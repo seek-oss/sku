@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const cwd = process.cwd();
+const src = path.join(cwd, 'src');
 const dist = path.join(cwd, 'dist');
 
 module.exports = {
@@ -51,6 +52,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({template: path.join(src, 'index.ejs')})
   ]
 };

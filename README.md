@@ -16,7 +16,7 @@ $ npm link
 To create a project, in a fresh project directory:
 
 ```bash
-$ mkdir src && echo 'alert("Hello world!")' >> src/index.js
+$ mkdir src && echo 'alert("Hello world!")' >> src/index.js && touch src/index.ejs
 ```
 
 ## Development workflow

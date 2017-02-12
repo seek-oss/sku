@@ -6,9 +6,9 @@ module.exports = {
     '\\.(css|less)$': 'identity-obj-proxy'
   },
   transform: {
-    '^.+\\.(js|jsx)$': require.resolve('./babelTransform.js')
+    '^.+\\.js$': require.resolve('./babelTransform.js')
   },
   transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'
+    '[/\\\\]node_modules[/\\\\](?!(seek-style-guide)[/\\\\]).+\\.js$'
   ]
 };

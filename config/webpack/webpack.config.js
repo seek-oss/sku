@@ -13,6 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules\/(?!(seek-style-guide)\/).*/,
         use: [
           {
             loader: require.resolve('babel-loader'),

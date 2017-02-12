@@ -1,4 +1,5 @@
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const cwd = process.cwd();
 const dist = path.join(cwd, 'dist');
@@ -24,11 +25,13 @@ module.exports = [
         },
         {
           test: /\.less$/,
-          use: [
-            { loader: require.resolve('style-loader') },
-            { loader: require.resolve('css-loader'), options: { modules: true } },
-            { loader: require.resolve('less-loader') }
-          ]
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              { loader: require.resolve('css-loader'), options: { modules: true } },
+              { loader: require.resolve('less-loader') }
+            ]
+          })
         },
         {
           test: /\.svg$/,
@@ -51,7 +54,10 @@ module.exports = [
           ]
         }
       ]
-    }
+    },
+    plugins: [
+      new ExtractTextPlugin('style.css')
+    ]
   },
   {
     entry: {

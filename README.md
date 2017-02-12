@@ -28,9 +28,10 @@ export default () => `
     <head>
       <meta charset="UTF-8">
       <title>My Awesome Project</title>
+      <link rel="stylesheet" type="text/css" href="/style.css" />
     </head>
     <body>
-      <script type="text/javascript" src="main.js"></script>
+      <script type="text/javascript" src="/main.js"></script>
     </body>
   </html>
 `;

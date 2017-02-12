@@ -3,7 +3,8 @@ const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin'
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const cwd = process.cwd();
-const dist = path.join(cwd, 'dist');
+const distPath = path.join(cwd, 'dist');
+const styleGuidePath = path.join(cwd, 'node_modules/seek-style-guide');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
@@ -13,18 +14,28 @@ const jsLoaders = [
   }
 ];
 
-const cssLoaders = [
-  {
-    loader: require.resolve('css-loader'),
-    options: {
-      modules: true,
-      minimize: isProductionBuild
+const makeCssLoaders = (options = {}) => {
+  const {
+    styleGuide = false
+  } = options;
+
+  const debugIdent = isProductionBuild ? '' :
+    `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
+
+  return [
+    {
+      loader: require.resolve('css-loader'),
+      options: {
+        modules: true,
+        localIdentName: `${debugIdent}[hash:base64:7]`,
+        minimize: isProductionBuild
+      }
+    },
+    {
+      loader: require.resolve('less-loader')
     }
-  },
-  {
-    loader: require.resolve('less-loader')
-  }
-];
+  ];
+};
 
 const svgLoaders = [
   {
@@ -48,7 +59,7 @@ module.exports = [
   {
     entry: path.join(cwd, 'src/index.js'),
     output: {
-      path: dist,
+      path: distPath,
       filename: '[name].js'
     },
     module: {
@@ -60,9 +71,18 @@ module.exports = [
         },
         {
           test: /\.less$/,
+          exclude: /node_modules/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: cssLoaders
+            use: makeCssLoaders()
+          })
+        },
+        {
+          test: /\.less$/,
+          include: styleGuidePath,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: makeCssLoaders({ styleGuide: true })
           })
         },
         {
@@ -85,7 +105,7 @@ module.exports = [
       render: path.join(cwd, 'src/render.js')
     },
     output: {
-      path: dist,
+      path: distPath,
       filename: '[name].js',
       libraryTarget: 'umd'
     },
@@ -98,7 +118,13 @@ module.exports = [
         },
         {
           test: /\.less$/,
-          use: cssLoaders
+          exclude: /node_modules/,
+          use: makeCssLoaders()
+        },
+        {
+          test: /\.less$/,
+          include: styleGuidePath,
+          use: makeCssLoaders({ styleGuide: true })
         },
         {
           test: /\.svg$/,

@@ -1,8 +1,48 @@
+const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const cwd = process.cwd();
 const dist = path.join(cwd, 'dist');
+const isProductionBuild = process.env.NODE_ENV === 'production';
+
+const jsLoaders = [
+  {
+    loader: require.resolve('babel-loader'),
+    options: require('../babel/babel.config')
+  }
+];
+
+const cssLoaders = [
+  {
+    loader: require.resolve('css-loader'),
+    options: {
+      modules: true,
+      minimize: isProductionBuild
+    }
+  },
+  {
+    loader: require.resolve('less-loader')
+  }
+];
+
+const svgLoaders = [
+  {
+    loader: require.resolve('raw-loader')
+  },
+  {
+    loader: require.resolve('svgo-loader'),
+    options: {
+      plugins: [
+        {
+          addAttributesToSVGElement: {
+            attribute: 'focusable="false"'
+          }
+        }
+      ]
+    }
+  }
+];
 
 module.exports = [
   {
@@ -16,48 +56,29 @@ module.exports = [
         {
           test: /\.js$/,
           exclude: /node_modules\/(?!(seek-style-guide)\/).*/,
-          use: [
-            {
-              loader: require.resolve('babel-loader'),
-              options: require('../babel/babel.config')
-            }
-          ]
+          use: jsLoaders
         },
         {
           test: /\.less$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: [
-              { loader: require.resolve('css-loader'), options: { modules: true } },
-              { loader: require.resolve('less-loader') }
-            ]
+            use: cssLoaders
           })
         },
         {
           test: /\.svg$/,
-          use: [
-            {
-              loader: require.resolve('raw-loader')
-            },
-            {
-              loader: require.resolve('svgo-loader'),
-              options: {
-                plugins: [
-                  {
-                    addAttributesToSVGElement: {
-                      attribute: 'focusable="false"'
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          use: svgLoaders
         }
       ]
     },
     plugins: [
       new ExtractTextPlugin('style.css')
-    ]
+    ].concat(!isProductionBuild ? [] : [
+      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      })
+    ])
   },
   {
     entry: {
@@ -73,39 +94,15 @@ module.exports = [
         {
           test: /\.js$/,
           exclude: /node_modules\/(?!(seek-style-guide)\/).*/,
-          use: [
-            {
-              loader: require.resolve('babel-loader'),
-              options: require('../babel/babel.config')
-            }
-          ]
+          use: jsLoaders
         },
         {
           test: /\.less$/,
-          use: [
-            { loader: require.resolve('css-loader/locals'), options: { modules: true } },
-            { loader: require.resolve('less-loader') }
-          ]
+          use: cssLoaders
         },
         {
           test: /\.svg$/,
-          use: [
-            {
-              loader: require.resolve('raw-loader')
-            },
-            {
-              loader: require.resolve('svgo-loader'),
-              options: {
-                plugins: [
-                  {
-                    addAttributesToSVGElement: {
-                      attribute: 'focusable="false"'
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          use: svgLoaders
         }
       ]
     },

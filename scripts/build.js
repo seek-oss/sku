@@ -1,3 +1,6 @@
+// First, ensure the build is running in production mode
+process.env.NODE_ENV = 'production';
+
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config');
 

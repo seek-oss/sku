@@ -2,6 +2,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config');
 const path = require('path');
+const opn = require('opn');
 
 const dist = path.join(process.cwd(), 'dist');
 
@@ -18,4 +19,6 @@ devServer.listen(port, (err, result) => {
 
   console.log(`Starting the development server on port ${port}...`);
   console.log();
+
+  opn(`http://localhost:${port}`);
 });

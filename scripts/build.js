@@ -8,6 +8,9 @@ webpack(webpackConfig, (err, stats) => {
   if (err) {
     console.log(err);
   } else {
-    console.log('Build complete!');
+    console.log(stats.toString({
+      chunks: false, // Makes the build much quieter
+      colors: true
+    }));
   }
 });

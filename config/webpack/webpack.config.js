@@ -57,7 +57,7 @@ const svgLoaders = [
 
 module.exports = [
   {
-    entry: path.join(cwd, 'src/index.js'),
+    entry: path.join(cwd, 'src/client.js'),
     output: {
       path: distPath,
       filename: '[name].js'

@@ -16,7 +16,7 @@ $ npm link
 To create a project, in a fresh project directory:
 
 ```bash
-$ mkdir src && echo 'document.write("Hello world!")' >> src/index.js
+$ mkdir src && echo 'document.write("Hello world!")' >> src/client.js
 ```
 
 Create a static HTML render function by creating a new file called `src/render.js` with the following contents:

@@ -16,6 +16,7 @@ const jsLoaders = [
 
 const makeCssLoaders = (options = {}) => {
   const {
+    server = false,
     styleGuide = false
   } = options;
 
@@ -24,7 +25,7 @@ const makeCssLoaders = (options = {}) => {
 
   return [
     {
-      loader: require.resolve('css-loader'),
+      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
         modules: true,
         localIdentName: `${debugIdent}[hash:base64:7]`,
@@ -119,12 +120,12 @@ module.exports = [
         {
           test: /\.less$/,
           exclude: /node_modules/,
-          use: makeCssLoaders()
+          use: makeCssLoaders({ server: true })
         },
         {
           test: /\.less$/,
           include: styleGuidePath,
-          use: makeCssLoaders({ styleGuide: true })
+          use: makeCssLoaders({ server: true, styleGuide: true })
         },
         {
           test: /\.svg$/,

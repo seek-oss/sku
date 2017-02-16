@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SEEK front-end development toolkit",
   "main": "index.js",
   "bin": {

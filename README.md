@@ -4,11 +4,8 @@ SEEK front-end development toolkit.
 
 ## Setup
 
-After cloning this project:
-
 ```bash
-$ npm install
-$ npm link
+$ npm install --save-dev sku
 ```
 
 ## Getting started

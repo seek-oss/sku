@@ -1,14 +1,12 @@
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config');
-const path = require('path');
 const opn = require('opn');
-
-const public = path.join(process.cwd(), 'public');
+const paths = require('../config/paths');
 
 const compiler = webpack(webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
-  contentBase: public
+  contentBase: paths.public
 });
 
 const port = 8080;

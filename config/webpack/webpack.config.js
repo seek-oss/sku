@@ -1,10 +1,7 @@
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path');
-const cwd = process.cwd();
-const distPath = path.join(cwd, 'dist');
-const styleGuidePath = path.join(cwd, 'node_modules/seek-style-guide');
+const paths = require('../paths');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
@@ -58,9 +55,9 @@ const svgLoaders = [
 
 module.exports = [
   {
-    entry: path.join(cwd, 'src/client.js'),
+    entry: paths.clientEntry,
     output: {
-      path: distPath,
+      path: paths.dist,
       filename: '[name].js'
     },
     module: {
@@ -80,7 +77,7 @@ module.exports = [
         },
         {
           test: /\.less$/,
-          include: styleGuidePath,
+          include: paths.seekStyleGuide,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: makeCssLoaders({ styleGuide: true })
@@ -103,10 +100,10 @@ module.exports = [
   },
   {
     entry: {
-      render: path.join(cwd, 'src/render.js')
+      render: paths.renderEntry
     },
     output: {
-      path: distPath,
+      path: paths.dist,
       filename: '[name].js',
       libraryTarget: 'umd'
     },
@@ -124,7 +121,7 @@ module.exports = [
         },
         {
           test: /\.less$/,
-          include: styleGuidePath,
+          include: paths.seekStyleGuide,
           use: makeCssLoaders({ server: true, styleGuide: true })
         },
         {

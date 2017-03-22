@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const paths = require('../paths');
+const builds = require('../builds');
+const flatten = require('lodash/flatten');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
@@ -53,7 +54,7 @@ const svgLoaders = [
   }
 ];
 
-module.exports = [
+const buildWebpackConfigs = builds.map(({ paths }) => ([
   {
     entry: paths.clientEntry,
     output: {
@@ -134,4 +135,6 @@ module.exports = [
       new StaticSiteGeneratorPlugin('render', '/')
     ]
   }
-];
+]));
+
+module.exports = flatten(buildWebpackConfigs);

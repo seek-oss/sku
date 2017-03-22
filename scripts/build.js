@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'production';
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
-const paths = require('../config/paths');
+const builds = require('../config/builds');
 
 webpack(webpackConfig, (err, stats) => {
   if (err) {
@@ -16,11 +16,11 @@ webpack(webpackConfig, (err, stats) => {
     colors: true
   }));
 
-  if (!fs.existsSync(paths.public)) {
-    return;
-  }
-
-  fs.copySync(paths.public, paths.dist, {
-    dereference: true
+  builds.forEach(({ paths }) => {
+    if (fs.existsSync(paths.public)) {
+      fs.copySync(paths.public, paths.dist, {
+        dereference: true
+      });
+    }
   });
 });

@@ -1,12 +1,13 @@
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config');
+const builds = require('../config/builds');
+const find = require('lodash/find');
 const opn = require('opn');
-const paths = require('../config/paths');
 
 const compiler = webpack(webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
-  contentBase: paths.public
+  contentBase: builds.map(({ paths }) => paths.public)
 });
 
 const port = 8080;

@@ -24,6 +24,7 @@ const builds = buildConfigs
   })
   .map(buildConfig => {
     const name = buildConfig.name || '';
+    const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
     const clientEntry = path.join(cwd, entry.client || 'src/client.js');
     const renderEntry = path.join(cwd, entry.render || 'src/render.js');
@@ -43,6 +44,7 @@ const builds = buildConfigs
 
     return {
       name,
+      env,
       paths
     };
   });

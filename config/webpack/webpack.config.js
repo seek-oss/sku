@@ -34,6 +34,30 @@ const makeCssLoaders = (options = {}) => {
     },
     {
       loader: require.resolve('less-loader')
+    },
+    {
+      // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
+      loader: require.resolve('string-replace-loader'),
+      options: {
+        search: '(url\\([\'"]?)(\.)',
+        replace: '$1\\$2',
+        flags: 'g'
+      }
+    }
+  ];
+};
+
+const makeImageLoaders = (options = {}) => {
+  const {
+    server = false
+  } = options;
+
+  return [
+    {
+      loader: require.resolve('url-loader'),
+      options: {
+        limit: server ? 999999999 : 10000
+      }
     }
   ];
 };
@@ -106,6 +130,10 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
             })
           },
           {
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            use: makeImageLoaders()
+          },
+          {
             test: /\.svg$/,
             use: svgLoaders
           }
@@ -146,6 +174,10 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
             test: /\.less$/,
             include: paths.seekStyleGuide,
             use: makeCssLoaders({ server: true, styleGuide: true })
+          },
+          {
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            use: makeImageLoaders({ server: true })
           },
           {
             test: /\.svg$/,

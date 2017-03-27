@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
+const args = require('../args');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
@@ -55,10 +56,23 @@ const svgLoaders = [
   }
 ];
 
-const buildWebpackConfigs = builds.map(({ paths, env }) => {
+const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
   const envVars = lodash.chain(env)
+    .mapValues((value, key) => {
+      if (typeof value !== 'object') {
+        return JSON.stringify(value);
+      }
+
+      const valueForProfile = value[args.profile];
+
+      if (typeof valueForProfile === 'undefined') {
+        console.log(`WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`);
+        process.exit(1);
+      }
+
+      return JSON.stringify(valueForProfile);
+    })
     .mapKeys((value, key) => `process.env.${key}`)
-    .mapValues(value => JSON.stringify(value))
     .value();
 
   return [

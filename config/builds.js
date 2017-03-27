@@ -2,25 +2,21 @@ const cwd = process.cwd();
 const path = require('path');
 const fs = require('fs');
 const skuConfigPath = path.join(cwd, 'sku.config.js');
-
-const isDevServer = /scripts\/start\.js$/.test(process.argv[1]);
-const buildName = process.argv[2];
+const args = require('./args');
 
 const makeArray = x => Array.isArray(x) ? x : [x];
 const buildConfigs = fs.existsSync(skuConfigPath) ? makeArray(require(skuConfigPath)) : [{}];
 
-if (isDevServer && buildConfigs.length > 1 && !buildName) {
+if (args.script === 'start' && buildConfigs.length > 1 && !args.buildName) {
   console.log('ERROR: Build name must be provded, e.g. sku start hello');
   process.exit(1);
 }
 
 const builds = buildConfigs
   .filter(buildConfig => {
-    if (!isDevServer) {
-      return true;
-    }
-
-    return buildConfig.name === buildName;
+    return args.script === 'start' ?
+      buildConfig.name === args.buildName :
+      true;
   })
   .map(buildConfig => {
     const name = buildConfig.name || '';
@@ -49,8 +45,8 @@ const builds = buildConfigs
     };
   });
 
-if (isDevServer && builds.length === 0) {
-  console.log(`ERROR: Build with the name "${buildName}" wasn't found`);
+if (args.script === 'start' && builds.length === 0) {
+  console.log(`ERROR: Build with the name "${args.buildName}" wasn't found`);
   process.exit(1);
 }
 

@@ -5,7 +5,9 @@ const skuConfigPath = path.join(cwd, 'sku.config.js');
 const args = require('./args');
 
 const makeArray = x => Array.isArray(x) ? x : [x];
-const buildConfigs = fs.existsSync(skuConfigPath) ? makeArray(require(skuConfigPath)) : [{}];
+const buildConfigs = fs.existsSync(skuConfigPath)
+  ? makeArray(require(skuConfigPath))
+  : [{}];
 
 if (args.script === 'start' && buildConfigs.length > 1 && !args.buildName) {
   console.log('ERROR: Build name must be provded, e.g. sku start hello');
@@ -14,28 +16,19 @@ if (args.script === 'start' && buildConfigs.length > 1 && !args.buildName) {
 
 const builds = buildConfigs
   .filter(buildConfig => {
-    return args.script === 'start' ?
-      buildConfig.name === args.buildName :
-      true;
+    return args.script === 'start' ? buildConfig.name === args.buildName : true;
   })
   .map(buildConfig => {
     const name = buildConfig.name || '';
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
-    const clientEntry = path.join(cwd, entry.client || 'src/client.js');
-    const renderEntry = path.join(cwd, entry.render || 'src/render.js');
-
-    const public = path.join(cwd, buildConfig.public || 'public');
-    const dist = path.join(cwd, buildConfig.target || 'dist');
-
-    const seekStyleGuide = path.join(cwd, 'node_modules/seek-style-guide');
 
     const paths = {
-      seekStyleGuide,
-      clientEntry,
-      renderEntry,
-      public,
-      dist
+      seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
+      clientEntry: path.join(cwd, entry.client || 'src/client.js'),
+      renderEntry: path.join(cwd, entry.render || 'src/render.js'),
+      public: path.join(cwd, buildConfig.public || 'public'),
+      dist: path.join(cwd, buildConfig.target || 'dist')
     };
 
     return {

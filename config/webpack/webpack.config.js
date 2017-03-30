@@ -20,8 +20,9 @@ const makeCssLoaders = (options = {}) => {
     styleGuide = false
   } = options;
 
-  const debugIdent = isProductionBuild ? '' :
-    `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
+  const debugIdent = isProductionBuild
+    ? ''
+    : `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
 
   return [
     {
@@ -81,7 +82,8 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
-  const envVars = lodash.chain(env)
+  const envVars = lodash
+    .chain(env)
     .mapValues((value, key) => {
       if (typeof value !== 'object') {
         return JSON.stringify(value);
@@ -90,7 +92,9 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
       const valueForProfile = value[args.profile];
 
       if (typeof valueForProfile === 'undefined') {
-        console.log(`WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`);
+        console.log(
+          `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`
+        );
         process.exit(1);
       }
 
@@ -142,12 +146,16 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
       plugins: [
         new webpack.DefinePlugin(envVars),
         new ExtractTextPlugin('style.css')
-      ].concat(!isProductionBuild ? [] : [
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        })
-      ])
+      ].concat(
+        !isProductionBuild
+          ? []
+          : [
+              new webpack.optimize.UglifyJsPlugin(),
+              new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+              })
+            ]
+      )
     },
     {
       entry: {

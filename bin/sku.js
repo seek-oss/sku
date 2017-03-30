@@ -8,7 +8,7 @@ switch (script) {
   case 'build':
   case 'start': {
     const scriptPath = require.resolve('../scripts/' + script);
-    const scriptArgs = [ scriptPath, ...args ];
+    const scriptArgs = [scriptPath, ...args];
 
     const result = spawn.sync('node', scriptArgs, { stdio: 'inherit' });
     process.exit(result.status);

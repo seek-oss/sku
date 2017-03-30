@@ -7,7 +7,15 @@
     "sku": "./bin/sku.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run format-check",
+    "format": "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
+    "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -60,5 +68,9 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
+  },
+  "devDependencies": {
+    "lint-staged": "^3.4.0",
+    "prettier": "^0.22.0"
   }
 }

@@ -1,8 +1,6 @@
 module.exports = {
-  testPathIgnorePatterns: [
-    '<rootDir>[/\\\\](dist|node_modules)[/\\\\]'
-  ],
-  'moduleNameMapper': {
+  testPathIgnorePatterns: ['<rootDir>[/\\\\](dist|node_modules)[/\\\\]'],
+  moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy'
   },
   transform: {

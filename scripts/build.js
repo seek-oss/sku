@@ -11,10 +11,12 @@ webpack(webpackConfig, (err, stats) => {
     return console.log(err);
   }
 
-  console.log(stats.toString({
-    chunks: false, // Makes the build much quieter
-    colors: true
-  }));
+  console.log(
+    stats.toString({
+      chunks: false, // Makes the build much quieter
+      colors: true
+    })
+  );
 
   builds.forEach(({ paths }) => {
     if (fs.existsSync(paths.public)) {

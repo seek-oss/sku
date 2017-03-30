@@ -1,6 +1,6 @@
 # sku
 
-SEEK front-end development toolkit.
+Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/) and [Jest](https://facebook.github.io/jest/).
 
 ## Setup
 

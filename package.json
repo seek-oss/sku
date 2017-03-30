@@ -1,7 +1,7 @@
 {
   "name": "sku",
   "version": "0.0.5",
-  "description": "SEEK front-end development toolkit",
+  "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
     "sku": "./bin/sku.js"

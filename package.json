@@ -9,7 +9,8 @@
   "scripts": {
     "test": "npm run format-check",
     "format": "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
-    "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'"
+    "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'",
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
@@ -70,6 +71,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "devDependencies": {
+    "husky": "^0.13.3",
     "lint-staged": "^3.4.0",
     "prettier": "^0.22.0"
   }

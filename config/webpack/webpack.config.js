@@ -30,7 +30,24 @@ const makeCssLoaders = (options = {}) => {
       options: {
         modules: true,
         localIdentName: `${debugIdent}[hash:base64:7]`,
-        minimize: isProductionBuild
+        minimize: isProductionBuild,
+        importLoaders: 3
+      }
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        plugins: () => [
+          require('autoprefixer')({
+            browsers: [
+              '> 1%',
+              'Last 2 versions',
+              'ie >= 10',
+              'Safari >= 8',
+              'iOS >= 8'
+            ]
+          })
+        ]
       }
     },
     {

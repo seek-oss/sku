@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "0.0.6",
+  "version": "0.0.0-development",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -10,7 +10,10 @@
     "test": "npm run format-check",
     "format": "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "commit": "git-cz",
+    "commitmsg": "validate-commit-msg",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
     "*.js": [
@@ -18,9 +21,14 @@
       "git add"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SEEK-Jobs/sku.git"
+    "url": "https://github.com/seek-oss/sku.git"
   },
   "keywords": [
     "toolkit",
@@ -29,9 +37,9 @@
   "author": "SEEK",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SEEK-Jobs/sku/issues"
+    "url": "https://github.com/seek-oss/sku/issues"
   },
-  "homepage": "https://github.com/SEEK-Jobs/sku#readme",
+  "homepage": "https://github.com/seek-oss/sku#readme",
   "dependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.22.1",
@@ -73,8 +81,12 @@
     "webpack-dev-server": "^2.3.0"
   },
   "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.13.3",
     "lint-staged": "^3.4.0",
-    "prettier": "^0.22.0"
+    "prettier": "^0.22.0",
+    "semantic-release": "^6.3.2",
+    "validate-commit-msg": "^2.12.1"
   }
 }

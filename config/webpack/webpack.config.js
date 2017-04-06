@@ -6,6 +6,7 @@ const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const thirdPartyModulesRegex = /node_modules\/(?!(seek-style-guide)\/).*/;
 
 const jsLoaders = [
   {
@@ -114,8 +115,21 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
         rules: [
           {
             test: /\.js$/,
-            exclude: /node_modules\/(?!(seek-style-guide)\/).*/,
+            exclude: thirdPartyModulesRegex,
             use: jsLoaders
+          },
+          {
+            test: /\.js$/,
+            include: thirdPartyModulesRegex,
+            use: [
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  babelrc: false,
+                  presets: [require.resolve('babel-preset-es2015')]
+                }
+              }
+            ]
           },
           {
             test: /\.less$/,
@@ -170,7 +184,7 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
         rules: [
           {
             test: /\.js$/,
-            exclude: /node_modules\/(?!(seek-style-guide)\/).*/,
+            exclude: thirdPartyModulesRegex,
             use: jsLoaders
           },
           {

@@ -1,6 +1,8 @@
 const cwd = process.cwd();
 const path = require('path');
 const fs = require('fs');
+const inquirer = require('inquirer');
+const deasyncPromise = require('deasync-promise');
 const skuConfigPath = path.join(cwd, 'sku.config.js');
 const args = require('./args');
 
@@ -9,14 +11,26 @@ const buildConfigs = fs.existsSync(skuConfigPath)
   ? makeArray(require(skuConfigPath))
   : [{}];
 
-if (args.script === 'start' && buildConfigs.length > 1 && !args.buildName) {
-  console.log('ERROR: Build name must be provded, e.g. sku start hello');
-  process.exit(1);
+let buildName = args.buildName;
+
+if (!buildName && args.script === 'start' && buildConfigs.length > 1) {
+  const answers = deasyncPromise(
+    inquirer.prompt([
+      {
+        type: 'list',
+        name: 'buildName',
+        message: 'You appear to be running a monorepo. Which project would you like to work on?',
+        choices: buildConfigs.map(x => x.name).filter(Boolean)
+      }
+    ])
+  );
+
+  buildName = answers.buildName;
 }
 
 const builds = buildConfigs
   .filter(buildConfig => {
-    return args.script === 'start' ? buildConfig.name === args.buildName : true;
+    return args.script === 'start' ? buildConfig.name === buildName : true;
   })
   .map(buildConfig => {
     const name = buildConfig.name || '';
@@ -39,7 +53,7 @@ const builds = buildConfigs
   });
 
 if (args.script === 'start' && builds.length === 0) {
-  console.log(`ERROR: Build with the name "${args.buildName}" wasn't found`);
+  console.log(`ERROR: Build with the name "${buildName}" wasn't found`);
   process.exit(1);
 }
 

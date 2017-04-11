@@ -185,7 +185,13 @@ module.exports = [
 ]
 ```
 
-You can then start the relevant project by name at development time:
+You will then be prompted to select the project you'd like to work on when starting your development server:
+
+```bash
+$ npm start
+```
+
+Alternatively, you can start the relevant project directly:
 
 ```bash
 $ npm start hello

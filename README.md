@@ -76,7 +76,7 @@ $ echo 'document.getElementById("app").innerHTML = "Hello world!"' >> src/client
 To include static assets that aren't handled by Webpack (e.g. `favicon.ico`), you can create a `public` directory:
 
 ```bash
-$ mkdir src/public
+$ mkdir public
 ```
 
 ## Development Workflow

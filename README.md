@@ -79,6 +79,71 @@ To include static assets that aren't handled by Webpack (e.g. `favicon.ico`), yo
 $ mkdir public
 ```
 
+## Getting Started with React
+
+Since sku was designed with static pre-rendering in mind, and provides [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) compilation out of the box, it's a perfect fit for [React](https://facebook.github.io/react).
+
+If you'd like to start a new React project, first install the required dependencies:
+
+```bash
+$ npm install --save-dev react react-dom
+```
+
+Next, create a new file called `src/App/App.js`:
+
+```bash
+$ mkdir -p src/App
+$ touch src/App/App.js
+```
+
+Add the following code to `src/App/App.js`:
+
+```js
+import React, { Component } from 'react';
+
+export default class App extends Component {
+  render() {
+    return (
+      <div>Hello world!</div>
+    );
+  }
+};
+```
+
+Replace the contents of `src/render.js` with the following, which provides static pre-rendering of your React app:
+
+```js
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import App from './App/App';
+
+export default () => `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>My Awesome Project</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="/style.css" />
+    </head>
+    <body>
+      <div id="app">${renderToString(<App />)}</div>
+      <script type="text/javascript" src="/main.js"></script>
+    </body>
+  </html>
+`;
+```
+
+Finally, replace the contents of 'src/client.js' with the following:
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+import App from './App/App';
+
+render(<App />, document.getElementById("app"));
+```
+
 ## Development Workflow
 
 To start a local development server and open a new browser tab:

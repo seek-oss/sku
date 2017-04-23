@@ -13,7 +13,14 @@ This tool is heavily inspired by other work, most notably:
 
 ## Getting Started
 
-If you haven't already, create a new Node.js project via npm:
+First, in a new directory, create a git repository with an appropriate `.gitignore` file:
+
+```bash
+$ git init
+$ echo -e 'node_modules\nnpm-debug.log\ndist' >> .gitignore
+```
+
+Next, create a new Node.js project via npm:
 
 ```bash
 $ npm init
@@ -25,17 +32,25 @@ Install sku into your project as a dev dependency:
 $ npm install --save-dev sku
 ```
 
-Add sku scripts to your `package.json`:
+In `package.json`, delete the default test script:
+
+```diff
+-"scripts": {
+-  "test": "echo \"Error: no test specified\" && exit 1"
+-},
+```
+
+Replace the deleted test script with a basic set of sku scripts:
 
 ```js
 "scripts": {
   "start": "sku start",
   "test": "sku test",
   "build": "sku build"
-}
+},
 ```
 
-For sku to work correctly, you need some initial source files. First, create a `src` directory:
+For sku to work correctly, you'll need some initial source files. First, create a `src` directory:
 
 ```bash
 $ mkdir src

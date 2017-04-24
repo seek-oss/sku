@@ -1,4 +1,4 @@
-const scriptNameRegex = /scripts\/([\w-]*)\.js$/i;
+const scriptNameRegex = /scripts[\/\\]([\w-]*)\.js$/i;
 const scriptName = process.argv[1].match(scriptNameRegex)[1];
 
 module.exports = {

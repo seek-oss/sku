@@ -11,7 +11,7 @@ const thirdPartyModulesRegex = /node_modules\/(?!(seek-style-guide)\/).*/;
 const jsLoaders = [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babel.config')
+    options: require('../babel/babel.config')({ webpack: true })
   }
 ];
 

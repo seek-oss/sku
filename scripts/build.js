@@ -1,28 +1,34 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const webpack = require('webpack');
+const Promise = require('bluebird');
+const webpackPromise = Promise.promisify(require('webpack'));
 const webpackConfig = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
 const builds = require('../config/builds');
 
-webpack(webpackConfig, (err, stats) => {
-  if (err) {
-    return console.log(err);
-  }
+const runWebpack = config => {
+  return webpackPromise(config).then(stats => {
+    console.log(
+      stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true
+      })
+    );
+  });
+};
 
-  console.log(
-    stats.toString({
-      chunks: false, // Makes the build much quieter
-      colors: true
-    })
-  );
-
+const copyPublicFiles = () => {
   builds.forEach(({ paths }) => {
     if (fs.existsSync(paths.public)) {
       fs.copySync(paths.public, paths.dist, {
         dereference: true
       });
+      console.log(`Copying ${paths.public} to ${paths.dist}`);
     }
   });
-});
+};
+
+Promise.map(webpackConfig, runWebpack)
+  .then(copyPublicFiles)
+  .then(() => console.log('Sku build complete!'));

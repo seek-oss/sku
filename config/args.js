@@ -1,5 +1,7 @@
 const scriptNameRegex = /scripts[\/\\]([\w-]*)\.js$/i;
-const scriptName = process.argv[1].match(scriptNameRegex)[1];
+const scriptName = /threads/.test(process.argv[1])
+  ? 'build' // Hack, if we're in a build thread
+  : process.argv[1].match(scriptNameRegex)[1];
 
 module.exports = {
   script: scriptName,

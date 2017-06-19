@@ -2,11 +2,21 @@
 process.env.NODE_ENV = 'production';
 
 const Promise = require('bluebird');
+const webpackPromise = Promise.promisify(require('webpack'));
 const webpackConfig = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
-const spawn = require('threads').spawn;
-
 const builds = require('../config/builds');
+
+const runWebpack = config => {
+  return webpackPromise(config).then(stats => {
+    console.log(
+      stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true
+      })
+    );
+  });
+};
 
 const copyPublicFiles = () => {
   builds.forEach(({ paths }) => {
@@ -19,42 +29,6 @@ const copyPublicFiles = () => {
   });
 };
 
-const spawnWebpackForConfigIndex = configIndex => {
-  const webpackThread = spawn(input => {
-    const path = require('path');
-    const configs = require(path.resolve(
-      input.__dirname,
-      '../config/webpack/webpack.config'
-    ));
-    const config = configs[input.configIndex];
-
-    const Promise = require('bluebird');
-    const webpackPromise = Promise.promisify(require('webpack'));
-
-    return webpackPromise(config).then(stats => {
-      console.log(
-        stats.toString({
-          chunks: false, // Makes the build much quieter
-          colors: true
-        })
-      );
-    });
-  });
-
-  webpackThread
-    .send({
-      configIndex,
-      __dirname,
-      argv: process.argv
-    })
-    .on('done', () => {
-      webpackThread.kill();
-    });
-
-  return webpackThread.promise();
-};
-
-Promise.each(webpackConfig, (_, configIndex) =>
-  spawnWebpackForConfigIndex(configIndex))
+Promise.map(webpackConfig, runWebpack)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'));

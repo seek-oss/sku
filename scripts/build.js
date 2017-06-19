@@ -29,6 +29,6 @@ const copyPublicFiles = () => {
   });
 };
 
-Promise.map(webpackConfig, runWebpack)
+Promise.each(webpackConfig, runWebpack)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'));

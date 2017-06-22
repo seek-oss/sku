@@ -47,7 +47,9 @@ const makeCssLoaders = (options = {}) => {
               'Safari >= 8',
               'iOS >= 8'
             ]
-          })
+          }),
+          require('postcss-import'),
+          +require('postcss-cssnext')
         ]
       }
     },
@@ -149,18 +151,18 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
             ]
           },
           {
-            test: /\.less$/,
+            test: [/\.less$/, /\.css$/],
             exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
+              fallback: require.resolve('style-loader'),
               use: makeCssLoaders()
             })
           },
           {
-            test: /\.less$/,
+            test: [/\.less$/, /\.css$/],
             include: paths.seekStyleGuide,
             use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
+              fallback: require.resolve('style-loader'),
               use: makeCssLoaders({ styleGuide: true })
             })
           },
@@ -205,12 +207,12 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
             use: jsLoaders
           },
           {
-            test: /\.less$/,
+            test: [/\.less$/, /\.css$/],
             exclude: /node_modules/,
             use: makeCssLoaders({ server: true })
           },
           {
-            test: /\.less$/,
+            test: [/\.less$/, /\.css$/],
             include: paths.seekStyleGuide,
             use: makeCssLoaders({ server: true, styleGuide: true })
           },

@@ -6,6 +6,7 @@ const args = process.argv.slice(3);
 switch (script) {
   case 'test':
   case 'build':
+  case 'lint':
   case 'start': {
     const scriptPath = require.resolve('../scripts/' + script);
     const scriptArgs = [scriptPath, ...args];

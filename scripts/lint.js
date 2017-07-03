@@ -13,6 +13,6 @@ const report = cli.executeOnFiles(['src']);
 console.log(chalk.cyan('Linting'));
 console.log(formatter(report.results));
 
-if (report.results.length > 0) {
+if (report.errorCount > 0) {
   process.exit(1);
 }

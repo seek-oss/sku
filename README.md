@@ -46,7 +46,8 @@ Replace the deleted test script with a basic set of sku scripts:
 "scripts": {
   "start": "sku start",
   "test": "sku test",
-  "build": "sku build"
+  "build": "sku build",
+  "lint": "sku lint"
 },
 ```
 
@@ -275,6 +276,20 @@ Alternatively, you can start the relevant project directly:
 
 ```bash
 $ npm start hello
+```
+
+### Linting
+
+Running `sku lint` will execute the eslint rules over the code in your `src` directory. You can see the eslint rules defined for sku projects [here](https://github.com/seek-oss/eslint-config-sku).
+
+#### Atom support
+
+Adding the following to your package.json file will enable the atom eslint plugin to work with sku.
+
+```json
+"eslintConfig": {
+  "extends": "sku"
+}
 ```
 
 ## Contributing

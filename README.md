@@ -2,7 +2,7 @@
 
 # sku
 
-Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/) and [Jest](https://facebook.github.io/jest/).
+Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/) and [Jest](https://facebook.github.io/jest/).
 
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed. Designed for usage with [seek-style-guide](https://github.com/seek-oss/seek-style-guide), although this isn't a requirement.
 
@@ -46,7 +46,8 @@ Replace the deleted test script with a basic set of sku scripts:
 "scripts": {
   "start": "sku start",
   "test": "sku test",
-  "build": "sku build"
+  "build": "sku build",
+  "lint": "sku lint"
 },
 ```
 
@@ -275,6 +276,20 @@ Alternatively, you can start the relevant project directly:
 
 ```bash
 $ npm start hello
+```
+
+### Linting
+
+Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-sku](https://github.com/seek-oss/eslint-config-sku).
+
+#### Atom support
+
+Adding the following to your package.json file will enable the atom ESLint plugin to work with sku.
+
+```js
+"eslintConfig": {
+  "extends": "sku"
+}
 ```
 
 ## Contributing

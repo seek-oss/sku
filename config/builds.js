@@ -6,7 +6,7 @@ const deasyncPromise = require('deasync-promise');
 const skuConfigPath = path.join(cwd, 'sku.config.js');
 const args = require('./args');
 
-const makeArray = x => Array.isArray(x) ? x : [x];
+const makeArray = x => (Array.isArray(x) ? x : [x]);
 const buildConfigs = fs.existsSync(skuConfigPath)
   ? makeArray(require(skuConfigPath))
   : [{}];
@@ -19,7 +19,8 @@ if (!buildName && args.script === 'start' && buildConfigs.length > 1) {
       {
         type: 'list',
         name: 'buildName',
-        message: 'You appear to be running a monorepo. Which project would you like to work on?',
+        message:
+          'You appear to be running a monorepo. Which project would you like to work on?',
         choices: buildConfigs.map(x => x.name).filter(Boolean)
       }
     ])

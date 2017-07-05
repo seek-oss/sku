@@ -223,15 +223,26 @@ module.exports = {
 }
 ```
 
-Environment variables can be configured separately for development and production:
+Since this config is written in JavaScript, not JSON, you can easily pass through any existing environment variables:
 
 ```js
 module.exports = {
   ...
   env: {
-    MY_ENVIRONMENT_VARIABLE: {
-      development: 'hello',
-      production: 'world'
+    BUILD_NUMBER: process.env.BUILD_NUMBER
+  }
+}
+```
+
+Environment variables can also be configured separately for development and production:
+
+```js
+module.exports = {
+  ...
+  env: {
+    API_ENDPOINT: {
+      development: '/mock/api',
+      production: 'https://example.com/real/api'
     }
   }
 }

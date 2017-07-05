@@ -209,7 +209,7 @@ module.exports = {
 
 ### Environment Variables
 
-By default, `process.env.NODE_ENV` is handled correctly for you and provided globally, even to your client code.
+By default, `process.env.NODE_ENV` is handled correctly for you and provided globally, even to your client code. This is based on the sku script that's currently being executed, so `NODE_ENV` is `'development'` when running `sku start`, but `'production'` when running `sku build`.
 
 Any other environment variables can be configured using the `env` option:
 

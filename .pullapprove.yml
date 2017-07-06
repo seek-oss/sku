@@ -5,10 +5,6 @@ groups:
     required: 2
     teams:
       - sku-contributors
-    # Enable github reviews when integration is sufficient:
-    # https://github.com/pullapprove/support/issues/98#issuecomment-256447253
-    # github_reviews:
-    #   enabled: true
     approve_by_comment:
       enabled: false
     always_rejected:

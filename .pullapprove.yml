@@ -1,0 +1,20 @@
+version: 2
+
+groups:
+  reviewers:
+    required: 2
+    teams:
+      - sku-contributors
+    # Enable github reviews when integration is sufficient:
+    # https://github.com/pullapprove/support/issues/98#issuecomment-256447253
+    # github_reviews:
+    #   enabled: true
+    approve_by_comment:
+      enabled: false
+    always_rejected:
+      title_regex: '^((?!: ).)*$'
+      explanation: 'Invalid title. Please read the contribution guide: https://github.com/seek-oss/sku/blob/master/CONTRIBUTING.md'
+    reset_on_push:
+      enabled: false
+    reset_on_reopened:
+      enabled: true

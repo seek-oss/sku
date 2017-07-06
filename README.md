@@ -11,6 +11,32 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
+## What does sku give you out of the box?
+
+### Modern Javascript support ###
+
+(Babel preconfigured with ES2015 and React presets, Webpack module loading)
+
+Use `import`, `const`, `=>`, spread operators, destructuring and all their friends in your code.  It'll just work.
+
+### CSS Modules ###
+
+(Webpack style loaders for LESS)
+
+Import your LESS styles directly into your components: https://github.com/css-modules/css-modules
+
+### Jest testing ###
+
+https://facebook.github.io/jest/
+
+sku will run any of your `.test.js` files through Jest for your convenience
+
+### First class support for SEEK Living Style Guide ###
+
+https://github.com/seek-oss/seek-style-guide
+
+If you choose to include the SEEK Living Style Guide in your project, no further webpack configuration is necessary.  Just start importing components and build your UI!
+
 ## Getting Started
 
 First, in a new directory, create a git repository with an appropriate `.gitignore` file:

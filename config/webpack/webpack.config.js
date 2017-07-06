@@ -7,6 +7,7 @@ const flatten = require('lodash/flatten');
 const args = require('../args');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const thirdPartyModulesRegex = /node_modules\/(?!(seek-style-guide)\/).*/;
+const { makePostCssLoaders, makeLessCssLoaders } = require('./makeCssLoaders');
 
 const jsLoaders = [
   {
@@ -14,57 +15,6 @@ const jsLoaders = [
     options: require('../babel/babel.config')({ webpack: true })
   }
 ];
-
-const makeCssLoaders = (options = {}) => {
-  const {
-    server = false,
-    styleGuide = false
-  } = options;
-
-  const debugIdent = isProductionBuild
-    ? ''
-    : `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
-
-  return [
-    {
-      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
-      options: {
-        modules: true,
-        localIdentName: `${debugIdent}[hash:base64:7]`,
-        minimize: isProductionBuild,
-        importLoaders: 3
-      }
-    },
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        plugins: () => [
-          require('autoprefixer')({
-            browsers: [
-              '> 1%',
-              'Last 2 versions',
-              'ie >= 10',
-              'Safari >= 8',
-              'iOS >= 8'
-            ]
-          })
-        ]
-      }
-    },
-    {
-      loader: require.resolve('less-loader')
-    },
-    {
-      // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
-      loader: require.resolve('string-replace-loader'),
-      options: {
-        search: '(url\\([\'"]?)(\.)',
-        replace: '$1\\$2',
-        flags: 'g'
-      }
-    }
-  ];
-};
 
 const makeImageLoaders = (options = {}) => {
   const {
@@ -152,16 +102,32 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
             test: /\.less$/,
             exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: makeCssLoaders()
+              fallback: require.resolve('style-loader'),
+              use: makeLessCssLoaders()
             })
           },
           {
             test: /\.less$/,
             include: paths.seekStyleGuide,
             use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: makeCssLoaders({ styleGuide: true })
+              fallback: require.resolve('style-loader'),
+              use: makeLessCssLoaders({ styleGuide: true })
+            })
+          },
+          {
+            test: [/\.css$/],
+            exclude: /node_modules/,
+            use: ExtractTextPlugin.extract({
+              fallback: require.resolve('style-loader'),
+              use: makePostCssLoaders({ theme: env.theme })
+            })
+          },
+          {
+            test: /\.css$/,
+            include: paths.seekStyleGuide,
+            use: ExtractTextPlugin.extract({
+              fallback: require.resolve('style-loader'),
+              use: makePostCssLoaders({ styleGuide: true, theme: env.theme })
             })
           },
           {
@@ -208,12 +174,26 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
           {
             test: /\.less$/,
             exclude: /node_modules/,
-            use: makeCssLoaders({ server: true })
+            use: makeLessCssLoaders({ server: true })
           },
           {
             test: /\.less$/,
             include: paths.seekStyleGuide,
-            use: makeCssLoaders({ server: true, styleGuide: true })
+            use: makeLessCssLoaders({ server: true, styleGuide: true })
+          },
+          {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: makePostCssLoaders({ server: true, theme: env.theme })
+          },
+          {
+            test: /\.css$/,
+            include: paths.seekStyleGuide,
+            use: makePostCssLoaders({
+              server: true,
+              styleGuide: true,
+              theme: env.theme
+            })
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

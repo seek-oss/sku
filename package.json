@@ -69,6 +69,8 @@
     "lodash": "^4.17.4",
     "opn": "^4.0.2",
     "pad-left": "^2.1.0",
+    "postcss-cssnext": "^2.11.0",
+    "postcss-import": "^10.0.0",
     "postcss-loader": "^1.3.3",
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",

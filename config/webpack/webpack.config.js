@@ -16,10 +16,7 @@ const jsLoaders = [
 ];
 
 const makeCssLoaders = (options = {}) => {
-  const {
-    server = false,
-    styleGuide = false
-  } = options;
+  const { server = false, styleGuide = false } = options;
 
   const debugIdent = isProductionBuild
     ? ''
@@ -58,7 +55,7 @@ const makeCssLoaders = (options = {}) => {
       // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
       loader: require.resolve('string-replace-loader'),
       options: {
-        search: '(url\\([\'"]?)(\.)',
+        search: '(url\\([\'"]?)(.)',
         replace: '$1\\$2',
         flags: 'g'
       }
@@ -67,9 +64,7 @@ const makeCssLoaders = (options = {}) => {
 };
 
 const makeImageLoaders = (options = {}) => {
-  const {
-    server = false
-  } = options;
+  const { server = false } = options;
 
   return [
     {

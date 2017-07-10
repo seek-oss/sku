@@ -11,31 +11,41 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
-## What does sku give you out of the box?
+## Features
 
-### Modern Javascript support ###
-
-(Babel preconfigured with ES2015 and React presets, Webpack module loading)
+### Modern Javascript (via [Babel](https://babeljs.io/)) ###
 
 Use `import`, `const`, `=>`, spread operators, destructuring and all their friends in your code.  It'll just work.
 
-### CSS Modules ###
+* [babel-preset-es2015](https://babeljs.io/docs/plugins/preset-es2015/)
+* [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/) and [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
+* [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
+* [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
 
-(Webpack style loaders for LESS)
+### Locally scoped CSS via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/)###
 
-Import your LESS styles directly into your components: https://github.com/css-modules/css-modules
+Import any `*.less` file into your Javascript as a `styles` object, and use its properties as class names.
 
-### Jest testing ###
+```
+import styles from './example.less';
 
-https://facebook.github.io/jest/
+const ExampleComponent = (props) => {
+  return (
+      <div className={styles.exampleWrapper}>
+        I'm styled with the .exampleWrapper rule in example.less!
+      </div>
+    )
+}
+```
 
-sku will run any of your `.test.js` files through Jest for your convenience
+### Unit and snapshot testing (via [Jest](https://facebook.github.io/jest/)) ###
 
-### First class support for SEEK Living Style Guide ###
+The `sku test` command will invoke Jest, running any tests in files named `*.test.js`, `*.spec.js` or in a `__tests__` folder.
 
-https://github.com/seek-oss/seek-style-guide
+### First class support for [SEEK Living Style Guide](https://github.com/seek-oss/seek-style-guide) ###
 
-If you choose to include the SEEK Living Style Guide in your project, no further webpack configuration is necessary.  Just start importing components and build your UI!
+sku is pre-configured for the SEEK Style Guide, so if you want to use it, just install it and go without any extra setup.
+
 
 ## Getting Started
 

@@ -248,6 +248,39 @@ module.exports = {
 }
 ```
 
+### Locales
+
+Often we render multiple versions of our application for different locations, eg. Australia & New Zealand. To render an HTML file for each location you can use the locales option in `sku.config.js`. Locales are preferable to [monorepos](#monorepo-support) when you need to render multiple versions of your HTML file but only need one version of each of the assets (JS, CSS, images, etc). Note: You can use `locales` inside a monorepo project.
+
+The `locales` option accepts an array of strings representing each locale you want to render HTML files for.
+
+```js
+module.exports = {
+  locales: ['AU', 'NZ']
+}
+```
+
+For each locale, sku will call your `render.js` function and pass it the locale as a parameter.
+
+```js
+const render = ({ locale }) => (
+  `<div>Rendered for ${locale}</div>`
+)
+```
+
+The name of the HTML file that is generated will be suffixed by `-{locale}`.
+
+eg.
+```js
+module.exports = {
+  locales: ['AU', 'NZ']
+}
+```
+
+will create `index-AU.html` & `index-NZ.html`.
+
+Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
+
 ### Monorepo Support
 
 If you need to build multiple projects in the same repo, you can provide an array of config objects.

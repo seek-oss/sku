@@ -94,7 +94,7 @@ const svgLoaders = [
   }
 ];
 
-const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
+const buildWebpackConfigs = builds.map(({ name, paths, env, locales }) => {
   const envVars = lodash
     .chain(env)
     .mapValues((value, key) => {
@@ -222,7 +222,17 @@ const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
       },
       plugins: [
         new webpack.DefinePlugin(envVars),
-        new StaticSiteGeneratorPlugin()
+        ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
+          locale =>
+            new StaticSiteGeneratorPlugin({
+              locals: {
+                locale
+              },
+              paths: `index${isProductionBuild && locale
+                ? `-${locale}`
+                : ''}.html`
+            })
+        )
       ]
     }
   ];

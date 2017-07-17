@@ -37,6 +37,7 @@ const builds = buildConfigs
     const name = buildConfig.name || '';
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
+    const locales = buildConfig.locales || [''];
 
     const paths = {
       seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
@@ -49,7 +50,8 @@ const builds = buildConfigs
     return {
       name,
       env,
-      paths
+      paths,
+      locales
     };
   });
 

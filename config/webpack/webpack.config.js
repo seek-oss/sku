@@ -6,7 +6,6 @@ const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
 const isProductionBuild = process.env.NODE_ENV === 'production';
-const thirdPartyModulesRegex = /node_modules\/(?!(seek-style-guide)\/).*/;
 
 const jsLoaders = [
   {
@@ -15,12 +14,15 @@ const jsLoaders = [
   }
 ];
 
+const packageToClassPrefix = name =>
+  `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
+
 const makeCssLoaders = (options = {}) => {
-  const { server = false, styleGuide = false } = options;
+  const { server = false, package = '' } = options;
 
   const debugIdent = isProductionBuild
     ? ''
-    : `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
+    : `${package ? packageToClassPrefix(package) : ''}[name]__[local]___`;
 
   return [
     {
@@ -117,6 +119,8 @@ const buildWebpackConfigs = builds.map(
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
+    const internalJs = [paths.src, ...paths.compilePackages];
+
     return [
       {
         entry: paths.clientEntry,
@@ -128,12 +132,12 @@ const buildWebpackConfigs = builds.map(
           rules: [
             {
               test: /\.js$/,
-              exclude: thirdPartyModulesRegex,
+              include: internalJs,
               use: jsLoaders
             },
             {
               test: /\.js$/,
-              include: thirdPartyModulesRegex,
+              exclude: internalJs,
               use: [
                 {
                   loader: require.resolve('babel-loader'),
@@ -152,14 +156,14 @@ const buildWebpackConfigs = builds.map(
                 use: makeCssLoaders()
               })
             },
-            {
+            ...paths.compilePackages.map(package => ({
               test: /\.less$/,
-              include: paths.seekStyleGuide,
+              include: package,
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: makeCssLoaders({ styleGuide: true })
+                use: makeCssLoaders({ package })
               })
-            },
+            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders()
@@ -198,7 +202,7 @@ const buildWebpackConfigs = builds.map(
           rules: [
             {
               test: /\.js$/,
-              exclude: thirdPartyModulesRegex,
+              include: internalJs,
               use: jsLoaders
             },
             {
@@ -206,11 +210,11 @@ const buildWebpackConfigs = builds.map(
               exclude: /node_modules/,
               use: makeCssLoaders({ server: true })
             },
-            {
+            ...paths.compilePackages.map(package => ({
               test: /\.less$/,
-              include: paths.seekStyleGuide,
-              use: makeCssLoaders({ server: true, styleGuide: true })
-            },
+              include: package,
+              use: makeCssLoaders({ server: true, package })
+            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })

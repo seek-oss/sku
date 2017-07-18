@@ -11,6 +11,8 @@ const buildConfigs = fs.existsSync(skuConfigPath)
   ? makeArray(require(skuConfigPath))
   : [{}];
 
+const defaultDecorator = a => a;
+
 let buildName = args.buildName;
 
 if (!buildName && args.script === 'start' && buildConfigs.length > 1) {
@@ -38,6 +40,8 @@ const builds = buildConfigs
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];
+    const webpackDecorator =
+      buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
     const paths = {
       seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
@@ -51,7 +55,8 @@ const builds = buildConfigs
       name,
       env,
       paths,
-      locales
+      locales,
+      webpackDecorator
     };
   });
 

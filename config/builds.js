@@ -6,10 +6,12 @@ const deasyncPromise = require('deasync-promise');
 const skuConfigPath = path.join(cwd, 'sku.config.js');
 const args = require('./args');
 
-const makeArray = x => Array.isArray(x) ? x : [x];
+const makeArray = x => (Array.isArray(x) ? x : [x]);
 const buildConfigs = fs.existsSync(skuConfigPath)
   ? makeArray(require(skuConfigPath))
   : [{}];
+
+const defaultDecorator = a => a;
 
 let buildName = args.buildName;
 
@@ -19,7 +21,8 @@ if (!buildName && args.script === 'start' && buildConfigs.length > 1) {
       {
         type: 'list',
         name: 'buildName',
-        message: 'You appear to be running a monorepo. Which project would you like to work on?',
+        message:
+          'You appear to be running a monorepo. Which project would you like to work on?',
         choices: buildConfigs.map(x => x.name).filter(Boolean)
       }
     ])
@@ -36,6 +39,9 @@ const builds = buildConfigs
     const name = buildConfig.name || '';
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
+    const locales = buildConfig.locales || [''];
+    const webpackDecorator =
+      buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
     const paths = {
       seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
@@ -48,7 +54,9 @@ const builds = buildConfigs
     return {
       name,
       env,
-      paths
+      paths,
+      locales,
+      webpackDecorator
     };
   });
 

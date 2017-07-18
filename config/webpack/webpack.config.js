@@ -16,10 +16,7 @@ const jsLoaders = [
 ];
 
 const makeCssLoaders = (options = {}) => {
-  const {
-    server = false,
-    styleGuide = false
-  } = options;
+  const { server = false, styleGuide = false } = options;
 
   const debugIdent = isProductionBuild
     ? ''
@@ -58,7 +55,7 @@ const makeCssLoaders = (options = {}) => {
       // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
       loader: require.resolve('string-replace-loader'),
       options: {
-        search: '(url\\([\'"]?)(\.)',
+        search: '(url\\([\'"]?)(.)',
         replace: '$1\\$2',
         flags: 'g'
       }
@@ -67,9 +64,7 @@ const makeCssLoaders = (options = {}) => {
 };
 
 const makeImageLoaders = (options = {}) => {
-  const {
-    server = false
-  } = options;
+  const { server = false } = options;
 
   return [
     {
@@ -99,138 +94,150 @@ const svgLoaders = [
   }
 ];
 
-const buildWebpackConfigs = builds.map(({ name, paths, env }) => {
-  const envVars = lodash
-    .chain(env)
-    .mapValues((value, key) => {
-      if (typeof value !== 'object') {
-        return JSON.stringify(value);
-      }
+const buildWebpackConfigs = builds.map(
+  ({ name, paths, env, locales, webpackDecorator }) => {
+    const envVars = lodash
+      .chain(env)
+      .mapValues((value, key) => {
+        if (typeof value !== 'object') {
+          return JSON.stringify(value);
+        }
 
-      const valueForProfile = value[args.profile];
+        const valueForProfile = value[args.profile];
 
-      if (typeof valueForProfile === 'undefined') {
-        console.log(
-          `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`
-        );
-        process.exit(1);
-      }
+        if (typeof valueForProfile === 'undefined') {
+          console.log(
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`
+          );
+          process.exit(1);
+        }
 
-      return JSON.stringify(valueForProfile);
-    })
-    .mapKeys((value, key) => `process.env.${key}`)
-    .value();
+        return JSON.stringify(valueForProfile);
+      })
+      .mapKeys((value, key) => `process.env.${key}`)
+      .value();
 
-  return [
-    {
-      entry: paths.clientEntry,
-      output: {
-        path: paths.dist,
-        filename: '[name].js'
-      },
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: thirdPartyModulesRegex,
-            use: jsLoaders
-          },
-          {
-            test: /\.js$/,
-            include: thirdPartyModulesRegex,
-            use: [
-              {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  presets: [require.resolve('babel-preset-es2015')]
+    return [
+      {
+        entry: paths.clientEntry,
+        output: {
+          path: paths.dist,
+          filename: '[name].js'
+        },
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: thirdPartyModulesRegex,
+              use: jsLoaders
+            },
+            {
+              test: /\.js$/,
+              include: thirdPartyModulesRegex,
+              use: [
+                {
+                  loader: require.resolve('babel-loader'),
+                  options: {
+                    babelrc: false,
+                    presets: [require.resolve('babel-preset-es2015')]
+                  }
                 }
-              }
-            ]
-          },
-          {
-            test: /\.less$/,
-            exclude: /node_modules/,
-            use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: makeCssLoaders()
-            })
-          },
-          {
-            test: /\.less$/,
-            include: paths.seekStyleGuide,
-            use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: makeCssLoaders({ styleGuide: true })
-            })
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: makeImageLoaders()
-          },
-          {
-            test: /\.svg$/,
-            use: svgLoaders
-          }
+              ]
+            },
+            {
+              test: /\.less$/,
+              exclude: /node_modules/,
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: makeCssLoaders()
+              })
+            },
+            {
+              test: /\.less$/,
+              include: paths.seekStyleGuide,
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: makeCssLoaders({ styleGuide: true })
+              })
+            },
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: makeImageLoaders()
+            },
+            {
+              test: /\.svg$/,
+              use: svgLoaders
+            }
+          ]
+        },
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          new ExtractTextPlugin('style.css')
+        ].concat(
+          !isProductionBuild
+            ? []
+            : [
+                new webpack.optimize.UglifyJsPlugin(),
+                new webpack.DefinePlugin({
+                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+                }),
+                new webpack.optimize.ModuleConcatenationPlugin()
+              ]
+        )
+      },
+      {
+        entry: {
+          render: paths.renderEntry
+        },
+        output: {
+          path: paths.dist,
+          filename: '[name].js',
+          libraryTarget: 'umd'
+        },
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: thirdPartyModulesRegex,
+              use: jsLoaders
+            },
+            {
+              test: /\.less$/,
+              exclude: /node_modules/,
+              use: makeCssLoaders({ server: true })
+            },
+            {
+              test: /\.less$/,
+              include: paths.seekStyleGuide,
+              use: makeCssLoaders({ server: true, styleGuide: true })
+            },
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: makeImageLoaders({ server: true })
+            },
+            {
+              test: /\.svg$/,
+              use: svgLoaders
+            }
+          ]
+        },
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
+            locale =>
+              new StaticSiteGeneratorPlugin({
+                locals: {
+                  locale
+                },
+                paths: `index${isProductionBuild && locale
+                  ? `-${locale}`
+                  : ''}.html`
+              })
+          )
         ]
-      },
-      plugins: [
-        new webpack.DefinePlugin(envVars),
-        new ExtractTextPlugin('style.css')
-      ].concat(
-        !isProductionBuild
-          ? []
-          : [
-              new webpack.optimize.UglifyJsPlugin(),
-              new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-              }),
-              new webpack.optimize.ModuleConcatenationPlugin()
-            ]
-      )
-    },
-    {
-      entry: {
-        render: paths.renderEntry
-      },
-      output: {
-        path: paths.dist,
-        filename: '[name].js',
-        libraryTarget: 'umd'
-      },
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: thirdPartyModulesRegex,
-            use: jsLoaders
-          },
-          {
-            test: /\.less$/,
-            exclude: /node_modules/,
-            use: makeCssLoaders({ server: true })
-          },
-          {
-            test: /\.less$/,
-            include: paths.seekStyleGuide,
-            use: makeCssLoaders({ server: true, styleGuide: true })
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: makeImageLoaders({ server: true })
-          },
-          {
-            test: /\.svg$/,
-            use: svgLoaders
-          }
-        ]
-      },
-      plugins: [
-        new webpack.DefinePlugin(envVars),
-        new StaticSiteGeneratorPlugin()
-      ]
-    }
-  ];
-});
+      }
+    ].map(webpackDecorator);
+  }
+);
 
 module.exports = flatten(buildWebpackConfigs);

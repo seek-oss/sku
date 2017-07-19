@@ -2,7 +2,7 @@ version: 2
 
 groups:
   reviewers:
-    required: 2
+    required: 1
     teams:
       - sku-contributors
     approve_by_comment:

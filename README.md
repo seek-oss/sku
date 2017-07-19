@@ -11,6 +11,8 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
+**WARNING: While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK. As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.**
+
 ## Features
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))

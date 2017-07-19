@@ -11,6 +11,71 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
+## Features
+
+### Modern Javascript (via [Babel](https://babeljs.io/))
+
+Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
+
+* [babel-preset-es2015](https://babeljs.io/docs/plugins/preset-es2015/)
+* [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/)
+* [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
+* [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
+* [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
+
+### Locally Scoped CSS (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
+
+Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.
+
+For example, given the following Less file:
+
+```less
+.exampleWrapper {
+  font-family: comic sans ms;
+  color: blue;
+}
+```
+
+You can then import the classes into your JavaScript code like so:
+
+```js
+import styles from './example.less';
+
+export default () => (
+  <div className={styles.exampleWrapper}>
+    Hello World!
+  </div>
+);
+```
+
+### Unit and Snapshot Testing (via [Jest](https://facebook.github.io/jest/))
+
+The `sku test` command will invoke Jest, running any tests in files named `*.test.js`, `*.spec.js` or in a `__tests__` folder.
+
+Since sku uses Jest as a testing framework, you can read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
+
+### Linting and Formatting (via [ESLint](http://eslint.org/) and [Prettier](https://github.com/prettier/prettier))
+
+Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-sku](https://github.com/seek-oss/eslint-config-sku).
+
+Adding the following to your package.json file will enable the [Atom ESLint plugin](https://github.com/AtomLinter/linter-eslint) to work correctly with sku.
+
+```js
+"eslintConfig": {
+  "extends": "sku"
+}
+```
+
+Similarly, running `sku format` will reformat the JavaScript code in `src` using Prettier.
+
+### Static Pre-rendering (via [static-site-generator-webpack-plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin))
+
+Generate static HTML files via a webpack-compiled render function that has access to your application code. For example, when building a React application, you can pre-render to static HTML with React's [renderToString](https://facebook.github.io/react/docs/react-dom-server.html#rendertostring) function.
+
+### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
+
+Without any special setup, sku is pre-configured for the SEEK Style Guide. Just start importing components as needed and everything should just work out of the box.
+
 ## Getting Started
 
 First, in a new directory, create a git repository with an appropriate `.gitignore` file:
@@ -180,12 +245,6 @@ To build assets for production:
 $ npm run build
 ```
 
-## Testing
-
-Anywhere inside your project, any file ending in `.test.js` will be included in an `npm test` run.
-
-Since sku uses Jest as a testing framework, you can read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
-
 ## Configuration
 
 If you need to configure sku, first create a `sku.config.js` file in your project root:
@@ -320,20 +379,6 @@ Alternatively, you can start the relevant project directly:
 
 ```bash
 $ npm start hello
-```
-
-### Linting
-
-Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-sku](https://github.com/seek-oss/eslint-config-sku).
-
-#### Atom support
-
-Adding the following to your package.json file will enable the atom ESLint plugin to work with sku.
-
-```js
-"eslintConfig": {
-  "extends": "sku"
-}
 ```
 
 ## Contributing

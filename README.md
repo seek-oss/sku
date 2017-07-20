@@ -309,6 +309,18 @@ module.exports = {
 }
 ```
 
+### Compile Packages
+
+Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.
+
+```js
+module.exports = {
+  compilePackages: ['awesome-shared-components']
+}
+```
+
+Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
+
 ### Locales
 
 Often we render multiple versions of our application for different locations, eg. Australia & New Zealand. To render an HTML file for each location you can use the locales option in `sku.config.js`. Locales are preferable to [monorepos](#monorepo-support) when you need to render multiple versions of your HTML file but only need one version of each of the assets (JS, CSS, images, etc). Note: You can use `locales` inside a monorepo project.

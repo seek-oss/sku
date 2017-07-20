@@ -40,11 +40,18 @@ const builds = buildConfigs
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];
+    const compilePackages = buildConfig.compilePackages || [];
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
     const paths = {
-      seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
+      src: path.join(cwd, 'src'),
+      compilePackages: [
+        path.join(cwd, 'node_modules/seek-style-guide'),
+        ...compilePackages.map(package =>
+          path.join(cwd, 'node_modules', package)
+        )
+      ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       renderEntry: path.join(cwd, entry.render || 'src/render.js'),
       public: path.join(cwd, buildConfig.public || 'public'),

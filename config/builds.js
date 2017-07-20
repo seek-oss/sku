@@ -41,6 +41,8 @@ const builds = buildConfigs
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];
+    const hosts = buildConfig.hosts || ['localhost'];
+    const port = buildConfig.port || 8080;
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
@@ -63,7 +65,9 @@ const builds = buildConfigs
       env,
       paths,
       locales,
-      webpackDecorator
+      webpackDecorator,
+      hosts,
+      port
     };
   });
 

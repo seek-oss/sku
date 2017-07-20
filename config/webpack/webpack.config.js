@@ -97,7 +97,7 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator }) => {
+  ({ name, paths, env, locales, webpackDecorator, port }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -121,9 +121,20 @@ const buildWebpackConfigs = builds.map(
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
+    const entry = [paths.clientEntry];
+    const devEntries = [
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?http://localhost:${port}/`
+    ];
+
+    if (!isProductionBuild) {
+      entry.unshift(...devEntries);
+    }
+
     return [
       {
-        entry: paths.clientEntry,
+        entry,
         output: {
           path: paths.dist,
           filename: '[name].js'

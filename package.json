@@ -55,6 +55,7 @@
     "bluebird": "^3.5.0",
     "chalk": "^2.0.1",
     "classnames": "^2.2.5",
+    "command-line-args": "^4.0.6",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.26.1",
     "deasync-promise": "^1.0.1",

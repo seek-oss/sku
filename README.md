@@ -236,7 +236,9 @@ module.exports = {
 }
 ```
 
-Environment variables can also be configured separately for development and production:
+Environment variables can also be configured separately for development and production, plus any custom environments. The default environment for `sku build` is `production`, however you can select a custom environment to build your application by passing the command line argument `--env` (`-e` for shorthand). The environment is also passed to your code using `process.env.SKU_ENV`. Please note that these environments are not related to `NODE_ENV`.
+
+`sku build --env testing`
 
 ```js
 module.exports = {
@@ -244,11 +246,14 @@ module.exports = {
   env: {
     API_ENDPOINT: {
       development: '/mock/api',
+      testing: 'http://localhost/test/api',
       production: 'https://example.com/real/api'
     }
   }
 }
 ```
+
+Note: Running `sku start` will always use the `development` environment.
 
 ### Compile Packages
 

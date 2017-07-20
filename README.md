@@ -354,6 +354,21 @@ will create `index-AU.html` & `index-NZ.html`.
 
 Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
 
+### Development server
+
+Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.
+
+```js
+module.exports = {
+  // A list hosts your app can run off while in the dev environment.
+  hosts: ['dev.seek.com.au', 'dev.seek.co.nz'],
+  // The port you want the server to run on
+  port: 5000
+}
+```
+
+Note: The app will always run on localhost. The `hosts` option is only for apps that resolve custom hosts to localhost.
+
 ### Monorepo Support
 
 If you need to build multiple projects in the same repo, you can provide an array of config objects.

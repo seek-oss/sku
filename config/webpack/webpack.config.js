@@ -105,31 +105,32 @@ const buildWebpackConfigs = builds.map(
           return JSON.stringify(value);
         }
 
-        const valueForProfile = value[args.profile];
+        const valueForEnv = value[args.env];
 
-        if (typeof valueForProfile === 'undefined') {
+        if (typeof valueForEnv === 'undefined') {
           console.log(
-            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.env}" environment`
           );
           process.exit(1);
         }
 
-        return JSON.stringify(valueForProfile);
+        return JSON.stringify(valueForEnv);
       })
+      .set('SKU_ENV', JSON.stringify(args.env))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
     const entry = [paths.clientEntry];
-    const devEntries = [
+    const devServerEntries = [
       `${require.resolve(
         'webpack-dev-server/client'
       )}?http://localhost:${port}/`
     ];
 
-    if (!isProductionBuild) {
-      entry.unshift(...devEntries);
+    if (args.script === 'start') {
+      entry.unshift(...devServerEntries);
     }
 
     return [

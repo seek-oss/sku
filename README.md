@@ -11,6 +11,8 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
+**WARNING: While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK. As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.**
+
 ## Features
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))
@@ -293,7 +295,9 @@ module.exports = {
 }
 ```
 
-Environment variables can also be configured separately for development and production:
+Environment variables can also be configured separately for development and production, plus any custom environments. The default environment for `sku build` is `production`, however you can select a custom environment to build your application by passing the command line argument `--env` (`-e` for shorthand). The environment is also passed to your code using `process.env.SKU_ENV`. Please note that these environments are not related to `NODE_ENV`.
+
+`sku build --env testing`
 
 ```js
 module.exports = {
@@ -301,11 +305,26 @@ module.exports = {
   env: {
     API_ENDPOINT: {
       development: '/mock/api',
+      testing: 'http://localhost/test/api',
       production: 'https://example.com/real/api'
     }
   }
 }
 ```
+
+Note: Running `sku start` will always use the `development` environment.
+
+### Compile Packages
+
+Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.
+
+```js
+module.exports = {
+  compilePackages: ['awesome-shared-components']
+}
+```
+
+Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
 
 ### Locales
 
@@ -339,6 +358,21 @@ module.exports = {
 will create `index-AU.html` & `index-NZ.html`.
 
 Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
+
+### Development server
+
+Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.
+
+```js
+module.exports = {
+  // A list hosts your app can run off while in the dev environment.
+  hosts: ['dev.seek.com.au', 'dev.seek.co.nz'],
+  // The port you want the server to run on
+  port: 5000
+}
+```
+
+Note: The app will always run on localhost. The `hosts` option is only for apps that resolve custom hosts to localhost.
 
 ### Monorepo Support
 

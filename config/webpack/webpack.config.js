@@ -6,7 +6,6 @@ const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
 const isProductionBuild = process.env.NODE_ENV === 'production';
-const thirdPartyModulesRegex = /node_modules\/(?!(seek-style-guide)\/).*/;
 
 const jsLoaders = [
   {
@@ -15,12 +14,15 @@ const jsLoaders = [
   }
 ];
 
+const packageToClassPrefix = name =>
+  `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
+
 const makeCssLoaders = (options = {}) => {
-  const { server = false, styleGuide = false } = options;
+  const { server = false, package = '' } = options;
 
   const debugIdent = isProductionBuild
     ? ''
-    : `${styleGuide ? '__STYLE_GUIDE__' : ''}[name]__[local]___`;
+    : `${package ? packageToClassPrefix(package) : ''}[name]__[local]___`;
 
   return [
     {
@@ -95,7 +97,7 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator }) => {
+  ({ name, paths, env, locales, webpackDecorator, port }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -103,23 +105,37 @@ const buildWebpackConfigs = builds.map(
           return JSON.stringify(value);
         }
 
-        const valueForProfile = value[args.profile];
+        const valueForEnv = value[args.env];
 
-        if (typeof valueForProfile === 'undefined') {
+        if (typeof valueForEnv === 'undefined') {
           console.log(
-            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.profile}" profile`
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.env}" environment`
           );
           process.exit(1);
         }
 
-        return JSON.stringify(valueForProfile);
+        return JSON.stringify(valueForEnv);
       })
+      .set('SKU_ENV', JSON.stringify(args.env))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
+    const internalJs = [paths.src, ...paths.compilePackages];
+
+    const entry = [paths.clientEntry];
+    const devServerEntries = [
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?http://localhost:${port}/`
+    ];
+
+    if (args.script === 'start') {
+      entry.unshift(...devServerEntries);
+    }
+
     return [
       {
-        entry: paths.clientEntry,
+        entry,
         output: {
           path: paths.dist,
           filename: '[name].js'
@@ -128,12 +144,12 @@ const buildWebpackConfigs = builds.map(
           rules: [
             {
               test: /\.js$/,
-              exclude: thirdPartyModulesRegex,
+              include: internalJs,
               use: jsLoaders
             },
             {
               test: /\.js$/,
-              include: thirdPartyModulesRegex,
+              exclude: internalJs,
               use: [
                 {
                   loader: require.resolve('babel-loader'),
@@ -152,14 +168,14 @@ const buildWebpackConfigs = builds.map(
                 use: makeCssLoaders()
               })
             },
-            {
+            ...paths.compilePackages.map(package => ({
               test: /\.less$/,
-              include: paths.seekStyleGuide,
+              include: package,
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: makeCssLoaders({ styleGuide: true })
+                use: makeCssLoaders({ package })
               })
-            },
+            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders()
@@ -198,7 +214,7 @@ const buildWebpackConfigs = builds.map(
           rules: [
             {
               test: /\.js$/,
-              exclude: thirdPartyModulesRegex,
+              include: internalJs,
               use: jsLoaders
             },
             {
@@ -206,11 +222,11 @@ const buildWebpackConfigs = builds.map(
               exclude: /node_modules/,
               use: makeCssLoaders({ server: true })
             },
-            {
+            ...paths.compilePackages.map(package => ({
               test: /\.less$/,
-              include: paths.seekStyleGuide,
-              use: makeCssLoaders({ server: true, styleGuide: true })
-            },
+              include: package,
+              use: makeCssLoaders({ server: true, package })
+            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })

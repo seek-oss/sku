@@ -40,11 +40,20 @@ const builds = buildConfigs
     const env = buildConfig.env || {};
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];
+    const compilePackages = buildConfig.compilePackages || [];
+    const hosts = buildConfig.hosts || ['localhost'];
+    const port = buildConfig.port || 8080;
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
     const paths = {
-      seekStyleGuide: path.join(cwd, 'node_modules/seek-style-guide'),
+      src: path.join(cwd, 'src'),
+      compilePackages: [
+        path.join(cwd, 'node_modules/seek-style-guide'),
+        ...compilePackages.map(package =>
+          path.join(cwd, 'node_modules', package)
+        )
+      ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       renderEntry: path.join(cwd, entry.render || 'src/render.js'),
       public: path.join(cwd, buildConfig.public || 'public'),
@@ -56,7 +65,9 @@ const builds = buildConfigs
       env,
       paths,
       locales,
-      webpackDecorator
+      webpackDecorator,
+      hosts,
+      port
     };
   });
 

@@ -65,6 +65,38 @@ const makeCssLoaders = (options = {}) => {
   ];
 };
 
+const makeCssInJsLoaders = (options = {}) => {
+  const { server = false } = options;
+
+  return [
+    {
+      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
+      options: {
+        modules: true,
+        importLoaders: 3
+      }
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        plugins: () => [
+          require('autoprefixer')({
+            browsers: [
+              '> 1%',
+              'Last 2 versions',
+              'ie >= 10',
+              'Safari >= 8',
+              'iOS >= 8'
+            ]
+          })
+        ]
+      }
+    },
+    { loader: require.resolve('css-in-js-loader') },
+    { loader: require.resolve('babel-loader') }
+  ];
+};
+
 const makeImageLoaders = (options = {}) => {
   const { server = false } = options;
 
@@ -143,12 +175,12 @@ const buildWebpackConfigs = builds.map(
         module: {
           rules: [
             {
-              test: /\.js$/,
+              test: /(?!\.css)\.js$/,
               include: internalJs,
               use: jsLoaders
             },
             {
-              test: /\.js$/,
+              test: /(?!\.css)\.js$/,
               exclude: internalJs,
               use: [
                 {
@@ -159,6 +191,13 @@ const buildWebpackConfigs = builds.map(
                   }
                 }
               ]
+            },
+            {
+              test: /\.css\.js$/,
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: makeCssInJsLoaders()
+              })
             },
             {
               test: /\.less$/,
@@ -213,9 +252,13 @@ const buildWebpackConfigs = builds.map(
         module: {
           rules: [
             {
-              test: /\.js$/,
+              test: /(?!\.css)\.js$/,
               include: internalJs,
               use: jsLoaders
+            },
+            {
+              test: /\.css\.js$/,
+              use: makeCssInJsLoaders({ server: true })
             },
             {
               test: /\.less$/,

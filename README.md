@@ -359,6 +359,50 @@ will create `index-AU.html` & `index-NZ.html`.
 
 Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
 
+
+### Tenants
+
+Applications that serve multiple branded experiences need to know which brand (or tenant) to render.  If invoked with a `--tenant` or `--t` command line, sku will pass through the supplied value as an environment variable named `SKU_TENANT`.
+
+For example, if we invoked
+
+`sku --tenant=jobStreet`
+
+And our application exposes the tenant as a prop to react app like so:
+
+```
+<div id="app">
+    ${renderToString(
+        <App tenant={process.env.SKU_TENANT} />
+    )}
+</div>
+```
+
+Then we can serve different experiences based on the tenant prop:
+
+```
+import JobStreetHeader from `./components/JobStreetHeader/JobStreetHeader`;
+import JobsDBHeader from './components/JobsDBHeader/JobsDBHeader';
+
+const renderHeader = (tenant) => {
+    if (tenant === 'jobStreet') {
+        return (<JobStreetHeader>)
+    } else {
+        return (JobsDBHeader)
+    }
+};
+
+const App = (props) => {
+    return (
+        <div>
+            {renderHeader(props.tenant)}
+        </div>
+    );
+}
+```
+
+
+
 ### Development server
 
 Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.

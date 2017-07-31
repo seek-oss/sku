@@ -18,13 +18,13 @@ const packageToClassPrefix = name =>
   `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
 const makeCssLoaders = (options = {}) => {
-  const { server = false, package = '' } = options;
+  const { server = false, package = '', js = false } = options;
 
   const debugIdent = isProductionBuild
     ? ''
     : `${package ? packageToClassPrefix(package) : ''}[name]__[local]___`;
 
-  return [
+  let cssLoaders = [
     {
       loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
@@ -63,38 +63,16 @@ const makeCssLoaders = (options = {}) => {
       }
     }
   ];
-};
 
-const makeCssInJsLoaders = (options = {}) => {
-  const { server = false } = options;
+  if (js) {
+    cssLoaders = [
+      ...cssLoaders,
+      { loader: require.resolve('css-in-js-loader') },
+      ...jsLoaders
+    ];
+  }
 
-  return [
-    {
-      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
-      options: {
-        modules: true,
-        importLoaders: 3
-      }
-    },
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        plugins: () => [
-          require('autoprefixer')({
-            browsers: [
-              '> 1%',
-              'Last 2 versions',
-              'ie >= 10',
-              'Safari >= 8',
-              'iOS >= 8'
-            ]
-          })
-        ]
-      }
-    },
-    { loader: require.resolve('css-in-js-loader') },
-    ...jsLoaders
-  ];
+  return cssLoaders;
 };
 
 const makeImageLoaders = (options = {}) => {
@@ -196,7 +174,7 @@ const buildWebpackConfigs = builds.map(
               test: /\.css\.js$/,
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: makeCssInJsLoaders()
+                use: makeCssInJsLoaders({ js: true })
               })
             },
             {
@@ -258,7 +236,7 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: makeCssInJsLoaders({ server: true })
+              use: makeCssInJsLoaders({ server: true, js: true })
             },
             {
               test: /\.less$/,

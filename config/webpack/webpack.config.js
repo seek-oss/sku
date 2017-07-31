@@ -24,7 +24,12 @@ const makeCssLoaders = (options = {}) => {
     ? ''
     : `${package ? packageToClassPrefix(package) : ''}[name]__[local]___`;
 
-  let cssLoaders = [
+  const cssInJsLoaders = [
+    { loader: require.resolve('css-in-js-loader') },
+    ...jsLoaders
+  ];
+
+  return (cssLoaders = [
     {
       loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
@@ -61,18 +66,9 @@ const makeCssLoaders = (options = {}) => {
         replace: '$1\\$2',
         flags: 'g'
       }
-    }
-  ];
-
-  if (js) {
-    cssLoaders = [
-      ...cssLoaders,
-      { loader: require.resolve('css-in-js-loader') },
-      ...jsLoaders
-    ];
-  }
-
-  return cssLoaders;
+    },
+    ...(js ? cssInJsLoaders : [])
+  ]);
 };
 
 const makeImageLoaders = (options = {}) => {

@@ -380,26 +380,14 @@ And our application exposes the tenant as a prop to react app like so:
 Then we can serve different experiences based on the tenant prop:
 
 ```
-import AwesomeHeader from './components/AwesomeHeader';
-import AmazingHeader from './components/AmazingHeader';
-
-const renderHeader = (tenant) => {
-  if (tenant === 'awesomeBrand') {
-    return (<AwesomeHeader>)
-  } else {
-    return (AmazingHeader)
-  }
-};
-
 const App = (props) => {
   return (
     <div>
-      {renderHeader(props.tenant)}
+      Welcome to {props.tenant === 'awesomeBrand' ? 'Awesome Brand' : 'Amazing Brand'}!
     </div>
   );
 }
 ```
-
 ### Development server
 
 Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.

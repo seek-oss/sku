@@ -13,7 +13,8 @@ const optionDefinitions = [
   {
     name: 'tenant',
     alias: 't',
-    type: String
+    type: String,
+    defaultValue: ''
   }
 ];
 

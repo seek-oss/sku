@@ -170,7 +170,7 @@ const buildWebpackConfigs = builds.map(
               test: /\.css\.js$/,
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: makeCssInJsLoaders({ js: true })
+                use: makeCssLoaders({ js: true })
               })
             },
             {
@@ -232,7 +232,7 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: makeCssInJsLoaders({ server: true, js: true })
+              use: makeCssLoaders({ server: true, js: true })
             },
             {
               test: /\.less$/,

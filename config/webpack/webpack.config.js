@@ -93,7 +93,7 @@ const makeCssInJsLoaders = (options = {}) => {
       }
     },
     { loader: require.resolve('css-in-js-loader') },
-    jsLoaders
+    ...jsLoaders
   ];
 };
 

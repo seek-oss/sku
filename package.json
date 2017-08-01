@@ -60,7 +60,7 @@
     "css-loader": "^0.26.1",
     "deasync-promise": "^1.0.1",
     "eslint-config-sku": "^1.0.0",
-    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "extract-text-webpack-plugin": "^3.0.0",
     "fs-extra": "^2.0.0",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^3.0.6",

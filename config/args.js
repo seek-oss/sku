@@ -15,14 +15,28 @@ const optionDefinitions = [
     alias: 't',
     type: String,
     defaultValue: ''
+  },
+  {
+    name: 'build',
+    alias: 'b',
+    type: String
   }
 ];
 
-const options = commandLineArgs(optionDefinitions);
+const options = commandLineArgs(optionDefinitions, { partial: true });
+
+//Backwards compatibility for unnamed build name argument, to be deprecated
+const buildName = () => {
+  if (options.build) {
+    return options.build;
+  } else if (options._unknown && options._unknown.length > 0) {
+    return options._unknown[0];
+  }
+};
 
 module.exports = {
   script: scriptName,
-  buildName: scriptName === 'start' ? process.argv[2] : null,
+  buildName: scriptName === 'start' ? buildName() : null,
   env: scriptName === 'start' ? 'development' : options.env,
   tenant: options.tenant
 };

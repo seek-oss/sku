@@ -41,7 +41,7 @@ const builds = buildConfigs
       {
         SKU_TENANT: args.tenant || ''
       },
-      buildConfig.env ? { ...buildConfig.env } : {}
+      buildConfig.env || {}
     );
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];

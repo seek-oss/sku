@@ -15,6 +15,11 @@ const optionDefinitions = [
     alias: 't',
     type: String,
     defaultValue: ''
+  },
+  {
+    name: 'build',
+    alias: 'b',
+    type: String
   }
 ];
 
@@ -22,7 +27,7 @@ const options = commandLineArgs(optionDefinitions);
 
 module.exports = {
   script: scriptName,
-  buildName: scriptName === 'start' ? process.argv[2] : null,
+  buildName: scriptName === 'start' ? options.build : null,
   env: scriptName === 'start' ? 'development' : options.env,
   tenant: options.tenant
 };

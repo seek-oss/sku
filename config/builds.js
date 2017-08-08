@@ -37,7 +37,10 @@ const builds = buildConfigs
   })
   .map(buildConfig => {
     const name = buildConfig.name || '';
-    const env = buildConfig.env || {};
+    const env = {
+      SKU_TENANT: args.tenant || '',
+      ...(buildConfig.env ? { ...buildConfig.env } : {})
+    };
     const entry = buildConfig.entry || {};
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];

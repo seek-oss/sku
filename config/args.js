@@ -23,11 +23,20 @@ const optionDefinitions = [
   }
 ];
 
-const options = commandLineArgs(optionDefinitions);
+const options = commandLineArgs(optionDefinitions, { partial: true });
+
+//Backwards compatibility for unnamed build name argument, to be deprecated
+const buildName = () => {
+  if (options.build) {
+    return options.build;
+  } else if (options._unknown && options._unknown.length > 0) {
+    return options._unknown[0];
+  }
+};
 
 module.exports = {
   script: scriptName,
-  buildName: scriptName === 'start' ? options.build : null,
+  buildName: scriptName === 'start' ? buildName() : null,
   env: scriptName === 'start' ? 'development' : options.env,
   tenant: options.tenant
 };

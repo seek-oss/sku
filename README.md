@@ -50,6 +50,34 @@ export default () => (
 );
 ```
 
+### Static CSS-in-JS (via [css-in-js-loader](https://github.com/nthtran/css-in-js-loader))
+
+You can import `.css.js` files into your components and use them exactly as you would a regular style sheet.  This is mostly useful when you want to take advantage of JavaScript to compose styles:
+
+```js
+import { standardWrapper } from 'theme/wrappers';
+import { fontFamily } from 'theme/typography';
+import { brandPrimary } from 'theme/palette';
+
+export default {
+  '.exampleWrapper': {
+    ...standardWrapper,
+    fontFamily: fontFamily,
+    color: brandPrimary
+  }
+};
+```
+
+```js
+import styles from './example.css.js';
+
+export default () => (
+  <div className={styles.exampleWrapper}>
+    Hello World!
+  </div>
+);
+```
+
 ### Unit and Snapshot Testing (via [Jest](https://facebook.github.io/jest/))
 
 The `sku test` command will invoke Jest, running any tests in files named `*.test.js`, `*.spec.js` or in a `__tests__` folder.

@@ -139,6 +139,8 @@ const buildWebpackConfigs = builds.map(
       entry.unshift(...devServerEntries);
     }
 
+    const isRender = !!paths.renderEntry;
+
     return [
       {
         entry,
@@ -216,12 +218,18 @@ const buildWebpackConfigs = builds.map(
       },
       {
         entry: {
-          render: paths.renderEntry
+          render: paths.renderEntry || paths.serverEntry
         },
+        target: isRender ? 'web' : 'node',
+        node: isRender
+          ? {}
+          : {
+              __dirname: false
+            },
         output: {
           path: paths.dist,
-          filename: '[name].js',
-          libraryTarget: 'umd'
+          filename: isRender ? 'render.js' : 'server.js',
+          libraryTarget: isRender ? 'umd' : 'var'
         },
         module: {
           rules: [
@@ -254,20 +262,22 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [
-          new webpack.DefinePlugin(envVars),
-          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
-            locale =>
-              new StaticSiteGeneratorPlugin({
-                locals: {
-                  locale
-                },
-                paths: `index${isProductionBuild && locale
-                  ? `-${locale}`
-                  : ''}.html`
-              })
-          )
-        ]
+        plugins: isRender
+          ? [
+              new webpack.DefinePlugin(envVars),
+              ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
+                locale =>
+                  new StaticSiteGeneratorPlugin({
+                    locals: {
+                      locale
+                    },
+                    paths: `index${isProductionBuild && locale
+                      ? `-${locale}`
+                      : ''}.html`
+                  })
+              )
+            ]
+          : [new webpack.DefinePlugin(envVars)]
       }
     ].map(webpackDecorator);
   }

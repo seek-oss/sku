@@ -60,7 +60,8 @@ const builds = buildConfigs
         )
       ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
-      renderEntry: path.join(cwd, entry.render || 'src/render.js'),
+      renderEntry: entry.render ? path.join(cwd, entry.render) : null,
+      serverEntry: entry.server ? path.join(cwd, entry.server) : null,
       public: path.join(cwd, buildConfig.public || 'public'),
       dist: path.join(cwd, buildConfig.target || 'dist')
     };

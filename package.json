@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --single-quote --write",
+      "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
       "git add"
     ]
   },

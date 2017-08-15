@@ -12,7 +12,7 @@ describe('Test cases', function() {
       var testCaseRoot = __dirname + '/test-cases/' + testCase;
 
       beforeEach(function(done) {
-        clean(testCaseRoot + '/actual-output', done);
+        clean(testCaseRoot + '/dist/', done);
       });
 
       it('should build as expected', function() {
@@ -22,7 +22,7 @@ describe('Test cases', function() {
         });
         expect(
           dirCompare.compareSync(
-            testCaseRoot + '/actual-output',
+            testCaseRoot + '/dist',
             testCaseRoot + '/expected-output',
             { compareContent: true }
           ).same

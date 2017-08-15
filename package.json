@@ -16,8 +16,8 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
+    "{bin,config,scripts}/**/*.js": [
+      "prettier --single-quote --write",
       "git add"
     ]
   },

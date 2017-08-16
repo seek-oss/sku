@@ -12,9 +12,14 @@ const runWebpack = config => {
     console.log(
       stats.toString({
         chunks: false, // Makes the build much quieter
+        children: false,
         colors: true
       })
     );
+
+    if (stats.hasErrors()) {
+      throw new Error();
+    }
   });
 };
 
@@ -31,4 +36,5 @@ const copyPublicFiles = () => {
 
 Promise.each(webpackConfig, runWebpack)
   .then(copyPublicFiles)
-  .then(() => console.log('Sku build complete!'));
+  .then(() => console.log('Sku build complete!'))
+  .catch(() => process.exit(1));

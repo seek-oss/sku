@@ -51,6 +51,15 @@ const builds = buildConfigs
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 
+    let renderEntry = path.join(cwd, 'src/render.js');
+    let serverEntry = null;
+    if (entry.render) {
+      renderEntry = path.join(cwd, entry.render);
+    } else if (entry.server) {
+      renderEntry = null;
+      serverEntry = path.join(cwd, entry.server);
+    }
+
     const paths = {
       src: path.join(cwd, 'src'),
       compilePackages: [
@@ -60,7 +69,8 @@ const builds = buildConfigs
         )
       ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
-      renderEntry: path.join(cwd, entry.render || 'src/render.js'),
+      renderEntry: renderEntry,
+      serverEntry: serverEntry,
       public: path.join(cwd, buildConfig.public || 'public'),
       dist: path.join(cwd, buildConfig.target || 'dist')
     };

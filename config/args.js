@@ -1,7 +1,11 @@
 const commandLineArgs = require('command-line-args');
 
 const scriptNameRegex = /scripts[\/\\]([\w-]*)\.js$/i;
-const scriptName = process.argv[1].match(scriptNameRegex)[1];
+const scriptNameByRegex = process.argv[1].match(scriptNameRegex);
+
+const scriptName = scriptNameByRegex
+  ? scriptNameByRegex[1]
+  : process.argv[1].substring(process.argv[1].lastIndexOf('/') + 1); //Invoked by cross-spawn rather than CLI
 
 const optionDefinitions = [
   {

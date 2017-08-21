@@ -26,6 +26,7 @@ prettierCheck(prettierConfig)
     console.log(chalk.cyan('Prettier format rules passed'));
   })
   .catch(exitCode => {
+    console.error('Error: The file(s) listed above failed the prettier check');
     console.error('Error: Prettier check exited with exit code', exitCode);
     process.exit(1);
   });

@@ -145,6 +145,15 @@ Replace the deleted test script with a basic set of sku scripts:
   "lint": "sku lint"
 },
 ```
+For using HMR, you can add this script:
+
+```
+"scripts": {
+  ...
+  "dev": "webpack-dev-server --config node_modules/sku/webpack.config.hmr.js --hot --history-api-fallback --open",
+  ...
+}
+```
 
 For sku to work correctly, you'll need some initial source files. First, create a `src` directory:
 

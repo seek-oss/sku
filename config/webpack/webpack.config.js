@@ -5,6 +5,7 @@ const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
+const path = require('path');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
@@ -123,6 +124,7 @@ const buildWebpackConfigs = builds.map(
         return JSON.stringify(valueForEnv);
       })
       .set('SKU_ENV', JSON.stringify(args.env))
+      .set('PORT', JSON.stringify(port))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
@@ -218,7 +220,15 @@ const buildWebpackConfigs = builds.map(
       },
       {
         entry: {
-          render: paths.renderEntry || paths.serverEntry
+          render:
+            paths.renderEntry || path.join(__dirname, '../server/server.js')
+        },
+        resolve: {
+          alias: isRender
+            ? {}
+            : {
+                serverEntry: paths.serverEntry
+              }
         },
         target: isRender ? 'web' : 'node',
         node: isRender

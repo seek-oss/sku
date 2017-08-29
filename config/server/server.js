@@ -7,12 +7,7 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 
-if (
-  middleware &&
-  (middleware instanceof Function ||
-    middleware instanceof express ||
-    (middleware instanceof Array && middleware.length > 0))
-) {
+if (middleware) {
   app.use(middleware);
 }
 app.get('*', renderCallback);

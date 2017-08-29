@@ -227,7 +227,7 @@ const buildWebpackConfigs = builds.map(
           alias: isRender
             ? {}
             : {
-                serverEntry: paths.serverEntry
+                __sku_alias__serverEntry: paths.serverEntry
               }
         },
         target: isRender ? 'web' : 'node',

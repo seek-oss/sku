@@ -1,16 +1,19 @@
 const express = require('express');
-const { renderCallback, middlewares } = require('serverEntry').default;
+const {
+  renderCallback,
+  middleware
+} = require('__sku_alias__serverEntry').default;
 const port = process.env.PORT || 8080;
 
 const app = express();
 
 if (
-  middlewares &&
-  (middlewares instanceof Function ||
-    middlewares instanceof express ||
-    (middlewares instanceof Array && middlewares.length > 0))
+  middleware &&
+  (middleware instanceof Function ||
+    middleware instanceof express ||
+    (middleware instanceof Array && middleware.length > 0))
 ) {
-  app.use(middlewares);
+  app.use(middleware);
 }
 app.get('*', renderCallback);
 

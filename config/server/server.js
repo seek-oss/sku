@@ -8,7 +8,12 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, './')));
+const env = process.env.NODE_ENV || 'development';
+
+if (env === 'development') {
+  app.use(express.static(path.join(__dirname, './')));
+}
+
 if (middleware) {
   app.use(middleware);
 }

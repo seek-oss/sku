@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const {
   renderCallback,
@@ -6,6 +7,12 @@ const {
 const port = process.env.PORT || 8080;
 
 const app = express();
+
+const env = process.env.NODE_ENV || 'development';
+
+if (env === 'development') {
+  app.use(express.static(path.join(__dirname, './')));
+}
 
 if (middleware) {
   app.use(middleware);

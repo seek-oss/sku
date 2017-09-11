@@ -19,6 +19,8 @@ if (middleware) {
 }
 app.get('*', renderCallback);
 
-app.listen(port, () => {
-  console.log(`App started on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App started on port ${port}`);
+// });
+
+export default app;

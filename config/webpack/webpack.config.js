@@ -7,6 +7,8 @@ const flatten = require('lodash/flatten');
 const args = require('../args');
 const path = require('path');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const nodeExternals = require('webpack-node-externals');
+const StartServerPlugin = require('start-server-webpack-plugin');
 
 const jsLoaders = [
   {
@@ -130,22 +132,28 @@ const buildWebpackConfigs = builds.map(
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
-    const entry = [paths.clientEntry];
-    const devServerEntries = [
+    const entry = [
+      'react-hot-loader/patch',
       `${require.resolve(
         'webpack-dev-server/client'
-      )}?http://localhost:${port}/`
+      )}?http://localhost:${port}/`,
+      `${require.resolve('webpack/hot/only-dev-server')}`,
+      paths.clientEntry
     ];
+    // const devServerEntries = [
 
-    if (args.script === 'start') {
-      entry.unshift(...devServerEntries);
-    }
+    // ];
+    //
+    // if (args.script === 'start') {
+    //   entry.unshift(...devServerEntries);
+    // }
 
     const isRender = !!paths.renderEntry;
 
     return [
       {
         entry,
+        devtool: 'inline-source-map',
         output: {
           path: paths.dist,
           filename: '[name].js'
@@ -208,7 +216,16 @@ const buildWebpackConfigs = builds.map(
           new ExtractTextPlugin('style.css')
         ].concat(
           !isProductionBuild
-            ? []
+            ? [
+                new webpack.NamedModulesPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin(),
+                new webpack.DefinePlugin({
+                  'process.env': {
+                    BUILD_TARGET: JSON.stringify('client')
+                  }
+                })
+              ]
             : [
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.DefinePlugin({
@@ -220,9 +237,14 @@ const buildWebpackConfigs = builds.map(
       },
       {
         entry: {
-          render:
-            paths.renderEntry || path.join(__dirname, '../server/server.js')
+          render: paths.renderEntry || [
+            `${require.resolve('webpack/hot/poll')}?1000`,
+            path.join(__dirname, '../server/index.js')
+          ]
         },
+        watch: true,
+        externals: [nodeExternals({ whitelist: ['webpack/hot/poll?1000'] })],
+
         resolve: {
           alias: isRender
             ? {}
@@ -287,7 +309,13 @@ const buildWebpackConfigs = builds.map(
                   })
               )
             ]
-          : [new webpack.DefinePlugin(envVars)]
+          : [
+              new StartServerPlugin('server.js'),
+              new webpack.NamedModulesPlugin(),
+              new webpack.HotModuleReplacementPlugin(),
+              new webpack.NoEmitOnErrorsPlugin(),
+              new webpack.DefinePlugin(envVars)
+            ]
       }
     ].map(webpackDecorator);
   }

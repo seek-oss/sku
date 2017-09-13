@@ -156,7 +156,8 @@ const buildWebpackConfigs = builds.map(
         devtool: 'inline-source-map',
         output: {
           path: paths.dist,
-          filename: '[name].js'
+          filename: '[name].js',
+          publicPath: 'http://localhost:3300/'
         },
         module: {
           rules: [

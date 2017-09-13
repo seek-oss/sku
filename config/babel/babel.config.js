@@ -8,8 +8,8 @@ module.exports = ({ webpack }) => {
       {
         root: [process.cwd()]
       }
-    ]
-    //require.resolve('react-hot-loader/babel')
+    ],
+    require.resolve('react-hot-loader/babel')
   ];
 
   if (webpack) {

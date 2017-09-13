@@ -11,12 +11,14 @@ const { hosts, port } = builds[0];
 
 const compiler = webpack(webpackConfig[0]);
 const devServer = new WebpackDevServer(compiler, {
-  contentBase: builds.map(({ paths }) => paths.public),
+  // contentBase: builds.map(({ paths }) => paths.public),
   historyApiFallback: true,
-  overlay: true,
+  host: 'localhost',
+  //overlay: true,
   stats: 'errors-only',
-  allowedHosts: hosts,
-  hot: true
+  //allowedHosts: hosts,
+  hot: true,
+  headers: { 'Access-Control-Allow-Origin': '*' }
 });
 
 devServer.listen(port, (err, result) => {

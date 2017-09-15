@@ -50,6 +50,8 @@ const builds = buildConfigs
     const port = buildConfig.port || 8080;
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
+    const jestDecorator =
+      buildConfig.dangerouslySetJestConfig || defaultDecorator;
 
     let renderEntry = path.join(cwd, 'src/render.js');
     let serverEntry = null;
@@ -81,6 +83,7 @@ const builds = buildConfigs
       paths,
       locales,
       webpackDecorator,
+      jestDecorator,
       hosts,
       port
     };

@@ -132,32 +132,39 @@ const buildWebpackConfigs = builds.map(
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
-    const entry = [
+    const isRender = !!paths.renderEntry;
+    const isStart = args.script === 'startServer';
+
+    const clientEntry = [paths.clientEntry];
+    const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve(
         'webpack-dev-server/client'
-      )}?http://localhost:${port}/`,
-      `${require.resolve('webpack/hot/only-dev-server')}`,
-      paths.clientEntry
+      )}?http://localhost:${3300}/`,
+      `${require.resolve('webpack/hot/only-dev-server')}`
     ];
-    // const devServerEntries = [
+    const serverEntry = paths.renderEntry || [
+      path.join(__dirname, '../server/index.js')
+    ];
+    const serverDevServerEntries = [
+      `${require.resolve('webpack/hot/poll')}?1000`
+    ];
 
-    // ];
-    //
-    // if (args.script === 'start') {
-    //   entry.unshift(...devServerEntries);
-    // }
-
-    const isRender = !!paths.renderEntry;
+    if (isStart) {
+      clientEntry.unshift(...clientDevServerEntries);
+      if (!isRender) {
+        serverEntry.unshift(...serverDevServerEntries);
+      }
+    }
 
     return [
       {
-        entry,
+        entry: clientEntry,
         devtool: 'inline-source-map',
         output: {
           path: paths.dist,
           filename: '[name].js',
-          publicPath: 'http://localhost:3300/'
+          publicPath: isStart ? 'http://localhost:3300/' : ''
         },
         module: {
           rules: [
@@ -216,16 +223,11 @@ const buildWebpackConfigs = builds.map(
           new webpack.DefinePlugin(envVars),
           new ExtractTextPlugin('style.css')
         ].concat(
-          !isProductionBuild
+          isStart
             ? [
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
-                new webpack.NoEmitOnErrorsPlugin(),
-                new webpack.DefinePlugin({
-                  'process.env': {
-                    BUILD_TARGET: JSON.stringify('client')
-                  }
-                })
+                new webpack.NoEmitOnErrorsPlugin()
               ]
             : [
                 new webpack.optimize.UglifyJsPlugin(),
@@ -237,15 +239,9 @@ const buildWebpackConfigs = builds.map(
         )
       },
       {
-        entry: {
-          render: paths.renderEntry || [
-            `${require.resolve('webpack/hot/poll')}?1000`,
-            path.join(__dirname, '../server/index.js')
-          ]
-        },
+        entry: serverEntry,
         watch: true,
         externals: [nodeExternals({ whitelist: ['webpack/hot/poll?1000'] })],
-
         resolve: {
           alias: isRender
             ? {}
@@ -310,13 +306,15 @@ const buildWebpackConfigs = builds.map(
                   })
               )
             ]
-          : [
-              new StartServerPlugin('server.js'),
-              new webpack.NamedModulesPlugin(),
-              new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin(),
-              new webpack.DefinePlugin(envVars)
-            ]
+          : isStart
+            ? [
+                new StartServerPlugin('server.js'),
+                new webpack.NamedModulesPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin(),
+                new webpack.DefinePlugin(envVars)
+              ]
+            : [new webpack.DefinePlugin(envVars)]
       }
     ].map(webpackDecorator);
   }

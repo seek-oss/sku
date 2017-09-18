@@ -20,13 +20,14 @@ const devServer = new WebpackDevServer(compiler, {
   headers: { 'Access-Control-Allow-Origin': '*' }
 });
 
-devServer.listen(port[0], (err, result) => {
+devServer.listen(port, '127.0.0.1', (err, result) => {
   if (err) {
     return console.log(err);
   }
 
   const url = `http://${hosts[0]}:${port[0]}`;
 
+  console.log();
   console.log(`Starting the development server on ${url}...`);
   console.log();
 

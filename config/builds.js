@@ -47,7 +47,9 @@ const builds = buildConfigs
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
-    const port = buildConfig.port || 8080;
+    const port = (buildConfig.port instanceof Array
+      ? buildConfig.port
+      : [buildConfig.port]) || [8080];
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
 

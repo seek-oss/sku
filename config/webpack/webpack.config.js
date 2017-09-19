@@ -133,7 +133,7 @@ const buildWebpackConfigs = builds.map(
     const internalJs = [paths.src, ...paths.compilePackages];
 
     const isRender = !!paths.renderEntry;
-    const isStart = args.script === 'startServer';
+    const isStart = args.script === 'start';
 
     const clientEntry = [paths.clientEntry];
     const clientDevServerEntries = [
@@ -241,7 +241,11 @@ const buildWebpackConfigs = builds.map(
       {
         entry: serverEntry,
         watch: true,
-        externals: [nodeExternals({ whitelist: ['webpack/hot/poll?1000'] })],
+        externals: [
+          nodeExternals({
+            whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
+          })
+        ],
         resolve: {
           alias: isRender
             ? {}

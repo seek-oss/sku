@@ -33,6 +33,7 @@ const makeCssLoaders = (options = {}) => {
   ];
 
   return (cssLoaders = [
+    ...(isProductionBuild || server ? [] : ['style-loader']),
     {
       loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
@@ -133,7 +134,7 @@ const buildWebpackConfigs = builds.map(
     const internalJs = [paths.src, ...paths.compilePackages];
 
     const isRender = !!paths.renderEntry;
-    const isStart = args.script === 'start';
+    const isStartScript = args.script === 'start';
 
     const clientEntry = [paths.clientEntry];
     const clientDevServerEntries = [
@@ -150,7 +151,7 @@ const buildWebpackConfigs = builds.map(
       `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
-    if (isStart) {
+    if (isStartScript) {
       clientEntry.unshift(...clientDevServerEntries);
       if (!isRender) {
         serverEntry.unshift(...serverDevServerEntries);
@@ -164,7 +165,7 @@ const buildWebpackConfigs = builds.map(
         output: {
           path: paths.dist,
           filename: '[name].js',
-          publicPath: isStart ? `http://localhost:${port[0]}/` : ''
+          publicPath: isStartScript ? `http://localhost:${port[0]}/` : ''
         },
         module: {
           rules: [
@@ -188,26 +189,32 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ js: true })
-              })
+              use: isStartScript
+                ? makeCssLoaders({ js: true })
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders({ js: true })
+                  })
             },
             {
               test: /\.less$/,
               exclude: /node_modules/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders()
-              })
+              use: isStartScript
+                ? makeCssLoaders()
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders()
+                  })
             },
             ...paths.compilePackages.map(package => ({
               test: /\.less$/,
               include: package,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ package })
-              })
+              use: isStartScript
+                ? makeCssLoaders({ package })
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders({ package })
+                  })
             })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -223,7 +230,7 @@ const buildWebpackConfigs = builds.map(
           new webpack.DefinePlugin(envVars),
           new ExtractTextPlugin('style.css')
         ].concat(
-          isStart
+          isStartScript
             ? [
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
@@ -310,7 +317,7 @@ const buildWebpackConfigs = builds.map(
                   })
               )
             ]
-          : isStart
+          : isStartScript
             ? [
                 new StartServerPlugin('server.js'),
                 new webpack.NamedModulesPlugin(),

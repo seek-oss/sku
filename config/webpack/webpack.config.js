@@ -248,11 +248,13 @@ const buildWebpackConfigs = builds.map(
       {
         entry: serverEntry,
         watch: true,
-        externals: [
-          nodeExternals({
-            whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
-          })
-        ],
+        externals: isRender
+          ? []
+          : [
+              nodeExternals({
+                whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
+              })
+            ],
         resolve: {
           alias: isRender
             ? {}

@@ -247,7 +247,7 @@ const buildWebpackConfigs = builds.map(
       },
       {
         entry: serverEntry,
-        watch: true,
+        watch: isStartScript,
         externals: isRender
           ? []
           : [

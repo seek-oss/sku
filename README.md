@@ -19,7 +19,7 @@ This tool is heavily inspired by other work, most notably:
 
 Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
 
-* [babel-preset-es2015](https://babeljs.io/docs/plugins/preset-es2015/)
+* [babel-preset-env](https://babeljs.io/docs/plugins/preset-env/)
 * [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/)
 * [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
 * [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)

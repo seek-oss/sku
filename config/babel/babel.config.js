@@ -1,5 +1,5 @@
 module.exports = ({ webpack }) => {
-  const es2015Options = webpack ? { modules: false } : {};
+  const envPresetOptions = webpack ? { modules: false } : {};
   const plugins = [
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
@@ -26,7 +26,7 @@ module.exports = ({ webpack }) => {
   return {
     babelrc: false,
     presets: [
-      [require.resolve('babel-preset-es2015'), es2015Options],
+      [require.resolve('babel-preset-env'), envPresetOptions],
       require.resolve('babel-preset-react')
     ],
     plugins,

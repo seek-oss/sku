@@ -1,6 +1,6 @@
 import http from 'http';
 import app from './server';
-const port = process.env.PORT || 8080;
+const port = process.env.SKU_PORT || 8080;
 
 const server = http.createServer(app);
 let currentApp = app;

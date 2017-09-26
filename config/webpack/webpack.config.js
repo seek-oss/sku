@@ -127,7 +127,7 @@ const buildWebpackConfigs = builds.map(
         return JSON.stringify(valueForEnv);
       })
       .set('SKU_ENV', JSON.stringify(args.env))
-      .set('PORT', JSON.stringify(port.length > 1 ? port[1] : ''))
+      .set('SKU_PORT', JSON.stringify(port.length > 1 ? port[1] : ''))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 

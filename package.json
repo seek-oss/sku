@@ -13,7 +13,9 @@
     "precommit": "lint-staged",
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "lint-staged": {
     "{bin,config,scripts}/**/*.js": [
@@ -82,7 +84,8 @@
     "svgo-loader": "^1.1.2",
     "url-loader": "^0.5.8",
     "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "webpack-dev-server": "^2.5.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "commitizen": "^2.9.6",
@@ -91,5 +94,6 @@
     "lint-staged": "^3.4.0",
     "semantic-release": "^6.3.2",
     "validate-commit-msg": "^2.12.1"
-  }
+  },
+  "snyk": true
 }

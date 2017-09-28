@@ -1,5 +1,5 @@
 const jest = require('jest');
-const baseJestConfig = require('../config/jest/jest.config');
+const baseJestConfig = require('../config/jest/jestConfig');
 const argv = process.argv.slice(2);
 const builds = require('../config/builds');
 

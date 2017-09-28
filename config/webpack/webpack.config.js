@@ -11,12 +11,15 @@ const isProductionBuild = process.env.NODE_ENV === 'production';
 const jsLoaders = [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babel.config')({ webpack: true })
+    options: require('../babel/babelConfig')({ webpack: true })
   }
 ];
 
 const packageToClassPrefix = name =>
-  `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
+  `__${name
+    .match(/([^\/]*)$/)[0]
+    .toUpperCase()
+    .replace(/[\/\-]/g, '_')}__`;
 
 const makeCssLoaders = (options = {}) => {
   const { server = false, package = '', js = false } = options;

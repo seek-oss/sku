@@ -6,12 +6,13 @@ const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
 const path = require('path');
+const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ webpack: true })
+    options: require('../babel/babelConfig')({ target: 'webpack' })
   }
 ];
 
@@ -46,17 +47,7 @@ const makeCssLoaders = (options = {}) => {
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        plugins: () => [
-          require('autoprefixer')({
-            browsers: [
-              '> 1%',
-              'Last 2 versions',
-              'ie >= 10',
-              'Safari >= 8',
-              'iOS >= 8'
-            ]
-          })
-        ]
+        plugins: () => [require('autoprefixer')(supportedBrowsers)]
       }
     },
     {

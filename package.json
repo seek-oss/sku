@@ -89,6 +89,8 @@
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.13.3",
     "lint-staged": "^3.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "semantic-release": "^6.3.2",
     "validate-commit-msg": "^2.12.1"
   }

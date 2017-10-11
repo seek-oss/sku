@@ -46,6 +46,9 @@ module.exports = ({ target }) => {
     ],
     plugins,
     env: {
+      development: {
+        plugins: [require.resolve('babel-plugin-flow-react-proptypes')]
+      },
       production: {
         presets: [require.resolve('babel-preset-react-optimize')]
       }

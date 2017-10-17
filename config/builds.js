@@ -47,9 +47,13 @@ const builds = buildConfigs
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
-    const port = (buildConfig.port instanceof Array
-      ? buildConfig.port
-      : [buildConfig.port]) || [8080];
+    let port = [8080];
+    if (buildConfig.port) {
+      port =
+        buildConfig.port instanceof Array
+          ? buildConfig.port
+          : [buildConfig.port];
+    }
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
     const jestDecorator =

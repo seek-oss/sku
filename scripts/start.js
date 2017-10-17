@@ -9,7 +9,7 @@ const fs = require('fs-extra');
 const { hosts, port } = builds[0];
 const serverEntry = builds[0].paths.serverEntry;
 
-const compiler = webpack(webpackConfig[0]);
+const compiler = webpack(serverEntry ? webpackConfig[0] : webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
   contentBase: builds.map(({ paths }) => paths.public),
   historyApiFallback: true,

@@ -19,10 +19,4 @@ if (middleware) {
 }
 app.get('*', renderCallback);
 
-if (env === 'production') {
-  app.listen(port, () => {
-    console.log(`App started on port ${port}`);
-  });
-}
-
 export default app;

@@ -1,5 +1,20 @@
-module.exports = ({ webpack }) => {
-  const envPresetOptions = webpack ? { modules: false } : {};
+const supportedBrowsers = require('../browsers/supportedBrowsers');
+
+const webpackEnvOptions = {
+  modules: false,
+  targets: supportedBrowsers
+};
+
+const nodeEnvOptions = {
+  targets: {
+    node: 'current'
+  }
+};
+
+module.exports = ({ target }) => {
+  const isWebpack = target === 'webpack';
+
+  const envPresetOptions = isWebpack ? webpackEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
@@ -11,7 +26,7 @@ module.exports = ({ webpack }) => {
     ]
   ];
 
-  if (webpack) {
+  if (isWebpack) {
     plugins.push([
       require.resolve('babel-plugin-transform-imports'),
       {
@@ -31,6 +46,9 @@ module.exports = ({ webpack }) => {
     ],
     plugins,
     env: {
+      development: {
+        plugins: [require.resolve('babel-plugin-flow-react-proptypes')]
+      },
       production: {
         presets: [require.resolve('babel-preset-react-optimize')]
       }

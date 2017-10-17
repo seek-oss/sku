@@ -3,7 +3,7 @@ const baseConfig = require('eslint-config-sku');
 const EslintCLI = require('eslint').CLIEngine;
 
 const prettierCheck = require('../lib/runPrettier').check;
-const prettierConfig = require('../config/prettier/prettier.config.js');
+const prettierConfig = require('../config/prettier/prettierConfig');
 
 const cli = new EslintCLI({
   baseConfig,

@@ -18,7 +18,7 @@ $ npm install
 
 ## Before Starting
 
-If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/sku/issues/new) and follow the provided RFC template.
+If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/sku/issues/new) and follow the provided RFC template. If you think it's a more straightforward API change and doesn't require a formal RFC, feel free to raise it in Slack first to see what others think.
 
 ## Workflow
 

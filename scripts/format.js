@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 const prettierWrite = require('../lib/runPrettier').write;
-const prettierConfig = require('../config/prettier/prettier.config.js');
+const prettierConfig = require('../config/prettier/prettierConfig');
 
 console.log(chalk.cyan('Formatting source code with Prettier'));
 

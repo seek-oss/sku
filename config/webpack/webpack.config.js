@@ -155,7 +155,7 @@ const buildWebpackConfigs = builds.map(
     return [
       {
         entry: clientEntry,
-        devtool: 'inline-source-map',
+        devtool: isStartScript ? 'inline-source-map' : false,
         output: {
           path: paths.dist,
           filename: '[name].js',

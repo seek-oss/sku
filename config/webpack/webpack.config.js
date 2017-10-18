@@ -19,7 +19,10 @@ const jsLoaders = [
 ];
 
 const packageToClassPrefix = name =>
-  `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
+  `__${name
+    .match(/([^\/]*)$/)[0]
+    .toUpperCase()
+    .replace(/[\/\-]/g, '_')}__`;
 
 const makeCssLoaders = (options = {}) => {
   const { server = false, package = '', js = false } = options;

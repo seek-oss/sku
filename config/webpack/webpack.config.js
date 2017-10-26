@@ -121,7 +121,7 @@ const buildWebpackConfigs = builds.map(
         return JSON.stringify(valueForEnv);
       })
       .set('SKU_ENV', JSON.stringify(args.env))
-      .set('SKU_PORT', JSON.stringify(port.length > 1 ? port[1] : ''))
+      .set('SKU_PORT', JSON.stringify(port.backend))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
@@ -135,7 +135,7 @@ const buildWebpackConfigs = builds.map(
       'react-hot-loader/patch',
       `${require.resolve(
         'webpack-dev-server/client'
-      )}?http://localhost:${port[0]}/`,
+      )}?http://localhost:${port.client}/`,
       `${require.resolve('webpack/hot/only-dev-server')}`
     ];
     const serverEntry = paths.renderEntry || [
@@ -159,7 +159,7 @@ const buildWebpackConfigs = builds.map(
         output: {
           path: paths.dist,
           filename: '[name].js',
-          publicPath: isStartScript ? `http://localhost:${port[0]}/` : ''
+          publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
         },
         module: {
           rules: [

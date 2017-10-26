@@ -20,12 +20,12 @@ const devServer = new WebpackDevServer(compiler, {
   headers: { 'Access-Control-Allow-Origin': '*' }
 });
 
-devServer.listen(port[0], '127.0.0.1', (err, result) => {
+devServer.listen(port.client, '127.0.0.1', (err, result) => {
   if (err) {
     return console.log(err);
   }
 
-  const url = `http://${hosts[0]}:${port[0]}`;
+  const url = `http://${hosts[0]}:${port.client}`;
 
   console.log();
   console.log(`Starting the development server on ${url}...`);
@@ -67,7 +67,7 @@ if (serverEntry) {
   runWebpack(webpackConfig[1])
     .then(copyPublicFiles)
     .then(() => {
-      const url = `http://${hosts[0]}:${port[1]}`;
+      const url = `http://${hosts[0]}:${port.backend}`;
       console.log(`Starting the back-end development server on ${url}...`);
       if (process.env.OPEN_TAB !== 'false') {
         opn(url);

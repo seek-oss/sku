@@ -5,10 +5,13 @@ const args = process.argv.slice(3);
 
 switch (script) {
   case 'test':
+  case 'test-ssr':
   case 'build':
+  case 'build-ssr':
   case 'lint':
   case 'format':
-  case 'start': {
+  case 'start':
+  case 'start-ssr': {
     const scriptPath = require.resolve('../scripts/' + script);
     const scriptArgs = [scriptPath, ...args];
 

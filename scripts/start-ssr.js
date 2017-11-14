@@ -1,14 +1,15 @@
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack/webpack.config.ssr');
-const builds = require('../config/builds.ssr');
+const builds = require('../config/builds');
 const opn = require('opn');
 const Promise = require('bluebird');
 const webpackPromise = Promise.promisify(require('webpack'));
 const fs = require('fs-extra');
 const { hosts, port } = builds[0];
+const serverEntry = builds[0].paths.serverEntry;
 
-const compiler = webpack(webpackConfig[0]);
+const compiler = webpack(serverEntry ? webpackConfig[0] : webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
   contentBase: builds.map(({ paths }) => paths.public),
   historyApiFallback: true,

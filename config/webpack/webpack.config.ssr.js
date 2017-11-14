@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const builds = require('../builds.ssr');
 const lodash = require('lodash');
@@ -19,10 +18,7 @@ const jsLoaders = [
 ];
 
 const packageToClassPrefix = name =>
-  `__${name
-    .match(/([^\/]*)$/)[0]
-    .toUpperCase()
-    .replace(/[\/\-]/g, '_')}__`;
+  `__${name.match(/([^\/]*)$/)[0].toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
 const makeCssLoaders = (options = {}) => {
   const { server = false, package = '', js = false } = options;
@@ -113,9 +109,7 @@ const buildWebpackConfigs = builds.map(
 
         if (typeof valueForEnv === 'undefined') {
           console.log(
-            `WARNING: Environment variable "${key}" for build "${
-              name
-            }" is missing a value for the "${args.env}" environment`
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${args.env}" environment`
           );
           process.exit(1);
         }
@@ -134,9 +128,9 @@ const buildWebpackConfigs = builds.map(
     const clientEntry = [paths.clientEntry];
     const clientDevServerEntries = [
       'react-hot-loader/patch',
-      `${require.resolve('webpack-dev-server/client')}?http://localhost:${
-        port.client
-      }/`,
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?http://localhost:${port.client}/`,
       `${require.resolve('webpack/hot/only-dev-server')}`
     ];
     const serverEntry = paths.renderEntry || [

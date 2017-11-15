@@ -1,13 +1,14 @@
 const webpack = require('webpack');
-const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const builds = require('../builds');
+const builds = require('../builds.ssr');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const nodeExternals = require('webpack-node-externals');
+const StartServerPlugin = require('start-server-webpack-plugin');
 
 const jsLoaders = [
   {
@@ -35,6 +36,7 @@ const makeCssLoaders = (options = {}) => {
   ];
 
   return (cssLoaders = [
+    ...(isProductionBuild || server ? [] : ['style-loader']),
     {
       loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
@@ -120,29 +122,42 @@ const buildWebpackConfigs = builds.map(
         return JSON.stringify(valueForEnv);
       })
       .set('SKU_ENV', JSON.stringify(args.env))
-      .set('PORT', JSON.stringify(port))
+      .set('SKU_PORT', JSON.stringify(port.backend))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
-    const entry = [paths.clientEntry];
-    const devServerEntries = [
+    const isStartScript = args.script === 'start-ssr';
+
+    const clientEntry = [paths.clientEntry];
+    const clientDevServerEntries = [
+      'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${
-        port
-      }/`
+        port.client
+      }/`,
+      `${require.resolve('webpack/hot/only-dev-server')}`
+    ];
+    const serverEntry = paths.renderEntry || [
+      path.join(__dirname, '../server/index.js')
+    ];
+    const serverDevServerEntries = [
+      `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
-    if (args.script === 'start') {
-      entry.unshift(...devServerEntries);
+    if (isStartScript) {
+      clientEntry.unshift(...clientDevServerEntries);
+      serverEntry.unshift(...serverDevServerEntries);
     }
 
     return [
       {
-        entry,
+        entry: clientEntry,
+        devtool: isStartScript ? 'inline-source-map' : false,
         output: {
           path: paths.dist,
-          filename: '[name].js'
+          filename: '[name].js',
+          publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
         },
         module: {
           rules: [
@@ -166,26 +181,32 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ js: true })
-              })
+              use: isStartScript
+                ? makeCssLoaders({ js: true })
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders({ js: true })
+                  })
             },
             {
               test: /\.less$/,
               exclude: /node_modules/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders()
-              })
+              use: isStartScript
+                ? makeCssLoaders()
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders()
+                  })
             },
             ...paths.compilePackages.map(package => ({
               test: /\.less$/,
               include: package,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ package })
-              })
+              use: isStartScript
+                ? makeCssLoaders({ package })
+                : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders({ package })
+                  })
             })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -201,8 +222,12 @@ const buildWebpackConfigs = builds.map(
           new webpack.DefinePlugin(envVars),
           new ExtractTextPlugin('style.css')
         ].concat(
-          !isProductionBuild
-            ? []
+          isStartScript
+            ? [
+                new webpack.NamedModulesPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin()
+              ]
             : [
                 new webpack.optimize.UglifyJsPlugin(),
                 new webpack.DefinePlugin({
@@ -213,15 +238,26 @@ const buildWebpackConfigs = builds.map(
         )
       },
       {
-        entry: {
-          render:
-            paths.renderEntry || path.join(__dirname, '../server/server.js')
+        entry: serverEntry,
+        watch: isStartScript,
+        externals: [
+          nodeExternals({
+            whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
+          })
+        ],
+        resolve: {
+          alias: {
+            __sku_alias__serverEntry: paths.serverEntry
+          }
         },
-        target: 'web',
+        target: 'node',
+        node: {
+          __dirname: false
+        },
         output: {
           path: paths.dist,
-          filename: 'render.js',
-          libraryTarget: 'umd'
+          filename: 'server.js',
+          libraryTarget: 'var'
         },
         module: {
           rules: [
@@ -254,20 +290,15 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [
-          new webpack.DefinePlugin(envVars),
-          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
-            locale =>
-              new StaticSiteGeneratorPlugin({
-                locals: {
-                  locale
-                },
-                paths: `index${
-                  isProductionBuild && locale ? `-${locale}` : ''
-                }.html`
-              })
-          )
-        ]
+        plugins: isStartScript
+          ? [
+              new StartServerPlugin('server.js'),
+              new webpack.NamedModulesPlugin(),
+              new webpack.HotModuleReplacementPlugin(),
+              new webpack.NoEmitOnErrorsPlugin(),
+              new webpack.DefinePlugin(envVars)
+            ]
+          : [new webpack.DefinePlugin(envVars)]
       }
     ].map(webpackDecorator);
   }

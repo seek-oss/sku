@@ -15,7 +15,7 @@ const defaultDecorator = a => a;
 
 let buildName = args.buildName;
 
-if (!buildName && args.script === 'start' && buildConfigs.length > 1) {
+if (!buildName && args.script === 'start-srp' && buildConfigs.length > 1) {
   const answers = deasyncPromise(
     inquirer.prompt([
       {
@@ -48,7 +48,16 @@ const builds = buildConfigs
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
 
-    const port = buildConfig.port || 8080;
+    const port = {
+      client:
+        buildConfig.port && buildConfig.port.client
+          ? buildConfig.port.client
+          : typeof buildConfig.port === 'number' ? buildConfig.port : 8080,
+      backend:
+        buildConfig.port && buildConfig.port.backend
+          ? buildConfig.port.backend
+          : 8181
+    };
 
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
@@ -64,7 +73,7 @@ const builds = buildConfigs
         )
       ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
-      renderEntry: path.join(cwd, entry.render || 'src/render.js'),
+      serverEntry: path.join(cwd, entry.server || 'src/server.js'),
       public: path.join(cwd, buildConfig.public || 'public'),
       dist: path.join(cwd, buildConfig.target || 'dist')
     };
@@ -81,7 +90,7 @@ const builds = buildConfigs
     };
   });
 
-if (args.script === 'start' && builds.length === 0) {
+if (args.script === 'start-ssr' && builds.length === 0) {
   console.log(`ERROR: Build with the name "${buildName}" wasn't found`);
   process.exit(1);
 }

@@ -16,18 +16,20 @@ const jsLoaders = [
   }
 ];
 
-const packageToClassPrefix = name =>
-  `__${name
+const packageNameToClassPrefix = packageName =>
+  `__${packageName
     .match(/([^\/]*)$/)[0]
     .toUpperCase()
     .replace(/[\/\-]/g, '_')}__`;
 
 const makeCssLoaders = (options = {}) => {
-  const { server = false, package = '', js = false } = options;
+  const { server = false, packageName = '', js = false } = options;
 
   const debugIdent = isProductionBuild
     ? ''
-    : `${package ? packageToClassPrefix(package) : ''}[name]__[local]___`;
+    : `${
+        packageName ? packageNameToClassPrefix(packageName) : ''
+      }[name]__[local]___`;
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
@@ -179,12 +181,12 @@ const buildWebpackConfigs = builds.map(
                 use: makeCssLoaders()
               })
             },
-            ...paths.compilePackages.map(package => ({
+            ...paths.compilePackages.map(packageName => ({
               test: /\.less$/,
-              include: package,
+              include: packageName,
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: makeCssLoaders({ package })
+                use: makeCssLoaders({ packageName })
               })
             })),
             {
@@ -239,10 +241,10 @@ const buildWebpackConfigs = builds.map(
               exclude: /node_modules/,
               use: makeCssLoaders({ server: true })
             },
-            ...paths.compilePackages.map(package => ({
+            ...paths.compilePackages.map(packageName => ({
               test: /\.less$/,
-              include: package,
-              use: makeCssLoaders({ server: true, package })
+              include: packageName,
+              use: makeCssLoaders({ server: true, packageName })
             })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

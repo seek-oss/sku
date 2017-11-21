@@ -55,7 +55,7 @@ const builds = buildConfigs
     const jestDecorator =
       buildConfig.dangerouslySetJestConfig || defaultDecorator;
     const eslintDecorator =
-      buildConfig.dangerouslySetEslintConfig || defaultDecorator;
+      buildConfig.dangerouslySetESLintConfig || defaultDecorator;
 
     const paths = {
       src: path.join(cwd, 'src'),

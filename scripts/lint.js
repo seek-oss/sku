@@ -1,12 +1,19 @@
 const chalk = require('chalk');
-const baseConfig = require('eslint-config-sku');
+const baseESlintConfig = require('eslint-config-sku');
 const EslintCLI = require('eslint').CLIEngine;
+const builds = require('../config/builds');
 
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 
+// Decorate eslint config is not supported for monorepo
+const eslintConfig =
+  builds.length === 1
+    ? builds[0].eslintDecorator(baseESlintConfig)
+    : baseESlintConfig;
+
 const cli = new EslintCLI({
-  baseConfig,
+  baseConfig: eslintConfig,
   useEslintrc: false
 });
 

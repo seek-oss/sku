@@ -8,9 +8,7 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 
 // Decorate eslint config is not supported for monorepo
 const eslintConfig =
-  builds.length === 1
-    ? builds[0].eslintDecorator(baseConfig)
-    : baseConfig;
+  builds.length === 1 ? builds[0].eslintDecorator(baseConfig) : baseConfig;
 
 const cli = new EslintCLI({
   baseConfig: eslintConfig,

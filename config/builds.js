@@ -54,6 +54,8 @@ const builds = buildConfigs
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
     const jestDecorator =
       buildConfig.dangerouslySetJestConfig || defaultDecorator;
+    const eslintDecorator =
+      buildConfig.dangerouslySetEslintConfig || defaultDecorator;
 
     const paths = {
       src: path.join(cwd, 'src'),
@@ -76,6 +78,7 @@ const builds = buildConfigs
       locales,
       webpackDecorator,
       jestDecorator,
+      eslintDecorator,
       hosts,
       port
     };

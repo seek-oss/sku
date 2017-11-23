@@ -93,6 +93,9 @@ const svgLoaders = [
           addAttributesToSVGElement: {
             attribute: 'focusable="false"'
           }
+        },
+        {
+          removeViewBox: false
         }
       ]
     }

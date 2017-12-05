@@ -115,9 +115,9 @@ const buildWebpackConfigs = builds.map(
 
         if (typeof valueForEnv === 'undefined') {
           console.log(
-            `WARNING: Environment variable "${key}" for build "${
-              name
-            }" is missing a value for the "${args.env}" environment`
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${
+              args.env
+            }" environment`
           );
           process.exit(1);
         }
@@ -133,9 +133,9 @@ const buildWebpackConfigs = builds.map(
 
     const entry = [paths.clientEntry];
     const devServerEntries = [
-      `${require.resolve('webpack-dev-server/client')}?http://localhost:${
-        port
-      }/`
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?http://localhost:${port}/`
     ];
 
     if (args.script === 'start') {

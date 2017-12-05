@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var clean = require('rimraf');
+var rimraf = require('rimraf');
 var getSubDirsSync = require('./utils/get-sub-dirs-sync');
 var dirCompare = require('dir-compare');
 var spawn = require('cross-spawn');
@@ -11,20 +11,37 @@ describe('Test cases', function() {
     describe(testCase, function() {
       var testCaseRoot = __dirname + '/test-cases/' + testCase;
 
-      beforeEach(function(done) {
-        clean(testCaseRoot + '/dist/', done);
-      });
+      beforeAll(function() {
+        rimraf.sync(testCaseRoot + '/dist/');
 
-      it('should build as expected', function() {
         spawn.sync('node', [__dirname + '/../scripts/build'], {
           stdio: 'inherit',
           cwd: testCaseRoot
         });
+      });
+
+      it('should build HTML and CSS', function() {
         expect(
           dirCompare.compareSync(
             testCaseRoot + '/dist',
             testCaseRoot + '/expected-output',
-            { compareContent: true }
+            {
+              includeFilter: '*.html, *.css',
+              compareContent: true
+            }
+          ).same
+        ).toBe(true);
+      });
+
+      it('should build JS', function() {
+        expect(
+          dirCompare.compareSync(
+            testCaseRoot + '/dist',
+            testCaseRoot + '/expected-output',
+            {
+              includeFilter: '*.js',
+              compareContent: false
+            }
           ).same
         ).toBe(true);
       });

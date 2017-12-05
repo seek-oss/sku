@@ -117,9 +117,9 @@ const buildWebpackConfigs = builds.map(
 
         if (typeof valueForEnv === 'undefined') {
           console.log(
-            `WARNING: Environment variable "${key}" for build "${
-              name
-            }" is missing a value for the "${args.env}" environment`
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${
+              args.env
+            }" environment`
           );
           process.exit(1);
         }

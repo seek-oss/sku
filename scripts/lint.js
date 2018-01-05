@@ -6,6 +6,9 @@ const builds = require('../config/builds');
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 
+const prettierDefaultPath = require('../config/prettier/defaultPath');
+const eslintDefaultPath = require('../config/eslint/defaultPath');
+
 const args = process.argv.slice(2);
 
 // Decorate eslint config is not supported for monorepo
@@ -19,7 +22,7 @@ const cli = new EslintCLI({
   useEslintrc: false
 });
 
-const pathsToCheck = args.length === 0 ? ['src'] : args;
+const pathsToCheck = args.length === 0 ? [eslintDefaultPath] : args;
 
 const formatter = cli.getFormatter();
 const report = cli.executeOnFiles(pathsToCheck);
@@ -33,8 +36,7 @@ if (report.errorCount > 0) {
 
 console.log(chalk.cyan('Checking Prettier format rules'));
 
-const defaultFilePattern = 'src/**/*.js';
-const filePattern = args.length === 0 ? defaultFilePattern : args;
+const filePattern = args.length === 0 ? prettierDefaultPath : args;
 
 prettierCheck(filePattern, prettierConfig)
   .then(() => {

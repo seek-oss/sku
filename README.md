@@ -88,13 +88,13 @@ Since sku uses Jest as a testing framework, you can read the [Jest documentation
 
 ### Linting and Formatting (via [ESLint](http://eslint.org/) and [Prettier](https://github.com/prettier/prettier))
 
-Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-sku](https://github.com/seek-oss/eslint-config-sku).
+Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek).
 
 Adding the following to your package.json file will enable the [Atom ESLint plugin](https://github.com/AtomLinter/linter-eslint) to work correctly with sku.
 
 ```js
 "eslintConfig": {
-  "extends": "sku"
+  "extends": "seek"
 }
 ```
 

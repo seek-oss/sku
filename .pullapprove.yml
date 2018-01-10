@@ -2,7 +2,7 @@ version: 2
 
 groups:
   reviewers:
-    required: 1
+    required: 2
     teams:
       - front-end-contributors
     approve_by_comment:

@@ -8,7 +8,7 @@ If you work at SEEK and run into issues along the way, or even if you find some 
 
 ## Setup
 
-First, install [Node.js v6+](https://nodejs.org/).
+First, install [Node.js v8+](https://nodejs.org/).
 
 After cloning the project, install the dependencies:
 
@@ -49,7 +49,7 @@ Once you've made the desired changes and you're ready to commit, stage your loca
 
 Before committing, consider the scope of your changes according to [semantic versioning](http://semver.org), noting whether this is a breaking change, a feature release or a patch.
 
-New versions are published automatically from [Travis CI](https://travis-ci.org) using [semantic-release](https://github.com/semantic-release/semantic-release). In order to automatically increment version numbers correctly, commit messages must follow our [semantic commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). If your commit includes a breaking change, be sure to prefix your commit body with `BREAKING CHANGE: `. To make this process easier, we have a commit script (powered by [commitizen](https://github.com/commitizen/cz-cli)) to help guide you through the commit process:
+New versions are published automatically from [Travis CI](https://travis-ci.org) using [semantic-release](https://github.com/semantic-release/semantic-release). In order to automatically increment version numbers correctly, commit messages must follow our [semantic commit message convention](https://github.com/seek-oss/commitlint-config-seek). If your commit includes a breaking change, be sure to prefix your commit body with `BREAKING CHANGE: `. To make this process easier, we have a commit script (powered by [commitizen](https://github.com/commitizen/cz-cli)) to help guide you through the commit process:
 
 ```bash
 $ npm run commit

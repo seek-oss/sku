@@ -8,7 +8,7 @@ groups:
     approve_by_comment:
       enabled: false
     always_rejected:
-      title_regex: '^(?!(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?\:\s(\S+)).*$'
+      title_regex: '^(?!(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)(\(\w+\))?\:\s[A-Z]).*$'
       explanation: 'Invalid PR title. For more information please see https://github.com/seek-oss/commitlint-config-seek'
     reset_on_push:
       enabled: false

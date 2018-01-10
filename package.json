@@ -12,7 +12,7 @@
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'",
     "precommit": "lint-staged",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint --edit --extends seek",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
@@ -89,13 +89,14 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^6.0.1",
     "commitizen": "^2.9.6",
-    "cz-conventional-changelog": "^2.0.0",
+    "commitlint-config-seek": "^1.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "semantic-release": "^8.0.3",
-    "validate-commit-msg": "^2.14.0"
+    "semantic-release": "^8.0.3"
   }
 }

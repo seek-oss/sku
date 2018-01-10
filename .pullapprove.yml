@@ -4,7 +4,7 @@ groups:
   reviewers:
     required: 1
     teams:
-      - sku-contributors
+      - front-end-contributors
     approve_by_comment:
       enabled: false
     always_rejected:

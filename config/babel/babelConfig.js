@@ -16,6 +16,7 @@ module.exports = ({ target }) => {
 
   const envPresetOptions = isWebpack ? webpackEnvOptions : nodeEnvOptions;
   const plugins = [
+    require.resolve('babel-plugin-transform-decorators-legacy'),
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
     [

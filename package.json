@@ -13,7 +13,7 @@
     "precommit": "lint-staged",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit --extends seek",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "lint-staged": {
     "{bin,config,scripts}/**/*.js": [
@@ -98,6 +98,6 @@
     "lint-staged": "^6.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "semantic-release": "^8.0.3"
+    "semantic-release": "^15.0.1"
   }
 }

@@ -24,6 +24,12 @@ const optionDefinitions = [
     name: 'build',
     alias: 'b',
     type: String
+  },
+  {
+    name: 'config',
+    alias: 'c',
+    type: String,
+    defaultValue: 'sku.config.js'
   }
 ];
 
@@ -42,5 +48,6 @@ module.exports = {
   script: scriptName,
   buildName: scriptName === 'start' ? buildName() : null,
   env: scriptName === 'start' ? 'development' : options.env,
-  tenant: options.tenant
+  tenant: options.tenant,
+  config: options.config
 };

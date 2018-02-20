@@ -3,8 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');
 const deasyncPromise = require('deasync-promise');
-const skuConfigPath = path.join(cwd, 'sku.config.js');
 const args = require('./args');
+const skuConfigPath = path.join(cwd, args.config);
 
 const makeArray = x => (Array.isArray(x) ? x : [x]);
 const buildConfigs = fs.existsSync(skuConfigPath)

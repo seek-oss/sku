@@ -298,6 +298,14 @@ module.exports = {
 }
 ```
 
+If you need to specify a different config file you can do so with the `--config` parameter.
+
+```bash
+$ sku start --config sku.custom.config.js
+```
+
+_**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
+
 ### Environment Variables
 
 By default, `process.env.NODE_ENV` is handled correctly for you and provided globally, even to your client code. This is based on the sku script that's currently being executed, so `NODE_ENV` is `'development'` when running `sku start`, but `'production'` when running `sku build`.

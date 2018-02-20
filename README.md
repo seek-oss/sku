@@ -304,7 +304,7 @@ If you need to specify a different config file you can do so with the `--config`
 $ sku start --config sku.custom.config.js
 ```
 
-_**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`) and unit test (`sku test`) will still use the default config file and does **not** support it._
+_**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
 
 ### Environment Variables
 

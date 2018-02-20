@@ -298,7 +298,7 @@ module.exports = {
 }
 ```
 
-If you need to specify a different config path/name you can do so with the `--config` parameter.
+If you need to specify a different config file you can do so with the `--config` parameter.
 
 ```bash
 $ sku start --config sku.custom.config.js

@@ -4,12 +4,12 @@ const webpackConfig = require('../config/webpack/webpack.config');
 const builds = require('../config/builds');
 const opn = require('opn');
 
-const { hosts, port } = builds[0];
+const { hosts, port, historyApiFallback } = builds[0];
 
 const compiler = webpack(webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
   contentBase: builds.map(({ paths }) => paths.public),
-  historyApiFallback: true,
+  historyApiFallback,
   overlay: true,
   stats: 'errors-only',
   allowedHosts: hosts

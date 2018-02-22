@@ -48,6 +48,14 @@ const builds = buildConfigs
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
 
+    const outputFilename = buildConfig.outputFilename || '[name].js';
+    const outputCssFilename = buildConfig.outputCssFilename || 'style.css';
+    const publicPath = buildConfig.publicPath || '';
+    const historyApiFallback =
+      buildConfig.historyApiFallback !== undefined
+        ? buildConfig.historyApiFallback
+        : true;
+
     const port = buildConfig.port || 8080;
 
     const webpackDecorator =
@@ -77,6 +85,10 @@ const builds = buildConfigs
       paths,
       locales,
       webpackDecorator,
+      outputFilename,
+      outputCssFilename,
+      historyApiFallback,
+      publicPath,
       jestDecorator,
       eslintDecorator,
       hosts,

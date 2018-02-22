@@ -306,6 +306,20 @@ $ sku start --config sku.custom.config.js
 
 _**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
 
+### Filename
+
+Build artefacts are created according to the naming convention set by `outputFilename` and `outputCssFilename`.
+
+Option | Default value
+-------|-------
+outputFilename | `[name].js`
+outputCssFilename | `style.css`
+publicPath | `/`
+
+See [Webpack output.filename](https://webpack.js.org/configuration/output/#output-filename) for available filename conventions.
+
+See [Webpack publicPath](https://webpack.js.org/guides/public-path/) for details on publicPath.
+
 ### Environment Variables
 
 By default, `process.env.NODE_ENV` is handled correctly for you and provided globally, even to your client code. This is based on the sku script that's currently being executed, so `NODE_ENV` is `'development'` when running `sku start`, but `'production'` when running `sku build`.

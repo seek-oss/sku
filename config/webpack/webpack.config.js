@@ -103,7 +103,17 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator, port }) => {
+  ({
+    name,
+    paths,
+    env,
+    locales,
+    webpackDecorator,
+    port,
+    outputFilename,
+    outputCssFilename,
+    publicPath
+  }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -131,23 +141,17 @@ const buildWebpackConfigs = builds.map(
 
     const internalJs = [paths.src, ...paths.compilePackages];
 
-    const entry = [paths.clientEntry];
-    const devServerEntries = [
-      `${require.resolve(
-        'webpack-dev-server/client'
-      )}?http://localhost:${port}/`
-    ];
-
-    if (args.script === 'start') {
-      entry.unshift(...devServerEntries);
-    }
-
     return [
       {
-        entry,
+        entry: {
+          main: paths.clientEntry,
+          render: paths.renderEntry
+        },
         output: {
           path: paths.dist,
-          filename: '[name].js'
+          filename: outputFilename,
+          publicPath,
+          libraryTarget: 'umd'
         },
         module: {
           rules: [
@@ -204,7 +208,11 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
+          new ExtractTextPlugin(outputCssFilename),
+          new StaticSiteGeneratorPlugin({
+            entry: 'render',
+            locals: { isProductionBuild, publicPath }
+          })
         ].concat(
           !isProductionBuild
             ? []
@@ -216,63 +224,6 @@ const buildWebpackConfigs = builds.map(
                 new webpack.optimize.ModuleConcatenationPlugin()
               ]
         )
-      },
-      {
-        entry: {
-          render:
-            paths.renderEntry || path.join(__dirname, '../server/server.js')
-        },
-        target: 'web',
-        output: {
-          path: paths.dist,
-          filename: 'render.js',
-          libraryTarget: 'umd'
-        },
-        module: {
-          rules: [
-            {
-              test: /(?!\.css)\.js$/,
-              include: internalJs,
-              use: jsLoaders
-            },
-            {
-              test: /\.css\.js$/,
-              use: makeCssLoaders({ server: true, js: true })
-            },
-            {
-              test: /\.less$/,
-              exclude: /node_modules/,
-              use: makeCssLoaders({ server: true })
-            },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: makeCssLoaders({ server: true, packageName })
-            })),
-            {
-              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              use: makeImageLoaders({ server: true })
-            },
-            {
-              test: /\.svg$/,
-              use: svgLoaders
-            }
-          ]
-        },
-        plugins: [
-          new webpack.DefinePlugin(envVars),
-          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
-            locale =>
-              new StaticSiteGeneratorPlugin({
-                locals: {
-                  locale
-                },
-                paths: `index${
-                  isProductionBuild && locale ? `-${locale}` : ''
-                }.html`
-              })
-          )
-        ]
       }
     ].map(webpackDecorator);
   }

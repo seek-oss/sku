@@ -7,8 +7,7 @@ const flatten = require('lodash/flatten');
 const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
-const env = process.env.NODE_ENV || 'development';
-const isProductionBuild = env === 'production';
+const isProductionBuild = process.env.NODE_ENV === 'production';
 
 const jsLoaders = [
   {
@@ -150,7 +149,6 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: '[name].js'
         },
-        mode: env,
         module: {
           rules: [
             {
@@ -230,7 +228,6 @@ const buildWebpackConfigs = builds.map(
           filename: 'render.js',
           libraryTarget: 'umd'
         },
-        mode: env,
         module: {
           rules: [
             {

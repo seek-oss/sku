@@ -164,6 +164,7 @@ const buildWebpackConfigs = builds.map(
           filename: '[name].js',
           publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
         },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {

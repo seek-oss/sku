@@ -149,6 +149,7 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: '[name].js'
         },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {

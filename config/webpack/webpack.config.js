@@ -14,7 +14,7 @@ const jsLoaders = [
     loader: require.resolve('babel-loader'),
     options: require('../babel/babelConfig')({ target: 'webpack' })
   }
-]
+];
 
 const packageNameToClassPrefix = packageName =>
   `__${packageName

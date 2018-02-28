@@ -10,10 +10,8 @@ const app = express();
 
 const env = process.env.NODE_ENV || 'development';
 
-console.log('starting server for', env);
-
 if (env === 'development') {
-  console.log('starting static server at', __dirname);
+  console.log('Adding static server to server directory', __dirname);
   app.use(express.static(path.join(__dirname, './')));
 }
 

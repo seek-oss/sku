@@ -165,6 +165,11 @@ const buildWebpackConfigs = builds.map(
           filename: '[name].js',
           publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
         },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
+        },
         module: {
           rules: [
             {
@@ -234,10 +239,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : [
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.optimize.ModuleConcatenationPlugin()
-              ]
+            : []
         )
       },
       {

@@ -150,6 +150,11 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: '[name].js'
         },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
+        },
         module: {
           rules: [
             {
@@ -206,14 +211,7 @@ const buildWebpackConfigs = builds.map(
         plugins: [
           new webpack.DefinePlugin(envVars),
           new ExtractTextPlugin('style.css')
-        ].concat(
-          !isProductionBuild
-            ? []
-            : [
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.optimize.ModuleConcatenationPlugin()
-              ]
-        )
+        ]
       },
       {
         entry: {

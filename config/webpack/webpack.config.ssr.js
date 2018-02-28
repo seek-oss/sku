@@ -128,6 +128,7 @@ const buildWebpackConfigs = builds.map(
       })
       .set('SKU_ENV', JSON.stringify(args.env))
       .set('SKU_PORT', JSON.stringify(port.backend))
+      .set('NODE_ENV', JSON.stringify(process.env.NODE_ENV))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
@@ -237,9 +238,6 @@ const buildWebpackConfigs = builds.map(
               ]
             : [
                 new webpack.optimize.UglifyJsPlugin(),
-                new webpack.DefinePlugin({
-                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-                }),
                 new webpack.optimize.ModuleConcatenationPlugin()
               ]
         )

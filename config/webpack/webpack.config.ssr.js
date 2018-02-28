@@ -6,7 +6,8 @@ const flatten = require('lodash/flatten');
 const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
-const isProductionBuild = process.env.NODE_ENV === 'production';
+const env = process.env.NODE_ENV === 'development';
+const isProductionBuild = env === 'production';
 const nodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 
@@ -164,7 +165,7 @@ const buildWebpackConfigs = builds.map(
           filename: '[name].js',
           publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
         },
-        mode: process.env.NODE_ENV,
+        mode: env,
         module: {
           rules: [
             {
@@ -265,6 +266,7 @@ const buildWebpackConfigs = builds.map(
           filename: 'server.js',
           libraryTarget: 'var'
         },
+        mode: env,
         module: {
           rules: [
             {

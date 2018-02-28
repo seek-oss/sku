@@ -86,7 +86,7 @@
     "svgo-loader": "^2.0.0",
     "url-loader": "^0.6.2",
     "webpack": "^4.0.1",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-dev-server": "^3.1.0",
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {

@@ -128,7 +128,6 @@ const buildWebpackConfigs = builds.map(
       })
       .set('SKU_ENV', JSON.stringify(args.env))
       .set('SKU_PORT', JSON.stringify(port.backend))
-      .set('NODE_ENV', JSON.stringify(process.env.NODE_ENV))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
@@ -264,6 +263,9 @@ const buildWebpackConfigs = builds.map(
           filename: 'server.js',
           libraryTarget: 'var'
         },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
+        },
         module: {
           rules: [
             {
@@ -295,15 +297,17 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: isStartScript
-          ? [
-              new StartServerPlugin('server.js'),
-              new webpack.NamedModulesPlugin(),
-              new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin(),
-              new webpack.DefinePlugin(envVars)
-            ]
-          : [new webpack.DefinePlugin(envVars)]
+        plugins: [new webpack.DefinePlugin(envVars)].concat(
+          isStartScript
+            ? [
+                new StartServerPlugin('server.js'),
+                new webpack.NamedModulesPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin(),
+                new webpack.DefinePlugin(envVars)
+              ]
+            : []
+        )
       }
     ].map(webpackDecorator);
   }

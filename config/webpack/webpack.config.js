@@ -126,7 +126,6 @@ const buildWebpackConfigs = builds.map(
       })
       .set('SKU_ENV', JSON.stringify(args.env))
       .set('PORT', JSON.stringify(port))
-      .set('NODE_ENV', JSON.stringify(process.env.NODE_ENV))
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
@@ -223,6 +222,9 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: 'render.js',
           libraryTarget: 'umd'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
         },
         module: {
           rules: [

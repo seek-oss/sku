@@ -303,8 +303,7 @@ const buildWebpackConfigs = builds.map(
                 new StartServerPlugin('server.js'),
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
-                new webpack.NoEmitOnErrorsPlugin(),
-                new webpack.DefinePlugin(envVars)
+                new webpack.NoEmitOnErrorsPlugin()
               ]
             : []
         )

@@ -195,24 +195,27 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: isStartScript
-                ? makeCssLoaders()
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders()
-                  })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: isStartScript
+                    ? makeCssLoaders({ packageName })
+                    : ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: makeCssLoaders({ packageName })
+                      })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: isStartScript
+                    ? makeCssLoaders()
+                    : ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: makeCssLoaders()
+                      })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: isStartScript
-                ? makeCssLoaders({ packageName })
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ packageName })
-                  })
-            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders()
@@ -277,14 +280,18 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: makeCssLoaders({ server: true })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: makeCssLoaders({ server: true, packageName })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: makeCssLoaders({ server: true })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: makeCssLoaders({ server: true, packageName })
-            })),
+
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })

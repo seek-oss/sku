@@ -3,3 +3,4 @@ npm-debug.log
 test/test-cases/*/dist
 yarn.lock
 package-lock.json
+.idea

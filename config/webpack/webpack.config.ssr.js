@@ -230,7 +230,7 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
+          new ExtractTextPlugin('style.css'),
         ].concat(
           isStartScript
             ? [
@@ -300,7 +300,12 @@ const buildWebpackConfigs = builds.map(
         plugins: [new webpack.DefinePlugin(envVars)].concat(
           isStartScript
             ? [
-                new StartServerPlugin('server.js'),
+                  new StartServerPlugin({
+                      name: 'server.js',
+                      nodeArgs: ['--inspect'], // allow debugging
+                      args: ['scriptArgument1', 'scriptArgument2'], // pass args to script
+                      signal: false
+                  }),
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()

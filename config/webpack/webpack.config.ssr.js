@@ -302,8 +302,6 @@ const buildWebpackConfigs = builds.map(
             ? [
                   new StartServerPlugin({
                       name: 'server.js',
-                      nodeArgs: ['--inspect'], // allow debugging
-                      args: ['scriptArgument1', 'scriptArgument2'], // pass args to script
                       signal: false
                   }),
                 new webpack.NamedModulesPlugin(),

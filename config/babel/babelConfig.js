@@ -29,15 +29,7 @@ module.exports = ({ target }) => {
   ];
 
   if (isWebpack) {
-    plugins.push([
-      require.resolve('babel-plugin-transform-imports'),
-      {
-        'seek-style-guide/react': {
-          transform: 'seek-style-guide/react/${member}/${member}',
-          preventFullImport: true
-        }
-      }
-    ]);
+    plugins.push(require.resolve('babel-plugin-seek-style-guide'));
   }
 
   return {

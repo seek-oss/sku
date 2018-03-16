@@ -1,50 +1,23 @@
-var webpack = require('webpack');
-var rimraf = require('rimraf');
-var getSubDirsSync = require('./utils/get-sub-dirs-sync');
-var dirCompare = require('dir-compare');
-var spawn = require('cross-spawn');
+const { promisify } = require('es6-promisify');
+const webpack = require('webpack');
+const rimrafAsync = promisify(require('rimraf'));
+const getSubDirsSync = require('./utils/getSubDirsSync');
+const dirContentsToObject = require('./utils/dirContentsToObject');
+const dirCompare = require('dir-compare');
+const { exec } = require('child-process-promise');
 
-var testCases = getSubDirsSync(__dirname + '/test-cases');
+getSubDirsSync(__dirname + '/test-cases').forEach(testCaseName => {
+  describe(testCaseName, () => {
+    const testCaseRoot = __dirname + '/test-cases/' + testCaseName;
 
-describe('Test cases', function() {
-  testCases.forEach(function(testCase) {
-    describe(testCase, function() {
-      var testCaseRoot = __dirname + '/test-cases/' + testCase;
+    beforeAll(async () => {
+      await rimrafAsync(testCaseRoot + '/dist/');
+      await exec(`node ${__dirname}/../scripts/build`, { cwd: testCaseRoot });
+    });
 
-      beforeAll(function() {
-        rimraf.sync(testCaseRoot + '/dist/');
-
-        spawn.sync('node', [__dirname + '/../scripts/build'], {
-          stdio: 'inherit',
-          cwd: testCaseRoot
-        });
-      });
-
-      it('should build HTML and CSS', function() {
-        expect(
-          dirCompare.compareSync(
-            testCaseRoot + '/dist',
-            testCaseRoot + '/expected-output',
-            {
-              includeFilter: '*.html, *.css',
-              compareContent: true
-            }
-          ).same
-        ).toBe(true);
-      });
-
-      it('should build JS', function() {
-        expect(
-          dirCompare.compareSync(
-            testCaseRoot + '/dist',
-            testCaseRoot + '/expected-output',
-            {
-              includeFilter: '*.js',
-              compareContent: false
-            }
-          ).same
-        ).toBe(true);
-      });
+    it('should generate the expected files', async () => {
+      const files = await dirContentsToObject(testCaseRoot + '/dist');
+      expect(files).toMatchSnapshot();
     });
   });
 });

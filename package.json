@@ -96,11 +96,14 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.1",
+    "child-process-promise": "^2.2.1",
     "commitizen": "^2.9.6",
     "commitlint-config-seek": "^1.0.0",
     "cz-conventional-changelog": "^2.1.0",
+    "es6-promisify": "^6.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
+    "node-dir": "^0.1.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "semantic-release": "^8.0.3"

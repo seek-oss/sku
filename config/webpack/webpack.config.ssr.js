@@ -8,6 +8,7 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const nodeExternals = require('webpack-node-externals');
+const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 
 const jsLoaders = [
@@ -250,6 +251,7 @@ const buildWebpackConfigs = builds.map(
         watch: isStartScript,
         externals: [
           nodeExternals({
+            modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
             whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
           })
         ],

@@ -2,7 +2,7 @@ const { promisify } = require('es6-promisify');
 const rimrafAsync = promisify(require('rimraf'));
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const spawn = require('../../utils/gracefulSpawn');
-const waitOnAsync = promisify(require('wait-on'));
+const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
 const skuConfig = require('./sku.config');
 
@@ -15,19 +15,8 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       await rimrafAsync(`${__dirname}/dist/`);
-
-      server = await runSkuScriptInDir('start-ssr', __dirname);
-      
-      await waitOnAsync({
-        resources: [
-          backendUrl.replace(/^http/, 'http-get'),
-          clientJsUrl.replace(/^http/, 'http-get')
-        ],
-        headers: {
-          accept: 'text/html, application/javascript'
-        },
-        timeout: 20000
-      });
+      server = await runSkuScriptInDir('start-ssr', __dirname);    
+      await waitForUrls(backendUrl, clientJsUrl);
     });
 
     afterAll(() => {
@@ -53,7 +42,7 @@ describe('ssr-hello-world', () => {
       await rimrafAsync(`${__dirname}/dist/`);
       await runSkuScriptInDir('build-ssr', __dirname);
       server = spawn('node', ['server'], { cwd: `${__dirname}/dist`, stdio: 'inherit' });
-      await waitOnAsync({ resources: [backendUrl.replace(/^http/, 'http-get')], timeout: 10000 });
+      await waitForUrls(backendUrl);
     });
 
     afterAll(() => {

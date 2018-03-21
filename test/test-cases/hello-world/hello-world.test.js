@@ -2,7 +2,7 @@ const { promisify } = require('es6-promisify');
 const rimrafAsync = promisify(require('rimraf'));
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const waitOnAsync = promisify(require('wait-on'));
+const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
 
 describe('hello-world', () => {
@@ -12,13 +12,7 @@ describe('hello-world', () => {
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start', __dirname);
-      
-      await waitOnAsync({
-        resources: [
-          devServerUrl.replace(/^http/, 'http-get')
-        ],
-        timeout: 20000
-      });
+      await waitForUrls(devServerUrl);
     });
 
     afterAll(() => {

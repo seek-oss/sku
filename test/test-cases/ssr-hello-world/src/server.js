@@ -1,4 +1,4 @@
-export default () => `
+const html = `
   <!DOCTYPE html>
   <html>
     <head>
@@ -8,7 +8,13 @@ export default () => `
     </head>
     <body>
       <div id="app"></div>
-      <script type="text/javascript" src="/main.js"></script>
+      <script type="text/javascript" src="http://localhost:8000/main.js"></script>
     </body>
   </html>
 `;
+
+export default {
+  renderCallback: (req, res) => {
+    res.send(html);
+  }
+};

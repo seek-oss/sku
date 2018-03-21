@@ -1,15 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`hello-world should generate the expected files 1`] = `
+exports[`hello-world build should generate the expected files 1`] = `
 Object {
   "index.html": "
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
+      <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/style.css\\" />
     </head>
     <body>
       <div id=\\"app\\"></div>
@@ -22,25 +21,19 @@ Object {
 }
 `;
 
-exports[`react-css-modules should generate the expected files 1`] = `
-Object {
-  "index.html": "
+exports[`hello-world start should start a development server 1`] = `
+"
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
+      <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/style.css\\" />
     </head>
     <body>
-      <div id=\\"app\\"><div class=\\"lr46_gr\\" data-reactroot=\\"\\"></div></div>
+      <div id=\\"app\\"></div>
       <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
     </body>
   </html>
-",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "style.css": ".lr46_gr{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}",
-}
+"
 `;

@@ -1,8 +1,7 @@
 const { promisify } = require('es6-promisify');
 const rimrafAsync = promisify(require('rimraf'));
 const dirContentsToObject = require('../../utils/dirContentsToObject');
-const { exec } = require('child-process-promise');
-const spawn = require('../../utils/gracefulSpawn');
+const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitOnAsync = promisify(require('wait-on'));
 const fetch = require('node-fetch');
 
@@ -12,10 +11,7 @@ describe('hello-world', () => {
     let server;
 
     beforeAll(async () => {
-      server = spawn('node', [`${__dirname}/../../../scripts/start`], {
-        stdio: 'inherit',
-        cwd: __dirname
-      });
+      server = await runSkuScriptInDir('start', __dirname);
       
       await waitOnAsync({
         resources: [
@@ -39,7 +35,7 @@ describe('hello-world', () => {
   describe('build', () => {
     beforeAll(async () => {
       await rimrafAsync(`${__dirname}/dist/`);
-      await exec(`node ${__dirname}/../../../scripts/build`, { cwd: __dirname, stdio: 'inherit' });
+      await runSkuScriptInDir('build', __dirname);
     });
   
     it('should generate the expected files', async () => {

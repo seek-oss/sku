@@ -9,10 +9,13 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
-const jsLoaders = [
+const makeJsLoaders = ({ convertDynamicImportToRequire = false } = {}) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target: 'webpack' })
+    options: require('../babel/babelConfig')({
+      target: 'webpack',
+      convertDynamicImportToRequire
+    })
   }
 ];
 
@@ -33,7 +36,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...jsLoaders
+    ...makeJsLoaders()
   ];
 
   return (cssLoaders = [
@@ -142,11 +145,14 @@ const buildWebpackConfigs = builds.map(
       entry.unshift(...devServerEntries);
     }
 
+    const publicPath = args.script === 'start' ? '/' : paths.publicPath;
+
     return [
       {
         entry,
         output: {
           path: paths.dist,
+          publicPath,
           filename: '[name].js'
         },
         module: {
@@ -154,7 +160,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders()
             },
             {
               test: /(?!\.css)\.js$/,
@@ -225,9 +231,10 @@ const buildWebpackConfigs = builds.map(
           render:
             paths.renderEntry || path.join(__dirname, '../server/server.js')
         },
-        target: 'web',
+        target: 'node',
         output: {
           path: paths.dist,
+          publicPath,
           filename: 'render.js',
           libraryTarget: 'umd'
         },
@@ -236,7 +243,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ convertDynamicImportToRequire: true })
             },
             {
               test: /\.css\.js$/,
@@ -272,6 +279,7 @@ const buildWebpackConfigs = builds.map(
             locale =>
               new StaticSiteGeneratorPlugin({
                 locals: {
+                  publicPath,
                   locale
                 },
                 paths: `index${

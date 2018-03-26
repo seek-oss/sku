@@ -4,10 +4,11 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
+const skuConfig = require('./sku.config');
 
 describe('hello-world', () => {
   describe('start', () => {
-    const devServerUrl = 'http://localhost:8080';
+    const devServerUrl = `http://localhost:${skuConfig.port}`;
     let server;
 
     beforeAll(async () => {

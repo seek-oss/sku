@@ -2,6 +2,7 @@
 
 exports[`hello-world build should generate the expected files 1`] = `
 Object {
+  "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": "
   <!DOCTYPE html>
   <html>
@@ -11,7 +12,7 @@ Object {
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </head>
     <body>
-      <div id=\\"app\\"></div>
+      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
       <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
     </body>
   </html>
@@ -31,7 +32,7 @@ exports[`hello-world start should start a development server 1`] = `
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </head>
     <body>
-      <div id=\\"app\\"></div>
+      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
       <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
     </body>
   </html>

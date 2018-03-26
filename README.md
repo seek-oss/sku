@@ -161,6 +161,7 @@ module.exports = {
     render: 'src/render.js'
   },
   public: 'src/public',
+  publicPath: '/',
   target: 'dist'
 }
 ```
@@ -172,6 +173,45 @@ $ sku start --config sku.custom.config.js
 ```
 
 _**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
+
+### Code Splitting
+
+At any point in your application, you can use a dynamic import to create a split point:
+
+```js
+import('./some/other/file').then(stuff => {
+  console.log(stuff);
+});
+```
+
+For dynamically loaded bundles to work in production, **you must provide a `publicPath` option in your sku config.**
+
+For example, if your assets are hosted on a CDN:
+
+```js
+module.exports = {
+  ...,
+  publicPath: `https://cdn.example.com/my-app/${process.env.BUILD_ID}/`
+};
+```
+
+In development, the public path will be `/`, since assets are served locally.
+
+In your application's `render` function, you have access to the public path so that you can render the correct asset URLs.
+
+For example:
+
+```js
+export default ({ publicPath }) => `
+  <!doctype html>
+  <html>
+    ...
+    <link rel="stylesheet" type="text/css" href="${publicPath}style.css" />
+    ...
+    <script src="${publicPath}main.js"></script>
+  </html>
+`;
+```
 
 ### Environment Variables
 

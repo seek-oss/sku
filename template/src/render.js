@@ -15,18 +15,18 @@ const metaStrings = [
 ];
 const metaHtml = metaStrings.filter(Boolean).join('\n    ');
 
-export default () => `
+export default ({ publicPath }) => `
   <!DOCTYPE html>
   <html${htmlAttributes ? ` ${htmlAttributes}` : ''}>
     <head>
       ${metaHtml}
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="/style.css" />
+      <link rel="stylesheet" type="text/css" href="${publicPath}style.css" />
     </head>
     <body${bodyAttributes ? ` ${bodyAttributes}` : ''}>
       <div id="app">${appHtml}</div>
-      <script type="text/javascript" src="/main.js"></script>
+      <script type="text/javascript" src="${publicPath}main.js"></script>
     </body>
   </html>
 `;

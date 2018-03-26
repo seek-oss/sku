@@ -1,1 +1,3 @@
-document.getElementById('app').innerHTML = 'Hello world!';
+import('./message').then(({ message }) => {
+  document.getElementById('app').innerHTML = message;
+});

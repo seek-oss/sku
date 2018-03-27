@@ -13,9 +13,11 @@ const template = ({ publicPath, message }) => `
   </html>
 `;
 
+const fileName = 'message';
+
 export default ({ publicPath }) => ({
   renderCallback: (req, res) => {
-    import('./message').then(({ message }) => {
+    import(`./message/${fileName}`).then(({ message }) => {
       res.send(template({ publicPath, message }));
     });
   }

@@ -1,4 +1,6 @@
-export default ({ publicPath }) => import('./message').then(({ message }) => `
+const fileName = 'message';
+
+export default ({ publicPath }) => import(`./message/${fileName}`).then(({ message }) => `
   <!DOCTYPE html>
   <html>
     <head>

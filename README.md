@@ -176,10 +176,12 @@ _**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build
 
 ### Code Splitting
 
-At any point in your application, you can use a dynamic import to create a split point:
+At any point in your application, you can use a dynamic import to create a split point.
+
+For example, when importing the default export from another file:
 
 ```js
-import('./some/other/file').then(stuff => {
+import('./some/other/file').then(({ default: stuff }) => {
   console.log(stuff);
 });
 ```

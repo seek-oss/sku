@@ -4,6 +4,7 @@ const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const spawn = require('../../utils/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
+const dirContentsToObject = require('../../utils/dirContentsToObject');
 const skuConfig = require('./sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.port.backend}`;
@@ -53,6 +54,11 @@ describe('ssr-hello-world', () => {
       const response = await fetch(backendUrl);
       const responseText = await response.text();
       expect(responseText).toMatchSnapshot();
+    });
+
+    it('should generate the expected files', async () => {
+      const files = await dirContentsToObject(`${__dirname}/dist`);
+      expect(files).toMatchSnapshot();
     });
   });
 });

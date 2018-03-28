@@ -11,11 +11,12 @@ const nodeEnvOptions = {
   }
 };
 
-module.exports = ({ target }) => {
+module.exports = ({ target, convertDynamicImportToRequire }) => {
   const isWebpack = target === 'webpack';
 
   const envPresetOptions = isWebpack ? webpackEnvOptions : nodeEnvOptions;
   const plugins = [
+    require.resolve('babel-plugin-syntax-dynamic-import'),
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
     require.resolve('babel-plugin-flow-react-proptypes'),
@@ -30,6 +31,10 @@ module.exports = ({ target }) => {
 
   if (isWebpack) {
     plugins.push(require.resolve('babel-plugin-seek-style-guide'));
+  }
+
+  if (convertDynamicImportToRequire) {
+    plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
   return {

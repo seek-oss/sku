@@ -3,7 +3,7 @@ module.exports = {
     client: 'src/client.js',
     render: 'src/render.js'
   },
-  public: 'src/public',
+  target: 'dist',
   publicPath: '/',
-  target: 'dist'
+  port: 8080
 };

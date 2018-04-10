@@ -19,7 +19,7 @@ This tool is heavily inspired by other work, most notably:
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))
 
-Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
+Use `import`, `const`, `=>`, `async` and `await`, promises, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
 
 * [babel-preset-env](https://babeljs.io/docs/plugins/preset-env/)
 * [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/)
@@ -181,9 +181,8 @@ At any point in your application, you can use a dynamic import to create a split
 For example, when importing the default export from another file:
 
 ```js
-import('./some/other/file').then(({ default: stuff }) => {
-  console.log(stuff);
-});
+const { default: stuff } = await import('./some/other/file');
+console.log(stuff);
 ```
 
 For dynamically loaded bundles to work in production, **you must provide a `publicPath` option in your sku config.**

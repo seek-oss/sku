@@ -1,4 +1,6 @@
-const template = ({ publicPath, message }) => `
+const dedent = require('dedent');
+
+const template = ({ publicPath, message }) => dedent`
   <!DOCTYPE html>
   <html>
     <head>
@@ -16,9 +18,8 @@ const template = ({ publicPath, message }) => `
 const fileName = 'message';
 
 export default ({ publicPath }) => ({
-  renderCallback: (req, res) => {
-    import(`./message/${fileName}`).then(({ message }) => {
-      res.send(template({ publicPath, message }));
-    });
+  renderCallback: async (req, res) => {
+    const { message } = await import(`./message/${fileName}`);
+    res.send(template({ publicPath, message }));
   }
 });

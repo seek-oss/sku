@@ -1,20 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build should generate a production server 1`] = `
-"
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
-    </body>
-  </html>
-"
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+  </body>
+</html>"
 `;
 
 exports[`ssr-hello-world build should generate the expected files 1`] = `
@@ -26,18 +24,16 @@ Object {
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
-"
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
-    </body>
-  </html>
-"
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+  </body>
+</html>"
 `;

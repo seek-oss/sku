@@ -3,38 +3,34 @@
 exports[`hello-world build should generate the expected files 1`] = `
 Object {
   "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+  </body>
+</html>",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`hello-world start should start a development server 1`] = `
-"
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-"
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+  </body>
+</html>"
 `;

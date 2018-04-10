@@ -1,5 +1,6 @@
-const fileName = 'message';
+(async () => {
+  const fileName = 'message';
 
-import(`./message/${fileName}`).then(({ message }) => {
+  const { message } = await import(`./message/${fileName}`);
   document.getElementById('app').innerHTML = message;
-});
+})();

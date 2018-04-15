@@ -59,6 +59,8 @@ const builds = buildConfigs
           : 8181
     };
 
+    const polyfills = buildConfig.polyfills || [];
+
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
     const jestDecorator =
@@ -87,7 +89,8 @@ const builds = buildConfigs
       webpackDecorator,
       jestDecorator,
       hosts,
-      port
+      port,
+      polyfills
     };
   });
 

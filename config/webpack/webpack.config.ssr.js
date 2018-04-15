@@ -109,7 +109,7 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator, port }) => {
+  ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -139,7 +139,11 @@ const buildWebpackConfigs = builds.map(
 
     const isStartScript = args.script === 'start-ssr';
 
-    const clientEntry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill);
+    });
+
+    const clientEntry = [...resolvedPolyfills, paths.clientEntry];
     const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${

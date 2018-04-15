@@ -273,6 +273,18 @@ module.exports = {
 
 Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
 
+### Polyfills
+
+Sometime you might need to polyfill a new object or method in browsers that don’t support that object or method, and you might also want polyfill is loaded and executed as part of entry point without your files needing to know about it.
+```js
+module.exports = {
+  polyfills: ['core-js/modules/es6.symbol', 'regenerator-runtime/runtime']
+}
+```
+
+Note: From a performance point of view, you should only send polyfills to browsers that need them.
+
+
 ### Locales
 
 Often we render multiple versions of our application for different locations, eg. Australia & New Zealand. To render an HTML file for each location you can use the locales option in `sku.config.js`. Locales are preferable to [monorepos](#monorepo-support) when you need to render multiple versions of your HTML file but only need one version of each of the assets (JS, CSS, images, etc). Note: You can use `locales` inside a monorepo project.

@@ -265,6 +265,8 @@ Note: Running `sku start` will always use the `development` environment.
 
 Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
 
+Note: Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
+
 ```js
 module.exports = {
   ...,

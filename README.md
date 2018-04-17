@@ -110,151 +110,18 @@ Without any special setup, sku is pre-configured for the SEEK Style Guide. Just 
 
 ## Getting Started
 
-First, in a new directory, create a git repository with an appropriate `.gitignore` file:
+Create a new project and start a local development environment:
 
 ```bash
-$ git init
-$ echo -e 'node_modules\nnpm-debug.log\ndist' >> .gitignore
+$ npx sku init my-app
+$ cd my-app
+$ npm start
 ```
 
-Next, create a new Node.js project via npm:
+Don't have [npx](https://www.npmjs.com/package/npx)?
 
 ```bash
-$ npm init
-```
-
-Install sku into your project as a dev dependency:
-
-```bash
-$ npm install --save-dev sku
-```
-
-In `package.json`, delete the default test script:
-
-```diff
--"scripts": {
--  "test": "echo \"Error: no test specified\" && exit 1"
--},
-```
-
-Replace the deleted test script with a basic set of sku scripts:
-
-```js
-"scripts": {
-  "start": "sku start",
-  "test": "sku test",
-  "build": "sku build",
-  "lint": "sku lint"
-},
-```
-
-For sku to work correctly, you'll need some initial source files. First, create a `src` directory:
-
-```bash
-$ mkdir src
-```
-
-Create a basic `src/render.js`, which is used to generate your `index.html` file:
-
-```bash
-$ touch src/render.js
-```
-
-Then add the following code to `src/render.js`:
-
-```js
-export default () => `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>My Awesome Project</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="/style.css" />
-    </head>
-    <body>
-      <div id="app"></div>
-      <script type="text/javascript" src="/main.js"></script>
-    </body>
-  </html>
-`;
-```
-
-Finally, add a basic `src/client.js`:
-
-```bash
-$ echo 'document.getElementById("app").innerHTML = "Hello world!"' >> src/client.js
-```
-
-To include static assets that aren't handled by Webpack (e.g. `favicon.ico`), you can create a `public` directory:
-
-```bash
-$ mkdir public
-```
-
-## Getting Started with React
-
-Since sku was designed with static pre-rendering in mind, and provides [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) compilation out of the box, it's a perfect fit for [React](https://facebook.github.io/react).
-
-If you'd like to start a new React project, first install the required dependencies:
-
-```bash
-$ npm install --save-dev react react-dom
-```
-
-Next, create a new file called `src/App/App.js`:
-
-```bash
-$ mkdir -p src/App
-$ touch src/App/App.js
-```
-
-Add the following code to `src/App/App.js`:
-
-```js
-import React, { Component } from 'react';
-
-export default class App extends Component {
-  render() {
-    return (
-      <div>Hello world!</div>
-    );
-  }
-};
-```
-
-Replace the contents of `src/render.js` with the following, which provides static pre-rendering of your React app:
-
-```js
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import App from './App/App';
-
-export default () => `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>My Awesome Project</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="/style.css" />
-    </head>
-    <body>
-      <div id="app">${renderToString(<App />)}</div>
-      <script type="text/javascript" src="/main.js"></script>
-    </body>
-  </html>
-`;
-```
-
-Finally, replace the contents of 'src/client.js' with the following:
-
-```js
-import React from 'react';
-import { render } from 'react-dom';
-import App from './App/App';
-
-render(<App />, document.getElementById("app"));
+$ npm install -g npx
 ```
 
 ## Development Workflow
@@ -294,6 +161,7 @@ module.exports = {
     render: 'src/render.js'
   },
   public: 'src/public',
+  publicPath: '/',
   target: 'dist'
 }
 ```
@@ -305,6 +173,47 @@ $ sku start --config sku.custom.config.js
 ```
 
 _**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
+
+### Code Splitting
+
+At any point in your application, you can use a dynamic import to create a split point.
+
+For example, when importing the default export from another file:
+
+```js
+import('./some/other/file').then(({ default: stuff }) => {
+  console.log(stuff);
+});
+```
+
+For dynamically loaded bundles to work in production, **you must provide a `publicPath` option in your sku config.**
+
+For example, if your assets are hosted on a CDN:
+
+```js
+module.exports = {
+  ...,
+  publicPath: `https://cdn.example.com/my-app/${process.env.BUILD_ID}/`
+};
+```
+
+In development, the public path will be `/`, since assets are served locally.
+
+In your application's `render` function, you have access to the public path so that you can render the correct asset URLs.
+
+For example:
+
+```js
+export default ({ publicPath }) => `
+  <!doctype html>
+  <html>
+    ...
+    <link rel="stylesheet" type="text/css" href="${publicPath}style.css" />
+    ...
+    <script src="${publicPath}main.js"></script>
+  </html>
+`;
+```
 
 ### Environment Variables
 

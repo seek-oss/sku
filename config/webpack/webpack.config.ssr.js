@@ -8,12 +8,13 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const nodeExternals = require('webpack-node-externals');
+const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 
-const jsLoaders = [
+const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target: 'webpack' })
+    options: require('../babel/babelConfig')({ target })
   }
 ];
 
@@ -34,7 +35,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...jsLoaders
+    ...makeJsLoaders({ target: 'node' })
   ];
 
   return (cssLoaders = [
@@ -150,6 +151,10 @@ const buildWebpackConfigs = builds.map(
       `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
+    const publicPath = isStartScript
+      ? `http://localhost:${port.client}/`
+      : paths.publicPath || '';
+
     if (isStartScript) {
       clientEntry.unshift(...clientDevServerEntries);
       serverEntry.unshift(...serverDevServerEntries);
@@ -162,7 +167,7 @@ const buildWebpackConfigs = builds.map(
         output: {
           path: paths.dist,
           filename: '[name].js',
-          publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
+          publicPath
         },
         optimization: {
           nodeEnv: process.env.NODE_ENV,
@@ -174,7 +179,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'browser' })
             },
             {
               test: /(?!\.css)\.js$/,
@@ -200,24 +205,27 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: isStartScript
-                ? makeCssLoaders()
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders()
-                  })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: isStartScript
+                    ? makeCssLoaders({ packageName })
+                    : ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: makeCssLoaders({ packageName })
+                      })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: isStartScript
+                    ? makeCssLoaders()
+                    : ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: makeCssLoaders()
+                      })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: isStartScript
-                ? makeCssLoaders({ packageName })
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ packageName })
-                  })
-            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders()
@@ -230,7 +238,7 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css'),
+          new ExtractTextPlugin('style.css')
         ].concat(
           isStartScript
             ? [
@@ -246,6 +254,7 @@ const buildWebpackConfigs = builds.map(
         watch: isStartScript,
         externals: [
           nodeExternals({
+            modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
             whitelist: ['webpack/hot/poll?1000', /.-style-guide/]
           })
         ],
@@ -271,7 +280,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'node' })
             },
             {
               test: /\.css\.js$/,
@@ -279,14 +288,18 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: makeCssLoaders({ server: true })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: makeCssLoaders({ server: true, packageName })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: makeCssLoaders({ server: true })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: makeCssLoaders({ server: true, packageName })
-            })),
+
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })
@@ -297,13 +310,18 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [new webpack.DefinePlugin(envVars)].concat(
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          new webpack.DefinePlugin({
+            __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
+          })
+        ].concat(
           isStartScript
             ? [
-                  new StartServerPlugin({
-                      name: 'server.js',
-                      signal: false
-                  }),
+                new StartServerPlugin({
+                  name: 'server.js',
+                  signal: false
+                }),
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()

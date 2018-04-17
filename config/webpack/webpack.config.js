@@ -9,10 +9,10 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
-const jsLoaders = [
+const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target: 'webpack' })
+    options: require('../babel/babelConfig')({ target })
   }
 ];
 
@@ -33,7 +33,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...jsLoaders
+    ...makeJsLoaders({ target: 'node' })
   ];
 
   return (cssLoaders = [
@@ -142,11 +142,14 @@ const buildWebpackConfigs = builds.map(
       entry.unshift(...devServerEntries);
     }
 
+    const publicPath = args.script === 'start' ? '/' : paths.publicPath;
+
     return [
       {
         entry,
         output: {
           path: paths.dist,
+          publicPath,
           filename: '[name].js'
         },
         optimization: {
@@ -159,7 +162,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'browser' })
             },
             {
               test: /(?!\.css)\.js$/,
@@ -183,20 +186,23 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders()
-              })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders({ packageName })
+                  })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: makeCssLoaders()
+                  })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ packageName })
-              })
-            })),
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders()
@@ -217,9 +223,10 @@ const buildWebpackConfigs = builds.map(
           render:
             paths.renderEntry || path.join(__dirname, '../server/server.js')
         },
-        target: 'web',
+        target: 'node',
         output: {
           path: paths.dist,
+          publicPath,
           filename: 'render.js',
           libraryTarget: 'umd'
         },
@@ -231,7 +238,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'node' })
             },
             {
               test: /\.css\.js$/,
@@ -239,14 +246,18 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.less$/,
-              exclude: /node_modules/,
-              use: makeCssLoaders({ server: true })
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: makeCssLoaders({ server: true, packageName })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: makeCssLoaders({ server: true })
+                }
+              ]
             },
-            ...paths.compilePackages.map(packageName => ({
-              test: /\.less$/,
-              include: packageName,
-              use: makeCssLoaders({ server: true, packageName })
-            })),
+
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })
@@ -263,6 +274,7 @@ const buildWebpackConfigs = builds.map(
             locale =>
               new StaticSiteGeneratorPlugin({
                 locals: {
+                  publicPath,
                   locale
                 },
                 paths: `index${

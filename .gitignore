@@ -1,5 +1,5 @@
 node_modules/
-npm-debug.log
+*.log
 test/test-cases/*/dist
 yarn.lock
 package-lock.json

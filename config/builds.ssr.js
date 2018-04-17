@@ -75,6 +75,7 @@ const builds = buildConfigs
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       serverEntry: path.join(cwd, entry.server || 'src/server.js'),
       public: path.join(cwd, buildConfig.public || 'public'),
+      publicPath: buildConfig.publicPath || '/',
       dist: path.join(cwd, buildConfig.target || 'dist')
     };
 

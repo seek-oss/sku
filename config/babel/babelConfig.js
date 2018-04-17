@@ -1,6 +1,6 @@
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 
-const webpackEnvOptions = {
+const browserEnvOptions = {
   modules: false,
   targets: supportedBrowsers
 };
@@ -12,10 +12,11 @@ const nodeEnvOptions = {
 };
 
 module.exports = ({ target }) => {
-  const isWebpack = target === 'webpack';
+  const isBrowser = target === 'browser';
 
-  const envPresetOptions = isWebpack ? webpackEnvOptions : nodeEnvOptions;
+  const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
+    require.resolve('babel-plugin-syntax-dynamic-import'),
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
     require.resolve('babel-plugin-flow-react-proptypes'),
@@ -28,16 +29,10 @@ module.exports = ({ target }) => {
     ]
   ];
 
-  if (isWebpack) {
-    plugins.push([
-      require.resolve('babel-plugin-transform-imports'),
-      {
-        'seek-style-guide/react': {
-          transform: 'seek-style-guide/react/${member}/${member}',
-          preventFullImport: true
-        }
-      }
-    ]);
+  if (isBrowser) {
+    plugins.push(require.resolve('babel-plugin-seek-style-guide'));
+  } else {
+    plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
   return {

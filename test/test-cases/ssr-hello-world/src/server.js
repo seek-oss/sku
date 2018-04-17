@@ -1,6 +1,4 @@
-const fileName = 'message';
-
-export default ({ publicPath }) => import(`./message/${fileName}`).then(({ message }) => `
+const template = ({ publicPath, message }) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -13,4 +11,14 @@ export default ({ publicPath }) => import(`./message/${fileName}`).then(({ messa
       <script type="text/javascript" src="${publicPath}main.js"></script>
     </body>
   </html>
-`);
+`;
+
+const fileName = 'message';
+
+export default ({ publicPath }) => ({
+  renderCallback: (req, res) => {
+    import(`./message/${fileName}`).then(({ message }) => {
+      res.send(template({ publicPath, message }));
+    });
+  }
+});

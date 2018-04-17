@@ -17,7 +17,7 @@ const devServer = new WebpackDevServer(compiler, {
   allowedHosts: hosts
 });
 
-devServer.listen(port, '127.0.0.1', (err, result) => {
+devServer.listen(port, '0.0.0.0', (err, result) => {
   if (err) {
     return console.log(err);
   }

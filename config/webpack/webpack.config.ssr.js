@@ -140,7 +140,7 @@ const buildWebpackConfigs = builds.map(
     const isStartScript = args.script === 'start-ssr';
 
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill);
+      return require.resolve(polyfill, { paths: [process.cwd()] });
     });
 
     const clientEntry = [...resolvedPolyfills, paths.clientEntry];

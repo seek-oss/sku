@@ -134,7 +134,7 @@ const buildWebpackConfigs = builds.map(
 
     const internalJs = [paths.src, ...paths.compilePackages];
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill);
+      return require.resolve(polyfill, { paths: [process.cwd()] });
     });
     const entry = [...resolvedPolyfills, paths.clientEntry];
     const devServerEntries = [

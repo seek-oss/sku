@@ -19,6 +19,7 @@ Object {
 ",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "style.css": "",
 }
 `;
 

@@ -9,13 +9,10 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
-const makeJsLoaders = ({ convertDynamicImportToRequire = false } = {}) => [
+const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({
-      target: 'webpack',
-      convertDynamicImportToRequire
-    })
+    options: require('../babel/babelConfig')({ target })
   }
 ];
 
@@ -36,7 +33,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...makeJsLoaders()
+    ...makeJsLoaders({ target: 'node' })
   ];
 
   return (cssLoaders = [
@@ -162,7 +159,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: makeJsLoaders()
+              use: makeJsLoaders({ target: 'browser' })
             },
             {
               test: /(?!\.css)\.js$/,
@@ -245,7 +242,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: makeJsLoaders({ convertDynamicImportToRequire: true })
+              use: makeJsLoaders({ target: 'node' })
             },
             {
               test: /\.css\.js$/,

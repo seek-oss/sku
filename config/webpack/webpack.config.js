@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
@@ -179,27 +179,22 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ js: true })
-              })
+              use: [MiniCssExtractPlugin.loader].concat(
+                makeCssLoaders({ js: true })
+              )
             },
             {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
                   include: packageName,
-                  use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ packageName })
-                  })
+                  use: [MiniCssExtractPlugin.loader].concat(
+                    makeCssLoaders({ packageName })
+                  )
                 })),
                 {
                   exclude: /node_modules/,
-                  use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders()
-                  })
+                  use: [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
                 }
               ]
             },
@@ -215,7 +210,9 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
+          new MiniCssExtractPlugin({
+            filename: 'style.css'
+          })
         ]
       },
       {

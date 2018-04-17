@@ -271,6 +271,7 @@ Note: Polyfills are only loaded in a browser context. This feature can't be used
 module.exports = {
   ...,
   polyfills: [
+    'promise-polyfill',
     'core-js/modules/es6.symbol',
     'regenerator-runtime/runtime'
   ]

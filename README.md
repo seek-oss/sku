@@ -261,6 +261,23 @@ module.exports = {
 
 Note: Running `sku start` will always use the `development` environment.
 
+### Polyfills
+
+Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
+
+Note: Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
+
+```js
+module.exports = {
+  ...,
+  polyfills: [
+    'promise-polyfill',
+    'core-js/modules/es6.symbol',
+    'regenerator-runtime/runtime'
+  ]
+}
+```
+
 ### Compile Packages
 
 Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.

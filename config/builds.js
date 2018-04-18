@@ -50,6 +50,8 @@ const builds = buildConfigs
 
     const port = buildConfig.port || 8080;
 
+    const polyfills = buildConfig.polyfills || [];
+
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
     const jestDecorator =
@@ -81,7 +83,8 @@ const builds = buildConfigs
       jestDecorator,
       eslintDecorator,
       hosts,
-      port
+      port,
+      polyfills
     };
   });
 

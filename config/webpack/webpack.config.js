@@ -103,7 +103,7 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator, port }) => {
+  ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -130,8 +130,10 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
-
-    const entry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+    const entry = [...resolvedPolyfills, paths.clientEntry];
     const devServerEntries = [
       `${require.resolve(
         'webpack-dev-server/client'

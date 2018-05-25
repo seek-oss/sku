@@ -332,7 +332,9 @@ module.exports = {
   // A list hosts your app can run off while in the dev environment.
   hosts: ['dev.seek.com.au', 'dev.seek.co.nz'],
   // The port you want the server to run on
-  port: 5000
+  port: 5000,
+  // Optional parameter to set a page to open when the development server starts
+  initialPath: '/my-page'
 }
 ```
 

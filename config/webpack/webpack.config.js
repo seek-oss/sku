@@ -130,10 +130,7 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    const entry = [...resolvedPolyfills, paths.clientEntry];
+    const entry = [paths.clientEntry];
     const devServerEntries = [
       `${require.resolve(
         'webpack-dev-server/client'
@@ -143,6 +140,11 @@ const buildWebpackConfigs = builds.map(
     if (args.script === 'start') {
       entry.unshift(...devServerEntries);
     }
+
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+    entry.unshift(...resolvedPolyfills);
 
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 

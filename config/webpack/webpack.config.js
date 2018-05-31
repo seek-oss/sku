@@ -130,7 +130,10 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
-    const entry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+    const entry = [...resolvedPolyfills, paths.clientEntry];
     const devServerEntries = [
       `${require.resolve(
         'webpack-dev-server/client'
@@ -140,11 +143,6 @@ const buildWebpackConfigs = builds.map(
     if (args.script === 'start') {
       entry.unshift(...devServerEntries);
     }
-
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    entry.unshift(...resolvedPolyfills);
 
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
@@ -156,7 +154,11 @@ const buildWebpackConfigs = builds.map(
           publicPath,
           filename: '[name].js'
         },
-        mode: process.env.NODE_ENV,
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
+        },
         module: {
           rules: [
             {
@@ -227,7 +229,9 @@ const buildWebpackConfigs = builds.map(
           filename: 'render.js',
           libraryTarget: 'umd'
         },
-        mode: process.env.NODE_ENV,
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
+        },
         module: {
           rules: [
             {

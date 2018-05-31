@@ -136,7 +136,11 @@ const buildWebpackConfigs = builds.map(
 
     const isStartScript = args.script === 'start-ssr';
 
-    const clientEntry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+
+    const clientEntry = [...resolvedPolyfills, paths.clientEntry];
     const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${
@@ -160,11 +164,6 @@ const buildWebpackConfigs = builds.map(
       serverEntry.unshift(...serverDevServerEntries);
     }
 
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    clientEntry.unshift(...resolvedPolyfills);
-
     return [
       {
         entry: clientEntry,
@@ -174,7 +173,11 @@ const buildWebpackConfigs = builds.map(
           filename: '[name].js',
           publicPath
         },
-        mode: process.env.NODE_ENV,
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
+        },
         module: {
           rules: [
             {
@@ -269,7 +272,9 @@ const buildWebpackConfigs = builds.map(
           filename: 'server.js',
           libraryTarget: 'var'
         },
-        mode: process.env.NODE_ENV,
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
+        },
         module: {
           rules: [
             {

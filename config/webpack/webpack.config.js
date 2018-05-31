@@ -154,11 +154,7 @@ const buildWebpackConfigs = builds.map(
           publicPath,
           filename: '[name].js'
         },
-        optimization: {
-          nodeEnv: process.env.NODE_ENV,
-          minimize: isProductionBuild,
-          concatenateModules: isProductionBuild
-        },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {
@@ -229,9 +225,7 @@ const buildWebpackConfigs = builds.map(
           filename: 'render.js',
           libraryTarget: 'umd'
         },
-        optimization: {
-          nodeEnv: process.env.NODE_ENV
-        },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {

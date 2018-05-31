@@ -173,11 +173,7 @@ const buildWebpackConfigs = builds.map(
           filename: '[name].js',
           publicPath
         },
-        optimization: {
-          nodeEnv: process.env.NODE_ENV,
-          minimize: isProductionBuild,
-          concatenateModules: isProductionBuild
-        },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {
@@ -272,9 +268,7 @@ const buildWebpackConfigs = builds.map(
           filename: 'server.js',
           libraryTarget: 'var'
         },
-        optimization: {
-          nodeEnv: process.env.NODE_ENV
-        },
+        mode: process.env.NODE_ENV,
         module: {
           rules: [
             {

@@ -11,10 +11,10 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 
-const jsLoaders = [
+const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target: 'webpack' })
+    options: require('../babel/babelConfig')({ target })
   }
 ];
 
@@ -35,7 +35,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...jsLoaders
+    ...makeJsLoaders({ target: 'node' })
   ];
 
   return (cssLoaders = [
@@ -106,7 +106,7 @@ const svgLoaders = [
 ];
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator, port }) => {
+  ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -151,10 +151,19 @@ const buildWebpackConfigs = builds.map(
       `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
+    const publicPath = isStartScript
+      ? `http://localhost:${port.client}/`
+      : paths.publicPath || '';
+
     if (isStartScript) {
       clientEntry.unshift(...clientDevServerEntries);
       serverEntry.unshift(...serverDevServerEntries);
     }
+
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+    clientEntry.unshift(...resolvedPolyfills);
 
     return [
       {
@@ -163,14 +172,14 @@ const buildWebpackConfigs = builds.map(
         output: {
           path: paths.dist,
           filename: '[name].js',
-          publicPath: isStartScript ? `http://localhost:${port.client}/` : ''
+          publicPath
         },
         module: {
           rules: [
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'browser' })
             },
             {
               test: /(?!\.css)\.js$/,
@@ -274,7 +283,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: jsLoaders
+              use: makeJsLoaders({ target: 'node' })
             },
             {
               test: /\.css\.js$/,
@@ -304,15 +313,21 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: isStartScript
-          ? [
-              new StartServerPlugin('server.js'),
-              new webpack.NamedModulesPlugin(),
-              new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin(),
-              new webpack.DefinePlugin(envVars)
-            ]
-          : [new webpack.DefinePlugin(envVars)]
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          new webpack.DefinePlugin({
+            __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
+          })
+        ].concat(
+          isStartScript
+            ? [
+                new StartServerPlugin('server.js'),
+                new webpack.NamedModulesPlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin()
+              ]
+            : []
+        )
       }
     ].map(webpackDecorator);
   }

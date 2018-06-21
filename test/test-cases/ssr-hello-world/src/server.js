@@ -1,4 +1,4 @@
-const html = `
+const template = ({ publicPath, message }) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -7,14 +7,18 @@ const html = `
       <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-      <div id="app"></div>
-      <script type="text/javascript" src="http://localhost:8000/main.js"></script>
+      <div id="app" data-message="${message}"></div>
+      <script type="text/javascript" src="${publicPath}main.js"></script>
     </body>
   </html>
 `;
 
-export default {
+const fileName = 'message';
+
+export default ({ publicPath }) => ({
   renderCallback: (req, res) => {
-    res.send(html);
+    import(`./message/${fileName}`).then(({ message }) => {
+      res.send(template({ publicPath, message }));
+    });
   }
-};
+});

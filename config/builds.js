@@ -50,6 +50,8 @@ const builds = buildConfigs
 
     const port = buildConfig.port || 8080;
 
+    const polyfills = buildConfig.polyfills || [];
+
     const webpackDecorator =
       buildConfig.dangerouslySetWebpackConfig || defaultDecorator;
     const jestDecorator =
@@ -68,6 +70,7 @@ const builds = buildConfigs
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       renderEntry: path.join(cwd, entry.render || 'src/render.js'),
       public: path.join(cwd, buildConfig.public || 'public'),
+      publicPath: buildConfig.publicPath || '/',
       dist: path.join(cwd, buildConfig.target || 'dist')
     };
 
@@ -80,7 +83,8 @@ const builds = buildConfigs
       jestDecorator,
       eslintDecorator,
       hosts,
-      port
+      port,
+      polyfills
     };
   });
 

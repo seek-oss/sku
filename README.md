@@ -161,6 +161,7 @@ module.exports = {
     render: 'src/render.js'
   },
   public: 'src/public',
+  publicPath: '/',
   target: 'dist'
 }
 ```
@@ -172,6 +173,47 @@ $ sku start --config sku.custom.config.js
 ```
 
 _**NOTE:** The `--config` parameter is only used for dev (`sku start`) and build steps (`sku build`). Linting (`sku lint`), formatting (`sku format`) and running of unit tests (`sku test`) will still use the default config file and does **not** support it._
+
+### Code Splitting
+
+At any point in your application, you can use a dynamic import to create a split point.
+
+For example, when importing the default export from another file:
+
+```js
+import('./some/other/file').then(({ default: stuff }) => {
+  console.log(stuff);
+});
+```
+
+For dynamically loaded bundles to work in production, **you must provide a `publicPath` option in your sku config.**
+
+For example, if your assets are hosted on a CDN:
+
+```js
+module.exports = {
+  ...,
+  publicPath: `https://cdn.example.com/my-app/${process.env.BUILD_ID}/`
+};
+```
+
+In development, the public path will be `/`, since assets are served locally.
+
+In your application's `render` function, you have access to the public path so that you can render the correct asset URLs.
+
+For example:
+
+```js
+export default ({ publicPath }) => `
+  <!doctype html>
+  <html>
+    ...
+    <link rel="stylesheet" type="text/css" href="${publicPath}style.css" />
+    ...
+    <script src="${publicPath}main.js"></script>
+  </html>
+`;
+```
 
 ### Environment Variables
 
@@ -218,6 +260,23 @@ module.exports = {
 ```
 
 Note: Running `sku start` will always use the `development` environment.
+
+### Polyfills
+
+Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
+
+Note: Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
+
+```js
+module.exports = {
+  ...,
+  polyfills: [
+    'promise-polyfill',
+    'core-js/modules/es6.symbol',
+    'regenerator-runtime/runtime'
+  ]
+}
+```
 
 ### Compile Packages
 

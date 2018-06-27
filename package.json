@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "npm run format-check && OPEN_TAB=false jest test/test-cases/*/*.test.js",
+    "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts}/**/*.js'",
     "precommit": "lint-staged",
@@ -99,6 +100,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.1",
+    "async-disk-cache": "^1.3.3",
     "child-process-promise": "^2.2.1",
     "commitizen": "^2.9.6",
     "commitlint-config-seek": "^1.0.0",

@@ -47,8 +47,8 @@ const builds = buildConfigs
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
-
     const port = buildConfig.port || 8080;
+    const initialPath = buildConfig.initialPath || '/';
 
     const polyfills = buildConfig.polyfills || [];
 
@@ -84,7 +84,8 @@ const builds = buildConfigs
       eslintDecorator,
       hosts,
       port,
-      polyfills
+      polyfills,
+      initialPath
     };
   });
 

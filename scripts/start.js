@@ -6,7 +6,7 @@ const webpackConfig = require('../config/webpack/webpack.config');
 const builds = require('../config/builds');
 const opn = require('opn');
 
-const { hosts, port } = builds[0];
+const { hosts, port, initialPath } = builds[0];
 
 const compiler = webpack(webpackConfig);
 const devServer = new WebpackDevServer(compiler, {
@@ -22,7 +22,7 @@ devServer.listen(port, '0.0.0.0', (err, result) => {
     return console.log(err);
   }
 
-  const url = `http://${hosts[0]}:${port}`;
+  const url = `http://${hosts[0]}:${port}${initialPath}`;
 
   console.log();
   console.log(`Starting the development server on ${url}...`);

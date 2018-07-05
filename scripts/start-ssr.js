@@ -8,7 +8,7 @@ const opn = require('opn');
 const Promise = require('bluebird');
 const webpackPromise = Promise.promisify(require('webpack'));
 const fs = require('fs-extra');
-const { hosts, port } = builds[0];
+const { hosts, port, initialPath } = builds[0];
 const serverEntry = builds[0].paths.serverEntry;
 
 const compiler = webpack(serverEntry ? webpackConfig[0] : webpackConfig);
@@ -64,7 +64,7 @@ const copyPublicFiles = () => {
 runWebpack(webpackConfig[1])
   .then(copyPublicFiles)
   .then(() => {
-    const url = `http://${hosts[0]}:${port.backend}`;
+    const url = `http://${hosts[0]}:${port.backend}${initialPath}`;
     console.log(`Starting the back-end development server on ${url}...`);
     if (process.env.OPEN_TAB !== 'false') {
       opn(url);

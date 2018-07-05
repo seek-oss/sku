@@ -47,6 +47,7 @@ const builds = buildConfigs
     const locales = buildConfig.locales || [''];
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
+    const initialPath = buildConfig.initialPath || '/';
 
     const port = {
       client:
@@ -90,7 +91,8 @@ const builds = buildConfigs
       jestDecorator,
       hosts,
       port,
-      polyfills
+      polyfills,
+      initialPath
     };
   });
 

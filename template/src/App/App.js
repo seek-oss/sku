@@ -46,22 +46,18 @@ export default class App extends Component {
                 <TextField
                   label="Name"
                   id="name"
-                  inputProps={{
-                    name: 'name',
-                    value: this.state.name,
-                    onChange: this.handleChange
-                  }}
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
                 />
               </div>
               <div className={styles.showMessage}>
                 <Checkbox
                   label="Show greeting"
                   id="showMessage"
-                  inputProps={{
-                    name: 'showMessage',
-                    checked: this.state.showMessage,
-                    onChange: this.handleChange
-                  }}
+                  name="showMessage"
+                  checked={this.state.showMessage}
+                  onChange={this.handleChange}
                 />
               </div>
             </Section>

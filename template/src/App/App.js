@@ -24,7 +24,7 @@ export default class App extends Component {
 
   handleChange = ({ target }) => {
     this.setState({
-      [target.name]: target.type === 'checkbox' ? target.checked : target.value
+      [target.id]: target.type === 'checkbox' ? target.checked : target.value
     });
   };
 
@@ -46,7 +46,6 @@ export default class App extends Component {
                 <TextField
                   label="Name"
                   id="name"
-                  name="name"
                   value={this.state.name}
                   onChange={this.handleChange}
                 />
@@ -55,7 +54,6 @@ export default class App extends Component {
                 <Checkbox
                   label="Show greeting"
                   id="showMessage"
-                  name="showMessage"
                   checked={this.state.showMessage}
                   onChange={this.handleChange}
                 />

@@ -166,6 +166,7 @@ const buildWebpackConfigs = builds.map(
 
     return [
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: clientEntry,
         devtool: isStartScript ? 'inline-source-map' : false,
         output: {
@@ -250,6 +251,7 @@ const buildWebpackConfigs = builds.map(
         )
       },
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: serverEntry,
         watch: isStartScript,
         externals: [

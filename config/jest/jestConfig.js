@@ -1,4 +1,5 @@
 module.exports = {
+  prettierPath: require.resolve('prettier'),
   testPathIgnorePatterns: ['<rootDir>[/\\\\](dist|node_modules)[/\\\\]'],
   moduleNameMapper: {
     '(seek-style-guide/react|.(css|less)$)': require.resolve(

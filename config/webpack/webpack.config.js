@@ -148,6 +148,7 @@ const buildWebpackConfigs = builds.map(
 
     return [
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry,
         output: {
           path: paths.dist,
@@ -218,6 +219,7 @@ const buildWebpackConfigs = builds.map(
         ]
       },
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: {
           render:
             paths.renderEntry || path.join(__dirname, '../server/server.js')

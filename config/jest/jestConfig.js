@@ -11,5 +11,6 @@ module.exports = {
   },
   transform: {
     '^.+\\.js$': require.resolve('./babelTransform.js')
-  }
+  },
+  testURL: 'http://localhost' // @see https://github.com/facebook/jest/issues/6766
 };

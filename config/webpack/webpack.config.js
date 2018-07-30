@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
@@ -130,7 +130,10 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const internalJs = [paths.src, ...paths.compilePackages];
-    const entry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+    const entry = [...resolvedPolyfills, paths.clientEntry];
     const devServerEntries = [
       `${require.resolve(
         'webpack-dev-server/client'
@@ -141,20 +144,21 @@ const buildWebpackConfigs = builds.map(
       entry.unshift(...devServerEntries);
     }
 
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    entry.unshift(...resolvedPolyfills);
-
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
     return [
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry,
         output: {
           path: paths.dist,
           publicPath,
           filename: '[name].js'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
         },
         module: {
           rules: [
@@ -178,27 +182,22 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: makeCssLoaders({ js: true })
-              })
+              use: [MiniCssExtractPlugin.loader].concat(
+                makeCssLoaders({ js: true })
+              )
             },
             {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
                   include: packageName,
-                  use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ packageName })
-                  })
+                  use: [MiniCssExtractPlugin.loader].concat(
+                    makeCssLoaders({ packageName })
+                  )
                 })),
                 {
                   exclude: /node_modules/,
-                  use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders()
-                  })
+                  use: [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
                 }
               ]
             },
@@ -214,20 +213,13 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
-        ].concat(
-          !isProductionBuild
-            ? []
-            : [
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.DefinePlugin({
-                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-                }),
-                new webpack.optimize.ModuleConcatenationPlugin()
-              ]
-        )
+          new MiniCssExtractPlugin({
+            filename: 'style.css'
+          })
+        ]
       },
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: {
           render:
             paths.renderEntry || path.join(__dirname, '../server/server.js')
@@ -238,6 +230,9 @@ const buildWebpackConfigs = builds.map(
           publicPath,
           filename: 'render.js',
           libraryTarget: 'umd'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
         },
         module: {
           rules: [

@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const builds = require('../builds.ssr');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
@@ -136,7 +136,11 @@ const buildWebpackConfigs = builds.map(
 
     const isStartScript = args.script === 'start-ssr';
 
-    const clientEntry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+
+    const clientEntry = [...resolvedPolyfills, paths.clientEntry];
     const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${
@@ -160,19 +164,20 @@ const buildWebpackConfigs = builds.map(
       serverEntry.unshift(...serverDevServerEntries);
     }
 
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    clientEntry.unshift(...resolvedPolyfills);
-
     return [
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: clientEntry,
         devtool: isStartScript ? 'inline-source-map' : false,
         output: {
           path: paths.dist,
           filename: '[name].js',
           publicPath
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
         },
         module: {
           rules: [
@@ -198,10 +203,9 @@ const buildWebpackConfigs = builds.map(
               test: /\.css\.js$/,
               use: isStartScript
                 ? makeCssLoaders({ js: true })
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ js: true })
-                  })
+                : [MiniCssExtractPlugin.loader].concat(
+                    makeCssLoaders({ js: true })
+                  )
             },
             {
               test: /\.less$/,
@@ -210,19 +214,15 @@ const buildWebpackConfigs = builds.map(
                   include: packageName,
                   use: isStartScript
                     ? makeCssLoaders({ packageName })
-                    : ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: makeCssLoaders({ packageName })
-                      })
+                    : [MiniCssExtractPlugin.loader].concat(
+                        makeCssLoaders({ packageName })
+                      )
                 })),
                 {
                   exclude: /node_modules/,
                   use: isStartScript
                     ? makeCssLoaders()
-                    : ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: makeCssLoaders()
-                      })
+                    : [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
                 }
               ]
             },
@@ -236,10 +236,7 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [
-          new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
-        ].concat(
+        plugins: [new webpack.DefinePlugin(envVars)].concat(
           isStartScript
             ? [
                 new webpack.NamedModulesPlugin(),
@@ -247,15 +244,14 @@ const buildWebpackConfigs = builds.map(
                 new webpack.NoEmitOnErrorsPlugin()
               ]
             : [
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.DefinePlugin({
-                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-                }),
-                new webpack.optimize.ModuleConcatenationPlugin()
+                new MiniCssExtractPlugin({
+                  filename: 'style.css'
+                })
               ]
         )
       },
       {
+        mode: isProductionBuild ? 'production' : 'development',
         entry: serverEntry,
         watch: isStartScript,
         externals: [
@@ -277,6 +273,9 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: 'server.js',
           libraryTarget: 'var'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
         },
         module: {
           rules: [
@@ -321,7 +320,10 @@ const buildWebpackConfigs = builds.map(
         ].concat(
           isStartScript
             ? [
-                new StartServerPlugin('server.js'),
+                new StartServerPlugin({
+                  name: 'server.js',
+                  signal: false
+                }),
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()

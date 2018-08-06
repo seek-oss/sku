@@ -1,5 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  setupTestFrameworkScriptFile: path.resolve(__dirname, 'test/utils/jestSetup.js')
+  setupTestFrameworkScriptFile: path.resolve(
+    __dirname,
+    'test/utils/jestSetup.js'
+  ),
+  testURL: 'http://localhost'
 };

@@ -78,7 +78,9 @@ const makeImageLoaders = (options = {}) => {
     {
       loader: require.resolve('url-loader'),
       options: {
-        limit: server ? 999999999 : 10000
+        limit: 10000,
+        fallback: require.resolve('file-loader'),
+        emitFile: !server
       }
     }
   ];

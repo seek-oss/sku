@@ -41,6 +41,8 @@ const makeCssLoaders = (options = {}) => {
   return (cssLoaders = [
     ...(isProductionBuild || server ? [] : ['style-loader']),
     {
+      // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
+      // Only the client build should generate CSS files.
       loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
       options: {
         modules: true,
@@ -78,7 +80,11 @@ const makeImageLoaders = (options = {}) => {
     {
       loader: require.resolve('url-loader'),
       options: {
-        limit: server ? 999999999 : 10000
+        limit: 10000,
+        fallback: require.resolve('file-loader'),
+        // We only want to emit client assets during the client build.
+        // The server build should only emit server-side JS and HTML files.
+        emitFile: !server
       }
     }
   ];

@@ -6,6 +6,9 @@
   "bin": {
     "sku": "./bin/sku.js"
   },
+  "engines": {
+    "node": ">=6.11.5"
+  },
   "scripts": {
     "test": "npm run format-check && OPEN_TAB=false jest test/test-cases/*/*.test.js",
     "test-manual": "node test/manual",

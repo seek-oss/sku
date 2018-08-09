@@ -8,6 +8,7 @@ const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const webpackMode = isProductionBuild ? 'production' : 'development';
 
 const makeJsLoaders = ({ target }) => [
   {
@@ -154,7 +155,7 @@ const buildWebpackConfigs = builds.map(
 
     return [
       {
-        mode: isProductionBuild ? 'production' : 'development',
+        mode: webpackMode,
         entry,
         output: {
           path: paths.dist,
@@ -225,7 +226,7 @@ const buildWebpackConfigs = builds.map(
         ]
       },
       {
-        mode: isProductionBuild ? 'production' : 'development',
+        mode: webpackMode,
         entry: {
           render:
             paths.renderEntry || path.join(__dirname, '../server/server.js')

@@ -7,6 +7,7 @@ const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const webpackMode = isProductionBuild ? 'production' : 'development';
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
@@ -172,7 +173,7 @@ const buildWebpackConfigs = builds.map(
 
     return [
       {
-        mode: isProductionBuild ? 'production' : 'development',
+        mode: webpackMode,
         entry: clientEntry,
         devtool: isStartScript ? 'inline-source-map' : false,
         output: {
@@ -257,7 +258,7 @@ const buildWebpackConfigs = builds.map(
         )
       },
       {
-        mode: isProductionBuild ? 'production' : 'development',
+        mode: webpackMode,
         entry: serverEntry,
         watch: isStartScript,
         externals: [

@@ -161,9 +161,8 @@ const buildWebpackConfigs = builds.map(
       : [...resolvedPolyfills, paths.clientEntry];
 
     // Define serverEntry
-    const renderEntry = paths.renderEntry || [
-      path.join(__dirname, '../server/index.js')
-    ];
+    const renderEntry =
+      paths.renderEntry || path.join(__dirname, '../server/index.js');
 
     const serverDevServerEntries = [
       `${require.resolve('webpack/hot/poll')}?1000`

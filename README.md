@@ -381,6 +381,57 @@ Alternatively, you can start the relevant project directly:
 $ npm start hello
 ```
 
+### Server-Side Rendering Support
+
+The default mode for sku is to statically render projects. However, Server-Side Rendering (SSR) can explicitly be turned on, both in development with hot module reloading for React, and in production.
+
+First, you need to create a `sku.config.js` file, which will contain the following setup at minimum:
+```js
+module.exports = {
+  entry: {
+    client: 'src/client.js',
+    server: 'src/server/server.js'
+  },
+  public: 'src/public',
+  publicPath: '/',
+  target: 'dist',
+  port: { client: 3300, backend: 3301 }
+}
+```
+If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above. 
+
+Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
+```js
+import render from './render.js';
+import middleware from './middleware';
+
+export default {
+  renderCallback: (req, res) => {
+    res.send(render());
+  },
+  middleware: middleware
+};
+```
+
+If you require to consume the webpack public path, this can done as follows:
+```js
+import render from './render.js';
+import middleware from './middleware';
+
+export default ({ publicPath }) => ({
+  renderCallback: (req, res) => {
+    res.send(render());
+  },
+  middleware: middleware
+});
+```
+
+Last but not least, please note that commands for SSR are different to the ones used normally:
+- Use `sku start-ssr` to start your development environment. It uses both `port.client` and `port.backend` to spin up hot module reloading servers.
+- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `port.backend`.  
+- Use `sku test-ssr` to test your application
+
+
 ## Contributing
 
 Refer to [CONTRIBUTING.md](./CONTRIBUTING.md). If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/seek-style-guide/issues/new) and follow the provided RFC template in the [GitHub issue template](.github/ISSUE_TEMPLATE.md).

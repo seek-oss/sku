@@ -385,7 +385,7 @@ $ npm start hello
 
 The default mode for sku is to statically render projects. However, Server-Side Rendering (SSR) can explicitly be turned on, both in development with hot module reloading for React, and in production.
 
-First, you need to create a `sku.config.js` file, which will contain the following setup at minima:
+First, you need to create a `sku.config.js` file, which will contain the following setup at minimum:
 ```js
 module.exports = {
   entry: {
@@ -393,21 +393,23 @@ module.exports = {
     server: 'src/server/server.js'
   },
   public: 'src/public',
-  target: 'dist/',
+  publicPath: '/',
+  target: 'dist',
   port: { client: 3300, backend: 3301 }
 }
 ```
+If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above. 
 
-Then, you need to create your `server` entry. Sku will automatically provide an Express server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
+Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
 ```js
 import render from './render.js';
 import middleware from './middleware';
 
 export default {
-    renderCallback: (req, res) => {
-        res.send(render());
-    },
-    middleware: middleware
+  renderCallback: (req, res) => {
+    res.send(render());
+  },
+  middleware: middleware
 };
 ```
 
@@ -417,10 +419,10 @@ import render from './render.js';
 import middleware from './middleware';
 
 export default ({ publicPath }) => ({
-    renderCallback: (req, res) => {
-        res.send(render());
-    },
-    middleware: middleware
+  renderCallback: (req, res) => {
+    res.send(render());
+  },
+  middleware: middleware
 });
 ```
 

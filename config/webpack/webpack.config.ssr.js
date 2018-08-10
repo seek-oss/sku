@@ -147,7 +147,7 @@ const buildWebpackConfigs = builds.map(
       return require.resolve(polyfill, { paths: [process.cwd()] });
     });
 
-    const clientEntry = [...resolvedPolyfills, paths.clientEntry];
+    // Define clientEntry
     const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${
@@ -155,21 +155,28 @@ const buildWebpackConfigs = builds.map(
       }/`,
       `${require.resolve('webpack/hot/only-dev-server')}`
     ];
-    const serverEntry = paths.renderEntry || [
+
+    const clientEntry = isStartScript
+      ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
+      : [...resolvedPolyfills, paths.clientEntry];
+
+    // Define serverEntry
+    const renderEntry = paths.renderEntry || [
       path.join(__dirname, '../server/index.js')
     ];
+
     const serverDevServerEntries = [
       `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
+    const serverEntry = isStartScript
+      ? [...serverDevServerEntries, renderEntry]
+      : [renderEntry];
+
+    // Define publicPath
     const publicPath = isStartScript
       ? `http://localhost:${port.client}/`
       : paths.publicPath || '';
-
-    if (isStartScript) {
-      clientEntry.unshift(...clientDevServerEntries);
-      serverEntry.unshift(...serverDevServerEntries);
-    }
 
     return [
       {

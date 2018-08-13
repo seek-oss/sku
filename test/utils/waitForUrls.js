@@ -8,7 +8,9 @@ module.exports = async (...urls) => {
     return await waitOnAsync({
       resources: urls.map(url => url.replace(/^http/, 'http-get')),
       headers: { accept: 'text/html, application/javascript' },
-      timeout
+      timeout,
+      log: true,
+      verbose: true
     });
   } catch (error) {
     if (error.message === 'Timeout') {

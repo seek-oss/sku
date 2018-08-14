@@ -9,6 +9,8 @@ module.exports = async (...urls) => {
       resources: urls.map(url => url.replace(/^http/, 'http-get')),
       headers: { accept: 'text/html, application/javascript' },
       timeout,
+      // Log output of wait behaviour timing to allow
+      //  increased debugging when service fails to start
       log: true,
       verbose: true
     });

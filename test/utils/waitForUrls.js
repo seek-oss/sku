@@ -11,8 +11,7 @@ module.exports = async (...urls) => {
       timeout,
       // Log output of wait behaviour timing to allow
       //  increased debugging when service fails to start
-      log: true,
-      verbose: true
+      log: true
     });
   } catch (error) {
     if (error.message === 'Timeout') {

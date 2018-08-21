@@ -3,3 +3,4 @@ node_modules/
 test/test-cases/*/dist
 yarn.lock
 package-lock.json
+.idea

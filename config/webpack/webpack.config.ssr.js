@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const builds = require('../builds.ssr');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
@@ -7,6 +7,7 @@ const args = require('../args');
 const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
+const webpackMode = isProductionBuild ? 'production' : 'development';
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
@@ -142,7 +143,11 @@ const buildWebpackConfigs = builds.map(
 
     const isStartScript = args.script === 'start-ssr';
 
-    const clientEntry = [paths.clientEntry];
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+
+    // Define clientEntry
     const clientDevServerEntries = [
       'react-hot-loader/patch',
       `${require.resolve('webpack-dev-server/client')}?http://localhost:${
@@ -150,35 +155,42 @@ const buildWebpackConfigs = builds.map(
       }/`,
       `${require.resolve('webpack/hot/only-dev-server')}`
     ];
-    const serverEntry = paths.renderEntry || [
-      path.join(__dirname, '../server/index.js')
-    ];
+
+    const clientEntry = isStartScript
+      ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
+      : [...resolvedPolyfills, paths.clientEntry];
+
+    // Define serverEntry
+    const renderEntry =
+      paths.renderEntry || path.join(__dirname, '../server/index.js');
+
     const serverDevServerEntries = [
       `${require.resolve('webpack/hot/poll')}?1000`
     ];
 
+    const serverEntry = isStartScript
+      ? [...serverDevServerEntries, renderEntry]
+      : [renderEntry];
+
+    // Define publicPath
     const publicPath = isStartScript
       ? `http://localhost:${port.client}/`
       : paths.publicPath || '';
 
-    if (isStartScript) {
-      clientEntry.unshift(...clientDevServerEntries);
-      serverEntry.unshift(...serverDevServerEntries);
-    }
-
-    const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
-    });
-    clientEntry.unshift(...resolvedPolyfills);
-
     return [
       {
+        mode: webpackMode,
         entry: clientEntry,
         devtool: isStartScript ? 'inline-source-map' : false,
         output: {
           path: paths.dist,
           filename: '[name].js',
           publicPath
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
         },
         module: {
           rules: [
@@ -204,10 +216,9 @@ const buildWebpackConfigs = builds.map(
               test: /\.css\.js$/,
               use: isStartScript
                 ? makeCssLoaders({ js: true })
-                : ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: makeCssLoaders({ js: true })
-                  })
+                : [MiniCssExtractPlugin.loader].concat(
+                    makeCssLoaders({ js: true })
+                  )
             },
             {
               test: /\.less$/,
@@ -216,19 +227,15 @@ const buildWebpackConfigs = builds.map(
                   include: packageName,
                   use: isStartScript
                     ? makeCssLoaders({ packageName })
-                    : ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: makeCssLoaders({ packageName })
-                      })
+                    : [MiniCssExtractPlugin.loader].concat(
+                        makeCssLoaders({ packageName })
+                      )
                 })),
                 {
                   exclude: /node_modules/,
                   use: isStartScript
                     ? makeCssLoaders()
-                    : ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: makeCssLoaders()
-                      })
+                    : [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
                 }
               ]
             },
@@ -242,10 +249,7 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [
-          new webpack.DefinePlugin(envVars),
-          new ExtractTextPlugin('style.css')
-        ].concat(
+        plugins: [new webpack.DefinePlugin(envVars)].concat(
           isStartScript
             ? [
                 new webpack.NamedModulesPlugin(),
@@ -253,15 +257,14 @@ const buildWebpackConfigs = builds.map(
                 new webpack.NoEmitOnErrorsPlugin()
               ]
             : [
-                new webpack.optimize.UglifyJsPlugin(),
-                new webpack.DefinePlugin({
-                  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-                }),
-                new webpack.optimize.ModuleConcatenationPlugin()
+                new MiniCssExtractPlugin({
+                  filename: 'style.css'
+                })
               ]
         )
       },
       {
+        mode: webpackMode,
         entry: serverEntry,
         watch: isStartScript,
         externals: [
@@ -283,6 +286,9 @@ const buildWebpackConfigs = builds.map(
           path: paths.dist,
           filename: 'server.js',
           libraryTarget: 'var'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
         },
         module: {
           rules: [
@@ -327,7 +333,10 @@ const buildWebpackConfigs = builds.map(
         ].concat(
           isStartScript
             ? [
-                new StartServerPlugin('server.js'),
+                new StartServerPlugin({
+                  name: 'server.js',
+                  signal: false
+                }),
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()

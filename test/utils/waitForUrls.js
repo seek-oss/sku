@@ -2,7 +2,7 @@ const { promisify } = require('es6-promisify');
 const waitOnAsync = promisify(require('wait-on'));
 
 module.exports = async (...urls) => {
-  const timeout = 60000;
+  const timeout = 80000;
 
   try {
     return await waitOnAsync({

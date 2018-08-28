@@ -47,7 +47,14 @@ module.exports = ({ target }) => {
         plugins: [require.resolve('babel-plugin-flow-react-proptypes')]
       },
       production: {
-        presets: [require.resolve('babel-preset-react-optimize')]
+        plugins: [
+          require.resolve('babel-plugin-transform-react-inline-elements'),
+          require.resolve('babel-plugin-transform-react-remove-prop-types'),
+          require.resolve(
+            'babel-plugin-transform-react-pure-class-to-function'
+          ),
+          require.resolve('babel-plugin-transform-react-constant-elements')
+        ]
       }
     }
   };

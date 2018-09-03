@@ -100,6 +100,10 @@ Adding the following to your package.json file will enable the [Atom ESLint plug
 
 Similarly, running `sku format` will reformat the JavaScript code in `src` using Prettier.
 
+Versions of our formatting tool `prettier` are locked to specific versions to ensure reliable `sku format` and `sku lint` commands.
+
+Changes to formatting are considered non-breaking. Please ensure you run `sku format` after upgrading `sku`.
+
 ### Static Pre-rendering (via [static-site-generator-webpack-plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin))
 
 Generate static HTML files via a webpack-compiled render function that has access to your application code. For example, when building a React application, you can pre-render to static HTML with React's [renderToString](https://facebook.github.io/react/docs/react-dom-server.html#rendertostring) function.
@@ -398,7 +402,7 @@ module.exports = {
   port: { client: 3300, backend: 3301 }
 }
 ```
-If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above. 
+If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above.
 
 Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
 ```js

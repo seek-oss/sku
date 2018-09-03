@@ -53,7 +53,9 @@ const builds = buildConfigs
       client:
         buildConfig.port && buildConfig.port.client
           ? buildConfig.port.client
-          : typeof buildConfig.port === 'number' ? buildConfig.port : 8080,
+          : typeof buildConfig.port === 'number'
+            ? buildConfig.port
+            : 8080,
       backend:
         buildConfig.port && buildConfig.port.backend
           ? buildConfig.port.backend

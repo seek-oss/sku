@@ -1,6 +1,8 @@
 const fileName = 'message';
 
-export default ({ publicPath }) => import(`./message/${fileName}`).then(({ message }) => `
+export default ({ publicPath }) =>
+  import(`./message/${fileName}`).then(
+    ({ message }) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -13,4 +15,5 @@ export default ({ publicPath }) => import(`./message/${fileName}`).then(({ messa
       <script type="text/javascript" src="${publicPath}main.js"></script>
     </body>
   </html>
-`);
+`
+  );

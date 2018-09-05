@@ -282,6 +282,20 @@ module.exports = {
 }
 ```
 
+### Source Paths
+
+By default, sku expects your source code to be in a directory named `src` in the root of your project. If your source code needs to be arranged differently, you can provide a `srcPaths` array:
+
+```js
+module.exports = {
+  ...,
+  srcPaths: [
+    'src',
+    'docs/src'
+  ]
+}
+```
+
 ### Compile Packages
 
 Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.
@@ -432,7 +446,7 @@ export default ({ publicPath }) => ({
 
 Last but not least, please note that commands for SSR are different to the ones used normally:
 - Use `sku start-ssr` to start your development environment. It uses both `port.client` and `port.backend` to spin up hot module reloading servers.
-- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `port.backend`.  
+- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `port.backend`.
 - Use `sku test-ssr` to test your application
 
 

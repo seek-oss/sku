@@ -1,8 +1,8 @@
-const fileName = 'message';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import App from '../another-folder/App';
 
-export default ({ publicPath }) =>
-  import(`./message/${fileName}`).then(
-    ({ message }) => `
+export default ({ publicPath }) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -11,9 +11,8 @@ export default ({ publicPath }) =>
       <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-      <div id="app" data-message="${message}"></div>
+      <div id="app">${renderToString(<App />)}</div>
       <script type="text/javascript" src="${publicPath}main.js"></script>
     </body>
   </html>
-`
-  );
+`;

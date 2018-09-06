@@ -1,7 +1,8 @@
 {
   "name": "sku",
   "version": "0.0.0-development",
-  "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
+  "description":
+    "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
     "sku": "./bin/sku.js"
@@ -10,14 +11,18 @@
     "node": ">=6.11.5"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest test/test-cases/*/*.test.js --runInBand",
+    "test":
+      "npm run format-check && OPEN_TAB=false jest **/*.test.js test/test-cases/*/*.test.js --runInBand",
     "test-manual": "node test/manual",
-    "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
-    "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
+    "format":
+      "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
+    "format-check":
+      "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
     "precommit": "lint-staged",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit --extends seek",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
     "{bin,config,scripts}/**/*.js": [
@@ -34,10 +39,7 @@
     "type": "git",
     "url": "https://github.com/seek-oss/sku.git"
   },
-  "keywords": [
-    "toolkit",
-    "webpack"
-  ],
+  "keywords": ["toolkit", "webpack"],
   "author": "SEEK",
   "license": "MIT",
   "bugs": {

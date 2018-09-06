@@ -9,7 +9,7 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 const prettierDefaultPath = require('../config/prettier/defaultPath');
 const eslintDefaultPath = require('../config/eslint/defaultPath');
 
-const args = process.argv.slice(3);
+const args = require('../config/args').argv;
 
 console.log(chalk.cyan('Linting'));
 

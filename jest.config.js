@@ -5,5 +5,6 @@ module.exports = {
     __dirname,
     'test/utils/jestSetup.js'
   ),
-  testURL: 'http://localhost'
+  testURL: 'http://localhost',
+  testMatch: ['**/*.test.js', 'test/test-cases/*/*.test.js']
 };

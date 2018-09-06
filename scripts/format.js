@@ -5,7 +5,7 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 
 const defaultPath = require('../config/prettier/defaultPath');
 
-const args = process.argv.slice(2);
+const args = process.argv.slice(3);
 
 console.log(chalk.cyan('Formatting source code with Prettier'));
 

@@ -9,7 +9,9 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 const prettierDefaultPath = require('../config/prettier/defaultPath');
 const eslintDefaultPath = require('../config/eslint/defaultPath');
 
-const args = process.argv.slice(2);
+const args = require('../config/args').argv;
+
+console.log(chalk.cyan('Linting'));
 
 // Decorate eslint config is not supported for monorepo
 const eslintConfig =
@@ -25,9 +27,9 @@ const cli = new EslintCLI({
 const pathsToCheck = args.length === 0 ? [eslintDefaultPath] : args;
 
 const formatter = cli.getFormatter();
+console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));
 const report = cli.executeOnFiles(pathsToCheck);
 
-console.log(chalk.cyan('Linting'));
 console.log(formatter(report.results));
 
 if (report.errorCount > 0) {

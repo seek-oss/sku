@@ -32,10 +32,24 @@ describe('hello-world', () => {
       await rimrafAsync(`${__dirname}/dist/`);
       await runSkuScriptInDir('build', __dirname);
     });
-  
+
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(`${__dirname}/dist`);
       expect(files).toMatchSnapshot();
+    });
+  });
+
+  describe('format', () => {
+    it('should format successfully', async () => {
+      const { childProcess } = await runSkuScriptInDir('format', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
+    });
+  });
+
+  describe('lint', () => {
+    it('should lint successfully', async () => {
+      const { childProcess } = await runSkuScriptInDir('lint', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
     });
   });
 });

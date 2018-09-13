@@ -6,5 +6,6 @@ module.exports = {
     'test/utils/jestSetup.js'
   ),
   testURL: 'http://localhost',
-  testMatch: ['**/*.test.js', 'test/test-cases/*/*.test.js']
+  testMatch: ['**/*.test.js'],
+  testPathIgnorePatterns: ['test\/.*\/src']
 };

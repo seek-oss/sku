@@ -1,6 +1,6 @@
 const jest = require('jest');
 const baseJestConfig = require('../config/jest/jestConfig');
-const argv = process.argv.slice(2);
+const { argv } = require('../config/args');
 const builds = require('../config/builds.ssr');
 
 //Decorate jest config is not supported for monorepo

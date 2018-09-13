@@ -37,4 +37,7 @@ const copyPublicFiles = () => {
 Promise.each(webpackConfig, runWebpack)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'))
-  .catch(() => process.exit(1));
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });

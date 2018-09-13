@@ -41,15 +41,15 @@ describe('hello-world', () => {
 
   describe('format', () => {
     it('should format successfully', async () => {
-      const { childProcess: { exitCode } } = await runSkuScriptInDir('format', __dirname);
-      expect(exitCode).toEqual(0);
+      const { childProcess } = await runSkuScriptInDir('format', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async () => {
-      const { childProcess: { exitCode } } = await runSkuScriptInDir('lint', __dirname);
-      expect(exitCode).toEqual(0);
+      const { childProcess } = await runSkuScriptInDir('lint', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
     });
   });
 });

@@ -156,6 +156,7 @@ const buildWebpackConfigs = builds.map(
 
     return [
       {
+        name: 'client',
         mode: webpackMode,
         entry,
         output: {
@@ -227,6 +228,7 @@ const buildWebpackConfigs = builds.map(
         ]
       },
       {
+        name: 'render',
         mode: webpackMode,
         entry: {
           render:

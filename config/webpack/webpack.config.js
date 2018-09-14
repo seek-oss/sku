@@ -151,7 +151,7 @@ const buildWebpackConfigs = builds.map(
         ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
         : [...resolvedPolyfills, paths.clientEntry];
 
-    const internalJs = [paths.src, ...paths.compilePackages];
+    const internalJs = [...paths.src, ...paths.compilePackages];
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
     return [

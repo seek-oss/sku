@@ -60,7 +60,9 @@ const builds = buildConfigs
       buildConfig.dangerouslySetESLintConfig || defaultDecorator;
 
     const paths = {
-      src: path.join(cwd, 'src'),
+      src: (buildConfig.srcPaths || ['src']).map(srcPath =>
+        path.join(cwd, srcPath)
+      ),
       compilePackages: [
         path.join(cwd, 'node_modules/seek-style-guide'),
         ...compilePackages.map(package =>

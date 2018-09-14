@@ -139,7 +139,7 @@ const buildWebpackConfigs = builds.map(
       .mapKeys((value, key) => `process.env.${key}`)
       .value();
 
-    const internalJs = [paths.src, ...paths.compilePackages];
+    const internalJs = [...paths.src, ...paths.compilePackages];
 
     const isStartScript = args.script === 'start-ssr';
 

@@ -24,7 +24,7 @@ const cli = new EslintCLI({
   useEslintrc: false
 });
 
-const pathsToCheck = args.length === 0 ? [eslintDefaultPath] : args;
+const pathsToCheck = args.length === 0 ? builds[0].paths.src : args;
 
 const formatter = cli.getFormatter();
 console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));

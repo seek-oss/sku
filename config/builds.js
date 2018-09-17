@@ -62,9 +62,13 @@ const builds = buildConfigs
       buildConfig.dangerouslySetBabelConfig || defaultDecorator;
 
     const paths = {
-      src: path.join(cwd, 'src'),
+      src: (buildConfig.srcPaths || ['src']).map(srcPath =>
+        path.join(cwd, srcPath)
+      ),
       compilePackages: [
-        path.join(cwd, 'node_modules/seek-style-guide'),
+        path.dirname(
+          require.resolve('seek-style-guide/package.json', { paths: [cwd] })
+        ),
         ...compilePackages.map(package =>
           path.join(cwd, 'node_modules', package)
         )

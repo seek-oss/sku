@@ -10,5 +10,5 @@ module.exports = async (script, cwd) => {
   }
 
   // Otherwise, resolve the promise when the script finishes
-  return await exec(`${skuBin} ${script}`, { stdio: 'inherit', cwd });
+  return await exec(`${skuBin} ${script}`, { stdio: 'inherit', cwd, env: { ...process.env, CI: 'true' } });
 };

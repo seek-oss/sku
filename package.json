@@ -99,6 +99,7 @@
     "style-loader": "^0.21.0",
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
+    "traverse": "^0.6.6",
     "url-loader": "^1.0.1",
     "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.16.4",
@@ -120,6 +121,8 @@
     "node-fetch": "^2.1.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-helmet": "^5.2.0",
+    "seek-style-guide": "37.11.1",
     "semantic-release": "^8.0.3",
     "wait-on": "^2.1.0"
   }

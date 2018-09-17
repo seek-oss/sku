@@ -6,7 +6,7 @@ const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 
-describe('react-css-modules', () => {
+describe('seek-style-guide', () => {
   beforeAll(async () => {
     await rimrafAsync(distDir);
     await runSkuScriptInDir('build', appDir);
@@ -17,7 +17,7 @@ describe('react-css-modules', () => {
     expect(files).toMatchSnapshot();
   });
 
-  it('should handle Less and css.js in tests', async () => {
+  it('should handle seek-style-guide in tests', async () => {
     const { childProcess } = await runSkuScriptInDir('test', appDir);
     expect(childProcess.exitCode).toEqual(0);
   });

@@ -162,6 +162,7 @@ const buildWebpackConfigs = builds.map(build => {
   const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
   const clientConfig = {
+    name: 'client',
     mode: webpackMode,
     entry,
     output: {

@@ -197,6 +197,11 @@ const buildWebpackConfigs = builds.map(
               )
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({

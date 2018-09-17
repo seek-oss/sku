@@ -1,7 +1,11 @@
 const builds = require('../builds');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 
-const babelDecorator = builds[0].babelDecorator || (config => config);
+// Decorate Babel config is not supported for monorepo
+const babelDecorator =
+  builds.length === 1 && builds[0].babelDecorator
+    ? builds[0].babelDecorator
+    : config => config;
 
 const browserEnvOptions = {
   modules: false,

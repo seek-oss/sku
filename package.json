@@ -121,6 +121,8 @@
     "node-fetch": "^2.1.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-helmet": "^5.2.0",
+    "seek-style-guide": "37.11.1",
     "semantic-release": "^8.0.3",
     "wait-on": "^2.1.0"
   }

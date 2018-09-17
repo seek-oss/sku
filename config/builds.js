@@ -64,7 +64,9 @@ const builds = buildConfigs
         path.join(cwd, srcPath)
       ),
       compilePackages: [
-        path.join(cwd, 'node_modules/seek-style-guide'),
+        path.dirname(
+          require.resolve('seek-style-guide/package.json', { paths: [cwd] })
+        ),
         ...compilePackages.map(package =>
           path.join(cwd, 'node_modules', package)
         )

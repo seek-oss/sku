@@ -4,5 +4,5 @@ module.exports = ({ name }) =>
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
     openAnalyzer: false,
-    reportFilename: `report/${name}.html`
+    reportFilename: `../report/${name}.html`
   });

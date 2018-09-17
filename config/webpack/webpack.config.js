@@ -10,10 +10,10 @@ const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const webpackMode = isProductionBuild ? 'production' : 'development';
 
-const makeJsLoaders = ({ babelDecorator }, { target }) => [
+const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: babelDecorator(require('../babel/babelConfig')({ target }))
+    options: require('../babel/babelConfig')({ target })
   }
 ];
 
@@ -23,7 +23,7 @@ const packageNameToClassPrefix = packageName =>
     .toUpperCase()
     .replace(/[\/\-]/g, '_')}__`;
 
-const makeCssLoaders = (build, options = {}) => {
+const makeCssLoaders = (options = {}) => {
   const { server = false, packageName = '', js = false } = options;
 
   const debugIdent = isProductionBuild
@@ -34,7 +34,7 @@ const makeCssLoaders = (build, options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('css-in-js-loader') },
-    ...makeJsLoaders(build, { target: 'node' })
+    ...makeJsLoaders({ target: 'node' })
   ];
 
   return (cssLoaders = [
@@ -179,7 +179,7 @@ const buildWebpackConfigs = builds.map(build => {
         {
           test: /(?!\.css)\.js$/,
           include: internalJs,
-          use: makeJsLoaders(build, { target: 'browser' })
+          use: makeJsLoaders({ target: 'browser' })
         },
         {
           test: /(?!\.css)\.js$/,
@@ -253,22 +253,22 @@ const buildWebpackConfigs = builds.map(build => {
         {
           test: /(?!\.css)\.js$/,
           include: internalJs,
-          use: makeJsLoaders(build, { target: 'node' })
+          use: makeJsLoaders({ target: 'node' })
         },
         {
           test: /\.css\.js$/,
-          use: makeCssLoaders(build, { server: true, js: true })
+          use: makeCssLoaders({ server: true, js: true })
         },
         {
           test: /\.less$/,
           oneOf: [
             ...paths.compilePackages.map(packageName => ({
               include: packageName,
-              use: makeCssLoaders(build, { server: true, packageName })
+              use: makeCssLoaders({ server: true, packageName })
             })),
             {
               exclude: /node_modules/,
-              use: makeCssLoaders(build, { server: true })
+              use: makeCssLoaders({ server: true })
             }
           ]
         },

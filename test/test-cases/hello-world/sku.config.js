@@ -1,6 +1,7 @@
 module.exports = {
   entry: {
-    client: 'src/client.js'
+    client: 'src/client.js',
+    render: 'src/render.js'
   },
   target: 'dist',
   publicPath: '/',

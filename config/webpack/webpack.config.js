@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
@@ -235,6 +236,8 @@ const buildWebpackConfigs = builds.map(
             paths.renderEntry || path.join(__dirname, '../server/server.js')
         },
         target: 'node',
+        // Don't bundle or transpile anything in node_modules
+        externals: [nodeExternals()],
         output: {
           path: paths.dist,
           publicPath,

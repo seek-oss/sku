@@ -11,6 +11,7 @@ const webpackMode = isProductionBuild ? 'production' : 'development';
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 
 const makeJsLoaders = ({ target }) => [
   {
@@ -258,6 +259,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.NoEmitOnErrorsPlugin()
               ]
             : [
+                bundleAnalyzerPlugin({ name: 'client' }),
                 new MiniCssExtractPlugin({
                   filename: 'style.css'
                 })
@@ -343,7 +345,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : []
+            : [bundleAnalyzerPlugin({ name: 'server' })]
         )
       }
     ].map(webpackDecorator);

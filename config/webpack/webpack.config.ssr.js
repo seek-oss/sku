@@ -222,6 +222,11 @@ const buildWebpackConfigs = builds.map(
                   )
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
@@ -304,6 +309,11 @@ const buildWebpackConfigs = builds.map(
               use: makeCssLoaders({ server: true, js: true })
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
@@ -316,7 +326,6 @@ const buildWebpackConfigs = builds.map(
                 }
               ]
             },
-
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })

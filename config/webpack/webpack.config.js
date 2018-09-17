@@ -236,9 +236,11 @@ const buildWebpackConfigs = builds.map(
         },
         target: 'node',
         // Don't bundle or transpile non-compiled packages
-        externals: [nodeExternals({
-          whitelist: paths.compilePackages
-        })],
+        externals: [
+          nodeExternals({
+            whitelist: paths.compilePackages
+          })
+        ],
         output: {
           path: paths.dist,
           publicPath,

@@ -17,8 +17,15 @@ const runWebpack = config => {
       })
     );
 
+    const info = stats.toJson();
+
     if (stats.hasErrors()) {
+      info.errors.forEach(console.error);
       throw new Error();
+    }
+
+    if (stats.hasWarnings()) {
+      info.warnings.forEach(console.warn);
     }
   });
 };

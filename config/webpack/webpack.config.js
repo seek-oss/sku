@@ -10,6 +10,7 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const webpackMode = isProductionBuild ? 'production' : 'development';
+const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 
 const makeJsLoaders = ({ target }) => [
   {
@@ -197,6 +198,11 @@ const buildWebpackConfigs = builds.map(
               )
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
@@ -223,6 +229,7 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
+          bundleAnalyzerPlugin({ name: 'client' }),
           new MiniCssExtractPlugin({
             filename: 'style.css'
           })
@@ -287,6 +294,7 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
+          bundleAnalyzerPlugin({ name: 'render' }),
           ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
             locale =>
               new StaticSiteGeneratorPlugin({

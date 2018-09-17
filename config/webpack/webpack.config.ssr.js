@@ -11,6 +11,7 @@ const webpackMode = isProductionBuild ? 'production' : 'development';
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 
 const makeJsLoaders = ({ target }) => [
   {
@@ -222,6 +223,11 @@ const buildWebpackConfigs = builds.map(
                   )
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
@@ -258,6 +264,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.NoEmitOnErrorsPlugin()
               ]
             : [
+                bundleAnalyzerPlugin({ name: 'client' }),
                 new MiniCssExtractPlugin({
                   filename: 'style.css'
                 })
@@ -304,6 +311,11 @@ const buildWebpackConfigs = builds.map(
               use: makeCssLoaders({ server: true, js: true })
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
@@ -316,7 +328,6 @@ const buildWebpackConfigs = builds.map(
                 }
               ]
             },
-
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               use: makeImageLoaders({ server: true })
@@ -343,7 +354,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : []
+            : [bundleAnalyzerPlugin({ name: 'server' })]
         )
       }
     ].map(webpackDecorator);

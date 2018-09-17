@@ -232,8 +232,7 @@ const buildWebpackConfigs = builds.map(
         name: 'render',
         mode: webpackMode,
         entry: {
-          render:
-            paths.renderEntry || path.join(__dirname, '../server/server.js')
+          render: paths.renderEntry
         },
         target: 'node',
         // Don't bundle or transpile anything in node_modules

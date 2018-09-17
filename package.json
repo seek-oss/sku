@@ -10,7 +10,7 @@
     "node": ">=6.11.5"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand",
+    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",

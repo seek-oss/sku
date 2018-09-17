@@ -237,7 +237,7 @@ const buildWebpackConfigs = builds.map(
       },
       {
         name: 'render',
-        mode: webpackMode,
+        mode: 'development',
         entry: {
           render: paths.renderEntry
         },
@@ -253,9 +253,6 @@ const buildWebpackConfigs = builds.map(
           publicPath,
           filename: 'render.js',
           libraryTarget: 'umd'
-        },
-        optimization: {
-          nodeEnv: process.env.NODE_ENV
         },
         module: {
           rules: [

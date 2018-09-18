@@ -71,12 +71,24 @@ const builds = buildConfigs
 
     const paths = {
       src: path.join(cwd, 'src'),
-      compilePackages: [
-        path.join(cwd, 'node_modules/seek-style-guide'),
-        ...compilePackages.map(package =>
-          path.join(cwd, 'node_modules', package)
-        )
-      ],
+      compilePackages: ['seek-style-guide', ...compilePackages].map(
+        packageName => {
+          try {
+            // First, try to leverage Node's require algorithm to find
+            // the package's root directory, from the working directory.
+            return path.dirname(
+              require.resolve(`${packageName}/package.json`, { paths: [cwd] })
+            );
+          } catch (err) {
+            // If a `package.json` file can't be resolved, maintain
+            // legacy behaviour by providing a naive directory path.
+            // This ensures the build still passes when a supported
+            // package is missing, e.g. your project might not be
+            // using 'seek-style-guide'.
+            return path.join(cwd, 'node_modules', packageName);
+          }
+        }
+      ),
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       serverEntry: path.join(cwd, entry.server || 'src/server.js'),
       public: path.join(cwd, buildConfig.public || 'public'),

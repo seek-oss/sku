@@ -263,6 +263,11 @@ const buildWebpackConfigs = builds.map(
               use: makeCssLoaders({ server: true, js: true })
             },
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({

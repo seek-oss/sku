@@ -1,4 +1,5 @@
 node_modules/
+report/
 *.log
 dist/
 yarn.lock

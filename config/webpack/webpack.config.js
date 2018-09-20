@@ -9,6 +9,7 @@ const path = require('path');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const isProductionBuild = process.env.NODE_ENV === 'production';
 const webpackMode = isProductionBuild ? 'production' : 'development';
+const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 
 const makeJsLoaders = ({ target }) => [
   {
@@ -109,199 +110,206 @@ const svgLoaders = [
   }
 ];
 
-const buildWebpackConfigs = builds.map(build => {
-  const {
-    name,
-    paths,
-    env,
-    locales,
-    webpackDecorator,
-    port,
-    polyfills
-  } = build;
-
-  const envVars = lodash
-    .chain(env)
-    .mapValues((value, key) => {
-      if (typeof value !== 'object') {
-        return JSON.stringify(value);
-      }
-
-      const valueForEnv = value[args.env];
-
-      if (typeof valueForEnv === 'undefined') {
-        console.log(
-          `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${
-            args.env
-          }" environment`
-        );
-        process.exit(1);
-      }
-
-      return JSON.stringify(valueForEnv);
-    })
-    .set('SKU_ENV', JSON.stringify(args.env))
-    .set('PORT', JSON.stringify(port))
-    .mapKeys((value, key) => `process.env.${key}`)
-    .value();
-
-  const resolvedPolyfills = polyfills.map(polyfill => {
-    return require.resolve(polyfill, { paths: [process.cwd()] });
-  });
-
-  const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`
-  ];
-
-  const entry =
-    args.script === 'start'
-      ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
-      : [...resolvedPolyfills, paths.clientEntry];
-
-  const internalJs = [paths.src, ...paths.compilePackages];
-  const publicPath = args.script === 'start' ? '/' : paths.publicPath;
-
-  const clientConfig = {
-    name: 'client',
-    mode: webpackMode,
-    entry,
-    output: {
-      path: paths.dist,
-      publicPath,
-      filename: '[name].js'
-    },
-    optimization: {
-      nodeEnv: process.env.NODE_ENV,
-      minimize: isProductionBuild,
-      concatenateModules: isProductionBuild
-    },
-    module: {
-      rules: [
-        {
-          test: /(?!\.css)\.js$/,
-          include: internalJs,
-          use: makeJsLoaders({ target: 'browser' })
-        },
-        {
-          test: /(?!\.css)\.js$/,
-          exclude: internalJs,
-          use: [
-            {
-              loader: require.resolve('babel-loader'),
-              options: {
-                babelrc: false,
-                presets: [require.resolve('babel-preset-env')]
-              }
-            }
-          ]
-        },
-        {
-          test: /\.css\.js$/,
-          use: [MiniCssExtractPlugin.loader].concat(
-            makeCssLoaders(build, { js: true })
-          )
-        },
-        {
-          test: /\.less$/,
-          oneOf: [
-            ...paths.compilePackages.map(packageName => ({
-              include: packageName,
-              use: [MiniCssExtractPlugin.loader].concat(
-                makeCssLoaders(build, { packageName })
-              )
-            })),
-            {
-              exclude: /node_modules/,
-              use: [MiniCssExtractPlugin.loader].concat(makeCssLoaders(build))
-            }
-          ]
-        },
-        {
-          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          use: makeImageLoaders()
-        },
-        {
-          test: /\.svg$/,
-          use: svgLoaders
+const buildWebpackConfigs = builds.map(
+  ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
+    const envVars = lodash
+      .chain(env)
+      .mapValues((value, key) => {
+        if (typeof value !== 'object') {
+          return JSON.stringify(value);
         }
-      ]
-    },
-    plugins: [
-      new webpack.DefinePlugin(envVars),
-      new MiniCssExtractPlugin({
-        filename: 'style.css'
+
+        const valueForEnv = value[args.env];
+
+        if (typeof valueForEnv === 'undefined') {
+          console.log(
+            `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${
+              args.env
+            }" environment`
+          );
+          process.exit(1);
+        }
+
+        return JSON.stringify(valueForEnv);
       })
-    ]
-  };
+      .set('SKU_ENV', JSON.stringify(args.env))
+      .set('PORT', JSON.stringify(port))
+      .mapKeys((value, key) => `process.env.${key}`)
+      .value();
 
-  const preRenderConfig = {
-    mode: webpackMode,
-    entry: {
-      render: paths.renderEntry || path.join(__dirname, '../server/server.js')
-    },
-    target: 'node',
-    output: {
-      path: paths.dist,
-      publicPath,
-      filename: 'render.js',
-      libraryTarget: 'umd'
-    },
-    optimization: {
-      nodeEnv: process.env.NODE_ENV
-    },
-    module: {
-      rules: [
-        {
-          test: /(?!\.css)\.js$/,
-          include: internalJs,
-          use: makeJsLoaders({ target: 'node' })
+    const resolvedPolyfills = polyfills.map(polyfill => {
+      return require.resolve(polyfill, { paths: [process.cwd()] });
+    });
+
+    const devServerEntries = [
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?http://localhost:${port}/`
+    ];
+
+    const entry =
+      args.script === 'start'
+        ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
+        : [...resolvedPolyfills, paths.clientEntry];
+
+    const internalJs = [...paths.src, ...paths.compilePackages];
+    const publicPath = args.script === 'start' ? '/' : paths.publicPath;
+
+    return [
+      {
+        name: 'client',
+        mode: webpackMode,
+        entry,
+        output: {
+          path: paths.dist,
+          publicPath,
+          filename: '[name].js'
         },
-        {
-          test: /\.css\.js$/,
-          use: makeCssLoaders({ server: true, js: true })
+        optimization: {
+          nodeEnv: process.env.NODE_ENV,
+          minimize: isProductionBuild,
+          concatenateModules: isProductionBuild
         },
-        {
-          test: /\.less$/,
-          oneOf: [
-            ...paths.compilePackages.map(packageName => ({
-              include: packageName,
-              use: makeCssLoaders({ server: true, packageName })
-            })),
+        module: {
+          rules: [
             {
-              exclude: /node_modules/,
-              use: makeCssLoaders({ server: true })
+              test: /(?!\.css)\.js$/,
+              include: internalJs,
+              use: makeJsLoaders({ target: 'browser' })
+            },
+            {
+              test: /(?!\.css)\.js$/,
+              exclude: internalJs,
+              use: [
+                {
+                  loader: require.resolve('babel-loader'),
+                  options: {
+                    babelrc: false,
+                    presets: [require.resolve('babel-preset-env')]
+                  }
+                }
+              ]
+            },
+            {
+              test: /\.css\.js$/,
+              use: [MiniCssExtractPlugin.loader].concat(
+                makeCssLoaders({ js: true })
+              )
+            },
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
+              test: /\.less$/,
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: [MiniCssExtractPlugin.loader].concat(
+                    makeCssLoaders({ packageName })
+                  )
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
+                }
+              ]
+            },
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: makeImageLoaders()
+            },
+            {
+              test: /\.svg$/,
+              use: svgLoaders
             }
           ]
         },
-
-        {
-          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          use: makeImageLoaders({ server: true })
-        },
-        {
-          test: /\.svg$/,
-          use: svgLoaders
-        }
-      ]
-    },
-    plugins: [
-      new webpack.DefinePlugin(envVars),
-      ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
-        locale =>
-          new StaticSiteGeneratorPlugin({
-            locals: {
-              publicPath,
-              locale
-            },
-            paths: `index${
-              isProductionBuild && locale ? `-${locale}` : ''
-            }.html`
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          bundleAnalyzerPlugin({ name: 'client' }),
+          new MiniCssExtractPlugin({
+            filename: 'style.css'
           })
-      )
-    ]
-  };
+        ]
+      },
+      {
+        name: 'render',
+        mode: webpackMode,
+        entry: {
+          render:
+            paths.renderEntry || path.join(__dirname, '../server/server.js')
+        },
+        target: 'node',
+        output: {
+          path: paths.dist,
+          publicPath,
+          filename: 'render.js',
+          libraryTarget: 'umd'
+        },
+        optimization: {
+          nodeEnv: process.env.NODE_ENV
+        },
+        module: {
+          rules: [
+            {
+              test: /(?!\.css)\.js$/,
+              include: internalJs,
+              use: makeJsLoaders({ target: 'node' })
+            },
+            {
+              test: /\.css\.js$/,
+              use: makeCssLoaders({ server: true, js: true })
+            },
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
+              test: /\.less$/,
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: packageName,
+                  use: makeCssLoaders({ server: true, packageName })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: makeCssLoaders({ server: true })
+                }
+              ]
+            },
 
-  return [clientConfig, preRenderConfig].map(webpackDecorator);
-});
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: makeImageLoaders({ server: true })
+            },
+            {
+              test: /\.svg$/,
+              use: svgLoaders
+            }
+          ]
+        },
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          bundleAnalyzerPlugin({ name: 'render' }),
+          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
+            locale =>
+              new StaticSiteGeneratorPlugin({
+                locals: {
+                  publicPath,
+                  locale
+                },
+                paths: `index${
+                  isProductionBuild && locale ? `-${locale}` : ''
+                }.html`
+              })
+          )
+        ]
+      }
+    ].map(webpackDecorator);
+  }
+);
 
 module.exports = flatten(buildWebpackConfigs);

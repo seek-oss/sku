@@ -3,10 +3,15 @@ const supportedBrowsers = require('../browsers/supportedBrowsers');
 
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
+/**
+ * Resolve a package name to an absolute path.
+ *
+ * e.g. my-package -> /Users/me/code/my-project/node_modules/my-package
+ */
 const resolvePackage = packageName => {
   try {
     // First, try to leverage Node's require algorithm to find
-    // the package relative to the current directory.
+    // the package.
     // We add `/package.json` to prevent `require.resolve` treating
     // the directory as a package and returning the `main` file.
     // We then use path.dirname to remove `/package.json` from the result.

@@ -3,16 +3,26 @@ const supportedBrowsers = require('../browsers/supportedBrowsers');
 
 const isProductionBuild = process.env.NODE_ENV === 'production';
 
-/**
- * Get the absolute path of a package.
- *
- * 1. Add `/package.json` to the package name so prevent require.resolve using the `main`
- *    field and returning a path deep inside the package.
- * 2. Use require.resolve to get the nearest node_modules containing the package.
- * 3. path.dirname to remove /package.json.
- */
-const resolvePackage = packageName =>
-  path.dirname(require.resolve(`${packageName}/package.json`));
+const resolvePackage = packageName => {
+  try {
+    // First, try to leverage Node's require algorithm to find
+    // the package relative to the current directory.
+    // We add `/package.json` to prevent `require.resolve` treating
+    // the directory as a package and returning the `main` file.
+    // We then use path.dirname to remove `/package.json` from the result.
+    // Clever, right?
+    return path.dirname(
+      require.resolve(`${packageName}/package.json`, { paths: [cwd] })
+    );
+  } catch (err) {
+    // If a `package.json` file can't be resolved, maintain
+    // legacy behaviour by providing a naive directory path.
+    // This ensures the build still passes when a supported
+    // package is missing, e.g. your project might not be
+    // using 'seek-style-guide'.
+    return path.join(cwd, 'node_modules', packageName);
+  }
+};
 
 /**
  * e.g.

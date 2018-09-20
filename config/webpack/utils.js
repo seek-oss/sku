@@ -11,9 +11,7 @@ const resolvePackage = packageName => {
     // the directory as a package and returning the `main` file.
     // We then use path.dirname to remove `/package.json` from the result.
     // Clever, right?
-    return path.dirname(
-      require.resolve(`${packageName}/package.json`, { paths: [cwd] })
-    );
+    return path.dirname(require.resolve(`${packageName}/package.json`));
   } catch (err) {
     // If a `package.json` file can't be resolved, maintain
     // legacy behaviour by providing a naive directory path.

@@ -20,7 +20,7 @@ const resolvePackage = packageName => {
     // This ensures the build still passes when a supported
     // package is missing, e.g. your project might not be
     // using 'seek-style-guide'.
-    return path.join(cwd, 'node_modules', packageName);
+    return path.join(process.cwd(), 'node_modules', packageName);
   }
 };
 

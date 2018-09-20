@@ -71,12 +71,7 @@ const builds = buildConfigs
 
     const paths = {
       src: path.join(cwd, 'src'),
-      compilePackages: [
-        path.join(cwd, 'node_modules/seek-style-guide'),
-        ...compilePackages.map(package =>
-          path.join(cwd, 'node_modules', package)
-        )
-      ],
+      compilePackages: ['seek-style-guide', ...compilePackages],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       serverEntry: path.join(cwd, entry.server || 'src/server.js'),
       public: path.join(cwd, buildConfig.public || 'public'),

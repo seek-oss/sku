@@ -6,110 +6,10 @@ const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
-const path = require('path');
-const supportedBrowsers = require('../browsers/supportedBrowsers');
-const isProductionBuild = process.env.NODE_ENV === 'production';
-const webpackMode = isProductionBuild ? 'production' : 'development';
 const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
+const utils = require('./utils');
 
-const makeJsLoaders = ({ target }) => [
-  {
-    loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target })
-  }
-];
-
-const packageNameToClassPrefix = packageName =>
-  `__${packageName
-    .match(/([^\/]*)$/)[0]
-    .toUpperCase()
-    .replace(/[\/\-]/g, '_')}__`;
-
-const makeCssLoaders = (options = {}) => {
-  const { server = false, packageName = '', js = false } = options;
-
-  const debugIdent = isProductionBuild
-    ? ''
-    : `${
-        packageName ? packageNameToClassPrefix(packageName) : ''
-      }[name]__[local]___`;
-
-  const cssInJsLoaders = [
-    { loader: require.resolve('css-in-js-loader') },
-    ...makeJsLoaders({ target: 'node' })
-  ];
-
-  return (cssLoaders = [
-    {
-      // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
-      // Only the client build should generate CSS files.
-      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
-      options: {
-        modules: true,
-        localIdentName: `${debugIdent}[hash:base64:7]`,
-        minimize: isProductionBuild,
-        importLoaders: 3
-      }
-    },
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        plugins: () => [require('autoprefixer')(supportedBrowsers)]
-      }
-    },
-    {
-      loader: require.resolve('less-loader')
-    },
-    {
-      // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
-      loader: require.resolve('string-replace-loader'),
-      options: {
-        search: '(url\\([\'"]?)(.)',
-        replace: '$1\\$2',
-        flags: 'g'
-      }
-    },
-    ...(js ? cssInJsLoaders : [])
-  ]);
-};
-
-const makeImageLoaders = (options = {}) => {
-  const { server = false } = options;
-
-  return [
-    {
-      loader: require.resolve('url-loader'),
-      options: {
-        limit: 10000,
-        fallback: require.resolve('file-loader'),
-        // We only want to emit client assets during the client build.
-        // The server build should only emit server-side JS and HTML files.
-        emitFile: !server
-      }
-    }
-  ];
-};
-
-const svgLoaders = [
-  {
-    loader: require.resolve('raw-loader')
-  },
-  {
-    loader: require.resolve('svgo-loader'),
-    options: {
-      plugins: [
-        {
-          addAttributesToSVGElement: {
-            attribute: 'focusable="false"'
-          }
-        },
-        {
-          removeViewBox: false
-        }
-      ]
-    }
-  }
-];
+const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
 const buildWebpackConfigs = builds.map(
   ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
@@ -153,7 +53,10 @@ const buildWebpackConfigs = builds.map(
         ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
         : [...resolvedPolyfills, paths.clientEntry];
 
-    const internalJs = [...paths.src, ...paths.compilePackages];
+    const internalJs = [
+      ...paths.src,
+      ...paths.compilePackages.map(utils.resolvePackage)
+    ];
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
     return [
@@ -168,15 +71,15 @@ const buildWebpackConfigs = builds.map(
         },
         optimization: {
           nodeEnv: process.env.NODE_ENV,
-          minimize: isProductionBuild,
-          concatenateModules: isProductionBuild
+          minimize: utils.isProductionBuild,
+          concatenateModules: utils.isProductionBuild
         },
         module: {
           rules: [
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: makeJsLoaders({ target: 'browser' })
+              use: utils.makeJsLoaders({ target: 'browser' })
             },
             {
               test: /(?!\.css)\.js$/,
@@ -194,7 +97,7 @@ const buildWebpackConfigs = builds.map(
             {
               test: /\.css\.js$/,
               use: [MiniCssExtractPlugin.loader].concat(
-                makeCssLoaders({ js: true })
+                utils.makeCssLoaders({ js: true })
               )
             },
             {
@@ -206,24 +109,26 @@ const buildWebpackConfigs = builds.map(
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
-                  include: packageName,
+                  include: utils.resolvePackage(packageName),
                   use: [MiniCssExtractPlugin.loader].concat(
-                    makeCssLoaders({ packageName })
+                    utils.makeCssLoaders({ packageName })
                   )
                 })),
                 {
                   exclude: /node_modules/,
-                  use: [MiniCssExtractPlugin.loader].concat(makeCssLoaders())
+                  use: [MiniCssExtractPlugin.loader].concat(
+                    utils.makeCssLoaders()
+                  )
                 }
               ]
             },
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              use: makeImageLoaders()
+              use: utils.makeImageLoaders()
             },
             {
               test: /\.svg$/,
-              use: svgLoaders
+              use: utils.makeSvgLoaders()
             }
           ]
         },
@@ -259,11 +164,11 @@ const buildWebpackConfigs = builds.map(
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
-              use: makeJsLoaders({ target: 'node' })
+              use: utils.makeJsLoaders({ target: 'node' })
             },
             {
               test: /\.css\.js$/,
-              use: makeCssLoaders({ server: true, js: true })
+              use: utils.makeCssLoaders({ server: true, js: true })
             },
             {
               test: /\.mjs$/,
@@ -274,30 +179,30 @@ const buildWebpackConfigs = builds.map(
               test: /\.less$/,
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
-                  include: packageName,
-                  use: makeCssLoaders({ server: true, packageName })
+                  include: utils.resolvePackage(packageName),
+                  use: utils.makeCssLoaders({ server: true, packageName })
                 })),
                 {
                   exclude: /node_modules/,
-                  use: makeCssLoaders({ server: true })
+                  use: utils.makeCssLoaders({ server: true })
                 }
               ]
             },
 
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              use: makeImageLoaders({ server: true })
+              use: utils.makeImageLoaders({ server: true })
             },
             {
               test: /\.svg$/,
-              use: svgLoaders
+              use: utils.makeSvgLoaders()
             }
           ]
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
           bundleAnalyzerPlugin({ name: 'render' }),
-          ...locales.slice(0, isProductionBuild ? locales.length : 1).map(
+          ...locales.slice(0, utils.isProductionBuild ? locales.length : 1).map(
             locale =>
               new StaticSiteGeneratorPlugin({
                 locals: {
@@ -305,7 +210,7 @@ const buildWebpackConfigs = builds.map(
                   locale
                 },
                 paths: `index${
-                  isProductionBuild && locale ? `-${locale}` : ''
+                  utils.isProductionBuild && locale ? `-${locale}` : ''
                 }.html`
               })
           )

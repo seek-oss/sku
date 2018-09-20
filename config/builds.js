@@ -63,14 +63,7 @@ const builds = buildConfigs
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
         path.join(cwd, srcPath)
       ),
-      compilePackages: [
-        path.dirname(
-          require.resolve('seek-style-guide/package.json', { paths: [cwd] })
-        ),
-        ...compilePackages.map(package =>
-          path.join(cwd, 'node_modules', package)
-        )
-      ],
+      compilePackages: ['seek-style-guide', ...compilePackages],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       renderEntry: path.join(cwd, entry.render || 'src/render.js'),
       public: path.join(cwd, buildConfig.public || 'public'),

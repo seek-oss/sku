@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`hello-world build should generate the expected files 1`] = `
+exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
   "index.html": "
   <!DOCTYPE html>
@@ -21,7 +21,7 @@ Object {
 }
 `;
 
-exports[`hello-world start should start a development server 1`] = `
+exports[`custom-src-paths start should start a development server 1`] = `
 "
   <!DOCTYPE html>
   <html>

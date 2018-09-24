@@ -57,6 +57,7 @@ const buildWebpackConfigs = builds.map(
       ...paths.src,
       ...paths.compilePackages.map(utils.resolvePackage)
     ];
+
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
     return [

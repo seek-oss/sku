@@ -1,31 +1,5 @@
-const path = require('path');
-const supportedBrowsers = require('../browsers/supportedBrowsers');
-
-const isProductionBuild = process.env.NODE_ENV === 'production';
-
-/**
- * Resolve a package name to an absolute path.
- *
- * e.g. my-package -> /Users/me/code/my-project/node_modules/my-package
- */
-const resolvePackage = packageName => {
-  try {
-    // First, try to leverage Node's require algorithm to find
-    // the package.
-    // We add `/package.json` to prevent `require.resolve` treating
-    // the directory as a package and returning the `main` file.
-    // We then use path.dirname to remove `/package.json` from the result.
-    // Clever, right?
-    return path.dirname(require.resolve(`${packageName}/package.json`));
-  } catch (err) {
-    // If a `package.json` file can't be resolved, maintain
-    // legacy behaviour by providing a naive directory path.
-    // This ensures the build still passes when a supported
-    // package is missing, e.g. your project might not be
-    // using 'seek-style-guide'.
-    return path.join(process.cwd(), 'node_modules', packageName);
-  }
-};
+const supportedBrowsers = require('../../browsers/supportedBrowsers');
+const { isProductionBuild } = require('./env');
 
 /**
  * e.g.
@@ -38,7 +12,7 @@ const packageNameToClassPrefix = packageName =>
 const makeJsLoaders = ({ target }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../babel/babelConfig')({ target })
+    options: require('../../babel/babelConfig')({ target })
   }
 ];
 
@@ -129,10 +103,8 @@ const makeSvgLoaders = () => [
 ];
 
 module.exports = {
-  resolvePackage,
   makeJsLoaders,
   makeCssLoaders,
   makeImageLoaders,
-  makeSvgLoaders,
-  isProductionBuild
+  makeSvgLoaders
 };

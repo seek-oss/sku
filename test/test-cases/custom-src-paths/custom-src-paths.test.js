@@ -6,7 +6,7 @@ const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
 const skuConfig = require('./sku.config');
 
-describe('hello-world', () => {
+describe('custom-src-paths', () => {
   describe('start', () => {
     const devServerUrl = `http://localhost:${skuConfig.port}`;
     let server;
@@ -41,14 +41,18 @@ describe('hello-world', () => {
 
   describe('format', () => {
     it('should format successfully', async () => {
-      const { childProcess: { exitCode } } = await runSkuScriptInDir('format', __dirname);
+      const {
+        childProcess: { exitCode }
+      } = await runSkuScriptInDir('format', __dirname);
       expect(exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async () => {
-      const { childProcess: { exitCode } } = await runSkuScriptInDir('lint', __dirname);
+      const {
+        childProcess: { exitCode }
+      } = await runSkuScriptInDir('lint', __dirname);
       expect(exitCode).toEqual(0);
     });
   });

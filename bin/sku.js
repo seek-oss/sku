@@ -1,5 +1,13 @@
 #!/usr/bin/env node
-const script = process.argv[2];
+const args = require('../config/args');
+
+const { script, debug } = args;
+
+if (debug) {
+  // Enable all sku:* `debug` logs
+  // @see https://www.npmjs.com/package/debug
+  process.env.DEBUG = 'sku:*';
+}
 
 switch (script) {
   case 'init':
@@ -16,7 +24,7 @@ switch (script) {
     break;
   }
   default: {
-    console.log('Unknown script "' + script + '".');
-    break;
+    console.error(`Unknown script ${script}`);
+    process.exit(1);
   }
 }

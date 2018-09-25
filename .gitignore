@@ -1,7 +1,10 @@
 node_modules/
+!test/test-cases/*/app/node_modules/
+test/test-cases/*/app/node_modules/.cache/
 report/
 *.log
 dist/
 yarn.lock
 package-lock.json
 .idea
+report/

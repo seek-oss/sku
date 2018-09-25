@@ -4,11 +4,10 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
-const skuConfig = require('./sku.config');
 
-describe('custom-src-paths', () => {
+describe('zero-config', () => {
   describe('start', () => {
-    const devServerUrl = `http://localhost:${skuConfig.port}`;
+    const devServerUrl = `http://localhost:8080`;
     let server;
 
     beforeAll(async () => {
@@ -41,19 +40,15 @@ describe('custom-src-paths', () => {
 
   describe('format', () => {
     it('should format successfully', async () => {
-      const {
-        childProcess: { exitCode }
-      } = await runSkuScriptInDir('format', __dirname);
-      expect(exitCode).toEqual(0);
+      const { childProcess } = await runSkuScriptInDir('format', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async () => {
-      const {
-        childProcess: { exitCode }
-      } = await runSkuScriptInDir('lint', __dirname);
-      expect(exitCode).toEqual(0);
+      const { childProcess } = await runSkuScriptInDir('lint', __dirname);
+      expect(childProcess.exitCode).toEqual(0);
     });
   });
 });

@@ -70,7 +70,9 @@ const builds = buildConfigs
       buildConfig.dangerouslySetJestConfig || defaultDecorator;
 
     const paths = {
-      src: path.join(cwd, 'src'),
+      src: (buildConfig.srcPaths || ['src']).map(srcPath =>
+        path.join(cwd, srcPath)
+      ),
       compilePackages: ['seek-style-guide', ...compilePackages],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       serverEntry: path.join(cwd, entry.server || 'src/server.js'),

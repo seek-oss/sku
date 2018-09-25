@@ -10,6 +10,7 @@ const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
+const debug = require('debug')('sku:webpack');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
@@ -44,6 +45,8 @@ const buildWebpackConfigs = builds.map(
       ...paths.src,
       ...paths.compilePackages.map(utils.resolvePackage)
     ];
+
+    debug({ build: name || 'default', internalJs });
 
     const isStartScript = args.script === 'start-ssr';
 
@@ -81,7 +84,7 @@ const buildWebpackConfigs = builds.map(
       ? `http://localhost:${port.client}/`
       : paths.publicPath || '';
 
-    return [
+    const result = [
       {
         name: 'client',
         mode: webpackMode,
@@ -271,6 +274,9 @@ const buildWebpackConfigs = builds.map(
         )
       }
     ].map(webpackDecorator);
+
+    debug(JSON.stringify(result));
+    return result;
   }
 );
 

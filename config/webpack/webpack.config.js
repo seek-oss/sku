@@ -63,7 +63,7 @@ const buildWebpackConfigs = builds.map(
 
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
-    return [
+    const result = [
       {
         name: 'client',
         mode: webpackMode,
@@ -226,6 +226,9 @@ const buildWebpackConfigs = builds.map(
         ]
       }
     ].map(webpackDecorator);
+
+    debug(JSON.stringify(result));
+    return result;
   }
 );
 

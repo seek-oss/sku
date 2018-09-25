@@ -186,8 +186,12 @@ const buildWebpackConfigs = builds.map(
             modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
             whitelist: [
               'webpack/hot/poll?1000',
-              /.-style-guide/,
-              ...paths.compilePackages
+              // webpack-node-externals compares the `import` or `require` expression to this list,
+              // not the package name, so we map each packageName to a pattern. This ensures it
+              // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
+              ...paths.compilePackages.map(
+                packageName => new RegExp(`^(${packageName})`)
+              )
             ]
           })
         ],

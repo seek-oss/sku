@@ -8,6 +8,7 @@ const flatten = require('lodash/flatten');
 const args = require('../args');
 const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
+const debug = require('debug')('sku:webpack');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
@@ -57,6 +58,8 @@ const buildWebpackConfigs = builds.map(
       ...paths.src,
       ...paths.compilePackages.map(utils.resolvePackage)
     ];
+
+    debug({ build: name || 'default', internalJs });
 
     const publicPath = args.script === 'start' ? '/' : paths.publicPath;
 
@@ -152,10 +155,10 @@ const buildWebpackConfigs = builds.map(
           // Don't bundle or transpile non-compiled packages
           nodeExternals({
             // webpack-node-externals compares the `import` or `require` expression to this list,
-            // so we map each packageName to RegExp, to ensure it matches when importing a file
-            // within a package e.g. import { Text } from 'seek-style-guide/react'
+            // not the package name, so we map each packageName to a pattern. This ensures it
+            // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
             whitelist: paths.compilePackages.map(
-              packageName => new RegExp(packageName)
+              packageName => new RegExp(`^(${packageName})`)
             )
           })
         ],

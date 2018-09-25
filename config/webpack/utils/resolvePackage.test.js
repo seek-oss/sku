@@ -6,57 +6,59 @@ describe('webpack utils', () => {
 
     beforeEach(() => {
       fs = {
-        existsSync: jest.fn(),
         readFileSync: jest.fn(() => '{}')
       };
       resolve = jest.fn();
       resolvePackage = createPackageResolver(fs, resolve);
     });
 
-    describe('resolves to ./node_modules', () => {
-      const localPath = `${process.cwd()}/node_modules/test`;
+    test('defaults to require.resolve', () => {
+      resolve.mockReturnValue('./node_modules/test/package.json');
 
-      test('when it exists', () => {
-        // Local package is found
-        fs.existsSync.mockReturnValue(true);
-
-        expect(resolvePackage('test')).toEqual(localPath);
-        expect(fs.existsSync).toHaveBeenCalledWith(localPath);
-      });
-
-      test('when the package is not a dependency', () => {
-        // Local package is not found is not listed in deps (see default fs.readFileSync mock).
-        fs.existsSync.mockReturnValue(false);
-
-        expect(resolvePackage('test')).toEqual(localPath);
-        expect(fs.existsSync).toHaveBeenCalledWith(localPath);
-      });
-
-      test('when ./package.json does not exist', () => {
-        // Local package is not found is not listen in deps (see default fs.readFileSync mock).
-        fs.existsSync.mockReturnValue(false);
-        const error = new Error('File not found');
-        error.code = 'ENOENT';
-        fs.readFileSync.mockImplementation(() => {
-          throw error;
-        });
-
-        expect(resolvePackage('test')).toEqual(localPath);
-        expect(fs.existsSync).toHaveBeenCalledWith(localPath);
-      });
+      expect(resolvePackage('test')).toEqual('./node_modules/test');
     });
 
-    describe('uses require.resolve', () => {
-      const resolvedPackage = 'path/to/node_modules/test';
-
-      beforeEach(() => {
-        // Local package does not exist
-        fs.existsSync.mockReturnValue(false);
-        // require.resolve succeeds
-        resolve.mockReturnValue(`${resolvedPackage}/package.json`);
+    test('returns a naive path when require.resolve fails and the package is not a project dependency', () => {
+      const error = new Error('Module not found');
+      error.code = 'MODULE_NOT_FOUND';
+      resolve.mockImplementation(() => {
+        throw error;
       });
 
-      test('when listed in dependencies', () => {
+      expect(resolvePackage('test')).toEqual(
+        `${process.cwd()}/node_modules/test`
+      );
+    });
+
+    test('handles missing package.json when looking for dependencies', () => {
+      const resolveError = new Error('Module not found');
+      resolveError.code = 'MODULE_NOT_FOUND';
+      resolve.mockImplementation(() => {
+        throw resolveError;
+      });
+
+      const packageError = new Error('File not found');
+      packageError.code = 'ENOENT';
+      fs.readFileSync.mockImplementation(() => {
+        throw packageError;
+      });
+
+      expect(resolvePackage('test')).toEqual(
+        `${process.cwd()}/node_modules/test`
+      );
+    });
+
+    describe('throws when require.resolve fails and the package is listed', () => {
+      const resolveError = new Error('Module not found');
+      resolveError.code = 'MODULE_NOT_FOUND';
+
+      beforeEach(() => {
+        resolve.mockImplementation(() => {
+          throw resolveError;
+        });
+      });
+
+      test('in dependencies', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             dependencies: {
@@ -65,11 +67,10 @@ describe('webpack utils', () => {
           })
         );
 
-        expect(resolvePackage('test')).toEqual(resolvedPackage);
-        expect(resolve).toHaveBeenCalledWith('test/package.json');
+        expect(() => resolvePackage('test')).toThrow(resolveError);
       });
 
-      test('when listed in devDependencies', () => {
+      test('in devDependencies', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             devDependencies: {
@@ -78,41 +79,17 @@ describe('webpack utils', () => {
           })
         );
 
-        expect(resolvePackage('test')).toEqual(resolvedPackage);
-        expect(resolve).toHaveBeenCalledWith('test/package.json');
+        expect(() => resolvePackage('test')).toThrow(resolveError);
       });
     });
 
-    test('throws for missing package', () => {
-      // The package is listed as a depenency
-      fs.readFileSync.mockReturnValue(
-        JSON.stringify({
-          dependencies: {
-            test: '1.0.0'
-          }
-        })
-      );
-
-      // Local package not found
-      fs.existsSync.mockReturnValue(false);
-
-      // require.resolve fails
-      const error = new Error('Module not found');
-      error.code = 'MODULE_NOT_FOUND';
-      resolve.mockImplementation(() => {
-        throw error;
-      });
-
-      expect(() => resolvePackage('test')).toThrowError('Module not found');
-    });
-
-    test('it caches results', () => {
-      fs.existsSync.mockReturnValue(true);
+    test('caches results', () => {
+      resolve.mockReturnValue('./node_modules/test/package.json');
 
       resolvePackage('test');
       resolvePackage('test');
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(1);
+      expect(resolve).toHaveBeenCalledTimes(1);
     });
   });
 });

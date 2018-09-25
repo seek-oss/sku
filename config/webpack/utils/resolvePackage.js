@@ -21,49 +21,37 @@ const createPackageResolver = (fs, resolve) => {
   function resolvePackage(packageName) {
     const cwd = process.cwd();
 
-    // First, look for a copy of the package in the project's node_modules.
-    // If it exists, we're done.
-    const localPackage = path.join(cwd, 'node_modules', packageName);
+    try {
+      // First, try to use require.resolve to find the package.
+      // We add /package.json and then dirname the result because require.resolve follows the `main`
+      // property in package.json to produce a path to a file deep inside the package, and we want
+      // the path to the top-level directory.
+      // This branch handles packages being symlinked into node_modules, for example with
+      // `npm link` or in sku's test cases.
+      const result = path.dirname(
+        resolve(`${packageName}/package.json`, { paths: [cwd] })
+      );
+      debug(`Resolved ${packageName} to ${result}`);
+      return result;
+    } catch (error) {
+      if (error.code === 'MODULE_NOT_FOUND') {
+        const dependencies = getProjectDependencies(fs.readFileSync);
 
-    if (fs.existsSync(localPackage)) {
-      debug(`Resolved ${packageName} to ${localPackage}`);
-      return localPackage;
+        if (!dependencies[packageName]) {
+          // If it's not we can safely return a naive local path, which prevents webpack from
+          // throwing config schema errors when this function is used to configure a loader.
+          // This branch handles the scenario where we're trying to resolve seek-style-guide because
+          // it's on the default list of compilePackages, but it's not actually being used in the project.
+          const localPackage = path.join(cwd, 'node_modules', packageName);
+          debug(`Resolved unused package ${packageName} to ${localPackage}`);
+          return localPackage;
+        }
+      }
+
+      // We've gotten this far because the package is listed as a project dependency and can't be
+      // resolved, or because the error is not ENOENT. In either case we want to throw.
+      throw error;
     }
-
-    // If there's no local package, check to see if it's listed as a project dependency. If it is
-    // we'll try and track it down, if not we'll return a naive local path.
-    // This branch handles the scenario where we're trying to resolve seek-style-guide because
-    // it's on the default list of compilePackages, but it's not actually being used in the project.
-    // Returning a naive path prevents webpack from throwing config schema errors.
-    const dependencies = getProjectDependencies(fs.readFileSync);
-
-    if (!dependencies[packageName]) {
-      debug(`Resolved ${packageName} to ${localPackage}`);
-      return localPackage;
-    }
-
-    // We haven't found a copy of the package in the project node_modules directory, and we know
-    // it's listed as a project dependency, so we use Node's require algorithm to track it down.
-    // This branch is used when sku or seek-style-guide have been `npm link`ed into a project,
-    // and also by the seek-style-guide.test.js sku test.
-    // Doing this can produce hard-to-debug build issues, so we log a warning.
-    // `resolve` will throw if the package name can't be resolved.
-    const resolvedPackage = path.dirname(
-      resolve(`${packageName}/package.json`)
-    );
-
-    console.warn(
-      chalk.yellow(
-        [
-          `WARNING! Sku failed to find the \`${packageName}\` package in this project.`,
-          `It found a copy at ${resolvedPackage}, which may result in strange behaviour!`,
-          `You should probably \`npm install\` the package into your project.`
-        ].join('\n')
-      )
-    );
-
-    debug(`Resolved ${packageName} to ${resolvedPackage}`);
-    return resolvedPackage;
   }
 
   return memoize(resolvePackage);

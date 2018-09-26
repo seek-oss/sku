@@ -6,7 +6,6 @@ const builds = require('../config/builds');
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 
-const prettierDefaultPath = require('../config/prettier/defaultPath');
 const eslintDefaultPath = require('../config/eslint/defaultPath');
 
 const args = require('../config/args').argv;
@@ -38,7 +37,10 @@ if (report.errorCount > 0) {
 
 console.log(chalk.cyan('Checking Prettier format rules'));
 
-const filePattern = args.length === 0 ? prettierDefaultPath : args;
+const filePattern =
+  args.length === 0
+    ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.js`)
+    : args;
 
 prettierCheck(filePattern, prettierConfig)
   .then(() => {

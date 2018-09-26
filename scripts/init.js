@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-const pkg = require('../package.json');
-const commander = require('commander');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
@@ -9,39 +7,38 @@ const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
 const kopy = require('kopy');
 const dedent = require('dedent');
-
 const detectYarn = require('../lib/detectYarn');
 const install = require('../lib/install');
 
-let projectName;
+const args = require('../config/args');
 
-const program = new commander.Command(pkg.name)
-  .version(pkg.version)
-  .arguments('<project-directory>')
-  .usage(`${chalk.green('<project-directory>')} [options]`)
-  .action(name => {
-    projectName = name;
-  })
-  .option('--verbose', 'print additional logs')
-  .parse(process.argv);
+const projectName = args.argv[0];
 
-if (typeof projectName === 'undefined') {
-  console.error('Please specify the project directory:');
+const usage = () => {
+  console.log('Usage:');
 
   console.log(
-    `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`
+    `  ${chalk.cyan('sku init')} ${chalk.green(
+      '<project-directory>'
+    )} [--verbose]`
   );
   console.log();
   console.log('For example:');
-  console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-seek-ui')}`);
-  console.log();
-  console.log(
-    `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
-  );
+  console.log(`  ${chalk.cyan('sku init')} ${chalk.green('my-seek-ui')}`);
+  process.exit(1);
+};
+
+if (args.argv.indexOf('--help') >= 0) {
+  usage();
+  process.exit(0);
+}
+
+if (!projectName) {
+  usage();
   process.exit(1);
 }
 
-const verbose = program.verbose;
+const verbose = args.argv.indexOf('--verbose') >= 0;
 
 const root = path.resolve(projectName);
 const appName = path.basename(root);

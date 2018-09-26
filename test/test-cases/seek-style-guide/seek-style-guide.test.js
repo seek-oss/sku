@@ -32,27 +32,19 @@ describe('seek-style-guide', () => {
     expect(childProcess.exitCode).toEqual(0);
   });
 
-  function linkLocalDependencies() {
-    return fs
-      .mkdir(`${__dirname}/app/node_modules`)
-      .catch(() => null)
-      .then(
-        Promise.all(
-          ['react', 'react-dom', 'seek-style-guide'].map(createPackageLink)
-        )
-      );
+  async function linkLocalDependencies() {
+    const nodeModules = `${__dirname}/app/node_modules`;
+    await rimrafAsync(nodeModules);
+    await fs.mkdir(nodeModules);
+    await Promise.all(
+      ['react', 'react-dom', 'seek-style-guide'].map(createPackageLink)
+    );
   }
 
   function createPackageLink(name) {
-    return fs
-      .symlink(
-        `${process.cwd()}/node_modules/${name}`,
-        `${__dirname}/app/node_modules/${name}`
-      )
-      .catch(error => {
-        if (error.code !== 'EEXIST') {
-          throw error;
-        }
-      });
+    return fs.symlink(
+      `${process.cwd()}/node_modules/${name}`,
+      `${__dirname}/app/node_modules/${name}`
+    );
   }
 });

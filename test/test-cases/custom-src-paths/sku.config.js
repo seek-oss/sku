@@ -1,11 +1,8 @@
 module.exports = {
-  srcPaths: [
-    'src',
-    'another-folder'
-  ],
+  srcPaths: ['lib', 'another-folder'],
   entry: {
-    client: 'src/client.js',
-    render: 'src/render.js'
+    client: 'lib/client.js',
+    render: 'lib/render.js'
   },
   target: 'dist',
   publicPath: '/',

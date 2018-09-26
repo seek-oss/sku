@@ -58,6 +58,8 @@ const builds = buildConfigs
       buildConfig.dangerouslySetJestConfig || defaultDecorator;
     const eslintDecorator =
       buildConfig.dangerouslySetESLintConfig || defaultDecorator;
+    const babelDecorator =
+      buildConfig.dangerouslySetBabelConfig || defaultDecorator;
 
     const paths = {
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
@@ -79,6 +81,7 @@ const builds = buildConfigs
       webpackDecorator,
       jestDecorator,
       eslintDecorator,
+      babelDecorator,
       hosts,
       port,
       polyfills,

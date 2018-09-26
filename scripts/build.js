@@ -17,12 +17,12 @@ const runWebpack = config => {
       })
     );
 
-    const info = stats.toJson();
-
     if (stats.hasErrors()) {
-      info.errors.forEach(console.error);
+      // Webpack has already printed the errors, so we just need to stop execution.
       throw new Error();
     }
+
+    const info = stats.toJson();
 
     if (stats.hasWarnings()) {
       info.warnings.forEach(console.warn);

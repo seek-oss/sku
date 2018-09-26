@@ -10,5 +10,16 @@ module.exports = async (script, cwd) => {
   }
 
   // Otherwise, resolve the promise when the script finishes
-  return await exec(`${skuBin} ${script}`, { stdio: 'inherit', cwd, env: { ...process.env, CI: 'true' } });
+  try {
+    return await exec(`${skuBin} ${script}`, {
+      stdio: 'inherit',
+      cwd,
+      env: { ...process.env, CI: 'true' }
+    });
+  } catch (error) {
+    // Print the stdout of a failed command so we can see it in the jest output.
+    error.stdout && console.warn(error.stdout);
+    error.stderr && console.warn(error.stderr);
+    throw error;
+  }
 };

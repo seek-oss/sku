@@ -15,7 +15,7 @@ const args = require('../config/args');
 const projectName = args.argv[0];
 
 const usage = () => {
-  console.error('Usage:');
+  console.log('Usage:');
 
   console.log(
     `  ${chalk.cyan('sku init')} ${chalk.green(

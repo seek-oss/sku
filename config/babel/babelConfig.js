@@ -1,4 +1,11 @@
+const builds = require('../builds');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
+
+// Decorate Babel config is not supported for monorepo
+const babelDecorator =
+  builds.length === 1 && builds[0].babelDecorator
+    ? builds[0].babelDecorator
+    : config => config;
 
 const browserEnvOptions = {
   modules: false,
@@ -35,7 +42,7 @@ module.exports = ({ target }) => {
     plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
-  return {
+  return babelDecorator({
     babelrc: false,
     presets: [
       [require.resolve('babel-preset-env'), envPresetOptions],
@@ -57,5 +64,5 @@ module.exports = ({ target }) => {
         ]
       }
     }
-  };
+  });
 };

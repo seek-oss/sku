@@ -73,7 +73,11 @@ const builds = buildConfigs
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
         path.join(cwd, srcPath)
       ),
-      compilePackages: ['seek-style-guide', ...compilePackages],
+      compilePackages: [
+        'seek-style-guide',
+        'braid-design-system',
+        ...compilePackages
+      ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       serverEntry: path.join(cwd, entry.server || 'src/server.js'),
       public: path.join(cwd, buildConfig.public || 'public'),

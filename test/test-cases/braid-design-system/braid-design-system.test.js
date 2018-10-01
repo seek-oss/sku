@@ -8,11 +8,11 @@ const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 
-describe('seek-style-guide', () => {
+describe('braid-design-system', () => {
   beforeAll(async () => {
     await rimrafAsync(distDir);
 
-    // "Install" React and seek-style-guide into this test app so that webpack-node-externals
+    // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.
     await linkLocalDependencies();
     await runSkuScriptInDir('build', appDir);
@@ -28,7 +28,7 @@ describe('seek-style-guide', () => {
     expect(render).toContain('!*** external "react-dom/server" ***!');
   });
 
-  it('should handle seek-style-guide in tests', async () => {
+  it('should handle braid-design-system in tests', async () => {
     const { childProcess } = await runSkuScriptInDir('test', appDir);
     expect(childProcess.exitCode).toEqual(0);
   });
@@ -38,7 +38,7 @@ describe('seek-style-guide', () => {
     await rimrafAsync(nodeModules);
     await fs.mkdir(nodeModules);
     await Promise.all(
-      ['react', 'react-dom', 'seek-style-guide'].map(createPackageLink)
+      ['react', 'react-dom', 'braid-design-system'].map(createPackageLink)
     );
   }
 

@@ -13,6 +13,7 @@ module.exports = {
     // these packages get updated, which happens regularly. There's
     // still room for debate about whether this is a good idea or not...
     'seek-style-guide/react': require.resolve('identity-obj-proxy'),
+    'seek-asia-style-guide/react': require.resolve('identity-obj-proxy'),
     'braid-design-system': require.resolve('identity-obj-proxy')
   },
   transform: {

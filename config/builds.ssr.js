@@ -75,6 +75,7 @@ const builds = buildConfigs
       ),
       compilePackages: [
         'seek-style-guide',
+        'seek-asia-style-guide',
         'braid-design-system',
         ...compilePackages
       ],

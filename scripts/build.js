@@ -3,9 +3,10 @@ process.env.NODE_ENV = 'production';
 
 const Promise = require('bluebird');
 const webpackPromise = Promise.promisify(require('webpack'));
-const webpackConfig = require('../config/webpack/webpack.config');
+const webpackConfigs = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
 const builds = require('../config/builds');
+const rimraf = require('rimraf');
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {
@@ -30,6 +31,23 @@ const runWebpack = config => {
   });
 };
 
+const compileAll = async () => {
+  webpackConfigs.forEach(async config => {
+    await runWebpack(config);
+  });
+};
+
+const cleanDistFolders = async () => {
+  builds.forEach(async ({ paths }) => {
+    console.log(`Clearing ${paths.dist}`);
+    await rimraf(paths.dist, err => {
+      if (err) {
+        throw new Error(err);
+      }
+    });
+  });
+};
+
 const copyPublicFiles = () => {
   builds.forEach(({ paths }) => {
     if (fs.existsSync(paths.public)) {
@@ -41,7 +59,8 @@ const copyPublicFiles = () => {
   });
 };
 
-Promise.each(webpackConfig, runWebpack)
+cleanDistFolders()
+  .then(compileAll)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'))
   .catch(error => {

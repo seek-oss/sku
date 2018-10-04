@@ -31,13 +31,10 @@ const runWebpack = config => {
   });
 };
 
-const cleanDistFolders = async () => {
-  await Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
-};
+const cleanDistFolders = () =>
+  Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
 
-const compileAll = async () => {
-  await Promise.all(webpackConfigs.map(runWebpack));
-};
+const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
 
 const copyPublicFiles = () => {
   builds.forEach(({ paths }) => {

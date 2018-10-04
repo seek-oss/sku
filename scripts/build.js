@@ -1,11 +1,12 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const Promise = require('bluebird');
-const webpackPromise = Promise.promisify(require('webpack'));
-const webpackConfig = require('../config/webpack/webpack.config');
+const { promisify } = require('es6-promisify');
+const webpackPromise = promisify(require('webpack'));
+const webpackConfigs = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
 const builds = require('../config/builds');
+const rimraf = promisify(require('rimraf'));
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {
@@ -30,6 +31,11 @@ const runWebpack = config => {
   });
 };
 
+const cleanDistFolders = () =>
+  Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
+
+const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
+
 const copyPublicFiles = () => {
   builds.forEach(({ paths }) => {
     if (fs.existsSync(paths.public)) {
@@ -41,7 +47,8 @@ const copyPublicFiles = () => {
   });
 };
 
-Promise.each(webpackConfig, runWebpack)
+cleanDistFolders()
+  .then(compileAll)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'))
   .catch(error => {

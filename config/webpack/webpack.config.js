@@ -142,7 +142,8 @@ const buildWebpackConfigs = builds.map(
           new webpack.DefinePlugin(envVars),
           bundleAnalyzerPlugin({ name: 'client' }),
           new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: 'style.css',
+            chunkFilename: '[name].css'
           })
         ]
       },

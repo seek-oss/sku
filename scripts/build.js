@@ -1,12 +1,12 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const Promise = require('bluebird');
-const webpackPromise = Promise.promisify(require('webpack'));
+const { promisify } = require('es6-promisify');
+const webpackPromise = promisify(require('webpack'));
 const webpackConfigs = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
 const builds = require('../config/builds');
-const rimraf = require('rimraf');
+const rimraf = promisify(require('rimraf'));
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {
@@ -31,21 +31,12 @@ const runWebpack = config => {
   });
 };
 
-const compileAll = async () => {
-  webpackConfigs.forEach(async config => {
-    await runWebpack(config);
-  });
+const cleanDistFolders = async () => {
+  await Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
 };
 
-const cleanDistFolders = async () => {
-  builds.forEach(async ({ paths }) => {
-    console.log(`Clearing ${paths.dist}`);
-    await rimraf(paths.dist, err => {
-      if (err) {
-        throw new Error(err);
-      }
-    });
-  });
+const compileAll = async () => {
+  await Promise.all(webpackConfigs.map(runWebpack));
 };
 
 const copyPublicFiles = () => {

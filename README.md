@@ -133,6 +133,7 @@ dist/
 └── baz/
     └── qux/
         └── index.html
+```
 
 ### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
 

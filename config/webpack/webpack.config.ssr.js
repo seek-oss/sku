@@ -115,7 +115,7 @@ const buildWebpackConfigs = builds.map(
                   loader: require.resolve('babel-loader'),
                   options: {
                     babelrc: false,
-                    presets: [require.resolve('babel-preset-env')]
+                    presets: [require.resolve('@babel/preset-env')]
                   }
                 }
               ]

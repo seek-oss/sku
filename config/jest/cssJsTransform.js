@@ -1,5 +1,5 @@
 const path = require('path');
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const babelConfig = require('../babel/babelConfig')({ target: 'node' });
 
 const traversePath = require.resolve('traverse');

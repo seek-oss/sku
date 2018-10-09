@@ -32,7 +32,7 @@ const runWebpack = config => {
 };
 
 const cleanDistFolders = () =>
-  Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
+  Promise.all(builds.map(({ paths }) => rimraf(`${paths.dist}/*`)));
 
 const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
 

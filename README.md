@@ -4,7 +4,7 @@
 <img src="logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
 <br />
 
-Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/) and [Jest](https://facebook.github.io/jest/).
+Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/), [Jest](https://facebook.github.io/jest/) and [Storybook](https://storybook.js.org/).
 
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed. Designed for usage with [seek-style-guide](https://github.com/seek-oss/seek-style-guide), although this isn't a requirement.
 
@@ -14,6 +14,22 @@ This tool is heavily inspired by other work, most notably:
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
 **WARNING: While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK. As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.**
+
+## Getting Started
+
+Create a new project and start a local development environment:
+
+```bash
+$ npx sku init my-app
+$ cd my-app
+$ npm start
+```
+
+Don't have [npx](https://www.npmjs.com/package/npx)?
+
+```bash
+$ npm install -g npx
+```
 
 ## Features
 
@@ -113,17 +129,19 @@ By default, sku is set up to render a single `index.html` page.
 If you need to statically pre-render multiple files, you can return an object whose keys are the path names, and values are the rendered mark up.
 
 In your `src/render.js`
-```
+
+```js
 export default ({ publicPath }) => {
   return {
-    '/foo': '<div>foo</div>',
-    '/bar': '<div>bar</div>',
-    '/baz/qux': '<div>qux</div>',
+    '/foo': '<html>...</html>',
+    '/bar': '<html>...</html>',
+    '/baz/qux': '<html>...</html>',
   }
 }
 ```
 
 Will result in your `/dist` folder having an output like this:
+
 ```
 dist/
 ├── foo/
@@ -135,25 +153,41 @@ dist/
         └── index.html
 ```
 
+### Component Explorer via [Storybook](https://storybook.js.org/)
+
+Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js`, for example:
+
+```js
+import { storiesOf } from 'sku/storybook';
+import React from 'react';
+import Button from './Button';
+
+storiesOf('Button', module)
+  .add('Primary', () => (
+    <Button variant="primary">
+      Primary
+    </Button>
+  ))
+  .add('Secondary', () => (
+    <Button variant="secondary">
+      Secondary
+    </Button>
+  ));
+```
+
+_**NOTE:** To access the Storybook API, you should import from `sku/storybook`, since your project isn't depending on Storybook directly._
+
+By default, Storybook runs on port `8081`. If you'd like to use a different port, you can provide it via the `storybookPort` option in `sku.config.js`:
+
+```js
+module.exports = {
+  storybookPort: 9000
+};
+```
+
 ### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
 
 Without any special setup, sku is pre-configured for the SEEK Style Guide. Just start importing components as needed and everything should just work out of the box.
-
-## Getting Started
-
-Create a new project and start a local development environment:
-
-```bash
-$ npx sku init my-app
-$ cd my-app
-$ npm start
-```
-
-Don't have [npx](https://www.npmjs.com/package/npx)?
-
-```bash
-$ npm install -g npx
-```
 
 ## Development Workflow
 

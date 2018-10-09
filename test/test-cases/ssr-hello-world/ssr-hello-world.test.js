@@ -1,7 +1,7 @@
 const { promisify } = require('es6-promisify');
 const rimrafAsync = promisify(require('rimraf'));
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const gracefulSpawn = require('../../..//lib/gracefulSpawn');
+const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
 const dirContentsToObject = require('../../utils/dirContentsToObject');

@@ -48,7 +48,7 @@ const builds = buildConfigs
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
     const port = buildConfig.port || 8080;
-    const storybookPort = buildConfig.port || 8081;
+    const storybookPort = buildConfig.storybookPort || 8081;
     const initialPath = buildConfig.initialPath || '/';
 
     const polyfills = buildConfig.polyfills || [];

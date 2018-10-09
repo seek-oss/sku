@@ -1,6 +1,8 @@
 import { configure } from '@storybook/react';
 
 const reqs = [
+  // These values are defined in `webpack.config.js` in this
+  // directory, along with a comment explaining the reasoning.
   require.context(__SKU_SRC_PATHS_0__, true, /\.stories\.js$/),
   require.context(__SKU_SRC_PATHS_1__, true, /\.stories\.js$/),
   require.context(__SKU_SRC_PATHS_2__, true, /\.stories\.js$/),

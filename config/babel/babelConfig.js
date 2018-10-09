@@ -17,6 +17,7 @@ module.exports = ({ target }) => {
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-syntax-dynamic-import'),
+    require.resolve('babel-plugin-flow-react-proptypes'),
     require.resolve('@babel/plugin-proposal-class-properties'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     [
@@ -33,6 +34,14 @@ module.exports = ({ target }) => {
     plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    plugins.push(
+      require.resolve('@babel/plugin-transform-react-inline-elements'),
+      require.resolve('babel-plugin-transform-react-remove-prop-types'),
+      require.resolve('@babel/plugin-transform-react-constant-elements')
+    );
+  }
+
   return {
     babelrc: false,
     presets: [
@@ -40,18 +49,6 @@ module.exports = ({ target }) => {
       require.resolve('@babel/preset-flow'),
       require.resolve('@babel/preset-react')
     ],
-    plugins,
-    env: {
-      development: {
-        plugins: [require.resolve('babel-plugin-flow-react-proptypes')]
-      },
-      production: {
-        plugins: [
-          require.resolve('@babel/plugin-transform-react-inline-elements'),
-          require.resolve('babel-plugin-transform-react-remove-prop-types'),
-          require.resolve('@babel/plugin-transform-react-constant-elements')
-        ]
-      }
-    }
+    plugins
   };
 };

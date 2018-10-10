@@ -34,9 +34,12 @@ const makeCssLoaders = (options = {}) => {
     {
       // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
       // Only the client build should generate CSS files.
-      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
+      loader: require.resolve(
+        server ? 'css-loader/locals' : 'typings-for-css-modules-loader'
+      ),
       options: {
         modules: true,
+        namedExport: true,
         localIdentName: `${debugIdent}[hash:base64:7]`,
         minimize: isProductionBuild,
         importLoaders: 3

@@ -100,10 +100,13 @@ const buildWebpackConfigs = builds.map(
           minimize: utils.isProductionBuild,
           concatenateModules: utils.isProductionBuild
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
             {
-              test: /(?!\.css)\.js$/,
+              test: /(?!\.css)\.(js|ts|tsx)$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'browser' })
             },
@@ -201,7 +204,8 @@ const buildWebpackConfigs = builds.map(
         resolve: {
           alias: {
             __sku_alias__serverEntry: paths.serverEntry
-          }
+          },
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
         },
         target: 'node',
         node: {
@@ -218,7 +222,7 @@ const buildWebpackConfigs = builds.map(
         module: {
           rules: [
             {
-              test: /(?!\.css)\.js$/,
+              test: /(?!\.css)\.(js|ts|tsx)$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'node' })
             },

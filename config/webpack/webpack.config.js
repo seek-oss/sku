@@ -78,10 +78,13 @@ const buildWebpackConfigs = builds.map(
           minimize: utils.isProductionBuild,
           concatenateModules: utils.isProductionBuild
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
             {
-              test: /(?!\.css)\.js$/,
+              test: /(?!\.css)\.(js|ts|tsx)$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'browser' })
             },
@@ -171,10 +174,13 @@ const buildWebpackConfigs = builds.map(
           filename: 'render.js',
           libraryTarget: 'umd'
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
             {
-              test: /(?!\.css)\.js$/,
+              test: /(?!\.css)\.(js|ts|tsx)$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'node' })
             },

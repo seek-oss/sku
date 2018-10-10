@@ -10,7 +10,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
+    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose test/test-cases/typescript-css-modules",
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
@@ -53,6 +53,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
     "@storybook/react": "^4.0.0-alpha.24",
     "autoprefixer": "^7.1.5",
     "babel-core": "^7.0.0-bridge.0",
@@ -105,6 +106,7 @@
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "traverse": "^0.6.6",
+    "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^1.0.1",
     "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.16.4",
@@ -115,6 +117,8 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.1",
+    "@types/react": "^16.4.16",
+    "@types/react-dom": "^16.0.9",
     "async-disk-cache": "^1.3.3",
     "braid-design-system": "0.0.2",
     "child-process-promise": "^2.2.1",

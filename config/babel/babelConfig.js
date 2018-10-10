@@ -45,6 +45,13 @@ module.exports = ({ target }) => {
   return {
     babelrc: false,
     presets: [
+      [
+        require.resolve('@babel/preset-typescript'),
+        {
+          isTSX: true,
+          allExtensions: true
+        }
+      ],
       [require.resolve('@babel/preset-env'), envPresetOptions],
       require.resolve('@babel/preset-flow'),
       require.resolve('@babel/preset-react')

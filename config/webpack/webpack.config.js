@@ -84,7 +84,12 @@ const buildWebpackConfigs = builds.map(
         module: {
           rules: [
             {
-              test: /(?!\.css)\.(js|ts|tsx)$/,
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' })
+            },
+            {
+              test: /(?!\.css)\.js$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'browser' })
             },
@@ -180,7 +185,12 @@ const buildWebpackConfigs = builds.map(
         module: {
           rules: [
             {
-              test: /(?!\.css)\.(js|ts|tsx)$/,
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            },
+            {
+              test: /(?!\.css)\.js$/,
               include: internalJs,
               use: utils.makeJsLoaders({ target: 'node' })
             },

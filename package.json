@@ -10,7 +10,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose test/test-cases/typescript-css-modules",
+    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
@@ -83,6 +83,7 @@
     "file-loader": "^1.1.11",
     "find-up": "^3.0.0",
     "fs-extra": "^5.0.0",
+    "glob-promise": "^3.4.0",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^6.0.0",
     "jest": "^23.4.2",

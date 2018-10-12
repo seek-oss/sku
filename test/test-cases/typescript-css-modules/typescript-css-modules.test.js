@@ -44,6 +44,8 @@ describe('typescript-css-modules', () => {
     let exitCode;
 
     beforeAll(async () => {
+      // run build first to ensure typescript declarations are generated
+      await runSkuScriptInDir('build', appDir);
       const { childProcess } = await runSkuScriptInDir('lint', appDir);
       exitCode = childProcess.exitCode;
     });

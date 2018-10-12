@@ -9,10 +9,10 @@ const { isProductionBuild } = require('./env');
 const packageNameToClassPrefix = packageName =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
-const makeJsLoaders = ({ target }) => [
+const makeJsLoaders = ({ target, lang }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')({ target })
+    options: require('../../babel/babelConfig')({ target, lang })
   }
 ];
 

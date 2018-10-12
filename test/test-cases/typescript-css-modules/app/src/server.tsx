@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import App from './App';
 
 export default () => ({
-  renderCallback: (_, res): void => {
+  renderCallback: (_: any, res: any): void => {
     res.send(`
       <!DOCTYPE html>
       <html>

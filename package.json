@@ -106,6 +106,8 @@
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "traverse": "^0.6.6",
+    "typescript": "^3.1.2",
+    "typescript-eslint-parser": "^20.0.0",
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^1.0.1",
     "validate-npm-package-name": "^3.0.0",

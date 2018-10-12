@@ -39,4 +39,17 @@ describe('typescript-css-modules', () => {
       expect(exitCode).toEqual(0);
     });
   });
+
+  describe('lint', () => {
+    let exitCode;
+
+    beforeAll(async () => {
+      const { childProcess } = await runSkuScriptInDir('lint', appDir);
+      exitCode = childProcess.exitCode;
+    });
+
+    it('should handle tsc and tslint', async () => {
+      expect(exitCode).toEqual(0);
+    });
+  });
 });

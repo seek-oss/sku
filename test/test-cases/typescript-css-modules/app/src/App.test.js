@@ -14,7 +14,7 @@ describe('App', () => {
     expect(jsStyles.nested).toEqual('jsStyles__nested');
   });
 
-  test('Ts snapshot', () => {
+  test('TS function', () => {
     expect(messageRenderer()).toBe('Hello World');
   });
 });

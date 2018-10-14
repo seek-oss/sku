@@ -1,6 +1,4 @@
 const path = require('path');
-const { promisify } = require('es6-promisify');
-const rimrafAsync = promisify(require('rimraf'));
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
@@ -8,7 +6,6 @@ const distDir = path.resolve(appDir, 'dist');
 
 describe('react-css-modules', () => {
   beforeAll(async () => {
-    await rimrafAsync(distDir);
     await runSkuScriptInDir('build', appDir);
   });
 

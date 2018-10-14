@@ -2,7 +2,6 @@ const path = require('path');
 const { promisify } = require('es6-promisify');
 const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs').promises;
-const { F_OK } = require('fs').constants;
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
@@ -10,8 +9,6 @@ const distDir = path.resolve(appDir, 'dist');
 
 describe('braid-design-system', () => {
   beforeAll(async () => {
-    await rimrafAsync(distDir);
-
     // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.
     await linkLocalDependencies();

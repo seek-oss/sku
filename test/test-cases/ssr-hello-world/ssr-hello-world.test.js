@@ -1,5 +1,3 @@
-const { promisify } = require('es6-promisify');
-const rimrafAsync = promisify(require('rimraf'));
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
@@ -15,7 +13,6 @@ describe('ssr-hello-world', () => {
     let server;
 
     beforeAll(async () => {
-      await rimrafAsync(`${__dirname}/dist/`);
       server = await runSkuScriptInDir('start-ssr', __dirname);
       await waitForUrls(backendUrl, clientJsUrl);
     });
@@ -40,7 +37,6 @@ describe('ssr-hello-world', () => {
     let server;
 
     beforeAll(async () => {
-      await rimrafAsync(`${__dirname}/dist/`);
       await runSkuScriptInDir('build-ssr', __dirname);
       server = gracefulSpawn('node', ['server'], {
         cwd: `${__dirname}/dist`,

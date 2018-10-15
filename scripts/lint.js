@@ -1,10 +1,8 @@
 const chalk = require('chalk');
 const baseESlintConfig = require('eslint-config-seek');
 const EslintCLI = require('eslint').CLIEngine;
-const lodash = require('lodash');
-const glob = require('glob-promise');
-
 const builds = require('../config/builds');
+const glob = require('glob-promise');
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 const runTsc = require('../lib/runTsc');
@@ -34,24 +32,8 @@ const run = async () => {
       ? builds[0].eslintDecorator(baseESlintConfig)
       : baseESlintConfig;
 
-  // should be moved to eslint-config-seek ??????
-  const typescriptEslintConfig = {
-    parserOptions: {
-      ecmaFeatures: { jsx: true }
-    },
-    settings: {
-      'import/parsers': {
-        'typescript-eslint-parser': ['.ts', '.tsx']
-      },
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.ts', '.tsx']
-        }
-      }
-    }
-  };
   const cli = new EslintCLI({
-    baseConfig: lodash.merge(eslintConfig, typescriptEslintConfig),
+    baseConfig: eslintConfig,
     useEslintrc: false
   });
 

@@ -12,9 +12,8 @@ const args = require('../config/args').argv;
 const run = async () => {
   console.log(chalk.cyan('Linting'));
 
-  const hasTSFiles = await glob('**/*.{ts,tsx}').then(
-    files => files.length > 0
-  );
+  const tsFiles = await glob('**/*.{ts,tsx}');
+  const hasTSFiles = tsFiles.length > 0;
 
   if (hasTSFiles) {
     try {

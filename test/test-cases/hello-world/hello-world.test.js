@@ -1,5 +1,3 @@
-const { promisify } = require('es6-promisify');
-const rimrafAsync = promisify(require('rimraf'));
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
@@ -29,7 +27,6 @@ describe('hello-world', () => {
 
   describe('build', () => {
     beforeAll(async () => {
-      await rimrafAsync(`${__dirname}/dist/`);
       await runSkuScriptInDir('build', __dirname);
     });
 

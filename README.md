@@ -37,11 +37,11 @@ $ npm install -g npx
 
 Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
 
-* [babel-preset-env](https://babeljs.io/docs/plugins/preset-env/)
-* [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/)
+* [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
+* [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
+* [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread)
+* [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
 * [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
-* [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
-* [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
 
 ### Locally Scoped CSS (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
 

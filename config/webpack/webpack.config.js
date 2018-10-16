@@ -94,7 +94,7 @@ const buildWebpackConfigs = builds.map(
                   options: {
                     babelrc: false,
                     presets: [
-                      [require.resolve('babel-preset-env'), { modules: false }]
+                      [require.resolve('@babel/preset-env'), { modules: false }]
                     ]
                   }
                 }

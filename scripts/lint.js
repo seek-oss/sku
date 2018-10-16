@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const baseESlintConfig = require('eslint-config-seek');
 const EslintCLI = require('eslint').CLIEngine;
 const builds = require('../config/builds');
-const glob = require('glob-promise');
+const isTypeScript = require('../config/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 const runTsc = require('../lib/runTsc');
@@ -12,10 +12,7 @@ const args = require('../config/args').argv;
 const run = async () => {
   console.log(chalk.cyan('Linting'));
 
-  const tsFiles = await glob('**/*.{ts,tsx}');
-  const hasTSFiles = tsFiles.length > 0;
-
-  if (hasTSFiles) {
+  if (isTypeScript) {
     try {
       await runTsc();
     } catch (e) {

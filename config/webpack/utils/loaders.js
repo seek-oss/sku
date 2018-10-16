@@ -1,5 +1,6 @@
 const supportedBrowsers = require('../../browsers/supportedBrowsers');
 const { isProductionBuild } = require('./env');
+const isTypeScript = require('../../../config/isTypeScript');
 
 /**
  * e.g.
@@ -30,16 +31,18 @@ const makeCssLoaders = (options = {}) => {
     ...makeJsLoaders({ target: 'node' })
   ];
 
+  const cssLoader = isTypeScript
+    ? 'typings-for-css-modules-loader'
+    : 'css-loader';
+
   return [
     {
       // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
       // Only the client build should generate CSS files.
-      loader: require.resolve(
-        server ? 'css-loader/locals' : 'typings-for-css-modules-loader'
-      ),
+      loader: require.resolve(server ? 'css-loader/locals' : cssLoader),
       options: {
         modules: true,
-        namedExport: true,
+        namedExport: true, // only for `typings-for-css-modules-loader`
         localIdentName: `${debugIdent}[hash:base64:7]`,
         minimize: isProductionBuild,
         importLoaders: 3

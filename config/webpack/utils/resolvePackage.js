@@ -40,8 +40,8 @@ const createPackageResolver = (fs, resolve) => {
         if (!dependencies[packageName]) {
           // If it's not we can safely return a naive local path, which prevents webpack from
           // throwing config schema errors when this function is used to configure a loader.
-          // This branch handles the scenario where we're trying to resolve seek-style-guide because
-          // it's on the default list of compilePackages, but it's not actually being used in the project.
+          // This branch handles the scenario where we're trying to resolve a design system module because
+          // it's in the default list of compilePackages, but it's not actually being used in the project.
           const localPackage = path.join(cwd, 'node_modules', packageName);
           debug(`Resolved unused package ${packageName} to ${localPackage}`);
           return localPackage;

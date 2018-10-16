@@ -4,7 +4,7 @@
 <img src="logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
 <br />
 
-Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/) and [Jest](https://facebook.github.io/jest/).
+Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/), [Jest](https://facebook.github.io/jest/) and [Storybook](https://storybook.js.org/).
 
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed. Designed for usage with [seek-style-guide](https://github.com/seek-oss/seek-style-guide), although this isn't a requirement.
 
@@ -15,17 +15,33 @@ This tool is heavily inspired by other work, most notably:
 
 **WARNING: While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK. As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.**
 
+## Getting Started
+
+Create a new project and start a local development environment:
+
+```bash
+$ npx sku init my-app
+$ cd my-app
+$ npm start
+```
+
+Don't have [npx](https://www.npmjs.com/package/npx)?
+
+```bash
+$ npm install -g npx
+```
+
 ## Features
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))
 
 Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
 
-* [babel-preset-env](https://babeljs.io/docs/plugins/preset-env/)
-* [babel-preset-react](https://babeljs.io/docs/plugins/preset-react/)
+* [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
+* [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
+* [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread)
+* [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
 * [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
-* [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
-* [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
 
 ### Locally Scoped CSS (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
 
@@ -108,25 +124,70 @@ Changes to formatting are considered non-breaking. Please ensure you run `sku fo
 
 Generate static HTML files via a webpack-compiled render function that has access to your application code. For example, when building a React application, you can pre-render to static HTML with React's [renderToString](https://facebook.github.io/react/docs/react-dom-server.html#rendertostring) function.
 
+By default, sku is set up to render a single `index.html` page.
+
+If you need to statically pre-render multiple files, you can return an object whose keys are the path names, and values are the rendered mark up.
+
+In your `src/render.js`
+
+```js
+export default ({ publicPath }) => {
+  return {
+    '/foo': '<html>...</html>',
+    '/bar': '<html>...</html>',
+    '/baz/qux': '<html>...</html>',
+  }
+}
+```
+
+Will result in your `/dist` folder having an output like this:
+
+```
+dist/
+├── foo/
+│   └── index.html
+├── bar/
+│   └── index.html
+└── baz/
+    └── qux/
+        └── index.html
+```
+
+### Component Explorer via [Storybook](https://storybook.js.org/)
+
+Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js`, for example:
+
+```js
+import { storiesOf } from 'sku/storybook';
+import React from 'react';
+import Button from './Button';
+
+storiesOf('Button', module)
+  .add('Primary', () => (
+    <Button variant="primary">
+      Primary
+    </Button>
+  ))
+  .add('Secondary', () => (
+    <Button variant="secondary">
+      Secondary
+    </Button>
+  ));
+```
+
+_**NOTE:** To access the Storybook API, you should import from `sku/storybook`, since your project isn't depending on Storybook directly._
+
+By default, Storybook runs on port `8081`. If you'd like to use a different port, you can provide it via the `storybookPort` option in `sku.config.js`:
+
+```js
+module.exports = {
+  storybookPort: 9000
+};
+```
+
 ### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
 
 Without any special setup, sku is pre-configured for the SEEK Style Guide. Just start importing components as needed and everything should just work out of the box.
-
-## Getting Started
-
-Create a new project and start a local development environment:
-
-```bash
-$ npx sku init my-app
-$ cd my-app
-$ npm start
-```
-
-Don't have [npx](https://www.npmjs.com/package/npx)?
-
-```bash
-$ npm install -g npx
-```
 
 ## Development Workflow
 

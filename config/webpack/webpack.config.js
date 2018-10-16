@@ -94,7 +94,7 @@ const buildWebpackConfigs = builds.map(
                   options: {
                     babelrc: false,
                     presets: [
-                      [require.resolve('babel-preset-env'), { modules: false }]
+                      [require.resolve('@babel/preset-env'), { modules: false }]
                     ]
                   }
                 }
@@ -142,7 +142,8 @@ const buildWebpackConfigs = builds.map(
           new webpack.DefinePlugin(envVars),
           bundleAnalyzerPlugin({ name: 'client' }),
           new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: 'style.css',
+            chunkFilename: '[name].css'
           })
         ]
       },

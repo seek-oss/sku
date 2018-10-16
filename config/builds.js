@@ -48,6 +48,7 @@ const builds = buildConfigs
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
     const port = buildConfig.port || 8080;
+    const storybookPort = buildConfig.storybookPort || 8081;
     const initialPath = buildConfig.initialPath || '/';
 
     const polyfills = buildConfig.polyfills || [];
@@ -65,7 +66,12 @@ const builds = buildConfigs
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
         path.join(cwd, srcPath)
       ),
-      compilePackages: ['seek-style-guide', ...compilePackages],
+      compilePackages: [
+        'seek-style-guide',
+        'seek-asia-style-guide',
+        'braid-design-system',
+        ...compilePackages
+      ],
       clientEntry: path.join(cwd, entry.client || 'src/client.js'),
       renderEntry: path.join(cwd, entry.render || 'src/render.js'),
       public: path.join(cwd, buildConfig.public || 'public'),
@@ -84,6 +90,7 @@ const builds = buildConfigs
       babelDecorator,
       hosts,
       port,
+      storybookPort,
       polyfills,
       initialPath
     };

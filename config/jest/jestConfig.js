@@ -6,13 +6,15 @@ module.exports = {
       './fileMock'
     ),
 
-    // Mock out all seek-style-guide components with strings,
+    // Mock out all design system components with strings,
     // using a proxy object that echoes back the import name,
     // e.g. `import { Text } from 'seek-style-guide/react'` resolves
     // to the string 'Text'. This way, snapshot tests won't break when
-    // seek-style-guide gets updated, which happens regularly. There's
+    // these packages get updated, which happens regularly. There's
     // still room for debate about whether this is a good idea or not...
-    'seek-style-guide/react': require.resolve('identity-obj-proxy')
+    '^seek-style-guide/react': require.resolve('identity-obj-proxy'),
+    '^seek-asia-style-guide/react': require.resolve('identity-obj-proxy'),
+    '^braid-design-system': require.resolve('identity-obj-proxy')
   },
   transform: {
     '^.+\\.css\\.js$': require.resolve('./cssJsTransform.js'),

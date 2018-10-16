@@ -18,7 +18,8 @@ switch (script) {
   case 'lint':
   case 'format':
   case 'start':
-  case 'start-ssr': {
+  case 'start-ssr':
+  case 'storybook': {
     const scriptPath = require.resolve('../scripts/' + script);
     require(scriptPath);
     break;

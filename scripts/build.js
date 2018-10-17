@@ -1,6 +1,7 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
+const path = require('path');
 const { promisify } = require('es6-promisify');
 const webpackPromise = promisify(require('webpack'));
 const webpackConfigs = require('../config/webpack/webpack.config');
@@ -34,6 +35,11 @@ const runWebpack = config => {
 const cleanDistFolders = () =>
   Promise.all(builds.map(({ paths }) => rimraf(paths.dist)));
 
+const cleanRenderJs = () =>
+  Promise.all(
+    builds.map(({ paths }) => rimraf(path.join(paths.dist, 'render.js')))
+  );
+
 const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
 
 const copyPublicFiles = () => {
@@ -49,6 +55,7 @@ const copyPublicFiles = () => {
 
 cleanDistFolders()
   .then(compileAll)
+  .then(cleanRenderJs)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'))
   .catch(error => {

@@ -21,11 +21,6 @@ describe('braid-design-system', () => {
   it('should generate the expected files', async () => {
     const files = await dirContentsToObject(distDir);
     expect(files).toMatchSnapshot();
-
-    // Check that react and react-dom were not bundled in the render output.
-    const render = (await fs.readFile(`${distDir}/render.js`)).toString();
-    expect(render).toContain('!*** external "react" ***!');
-    expect(render).toContain('!*** external "react-dom/server" ***!');
   });
 
   it('should handle braid-design-system in tests', async () => {

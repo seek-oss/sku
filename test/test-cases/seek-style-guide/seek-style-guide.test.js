@@ -10,8 +10,6 @@ const distDir = path.resolve(appDir, 'dist');
 
 describe('seek-style-guide', () => {
   beforeAll(async () => {
-    await rimrafAsync(distDir);
-
     // "Install" React and seek-style-guide into this test app so that webpack-node-externals
     // treats them correctly.
     await linkLocalDependencies();

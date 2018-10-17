@@ -1,5 +1,5 @@
 const path = require('path');
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const babelConfig = require('../babel/babelConfig')({ target: 'node' });
 
 const traversePath = require.resolve('traverse');
@@ -8,9 +8,10 @@ const getClassNamesPath = require.resolve('./getClassNames');
 module.exports = {
   process: (src, srcPath) => {
     const fileName = path.parse(srcPath).name;
+    const config = Object.assign({}, babelConfig, { filename: 'unknown' });
 
     // Ensure the code uses our provided Babel feature set
-    const { code } = babel.transform(src, babelConfig);
+    const { code } = babel.transform(src, config);
 
     // Wrap the .css.js code in some custom logic
     // to extract the classes and generate a CSS Module

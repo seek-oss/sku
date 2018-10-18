@@ -10,7 +10,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
+    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose test/test-cases/typescript-css-modules",
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
@@ -71,6 +71,7 @@
     "cross-spawn": "^6.0.5",
     "css-in-js-loader": "^0.1.2",
     "css-loader": "^0.28.7",
+    "css-modules-typescript-loader": "^1.0.0",
     "deasync-promise": "^1.0.1",
     "death": "^1.1.0",
     "debug": "^4.0.1",

@@ -131,6 +131,7 @@
     "seek-asia-style-guide": "6.6.2",
     "seek-style-guide": "37.11.1",
     "semantic-release": "^8.0.3",
-    "wait-on": "^2.1.0"
+    "wait-on": "^2.1.0",
+    "webpack-stats-plugin": "^0.2.1"
   }
 }

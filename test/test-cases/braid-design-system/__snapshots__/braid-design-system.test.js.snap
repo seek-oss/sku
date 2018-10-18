@@ -2,6 +2,10 @@
 
 exports[`braid-design-system should generate the expected files 1`] = `
 Object {
+  "externals.json": "[
+  \\"\\\\\\"react\\\\\\"\\",
+  \\"\\\\\\"react-dom/server\\\\\\"\\"
+]",
   "index.html": "
   <!DOCTYPE html>
   <html>

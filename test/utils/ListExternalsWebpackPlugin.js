@@ -11,7 +11,7 @@ module.exports = class ListExternalsWebpackPlugin {
           modules
             .map(({ identifier }) => identifier)
             .filter(id => /^external /.test(id))
-            .map(id => id.replace(/^external /, ''))
+            .map(id => id.replace(/^external "/, '').replace(/"$/, ''))
             .sort()
         );
 

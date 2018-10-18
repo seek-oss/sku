@@ -7,7 +7,7 @@ module.exports = class ListExternalsWebpackPlugin {
       filename,
       fields: ['modules'],
       transform({ modules }) {
-        const identifiers = uniq(
+        const externals = uniq(
           modules
             .map(({ identifier }) => identifier)
             .filter(id => /^external /.test(id))
@@ -15,7 +15,7 @@ module.exports = class ListExternalsWebpackPlugin {
             .sort()
         );
 
-        return JSON.stringify(identifiers, null, 2);
+        return JSON.stringify(externals, null, 2);
       }
     });
   }

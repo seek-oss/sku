@@ -12,7 +12,7 @@ console.log(chalk.cyan('Formatting source code with Prettier'));
 
 const filePattern =
   args.length === 0
-    ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.js`)
+    ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.{js,ts,tsx}`)
     : args;
 
 prettierWrite(filePattern, prettierConfig)

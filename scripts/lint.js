@@ -49,7 +49,7 @@ const run = async () => {
 
   const filePattern =
     args.length === 0
-      ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.js`)
+      ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.{js,ts,tsx}`)
       : args;
 
   prettierCheck(filePattern, prettierConfig)

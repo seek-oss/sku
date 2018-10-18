@@ -102,6 +102,13 @@ The `sku test` command will invoke Jest, running any tests in files named `*.tes
 
 Since sku uses Jest as a testing framework, you can read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
 
+Note: `sku` will forward all command line args to `jest`.
+
+Example running tests in watch mode:
+```bash
+$ sku test --watch
+```
+
 ### Linting and Formatting (via [ESLint](http://eslint.org/) and [Prettier](https://github.com/prettier/prettier))
 
 Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek).

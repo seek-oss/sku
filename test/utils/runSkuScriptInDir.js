@@ -14,7 +14,7 @@ module.exports = async (script, cwd) => {
     return await exec(`${skuBin} ${script}`, {
       stdio: 'inherit',
       cwd,
-      env: { ...process.env, CI: 'true' }
+      env: process.env
     });
   } catch (error) {
     // Print the stdout of a failed command so we can see it in the jest output.

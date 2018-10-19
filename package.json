@@ -89,7 +89,7 @@
     "inquirer": "^6.0.0",
     "jest": "^23.4.2",
     "kopy": "^8.3.0",
-    "less": "^2.7.2",
+    "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.10",
     "memoizee": "^0.4.14",
@@ -138,6 +138,7 @@
     "seek-asia-style-guide": "6.6.2",
     "seek-style-guide": "37.11.1",
     "semantic-release": "^8.0.3",
-    "wait-on": "^2.1.0"
+    "wait-on": "^2.1.0",
+    "webpack-stats-plugin": "^0.2.1"
   }
 }

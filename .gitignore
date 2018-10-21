@@ -7,5 +7,3 @@ package-lock.json
 .idea
 report/
 test/**/tsconfig.json
-test/**/*.css.js.d.ts
-test/**/*.less.d.ts

@@ -3,6 +3,7 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
+const srcDir = path.resolve(appDir, 'src');
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
@@ -12,7 +13,11 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      expect(files).toMatchSnapshot();
+      const srcFiles = await dirContentsToObject(srcDir, ['.ts']);
+      expect({
+        ...files, 
+        ...srcFiles
+      }).toMatchSnapshot();
     });
   });
 
@@ -23,7 +28,11 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      expect(files).toMatchSnapshot();
+      const srcFiles = await dirContentsToObject(srcDir, ['.ts']);
+      expect({
+        ...files, 
+        ...srcFiles
+      }).toMatchSnapshot();
     });
   });
 

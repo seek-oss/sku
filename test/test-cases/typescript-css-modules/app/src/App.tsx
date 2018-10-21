@@ -2,8 +2,13 @@ import React from 'react';
 import lessStyles from './lessStyles.less';
 import jsStyles from './jsStyles.css.js';
 
-export const messageRenderer = (): string => {
-  return 'Hello World';
+enum Message {
+  Hello = 'Hello World',
+  Goodbye = 'Goodbye World'
+}
+
+export const messageRenderer = (): Message => {
+  return Message.Hello;
 };
 
 export default () => (

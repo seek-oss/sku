@@ -7,3 +7,4 @@ package-lock.json
 .idea
 report/
 test/**/tsconfig.json
+test/**/tslint.json

@@ -31,6 +31,8 @@ const makeCssLoaders = (options = {}) => {
     ...makeJsLoaders({ target: 'node' })
   ];
 
+  // Apply css-modules-typescript-loader for client builds only as
+  // we only need to generate type declarations once.
   const cssModuleToTypeScriptLoader =
     isTypeScript && !server
       ? [

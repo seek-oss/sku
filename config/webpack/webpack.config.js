@@ -6,7 +6,7 @@ const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
-const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
+const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 

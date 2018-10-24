@@ -1,7 +1,2 @@
 node_modules
 npm-debug.log
-tsconfig.json
-*.css.js.d.ts
-*.less.d.ts
-/dist
-/report

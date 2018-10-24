@@ -8,7 +8,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
-const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
+const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 
@@ -100,8 +100,16 @@ const buildWebpackConfigs = builds.map(
           minimize: utils.isProductionBuild,
           concatenateModules: utils.isProductionBuild
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
+            {
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' })
+            },
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
@@ -201,7 +209,8 @@ const buildWebpackConfigs = builds.map(
         resolve: {
           alias: {
             __sku_alias__serverEntry: paths.serverEntry
-          }
+          },
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
         },
         target: 'node',
         node: {
@@ -217,6 +226,11 @@ const buildWebpackConfigs = builds.map(
         },
         module: {
           rules: [
+            {
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            },
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,

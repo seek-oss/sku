@@ -6,7 +6,7 @@ const builds = require('../builds');
 const lodash = require('lodash');
 const flatten = require('lodash/flatten');
 const args = require('../args');
-const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
+const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 
@@ -78,8 +78,16 @@ const buildWebpackConfigs = builds.map(
           minimize: utils.isProductionBuild,
           concatenateModules: utils.isProductionBuild
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
+            {
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' })
+            },
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,
@@ -171,8 +179,16 @@ const buildWebpackConfigs = builds.map(
           filename: 'render.js',
           libraryTarget: 'umd'
         },
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        },
         module: {
           rules: [
+            {
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            },
             {
               test: /(?!\.css)\.js$/,
               include: internalJs,

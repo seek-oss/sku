@@ -1,5 +1,6 @@
 const supportedBrowsers = require('../../browsers/supportedBrowsers');
-const { isProductionBuild } = require('./env');
+const { isProductionBuild, isCI } = require('./env');
+const isTypeScript = require('../../../config/isTypeScript');
 
 /**
  * e.g.
@@ -9,10 +10,10 @@ const { isProductionBuild } = require('./env');
 const packageNameToClassPrefix = packageName =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
-const makeJsLoaders = ({ target }) => [
+const makeJsLoaders = ({ target, lang }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')({ target })
+    options: require('../../babel/babelConfig')({ target, lang })
   }
 ];
 
@@ -30,7 +31,22 @@ const makeCssLoaders = (options = {}) => {
     ...makeJsLoaders({ target: 'node' })
   ];
 
+  // Apply css-modules-typescript-loader for client builds only as
+  // we only need to generate type declarations once.
+  const cssModuleToTypeScriptLoader =
+    isTypeScript && !server
+      ? [
+          {
+            loader: require.resolve('css-modules-typescript-loader'),
+            options: {
+              mode: isCI ? 'verify' : 'emit'
+            }
+          }
+        ]
+      : [];
+
   return [
+    ...cssModuleToTypeScriptLoader,
     {
       // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
       // Only the client build should generate CSS files.

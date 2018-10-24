@@ -11,7 +11,7 @@ const nodeEnvOptions = {
   }
 };
 
-module.exports = ({ target }) => {
+module.exports = ({ target, lang = 'js' }) => {
   const isBrowser = target === 'browser';
 
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
@@ -42,11 +42,22 @@ module.exports = ({ target }) => {
     );
   }
 
+  const languagePreset =
+    lang === 'ts'
+      ? [
+          require.resolve('@babel/preset-typescript'),
+          {
+            isTSX: true,
+            allExtensions: true
+          }
+        ]
+      : require.resolve('@babel/preset-flow');
+
   return {
     babelrc: false,
     presets: [
+      languagePreset,
       [require.resolve('@babel/preset-env'), envPresetOptions],
-      require.resolve('@babel/preset-flow'),
       require.resolve('@babel/preset-react')
     ],
     plugins

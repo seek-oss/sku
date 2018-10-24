@@ -1,8 +1,15 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = ({ name }) =>
+const bundleReportFolder = 'report';
+
+const bundleAnalyzerPlugin = ({ name }) =>
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
     openAnalyzer: false,
-    reportFilename: `../report/${name}.html`
+    reportFilename: `../${bundleReportFolder}/${name}.html`
   });
+
+module.exports = {
+  bundleAnalyzerPlugin,
+  bundleReportFolder
+};

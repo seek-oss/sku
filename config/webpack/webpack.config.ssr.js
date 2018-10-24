@@ -8,7 +8,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
-const bundleAnalyzerPlugin = require('./plugins/bundleAnalyzer');
+const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 

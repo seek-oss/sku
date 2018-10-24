@@ -6,6 +6,10 @@ const distDir = path.resolve(appDir, 'dist');
 const srcDir = path.resolve(appDir, 'src');
 
 describe('typescript-css-modules', () => {
+  beforeAll(async () => {
+    await runSkuScriptInDir('configure', appDir);
+  });
+
   describe('build', () => {
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
@@ -15,7 +19,7 @@ describe('typescript-css-modules', () => {
       const files = await dirContentsToObject(distDir);
       const srcFiles = await dirContentsToObject(srcDir, ['.ts']);
       expect({
-        ...files, 
+        ...files,
         ...srcFiles
       }).toMatchSnapshot();
     });
@@ -30,7 +34,7 @@ describe('typescript-css-modules', () => {
       const files = await dirContentsToObject(distDir);
       const srcFiles = await dirContentsToObject(srcDir, ['.ts']);
       expect({
-        ...files, 
+        ...files,
         ...srcFiles
       }).toMatchSnapshot();
     });

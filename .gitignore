@@ -7,4 +7,5 @@ package-lock.json
 # managed by sku
 dist/
 report/
+tsconfig.json
 # end managed by sku

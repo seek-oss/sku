@@ -1,8 +1,10 @@
 node_modules/
-report/
 *.log
-dist/
 yarn.lock
 package-lock.json
 .idea
+
+# managed by sku
+dist/
 report/
+# end managed by sku

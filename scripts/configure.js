@@ -13,7 +13,7 @@ const tslintConfig = require('../config/typescript/tslint.json');
 
 const addSep = p => `${p}${path.sep}`;
 
-const writeFileToRoot = (fileName, content) => {
+const writeFileToCWD = (fileName, content) => {
   const outPath = path.join(process.cwd(), fileName);
 
   fs.writeFileSync(outPath, JSON.stringify(content));
@@ -41,8 +41,8 @@ const writeFileToRoot = (fileName, content) => {
       exclude: [path.join(process.cwd(), 'node_modules')]
     };
 
-    writeFileToRoot(tsConfigFileName, tsConfig);
-    writeFileToRoot(tslintConfigFileName, tslintConfig);
+    writeFileToCWD(tsConfigFileName, tsConfig);
+    writeFileToCWD(tslintConfigFileName, tslintConfig);
 
     gitIgnorePatterns.push(tsConfigFileName, tslintConfigFileName);
   }

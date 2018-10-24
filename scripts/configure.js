@@ -9,8 +9,15 @@ const builds = require('../config/builds');
 const {
   bundleReportFolder
 } = require('../config/webpack/plugins/bundleAnalyzer');
+const tslintConfig = require('../config/typescript/tslint.json');
 
 const addSep = p => `${p}${path.sep}`;
+
+const writeFileToRoot = (fileName, content) => {
+  const outPath = path.join(process.cwd(), fileName);
+
+  fs.writeFileSync(outPath, JSON.stringify(content));
+};
 
 (async () => {
   const gitIgnorePatterns = [addSep(bundleReportFolder)];
@@ -26,16 +33,18 @@ const addSep = p => `${p}${path.sep}`;
 
   if (isTypeScript) {
     const tsConfigFileName = 'tsconfig.json';
+    const tslintConfigFileName = 'tslint.json';
 
     const tsConfig = {
       extends: require.resolve('../config/typescript/tsconfig.json'),
       include: builds.reduce((acc, { paths }) => [...acc, ...paths.src], []),
       exclude: [path.join(process.cwd(), 'node_modules')]
     };
-    const outPath = path.join(process.cwd(), tsConfigFileName);
 
-    fs.writeFileSync(outPath, JSON.stringify(tsConfig));
-    gitIgnorePatterns.push(tsConfigFileName);
+    writeFileToRoot(tsConfigFileName, tsConfig);
+    writeFileToRoot(tslintConfigFileName, tslintConfig);
+
+    gitIgnorePatterns.push(tsConfigFileName, tslintConfigFileName);
   }
 
   await ensureGitignore({

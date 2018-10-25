@@ -13,26 +13,28 @@ const {
   bundleReportFolder
 } = require('../config/webpack/plugins/bundleAnalyzer');
 const tslintConfig = require('../config/typescript/tslint.json');
+const prettierConfig = require('../config/prettier/prettierConfig');
 
 const addSep = p => `${p}${path.sep}`;
 
 const writeFileToCWD = async (fileName, content) => {
   const outPath = path.join(process.cwd(), fileName);
 
-  await writeFileAsync(outPath, JSON.stringify(content));
+  await writeFileAsync(outPath, JSON.stringify(content, null, 2));
 };
 
 (async () => {
   const gitIgnorePatterns = [addSep(bundleReportFolder)];
+  const prettierIgnorePatterns = [addSep(bundleReportFolder)];
 
   // Add target directories
-  gitIgnorePatterns.push(
-    ...uniq(
-      builds.map(({ paths }) =>
-        addSep(paths.dist.replace(addSep(process.cwd()), ''))
-      )
+  const targetDirectories = uniq(
+    builds.map(({ paths }) =>
+      addSep(paths.dist.replace(addSep(process.cwd()), ''))
     )
   );
+  gitIgnorePatterns.push(targetDirectories);
+  prettierIgnorePatterns.push(targetDirectories);
 
   if (isTypeScript) {
     const tsConfigFileName = 'tsconfig.json';
@@ -50,8 +52,18 @@ const writeFileToCWD = async (fileName, content) => {
     gitIgnorePatterns.push(tsConfigFileName, tslintConfigFileName);
   }
 
+  const prettierConfigFilename = '.prettierrc';
+  await writeFileToCWD(prettierConfigFilename, prettierConfig);
+  gitIgnorePatterns.push(prettierConfigFilename);
+
   await ensureGitignore({
     comment: 'managed by sku',
     patterns: gitIgnorePatterns
+  });
+
+  await ensureGitignore({
+    filepath: path.join(process.cwd(), '.prettierignore'),
+    comment: 'managed by sku',
+    patterns: prettierIgnorePatterns
   });
 })();

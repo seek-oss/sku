@@ -6,6 +6,7 @@ const isTypeScript = require('../config/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
 const prettierConfig = require('../config/prettier/prettierConfig');
 const runTsc = require('../lib/runTsc');
+const runTSLint = require('../lib/runTSLint');
 
 const args = require('../config/args').argv;
 
@@ -15,6 +16,7 @@ const run = async () => {
   if (isTypeScript) {
     try {
       await runTsc();
+      await runTSLint();
     } catch (e) {
       console.log(e);
 

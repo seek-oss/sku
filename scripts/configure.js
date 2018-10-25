@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { promisify } = require('util');
 const ensureGitignore = require('ensure-gitignore');
 const uniq = require('lodash/uniq');
+
+const writeFileAsync = promisify(fs.writeFile);
 
 const isTypeScript = require('../config/isTypeScript');
 const builds = require('../config/builds');
@@ -13,10 +16,10 @@ const tslintConfig = require('../config/typescript/tslint.json');
 
 const addSep = p => `${p}${path.sep}`;
 
-const writeFileToCWD = (fileName, content) => {
+const writeFileToCWD = async (fileName, content) => {
   const outPath = path.join(process.cwd(), fileName);
 
-  fs.writeFileSync(outPath, JSON.stringify(content));
+  await writeFileAsync(outPath, JSON.stringify(content));
 };
 
 (async () => {
@@ -41,8 +44,8 @@ const writeFileToCWD = (fileName, content) => {
       exclude: [path.join(process.cwd(), 'node_modules')]
     };
 
-    writeFileToCWD(tsConfigFileName, tsConfig);
-    writeFileToCWD(tslintConfigFileName, tslintConfig);
+    await writeFileToCWD(tsConfigFileName, tsConfig);
+    await writeFileToCWD(tslintConfigFileName, tslintConfig);
 
     gitIgnorePatterns.push(tsConfigFileName, tslintConfigFileName);
   }

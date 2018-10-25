@@ -8,4 +8,5 @@ package-lock.json
 dist/
 report/
 tsconfig.json
+tslint.json
 # end managed by sku

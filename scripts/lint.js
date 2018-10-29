@@ -4,13 +4,12 @@ const EslintCLI = require('eslint').CLIEngine;
 const builds = require('../config/builds');
 const isTypeScript = require('../config/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
-const prettierConfig = require('../config/prettier/prettierConfig');
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
 
 const args = require('../config/args').argv;
 
-const run = async () => {
+(async () => {
   console.log(chalk.cyan('Linting'));
 
   if (isTypeScript) {
@@ -47,24 +46,5 @@ const run = async () => {
     process.exit(1);
   }
 
-  console.log(chalk.cyan('Checking Prettier format rules'));
-
-  const filePattern =
-    args.length === 0
-      ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.{js,ts,tsx}`)
-      : args;
-
-  prettierCheck(filePattern, prettierConfig)
-    .then(() => {
-      console.log(chalk.cyan('Prettier format rules passed'));
-    })
-    .catch(exitCode => {
-      console.error(
-        'Error: The file(s) listed above failed the prettier check'
-      );
-      console.error('Error: Prettier check exited with exit code', exitCode);
-      process.exit(1);
-    });
-};
-
-run();
+  await prettierCheck();
+})();

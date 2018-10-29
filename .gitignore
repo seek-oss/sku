@@ -5,6 +5,7 @@ package-lock.json
 .idea
 
 # managed by sku
+.prettierrc
 dist/
 report/
 tsconfig.json

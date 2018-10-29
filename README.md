@@ -39,9 +39,16 @@ Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with 
 
 * [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
 * [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
+* [@babel/preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
 * [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread)
 * [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
 * [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
+
+### TypeScript
+
+TypeScript files (`.ts` and `.tsx`) are supported as part of your source code. You can also mix JavaScript with TypeScript allowing you to slowly convert your project to TypeScript over time. The `sku lint` script will report any type errors in your code.
+
+Note: Test files do not support TypeScript.
 
 ### Locally Scoped CSS (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
 
@@ -109,9 +116,9 @@ Example running tests in watch mode:
 $ sku test --watch
 ```
 
-### Linting and Formatting (via [ESLint](http://eslint.org/) and [Prettier](https://github.com/prettier/prettier))
+### Linting and Formatting (via [ESLint](http://eslint.org/), [TSLint](https://palantir.github.io/tslint/) and [Prettier](https://github.com/prettier/prettier))
 
-Running `sku lint` will execute the ESLint rules over the code in your `src` directory. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek).
+Running `sku lint` will execute the ESLint/TSLint rules over the code in your `src` directory, depending on the type of file. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek). Similarly you can see the TSLint rules defined in [tslint-config-seek](https://github.com/seek-oss/tslint-config-seek).
 
 Adding the following to your package.json file will enable the [Atom ESLint plugin](https://github.com/AtomLinter/linter-eslint) to work correctly with sku.
 
@@ -121,11 +128,9 @@ Adding the following to your package.json file will enable the [Atom ESLint plug
 }
 ```
 
-Similarly, running `sku format` will reformat the JavaScript code in `src` using Prettier.
+Running `sku format` will format all JavaScript and TypeScript files in your project using [Prettier](https://github.com/prettier/prettier). As changes to formatting are considered non-breaking, please ensure you run `sku format` after upgrading `sku`.
 
-Versions of our formatting tool `prettier` are locked to specific versions to ensure reliable `sku format` and `sku lint` commands.
-
-Changes to formatting are considered non-breaking. Please ensure you run `sku format` after upgrading `sku`.
+Files can be excluded from formatting by adding paths into the `.prettierignore` file.
 
 ### Static Pre-rendering (via [static-site-generator-webpack-plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin))
 

@@ -1,25 +1,3 @@
-const path = require('path');
-const chalk = require('chalk');
-
 const prettierWrite = require('../lib/runPrettier').write;
-const prettierConfig = require('../config/prettier/prettierConfig');
 
-const builds = require('../config/builds');
-
-const args = require('../config/args').argv;
-
-console.log(chalk.cyan('Formatting source code with Prettier'));
-
-const filePattern =
-  args.length === 0
-    ? builds[0].paths.src.map(srcPath => `${srcPath}/**/*.{js,ts,tsx}`)
-    : args;
-
-prettierWrite(filePattern, prettierConfig)
-  .then(() => {
-    console.log(chalk.cyan('Prettier format complete'));
-  })
-  .catch(exitCode => {
-    console.error('Error: Prettier exited with exit code', exitCode);
-    process.exit(1);
-  });
+(async () => await prettierWrite())();

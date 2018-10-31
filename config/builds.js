@@ -4,6 +4,9 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const deasyncPromise = require('deasync-promise');
 const args = require('./args');
+const { createHooks } = require('../lib/hooks');
+const { applyPlugin } = require('../lib/plugins');
+
 const skuConfigPath = path.join(cwd, args.config);
 
 const makeArray = x => (Array.isArray(x) ? x : [x]);
@@ -65,6 +68,7 @@ const builds = buildConfigs
         path.join(cwd, srcPath)
       ),
       compilePackages: [
+        'sku',
         'seek-style-guide',
         'seek-asia-style-guide',
         'braid-design-system',
@@ -76,6 +80,12 @@ const builds = buildConfigs
       publicPath: buildConfig.publicPath || '/',
       dist: path.join(cwd, buildConfig.target || 'dist')
     };
+
+    const hooks = createHooks();
+
+    if (buildConfig.plugins && buildConfig.plugins.length) {
+      buildConfig.plugins.forEach(plugin => applyPlugin(plugin, hooks));
+    }
 
     return {
       name,
@@ -89,7 +99,8 @@ const builds = buildConfigs
       port,
       storybookPort,
       polyfills,
-      initialPath
+      initialPath,
+      hooks
     };
   });
 

@@ -1,4 +1,6 @@
+const merge = require('babel-merge');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
+const builds = require('../builds');
 
 const browserEnvOptions = {
   modules: false,
@@ -10,6 +12,30 @@ const nodeEnvOptions = {
     node: 'current'
   }
 };
+
+class BabelHook {
+  constructor(config) {
+    this.config = config;
+  }
+
+  merge(config) {
+    this.config = merge(this.config, config);
+  }
+
+  getConfig() {
+    return this.config;
+  }
+}
+
+function applyHook(config) {
+  if (builds.length === 1) {
+    const hook = new BabelHook(config);
+    builds[0].hooks.babel.call(hook);
+    return hook.getConfig();
+  }
+
+  return config;
+}
 
 module.exports = ({ target, lang = 'js' }) => {
   const isBrowser = target === 'browser';
@@ -53,7 +79,7 @@ module.exports = ({ target, lang = 'js' }) => {
         ]
       : require.resolve('@babel/preset-flow');
 
-  return {
+  const config = {
     babelrc: false,
     presets: [
       languagePreset,
@@ -62,4 +88,6 @@ module.exports = ({ target, lang = 'js' }) => {
     ],
     plugins
   };
+
+  return applyHook(config);
 };

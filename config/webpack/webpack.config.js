@@ -9,6 +9,7 @@ const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
+const { cwd } = require('../../lib/cwd');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
@@ -40,7 +41,7 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
+      return require.resolve(polyfill, { paths: [cwd()] });
     });
 
     const devServerEntries = [

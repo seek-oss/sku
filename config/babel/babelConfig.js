@@ -1,4 +1,5 @@
 const supportedBrowsers = require('../browsers/supportedBrowsers');
+const { cwd } = require('../../lib/cwd');
 
 const browserEnvOptions = {
   modules: false,
@@ -23,7 +24,7 @@ module.exports = ({ target, lang = 'js' }) => {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: [process.cwd()]
+        root: [cwd()]
       }
     ]
   ];

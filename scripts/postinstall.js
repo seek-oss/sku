@@ -1,7 +1,12 @@
 #!/usr/bin/env node
-const configure = require('../lib/configure');
+const { setCwd } = require('../lib/cwd');
 
 // npm scripts can have an incorrect cwd
 // in this case INIT_CWD should be set
 // see: https://docs.npmjs.com/cli/run-script
-configure(process.env.INIT_CWD);
+// must be run first
+setCwd(process.env.INIT_CWD);
+
+const configure = require('../lib/configure');
+
+configure();

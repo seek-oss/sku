@@ -6,6 +6,7 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
+const { cwd } = require('../../../lib/cwd');
 
 describe('seek-style-guide', () => {
   beforeAll(async () => {
@@ -36,7 +37,7 @@ describe('seek-style-guide', () => {
 
   function createPackageLink(name) {
     return fs.symlink(
-      `${process.cwd()}/node_modules/${name}`,
+      `${cwd()}/node_modules/${name}`,
       `${__dirname}/app/node_modules/${name}`
     );
   }

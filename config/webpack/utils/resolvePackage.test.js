@@ -1,4 +1,5 @@
 const { createPackageResolver } = require('./resolvePackage');
+const { cwd } = require('../../../lib/cwd');
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {
@@ -25,9 +26,7 @@ describe('webpack utils', () => {
         throw error;
       });
 
-      expect(resolvePackage('test')).toEqual(
-        `${process.cwd()}/node_modules/test`
-      );
+      expect(resolvePackage('test')).toEqual(`${cwd()}/node_modules/test`);
     });
 
     test('handles missing package.json when looking for dependencies', () => {
@@ -43,9 +42,7 @@ describe('webpack utils', () => {
         throw packageError;
       });
 
-      expect(resolvePackage('test')).toEqual(
-        `${process.cwd()}/node_modules/test`
-      );
+      expect(resolvePackage('test')).toEqual(`${cwd()}/node_modules/test`);
     });
 
     describe('throws when require.resolve fails and the package is listed', () => {

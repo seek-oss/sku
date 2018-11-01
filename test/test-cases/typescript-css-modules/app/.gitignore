@@ -1,0 +1,7 @@
+# managed by sku
+.prettierrc
+dist/
+report/
+tsconfig.json
+tslint.json
+# end managed by sku

@@ -1,6 +1,6 @@
 const supportedBrowsers = require('../../browsers/supportedBrowsers');
 const { isProductionBuild, isCI } = require('./env');
-const isTypeScript = require('../../../config/isTypeScript');
+const isTypeScript = require('../../../lib/isTypeScript');
 
 /**
  * e.g.
@@ -34,7 +34,7 @@ const makeCssLoaders = (options = {}) => {
   // Apply css-modules-typescript-loader for client builds only as
   // we only need to generate type declarations once.
   const cssModuleToTypeScriptLoader =
-    isTypeScript && !server
+    isTypeScript() && !server
       ? [
           {
             loader: require.resolve('css-modules-typescript-loader'),

@@ -17,7 +17,7 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 
 // npm postinstall can have an incorrect cwd
 // in this case INIT_CWD should be set
-const cwd = process.env.INIT_CWD || cwd;
+const cwd = process.env.INIT_CWD || process.cwd();
 
 const addSep = p => `${p}${path.sep}`;
 const prependBanner = str =>

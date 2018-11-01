@@ -37,7 +37,7 @@ describe('braid-design-system', () => {
 
   function createPackageLink(name) {
     return fs.symlink(
-      `${cwd}/node_modules/${name}`,
+      `${cwd()}/node_modules/${name}`,
       `${__dirname}/app/node_modules/${name}`
     );
   }

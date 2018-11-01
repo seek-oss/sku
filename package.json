@@ -14,7 +14,7 @@
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
-    "postinstall": "./scripts/postinstall",
+    "postinstall": "./scripts/postinstall.js",
     "precommit": "lint-staged",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit --extends seek",

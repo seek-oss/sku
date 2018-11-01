@@ -1,9 +1,9 @@
-const cwd = process.cwd();
+const { cwd } = require('../lib/cwd');
 const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');
 const deasyncPromise = require('deasync-promise');
-const skuConfigPath = path.join(cwd, 'sku.config.js');
+const skuConfigPath = path.join(cwd(), 'sku.config.js');
 const args = require('./args');
 
 const makeArray = x => (Array.isArray(x) ? x : [x]);
@@ -71,7 +71,7 @@ const builds = buildConfigs
 
     const paths = {
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
-        path.join(cwd, srcPath)
+        path.join(cwd(), srcPath)
       ),
       compilePackages: [
         'seek-style-guide',
@@ -79,11 +79,11 @@ const builds = buildConfigs
         'braid-design-system',
         ...compilePackages
       ],
-      clientEntry: path.join(cwd, entry.client || 'src/client.js'),
-      serverEntry: path.join(cwd, entry.server || 'src/server.js'),
-      public: path.join(cwd, buildConfig.public || 'public'),
+      clientEntry: path.join(cwd(), entry.client || 'src/client.js'),
+      serverEntry: path.join(cwd(), entry.server || 'src/server.js'),
+      public: path.join(cwd(), buildConfig.public || 'public'),
       publicPath: buildConfig.publicPath || '/',
-      dist: path.join(cwd, buildConfig.target || 'dist')
+      dist: path.join(cwd(), buildConfig.target || 'dist')
     };
 
     return {

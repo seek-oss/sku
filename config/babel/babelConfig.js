@@ -1,6 +1,7 @@
 const merge = require('babel-merge');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const builds = require('../builds');
+const { cwd } = require('../../lib/cwd');
 
 const browserEnvOptions = {
   modules: false,
@@ -49,7 +50,7 @@ module.exports = ({ target, lang = 'js' }) => {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: [process.cwd()]
+        root: [cwd()]
       }
     ]
   ];

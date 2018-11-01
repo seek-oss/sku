@@ -1,4 +1,4 @@
-const cwd = process.cwd();
+const { cwd } = require('../lib/cwd');
 const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');
@@ -7,7 +7,7 @@ const args = require('./args');
 const { createHooks } = require('../lib/hooks');
 const { applyPlugin } = require('../lib/plugins');
 
-const skuConfigPath = path.join(cwd, args.config);
+const skuConfigPath = path.join(cwd(), args.config);
 
 const makeArray = x => (Array.isArray(x) ? x : [x]);
 const buildConfigs = fs.existsSync(skuConfigPath)
@@ -65,7 +65,7 @@ const builds = buildConfigs
 
     const paths = {
       src: (buildConfig.srcPaths || ['src']).map(srcPath =>
-        path.join(cwd, srcPath)
+        path.join(cwd(), srcPath)
       ),
       compilePackages: [
         'sku',
@@ -74,11 +74,11 @@ const builds = buildConfigs
         'braid-design-system',
         ...compilePackages
       ],
-      clientEntry: path.join(cwd, entry.client || 'src/client.js'),
-      renderEntry: path.join(cwd, entry.render || 'src/render.js'),
-      public: path.join(cwd, buildConfig.public || 'public'),
+      clientEntry: path.join(cwd(), entry.client || 'src/client.js'),
+      renderEntry: path.join(cwd(), entry.render || 'src/render.js'),
+      public: path.join(cwd(), buildConfig.public || 'public'),
       publicPath: buildConfig.publicPath || '/',
-      dist: path.join(cwd, buildConfig.target || 'dist')
+      dist: path.join(cwd(), buildConfig.target || 'dist')
     };
 
     const hooks = createHooks();

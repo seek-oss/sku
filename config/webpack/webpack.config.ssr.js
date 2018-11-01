@@ -11,6 +11,7 @@ const StartServerPlugin = require('start-server-webpack-plugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
+const { cwd } = require('../../lib/cwd');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
@@ -51,7 +52,7 @@ const buildWebpackConfigs = builds.map(
     const isStartScript = args.script === 'start-ssr';
 
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [process.cwd()] });
+      return require.resolve(polyfill, { paths: [cwd()] });
     });
 
     // Define clientEntry

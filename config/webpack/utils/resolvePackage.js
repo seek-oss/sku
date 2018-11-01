@@ -2,6 +2,7 @@ const path = require('path');
 const memoize = require('memoizee');
 const chalk = require('chalk');
 const debug = require('debug')('sku:resolvePackage');
+const { cwd } = require('../../../lib/cwd');
 
 /**
  * Create a `resolvePackage` function.
@@ -19,8 +20,6 @@ const createPackageResolver = (fs, resolve) => {
    * Throws if a package is listed in the project's dependencies and cannot be resolved.
    */
   function resolvePackage(packageName) {
-    const cwd = process.cwd();
-
     try {
       // First, try to use require.resolve to find the package.
       // We add /package.json and then dirname the result because require.resolve follows the `main`
@@ -61,7 +60,7 @@ function getProjectDependencies(readFileSync) {
   let pkg;
 
   try {
-    pkg = JSON.parse(readFileSync(`${process.cwd()}/package.json`).toString());
+    pkg = JSON.parse(readFileSync(`${cwd}/package.json`).toString());
   } catch (error) {
     if (error.code === 'ENOENT') {
       pkg = {};

@@ -1,4 +1,4 @@
-const cwd = process.cwd();
+const { cwd } = require('../lib/cwd');
 const path = require('path');
 const fs = require('fs');
 const inquirer = require('inquirer');

@@ -41,7 +41,7 @@ const buildWebpackConfigs = builds.map(
       .value();
 
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [cwd] });
+      return require.resolve(polyfill, { paths: [cwd()] });
     });
 
     const devServerEntries = [

@@ -28,7 +28,7 @@ const createPackageResolver = (fs, resolve) => {
       // This branch handles packages being symlinked into node_modules, for example with
       // `npm link` or in sku's test cases.
       const result = path.dirname(
-        resolve(`${packageName}/package.json`, { paths: [cwd] })
+        resolve(`${packageName}/package.json`, { paths: [cwd()] })
       );
       debug(`Resolved ${packageName} to ${result}`);
       return result;
@@ -41,7 +41,7 @@ const createPackageResolver = (fs, resolve) => {
           // throwing config schema errors when this function is used to configure a loader.
           // This branch handles the scenario where we're trying to resolve a design system module because
           // it's in the default list of compilePackages, but it's not actually being used in the project.
-          const localPackage = path.join(cwd, 'node_modules', packageName);
+          const localPackage = path.join(cwd(), 'node_modules', packageName);
           debug(`Resolved unused package ${packageName} to ${localPackage}`);
           return localPackage;
         }
@@ -60,7 +60,7 @@ function getProjectDependencies(readFileSync) {
   let pkg;
 
   try {
-    pkg = JSON.parse(readFileSync(`${cwd}/package.json`).toString());
+    pkg = JSON.parse(readFileSync(`${cwd()}/package.json`).toString());
   } catch (error) {
     if (error.code === 'ENOENT') {
       pkg = {};

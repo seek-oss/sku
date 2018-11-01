@@ -52,7 +52,7 @@ const buildWebpackConfigs = builds.map(
     const isStartScript = args.script === 'start-ssr';
 
     const resolvedPolyfills = polyfills.map(polyfill => {
-      return require.resolve(polyfill, { paths: [cwd] });
+      return require.resolve(polyfill, { paths: [cwd()] });
     });
 
     // Define clientEntry

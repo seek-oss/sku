@@ -3,6 +3,7 @@ const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
 const fetch = require('node-fetch');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
+const getAppSnapshot = require('../../utils/getAppSnapshot');
 const skuConfig = require('./sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.port.backend}`;
@@ -22,9 +23,8 @@ describe('ssr-hello-world', () => {
     });
 
     it('should start a development server', async () => {
-      const response = await fetch(backendUrl);
-      const responseText = await response.text();
-      expect(responseText).toMatchSnapshot();
+      const snapshot = await getAppSnapshot(backendUrl);
+      expect(snapshot).toMatchSnapshot();
     });
 
     it('should start a static asset server', async () => {

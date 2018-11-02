@@ -111,9 +111,7 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: [MiniCssExtractPlugin.loader].concat(
-                utils.makeCssLoaders({ js: true })
-              )
+              use: utils.makeCssLoaders({ js: true })
             },
             {
               test: /\.mjs$/,
@@ -125,15 +123,11 @@ const buildWebpackConfigs = builds.map(
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
                   include: utils.resolvePackage(packageName),
-                  use: [MiniCssExtractPlugin.loader].concat(
-                    utils.makeCssLoaders({ packageName })
-                  )
+                  use: utils.makeCssLoaders({ packageName })
                 })),
                 {
                   exclude: /node_modules/,
-                  use: [MiniCssExtractPlugin.loader].concat(
-                    utils.makeCssLoaders()
-                  )
+                  use: utils.makeCssLoaders()
                 }
               ]
             },

@@ -1,6 +1,7 @@
 const supportedBrowsers = require('../../browsers/supportedBrowsers');
 const { isProductionBuild, isCI } = require('./env');
 const isTypeScript = require('../../../lib/isTypeScript');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * e.g.
@@ -18,7 +19,7 @@ const makeJsLoaders = ({ target, lang }) => [
 ];
 
 const makeCssLoaders = (options = {}) => {
-  const { server = false, packageName = '', js = false } = options;
+  const { server = false, packageName = '', js = false, hot = false } = options;
 
   const debugIdent = isProductionBuild
     ? ''
@@ -46,6 +47,8 @@ const makeCssLoaders = (options = {}) => {
       : [];
 
   return [
+    ...(hot ? ['css-hot-loader'] : []),
+    ...(!server ? [MiniCssExtractPlugin.loader] : []),
     ...cssModuleToTypeScriptLoader,
     {
       // On the server, we use 'css-loader/locals' to avoid generating a CSS file.

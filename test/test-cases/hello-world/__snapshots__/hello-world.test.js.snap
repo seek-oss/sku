@@ -22,7 +22,20 @@ Object {
 `;
 
 exports[`hello-world start should start a development server 1`] = `
-"
+Object {
+  "content": "<!DOCTYPE html><html><head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+    <body>
+      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+    
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "
   <!DOCTYPE html>
   <html>
     <head>
@@ -35,5 +48,7 @@ exports[`hello-world start should start a development server 1`] = `
       <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
     </body>
   </html>
-"
+",
+  "warnings": Array [],
+}
 `;

@@ -1,6 +1,8 @@
 const path = require('path');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
+const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
+const getAppSnapshot = require('../../utils/getAppSnapshot');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const srcDir = path.resolve(appDir, 'src');
@@ -37,6 +39,25 @@ describe('typescript-css-modules', () => {
         ...files,
         ...srcFiles
       }).toMatchSnapshot();
+    });
+  });
+
+  describe('start', () => {
+    const devServerUrl = `http://localhost:8080`;
+    let server;
+
+    beforeAll(async () => {
+      server = await runSkuScriptInDir('start', appDir);
+      await waitForUrls(devServerUrl);
+    });
+
+    afterAll(() => {
+      server.kill();
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot(devServerUrl);
+      expect(snapshot).toMatchSnapshot();
     });
   });
 

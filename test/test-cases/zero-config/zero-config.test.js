@@ -1,6 +1,7 @@
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
+const getAppSnapshot = require('../../utils/getAppSnapshot');
 const fetch = require('node-fetch');
 
 describe('zero-config', () => {
@@ -18,9 +19,8 @@ describe('zero-config', () => {
     });
 
     it('should start a development server', async () => {
-      const response = await fetch(devServerUrl);
-      const responseText = await response.text();
-      expect(responseText).toMatchSnapshot();
+      const snapshot = await getAppSnapshot(devServerUrl);
+      expect(snapshot).toMatchSnapshot();
     });
   });
 

@@ -285,7 +285,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : [bundleAnalyzerPlugin({ name: 'server' })]
+            : []
         )
       }
     ].map(webpackDecorator);

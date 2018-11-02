@@ -49,11 +49,11 @@ const buildWebpackConfigs = builds.map(
         'webpack-dev-server/client'
       )}?http://localhost:${port}/`
     ];
+    const isStartScript = args.script === 'start';
 
-    const entry =
-      args.script === 'start'
-        ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
-        : [...resolvedPolyfills, paths.clientEntry];
+    const entry = isStartScript
+      ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
+      : [...resolvedPolyfills, paths.clientEntry];
 
     const internalJs = [
       ...paths.src,
@@ -62,7 +62,7 @@ const buildWebpackConfigs = builds.map(
 
     debug({ build: name || 'default', internalJs });
 
-    const publicPath = args.script === 'start' ? '/' : paths.publicPath;
+    const publicPath = isStartScript ? '/' : paths.publicPath;
 
     const result = [
       {
@@ -149,7 +149,7 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          bundleAnalyzerPlugin({ name: 'client' }),
+          ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
           new MiniCssExtractPlugin({
             filename: 'style.css',
             chunkFilename: '[name].css'
@@ -230,7 +230,6 @@ const buildWebpackConfigs = builds.map(
         },
         plugins: [
           new webpack.DefinePlugin(envVars),
-          bundleAnalyzerPlugin({ name: 'render' }),
           ...locales.slice(0, utils.isProductionBuild ? locales.length : 1).map(
             locale =>
               new StaticSiteGeneratorPlugin({

@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const builds = require('../builds');
 const flatten = require('lodash/flatten');

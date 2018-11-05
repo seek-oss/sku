@@ -9,6 +9,7 @@ Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [B
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed. Designed for usage with [seek-style-guide](https://github.com/seek-oss/seek-style-guide), although this isn't a requirement.
 
 This tool is heavily inspired by other work, most notably:
+
 - [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
@@ -35,14 +36,14 @@ $ npm install -g npx
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))
 
-Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code.  It'll all just work, thanks to the following Babel plugins:
+Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code. It'll all just work, thanks to the following Babel plugins:
 
-* [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
-* [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
-* [@babel/preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
-* [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread)
-* [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
-* [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
+- [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
+- [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
+- [@babel/preset-typescript](https://babeljs.io/docs/en/babel-preset-typescript)
+- [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/en/babel-plugin-proposal-object-rest-spread)
+- [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
+- [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
 
 ### TypeScript
 
@@ -68,16 +69,12 @@ You can then import the classes into your JavaScript code like so:
 ```js
 import styles from './example.less';
 
-export default () => (
-  <div className={styles.exampleWrapper}>
-    Hello World!
-  </div>
-);
+export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 ```
 
 ### Static CSS-in-JS (via [css-in-js-loader](https://github.com/nthtran/css-in-js-loader))
 
-You can import `.css.js` files into your components and use them exactly as you would a regular style sheet.  This is mostly useful when you want to take advantage of JavaScript to compose styles:
+You can import `.css.js` files into your components and use them exactly as you would a regular style sheet. This is mostly useful when you want to take advantage of JavaScript to compose styles:
 
 ```js
 import { standardWrapper } from 'theme/wrappers';
@@ -96,11 +93,7 @@ export default {
 ```js
 import styles from './example.css.js';
 
-export default () => (
-  <div className={styles.exampleWrapper}>
-    Hello World!
-  </div>
-);
+export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 ```
 
 ### Unit and Snapshot Testing (via [Jest](https://facebook.github.io/jest/))
@@ -112,6 +105,7 @@ Since sku uses Jest as a testing framework, you can read the [Jest documentation
 Note: `sku` will forward all command line args to `jest`.
 
 Example running tests in watch mode:
+
 ```bash
 $ sku test --watch
 ```
@@ -147,9 +141,9 @@ export default ({ publicPath }) => {
   return {
     '/foo': '<html>...</html>',
     '/bar': '<html>...</html>',
-    '/baz/qux': '<html>...</html>',
-  }
-}
+    '/baz/qux': '<html>...</html>'
+  };
+};
 ```
 
 Will result in your `/dist` folder having an output like this:
@@ -175,16 +169,8 @@ import React from 'react';
 import Button from './Button';
 
 storiesOf('Button', module)
-  .add('Primary', () => (
-    <Button variant="primary">
-      Primary
-    </Button>
-  ))
-  .add('Secondary', () => (
-    <Button variant="secondary">
-      Secondary
-    </Button>
-  ));
+  .add('Primary', () => <Button variant="primary">Primary</Button>)
+  .add('Secondary', () => <Button variant="secondary">Secondary</Button>);
 ```
 
 _**NOTE:** To access the Storybook API, you should import from `sku/storybook`, since your project isn't depending on Storybook directly._
@@ -240,7 +226,7 @@ module.exports = {
   public: 'src/public',
   publicPath: '/',
   target: 'dist'
-}
+};
 ```
 
 If you need to specify a different config file you can do so with the `--config` parameter.
@@ -376,7 +362,7 @@ Sometimes you might want to extract and share code between sku projects, but thi
 ```js
 module.exports = {
   compilePackages: ['awesome-shared-components']
-}
+};
 ```
 
 Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
@@ -390,24 +376,23 @@ The `locales` option accepts an array of strings representing each locale you wa
 ```js
 module.exports = {
   locales: ['AU', 'NZ']
-}
+};
 ```
 
 For each locale, sku will call your `render.js` function and pass it the locale as a parameter.
 
 ```js
-const render = ({ locale }) => (
-  `<div>Rendered for ${locale}</div>`
-)
+const render = ({ locale }) => `<div>Rendered for ${locale}</div>`;
 ```
 
 The name of the HTML file that is generated will be suffixed by `-{locale}`.
 
 eg.
+
 ```js
 module.exports = {
   locales: ['AU', 'NZ']
-}
+};
 ```
 
 will create `index-AU.html` & `index-NZ.html`.
@@ -426,7 +411,7 @@ module.exports = {
   port: 5000,
   // Optional parameter to set a page to open when the development server starts
   initialPath: '/my-page'
-}
+};
 ```
 
 Note: The app will always run on localhost. The `hosts` option is only for apps that resolve custom hosts to localhost.
@@ -457,7 +442,7 @@ module.exports = [
     public: 'src/pages/world/public',
     target: 'dist/world'
   }
-]
+];
 ```
 
 You will then be prompted to select the project you'd like to work on when starting your development server:
@@ -477,6 +462,7 @@ $ npm start hello
 The default mode for sku is to statically render projects. However, Server-Side Rendering (SSR) can explicitly be turned on, both in development with hot module reloading for React, and in production.
 
 First, you need to create a `sku.config.js` file, which will contain the following setup at minimum:
+
 ```js
 module.exports = {
   entry: {
@@ -487,11 +473,13 @@ module.exports = {
   publicPath: '/',
   target: 'dist',
   port: { client: 3300, backend: 3301 }
-}
+};
 ```
+
 If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above.
 
 Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
+
 ```js
 import render from './render.js';
 import middleware from './middleware';
@@ -505,6 +493,7 @@ export default {
 ```
 
 If you require to consume the webpack public path, this can done as follows:
+
 ```js
 import render from './render.js';
 import middleware from './middleware';
@@ -518,10 +507,10 @@ export default ({ publicPath }) => ({
 ```
 
 Last but not least, please note that commands for SSR are different to the ones used normally:
+
 - Use `sku start-ssr` to start your development environment. It uses both `port.client` and `port.backend` to spin up hot module reloading servers.
 - Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `port.backend`.
 - Use `sku test-ssr` to test your application
-
 
 ## Contributing
 

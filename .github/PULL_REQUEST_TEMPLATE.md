@@ -27,5 +27,9 @@ After:
 EXAMPLE USAGE:
 
 ```js
-{{ Code }}
+{
+  {
+    Code;
+  }
+}
 ```

@@ -18,8 +18,12 @@ module.exports = async (script, cwd) => {
     });
   } catch (error) {
     // Print the stdout of a failed command so we can see it in the jest output.
-    error.stdout && console.warn(error.stdout);
-    error.stderr && console.warn(error.stderr);
+    if (error.stdout) {
+      console.warn(error.stdout);
+    }
+    if (error.stderr) {
+      console.warn(error.stderr);
+    }
     throw error;
   }
 };

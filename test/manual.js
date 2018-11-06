@@ -11,7 +11,10 @@ const LAST_TEST_CASE = 'lastTestCase';
 const LAST_SCRIPT = 'lastScript';
 
 const runScriptForTestCase = (script, testCase) => {
-  return runSkuScriptInDir(script, path.join(__dirname, 'test-cases', testCase));
+  return runSkuScriptInDir(
+    script,
+    path.join(__dirname, 'test-cases', testCase)
+  );
 };
 
 (async () => {
@@ -28,7 +31,8 @@ const runScriptForTestCase = (script, testCase) => {
     ]);
 
     if (useLast) {
-      return await runScriptForTestCase(lastScript, lastTestCase);
+      await runScriptForTestCase(lastScript, lastTestCase);
+      return;
     }
   }
 

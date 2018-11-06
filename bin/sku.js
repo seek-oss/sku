@@ -21,7 +21,7 @@ switch (script) {
   case 'start-ssr':
   case 'storybook':
   case 'configure': {
-    const scriptPath = require.resolve('../scripts/' + script);
+    const scriptPath = require.resolve(`../scripts/${script}`);
     require(scriptPath);
     break;
   }

@@ -22,9 +22,10 @@ const devServer = new WebpackDevServer(compiler, {
   headers: { 'Access-Control-Allow-Origin': '*' }
 });
 
-devServer.listen(port.client, '127.0.0.1', (err, result) => {
+devServer.listen(port.client, '127.0.0.1', err => {
   if (err) {
-    return console.log(err);
+    console.log(err);
+    return;
   }
 
   const url = `http://${hosts[0]}:${port.client}`;

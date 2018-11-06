@@ -10,10 +10,11 @@
     "node": ">=8.0.0"
   },
   "scripts": {
+    "lint": "eslint .",
     "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
     "test-manual": "node test/manual",
-    "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
-    "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
+    "format": "prettier --config ./config/prettier/prettierConfig.js --write '**/*.{js,ts,tsx,md,less,css}'",
+    "format-check": "prettier --config ./config/prettier/prettierConfig.js --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "./scripts/postinstall.js",
     "precommit": "lint-staged",
     "commit": "git-cz",
@@ -21,8 +22,12 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
-    "{bin,config,scripts}/**/*.js": [
-      "prettier --single-quote --write",
+    "**/*.js": [
+      "npm run lint",
+      "git add"
+    ],
+    "**/*.{js,ts,tsx,md,less,css}": [
+      "npm run format",
       "git add"
     ]
   },

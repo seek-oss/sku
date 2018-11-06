@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const serverExports = require('__sku_alias__serverEntry').default;
+const serverExports = require('__sku_alias__serverEntry').default; // eslint-disable-line import/no-unresolved
 
 const serverOptions =
   typeof serverExports === 'function'
@@ -8,8 +8,6 @@ const serverOptions =
     : serverExports;
 
 const { renderCallback, middleware } = serverOptions;
-
-const port = process.env.SKU_PORT || 8080;
 
 const app = express();
 

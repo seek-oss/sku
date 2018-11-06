@@ -48,14 +48,14 @@ const builds = buildConfigs
     const compilePackages = buildConfig.compilePackages || [];
     const hosts = buildConfig.hosts || ['localhost'];
     const initialPath = buildConfig.initialPath || '/';
+    const clientPort =
+      typeof buildConfig.port === 'number' ? buildConfig.port : 8080;
 
     const port = {
       client:
         buildConfig.port && buildConfig.port.client
           ? buildConfig.port.client
-          : typeof buildConfig.port === 'number'
-            ? buildConfig.port
-            : 8080,
+          : clientPort,
       backend:
         buildConfig.port && buildConfig.port.backend
           ? buildConfig.port.backend

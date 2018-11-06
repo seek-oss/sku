@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleGuideProvider, PageBlock, Section, Text } from 'seek-style-guide/react';
+import {
+  StyleGuideProvider,
+  PageBlock,
+  Section,
+  Text
+} from 'seek-style-guide/react';
 
 export default () => (
   <StyleGuideProvider>

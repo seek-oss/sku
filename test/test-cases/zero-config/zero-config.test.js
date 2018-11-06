@@ -2,7 +2,6 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
-const fetch = require('node-fetch');
 
 describe('zero-config', () => {
   describe('start', () => {

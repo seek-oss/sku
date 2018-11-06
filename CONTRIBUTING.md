@@ -49,7 +49,7 @@ Once you've made the desired changes and you're ready to commit, stage your loca
 
 Before committing, consider the scope of your changes according to [semantic versioning](http://semver.org), noting whether this is a breaking change, a feature release or a patch.
 
-New versions are published automatically from [Travis CI](https://travis-ci.org) using [semantic-release](https://github.com/semantic-release/semantic-release). In order to automatically increment version numbers correctly, commit messages must follow our [semantic commit message convention](https://github.com/seek-oss/commitlint-config-seek). If your commit includes a breaking change, be sure to prefix your commit body with `BREAKING CHANGE: `. To make this process easier, we have a commit script (powered by [commitizen](https://github.com/commitizen/cz-cli)) to help guide you through the commit process:
+New versions are published automatically from [Travis CI](https://travis-ci.org) using [semantic-release](https://github.com/semantic-release/semantic-release). In order to automatically increment version numbers correctly, commit messages must follow our [semantic commit message convention](https://github.com/seek-oss/commitlint-config-seek). If your commit includes a breaking change, be sure to prefix your commit body with `BREAKING CHANGE:`. To make this process easier, we have a commit script (powered by [commitizen](https://github.com/commitizen/cz-cli)) to help guide you through the commit process:
 
 ```bash
 $ npm run commit
@@ -63,9 +63,9 @@ In order for your pull request to be accepted, the [Travis CI](https://travis-ci
 
 Once your work is approved and ready to go, follow these steps:
 
-1) Hit the merge button
-2) Ensure the commit message matches the title of the PR (it may have been edited!)
-3) Copy and paste the text under **"Commit Message For Review"** into the commit body (again, it may have been edited!)
+1. Hit the merge button
+2. Ensure the commit message matches the title of the PR (it may have been edited!)
+3. Copy and paste the text under **"Commit Message For Review"** into the commit body (again, it may have been edited!)
 
 Finally, take a deep breath, hit the green "confirm" button, and we have liftoff—your work should be automatically deployed!
 

@@ -2,7 +2,6 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
-const fetch = require('node-fetch');
 const skuConfig = require('./sku.config');
 
 describe('custom-src-paths', () => {

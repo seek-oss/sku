@@ -17,9 +17,10 @@ const devServer = new WebpackDevServer(compiler, {
   allowedHosts: hosts
 });
 
-devServer.listen(port, '0.0.0.0', (err, result) => {
+devServer.listen(port, '0.0.0.0', err => {
   if (err) {
-    return console.log(err);
+    console.log(err);
+    return;
   }
 
   const url = `http://${hosts[0]}:${port}${initialPath}`;

@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.sku.json",
+    "prepare": "npm run build",
     "test": "npm run format-check && npm run build && OPEN_TAB=false jest --runInBand --verbose",
     "lint": "eslint .",
     "test-manual": "node test/manual",

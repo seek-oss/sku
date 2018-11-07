@@ -3,7 +3,6 @@ node_modules/
 yarn.lock
 package-lock.json
 .idea
-lib/hooks/**/*.js
 
 # managed by sku
 .prettierrc

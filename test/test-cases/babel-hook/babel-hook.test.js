@@ -1,8 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('es6-promisify');
-const rimrafAsync = promisify(require('rimraf'));
-const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 
 const appDir = __dirname;

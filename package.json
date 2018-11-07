@@ -12,9 +12,10 @@
   "scripts": {
     "build": "tsc",
     "test": "npm run format-check && npm run build && OPEN_TAB=false jest --runInBand --verbose",
+    "lint": "eslint .",
     "test-manual": "node test/manual",
-    "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
-    "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
+    "format": "prettier --config ./config/prettier/prettierConfig.js --write '**/*.{js,ts,tsx,md,less,css}'",
+    "format-check": "prettier --config ./config/prettier/prettierConfig.js --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "./scripts/postinstall.js",
     "precommit": "lint-staged",
     "commit": "git-cz",
@@ -22,8 +23,12 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "lint-staged": {
-    "{bin,config,scripts}/**/*.js": [
-      "prettier --single-quote --write",
+    "**/*.js": [
+      "npm run lint",
+      "git add"
+    ],
+    "**/*.{js,ts,tsx,md,less,css}": [
+      "npm run format",
       "git add"
     ]
   },
@@ -71,6 +76,7 @@
     "chalk": "^2.4.1",
     "command-line-args": "^4.0.7",
     "cross-spawn": "^6.0.5",
+    "css-hot-loader": "^1.4.2",
     "css-in-js-loader": "^0.1.2",
     "css-loader": "^0.28.7",
     "css-modules-typescript-loader": "^1.0.0",
@@ -107,7 +113,6 @@
     "start-server-webpack-plugin": "^2.2.5",
     "static-site-generator-webpack-plugin": "^3.4.1",
     "string-replace-loader": "^2.1.1",
-    "style-loader": "^0.21.0",
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "tapable": "^1.1.0",
@@ -140,6 +145,7 @@
     "lint-staged": "^7.2.2",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.1.1",
+    "puppeteer": "^1.10.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",

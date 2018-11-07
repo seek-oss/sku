@@ -1,7 +1,7 @@
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
-const fetch = require('node-fetch');
+const getAppSnapshot = require('../../utils/getAppSnapshot');
 const skuConfig = require('./sku.config');
 
 describe('custom-src-paths', () => {
@@ -19,9 +19,8 @@ describe('custom-src-paths', () => {
     });
 
     it('should start a development server', async () => {
-      const response = await fetch(devServerUrl);
-      const responseText = await response.text();
-      expect(responseText).toMatchSnapshot();
+      const snapshot = await getAppSnapshot(devServerUrl);
+      expect(snapshot).toMatchSnapshot();
     });
   });
 

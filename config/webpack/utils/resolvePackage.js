@@ -1,8 +1,26 @@
 const path = require('path');
 const memoize = require('memoizee');
-const chalk = require('chalk');
 const debug = require('debug')('sku:resolvePackage');
 const { cwd } = require('../../../lib/cwd');
+
+function getProjectDependencies(readFileSync) {
+  let pkg;
+
+  try {
+    pkg = JSON.parse(readFileSync(`${cwd()}/package.json`).toString());
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      pkg = {};
+    } else {
+      throw error;
+    }
+  }
+
+  return {
+    ...(pkg.dependencies || {}),
+    ...(pkg.devDependencies || {})
+  };
+}
 
 /**
  * Create a `resolvePackage` function.
@@ -55,25 +73,6 @@ const createPackageResolver = (fs, resolve) => {
 
   return memoize(resolvePackage);
 };
-
-function getProjectDependencies(readFileSync) {
-  let pkg;
-
-  try {
-    pkg = JSON.parse(readFileSync(`${cwd()}/package.json`).toString());
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      pkg = {};
-    } else {
-      throw error;
-    }
-  }
-
-  return {
-    ...(pkg.dependencies || {}),
-    ...(pkg.devDependencies || {})
-  };
-}
 
 module.exports = {
   resolvePackage: createPackageResolver(require('fs'), require.resolve),

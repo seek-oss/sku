@@ -16,7 +16,7 @@ const { cwd } = require('../../lib/cwd');
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
 const buildWebpackConfigs = builds.map(
-  ({ name, paths, env, locales, webpackDecorator, port, polyfills }) => {
+  ({ name, paths, env, webpackDecorator, port, polyfills }) => {
     const envVars = lodash
       .chain(env)
       .mapValues((value, key) => {
@@ -131,11 +131,10 @@ const buildWebpackConfigs = builds.map(
             },
             {
               test: /\.css\.js$/,
-              use: isStartScript
-                ? utils.makeCssLoaders({ js: true })
-                : [MiniCssExtractPlugin.loader].concat(
-                    utils.makeCssLoaders({ js: true })
-                  )
+              use: utils.makeCssLoaders({
+                js: true,
+                hot: isStartScript
+              })
             },
             {
               test: /\.mjs$/,
@@ -147,19 +146,16 @@ const buildWebpackConfigs = builds.map(
               oneOf: [
                 ...paths.compilePackages.map(packageName => ({
                   include: utils.resolvePackage(packageName),
-                  use: isStartScript
-                    ? utils.makeCssLoaders({ packageName })
-                    : [MiniCssExtractPlugin.loader].concat(
-                        utils.makeCssLoaders({ packageName })
-                      )
+                  use: utils.makeCssLoaders({
+                    packageName,
+                    hot: isStartScript
+                  })
                 })),
                 {
                   exclude: /node_modules/,
-                  use: isStartScript
-                    ? utils.makeCssLoaders()
-                    : [MiniCssExtractPlugin.loader].concat(
-                        utils.makeCssLoaders()
-                      )
+                  use: utils.makeCssLoaders({
+                    hot: isStartScript
+                  })
                 }
               ]
             },
@@ -173,19 +169,19 @@ const buildWebpackConfigs = builds.map(
             }
           ]
         },
-        plugins: [new webpack.DefinePlugin(envVars)].concat(
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          new MiniCssExtractPlugin({
+            filename: 'style.css'
+          })
+        ].concat(
           isStartScript
             ? [
                 new webpack.NamedModulesPlugin(),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : [
-                bundleAnalyzerPlugin({ name: 'client' }),
-                new MiniCssExtractPlugin({
-                  filename: 'style.css'
-                })
-              ]
+            : [bundleAnalyzerPlugin({ name: 'client' })]
         )
       },
       {
@@ -285,7 +281,7 @@ const buildWebpackConfigs = builds.map(
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin()
               ]
-            : [bundleAnalyzerPlugin({ name: 'server' })]
+            : []
         )
       }
     ].map(webpackDecorator);

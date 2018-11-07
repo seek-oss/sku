@@ -1,7 +1,7 @@
-const merge = require('babel-merge');
 const supportedBrowsers = require('../browsers/supportedBrowsers');
 const builds = require('../builds');
 const { cwd } = require('../../lib/cwd');
+const BabelConfig = require('../../lib/hooks/babel/BabelConfig').default;
 
 const browserEnvOptions = {
   modules: false,
@@ -14,23 +14,9 @@ const nodeEnvOptions = {
   }
 };
 
-class BabelHook {
-  constructor(config) {
-    this.config = config;
-  }
-
-  merge(config) {
-    this.config = merge(this.config, config);
-  }
-
-  getConfig() {
-    return this.config;
-  }
-}
-
 function applyHook(config) {
   if (builds.length === 1) {
-    const hook = new BabelHook(config);
+    const hook = new BabelConfig(config);
     builds[0].hooks.babel.call(hook);
     return hook.getConfig();
   }
@@ -44,7 +30,7 @@ module.exports = ({ target, lang = 'js' }) => {
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-syntax-dynamic-import'),
-    require.resolve('babel-plugin-react-flow-props-to-prop-types'),
+    require.resolve('babel-plugin-flow-react-proptypes'),
     require.resolve('@babel/plugin-proposal-class-properties'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     [

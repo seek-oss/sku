@@ -20,7 +20,7 @@ export interface HookInstance {
 export type Hook = HookFunction | HookInstance;
 
 function applyHook(hook: Hook, hooks: Hooks) {
-  let apply: HookFunction;
+  let apply: HookFunction | null = null;
 
   if (typeof hook === 'function') {
     apply = hook as HookFunction;

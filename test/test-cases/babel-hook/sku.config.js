@@ -1,5 +1,6 @@
-const { BabelPlugin } = require('../../../plugins');
+const { BabelHook } = require('../../../hooks');
 
+console.log({ BabelHook });
 module.exports = {
   entry: {
     client: 'src/client.js',
@@ -8,13 +9,13 @@ module.exports = {
   target: 'dist',
   publicPath: '/',
   port: 8080,
-  plugins: [
-    new BabelPlugin({
+  hooks: [
+    new BabelHook({
       plugins: [
         [
           'transform-define',
           {
-            'process.env.GREETING': 'BabelPlugin success!'
+            'process.env.GREETING': 'BabelHook success!'
           }
         ]
       ]

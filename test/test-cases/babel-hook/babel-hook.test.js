@@ -8,16 +8,16 @@ const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = __dirname;
 const distDir = path.resolve(appDir, 'dist');
 
-describe('BabelPlugin', () => {
+describe('BabelHook', () => {
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);
   });
 
   it('should generate the expected files', async () => {
     const bundle = fs.readFileSync(`${distDir}/main.js`).toString();
-    expect(bundle).toContain('BabelPlugin success!');
+    expect(bundle).toContain('BabelHook success!');
 
     const html = fs.readFileSync(`${distDir}/index.html`).toString();
-    expect(html).toContain('BabelPlugin success!');
+    expect(html).toContain('BabelHook success!');
   });
 });

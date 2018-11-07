@@ -4,8 +4,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const deasyncPromise = require('deasync-promise');
 const args = require('./args');
-const { createHooks } = require('../lib/hooks');
-const { applyPlugin } = require('../lib/plugins');
+const { applyHooks } = require('../lib/hooks');
 
 const skuConfigPath = path.join(cwd(), args.config);
 
@@ -81,11 +80,7 @@ const builds = buildConfigs
       dist: path.join(cwd(), buildConfig.target || 'dist')
     };
 
-    const hooks = createHooks();
-
-    if (buildConfig.plugins && buildConfig.plugins.length) {
-      buildConfig.plugins.forEach(plugin => applyPlugin(plugin, hooks));
-    }
+    const hooks = applyHooks(buildConfig.hooks || []);
 
     return {
       name,

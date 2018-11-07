@@ -10,7 +10,8 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose",
+    "build": "tsc",
+    "test": "npm run format-check && npm run build && OPEN_TAB=false jest --runInBand --verbose",
     "test-manual": "node test/manual",
     "format": "prettier --single-quote --write '{bin,config,scripts,lib}/**/*.js'",
     "format-check": "prettier --single-quote --list-different '{bin,config,scripts,lib}/**/*.js'",
@@ -126,6 +127,7 @@
     "@commitlint/cli": "^6.0.1",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
+    "@types/tapable": "^1.0.4",
     "async-disk-cache": "^1.3.3",
     "babel-plugin-react-flow-props-to-prop-types": "^0.15.0",
     "babel-plugin-transform-define": "^1.3.0",

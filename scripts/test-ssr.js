@@ -1,13 +1,10 @@
 const jest = require('jest');
+
 const baseJestConfig = require('../config/jest/jestConfig');
 const { argv } = require('../config/args');
-const builds = require('../config/builds.ssr');
+const { jestDecorator } = require('../config/projectConfig');
 
-// Decorate jest config is not supported for monorepo
-const jestConfig =
-  builds.length === 1
-    ? builds[0].jestDecorator(baseJestConfig)
-    : baseJestConfig;
+const jestConfig = jestDecorator(baseJestConfig);
 
 if (!process.env.CI && argv.indexOf('--coverage') < 0) {
   argv.push('--watch');

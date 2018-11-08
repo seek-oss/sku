@@ -1,21 +1,31 @@
 const chalk = require('chalk');
 const baseESlintConfig = require('eslint-config-seek');
 const EslintCLI = require('eslint').CLIEngine;
-const builds = require('../config/builds');
+
 const isTypeScript = require('../lib/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
 
+const { paths, eslintDecorator } = require('../config/projectConfig');
 const args = require('../config/args').argv;
 
 (async () => {
   console.log(chalk.cyan('Linting'));
 
+  const eslint = new EslintCLI({
+    baseConfig: eslintDecorator(baseESlintConfig),
+    useEslintrc: false
+  });
+
+  const pathsToCheck = eslint.resolveFileGlobPatterns(
+    args.length === 0 ? paths.src : args
+  );
+
   if (isTypeScript()) {
     try {
       await runTsc();
-      await runTSLint();
+      await runTSLint(pathsToCheck);
     } catch (e) {
       console.log(e);
 
@@ -23,22 +33,9 @@ const args = require('../config/args').argv;
     }
   }
 
-  // Decorate eslint config is not supported for monorepo
-  const eslintConfig =
-    builds.length === 1
-      ? builds[0].eslintDecorator(baseESlintConfig)
-      : baseESlintConfig;
-
-  const cli = new EslintCLI({
-    baseConfig: eslintConfig,
-    useEslintrc: false
-  });
-
-  const pathsToCheck = args.length === 0 ? builds[0].paths.src : args;
-
-  const formatter = cli.getFormatter();
+  const formatter = eslint.getFormatter();
   console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));
-  const report = cli.executeOnFiles(pathsToCheck);
+  const report = eslint.executeOnFiles(pathsToCheck);
 
   console.log(formatter(report.results));
 
@@ -46,5 +43,5 @@ const args = require('../config/args').argv;
     process.exit(1);
   }
 
-  await prettierCheck();
+  await prettierCheck(pathsToCheck);
 })();

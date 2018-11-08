@@ -5,5 +5,6 @@ module.exports = {
   },
   target: 'dist',
   publicPath: 'http://localhost:8000/',
-  port: { client: 8000, backend: 8001 }
+  port: 8000,
+  serverPort: 8001
 };

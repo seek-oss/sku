@@ -6,8 +6,8 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
 const skuConfig = require('./sku.config');
 
-const backendUrl = `http://localhost:${skuConfig.port.backend}`;
-const clientJsUrl = `http://localhost:${skuConfig.port.client}/main.js`;
+const backendUrl = `http://localhost:${skuConfig.serverPort}`;
+const clientJsUrl = `http://localhost:${skuConfig.port}/main.js`;
 
 describe('ssr-hello-world', () => {
   describe('start', () => {

@@ -1,10 +1,7 @@
 const webpack = require('webpack');
-const builds = require('../builds');
-const flatten = require('lodash/flatten');
+const { paths } = require('../projectConfig');
 const find = require('lodash/find');
 const webpackMerge = require('webpack-merge');
-
-const srcPaths = flatten(builds.map(build => build.paths.src));
 
 const webpackConfigs = require('../webpack/webpack.config');
 const clientWebpackConfig = find(
@@ -32,16 +29,16 @@ module.exports = webpackMerge(
         // totally arbitrary, but designed to be more than we'd need.
         // The first path doesn't fall back to __dirname because they
         // need to provide at least one valid srcPath.
-        __SKU_SRC_PATHS_0__: JSON.stringify(srcPaths[0]),
-        __SKU_SRC_PATHS_1__: JSON.stringify(srcPaths[1] || __dirname),
-        __SKU_SRC_PATHS_2__: JSON.stringify(srcPaths[2] || __dirname),
-        __SKU_SRC_PATHS_3__: JSON.stringify(srcPaths[3] || __dirname),
-        __SKU_SRC_PATHS_4__: JSON.stringify(srcPaths[4] || __dirname),
-        __SKU_SRC_PATHS_5__: JSON.stringify(srcPaths[5] || __dirname),
-        __SKU_SRC_PATHS_6__: JSON.stringify(srcPaths[6] || __dirname),
-        __SKU_SRC_PATHS_7__: JSON.stringify(srcPaths[7] || __dirname),
-        __SKU_SRC_PATHS_8__: JSON.stringify(srcPaths[8] || __dirname),
-        __SKU_SRC_PATHS_9__: JSON.stringify(srcPaths[9] || __dirname)
+        __SKU_SRC_PATHS_0__: JSON.stringify(paths.src[0]),
+        __SKU_SRC_PATHS_1__: JSON.stringify(paths.src[1] || __dirname),
+        __SKU_SRC_PATHS_2__: JSON.stringify(paths.src[2] || __dirname),
+        __SKU_SRC_PATHS_3__: JSON.stringify(paths.src[3] || __dirname),
+        __SKU_SRC_PATHS_4__: JSON.stringify(paths.src[4] || __dirname),
+        __SKU_SRC_PATHS_5__: JSON.stringify(paths.src[5] || __dirname),
+        __SKU_SRC_PATHS_6__: JSON.stringify(paths.src[6] || __dirname),
+        __SKU_SRC_PATHS_7__: JSON.stringify(paths.src[7] || __dirname),
+        __SKU_SRC_PATHS_8__: JSON.stringify(paths.src[8] || __dirname),
+        __SKU_SRC_PATHS_9__: JSON.stringify(paths.src[9] || __dirname)
       })
     ]
   }

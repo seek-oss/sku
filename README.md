@@ -472,7 +472,8 @@ module.exports = {
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
-  port: { client: 3300, backend: 3301 }
+  port: client: 3300,
+  serverPort: 3301
 };
 ```
 
@@ -508,8 +509,8 @@ export default ({ publicPath }) => ({
 
 Last but not least, please note that commands for SSR are different to the ones used normally:
 
-- Use `sku start-ssr` to start your development environment. It uses both `port.client` and `port.backend` to spin up hot module reloading servers.
-- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `port.backend`.
+- Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.
+- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
 - Use `sku test-ssr` to test your application
 
 ## Contributing

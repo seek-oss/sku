@@ -1,4 +1,4 @@
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const waitOnAsync = promisify(require('wait-on'));
 
 module.exports = async (...urls) => {

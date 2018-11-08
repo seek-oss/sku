@@ -3,9 +3,10 @@ process.env.NODE_ENV = 'production';
 
 const Promise = require('bluebird');
 const webpackPromise = Promise.promisify(require('webpack'));
-const webpackConfig = require('../config/webpack/webpack.config.ssr');
 const fs = require('fs-extra');
-const builds = require('../config/builds.ssr');
+
+const webpackConfig = require('../config/webpack/webpack.config.ssr');
+const { paths } = require('../config/projectConfig');
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {
@@ -24,14 +25,12 @@ const runWebpack = config => {
 };
 
 const copyPublicFiles = () => {
-  builds.forEach(({ paths }) => {
-    if (fs.existsSync(paths.public)) {
-      fs.copySync(paths.public, paths.dist, {
-        dereference: true
-      });
-      console.log(`Copying ${paths.public} to ${paths.dist}`);
-    }
-  });
+  if (fs.existsSync(paths.public)) {
+    fs.copySync(paths.public, paths.target, {
+      dereference: true
+    });
+    console.log(`Copying ${paths.public} to ${paths.target}`);
+  }
 };
 
 Promise.each(webpackConfig, runWebpack)

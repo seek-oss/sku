@@ -2,12 +2,13 @@
 process.env.NODE_ENV = 'production';
 
 const path = require('path');
-const { promisify } = require('es6-promisify');
-const webpackPromise = promisify(require('webpack'));
-const webpackConfigs = require('../config/webpack/webpack.config');
 const fs = require('fs-extra');
-const builds = require('../config/builds');
+const { promisify } = require('util');
+const webpackPromise = promisify(require('webpack'));
 const rimraf = promisify(require('rimraf'));
+
+const webpackConfigs = require('../config/webpack/webpack.config');
+const { paths } = require('../config/projectConfig');
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {
@@ -32,25 +33,19 @@ const runWebpack = config => {
   });
 };
 
-const cleanDistFolders = () =>
-  Promise.all(builds.map(({ paths }) => rimraf(`${paths.dist}/*`)));
+const cleanDistFolders = () => rimraf(`${paths.target}/*`);
 
-const cleanRenderJs = () =>
-  Promise.all(
-    builds.map(({ paths }) => rimraf(path.join(paths.dist, 'render.js')))
-  );
+const cleanRenderJs = () => rimraf(path.join(paths.target, 'render.js'));
 
 const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
 
 const copyPublicFiles = () => {
-  builds.forEach(({ paths }) => {
-    if (fs.existsSync(paths.public)) {
-      fs.copySync(paths.public, paths.dist, {
-        dereference: true
-      });
-      console.log(`Copying ${paths.public} to ${paths.dist}`);
-    }
-  });
+  if (fs.existsSync(paths.public)) {
+    fs.copySync(paths.public, paths.target, {
+      dereference: true
+    });
+    console.log(`Copying ${paths.public} to ${paths.target}`);
+  }
 };
 
 cleanDistFolders()

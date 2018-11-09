@@ -472,7 +472,7 @@ module.exports = {
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
-  port: client: 3300,
+  port: 3300,
   serverPort: 3301
 };
 ```

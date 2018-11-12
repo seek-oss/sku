@@ -7,12 +7,13 @@ const Promise = require('bluebird');
 const fs = require('fs-extra');
 const webpackPromise = Promise.promisify(require('webpack'));
 
-const webpackConfig = require('../config/webpack/webpack.config.ssr');
 const { hosts, port, initialPath, paths } = require('../context');
+const [
+  clientWebpackConfig,
+  serverWebpackConfig
+] = require('../config/webpack/webpack.config.ssr');
 
-const serverEntry = paths.serverEntry;
-
-const compiler = webpack(serverEntry ? webpackConfig[0] : webpackConfig);
+const compiler = webpack(clientWebpackConfig);
 const devServer = new WebpackDevServer(compiler, {
   contentBase: paths.public,
   historyApiFallback: true,
@@ -61,7 +62,7 @@ const copyPublicFiles = () => {
   }
 };
 
-runWebpack(webpackConfig[1])
+runWebpack(serverWebpackConfig)
   .then(copyPublicFiles)
   .then(() => {
     const url = `http://${hosts[0]}:${port.server}${initialPath}`;

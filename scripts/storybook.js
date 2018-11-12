@@ -1,7 +1,7 @@
 const path = require('path');
 
 const gracefulSpawn = require('../lib/gracefulSpawn');
-const { storybookPort } = require('../config/projectConfig');
+const { storybookPort } = require('../context');
 
 const startStorybookPath = require.resolve('@storybook/react/bin/index.js');
 const configDir = path.resolve(__dirname, '..', 'config', 'storybook');

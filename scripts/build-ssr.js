@@ -6,7 +6,7 @@ const webpackPromise = Promise.promisify(require('webpack'));
 const fs = require('fs-extra');
 
 const webpackConfig = require('../config/webpack/webpack.config.ssr');
-const { paths } = require('../config/projectConfig');
+const { paths } = require('../context');
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {

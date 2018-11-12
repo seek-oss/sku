@@ -8,7 +8,7 @@ const fs = require('fs-extra');
 const webpackPromise = Promise.promisify(require('webpack'));
 
 const webpackConfig = require('../config/webpack/webpack.config.ssr');
-const { hosts, port, initialPath, paths } = require('../config/projectConfig');
+const { hosts, port, initialPath, paths } = require('../context');
 
 const serverEntry = paths.serverEntry;
 

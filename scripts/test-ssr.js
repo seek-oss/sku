@@ -2,7 +2,7 @@ const jest = require('jest');
 
 const baseJestConfig = require('../config/jest/jestConfig');
 const { argv } = require('../config/args');
-const { jestDecorator } = require('../config/projectConfig');
+const { jestDecorator } = require('../context');
 
 const jestConfig = jestDecorator(baseJestConfig);
 

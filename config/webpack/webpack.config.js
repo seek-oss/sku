@@ -5,7 +5,7 @@ const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
 
 const args = require('../args');
-const config = require('../projectConfig');
+const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
@@ -13,7 +13,15 @@ const { cwd } = require('../../lib/cwd');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
-const { paths, env, locales, webpackDecorator, port, polyfills } = config;
+const {
+  paths,
+  env,
+  locales,
+  webpackDecorator,
+  port,
+  polyfills,
+  isStartScript
+} = config;
 
 const envVars = lodash
   .chain(env)
@@ -49,7 +57,6 @@ const devServerEntries = [
     port.client
   }/`
 ];
-const isStartScript = args.script === 'start';
 
 const entry = isStartScript
   ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
@@ -62,8 +69,6 @@ const internalJs = [
 
 debug({ build: 'default', internalJs });
 
-const publicPath = isStartScript ? '/' : paths.publicPath;
-
 const buildWebpackConfigs = [
   {
     name: 'client',
@@ -71,7 +76,7 @@ const buildWebpackConfigs = [
     entry,
     output: {
       path: paths.target,
-      publicPath,
+      publicPath: paths.publicPath,
       filename: '[name].js'
     },
     optimization: {
@@ -170,7 +175,7 @@ const buildWebpackConfigs = [
     ],
     output: {
       path: paths.target,
-      publicPath,
+      publicPath: paths.publicPath,
       filename: 'render.js',
       libraryTarget: 'umd'
     },
@@ -228,7 +233,7 @@ const buildWebpackConfigs = [
         locale =>
           new StaticSiteGeneratorPlugin({
             locals: {
-              publicPath,
+              publicPath: paths.publicPath,
               locale
             },
             paths: `index${

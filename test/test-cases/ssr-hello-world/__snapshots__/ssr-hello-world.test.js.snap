@@ -11,7 +11,7 @@ exports[`ssr-hello-world build should generate a production server 1`] = `
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://some.cdn/main.js\\"></script>
     </body>
   </html>
 "

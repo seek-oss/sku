@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const { paths } = require('../projectConfig');
+const { paths } = require('../../context');
 const find = require('lodash/find');
 const webpackMerge = require('webpack-merge');
 

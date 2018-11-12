@@ -11,13 +11,13 @@ const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
 const {
-  name,
   paths,
   env,
   webpackDecorator,
   port,
-  polyfills
-} = require('../projectConfig');
+  polyfills,
+  isStartScript
+} = require('../../context');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
@@ -32,7 +32,7 @@ const envVars = lodash
 
     if (typeof valueForEnv === 'undefined') {
       console.log(
-        `WARNING: Environment variable "${key}" for build "${name}" is missing a value for the "${
+        `WARNING: Environment variable "${key}" is missing a value for the "${
           args.env
         }" environment`
       );
@@ -51,20 +51,18 @@ const internalJs = [
   ...paths.compilePackages.map(utils.resolvePackage)
 ];
 
-debug({ build: name || 'default', internalJs });
-
-const isStartScript = args.script === 'start-ssr';
+debug({ build: 'default', internalJs });
 
 const resolvedPolyfills = polyfills.map(polyfill => {
   return require.resolve(polyfill, { paths: [cwd()] });
 });
 
+const clientServer = `http://localhost:${port.client}/`;
+
 // Define clientEntry
 const clientDevServerEntries = [
   'react-hot-loader/patch',
-  `${require.resolve('webpack-dev-server/client')}?http://localhost:${
-    port.client
-  }/`,
+  `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
   `${require.resolve('webpack/hot/only-dev-server')}`
 ];
 
@@ -80,10 +78,7 @@ const serverEntry = isStartScript
   ? [...serverDevServerEntries, skuServerEntry]
   : [skuServerEntry];
 
-// Define publicPath
-const publicPath = isStartScript
-  ? `http://localhost:${port.client}/`
-  : paths.publicPath || '';
+const publicPath = isStartScript ? clientServer : paths.publicPath;
 
 const buildWebpackConfigs = [
   {

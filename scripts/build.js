@@ -8,7 +8,7 @@ const webpackPromise = promisify(require('webpack'));
 const rimraf = promisify(require('rimraf'));
 
 const webpackConfigs = require('../config/webpack/webpack.config');
-const { paths } = require('../config/projectConfig');
+const { paths } = require('../context');
 
 const runWebpack = config => {
   return webpackPromise(config).then(stats => {

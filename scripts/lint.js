@@ -7,25 +7,16 @@ const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
 
-const { paths, eslintDecorator } = require('../config/projectConfig');
+const { paths, eslintDecorator } = require('../context');
 const args = require('../config/args').argv;
 
 (async () => {
   console.log(chalk.cyan('Linting'));
 
-  const eslint = new EslintCLI({
-    baseConfig: eslintDecorator(baseESlintConfig),
-    useEslintrc: false
-  });
-
-  const pathsToCheck = eslint.resolveFileGlobPatterns(
-    args.length === 0 ? paths.src : args
-  );
-
   if (isTypeScript()) {
     try {
       await runTsc();
-      await runTSLint(pathsToCheck);
+      await runTSLint();
     } catch (e) {
       console.log(e);
 
@@ -33,9 +24,16 @@ const args = require('../config/args').argv;
     }
   }
 
-  const formatter = eslint.getFormatter();
+  const cli = new EslintCLI({
+    baseConfig: eslintDecorator(baseESlintConfig),
+    useEslintrc: false
+  });
+
+  const pathsToCheck = args.length === 0 ? paths.src : args;
+
+  const formatter = cli.getFormatter();
   console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));
-  const report = eslint.executeOnFiles(pathsToCheck);
+  const report = cli.executeOnFiles(pathsToCheck);
 
   console.log(formatter(report.results));
 
@@ -43,5 +41,5 @@ const args = require('../config/args').argv;
     process.exit(1);
   }
 
-  await prettierCheck(pathsToCheck);
+  await prettierCheck();
 })();

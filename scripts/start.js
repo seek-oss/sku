@@ -4,7 +4,7 @@ const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 
-const { hosts, port, initialPath, paths } = require('../config/projectConfig');
+const { hosts, port, initialPath, paths } = require('../context');
 const webpackConfig = require('../config/webpack/webpack.config');
 
 const compiler = webpack(webpackConfig);

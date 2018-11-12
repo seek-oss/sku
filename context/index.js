@@ -1,8 +1,8 @@
 const fs = require('fs');
 const { merge } = require('lodash');
 
-const { getPathFromCwd } = require('../../lib/cwd');
-const args = require('../args');
+const { getPathFromCwd } = require('../lib/cwd');
+const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
@@ -17,6 +17,8 @@ const env = {
   SKU_TENANT: args.tenant
 };
 
+const isStartScript = args.script === 'start-ssr' || args.script === 'start';
+
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
@@ -30,7 +32,7 @@ const paths = {
   serverEntry: getPathFromCwd(skuConfig.entry.server),
   public: getPathFromCwd(skuConfig.public),
   target: getPathFromCwd(skuConfig.target),
-  publicPath: skuConfig.publicPath
+  publicPath: isStartScript ? '/' : skuConfig.publicPath
 };
 
 module.exports = {
@@ -47,5 +49,6 @@ module.exports = {
   initialPath: skuConfig.initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
-  eslintDecorator: skuConfig.dangerouslySetESLintConfig
+  eslintDecorator: skuConfig.dangerouslySetESLintConfig,
+  isStartScript
 };

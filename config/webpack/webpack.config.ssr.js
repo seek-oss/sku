@@ -87,7 +87,7 @@ const buildWebpackConfigs = [
     entry: clientEntry,
     devtool: isStartScript ? 'inline-source-map' : false,
     output: {
-      path: paths.dist,
+      path: paths.target,
       filename: '[name].js',
       publicPath
     },
@@ -209,7 +209,7 @@ const buildWebpackConfigs = [
       __dirname: false
     },
     output: {
-      path: paths.dist,
+      path: paths.target,
       filename: 'server.js',
       libraryTarget: 'var'
     },

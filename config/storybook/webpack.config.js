@@ -18,6 +18,7 @@ module.exports = webpackMerge(
     // mainly because it configures entries and outputs,
     // which would break the Storybook build.
     module: clientWebpackConfig.module,
+    resolve: clientWebpackConfig.resolve,
     plugins: clientWebpackConfig.plugins
   },
   {

@@ -4,7 +4,5 @@ module.exports = {
     client: 'lib/client.js',
     render: 'lib/render.js'
   },
-  target: 'dist',
-  publicPath: '/',
   port: 8080
 };

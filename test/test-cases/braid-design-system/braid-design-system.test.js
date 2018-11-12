@@ -1,5 +1,5 @@
 const path = require('path');
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');

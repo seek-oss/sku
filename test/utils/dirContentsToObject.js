@@ -1,4 +1,4 @@
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const readFilesAsync = promisify(require('node-dir').readFiles);
 const { relative, extname } = require('path');
 

@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`multiple-entries build should generate the expected files 1`] = `
+Object {
+  "4-04990a1776692a284b46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
+",
+  "details-90dae2a86e5268f3e1e1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
+",
+  "home-7ecd60205ea4ded3d88f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "production/au/details/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"https:/www.seekcdn.com.au/someapp/details-6c8d7afb3c7b045262fd.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
+        <script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/runtime-b712eafe077a07e0ac6b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/vendors~details~home-879a40a4ef58cdd62b73.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/details-90dae2a86e5268f3e1e1.js\\"></script>
+      </body>
+    </html>
+  ",
+  "production/au/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"https:/www.seekcdn.com.au/someapp/home-62bf94bf0fd2ba3c2aa2.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
+        <script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/runtime-b712eafe077a07e0ac6b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/vendors~details~home-879a40a4ef58cdd62b73.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/home-7ecd60205ea4ded3d88f.js\\"></script>
+      </body>
+    </html>
+  ",
+  "production/nz/details/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"https:/www.seekcdn.com.au/someapp/details-6c8d7afb3c7b045262fd.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
+        <script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/runtime-b712eafe077a07e0ac6b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/vendors~details~home-879a40a4ef58cdd62b73.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/details-90dae2a86e5268f3e1e1.js\\"></script>
+      </body>
+    </html>
+  ",
+  "production/nz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"https:/www.seekcdn.com.au/someapp/home-62bf94bf0fd2ba3c2aa2.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->nz</h1></div>
+        <script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/runtime-b712eafe077a07e0ac6b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/vendors~details~home-879a40a4ef58cdd62b73.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"https:/www.seekcdn.com.au/someapp/home-7ecd60205ea4ded3d88f.js\\"></script>
+      </body>
+    </html>
+  ",
+  "runtime-b712eafe077a07e0ac6b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~details~home-879a40a4ef58cdd62b73.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`multiple-entries start should render details page correctly 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details-53b7cab61cd1f17a7421.css\\">
+      <script charset=\\"utf-8\\" src=\\"/0-fec8d32c24d473a60869.js\\"></script></head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- --><span>Some special async content</span></h1></div>
+        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home-34eaec8188eb80432cf2.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details-5a3614894147731612e7.js\\"></script>
+      
+    
+  </body></html>",
+  "errors": Array [],
+  "sourceHtml": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details-53b7cab61cd1f17a7421.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
+        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home-34eaec8188eb80432cf2.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details-5a3614894147731612e7.js\\"></script>
+      </body>
+    </html>
+  ",
+  "warnings": Array [],
+}
+`;
+
+exports[`multiple-entries start should render home page correctly 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home-0e5d90a65a365ed7abc2.css\\">
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
+        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home-34eaec8188eb80432cf2.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home-6fba006b87e881dfdbc9.js\\"></script>
+      
+    
+  </body></html>",
+  "errors": Array [],
+  "sourceHtml": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\\"UTF-8\\">
+        <title>hello-world</title>
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <script>
+          window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+        </script>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home-0e5d90a65a365ed7abc2.css\\" />
+      </head>
+      <body>
+        <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
+        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home-34eaec8188eb80432cf2.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home-6fba006b87e881dfdbc9.js\\"></script>
+      </body>
+    </html>
+  ",
+  "warnings": Array [],
+}
+`;

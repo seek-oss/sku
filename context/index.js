@@ -4,6 +4,7 @@ const { merge } = require('lodash');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
+const { getClientEntries, defaultClientEntry } = require('./clientEntries');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
@@ -19,6 +20,10 @@ const env = {
 
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 
+const transformPath = isStartScript
+  ? skuConfig.devTransformPath
+  : skuConfig.transformPath;
+
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
@@ -27,7 +32,7 @@ const paths = {
     'braid-design-system',
     ...skuConfig.compilePackages
   ],
-  clientEntry: getPathFromCwd(skuConfig.entry.client),
+  clientEntries: getClientEntries(skuConfig),
   renderEntry: getPathFromCwd(skuConfig.entry.render),
   serverEntry: getPathFromCwd(skuConfig.entry.server),
   public: getPathFromCwd(skuConfig.public),
@@ -50,5 +55,10 @@ module.exports = {
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
-  isStartScript
+  isStartScript,
+  sites: skuConfig.sites,
+  routes: skuConfig.routes,
+  environments: skuConfig.environments,
+  transformPath,
+  defaultClientEntry
 };

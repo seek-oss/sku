@@ -2,15 +2,12 @@ process.env.NODE_ENV = 'development';
 
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
 
 const { hosts, port, initialPath, paths } = require('../context');
-const webpackConfig = require('../config/webpack/webpack.config');
+const webpackCompiler = require('../config/webpack/webpack.config');
 
-const compiler = webpack(webpackConfig);
-const devServer = new WebpackDevServer(compiler, {
+const devServer = new WebpackDevServer(webpackCompiler, {
   contentBase: paths.public,
-  historyApiFallback: true,
   overlay: true,
   stats: 'errors-only',
   allowedHosts: hosts

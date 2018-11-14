@@ -3,6 +3,5 @@ module.exports = {
   entry: {
     client: 'lib/client.js',
     render: 'lib/render.js'
-  },
-  port: 8080
+  }
 };

@@ -1,13 +1,12 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
 
 const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const staticRenderPlugin = require('./plugins/staticSitePlugin');
+const htmlRenderPlugin = require('./plugins/htmlRenderPlugin');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 const { cwd } = require('../../lib/cwd');
@@ -167,6 +166,7 @@ const buildWebpackConfigs = [
   },
   {
     name: 'render',
+    dependencies: ['client'],
     mode: 'development',
     entry: {
       render: isStartScript ? startRenderEntry : buildRenderEntry
@@ -249,6 +249,6 @@ const buildWebpackConfigs = [
 debug(JSON.stringify(buildWebpackConfigs));
 
 const compiler = webpack(buildWebpackConfigs);
-compiler.apply(staticRenderPlugin());
+compiler.apply(htmlRenderPlugin());
 
 module.exports = compiler;

@@ -4,6 +4,7 @@ yarn.lock
 package-lock.json
 .idea
 config/render/startConfig.json
+client-stats.json
 
 # managed by sku
 .prettierrc

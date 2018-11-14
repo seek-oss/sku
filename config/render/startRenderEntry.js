@@ -8,6 +8,5 @@ export default renderContext => {
 
   const result = renderHTML({ ...renderParams, app });
 
-  console.log('LOOK', result);
   return result;
 };

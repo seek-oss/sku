@@ -20,10 +20,7 @@ const skuPath = require.resolve('../bin/sku');
     if (isInitialPrBuild && isInternalPr) {
       console.log('');
       console.log(
-        'Skipping Chromatic for initial pull request build on Travis CI: http://docs.chromaticqa.com/setup_ci#travis'
-      );
-      console.log(
-        'You should disable "Build on Pull Requests" in your repository settings: https://docs.travis-ci.com/user/pull-requests/#how-pull-requests-are-built'
+        'Skipping Chromatic for internal pull request build on Travis CI: http://docs.chromaticqa.com/setup_ci#travis'
       );
       console.log('');
       process.exit(0);

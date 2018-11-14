@@ -28,6 +28,5 @@ module.exports = {
   polyfills: [],
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
-  dangerouslySetESLintConfig: defaultDecorator,
-  locales: ['']
+  dangerouslySetESLintConfig: defaultDecorator
 };

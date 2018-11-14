@@ -4,40 +4,41 @@ process.env.NODE_ENV = 'production';
 const path = require('path');
 const fs = require('fs-extra');
 const { promisify } = require('util');
-const webpackPromise = promisify(require('webpack'));
 const rimraf = promisify(require('rimraf'));
 
-const webpackConfigs = require('../config/webpack/webpack.config');
+const webpackCompiler = require('../config/webpack/webpack.config');
 const { paths } = require('../context');
 
-const runWebpack = config => {
-  return webpackPromise(config).then(stats => {
-    console.log(
-      stats.toString({
-        chunks: false, // Makes the build much quieter
-        children: false,
-        colors: true
-      })
-    );
+const compile = () => {
+  return new Promise((resolve, reject) => {
+    webpackCompiler.run((error, stats) => {
+      console.log(
+        stats.toString({
+          chunks: false, // Makes the build much quieter
+          children: false,
+          colors: true
+        })
+      );
 
-    if (stats.hasErrors()) {
-      // Webpack has already printed the errors, so we just need to stop execution.
-      throw new Error();
-    }
+      if (error || stats.hasErrors()) {
+        // Webpack has already printed the errors, so we just need to stop execution.
+        reject();
+      }
 
-    const info = stats.toJson();
+      const info = stats.toJson();
 
-    if (stats.hasWarnings()) {
-      info.warnings.forEach(console.warn);
-    }
+      if (stats.hasWarnings()) {
+        info.warnings.forEach(console.warn);
+      }
+
+      resolve();
+    });
   });
 };
 
 const cleanDistFolders = () => rimraf(`${paths.target}/*`);
 
 const cleanRenderJs = () => rimraf(path.join(paths.target, 'render.js'));
-
-const compileAll = () => Promise.all(webpackConfigs.map(runWebpack));
 
 const copyPublicFiles = () => {
   if (fs.existsSync(paths.public)) {
@@ -49,7 +50,7 @@ const copyPublicFiles = () => {
 };
 
 cleanDistFolders()
-  .then(compileAll)
+  .then(compile)
   .then(cleanRenderJs)
   .then(copyPublicFiles)
   .then(() => console.log('Sku build complete!'))

@@ -3,6 +3,7 @@ node_modules/
 yarn.lock
 package-lock.json
 .idea
+config/render/startConfig.json
 
 # managed by sku
 .prettierrc

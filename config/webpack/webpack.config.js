@@ -1,27 +1,23 @@
 const webpack = require('webpack');
-const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
 
 const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
+const staticRenderPlugin = require('./plugins/staticSitePlugin');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 const { cwd } = require('../../lib/cwd');
 
+const startRenderEntry = require.resolve('../render/startRenderEntry');
+const buildRenderEntry = require.resolve('../render/buildRenderEntry');
+
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
-const {
-  paths,
-  env,
-  locales,
-  webpackDecorator,
-  port,
-  polyfills,
-  isStartScript
-} = config;
+const { paths, env, webpackDecorator, port, polyfills, isStartScript } = config;
 
 const envVars = lodash
   .chain(env)
@@ -58,9 +54,14 @@ const devServerEntries = [
   }/`
 ];
 
-const entry = isStartScript
-  ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
-  : [...resolvedPolyfills, paths.clientEntry];
+// Add polyfills and dev server client to all entries
+const entries = lodash.mapValues(
+  paths.clientEntries,
+  entry =>
+    isStartScript
+      ? [...resolvedPolyfills, ...devServerEntries, entry]
+      : [...resolvedPolyfills, entry]
+);
 
 const internalJs = [
   ...paths.src,
@@ -73,16 +74,24 @@ const buildWebpackConfigs = [
   {
     name: 'client',
     mode: webpackMode,
-    entry,
+    entry: entries,
+    devtool: isStartScript ? 'inline-source-map' : false,
     output: {
       path: paths.target,
       publicPath: paths.publicPath,
-      filename: '[name].js'
+      filename: '[name]-[contenthash].js',
+      chunkFilename: '[name]-[contenthash].js'
     },
     optimization: {
       nodeEnv: process.env.NODE_ENV,
       minimize: utils.isProductionBuild,
-      concatenateModules: utils.isProductionBuild
+      concatenateModules: utils.isProductionBuild,
+      splitChunks: {
+        chunks: 'all'
+      },
+      runtimeChunk: {
+        name: 'runtime'
+      }
     },
     resolve: {
       extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
@@ -150,16 +159,17 @@ const buildWebpackConfigs = [
       new webpack.DefinePlugin(envVars),
       ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
       new MiniCssExtractPlugin({
-        filename: 'style.css',
-        chunkFilename: '[name].css'
-      })
+        filename: '[name]-[contenthash].css',
+        chunkFilename: '[name]-[contenthash].css'
+      }),
+      new webpack.HashedModuleIdsPlugin()
     ]
   },
   {
     name: 'render',
     mode: 'development',
     entry: {
-      render: paths.renderEntry
+      render: isStartScript ? startRenderEntry : buildRenderEntry
     },
     target: 'node',
     externals: [
@@ -177,10 +187,15 @@ const buildWebpackConfigs = [
       path: paths.target,
       publicPath: paths.publicPath,
       filename: 'render.js',
-      libraryTarget: 'umd'
+      libraryExport: 'default',
+      library: 'static',
+      libraryTarget: 'umd2'
     },
     resolve: {
-      extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+      extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+      alias: {
+        __sku_alias__renderEntry: paths.renderEntry
+      }
     },
     module: {
       rules: [
@@ -227,24 +242,13 @@ const buildWebpackConfigs = [
         }
       ]
     },
-    plugins: [
-      new webpack.DefinePlugin(envVars),
-      ...locales.slice(0, utils.isProductionBuild ? locales.length : 1).map(
-        locale =>
-          new StaticSiteGeneratorPlugin({
-            locals: {
-              publicPath: paths.publicPath,
-              locale
-            },
-            paths: `index${
-              utils.isProductionBuild && locale ? `-${locale}` : ''
-            }.html`
-          })
-      )
-    ]
+    plugins: [new webpack.DefinePlugin(envVars)]
   }
 ].map(webpackDecorator);
 
 debug(JSON.stringify(buildWebpackConfigs));
 
-module.exports = buildWebpackConfigs;
+const compiler = webpack(buildWebpackConfigs);
+compiler.apply(staticRenderPlugin());
+
+module.exports = compiler;

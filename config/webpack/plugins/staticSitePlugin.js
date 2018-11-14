@@ -2,6 +2,8 @@ const path = require('path');
 const { flatMap, partition } = require('lodash');
 const MultiStaticRenderPlugin = require('multi-static-render-webpack-plugin');
 
+const { writeStartConfig } = require('../utils/startConfig');
+
 const {
   isStartScript,
   paths,
@@ -20,9 +22,9 @@ const debugStats = clientStats => {
 };
 
 const mapStatsToParams = ({ clientStats, routeName }) => {
-  // debugStats(clientStats);
-  const assets = clientStats[routeName]
-    ? clientStats[routeName].assets
+  debugStats(clientStats);
+  const assets = clientStats.entrypoints[routeName]
+    ? clientStats.entrypoints[routeName].assets
     : clientStats[defaultClientEntry].assets;
 
   const [styles, scripts] = partition(assets, asset => asset.endsWith('.css'));
@@ -51,7 +53,14 @@ const mapStatsToParams = ({ clientStats, routeName }) => {
   };
 };
 
-const getStartRoutes = () => {};
+const getStartRoutes = () => {
+  writeStartConfig(environments[0], sites[0]);
+
+  return routes.map(({ name, route }) => ({
+    routeName: name,
+    route: transformPath({ route })
+  }));
+};
 
 const getBuildRoutes = () =>
   flatMap(environments, environment =>

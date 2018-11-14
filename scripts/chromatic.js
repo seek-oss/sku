@@ -1,4 +1,4 @@
-const { branch } = require('env-ci')();
+const ci = require('env-ci')();
 const chalk = require('chalk');
 const runBin = require('../lib/runBin');
 const builds = require('../config/builds');
@@ -7,7 +7,7 @@ const skuPath = require.resolve('../bin/sku');
 
 (async () => {
   // Handle Travis CI setup: http://docs.chromaticqa.com/setup_ci#travis
-  if (process.env.TRAVIS) {
+  if (ci.service === 'travis') {
     const {
       TRAVIS_EVENT_TYPE,
       TRAVIS_PULL_REQUEST_SLUG,
@@ -55,7 +55,7 @@ const skuPath = require.resolve('../bin/sku');
         // commit technically hasn't been accepted in Chromatic.
         // This flag ensures that master builds are assumed to have
         // already been accepted during the PR process.
-        ...(branch === 'master' ? ['--auto-accept-changes'] : [])
+        ...(ci.branch === 'master' ? ['--auto-accept-changes'] : [])
       ]
     });
 

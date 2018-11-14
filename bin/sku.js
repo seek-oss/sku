@@ -20,6 +20,7 @@ switch (script) {
   case 'start':
   case 'start-ssr':
   case 'storybook':
+  case 'chromatic':
   case 'configure': {
     const scriptPath = require.resolve(`../scripts/${script}`);
     require(scriptPath);

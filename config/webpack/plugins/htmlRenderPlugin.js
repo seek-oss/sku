@@ -14,16 +14,7 @@ const {
   defaultClientEntry
 } = require('../../../context');
 
-const debugStats = clientStats => {
-  require('fs').writeFileSync(
-    require('path').join(process.cwd(), 'client-stats.json'),
-    JSON.stringify(clientStats)
-  );
-};
-
 const mapStatsToParams = ({ clientStats, routeName }) => {
-  debugStats(clientStats);
-
   const { entrypoints } = clientStats;
   const assets = entrypoints[routeName]
     ? entrypoints[routeName].assets

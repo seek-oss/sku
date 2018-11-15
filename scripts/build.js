@@ -2,10 +2,10 @@
 process.env.NODE_ENV = 'production';
 
 const path = require('path');
-const fs = require('fs-extra');
 const { promisify } = require('util');
 const rimraf = promisify(require('rimraf'));
 
+const copyPublicFiles = require('../lib/copyPublicFiles');
 const webpackCompiler = require('../config/webpack/webpack.config');
 const { paths } = require('../context');
 
@@ -39,15 +39,6 @@ const compile = () => {
 const cleanDistFolders = () => rimraf(`${paths.target}/*`);
 
 const cleanRenderJs = () => rimraf(path.join(paths.target, 'render.js'));
-
-const copyPublicFiles = () => {
-  if (fs.existsSync(paths.public)) {
-    fs.copySync(paths.public, paths.target, {
-      dereference: true
-    });
-    console.log(`Copying ${paths.public} to ${paths.target}`);
-  }
-};
 
 cleanDistFolders()
   .then(compile)

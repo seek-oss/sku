@@ -5,7 +5,12 @@ import App from './App';
 
 export const renderApp = () => renderToString(<App />);
 
-export const renderHTML = ({ app, headTags, bodyTags }) => `
+interface RenderHTMLProps {
+  app: string;
+  headTags: string;
+  bodyTags: string;
+}
+export const renderHTML = ({ app, headTags, bodyTags }: RenderHTMLProps) => `
   <!DOCTYPE html>
   <html>
     <head>

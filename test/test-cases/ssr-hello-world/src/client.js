@@ -1,8 +1,5 @@
-import styles from './client.less';
+import React from 'react';
+import { hydrate } from 'react-dom';
+import App from './App';
 
-const fileName = 'message';
-
-import(`./message/${fileName}`).then(({ message }) => {
-  document.getElementById('app').innerHTML = message;
-  document.getElementById('app').className = styles.root;
-});
+hydrate(<App />, document.getElementById('app'));

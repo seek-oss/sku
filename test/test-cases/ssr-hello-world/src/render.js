@@ -3,12 +3,14 @@ import { renderToString } from 'react-dom/server';
 
 import App from './App';
 
-const template = ({ headTags, bodyTags, app }) => `
+export const renderApp = () => renderToString(<App />);
+
+export const renderHTML = ({ app, bodyTags, headTags }) => `
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset="UTF-8">
-      <title>hello-world</title>
+      <title>My Awesome Project</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       ${headTags}
     </head>
@@ -18,10 +20,3 @@ const template = ({ headTags, bodyTags, app }) => `
     </body>
   </html>
 `;
-
-export default ({ headTags, bodyTags }) => ({
-  renderCallback: (req, res) => {
-    const app = renderToString(<App />);
-    res.send(template({ headTags, bodyTags, app }));
-  }
-});

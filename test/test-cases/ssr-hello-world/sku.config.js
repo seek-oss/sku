@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: 'http://some.cdn/',
+  publicPath: 'http://localhost:4000',
   port: 8000,
   serverPort: 8001
 };

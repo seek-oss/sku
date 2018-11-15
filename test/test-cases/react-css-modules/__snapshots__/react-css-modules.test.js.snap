@@ -2,24 +2,28 @@
 
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
-  "index.html": "
+  "production/au/index.html": "
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset=\\"UTF-8\\">
       <title>My Awesome Project</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/style.css\\" />
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-6eca44a25078eafecfcb.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-529c598e44284de60c82.js\\"></script>
     </body>
   </html>
 ",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "style.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
+  "runtime-13848ce239fe40766fec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "skuDefaultClientEntry-529c598e44284de60c82.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "skuDefaultClientEntry-b8efa93ad3ab8918f8db.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
+  "vendors~skuDefaultClientEntry-6eca44a25078eafecfcb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

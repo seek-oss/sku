@@ -1,27 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build should generate a production server 1`] = `
-"
+Object {
+  "content": "<!DOCTYPE html><html><head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://some.cdn/skuDefaultClientEntry-354360d8c5091be0b917.css\\">
+    </head>
+    <body>
+      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+      <script type=\\"text/javascript\\" src=\\"http://some.cdn/runtime-42ce08af69de0e55768b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://some.cdn/skuDefaultClientEntry-df149e4b53c630cf03fd.js\\"></script>
+    
+  
+</body></html>",
+  "errors": Array [
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+  ],
+  "sourceHtml": "
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://some.cdn/skuDefaultClientEntry-354360d8c5091be0b917.css\\" />
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://some.cdn/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://some.cdn/runtime-42ce08af69de0e55768b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://some.cdn/skuDefaultClientEntry-df149e4b53c630cf03fd.js\\"></script>
     </body>
   </html>
-"
-`;
-
-exports[`ssr-hello-world build should generate the expected files 1`] = `
-Object {
-  "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+",
+  "warnings": Array [],
 }
 `;
 
@@ -31,14 +46,20 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script charset=\\"utf-8\\" src=\\"http://localhost:8000/0.js\\"></script></head>
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://some.cdn/skuDefaultClientEntry-354360d8c5091be0b917.css\\">
+    </head>
     <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+      <script type=\\"text/javascript\\" src=\\"http://some.cdn/runtime-42ce08af69de0e55768b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://some.cdn/skuDefaultClientEntry-df149e4b53c630cf03fd.js\\"></script>
     
   
 </body></html>",
-  "errors": Array [],
+  "errors": Array [
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+  ],
   "sourceHtml": "
   <!DOCTYPE html>
   <html>
@@ -46,10 +67,12 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://some.cdn/skuDefaultClientEntry-354360d8c5091be0b917.css\\" />
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://some.cdn/runtime-42ce08af69de0e55768b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://some.cdn/skuDefaultClientEntry-df149e4b53c630cf03fd.js\\"></script>
     </body>
   </html>
 ",

@@ -3,9 +3,9 @@ process.env.NODE_ENV = 'development';
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const opn = require('opn');
-const Promise = require('bluebird');
 const fs = require('fs-extra');
-const webpackPromise = Promise.promisify(require('webpack'));
+const { promisify } = require('util');
+const webpackPromise = promisify(require('webpack'));
 
 const { hosts, port, initialPath, paths } = require('../context');
 const [

@@ -1,9 +1,11 @@
+const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const lodash = require('lodash');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
 
 const debug = require('debug')('sku:webpack');
 const args = require('../args');
@@ -66,9 +68,14 @@ const clientDevServerEntries = [
   `${require.resolve('webpack/hot/only-dev-server')}`
 ];
 
-const clientEntry = isStartScript
-  ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
-  : [...resolvedPolyfills, paths.clientEntry];
+// Add polyfills and dev server client to all entries
+const clientEntries = lodash.mapValues(
+  paths.clientEntries,
+  entry =>
+    isStartScript
+      ? [...resolvedPolyfills, ...clientDevServerEntries, entry]
+      : [...resolvedPolyfills, entry]
+);
 
 const serverDevServerEntries = [`${require.resolve('webpack/hot/poll')}?1000`];
 
@@ -80,21 +87,31 @@ const serverEntry = isStartScript
 
 const publicPath = isStartScript ? clientServer : paths.publicPath;
 
+const assetsFile = 'assets.json';
+const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+
 const buildWebpackConfigs = [
   {
     name: 'client',
     mode: webpackMode,
-    entry: clientEntry,
+    entry: clientEntries,
     devtool: isStartScript ? 'inline-source-map' : false,
     output: {
       path: paths.target,
-      filename: '[name].js',
-      publicPath
+      publicPath,
+      filename: `${fileMask}.js`,
+      chunkFilename: `${fileMask}.js`
     },
     optimization: {
       nodeEnv: process.env.NODE_ENV,
       minimize: utils.isProductionBuild,
-      concatenateModules: utils.isProductionBuild
+      concatenateModules: utils.isProductionBuild,
+      splitChunks: {
+        chunks: 'all'
+      },
+      runtimeChunk: {
+        name: 'runtime'
+      }
     },
     resolve: {
       extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
@@ -166,8 +183,13 @@ const buildWebpackConfigs = [
     },
     plugins: [
       new webpack.DefinePlugin(envVars),
+      new AssetsPlugin({
+        entrypoints: true,
+        filename: path.join(path.basename(paths.target), assetsFile)
+      }),
       new MiniCssExtractPlugin({
-        filename: 'style.css'
+        filename: `${fileMask}.css`,
+        chunkFilename: `${fileMask}.css`
       })
     ].concat(
       isStartScript
@@ -176,7 +198,10 @@ const buildWebpackConfigs = [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin()
           ]
-        : [bundleAnalyzerPlugin({ name: 'client' })]
+        : [
+            bundleAnalyzerPlugin({ name: 'client' }),
+            new webpack.HashedModuleIdsPlugin()
+          ]
     )
   },
   {
@@ -200,7 +225,8 @@ const buildWebpackConfigs = [
     ],
     resolve: {
       alias: {
-        __sku_alias__serverEntry: paths.serverEntry
+        __sku_alias__serverEntry: paths.serverEntry,
+        __sku_alias__assets: path.join(paths.target, assetsFile)
       },
       extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
     },
@@ -260,12 +286,7 @@ const buildWebpackConfigs = [
         }
       ]
     },
-    plugins: [
-      new webpack.DefinePlugin(envVars),
-      new webpack.DefinePlugin({
-        __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
-      })
-    ].concat(
+    plugins: [new webpack.DefinePlugin(envVars)].concat(
       isStartScript
         ? [
             new StartServerPlugin({

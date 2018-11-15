@@ -1,7 +1,7 @@
 import { renderApp, renderHTML } from '__sku_alias__renderEntry';
 
-export default renderParams => {
-  const app = renderApp(renderParams);
+export default async renderParams => {
+  const app = await renderApp(renderParams);
 
-  return renderHTML({ ...renderParams, app });
+  return await renderHTML({ ...renderParams, app });
 };

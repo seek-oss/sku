@@ -2,22 +2,25 @@
 
 exports[`zero-config build should generate the expected files 1`] = `
 Object {
-  "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "
+  "0-2d4c17dcf56e1762b025.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "production/au/index.html": "
   <!DOCTYPE html>
   <html>
     <head>
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime-dd9f3671ce9f3a689039.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-df98e7bcae522bbcf688.js\\"></script>
     </body>
   </html>
 ",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-dd9f3671ce9f3a689039.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "skuDefaultClientEntry-df98e7bcae522bbcf688.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -27,10 +30,13 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+      
+    <script charset=\\"utf-8\\" src=\\"/0-4d2352c908ec88da6270.js\\"></script></head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1dcfb96cba27e57b37be.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     
   
 </body></html>",
@@ -42,10 +48,13 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1dcfb96cba27e57b37be.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     </body>
   </html>
 ",

@@ -6,7 +6,6 @@
     "no-sync": 0
   },
   "globals": {
-    "__SKU_PUBLIC_PATH__": true,
     "__SKU_SRC_PATHS_0__": true,
     "__SKU_SRC_PATHS_1__": true,
     "__SKU_SRC_PATHS_2__": true,

@@ -15,7 +15,7 @@
     "test-manual": "node test/manual",
     "format": "prettier --config ./config/prettier/prettierConfig.js --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --config ./config/prettier/prettierConfig.js --list-different '**/*.{js,ts,tsx,md,less,css}'",
-    "postinstall": "./scripts/postinstall.js",
+    "postinstall": "node ./scripts/postinstall.js",
     "commit": "git-cz",
     "semantic-release": "semantic-release"
   },

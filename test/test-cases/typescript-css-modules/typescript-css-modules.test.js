@@ -3,9 +3,14 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
+const startAssetServer = require('../../utils/assetServer');
+const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const srcDir = path.resolve(appDir, 'src');
+const skuConfig = require('./app/sku.config');
+
+const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 
 describe('typescript-css-modules', () => {
   beforeAll(async () => {
@@ -13,8 +18,21 @@ describe('typescript-css-modules', () => {
   });
 
   describe('build', () => {
+    let closeAssetServer;
+
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
+      closeAssetServer = startAssetServer(4000, distDir);
+      await waitForUrls('http://localhost:4000');
+    });
+
+    afterAll(() => {
+      closeAssetServer();
+    });
+
+    it('should create valid app', async () => {
+      const app = await getAppSnapshot('http://localhost:4000/production/au');
+      expect(app).toMatchSnapshot();
     });
 
     it('should generate the expected files', async () => {
@@ -28,8 +46,26 @@ describe('typescript-css-modules', () => {
   });
 
   describe('build-ssr', () => {
+    let server, closeAssetServer;
+
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);
+      server = gracefulSpawn('node', ['server'], {
+        cwd: distDir,
+        stdio: 'inherit'
+      });
+      closeAssetServer = startAssetServer(4000, distDir);
+      await waitForUrls(backendUrl, 'http://localhost:4000');
+    });
+
+    afterAll(() => {
+      server.kill();
+      closeAssetServer();
+    });
+
+    it('should create valid app', async () => {
+      const app = await getAppSnapshot(backendUrl);
+      expect(app).toMatchSnapshot();
     });
 
     it('should generate the expected files', async () => {

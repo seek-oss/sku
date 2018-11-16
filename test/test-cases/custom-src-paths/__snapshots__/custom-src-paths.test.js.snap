@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`custom-src-paths build should create valid app 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      
+    </head>
+    <body>
+      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+    
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      
+    </head>
+    <body>
+      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+    </body>
+  </html>
+",
+  "warnings": Array [],
+}
+`;
+
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
   "production/au/index.html": "
@@ -13,13 +51,13 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
     </body>
   </html>
 ",
-  "runtime-13848ce239fe40766fec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-014340d9b9907db3205b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-05b78e015ee823f13484.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

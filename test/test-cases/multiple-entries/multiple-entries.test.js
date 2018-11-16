@@ -2,6 +2,9 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
+const startAssetServer = require('../../utils/assetServer');
+
+const targetDirectory = `${__dirname}/dist`;
 
 describe('multiple-entries', () => {
   describe('start', () => {
@@ -29,12 +32,25 @@ describe('multiple-entries', () => {
   });
 
   describe('build', () => {
+    let closeAssetServer;
+
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
+      closeAssetServer = startAssetServer(4000, targetDirectory);
+      await waitForUrls('http://localhost:4000');
+    });
+
+    afterAll(() => {
+      closeAssetServer();
+    });
+
+    it('should create valid app', async () => {
+      const app = await getAppSnapshot('http://localhost:4000/production/au');
+      expect(app).toMatchSnapshot();
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(`${__dirname}/dist`);
+      const files = await dirContentsToObject(targetDirectory);
       expect(files).toMatchSnapshot();
     });
   });

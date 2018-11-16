@@ -1,4 +1,3 @@
-const path = require('path');
 const { flatMap, partition } = require('lodash');
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 
@@ -14,6 +13,12 @@ const {
   defaultClientEntry
 } = require('../../../context');
 
+const createPublicUrl = (publicPath, asset) => {
+  const host = publicPath.endsWith('/') ? publicPath : `${publicPath}/`;
+
+  return `${host}${asset}`;
+};
+
 const mapStatsToParams = ({ clientStats, routeName }) => {
   const { entrypoints } = clientStats;
   const assets = entrypoints[routeName]
@@ -24,7 +29,7 @@ const mapStatsToParams = ({ clientStats, routeName }) => {
   const bodyTags = scripts
     .map(
       chunkFile =>
-        `<script type="text/javascript" src="${path.join(
+        `<script type="text/javascript" src="${createPublicUrl(
           paths.publicPath,
           chunkFile
         )}"></script>`
@@ -33,7 +38,7 @@ const mapStatsToParams = ({ clientStats, routeName }) => {
   const headTags = styles
     .map(
       chunkFile =>
-        `<link rel="stylesheet" type="text/css" href="${path.join(
+        `<link rel="stylesheet" type="text/css" href="${createPublicUrl(
           paths.publicPath,
           chunkFile
         )}" />`

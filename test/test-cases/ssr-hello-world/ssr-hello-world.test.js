@@ -4,7 +4,7 @@ const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
-const { startBin } = require('../../../lib/runBin');
+const startAssetServer = require('../../utils/assetServer');
 const skuConfig = require('./sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
@@ -29,7 +29,7 @@ describe('ssr-hello-world', () => {
 
   describe('build', () => {
     const targetDirectory = path.join(__dirname, 'dist');
-    let server, assetServer;
+    let server, closeAssetServer;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', __dirname);
@@ -38,19 +38,14 @@ describe('ssr-hello-world', () => {
         cwd: targetDirectory,
         stdio: 'inherit'
       });
-
-      assetServer = startBin({
-        packageName: 'serve',
-        args: ['-l', 'tcp://localhost:4000'],
-        options: { cwd: targetDirectory }
-      });
+      closeAssetServer = startAssetServer(4000, targetDirectory);
 
       await waitForUrls(backendUrl, 'http://localhost:4000');
     });
 
     afterAll(() => {
       server.kill();
-      assetServer.kill();
+      closeAssetServer();
     });
 
     it('should generate a production server', async () => {

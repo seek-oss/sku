@@ -52,7 +52,7 @@ import styled from 'react-emotion/macro';
 import { css } from 'emotion/macro';
 ```
 
-Lots of package support macros, and their documentation is best place to look for help.
+Lots of packages support macros, and their documentation is best place to look for help.
 
 ### TypeScript
 

@@ -11,7 +11,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run format-check && OPEN_TAB=false jest --runInBand --verbose --detectOpenHandles",
+    "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
+    "test": "yarn check --integrity && npm run format-check && OPEN_TAB=false jest --runInBand --verbose --detectOpenHandles",
     "test-manual": "node test/manual",
     "format": "prettier --config ./config/prettier/prettierConfig.js --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --config ./config/prettier/prettierConfig.js --list-different '**/*.{js,ts,tsx,md,less,css}'",
@@ -26,6 +27,10 @@
     }
   },
   "lint-staged": {
+    "+(package.json|yarn.lock)": [
+      "npm run check",
+      "git add package.json yarn.lock"
+    ],
     "**/*.js": [
       "npm run lint",
       "git add"

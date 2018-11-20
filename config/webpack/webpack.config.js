@@ -20,7 +20,9 @@ const {
   webpackDecorator,
   port,
   polyfills,
-  isStartScript
+  libraryName,
+  isStartScript,
+  isBuildScript
 } = config;
 
 const envVars = lodash
@@ -58,9 +60,11 @@ const devServerEntries = [
   }/`
 ];
 
-const entry = isStartScript
-  ? [...resolvedPolyfills, ...devServerEntries, paths.clientEntry]
-  : [...resolvedPolyfills, paths.clientEntry];
+const entry = [
+  ...resolvedPolyfills,
+  ...(isStartScript ? devServerEntries : []),
+  paths.libraryEntry || paths.clientEntry
+];
 
 const internalJs = [
   ...paths.src,
@@ -77,7 +81,14 @@ const buildWebpackConfigs = [
     output: {
       path: paths.target,
       publicPath: paths.publicPath,
-      filename: '[name].js'
+      filename: paths.libraryEntry ? `${libraryName}.js` : '[name].js',
+      ...(paths.libraryEntry
+        ? {
+            library: libraryName,
+            libraryTarget: 'umd',
+            libraryExport: 'default'
+          }
+        : {})
     },
     optimization: {
       nodeEnv: process.env.NODE_ENV,
@@ -150,100 +161,106 @@ const buildWebpackConfigs = [
       new webpack.DefinePlugin(envVars),
       ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
       new MiniCssExtractPlugin({
-        filename: 'style.css',
+        filename: paths.libraryEntry ? `${libraryName}.css` : 'style.css',
         chunkFilename: '[name].css'
       })
     ]
   },
-  {
-    name: 'render',
-    mode: 'development',
-    entry: {
-      render: paths.renderEntry
-    },
-    target: 'node',
-    externals: [
-      // Don't bundle or transpile non-compiled packages
-      nodeExternals({
-        // webpack-node-externals compares the `import` or `require` expression to this list,
-        // not the package name, so we map each packageName to a pattern. This ensures it
-        // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
-        whitelist: paths.compilePackages.map(
-          packageName => new RegExp(`^(${packageName})`)
-        )
-      })
-    ],
-    output: {
-      path: paths.target,
-      publicPath: paths.publicPath,
-      filename: 'render.js',
-      libraryTarget: 'umd'
-    },
-    resolve: {
-      extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
-    },
-    module: {
-      rules: [
-        {
-          test: /(?!\.css)\.(ts|tsx)$/,
-          include: internalJs,
-          use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+  // Don't render HTML when building a library
+  paths.libraryEntry && isBuildScript
+    ? null
+    : {
+        name: 'render',
+        mode: 'development',
+        entry: {
+          render: paths.renderEntry
         },
-        {
-          test: /(?!\.css)\.js$/,
-          include: internalJs,
-          use: utils.makeJsLoaders({ target: 'node' })
+        target: 'node',
+        externals: [
+          // Don't bundle or transpile non-compiled packages
+          nodeExternals({
+            // webpack-node-externals compares the `import` or `require` expression to this list,
+            // not the package name, so we map each packageName to a pattern. This ensures it
+            // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
+            whitelist: paths.compilePackages.map(
+              packageName => new RegExp(`^(${packageName})`)
+            )
+          })
+        ],
+        output: {
+          path: paths.target,
+          publicPath: paths.publicPath,
+          filename: 'render.js',
+          libraryTarget: 'umd'
         },
-        {
-          test: /\.css\.js$/,
-          use: utils.makeCssLoaders({ server: true, js: true })
+        resolve: {
+          extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
         },
-        {
-          test: /\.mjs$/,
-          include: /node_modules/,
-          type: 'javascript/auto'
-        },
-        {
-          test: /\.less$/,
-          oneOf: [
-            ...paths.compilePackages.map(packageName => ({
-              include: utils.resolvePackage(packageName),
-              use: utils.makeCssLoaders({ server: true, packageName })
-            })),
+        module: {
+          rules: [
             {
-              exclude: /node_modules/,
-              use: utils.makeCssLoaders({ server: true })
+              test: /(?!\.css)\.(ts|tsx)$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            },
+            {
+              test: /(?!\.css)\.js$/,
+              include: internalJs,
+              use: utils.makeJsLoaders({ target: 'node' })
+            },
+            {
+              test: /\.css\.js$/,
+              use: utils.makeCssLoaders({ server: true, js: true })
+            },
+            {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: 'javascript/auto'
+            },
+            {
+              test: /\.less$/,
+              oneOf: [
+                ...paths.compilePackages.map(packageName => ({
+                  include: utils.resolvePackage(packageName),
+                  use: utils.makeCssLoaders({ server: true, packageName })
+                })),
+                {
+                  exclude: /node_modules/,
+                  use: utils.makeCssLoaders({ server: true })
+                }
+              ]
+            },
+
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+              use: utils.makeImageLoaders({ server: true })
+            },
+            {
+              test: /\.svg$/,
+              use: utils.makeSvgLoaders()
             }
           ]
         },
-
-        {
-          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-          use: utils.makeImageLoaders({ server: true })
-        },
-        {
-          test: /\.svg$/,
-          use: utils.makeSvgLoaders()
-        }
-      ]
-    },
-    plugins: [
-      new webpack.DefinePlugin(envVars),
-      ...locales.slice(0, utils.isProductionBuild ? locales.length : 1).map(
-        locale =>
-          new StaticSiteGeneratorPlugin({
-            locals: {
-              publicPath: paths.publicPath,
-              locale
-            },
-            paths: `index${
-              utils.isProductionBuild && locale ? `-${locale}` : ''
-            }.html`
-          })
-      )
-    ]
-  }
-].map(webpackDecorator);
+        plugins: [
+          new webpack.DefinePlugin(envVars),
+          ...locales.slice(0, utils.isProductionBuild ? locales.length : 1).map(
+            locale =>
+              new StaticSiteGeneratorPlugin({
+                locals: {
+                  publicPath: paths.publicPath,
+                  libraryName,
+                  locale
+                },
+                paths: `index${
+                  utils.isProductionBuild && locale ? `-${locale}` : ''
+                }.html`
+              })
+          )
+        ]
+      }
+]
+  .filter(Boolean)
+  .map(webpackDecorator);
 
 debug(JSON.stringify(buildWebpackConfigs));
 

@@ -32,8 +32,8 @@ describe('custom-src-paths', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = startAssetServer(4000, targetDirectory);
-      await waitForUrls('http://localhost:4000');
+      closeAssetServer = startAssetServer(4002, targetDirectory);
+      await waitForUrls('http://localhost:4002');
     });
 
     afterAll(() => {
@@ -46,7 +46,7 @@ describe('custom-src-paths', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4000/production/au');
+      const app = await getAppSnapshot('http://localhost:4002/production/au');
       expect(app).toMatchSnapshot();
     });
   });

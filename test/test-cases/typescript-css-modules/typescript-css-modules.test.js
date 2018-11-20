@@ -22,8 +22,8 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      closeAssetServer = startAssetServer(4000, distDir);
-      await waitForUrls('http://localhost:4000');
+      closeAssetServer = startAssetServer(4003, distDir);
+      await waitForUrls('http://localhost:4003');
     });
 
     afterAll(() => {
@@ -31,7 +31,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4000/production/au');
+      const app = await getAppSnapshot('http://localhost:4003/production/au');
       expect(app).toMatchSnapshot();
     });
 
@@ -54,8 +54,8 @@ describe('typescript-css-modules', () => {
         cwd: distDir,
         stdio: 'inherit'
       });
-      closeAssetServer = startAssetServer(4000, distDir);
-      await waitForUrls(backendUrl, 'http://localhost:4000');
+      closeAssetServer = startAssetServer(4003, distDir);
+      await waitForUrls(backendUrl, 'http://localhost:4003');
     });
 
     afterAll(() => {
@@ -79,7 +79,7 @@ describe('typescript-css-modules', () => {
   });
 
   describe('start', () => {
-    const devServerUrl = `http://localhost:8080`;
+    const devServerUrl = `http://localhost:8204`;
     let server;
 
     beforeAll(async () => {

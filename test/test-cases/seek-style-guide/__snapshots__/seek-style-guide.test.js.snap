@@ -18,7 +18,7 @@ Object {
     <body>
       <div id=\\"app\\"><div class=\\"_20YbULa\\" data-reactroot=\\"\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
       <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-eb8ce3ffdf6d424618d1.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-c591fca81d28a0299576.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-1ac160595c16f84f052f.js\\"></script>
     </body>
   </html>
@@ -38,6 +38,6 @@ Object {
 ._1lTs4d6{font-weight:600}
 ._33Weyvq{font-weight:400}
 ",
-  "vendors~skuDefaultClientEntry-eb8ce3ffdf6d424618d1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~skuDefaultClientEntry-c591fca81d28a0299576.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

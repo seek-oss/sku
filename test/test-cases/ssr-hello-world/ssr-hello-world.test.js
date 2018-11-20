@@ -5,15 +5,23 @@ const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
 const startAssetServer = require('../../utils/assetServer');
-const skuConfig = require('./sku.config');
+const skuBuildConfig = require('./sku-build.config');
+const skuStartConfig = require('./sku-start.config');
 
-const backendUrl = `http://localhost:${skuConfig.serverPort}`;
+const getTestConfig = skuConfig => ({
+  backendUrl: `http://localhost:${skuConfig.serverPort}`,
+  targetDirectory: path.join(__dirname, skuConfig.target)
+});
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
+    const { backendUrl } = getTestConfig(skuStartConfig);
     let server;
+
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start-ssr', __dirname);
+      server = await runSkuScriptInDir('start-ssr', __dirname, [
+        '--config=sku-start.config.js'
+      ]);
       await waitForUrls(backendUrl);
     });
 
@@ -28,11 +36,13 @@ describe('ssr-hello-world', () => {
   });
 
   describe('build', () => {
-    const targetDirectory = path.join(__dirname, 'dist');
+    const { backendUrl, targetDirectory } = getTestConfig(skuBuildConfig);
     let server, closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', __dirname);
+      await runSkuScriptInDir('build-ssr', __dirname, [
+        '--config=sku-build.config.js'
+      ]);
 
       server = gracefulSpawn('node', ['server'], {
         cwd: targetDirectory,

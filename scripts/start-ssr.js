@@ -6,12 +6,14 @@ const opn = require('opn');
 const { once } = require('lodash');
 
 const { watch } = require('../lib/runWebpack');
-const copyPublicFiles = require('../lib/copyPublicFiles');
+const { copyPublicFiles, ensureTargetDirectory } = require('../lib/fileUtils');
 const { hosts, port, initialPath, paths } = require('../context');
 const [
   clientWebpackConfig,
   serverWebpackConfig
 ] = require('../config/webpack/webpack.config.ssr');
+
+ensureTargetDirectory();
 
 const clientCompiler = webpack(clientWebpackConfig);
 const serverCompiler = webpack(serverWebpackConfig);

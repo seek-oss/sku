@@ -35,7 +35,7 @@ Object {
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
       <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1dcfb96cba27e57b37be.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     
   
@@ -53,7 +53,7 @@ Object {
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
       <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1dcfb96cba27e57b37be.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     </body>
   </html>

@@ -14,7 +14,7 @@ Object {
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
       <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-6eca44a25078eafecfcb.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-529c598e44284de60c82.js\\"></script>
     </body>
   </html>
@@ -24,6 +24,6 @@ Object {
   "skuDefaultClientEntry-b8efa93ad3ab8918f8db.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
-  "vendors~skuDefaultClientEntry-6eca44a25078eafecfcb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

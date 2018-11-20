@@ -4,8 +4,11 @@ process.env.NODE_ENV = 'production';
 const webpack = require('webpack');
 
 const { run } = require('../lib/runWebpack');
-const copyPublicFiles = require('../lib/copyPublicFiles');
-const cleanTargetFolder = require('../lib/cleanTargetFolder');
+const {
+  copyPublicFiles,
+  cleanTargetFolder,
+  ensureTargetDirectory
+} = require('../lib/fileUtils');
 const [
   clientConfig,
   serverConfig
@@ -13,6 +16,7 @@ const [
 
 (async () => {
   try {
+    await ensureTargetDirectory();
     await cleanTargetFolder();
     await run(webpack(clientConfig));
     await run(webpack(serverConfig));

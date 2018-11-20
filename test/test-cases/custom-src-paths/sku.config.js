@@ -5,5 +5,5 @@ module.exports = {
     render: 'lib/render.js'
   },
   port: 8080,
-  publicPath: 'http://localhost:4000'
+  publicPath: 'http://localhost:4002'
 };

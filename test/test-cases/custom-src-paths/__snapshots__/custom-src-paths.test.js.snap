@@ -10,9 +10,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
     
   
 </body></html>",
@@ -28,9 +28,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
     </body>
   </html>
 ",
@@ -51,15 +51,15 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
     </body>
   </html>
 ",
-  "runtime-014340d9b9907db3205b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-b6805b89996844acbb76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-05b78e015ee823f13484.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~skuDefaultClientEntry-f320ad30fcbd0c053d0a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -70,12 +70,12 @@ Object {
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       
-    </head>
+    <script charset=\\"utf-8\\" src=\\"/0-4d2352c908ec88da6270.js\\"></script></head>
     <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-3d179b241d850712e66b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-d5f69e232efb0f0b11bf.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-dae07dc9b7427a1d5a2e.js\\"></script>
+      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     
   
 </body></html>",
@@ -90,10 +90,10 @@ Object {
       
     </head>
     <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-3d179b241d850712e66b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-d5f69e232efb0f0b11bf.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-dae07dc9b7427a1d5a2e.js\\"></script>
+      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
     </body>
   </html>
 ",

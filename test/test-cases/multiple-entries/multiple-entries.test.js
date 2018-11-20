@@ -8,7 +8,7 @@ const targetDirectory = `${__dirname}/dist`;
 
 describe('multiple-entries', () => {
   describe('start', () => {
-    const devServerUrl = `http://localhost:8080`;
+    const devServerUrl = `http://localhost:8202`;
     let server;
 
     beforeAll(async () => {
@@ -36,8 +36,8 @@ describe('multiple-entries', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = startAssetServer(4000, targetDirectory);
-      await waitForUrls('http://localhost:4000');
+      closeAssetServer = startAssetServer(4001, targetDirectory);
+      await waitForUrls('http://localhost:4001');
     });
 
     afterAll(() => {
@@ -45,7 +45,7 @@ describe('multiple-entries', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4000/production/au');
+      const app = await getAppSnapshot('http://localhost:4001/production/au');
       expect(app).toMatchSnapshot();
     });
 

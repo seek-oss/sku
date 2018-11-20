@@ -4,5 +4,6 @@ module.exports = {
     { name: 'details', entry: 'src/DetailsPage.js', route: '/details' }
   ],
   sites: ['au', 'nz'],
-  publicPath: 'http://localhost:4000'
+  port: 8202,
+  publicPath: 'http://localhost:4001'
 };

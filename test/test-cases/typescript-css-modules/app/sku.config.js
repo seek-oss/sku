@@ -4,6 +4,7 @@ module.exports = {
     render: 'src/render.tsx',
     server: 'src/server.tsx'
   },
+  port: 8204,
   serverPort: 8010,
-  publicPath: 'http://localhost:4000'
+  publicPath: 'http://localhost:4003'
 };

@@ -5,8 +5,11 @@ const path = require('path');
 const { promisify } = require('util');
 const rimraf = promisify(require('rimraf'));
 
-const copyPublicFiles = require('../lib/copyPublicFiles');
-const cleanTargetFolder = require('../lib/cleanTargetFolder');
+const {
+  copyPublicFiles,
+  cleanTargetFolder,
+  ensureTargetDirectory
+} = require('../lib/fileUtils');
 
 const { run } = require('../lib/runWebpack');
 const webpackCompiler = require('../config/webpack/webpack.config');
@@ -16,6 +19,7 @@ const cleanRenderJs = () => rimraf(path.join(paths.target, 'render.js'));
 
 (async () => {
   try {
+    await ensureTargetDirectory();
     await cleanTargetFolder();
     await run(webpackCompiler);
     await cleanRenderJs();

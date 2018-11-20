@@ -69,6 +69,8 @@ const internalJs = [
 
 debug({ build: 'default', internalJs });
 
+const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+
 const buildWebpackConfigs = [
   {
     name: 'client',
@@ -78,8 +80,8 @@ const buildWebpackConfigs = [
     output: {
       path: paths.target,
       publicPath: paths.publicPath,
-      filename: '[name]-[contenthash].js',
-      chunkFilename: '[name]-[contenthash].js'
+      filename: `${fileMask}.js`,
+      chunkFilename: `${fileMask}.js`
     },
     optimization: {
       nodeEnv: process.env.NODE_ENV,
@@ -158,8 +160,8 @@ const buildWebpackConfigs = [
       new webpack.DefinePlugin(envVars),
       ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
       new MiniCssExtractPlugin({
-        filename: '[name]-[contenthash].css',
-        chunkFilename: '[name]-[contenthash].css'
+        filename: `${fileMask}.css`,
+        chunkFilename: `${fileMask}.css`
       }),
       new webpack.HashedModuleIdsPlugin()
     ]

@@ -70,9 +70,9 @@ Object {
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       
-    <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+    </head>
     <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
       <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
@@ -90,7 +90,7 @@ Object {
       
     </head>
     <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
       <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>

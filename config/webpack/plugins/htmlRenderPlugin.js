@@ -77,6 +77,6 @@ module.exports = () => {
     renderDirectory: paths.target,
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
     mapStatsToParams,
-    verbose: true
+    verbose: false
   });
 };

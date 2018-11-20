@@ -56,7 +56,7 @@ const getStartRoutes = () => {
 
   return routes.map(({ name, route }) => ({
     routeName: name,
-    route: transformPath({ route })
+    route
   }));
 };
 
@@ -67,7 +67,7 @@ const getBuildRoutes = () =>
         environment,
         site,
         routeName: name,
-        route: transformPath({ environment, site, route })
+        route
       }))
     )
   );
@@ -76,6 +76,7 @@ module.exports = () => {
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
+    transformFilePath: transformPath,
     mapStatsToParams,
     verbose: false
   });

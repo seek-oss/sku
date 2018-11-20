@@ -104,7 +104,7 @@
     "file-loader": "^1.1.11",
     "find-up": "^3.0.0",
     "fs-extra": "^5.0.0",
-    "html-render-webpack-plugin": "github:jahredhope/html-render-webpack-plugin#8ad08ee",
+    "html-render-webpack-plugin": "^0.0.2",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^6.0.0",
     "jest": "^23.4.2",

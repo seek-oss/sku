@@ -6449,9 +6449,10 @@ html-minifier@^3.5.20:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-"html-render-webpack-plugin@github:jahredhope/html-render-webpack-plugin#8ad08ee":
-  version "0.0.0-development"
-  resolved "https://codeload.github.com/jahredhope/html-render-webpack-plugin/tar.gz/8ad08ee9e628f306b9fa7eaa459815d0b89e25f1"
+html-render-webpack-plugin@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-0.0.2.tgz#ef0f570bf8f4675fb4d6e2c7a0dede7779d66787"
+  integrity sha512-ZaI1pXOAVtZ7RMP0VFndDVwMGvEUZaL8CEnkIiyK9vYF1/aUE5kTl0KXG4Torkya/m5TTtdfG+4ShB7kmbEEVA==
   dependencies:
     chalk "^2.4.1"
     eval "^0.1.2"

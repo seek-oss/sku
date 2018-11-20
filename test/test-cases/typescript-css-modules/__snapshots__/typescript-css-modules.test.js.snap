@@ -143,13 +143,13 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>My Awesome Project</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry-2dcacdfe37ba3e3dcf4b.css\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-3d179b241d850712e66b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-3cca5382a9bdf26cb5bc.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-869bb38f827acae925c2.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
     
   
 </body></html>",
@@ -161,13 +161,13 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>My Awesome Project</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry-2dcacdfe37ba3e3dcf4b.css\\" />
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\" />
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-3d179b241d850712e66b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-3cca5382a9bdf26cb5bc.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-869bb38f827acae925c2.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
     </body>
   </html>
 ",

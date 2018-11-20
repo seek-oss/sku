@@ -147,13 +147,13 @@ Object {
         <script>
           window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
         </script>
-        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details-53b7cab61cd1f17a7421.css\\">
-      <script charset=\\"utf-8\\" src=\\"/0-fec8d32c24d473a60869.js\\"></script></head>
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\">
+      <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
       <body>
         <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- --><span>Some special async content</span></h1></div>
-        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home-53b203d80e6e2c49236a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details-31c1f110195671ae006e.js\\"></script>
+        <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
       
     
   </body></html>",
@@ -168,13 +168,13 @@ Object {
         <script>
           window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
         </script>
-        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details-53b7cab61cd1f17a7421.css\\" />
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\" />
       </head>
       <body>
         <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home-53b203d80e6e2c49236a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details-31c1f110195671ae006e.js\\"></script>
+        <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
       </body>
     </html>
   ",
@@ -191,13 +191,13 @@ Object {
         <script>
           window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
         </script>
-        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home-0e5d90a65a365ed7abc2.css\\">
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\">
       </head>
       <body>
         <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home-53b203d80e6e2c49236a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home-8e5f713c6e96615caa43.js\\"></script>
+        <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
       
     
   </body></html>",
@@ -212,13 +212,13 @@ Object {
         <script>
           window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
         </script>
-        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home-0e5d90a65a365ed7abc2.css\\" />
+        <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\" />
       </head>
       <body>
         <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-        <script type=\\"text/javascript\\" src=\\"/runtime-39149a979ebc6ab3998d.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home-53b203d80e6e2c49236a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home-8e5f713c6e96615caa43.js\\"></script>
+        <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
       </body>
     </html>
   ",

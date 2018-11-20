@@ -31,12 +31,12 @@ Object {
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
       
-    <script charset=\\"utf-8\\" src=\\"/0-4d2352c908ec88da6270.js\\"></script></head>
+    <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
     
   
 </body></html>",
@@ -52,9 +52,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-5a7e8b7a11011752823c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-2013b2d55e033bfe460c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-22b64891a7cc81a51920.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
     </body>
   </html>
 ",

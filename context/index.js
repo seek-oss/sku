@@ -16,7 +16,7 @@ const skuConfig = merge(defaultSkuConfig, appSkuConfig);
 if (skuConfig.entry.library && !skuConfig.libraryName) {
   console.log(
     chalk.red(
-      "Error: In your sku config, you've provided 'entry.library' without a corresponding 'libraryName' option."
+      "Error: In your sku config, you've provided 'entry.library' without a corresponding 'libraryName' option. More details: https://github.com/seek-oss/sku#building-a-library"
     )
   );
   process.exit(1);

@@ -9,10 +9,10 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -25,10 +25,10 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -46,14 +46,14 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
   </body>
 </html>",
   "runtime-b6805b89996844acbb76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "skuDefaultClientEntry-05b78e015ee823f13484.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
@@ -65,9 +65,9 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     
-  <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+  </head>
   <body>
-    <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
     <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
@@ -83,7 +83,7 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
     <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>

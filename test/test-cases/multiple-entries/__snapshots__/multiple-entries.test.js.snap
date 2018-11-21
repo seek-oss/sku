@@ -15,7 +15,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-7ecd60205ea4ded3d88f.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -34,7 +34,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-7ecd60205ea4ded3d88f.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -44,12 +44,12 @@ Object {
 exports[`multiple-entries build should generate the expected files 1`] = `
 Object {
   "4-04990a1776692a284b46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "details-41a543f05ec33cbe29bb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
 ",
-  "details-90dae2a86e5268f3e1e1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
 ",
-  "home-7ecd60205ea4ded3d88f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "home-ae8d867601646498c48e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/index.html": "<!DOCTYPE html>
 <html>
   <head>
@@ -65,7 +65,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-90dae2a86e5268f3e1e1.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-41a543f05ec33cbe29bb.js\\"></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -83,7 +83,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-7ecd60205ea4ded3d88f.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
   </body>
 </html>",
   "production/nz/details/index.html": "<!DOCTYPE html>
@@ -101,7 +101,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-90dae2a86e5268f3e1e1.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-41a543f05ec33cbe29bb.js\\"></script>
   </body>
 </html>",
   "production/nz/index.html": "<!DOCTYPE html>
@@ -119,7 +119,7 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->nz</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-7ecd60205ea4ded3d88f.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
   </body>
 </html>",
   "runtime-401aa21f1fa0a3f1a06a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

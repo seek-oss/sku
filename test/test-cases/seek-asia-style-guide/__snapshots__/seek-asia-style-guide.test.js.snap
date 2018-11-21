@@ -6,23 +6,21 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "production/au/index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/vendors~skuDefaultClientEntry-fd7409ec4d112211a969.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1k6xEmK\\" data-reactroot=\\"\\"><div class=\\"dgc-8Wj\\"><h1>SEEK Asia</h1></div><div class=\\"\\"><div class=\\"_12lF2dd\\"><div class=\\"_1I9KGZo\\"><span class=\\"T_bb8ZR _2l47xPH\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
+  "production/au/index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/vendors~skuDefaultClientEntry-fd7409ec4d112211a969.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1k6xEmK\\" data-reactroot=\\"\\"><div class=\\"dgc-8Wj\\"><h1>SEEK Asia</h1></div><div class=\\"\\"><div class=\\"_12lF2dd\\"><div class=\\"_1I9KGZo\\"><span class=\\"T_bb8ZR _2l47xPH\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-e604d4934bcccc12dc3d.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-d52da540fa6ecc57debf.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "runtime-13848ce239fe40766fec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-d52da540fa6ecc57debf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~skuDefaultClientEntry-e604d4934bcccc12dc3d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

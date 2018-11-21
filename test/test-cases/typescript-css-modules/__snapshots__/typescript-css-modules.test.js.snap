@@ -3,37 +3,34 @@
 exports[`typescript-css-modules build should create valid app 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\">
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\"></script>
-    
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;
@@ -50,23 +47,21 @@ export const nested: string;
 export const root: string;
 export const nested: string;
 ",
-  "production/au/index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
+  "production/au/index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4003/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "runtime-f31154b442e59ba52e55.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-3e8de5a9b0f57b968818.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-b8efa93ad3ab8918f8db.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
@@ -140,37 +135,34 @@ export const nested: string;
 exports[`typescript-css-modules start should start a development server 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\">
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
-    
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;

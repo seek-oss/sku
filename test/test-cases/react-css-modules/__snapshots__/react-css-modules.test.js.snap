@@ -2,23 +2,21 @@
 
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
-  "production/au/index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
+  "production/au/index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/skuDefaultClientEntry-b8efa93ad3ab8918f8db.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-529c598e44284de60c82.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "runtime-13848ce239fe40766fec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-529c598e44284de60c82.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-b8efa93ad3ab8918f8db.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}

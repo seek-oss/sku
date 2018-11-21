@@ -1,7 +1,7 @@
-import { renderApp, renderHTML } from '__sku_alias__renderEntry'; // eslint-disable-line import/no-unresolved
+import render from '__sku_alias__renderEntry'; // eslint-disable-line import/no-unresolved
 
-export default async renderParams => {
-  const app = await renderApp(renderParams);
+export default async ({ headTags, bodyTags, ...renderParams }) => {
+  const app = await render.renderApp(renderParams);
 
-  return await renderHTML({ ...renderParams, app });
+  return await render.renderHTML({ headTags, bodyTags, ...renderParams, app });
 };

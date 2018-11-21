@@ -3,60 +3,55 @@
 exports[`custom-src-paths build should create valid app 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
-    
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "production/au/index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
+  "production/au/index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-05b78e015ee823f13484.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "runtime-b6805b89996844acbb76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "skuDefaultClientEntry-05b78e015ee823f13484.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -66,37 +61,34 @@ Object {
 exports[`custom-src-paths start should start a development server 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
-    
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
-    </body>
-  </html>
-",
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;

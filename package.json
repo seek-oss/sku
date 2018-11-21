@@ -20,6 +20,7 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release"
   },
+  "types": "./sku-types.d.ts",
   "husky": {
     "hooks": {
       "commit-msg": "commitlint --edit --extends seek",
@@ -139,6 +140,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
+    "@types/dedent": "^0.7.0",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "async-disk-cache": "^1.3.3",

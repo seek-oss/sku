@@ -8,7 +8,7 @@ const {
   copyPublicFiles,
   cleanTargetFolder,
   ensureTargetDirectory
-} = require('../lib/fileUtils');
+} = require('../lib/buildFileUtils');
 const [
   clientConfig,
   serverConfig

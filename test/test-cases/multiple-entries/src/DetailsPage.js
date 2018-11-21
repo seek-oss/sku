@@ -3,6 +3,6 @@ import { hydrate } from 'react-dom';
 import Details from './handlers/Details';
 
 hydrate(
-  <Details site={window.SKU_CONFIG.site} />,
+  <Details site={window.APP_CONFIG.site} />,
   document.getElementById('app')
 );

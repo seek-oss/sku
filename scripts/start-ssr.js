@@ -6,18 +6,24 @@ const opn = require('opn');
 const { once } = require('lodash');
 
 const { watch } = require('../lib/runWebpack');
-const { copyPublicFiles, ensureTargetDirectory } = require('../lib/fileUtils');
+const {
+  copyPublicFiles,
+  ensureTargetDirectory
+} = require('../lib/buildFileUtils');
 const { hosts, port, initialPath, paths } = require('../context');
 const [
   clientWebpackConfig,
   serverWebpackConfig
 ] = require('../config/webpack/webpack.config.ssr');
 
+// Make sure target directory exists before starting
 ensureTargetDirectory();
 
 const clientCompiler = webpack(clientWebpackConfig);
 const serverCompiler = webpack(serverWebpackConfig);
 
+// Starts the server webpack config running.
+// We only want to do this once as it runs in watch mode
 const startServerWatch = once(async () => {
   try {
     console.log('Start server compile');
@@ -37,10 +43,13 @@ const startServerWatch = once(async () => {
   }
 });
 
+// Make sure the client webpack config is complete before
+// starting the server build. The server relies on the client assets.
 clientCompiler.hooks.afterEmit.tap('sku start-ssr', async () => {
   startServerWatch();
 });
 
+// Start webpack dev server using only the client config
 const devServer = new WebpackDevServer(clientCompiler, {
   contentBase: paths.public,
   historyApiFallback: true,

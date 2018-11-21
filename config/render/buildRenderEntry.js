@@ -3,5 +3,10 @@ import render from '__sku_alias__renderEntry'; // eslint-disable-line import/no-
 export default async ({ headTags, bodyTags, ...renderParams }) => {
   const app = await render.renderApp(renderParams);
 
-  return await render.renderHTML({ headTags, bodyTags, ...renderParams, app });
+  return await render.renderDocument({
+    headTags,
+    bodyTags,
+    ...renderParams,
+    app
+  });
 };

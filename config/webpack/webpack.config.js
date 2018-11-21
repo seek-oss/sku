@@ -6,7 +6,6 @@ const lodash = require('lodash');
 const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const htmlRenderPlugin = require('./plugins/htmlRenderPlugin');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack');
 const { cwd } = require('../../lib/cwd');
@@ -69,6 +68,9 @@ const internalJs = [
 
 debug({ build: 'default', internalJs });
 
+// The file mask is set to just name in start/dev mode as contenthash
+// is not supported for hot reloading. It can also cause non
+// deterministic snapshots in jest tests.
 const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
 
 const buildWebpackConfigs = [
@@ -168,6 +170,9 @@ const buildWebpackConfigs = [
   },
   {
     name: 'render',
+    // dependencies is required for html-render-webpack-plugin.
+    // It directs the plugin to wait for the 'client' build to finish
+    // before starting the render phase.
     dependencies: ['client'],
     mode: 'development',
     entry: {
@@ -250,7 +255,4 @@ const buildWebpackConfigs = [
 
 debug(JSON.stringify(buildWebpackConfigs));
 
-const compiler = webpack(buildWebpackConfigs);
-compiler.apply(htmlRenderPlugin());
-
-module.exports = compiler;
+module.exports = buildWebpackConfigs;

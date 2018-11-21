@@ -7,7 +7,7 @@ import App from './App';
 export default {
   renderApp: () => renderToString(<App />),
 
-  renderHTML: ({ app, bodyTags, headTags }) => dedent`
+  renderDocument: ({ app, bodyTags, headTags }) => dedent`
     <!DOCTYPE html>
     <html>
       <head>

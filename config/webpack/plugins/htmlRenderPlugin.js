@@ -9,7 +9,7 @@ const {
   routes,
   environments,
   sites,
-  transformPath,
+  transformOutputPath,
   defaultClientEntry
 } = require('../../../context');
 
@@ -76,7 +76,7 @@ module.exports = () => {
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
-    transformFilePath: transformPath,
+    transformFilePath: transformOutputPath,
     mapStatsToParams,
     verbose: false
   });

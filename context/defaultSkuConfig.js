@@ -11,9 +11,9 @@ module.exports = {
   routes: [{ name: 'main', route: '/' }],
   sites: ['au'],
   environments: ['production'],
-  transformPath: ({ environment, site, route }) =>
+  transformOutputPath: ({ environment, site, route }) =>
     path.join(environment, site, route),
-  devTransformPath: ({ route }) => route,
+  devTransformOutputPath: ({ route }) => route,
   srcPaths: ['./src'],
   env: {},
   compilePackages: [],

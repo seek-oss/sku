@@ -88,6 +88,10 @@ const serverEntry = isStartScript
 const publicPath = isStartScript ? clientServer : paths.publicPath;
 
 const assetsFile = 'assets.json';
+
+// The file mask is set to just name in start/dev mode as contenthash
+// is not supported for hot reloading. It can also cause non
+// deterministic snapshots in jest tests.
 const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
 
 const buildWebpackConfigs = [

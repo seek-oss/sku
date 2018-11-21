@@ -4,13 +4,14 @@ const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 
 const { hosts, port, initialPath, paths } = require('../context');
-const webpackCompiler = require('../config/webpack/webpack.config');
+const webpackCompiler = require('../config/webpack/webpack.compiler');
 
 const devServer = new WebpackDevServer(webpackCompiler, {
   contentBase: paths.public,
   overlay: true,
   stats: 'errors-only',
-  allowedHosts: hosts
+  allowedHosts: hosts,
+  historyApiFallback: true
 });
 
 devServer.listen(port.client, '0.0.0.0', err => {

@@ -1,21 +1,15 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const path = require('path');
-const { promisify } = require('util');
-const rimraf = promisify(require('rimraf'));
-
 const {
   copyPublicFiles,
   cleanTargetFolder,
-  ensureTargetDirectory
-} = require('../lib/fileUtils');
+  ensureTargetDirectory,
+  cleanRenderJs
+} = require('../lib/buildFileUtils');
 
 const { run } = require('../lib/runWebpack');
-const webpackCompiler = require('../config/webpack/webpack.config');
-const { paths } = require('../context');
-
-const cleanRenderJs = () => rimraf(path.join(paths.target, 'render.js'));
+const webpackCompiler = require('../config/webpack/webpack.compiler');
 
 (async () => {
   try {

@@ -7,7 +7,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
@@ -26,7 +26,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -57,7 +57,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
@@ -75,7 +75,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -93,7 +93,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
@@ -111,7 +111,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -134,7 +134,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\">
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
@@ -153,7 +153,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\" />
   </head>
@@ -175,7 +175,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\">
   </head>
@@ -194,7 +194,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.SKU_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\" />
   </head>

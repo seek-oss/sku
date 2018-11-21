@@ -24,7 +24,7 @@ const renderApp = () => {
   };
 };
 
-const renderHTML = ({ app, bodyTags, headTags }) => `
+const renderDocument = ({ app, bodyTags, headTags }) => `
   <!DOCTYPE html>
   <html${app.htmlAttributes ? ` ${app.htmlAttributes}` : ''}>
     <head>
@@ -42,5 +42,5 @@ const renderHTML = ({ app, bodyTags, headTags }) => `
 
 export default {
   renderApp,
-  renderHTML
+  renderDocument
 };

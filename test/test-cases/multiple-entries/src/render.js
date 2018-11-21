@@ -16,7 +16,7 @@ export default {
     return renderToString(<App site={site} />);
   },
 
-  renderHTML: ({ app, bodyTags, headTags, site, environment }) => {
+  renderDocument: ({ app, bodyTags, headTags, site, environment }) => {
     return dedent`
       <!DOCTYPE html>
       <html>
@@ -25,7 +25,7 @@ export default {
           <title>hello-world</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <script>
-            window.SKU_CONFIG = ${JSON.stringify({ site, environment })};
+            window.APP_CONFIG = ${JSON.stringify({ site, environment })};
           </script>
           ${headTags}
         </head>

@@ -20,9 +20,9 @@ const env = {
 
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 
-const transformPath = isStartScript
-  ? skuConfig.devTransformPath
-  : skuConfig.transformPath;
+const transformOutputPath = isStartScript
+  ? skuConfig.devTransformOutputPath
+  : skuConfig.transformOutputPath;
 
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
@@ -59,6 +59,6 @@ module.exports = {
   sites: skuConfig.sites,
   routes: skuConfig.routes,
   environments: skuConfig.environments,
-  transformPath,
+  transformOutputPath,
   defaultClientEntry
 };

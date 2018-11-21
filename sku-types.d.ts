@@ -3,7 +3,7 @@ interface RenderAppProps {
   site: string;
 }
 
-interface RenderHTMLProps<T> extends RenderAppProps {
+interface renderDocumentProps<T> extends RenderAppProps {
   app: T;
   headTags: string;
   bodyTags: string;
@@ -12,5 +12,5 @@ interface RenderHTMLProps<T> extends RenderAppProps {
 export interface Render<T = string> {
   renderApp(p: RenderAppProps): T;
 
-  renderHTML(p: RenderHTMLProps<T>): string;
+  renderDocument(p: renderDocumentProps<T>): string;
 }

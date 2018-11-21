@@ -6,7 +6,7 @@ export default async ({ headTags, bodyTags, ...renderContext }) => {
 
   const app = await render.renderApp(renderParams);
 
-  const result = await render.renderHTML({
+  const result = await render.renderDocument({
     headTags,
     bodyTags,
     ...renderParams,

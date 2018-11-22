@@ -1,13 +1,66 @@
 # Static rendering
 
-Client-side apps (spas) all suffer the same performance pitfall of not being able to show any content until the javascript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, `sku` renders all the static content of your app at build time.
+Client-side apps (spas) all suffer the same performance pitfall of not being able to show any content until the javascript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, `sku` renders all the static content (everything not requiring an API call) of your app at build time.
 
-To achieve this, `sku` apps have a special render entry point like the following.
+## Configuration
+
+The sku config contains route specific options.
+
+```js
+module.exports = {
+  routes: [
+    {
+      route: '/',
+      name: 'home',
+      entry: 'src/Home.js' // Optional: falls back to entry.client
+    },
+    {
+      route: '/details',
+      name: 'details',
+      entry: 'src/Details.js'
+    }
+  ],
+  environments: ['development', 'production'],
+  sites: ['au', 'jobstreet'],
+  target: 'dist' // Optional, this is the default value
+};
+```
+
+Running `sku build` with the above config will create the following output in your target directory.
+
+```
+├── development
+│   ├── au
+│   │   ├── index.html
+│   │   ├── details
+│   │   |   ├── index.html
+│   ├── jobstreet
+│   │   ├── index.html
+│   │   ├── details
+│   │   |   ├── index.html
+├── production
+│   ├── au
+│   │   ├── index.html
+│   │   ├── details
+│   │   |   ├── index.html
+│   ├── jobstreet
+│   │   ├── index.html
+│   │   ├── details
+│   │   |   ├── index.html
+├── [static-asset].{css,js,jpg,etc}
+```
+
+Note: `sku start` will default to the first `environment` and `site` in your config.
+
+## Render entry
+
+After configuring sku config, the render entry needs to return the HTML required to create all the above files. The render entry is set via `entry.render` (default is `src/render.js`).
+
+**Example render entry**
 
 ```js
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-
 import App from './App';
 
 export default {
@@ -40,8 +93,101 @@ The `renderApp` function should return a your application as an HTML string (gen
 
 ## renderDocument
 
-`renderDocument` is called immediately after `renderApp`. It gets passed all the same values as `renderApp` plus the following.
+`renderDocument` is called immediately after `renderApp`. It gets passed all the same values as `renderApp` plus the following. It must return a full HTML document.
 
-- app - the value returned from the `renderApp` function
-- headtags - html tags to be placed in the head of the html
-- bodytags - html tags to be placed at the end of the html body
+- `app` - the value returned from the `renderApp` function
+- `headtags` - html tags to be placed in the head of the html
+- `bodytags` - html tags to be placed at the end of the html body
+
+## Examples
+
+### Typescript
+
+If your app uses Typescript sku provides the type definitions for the render entry.
+
+```ts
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Render } from 'sku';
+import App from './App';
+
+interface RenderContext {
+  html: string;
+  otherThing: number;
+}
+const skuRender: Render<RenderContext> = {
+  renderApp: () => ({
+    html: renderToString(<App />),
+    otherThing: 10
+  }),
+
+  renderDocument: ({ app, headTags, bodyTags }) => `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        ${headTags}
+      </head>
+      <body>
+        <div id="app">${app}</div>
+        ${bodyTags}
+      </body>
+    </html>
+  `
+};
+
+export default skuRender;
+```
+
+### React helmet
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import Helmet from 'react-helmet';
+import App from './App/App';
+
+const renderApp = () => {
+  const appHtml = ReactDOM.renderToString(<App />);
+  const helmet = Helmet.renderStatic();
+
+  const htmlAttributes = helmet.htmlAttributes.toString();
+  const bodyAttributes = helmet.bodyAttributes.toString();
+  const metaStrings = [
+    helmet.title.toString(),
+    helmet.meta.toString(),
+    helmet.link.toString()
+  ];
+  const metaHtml = metaStrings.filter(Boolean).join('\n    ');
+
+  return {
+    appHtml,
+    metaHtml,
+    htmlAttributes,
+    bodyAttributes
+  };
+};
+
+const renderDocument = ({ app, bodyTags, headTags }) => `
+  <!DOCTYPE html>
+  <html${app.htmlAttributes ? ` ${app.htmlAttributes}` : ''}>
+    <head>
+      ${app.metaHtml}
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      ${headTags}
+    </head>
+    <body${app.bodyAttributes ? ` ${app.bodyAttributes}` : ''}>
+      <div id="app">${app.appHtml}</div>
+      ${bodyTags}
+    </body>
+  </html>
+`;
+
+export default {
+  renderApp,
+  renderDocument
+};
+```

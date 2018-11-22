@@ -1,6 +1,6 @@
 # Static rendering
 
-Client-side apps (spas) all suffer the same performance pitfall of not being able to show any content until the javascript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, `sku` renders all the static content (everything not requiring an API call) of your app at build time.
+Client-side apps all suffer the same performance pitfall of not being able to show any content until the JavaScript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, sku renders all the static content (everything not requiring an API call) of your app at build time.
 
 ## Configuration
 
@@ -54,7 +54,7 @@ Note: `sku start` will default to the first `environment` and `site` in your con
 
 ## Render entry
 
-After configuring sku config, the render entry needs to return the HTML required to create all the above files. The render entry is set via `entry.render` (default is `src/render.js`).
+After configuring sku, the render entry needs to return the HTML required to create all the above files. The render entry is set via `entry.render` (default is `src/render.js`).
 
 **Example render entry**
 
@@ -101,9 +101,9 @@ The `renderApp` function should return a your application as an HTML string (gen
 
 ## Examples
 
-### Typescript
+### TypeScript
 
-If your app uses Typescript sku provides the type definitions for the render entry.
+If your app uses TypeScript, sku provides the type definitions for the render entry.
 
 ```ts
 import React from 'react';
@@ -131,7 +131,7 @@ const skuRender: Render<RenderContext> = {
         ${headTags}
       </head>
       <body>
-        <div id="app">${app}</div>
+        <div id="app">${app.html}</div>
         ${bodyTags}
       </body>
     </html>

@@ -92,6 +92,7 @@
     "dedent": "^0.7.0",
     "empty-dir": "^1.0.0",
     "ensure-gitignore": "^1.1.2",
+    "escape-string-regexp": "^1.0.5",
     "eslint": "^5.8.0",
     "eslint-config-seek": "^3.2.1",
     "express": "^4.16.3",

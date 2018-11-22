@@ -1,13 +1,10 @@
 const chalk = require('chalk');
-const baseESlintConfig = require('eslint-config-seek');
 const EslintCLI = require('eslint').CLIEngine;
-
+const eslintConfig = require('../config/eslint/eslintConfig');
 const isTypeScript = require('../lib/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
-
-const { paths, eslintDecorator } = require('../context');
 const args = require('../config/args').argv;
 
 (async () => {
@@ -25,11 +22,11 @@ const args = require('../config/args').argv;
   }
 
   const cli = new EslintCLI({
-    baseConfig: eslintDecorator(baseESlintConfig),
+    baseConfig: eslintConfig,
     useEslintrc: false
   });
 
-  const pathsToCheck = args.length === 0 ? paths.src : args;
+  const pathsToCheck = args.length === 0 ? ['.'] : args;
 
   const formatter = cli.getFormatter();
   console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));

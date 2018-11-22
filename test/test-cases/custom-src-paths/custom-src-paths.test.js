@@ -5,6 +5,10 @@ const getAppSnapshot = require('../../utils/getAppSnapshot');
 const skuConfig = require('./sku.config');
 
 describe('custom-src-paths', () => {
+  beforeAll(async () => {
+    await runSkuScriptInDir('configure', __dirname);
+  });
+
   describe('start', () => {
     const devServerUrl = `http://localhost:${skuConfig.port}`;
     let server;

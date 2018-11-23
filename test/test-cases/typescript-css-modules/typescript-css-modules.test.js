@@ -31,7 +31,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4003/production/au');
+      const app = await getAppSnapshot('http://localhost:4003');
       expect(app).toMatchSnapshot();
     });
 

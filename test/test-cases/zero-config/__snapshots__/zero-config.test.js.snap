@@ -3,7 +3,7 @@
 exports[`zero-config build should generate the expected files 1`] = `
 Object {
   "0-2d4c17dcf56e1762b025.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/index.html": "<!DOCTYPE html>
+  "index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">

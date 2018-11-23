@@ -6,7 +6,7 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "production/au/index.html": "<!DOCTYPE html>
+  "index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">

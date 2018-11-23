@@ -46,7 +46,7 @@ describe('custom-src-paths', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4002/production/au');
+      const app = await getAppSnapshot('http://localhost:4002');
       expect(app).toMatchSnapshot();
     });
   });

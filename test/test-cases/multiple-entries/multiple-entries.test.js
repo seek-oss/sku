@@ -45,7 +45,7 @@ describe('multiple-entries', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4001/au');
+      const app = await getAppSnapshot('http://localhost:4001/production/au');
       expect(app).toMatchSnapshot();
     });
 

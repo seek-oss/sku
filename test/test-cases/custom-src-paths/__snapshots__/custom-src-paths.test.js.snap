@@ -37,7 +37,7 @@ Object {
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "production/au/index.html": "<!DOCTYPE html>
+  "index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">

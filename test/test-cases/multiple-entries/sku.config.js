@@ -1,7 +1,7 @@
 module.exports = {
   routes: [
     { name: 'home', entry: 'src/HomePage.js', route: '/' },
-    { name: 'details', entry: 'src/DetailsPage.js', route: '/details' }
+    { name: 'details', entry: 'src/DetailsPage.js', route: '/details/:id' }
   ],
   sites: ['au', 'nz'],
   port: 8202,

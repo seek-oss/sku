@@ -9,9 +9,9 @@ module.exports = {
     server: 'src/server.js'
   },
   routes: [{ name: 'main', route: '/' }],
-  sites: ['au'],
-  environments: ['production'],
-  transformOutputPath: ({ environment, site, route }) =>
+  sites: [],
+  environments: [],
+  transformOutputPath: ({ environment = '', site = '', route = '' }) =>
     path.join(environment, site, route),
   devTransformOutputPath: ({ route }) => route,
   srcPaths: ['./src'],

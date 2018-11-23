@@ -24,6 +24,10 @@ const transformOutputPath = isStartScript
   ? skuConfig.devTransformOutputPath
   : skuConfig.transformOutputPath;
 
+const dynamicRoutes = skuConfig.routes
+  .filter(({ route }) => route.indexOf(':') > 0)
+  .map(({ route }) => route);
+
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
@@ -58,6 +62,7 @@ module.exports = {
   isStartScript,
   sites: skuConfig.sites,
   routes: skuConfig.routes,
+  dynamicRoutes,
   environments: skuConfig.environments,
   transformOutputPath,
   defaultClientEntry

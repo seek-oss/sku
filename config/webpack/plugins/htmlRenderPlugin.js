@@ -1,8 +1,8 @@
-const { flatMap, partition } = require('lodash');
+const { partition } = require('lodash');
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 
 const { writeStartConfig } = require('../utils/startConfig');
-
+const product = require('../../../lib/product');
 const {
   isStartScript,
   paths,
@@ -61,16 +61,15 @@ const getStartRoutes = () => {
 };
 
 const getBuildRoutes = () =>
-  flatMap(environments, environment =>
-    flatMap(sites, site =>
-      flatMap(routes, ({ name, route }) => ({
-        environment,
-        site,
-        routeName: name,
-        route
-      }))
-    )
-  );
+  product({
+    environment: environments,
+    site: sites,
+    route: routes
+  }).map(({ route, ...rest }) => ({
+    ...rest,
+    routeName: route.name,
+    route: route.route
+  }));
 
 module.exports = () => {
   return new HtmlRenderPlugin({

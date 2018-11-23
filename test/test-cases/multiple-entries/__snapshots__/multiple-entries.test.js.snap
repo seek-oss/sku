@@ -7,7 +7,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
@@ -26,7 +26,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -44,20 +44,14 @@ Object {
 exports[`multiple-entries build should generate the expected files 1`] = `
 Object {
   "4-04990a1776692a284b46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "details-41a543f05ec33cbe29bb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
-",
-  "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
-",
-  "home-ae8d867601646498c48e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/index.html": "<!DOCTYPE html>
+  "au/details/:id/index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
@@ -65,17 +59,17 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-41a543f05ec33cbe29bb.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\"></script>
   </body>
 </html>",
-  "production/au/index.html": "<!DOCTYPE html>
+  "au/index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -86,14 +80,20 @@ Object {
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
   </body>
 </html>",
-  "production/nz/details/index.html": "<!DOCTYPE html>
+  "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
+",
+  "details-c05fd34f9f1a30e65bab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
+",
+  "home-ae8d867601646498c48e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "nz/details/:id/index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"nz\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
@@ -101,17 +101,17 @@ Object {
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
     <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-41a543f05ec33cbe29bb.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\"></script>
   </body>
 </html>",
-  "production/nz/index.html": "<!DOCTYPE html>
+  "nz/index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"nz\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
@@ -134,12 +134,12 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\">
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- --><span>Some special async content</span></h1></div>
+    <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->ID: 123<span>Some special async content</span></h1></div>
     <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
 <script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
@@ -153,7 +153,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/details.css\\" />
   </head>
@@ -175,7 +175,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\">
   </head>
@@ -194,7 +194,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+      window.APP_CONFIG = {\\"site\\":\\"au\\"};
     </script>
     <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/home.css\\" />
   </head>

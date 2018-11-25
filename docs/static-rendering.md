@@ -50,7 +50,9 @@ Running `sku build` with the above config will create the following output in yo
 ├── [static-asset].{css,js,jpg,etc}
 ```
 
-Note: `sku start` will default to the first `environment` and `site` in your config.
+`environments`, `sites` & `routes` are all optional and will not show up in the build output if not specified.
+
+Note: `sku start` will default to the first `environment` and `site` in your config if provided.
 
 ## Render entry
 
@@ -99,7 +101,7 @@ The `renderApp` function should return a your application as an HTML string (gen
 - `headTags` - html tags to be placed in the head of the html
 - `bodyTags` - html tags to be placed at the end of the html body
 
-## Examples
+## Common use cases
 
 ### TypeScript
 
@@ -142,6 +144,8 @@ export default skuRender;
 ```
 
 ### React helmet
+
+React helmet requires extra work after React render to extract static meta information. This is also a common pattern used by some other libraries (eg. [react-loadable](https://github.com/jamiebuilds/react-loadable), [emotion](https://emotion.sh/docs/ssr)).
 
 ```js
 import React from 'react';
@@ -191,3 +195,36 @@ export default {
   renderDocument
 };
 ```
+
+### Dynamic routes
+
+Apps using params in their path (eg. `/job/[12345]`) are supported as well. sku represents these params using the standard `/job/:id` convention, where `:` marks this part of the path as dynamic.
+
+```js
+{
+  routes: [
+    {
+      route: '/',
+      name: 'home'
+    },
+    {
+      route: '/job/:id',
+      name: 'jobDetails'
+    }
+  ],
+}
+```
+
+When running `sku start`, requesting `/job/123` will return the rendered `jobDetails` html. Running `sku build` will output the following folder structure.
+
+```
+├── index.html
+├── job
+│   ├── :id
+│   │   ├── index.html
+├── [static-asset].{css,js,jpg,etc}
+```
+
+**Warning**
+
+Although sku supports this behavior, your webserver must also be configured to serve the correct files. Due to this, some teams will choose to opt out of statically rendering these routes to reduce complexity.

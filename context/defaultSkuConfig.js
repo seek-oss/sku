@@ -18,6 +18,7 @@ module.exports = {
   public: 'public',
   publicPath: '/',
   polyfills: [],
+  libraryName: null,
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,

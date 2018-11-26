@@ -198,7 +198,7 @@ export default {
 
 ### Dynamic routes
 
-Apps using params in their path (eg. `/job/[12345]`) are supported as well. sku represents these params using the standard `/job/:id` convention, where `:` marks this part of the path as dynamic.
+Apps using params in their path (eg. `/job/[12345]`) are supported as well. These params are represented in sku using the standard `/job/:id` convention, where `:` marks this part of the path as dynamic.
 
 ```js
 {

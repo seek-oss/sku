@@ -227,4 +227,4 @@ When running `sku start`, requesting `/job/123` will return the rendered `jobDet
 
 **Warning**
 
-Although sku supports this behavior, your webserver must also be configured to serve the correct files. Due to this, some teams will choose to opt out of statically rendering these routes to reduce complexity.
+Although sku supports this behaviour, your web server must also be configured to serve the correct files by routing dynamic paths to the appropriate static file for that route. Due to this, some teams will choose to opt out of statically rendering these routes to reduce complexity.

@@ -215,7 +215,7 @@ Apps using params in their path (eg. `/job/[12345]`) are supported as well. Thes
 }
 ```
 
-When running `sku start`, requesting `/job/123` will return the rendered `jobDetails` html. Running `sku build` will output the following folder structure.
+When running `sku start`, requesting `/job/123` will return the rendered `jobDetails` HTML. Running `sku build` will output the following folder structure.
 
 ```
 ├── index.html

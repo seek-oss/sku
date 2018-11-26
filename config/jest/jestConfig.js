@@ -4,6 +4,11 @@ const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages.map(escapeRegex).join('|');
 
 module.exports = {
+  ...(paths.setupTests
+    ? {
+        setupTestFrameworkScriptFile: paths.setupTests
+      }
+    : {}),
   prettierPath: require.resolve('prettier'),
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`

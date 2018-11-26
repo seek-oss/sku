@@ -99,7 +99,7 @@ The `renderApp` function should return your application as an HTML string (gener
 
 - `app` - the value returned from the `renderApp` function
 - `headTags` - html tags to be placed in the head of the html
-- `bodyTags` - html tags to be placed at the end of the html body
+- `bodyTags` - html tags to be placed at the **end** of the html body
 
 ## Common use cases
 

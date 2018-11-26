@@ -13,9 +13,18 @@ const { cwd } = require('../../lib/cwd');
 const startRenderEntry = require.resolve('../render/startRenderEntry');
 const buildRenderEntry = require.resolve('../render/buildRenderEntry');
 
-const webpackMode = utils.isProductionBuild ? 'production' : 'development';
+const {
+  paths,
+  env,
+  webpackDecorator,
+  port,
+  polyfills,
+  isLibrary,
+  libraryName,
+  isStartScript
+} = config;
 
-const { paths, env, webpackDecorator, port, polyfills, isStartScript } = config;
+const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
 const envVars = lodash
   .chain(env)
@@ -52,14 +61,16 @@ const devServerEntries = [
   }/`
 ];
 
+const createEntry = entry => [
+  ...resolvedPolyfills,
+  ...(isStartScript ? devServerEntries : []),
+  entry
+];
+
 // Add polyfills and dev server client to all entries
-const entries = lodash.mapValues(
-  paths.clientEntries,
-  entry =>
-    isStartScript
-      ? [...resolvedPolyfills, ...devServerEntries, entry]
-      : [...resolvedPolyfills, entry]
-);
+const entry = isLibrary
+  ? createEntry(paths.libraryEntry)
+  : lodash.mapValues(paths.clientEntries, createEntry);
 
 const internalJs = [
   ...paths.src,
@@ -68,33 +79,52 @@ const internalJs = [
 
 debug({ build: 'default', internalJs });
 
-// The file mask is set to just name in start/dev mode as contenthash
+// The client file mask is set to just name in start/dev mode as contenthash
 // is not supported for hot reloading. It can also cause non
 // deterministic snapshots in jest tests.
-const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+const clientFileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+
+// Libraries should always have the same file name
+const libraryFileMask = libraryName;
+
+const jsFileMask = isLibrary ? `${libraryFileMask}.js` : `${clientFileMask}.js`;
+const cssFileMask = isLibrary
+  ? `${libraryFileMask}.css`
+  : `${clientFileMask}.css`;
 
 const buildWebpackConfigs = [
   {
     name: 'client',
     mode: webpackMode,
-    entry: entries,
+    entry,
     devtool: isStartScript ? 'inline-source-map' : false,
     output: {
       path: paths.target,
       publicPath: paths.publicPath,
-      filename: `${fileMask}.js`,
-      chunkFilename: `${fileMask}.js`
+      filename: jsFileMask,
+      chunkFilename: jsFileMask,
+      ...(isLibrary
+        ? {
+            library: libraryName,
+            libraryTarget: 'umd',
+            libraryExport: 'default'
+          }
+        : {})
     },
     optimization: {
       nodeEnv: process.env.NODE_ENV,
       minimize: utils.isProductionBuild,
       concatenateModules: utils.isProductionBuild,
-      splitChunks: {
-        chunks: 'all'
-      },
-      runtimeChunk: {
-        name: 'runtime'
-      }
+      ...(!isLibrary
+        ? {
+            splitChunks: {
+              chunks: 'all'
+            },
+            runtimeChunk: {
+              name: 'runtime'
+            }
+          }
+        : {})
     },
     resolve: {
       extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
@@ -162,8 +192,8 @@ const buildWebpackConfigs = [
       new webpack.DefinePlugin(envVars),
       ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
       new MiniCssExtractPlugin({
-        filename: `${fileMask}.css`,
-        chunkFilename: `${fileMask}.css`
+        filename: cssFileMask,
+        chunkFilename: cssFileMask
       }),
       new webpack.HashedModuleIdsPlugin()
     ]
@@ -238,7 +268,6 @@ const buildWebpackConfigs = [
             }
           ]
         },
-
         {
           test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
           use: utils.makeImageLoaders({ server: true })
@@ -249,9 +278,16 @@ const buildWebpackConfigs = [
         }
       ]
     },
-    plugins: [new webpack.DefinePlugin(envVars)]
+    plugins: [
+      new webpack.DefinePlugin(envVars),
+      new webpack.DefinePlugin({
+        SKU_LIBRARY_NAME: JSON.stringify(libraryName)
+      })
+    ]
   }
-].map(webpackDecorator);
+]
+  .filter(Boolean)
+  .map(webpackDecorator);
 
 debug(JSON.stringify(buildWebpackConfigs));
 

@@ -8,6 +8,10 @@ const skuConfig = require('./sku.config');
 const targetDirectory = `${__dirname}/dist`;
 
 describe('custom-src-paths', () => {
+  beforeAll(async () => {
+    await runSkuScriptInDir('configure', __dirname);
+  });
+
   describe('start', () => {
     const devServerUrl = `http://localhost:${skuConfig.port}`;
     let server;

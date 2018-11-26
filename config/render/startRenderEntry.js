@@ -1,10 +1,15 @@
 import render from '__sku_alias__renderEntry'; // eslint-disable-line import/no-unresolved
 import config from './startConfig.json'; // eslint-disable-line import/no-unresolved
 
-export default async ({ headTags, bodyTags, ...renderContext }) => {
-  const renderParams = { ...renderContext, ...config };
+const libraryName = SKU_LIBRARY_NAME; // eslint-disable-line
 
-  const app = await render.renderApp(renderParams);
+export default async ({ headTags, bodyTags, ...renderContext }) => {
+  let app;
+  const renderParams = { ...renderContext, ...config, libraryName };
+
+  if (render.renderApp) {
+    app = await render.renderApp(renderParams);
+  }
 
   const result = await render.renderDocument({
     headTags,

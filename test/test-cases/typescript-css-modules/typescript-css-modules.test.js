@@ -1,4 +1,7 @@
+const { promisify } = require('util');
+const readFile = promisify(require('fs').readFile);
 const path = require('path');
+const jsonc = require('jsonc-parser');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
@@ -15,6 +18,17 @@ const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 describe('typescript-css-modules', () => {
   beforeAll(async () => {
     await runSkuScriptInDir('configure', appDir);
+  });
+
+  describe('configure', () => {
+    it('should generate a custom ESLint config', async () => {
+      const eslintRc = await readFile(path.join(appDir, '.eslintrc'), 'utf-8');
+      const eslintConfig = jsonc.parse(eslintRc);
+      expect(eslintConfig.extends).toEqual(
+        require.resolve('eslint-config-seek')
+      );
+      expect(eslintConfig.rules['no-console']).toEqual(0);
+    });
   });
 
   describe('build', () => {

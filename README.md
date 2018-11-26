@@ -367,6 +367,30 @@ module.exports = {
 
 Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
 
+### Building a Library
+
+If you need to build a UMD library instead of a web site, you can provide a `library` entry and `libraryName` option instead:
+
+```js
+modules.exports = {
+  entry: {
+    library: 'src/library.js',
+    render: 'src/render.js'
+  },
+  libraryName: 'MyAwesomeLibrary'
+};
+```
+
+Your `library` entry must export its public API via a default export:
+
+```js
+export default () => {
+  console.log('Hello from my library!');
+};
+```
+
+Note that, in this scenario, the `render` entry is only used to provide a development environment. No HTML will be generated when running `sku build`.
+
 ### Locales
 
 Often we render multiple versions of our application for different locations, eg. Australia & New Zealand. To render an HTML file for each location you can use the locales option in `sku.config.js`. Locales are preferable to [monorepos](#monorepo-support) when you need to render multiple versions of your HTML file but only need one version of each of the assets (JS, CSS, images, etc). Note: You can use `locales` inside a monorepo project.

@@ -81,9 +81,9 @@ Object {
         </head>
         <body>
           <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-          <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\"></script>
+          <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\" defer=\\"\\"></script>
         
       
     </body></html>",
@@ -99,9 +99,9 @@ Object {
         </head>
         <body>
           <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-          <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\"></script>
+          <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-f31154b442e59ba52e55.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4003/skuDefaultClientEntry-3e8de5a9b0f57b968818.js\\" defer></script>
         </body>
       </html>
     ",

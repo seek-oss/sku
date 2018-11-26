@@ -10,9 +10,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-7433479861943aaac3dc.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-b0ae8ed890757176c909.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-7433479861943aaac3dc.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-b0ae8ed890757176c909.js\\" defer=\\"\\"></script>
     
   
 </body></html>",
@@ -28,9 +28,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-7433479861943aaac3dc.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-b0ae8ed890757176c909.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-014340d9b9907db3205b.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~skuDefaultClientEntry-7433479861943aaac3dc.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/skuDefaultClientEntry-b0ae8ed890757176c909.js\\" defer></script>
     </body>
   </html>
 ",
@@ -48,9 +48,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:8100/skuDefaultClientEntry.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~skuDefaultClientEntry.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/skuDefaultClientEntry.js\\" defer=\\"\\"></script>
     
   
 </body></html>",
@@ -66,9 +66,9 @@ Object {
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:8100/skuDefaultClientEntry.js\\"></script>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~skuDefaultClientEntry.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/skuDefaultClientEntry.js\\" defer></script>
     </body>
   </html>
 ",

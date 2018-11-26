@@ -12,7 +12,8 @@ const styles = makeArray(assets[Object.keys(assets)[0]].css);
 
 const bodyTags = scripts
   .map(
-    chunkFile => `<script type="text/javascript" src="${chunkFile}"></script>`
+    chunkFile =>
+      `<script type="text/javascript" src="${chunkFile}" defer></script>`
   )
   .join('\n');
 const headTags = styles

@@ -143,7 +143,7 @@ const skuRender: Render<RenderContext> = {
 export default skuRender;
 ```
 
-### React helmet
+### React Helmet
 
 React Helmet requires extra work after React is finished rendering to extract static meta information. This is also a common pattern used by some other libraries (e.g. [react-loadable](https://github.com/jamiebuilds/react-loadable), [emotion](https://emotion.sh/docs/ssr)).
 

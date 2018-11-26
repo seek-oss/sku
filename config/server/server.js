@@ -3,6 +3,8 @@ const express = require('express');
 const serverExports = require('__sku_alias__serverEntry').default; // eslint-disable-line import/no-unresolved
 const assets = require('__sku_alias__assets'); // eslint-disable-line import/no-unresolved
 
+const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
+
 const makeArray = a => (Array.isArray(a) ? a : [a]);
 
 const scripts = makeArray(assets[Object.keys(assets)[0]].js);
@@ -19,7 +21,7 @@ const headTags = styles
   )
   .join('\n');
 
-const serverOptions = serverExports({ headTags, bodyTags });
+const serverOptions = serverExports({ publicPath, headTags, bodyTags });
 
 const { renderCallback, middleware } = serverOptions;
 

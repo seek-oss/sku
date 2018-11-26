@@ -260,24 +260,6 @@ module.exports = {
 };
 ```
 
-In development, the public path will be `/`, since assets are served locally.
-
-In your application's `render` function, you have access to the public path so that you can render the correct asset URLs.
-
-For example:
-
-```js
-export default ({ publicPath }) => `
-  <!doctype html>
-  <html>
-    ...
-    <link rel="stylesheet" type="text/css" href="${publicPath}style.css" />
-    ...
-    <script src="${publicPath}main.js"></script>
-  </html>
-`;
-```
-
 ### Environment Variables
 
 By default, `process.env.NODE_ENV` is handled correctly for you and provided globally, even to your client code. This is based on the sku script that's currently being executed, so `NODE_ENV` is `'development'` when running `sku start`, but `'production'` when running `sku build`.
@@ -391,34 +373,6 @@ export default () => {
 
 Note that, in this scenario, the `render` entry is only used to provide a development environment. No HTML will be generated when running `sku build`.
 
-### Locales
-
-Often we render multiple versions of our application for different locations, eg. Australia & New Zealand. To render an HTML file for each location you can use the locales option in `sku.config.js`. Locales are preferable to [monorepos](#monorepo-support) when you need to render multiple versions of your HTML file but only need one version of each of the assets (JS, CSS, images, etc). Note: You can use `locales` inside a monorepo project.
-
-The `locales` option accepts an array of strings representing each locale you want to render HTML files for.
-
-```js
-module.exports = {
-  locales: ['AU', 'NZ']
-};
-```
-
-For each locale, sku will call your `render.js` function and pass it the locale as a parameter.
-
-```js
-const render = ({ locale }) => `<div>Rendered for ${locale}</div>`;
-```
-
-The name of the HTML file that is generated will be suffixed by `-{locale}`.
-
-eg.
-
-```js
-module.exports = {
-  locales: ['AU', 'NZ']
-};
-```
-
 will create `index-AU.html` & `index-NZ.html`.
 
 Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
@@ -439,47 +393,6 @@ module.exports = {
 ```
 
 Note: The app will always run on localhost. The `hosts` option is only for apps that resolve custom hosts to localhost.
-
-### Monorepo Support
-
-If you need to build multiple projects in the same repo, you can provide an array of config objects.
-
-Note that you can only run a development server for a single project at a time, so each configuration must be given a unique name:
-
-```js
-module.exports = [
-  {
-    name: 'hello',
-    entry: {
-      client: 'src/pages/hello/client.js',
-      render: 'src/pages/hello/render.js'
-    },
-    public: 'src/pages/hello/public',
-    target: 'dist/hello'
-  },
-  {
-    name: 'world',
-    entry: {
-      client: 'src/pages/world/client.js',
-      render: 'src/pages/world/render.js'
-    },
-    public: 'src/pages/world/public',
-    target: 'dist/world'
-  }
-];
-```
-
-You will then be prompted to select the project you'd like to work on when starting your development server:
-
-```bash
-$ npm start
-```
-
-Alternatively, you can start the relevant project directly:
-
-```bash
-$ npm start hello
-```
 
 ### Server-Side Rendering Support
 
@@ -509,26 +422,12 @@ Then, you need to create your `server` entry. Sku will automatically provide an 
 import render from './render.js';
 import middleware from './middleware';
 
-export default {
+export default ({ publicPath, headTags, bodyTags }) => {
   renderCallback: (req, res) => {
-    res.send(render());
+    res.send(render(publicPath, headTags, bodyTags));
   },
   middleware: middleware
 };
-```
-
-If you require to consume the webpack public path, this can done as follows:
-
-```js
-import render from './render.js';
-import middleware from './middleware';
-
-export default ({ publicPath }) => ({
-  renderCallback: (req, res) => {
-    res.send(render());
-  },
-  middleware: middleware
-});
 ```
 
 Last but not least, please note that commands for SSR are different to the ones used normally:

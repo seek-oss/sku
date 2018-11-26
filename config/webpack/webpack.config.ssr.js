@@ -87,7 +87,7 @@ const serverEntry = isStartScript
 
 const publicPath = isStartScript ? clientServer : paths.publicPath;
 
-const assetsFile = 'assets.json';
+const assetsFileName = 'assets.json';
 
 // The file mask is set to just name in start/dev mode as contenthash
 // is not supported for hot reloading. It can also cause non
@@ -189,7 +189,7 @@ const buildWebpackConfigs = [
       new webpack.DefinePlugin(envVars),
       new AssetsPlugin({
         entrypoints: true,
-        filename: path.join(path.basename(paths.target), assetsFile)
+        filename: path.join(paths.relativeTarget, assetsFileName)
       }),
       new MiniCssExtractPlugin({
         filename: `${fileMask}.css`,
@@ -230,7 +230,7 @@ const buildWebpackConfigs = [
     resolve: {
       alias: {
         __sku_alias__serverEntry: paths.serverEntry,
-        __sku_alias__assets: path.join(paths.target, assetsFile)
+        __sku_alias__assets: path.join(paths.target, assetsFileName)
       },
       extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
     },
@@ -290,7 +290,12 @@ const buildWebpackConfigs = [
         }
       ]
     },
-    plugins: [new webpack.DefinePlugin(envVars)].concat(
+    plugins: [
+      new webpack.DefinePlugin(envVars),
+      new webpack.DefinePlugin({
+        __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
+      })
+    ].concat(
       isStartScript
         ? [
             new StartServerPlugin({

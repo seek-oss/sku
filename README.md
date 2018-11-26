@@ -126,38 +126,11 @@ Running `sku format` will format all JavaScript and TypeScript files in your pro
 
 Files can be excluded from formatting by adding paths into the `.prettierignore` file.
 
-### Static Pre-rendering (via [static-site-generator-webpack-plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin))
+### Static Pre-rendering (via [html-render-webpack-plugin](https://github.com/jahredhope/html-render-webpack-plugin))
 
 Generate static HTML files via a webpack-compiled render function that has access to your application code. For example, when building a React application, you can pre-render to static HTML with React's [renderToString](https://facebook.github.io/react/docs/react-dom-server.html#rendertostring) function.
 
-By default, sku is set up to render a single `index.html` page.
-
-If you need to statically pre-render multiple files, you can return an object whose keys are the path names, and values are the rendered mark up.
-
-In your `src/render.js`
-
-```js
-export default ({ publicPath }) => {
-  return {
-    '/foo': '<html>...</html>',
-    '/bar': '<html>...</html>',
-    '/baz/qux': '<html>...</html>'
-  };
-};
-```
-
-Will result in your `/dist` folder having an output like this:
-
-```
-dist/
-├── foo/
-│   └── index.html
-├── bar/
-│   └── index.html
-└── baz/
-    └── qux/
-        └── index.html
-```
+See the [static-rendering](./docs/static-rendering) docs for more detail.
 
 ### Component Explorer via [Storybook](https://storybook.js.org/)
 

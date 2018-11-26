@@ -16,9 +16,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_3lc311G _2dPpu8E _30kRq5M _3k5ze2u _2oY7eBs\\"><span class=\\"_3lc311G _1mZMC-p mT50rPc _2tWVdVE _26ZvMQL _28lA_OY\\">Hello World</span></div></div>
-    <script type=\\"text/javascript\\" src=\\"somecdn.com/runtime-af53715a9314ffe691db.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"somecdn.com/vendors~skuDefaultClientEntry-8aafadee53c15f8aa38c.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"somecdn.com/skuDefaultClientEntry-fe1c1efb1aa5aec2b72a.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"somecdn.com/runtime-af53715a9314ffe691db.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"somecdn.com/vendors~skuDefaultClientEntry-8aafadee53c15f8aa38c.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"somecdn.com/skuDefaultClientEntry-fe1c1efb1aa5aec2b72a.js\\" defer></script>
   </body>
 </html>",
   "runtime-af53715a9314ffe691db.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

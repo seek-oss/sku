@@ -10,9 +10,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -26,9 +26,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -47,9 +47,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-b6805b89996844acbb76.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~skuDefaultClientEntry-c6807d2c4e89eaba157e.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/skuDefaultClientEntry-5ebd99e0a35e3f78c71d.js\\" defer></script>
   </body>
 </html>",
   "runtime-b6805b89996844acbb76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -68,9 +68,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -84,9 +84,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],

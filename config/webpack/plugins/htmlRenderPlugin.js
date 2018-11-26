@@ -37,7 +37,7 @@ const mapStatsToParams = ({ webpackStats, routeName }) => {
         `<script type="text/javascript" src="${createPublicUrl(
           paths.publicPath,
           chunkFile
-        )}"></script>`
+        )}" defer></script>`
     )
     .join('\n');
   const headTags = styles
@@ -52,7 +52,8 @@ const mapStatsToParams = ({ webpackStats, routeName }) => {
 
   return {
     headTags,
-    bodyTags
+    bodyTags,
+    webpackStats
   };
 };
 

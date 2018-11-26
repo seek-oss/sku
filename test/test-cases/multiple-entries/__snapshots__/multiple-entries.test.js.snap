@@ -13,9 +13,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -32,9 +32,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -63,9 +63,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\" defer></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -81,9 +81,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" defer></script>
   </body>
 </html>",
   "production/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -99,9 +99,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\" defer></script>
   </body>
 </html>",
   "production/nz/index.html": "<!DOCTYPE html>
@@ -117,9 +117,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->nz</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-401aa21f1fa0a3f1a06a.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" defer></script>
   </body>
 </html>",
   "runtime-401aa21f1fa0a3f1a06a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -140,9 +140,9 @@ Object {
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->ID: 123<span>Some special async content</span></h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -159,9 +159,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -181,9 +181,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -200,9 +200,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],

@@ -13,8 +13,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-dd9f3671ce9f3a689039.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-df98e7bcae522bbcf688.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-dd9f3671ce9f3a689039.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-df98e7bcae522bbcf688.js\\" defer></script>
   </body>
 </html>",
   "runtime-dd9f3671ce9f3a689039.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -32,9 +32,9 @@ Object {
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -48,9 +48,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],

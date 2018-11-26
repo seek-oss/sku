@@ -12,9 +12,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-529c598e44284de60c82.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-13848ce239fe40766fec.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry-1d95f7f495034eec0220.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-529c598e44284de60c82.js\\" defer></script>
   </body>
 </html>",
   "runtime-13848ce239fe40766fec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

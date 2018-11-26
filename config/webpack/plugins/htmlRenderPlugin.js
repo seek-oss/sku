@@ -19,8 +19,10 @@ const createPublicUrl = (publicPath, asset) => {
   return `${host}${asset}`;
 };
 
-const mapStatsToParams = ({ clientStats, routeName }) => {
-  const { entrypoints } = clientStats;
+const mapStatsToParams = ({ webpackStats, routeName }) => {
+  const { entrypoints } = webpackStats
+    .toJson()
+    .children.find(({ name }) => name === 'client');
   const assets = entrypoints[routeName]
     ? entrypoints[routeName].assets
     : entrypoints[defaultClientEntry].assets;

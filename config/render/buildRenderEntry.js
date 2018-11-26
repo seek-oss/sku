@@ -1,4 +1,8 @@
-import render from '__sku_alias__renderEntry'; // eslint-disable-line import/no-unresolved
+/* eslint-disable import/no-unresolved */
+
+// __sku_alias__renderEntry is a webpack alias
+// pointing to the consuming apps render entry
+import render from '__sku_alias__renderEntry';
 
 export default async ({ headTags, bodyTags, ...renderParams }) => {
   const app = await render.renderApp(renderParams);

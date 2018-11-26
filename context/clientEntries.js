@@ -5,6 +5,8 @@ const { getPathFromCwd } = require('../lib/cwd');
 
 const defaultClientEntry = 'skuDefaultClientEntry';
 
+// Create a webpack entry object for each route specific entry
+// and the default client entry (if it exists)
 const getClientEntries = config => {
   const entries = config.routes
     .filter(({ entry }) => Boolean(entry))

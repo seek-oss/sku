@@ -285,9 +285,7 @@ const buildWebpackConfigs = [
       })
     ]
   }
-]
-  .filter(Boolean)
-  .map(webpackDecorator);
+].map(webpackDecorator);
 
 debug(JSON.stringify(buildWebpackConfigs));
 

@@ -1,9 +1,12 @@
-import { configure, addParameters } from '@storybook/react';
+import React from 'react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import 'storybook-chromatic';
 
 addParameters({
   chromatic: { viewports: [320, 1200] }
 });
+
+addDecorator(story => React.createElement('div', null, story()));
 
 const reqs = [
   // These values are defined in `webpack.config.js` in this

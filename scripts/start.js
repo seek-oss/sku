@@ -4,14 +4,10 @@ const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 
 const dynamicRouteMiddlware = require('../lib/dynamicRouteMiddleware');
-const {
-  hosts,
-  port,
-  initialPath,
-  paths,
-  dynamicRoutes
-} = require('../context');
+const { hosts, port, initialPath, paths, routes } = require('../context');
 const webpackCompiler = require('../config/webpack/webpack.compiler');
+
+const routeList = routes.map(({ route }) => route);
 
 const devServer = new WebpackDevServer(webpackCompiler, {
   contentBase: paths.public,
@@ -22,7 +18,7 @@ const devServer = new WebpackDevServer(webpackCompiler, {
     app.get(
       '*',
       dynamicRouteMiddlware({
-        dynamicRoutes,
+        dynamicRoutes: routeList,
         fs: server.middleware.fileSystem,
         rootDirectory: paths.target
       })

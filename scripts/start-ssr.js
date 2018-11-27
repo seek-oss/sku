@@ -45,7 +45,7 @@ const startServerWatch = once(async () => {
 
 // Make sure the client webpack config is complete before
 // starting the server build. The server relies on the client assets.
-clientCompiler.hooks.afterEmit.tap('sku start-ssr', async () => {
+clientCompiler.hooks.afterEmit.tap('sku start-ssr', () => {
   startServerWatch();
 });
 

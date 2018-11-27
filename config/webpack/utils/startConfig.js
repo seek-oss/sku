@@ -6,10 +6,14 @@ const startConfigPath = path.join(__dirname, '../../render/startConfig.json');
 const writeStartConfig = (environment, site) => {
   fs.writeFileSync(
     startConfigPath,
-    JSON.stringify({
-      environment,
-      site
-    })
+    JSON.stringify(
+      {
+        environment,
+        site
+      },
+      null,
+      2
+    )
   );
 };
 

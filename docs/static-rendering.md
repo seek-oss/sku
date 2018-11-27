@@ -21,7 +21,7 @@ module.exports = {
     }
   ],
   environments: ['development', 'production'],
-  sites: ['au', 'jobstreet'],
+  sites: ['australia', 'asia'],
   target: 'dist' // Optional, this is the default value
 };
 ```
@@ -30,20 +30,20 @@ Running `sku build` with the above config will create the following output in yo
 
 ```
 ├── development
-│   ├── au
+│   ├── australia
 │   │   ├── index.html
 │   │   ├── details
 │   │   |   ├── index.html
-│   ├── jobstreet
+│   ├── asia
 │   │   ├── index.html
 │   │   ├── details
 │   │   |   ├── index.html
 ├── production
-│   ├── au
+│   ├── australia
 │   │   ├── index.html
 │   │   ├── details
 │   │   |   ├── index.html
-│   ├── jobstreet
+│   ├── asia
 │   │   ├── index.html
 │   │   ├── details
 │   │   |   ├── index.html

@@ -110,6 +110,24 @@ Example running tests in watch mode:
 $ sku test --watch
 ```
 
+If you need to set up your test framework, you can provide a `setupTests` script in your config:
+
+```js
+module.exports = {
+  setupTests: 'src/setupTests.js'
+};
+```
+
+For example, if you're using [Enzyme](https://airbnb.io/enzyme/), your `setupTests` script would look like this:
+
+```js
+import 'jest-enzyme';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+```
+
 ### Linting and Formatting (via [ESLint](http://eslint.org/), [TSLint](https://palantir.github.io/tslint/) and [Prettier](https://github.com/prettier/prettier))
 
 Running `sku lint` will execute the ESLint/TSLint rules over the code in your `src` directory, depending on the type of file. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek). Similarly you can see the TSLint rules defined in [tslint-config-seek](https://github.com/seek-oss/tslint-config-seek).

@@ -21,6 +21,7 @@ module.exports = {
   port: 8080,
   serverPort: 8181,
   target: 'dist',
+  setupTests: null,
   storybookPort: 8081,
   initialPath: '/',
   public: 'public',

@@ -44,7 +44,8 @@ const paths = {
   public: getPathFromCwd(skuConfig.public),
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
-  publicPath: isStartScript ? '/' : skuConfig.publicPath
+  publicPath: isStartScript ? '/' : skuConfig.publicPath,
+  setupTests: skuConfig.setupTests ? getPathFromCwd(skuConfig.setupTests) : null
 };
 
 module.exports = {

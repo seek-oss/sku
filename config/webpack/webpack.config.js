@@ -200,10 +200,6 @@ const buildWebpackConfigs = [
   },
   {
     name: 'render',
-    // dependencies is required for html-render-webpack-plugin.
-    // It directs the plugin to wait for the 'client' build to finish
-    // before starting the render phase.
-    dependencies: ['client'],
     mode: 'development',
     entry: {
       render: isStartScript ? startRenderEntry : buildRenderEntry

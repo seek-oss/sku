@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const { run } = require('../lib/runWebpack');
 const {
   copyPublicFiles,
-  cleanTargetFolder,
+  cleanTargetDirectory,
   ensureTargetDirectory
 } = require('../lib/buildFileUtils');
 const [
@@ -17,7 +17,7 @@ const [
 (async () => {
   try {
     await ensureTargetDirectory();
-    await cleanTargetFolder();
+    await cleanTargetDirectory();
     await run(webpack(clientConfig));
     await run(webpack(serverConfig));
     await copyPublicFiles();

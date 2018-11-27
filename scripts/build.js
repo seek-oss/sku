@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'production';
 
 const {
   copyPublicFiles,
-  cleanTargetFolder,
+  cleanTargetDirectory,
   ensureTargetDirectory,
   cleanRenderJs
 } = require('../lib/buildFileUtils');
@@ -14,7 +14,7 @@ const webpackCompiler = require('../config/webpack/webpack.compiler');
 (async () => {
   try {
     await ensureTargetDirectory();
-    await cleanTargetFolder();
+    await cleanTargetDirectory();
     await run(webpackCompiler);
     await cleanRenderJs();
     await copyPublicFiles();

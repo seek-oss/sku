@@ -13,12 +13,12 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-dd9f3671ce9f3a689039.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry-df98e7bcae522bbcf688.js\\" defer></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-f2546d261e10324b4552.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/main-2d0ef90d595da2b109cf.js\\" defer></script>
   </body>
 </html>",
-  "runtime-dd9f3671ce9f3a689039.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "skuDefaultClientEntry-df98e7bcae522bbcf688.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2d0ef90d595da2b109cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-f2546d261e10324b4552.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -33,8 +33,8 @@ Object {
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
     <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer=\\"\\"></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -49,8 +49,8 @@ Object {
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
     <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~skuDefaultClientEntry.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/skuDefaultClientEntry.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" defer></script>
   </body>
 </html>",
   "warnings": Array [],

@@ -1,10 +1,10 @@
 const fs = require('fs');
 const { merge } = require('lodash');
-const chalk = require('chalk');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const { getClientEntries, defaultClientEntry } = require('./clientEntries');
+const validateConfig = require('./validateConfig');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
@@ -13,15 +13,7 @@ const appSkuConfig = fs.existsSync(appSkuConfigPath)
   : {};
 const skuConfig = merge(defaultSkuConfig, appSkuConfig);
 
-// Validate config
-if (skuConfig.entry.library && !skuConfig.libraryName) {
-  console.log(
-    chalk.red(
-      "Error: In your sku config, you've provided 'entry.library' without a corresponding 'libraryName' option. More details: https://github.com/seek-oss/sku#building-a-library"
-    )
-  );
-  process.exit(1);
-}
+validateConfig(skuConfig);
 
 const env = {
   ...skuConfig.env,

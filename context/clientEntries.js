@@ -3,7 +3,7 @@ const { fromPairs } = require('lodash');
 
 const { getPathFromCwd } = require('../lib/cwd');
 
-const defaultClientEntry = 'skuDefaultClientEntry';
+const defaultClientEntry = 'main';
 
 // Create a webpack entry object for each route specific entry
 // and the default client entry (if it exists)

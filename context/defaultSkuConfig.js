@@ -8,7 +8,7 @@ module.exports = {
     render: 'src/render.js',
     server: 'src/server.js'
   },
-  routes: [{ name: 'main', route: '/' }],
+  routes: [{ name: 'default', route: '/' }],
   sites: [],
   environments: [],
   transformOutputPath: ({ environment = '', site = '', route = '' }) =>

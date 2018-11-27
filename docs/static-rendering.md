@@ -145,7 +145,7 @@ export default skuRender;
 
 ### React Helmet
 
-React Helmet requires extra work after React is finished rendering to extract static meta information. This is also a common pattern used by some other libraries (e.g. [react-loadable](https://github.com/jamiebuilds/react-loadable), [emotion](https://emotion.sh/docs/ssr)).
+[React Helmet](https://github.com/nfl/react-helmet) requires extra work after React is finished rendering to extract static meta information. This is also a common pattern used by some other libraries (e.g. [react-loadable](https://github.com/jamiebuilds/react-loadable), [emotion](https://emotion.sh/docs/ssr)).
 
 ```js
 import React from 'react';

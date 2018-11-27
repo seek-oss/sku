@@ -3,7 +3,6 @@ node_modules/
 package-lock.json
 .idea
 config/render/startConfig.json
-client-stats.json
 dist-start/
 dist-build/
 

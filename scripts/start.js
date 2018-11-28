@@ -2,18 +2,30 @@ process.env.NODE_ENV = 'development';
 
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
 
-const { hosts, port, initialPath, paths } = require('../context');
-const webpackConfig = require('../config/webpack/webpack.config');
+const dynamicRouteMiddlware = require('../lib/dynamicRouteMiddleware');
+const { hosts, port, initialPath, paths, routes } = require('../context');
+const webpackCompiler = require('../config/webpack/webpack.compiler');
 
-const compiler = webpack(webpackConfig);
-const devServer = new WebpackDevServer(compiler, {
+const dynamicRoutes = routes
+  .filter(({ route }) => /\:/.test(route))
+  .map(({ route }) => route);
+
+const devServer = new WebpackDevServer(webpackCompiler, {
   contentBase: paths.public,
-  historyApiFallback: true,
   overlay: true,
   stats: 'errors-only',
-  allowedHosts: hosts
+  allowedHosts: hosts,
+  after: (app, server) => {
+    app.get(
+      '*',
+      dynamicRouteMiddlware({
+        dynamicRoutes,
+        fs: server.middleware.fileSystem,
+        rootDirectory: paths.target
+      })
+    );
+  }
 });
 
 devServer.listen(port.client, '0.0.0.0', err => {

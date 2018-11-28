@@ -3,15 +3,15 @@ const { exec } = require('child-process-promise');
 
 const skuBin = `${__dirname}/../../bin/sku.js`;
 
-module.exports = async (script, cwd) => {
+module.exports = async (script, cwd, args = []) => {
   // When starting a dev server, return a hook to the running process
   if (/^start/.test(script)) {
-    return gracefulSpawn(skuBin, [script], { stdio: 'inherit', cwd });
+    return gracefulSpawn(skuBin, [script, ...args], { stdio: 'inherit', cwd });
   }
 
   // Otherwise, resolve the promise when the script finishes
   try {
-    return await exec(`${skuBin} ${script}`, {
+    return await exec(`${skuBin} ${script} ${args.join(' ')}`, {
       stdio: 'inherit',
       cwd,
       env: process.env

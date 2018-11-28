@@ -7,5 +7,6 @@ module.exports = {
   ),
   testURL: 'http://localhost',
   testMatch: ['**/*.test.js'],
-  testPathIgnorePatterns: ['test/.*/src']
+  testPathIgnorePatterns: ['test/.*/src'],
+  preset: 'jest-puppeteer'
 };

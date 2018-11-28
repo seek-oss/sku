@@ -19,7 +19,7 @@ describe('library-build', () => {
   });
 
   describe('start', () => {
-    const devServerUrl = `http://localhost:8080`;
+    const devServerUrl = `http://localhost:8082`;
     let server;
 
     beforeAll(async () => {

@@ -2,7 +2,10 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
+const startAssetServer = require('../../utils/assetServer');
 const skuConfig = require('./sku.config');
+
+const targetDirectory = `${__dirname}/dist`;
 
 describe('custom-src-paths', () => {
   beforeAll(async () => {
@@ -29,13 +32,26 @@ describe('custom-src-paths', () => {
   });
 
   describe('build', () => {
+    let closeAssetServer;
+
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
+      closeAssetServer = startAssetServer(4002, targetDirectory);
+      await waitForUrls('http://localhost:4002');
+    });
+
+    afterAll(() => {
+      closeAssetServer();
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(`${__dirname}/dist`);
+      const files = await dirContentsToObject(targetDirectory);
       expect(files).toMatchSnapshot();
+    });
+
+    it('should create valid app', async () => {
+      const app = await getAppSnapshot('http://localhost:4002');
+      expect(app).toMatchSnapshot();
     });
   });
 

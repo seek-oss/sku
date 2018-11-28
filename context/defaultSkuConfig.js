@@ -23,7 +23,7 @@ module.exports = {
   target: 'dist',
   setupTests: null,
   storybookPort: 8081,
-  initialPath: '/',
+  initialPath: null,
   public: 'public',
   publicPath: '/',
   polyfills: [],

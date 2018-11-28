@@ -26,6 +26,8 @@ module.exports = {
 };
 ```
 
+> The fi
+
 Running `sku build` with the above config will create the following output in your target directory.
 
 ```

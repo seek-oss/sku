@@ -26,7 +26,7 @@ module.exports = {
 };
 ```
 
-> The fi
+> The first listed route will be default route opened by `sku start`. If you want to change this set the `intialPath` option.
 
 Running `sku build` with the above config will create the following output in your target directory.
 

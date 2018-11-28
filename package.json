@@ -154,6 +154,7 @@
     "jest-puppeteer": "^3.5.1",
     "jsonc-parser": "^2.0.2",
     "lint-staged": "^8.0.4",
+    "memfs": "^2.14.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.1.1",
     "puppeteer": "^1.10.0",

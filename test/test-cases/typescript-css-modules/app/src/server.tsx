@@ -3,7 +3,11 @@ import { renderToString } from 'react-dom/server';
 
 import App from './App';
 
-export default () => ({
+interface SkuProps {
+  headTags: string;
+  bodyTags: string;
+}
+export default ({ headTags, bodyTags }: SkuProps) => ({
   renderCallback: (_: any, res: any): void => {
     res.send(`
       <!DOCTYPE html>
@@ -12,11 +16,11 @@ export default () => ({
           <meta charset="UTF-8">
           <title>My Awesome Project</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link rel="stylesheet" type="text/css" href="/style.css" />
+          ${headTags}
         </head>
         <body>
           <div id="app">${renderToString(<App />)}</div>
-          <script type="text/javascript" src="/main.js"></script>
+          ${bodyTags}
         </body>
       </html>
     `);

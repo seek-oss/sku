@@ -1,3 +1,5 @@
+const path = require('path');
+
 const defaultDecorator = a => a;
 
 module.exports = {
@@ -6,6 +8,12 @@ module.exports = {
     render: 'src/render.js',
     server: 'src/server.js'
   },
+  routes: [{ name: 'default', route: '/' }],
+  sites: [],
+  environments: [],
+  transformOutputPath: ({ environment = '', site = '', route = '' }) =>
+    path.join(environment, site, route),
+  devTransformOutputPath: ({ route }) => route,
   srcPaths: ['./src'],
   env: {},
   compilePackages: [],
@@ -13,6 +21,7 @@ module.exports = {
   port: 8080,
   serverPort: 8181,
   target: 'dist',
+  setupTests: null,
   storybookPort: 8081,
   initialPath: '/',
   public: 'public',
@@ -21,6 +30,5 @@ module.exports = {
   libraryName: null,
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
-  dangerouslySetESLintConfig: defaultDecorator,
-  locales: ['']
+  dangerouslySetESLintConfig: defaultDecorator
 };

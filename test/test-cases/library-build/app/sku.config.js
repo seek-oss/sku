@@ -3,5 +3,6 @@ module.exports = {
     library: 'src/library.js',
     render: 'src/render.js'
   },
-  libraryName: 'MyLibrary'
+  libraryName: 'MyLibrary',
+  port: 8082
 };

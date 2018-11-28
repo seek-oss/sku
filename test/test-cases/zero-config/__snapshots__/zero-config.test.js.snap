@@ -2,53 +2,57 @@
 
 exports[`zero-config build should generate the expected files 1`] = `
 Object {
-  "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "0-2d4c17dcf56e1762b025.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime-f2546d261e10324b4552.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/main-2d0ef90d595da2b109cf.js\\" defer></script>
+  </body>
+</html>",
+  "main-2d0ef90d595da2b109cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-f2546d261e10324b4552.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`zero-config start should start a development server 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     
+  <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" defer=\\"\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" defer=\\"\\"></script>
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-",
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" defer></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" defer></script>
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;

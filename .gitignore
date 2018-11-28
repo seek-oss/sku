@@ -1,8 +1,10 @@
 node_modules/
 *.log
-yarn.lock
 package-lock.json
 .idea
+config/render/startConfig.json
+dist-start/
+dist-build/
 
 # managed by sku
 .prettierrc

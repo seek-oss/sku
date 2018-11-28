@@ -6454,10 +6454,10 @@ html-minifier@^3.5.20:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-html-render-webpack-plugin@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-1.0.1.tgz#99a9a425402392c5e5dc1445609a275706f89159"
-  integrity sha512-/UPKCPjX9CSmmSMi3tnmk072QNXVvlOkfD44ocQLMsebczjvVBoJ0adTjwexiUlRfdyEgOLRKD1J7UBQOORJsg==
+html-render-webpack-plugin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-1.0.3.tgz#8c897033ca1b33b05740fcbb2bcdf79ac00e365f"
+  integrity sha512-L96ICY+C0oe5JY/hoycujWMPeYccGngWeV79jGwDJNPxOT+TDeKcNDLM4+DFVvaMsDkPSIm659A0jFhXKaL8gQ==
   dependencies:
     chalk "^2.4.1"
     eval "^0.1.2"

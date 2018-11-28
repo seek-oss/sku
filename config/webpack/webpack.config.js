@@ -202,7 +202,7 @@ const buildWebpackConfigs = [
     name: 'render',
     mode: 'development',
     entry: {
-      render: isStartScript ? startRenderEntry : buildRenderEntry
+      main: isStartScript ? startRenderEntry : buildRenderEntry
     },
     target: 'node',
     externals: [

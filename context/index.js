@@ -27,6 +27,9 @@ const transformOutputPath = isStartScript
   ? skuConfig.devTransformOutputPath
   : skuConfig.transformOutputPath;
 
+// Default initialPath to the first route
+const initialPath = skuConfig.initialPath || skuConfig.routes[0].route;
+
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
@@ -61,7 +64,7 @@ module.exports = {
   isLibrary: Boolean(skuConfig.entry.library),
   storybookPort: skuConfig.storybookPort,
   polyfills: skuConfig.polyfills,
-  initialPath: skuConfig.initialPath,
+  initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,

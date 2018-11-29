@@ -18,7 +18,8 @@ const {
   webpackDecorator,
   port,
   polyfills,
-  isStartScript
+  isStartScript,
+  supportedBrowsers
 } = require('../../context');
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
@@ -140,7 +141,15 @@ const buildWebpackConfigs = [
               loader: require.resolve('babel-loader'),
               options: {
                 babelrc: false,
-                presets: [require.resolve('@babel/preset-env')]
+                presets: [
+                  [
+                    require.resolve('@babel/preset-env'),
+                    {
+                      modules: false,
+                      targets: supportedBrowsers
+                    }
+                  ]
+                ]
               }
             }
           ]

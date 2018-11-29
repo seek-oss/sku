@@ -1,3 +1,4 @@
+const supportedBrowsers = require('browserslist-config-seek');
 const path = require('path');
 
 const defaultDecorator = a => a;
@@ -28,5 +29,6 @@ module.exports = {
   libraryName: null,
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
-  dangerouslySetESLintConfig: defaultDecorator
+  dangerouslySetESLintConfig: defaultDecorator,
+  supportedBrowsers
 };

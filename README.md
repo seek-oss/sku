@@ -219,10 +219,8 @@ While sku has a zero configuration mode, the equivalent manual configuration wou
 
 ```js
 module.exports = {
-  entry: {
-    client: 'src/client.js',
-    render: 'src/render.js'
-  },
+  clientEntry: 'src/client.js',
+  renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
   target: 'dist'
@@ -355,10 +353,8 @@ If you need to build a UMD library instead of a web site, you can provide a `lib
 
 ```js
 modules.exports = {
-  entry: {
-    library: 'src/library.js',
-    render: 'src/render.js'
-  },
+  libraryEntry: 'src/library.js',
+  renderEntry: 'src/render.js',
   libraryName: 'MyAwesomeLibrary'
 };
 ```
@@ -402,10 +398,8 @@ First, you need to create a `sku.config.js` file, which will contain the followi
 
 ```js
 module.exports = {
-  entry: {
-    client: 'src/client.js',
-    server: 'src/server/server.js'
-  },
+  clientEntry: 'src/client.js',
+  serverEntry: 'src/server/server.js',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',

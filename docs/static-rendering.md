@@ -12,7 +12,7 @@ module.exports = {
     {
       route: '/',
       name: 'home',
-      entry: 'src/Home.js' // Optional: falls back to entry.client
+      entry: 'src/Home.js' // Optional: falls back to clientEntry
     },
     {
       route: '/details',
@@ -58,7 +58,7 @@ Note: `sku start` will default to the first `environment` and `site` in your con
 
 ## Render entry
 
-After configuring sku, the render entry needs to return the HTML required to create all the above files. The render entry is set via `entry.render` (default is `src/render.js`).
+After configuring sku, the render entry needs to return the HTML required to create all the above files. The render entry is set via `renderEntry` (default is `src/render.js`).
 
 **Example render entry**
 

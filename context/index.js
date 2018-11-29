@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { merge } = require('lodash');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
@@ -11,7 +10,11 @@ const appSkuConfigPath = getPathFromCwd(args.config);
 const appSkuConfig = fs.existsSync(appSkuConfigPath)
   ? require(appSkuConfigPath)
   : {};
-const skuConfig = merge(defaultSkuConfig, appSkuConfig);
+
+const skuConfig = {
+  ...defaultSkuConfig,
+  ...appSkuConfig
+};
 
 validateConfig(skuConfig);
 
@@ -39,11 +42,11 @@ const paths = {
     ...skuConfig.compilePackages
   ],
   clientEntries: getClientEntries(skuConfig),
-  renderEntry: getPathFromCwd(skuConfig.entry.render),
-  libraryEntry: skuConfig.entry.library
-    ? getPathFromCwd(skuConfig.entry.library)
+  renderEntry: getPathFromCwd(skuConfig.renderEntry),
+  libraryEntry: skuConfig.libraryEntry
+    ? getPathFromCwd(skuConfig.libraryEntry)
     : null,
-  serverEntry: getPathFromCwd(skuConfig.entry.server),
+  serverEntry: getPathFromCwd(skuConfig.serverEntry),
   public: getPathFromCwd(skuConfig.public),
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
@@ -61,7 +64,7 @@ module.exports = {
     server: skuConfig.serverPort
   },
   libraryName: skuConfig.libraryName,
-  isLibrary: Boolean(skuConfig.entry.library),
+  isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
   polyfills: skuConfig.polyfills,
   initialPath,

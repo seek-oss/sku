@@ -1,8 +1,6 @@
 module.exports = {
-  entry: {
-    library: 'src/library.js',
-    render: 'src/render.js'
-  },
+  libraryEntry: 'src/library.js',
+  renderEntry: 'src/render.js',
   libraryName: 'MyLibrary',
   port: 8082
 };

@@ -1,4 +1,4 @@
-const supportedBrowsers = require('../../browsers/supportedBrowsers');
+const { supportedBrowsers } = require('../../../context');
 const { isProductionBuild, isCI } = require('./env');
 const isTypeScript = require('../../../lib/isTypeScript');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');

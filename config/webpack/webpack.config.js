@@ -21,7 +21,8 @@ const {
   polyfills,
   isLibrary,
   libraryName,
-  isStartScript
+  isStartScript,
+  supportedBrowsers
 } = config;
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
@@ -150,7 +151,13 @@ const buildWebpackConfigs = [
               options: {
                 babelrc: false,
                 presets: [
-                  [require.resolve('@babel/preset-env'), { modules: false }]
+                  [
+                    require.resolve('@babel/preset-env'),
+                    {
+                      modules: false,
+                      targets: supportedBrowsers
+                    }
+                  ]
                 ]
               }
             }

@@ -1,3 +1,4 @@
+const browserslist = require('browserslist');
 const chalk = require('chalk');
 const { defaultClientEntry } = require('./clientEntries');
 
@@ -20,4 +21,14 @@ module.exports = skuConfig => {
       );
     }
   });
+
+  // Ensure supportedBrowsers is valid browserslist query
+  try {
+    browserslist(skuConfig.supportedBrowsers);
+  } catch (e) {
+    console.log(chalk.yellow(e.message));
+    exitWithError(
+      'Error: supportedBrowsers option is invalid, must be a valid browserslist query. More details: https://github.com/browserslist/browserslist'
+    );
+  }
 };

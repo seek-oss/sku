@@ -2902,6 +2902,11 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
+browserslist-config-seek@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/browserslist-config-seek/-/browserslist-config-seek-2.0.0.tgz#03628cc2469d85ee5b2bebf9009db43e06632a98"
+  integrity sha512-EEf8zWclO4cu3H50bWwo3SOG2KbyH+7NIgGpXvHGNbLWom7rqfFB3SspGj1nGYdLVxrdgKjnsdb5N/GMODFbaQ==
+
 browserslist@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.1.1.tgz#328eb4ff1215b12df6589e9ab82f8adaa4fc8cd6"
@@ -2927,7 +2932,7 @@ browserslist@^2.11.3:
     caniuse-lite "^1.0.30000792"
     electron-to-chromium "^1.3.30"
 
-browserslist@^4.1.0, browserslist@^4.3.3:
+browserslist@^4.1.0, browserslist@^4.3.3, browserslist@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.4.tgz#4477b737db6a1b07077275b24791e680d4300425"
   integrity sha512-u5iz+ijIMUlmV8blX82VGFrB9ecnUg5qEt55CMZ/YJEhha+d8qpBfOFuutJ6F/VKRXjZoD33b6uvarpPxcl3RA==

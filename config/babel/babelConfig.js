@@ -1,4 +1,4 @@
-const supportedBrowsers = require('../browsers/supportedBrowsers');
+const { supportedBrowsers } = require('../../context');
 const { cwd } = require('../../lib/cwd');
 
 const browserEnvOptions = {

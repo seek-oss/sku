@@ -77,5 +77,6 @@ module.exports = {
   transformOutputPath,
   defaultClientEntry,
   isStartScript,
-  isBuildScript
+  isBuildScript,
+  supportedBrowsers: skuConfig.supportedBrowsers
 };

@@ -12,8 +12,8 @@ const getClientEntries = config => {
     .filter(({ entry }) => Boolean(entry))
     .map(({ name, entry }) => [name, entry]);
 
-  if (fs.existsSync(getPathFromCwd(config.entry.client))) {
-    entries.push([defaultClientEntry, config.entry.client]);
+  if (fs.existsSync(getPathFromCwd(config.clientEntry))) {
+    entries.push([defaultClientEntry, config.clientEntry]);
   }
 
   return fromPairs(

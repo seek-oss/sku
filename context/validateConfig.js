@@ -7,9 +7,9 @@ const exitWithError = message => {
 };
 
 module.exports = skuConfig => {
-  if (skuConfig.entry.library && !skuConfig.libraryName) {
+  if (skuConfig.libraryEntry && !skuConfig.libraryName) {
     exitWithError(
-      "Error: In your sku config, you've provided 'entry.library' without a corresponding 'libraryName' option. More details: https://github.com/seek-oss/sku#building-a-library"
+      "Error: In your sku config, you've provided 'libraryEntry' without a corresponding 'libraryName' option. More details: https://github.com/seek-oss/sku#building-a-library"
     );
   }
 

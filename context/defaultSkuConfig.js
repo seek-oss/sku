@@ -3,11 +3,9 @@ const path = require('path');
 const defaultDecorator = a => a;
 
 module.exports = {
-  entry: {
-    client: 'src/client.js',
-    render: 'src/render.js',
-    server: 'src/server.js'
-  },
+  clientEntry: 'src/client.js',
+  renderEntry: 'src/render.js',
+  serverEntry: 'src/server.js',
   routes: [{ name: 'default', route: '/' }],
   sites: [],
   environments: [],

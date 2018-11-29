@@ -16,9 +16,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1k6xEmK\\" data-reactroot=\\"\\"><div class=\\"dgc-8Wj\\"><h1>SEEK Asia</h1></div><div class=\\"\\"><div class=\\"_12lF2dd\\"><div class=\\"_1I9KGZo\\"><span class=\\"T_bb8ZR _2l47xPH\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main-e604d4934bcccc12dc3d.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/main-b72c53fed08cdcc85c3e.js\\" defer></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main-e604d4934bcccc12dc3d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-b72c53fed08cdcc85c3e.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "main-b72c53fed08cdcc85c3e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

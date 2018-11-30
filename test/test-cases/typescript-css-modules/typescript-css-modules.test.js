@@ -1,4 +1,7 @@
+const { promisify } = require('util');
+const readFile = promisify(require('fs').readFile);
 const path = require('path');
+const jsonc = require('jsonc-parser');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');

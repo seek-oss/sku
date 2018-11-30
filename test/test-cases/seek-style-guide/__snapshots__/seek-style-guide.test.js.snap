@@ -16,9 +16,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_20YbULa\\" data-reactroot=\\"\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main-c591fca81d28a0299576.js\\" defer></script>
-<script type=\\"text/javascript\\" src=\\"/main-6883b2a6f3d7fd33b3a8.js\\" defer></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main-c591fca81d28a0299576.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-6883b2a6f3d7fd33b3a8.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "main-6883b2a6f3d7fd33b3a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

@@ -13,7 +13,7 @@ const styles = makeArray(assets[Object.keys(assets)[0]].css);
 const bodyTags = scripts
   .map(
     chunkFile =>
-      `<script type="text/javascript" src="${chunkFile}" defer></script>`
+      `<script type="text/javascript" src="${chunkFile}" crossorigin="anonymous"></script>`
   )
   .join('\n');
 const headTags = styles

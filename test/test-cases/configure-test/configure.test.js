@@ -43,6 +43,13 @@ describe('configure', () => {
       });
     });
 
+    describe('eslint', () => {
+      it('should generate a eslint config', async () => {
+        const eslintrc = await readJsonC(app1, '.eslintrc');
+        expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
+      });
+    });
+
     describe('typescript', () => {
       it('should not generate tsconfig config', async () => {
         expect(readJsonC(app1, 'tsconfig.json')).rejects.toThrowError(
@@ -60,13 +67,14 @@ describe('configure', () => {
     describe('ignore files', () => {
       it(`should generate \`.gitignore\``, async () => {
         const ignoreContents = await readIgnore(app1, '.gitignore');
-        expect(ignoreContents.length).toEqual(3);
+        expect(ignoreContents.length).toEqual(4);
+        expect(ignoreContents).toContain(`.eslintrc`);
         expect(ignoreContents).toContain(`.prettierrc`);
         expect(ignoreContents).toContain(`${defaultTargetDir}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
       });
 
-      ['.prettierignore'].forEach(ignore =>
+      ['.eslintignore', '.prettierignore'].forEach(ignore =>
         it(`should generate \`${ignore}\``, async () => {
           const ignoreContents = await readIgnore(app1, ignore);
           expect(ignoreContents.length).toEqual(2);
@@ -89,6 +97,14 @@ describe('configure', () => {
       });
     });
 
+    describe('eslint', () => {
+      it('should generate a custom eslint config', async () => {
+        const eslintrc = await readJsonC(app2, '.eslintrc');
+        expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
+        expect(eslintrc.rules['no-console']).toEqual(0);
+      });
+    });
+
     describe('typescript', () => {
       it('should generate tsconfig config', async () => {
         const tsconfigContents = await readJsonC(app2, 'tsconfig.json');
@@ -108,7 +124,8 @@ describe('configure', () => {
     describe('ignore files', () => {
       it(`should generate \`.gitignore\``, async () => {
         const ignoreContents = await readIgnore(app2, '.gitignore');
-        expect(ignoreContents.length).toEqual(5);
+        expect(ignoreContents.length).toEqual(6);
+        expect(ignoreContents).toContain(`.eslintrc`);
         expect(ignoreContents).toContain(`.prettierrc`);
         expect(ignoreContents).toContain(`tsconfig.json`);
         expect(ignoreContents).toContain(`tslint.json`);
@@ -116,7 +133,7 @@ describe('configure', () => {
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
       });
 
-      ['.prettierignore'].forEach(ignore =>
+      ['.eslintignore', '.prettierignore'].forEach(ignore =>
         it(`should generate \`${ignore}\``, async () => {
           const ignoreContents = await readIgnore(app2, ignore);
           expect(ignoreContents.length).toEqual(2);

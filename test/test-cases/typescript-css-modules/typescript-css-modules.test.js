@@ -20,17 +20,6 @@ describe('typescript-css-modules', () => {
     await runSkuScriptInDir('configure', appDir);
   });
 
-  describe('configure', () => {
-    it('should generate a custom ESLint config', async () => {
-      const eslintRc = await readFile(path.join(appDir, '.eslintrc'), 'utf-8');
-      const eslintConfig = jsonc.parse(eslintRc);
-      expect(eslintConfig.extends).toEqual(
-        require.resolve('eslint-config-seek')
-      );
-      expect(eslintConfig.rules['no-console']).toEqual(0);
-    });
-  });
-
   describe('build', () => {
     let closeAssetServer;
 

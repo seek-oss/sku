@@ -1,0 +1,6 @@
+# managed by sku
+.eslintrc
+.prettierrc
+dist/
+report/
+# end managed by sku

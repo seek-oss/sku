@@ -1,10 +1,7 @@
 module.exports = {
   srcPaths: ['lib', 'another-folder'],
-  entry: {
-    client: 'lib/client.js',
-    render: 'lib/render.js'
-  },
-  target: 'dist',
-  publicPath: '/',
-  port: 8080
+  clientEntry: 'lib/client.js',
+  renderEntry: 'lib/render.js',
+  port: 8201,
+  publicPath: 'http://localhost:4002'
 };

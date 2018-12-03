@@ -1,10 +1,8 @@
 module.exports = {
-  entry: {
-    client: 'src/client.tsx',
-    render: 'src/render.tsx',
-    server: 'src/server.tsx'
-  },
-  target: 'dist',
-  publicPath: '/',
-  port: 8080
+  clientEntry: 'src/client.tsx',
+  renderEntry: 'src/render.tsx',
+  serverEntry: 'src/server.tsx',
+  port: 8204,
+  serverPort: 8010,
+  publicPath: 'http://localhost:4003'
 };

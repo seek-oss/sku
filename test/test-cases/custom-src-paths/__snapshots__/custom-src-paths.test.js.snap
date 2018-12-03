@@ -1,53 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`custom-src-paths build should create valid app 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+  </body>
+</html>",
+  "warnings": Array [],
+}
+`;
+
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+  </body>
+</html>",
+  "main-a79d6fc51aec0310c471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-2844b96e4645a1349e71.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`custom-src-paths start should start a development server 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" crossorigin=\\"anonymous\\"></script>
   
 </body></html>",
   "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div data-reactroot=\\"\\">Hello World!</div></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
-",
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    
+  </head>
+  <body>
+    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\" crossorigin=\\"anonymous\\"></script>
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;

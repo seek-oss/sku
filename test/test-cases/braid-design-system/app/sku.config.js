@@ -1,11 +1,8 @@
 const ListExternalsPlugin = require('../../../utils/ListExternalsWebpackPlugin');
 
 module.exports = {
-  entry: {
-    client: 'src/client.js',
-    render: 'src/render.js'
-  },
-  target: 'dist',
+  publicPath: 'somecdn.com',
+  port: 8200,
   dangerouslySetWebpackConfig: config => {
     if (config.name === 'render') {
       config.plugins.push(new ListExternalsPlugin());

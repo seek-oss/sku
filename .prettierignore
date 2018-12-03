@@ -1,3 +1,6 @@
+dist-build/
+dist-start/
+
 # managed by sku
 dist/
 report/

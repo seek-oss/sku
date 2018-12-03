@@ -2,24 +2,26 @@
 
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
-  "index.html": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>My Awesome Project</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/style.css\\" />
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
-    </body>
-  </html>
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>My Awesome Project</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/main-bfe8911084b821bf8edd.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main-1d95f7f495034eec0220.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-8d87969f84ec7f921ce7.js\\" crossorigin=\\"anonymous\\"></script>
+  </body>
+</html>",
+  "main-8d87969f84ec7f921ce7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
+.Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "style.css": "._1brbpTo{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
-.Jlnxw97{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
-",
+  "runtime-7f8cc4df306030a30c08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-1d95f7f495034eec0220.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

@@ -1,9 +1,5 @@
 module.exports = {
-  entry: {
-    client: 'src/client.js',
-    render: 'src/render.js'
-  },
-  public: 'src/public',
-  publicPath: '/',
-  target: 'dist'
+  clientEntry: 'src/client.js',
+  renderEntry: 'src/render.js',
+  publicPath: '/path/to/public/assets/' // <-- Required for sku build output
 };

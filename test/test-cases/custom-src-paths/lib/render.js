@@ -1,18 +1,24 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import dedent from 'dedent';
 import App from '../another-folder/App';
 
-export default ({ publicPath }) => `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>hello-world</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-      <div id="app">${renderToString(<App />)}</div>
-      <script type="text/javascript" src="${publicPath}main.js"></script>
-    </body>
-  </html>
-`;
+export default {
+  renderApp: () => renderToString(<App />),
+
+  renderDocument: ({ app, bodyTags, headTags }) => dedent`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>hello-world</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        ${headTags}
+      </head>
+      <body>
+        <div id="app">${app}</div>
+        ${bodyTags}
+      </body>
+    </html>
+  `
+};

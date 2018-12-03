@@ -1,12 +1,10 @@
 const chalk = require('chalk');
-const baseESlintConfig = require('eslint-config-seek');
 const EslintCLI = require('eslint').CLIEngine;
-const builds = require('../config/builds');
+const eslintConfig = require('../config/eslint/eslintConfig');
 const isTypeScript = require('../lib/isTypeScript');
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
-
 const args = require('../config/args').argv;
 
 (async () => {
@@ -23,18 +21,12 @@ const args = require('../config/args').argv;
     }
   }
 
-  // Decorate eslint config is not supported for monorepo
-  const eslintConfig =
-    builds.length === 1
-      ? builds[0].eslintDecorator(baseESlintConfig)
-      : baseESlintConfig;
-
   const cli = new EslintCLI({
     baseConfig: eslintConfig,
     useEslintrc: false
   });
 
-  const pathsToCheck = args.length === 0 ? builds[0].paths.src : args;
+  const pathsToCheck = args.length === 0 ? ['.'] : args;
 
   const formatter = cli.getFormatter();
   console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));

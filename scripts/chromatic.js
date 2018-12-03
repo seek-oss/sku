@@ -1,8 +1,7 @@
 const ci = require('env-ci')();
 const chalk = require('chalk');
 const runBin = require('../lib/runBin');
-const builds = require('../config/builds');
-const { storybookPort } = builds[0];
+const { storybookPort } = require('../context');
 const skuPath = require.resolve('../bin/sku');
 
 (async () => {

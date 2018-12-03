@@ -1,40 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build should generate a production server 1`] = `
-"
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </head>
-    <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
-    </body>
-  </html>
-"
-`;
-
-exports[`ssr-hello-world build should generate the expected files 1`] = `
-Object {
-  "0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`ssr-hello-world start should start a development server 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script charset=\\"utf-8\\" src=\\"http://localhost:8000/0.js\\"></script></head>
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4000/main-e8e369bb4ca7d70a30a2.css\\">
+    </head>
     <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-46e490315fd43280bd3a.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~main-7433479861943aaac3dc.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/main-7617f4b40ec6550cdb75.js\\" crossorigin=\\"anonymous\\"></script>
     
   
 </body></html>",
@@ -46,10 +24,51 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4000/main-e8e369bb4ca7d70a30a2.css\\" />
     </head>
     <body>
-      <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-      <script type=\\"text/javascript\\" src=\\"http://localhost:8000/main.js\\"></script>
+      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-46e490315fd43280bd3a.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~main-7433479861943aaac3dc.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/main-7617f4b40ec6550cdb75.js\\" crossorigin=\\"anonymous\\"></script>
+    </body>
+  </html>
+",
+  "warnings": Array [],
+}
+`;
+
+exports[`ssr-hello-world start should start a development server 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:8100/main.css\\">
+    </head>
+    <body>
+      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\"></script>
+    
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:8100/main.css\\" />
+    </head>
+    <body>
+      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\"></script>
     </body>
   </html>
 ",

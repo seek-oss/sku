@@ -1,4 +1,4 @@
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
 const waitOnAsync = promisify(require('wait-on'));
 
 module.exports = async (...urls) => {
@@ -11,7 +11,7 @@ module.exports = async (...urls) => {
       timeout,
       // Log output of wait behaviour timing to allow
       //  increased debugging when service fails to start
-      log: true
+      log: false
     });
   } catch (error) {
     if (error.message === 'Timeout') {

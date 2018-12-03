@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const { setCwd, getPathFromCwd } = require('../lib/cwd');
 
 // npm scripts can have an incorrect cwd
@@ -7,11 +8,17 @@ const { setCwd, getPathFromCwd } = require('../lib/cwd');
 // must be run first
 setCwd(process.env.INIT_CWD);
 
-const packageName = require(getPathFromCwd('./package.json')).name;
+const packageJson = getPathFromCwd('./package.json');
+const packageJsonExists = fs.existsSync(packageJson);
 
-// Don't run configure script on sku itself
-if (packageName !== 'sku') {
-  const configure = require('../lib/configure');
+// Don't run configure if CWD is not a project (e.g. npx)
+if (packageJsonExists) {
+  const packageName = require(packageJson).name;
 
-  configure();
+  // Don't run configure script on sku itself
+  if (packageName !== 'sku') {
+    const configure = require('../lib/configure');
+
+    configure();
+  }
 }

@@ -56,7 +56,7 @@ The entry file for the server.
 
 **Only for libraries**
 
-The entry file for the library. If set, sku will assume the project is a library. Must export it's API from this file.
+The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
 
 Example:
 

@@ -1,23 +1,62 @@
 const browserslist = require('browserslist');
-const chalk = require('chalk');
+const { yellow, red, bold, underline, white } = require('chalk');
+const didYouMean = require('didyoumean2').default;
+const { emojify } = require('node-emoji');
+
+const configSchema = require('./configSchema');
+const defaultSkuConfig = require('./defaultSkuConfig');
 const { defaultClientEntry } = require('./clientEntries');
 
-const exitWithError = message => {
-  console.log(chalk.red(message));
+const availableConfigKeys = Object.keys(defaultSkuConfig);
+
+const exitWithErrors = errors => {
+  console.log(bold(underline(red('Errors in sku config:'))));
+  errors.forEach(error => {
+    console.log(yellow(emojify(error)));
+  });
   process.exit(1);
 };
 
 module.exports = skuConfig => {
+  const errors = [];
+
+  // Validate extra keys
+  Object.keys(skuConfig)
+    .filter(key => !availableConfigKeys.includes(key))
+    .forEach(key => {
+      const unknownMessage = `Unknown key '${bold(key)}'.`;
+      const suggestedKey = didYouMean(key, availableConfigKeys);
+      const suggestedMessage = suggestedKey
+        ? ` Did you mean '${bold(suggestedKey)}'?`
+        : '';
+      errors.push(`:question: ${unknownMessage}${suggestedMessage}`);
+    });
+
+  // Validate schema types
+  configSchema.validate(skuConfig).forEach(({ message, path }) => {
+    errors.push(`:no_entry_sign: ${message.replace(path, `'${bold(path)}'`)}`);
+  });
+
+  // Validate library entry has corresponding libraryName
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {
-    exitWithError(
-      "Error: In your sku config, you've provided 'libraryEntry' without a corresponding 'libraryName' option. More details: https://github.com/seek-oss/sku#building-a-library"
+    errors.push(
+      `:no_entry_sign: '${bold(
+        'libraryEntry'
+      )}' must have a corresponding '${bold(
+        'libraryName'
+      )}' option. More details: ${underline(
+        'https://github.com/seek-oss/sku#building-a-library'
+      )}`
     );
   }
 
+  // Ensure defaultClientEntry is not configured as a route name
   skuConfig.routes.forEach(({ name }) => {
     if (name === defaultClientEntry) {
-      exitWithError(
-        `Error: Invalid route name. '${defaultClientEntry}' is reserved, please use a different route name`
+      errors.push(
+        `:no_entry_sign: Invalid route name: '${bold(
+          defaultClientEntry
+        )}', please use a different route name`
       );
     }
   });
@@ -26,9 +65,14 @@ module.exports = skuConfig => {
   try {
     browserslist(skuConfig.supportedBrowsers);
   } catch (e) {
-    console.log(chalk.yellow(e.message));
-    exitWithError(
-      'Error: supportedBrowsers option is invalid, must be a valid browserslist query. More details: https://github.com/browserslist/browserslist'
+    errors.push(
+      `:no_entry_sign: '${bold(
+        'supportedBrowsers'
+      )}' must be a valid browserslist query. ${white(e.message)}`
     );
+  }
+
+  if (errors.length > 0) {
+    exitWithErrors(errors);
   }
 };

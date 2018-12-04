@@ -7,6 +7,7 @@ module.exports = {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',
+  libraryEntry: null,
   routes: [{ name: 'default', route: '/' }],
   sites: [],
   environments: [],

@@ -32,6 +32,8 @@ Don't have [npx](https://www.npmjs.com/package/npx)?
 $ npm install -g npx
 ```
 
+## [Documentation](./docs)
+
 ## Features
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))
@@ -368,10 +370,6 @@ export default () => {
 ```
 
 Note that, in this scenario, the `render` entry is only used to provide a development environment. No HTML will be generated when running `sku build`.
-
-will create `index-AU.html` & `index-NZ.html`.
-
-Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
 
 ### Development server
 

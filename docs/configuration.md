@@ -204,7 +204,7 @@ Reliance on this setting will cause issues when upgrading sku as any custom sett
 
 ## `dangerouslySetJestConfig` [`function`]
 
-Similar to `dangerouslySetWebpackConfig` but for [jest](https://jestjs.io/docs/en/configuration) config. Make sure `setupTests` definitely doesn't cover your needs before using.
+Similar to `dangerouslySetWebpackConfig` but for [jest](https://jestjs.io/docs/en/configuration) config. Make sure [`setupTests`](#setuptests-string) definitely doesn't cover your needs before using.
 
 Please speak with the `sku-support` group before using.
 

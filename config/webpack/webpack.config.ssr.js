@@ -7,7 +7,7 @@ const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 
-const debug = require('debug')('sku:webpack');
+const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
@@ -53,8 +53,6 @@ const internalJs = [
   ...paths.src,
   ...paths.compilePackages.map(utils.resolvePackage)
 ];
-
-debug({ build: 'default', internalJs });
 
 const resolvedPolyfills = polyfills.map(polyfill => {
   return require.resolve(polyfill, { paths: [cwd()] });

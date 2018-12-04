@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'production';
 
 const webpack = require('webpack');
-
+const { green, red } = require('chalk');
 const { run } = require('../lib/runWebpack');
 const {
   copyPublicFiles,
@@ -22,9 +22,9 @@ const [
     await run(webpack(serverConfig));
     await copyPublicFiles();
 
-    console.log('Sku build complete!');
+    console.log(green('Sku build complete!'));
   } catch (e) {
-    console.log(e);
+    console.error(red(e));
 
     process.exit(1);
   }

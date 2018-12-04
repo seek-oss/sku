@@ -369,10 +369,6 @@ export default () => {
 
 Note that, in this scenario, the `render` entry is only used to provide a development environment. No HTML will be generated when running `sku build`.
 
-will create `index-AU.html` & `index-NZ.html`.
-
-Note: When running the app in dev mode only one HTML file will be created, defaulting to the first listed locale.
-
 ### Development server
 
 Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.

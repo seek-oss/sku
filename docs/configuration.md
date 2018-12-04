@@ -198,9 +198,22 @@ The [`browserslist`](https://github.com/browserslist/browserslist) query describ
 
 ## `dangerouslySetWebpackConfig` [`function`]
 
-This function provides a way to override the webpack config after sku has created it. Ideally, this is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
+This function provides a way to override the webpack config after sku has created it. As sku creates two webpack configs (`client` & `server|render`) this function will actually run twice, if you only need to modify one, then you can check `config.name`.
+
+Ideally, this setting is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
 
 Reliance on this setting will cause issues when upgrading sku as any custom settings may break at anytime. You've been warned!
+
+Example:
+
+```js
+{
+  dangerouslySetWebpackConfig: skuWebpackConfig => ({
+    ...skuWebpackConfig,
+    someOtherConfig: 'dangerousValue'
+  });
+}
+```
 
 ## `dangerouslySetJestConfig` [`function`]
 
@@ -208,6 +221,28 @@ Similar to `dangerouslySetWebpackConfig` but for [jest](https://jestjs.io/docs/e
 
 Please speak with the `sku-support` group before using.
 
+Example:
+
+```js
+{
+  dangerouslySetJestConfig: skuJestConfig => ({
+    ...skuJestConfig,
+    someOtherConfig: 'dangerousValue'
+  });
+}
+```
+
 ## `dangerouslySetESLintConfig` [`function`]
 
 Similar to `dangerouslySetWebpackConfig` but for [eslint](https://eslint.org/) config.
+
+Example:
+
+```js
+{
+  dangerouslySetESLintConfig: skuEslintConfig => ({
+    ...skuEslintConfig,
+    someOtherConfig: 'dangerousValue'
+  });
+}
+```

@@ -32,6 +32,8 @@ Don't have [npx](https://www.npmjs.com/package/npx)?
 $ npm install -g npx
 ```
 
+## [Documentation](./docs)
+
 ## Features
 
 ### Modern Javascript (via [Babel](https://babeljs.io/))

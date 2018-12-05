@@ -1,6 +1,7 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
+const { green, red } = require('chalk');
 const {
   copyPublicFiles,
   cleanTargetDirectory,
@@ -18,9 +19,9 @@ const webpackCompiler = require('../config/webpack/webpack.compiler');
     await run(webpackCompiler);
     await cleanRenderJs();
     await copyPublicFiles();
-    console.log('Sku build complete!');
+    console.log(green('Sku build complete!'));
   } catch (error) {
-    console.error(error);
+    console.error(red(error));
     process.exit(1);
   }
 })();

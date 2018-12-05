@@ -7,7 +7,7 @@ const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
-const debug = require('debug')('sku:webpack');
+const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 
 const startRenderEntry = require.resolve('../render/startRenderEntry');
@@ -77,8 +77,6 @@ const internalJs = [
   ...paths.src,
   ...paths.compilePackages.map(utils.resolvePackage)
 ];
-
-debug({ build: 'default', internalJs });
 
 // The client file mask is set to just name in start/dev mode as contenthash
 // is not supported for hot reloading. It can also cause non

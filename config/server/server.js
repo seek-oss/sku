@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const renderScriptTag = require('../../lib/renderScriptTag');
 const serverExports = require('__sku_alias__serverEntry').default; // eslint-disable-line import/no-unresolved
 const assets = require('__sku_alias__assets'); // eslint-disable-line import/no-unresolved
 
@@ -11,10 +12,7 @@ const scripts = makeArray(assets[Object.keys(assets)[0]].js);
 const styles = makeArray(assets[Object.keys(assets)[0]].css);
 
 const bodyTags = scripts
-  .map(
-    chunkFile =>
-      `<script type="text/javascript" src="${chunkFile}" crossorigin="anonymous"></script>`
-  )
+  .map(chunkFile => renderScriptTag(chunkFile))
   .join('\n');
 const headTags = styles
   .map(

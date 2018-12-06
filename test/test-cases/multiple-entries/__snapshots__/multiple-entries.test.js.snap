@@ -140,9 +140,9 @@ Object {
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->ID: 123<span>Some special async content</span></h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -159,9 +159,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/details.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/details.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -181,9 +181,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -200,9 +200,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/home.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~details~home.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/home.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],

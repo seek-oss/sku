@@ -13,8 +13,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-f2546d261e10324b4552.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main-2d0ef90d595da2b109cf.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-f2546d261e10324b4552.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-2d0ef90d595da2b109cf.js\\"></script>
   </body>
 </html>",
   "main-2d0ef90d595da2b109cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -32,9 +32,9 @@ Object {
   <script charset=\\"utf-8\\" src=\\"/0.js\\"></script></head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\">Hello world!</div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -48,9 +48,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],

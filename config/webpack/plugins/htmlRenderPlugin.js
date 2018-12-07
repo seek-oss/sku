@@ -1,4 +1,3 @@
-const { partition } = require('lodash');
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 
 const renderScriptTag = require('../../../lib/renderScriptTag');
@@ -31,7 +30,9 @@ const mapStatsToParams = ({ webpackStats, routeName }) => {
     ? entrypoints[routeName].assets
     : entrypoints[defaultClientEntry].assets;
 
-  const [styles, scripts] = partition(assets, asset => asset.endsWith('.css'));
+  const styles = assets.filter(asset => asset.endsWith('.css'));
+  const scripts = assets.filter(asset => asset.endsWith('.js'));
+
   const bodyTags = scripts
     .map(chunkFile =>
       renderScriptTag(createPublicUrl(paths.publicPath, chunkFile))

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`public path build should create valid app 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"<div class=\\" _1okz42c\\"=\\"\\" data-reactroot=\\"\\"><div class=\\"_1oKZ42c\\"></div></div>\\"&gt;
+    <script type=\\"text/javascript\\" src=\\"/static/runtime-9d079a3b0cbe4340de86.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/static/vendors~main-c6807d2c4e89eaba157e.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/static/main-2d99b6236d4557cf8d78.js\\"></script>
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\" data-message=\\"<div class=\\"_1oKZ42c\\" data-reactroot=\\"\\"></div>\\"></div>
+    <script type=\\"text/javascript\\" src=\\"/static/runtime-9d079a3b0cbe4340de86.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/static/vendors~main-c6807d2c4e89eaba157e.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/static/main-2d99b6236d4557cf8d78.js\\"></script>
+  </body>
+</html>",
+  "warnings": Array [],
+}
+`;

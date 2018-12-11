@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`public path build should create valid app 1`] = `
+exports[`public path build should create valid app with no unresolved resources 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
     <meta charset=\\"UTF-8\\">

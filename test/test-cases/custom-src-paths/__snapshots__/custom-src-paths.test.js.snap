@@ -10,7 +10,7 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
   
@@ -26,7 +26,7 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
@@ -47,13 +47,13 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-2844b96e4645a1349e71.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "main-a79d6fc51aec0310c471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-2844b96e4645a1349e71.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-7f18796c99b251eccdaf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

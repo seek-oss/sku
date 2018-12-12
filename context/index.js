@@ -33,6 +33,10 @@ const transformOutputPath = isStartScript
 // Default initialPath to the first route
 const initialPath = skuConfig.initialPath || skuConfig.routes[0].route;
 
+const publicPath = skuConfig.publicPath.endsWith('/')
+  ? skuConfig.publicPath
+  : `${skuConfig.publicPath}/`;
+
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
@@ -50,7 +54,7 @@ const paths = {
   public: getPathFromCwd(skuConfig.public),
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
-  publicPath: isStartScript ? '/' : skuConfig.publicPath,
+  publicPath: isStartScript ? '/' : publicPath,
   setupTests: skuConfig.setupTests ? getPathFromCwd(skuConfig.setupTests) : null
 };
 

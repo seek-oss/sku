@@ -151,7 +151,7 @@ Files can be excluded from formatting by adding paths into the `.prettierignore`
 
 Generate static HTML files via a webpack-compiled render function that has access to your application code. For example, when building a React application, you can pre-render to static HTML with React's [renderToString](https://facebook.github.io/react/docs/react-dom-server.html#rendertostring) function.
 
-See the [static-rendering](./docs/static-rendering) docs for more detail.
+See the [static-rendering](./docs/static-rendering.md) docs for more detail.
 
 ### Component Explorer via [Storybook](https://storybook.js.org/)
 

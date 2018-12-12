@@ -13,11 +13,7 @@ const {
   defaultClientEntry
 } = require('../../../context');
 
-const createPublicUrl = (publicPath, asset) => {
-  const host = publicPath.endsWith('/') ? publicPath : `${publicPath}/`;
-
-  return `${host}${asset}`;
-};
+const createPublicUrl = (publicPath, asset) => `${publicPath}${asset}`;
 
 // mapStatsToParams runs once for each render. It's purpose is
 // to create the relevant asset tags required for each route.

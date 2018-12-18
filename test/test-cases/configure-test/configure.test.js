@@ -1,5 +1,8 @@
+const fs = require('fs');
 const { promisify } = require('util');
-const readFile = promisify(require('fs').readFile);
+const readFile = promisify(fs.readFile);
+const copyFile = promisify(fs.copyFile);
+const rimraf = require('rimraf');
 const path = require('path');
 const jsonc = require('jsonc-parser');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
@@ -9,9 +12,8 @@ const {
 const prettierConfig = require('../../../config/prettier/prettierConfig');
 const tslintConfig = require('../../../config/typescript/tslint.json');
 const defaultTargetDir = 'dist';
-const app1 = path.resolve(__dirname, 'app');
-const app2 = path.resolve(__dirname, 'typescript-app');
-const skuConfig = require('./typescript-app/sku.config');
+const appFolder = path.resolve(__dirname, 'App');
+const skuConfig = require('./sku.config');
 
 const readFileContents = async (appDir, fileName) => {
   const contents = await readFile(path.join(appDir, fileName), 'utf-8');
@@ -30,35 +32,47 @@ const readIgnore = async (appDir, fileName) => {
     .filter(ignore => ignore && !ignore.startsWith('#')); // remove blanks and comments
 };
 
+const copyToApp = async filename =>
+  await copyFile(
+    path.join(__dirname, filename),
+    path.join(appFolder, filename)
+  );
+const emptyAppDir = async () => await rimraf(`${appFolder}/**/*`);
+
 describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
-      await runSkuScriptInDir('configure', app1);
+      await copyToApp('App.js');
+      await runSkuScriptInDir('configure', appFolder);
+    });
+
+    afterAll(async () => {
+      await emptyAppDir();
     });
 
     describe('prettier', () => {
       it('should generate a prettier config', async () => {
-        const prettierRc = await readJsonC(app1, '.prettierrc');
+        const prettierRc = await readJsonC(appFolder, '.prettierrc');
         expect(prettierRc).toEqual(prettierConfig);
       });
     });
 
     describe('eslint', () => {
       it('should generate a eslint config', async () => {
-        const eslintrc = await readJsonC(app1, '.eslintrc');
+        const eslintrc = await readJsonC(appFolder, '.eslintrc');
         expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
       });
     });
 
     describe('typescript', () => {
       it('should not generate tsconfig config', async () => {
-        expect(readJsonC(app1, 'tsconfig.json')).rejects.toThrowError(
+        expect(readJsonC(appFolder, 'tsconfig.json')).rejects.toThrowError(
           /ENOENT: no such file or directory, open \'.*\/tsconfig\.json\'/
         );
       });
 
       it('should not generate tslint config', async () => {
-        expect(readJsonC(app1, 'tslint.json')).rejects.toThrowError(
+        expect(readJsonC(appFolder, 'tslint.json')).rejects.toThrowError(
           /ENOENT: no such file or directory, open \'.*\/tslint\.json\'/
         );
       });
@@ -66,7 +80,7 @@ describe('configure', () => {
 
     describe('ignore files', () => {
       it(`should generate \`.gitignore\``, async () => {
-        const ignoreContents = await readIgnore(app1, '.gitignore');
+        const ignoreContents = await readIgnore(appFolder, '.gitignore');
         expect(ignoreContents.length).toEqual(4);
         expect(ignoreContents).toContain(`.eslintrc`);
         expect(ignoreContents).toContain(`.prettierrc`);
@@ -76,7 +90,7 @@ describe('configure', () => {
 
       ['.eslintignore', '.prettierignore'].forEach(ignore =>
         it(`should generate \`${ignore}\``, async () => {
-          const ignoreContents = await readIgnore(app1, ignore);
+          const ignoreContents = await readIgnore(appFolder, ignore);
           expect(ignoreContents.length).toEqual(2);
           expect(ignoreContents).toContain(`${defaultTargetDir}/`);
           expect(ignoreContents).toContain(`${bundleReportFolder}/`);
@@ -87,19 +101,25 @@ describe('configure', () => {
 
   describe('custom', () => {
     beforeAll(async () => {
-      await runSkuScriptInDir('configure', app2);
+      await copyToApp('App.tsx');
+      await copyToApp('sku.config.js');
+      await runSkuScriptInDir('configure', appFolder);
+    });
+
+    afterAll(async () => {
+      await emptyAppDir();
     });
 
     describe('prettier', () => {
       it('should generate a prettier config', async () => {
-        const prettierRc = await readJsonC(app2, '.prettierrc');
+        const prettierRc = await readJsonC(appFolder, '.prettierrc');
         expect(prettierRc).toEqual(prettierConfig);
       });
     });
 
     describe('eslint', () => {
       it('should generate a custom eslint config', async () => {
-        const eslintrc = await readJsonC(app2, '.eslintrc');
+        const eslintrc = await readJsonC(appFolder, '.eslintrc');
         expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
         expect(eslintrc.rules['no-console']).toEqual(0);
       });
@@ -107,7 +127,7 @@ describe('configure', () => {
 
     describe('typescript', () => {
       it('should generate tsconfig config', async () => {
-        const tsconfigContents = await readJsonC(app2, 'tsconfig.json');
+        const tsconfigContents = await readJsonC(appFolder, 'tsconfig.json');
         expect(Object.keys(tsconfigContents).sort()).toEqual([
           'exclude',
           'extends',
@@ -116,14 +136,14 @@ describe('configure', () => {
       });
 
       it('should generate tslint config', async () => {
-        const tslintContents = await readJsonC(app2, 'tslint.json');
+        const tslintContents = await readJsonC(appFolder, 'tslint.json');
         expect(tslintContents).toEqual(tslintConfig);
       });
     });
 
     describe('ignore files', () => {
       it(`should generate \`.gitignore\``, async () => {
-        const ignoreContents = await readIgnore(app2, '.gitignore');
+        const ignoreContents = await readIgnore(appFolder, '.gitignore');
         expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain(`.eslintrc`);
         expect(ignoreContents).toContain(`.prettierrc`);
@@ -135,7 +155,7 @@ describe('configure', () => {
 
       ['.eslintignore', '.prettierignore'].forEach(ignore =>
         it(`should generate \`${ignore}\``, async () => {
-          const ignoreContents = await readIgnore(app2, ignore);
+          const ignoreContents = await readIgnore(appFolder, ignore);
           expect(ignoreContents.length).toEqual(2);
           expect(ignoreContents).toContain(`${skuConfig.target}/`);
           expect(ignoreContents).toContain(`${bundleReportFolder}/`);

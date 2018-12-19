@@ -2,6 +2,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 const copyFile = promisify(fs.copyFile);
+const makeDir = promisify(fs.mkdir);
 const rimraf = promisify(require('rimraf'));
 const path = require('path');
 const jsonc = require('jsonc-parser');
@@ -35,8 +36,8 @@ const readIgnore = async (appDir, fileName) => {
 
 const copyToApp = async (filename, folder) =>
   await copyFile(path.join(__dirname, filename), path.join(folder, filename));
-const emptyAppDir = async folder =>
-  await rimraf(`${folder}/**/*`, {
+const removeAppDir = async folder =>
+  await rimraf(folder, {
     glob: {
       dot: true
     }
@@ -45,12 +46,13 @@ const emptyAppDir = async folder =>
 describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
+      await makeDir(appFolder);
       await copyToApp('App.js', appFolder);
       await runSkuScriptInDir('configure', appFolder);
     });
 
     afterAll(async () => {
-      await emptyAppDir(appFolder);
+      await removeAppDir(appFolder);
     });
 
     it('should generate a prettier config', async () => {
@@ -96,13 +98,14 @@ describe('configure', () => {
 
   describe('custom', () => {
     beforeAll(async () => {
+      await makeDir(appFolderTS);
       await copyToApp('App.tsx', appFolderTS);
       await copyToApp('sku.config.js', appFolderTS);
       await runSkuScriptInDir('configure', appFolderTS);
     });
 
     afterAll(async () => {
-      await emptyAppDir(appFolderTS);
+      await removeAppDir(appFolderTS);
     });
 
     it('should generate a prettier config', async () => {

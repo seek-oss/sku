@@ -1,21 +1,27 @@
 const Schema = require('validate');
 
-module.exports = new Schema({
+const jsTsFile = val => /\.(js|ts|tsx)$/.test(val);
+
+const schema = new Schema({
   clientEntry: {
     type: String,
-    required: true
+    required: true,
+    use: { jsTsFile }
   },
   renderEntry: {
     type: String,
-    required: true
+    required: true,
+    use: { jsTsFile }
   },
   serverEntry: {
     type: String,
-    required: true
+    required: true,
+    use: { jsTsFile }
   },
   libraryEntry: {
     type: String,
-    required: false
+    required: false,
+    use: { jsTsFile }
   },
   routes: {
     type: Array,
@@ -148,3 +154,9 @@ module.exports = new Schema({
     required: true
   }
 });
+
+schema.message({
+  jsTsFile: path => `${path} must be a js or ts file`
+});
+
+module.exports = schema;

@@ -13,9 +13,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-9f34519d79bdec5cb756.js\\" crossorigin=\\"anonymous\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -32,9 +32,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-9f34519d79bdec5cb756.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -43,13 +43,13 @@ Object {
 
 exports[`multiple-entries build should generate the expected files 1`] = `
 Object {
-  "4-04990a1776692a284b46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "4-2434988453e9e04ec823.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
 ",
-  "details-c05fd34f9f1a30e65bab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "details-c9c3d1a4b7369ef58b9f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
 ",
-  "home-ae8d867601646498c48e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "home-9f34519d79bdec5cb756.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": "<!DOCTYPE html>
 <html>
   <head>
@@ -63,9 +63,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c9c3d1a4b7369ef58b9f.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -81,9 +81,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-9f34519d79bdec5cb756.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -99,9 +99,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c9c3d1a4b7369ef58b9f.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/nz/index.html": "<!DOCTYPE html>
@@ -117,13 +117,13 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->nz</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-1c006fe363b9850ad73d.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-987ef7c089c39d525863.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-9f34519d79bdec5cb756.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
-  "runtime-cc01c931f7516286345f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~details~home-51928ef7fbf843e82b23.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-1c006fe363b9850ad73d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~details~home-987ef7c089c39d525863.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

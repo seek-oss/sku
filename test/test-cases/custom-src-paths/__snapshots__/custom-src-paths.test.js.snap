@@ -10,9 +10,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-c1ffd5bad5f8b0700177.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-d0d3d9bccbf473ee26f9.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-f694be149d02b4fd706e.js\\" crossorigin=\\"anonymous\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -26,9 +26,9 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-c1ffd5bad5f8b0700177.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-d0d3d9bccbf473ee26f9.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-f694be149d02b4fd706e.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -47,14 +47,14 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-7f18796c99b251eccdaf.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-c6807d2c4e89eaba157e.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-a79d6fc51aec0310c471.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-c1ffd5bad5f8b0700177.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-d0d3d9bccbf473ee26f9.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-f694be149d02b4fd706e.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
-  "main-a79d6fc51aec0310c471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-7f18796c99b251eccdaf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-c6807d2c4e89eaba157e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f694be149d02b4fd706e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-c1ffd5bad5f8b0700177.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-d0d3d9bccbf473ee26f9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

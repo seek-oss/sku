@@ -36,8 +36,8 @@ describe('multiple-entries', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = startAssetServer(4001, targetDirectory);
-      await waitForUrls('http://localhost:4001');
+      closeAssetServer = startAssetServer(4004, targetDirectory);
+      await waitForUrls('http://localhost:4004');
     });
 
     afterAll(() => {
@@ -45,7 +45,7 @@ describe('multiple-entries', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4001/production/au');
+      const app = await getAppSnapshot('http://localhost:4004/production/au');
       expect(app).toMatchSnapshot();
     });
 

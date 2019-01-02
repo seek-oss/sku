@@ -4,6 +4,10 @@
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "strict": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "*"]
+    }
   }
 }

@@ -1,28 +1,24 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import dedent from 'dedent';
+import App from './app';
 
-import { Render } from '../../../../../sku-types';
-import App from 'src/App';
-
-const skuRender: Render = {
+export default {
   renderApp: () => renderToString(<App />),
 
-  renderDocument: ({ app, headTags, bodyTags }) => dedent`
+  renderDocument: ({ app, bodyTags, headTags }) => dedent`
     <!DOCTYPE html>
     <html>
       <head>
         <meta charset="UTF-8">
-        <title>My Awesome Project</title>
+        <title>hello-world</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${headTags}
       </head>
       <body>
-        <div id="app">${app}</div>
+        <div id="app" data-message="${app}"></div>
         ${bodyTags}
       </body>
     </html>
   `
 };
-
-export default skuRender;

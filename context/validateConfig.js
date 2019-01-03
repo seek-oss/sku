@@ -33,9 +33,13 @@ module.exports = skuConfig => {
     });
 
   // Validate schema types
-  configSchema.validate(skuConfig).forEach(({ message, path }) => {
-    errors.push(`:no_entry_sign: ${message.replace(path, `'${bold(path)}'`)}`);
-  });
+  configSchema
+    .validate(skuConfig, { strip: false })
+    .forEach(({ message, path }) => {
+      errors.push(
+        `:no_entry_sign: ${message.replace(path, `'${bold(path)}'`)}`
+      );
+    });
 
   // Validate library entry has corresponding libraryName
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {

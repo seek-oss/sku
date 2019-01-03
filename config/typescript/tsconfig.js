@@ -8,6 +8,7 @@ module.exports = () => ({
     noUnusedLocals: true,
     strict: true,
     jsx: 'preserve',
+    lib: ['dom', 'es2015'],
     baseUrl: cwd(),
     paths: {
       '*': ['*']

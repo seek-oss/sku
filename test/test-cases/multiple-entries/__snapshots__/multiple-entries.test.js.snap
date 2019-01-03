@@ -2,11 +2,41 @@
 
 exports[`multiple-entries build should create valid app 1`] = `
 Object {
-  "content": "<!DOCTYPE html><html><head> <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, user-scalable=no\\"> <style> body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", \\"Roboto\\", \\"Oxygen\\", \\"Ubuntu\\", \\"Cantarell\\", \\"Fira Sans\\", \\"Droid Sans\\", \\"Helvetica Neue\\", sans-serif; cursor: default; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; } main, aside, section { display: flex; justify-content: center; align-items: center; flex-direction: column; } main { height: 100%; } aside { background: #000; flex-shrink: 1; padding: 30px 20px; } aside p { margin: 0; color: #999999; font-size: 14px; line-height: 24px; } aside a { color: #fff; text-decoration: none; } section span { font-size: 24px; font-weight: 500; display: block; border-bottom: 1px solid #EAEAEA; text-align: center; padding-bottom: 20px; width: 100px; } section p { font-size: 14px; font-weight: 400; } section span + p { margin: 20px 0 0 0; } @media (min-width: 768px) { section { height: 40px; flex-direction: row; } section span, section p { height: 100%; line-height: 40px; } section span { border-bottom: 0; border-right: 1px solid #EAEAEA; padding: 0 20px 0 0; width: auto; } section span + p { margin: 0; padding-left: 20px; } aside { padding: 50px 0; } aside p { max-width: 520px; text-align: center; } } </style></head><body> <main> <section> <span>404</span> <p>The requested path could not be found</p> </section> </main></body></html>",
-  "errors": Array [
-    "Failed to load resource: the server responded with a status of 404 (Not Found)",
-  ],
-  "sourceHtml": "<!DOCTYPE html><head> <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1, user-scalable=no\\"/> <style> body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", \\"Roboto\\", \\"Oxygen\\", \\"Ubuntu\\", \\"Cantarell\\", \\"Fira Sans\\", \\"Droid Sans\\", \\"Helvetica Neue\\", sans-serif; cursor: default; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; } main, aside, section { display: flex; justify-content: center; align-items: center; flex-direction: column; } main { height: 100%; } aside { background: #000; flex-shrink: 1; padding: 30px 20px; } aside p { margin: 0; color: #999999; font-size: 14px; line-height: 24px; } aside a { color: #fff; text-decoration: none; } section span { font-size: 24px; font-weight: 500; display: block; border-bottom: 1px solid #EAEAEA; text-align: center; padding-bottom: 20px; width: 100px; } section p { font-size: 14px; font-weight: 400; } section span + p { margin: 20px 0 0 0; } @media (min-width: 768px) { section { height: 40px; flex-direction: row; } section span, section p { height: 100%; line-height: 40px; } section span { border-bottom: 0; border-right: 1px solid #EAEAEA; padding: 0 20px 0 0; width: auto; } section span + p { margin: 0; padding-left: 20px; } aside { padding: 50px 0; } aside p { max-width: 520px; text-align: center; } } </style></head><body> <main> <section> <span>404</span> <p>The requested path could not be found</p> </section> </main></body>",
+  "content": "<!DOCTYPE html><html><head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <script>
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+    </script>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/home-62bf94bf0fd2ba3c2aa2.css\\">
+  </head>
+  <body>
+    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\\"UTF-8\\">
+    <title>hello-world</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <script>
+      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
+    </script>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/home-62bf94bf0fd2ba3c2aa2.css\\" />
+  </head>
+  <body>
+    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+  </body>
+</html>",
   "warnings": Array [],
 }
 `;
@@ -29,13 +59,13 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-870c3f9a3be73b58904d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -47,13 +77,13 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-870c3f9a3be73b58904d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -65,13 +95,13 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/details-6c8d7afb3c7b045262fd.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-6c8d7afb3c7b045262fd.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-870c3f9a3be73b58904d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/details-c05fd34f9f1a30e65bab.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "production/nz/index.html": "<!DOCTYPE html>
@@ -83,16 +113,16 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4001/home-62bf94bf0fd2ba3c2aa2.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/home-62bf94bf0fd2ba3c2aa2.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\" data-reactroot=\\"\\">Welcome to the Home page - <!-- -->nz</h1></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4001/runtime-870c3f9a3be73b58904d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4001/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
+    <script type=\\"text/javascript\\" src=\\"http://localhost:4004/runtime-cc01c931f7516286345f.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/vendors~details~home-51928ef7fbf843e82b23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4004/home-ae8d867601646498c48e.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
-  "runtime-870c3f9a3be73b58904d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-cc01c931f7516286345f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~details~home-51928ef7fbf843e82b23.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

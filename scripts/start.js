@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'development';
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 
-const dynamicRouteMiddlware = require('../lib/dynamicRouteMiddleware');
+const dynamicRouteMiddleware = require('../lib/dynamicRouteMiddleware');
 const { hosts, port, initialPath, paths, routes } = require('../context');
 const webpackCompiler = require('../config/webpack/webpack.compiler');
 
@@ -19,7 +19,7 @@ const devServer = new WebpackDevServer(webpackCompiler, {
   after: (app, server) => {
     app.get(
       '*',
-      dynamicRouteMiddlware({
+      dynamicRouteMiddleware({
         dynamicRoutes,
         fs: server.middleware.fileSystem,
         rootDirectory: paths.target

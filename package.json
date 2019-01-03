@@ -15,8 +15,8 @@
     "pretest": "yarn check --integrity && npm run lint",
     "test": "OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
     "test-manual": "node test/manual",
-    "format": "prettier --config ./config/prettier/prettierConfig.js --write '**/*.{js,ts,tsx,md,less,css}'",
-    "format-check": "prettier --config ./config/prettier/prettierConfig.js --list-different '**/*.{js,ts,tsx,md,less,css}'",
+    "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",
+    "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "node ./scripts/postinstall.js",
     "commit": "git-cz",
     "semantic-release": "semantic-release"

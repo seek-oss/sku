@@ -24,7 +24,8 @@ module.exports = ({ target, lang = 'js' }) => {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: [cwd()]
+        root: [cwd()],
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
       }
     ],
     require.resolve('babel-plugin-macros')

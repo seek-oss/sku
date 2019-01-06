@@ -16,14 +16,14 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_20YbULa\\" data-reactroot=\\"\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-7f8cc4df306030a30c08.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main-c591fca81d28a0299576.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main-6883b2a6f3d7fd33b3a8.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-a2edef02345609a75f77.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main-cd4397fc294165550a63.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-2ccc1d4d6cb62bac45a2.js\\"></script>
   </body>
 </html>",
-  "main-6883b2a6f3d7fd33b3a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-7f8cc4df306030a30c08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-c591fca81d28a0299576.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2ccc1d4d6cb62bac45a2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-a2edef02345609a75f77.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-cd4397fc294165550a63.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-e9ce042535bec7074a05.css": "a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:\\"\\";content:none}table{border-collapse:collapse;border-spacing:0}mark{background-color:transparent;color:inherit}html{min-height:100%}._20YbULa,html{background-color:#eee}._20YbULa{font-size:10px;font-family:Roboto,Helvetica Neue,HelveticaNeue,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#1c1c1c;box-sizing:border-box}._20YbULa *,._20YbULa :after,._20YbULa :before{font-family:inherit;box-sizing:inherit;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}._20YbULa input[type=search]::-webkit-search-decoration{-webkit-appearance:none}._1hwCpFM{height:100%}
 .Oxw3aoN{position:absolute!important;clip:rect(1px,1px,1px,1px);pointer-events:none}
 ._3xxbHuF{max-width:940px;margin:0 auto}

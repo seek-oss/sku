@@ -1,3 +1,6 @@
 {
-  "extends": "tslint-config-seek"
+  "extends": "tslint-config-seek",
+  "rules": {
+    "no-implicit-dependencies": false
+  }
 }

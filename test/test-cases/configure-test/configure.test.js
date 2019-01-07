@@ -80,11 +80,12 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(4);
+      expect(ignoreContents.length).toEqual(5);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`${defaultTargetDir}/`);
       expect(ignoreContents).toContain(`${bundleReportFolder}/`);
+      expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
     ['.eslintignore', '.prettierignore'].forEach(ignore =>
@@ -137,13 +138,14 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
-      expect(ignoreContents.length).toEqual(6);
+      expect(ignoreContents.length).toEqual(7);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`tsconfig.json`);
       expect(ignoreContents).toContain(`tslint.json`);
       expect(ignoreContents).toContain(`${skuConfig.target}/`);
       expect(ignoreContents).toContain(`${bundleReportFolder}/`);
+      expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
     ['.eslintignore', '.prettierignore'].forEach(ignore =>

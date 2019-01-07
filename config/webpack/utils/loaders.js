@@ -75,15 +75,6 @@ const makeCssLoaders = (options = {}) => {
     {
       loader: require.resolve('less-loader')
     },
-    {
-      // Hacky fix for https://github.com/webpack-contrib/css-loader/issues/74
-      loader: require.resolve('string-replace-loader'),
-      options: {
-        search: '(url\\([\'"]?)(.)',
-        replace: '$1\\$2',
-        flags: 'g'
-      }
-    },
     ...(js ? cssInJsLoaders : [])
   ];
 };

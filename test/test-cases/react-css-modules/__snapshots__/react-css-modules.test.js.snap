@@ -12,16 +12,16 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-a2edef02345609a75f77.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main-4e6ef66b8aec9ab4ab4a.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main-5da918a972dd92b30c44.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-57519d664ffbf58ed414.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/vendors~main-107ac53d6e89f601231d.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-ca39c9fb12cf3b1076d7.js\\"></script>
   </body>
 </html>",
-  "main-5da918a972dd92b30c44.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
-  "runtime-a2edef02345609a75f77.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-4e6ef66b8aec9ab4ab4a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-ca39c9fb12cf3b1076d7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-57519d664ffbf58ed414.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-107ac53d6e89f601231d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

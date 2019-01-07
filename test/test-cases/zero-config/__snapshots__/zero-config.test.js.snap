@@ -2,7 +2,7 @@
 
 exports[`zero-config build should generate the expected files 1`] = `
 Object {
-  "0-6e85fc8647b22d1e56d2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "0-e7fc8c55eda7a5e0ce50.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": "<!DOCTYPE html>
 <html>
   <head>
@@ -13,12 +13,12 @@ Object {
   </head>
   <body>
     <div id=\\"app\\" data-message=\\"Hello world!\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-9b3900855aa0aeac070b.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main-19a7a9647dccb7dfc84f.js\\"></script>
+    <script type=\\"text/javascript\\" src=\\"/runtime-4e8a35a4777a2d23c7cf.js\\"></script>
+<script type=\\"text/javascript\\" src=\\"/main-7d63a22738bb7879fc80.js\\"></script>
   </body>
 </html>",
-  "main-19a7a9647dccb7dfc84f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-9b3900855aa0aeac070b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-7d63a22738bb7879fc80.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-4e8a35a4777a2d23c7cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

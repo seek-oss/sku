@@ -68,7 +68,7 @@ const makeCssLoaders = (options = {}) => {
         plugins: () => [
           require('autoprefixer')(supportedBrowsers),
           // Minimize CSS on production builds
-          ...(isProductionBuild ? [require('cssnano')] : [])
+          ...(isProductionBuild ? [require('cssnano')()] : [])
         ]
       }
     },

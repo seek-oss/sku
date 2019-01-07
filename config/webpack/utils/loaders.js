@@ -51,20 +51,25 @@ const makeCssLoaders = (options = {}) => {
     ...(!server ? [MiniCssExtractPlugin.loader] : []),
     ...cssModuleToTypeScriptLoader,
     {
-      // On the server, we use 'css-loader/locals' to avoid generating a CSS file.
-      // Only the client build should generate CSS files.
-      loader: require.resolve(`css-loader${server ? '/locals' : ''}`),
+      loader: require.resolve('css-loader'),
       options: {
-        modules: true,
+        modules: 'local',
         localIdentName: `${debugIdent}[hash:base64:7]`,
-        minimize: isProductionBuild,
+
+        // On the server, avoid generating a CSS file with exportOnlyLocals.
+        // Only the client build should generate CSS files.
+        exportOnlyLocals: Boolean(server),
         importLoaders: 3
       }
     },
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        plugins: () => [require('autoprefixer')(supportedBrowsers)]
+        plugins: () => [
+          require('autoprefixer')(supportedBrowsers),
+          // Minimize CSS on production builds
+          ...(isProductionBuild ? [require('cssnano')] : [])
+        ]
       }
     },
     {

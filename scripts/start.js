@@ -2,45 +2,63 @@ process.env.NODE_ENV = 'development';
 
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
+const { blue, underline } = require('chalk');
 
 const dynamicRouteMiddleware = require('../lib/dynamicRouteMiddleware');
+const allocatePort = require('../lib/allocatePort');
 const { hosts, port, initialPath, paths, routes } = require('../context');
-const webpackCompiler = require('../config/webpack/webpack.compiler');
+const makeWebpackConfig = require('../config/webpack/webpack.config');
 
-const dynamicRoutes = routes
-  .filter(({ route }) => /\:/.test(route))
-  .map(({ route }) => route);
+const localhost = '0.0.0.0';
 
-const devServer = new WebpackDevServer(webpackCompiler, {
-  contentBase: paths.public,
-  overlay: true,
-  stats: 'errors-only',
-  allowedHosts: hosts,
-  after: (app, server) => {
-    app.get(
-      '*',
-      dynamicRouteMiddleware({
-        dynamicRoutes,
-        fs: server.middleware.fileSystem,
-        rootDirectory: paths.target
-      })
-    );
-  }
-});
+(async () => {
+  const availablePort = await allocatePort({
+    port: port.client,
+    host: localhost
+  });
 
-devServer.listen(port.client, '0.0.0.0', err => {
-  if (err) {
-    console.log(err);
-    return;
-  }
+  const dynamicRoutes = routes
+    .filter(({ route }) => /\:/.test(route))
+    .map(({ route }) => route);
 
-  const url = `http://${hosts[0]}:${port.client}${initialPath}`;
+  const webpackCompiler = webpack(
+    makeWebpackConfig({
+      port: availablePort
+    })
+  );
 
-  console.log();
-  console.log(`Starting the development server on ${url}...`);
-  console.log();
+  const devServer = new WebpackDevServer(webpackCompiler, {
+    contentBase: paths.public,
+    overlay: true,
+    stats: 'errors-only',
+    allowedHosts: hosts,
+    after: (app, server) => {
+      app.get(
+        '*',
+        dynamicRouteMiddleware({
+          dynamicRoutes,
+          fs: server.middleware.fileSystem,
+          rootDirectory: paths.target
+        })
+      );
+    }
+  });
 
-  if (process.env.OPEN_TAB !== 'false') {
-    opn(url);
-  }
-});
+  devServer.listen(availablePort, localhost, err => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const url = `http://${hosts[0]}:${availablePort}${initialPath}`;
+
+    console.log();
+    console.log(blue(`Starting the development server on ${underline(url)}`));
+    console.log();
+
+    if (process.env.OPEN_TAB !== 'false') {
+      opn(url);
+    }
+  });
+})();

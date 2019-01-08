@@ -44,9 +44,9 @@ Object {
 exports[`multiple-entries build should generate the expected files 1`] = `
 Object {
   "4-7e4ff1570234ffafe170.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "details-5400d2a9f136d75fc740.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "details-6c8d7afb3c7b045262fd.css": "._91MnZhe{color:blue}
+  "details-0e82719ea3ab71aafb06.css": "._91MnZhe{color:#00f}
 ",
+  "details-5400d2a9f136d75fc740.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
 ",
   "home-ea5778798875a49dba7a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -59,7 +59,7 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-6c8d7afb3c7b045262fd.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-0e82719ea3ab71aafb06.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->au<!-- -->loading...</h1></div>
@@ -95,7 +95,7 @@ Object {
     <script>
       window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
     </script>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-6c8d7afb3c7b045262fd.css\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4004/details-0e82719ea3ab71aafb06.css\\" />
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\" data-reactroot=\\"\\">Welcome to the Details page - <!-- -->nz<!-- -->loading...</h1></div>

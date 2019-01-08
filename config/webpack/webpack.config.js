@@ -5,6 +5,7 @@ const lodash = require('lodash');
 
 const args = require('../args');
 const config = require('../../context');
+const createHtmlRenderPlugin = require('./plugins/createHtmlRenderPlugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
@@ -26,6 +27,9 @@ const {
 } = config;
 
 const webpackMode = utils.isProductionBuild ? 'production' : 'development';
+
+const renderHtml = !isLibrary || isStartScript;
+const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
 const envVars = lodash
   .chain(env)
@@ -194,8 +198,9 @@ const buildWebpackConfigs = [
       ]
     },
     plugins: [
-      new webpack.DefinePlugin(envVars),
+      ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
       ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
+      new webpack.DefinePlugin(envVars),
       new MiniCssExtractPlugin({
         filename: cssFileMask,
         chunkFilename: cssFileMask
@@ -280,6 +285,7 @@ const buildWebpackConfigs = [
       ]
     },
     plugins: [
+      ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
       new webpack.DefinePlugin(envVars),
       new webpack.DefinePlugin({
         SKU_LIBRARY_NAME: JSON.stringify(libraryName)

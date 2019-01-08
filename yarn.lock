@@ -6972,7 +6972,7 @@ html-minifier@^3.5.20:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-html-render-webpack-plugin@^1.0.3:
+html-render-webpack-plugin@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-1.1.1.tgz#9982fe8e495bf22e56452eed41726915c8b21d81"
   integrity sha512-LolCHpVK9F5WJZ41231cHO8cHajboTakh+Ys8O7vS7waY0bjxtkwvUDA7phF0NJkmXRW9VAgkBWmVWnWA1Mluw==

@@ -9,13 +9,15 @@ const {
   cleanTargetDirectory,
   ensureTargetDirectory
 } = require('../lib/buildFileUtils');
-const [
-  clientConfig,
-  serverConfig
-] = require('../config/webpack/webpack.config.ssr');
+const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
+const { port } = require('../context');
 
 (async () => {
   try {
+    const [clientConfig, serverConfig] = makeWebpackConfig({
+      clientPort: port.client,
+      serverPort: port.server
+    });
     await ensureTargetDirectory();
     await cleanTargetDirectory();
     await run(webpack(clientConfig));

@@ -2,21 +2,22 @@
 process.env.NODE_ENV = 'production';
 
 const { green, red } = require('chalk');
+const webpack = require('webpack');
+
 const {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
   cleanRenderJs
 } = require('../lib/buildFileUtils');
-
 const { run } = require('../lib/runWebpack');
-const webpackCompiler = require('../config/webpack/webpack.compiler');
+const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 (async () => {
   try {
     await ensureTargetDirectory();
     await cleanTargetDirectory();
-    await run(webpackCompiler);
+    await run(webpack(makeWebpackConfig()));
     await cleanRenderJs();
     await copyPublicFiles();
     console.log(green('Sku build complete!'));

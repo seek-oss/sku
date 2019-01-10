@@ -3185,15 +3185,14 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.2.tgz#0f61e0a3829ef38716869c21d39bfbaa900115f9"
-  integrity sha512-RrmNdWDz1XoR/DuhQPFh5xSGmQ9KLl7QgjOr4Lg1FWECN1meOfllX8lf55A8ebyNZjVzj692Ft/VFBZwUsMpkg==
+braid-design-system@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.23.tgz#2355f36632f8e6fd6feb69e57f2ed0f30d6cf634"
+  integrity sha512-8T0lxNmhPZ+zCai0KzDgwfdIUtkSuvkJLD3G+wZ5uTH7+j8ROw0ACR1sad/3dsx+65WdETpNAFT4QClDfgderQ==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.6"
     prop-types "^15.6.2"
-    react "^16.5.2"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -11937,7 +11936,7 @@ react-treebeard@^3.1.0:
     shallowequal "^1.1.0"
     velocity-react "^1.4.1"
 
-react@^16.4.2, react@^16.5.2, react@^16.6.3:
+react@^16.4.2, react@^16.6.3:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
@@ -12700,10 +12699,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@6.21.2:
-  version "6.21.2"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.21.2.tgz#c1b0a87e7516ba2fc1bbe97510a8f6f08e9d6e67"
-  integrity sha512-/eB5+f1ui5aqtPwoFap86sYxH/ZsAI+ZfK36BhFV/M2p3gYQTRhzIamIcxYUuwrxIiqmP5Q+Pr+2g1rFyJ3Qrg==
+seek-asia-style-guide@6.22.0:
+  version "6.22.0"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.22.0.tgz#1b7832e1e1ece9090abe20a281404a76849c4d08"
+  integrity sha512-TLxQp7YClBdBj5f5lhssACdv5OqQnG86otXVfYpznosWZub0D/Gg9ZM/B3YhWvooTK26wGpDzDD052caxES9jg==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"

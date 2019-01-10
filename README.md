@@ -343,7 +343,7 @@ Any `node_modules` passed into this option will be compiled through webpack as i
 
 ### Building a Library
 
-If you need to build a UMD library instead of a web site, you can provide a `library` entry and `libraryName` option instead:
+If you need to build a UMD library instead of a web site, you can provide a `libraryEntry` and `libraryName` option instead:
 
 ```js
 modules.exports = {

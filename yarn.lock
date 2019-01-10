@@ -5367,15 +5367,16 @@ eslint-config-prettier@^3.1.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-seek@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-3.2.1.tgz#299aeffeb810be2242781a8263430b10c9592e3c"
-  integrity sha512-P6FZ+P5QnwjEUsOk+3EVpR9pI7qD+nuAy7fNC9AHsVcyI4o5gscRFTd3UdJDypqyC8o2leJaRYKO/zq363t44g==
+eslint-config-seek@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-4.0.0.tgz#f7da57b23bd55c3fd9ec6422b32c0c81f1c9fef6"
+  integrity sha512-e7INSNysUTawem6DzGKLOQ0QpwVYYIhNQ606ue8S/1diBsCUenIg5KVts+xECHo6ULC0FMApRzLIQIIxKVD0YQ==
   dependencies:
     babel-eslint "^10.0.1"
     eslint-config-prettier "^3.1.0"
     eslint-import-resolver-node "^0.3.2"
     eslint-plugin-css-modules "^2.9.1"
+    eslint-plugin-cypress "^2.2.0"
     eslint-plugin-flowtype "^3.0.0"
     eslint-plugin-import "^2.14.0"
     eslint-plugin-react "^7.11.1"
@@ -5406,6 +5407,13 @@ eslint-plugin-css-modules@^2.9.1:
   dependencies:
     gonzales-pe "^4.0.3"
     lodash "^4.17.2"
+
+eslint-plugin-cypress@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.2.0.tgz#31f23bec82eb4078711b374af66af3daa9fdbd2e"
+  integrity sha512-Xk1DMXPfnSChpNhQPw8E9lfRUse9nSyPccxMbKlOuwCmTm2fhyNQWfulDr9DDgUL1Xetdub5lnYQkKniHjNbYw==
+  dependencies:
+    globals "^11.0.1"
 
 eslint-plugin-flowtype@^3.0.0:
   version "3.2.0"

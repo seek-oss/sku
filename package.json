@@ -170,6 +170,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
+    "renovate-config-seek": "^0.4.0",
     "seek-asia-style-guide": "6.21.2",
     "seek-style-guide": "38.9.1",
     "semantic-release": "^15.10.8",

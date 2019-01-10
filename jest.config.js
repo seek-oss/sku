@@ -8,5 +8,9 @@ module.exports = {
   testURL: 'http://localhost',
   testMatch: ['**/*.test.js'],
   testPathIgnorePatterns: ['test/.*/src'],
-  preset: 'jest-puppeteer'
+  preset: 'jest-puppeteer',
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname'
+  ]
 };

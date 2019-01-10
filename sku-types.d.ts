@@ -1,9 +1,18 @@
+import { Stats } from 'webpack';
+
 interface RenderAppProps {
+  routeName: string;
+  route: string;
   environment: string;
   site: string;
+  libraryName: string;
+  webpackStats: {
+    stats: Stats[];
+    hash: string;
+  };
 }
 
-interface renderDocumentProps<T> extends RenderAppProps {
+interface RenderDocumentProps<T> extends RenderAppProps {
   app: T;
   headTags: string;
   bodyTags: string;
@@ -12,5 +21,5 @@ interface renderDocumentProps<T> extends RenderAppProps {
 export interface Render<T = string> {
   renderApp(p: RenderAppProps): T;
 
-  renderDocument(p: renderDocumentProps<T>): string;
+  renderDocument(p: RenderDocumentProps<T>): string;
 }

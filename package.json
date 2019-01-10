@@ -118,6 +118,7 @@
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^6.0.0",
     "jest": "^23.4.2",
+    "jest-watch-typeahead": "^0.2.0",
     "kopy": "^8.3.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",

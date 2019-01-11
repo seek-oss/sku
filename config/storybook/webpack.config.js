@@ -3,9 +3,9 @@ const { paths } = require('../../context');
 const find = require('lodash/find');
 const webpackMerge = require('webpack-merge');
 
-const webpackConfigs = require('../webpack/webpack.config');
+const makeWebpackConfig = require('../webpack/webpack.config');
 const clientWebpackConfig = find(
-  webpackConfigs,
+  makeWebpackConfig(),
   config => config.name === 'client'
 );
 

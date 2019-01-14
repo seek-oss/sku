@@ -1,6 +1,7 @@
-const { supportedBrowsers } = require('../../../context');
+const { supportedBrowsers, paths } = require('../../../context');
 const { isProductionBuild, isCI } = require('./env');
 const isTypeScript = require('../../../lib/isTypeScript');
+const { resolvePackage } = require('./resolvePackage');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
@@ -19,7 +20,13 @@ const makeJsLoaders = ({ target, lang }) => [
 ];
 
 const makeCssLoaders = (options = {}) => {
-  const { server = false, packageName = '', js = false, hot = false } = options;
+  const {
+    server = false,
+    packageName = '',
+    js = false,
+    hot = false,
+    compilePackage = false
+  } = options;
 
   const debugIdent = isProductionBuild
     ? ''
@@ -34,8 +41,9 @@ const makeCssLoaders = (options = {}) => {
 
   // Apply css-modules-typescript-loader for client builds only as
   // we only need to generate type declarations once.
+  // Also, ignore compile packages as the types can't be committed
   const cssModuleToTypeScriptLoader =
-    isTypeScript() && !server
+    isTypeScript() && !server && !compilePackage
       ? [
           {
             loader: require.resolve('css-modules-typescript-loader'),
@@ -79,6 +87,21 @@ const makeCssLoaders = (options = {}) => {
   ];
 };
 
+const makeCssOneOf = (loaderOptions = {}) => [
+  ...paths.compilePackages.map(packageName => ({
+    include: resolvePackage(packageName),
+    use: makeCssLoaders({
+      packageName,
+      compilePackage: true,
+      ...loaderOptions
+    })
+  })),
+  {
+    exclude: /node_modules/,
+    use: makeCssLoaders(loaderOptions)
+  }
+];
+
 const makeImageLoaders = (options = {}) => {
   const { server = false } = options;
 
@@ -121,5 +144,6 @@ module.exports = {
   makeJsLoaders,
   makeCssLoaders,
   makeImageLoaders,
-  makeSvgLoaders
+  makeSvgLoaders,
+  makeCssOneOf
 };

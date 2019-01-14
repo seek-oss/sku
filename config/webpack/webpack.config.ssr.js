@@ -155,34 +155,20 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
             ]
           },
           {
-            test: /\.css\.js$/,
-            use: utils.makeCssLoaders({
-              js: true,
-              hot: isStartScript
-            })
-          },
-          {
             test: /\.mjs$/,
             include: /node_modules/,
             type: 'javascript/auto'
           },
           {
+            test: /\.css\.js$/,
+            oneOf: utils.makeCssOneOf({
+              js: true,
+              hot: isStartScript
+            })
+          },
+          {
             test: /\.less$/,
-            oneOf: [
-              ...paths.compilePackages.map(packageName => ({
-                include: utils.resolvePackage(packageName),
-                use: utils.makeCssLoaders({
-                  packageName,
-                  hot: isStartScript
-                })
-              })),
-              {
-                exclude: /node_modules/,
-                use: utils.makeCssLoaders({
-                  hot: isStartScript
-                })
-              }
-            ]
+            oneOf: utils.makeCssOneOf({ hot: isStartScript })
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -268,26 +254,17 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
             use: utils.makeJsLoaders({ target: 'node' })
           },
           {
-            test: /\.css\.js$/,
-            use: utils.makeCssLoaders({ server: true, js: true })
-          },
-          {
             test: /\.mjs$/,
             include: /node_modules/,
             type: 'javascript/auto'
           },
           {
+            test: /\.css\.js$/,
+            oneOf: utils.makeCssOneOf({ server: true, js: true })
+          },
+          {
             test: /\.less$/,
-            oneOf: [
-              ...paths.compilePackages.map(packageName => ({
-                include: utils.resolvePackage(packageName),
-                use: utils.makeCssLoaders({ server: true, packageName })
-              })),
-              {
-                exclude: /node_modules/,
-                use: utils.makeCssLoaders({ server: true })
-              }
-            ]
+            oneOf: utils.makeCssOneOf({ server: true })
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],

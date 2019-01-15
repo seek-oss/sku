@@ -26,10 +26,10 @@ const {
 } = config;
 
 // port is only required for dev builds
-const makeWebpackConfig = ({ port = 0 } = {}) => {
+const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   const webpackMode = utils.isProductionBuild ? 'production' : 'development';
 
-  const renderHtml = !isLibrary || isStartScript;
+  const renderHtml = isLibrary ? isStartScript : !isStorybook;
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash

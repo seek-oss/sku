@@ -1,6 +1,6 @@
 import http from 'http';
 import app from './server';
-const port = process.env.SKU_PORT || 8080;
+const port = process.env.SKU_PORT || __SKU_DEFAULT_SERVER_PORT__; // eslint-disable-line no-undef
 
 if (module.hot) {
   const server = http.createServer(app);

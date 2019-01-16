@@ -45,7 +45,6 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       return JSON.stringify(valueForEnv);
     })
     .set('SKU_ENV', JSON.stringify(args.env))
-    .set('SKU_PORT', JSON.stringify(serverPort))
     .mapKeys((value, key) => `process.env.${key}`)
     .value();
 
@@ -279,6 +278,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       plugins: [
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
+          __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
         })
       ].concat(

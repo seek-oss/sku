@@ -65,7 +65,7 @@ module.exports = {
   hosts: skuConfig.hosts,
   port: {
     client: skuConfig.port,
-    server: skuConfig.serverPort
+    server: parseInt(process.env.SKU_PORT, 10) || skuConfig.serverPort
   },
   libraryName: skuConfig.libraryName,
   isLibrary: Boolean(skuConfig.libraryEntry),

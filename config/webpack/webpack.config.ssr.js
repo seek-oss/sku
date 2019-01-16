@@ -67,12 +67,10 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   ];
 
   // Add polyfills and dev server client to all entries
-  const clientEntries = lodash.mapValues(
-    paths.clientEntries,
-    entry =>
-      isStartScript
-        ? [...resolvedPolyfills, ...clientDevServerEntries, entry]
-        : [...resolvedPolyfills, entry]
+  const clientEntries = lodash.mapValues(paths.clientEntries, entry =>
+    isStartScript
+      ? [...resolvedPolyfills, ...clientDevServerEntries, entry]
+      : [...resolvedPolyfills, entry]
   );
 
   const serverDevServerEntries = [

@@ -4,6 +4,11 @@ import jsStyles from './jsStyles.css.js';
 
 export default () => (
   <div className={`${lessStyles.root} ${jsStyles.root}`}>
-    <div className={`${lessStyles.nested} ${jsStyles.nested}`}>Hello World</div>
+    <div
+      className={`${lessStyles.nested} ${jsStyles.nested}`}
+      data-automation-text
+    >
+      Hello World
+    </div>
   </div>
 );

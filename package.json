@@ -139,6 +139,7 @@
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "traverse": "^0.6.6",
+    "tree-kill": "^1.2.1",
     "tslint": "^5.11.0",
     "tslint-config-seek": "^1.0.0",
     "typescript": "^3.1.5",

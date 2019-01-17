@@ -5,7 +5,7 @@ const webpackMerge = require('webpack-merge');
 
 const makeWebpackConfig = require('../webpack/webpack.config');
 const clientWebpackConfig = find(
-  makeWebpackConfig(),
+  makeWebpackConfig({ isStorybook: true }),
   config => config.name === 'client'
 );
 

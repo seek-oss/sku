@@ -94,7 +94,6 @@
     "command-line-args": "^4.0.7",
     "cross-spawn": "^6.0.5",
     "css-hot-loader": "^1.4.2",
-    "css-in-js-loader": "^0.1.2",
     "css-loader": "^2.1.0",
     "css-modules-typescript-loader": "^1.0.0",
     "cssnano": "^4.1.8",

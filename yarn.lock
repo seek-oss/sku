@@ -12766,10 +12766,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@6.22.0:
-  version "6.22.0"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.22.0.tgz#1b7832e1e1ece9090abe20a281404a76849c4d08"
-  integrity sha512-TLxQp7YClBdBj5f5lhssACdv5OqQnG86otXVfYpznosWZub0D/Gg9ZM/B3YhWvooTK26wGpDzDD052caxES9jg==
+seek-asia-style-guide@6.25.0:
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.25.0.tgz#0d8bc2363920559bf13212ed7854c8d35a8d078e"
+  integrity sha512-Rn3V4heAiiIYpw2wVJHtMVZXe4g4mfXJOPYfDyNj/Wtw1ilqQhHcGTcMzQAJKgG72f/fFQqguW6uLs4hECnW/A==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"

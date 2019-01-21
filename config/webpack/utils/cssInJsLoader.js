@@ -1,4 +1,5 @@
 /* eslint-disable */
+// Original source: https://github.com/naistran/css-in-js-loader/blob/master/index.js
 var path = require('path');
 var fs = require('fs');
 var postcss = require('postcss');

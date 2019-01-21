@@ -1,6 +1,6 @@
 const { promisify } = require('util');
 const readFilesAsync = promisify(require('node-dir').readFiles);
-const { relative, extname } = require('path');
+const { relative } = require('path');
 
 module.exports = async (dirname, includeExtensions) => {
   const files = {};
@@ -14,7 +14,7 @@ module.exports = async (dirname, includeExtensions) => {
 
     if (
       !includeExtensions ||
-      includeExtensions.includes(extname(relativeFilePath))
+      includeExtensions.filter(ext => relativeFilePath.endsWith(ext)).length > 0
     ) {
       files[relativeFilePath] = /\.js$/.test(relativeFilePath)
         ? 'CONTENTS IGNORED IN SNAPSHOT TEST'

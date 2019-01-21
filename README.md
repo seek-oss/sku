@@ -177,6 +177,10 @@ module.exports = {
 };
 ```
 
+### Bundle Analysis
+
+`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.
+
 ### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
 
 Without any special setup, sku is pre-configured for the SEEK Style Guide. Just start importing components as needed and everything should just work out of the box.
@@ -419,10 +423,6 @@ Last but not least, please note that commands for SSR are different to the ones 
 - Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.
 - Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
 - Use `sku test-ssr` to test your application
-
-## Bundle Analysis
-
-`sku` comes with bundle analysis built in. A report is generated in the `/report` directory when `sku build` is run.
 
 ## Contributing
 

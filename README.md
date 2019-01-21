@@ -420,6 +420,10 @@ Last but not least, please note that commands for SSR are different to the ones 
 - Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
 - Use `sku test-ssr` to test your application
 
+## Bundle Analysis
+
+`sku` comes with bundle analysis built in. A report is generated in the `/report` directory when `sku build` is run.
+
 ## Contributing
 
 Refer to [CONTRIBUTING.md](./CONTRIBUTING.md). If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/seek-style-guide/issues/new) and follow the provided RFC template in the [GitHub issue template](.github/ISSUE_TEMPLATE.md).

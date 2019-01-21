@@ -4,10 +4,6 @@ const waitForUrls = require('../../utils/waitForUrls');
 const getAppSnapshot = require('../../utils/getAppSnapshot');
 
 describe('zero-config', () => {
-  beforeAll(async () => {
-    await runSkuScriptInDir('configure', __dirname);
-  });
-
   describe('start', () => {
     const devServerUrl = `http://localhost:8080`;
     let server;

@@ -1,6 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ssr-hello-world build should generate a production server 1`] = `
+exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
+Object {
+  "content": "<!DOCTYPE html><html><head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
+    </head>
+    <body>
+      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-f458c5df036adcdc2f23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~main-0bb0c98b3b5b72ceaad1.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/main-233d8ccf226a6fd304a1.js\\" crossorigin=\\"anonymous\\"></script>
+    
+  
+</body></html>",
+  "errors": Array [],
+  "sourceHtml": "
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset=\\"UTF-8\\">
+      <title>hello-world</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" />
+    </head>
+    <body>
+      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+      <script type=\\"text/javascript\\" src=\\"http://localhost:4000/runtime-f458c5df036adcdc2f23.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/vendors~main-0bb0c98b3b5b72ceaad1.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"http://localhost:4000/main-233d8ccf226a6fd304a1.js\\" crossorigin=\\"anonymous\\"></script>
+    </body>
+  </html>
+",
+  "warnings": Array [],
+}
+`;
+
+exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 Object {
   "content": "<!DOCTYPE html><html><head>
       <meta charset=\\"UTF-8\\">

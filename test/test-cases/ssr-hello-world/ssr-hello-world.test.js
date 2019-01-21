@@ -37,30 +37,64 @@ describe('ssr-hello-world', () => {
 
   describe('build', () => {
     const { backendUrl, targetDirectory } = getTestConfig(skuBuildConfig);
-    let server, closeAssetServer;
+    let closeAssetServer;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', __dirname, [
         '--config=sku-build.config.js'
       ]);
 
-      server = gracefulSpawn('node', ['server'], {
-        cwd: targetDirectory,
-        stdio: 'inherit'
-      });
       closeAssetServer = startAssetServer(4000, targetDirectory);
 
-      await waitForUrls(backendUrl, 'http://localhost:4000');
+      await waitForUrls('http://localhost:4000');
     });
 
     afterAll(() => {
-      server.kill();
       closeAssetServer();
     });
 
-    it('should generate a production server', async () => {
-      const snapshot = await getAppSnapshot(backendUrl);
-      expect(snapshot).toMatchSnapshot();
+    describe('default port', () => {
+      let server;
+
+      beforeAll(async () => {
+        server = gracefulSpawn('node', ['server'], {
+          cwd: targetDirectory,
+          stdio: 'inherit'
+        });
+        await waitForUrls(backendUrl);
+      });
+
+      afterAll(() => {
+        server.kill();
+      });
+
+      it('should generate a production server based on config', async () => {
+        const snapshot = await getAppSnapshot(backendUrl);
+        expect(snapshot).toMatchSnapshot();
+      });
+    });
+
+    describe('custom port', () => {
+      const customPort = 7654;
+      const customPortUrl = `http://localhost:${customPort}`;
+      let server;
+
+      beforeAll(async () => {
+        server = gracefulSpawn('node', ['server', '--port', customPort], {
+          cwd: targetDirectory,
+          stdio: 'inherit'
+        });
+        await waitForUrls(customPortUrl);
+      });
+
+      afterAll(() => {
+        server.kill();
+      });
+
+      it('should generate a production server running on custom port', async () => {
+        const snapshot = await getAppSnapshot(customPortUrl);
+        expect(snapshot).toMatchSnapshot();
+      });
     });
   });
 });

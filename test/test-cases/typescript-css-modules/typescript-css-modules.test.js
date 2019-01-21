@@ -13,10 +13,6 @@ const skuConfig = require('./app/sku.config');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 
 describe('typescript-css-modules', () => {
-  beforeAll(async () => {
-    await runSkuScriptInDir('configure', appDir);
-  });
-
   describe('build', () => {
     let closeAssetServer;
 

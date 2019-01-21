@@ -3213,7 +3213,7 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@0.0.23:
+braid-design-system@^0.0.23:
   version "0.0.23"
   resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.23.tgz#2355f36632f8e6fd6feb69e57f2ed0f30d6cf634"
   integrity sha512-8T0lxNmhPZ+zCai0KzDgwfdIUtkSuvkJLD3G+wZ5uTH7+j8ROw0ACR1sad/3dsx+65WdETpNAFT4QClDfgderQ==
@@ -12761,10 +12761,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@6.25.0:
-  version "6.25.0"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.25.0.tgz#0d8bc2363920559bf13212ed7854c8d35a8d078e"
-  integrity sha512-Rn3V4heAiiIYpw2wVJHtMVZXe4g4mfXJOPYfDyNj/Wtw1ilqQhHcGTcMzQAJKgG72f/fFQqguW6uLs4hECnW/A==
+seek-asia-style-guide@^6.25.0:
+  version "6.25.1"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.25.1.tgz#d6dfaa4048f46b9dc45858bbfaabed50d50555dd"
+  integrity sha512-FHk/f4QwKbm7Y+LNbC2ici1wKEiGbPAlH38NBnwrdNWxAEsebj4tr4DjQy6QEgnNWLp7jQaa7yMeCSe/uyxY0w==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"
@@ -12783,7 +12783,7 @@ seek-asia-style-guide@6.25.0:
     react-tabs "^2.2.2"
     webfontloader "^1.6.28"
 
-seek-style-guide@38.9.2:
+seek-style-guide@^38.9.2:
   version "38.9.2"
   resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-38.9.2.tgz#a96d05753ad3667b38517bac52c197ff3ede6c1f"
   integrity sha512-R39Bw3D6ILbiFRjtWWpVZO8Xl0zu4GzLQANFyQyAx7WOVt75qpKOu8HJ1tES6dei4U06iZR8JNaMHMxyE7Bs4w==

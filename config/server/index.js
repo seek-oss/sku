@@ -1,6 +1,18 @@
 import http from 'http';
+import commandLineArgs from 'command-line-args';
 import app from './server';
-const port = process.env.SKU_PORT || 8080;
+
+const { port } = commandLineArgs(
+  [
+    {
+      name: 'port',
+      alias: 'p',
+      type: Number,
+      defaultValue: __SKU_DEFAULT_SERVER_PORT__ // eslint-disable-line no-undef
+    }
+  ],
+  { partial: true }
+);
 
 if (module.hot) {
   const server = http.createServer(app);

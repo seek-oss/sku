@@ -17,7 +17,7 @@ Object {
   <body>
     <div id=\\"app\\"><div class=\\"_3lc311G _1JLPkaJ _1mZMC-p mT50rPc _1HfGs1a _28lA_OY _2nLlR-z _2dPpu8E _3k5ze2u _2oY7eBs\\">Hello World</div></div>
     <script type=\\"text/javascript\\" src=\\"https://somecdn.com/runtime-fbd8cfd5228030d42f19.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"https://somecdn.com/vendors~main-d2e750526e6d76f0c162.js\\" crossorigin=\\"anonymous\\"></script>
+<script type=\\"text/javascript\\" src=\\"https://somecdn.com/vendors~main-f94223839d905215ea24.js\\" crossorigin=\\"anonymous\\"></script>
 <script type=\\"text/javascript\\" src=\\"https://somecdn.com/main-28be2104758b3d6058d3.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
@@ -115,6 +115,6 @@ Object {
 ._2dPpu8E{box-sizing:border-box}
 ._3lc311G{display:block}._1CaVPtc{display:list-item;list-style:disc}
 ",
-  "vendors~main-d2e750526e6d76f0c162.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-f94223839d905215ea24.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

@@ -9,8 +9,17 @@ if (debug) {
   process.env.DEBUG = 'sku:*';
 }
 
+const runScript = scriptName => {
+  require(`../scripts/${scriptName}`);
+};
+
 switch (script) {
   case 'init':
+  case 'configure': {
+    runScript(script);
+    break;
+  }
+
   case 'test':
   case 'test-ssr':
   case 'build':
@@ -20,10 +29,9 @@ switch (script) {
   case 'start':
   case 'start-ssr':
   case 'storybook':
-  case 'chromatic':
-  case 'configure': {
-    const scriptPath = require.resolve(`../scripts/${script}`);
-    require(scriptPath);
+  case 'chromatic': {
+    runScript('configure');
+    runScript(script);
     break;
   }
   default: {

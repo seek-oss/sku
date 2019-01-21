@@ -177,6 +177,10 @@ module.exports = {
 };
 ```
 
+### Bundle Analysis
+
+`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.
+
 ### [SEEK Style Guide](https://github.com/seek-oss/seek-style-guide) Support
 
 Without any special setup, sku is pre-configured for the SEEK Style Guide. Just start importing components as needed and everything should just work out of the box.

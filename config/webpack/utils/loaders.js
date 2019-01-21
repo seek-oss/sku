@@ -35,7 +35,7 @@ const makeCssLoaders = (options = {}) => {
       }[name]__[local]___`;
 
   const cssInJsLoaders = [
-    { loader: require.resolve('css-in-js-loader') },
+    { loader: require.resolve('./cssInJsLoader') },
     ...makeJsLoaders({ target: 'node' })
   ];
 

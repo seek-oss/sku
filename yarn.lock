@@ -4384,11 +4384,6 @@ css-hot-loader@^1.4.2:
     lodash "^4.17.5"
     normalize-url "^1.9.1"
 
-css-in-js-loader@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/css-in-js-loader/-/css-in-js-loader-0.1.2.tgz#ea7f23eb279f6b5ec2fee784c6c05ca76b11d99e"
-  integrity sha1-6n8j6yefa17C/ueExsBcp2sR2Z4=
-
 css-loader@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-1.0.1.tgz#6885bb5233b35ec47b006057da01cc640b6b79fe"

@@ -3213,14 +3213,14 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.23.tgz#2355f36632f8e6fd6feb69e57f2ed0f30d6cf634"
-  integrity sha512-8T0lxNmhPZ+zCai0KzDgwfdIUtkSuvkJLD3G+wZ5uTH7+j8ROw0ACR1sad/3dsx+65WdETpNAFT4QClDfgderQ==
+braid-design-system@0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.24.tgz#636a85c0ee7b4988df7704cb7bd0dfe3d1e8a34c"
+  integrity sha512-UhbyJAOA6i89Izx3tb4WHzwi8XCZM0FRTYRCHe7CSXeSJd+2OOB0pwLUUnvm0wXpMcPAQLjgtNrHq2Z+L5owIA==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.6"
-    prop-types "^15.6.2"
+    utility-types "^3.2.1"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -14519,6 +14519,11 @@ utila@^0.4.0, utila@~0.4:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
+
+utility-types@^3.2.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.4.1.tgz#3caa1d207eac873f989bf8c92cf3e8c539045c61"
+  integrity sha512-GyH068kJf7c4vhfqj4aCM5X+TeV8jG2iPFLimpGpnQ7dvKfogZOHfiYxMww/nGEfMm/bEmnVbeZGO1see1OVKg==
 
 utils-merge@1.0.1:
   version "1.0.1"

@@ -60,8 +60,6 @@ Lots of packages support macros, and their documentation is best place to look f
 
 TypeScript files (`.ts` and `.tsx`) are supported as part of your source code. You can also mix JavaScript with TypeScript allowing you to slowly convert your project to TypeScript over time. The `sku lint` script will report any type errors in your code.
 
-Note: Test files do not support TypeScript.
-
 ### Locally Scoped CSS (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
 
 Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.

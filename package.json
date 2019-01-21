@@ -75,6 +75,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@storybook/react": "^4.0.0-alpha.24",
+    "@types/jest": "^23.3.13",
     "@types/webpack": "^4.4.22",
     "assets-webpack-plugin": "^3.9.7",
     "autoprefixer": "^9.4.5",

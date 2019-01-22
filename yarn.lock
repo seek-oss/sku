@@ -365,6 +365,13 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
+"@babel/plugin-syntax-dynamic-import@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.2.0.tgz#69c159ffaf4998122161ad8ebc5e6d1f55df8612"
+  integrity sha512-mVxuJ0YroI/h/tbFTPGZR8cv6ai+STMKNBq0f8hFxsxWjl94qqhsb+wXbpNMDPU3cfR1TIsVFzU3nXyZMqyK4w==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
 "@babel/plugin-syntax-flow@^7.0.0", "@babel/plugin-syntax-flow@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.2.0.tgz#a765f061f803bc48f240c26f8747faf97c26bf7c"
@@ -1174,6 +1181,27 @@
     log-symbols "^1.0.2"
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
+
+"@loadable/babel-plugin@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.2.2.tgz#448f21ce984cee827a7bd4ce7c625c343c3b12e6"
+  integrity sha512-gTi0ZXI4s/Nwdr25PyyPQfe465eMM30AtQqMmJU2cSfB9bRHNAtKb666W3ZccgmL35LV4Px3qTo5hYC6OyGzNg==
+  dependencies:
+    "@babel/plugin-syntax-dynamic-import" "^7.2.0"
+
+"@loadable/component@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.2.2.tgz#64db5fb1e93d6bc93596947336283979f055d5d2"
+  integrity sha512-trM/wBZbD1kL5CdBOD8pxbVZeKoycrb+qJs3FqKezUnzm6RTmYNYFYYDDzzapH9rc60/rPJYVXa9IP0TJF6Q6A==
+  dependencies:
+    hoist-non-react-statics "^3.2.1"
+
+"@loadable/server@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.4.0.tgz#c7056761132539449043eac26a7222a95fae0f7a"
+  integrity sha512-avDnUn0f+TqS+KSQddbHDgwzhX/A9rJQekBNRObaVAGudyMBtWMikSs4ISegS4lxYwCBr0NNzzDWvEdoyRlbTw==
+  dependencies:
+    lodash "^4.17.11"
 
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
@@ -6956,6 +6984,13 @@ hoist-non-react-statics@1.x.x, hoist-non-react-statics@^1.2.0:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
   integrity sha1-qkSM8JhtVcxAdzsXF0t90GbLfPs=
 
+hoist-non-react-statics@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.1.tgz#c09c0555c84b38a7ede6912b61efddafd6e75e1e"
+  integrity sha512-TFsu3TV3YLY+zFTZDrN8L2DTFanObwmBLpWvJs1qfUuEQ5bTAdFcwfx2T/bsCXfM9QHSLvjfP+nihEl0yvozxw==
+  dependencies:
+    react-is "^16.3.2"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -11900,6 +11935,11 @@ react-inspector@^2.3.0:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
     prop-types "^15.6.1"
+
+react-is@^16.3.2:
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
+  integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
 
 react-isolated-scroll@^0.1.1:
   version "0.1.1"

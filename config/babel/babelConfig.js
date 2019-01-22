@@ -28,13 +28,14 @@ module.exports = ({ target, lang = 'js' }) => {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
       }
     ],
-    require.resolve('babel-plugin-macros')
+    require.resolve('babel-plugin-macros'),
+    require.resolve('@loadable/babel-plugin')
   ];
 
   if (isBrowser) {
     plugins.push(require.resolve('babel-plugin-seek-style-guide'));
   } else {
-    plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
+    // plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
   if (process.env.NODE_ENV === 'production') {

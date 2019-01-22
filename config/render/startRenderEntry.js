@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+import makeExtractor from './makeExtractor';
 
 // '__sku_alias__renderEntry' is a webpack alias
 // pointing to the consuming apps render entry
@@ -9,19 +10,23 @@ import config from './startConfig.json';
 
 const libraryName = SKU_LIBRARY_NAME; // eslint-disable-line no-undef
 
-export default async ({ headTags, bodyTags, ...renderContext }) => {
+export default async renderParams => {
   let app;
-  const renderParams = { ...renderContext, ...config, libraryName };
+  const renderContext = { ...renderParams, ...config, libraryName };
+
+  const { SkuProvider, getScriptTags, getStyleTags } = makeExtractor(
+    renderParams.webpackStats
+  );
 
   // renderApp is optional for libraries
   if (render.renderApp) {
-    app = await render.renderApp(renderParams);
+    app = await render.renderApp({ ...renderContext, SkuProvider });
   }
 
   const result = await render.renderDocument({
-    headTags,
-    bodyTags,
-    ...renderParams,
+    ...renderContext,
+    headTags: getStyleTags(),
+    bodyTags: getScriptTags(),
     app
   });
 

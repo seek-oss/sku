@@ -1,9 +1,41 @@
 import React from 'react';
-import { seekAnz } from 'braid-design-system/lib/themes';
-import { ThemeProvider, Text } from 'braid-design-system';
+import loadable from '@loadable/component';
 
-export default () => (
-  <ThemeProvider theme={seekAnz}>
-    <Text>Hello World</Text>
-  </ThemeProvider>
+import {
+  ThemeProvider,
+  Text,
+  Checkbox,
+  ChecklistCard
+} from 'braid-design-system';
+
+const Theme = loadable.lib(({ themeName }) => import(`./themes/${themeName}`));
+
+export default ({ theme: themeName }) => (
+  <Theme themeName={themeName}>
+    {({ default: theme }) => (
+      <ThemeProvider theme={theme}>
+        <Text>Hello {themeName}</Text>
+        <ChecklistCard>
+          <Checkbox
+            checked={false}
+            id="id_1"
+            label="This is a checkbox"
+            message={false}
+          />
+          <Checkbox
+            checked={false}
+            id="id_2"
+            label="This is a checkbox"
+            message={false}
+          />
+          <Checkbox
+            checked={false}
+            id="id_3"
+            label="This is a checkbox"
+            message={false}
+          />
+        </ChecklistCard>
+      </ThemeProvider>
+    )}
+  </Theme>
 );

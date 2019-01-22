@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
+const path = require('path');
 
 const args = require('../args');
 const config = require('../../context');
@@ -77,6 +78,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     : lodash.mapValues(paths.clientEntries, createEntry);
 
   const internalJs = [
+    path.join(__dirname, '../render'),
     ...paths.src,
     ...paths.compilePackages.map(utils.resolvePackage)
   ];

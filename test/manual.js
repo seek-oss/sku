@@ -2,18 +2,23 @@ const pkg = require('../package.json');
 const Cache = require('async-disk-cache');
 const inquirer = require('inquirer');
 const { promisify } = require('util');
-const readdirAsync = promisify(require('fs').readdir);
+const fs = require('fs');
 const path = require('path');
 const runSkuScriptInDir = require('./utils/runSkuScriptInDir');
+const readdirAsync = promisify(fs.readdir);
 
 const cache = new Cache(pkg.name);
 const LAST_TEST_CASE = 'lastTestCase';
 const LAST_SCRIPT = 'lastScript';
 
 const runScriptForTestCase = (script, testCase) => {
+  const testCasePath = path.join(__dirname, 'test-cases', testCase);
+
+  const hasAppDirectory = fs.existsSync(path.join(testCasePath, 'app'));
+
   return runSkuScriptInDir(
     script,
-    path.join(__dirname, 'test-cases', testCase)
+    path.join(testCasePath, hasAppDirectory ? 'app' : '')
   );
 };
 

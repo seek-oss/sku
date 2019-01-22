@@ -153,7 +153,7 @@ See the [static-rendering](./docs/static-rendering.md) docs for more detail.
 
 ### Component Explorer via [Storybook](https://storybook.js.org/)
 
-Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js`, for example:
+Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js` (or `.ts`, or `.tsx`), for example:
 
 ```js
 import { storiesOf } from 'sku/storybook';

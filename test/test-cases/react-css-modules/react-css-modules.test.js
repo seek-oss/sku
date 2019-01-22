@@ -25,7 +25,7 @@ describe('react-css-modules', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir);
+      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
       await waitForUrls(storybookUrl);
     });
 

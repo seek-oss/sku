@@ -13,7 +13,10 @@ export const messageRenderer = (): Message => {
 
 export default () => (
   <div className={`${lessStyles.root} ${jsStyles.root}`}>
-    <div className={`${lessStyles.nested} ${jsStyles.nested}`}>
+    <div
+      className={`${lessStyles.nested} ${jsStyles.nested}`}
+      data-automation-text
+    >
       {messageRenderer()}
     </div>
   </div>

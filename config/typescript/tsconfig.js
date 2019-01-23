@@ -5,6 +5,7 @@ module.exports = () => ({
   compilerOptions: {
     esModuleInterop: true,
     allowSyntheticDefaultImports: true,
+    resolveJsonModule: true,
     noUnusedLocals: true,
     strict: true,
     jsx: 'preserve',

@@ -6,13 +6,14 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
   </head>
   <body>
-    <div id=\\"app\\" data-message=\\"<div class=\\" _1okz42c\\"=\\"\\" data-reactroot=\\"\\"><div class=\\"_1oKZ42c\\"></div></div>\\"&gt;
-    <script type=\\"text/javascript\\" src=\\"/static/runtime-7f08b047779d21f25e50.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/static/vendors~main-9aa20d39de042df69f71.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/static/main-2d4b0695cf6a2a2910ec.js\\"></script>
+    <div id=\\"app\\" data-message=\\"<div class=\\" _1okz42c\\"=\\"\\"><div class=\\"_1oKZ42c\\"></div></div>\\"&gt;
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/runtime-7f08b047779d21f25e50.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/main-f3778d1de5be248bd8fb.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -22,13 +23,14 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\" />
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
   </head>
   <body>
-    <div id=\\"app\\" data-message=\\"<div class=\\"_1oKZ42c\\" data-reactroot=\\"\\"></div>\\"></div>
-    <script type=\\"text/javascript\\" src=\\"/static/runtime-7f08b047779d21f25e50.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/static/vendors~main-9aa20d39de042df69f71.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/static/main-2d4b0695cf6a2a2910ec.js\\"></script>
+    <div id=\\"app\\" data-message=\\"<div class=\\"_1oKZ42c\\"></div>\\"></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"/static/runtime-7f08b047779d21f25e50.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/static/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/static/main-f3778d1de5be248bd8fb.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],

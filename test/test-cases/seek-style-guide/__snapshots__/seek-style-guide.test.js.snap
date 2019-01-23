@@ -3,6 +3,8 @@
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"fs\\",
+  \\"path\\",
   \\"react\\",
   \\"react-dom/server\\"
 ]",
@@ -12,18 +14,19 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"/vendors~main-6d4186689f7744048976.css\\" />
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/vendors~main-0d236d105339b21bcea3.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"_20YbULa\\" data-reactroot=\\"\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime-57519d664ffbf58ed414.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main-9a49a1fdbb109c5cd5d1.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main-dd1d0abe164e360bb8ef.js\\"></script>
+    <div id=\\"app\\"><div class=\\"_20YbULa\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"/runtime-57519d664ffbf58ed414.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/vendors~main-1e4b8744df5318982036.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/main-98663df9cf561bcfe731.js\\"></script>
   </body>
 </html>",
-  "main-dd1d0abe164e360bb8ef.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-98663df9cf561bcfe731.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-57519d664ffbf58ed414.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-6d4186689f7744048976.css": "a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:\\"\\";content:none}table{border-collapse:collapse;border-spacing:0}mark{background-color:transparent;color:inherit}html{min-height:100%}._20YbULa,html{background-color:#eee}._20YbULa{font-size:10px;font-family:Roboto,Helvetica Neue,HelveticaNeue,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#1c1c1c;box-sizing:border-box}._20YbULa *,._20YbULa :after,._20YbULa :before{font-family:inherit;box-sizing:inherit;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}._20YbULa input[type=search]::-webkit-search-decoration{-webkit-appearance:none}._1hwCpFM{height:100%}
+  "vendors~main-0d236d105339b21bcea3.css": "a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:\\"\\";content:none}table{border-collapse:collapse;border-spacing:0}mark{background-color:transparent;color:inherit}html{min-height:100%}._20YbULa,html{background-color:#eee}._20YbULa{font-size:10px;font-family:Roboto,Helvetica Neue,HelveticaNeue,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#1c1c1c;box-sizing:border-box}._20YbULa *,._20YbULa :after,._20YbULa :before{font-family:inherit;box-sizing:inherit;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}._20YbULa input[type=search]::-webkit-search-decoration{-webkit-appearance:none}._1hwCpFM{height:100%}
 .Oxw3aoN{position:absolute!important;clip:rect(1px,1px,1px,1px);pointer-events:none}
 ._3xxbHuF{max-width:940px;margin:0 auto}
 .GN6nQol{padding:18px 20px}@media only screen and (min-width:740px){.GN6nQol{padding-left:25px;padding-right:25px}}.GN6nQol._2hJYZLX{margin:0 -20px}@media only screen and (min-width:740px){.GN6nQol._2hJYZLX{margin:0 -25px}}.GN6nQol._1oH2W9O{padding-top:0;padding-bottom:0}.GN6nQol.X0FctiP{color:#169400}.GN6nQol.X0FctiP.spD5Qro{background-color:#169400;color:#fff}.GN6nQol.X0FctiP._1-j2JXv{background-color:#f3f9f2}.GN6nQol.llTEFEA{color:#9556b7}.GN6nQol.llTEFEA.spD5Qro{background-color:#9556b7;color:#fff}.GN6nQol.llTEFEA._1-j2JXv{background-color:#f9f6fb}.GN6nQol._2pnoIks{color:#e60278}.GN6nQol._2pnoIks.spD5Qro,.GN6nQol._2pnoIks._1-j2JXv{background-color:#fff;color:#e60278}.GN6nQol._1cG8CyK{color:#404040}.GN6nQol._1cG8CyK.spD5Qro,.GN6nQol._1cG8CyK._1-j2JXv{background-color:#fbfbfb;color:#404040}.soHOhTq{padding-top:30px;padding-bottom:30px}@media only screen and (min-width:740px){.soHOhTq{padding-top:42px;padding-bottom:36px}}
@@ -36,6 +39,6 @@ Object {
 ._1lTs4d6{font-weight:600}
 ._33Weyvq{font-weight:400}
 ",
-  "vendors~main-9a49a1fdbb109c5cd5d1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-1e4b8744df5318982036.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

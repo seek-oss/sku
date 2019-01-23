@@ -9,10 +9,11 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-9aa20d39de042df69f71.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-2218cfee6bcdd73ca471.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id=\\"app\\"><div>Hello custom src paths</div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/main-169601831f45c3690019.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -25,10 +26,11 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-9aa20d39de042df69f71.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-2218cfee6bcdd73ca471.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id=\\"app\\"><div>Hello custom src paths</div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-169601831f45c3690019.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -46,15 +48,16 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/vendors~main-9aa20d39de042df69f71.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4002/main-2218cfee6bcdd73ca471.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id=\\"app\\"><div>Hello custom src paths</div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-169601831f45c3690019.js\\"></script>
   </body>
 </html>",
-  "main-2218cfee6bcdd73ca471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-169601831f45c3690019.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-27f87d9f0d19bf7deb87.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-9aa20d39de042df69f71.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-a3090295ce177dd64404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -67,10 +70,11 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+    <div id=\\"app\\"><div>Hello custom src paths</div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -83,10 +87,11 @@ Object {
     
   </head>
   <body>
-    <div id=\\"app\\"><div data-reactroot=\\"\\">Hello custom src paths</div></div>
-    <script type=\\"text/javascript\\" src=\\"/runtime.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/vendors~main.js\\"></script>
-<script type=\\"text/javascript\\" src=\\"/main.js\\"></script>
+    <div id=\\"app\\"><div>Hello custom src paths</div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/main.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],

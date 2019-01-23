@@ -1,4 +1,5 @@
-import { Stats } from 'webpack';
+// import { Stats } from 'webpack';
+import { ComponentType } from 'react';
 
 interface RenderAppProps {
   routeName: string;
@@ -6,10 +7,8 @@ interface RenderAppProps {
   environment: string;
   site: string;
   libraryName: string;
-  webpackStats: {
-    stats: Stats[];
-    hash: string;
-  };
+  SkuProvider: ComponentType;
+  webpackStats: any; // Find better type
 }
 
 interface RenderDocumentProps<T> extends RenderAppProps {

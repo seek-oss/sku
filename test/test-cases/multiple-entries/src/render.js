@@ -11,9 +11,13 @@ const pageMap = {
 };
 
 export default {
-  renderApp: ({ routeName, site }) => {
+  renderApp: ({ SkuProvider, routeName, site }) => {
     const App = pageMap[routeName];
-    return renderToString(<App site={site} />);
+    return renderToString(
+      <SkuProvider>
+        <App site={site} />
+      </SkuProvider>
+    );
   },
 
   renderDocument: ({ app, bodyTags, headTags, site, environment }) => {

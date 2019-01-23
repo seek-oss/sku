@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import makeExtractor from './makeExtractor';
+import makeExtractor from '../makeExtractor';
 
 // '__sku_alias__renderEntry' is a webpack alias
 // pointing to the consuming apps render entry

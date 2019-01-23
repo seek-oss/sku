@@ -19,9 +19,8 @@ const template = ({ headTags, bodyTags, app }) => `
   </html>
 `;
 
-export default ({ extractor }) => ({
-  renderCallback: (req, res) => {
-    const { SkuProvider, getBodyTags, getHeadTags } = extractor();
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     const app = renderToString(
       <SkuProvider>
         <App />

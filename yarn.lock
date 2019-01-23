@@ -1692,6 +1692,13 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.13.tgz#c81484b6f4ca007bb09887ed15ecb3286d58f928"
   integrity sha512-ePl4l+7dLLmCucIwgQHAgjiepY++qcI6nb8eAwGNkB6OxmTe3Z9rQU3rSpomqu42PCCnlThZbOoxsf+qylJsLA==
 
+"@types/loadable__component@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.2.0.tgz#8a6263bceb0a554363520a1e9fde9da863288ee4"
+  integrity sha512-OPs8SYUDXUn17RFc0tvCnBXziSy3KzubBwEJnlta7aj8UYS1qBe7mMrSaUkLZvwWvoKR23x2WoABOi4uiSRH9g==
+  dependencies:
+    "@types/react" "*"
+
 "@types/node@*":
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"

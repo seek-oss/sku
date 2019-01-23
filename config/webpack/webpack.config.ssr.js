@@ -49,6 +49,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     .value();
 
   const internalJs = [
+    path.join(__dirname, '../../entry'),
     ...paths.src,
     ...paths.compilePackages.map(utils.resolvePackage)
   ];
@@ -77,7 +78,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     `${require.resolve('webpack/hot/poll')}?1000`
   ];
 
-  const skuServerEntry = require.resolve('../server/index.js');
+  const skuServerEntry = require.resolve('../../entry/server/index.js');
 
   const serverEntry = isStartScript
     ? [...serverDevServerEntries, skuServerEntry]
@@ -180,7 +181,9 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       plugins: [
         new webpack.DefinePlugin(envVars),
         new LoadablePlugin({
-          filename: webpackStatsFilename
+          filename: webpackStatsFilename,
+          writeToDisk: true,
+          outputAsset: false
         }),
         new MiniCssExtractPlugin({
           filename: `${fileMask}.css`,

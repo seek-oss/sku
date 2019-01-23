@@ -1,12 +1,8 @@
 import React from 'react';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
-export default webpackStats => {
-  const stats = webpackStats
-    .toJson()
-    .children.find(({ name }) => name === 'client');
-
-  const extractor = new ChunkExtractor({ stats });
+export default (stats, entrypoint) => () => {
+  const extractor = new ChunkExtractor({ stats, entrypoints: [entrypoint] });
 
   const SkuProvider = ({ children }) => (
     <ChunkExtractorManager extractor={extractor}>
@@ -15,8 +11,8 @@ export default webpackStats => {
   );
 
   return {
-    getStyleTags: () => extractor.getStyleTags(),
-    getScriptTags: () => extractor.getScriptTags(),
+    getHeadTags: () => extractor.getStyleTags(),
+    getBodyTags: () => extractor.getScriptTags(),
     SkuProvider
   };
 };

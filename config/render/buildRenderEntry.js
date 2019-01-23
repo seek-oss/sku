@@ -6,16 +6,17 @@ import makeExtractor from './makeExtractor';
 import render from '__sku_alias__renderEntry';
 
 export default async renderParams => {
-  const { SkuProvider, getScriptTags, getStyleTags } = makeExtractor(
-    renderParams.webpackStats
-  );
+  const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
+    renderParams.webpackStats,
+    renderParams.entrypoint
+  )();
 
   const app = await render.renderApp({ ...renderParams, SkuProvider });
 
   return await render.renderDocument({
     ...renderParams,
     app,
-    bodyTags: getScriptTags(),
-    headTags: getStyleTags()
+    bodyTags: getBodyTags(),
+    headTags: getHeadTags()
   });
 };

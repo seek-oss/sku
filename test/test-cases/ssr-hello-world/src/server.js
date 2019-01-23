@@ -19,9 +19,16 @@ const template = ({ headTags, bodyTags, app }) => `
   </html>
 `;
 
-export default ({ headTags, bodyTags }) => ({
+export default ({ extractor }) => ({
   renderCallback: (req, res) => {
-    const app = renderToString(<App />);
-    res.send(template({ headTags, bodyTags, app }));
+    const { SkuProvider, getBodyTags, getHeadTags } = extractor();
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>
+    );
+    res.send(
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app })
+    );
   }
 });

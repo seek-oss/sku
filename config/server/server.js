@@ -1,26 +1,15 @@
 const path = require('path');
 const express = require('express');
-const renderScriptTag = require('../../lib/renderScriptTag');
+const makeExtractor = require('../render/makeExtractor');
 const serverExports = require('__sku_alias__serverEntry').default; // eslint-disable-line import/no-unresolved
-const assets = require('__sku_alias__assets'); // eslint-disable-line import/no-unresolved
+const webpackStats = require('__sku_alias__assets'); // eslint-disable-line import/no-unresolved
 
 const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
 
-const makeArray = a => (Array.isArray(a) ? a : [a]);
+// default entrypoint
+const extractor = makeExtractor(webpackStats, 'main');
 
-const scripts = makeArray(assets[Object.keys(assets)[0]].js);
-const styles = makeArray(assets[Object.keys(assets)[0]].css);
-
-const bodyTags = scripts
-  .map(chunkFile => renderScriptTag(chunkFile))
-  .join('\n');
-const headTags = styles
-  .map(
-    chunkFile => `<link rel="stylesheet" type="text/css" href="${chunkFile}" />`
-  )
-  .join('\n');
-
-const serverOptions = serverExports({ publicPath, headTags, bodyTags });
+const serverOptions = serverExports({ publicPath, extractor });
 
 const { renderCallback, middleware } = serverOptions;
 

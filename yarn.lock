@@ -1203,6 +1203,11 @@
   dependencies:
     lodash "^4.17.11"
 
+"@loadable/webpack-plugin@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.5.0.tgz#4d44812d3cc106b6278570fa4c8ebdeb07cc3549"
+  integrity sha512-/lW1JnDfxx7z9krS26eUvzuehlKDGB+VN9Vnf6Zu9fm4acyMqymAKHSeF/4LwluFsvFhqqLInrCCJGv9ZIZx8g==
+
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"

@@ -14,9 +14,10 @@ export default async renderParams => {
   let app;
   const renderContext = { ...renderParams, ...config, libraryName };
 
-  const { SkuProvider, getScriptTags, getStyleTags } = makeExtractor(
-    renderParams.webpackStats
-  );
+  const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
+    renderParams.webpackStats,
+    renderParams.entrypoint
+  )();
 
   // renderApp is optional for libraries
   if (render.renderApp) {
@@ -25,8 +26,8 @@ export default async renderParams => {
 
   const result = await render.renderDocument({
     ...renderContext,
-    headTags: getStyleTags(),
-    bodyTags: getScriptTags(),
+    headTags: getHeadTags(),
+    bodyTags: getBodyTags(),
     app
   });
 

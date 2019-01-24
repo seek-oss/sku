@@ -1182,24 +1182,24 @@
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
 
-"@loadable/babel-plugin@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.2.2.tgz#448f21ce984cee827a7bd4ce7c625c343c3b12e6"
-  integrity sha512-gTi0ZXI4s/Nwdr25PyyPQfe465eMM30AtQqMmJU2cSfB9bRHNAtKb666W3ZccgmL35LV4Px3qTo5hYC6OyGzNg==
+"@loadable/babel-plugin@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.5.0.tgz#72387f03c6c85e75c0055ab64e2b4b8bb7c028b6"
+  integrity sha512-85vnmdkfmh4JD+oWd5Kq/QSb8NOivD5/Ilx6CWWfo7w1W2OjSrw7fGRUM20o95azaC2TePqdO8BEFR9jyemm3w==
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.2.0"
 
-"@loadable/component@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.2.2.tgz#64db5fb1e93d6bc93596947336283979f055d5d2"
-  integrity sha512-trM/wBZbD1kL5CdBOD8pxbVZeKoycrb+qJs3FqKezUnzm6RTmYNYFYYDDzzapH9rc60/rPJYVXa9IP0TJF6Q6A==
+"@loadable/component@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.5.0.tgz#d26ae31bb4da3cac6ae34074eda7e70ffcc2617b"
+  integrity sha512-Dl7U6K+j3wBotr3CKgJ/gbkFWubF504o2pnqGpMLip0PURHraX2ZhWz1gFjMcuFO/Z7lB+KqGVLgpJAI58Savw==
   dependencies:
     hoist-non-react-statics "^3.2.1"
 
-"@loadable/server@^5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.4.0.tgz#c7056761132539449043eac26a7222a95fae0f7a"
-  integrity sha512-avDnUn0f+TqS+KSQddbHDgwzhX/A9rJQekBNRObaVAGudyMBtWMikSs4ISegS4lxYwCBr0NNzzDWvEdoyRlbTw==
+"@loadable/server@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.5.0.tgz#b5fb14826db5d4f4e603c47c1232c80f2081251b"
+  integrity sha512-a/gpCthY3feAZcTJfcLYaVZ69ovUVVl8vh48xwzyoBw4rPlbCLIsfN7sCkAWlrLcDFTz7UYKPEPLcV0zom79dQ==
   dependencies:
     lodash "^4.17.11"
 

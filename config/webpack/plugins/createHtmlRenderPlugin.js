@@ -9,7 +9,8 @@ const {
   environments,
   sites,
   transformOutputPath,
-  defaultClientEntry
+  defaultClientEntry,
+  publicPath
 } = require('../../../context');
 
 // mapStatsToParams runs once for each render. It's purpose is
@@ -25,7 +26,8 @@ const mapStatsToParams = ({ webpackStats, routeName }) => {
 
   return {
     webpackStats: stats,
-    entrypoint
+    entrypoint,
+    publicPath
   };
 };
 

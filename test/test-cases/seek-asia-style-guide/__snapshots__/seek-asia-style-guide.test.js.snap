@@ -14,7 +14,11 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/vendors~main-51123a4e03742cb790a2.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-57519d664ffbf58ed414.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/vendors~main-51123a4e03742cb790a2.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-7196e9bc949808cefd44.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-1791766683a4c3505824.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/vendors~main-51123a4e03742cb790a2.css\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1k6xEmK\\"><div class=\\"dgc-8Wj\\"><h1>SEEK Asia Style Guide</h1></div><div class=\\"\\"><div class=\\"_12lF2dd\\"><div class=\\"_1I9KGZo\\"><span class=\\"T_bb8ZR _2l47xPH\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>

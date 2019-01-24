@@ -14,7 +14,9 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/MyLibrary.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/MyLibrary.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/MyLibrary.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/MyLibrary.css\\">
   </head>
   <body>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
@@ -29,7 +31,9 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/MyLibrary.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/MyLibrary.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/MyLibrary.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/MyLibrary.css\\">
   </head>
   <body>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>

@@ -65,7 +65,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distDir);
+      const files = await dirContentsToObject(distDir, ['.js', '.css']);
       const srcFiles = await dirContentsToObject(srcDir, ['.d.ts']);
       expect({
         ...files,

@@ -9,7 +9,7 @@ export default async renderParams => {
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     renderParams.webpackStats,
     renderParams.entrypoint
-  )();
+  );
 
   const app = await render.renderApp({ ...renderParams, SkuProvider });
 

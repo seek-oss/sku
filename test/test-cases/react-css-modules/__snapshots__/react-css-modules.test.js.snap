@@ -8,7 +8,11 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-57519d664ffbf58ed414.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-cb9dd1c068af0c566003.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-ccf59aff977f1445f6cf.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>

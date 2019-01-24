@@ -14,7 +14,11 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/vendors~main-0d236d105339b21bcea3.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-57519d664ffbf58ed414.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/vendors~main-0d236d105339b21bcea3.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-1e4b8744df5318982036.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-98663df9cf561bcfe731.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/vendors~main-0d236d105339b21bcea3.css\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_20YbULa\\"><div class=\\"Oxw3aoN\\"><h1>SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site</h1></div><div class=\\"\\"><div class=\\"_3xxbHuF\\"><div class=\\"GN6nQol\\"><span class=\\"_31viNaz _2R8GxMH _3CnSGKb\\"><span class=\\"\\">Hello world!</span></span></div></div></div></div></div>

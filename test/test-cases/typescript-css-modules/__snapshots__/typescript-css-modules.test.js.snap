@@ -6,13 +6,18 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\" data-reactroot=\\"\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/vendors~main-107ac53d6e89f601231d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4003/main-fda1deda919713312e47.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -22,14 +27,18 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-2822b92ec886614943d2.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -44,14 +53,18 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+    <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-1dabfc1890e798beba49.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-cb9dd1c068af0c566003.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-2822b92ec886614943d2.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-02036277a825a8a29f53.js\\"></script>
   </body>
 </html>",
   "jsStyles.css.js.d.ts": "// This file is automatically generated.
@@ -64,11 +77,10 @@ export const nested: string;
 export const root: string;
 export const nested: string;
 ",
-  "main-2822b92ec886614943d2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-02036277a825a8a29f53.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
-  "main-fda1deda919713312e47.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-1dabfc1890e798beba49.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-cb9dd1c068af0c566003.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
@@ -80,14 +92,18 @@ Object {
           <meta charset=\\"UTF-8\\">
           <title>My Awesome Project</title>
           <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+          <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-788412e48c599883634a.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
         </head>
         <body>
-          <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+          <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
           <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-09b839233ca435d60227.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\"></script>
         
       
     </body></html>",
@@ -99,14 +115,18 @@ Object {
           <meta charset=\\"UTF-8\\">
           <title>My Awesome Project</title>
           <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+          <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-788412e48c599883634a.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
         </head>
         <body>
-          <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
+          <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
           <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-09b839233ca435d60227.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\"></script>
         </body>
       </html>
     ",
@@ -126,213 +146,13 @@ export const nested: string;
 export const root: string;
 export const nested: string;
 ",
-  "main-09b839233ca435d60227.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-788412e48c599883634a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",
   "runtime-3fcd94aac7fd64fcdc37.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-3e4982c4018de00003e8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "webpackStats.json": "{
-  \\"errors\\": [],
-  \\"warnings\\": [],
-  \\"version\\": \\"4.28.3\\",
-  \\"hash\\": \\"b13852044887b4af3d53\\",
-  \\"publicPath\\": \\"http://localhost:4003/\\",
-  \\"outputPath\\": \\"/Users/mjones/projects/sku/test/test-cases/typescript-css-modules/app/dist\\",
-  \\"assetsByChunkName\\": {
-    \\"main\\": [
-      \\"main-bfe8911084b821bf8edd.css\\",
-      \\"main-09b839233ca435d60227.js\\"
-    ],
-    \\"runtime\\": \\"runtime-3fcd94aac7fd64fcdc37.js\\",
-    \\"vendors~main\\": \\"vendors~main-3e4982c4018de00003e8.js\\"
-  },
-  \\"assets\\": [
-    {
-      \\"name\\": \\"main-09b839233ca435d60227.js\\",
-      \\"size\\": 1596,
-      \\"chunks\\": [
-        0
-      ],
-      \\"chunkNames\\": [
-        \\"main\\"
-      ]
-    },
-    {
-      \\"name\\": \\"main-bfe8911084b821bf8edd.css\\",
-      \\"size\\": 206,
-      \\"chunks\\": [
-        0
-      ],
-      \\"chunkNames\\": [
-        \\"main\\"
-      ]
-    },
-    {
-      \\"name\\": \\"runtime-3fcd94aac7fd64fcdc37.js\\",
-      \\"size\\": 1499,
-      \\"chunks\\": [
-        1
-      ],
-      \\"chunkNames\\": [
-        \\"runtime\\"
-      ]
-    },
-    {
-      \\"name\\": \\"vendors~main-3e4982c4018de00003e8.js\\",
-      \\"size\\": 119384,
-      \\"chunks\\": [
-        2
-      ],
-      \\"chunkNames\\": [
-        \\"vendors~main\\"
-      ]
-    }
-  ],
-  \\"filteredAssets\\": 0,
-  \\"entrypoints\\": {
-    \\"main\\": {
-      \\"chunks\\": [
-        1,
-        2,
-        0
-      ],
-      \\"assets\\": [
-        \\"runtime-3fcd94aac7fd64fcdc37.js\\",
-        \\"vendors~main-3e4982c4018de00003e8.js\\",
-        \\"main-bfe8911084b821bf8edd.css\\",
-        \\"main-09b839233ca435d60227.js\\"
-      ],
-      \\"children\\": {},
-      \\"childAssets\\": {}
-    }
-  },
-  \\"namedChunkGroups\\": {
-    \\"main\\": {
-      \\"chunks\\": [
-        1,
-        2,
-        0
-      ],
-      \\"assets\\": [
-        \\"runtime-3fcd94aac7fd64fcdc37.js\\",
-        \\"vendors~main-3e4982c4018de00003e8.js\\",
-        \\"main-bfe8911084b821bf8edd.css\\",
-        \\"main-09b839233ca435d60227.js\\"
-      ],
-      \\"children\\": {},
-      \\"childAssets\\": {}
-    }
-  },
-  \\"children\\": [
-    {
-      \\"errors\\": [],
-      \\"warnings\\": [],
-      \\"publicPath\\": \\"http://localhost:4003/\\",
-      \\"outputPath\\": \\"/Users/mjones/projects/sku/test/test-cases/typescript-css-modules/app/dist\\",
-      \\"assetsByChunkName\\": {},
-      \\"assets\\": [],
-      \\"filteredAssets\\": 0,
-      \\"entrypoints\\": {
-        \\"undefined\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"css-in-js-output-filename\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"namedChunkGroups\\": {
-        \\"undefined\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"css-in-js-output-filename\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"children\\": [],
-      \\"name\\": \\"css-in-js-compiler\\"
-    },
-    {
-      \\"errors\\": [],
-      \\"warnings\\": [],
-      \\"publicPath\\": \\"http://localhost:4003/\\",
-      \\"outputPath\\": \\"/Users/mjones/projects/sku/test/test-cases/typescript-css-modules/app/dist\\",
-      \\"assetsByChunkName\\": {},
-      \\"assets\\": [],
-      \\"filteredAssets\\": 0,
-      \\"entrypoints\\": {
-        \\"mini-css-extract-plugin\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"*\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"namedChunkGroups\\": {
-        \\"mini-css-extract-plugin\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"*\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"children\\": [],
-      \\"name\\": \\"mini-css-extract-plugin ../../../../node_modules/css-modules-typescript-loader/index.js??ref--8-oneOf-3-1!../../../../node_modules/css-loader/dist/cjs.js??ref--8-oneOf-3-2!../../../../node_modules/postcss-loader/lib/index.js??ref--8-oneOf-3-3!../../../../node_modules/less-loader/dist/cjs.js!../../../../config/webpack/utils/cssInJsLoader.js!../../../../node_modules/babel-loader/lib/index.js??ref--8-oneOf-3-6!src/jsStyles.css.js\\"
-    },
-    {
-      \\"errors\\": [],
-      \\"warnings\\": [],
-      \\"publicPath\\": \\"http://localhost:4003/\\",
-      \\"outputPath\\": \\"/Users/mjones/projects/sku/test/test-cases/typescript-css-modules/app/dist\\",
-      \\"assetsByChunkName\\": {},
-      \\"assets\\": [],
-      \\"filteredAssets\\": 0,
-      \\"entrypoints\\": {
-        \\"mini-css-extract-plugin\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"*\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"namedChunkGroups\\": {
-        \\"mini-css-extract-plugin\\": {
-          \\"chunks\\": [
-            0
-          ],
-          \\"assets\\": [
-            \\"*\\"
-          ],
-          \\"children\\": {},
-          \\"childAssets\\": {}
-        }
-      },
-      \\"children\\": [],
-      \\"name\\": \\"mini-css-extract-plugin ../../../../node_modules/css-modules-typescript-loader/index.js??ref--9-oneOf-3-1!../../../../node_modules/css-loader/dist/cjs.js??ref--9-oneOf-3-2!../../../../node_modules/postcss-loader/lib/index.js??ref--9-oneOf-3-3!../../../../node_modules/less-loader/dist/cjs.js!src/lessStyles.less\\"
-    }
-  ]
-}",
 }
 `;
 
@@ -342,10 +162,14 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/main.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
@@ -359,10 +183,14 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main.css\\">
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/main.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main.css\\">
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
+    <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>

@@ -14,7 +14,13 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
+    <link data-chunk=\\"themes-jobStreet\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
+<link data-chunk=\\"themes-jobStreet\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-jobStreet-5af0c7263c4fb9867e9f.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-0dd08fb4214ce5d88d6e.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/vendors~main-8cc762a143aa6b3808bf.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-88c755d56c52e5db800d.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-9e2307ccd1368cf13f34.js\\">
+<link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
 <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-8cc762a143aa6b3808bf.css\\">
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -37,7 +43,13 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
+    <link data-chunk=\\"themes-seekAnz\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
+<link data-chunk=\\"themes-seekAnz\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-seekAnz-8012bfb0b6ae6ce0fc24.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-0dd08fb4214ce5d88d6e.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/vendors~main-8cc762a143aa6b3808bf.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-88c755d56c52e5db800d.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-9e2307ccd1368cf13f34.js\\">
+<link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
 <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-8cc762a143aa6b3808bf.css\\">
     <script>
       window.SKU_SITE = 'seekAnz';

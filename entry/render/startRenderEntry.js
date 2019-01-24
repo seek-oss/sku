@@ -17,7 +17,7 @@ export default async renderParams => {
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     renderParams.webpackStats,
     renderParams.entrypoint
-  )();
+  );
 
   // renderApp is optional for libraries
   if (render.renderApp) {

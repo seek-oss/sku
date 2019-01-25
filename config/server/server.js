@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
 const renderScriptTag = require('../../lib/renderScriptTag');
-const serverExports = require('__sku_alias__serverEntry').default; // eslint-disable-line import/no-unresolved
-const assets = require('__sku_alias__assets'); // eslint-disable-line import/no-unresolved
+const serverExports = require('__sku_alias__serverEntry').default;
+const assets = require('__sku_alias__assets');
 
 const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
 

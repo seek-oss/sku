@@ -100,10 +100,10 @@ Object {
         </head>
         <body>
           <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-          <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\"></script>
+          <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\" crossorigin=\\"anonymous\\"></script>
         
       
     </body></html>",
@@ -123,14 +123,18 @@ Object {
         </head>
         <body>
           <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-          <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\"></script>
+          <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-3e4982c4018de00003e8.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-788412e48c599883634a.js\\" crossorigin=\\"anonymous\\"></script>
         </body>
       </html>
     ",
-  "warnings": Array [],
+  "warnings": Array [
+    "A preload for 'http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
+    "A preload for 'http://localhost:4003/vendors~main-3e4982c4018de00003e8.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
+    "A preload for 'http://localhost:4003/main-788412e48c599883634a.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
+  ],
 }
 `;
 

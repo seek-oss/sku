@@ -12,7 +12,7 @@
         "ignore": [
           "__sku_alias__renderEntry",
           "__sku_alias__serverEntry",
-          "__sku_alias__assets"
+          "__sku_alias__webpackStats"
         ]
       }
     ]

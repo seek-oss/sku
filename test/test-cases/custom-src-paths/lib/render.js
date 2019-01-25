@@ -4,7 +4,12 @@ import dedent from 'dedent';
 import App from '../another-folder/App';
 
 export default {
-  renderApp: () => renderToString(<App />),
+  renderApp: ({ SkuProvider }) =>
+    renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>
+    ),
 
   renderDocument: ({ app, bodyTags, headTags }) => dedent`
     <!DOCTYPE html>

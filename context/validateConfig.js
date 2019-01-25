@@ -5,7 +5,7 @@ const { emojify } = require('node-emoji');
 
 const configSchema = require('./configSchema');
 const defaultSkuConfig = require('./defaultSkuConfig');
-const { defaultClientEntry } = require('./clientEntries');
+const defaultClientEntry = require('./defaultClientEntry');
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 

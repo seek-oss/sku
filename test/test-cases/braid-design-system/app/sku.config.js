@@ -1,6 +1,7 @@
 const ListExternalsPlugin = require('../../../utils/ListExternalsWebpackPlugin');
 
 module.exports = {
+  sites: ['seekAnz', 'jobStreet'],
   publicPath: 'https://somecdn.com',
   port: 8200,
   dangerouslySetWebpackConfig: config => {

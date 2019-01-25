@@ -1,6 +1,5 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 
-const renderScriptTag = require('../../../lib/renderScriptTag');
 const { writeStartConfig } = require('../utils/startConfig');
 const product = require('../../../lib/product');
 const {
@@ -10,44 +9,25 @@ const {
   environments,
   sites,
   transformOutputPath,
-  defaultClientEntry
+  defaultClientEntry,
+  publicPath
 } = require('../../../context');
-
-const createPublicUrl = (publicPath, asset) => `${publicPath}${asset}`;
 
 // mapStatsToParams runs once for each render. It's purpose is
 // to create the relevant asset tags required for each route.
 // Each entrypoint maps back to a route specific entry or the default client entry
 const mapStatsToParams = ({ webpackStats, routeName }) => {
-  const { entrypoints } = webpackStats
+  const stats = webpackStats
     .toJson()
     .children.find(({ name }) => name === 'client');
-  const assets = entrypoints[routeName]
-    ? entrypoints[routeName].assets
-    : entrypoints[defaultClientEntry].assets;
-
-  const styles = assets.filter(asset => asset.endsWith('.css'));
-  const scripts = assets.filter(asset => asset.endsWith('.js'));
-
-  const bodyTags = scripts
-    .map(chunkFile =>
-      renderScriptTag(createPublicUrl(paths.publicPath, chunkFile))
-    )
-    .join('\n');
-  const headTags = styles
-    .map(
-      chunkFile =>
-        `<link rel="stylesheet" type="text/css" href="${createPublicUrl(
-          paths.publicPath,
-          chunkFile
-        )}" />`
-    )
-    .join('\n');
+  const entrypoint = stats.entrypoints[routeName]
+    ? routeName
+    : defaultClientEntry;
 
   return {
-    headTags,
-    bodyTags,
-    webpackStats
+    webpackStats: stats,
+    entrypoint,
+    publicPath
   };
 };
 

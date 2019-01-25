@@ -19,9 +19,15 @@ const template = ({ headTags, bodyTags, app }) => `
   </html>
 `;
 
-export default ({ headTags, bodyTags }) => ({
-  renderCallback: (req, res) => {
-    const app = renderToString(<App />);
-    res.send(template({ headTags, bodyTags, app }));
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>
+    );
+    res.send(
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app })
+    );
   }
 });

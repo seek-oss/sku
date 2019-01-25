@@ -5,7 +5,7 @@ const lodash = require('lodash');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
@@ -49,6 +49,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     .value();
 
   const internalJs = [
+    path.join(__dirname, '../../entry'),
     ...paths.src,
     ...paths.compilePackages.map(utils.resolvePackage)
   ];
@@ -77,7 +78,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     `${require.resolve('webpack/hot/poll')}?1000`
   ];
 
-  const skuServerEntry = require.resolve('../server/index.js');
+  const skuServerEntry = require.resolve('../../entry/server/index.js');
 
   const serverEntry = isStartScript
     ? [...serverDevServerEntries, skuServerEntry]
@@ -85,7 +86,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
 
   const publicPath = isStartScript ? clientServer : paths.publicPath;
 
-  const assetsFileName = 'assets.json';
+  const webpackStatsFilename = 'webpackStats.json';
 
   // The file mask is set to just name in start/dev mode as contenthash
   // is not supported for hot reloading. It can also cause non
@@ -179,9 +180,10 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       },
       plugins: [
         new webpack.DefinePlugin(envVars),
-        new AssetsPlugin({
-          entrypoints: true,
-          filename: path.join(paths.relativeTarget, assetsFileName)
+        new LoadablePlugin({
+          filename: webpackStatsFilename,
+          writeToDisk: true,
+          outputAsset: false
         }),
         new MiniCssExtractPlugin({
           filename: `${fileMask}.css`,
@@ -222,7 +224,10 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       resolve: {
         alias: {
           __sku_alias__serverEntry: paths.serverEntry,
-          __sku_alias__assets: path.join(paths.target, assetsFileName)
+          __sku_alias__webpackStats: path.join(
+            paths.target,
+            webpackStatsFilename
+          )
         },
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
       },

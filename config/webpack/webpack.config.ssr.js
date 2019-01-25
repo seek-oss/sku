@@ -60,7 +60,6 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
 
   const clientServer = `http://localhost:${clientPort}/`;
 
-  // Define clientEntry
   const clientDevServerEntries = [
     'react-hot-loader/patch',
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
@@ -68,11 +67,9 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   ];
 
   // Add polyfills and dev server client to all entries
-  const clientEntries = lodash.mapValues(paths.clientEntries, entry =>
-    isStartScript
-      ? [...resolvedPolyfills, ...clientDevServerEntries, entry]
-      : [...resolvedPolyfills, entry]
-  );
+  const clientEntry = isStartScript
+    ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
+    : [...resolvedPolyfills, paths.clientEntry];
 
   const serverDevServerEntries = [
     `${require.resolve('webpack/hot/poll')}?1000`
@@ -97,7 +94,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     {
       name: 'client',
       mode: webpackMode,
-      entry: clientEntries,
+      entry: clientEntry,
       devtool: isStartScript ? 'inline-source-map' : false,
       output: {
         path: paths.target,

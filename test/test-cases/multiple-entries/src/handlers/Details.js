@@ -2,13 +2,15 @@
 import styles from './Details.less';
 
 import React from 'react';
+import loadable from '@loadable/component';
+
+const AsyncComponent = loadable(() => import('./AsyncComponent'));
 
 export default class Details extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: null,
-      asyncComponent: null
+      id: null
     };
   }
 
@@ -18,21 +20,16 @@ export default class Details extends React.Component {
         window.location.pathname.lastIndexOf('/') + 1
       )
     });
-    import('./AsyncComponent').then(asyncComponent => {
-      this.setState({
-        asyncComponent: asyncComponent.default
-      });
-    });
   }
 
   render() {
-    const { asyncComponent: AsyncComponent, id } = this.state;
+    const { id } = this.state;
 
     return (
       <h1 className={styles.root}>
         Welcome to the Details page - {this.props.site}
         {id && `ID: ${id}`}
-        {AsyncComponent ? <AsyncComponent /> : 'loading...'}
+        <AsyncComponent />
       </h1>
     );
   }

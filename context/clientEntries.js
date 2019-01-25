@@ -2,8 +2,7 @@ const fs = require('fs');
 const { fromPairs } = require('lodash');
 
 const { getPathFromCwd } = require('../lib/cwd');
-
-const defaultClientEntry = 'main';
+const defaultClientEntry = require('./defaultClientEntry');
 
 // Create a webpack entry object for each route specific entry
 // and the default client entry (if it exists)
@@ -22,6 +21,5 @@ const getClientEntries = config => {
 };
 
 module.exports = {
-  defaultClientEntry,
   getClientEntries
 };

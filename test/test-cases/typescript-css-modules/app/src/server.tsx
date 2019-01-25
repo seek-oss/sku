@@ -4,11 +4,22 @@ import { renderToString } from 'react-dom/server';
 import App from './App';
 
 interface SkuProps {
-  headTags: string;
-  bodyTags: string;
+  SkuProvider: React.FunctionComponent;
+  getHeadTags: () => string;
+  getBodyTags: () => string;
 }
-export default ({ headTags, bodyTags }: SkuProps) => ({
-  renderCallback: (_: any, res: any): void => {
+export default () => ({
+  renderCallback: (
+    { SkuProvider, getBodyTags, getHeadTags }: SkuProps,
+    _: any,
+    res: any
+  ): void => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>
+    );
+
     res.send(`
       <!DOCTYPE html>
       <html>
@@ -16,11 +27,11 @@ export default ({ headTags, bodyTags }: SkuProps) => ({
           <meta charset="UTF-8">
           <title>My Awesome Project</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          ${headTags}
+          ${getHeadTags()}
         </head>
         <body>
-          <div id="app">${renderToString(<App />)}</div>
-          ${bodyTags}
+          <div id="app">${app}</div>
+          ${getBodyTags()}
         </body>
       </html>
     `);

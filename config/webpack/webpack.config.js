@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
+const path = require('path');
 
 const args = require('../args');
 const config = require('../../context');
@@ -11,8 +12,8 @@ const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 
-const startRenderEntry = require.resolve('../render/startRenderEntry');
-const buildRenderEntry = require.resolve('../render/buildRenderEntry');
+const startRenderEntry = require.resolve('../../entry/render/startRenderEntry');
+const buildRenderEntry = require.resolve('../../entry/render/buildRenderEntry');
 
 const {
   paths,
@@ -77,6 +78,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     : lodash.mapValues(paths.clientEntries, createEntry);
 
   const internalJs = [
+    path.join(__dirname, '../../entry'),
     ...paths.src,
     ...paths.compilePackages.map(utils.resolvePackage)
   ];

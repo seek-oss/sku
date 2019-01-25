@@ -6,7 +6,12 @@ import { Render } from '../../../../../sku-types';
 import App from 'src/App';
 
 const skuRender: Render = {
-  renderApp: () => renderToString(<App />),
+  renderApp: ({ SkuProvider }) =>
+    renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>
+    ),
 
   renderDocument: ({ app, headTags, bodyTags }) => dedent`
     <!DOCTYPE html>

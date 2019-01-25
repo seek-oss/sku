@@ -3,6 +3,7 @@ const { paths } = require('../../context');
 
 module.exports = () => ({
   compilerOptions: {
+    skipLibCheck: true, // Fixes https://github.com/cypress-io/cypress/issues/1087
     esModuleInterop: true,
     allowSyntheticDefaultImports: true,
     resolveJsonModule: true,

@@ -2,8 +2,8 @@ import path from 'path';
 import express from 'express';
 import defaultClientEntry from '../../context/defaultClientEntry';
 import makeExtractor from '../makeExtractor';
-import serverExports from '__sku_alias__serverEntry'; // eslint-disable-line import/no-unresolved
-import webpackStats from '__sku_alias__webpackStats'; // eslint-disable-line import/no-unresolved
+import serverExports from '__sku_alias__serverEntry';
+import webpackStats from '__sku_alias__webpackStats';
 
 const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
 

@@ -1,9 +1,21 @@
 {
   "extends": "seek",
   "rules": {
-    "no-console": 0,
-    "no-process-exit": 0,
-    "no-sync": 0
+    "no-console": "off",
+    "no-process-exit": "off",
+    "no-sync": "off",
+    "import/no-unresolved": [
+      "error",
+      {
+        "commonjs": true,
+        "amd": true,
+        "ignore": [
+          "__sku_alias__renderEntry",
+          "__sku_alias__serverEntry",
+          "__sku_alias__webpackStats"
+        ]
+      }
+    ]
   },
   "globals": {
     "__SKU_SRC_PATHS_0__": true,

@@ -28,6 +28,7 @@ module.exports = {
   publicPath: '/',
   polyfills: [],
   libraryName: null,
+  sourceMapsProd: false,
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,

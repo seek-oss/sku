@@ -27,6 +27,7 @@
   - [`dangerouslySetWebpackConfig` [`function`]](#dangerouslysetwebpackconfig-function)
   - [`dangerouslySetJestConfig` [`function`]](#dangerouslysetjestconfig-function)
   - [`dangerouslySetESLintConfig` [`function`]](#dangerouslyseteslintconfig-function)
+  - [`sourceMapsProd` [`boolean`]](#source-maps)
 
 ## `clientEntry` [`string`]
 
@@ -244,5 +245,18 @@ Example:
     ...skuEslintConfig,
     someOtherConfig: 'dangerousValue'
   });
+}
+```
+
+## `sourceMapsProd` [`boolean`]
+
+By default source maps will be generated only for development builds.
+Set to `true` to enable source maps in production.
+
+Example:
+
+```js
+{
+  sourceMapsProd: true;
 }
 ```

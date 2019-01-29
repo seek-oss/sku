@@ -78,9 +78,9 @@ An array of routes for the app. Each route must specify a name and a route corre
 Example:
 
 ```js
-{
-  routes: [{ name: 'home', route: '/' }];
-}
+const config = {
+  routes: [{ name: 'home', route: '/' }]
+};
 ```
 
 ## `sites` [`Array<string>`]
@@ -208,12 +208,12 @@ Reliance on this setting will cause issues when upgrading sku as any custom sett
 Example:
 
 ```js
-{
+const config = {
   dangerouslySetWebpackConfig: skuWebpackConfig => ({
     ...skuWebpackConfig,
     someOtherConfig: 'dangerousValue'
-  });
-}
+  })
+};
 ```
 
 ## `dangerouslySetJestConfig` [`function`]
@@ -225,12 +225,12 @@ Please speak with the `sku-support` group before using.
 Example:
 
 ```js
-{
+const config = {
   dangerouslySetJestConfig: skuJestConfig => ({
     ...skuJestConfig,
     someOtherConfig: 'dangerousValue'
-  });
-}
+  })
+};
 ```
 
 ## `dangerouslySetESLintConfig` [`function`]
@@ -240,12 +240,12 @@ Similar to `dangerouslySetWebpackConfig` but for [eslint](https://eslint.org/) c
 Example:
 
 ```js
-{
+const config = {
   dangerouslySetESLintConfig: skuEslintConfig => ({
     ...skuEslintConfig,
     someOtherConfig: 'dangerousValue'
-  });
-}
+  })
+};
 ```
 
 ## `sourceMapsProd` [`boolean`]
@@ -256,7 +256,7 @@ Set to `true` to enable source maps in production.
 Example:
 
 ```js
-{
-  sourceMapsProd: true;
-}
+const config = {
+  sourceMapsProd: true
+};
 ```

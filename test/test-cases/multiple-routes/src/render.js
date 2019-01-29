@@ -1,21 +1,17 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import dedent from 'dedent';
+import { StaticRouter } from 'react-router-dom';
 
-import HomePage from './handlers/Home';
-import DetailsPage from './handlers/Details';
-
-const pageMap = {
-  home: HomePage,
-  details: DetailsPage
-};
+import App from './App';
 
 export default {
-  renderApp: ({ SkuProvider, routeName, site }) => {
-    const App = pageMap[routeName];
+  renderApp: ({ SkuProvider, route, site }) => {
     return renderToString(
       <SkuProvider>
-        <App site={site} />
+        <StaticRouter location={route} context={{}}>
+          <App site={site} />
+        </StaticRouter>
       </SkuProvider>
     );
   },

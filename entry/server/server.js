@@ -1,6 +1,5 @@
 import path from 'path';
 import express from 'express';
-import defaultClientEntry from '../../context/defaultClientEntry';
 import makeExtractor from '../makeExtractor';
 import serverExports from '__sku_alias__serverEntry';
 import webpackStats from '__sku_alias__webpackStats';
@@ -23,10 +22,7 @@ if (middleware) {
   app.use(middleware);
 }
 app.get('*', (...args) =>
-  renderCallback(
-    makeExtractor(webpackStats, defaultClientEntry, publicPath),
-    ...args
-  )
+  renderCallback(makeExtractor(webpackStats, publicPath), ...args)
 );
 
 export default app;

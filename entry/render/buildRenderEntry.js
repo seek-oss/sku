@@ -7,7 +7,6 @@ import render from '__sku_alias__renderEntry';
 export default async renderParams => {
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     renderParams.webpackStats,
-    renderParams.entrypoint,
     renderParams.publicPath
   );
 

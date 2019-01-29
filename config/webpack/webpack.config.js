@@ -74,9 +74,9 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   ];
 
   // Add polyfills and dev server client to all entries
-  const entry = isLibrary
+  const clientEntry = isLibrary
     ? createEntry(paths.libraryEntry)
-    : lodash.mapValues(paths.clientEntries, createEntry);
+    : createEntry(paths.clientEntry);
 
   const internalJs = [
     path.join(__dirname, '../../entry'),
@@ -103,7 +103,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     {
       name: 'client',
       mode: webpackMode,
-      entry,
+      entry: clientEntry,
       devtool: isStartScript ? 'inline-source-map' : false,
       output: {
         path: paths.target,

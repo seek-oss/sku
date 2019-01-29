@@ -27,10 +27,6 @@ module.exports = new Schema({
       route: {
         type: String,
         required: true
-      },
-      entry: {
-        type: String,
-        required: false
       }
     },
     length: { min: 1 },

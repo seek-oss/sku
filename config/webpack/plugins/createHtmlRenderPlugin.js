@@ -9,24 +9,18 @@ const {
   environments,
   sites,
   transformOutputPath,
-  defaultClientEntry,
   publicPath
 } = require('../../../context');
 
 // mapStatsToParams runs once for each render. It's purpose is
-// to create the relevant asset tags required for each route.
-// Each entrypoint maps back to a route specific entry or the default client entry
-const mapStatsToParams = ({ webpackStats, routeName }) => {
+// to forward the client webpack stats to the render function
+const mapStatsToParams = ({ webpackStats }) => {
   const stats = webpackStats
     .toJson()
     .children.find(({ name }) => name === 'client');
-  const entrypoint = stats.entrypoints[routeName]
-    ? routeName
-    : defaultClientEntry;
 
   return {
     webpackStats: stats,
-    entrypoint,
     publicPath
   };
 };

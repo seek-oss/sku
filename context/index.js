@@ -3,7 +3,6 @@ const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
-const { getClientEntries } = require('./clientEntries');
 const validateConfig = require('./validateConfig');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
@@ -46,7 +45,7 @@ const paths = {
     'braid-design-system',
     ...skuConfig.compilePackages
   ],
-  clientEntries: getClientEntries(skuConfig),
+  clientEntry: getPathFromCwd(skuConfig.clientEntry),
   renderEntry: getPathFromCwd(skuConfig.renderEntry),
   libraryEntry: skuConfig.libraryEntry
     ? getPathFromCwd(skuConfig.libraryEntry)

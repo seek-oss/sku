@@ -1,8 +1,13 @@
 import React from 'react';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
-export default (stats, entrypoint, publicPath) => {
-  const extractor = new ChunkExtractor({ stats, entrypoints: [entrypoint] });
+import defaultEntryPoint from '../context/defaultClientEntry';
+
+export default (stats, publicPath) => {
+  const extractor = new ChunkExtractor({
+    stats,
+    entrypoints: [defaultEntryPoint]
+  });
 
   const SkuProvider = ({ children }) => (
     <ChunkExtractorManager extractor={extractor}>

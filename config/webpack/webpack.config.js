@@ -63,7 +63,8 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   });
 
   const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`
+    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`,
+    require.resolve('../../entry/sku-client/index.js')
   ];
 
   const createEntry = entry => [

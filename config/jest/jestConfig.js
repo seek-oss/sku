@@ -47,7 +47,7 @@ module.exports = {
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding
     // the default, which normally excludes everything in node_modules.
-    `node_modules${slash}(?!(${compilePackagesRegex}))${slash}.+`
+    `node_modules${slash}(?!(${compilePackagesRegex}))`
   ],
   testURL: 'http://localhost', // @see https://github.com/facebook/jest/issues/6766
   watchPlugins: [

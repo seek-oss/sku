@@ -3,12 +3,16 @@ process.env.NODE_ENV = 'development';
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
+const bodyParser = require('body-parser');
 const { blue, underline } = require('chalk');
 
+const { writeStartConfig } = require('../lib/startConfig');
 const dynamicRouteMiddleware = require('../lib/dynamicRouteMiddleware');
 const allocatePort = require('../lib/allocatePort');
 const { hosts, port, initialPath, paths, routes } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
+
+const jsonParser = bodyParser.json();
 
 const localhost = '0.0.0.0';
 
@@ -42,6 +46,12 @@ const localhost = '0.0.0.0';
           rootDirectory: paths.target
         })
       );
+
+      app.post('/sku/app-config', jsonParser, (req, res) => {
+        writeStartConfig(req.body);
+
+        res.sendStatus(200);
+      });
     }
   });
 

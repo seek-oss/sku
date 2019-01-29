@@ -1,11 +1,15 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
-import Home from './handlers/Home';
+
+import App from './App';
 
 loadableReady(() => {
   hydrate(
-    <Home site={window.APP_CONFIG.site} />,
+    <BrowserRouter>
+      <App site={window.APP_CONFIG.site} />
+    </BrowserRouter>,
     document.getElementById('app')
   );
 });

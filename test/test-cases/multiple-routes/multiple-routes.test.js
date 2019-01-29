@@ -6,7 +6,7 @@ const startAssetServer = require('../../utils/assetServer');
 
 const targetDirectory = `${__dirname}/dist`;
 
-describe('multiple-entries', () => {
+describe('multiple-routes', () => {
   describe('start', () => {
     const devServerUrl = `http://localhost:8202`;
     let server;

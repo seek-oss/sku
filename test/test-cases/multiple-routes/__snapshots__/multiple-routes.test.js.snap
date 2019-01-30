@@ -6,23 +6,21 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
 <script async=\\"\\" data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -32,23 +30,21 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
 <script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -67,32 +63,30 @@ Object {
 ",
   "handlers-Home-c864c1b7bd0e66aae11f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-c4aa489f16de32c5e6da.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-7455347180589ae796c7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": "<!DOCTYPE html>
 <html>
   <head>
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-8fb34c2644e16e85c79e.js\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-07cc1f2de72c2850d498.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\">Welcome to the Details page - <!-- -->au<span>Some special async content</span></h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
 <script async data-chunk=\\"handlers-Details\\" src=\\"http://localhost:4004/handlers-Details-8fb34c2644e16e85c79e.js\\"></script>
 <script async data-chunk=\\"AsyncComponent\\" src=\\"http://localhost:4004/AsyncComponent-07cc1f2de72c2850d498.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -101,23 +95,21 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
 <script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   </body>
 </html>",
   "production/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -126,25 +118,23 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-8fb34c2644e16e85c79e.js\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-07cc1f2de72c2850d498.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_91MnZhe\\">Welcome to the Details page - <!-- -->nz<span>Some special async content</span></h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"nz\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
 <script async data-chunk=\\"handlers-Details\\" src=\\"http://localhost:4004/handlers-Details-8fb34c2644e16e85c79e.js\\"></script>
 <script async data-chunk=\\"AsyncComponent\\" src=\\"http://localhost:4004/AsyncComponent-07cc1f2de72c2850d498.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   </body>
 </html>",
   "production/nz/index.html": "<!DOCTYPE html>
@@ -153,23 +143,21 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"nz\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-7455347180589ae796c7.js\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->nz</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"nz\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
 <script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-c864c1b7bd0e66aae11f.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-9dad5cef51b0ed90e1ca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-101f55ed40abf2feb656.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-c4aa489f16de32c5e6da.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-7455347180589ae796c7.js\\"></script>
   </body>
 </html>",
   "runtime-9dad5cef51b0ed90e1ca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -183,9 +171,6 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"style\\" href=\\"/handlers-Details.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
@@ -196,7 +181,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\">Welcome to the Details page - <!-- -->au<span>Some special async content</span></h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
 <script async=\\"\\" data-chunk=\\"handlers-Details\\" src=\\"/handlers-Details.js\\"></script>
 <script async=\\"\\" data-chunk=\\"AsyncComponent\\" src=\\"/AsyncComponent.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
@@ -211,9 +197,6 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"style\\" href=\\"/handlers-Details.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
@@ -224,7 +207,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\">Welcome to the Details page - <!-- -->au<span>Some special async content</span></h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
 <script async data-chunk=\\"handlers-Details\\" src=\\"/handlers-Details.js\\"></script>
 <script async data-chunk=\\"AsyncComponent\\" src=\\"/AsyncComponent.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
@@ -242,9 +226,6 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"/handlers-Home.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
@@ -254,7 +235,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
 <script async=\\"\\" data-chunk=\\"handlers-Home\\" src=\\"/handlers-Home.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
@@ -268,9 +250,6 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <script>
-      window.APP_CONFIG = {\\"site\\":\\"au\\",\\"environment\\":\\"production\\"};
-    </script>
     <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"style\\" href=\\"/handlers-Home.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
@@ -280,7 +259,8 @@ Object {
   </head>
   <body>
     <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
+    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
+<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
 <script async data-chunk=\\"handlers-Home\\" src=\\"/handlers-Home.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>

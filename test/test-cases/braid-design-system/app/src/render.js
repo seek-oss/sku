@@ -13,6 +13,10 @@ export default {
     );
   },
 
+  provideClientContext: ({ site }) => ({
+    site
+  }),
+
   renderDocument: ({ app, headTags, bodyTags, site }) => dedent`
     <!DOCTYPE html>
     <html>

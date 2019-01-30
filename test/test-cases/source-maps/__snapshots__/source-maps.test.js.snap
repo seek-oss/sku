@@ -8,20 +8,24 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
+    <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/runtime-985e5e30cbdd19a8ea5d.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/vendors~main-a3090295ce177dd64404.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/main-8e6fc478c101f972df15.js\\">
+
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello source maps</div></div>
-    <script type=\\"text/javascript\\" src=\\"http://localhost:4005/runtime-985e5e30cbdd19a8ea5d.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4005/vendors~main-9aa20d39de042df69f71.js\\" crossorigin=\\"anonymous\\"></script>
-<script type=\\"text/javascript\\" src=\\"http://localhost:4005/main-d9b93070ae828b2cd8b9.js\\" crossorigin=\\"anonymous\\"></script>
+    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/runtime-985e5e30cbdd19a8ea5d.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/main-8e6fc478c101f972df15.js\\"></script>
   </body>
 </html>",
-  "main-d9b93070ae828b2cd8b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-d9b93070ae828b2cd8b9.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8e6fc478c101f972df15.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8e6fc478c101f972df15.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-985e5e30cbdd19a8ea5d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-985e5e30cbdd19a8ea5d.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-9aa20d39de042df69f71.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-9aa20d39de042df69f71.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-a3090295ce177dd64404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-a3090295ce177dd64404.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

@@ -23,6 +23,7 @@ const {
   isLibrary,
   libraryName,
   isStartScript,
+  sourceMapsProd,
   supportedBrowsers
 } = config;
 
@@ -99,12 +100,15 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     ? `${libraryFileMask}.css`
     : `${clientFileMask}.css`;
 
+  const sourceMapStyle = isStartScript ? 'inline-source-map' : 'source-map';
+  const useSourceMaps = isStartScript || sourceMapsProd;
+
   const webpackConfigs = [
     {
       name: 'client',
       mode: webpackMode,
       entry: clientEntry,
-      devtool: isStartScript ? 'inline-source-map' : false,
+      devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
         path: paths.target,
         publicPath: paths.publicPath,

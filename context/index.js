@@ -82,5 +82,6 @@ module.exports = {
   defaultClientEntry,
   isStartScript,
   isBuildScript,
-  supportedBrowsers: skuConfig.supportedBrowsers
+  supportedBrowsers: skuConfig.supportedBrowsers,
+  sourceMapsProd: Boolean(skuConfig.sourceMapsProd)
 };

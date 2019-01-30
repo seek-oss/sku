@@ -146,5 +146,8 @@ module.exports = new Schema({
       required: true
     },
     required: true
+  },
+  sourceMapsProd: {
+    type: Boolean
   }
 });

@@ -1,4 +1,3 @@
-import { Stats } from 'webpack';
 import { ComponentType } from 'react';
 
 interface RenderAppProps {
@@ -12,14 +11,20 @@ interface RenderAppProps {
   webpackStats: object;
 }
 
-interface RenderDocumentProps<T> extends RenderAppProps {
-  app: T;
+interface RenderDocumentProps<App> extends RenderAppProps {
+  app: App;
   headTags: string;
   bodyTags: string;
 }
 
-export interface Render<T = string> {
-  renderApp(p: RenderAppProps): T;
+export interface Render<App = string> {
+  renderApp(p: RenderAppProps): App;
 
-  renderDocument(p: RenderDocumentProps<T>): string;
+  provideClientContext?(p: {
+    environment: string;
+    site: string;
+    app: App;
+  }): object;
+
+  renderDocument(p: RenderDocumentProps<App>): string;
 }

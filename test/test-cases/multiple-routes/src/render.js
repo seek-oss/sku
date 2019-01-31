@@ -16,7 +16,11 @@ export default {
     );
   },
 
-  renderDocument: ({ app, bodyTags, headTags, site, environment }) => {
+  provideClientContext: ({ site }) => ({
+    site
+  }),
+
+  renderDocument: ({ app, bodyTags, headTags }) => {
     return dedent`
       <!DOCTYPE html>
       <html>
@@ -24,9 +28,6 @@ export default {
           <meta charset="UTF-8">
           <title>hello-world</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <script>
-            window.APP_CONFIG = ${JSON.stringify({ site, environment })};
-          </script>
           ${headTags}
         </head>
         <body>

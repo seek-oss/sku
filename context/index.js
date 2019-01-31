@@ -30,6 +30,11 @@ const transformOutputPath = isStartScript
   ? skuConfig.devTransformOutputPath
   : skuConfig.transformOutputPath;
 
+// normalize sites to object syntax
+const sites = skuConfig.sites.map(site =>
+  typeof site === 'string' ? { name: site } : site
+);
+
 // Default initialPath to the first route
 const initialPath = skuConfig.initialPath || skuConfig.routes[0].route;
 
@@ -75,7 +80,7 @@ module.exports = {
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
-  sites: skuConfig.sites,
+  sites,
   routes: skuConfig.routes,
   environments: skuConfig.environments,
   transformOutputPath,

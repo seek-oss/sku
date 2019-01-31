@@ -29,12 +29,18 @@ const getStartRoutes = () => {
   // Create a dynamic file for use in start mode containing
   // environment and site config. This allows us to change
   // the environment/site without restarting the dev server
-  writeStartConfig({ environment: environments[0], site: sites[0] });
+  // writeStartConfig({ environment: environments[0], site: sites[0] });
 
   // Start mode needs one render pass per route
-  return routes.map(({ name, route }) => ({
-    routeName: name,
-    route
+  return product({
+    environment: [environments[0]],
+    site: sites,
+    route: routes
+  }).map(({ route, site, ...rest }) => ({
+    ...rest,
+    site: site.name,
+    routeName: route.name,
+    route: route.route
   }));
 };
 
@@ -46,8 +52,9 @@ const getBuildRoutes = () =>
     environment: environments,
     site: sites,
     route: routes
-  }).map(({ route, ...rest }) => ({
+  }).map(({ route, site, ...rest }) => ({
     ...rest,
+    site: site.name,
     routeName: route.name,
     route: route.route
   }));

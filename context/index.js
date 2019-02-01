@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
@@ -26,8 +27,11 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
+const startTransformPath = ({ site = '', route = '' }) =>
+  path.join(site, route);
+
 const transformOutputPath = isStartScript
-  ? skuConfig.devTransformOutputPath
+  ? startTransformPath
   : skuConfig.transformOutputPath;
 
 // normalize sites to object syntax

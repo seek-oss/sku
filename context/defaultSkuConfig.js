@@ -13,7 +13,6 @@ module.exports = {
   environments: [],
   transformOutputPath: ({ environment = '', site = '', route = '' }) =>
     path.join(environment, site, route),
-  devTransformOutputPath: ({ site, route }) => path.join(site, route),
   srcPaths: ['./src'],
   env: {},
   compilePackages: [],

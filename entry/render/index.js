@@ -4,16 +4,20 @@ import clientContextKey from '../clientContextKey';
 
 import render from '__sku_alias__renderEntry';
 
+const libraryName = SKU_LIBRARY_NAME; // eslint-disable-line no-undef
+
 export const serializeConfig = config =>
   `<script>window.${clientContextKey} = ${serializeJavascript(
     config
   )};</script>`;
 
 export default async renderParams => {
+  const renderContext = { ...renderParams, libraryName };
+
   let app;
   let clientContext = {};
 
-  const { webpackStats, publicPath } = renderParams;
+  const { webpackStats, publicPath } = renderContext;
 
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     webpackStats,
@@ -23,13 +27,16 @@ export default async renderParams => {
   // renderApp is optional for libraries
   if (render.renderApp) {
     app = await render.renderApp({
-      ...renderParams,
+      ...renderContext,
       SkuProvider
     });
   }
 
   if (render.provideClientContext) {
-    clientContext = await render.provideClientContext({ ...renderParams, app });
+    clientContext = await render.provideClientContext({
+      ...renderContext,
+      app
+    });
   }
 
   const bodyTags =
@@ -38,7 +45,7 @@ export default async renderParams => {
       : getBodyTags();
 
   const result = await render.renderDocument({
-    ...renderParams,
+    ...renderContext,
     headTags: getHeadTags(),
     bodyTags,
     app

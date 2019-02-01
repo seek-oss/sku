@@ -33,13 +33,14 @@ module.exports = skuConfig => {
     });
 
   // Validate schema types
-  // configSchema
-  //   .validate(skuConfig, { strip: false })
-  //   .forEach(({ message, path }) => {
-  //     errors.push(
-  //       `:no_entry_sign: ${message.replace(path, `'${bold(path)}'`)}`
-  //     );
-  //   });
+  const schemaCheckResult = configSchema(skuConfig);
+  if (schemaCheckResult !== true) {
+    schemaCheckResult.forEach(({ message, field }) => {
+      errors.push(
+        `:no_entry_sign: ${message.replace(field, `${bold(field)}`)}`
+      );
+    });
+  }
 
   // Validate library entry has corresponding libraryName
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {

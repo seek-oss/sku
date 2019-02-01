@@ -1,149 +1,127 @@
-const Schema = require('validate');
+const Validator = require('fastest-validator');
 
-module.exports = new Schema({
+const validator = new Validator();
+
+module.exports = validator.compile({
   clientEntry: {
-    type: String,
-    required: true
+    type: 'string'
   },
   renderEntry: {
-    type: String,
-    required: true
+    type: 'string'
   },
   serverEntry: {
-    type: String,
-    required: true
+    type: 'string'
   },
   libraryEntry: {
-    type: String,
-    required: false
+    type: 'string',
+    optional: true
   },
   routes: {
-    type: Array,
-    each: {
-      name: {
-        type: String,
-        required: true
-      },
-      route: {
-        type: String,
-        required: true
+    type: 'array',
+    items: {
+      type: 'object',
+      props: {
+        route: {
+          type: 'string'
+        },
+        name: {
+          type: 'string',
+          optional: true
+        },
+        entry: {
+          type: 'string',
+          optional: true
+        }
       }
     },
-    length: { min: 1 },
-    required: true
+    min: 1
   },
   sites: {
-    type: Array,
-    each: { type: String, required: true },
-    required: true
+    type: 'array',
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: {
+          name: { type: 'string' },
+          site: { type: 'string', optional: true }
+        }
+      }
+    ]
   },
   environments: {
-    type: Array,
-    each: { type: String, required: true },
-    required: true
+    type: 'array',
+    items: 'string'
   },
   transformOutputPath: {
-    type: Function,
-    required: true
-  },
-  devTransformOutputPath: {
-    type: Function,
-    required: true
+    type: 'function'
   },
   srcPaths: {
-    type: Array,
-    each: {
-      type: String,
-      required: true
-    },
-    length: { min: 1 },
-    required: true
+    type: 'array',
+    items: 'string',
+    min: 1
   },
   env: {
-    type: Object,
-    required: true
+    type: 'object'
   },
   compilePackages: {
-    type: Array,
-    each: {
-      type: String,
-      required: true
-    },
-    required: true
+    type: 'array',
+    items: 'string'
   },
   hosts: {
-    type: Array,
-    each: {
-      type: String,
-      required: true
-    },
-    required: true
+    type: 'array',
+    items: 'string'
   },
   port: {
-    type: Number,
-    required: true
+    type: 'number'
   },
   serverPort: {
-    type: Number,
-    required: true
+    type: 'number'
   },
   storybookPort: {
-    type: Number,
-    required: true
+    type: 'number'
   },
   target: {
-    type: String,
-    required: true
+    type: 'string'
   },
   setupTests: {
-    type: String,
-    required: false
+    type: 'string',
+    optional: true
   },
   initialPath: {
-    type: String,
-    required: false
+    type: 'string',
+    optional: true
   },
   public: {
-    type: String,
-    required: true
+    type: 'string'
   },
   publicPath: {
-    type: String,
-    required: true
+    type: 'string'
   },
   polyfills: {
-    type: Array,
-    each: {
-      type: String,
-      required: true
-    },
-    required: true
+    type: 'array',
+    items: 'string'
   },
   libraryName: {
-    type: String,
-    required: false
+    type: 'string',
+    optional: true
   },
   dangerouslySetWebpackConfig: {
-    type: Function,
-    required: true
+    type: 'function'
   },
   dangerouslySetJestConfig: {
-    type: Function,
-    required: true
+    type: 'function'
   },
   dangerouslySetESLintConfig: {
-    type: Function,
-    required: true
+    type: 'function'
   },
   supportedBrowsers: {
-    type: Array,
-    each: {
-      type: String,
-      required: true
-    },
-    required: true
+    type: 'array',
+    items: {
+      type: 'string'
+    }
   },
   sourceMapsProd: {
-    type: Boolean
+    type: 'boolean'
   }
 });

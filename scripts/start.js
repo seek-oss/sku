@@ -3,25 +3,13 @@ process.env.NODE_ENV = 'development';
 const opn = require('opn');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const bodyParser = require('body-parser');
-const { blue, underline, yellow, bold } = require('chalk');
-const hostile = require('hostile');
+const { blue, underline } = require('chalk');
 
-const { writeStartConfig } = require('../lib/startConfig');
-const dynamicRouteMiddleware = require('../lib/dynamicRouteMiddleware');
+const { checkHosts, getAppHosts } = require('../lib/hosts');
 const siteServeMiddleware = require('../lib/siteServeMiddleware');
 const allocatePort = require('../lib/allocatePort');
-const {
-  hosts,
-  port,
-  initialPath,
-  paths,
-  routes,
-  sites
-} = require('../context');
+const { port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
-
-const jsonParser = bodyParser.json();
 
 const localhost = '0.0.0.0';
 
@@ -31,70 +19,28 @@ const localhost = '0.0.0.0';
     host: localhost
   });
 
-  const dynamicRoutes = routes
-    .filter(({ route }) => /\:/.test(route))
-    .map(({ route }) => route);
-
   const webpackCompiler = webpack(
     makeWebpackConfig({
       port: availablePort
     })
   );
 
-  const sitesWithHosts = sites.filter(site => site.host);
+  await checkHosts();
 
-  const allowedHosts = sitesWithHosts.map(site => site.host).concat(hosts);
-
-  if (allowedHosts.length > 0) {
-    hostile.get(false, (err, lines) => {
-      if (err) {
-        // ignore error
-        return;
-      }
-
-      allowedHosts
-        .filter(allowedHost => !lines.find(([_, host]) => allowedHost === host))
-        .forEach(allowedHost => {
-          console.log(
-            yellow(
-              `Configured host '${bold(
-                allowedHost
-              )}' is not configured in your host file`
-            )
-          );
-        });
-    });
-  }
+  const appHosts = getAppHosts();
 
   const devServer = new WebpackDevServer(webpackCompiler, {
     contentBase: paths.public,
     overlay: true,
     stats: 'errors-only',
-    allowedHosts,
+    allowedHosts: appHosts,
     after: (app, server) => {
       app.get(
         '*',
         siteServeMiddleware({
-          sites: sitesWithHosts,
-          fs: server.middleware.fileSystem,
-          rootDirectory: paths.target
+          fs: server.middleware.fileSystem
         })
       );
-
-      app.get(
-        '*',
-        dynamicRouteMiddleware({
-          dynamicRoutes,
-          fs: server.middleware.fileSystem,
-          rootDirectory: paths.target
-        })
-      );
-
-      app.post('/sku/app-config', jsonParser, (req, res) => {
-        writeStartConfig(req.body);
-
-        res.sendStatus(200);
-      });
     }
   });
 
@@ -104,7 +50,7 @@ const localhost = '0.0.0.0';
       return;
     }
 
-    const url = `http://${hosts[0]}:${availablePort}${initialPath}`;
+    const url = `http://${appHosts[0]}:${availablePort}${initialPath}`;
 
     console.log();
     console.log(blue(`Starting the development server on ${underline(url)}`));

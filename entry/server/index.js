@@ -1,6 +1,6 @@
 import http from 'http';
 import commandLineArgs from 'command-line-args';
-import app from './server';
+import { app, onStart } from './server';
 
 const { port } = commandLineArgs(
   [
@@ -26,5 +26,9 @@ if (module.hot) {
 } else {
   app.listen(port, () => {
     console.log(`App started on port ${port}`);
+
+    if (typeof onStart === 'function') {
+      onStart(app);
+    }
   });
 }

@@ -8,7 +8,7 @@ const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
 
 const serverOptions = serverExports({ publicPath });
 
-const { renderCallback, middleware } = serverOptions;
+const { renderCallback, middleware, onStart } = serverOptions;
 
 const app = express();
 
@@ -25,4 +25,4 @@ app.get('*', (...args) =>
   renderCallback(makeExtractor(webpackStats, publicPath), ...args)
 );
 
-export default app;
+export { app, onStart };

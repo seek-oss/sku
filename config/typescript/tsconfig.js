@@ -3,7 +3,14 @@ const { paths } = require('../../context');
 
 module.exports = () => ({
   compilerOptions: {
-    skipLibCheck: true, // Fixes https://github.com/cypress-io/cypress/issues/1087
+    // This flag allows tsc to be invoked directly by VS Code (via Cmd+Shift+B),
+    // otherwise it would emit a bunch of useless JS/JSX files in your project.
+    // We emit compiled JavaScript into `dist` via webpack + Babel, not tsc.
+    noEmit: true,
+
+    // Fixes https://github.com/cypress-io/cypress/issues/1087
+    skipLibCheck: true,
+
     esModuleInterop: true,
     allowSyntheticDefaultImports: true,
     resolveJsonModule: true,

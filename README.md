@@ -402,7 +402,13 @@ module.exports = {
 
 If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above.
 
-Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide a render callback and any additional middlewares to that server. You can provide either a single middleware or an array. This can be done as follows:
+Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide the following:
+
+- a render callback
+- optionally, any required middlewares, either one or an array
+- optionally, a callback to run after the server starts, which receives the Express application instance as a parameter
+
+This can be done as follows:
 
 ```js
 import render from './render.js';
@@ -412,7 +418,11 @@ export default ({ publicPath, headTags, bodyTags }) => {
   renderCallback: (req, res) => {
     res.send(render(publicPath, headTags, bodyTags));
   },
-  middleware: middleware
+  middleware: middleware,
+  onStart: app => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  }
 };
 ```
 

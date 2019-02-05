@@ -44,7 +44,7 @@ module.exports = validator.compile({
         type: 'object',
         props: {
           name: { type: 'string' },
-          site: { type: 'string', optional: true }
+          host: { type: 'string', optional: true }
         }
       }
     ]

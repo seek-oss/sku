@@ -1,4 +1,7 @@
 const path = require('path');
+const fs = require('fs');
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const gracefulSpawn = require('../../../lib/gracefulSpawn');
@@ -71,6 +74,15 @@ describe('ssr-hello-world', () => {
       it('should generate a production server based on config', async () => {
         const snapshot = await getAppSnapshot(backendUrl);
         expect(snapshot).toMatchSnapshot();
+      });
+
+      it("should invoke the provided 'onStart' callback", async () => {
+        const pathToFile = path.join(targetDirectory, 'started.txt');
+        const startedFile = await readFile(pathToFile, { encoding: 'utf-8' });
+
+        expect(startedFile).toMatchInlineSnapshot(
+          `"Server started, here's your callback"`
+        );
       });
     });
 

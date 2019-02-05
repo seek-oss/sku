@@ -22,7 +22,7 @@ const headTags = styles
 
 const serverOptions = serverExports({ publicPath, headTags, bodyTags });
 
-const { renderCallback, middleware } = serverOptions;
+const { renderCallback, middleware, onStart } = serverOptions;
 
 const app = express();
 
@@ -37,4 +37,4 @@ if (middleware) {
 }
 app.get('*', renderCallback);
 
-export default app;
+export { app, onStart };

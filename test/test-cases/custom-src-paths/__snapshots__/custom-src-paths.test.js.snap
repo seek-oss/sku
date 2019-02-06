@@ -7,7 +7,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
 
   </head>
@@ -15,7 +15,7 @@ Object {
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
   
 </body></html>",
@@ -27,7 +27,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
 
   </head>
@@ -35,7 +35,7 @@ Object {
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
   </body>
 </html>",
@@ -52,7 +52,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
 
   </head>
@@ -60,13 +60,13 @@ Object {
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-5c9997f413dc34fe1f9b.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
   </body>
 </html>",
   "main-c038b5fb2b76d489450f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-27f87d9f0d19bf7deb87.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-a3090295ce177dd64404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-5c9997f413dc34fe1f9b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

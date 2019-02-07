@@ -1,13 +1,53 @@
 # Multi site (Theming)
 
-One of the features that makes sku unique, is it can handle a mutli site/brand application out of the box.
-The following is an example of how you would use this feature with [Braid](https://github.com/seek-oss/braid-design-system), but you can use this approach to different your sites in anyway you see fit.
+One of the features that makes sku unique, is it can handle a multi site/brand application out of the box using the [`sites`](./docs/configuration#sites) option.
+
+## Switching site by host
+
+By default, sku will render the first site in the [`sites`](./docs/configuration#sites) array when using `sku start`. However, if you want to be able to switch between sites without restarting the server, you can do so by setting a `host` for each site.
+
+```js
+module.exports = {
+  sites: [
+    { name: 'seekAnz', host: 'dev.seek.com.au' },
+    { name: 'jobStreet', host: 'dev.jobstreet.com' }
+  ]
+};
+```
+
+Now, if you request `http://dev.seek.com.au`, you will receive the `seekAnz` version of the app, and `http://dev.jobstreet.com` will return the `jobStreet` one.
+
+### Setup hosts
+
+Switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you.
+
+First add the following script to your `package.json`.
+
+```JSON
+{
+  "setup-hosts": "sku setup-hosts"
+}
+```
+
+Then you can run the script to configure you machine with the required hosts.
+
+```bash
+$ sudo npm run setup-hosts
+```
+
+_**NOTE:** Modifying hosts configuration needs root privileges._
+
+## Braid example
+
+The following is an example of how you would use this feature with [Braid](https://github.com/seek-oss/braid-design-system), but you can use this approach to vary your sites in any way.
 
 _**NOTE:** Currently this example is for static rendering projects only but SSR projects can follow the same pattern._
 
-## Config
+### Config
 
 Firstly, add a [`sites`](./docs/configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
+
+_**NOTE:** For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site._
 
 ```js
 module.exports = {
@@ -15,7 +55,7 @@ module.exports = {
 };
 ```
 
-## Forwarding site
+### Rendering the site
 
 Now handle the site variable in our render and client entries.
 
@@ -71,6 +111,10 @@ export default ({ site }) =>
   hydrate(<App site={site} />, document.getElementById('app'));
 ```
 
+### Loading the theme
+
+Now the site is available in our `App` component, we can create a [`loadable library`](https://www.smooth-code.com/open-source/loadable-components/docs/api-loadable-component/#loadablelib) using the site prop. This means the result of this import will actually be different depending on which site we are rendering.
+
 ```js
 // App.js
 import React from 'react';
@@ -78,8 +122,8 @@ import loadable from '@loadable/component';
 
 import { ThemeProvider } from 'braid-design-system';
 
-// Create a loadable library which will differ by site for your Theme
-const Theme = loadable.lib(({ site }) => import(`./themes/${site}`));
+// Create a loadable library which will differ by site
+const Theme = loadable.lib(({ site }) => import(`braid-design-system/lib/themes/${site}`);
 
 export default ({ site }) => (
   <Theme themeName={site}>

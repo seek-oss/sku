@@ -10,7 +10,7 @@
 - [Compilation](./docs/compilation.md)
 - [Styling](./docs/styling.md)
 - [Code splitting](./docs/code-splitting.md)
-- [Muli site (Theming)](./docs/multi-site.md)
+- [Multi-site (Theming)](./docs/multi-site.md)
 - [Extra features](./docs/extra-features.md)
 - **Quality**
 - [Testing](./docs/testing.md)

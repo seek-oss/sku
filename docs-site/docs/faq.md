@@ -1,6 +1,6 @@
 # FAQ
 
-## It's not working
+## Why isn't X working?
 
 If you're having issues with sku please contact the _#sku-support_ channel for help. However, you can try the following to resolve common issues.
 

@@ -4,7 +4,7 @@ import clientContextKey from '../clientContextKey';
 
 import render from '__sku_alias__renderEntry';
 
-const libraryName = SKU_LIBRARY_NAME; // eslint-disable-line no-undef
+const libraryName = SKU_LIBRARY_NAME;
 
 export const serializeConfig = config =>
   `<script>window.${clientContextKey} = ${serializeJavascript(

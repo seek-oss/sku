@@ -29,6 +29,7 @@
     "__SKU_SRC_PATHS_7__": true,
     "__SKU_SRC_PATHS_8__": true,
     "__SKU_SRC_PATHS_9__": true,
-    "browser": true
+    "browser": true,
+    "SKU_LIBRARY_NAME": true
   }
 }

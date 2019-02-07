@@ -1,6 +1,6 @@
 # Static rendering
 
-Client-side apps all suffer the same performance pitfall of not being able to show any content until the JavaScript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, sku renders all the static content (everything not requiring an API call) of your app at build time.
+Client-side apps all suffer the same performance pitfall of not being able to show any content until the JavaScript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, sku renders all the static content (everything not requiring an API call) of your app at build time. We refer to this as static rendering.
 
 ## Configuration
 
@@ -43,7 +43,7 @@ Running `sku build` with the above config will create the following output in yo
 
 `environments`, `sites` & `routes` are all optional and will not show up in the build output if not specified.
 
-Note: `sku start` will default to the first `environment` and `site` in your config if provided.
+_**NOTE:** `sku start` will default to the first `environment` and `site` in your config if provided._
 
 ## Rendering
 
@@ -89,6 +89,8 @@ The `renderApp` function should return your application as an HTML string (gener
 _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required** for the app to work._
 
 `renderApp` will be called once for each combination of settings in sku config. Specifically, `environment`, `site` & `route`.
+
+> The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
 
 ### provideClientContext
 

@@ -23,7 +23,60 @@
       :root {
         /* Theme var docs available here: https://jhildenbiddle.github.io/docsify-themeable/#/customization */
 
-        --cover-max-width: ; /* Fixes cover centering */
+        --cover-max-width: 400px;
+        --theme-color: #8300fc;
+        --cover-background-color: #fff;
+        --base-font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        --sidebar-background: #f8f8f8;
+        --code-theme-background: #f8f8f8;
+        --blockquote-background: #f8f8f8;
+        --sidebar-toggle-background: #f8f8f8;
+        --sidebar-toggle-icon-color: #8300fc;
+        --sidebar-toggle-icon-stroke-width: 2px;
+        --sidebar-border-color: #f8f8f8;
+        --code-inline-background: #efefef;
+        --search-input-border-color: #fff;
+        --heading-h1-font-weight: 800;
+        --heading-h2-font-weight: 800;
+        --sidebar-name-font-size: 24px;
+        --sidebar-name-font-weight: 800;
+        --sidebar-nav-strong-font-size: 16px;
+        --sidebar-nav-strong-font-weight: 800;
+        --sidebar-nav-strong-text-transform: none;
+        --sidebar-nav-link-font-weight--active: 600;
+        --sidebar-nav-pagelink-padding: 6px 8px;
+        --sidebar-nav-pagelink-background-image: none;
+        --sidebar-nav-pagelink-background-image--active: none;
+        --sidebar-nav-pagelink-background-image--collapse: none;
+        --sidebar-nav-pagelink-background-image--loaded: none;
+        --sidebar-toggle-offset-top: 32px;
+
+        --code-theme-selector: #ce0095;
+        --code-theme-tag: #c7006f;
+        --code-theme-keyword: #5100a5;
+        --code-theme-function: #2b75ad;
+        --code-theme-operator: #007d62;
+      }
+
+      .app-nav a {
+        color: var(--theme-color);
+      }
+
+      .sidebar > h1 {
+        max-width: 80px;
+        margin: 24px 8px 0;
+      }
+
+      .sidebar .search input {
+        line-height: 1.5;
+      }
+
+      .app-nav:not(:empty) ~ main .markdown-section {
+        padding-top: 5rem;
+      }
+
+      .markdown-section h1:first-child {
+        margin-bottom: 35px;
       }
     </style>
   </head>
@@ -37,7 +90,9 @@
         loadNavbar: true,
         subMaxLevel: 3,
         coverpage: true,
-        onlyCover: true
+        onlyCover: true,
+        auto2top: true,
+        logo: '/logo/logo.png'
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>

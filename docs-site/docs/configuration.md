@@ -1,5 +1,29 @@
 # Configuration
 
+If you need to configure sku, first create a `sku.config.js` file in your project root:
+
+```bash
+$ touch sku.config.js
+```
+
+While sku has a zero configuration mode, the equivalent manual configuration would look like this:
+
+```js
+module.exports = {
+  clientEntry: 'src/client.js',
+  renderEntry: 'src/render.js',
+  public: 'src/public',
+  publicPath: '/',
+  target: 'dist'
+};
+```
+
+If you need to specify a different config file you can do so with the `--config` parameter.
+
+```bash
+$ sku start --config sku.custom.config.js
+```
+
 ## clientEntry
 
 type `string`
@@ -96,7 +120,7 @@ type `Array<string>`
 
 Default: `['./src']`
 
-An array of directories holding your apps source code.
+An array of directories holding your apps source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
 ## compilePackages
 

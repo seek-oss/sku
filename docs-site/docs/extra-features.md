@@ -1,0 +1,34 @@
+# Build features
+
+## Compile packages
+
+Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.
+
+```js
+module.exports = {
+  compilePackages: ['awesome-shared-components']
+};
+```
+
+Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
+
+## Polyfills
+
+Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
+
+Note: Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
+
+```js
+module.exports = {
+  ...,
+  polyfills: [
+    'promise-polyfill',
+    'core-js/modules/es6.symbol',
+    'regenerator-runtime/runtime'
+  ]
+}
+```
+
+## Bundle analysis
+
+`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.

@@ -1,5 +1,7 @@
 # Building the app
 
+## First steps
+
 You should have the following scripts in your `package.json`.
 
 ```js
@@ -27,5 +29,42 @@ module.exports = {
   // Optional parameter to set the page to open when the
   // development server starts, defaults to your first route
   initialPath: '/my-page'
+};
+```
+
+## Entry points
+
+There are two main entry points for every sku app. The client entry, and the render entry. SSR apps will have a server entry instead of a render entry.
+
+### Render
+
+**Static render only**
+
+The render entry is in charge of returning a string of HTML that represents each of your apps routes, sites & environments. You can think of it as a server render that runs at build time. For more info on how to do this see [static rendering](./docs/static-rendering.md).
+
+### Server
+
+**SSR only**
+
+The server file has a similar responsibility to the render entry, except it deals with http requests rather than pre-configured values. You can also add things like router middleware.
+
+sku currently uses [`express`](https://expressjs.com/) as it's SSR web server.
+
+### Client
+
+The client entry is the entrypoint for all your client side code (code that runs in the browser). This is where you'll want to hydrate your React application and configure any state management you may be using.
+
+> If you need pass information between render and client (e.g. Config values) see [`provideClientContext`](./docs/static-rendering#provideclientcontext)
+
+Example client entry
+
+```js
+import React from 'react';
+import { hydrate } from 'react-dom';
+
+import App from './App';
+
+export default () => {
+  hydrate(<App />, document.getElementById('app'));
 };
 ```

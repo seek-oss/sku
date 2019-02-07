@@ -1,40 +1,31 @@
 # Building the app
 
+You should have the following scripts in your `package.json`.
+
+```js
+{
+  "scripts": {
+    "start": "sku start" // or `sku start-ssr` for SSR projects
+    "build": "sku build" // or `sku build-ssr` for SSR projects
+  }
+}
+```
+
 To start a local development server and open a new browser tab:
 
 ```bash
 $ npm start
 ```
 
-or for SSR projects
-
-```bash
-$ npm start-ssr
-```
-
-To build assets for production:
-
-```bash
-$ npm run build
-```
-
-or for SSR projects
-
-```bash
-$ npm build-ssr
-```
-
 Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.
 
 ```js
 module.exports = {
-  // A list hosts your app can run off while in the dev environment.
-  hosts: ['dev.seek.com.au', 'dev.seek.co.nz'],
-  // The port you want the server to run on
+  // The preferred port you want the server to run on. sku will automatically
+  // find a free port if this one is busy.
   port: 5000,
-  // Optional parameter to set a page to open when the development server starts
+  // Optional parameter to set the page to open when the
+  // development server starts, defaults to your first route
   initialPath: '/my-page'
 };
 ```
-
-Note: The app will always run on localhost. The `hosts` option is only for apps that resolve custom hosts to localhost.

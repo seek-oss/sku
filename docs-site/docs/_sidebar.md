@@ -1,5 +1,6 @@
 - [Getting started](./docs/getting-started.md)
 - [Configuration](./docs/configuration.md)
+- [FAQ](./docs/faq)
 - **Project types**
 - [Static rendering](./docs/static-rendering.md)
 - [Server rendering](./docs/server-rendering.md)

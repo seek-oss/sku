@@ -18,22 +18,25 @@ module.exports = validator.compile({
   },
   routes: {
     type: 'array',
-    items: {
-      type: 'object',
-      props: {
-        route: {
-          type: 'string'
-        },
-        name: {
-          type: 'string',
-          optional: true
-        },
-        entry: {
-          type: 'string',
-          optional: true
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: {
+          route: {
+            type: 'string'
+          },
+          name: {
+            type: 'string',
+            optional: true
+          },
+          entry: {
+            type: 'string',
+            optional: true
+          }
         }
       }
-    },
+    ],
     min: 1
   },
   sites: {

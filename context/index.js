@@ -26,12 +26,16 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
+const normalizedRoutes = skuConfig.routes.map(route =>
+  typeof route === 'string' ? { route } : route
+);
+
 const transformOutputPath = isStartScript
   ? skuConfig.devTransformOutputPath
   : skuConfig.transformOutputPath;
 
 // Default initialPath to the first route
-const initialPath = skuConfig.initialPath || skuConfig.routes[0].route;
+const initialPath = skuConfig.initialPath || normalizedRoutes[0].route;
 
 const publicPath = skuConfig.publicPath.endsWith('/')
   ? skuConfig.publicPath
@@ -76,7 +80,7 @@ module.exports = {
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
   sites: skuConfig.sites,
-  routes: skuConfig.routes,
+  routes: normalizedRoutes,
   environments: skuConfig.environments,
   transformOutputPath,
   defaultClientEntry,

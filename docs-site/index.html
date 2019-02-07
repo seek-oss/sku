@@ -42,6 +42,11 @@
         --code-theme-function: #2b75ad;
         --code-theme-operator: #007d62;
       }
+
+      .sidebar > h1 {
+        max-width: 120px;
+        margin: 40px auto 10px;
+      }
     </style>
   </head>
   <body>
@@ -54,7 +59,9 @@
         loadNavbar: true,
         subMaxLevel: 3,
         coverpage: true,
-        onlyCover: true
+        onlyCover: true,
+        auto2top: true,
+        logo: '/logo/logo.png'
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>

@@ -36,9 +36,11 @@ module.exports = skuConfig => {
   const schemaCheckResult = configSchema(skuConfig);
   if (schemaCheckResult !== true) {
     schemaCheckResult.forEach(({ message, field }) => {
-      errors.push(
-        `:no_entry_sign: ${message.replace(field, `${bold(field)}`)}`
-      );
+      const errorMessage = message
+        ? `:no_entry_sign: ${message.replace(field, `${bold(field)}`)}`
+        : `:no_entry_sign: '${bold(field)}' is invalid`;
+
+      errors.push(errorMessage);
     });
   }
 

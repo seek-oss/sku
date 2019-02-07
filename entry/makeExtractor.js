@@ -15,17 +15,17 @@ export default (stats, publicPath) => {
     </ChunkExtractorManager>
   );
 
-  const extraScriptAttributes = /^(https?:)?\/\//.test(publicPath)
+  const extraTagAttributes = /^(https?:)?\/\//.test(publicPath)
     ? { crossorigin: 'anonymous' }
     : {};
 
   return {
     getHeadTags: () =>
       [
-        extractor.getLinkTags(extraScriptAttributes),
-        extractor.getStyleTags()
+        extractor.getLinkTags(extraTagAttributes),
+        extractor.getStyleTags(extraTagAttributes)
       ].join('\n'),
-    getBodyTags: () => extractor.getScriptTags(extraScriptAttributes),
+    getBodyTags: () => extractor.getScriptTags(extraTagAttributes),
     SkuProvider
   };
 };

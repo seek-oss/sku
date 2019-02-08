@@ -5,7 +5,8 @@ Code splitting is a great way to ensure each page of your app is as light as pos
 Here's an example of splitting out a React component into a separate chunk.
 
 ```js
-import loadable from '@loadable/component';
+// Make sure to import @loadable/component through sku
+import loadable from 'sku/@loadable/component';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));
 
@@ -91,7 +92,7 @@ export default () => {
 // App.js
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import loadable from '@loadable/component';
+import loadable from 'sku/@loadable/component';
 
 const Home = loadable(() => import('./handlers/Home'));
 const Details = loadable(() => import('./handlers/Details'));

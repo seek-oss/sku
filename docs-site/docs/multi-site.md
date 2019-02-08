@@ -118,7 +118,7 @@ Now the site is available in our `App` component, we can create a [`loadable lib
 ```js
 // App.js
 import React from 'react';
-import loadable from '@loadable/component';
+import loadable from 'sku/@loadable/component';
 
 import { ThemeProvider } from 'braid-design-system';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { loadableReady } from '@loadable/component';
+import { loadableReady } from '../../../../@loadable/component';
 
 import App from './App';
 

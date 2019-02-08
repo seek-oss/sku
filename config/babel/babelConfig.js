@@ -28,6 +28,7 @@ module.exports = ({ target, lang = 'js' }) => {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
       }
     ],
+    require.resolve('@babel/plugin-transform-runtime'),
     require.resolve('babel-plugin-macros'),
     require.resolve('@loadable/babel-plugin')
   ];

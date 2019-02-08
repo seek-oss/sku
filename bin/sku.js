@@ -14,6 +14,7 @@ const runScript = scriptName => {
 };
 
 switch (script) {
+  case 'setup-hosts':
   case 'init':
   case 'configure': {
     runScript(script);

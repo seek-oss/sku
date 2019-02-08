@@ -1,6 +1,5 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 
-const { writeStartConfig } = require('../../../lib/startConfig');
 const product = require('../../../lib/product');
 const {
   isStartScript,
@@ -26,15 +25,18 @@ const mapStatsToParams = ({ webpackStats }) => {
 };
 
 const getStartRoutes = () => {
-  // Create a dynamic file for use in start mode containing
-  // environment and site config. This allows us to change
-  // the environment/site without restarting the dev server
-  writeStartConfig({ environment: environments[0], site: sites[0] });
-
-  // Start mode needs one render pass per route
-  return routes.map(({ name, route }) => ({
-    routeName: name,
-    route
+  // product creates a new array featuring every possible combination
+  // of parameters. This is used to ensure we have a specific HTML file for
+  // every combination of site & route. Environment is always the
+  // first option in start mode.
+  return product({
+    site: sites,
+    route: routes
+  }).map(({ route, site = {} }) => ({
+    environment: environments.length > 0 ? environments[0] : undefined, // eslint-disable-line no-undefined
+    site: site.name,
+    routeName: route.name,
+    route: route.route
   }));
 };
 
@@ -46,8 +48,9 @@ const getBuildRoutes = () =>
     environment: environments,
     site: sites,
     route: routes
-  }).map(({ route, ...rest }) => ({
+  }).map(({ route, site = {}, ...rest }) => ({
     ...rest,
+    site: site.name,
     routeName: route.name,
     route: route.route
   }));

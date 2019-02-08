@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom/server';
 import Helmet from 'react-helmet';
 import App from './App/App';
 
-const renderApp = () => {
-  const appHtml = ReactDOM.renderToString(<App />);
+const renderApp = ({ SkuProvider }) => {
+  const appHtml = ReactDOM.renderToString(
+    <SkuProvider>
+      <App />
+    </SkuProvider>
+  );
   const helmet = Helmet.renderStatic();
 
   const htmlAttributes = helmet.htmlAttributes.toString();

@@ -41,16 +41,22 @@ module.exports = validator.compile({
   },
   sites: {
     type: 'array',
-    items: { type: 'string' }
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: {
+          name: { type: 'string' },
+          host: { type: 'string', optional: true }
+        }
+      }
+    ]
   },
   environments: {
     type: 'array',
     items: 'string'
   },
   transformOutputPath: {
-    type: 'function'
-  },
-  devTransformOutputPath: {
     type: 'function'
   },
   srcPaths: {

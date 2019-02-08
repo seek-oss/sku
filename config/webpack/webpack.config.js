@@ -12,8 +12,7 @@ const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 
-const startRenderEntry = require.resolve('../../entry/render/startRenderEntry');
-const buildRenderEntry = require.resolve('../../entry/render/buildRenderEntry');
+const renderEntry = require.resolve('../../entry/render');
 
 const {
   paths,
@@ -64,8 +63,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   });
 
   const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`,
-    require.resolve('../../entry/sku-client/index.js')
+    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`
   ];
 
   const skuClientEntry = require.resolve('../../entry/client/index.js');
@@ -216,7 +214,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       name: 'render',
       mode: 'development',
       entry: {
-        main: isStartScript ? startRenderEntry : buildRenderEntry
+        main: renderEntry
       },
       target: 'node',
       externals: [

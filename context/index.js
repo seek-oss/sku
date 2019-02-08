@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
@@ -30,9 +31,17 @@ const normalizedRoutes = skuConfig.routes.map(route =>
   typeof route === 'string' ? { route } : route
 );
 
+const startTransformPath = ({ site = '', route = '' }) =>
+  path.join(site, route);
+
 const transformOutputPath = isStartScript
-  ? skuConfig.devTransformOutputPath
+  ? startTransformPath
   : skuConfig.transformOutputPath;
+
+// normalize sites to object syntax
+const sites = skuConfig.sites.map(site =>
+  typeof site === 'string' ? { name: site } : site
+);
 
 // Default initialPath to the first route
 const initialPath = skuConfig.initialPath || normalizedRoutes[0].route;
@@ -79,8 +88,8 @@ module.exports = {
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
-  sites: skuConfig.sites,
   routes: normalizedRoutes,
+  sites,
   environments: skuConfig.environments,
   transformOutputPath,
   defaultClientEntry,

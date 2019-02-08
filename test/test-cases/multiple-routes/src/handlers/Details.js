@@ -2,7 +2,7 @@
 import styles from './Details.less';
 
 import React from 'react';
-import loadable from '@loadable/component';
+import loadable from '../../../../../@loadable/component';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));
 

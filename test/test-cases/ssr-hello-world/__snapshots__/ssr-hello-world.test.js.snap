@@ -6,18 +6,18 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f2868822765083529819.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
       <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f2868822765083529819.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\"></script>
     
   
 </body></html>",
@@ -29,26 +29,22 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f2868822765083529819.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
       <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f2868822765083529819.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\"></script>
     </body>
   </html>
 ",
-  "warnings": Array [
-    "A preload for 'http://localhost:4000/runtime-2b1037af33329e2eb3c0.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:4000/vendors~main-b67a55975a578d88324f.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:4000/main-f2868822765083529819.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-  ],
+  "warnings": Array [],
 }
 `;
 
@@ -58,18 +54,18 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f2868822765083529819.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
       <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f2868822765083529819.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\"></script>
     
   
 </body></html>",
@@ -81,26 +77,22 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f2868822765083529819.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
       <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-b67a55975a578d88324f.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f2868822765083529819.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-a5ce0820b251d0257c91.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-f7e25aad8d07a1047893.js\\" crossorigin=\\"anonymous\\"></script>
     </body>
   </html>
 ",
-  "warnings": Array [
-    "A preload for 'http://localhost:4000/runtime-2b1037af33329e2eb3c0.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:4000/vendors~main-b67a55975a578d88324f.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:4000/main-f2868822765083529819.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-  ],
+  "warnings": Array [],
 }
 `;
 
@@ -110,11 +102,11 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:8100/main.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:8100/main.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
@@ -133,11 +125,11 @@ Object {
       <meta charset=\\"UTF-8\\">
       <title>hello-world</title>
       <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:8100/main.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\">
+      <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"http://localhost:8100/main.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\" crossorigin=\\"anonymous\\">
     </head>
     <body>
       <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
@@ -148,10 +140,6 @@ Object {
     </body>
   </html>
 ",
-  "warnings": Array [
-    "A preload for 'http://localhost:8100/runtime.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:8100/vendors~main.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-    "A preload for 'http://localhost:8100/main.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute.",
-  ],
+  "warnings": Array [],
 }
 `;

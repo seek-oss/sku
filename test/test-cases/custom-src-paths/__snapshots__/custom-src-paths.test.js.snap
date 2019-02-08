@@ -7,16 +7,16 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\">
 
   </head>
   <body>
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -27,16 +27,16 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\">
 
   </head>
   <body>
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -52,21 +52,21 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\">
 
   </head>
   <body>
     <div id=\\"app\\"><div>Hello custom src paths</div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-27f87d9f0d19bf7deb87.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-a3090295ce177dd64404.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-c038b5fb2b76d489450f.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-cded978e9bab6f848864.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-fa33bb50db0ccfc89936.js\\"></script>
   </body>
 </html>",
-  "main-c038b5fb2b76d489450f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-fa33bb50db0ccfc89936.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-27f87d9f0d19bf7deb87.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-a3090295ce177dd64404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-cded978e9bab6f848864.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

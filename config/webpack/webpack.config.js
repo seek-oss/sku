@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
 const path = require('path');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
@@ -201,6 +202,14 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
+        ...(renderHtml
+          ? [
+              new LoadablePlugin({
+                writeToDisk: false,
+                outputAsset: false
+              })
+            ]
+          : []),
         ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({

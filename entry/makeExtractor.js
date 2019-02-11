@@ -20,11 +20,7 @@ export default (stats, publicPath) => {
     : {};
 
   return {
-    getHeadTags: () =>
-      [
-        extractor.getLinkTags(extraTagAttributes),
-        extractor.getStyleTags(extraTagAttributes)
-      ].join('\n'),
+    getHeadTags: () => extractor.getStyleTags(extraTagAttributes),
     getBodyTags: () => extractor.getScriptTags(extraTagAttributes),
     SkuProvider
   };

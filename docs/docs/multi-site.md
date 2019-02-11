@@ -123,7 +123,7 @@ import loadable from 'sku/@loadable/component';
 import { ThemeProvider } from 'braid-design-system';
 
 // Create a loadable library which will differ by site
-const Theme = loadable.lib(({ site }) => import(`braid-design-system/lib/themes/${site}`);
+const Theme = loadable.lib(({ site }) => import(`braid-design-system/themes/${site}`));
 
 export default ({ site }) => (
   <Theme themeName={site}>

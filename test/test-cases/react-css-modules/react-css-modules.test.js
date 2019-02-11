@@ -2,12 +2,27 @@ const path = require('path');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
+const startAssetServer = require('../../utils/assetServer');
+const getAppSnapshot = require('../../utils/getAppSnapshot');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 
 describe('react-css-modules', () => {
+  let closeAssetServer;
+
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);
+    closeAssetServer = startAssetServer(4293, distDir);
+    await waitForUrls('http://localhost:4293');
+  });
+
+  afterAll(() => {
+    closeAssetServer();
+  });
+
+  it('should create valid app', async () => {
+    const app = await getAppSnapshot('http://localhost:4293');
+    expect(app).toMatchSnapshot();
   });
 
   it('should generate the expected files', async () => {
@@ -50,7 +65,7 @@ describe('react-css-modules', () => {
         return { text, color, fontSize };
       });
 
-      expect(content.text).toEqual('Hello World');
+      expect(content.text).toEqual('Updated render');
       expect(content.color).toEqual('rgb(255, 0, 0)');
       expect(content.fontSize).toEqual('32px');
     });

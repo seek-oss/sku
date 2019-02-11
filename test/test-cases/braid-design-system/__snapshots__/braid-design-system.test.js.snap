@@ -14,14 +14,11 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-jobStreet\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
-<link data-chunk=\\"themes-jobStreet\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-jobStreet-c4d24420c93ed4a65dca.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-ec7f52f10b6c206393d4.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\">
-<link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
+    <link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
 <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\">
     <script>
       window.SKU_SITE = 'jobStreet';
     </script>
@@ -32,7 +29,7 @@ Object {
 <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [0];</script>
 <script async data-chunk=\\"themes-jobStreet\\" src=\\"https://somecdn.com/themes-jobStreet-c4d24420c93ed4a65dca.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"https://somecdn.com/vendors~main-ec7f52f10b6c206393d4.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\"></script>
   </body>
 </html>",
@@ -44,14 +41,11 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-seekAnz\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
-<link data-chunk=\\"themes-seekAnz\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-seekAnz-977833bf907efdee60aa.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-ec7f52f10b6c206393d4.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\">
-<link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
+    <link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
 <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\">
     <script>
       window.SKU_SITE = 'seekAnz';
     </script>
@@ -62,7 +56,7 @@ Object {
 <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [1];</script>
 <script async data-chunk=\\"themes-seekAnz\\" src=\\"https://somecdn.com/themes-seekAnz-977833bf907efdee60aa.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"https://somecdn.com/vendors~main-ec7f52f10b6c206393d4.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"https://somecdn.com/main-a377a140c9ddf4b7e15b.js\\"></script>
   </body>
 </html>",
@@ -125,6 +119,6 @@ Object {
 ._3lc311G{display:block}._1CaVPtc{display:list-item;list-style:disc}
 .uzdPKYt{display:-webkit-flex;display:-ms-flexbox;display:flex}._2SjLLNy{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0}
 ",
-  "vendors~main-ec7f52f10b6c206393d4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-6d3b9066cb1abe221dfa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

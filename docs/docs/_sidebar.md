@@ -1,0 +1,18 @@
+- [Getting started](./docs/getting-started.md)
+- [Configuration](./docs/configuration.md)
+- [FAQ](./docs/faq)
+- **Project types**
+- [Static rendering](./docs/static-rendering.md)
+- [Server rendering](./docs/server-rendering.md)
+- [Libraries](./docs/libraries.md)
+- **Development**
+- [Building the app](./docs/building-the-app.md)
+- [Compilation](./docs/compilation.md)
+- [Styling](./docs/styling.md)
+- [Code splitting](./docs/code-splitting.md)
+- [Multi-site (Theming)](./docs/multi-site.md)
+- [Extra features](./docs/extra-features.md)
+- **Quality**
+- [Testing](./docs/testing.md)
+- [Linting/formatting](./docs/linting.md)
+- [Storybook](./docs/storybook.md)

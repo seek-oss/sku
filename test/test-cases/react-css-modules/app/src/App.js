@@ -2,7 +2,7 @@ import React from 'react';
 import lessStyles from './lessStyles.less';
 import jsStyles from './jsStyles.css.js';
 
-export default () => {
+export default ({ children }) => {
   const [message, setMessage] = React.useState('Initial render');
 
   // This tests that React has boostrapped correctky client side
@@ -16,7 +16,7 @@ export default () => {
         className={`${lessStyles.nested} ${jsStyles.nested}`}
         data-automation-text
       >
-        {message}
+        {children || message}
       </div>
     </div>
   );

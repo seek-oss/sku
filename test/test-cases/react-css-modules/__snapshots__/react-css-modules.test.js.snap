@@ -9,14 +9,14 @@ Object {
     <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-9c0194badb44b0a1226c.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-25bdbf64bd7913c31ed8.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-2d3c80a108b62177ec67.js\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Updated render</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime-9c0194badb44b0a1226c.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main-25bdbf64bd7913c31ed8.js\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main-2d3c80a108b62177ec67.js\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -29,14 +29,14 @@ Object {
     <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-9c0194badb44b0a1226c.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-25bdbf64bd7913c31ed8.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-2d3c80a108b62177ec67.js\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Initial render</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"/runtime-9c0194badb44b0a1226c.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main-25bdbf64bd7913c31ed8.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/main-2d3c80a108b62177ec67.js\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -54,17 +54,17 @@ Object {
     <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-9c0194badb44b0a1226c.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-25bdbf64bd7913c31ed8.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-2d3c80a108b62177ec67.js\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Initial render</div></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"/runtime-9c0194badb44b0a1226c.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/vendors~main-6a0b8618a6bca73ed0ff.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main-25bdbf64bd7913c31ed8.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/main-2d3c80a108b62177ec67.js\\"></script>
   </body>
 </html>",
-  "main-25bdbf64bd7913c31ed8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2d3c80a108b62177ec67.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",

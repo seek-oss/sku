@@ -290,7 +290,8 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
-          SKU_LIBRARY_NAME: JSON.stringify(libraryName)
+          SKU_LIBRARY_NAME: JSON.stringify(libraryName),
+          __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath)
         })
       ]
     }

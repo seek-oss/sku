@@ -6,17 +6,17 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\"></script>
+    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\"></script>
+<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\"></script>
   
 </body></html>",
   "errors": Array [],
@@ -26,17 +26,17 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\"></script>
+    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "warnings": Array [],
@@ -51,17 +51,17 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\">
   </head>
   <body>
     <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\" data-automation-text=\\"true\\">Hello World</div></div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\"></script>
+    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4003/main-8da2d92ade01acad2599.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "jsStyles.css.js.d.ts": "// This file is automatically generated.

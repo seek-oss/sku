@@ -5,6 +5,7 @@ import clientContextKey from '../clientContextKey';
 import render from '__sku_alias__renderEntry';
 
 const libraryName = SKU_LIBRARY_NAME;
+const publicPath = __SKU_PUBLIC_PATH__;
 
 export const serializeConfig = config =>
   `<script>window.${clientContextKey} = ${serializeJavascript(
@@ -17,7 +18,7 @@ export default async renderParams => {
   let app;
   let clientContext = {};
 
-  const { webpackStats, publicPath } = renderContext;
+  const { webpackStats } = renderContext;
 
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     webpackStats,

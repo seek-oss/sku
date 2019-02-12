@@ -9,16 +9,16 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/runtime-f008b5a55ffd40729319.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/vendors~main-fabca146acc8059ae7df.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/main-dfcc0b7790e4036b79cc.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/runtime-f008b5a55ffd40729319.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4005/main-dfcc0b7790e4036b79cc.js\\" crossorigin=\\"anonymous\\">
   </head>
   <body>
     <div id=\\"app\\"><div data-reactroot=\\"\\">Hello source maps</div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/runtime-f008b5a55ffd40729319.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/vendors~main-fabca146acc8059ae7df.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/main-dfcc0b7790e4036b79cc.js\\"></script>
+    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/runtime-f008b5a55ffd40729319.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\"></script>
+<script async data-chunk=\\"main\\" src=\\"http://localhost:4005/main-dfcc0b7790e4036b79cc.js\\" crossorigin=\\"anonymous\\"></script>
   </body>
 </html>",
   "main-dfcc0b7790e4036b79cc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

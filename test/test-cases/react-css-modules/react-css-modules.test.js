@@ -12,8 +12,7 @@ describe('react-css-modules', () => {
 
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);
-    closeAssetServer = startAssetServer(4293, distDir);
-    await waitForUrls('http://localhost:4293');
+    closeAssetServer = await startAssetServer(4293, distDir);
   });
 
   afterAll(() => {

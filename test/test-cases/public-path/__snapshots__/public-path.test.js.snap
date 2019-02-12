@@ -12,7 +12,7 @@ Object {
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/main-f52d86b1762b403f4a0e.js\\">
   </head>
   <body>
-    <div id=\\"app\\" data-message=\\"<div class=\\" _1okz42c\\"=\\"\\"><div class=\\"_1oKZ42c\\"></div></div>\\"&gt;
+    <div id=\\"app\\"><div class=\\"_1oKZ42c\\"></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\"></script>
 <script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/vendors~main-fabca146acc8059ae7df.js\\"></script>
@@ -32,7 +32,7 @@ Object {
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/main-f52d86b1762b403f4a0e.js\\">
   </head>
   <body>
-    <div id=\\"app\\" data-message=\\"<div class=\\"_1oKZ42c\\"></div>\\"></div>
+    <div id=\\"app\\"><div class=\\"_1oKZ42c\\"></div></div>
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/static/vendors~main-fabca146acc8059ae7df.js\\"></script>

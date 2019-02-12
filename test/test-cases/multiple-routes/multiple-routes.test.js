@@ -36,8 +36,9 @@ describe('multiple-routes', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = startAssetServer(4004, targetDirectory);
-      await waitForUrls('http://localhost:4004');
+      closeAssetServer = await startAssetServer(4004, targetDirectory, [
+        { source: '/', destination: '/production/au/index.html' }
+      ]);
     });
 
     afterAll(() => {
@@ -45,7 +46,7 @@ describe('multiple-routes', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4004/production/au');
+      const app = await getAppSnapshot('http://localhost:4004');
       expect(app).toMatchSnapshot();
     });
 

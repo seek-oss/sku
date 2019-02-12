@@ -1,16 +1,27 @@
-const path = require('path');
-const { startBin } = require('../../lib/runBin');
+const handler = require('serve-handler');
+const http = require('http');
 
-const configLocation = require.resolve('./assetServerConfig.json');
+module.exports = async (port, targetDirectory, rewrites = []) =>
+  new Promise(resolve => {
+    const server = http.createServer((request, response) => {
+      return handler(request, response, {
+        public: targetDirectory,
+        rewrites,
+        headers: [
+          {
+            source: '**/*.*',
+            headers: [
+              {
+                key: 'Access-Control-Allow-Origin',
+                value: '*'
+              }
+            ]
+          }
+        ]
+      });
+    });
 
-module.exports = (port, targetDirectory) => {
-  const config = path.relative(targetDirectory, configLocation);
-
-  const server = startBin({
-    packageName: 'serve',
-    args: ['--listen', port, '--config', config],
-    options: { cwd: targetDirectory }
+    server.listen(port, () => {
+      resolve(() => server.close());
+    });
   });
-
-  return () => server.kill();
-};

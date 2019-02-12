@@ -20,7 +20,7 @@ export default {
         ${headTags}
       </head>
       <body>
-        <div id="app" data-message="${app}"></div>
+        <div id="app">${app}</div>
         ${bodyTags}
       </body>
     </html>

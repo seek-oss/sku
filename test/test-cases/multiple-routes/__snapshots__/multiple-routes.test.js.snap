@@ -13,7 +13,7 @@ Object {
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
   </head>
   <body>
-    <div id=\\"app\\"></div>
+    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
     <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
 <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
 <script async=\\"\\" data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\"></script>

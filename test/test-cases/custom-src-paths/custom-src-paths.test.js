@@ -32,8 +32,7 @@ describe('custom-src-paths', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = startAssetServer(4002, targetDirectory);
-      await waitForUrls('http://localhost:4002');
+      closeAssetServer = await startAssetServer(4002, targetDirectory);
     });
 
     afterAll(() => {

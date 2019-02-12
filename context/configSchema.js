@@ -29,10 +29,6 @@ module.exports = validator.compile({
           name: {
             type: 'string',
             optional: true
-          },
-          entry: {
-            type: 'string',
-            optional: true
           }
         }
       }

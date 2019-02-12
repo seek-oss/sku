@@ -6,7 +6,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-a9406e61720c9acc41c8.js\\" crossorigin=\\"anonymous\\">
@@ -26,7 +26,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-a9406e61720c9acc41c8.js\\" crossorigin=\\"anonymous\\">
@@ -51,7 +51,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-5be2b7781abd50e8f05e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-a9406e61720c9acc41c8.js\\" crossorigin=\\"anonymous\\">
@@ -89,7 +89,7 @@ Object {
           <meta charset=\\"UTF-8\\">
           <title>My Awesome Project</title>
           <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-978847381892af353353.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-2aee2d63a8586f395112.js\\" crossorigin=\\"anonymous\\">
@@ -111,7 +111,7 @@ Object {
           <meta charset=\\"UTF-8\\">
           <title>My Awesome Project</title>
           <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\" crossorigin=\\"anonymous\\">
+          <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4003/main-bfe8911084b821bf8edd.css\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/runtime-3fcd94aac7fd64fcdc37.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/vendors~main-978847381892af353353.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4003/main-2aee2d63a8586f395112.js\\" crossorigin=\\"anonymous\\">

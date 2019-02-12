@@ -15,23 +15,23 @@ export default (stats, publicPath) => {
     </ChunkExtractorManager>
   );
 
-  const extraTagAttributes = /^(https?:)?\/\//.test(publicPath)
+  const extraScriptTagAttributes = /^(https?:)?\/\//.test(publicPath)
     ? { crossorigin: 'anonymous' }
     : {};
 
   return {
     getHeadTags: () => {
       const scriptPreloads = extractor
-        .getLinkTags(extraTagAttributes)
+        .getLinkTags(extraScriptTagAttributes)
         .split('\n')
         .filter(tag => tag.includes('as="script"'))
         .join('\n');
 
-      const styleTags = extractor.getStyleTags(extraTagAttributes);
+      const styleTags = extractor.getStyleTags();
 
       return [styleTags, scriptPreloads].join('\n');
     },
-    getBodyTags: () => extractor.getScriptTags(extraTagAttributes),
+    getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
     SkuProvider
   };
 };

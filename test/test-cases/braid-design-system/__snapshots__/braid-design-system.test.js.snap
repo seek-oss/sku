@@ -14,8 +14,8 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"themes-jobStreet\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-jobStreet-19be796502a2b532c3c1.css\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
 <link data-chunk=\\"themes-jobStreet\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-jobStreet-c4d24420c93ed4a65dca.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\" crossorigin=\\"anonymous\\">
@@ -42,8 +42,8 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>My Awesome Project</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"themes-seekAnz\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/themes-seekAnz-7436b11da1be033a17c3.css\\">
+<link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"https://somecdn.com/vendors~main-08aaa5664c6d07a7ab89.css\\">
 <link data-chunk=\\"themes-seekAnz\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/themes-seekAnz-977833bf907efdee60aa.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/runtime-10ef51d0e4f38e8bcf9e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"https://somecdn.com/vendors~main-6d3b9066cb1abe221dfa.js\\" crossorigin=\\"anonymous\\">

@@ -6,7 +6,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
@@ -29,7 +29,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
@@ -68,7 +68,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
@@ -92,7 +92,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
@@ -114,7 +114,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
 <link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
@@ -138,7 +138,7 @@ Object {
     <meta charset=\\"UTF-8\\">
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\" crossorigin=\\"anonymous\\">
+    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
 <link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">

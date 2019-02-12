@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import lessStyles from './lessStyles.less';
 import jsStyles from './jsStyles.css.js';
 
@@ -11,13 +11,17 @@ export const messageRenderer = (): Message => {
   return Message.Hello;
 };
 
-export default () => (
+interface Props {
+  children?: ReactNode;
+}
+
+export default ({ children }: Props) => (
   <div className={`${lessStyles.root} ${jsStyles.root}`}>
     <div
       className={`${lessStyles.nested} ${jsStyles.nested}`}
       data-automation-text
     >
-      {messageRenderer()}
+      {children || messageRenderer()}
     </div>
   </div>
 );

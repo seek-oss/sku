@@ -11,7 +11,7 @@ Object {
     <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime-57519d664ffbf58ed414.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main-21d5c435b7befecf9fc4.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"style\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-b0d07ec0f57f0de8a258.js\\">
+<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main-270390c0a490512cfefa.js\\">
 <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/main-bfe8911084b821bf8edd.css\\">
   </head>
   <body>
@@ -19,10 +19,10 @@ Object {
     <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
 <script async data-chunk=\\"main\\" src=\\"/runtime-57519d664ffbf58ed414.js\\"></script>
 <script async data-chunk=\\"main\\" src=\\"/vendors~main-21d5c435b7befecf9fc4.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main-b0d07ec0f57f0de8a258.js\\"></script>
+<script async data-chunk=\\"main\\" src=\\"/main-270390c0a490512cfefa.js\\"></script>
   </body>
 </html>",
-  "main-b0d07ec0f57f0de8a258.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-270390c0a490512cfefa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
 .Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
 ",

@@ -5,6 +5,7 @@ import jsStyles from './jsStyles.css.js';
 export default () => {
   const [message, setMessage] = React.useState('Initial render');
 
+  // This tests that React has boostrapped correctky client side
   setTimeout(() => {
     setMessage('Updated render');
   }, 1);

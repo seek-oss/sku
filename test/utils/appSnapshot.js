@@ -1,20 +1,27 @@
+const LineDiff = require('line-diff');
+
 const appSnapshotSerializer = {
   print: (
     { sourceHtml, clientRenderContent, warnings, errors },
     serializer
   ) => {
+    const serializedSouceHtml = serializer(sourceHtml);
+    const serializedClientRenderContent = serializer(clientRenderContent);
+
+    const htmlDiff = new LineDiff(
+      serializedSouceHtml,
+      serializedClientRenderContent
+    );
+
+    console.log(JSON.stringify(htmlDiff.changes, null, 2));
+
     const snapshotItems = [
-      `SOURCE HTML: ${serializer(sourceHtml)}`,
-      `CLIENT RENDER CONTENT: ${serializer(clientRenderContent)}`
+      `SOURCE HTML: ${serializedSouceHtml}`,
+      `WARNINGS: ${serializer(warnings)}`,
+      `POST HYDRATE DIFF: ${htmlDiff.toString()}`,
+      `WARNINGS: ${serializer(warnings)}`,
+      `ERRORS: ${serializer(errors)}`
     ];
-
-    if (warnings.length > 0) {
-      snapshotItems.push(`WARNINGS: ${serializer(warnings)}`);
-    }
-
-    if (errors.length > 0) {
-      snapshotItems.push(`ERRORS: ${serializer(errors)}`);
-    }
 
     return snapshotItems.join('\n');
   },

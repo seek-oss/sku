@@ -19,16 +19,18 @@ export default (stats, publicPath) => {
     ? { crossorigin: 'anonymous' }
     : {};
 
-  const scriptPreloads = extractor
-    .getLinkTags(extraTagAttributes)
-    .split('\n')
-    .filter(tag => tag.includes('as="script"'));
-
   return {
-    getHeadTags: () =>
-      [extractor.getStyleTags(extraTagAttributes), ...scriptPreloads].join(
-        '\n'
-      ),
+    getHeadTags: () => {
+      const scriptPreloads = extractor
+        .getLinkTags(extraTagAttributes)
+        .split('\n')
+        .filter(tag => tag.includes('as="script"'))
+        .join('\n');
+
+      const styleTags = extractor.getStyleTags(extraTagAttributes);
+
+      return [styleTags, scriptPreloads].join('\n');
+    },
     getBodyTags: () => extractor.getScriptTags(extraTagAttributes),
     SkuProvider
   };

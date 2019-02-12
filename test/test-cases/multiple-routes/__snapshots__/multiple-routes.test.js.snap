@@ -7,6 +7,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -29,6 +30,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -67,6 +69,8 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
+<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\">
+<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -89,6 +93,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -110,6 +115,8 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
+<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\">
+<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -132,6 +139,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\">
@@ -158,6 +166,8 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"/handlers-Details.css\\">
+<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
+<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
@@ -181,6 +191,8 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"/handlers-Details.css\\">
+<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
+<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
@@ -207,6 +219,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"/handlers-Home.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
@@ -229,6 +242,7 @@ Object {
     <title>hello-world</title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"/handlers-Home.css\\">
+<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
 <link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">

@@ -2,13 +2,13 @@ import React from 'react';
 import lessStyles from './lessStyles.less';
 import jsStyles from './jsStyles.css.js';
 
-export default () => (
+export default ({ children }) => (
   <div className={`${lessStyles.root} ${jsStyles.root}`}>
     <div
       className={`${lessStyles.nested} ${jsStyles.nested}`}
       data-automation-text
     >
-      Hello World
+      {children || 'Hello World'}
     </div>
   </div>
 );

@@ -63,71 +63,15 @@ SOURCE HTML:
   </body>
 </html>
 
-WARNINGS: Array []
-POST HYDRATE DIFF:    
-   <!DOCTYPE html>
-   <html>
-     <head>
-       <meta charset="UTF-8">
-       <title>
-         My Awesome Project
-       </title>
-       <meta name="viewport"
-             content="width=device-width, initial-scale=1"
-       >
-       <link data-chunk="main"
-             rel="stylesheet"
-             href="/main-bfe8911084b821bf8edd.css"
-       >
-       <link data-chunk="main"
-             rel="preload"
-             as="script"
-             href="/runtime-9c0194badb44b0a1226c.js"
-       >
-       <link data-chunk="main"
-             rel="preload"
-             as="script"
-             href="/vendors~main-6a0b8618a6bca73ed0ff.js"
-       >
-       <link data-chunk="main"
-             rel="preload"
-             as="script"
-             href="/main-2d3c80a108b62177ec67.js"
-       >
-     </head>
-     <body>
-       <div id="app">
-         <div class="_1brbpTo Jlnxw97">
-           <div class="_3YtmnHj lwsthgY"
-                data-automation-text="true"
-           >
- -           Initial render
- +           Updated render
-           </div>
-         </div>
-       </div>
-       <script>
-         window.__LOADABLE_REQUIRED_CHUNKS__ = [];
-       </script>
-       <script async
-               data-chunk="main"
-               src="/runtime-9c0194badb44b0a1226c.js"
-       >
-       </script>
-       <script async
-               data-chunk="main"
-               src="/vendors~main-6a0b8618a6bca73ed0ff.js"
-       >
-       </script>
-       <script async
-               data-chunk="main"
-               src="/main-2d3c80a108b62177ec67.js"
-       >
-       </script>
-     </body>
-   </html>
-   
-
+POST HYDRATE DIFFS: 
+        <div class="_3YtmnHj lwsthgY"
+             data-automation-text="true"
+        >
+          -Initial render
+          +Updated render
+        </div>
+      </div>
+    </div>
 WARNINGS: Array []
 ERRORS: Array []
 `;

@@ -103,8 +103,7 @@ Object {
 ,
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-315e4ca7adb34128a9ea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  production/au/details/: id/index.html;
-: 
+  "production/au/details/:id/index.html": 
 <!DOCTYPE html>
 <html>
   <head>
@@ -279,8 +278,7 @@ Object {
   </body>
 </html>
 ,
-  production/nz/details/: id/index.html;
-: 
+  "production/nz/details/:id/index.html": 
 <!DOCTYPE html>
 <html>
   <head>

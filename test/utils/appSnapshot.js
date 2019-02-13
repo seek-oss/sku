@@ -1,11 +1,12 @@
 const diff = require('git-diff');
 const prettier = require('prettier');
+const css = require('css');
 
 const cssSnapshotSerializer = {
   print: value => prettier.format(value, { parser: 'css' }),
   test: value => {
     try {
-      prettier.format(value, { parser: 'css' });
+      css.parse(value);
     } catch (e) {
       return false;
     }

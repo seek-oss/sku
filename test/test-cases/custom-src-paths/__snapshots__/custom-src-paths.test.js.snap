@@ -1,69 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`custom-src-paths build should create valid app 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><div>Hello custom src paths</div></div>
-    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/main-41c73dcef41151dbf413.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><div>Hello custom src paths</div></div>
-    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/main-41c73dcef41151dbf413.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "index.html": "<!DOCTYPE html>
+  "index.html": 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4002/main-41c73dcef41151dbf413.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><div>Hello custom src paths</div></div>
-    <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/runtime-56746167f3edb17d7f83.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/vendors~main-fabca146acc8059ae7df.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4002/main-41c73dcef41151dbf413.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4002/main-41c73dcef41151dbf413.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
+</html>
+,
   "main-41c73dcef41151dbf413.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-56746167f3edb17d7f83.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-fabca146acc8059ae7df.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -71,44 +135,61 @@ Object {
 `;
 
 exports[`custom-src-paths start should start a development server 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><div>Hello custom src paths</div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main.js\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/runtime.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/vendors~main.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/main.js"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><div>Hello custom src paths</div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main.js\\"></script>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script>
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="/runtime.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/vendors~main.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/main.js"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;

@@ -1,59 +1,16 @@
-const LineDiff = require('line-diff');
+const diff = require('git-diff');
+const prettier = require('prettier');
 
-const getLineDiff = (html1, html2) => {
-  const diffs = [];
-  const lineBuffer = 3;
-
-  const changes = new LineDiff(html1, html2).changes;
-
-  let bufferCount = lineBuffer;
-  let currentDiff = null;
-
-  changes.forEach((change, index) => {
-    if (currentDiff && !change.modified) {
-      bufferCount--;
-      currentDiff.push(change);
+const cssSnapshotSerializer = {
+  print: value => prettier.format(value, { parser: 'css' }),
+  test: value => {
+    try {
+      prettier.format(value, { parser: 'css' });
+    } catch (e) {
+      return false;
     }
-
-    if (change.modified) {
-      bufferCount = lineBuffer;
-    }
-
-    if (!currentDiff && change.modified) {
-      const bufferStart = index - bufferCount > 0 ? index - bufferCount : 0;
-      const previousBuffer = [...changes].splice(bufferStart, bufferCount);
-      currentDiff = [...previousBuffer, change];
-    }
-
-    if (bufferCount === 0) {
-      diffs.push(currentDiff);
-      bufferCount = lineBuffer;
-      currentDiff = null;
-    }
-  });
-
-  return diffs
-    .map(diff =>
-      diff
-        .map(change => {
-          if (change.modified) {
-            const [indent] = change._[0].match(/^(\s*)/);
-
-            const stringDiff = [
-              `${indent}-${change._[0].trim()}`,
-              `${indent}+${change._[1].trim()}`
-            ];
-
-            console.log(stringDiff);
-
-            return stringDiff.join('\n');
-          }
-
-          return change._[0];
-        })
-        .join('\n')
-    )
-    .join('===============================================\n');
+    return true;
+  }
 };
 
 const appSnapshotSerializer = {
@@ -64,14 +21,14 @@ const appSnapshotSerializer = {
     const serializedSouceHtml = serializer(sourceHtml);
     const serializedClientRenderContent = serializer(clientRenderContent);
 
-    const htmlDiff = getLineDiff(
-      serializedSouceHtml,
-      serializedClientRenderContent
-    );
+    const htmlDiff = diff(serializedSouceHtml, serializedClientRenderContent, {
+      colors: false,
+      noHeaders: true
+    });
 
     const snapshotItems = [
       `SOURCE HTML: ${serializedSouceHtml}`,
-      `POST HYDRATE DIFFS: \n${htmlDiff}`,
+      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`,
       `WARNINGS: ${serializer(warnings)}`,
       `ERRORS: ${serializer(errors)}`
     ];
@@ -113,5 +70,6 @@ const getAppSnapshot = async url => {
 
 module.exports = {
   appSnapshotSerializer,
-  getAppSnapshot
+  getAppSnapshot,
+  cssSnapshotSerializer
 };

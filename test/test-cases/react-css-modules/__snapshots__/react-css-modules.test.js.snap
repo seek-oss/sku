@@ -64,14 +64,15 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: 
-        <div class="_3YtmnHj lwsthgY"
-             data-automation-text="true"
-        >
-          -Initial render
-          +Updated render
-        </div>
-      </div>
-    </div>
+         <div class="_3YtmnHj lwsthgY"
+              data-automation-text="true"
+         >
+-          Initial render
++          Updated render
+         </div>
+       </div>
+     </div>
+
 WARNINGS: Array []
 ERRORS: Array []
 `;
@@ -141,9 +142,23 @@ Object {
 </html>
 ,
   "main-2d3c80a108b62177ec67.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-bfe8911084b821bf8edd.css": "._1brbpTo{display:-webkit-flex;display:-ms-flexbox;display:flex}._1brbpTo ._3YtmnHj{font-size:32px}
-.Jlnxw97{-webkit-align-items:center;-ms-flex-align:center;align-items:center}.Jlnxw97 .lwsthgY{color:red}
-",
+  "main-bfe8911084b821bf8edd.css": ._1brbpTo {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+._1brbpTo ._3YtmnHj {
+  font-size: 32px;
+}
+.Jlnxw97 {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.Jlnxw97 .lwsthgY {
+  color: red;
+}
+,
   "runtime-9c0194badb44b0a1226c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-6a0b8618a6bca73ed0ff.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

@@ -14,6 +14,7 @@ const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 
 const renderEntry = require.resolve('../../entry/render');
+const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const {
   paths,
@@ -223,7 +224,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       name: 'render',
       mode: 'development',
       entry: {
-        main: renderEntry
+        main: isLibrary ? libraryRenderEntry : renderEntry
       },
       target: 'node',
       externals: [

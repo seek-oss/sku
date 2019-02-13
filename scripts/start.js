@@ -5,9 +5,10 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 
-const dynamicRouteMiddleware = require('../lib/dynamicRouteMiddleware');
+const { checkHosts, getAppHosts } = require('../lib/hosts');
+const siteServeMiddleware = require('../lib/siteServeMiddleware');
 const allocatePort = require('../lib/allocatePort');
-const { hosts, port, initialPath, paths, routes } = require('../context');
+const { port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 const localhost = '0.0.0.0';
@@ -18,28 +19,26 @@ const localhost = '0.0.0.0';
     host: localhost
   });
 
-  const dynamicRoutes = routes
-    .filter(({ route }) => /\:/.test(route))
-    .map(({ route }) => route);
-
   const webpackCompiler = webpack(
     makeWebpackConfig({
       port: availablePort
     })
   );
 
+  await checkHosts();
+
+  const appHosts = getAppHosts();
+
   const devServer = new WebpackDevServer(webpackCompiler, {
     contentBase: paths.public,
     overlay: true,
     stats: 'errors-only',
-    allowedHosts: hosts,
+    allowedHosts: appHosts,
     after: (app, server) => {
       app.get(
         '*',
-        dynamicRouteMiddleware({
-          dynamicRoutes,
-          fs: server.middleware.fileSystem,
-          rootDirectory: paths.target
+        siteServeMiddleware({
+          fs: server.middleware.fileSystem
         })
       );
     }
@@ -51,7 +50,7 @@ const localhost = '0.0.0.0';
       return;
     }
 
-    const url = `http://${hosts[0]}:${availablePort}${initialPath}`;
+    const url = `http://${appHosts[0]}:${availablePort}${initialPath}`;
 
     console.log();
     console.log(blue(`Starting the development server on ${underline(url)}`));

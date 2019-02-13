@@ -1,5 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+
 import App from './App';
 
-hydrate(<App />, document.getElementById('app'));
+export default ({ site }) =>
+  hydrate(<App theme={site} />, document.getElementById('app'));

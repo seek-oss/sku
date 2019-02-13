@@ -18,8 +18,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      closeAssetServer = startAssetServer(4003, distDir);
-      await waitForUrls('http://localhost:4003');
+      closeAssetServer = await startAssetServer(4003, distDir);
     });
 
     afterAll(() => {
@@ -50,7 +49,7 @@ describe('typescript-css-modules', () => {
         cwd: distDir,
         stdio: 'inherit'
       });
-      closeAssetServer = startAssetServer(4003, distDir);
+      closeAssetServer = await startAssetServer(4003, distDir);
       await waitForUrls(backendUrl, 'http://localhost:4003');
     });
 
@@ -65,7 +64,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distDir);
+      const files = await dirContentsToObject(distDir, ['.js', '.css']);
       const srcFiles = await dirContentsToObject(srcDir, ['.d.ts']);
       expect({
         ...files,

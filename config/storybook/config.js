@@ -1,11 +1,13 @@
 import React from 'react';
 import { configure, addDecorator, addParameters } from '@storybook/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import 'storybook-chromatic';
 
 addParameters({
   chromatic: { viewports: [320, 1200] }
 });
 
+addDecorator(withKnobs);
 addDecorator(story => React.createElement('div', null, story()));
 
 const reqs = [

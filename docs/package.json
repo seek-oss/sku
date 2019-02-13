@@ -1,0 +1,13 @@
+{
+  "name": "sku-docs",
+  "version": "1.0.0",
+  "description": "Docs for sku",
+  "scripts": {
+    "start": "docsify serve"
+  },
+  "author": "SEEK",
+  "license": "MIT",
+  "devDependencies": {
+    "docsify-cli": "^4.3.0"
+  }
+}

@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
+const path = require('path');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
@@ -11,8 +13,7 @@ const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 
-const startRenderEntry = require.resolve('../render/startRenderEntry');
-const buildRenderEntry = require.resolve('../render/buildRenderEntry');
+const renderEntry = require.resolve('../../entry/render');
 
 const {
   paths,
@@ -66,6 +67,8 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`
   ];
 
+  const skuClientEntry = require.resolve('../../entry/client/index.js');
+
   const createEntry = entry => [
     ...resolvedPolyfills,
     ...(isStartScript ? devServerEntries : []),
@@ -73,11 +76,12 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   ];
 
   // Add polyfills and dev server client to all entries
-  const entry = isLibrary
+  const clientEntry = isLibrary
     ? createEntry(paths.libraryEntry)
-    : lodash.mapValues(paths.clientEntries, createEntry);
+    : createEntry(skuClientEntry);
 
   const internalJs = [
+    path.join(__dirname, '../../entry'),
     ...paths.src,
     ...paths.compilePackages.map(utils.resolvePackage)
   ];
@@ -104,7 +108,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     {
       name: 'client',
       mode: webpackMode,
-      entry,
+      entry: clientEntry,
       devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
         path: paths.target,
@@ -135,7 +139,10 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           : {})
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+        alias: {
+          __sku_alias__clientEntry: paths.clientEntry
+        }
       },
       module: {
         rules: [
@@ -195,6 +202,14 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
+        ...(renderHtml
+          ? [
+              new LoadablePlugin({
+                writeToDisk: false,
+                outputAsset: false
+              })
+            ]
+          : []),
         ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
@@ -208,7 +223,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       name: 'render',
       mode: 'development',
       entry: {
-        main: isStartScript ? startRenderEntry : buildRenderEntry
+        main: renderEntry
       },
       target: 'node',
       externals: [
@@ -275,7 +290,8 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
-          SKU_LIBRARY_NAME: JSON.stringify(libraryName)
+          SKU_LIBRARY_NAME: JSON.stringify(libraryName),
+          __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath)
         })
       ]
     }

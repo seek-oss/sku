@@ -47,9 +47,7 @@ describe('ssr-hello-world', () => {
         '--config=sku-build.config.js'
       ]);
 
-      closeAssetServer = startAssetServer(4000, targetDirectory);
-
-      await waitForUrls('http://localhost:4000');
+      closeAssetServer = await startAssetServer(4000, targetDirectory);
     });
 
     afterAll(() => {

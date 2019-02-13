@@ -1,5 +1,5 @@
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const getAppSnapshot = require('../../utils/getAppSnapshot');
+const { getAppSnapshot } = require('../../utils/appSnapshot');
 const startAssetServer = require('../../utils/assetServer');
 const targetDirectory = `${__dirname}/dist`;
 

@@ -1,44 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`public path build should create valid app with no unresolved resources 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/vendors~main-fabca146acc8059ae7df.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/main-f52d86b1762b403f4a0e.js\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><div class=\\"_1oKZ42c\\"></div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/vendors~main-fabca146acc8059ae7df.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/static/main-f52d86b1762b403f4a0e.js\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"/static/main-d72d68abb80c2eed0357.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/vendors~main-fabca146acc8059ae7df.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/static/main-f52d86b1762b403f4a0e.js\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="/static/main-d72d68abb80c2eed0357.css"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/static/runtime-ae11dd820f2b1b4ccf66.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/static/vendors~main-fabca146acc8059ae7df.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/static/main-f52d86b1762b403f4a0e.js"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><div class=\\"_1oKZ42c\\"></div></div>
-    <script>window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"/static/runtime-ae11dd820f2b1b4ccf66.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/static/vendors~main-fabca146acc8059ae7df.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/static/main-f52d86b1762b403f4a0e.js\\"></script>
+    <div id="app">
+      <div class="_1oKZ42c">
+      </div>
+    </div>
+    <script>
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="/static/runtime-ae11dd820f2b1b4ccf66.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/static/vendors~main-fabca146acc8059ae7df.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/static/main-f52d86b1762b403f4a0e.js"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;

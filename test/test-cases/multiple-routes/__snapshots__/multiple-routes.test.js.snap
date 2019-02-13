@@ -1,262 +1,637 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`multiple-routes build should create valid app 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
-<script async=\\"\\" data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Home"
+          rel="stylesheet"
+          href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
+    >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
-<script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <h1 class="_1QX0Hyt">
+        Welcome to the Home page -
+        au
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;
 
 exports[`multiple-routes build should generate the expected files 1`] = `
 Object {
   "AsyncComponent-f50489629ba9808dfc93.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-0e82719ea3ab71aafb06.css": "._91MnZhe{color:#00f}
-",
+  "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
+  color: #00f;
+}
+,
   "handlers-Details-449b01f8c392f088234e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-2b6eed958898a41c973d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-62bf94bf0fd2ba3c2aa2.css": "._1QX0Hyt{color:red}
-",
+  "handlers-Home-62bf94bf0fd2ba3c2aa2.css": ._1QX0Hyt {
+  color: red;
+}
+,
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-315e4ca7adb34128a9ea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/:id/index.html": "<!DOCTYPE html>
+  "production/au/details/:id/index.html": 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
-<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Details"
+          rel="stylesheet"
+          href="http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css"
+    >
+    <link data-chunk="handlers-Details"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/handlers-Details-449b01f8c392f088234e.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"_91MnZhe\\">Welcome to the Details page - <!-- -->au<span>Some special async content</span></h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
-<script async data-chunk=\\"handlers-Details\\" src=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"AsyncComponent\\" src=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <h1 class="_91MnZhe">
+        Welcome to the Details page -
+        au
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];
+    </script>
+    <script async
+            data-chunk="handlers-Details"
+            src="http://localhost:4004/handlers-Details-449b01f8c392f088234e.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
-  "production/au/index.html": "<!DOCTYPE html>
+</html>
+,
+  "production/au/index.html": 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Home"
+          rel="stylesheet"
+          href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
+    >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
-<script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <h1 class="_1QX0Hyt">
+        Welcome to the Home page -
+        au
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
-  "production/nz/details/:id/index.html": "<!DOCTYPE html>
+</html>
+,
+  "production/nz/details/:id/index.html": 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css\\">
-<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Details"
+          rel="stylesheet"
+          href="http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css"
+    >
+    <link data-chunk="handlers-Details"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/handlers-Details-449b01f8c392f088234e.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"_91MnZhe\\">Welcome to the Details page - <!-- -->nz<span>Some special async content</span></h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"nz\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];</script>
-<script async data-chunk=\\"handlers-Details\\" src=\\"http://localhost:4004/handlers-Details-449b01f8c392f088234e.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"AsyncComponent\\" src=\\"http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <h1 class="_91MnZhe">
+        Welcome to the Details page -
+        nz
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"nz"};
+    </script>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];
+    </script>
+    <script async
+            data-chunk="handlers-Details"
+            src="http://localhost:4004/handlers-Details-449b01f8c392f088234e.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="http://localhost:4004/AsyncComponent-f50489629ba9808dfc93.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
-  "production/nz/index.html": "<!DOCTYPE html>
+</html>
+,
+  "production/nz/index.html": 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Home"
+          rel="stylesheet"
+          href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
+    >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"_1QX0Hyt\\">Welcome to the Home page - <!-- -->nz</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"nz\\"};</script>
-<script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [2];</script>
-<script async data-chunk=\\"handlers-Home\\" src=\\"http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/runtime-072f8b655ba253d26260.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4004/main-315e4ca7adb34128a9ea.js\\" crossorigin=\\"anonymous\\"></script>
+    <div id="app">
+      <h1 class="_1QX0Hyt">
+        Welcome to the Home page -
+        nz
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"nz"};
+    </script>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="http://localhost:4004/handlers-Home-2b6eed958898a41c973d.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-072f8b655ba253d26260.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-9eb13a9d9e5bf57170b7.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-315e4ca7adb34128a9ea.js"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
-</html>",
+</html>
+,
   "runtime-072f8b655ba253d26260.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-9eb13a9d9e5bf57170b7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes start should render details page correctly 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"/handlers-Details.css\\">
-<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
-<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\">Welcome to the Details page - <!-- -->auID: 123<span>Some special async content</span></h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
-<script async=\\"\\" data-chunk=\\"handlers-Details\\" src=\\"/handlers-Details.js\\"></script>
-<script async=\\"\\" data-chunk=\\"AsyncComponent\\" src=\\"/AsyncComponent.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main.js\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Details\\" rel=\\"stylesheet\\" href=\\"/handlers-Details.css\\">
-<link data-chunk=\\"handlers-Details\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Details.js\\">
-<link data-chunk=\\"AsyncComponent\\" rel=\\"preload\\" as=\\"script\\" href=\\"/AsyncComponent.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Details"
+          rel="stylesheet"
+          href="/handlers-Details.css"
+    >
+    <link data-chunk="handlers-Details"
+          rel="preload"
+          as="script"
+          href="/handlers-Details.js"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="/AsyncComponent.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/runtime.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/vendors~main.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/main.js"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"Details__root___91MnZhe\\">Welcome to the Details page - <!-- -->au<span>Some special async content</span></h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Details\\",\\"AsyncComponent\\"];</script>
-<script async data-chunk=\\"handlers-Details\\" src=\\"/handlers-Details.js\\"></script>
-<script async data-chunk=\\"AsyncComponent\\" src=\\"/AsyncComponent.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main.js\\"></script>
+    <div id="app">
+      <h1 class="Details__root___91MnZhe">
+        Welcome to the Details page -
+        au
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script>
+      window.__LOADABLE_REQUIRED_CHUNKS__ = ["handlers-Details","AsyncComponent"];
+    </script>
+    <script async
+            data-chunk="handlers-Details"
+            src="/handlers-Details.js"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="/AsyncComponent.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/runtime.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/vendors~main.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/main.js"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: 
+     <div id="app">
+       <h1 class="Details__root___91MnZhe">
+         Welcome to the Details page -
+-        au
++        auID: 123
+         <span>
+           Some special async content
+         </span>
+
+WARNINGS: Array []
+ERRORS: Array []
 `;
 
 exports[`multiple-routes start should render home page correctly 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"/handlers-Home.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
-  </head>
-  <body>
-    <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
-<script async=\\"\\" data-chunk=\\"handlers-Home\\" src=\\"/handlers-Home.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"/main.js\\"></script>
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "<!DOCTYPE html>
+SOURCE HTML: 
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset=\\"UTF-8\\">
-    <title>hello-world</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    <link data-chunk=\\"handlers-Home\\" rel=\\"stylesheet\\" href=\\"/handlers-Home.css\\">
-<link data-chunk=\\"handlers-Home\\" rel=\\"preload\\" as=\\"script\\" href=\\"/handlers-Home.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/runtime.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/vendors~main.js\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"/main.js\\">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Home"
+          rel="stylesheet"
+          href="/handlers-Home.css"
+    >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="/handlers-Home.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/runtime.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/vendors~main.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/main.js"
+    >
   </head>
   <body>
-    <div id=\\"app\\"><h1 class=\\"Home__root___1QX0Hyt\\">Welcome to the Home page - <!-- -->au</h1></div>
-    <script>window.__SKU_CLIENT_CONTEXT__ = {\\"site\\":\\"au\\"};</script>
-<script>window.__LOADABLE_REQUIRED_CHUNKS__ = [\\"handlers-Home\\"];</script>
-<script async data-chunk=\\"handlers-Home\\" src=\\"/handlers-Home.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/runtime.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/vendors~main.js\\"></script>
-<script async data-chunk=\\"main\\" src=\\"/main.js\\"></script>
+    <div id="app">
+      <h1 class="Home__root___1QX0Hyt">
+        Welcome to the Home page -
+        au
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script>
+      window.__LOADABLE_REQUIRED_CHUNKS__ = ["handlers-Home"];
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="/handlers-Home.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/runtime.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/vendors~main.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/main.js"
+    >
+    </script>
   </body>
-</html>",
-  "warnings": Array [],
-}
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;

@@ -2,7 +2,7 @@ const path = require('path');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const getAppSnapshot = require('../../utils/getAppSnapshot');
+const { getAppSnapshot } = require('../../utils/appSnapshot');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 

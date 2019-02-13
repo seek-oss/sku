@@ -1,139 +1,217 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\"></script>
-    
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\"></script>
-    </body>
-  </html>
-",
-  "warnings": Array [],
-}
+SOURCE HTML: 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/runtime-2b1037af33329e2eb3c0.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/vendors~main-3841825c0987f85e5756.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/main-5ef10026767183cfc120.js"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="_1brbpTo Jlnxw97">
+        <div class="_3YtmnHj lwsthgY">
+          Hello World
+        </div>
+      </div>
+    </div>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/runtime-2b1037af33329e2eb3c0.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/vendors~main-3841825c0987f85e5756.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/main-5ef10026767183cfc120.js"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\"></script>
-    
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:4000/main-9faf588efead42b43c24.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"_1brbpTo Jlnxw97\\"><div class=\\"_3YtmnHj lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/runtime-2b1037af33329e2eb3c0.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/vendors~main-3841825c0987f85e5756.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:4000/main-5ef10026767183cfc120.js\\" crossorigin=\\"anonymous\\"></script>
-    </body>
-  </html>
-",
-  "warnings": Array [],
-}
+SOURCE HTML: 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/runtime-2b1037af33329e2eb3c0.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/vendors~main-3841825c0987f85e5756.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4000/main-5ef10026767183cfc120.js"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="_1brbpTo Jlnxw97">
+        <div class="_3YtmnHj lwsthgY">
+          Hello World
+        </div>
+      </div>
+    </div>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/runtime-2b1037af33329e2eb3c0.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/vendors~main-3841825c0987f85e5756.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4000/main-5ef10026767183cfc120.js"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
-Object {
-  "content": "<!DOCTYPE html><html><head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
-<script async=\\"\\" data-chunk=\\"main\\" src=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\"></script>
-    
-  
-</body></html>",
-  "errors": Array [],
-  "sourceHtml": "
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <title>hello-world</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-      <link data-chunk=\\"main\\" rel=\\"stylesheet\\" href=\\"http://localhost:8100/main.css\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\">
-<link data-chunk=\\"main\\" rel=\\"preload\\" as=\\"script\\" href=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\">
-    </head>
-    <body>
-      <div id=\\"app\\"><div class=\\"lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97\\"><div class=\\"lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY\\">Hello World</div></div></div>
-      <script crossorigin=\\"anonymous\\">window.__LOADABLE_REQUIRED_CHUNKS__ = [];</script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:8100/runtime.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:8100/vendors~main.js\\" crossorigin=\\"anonymous\\"></script>
-<script async data-chunk=\\"main\\" src=\\"http://localhost:8100/main.js\\" crossorigin=\\"anonymous\\"></script>
-    </body>
-  </html>
-",
-  "warnings": Array [],
-}
+SOURCE HTML: 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="http://localhost:8100/main.css"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:8100/runtime.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:8100/vendors~main.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:8100/main.js"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97">
+        <div class="lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY">
+          Hello World
+        </div>
+      </div>
+    </div>
+    <script crossorigin="anonymous">
+      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:8100/runtime.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:8100/vendors~main.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:8100/main.js"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+
+POST HYDRATE DIFFS: NO DIFF
+WARNINGS: Array []
+ERRORS: Array []
 `;

@@ -61,7 +61,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   const clientServer = `http://localhost:${clientPort}/`;
 
   const clientDevServerEntries = [
-    'react-hot-loader/patch',
+    `${require.resolve('react-hot-loader/patch')}`,
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
     `${require.resolve('webpack/hot/only-dev-server')}`
   ];

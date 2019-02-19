@@ -1,5 +1,13 @@
 {
-  "extends": [
-    "seek"
+  "extends": ["seek"],
+  "prCreation": "not-pending",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "packagePatterns": ["^(braid-design-system|(seek-style-guide(-asia)?))$"],
+      "schedule": ["at 8:00 am on the first weekday of the month"]
+    }
   ]
 }

@@ -62,7 +62,7 @@ const getAppSnapshot = async url => {
     }
   });
 
-  const response = await page.goto(url);
+  const response = await page.goto(url, { waitUntil: 'networkidle0' });
   const sourceHtml = await response.text();
   const clientRenderContent = await page.content();
 

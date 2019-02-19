@@ -197,5 +197,9 @@
     "serve-handler": "^5.0.8",
     "wait-on": "^2.1.0",
     "webpack-stats-plugin": "^0.2.1"
+  },
+  "toolchain": {
+    "node": "10.15.1",
+    "yarn": "1.13.0"
   }
 }

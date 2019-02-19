@@ -87,20 +87,30 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
     ...paths.compilePackages.map(utils.resolvePackage)
   ];
 
-  // The client file mask is set to just name in start/dev mode as contenthash
-  // is not supported for hot reloading. It can also cause non
-  // deterministic snapshots in jest tests.
-  const clientFileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+  const getFileMask = () => {
+    if (isStorybook) {
+      return '[name]';
+    }
 
-  // Libraries should always have the same file name
-  const libraryFileMask = libraryName;
+    // Libraries should always have the same file name
+    // unless we're building for storybook
+    if (isLibrary) {
+      return libraryName;
+    }
 
-  const jsFileMask = isLibrary
-    ? `${libraryFileMask}.js`
-    : `${clientFileMask}.js`;
-  const cssFileMask = isLibrary
-    ? `${libraryFileMask}.css`
-    : `${clientFileMask}.css`;
+    // The client file mask is set to just name in start/dev mode as contenthash
+    // is not supported for hot reloading. It can also cause non
+    // deterministic snapshots in jest tests.
+    if (isStartScript) {
+      return '[name]';
+    }
+
+    // Production builds should contain contenthash for optimal file caching
+    return '[name]-[contenthash]';
+  };
+
+  const jsFileMask = `${getFileMask()}.js`;
+  const cssFileMask = `${getFileMask()}.css`;
 
   const sourceMapStyle = isStartScript ? 'inline-source-map' : 'source-map';
   const useSourceMaps = isStartScript || sourceMapsProd;

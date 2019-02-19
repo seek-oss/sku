@@ -1,11 +1,13 @@
 {
   "extends": ["seek"],
   "prCreation": "not-pending",
+  "timezone": "Australia/Melbourne",
   "lockFileMaintenance": {
     "enabled": true
   },
   "packageRules": [
     {
+      "groupName": "Style guide maintenance",
       "packagePatterns": ["^(braid-design-system|(seek-style-guide(-asia)?))$"],
       "schedule": ["before 8:00 am on the first weekday of the month"]
     }

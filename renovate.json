@@ -23,7 +23,7 @@
     },
     {
       "groupName": "Tooling maintenance",
-      "packagePatterns": ["jest|puppeteer|tslint|eslint|prettier"],
+      "packagePatterns": ["jest|puppeteer|tslint|eslint"],
       "schedule": ["before 8am on Thursday"]
     }
   ]

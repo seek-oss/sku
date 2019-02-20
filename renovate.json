@@ -7,25 +7,25 @@
   },
   "packageRules": [
     {
-      "groupName": "Style guide maintenance",
+      "groupName": "style guide packages",
       "packagePatterns": ["^(braid-design-system|(seek(-asia)?-style-guide))$"],
       "enabled": true,
       "schedule": ["before 8am on the first day of the month"]
     },
     {
-      "groupName": "Webpack maintenance",
+      "groupName": "webpack packages",
       "packagePatterns": ["webpack|(-loader$)|autoprefixer|less|css|svg"],
       "enabled": true,
       "schedule": ["before 11am on Thursday"]
     },
     {
-      "groupName": "Babel maintenance",
+      "groupName": "babel packages",
       "packagePatterns": ["^@?babel[/-]"],
       "enabled": true,
       "schedule": ["before 11am on Thursday"]
     },
     {
-      "groupName": "Tooling maintenance",
+      "groupName": "test and lint packages",
       "packagePatterns": ["jest|puppeteer|tslint|eslint"],
       "enabled": true,
       "schedule": ["before 11am on Thursday"]

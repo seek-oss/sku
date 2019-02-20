@@ -9,7 +9,7 @@
     {
       "groupName": "Style guide maintenance",
       "packagePatterns": ["^(braid-design-system|(seek-style-guide(-asia)?))$"],
-      "schedule": ["before 8:00 am on the first weekday of the month"]
+      "schedule": ["before 8am on the first weekday of the month"]
     }
   ]
 }

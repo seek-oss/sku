@@ -8,7 +8,7 @@
   "packageRules": [
     {
       "groupName": "Style guide maintenance",
-      "packagePatterns": ["^(braid-design-system|(seek-style-guide(-asia)?))$"],
+      "packagePatterns": ["^(braid-design-system|(seek(-asia)?-style-guide))$"],
       "schedule": ["before 8am on the first day of the month"]
     },
     {

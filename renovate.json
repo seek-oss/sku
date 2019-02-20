@@ -8,8 +8,23 @@
   "packageRules": [
     {
       "groupName": "Style guide maintenance",
-      "packagePatterns": ["^(braid-design-system|(seek-style-guide(-asia)?))$"],
+      "packagePatterns": ["^(braid-design-system|(seek(-asia)?-style-guide))$"],
       "schedule": ["before 8am on the first day of the month"]
+    },
+    {
+      "groupName": "Webpack maintenance",
+      "packagePatterns": ["webpack|(-loader$)|autoprefixer|less|css|svg"],
+      "schedule": ["before 8am on Thursday"]
+    },
+    {
+      "groupName": "Babel maintenance",
+      "packagePatterns": ["^@?babel[/-]"],
+      "schedule": ["before 8am on Thursday"]
+    },
+    {
+      "groupName": "Tooling maintenance",
+      "packagePatterns": ["jest|puppeteer|tslint|eslint"],
+      "schedule": ["before 8am on Thursday"]
     }
   ]
 }

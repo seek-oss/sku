@@ -11642,6 +11642,15 @@ prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8,
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
+prop-types@^15.5.6:
+  version "15.7.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.8.1"
+
 property-information@^5.0.0, property-information@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-5.0.1.tgz#c3b09f4f5750b1634c0b24205adbf78f18bdf94f"
@@ -12042,6 +12051,11 @@ react-is@^16.3.2:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
   integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
 
+react-is@^16.8.1:
+  version "16.8.2"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.2.tgz#09891d324cad1cb0c1f2d91f70a71a4bee34df0f"
+  integrity sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
+
 react-isolated-scroll@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/react-isolated-scroll/-/react-isolated-scroll-0.1.1.tgz#781faea948ced62d07624d7e39a12bccb584a5c5"
@@ -12143,6 +12157,13 @@ react-tabs@^2.2.2:
   dependencies:
     classnames "^2.2.0"
     prop-types "^15.5.0"
+
+react-text-mask@^5.4.3:
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
+  integrity sha1-mR77QpnjDC5sLEbRP2FxaUY+DS0=
+  dependencies:
+    prop-types "^15.5.6"
 
 react-textarea-autosize@^7.0.4:
   version "7.1.0"
@@ -12975,10 +12996,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@^6.25.0:
-  version "6.25.1"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-6.25.1.tgz#d6dfaa4048f46b9dc45858bbfaabed50d50555dd"
-  integrity sha512-FHk/f4QwKbm7Y+LNbC2ici1wKEiGbPAlH38NBnwrdNWxAEsebj4tr4DjQy6QEgnNWLp7jQaa7yMeCSe/uyxY0w==
+seek-asia-style-guide@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-7.0.0.tgz#e183bc68f36e1f3af3523f633bcb701d81641fa6"
+  integrity sha512-7xO9Pz4A8roc934iVI1m7UDKwMUqoHmRd826X9RpjxOZg4gghdG8sxh9av7F28uXeSN8p4S38s0wxOf0+QEnqg==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"
@@ -12995,6 +13016,7 @@ seek-asia-style-guide@^6.25.0:
     react-isolated-scroll "^0.1.1"
     react-scrolllock "^2.0.1"
     react-tabs "^2.2.2"
+    react-text-mask "^5.4.3"
     webfontloader "^1.6.28"
 
 seek-style-guide@^38.9.2:

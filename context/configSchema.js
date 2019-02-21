@@ -83,10 +83,17 @@ module.exports = validator.compile({
   target: {
     type: 'string'
   },
-  setupTests: {
-    type: 'string',
-    optional: true
-  },
+  setupTests: [
+    {
+      type: 'string',
+      optional: true
+    },
+    {
+      type: 'array',
+      items: 'string',
+      optional: true
+    }
+  ],
   initialPath: {
     type: 'string',
     optional: true

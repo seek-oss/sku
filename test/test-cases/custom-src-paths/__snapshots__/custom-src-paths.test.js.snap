@@ -15,19 +15,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+          href="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+          href="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/main-41c73dcef41151dbf413.js"
+          href="http://localhost:4002/main-55ef0393adc164f6ae61.js"
           crossorigin="anonymous"
     >
   </head>
@@ -42,19 +42,19 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+            src="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+            src="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/main-41c73dcef41151dbf413.js"
+            src="http://localhost:4002/main-55ef0393adc164f6ae61.js"
             crossorigin="anonymous"
     >
     </script>
@@ -82,19 +82,19 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+          href="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+          href="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/main-41c73dcef41151dbf413.js"
+          href="http://localhost:4002/main-55ef0393adc164f6ae61.js"
           crossorigin="anonymous"
     >
   </head>
@@ -109,28 +109,28 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/runtime-56746167f3edb17d7f83.js"
+            src="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-fabca146acc8059ae7df.js"
+            src="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/main-41c73dcef41151dbf413.js"
+            src="http://localhost:4002/main-55ef0393adc164f6ae61.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "main-41c73dcef41151dbf413.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-56746167f3edb17d7f83.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-fabca146acc8059ae7df.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-55ef0393adc164f6ae61.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0ea2528cf0b6ed101089.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-158a692b0e7ed53a3166.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

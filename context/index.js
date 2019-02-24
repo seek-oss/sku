@@ -38,6 +38,18 @@ const transformOutputPath = isStartScript
   ? startTransformPath
   : skuConfig.transformOutputPath;
 
+const getSetupTests = setupTests => {
+  if (!setupTests) {
+    return [];
+  }
+
+  if (Array.isArray(setupTests)) {
+    return setupTests.map(setupTest => getPathFromCwd(setupTest));
+  }
+
+  return [getPathFromCwd(setupTests)];
+};
+
 // normalize sites to object syntax
 const sites = skuConfig.sites.map(site =>
   typeof site === 'string' ? { name: site } : site
@@ -68,7 +80,7 @@ const paths = {
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,
-  setupTests: skuConfig.setupTests ? getPathFromCwd(skuConfig.setupTests) : null
+  setupTests: getSetupTests(skuConfig.setupTests)
 };
 
 module.exports = {

@@ -4,11 +4,7 @@ const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages.map(escapeRegex).join('|');
 
 module.exports = {
-  ...(paths.setupTests
-    ? {
-        setupTestFrameworkScriptFile: paths.setupTests
-      }
-    : {}),
+  setupFilesAfterEnv: paths.setupTests,
   prettierPath: require.resolve('prettier'),
   testMatch: [
     // Default values, but with 'ts' + 'tsx' support
@@ -19,7 +15,7 @@ module.exports = {
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`
   ],
-  moduleFileExtensions: ['js', 'ts', 'tsx'],
+  moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg)$': require.resolve(
       './fileMock'

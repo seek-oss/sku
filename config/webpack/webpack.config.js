@@ -167,27 +167,36 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
             include: internalJs,
             use: utils.makeJsLoaders({ target: 'browser' })
           },
-          {
-            test: /(?!\.css)\.js$/,
-            exclude: internalJs,
-            use: [
-              {
-                loader: require.resolve('babel-loader'),
-                options: {
-                  babelrc: false,
-                  presets: [
-                    [
-                      require.resolve('@babel/preset-env'),
-                      {
-                        modules: false,
-                        targets: supportedBrowsers
+          ...(isStartScript
+            ? []
+            : [
+                {
+                  test: /(?!\.css)\.js$/,
+                  exclude: [
+                    internalJs,
+                    // Prevent running `react-dom` through babel as it's
+                    // too large and already meets our browser support policy
+                    path.dirname(require.resolve('react-dom/package.json'))
+                  ],
+                  use: [
+                    {
+                      loader: require.resolve('babel-loader'),
+                      options: {
+                        babelrc: false,
+                        presets: [
+                          [
+                            require.resolve('@babel/preset-env'),
+                            {
+                              modules: false,
+                              targets: supportedBrowsers
+                            }
+                          ]
+                        ]
                       }
-                    ]
+                    }
                   ]
                 }
-              }
-            ]
-          },
+              ]),
           {
             test: /\.mjs$/,
             include: /node_modules/,

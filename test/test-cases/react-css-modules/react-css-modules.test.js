@@ -49,7 +49,7 @@ describe('react-css-modules', () => {
 
     it('should start a storybook server', async () => {
       const page = await browser.newPage();
-      await page.goto(storybookUrl);
+      await page.goto(storybookUrl, { waitUntil: 'networkidle0' });
 
       const content = await page.evaluate(async () => {
         const element = await window.document

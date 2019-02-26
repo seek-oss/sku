@@ -58,6 +58,7 @@ module.exports = ({ target, lang = 'js' }) => {
 
   return {
     babelrc: false,
+    sourceType: 'unambiguous',
     presets: [
       languagePreset,
       [require.resolve('@babel/preset-env'), envPresetOptions],

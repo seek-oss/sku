@@ -21,7 +21,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-c0689d8bf3651a8ccac3.js"
+          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -48,7 +48,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-c0689d8bf3651a8ccac3.js"
+            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
             crossorigin="anonymous"
     >
     </script>
@@ -88,7 +88,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-c0689d8bf3651a8ccac3.js"
+          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -115,7 +115,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-c0689d8bf3651a8ccac3.js"
+            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
             crossorigin="anonymous"
     >
     </script>
@@ -130,7 +130,7 @@ Object {
 ,
   "main-55ef0393adc164f6ae61.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-0ea2528cf0b6ed101089.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-c0689d8bf3651a8ccac3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-618579b08dc20130efab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -190,10 +190,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array [
-  "[WDS] Warnings while compiling.",
-  "/Users/mdalgleish/Projects/sku/node_modules/@loadable/server/lib/util.js 26:9-28
-Critical dependency: the request of a dependency is an expression",
-]
+WARNINGS: Array []
 ERRORS: Array []
 `;

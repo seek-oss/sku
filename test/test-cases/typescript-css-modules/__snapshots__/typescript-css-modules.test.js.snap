@@ -25,7 +25,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-8ce149c34deb24c05e87.js"
+          href="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -56,7 +56,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-8ce149c34deb24c05e87.js"
+            src="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
             crossorigin="anonymous"
     >
     </script>
@@ -100,7 +100,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-8ce149c34deb24c05e87.js"
+          href="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -131,7 +131,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-8ce149c34deb24c05e87.js"
+            src="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
             crossorigin="anonymous"
     >
     </script>
@@ -173,7 +173,7 @@ export const root: string;
 }
 ,
   "runtime-dfda6aa3edd4b5fc5f37.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-8ce149c34deb24c05e87.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ddb229777eec8a7a373e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -202,7 +202,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-61296964ab5747dec9b4.js"
+          href="http://localhost:4003/vendors~main-db4e64159786832628b1.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -233,7 +233,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-61296964ab5747dec9b4.js"
+            src="http://localhost:4003/vendors~main-db4e64159786832628b1.js"
             crossorigin="anonymous"
     >
     </script>
@@ -283,7 +283,7 @@ export const root: string;
   "main-d77f47c2a5b9d4421a76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-dfda6aa3edd4b5fc5f37.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-61296964ab5747dec9b4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-db4e64159786832628b1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

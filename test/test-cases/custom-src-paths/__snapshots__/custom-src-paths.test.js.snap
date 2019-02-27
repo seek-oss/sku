@@ -21,7 +21,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
+          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -48,7 +48,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
+            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
             crossorigin="anonymous"
     >
     </script>
@@ -88,7 +88,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
+          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -115,7 +115,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-158a692b0e7ed53a3166.js"
+            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
             crossorigin="anonymous"
     >
     </script>
@@ -130,7 +130,7 @@ Object {
 ,
   "main-55ef0393adc164f6ae61.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-0ea2528cf0b6ed101089.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-158a692b0e7ed53a3166.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-618579b08dc20130efab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

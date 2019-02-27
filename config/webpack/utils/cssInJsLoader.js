@@ -102,7 +102,7 @@ function produce(loader, request, callback) {
     }
     if (exports) {
       postcss()
-        .process(exports, { parser: postcssJs })
+        .process(exports, { from: this.resourcePath, parser: postcssJs })
         .then(function(res) {
           callback(null, res.css);
         });

@@ -68,8 +68,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
@@ -140,8 +138,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
@@ -212,6 +208,4 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;

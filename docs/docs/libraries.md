@@ -8,7 +8,7 @@ If you need to build a UMD library instead of a web site, you can provide a `lib
 modules.exports = {
   libraryEntry: 'src/library.js',
   renderEntry: 'src/render.js',
-  libraryName: 'MyAwesomeLibrary'
+  libraryName: 'MyAwesomeLibrary',
 };
 ```
 

@@ -22,7 +22,7 @@ if (middleware) {
   app.use(middleware);
 }
 app.get('*', (...args) =>
-  renderCallback(makeExtractor(webpackStats, publicPath), ...args)
+  renderCallback(makeExtractor(webpackStats, publicPath), ...args),
 );
 
 export { app, onStart };

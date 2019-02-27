@@ -18,7 +18,7 @@ function getProjectDependencies(readFileSync) {
 
   return {
     ...(pkg.dependencies || {}),
-    ...(pkg.devDependencies || {})
+    ...(pkg.devDependencies || {}),
   };
 }
 
@@ -46,7 +46,7 @@ const createPackageResolver = (fs, resolve) => {
       // This branch handles packages being symlinked into node_modules, for example with
       // `npm link` or in sku's test cases.
       const result = path.dirname(
-        resolve(`${packageName}/package.json`, { paths: [cwd()] })
+        resolve(`${packageName}/package.json`, { paths: [cwd()] }),
       );
       debug(`Resolved ${packageName} to ${result}`);
       return result;
@@ -76,5 +76,5 @@ const createPackageResolver = (fs, resolve) => {
 
 module.exports = {
   resolvePackage: createPackageResolver(require('fs'), require.resolve),
-  createPackageResolver
+  createPackageResolver,
 };

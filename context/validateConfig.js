@@ -48,12 +48,12 @@ module.exports = skuConfig => {
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {
     errors.push(
       `:no_entry_sign: '${bold(
-        'libraryEntry'
+        'libraryEntry',
       )}' must have a corresponding '${bold(
-        'libraryName'
+        'libraryName',
       )}' option. More details: ${underline(
-        'https://github.com/seek-oss/sku#building-a-library'
-      )}`
+        'https://github.com/seek-oss/sku#building-a-library',
+      )}`,
     );
   }
 
@@ -62,8 +62,8 @@ module.exports = skuConfig => {
     if (name === defaultClientEntry) {
       errors.push(
         `:no_entry_sign: Invalid route name: '${bold(
-          defaultClientEntry
-        )}', please use a different route name`
+          defaultClientEntry,
+        )}', please use a different route name`,
       );
     }
   });
@@ -74,8 +74,8 @@ module.exports = skuConfig => {
   } catch (e) {
     errors.push(
       `:no_entry_sign: '${bold(
-        'supportedBrowsers'
-      )}' must be a valid browserslist query. ${white(e.message)}`
+        'supportedBrowsers',
+      )}' must be a valid browserslist query. ${white(e.message)}`,
     );
   }
 

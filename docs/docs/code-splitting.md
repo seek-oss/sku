@@ -48,7 +48,7 @@ export default {
         <StaticRouter location={route} context={{}}>
           <App />
         </StaticRouter>
-      </SkuProvider>
+      </SkuProvider>,
     );
   },
 
@@ -66,7 +66,7 @@ export default {
         </body>
       </html>
     `;
-  }
+  },
 };
 ```
 
@@ -83,7 +83,7 @@ export default () => {
     <BrowserRouter>
       <App />
     </BrowserRouter>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 };
 ```

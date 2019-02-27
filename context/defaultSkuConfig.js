@@ -31,5 +31,5 @@ module.exports = {
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
-  supportedBrowsers
+  supportedBrowsers,
 };

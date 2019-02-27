@@ -14,7 +14,7 @@ module.exports = {
   renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
-  target: 'dist'
+  target: 'dist',
 };
 ```
 
@@ -54,8 +54,8 @@ Example:
 const config = {
   dangerouslySetESLintConfig: skuEslintConfig => ({
     ...skuEslintConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
 };
 ```
 
@@ -73,8 +73,8 @@ Example:
 const config = {
   dangerouslySetJestConfig: skuJestConfig => ({
     ...skuJestConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
 };
 ```
 
@@ -94,8 +94,8 @@ Example:
 const config = {
   dangerouslySetWebpackConfig: skuWebpackConfig => ({
     ...skuWebpackConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
 };
 ```
 
@@ -207,7 +207,7 @@ Example:
 
 ```js
 const config = {
-  routes: ['/', '/details']
+  routes: ['/', '/details'],
 };
 ```
 
@@ -260,7 +260,7 @@ Example:
 
 ```js
 const config = {
-  sourceMapsProd: true
+  sourceMapsProd: true,
 };
 ```
 

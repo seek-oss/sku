@@ -3,7 +3,7 @@ import {
   StyleGuideProvider,
   PageBlock,
   Section,
-  Text
+  Text,
 } from 'seek-asia-style-guide/react';
 
 export default () => (

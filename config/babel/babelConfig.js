@@ -3,13 +3,13 @@ const { cwd } = require('../../lib/cwd');
 
 const browserEnvOptions = {
   modules: false,
-  targets: supportedBrowsers
+  targets: supportedBrowsers,
 };
 
 const nodeEnvOptions = {
   targets: {
-    node: 'current'
-  }
+    node: 'current',
+  },
 };
 
 module.exports = ({ target, lang = 'js' }) => {
@@ -25,12 +25,12 @@ module.exports = ({ target, lang = 'js' }) => {
       require.resolve('babel-plugin-module-resolver'),
       {
         root: [cwd()],
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
-      }
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+      },
     ],
     require.resolve('@babel/plugin-transform-runtime'),
     require.resolve('babel-plugin-macros'),
-    require.resolve('@loadable/babel-plugin')
+    require.resolve('@loadable/babel-plugin'),
   ];
 
   if (isBrowser) {
@@ -41,7 +41,7 @@ module.exports = ({ target, lang = 'js' }) => {
     plugins.push(
       require.resolve('@babel/plugin-transform-react-inline-elements'),
       require.resolve('babel-plugin-transform-react-remove-prop-types'),
-      require.resolve('@babel/plugin-transform-react-constant-elements')
+      require.resolve('@babel/plugin-transform-react-constant-elements'),
     );
   }
 
@@ -51,8 +51,8 @@ module.exports = ({ target, lang = 'js' }) => {
           require.resolve('@babel/preset-typescript'),
           {
             isTSX: true,
-            allExtensions: true
-          }
+            allExtensions: true,
+          },
         ]
       : require.resolve('@babel/preset-flow');
 
@@ -62,8 +62,8 @@ module.exports = ({ target, lang = 'js' }) => {
     presets: [
       languagePreset,
       [require.resolve('@babel/preset-env'), envPresetOptions],
-      require.resolve('@babel/preset-react')
+      require.resolve('@babel/preset-react'),
     ],
-    plugins
+    plugins,
   };
 };

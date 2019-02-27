@@ -13,11 +13,11 @@ module.exports = async (port, targetDirectory, rewrites = []) =>
             headers: [
               {
                 key: 'Access-Control-Allow-Origin',
-                value: '*'
-              }
-            ]
-          }
-        ]
+                value: '*',
+              },
+            ],
+          },
+        ],
       });
     });
 

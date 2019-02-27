@@ -16,13 +16,13 @@ const localhost = '0.0.0.0';
 (async () => {
   const availablePort = await allocatePort({
     port: port.client,
-    host: localhost
+    host: localhost,
   });
 
   const webpackCompiler = webpack(
     makeWebpackConfig({
-      port: availablePort
-    })
+      port: availablePort,
+    }),
   );
 
   await checkHosts();
@@ -38,10 +38,10 @@ const localhost = '0.0.0.0';
       app.get(
         '*',
         siteServeMiddleware({
-          fs: server.middleware.fileSystem
-        })
+          fs: server.middleware.fileSystem,
+        }),
       );
-    }
+    },
   });
 
   devServer.listen(availablePort, localhost, err => {

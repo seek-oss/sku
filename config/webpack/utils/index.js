@@ -5,5 +5,5 @@ const { resolvePackage } = require('./resolvePackage');
 module.exports = {
   ...env,
   ...loaders,
-  resolvePackage
+  resolvePackage,
 };

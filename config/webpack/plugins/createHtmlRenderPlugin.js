@@ -8,7 +8,7 @@ const {
   environments,
   sites,
   transformOutputPath,
-  publicPath
+  publicPath,
 } = require('../../../context');
 
 // mapStatsToParams runs once for each render. It's purpose is
@@ -20,7 +20,7 @@ const mapStatsToParams = ({ webpackStats }) => {
 
   return {
     webpackStats: stats,
-    publicPath
+    publicPath,
   };
 };
 
@@ -31,12 +31,12 @@ const getStartRoutes = () => {
   // first option in start mode.
   return product({
     site: sites,
-    route: routes
+    route: routes,
   }).map(({ route, site = {} }) => ({
     environment: environments.length > 0 ? environments[0] : undefined, // eslint-disable-line no-undefined
     site: site.name,
     routeName: route.name,
-    route: route.route
+    route: route.route,
   }));
 };
 
@@ -47,12 +47,12 @@ const getBuildRoutes = () =>
   product({
     environment: environments,
     site: sites,
-    route: routes
+    route: routes,
   }).map(({ route, site = {}, ...rest }) => ({
     ...rest,
     site: site.name,
     routeName: route.name,
-    route: route.route
+    route: route.route,
   }));
 
 module.exports = () => {
@@ -63,6 +63,6 @@ module.exports = () => {
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
     transformFilePath: transformOutputPath,
     mapStatsToParams,
-    verbose: false
+    verbose: false,
   });
 };

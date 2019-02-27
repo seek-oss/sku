@@ -9,7 +9,7 @@ const publicPath = __SKU_PUBLIC_PATH__;
 
 export const serializeConfig = config =>
   `<script>window.${clientContextKey} = ${serializeJavascript(
-    config
+    config,
   )};</script>`;
 
 export default async renderParams => {
@@ -22,21 +22,21 @@ export default async renderParams => {
 
   const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
     webpackStats,
-    publicPath
+    publicPath,
   );
 
   // renderApp is optional for libraries
   if (render.renderApp) {
     app = await render.renderApp({
       ...renderContext,
-      SkuProvider
+      SkuProvider,
     });
   }
 
   if (render.provideClientContext) {
     clientContext = await render.provideClientContext({
       ...renderContext,
-      app
+      app,
     });
   }
 
@@ -49,7 +49,7 @@ export default async renderParams => {
     ...renderContext,
     headTags: getHeadTags(),
     bodyTags,
-    app
+    app,
   });
 
   return result;

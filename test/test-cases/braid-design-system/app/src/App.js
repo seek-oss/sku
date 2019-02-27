@@ -5,7 +5,7 @@ import {
   ThemeProvider,
   Text,
   Checkbox,
-  ChecklistCard
+  ChecklistCard,
 } from 'braid-design-system';
 
 const Theme = loadable.lib(({ themeName }) => import(`./themes/${themeName}`));

@@ -14,21 +14,21 @@ const appSkuConfig = fs.existsSync(appSkuConfigPath)
 
 const skuConfig = {
   ...defaultSkuConfig,
-  ...appSkuConfig
+  ...appSkuConfig,
 };
 
 validateConfig(skuConfig);
 
 const env = {
   ...skuConfig.env,
-  SKU_TENANT: args.tenant
+  SKU_TENANT: args.tenant,
 };
 
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
 const normalizedRoutes = skuConfig.routes.map(route =>
-  typeof route === 'string' ? { route } : route
+  typeof route === 'string' ? { route } : route,
 );
 
 const startTransformPath = ({ site = '', route = '' }) =>
@@ -52,7 +52,7 @@ const getSetupTests = setupTests => {
 
 // normalize sites to object syntax
 const sites = skuConfig.sites.map(site =>
-  typeof site === 'string' ? { name: site } : site
+  typeof site === 'string' ? { name: site } : site,
 );
 
 // Default initialPath to the first route
@@ -68,7 +68,7 @@ const paths = {
     'seek-style-guide',
     'seek-asia-style-guide',
     'braid-design-system',
-    ...skuConfig.compilePackages
+    ...skuConfig.compilePackages,
   ],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
   renderEntry: getPathFromCwd(skuConfig.renderEntry),
@@ -80,7 +80,7 @@ const paths = {
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,
-  setupTests: getSetupTests(skuConfig.setupTests)
+  setupTests: getSetupTests(skuConfig.setupTests),
 };
 
 module.exports = {
@@ -90,7 +90,7 @@ module.exports = {
   hosts: skuConfig.hosts,
   port: {
     client: skuConfig.port,
-    server: skuConfig.serverPort
+    server: skuConfig.serverPort,
   },
   libraryName: skuConfig.libraryName,
   isLibrary: Boolean(skuConfig.libraryEntry),
@@ -108,5 +108,5 @@ module.exports = {
   isStartScript,
   isBuildScript,
   supportedBrowsers: skuConfig.supportedBrowsers,
-  sourceMapsProd: Boolean(skuConfig.sourceMapsProd)
+  sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
 };

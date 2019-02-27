@@ -4,5 +4,5 @@ module.exports = {
     config.rules = config.rules || {};
     config.rules['no-console'] = 0;
     return config;
-  }
+  },
 };

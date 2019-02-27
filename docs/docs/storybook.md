@@ -29,6 +29,6 @@ By default, Storybook runs on port `8081`. If you'd like to use a different port
 
 ```js
 module.exports = {
-  storybookPort: 9000
+  storybookPort: 9000,
 };
 ```

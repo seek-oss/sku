@@ -36,7 +36,7 @@ module.exports = {
       const cssModule = {};
       classNames.forEach(className => {
         cssModule[className] = [${JSON.stringify(
-          fileName.replace('.css', '')
+          fileName.replace('.css', ''),
         )}, '__', className].join('');
       });
 
@@ -44,5 +44,5 @@ module.exports = {
     `;
 
     return generatedCode;
-  }
+  },
 };

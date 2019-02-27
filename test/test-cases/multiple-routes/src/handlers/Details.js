@@ -10,15 +10,15 @@ export default class Details extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: null
+      id: null,
     };
   }
 
   componentDidMount() {
     this.setState({
       id: window.location.pathname.substr(
-        window.location.pathname.lastIndexOf('/') + 1
-      )
+        window.location.pathname.lastIndexOf('/') + 1,
+      ),
     });
   }
 

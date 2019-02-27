@@ -82,8 +82,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`multiple-routes build should generate the expected files 1`] = `
@@ -554,8 +552,6 @@ POST HYDRATE DIFFS:
            Some special async content
          </span>
 
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`multiple-routes start should render home page correctly 1`] = `
@@ -632,6 +628,4 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;

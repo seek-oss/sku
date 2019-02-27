@@ -73,8 +73,6 @@ POST HYDRATE DIFFS:
        </div>
      </div>
 
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`react-css-modules should generate the expected files 1`] = `

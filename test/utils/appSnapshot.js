@@ -15,10 +15,7 @@ const cssSnapshotSerializer = {
 };
 
 const appSnapshotSerializer = {
-  print: (
-    { sourceHtml, clientRenderContent, warnings, errors },
-    serializer
-  ) => {
+  print: ({ sourceHtml, clientRenderContent }, serializer) => {
     const serializedSouceHtml = serializer(sourceHtml);
     const serializedClientRenderContent = serializer(clientRenderContent);
 
@@ -29,9 +26,7 @@ const appSnapshotSerializer = {
 
     const snapshotItems = [
       `SOURCE HTML: ${serializedSouceHtml}`,
-      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`,
-      `WARNINGS: ${serializer(warnings)}`,
-      `ERRORS: ${serializer(errors)}`
+      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`
     ];
 
     return snapshotItems.join('\n');
@@ -66,7 +61,10 @@ const getAppSnapshot = async url => {
   const sourceHtml = await response.text();
   const clientRenderContent = await page.content();
 
-  return { sourceHtml, clientRenderContent, warnings, errors };
+  expect(warnings).toEqual([]);
+  expect(errors).toEqual([]);
+
+  return { sourceHtml, clientRenderContent };
 };
 
 module.exports = {

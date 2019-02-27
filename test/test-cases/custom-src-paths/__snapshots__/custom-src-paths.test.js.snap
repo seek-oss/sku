@@ -62,8 +62,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
@@ -190,6 +188,4 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;

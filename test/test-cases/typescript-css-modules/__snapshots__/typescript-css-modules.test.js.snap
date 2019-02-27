@@ -70,8 +70,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`typescript-css-modules build should generate the expected files 1`] = `
@@ -247,8 +245,6 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;
 
 exports[`typescript-css-modules build-ssr should generate the expected files 1`] = `
@@ -351,6 +347,4 @@ SOURCE HTML:
 </html>
 
 POST HYDRATE DIFFS: NO DIFF
-WARNINGS: Array []
-ERRORS: Array []
 `;

@@ -3151,10 +3151,10 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.24.tgz#636a85c0ee7b4988df7704cb7bd0dfe3d1e8a34c"
-  integrity sha512-UhbyJAOA6i89Izx3tb4WHzwi8XCZM0FRTYRCHe7CSXeSJd+2OOB0pwLUUnvm0wXpMcPAQLjgtNrHq2Z+L5owIA==
+braid-design-system@^0.0.36:
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.36.tgz#3d7d00662f907120c7f6a045db1f7f198a8ab5f2"
+  integrity sha512-haBpvqPahauxymS4z6ITqD0kHXC/mmPdjQD3EjH8mtjANr3S6vhdlssIq1UtFwH/oHJvUjby69xIBS78wrOFMw==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.6"

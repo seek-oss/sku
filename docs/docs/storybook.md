@@ -49,6 +49,6 @@ By default, it deploys the content in the storybook-static directory in your pro
 
 ```js
 module.exports = {
-  storybookTarget: './dist/mystorybook'
+  storybookTarget: './dist/mystorybook',
 };
 ```

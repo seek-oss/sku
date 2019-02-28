@@ -9,7 +9,7 @@ argv.push('--config-dir', configDir);
 argv.push('--output-dir', storybookTarget || '');
 
 const storybookProcess = gracefulSpawn(startStorybookPath, argv, {
-  stdio: 'inherit'
+  stdio: 'inherit',
 });
 
 storybookProcess.on('exit', exitCode => {

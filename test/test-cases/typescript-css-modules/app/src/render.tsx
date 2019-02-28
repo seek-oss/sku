@@ -10,7 +10,7 @@ const skuRender: Render = {
     renderToString(
       <SkuProvider>
         <App />
-      </SkuProvider>
+      </SkuProvider>,
     ),
 
   renderDocument: ({ app, headTags, bodyTags }) => dedent`
@@ -27,7 +27,7 @@ const skuRender: Render = {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 
 export default skuRender;

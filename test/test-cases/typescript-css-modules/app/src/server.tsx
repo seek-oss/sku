@@ -12,12 +12,12 @@ export default () => ({
   renderCallback: (
     { SkuProvider, getBodyTags, getHeadTags }: SkuProps,
     _: any,
-    res: any
+    res: any,
   ): void => {
     const app = renderToString(
       <SkuProvider>
         <App />
-      </SkuProvider>
+      </SkuProvider>,
     );
 
     res.send(`
@@ -35,5 +35,5 @@ export default () => ({
         </body>
       </html>
     `);
-  }
+  },
 });

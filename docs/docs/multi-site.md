@@ -10,8 +10,8 @@ By default, sku will render the first site in the [`sites`](./docs/configuration
 module.exports = {
   sites: [
     { name: 'seekAnz', host: 'dev.seek.com.au' },
-    { name: 'jobStreet', host: 'dev.jobstreet.com' }
-  ]
+    { name: 'jobStreet', host: 'dev.jobstreet.com' },
+  ],
 };
 ```
 
@@ -51,7 +51,7 @@ _**NOTE:** For this example to work, your sites need to match the available [the
 
 ```js
 module.exports = {
-  sites: ['seekAnz', 'jobStreet']
+  sites: ['seekAnz', 'jobStreet'],
 };
 ```
 
@@ -72,13 +72,13 @@ export default {
     return renderToString(
       <SkuProvider>
         <App site={site} />
-      </SkuProvider>
+      </SkuProvider>,
     );
   },
 
   // Make the site variable available for the client
   provideClientContext: ({ site }) => ({
-    site
+    site,
   }),
 
   renderDocument: ({ app, headTags, bodyTags }) => `
@@ -95,7 +95,7 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 ```
 

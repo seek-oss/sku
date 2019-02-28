@@ -35,7 +35,7 @@ function produce(loader, request, callback) {
   var outputOptions = { filename: childFilename };
   var childCompiler = getRootCompilation(loader).createChildCompiler(
     'css-in-js-compiler',
-    outputOptions
+    outputOptions,
   );
   new NodeTemplatePlugin(outputOptions).apply(childCompiler);
   new LibraryTemplatePlugin(null, 'commonjs2').apply(childCompiler);
@@ -53,7 +53,7 @@ function produce(loader, request, callback) {
   // a child compiler so we don't spawn another child compilers from there.
   childCompiler.hooks.thisCompilation.tap(CSSInJsLoader, function(compilation) {
     compilation.hooks.normalModuleLoader.tap(CSSInJsLoader, function(
-      loaderContext
+      loaderContext,
     ) {
       loaderContext[__dirname] = false;
     });
@@ -61,7 +61,7 @@ function produce(loader, request, callback) {
   var source;
   childCompiler.hooks.afterCompile.tapAsync(CSSInJsLoader, function(
     compilation,
-    callback
+    callback,
   ) {
     source =
       compilation.assets[childFilename] &&

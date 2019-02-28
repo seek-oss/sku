@@ -9,6 +9,6 @@ export default ({ site }) => {
     <BrowserRouter>
       <App site={site} />
     </BrowserRouter>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 };

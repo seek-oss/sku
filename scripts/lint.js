@@ -23,7 +23,7 @@ const args = require('../config/args').argv;
 
   const cli = new EslintCLI({
     baseConfig: eslintConfig,
-    useEslintrc: false
+    useEslintrc: false,
   });
 
   const pathsToCheck = args.length === 0 ? ['.'] : args;

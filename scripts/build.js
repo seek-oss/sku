@@ -8,7 +8,7 @@ const {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-  cleanRenderJs
+  cleanRenderJs,
 } = require('../lib/buildFileUtils');
 const { run } = require('../lib/runWebpack');
 const makeWebpackConfig = require('../config/webpack/webpack.config');

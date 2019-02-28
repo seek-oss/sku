@@ -6,7 +6,7 @@ import defaultEntryPoint from '../context/defaultClientEntry';
 export default (stats, publicPath) => {
   const extractor = new ChunkExtractor({
     stats,
-    entrypoints: [defaultEntryPoint]
+    entrypoints: [defaultEntryPoint],
   });
 
   const SkuProvider = ({ children }) => (
@@ -32,6 +32,6 @@ export default (stats, publicPath) => {
       return [styleTags, scriptPreloads].join('\n');
     },
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
-    SkuProvider
+    SkuProvider,
   };
 };

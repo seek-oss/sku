@@ -12,5 +12,5 @@ module.exports = {
     });
 
     return `module.exports = ${JSON.stringify(cssModule)}`;
-  }
+  },
 };

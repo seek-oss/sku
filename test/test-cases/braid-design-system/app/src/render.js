@@ -9,12 +9,12 @@ export default {
     return renderToString(
       <SkuProvider>
         <App theme={site} />
-      </SkuProvider>
+      </SkuProvider>,
     );
   },
 
   provideClientContext: ({ site }) => ({
-    site
+    site,
   }),
 
   renderDocument: ({ app, headTags, bodyTags, site }) => dedent`
@@ -34,5 +34,5 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };

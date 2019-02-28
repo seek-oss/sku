@@ -11,7 +11,7 @@ const { cwd } = require('../../../lib/cwd');
 function createPackageLink(name) {
   return fs.symlink(
     `${cwd()}/node_modules/${name}`,
-    `${__dirname}/app/node_modules/${name}`
+    `${__dirname}/app/node_modules/${name}`,
   );
 }
 
@@ -20,7 +20,7 @@ async function linkLocalDependencies() {
   await rimrafAsync(nodeModules);
   await fs.mkdir(nodeModules);
   await Promise.all(
-    ['react', 'react-dom', 'braid-design-system'].map(createPackageLink)
+    ['react', 'react-dom', 'braid-design-system'].map(createPackageLink),
   );
 }
 

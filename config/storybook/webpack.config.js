@@ -6,7 +6,7 @@ const webpackMerge = require('webpack-merge');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const clientWebpackConfig = find(
   makeWebpackConfig({ isStorybook: true }),
-  config => config.name === 'client'
+  config => config.name === 'client',
 );
 
 module.exports = webpackMerge(
@@ -16,7 +16,7 @@ module.exports = webpackMerge(
     // which would break the Storybook build.
     module: clientWebpackConfig.module,
     resolve: clientWebpackConfig.resolve,
-    plugins: clientWebpackConfig.plugins
+    plugins: clientWebpackConfig.plugins,
   },
   {
     plugins: [
@@ -39,8 +39,8 @@ module.exports = webpackMerge(
         __SKU_SRC_PATHS_6__: JSON.stringify(paths.src[6] || __dirname),
         __SKU_SRC_PATHS_7__: JSON.stringify(paths.src[7] || __dirname),
         __SKU_SRC_PATHS_8__: JSON.stringify(paths.src[8] || __dirname),
-        __SKU_SRC_PATHS_9__: JSON.stringify(paths.src[9] || __dirname)
-      })
-    ]
-  }
+        __SKU_SRC_PATHS_9__: JSON.stringify(paths.src[9] || __dirname),
+      }),
+    ],
+  },
 );

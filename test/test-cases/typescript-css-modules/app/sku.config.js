@@ -6,5 +6,5 @@ module.exports = {
   serverPort: 8010,
   storybookPort: 8082,
   publicPath: 'http://localhost:4003',
-  setupTests: 'src/setupTests.ts'
+  setupTests: 'src/setupTests.ts',
 };

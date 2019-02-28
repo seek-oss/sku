@@ -12,7 +12,7 @@ module.exports = {
   publicPath: '/',
   target: 'dist',
   port: 3300,
-  serverPort: 3301
+  serverPort: 3301,
 };
 ```
 

@@ -20,5 +20,5 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };

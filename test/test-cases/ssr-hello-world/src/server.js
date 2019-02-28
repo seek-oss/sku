@@ -27,13 +27,13 @@ export default () => ({
     const app = renderToString(
       <SkuProvider>
         <App />
-      </SkuProvider>
+      </SkuProvider>,
     );
     res.send(
-      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app })
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
     );
   },
   onStart: async () => {
     await writeFile('./started.txt', "Server started, here's your callback");
-  }
+  },
 });

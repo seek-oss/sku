@@ -19,8 +19,8 @@ const usage = () => {
 
   console.log(
     `  ${chalk.cyan('sku init')} ${chalk.green(
-      '<project-directory>'
-    )} [--verbose]`
+      '<project-directory>',
+    )} [--verbose]`,
   );
   console.log();
   console.log('For example:');
@@ -46,7 +46,7 @@ const appName = path.basename(root);
 const reservedNames = ['react', 'react-dom', 'sku', 'seek-style-guide'].sort();
 
 const { validForNewPackages, errors = [], warnings = [] } = validatePackageName(
-  appName
+  appName,
 );
 
 if (!validForNewPackages) {
@@ -72,7 +72,7 @@ if (reservedNames.indexOf(appName) >= 0) {
       ${chalk.cyan(reservedNames.map(depName => `  ${depName}`).join('\n'))}
 
       Please choose a different project name.
-    `)
+    `),
   );
   process.exit(1);
 }
@@ -96,8 +96,8 @@ const packageJson = {
     test: 'sku test',
     build: 'sku build',
     lint: 'sku lint',
-    format: 'sku format'
-  }
+    format: 'sku format',
+  },
 };
 const packageJsonString = JSON.stringify(packageJson, null, 2);
 
@@ -111,7 +111,7 @@ const allDeps = [
   'sku',
   'react',
   'react-dom',
-  'react-helmet'
+  'react-helmet',
 ];
 
 console.log('Installing packages. This might take a couple of minutes.');
@@ -123,7 +123,7 @@ install(allDeps, verbose, useYarn)
     return kopy(path.join(__dirname, '../template'), root, {
       move: {
         // Remove leading underscores from filenames:
-        '_*': filepath => filepath.replace(/^_/, '')
+        '_*': filepath => filepath.replace(/^_/, ''),
       },
       data: {
         appName,
@@ -148,8 +148,8 @@ install(allDeps, verbose, useYarn)
         testScript: useYarn ? 'yarn test' : 'npm test',
         lintScript: useYarn ? 'yarn lint' : 'npm run lint',
         formatScript: useYarn ? 'yarn format' : 'npm run format',
-        buildScript: useYarn ? 'yarn build' : 'npm run build'
-      }
+        buildScript: useYarn ? 'yarn build' : 'npm run build',
+      },
     });
   })
   .then(() => console.log('Success!'));

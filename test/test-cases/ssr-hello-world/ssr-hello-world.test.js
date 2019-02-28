@@ -13,7 +13,7 @@ const skuStartConfig = require('./sku-start.config');
 
 const getTestConfig = skuConfig => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
-  targetDirectory: path.join(__dirname, skuConfig.target)
+  targetDirectory: path.join(__dirname, skuConfig.target),
 });
 
 describe('ssr-hello-world', () => {
@@ -23,7 +23,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start-ssr', __dirname, [
-        '--config=sku-start.config.js'
+        '--config=sku-start.config.js',
       ]);
       await waitForUrls(backendUrl);
     });
@@ -44,7 +44,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', __dirname, [
-        '--config=sku-build.config.js'
+        '--config=sku-build.config.js',
       ]);
 
       closeAssetServer = await startAssetServer(4000, targetDirectory);
@@ -60,7 +60,7 @@ describe('ssr-hello-world', () => {
       beforeAll(async () => {
         server = gracefulSpawn('node', ['server'], {
           cwd: targetDirectory,
-          stdio: 'inherit'
+          stdio: 'inherit',
         });
         await waitForUrls(backendUrl);
       });
@@ -79,7 +79,7 @@ describe('ssr-hello-world', () => {
         const startedFile = await readFile(pathToFile, { encoding: 'utf-8' });
 
         expect(startedFile).toMatchInlineSnapshot(
-          `"Server started, here's your callback"`
+          `"Server started, here's your callback"`,
         );
       });
     });
@@ -92,7 +92,7 @@ describe('ssr-hello-world', () => {
       beforeAll(async () => {
         server = gracefulSpawn('node', ['server', '--port', customPort], {
           cwd: targetDirectory,
-          stdio: 'inherit'
+          stdio: 'inherit',
         });
         await waitForUrls(customPortUrl);
       });

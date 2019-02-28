@@ -9,7 +9,7 @@ const { blue, underline } = require('chalk');
 const { watch } = require('../lib/runWebpack');
 const {
   copyPublicFiles,
-  ensureTargetDirectory
+  ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const { hosts, port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
@@ -21,16 +21,16 @@ const localhost = '0.0.0.0';
   // Find available ports if requested ones aren't available
   const clientPort = await allocatePort({
     port: port.client,
-    host: localhost
+    host: localhost,
   });
   const serverPort = await allocatePort({
     port: port.server,
-    host: localhost
+    host: localhost,
   });
 
   const [clientWebpackConfig, serverWebpackConfig] = makeWebpackConfig({
     clientPort,
-    serverPort
+    serverPort,
   });
 
   // Make sure target directory exists before starting
@@ -44,10 +44,12 @@ const localhost = '0.0.0.0';
 
   console.log();
   console.log(
-    blue(`Starting the webpack dev server on ${underline(webpackDevServerUrl)}`)
+    blue(
+      `Starting the webpack dev server on ${underline(webpackDevServerUrl)}`,
+    ),
   );
   console.log(
-    blue(`Starting the SSR development server on ${underline(serverUrl)}`)
+    blue(`Starting the SSR development server on ${underline(serverUrl)}`),
   );
   console.log();
 
@@ -84,7 +86,7 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: hosts,
     hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*' }
+    headers: { 'Access-Control-Allow-Origin': '*' },
   });
 
   devServer.listen(clientPort, localhost, err => {

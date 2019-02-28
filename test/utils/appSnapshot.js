@@ -11,7 +11,7 @@ const cssSnapshotSerializer = {
       return false;
     }
     return true;
-  }
+  },
 };
 
 const appSnapshotSerializer = {
@@ -21,12 +21,12 @@ const appSnapshotSerializer = {
 
     const htmlDiff = diff(serializedSouceHtml, serializedClientRenderContent, {
       colors: false,
-      noHeaders: true
+      noHeaders: true,
     });
 
     const snapshotItems = [
       `SOURCE HTML: ${serializedSouceHtml}`,
-      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`
+      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`,
     ];
 
     return snapshotItems.join('\n');
@@ -38,7 +38,7 @@ const appSnapshotSerializer = {
       val.hasOwnProperty('clientRenderContent') &&
       val.hasOwnProperty('sourceHtml')
     );
-  }
+  },
 };
 
 const getAppSnapshot = async url => {
@@ -70,5 +70,5 @@ const getAppSnapshot = async url => {
 module.exports = {
   appSnapshotSerializer,
   getAppSnapshot,
-  cssSnapshotSerializer
+  cssSnapshotSerializer,
 };

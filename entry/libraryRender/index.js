@@ -9,6 +9,6 @@ export default async renderParams => {
   return await render.renderDocument({
     ...renderContext,
     headTags: `<link rel="stylesheet" type="text/css" href="${publicPath}${libraryName}.css">`,
-    bodyTags: `<script src="${publicPath}${libraryName}.js"></script>`
+    bodyTags: `<script src="${publicPath}${libraryName}.js"></script>`,
   });
 };

@@ -8,7 +8,7 @@ const path = require('path');
 const jsonc = require('jsonc-parser');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const {
-  bundleReportFolder
+  bundleReportFolder,
 } = require('../../../config/webpack/plugins/bundleAnalyzer');
 const prettierConfig = require('../../../config/prettier/prettierConfig');
 const tslintConfig = require('../../../config/typescript/tslint.json');
@@ -40,8 +40,8 @@ const copyToApp = async (filename, folder) =>
 const removeAppDir = async folder =>
   await rimraf(folder, {
     glob: {
-      dot: true
-    }
+      dot: true,
+    },
   });
 
 describe('configure', () => {
@@ -68,13 +68,13 @@ describe('configure', () => {
 
     it('should not generate tsconfig config', async () => {
       expect(readJsonC(appFolder, 'tsconfig.json')).rejects.toThrowError(
-        /ENOENT: no such file or directory, open \'.*\/tsconfig\.json\'/
+        /ENOENT: no such file or directory, open \'.*\/tsconfig\.json\'/,
       );
     });
 
     it('should not generate tslint config', async () => {
       expect(readJsonC(appFolder, 'tslint.json')).rejects.toThrowError(
-        /ENOENT: no such file or directory, open \'.*\/tslint\.json\'/
+        /ENOENT: no such file or directory, open \'.*\/tslint\.json\'/,
       );
     });
 
@@ -95,7 +95,7 @@ describe('configure', () => {
         expect(ignoreContents).toContain(`${defaultTargetDir}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
         expect(ignoreContents).toContain(`${coverageFolder}/`);
-      })
+      }),
     );
   });
 
@@ -127,7 +127,7 @@ describe('configure', () => {
       expect(Object.keys(tsconfigContents).sort()).toEqual([
         'compilerOptions',
         'exclude',
-        'include'
+        'include',
       ]);
     });
 
@@ -155,7 +155,7 @@ describe('configure', () => {
         expect(ignoreContents).toContain(`${skuConfig.target}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
         expect(ignoreContents).toContain(`${coverageFolder}/`);
-      })
+      }),
     );
   });
 });

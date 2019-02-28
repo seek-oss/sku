@@ -18,7 +18,7 @@ const {
   webpackDecorator,
   polyfills,
   isStartScript,
-  supportedBrowsers
+  supportedBrowsers,
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort }) => {
@@ -37,7 +37,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
         console.log(
           `WARNING: Environment variable "${key}" is missing a value for the "${
             args.env
-          }" environment`
+          }" environment`,
         );
         process.exit(1);
       }
@@ -51,7 +51,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   const internalJs = [
     path.join(__dirname, '../../entry'),
     ...paths.src,
-    ...paths.compilePackages.map(utils.resolvePackage)
+    ...paths.compilePackages.map(utils.resolvePackage),
   ];
 
   const resolvedPolyfills = polyfills.map(polyfill => {
@@ -63,7 +63,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   const clientDevServerEntries = [
     `${require.resolve('react-hot-loader/patch')}`,
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
-    `${require.resolve('webpack/hot/only-dev-server')}`
+    `${require.resolve('webpack/hot/only-dev-server')}`,
   ];
 
   // Add polyfills and dev server client to all entries
@@ -72,7 +72,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
     : [...resolvedPolyfills, paths.clientEntry];
 
   const serverDevServerEntries = [
-    `${require.resolve('webpack/hot/poll')}?1000`
+    `${require.resolve('webpack/hot/poll')}?1000`,
   ];
 
   const skuServerEntry = require.resolve('../../entry/server/index.js');
@@ -100,33 +100,33 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
         path: paths.target,
         publicPath,
         filename: `${fileMask}.js`,
-        chunkFilename: `${fileMask}.js`
+        chunkFilename: `${fileMask}.js`,
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: utils.isProductionBuild,
         concatenateModules: utils.isProductionBuild,
         splitChunks: {
-          chunks: 'all'
+          chunks: 'all',
         },
         runtimeChunk: {
-          name: 'runtime'
-        }
+          name: 'runtime',
+        },
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
       },
       module: {
         rules: [
           {
             test: /(?!\.css)\.(ts|tsx)$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' })
+            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' }),
           },
           {
             test: /(?!\.css)\.js$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser' })
+            use: utils.makeJsLoaders({ target: 'browser' }),
           },
           ...(isStartScript
             ? []
@@ -137,7 +137,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
                     internalJs,
                     // Prevent running `react-dom` through babel as it's
                     // too large and already meets our browser support policy
-                    path.dirname(require.resolve('react-dom/package.json'))
+                    path.dirname(require.resolve('react-dom/package.json')),
                   ],
                   use: [
                     {
@@ -149,64 +149,64 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
                             require.resolve('@babel/preset-env'),
                             {
                               modules: false,
-                              targets: supportedBrowsers
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  ]
-                }
+                              targets: supportedBrowsers,
+                            },
+                          ],
+                        ],
+                      },
+                    },
+                  ],
+                },
               ]),
           {
             test: /\.mjs$/,
             include: /node_modules/,
-            type: 'javascript/auto'
+            type: 'javascript/auto',
           },
           {
             test: /\.css\.js$/,
             oneOf: utils.makeCssOneOf({
               js: true,
-              hot: isStartScript
-            })
+              hot: isStartScript,
+            }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ hot: isStartScript })
+            oneOf: utils.makeCssOneOf({ hot: isStartScript }),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders()
+            use: utils.makeImageLoaders(),
           },
           {
             test: /\.svg$/,
-            use: utils.makeSvgLoaders()
-          }
-        ]
+            use: utils.makeSvgLoaders(),
+          },
+        ],
       },
       plugins: [
         new webpack.DefinePlugin(envVars),
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,
-          outputAsset: false
+          outputAsset: false,
         }),
         new MiniCssExtractPlugin({
           filename: `${fileMask}.css`,
-          chunkFilename: `${fileMask}.css`
-        })
+          chunkFilename: `${fileMask}.css`,
+        }),
       ].concat(
         isStartScript
           ? [
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin()
+              new webpack.NoEmitOnErrorsPlugin(),
             ]
           : [
               bundleAnalyzerPlugin({ name: 'client' }),
-              new webpack.HashedModuleIdsPlugin()
-            ]
-      )
+              new webpack.HashedModuleIdsPlugin(),
+            ],
+      ),
     },
     {
       name: 'server',
@@ -222,88 +222,88 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
             ...paths.compilePackages.map(
-              packageName => new RegExp(`^(${packageName})`)
-            )
-          ]
-        })
+              packageName => new RegExp(`^(${packageName})`),
+            ),
+          ],
+        }),
       ],
       resolve: {
         alias: {
           __sku_alias__serverEntry: paths.serverEntry,
           __sku_alias__webpackStats: path.join(
             paths.target,
-            webpackStatsFilename
-          )
+            webpackStatsFilename,
+          ),
         },
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx']
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
       },
       target: 'node',
       node: {
-        __dirname: false
+        __dirname: false,
       },
       output: {
         path: paths.target,
         filename: 'server.js',
-        libraryTarget: 'var'
+        libraryTarget: 'var',
       },
       optimization: {
-        nodeEnv: process.env.NODE_ENV
+        nodeEnv: process.env.NODE_ENV,
       },
       module: {
         rules: [
           {
             test: /(?!\.css)\.(ts|tsx)$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' }),
           },
           {
             test: /(?!\.css)\.js$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node' })
+            use: utils.makeJsLoaders({ target: 'node' }),
           },
           {
             test: /\.mjs$/,
             include: /node_modules/,
-            type: 'javascript/auto'
+            type: 'javascript/auto',
           },
           {
             test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ server: true, js: true })
+            oneOf: utils.makeCssOneOf({ server: true, js: true }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ server: true })
+            oneOf: utils.makeCssOneOf({ server: true }),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders({ server: true })
+            use: utils.makeImageLoaders({ server: true }),
           },
           {
             test: /\.svg$/,
-            use: utils.makeSvgLoaders()
-          }
-        ]
+            use: utils.makeSvgLoaders(),
+          },
+        ],
       },
       plugins: [
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
-          __SKU_PUBLIC_PATH__: JSON.stringify(publicPath)
-        })
+          __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
+        }),
       ].concat(
         isStartScript
           ? [
               new StartServerPlugin({
                 name: 'server.js',
-                signal: false
+                signal: false,
               }),
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin()
+              new webpack.NoEmitOnErrorsPlugin(),
             ]
-          : []
-      )
-    }
+          : [],
+      ),
+    },
   ].map(webpackDecorator);
 
   debug(JSON.stringify(webpackConfigs));

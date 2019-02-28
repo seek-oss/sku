@@ -8,10 +8,10 @@ const { port } = commandLineArgs(
       name: 'port',
       alias: 'p',
       type: Number,
-      defaultValue: __SKU_DEFAULT_SERVER_PORT__ // eslint-disable-line no-undef
-    }
+      defaultValue: __SKU_DEFAULT_SERVER_PORT__, // eslint-disable-line no-undef
+    },
   ],
-  { partial: true }
+  { partial: true },
 );
 
 if (module.hot) {

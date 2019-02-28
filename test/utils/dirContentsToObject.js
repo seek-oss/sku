@@ -7,7 +7,7 @@ const { relative } = require('path');
 const IGNORED_FILE_EXTENSIONS = ['js', 'map'];
 const ignoredFilePattern = new RegExp(
   `\\.(${IGNORED_FILE_EXTENSIONS.join('|')})$`,
-  'i'
+  'i',
 );
 
 module.exports = async (dirname, includeExtensions) => {

@@ -8,7 +8,7 @@ console.log(chalk.cyan('Fixing code with ESLint'));
 const eslintCli = new EslintCLI({
   baseConfig: eslintConfig,
   useEslintrc: false,
-  fix: true
+  fix: true,
 });
 const eslintPathsToCheck = args.length === 0 ? ['.'] : args;
 const eslintReport = eslintCli.executeOnFiles(eslintPathsToCheck);

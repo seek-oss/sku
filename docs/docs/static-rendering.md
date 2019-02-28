@@ -11,7 +11,7 @@ module.exports = {
   routes: ['/', '/details'],
   environments: ['development', 'production'],
   sites: ['australia', 'asia'],
-  target: 'dist' // Optional, this is the default value
+  target: 'dist', // Optional, this is the default value
 };
 ```
 
@@ -61,7 +61,7 @@ export default {
     renderToString(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />
-      </SkuProvider>
+      </SkuProvider>,
     ),
 
   renderDocument: ({ app, bodyTags, headTags }) => `
@@ -78,7 +78,7 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 ```
 
@@ -108,19 +108,19 @@ export default {
     const html = renderToString(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />
-      </SkuProvider>
+      </SkuProvider>,
     );
 
     return {
       html,
-      appLength: html.length // <- arbitrary example
+      appLength: html.length, // <- arbitrary example
     };
   },
 
   provideClientContext: ({ site, environment, app }) => ({
     site,
     analyticsEnabled: environment === 'production',
-    appLength: app.appLength
+    appLength: app.appLength,
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => `
@@ -137,7 +137,7 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 ```
 
@@ -154,7 +154,7 @@ export default ({ site, analyticsEnabled, appLength }) => {
 
   hydrate(
     <App site={site} analytics={analyticsEnabled} />,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 };
 ```
@@ -186,7 +186,7 @@ interface RenderContext {
 const skuRender: Render<RenderContext> = {
   renderApp: () => ({
     html: renderToString(<App />),
-    otherThing: 10
+    otherThing: 10,
   }),
 
   renderDocument: ({ app, headTags, bodyTags }) => `
@@ -203,7 +203,7 @@ const skuRender: Render<RenderContext> = {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 
 export default skuRender;
@@ -228,7 +228,7 @@ const renderApp = () => {
   const metaStrings = [
     helmet.title.toString(),
     helmet.meta.toString(),
-    helmet.link.toString()
+    helmet.link.toString(),
   ];
   const metaHtml = metaStrings.filter(Boolean).join('\n    ');
 
@@ -236,7 +236,7 @@ const renderApp = () => {
     appHtml,
     metaHtml,
     htmlAttributes,
-    bodyAttributes
+    bodyAttributes,
   };
 };
 
@@ -258,7 +258,7 @@ const renderDocument = ({ app, bodyTags, headTags }) => `
 
 export default {
   renderApp,
-  renderDocument
+  renderDocument,
 };
 ```
 

@@ -7,7 +7,7 @@ describe('webpack utils', () => {
 
     beforeEach(() => {
       fs = {
-        readFileSync: jest.fn(() => '{}')
+        readFileSync: jest.fn(() => '{}'),
       };
       resolve = jest.fn();
       resolvePackage = createPackageResolver(fs, resolve);
@@ -59,9 +59,9 @@ describe('webpack utils', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             dependencies: {
-              test: '1.0.0'
-            }
-          })
+              test: '1.0.0',
+            },
+          }),
         );
 
         expect(() => resolvePackage('test')).toThrow(resolveError);
@@ -71,9 +71,9 @@ describe('webpack utils', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             devDependencies: {
-              test: '1.0.0'
-            }
-          })
+              test: '1.0.0',
+            },
+          }),
         );
 
         expect(() => resolvePackage('test')).toThrow(resolveError);

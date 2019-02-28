@@ -37,7 +37,7 @@ describe('multiple-routes', () => {
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
       closeAssetServer = await startAssetServer(4004, targetDirectory, [
-        { source: '/', destination: '/production/au/index.html' }
+        { source: '/', destination: '/production/au/index.html' },
       ]);
     });
 

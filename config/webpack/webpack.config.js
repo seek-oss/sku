@@ -25,7 +25,7 @@ const {
   libraryName,
   isStartScript,
   sourceMapsProd,
-  supportedBrowsers
+  supportedBrowsers,
 } = config;
 
 // port is only required for dev builds
@@ -48,7 +48,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         console.log(
           `WARNING: Environment variable "${key}" is missing a value for the "${
             args.env
-          }" environment`
+          }" environment`,
         );
         process.exit(1);
       }
@@ -65,7 +65,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   });
 
   const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`
+    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`,
   ];
 
   const skuClientEntry = require.resolve('../../entry/client/index.js');
@@ -73,7 +73,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   const createEntry = entry => [
     ...resolvedPolyfills,
     ...(isStartScript ? devServerEntries : []),
-    entry
+    entry,
   ];
 
   // Add polyfills and dev server client to all entries
@@ -84,7 +84,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   const internalJs = [
     path.join(__dirname, '../../entry'),
     ...paths.src,
-    ...paths.compilePackages.map(utils.resolvePackage)
+    ...paths.compilePackages.map(utils.resolvePackage),
   ];
 
   const getFileMask = () => {
@@ -130,9 +130,9 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           ? {
               library: libraryName,
               libraryTarget: 'umd',
-              libraryExport: 'default'
+              libraryExport: 'default',
             }
-          : {})
+          : {}),
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
@@ -141,31 +141,31 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         ...(!isLibrary
           ? {
               splitChunks: {
-                chunks: 'all'
+                chunks: 'all',
               },
               runtimeChunk: {
-                name: 'runtime'
-              }
+                name: 'runtime',
+              },
             }
-          : {})
+          : {}),
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: {
-          __sku_alias__clientEntry: paths.clientEntry
-        }
+          __sku_alias__clientEntry: paths.clientEntry,
+        },
       },
       module: {
         rules: [
           {
             test: /(?!\.css)\.(ts|tsx)$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' })
+            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' }),
           },
           {
             test: /(?!\.css)\.js$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser' })
+            use: utils.makeJsLoaders({ target: 'browser' }),
           },
           ...(isStartScript
             ? []
@@ -176,7 +176,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
                     internalJs,
                     // Prevent running `react-dom` through babel as it's
                     // too large and already meets our browser support policy
-                    path.dirname(require.resolve('react-dom/package.json'))
+                    path.dirname(require.resolve('react-dom/package.json')),
                   ],
                   use: [
                     {
@@ -188,37 +188,37 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
                             require.resolve('@babel/preset-env'),
                             {
                               modules: false,
-                              targets: supportedBrowsers
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  ]
-                }
+                              targets: supportedBrowsers,
+                            },
+                          ],
+                        ],
+                      },
+                    },
+                  ],
+                },
               ]),
           {
             test: /\.mjs$/,
             include: /node_modules/,
-            type: 'javascript/auto'
+            type: 'javascript/auto',
           },
           {
             test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ js: true })
+            oneOf: utils.makeCssOneOf({ js: true }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf()
+            oneOf: utils.makeCssOneOf(),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders()
+            use: utils.makeImageLoaders(),
           },
           {
             test: /\.svg$/,
-            use: utils.makeSvgLoaders()
-          }
-        ]
+            use: utils.makeSvgLoaders(),
+          },
+        ],
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
@@ -226,24 +226,24 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           ? [
               new LoadablePlugin({
                 writeToDisk: false,
-                outputAsset: false
-              })
+                outputAsset: false,
+              }),
             ]
           : []),
         ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
-          chunkFilename: cssFileMask
+          chunkFilename: cssFileMask,
         }),
-        new webpack.HashedModuleIdsPlugin()
-      ]
+        new webpack.HashedModuleIdsPlugin(),
+      ],
     },
     {
       name: 'render',
       mode: 'development',
       entry: {
-        main: isLibrary ? libraryRenderEntry : renderEntry
+        main: isLibrary ? libraryRenderEntry : renderEntry,
       },
       target: 'node',
       externals: [
@@ -253,9 +253,9 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           // not the package name, so we map each packageName to a pattern. This ensures it
           // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
           whitelist: paths.compilePackages.map(
-            packageName => new RegExp(`^(${packageName})`)
-          )
-        })
+            packageName => new RegExp(`^(${packageName})`),
+          ),
+        }),
       ],
       output: {
         path: paths.target,
@@ -263,58 +263,58 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         filename: 'render.js',
         libraryExport: 'default',
         library: 'static',
-        libraryTarget: 'umd2'
+        libraryTarget: 'umd2',
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: {
-          __sku_alias__renderEntry: paths.renderEntry
-        }
+          __sku_alias__renderEntry: paths.renderEntry,
+        },
       },
       module: {
         rules: [
           {
             test: /(?!\.css)\.(ts|tsx)$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' })
+            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' }),
           },
           {
             test: /(?!\.css)\.js$/,
             include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node' })
+            use: utils.makeJsLoaders({ target: 'node' }),
           },
           {
             test: /\.mjs$/,
             include: /node_modules/,
-            type: 'javascript/auto'
+            type: 'javascript/auto',
           },
           {
             test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ server: true, js: true })
+            oneOf: utils.makeCssOneOf({ server: true, js: true }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ server: true })
+            oneOf: utils.makeCssOneOf({ server: true }),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders({ server: true })
+            use: utils.makeImageLoaders({ server: true }),
           },
           {
             test: /\.svg$/,
-            use: utils.makeSvgLoaders()
-          }
-        ]
+            use: utils.makeSvgLoaders(),
+          },
+        ],
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
-          __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath)
-        })
-      ]
-    }
+          __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
+        }),
+      ],
+    },
   ].map(webpackDecorator);
 
   debug(JSON.stringify(webpackConfigs));

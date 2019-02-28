@@ -4,7 +4,7 @@ import jsStyles from './jsStyles.css.js';
 
 enum Message {
   Hello = 'Hello World',
-  Goodbye = 'Goodbye World'
+  Goodbye = 'Goodbye World',
 }
 
 export const messageRenderer = (): Message => {

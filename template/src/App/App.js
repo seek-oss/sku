@@ -8,7 +8,7 @@ import {
   Section,
   Text,
   TextField,
-  Checkbox
+  Checkbox,
 } from 'seek-style-guide/react';
 import styles from './App.less';
 
@@ -18,13 +18,13 @@ export default class App extends Component {
 
     this.state = {
       name: '',
-      showMessage: false
+      showMessage: false,
     };
   }
 
   handleChange = ({ target }) => {
     this.setState({
-      [target.id]: target.type === 'checkbox' ? target.checked : target.value
+      [target.id]: target.type === 'checkbox' ? target.checked : target.value,
     });
   };
 

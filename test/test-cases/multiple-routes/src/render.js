@@ -12,12 +12,12 @@ export default {
         <StaticRouter location={route} context={{}}>
           <App site={site} />
         </StaticRouter>
-      </SkuProvider>
+      </SkuProvider>,
     );
   },
 
   provideClientContext: ({ site }) => ({
-    site
+    site,
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => {
@@ -36,5 +36,5 @@ export default {
         </body>
       </html>
     `;
-  }
+  },
 };

@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import 'storybook-chromatic';
 
 addParameters({
-  chromatic: { viewports: [320, 1200] }
+  chromatic: { viewports: [320, 1200] },
 });
 
 addDecorator(withKnobs);
@@ -19,7 +19,7 @@ addDecorator(story =>
   // prevent margins from collapsing, otherwise screenshot services will
   // ignore bottom margins, leading to missed changes when margin values
   // change, or unwanted diffs when migrating from margin to padding.
-  React.createElement('div', { style: { paddingBottom: '0.05px' } }, story())
+  React.createElement('div', { style: { paddingBottom: '0.05px' } }, story()),
 );
 
 const reqs = [
@@ -34,7 +34,7 @@ const reqs = [
   require.context(__SKU_SRC_PATHS_6__, true, /\.stories\.(j|t)sx?$/),
   require.context(__SKU_SRC_PATHS_7__, true, /\.stories\.(j|t)sx?$/),
   require.context(__SKU_SRC_PATHS_8__, true, /\.stories\.(j|t)sx?$/),
-  require.context(__SKU_SRC_PATHS_9__, true, /\.stories\.(j|t)sx?$/)
+  require.context(__SKU_SRC_PATHS_9__, true, /\.stories\.(j|t)sx?$/),
 ];
 
 function loadStories() {

@@ -4,17 +4,17 @@ const validator = new Validator();
 
 module.exports = validator.compile({
   clientEntry: {
-    type: 'string'
+    type: 'string',
   },
   renderEntry: {
-    type: 'string'
+    type: 'string',
   },
   serverEntry: {
-    type: 'string'
+    type: 'string',
   },
   libraryEntry: {
     type: 'string',
-    optional: true
+    optional: true,
   },
   routes: {
     type: 'array',
@@ -24,16 +24,16 @@ module.exports = validator.compile({
         type: 'object',
         props: {
           route: {
-            type: 'string'
+            type: 'string',
           },
           name: {
             type: 'string',
-            optional: true
-          }
-        }
-      }
+            optional: true,
+          },
+        },
+      },
     ],
-    min: 1
+    min: 1,
   },
   sites: {
     type: 'array',
@@ -43,91 +43,91 @@ module.exports = validator.compile({
         type: 'object',
         props: {
           name: { type: 'string' },
-          host: { type: 'string', optional: true }
-        }
-      }
-    ]
+          host: { type: 'string', optional: true },
+        },
+      },
+    ],
   },
   environments: {
     type: 'array',
-    items: 'string'
+    items: 'string',
   },
   transformOutputPath: {
-    type: 'function'
+    type: 'function',
   },
   srcPaths: {
     type: 'array',
     items: 'string',
-    min: 1
+    min: 1,
   },
   env: {
-    type: 'object'
+    type: 'object',
   },
   compilePackages: {
     type: 'array',
-    items: 'string'
+    items: 'string',
   },
   hosts: {
     type: 'array',
-    items: 'string'
+    items: 'string',
   },
   port: {
-    type: 'number'
+    type: 'number',
   },
   serverPort: {
-    type: 'number'
+    type: 'number',
   },
   storybookPort: {
-    type: 'number'
+    type: 'number',
   },
   target: {
-    type: 'string'
+    type: 'string',
   },
   setupTests: [
     {
       type: 'string',
-      optional: true
+      optional: true,
     },
     {
       type: 'array',
       items: 'string',
-      optional: true
-    }
+      optional: true,
+    },
   ],
   initialPath: {
     type: 'string',
-    optional: true
+    optional: true,
   },
   public: {
-    type: 'string'
+    type: 'string',
   },
   publicPath: {
-    type: 'string'
+    type: 'string',
   },
   polyfills: {
     type: 'array',
-    items: 'string'
+    items: 'string',
   },
   libraryName: {
     type: 'string',
-    optional: true
+    optional: true,
   },
   dangerouslySetWebpackConfig: {
-    type: 'function'
+    type: 'function',
   },
   dangerouslySetJestConfig: {
-    type: 'function'
+    type: 'function',
   },
   dangerouslySetESLintConfig: {
-    type: 'function'
+    type: 'function',
   },
   supportedBrowsers: {
     type: 'array',
     items: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   sourceMapsProd: {
-    type: 'boolean'
-  }
+    type: 'boolean',
+  },
 });

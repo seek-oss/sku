@@ -15,8 +15,8 @@ const packageNameToClassPrefix = packageName =>
 const makeJsLoaders = ({ target, lang }) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')({ target, lang })
-  }
+    options: require('../../babel/babelConfig')({ target, lang }),
+  },
 ];
 
 const makeCssLoaders = (options = {}) => {
@@ -25,7 +25,7 @@ const makeCssLoaders = (options = {}) => {
     packageName = '',
     js = false,
     hot = false,
-    compilePackage = false
+    compilePackage = false,
   } = options;
 
   const debugIdent = isProductionBuild
@@ -36,7 +36,7 @@ const makeCssLoaders = (options = {}) => {
 
   const cssInJsLoaders = [
     { loader: require.resolve('./cssInJsLoader') },
-    ...makeJsLoaders({ target: 'node' })
+    ...makeJsLoaders({ target: 'node' }),
   ];
 
   // Apply css-modules-typescript-loader for client builds only as
@@ -48,9 +48,9 @@ const makeCssLoaders = (options = {}) => {
           {
             loader: require.resolve('css-modules-typescript-loader'),
             options: {
-              mode: isCI ? 'verify' : 'emit'
-            }
-          }
+              mode: isCI ? 'verify' : 'emit',
+            },
+          },
         ]
       : [];
 
@@ -67,8 +67,8 @@ const makeCssLoaders = (options = {}) => {
         // On the server, avoid generating a CSS file with exportOnlyLocals.
         // Only the client build should generate CSS files.
         exportOnlyLocals: Boolean(server),
-        importLoaders: 3
-      }
+        importLoaders: 3,
+      },
     },
     {
       loader: require.resolve('postcss-loader'),
@@ -76,14 +76,14 @@ const makeCssLoaders = (options = {}) => {
         plugins: () => [
           require('autoprefixer')(supportedBrowsers),
           // Minimize CSS on production builds
-          ...(isProductionBuild ? [require('cssnano')()] : [])
-        ]
-      }
+          ...(isProductionBuild ? [require('cssnano')()] : []),
+        ],
+      },
     },
     {
-      loader: require.resolve('less-loader')
+      loader: require.resolve('less-loader'),
     },
-    ...(js ? cssInJsLoaders : [])
+    ...(js ? cssInJsLoaders : []),
   ];
 };
 
@@ -93,13 +93,13 @@ const makeCssOneOf = (loaderOptions = {}) => [
     use: makeCssLoaders({
       packageName,
       compilePackage: true,
-      ...loaderOptions
-    })
+      ...loaderOptions,
+    }),
   })),
   {
     exclude: /node_modules/,
-    use: makeCssLoaders(loaderOptions)
-  }
+    use: makeCssLoaders(loaderOptions),
+  },
 ];
 
 const makeImageLoaders = (options = {}) => {
@@ -113,15 +113,15 @@ const makeImageLoaders = (options = {}) => {
         fallback: require.resolve('file-loader'),
         // We only want to emit client assets during the client build.
         // The server build should only emit server-side JS and HTML files.
-        emitFile: !server
-      }
-    }
+        emitFile: !server,
+      },
+    },
   ];
 };
 
 const makeSvgLoaders = () => [
   {
-    loader: require.resolve('raw-loader')
+    loader: require.resolve('raw-loader'),
   },
   {
     loader: require.resolve('svgo-loader'),
@@ -129,15 +129,15 @@ const makeSvgLoaders = () => [
       plugins: [
         {
           addAttributesToSVGElement: {
-            attribute: 'focusable="false"'
-          }
+            attribute: 'focusable="false"',
+          },
         },
         {
-          removeViewBox: false
-        }
-      ]
-    }
-  }
+          removeViewBox: false,
+        },
+      ],
+    },
+  },
 ];
 
 module.exports = {
@@ -145,5 +145,5 @@ module.exports = {
   makeCssLoaders,
   makeImageLoaders,
   makeSvgLoaders,
-  makeCssOneOf
+  makeCssOneOf,
 };

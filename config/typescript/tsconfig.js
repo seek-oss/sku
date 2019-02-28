@@ -20,9 +20,9 @@ module.exports = () => ({
     lib: ['dom', 'es2015'],
     baseUrl: cwd(),
     paths: {
-      '*': ['*']
-    }
+      '*': ['*'],
+    },
   },
   include: paths.src,
-  exclude: [getPathFromCwd('node_modules')]
+  exclude: [getPathFromCwd('node_modules')],
 });

@@ -7,10 +7,10 @@ const bundleAnalyzerPlugin = ({ name }) =>
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
     openAnalyzer: false,
-    reportFilename: getPathFromCwd(`${bundleReportFolder}/${name}.html`)
+    reportFilename: getPathFromCwd(`${bundleReportFolder}/${name}.html`),
   });
 
 module.exports = {
   bundleAnalyzerPlugin,
-  bundleReportFolder
+  bundleReportFolder,
 };

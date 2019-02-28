@@ -12,11 +12,11 @@ module.exports = class ListExternalsWebpackPlugin {
             .map(({ identifier }) => identifier)
             .filter(id => /^external /.test(id))
             .map(id => id.replace(/^external "/, '').replace(/"$/, ''))
-            .sort()
+            .sort(),
         );
 
         return JSON.stringify(externals, null, 2);
-      }
+      },
     });
   }
 };

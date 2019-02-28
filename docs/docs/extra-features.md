@@ -17,7 +17,7 @@ Sometimes you might want to extract and share code between sku projects, but thi
 
 ```js
 module.exports = {
-  compilePackages: ['awesome-shared-components']
+  compilePackages: ['awesome-shared-components'],
 };
 ```
 

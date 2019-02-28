@@ -17,7 +17,7 @@ import {
   array,
   button,
   withKnobs,
-  withKnobsOptions
+  withKnobsOptions,
 } from '@storybook/addon-knobs';
 
 export {
@@ -34,5 +34,5 @@ export {
   array,
   button,
   withKnobs,
-  withKnobsOptions
+  withKnobsOptions,
 };

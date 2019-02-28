@@ -8,7 +8,7 @@ export default {
     renderToString(
       <SkuProvider>
         <App />
-      </SkuProvider>
+      </SkuProvider>,
     ),
   renderDocument: ({ app, bodyTags, headTags }) => dedent`
     <!DOCTYPE html>
@@ -24,5 +24,5 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };

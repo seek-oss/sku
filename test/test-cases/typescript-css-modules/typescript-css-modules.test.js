@@ -35,7 +35,7 @@ describe('typescript-css-modules', () => {
       const srcFiles = await dirContentsToObject(srcDir, ['.d.ts']);
       expect({
         ...files,
-        ...srcFiles
+        ...srcFiles,
       }).toMatchSnapshot();
     });
   });
@@ -47,7 +47,7 @@ describe('typescript-css-modules', () => {
       await runSkuScriptInDir('build-ssr', appDir);
       server = gracefulSpawn('node', ['server'], {
         cwd: distDir,
-        stdio: 'inherit'
+        stdio: 'inherit',
       });
       closeAssetServer = await startAssetServer(4003, distDir);
       await waitForUrls(backendUrl, 'http://localhost:4003');
@@ -68,7 +68,7 @@ describe('typescript-css-modules', () => {
       const srcFiles = await dirContentsToObject(srcDir, ['.d.ts']);
       expect({
         ...files,
-        ...srcFiles
+        ...srcFiles,
       }).toMatchSnapshot();
     });
   });

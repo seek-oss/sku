@@ -11,7 +11,7 @@ import {
   setAddon,
   storiesOf,
   forceReRender,
-  getStorybook
+  getStorybook,
 } from '@storybook/react';
 
 export {
@@ -22,5 +22,5 @@ export {
   setAddon,
   storiesOf,
   forceReRender,
-  getStorybook
+  getStorybook,
 };

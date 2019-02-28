@@ -7,7 +7,7 @@ const { run } = require('../lib/runWebpack');
 const {
   copyPublicFiles,
   cleanTargetDirectory,
-  ensureTargetDirectory
+  ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const { port } = require('../context');
@@ -16,7 +16,7 @@ const { port } = require('../context');
   try {
     const [clientConfig, serverConfig] = makeWebpackConfig({
       clientPort: port.client,
-      serverPort: port.server
+      serverPort: port.server,
     });
     await ensureTargetDirectory();
     await cleanTargetDirectory();

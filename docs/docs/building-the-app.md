@@ -28,7 +28,7 @@ module.exports = {
   port: 5000,
   // Optional parameter to set the page to open when the
   // development server starts, defaults to your first route
-  initialPath: '/my-page'
+  initialPath: '/my-page',
 };
 ```
 

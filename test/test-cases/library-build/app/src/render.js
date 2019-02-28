@@ -15,5 +15,5 @@ export default {
       <script>window.${libraryName}();</script>
     </body>
   </html>
-`
+`,
 };

@@ -18,7 +18,7 @@ If you need to set up your test framework, you can provide a `setupTests` script
 
 ```js
 module.exports = {
-  setupTests: 'src/setupTests.js'
+  setupTests: 'src/setupTests.js',
 };
 ```
 

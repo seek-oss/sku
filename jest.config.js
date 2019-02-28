@@ -8,6 +8,6 @@ module.exports = {
   preset: 'jest-puppeteer',
   watchPlugins: [
     'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname'
-  ]
+    'jest-watch-typeahead/testname',
+  ],
 };

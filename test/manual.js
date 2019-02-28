@@ -18,7 +18,7 @@ const runScriptForTestCase = (script, testCase) => {
 
   return runSkuScriptInDir(
     script,
-    path.join(testCasePath, hasAppDirectory ? 'app' : '')
+    path.join(testCasePath, hasAppDirectory ? 'app' : ''),
   );
 };
 
@@ -31,8 +31,8 @@ const runScriptForTestCase = (script, testCase) => {
       {
         type: 'confirm',
         name: 'useLast',
-        message: `Re-run "${lastTestCase}" with "sku ${lastScript}"?`
-      }
+        message: `Re-run "${lastTestCase}" with "sku ${lastScript}"?`,
+      },
     ]);
 
     if (useLast) {
@@ -48,14 +48,14 @@ const runScriptForTestCase = (script, testCase) => {
       type: 'list',
       name: 'testCase',
       message: 'Which case would you like to manually test?',
-      choices: testCases
+      choices: testCases,
     },
     {
       type: 'list',
       name: 'script',
       message: 'Which sku script would you like to run?',
-      choices: ['start', 'start-ssr', 'build', 'build-ssr', 'storybook']
-    }
+      choices: ['start', 'start-ssr', 'build', 'build-ssr', 'storybook'],
+    },
   ]);
 
   await cache.set(LAST_TEST_CASE, testCase);

@@ -38,8 +38,8 @@ export default {
   '.exampleWrapper': {
     ...standardWrapper,
     fontFamily: fontFamily,
-    color: brandPrimary
-  }
+    color: brandPrimary,
+  },
 };
 ```
 

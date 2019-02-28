@@ -1,7 +1,7 @@
 const jestSerializerHtml = require('jest-serializer-html');
 const {
   appSnapshotSerializer,
-  cssSnapshotSerializer
+  cssSnapshotSerializer,
 } = require('./appSnapshot');
 
 expect.addSnapshotSerializer(jestSerializerHtml);

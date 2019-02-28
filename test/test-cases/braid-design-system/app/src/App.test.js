@@ -3,7 +3,7 @@ import { Box } from 'braid-design-system';
 
 describe('braid-design-system', () => {
   test('atoms', () => {
-    expect(seekAnz.atoms.paddingTop.large).toEqual('paddingTop__large');
+    expect(seekAnz.atoms.paddingTop.large).toEqual('atoms__paddingTop_large');
   });
 
   test('components', () => {

@@ -30,6 +30,7 @@ switch (script) {
   case 'start':
   case 'start-ssr':
   case 'storybook':
+  case 'build-storybook':
   case 'chromatic': {
     runScript('configure');
     runScript(script);

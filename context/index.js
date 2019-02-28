@@ -95,6 +95,7 @@ module.exports = {
   libraryName: skuConfig.libraryName,
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
+  storybookTarget: skuConfig.storybookTarget,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,

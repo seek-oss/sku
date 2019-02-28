@@ -32,3 +32,23 @@ module.exports = {
   storybookPort: 9000
 };
 ```
+
+To build the storybook, simply add the following NPM script:
+
+```js
+{
+  "scripts": {
+    "buildStorybook": "sku build-storybook"
+  }
+}
+```
+
+Then run `npm run buildStorybook`
+
+By default, it deploys the content in the storybook-static directory in your project root folder, if you would like to specify a directory where to store the built files, you can provide it via the `storybookTarget` option in `sku.config.js`:
+
+```js
+module.exports = {
+  storybookTarget: './dist/mystorybook'
+};
+```

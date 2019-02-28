@@ -190,7 +190,7 @@
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.3.1",
     "renovate-config-seek": "^0.4.0",
-    "seek-asia-style-guide": "^6.25.0",
+    "seek-asia-style-guide": "^7.0.0",
     "seek-style-guide": "^38.9.2",
     "semantic-release": "^15.10.8",
     "serve-handler": "^5.0.8",

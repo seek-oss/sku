@@ -1,12 +1,7 @@
 import React from 'react';
 import loadable from '../../../../../@loadable/component';
 
-import {
-  ThemeProvider,
-  Text,
-  Checkbox,
-  ChecklistCard,
-} from 'braid-design-system';
+import { ThemeProvider, Text, Checkbox, Card } from 'braid-design-system';
 
 const Theme = loadable.lib(({ themeName }) => import(`./themes/${themeName}`));
 
@@ -15,7 +10,7 @@ export default ({ theme: themeName }) => (
     {({ default: theme }) => (
       <ThemeProvider theme={theme}>
         <Text>Hello {themeName}</Text>
-        <ChecklistCard>
+        <Card>
           <Checkbox
             checked={false}
             id="id_1"
@@ -34,7 +29,7 @@ export default ({ theme: themeName }) => (
             label="This is a checkbox"
             message={false}
           />
-        </ChecklistCard>
+        </Card>
       </ThemeProvider>
     )}
   </Theme>

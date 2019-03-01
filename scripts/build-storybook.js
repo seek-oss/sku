@@ -6,7 +6,7 @@ const startStorybookPath = require.resolve('@storybook/react/bin/build.js');
 const configDir = path.resolve(__dirname, '..', 'config', 'storybook');
 
 argv.push('--config-dir', configDir);
-argv.push('--output-dir', storybookTarget || '');
+argv.push('--output-dir', storybookTarget);
 
 const storybookProcess = gracefulSpawn(startStorybookPath, argv, {
   stdio: 'inherit',

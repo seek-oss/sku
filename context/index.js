@@ -81,6 +81,7 @@ const paths = {
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests),
+  storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
 };
 
 module.exports = {

@@ -6,6 +6,7 @@ const startAssetServer = require('../../utils/assetServer');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
+const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
 describe('react-css-modules', () => {
   let closeAssetServer;
@@ -67,6 +68,24 @@ describe('react-css-modules', () => {
       expect(content.text).toEqual('Updated render');
       expect(content.color).toEqual('rgb(255, 0, 0)');
       expect(content.fontSize).toEqual('32px');
+    });
+  });
+
+  describe('build-storybook', () => {
+    let closeStorybookServer;
+
+    beforeAll(async () => {
+      await runSkuScriptInDir('build-storybook', appDir);
+      closeStorybookServer = await startAssetServer(4297, storybookDistDir);
+    });
+
+    afterAll(() => {
+      closeStorybookServer();
+    });
+
+    it('should create valid storybook', async () => {
+      const app = await getAppSnapshot('http://localhost:4297');
+      expect(app).toMatchSnapshot();
     });
   });
 });

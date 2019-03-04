@@ -280,6 +280,14 @@ Default: `8081`
 
 The port to host storybook on when running `sku storybook`.
 
+## storybookTarget
+
+type `string`
+
+Default: `dist-storybook`
+
+The directory `sku build-storybook` will output files to.
+
 ## supportedBrowsers
 
 type `browserslist-query`

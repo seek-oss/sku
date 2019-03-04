@@ -38,14 +38,14 @@ To build the storybook, simply add the following NPM script:
 ```js
 {
   "scripts": {
-    "buildStorybook": "sku build-storybook"
+    "build-storybook": "sku build-storybook"
   }
 }
 ```
 
-Then run `npm run buildStorybook`
+Then run `npm run build-storybook`
 
-By default, it deploys the content in the storybook-static directory in your project root folder, if you would like to specify a directory where to store the built files, you can provide it via the `storybookTarget` option in `sku.config.js`:
+By default, it builds storybook into the `dist-storybook` folder. If you would like to specify a custom directory, you can provide it via the `storybookTarget` option in `sku.config.js`:
 
 ```js
 module.exports = {

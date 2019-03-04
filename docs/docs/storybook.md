@@ -49,6 +49,6 @@ By default, Storybook assets are generated in the `dist-storybook` directory in 
 
 ```js
 module.exports = {
-  storybookTarget: './dist/storybook'
+  storybookTarget: './dist/storybook',
 };
 ```

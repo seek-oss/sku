@@ -65,7 +65,7 @@ describe('react-css-modules', () => {
         return { text, color, fontSize };
       });
 
-      expect(content.text).toEqual('Updated render');
+      expect(content.text).toEqual('Storybook render');
       expect(content.color).toEqual('rgb(255, 0, 0)');
       expect(content.fontSize).toEqual('32px');
     });

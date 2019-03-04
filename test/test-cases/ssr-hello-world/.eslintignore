@@ -1,5 +1,6 @@
 # managed by sku
 coverage/
 dist-build/
+dist-storybook/
 report/
 # end managed by sku

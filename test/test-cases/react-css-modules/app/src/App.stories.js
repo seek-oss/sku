@@ -6,5 +6,5 @@ import { storiesOf } from '../../../../../@storybook/react';
 import { text } from '../../../../../@storybook/addon-knobs';
 
 storiesOf('App', module).add('Default', () => (
-  <App>{text('Text', 'Initial render')}</App>
+  <App>{text('Text', 'Storybook render')}</App>
 ));

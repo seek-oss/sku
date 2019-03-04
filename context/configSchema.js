@@ -80,6 +80,9 @@ module.exports = validator.compile({
   storybookPort: {
     type: 'number',
   },
+  storybookTarget: {
+    type: 'string',
+  },
   target: {
     type: 'string',
   },

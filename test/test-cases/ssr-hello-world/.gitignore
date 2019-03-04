@@ -3,5 +3,6 @@
 .prettierrc
 coverage/
 dist-build/
+dist-storybook/
 report/
 # end managed by sku

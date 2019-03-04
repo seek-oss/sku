@@ -81,6 +81,7 @@ const paths = {
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests),
+  storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
 };
 
 module.exports = {
@@ -95,6 +96,7 @@ module.exports = {
   libraryName: skuConfig.libraryName,
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
+  storybookTarget: skuConfig.storybookTarget,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,

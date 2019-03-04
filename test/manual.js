@@ -54,7 +54,14 @@ const runScriptForTestCase = (script, testCase) => {
       type: 'list',
       name: 'script',
       message: 'Which sku script would you like to run?',
-      choices: ['start', 'start-ssr', 'build', 'build-ssr', 'storybook'],
+      choices: [
+        'start',
+        'start-ssr',
+        'build',
+        'build-ssr',
+        'storybook',
+        'build-storybook',
+      ],
     },
   ]);
 

@@ -32,3 +32,23 @@ module.exports = {
   storybookPort: 9000,
 };
 ```
+
+To build the Storybook, first add the following npm script:
+
+```js
+{
+  "scripts": {
+    "build-storybook": "sku build-storybook"
+  }
+}
+```
+
+Then run `npm run build-storybook`.
+
+By default, Storybook assets are generated in the `dist-storybook` directory in your project root folder. If you would like to specify a custom target directory, you can provide it via the `storybookTarget` option in `sku.config.js`:
+
+```js
+module.exports = {
+  storybookTarget: './dist/storybook',
+};
+```

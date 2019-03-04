@@ -33,7 +33,7 @@ module.exports = {
 };
 ```
 
-To build the storybook, simply add the following NPM script:
+To build the Storybook, first add the following npm script:
 
 ```js
 {
@@ -43,12 +43,12 @@ To build the storybook, simply add the following NPM script:
 }
 ```
 
-Then run `npm run build-storybook`
+Then run `npm run build-storybook`.
 
-By default, it builds storybook into the `dist-storybook` folder. If you would like to specify a custom directory, you can provide it via the `storybookTarget` option in `sku.config.js`:
+By default, Storybook assets are generated in the `dist-storybook` directory in your project root folder. If you would like to specify a custom target directory, you can provide it via the `storybookTarget` option in `sku.config.js`:
 
 ```js
 module.exports = {
-  storybookTarget: './dist/mystorybook',
+  storybookTarget: './dist/storybook'
 };
 ```

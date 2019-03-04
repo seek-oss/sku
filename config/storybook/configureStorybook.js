@@ -19,7 +19,7 @@ export default () => {
   );
 
   const reqs = [
-    // These values are defined in `webpack.config.js` in this
+    // These values are defined in `storybookWebpackConfig.js` in this
     // directory, along with a comment explaining the reasoning.
     require.context(__SKU_SRC_PATHS_0__, true, /\.stories\.(j|t)sx?$/),
     require.context(__SKU_SRC_PATHS_1__, true, /\.stories\.(j|t)sx?$/),

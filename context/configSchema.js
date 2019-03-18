@@ -133,4 +133,7 @@ module.exports = validator.compile({
   sourceMapsProd: {
     type: 'boolean',
   },
+  displayNamesProd: {
+    type: 'boolean',
+  },
 });

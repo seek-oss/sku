@@ -45,9 +45,7 @@ module.exports = ({ target, lang = 'js' }) => {
     );
 
     if (displayNamesProd) {
-      plugins.push(
-        require.resolve('@babel/plugin-transform-react-display-name'),
-      );
+      plugins.push(require.resolve('babel-plugin-add-react-displayname'));
     }
   }
 

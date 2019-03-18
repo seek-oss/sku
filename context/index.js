@@ -111,4 +111,5 @@ module.exports = {
   isBuildScript,
   supportedBrowsers: skuConfig.supportedBrowsers,
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
+  displayNamesProd: Boolean(skuConfig.displayNamesProd),
 };

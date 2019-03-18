@@ -99,6 +99,22 @@ const config = {
 };
 ```
 
+## displayNamesProd
+
+type `boolean`
+
+Default: `false`
+
+Adds static `displayName` properties to React components in production. This setting is designed for usage on sites that generate React code snippets, e.g. [Braid](https://seek-oss.github.io/braid-design-system/).
+
+Example:
+
+```js
+const config = {
+  displayNamesProd: true,
+};
+```
+
 ## environments
 
 **Only for static apps**

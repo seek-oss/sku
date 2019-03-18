@@ -1,4 +1,4 @@
-const { supportedBrowsers } = require('../../context');
+const { supportedBrowsers, displayNamesProd } = require('../../context');
 const { cwd } = require('../../lib/cwd');
 
 const browserEnvOptions = {
@@ -43,6 +43,10 @@ module.exports = ({ target, lang = 'js' }) => {
       require.resolve('babel-plugin-transform-react-remove-prop-types'),
       require.resolve('@babel/plugin-transform-react-constant-elements'),
     );
+
+    if (displayNamesProd) {
+      plugins.push(require.resolve('babel-plugin-add-react-displayname'));
+    }
   }
 
   const languagePreset =

@@ -14,6 +14,7 @@ const nodeEnvOptions = {
 
 module.exports = ({ target, lang = 'js' }) => {
   const isBrowser = target === 'browser';
+  const isJest = target === 'jest';
 
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
@@ -35,6 +36,10 @@ module.exports = ({ target, lang = 'js' }) => {
 
   if (isBrowser) {
     plugins.push(require.resolve('babel-plugin-seek-style-guide'));
+  }
+
+  if (isJest) {
+    plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
   if (process.env.NODE_ENV === 'production') {

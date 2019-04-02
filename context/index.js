@@ -65,6 +65,7 @@ const publicPath = skuConfig.publicPath.endsWith('/')
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [
+    'sku',
     'seek-style-guide',
     'seek-asia-style-guide',
     'braid-design-system',

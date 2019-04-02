@@ -193,7 +193,7 @@
     "react-router-dom": "^4.3.1",
     "react-testing-library": "^6.0.3",
     "renovate-config-seek": "^0.4.0",
-    "seek-asia-style-guide": "^7.0.0",
+    "seek-asia-style-guide": "^10.0.0",
     "seek-style-guide": "^38.9.2",
     "semantic-release": "^15.10.8",
     "serve-handler": "^5.0.8",

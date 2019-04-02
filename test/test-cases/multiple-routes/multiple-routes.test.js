@@ -1,10 +1,12 @@
+const path = require('path');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
 const startAssetServer = require('../../utils/assetServer');
+const appDir = path.resolve(__dirname, 'app');
 
-const targetDirectory = `${__dirname}/dist`;
+const targetDirectory = `${appDir}/dist`;
 
 describe('multiple-routes', () => {
   describe('start', () => {
@@ -12,7 +14,7 @@ describe('multiple-routes', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', __dirname);
+      server = await runSkuScriptInDir('start', appDir);
       await waitForUrls(devServerUrl);
     });
 
@@ -31,11 +33,18 @@ describe('multiple-routes', () => {
     });
   });
 
+  describe('test', () => {
+    it('should handle dynamic imports in tests', async () => {
+      const { childProcess } = await runSkuScriptInDir('test', appDir);
+      expect(childProcess.exitCode).toEqual(0);
+    });
+  });
+
   describe('build', () => {
     let closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', __dirname);
+      await runSkuScriptInDir('build', appDir);
       closeAssetServer = await startAssetServer(4004, targetDirectory, [
         { source: '/', destination: '/production/au/index.html' },
       ]);

@@ -8,6 +8,8 @@ dist-build/
 
 # managed by sku
 .prettierrc
+coverage/
+dist-storybook/
 dist/
 report/
 tsconfig.json

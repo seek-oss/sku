@@ -3,3 +3,5 @@ node_modules
 report/
 dist-start/
 dist-build/
+dist-storybook/
+coverage/

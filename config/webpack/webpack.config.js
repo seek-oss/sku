@@ -9,6 +9,8 @@ const args = require('../args');
 const config = require('../../context');
 const createHtmlRenderPlugin = require('./plugins/createHtmlRenderPlugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
+const createTreatPlugin = require('./plugins/createTreatPlugin');
+
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
@@ -237,6 +239,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           chunkFilename: cssFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
+        createTreatPlugin({ target: 'browser', isStartScript }),
       ],
     },
     {
@@ -313,6 +316,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
         }),
+        createTreatPlugin({ target: 'node', isStartScript }),
       ],
     },
   ].map(webpackDecorator);

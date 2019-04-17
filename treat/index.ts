@@ -24,5 +24,7 @@ export {
   useStyles,
   resolveClassNames,
   resolveStyles,
-  ThemeRef,
 };
+
+// We need to re-export types separately or they won't work in webpack :(
+export type ThemeRef = ThemeRef;

@@ -12,6 +12,7 @@ import {
   useStyles,
   resolveClassNames,
   resolveStyles,
+  ThemeRef,
 } from 'treat';
 
 export {
@@ -23,4 +24,5 @@ export {
   useStyles,
   resolveClassNames,
   resolveStyles,
+  ThemeRef,
 };

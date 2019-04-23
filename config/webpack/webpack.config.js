@@ -239,7 +239,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           chunkFilename: cssFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
-        createTreatPlugin({ target: 'browser', isStartScript }),
+        createTreatPlugin({ target: 'browser', isStartScript, isStorybook }),
       ],
     },
     {
@@ -316,7 +316,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
         }),
-        createTreatPlugin({ target: 'node', isStartScript }),
+        createTreatPlugin({ target: 'node', isStartScript, isStorybook }),
       ],
     },
   ].map(webpackDecorator);

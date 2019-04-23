@@ -19,19 +19,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+          href="http://localhost:4003/runtime-495269527ee48e41bef3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
+          href="http://localhost:4003/vendors~main-ad81b3b3065c5d772d77.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-73b31fa80ab035588e3a.js"
+          href="http://localhost:4003/main-377a0e272957ffc7972a.js"
           crossorigin="anonymous"
     >
   </head>
@@ -45,24 +45,27 @@ SOURCE HTML:
         </div>
       </div>
     </div>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+            src="http://localhost:4003/runtime-495269527ee48e41bef3.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
+            src="http://localhost:4003/vendors~main-ad81b3b3065c5d772d77.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-73b31fa80ab035588e3a.js"
+            src="http://localhost:4003/main-377a0e272957ffc7972a.js"
             crossorigin="anonymous"
     >
     </script>
@@ -92,19 +95,19 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+          href="http://localhost:4003/runtime-495269527ee48e41bef3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
+          href="http://localhost:4003/vendors~main-ad81b3b3065c5d772d77.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-73b31fa80ab035588e3a.js"
+          href="http://localhost:4003/main-377a0e272957ffc7972a.js"
           crossorigin="anonymous"
     >
   </head>
@@ -118,24 +121,27 @@ Object {
         </div>
       </div>
     </div>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+            src="http://localhost:4003/runtime-495269527ee48e41bef3.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-ddb229777eec8a7a373e.js"
+            src="http://localhost:4003/vendors~main-ad81b3b3065c5d772d77.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-73b31fa80ab035588e3a.js"
+            src="http://localhost:4003/main-377a0e272957ffc7972a.js"
             crossorigin="anonymous"
     >
     </script>
@@ -152,7 +158,7 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-73b31fa80ab035588e3a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-377a0e272957ffc7972a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -170,8 +176,8 @@ export const root: string;
   color: red;
 }
 ,
-  "runtime-dfda6aa3edd4b5fc5f37.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-ddb229777eec8a7a373e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-495269527ee48e41bef3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ad81b3b3065c5d772d77.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -194,19 +200,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+          href="http://localhost:4003/runtime-495269527ee48e41bef3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-db4e64159786832628b1.js"
+          href="http://localhost:4003/vendors~main-a4248f7c854054c1a25c.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-d77f47c2a5b9d4421a76.js"
+          href="http://localhost:4003/main-54be680c32789b245404.js"
           crossorigin="anonymous"
     >
   </head>
@@ -220,24 +226,27 @@ SOURCE HTML:
         </div>
       </div>
     </div>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-dfda6aa3edd4b5fc5f37.js"
+            src="http://localhost:4003/runtime-495269527ee48e41bef3.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-db4e64159786832628b1.js"
+            src="http://localhost:4003/vendors~main-a4248f7c854054c1a25c.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-d77f47c2a5b9d4421a76.js"
+            src="http://localhost:4003/main-54be680c32789b245404.js"
             crossorigin="anonymous"
     >
     </script>
@@ -259,6 +268,7 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
+  "main-54be680c32789b245404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -276,10 +286,9 @@ export const root: string;
   color: red;
 }
 ,
-  "main-d77f47c2a5b9d4421a76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-dfda6aa3edd4b5fc5f37.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-495269527ee48e41bef3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-db4e64159786832628b1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-a4248f7c854054c1a25c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -325,8 +334,10 @@ SOURCE HTML:
         </div>
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"

@@ -15,19 +15,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
+          href="http://localhost:4002/runtime-9154ddc196a85db1973d.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
+          href="http://localhost:4002/vendors~main-fcd4b4c04ed59d9b5ae4.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/main-55ef0393adc164f6ae61.js"
+          href="http://localhost:4002/main-2a6f7b9ddb37f1fe7c62.js"
           crossorigin="anonymous"
     >
   </head>
@@ -37,24 +37,27 @@ SOURCE HTML:
         Hello custom src paths
       </div>
     </div>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
+            src="http://localhost:4002/runtime-9154ddc196a85db1973d.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
+            src="http://localhost:4002/vendors~main-fcd4b4c04ed59d9b5ae4.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/main-55ef0393adc164f6ae61.js"
+            src="http://localhost:4002/main-2a6f7b9ddb37f1fe7c62.js"
             crossorigin="anonymous"
     >
     </script>
@@ -80,19 +83,19 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
+          href="http://localhost:4002/runtime-9154ddc196a85db1973d.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
+          href="http://localhost:4002/vendors~main-fcd4b4c04ed59d9b5ae4.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/main-55ef0393adc164f6ae61.js"
+          href="http://localhost:4002/main-2a6f7b9ddb37f1fe7c62.js"
           crossorigin="anonymous"
     >
   </head>
@@ -102,33 +105,36 @@ Object {
         Hello custom src paths
       </div>
     </div>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/runtime-0ea2528cf0b6ed101089.js"
+            src="http://localhost:4002/runtime-9154ddc196a85db1973d.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-618579b08dc20130efab.js"
+            src="http://localhost:4002/vendors~main-fcd4b4c04ed59d9b5ae4.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/main-55ef0393adc164f6ae61.js"
+            src="http://localhost:4002/main-2a6f7b9ddb37f1fe7c62.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "main-55ef0393adc164f6ae61.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-0ea2528cf0b6ed101089.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-618579b08dc20130efab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2a6f7b9ddb37f1fe7c62.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-9154ddc196a85db1973d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-fcd4b4c04ed59d9b5ae4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -166,8 +172,10 @@ SOURCE HTML:
         Hello custom src paths
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"

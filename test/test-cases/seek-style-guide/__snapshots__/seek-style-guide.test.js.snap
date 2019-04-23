@@ -26,17 +26,17 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-135ea29ecc719f03a91d.js"
+          href="/runtime-aeb0c9cb99d2933bf332.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-7da30edd2d895bdbfcb5.js"
+          href="/vendors~main-848169fa6af3042ded33.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-6d049a35621f4ea5e659.js"
+          href="/main-a792ad051a85e8dfb370.js"
     >
   </head>
   <body>
@@ -60,30 +60,32 @@ Object {
         </div>
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-135ea29ecc719f03a91d.js"
+            src="/runtime-aeb0c9cb99d2933bf332.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-7da30edd2d895bdbfcb5.js"
+            src="/vendors~main-848169fa6af3042ded33.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-6d049a35621f4ea5e659.js"
+            src="/main-a792ad051a85e8dfb370.js"
     >
     </script>
   </body>
 </html>
 ,
-  "main-6d049a35621f4ea5e659.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-135ea29ecc719f03a91d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-7da30edd2d895bdbfcb5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-a792ad051a85e8dfb370.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-848169fa6af3042ded33.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-c09502ce674a7b18ccd6.css": a,
 abbr,
 acronym,

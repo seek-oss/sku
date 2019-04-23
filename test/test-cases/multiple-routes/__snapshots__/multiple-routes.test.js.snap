@@ -16,28 +16,28 @@ SOURCE HTML:
           rel="stylesheet"
           href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
     >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          crossorigin="anonymous"
+    >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/main-31d5c5a990273252eb27.js"
+          href="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
           crossorigin="anonymous"
     >
   </head>
@@ -51,30 +51,33 @@ SOURCE HTML:
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [2]
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/main-31d5c5a990273252eb27.js"
+            src="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
             crossorigin="anonymous"
     >
     </script>
@@ -86,21 +89,21 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`multiple-routes build should generate the expected files 1`] = `
 Object {
-  "AsyncComponent-0f65c3bbe8687e1eecaf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-30506b11de8eab176614.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
   color: #00f;
 }
 ,
-  "handlers-Details-4ed8e2ebe22a3b84ecff.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-cad3b5e6fbd814c4821b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-62bf94bf0fd2ba3c2aa2.css": ._1QX0Hyt {
   color: red;
 }
 ,
-  "handlers-Home-d4afda529b3b1a8b8da7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-7c924ffe515bf8491cca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-31d5c5a990273252eb27.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-15143f94aaccd9e0a333.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": 
 <!DOCTYPE html>
 <html>
@@ -116,34 +119,34 @@ Object {
           rel="stylesheet"
           href="http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css"
     >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          crossorigin="anonymous"
+    >
     <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Details-4ed8e2ebe22a3b84ecff.js"
+          href="http://localhost:4004/handlers-Details-cad3b5e6fbd814c4821b.js"
           crossorigin="anonymous"
     >
     <link data-chunk="AsyncComponent"
           rel="preload"
           as="script"
-          href="http://localhost:4004/AsyncComponent-0f65c3bbe8687e1eecaf.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/main-31d5c5a990273252eb27.js"
+          href="http://localhost:4004/AsyncComponent-30506b11de8eab176614.js"
           crossorigin="anonymous"
     >
   </head>
@@ -160,36 +163,39 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [1,0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="handlers-Details"
-            src="http://localhost:4004/handlers-Details-4ed8e2ebe22a3b84ecff.js"
+            src="http://localhost:4004/handlers-Details-cad3b5e6fbd814c4821b.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="AsyncComponent"
-            src="http://localhost:4004/AsyncComponent-0f65c3bbe8687e1eecaf.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/main-31d5c5a990273252eb27.js"
+            src="http://localhost:4004/AsyncComponent-30506b11de8eab176614.js"
             crossorigin="anonymous"
     >
     </script>
@@ -211,28 +217,28 @@ Object {
           rel="stylesheet"
           href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
     >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          crossorigin="anonymous"
+    >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/main-31d5c5a990273252eb27.js"
+          href="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
           crossorigin="anonymous"
     >
   </head>
@@ -246,30 +252,33 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [2]
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/main-31d5c5a990273252eb27.js"
+            src="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
             crossorigin="anonymous"
     >
     </script>
@@ -291,34 +300,34 @@ Object {
           rel="stylesheet"
           href="http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css"
     >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          crossorigin="anonymous"
+    >
     <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Details-4ed8e2ebe22a3b84ecff.js"
+          href="http://localhost:4004/handlers-Details-cad3b5e6fbd814c4821b.js"
           crossorigin="anonymous"
     >
     <link data-chunk="AsyncComponent"
           rel="preload"
           as="script"
-          href="http://localhost:4004/AsyncComponent-0f65c3bbe8687e1eecaf.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/main-31d5c5a990273252eb27.js"
+          href="http://localhost:4004/AsyncComponent-30506b11de8eab176614.js"
           crossorigin="anonymous"
     >
   </head>
@@ -335,36 +344,39 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"nz"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [1,0];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [1,0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="handlers-Details"
-            src="http://localhost:4004/handlers-Details-4ed8e2ebe22a3b84ecff.js"
+            src="http://localhost:4004/handlers-Details-cad3b5e6fbd814c4821b.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="AsyncComponent"
-            src="http://localhost:4004/AsyncComponent-0f65c3bbe8687e1eecaf.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/main-31d5c5a990273252eb27.js"
+            src="http://localhost:4004/AsyncComponent-30506b11de8eab176614.js"
             crossorigin="anonymous"
     >
     </script>
@@ -386,28 +398,28 @@ Object {
           rel="stylesheet"
           href="http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css"
     >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          crossorigin="anonymous"
+    >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4004/main-31d5c5a990273252eb27.js"
+          href="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
           crossorigin="anonymous"
     >
   </head>
@@ -421,38 +433,41 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"nz"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [2];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [2]
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/runtime-6a4c32a614983c5dc925.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-d4afda529b3b1a8b8da7.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/runtime-53a00b797ada902fafcd.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/vendors~main-c6b8f06aa18abf922081.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4004/main-31d5c5a990273252eb27.js"
+            src="http://localhost:4004/handlers-Home-7c924ffe515bf8491cca.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "runtime-53a00b797ada902fafcd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-c6b8f06aa18abf922081.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-6a4c32a614983c5dc925.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-f75ee26fa85c375cb2cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -472,16 +487,6 @@ SOURCE HTML:
           rel="stylesheet"
           href="/handlers-Details.css"
     >
-    <link data-chunk="handlers-Details"
-          rel="preload"
-          as="script"
-          href="/handlers-Details.js"
-    >
-    <link data-chunk="AsyncComponent"
-          rel="preload"
-          as="script"
-          href="/AsyncComponent.js"
-    >
     <link data-chunk="main"
           rel="preload"
           as="script"
@@ -497,6 +502,16 @@ SOURCE HTML:
           as="script"
           href="/main.js"
     >
+    <link data-chunk="handlers-Details"
+          rel="preload"
+          as="script"
+          href="/handlers-Details.js"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="/AsyncComponent.js"
+    >
   </head>
   <body>
     <div id="app">
@@ -511,18 +526,10 @@ SOURCE HTML:
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
     </script>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = ["handlers-Details","AsyncComponent"];
-    </script>
-    <script async
-            data-chunk="handlers-Details"
-            src="/handlers-Details.js"
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
     >
-    </script>
-    <script async
-            data-chunk="AsyncComponent"
-            src="/AsyncComponent.js"
-    >
+      ["handlers-Details","AsyncComponent"]
     </script>
     <script async
             data-chunk="main"
@@ -537,6 +544,16 @@ SOURCE HTML:
     <script async
             data-chunk="main"
             src="/main.js"
+    >
+    </script>
+    <script async
+            data-chunk="handlers-Details"
+            src="/handlers-Details.js"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="/AsyncComponent.js"
     >
     </script>
   </body>
@@ -570,11 +587,6 @@ SOURCE HTML:
           rel="stylesheet"
           href="/handlers-Home.css"
     >
-    <link data-chunk="handlers-Home"
-          rel="preload"
-          as="script"
-          href="/handlers-Home.js"
-    >
     <link data-chunk="main"
           rel="preload"
           as="script"
@@ -590,6 +602,11 @@ SOURCE HTML:
           as="script"
           href="/main.js"
     >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="/handlers-Home.js"
+    >
   </head>
   <body>
     <div id="app">
@@ -601,13 +618,10 @@ SOURCE HTML:
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
     </script>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = ["handlers-Home"];
-    </script>
-    <script async
-            data-chunk="handlers-Home"
-            src="/handlers-Home.js"
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
     >
+      ["handlers-Home"]
     </script>
     <script async
             data-chunk="main"
@@ -622,6 +636,11 @@ SOURCE HTML:
     <script async
             data-chunk="main"
             src="/main.js"
+    >
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="/handlers-Home.js"
     >
     </script>
   </body>

@@ -19,42 +19,42 @@ Object {
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="https://somecdn.com/vendors~main-49f571a59ec95e51db91.css"
+    >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
           href="https://somecdn.com/vendors~themes-jobStreet-67810f616b78ebd3d240.css"
     >
     <link data-chunk="main"
-          rel="stylesheet"
-          href="https://somecdn.com/vendors~main-607cf5ff964931ad76b7.css"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/vendors~main-8848b4fa7e026a3c0cd3.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/main-e40ad30330080589ce1e.js"
+          crossorigin="anonymous"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~themes-jobStreet-6207e72313d53d669023.js"
+          href="https://somecdn.com/vendors~themes-jobStreet-6e4b879df42439d00dee.js"
           crossorigin="anonymous"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-jobStreet-ef5d0bc2d251429d696f.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/runtime-42789770c3cd810aebe4.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/vendors~main-79cee42d2f611f70df2d.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/main-481bb29f52722089dabd.js"
+          href="https://somecdn.com/themes-jobStreet-47b4b0c2ff49e2cc8924.js"
           crossorigin="anonymous"
     >
     <script>
@@ -213,44 +213,47 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [2,0];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [2,0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/vendors~main-8848b4fa7e026a3c0cd3.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/main-e40ad30330080589ce1e.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="https://somecdn.com/vendors~themes-jobStreet-6207e72313d53d669023.js"
+            src="https://somecdn.com/vendors~themes-jobStreet-6e4b879df42439d00dee.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="https://somecdn.com/themes-jobStreet-ef5d0bc2d251429d696f.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/runtime-42789770c3cd810aebe4.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/vendors~main-79cee42d2f611f70df2d.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/main-481bb29f52722089dabd.js"
+            src="https://somecdn.com/themes-jobStreet-47b4b0c2ff49e2cc8924.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "main-481bb29f52722089dabd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-42789770c3cd810aebe4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-e40ad30330080589ce1e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-cab5104a3be2be1d2362.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": 
 <!DOCTYPE html>
 <html>
@@ -262,42 +265,42 @@ Object {
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="https://somecdn.com/vendors~main-49f571a59ec95e51db91.css"
+    >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
           href="https://somecdn.com/vendors~themes-seekAnz-7f2d670318efcf6afad2.css"
     >
     <link data-chunk="main"
-          rel="stylesheet"
-          href="https://somecdn.com/vendors~main-607cf5ff964931ad76b7.css"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/vendors~main-8848b4fa7e026a3c0cd3.js"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="https://somecdn.com/main-e40ad30330080589ce1e.js"
+          crossorigin="anonymous"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~themes-seekAnz-bd87a23b56ff5a5f456d.js"
+          href="https://somecdn.com/vendors~themes-seekAnz-d296d18aecfd8e7612a6.js"
           crossorigin="anonymous"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-seekAnz-ac0870426bbd4ceca7a6.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/runtime-42789770c3cd810aebe4.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/vendors~main-79cee42d2f611f70df2d.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/main-481bb29f52722089dabd.js"
+          href="https://somecdn.com/themes-seekAnz-660a0729ec5e62821fa5.js"
           crossorigin="anonymous"
     >
     <script>
@@ -456,47 +459,50 @@ Object {
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"seekAnz"};
     </script>
-    <script crossorigin="anonymous">
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [3,1];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      [3,1]
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/vendors~main-8848b4fa7e026a3c0cd3.js"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="https://somecdn.com/main-e40ad30330080589ce1e.js"
+            crossorigin="anonymous"
+    >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="https://somecdn.com/vendors~themes-seekAnz-bd87a23b56ff5a5f456d.js"
+            src="https://somecdn.com/vendors~themes-seekAnz-d296d18aecfd8e7612a6.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="https://somecdn.com/themes-seekAnz-ac0870426bbd4ceca7a6.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/runtime-42789770c3cd810aebe4.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/vendors~main-79cee42d2f611f70df2d.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/main-481bb29f52722089dabd.js"
+            src="https://somecdn.com/themes-seekAnz-660a0729ec5e62821fa5.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "themes-jobStreet-ef5d0bc2d251429d696f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-47b4b0c2ff49e2cc8924.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-ac0870426bbd4ceca7a6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-660a0729ec5e62821fa5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-607cf5ff964931ad76b7.css": ._3DWxPaW {
+  "vendors~main-49f571a59ec95e51db91.css": ._3DWxPaW {
   display: block;
 }
 ._2ITnC9Y {
@@ -613,8 +619,7 @@ Object {
   flex-grow: 0;
 }
 ,
-  "vendors~main-79cee42d2f611f70df2d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreet-6207e72313d53d669023.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-8848b4fa7e026a3c0cd3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobStreet-67810f616b78ebd3d240.css": ._3IiUysg,
 ._2WCNw0q,
 ._3LAqmg3,
@@ -1475,6 +1480,7 @@ Object {
   }
 }
 ,
+  "vendors~themes-jobStreet-6e4b879df42439d00dee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobStreet~themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekAnz-7f2d670318efcf6afad2.css": ._3IiUysg,
@@ -2322,7 +2328,7 @@ Object {
   }
 }
 ,
-  "vendors~themes-seekAnz-bd87a23b56ff5a5f456d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekAnz-d296d18aecfd8e7612a6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

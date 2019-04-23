@@ -19,17 +19,17 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/runtime-9612951e680e0fabda6f.js"
+          href="/static/runtime-db77a217f713f6f5cbcf.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/vendors~main-618579b08dc20130efab.js"
+          href="/static/vendors~main-fcd4b4c04ed59d9b5ae4.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/main-9c623ee9a43558ae1ce6.js"
+          href="/static/main-3c5862e5a46d5c58ad41.js"
     >
   </head>
   <body>
@@ -37,22 +37,24 @@ SOURCE HTML:
       <div class="_1oKZ42c">
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="/static/runtime-9612951e680e0fabda6f.js"
+            src="/static/runtime-db77a217f713f6f5cbcf.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/static/vendors~main-618579b08dc20130efab.js"
+            src="/static/vendors~main-fcd4b4c04ed59d9b5ae4.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/static/main-9c623ee9a43558ae1ce6.js"
+            src="/static/main-3c5862e5a46d5c58ad41.js"
     >
     </script>
   </body>

@@ -34,11 +34,11 @@ SOURCE HTML:
     </div>
     <script src="./sb_dll/storybook_ui_dll.js">
     </script>
-    <script src="runtime~main.bf7f1bbd18bd2f1ec8df.bundle.js">
+    <script src="runtime~main.6ac4c33d73ae9704bbb9.bundle.js">
     </script>
-    <script src="vendors~main.ff21b840f02c2cfab776.bundle.js">
+    <script src="vendors~main.0e230ff315f46646dd33.bundle.js">
     </script>
-    <script src="main.1c95191c85f02a355925.bundle.js">
+    <script src="main.22ba4fcad3bfd592f2f3.bundle.js">
     </script>
   </body>
 </html>
@@ -72,17 +72,17 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-135ea29ecc719f03a91d.js"
+          href="/runtime-aeb0c9cb99d2933bf332.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-ebc0059b8e6723cbd264.js"
+          href="/vendors~main-d40d05de2c9045e6cb9c.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-1b5c19b44d983b352e4c.js"
+          href="/main-2a1489f7ae3a215a4254.js"
     >
   </head>
   <body>
@@ -95,22 +95,24 @@ SOURCE HTML:
         </div>
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-135ea29ecc719f03a91d.js"
+            src="/runtime-aeb0c9cb99d2933bf332.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-ebc0059b8e6723cbd264.js"
+            src="/vendors~main-d40d05de2c9045e6cb9c.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-1b5c19b44d983b352e4c.js"
+            src="/main-2a1489f7ae3a215a4254.js"
     >
     </script>
   </body>
@@ -148,17 +150,17 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-135ea29ecc719f03a91d.js"
+          href="/runtime-aeb0c9cb99d2933bf332.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-ebc0059b8e6723cbd264.js"
+          href="/vendors~main-d40d05de2c9045e6cb9c.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-1b5c19b44d983b352e4c.js"
+          href="/main-2a1489f7ae3a215a4254.js"
     >
   </head>
   <body>
@@ -171,28 +173,30 @@ Object {
         </div>
       </div>
     </div>
-    <script>
-      window.__LOADABLE_REQUIRED_CHUNKS__ = [];
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-135ea29ecc719f03a91d.js"
+            src="/runtime-aeb0c9cb99d2933bf332.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-ebc0059b8e6723cbd264.js"
+            src="/vendors~main-d40d05de2c9045e6cb9c.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-1b5c19b44d983b352e4c.js"
+            src="/main-2a1489f7ae3a215a4254.js"
     >
     </script>
   </body>
 </html>
 ,
-  "main-1b5c19b44d983b352e4c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2a1489f7ae3a215a4254.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -210,7 +214,7 @@ Object {
   color: red;
 }
 ,
-  "runtime-135ea29ecc719f03a91d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-ebc0059b8e6723cbd264.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-d40d05de2c9045e6cb9c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

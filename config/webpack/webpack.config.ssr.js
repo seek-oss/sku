@@ -6,6 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const createTreatPlugin = require('./plugins/createTreatPlugin');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
@@ -22,7 +23,8 @@ const {
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort }) => {
-  const webpackMode = utils.isProductionBuild ? 'production' : 'development';
+  const { isProductionBuild } = utils;
+  const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const envVars = lodash
     .chain(env)
@@ -104,8 +106,8 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
-        minimize: utils.isProductionBuild,
-        concatenateModules: utils.isProductionBuild,
+        minimize: isProductionBuild,
+        concatenateModules: isProductionBuild,
         splitChunks: {
           chunks: 'all',
         },
@@ -195,6 +197,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
           filename: `${fileMask}.css`,
           chunkFilename: `${fileMask}.css`,
         }),
+        createTreatPlugin({ target: 'browser', isProductionBuild }),
       ].concat(
         isStartScript
           ? [
@@ -290,6 +293,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
         }),
+        createTreatPlugin({ target: 'node', isProductionBuild }),
       ].concat(
         isStartScript
           ? [

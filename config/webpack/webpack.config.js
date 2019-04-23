@@ -32,7 +32,8 @@ const {
 
 // port is only required for dev builds
 const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
-  const webpackMode = utils.isProductionBuild ? 'production' : 'development';
+  const { isProductionBuild } = utils;
+  const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const renderHtml = isLibrary ? isStartScript : !isStorybook;
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
@@ -138,8 +139,8 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
-        minimize: utils.isProductionBuild,
-        concatenateModules: utils.isProductionBuild,
+        minimize: isProductionBuild,
+        concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {
               splitChunks: {
@@ -239,7 +240,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           chunkFilename: cssFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
-        createTreatPlugin({ target: 'browser', isStartScript, isStorybook }),
+        createTreatPlugin({ target: 'browser', isProductionBuild }),
       ],
     },
     {
@@ -316,7 +317,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
         }),
-        createTreatPlugin({ target: 'node', isStartScript, isStorybook }),
+        createTreatPlugin({ target: 'node', isProductionBuild }),
       ],
     },
   ].map(webpackDecorator);

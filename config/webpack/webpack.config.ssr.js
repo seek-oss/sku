@@ -23,7 +23,8 @@ const {
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort }) => {
-  const webpackMode = utils.isProductionBuild ? 'production' : 'development';
+  const { isProductionBuild } = utils;
+  const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const envVars = lodash
     .chain(env)
@@ -105,8 +106,8 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
-        minimize: utils.isProductionBuild,
-        concatenateModules: utils.isProductionBuild,
+        minimize: isProductionBuild,
+        concatenateModules: isProductionBuild,
         splitChunks: {
           chunks: 'all',
         },
@@ -196,7 +197,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
           filename: `${fileMask}.css`,
           chunkFilename: `${fileMask}.css`,
         }),
-        createTreatPlugin({ target: 'browser', isStartScript }),
+        createTreatPlugin({ target: 'browser', isProductionBuild }),
       ].concat(
         isStartScript
           ? [

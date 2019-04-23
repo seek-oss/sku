@@ -293,7 +293,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
         }),
-        createTreatPlugin({ target: 'node', isStartScript }),
+        createTreatPlugin({ target: 'node', isProductionBuild }),
       ].concat(
         isStartScript
           ? [

@@ -8,7 +8,7 @@ module.exports = ({ target, isProductionBuild }) => {
     isProductionBuild ? '' : 'BRAID__[name]-[local]_'
   }[hash:base64:5]`;
 
-  const themeIdentFallback = '[hash:base64:5]';
+  const themeIdentFallback = '[hash:base64:3]';
 
   const devThemeIdent = theme =>
     theme.name ? `_${theme.name}` : themeIdentFallback;

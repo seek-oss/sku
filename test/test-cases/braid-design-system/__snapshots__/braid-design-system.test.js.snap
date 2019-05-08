@@ -21,40 +21,34 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="https://somecdn.com/vendors~main-49f571a59ec95e51db91.css"
+          href="https://somecdn.com/vendors~main-086f764b6b3607b25afb.css"
     >
-    <link data-chunk="themes-jobStreet"
+    <link data-chunk="braid-design-system-themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/vendors~themes-jobStreet-67810f616b78ebd3d240.css"
+          href="https://somecdn.com/vendors~braid-design-system-themes-jobStreet-49969d59baa90a159aa0.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/vendors~main-3aebefecdcf4d31e5ae6.js"
+          href="https://somecdn.com/runtime-1f0b254c9ef721d280de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-7febfb02ec7b78bc9298.js"
+          href="https://somecdn.com/vendors~main-d25c37b8e569ef00baed.js"
           crossorigin="anonymous"
     >
-    <link data-chunk="themes-jobStreet"
+    <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~themes-jobStreet-6e4b879df42439d00dee.js"
+          href="https://somecdn.com/main-f826bb1492c310d7ba26.js"
           crossorigin="anonymous"
     >
-    <link data-chunk="themes-jobStreet"
+    <link data-chunk="braid-design-system-themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-jobStreet-47b4b0c2ff49e2cc8924.js"
+          href="https://somecdn.com/vendors~braid-design-system-themes-jobStreet-880c74dd3e86a209b72f.js"
           crossorigin="anonymous"
     >
     <script>
@@ -66,6 +60,16 @@ Object {
       <div class="_3lc311G _3DyNnTW wBZFtYB _1TkHDDW _3HEs-S- _2P0kF3w _2oY7eBs">
         Hello
         jobStreet
+        <div class="HaEqn2s okvXM2a _2oY7eBs">
+          <svg width="16"
+               height="16"
+               viewbox="0 0 1024 1024"
+               class="_2nGaB _1uz0K_xT_1 _1wCDcfv _3zOi8iv"
+          >
+            <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
+            </path>
+          </svg>
+        </div>
       </div>
       <div class="_229asV3 _2oY7eBs">
         <div class="_27TF7A6 _2xvFrBC _2824VQ3 _30s6Mt7 _3Qi1b6K _2oY7eBs">
@@ -100,99 +104,7 @@ Object {
                     <svg viewbox="90.471 302.809 823 823"
                          width="16"
                          height="16"
-                         class="_1y_4hg9 _2ITnC9Y _3DWxPaW TAQB7pN"
-                    >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-                <div class="_1pQYZ6C _3mGVXh8 _2oY7eBs">
-                  <div class="_3lc311G _3DyNnTW wBZFtYB _1TkHDDW _3HEs-S- _2oY7eBs">
-                    This is a checkbox
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox"
-                   class="_1oQSh2m"
-                   id="id_2"
-                   aria-describedby="id_2-message"
-            >
-            <div class="_1WIkhn_">
-              <label class="_2TOJ8vh _3FK76Tr"
-                     for="id_2"
-              >
-                <div class="EKNisOw _2uiKUz8 _12nHwq- _36fDV23 _2oY7eBs"
-                     style="width:24px;height:24px;margin-top:10px"
-                >
-                  <div class="_2QFvL6i NPf1vWO _12nHwq- NPf1vWO _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _10597UX _2C9hdfF _12nHwq- _2C9hdfF _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2rGV2RP _3Qz5ZZ1 _12nHwq- _3Qz5ZZ1 _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2sqCI5f c4k4BcP _12nHwq- _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _3ddpN8u _30p89-W NPf1vWO _12nHwq- NPf1vWO _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i U61AQmG fx-ZG-7 _12nHwq- fx-ZG-7 _125NlJW _2oY7eBs"
-                       style="opacity:0"
-                  >
-                  </div>
-                  <div class="_2EVIIjs _125NlJW TAQB7pN _2oY7eBs">
-                    <svg viewbox="90.471 302.809 823 823"
-                         width="16"
-                         height="16"
-                         class="_1y_4hg9 _2ITnC9Y _3DWxPaW TAQB7pN"
-                    >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-                <div class="_1pQYZ6C _3mGVXh8 _2oY7eBs">
-                  <div class="_3lc311G _3DyNnTW wBZFtYB _1TkHDDW _3HEs-S- _2oY7eBs">
-                    This is a checkbox
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox"
-                   class="_1oQSh2m"
-                   id="id_3"
-                   aria-describedby="id_3-message"
-            >
-            <div class="_1WIkhn_">
-              <label class="_2TOJ8vh _3FK76Tr"
-                     for="id_3"
-              >
-                <div class="EKNisOw _2uiKUz8 _12nHwq- _36fDV23 _2oY7eBs"
-                     style="width:24px;height:24px;margin-top:10px"
-                >
-                  <div class="_2QFvL6i NPf1vWO _12nHwq- NPf1vWO _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _10597UX _2C9hdfF _12nHwq- _2C9hdfF _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2rGV2RP _3Qz5ZZ1 _12nHwq- _3Qz5ZZ1 _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2sqCI5f c4k4BcP _12nHwq- _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _3ddpN8u _30p89-W NPf1vWO _12nHwq- NPf1vWO _125NlJW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i U61AQmG fx-ZG-7 _12nHwq- fx-ZG-7 _125NlJW _2oY7eBs"
-                       style="opacity:0"
-                  >
-                  </div>
-                  <div class="_2EVIIjs _125NlJW TAQB7pN _2oY7eBs">
-                    <svg viewbox="90.471 302.809 823 823"
-                         width="16"
-                         height="16"
-                         class="_1y_4hg9 _2ITnC9Y _3DWxPaW TAQB7pN"
+                         class="JKAIx _1y_4hg9 TAQB7pN _5i_EJj2"
                     >
                       <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
                       </path>
@@ -217,43 +129,37 @@ Object {
             type="application/json"
             crossorigin="anonymous"
     >
-      [2,0]
+      [0]
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/vendors~main-3aebefecdcf4d31e5ae6.js"
+            src="https://somecdn.com/runtime-1f0b254c9ef721d280de.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-7febfb02ec7b78bc9298.js"
+            src="https://somecdn.com/vendors~main-d25c37b8e569ef00baed.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
-            data-chunk="themes-jobStreet"
-            src="https://somecdn.com/vendors~themes-jobStreet-6e4b879df42439d00dee.js"
+            data-chunk="main"
+            src="https://somecdn.com/main-f826bb1492c310d7ba26.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
-            data-chunk="themes-jobStreet"
-            src="https://somecdn.com/themes-jobStreet-47b4b0c2ff49e2cc8924.js"
+            data-chunk="braid-design-system-themes-jobStreet"
+            src="https://somecdn.com/vendors~braid-design-system-themes-jobStreet-880c74dd3e86a209b72f.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "main-7febfb02ec7b78bc9298.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-cab5104a3be2be1d2362.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f826bb1492c310d7ba26.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-1f0b254c9ef721d280de.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": 
 <!DOCTYPE html>
 <html>
@@ -267,40 +173,34 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="https://somecdn.com/vendors~main-49f571a59ec95e51db91.css"
+          href="https://somecdn.com/vendors~main-086f764b6b3607b25afb.css"
     >
-    <link data-chunk="themes-seekAnz"
+    <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/vendors~themes-seekAnz-7f2d670318efcf6afad2.css"
+          href="https://somecdn.com/vendors~braid-design-system-themes-seekAnz-e214cc316d2ac61f5abc.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="https://somecdn.com/vendors~main-3aebefecdcf4d31e5ae6.js"
+          href="https://somecdn.com/runtime-1f0b254c9ef721d280de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-7febfb02ec7b78bc9298.js"
+          href="https://somecdn.com/vendors~main-d25c37b8e569ef00baed.js"
           crossorigin="anonymous"
     >
-    <link data-chunk="themes-seekAnz"
+    <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~themes-seekAnz-d296d18aecfd8e7612a6.js"
+          href="https://somecdn.com/main-f826bb1492c310d7ba26.js"
           crossorigin="anonymous"
     >
-    <link data-chunk="themes-seekAnz"
+    <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-seekAnz-660a0729ec5e62821fa5.js"
+          href="https://somecdn.com/vendors~braid-design-system-themes-seekAnz-556df11449101cd70806.js"
           crossorigin="anonymous"
     >
     <script>
@@ -312,6 +212,16 @@ Object {
       <div class="_3lc311G _32FtM0t _3tnzQi2 _2XGpPEA _3bMfHSy mG1wkyG _2oY7eBs">
         Hello
         seekAnz
+        <div class="HaEqn2s okvXM2a _2oY7eBs">
+          <svg width="16"
+               height="16"
+               viewbox="0 0 1024 1024"
+               class="_2nGaB _1uz0K_3sKaC _36wGlx1 _18xKQlI"
+          >
+            <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
+            </path>
+          </svg>
+        </div>
       </div>
       <div class="_1mSIxf2 _2oY7eBs">
         <div class="_3-m0JFq _3fZWXPQ _2vHtVP5 y-ma1r1 _2vaUzu9 _2oY7eBs">
@@ -346,99 +256,7 @@ Object {
                     <svg viewbox="90.471 302.809 823 823"
                          width="16"
                          height="16"
-                         class="_2k9XWOC _2ITnC9Y _3DWxPaW _7IBTr7P"
-                    >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-                <div class="_2kmuZJ6 _1Qk2uli _2oY7eBs">
-                  <div class="_3lc311G _32FtM0t _3tnzQi2 _2XGpPEA _3bMfHSy _2oY7eBs">
-                    This is a checkbox
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox"
-                   class="_1oQSh2m"
-                   id="id_2"
-                   aria-describedby="id_2-message"
-            >
-            <div class="_1WIkhn_">
-              <label class="_2TOJ8vh _3FK76Tr"
-                     for="id_2"
-              >
-                <div class="EKNisOw _2jSzQzf _2-xoAp9 _1mP8-p2 _2oY7eBs"
-                     style="width:30px;height:30px;margin-top:9px"
-                >
-                  <div class="_2QFvL6i uPlGdtW _2-xoAp9 uPlGdtW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _10597UX _1cCXRHc _2-xoAp9 _1cCXRHc _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2rGV2RP _2hR0x5f _2-xoAp9 _2hR0x5f z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2sqCI5f _3UZrlBL _2-xoAp9 z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _3ddpN8u _1SjMIr3 uPlGdtW _2-xoAp9 uPlGdtW z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i U61AQmG uK2PFKF _2-xoAp9 uK2PFKF z4E71gw _2oY7eBs"
-                       style="opacity:0"
-                  >
-                  </div>
-                  <div class="_2EVIIjs z4E71gw _7IBTr7P _2oY7eBs">
-                    <svg viewbox="90.471 302.809 823 823"
-                         width="16"
-                         height="16"
-                         class="_2k9XWOC _2ITnC9Y _3DWxPaW _7IBTr7P"
-                    >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-                <div class="_2kmuZJ6 _1Qk2uli _2oY7eBs">
-                  <div class="_3lc311G _32FtM0t _3tnzQi2 _2XGpPEA _3bMfHSy _2oY7eBs">
-                    This is a checkbox
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div>
-            <input type="checkbox"
-                   class="_1oQSh2m"
-                   id="id_3"
-                   aria-describedby="id_3-message"
-            >
-            <div class="_1WIkhn_">
-              <label class="_2TOJ8vh _3FK76Tr"
-                     for="id_3"
-              >
-                <div class="EKNisOw _2jSzQzf _2-xoAp9 _1mP8-p2 _2oY7eBs"
-                     style="width:30px;height:30px;margin-top:9px"
-                >
-                  <div class="_2QFvL6i uPlGdtW _2-xoAp9 uPlGdtW _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _10597UX _1cCXRHc _2-xoAp9 _1cCXRHc _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2rGV2RP _2hR0x5f _2-xoAp9 _2hR0x5f z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _2sqCI5f _3UZrlBL _2-xoAp9 z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i _3ddpN8u _1SjMIr3 uPlGdtW _2-xoAp9 uPlGdtW z4E71gw _2oY7eBs">
-                  </div>
-                  <div class="_2QFvL6i U61AQmG uK2PFKF _2-xoAp9 uK2PFKF z4E71gw _2oY7eBs"
-                       style="opacity:0"
-                  >
-                  </div>
-                  <div class="_2EVIIjs z4E71gw _7IBTr7P _2oY7eBs">
-                    <svg viewbox="90.471 302.809 823 823"
-                         width="16"
-                         height="16"
-                         class="_2k9XWOC _2ITnC9Y _3DWxPaW _7IBTr7P"
+                         class="JKAIx _2k9XWOC _7IBTr7P _11QgpkT"
                     >
                       <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
                       </path>
@@ -463,164 +281,36 @@ Object {
             type="application/json"
             crossorigin="anonymous"
     >
-      [3,1]
+      [1]
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-cab5104a3be2be1d2362.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="https://somecdn.com/vendors~main-3aebefecdcf4d31e5ae6.js"
+            src="https://somecdn.com/runtime-1f0b254c9ef721d280de.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-7febfb02ec7b78bc9298.js"
+            src="https://somecdn.com/vendors~main-d25c37b8e569ef00baed.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
-            data-chunk="themes-seekAnz"
-            src="https://somecdn.com/vendors~themes-seekAnz-d296d18aecfd8e7612a6.js"
+            data-chunk="main"
+            src="https://somecdn.com/main-f826bb1492c310d7ba26.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
-            data-chunk="themes-seekAnz"
-            src="https://somecdn.com/themes-seekAnz-660a0729ec5e62821fa5.js"
+            data-chunk="braid-design-system-themes-seekAnz"
+            src="https://somecdn.com/vendors~braid-design-system-themes-seekAnz-556df11449101cd70806.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "themes-jobStreet-47b4b0c2ff49e2cc8924.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-660a0729ec5e62821fa5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-3aebefecdcf4d31e5ae6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-49f571a59ec95e51db91.css": ._3DWxPaW {
-  display: block;
-}
-._2ITnC9Y {
-  height: 100%;
-}
-._2c8GFnW {
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  top: -0.105em;
-}
-._1oQSh2m {
-  opacity: 0;
-  position: absolute;
-  height: 0;
-  width: 0;
-}
-._2TOJ8vh {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-._1oQSh2m:not(:disabled) ~ ._1WIkhn_ ._2TOJ8vh {
-  cursor: pointer;
-}
-.EKNisOw {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  position: relative;
-  padding: 4px;
-}
-._2QFvL6i {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-._10597UX {
-  opacity: 0;
-  z-index: 1;
-}
-._1oQSh2m:not(:disabled) ~ ._1WIkhn_ ._2TOJ8vh:hover > * > ._10597UX {
-  opacity: 1;
-}
-._2rGV2RP {
-  opacity: 0;
-  z-index: 1;
-}
-._1oQSh2m:focus ~ ._1WIkhn_ > * > * > ._2rGV2RP {
-  opacity: 1;
-}
-._3ddpN8u {
-  opacity: 0;
-  z-index: 2;
-}
-._2sqCI5f {
-  opacity: 0;
-  z-index: 3;
-}
-._1oQSh2m:checked ~ ._1WIkhn_ > * > * > ._2sqCI5f {
-  opacity: 1;
-}
-.U61AQmG {
-  z-index: 4;
-}
-._1oQSh2m:disabled ~ ._1WIkhn_ > * > * > ._3ddpN8u {
-  opacity: 1;
-}
-._2EVIIjs {
-  opacity: 0;
-  -webkit-transform: scale(0.7);
-  transform: scale(0.7);
-  position: relative;
-  z-index: 5;
-  height: 100%;
-}
-._1oQSh2m:checked ~ ._1WIkhn_ > * > * > ._2EVIIjs {
-  -webkit-transform: none;
-  transform: none;
-  opacity: 1;
-}
-.nk3q2_7 {
-  display: none;
-}
-._1oQSh2m:checked ~ ._1WIkhn_ > .nk3q2_7 {
-  display: block;
-}
-._3lc311G {
-  display: block;
-}
-._1CaVPtc {
-  display: list-item;
-  list-style: disc;
-  margin-left: 1.3em;
-}
-._3G4_NiI {
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-._3nV1ujO {
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-._2EwXQ6n {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-flex-grow: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-}
-,
-  "vendors~themes-jobStreet-67810f616b78ebd3d240.css": ._3IiUysg,
+  "vendors~braid-design-system-themes-jobStreet-49969d59baa90a159aa0.css": ._3IiUysg,
 ._2WCNw0q,
 ._3LAqmg3,
 ._2AN0c48,
@@ -808,11 +498,23 @@ Object {
 ._3oAa1Gg {
   background-color: #142d69;
 }
+._16sJ7UW {
+  background-color: #eef2fc;
+}
 ._27TF7A6 {
   background-color: #fff;
 }
 ._2ptbXUD {
-  background-color: #ffeaea;
+  background-color: #eb0000;
+}
+._2OI-J-H {
+  background-color: #fdeded;
+}
+.H9yC-wq {
+  background-color: green;
+}
+._2VNBzX- {
+  background-color: #edfded;
 }
 ._12nHwq- {
   border-radius: 3px;
@@ -824,7 +526,7 @@ Object {
   box-shadow: inset 0 0 0 1px #ccc;
 }
 .fx-ZG-7 {
-  box-shadow: inset 0 0 0 1px red;
+  box-shadow: inset 0 0 0 1px #eb0000;
 }
 ._2C9hdfF {
   box-shadow: inset 0 0 0 1px #142d69;
@@ -849,15 +551,21 @@ Object {
   color: #fff;
 }
 .Vi3bXyd {
-  color: red;
+  color: #eb0000;
 }
-._1L5V1o2 {
+.FsPR7gY {
+  color: #d00;
+}
+._1L5V1o2,
+.kh6xcNB {
   color: green;
 }
 ._3TLpk9b {
   color: rgba(51, 51, 51, 0.7);
 }
-._3dajIFZ {
+._3dajIFZ,
+._3T70oMu,
+._1D-Hpso {
   color: #142d69;
 }
 ._2K1zkvJ {
@@ -873,9 +581,17 @@ Object {
   fill: #ccc;
 }
 ._1Jfxi3c {
-  fill: red;
+  fill: #eb0000;
 }
-._128lrMS {
+._3_9v3eR {
+  fill: #d00;
+}
+.RQ-1W1J,
+._2GJowDa {
+  fill: #142d69;
+}
+._128lrMS,
+.TR_xlNN {
   fill: green;
 }
 .tSeMlbg {
@@ -895,42 +611,6 @@ Object {
 }
 ._2lLtHZD {
   font-weight: 600;
-}
-._1R-Qvda {
-  height: 20px;
-}
-._1Fw4A3j {
-  height: 14px;
-}
-._1eEEg1f {
-  height: 24px;
-}
-.k84n3hT {
-  height: 16px;
-}
-._1dNWXBW {
-  min-height: 20px;
-}
-._1Mu50Ng {
-  min-height: 14px;
-}
-._37gWLE0 {
-  min-height: 24px;
-}
-._47bnPwm {
-  min-height: 16px;
-}
-.ZilqThn {
-  width: 20px;
-}
-._376gXWR {
-  width: 14px;
-}
-._2zzWcBq {
-  width: 24px;
-}
-.Gw0DatG {
-  width: 16px;
 }
 .TAQB7pN {
   width: 100%;
@@ -1479,11 +1159,49 @@ Object {
     flex-direction: column;
   }
 }
+._2nGaB {
+  vertical-align: middle;
+  position: relative;
+  top: -0.105em;
+}
+.JKAIx {
+  height: 100%;
+}
+._3MXF5 {
+  justify-content: flex-end;
+}
+._3Md34 {
+  flex-grow: 1;
+}
+._3mgra {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+._1uz0K_xT_1 {
+  width: 14px;
+  height: 14px;
+}
+._2AzCa_xT_1 {
+  width: 16px;
+  height: 16px;
+}
+._1BKBI_xT_1 {
+  width: 20px;
+  height: 20px;
+}
+._3ZnXD_xT_1 {
+  width: 24px;
+  height: 24px;
+}
+.X_Pz3_xT_1 {
+  min-height: 20px;
+}
 ,
-  "vendors~themes-jobStreet-6e4b879df42439d00dee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreet~themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekAnz-7f2d670318efcf6afad2.css": ._3IiUysg,
+  "vendors~braid-design-system-themes-jobStreet-880c74dd3e86a209b72f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-jobStreet~braid-design-system-themes-seekAnz~braid-design-system-~34a11ad8.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-seekAnz-556df11449101cd70806.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-seekAnz-e214cc316d2ac61f5abc.css": ._3IiUysg,
 ._2WCNw0q,
 ._3LAqmg3,
 ._2AN0c48,
@@ -1668,9 +1386,23 @@ Object {
 ._1CGU5Vo {
   background-color: #9556b7;
 }
-._3-m0JFq,
-._1dl10VJ {
+._1uvKzax {
+  background-color: #f6f1f9;
+}
+._3-m0JFq {
   background-color: #fff;
+}
+._1dl10VJ {
+  background-color: #e60278;
+}
+._3ZtKxLR {
+  background-color: #fdedf5;
+}
+._2xwLljc {
+  background-color: #169400;
+}
+._14zcs1L {
+  background-color: #effded;
 }
 ._2-xoAp9 {
   border-radius: 4px;
@@ -1705,11 +1437,23 @@ Object {
 ._2zAPUcs {
   color: #e60278;
 }
+._2olweAY {
+  color: #d60170;
+}
 .y6Z-la- {
-  color: green;
+  color: #169400;
+}
+._3cFA0Rf {
+  color: #148500;
 }
 ._3RzjZ_- {
   color: rgba(28, 28, 28, 0.63);
+}
+._22g3k7B {
+  color: #9556b7;
+}
+._2HkQofq {
+  color: #9254b4;
 }
 ._1FhP0Xv {
   color: #2765cf;
@@ -1729,8 +1473,20 @@ Object {
 .K6JmfFZ {
   fill: #e60278;
 }
+._1JdnsRg {
+  fill: #d60170;
+}
+._2PvNBf_ {
+  fill: #9556b7;
+}
+._3sL6p3f {
+  fill: #9254b4;
+}
 ._1KCh6Xj {
-  fill: green;
+  fill: #169400;
+}
+._1mkO1PP {
+  fill: #148500;
 }
 ._331zc7t {
   fill: rgba(28, 28, 28, 0.63);
@@ -1750,42 +1506,6 @@ Object {
 }
 .jKD1ELP {
   font-weight: 600;
-}
-.CdNd10w {
-  height: 24px;
-}
-._17rxj42 {
-  height: 16px;
-}
-._2DxBzd6 {
-  height: 24px;
-}
-.k3qfRA- {
-  height: 18px;
-}
-.vBsUc4y {
-  min-height: 24px;
-}
-._1bXn5n9 {
-  min-height: 16px;
-}
-._1swgmSN {
-  min-height: 24px;
-}
-._3kKkEdT {
-  min-height: 18px;
-}
-._3q3f9mC {
-  width: 24px;
-}
-.a9cS0ss {
-  width: 16px;
-}
-._2XkwcLm {
-  width: 24px;
-}
-._2TvagHY {
-  width: 18px;
 }
 ._7IBTr7P {
   width: 100%;
@@ -2327,8 +2047,1926 @@ Object {
     flex-direction: column;
   }
 }
+._2nGaB {
+  vertical-align: middle;
+  position: relative;
+  top: -0.105em;
+}
+.JKAIx {
+  height: 100%;
+}
+._3MXF5 {
+  justify-content: flex-end;
+}
+._3Md34 {
+  flex-grow: 1;
+}
+._3mgra {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+._1uz0K_3sKaC {
+  width: 16px;
+  height: 16px;
+}
+._2AzCa_3sKaC {
+  width: 18px;
+  height: 18px;
+}
+._1BKBI_3sKaC,
+._3ZnXD_3sKaC {
+  width: 24px;
+  height: 24px;
+}
+.X_Pz3_3sKaC {
+  min-height: 24px;
+}
 ,
-  "vendors~themes-seekAnz-d296d18aecfd8e7612a6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-seekAsia-6ab3ec0c18f1a3507bfb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-seekAsia-76d6de0a976db8c9194c.css": ._3IiUysg,
+._2WCNw0q,
+._3LAqmg3,
+._2AN0c48,
+._3vEQfRp,
+._2trBxvL,
+._1eL7GTN,
+._2TOt0dl,
+._3qmSVIt,
+._1_nUkyU,
+._2_WihXZ,
+._2ojmSRG,
+._2OgNSLV,
+._3-Bbmhp,
+._112OfWK,
+._1g1DJL0,
+._3RcCdvw,
+._15efk9s,
+.mfwkjSB,
+._2ibAU8h,
+._3BI4WO0,
+._3ICvoBB,
+._2oY7eBs,
+._3thgM40,
+._1MGtKSw,
+._1U3x5ln,
+._1MqFTwl,
+._2fYF4lo,
+._2sDccJx,
+._11NzP02,
+._2Lwah7w,
+._4P8f6gO,
+._1tV8u3A,
+._3SiKRpv,
+._2KgtkWp,
+._3gCqJVq,
+._1RhvqbX,
+._3f95heZ,
+._1AY55lW,
+._2oTlOI9,
+._2ixMIHY,
+._2OnDc7W,
+._2g0nR3q,
+._26bhdaL,
+.fa9mJ1F,
+._2wa5brK,
+._1lm-l5H,
+._3FK76Tr,
+._2TjyCgn,
+._2v89aJ_,
+.DoPP1qq,
+._1Edrobi,
+._1yRM2wC,
+._1IhnU-p,
+._4diPrFH,
+._-7QbC7s,
+.JjROhPr,
+._3llRwqo,
+._23DwT9L,
+._33oqQo2,
+._2fO5UlH,
+._3fBDMQ0,
+._3xWreXo,
+._31AvE1E,
+.gwBaSw8,
+._1FpPa02,
+._1eMKFSn,
+._3DOO473,
+._3q6Ds3F,
+.Q3O5KmD,
+._3CmJ7Kl,
+._1v16zEs,
+.dKpIASS,
+._1WDu6Wh,
+._3sTrxT7,
+._9hFgAfn,
+._30uCamc,
+.IulIPMv,
+.AxDdU_m,
+._3RXLvKp,
+._3Djm44j,
+._1-w6rIh,
+.hmMX6s5,
+._3BH_6j9 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+._2trBxvL,
+._1eL7GTN,
+._3BI4WO0,
+._2sDccJx,
+._11NzP02,
+._2Lwah7w,
+._1AY55lW,
+._2oTlOI9,
+._1Edrobi,
+._1yRM2wC,
+._3xWreXo {
+  display: block;
+}
+._2ojmSRG {
+  line-height: 1;
+}
+._4diPrFH,
+.hmMX6s5 {
+  list-style: none;
+}
+._2_WihXZ,
+._23DwT9L {
+  quotes: none;
+}
+._2_WihXZ:after,
+._2_WihXZ:before,
+._23DwT9L:after,
+._23DwT9L:before {
+  content: "";
+}
+._1v16zEs {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.DoPP1qq {
+  background-color: transparent;
+  color: inherit;
+}
+._31AvE1E {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+._2KdyVcl {
+  font-size: 16px;
+  line-height: 24px;
+}
+._2P4j4Xu {
+  font-size: 18px;
+  line-height: 24px;
+}
+._3RlWp9j {
+  font-size: 28px;
+  line-height: 36px;
+}
+._38ykwWB {
+  font-size: 24px;
+  line-height: 32px;
+}
+._3maBeZ3 {
+  font-size: 20px;
+  line-height: 28px;
+}
+._2wKdL8A {
+  background-color: #fff;
+}
+._3RRBHx4 {
+  background-color: #ccc;
+}
+._1xJpacu {
+  background-color: #298eb9;
+}
+.aj0zAV2 {
+  background-color: #247ea4;
+}
+._35xMbHv {
+  background-color: #2e9ece;
+}
+._2Rn6wnv {
+  background-color: #ccc;
+}
+._1Ssn_Rx {
+  background-color: #0d3880;
+}
+._2WMU1cx {
+  background-color: #0b2e69;
+}
+._1ffly9T {
+  background-color: #0f4297;
+}
+._139gH0h {
+  background-color: #eef8fc;
+}
+._2DurX2A {
+  background-color: #0c4b85;
+}
+._3keyzPK {
+  background-color: #ecf5fd;
+}
+._1-0aATs {
+  background-color: #fff;
+}
+._3gga90W {
+  background-color: #eb0000;
+}
+._1NXvnkZ {
+  background-color: #fdeded;
+}
+._2UsCo-6 {
+  background-color: #498307;
+}
+._10Ffzmf {
+  background-color: #f5feec;
+}
+._2rnSOY5 {
+  border-radius: 4px;
+}
+._1Fj8BzL {
+  box-shadow: 0 0 0 2px #94c9e0;
+}
+._3zu_Vld {
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+._1yJYwS2 {
+  box-shadow: inset 0 0 0 1px #eb0000;
+}
+.W8mQw-n {
+  box-shadow: inset 0 0 0 1px #298eb9;
+}
+.riQ9Xqa {
+  box-shadow: inset 0 0 0 2px #298eb9;
+}
+._2xLQbsJ {
+  color: #333;
+}
+.zaQPByM {
+  color: #298eb9;
+}
+._1RUUphN {
+  color: #000;
+}
+.p4ktg63 {
+  color: #fff;
+}
+.uPg2Du8 {
+  color: #eb0000;
+}
+._1UGYw5a {
+  color: #d00;
+}
+.lsPqZY6 {
+  color: #498307;
+}
+._3PJnZGQ {
+  color: #488207;
+}
+._2ZuDtEj {
+  color: #666;
+}
+._3byP2sC,
+._19w9hze {
+  color: #0c4b85;
+}
+._3h9HqzX {
+  color: #298eb9;
+}
+._1f3S4Jq {
+  color: #fff;
+}
+._3KjKt7l {
+  fill: currentColor;
+}
+._1uWoufp {
+  fill: #298eb9;
+}
+._3C26doE {
+  fill: #ccc;
+}
+._395I8wQ {
+  fill: #eb0000;
+}
+._3GdhL5Y {
+  fill: #d00;
+}
+._59CJ9bY,
+._2VYu68N {
+  fill: #0c4b85;
+}
+._1BBBVYJ {
+  fill: #498307;
+}
+._1XQJCOU {
+  fill: #488207;
+}
+._3ZlEXPX {
+  fill: #333;
+}
+._3yN5K3f {
+  fill: #fff;
+}
+._2bRXftB {
+  font-family: Muli, -apple-system, system-ui, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, Arial, sans-serif;
+}
+._2JdSHB7 {
+  font-weight: 400;
+}
+._3fNYnYe {
+  font-weight: 500;
+}
+._1ShTyaP {
+  font-weight: 700;
+}
+._3Nso9bl {
+  width: 100%;
+}
+.dYyQHAP {
+  margin-top: 0;
+}
+._3USLhn4 {
+  margin-top: 4px;
+}
+._1nGI7DH {
+  margin-top: 8px;
+}
+._3C1qrq_ {
+  margin-top: 12px;
+}
+.LrTXvYB {
+  margin-top: 16px;
+}
+._1IgYOAv {
+  margin-top: 24px;
+}
+._30ka1FO {
+  margin-top: 32px;
+}
+._1fVArt4 {
+  margin-top: 64px;
+}
+._3RsT9N2 {
+  margin-right: 0;
+}
+._26zbpgM {
+  margin-right: 20px;
+}
+._3WxtFx- {
+  margin-right: 4px;
+}
+._2q9KfSK {
+  margin-right: 8px;
+}
+._3CD-M9L {
+  margin-right: 12px;
+}
+.pVZjC3G {
+  margin-right: 16px;
+}
+._2g2TaYV {
+  margin-right: 24px;
+}
+._3AODug8 {
+  margin-right: 32px;
+}
+._1-cDoD5 {
+  margin-right: 64px;
+}
+._3sHbHEC {
+  margin-bottom: 0;
+}
+._1Vhr8bN {
+  margin-bottom: 4px;
+}
+._1RJjYCS {
+  margin-bottom: 8px;
+}
+._2kq5qwZ {
+  margin-bottom: 12px;
+}
+._3Ialnhu {
+  margin-bottom: 16px;
+}
+._1k6TgWA {
+  margin-bottom: 24px;
+}
+._2DfXzJG {
+  margin-bottom: 32px;
+}
+._3JsLcnn {
+  margin-bottom: 64px;
+}
+._1S5rTEo {
+  margin-left: 0;
+}
+.VeutZB4 {
+  margin-left: 20px;
+}
+._2TlZ9_h {
+  margin-left: 4px;
+}
+.QCUMvuW {
+  margin-left: 8px;
+}
+._3e9YNKL {
+  margin-left: 12px;
+}
+._1ryJUG- {
+  margin-left: 16px;
+}
+._3TumzK8 {
+  margin-left: 24px;
+}
+._3QEfF8h {
+  margin-left: 32px;
+}
+._3L16AFD {
+  margin-left: 64px;
+}
+._1QJZw6i {
+  padding-top: 0;
+}
+.aOhYuo1 {
+  padding-top: 4px;
+}
+.kInEMKV {
+  padding-top: 8px;
+}
+._2WfEqMP {
+  padding-top: 12px;
+}
+._1Kaaemv {
+  padding-top: 16px;
+}
+.IFB229r {
+  padding-top: 24px;
+}
+._2O4twkc {
+  padding-top: 32px;
+}
+._2xGhhv7 {
+  padding-top: 64px;
+}
+._3Vaf-pP {
+  padding-right: 0;
+}
+.Rb5JLyt {
+  padding-right: 20px;
+}
+._1Gt26cQ {
+  padding-right: 4px;
+}
+.IjJahId {
+  padding-right: 8px;
+}
+._1nnWqCU {
+  padding-right: 12px;
+}
+._1nToLz6 {
+  padding-right: 16px;
+}
+._2YyX6Ru {
+  padding-right: 24px;
+}
+._2G-2KrE {
+  padding-right: 32px;
+}
+._3laDv5x {
+  padding-right: 64px;
+}
+._10z7Cr1 {
+  padding-bottom: 0;
+}
+._1Sp2n6n {
+  padding-bottom: 4px;
+}
+.x6UIMoK {
+  padding-bottom: 8px;
+}
+.k-J3cqD {
+  padding-bottom: 12px;
+}
+._1rJROPG {
+  padding-bottom: 16px;
+}
+._1gi_xMy {
+  padding-bottom: 24px;
+}
+._3-lAtOg {
+  padding-bottom: 32px;
+}
+.hmQTJrQ {
+  padding-bottom: 64px;
+}
+._1JikRty {
+  padding-left: 0;
+}
+._2p7TIjP {
+  padding-left: 20px;
+}
+._154G9Q2 {
+  padding-left: 4px;
+}
+._3lDaFwR {
+  padding-left: 8px;
+}
+._3TKllle {
+  padding-left: 12px;
+}
+._18pNHBx {
+  padding-left: 16px;
+}
+._1PjNDAG {
+  padding-left: 24px;
+}
+._3n3ziOu {
+  padding-left: 32px;
+}
+._3NPVhji {
+  padding-left: 64px;
+}
+._1r6SmW_ {
+  padding-top: 10px;
+}
+._18M8_l9 {
+  padding-bottom: 10px;
+}
+._1ZIGV5L {
+  display: block;
+}
+._2IHdWK8 {
+  display: inline;
+}
+._2SezfQj {
+  display: none;
+}
+._13TF-gd {
+  display: inline-block;
+}
+.uxjT5dy {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+._3AW0ZTT {
+  -webkit-transform: translateY(0.38em);
+  transform: translateY(0.38em);
+}
+._2E95LYX {
+  -webkit-transform: translateY(0.29666667em);
+  transform: translateY(0.29666667em);
+}
+.lIgDpYO {
+  -webkit-transform: translateY(0.27285714em);
+  transform: translateY(0.27285714em);
+}
+.wVU7-65 {
+  -webkit-transform: translateY(0.29666667em);
+  transform: translateY(0.29666667em);
+}
+._1ESa21H {
+  -webkit-transform: translateY(0.33em);
+  transform: translateY(0.33em);
+}
+._1CewyYI:active {
+  -webkit-transform: scale(0.98);
+  transform: scale(0.98);
+}
+._17Hf2cB {
+  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
+  transition: transform 0.125s ease, opacity 0.125s ease;
+  transition: transform 0.125s ease, opacity 0.125s ease,
+    -webkit-transform 0.125s ease;
+}
+._5xANec0 {
+  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
+    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+}
+._2-stvfs {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+._6rDHkg3 {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  ._2KdyVcl {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  ._2P4j4Xu {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  ._3RlWp9j {
+    font-size: 34px;
+    line-height: 44px;
+  }
+  ._38ykwWB {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  ._3maBeZ3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  ._1AREf1Y {
+    margin-top: 0;
+  }
+  ._1JLb8uM {
+    margin-top: 4px;
+  }
+  ._3Hl4Q4a {
+    margin-top: 8px;
+  }
+  ._3zBg_jC {
+    margin-top: 12px;
+  }
+  ._2YNN8Vu {
+    margin-top: 16px;
+  }
+  .hDCdZZz {
+    margin-top: 24px;
+  }
+  ._19-JgDs {
+    margin-top: 32px;
+  }
+  .ynbzl7M {
+    margin-top: 64px;
+  }
+  ._1-FZcRw {
+    margin-right: 0;
+  }
+  ._31zEERQ {
+    margin-right: 20px;
+  }
+  ._3WyUqhL {
+    margin-right: 4px;
+  }
+  ._1dLN_c0 {
+    margin-right: 8px;
+  }
+  ._2GEdmEr {
+    margin-right: 12px;
+  }
+  .v1LKmU_ {
+    margin-right: 16px;
+  }
+  ._3lgoSb5 {
+    margin-right: 24px;
+  }
+  .jAX0XbO {
+    margin-right: 32px;
+  }
+  ._1oaL8R9 {
+    margin-right: 64px;
+  }
+  ._1yRPP4e {
+    margin-bottom: 0;
+  }
+  ._3YZHV-c {
+    margin-bottom: 4px;
+  }
+  ._1L-ysjE {
+    margin-bottom: 8px;
+  }
+  ._3qucWq- {
+    margin-bottom: 12px;
+  }
+  ._2kQWlXm {
+    margin-bottom: 16px;
+  }
+  ._3JGMHbH {
+    margin-bottom: 24px;
+  }
+  ._31gp-NJ {
+    margin-bottom: 32px;
+  }
+  ._2fvodbW {
+    margin-bottom: 64px;
+  }
+  ._2kbIBDW {
+    margin-left: 0;
+  }
+  ._2bhsJpJ {
+    margin-left: 20px;
+  }
+  .TxgGSNy {
+    margin-left: 4px;
+  }
+  ._2Sl3UVg {
+    margin-left: 8px;
+  }
+  ._23m_vmA {
+    margin-left: 12px;
+  }
+  ._6KihbV0 {
+    margin-left: 16px;
+  }
+  ._2XdXfrt {
+    margin-left: 24px;
+  }
+  .UV9PLpR {
+    margin-left: 32px;
+  }
+  ._1g-UUiW {
+    margin-left: 64px;
+  }
+  ._2V9Y9Cf {
+    padding-top: 0;
+  }
+  ._39DNsM3 {
+    padding-top: 4px;
+  }
+  ._39BXxtw {
+    padding-top: 8px;
+  }
+  ._2GIzYGj {
+    padding-top: 12px;
+  }
+  ._2WHqpOd {
+    padding-top: 16px;
+  }
+  .jZtMUV3 {
+    padding-top: 24px;
+  }
+  ._3b8vwso {
+    padding-top: 32px;
+  }
+  ._1We6E9S {
+    padding-top: 64px;
+  }
+  ._12Qe6xK {
+    padding-right: 0;
+  }
+  ._2uKNNWn {
+    padding-right: 20px;
+  }
+  ._2NUTa7b {
+    padding-right: 4px;
+  }
+  ._1YdKtvz {
+    padding-right: 8px;
+  }
+  ._3CaxPWP {
+    padding-right: 12px;
+  }
+  ._3GBhicQ {
+    padding-right: 16px;
+  }
+  ._20VePGv {
+    padding-right: 24px;
+  }
+  .pXLAiDY {
+    padding-right: 32px;
+  }
+  ._3lYC4z5 {
+    padding-right: 64px;
+  }
+  ._1cuZ_nc {
+    padding-bottom: 0;
+  }
+  ._2ETsOMs {
+    padding-bottom: 4px;
+  }
+  .BVdS4tV {
+    padding-bottom: 8px;
+  }
+  ._2cwhvbk {
+    padding-bottom: 12px;
+  }
+  ._1wGlagz {
+    padding-bottom: 16px;
+  }
+  .nIPHK69 {
+    padding-bottom: 24px;
+  }
+  ._2V72gPX {
+    padding-bottom: 32px;
+  }
+  ._2Z4Xg2F {
+    padding-bottom: 64px;
+  }
+  ._1KGik-Q {
+    padding-left: 0;
+  }
+  ._3245AjT {
+    padding-left: 20px;
+  }
+  ._17pPiOD {
+    padding-left: 4px;
+  }
+  .racmE7V {
+    padding-left: 8px;
+  }
+  ._17gogPG {
+    padding-left: 12px;
+  }
+  ._37EoeG1 {
+    padding-left: 16px;
+  }
+  ._2V3NMlr {
+    padding-left: 24px;
+  }
+  ._2TFqqYg {
+    padding-left: 32px;
+  }
+  ._8hZ4Y0B {
+    padding-left: 64px;
+  }
+  .UYJgP_q {
+    padding-top: 10px;
+  }
+  ._6P24Mux {
+    padding-bottom: 10px;
+  }
+  .W7_OA-f {
+    display: block;
+  }
+  ._30keeVC {
+    display: inline;
+  }
+  ._23SPMtS {
+    display: none;
+  }
+  ._3jEKADW {
+    display: inline-block;
+  }
+  ._14jh1My {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  ._2E95LYX {
+    -webkit-transform: translateY(0.33em);
+    transform: translateY(0.33em);
+  }
+  .lIgDpYO {
+    -webkit-transform: translateY(0.27705882em);
+    transform: translateY(0.27705882em);
+  }
+  .wVU7-65 {
+    -webkit-transform: translateY(0.27285714em);
+    transform: translateY(0.27285714em);
+  }
+  ._1ESa21H {
+    -webkit-transform: translateY(0.29666667em);
+    transform: translateY(0.29666667em);
+  }
+  ._3wfvCoi {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  ._2NoQmxH {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+._2nGaB {
+  vertical-align: middle;
+  position: relative;
+  top: -0.105em;
+}
+.JKAIx {
+  height: 100%;
+}
+._3MXF5 {
+  justify-content: flex-end;
+}
+._3Md34 {
+  flex-grow: 1;
+}
+._3mgra {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+._1uz0K_2Sxou {
+  width: 16px;
+  height: 16px;
+}
+._2AzCa_2Sxou {
+  width: 18px;
+  height: 18px;
+}
+._1BKBI_2Sxou,
+._3ZnXD_2Sxou {
+  width: 24px;
+  height: 24px;
+}
+@media screen and (min-width: 768px) {
+  ._2AzCa_2Sxou {
+    width: 20px;
+    height: 20px;
+  }
+  ._3ZnXD_2Sxou {
+    width: 28px;
+    height: 28px;
+  }
+}
+.X_Pz3_2Sxou {
+  min-height: 24px;
+}
+,
+  "vendors~braid-design-system-themes-seekAsia.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-wireframe-4bb41bd1cfd8de2d6974.css": ._3IiUysg,
+._2WCNw0q,
+._3LAqmg3,
+._2AN0c48,
+._3vEQfRp,
+._2trBxvL,
+._1eL7GTN,
+._2TOt0dl,
+._3qmSVIt,
+._1_nUkyU,
+._2_WihXZ,
+._2ojmSRG,
+._2OgNSLV,
+._3-Bbmhp,
+._112OfWK,
+._1g1DJL0,
+._3RcCdvw,
+._15efk9s,
+.mfwkjSB,
+._2ibAU8h,
+._3BI4WO0,
+._3ICvoBB,
+._2oY7eBs,
+._3thgM40,
+._1MGtKSw,
+._1U3x5ln,
+._1MqFTwl,
+._2fYF4lo,
+._2sDccJx,
+._11NzP02,
+._2Lwah7w,
+._4P8f6gO,
+._1tV8u3A,
+._3SiKRpv,
+._2KgtkWp,
+._3gCqJVq,
+._1RhvqbX,
+._3f95heZ,
+._1AY55lW,
+._2oTlOI9,
+._2ixMIHY,
+._2OnDc7W,
+._2g0nR3q,
+._26bhdaL,
+.fa9mJ1F,
+._2wa5brK,
+._1lm-l5H,
+._3FK76Tr,
+._2TjyCgn,
+._2v89aJ_,
+.DoPP1qq,
+._1Edrobi,
+._1yRM2wC,
+._1IhnU-p,
+._4diPrFH,
+._-7QbC7s,
+.JjROhPr,
+._3llRwqo,
+._23DwT9L,
+._33oqQo2,
+._2fO5UlH,
+._3fBDMQ0,
+._3xWreXo,
+._31AvE1E,
+.gwBaSw8,
+._1FpPa02,
+._1eMKFSn,
+._3DOO473,
+._3q6Ds3F,
+.Q3O5KmD,
+._3CmJ7Kl,
+._1v16zEs,
+.dKpIASS,
+._1WDu6Wh,
+._3sTrxT7,
+._9hFgAfn,
+._30uCamc,
+.IulIPMv,
+.AxDdU_m,
+._3RXLvKp,
+._3Djm44j,
+._1-w6rIh,
+.hmMX6s5,
+._3BH_6j9 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+._2trBxvL,
+._1eL7GTN,
+._3BI4WO0,
+._2sDccJx,
+._11NzP02,
+._2Lwah7w,
+._1AY55lW,
+._2oTlOI9,
+._1Edrobi,
+._1yRM2wC,
+._3xWreXo {
+  display: block;
+}
+._2ojmSRG {
+  line-height: 1;
+}
+._4diPrFH,
+.hmMX6s5 {
+  list-style: none;
+}
+._2_WihXZ,
+._23DwT9L {
+  quotes: none;
+}
+._2_WihXZ:after,
+._2_WihXZ:before,
+._23DwT9L:after,
+._23DwT9L:before {
+  content: "";
+}
+._1v16zEs {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.DoPP1qq {
+  background-color: transparent;
+  color: inherit;
+}
+._31AvE1E {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.OJCocEn {
+  font-size: 16px;
+  line-height: 24px;
+}
+._37IBOu7 {
+  font-size: 18px;
+  line-height: 24px;
+}
+._3Jy4lKu {
+  font-size: 28px;
+  line-height: 36px;
+}
+._2GQgU4G,
+.ERmMVZQ {
+  font-size: 21px;
+  line-height: 30px;
+}
+._5GPasH1 {
+  background-color: #fff;
+}
+._1FGvK1F {
+  background-color: #eee;
+}
+._3FtM007,
+._1z6P5T7 {
+  background-color: #000;
+}
+._1xrPQZb {
+  background-color: #0d0d0d;
+}
+._1BHN8-y {
+  background-color: #ccc;
+}
+._2vsPgDQ {
+  background-color: #ff8c00;
+}
+._1oXSgsK {
+  background-color: #e67e00;
+}
+._2BuTkbr {
+  background-color: #ff981a;
+}
+._1O2-EbV {
+  background-color: #eee;
+}
+._1A0V7mE {
+  background-color: navy;
+}
+.V1oYI2- {
+  background-color: #ededfd;
+}
+._1tuD_x9 {
+  background-color: #fff;
+}
+._2zR1Sqy {
+  background-color: red;
+}
+._3M6va2O {
+  background-color: #fdeded;
+}
+._2IZ_Glf {
+  background-color: green;
+}
+.JsfY9xc {
+  background-color: #edfded;
+}
+._2SjWUb7 {
+  border-radius: 4px;
+}
+._1MeRz2p {
+  box-shadow: 0 0 0 2px #00bfff;
+}
+._3g93CGx {
+  box-shadow: inset 0 0 0 1px #777;
+}
+._1kQYZxS {
+  box-shadow: inset 0 0 0 1px red;
+}
+._5thcfO- {
+  box-shadow: inset 0 0 0 1px #000;
+}
+._3f4n0Hv {
+  box-shadow: inset 0 0 0 2px #000;
+}
+.WRMk-bc {
+  color: #2b2b2b;
+}
+._1pyJwVh {
+  color: #4c77bb;
+}
+.D9c4UG0 {
+  color: #2b2b2b;
+}
+._3DzNaIa {
+  color: #fff;
+}
+.Tv8aAAR {
+  color: red;
+}
+._3mFoDPJ {
+  color: #d00;
+}
+._2JSAJmY,
+._29ofwP2 {
+  color: green;
+}
+._33u7-rI {
+  color: #777;
+}
+.h4uVz3S,
+._3aNGP2P {
+  color: navy;
+}
+._1Idy8fQ {
+  color: #000;
+}
+.PBSVbxk {
+  color: #fff;
+}
+._3wTJXvK {
+  fill: currentColor;
+}
+._2mbtZNc {
+  fill: #000;
+}
+._2Vh0QyU {
+  fill: #ccc;
+}
+._3UFHR_M {
+  fill: red;
+}
+.Y0i1Au- {
+  fill: #d00;
+}
+._1nJrlvj,
+.APwhuBj {
+  fill: navy;
+}
+._3nEdGdL,
+._3CITsh3 {
+  fill: green;
+}
+._3lHkL7Y {
+  fill: #777;
+}
+._3cqZPyR {
+  fill: #fff;
+}
+._3Ac8lVu {
+  font-family: Courier, monospace;
+}
+.YZ-pgz_ {
+  font-weight: 400;
+}
+.MG7o6cf {
+  font-weight: 500;
+}
+._1542dJB {
+  font-weight: 600;
+}
+.wvwxNMe {
+  width: 100%;
+}
+._3Bm7PyF {
+  margin-top: 0;
+}
+._3T8P1PU {
+  margin-top: 6px;
+}
+._1EIV-wN {
+  margin-top: 12px;
+}
+._3W0-aeZ {
+  margin-top: 18px;
+}
+._2eK6h1z {
+  margin-top: 24px;
+}
+._233CK1k {
+  margin-top: 36px;
+}
+._3oI89Rv {
+  margin-top: 48px;
+}
+._3EScEes {
+  margin-top: 96px;
+}
+._2Rlka19 {
+  margin-right: 0;
+}
+._1WypgFs {
+  margin-right: 25px;
+}
+._1gCmQDH {
+  margin-right: 5px;
+}
+.MqMzN-J {
+  margin-right: 10px;
+}
+.rEXOq3D {
+  margin-right: 15px;
+}
+._2V7VETX {
+  margin-right: 20px;
+}
+._2VIVdp2 {
+  margin-right: 30px;
+}
+.YB2FqUx {
+  margin-right: 40px;
+}
+.z1K_kaB {
+  margin-right: 80px;
+}
+._2Psh5b1 {
+  margin-bottom: 0;
+}
+.bxanU0C {
+  margin-bottom: 6px;
+}
+._3if2Vaf {
+  margin-bottom: 12px;
+}
+._2dX55y1 {
+  margin-bottom: 18px;
+}
+.N0WVFlE {
+  margin-bottom: 24px;
+}
+.x7Mlfbp {
+  margin-bottom: 36px;
+}
+.nkygbkZ {
+  margin-bottom: 48px;
+}
+._1e7jAgI {
+  margin-bottom: 96px;
+}
+._2xx2fYp {
+  margin-left: 0;
+}
+._2m8gxFw {
+  margin-left: 25px;
+}
+._2q1JgiK {
+  margin-left: 5px;
+}
+._16c-77i {
+  margin-left: 10px;
+}
+._2XR8xk8 {
+  margin-left: 15px;
+}
+.I8KtlSw {
+  margin-left: 20px;
+}
+._3hXdz2E {
+  margin-left: 30px;
+}
+._3jNRI05 {
+  margin-left: 40px;
+}
+._3zVwnQk {
+  margin-left: 80px;
+}
+._7OpTi7y {
+  padding-top: 0;
+}
+._2mvg3iE {
+  padding-top: 6px;
+}
+.Wohvdg2 {
+  padding-top: 12px;
+}
+._8ZJ59GB {
+  padding-top: 18px;
+}
+._1X4gp1p {
+  padding-top: 24px;
+}
+._2C5aKxP {
+  padding-top: 36px;
+}
+._29mypv4 {
+  padding-top: 48px;
+}
+._2lJvBq7 {
+  padding-top: 96px;
+}
+._3Ygs2bw {
+  padding-right: 0;
+}
+._2U6RVHL {
+  padding-right: 25px;
+}
+._1ug0Nyn {
+  padding-right: 5px;
+}
+._2M3JpFo {
+  padding-right: 10px;
+}
+._2nzW4Xc {
+  padding-right: 15px;
+}
+._2_BlmX5 {
+  padding-right: 20px;
+}
+._3GIJeLo {
+  padding-right: 30px;
+}
+._1F2dZBm {
+  padding-right: 40px;
+}
+.ZvIETVJ {
+  padding-right: 80px;
+}
+.BSOZbrr {
+  padding-bottom: 0;
+}
+._3ptk1S- {
+  padding-bottom: 6px;
+}
+._35aM3Hf {
+  padding-bottom: 12px;
+}
+._1i1Y-uF {
+  padding-bottom: 18px;
+}
+._3bvvwqI {
+  padding-bottom: 24px;
+}
+._3Iz8Vio {
+  padding-bottom: 36px;
+}
+._2NXR6Sx {
+  padding-bottom: 48px;
+}
+.Y1dRyMW {
+  padding-bottom: 96px;
+}
+.mlKUcCG {
+  padding-left: 0;
+}
+._25kqQ8K {
+  padding-left: 25px;
+}
+._1OIJEMf {
+  padding-left: 5px;
+}
+.Uo4bfES {
+  padding-left: 10px;
+}
+._2XKgN9A {
+  padding-left: 15px;
+}
+.eYIhMZG {
+  padding-left: 20px;
+}
+._1WDrYjM {
+  padding-left: 30px;
+}
+._1TvjQg3 {
+  padding-left: 40px;
+}
+.qq7r77x {
+  padding-left: 80px;
+}
+._3ZJGQE0 {
+  padding-top: 12px;
+}
+._3-ECa3V {
+  padding-bottom: 12px;
+}
+._1BlPR45 {
+  display: block;
+}
+.D3cJoOX {
+  display: inline;
+}
+._1NOzdKS {
+  display: none;
+}
+._3E9uGaC {
+  display: inline-block;
+}
+._1FE3btw {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+._1dp-zJC {
+  -webkit-transform: translateY(0.41em);
+  transform: translateY(0.41em);
+}
+._3TURffX {
+  -webkit-transform: translateY(0.32666667em);
+  transform: translateY(0.32666667em);
+}
+._3bTkQrF {
+  -webkit-transform: translateY(0.30285714em);
+  transform: translateY(0.30285714em);
+}
+._1CQMg38,
+._2LkgLd3 {
+  -webkit-transform: translateY(0.37428571em);
+  transform: translateY(0.37428571em);
+}
+.gh2c_LS:active {
+  -webkit-transform: scale(0.97);
+  transform: scale(0.97);
+}
+._7dWNZav {
+  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
+  transition: transform 0.125s ease, opacity 0.125s ease;
+  transition: transform 0.125s ease, opacity 0.125s ease,
+    -webkit-transform 0.125s ease;
+}
+.eZc0hZA {
+  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
+    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+}
+._1Jpet3r {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+._3_XNoFQ {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .OJCocEn {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  ._37IBOu7 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  ._3Jy4lKu {
+    font-size: 42px;
+    line-height: 48px;
+  }
+  ._2GQgU4G {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  .ERmMVZQ {
+    font-size: 21px;
+    line-height: 30px;
+  }
+  ._2lcX9Qr {
+    margin-top: 0;
+  }
+  .j--whgk {
+    margin-top: 6px;
+  }
+  ._1aYRuyC {
+    margin-top: 12px;
+  }
+  .piWVcRt {
+    margin-top: 18px;
+  }
+  ._2P4Ebc4 {
+    margin-top: 24px;
+  }
+  ._1x1P1py {
+    margin-top: 36px;
+  }
+  .si5sgbv {
+    margin-top: 48px;
+  }
+  .hAhvtZG {
+    margin-top: 96px;
+  }
+  ._3cAUGgs {
+    margin-right: 0;
+  }
+  ._10rw5Fr {
+    margin-right: 25px;
+  }
+  ._8mhuES {
+    margin-right: 5px;
+  }
+  ._3fzAmOK {
+    margin-right: 10px;
+  }
+  ._2qILcbg {
+    margin-right: 15px;
+  }
+  .kvyKA9w {
+    margin-right: 20px;
+  }
+  .Q0_WeJ7 {
+    margin-right: 30px;
+  }
+  ._1zzA-lK {
+    margin-right: 40px;
+  }
+  ._2ms-uqh {
+    margin-right: 80px;
+  }
+  .PRZnsxF {
+    margin-bottom: 0;
+  }
+  ._3bYOl06 {
+    margin-bottom: 6px;
+  }
+  ._20ggNBo {
+    margin-bottom: 12px;
+  }
+  ._2JWyApX {
+    margin-bottom: 18px;
+  }
+  ._1ka68_W {
+    margin-bottom: 24px;
+  }
+  ._8KokiKI {
+    margin-bottom: 36px;
+  }
+  ._38wu3AW {
+    margin-bottom: 48px;
+  }
+  .HpPtKw2 {
+    margin-bottom: 96px;
+  }
+  .vshecU0 {
+    margin-left: 0;
+  }
+  .E0NTN7x {
+    margin-left: 25px;
+  }
+  ._2CHae1h {
+    margin-left: 5px;
+  }
+  ._33XJlge {
+    margin-left: 10px;
+  }
+  .RhT5fUK {
+    margin-left: 15px;
+  }
+  .XOEUCTZ {
+    margin-left: 20px;
+  }
+  ._1lRllUO {
+    margin-left: 30px;
+  }
+  ._2N5RtC- {
+    margin-left: 40px;
+  }
+  .LRQlkG8 {
+    margin-left: 80px;
+  }
+  ._1fG7GYJ {
+    padding-top: 0;
+  }
+  ._2azJ0Lm {
+    padding-top: 6px;
+  }
+  ._39h2ciP {
+    padding-top: 12px;
+  }
+  ._1KPkDdq {
+    padding-top: 18px;
+  }
+  .eQOHLnD {
+    padding-top: 24px;
+  }
+  ._3G_KtdD {
+    padding-top: 36px;
+  }
+  ._1fooi4O {
+    padding-top: 48px;
+  }
+  ._2xFrFQn {
+    padding-top: 96px;
+  }
+  ._1Q-3Rj4 {
+    padding-right: 0;
+  }
+  ._2DTp9K3 {
+    padding-right: 25px;
+  }
+  .AlFsEmo {
+    padding-right: 5px;
+  }
+  ._2UEj9bw {
+    padding-right: 10px;
+  }
+  ._1VsV0yY {
+    padding-right: 15px;
+  }
+  .BYi0BBU {
+    padding-right: 20px;
+  }
+  ._3-vVbHL {
+    padding-right: 30px;
+  }
+  ._3VWuvrC {
+    padding-right: 40px;
+  }
+  ._1haTRNq {
+    padding-right: 80px;
+  }
+  ._33vcIl2 {
+    padding-bottom: 0;
+  }
+  ._1bOFZc_ {
+    padding-bottom: 6px;
+  }
+  ._2wnSv8P {
+    padding-bottom: 12px;
+  }
+  ._31gdHaF {
+    padding-bottom: 18px;
+  }
+  .o95ThJD {
+    padding-bottom: 24px;
+  }
+  ._34xMojk {
+    padding-bottom: 36px;
+  }
+  .jJOweyW {
+    padding-bottom: 48px;
+  }
+  ._35AfIRP {
+    padding-bottom: 96px;
+  }
+  ._1mdfQ2w {
+    padding-left: 0;
+  }
+  ._3Y9pGqB {
+    padding-left: 25px;
+  }
+  ._3u72CRB {
+    padding-left: 5px;
+  }
+  ._2CEAZHx {
+    padding-left: 10px;
+  }
+  ._8NgdA2 {
+    padding-left: 15px;
+  }
+  ._2Mx_RCE {
+    padding-left: 20px;
+  }
+  ._38pOkil {
+    padding-left: 30px;
+  }
+  .C9FHazx {
+    padding-left: 40px;
+  }
+  ._1YQ11NY {
+    padding-left: 80px;
+  }
+  ._3Va17pW {
+    padding-top: 12px;
+  }
+  .w4EwB-n {
+    padding-bottom: 12px;
+  }
+  ._3UJVs0C {
+    display: block;
+  }
+  .-QRkmIm {
+    display: inline;
+  }
+  .Vy362h0 {
+    display: none;
+  }
+  ._2MophnC {
+    display: inline-block;
+  }
+  ._1YI8hbu {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  ._3bTkQrF {
+    -webkit-transform: translateY(0.23142857em);
+    transform: translateY(0.23142857em);
+  }
+  ._1CQMg38 {
+    -webkit-transform: translateY(0.30285714em);
+    transform: translateY(0.30285714em);
+  }
+  ._36Jr6Zx {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  ._2zRf4iS {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+._2nGaB {
+  vertical-align: middle;
+  position: relative;
+  top: -0.105em;
+}
+.JKAIx {
+  height: 100%;
+}
+._3MXF5 {
+  justify-content: flex-end;
+}
+._3Md34 {
+  flex-grow: 1;
+}
+._3mgra {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+._1uz0K_3eXzq {
+  width: 16px;
+  height: 16px;
+}
+._2AzCa_3eXzq {
+  width: 18px;
+  height: 18px;
+}
+._1BKBI_3eXzq,
+._3ZnXD_3eXzq {
+  width: 24px;
+  height: 24px;
+}
+.X_Pz3_3eXzq {
+  min-height: 24px;
+}
+,
+  "vendors~braid-design-system-themes-wireframe-d5e803083a312b5da96c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-086f764b6b3607b25afb.css": ._1oQSh2m {
+  opacity: 0;
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+._2TOJ8vh {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+._1oQSh2m:not(:disabled) ~ ._1WIkhn_ ._2TOJ8vh {
+  cursor: pointer;
+}
+.EKNisOw {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  padding: 4px;
+}
+._2QFvL6i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+._10597UX {
+  opacity: 0;
+  z-index: 1;
+}
+._1oQSh2m:not(:disabled) ~ ._1WIkhn_ ._2TOJ8vh:hover > * > ._10597UX {
+  opacity: 1;
+}
+._2rGV2RP {
+  opacity: 0;
+  z-index: 1;
+}
+._1oQSh2m:focus ~ ._1WIkhn_ > * > * > ._2rGV2RP {
+  opacity: 1;
+}
+._3ddpN8u {
+  opacity: 0;
+  z-index: 2;
+}
+._2sqCI5f {
+  opacity: 0;
+  z-index: 3;
+}
+._1oQSh2m:checked ~ ._1WIkhn_ > * > * > ._2sqCI5f {
+  opacity: 1;
+}
+.U61AQmG {
+  z-index: 4;
+}
+._1oQSh2m:disabled ~ ._1WIkhn_ > * > * > ._3ddpN8u {
+  opacity: 1;
+}
+._2EVIIjs {
+  opacity: 0;
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+  position: relative;
+  z-index: 5;
+  height: 100%;
+}
+._1oQSh2m:checked ~ ._1WIkhn_ > * > * > ._2EVIIjs {
+  -webkit-transform: none;
+  transform: none;
+  opacity: 1;
+}
+.nk3q2_7 {
+  display: none;
+}
+._1oQSh2m:checked ~ ._1WIkhn_ > .nk3q2_7 {
+  display: block;
+}
+._3lc311G {
+  display: block;
+}
+._1CaVPtc {
+  display: list-item;
+  list-style: disc;
+  margin-left: 1.3em;
+}
+.HaEqn2s {
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.okvXM2a {
+  display: inline-block;
+}
+._2yIW-TJ {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+._1dJkO5J {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+._1nip7oL {
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+,
+  "vendors~main-d25c37b8e569ef00baed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

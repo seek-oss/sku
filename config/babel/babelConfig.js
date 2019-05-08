@@ -1,5 +1,6 @@
 const { supportedBrowsers, displayNamesProd } = require('../../context');
 const { cwd } = require('../../lib/cwd');
+const aliases = require('../../lib/aliases');
 
 const browserEnvOptions = {
   modules: false,
@@ -27,6 +28,7 @@ module.exports = ({ target, lang = 'js' }) => {
       {
         root: [cwd()],
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+        alias: aliases.babel,
       },
     ],
     require.resolve('@babel/plugin-transform-runtime'),

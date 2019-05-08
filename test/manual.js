@@ -61,6 +61,7 @@ const runScriptForTestCase = (script, testCase) => {
         'build-ssr',
         'storybook',
         'build-storybook',
+        'configure',
       ],
     },
   ]);

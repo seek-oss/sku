@@ -31,12 +31,12 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-a28029fb62944d5c358c.js"
+          href="/vendors~main-435c2c756fd077c0c000.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-0846ed506829104b34e2.js"
+          href="/main-2f6137cf2b369554df08.js"
     >
   </head>
   <body>
@@ -72,18 +72,18 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-a28029fb62944d5c358c.js"
+            src="/vendors~main-435c2c756fd077c0c000.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-0846ed506829104b34e2.js"
+            src="/main-2f6137cf2b369554df08.js"
     >
     </script>
   </body>
 </html>
 ,
-  "main-0846ed506829104b34e2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2f6137cf2b369554df08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-41483bfc193e35fcb21d.css": a,
 abbr,
@@ -612,6 +612,6 @@ html {
   font-weight: 400;
 }
 ,
-  "vendors~main-a28029fb62944d5c358c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-435c2c756fd077c0c000.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

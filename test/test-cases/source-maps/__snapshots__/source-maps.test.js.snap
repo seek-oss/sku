@@ -28,7 +28,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4005/main-cf578c67e56de99b1bf3.js"
+          href="http://localhost:4005/main-5b1246e125d6ff08ff62.js"
           crossorigin="anonymous"
     >
   </head>
@@ -58,15 +58,15 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4005/main-cf578c67e56de99b1bf3.js"
+            src="http://localhost:4005/main-5b1246e125d6ff08ff62.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
 ,
-  "main-cf578c67e56de99b1bf3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-cf578c67e56de99b1bf3.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-5b1246e125d6ff08ff62.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-5b1246e125d6ff08ff62.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-a7b1b490a79ce99bfdfc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-a7b1b490a79ce99bfdfc.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-5447f44788c4d4e75b92.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

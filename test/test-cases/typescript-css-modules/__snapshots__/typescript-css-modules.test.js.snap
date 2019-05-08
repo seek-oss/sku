@@ -31,7 +31,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-4e64aee0f8baf6d2cf10.js"
+          href="http://localhost:4003/main-dde3ea3a3ee25814298a.js"
           crossorigin="anonymous"
     >
   </head>
@@ -65,7 +65,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-4e64aee0f8baf6d2cf10.js"
+            src="http://localhost:4003/main-dde3ea3a3ee25814298a.js"
             crossorigin="anonymous"
     >
     </script>
@@ -107,7 +107,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-4e64aee0f8baf6d2cf10.js"
+          href="http://localhost:4003/main-dde3ea3a3ee25814298a.js"
           crossorigin="anonymous"
     >
   </head>
@@ -141,7 +141,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-4e64aee0f8baf6d2cf10.js"
+            src="http://localhost:4003/main-dde3ea3a3ee25814298a.js"
             crossorigin="anonymous"
     >
     </script>
@@ -158,7 +158,6 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-4e64aee0f8baf6d2cf10.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -176,6 +175,7 @@ export const root: string;
   color: red;
 }
 ,
+  "main-dde3ea3a3ee25814298a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-495269527ee48e41bef3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-ca41a4b75c3b7b9ec158.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

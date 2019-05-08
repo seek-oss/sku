@@ -36,7 +36,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-2f6137cf2b369554df08.js"
+          href="/main-8448d5cacbffaa888016.js"
     >
   </head>
   <body>
@@ -77,13 +77,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/main-2f6137cf2b369554df08.js"
+            src="/main-8448d5cacbffaa888016.js"
     >
     </script>
   </body>
 </html>
 ,
-  "main-2f6137cf2b369554df08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8448d5cacbffaa888016.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-41483bfc193e35fcb21d.css": a,
 abbr,

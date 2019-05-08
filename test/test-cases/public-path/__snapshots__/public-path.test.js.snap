@@ -29,7 +29,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/main-913ce98c2511f1e07767.js"
+          href="/static/main-8201bae68961fb854eef.js"
     >
   </head>
   <body>
@@ -54,7 +54,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="/static/main-913ce98c2511f1e07767.js"
+            src="/static/main-8201bae68961fb854eef.js"
     >
     </script>
   </body>

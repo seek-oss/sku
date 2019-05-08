@@ -31,7 +31,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-32b4b039ae9fb6fc23cd.js"
+          href="http://localhost:4000/main-5b74798e7e741898314c.js"
           crossorigin="anonymous"
     >
   </head>
@@ -63,7 +63,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-32b4b039ae9fb6fc23cd.js"
+            src="http://localhost:4000/main-5b74798e7e741898314c.js"
             crossorigin="anonymous"
     >
     </script>
@@ -104,7 +104,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-32b4b039ae9fb6fc23cd.js"
+          href="http://localhost:4000/main-5b74798e7e741898314c.js"
           crossorigin="anonymous"
     >
   </head>
@@ -136,7 +136,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-32b4b039ae9fb6fc23cd.js"
+            src="http://localhost:4000/main-5b74798e7e741898314c.js"
             crossorigin="anonymous"
     >
     </script>

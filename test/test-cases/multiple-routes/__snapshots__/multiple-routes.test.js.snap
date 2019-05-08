@@ -25,13 +25,13 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          href="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          href="http://localhost:4004/main-93652706d978d7d0f0de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="handlers-Home"
@@ -65,13 +65,13 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            src="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            src="http://localhost:4004/main-93652706d978d7d0f0de.js"
             crossorigin="anonymous"
     >
     </script>
@@ -103,7 +103,7 @@ Object {
 ,
   "handlers-Home-7c924ffe515bf8491cca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-15143f94aaccd9e0a333.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-93652706d978d7d0f0de.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": 
 <!DOCTYPE html>
 <html>
@@ -128,13 +128,13 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          href="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          href="http://localhost:4004/main-93652706d978d7d0f0de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="handlers-Details"
@@ -177,13 +177,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            src="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            src="http://localhost:4004/main-93652706d978d7d0f0de.js"
             crossorigin="anonymous"
     >
     </script>
@@ -226,13 +226,13 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          href="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          href="http://localhost:4004/main-93652706d978d7d0f0de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="handlers-Home"
@@ -266,13 +266,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            src="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            src="http://localhost:4004/main-93652706d978d7d0f0de.js"
             crossorigin="anonymous"
     >
     </script>
@@ -309,13 +309,13 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          href="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          href="http://localhost:4004/main-93652706d978d7d0f0de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="handlers-Details"
@@ -358,13 +358,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            src="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            src="http://localhost:4004/main-93652706d978d7d0f0de.js"
             crossorigin="anonymous"
     >
     </script>
@@ -407,13 +407,13 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+          href="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+          href="http://localhost:4004/main-93652706d978d7d0f0de.js"
           crossorigin="anonymous"
     >
     <link data-chunk="handlers-Home"
@@ -447,13 +447,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/vendors~main-f75ee26fa85c375cb2cf.js"
+            src="http://localhost:4004/vendors~main-96921caaa9d726f7d3d7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/main-15143f94aaccd9e0a333.js"
+            src="http://localhost:4004/main-93652706d978d7d0f0de.js"
             crossorigin="anonymous"
     >
     </script>
@@ -467,7 +467,7 @@ Object {
 </html>
 ,
   "runtime-6a4c32a614983c5dc925.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-f75ee26fa85c375cb2cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-96921caaa9d726f7d3d7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -14447,10 +14447,10 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-alpha.16:
-  version "1.0.0-alpha.16"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-alpha.16.tgz#a69b712c396e3832b6ac05e6d0d0c205ee308954"
-  integrity sha512-ki1ucJac2e1GnhwbUNcyiPYhXPSheqnEOqUwXTrTMgDRyg0UY4w2eiaPB/9UhNP9TDYWeT9oGddsKAY/EdCLOA==
+treat@1.0.0-alpha.17:
+  version "1.0.0-alpha.17"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-alpha.17.tgz#50fe5d206e3075af004ad62940524e86c9e78687"
+  integrity sha512-IeHorMz6Q9XPAxlIRN2GzYvbMysaRLXXaT60hay5SVnTdCyxsqbYDlZu9tmc1lyMbL4muLEVUSjutZmY67gaBQ==
   dependencies:
     "@types/lodash" "^4.14.123"
     autoprefixer "^9.5.0"

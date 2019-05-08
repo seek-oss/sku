@@ -33,8 +33,14 @@
       "npm run check",
       "git add package.json yarn.lock"
     ],
-    "**/*.js": ["eslint --fix", "git add"],
-    "**/*.{js,ts,tsx,md,less,css}": ["prettier --write", "git add"]
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "**/*.{js,ts,tsx,md,less,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "config": {
     "commitizen": {
@@ -48,7 +54,10 @@
     "type": "git",
     "url": "https://github.com/seek-oss/sku.git"
   },
-  "keywords": ["toolkit", "webpack"],
+  "keywords": [
+    "toolkit",
+    "webpack"
+  ],
   "author": "SEEK",
   "license": "MIT",
   "bugs": {
@@ -144,7 +153,7 @@
     "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "traverse": "^0.6.6",
-    "treat": "1.0.0-alpha.16",
+    "treat": "1.0.0-alpha.17",
     "tree-kill": "^1.2.1",
     "tslint": "^5.11.0",
     "tslint-config-seek": "^1.0.0",

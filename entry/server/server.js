@@ -18,6 +18,12 @@ if (env === 'development') {
   app.use(express.static(path.join(__dirname, './')));
 }
 
+if (env !== 'development') {
+  // Disable x-powered-by header according to Express Best Practice
+  // https://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
+  app.disable('x-powered-by');
+}
+
 if (middleware) {
   app.use(middleware);
 }

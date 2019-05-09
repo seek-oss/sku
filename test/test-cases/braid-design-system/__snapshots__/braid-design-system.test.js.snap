@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`braid-design-system should generate the expected files 1`] = `
+exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
   "externals.json": "[
   \\"fs\\",

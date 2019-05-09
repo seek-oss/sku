@@ -3,10 +3,14 @@ const { promisify } = require('util');
 const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
+const { getAppSnapshot } = require('../../utils/appSnapshot');
+const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
+const startAssetServer = require('../../utils/assetServer');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const { getPathFromCwd } = require('../../../lib/cwd');
+const skuConfig = require('./app/sku.config');
 
 async function createPackageLink(name) {
   await fs.mkdirp(`${__dirname}/app/node_modules`);
@@ -28,7 +32,7 @@ async function createPackageCopy(name) {
   await fs.copy(srcPath, destPath);
 }
 
-async function copyLocalDependencies() {
+async function setUpLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
   await rimrafAsync(nodeModules);
   await Promise.all(['react', 'react-dom'].map(createPackageLink));
@@ -43,13 +47,49 @@ describe('braid-design-system', () => {
   beforeAll(async () => {
     // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.
-    await copyLocalDependencies();
-    await runSkuScriptInDir('build', appDir);
+    await setUpLocalDependencies();
   });
 
-  it('should generate the expected files', async () => {
-    const files = await dirContentsToObject(distDir);
-    expect(files).toMatchSnapshot();
+  describe('start', () => {
+    const devServerUrl = `http://localhost:${skuConfig.port}`;
+    let server;
+
+    beforeAll(async () => {
+      server = await runSkuScriptInDir('start', appDir);
+      await waitForUrls(devServerUrl);
+    });
+
+    afterAll(() => {
+      server.kill();
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot(devServerUrl);
+      expect(snapshot).toMatchSnapshot();
+    });
+  });
+
+  describe('build', () => {
+    let closeAssetServer;
+
+    beforeAll(async () => {
+      await runSkuScriptInDir('build', appDir);
+      closeAssetServer = await startAssetServer(4005, distDir);
+    });
+
+    afterAll(() => {
+      closeAssetServer();
+    });
+
+    it('should generate the expected files', async () => {
+      const files = await dirContentsToObject(distDir);
+      expect(files).toMatchSnapshot();
+    });
+
+    it('should create valid app', async () => {
+      const app = await getAppSnapshot('http://localhost:4005');
+      expect(app).toMatchSnapshot();
+    });
   });
 
   it('should handle braid-design-system in tests', async () => {

@@ -31,5 +31,6 @@ module.exports = ({ target, isProductionBuild }) => {
     outputLoaders: [MiniCssExtractPlugin.loader],
     localIdentName,
     themeIdentName,
+    babelPlugin: false,
   });
 };

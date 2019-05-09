@@ -6,21 +6,27 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
-const { cwd } = require('../../../lib/cwd');
+const { getPathFromCwd } = require('../../../lib/cwd');
 
-function createPackageLink(name) {
-  return fs.symlink(
-    `${cwd()}/node_modules/${name}`,
-    `${__dirname}/app/node_modules/${name}`,
+async function createLocalPackageCopy(name) {
+  const srcPath = getPathFromCwd(
+    /^sku\//.test(name)
+      ? `${name.replace('sku/', '')}`
+      : `node_modules/${name}`,
   );
+  const destPath = `${__dirname}/app/node_modules/${name}`;
+
+  await fs.mkdirp(destPath);
+  await fs.copy(srcPath, destPath);
 }
 
 async function linkLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
   await rimrafAsync(nodeModules);
-  await fs.mkdir(nodeModules);
   await Promise.all(
-    ['react', 'react-dom', 'braid-design-system'].map(createPackageLink),
+    ['react', 'react-dom', 'braid-design-system', 'sku/treat'].map(
+      createLocalPackageCopy,
+    ),
   );
 }
 

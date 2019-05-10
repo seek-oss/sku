@@ -11,6 +11,7 @@ const srcDir = path.resolve(appDir, 'src');
 const skuConfig = require('./app/sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
+const cssTypes = ['.less.d.ts', '.css.js.d.ts'];
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
@@ -32,10 +33,10 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      const srcFiles = await dirContentsToObject(srcDir, ['.d.ts']);
+      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
       expect({
         ...files,
-        ...srcFiles,
+        ...cssTypeFiles,
       }).toMatchSnapshot();
     });
   });
@@ -65,13 +66,10 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir, ['.js', '.css']);
-      const srcFiles = await dirContentsToObject(srcDir, [
-        '.less.d.ts',
-        '.css.js.d.ts',
-      ]);
+      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
       expect({
         ...files,
-        ...srcFiles,
+        ...cssTypeFiles,
       }).toMatchSnapshot();
     });
   });

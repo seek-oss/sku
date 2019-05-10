@@ -77,10 +77,6 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`typescript-css-modules build should generate the expected files 1`] = `
 Object {
-  "globalTypes.d.ts": "declare module 'foo' {
-  export default () => 'bar';
-}
-",
   "index.html": 
 <!DOCTYPE html>
 <html>

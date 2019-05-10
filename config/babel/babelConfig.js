@@ -32,7 +32,12 @@ module.exports = ({ target, lang = 'js' }) => {
     require.resolve('@babel/plugin-transform-runtime'),
     require.resolve('babel-plugin-macros'),
     require.resolve('@loadable/babel-plugin'),
-    require.resolve('treat/babel-plugin'),
+    [
+      require.resolve('treat/babel-plugin'),
+      {
+        alias: 'sku/treat',
+      },
+    ],
   ];
 
   if (isBrowser) {

@@ -6,7 +6,6 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const startAssetServer = require('../../utils/assetServer');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const { getPathFromCwd } = require('../../../lib/cwd');
@@ -70,25 +69,13 @@ describe('braid-design-system', () => {
   });
 
   describe('build', () => {
-    let closeAssetServer;
-
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      closeAssetServer = await startAssetServer(4005, distDir);
-    });
-
-    afterAll(() => {
-      closeAssetServer();
     });
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
-    });
-
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4005');
-      expect(app).toMatchSnapshot();
     });
   });
 

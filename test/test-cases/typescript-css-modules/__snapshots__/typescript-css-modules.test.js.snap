@@ -31,7 +31,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-ab734aede090bf2cdd2e.js"
+          href="http://localhost:4003/main-3c30aebc3167e93dbace.js"
           crossorigin="anonymous"
     >
   </head>
@@ -65,7 +65,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-ab734aede090bf2cdd2e.js"
+            src="http://localhost:4003/main-3c30aebc3167e93dbace.js"
             crossorigin="anonymous"
     >
     </script>
@@ -107,7 +107,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-ab734aede090bf2cdd2e.js"
+          href="http://localhost:4003/main-3c30aebc3167e93dbace.js"
           crossorigin="anonymous"
     >
   </head>
@@ -141,7 +141,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-ab734aede090bf2cdd2e.js"
+            src="http://localhost:4003/main-3c30aebc3167e93dbace.js"
             crossorigin="anonymous"
     >
     </script>
@@ -158,7 +158,7 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-ab734aede090bf2cdd2e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-3c30aebc3167e93dbace.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -212,7 +212,7 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-54be680c32789b245404.js"
+          href="http://localhost:4003/main-c49e1d1588eb861254f6.js"
           crossorigin="anonymous"
     >
   </head>
@@ -246,7 +246,7 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-54be680c32789b245404.js"
+            src="http://localhost:4003/main-c49e1d1588eb861254f6.js"
             crossorigin="anonymous"
     >
     </script>
@@ -268,7 +268,6 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-54be680c32789b245404.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -286,6 +285,7 @@ export const root: string;
   color: red;
 }
 ,
+  "main-c49e1d1588eb861254f6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-495269527ee48e41bef3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-a4248f7c854054c1a25c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

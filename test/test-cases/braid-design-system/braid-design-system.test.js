@@ -3,24 +3,42 @@ const { promisify } = require('util');
 const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
+const { getAppSnapshot } = require('../../utils/appSnapshot');
+const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
-const { cwd } = require('../../../lib/cwd');
+const { getPathFromCwd } = require('../../../lib/cwd');
+const skuConfig = require('./app/sku.config');
 
-function createPackageLink(name) {
-  return fs.symlink(
-    `${cwd()}/node_modules/${name}`,
+async function createPackageLink(name) {
+  await fs.mkdirp(`${__dirname}/app/node_modules`);
+  await fs.symlink(
+    getPathFromCwd(`node_modules/${name}`),
     `${__dirname}/app/node_modules/${name}`,
   );
 }
 
-async function linkLocalDependencies() {
+async function createPackageCopy(name) {
+  const srcPath = getPathFromCwd(
+    /^sku\//.test(name)
+      ? `${name.replace('sku/', '')}`
+      : `node_modules/${name}`,
+  );
+  const destPath = `${__dirname}/app/node_modules/${name}`;
+
+  await fs.mkdirp(destPath);
+  await fs.copy(srcPath, destPath);
+}
+
+async function setUpLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
   await rimrafAsync(nodeModules);
-  await fs.mkdir(nodeModules);
+  await Promise.all(['react', 'react-dom'].map(createPackageLink));
   await Promise.all(
-    ['react', 'react-dom', 'braid-design-system'].map(createPackageLink),
+    ['braid-design-system', 'sku/treat', 'sku/@loadable/component'].map(
+      createPackageCopy,
+    ),
   );
 }
 
@@ -28,13 +46,37 @@ describe('braid-design-system', () => {
   beforeAll(async () => {
     // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.
-    await linkLocalDependencies();
-    await runSkuScriptInDir('build', appDir);
+    await setUpLocalDependencies();
   });
 
-  it('should generate the expected files', async () => {
-    const files = await dirContentsToObject(distDir);
-    expect(files).toMatchSnapshot();
+  describe('start', () => {
+    const devServerUrl = `http://localhost:${skuConfig.port}`;
+    let server;
+
+    beforeAll(async () => {
+      server = await runSkuScriptInDir('start', appDir);
+      await waitForUrls(devServerUrl);
+    });
+
+    afterAll(() => {
+      server.kill();
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot(devServerUrl);
+      expect(snapshot).toMatchSnapshot();
+    });
+  });
+
+  describe('build', () => {
+    beforeAll(async () => {
+      await runSkuScriptInDir('build', appDir);
+    });
+
+    it('should generate the expected files', async () => {
+      const files = await dirContentsToObject(distDir);
+      expect(files).toMatchSnapshot();
+    });
   });
 
   it('should handle braid-design-system in tests', async () => {

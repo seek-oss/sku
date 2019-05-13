@@ -59,6 +59,8 @@ const runScriptForTestCase = (script, testCase) => {
         'start-ssr',
         'build',
         'build-ssr',
+        'test',
+        'configure',
         'storybook',
         'build-storybook',
       ],

@@ -1,4 +1,4 @@
-const TreatPlugin = require('treat/plugin');
+const TreatPlugin = require('treat/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
@@ -31,6 +31,5 @@ module.exports = ({ target, isProductionBuild }) => {
     outputLoaders: [MiniCssExtractPlugin.loader],
     localIdentName,
     themeIdentName,
-    babelPlugin: false,
   });
 };

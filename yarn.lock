@@ -29,7 +29,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.1.2", "@babel/core@^7.4.3", "@babel/core@^7.4.4":
+"@babel/core@^7.1.0", "@babel/core@^7.1.2", "@babel/core@^7.4.3":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.4.4.tgz#84055750b05fcd50f9915a826b44fa347a825250"
   integrity sha512-lQgGX3FPRgbz2SKmhMtYgJvVzGZrmjaF4apZ2bLwofAKiSjxU0drPh4S/VasyYXwaTs+A1gvQ45BN8SQJzHsQQ==
@@ -2922,7 +2922,7 @@ babel-loader@8.0.4:
     mkdirp "^0.5.1"
     util.promisify "^1.0.0"
 
-babel-loader@^8.0.4, babel-loader@^8.0.5:
+babel-loader@^8.0.4:
   version "8.0.6"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.6.tgz#e33bdb6f362b03f4bb141a0c21ab87c501b70dfb"
   integrity sha512-4BmWKtBOBm13uoUwd08UwjZlaw3O9GWf456R9j+5YykFZ6LUIjIKLc0zEZf+hauxPOJs96C8k6FvYD09vWzhYw==
@@ -3165,6 +3165,11 @@ babel-plugin-transform-undefined-to-void@^6.9.4:
   version "6.9.4"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.9.4.tgz#be241ca81404030678b748717322b89d0c8fe280"
   integrity sha1-viQcqBQEAwZ4t0hxcyK4nQyP4oA=
+
+babel-plugin-treat@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.2.tgz#3f1204ac207506a31b1c82a53a067b93135a7722"
+  integrity sha512-0zK9SldwoeuL5G4xGDpoJgZSkzgnpfl36a4SfwkL2neYgdXvzi+Z9axccJ1kp9I6RQ5ZVNUJ6JQs3NkBxVdQjw==
 
 babel-polyfill@6.26.0:
   version "6.26.0"
@@ -10490,7 +10495,6 @@ npm@^6.8.0:
     cmd-shim "~2.0.2"
     columnify "~1.5.4"
     config-chain "^1.1.12"
-    debuglog "*"
     detect-indent "~5.0.0"
     detect-newline "^2.1.0"
     dezalgo "~1.0.3"
@@ -10505,7 +10509,6 @@ npm@^6.8.0:
     has-unicode "~2.0.1"
     hosted-git-info "^2.7.1"
     iferr "^1.0.2"
-    imurmurhash "*"
     inflight "~1.0.6"
     inherits "~2.0.3"
     ini "^1.3.5"
@@ -10515,22 +10518,12 @@ npm@^6.8.0:
     lazy-property "~1.0.0"
     libcipm "^3.0.3"
     libnpm "^2.0.1"
-    libnpmaccess "*"
     libnpmhook "^5.0.2"
-    libnpmorg "*"
-    libnpmsearch "*"
-    libnpmteam "*"
     libnpx "^10.2.0"
     lock-verify "^2.1.0"
     lockfile "^1.0.4"
-    lodash._baseindexof "*"
     lodash._baseuniq "~4.6.0"
-    lodash._bindcallback "*"
-    lodash._cacheindexof "*"
-    lodash._createcache "*"
-    lodash._getnative "*"
     lodash.clonedeep "~4.5.0"
-    lodash.restparam "*"
     lodash.union "~4.6.0"
     lodash.uniq "~4.5.0"
     lodash.without "~4.4.0"
@@ -10549,7 +10542,6 @@ npm@^6.8.0:
     npm-package-arg "^6.1.0"
     npm-packlist "^1.4.1"
     npm-pick-manifest "^2.2.3"
-    npm-profile "*"
     npm-registry-fetch "^3.9.0"
     npm-user-validate "~1.0.0"
     npmlog "~4.1.2"
@@ -10568,7 +10560,6 @@ npm@^6.8.0:
     read-package-json "^2.0.13"
     read-package-tree "^5.2.2"
     readable-stream "^3.1.1"
-    readdir-scoped-modules "*"
     request "^2.88.0"
     retry "^0.12.0"
     rimraf "^2.6.3"
@@ -12377,6 +12368,11 @@ react-transition-group@^2.0.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react-treat@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.5.tgz#e85e83423f5e58a0927def9831185be97da86117"
+  integrity sha512-NjKz/6fl9sw7/5hTvVC8hcHAH7qSvX05Fa21KtGGiLocU+lBvVFsIBHWFtXz9+Bga9RInHyQkKwlWQ1O3dE19w==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -14532,15 +14528,13 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-alpha.18:
-  version "1.0.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-alpha.18.tgz#88242cb1e0883fa5de65453ac7a2cccc1061b454"
-  integrity sha512-jIQSxJIM1AhTs+jzVId8f65U5MjhnpzoFPImUs2fRIZvRwmog2NrE+5tYlJjsu+BgQ/PP8fPuC5BQCmAsSXz0w==
+treat@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.5.tgz#5c842fffc86bd07eb5b3efab8d872ceaf8c48dc1"
+  integrity sha512-1+ch4yuSOSvToBJAx7N3BT5M/oQYRaMrDamWSx3EKj57yp8NLvan02+oigva2mXN+Huz8BGF3tUFeihMrA4nwg==
   dependencies:
-    "@babel/core" "^7.4.4"
     "@types/lodash" "^4.14.123"
     autoprefixer "^9.5.0"
-    babel-loader "^8.0.5"
     bluebird "^3.5.4"
     css-loader "^2.1.0"
     cssnano "^4.1.10"

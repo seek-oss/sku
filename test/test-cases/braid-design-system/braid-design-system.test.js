@@ -36,9 +36,12 @@ async function setUpLocalDependencies() {
   await rimrafAsync(nodeModules);
   await Promise.all(['react', 'react-dom'].map(createPackageLink));
   await Promise.all(
-    ['braid-design-system', 'sku/treat', 'sku/@loadable/component'].map(
-      createPackageCopy,
-    ),
+    [
+      'braid-design-system',
+      'sku/treat',
+      'sku/react-treat',
+      'sku/@loadable/component',
+    ].map(createPackageCopy),
   );
 }
 

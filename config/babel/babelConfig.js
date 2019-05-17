@@ -24,20 +24,12 @@ module.exports = ({ target, lang = 'js' }) => {
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     [
       require.resolve('babel-plugin-module-resolver'),
-      {
-        root: [cwd()],
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
-      },
+      { root: [cwd()], extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'] },
     ],
     require.resolve('@babel/plugin-transform-runtime'),
     require.resolve('babel-plugin-macros'),
     require.resolve('@loadable/babel-plugin'),
-    [
-      require.resolve('treat/babel-plugin'),
-      {
-        alias: 'sku/treat',
-      },
-    ],
+    [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
   ];
 
   if (isBrowser) {

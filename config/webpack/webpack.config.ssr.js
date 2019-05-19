@@ -19,6 +19,7 @@ const {
   webpackDecorator,
   polyfills,
   isStartScript,
+  sourceMapsProd,
   supportedBrowsers,
 } = require('../../context');
 
@@ -85,6 +86,9 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
 
   const publicPath = isStartScript ? clientServer : paths.publicPath;
 
+  const sourceMapStyle = isStartScript ? 'inline-source-map' : 'source-map';
+  const useSourceMaps = isStartScript || sourceMapsProd;
+
   const webpackStatsFilename = 'webpackStats.json';
 
   // The file mask is set to just name in start/dev mode as contenthash
@@ -97,7 +101,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       name: 'client',
       mode: webpackMode,
       entry: clientEntry,
-      devtool: isStartScript ? 'inline-source-map' : false,
+      devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
         path: paths.target,
         publicPath,

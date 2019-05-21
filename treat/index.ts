@@ -6,10 +6,12 @@
 import {
   createTheme,
   style,
+  styleMap,
   css,
   globalStyle,
-  resolveClassNames,
   resolveStyles,
+  resolveClassName,
+  resolveClassNames,
   ThemeRef,
   ClassRef,
   Styles,
@@ -22,17 +24,25 @@ import {
 } from 'treat';
 
 // Provided for backwards compatibility. Remove in sku 9
-import { TreatProvider, useClassNames, useStyles } from 'react-treat';
+import {
+  TreatProvider,
+  useStyles,
+  useClassName,
+  useClassNames,
+} from 'react-treat';
 
 export {
   createTheme,
   style,
+  styleMap,
   css,
   TreatProvider,
-  useClassNames,
   useStyles,
-  resolveClassNames,
+  useClassName,
+  useClassNames,
   resolveStyles,
+  resolveClassName,
+  resolveClassNames,
   globalStyle,
 };
 

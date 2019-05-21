@@ -3,6 +3,7 @@
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"crypto\\",
   \\"fs\\",
   \\"path\\",
   \\"react\\",
@@ -36,7 +37,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-0e63840deb94b900f4b6.js"
+          href="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -139,7 +140,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-0e63840deb94b900f4b6.js"
+            src="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
             crossorigin="anonymous"
     >
     </script>
@@ -188,7 +189,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-0e63840deb94b900f4b6.js"
+          href="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -291,7 +292,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-0e63840deb94b900f4b6.js"
+            src="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
             crossorigin="anonymous"
     >
     </script>
@@ -3858,7 +3859,7 @@ Object {
 }
 ,
   "vendors~braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0e63840deb94b900f4b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-5ae39520c7cb443f2902.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-b702a1068593a4d85436.css": ._1dX-8s8 {
   opacity: 0;
   position: absolute;

@@ -37,7 +37,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
+          href="https://somecdn.com/vendors~main-0d76cbea5314ae6cf621.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -140,7 +140,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
+            src="https://somecdn.com/vendors~main-0d76cbea5314ae6cf621.js"
             crossorigin="anonymous"
     >
     </script>
@@ -189,7 +189,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
+          href="https://somecdn.com/vendors~main-0d76cbea5314ae6cf621.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -292,7 +292,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-5ae39520c7cb443f2902.js"
+            src="https://somecdn.com/vendors~main-0d76cbea5314ae6cf621.js"
             crossorigin="anonymous"
     >
     </script>
@@ -3859,7 +3859,7 @@ Object {
 }
 ,
   "vendors~braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-5ae39520c7cb443f2902.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-0d76cbea5314ae6cf621.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-b702a1068593a4d85436.css": ._1dX-8s8 {
   opacity: 0;
   position: absolute;

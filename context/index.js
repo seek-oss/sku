@@ -83,6 +83,8 @@ const paths = {
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests),
   storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
+  playroomTarget: getPathFromCwd(skuConfig.playroomTarget),
+  playroomComponents: getPathFromCwd(skuConfig.playroomComponents),
 };
 
 module.exports = {
@@ -113,4 +115,10 @@ module.exports = {
   supportedBrowsers: skuConfig.supportedBrowsers,
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
   displayNamesProd: Boolean(skuConfig.displayNamesProd),
+  playroom: {
+    widths: skuConfig.playroomWidths,
+    title: skuConfig.playroomTitle,
+    themes: skuConfig.playroomThemes,
+    frameComponent: skuConfig.playroomFrameComponent,
+  },
 };

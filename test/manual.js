@@ -42,6 +42,7 @@ const runScriptForTestCase = (script, testCase) => {
   }
 
   const testCases = await readdirAsync(path.join(__dirname, 'test-cases'));
+  const scripts = await readdirAsync(path.join(__dirname, '../scripts'));
 
   const { testCase, script } = await inquirer.prompt([
     {
@@ -54,16 +55,7 @@ const runScriptForTestCase = (script, testCase) => {
       type: 'list',
       name: 'script',
       message: 'Which sku script would you like to run?',
-      choices: [
-        'start',
-        'start-ssr',
-        'build',
-        'build-ssr',
-        'test',
-        'configure',
-        'storybook',
-        'build-storybook',
-      ],
+      choices: scripts.map(scriptName => scriptName.replace(/\.js/, '')),
     },
   ]);
 

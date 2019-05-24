@@ -136,4 +136,17 @@ module.exports = validator.compile({
   displayNamesProd: {
     type: 'boolean',
   },
+  playroomTarget: {
+    type: 'string',
+  },
+  playroomWidths: {
+    type: 'array',
+    items: {
+      type: 'number',
+    },
+  },
+  playroomComponents: { type: 'string' },
+  playroomTitle: { type: 'string', optional: true },
+  playroomThemes: { type: 'string', optional: true },
+  playroomFrameComponent: { type: 'string', optional: true },
 });

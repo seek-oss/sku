@@ -13677,10 +13677,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@^10.0.0:
-  version "10.1.5"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-10.1.5.tgz#0dc5bfe17dd4be7d65b23da00fcf0de0b8b52ad2"
-  integrity sha512-TomScoXjxlXABiEHftIPryMrTLo10sDkWvFpxHWTIMWobU9DPs50WX9iG4OHtz1HV6jOeFO4wM2eWda9veC5Qw==
+seek-asia-style-guide@^13.0.0:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-13.0.1.tgz#97164610a6ed119db9a155af39cee65ff8f3832f"
+  integrity sha512-osxeY7Ovgs5aEh+LnJ85j3ZEOcYz2bpFBapzuD9QzWThha5Ld7ZS+dBwe/eb/obKHF03Xhu38cqMrxi5uu3k9w==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"
@@ -13700,10 +13700,10 @@ seek-asia-style-guide@^10.0.0:
     react-text-mask "^5.4.3"
     webfontloader "^1.6.28"
 
-seek-style-guide@^38.9.2:
-  version "38.13.1"
-  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-38.13.1.tgz#f06b957a8399bb2004e0a28ce90ca1575ca63fc5"
-  integrity sha512-gXV32fUO4boFnXTWaaAM9wAZ4WiwPr/qkryDtJnSJgVYglJ0thG6ZnoJqT3tkXERJ3StUZ8PSdr4xXU5tt53iA==
+seek-style-guide@^40.0.0:
+  version "40.1.1"
+  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-40.1.1.tgz#92ba3cdb37cbcde3bab7d1f89ccbd49aa276f97f"
+  integrity sha512-28uoRPgacEaKASXAE550aB++GMUNQPkmK21eyMYX4+i52ic29MjFDr1XlWG5i+eXPnRmZn0DfElgQ2b/77VNXg==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.5"

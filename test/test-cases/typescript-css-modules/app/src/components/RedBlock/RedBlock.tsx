@@ -1,4 +1,10 @@
 import styles from './RedBlock.less';
 import React from 'react';
 
-export default () => <div className={styles.root} />;
+interface RedBlockProps {
+  border?: boolean;
+}
+
+export default ({ border = false }: RedBlockProps) => (
+  <div className={`${styles.root} ${border ? styles.border : ''}`} />
+);

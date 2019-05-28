@@ -146,6 +146,7 @@ module.exports = validator.compile({
     },
   },
   playroomComponents: { type: 'string' },
+  playroomPort: { type: 'number', optional: true },
   playroomTitle: { type: 'string', optional: true },
   playroomThemes: { type: 'string', optional: true },
   playroomFrameComponent: { type: 'string', optional: true },

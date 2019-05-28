@@ -170,7 +170,12 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
                 {
                   test: /(?!\.css)\.js$/,
                   exclude: [
-                    internalJs, // Prevent running `react-dom` through babel as it's
+                    internalJs,
+
+                    // Playroom source is managed by its own webpack config
+                    path.dirname(require.resolve('playroom/package.json')),
+
+                    // Prevent running `react-dom` through babel as it's
                     // too large and already meets our browser support policy
                     path.dirname(require.resolve('react-dom/package.json')),
                   ],

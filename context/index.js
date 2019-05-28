@@ -116,6 +116,7 @@ module.exports = {
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
   displayNamesProd: Boolean(skuConfig.displayNamesProd),
   playroom: {
+    port: skuConfig.playroomPort,
     widths: skuConfig.playroomWidths,
     title: skuConfig.playroomTitle,
     themes: skuConfig.playroomThemes,

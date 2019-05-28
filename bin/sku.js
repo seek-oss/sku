@@ -31,7 +31,8 @@ switch (script) {
   case 'start-ssr':
   case 'storybook':
   case 'build-storybook':
-  case 'start-playroom':
+  case 'playroom':
+  case 'build-playroom':
   case 'chromatic': {
     runScript('configure');
     runScript(script);

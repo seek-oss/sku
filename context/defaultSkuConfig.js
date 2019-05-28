@@ -35,6 +35,7 @@ module.exports = {
   dangerouslySetESLintConfig: defaultDecorator,
   supportedBrowsers,
   playroomTarget: 'dist-playroom',
-  playroomWidths: [320, 1024],
-  playroomComponents: 'src/components/index.js',
+  playroomWidths: [320, 768, 1024],
+  playroomComponents: 'src/components',
+  playroomPort: 8082,
 };

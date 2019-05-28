@@ -27,14 +27,14 @@ try {
 }
 
 module.exports = () => ({
+  port: playroom.port,
   outputPath: paths.playroomTarget,
   components: paths.playroomComponents,
   openBrowser: process.env.OPEN_TAB !== 'false',
   ...playroom,
-  webpackConfig: config => ({
+  webpackConfig: () => ({
     module: clientWebpackConfig.module,
     resolve: clientWebpackConfig.resolve,
     plugins: clientWebpackConfig.plugins,
-    ...config,
   }),
 });

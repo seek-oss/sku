@@ -31,11 +31,11 @@ const {
 } = config;
 
 // port is only required for dev builds
-const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
+const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
   const { isProductionBuild } = utils;
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
-  const renderHtml = isLibrary ? isStartScript : !isStorybook;
+  const renderHtml = isLibrary ? isStartScript : !isIntegration;
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
@@ -91,7 +91,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
   ];
 
   const getFileMask = () => {
-    if (isStorybook) {
+    if (isIntegration) {
       return '[name]';
     }
 
@@ -143,20 +143,14 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
         concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {
-              splitChunks: {
-                chunks: 'all',
-              },
-              runtimeChunk: {
-                name: 'runtime',
-              },
+              splitChunks: { chunks: 'all' },
+              runtimeChunk: { name: 'runtime' },
             }
           : {}),
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
-        alias: {
-          __sku_alias__clientEntry: paths.clientEntry,
-        },
+        alias: { __sku_alias__clientEntry: paths.clientEntry },
       },
       module: {
         rules: [
@@ -177,6 +171,10 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
                   test: /(?!\.css)\.js$/,
                   exclude: [
                     internalJs,
+
+                    // Playroom source is managed by its own webpack config
+                    path.dirname(require.resolve('playroom/package.json')),
+
                     // Prevent running `react-dom` through babel as it's
                     // too large and already meets our browser support policy
                     path.dirname(require.resolve('react-dom/package.json')),
@@ -189,10 +187,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
                         presets: [
                           [
                             require.resolve('@babel/preset-env'),
-                            {
-                              modules: false,
-                              targets: supportedBrowsers,
-                            },
+                            { modules: false, targets: supportedBrowsers },
                           ],
                         ],
                       },
@@ -200,27 +195,14 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
                   ],
                 },
               ]),
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
-          {
-            test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ js: true }),
-          },
-          {
-            test: /\.less$/,
-            oneOf: utils.makeCssOneOf(),
-          },
+          { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
+          { test: /\.css\.js$/, oneOf: utils.makeCssOneOf({ js: true }) },
+          { test: /\.less$/, oneOf: utils.makeCssOneOf() },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             use: utils.makeImageLoaders(),
           },
-          {
-            test: /\.svg$/,
-            use: utils.makeSvgLoaders(),
-          },
+          { test: /\.svg$/, use: utils.makeSvgLoaders() },
         ],
       },
       plugins: [
@@ -233,22 +215,25 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
               }),
             ]
           : []),
-        ...(isStartScript ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
+        ...(isStartScript || isIntegration
+          ? []
+          : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
           chunkFilename: cssFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
-        createTreatPlugin({ target: 'browser', isProductionBuild }),
+        createTreatPlugin({
+          target: 'browser',
+          isProductionBuild,
+        }),
       ],
     },
     {
       name: 'render',
       mode: 'development',
-      entry: {
-        main: isLibrary ? libraryRenderEntry : renderEntry,
-      },
+      entry: { main: isLibrary ? libraryRenderEntry : renderEntry },
       target: 'node',
       externals: [
         // Don't bundle or transpile non-compiled packages
@@ -271,9 +256,7 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
-        alias: {
-          __sku_alias__renderEntry: paths.renderEntry,
-        },
+        alias: { __sku_alias__renderEntry: paths.renderEntry },
       },
       module: {
         rules: [
@@ -287,27 +270,22 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
             include: internalJs,
             use: utils.makeJsLoaders({ target: 'node' }),
           },
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
+          { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
           {
             test: /\.css\.js$/,
             oneOf: utils.makeCssOneOf({ server: true, js: true }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ server: true }),
+            oneOf: utils.makeCssOneOf({
+              server: true,
+            }),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             use: utils.makeImageLoaders({ server: true }),
           },
-          {
-            test: /\.svg$/,
-            use: utils.makeSvgLoaders(),
-          },
+          { test: /\.svg$/, use: utils.makeSvgLoaders() },
         ],
       },
       plugins: [
@@ -317,7 +295,10 @@ const makeWebpackConfig = ({ isStorybook = false, port = 0 } = {}) => {
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
         }),
-        createTreatPlugin({ target: 'node', isProductionBuild }),
+        createTreatPlugin({
+          target: 'node',
+          isProductionBuild,
+        }),
       ],
     },
   ].map(webpackDecorator);

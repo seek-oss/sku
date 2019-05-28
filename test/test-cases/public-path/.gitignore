@@ -2,6 +2,7 @@
 .eslintrc
 .prettierrc
 coverage/
+dist-playroom/
 dist-storybook/
 dist/static/
 report/

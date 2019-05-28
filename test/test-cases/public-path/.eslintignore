@@ -1,5 +1,6 @@
 # managed by sku
 coverage/
+dist-playroom/
 dist-storybook/
 dist/static/
 report/

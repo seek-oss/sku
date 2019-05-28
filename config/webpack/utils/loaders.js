@@ -43,7 +43,7 @@ const makeCssLoaders = (options = {}) => {
   // we only need to generate type declarations once.
   // Also, ignore compile packages as the types can't be committed
   const cssModuleToTypeScriptLoader =
-    isTypeScript() && !server && !compilePackage
+    isTypeScript && !server && !compilePackage
       ? [
           {
             loader: require.resolve('css-modules-typescript-loader'),

@@ -304,6 +304,56 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
+## playroomComponents
+
+type `string`
+
+Default: `src/components/index.{js|ts}`
+
+The file that exports all components available within Playroom.
+
+## playroomThemes
+
+type `string`
+
+The file that exports all themes available within Playroom.
+
+## playroomFrameComponent
+
+type `string`
+
+The file that exports a component that wraps each frame within Playroom.
+
+## playroomWidths
+
+type `Array<number>`
+
+Default: `[320, 768, 1024]`
+
+The responsive widths for frames within Playroom.
+
+## playroomTitle
+
+type `string`
+
+The title of your Playroom.
+
+## playroomPort
+
+type `number`
+
+Default: `8082`
+
+The port to host Playroom on when running `sku playroom`.
+
+## playroomTarget
+
+type `string`
+
+Default: `dist-playroom`
+
+The directory `sku build-playroom` will output files to.
+
 ## supportedBrowsers
 
 type `browserslist-query`

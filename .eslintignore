@@ -3,5 +3,6 @@ node_modules
 report/
 dist-start/
 dist-build/
+dist-playroom/
 dist-storybook/
 coverage/

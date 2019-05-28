@@ -12,15 +12,13 @@ import {
   resolveStyles,
   resolveClassName,
   resolveClassNames,
+  Style,
+  Styles,
+  GlobalStyle,
+  CSSProperties,
   ThemeRef,
   ClassRef,
-  Styles,
-  ThemedStyles,
-  StyleSheet,
-  StaticStyleSheet,
-  ThemedStyleSheet,
-  TreatTheme,
-  StylesMap,
+  TreatModule,
 } from 'treat';
 
 // Provided for backwards compatibility. Remove in sku 9
@@ -47,20 +45,10 @@ export {
 };
 
 // We need to re-export types separately or they won't work in webpack :(((
+export type Style = Style;
+export type Styles = Styles;
+export type GlobalStyle = GlobalStyle;
+export type CSSProperties = CSSProperties;
 export type ThemeRef = ThemeRef;
 export type ClassRef = ClassRef;
-export type Styles = Styles;
-export type ThemedStyles<Theme> = ThemedStyles<Theme>;
-export type StyleSheet<Theme, ClassName extends string> = StyleSheet<
-  Theme,
-  ClassName
->;
-export type StaticStyleSheet<ClassName extends string> = StaticStyleSheet<
-  ClassName
->;
-export type ThemedStyleSheet<
-  Theme,
-  ClassName extends string
-> = ThemedStyleSheet<Theme, ClassName>;
-export type TreatTheme<Tokens> = TreatTheme<Tokens>;
-export type StylesMap<ClassName extends string> = StylesMap<ClassName>;
+export type TreatModule = TreatModule;

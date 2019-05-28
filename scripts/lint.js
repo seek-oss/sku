@@ -10,7 +10,7 @@ const args = require('../config/args').argv;
 (async () => {
   console.log(chalk.cyan('Linting'));
 
-  if (isTypeScript()) {
+  if (isTypeScript) {
     try {
       await runTsc();
       await runTSLint();

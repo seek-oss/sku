@@ -3,6 +3,7 @@ dist-start/
 
 # managed by sku
 coverage/
+dist-playroom/
 dist-storybook/
 dist/
 report/

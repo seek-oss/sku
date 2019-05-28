@@ -2,11 +2,20 @@
 
 Running `sku playroom` will open up a local component playroom.
 
-By default, Playroom will try to import your components from `src/components`. If you'd like to import from a different file, you'll need to provide a `playroomComponents` option in `sku.config.js`.
+By default, Playroom will try to import your components from `src/components/index.js`. If you'd like to import from a different file, you'll need to provide a `playroomComponents` option in `sku.config.js`.
 
 ```js
 module.exports = {
   playroomComponents: './src/components.js',
+};
+```
+
+You can also provide themes and a frame component via the following options:
+
+```js
+module.exports = {
+  playroomThemes: './src/themes.js',
+  playroomFrameComponent: './src/playroom/FrameComponent.js',
 };
 ```
 

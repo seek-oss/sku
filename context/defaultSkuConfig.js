@@ -36,6 +36,6 @@ module.exports = {
   supportedBrowsers,
   playroomTarget: 'dist-playroom',
   playroomWidths: [320, 768, 1024],
-  playroomComponents: 'src/components',
+  playroomComponents: 'src/components/index.js',
   playroomPort: 8082,
 };

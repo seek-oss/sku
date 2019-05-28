@@ -8,8 +8,6 @@ const clientWebpackConfig = find(
   config => config.name === 'client',
 );
 
-console.log(paths.playroomComponents);
-
 try {
   require.resolve(paths.playroomComponents);
 } catch (e) {

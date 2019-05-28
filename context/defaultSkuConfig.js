@@ -1,5 +1,6 @@
 const supportedBrowsers = require('browserslist-config-seek');
 const path = require('path');
+const isTypeScript = require('../lib/isTypeScript');
 
 const defaultDecorator = a => a;
 
@@ -36,7 +37,7 @@ module.exports = {
   supportedBrowsers,
   playroomTarget: 'dist-playroom',
   playroomWidths: [320, 768, 1024],
-  playroomComponents: 'src/components/index.js',
+  playroomComponents: `src/components/index.${isTypeScript ? 'ts' : 'js'}`,
   playroomThemes: null,
   playroomFrameComponent: null,
   playroomTitle: null,

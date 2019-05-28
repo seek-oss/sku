@@ -13,6 +13,10 @@
       "schedule": ["before 8am on the first day of the month"]
     },
     {
+      "packageNames": ["playroom"],
+      "enabled": true
+    },
+    {
       "groupName": "webpack packages",
       "packagePatterns": ["webpack|(-loader$)|autoprefixer|less|css|svg"],
       "enabled": true,

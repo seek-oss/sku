@@ -7,5 +7,4 @@ module.exports = {
   storybookPort: 8082,
   publicPath: 'http://localhost:4003',
   setupTests: 'src/setupTests.ts',
-  playroomComponents: 'src/components/index.ts',
 };

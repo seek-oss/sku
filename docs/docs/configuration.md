@@ -308,7 +308,7 @@ The directory `sku build-storybook` will output files to.
 
 type `string`
 
-Default: `src/components/index.js`
+Default: `src/components/index.{js|ts}`
 
 The file that exports all components available within Playroom.
 

@@ -1966,11 +1966,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/classnames@^2.2.6":
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.7.tgz#fb68cc9be8487e6ea5b13700e759bfbab7e0fefd"
-  integrity sha512-rzOhiQ55WzAiFgXRtitP/ZUT8iVNyllEpylJ5zHzR4vArUvMB39GTk+Zon/uAM0JxEFAWnwsxC2gH8s+tZ3Myg==
-
 "@types/dedent@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@types/dedent/-/dedent-0.7.0.tgz#155f339ca404e6dd90b9ce46a3f78fd69ca9b050"
@@ -2029,10 +2024,15 @@
   dependencies:
     "@types/react" "*"
 
-"@types/lodash@^4.14.120", "@types/lodash@^4.14.123":
+"@types/lodash@^4.14.123":
   version "4.14.126"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.126.tgz#47cff3ea014aa083194f8ca3ec351136c3786613"
   integrity sha512-HxQ+wQnBtnL0LszZrVdMqWIlzZNyKuMLUb6swQ3mo6ysPqpAu7gfnapCQIi0B+Mrf0fNLZh8AWgJs2njejVasg==
+
+"@types/lodash@^4.14.132":
+  version "4.14.132"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.132.tgz#8ce45ca8745ff2e004fac0de0ab46f61e390ffa0"
+  integrity sha512-RNUU1rrh85NgUJcjOOr96YXr+RHwInGbaQCZmlitqOaCKXffj8bh+Zxwuq5rjDy5OgzFldDVoqk4pyLEDiwxIw==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -3406,6 +3406,11 @@ basekick@^3.0.0:
   resolved "https://registry.yarnpkg.com/basekick/-/basekick-3.0.0.tgz#a79e013b366004eb7f2f61c51ef48eb2f03dd8da"
   integrity sha1-p54BOzZgBOt/L2HFHvSOsvA92No=
 
+basekick@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/basekick/-/basekick-3.1.1.tgz#bd46180b539b84c3e030d0ae93f31977272e09af"
+  integrity sha512-F6IBL9SDlf8rJLKnNcvi1/LqnzkDALVmjTT99/+ZKBsrZyLIZ+tEbuHsrMfjkqY7R6h55vjIF1yjHJvHhZAq3w==
+
 batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
@@ -3590,16 +3595,16 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@^0.0.62:
-  version "0.0.62"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.62.tgz#f0ba44c9f2c15a48abe18dd1686abf19fbe10309"
-  integrity sha512-B7fyDk8wTl1T0y4tTbh38GKD8nMLNYQKovOA8t3BhmCcOapkaMz+h6uu8AoSJoUUJhmfUsncZCPBkSZVkSREjg==
+braid-design-system@^0.0.79:
+  version "0.0.79"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.79.tgz#d62da64ead5a42f72fdcbe3af7379a08460013af"
+  integrity sha512-b2Hor9TpiLCXzzfJXBkDGTm6CzopzEq1gjLhvc4TEumoDavxJmELChGijx4ectKwcInHL6nT+skrOcm0wAMFCg==
   dependencies:
-    "@types/classnames" "^2.2.6"
-    "@types/lodash" "^4.14.120"
+    "@types/lodash" "^4.14.132"
     "@types/react" "^16.8.8"
-    basekick "^3.0.0"
-    classnames "^2.2.6"
+    basekick "^3.1.1"
+    csstype "^2.6.4"
+    lodash "^4.17.11"
     polished "^3.0.3"
     utility-types "^3.2.1"
 
@@ -4117,7 +4122,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.0, classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.0, classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -5047,6 +5052,11 @@ csstype@^2.2.0, csstype@^2.6.3:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.4.tgz#d585a6062096e324e7187f80e04f92bd0f00e37f"
   integrity sha512-lAJUJP3M6HxFXbqtGRc0iZrdyeN+WzOWeY0q/VnFzI+kqVrYIzC7bWlKqCW7oCIdzoPkvfp82EVvrTlQ8zsWQg==
+
+csstype@^2.6.4:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.5.tgz#1cd1dff742ebf4d7c991470ae71e12bb6751e034"
+  integrity sha512-JsTaiksRsel5n7XwqPAfB0l3TFKdpjW/kgAELf9vrb5adGA7UCPLajKK5s3nFrcFm3Rkyp/Qkgl73ENc1UY3cA==
 
 current-git-branch@^1.1.0:
   version "1.1.0"

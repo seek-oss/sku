@@ -37,5 +37,8 @@ module.exports = {
   playroomTarget: 'dist-playroom',
   playroomWidths: [320, 768, 1024],
   playroomComponents: 'src/components/index.js',
+  playroomThemes: undefined,
+  playroomFrameComponent: undefined,
+  playroomTitle: undefined,
   playroomPort: 8082,
 };

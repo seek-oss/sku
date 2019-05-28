@@ -30,6 +30,8 @@ module.exports = () => ({
   port: playroom.port,
   outputPath: paths.playroomTarget,
   components: paths.playroomComponents,
+  themes: paths.playroomThemes,
+  frameComponent: paths.playroomFrameComponent,
   openBrowser: process.env.OPEN_TAB !== 'false',
   ...playroom,
   webpackConfig: () => ({

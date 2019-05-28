@@ -54,3 +54,11 @@ module.exports = {
   playroomPort: 9000,
 };
 ```
+
+If you'd like to configure the playroom title, you can provide the following config:
+
+```js
+module.exports = {
+  playroomTitle: 'My Components',
+};
+```

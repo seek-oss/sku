@@ -38,7 +38,9 @@ module.exports = {
     // Match any `.js` file that isn't a `.css.js` file.
     // We do this by asserting the 4 characters before `.js` aren't `.css`
     // or that it has fewer than 4 characters (e.g. `foo.js`)
-    '((?!(\\.css)).{4}|^.{1,3})\\.jsx?$': require.resolve('./jsBabelTransform.js'),
+    '((?!(\\.css)).{4}|^.{1,3})\\.jsx?$': require.resolve(
+      './jsBabelTransform.js',
+    ),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding

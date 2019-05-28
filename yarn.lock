@@ -1222,6 +1222,32 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.1.3.tgz#b700d97385fa91affed60c71dfd51c67e9dad762"
   integrity sha512-QsYGKdhhuDFNq7bjm2r44y0mp5xW3uO3csuTPDWZc0OIiMQv+AIY5Cqwd4mJiC5N8estVl7qlvOx1hbtOuUWbw==
 
+"@hapi/address@2.x.x":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.0.0.tgz#9f05469c88cb2fd3dcd624776b54ee95c312126a"
+  integrity sha512-mV6T0IYqb0xL1UALPFplXYQmR0twnXG0M6jUswpquqT2sD12BOiCiLy3EvMp/Fy7s3DZElC4/aPjEjo2jeZpvw==
+
+"@hapi/hoek@6.x.x":
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-6.2.4.tgz#4b95fbaccbfba90185690890bdf1a2fbbda10595"
+  integrity sha512-HOJ20Kc93DkDVvjwHyHawPwPkX44sIrbXazAUDiUXaY2R9JwQGo2PhFfnQtdrsIe4igjG2fPgMra7NYw7qhy0A==
+
+"@hapi/joi@^15.0.3":
+  version "15.0.3"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-15.0.3.tgz#e94568fd859e5e945126d5675e7dd218484638a7"
+  integrity sha512-z6CesJ2YBwgVCi+ci8SI8zixoj8bGFn/vZb9MBPbSyoxsS2PnWYjHcyTM17VLK6tx64YVK38SDIh10hJypB+ig==
+  dependencies:
+    "@hapi/address" "2.x.x"
+    "@hapi/hoek" "6.x.x"
+    "@hapi/topo" "3.x.x"
+
+"@hapi/topo@3.x.x":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-3.1.0.tgz#5c47cd9637c2953db185aa957a27bcb2a8b7a6f8"
+  integrity sha512-gZDI/eXOIk8kP2PkUKjWu9RW8GGVd2Hkgjxyr/S7Z+JF+0mr7bAlbw+DkTRxnD580o8Kqxlnba9wvqp5aOHBww==
+  dependencies:
+    "@hapi/hoek" "6.x.x"
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -4859,6 +4885,11 @@ css-select@^2.0.0:
     css-what "^2.1.2"
     domutils "^1.7.0"
     nth-check "^1.0.2"
+
+css-selector-parser@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/css-selector-parser/-/css-selector-parser-1.3.0.tgz#5f1ad43e2d8eefbfdc304fcd39a521664943e3eb"
+  integrity sha1-XxrUPi2O77/cME/NOaUhZklD4+s=
 
 css-selector-tokenizer@^0.7.0:
   version "0.7.1"
@@ -12815,10 +12846,10 @@ react-transition-group@^2.0.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-treat@1.0.0-beta.17:
-  version "1.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.17.tgz#3aa4b6239b4f48ed36ab8eb92a715ab70eb3340b"
-  integrity sha512-J4igQDXAji70a7GzPTsw0UBArWBr82NAHfSSIQ8N8wcyhdDZCE3N7C0vpYGsW+pAs7jGoIQ1FGKmv4iOJxlxWA==
+react-treat@1.0.0-beta.20:
+  version "1.0.0-beta.20"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.20.tgz#5cf05a41c7aa756a0d4b7e18fb8521be9725a608"
+  integrity sha512-gow2COx3jJE6HNzxxWWlg4NMsfE/S9OfkV6tv3VLQvIAYmPHcM/S83T0zk9A2fNlvPqXuVmkffmwdJUAkW7dlQ==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -15044,17 +15075,20 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-beta.17:
-  version "1.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.17.tgz#effbe05a44d93783ddcc97d763e32c6470f89c2c"
-  integrity sha512-9NX0MeIJuaRuANJjqO1WmtiqKkZ2fJQodXNmw5CjN2klRTQ92EKluVM3QD6uyr3FGQbI0eQDyW4z8fualoLLhA==
+treat@1.0.0-beta.20:
+  version "1.0.0-beta.20"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.20.tgz#1e3e405cd8d99013dc7e5abbdf6ee1ddc690c4b9"
+  integrity sha512-U0dZvLHTOheM47UnbgOdnyBn4/3zRq/5p3zV9uILap6iwSIAuSaK50dtlftchJNicFtlMXBITTLF0YBJBlP12Q==
   dependencies:
+    "@hapi/joi" "^15.0.3"
     "@types/lodash" "^4.14.123"
     autoprefixer "^9.5.0"
     bluebird "^3.5.4"
     css-loader "^2.1.0"
+    css-selector-parser "^1.3.0"
     cssnano "^4.1.10"
     csstype "^2.6.3"
+    dedent "^0.7.0"
     eval "^0.1.2"
     loader-utils "^1.2.3"
     normalize-path "^3.0.0"

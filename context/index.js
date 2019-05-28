@@ -85,8 +85,12 @@ const paths = {
   storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
   playroomTarget: getPathFromCwd(skuConfig.playroomTarget),
   playroomComponents: getPathFromCwd(skuConfig.playroomComponents),
-  playroomThemes: getPathFromCwd(skuConfig.playroomThemes),
-  playroomFrameComponent: getPathFromCwd(skuConfig.playroomFrameComponent),
+  playroomThemes: skuConfig.playroomThemes
+    ? getPathFromCwd(skuConfig.playroomThemes)
+    : null,
+  playroomFrameComponent: skuConfig.playroomFrameComponent
+    ? getPathFromCwd(skuConfig.playroomFrameComponent)
+    : null,
 };
 
 module.exports = {

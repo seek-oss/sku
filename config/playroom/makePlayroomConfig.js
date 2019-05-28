@@ -26,6 +26,7 @@ try {
 
 module.exports = () => ({
   port: playroom.port,
+  title: playroom.title,
   outputPath: paths.playroomTarget,
   components: paths.playroomComponents,
   themes: paths.playroomThemes,

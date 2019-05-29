@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`public path build should create valid app with no unresolved resources 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -19,17 +18,17 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/runtime-db77a217f713f6f5cbcf.js"
+          href="/static/runtime-439259ce93cc000a7deb.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/vendors~main-6a2a998ad2d1926e09f6.js"
+          href="/static/vendors~main-137ee9c3e0769033aeb9.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/main-2b096fa2c810d36e3fe4.js"
+          href="/static/main-261a171afa869a59be56.js"
     >
   </head>
   <body>
@@ -44,21 +43,20 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="/static/runtime-db77a217f713f6f5cbcf.js"
+            src="/static/runtime-439259ce93cc000a7deb.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/static/vendors~main-6a2a998ad2d1926e09f6.js"
+            src="/static/vendors~main-137ee9c3e0769033aeb9.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/static/main-2b096fa2c810d36e3fe4.js"
+            src="/static/main-261a171afa869a59be56.js"
     >
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: NO DIFF
 `;

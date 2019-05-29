@@ -3249,10 +3249,10 @@ babel-plugin-transform-undefined-to-void@^6.9.4:
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.9.4.tgz#be241ca81404030678b748717322b89d0c8fe280"
   integrity sha1-viQcqBQEAwZ4t0hxcyK4nQyP4oA=
 
-babel-plugin-treat@1.0.0-beta.8:
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.8.tgz#9921d5e36a2cb52b5e57f72e22920b215594504b"
-  integrity sha512-CG4Ji9FVPNPZ8cM8ns7YWd6/mAM+6mqAMVOCtpXWizh2hChI572Q58iepsM+gMVKbSNqKaAikvBwDW+HKmfuMA==
+babel-plugin-treat@1.0.0-beta.23:
+  version "1.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.23.tgz#e39f219686c6cb955aed174b07b8fef7a982d9be"
+  integrity sha512-U3XwAG1VMoE5YOAsc6h79wndN/kjVzqXfz7EssHTpj1KH640IooYwxFMrVdmV66Kr9iL41I0S65j3FqnioiO5A==
 
 babel-polyfill@6.26.0:
   version "6.26.0"

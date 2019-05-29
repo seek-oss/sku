@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`react-css-modules build-storybook should create valid storybook 1`] = `
-SOURCE HTML: 
-<!doctype html>
+SOURCE HTML: <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -34,17 +33,15 @@ SOURCE HTML:
     </div>
     <script src="./sb_dll/storybook_ui_dll.js">
     </script>
-    <script src="runtime~main.6ac4c33d73ae9704bbb9.bundle.js">
+    <script src="runtime~main.17da544d0ef88cbabfaf.bundle.js">
     </script>
-    <script src="vendors~main.2ed72cf0f594567d550e.bundle.js">
+    <script src="vendors~main.698a5b26e7a9f7fd4fd0.bundle.js">
     </script>
-    <script src="main.8643fa625f3b6b9dae1a.bundle.js">
+    <script src="main.686afa11709a3989d607.bundle.js">
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: 
- 
 -<!doctype html>
 +<!DOCTYPE html>
  <html>
@@ -54,8 +51,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`react-css-modules should create valid app 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -72,17 +68,17 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-aeb0c9cb99d2933bf332.js"
+          href="/runtime-0fab60c54740754a26ba.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-e8b0dc187882cf88d5f3.js"
+          href="/vendors~main-68230d31fbd30f3e6b44.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-57440a740d6fc78dd340.js"
+          href="/main-99e47a96fdf88f06044e.js"
     >
   </head>
   <body>
@@ -102,22 +98,21 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-aeb0c9cb99d2933bf332.js"
+            src="/runtime-0fab60c54740754a26ba.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-e8b0dc187882cf88d5f3.js"
+            src="/vendors~main-68230d31fbd30f3e6b44.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-57440a740d6fc78dd340.js"
+            src="/main-99e47a96fdf88f06044e.js"
     >
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: 
          <div class="_3YtmnHj lwsthgY"
               data-automation-text="true"
@@ -132,8 +127,7 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
-  "index.html": 
-<!DOCTYPE html>
+  "index.html": <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -150,17 +144,17 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-aeb0c9cb99d2933bf332.js"
+          href="/runtime-0fab60c54740754a26ba.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-e8b0dc187882cf88d5f3.js"
+          href="/vendors~main-68230d31fbd30f3e6b44.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-57440a740d6fc78dd340.js"
+          href="/main-99e47a96fdf88f06044e.js"
     >
   </head>
   <body>
@@ -180,23 +174,22 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-aeb0c9cb99d2933bf332.js"
+            src="/runtime-0fab60c54740754a26ba.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-e8b0dc187882cf88d5f3.js"
+            src="/vendors~main-68230d31fbd30f3e6b44.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-57440a740d6fc78dd340.js"
+            src="/main-99e47a96fdf88f06044e.js"
     >
     </script>
   </body>
-</html>
-,
-  "main-57440a740d6fc78dd340.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+</html>,
+  "main-99e47a96fdf88f06044e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -214,7 +207,7 @@ Object {
   color: red;
 }
 ,
-  "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-e8b0dc187882cf88d5f3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0fab60c54740754a26ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-68230d31fbd30f3e6b44.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

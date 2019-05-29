@@ -11,8 +11,7 @@ Object {
 `;
 
 exports[`library-build start should start a development server 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -35,7 +34,6 @@ SOURCE HTML:
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: 
      <script>
        window.MyLibrary();
@@ -45,5 +43,6 @@ POST HYDRATE DIFFS:
 +    </div>
    </body>
  </html>
+\\ No newline at end of file
 
 `;

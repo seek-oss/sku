@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -19,19 +18,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-55120eeb7c576ec93b5c.js"
+          href="http://localhost:4000/runtime-2cab3011fc3337c7999b.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-ad03a7cefcdb7243374d.js"
+          href="http://localhost:4000/vendors~main-b6e7db4adcfdaa71b708.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-42678a30256a6396de82.js"
+          href="http://localhost:4000/main-c95605e6591d724e902d.js"
           crossorigin="anonymous"
     >
   </head>
@@ -51,31 +50,29 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-55120eeb7c576ec93b5c.js"
+            src="http://localhost:4000/runtime-2cab3011fc3337c7999b.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-ad03a7cefcdb7243374d.js"
+            src="http://localhost:4000/vendors~main-b6e7db4adcfdaa71b708.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-42678a30256a6396de82.js"
+            src="http://localhost:4000/main-c95605e6591d724e902d.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -92,19 +89,19 @@ SOURCE HTML:
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-55120eeb7c576ec93b5c.js"
+          href="http://localhost:4000/runtime-2cab3011fc3337c7999b.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-ad03a7cefcdb7243374d.js"
+          href="http://localhost:4000/vendors~main-b6e7db4adcfdaa71b708.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-42678a30256a6396de82.js"
+          href="http://localhost:4000/main-c95605e6591d724e902d.js"
           crossorigin="anonymous"
     >
   </head>
@@ -124,31 +121,29 @@ SOURCE HTML:
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-55120eeb7c576ec93b5c.js"
+            src="http://localhost:4000/runtime-2cab3011fc3337c7999b.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-ad03a7cefcdb7243374d.js"
+            src="http://localhost:4000/vendors~main-b6e7db4adcfdaa71b708.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-42678a30256a6396de82.js"
+            src="http://localhost:4000/main-c95605e6591d724e902d.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
-SOURCE HTML: 
-<!DOCTYPE html>
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -215,6 +210,5 @@ SOURCE HTML:
     </script>
   </body>
 </html>
-
 POST HYDRATE DIFFS: NO DIFF
 `;

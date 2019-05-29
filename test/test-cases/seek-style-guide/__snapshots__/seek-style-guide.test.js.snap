@@ -8,8 +8,7 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "index.html": 
-<!DOCTYPE html>
+  "index.html": <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -21,22 +20,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-41483bfc193e35fcb21d.css"
+          href="/vendors~main-d71f0d4e2a50b783f560.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-aeb0c9cb99d2933bf332.js"
+          href="/runtime-0fab60c54740754a26ba.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-a28029fb62944d5c358c.js"
+          href="/vendors~main-9a9bfdf0f10c99f233a3.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-0846ed506829104b34e2.js"
+          href="/main-5ffc10eabc44a7378e53.js"
     >
   </head>
   <body>
@@ -67,25 +66,25 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-aeb0c9cb99d2933bf332.js"
+            src="/runtime-0fab60c54740754a26ba.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-a28029fb62944d5c358c.js"
+            src="/vendors~main-9a9bfdf0f10c99f233a3.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-0846ed506829104b34e2.js"
+            src="/main-5ffc10eabc44a7378e53.js"
     >
     </script>
   </body>
-</html>
-,
-  "main-0846ed506829104b34e2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-aeb0c9cb99d2933bf332.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-41483bfc193e35fcb21d.css": a,
+</html>,
+  "main-5ffc10eabc44a7378e53.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0fab60c54740754a26ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-9a9bfdf0f10c99f233a3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-d71f0d4e2a50b783f560.css": a,
 abbr,
 acronym,
 address,
@@ -329,7 +328,7 @@ html {
 ._31viNaz ._31viNaz:after {
   content: "ERROR: Multiple <Text> components nested";
   background: red;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   position: absolute;
   top: 0;
@@ -445,14 +444,14 @@ html {
   ._3X2sUcS:not(._3CnSGKb) {
     font-size: 18px;
     line-height: 24px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
   ._3X2sUcS:not(._3CnSGKb) {
     font-size: 18px;
     line-height: 24px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
@@ -461,7 +460,7 @@ html {
     line-height: 24px;
     -webkit-transform: translateY(0.32666667em);
     transform: translateY(0.32666667em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
@@ -470,21 +469,21 @@ html {
     line-height: 24px;
     -webkit-transform: translateY(0.32666667em);
     transform: translateY(0.32666667em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
   ._1iMwyee:not(._3CnSGKb) {
     font-size: 21px;
     line-height: 30px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
   ._1iMwyee:not(._3CnSGKb) {
     font-size: 28px;
     line-height: 36px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
@@ -493,7 +492,7 @@ html {
     line-height: 30px;
     -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
@@ -502,21 +501,21 @@ html {
     line-height: 36px;
     -webkit-transform: translateY(0.30285714em);
     transform: translateY(0.30285714em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
   ._12x7M_H:not(._3CnSGKb) {
     font-size: 21px;
     line-height: 30px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
   ._12x7M_H:not(._3CnSGKb) {
     font-size: 22px;
     line-height: 30px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
@@ -525,7 +524,7 @@ html {
     line-height: 30px;
     -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
@@ -534,14 +533,14 @@ html {
     line-height: 30px;
     -webkit-transform: translateY(0.34181818em);
     transform: translateY(0.34181818em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (max-width: 739px) {
   ._2gZSEA6:not(._3CnSGKb) {
     font-size: 21px;
     line-height: 30px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
@@ -557,7 +556,7 @@ html {
     line-height: 30px;
     -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 @media only screen and (min-width: 740px) {
@@ -606,12 +605,11 @@ html {
   color: #9556b7;
 }
 ._1lTs4d6 {
-  font-weight: 600;
+  font-weight: 700;
 }
 ._33Weyvq {
   font-weight: 400;
 }
 ,
-  "vendors~main-a28029fb62944d5c358c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

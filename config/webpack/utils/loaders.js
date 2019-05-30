@@ -135,6 +135,11 @@ const makeSvgLoaders = () => [
         {
           removeViewBox: false,
         },
+        {
+          cleanupIDs: {
+            prefix: 'svg-',
+          },
+        },
       ],
     },
   },

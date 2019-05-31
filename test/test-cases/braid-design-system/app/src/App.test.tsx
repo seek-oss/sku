@@ -11,6 +11,8 @@ describe('braid-design-system', () => {
           <Box paddingTop="large" />
         </ThemeProvider>,
       ),
-    ).toMatchInlineSnapshot(`"<div class=\\"top_large_theme\\"></div>"`);
+    ).toMatchInlineSnapshot(
+      `"<div class=\\"padding_top_large_theme\\"></div>"`,
+    );
   });
 });

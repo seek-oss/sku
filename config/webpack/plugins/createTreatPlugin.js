@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
 
-module.exports = ({ target, isProductionBuild }) => {
+module.exports = ({ target, isProductionBuild, internalJs }) => {
   const localIdentName = `${
     isProductionBuild ? '' : 'BRAID__[name]-[local]_'
   }[hash:base64:5]`;
@@ -26,7 +26,10 @@ module.exports = ({ target, isProductionBuild }) => {
   const themeIdentName = isProductionBuild ? prodThemeIdent : devThemeIdent;
 
   return new TreatPlugin({
-    test: /braid-design-system\/(?!node_modules).+\.treat\.(?:js|ts)/,
+    test: {
+      test: /\.treat\.ts$/,
+      include: internalJs,
+    },
     outputCSS: target === 'browser',
     outputLoaders: [MiniCssExtractPlugin.loader],
     localIdentName,

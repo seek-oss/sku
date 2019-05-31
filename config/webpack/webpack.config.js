@@ -227,6 +227,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
         createTreatPlugin({
           target: 'browser',
           isProductionBuild,
+          internalJs,
         }),
       ],
     },
@@ -298,6 +299,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
         createTreatPlugin({
           target: 'node',
           isProductionBuild,
+          internalJs,
         }),
       ],
     },

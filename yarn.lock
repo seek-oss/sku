@@ -3249,10 +3249,10 @@ babel-plugin-transform-undefined-to-void@^6.9.4:
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.9.4.tgz#be241ca81404030678b748717322b89d0c8fe280"
   integrity sha1-viQcqBQEAwZ4t0hxcyK4nQyP4oA=
 
-babel-plugin-treat@1.0.0-beta.8:
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.8.tgz#9921d5e36a2cb52b5e57f72e22920b215594504b"
-  integrity sha512-CG4Ji9FVPNPZ8cM8ns7YWd6/mAM+6mqAMVOCtpXWizh2hChI572Q58iepsM+gMVKbSNqKaAikvBwDW+HKmfuMA==
+babel-plugin-treat@1.0.0-beta.23:
+  version "1.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.23.tgz#e39f219686c6cb955aed174b07b8fef7a982d9be"
+  integrity sha512-U3XwAG1VMoE5YOAsc6h79wndN/kjVzqXfz7EssHTpj1KH640IooYwxFMrVdmV66Kr9iL41I0S65j3FqnioiO5A==
 
 babel-polyfill@6.26.0:
   version "6.26.0"
@@ -10804,7 +10804,6 @@ npm@^6.8.0:
     cmd-shim "~2.0.2"
     columnify "~1.5.4"
     config-chain "^1.1.12"
-    debuglog "*"
     detect-indent "~5.0.0"
     detect-newline "^2.1.0"
     dezalgo "~1.0.3"
@@ -10819,7 +10818,6 @@ npm@^6.8.0:
     has-unicode "~2.0.1"
     hosted-git-info "^2.7.1"
     iferr "^1.0.2"
-    imurmurhash "*"
     inflight "~1.0.6"
     inherits "~2.0.3"
     ini "^1.3.5"
@@ -10829,22 +10827,12 @@ npm@^6.8.0:
     lazy-property "~1.0.0"
     libcipm "^3.0.3"
     libnpm "^2.0.1"
-    libnpmaccess "*"
     libnpmhook "^5.0.2"
-    libnpmorg "*"
-    libnpmsearch "*"
-    libnpmteam "*"
     libnpx "^10.2.0"
     lock-verify "^2.1.0"
     lockfile "^1.0.4"
-    lodash._baseindexof "*"
     lodash._baseuniq "~4.6.0"
-    lodash._bindcallback "*"
-    lodash._cacheindexof "*"
-    lodash._createcache "*"
-    lodash._getnative "*"
     lodash.clonedeep "~4.5.0"
-    lodash.restparam "*"
     lodash.union "~4.6.0"
     lodash.uniq "~4.5.0"
     lodash.without "~4.4.0"
@@ -10863,7 +10851,6 @@ npm@^6.8.0:
     npm-package-arg "^6.1.0"
     npm-packlist "^1.4.1"
     npm-pick-manifest "^2.2.3"
-    npm-profile "*"
     npm-registry-fetch "^3.9.0"
     npm-user-validate "~1.0.0"
     npmlog "~4.1.2"
@@ -10882,7 +10869,6 @@ npm@^6.8.0:
     read-package-json "^2.0.13"
     read-package-tree "^5.2.2"
     readable-stream "^3.1.1"
-    readdir-scoped-modules "*"
     request "^2.88.0"
     retry "^0.12.0"
     rimraf "^2.6.3"
@@ -12780,10 +12766,10 @@ react-transition-group@^2.0.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-treat@1.0.0-beta.22:
-  version "1.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.22.tgz#7afb8c651df74e81fc9f6375e985fc41b191f307"
-  integrity sha512-23Z3rjpq8DcH5Rvsa6zTbgtzE/Z6i91htOyVFjEjzTCEWUPI6YwAioa0JX/QGfjzVlRSDuIPiHmuPqSJsB4B+Q==
+react-treat@1.0.0-beta.26:
+  version "1.0.0-beta.26"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.26.tgz#1ffce83ec6ba3e15dfa6097eaf958cedfea4e6f9"
+  integrity sha512-px2QAFsSOIY/hVerjp3K9ahgm5RveVhiTdd/+3jdYYeoMo7lF86E1e9jHznFV2QQCAxJhNeA0YjOrJK5BAzerw==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -14971,15 +14957,16 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-beta.22:
-  version "1.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.22.tgz#a836854d0bd0e3359e2075ae6eb9265e5627d518"
-  integrity sha512-rkHohrFHJRMticA/rYTvdaUHBG36eo4LAeAIHbLh0Z5BaNMIdcypOzXCIC3O7YeJ5uroOm+RDH7y5FT4WbBReQ==
+treat@1.0.0-beta.26:
+  version "1.0.0-beta.26"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.26.tgz#6aa325b2da7773bdd050b41ee6dc9ca52de412dd"
+  integrity sha512-Gae9I/5frO6O0oQ1QUWrmxpi6IPopnahGNBpKWFm7eakRlDIx1k7/Q7T/paAEUjNyhgLpL197j8klhfjBRfVFA==
   dependencies:
     "@hapi/joi" "^15.0.3"
     "@types/lodash" "^4.14.123"
     autoprefixer "^9.5.0"
     bluebird "^3.5.4"
+    chalk "^2.4.2"
     css-loader "^2.1.0"
     css-selector-parser "^1.3.0"
     cssnano "^4.1.10"

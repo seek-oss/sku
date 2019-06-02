@@ -4192,7 +4192,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-standard_fontSize_1_nER_seekAnz BRAID__typography-color_neutral_1NXQv_seekAnz BRAID__typography-standard_transform_1PM5y_seekAnz BRAID__box-display_block__Z9GO __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
+      <div class="BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_fontSize_1_nER_seekAnz BRAID__typography-color_neutral_1NXQv_seekAnz BRAID__typography-text_standard_transform_1PM5y_seekAnz BRAID__box-display_block__Z9GO __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
         Hello
         seekAnz
         <div class="BRAID__ChevronIcon-root_2sL5F BRAID__box-display_inlineBlock_1_euO __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
@@ -4206,8 +4206,8 @@ SOURCE HTML: <!DOCTYPE html>
           </svg>
         </div>
       </div>
-      <div class="BRAID__box-bottom_medium_o5wHJ_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
-        <div class="BRAID__box-backgroundColor_card_DV4sK_seekAnz BRAID__box-top_small_ST9QG_seekAnz BRAID__box-right_gutter_11gxS_seekAnz BRAID__box-bottom_large_2Yn0H_seekAnz BRAID__box-left_gutter_1Hlla_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
+      <div class="BRAID__box-padding_bottom_medium_o5wHJ_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
+        <div class="BRAID__box-backgroundColor_card_DV4sK_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
           <div class="__BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
             <input type="checkbox"
                    class="BRAID__InlineField-realField_q3uRq BRAID__InlineField-fieldSize_3HWgs_seekAnz  __BRAID_DESIGN_SYSTEM__reset-css__input___Fx8R73_"
@@ -4215,7 +4215,7 @@ SOURCE HTML: <!DOCTYPE html>
                    aria-describedby="id_1-message"
             >
             <div class="BRAID__box-display_flex_2_IRV __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
-              <div class="BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fieldSize_3HWgs_seekAnz BRAID__box-backgroundColor_input_K7ZDs_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_3wwUY_seekAnz BRAID__box-right_small_3X4VK_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
+              <div class="BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fieldSize_3HWgs_seekAnz BRAID__box-backgroundColor_input_K7ZDs_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_3wwUY_seekAnz BRAID__box-margin_right_small_3X4VK_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
                 <div class="BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_ZBQ-p BRAID__box-backgroundColor_formAccent_2ZK6A_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
                 </div>
                 <div class="BRAID__InlineField-icon_2Cszt BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-width_full_1IQ7a __BRAID_DESIGN_SYSTEM__reset-css__div___2hWulPn">
@@ -4236,7 +4236,7 @@ SOURCE HTML: <!DOCTYPE html>
               <label class="BRAID__InlineField-label_1N9cL BRAID__typography-touchable_standard_2DNlq_seekAnz BRAID__typography-touchableDesktop_standard_2TpEq_seekAnz  __BRAID_DESIGN_SYSTEM__reset-css__label___3i51Hlh"
                      for="id_1"
               >
-                <span class="BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-standard_fontSize_1_nER_seekAnz BRAID__typography-color_neutral_1NXQv_seekAnz BRAID__box-display_block__Z9GO __BRAID_DESIGN_SYSTEM__reset-css__span___1sVSwah">
+                <span class="BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_fontSize_1_nER_seekAnz BRAID__typography-color_neutral_1NXQv_seekAnz BRAID__box-display_block__Z9GO __BRAID_DESIGN_SYSTEM__reset-css__span___1sVSwah">
                   This is a checkbox
                 </span>
               </label>

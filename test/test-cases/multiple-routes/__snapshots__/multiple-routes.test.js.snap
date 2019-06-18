@@ -18,7 +18,7 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/runtime-758b148d4392db005a83.js"
+          href="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -36,16 +36,18 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+          href="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
       <h1 class="_1QX0Hyt">
-        Welcome to the Home page -
-        au
+        Welcome to the Home page
       </h1>
+      <h2>
+        au
+      </h2>
     </div>
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
@@ -58,7 +60,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/runtime-758b148d4392db005a83.js"
+            src="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
             crossorigin="anonymous"
     >
     </script>
@@ -76,7 +78,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+            src="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
             crossorigin="anonymous"
     >
     </script>
@@ -99,7 +101,7 @@ Object {
   color: red;
 }
 ,
-  "handlers-Home-fa52d793e71fdb2d203b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-c6a050477f00805f3f77.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-9e8db1c3bb272c8b69ad.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": <!DOCTYPE html>
@@ -119,7 +121,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/runtime-758b148d4392db005a83.js"
+          href="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -168,7 +170,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/runtime-758b148d4392db005a83.js"
+            src="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
             crossorigin="anonymous"
     >
     </script>
@@ -215,7 +217,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/runtime-758b148d4392db005a83.js"
+          href="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -233,16 +235,18 @@ Object {
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+          href="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
       <h1 class="_1QX0Hyt">
-        Welcome to the Home page -
-        au
+        Welcome to the Home page
       </h1>
+      <h2>
+        au
+      </h2>
     </div>
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
@@ -255,7 +259,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/runtime-758b148d4392db005a83.js"
+            src="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
             crossorigin="anonymous"
     >
     </script>
@@ -273,7 +277,7 @@ Object {
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+            src="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
             crossorigin="anonymous"
     >
     </script>
@@ -296,7 +300,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/runtime-758b148d4392db005a83.js"
+          href="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -345,7 +349,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/runtime-758b148d4392db005a83.js"
+            src="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
             crossorigin="anonymous"
     >
     </script>
@@ -392,7 +396,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4004/runtime-758b148d4392db005a83.js"
+          href="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -410,16 +414,18 @@ Object {
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+          href="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
       <h1 class="_1QX0Hyt">
-        Welcome to the Home page -
-        nz
+        Welcome to the Home page
       </h1>
+      <h2>
+        nz
+      </h2>
     </div>
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"nz"};
@@ -432,7 +438,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4004/runtime-758b148d4392db005a83.js"
+            src="http://localhost:4004/runtime-ef1692b9f4c71e130cbc.js"
             crossorigin="anonymous"
     >
     </script>
@@ -450,13 +456,13 @@ Object {
     </script>
     <script async
             data-chunk="handlers-Home"
-            src="http://localhost:4004/handlers-Home-fa52d793e71fdb2d203b.js"
+            src="http://localhost:4004/handlers-Home-c6a050477f00805f3f77.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "runtime-758b148d4392db005a83.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-ef1692b9f4c71e130cbc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-9ec0e0b1fc2eb6bb5080.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
@@ -598,9 +604,11 @@ SOURCE HTML: <!DOCTYPE html>
   <body>
     <div id="app">
       <h1 class="Home__root___1QX0Hyt">
-        Welcome to the Home page -
-        au
+        Welcome to the Home page
       </h1>
+      <h2>
+        au
+      </h2>
     </div>
     <script>
       window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};

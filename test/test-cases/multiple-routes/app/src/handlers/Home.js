@@ -1,7 +1,10 @@
 import styles from './Home.less';
 
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default props => (
-  <h1 className={styles.root}>Welcome to the Home page - {props.site}</h1>
+  <Fragment>
+    <h1 className={styles.root}>Welcome to the Home page</h1>
+    <h2>{props.site}</h2>
+  </Fragment>
 );

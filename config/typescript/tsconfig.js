@@ -22,6 +22,7 @@ module.exports = () => ({
     paths: {
       '*': ['*'],
     },
+    target: 'es5',
   },
   include: paths.src,
   exclude: [getPathFromCwd('node_modules')],

@@ -1,5 +1,4 @@
 const path = require('path');
-
 module.exports = {
   setupFilesAfterEnv: [path.resolve(__dirname, 'test/utils/jestSetup.js')],
   testURL: 'http://localhost',

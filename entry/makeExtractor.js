@@ -33,5 +33,6 @@ export default (stats, publicPath) => {
     },
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
     SkuProvider,
+    extractor,
   };
 };

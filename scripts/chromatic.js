@@ -1,3 +1,6 @@
+// Ensure screenshots are taken in production mode
+process.env.NODE_ENV = 'production';
+
 const ci = require('env-ci')();
 const chalk = require('chalk');
 const { runBin } = require('../lib/runBin');
@@ -30,7 +33,10 @@ const skuPath = require.resolve('../bin/sku');
     await runBin({
       packageName: 'storybook-chromatic',
       binName: 'chromatic',
-      options: { stdio: 'inherit' },
+      options: {
+        stdio: 'inherit',
+        env: process.env,
+      },
       args: [
         'test',
 

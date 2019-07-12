@@ -30,10 +30,7 @@ const skuPath = require.resolve('../bin/sku');
     await runBin({
       packageName: 'storybook-chromatic',
       binName: 'chromatic',
-      options: {
-        stdio: 'inherit',
-        env: process.env,
-      },
+      options: { stdio: 'inherit' },
       args: [
         'test',
 

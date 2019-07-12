@@ -41,7 +41,7 @@ const skuPath = require.resolve('../bin/sku');
         // will run 'npm run storybook', which may not be
         // configured correctly in the consumer's package.json.
         '--exec',
-        `${skuPath} storybook`,
+        `NODE_ENV=production ${skuPath} storybook`,
 
         // Changes should be reviewed in the pull request via the GitHub
         // integration, rather than breaking the build.

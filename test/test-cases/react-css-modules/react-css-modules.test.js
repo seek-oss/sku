@@ -8,6 +8,28 @@ const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
+const assertStorybookContent = async url => {
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: 'networkidle2' });
+
+  const content = await page.evaluate(async () => {
+    const element = await window.document
+      .querySelector('iframe')
+      .contentDocument.querySelector('[data-automation-text]');
+
+    const text = element.innerText;
+    const styles = window.getComputedStyle(element);
+    const color = styles.getPropertyValue('color');
+    const fontSize = styles.getPropertyValue('font-size');
+
+    return { text, color, fontSize };
+  });
+
+  expect(content.text).toEqual('Storybook render');
+  expect(content.color).toEqual('rgb(255, 0, 0)');
+  expect(content.fontSize).toEqual('32px');
+};
+
 describe('react-css-modules', () => {
   let closeAssetServer;
 
@@ -49,25 +71,7 @@ describe('react-css-modules', () => {
     });
 
     it('should start a storybook server', async () => {
-      const page = await browser.newPage();
-      await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
-
-      const content = await page.evaluate(async () => {
-        const element = await window.document
-          .querySelector('iframe')
-          .contentDocument.querySelector('[data-automation-text]');
-
-        const text = element.innerText;
-        const styles = window.getComputedStyle(element);
-        const color = styles.getPropertyValue('color');
-        const fontSize = styles.getPropertyValue('font-size');
-
-        return { text, color, fontSize };
-      });
-
-      expect(content.text).toEqual('Storybook render');
-      expect(content.color).toEqual('rgb(255, 0, 0)');
-      expect(content.fontSize).toEqual('32px');
+      await assertStorybookContent(storybookUrl);
     });
   });
 
@@ -84,8 +88,7 @@ describe('react-css-modules', () => {
     });
 
     it('should create valid storybook', async () => {
-      const app = await getAppSnapshot('http://localhost:4297');
-      expect(app).toMatchSnapshot();
+      await assertStorybookContent('http://localhost:4297');
     });
   });
 });

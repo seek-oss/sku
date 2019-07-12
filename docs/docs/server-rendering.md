@@ -27,19 +27,26 @@ Then, you need to create your `server` entry. Sku will automatically provide an 
 This can be done as follows:
 
 ```js
-import render from './render.js';
+import template from './template';
 import middleware from './middleware';
 
-export default ({ publicPath, headTags, bodyTags }) => {
-  renderCallback: (req, res) => {
-    res.send(render(publicPath, headTags, bodyTags));
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+    res.send(
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
+    );
   },
   middleware: middleware,
   onStart: app => {
     console.log('My app started 👯‍♀️!');
     app.keepAliveTimeout = 20000;
-  }
-};
+  },
+});
 ```
 
 Last but not least, please note that commands for SSR are different to the ones used normally:

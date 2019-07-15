@@ -28,13 +28,11 @@ const template = ({ headTags, bodyTags, app }) => `
 
 export default () => ({
   renderCallback: async (
-    { SkuProvider, getBodyTags, getHeadTags, getPreRenderHeadTags },
+    { SkuProvider, getBodyTags, getHeadTags },
     req,
     res,
   ) => {
-    res
-      .status(200)
-      .write(initialResponseTemplate({ headTags: getPreRenderHeadTags() }));
+    res.status(200).write(initialResponseTemplate({ headTags: getHeadTags() }));
     res.flush();
     await Promise.resolve();
 

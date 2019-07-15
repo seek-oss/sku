@@ -49,6 +49,46 @@ export default () => ({
 });
 ```
 
+`getHeadTags` can be called multiple times. Each time it will only return the new tags since last called. This can be helpful when head tags are added dynamically when rendering.
+
+For example, you may want to send back an initial response before you are done rendering your response:
+
+```js
+import { initialResponseTemplate, followupResponseTemplate } from './template';
+import middleware from './middleware';
+
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    res.status(200);
+    // Call `getHeadTags` early to retrieve whatever tags are available.
+    res.write(initialResponseTemplate({ headTags: getHeadTags() }));
+    res.flush();
+    await Promise.resolve();
+
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+
+    res.write(
+      // Call `getHeadTags` again just in case new tags are available.
+      followupResponseTemplate({
+        headTags: getHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+      }),
+    );
+    res.end;
+  },
+  middleware: middleware,
+  onStart: app => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  },
+});
+```
+
 Last but not least, please note that commands for SSR are different to the ones used normally:
 
 - Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.

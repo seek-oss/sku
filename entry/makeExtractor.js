@@ -27,8 +27,8 @@ export default (stats, publicPath) => {
     ? { crossorigin: 'anonymous' }
     : {};
 
-  let previouslyReturnedJsHeadTags = null;
-  let previouslyReturnedCssHeadTags = null;
+  let previouslyReturnedJsHeadTags = '';
+  let previouslyReturnedCssHeadTags = '';
 
   const getJsHeadTags = () =>
     extractor
@@ -40,47 +40,33 @@ export default (stats, publicPath) => {
   const getCssHeadTags = () => extractor.getStyleTags();
 
   return {
-    getPreRenderHeadTags: ({ excludeJs, excludeCss } = {}) => {
-      const tags = [];
-
-      if (!excludeCss && excludeCss) {
-        const cssHeadTags = getCssHeadTags();
-        previouslyReturnedCssHeadTags = cssHeadTags;
-        tags.push(cssHeadTags);
-      }
-
-      if (!excludeJs && excludeJs) {
-        const jsHeadTags = getJsHeadTags();
-        previouslyReturnedJsHeadTags = jsHeadTags;
-        tags.push(jsHeadTags);
-      }
-      return tags.join('\n');
-    },
     getHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
       if (!excludeCss) {
         const cssHeadTags = getCssHeadTags();
         tags.push(
-          previouslyReturnedCssHeadTags !== null
+          previouslyReturnedCssHeadTags
             ? getNewTags({
                 before: previouslyReturnedCssHeadTags,
                 after: cssHeadTags,
               })
             : cssHeadTags,
         );
+        previouslyReturnedCssHeadTags += cssHeadTags;
       }
 
       if (!excludeJs) {
         const jsHeadTags = getJsHeadTags();
         tags.push(
-          previouslyReturnedJsHeadTags !== null
+          previouslyReturnedJsHeadTags
             ? getNewTags({
                 before: previouslyReturnedJsHeadTags,
                 after: jsHeadTags,
               })
             : jsHeadTags,
         );
+        previouslyReturnedJsHeadTags += jsHeadTags;
       }
       return tags.join('\n');
     },

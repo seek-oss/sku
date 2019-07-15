@@ -20,16 +20,24 @@ export default (stats, publicPath) => {
     : {};
 
   return {
-    getHeadTags: () => {
-      const scriptPreloads = extractor
-        .getLinkTags(extraScriptTagAttributes)
-        .split('\n')
-        .filter(tag => tag.includes('as="script"'))
-        .join('\n');
+    getHeadTags: ({ js, css } = { js: true, css: true }) => {
+      const tags = [];
 
-      const styleTags = extractor.getStyleTags();
+      if (css) {
+        tags.push(extractor.getStyleTags());
+      }
 
-      return [styleTags, scriptPreloads].join('\n');
+      if (js) {
+        tags.push(
+          extractor
+            .getLinkTags(extraScriptTagAttributes)
+            .split('\n')
+            .filter(tag => tag.includes('as="script"'))
+            .join('\n'),
+        );
+      }
+
+      return tags.join('\n');
     },
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
     SkuProvider,

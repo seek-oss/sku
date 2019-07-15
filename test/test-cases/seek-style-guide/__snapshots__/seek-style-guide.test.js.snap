@@ -20,7 +20,7 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-d71f0d4e2a50b783f560.css"
+          href="/vendors~main-ce4db91395829355e6f0.css"
     >
     <link data-chunk="main"
           rel="preload"
@@ -30,7 +30,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-9a9bfdf0f10c99f233a3.js"
+          href="/vendors~main-88eec50fb7a8628323f5.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -71,7 +71,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-9a9bfdf0f10c99f233a3.js"
+            src="/vendors~main-88eec50fb7a8628323f5.js"
     >
     </script>
     <script async
@@ -83,8 +83,8 @@ Object {
 </html>,
   "main-5ffc10eabc44a7378e53.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-0fab60c54740754a26ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-9a9bfdf0f10c99f233a3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-d71f0d4e2a50b783f560.css": a,
+  "vendors~main-88eec50fb7a8628323f5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ce4db91395829355e6f0.css": a,
 abbr,
 acronym,
 address,

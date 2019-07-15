@@ -3,6 +3,14 @@ import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
 import defaultEntryPoint from '../context/defaultClientEntry';
 
+const getNewTags = ({ before, after }) => {
+  const beforeArr = before.split('\n');
+
+  const afterArr = after.split('\n');
+
+  return afterArr.filter(tag => !beforeArr.includes(tag)).join('\n');
+};
+
 export default (stats, publicPath) => {
   const extractor = new ChunkExtractor({
     stats,
@@ -19,24 +27,61 @@ export default (stats, publicPath) => {
     ? { crossorigin: 'anonymous' }
     : {};
 
+  let previouslyReturnedJsHeadTags = null;
+  let previouslyReturnedCssHeadTags = null;
+
+  const getJsHeadTags = () =>
+    extractor
+      .getLinkTags(extraScriptTagAttributes)
+      .split('\n')
+      .filter(tag => tag.includes('as="script"'))
+      .join('\n');
+
+  const getCssHeadTags = () => extractor.getStyleTags();
+
   return {
-    getHeadTags: ({ js, css } = { js: true, css: true }) => {
+    getPreRenderHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
-      if (css) {
-        tags.push(extractor.getStyleTags());
+      if (!excludeCss && excludeCss) {
+        const cssHeadTags = getCssHeadTags();
+        previouslyReturnedCssHeadTags = cssHeadTags;
+        tags.push(cssHeadTags);
       }
 
-      if (js) {
+      if (!excludeJs && excludeJs) {
+        const jsHeadTags = getJsHeadTags();
+        previouslyReturnedJsHeadTags = jsHeadTags;
+        tags.push(jsHeadTags);
+      }
+      return tags.join('\n');
+    },
+    getHeadTags: ({ excludeJs, excludeCss } = {}) => {
+      const tags = [];
+
+      if (!excludeCss) {
+        const cssHeadTags = getCssHeadTags();
         tags.push(
-          extractor
-            .getLinkTags(extraScriptTagAttributes)
-            .split('\n')
-            .filter(tag => tag.includes('as="script"'))
-            .join('\n'),
+          previouslyReturnedCssHeadTags !== null
+            ? getNewTags({
+                before: previouslyReturnedCssHeadTags,
+                after: cssHeadTags,
+              })
+            : cssHeadTags,
         );
       }
 
+      if (!excludeJs) {
+        const jsHeadTags = getJsHeadTags();
+        tags.push(
+          previouslyReturnedJsHeadTags !== null
+            ? getNewTags({
+                before: previouslyReturnedJsHeadTags,
+                after: jsHeadTags,
+              })
+            : jsHeadTags,
+        );
+      }
       return tags.join('\n');
     },
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),

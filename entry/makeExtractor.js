@@ -44,6 +44,18 @@ export default (stats, publicPath) => {
       const tags = [];
 
       if (!excludeCss) {
+        tags.push(getCssHeadTags());
+      }
+
+      if (!excludeJs) {
+        tags.push(getJsHeadTags());
+      }
+      return tags.join('\n');
+    },
+    flushHeadTags: ({ excludeJs, excludeCss } = {}) => {
+      const tags = [];
+
+      if (!excludeCss) {
         const cssHeadTags = getCssHeadTags();
         tags.push(
           previouslyReturnedCssHeadTags

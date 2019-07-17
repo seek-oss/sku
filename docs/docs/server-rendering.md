@@ -49,7 +49,11 @@ export default () => ({
 });
 ```
 
-`getHeadTags` can be called multiple times. Each time it will only return the new tags since last called. This can be helpful when head tags are added dynamically when rendering.
+## Multi-part response
+
+If you need to return HTML at different times in the request you can use `flushHeadTags` to retrieve only the new head tags since the previous call.
+
+New head tags can be added during render, typically this is due to dynamic chunks being used during a render.
 
 For example, you may want to send back an initial response before you are done rendering your response:
 
@@ -60,8 +64,8 @@ import middleware from './middleware';
 export default () => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     res.status(200);
-    // Call `getHeadTags` early to retrieve whatever tags are available.
-    res.write(initialResponseTemplate({ headTags: getHeadTags() }));
+    // Call `flushHeadTags` early to retrieve whatever tags are available.
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
     res.flush();
     await Promise.resolve();
 
@@ -72,9 +76,9 @@ export default () => ({
     );
 
     res.write(
-      // Call `getHeadTags` again just in case new tags are available.
+      // Call `flushHeadTags` again just in case new tags are available.
       followupResponseTemplate({
-        headTags: getHeadTags(),
+        headTags: flushHeadTags(),
         bodyTags: getBodyTags(),
         app,
       }),

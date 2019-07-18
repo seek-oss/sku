@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import seekAnz from 'braid-design-system/themes/seekAnz';
 import { Box, ThemeProvider } from 'braid-design-system';
 
-describe('braid-design-system', () => {
+describe('braid-design-system', async () => {
   test('components', () => {
     expect(
       renderToString(

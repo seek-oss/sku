@@ -1,3 +1,4 @@
+/* eslint-disable-next-line jest/no-jest-import */
 const jest = require('jest');
 
 const baseJestConfig = require('../config/jest/jestConfig');

@@ -6,13 +6,17 @@ const writeFile = promisify(fs.writeFile);
 
 import App from './App';
 
+const initialResponseTemplate = ({ headTags }) => `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    ${headTags}
+`;
+
 const template = ({ headTags, bodyTags, app }) => `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>hello-world</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
       ${headTags}
     </head>
     <body>
@@ -23,15 +27,26 @@ const template = ({ headTags, bodyTags, app }) => `
 `;
 
 export default () => ({
-  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+  renderCallback: async (
+    { SkuProvider, getBodyTags, flushHeadTags },
+    req,
+    res,
+  ) => {
+    res
+      .status(200)
+      .write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    res.flush();
+    await Promise.resolve();
+
     const app = renderToString(
       <SkuProvider>
         <App />
       </SkuProvider>,
     );
-    res.send(
-      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
+    res.write(
+      template({ headTags: flushHeadTags(), bodyTags: getBodyTags(), app }),
     );
+    res.end();
   },
   onStart: async () => {
     await writeFile('./started.txt', "Server started, here's your callback");

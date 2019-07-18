@@ -49,6 +49,50 @@ export default () => ({
 });
 ```
 
+## Multi-part response
+
+If you need to return HTML at different times in the request you can use `flushHeadTags` to retrieve only the new head tags since the previous call.
+
+New head tags can be added during render, typically this is due to dynamic chunks being used during a render.
+
+For example, you may want to send back an initial response before you are done rendering your response:
+
+```js
+import { initialResponseTemplate, followupResponseTemplate } from './template';
+import middleware from './middleware';
+
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    res.status(200);
+    // Call `flushHeadTags` early to retrieve whatever tags are available.
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    res.flush();
+    await Promise.resolve();
+
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+
+    res.write(
+      // Call `flushHeadTags` again just in case new tags are available.
+      followupResponseTemplate({
+        headTags: flushHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+      }),
+    );
+    res.end;
+  },
+  middleware: middleware,
+  onStart: app => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  },
+});
+```
+
 Last but not least, please note that commands for SSR are different to the ones used normally:
 
 - Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.

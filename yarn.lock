@@ -12962,10 +12962,10 @@ react-transition-group@^2.0.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-treat@1.0.0-beta.35:
-  version "1.0.0-beta.35"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.35.tgz#dcc0212f9afd273734eef705cd1254faf2034b44"
-  integrity sha512-cToCKBKDeZL9waJdVk6N9+GYoUEZSVXtqWxzulZN2dXwWCBkaci4Bk6pcuPEvbbmhXRmM+rWiIGjBsMbOE1pPw==
+react-treat@1.0.0-beta.36:
+  version "1.0.0-beta.36"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.36.tgz#45b00e98fda51db69bef18b854333e31bf0487da"
+  integrity sha512-An8J6vlO1EGgKHz6I/o/+fcJjqyzs4OQtKkoFyUhUwgQjcjPY6aKtSFPCZNFY9dEcntXYpdLn67TxXik8yX8CQ==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -15116,10 +15116,10 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-beta.35:
-  version "1.0.0-beta.35"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.35.tgz#3608d6e2f4d4d7839e3af08a9ce54c1226c95696"
-  integrity sha512-FQ6y72pOzK50G/dFofVZlOdjctqMM5GIac0h570THfHzuZtxRvTGdqIdb0NXhugLXsh+AUWy2he/bq11fx2hFQ==
+treat@1.0.0-beta.36:
+  version "1.0.0-beta.36"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.36.tgz#8f765119c62a7709be3b26f1a05ed9f0dc1ffb63"
+  integrity sha512-ADxBhU33G4ECkfQagCvM/GqHz9z51kt7mX1ZEzClrOgKJgpuQsv2aqJj8lgjhYgEClHNuqeOXaMFw7Q55zMDUQ==
   dependencies:
     "@hapi/joi" "^15.0.3"
     autoprefixer "^9.5.0"

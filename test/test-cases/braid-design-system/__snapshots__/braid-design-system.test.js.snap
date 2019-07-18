@@ -3895,7 +3895,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-5fcb9965286a7fb7eaf8.js"
+          href="https://somecdn.com/vendors~main-99e837f48f9b1fe9ad42.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -3986,7 +3986,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-5fcb9965286a7fb7eaf8.js"
+            src="https://somecdn.com/vendors~main-99e837f48f9b1fe9ad42.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4029,7 +4029,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-5fcb9965286a7fb7eaf8.js"
+          href="https://somecdn.com/vendors~main-99e837f48f9b1fe9ad42.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4120,7 +4120,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-5fcb9965286a7fb7eaf8.js"
+            src="https://somecdn.com/vendors~main-99e837f48f9b1fe9ad42.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4138,7 +4138,7 @@ Object {
     </script>
   </body>
 </html>,
-  "vendors~main-5fcb9965286a7fb7eaf8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-99e837f48f9b1fe9ad42.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

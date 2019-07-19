@@ -49,9 +49,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
 
       if (typeof valueForEnv === 'undefined') {
         console.log(
-          `WARNING: Environment variable "${key}" is missing a value for the "${
-            args.env
-          }" environment`,
+          `WARNING: Environment variable "${key}" is missing a value for the "${args.env}" environment`,
         );
         process.exit(1);
       }

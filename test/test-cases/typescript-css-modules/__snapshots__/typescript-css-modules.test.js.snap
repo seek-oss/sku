@@ -24,7 +24,7 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-2d8d580c3b4648371386.js"
+          href="http://localhost:4003/vendors~main-5209976bf4f06b2baab0.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -58,7 +58,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-2d8d580c3b4648371386.js"
+            src="http://localhost:4003/vendors~main-5209976bf4f06b2baab0.js"
             crossorigin="anonymous"
     >
     </script>
@@ -108,7 +108,7 @@ export const root: string;
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-2d8d580c3b4648371386.js"
+          href="http://localhost:4003/vendors~main-5209976bf4f06b2baab0.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -142,7 +142,7 @@ export const root: string;
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-2d8d580c3b4648371386.js"
+            src="http://localhost:4003/vendors~main-5209976bf4f06b2baab0.js"
             crossorigin="anonymous"
     >
     </script>
@@ -183,7 +183,7 @@ export const root: string;
 }
 ,
   "runtime-60d2853d68898461f692.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-2d8d580c3b4648371386.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-5209976bf4f06b2baab0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -9,8 +9,9 @@ const clientWebpackConfig = find(
   config => config.name === 'client',
 );
 
-module.exports = () =>
+module.exports = ({ config }) =>
   webpackMerge(
+    config,
     {
       // We don't want to apply the entire webpack config,
       // mainly because it configures entries and outputs,

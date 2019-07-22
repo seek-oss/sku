@@ -4868,50 +4868,50 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <span class="BRAID__reset-style_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
+      <span class="BRAID__reset-base_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
         Hello
         seekAnz
-        <div class="BRAID__reset-style_3P29T BRAID__box-display_inlineBlock_1BmwK BRAID__ChevronIcon-root_2sL5F">
+        <div class="BRAID__reset-base_3P29T BRAID__box-display_inlineBlock_1BmwK BRAID__ChevronIcon-root_2sL5F">
           <svg width="16"
                height="16"
                viewbox="0 0 1024 1024"
-               class="BRAID__reset-style_3P29T BRAID__box-position_relative_3XcVB BRAID__box-display_inlineBlock_1BmwK BRAID__Icon-inline_3DZKV BRAID__Icon-inlineSizes_standard_R49Kd_seekAnz BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_neutral_17ajR_seekAnz"
+               class="BRAID__reset-base_3P29T BRAID__box-position_relative_3XcVB BRAID__box-display_inlineBlock_1BmwK BRAID__Icon-inline_3DZKV BRAID__Icon-inlineSizes_standard_R49Kd_seekAnz BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_neutral_17ajR_seekAnz"
           >
             <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
             </path>
           </svg>
         </div>
       </span>
-      <div class="BRAID__reset-style_3P29T BRAID__box-padding_bottom_medium_o5wHJ_seekAnz">
-        <div class="BRAID__reset-style_3P29T BRAID__box-background_card_3Mbiw_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz">
-          <div class="BRAID__reset-style_3P29T">
+      <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_medium_o5wHJ_seekAnz">
+        <div class="BRAID__reset-base_3P29T BRAID__box-background_card_3Mbiw_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz">
+          <div class="BRAID__reset-base_3P29T">
             <input type="checkbox"
-                   class="BRAID__reset-style_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                   class="BRAID__reset-base_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="BRAID__reset-style_3P29T BRAID__box-display_flex_1ij33">
-              <div class="BRAID__reset-style_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
-                <div class="BRAID__reset-style_3P29T BRAID__box-background_formAccent_17cfE_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_22dp5">
-                  <div class="BRAID__reset-style_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
+            <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_1ij33">
+              <div class="BRAID__reset-base_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
+                <div class="BRAID__reset-base_3P29T BRAID__box-background_formAccent_17cfE_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_22dp5">
+                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
                     <svg viewbox="90.471 302.809 823 823"
                          width="16"
                          height="16"
-                         class="BRAID__reset-style_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-style_3KSG8_seekAnz"
+                         class="BRAID__reset-base_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-style_3KSG8_seekAnz"
                     >
                       <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="BRAID__reset-style_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_3dk2W_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_nWwhH">
+                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_3dk2W_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_nWwhH">
                 </div>
-                <div class="BRAID__reset-style_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_11agk_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_121VT">
-                  <div class="BRAID__reset-style_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
+                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_11agk_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_121VT">
+                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
                     <svg viewbox="90.471 302.809 823 823"
                          width="16"
                          height="16"
-                         class="BRAID__reset-style_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_formAccent_6eu7W_seekAnz"
+                         class="BRAID__reset-base_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_formAccent_6eu7W_seekAnz"
                     >
                       <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
                       </path>
@@ -4919,18 +4919,18 @@ SOURCE HTML: <!DOCTYPE html>
                   </div>
                 </div>
               </div>
-              <label class="BRAID__reset-style_3P29T BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_38cx__seekAnz"
+              <label class="BRAID__reset-base_3P29T BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_38cx__seekAnz"
                      for="id_1"
               >
-                <span class="BRAID__reset-style_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
+                <span class="BRAID__reset-base_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="BRAID__reset-style_3P29T BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_1ij33 BRAID__FieldMessage-root_24rCK"
+            <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_1ij33 BRAID__FieldMessage-root_24rCK"
                  id="id_1-message"
             >
-              <div class="BRAID__reset-style_3P29T BRAID__FieldMessage-grow_3KscY BRAID__FieldMessage-minHeight_3hlJo_seekAnz">
+              <div class="BRAID__reset-base_3P29T BRAID__FieldMessage-grow_3KscY BRAID__FieldMessage-minHeight_3hlJo_seekAnz">
               </div>
             </div>
           </div>
@@ -4968,12 +4968,12 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                    class="BRAID__reset-style_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                    class="BRAID__reset-base_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                     id="id_1"
                     aria-describedby="id_1-message"
 +                   value
              >
-             <div class="BRAID__reset-style_3P29T BRAID__box-display_flex_1ij33">
-               <div class="BRAID__reset-style_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
+             <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_1ij33">
+               <div class="BRAID__reset-base_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
 
 `;

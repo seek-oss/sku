@@ -12,7 +12,7 @@ describe('braid-design-system', () => {
         </BraidProvider>,
       ),
     ).toMatchInlineSnapshot(
-      `"<div class=\\"style padding_top_large_theme\\"></div>"`,
+      `"<div class=\\"base padding_top_large_theme\\"></div>"`,
     );
   });
 });

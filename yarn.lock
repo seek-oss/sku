@@ -3905,10 +3905,10 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-2.0.1.tgz#4b69a6a6455ca72085d3a0b99259c2067f4e7eea"
-  integrity sha512-jgotmiZYotCiPNLqvpRIr+rD2KIp+G4MJIX8iVei06FysHgzs3UCCuWMSQgVt65a1vrNfGFwtFmH2pmuKLc1ug==
+braid-design-system@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-2.0.2.tgz#c5715e74b23f935a94771d115138016616629c6c"
+  integrity sha512-XjxyMgKLaQg2h1V1nAZEALS+WRXsCH9+c5E8gkyHDPKR8jz1Oblgz8XW3jxs6kY/aSgPMyZXa2o8/9OEs+YzqA==
   dependencies:
     "@types/classnames" "^2.2.8"
     "@types/lodash" "^4.14.132"

@@ -175,7 +175,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "async-disk-cache": "^1.3.4",
-    "braid-design-system": "^2.0.1",
+    "braid-design-system": "^2.0.2",
     "child-process-promise": "^2.2.1",
     "commitizen": "^3.1.1",
     "commitlint-config-seek": "^1.0.0",

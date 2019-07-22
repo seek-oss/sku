@@ -2267,6 +2267,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/classnames@^2.2.8":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.9.tgz#d868b6febb02666330410fe7f58f3c4b8258be7b"
+  integrity sha512-MNl+rT5UmZeilaPxAVs6YaPC2m6aA8rofviZbhbxpPpl61uKodfdQVsBtgJGTqGizEf02oW3tsVe7FYB8kK14A==
+
 "@types/dedent@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@types/dedent/-/dedent-0.7.0.tgz#155f339ca404e6dd90b9ce46a3f78fd69ca9b050"
@@ -3900,18 +3905,22 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-braid-design-system@^0.0.79:
-  version "0.0.79"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-0.0.79.tgz#d62da64ead5a42f72fdcbe3af7379a08460013af"
-  integrity sha512-b2Hor9TpiLCXzzfJXBkDGTm6CzopzEq1gjLhvc4TEumoDavxJmELChGijx4ectKwcInHL6nT+skrOcm0wAMFCg==
+braid-design-system@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-2.0.1.tgz#4b69a6a6455ca72085d3a0b99259c2067f4e7eea"
+  integrity sha512-jgotmiZYotCiPNLqvpRIr+rD2KIp+G4MJIX8iVei06FysHgzs3UCCuWMSQgVt65a1vrNfGFwtFmH2pmuKLc1ug==
   dependencies:
+    "@types/classnames" "^2.2.8"
     "@types/lodash" "^4.14.132"
     "@types/react" "^16.8.8"
     basekick "^3.1.1"
+    classnames "^2.2.6"
     csstype "^2.6.4"
+    gradient-parser "^0.1.5"
+    is-mobile "^2.0.1"
     lodash "^4.17.11"
     polished "^3.0.3"
-    utility-types "^3.2.1"
+    utility-types "^3.7.0"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -4391,7 +4400,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.0, classnames@^2.2.5:
+classnames@^2.2.0, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -7476,6 +7485,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.3
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
   integrity sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
 
+gradient-parser@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/gradient-parser/-/gradient-parser-0.1.5.tgz#0c7e2179559e5ce7d8d71f4423af937100b2248c"
+  integrity sha1-DH4heVWeXOfY1x9EI6+TcQCyJIw=
+
 growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
@@ -8423,6 +8437,11 @@ is-installed-globally@^0.1.0:
   dependencies:
     global-dirs "^0.1.0"
     is-path-inside "^1.0.0"
+
+is-mobile@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/is-mobile/-/is-mobile-2.0.1.tgz#7e307cf066030e5c1241b53521ceaa999d1f1a2f"
+  integrity sha512-JNaoIFM3geBseef71iOu4024vfphwjFQPFGD64cziXbbyHdrF9zLTqxj2VEbrdOS/gkiQ5b3HldPf4eYPu8g/g==
 
 is-npm@^1.0.0:
   version "1.0.0"
@@ -9975,6 +9994,11 @@ lodash@^4.17.13:
   version "4.17.14"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
   integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
+
+lodash@^4.17.14:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-symbols@^1.0.2:
   version "1.0.2"
@@ -13766,10 +13790,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@^13.0.1:
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-13.2.3.tgz#3c20765d5fdab1223d9e32d258561e7f86d578fc"
-  integrity sha512-JF+xeo4RpoT2ZtIdPNFhLqvHznoszczRhHGjfW/jp0J4/uVjEovq5x1Zwn+biXWXsfAT/Lwff8Tc1pCAQL2kpg==
+seek-asia-style-guide@^14.1.4:
+  version "14.1.4"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-14.1.4.tgz#e4b680b09ea4430857cadef852cab9b2ea70836e"
+  integrity sha512-VSRg9Z2qIB4dO2ghRd0jzcYkgsHvlZJ9oTCj1rTtjtchDkAmeh1c65e3izDdNqp6JHh7AZzsO/ixcTjC8/DhZw==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"
@@ -13789,14 +13813,14 @@ seek-asia-style-guide@^13.0.1:
     react-text-mask "^5.4.3"
     webfontloader "^1.6.28"
 
-seek-style-guide@^40.1.1:
-  version "40.2.0"
-  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-40.2.0.tgz#2450bffb801f5f005bdd207d6401da42443c69ed"
-  integrity sha512-KOLskbxBC8oBRStRKvONyabMx33AAk7olA2SCuFj7Ggs9pfFuikp9v5Hfyh+zoA1vLW4XZaKpNkKc1tPUIpo5Q==
+seek-style-guide@^40.2.1:
+  version "40.2.1"
+  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-40.2.1.tgz#468b4ea9b4399d3ecc58349934f717800f53a52d"
+  integrity sha512-XxfXwmBJS7K/pFRO0UFINpOPGZWfJ+PKCtb0ta8JCQaZY0vCArcVTQn0p70TmArvzfv3Uw8zhFIHj8i88WjPoA==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.5"
-    lodash "^4.17.4"
+    lodash "^4.17.14"
     pad-left "^2.1.0"
     prop-types "^15.6.0"
     react-autowhatever "10.1.1"
@@ -15553,7 +15577,7 @@ utila@^0.4.0, utila@~0.4:
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
 
-utility-types@^3.2.1:
+utility-types@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.7.0.tgz#51f1c29fa35d4267488345706efcf3f68f2b1933"
   integrity sha512-mqRJXN7dEArK/NZNJUubjr9kbFFVZcmF/JHDc9jt5O/aYXUVmopHYujDMhLmLil1Bxo2+khe6KAIVvDH9Yc4VA==

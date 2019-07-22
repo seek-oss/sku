@@ -20,7 +20,7 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-cbdcb041c574732aad9e.css"
+          href="/vendors~main-89c506fefb5fff295f82.css"
     >
     <link data-chunk="main"
           rel="preload"
@@ -30,7 +30,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-825663428ae0bb4cca52.js"
+          href="/vendors~main-df29ba590bdbd21ccc3a.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -46,15 +46,13 @@ Object {
             SEEK Asia Style Guide
           </h1>
         </div>
-        <div class>
-          <div class="_12lF2dd">
-            <div class="_1I9KGZo">
-              <span class="T_bb8ZR _2l47xPH">
-                <span class>
-                  Hello world!
-                </span>
+        <div class="_12lF2dd">
+          <div class="_1I9KGZo">
+            <span class="T_bb8ZR _2l47xPH">
+              <span class>
+                Hello world!
               </span>
-            </div>
+            </span>
           </div>
         </div>
       </div>
@@ -71,7 +69,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-825663428ae0bb4cca52.js"
+            src="/vendors~main-df29ba590bdbd21ccc3a.js"
     >
     </script>
     <script async
@@ -83,8 +81,7 @@ Object {
 </html>,
   "main-f7f033706f301a6da9f3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-0fab60c54740754a26ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-825663428ae0bb4cca52.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-cbdcb041c574732aad9e.css": a,
+  "vendors~main-89c506fefb5fff295f82.css": a,
 abbr,
 acronym,
 address,
@@ -1775,6 +1772,13 @@ html {
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
+@media only screen and (min-width: 992px) {
+  ._23oNkQB {
+    -webkit-flex-basis: 50%;
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+  }
+}
 ._2RtvDJX,
 ._3pXLdJY {
   display: -webkit-flex;
@@ -2248,6 +2252,10 @@ html {
   max-width: 500px;
   width: 100%;
   padding-bottom: 12px;
+}
+._1YwmoN5 {
+  background-color: #eee;
+  height: 100px;
 }
 ._3rKKEGh {
   -webkit-flex-direction: row;
@@ -2897,6 +2905,7 @@ html {
 }
 ._VaypF0 .w3_mugI {
   color: #0f2c55;
+  padding-bottom: 0;
 }
 ._1Yu6UvA {
   margin: 8px 16px 0 0;
@@ -3569,8 +3578,9 @@ html {
   }
 }
 ._12lF2dd {
+  margin-left: auto;
+  margin-right: auto;
   max-width: 1168px;
-  margin: 0 auto;
 }
 ._2YSEKp5 {
   display: -webkit-flex;
@@ -4239,5 +4249,6 @@ html {
   outline: none;
 }
 ,
+  "vendors~main-df29ba590bdbd21ccc3a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

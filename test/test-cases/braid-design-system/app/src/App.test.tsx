@@ -1,18 +1,18 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import seekAnz from 'braid-design-system/themes/seekAnz';
-import { Box, ThemeProvider } from 'braid-design-system';
+import { Box, BraidProvider } from 'braid-design-system';
 
 describe('braid-design-system', () => {
   test('components', () => {
     expect(
       renderToString(
-        <ThemeProvider theme={seekAnz}>
+        <BraidProvider theme={seekAnz}>
           <Box paddingTop="large" />
-        </ThemeProvider>,
+        </BraidProvider>,
       ),
     ).toMatchInlineSnapshot(
-      `"<div class=\\"padding_top_large_theme\\"></div>"`,
+      `"<div class=\\"style padding_top_large_theme\\"></div>"`,
     );
   });
 });

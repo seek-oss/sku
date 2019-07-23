@@ -2,7 +2,7 @@ import React from 'react';
 import loadable from 'sku/@loadable/component'; // eslint-disable-line import/no-unresolved
 
 import {
-  ThemeProvider,
+  BraidProvider,
   Text,
   Checkbox,
   Card,
@@ -18,7 +18,7 @@ const noop = () => {};
 export default ({ theme: themeName }) => (
   <Theme themeName={themeName}>
     {({ default: theme }) => (
-      <ThemeProvider theme={theme}>
+      <BraidProvider theme={theme}>
         <Text>
           Hello {themeName} <ChevronIcon inline />
         </Text>
@@ -28,10 +28,9 @@ export default ({ theme: themeName }) => (
             onChange={noop}
             id="id_1"
             label="This is a checkbox"
-            message={false}
           />
         </Card>
-      </ThemeProvider>
+      </BraidProvider>
     )}
   </Theme>
 );

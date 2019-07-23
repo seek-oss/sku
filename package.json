@@ -139,7 +139,7 @@
     "less-loader": "^4.1.0",
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
-    "mini-css-extract-plugin": "^0.5.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-emoji": "^1.8.1",
     "opn": "^5.3.0",
     "playroom": "^0.9.1",
@@ -165,7 +165,7 @@
     "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-dev-server": "3.2.1",
+    "webpack-dev-server": "3.7.2",
     "webpack-merge": "^4.1.5",
     "webpack-node-externals": "^1.7.2"
   },
@@ -202,7 +202,7 @@
     "semantic-release": "^15.13.12",
     "serve-handler": "^6.0.1",
     "wait-on": "^3.2.0",
-    "webpack-stats-plugin": "^0.2.1"
+    "webpack-stats-plugin": "^0.3.0"
   },
   "toolchain": {
     "node": "10.15.1",

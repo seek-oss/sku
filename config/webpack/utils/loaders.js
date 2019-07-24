@@ -3,6 +3,7 @@ const { isProductionBuild, isCI } = require('./env');
 const isTypeScript = require('../../../lib/isTypeScript');
 const { resolvePackage } = require('./resolvePackage');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const getLocalIdent = require('./getIdentName');
 
 /**
  * e.g.
@@ -55,18 +56,29 @@ const makeCssLoaders = (options = {}) => {
       : [];
 
   return [
-    ...(hot ? ['css-hot-loader'] : []),
-    ...(!server ? [MiniCssExtractPlugin.loader] : []),
+    ...(!server
+      ? [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: hot,
+            },
+          },
+        ]
+      : []),
     ...cssModuleToTypeScriptLoader,
     {
       loader: require.resolve('css-loader'),
       options: {
-        modules: 'local',
-        localIdentName: `${debugIdent}[hash:base64:7]`,
+        modules: {
+          mode: 'local',
+          localIdentName: `${debugIdent}[hash:base64:7]`,
+          getLocalIdent,
+        },
 
-        // On the server, avoid generating a CSS file with exportOnlyLocals.
+        // On the server, avoid generating a CSS file with onlyLocals.
         // Only the client build should generate CSS files.
-        exportOnlyLocals: Boolean(server),
+        onlyLocals: Boolean(server),
         importLoaders: 3,
       },
     },

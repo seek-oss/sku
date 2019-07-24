@@ -101,7 +101,7 @@
     "babel-plugin-seek-style-guide": "^1.0.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "babel-plugin-treat": "1.0.0-beta.23",
+    "babel-plugin-treat": "1.0.0",
     "browserslist": "^4.4.0",
     "browserslist-config-seek": "^2.0.0",
     "chalk": "^2.4.1",

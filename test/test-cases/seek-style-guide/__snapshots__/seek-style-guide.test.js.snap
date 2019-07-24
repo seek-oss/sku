@@ -3,8 +3,6 @@
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
   "externals.json": "[
-  \\"fs\\",
-  \\"path\\",
   \\"react\\",
   \\"react-dom/server\\"
 ]",

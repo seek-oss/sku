@@ -8,13 +8,10 @@ import {
   style,
   styleMap,
   styleTree,
-  css,
   globalStyle,
   resolveStyles,
   resolveClassName,
-  resolveClassNames,
   Style,
-  Styles,
   GlobalStyle,
   CSSProperties,
   ThemeRef,
@@ -23,32 +20,23 @@ import {
 } from 'treat';
 
 // Provided for backwards compatibility. Remove in sku 9
-import {
-  TreatProvider,
-  useStyles,
-  useClassName,
-  useClassNames,
-} from 'react-treat';
+import { TreatProvider, useStyles, useClassName } from 'react-treat';
 
 export {
   createTheme,
   style,
   styleMap,
   styleTree,
-  css,
   TreatProvider,
   useStyles,
   useClassName,
-  useClassNames,
   resolveStyles,
   resolveClassName,
-  resolveClassNames,
   globalStyle,
 };
 
 // We need to re-export types separately or they won't work in webpack :(((
 export type Style = Style;
-export type Styles = Styles;
 export type GlobalStyle = GlobalStyle;
 export type CSSProperties = CSSProperties;
 export type ThemeRef = ThemeRef;

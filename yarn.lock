@@ -3641,10 +3641,10 @@ babel-plugin-transform-undefined-to-void@^6.9.4:
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.9.4.tgz#be241ca81404030678b748717322b89d0c8fe280"
   integrity sha1-viQcqBQEAwZ4t0hxcyK4nQyP4oA=
 
-babel-plugin-treat@1.0.0-beta.23:
-  version "1.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0-beta.23.tgz#e39f219686c6cb955aed174b07b8fef7a982d9be"
-  integrity sha512-U3XwAG1VMoE5YOAsc6h79wndN/kjVzqXfz7EssHTpj1KH640IooYwxFMrVdmV66Kr9iL41I0S65j3FqnioiO5A==
+babel-plugin-treat@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-treat/-/babel-plugin-treat-1.0.0.tgz#f75972f7d53d37c5eba176046081233f8b8b2272"
+  integrity sha512-ixeYy6QG2KikY18pLFqsgjB18I3i6MqXA7QgOSe2VBzx+8IW3m/HcEmSOLsIQhYSrMXAJ5wfYxq2a0k7yrfS9Q==
 
 babel-polyfill@6.26.0:
   version "6.26.0"
@@ -13188,10 +13188,10 @@ react-transition-group@^2.0.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-treat@1.0.0-beta.36:
-  version "1.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0-beta.36.tgz#45b00e98fda51db69bef18b854333e31bf0487da"
-  integrity sha512-An8J6vlO1EGgKHz6I/o/+fcJjqyzs4OQtKkoFyUhUwgQjcjPY6aKtSFPCZNFY9dEcntXYpdLn67TxXik8yX8CQ==
+react-treat@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0.tgz#d789ad466c4bae8b002e202d4c444ac0fa54a355"
+  integrity sha512-RTNchTZBN0QXDnzT9SLMy21lbbBqMbBQxDf10zDTihGoF77bojV3vzvg/JV2f2IdTfgXIq8AHiNzfpI7OIVuYQ==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -15371,10 +15371,10 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@1.0.0-beta.36:
-  version "1.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0-beta.36.tgz#8f765119c62a7709be3b26f1a05ed9f0dc1ffb63"
-  integrity sha512-ADxBhU33G4ECkfQagCvM/GqHz9z51kt7mX1ZEzClrOgKJgpuQsv2aqJj8lgjhYgEClHNuqeOXaMFw7Q55zMDUQ==
+treat@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0.tgz#11b4221fd15e5ee1a347a08c852bf7193724c937"
+  integrity sha512-P6oSaU7vgezuczklKrjcXSlDDmYgSjm8M3MLtvayH9oojtFNPYiuhyZ1M5J++AFA0Ik+ZxATbuyGGcB52aexnA==
   dependencies:
     "@hapi/joi" "^15.0.3"
     autoprefixer "^9.5.0"

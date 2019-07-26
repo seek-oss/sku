@@ -1,7 +1,7 @@
 import React from 'react';
 import App from './App';
 import { StaticRouter } from 'react-router-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 describe('multiple-routes', () => {
   it('should support loadable components', () => {

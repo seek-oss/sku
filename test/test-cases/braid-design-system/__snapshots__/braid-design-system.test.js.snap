@@ -2,8 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "braid-design-system-themes-jobStreet-0b48f72cf5b2bea2d0fc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreet-3cdfe5d020918ac4f2d9.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -49,6 +48,9 @@ Object {
 }
 ._18GrW::-ms-expand {
   display: none;
+}
+.Ufq8O {
+  background: none;
 }
 ._1IQ7a {
   width: 100%;
@@ -922,8 +924,10 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-18472c737c376fe85912.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreetClassic-315bd2bbcdbe84aeb64c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobStreetClassic-f0ed6379e6e4d5e0b5bd.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -969,6 +973,9 @@ Object {
 }
 ._18GrW::-ms-expand {
   display: none;
+}
+.Ufq8O {
+  background: none;
 }
 ._1IQ7a {
   width: 100%;
@@ -1842,9 +1849,9 @@ Object {
   min-height: 20px;
 }
 ,
-  "braid-design-system-themes-jobStreetClassic-47eafc5990f43407cf67.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-4f6bf7ee37ba3e88454d.css": ._3QqL3 {
+  "braid-design-system-themes-jobsDB-3584cd3992fa47a0345e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobsDB-94ffb363141fa928716d.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1890,6 +1897,9 @@ Object {
 }
 ._18GrW::-ms-expand {
   display: none;
+}
+.Ufq8O {
+  background: none;
 }
 ._1IQ7a {
   width: 100%;
@@ -2759,9 +2769,9 @@ Object {
   min-height: 20px;
 }
 ,
-  "braid-design-system-themes-jobsDB-57db0d9e3bed98b7467d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobsDB.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-38b7ba8f09e1bfe490e3.css": ._3QqL3 {
+  "braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-seekAnz-8973175a290cdc780477.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -2807,6 +2817,9 @@ Object {
 }
 ._18GrW::-ms-expand {
   display: none;
+}
+.Ufq8O {
+  background: none;
 }
 ._1IQ7a {
   width: 100%;
@@ -3651,10 +3664,9 @@ Object {
   min-height: 18px;
 }
 ,
-  "braid-design-system-themes-seekAnz-4b935dcaefe50a1fcfc2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-3fe45e17cfda74c6edc6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-c095933f9b45e33eb4fa.css": ._3QqL3 {
+  "braid-design-system-themes-wireframe-2ec24e3b41cf1bf181a7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-wireframe-bdb465e80c95d5be2aa8.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -3700,6 +3712,9 @@ Object {
 }
 ._18GrW::-ms-expand {
   display: none;
+}
+.Ufq8O {
+  background: none;
 }
 ._1IQ7a {
   width: 100%;
@@ -4545,15 +4560,8 @@ Object {
 ,
   "braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
-  \\"assert\\",
-  \\"crypto\\",
-  \\"fs\\",
-  \\"net\\",
-  \\"path\\",
-  \\"punycode\\",
   \\"react\\",
-  \\"react-dom/server\\",
-  \\"util\\"
+  \\"react-dom/server\\"
 ]",
   "jobStreet/index.html": <!DOCTYPE html>
 <html>
@@ -4567,18 +4575,18 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-3cdfe5d020918ac4f2d9.css"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-9b2020245f6853a21c30.js"
+          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-2a1e7193c882b05f8062.js"
+          href="https://somecdn.com/vendors~main-d96be62f90ded194d2ba.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4590,7 +4598,7 @@ Object {
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-0b48f72cf5b2bea2d0fc.js"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4682,13 +4690,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-9b2020245f6853a21c30.js"
+            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-2a1e7193c882b05f8062.js"
+            src="https://somecdn.com/vendors~main-d96be62f90ded194d2ba.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4700,14 +4708,14 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-jobStreet"
-            src="https://somecdn.com/braid-design-system-themes-jobStreet-0b48f72cf5b2bea2d0fc.js"
+            src="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "main-d9b7d495a95ff69333b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-9b2020245f6853a21c30.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-4c94595940a6c7edbaf9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -4720,18 +4728,18 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-38b7ba8f09e1bfe490e3.css"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-8973175a290cdc780477.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-9b2020245f6853a21c30.js"
+          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-2a1e7193c882b05f8062.js"
+          href="https://somecdn.com/vendors~main-d96be62f90ded194d2ba.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4743,7 +4751,7 @@ Object {
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-4b935dcaefe50a1fcfc2.js"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4835,13 +4843,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-9b2020245f6853a21c30.js"
+            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-2a1e7193c882b05f8062.js"
+            src="https://somecdn.com/vendors~main-d96be62f90ded194d2ba.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4853,13 +4861,13 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-seekAnz"
-            src="https://somecdn.com/braid-design-system-themes-seekAnz-4b935dcaefe50a1fcfc2.js"
+            src="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "vendors~main-2a1e7193c882b05f8062.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-d96be62f90ded194d2ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

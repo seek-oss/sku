@@ -1688,29 +1688,29 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@loadable/babel-plugin@^5.6.0":
+"@loadable/babel-plugin@^5.10.0":
   version "5.10.0"
   resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.10.0.tgz#9d2b83649c910404214ae0da4c4a84a2a3f583ed"
   integrity sha512-6hbsDIuHSjgATLK7m/Y7WwZ1t6vmZ22AYTtYsjK5L17KxiPm9v1hvUoheLs3jnDFUTHS6mgzD8vliZJdfsLLQA==
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.2.0"
 
-"@loadable/component@^5.6.0":
-  version "5.10.1"
-  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.10.1.tgz#09613e46d409ffacb3b4403658ed90adbc01ba24"
-  integrity sha512-nYb38UbPWCWB9R8US4Za0JzgjS1QaY13STJhU7ZUsfO2qG3k5huppVF92eX2iauhfpdrRkCDQqi+Fg/US4FXIg==
+"@loadable/component@^5.10.2":
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.10.2.tgz#1f51e7a0064cc0f59604b1933bbc7a1bbfd84d18"
+  integrity sha512-pUzGRc/mhGzZ0+xJPQErnS68BQEApFYGwn10iSDqBHdDhOruCASTer1J+rYI4jaJJcegJwnuzh7j/SqMoiCyAQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
     hoist-non-react-statics "^3.3.0"
 
-"@loadable/server@^5.6.0":
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.9.0.tgz#ca40a7d5317a5a211ef9ac2278810c8671fb80f4"
-  integrity sha512-AJv446qSJgMr49HBBECtfhD9JN4AB9SKtWLI+Ri20Awq6HY79a8mnYN5aFmSq2g5rdp7mhXLm6A9cstbz5LDow==
+"@loadable/server@^5.10.2":
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.10.2.tgz#044feee9026eb104ebcbfb9e35dbfe4e7976523a"
+  integrity sha512-6B0/LxiX4iWhucSHEAgiDfQthFjRfd7cfifNv/rlvbRN+KVJh0mJwmAAlRLee3n7bDfEhoRIH3v/7p7O7OfgWw==
   dependencies:
     lodash "^4.17.11"
 
-"@loadable/webpack-plugin@^5.5.0":
+"@loadable/webpack-plugin@^5.7.1":
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.7.1.tgz#9fe4b19c347eaa72f8ff366ae9a9d2b724f86124"
   integrity sha512-tURNYwPUahbM4Miz/mwMD+PZGnMpknRukwt4RViVX6tYOt06a5U92xJTv7t54C4tHdtCIEOmDrqCo97sfIu4mg==
@@ -2339,17 +2339,17 @@
   resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
   integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
 
-"@types/jest@^24.0.0":
-  version "24.0.13"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.13.tgz#10f50b64cb05fb02411fbba49e9042a3a11da3f9"
-  integrity sha512-3m6RPnO35r7Dg+uMLj1+xfZaOgIHHHut61djNjzwExXN4/Pm9has9C6I1KMYSfz7mahDhWUOVg4HW/nZdv5Pww==
+"@types/jest@^24.0.15":
+  version "24.0.15"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.15.tgz#6c42d5af7fe3b44ffff7cc65de7bf741e8fa427f"
+  integrity sha512-MU1HIvWUme74stAoc3mgAi+aMlgKOudgEvQDIm1v4RkrDudBh1T+NFp5sftpBAdXdx1J0PbdpJ+M2EsSOi1djA==
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/loadable__component@^5.2.0":
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.9.0.tgz#6c59ccbfa49329d227f74d0c49002888a11a817d"
-  integrity sha512-uTsudqvPxlZumuXQ4YOfD6yoGjPe3RmkL7q5e3HEFERPKv4BCYPTPE2vQ0Klj9KMWFbprEuF1DRjmjlQRunkEA==
+"@types/loadable__component@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@types/loadable__component/-/loadable__component-5.10.0.tgz#178fdc401983f4f93647fac778226da7b8c1e080"
+  integrity sha512-AaDP1VxV3p7CdPOtOTl3ALgQ6ES4AxJKO9UGj9vJonq/w2yERxwdzFiWNQFh9fEDXEzjxujBlM2RmSJtHV1/pA==
   dependencies:
     "@types/react" "*"
 
@@ -3331,7 +3331,7 @@ babel-helper-to-multiple-sequence-expressions@^0.5.0:
   resolved "https://registry.yarnpkg.com/babel-helper-to-multiple-sequence-expressions/-/babel-helper-to-multiple-sequence-expressions-0.5.0.tgz#a3f924e3561882d42fcf48907aa98f7979a4588d"
   integrity sha512-m2CvfDW4+1qfDdsrtf4dwOslQC3yhbgyBFptncp4wvtdrDHqueW7slsYv4gArie056phvQFhT2nRcGS4bnm6mA==
 
-babel-jest@^24.0.0, babel-jest@^24.8.0:
+babel-jest@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.8.0.tgz#5c15ff2b28e20b0f45df43fe6b7f2aae93dba589"
   integrity sha512-+5/kaZt4I9efoXzPlZASyK/lN9qdRKmmUav9smVc0ruPQD7IsfucQ87gpOE8mn2jbDuS6M/YOW6n3v9ZoIfgnw==
@@ -9263,7 +9263,7 @@ jest-validate@^24.8.0:
     leven "^2.1.0"
     pretty-format "^24.8.0"
 
-jest-watch-typeahead@^0.3.0:
+jest-watch-typeahead@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/jest-watch-typeahead/-/jest-watch-typeahead-0.3.1.tgz#47701024b64b444aa325d801b4b3a6d61ed70701"
   integrity sha512-cDIko96c4Yqg/7mfye1eEYZ6Pvugo9mnOOhGQod3Es7/KptNv1b+9gFVaotzdqNqTlwbkA80BnWHtzV4dc+trA==
@@ -9296,7 +9296,7 @@ jest-worker@^24.6.0:
     merge-stream "^1.0.1"
     supports-color "^6.1.0"
 
-jest@^24.0.0:
+jest@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-24.8.0.tgz#d5dff1984d0d1002196e9b7f12f75af1b2809081"
   integrity sha512-o0HM90RKFRNWmAWvlyV8i5jGZ97pFwkeVoGvPW1EtLTgJc2+jcuqcbbqcSZLE/3f2S5pt0y2ZBETuhpWNl1Reg==
@@ -11982,10 +11982,10 @@ pkg-up@2.0.0, pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-playroom@^0.9.3:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.9.3.tgz#49b765069f020a9584c15f48ac825aa4a063dbc6"
-  integrity sha512-gD06/W8Gu8Slu5uedT7j09hEoTWFYWpuzryg4z0dgKsu20o6AyaNkfb5RjmfRVg/f/qrCXYonpgFdl/P5wQlKQ==
+playroom@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.9.4.tgz#d2853895e38368976e29ec44c08a3b7699fd5597"
+  integrity sha512-/QsW+QI5uCm9z7IKnOBSYmQDJYFA8wOL7nakDjL/hQ+Glpb6kFr6pnZTxvVUQWv3gxwR3I6i5tuq5HAST83o5A==
   dependencies:
     "@babel/core" "^7.1.0"
     "@babel/preset-env" "^7.2.0"
@@ -12007,7 +12007,7 @@ playroom@^0.9.3:
     less "^3.8.1"
     less-loader "^4.1.0"
     localforage "^1.7.2"
-    lodash "^4.17.11"
+    lodash "^4.17.15"
     mini-css-extract-plugin "^0.4.3"
     opn "^5.4.0"
     parse-prop-types "^0.3.0"

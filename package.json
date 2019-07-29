@@ -204,8 +204,8 @@
     "wait-on": "^3.3.0",
     "webpack-stats-plugin": "^0.3.0"
   },
-  "toolchain": {
+  "volta": {
     "node": "10.15.1",
-    "yarn": "1.16.0"
+    "yarn": "1.17.3"
   }
 }

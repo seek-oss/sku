@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreet-a7b06a72c79448e0c29b.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -38,18 +38,18 @@ Object {
   border-spacing: 0;
 }
 ._1xrTt {
-  background-color: transparent;
-  color: inherit;
-}
-._18GrW {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW::-ms-expand {
+._18GrW {
+  background-color: transparent;
+  color: inherit;
+}
+.Ufq8O::-ms-expand {
   display: none;
 }
-.Ufq8O {
+._2R_8K {
   background: none;
 }
 ._1IQ7a {
@@ -116,11 +116,9 @@ Object {
   opacity: 1;
 }
 ._3PnVZ {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 ._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 ._121VT > ._3PnVZ {
@@ -160,22 +158,16 @@ Object {
   flex-grow: 0;
 }
 ._2sL5F {
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 ._2t54j {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .BkvSr {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._2E4Yy {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .E8MkT_1 {
@@ -383,20 +375,13 @@ Object {
   padding-right: 0;
 }
 ._1DQWm_1:active {
-  -webkit-transform: scale(0.98);
   transform: scale(0.98);
 }
 ._3EZ81_1 {
-  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
   transition: transform 0.125s ease, opacity 0.125s ease;
-  transition: transform 0.125s ease, opacity 0.125s ease,
-    -webkit-transform 0.125s ease;
 }
 .MVjBS_1 {
-  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
-    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
 }
 ._1OCHt_1 {
   border-radius: 4px;
@@ -765,7 +750,6 @@ Object {
   line-height: 16px;
 }
 .xvwS0_1 {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._1_nER_1 {
@@ -773,7 +757,6 @@ Object {
   line-height: 20px;
 }
 ._1PM5y_1 {
-  -webkit-transform: translateY(0.3442857142857143em);
   transform: translateY(0.3442857142857143em);
 }
 ._6ufcS_1 {
@@ -781,7 +764,6 @@ Object {
   line-height: 24px;
 }
 ._2WTa0_1 {
-  -webkit-transform: translateY(0.38em);
   transform: translateY(0.38em);
 }
 ._8QVx6_1 {
@@ -789,7 +771,6 @@ Object {
   line-height: 24px;
 }
 ._3srVf_1 {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._30vru_1 {
@@ -803,7 +784,6 @@ Object {
   line-height: 36px;
 }
 ._3LFeA_1 {
-  -webkit-transform: translateY(0.2728571428571429em);
   transform: translateY(0.2728571428571429em);
 }
 ._1H36Y_1 {
@@ -811,7 +791,6 @@ Object {
   line-height: 32px;
 }
 ._1NXQv_1 {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._642YY_1 {
@@ -819,7 +798,6 @@ Object {
   line-height: 28px;
 }
 ._2k6I7_1 {
-  -webkit-transform: translateY(0.32999999999999996em);
   transform: translateY(0.32999999999999996em);
 }
 ._2VCbC_1 {
@@ -827,7 +805,6 @@ Object {
   line-height: 24px;
 }
 ._1VMf3_1 {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._17ajR_1 {
@@ -892,7 +869,6 @@ Object {
     line-height: 44px;
   }
   ._3LFeA_1 {
-    -webkit-transform: translateY(0.2770588235294118em);
     transform: translateY(0.2770588235294118em);
   }
   ._1H36Y_1 {
@@ -900,7 +876,6 @@ Object {
     line-height: 36px;
   }
   ._1NXQv_1 {
-    -webkit-transform: translateY(0.2728571428571429em);
     transform: translateY(0.2728571428571429em);
   }
   ._642YY_1 {
@@ -908,7 +883,6 @@ Object {
     line-height: 32px;
   }
   ._2k6I7_1 {
-    -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
   }
   ._2VCbC_1 {
@@ -916,7 +890,6 @@ Object {
     line-height: 28px;
   }
   ._1VMf3_1 {
-    -webkit-transform: translateY(0.32999999999999996em);
     transform: translateY(0.32999999999999996em);
   }
 }
@@ -924,10 +897,10 @@ Object {
   min-height: 20px;
 }
 ,
-  "braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobStreet-b87f95c63f4a16f4842a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-315bd2bbcdbe84aeb64c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-f0ed6379e6e4d5e0b5bd.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreetClassic-56b7978f0975c91e6a98.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobStreetClassic-b3eef11be662e87536a8.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -963,18 +936,18 @@ Object {
   border-spacing: 0;
 }
 ._1xrTt {
-  background-color: transparent;
-  color: inherit;
-}
-._18GrW {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW::-ms-expand {
+._18GrW {
+  background-color: transparent;
+  color: inherit;
+}
+.Ufq8O::-ms-expand {
   display: none;
 }
-.Ufq8O {
+._2R_8K {
   background: none;
 }
 ._1IQ7a {
@@ -1041,11 +1014,9 @@ Object {
   opacity: 1;
 }
 ._3PnVZ {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 ._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 ._121VT > ._3PnVZ {
@@ -1085,22 +1056,16 @@ Object {
   flex-grow: 0;
 }
 ._2sL5F {
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 ._2t54j {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .BkvSr {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._2E4Yy {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .E8MkT_2oR {
@@ -1308,20 +1273,13 @@ Object {
   padding-right: 0;
 }
 ._1DQWm_2oR:active {
-  -webkit-transform: scale(0.98);
   transform: scale(0.98);
 }
 ._3EZ81_2oR {
-  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
   transition: transform 0.125s ease, opacity 0.125s ease;
-  transition: transform 0.125s ease, opacity 0.125s ease,
-    -webkit-transform 0.125s ease;
 }
 .MVjBS_2oR {
-  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
-    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
 }
 ._1OCHt_2oR {
   border-radius: 3px;
@@ -1686,7 +1644,6 @@ Object {
   line-height: 16px;
 }
 .xvwS0_2oR {
-  -webkit-transform: translateY(0.3572727272727273em);
   transform: translateY(0.3572727272727273em);
 }
 ._1_nER_2oR {
@@ -1694,7 +1651,6 @@ Object {
   line-height: 20px;
 }
 ._1PM5y_2oR {
-  -webkit-transform: translateY(0.4633333333333334em);
   transform: translateY(0.4633333333333334em);
 }
 ._6ufcS_2oR {
@@ -1702,7 +1658,6 @@ Object {
   line-height: 20px;
 }
 ._2WTa0_2oR {
-  -webkit-transform: translateY(0.3442857142857143em);
   transform: translateY(0.3442857142857143em);
 }
 ._8QVx6_2oR {
@@ -1710,7 +1665,6 @@ Object {
   line-height: 24px;
 }
 ._3srVf_2oR {
-  -webkit-transform: translateY(0.38em);
   transform: translateY(0.38em);
 }
 ._30vru_2oR {
@@ -1724,7 +1678,6 @@ Object {
   line-height: 36px;
 }
 ._3LFeA_2oR {
-  -webkit-transform: translateY(0.2728571428571429em);
   transform: translateY(0.2728571428571429em);
 }
 ._1H36Y_2oR {
@@ -1732,7 +1685,6 @@ Object {
   line-height: 32px;
 }
 ._1NXQv_2oR {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._642YY_2oR {
@@ -1740,7 +1692,6 @@ Object {
   line-height: 28px;
 }
 ._2k6I7_2oR {
-  -webkit-transform: translateY(0.32999999999999996em);
   transform: translateY(0.32999999999999996em);
 }
 ._2VCbC_2oR {
@@ -1748,7 +1699,6 @@ Object {
   line-height: 24px;
 }
 ._1VMf3_2oR {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._17ajR_2oR {
@@ -1817,7 +1767,6 @@ Object {
     line-height: 44px;
   }
   ._3LFeA_2oR {
-    -webkit-transform: translateY(0.2770588235294118em);
     transform: translateY(0.2770588235294118em);
   }
   ._1H36Y_2oR {
@@ -1825,7 +1774,6 @@ Object {
     line-height: 36px;
   }
   ._1NXQv_2oR {
-    -webkit-transform: translateY(0.2728571428571429em);
     transform: translateY(0.2728571428571429em);
   }
   ._642YY_2oR {
@@ -1833,7 +1781,6 @@ Object {
     line-height: 32px;
   }
   ._2k6I7_2oR {
-    -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
   }
   ._2VCbC_2oR {
@@ -1841,7 +1788,6 @@ Object {
     line-height: 28px;
   }
   ._1VMf3_2oR {
-    -webkit-transform: translateY(0.32999999999999996em);
     transform: translateY(0.32999999999999996em);
   }
 }
@@ -1850,8 +1796,7 @@ Object {
 }
 ,
   "braid-design-system-themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-3584cd3992fa47a0345e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-94ffb363141fa928716d.css": ._3QqL3 {
+  "braid-design-system-themes-jobsDB-22c4fce29dbe328798f0.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1887,18 +1832,18 @@ Object {
   border-spacing: 0;
 }
 ._1xrTt {
-  background-color: transparent;
-  color: inherit;
-}
-._18GrW {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW::-ms-expand {
+._18GrW {
+  background-color: transparent;
+  color: inherit;
+}
+.Ufq8O::-ms-expand {
   display: none;
 }
-.Ufq8O {
+._2R_8K {
   background: none;
 }
 ._1IQ7a {
@@ -1965,11 +1910,9 @@ Object {
   opacity: 1;
 }
 ._3PnVZ {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 ._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 ._121VT > ._3PnVZ {
@@ -2009,22 +1952,16 @@ Object {
   flex-grow: 0;
 }
 ._2sL5F {
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 ._2t54j {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .BkvSr {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._2E4Yy {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .E8MkT_1Fy {
@@ -2232,20 +2169,13 @@ Object {
   padding-right: 0;
 }
 ._1DQWm_1Fy:active {
-  -webkit-transform: scale(0.98);
   transform: scale(0.98);
 }
 ._3EZ81_1Fy {
-  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
   transition: transform 0.125s ease, opacity 0.125s ease;
-  transition: transform 0.125s ease, opacity 0.125s ease,
-    -webkit-transform 0.125s ease;
 }
 .MVjBS_1Fy {
-  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
-    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
 }
 ._1OCHt_1Fy {
   border-radius: 4px;
@@ -2614,7 +2544,6 @@ Object {
   line-height: 16px;
 }
 .xvwS0_1Fy {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._1_nER_1Fy {
@@ -2622,7 +2551,6 @@ Object {
   line-height: 20px;
 }
 ._1PM5y_1Fy {
-  -webkit-transform: translateY(0.3442857142857143em);
   transform: translateY(0.3442857142857143em);
 }
 ._6ufcS_1Fy {
@@ -2630,7 +2558,6 @@ Object {
   line-height: 24px;
 }
 ._2WTa0_1Fy {
-  -webkit-transform: translateY(0.38em);
   transform: translateY(0.38em);
 }
 ._8QVx6_1Fy {
@@ -2638,7 +2565,6 @@ Object {
   line-height: 24px;
 }
 ._3srVf_1Fy {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._30vru_1Fy {
@@ -2652,7 +2578,6 @@ Object {
   line-height: 36px;
 }
 ._3LFeA_1Fy {
-  -webkit-transform: translateY(0.2728571428571429em);
   transform: translateY(0.2728571428571429em);
 }
 ._1H36Y_1Fy {
@@ -2660,7 +2585,6 @@ Object {
   line-height: 32px;
 }
 ._1NXQv_1Fy {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._642YY_1Fy {
@@ -2668,7 +2592,6 @@ Object {
   line-height: 28px;
 }
 ._2k6I7_1Fy {
-  -webkit-transform: translateY(0.32999999999999996em);
   transform: translateY(0.32999999999999996em);
 }
 ._2VCbC_1Fy {
@@ -2676,7 +2599,6 @@ Object {
   line-height: 24px;
 }
 ._1VMf3_1Fy {
-  -webkit-transform: translateY(0.29666666666666663em);
   transform: translateY(0.29666666666666663em);
 }
 ._17ajR_1Fy {
@@ -2737,7 +2659,6 @@ Object {
     line-height: 44px;
   }
   ._3LFeA_1Fy {
-    -webkit-transform: translateY(0.2770588235294118em);
     transform: translateY(0.2770588235294118em);
   }
   ._1H36Y_1Fy {
@@ -2745,7 +2666,6 @@ Object {
     line-height: 36px;
   }
   ._1NXQv_1Fy {
-    -webkit-transform: translateY(0.2728571428571429em);
     transform: translateY(0.2728571428571429em);
   }
   ._642YY_1Fy {
@@ -2753,7 +2673,6 @@ Object {
     line-height: 32px;
   }
   ._2k6I7_1Fy {
-    -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
   }
   ._2VCbC_1Fy {
@@ -2761,7 +2680,6 @@ Object {
     line-height: 28px;
   }
   ._1VMf3_1Fy {
-    -webkit-transform: translateY(0.32999999999999996em);
     transform: translateY(0.32999999999999996em);
   }
 }
@@ -2769,9 +2687,9 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobsDB-a8c72b033bd8cb96fdeb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobsDB.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-8973175a290cdc780477.css": ._3QqL3 {
+  "braid-design-system-themes-seekAnz-76e1fee6b57da91c509c.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -2807,18 +2725,18 @@ Object {
   border-spacing: 0;
 }
 ._1xrTt {
-  background-color: transparent;
-  color: inherit;
-}
-._18GrW {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW::-ms-expand {
+._18GrW {
+  background-color: transparent;
+  color: inherit;
+}
+.Ufq8O::-ms-expand {
   display: none;
 }
-.Ufq8O {
+._2R_8K {
   background: none;
 }
 ._1IQ7a {
@@ -2885,11 +2803,9 @@ Object {
   opacity: 1;
 }
 ._3PnVZ {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 ._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 ._121VT > ._3PnVZ {
@@ -2929,22 +2845,16 @@ Object {
   flex-grow: 0;
 }
 ._2sL5F {
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 ._2t54j {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .BkvSr {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._2E4Yy {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .E8MkT_2 {
@@ -3152,20 +3062,13 @@ Object {
   padding-right: 0;
 }
 ._1DQWm_2:active {
-  -webkit-transform: scale(0.95);
   transform: scale(0.95);
 }
 ._3EZ81_2 {
-  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
   transition: transform 0.125s ease, opacity 0.125s ease;
-  transition: transform 0.125s ease, opacity 0.125s ease,
-    -webkit-transform 0.125s ease;
 }
 .MVjBS_2 {
-  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
-    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
 }
 ._1OCHt_2 {
   border-radius: 2px;
@@ -3528,7 +3431,6 @@ Object {
   line-height: 18px;
 }
 .xvwS0_2 {
-  -webkit-transform: translateY(0.41000000000000003em);
   transform: translateY(0.41000000000000003em);
 }
 ._1_nER_2 {
@@ -3536,7 +3438,6 @@ Object {
   line-height: 18px;
 }
 ._1PM5y_2 {
-  -webkit-transform: translateY(0.30285714285714294em);
   transform: translateY(0.30285714285714294em);
 }
 ._6ufcS_2 {
@@ -3544,7 +3445,6 @@ Object {
   line-height: 24px;
 }
 ._2WTa0_2 {
-  -webkit-transform: translateY(0.41000000000000003em);
   transform: translateY(0.41000000000000003em);
 }
 ._8QVx6_2 {
@@ -3552,7 +3452,6 @@ Object {
   line-height: 24px;
 }
 ._3srVf_2 {
-  -webkit-transform: translateY(0.32666666666666666em);
   transform: translateY(0.32666666666666666em);
 }
 ._30vru_2 {
@@ -3566,7 +3465,6 @@ Object {
   line-height: 36px;
 }
 ._3LFeA_2 {
-  -webkit-transform: translateY(0.30285714285714294em);
   transform: translateY(0.30285714285714294em);
 }
 ._1H36Y_2 {
@@ -3574,7 +3472,6 @@ Object {
   line-height: 30px;
 }
 ._1NXQv_2 {
-  -webkit-transform: translateY(0.37428571428571433em);
   transform: translateY(0.37428571428571433em);
 }
 ._642YY_2 {
@@ -3582,7 +3479,6 @@ Object {
   line-height: 30px;
 }
 ._2k6I7_2 {
-  -webkit-transform: translateY(0.37428571428571433em);
   transform: translateY(0.37428571428571433em);
 }
 ._2VCbC_2 {
@@ -3590,7 +3486,6 @@ Object {
   line-height: 24px;
 }
 ._1VMf3_2 {
-  -webkit-transform: translateY(0.32666666666666666em);
   transform: translateY(0.32666666666666666em);
 }
 ._17ajR_2 {
@@ -3648,7 +3543,6 @@ Object {
     line-height: 48px;
   }
   ._3LFeA_2 {
-    -webkit-transform: translateY(0.2314285714285714em);
     transform: translateY(0.2314285714285714em);
   }
   ._1H36Y_2 {
@@ -3656,7 +3550,6 @@ Object {
     line-height: 36px;
   }
   ._1NXQv_2 {
-    -webkit-transform: translateY(0.30285714285714294em);
     transform: translateY(0.30285714285714294em);
   }
 }
@@ -3664,9 +3557,10 @@ Object {
   min-height: 18px;
 }
 ,
+  "braid-design-system-themes-seekAnz-7ed63b5d1fbf804e1738.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-2ec24e3b41cf1bf181a7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-bdb465e80c95d5be2aa8.css": ._3QqL3 {
+  "braid-design-system-themes-wireframe-32a1c81e59701f5b3808.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-wireframe-d9a92a5641513238201b.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -3702,18 +3596,18 @@ Object {
   border-spacing: 0;
 }
 ._1xrTt {
-  background-color: transparent;
-  color: inherit;
-}
-._18GrW {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW::-ms-expand {
+._18GrW {
+  background-color: transparent;
+  color: inherit;
+}
+.Ufq8O::-ms-expand {
   display: none;
 }
-.Ufq8O {
+._2R_8K {
   background: none;
 }
 ._1IQ7a {
@@ -3780,11 +3674,9 @@ Object {
   opacity: 1;
 }
 ._3PnVZ {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 ._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 ._121VT > ._3PnVZ {
@@ -3824,22 +3716,16 @@ Object {
   flex-grow: 0;
 }
 ._2sL5F {
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
 ._2t54j {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .BkvSr {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._2E4Yy {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .E8MkT_0 {
@@ -4047,20 +3933,13 @@ Object {
   padding-right: 0;
 }
 ._1DQWm_0:active {
-  -webkit-transform: scale(0.97);
   transform: scale(0.97);
 }
 ._3EZ81_0 {
-  transition: opacity 0.125s ease, -webkit-transform 0.125s ease;
   transition: transform 0.125s ease, opacity 0.125s ease;
-  transition: transform 0.125s ease, opacity 0.125s ease,
-    -webkit-transform 0.125s ease;
 }
 .MVjBS_0 {
-  transition: -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  transition: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235),
-    -webkit-transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
 }
 ._1OCHt_0 {
   border-radius: 4px;
@@ -4422,7 +4301,6 @@ Object {
   line-height: 18px;
 }
 .xvwS0_0 {
-  -webkit-transform: translateY(0.41000000000000003em);
   transform: translateY(0.41000000000000003em);
 }
 ._1_nER_0 {
@@ -4430,7 +4308,6 @@ Object {
   line-height: 18px;
 }
 ._1PM5y_0 {
-  -webkit-transform: translateY(0.30285714285714294em);
   transform: translateY(0.30285714285714294em);
 }
 ._6ufcS_0 {
@@ -4438,7 +4315,6 @@ Object {
   line-height: 24px;
 }
 ._2WTa0_0 {
-  -webkit-transform: translateY(0.41000000000000003em);
   transform: translateY(0.41000000000000003em);
 }
 ._8QVx6_0 {
@@ -4446,7 +4322,6 @@ Object {
   line-height: 24px;
 }
 ._3srVf_0 {
-  -webkit-transform: translateY(0.32666666666666666em);
   transform: translateY(0.32666666666666666em);
 }
 ._30vru_0 {
@@ -4460,7 +4335,6 @@ Object {
   line-height: 36px;
 }
 ._3LFeA_0 {
-  -webkit-transform: translateY(0.30285714285714294em);
   transform: translateY(0.30285714285714294em);
 }
 ._1H36Y_0 {
@@ -4468,7 +4342,6 @@ Object {
   line-height: 30px;
 }
 ._1NXQv_0 {
-  -webkit-transform: translateY(0.37428571428571433em);
   transform: translateY(0.37428571428571433em);
 }
 ._642YY_0 {
@@ -4476,7 +4349,6 @@ Object {
   line-height: 30px;
 }
 ._2k6I7_0 {
-  -webkit-transform: translateY(0.37428571428571433em);
   transform: translateY(0.37428571428571433em);
 }
 ._2VCbC_0 {
@@ -4484,7 +4356,6 @@ Object {
   line-height: 24px;
 }
 ._1VMf3_0 {
-  -webkit-transform: translateY(0.32666666666666666em);
   transform: translateY(0.32666666666666666em);
 }
 ._17ajR_0 {
@@ -4542,7 +4413,6 @@ Object {
     line-height: 48px;
   }
   ._3LFeA_0 {
-    -webkit-transform: translateY(0.2314285714285714em);
     transform: translateY(0.2314285714285714em);
   }
   ._1H36Y_0 {
@@ -4550,7 +4420,6 @@ Object {
     line-height: 36px;
   }
   ._1NXQv_0 {
-    -webkit-transform: translateY(0.30285714285714294em);
     transform: translateY(0.30285714285714294em);
   }
 }
@@ -4575,30 +4444,30 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-a7b06a72c79448e0c29b.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+          href="https://somecdn.com/runtime-486dc1ba3b654be7e324.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
+          href="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-d9b7d495a95ff69333b9.js"
+          href="https://somecdn.com/main-7830c03c8c172e94d04d.js"
           crossorigin="anonymous"
     >
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-b87f95c63f4a16f4842a.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4625,7 +4494,7 @@ Object {
         <div class="_3P29T _3Mbiw_1 ST9QG_1 _11gxS_1 _2Yn0H_1 _1Hlla_1">
           <div class="_3P29T">
             <input type="checkbox"
-                   class="_3P29T _Z9GO _3HWgs q3uRq_1"
+                   class="_3P29T _1K98W _1xrTt _Z9GO _3HWgs q3uRq_1"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
@@ -4690,32 +4559,32 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+            src="https://somecdn.com/runtime-486dc1ba3b654be7e324.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
+            src="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-d9b7d495a95ff69333b9.js"
+            src="https://somecdn.com/main-7830c03c8c172e94d04d.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="braid-design-system-themes-jobStreet"
-            src="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
+            src="https://somecdn.com/braid-design-system-themes-jobStreet-b87f95c63f4a16f4842a.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "main-d9b7d495a95ff69333b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-4c94595940a6c7edbaf9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-7830c03c8c172e94d04d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-486dc1ba3b654be7e324.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -4728,30 +4597,30 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-8973175a290cdc780477.css"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-76e1fee6b57da91c509c.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+          href="https://somecdn.com/runtime-486dc1ba3b654be7e324.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
+          href="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-d9b7d495a95ff69333b9.js"
+          href="https://somecdn.com/main-7830c03c8c172e94d04d.js"
           crossorigin="anonymous"
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-7ed63b5d1fbf804e1738.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4778,7 +4647,7 @@ Object {
         <div class="_3P29T _3Mbiw_2 ST9QG_2 _11gxS_2 _2Yn0H_2 _1Hlla_2">
           <div class="_3P29T">
             <input type="checkbox"
-                   class="_3P29T _Z9GO _3HWgs q3uRq_2"
+                   class="_3P29T _1K98W _1xrTt _Z9GO _3HWgs q3uRq_2"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
@@ -4843,31 +4712,31 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+            src="https://somecdn.com/runtime-486dc1ba3b654be7e324.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
+            src="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-d9b7d495a95ff69333b9.js"
+            src="https://somecdn.com/main-7830c03c8c172e94d04d.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="braid-design-system-themes-seekAnz"
-            src="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
+            src="https://somecdn.com/braid-design-system-themes-seekAnz-7ed63b5d1fbf804e1738.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "vendors~main-8f11904cc89393fabbe9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-7e9a72e0473d0ac4ab79.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -4939,7 +4808,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="BRAID__reset-base_3P29T BRAID__box-background_card_3Mbiw_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz">
           <div class="BRAID__reset-base_3P29T">
             <input type="checkbox"
-                   class="BRAID__reset-base_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                   class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
@@ -5029,7 +4898,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                    class="BRAID__reset-base_3P29T BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                    class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                     id="id_1"
                     aria-describedby="id_1-message"
 +                   value

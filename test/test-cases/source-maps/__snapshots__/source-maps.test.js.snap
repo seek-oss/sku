@@ -15,19 +15,19 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4005/runtime-ca608c399704ec8213c1.js"
+          href="http://localhost:4005/runtime-1414e28ec1712670f310.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4005/vendors~main-e9757a78cbfca70f79b3.js"
+          href="http://localhost:4005/vendors~main-fb83b7359c8a22a90ab7.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4005/main-a2efc4ad92c62e6bf9a6.js"
+          href="http://localhost:4005/main-9cb6bf74677210eed8a0.js"
           crossorigin="anonymous"
     >
   </head>
@@ -45,29 +45,29 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4005/runtime-ca608c399704ec8213c1.js"
+            src="http://localhost:4005/runtime-1414e28ec1712670f310.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4005/vendors~main-e9757a78cbfca70f79b3.js"
+            src="http://localhost:4005/vendors~main-fb83b7359c8a22a90ab7.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4005/main-a2efc4ad92c62e6bf9a6.js"
+            src="http://localhost:4005/main-9cb6bf74677210eed8a0.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "main-a2efc4ad92c62e6bf9a6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-a2efc4ad92c62e6bf9a6.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-ca608c399704ec8213c1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-ca608c399704ec8213c1.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-e9757a78cbfca70f79b3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-e9757a78cbfca70f79b3.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-9cb6bf74677210eed8a0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-9cb6bf74677210eed8a0.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-1414e28ec1712670f310.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-1414e28ec1712670f310.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-fb83b7359c8a22a90ab7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-fb83b7359c8a22a90ab7.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

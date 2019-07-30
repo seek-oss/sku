@@ -21,7 +21,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4005/vendors~main-137ee9c3e0769033aeb9.js"
+          href="http://localhost:4005/vendors~main-e9757a78cbfca70f79b3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -51,7 +51,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4005/vendors~main-137ee9c3e0769033aeb9.js"
+            src="http://localhost:4005/vendors~main-e9757a78cbfca70f79b3.js"
             crossorigin="anonymous"
     >
     </script>
@@ -67,7 +67,7 @@ Object {
   "main-a2efc4ad92c62e6bf9a6.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-ca608c399704ec8213c1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-ca608c399704ec8213c1.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-137ee9c3e0769033aeb9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-137ee9c3e0769033aeb9.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-e9757a78cbfca70f79b3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-e9757a78cbfca70f79b3.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

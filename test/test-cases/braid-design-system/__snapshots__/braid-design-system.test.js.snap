@@ -4586,7 +4586,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-69c73f36180822d957de.js"
+          href="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4696,7 +4696,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-69c73f36180822d957de.js"
+            src="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4739,7 +4739,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-69c73f36180822d957de.js"
+          href="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4849,7 +4849,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-69c73f36180822d957de.js"
+            src="https://somecdn.com/vendors~main-8f11904cc89393fabbe9.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4867,7 +4867,7 @@ Object {
     </script>
   </body>
 </html>,
-  "vendors~main-69c73f36180822d957de.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-8f11904cc89393fabbe9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

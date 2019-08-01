@@ -3206,7 +3206,7 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autoprefixer@^9.3.1, autoprefixer@^9.5.0:
+autoprefixer@^9.3.1:
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.5.1.tgz#243b1267b67e7e947f28919d786b50d3bb0fb357"
   integrity sha512-KJSzkStUl3wP0D5sdMlP82Q52JLy5+atf2MHAre48+ckWkXgixmfHyWmA77wFDy6jTHU6mIgXv6hAQ2mf1PjJQ==
@@ -3218,7 +3218,7 @@ autoprefixer@^9.3.1, autoprefixer@^9.5.0:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-autoprefixer@^9.6.1:
+autoprefixer@^9.6.0, autoprefixer@^9.6.1:
   version "9.6.1"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.1.tgz#51967a02d2d2300bb01866c1611ec8348d355a47"
   integrity sha512-aVo5WxR3VyvyJxcJC3h4FKfwCQvQWb1tSI5VHNibddCVWrcD1NvlxEweg3TSgiPztMnWfjpy2FURKA2kvDE+Tw==
@@ -13188,10 +13188,10 @@ react-transition-group@^2.0.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-treat@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.0.tgz#d789ad466c4bae8b002e202d4c444ac0fa54a355"
-  integrity sha512-RTNchTZBN0QXDnzT9SLMy21lbbBqMbBQxDf10zDTihGoF77bojV3vzvg/JV2f2IdTfgXIq8AHiNzfpI7OIVuYQ==
+react-treat@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.0.2.tgz#3a3a2c86a0637becc7338bf908e77cda89ef16ae"
+  integrity sha512-pkA393CuPHMYgmncm2fjE3Z8uWPTIBENjmgNSamq87qxQRE9uhPinCOaeDtf6yLbKcVTXpAHh3qBcf69o1LIiQ==
 
 react-treebeard@3.1.0:
   version "3.1.0"
@@ -15371,13 +15371,13 @@ traverse@^0.6.6, traverse@~0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.0.tgz#11b4221fd15e5ee1a347a08c852bf7193724c937"
-  integrity sha512-P6oSaU7vgezuczklKrjcXSlDDmYgSjm8M3MLtvayH9oojtFNPYiuhyZ1M5J++AFA0Ik+ZxATbuyGGcB52aexnA==
+treat@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.0.2.tgz#72d827b9e59f27a6c25430986efe751d4a0317a2"
+  integrity sha512-799sOo3uwSr1IR5MzLdJ6WKRGmdoeOtTgTyyb4SQtTY+N6hPgi8xfYRHeOAi7R8HdIuzidVj9g0v8rdTTqcdrQ==
   dependencies:
     "@hapi/joi" "^15.0.3"
-    autoprefixer "^9.5.0"
+    autoprefixer "^9.6.0"
     bluebird "^3.5.4"
     chalk "^2.4.2"
     css-loader "^2.1.0"

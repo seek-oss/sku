@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreet-0cbbd2f6dfd6aa168f24.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -77,12 +77,18 @@ Object {
   display: inline-block;
 }
 ._1ij33 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 ._1pqMN {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .K7ZDs {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._3HWgs {
@@ -93,6 +99,8 @@ Object {
   cursor: pointer;
 }
 ._2azEk {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 ._3R2vq {
@@ -150,13 +158,21 @@ Object {
   margin-left: 1.3em;
 }
 ._24rCK {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 ._3KscY {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 ._2PJcX {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
   flex-grow: 0;
 }
 ._2sL5F {
@@ -694,12 +710,18 @@ Object {
     display: inline-block;
   }
   .B2ppV_1 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
   }
   ._269oH_1 {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._2W9UW_1 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -924,10 +946,9 @@ Object {
   min-height: 20px;
 }
 ,
-  "braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobStreet-447d5d5a15f4b1e8cd39.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-315bd2bbcdbe84aeb64c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-f0ed6379e6e4d5e0b5bd.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreetClassic-34222d31f6dd0de10864.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1002,12 +1023,18 @@ Object {
   display: inline-block;
 }
 ._1ij33 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 ._1pqMN {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .K7ZDs {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._3HWgs {
@@ -1018,6 +1045,8 @@ Object {
   cursor: pointer;
 }
 ._2azEk {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 ._3R2vq {
@@ -1075,13 +1104,21 @@ Object {
   margin-left: 1.3em;
 }
 ._24rCK {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 ._3KscY {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 ._2PJcX {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
   flex-grow: 0;
 }
 ._2sL5F {
@@ -1619,12 +1656,18 @@ Object {
     display: inline-block;
   }
   .B2ppV_2oR {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
   }
   ._269oH_2oR {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._2W9UW_2oR {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -1849,9 +1892,9 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobStreetClassic-b85a797809d631aa02ca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-3584cd3992fa47a0345e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-94ffb363141fa928716d.css": ._3QqL3 {
+  "braid-design-system-themes-jobsDB-9a17bb7239a854235f49.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1926,12 +1969,18 @@ Object {
   display: inline-block;
 }
 ._1ij33 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 ._1pqMN {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .K7ZDs {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._3HWgs {
@@ -1942,6 +1991,8 @@ Object {
   cursor: pointer;
 }
 ._2azEk {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 ._3R2vq {
@@ -1999,13 +2050,21 @@ Object {
   margin-left: 1.3em;
 }
 ._24rCK {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 ._3KscY {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 ._2PJcX {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
   flex-grow: 0;
 }
 ._2sL5F {
@@ -2543,12 +2602,18 @@ Object {
     display: inline-block;
   }
   .B2ppV_1Fy {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
   }
   ._269oH_1Fy {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._2W9UW_1Fy {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -2769,9 +2834,10 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobsDB-a16a375badba7d77a3b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobsDB.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-8973175a290cdc780477.css": ._3QqL3 {
+  "braid-design-system-themes-seekAnz-1f266bee6d642655568a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-seekAnz-56bcee82a8684811c662.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -2846,12 +2912,18 @@ Object {
   display: inline-block;
 }
 ._1ij33 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 ._1pqMN {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .K7ZDs {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._3HWgs {
@@ -2862,6 +2934,8 @@ Object {
   cursor: pointer;
 }
 ._2azEk {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 ._3R2vq {
@@ -2919,13 +2993,21 @@ Object {
   margin-left: 1.3em;
 }
 ._24rCK {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 ._3KscY {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 ._2PJcX {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
   flex-grow: 0;
 }
 ._2sL5F {
@@ -3463,12 +3545,18 @@ Object {
     display: inline-block;
   }
   .B2ppV_2 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
   }
   ._269oH_2 {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._2W9UW_2 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -3665,8 +3753,7 @@ Object {
 }
 ,
   "braid-design-system-themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-2ec24e3b41cf1bf181a7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-bdb465e80c95d5be2aa8.css": ._3QqL3 {
+  "braid-design-system-themes-wireframe-90d38565d0b11ef56a50.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -3741,12 +3828,18 @@ Object {
   display: inline-block;
 }
 ._1ij33 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 ._1pqMN {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .K7ZDs {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._3HWgs {
@@ -3757,6 +3850,8 @@ Object {
   cursor: pointer;
 }
 ._2azEk {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 ._3R2vq {
@@ -3814,13 +3909,21 @@ Object {
   margin-left: 1.3em;
 }
 ._24rCK {
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 ._3KscY {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 ._2PJcX {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
   flex-grow: 0;
 }
 ._2sL5F {
@@ -4358,12 +4461,18 @@ Object {
     display: inline-block;
   }
   .B2ppV_0 {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
   }
   ._269oH_0 {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._2W9UW_0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -4558,6 +4667,7 @@ Object {
   min-height: 18px;
 }
 ,
+  "braid-design-system-themes-wireframe-99623345b51971980e72.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   \\"react\\",
@@ -4575,12 +4685,12 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-a24034818fd8c6d3d920.css"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-0cbbd2f6dfd6aa168f24.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+          href="https://somecdn.com/runtime-8712903317d55e3ecfa3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4598,7 +4708,7 @@ Object {
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-447d5d5a15f4b1e8cd39.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4690,7 +4800,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+            src="https://somecdn.com/runtime-8712903317d55e3ecfa3.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4708,14 +4818,14 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-jobStreet"
-            src="https://somecdn.com/braid-design-system-themes-jobStreet-f7966e2658b6c0a09785.js"
+            src="https://somecdn.com/braid-design-system-themes-jobStreet-447d5d5a15f4b1e8cd39.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "main-d9b7d495a95ff69333b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-4c94595940a6c7edbaf9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-8712903317d55e3ecfa3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -4728,12 +4838,12 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-8973175a290cdc780477.css"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-56bcee82a8684811c662.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+          href="https://somecdn.com/runtime-8712903317d55e3ecfa3.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4751,7 +4861,7 @@ Object {
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-1f266bee6d642655568a.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4843,7 +4953,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-4c94595940a6c7edbaf9.js"
+            src="https://somecdn.com/runtime-8712903317d55e3ecfa3.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4861,7 +4971,7 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-seekAnz"
-            src="https://somecdn.com/braid-design-system-themes-seekAnz-7286dad759a8f95666fe.js"
+            src="https://somecdn.com/braid-design-system-themes-seekAnz-1f266bee6d642655568a.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4881,6 +4991,10 @@ SOURCE HTML: <!DOCTYPE html>
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="braid-design-system-themes-seekAnz"
+          rel="stylesheet"
+          href="/vendors~braid-design-system-themes-jobStreet~braid-design-system-themes-jobStreetClassic~braid-desig~e7cf95e7.css"
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
@@ -4904,6 +5018,11 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="/main.js"
+    >
+    <link data-chunk="braid-design-system-themes-seekAnz"
+          rel="preload"
+          as="script"
+          href="/vendors~braid-design-system-themes-jobStreet~braid-design-system-themes-jobStreetClassic~braid-desig~e7cf95e7.js"
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
@@ -4999,7 +5118,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      ["vendors~braid-design-system-themes-seekAnz","braid-design-system-themes-seekAnz"]
+      ["vendors~braid-design-system-themes-jobStreet~braid-design-system-themes-jobStreetClassic~braid-desig~e7cf95e7","vendors~braid-design-system-themes-seekAnz","braid-design-system-themes-seekAnz"]
     </script>
     <script async
             data-chunk="main"
@@ -5014,6 +5133,11 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="/main.js"
+    >
+    </script>
+    <script async
+            data-chunk="braid-design-system-themes-seekAnz"
+            src="/vendors~braid-design-system-themes-jobStreet~braid-design-system-themes-jobStreetClassic~braid-desig~e7cf95e7.js"
     >
     </script>
     <script async

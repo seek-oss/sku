@@ -69,13 +69,13 @@ describe('configure', () => {
     });
 
     it('should not generate tsconfig config', async () => {
-      expect(readJsonC(appFolder, 'tsconfig.json')).rejects.toThrow(
+      await expect(readJsonC(appFolder, 'tsconfig.json')).rejects.toThrow(
         /ENOENT: no such file or directory, open \'.*\/tsconfig\.json\'/,
       );
     });
 
     it('should not generate tslint config', async () => {
-      expect(readJsonC(appFolder, 'tslint.json')).rejects.toThrow(
+      await expect(readJsonC(appFolder, 'tslint.json')).rejects.toThrow(
         /ENOENT: no such file or directory, open \'.*\/tslint\.json\'/,
       );
     });

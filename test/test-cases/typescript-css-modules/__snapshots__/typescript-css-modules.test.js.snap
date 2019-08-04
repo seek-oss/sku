@@ -18,19 +18,19 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-60d2853d68898461f692.js"
+          href="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-f46f86df6f518c16337c.js"
+          href="http://localhost:4003/vendors~main-54b7ca3e33087402d26e.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-21caac52b4b88dff6bd1.js"
+          href="http://localhost:4003/main-8bc79b3b9529deb010b1.js"
           crossorigin="anonymous"
     >
   </head>
@@ -52,19 +52,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-60d2853d68898461f692.js"
+            src="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-f46f86df6f518c16337c.js"
+            src="http://localhost:4003/vendors~main-54b7ca3e33087402d26e.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-21caac52b4b88dff6bd1.js"
+            src="http://localhost:4003/main-8bc79b3b9529deb010b1.js"
             crossorigin="anonymous"
     >
     </script>
@@ -102,19 +102,19 @@ export const root: string;
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-60d2853d68898461f692.js"
+          href="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-f46f86df6f518c16337c.js"
+          href="http://localhost:4003/vendors~main-54b7ca3e33087402d26e.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-21caac52b4b88dff6bd1.js"
+          href="http://localhost:4003/main-8bc79b3b9529deb010b1.js"
           crossorigin="anonymous"
     >
   </head>
@@ -136,19 +136,19 @@ export const root: string;
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-60d2853d68898461f692.js"
+            src="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-f46f86df6f518c16337c.js"
+            src="http://localhost:4003/vendors~main-54b7ca3e33087402d26e.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-21caac52b4b88dff6bd1.js"
+            src="http://localhost:4003/main-8bc79b3b9529deb010b1.js"
             crossorigin="anonymous"
     >
     </script>
@@ -164,7 +164,7 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-21caac52b4b88dff6bd1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8bc79b3b9529deb010b1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,8 +182,8 @@ export const root: string;
   color: red;
 }
 ,
-  "runtime-60d2853d68898461f692.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-f46f86df6f518c16337c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-89174f9ca2abd22bf7fd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-54b7ca3e33087402d26e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -205,19 +205,19 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-60d2853d68898461f692.js"
+          href="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-3a03c3ed273edb657a23.js"
+          href="http://localhost:4003/vendors~main-517bc30928b656c999f1.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-bc430cf1eb94bdace634.js"
+          href="http://localhost:4003/main-c5d02d8674d1cc7c11fb.js"
           crossorigin="anonymous"
     >
   </head>
@@ -239,19 +239,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-60d2853d68898461f692.js"
+            src="http://localhost:4003/runtime-89174f9ca2abd22bf7fd.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-3a03c3ed273edb657a23.js"
+            src="http://localhost:4003/vendors~main-517bc30928b656c999f1.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-bc430cf1eb94bdace634.js"
+            src="http://localhost:4003/main-c5d02d8674d1cc7c11fb.js"
             crossorigin="anonymous"
     >
     </script>
@@ -282,7 +282,6 @@ export const root: string;
 export const nested: string;
 export const root: string;
 ",
-  "main-bc430cf1eb94bdace634.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -300,9 +299,10 @@ export const root: string;
   color: red;
 }
 ,
-  "runtime-60d2853d68898461f692.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c5d02d8674d1cc7c11fb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-89174f9ca2abd22bf7fd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-3a03c3ed273edb657a23.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-517bc30928b656c999f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

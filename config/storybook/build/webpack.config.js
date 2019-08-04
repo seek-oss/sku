@@ -1,3 +1,3 @@
 const storybookWebpackConfig = require('../storybookWebpackConfig');
 
-module.exports = storybookWebpackConfig();
+module.exports = storybookConfig => storybookWebpackConfig(storybookConfig);

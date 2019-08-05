@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'development';
 
-const opn = require('opn');
+const open = require('open');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
@@ -57,7 +57,7 @@ const localhost = '0.0.0.0';
     console.log();
 
     if (process.env.OPEN_TAB !== 'false') {
-      opn(url);
+      open(url);
     }
   });
 })();

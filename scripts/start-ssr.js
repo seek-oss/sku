@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'development';
 
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const opn = require('opn');
+const open = require('open');
 const { once } = require('lodash');
 const { blue, underline } = require('chalk');
 
@@ -63,7 +63,7 @@ const localhost = '0.0.0.0';
       await watch(serverCompiler);
 
       if (process.env.OPEN_TAB !== 'false') {
-        opn(serverUrl);
+        open(serverUrl);
       }
     } catch (e) {
       console.log(e);

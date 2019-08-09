@@ -27,8 +27,8 @@ describe('library-build', () => {
       await waitForUrls(devServerUrl);
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
     });
 
     it('should start a development server', async () => {

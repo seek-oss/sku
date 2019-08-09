@@ -2,15 +2,26 @@ const webpack = require('webpack');
 const { paths } = require('../../context');
 const find = require('lodash/find');
 const webpackMerge = require('webpack-merge');
-
 const makeWebpackConfig = require('../webpack/webpack.config');
+const { resolvePackage } = require('../webpack/utils/resolvePackage');
 const clientWebpackConfig = find(
   makeWebpackConfig({ isIntegration: true }),
   config => config.name === 'client',
 );
 
-module.exports = ({ config }) =>
-  webpackMerge(
+module.exports = ({ config }) => {
+  // Ensure Storybook's webpack loaders ignore our code :(
+  if (config && config.module && Array.isArray(config.module.rules)) {
+    config.module.rules.forEach(rule => {
+      rule.exclude = [
+        ...(rule.exclude || []), // Ensure we don't clobber any existing exclusions
+        ...paths.src,
+        ...paths.compilePackages.map(resolvePackage),
+      ];
+    });
+  }
+
+  return webpackMerge(
     config,
     {
       // We don't want to apply the entire webpack config,
@@ -46,3 +57,4 @@ module.exports = ({ config }) =>
       ],
     },
   );
+};

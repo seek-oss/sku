@@ -28,8 +28,8 @@ describe('ssr-hello-world', () => {
       await waitForUrls(backendUrl);
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
     });
 
     it('should start a development server', async () => {
@@ -65,8 +65,8 @@ describe('ssr-hello-world', () => {
         await waitForUrls(backendUrl);
       });
 
-      afterAll(() => {
-        server.kill();
+      afterAll(async () => {
+        await server.kill();
       });
 
       it('should generate a production server based on config', async () => {
@@ -97,8 +97,8 @@ describe('ssr-hello-world', () => {
         await waitForUrls(customPortUrl);
       });
 
-      afterAll(() => {
-        server.kill();
+      afterAll(async () => {
+        await server.kill();
       });
 
       it('should generate a production server running on custom port', async () => {

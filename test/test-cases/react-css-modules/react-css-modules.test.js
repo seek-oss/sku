@@ -66,8 +66,8 @@ describe('react-css-modules', () => {
       await waitForUrls(storybookUrl);
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
     });
 
     it('should start a storybook server', async () => {

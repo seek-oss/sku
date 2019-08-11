@@ -54,8 +54,8 @@ describe('typescript-css-modules', () => {
       await waitForUrls(backendUrl, 'http://localhost:4003');
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
       closeAssetServer();
     });
 
@@ -83,8 +83,8 @@ describe('typescript-css-modules', () => {
       await waitForUrls(devServerUrl);
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
     });
 
     it('should start a development server', async () => {
@@ -130,8 +130,8 @@ describe('typescript-css-modules', () => {
       await waitForUrls(storybookUrl);
     });
 
-    afterAll(() => {
-      server.kill();
+    afterAll(async () => {
+      await server.kill();
     });
 
     it('should start a storybook server', async () => {

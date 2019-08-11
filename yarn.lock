@@ -3789,10 +3789,10 @@ braces@^3.0.1:
   dependencies:
     fill-range "^7.0.1"
 
-braid-design-system@^2.0.3:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-2.0.4.tgz#7b5c4b9e842c25ddb7996251bafa26993fb32a80"
-  integrity sha512-Pz7/dC6kNlY1MfhHq1O3J/smTRYlA4T7si602em9I3vfb9BrlVKQkXEuu/cP3I0VXjPtirQ9Kz5OUgaD4BnYlQ==
+braid-design-system@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-3.0.0.tgz#087af919c479ccf5255ed20812896a14e092c973"
+  integrity sha512-VuMJWKljGTJE2xjdj+RB+EEgaiLcdQJk7QWMUxkBUKNFBaWk04LmYEkmzpfr5NMM6ymwB6gRBC1412Ulk4f0Gw==
   dependencies:
     "@types/classnames" "^2.2.8"
     "@types/lodash" "^4.14.132"
@@ -14211,10 +14211,10 @@ section-iterator@^2.0.0:
   resolved "https://registry.yarnpkg.com/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
   integrity sha1-v0RNev7rlK1Dw5rS+yYVFifMuio=
 
-seek-asia-style-guide@^14.1.4:
-  version "14.1.4"
-  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-14.1.4.tgz#e4b680b09ea4430857cadef852cab9b2ea70836e"
-  integrity sha512-VSRg9Z2qIB4dO2ghRd0jzcYkgsHvlZJ9oTCj1rTtjtchDkAmeh1c65e3izDdNqp6JHh7AZzsO/ixcTjC8/DhZw==
+seek-asia-style-guide@^15.0.0:
+  version "15.2.0"
+  resolved "https://registry.yarnpkg.com/seek-asia-style-guide/-/seek-asia-style-guide-15.2.0.tgz#08ac4f57c889230e9155d0164ad1eb28a031d3e5"
+  integrity sha512-pQotUOwaM0Q5c00DvP2wr0f6XxcIRQ5AG2uTTPGazjfpJDh73dI9MJ7Cr7P6oYMOAeSseeTtG5dsMuMcRO+RKw==
   dependencies:
     autosuggest-highlight "^3.1.1"
     basekick "^3.0.0"

@@ -29,13 +29,13 @@
     },
     {
       "groupName": "platform tools",
-      "packageNames": ["browserslist|playroom|storybook"],
+      "packagePatterns": ["browserslist|playroom|storybook"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
     {
       "groupName": "typescript",
-      "packageNames": ["^typescript$"],
+      "packagePatterns": ["^typescript$"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
@@ -51,7 +51,6 @@
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
-
     {
       "groupName": "cli packages",
       "depTypeList": ["dependencies"],

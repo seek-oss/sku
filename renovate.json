@@ -3,36 +3,80 @@
   "prCreation": "not-pending",
   "timezone": "Australia/Melbourne",
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "schedule": ["before 8am on the last day of the month"]
   },
   "packageRules": [
+    {
+      "groupName": "babel packages",
+      "packagePatterns": ["^@?babel[/-](core|plugin|preset|runtime|loader)"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "webpack packages",
+      "packagePatterns": [
+        "(?<!@loadable/)webpack|(-loader$)|autoprefixer|less|css|svg|treat"
+      ],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "loadable packages",
+      "packagePatterns": ["^(@types/)?(@)?loadable"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "platform tools",
+      "packageNames": ["browserslist|playroom|storybook"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "typescript",
+      "packageNames": ["^typescript$"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "test packages",
+      "packagePatterns": ["jest|puppeteer|identity-obj-proxy"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+    {
+      "groupName": "lint packages",
+      "packagePatterns": ["prettier|tslint|eslint"],
+      "enabled": true,
+      "schedule": ["before 9am on Tuesday"]
+    },
+
+    {
+      "groupName": "cli packages",
+      "depTypeList": ["dependencies"],
+      "enabled": true,
+      "schedule": ["before 8am on the 15th day of the month"]
+    },
+    {
+      "groupName": "workflow packages",
+      "packagePatterns": [
+        "commitlint|commitizen|conventional|husky|lint-staged|semantic-release"
+      ],
+      "enabled": true,
+      "schedule": ["before 8am on the first day of the month"]
+    },
+    {
+      "groupName": "react packages",
+      "packagePatterns": ["react"],
+      "enabled": true,
+      "schedule": ["before 8am on the first day of the month"]
+    },
     {
       "groupName": "style guide packages",
       "packagePatterns": ["^(braid-design-system|(seek(-asia)?-style-guide))$"],
       "enabled": true,
       "schedule": ["before 8am on the first day of the month"]
-    },
-    {
-      "packageNames": ["playroom"],
-      "enabled": true
-    },
-    {
-      "groupName": "webpack packages",
-      "packagePatterns": ["webpack|(-loader$)|autoprefixer|less|css|svg"],
-      "enabled": true,
-      "schedule": ["before 11am on Thursday"]
-    },
-    {
-      "groupName": "babel packages",
-      "packagePatterns": ["^@?babel[/-]"],
-      "enabled": true,
-      "schedule": ["before 11am on Thursday"]
-    },
-    {
-      "groupName": "test and lint packages",
-      "packagePatterns": ["jest|puppeteer|tslint|eslint"],
-      "enabled": true,
-      "schedule": ["before 11am on Thursday"]
     }
   ]
 }

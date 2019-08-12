@@ -3,7 +3,6 @@ const { isProductionBuild, isCI } = require('./env');
 const isTypeScript = require('../../../lib/isTypeScript');
 const { resolvePackage } = require('./resolvePackage');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const getLocalIdent = require('./getIdentName');
 
 /**
  * e.g.
@@ -73,7 +72,6 @@ const makeCssLoaders = (options = {}) => {
         modules: {
           mode: 'local',
           localIdentName: `${debugIdent}[hash:base64:7]`,
-          getLocalIdent,
         },
 
         // On the server, avoid generating a CSS file with onlyLocals.

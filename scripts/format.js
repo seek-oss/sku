@@ -1,19 +1,21 @@
 const chalk = require('chalk');
-const EslintCLI = require('eslint').CLIEngine;
-const eslintConfig = require('../config/eslint/eslintConfig');
+const esLintFix = require('../lib/runESLint').fix;
 const prettierWrite = require('../lib/runPrettier').write;
 const args = require('../config/args').argv;
+const pathsToCheck = args.length > 0 ? args : undefined;
 
-console.log(chalk.cyan('Fixing code with ESLint'));
-const eslintCli = new EslintCLI({
-  baseConfig: eslintConfig,
-  useEslintrc: false,
-  fix: true,
-});
-const eslintPathsToCheck = args.length === 0 ? ['.'] : args;
-const eslintReport = eslintCli.executeOnFiles(eslintPathsToCheck);
-EslintCLI.outputFixes(eslintReport);
-console.log(chalk.cyan('ESLint fix complete'));
+(async () => {
+  console.log(chalk.cyan('Formatting'));
 
-const prettierPathsToCheck = args.length === 0 ? [] : args;
-prettierWrite(prettierPathsToCheck);
+  try {
+    await prettierWrite(pathsToCheck);
+    await esLintFix(pathsToCheck);
+  } catch (e) {
+    if (e) {
+      console.error(e);
+    }
+
+    process.exit(1);
+  }
+  console.log(chalk.cyan('Formatting complete'));
+})();

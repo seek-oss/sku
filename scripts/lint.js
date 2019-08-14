@@ -1,42 +1,30 @@
 const chalk = require('chalk');
-const EslintCLI = require('eslint').CLIEngine;
-const eslintConfig = require('../config/eslint/eslintConfig');
 const isTypeScript = require('../lib/isTypeScript');
+const esLintCheck = require('../lib/runESLint').check;
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
 const runTSLint = require('../lib/runTSLint');
 const args = require('../config/args').argv;
+const pathsToCheck = args.length > 0 ? args : undefined;
 
 (async () => {
   console.log(chalk.cyan('Linting'));
 
-  if (isTypeScript) {
-    try {
+  try {
+    if (isTypeScript) {
       await runTsc();
-      await runTSLint();
-    } catch (e) {
-      console.log(e);
-
-      process.exit(1);
+      await runTSLint(pathsToCheck);
     }
-  }
 
-  const cli = new EslintCLI({
-    baseConfig: eslintConfig,
-    useEslintrc: false,
-  });
+    await prettierCheck(pathsToCheck);
+    await esLintCheck(pathsToCheck);
+  } catch (e) {
+    if (e) {
+      console.error(e);
+    }
 
-  const pathsToCheck = args.length === 0 ? ['.'] : args;
-
-  const formatter = cli.getFormatter();
-  console.log(chalk.gray(`eslint ${pathsToCheck.join(' ')}`));
-  const report = cli.executeOnFiles(pathsToCheck);
-
-  console.log(formatter(report.results));
-
-  if (report.errorCount > 0) {
     process.exit(1);
   }
 
-  await prettierCheck();
+  console.log(chalk.cyan('Linting complete'));
 })();

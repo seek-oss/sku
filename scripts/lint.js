@@ -12,8 +12,18 @@ const pathsToCheck = args.length > 0 ? args : undefined;
 
   try {
     if (isTypeScript) {
-      await runTsc();
+      const hasPaths = typeof pathsToCheck !== 'undefined';
+      const pathsIncludeTS =
+        hasPaths &&
+        pathsToCheck.filter(
+          filePath => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
+        ).length > 0;
+
       await runTSLint(pathsToCheck);
+
+      if (!hasPaths || pathsIncludeTS) {
+        await runTsc();
+      }
     }
 
     await prettierCheck(pathsToCheck);

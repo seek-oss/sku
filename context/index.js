@@ -12,6 +12,8 @@ const appSkuConfig = fs.existsSync(appSkuConfigPath)
   ? require(appSkuConfigPath)
   : {};
 
+const isYarn = fs.existsSync(getPathFromCwd('yarn.lock'));
+
 const skuConfig = {
   ...defaultSkuConfig,
   ...appSkuConfig,
@@ -127,4 +129,5 @@ module.exports = {
     title: skuConfig.playroomTitle,
     themes: skuConfig.playroomThemes,
   },
+  isYarn,
 };

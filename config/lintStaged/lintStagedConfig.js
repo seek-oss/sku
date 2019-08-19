@@ -1,4 +1,4 @@
-const { isYarn } = require('../../context');
+const isYarn = require('../../lib/isYarn');
 
 const steps = {};
 

@@ -149,5 +149,4 @@ module.exports = validator.compile({
   },
   playroomPort: { type: 'number', optional: true },
   playroomTitle: { type: 'string', optional: true },
-  isYarn: { type: 'boolean', optional: true },
 });

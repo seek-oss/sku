@@ -46,7 +46,7 @@ module.exports = {
 
 ## Pre-commit hooks
 
-To speed up the feedback loop on linting and formatting errors `sku` provides `pre-commit` script that can be run to catch simple problems before CI. To make use of this it is recommended that you install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it in `package.json` as follows:
+To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI. To make use of this, it's recommended that you install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it in `package.json` as follows:
 
 ```js
 // package.json

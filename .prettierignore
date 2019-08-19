@@ -1,10 +1,10 @@
-dist-build/
-dist-start/
-
-# managed by sku
+*.css.js.d.ts
+*.less.d.ts
+node_modules
 coverage/
-dist-playroom/
-dist-storybook/
 dist/
+dist-build/
+dist-playroom/
+dist-start/
+dist-storybook/
 report/
-# end managed by sku

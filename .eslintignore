@@ -1,8 +1,10 @@
-dist/
+*.css.js.d.ts
+*.less.d.ts
 node_modules
-report/
-dist-start/
+coverage/
+dist/
 dist-build/
 dist-playroom/
+dist-start/
 dist-storybook/
-coverage/
+report/

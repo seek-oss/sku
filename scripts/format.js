@@ -8,8 +8,8 @@ const pathsToCheck = args.length > 0 ? args : undefined;
   console.log(chalk.cyan('Formatting'));
 
   try {
-    await prettierWrite(pathsToCheck);
     await esLintFix(pathsToCheck);
+    await prettierWrite(pathsToCheck);
   } catch (e) {
     if (e) {
       console.error(e);

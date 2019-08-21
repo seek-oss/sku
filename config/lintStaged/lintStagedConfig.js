@@ -5,7 +5,7 @@ const steps = {};
 // Yarn lock integrity check
 if (isYarn) {
   steps['+(package.json|yarn.lock)'] = [
-    'yarn check-integrity',
+    () => 'yarn check --integrity',
     'git add package.json yarn.lock',
   ];
 }

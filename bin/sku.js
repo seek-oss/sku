@@ -33,6 +33,7 @@ switch (script) {
   case 'build-storybook':
   case 'playroom':
   case 'build-playroom':
+  case 'pre-commit':
   case 'chromatic': {
     runScript('configure');
     runScript(script);

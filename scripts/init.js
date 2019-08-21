@@ -98,6 +98,11 @@ const packageJson = {
     lint: 'sku lint',
     format: 'sku format',
   },
+  husky: {
+    hooks: {
+      'pre-commit': 'sku pre-commit',
+    },
+  },
 };
 const packageJsonString = JSON.stringify(packageJson, null, 2);
 
@@ -106,19 +111,23 @@ process.chdir(root);
 
 const useYarn = detectYarn();
 
-const allDeps = [
-  'seek-style-guide',
-  'sku',
-  'react',
-  'react-dom',
-  'react-helmet',
-];
+const deps = ['seek-style-guide', 'sku', 'react', 'react-dom', 'react-helmet'];
+
+const devDeps = ['husky'];
 
 console.log('Installing packages. This might take a couple of minutes.');
-console.log(`Installing ${allDeps.map(x => chalk.cyan(x)).join(', ')}...`);
+console.log(
+  `Installing ${deps
+    .concat(devDeps)
+    .map(x => chalk.cyan(x))
+    .join(', ')}...`,
+);
 console.log();
 
-install(allDeps, verbose, useYarn)
+Promise.all([
+  install({ deps, verbose, useYarn }),
+  install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn }),
+])
   .then(() => {
     return kopy(path.join(__dirname, '../template'), root, {
       move: {

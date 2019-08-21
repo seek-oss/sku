@@ -43,3 +43,17 @@ module.exports = {
 ## Bundle analysis
 
 `sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.
+
+## Pre-commit hooks
+
+To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI. To make use of this, it's recommended that you install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it in `package.json` as follows:
+
+```js
+// package.json
+
+"husky": {
+  "hooks": {
+    "pre-commit": "sku pre-commit"
+  }
+},
+```

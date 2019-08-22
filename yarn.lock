@@ -5092,10 +5092,10 @@ css-loader@^3.2.0:
     postcss-value-parser "^4.0.0"
     schema-utils "^2.0.0"
 
-css-modules-typescript-loader@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/css-modules-typescript-loader/-/css-modules-typescript-loader-2.0.4.tgz#0ddf207097f24c4bef8dd55964dfdbe6e373e283"
-  integrity sha512-hjIjlmJ0D8MRTGoRkIdWTLbKrnTLgSKsL9QLOTsVDq9UbRWLwfEBmeNgsM/KVkVB/DTYSbmlvw7OubaeOBlnqQ==
+css-modules-typescript-loader@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/css-modules-typescript-loader/-/css-modules-typescript-loader-3.0.0.tgz#ed5255f3e6d48b1a975c82c05525ce2fc73bd1e6"
+  integrity sha512-22H3eIiwWfA5o02z0ZvDPXbmblj1CopOHnEhm0xMHmXi9aU3mgGf/I66+aFlZYP67xekVXlGI6tDFtNnPciUtA==
   dependencies:
     line-diff "^2.0.1"
     loader-utils "^1.2.3"

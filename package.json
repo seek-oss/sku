@@ -107,7 +107,7 @@
     "command-line-args": "^5.1.1",
     "cross-spawn": "^6.0.5",
     "css-loader": "^3.2.0",
-    "css-modules-typescript-loader": "2.0.4",
+    "css-modules-typescript-loader": "3.0.0",
     "cssnano": "^4.1.10",
     "death": "^1.1.0",
     "debug": "^4.1.1",

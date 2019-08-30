@@ -1,6 +1,6 @@
 # <%= appName %>
 
-This project is powered by [sku](https://github.com/seek-oss/sku), [seek-style-guide](https://github.com/seek-oss/seek-style-guide) and built with [React](https://facebook.github.io/react).
+This project is powered by [sku](https://github.com/seek-oss/sku), [braid](https://github.com/seek-oss/braid-design-system) and built with [React](https://facebook.github.io/react).
 
 ## Getting Started
 

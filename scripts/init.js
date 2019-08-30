@@ -11,6 +11,8 @@ const detectYarn = require('../lib/detectYarn');
 const prettierWrite = require('../lib/runPrettier').write;
 const configure = require('../lib/configure');
 const install = require('../lib/install');
+const { getMissingHosts } = require('../lib/hosts');
+const { getSuggestedScript } = require('../lib/suggestScript');
 
 const args = require('../config/args');
 
@@ -195,5 +197,30 @@ const args = require('../config/args');
   await configure();
   await prettierWrite();
 
-  console.log(`${chalk.blue(projectName)} created`);
+  // read configured sites from templated sku config
+  const sites = require(path.join(root, 'sku.config.js')).sites;
+  const missingHosts = await getMissingHosts(sites);
+  const setupHostScript = await getSuggestedScript('setup-hosts', {
+    sudo: true,
+  });
+
+  const nextSteps = [
+    `${chalk.cyan('cd')} ${projectName}`,
+    missingHosts.length > 0 ? chalk.cyan(setupHostScript) : null,
+    `${chalk.cyan('yarn start')}`,
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  console.log(dedent`
+    ---------------------------------------------------------------
+
+    ${chalk.blue(projectName)} created
+
+    Get started by running:
+
+    ${nextSteps}
+
+    ---------------------------------------------------------------
+  `);
 })();

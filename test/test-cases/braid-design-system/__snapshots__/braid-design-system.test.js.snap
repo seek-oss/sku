@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "braid-design-system-themes-jobStreet-c9e777c15fd4988081f9.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreet-5264b5401e237478c389.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -56,40 +56,53 @@ Object {
   width: 100%;
 }
 ._Z9GO {
-  position: absolute;
+  height: 100%;
 }
 ._3XcVB {
-  position: relative;
+  position: absolute;
 }
 ._1B71U {
-  position: fixed;
+  position: relative;
 }
 ._1_euO {
-  display: block;
+  position: fixed;
 }
 ._2_IRV {
-  display: inline;
+  display: block;
 }
 .kOyfw {
-  display: none;
+  display: inline;
 }
 ._1BmwK {
-  display: inline-block;
+  display: none;
 }
 ._1ij33 {
+  display: inline-block;
+}
+._2iYJH {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1pqMN {
+.K7ZDs {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.K7ZDs {
+._269oH {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+._2W9UW {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+._2ZK6A {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 ._3HWgs {
   opacity: 0;
@@ -113,36 +126,29 @@ Object {
   cursor: pointer;
 }
 .Jx54Q {
-  height: 100%;
-}
-.ZBQ-p {
   border-radius: 100%;
 }
-._3HWgs:checked + * > ._2azEk > ._22dp5,
-._3HWgs:focus + * > ._2azEk > .nWwhH,
-._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > ._121VT {
+._3HWgs:checked + * > ._2azEk > .ZBQ-p,
+._3HWgs:focus + * > ._2azEk > ._22dp5,
+._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._3PnVZ {
+._121VT {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+._3HWgs:active + * > ._2azEk > * > ._121VT {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-._121VT > ._3PnVZ {
+.nWwhH > ._121VT {
   opacity: 0.2;
 }
-._3DZKV {
+._1HqaG {
   vertical-align: middle;
   top: -0.105em;
-}
-._1X6is {
-  height: 100%;
-}
-.x2CSj {
-  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 ._1DzSs {
   pointer-events: none;
@@ -417,79 +423,79 @@ Object {
 ._1OCHt_1 {
   border-radius: 4px;
 }
-._2ZK6A_1 {
-  background: #1c3f94;
-}
-._20cMK_1 {
-  background: #fff;
-}
-._3L6rw_1 {
-  background: #ccc;
-}
-.DV4sK_1 {
-  background: #fff200;
-}
-._17cfE_1 {
-  background: #1c3f94;
-}
 ._3K7SV_1 {
-  background: #ccc;
+  background: #1c3f94;
 }
 ._1shp6_1 {
-  background: #eef8fc;
-}
-._3Mbiw_1 {
   background: #fff;
 }
+._3Mbiw_1 {
+  background: #ccc;
+}
 ._17OUy_1 {
-  background: #eb0000;
+  background: #fff200;
 }
 .GzauW_1 {
-  background: #0c4b85;
+  background: #1c3f94;
 }
 .anfIF_1 {
-  background: #498307;
+  background: #ccc;
 }
 .wd-P2_1 {
-  background: #666;
+  background: #eef8fc;
 }
 ._2fX9z_1 {
-  background: #18367f;
+  background: #fff;
 }
 ._2RiYn_1 {
-  background: #2048a9;
+  background: #eb0000;
 }
 ._30S_F_1 {
-  background: #ccc200;
+  background: #0c4b85;
 }
 ._3wwUY_1 {
-  background: #e6da00;
+  background: #498307;
 }
 ._19OqH_1 {
-  background: #ecf2f6;
+  background: #666;
 }
 ._38O-x_1 {
-  background: #f7e9e9;
+  background: #18367f;
 }
 .pGoNm_1 {
-  background: #f0f6ea;
+  background: #2048a9;
 }
 ._2j_ce_1 {
-  background: #f1f1f1;
+  background: #ccc200;
 }
 ._3dk2W_1 {
-  box-shadow: 0 0 0 2px #94c9e0;
+  background: #e6da00;
 }
 ._23NJu_1 {
-  box-shadow: inset 0 0 0 1px #ccc;
+  background: #ecf2f6;
 }
 ._3lY29_1 {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  background: #f7e9e9;
 }
 ._11agk_1 {
-  box-shadow: inset 0 0 0 1px #1c3f94;
+  background: #f0f6ea;
 }
 ._154R6_1 {
+  background: #f1f1f1;
+}
+._2NQv2_1 {
+  box-shadow: 0 0 0 2px #94c9e0;
+}
+._2xNg4_1 {
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+._29w0S_1 {
+  box-shadow: inset 0 0 0 1px #eb0000;
+}
+._1lL3q_1 {
+  box-shadow: inset 0 0 0 1px #1c3f94;
+}
+.UwbMv_1 {
   box-shadow: inset 0 0 0 2px #1c3f94;
 }
 @media screen and (min-width: 768px) {
@@ -697,32 +703,42 @@ Object {
   ._2ERa8_1 {
     padding-right: 0;
   }
-  ._2iYJH_1 {
+  ._3h1c-_1 {
     display: block;
   }
-  ._3h1c-_1 {
+  .EVDih_1 {
     display: inline;
   }
-  .EVDih_1 {
+  .MU3mv_1 {
     display: none;
   }
-  .MU3mv_1 {
+  .B2ppV_1 {
     display: inline-block;
   }
-  .B2ppV_1 {
+  ._1pqMN_1 {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
-  ._269oH_1 {
+  ._20cMK_1 {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  ._2W9UW_1 {
+  ._3L6rw_1 {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .DV4sK_1 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  ._17cfE_1 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 }
 .q3uRq_1 {
@@ -740,32 +756,16 @@ Object {
 ._3HWgs:checked ~ ._2Cszt_1 {
   display: block;
 }
-._2OZJL_1 {
-  width: 12px;
-  height: 12px;
-}
-._3uOkF_1 {
-  width: 14px;
-  height: 14px;
-}
-.R49Kd_1 {
+._2ZfBL_1 {
   width: 16px;
   height: 16px;
 }
-._1IfLU_1 {
-  width: 18px;
-  height: 18px;
-}
-.SCclK_1 {
-  width: 16px;
-  height: 16px;
-}
-._1wv20_1 {
+.pgLNd_1 {
   width: 20px;
   height: 20px;
 }
-._3TTSE_1,
-._3Ukew_1 {
+._1pDOq_1,
+._2e6ji_1 {
   width: 24px;
   height: 24px;
 }
@@ -885,26 +885,30 @@ Object {
 ._2DNlq_1 {
   color: #fff;
 }
+._2TpEq_1,
+._3KSG8_1,
 .u7OQ5_1 {
   color: #333;
 }
 ._1QEQt_1,
 ._1weGM_1,
-._2TpEq_1,
-._3KSG8_1,
-._3vlP__1 {
+._2mc_y_1,
+._3NFar_1,
+._3vlP__1,
+._38cx__1,
+.MxhoO_1 {
   color: #fff;
 }
-._3NFar_1 {
+._1W_Sg_1 {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-._2mc_y_1 {
+._29LNX_1 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-._38cx__1,
-.MxhoO_1 {
+._2kIc-_1,
+.And8z_1 {
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -946,10 +950,9 @@ Object {
   min-height: 20px;
 }
 ,
-  "braid-design-system-themes-jobStreet-d03dbd9d653c33ac1f9e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-jobStreet-53f2eec8c3135e20af22.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-b050add5972ea338866a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobStreetClassic-c5e6ede0c027c6a668c9.css": ._3QqL3 {
+  "braid-design-system-themes-jobStreetClassic-07f39c7bda1f9bf26cc6.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1003,40 +1006,53 @@ Object {
   width: 100%;
 }
 ._Z9GO {
-  position: absolute;
+  height: 100%;
 }
 ._3XcVB {
-  position: relative;
+  position: absolute;
 }
 ._1B71U {
-  position: fixed;
+  position: relative;
 }
 ._1_euO {
-  display: block;
+  position: fixed;
 }
 ._2_IRV {
-  display: inline;
+  display: block;
 }
 .kOyfw {
-  display: none;
+  display: inline;
 }
 ._1BmwK {
-  display: inline-block;
+  display: none;
 }
 ._1ij33 {
+  display: inline-block;
+}
+._2iYJH {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1pqMN {
+.K7ZDs {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.K7ZDs {
+._269oH {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+._2W9UW {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+._2ZK6A {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 ._3HWgs {
   opacity: 0;
@@ -1060,36 +1076,29 @@ Object {
   cursor: pointer;
 }
 .Jx54Q {
-  height: 100%;
-}
-.ZBQ-p {
   border-radius: 100%;
 }
-._3HWgs:checked + * > ._2azEk > ._22dp5,
-._3HWgs:focus + * > ._2azEk > .nWwhH,
-._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > ._121VT {
+._3HWgs:checked + * > ._2azEk > .ZBQ-p,
+._3HWgs:focus + * > ._2azEk > ._22dp5,
+._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._3PnVZ {
+._121VT {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+._3HWgs:active + * > ._2azEk > * > ._121VT {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-._121VT > ._3PnVZ {
+.nWwhH > ._121VT {
   opacity: 0.2;
 }
-._3DZKV {
+._1HqaG {
   vertical-align: middle;
   top: -0.105em;
-}
-._1X6is {
-  height: 100%;
-}
-.x2CSj {
-  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 ._1DzSs {
   pointer-events: none;
@@ -1364,79 +1373,79 @@ Object {
 ._1OCHt_2oR {
   border-radius: 3px;
 }
-._2ZK6A_2oR {
-  background: #1c3f94;
-}
-._20cMK_2oR {
-  background: #fff;
-}
-._3L6rw_2oR {
-  background: #ccc;
-}
-.DV4sK_2oR {
-  background: #fff200;
-}
-._17cfE_2oR {
-  background: #1c3f94;
-}
 ._3K7SV_2oR {
-  background: #ccc;
+  background: #1c3f94;
 }
 ._1shp6_2oR {
-  background: #e8ebf4;
-}
-._3Mbiw_2oR {
   background: #fff;
 }
+._3Mbiw_2oR {
+  background: #ccc;
+}
 ._17OUy_2oR {
-  background: #eb0000;
+  background: #fff200;
 }
 .GzauW_2oR {
-  background: #142d69;
+  background: #1c3f94;
 }
 .anfIF_2oR {
-  background: #498307;
+  background: #ccc;
 }
 .wd-P2_2oR {
-  background: #666;
+  background: #e8ebf4;
 }
 ._2fX9z_2oR {
-  background: #18367f;
+  background: #fff;
 }
 ._2RiYn_2oR {
-  background: #2048a9;
+  background: #eb0000;
 }
 ._30S_F_2oR {
-  background: #ccc200;
+  background: #142d69;
 }
 ._3wwUY_2oR {
-  background: #e6da00;
+  background: #498307;
 }
 ._19OqH_2oR {
-  background: #eef0f6;
+  background: #666;
 }
 ._38O-x_2oR {
-  background: #f7e9e9;
+  background: #18367f;
 }
 .pGoNm_2oR {
-  background: #f0f6ea;
+  background: #2048a9;
 }
 ._2j_ce_2oR {
-  background: #f1f1f1;
+  background: #ccc200;
 }
 ._3dk2W_2oR {
-  box-shadow: 0 0 0 2px #94c9e0;
+  background: #e6da00;
 }
 ._23NJu_2oR {
-  box-shadow: inset 0 0 0 1px #ccc;
+  background: #eef0f6;
 }
 ._3lY29_2oR {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  background: #f7e9e9;
 }
 ._11agk_2oR {
-  box-shadow: inset 0 0 0 1px #1c3f94;
+  background: #f0f6ea;
 }
 ._154R6_2oR {
+  background: #f1f1f1;
+}
+._2NQv2_2oR {
+  box-shadow: 0 0 0 2px #94c9e0;
+}
+._2xNg4_2oR {
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+._29w0S_2oR {
+  box-shadow: inset 0 0 0 1px #eb0000;
+}
+._1lL3q_2oR {
+  box-shadow: inset 0 0 0 1px #1c3f94;
+}
+.UwbMv_2oR {
   box-shadow: inset 0 0 0 2px #1c3f94;
 }
 @media screen and (min-width: 768px) {
@@ -1644,32 +1653,42 @@ Object {
   ._2ERa8_2oR {
     padding-right: 0;
   }
-  ._2iYJH_2oR {
+  ._3h1c-_2oR {
     display: block;
   }
-  ._3h1c-_2oR {
+  .EVDih_2oR {
     display: inline;
   }
-  .EVDih_2oR {
+  .MU3mv_2oR {
     display: none;
   }
-  .MU3mv_2oR {
+  .B2ppV_2oR {
     display: inline-block;
   }
-  .B2ppV_2oR {
+  ._1pqMN_2oR {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
-  ._269oH_2oR {
+  ._20cMK_2oR {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  ._2W9UW_2oR {
+  ._3L6rw_2oR {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .DV4sK_2oR {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  ._17cfE_2oR {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 }
 .q3uRq_2oR {
@@ -1687,29 +1706,16 @@ Object {
 ._3HWgs:checked ~ ._2Cszt_2oR {
   display: block;
 }
-._2OZJL_2oR {
-  width: 11px;
-  height: 11px;
-}
-._3uOkF_2oR {
-  width: 12px;
-  height: 12px;
-}
-.R49Kd_2oR {
-  width: 14px;
-  height: 14px;
-}
-._1IfLU_2oR,
-.SCclK_2oR {
+._2ZfBL_2oR {
   width: 16px;
   height: 16px;
 }
-._1wv20_2oR,
-._3Ukew_2oR {
+._2e6ji_2oR,
+.pgLNd_2oR {
   width: 20px;
   height: 20px;
 }
-._3TTSE_2oR {
+._1pDOq_2oR {
   width: 24px;
   height: 24px;
 }
@@ -1832,26 +1838,30 @@ Object {
 ._2DNlq_2oR {
   color: #fff;
 }
+._2TpEq_2oR,
+._3KSG8_2oR,
 .u7OQ5_2oR {
   color: #333;
 }
 ._1QEQt_2oR,
 ._1weGM_2oR,
-._2TpEq_2oR,
-._3KSG8_2oR,
-._3vlP__2oR {
+._2mc_y_2oR,
+._3NFar_2oR,
+._3vlP__2oR,
+._38cx__2oR,
+.MxhoO_2oR {
   color: #fff;
 }
-._3NFar_2oR {
+._1W_Sg_2oR {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-._2mc_y_2oR,
-._38cx__2oR {
+._29LNX_2oR,
+.And8z_2oR {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.MxhoO_2oR {
+._2kIc-_2oR {
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -1893,9 +1903,9 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobStreetClassic-a65b9d33ac21e1500bd0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-28fff472a907f2b388ba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-jobsDB-ce5c4ea32dd13b589f4f.css": ._3QqL3 {
+  "braid-design-system-themes-jobsDB-0753b45625b467aa9e36.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -1949,40 +1959,53 @@ Object {
   width: 100%;
 }
 ._Z9GO {
-  position: absolute;
+  height: 100%;
 }
 ._3XcVB {
-  position: relative;
+  position: absolute;
 }
 ._1B71U {
-  position: fixed;
+  position: relative;
 }
 ._1_euO {
-  display: block;
+  position: fixed;
 }
 ._2_IRV {
-  display: inline;
+  display: block;
 }
 .kOyfw {
-  display: none;
+  display: inline;
 }
 ._1BmwK {
-  display: inline-block;
+  display: none;
 }
 ._1ij33 {
+  display: inline-block;
+}
+._2iYJH {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1pqMN {
+.K7ZDs {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.K7ZDs {
+._269oH {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+._2W9UW {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+._2ZK6A {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 ._3HWgs {
   opacity: 0;
@@ -2006,36 +2029,29 @@ Object {
   cursor: pointer;
 }
 .Jx54Q {
-  height: 100%;
-}
-.ZBQ-p {
   border-radius: 100%;
 }
-._3HWgs:checked + * > ._2azEk > ._22dp5,
-._3HWgs:focus + * > ._2azEk > .nWwhH,
-._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > ._121VT {
+._3HWgs:checked + * > ._2azEk > .ZBQ-p,
+._3HWgs:focus + * > ._2azEk > ._22dp5,
+._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._3PnVZ {
+._121VT {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+._3HWgs:active + * > ._2azEk > * > ._121VT {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-._121VT > ._3PnVZ {
+.nWwhH > ._121VT {
   opacity: 0.2;
 }
-._3DZKV {
+._1HqaG {
   vertical-align: middle;
   top: -0.105em;
-}
-._1X6is {
-  height: 100%;
-}
-.x2CSj {
-  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 ._1DzSs {
   pointer-events: none;
@@ -2310,79 +2326,79 @@ Object {
 ._1OCHt_1Fy {
   border-radius: 4px;
 }
-._2ZK6A_1Fy {
+._3K7SV_1Fy {
   background: linear-gradient(90deg, #0e7e8b, #0c4b85);
 }
-._20cMK_1Fy {
-  background: #fff;
-}
-._3L6rw_1Fy {
-  background: #ccc;
-}
-.DV4sK_1Fy {
-  background: #ff9000;
-}
-._17cfE_1Fy {
-  background: #0c4b85;
-}
-._3K7SV_1Fy {
-  background: #ccc;
-}
 ._1shp6_1Fy {
-  background: #eef8fc;
+  background: #fff;
 }
 ._3Mbiw_1Fy {
-  background: #fff;
+  background: #ccc;
 }
 ._17OUy_1Fy {
-  background: #eb0000;
+  background: #ff9000;
 }
 .GzauW_1Fy {
   background: #0c4b85;
 }
 .anfIF_1Fy {
-  background: #498307;
+  background: #ccc;
 }
 .wd-P2_1Fy {
-  background: #666;
+  background: #eef8fc;
 }
 ._2fX9z_1Fy {
-  background: #0a3e6e;
+  background: #fff;
 }
 ._2RiYn_1Fy {
-  background: #0e589c;
+  background: #eb0000;
 }
 ._30S_F_1Fy {
-  background: #cc7300;
+  background: #0c4b85;
 }
 ._3wwUY_1Fy {
-  background: #e68200;
+  background: #498307;
 }
 ._19OqH_1Fy {
-  background: #ecf2f6;
+  background: #666;
 }
 ._38O-x_1Fy {
-  background: #f7e9e9;
+  background: #0a3e6e;
 }
 .pGoNm_1Fy {
-  background: #f0f6ea;
+  background: #0e589c;
 }
 ._2j_ce_1Fy {
-  background: #f1f1f1;
+  background: #cc7300;
 }
 ._3dk2W_1Fy {
-  box-shadow: 0 0 0 2px #94c9e0;
+  background: #e68200;
 }
 ._23NJu_1Fy {
-  box-shadow: inset 0 0 0 1px #ccc;
+  background: #ecf2f6;
 }
 ._3lY29_1Fy {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  background: #f7e9e9;
 }
 ._11agk_1Fy {
-  box-shadow: inset 0 0 0 1px #0c4b85;
+  background: #f0f6ea;
 }
 ._154R6_1Fy {
+  background: #f1f1f1;
+}
+._2NQv2_1Fy {
+  box-shadow: 0 0 0 2px #94c9e0;
+}
+._2xNg4_1Fy {
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+._29w0S_1Fy {
+  box-shadow: inset 0 0 0 1px #eb0000;
+}
+._1lL3q_1Fy {
+  box-shadow: inset 0 0 0 1px #0c4b85;
+}
+.UwbMv_1Fy {
   box-shadow: inset 0 0 0 2px #0c4b85;
 }
 @media screen and (min-width: 768px) {
@@ -2590,32 +2606,42 @@ Object {
   ._2ERa8_1Fy {
     padding-right: 0;
   }
-  ._2iYJH_1Fy {
+  ._3h1c-_1Fy {
     display: block;
   }
-  ._3h1c-_1Fy {
+  .EVDih_1Fy {
     display: inline;
   }
-  .EVDih_1Fy {
+  .MU3mv_1Fy {
     display: none;
   }
-  .MU3mv_1Fy {
+  .B2ppV_1Fy {
     display: inline-block;
   }
-  .B2ppV_1Fy {
+  ._1pqMN_1Fy {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
-  ._269oH_1Fy {
+  ._20cMK_1Fy {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  ._2W9UW_1Fy {
+  ._3L6rw_1Fy {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .DV4sK_1Fy {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  ._17cfE_1Fy {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 }
 .q3uRq_1Fy {
@@ -2633,32 +2659,16 @@ Object {
 ._3HWgs:checked ~ ._2Cszt_1Fy {
   display: block;
 }
-._2OZJL_1Fy {
-  width: 12px;
-  height: 12px;
-}
-._3uOkF_1Fy {
-  width: 14px;
-  height: 14px;
-}
-.R49Kd_1Fy {
+._2ZfBL_1Fy {
   width: 16px;
   height: 16px;
 }
-._1IfLU_1Fy {
-  width: 18px;
-  height: 18px;
-}
-.SCclK_1Fy {
-  width: 16px;
-  height: 16px;
-}
-._1wv20_1Fy {
+.pgLNd_1Fy {
   width: 20px;
   height: 20px;
 }
-._3TTSE_1Fy,
-._3Ukew_1Fy {
+._1pDOq_1Fy,
+._2e6ji_1Fy {
   width: 24px;
   height: 24px;
 }
@@ -2778,22 +2788,26 @@ Object {
 ._1QEQt_1Fy,
 ._1weGM_1Fy,
 ._2DNlq_1Fy,
+._2mc_y_1Fy,
 ._2TpEq_1Fy,
 ._3KSG8_1Fy,
+._3NFar_1Fy,
 ._3vlP__1Fy,
+._38cx__1Fy,
+.MxhoO_1Fy,
 .u7OQ5_1Fy {
   color: #fff;
 }
-._3NFar_1Fy {
+._1W_Sg_1Fy {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-._2mc_y_1Fy {
+._29LNX_1Fy {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-._38cx__1Fy,
-.MxhoO_1Fy {
+._2kIc-_1Fy,
+.And8z_1Fy {
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -2835,8 +2849,10 @@ Object {
   min-height: 20px;
 }
 ,
+  "braid-design-system-themes-jobsDB-b07c7c10248d08f909a0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-jobsDB.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-seekAnz-37b4a9aef68e1b8c167a.css": ._3QqL3 {
+  "braid-design-system-themes-seekAnz-8fc6049e9364db8d8fed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-seekAnz-a916838be55018f96bac.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -2890,40 +2906,53 @@ Object {
   width: 100%;
 }
 ._Z9GO {
-  position: absolute;
+  height: 100%;
 }
 ._3XcVB {
-  position: relative;
+  position: absolute;
 }
 ._1B71U {
-  position: fixed;
+  position: relative;
 }
 ._1_euO {
-  display: block;
+  position: fixed;
 }
 ._2_IRV {
-  display: inline;
+  display: block;
 }
 .kOyfw {
-  display: none;
+  display: inline;
 }
 ._1BmwK {
-  display: inline-block;
+  display: none;
 }
 ._1ij33 {
+  display: inline-block;
+}
+._2iYJH {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1pqMN {
+.K7ZDs {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.K7ZDs {
+._269oH {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+._2W9UW {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+._2ZK6A {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 ._3HWgs {
   opacity: 0;
@@ -2947,36 +2976,29 @@ Object {
   cursor: pointer;
 }
 .Jx54Q {
-  height: 100%;
-}
-.ZBQ-p {
   border-radius: 100%;
 }
-._3HWgs:checked + * > ._2azEk > ._22dp5,
-._3HWgs:focus + * > ._2azEk > .nWwhH,
-._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > ._121VT {
+._3HWgs:checked + * > ._2azEk > .ZBQ-p,
+._3HWgs:focus + * > ._2azEk > ._22dp5,
+._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._3PnVZ {
+._121VT {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+._3HWgs:active + * > ._2azEk > * > ._121VT {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-._121VT > ._3PnVZ {
+.nWwhH > ._121VT {
   opacity: 0.2;
 }
-._3DZKV {
+._1HqaG {
   vertical-align: middle;
   top: -0.105em;
-}
-._1X6is {
-  height: 100%;
-}
-.x2CSj {
-  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 ._1DzSs {
   pointer-events: none;
@@ -3251,79 +3273,79 @@ Object {
 ._1OCHt_2 {
   border-radius: 2px;
 }
-._2ZK6A_2 {
+._3K7SV_2 {
   background: #0d3880;
 }
-._20cMK_2 {
-  background: #fff;
-}
-._3L6rw_2 {
-  background: #eee;
-}
-.DV4sK_2 {
-  background: #e60278;
-}
-._17cfE_2 {
-  background: #2765cf;
-}
-._3K7SV_2 {
-  background: #ccc;
-}
 ._1shp6_2 {
-  background: #f5f8ff;
+  background: #fff;
 }
 ._3Mbiw_2 {
-  background: #fff;
+  background: #eee;
 }
 ._17OUy_2 {
   background: #e60278;
 }
 .GzauW_2 {
-  background: #9556b7;
+  background: #2765cf;
 }
 .anfIF_2 {
-  background: #169400;
+  background: #ccc;
 }
 .wd-P2_2 {
-  background: rgba(28, 28, 28, 0.63);
+  background: #f5f8ff;
 }
 ._2fX9z_2 {
-  background: #235bba;
+  background: #fff;
 }
 ._2RiYn_2 {
-  background: #3672d9;
+  background: #e60278;
 }
 ._30S_F_2 {
-  background: #cd026b;
+  background: #9556b7;
 }
 ._3wwUY_2 {
-  background: #fd0585;
+  background: #169400;
 }
 ._19OqH_2 {
-  background: #f1edf3;
+  background: rgba(28, 28, 28, 0.63);
 }
 ._38O-x_2 {
-  background: #f7e9f0;
+  background: #235bba;
 }
 .pGoNm_2 {
-  background: #ebf6e9;
+  background: #3672d9;
 }
 ._2j_ce_2 {
-  background: #f2f2f2;
+  background: #cd026b;
 }
 ._3dk2W_2 {
-  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.7);
+  background: #fd0585;
 }
 ._23NJu_2 {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
+  background: #f1edf3;
 }
 ._3lY29_2 {
-  box-shadow: inset 0 0 0 1px #e60278;
+  background: #f7e9f0;
 }
 ._11agk_2 {
-  box-shadow: inset 0 0 0 1px #2765cf;
+  background: #ebf6e9;
 }
 ._154R6_2 {
+  background: #f2f2f2;
+}
+._2NQv2_2 {
+  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.7);
+}
+._2xNg4_2 {
+  box-shadow: inset 0 0 0 1px #d6d6d6;
+}
+._29w0S_2 {
+  box-shadow: inset 0 0 0 1px #e60278;
+}
+._1lL3q_2 {
+  box-shadow: inset 0 0 0 1px #2765cf;
+}
+.UwbMv_2 {
   box-shadow: inset 0 0 0 2px #2765cf;
 }
 @media screen and (min-width: 740px) {
@@ -3531,32 +3553,42 @@ Object {
   ._2ERa8_2 {
     padding-right: 0;
   }
-  ._2iYJH_2 {
+  ._3h1c-_2 {
     display: block;
   }
-  ._3h1c-_2 {
+  .EVDih_2 {
     display: inline;
   }
-  .EVDih_2 {
+  .MU3mv_2 {
     display: none;
   }
-  .MU3mv_2 {
+  .B2ppV_2 {
     display: inline-block;
   }
-  .B2ppV_2 {
+  ._1pqMN_2 {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
-  ._269oH_2 {
+  ._20cMK_2 {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  ._2W9UW_2 {
+  ._3L6rw_2 {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .DV4sK_2 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  ._17cfE_2 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 }
 .q3uRq_2 {
@@ -3574,28 +3606,18 @@ Object {
 ._3HWgs:checked ~ ._2Cszt_2 {
   display: block;
 }
-._2OZJL_2 {
-  width: 12px;
-  height: 12px;
-}
-._3uOkF_2 {
-  width: 14px;
-  height: 14px;
-}
-.R49Kd_2 {
-  width: 16px;
-  height: 16px;
-}
-._1IfLU_2,
-._1wv20_2,
-.SCclK_2 {
+._2ZfBL_2,
+.pgLNd_2 {
   width: 18px;
   height: 18px;
 }
-._3TTSE_2,
-._3Ukew_2 {
+._2e6ji_2 {
   width: 24px;
   height: 24px;
+}
+._1pDOq_2 {
+  width: 30px;
+  height: 30px;
 }
 .C6ZIU_2 {
   font-family: Roboto, Helvetica Neue, HelveticaNeue, Helvetica, Arial,
@@ -3636,11 +3658,11 @@ Object {
 }
 ._8QVx6_2 {
   font-size: 18px;
-  line-height: 24px;
+  line-height: 30px;
 }
 ._3srVf_2 {
-  -webkit-transform: translateY(0.32666666666666666em);
-  transform: translateY(0.32666666666666666em);
+  -webkit-transform: translateY(0.4933333333333334em);
+  transform: translateY(0.4933333333333334em);
 }
 ._30vru_2 {
   font-weight: 400;
@@ -3674,11 +3696,11 @@ Object {
 }
 ._2VCbC_2 {
   font-size: 18px;
-  line-height: 24px;
+  line-height: 30px;
 }
 ._1VMf3_2 {
-  -webkit-transform: translateY(0.32666666666666666em);
-  transform: translateY(0.32666666666666666em);
+  -webkit-transform: translateY(0.4933333333333334em);
+  transform: translateY(0.4933333333333334em);
 }
 ._17ajR_2 {
   color: #1c1c1c;
@@ -3713,21 +3735,28 @@ Object {
 ._1QEQt_2,
 ._1weGM_2,
 ._2DNlq_2,
+._2mc_y_2,
 ._2TpEq_2,
 ._3KSG8_2,
+._3NFar_2,
 ._3vlP__2,
+._38cx__2,
+.MxhoO_2,
 .u7OQ5_2 {
   color: #fff;
 }
-._2mc_y_2,
-._3NFar_2 {
+._1W_Sg_2,
+._29LNX_2 {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-._38cx__2,
-.MxhoO_2 {
+.And8z_2 {
   padding-top: 12px;
   padding-bottom: 12px;
+}
+._2kIc-_2 {
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 @media screen and (min-width: 740px) {
   ._26NdQ_2 {
@@ -3751,9 +3780,9 @@ Object {
   min-height: 18px;
 }
 ,
-  "braid-design-system-themes-seekAnz-a8448f1b26185f3a1212.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "braid-design-system-themes-wireframe-e0a582a2ac636963889e.css": ._3QqL3 {
+  "braid-design-system-themes-wireframe-207d23d39988f4e7c78d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "braid-design-system-themes-wireframe-dca5f8785ad37b867e89.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
@@ -3807,40 +3836,53 @@ Object {
   width: 100%;
 }
 ._Z9GO {
-  position: absolute;
+  height: 100%;
 }
 ._3XcVB {
-  position: relative;
+  position: absolute;
 }
 ._1B71U {
-  position: fixed;
+  position: relative;
 }
 ._1_euO {
-  display: block;
+  position: fixed;
 }
 ._2_IRV {
-  display: inline;
+  display: block;
 }
 .kOyfw {
-  display: none;
+  display: inline;
 }
 ._1BmwK {
-  display: inline-block;
+  display: none;
 }
 ._1ij33 {
+  display: inline-block;
+}
+._2iYJH {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1pqMN {
+.K7ZDs {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.K7ZDs {
+._269oH {
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+._2W9UW {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+._2ZK6A {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 ._3HWgs {
   opacity: 0;
@@ -3864,36 +3906,29 @@ Object {
   cursor: pointer;
 }
 .Jx54Q {
-  height: 100%;
-}
-.ZBQ-p {
   border-radius: 100%;
 }
-._3HWgs:checked + * > ._2azEk > ._22dp5,
-._3HWgs:focus + * > ._2azEk > .nWwhH,
-._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > ._121VT {
+._3HWgs:checked + * > ._2azEk > .ZBQ-p,
+._3HWgs:focus + * > ._2azEk > ._22dp5,
+._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._3PnVZ {
+._121VT {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+._3HWgs:active + * > ._2azEk > * > ._121VT {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
-._121VT > ._3PnVZ {
+.nWwhH > ._121VT {
   opacity: 0.2;
 }
-._3DZKV {
+._1HqaG {
   vertical-align: middle;
   top: -0.105em;
-}
-._1X6is {
-  height: 100%;
-}
-.x2CSj {
-  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 ._1DzSs {
   pointer-events: none;
@@ -4168,79 +4203,79 @@ Object {
 ._1OCHt_0 {
   border-radius: 4px;
 }
-._2ZK6A_0 {
+._3K7SV_0 {
   background: #2b2b2b;
 }
-._20cMK_0 {
-  background: #fff;
-}
-._3L6rw_0 {
-  background: #eee;
-}
-.DV4sK_0 {
-  background: #000;
-}
-._17cfE_0 {
-  background: #404040;
-}
-._3K7SV_0 {
-  background: #ccc;
-}
 ._1shp6_0 {
-  background: #eee;
+  background: #fff;
 }
 ._3Mbiw_0 {
-  background: #fff;
+  background: #eee;
 }
 ._17OUy_0 {
-  background: red;
-}
-.GzauW_0 {
-  background: navy;
-}
-.anfIF_0 {
-  background: green;
-}
-.wd-P2_0 {
-  background: #777;
-}
-._2fX9z_0 {
-  background: #333;
-}
-._2RiYn_0 {
-  background: #4d4d4d;
-}
-._30S_F_0 {
   background: #000;
 }
+.GzauW_0 {
+  background: #404040;
+}
+.anfIF_0 {
+  background: #ccc;
+}
+.wd-P2_0 {
+  background: #eee;
+}
+._2fX9z_0 {
+  background: #fff;
+}
+._2RiYn_0 {
+  background: red;
+}
+._30S_F_0 {
+  background: navy;
+}
 ._3wwUY_0 {
-  background: #0d0d0d;
+  background: green;
 }
 ._19OqH_0 {
-  background: #ececf8;
+  background: #777;
 }
 ._38O-x_0 {
-  background: #f6e9e9;
+  background: #333;
 }
 .pGoNm_0 {
-  background: #eaf7ea;
+  background: #4d4d4d;
 }
 ._2j_ce_0 {
-  background: #f0f0f0;
+  background: #000;
 }
 ._3dk2W_0 {
-  box-shadow: 0 0 0 2px #00bfff;
+  background: #0d0d0d;
 }
 ._23NJu_0 {
-  box-shadow: inset 0 0 0 1px #777;
+  background: #ececf8;
 }
 ._3lY29_0 {
-  box-shadow: inset 0 0 0 1px red;
+  background: #f6e9e9;
 }
 ._11agk_0 {
-  box-shadow: inset 0 0 0 1px #404040;
+  background: #eaf7ea;
 }
 ._154R6_0 {
+  background: #f0f0f0;
+}
+._2NQv2_0 {
+  box-shadow: 0 0 0 2px #00bfff;
+}
+._2xNg4_0 {
+  box-shadow: inset 0 0 0 1px #777;
+}
+._29w0S_0 {
+  box-shadow: inset 0 0 0 1px red;
+}
+._1lL3q_0 {
+  box-shadow: inset 0 0 0 1px #404040;
+}
+.UwbMv_0 {
   box-shadow: inset 0 0 0 2px #404040;
 }
 @media screen and (min-width: 768px) {
@@ -4448,32 +4483,42 @@ Object {
   ._2ERa8_0 {
     padding-right: 0;
   }
-  ._2iYJH_0 {
+  ._3h1c-_0 {
     display: block;
   }
-  ._3h1c-_0 {
+  .EVDih_0 {
     display: inline;
   }
-  .EVDih_0 {
+  .MU3mv_0 {
     display: none;
   }
-  .MU3mv_0 {
+  .B2ppV_0 {
     display: inline-block;
   }
-  .B2ppV_0 {
+  ._1pqMN_0 {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
   }
-  ._269oH_0 {
+  ._20cMK_0 {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  ._2W9UW_0 {
+  ._3L6rw_0 {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .DV4sK_0 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+  ._17cfE_0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
   }
 }
 .q3uRq_0 {
@@ -4491,26 +4536,13 @@ Object {
 ._3HWgs:checked ~ ._2Cszt_0 {
   display: block;
 }
-._2OZJL_0 {
-  width: 12px;
-  height: 12px;
-}
-._3uOkF_0 {
-  width: 14px;
-  height: 14px;
-}
-.R49Kd_0 {
-  width: 16px;
-  height: 16px;
-}
-._1IfLU_0,
-._1wv20_0,
-.SCclK_0 {
+._2ZfBL_0,
+.pgLNd_0 {
   width: 18px;
   height: 18px;
 }
-._3TTSE_0,
-._3Ukew_0 {
+._1pDOq_0,
+._2e6ji_0 {
   width: 24px;
   height: 24px;
 }
@@ -4629,19 +4661,23 @@ Object {
 ._1QEQt_0,
 ._1weGM_0,
 ._2DNlq_0,
+._2mc_y_0,
 ._2TpEq_0,
 ._3KSG8_0,
+._3NFar_0,
 ._3vlP__0,
+._38cx__0,
+.MxhoO_0,
 .u7OQ5_0 {
   color: #fff;
 }
-._2mc_y_0,
-._3NFar_0 {
+._1W_Sg_0,
+._29LNX_0 {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-._38cx__0,
-.MxhoO_0 {
+._2kIc-_0,
+.And8z_0 {
   padding-top: 12px;
   padding-bottom: 12px;
 }
@@ -4667,7 +4703,6 @@ Object {
   min-height: 18px;
 }
 ,
-  "braid-design-system-themes-wireframe-fc80bd03f9703972fd18.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "braid-design-system-themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   \\"react\\",
@@ -4685,18 +4720,18 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-c9e777c15fd4988081f9.css"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-5264b5401e237478c389.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-21e723ef4e280cb1c6e4.js"
+          href="https://somecdn.com/runtime-b8e85a6eb7b6f97a1e22.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
+          href="https://somecdn.com/vendors~main-208d463563c59a724516.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4708,7 +4743,7 @@ Object {
     <link data-chunk="braid-design-system-themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-jobStreet-d03dbd9d653c33ac1f9e.js"
+          href="https://somecdn.com/braid-design-system-themes-jobStreet-53f2eec8c3135e20af22.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4717,66 +4752,79 @@ Object {
   </head>
   <body>
     <div id="app">
-      <span class="_3P29T _1_euO C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1 _2WTa0_1">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#e5e5e5}
+      </style>
+      <span class="_3P29T _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1 _2WTa0_1">
         Hello
         jobStreet
-        <div class="_3P29T _1BmwK _2sL5F">
-          <svg width="16"
-               height="16"
-               viewbox="0 0 1024 1024"
-               class="_3P29T _3XcVB _1BmwK _3DZKV R49Kd_1 x2CSj _17ajR_1"
+        <svg viewbox="0 0 1024 1024"
+             focusable="false"
+             fill="currentColor"
+             width="16"
+             height="16"
+             class="_3P29T _1B71U _1ij33 _2sL5F _17ajR_1 _1HqaG"
+        >
+          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
+                fill="currentColor"
           >
-            <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
-            </path>
-          </svg>
-        </div>
+          </path>
+        </svg>
       </span>
       <div class="_3P29T o5wHJ_1">
-        <div class="_3P29T _3Mbiw_1 ST9QG_1 _11gxS_1 _2Yn0H_1 _1Hlla_1">
+        <div class="_3P29T _2fX9z_1 ST9QG_1 _2Yn0H_1 _1Hlla_1 _11gxS_1">
           <div class="_3P29T">
             <input type="checkbox"
-                   class="_3P29T _1K98W _1xrTt _Z9GO _3HWgs q3uRq_1"
+                   class="_3P29T _1K98W _1xrTt _3XcVB _3HWgs q3uRq_1"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="_3P29T _1ij33">
-              <div class="_3P29T _20cMK_1 _1OCHt_1 _23NJu_1 _3XcVB _2azEk _1N9cL_1">
-                <div class="_3P29T _17cfE_1 _1OCHt_1 _3EZ81_1 _Z9GO _1DzSs _22dp5">
-                  <div class="_3P29T _3EZ81_1 _3PnVZ">
+            <div class="_3P29T _2iYJH">
+              <div class="_3P29T _1shp6_1 _1OCHt_1 _2xNg4_1 _1B71U _2azEk _1N9cL_1">
+                <div class="_3P29T GzauW_1 _1OCHt_1 _3EZ81_1 _3XcVB _1DzSs ZBQ-p">
+                  <div class="_3P29T _3EZ81_1 _121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _1IQ7a _1_euO _1X6is x2CSj _3KSG8_1"
+                         class="_3P29T _Z9GO _1IQ7a _2_IRV _1QEQt_1"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="_3P29T _1OCHt_1 _3dk2W_1 _3EZ81_1 _Z9GO _1DzSs nWwhH">
+                <div class="_3P29T _1OCHt_1 _2NQv2_1 _3EZ81_1 _3XcVB _1DzSs _22dp5">
                 </div>
-                <div class="_3P29T _1OCHt_1 _11agk_1 _3EZ81_1 _Z9GO _1DzSs _121VT">
-                  <div class="_3P29T _3EZ81_1 _3PnVZ">
+                <div class="_3P29T _1OCHt_1 _1lL3q_1 _3EZ81_1 _3XcVB _1DzSs nWwhH">
+                  <div class="_3P29T _3EZ81_1 _121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _1IQ7a _1_euO _1X6is x2CSj _6eu7W_1"
+                         class="_3P29T _Z9GO _1IQ7a _2_IRV _6eu7W_1"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="_3P29T _6QFg_1 _3R2vq _38cx__1"
+              <label class="_3P29T _6QFg_1 _3R2vq And8z_1"
                      for="id_1"
               >
-                <span class="_3P29T _1_euO C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1">
+                <span class="_3P29T _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="_3P29T _1Obfb_1 _1ij33 _24rCK"
+            <div class="_3P29T _1Obfb_1 _2iYJH _24rCK"
                  id="id_1-message"
             >
               <div class="_3P29T _3KscY _3hlJo_1">
@@ -4800,13 +4848,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-21e723ef4e280cb1c6e4.js"
+            src="https://somecdn.com/runtime-b8e85a6eb7b6f97a1e22.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
+            src="https://somecdn.com/vendors~main-208d463563c59a724516.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4818,14 +4866,14 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-jobStreet"
-            src="https://somecdn.com/braid-design-system-themes-jobStreet-d03dbd9d653c33ac1f9e.js"
+            src="https://somecdn.com/braid-design-system-themes-jobStreet-53f2eec8c3135e20af22.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "main-7830c03c8c172e94d04d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-21e723ef4e280cb1c6e4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-b8e85a6eb7b6f97a1e22.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -4838,18 +4886,18 @@ Object {
     >
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-37b4a9aef68e1b8c167a.css"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-a916838be55018f96bac.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-21e723ef4e280cb1c6e4.js"
+          href="https://somecdn.com/runtime-b8e85a6eb7b6f97a1e22.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
+          href="https://somecdn.com/vendors~main-208d463563c59a724516.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
@@ -4861,7 +4909,7 @@ Object {
     <link data-chunk="braid-design-system-themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/braid-design-system-themes-seekAnz-a8448f1b26185f3a1212.js"
+          href="https://somecdn.com/braid-design-system-themes-seekAnz-8fc6049e9364db8d8fed.js"
           crossorigin="anonymous"
     >
     <script>
@@ -4870,66 +4918,79 @@ Object {
   </head>
   <body>
     <div id="app">
-      <span class="_3P29T _1_euO C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2 _2WTa0_2">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#eee}
+      </style>
+      <span class="_3P29T _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2 _2WTa0_2">
         Hello
         seekAnz
-        <div class="_3P29T _1BmwK _2sL5F">
-          <svg width="16"
-               height="16"
-               viewbox="0 0 1024 1024"
-               class="_3P29T _3XcVB _1BmwK _3DZKV R49Kd_2 x2CSj _17ajR_2"
+        <svg viewbox="0 0 1024 1024"
+             focusable="false"
+             fill="currentColor"
+             width="16"
+             height="16"
+             class="_3P29T _1B71U _1ij33 _2sL5F _17ajR_2 _1HqaG"
+        >
+          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
+                fill="currentColor"
           >
-            <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
-            </path>
-          </svg>
-        </div>
+          </path>
+        </svg>
       </span>
       <div class="_3P29T o5wHJ_2">
-        <div class="_3P29T _3Mbiw_2 ST9QG_2 _11gxS_2 _2Yn0H_2 _1Hlla_2">
+        <div class="_3P29T _2fX9z_2 ST9QG_2 _2Yn0H_2 _1Hlla_2 _11gxS_2">
           <div class="_3P29T">
             <input type="checkbox"
-                   class="_3P29T _1K98W _1xrTt _Z9GO _3HWgs q3uRq_2"
+                   class="_3P29T _1K98W _1xrTt _3XcVB _3HWgs q3uRq_2"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="_3P29T _1ij33">
-              <div class="_3P29T _20cMK_2 _1OCHt_2 _23NJu_2 _3XcVB _2azEk _1N9cL_2">
-                <div class="_3P29T _17cfE_2 _1OCHt_2 _3EZ81_2 _Z9GO _1DzSs _22dp5">
-                  <div class="_3P29T _3EZ81_2 _3PnVZ">
+            <div class="_3P29T _2iYJH">
+              <div class="_3P29T _1shp6_2 _1OCHt_2 _2xNg4_2 _1B71U _2azEk _1N9cL_2">
+                <div class="_3P29T GzauW_2 _1OCHt_2 _3EZ81_2 _3XcVB _1DzSs ZBQ-p">
+                  <div class="_3P29T _3EZ81_2 _121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _1IQ7a _1_euO _1X6is x2CSj _3KSG8_2"
+                         class="_3P29T _Z9GO _1IQ7a _2_IRV _1QEQt_2"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="_3P29T _1OCHt_2 _3dk2W_2 _3EZ81_2 _Z9GO _1DzSs nWwhH">
+                <div class="_3P29T _1OCHt_2 _2NQv2_2 _3EZ81_2 _3XcVB _1DzSs _22dp5">
                 </div>
-                <div class="_3P29T _1OCHt_2 _11agk_2 _3EZ81_2 _Z9GO _1DzSs _121VT">
-                  <div class="_3P29T _3EZ81_2 _3PnVZ">
+                <div class="_3P29T _1OCHt_2 _1lL3q_2 _3EZ81_2 _3XcVB _1DzSs nWwhH">
+                  <div class="_3P29T _3EZ81_2 _121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _1IQ7a _1_euO _1X6is x2CSj _6eu7W_2"
+                         class="_3P29T _Z9GO _1IQ7a _2_IRV _6eu7W_2"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="_3P29T _6QFg_2 _3R2vq _38cx__2"
+              <label class="_3P29T _6QFg_2 _3R2vq And8z_2"
                      for="id_1"
               >
-                <span class="_3P29T _1_euO C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2">
+                <span class="_3P29T _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="_3P29T _3yuzv_2 _1ij33 _24rCK"
+            <div class="_3P29T _3yuzv_2 _2iYJH _24rCK"
                  id="id_1-message"
             >
               <div class="_3P29T _3KscY _3hlJo_2">
@@ -4953,13 +5014,13 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-21e723ef4e280cb1c6e4.js"
+            src="https://somecdn.com/runtime-b8e85a6eb7b6f97a1e22.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-7e9a72e0473d0ac4ab79.js"
+            src="https://somecdn.com/vendors~main-208d463563c59a724516.js"
             crossorigin="anonymous"
     >
     </script>
@@ -4971,13 +5032,13 @@ Object {
     </script>
     <script async
             data-chunk="braid-design-system-themes-seekAnz"
-            src="https://somecdn.com/braid-design-system-themes-seekAnz-a8448f1b26185f3a1212.js"
+            src="https://somecdn.com/braid-design-system-themes-seekAnz-8fc6049e9364db8d8fed.js"
             crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "vendors~main-7e9a72e0473d0ac4ab79.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-208d463563c59a724516.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -5040,66 +5101,79 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <span class="BRAID__reset-base_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#eee}
+      </style>
+      <span class="BRAID__reset-base_3P29T BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
         Hello
         seekAnz
-        <div class="BRAID__reset-base_3P29T BRAID__box-display_inlineBlock_1BmwK BRAID__ChevronIcon-root_2sL5F">
-          <svg width="16"
-               height="16"
-               viewbox="0 0 1024 1024"
-               class="BRAID__reset-base_3P29T BRAID__box-position_relative_3XcVB BRAID__box-display_inlineBlock_1BmwK BRAID__Icon-inline_3DZKV BRAID__Icon-inlineSizes_standard_R49Kd_seekAnz BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_neutral_17ajR_seekAnz"
+        <svg viewbox="0 0 1024 1024"
+             focusable="false"
+             fill="currentColor"
+             width="16"
+             height="16"
+             class="BRAID__reset-base_3P29T BRAID__box-position_relative_1B71U BRAID__box-display_inlineBlock_1ij33 BRAID__ChevronIcon-root_2sL5F BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__icon-inline_1HqaG"
+        >
+          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
+                fill="currentColor"
           >
-            <path d="M945 266l78 67-510 524-510-524 75-69 435 451 432-449z">
-            </path>
-          </svg>
-        </div>
+          </path>
+        </svg>
       </span>
       <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_medium_o5wHJ_seekAnz">
-        <div class="BRAID__reset-base_3P29T BRAID__box-background_card_3Mbiw_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz">
+        <div class="BRAID__reset-base_3P29T BRAID__box-background_card_2fX9z_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz">
           <div class="BRAID__reset-base_3P29T">
             <input type="checkbox"
-                   class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                   class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute_3XcVB BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_1ij33">
-              <div class="BRAID__reset-base_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
-                <div class="BRAID__reset-base_3P29T BRAID__box-background_formAccent_17cfE_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_22dp5">
-                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
+            <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_2iYJH">
+              <div class="BRAID__reset-base_3P29T BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_2xNg4_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
+                <div class="BRAID__reset-base_3P29T BRAID__box-background_formAccent_GzauW_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_ZBQ-p">
+                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="BRAID__reset-base_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-style_3KSG8_seekAnz"
+                         class="BRAID__reset-base_3P29T BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-textColorForBackground-formAccent_1QEQt_seekAnz"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_3dk2W_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_nWwhH">
+                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_2NQv2_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_22dp5">
                 </div>
-                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_11agk_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute__Z9GO BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_121VT">
-                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_3PnVZ">
+                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_1lL3q_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_nWwhH">
+                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT">
                     <svg viewbox="90.471 302.809 823 823"
+                         focusable="false"
+                         fill="currentColor"
                          width="16"
                          height="16"
-                         class="BRAID__reset-base_3P29T BRAID__box-width_full_1IQ7a BRAID__box-display_block_1_euO BRAID__Icon-fullHeight_1X6is BRAID__Icon-currentColor_x2CSj BRAID__typography-tone_formAccent_6eu7W_seekAnz"
+                         class="BRAID__reset-base_3P29T BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-tone_formAccent_6eu7W_seekAnz"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882">
+                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
+                            fill="currentColor"
+                      >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="BRAID__reset-base_3P29T BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_38cx__seekAnz"
+              <label class="BRAID__reset-base_3P29T BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_And8z_seekAnz"
                      for="id_1"
               >
-                <span class="BRAID__reset-base_3P29T BRAID__box-display_block_1_euO BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
+                <span class="BRAID__reset-base_3P29T BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_1ij33 BRAID__FieldMessage-root_24rCK"
+            <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_2iYJH BRAID__FieldMessage-root_24rCK"
                  id="id_1-message"
             >
               <div class="BRAID__reset-base_3P29T BRAID__FieldMessage-grow_3KscY BRAID__FieldMessage-minHeight_3hlJo_seekAnz">
@@ -5153,12 +5227,12 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                    class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute__Z9GO BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                    class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute_3XcVB BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
                     id="id_1"
                     aria-describedby="id_1-message"
 +                   value
              >
-             <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_1ij33">
-               <div class="BRAID__reset-base_3P29T BRAID__box-background_input_20cMK_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_23NJu_seekAnz BRAID__box-position_relative_3XcVB BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
+             <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_2iYJH">
+               <div class="BRAID__reset-base_3P29T BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_2xNg4_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
 
 `;

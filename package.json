@@ -175,6 +175,7 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
     "async-disk-cache": "^1.3.4",
+    "bent": "^6.1.0",
     "braid-design-system": "^2.0.3",
     "child-process-promise": "^2.2.1",
     "commitizen": "^4.0.3",

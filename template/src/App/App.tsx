@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import loadable from 'sku/@loadable/component';
-
+import React from 'react';
 import { BraidProvider, Alert } from 'braid-design-system';
+import { BraidThemeLoader } from './BraidThemeLoader';
 
-const Theme = loadable.lib(props =>
-  import(`braid-design-system/themes/${props.braidTheme}`),
-);
+interface AppProps {
+  site: string;
+}
 
-export default ({ site }) => (
-  <Theme braidTheme={site}>
-    {({ default: theme }) => (
+export default ({ site }: AppProps) => (
+  <BraidThemeLoader themeName={site}>
+    {theme => (
       <BraidProvider theme={theme}>
-        <Alert tone="critical">Warning: sku awesomeness ensuing</Alert>
+        <Alert tone="info">Warning: sku awesomeness ensuing</Alert>
       </BraidProvider>
     )}
-  </Theme>
+  </BraidThemeLoader>
 );

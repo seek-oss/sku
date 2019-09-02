@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Render } from 'sku';
 
-import { RenderContext } from './types';
+import { ClientContext } from './types';
 import App from './App/App';
+
+interface RenderContext {
+  appHtml: string;
+}
 
 const skuRender: Render<RenderContext> = {
   renderApp: ({ SkuProvider, site }) => {
@@ -18,7 +22,7 @@ const skuRender: Render<RenderContext> = {
     };
   },
 
-  provideClientContext: ({ site }) => ({
+  provideClientContext: ({ site }): ClientContext => ({
     site,
   }),
 

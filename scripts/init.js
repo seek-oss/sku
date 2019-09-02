@@ -2,6 +2,7 @@
 
 const chalk = require('chalk');
 const fs = require('fs-extra');
+const bent = require('bent');
 const path = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
@@ -13,6 +14,8 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const { getMissingHosts } = require('../lib/hosts');
 const { getSuggestedScript } = require('../lib/suggestScript');
+
+const getFileContent = bent('string');
 
 const args = require('../config/args');
 
@@ -121,37 +124,27 @@ const args = require('../config/args');
   fs.writeFileSync(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
-  const useYarn = detectYarn();
-
-  const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
-
-  const devDeps = ['husky'];
-
-  console.log('Installing packages. This might take a couple of minutes.');
-  console.log(
-    `Installing ${deps
-      .concat(devDeps)
-      .map(x => chalk.cyan(x))
-      .join(', ')}...`,
+  const braidThemeFile = await getFileContent(
+    'https://raw.githubusercontent.com/seek-oss/braid-design-system/master/lib/themes/index.ts',
   );
-  console.log();
 
-  await install({ deps, verbose, useYarn });
-  await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
+  const braidThemes = braidThemeFile
+    .match(/default as (.*) }/g)
+    .map(themeMatch => themeMatch.match(/default as (.*) }/))
+    .map(([_, themeName]) => themeName)
+    .sort();
+
+  const useYarn = detectYarn();
 
   await kopy(path.join(__dirname, '../template'), root, {
     prompts: [
       {
         name: 'sites',
         type: 'checkbox',
-        message: 'What braid themes would you like',
+        message: 'Which Braid themes would you like?',
         validate: sites =>
-          sites.length > 0 ? true : 'Please select at least one braid theme',
-        choices: fs
-          .readdirSync(
-            path.join(root, 'node_modules/braid-design-system/themes'),
-          )
-          .map(themeFile => themeFile.split('.')[0]),
+          sites.length > 0 ? true : 'Please select at least one Braid theme',
+        choices: braidThemes,
       },
     ],
     move: {
@@ -193,6 +186,22 @@ const args = require('../config/args');
         .join(','),
     }),
   });
+
+  const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
+
+  const devDeps = ['husky', '@types/react', '@types/react-dom'];
+
+  console.log('Installing packages. This might take a couple of minutes.');
+  console.log(
+    `Installing ${deps
+      .concat(devDeps)
+      .map(x => chalk.cyan(x))
+      .join(', ')}...`,
+  );
+  console.log();
+
+  await install({ deps, verbose, useYarn });
+  await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
 
   await configure();
   await prettierWrite();

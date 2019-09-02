@@ -1,3 +1,3 @@
-export interface RenderContext {
+export interface ClientContext {
   site: string;
 }

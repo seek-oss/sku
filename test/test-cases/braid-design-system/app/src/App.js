@@ -16,7 +16,7 @@ export default ({ themeName }) => {
   return (
     <BraidLoadableProvider themeName={themeName}>
       <Text>
-        Hello {themeName} <ChevronIcon inline />
+        Hello {themeName} <ChevronIcon />
       </Text>
       <Card>
         <Checkbox

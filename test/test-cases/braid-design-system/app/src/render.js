@@ -8,7 +8,7 @@ export default {
   renderApp: ({ site, SkuProvider }) => {
     return renderToString(
       <SkuProvider>
-        <App theme={site} />
+        <App themeName={site} />
       </SkuProvider>,
     );
   },

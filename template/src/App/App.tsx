@@ -1,17 +1,12 @@
 import React from 'react';
-import { BraidProvider, Alert } from 'braid-design-system';
-import { BraidThemeLoader } from './BraidThemeLoader';
+import { BraidLoadableProvider, Alert } from 'braid-design-system';
 
 interface AppProps {
   site: string;
 }
 
 export default ({ site }: AppProps) => (
-  <BraidThemeLoader themeName={site}>
-    {theme => (
-      <BraidProvider theme={theme}>
-        <Alert tone="info">Warning: sku awesomeness ensuing</Alert>
-      </BraidProvider>
-    )}
-  </BraidThemeLoader>
+  <BraidLoadableProvider themeName={site}>
+    <Alert tone="info">Warning: sku awesomeness ensuing</Alert>
+  </BraidLoadableProvider>
 );

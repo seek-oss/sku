@@ -1,5 +1,6 @@
 import React from 'react';
-import { BraidLoadableProvider, Alert } from 'braid-design-system';
+import { BraidLoadableProvider } from 'braid-design-system';
+import NextSteps from './NextSteps';
 
 interface AppProps {
   site: string;
@@ -7,6 +8,6 @@ interface AppProps {
 
 export default ({ site }: AppProps) => (
   <BraidLoadableProvider themeName={site}>
-    <Alert tone="info">Warning: sku awesomeness ensuing</Alert>
+    <NextSteps />
   </BraidLoadableProvider>
 );

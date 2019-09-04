@@ -5,7 +5,7 @@ const webpackMerge = require('webpack-merge');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');
 const clientWebpackConfig = find(
-  makeWebpackConfig({ isIntegration: true }),
+  makeWebpackConfig({ isIntegration: true, hot: true }),
   config => config.name === 'client',
 );
 
@@ -27,6 +27,7 @@ module.exports = ({ config }) => {
       // We don't want to apply the entire webpack config,
       // mainly because it configures entries and outputs,
       // which would break the Storybook build.
+      entry: clientWebpackConfig.entry,
       module: clientWebpackConfig.module,
       resolve: clientWebpackConfig.resolve,
       plugins: clientWebpackConfig.plugins,

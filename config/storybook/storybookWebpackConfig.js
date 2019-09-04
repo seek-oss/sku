@@ -5,7 +5,7 @@ const webpackMerge = require('webpack-merge');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');
 const clientWebpackConfig = find(
-  makeWebpackConfig({ isIntegration: true, hot: true }),
+  makeWebpackConfig({ isIntegration: true, isDevServer: true }),
   config => config.name === 'client',
 );
 

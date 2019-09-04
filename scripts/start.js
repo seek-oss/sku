@@ -22,7 +22,7 @@ const localhost = '0.0.0.0';
   const webpackCompiler = webpack(
     makeWebpackConfig({
       port: availablePort,
-      hot: true,
+      isDevServer: true,
     }),
   );
 

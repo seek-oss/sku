@@ -18,31 +18,27 @@ Object {
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="https://somecdn.com/themes-jobStreet-5264b5401e237478c389.css"
+          href="/themes-jobStreet-5264b5401e237478c389.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-c9592cb99f7c9022db64.js"
-          crossorigin="anonymous"
+          href="/runtime-f7c7d34638c6deba08af.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-baddbec5b9889c7e77ff.js"
-          crossorigin="anonymous"
+          href="/vendors~main-baddbec5b9889c7e77ff.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-86facbc830f0c6f1d71d.js"
-          crossorigin="anonymous"
+          href="/main-86facbc830f0c6f1d71d.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-jobStreet-caf75576355c6529da38.js"
-          crossorigin="anonymous"
+          href="/themes-jobStreet-caf75576355c6529da38.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -140,38 +136,33 @@ Object {
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [0]
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-c9592cb99f7c9022db64.js"
-            crossorigin="anonymous"
+            src="/runtime-f7c7d34638c6deba08af.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-baddbec5b9889c7e77ff.js"
-            crossorigin="anonymous"
+            src="/vendors~main-baddbec5b9889c7e77ff.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-86facbc830f0c6f1d71d.js"
-            crossorigin="anonymous"
+            src="/main-86facbc830f0c6f1d71d.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="https://somecdn.com/themes-jobStreet-caf75576355c6529da38.js"
-            crossorigin="anonymous"
+            src="/themes-jobStreet-caf75576355c6529da38.js"
     >
     </script>
   </body>
 </html>,
   "main-86facbc830f0c6f1d71d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-c9592cb99f7c9022db64.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-f7c7d34638c6deba08af.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -184,31 +175,27 @@ Object {
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="https://somecdn.com/themes-seekAnz-a916838be55018f96bac.css"
+          href="/themes-seekAnz-a916838be55018f96bac.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/runtime-c9592cb99f7c9022db64.js"
-          crossorigin="anonymous"
+          href="/runtime-f7c7d34638c6deba08af.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/vendors~main-baddbec5b9889c7e77ff.js"
-          crossorigin="anonymous"
+          href="/vendors~main-baddbec5b9889c7e77ff.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="https://somecdn.com/main-86facbc830f0c6f1d71d.js"
-          crossorigin="anonymous"
+          href="/main-86facbc830f0c6f1d71d.js"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="https://somecdn.com/themes-seekAnz-a6c15d9b74e3f9239729.js"
-          crossorigin="anonymous"
+          href="/themes-seekAnz-a6c15d9b74e3f9239729.js"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -306,32 +293,27 @@ Object {
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [3]
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/runtime-c9592cb99f7c9022db64.js"
-            crossorigin="anonymous"
+            src="/runtime-f7c7d34638c6deba08af.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/vendors~main-baddbec5b9889c7e77ff.js"
-            crossorigin="anonymous"
+            src="/vendors~main-baddbec5b9889c7e77ff.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="https://somecdn.com/main-86facbc830f0c6f1d71d.js"
-            crossorigin="anonymous"
+            src="/main-86facbc830f0c6f1d71d.js"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="https://somecdn.com/themes-seekAnz-a6c15d9b74e3f9239729.js"
-            crossorigin="anonymous"
+            src="/themes-seekAnz-a6c15d9b74e3f9239729.js"
     >
     </script>
   </body>

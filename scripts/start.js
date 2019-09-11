@@ -1,6 +1,5 @@
 process.env.NODE_ENV = 'development';
 
-const open = require('open');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
@@ -8,6 +7,7 @@ const { blue, underline } = require('chalk');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const siteServeMiddleware = require('../lib/siteServeMiddleware');
 const allocatePort = require('../lib/allocatePort');
+const openBrowser = require('../lib/openBrowser');
 const { port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
@@ -56,8 +56,6 @@ const localhost = '0.0.0.0';
     console.log(blue(`Starting the development server on ${underline(url)}`));
     console.log();
 
-    if (process.env.OPEN_TAB !== 'false') {
-      open(url);
-    }
+    openBrowser(url);
   });
 })();

@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'development';
 
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const open = require('open');
 const { once } = require('lodash');
 const { blue, underline } = require('chalk');
 
@@ -14,6 +13,7 @@ const {
 const { hosts, port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
+const openBrowser = require('../lib/openBrowser');
 
 const localhost = '0.0.0.0';
 
@@ -63,9 +63,7 @@ const localhost = '0.0.0.0';
       await copyPublicFiles();
       await watch(serverCompiler);
 
-      if (process.env.OPEN_TAB !== 'false') {
-        open(serverUrl);
-      }
+      openBrowser(serverUrl);
     } catch (e) {
       console.log(e);
 

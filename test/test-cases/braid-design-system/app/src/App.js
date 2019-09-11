@@ -1,11 +1,12 @@
 import React from 'react';
 
+import 'braid-design-system/reset';
 import {
   BraidLoadableProvider,
   Text,
   Checkbox,
   Card,
-  ChevronIcon,
+  IconChevron,
   Box,
 } from 'braid-design-system';
 import * as style from './App.treat';
@@ -16,7 +17,7 @@ export default ({ themeName }) => {
   return (
     <BraidLoadableProvider themeName={themeName}>
       <Text>
-        Hello {themeName} <ChevronIcon />
+        Hello {themeName} <IconChevron />
       </Text>
       <Card>
         <Checkbox

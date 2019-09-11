@@ -44,7 +44,7 @@ export default () => (
               TypeScript
             </TextLink>
             , <TextLink href="https://jestjs.io/">Jest</TextLink>,{' '}
-            <TextLink href="https://eslint.org/">ESLint</TextLink>,
+            <TextLink href="https://eslint.org/">ESLint</TextLink>,{' '}
             <TextLink href="https://storybook.js.org/">Storybook</TextLink>,{' '}
             <TextLink href="https://github.com/seek-oss/playroom">
               Playroom

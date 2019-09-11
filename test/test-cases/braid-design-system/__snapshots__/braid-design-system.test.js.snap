@@ -1,5 +1,184 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`braid-design-system build should create valid app 1`] = `
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="stylesheet"
+          href="/themes-jobStreet-d148963240fcb40fae4b.css"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/runtime-cfbe7236f2eec43e0134.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/vendors~main-98832c8b8301ab5c7969.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="/main-13260b1db24497342d63.js"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="preload"
+          as="script"
+          href="/themes-jobStreet-a9e87116835b7f7100c6.js"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#e5e5e5}
+      </style>
+      <span class="FYwKg _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1 _2WTa0_1">
+        Hello
+        jobStreet
+        <svg viewbox="0 0 24 24"
+             focusable="false"
+             fill="currentColor"
+             width="16"
+             height="16"
+             class="FYwKg _1B71U _1ij33 eO0my _17ajR_1 _1HqaG"
+        >
+          <path fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 8l-8 8-8-8"
+          >
+          </path>
+        </svg>
+      </span>
+      <div class="FYwKg o5wHJ_1">
+        <div class="FYwKg _2fX9z_1 ST9QG_1 _2Yn0H_1 _1Hlla_1 _11gxS_1">
+          <div class="FYwKg">
+            <input type="checkbox"
+                   class="FYwKg _3j_fQ _2PHih _3XcVB q3uRq_1 _3HWgs"
+                   id="id_1"
+                   aria-describedby="id_1-message"
+            >
+            <div class="FYwKg _2iYJH">
+              <div class="FYwKg _1shp6_1 _1OCHt_1 _29w0S_1 _1B71U _1N9cL_1 _2azEk">
+                <div class="FYwKg GzauW_1 _1OCHt_1 _3EZ81_1 _3XcVB _1DzSs ZBQ-p">
+                  <div class="FYwKg _3EZ81_1 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _1QEQt_1"
+                    >
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
+                      >
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="FYwKg _1OCHt_1 _2xNg4_1 _3EZ81_1 _3XcVB _1DzSs _22dp5">
+                </div>
+                <div class="FYwKg _1OCHt_1 UwbMv_1 _3EZ81_1 _3XcVB _1DzSs nWwhH">
+                  <div class="FYwKg _3EZ81_1 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _6eu7W_1"
+                    >
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
+                      >
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <label class="FYwKg _6QFg_1 _3R2vq And8z_1"
+                     for="id_1"
+              >
+                <span class="FYwKg _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1">
+                  This is a checkbox
+                </span>
+              </label>
+            </div>
+            <div class="FYwKg _1Obfb_1 _2iYJH _24rCK"
+                 id="id_1-message"
+            >
+              <div class="FYwKg _3KscY _3hlJo_1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="FYwKg _3QqL3">
+        Custom content
+      </div>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="/runtime-cfbe7236f2eec43e0134.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/vendors~main-98832c8b8301ab5c7969.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/main-13260b1db24497342d63.js"
+    >
+    </script>
+    <script async
+            data-chunk="themes-jobStreet"
+            src="/themes-jobStreet-a9e87116835b7f7100c6.js"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+                    class="FYwKg _3j_fQ _2PHih _3XcVB q3uRq_1 _3HWgs"
+                    id="id_1"
+                    aria-describedby="id_1-message"
++                   value
+             >
+             <div class="FYwKg _2iYJH">
+               <div class="FYwKg _1shp6_1 _1OCHt_1 _29w0S_1 _1B71U _1N9cL_1 _2azEk">
+
+`;
+
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
   "externals.json": "[
@@ -18,27 +197,27 @@ Object {
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-5264b5401e237478c389.css"
+          href="/themes-jobStreet-d148963240fcb40fae4b.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-f7c7d34638c6deba08af.js"
+          href="/runtime-cfbe7236f2eec43e0134.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-baddbec5b9889c7e77ff.js"
+          href="/vendors~main-98832c8b8301ab5c7969.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-86facbc830f0c6f1d71d.js"
+          href="/main-13260b1db24497342d63.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-caf75576355c6529da38.js"
+          href="/themes-jobStreet-a9e87116835b7f7100c6.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -49,85 +228,97 @@ Object {
       <style type="text/css">
         body{margin:0;padding:0;background:#e5e5e5}
       </style>
-      <span class="_3P29T _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1 _2WTa0_1">
+      <span class="FYwKg _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1 _2WTa0_1">
         Hello
         jobStreet
-        <svg viewbox="0 0 1024 1024"
+        <svg viewbox="0 0 24 24"
              focusable="false"
              fill="currentColor"
              width="16"
              height="16"
-             class="_3P29T _1B71U _1ij33 _2sL5F _17ajR_1 _1HqaG"
+             class="FYwKg _1B71U _1ij33 eO0my _17ajR_1 _1HqaG"
         >
-          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
-                fill="currentColor"
+          <path fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 8l-8 8-8-8"
           >
           </path>
         </svg>
       </span>
-      <div class="_3P29T o5wHJ_1">
-        <div class="_3P29T _2fX9z_1 ST9QG_1 _2Yn0H_1 _1Hlla_1 _11gxS_1">
-          <div class="_3P29T">
+      <div class="FYwKg o5wHJ_1">
+        <div class="FYwKg _2fX9z_1 ST9QG_1 _2Yn0H_1 _1Hlla_1 _11gxS_1">
+          <div class="FYwKg">
             <input type="checkbox"
-                   class="_3P29T _1K98W _1xrTt _3XcVB _3HWgs q3uRq_1"
+                   class="FYwKg _3j_fQ _2PHih _3XcVB q3uRq_1 _3HWgs"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="_3P29T _2iYJH">
-              <div class="_3P29T _1shp6_1 _1OCHt_1 _2xNg4_1 _1B71U _2azEk _1N9cL_1">
-                <div class="_3P29T GzauW_1 _1OCHt_1 _3EZ81_1 _3XcVB _1DzSs ZBQ-p">
-                  <div class="_3P29T _3EZ81_1 _121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+            <div class="FYwKg _2iYJH">
+              <div class="FYwKg _1shp6_1 _1OCHt_1 _29w0S_1 _1B71U _1N9cL_1 _2azEk">
+                <div class="FYwKg GzauW_1 _1OCHt_1 _3EZ81_1 _3XcVB _1DzSs ZBQ-p">
+                  <div class="FYwKg _3EZ81_1 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _Z9GO _1IQ7a _2_IRV _1QEQt_1"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _1QEQt_1"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="_3P29T _1OCHt_1 _2NQv2_1 _3EZ81_1 _3XcVB _1DzSs _22dp5">
+                <div class="FYwKg _1OCHt_1 _2xNg4_1 _3EZ81_1 _3XcVB _1DzSs _22dp5">
                 </div>
-                <div class="_3P29T _1OCHt_1 _1lL3q_1 _3EZ81_1 _3XcVB _1DzSs nWwhH">
-                  <div class="_3P29T _3EZ81_1 _121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+                <div class="FYwKg _1OCHt_1 UwbMv_1 _3EZ81_1 _3XcVB _1DzSs nWwhH">
+                  <div class="FYwKg _3EZ81_1 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _Z9GO _1IQ7a _2_IRV _6eu7W_1"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _6eu7W_1"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="_3P29T _6QFg_1 _3R2vq And8z_1"
+              <label class="FYwKg _6QFg_1 _3R2vq And8z_1"
                      for="id_1"
               >
-                <span class="_3P29T _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1">
+                <span class="FYwKg _2_IRV C6ZIU_1 _6ufcS_1 _17ajR_1 _29m7__1">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="_3P29T _1Obfb_1 _2iYJH _24rCK"
+            <div class="FYwKg _1Obfb_1 _2iYJH _24rCK"
                  id="id_1-message"
             >
-              <div class="_3P29T _3KscY _3hlJo_1">
+              <div class="FYwKg _3KscY _3hlJo_1">
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="_3P29T _3QqL3">
+      <div class="FYwKg _3QqL3">
         Custom content
       </div>
     </div>
@@ -141,28 +332,28 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-f7c7d34638c6deba08af.js"
+            src="/runtime-cfbe7236f2eec43e0134.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-baddbec5b9889c7e77ff.js"
+            src="/vendors~main-98832c8b8301ab5c7969.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-86facbc830f0c6f1d71d.js"
+            src="/main-13260b1db24497342d63.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-caf75576355c6529da38.js"
+            src="/themes-jobStreet-a9e87116835b7f7100c6.js"
     >
     </script>
   </body>
 </html>,
-  "main-86facbc830f0c6f1d71d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-f7c7d34638c6deba08af.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-13260b1db24497342d63.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-cfbe7236f2eec43e0134.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -175,27 +366,27 @@ Object {
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/themes-seekAnz-a916838be55018f96bac.css"
+          href="/themes-seekAnz-c2b755630a6b507fff55.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-f7c7d34638c6deba08af.js"
+          href="/runtime-cfbe7236f2eec43e0134.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-baddbec5b9889c7e77ff.js"
+          href="/vendors~main-98832c8b8301ab5c7969.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-86facbc830f0c6f1d71d.js"
+          href="/main-13260b1db24497342d63.js"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/themes-seekAnz-a6c15d9b74e3f9239729.js"
+          href="/themes-seekAnz-35b11cfc136e11da2a62.js"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -206,85 +397,97 @@ Object {
       <style type="text/css">
         body{margin:0;padding:0;background:#eee}
       </style>
-      <span class="_3P29T _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2 _2WTa0_2">
+      <span class="FYwKg _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2 _2WTa0_2">
         Hello
         seekAnz
-        <svg viewbox="0 0 1024 1024"
+        <svg viewbox="0 0 24 24"
              focusable="false"
              fill="currentColor"
              width="16"
              height="16"
-             class="_3P29T _1B71U _1ij33 _2sL5F _17ajR_2 _1HqaG"
+             class="FYwKg _1B71U _1ij33 eO0my _17ajR_2 _1HqaG"
         >
-          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
-                fill="currentColor"
+          <path fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 8l-8 8-8-8"
           >
           </path>
         </svg>
       </span>
-      <div class="_3P29T o5wHJ_2">
-        <div class="_3P29T _2fX9z_2 ST9QG_2 _2Yn0H_2 _1Hlla_2 _11gxS_2">
-          <div class="_3P29T">
+      <div class="FYwKg o5wHJ_2">
+        <div class="FYwKg _2fX9z_2 ST9QG_2 _2Yn0H_2 _1Hlla_2 _11gxS_2">
+          <div class="FYwKg">
             <input type="checkbox"
-                   class="_3P29T _1K98W _1xrTt _3XcVB _3HWgs q3uRq_2"
+                   class="FYwKg _3j_fQ _2PHih _3XcVB q3uRq_2 _3HWgs"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="_3P29T _2iYJH">
-              <div class="_3P29T _1shp6_2 _1OCHt_2 _2xNg4_2 _1B71U _2azEk _1N9cL_2">
-                <div class="_3P29T GzauW_2 _1OCHt_2 _3EZ81_2 _3XcVB _1DzSs ZBQ-p">
-                  <div class="_3P29T _3EZ81_2 _121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+            <div class="FYwKg _2iYJH">
+              <div class="FYwKg _1shp6_2 _1OCHt_2 _29w0S_2 _1B71U _1N9cL_2 _2azEk">
+                <div class="FYwKg GzauW_2 _1OCHt_2 _3EZ81_2 _3XcVB _1DzSs ZBQ-p">
+                  <div class="FYwKg _3EZ81_2 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _Z9GO _1IQ7a _2_IRV _1QEQt_2"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _1QEQt_2"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="_3P29T _1OCHt_2 _2NQv2_2 _3EZ81_2 _3XcVB _1DzSs _22dp5">
+                <div class="FYwKg _1OCHt_2 _2xNg4_2 _3EZ81_2 _3XcVB _1DzSs _22dp5">
                 </div>
-                <div class="_3P29T _1OCHt_2 _1lL3q_2 _3EZ81_2 _3XcVB _1DzSs nWwhH">
-                  <div class="_3P29T _3EZ81_2 _121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+                <div class="FYwKg _1OCHt_2 UwbMv_2 _3EZ81_2 _3XcVB _1DzSs nWwhH">
+                  <div class="FYwKg _3EZ81_2 _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="_3P29T _Z9GO _1IQ7a _2_IRV _6eu7W_2"
+                         class="FYwKg _Z9GO _1IQ7a _2_IRV _6eu7W_2"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="_3P29T _6QFg_2 _3R2vq And8z_2"
+              <label class="FYwKg _6QFg_2 _3R2vq And8z_2"
                      for="id_1"
               >
-                <span class="_3P29T _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2">
+                <span class="FYwKg _2_IRV C6ZIU_2 _6ufcS_2 _17ajR_2 _29m7__2">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="_3P29T _3yuzv_2 _2iYJH _24rCK"
+            <div class="FYwKg _3yuzv_2 _2iYJH _24rCK"
                  id="id_1-message"
             >
-              <div class="_3P29T _3KscY _3hlJo_2">
+              <div class="FYwKg _3KscY _3hlJo_2">
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="_3P29T _3QqL3">
+      <div class="FYwKg _3QqL3">
         Custom content
       </div>
     </div>
@@ -298,48 +501,49 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-f7c7d34638c6deba08af.js"
+            src="/runtime-cfbe7236f2eec43e0134.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-baddbec5b9889c7e77ff.js"
+            src="/vendors~main-98832c8b8301ab5c7969.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-86facbc830f0c6f1d71d.js"
+            src="/main-13260b1db24497342d63.js"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/themes-seekAnz-a6c15d9b74e3f9239729.js"
+            src="/themes-seekAnz-35b11cfc136e11da2a62.js"
     >
     </script>
   </body>
 </html>,
-  "themes-jobStreet-5264b5401e237478c389.css": ._3QqL3 {
+  "themes-jobStreet-a9e87116835b7f7100c6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-d148963240fcb40fae4b.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
   padding: 20px;
 }
-._2sL5F {
+.eO0my {
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-._2t54j {
+._1RBWy {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.BkvSr {
+._3yqXL {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-._2E4Yy {
+.vrGeI {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
@@ -349,7 +553,7 @@ Object {
   width: 1em;
   height: 1em;
 }
-._3P29T {
+.FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -358,39 +562,39 @@ Object {
   font: inherit;
   vertical-align: baseline;
 }
-._1K98W {
+._3j_fQ {
   display: block;
 }
-._2MYSy {
+._19GyU {
   line-height: 1;
 }
-._2ACt0 {
+._302h6 {
   list-style: none;
 }
-.FPVLo {
+._JRzj {
   quotes: none;
 }
-.FPVLo:after,
-.FPVLo:before {
+._JRzj:after,
+._JRzj:before {
   content: "";
 }
-.ldNbu {
+._2RYN8 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-._1xrTt {
+._2PHih {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW {
+._3JHxg {
   background-color: transparent;
   color: inherit;
 }
-.Ufq8O::-ms-expand {
+._3sxhA::-ms-expand {
   display: none;
 }
-._2R_8K {
+._1ZS7q {
   background: none;
 }
 ._1IQ7a {
@@ -474,16 +678,24 @@ Object {
 ._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._121VT {
+.nWwhH > ._121VT {
+  opacity: 0.2;
+}
+._3PnVZ {
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+}
+._15Hj_ {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._121VT {
+._3HWgs:active + * > ._2azEk > * > ._15Hj_ {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
-}
-.nWwhH > ._121VT {
-  opacity: 0.2;
 }
 ._1DzSs {
   pointer-events: none;
@@ -696,14 +908,6 @@ Object {
   ._2k6I7_1 {
     -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
-  }
-  ._2VCbC_1 {
-    font-size: 20px;
-    line-height: 28px;
-  }
-  ._1VMf3_1 {
-    -webkit-transform: translateY(0.32999999999999996em);
-    transform: translateY(0.32999999999999996em);
   }
 }
 .E8MkT_1 {
@@ -990,18 +1194,21 @@ Object {
   background: #f1f1f1;
 }
 ._2NQv2_1 {
-  box-shadow: 0 0 0 2px #94c9e0;
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
 }
 ._2xNg4_1 {
-  box-shadow: inset 0 0 0 1px #ccc;
+  box-shadow: 0 0 0 2px #94c9e0;
 }
 ._29w0S_1 {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  box-shadow: inset 0 0 0 1px #ccc;
 }
 ._1lL3q_1 {
-  box-shadow: inset 0 0 0 1px #1c3f94;
+  box-shadow: inset 0 0 0 1px #eb0000;
 }
 .UwbMv_1 {
+  box-shadow: inset 0 0 0 1px #1c3f94;
+}
+._2Guux_1 {
   box-shadow: inset 0 0 0 2px #1c3f94;
 }
 @media screen and (min-width: 768px) {
@@ -1266,30 +1473,30 @@ Object {
   min-height: 20px;
 }
 ,
-  "themes-jobStreet-caf75576355c6529da38.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-07f39c7bda1f9bf26cc6.css": ._3QqL3 {
+  "themes-jobStreetClassic-746138e2c1a53c04e72c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-8131f6853123ad1611db.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
   padding: 20px;
 }
-._2sL5F {
+.eO0my {
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-._2t54j {
+._1RBWy {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.BkvSr {
+._3yqXL {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-._2E4Yy {
+.vrGeI {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
@@ -1299,7 +1506,7 @@ Object {
   width: 1em;
   height: 1em;
 }
-._3P29T {
+.FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1308,39 +1515,39 @@ Object {
   font: inherit;
   vertical-align: baseline;
 }
-._1K98W {
+._3j_fQ {
   display: block;
 }
-._2MYSy {
+._19GyU {
   line-height: 1;
 }
-._2ACt0 {
+._302h6 {
   list-style: none;
 }
-.FPVLo {
+._JRzj {
   quotes: none;
 }
-.FPVLo:after,
-.FPVLo:before {
+._JRzj:after,
+._JRzj:before {
   content: "";
 }
-.ldNbu {
+._2RYN8 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-._1xrTt {
+._2PHih {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW {
+._3JHxg {
   background-color: transparent;
   color: inherit;
 }
-.Ufq8O::-ms-expand {
+._3sxhA::-ms-expand {
   display: none;
 }
-._2R_8K {
+._1ZS7q {
   background: none;
 }
 ._1IQ7a {
@@ -1424,16 +1631,24 @@ Object {
 ._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._121VT {
+.nWwhH > ._121VT {
+  opacity: 0.2;
+}
+._3PnVZ {
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+}
+._15Hj_ {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._121VT {
+._3HWgs:active + * > ._2azEk > * > ._15Hj_ {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
-}
-.nWwhH > ._121VT {
-  opacity: 0.2;
 }
 ._1DzSs {
   pointer-events: none;
@@ -1649,14 +1864,6 @@ Object {
   ._2k6I7_2oR {
     -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
-  }
-  ._2VCbC_2oR {
-    font-size: 20px;
-    line-height: 28px;
-  }
-  ._1VMf3_2oR {
-    -webkit-transform: translateY(0.32999999999999996em);
-    transform: translateY(0.32999999999999996em);
   }
 }
 .E8MkT_2oR {
@@ -1943,18 +2150,21 @@ Object {
   background: #f1f1f1;
 }
 ._2NQv2_2oR {
-  box-shadow: 0 0 0 2px #94c9e0;
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
 }
 ._2xNg4_2oR {
-  box-shadow: inset 0 0 0 1px #ccc;
+  box-shadow: 0 0 0 2px #94c9e0;
 }
 ._29w0S_2oR {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  box-shadow: inset 0 0 0 1px #ccc;
 }
 ._1lL3q_2oR {
-  box-shadow: inset 0 0 0 1px #1c3f94;
+  box-shadow: inset 0 0 0 1px #eb0000;
 }
 .UwbMv_2oR {
+  box-shadow: inset 0 0 0 1px #1c3f94;
+}
+._2Guux_2oR {
   box-shadow: inset 0 0 0 2px #1c3f94;
 }
 @media screen and (min-width: 768px) {
@@ -2219,30 +2429,30 @@ Object {
   min-height: 20px;
 }
 ,
-  "themes-jobStreetClassic-ca05b4e3c8c74dc98d02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb-29e431ea16f54d61cd22.css": ._3QqL3 {
+  "themes-jobsDb-521186e878782e4236e9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-5d7977f1119e196a6d89.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
   padding: 20px;
 }
-._2sL5F {
+.eO0my {
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-._2t54j {
+._1RBWy {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.BkvSr {
+._3yqXL {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-._2E4Yy {
+.vrGeI {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
@@ -2252,7 +2462,7 @@ Object {
   width: 1em;
   height: 1em;
 }
-._3P29T {
+.FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -2261,39 +2471,39 @@ Object {
   font: inherit;
   vertical-align: baseline;
 }
-._1K98W {
+._3j_fQ {
   display: block;
 }
-._2MYSy {
+._19GyU {
   line-height: 1;
 }
-._2ACt0 {
+._302h6 {
   list-style: none;
 }
-.FPVLo {
+._JRzj {
   quotes: none;
 }
-.FPVLo:after,
-.FPVLo:before {
+._JRzj:after,
+._JRzj:before {
   content: "";
 }
-.ldNbu {
+._2RYN8 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-._1xrTt {
+._2PHih {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW {
+._3JHxg {
   background-color: transparent;
   color: inherit;
 }
-.Ufq8O::-ms-expand {
+._3sxhA::-ms-expand {
   display: none;
 }
-._2R_8K {
+._1ZS7q {
   background: none;
 }
 ._1IQ7a {
@@ -2377,16 +2587,24 @@ Object {
 ._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._121VT {
+.nWwhH > ._121VT {
+  opacity: 0.2;
+}
+._3PnVZ {
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+}
+._15Hj_ {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._121VT {
+._3HWgs:active + * > ._2azEk > * > ._15Hj_ {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
-}
-.nWwhH > ._121VT {
-  opacity: 0.2;
 }
 ._1DzSs {
   pointer-events: none;
@@ -2595,14 +2813,6 @@ Object {
   ._2k6I7_1Fy {
     -webkit-transform: translateY(0.29666666666666663em);
     transform: translateY(0.29666666666666663em);
-  }
-  ._2VCbC_1Fy {
-    font-size: 20px;
-    line-height: 28px;
-  }
-  ._1VMf3_1Fy {
-    -webkit-transform: translateY(0.32999999999999996em);
-    transform: translateY(0.32999999999999996em);
   }
 }
 .E8MkT_1Fy {
@@ -2889,18 +3099,21 @@ Object {
   background: #f1f1f1;
 }
 ._2NQv2_1Fy {
-  box-shadow: 0 0 0 2px #94c9e0;
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
 }
 ._2xNg4_1Fy {
-  box-shadow: inset 0 0 0 1px #ccc;
+  box-shadow: 0 0 0 2px #94c9e0;
 }
 ._29w0S_1Fy {
-  box-shadow: inset 0 0 0 1px #eb0000;
+  box-shadow: inset 0 0 0 1px #ccc;
 }
 ._1lL3q_1Fy {
-  box-shadow: inset 0 0 0 1px #0c4b85;
+  box-shadow: inset 0 0 0 1px #eb0000;
 }
 .UwbMv_1Fy {
+  box-shadow: inset 0 0 0 1px #0c4b85;
+}
+._2Guux_1Fy {
   box-shadow: inset 0 0 0 2px #0c4b85;
 }
 @media screen and (min-width: 768px) {
@@ -3165,31 +3378,30 @@ Object {
   min-height: 20px;
 }
 ,
-  "themes-jobsDb-4c8fe905cf2be3d784bb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-a6c15d9b74e3f9239729.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-a916838be55018f96bac.css": ._3QqL3 {
+  "themes-seekAnz-35b11cfc136e11da2a62.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-c2b755630a6b507fff55.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
   padding: 20px;
 }
-._2sL5F {
+.eO0my {
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-._2t54j {
+._1RBWy {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.BkvSr {
+._3yqXL {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-._2E4Yy {
+.vrGeI {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
@@ -3199,7 +3411,7 @@ Object {
   width: 1em;
   height: 1em;
 }
-._3P29T {
+.FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -3208,39 +3420,39 @@ Object {
   font: inherit;
   vertical-align: baseline;
 }
-._1K98W {
+._3j_fQ {
   display: block;
 }
-._2MYSy {
+._19GyU {
   line-height: 1;
 }
-._2ACt0 {
+._302h6 {
   list-style: none;
 }
-.FPVLo {
+._JRzj {
   quotes: none;
 }
-.FPVLo:after,
-.FPVLo:before {
+._JRzj:after,
+._JRzj:before {
   content: "";
 }
-.ldNbu {
+._2RYN8 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-._1xrTt {
+._2PHih {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW {
+._3JHxg {
   background-color: transparent;
   color: inherit;
 }
-.Ufq8O::-ms-expand {
+._3sxhA::-ms-expand {
   display: none;
 }
-._2R_8K {
+._1ZS7q {
   background: none;
 }
 ._1IQ7a {
@@ -3324,16 +3536,24 @@ Object {
 ._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._121VT {
+.nWwhH > ._121VT {
+  opacity: 0.2;
+}
+._3PnVZ {
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+}
+._15Hj_ {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._121VT {
+._3HWgs:active + * > ._2azEk > * > ._15Hj_ {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
-}
-.nWwhH > ._121VT {
-  opacity: 0.2;
 }
 ._1DzSs {
   pointer-events: none;
@@ -3778,7 +3998,7 @@ Object {
   background: #ccc;
 }
 .wd-P2_2 {
-  background: #f5f8ff;
+  background: #eee;
 }
 ._2fX9z_2 {
   background: #fff;
@@ -3793,7 +4013,7 @@ Object {
   background: #169400;
 }
 ._19OqH_2 {
-  background: rgba(28, 28, 28, 0.63);
+  background: #747474;
 }
 ._38O-x_2 {
   background: #235bba;
@@ -3817,21 +4037,24 @@ Object {
   background: #ebf6e9;
 }
 ._154R6_2 {
-  background: #f2f2f2;
+  background: #f0f0f0;
 }
 ._2NQv2_2 {
-  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.7);
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
 }
 ._2xNg4_2 {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
+  box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.7);
 }
 ._29w0S_2 {
-  box-shadow: inset 0 0 0 1px #e60278;
+  box-shadow: inset 0 0 0 1px #d6d6d6;
 }
 ._1lL3q_2 {
-  box-shadow: inset 0 0 0 1px #2765cf;
+  box-shadow: inset 0 0 0 1px #e60278;
 }
 .UwbMv_2 {
+  box-shadow: inset 0 0 0 1px #2765cf;
+}
+._2Guux_2 {
   box-shadow: inset 0 0 0 2px #2765cf;
 }
 @media screen and (min-width: 740px) {
@@ -4097,28 +4320,29 @@ Object {
 }
 ,
   "themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-wireframe-dca5f8785ad37b867e89.css": ._3QqL3 {
+  "themes-wireframe-6082fafa5b621b8af2bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-e28f5a289fc68cbb1e06.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
   font-size: 50px;
   padding: 20px;
 }
-._2sL5F {
+.eO0my {
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
 }
-._2t54j {
+._1RBWy {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-.BkvSr {
+._3yqXL {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-._2E4Yy {
+.vrGeI {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
@@ -4128,7 +4352,7 @@ Object {
   width: 1em;
   height: 1em;
 }
-._3P29T {
+.FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -4137,39 +4361,39 @@ Object {
   font: inherit;
   vertical-align: baseline;
 }
-._1K98W {
+._3j_fQ {
   display: block;
 }
-._2MYSy {
+._19GyU {
   line-height: 1;
 }
-._2ACt0 {
+._302h6 {
   list-style: none;
 }
-.FPVLo {
+._JRzj {
   quotes: none;
 }
-.FPVLo:after,
-.FPVLo:before {
+._JRzj:after,
+._JRzj:before {
   content: "";
 }
-.ldNbu {
+._2RYN8 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-._1xrTt {
+._2PHih {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-._18GrW {
+._3JHxg {
   background-color: transparent;
   color: inherit;
 }
-.Ufq8O::-ms-expand {
+._3sxhA::-ms-expand {
   display: none;
 }
-._2R_8K {
+._1ZS7q {
   background: none;
 }
 ._1IQ7a {
@@ -4253,16 +4477,24 @@ Object {
 ._3HWgs:hover:not(:checked):not(:disabled) + * > ._2azEk > .nWwhH {
   opacity: 1;
 }
-._121VT {
+.nWwhH > ._121VT {
+  opacity: 0.2;
+}
+._3PnVZ {
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+}
+._3HWgs:active + * > ._2azEk > * > ._3PnVZ {
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+}
+._15Hj_ {
   -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
-._3HWgs:active + * > ._2azEk > * > ._121VT {
+._3HWgs:active + * > ._2azEk > * > ._15Hj_ {
   -webkit-transform: scale(0.5);
   transform: scale(0.5);
-}
-.nWwhH > ._121VT {
-  opacity: 0.2;
 }
 ._1DzSs {
   pointer-events: none;
@@ -4742,18 +4974,21 @@ Object {
   background: #f0f0f0;
 }
 ._2NQv2_0 {
-  box-shadow: 0 0 0 2px #00bfff;
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
 }
 ._2xNg4_0 {
-  box-shadow: inset 0 0 0 1px #777;
+  box-shadow: 0 0 0 2px #00bfff;
 }
 ._29w0S_0 {
-  box-shadow: inset 0 0 0 1px red;
+  box-shadow: inset 0 0 0 1px #777;
 }
 ._1lL3q_0 {
-  box-shadow: inset 0 0 0 1px #404040;
+  box-shadow: inset 0 0 0 1px red;
 }
 .UwbMv_0 {
+  box-shadow: inset 0 0 0 1px #404040;
+}
+._2Guux_0 {
   box-shadow: inset 0 0 0 2px #404040;
 }
 @media screen and (min-width: 768px) {
@@ -5018,9 +5253,8 @@ Object {
   min-height: 18px;
 }
 ,
-  "themes-wireframe-fe375e387b9a981e2264.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-baddbec5b9889c7e77ff.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-98832c8b8301ab5c7969.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -5086,85 +5320,97 @@ SOURCE HTML: <!DOCTYPE html>
       <style type="text/css">
         body{margin:0;padding:0;background:#eee}
       </style>
-      <span class="BRAID__reset-base_3P29T BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
+      <span class="BRAID__reset-base_FYwKg BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_standard_transform_2WTa0_seekAnz">
         Hello
         seekAnz
-        <svg viewbox="0 0 1024 1024"
+        <svg viewbox="0 0 24 24"
              focusable="false"
              fill="currentColor"
              width="16"
              height="16"
-             class="BRAID__reset-base_3P29T BRAID__box-position_relative_1B71U BRAID__box-display_inlineBlock_1ij33 BRAID__ChevronIcon-root_2sL5F BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__icon-inline_1HqaG"
+             class="BRAID__reset-base_FYwKg BRAID__box-position_relative_1B71U BRAID__box-display_inlineBlock_1ij33 BRAID__IconChevron-root_eO0my BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__icon-inline_1HqaG"
         >
-          <path d="M945 266l78 67-510 524L3 333l75-69 435 451 432-449z"
-                fill="currentColor"
+          <path fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 8l-8 8-8-8"
           >
           </path>
         </svg>
       </span>
-      <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_medium_o5wHJ_seekAnz">
-        <div class="BRAID__reset-base_3P29T BRAID__box-background_card_2fX9z_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz">
-          <div class="BRAID__reset-base_3P29T">
+      <div class="BRAID__reset-base_FYwKg BRAID__box-padding_bottom_medium_o5wHJ_seekAnz">
+        <div class="BRAID__reset-base_FYwKg BRAID__box-background_card_2fX9z_seekAnz BRAID__box-padding_top_small_ST9QG_seekAnz BRAID__box-padding_bottom_large_2Yn0H_seekAnz BRAID__box-padding_left_gutter_1Hlla_seekAnz BRAID__box-padding_right_gutter_11gxS_seekAnz">
+          <div class="BRAID__reset-base_FYwKg">
             <input type="checkbox"
-                   class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute_3XcVB BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                   class="BRAID__reset-base_FYwKg BRAID__reset-block_3j_fQ BRAID__reset-appearance_2PHih BRAID__box-position_absolute_3XcVB BRAID__InlineField-realFieldSize_q3uRq_seekAnz BRAID__InlineField-realFieldBase_3HWgs"
                    id="id_1"
                    aria-describedby="id_1-message"
             >
-            <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_2iYJH">
-              <div class="BRAID__reset-base_3P29T BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_2xNg4_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
-                <div class="BRAID__reset-base_3P29T BRAID__box-background_formAccent_GzauW_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_ZBQ-p">
-                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+            <div class="BRAID__reset-base_FYwKg BRAID__box-display_flex_2iYJH">
+              <div class="BRAID__reset-base_FYwKg BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_29w0S_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz BRAID__InlineField-fakeFieldBase_2azEk">
+                <div class="BRAID__reset-base_FYwKg BRAID__box-background_formAccent_GzauW_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-selected_ZBQ-p">
+                  <div class="BRAID__reset-base_FYwKg BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT BRAID__InlineField-checkboxScale_3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="BRAID__reset-base_3P29T BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-textColorForBackground-formAccent_1QEQt_seekAnz"
+                         class="BRAID__reset-base_FYwKg BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-textColorForBackground-formAccent_1QEQt_seekAnz"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
-                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_2NQv2_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_22dp5">
+                <div class="BRAID__reset-base_FYwKg BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_outlineFocus_2xNg4_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-focusOverlay_22dp5">
                 </div>
-                <div class="BRAID__reset-base_3P29T BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_1lL3q_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_nWwhH">
-                  <div class="BRAID__reset-base_3P29T BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT">
-                    <svg viewbox="90.471 302.809 823 823"
+                <div class="BRAID__reset-base_FYwKg BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderFormAccent_UwbMv_seekAnz BRAID__box-transition_fast_3EZ81_seekAnz BRAID__box-position_absolute_3XcVB BRAID__Overlay-root_1DzSs BRAID__InlineField-hoverOverlay_nWwhH">
+                  <div class="BRAID__reset-base_FYwKg BRAID__box-transition_fast_3EZ81_seekAnz BRAID__InlineField-indicator_121VT BRAID__InlineField-checkboxScale_3PnVZ">
+                    <svg viewbox="0 0 24 24"
                          focusable="false"
                          fill="currentColor"
                          width="16"
                          height="16"
-                         class="BRAID__reset-base_3P29T BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-tone_formAccent_6eu7W_seekAnz"
+                         class="BRAID__reset-base_FYwKg BRAID__box-height_full__Z9GO BRAID__box-width_full_1IQ7a BRAID__box-display_block_2_IRV BRAID__typography-tone_formAccent_6eu7W_seekAnz"
                     >
-                      <path d="M365.407 1022.185L90.677 747.457l67.883-67.882L365.406 886.42l479.977-479.988 67.883 67.882"
-                            fill="currentColor"
+                      <path fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 7L9 17l-4-4"
                       >
                       </path>
                     </svg>
                   </div>
                 </div>
               </div>
-              <label class="BRAID__reset-base_3P29T BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_And8z_seekAnz"
+              <label class="BRAID__reset-base_FYwKg BRAID__box-padding_left_small__6QFg_seekAnz BRAID__InlineField-label_3R2vq BRAID__typography-touchable_standard_And8z_seekAnz"
                      for="id_1"
               >
-                <span class="BRAID__reset-base_3P29T BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
+                <span class="BRAID__reset-base_FYwKg BRAID__box-display_block_2_IRV BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_standard_fontSize_6ufcS_seekAnz BRAID__typography-tone_neutral_17ajR_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz">
                   This is a checkbox
                 </span>
               </label>
             </div>
-            <div class="BRAID__reset-base_3P29T BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_2iYJH BRAID__FieldMessage-root_24rCK"
+            <div class="BRAID__reset-base_FYwKg BRAID__box-padding_bottom_xxsmall_3yuzv_seekAnz BRAID__box-display_flex_2iYJH BRAID__FieldMessage-root_24rCK"
                  id="id_1-message"
             >
-              <div class="BRAID__reset-base_3P29T BRAID__FieldMessage-grow_3KscY BRAID__FieldMessage-minHeight_3hlJo_seekAnz">
+              <div class="BRAID__reset-base_FYwKg BRAID__FieldMessage-grow_3KscY BRAID__FieldMessage-minHeight_3hlJo_seekAnz">
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="BRAID__reset-base_3P29T BRAID__App-customBox_3QqL3">
+      <div class="BRAID__reset-base_FYwKg BRAID__App-customBox_3QqL3">
         Custom content
       </div>
     </div>
@@ -5209,12 +5455,12 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                    class="BRAID__reset-base_3P29T BRAID__reset-block_1K98W BRAID__reset-appearance_1xrTt BRAID__box-position_absolute_3XcVB BRAID__InlineField-realField_3HWgs BRAID__InlineField-realFieldSize_q3uRq_seekAnz"
+                    class="BRAID__reset-base_FYwKg BRAID__reset-block_3j_fQ BRAID__reset-appearance_2PHih BRAID__box-position_absolute_3XcVB BRAID__InlineField-realFieldSize_q3uRq_seekAnz BRAID__InlineField-realFieldBase_3HWgs"
                     id="id_1"
                     aria-describedby="id_1-message"
 +                   value
              >
-             <div class="BRAID__reset-base_3P29T BRAID__box-display_flex_2iYJH">
-               <div class="BRAID__reset-base_3P29T BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_2xNg4_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeField_2azEk BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz">
+             <div class="BRAID__reset-base_FYwKg BRAID__box-display_flex_2iYJH">
+               <div class="BRAID__reset-base_FYwKg BRAID__box-background_input_1shp6_seekAnz BRAID__box-borderRadius_standard_1OCHt_seekAnz BRAID__box-boxShadow_borderStandard_29w0S_seekAnz BRAID__box-position_relative_1B71U BRAID__InlineField-fakeFieldSize_1N9cL_seekAnz BRAID__InlineField-fakeFieldBase_2azEk">
 
 `;

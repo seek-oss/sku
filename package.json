@@ -102,7 +102,6 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-treat": "^1.0.0",
     "bent": "^6.1.0",
-
     "browserslist": "^4.6.6",
     "browserslist-config-seek": "^2.0.0",
     "chalk": "^2.4.2",
@@ -168,7 +167,8 @@
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-dev-server": "3.2.1",
     "webpack-merge": "^4.2.1",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "x-default-browser": "^0.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",

@@ -25,17 +25,20 @@ const {
   polyfills,
   isLibrary,
   libraryName,
-  isStartScript,
   sourceMapsProd,
   supportedBrowsers,
 } = config;
 
 // port is only required for dev builds
-const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
+const makeWebpackConfig = ({
+  isIntegration = false,
+  port = 0,
+  isDevServer = false,
+} = {}) => {
   const { isProductionBuild } = utils;
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
-  const renderHtml = isLibrary ? isStartScript : !isIntegration;
+  const renderHtml = isLibrary ? isDevServer : !isIntegration;
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
@@ -73,7 +76,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
 
   const createEntry = entry => [
     ...resolvedPolyfills,
-    ...(isStartScript ? devServerEntries : []),
+    ...(isDevServer ? devServerEntries : []),
     entry,
   ];
 
@@ -102,7 +105,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
     // The client file mask is set to just name in start/dev mode as contenthash
     // is not supported for hot reloading. It can also cause non
     // deterministic snapshots in jest tests.
-    if (isStartScript) {
+    if (isDevServer) {
       return '[name]';
     }
 
@@ -113,8 +116,8 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
   const jsFileMask = `${getFileMask()}.js`;
   const cssFileMask = `${getFileMask()}.css`;
 
-  const sourceMapStyle = isStartScript ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isStartScript || sourceMapsProd;
+  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
+  const useSourceMaps = isDevServer || sourceMapsProd;
 
   const webpackConfigs = [
     {
@@ -162,7 +165,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
             include: internalJs,
             use: utils.makeJsLoaders({ target: 'browser' }),
           },
-          ...(isStartScript
+          ...(isDevServer
             ? []
             : [
                 {
@@ -194,8 +197,11 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
                 },
               ]),
           { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
-          { test: /\.css\.js$/, oneOf: utils.makeCssOneOf({ js: true }) },
-          { test: /\.less$/, oneOf: utils.makeCssOneOf() },
+          {
+            test: /\.css\.js$/,
+            oneOf: utils.makeCssOneOf({ js: true, hot: isDevServer }),
+          },
+          { test: /\.less$/, oneOf: utils.makeCssOneOf({ hot: isDevServer }) },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             use: utils.makeImageLoaders(),
@@ -213,9 +219,7 @@ const makeWebpackConfig = ({ isIntegration = false, port = 0 } = {}) => {
               }),
             ]
           : []),
-        ...(isStartScript || isIntegration
-          ? []
-          : [bundleAnalyzerPlugin({ name: 'client' })]),
+        ...(isDevServer ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
           filename: cssFileMask,

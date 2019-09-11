@@ -18,12 +18,11 @@ const {
   env,
   webpackDecorator,
   polyfills,
-  isStartScript,
   sourceMapsProd,
   supportedBrowsers,
 } = require('../../context');
 
-const makeWebpackConfig = ({ clientPort, serverPort }) => {
+const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
   const { isProductionBuild } = utils;
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
@@ -68,7 +67,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
   ];
 
   // Add polyfills and dev server client to all entries
-  const clientEntry = isStartScript
+  const clientEntry = isDevServer
     ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
     : [...resolvedPolyfills, paths.clientEntry];
 
@@ -78,21 +77,21 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
 
   const skuServerEntry = require.resolve('../../entry/server/index.js');
 
-  const serverEntry = isStartScript
+  const serverEntry = isDevServer
     ? [...serverDevServerEntries, skuServerEntry]
     : [skuServerEntry];
 
-  const publicPath = isStartScript ? clientServer : paths.publicPath;
+  const publicPath = isDevServer ? clientServer : paths.publicPath;
 
-  const sourceMapStyle = isStartScript ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isStartScript || sourceMapsProd;
+  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
+  const useSourceMaps = isDevServer || sourceMapsProd;
 
   const webpackStatsFilename = 'webpackStats.json';
 
   // The file mask is set to just name in start/dev mode as contenthash
   // is not supported for hot reloading. It can also cause non
   // deterministic snapshots in jest tests.
-  const fileMask = isStartScript ? '[name]' : '[name]-[contenthash]';
+  const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
   const webpackConfigs = [
     {
@@ -132,7 +131,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
             include: internalJs,
             use: utils.makeJsLoaders({ target: 'browser' }),
           },
-          ...(isStartScript
+          ...(isDevServer
             ? []
             : [
                 {
@@ -171,12 +170,12 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
             test: /\.css\.js$/,
             oneOf: utils.makeCssOneOf({
               js: true,
-              hot: isStartScript,
+              hot: isDevServer,
             }),
           },
           {
             test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ hot: isStartScript }),
+            oneOf: utils.makeCssOneOf({ hot: isDevServer }),
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -201,7 +200,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
         }),
         createTreatPlugin({ target: 'browser', isProductionBuild, internalJs }),
       ].concat(
-        isStartScript
+        isDevServer
           ? [
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
@@ -217,7 +216,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
       name: 'server',
       mode: webpackMode,
       entry: serverEntry,
-      watch: isStartScript,
+      watch: isDevServer,
       externals: [
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
@@ -297,7 +296,7 @@ const makeWebpackConfig = ({ clientPort, serverPort }) => {
         }),
         createTreatPlugin({ target: 'node', isProductionBuild, internalJs }),
       ].concat(
-        isStartScript
+        isDevServer
           ? [
               new StartServerPlugin({
                 name: 'server.js',

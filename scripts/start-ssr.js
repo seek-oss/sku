@@ -31,6 +31,7 @@ const localhost = '0.0.0.0';
   const [clientWebpackConfig, serverWebpackConfig] = makeWebpackConfig({
     clientPort,
     serverPort,
+    isDevServer: true,
   });
 
   // Make sure target directory exists before starting

@@ -85,7 +85,7 @@ describe('braid-design-system', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4396/jobstreet');
+      const app = await getAppSnapshot('http://localhost:4396/jobStreet');
       expect(app).toMatchSnapshot();
     });
 

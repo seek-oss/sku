@@ -219,7 +219,9 @@ const makeWebpackConfig = ({
               }),
             ]
           : []),
-        ...(isDevServer ? [] : [bundleAnalyzerPlugin({ name: 'client' })]),
+        ...(isDevServer || isIntegration
+          ? []
+          : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
           filename: cssFileMask,

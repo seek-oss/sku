@@ -6,7 +6,6 @@
 import {
   addDecorator,
   addParameters,
-  clearDecorators,
   configure,
   setAddon,
   storiesOf,
@@ -17,7 +16,6 @@ import {
 export {
   addDecorator,
   addParameters,
-  clearDecorators,
   configure,
   setAddon,
   storiesOf,

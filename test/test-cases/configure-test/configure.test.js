@@ -11,7 +11,6 @@ const {
   bundleReportFolder,
 } = require('../../../config/webpack/plugins/bundleAnalyzer');
 const prettierConfig = require('../../../config/prettier/prettierConfig');
-const tslintConfig = require('../../../config/typescript/tslint.json');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const defaultPlayroomTargetDir = 'dist-playroom';
@@ -141,7 +140,7 @@ describe('configure', () => {
 
     it('should generate tslint config', async () => {
       const tslintContents = await readJsonC(appFolderTS, 'tslint.json');
-      expect(tslintContents).toEqual(tslintConfig);
+      expect(tslintContents).toMatchSnapshot();
     });
 
     it(`should generate \`.gitignore\``, async () => {

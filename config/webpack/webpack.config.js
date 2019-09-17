@@ -31,20 +31,22 @@ const {
 
 // port is only required for dev builds
 const makeWebpackConfig = ({
-  isStoryBook = false,
   isIntegration = false,
   port = 0,
   isDevServer = false,
 } = {}) => {
   const { isProductionBuild } = utils;
   const webpackMode = isProductionBuild ? 'production' : 'development';
-  const shouldRenderHtml = () => {
-    if (isStoryBook) {
+  const isRenderHtml = () => {
+    if (isIntegration) {
       return false;
     }
-    return isLibrary ? isDevServer : !isIntegration;
+    if (isLibrary) {
+      return isDevServer;
+    }
+    return true;
   };
-  const renderHtml = shouldRenderHtml();
+  const renderHtml = isRenderHtml();
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash

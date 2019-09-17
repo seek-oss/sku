@@ -7,7 +7,7 @@ const { resolvePackage } = require('../webpack/utils/resolvePackage');
 
 module.exports = ({ config }, { isDevServer }) => {
   const clientWebpackConfig = find(
-    makeWebpackConfig({ isIntegration: true, isDevServer }),
+    makeWebpackConfig({ isStoryBook: true, isIntegration: true, isDevServer }),
     ({ name }) => name === 'client',
   );
 

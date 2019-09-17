@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configure custom should generate tslint config 1`] = `
+Object {
+  "extends": "tslint-config-seek",
+  "linterOptions": Object {
+    "exclude": Array [
+      "**/*.json",
+      "*.css.js.d.ts",
+      "*.less.d.ts",
+      "coverage/",
+      "foo/bar/",
+      "playroom/foobar/",
+      "report/",
+      "storybook/foobar/",
+    ],
+  },
+  "rules": Object {
+    "no-implicit-dependencies": false,
+  },
+}
+`;

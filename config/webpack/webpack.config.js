@@ -37,8 +37,16 @@ const makeWebpackConfig = ({
 } = {}) => {
   const { isProductionBuild } = utils;
   const webpackMode = isProductionBuild ? 'production' : 'development';
-
-  const renderHtml = isLibrary ? isDevServer : !isIntegration;
+  const shouldRenderHtml = () => {
+    if (isIntegration) {
+      return false;
+    }
+    if (isLibrary) {
+      return isDevServer;
+    }
+    return true;
+  };
+  const renderHtml = shouldRenderHtml();
   const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash

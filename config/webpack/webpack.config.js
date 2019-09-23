@@ -99,14 +99,14 @@ const makeWebpackConfig = ({
     ...paths.compilePackages.map(utils.resolvePackage),
   ];
 
-  const getFileMask = () => {
+  const getFileMask = ({ isMainChunk }) => {
     if (isIntegration) {
       return '[name]';
     }
 
     // Libraries should always have the same file name
-    // unless we're building for storybook
-    if (isLibrary) {
+    // for the main chunk unless we're building for storybook
+    if (isLibrary && isMainChunk) {
       return libraryName;
     }
 
@@ -121,8 +121,11 @@ const makeWebpackConfig = ({
     return '[name]-[contenthash]';
   };
 
-  const jsFileMask = `${getFileMask()}.js`;
-  const cssFileMask = `${getFileMask()}.css`;
+  const jsFileMask = `${getFileMask({ isMainChunk: true })}.js`;
+  const jsChunkFileMask = `${getFileMask({ isMainChunk: false })}.js`;
+
+  const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
+  const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
   const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
   const useSourceMaps = isDevServer || sourceMapsProd;
@@ -137,7 +140,7 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath: paths.publicPath,
         filename: jsFileMask,
-        chunkFilename: jsFileMask,
+        chunkFilename: jsChunkFileMask,
         ...(isLibrary
           ? {
               library: libraryName,
@@ -233,7 +236,7 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin(envVars),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
-          chunkFilename: cssFileMask,
+          chunkFilename: cssChunkFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
         createTreatPlugin({

@@ -86,6 +86,7 @@ const localhost = '0.0.0.0';
     allowedHosts: hosts,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
+    sockPort: clientPort,
   });
 
   devServer.listen(clientPort, localhost, err => {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const args = require('../config/args');
+const validatePeersDeps = require('../lib/validatePeersDeps');
 
 const { script, debug } = args;
 
@@ -23,22 +24,29 @@ switch (script) {
 
   case 'test':
   case 'test-ssr':
-  case 'build':
-  case 'build-ssr':
   case 'lint':
   case 'format':
-  case 'start':
-  case 'start-ssr':
-  case 'storybook':
-  case 'build-storybook':
-  case 'playroom':
-  case 'build-playroom':
-  case 'pre-commit':
-  case 'chromatic': {
+  case 'pre-commit': {
     runScript('configure');
     runScript(script);
     break;
   }
+
+  case 'start':
+  case 'start-ssr':
+  case 'playroom':
+  case 'storybook':
+  case 'build-playroom':
+  case 'build-storybook':
+  case 'build':
+  case 'build-ssr':
+  case 'chromatic': {
+    runScript('configure');
+    validatePeersDeps();
+    runScript(script);
+    break;
+  }
+
   default: {
     console.error(`Unknown script ${script}`);
     process.exit(1);

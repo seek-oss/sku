@@ -42,6 +42,8 @@ switch (script) {
   case 'build-ssr':
   case 'chromatic': {
     runScript('configure');
+
+    // Intentionally not awaiting async function as it's just for logging warnings
     validatePeersDeps();
     runScript(script);
     break;

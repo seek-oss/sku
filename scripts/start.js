@@ -7,33 +7,20 @@ const exceptionFormatter = require('exception-formatter');
 const pathToRegex = require('path-to-regexp');
 
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const createRenderer = require('../lib/createRenderer');
+const createRenderProvider = require('../lib/staticRenderer');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
-const { port, initialPath, paths, routes } = require('../context');
+const {
+  port,
+  initialPath,
+  paths,
+  routes,
+  sites,
+  environments,
+} = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 const localhost = '0.0.0.0';
-
-let renderer;
-let buildReady = false;
-let webpackStats;
-const renderCallbacks = [];
-
-function flushQueuedRequests() {
-  if (renderCallbacks.length > 0) {
-    renderCallbacks.shift()();
-    flushQueuedRequests();
-  }
-}
-
-function renderWhenReady(cb) {
-  if (buildReady) {
-    cb();
-  }
-
-  renderCallbacks.push(cb);
-}
 
 (async () => {
   const availablePort = await allocatePort({
@@ -41,26 +28,38 @@ function renderWhenReady(cb) {
     host: localhost,
   });
 
-  const [clientConfig, renderConfig] = makeWebpackConfig({
+  const config = makeWebpackConfig({
     port: availablePort,
     isDevServer: true,
   });
 
-  const clientCompiler = webpack(clientConfig);
-  const renderCompiler = webpack(renderConfig);
+  const parentCompiler = webpack(config);
+
+  const clientCompiler = parentCompiler.compilers.find(
+    c => c.name === 'client',
+  );
+  const renderCompiler = parentCompiler.compilers.find(
+    c => c.name === 'render',
+  );
 
   await checkHosts();
 
   const appHosts = getAppHosts();
 
-  const devServer = new WebpackDevServer(clientCompiler, {
+  const { renderWhenReady } = createRenderProvider({
+    clientCompiler,
+    renderCompiler,
+  });
+
+  const devServer = new WebpackDevServer(parentCompiler, {
     contentBase: paths.public,
     overlay: true,
     stats: 'errors-only',
     allowedHosts: appHosts,
     after: app => {
       app.get('*', (req, res, next) => {
-        console.log('Received request', req.path);
+        console.log('Received request', { path: req.path, query: req.query });
+        const start = Date.now();
 
         const matchingRoute = routes.find(({ route }) =>
           pathToRegex(route).exec(req.path),
@@ -70,68 +69,32 @@ function renderWhenReady(cb) {
           return next();
         }
 
-        console.log(matchingRoute);
-
-        renderWhenReady(() => {
+        renderWhenReady(({ renderer, webpackStats }) => {
           console.log('Renderer ready. Attempting', req.path);
+
+          const matchingSite = sites.find(site => site.host === req.hostname);
 
           renderer({
             webpackStats,
             route: matchingRoute.route,
-            site: 'au',
-            environment: 'production',
+            site: matchingSite ? matchingSite.name : sites[0].name,
+            environment: environments.length > 0 ? environments[0] : undefined,
           })
             .then(html => {
-              console.log(res.headersSent);
+              console.log('Request sent after', Date.now() - start);
 
               res.send(html);
             })
             .catch(err => {
-              console.log(err, 'Errors n stuff');
-
               // res.status(500).send(exceptionFormatter(err, { format: 'html' }));
+              console.log(err);
+
+              next();
             });
         });
       });
     },
   });
-
-  clientCompiler.hooks.afterEmit.tap('sku-start', compilation => {
-    webpackStats = compilation.getStats().toJson({
-      hash: true,
-      publicPath: true,
-      assets: true,
-      chunks: false,
-      modules: false,
-      source: false,
-      errorDetails: false,
-      timings: false,
-    });
-  });
-
-  renderCompiler.hooks.watchRun.tap('sku-start', () => {
-    console.log('Render code startin up');
-    buildReady = false;
-  });
-
-  renderCompiler.hooks.afterEmit.tap('sku-start', compilation => {
-    const shouldCreateRenderer = Object.values(compilation.assets).filter(
-      ({ emitted }) => emitted,
-    );
-
-    if (shouldCreateRenderer) {
-      renderer = createRenderer({
-        fileName: 'render.js',
-        compilation,
-      });
-    }
-    buildReady = true;
-    console.log('Build complete. Flushing queue');
-
-    flushQueuedRequests();
-  });
-
-  renderCompiler.watch({}, () => {});
 
   devServer.listen(availablePort, localhost, err => {
     if (err) {

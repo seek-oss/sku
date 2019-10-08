@@ -24,7 +24,7 @@ export default ({ themeName }) => {
           checked={false}
           onChange={noop}
           id="id_1"
-          label="This is a checkbox"
+          label="This is not a checkbox"
         />
       </Card>
       <Box className={style.customBox}>Custom content</Box>

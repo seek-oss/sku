@@ -190,7 +190,6 @@
     "jest-puppeteer": "^4.3.0",
     "jest-serializer-html": "^7.0.0",
     "jsonc-parser": "^2.1.0",
-    "memfs": "^2.15.5",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.6.0",
     "puppeteer": "^1.19.0",

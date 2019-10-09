@@ -57,10 +57,8 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     after: app => {
+      // eslint-disable-next-line consistent-return
       app.get('*', (req, res, next) => {
-        console.log('Received request', { path: req.path, query: req.query });
-        const start = Date.now();
-
         const matchingRoute = routes.find(({ route }) =>
           pathToRegex(route).exec(req.path),
         );
@@ -70,8 +68,6 @@ const localhost = '0.0.0.0';
         }
 
         renderWhenReady(({ renderer, webpackStats }) => {
-          console.log('Renderer ready. Attempting', req.path);
-
           const matchingSite = sites.find(site => site.host === req.hostname);
 
           renderer({
@@ -81,15 +77,10 @@ const localhost = '0.0.0.0';
             environment: environments.length > 0 ? environments[0] : undefined,
           })
             .then(html => {
-              console.log('Request sent after', Date.now() - start);
-
               res.send(html);
             })
             .catch(err => {
-              // res.status(500).send(exceptionFormatter(err, { format: 'html' }));
-              console.log(err);
-
-              next();
+              res.status(500).send(exceptionFormatter(err, { format: 'html' }));
             });
         });
       });

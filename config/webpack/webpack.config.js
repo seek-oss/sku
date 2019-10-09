@@ -46,8 +46,9 @@ const makeWebpackConfig = ({
     }
     return true;
   };
-  const renderHtml = false;
-  const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
+  const renderHtml = shouldRenderHtml();
+  const htmlRenderPlugin =
+    !isDevServer && renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
     .chain(env)

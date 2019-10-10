@@ -135,7 +135,10 @@ const makeWebpackConfig = ({
     {
       name: 'client',
       mode: webpackMode,
-      entry: clientEntry,
+      entry: {
+        main: clientEntry,
+        ...(isDevServer ? { devServerOnly: devServerEntries } : {}),
+      },
       devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
         path: paths.target,

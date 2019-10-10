@@ -78,19 +78,30 @@ const localhost = '0.0.0.0';
           return next();
         }
 
-        renderWhenReady(({ renderer, webpackStats }) => {
-          renderer({
-            webpackStats,
-            route: matchingRoute.route,
-            site: getSiteForHost(req.hostname),
-            environment: environments.length > 0 ? environments[0] : undefined,
-          })
-            .then(html => {
-              res.send(html);
-            })
-            .catch(err => {
-              res.status(500).send(exceptionFormatter(err, { format: 'html' }));
+        renderWhenReady(async ({ renderer, webpackStats }) => {
+          try {
+            const html = await renderer({
+              webpackStats,
+              route: matchingRoute.route,
+              site: getSiteForHost(req.hostname),
+              environment:
+                environments.length > 0 ? environments[0] : undefined,
             });
+
+            res.send(html);
+          } catch (err) {
+            res.status(500).send(
+              exceptionFormatter(err, {
+                format: 'html',
+                inlineStyle: true,
+                basepath: 'webpack://static/./',
+              }).concat(
+                ...webpackStats.entrypoints.devServerOnly.assets.map(
+                  asset => `<script src="/${asset}"></script>`,
+                ),
+              ),
+            );
+          }
         });
       });
     },

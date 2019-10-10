@@ -84,6 +84,7 @@ const localhost = '0.0.0.0';
             const html = await renderer({
               webpackStats,
               route: matchingRoute.route,
+              routeName: matchingRoute.name,
               site: getSiteForHost(req.hostname),
               environment:
                 environments.length > 0 ? environments[0] : undefined,

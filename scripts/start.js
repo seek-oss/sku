@@ -17,6 +17,7 @@ const {
   routes,
   sites,
   environments,
+  isLibrary,
 } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
@@ -90,16 +91,21 @@ const localhost = '0.0.0.0';
 
             res.send(html);
           } catch (err) {
+            // Library mode does not have "devServerOnly" entry as it is a UMD
+            const devServerAssets = !isLibrary
+              ? webpackStats.entrypoints.devServerOnly.assets
+              : [];
+
+            const devServerScripts = devServerAssets.map(
+              asset => `<script src="/${asset}"></script>`,
+            );
+
             res.status(500).send(
               exceptionFormatter(err, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
-              }).concat(
-                ...webpackStats.entrypoints.devServerOnly.assets.map(
-                  asset => `<script src="/${asset}"></script>`,
-                ),
-              ),
+              }).concat(...devServerScripts),
             );
           }
         });

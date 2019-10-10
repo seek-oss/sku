@@ -345,6 +345,11 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
+          href="/vendors~devServerOnly~main.js"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
           href="/vendors~main.js"
     >
     <link data-chunk="main"
@@ -371,6 +376,11 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="/runtime.js"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="/vendors~devServerOnly~main.js"
     >
     </script>
     <script async

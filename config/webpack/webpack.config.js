@@ -47,7 +47,8 @@ const makeWebpackConfig = ({
     return true;
   };
   const renderHtml = shouldRenderHtml();
-  const htmlRenderPlugin = renderHtml ? createHtmlRenderPlugin() : null;
+  const htmlRenderPlugin =
+    !isDevServer && renderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
     .chain(env)
@@ -134,7 +135,12 @@ const makeWebpackConfig = ({
     {
       name: 'client',
       mode: webpackMode,
-      entry: clientEntry,
+      entry: {
+        main: clientEntry,
+        ...(isDevServer && !isLibrary
+          ? { devServerOnly: devServerEntries }
+          : {}),
+      },
       devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
         path: paths.target,

@@ -247,6 +247,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
       },
       output: {
         path: paths.target,
+        publicPath,
         filename: 'server.js',
         libraryTarget: 'var',
       },

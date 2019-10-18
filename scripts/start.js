@@ -64,6 +64,8 @@ const localhost = '0.0.0.0';
 
   const devServer = new WebpackDevServer(parentCompiler, {
     contentBase: paths.public,
+    publicPath: paths.publicPath,
+    host: appHosts[0],
     overlay: true,
     stats: 'errors-only',
     allowedHosts: appHosts,

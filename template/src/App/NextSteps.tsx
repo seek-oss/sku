@@ -17,7 +17,7 @@ export default () => (
       <Stack space="medium">
         <Heading level="1">Congratulations 🎉</Heading>
         <Text>
-          <Strong>{'ssr-test'}</Strong> has been successfully initialised.
+          <Strong>{'<%= appName %>'}</Strong> has been successfully initialised.
         </Text>
       </Stack>
     </Box>

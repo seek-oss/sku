@@ -10,7 +10,8 @@ const {
   copyPublicFiles,
   ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
-const { hosts, port, initialPath, paths } = require('../context');
+const { checkHosts, getAppHosts } = require('../lib/hosts');
+const { port, initialPath, paths } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -34,14 +35,18 @@ const localhost = '0.0.0.0';
     isDevServer: true,
   });
 
+  await checkHosts();
+
+  const appHosts = getAppHosts();
+
   // Make sure target directory exists before starting
   ensureTargetDirectory();
 
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
 
-  const serverUrl = `http://${hosts[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `http://${hosts[0]}:${clientPort}`;
+  const serverUrl = `http://${appHosts[0]}:${serverPort}${initialPath}`;
+  const webpackDevServerUrl = `http://${appHosts[0]}:${clientPort}`;
 
   console.log();
   console.log(
@@ -80,10 +85,12 @@ const localhost = '0.0.0.0';
   // Start webpack dev server using only the client config
   const devServer = new WebpackDevServer(clientCompiler, {
     contentBase: paths.public,
+    publicPath: paths.publicPath,
+    host: appHosts[0],
     historyApiFallback: true,
     overlay: true,
     stats: 'errors-only',
-    allowedHosts: hosts,
+    allowedHosts: appHosts,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     sockPort: clientPort,

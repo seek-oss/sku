@@ -5,38 +5,36 @@ import {
   Text,
   Strong,
   Card,
-  Divider,
-  Paragraph,
   TextLink,
   BulletList,
   Bullet,
+  Stack,
 } from 'braid-design-system';
 
 export default () => (
   <Fragment>
     <Box background="brand" paddingY="xxlarge" paddingX="gutter">
-      <Heading level="1">Congratulations 🎉</Heading>
-      <Text>
-        <Strong>{'<%= appName %>'}</Strong> has been successfully initialised.
-      </Text>
+      <Stack space="medium">
+        <Heading level="1">Congratulations 🎉</Heading>
+        <Text>
+          <Strong>{'ssr-test'}</Strong> has been successfully initialised.
+        </Text>
+      </Stack>
     </Box>
     <Box paddingX={['xsmall', 'gutter']} style={{ marginTop: '-40px' }}>
       <Card>
-        <Heading level="2">🏃🏾‍♀️ Next steps</Heading>
+        <Stack space="medium">
+          <Stack space="large" dividers>
+            <Heading level="2">🏃🏾‍♀️ Next steps</Heading>
 
-        <Box paddingY="xsmall">
-          <Divider />
-        </Box>
+            <Text>
+              The project comes pre-configured with a lot of standardised
+              tooling to make authoring web applications easier.
+            </Text>
+          </Stack>
 
-        <Paragraph>
-          <Text>
-            The project comes pre-configured with a lot of standardised tooling
-            to make authoring web applications easier.
-          </Text>
-        </Paragraph>
+          <Heading level="4">Platform</Heading>
 
-        <Heading level="4">Platform</Heading>
-        <Paragraph>
           <Text>
             The sku platform provides a number of tools to make development more
             efficient, for example,
@@ -51,8 +49,7 @@ export default () => (
             </TextLink>
             , and more.
           </Text>
-        </Paragraph>
-        <Paragraph>
+
           <Text>
             For more information see the sku{' '}
             <TextLink href="https://seek-oss.github.io/sku/#/">
@@ -60,10 +57,9 @@ export default () => (
             </TextLink>
             .
           </Text>
-        </Paragraph>
 
-        <Heading level="4">Components</Heading>
-        <Paragraph>
+          <Heading level="4">Components</Heading>
+
           <Text>
             The project comes with{' '}
             <TextLink href="https://seek-oss.github.io/braid-design-system/">
@@ -75,47 +71,43 @@ export default () => (
             </TextLink>
             .
           </Text>
-        </Paragraph>
+        </Stack>
       </Card>
 
       <Card>
-        <Heading level="2">💬 Support</Heading>
+        <Stack space="medium">
+          <Stack space="large" dividers>
+            <Heading level="2">💬 Support</Heading>
 
-        <Box paddingY="xsmall">
-          <Divider />
-        </Box>
+            <Text>
+              Whether it&rsquo;s a problem or a feature request, please
+              don&rsquo;t hesitate to contact us via slack.
+            </Text>
+          </Stack>
 
-        <Paragraph>
-          <Text>
-            Whether it&rsquo;s a problem or a feature request, please
-            don&rsquo;t hesitate to contact us via slack.
-          </Text>
-        </Paragraph>
+          <Heading level="4">Technical support</Heading>
 
-        <Heading level="4">Technical support</Heading>
-        <Paragraph>
           <Text>
             For technical queries about the platform or the design system:
           </Text>
-        </Paragraph>
 
-        <Box paddingBottom="xsmall">
-          <BulletList>
-            <Bullet>
-              <TextLink href="https://seekchat.slack.com/channels/sku-support">
-                #sku-support
-              </TextLink>
-            </Bullet>
-            <Bullet>
-              <TextLink href="https://seekchat.slack.com/channels/braid-support">
-                #braid-support
-              </TextLink>
-            </Bullet>
-          </BulletList>
-        </Box>
+          <Box paddingBottom="xsmall">
+            <BulletList>
+              <Bullet>
+                <TextLink href="https://seekchat.slack.com/channels/sku-support">
+                  #sku-support
+                </TextLink>
+              </Bullet>
+              <Bullet>
+                <TextLink href="https://seekchat.slack.com/channels/braid-support">
+                  #braid-support
+                </TextLink>
+              </Bullet>
+            </BulletList>
+          </Box>
 
-        <Heading level="4">Design support</Heading>
-        <Paragraph>
+          <Heading level="4">Design support</Heading>
+
           <Text>
             To discuss new or existing design patterns, visit{' '}
             <TextLink href="https://seekchat.slack.com/channels/braid-design-support">
@@ -123,7 +115,7 @@ export default () => (
             </TextLink>
             .
           </Text>
-        </Paragraph>
+        </Stack>
       </Card>
     </Box>
   </Fragment>

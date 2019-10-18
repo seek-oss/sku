@@ -14,21 +14,23 @@ const { port } = commandLineArgs(
   { partial: true },
 );
 
+const startCallback = () => {
+  console.log(`App started on port ${port}`);
+
+  if (typeof onStart === 'function') {
+    onStart(app);
+  }
+};
+
 if (module.hot) {
   const server = http.createServer(app);
   let currentApp = app;
-  server.listen(port);
+  server.listen(port, startCallback);
   module.hot.accept('./server', () => {
     server.removeListener('request', currentApp);
     server.on('request', app);
     currentApp = app;
   });
 } else {
-  app.listen(port, () => {
-    console.log(`App started on port ${port}`);
-
-    if (typeof onStart === 'function') {
-      onStart(app);
-    }
-  });
+  app.listen(port, startCallback);
 }

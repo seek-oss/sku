@@ -23,12 +23,12 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b66bb8765ac48a9d72e9.js"
+          href="/vendors~main-b572a5b0167e35728e4d.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-8b9f59e2c91ddd3fa14e.js"
+          href="/main-e75d9e10fa19daacb58b.js"
     >
   </head>
   <body>
@@ -53,12 +53,12 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b66bb8765ac48a9d72e9.js"
+            src="/vendors~main-b572a5b0167e35728e4d.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-8b9f59e2c91ddd3fa14e.js"
+            src="/main-e75d9e10fa19daacb58b.js"
     >
     </script>
   </body>
@@ -99,12 +99,12 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b66bb8765ac48a9d72e9.js"
+          href="/vendors~main-b572a5b0167e35728e4d.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-8b9f59e2c91ddd3fa14e.js"
+          href="/main-e75d9e10fa19daacb58b.js"
     >
   </head>
   <body>
@@ -129,17 +129,16 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b66bb8765ac48a9d72e9.js"
+            src="/vendors~main-b572a5b0167e35728e4d.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-8b9f59e2c91ddd3fa14e.js"
+            src="/main-e75d9e10fa19daacb58b.js"
     >
     </script>
   </body>
 </html>,
-  "main-8b9f59e2c91ddd3fa14e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,7 +156,8 @@ Object {
   color: red;
 }
 ,
+  "main-e75d9e10fa19daacb58b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-2ae9f933930327de819a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-b66bb8765ac48a9d72e9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-b572a5b0167e35728e4d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

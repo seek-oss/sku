@@ -88,19 +88,16 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`multiple-routes build should generate the expected files 1`] = `
 Object {
   "AsyncComponent-4f6078a8c6372528d7ce.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
   color: #00f;
 }
 ,
   "handlers-Details-ceeb54793ef1f495da82.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-62bf94bf0fd2ba3c2aa2.css": ._1QX0Hyt {
   color: red;
 }
 ,
   "handlers-Home-e31e76cf578c2f680f04.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-7dcb4f16ee6b74249b6d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/:id/index.html": <!DOCTYPE html>
 <html>

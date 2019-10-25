@@ -1668,7 +1668,6 @@ Object {
 }
 ,
   "themes-jobStreet-fbb07a1915da8379dc0d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-d5f28c03efd378bfca2f.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -2801,7 +2800,6 @@ Object {
 }
 ,
   "themes-jobStreetClassic-fd3dc445bed87767a5cb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-18d0fc3ee41155bacec9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-6540b47693d60a552a6f.css": .FYwKg {
   margin: 0;
@@ -3927,7 +3925,6 @@ Object {
   display: block;
 }
 ,
-  "themes-jobsDb.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDbRebrand-343552c208c9898ca260.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDbRebrand-685ba221cdbdc214da0e.css": .FYwKg {
   margin: 0;
@@ -5056,7 +5053,6 @@ Object {
   display: block;
 }
 ,
-  "themes-jobsDbRebrand.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-214d45e00c9187e28edb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-bec6ea274fac42e50650.css": .FYwKg {
   margin: 0;
@@ -6165,7 +6161,6 @@ Object {
   display: block;
 }
 ,
-  "themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-c50533c65d9eb9ab9c1c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-ee259534d54e29285ddf.css": .FYwKg {
   margin: 0;
@@ -7274,7 +7269,6 @@ Object {
   display: block;
 }
 ,
-  "themes-seekBusiness.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-2992f5f611501ae7d9bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-95d42f06c6b86dac61d7.css": .FYwKg {
   margin: 0;
@@ -8382,7 +8376,6 @@ Object {
   display: block;
 }
 ,
-  "themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-adf22b41d79c9d93c41b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

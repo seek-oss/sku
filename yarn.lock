@@ -10396,6 +10396,11 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
+lz-string@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
+  integrity sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY=
+
 macos-release@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
@@ -12269,10 +12274,10 @@ pkg-up@2.0.0, pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-playroom@^0.9.4:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.9.4.tgz#d2853895e38368976e29ec44c08a3b7699fd5597"
-  integrity sha512-/QsW+QI5uCm9z7IKnOBSYmQDJYFA8wOL7nakDjL/hQ+Glpb6kFr6pnZTxvVUQWv3gxwR3I6i5tuq5HAST83o5A==
+playroom@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.10.1.tgz#66bf0d4c8985241ef7a78d28b12236574cf917f7"
+  integrity sha512-cpD/eOkQ6hzslCrxjpXIkjO5avITyARwc4AFZDWoIUHRhRFxEM4+VPTiZh9R144mhpzpaCIZQQzZH8PcOpWYkw==
   dependencies:
     "@babel/core" "^7.1.0"
     "@babel/preset-env" "^7.2.0"
@@ -12295,6 +12300,7 @@ playroom@^0.9.4:
     less-loader "^4.1.0"
     localforage "^1.7.2"
     lodash "^4.17.15"
+    lz-string "^1.4.4"
     mini-css-extract-plugin "^0.4.3"
     opn "^5.4.0"
     parse-prop-types "^0.3.0"

@@ -11,12 +11,12 @@ import {
   globalStyle,
   resolveStyles,
   resolveClassName,
-  Style,
-  GlobalStyle,
-  CSSProperties,
-  ThemeRef,
-  ClassRef,
-  TreatModule,
+  Style as _Style,
+  GlobalStyle as _GlobalStyle,
+  CSSProperties as _CSSProperties,
+  ThemeRef as _ThemeRef,
+  ClassRef as _ClassRef,
+  TreatModule as _TreatModule,
 } from 'treat';
 
 // Provided for backwards compatibility. Remove in sku 9
@@ -36,9 +36,9 @@ export {
 };
 
 // We need to re-export types separately or they won't work in webpack :(((
-export type Style = Style;
-export type GlobalStyle = GlobalStyle;
-export type CSSProperties = CSSProperties;
-export type ThemeRef = ThemeRef;
-export type ClassRef = ClassRef;
-export type TreatModule = TreatModule;
+export type Style = _Style;
+export type GlobalStyle = _GlobalStyle;
+export type CSSProperties = _CSSProperties;
+export type ThemeRef = _ThemeRef;
+export type ClassRef = _ClassRef;
+export type TreatModule = _TreatModule;

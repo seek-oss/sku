@@ -8,6 +8,7 @@ const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
 const kopy = require('kopy');
 const dedent = require('dedent');
+const { setCwd } = require('../lib/cwd');
 const detectYarn = require('../lib/detectYarn');
 const prettierWrite = require('../lib/runPrettier').write;
 const configure = require('../lib/configure');
@@ -49,6 +50,8 @@ const args = require('../config/args');
   const verbose = args.argv.indexOf('--verbose') >= 0;
 
   const root = path.resolve(projectName);
+  setCwd(root);
+
   const appName = path.basename(root);
 
   const reservedNames = [

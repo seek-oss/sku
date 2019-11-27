@@ -22,6 +22,11 @@ module.exports = async (script, cwd, args = []) => {
       // See node v10: https://nodejs.org/docs/latest-v10.x/api/child_process.html#child_process_child_process_exec_command_options_callback
       // See node v12: https://nodejs.org/docs/latest-v12.x/api/child_process.html#child_process_child_process_exec_command_options_callback
       maxBuffer: 1024 * 1024,
+    }).then(result => {
+      const stdout = result.stdout;
+      const stderr = result.stderr;
+      console.log('stdout: ', stdout);
+      console.log('stderr: ', stderr);
     });
   } catch (error) {
     // Print the stdout of a failed command so we can see it in the jest output.

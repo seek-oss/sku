@@ -2,8 +2,8 @@
 *.css.js.d.ts
 *.less.d.ts
 coverage/
-dist-build/
 dist-playroom/
 dist-storybook/
+dist/
 report/
 # end managed by sku

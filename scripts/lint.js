@@ -18,15 +18,14 @@ const pathsToCheck = args.length > 0 ? args : undefined;
           filePath => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
         ).length > 0;
 
-      await esLintCheck({ paths: pathsToCheck, isTypeScript });
-
       if (!hasPaths || pathsIncludeTS) {
-        await runTsc();
+        // await runTsc();
       }
     }
 
-    await prettierCheck(pathsToCheck);
-    await esLintCheck({ paths: pathsToCheck });
+    // await prettierCheck(pathsToCheck);
+    console.log('Run for JS');
+    await esLintCheck(pathsToCheck);
   } catch (e) {
     if (e) {
       console.error(e);

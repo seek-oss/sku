@@ -19,12 +19,12 @@ const pathsToCheck = args.length > 0 ? args : undefined;
         ).length > 0;
 
       if (!hasPaths || pathsIncludeTS) {
-        // await runTsc();
+        await runTsc();
       }
+      await esLintCheck(['**/*.ts', '**/*.tsx']);
     }
 
-    // await prettierCheck(pathsToCheck);
-    console.log('Run for JS');
+    await prettierCheck(pathsToCheck);
     await esLintCheck(pathsToCheck);
   } catch (e) {
     if (e) {

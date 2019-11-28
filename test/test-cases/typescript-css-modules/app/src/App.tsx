@@ -16,7 +16,7 @@ interface Props {
   children?: ReactNode;
 }
 
-export default ({ children }: Props) => (
+export default ({ children, foo }: Props) => (
   <div className={`${lessStyles.root} ${jsStyles.root}`}>
     <div
       className={`${lessStyles.nested} ${jsStyles.nested}`}
@@ -26,3 +26,5 @@ export default ({ children }: Props) => (
     </div>
   </div>
 );
+
+const f = () => {}

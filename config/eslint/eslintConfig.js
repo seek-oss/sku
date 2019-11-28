@@ -70,7 +70,7 @@ const { eslintDecorator } = require('../../context');
 
 const baseConfig = {
   extends: require.resolve('eslint-config-seek'),
-  overrides: [ts], // working.overrides,
+  overrides: [ts],
 };
 
 module.exports = eslintDecorator(baseConfig);

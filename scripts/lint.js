@@ -21,7 +21,6 @@ const pathsToCheck = args.length > 0 ? args : undefined;
       if (!hasPaths || pathsIncludeTS) {
         await runTsc();
       }
-      await esLintCheck(['**/*.ts', '**/*.tsx']);
     }
 
     await prettierCheck(pathsToCheck);

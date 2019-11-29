@@ -6333,11 +6333,11 @@ eslint-config-prettier@^6.0.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-seek@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-4.3.1.tgz#e97b801243effd90a67651585f25f8d3185be88d"
-  integrity sha512-KbIwtmcmxJ636DdstKqXQF5JDNcK6Q7towDLv0tXwErCIqysTXbujp4jhPzkXAsokjXyMp4f+gxt+k8HTSEWMQ==
+"eslint-config-seek@github:seek-oss/eslint-config-seek#add-typescript-support":
+  version "0.0.0-development"
+  resolved "https://codeload.github.com/seek-oss/eslint-config-seek/tar.gz/a8292cd89c427fc8ef47ffb0016809233c4e2122"
   dependencies:
+    "@typescript-eslint/eslint-plugin" "^2.9.0"
     "@typescript-eslint/parser" "^1.12.0"
     babel-eslint "^10.0.2"
     eslint-config-prettier "^6.0.0"
@@ -6425,11 +6425,6 @@ eslint-plugin-react-hooks@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.6.1.tgz#3c66a5515ea3e0a221ffc5d4e75c971c217b1a4c"
   integrity sha512-wHhmGJyVuijnYIJXZJHDUF2WM+rJYTjulUTqF9k61d3BTk8etydz+M4dXUVH7M76ZRS85rqBTCx0Es/lLsrjnA==
-
-eslint-plugin-react-hooks@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-2.3.0.tgz#53e073961f1f5ccf8dd19558036c1fac8c29d99a"
-  integrity sha512-gLKCa52G4ee7uXzdLiorca7JIQZPPXRAQDXV83J4bUEeUuc5pIEyZYAZ45Xnxe5IuupxEqHS+hUhSLIimK1EMw==
 
 eslint-plugin-react@^7.14.2:
   version "7.14.3"

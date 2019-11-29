@@ -10,4 +10,4 @@ If you're having issues with sku please contact the _#sku-support_ channel for h
   - `webpack` or any `webpack` loaders/plugins that sku already provides
   - `storybook`
   - `typescript`
-  - `prettier`, `eslint` and `tslint`
+  - `prettier` and `eslint`

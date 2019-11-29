@@ -119,9 +119,8 @@
     "env-ci": "^4.1.1",
     "escape-string-regexp": "^2.0.0",
     "eslint": "^6.1.0",
-    "eslint-config-seek": "^4.3.1",
+    "eslint-config-seek": "github:seek-oss/eslint-config-seek#add-typescript-support",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react-hooks": "^2.3.0",
     "eval": "^0.1.4",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",
@@ -191,7 +190,6 @@
     "commitlint-config-seek": "^1.0.0",
     "css": "^2.2.4",
     "cz-conventional-changelog": "^3.0.2",
-    
     "git-diff": "^2.0.6",
     "husky": "^3.0.1",
     "jest-puppeteer": "^4.3.0",

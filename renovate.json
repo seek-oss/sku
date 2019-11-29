@@ -47,7 +47,7 @@
     },
     {
       "groupName": "lint packages",
-      "packagePatterns": ["prettier|tslint|eslint"],
+      "packagePatterns": ["prettier|eslint"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },

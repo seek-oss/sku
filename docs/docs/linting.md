@@ -2,7 +2,7 @@
 
 (via [ESLint](http://eslint.org/) and [Prettier](https://github.com/prettier/prettier))
 
-Running `sku lint` will execute the ESLint rules over the code in your `src` directory, depending on the type of file. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek).
+Running `sku lint` will execute the ESLint rules over the code in your `src` directory, depending on the type of file. You can see the ESLint rules defined for sku projects in [eslint-config-seek](https://github.com/seek-oss/eslint-config-seek). Support is provided for both Javascript and Typescript files.
 
 Running `sku format` will format all JavaScript and TypeScript files in your project using [Prettier](https://github.com/prettier/prettier), and fix [ESLint](http://eslint.org/) errors where possible. As changes to formatting are considered non-breaking, please ensure you run `sku format` after upgrading `sku`.
 

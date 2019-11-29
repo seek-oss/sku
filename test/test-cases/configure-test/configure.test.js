@@ -73,12 +73,6 @@ describe('configure', () => {
       );
     });
 
-    it('should not generate tslint config', async () => {
-      await expect(readJsonC(appFolder, 'tslint.json')).rejects.toThrow(
-        /ENOENT: no such file or directory, open \'.*\/tslint\.json\'/,
-      );
-    });
-
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
       expect(ignoreContents.length).toEqual(7);
@@ -138,18 +132,12 @@ describe('configure', () => {
       ]);
     });
 
-    it('should generate tslint config', async () => {
-      const tslintContents = await readJsonC(appFolderTS, 'tslint.json');
-      expect(tslintContents).toMatchSnapshot();
-    });
-
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
       expect(ignoreContents.length).toEqual(9);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`tsconfig.json`);
-      expect(ignoreContents).toContain(`tslint.json`);
       expect(ignoreContents).toContain(`${skuConfig.target}/`);
       expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);
       expect(ignoreContents).toContain(`${skuConfig.playroomTarget}/`);

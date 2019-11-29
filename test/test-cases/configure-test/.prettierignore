@@ -1,13 +1,9 @@
-App/*
-TSApp/*
-
 # managed by sku
-.eslintrc
-.prettierrc
+*.css.js.d.ts
+*.less.d.ts
 coverage/
 foo/bar/
 playroom/foobar/
 report/
 storybook/foobar/
-tsconfig.json
 # end managed by sku

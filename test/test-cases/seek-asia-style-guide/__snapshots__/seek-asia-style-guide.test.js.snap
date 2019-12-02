@@ -28,7 +28,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-a3ccd4e21c1f155b0f35.js"
+          href="/vendors~main-935ff8746ee3234d3eef.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -67,7 +67,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-a3ccd4e21c1f155b0f35.js"
+            src="/vendors~main-935ff8746ee3234d3eef.js"
     >
     </script>
     <script async
@@ -4226,6 +4226,6 @@ html {
   outline: none;
 }
 ,
-  "vendors~main-a3ccd4e21c1f155b0f35.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-935ff8746ee3234d3eef.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

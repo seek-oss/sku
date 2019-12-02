@@ -23,7 +23,7 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/vendors~main-fb83b7359c8a22a90ab7.js"
+          href="/static/vendors~main-82377dc9f8590085df97.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -48,7 +48,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/static/vendors~main-fb83b7359c8a22a90ab7.js"
+            src="/static/vendors~main-82377dc9f8590085df97.js"
     >
     </script>
     <script async

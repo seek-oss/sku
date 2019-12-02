@@ -23,7 +23,7 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b66bb8765ac48a9d72e9.js"
+          href="/vendors~main-e6c627938938f70d122e.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -53,7 +53,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b66bb8765ac48a9d72e9.js"
+            src="/vendors~main-e6c627938938f70d122e.js"
     >
     </script>
     <script async
@@ -99,7 +99,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b66bb8765ac48a9d72e9.js"
+          href="/vendors~main-e6c627938938f70d122e.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -129,7 +129,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b66bb8765ac48a9d72e9.js"
+            src="/vendors~main-e6c627938938f70d122e.js"
     >
     </script>
     <script async
@@ -158,6 +158,6 @@ Object {
 }
 ,
   "runtime-2ae9f933930327de819a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-b66bb8765ac48a9d72e9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-e6c627938938f70d122e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

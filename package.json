@@ -70,7 +70,9 @@
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/plugin-transform-react-constant-elements": "^7.5.0",
     "@babel/plugin-transform-react-inline-elements": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.5.5",
@@ -164,7 +166,7 @@
     "tree-kill": "^1.2.1",
     "tslint": "^5.11.0",
     "tslint-config-seek": "^1.0.0",
-    "typescript": "^3.5.3",
+    "typescript": "^3.7.2",
     "url-loader": "^2.1.0",
     "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.37.0",

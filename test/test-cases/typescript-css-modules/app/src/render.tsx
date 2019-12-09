@@ -2,8 +2,8 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import dedent from 'dedent';
 
-import { Render } from '../../../../../sku-types.d';
-import App from './App';
+import { Render } from '../../../../../sku-types';
+import App from 'src/App';
 
 const skuRender: Render = {
   renderApp: ({ SkuProvider }) =>

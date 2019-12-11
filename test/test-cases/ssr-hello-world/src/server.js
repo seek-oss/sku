@@ -49,6 +49,8 @@ export default () => ({
     res.end();
   },
   onStart: async () => {
-    await writeFile('./started.txt', "Server started, here's your callback");
+    if (process.env.NODE_ENV === 'production') {
+      await writeFile('./started.txt', "Server started, here's your callback");
+    }
   },
 });

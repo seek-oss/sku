@@ -90,7 +90,6 @@
     "@types/jest": "^24.0.16",
     "@types/loadable__component": "^5.10.0",
     "@types/webpack": "^4.32.1",
-    "@typescript-eslint/eslint-plugin": "^2.9.0",
     "autoprefixer": "^9.6.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",

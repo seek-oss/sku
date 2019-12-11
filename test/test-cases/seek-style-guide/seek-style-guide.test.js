@@ -1,3 +1,5 @@
+/* eslint-disable jest/expect-expect */
+/* eslint-disable jest/expect-expect */
 const path = require('path');
 const { promisify } = require('util');
 const rimrafAsync = promisify(require('rimraf'));

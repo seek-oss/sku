@@ -7143,9 +7143,10 @@ eslint-config-prettier@^6.7.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-seek@seek-oss/eslint-config-seek#48c88d829bb:
-  version "0.0.0-development"
-  resolved "https://codeload.github.com/seek-oss/eslint-config-seek/tar.gz/48c88d829bb666e4a8d756e85d3de80f9adadca9"
+eslint-config-seek@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-5.0.0.tgz#d6f1fb4a9f95bf69f2acfcbc4ac86a63cd600503"
+  integrity sha512-iPP7GXRcWqds37chL6Js+pWJNiE0vY9idZSQXYHXCwrMzxG9ZToRSrk61YGbGr3j8MX9sYq0enwhJMvLWPn6qA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.11.0"
     "@typescript-eslint/parser" "^2.11.0"

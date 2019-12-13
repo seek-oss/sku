@@ -81,6 +81,7 @@ describe('seek-style-guide', () => {
 
     it('should start a storybook server', async () => {
       await assertStorybookContent(storybookUrl);
+      expect.assertions(2);
     });
   });
 });

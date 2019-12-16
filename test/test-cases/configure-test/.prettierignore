@@ -1,9 +1,0 @@
-# managed by sku
-*.css.js.d.ts
-*.less.d.ts
-coverage/
-foo/bar/
-playroom/foobar/
-report/
-storybook/foobar/
-# end managed by sku

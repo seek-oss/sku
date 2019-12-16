@@ -116,7 +116,7 @@ describe('typescript-css-modules', () => {
       exitCode = childProcess.exitCode;
     });
 
-    it('should handle tsc and tslint', async () => {
+    it('should handle tsc and eslint', async () => {
       expect(exitCode).toEqual(0);
     });
   });

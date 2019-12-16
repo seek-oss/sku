@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 const path = require('path');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');

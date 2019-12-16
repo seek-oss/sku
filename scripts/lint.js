@@ -3,7 +3,6 @@ const isTypeScript = require('../lib/isTypeScript');
 const esLintCheck = require('../lib/runESLint').check;
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
-const runTSLint = require('../lib/runTSLint');
 const args = require('../config/args').argv;
 const pathsToCheck = args.length > 0 ? args : undefined;
 
@@ -18,8 +17,6 @@ const pathsToCheck = args.length > 0 ? args : undefined;
         pathsToCheck.filter(
           filePath => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
         ).length > 0;
-
-      await runTSLint(pathsToCheck);
 
       if (!hasPaths || pathsIncludeTS) {
         await runTsc();

@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 const path = require('path');
 const { promisify } = require('util');
 const rimrafAsync = promisify(require('rimraf'));
@@ -79,6 +80,7 @@ describe('seek-style-guide', () => {
 
     it('should start a storybook server', async () => {
       await assertStorybookContent(storybookUrl);
+      expect.assertions(2);
     });
   });
 });

@@ -29,7 +29,7 @@
     },
     {
       "groupName": "platform tools",
-      "packagePatterns": ["browserslist|playroom|storybook"],
+      "packagePatterns": ["(browserslist|playroom|storybook)"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
@@ -41,13 +41,15 @@
     },
     {
       "groupName": "test packages",
-      "packagePatterns": ["jest|puppeteer|identity-obj-proxy"],
+      "packagePatterns": [
+        "(testing-library|jest|puppeteer|identity-obj-proxy)"
+      ],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
     {
       "groupName": "lint packages",
-      "packagePatterns": ["prettier|eslint"],
+      "packagePatterns": ["(prettier|eslint)"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },
@@ -60,7 +62,7 @@
     {
       "groupName": "workflow packages",
       "packagePatterns": [
-        "commitlint|commitizen|conventional|husky|lint-staged|semantic-release"
+        "(commitlint|commitizen|conventional|husky|lint-staged|semantic-release)"
       ],
       "enabled": true,
       "schedule": ["before 8am on the first day of the month"]

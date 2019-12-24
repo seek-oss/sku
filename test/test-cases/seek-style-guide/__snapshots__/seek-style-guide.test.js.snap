@@ -3,6 +3,8 @@
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"fs\\",
+  \\"path\\",
   \\"react\\",
   \\"react-dom/server\\"
 ]",
@@ -18,22 +20,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-824852c3ed511bca6cff.css"
+          href="/vendors~main-df1148368013fce769c9.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-2ae9f933930327de819a.js"
+          href="/runtime-0fa5444f4a643d55e2a2.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-0fbdcdd7f219811b90f9.js"
+          href="/vendors~main-201038d4d29072011ddb.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-4a1528fa21326f83f6b7.js"
+          href="/main-3e8c7133f63aa6f3e10c.js"
     >
   </head>
   <body>
@@ -80,25 +82,25 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-2ae9f933930327de819a.js"
+            src="/runtime-0fa5444f4a643d55e2a2.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-0fbdcdd7f219811b90f9.js"
+            src="/vendors~main-201038d4d29072011ddb.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-4a1528fa21326f83f6b7.js"
+            src="/main-3e8c7133f63aa6f3e10c.js"
     >
     </script>
   </body>
 </html>,
-  "main-4a1528fa21326f83f6b7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-2ae9f933930327de819a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0fbdcdd7f219811b90f9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-824852c3ed511bca6cff.css": a,
+  "main-3e8c7133f63aa6f3e10c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0fa5444f4a643d55e2a2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-201038d4d29072011ddb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-df1148368013fce769c9.css": a,
 abbr,
 acronym,
 address,

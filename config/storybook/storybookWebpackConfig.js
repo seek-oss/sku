@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const { paths } = require('../../context');
+const { paths, screenshotWidths } = require('../../context');
 const find = require('lodash/find');
 const webpackMerge = require('webpack-merge');
 const makeWebpackConfig = require('../webpack/webpack.config');
@@ -54,6 +54,8 @@ module.exports = ({ config }, { isDevServer }) => {
           __SKU_SRC_PATHS_7__: JSON.stringify(paths.src[7] || __dirname),
           __SKU_SRC_PATHS_8__: JSON.stringify(paths.src[8] || __dirname),
           __SKU_SRC_PATHS_9__: JSON.stringify(paths.src[9] || __dirname),
+
+          __SKU_SCREENSHOT_WIDTHS__: JSON.stringify(screenshotWidths),
         }),
       ],
     },

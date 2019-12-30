@@ -83,6 +83,10 @@ module.exports = validator.compile({
   storybookTarget: {
     type: 'string',
   },
+  screenshotWidths: {
+    type: 'array',
+    items: [{ type: 'number' }],
+  },
   target: {
     type: 'string',
   },

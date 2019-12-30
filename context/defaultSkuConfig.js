@@ -24,6 +24,7 @@ module.exports = {
   setupTests: null,
   storybookPort: 8081,
   storybookTarget: 'dist-storybook',
+  screenshotWidths: [320, 1200],
   initialPath: null,
   public: 'public',
   publicPath: '/',

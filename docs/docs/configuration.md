@@ -304,6 +304,14 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
+## screenshotWidths
+
+type: `Array<number>`
+
+Default: `[320, 1200]`
+
+Global configuration for Chromatic screenshot widths.
+
 ## playroomComponents
 
 type `string`

@@ -83,6 +83,9 @@ module.exports = validator.compile({
   storybookTarget: {
     type: 'string',
   },
+  provideDefaultChromaticViewports: {
+    type: 'boolean',
+  },
   target: {
     type: 'string',
   },

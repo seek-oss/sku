@@ -304,6 +304,14 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
+## provideDefaultChromaticViewports
+
+type: `boolean`
+
+Default: `true`
+
+Configures whether a default set of viewports (`320` and `1200`) should be provided to all screenshots. If you'd like to manually configure Chromatic per story, set this to `false`.
+
 ## playroomComponents
 
 type `string`

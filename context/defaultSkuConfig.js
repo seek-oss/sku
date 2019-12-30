@@ -24,6 +24,7 @@ module.exports = {
   setupTests: null,
   storybookPort: 8081,
   storybookTarget: 'dist-storybook',
+  provideDefaultChromaticViewports: true,
   initialPath: null,
   public: 'public',
   publicPath: '/',

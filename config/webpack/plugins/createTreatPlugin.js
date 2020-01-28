@@ -4,8 +4,10 @@ const { supportedBrowsers } = require('../../../context');
 
 const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
 
-module.exports = ({ target, isProductionBuild, internalJs }) => {
-  const localIdentName = `${
+module.exports = ({ target, isProductionBuild, internalJs, libraryName }) => {
+  const libraryPrefix = libraryName ? `${libraryName}_` : '';
+
+  const localIdentName = `${libraryPrefix}${
     isProductionBuild ? '' : 'BRAID__[name]-[local]_'
   }[hash:base64:5]`;
 

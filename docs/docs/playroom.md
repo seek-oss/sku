@@ -10,12 +10,13 @@ module.exports = {
 };
 ```
 
-You can also provide themes and a frame component via the following options:
+You can also provide themes, snippets and a frame component via the following options:
 
 ```js
 module.exports = {
   playroomThemes: './src/themes.js',
-  playroomFrameComponent: './src/playroom/FrameComponent.js',
+  playroomSnippets: './playroom/snippets.js',
+  playroomFrameComponent: './playroom/FrameComponent.js',
 };
 ```
 

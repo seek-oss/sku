@@ -40,6 +40,7 @@ module.exports = {
   playroomWidths: [320, 768, 1024],
   playroomComponents: `src/components/index.${isTypeScript ? 'ts' : 'js'}`,
   playroomThemes: null,
+  playroomSnippets: null,
   playroomFrameComponent: null,
   playroomTitle: null,
   playroomPort: 8082,

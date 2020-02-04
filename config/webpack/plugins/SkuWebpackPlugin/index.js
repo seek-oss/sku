@@ -29,6 +29,7 @@ class SkuWebpackPlugin {
       hot: false,
       generateCSSTypes: false,
       supportedBrowsers: defaultSupportedBrowsers,
+      compilePackages: [],
       ...options,
     };
     this.compilePackages = uniq([
@@ -134,12 +135,12 @@ class SkuWebpackPlugin {
 
     compiler.options.module.rules.push(...rules);
 
-    if (compiler.options.resolve.extensions.includes('ts')) {
-      compiler.options.resolve.extensions.push('ts');
+    if (!compiler.options.resolve.extensions.includes('.ts')) {
+      compiler.options.resolve.extensions.push('.ts');
     }
 
-    if (compiler.options.resolve.extensions.includes('tsx')) {
-      compiler.options.resolve.extensions.push('tsx');
+    if (!compiler.options.resolve.extensions.includes('.tsx')) {
+      compiler.options.resolve.extensions.push('.tsx');
     }
 
     createTreatPlugin({

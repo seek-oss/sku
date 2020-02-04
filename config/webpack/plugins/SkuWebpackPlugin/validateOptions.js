@@ -7,7 +7,7 @@ const { emojify } = require('node-emoji');
 const validator = new Validator();
 
 const exitWithErrors = errors => {
-  console.log(bold(underline(red('Errors in sku config:'))));
+  console.log(bold(underline(red('SkuWebpackPlugin: Invalid options'))));
   errors.forEach(error => {
     console.log(yellow(emojify(error)));
   });
@@ -62,7 +62,7 @@ module.exports = options => {
   Object.keys(options)
     .filter(key => !availableOptions.includes(key))
     .forEach(key => {
-      const unknownMessage = `SkuWebpackPlugin: Unknown option '${bold(key)}'.`;
+      const unknownMessage = `Unknown option '${bold(key)}'.`;
       const suggestedKey = didYouMean(key, availableOptions);
       const suggestedMessage = suggestedKey
         ? ` Did you mean '${bold(suggestedKey)}'?`

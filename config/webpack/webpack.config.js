@@ -232,7 +232,7 @@ const makeWebpackConfig = ({
           supportedBrowsers,
           mode: webpackMode,
           libraryName,
-          generateLessTypes: isTypeScript,
+          generateCSSTypes: isTypeScript,
           MiniCssExtractPlugin,
         }),
       ],

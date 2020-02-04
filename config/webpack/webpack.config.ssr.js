@@ -173,7 +173,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          generateLessTypes: isTypeScript,
+          generateCSSTypes: isTypeScript,
           supportedBrowsers,
           mode: webpackMode,
           MiniCssExtractPlugin,

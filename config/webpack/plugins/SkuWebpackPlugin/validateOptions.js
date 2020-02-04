@@ -44,7 +44,7 @@ const schema = {
     type: 'string',
     optional: true,
   },
-  generateLessTypes: {
+  generateCSSTypes: {
     type: 'boolean',
     optional: true,
   },

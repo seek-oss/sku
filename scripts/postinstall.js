@@ -13,10 +13,11 @@ const packageJsonExists = fs.existsSync(packageJson);
 
 // Don't run configure if CWD is not a project (e.g. npx)
 if (packageJsonExists) {
-  const packageName = require(packageJson).name;
+  const { name: packageName, sku = true } = require(packageJson);
 
   // Don't run configure script on sku itself
-  if (packageName !== 'sku') {
+  // Also ignore projects that are disabling sku core features through `sku: false`
+  if (packageName !== 'sku' && sku) {
     const configure = require('../lib/configure');
 
     configure();

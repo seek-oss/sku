@@ -5,6 +5,7 @@ const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
+const defaultCompilePackages = require('./defaultCompilePackages');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
@@ -64,13 +65,7 @@ const publicPath = skuConfig.publicPath.endsWith('/')
 
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
-  compilePackages: [
-    'sku',
-    'seek-style-guide',
-    'seek-asia-style-guide',
-    'braid-design-system',
-    ...skuConfig.compilePackages,
-  ],
+  compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
   renderEntry: getPathFromCwd(skuConfig.renderEntry),
   libraryEntry: skuConfig.libraryEntry

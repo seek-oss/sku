@@ -1,18 +1,22 @@
-const { supportedBrowsers, displayNamesProd } = require('../../context');
 const { cwd } = require('../../lib/cwd');
 
-const browserEnvOptions = {
-  modules: false,
-  targets: supportedBrowsers,
-};
+module.exports = ({
+  target,
+  lang = 'js',
+  supportedBrowsers,
+  displayNamesProd = false,
+}) => {
+  const browserEnvOptions = {
+    modules: false,
+    targets: supportedBrowsers,
+  };
 
-const nodeEnvOptions = {
-  targets: {
-    node: 'current',
-  },
-};
+  const nodeEnvOptions = {
+    targets: {
+      node: 'current',
+    },
+  };
 
-module.exports = ({ target, lang = 'js' }) => {
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
 

@@ -326,6 +326,12 @@ type `string`
 
 The file that exports all themes available within Playroom.
 
+## playroomSnippets
+
+type `string`
+
+The file that exports all snippets available to Playroom.
+
 ## playroomFrameComponent
 
 type `string`

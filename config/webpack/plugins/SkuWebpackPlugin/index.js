@@ -16,21 +16,14 @@ const {
 } = require('../../utils');
 const createTreatPlugin = require('../createTreatPlugin');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
+const validateOptions = require('./validateOptions');
 
 const isCI = process.env.CI === 'true';
 
 class SkuWebpackPlugin {
   constructor(options = {}) {
-    /*
-      target: 'node' | 'browser'
-      hot: boolean
-      include: string[]
-      compilePackages: string[]
-      libraryName: string
-      generateLessTypes: boolean
-      supportedBrowsers: Browserslist query
-      MiniCssExtractPlugin: MiniCssExtractPlugin
-    */
+    validateOptions(options);
+
     this.options = {
       include: [],
       hot: false,

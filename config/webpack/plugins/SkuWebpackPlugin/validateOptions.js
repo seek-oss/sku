@@ -19,6 +19,10 @@ const schema = {
     type: 'enum',
     values: ['node', 'browser'],
   },
+  mode: {
+    type: 'enum',
+    values: ['development', 'production'],
+  },
   MiniCssExtractPlugin: {
     type: 'any',
   },

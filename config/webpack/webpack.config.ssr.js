@@ -175,7 +175,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           compilePackages: paths.compilePackages,
           generateLessTypes: isTypeScript,
           supportedBrowsers,
-          isProductionBuild,
+          mode: webpackMode,
           MiniCssExtractPlugin,
         }),
       ].concat(
@@ -254,7 +254,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           include: internalInclude,
           compilePackages: paths.compilePackages,
           supportedBrowsers,
-          isProductionBuild,
+          mode: webpackMode,
           MiniCssExtractPlugin,
         }),
       ].concat(

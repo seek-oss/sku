@@ -48,10 +48,12 @@ class SkuWebpackPlugin {
       hot,
       generateCSSTypes,
       supportedBrowsers,
-      isProductionBuild,
+      mode,
       libraryName,
       MiniCssExtractPlugin,
     } = this.options;
+
+    const isProductionBuild = mode === 'production';
 
     const rules = [
       {

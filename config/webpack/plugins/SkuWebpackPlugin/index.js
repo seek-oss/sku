@@ -150,6 +150,7 @@ class SkuWebpackPlugin {
       isProductionBuild,
       include: this.include,
       libraryName,
+      supportedBrowsers,
       MiniCssExtractPlugin,
     }).apply(compiler);
   }

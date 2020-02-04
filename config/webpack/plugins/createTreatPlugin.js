@@ -1,5 +1,4 @@
 const TreatPlugin = require('treat/webpack-plugin');
-const { supportedBrowsers } = require('../../../context');
 
 const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
 
@@ -8,6 +7,7 @@ module.exports = ({
   isProductionBuild,
   include,
   libraryName,
+  supportedBrowsers,
   MiniCssExtractPlugin,
 }) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';

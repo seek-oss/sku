@@ -83,6 +83,9 @@ const paths = {
   playroomThemes: skuConfig.playroomThemes
     ? getPathFromCwd(skuConfig.playroomThemes)
     : null,
+  playroomSnippets: skuConfig.playroomSnippets
+    ? getPathFromCwd(skuConfig.playroomSnippets)
+    : null,
   playroomFrameComponent: skuConfig.playroomFrameComponent
     ? getPathFromCwd(skuConfig.playroomFrameComponent)
     : null,
@@ -121,6 +124,5 @@ module.exports = {
     port: skuConfig.playroomPort,
     widths: skuConfig.playroomWidths,
     title: skuConfig.playroomTitle,
-    themes: skuConfig.playroomThemes,
   },
 };

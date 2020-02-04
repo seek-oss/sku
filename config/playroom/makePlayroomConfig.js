@@ -30,6 +30,7 @@ module.exports = () => ({
   outputPath: paths.playroomTarget,
   components: paths.playroomComponents,
   themes: paths.playroomThemes,
+  snippets: paths.playroomSnippets,
   frameComponent: paths.playroomFrameComponent,
   openBrowser: process.env.OPEN_TAB !== 'false',
   ...playroom,

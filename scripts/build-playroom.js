@@ -1,3 +1,6 @@
+// First, ensure the build is running in production mode
+process.env.NODE_ENV = 'production';
+
 const playroom = require('playroom/lib');
 const { cwd } = require('../lib/cwd');
 const makePlayroomConfig = require('../config/playroom/makePlayroomConfig');

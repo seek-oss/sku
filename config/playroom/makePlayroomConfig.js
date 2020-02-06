@@ -38,5 +38,9 @@ module.exports = () => ({
     module: clientWebpackConfig.module,
     resolve: clientWebpackConfig.resolve,
     plugins: clientWebpackConfig.plugins,
+    optimization: {
+      ...clientWebpackConfig.optimization,
+      concatenateModules: false,
+    },
   }),
 });

@@ -50,6 +50,7 @@ class SkuWebpackPlugin {
       supportedBrowsers,
       mode,
       libraryName,
+      displayNamesProd,
       MiniCssExtractPlugin,
     } = this.options;
 
@@ -59,12 +60,22 @@ class SkuWebpackPlugin {
       {
         test: TYPESCRIPT,
         include: this.include,
-        use: makeJsLoaders({ target, lang: 'ts', supportedBrowsers }),
+        use: makeJsLoaders({
+          target,
+          lang: 'ts',
+          supportedBrowsers,
+          displayNamesProd,
+        }),
       },
       {
         test: JAVASCRIPT,
         include: this.include,
-        use: makeJsLoaders({ target, lang: 'js', supportedBrowsers }),
+        use: makeJsLoaders({
+          target,
+          lang: 'js',
+          supportedBrowsers,
+          displayNamesProd,
+        }),
       },
       {
         test: CSS_IN_JS,

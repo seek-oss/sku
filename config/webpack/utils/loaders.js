@@ -6,14 +6,10 @@
 const packageNameToClassPrefix = packageName =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
-const makeJsLoaders = ({ target, lang, supportedBrowsers }) => [
+const makeJsLoaders = options => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')({
-      target,
-      lang,
-      supportedBrowsers,
-    }),
+    options: require('../../babel/babelConfig')(options),
   },
 ];
 

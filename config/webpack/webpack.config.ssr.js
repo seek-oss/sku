@@ -21,6 +21,7 @@ const {
   polyfills,
   sourceMapsProd,
   supportedBrowsers,
+  displayNamesProd,
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
@@ -176,6 +177,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           generateCSSTypes: isTypeScript,
           supportedBrowsers,
           mode: webpackMode,
+          displayNamesProd,
           MiniCssExtractPlugin,
         }),
       ].concat(
@@ -255,6 +257,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           compilePackages: paths.compilePackages,
           supportedBrowsers,
           mode: webpackMode,
+          displayNamesProd,
           MiniCssExtractPlugin,
         }),
       ].concat(

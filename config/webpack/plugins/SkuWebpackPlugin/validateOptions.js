@@ -53,6 +53,10 @@ const schema = {
     items: 'string',
     optional: true,
   },
+  displayNamesProd: {
+    type: 'boolean',
+    optional: true,
+  },
 };
 
 const validate = validator.compile(schema);

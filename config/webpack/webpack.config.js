@@ -28,6 +28,7 @@ const {
   libraryName,
   sourceMapsProd,
   supportedBrowsers,
+  displayNamesProd,
 } = config;
 
 // port is only required for dev builds
@@ -233,6 +234,7 @@ const makeWebpackConfig = ({
           mode: webpackMode,
           libraryName,
           generateCSSTypes: isTypeScript,
+          displayNamesProd,
           MiniCssExtractPlugin,
         }),
       ],
@@ -285,6 +287,7 @@ const makeWebpackConfig = ({
           supportedBrowsers,
           mode: webpackMode,
           libraryName,
+          displayNamesProd,
           MiniCssExtractPlugin,
         }),
       ],

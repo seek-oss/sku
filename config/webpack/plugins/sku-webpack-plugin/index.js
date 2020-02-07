@@ -48,7 +48,7 @@ class SkuWebpackPlugin {
       hot,
       generateCSSTypes,
       supportedBrowsers,
-      mode,
+      mode = compiler.options.mode,
       libraryName,
       displayNamesProd,
       MiniCssExtractPlugin,

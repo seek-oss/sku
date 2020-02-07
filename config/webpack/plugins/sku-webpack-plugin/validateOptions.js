@@ -19,12 +19,13 @@ const schema = {
     type: 'enum',
     values: ['node', 'browser'],
   },
+  MiniCssExtractPlugin: {
+    type: 'any',
+  },
   mode: {
     type: 'enum',
     values: ['development', 'production'],
-  },
-  MiniCssExtractPlugin: {
-    type: 'any',
+    optional: true,
   },
   hot: {
     type: 'boolean',

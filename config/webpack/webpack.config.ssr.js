@@ -6,7 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const SkuWebpackPlugin = require('./plugins/SkuWebpackPlugin');
+const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');

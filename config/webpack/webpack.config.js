@@ -9,7 +9,7 @@ const args = require('../args');
 const config = require('../../context');
 const createHtmlRenderPlugin = require('./plugins/createHtmlRenderPlugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const SkuWebpackPlugin = require('./plugins/SkuWebpackPlugin');
+const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');

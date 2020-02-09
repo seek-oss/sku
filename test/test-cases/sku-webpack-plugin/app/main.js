@@ -1,7 +1,7 @@
 import 'braid-design-system/reset';
-import theme from 'braid-design-system/themes/seekAnz';
 import React from 'react';
 import ReactDom from 'react-dom';
+import theme from 'braid-design-system/themes/seekAnz';
 
 import { BraidProvider, Card, Text } from 'braid-design-system';
 

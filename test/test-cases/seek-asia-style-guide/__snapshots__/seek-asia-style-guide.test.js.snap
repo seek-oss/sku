@@ -18,22 +18,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-829df93cc376a61b44a0.css"
+          href="/vendors~main-f49de757d4c95ed97c70.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-2ae9f933930327de819a.js"
+          href="/runtime-c578e31f9b7fceb502e4.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-935ff8746ee3234d3eef.js"
+          href="/vendors~main-d4896f305065a6c9911a.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-cc66664da434334f32d4.js"
+          href="/main-dc6f9446ba461304b9bd.js"
     >
   </head>
   <body>
@@ -62,24 +62,25 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-2ae9f933930327de819a.js"
+            src="/runtime-c578e31f9b7fceb502e4.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-935ff8746ee3234d3eef.js"
+            src="/vendors~main-d4896f305065a6c9911a.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-cc66664da434334f32d4.js"
+            src="/main-dc6f9446ba461304b9bd.js"
     >
     </script>
   </body>
 </html>,
-  "main-cc66664da434334f32d4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-2ae9f933930327de819a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-829df93cc376a61b44a0.css": a,
+  "main-dc6f9446ba461304b9bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-c578e31f9b7fceb502e4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-d4896f305065a6c9911a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-f49de757d4c95ed97c70.css": a,
 abbr,
 acronym,
 address,
@@ -802,7 +803,6 @@ html {
   display: inline-block;
   text-decoration: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   text-align: center;
@@ -899,6 +899,10 @@ html {
   .IPGF0fW:hover {
     background-color: #247ea4;
     border-color: #298eb9;
+  }
+}
+@media (hover: hover) {
+  .IPGF0fW:hover {
     background-color: #94c9e0;
     border-color: #94c9e0;
   }
@@ -923,6 +927,10 @@ html {
   ._22TrOgh:hover {
     background-color: #c7e8f7;
     border-color: #ddf1fa;
+  }
+}
+@media (hover: hover) {
+  ._22TrOgh:hover {
     background-color: #eef8fc;
     border-color: #eef8fc;
   }
@@ -992,8 +1000,13 @@ html {
   ._3ifNFRA:hover {
     background-color: transparent;
     border-color: currentColor;
+  }
+}
+@media (hover: hover) {
+  ._3ifNFRA:hover {
     background-color: hsla(0, 0%, 100%, 0.1);
     color: #fff;
+    border-color: currentColor;
   }
 }
 ._3ifNFRA.cOlKkD5 {
@@ -1005,8 +1018,13 @@ html {
   ._3ifNFRA.cOlKkD5:hover {
     background-color: transparent;
     border-color: currentColor;
+  }
+}
+@media (hover: hover) {
+  ._3ifNFRA.cOlKkD5:hover {
     background-color: rgba(14, 126, 139, 0.1);
     color: #0e7e8b;
+    border-color: currentColor;
   }
 }
 ._3ifNFRA._3LnRCbs {
@@ -1018,8 +1036,13 @@ html {
   ._3ifNFRA._3LnRCbs:hover {
     background-color: transparent;
     border-color: currentColor;
+  }
+}
+@media (hover: hover) {
+  ._3ifNFRA._3LnRCbs:hover {
     background-color: rgba(27, 149, 62, 0.1);
     color: #1b953e;
+    border-color: currentColor;
   }
 }
 ._3ifNFRA._1Ll5F7H {
@@ -1288,7 +1311,6 @@ html {
   line-height: 24px;
   height: auto;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -3346,8 +3368,10 @@ html {
 ._2dhgcuf {
   grid-area: labels;
 }
-._26wh4Vy ._2dhgcuf,
 ._1aVaS3w:checked + ._3G24QPw ._2dhgcuf {
+  font-weight: 600;
+}
+._26wh4Vy ._2dhgcuf {
   font-weight: 600;
 }
 .thkUqmK ._2dhgcuf {
@@ -3532,8 +3556,8 @@ html {
       grid-auto-flow: column;
       grid-column-gap: 16px;
       margin: 0;
+      padding: 0;
     }
-    ._3evzIMa,
     ._3evzIMa > * {
       padding: 0;
     }
@@ -3777,7 +3801,10 @@ html {
 ._1qcg95A:not([readonly]):not([disabled]):focus::-moz-focus-inner {
   border: 0;
 }
-._3ZGwcbV ._1qcg95A,
+._3ZGwcbV ._1qcg95A {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px #ff4b4b;
+}
 ._3ZGwcbV ._1qcg95A:not([readonly]):not([disabled]):focus {
   border-color: transparent;
   box-shadow: 0 0 0 1px #ff4b4b;
@@ -3891,7 +3918,10 @@ html {
   color: #ccc;
   cursor: not-allowed;
 }
-._2TAgs75 ._1QkQI-T,
+._2TAgs75 ._1QkQI-T {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px #e60278;
+}
 ._2TAgs75 ._1QkQI-T:not([readonly]):not([disabled]):focus {
   border-color: transparent;
   box-shadow: 0 0 0 1px #e60278;
@@ -4025,7 +4055,6 @@ html {
   line-height: inherit;
   padding-bottom: 0;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -4140,7 +4169,10 @@ html {
 ._aOXPmY:not([readonly]):not([disabled]):focus::-moz-focus-inner {
   border: 0;
 }
-._2Ezm7pZ ._aOXPmY,
+._2Ezm7pZ ._aOXPmY {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px #e60278;
+}
 ._2Ezm7pZ ._aOXPmY:not([readonly]):not([disabled]):focus {
   border-color: transparent;
   box-shadow: 0 0 0 1px #e60278;
@@ -4226,6 +4258,5 @@ html {
   outline: none;
 }
 ,
-  "vendors~main-935ff8746ee3234d3eef.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

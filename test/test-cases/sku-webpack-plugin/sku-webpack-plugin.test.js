@@ -1,6 +1,5 @@
 const path = require('path');
 const { promisify } = require('util');
-const spawn = require('../../../lib/gracefulSpawn');
 const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
@@ -8,7 +7,7 @@ const { getAppSnapshot } = require('../../utils/appSnapshot');
 const waitForUrls = require('../../utils/waitForUrls');
 const startAssetServer = require('../../utils/assetServer');
 const { getPathFromCwd } = require('../../../lib/cwd');
-const { runBin } = require('../../../lib/runBin');
+const { runBin, startBin } = require('../../../lib/runBin');
 
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
@@ -61,8 +60,12 @@ describe('sku-webpack-plugin', () => {
     let process;
 
     beforeAll(async () => {
-      process = spawn('webpack-dev-server', ['--mode development'], {
-        cwd: appDir,
+      process = startBin({
+        packageName: 'webpack-dev-server',
+        args: ['--mode development'],
+        options: {
+          cwd: appDir,
+        },
       });
 
       await waitForUrls(devServerUrl);
@@ -84,9 +87,10 @@ describe('sku-webpack-plugin', () => {
     beforeAll(async () => {
       await runBin({
         packageName: 'webpack-cli',
-        args: ['--mode production'],
+        args: ['--mode="production"'],
         options: {
           cwd: appDir,
+          stdio: 'inherit',
         },
       });
 

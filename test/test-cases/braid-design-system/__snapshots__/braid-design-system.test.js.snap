@@ -18,7 +18,7 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-0b3852a39bacf4334387.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -151,7 +151,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-0b3852a39bacf4334387.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
@@ -214,7 +214,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-0b3852a39bacf4334387.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -347,7 +347,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-0b3852a39bacf4334387.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
@@ -368,7 +368,7 @@ Object {
   </body>
 </html>,
   "main-c52e5a1a50aa9ca2cfde.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-0b3852a39bacf4334387.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-090469d642b7ffae1a30.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -386,7 +386,7 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-0b3852a39bacf4334387.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
@@ -519,7 +519,7 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-0b3852a39bacf4334387.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
@@ -1670,8 +1670,8 @@ Object {
 }
 ,
   "themes-jobStreet-f27b49009716af1506b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-c12871499940805cead1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-ea017f4e152e4c936aeb.css": .FYwKg {
+  "themes-jobStreetClassic-827cf45c927300e30cee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-be8f7b4982ee36d42a52.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -2105,10 +2105,10 @@ Object {
 ._1QEQt_2oR {
   color: #1c3f94;
 }
-._1QEQt_2oR:focus {
+._1QEQt_2oR:hover {
   color: #142d69;
 }
-._1QEQt_2oR:hover {
+._1QEQt_2oR:focus {
   color: #142d69;
 }
 ._3vlP__2oR {

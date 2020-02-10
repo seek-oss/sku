@@ -13,10 +13,17 @@ const packageJsonExists = fs.existsSync(packageJson);
 
 // Don't run configure if CWD is not a project (e.g. npx)
 if (packageJsonExists) {
-  const packageName = require(packageJson).name;
+  const {
+    name: packageName,
+    skuSkipPostInstall = false,
+    skuSkipPostinstall = false,
+  } = require(packageJson);
+
+  const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
 
   // Don't run configure script on sku itself
-  if (packageName !== 'sku') {
+  // Also ignore projects that are opting out of sku's postinstall script
+  if (packageName !== 'sku' && !skipPostInstall) {
     const configure = require('../lib/configure');
 
     configure();

@@ -13,27 +13,27 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-858b5c41dffd3a90f507.css"
+          href="/themes-jobStreet-ba13a22abcf0ef29a9ea.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-f3f94c3f6149ca0ebdb6.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-797ae78de7ed6419ef3d.js"
+          href="/vendors~main-b23205b45d989653a744.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-de2a9e1232dbaf03bc27.js"
+          href="/main-c52e5a1a50aa9ca2cfde.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-a1c2a0f51af0ee93d8a9.js"
+          href="/themes-jobStreet-f27b49009716af1506b6.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -151,22 +151,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-f3f94c3f6149ca0ebdb6.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-797ae78de7ed6419ef3d.js"
+            src="/vendors~main-b23205b45d989653a744.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-de2a9e1232dbaf03bc27.js"
+            src="/main-c52e5a1a50aa9ca2cfde.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-a1c2a0f51af0ee93d8a9.js"
+            src="/themes-jobStreet-f27b49009716af1506b6.js"
     >
     </script>
   </body>
@@ -209,27 +209,27 @@ Object {
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-858b5c41dffd3a90f507.css"
+          href="/themes-jobStreet-ba13a22abcf0ef29a9ea.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-f3f94c3f6149ca0ebdb6.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-797ae78de7ed6419ef3d.js"
+          href="/vendors~main-b23205b45d989653a744.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-de2a9e1232dbaf03bc27.js"
+          href="/main-c52e5a1a50aa9ca2cfde.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-a1c2a0f51af0ee93d8a9.js"
+          href="/themes-jobStreet-f27b49009716af1506b6.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -347,28 +347,28 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-f3f94c3f6149ca0ebdb6.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-797ae78de7ed6419ef3d.js"
+            src="/vendors~main-b23205b45d989653a744.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-de2a9e1232dbaf03bc27.js"
+            src="/main-c52e5a1a50aa9ca2cfde.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-a1c2a0f51af0ee93d8a9.js"
+            src="/themes-jobStreet-f27b49009716af1506b6.js"
     >
     </script>
   </body>
 </html>,
-  "main-de2a9e1232dbaf03bc27.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-f3f94c3f6149ca0ebdb6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c52e5a1a50aa9ca2cfde.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-090469d642b7ffae1a30.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -381,27 +381,27 @@ Object {
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/themes-seekAnz-bec6ea274fac42e50650.css"
+          href="/themes-seekAnz-b3bd3435effbe96237b0.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-f3f94c3f6149ca0ebdb6.js"
+          href="/runtime-090469d642b7ffae1a30.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-797ae78de7ed6419ef3d.js"
+          href="/vendors~main-b23205b45d989653a744.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-de2a9e1232dbaf03bc27.js"
+          href="/main-c52e5a1a50aa9ca2cfde.js"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/themes-seekAnz-5debd328b9da4e9a26b2.js"
+          href="/themes-seekAnz-8f4db8da3d530e3b2aea.js"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -519,27 +519,27 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-f3f94c3f6149ca0ebdb6.js"
+            src="/runtime-090469d642b7ffae1a30.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-797ae78de7ed6419ef3d.js"
+            src="/vendors~main-b23205b45d989653a744.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-de2a9e1232dbaf03bc27.js"
+            src="/main-c52e5a1a50aa9ca2cfde.js"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/themes-seekAnz-5debd328b9da4e9a26b2.js"
+            src="/themes-seekAnz-8f4db8da3d530e3b2aea.js"
     >
     </script>
   </body>
 </html>,
-  "themes-jobStreet-858b5c41dffd3a90f507.css": .FYwKg {
+  "themes-jobStreet-ba13a22abcf0ef29a9ea.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -726,15 +726,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -771,7 +774,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -1667,8 +1669,9 @@ Object {
   display: block;
 }
 ,
-  "themes-jobStreet-a1c2a0f51af0ee93d8a9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-d5f28c03efd378bfca2f.css": .FYwKg {
+  "themes-jobStreet-f27b49009716af1506b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-827cf45c927300e30cee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-be8f7b4982ee36d42a52.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1855,15 +1858,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -1900,7 +1906,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -2100,8 +2105,10 @@ Object {
 ._1QEQt_2oR {
   color: #1c3f94;
 }
-._1QEQt_2oR:focus,
 ._1QEQt_2oR:hover {
+  color: #142d69;
+}
+._1QEQt_2oR:focus {
   color: #142d69;
 }
 ._3vlP__2oR {
@@ -2799,8 +2806,8 @@ Object {
   display: block;
 }
 ,
-  "themes-jobStreetClassic-ea02164476317f301291.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb-6540b47693d60a552a6f.css": .FYwKg {
+  "themes-jobsDb-37277b3b5a6e6485f1cb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-fae05393673b927c43a4.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -2987,15 +2994,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -3032,7 +3042,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -3924,8 +3933,7 @@ Object {
   display: block;
 }
 ,
-  "themes-jobsDb-f5aaf8e27b48b6816925.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDbRebrand-685ba221cdbdc214da0e.css": .FYwKg {
+  "themes-jobsDbRebrand-693dd8d90f430ee84851.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -4112,15 +4120,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -4157,7 +4168,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -5052,9 +5062,9 @@ Object {
   display: block;
 }
 ,
-  "themes-jobsDbRebrand-bdfaecc4c0b7477be47a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-5debd328b9da4e9a26b2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-bec6ea274fac42e50650.css": .FYwKg {
+  "themes-jobsDbRebrand-6fa51fd8e37a84930717.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-8f4db8da3d530e3b2aea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-b3bd3435effbe96237b0.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -5241,15 +5251,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -5286,7 +5299,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -6161,8 +6173,8 @@ Object {
   display: block;
 }
 ,
-  "themes-seekBusiness-156ec888cf2dcfeea528.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekBusiness-ee259534d54e29285ddf.css": .FYwKg {
+  "themes-seekBusiness-03e77e9a8dbcc74e96a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekBusiness-bdb9a5253226bb0d0343.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -6349,15 +6361,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -6394,7 +6409,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -7269,8 +7283,8 @@ Object {
   display: block;
 }
 ,
-  "themes-wireframe-43f4db86c1e32d99f409.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-wireframe-95d42f06c6b86dac61d7.css": .FYwKg {
+  "themes-wireframe-59fed23d642152dc4abc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-ddca525c76f499148a91.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7457,15 +7471,18 @@ Object {
 }
 ._1N9cL {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt,
-._3HWgs:focus + * > .q3uRq > .Jx54Q,
+._3HWgs:checked + * > .q3uRq > ._2Cszt {
+  opacity: 1;
+}
+._3HWgs:focus + * > .q3uRq > .Jx54Q {
+  opacity: 1;
+}
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -7502,7 +7519,6 @@ Object {
 }
 ._3KscY {
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
@@ -8376,7 +8392,7 @@ Object {
   display: block;
 }
 ,
-  "vendors~main-797ae78de7ed6419ef3d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-b23205b45d989653a744.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

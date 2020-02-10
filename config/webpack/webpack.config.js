@@ -9,11 +9,12 @@ const args = require('../args');
 const config = require('../../context');
 const createHtmlRenderPlugin = require('./plugins/createHtmlRenderPlugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const createTreatPlugin = require('./plugins/createTreatPlugin');
+const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
+const isTypeScript = require('../../lib/isTypeScript');
 
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
@@ -27,6 +28,7 @@ const {
   libraryName,
   sourceMapsProd,
   supportedBrowsers,
+  displayNamesProd,
 } = config;
 
 // port is only required for dev builds
@@ -35,7 +37,8 @@ const makeWebpackConfig = ({
   port = 0,
   isDevServer = false,
 } = {}) => {
-  const { isProductionBuild } = utils;
+  const isProductionBuild = process.env.NODE_ENV === 'production';
+
   const webpackMode = isProductionBuild ? 'production' : 'development';
   const shouldRenderHtml = () => {
     if (isIntegration) {
@@ -94,11 +97,7 @@ const makeWebpackConfig = ({
     ? createEntry(paths.libraryEntry)
     : createEntry(skuClientEntry);
 
-  const internalJs = [
-    path.join(__dirname, '../../entry'),
-    ...paths.src,
-    ...paths.compilePackages.map(utils.resolvePackage),
-  ];
+  const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
   const getFileMask = ({ isMainChunk }) => {
     if (isIntegration) {
@@ -172,23 +171,14 @@ const makeWebpackConfig = ({
       },
       module: {
         rules: [
-          {
-            test: /(?!\.css)\.(ts|tsx)$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' }),
-          },
-          {
-            test: /(?!\.css)\.js$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser' }),
-          },
-          ...(isDevServer
+          ...(isDevServer || isIntegration
             ? []
             : [
                 {
-                  test: /(?!\.css)\.js$/,
+                  test: utils.JAVASCRIPT,
                   exclude: [
-                    internalJs,
+                    internalInclude,
+                    ...paths.compilePackages.map(utils.resolvePackage),
 
                     // Playroom source is managed by its own webpack config
                     path.dirname(require.resolve('playroom/package.json')),
@@ -214,16 +204,6 @@ const makeWebpackConfig = ({
                 },
               ]),
           { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
-          {
-            test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ js: true, hot: isDevServer }),
-          },
-          { test: /\.less$/, oneOf: utils.makeCssOneOf({ hot: isDevServer }) },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders(),
-          },
-          { test: /\.svg$/, use: utils.makeSvgLoaders() },
         ],
       },
       plugins: [
@@ -245,11 +225,17 @@ const makeWebpackConfig = ({
           chunkFilename: cssChunkFileMask,
         }),
         new webpack.HashedModuleIdsPlugin(),
-        createTreatPlugin({
+        new SkuWebpackPlugin({
           target: 'browser',
-          isProductionBuild,
-          internalJs,
+          hot: isDevServer,
+          include: internalInclude,
+          compilePackages: paths.compilePackages,
+          supportedBrowsers,
+          mode: webpackMode,
           libraryName,
+          generateCSSTypes: isTypeScript,
+          displayNamesProd,
+          MiniCssExtractPlugin,
         }),
       ],
     },
@@ -283,32 +269,7 @@ const makeWebpackConfig = ({
       },
       module: {
         rules: [
-          {
-            test: /(?!\.css)\.(ts|tsx)$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' }),
-          },
-          {
-            test: /(?!\.css)\.js$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node' }),
-          },
           { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
-          {
-            test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ server: true, js: true }),
-          },
-          {
-            test: /\.less$/,
-            oneOf: utils.makeCssOneOf({
-              server: true,
-            }),
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders({ server: true }),
-          },
-          { test: /\.svg$/, use: utils.makeSvgLoaders() },
         ],
       },
       plugins: [
@@ -318,11 +279,16 @@ const makeWebpackConfig = ({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
         }),
-        createTreatPlugin({
+        new SkuWebpackPlugin({
           target: 'node',
-          isProductionBuild,
-          internalJs,
+          hot: isDevServer,
+          include: internalInclude,
+          compilePackages: paths.compilePackages,
+          supportedBrowsers,
+          mode: webpackMode,
           libraryName,
+          displayNamesProd,
+          MiniCssExtractPlugin,
         }),
       ],
     },

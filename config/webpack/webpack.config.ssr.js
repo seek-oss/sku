@@ -6,13 +6,14 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const createTreatPlugin = require('./plugins/createTreatPlugin');
+const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
+const isTypeScript = require('../../lib/isTypeScript');
 const {
   paths,
   env,
@@ -20,10 +21,11 @@ const {
   polyfills,
   sourceMapsProd,
   supportedBrowsers,
+  displayNamesProd,
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
-  const { isProductionBuild } = utils;
+  const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const envVars = lodash
@@ -48,11 +50,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
     .mapKeys((value, key) => `process.env.${key}`)
     .value();
 
-  const internalJs = [
-    path.join(__dirname, '../../entry'),
-    ...paths.src,
-    ...paths.compilePackages.map(utils.resolvePackage),
-  ];
+  const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
   const resolvedPolyfills = polyfills.map(polyfill => {
     return require.resolve(polyfill, { paths: [cwd()] });
@@ -121,23 +119,15 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
       },
       module: {
         rules: [
-          {
-            test: /(?!\.css)\.(ts|tsx)$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser', lang: 'ts' }),
-          },
-          {
-            test: /(?!\.css)\.js$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'browser' }),
-          },
           ...(isDevServer
             ? []
             : [
                 {
-                  test: /(?!\.css)\.js$/,
+                  test: utils.JAVASCRIPT,
                   exclude: [
-                    internalJs,
+                    internalInclude,
+                    ...paths.compilePackages.map(utils.resolvePackage),
+
                     // Prevent running `react-dom` through babel as it's
                     // too large and already meets our browser support policy
                     path.dirname(require.resolve('react-dom/package.json')),
@@ -166,25 +156,6 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
             include: /node_modules/,
             type: 'javascript/auto',
           },
-          {
-            test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({
-              js: true,
-              hot: isDevServer,
-            }),
-          },
-          {
-            test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ hot: isDevServer }),
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders(),
-          },
-          {
-            test: /\.svg$/,
-            use: utils.makeSvgLoaders(),
-          },
         ],
       },
       plugins: [
@@ -198,7 +169,17 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           filename: `${fileMask}.css`,
           chunkFilename: `${fileMask}.css`,
         }),
-        createTreatPlugin({ target: 'browser', isProductionBuild, internalJs }),
+        new SkuWebpackPlugin({
+          target: 'browser',
+          hot: isDevServer,
+          include: internalInclude,
+          compilePackages: paths.compilePackages,
+          generateCSSTypes: isTypeScript,
+          supportedBrowsers,
+          mode: webpackMode,
+          displayNamesProd,
+          MiniCssExtractPlugin,
+        }),
       ].concat(
         isDevServer
           ? [
@@ -257,35 +238,9 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
       module: {
         rules: [
           {
-            test: /(?!\.css)\.(ts|tsx)$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node', lang: 'ts' }),
-          },
-          {
-            test: /(?!\.css)\.js$/,
-            include: internalJs,
-            use: utils.makeJsLoaders({ target: 'node' }),
-          },
-          {
             test: /\.mjs$/,
             include: /node_modules/,
             type: 'javascript/auto',
-          },
-          {
-            test: /\.css\.js$/,
-            oneOf: utils.makeCssOneOf({ server: true, js: true }),
-          },
-          {
-            test: /\.less$/,
-            oneOf: utils.makeCssOneOf({ server: true }),
-          },
-          {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            use: utils.makeImageLoaders({ server: true }),
-          },
-          {
-            test: /\.svg$/,
-            use: utils.makeSvgLoaders(),
           },
         ],
       },
@@ -295,7 +250,16 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
         }),
-        createTreatPlugin({ target: 'node', isProductionBuild, internalJs }),
+        new SkuWebpackPlugin({
+          target: 'node',
+          hot: isDevServer,
+          include: internalInclude,
+          compilePackages: paths.compilePackages,
+          supportedBrowsers,
+          mode: webpackMode,
+          displayNamesProd,
+          MiniCssExtractPlugin,
+        }),
       ].concat(
         isDevServer
           ? [

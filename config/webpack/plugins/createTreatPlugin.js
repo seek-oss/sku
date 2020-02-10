@@ -1,10 +1,15 @@
 const TreatPlugin = require('treat/webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { supportedBrowsers } = require('../../../context');
 
 const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
 
-module.exports = ({ target, isProductionBuild, internalJs, libraryName }) => {
+module.exports = ({
+  target,
+  isProductionBuild,
+  include,
+  libraryName,
+  supportedBrowsers,
+  MiniCssExtractPlugin,
+}) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';
 
   const localIdentName = `${libraryPrefix}${
@@ -31,7 +36,7 @@ module.exports = ({ target, isProductionBuild, internalJs, libraryName }) => {
   return new TreatPlugin({
     test: {
       test: /\.treat\.ts$/,
-      include: internalJs,
+      include,
     },
     outputCSS: target === 'browser',
     outputLoaders: [MiniCssExtractPlugin.loader],

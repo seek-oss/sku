@@ -22,7 +22,7 @@ if (packageJsonExists) {
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
 
   // Don't run configure script on sku itself
-  // Also ignore projects that are disabling sku core features through `sku: false`
+  // Also ignore projects that are opting out of sku's postinstall script
   if (packageName !== 'sku' && !skipPostInstall) {
     const configure = require('../lib/configure');
 

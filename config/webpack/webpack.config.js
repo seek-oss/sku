@@ -207,7 +207,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
+        ...(htmlRenderPlugin ? [htmlRenderPlugin.statsCollectorPlugin] : []),
         ...(renderHtml
           ? [
               new LoadablePlugin({
@@ -273,7 +273,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
+        ...(htmlRenderPlugin ? [htmlRenderPlugin.rendererPlugin] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),

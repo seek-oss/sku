@@ -1,4 +1,5 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
+const memoize = require('memoizee');
 
 const product = require('../../../lib/product');
 const {
@@ -11,12 +12,16 @@ const {
   publicPath,
 } = require('../../../context');
 
+const getClientStats = webpackStats => {
+  return webpackStats.toJson().children.find(({ name }) => name === 'client');
+};
+
+const getCachedClientStats = memoize(getClientStats);
+
 // mapStatsToParams runs once for each render. It's purpose is
 // to forward the client webpack stats to the render function
 const mapStatsToParams = ({ webpackStats }) => {
-  const stats = webpackStats
-    .toJson()
-    .children.find(({ name }) => name === 'client');
+  const stats = getCachedClientStats(webpackStats);
 
   return {
     webpackStats: stats,

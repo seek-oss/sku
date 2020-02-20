@@ -13,7 +13,7 @@ const {
 } = require('../../../context');
 
 const getClientStats = webpackStats => {
-  return webpackStats.toJson();
+  return webpackStats.toJson().children.find(({ name }) => name === 'client');
 };
 
 const getCachedClientStats = memoize(getClientStats);
@@ -68,5 +68,6 @@ module.exports = () => {
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
     transformFilePath: transformOutputPath,
     mapStatsToParams,
+    verbose: false,
   });
 };

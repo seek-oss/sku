@@ -7,7 +7,7 @@ module.exports = {
     const classNames = getClassNames(src);
 
     const cssModule = {};
-    classNames.forEach(className => {
+    classNames.forEach((className) => {
       cssModule[className] = `${fileName}__${className}`;
     });
 

@@ -80,7 +80,7 @@ class SkuWebpackPlugin {
       {
         test: CSS_IN_JS,
         oneOf: this.compilePackages
-          .map(packageName => ({
+          .map((packageName) => ({
             include: resolvePackage(packageName),
             use: makeCssInJsLoaders({
               target,
@@ -111,7 +111,7 @@ class SkuWebpackPlugin {
       {
         test: LESS,
         oneOf: this.compilePackages
-          .map(packageName => ({
+          .map((packageName) => ({
             include: resolvePackage(packageName),
             use: makeCssLoaders({
               target,

@@ -15,7 +15,7 @@ const pathsToCheck = args.length > 0 ? args : undefined;
       const pathsIncludeTS =
         hasPaths &&
         pathsToCheck.filter(
-          filePath => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
+          (filePath) => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
         ).length > 0;
 
       if (!hasPaths || pathsIncludeTS) {

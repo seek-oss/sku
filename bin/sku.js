@@ -15,7 +15,7 @@ const configureProject = async () => {
   await configure();
 };
 
-const runScript = scriptName => {
+const runScript = (scriptName) => {
   require(`../scripts/${scriptName}`);
 };
 

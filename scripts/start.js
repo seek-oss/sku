@@ -37,10 +37,10 @@ const localhost = '0.0.0.0';
   const parentCompiler = webpack(config);
 
   const clientCompiler = parentCompiler.compilers.find(
-    c => c.name === 'client',
+    (c) => c.name === 'client',
   );
   const renderCompiler = parentCompiler.compilers.find(
-    c => c.name === 'render',
+    (c) => c.name === 'render',
   );
 
   await checkHosts();
@@ -52,12 +52,12 @@ const localhost = '0.0.0.0';
     renderCompiler,
   });
 
-  const getSiteForHost = hostname => {
+  const getSiteForHost = (hostname) => {
     if (sites.length === 0) {
       return undefined;
     }
 
-    const matchingSite = sites.find(site => site.host === hostname);
+    const matchingSite = sites.find((site) => site.host === hostname);
 
     return matchingSite ? matchingSite.name : sites[0].name;
   };
@@ -70,7 +70,7 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
-    after: app => {
+    after: (app) => {
       // eslint-disable-next-line consistent-return
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) =>
@@ -100,7 +100,7 @@ const localhost = '0.0.0.0';
               : [];
 
             const devServerScripts = devServerAssets.map(
-              asset => `<script src="/${asset}"></script>`,
+              (asset) => `<script src="/${asset}"></script>`,
             );
 
             res.status(500).send(
@@ -116,7 +116,7 @@ const localhost = '0.0.0.0';
     },
   });
 
-  devServer.listen(availablePort, localhost, err => {
+  devServer.listen(availablePort, localhost, (err) => {
     if (err) {
       console.log(err);
       return;

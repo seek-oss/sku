@@ -96,7 +96,7 @@ const localhost = '0.0.0.0';
     sockPort: clientPort,
   });
 
-  devServer.listen(clientPort, localhost, err => {
+  devServer.listen(clientPort, localhost, (err) => {
     if (err) {
       console.log(err);
       return;

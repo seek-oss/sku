@@ -26,7 +26,7 @@ async function linkLocalDependencies() {
   );
 }
 
-const assertStorybookContent = async url => {
+const assertStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 

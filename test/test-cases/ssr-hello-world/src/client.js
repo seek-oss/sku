@@ -5,7 +5,7 @@ import { loadableReady } from '../../../../@loadable/component';
 
 import App from './App';
 
-const render = Component => {
+const render = (Component) => {
   hydrate(
     <AppContainer>
       <Component />

@@ -3,10 +3,10 @@
  * seek-style-guide -> __SEEK_STYLE_GUIDE__
  * @foo/awesome -> __FOO_AWESOME__
  */
-const packageNameToClassPrefix = packageName =>
+const packageNameToClassPrefix = (packageName) =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
-const makeJsLoaders = options => [
+const makeJsLoaders = (options) => [
   {
     loader: require.resolve('babel-loader'),
     options: require('../../babel/babelConfig')(options),

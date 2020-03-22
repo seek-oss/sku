@@ -22,7 +22,8 @@ module.exports = async (dirname, includeExtensions) => {
 
     if (
       !includeExtensions ||
-      includeExtensions.filter(ext => relativeFilePath.endsWith(ext)).length > 0
+      includeExtensions.filter((ext) => relativeFilePath.endsWith(ext)).length >
+        0
     ) {
       files[relativeFilePath] = ignoredFilePattern.test(relativeFilePath)
         ? 'CONTENTS IGNORED IN SNAPSHOT TEST'

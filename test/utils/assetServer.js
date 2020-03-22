@@ -2,7 +2,7 @@ const handler = require('serve-handler');
 const http = require('http');
 
 module.exports = async (port, targetDirectory, rewrites = []) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     const server = http.createServer((request, response) => {
       return handler(request, response, {
         public: targetDirectory,

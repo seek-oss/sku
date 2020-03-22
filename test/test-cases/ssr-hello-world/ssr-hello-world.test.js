@@ -11,7 +11,7 @@ const startAssetServer = require('../../utils/assetServer');
 const skuBuildConfig = require('./sku-build.config');
 const skuStartConfig = require('./sku-start.config');
 
-const getTestConfig = skuConfig => ({
+const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
   targetDirectory: path.join(__dirname, skuConfig.target),
 });

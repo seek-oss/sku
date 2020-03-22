@@ -52,7 +52,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
 
   const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
-  const resolvedPolyfills = polyfills.map(polyfill => {
+  const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
@@ -207,7 +207,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
             ...paths.compilePackages.map(
-              packageName => new RegExp(`^(${packageName})`),
+              (packageName) => new RegExp(`^(${packageName})`),
             ),
           ],
         }),

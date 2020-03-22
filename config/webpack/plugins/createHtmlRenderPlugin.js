@@ -12,7 +12,7 @@ const {
   publicPath,
 } = require('../../../context');
 
-const getClientStats = webpackStats => {
+const getClientStats = (webpackStats) => {
   return webpackStats.toJson().children.find(({ name }) => name === 'client');
 };
 

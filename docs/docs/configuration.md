@@ -52,7 +52,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetESLintConfig: skuEslintConfig => ({
+  dangerouslySetESLintConfig: (skuEslintConfig) => ({
     ...skuEslintConfig,
     someOtherConfig: 'dangerousValue',
   }),
@@ -71,7 +71,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetJestConfig: skuJestConfig => ({
+  dangerouslySetJestConfig: (skuJestConfig) => ({
     ...skuJestConfig,
     someOtherConfig: 'dangerousValue',
   }),
@@ -92,7 +92,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetWebpackConfig: skuWebpackConfig => ({
+  dangerouslySetWebpackConfig: (skuWebpackConfig) => ({
     ...skuWebpackConfig,
     someOtherConfig: 'dangerousValue',
   }),

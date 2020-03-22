@@ -3,8 +3,8 @@ const prettier = require('prettier');
 const css = require('css');
 
 const cssSnapshotSerializer = {
-  print: value => prettier.format(value, { parser: 'css' }),
-  test: value => {
+  print: (value) => prettier.format(value, { parser: 'css' }),
+  test: (value) => {
     try {
       css.parse(value);
     } catch (e) {
@@ -32,7 +32,7 @@ const appSnapshotSerializer = {
     return snapshotItems.join('\n');
   },
 
-  test: val => {
+  test: (val) => {
     return (
       val &&
       val.hasOwnProperty('clientRenderContent') &&
@@ -41,13 +41,13 @@ const appSnapshotSerializer = {
   },
 };
 
-const getAppSnapshot = async url => {
+const getAppSnapshot = async (url) => {
   const warnings = [];
   const errors = [];
 
   const page = await browser.newPage();
 
-  page.on('console', msg => {
+  page.on('console', (msg) => {
     if (msg.type() === 'warning') {
       warnings.push(msg.text());
     }

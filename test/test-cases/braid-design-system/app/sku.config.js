@@ -4,7 +4,7 @@ module.exports = {
   sites: [{ name: 'seekAnz' }, { name: 'jobStreet' }],
   publicPath: '/',
   port: 8200,
-  dangerouslySetWebpackConfig: config => {
+  dangerouslySetWebpackConfig: (config) => {
     if (config.name === 'render') {
       config.plugins.push(new ListExternalsPlugin());
     }

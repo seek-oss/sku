@@ -76,7 +76,7 @@ const makeWebpackConfig = ({
     .mapKeys((value, key) => `process.env.${key}`)
     .value();
 
-  const resolvedPolyfills = polyfills.map(polyfill => {
+  const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
@@ -86,7 +86,7 @@ const makeWebpackConfig = ({
 
   const skuClientEntry = require.resolve('../../entry/client/index.js');
 
-  const createEntry = entry => [
+  const createEntry = (entry) => [
     ...resolvedPolyfills,
     ...(isDevServer ? devServerEntries : []),
     entry,
@@ -251,7 +251,7 @@ const makeWebpackConfig = ({
           // not the package name, so we map each packageName to a pattern. This ensures it
           // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
           whitelist: paths.compilePackages.map(
-            packageName => new RegExp(`^(${packageName})`),
+            (packageName) => new RegExp(`^(${packageName})`),
           ),
         }),
       ],

@@ -2,7 +2,7 @@ const supportedBrowsers = require('browserslist-config-seek');
 const path = require('path');
 const isTypeScript = require('../lib/isTypeScript');
 
-const defaultDecorator = a => a;
+const defaultDecorator = (a) => a;
 
 module.exports = {
   clientEntry: 'src/client.js',

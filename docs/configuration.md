@@ -14,7 +14,7 @@ module.exports = {
   renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
-  target: 'dist'
+  target: 'dist',
 };
 ```
 
@@ -54,8 +54,8 @@ Example:
 const config = {
   dangerouslySetESLintConfig: skuEslintConfig => ({
     ...skuEslintConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
 };
 ```
 
@@ -73,8 +73,8 @@ Example:
 const config = {
   dangerouslySetJestConfig: skuJestConfig => ({
     ...skuJestConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
 };
 ```
 
@@ -94,8 +94,24 @@ Example:
 const config = {
   dangerouslySetWebpackConfig: skuWebpackConfig => ({
     ...skuWebpackConfig,
-    someOtherConfig: 'dangerousValue'
-  })
+    someOtherConfig: 'dangerousValue',
+  }),
+};
+```
+
+## displayNamesProd
+
+type `boolean`
+
+Default: `false`
+
+Adds static `displayName` properties to React components in production. This setting is designed for usage on sites that generate React code snippets, e.g. [Braid](https://seek-oss.github.io/braid-design-system/).
+
+Example:
+
+```js
+const config = {
+  displayNamesProd: true,
 };
 ```
 
@@ -107,7 +123,7 @@ type `Array<string>`
 
 Default: `[]`
 
-An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./static-rendering.md) for more info.
+An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./docs/static-rendering.md) for more info.
 
 ## hosts
 
@@ -207,7 +223,7 @@ Example:
 
 ```js
 const config = {
-  routes: ['/', '/details']
+  routes: ['/', '/details'],
 };
 ```
 
@@ -260,7 +276,7 @@ Example:
 
 ```js
 const config = {
-  sourceMapsProd: true
+  sourceMapsProd: true,
 };
 ```
 
@@ -279,6 +295,78 @@ type `number`
 Default: `8081`
 
 The port to host storybook on when running `sku storybook`.
+
+## storybookTarget
+
+type `string`
+
+Default: `dist-storybook`
+
+The directory `sku build-storybook` will output files to.
+
+## provideDefaultChromaticViewports
+
+type: `boolean`
+
+Default: `true`
+
+Configures whether a default set of viewports (`320` and `1200`) should be provided to all screenshots. If you'd like to manually configure Chromatic per story, set this to `false`.
+
+## playroomComponents
+
+type `string`
+
+Default: `src/components/index.{js|ts}`
+
+The file that exports all components available within Playroom.
+
+## playroomThemes
+
+type `string`
+
+The file that exports all themes available within Playroom.
+
+## playroomSnippets
+
+type `string`
+
+The file that exports all snippets available to Playroom.
+
+## playroomFrameComponent
+
+type `string`
+
+The file that exports a component that wraps each frame within Playroom.
+
+## playroomWidths
+
+type `Array<number>`
+
+Default: `[320, 768, 1024]`
+
+The responsive widths for frames within Playroom.
+
+## playroomTitle
+
+type `string`
+
+The title of your Playroom.
+
+## playroomPort
+
+type `number`
+
+Default: `8082`
+
+The port to host Playroom on when running `sku playroom`.
+
+## playroomTarget
+
+type `string`
+
+Default: `dist-playroom`
+
+The directory `sku build-playroom` will output files to.
 
 ## supportedBrowsers
 

@@ -12,7 +12,7 @@ module.exports = {
   publicPath: '/',
   target: 'dist',
   port: 3300,
-  serverPort: 3301
+  serverPort: 3301,
 };
 ```
 
@@ -27,19 +27,70 @@ Then, you need to create your `server` entry. Sku will automatically provide an 
 This can be done as follows:
 
 ```js
-import render from './render.js';
+import template from './template';
 import middleware from './middleware';
 
-export default ({ publicPath, headTags, bodyTags }) => {
-  renderCallback: (req, res) => {
-    res.send(render(publicPath, headTags, bodyTags));
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+    res.send(
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
+    );
   },
   middleware: middleware,
   onStart: app => {
     console.log('My app started 👯‍♀️!');
     app.keepAliveTimeout = 20000;
-  }
-};
+  },
+});
+```
+
+## Multi-part response
+
+If you need to return HTML at different times in the request you can use `flushHeadTags` to retrieve only the new head tags since the previous call.
+
+New head tags can be added during render, typically this is due to dynamic chunks being used during a render.
+
+For example, you may want to send back an initial response before you are done rendering your response:
+
+```js
+import { initialResponseTemplate, followupResponseTemplate } from './template';
+import middleware from './middleware';
+
+export default () => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    res.status(200);
+    // Call `flushHeadTags` early to retrieve whatever tags are available.
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    res.flush();
+    await Promise.resolve();
+
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+
+    res.write(
+      // Call `flushHeadTags` again just in case new tags are available.
+      followupResponseTemplate({
+        headTags: flushHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+      }),
+    );
+    res.end;
+  },
+  middleware: middleware,
+  onStart: app => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  },
+});
 ```
 
 Last but not least, please note that commands for SSR are different to the ones used normally:

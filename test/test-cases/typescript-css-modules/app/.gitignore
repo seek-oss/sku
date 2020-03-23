@@ -1,9 +1,0 @@
-# managed by sku
-.eslintrc
-.prettierrc
-coverage/
-dist/
-report/
-tsconfig.json
-tslint.json
-# end managed by sku

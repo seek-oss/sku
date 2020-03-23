@@ -10,8 +10,8 @@ By default, sku will render the first site in the [`sites`](./docs/configuration
 module.exports = {
   sites: [
     { name: 'seekAnz', host: 'dev.seek.com.au' },
-    { name: 'jobStreet', host: 'dev.jobstreet.com' }
-  ]
+    { name: 'jobStreet', host: 'dev.jobstreet.com' },
+  ],
 };
 ```
 
@@ -51,7 +51,7 @@ _**NOTE:** For this example to work, your sites need to match the available [the
 
 ```js
 module.exports = {
-  sites: ['seekAnz', 'jobStreet']
+  sites: ['seekAnz', 'jobStreet'],
 };
 ```
 
@@ -72,13 +72,13 @@ export default {
     return renderToString(
       <SkuProvider>
         <App site={site} />
-      </SkuProvider>
+      </SkuProvider>,
     );
   },
 
   // Make the site variable available for the client
   provideClientContext: ({ site }) => ({
-    site
+    site,
   }),
 
   renderDocument: ({ app, headTags, bodyTags }) => `
@@ -95,7 +95,7 @@ export default {
         ${bodyTags}
       </body>
     </html>
-  `
+  `,
 };
 ```
 
@@ -113,25 +113,19 @@ export default ({ site }) =>
 
 ### Loading the theme
 
-Now the site is available in our `App` component, we can create a [`loadable library`](https://www.smooth-code.com/open-source/loadable-components/docs/api-loadable-component/#loadablelib) using the site prop. This means the result of this import will actually be different depending on which site we are rendering.
+Now the site is available in our `App` component, we use `BraidLoadableProvider` (which uses [loadable-components](./docs/code-splitting) internally) to configure the specified theme.
 
 ```js
 // App.js
 import React from 'react';
-import loadable from '@loadable/component';
 
-import { ThemeProvider } from 'braid-design-system';
+import { BraidLoadableProvider } from 'braid-design-system';
 
-// Create a loadable library which will differ by site
-const Theme = loadable.lib(({ site }) => import(`braid-design-system/lib/themes/${site}`);
-
-export default ({ site }) => (
-  <Theme themeName={site}>
-    {({ default: theme }) => ( {/* Note that the value is named 'default' as it is an export */}
-      <ThemeProvider theme={theme}>
-        <MyPage />
-      </ThemeProvider>
-    )}
-  </Theme>
-);
+export default ({ site }) => {
+  return (
+    <BraidLoadableProvider themeName={site}>
+      <MyPage />
+    </BraidLoadableProvider>
+  );
+};
 ```

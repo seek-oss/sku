@@ -69,5 +69,10 @@ module.exports = () => {
     transformFilePath: transformOutputPath,
     mapStatsToParams,
     verbose: false,
+    extraGlobals: {
+      // This fixes an issue where one of treats deps (@hapi/joek)
+      // accesses Buffer globally. Not great...
+      Buffer,
+    },
   });
 };

@@ -8684,13 +8684,13 @@ html-minifier@^4.0.0:
     relateurl "^0.2.7"
     uglify-js "^3.5.1"
 
-html-render-webpack-plugin@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-1.1.1.tgz#9982fe8e495bf22e56452eed41726915c8b21d81"
-  integrity sha512-LolCHpVK9F5WJZ41231cHO8cHajboTakh+Ys8O7vS7waY0bjxtkwvUDA7phF0NJkmXRW9VAgkBWmVWnWA1Mluw==
+html-render-webpack-plugin@1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-1.2.0.tgz#79fde5d36bc6727e7299ff7dcbe1da76f9e39430"
+  integrity sha512-CzEI2ZxxdatoSl/ue4nhG0lcOaEE5Q7xxo7JVNliRUycyNn8TbU8DCGdKLGCGWmTmFOj92pqlMuxTHSVQf6SRA==
   dependencies:
-    chalk "^2.4.1"
-    eval "^0.1.2"
+    chalk "^2.4.2"
+    eval "^0.1.4"
 
 html-webpack-plugin@^3.2.0:
   version "3.2.0"

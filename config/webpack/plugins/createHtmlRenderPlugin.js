@@ -1,5 +1,6 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 const memoize = require('memoizee');
+const Buffer = require('buffer');
 
 const product = require('../../../lib/product');
 const {

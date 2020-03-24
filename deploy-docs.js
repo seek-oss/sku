@@ -20,6 +20,7 @@ const makeConfig = function () {
       ? repoUrl.replace('https://', `https://${GITHUB_TOKEN}@`)
       : repoUrl,
     logger: log,
+    dotfiles: true,
   };
 };
 

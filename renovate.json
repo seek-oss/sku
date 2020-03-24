@@ -16,7 +16,10 @@
     {
       "groupName": "webpack packages",
       "packagePatterns": [
-        "(?<!@loadable/)webpack|(-loader$)|autoprefixer|less|css|svg|treat"
+        "webpack|(-loader$)|autoprefixer|less|css|svg|treat"
+      ],
+      "excludePackagePatterns": [
+        "^@loadable\/webpack"
       ],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]

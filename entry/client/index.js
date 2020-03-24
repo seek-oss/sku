@@ -21,6 +21,8 @@ if (process.env.NODE_ENV === 'development') {
           <App site={site} />, 
           document.getElementById('app')
         );
+
+      See https://seek-oss.github.io/sku/#/./docs/building-the-app?id=client for more info.
   `);
   }
 }

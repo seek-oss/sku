@@ -220,6 +220,15 @@ const makeWebpackConfig = ({
           ? []
           : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
+        ...(isDevServer
+          ? [
+              new webpack.DefinePlugin({
+                __SKU_CLIENT_PATH__: JSON.stringify(
+                  path.relative(cwd(), paths.clientEntry),
+                ),
+              }),
+            ]
+          : []),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
           chunkFilename: cssChunkFileMask,

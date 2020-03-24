@@ -10,3 +10,4 @@ dist-storybook/
 report/
 template/
 .changeset/*.md
+CHANGELOG.md

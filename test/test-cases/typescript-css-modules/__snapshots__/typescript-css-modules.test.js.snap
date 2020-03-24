@@ -24,13 +24,13 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-4e82b891129f1e1816c7.js"
+          href="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-7e29bbb1f30e0249c157.js"
+          href="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
           crossorigin="anonymous"
     >
   </head>
@@ -58,13 +58,13 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-4e82b891129f1e1816c7.js"
+            src="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-7e29bbb1f30e0249c157.js"
+            src="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
             crossorigin="anonymous"
     >
     </script>
@@ -108,13 +108,13 @@ export const root: string;
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-4e82b891129f1e1816c7.js"
+          href="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-7e29bbb1f30e0249c157.js"
+          href="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
           crossorigin="anonymous"
     >
   </head>
@@ -142,13 +142,13 @@ export const root: string;
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-4e82b891129f1e1816c7.js"
+            src="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-7e29bbb1f30e0249c157.js"
+            src="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
             crossorigin="anonymous"
     >
     </script>
@@ -172,7 +172,7 @@ interface CssExports {
 declare const cssExports: CssExports;
 export = cssExports;
 ",
-  "main-7e29bbb1f30e0249c157.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0b09f9bf338f7b37cc2d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-bfe8911084b821bf8edd.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -191,7 +191,7 @@ export = cssExports;
 }
 ,
   "runtime-62bc0856cbb8d47f9471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-4e82b891129f1e1816c7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-a264bd1d24dfb67ae5a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

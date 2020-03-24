@@ -23,12 +23,12 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/vendors~main-293de8fb778fafa23f06.js"
+          href="/static/vendors~main-2d92e57430dea49b3830.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/static/main-22b381db15cc5b64702c.js"
+          href="/static/main-a4595bb68ff7940c1b5e.js"
     >
   </head>
   <body>
@@ -48,12 +48,12 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/static/vendors~main-293de8fb778fafa23f06.js"
+            src="/static/vendors~main-2d92e57430dea49b3830.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/static/main-22b381db15cc5b64702c.js"
+            src="/static/main-a4595bb68ff7940c1b5e.js"
     >
     </script>
   </body>

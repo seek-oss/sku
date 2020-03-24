@@ -18,7 +18,7 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-f49de757d4c95ed97c70.css"
+          href="/vendors~main-0bf0adff8c6978a156f7.css"
     >
     <link data-chunk="main"
           rel="preload"
@@ -79,8 +79,7 @@ Object {
 </html>,
   "main-dc6f9446ba461304b9bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c578e31f9b7fceb502e4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-d4896f305065a6c9911a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-f49de757d4c95ed97c70.css": a,
+  "vendors~main-0bf0adff8c6978a156f7.css": a,
 abbr,
 acronym,
 address,
@@ -4258,5 +4257,6 @@ html {
   outline: none;
 }
 ,
+  "vendors~main-d4896f305065a6c9911a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

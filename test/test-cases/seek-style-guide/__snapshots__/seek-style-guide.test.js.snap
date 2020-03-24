@@ -3,6 +3,8 @@
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"fs\\",
+  \\"path\\",
   \\"react\\",
   \\"react-dom/server\\"
 ]",
@@ -23,17 +25,17 @@ Object {
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-c578e31f9b7fceb502e4.js"
+          href="/runtime-554e53c2f72903d6f45f.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-a243dad65606d2cbcfe5.js"
+          href="/vendors~main-5f1b9c9f91df577e57ed.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-a612cf92dc01f160cfa9.js"
+          href="/main-faad1274715801b752ea.js"
     >
   </head>
   <body>
@@ -80,23 +82,23 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-c578e31f9b7fceb502e4.js"
+            src="/runtime-554e53c2f72903d6f45f.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-a243dad65606d2cbcfe5.js"
+            src="/vendors~main-5f1b9c9f91df577e57ed.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-a612cf92dc01f160cfa9.js"
+            src="/main-faad1274715801b752ea.js"
     >
     </script>
   </body>
 </html>,
-  "main-a612cf92dc01f160cfa9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-c578e31f9b7fceb502e4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-faad1274715801b752ea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-492f2c41d9f41ff813a1.css": a,
 abbr,
 acronym,
@@ -754,6 +756,6 @@ html {
   }
 }
 ,
-  "vendors~main-a243dad65606d2cbcfe5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-5f1b9c9f91df577e57ed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

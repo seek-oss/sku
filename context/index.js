@@ -28,7 +28,7 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
-const normalizedRoutes = skuConfig.routes.map(route =>
+const normalizedRoutes = skuConfig.routes.map((route) =>
   typeof route === 'string' ? { route } : route,
 );
 
@@ -39,20 +39,20 @@ const transformOutputPath = isStartScript
   ? startTransformPath
   : skuConfig.transformOutputPath;
 
-const getSetupTests = setupTests => {
+const getSetupTests = (setupTests) => {
   if (!setupTests) {
     return [];
   }
 
   if (Array.isArray(setupTests)) {
-    return setupTests.map(setupTest => getPathFromCwd(setupTest));
+    return setupTests.map((setupTest) => getPathFromCwd(setupTest));
   }
 
   return [getPathFromCwd(setupTests)];
 };
 
 // normalize sites to object syntax
-const sites = skuConfig.sites.map(site =>
+const sites = skuConfig.sites.map((site) =>
   typeof site === 'string' ? { name: site } : site,
 );
 

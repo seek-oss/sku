@@ -13,7 +13,7 @@ module.exports = ({ config }, { isDevServer }) => {
 
   // Ensure Storybook's webpack loaders ignore our code :(
   if (config && config.module && Array.isArray(config.module.rules)) {
-    config.module.rules.forEach(rule => {
+    config.module.rules.forEach((rule) => {
       rule.exclude = [
         ...(rule.exclude || []), // Ensure we don't clobber any existing exclusions
         ...paths.src,

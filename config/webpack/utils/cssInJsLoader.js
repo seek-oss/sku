@@ -12,12 +12,12 @@ var LimitChunkCountPlugin = require('webpack/lib/optimize/LimitChunkCountPlugin'
 
 const CSSInJsLoader = 'css-in-js-loader';
 
-module.exports = function(source) {
+module.exports = function (source) {
   if (this.cacheable) this.cacheable();
   return source;
 };
 
-module.exports.pitch = function(request, prevRequest) {
+module.exports.pitch = function (request, prevRequest) {
   if (this.cacheable) this.cacheable();
   var callback = this.async();
   if (['.js', '.ts'].indexOf(path.extname(request)) >= 0) {
@@ -43,7 +43,7 @@ function produce(loader, request, callback) {
   new SingleEntryPlugin(loader.context, '!!' + request).apply(childCompiler);
   new LimitChunkCountPlugin({ maxChunks: 1 }).apply(childCompiler);
   var subCache = 'subcache ' + __dirname + ' ' + request;
-  childCompiler.hooks.compilation.tap(CSSInJsLoader, function(compilation) {
+  childCompiler.hooks.compilation.tap(CSSInJsLoader, function (compilation) {
     if (compilation.cache) {
       if (!compilation.cache[subCache]) compilation.cache[subCache] = {};
       compilation.cache = compilation.cache[subCache];
@@ -51,15 +51,17 @@ function produce(loader, request, callback) {
   });
   // We set loaderContext[__dirname] = false to indicate we already in
   // a child compiler so we don't spawn another child compilers from there.
-  childCompiler.hooks.thisCompilation.tap(CSSInJsLoader, function(compilation) {
-    compilation.hooks.normalModuleLoader.tap(CSSInJsLoader, function(
+  childCompiler.hooks.thisCompilation.tap(CSSInJsLoader, function (
+    compilation,
+  ) {
+    compilation.hooks.normalModuleLoader.tap(CSSInJsLoader, function (
       loaderContext,
     ) {
       loaderContext[__dirname] = false;
     });
   });
   var source;
-  childCompiler.hooks.afterCompile.tapAsync(CSSInJsLoader, function(
+  childCompiler.hooks.afterCompile.tapAsync(CSSInJsLoader, function (
     compilation,
     callback,
   ) {
@@ -68,8 +70,8 @@ function produce(loader, request, callback) {
       compilation.assets[childFilename].source();
 
     // Remove all chunk assets
-    compilation.chunks.forEach(function(chunk) {
-      chunk.files.forEach(function(file) {
+    compilation.chunks.forEach(function (chunk) {
+      chunk.files.forEach(function (file) {
         delete compilation.assets[file];
       });
     });
@@ -77,7 +79,7 @@ function produce(loader, request, callback) {
     callback();
   });
 
-  childCompiler.runAsChild(function(err, entries, compilation) {
+  childCompiler.runAsChild(function (err, entries, compilation) {
     if (err) return callback(err);
 
     if (compilation.errors.length > 0) {
@@ -86,10 +88,10 @@ function produce(loader, request, callback) {
     if (!source) {
       return callback(new Error("Didn't get a result from child compiler"));
     }
-    compilation.fileDependencies.forEach(function(dep) {
+    compilation.fileDependencies.forEach(function (dep) {
       loader.addDependency(dep);
     }, loader);
-    compilation.contextDependencies.forEach(function(dep) {
+    compilation.contextDependencies.forEach(function (dep) {
       loader.addContextDependency(dep);
     }, loader);
     try {
@@ -103,7 +105,7 @@ function produce(loader, request, callback) {
     if (exports) {
       postcss()
         .process(exports, { from: this.resourcePath, parser: postcssJs })
-        .then(function(res) {
+        .then(function (res) {
           callback(null, res.css);
         });
     } else {

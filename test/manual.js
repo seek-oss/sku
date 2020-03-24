@@ -55,7 +55,7 @@ const runScriptForTestCase = (script, testCase) => {
       type: 'list',
       name: 'script',
       message: 'Which sku script would you like to run?',
-      choices: scripts.map(scriptName => scriptName.replace(/\.js/, '')),
+      choices: scripts.map((scriptName) => scriptName.replace(/\.js/, '')),
     },
   ]);
 

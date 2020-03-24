@@ -5,7 +5,7 @@ const makeWebpackConfig = require('../webpack/webpack.config');
 
 const clientWebpackConfig = find(
   makeWebpackConfig({ isIntegration: true }),
-  config => config.name === 'client',
+  (config) => config.name === 'client',
 );
 
 try {

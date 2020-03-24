@@ -18,10 +18,10 @@ module.exports = ({
 
   const themeIdentFallback = '[hash:base64:3]';
 
-  const devThemeIdent = theme =>
+  const devThemeIdent = (theme) =>
     theme.name ? `_${theme.name}` : themeIdentFallback;
 
-  const prodThemeIdent = theme => {
+  const prodThemeIdent = (theme) => {
     const braidThemeIndex = braidThemes.indexOf(theme.name);
 
     if (braidThemeIndex >= 0) {

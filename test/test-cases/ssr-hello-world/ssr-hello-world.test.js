@@ -11,7 +11,7 @@ const startAssetServer = require('../../utils/assetServer');
 const skuBuildConfig = require('./sku-build.config');
 const skuStartConfig = require('./sku-start.config');
 
-const getTestConfig = skuConfig => ({
+const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
   targetDirectory: path.join(__dirname, skuConfig.target),
 });
@@ -33,7 +33,14 @@ describe('ssr-hello-world', () => {
     });
 
     it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(backendUrl);
+      const snapshot = await getAppSnapshot(
+        backendUrl,
+        // This ignores warnings coming from react-hot-loader
+        (warning) =>
+          warning.indexOf(
+            'Please update the following components: %s AppContainer',
+          ) === -1,
+      );
       expect(snapshot).toMatchSnapshot();
     });
   });

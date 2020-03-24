@@ -7,12 +7,12 @@ import render from '__sku_alias__renderEntry';
 const libraryName = SKU_LIBRARY_NAME;
 const publicPath = __SKU_PUBLIC_PATH__;
 
-export const serializeConfig = config =>
+export const serializeConfig = (config) =>
   `<script>window.${clientContextKey} = ${serializeJavascript(
     config,
   )};</script>`;
 
-export default async renderParams => {
+export default async (renderParams) => {
   const renderContext = { ...renderParams, libraryName };
 
   let app;

@@ -21,7 +21,7 @@ const configDir = path.resolve(__dirname, '..', 'config', 'storybook', 'build');
     env: process.env,
   });
 
-  storybookProcess.on('exit', exitCode => {
+  storybookProcess.on('exit', (exitCode) => {
     process.exit(exitCode);
   });
 })();

@@ -33,13 +33,13 @@ const readIgnore = async (appDir, fileName) => {
   const contents = await readFileContents(appDir, fileName);
   return contents
     .split('\n')
-    .filter(ignore => ignore && !ignore.startsWith('#')); // remove blanks and comments
+    .filter((ignore) => ignore && !ignore.startsWith('#')); // remove blanks and comments
 };
 
 const copyToApp = async (filename, folder) =>
   copyFile(path.join(__dirname, filename), path.join(folder, filename));
 
-const removeAppDir = async folder =>
+const removeAppDir = async (folder) =>
   rimraf(folder, {
     glob: {
       dot: true,
@@ -86,7 +86,7 @@ describe('configure', () => {
       expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach(ignore =>
+    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolder, ignore);
         expect(ignoreContents.length).toEqual(7);
@@ -146,7 +146,7 @@ describe('configure', () => {
       expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach(ignore =>
+    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
         expect(ignoreContents.length).toEqual(7);

@@ -9,21 +9,21 @@ const defaultClientEntry = require('./defaultClientEntry');
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
-const exitWithErrors = errors => {
+const exitWithErrors = (errors) => {
   console.log(bold(underline(red('Errors in sku config:'))));
-  errors.forEach(error => {
+  errors.forEach((error) => {
     console.log(yellow(emojify(error)));
   });
   process.exit(1);
 };
 
-module.exports = skuConfig => {
+module.exports = (skuConfig) => {
   const errors = [];
 
   // Validate extra keys
   Object.keys(skuConfig)
-    .filter(key => !availableConfigKeys.includes(key))
-    .forEach(key => {
+    .filter((key) => !availableConfigKeys.includes(key))
+    .forEach((key) => {
       const unknownMessage = `Unknown key '${bold(key)}'.`;
       const suggestedKey = didYouMean(key, availableConfigKeys);
       const suggestedMessage = suggestedKey

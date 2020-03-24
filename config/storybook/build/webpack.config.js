@@ -1,4 +1,4 @@
 const storybookWebpackConfig = require('../storybookWebpackConfig');
 
-module.exports = storybookConfig =>
+module.exports = (storybookConfig) =>
   storybookWebpackConfig(storybookConfig, { isDevServer: false });

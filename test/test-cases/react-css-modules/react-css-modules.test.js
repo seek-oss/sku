@@ -9,7 +9,7 @@ const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
-const assertStorybookContent = async url => {
+const assertStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 

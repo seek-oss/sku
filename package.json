@@ -167,6 +167,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.6.1",
+    "@changesets/get-github-info": "^0.4.1",
     "@testing-library/react": "^8.0.6",
     "@types/dedent": "^0.7.0",
     "@types/react": "^16.8.23",

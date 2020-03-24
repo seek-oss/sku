@@ -41,7 +41,7 @@ const appSnapshotSerializer = {
   },
 };
 
-const getAppSnapshot = async (url) => {
+const getAppSnapshot = async (url, warningFilter = () => true) => {
   const warnings = [];
   const errors = [];
 
@@ -49,7 +49,7 @@ const getAppSnapshot = async (url) => {
 
   page.on('console', (msg) => {
     if (msg.type() === 'warning') {
-      warnings.push(msg.text());
+      warnings.filter(warningFilter).push(msg.text());
     }
 
     if (msg.type() === 'error') {

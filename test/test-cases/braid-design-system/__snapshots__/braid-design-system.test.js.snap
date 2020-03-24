@@ -13,27 +13,27 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-9811c8ea363a9e8e3229.css"
+          href="/themes-jobStreet-51b72b8122d6644a3bc9.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-d3680b5f9ad18a1c67f8.js"
+          href="/runtime-2c524116a38562cba3f4.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b23205b45d989653a744.js"
+          href="/vendors~main-6e8aedde130662aea8a2.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-c52e5a1a50aa9ca2cfde.js"
+          href="/main-8eb13fa4e6aedaa67376.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-f27b49009716af1506b6.js"
+          href="/themes-jobStreet-770f65c46502d69d7586.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -151,22 +151,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-d3680b5f9ad18a1c67f8.js"
+            src="/runtime-2c524116a38562cba3f4.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b23205b45d989653a744.js"
+            src="/vendors~main-6e8aedde130662aea8a2.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-c52e5a1a50aa9ca2cfde.js"
+            src="/main-8eb13fa4e6aedaa67376.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-f27b49009716af1506b6.js"
+            src="/themes-jobStreet-770f65c46502d69d7586.js"
     >
     </script>
   </body>
@@ -194,8 +194,14 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"crypto\\",
+  \\"fs\\",
+  \\"net\\",
+  \\"path\\",
   \\"react\\",
-  \\"react-dom/server\\"
+  \\"react-dom/server\\",
+  \\"url\\",
+  \\"util\\"
 ]",
   "jobStreet/index.html": <!DOCTYPE html>
 <html>
@@ -209,27 +215,27 @@ Object {
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-9811c8ea363a9e8e3229.css"
+          href="/themes-jobStreet-51b72b8122d6644a3bc9.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-d3680b5f9ad18a1c67f8.js"
+          href="/runtime-2c524116a38562cba3f4.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b23205b45d989653a744.js"
+          href="/vendors~main-6e8aedde130662aea8a2.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-c52e5a1a50aa9ca2cfde.js"
+          href="/main-8eb13fa4e6aedaa67376.js"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-f27b49009716af1506b6.js"
+          href="/themes-jobStreet-770f65c46502d69d7586.js"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -347,28 +353,28 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-d3680b5f9ad18a1c67f8.js"
+            src="/runtime-2c524116a38562cba3f4.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b23205b45d989653a744.js"
+            src="/vendors~main-6e8aedde130662aea8a2.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-c52e5a1a50aa9ca2cfde.js"
+            src="/main-8eb13fa4e6aedaa67376.js"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-f27b49009716af1506b6.js"
+            src="/themes-jobStreet-770f65c46502d69d7586.js"
     >
     </script>
   </body>
 </html>,
-  "main-c52e5a1a50aa9ca2cfde.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-d3680b5f9ad18a1c67f8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8eb13fa4e6aedaa67376.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-2c524116a38562cba3f4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": <!DOCTYPE html>
 <html>
   <head>
@@ -381,27 +387,27 @@ Object {
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/themes-seekAnz-f1ea88c3695f1c00e2f2.css"
+          href="/themes-seekAnz-f19341304e28bcfbf22a.css"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-d3680b5f9ad18a1c67f8.js"
+          href="/runtime-2c524116a38562cba3f4.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-b23205b45d989653a744.js"
+          href="/vendors~main-6e8aedde130662aea8a2.js"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-c52e5a1a50aa9ca2cfde.js"
+          href="/main-8eb13fa4e6aedaa67376.js"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/themes-seekAnz-8f4db8da3d530e3b2aea.js"
+          href="/themes-seekAnz-e2e7b49572116abd1672.js"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -519,27 +525,27 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-d3680b5f9ad18a1c67f8.js"
+            src="/runtime-2c524116a38562cba3f4.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-b23205b45d989653a744.js"
+            src="/vendors~main-6e8aedde130662aea8a2.js"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-c52e5a1a50aa9ca2cfde.js"
+            src="/main-8eb13fa4e6aedaa67376.js"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/themes-seekAnz-8f4db8da3d530e3b2aea.js"
+            src="/themes-seekAnz-e2e7b49572116abd1672.js"
     >
     </script>
   </body>
 </html>,
-  "themes-jobStreet-9811c8ea363a9e8e3229.css": .FYwKg {
+  "themes-jobStreet-51b72b8122d6644a3bc9.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -732,12 +738,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -1669,8 +1671,9 @@ Object {
   display: block;
 }
 ,
-  "themes-jobStreet-f27b49009716af1506b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-1673141cfa543b35841b.css": .FYwKg {
+  "themes-jobStreet-770f65c46502d69d7586.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-6a64a9c6ea2dcf144b81.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-f5cbf5d7a374e43a07dc.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1863,12 +1866,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -2104,10 +2103,8 @@ Object {
 ._1QEQt_2oR {
   color: #1c3f94;
 }
+._1QEQt_2oR:focus,
 ._1QEQt_2oR:hover {
-  color: #142d69;
-}
-._1QEQt_2oR:focus {
   color: #142d69;
 }
 ._3vlP__2oR {
@@ -2805,9 +2802,7 @@ Object {
   display: block;
 }
 ,
-  "themes-jobStreetClassic-827cf45c927300e30cee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb-37277b3b5a6e6485f1cb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb-9cf762c97c593f1482eb.css": .FYwKg {
+  "themes-jobsDb-e8175cfb1436a91dac35.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -3000,12 +2995,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -3933,8 +3924,8 @@ Object {
   display: block;
 }
 ,
-  "themes-jobsDbRebrand-6fa51fd8e37a84930717.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDbRebrand-9e4c5d9bdbb0038b0ab1.css": .FYwKg {
+  "themes-jobsDb-eb00e502d4ff979c253a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDbRebrand-31ba85df580c0ff8e35f.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -4127,12 +4118,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -5063,8 +5050,9 @@ Object {
   display: block;
 }
 ,
-  "themes-seekAnz-8f4db8da3d530e3b2aea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-f1ea88c3695f1c00e2f2.css": .FYwKg {
+  "themes-jobsDbRebrand-3302f5c43f2a0fe07360.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-e2e7b49572116abd1672.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-f19341304e28bcfbf22a.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -5257,12 +5245,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -6173,8 +6157,7 @@ Object {
   display: block;
 }
 ,
-  "themes-seekBusiness-03e77e9a8dbcc74e96a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekBusiness-935dd20c808d28466277.css": .FYwKg {
+  "themes-seekBusiness-7be8f20b85e6caeb9ce6.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -6367,12 +6350,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -7283,7 +7262,8 @@ Object {
   display: block;
 }
 ,
-  "themes-wireframe-2c439e5f8fd51efd509a.css": .FYwKg {
+  "themes-seekBusiness-c343a1db64f7dfab92f0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-3e337588017096044cfa.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7476,12 +7456,8 @@ Object {
 ._3HWgs:not(:disabled) + * > .q3uRq + ._1N9cL {
   cursor: pointer;
 }
-._3HWgs:checked + * > .q3uRq > ._2Cszt {
-  opacity: 1;
-}
-._3HWgs:focus + * > .q3uRq > .Jx54Q {
-  opacity: 1;
-}
+._3HWgs:checked + * > .q3uRq > ._2Cszt,
+._3HWgs:focus + * > .q3uRq > .Jx54Q,
 ._3HWgs:hover:not(:checked):not(:disabled) + * > .q3uRq > .ZBQ-p {
   opacity: 1;
 }
@@ -8391,8 +8367,8 @@ Object {
   display: block;
 }
 ,
-  "themes-wireframe-59fed23d642152dc4abc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-b23205b45d989653a744.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-40e3c6cc48b9239a81c3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-6e8aedde130662aea8a2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

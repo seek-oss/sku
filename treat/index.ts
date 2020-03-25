@@ -19,17 +19,11 @@ import {
   TreatModule as _TreatModule,
 } from 'treat';
 
-// Provided for backwards compatibility. Remove in sku 9
-import { TreatProvider, useStyles, useClassName } from 'react-treat';
-
 export {
   createTheme,
   style,
   styleMap,
   styleTree,
-  TreatProvider,
-  useStyles,
-  useClassName,
   resolveStyles,
   resolveClassName,
   globalStyle,

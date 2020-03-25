@@ -31,7 +31,7 @@ module.exports = {
     '^seek-asia-style-guide/react': require.resolve('identity-obj-proxy'),
   },
   transform: {
-    '\\.(css|less)$': require.resolve('./cssModulesTransform.js'),
+    '\\.less$': require.resolve('./cssModulesTransform.js'),
     '\\.(ts|tsx)$': require.resolve('./tsBabelTransform.js'),
     '\\.js$': require.resolve('./jsBabelTransform.js'),
   },

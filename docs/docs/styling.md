@@ -23,28 +23,25 @@ import styles from './example.less';
 export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 ```
 
-## Static CSS-in-JS
+## [treat](https://seek-oss.github.io/treat/)
 
-(via [css-in-js-loader](https://github.com/nthtran/css-in-js-loader))
+Note: You must access all treat imports through the sku prefix. e.g. `sku/treat`, `sku/react-treat`;
 
-You can import `.css.js` files into your components and use them exactly as you would a regular style sheet. This is mostly useful when you want to take advantage of JavaScript to compose styles:
+See treat's [docs](https://seek-oss.github.io/treat/) for details on proper usage.
 
 ```js
-import { standardWrapper } from 'theme/wrappers';
-import { fontFamily } from 'theme/typography';
-import { brandPrimary } from 'theme/palette';
+import { style } from 'sku/treat';
 
-export default {
-  '.exampleWrapper': {
-    ...standardWrapper,
-    fontFamily: fontFamily,
-    color: brandPrimary,
-  },
-};
+export const bigBox = style({ width: 500, height: 500 });
 ```
 
 ```js
-import styles from './example.css.js';
+import { useStyles } from 'sku/react-treat';
+import * as styleRefs from './example.treat';
 
-export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
+export default () => {
+  const styles = useStyles(styleRefs);
+
+  return <div className={styles.bigBox}>I am a big box</div>;
+};
 ```

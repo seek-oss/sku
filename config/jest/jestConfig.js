@@ -9,8 +9,8 @@ module.exports = {
   testMatch: [
     // Default values, but with 'ts' + 'tsx' support
     // (https://jestjs.io/docs/en/configuration.html#testmatch-array-string)
-    '**/__tests__/**/*.(j|t)s?(x)',
-    '**/?(*.)+(spec|test).(j|t)s?(x)',
+    '**/__tests__/**/*.(js|ts|tsx)',
+    '**/?(*.)+(spec|test).(js|ts|tsx)',
   ],
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
@@ -31,16 +31,9 @@ module.exports = {
     '^seek-asia-style-guide/react': require.resolve('identity-obj-proxy'),
   },
   transform: {
-    '^.+\\.css\\.js$': require.resolve('./cssJsTransform.js'),
     '\\.(css|less)$': require.resolve('./cssModulesTransform.js'),
-    '\\.tsx?': require.resolve('./tsBabelTransform.js'),
-
-    // Match any `.js` file that isn't a `.css.js` file.
-    // We do this by asserting the 4 characters before `.js` aren't `.css`
-    // or that it has fewer than 4 characters (e.g. `foo.js`)
-    '((?!(\\.css)).{4}|^.{1,3})\\.jsx?$': require.resolve(
-      './jsBabelTransform.js',
-    ),
+    '\\.(ts|tsx)$': require.resolve('./tsBabelTransform.js'),
+    '\\.js$': require.resolve('./jsBabelTransform.js'),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding

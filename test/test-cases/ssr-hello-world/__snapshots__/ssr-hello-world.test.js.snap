@@ -13,7 +13,7 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="http://localhost:4000/main-fadb2269a374a06075a5.css"
     >
     <link data-chunk="main"
           rel="preload"
@@ -30,14 +30,14 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-e6ba5dd1228141fb963e.js"
+          href="http://localhost:4000/main-7af3fc9aa1bc97e1b3a1.js"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
@@ -63,7 +63,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-e6ba5dd1228141fb963e.js"
+            src="http://localhost:4000/main-7af3fc9aa1bc97e1b3a1.js"
             crossorigin="anonymous"
     >
     </script>
@@ -85,7 +85,7 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="http://localhost:4000/main-fadb2269a374a06075a5.css"
     >
     <link data-chunk="main"
           rel="preload"
@@ -102,14 +102,14 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-e6ba5dd1228141fb963e.js"
+          href="http://localhost:4000/main-7af3fc9aa1bc97e1b3a1.js"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
@@ -135,7 +135,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-e6ba5dd1228141fb963e.js"
+            src="http://localhost:4000/main-7af3fc9aa1bc97e1b3a1.js"
             crossorigin="anonymous"
     >
     </script>
@@ -180,8 +180,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97">
-        <div class="lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY">
+      <div class="lessStyles__root___1brbpTo">
+        <div class="lessStyles__nested___3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:8100/543503d0f8691e33cdf9a03512ad717a.png">

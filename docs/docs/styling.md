@@ -23,7 +23,7 @@ import styles from './example.less';
 export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 ```
 
-## [treat](https://seek-oss.github.io/treat/)
+## treat
 
 Note: You must access all treat imports through the sku prefix. e.g. `sku/treat`, `sku/react-treat`;
 

@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`react-css-modules should create valid app 1`] = `
+SCRIPTS: Array [
+  "/runtime-554e53c2f72903d6f45f.js",
+  "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
+  "/main-a11ee3ceb7e73f40a468.js",
+]
+CSS: Array [
+  "/main-fadb2269a374a06075a5.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -13,22 +21,22 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/main-fadb2269a374a06075a5.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-554e53c2f72903d6f45f.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-de7ea8f2a0d5ba76c5b9.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-a11ee3ceb7e73f40a468.js"
+          href="scripts[2]"
     >
   </head>
   <body>
@@ -48,17 +56,17 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-554e53c2f72903d6f45f.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-de7ea8f2a0d5ba76c5b9.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-a11ee3ceb7e73f40a468.js"
+            src="scripts[2]"
     >
     </script>
   </body>
@@ -77,7 +85,15 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "/runtime-554e53c2f72903d6f45f.js",
+    "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
+    "/main-a11ee3ceb7e73f40a468.js",
+  ]
+CSS: Array [
+    "/main-fadb2269a374a06075a5.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -89,22 +105,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/main-fadb2269a374a06075a5.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-554e53c2f72903d6f45f.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-de7ea8f2a0d5ba76c5b9.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-a11ee3ceb7e73f40a468.js"
+          href="scripts[2]"
     >
   </head>
   <body>
@@ -124,17 +140,17 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-554e53c2f72903d6f45f.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-de7ea8f2a0d5ba76c5b9.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-a11ee3ceb7e73f40a468.js"
+            src="scripts[2]"
     >
     </script>
   </body>

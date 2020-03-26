@@ -33,14 +33,7 @@ describe('ssr-hello-world', () => {
     });
 
     it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(
-        backendUrl,
-        // This ignores warnings coming from react-hot-loader
-        (warning) =>
-          warning.indexOf(
-            'Please update the following components: %s AppContainer',
-          ) === -1,
-      );
+      const snapshot = await getAppSnapshot(backendUrl);
       expect(snapshot).toMatchSnapshot();
     });
   });

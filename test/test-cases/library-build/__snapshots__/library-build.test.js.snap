@@ -19,6 +19,12 @@ Object {
 `;
 
 exports[`library-build start should start a development server 1`] = `
+SCRIPTS: Array [
+  "/MyLibrary.js",
+]
+CSS: Array [
+  "/MyLibrary.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -31,11 +37,11 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link rel="stylesheet"
           type="text/css"
-          href="/MyLibrary.css"
+          href="styles[0]"
     >
   </head>
   <body>
-    <script src="/MyLibrary.js">
+    <script src="scripts[0]">
     </script>
     <script>
       window.MyLibrary();

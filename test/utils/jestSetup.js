@@ -1,11 +1,11 @@
-const jestSerializerHtml = require('jest-serializer-html');
 const {
   appSnapshotSerializer,
   cssSnapshotSerializer,
+  htmlSnapshotSerializer,
 } = require('./appSnapshot');
 
-expect.addSnapshotSerializer(jestSerializerHtml);
 expect.addSnapshotSerializer(appSnapshotSerializer);
 expect.addSnapshotSerializer(cssSnapshotSerializer);
+expect.addSnapshotSerializer(htmlSnapshotSerializer);
 
 jest.setTimeout(90000);

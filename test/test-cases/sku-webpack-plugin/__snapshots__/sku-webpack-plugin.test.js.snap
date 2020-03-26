@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`sku-webpack-plugin build should create valid app 1`] = `
+SCRIPTS: Array [
+  "main.js",
+]
+CSS: Array [
+  "main.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -8,13 +14,13 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       Webpack App
     </title>
-    <link href="main.css"
+    <link href="styles[0]"
           rel="stylesheet"
     >
   </head>
   <body>
     <script type="text/javascript"
-            src="main.js"
+            src="scripts[0]"
     >
     </script>
   </body>
@@ -41,20 +47,26 @@ POST HYDRATE DIFFS:
 
 exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 Object {
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "main.js",
+  ]
+CSS: Array [
+    "main.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
       Webpack App
     </title>
-    <link href="main.css"
+    <link href="styles[0]"
           rel="stylesheet"
     >
   </head>
   <body>
     <script type="text/javascript"
-            src="main.js"
+            src="scripts[0]"
     >
     </script>
   </body>
@@ -1043,6 +1055,12 @@ Object {
 `;
 
 exports[`sku-webpack-plugin start should start a development server 1`] = `
+SCRIPTS: Array [
+  "main.js",
+]
+CSS: Array [
+  "main.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -1050,13 +1068,13 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       Webpack App
     </title>
-    <link href="main.css"
+    <link href="styles[0]"
           rel="stylesheet"
     >
   </head>
   <body>
     <script type="text/javascript"
-            src="main.js"
+            src="scripts[0]"
     >
     </script>
   </body>

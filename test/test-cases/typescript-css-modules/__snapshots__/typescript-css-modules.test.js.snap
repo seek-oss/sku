@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`typescript-css-modules build should create valid app 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
+  "http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js",
+  "http://localhost:4003/main-0b09f9bf338f7b37cc2d.js",
+]
+CSS: Array [
+  "http://localhost:4003/main-bfe8911084b821bf8edd.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -13,24 +21,24 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4003/main-bfe8911084b821bf8edd.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -52,19 +60,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -85,7 +93,15 @@ export const root: string;
 export const border: string;
 export const root: string;
 ",
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
+    "http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js",
+    "http://localhost:4003/main-0b09f9bf338f7b37cc2d.js",
+  ]
+CSS: Array [
+    "http://localhost:4003/main-bfe8911084b821bf8edd.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -97,24 +113,24 @@ export const root: string;
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4003/main-bfe8911084b821bf8edd.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -136,19 +152,19 @@ export const root: string;
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-0b09f9bf338f7b37cc2d.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -196,6 +212,14 @@ export = cssExports;
 `;
 
 exports[`typescript-css-modules build-ssr should create valid app 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
+  "http://localhost:4003/vendors~main-984fab7243c3dc553e6f.js",
+  "http://localhost:4003/main-fe572733ec996a636549.js",
+]
+CSS: Array [
+  "http://localhost:4003/main-bfe8911084b821bf8edd.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -208,24 +232,24 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4003/main-bfe8911084b821bf8edd.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/vendors~main-984fab7243c3dc553e6f.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4003/main-fe572733ec996a636549.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -247,19 +271,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/runtime-62bc0856cbb8d47f9471.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/vendors~main-984fab7243c3dc553e6f.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4003/main-fe572733ec996a636549.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -323,6 +347,15 @@ export = cssExports;
 `;
 
 exports[`typescript-css-modules start should start a development server 1`] = `
+SCRIPTS: Array [
+  "/runtime.js",
+  "/vendors~devServerOnly~main.js",
+  "/vendors~main.js",
+  "/main.js",
+]
+CSS: Array [
+  "/main.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -335,27 +368,27 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/main.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~devServerOnly~main.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main.js"
+          href="scripts[2]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main.js"
+          href="scripts[3]"
     >
   </head>
   <body>
@@ -375,22 +408,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~devServerOnly~main.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main.js"
+            src="scripts[3]"
     >
     </script>
   </body>

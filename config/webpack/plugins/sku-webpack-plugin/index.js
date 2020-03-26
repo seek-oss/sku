@@ -10,6 +10,7 @@ const {
   LESS,
   IMAGE,
   SVG,
+  DEPRECATED_CSS_IN_JS,
   resolvePackage,
 } = require('../../utils');
 const createTreatPlugin = require('../createTreatPlugin');
@@ -111,6 +112,10 @@ class SkuWebpackPlugin {
         use: makeImageLoaders({ target }),
       },
       { test: SVG, use: makeSvgLoaders() },
+      {
+        test: DEPRECATED_CSS_IN_JS,
+        use: require.resolve('../invalidFileLoader'),
+      },
     ];
 
     compiler.options.module.rules.push(...rules);

@@ -11,7 +11,7 @@ const htmlSnapshotSerializer = {
     const styles = [];
 
     const extractedHtml = formatHtml(html).replace(
-      /(href|src)="(.*.(?:js|css))"/g,
+      /(href|src)="(.*\.(?:js|css))"/g,
       (_match, key, url) => {
         const [type, assets] = url.endsWith('.js')
           ? ['scripts', scripts]

@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
+]
+CSS: Array [
+  "http://localhost:4000/main-9faf588efead42b43c24.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -13,24 +21,24 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-293de8fb778fafa23f06.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-0fd1a62f25e9f36d64e6.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -51,19 +59,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-293de8fb778fafa23f06.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-0fd1a62f25e9f36d64e6.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -73,6 +81,14 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
+]
+CSS: Array [
+  "http://localhost:4000/main-9faf588efead42b43c24.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -85,24 +101,24 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-293de8fb778fafa23f06.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-0fd1a62f25e9f36d64e6.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -123,19 +139,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-293de8fb778fafa23f06.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-0fd1a62f25e9f36d64e6.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -145,6 +161,14 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
+SCRIPTS: Array [
+  "http://localhost:8100/runtime.js",
+  "http://localhost:8100/vendors~main.js",
+  "http://localhost:8100/main.js",
+]
+CSS: Array [
+  "http://localhost:8100/main.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -157,24 +181,24 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:8100/main.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/runtime.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/vendors~main.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/main.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -195,19 +219,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/runtime.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/vendors~main.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/main.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>

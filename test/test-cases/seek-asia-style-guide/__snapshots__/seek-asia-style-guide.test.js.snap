@@ -8,7 +8,15 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "/runtime-554e53c2f72903d6f45f.js",
+    "/vendors~main-c782bec678f2b2b8aef9.js",
+    "/main-843a38c33c7446f80656.js",
+  ]
+CSS: Array [
+    "/vendors~main-9ee511066e2df2f42c8b.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -20,22 +28,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-9ee511066e2df2f42c8b.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-554e53c2f72903d6f45f.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-c782bec678f2b2b8aef9.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-843a38c33c7446f80656.js"
+          href="scripts[2]"
     >
   </head>
   <body>
@@ -64,17 +72,17 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-554e53c2f72903d6f45f.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-c782bec678f2b2b8aef9.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-843a38c33c7446f80656.js"
+            src="scripts[2]"
     >
     </script>
   </body>

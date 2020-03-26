@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`braid-design-system build should create valid app 1`] = `
+SCRIPTS: Array [
+  "/runtime-2c524116a38562cba3f4.js",
+  "/vendors~main-6e8aedde130662aea8a2.js",
+  "/main-420fa4eaed1fdbe87491.js",
+  "/themes-jobStreet-770f65c46502d69d7586.js",
+]
+CSS: Array [
+  "/themes-jobStreet-51b72b8122d6644a3bc9.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -13,27 +22,27 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-51b72b8122d6644a3bc9.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-2c524116a38562cba3f4.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-6e8aedde130662aea8a2.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-420fa4eaed1fdbe87491.js"
+          href="scripts[2]"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-770f65c46502d69d7586.js"
+          href="scripts[3]"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -151,22 +160,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-2c524116a38562cba3f4.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-6e8aedde130662aea8a2.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-420fa4eaed1fdbe87491.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-770f65c46502d69d7586.js"
+            src="scripts[3]"
     >
     </script>
   </body>
@@ -203,7 +212,16 @@ Object {
   \\"url\\",
   \\"util\\"
 ]",
-  "jobStreet/index.html": <!DOCTYPE html>
+  "jobStreet/index.html": SCRIPTS: Array [
+    "/runtime-2c524116a38562cba3f4.js",
+    "/vendors~main-6e8aedde130662aea8a2.js",
+    "/main-420fa4eaed1fdbe87491.js",
+    "/themes-jobStreet-770f65c46502d69d7586.js",
+  ]
+CSS: Array [
+    "/themes-jobStreet-51b72b8122d6644a3bc9.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -215,27 +233,27 @@ Object {
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
-          href="/themes-jobStreet-51b72b8122d6644a3bc9.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-2c524116a38562cba3f4.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-6e8aedde130662aea8a2.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-420fa4eaed1fdbe87491.js"
+          href="scripts[2]"
     >
     <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
-          href="/themes-jobStreet-770f65c46502d69d7586.js"
+          href="scripts[3]"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -353,29 +371,38 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-2c524116a38562cba3f4.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-6e8aedde130662aea8a2.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-420fa4eaed1fdbe87491.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
-            src="/themes-jobStreet-770f65c46502d69d7586.js"
+            src="scripts[3]"
     >
     </script>
   </body>
 </html>,
   "main-420fa4eaed1fdbe87491.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-2c524116a38562cba3f4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "seekAnz/index.html": <!DOCTYPE html>
+  "seekAnz/index.html": SCRIPTS: Array [
+    "/runtime-2c524116a38562cba3f4.js",
+    "/vendors~main-6e8aedde130662aea8a2.js",
+    "/main-420fa4eaed1fdbe87491.js",
+    "/themes-seekAnz-e2e7b49572116abd1672.js",
+  ]
+CSS: Array [
+    "/themes-seekAnz-f19341304e28bcfbf22a.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -387,27 +414,27 @@ Object {
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/themes-seekAnz-f19341304e28bcfbf22a.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-2c524116a38562cba3f4.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-6e8aedde130662aea8a2.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-420fa4eaed1fdbe87491.js"
+          href="scripts[2]"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/themes-seekAnz-e2e7b49572116abd1672.js"
+          href="scripts[3]"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -525,22 +552,22 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-2c524116a38562cba3f4.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-6e8aedde130662aea8a2.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-420fa4eaed1fdbe87491.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/themes-seekAnz-e2e7b49572116abd1672.js"
+            src="scripts[3]"
     >
     </script>
   </body>
@@ -8373,6 +8400,20 @@ Object {
 `;
 
 exports[`braid-design-system start should start a development server 1`] = `
+SCRIPTS: Array [
+  "/runtime.js",
+  "/vendors~devServerOnly~main.js",
+  "/vendors~main.js",
+  "/main.js",
+  "/vendors~themes-jobStreet~themes-jobStreetClassic~themes-jobsDb~themes-jobsDbRebrand~themes-seekAnz~t~afbd2572.js",
+  "/vendors~themes-seekAnz.js",
+  "/themes-seekAnz.js",
+]
+CSS: Array [
+  "/vendors~themes-jobStreet~themes-jobStreetClassic~themes-jobsDb~themes-jobsDbRebrand~themes-seekAnz~t~afbd2572.css",
+  "/vendors~themes-seekAnz.css",
+  "/themes-seekAnz.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -8385,50 +8426,50 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/vendors~themes-jobStreet~themes-jobStreetClassic~themes-jobsDb~themes-jobsDbRebrand~themes-seekAnz~t~afbd2572.css"
+          href="styles[0]"
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/vendors~themes-seekAnz.css"
+          href="styles[1]"
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
-          href="/themes-seekAnz.css"
+          href="styles[2]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~devServerOnly~main.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main.js"
+          href="scripts[2]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main.js"
+          href="scripts[3]"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/vendors~themes-jobStreet~themes-jobStreetClassic~themes-jobsDb~themes-jobsDbRebrand~themes-seekAnz~t~afbd2572.js"
+          href="scripts[4]"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/vendors~themes-seekAnz.js"
+          href="scripts[5]"
     >
     <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
-          href="/themes-seekAnz.js"
+          href="scripts[6]"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -8546,37 +8587,37 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~devServerOnly~main.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main.js"
+            src="scripts[3]"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/vendors~themes-jobStreet~themes-jobStreetClassic~themes-jobsDb~themes-jobsDbRebrand~themes-seekAnz~t~afbd2572.js"
+            src="scripts[4]"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/vendors~themes-seekAnz.js"
+            src="scripts[5]"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
-            src="/themes-seekAnz.js"
+            src="scripts[6]"
     >
     </script>
   </body>

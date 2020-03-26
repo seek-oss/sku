@@ -3,8 +3,8 @@
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
 SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
-  "http://localhost:4000/vendors~main-a8e117066fe0a6dafc9a.js",
-  "http://localhost:4000/main-e6ba5dd1228141fb963e.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
 ]
 CSS: Array [
   "http://localhost:4000/main-9faf588efead42b43c24.css",
@@ -48,7 +48,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="_3YtmnHj lwsthgY">
           Hello World
         </div>
-        <img src="images[0]">
+        <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -83,8 +83,8 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
-  "http://localhost:4000/vendors~main-a8e117066fe0a6dafc9a.js",
-  "http://localhost:4000/main-e6ba5dd1228141fb963e.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
 ]
 CSS: Array [
   "http://localhost:4000/main-9faf588efead42b43c24.css",
@@ -128,7 +128,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="_3YtmnHj lwsthgY">
           Hello World
         </div>
-        <img src="images[0]">
+        <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -208,7 +208,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY">
           Hello World
         </div>
-        <img src="images[0]">
+        <img src="http://localhost:8100/543503d0f8691e33cdf9a03512ad717a.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"

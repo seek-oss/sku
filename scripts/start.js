@@ -7,7 +7,6 @@ const exceptionFormatter = require('exception-formatter');
 const pathToRegex = require('path-to-regexp');
 
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const createRenderProvider = require('../lib/staticRenderer');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const {
@@ -18,7 +17,9 @@ const {
   sites,
   environments,
   isLibrary,
+  transformOutputPath,
 } = require('../context');
+const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 const localhost = '0.0.0.0';
@@ -29,28 +30,19 @@ const localhost = '0.0.0.0';
     host: localhost,
   });
 
+  const htmlRenderPlugin = createHtmlRenderPlugin();
+
   const config = makeWebpackConfig({
     port: availablePort,
     isDevServer: true,
+    htmlRenderPlugin,
   });
 
   const parentCompiler = webpack(config);
 
-  const clientCompiler = parentCompiler.compilers.find(
-    (c) => c.name === 'client',
-  );
-  const renderCompiler = parentCompiler.compilers.find(
-    (c) => c.name === 'render',
-  );
-
   await checkHosts();
 
   const appHosts = getAppHosts();
-
-  const { renderWhenReady } = createRenderProvider({
-    clientCompiler,
-    renderCompiler,
-  });
 
   const getSiteForHost = (hostname) => {
     if (sites.length === 0) {
@@ -81,20 +73,34 @@ const localhost = '0.0.0.0';
           return next();
         }
 
-        renderWhenReady(async ({ renderer, webpackStats }) => {
-          try {
-            const html = await renderer({
-              webpackStats,
-              route: matchingRoute.route,
-              routeName: matchingRoute.name,
-              site: getSiteForHost(req.hostname),
-              environment:
-                environments.length > 0 ? environments[0] : undefined,
-            });
+        console.log(
+          {
+            route: matchingRoute.route,
+            routeName: matchingRoute.name,
+            site: getSiteForHost(req.hostname),
+            environment: environments.length > 0 ? environments[0] : undefined,
+          },
+          transformOutputPath({
+            route: matchingRoute.route,
+            routeName: matchingRoute.name,
+            site: getSiteForHost(req.hostname),
+            environment: environments.length > 0 ? environments[0] : undefined,
+          }),
+        );
 
-            res.send(html);
-          } catch (err) {
-            // Library mode does not have "devServerOnly" entry as it is a UMD
+        htmlRenderPlugin
+          .renderWhenReady({
+            route: matchingRoute.route,
+            routeName: matchingRoute.name,
+            site: getSiteForHost(req.hostname),
+            environment: environments.length > 0 ? environments[0] : undefined,
+          })
+          .then((html) => res.send(html))
+          .catch((renderError) => {
+            console.log(renderError);
+
+            const webpackStats = renderError.webpackStats.toJSON();
+
             const devServerAssets = !isLibrary
               ? webpackStats.entrypoints.devServerOnly.assets
               : [];
@@ -104,14 +110,13 @@ const localhost = '0.0.0.0';
             );
 
             res.status(500).send(
-              exceptionFormatter(err, {
+              exceptionFormatter(renderError, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
               }).concat(...devServerScripts),
             );
-          }
-        });
+          });
       });
     },
   });

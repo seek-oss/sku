@@ -66,9 +66,9 @@ module.exports = () => {
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
+    skipAssets: isStartScript,
     transformFilePath: transformOutputPath,
     mapStatsToParams,
-    verbose: false,
     extraGlobals: {
       // This fixes an issue where one of treats deps (@hapi/joek)
       // accesses Buffer globally. Not great...

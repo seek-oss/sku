@@ -7,7 +7,6 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
-const createHtmlRenderPlugin = require('./plugins/createHtmlRenderPlugin');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 
@@ -36,22 +35,21 @@ const makeWebpackConfig = ({
   isIntegration = false,
   port = 0,
   isDevServer = false,
+  htmlRenderPlugin,
 } = {}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
-  const shouldRenderHtml = () => {
-    if (isIntegration) {
-      return false;
-    }
-    if (isLibrary) {
-      return isDevServer;
-    }
-    return true;
-  };
-  const renderHtml = shouldRenderHtml();
-  const htmlRenderPlugin =
-    !isDevServer && renderHtml ? createHtmlRenderPlugin() : null;
+  // const shouldRenderHtml = (() => {
+  //   if (isIntegration) {
+  //     return false;
+  //   }
+  //   if (isLibrary) {
+  //     return isDevServer;
+  //   }
+  //   return true;
+  // })();
+  // const htmlRenderPlugin = shouldRenderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
     .chain(env)
@@ -207,9 +205,9 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        ...(htmlRenderPlugin ? [htmlRenderPlugin] : []),
-        ...(renderHtml
+        ...(htmlRenderPlugin
           ? [
+              htmlRenderPlugin.statsCollectorPlugin,
               new LoadablePlugin({
                 writeToDisk: false,
                 outputAsset: false,
@@ -282,7 +280,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        ...(htmlRenderPlugin ? [htmlRenderPlugin.render()] : []),
+        ...(htmlRenderPlugin ? [htmlRenderPlugin.rendererPlugin] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),

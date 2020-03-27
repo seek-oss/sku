@@ -4,10 +4,10 @@ exports[`ssr-hello-world build custom port should generate a production server r
 SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
   "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
-  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
+  "http://localhost:4000/main-ee6bfb0765d78f88e1c0.js",
 ]
 CSS: Array [
-  "http://localhost:4000/main-9faf588efead42b43c24.css",
+  "http://localhost:4000/main-fadb2269a374a06075a5.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -44,8 +44,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
@@ -84,10 +84,10 @@ exports[`ssr-hello-world build default port should generate a production server 
 SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
   "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
-  "http://localhost:4000/main-0fd1a62f25e9f36d64e6.js",
+  "http://localhost:4000/main-ee6bfb0765d78f88e1c0.js",
 ]
 CSS: Array [
-  "http://localhost:4000/main-9faf588efead42b43c24.css",
+  "http://localhost:4000/main-fadb2269a374a06075a5.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -124,8 +124,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
@@ -204,8 +204,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97">
-        <div class="lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY">
+      <div class="lessStyles__root___1brbpTo">
+        <div class="lessStyles__nested___3YtmnHj">
           Hello World
         </div>
         <img src="http://localhost:8100/543503d0f8691e33cdf9a03512ad717a.png">

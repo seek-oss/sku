@@ -4,10 +4,10 @@ exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: Array [
   "/runtime-554e53c2f72903d6f45f.js",
   "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
-  "/main-4970b4091dcecae17f61.js",
+  "/main-a11ee3ceb7e73f40a468.js",
 ]
 CSS: Array [
-  "/main-bfe8911084b821bf8edd.css",
+  "/main-fadb2269a374a06075a5.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -41,8 +41,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY"
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj"
              data-automation-text="true"
         >
           Initial render
@@ -72,7 +72,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-         <div class="_3YtmnHj lwsthgY"
+         <div class="_3YtmnHj"
               data-automation-text="true"
          >
 -          Initial render
@@ -88,10 +88,10 @@ Object {
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
     "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
-    "/main-4970b4091dcecae17f61.js",
+    "/main-a11ee3ceb7e73f40a468.js",
   ]
 CSS: Array [
-    "/main-bfe8911084b821bf8edd.css",
+    "/main-fadb2269a374a06075a5.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -125,8 +125,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY"
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj"
              data-automation-text="true"
         >
           Initial render
@@ -155,22 +155,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-4970b4091dcecae17f61.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-bfe8911084b821bf8edd.css": ._1brbpTo {
+  "main-a11ee3ceb7e73f40a468.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-fadb2269a374a06075a5.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 ._1brbpTo ._3YtmnHj {
   font-size: 32px;
-}
-.Jlnxw97 {
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-.Jlnxw97 .lwsthgY {
-  color: red;
 }
 ,
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

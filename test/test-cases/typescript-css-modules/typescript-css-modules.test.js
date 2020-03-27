@@ -11,7 +11,7 @@ const srcDir = path.resolve(appDir, 'src');
 const skuConfig = require('./app/sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
-const cssTypes = ['.less.d.ts', '.css.js.d.ts'];
+const cssTypes = ['.less.d.ts'];
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
@@ -145,14 +145,12 @@ describe('typescript-css-modules', () => {
 
         const text = element.innerText;
         const styles = window.getComputedStyle(element);
-        const color = styles.getPropertyValue('color');
         const fontSize = styles.getPropertyValue('font-size');
 
-        return { text, color, fontSize };
+        return { text, fontSize };
       });
 
       expect(content.text).toEqual('Hello World');
-      expect(content.color).toEqual('rgb(255, 0, 0)');
       expect(content.fontSize).toEqual('32px');
     });
   });

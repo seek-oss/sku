@@ -3,15 +3,14 @@ const defaultSupportedBrowsers = require('browserslist-config-seek');
 const {
   makeJsLoaders,
   makeCssLoaders,
-  makeCssInJsLoaders,
   makeImageLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
   JAVASCRIPT,
-  CSS_IN_JS,
   LESS,
   IMAGE,
   SVG,
+  DEPRECATED_CSS_IN_JS,
   resolvePackage,
 } = require('../../utils');
 const createTreatPlugin = require('../createTreatPlugin');
@@ -78,37 +77,6 @@ class SkuWebpackPlugin {
         }),
       },
       {
-        test: CSS_IN_JS,
-        oneOf: this.compilePackages
-          .map((packageName) => ({
-            include: resolvePackage(packageName),
-            use: makeCssInJsLoaders({
-              target,
-              isCI,
-              isProductionBuild,
-              generateCSSTypes,
-              MiniCssExtractPlugin,
-              packageName,
-              hot,
-              compilePackage: true,
-              supportedBrowsers,
-            }),
-          }))
-          .concat({
-            include: this.include,
-            use: makeCssInJsLoaders({
-              target,
-              isCI,
-              isProductionBuild,
-              generateCSSTypes,
-              MiniCssExtractPlugin,
-              hot,
-              compilePackage: false,
-              supportedBrowsers,
-            }),
-          }),
-      },
-      {
         test: LESS,
         oneOf: this.compilePackages
           .map((packageName) => ({
@@ -144,6 +112,10 @@ class SkuWebpackPlugin {
         use: makeImageLoaders({ target }),
       },
       { test: SVG, use: makeSvgLoaders() },
+      {
+        test: DEPRECATED_CSS_IN_JS,
+        use: require.resolve('../deprecatedCssInJsFileLoader'),
+      },
     ];
 
     compiler.options.module.rules.push(...rules);

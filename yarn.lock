@@ -7641,9 +7641,9 @@ html-minifier@^3.2.3:
     uglify-js "3.4.x"
 
 html-render-webpack-plugin@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-2.0.2.tgz#858e8d3649cb1d0d9f2b5c6216b65ba0d9570038"
-  integrity sha512-/6UOtvEkzp0t0IdvtLdbDzacWlz6s46ndXAirpiNpE25hHwRBBZkLaGIX/ZeoeyF7hnfFEu3Jmwh8i9mbdgtTw==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/html-render-webpack-plugin/-/html-render-webpack-plugin-2.0.3.tgz#3338481e4212bad96905b1b0c73597a369491b1c"
+  integrity sha512-M827QpfzrHGsGGx3gp7ol+GDXRdH9gR3E8Y8gdqB5TEN3Jnp75V6Ww652I1KqO0/DzdqdUPGWUCmjEnbrGtEkw==
   dependencies:
     chalk "^3.0.0"
     eval "^0.1.4"

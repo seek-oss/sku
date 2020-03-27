@@ -89,8 +89,7 @@ describe('configure', () => {
     ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolder, ignore);
-        expect(ignoreContents.length).toEqual(7);
-        expect(ignoreContents).toContain('*.css.js.d.ts');
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
         expect(ignoreContents).toContain(`${defaultTargetDir}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
@@ -149,8 +148,7 @@ describe('configure', () => {
     ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
-        expect(ignoreContents.length).toEqual(7);
-        expect(ignoreContents).toContain('*.css.js.d.ts');
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
         expect(ignoreContents).toContain(`${skuConfig.target}/`);
         expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);

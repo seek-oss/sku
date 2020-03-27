@@ -1,4 +1,3 @@
-*.css.js.d.ts
 *.less.d.ts
 node_modules
 coverage/

@@ -89,15 +89,6 @@ const makeCssLoaders = (options = {}) => {
   ];
 };
 
-const makeCssInJsLoaders = (loaderOptions = {}) => {
-  const cssInJsLoaders = [
-    { loader: require.resolve('./cssInJsLoader') },
-    ...makeJsLoaders(loaderOptions),
-  ];
-
-  return [...makeCssLoaders(loaderOptions), ...cssInJsLoaders];
-};
-
 const makeImageLoaders = (options = {}) => {
   const { target = 'browser' } = options;
 
@@ -139,7 +130,6 @@ const makeSvgLoaders = () => [
 module.exports = {
   makeJsLoaders,
   makeCssLoaders,
-  makeCssInJsLoaders,
   makeImageLoaders,
   makeSvgLoaders,
 };

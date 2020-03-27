@@ -17,7 +17,6 @@ const {
   sites,
   environments,
   isLibrary,
-  transformOutputPath,
 } = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
@@ -73,21 +72,6 @@ const localhost = '0.0.0.0';
           return next();
         }
 
-        console.log(
-          {
-            route: matchingRoute.route,
-            routeName: matchingRoute.name,
-            site: getSiteForHost(req.hostname),
-            environment: environments.length > 0 ? environments[0] : undefined,
-          },
-          transformOutputPath({
-            route: matchingRoute.route,
-            routeName: matchingRoute.name,
-            site: getSiteForHost(req.hostname),
-            environment: environments.length > 0 ? environments[0] : undefined,
-          }),
-        );
-
         htmlRenderPlugin
           .renderWhenReady({
             route: matchingRoute.route,
@@ -97,9 +81,7 @@ const localhost = '0.0.0.0';
           })
           .then((html) => res.send(html))
           .catch((renderError) => {
-            console.log(renderError);
-
-            const webpackStats = renderError.webpackStats.toJSON();
+            const webpackStats = renderError.webpackStats.toJson();
 
             const devServerAssets = !isLibrary
               ? webpackStats.entrypoints.devServerOnly.assets

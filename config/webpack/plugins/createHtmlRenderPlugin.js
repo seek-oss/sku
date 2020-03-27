@@ -12,9 +12,7 @@ const {
   publicPath,
 } = require('../../../context');
 
-const getClientStats = (webpackStats) => {
-  return webpackStats.toJson().children.find(({ name }) => name === 'client');
-};
+const getClientStats = (webpackStats) => webpackStats.toJson();
 
 const getCachedClientStats = memoize(getClientStats);
 

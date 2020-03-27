@@ -114,7 +114,7 @@ class SkuWebpackPlugin {
       { test: SVG, use: makeSvgLoaders() },
       {
         test: DEPRECATED_CSS_IN_JS,
-        use: require.resolve('../invalidFileLoader'),
+        use: require.resolve('../deprecatedCssInJsFileLoader'),
       },
     ];
 

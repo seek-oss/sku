@@ -13,6 +13,7 @@ const {
 const { run } = require('../lib/runWebpack');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
+const { isLibrary } = require('../context');
 
 (async () => {
   try {
@@ -20,7 +21,9 @@ const makeWebpackConfig = require('../config/webpack/webpack.config');
     await cleanTargetDirectory();
     await run(
       webpack(
-        makeWebpackConfig({ htmlRenderPlugin: createHtmlRenderPlugin() }),
+        makeWebpackConfig({
+          htmlRenderPlugin: !isLibrary ? createHtmlRenderPlugin() : undefined,
+        }),
       ),
     );
     await cleanRenderJs();

@@ -40,16 +40,6 @@ const makeWebpackConfig = ({
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
-  // const shouldRenderHtml = (() => {
-  //   if (isIntegration) {
-  //     return false;
-  //   }
-  //   if (isLibrary) {
-  //     return isDevServer;
-  //   }
-  //   return true;
-  // })();
-  // const htmlRenderPlugin = shouldRenderHtml ? createHtmlRenderPlugin() : null;
 
   const envVars = lodash
     .chain(env)

@@ -7,9 +7,7 @@ enum Message {
   Goodbye = 'Goodbye World',
 }
 
-export const messageRenderer = (): Message => {
-  return Message.Hello;
-};
+export const messageRenderer = (): Message => Message.Hello;
 
 interface Props {
   children?: ReactNode;

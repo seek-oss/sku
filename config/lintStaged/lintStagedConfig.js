@@ -11,10 +11,6 @@ if (isYarn) {
 }
 
 // Format & lint
-steps['**/*.{js,jsx,ts,tsx,md,less,css}'] = [
-  `sku format`,
-  `sku lint`,
-  'git add',
-];
+steps['**/*.{js,ts,tsx,md,less}'] = [`sku format`, `sku lint`, 'git add'];
 
 module.exports = steps;

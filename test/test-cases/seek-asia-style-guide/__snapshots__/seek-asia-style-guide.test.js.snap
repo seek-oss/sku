@@ -10,7 +10,7 @@ Object {
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
-    "/vendors~main-c782bec678f2b2b8aef9.js",
+    "/vendors~main-1c0b9580e64e330f9771.js",
     "/main-843a38c33c7446f80656.js",
   ]
 CSS: Array [
@@ -89,6 +89,7 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "main-843a38c33c7446f80656.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-1c0b9580e64e330f9771.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-9ee511066e2df2f42c8b.css": a,
 abbr,
 acronym,
@@ -4140,6 +4141,5 @@ html {
   outline: none;
 }
 ,
-  "vendors~main-c782bec678f2b2b8aef9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

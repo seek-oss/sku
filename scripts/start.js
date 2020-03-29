@@ -4,7 +4,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
-const pathToRegex = require('path-to-regexp');
+const { pathToRegexp } = require('path-to-regexp');
 
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
@@ -65,7 +65,7 @@ const localhost = '0.0.0.0';
       // eslint-disable-next-line consistent-return
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) =>
-          pathToRegex(route).exec(req.path),
+          pathToRegexp(route).exec(req.path),
         );
 
         if (!matchingRoute) {

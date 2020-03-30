@@ -18,8 +18,8 @@ module.exports = {
         groups: [
           'builtin',
           'external',
-          'parent',
           'internal',
+          'parent',
           'sibling',
           'index',
         ],

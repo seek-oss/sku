@@ -81,15 +81,15 @@ const localhost = '0.0.0.0';
           })
           .then((html) => res.send(html))
           .catch((renderError) => {
-            const webpackStats = renderError.webpackStats.toJson();
+            let devServerScripts = [];
 
-            const devServerAssets = !isLibrary
-              ? webpackStats.entrypoints.devServerOnly.assets
-              : [];
+            if (renderError.webpackStats && !isLibrary) {
+              const webpackStats = renderError.webpackStats.toJson();
 
-            const devServerScripts = devServerAssets.map(
-              (asset) => `<script src="/${asset}"></script>`,
-            );
+              devServerScripts = webpackStats.entrypoints.devServerOnly.assets.map(
+                (asset) => `<script src="/${asset}"></script>`,
+              );
+            }
 
             res.status(500).send(
               exceptionFormatter(renderError, {

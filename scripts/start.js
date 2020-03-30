@@ -62,7 +62,6 @@ const localhost = '0.0.0.0';
     allowedHosts: appHosts,
     serveIndex: false,
     after: (app) => {
-      // eslint-disable-next-line consistent-return
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) =>
           pathToRegexp(route).exec(req.path),

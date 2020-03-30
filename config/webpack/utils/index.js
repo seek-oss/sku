@@ -1,9 +1,13 @@
-const env = require('./env');
 const loaders = require('./loaders');
 const { resolvePackage } = require('./resolvePackage');
 
 module.exports = {
-  ...env,
   ...loaders,
   resolvePackage,
+  TYPESCRIPT: /\.(ts|tsx)$/,
+  JAVASCRIPT: /\.js$/,
+  LESS: /\.less$/,
+  IMAGE: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+  SVG: /\.svg$/,
+  DEPRECATED_CSS_IN_JS: /\.css\.js$/,
 };

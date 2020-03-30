@@ -8,7 +8,15 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "/runtime-554e53c2f72903d6f45f.js",
+    "/vendors~main-1c0b9580e64e330f9771.js",
+    "/main-843a38c33c7446f80656.js",
+  ]
+CSS: Array [
+    "/vendors~main-9ee511066e2df2f42c8b.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -20,22 +28,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-ef3808e29f10d5bd59fc.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-0fa5444f4a643d55e2a2.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-a6f202cb7b020248db5f.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-681fe9d305561d5645a7.js"
+          href="scripts[2]"
     >
   </head>
   <body>
@@ -64,25 +72,25 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-0fa5444f4a643d55e2a2.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-a6f202cb7b020248db5f.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-681fe9d305561d5645a7.js"
+            src="scripts[2]"
     >
     </script>
   </body>
 </html>,
-  "main-681fe9d305561d5645a7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-0fa5444f4a643d55e2a2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-a6f202cb7b020248db5f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-ef3808e29f10d5bd59fc.css": a,
+  "main-843a38c33c7446f80656.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-1c0b9580e64e330f9771.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-9ee511066e2df2f42c8b.css": a,
 abbr,
 acronym,
 address,

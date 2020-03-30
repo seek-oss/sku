@@ -1,4 +1,5 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
+const memoize = require('memoizee');
 
 const product = require('../../../lib/product');
 const {
@@ -11,12 +12,14 @@ const {
   publicPath,
 } = require('../../../context');
 
+const getClientStats = (webpackStats) => webpackStats.toJson();
+
+const getCachedClientStats = memoize(getClientStats);
+
 // mapStatsToParams runs once for each render. It's purpose is
 // to forward the client webpack stats to the render function
 const mapStatsToParams = ({ webpackStats }) => {
-  const stats = webpackStats
-    .toJson()
-    .children.find(({ name }) => name === 'client');
+  const stats = getCachedClientStats(webpackStats);
 
   return {
     webpackStats: stats,
@@ -61,8 +64,13 @@ module.exports = () => {
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
     routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
+    skipAssets: isStartScript,
     transformFilePath: transformOutputPath,
     mapStatsToParams,
-    verbose: false,
+    extraGlobals: {
+      // This fixes an issue where one of treats deps (@hapi/joek)
+      // accesses Buffer globally. Not great...
+      Buffer,
+    },
   });
 };

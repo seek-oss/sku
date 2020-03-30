@@ -33,13 +33,14 @@ const readIgnore = async (appDir, fileName) => {
   const contents = await readFileContents(appDir, fileName);
   return contents
     .split('\n')
-    .filter(ignore => ignore && !ignore.startsWith('#')); // remove blanks and comments
+    .filter((ignore) => ignore && !ignore.startsWith('#')); // remove blanks and comments
 };
 
 const copyToApp = async (filename, folder) =>
-  await copyFile(path.join(__dirname, filename), path.join(folder, filename));
-const removeAppDir = async folder =>
-  await rimraf(folder, {
+  copyFile(path.join(__dirname, filename), path.join(folder, filename));
+
+const removeAppDir = async (folder) =>
+  rimraf(folder, {
     glob: {
       dot: true,
     },
@@ -85,11 +86,10 @@ describe('configure', () => {
       expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach(ignore =>
+    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolder, ignore);
-        expect(ignoreContents.length).toEqual(7);
-        expect(ignoreContents).toContain('*.css.js.d.ts');
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
         expect(ignoreContents).toContain(`${defaultTargetDir}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
@@ -145,11 +145,10 @@ describe('configure', () => {
       expect(ignoreContents).toContain(`${coverageFolder}/`);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach(ignore =>
+    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
-        expect(ignoreContents.length).toEqual(7);
-        expect(ignoreContents).toContain('*.css.js.d.ts');
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
         expect(ignoreContents).toContain(`${skuConfig.target}/`);
         expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);

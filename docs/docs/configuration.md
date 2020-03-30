@@ -52,7 +52,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetESLintConfig: skuEslintConfig => ({
+  dangerouslySetESLintConfig: (skuEslintConfig) => ({
     ...skuEslintConfig,
     someOtherConfig: 'dangerousValue',
   }),
@@ -71,7 +71,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetJestConfig: skuJestConfig => ({
+  dangerouslySetJestConfig: (skuJestConfig) => ({
     ...skuJestConfig,
     someOtherConfig: 'dangerousValue',
   }),
@@ -92,7 +92,7 @@ Example:
 
 ```js
 const config = {
-  dangerouslySetWebpackConfig: skuWebpackConfig => ({
+  dangerouslySetWebpackConfig: (skuWebpackConfig) => ({
     ...skuWebpackConfig,
     someOtherConfig: 'dangerousValue',
   }),
@@ -304,6 +304,14 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
+## provideDefaultChromaticViewports
+
+type: `boolean`
+
+Default: `true`
+
+Configures whether a default set of viewports (`320` and `1200`) should be provided to all screenshots. If you'd like to manually configure Chromatic per story, set this to `false`.
+
 ## playroomComponents
 
 type `string`
@@ -317,6 +325,12 @@ The file that exports all components available within Playroom.
 type `string`
 
 The file that exports all themes available within Playroom.
+
+## playroomSnippets
+
+type `string`
+
+The file that exports all snippets available to Playroom.
 
 ## playroomFrameComponent
 

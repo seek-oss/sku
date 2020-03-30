@@ -5,6 +5,7 @@ const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
+const defaultCompilePackages = require('./defaultCompilePackages');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
@@ -27,7 +28,7 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
-const normalizedRoutes = skuConfig.routes.map(route =>
+const normalizedRoutes = skuConfig.routes.map((route) =>
   typeof route === 'string' ? { route } : route,
 );
 
@@ -38,20 +39,20 @@ const transformOutputPath = isStartScript
   ? startTransformPath
   : skuConfig.transformOutputPath;
 
-const getSetupTests = setupTests => {
+const getSetupTests = (setupTests) => {
   if (!setupTests) {
     return [];
   }
 
   if (Array.isArray(setupTests)) {
-    return setupTests.map(setupTest => getPathFromCwd(setupTest));
+    return setupTests.map((setupTest) => getPathFromCwd(setupTest));
   }
 
   return [getPathFromCwd(setupTests)];
 };
 
 // normalize sites to object syntax
-const sites = skuConfig.sites.map(site =>
+const sites = skuConfig.sites.map((site) =>
   typeof site === 'string' ? { name: site } : site,
 );
 
@@ -64,13 +65,7 @@ const publicPath = skuConfig.publicPath.endsWith('/')
 
 const paths = {
   src: skuConfig.srcPaths.map(getPathFromCwd),
-  compilePackages: [
-    'sku',
-    'seek-style-guide',
-    'seek-asia-style-guide',
-    'braid-design-system',
-    ...skuConfig.compilePackages,
-  ],
+  compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
   renderEntry: getPathFromCwd(skuConfig.renderEntry),
   libraryEntry: skuConfig.libraryEntry
@@ -87,6 +82,9 @@ const paths = {
   playroomComponents: getPathFromCwd(skuConfig.playroomComponents),
   playroomThemes: skuConfig.playroomThemes
     ? getPathFromCwd(skuConfig.playroomThemes)
+    : null,
+  playroomSnippets: skuConfig.playroomSnippets
+    ? getPathFromCwd(skuConfig.playroomSnippets)
     : null,
   playroomFrameComponent: skuConfig.playroomFrameComponent
     ? getPathFromCwd(skuConfig.playroomFrameComponent)
@@ -106,6 +104,7 @@ module.exports = {
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
   storybookTarget: skuConfig.storybookTarget,
+  provideDefaultChromaticViewports: skuConfig.provideDefaultChromaticViewports,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
@@ -125,6 +124,5 @@ module.exports = {
     port: skuConfig.playroomPort,
     widths: skuConfig.playroomWidths,
     title: skuConfig.playroomTitle,
-    themes: skuConfig.playroomThemes,
   },
 };

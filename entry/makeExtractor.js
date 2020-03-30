@@ -8,7 +8,7 @@ const getNewTags = ({ before, after }) => {
 
   const afterArr = after.split('\n');
 
-  return afterArr.filter(tag => !beforeArr.includes(tag)).join('\n');
+  return afterArr.filter((tag) => !beforeArr.includes(tag)).join('\n');
 };
 
 export default (stats, publicPath) => {
@@ -34,7 +34,7 @@ export default (stats, publicPath) => {
     extractor
       .getLinkTags(extraScriptTagAttributes)
       .split('\n')
-      .filter(tag => tag.includes('as="script"'))
+      .filter((tag) => tag.includes('as="script"'))
       .join('\n');
 
   const getCssHeadTags = () => extractor.getStyleTags();

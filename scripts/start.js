@@ -4,10 +4,9 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
-const pathToRegex = require('path-to-regexp');
+const { pathToRegexp } = require('path-to-regexp');
 
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const createRenderProvider = require('../lib/staticRenderer');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const {
@@ -19,6 +18,7 @@ const {
   environments,
   isLibrary,
 } = require('../context');
+const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 const localhost = '0.0.0.0';
@@ -29,35 +29,26 @@ const localhost = '0.0.0.0';
     host: localhost,
   });
 
+  const htmlRenderPlugin = createHtmlRenderPlugin();
+
   const config = makeWebpackConfig({
     port: availablePort,
     isDevServer: true,
+    htmlRenderPlugin,
   });
 
   const parentCompiler = webpack(config);
-
-  const clientCompiler = parentCompiler.compilers.find(
-    c => c.name === 'client',
-  );
-  const renderCompiler = parentCompiler.compilers.find(
-    c => c.name === 'render',
-  );
 
   await checkHosts();
 
   const appHosts = getAppHosts();
 
-  const { renderWhenReady } = createRenderProvider({
-    clientCompiler,
-    renderCompiler,
-  });
-
-  const getSiteForHost = hostname => {
+  const getSiteForHost = (hostname) => {
     if (sites.length === 0) {
       return undefined;
     }
 
-    const matchingSite = sites.find(site => site.host === hostname);
+    const matchingSite = sites.find((site) => site.host === hostname);
 
     return matchingSite ? matchingSite.name : sites[0].name;
   };
@@ -70,53 +61,48 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
-    after: app => {
-      // eslint-disable-next-line consistent-return
+    after: (app) => {
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) =>
-          pathToRegex(route).exec(req.path),
+          pathToRegexp(route).exec(req.path),
         );
 
         if (!matchingRoute) {
           return next();
         }
 
-        renderWhenReady(async ({ renderer, webpackStats }) => {
-          try {
-            const html = await renderer({
-              webpackStats,
-              route: matchingRoute.route,
-              routeName: matchingRoute.name,
-              site: getSiteForHost(req.hostname),
-              environment:
-                environments.length > 0 ? environments[0] : undefined,
-            });
+        htmlRenderPlugin
+          .renderWhenReady({
+            route: matchingRoute.route,
+            routeName: matchingRoute.name,
+            site: getSiteForHost(req.hostname),
+            environment: environments.length > 0 ? environments[0] : undefined,
+          })
+          .then((html) => res.send(html))
+          .catch((renderError) => {
+            let devServerScripts = [];
 
-            res.send(html);
-          } catch (err) {
-            // Library mode does not have "devServerOnly" entry as it is a UMD
-            const devServerAssets = !isLibrary
-              ? webpackStats.entrypoints.devServerOnly.assets
-              : [];
+            if (renderError.webpackStats && !isLibrary) {
+              const webpackStats = renderError.webpackStats.toJson();
 
-            const devServerScripts = devServerAssets.map(
-              asset => `<script src="/${asset}"></script>`,
-            );
+              devServerScripts = webpackStats.entrypoints.devServerOnly.assets.map(
+                (asset) => `<script src="/${asset}"></script>`,
+              );
+            }
 
             res.status(500).send(
-              exceptionFormatter(err, {
+              exceptionFormatter(renderError, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
               }).concat(...devServerScripts),
             );
-          }
-        });
+          });
       });
     },
   });
 
-  devServer.listen(availablePort, localhost, err => {
+  devServer.listen(availablePort, localhost, (err) => {
     if (err) {
       console.log(err);
       return;

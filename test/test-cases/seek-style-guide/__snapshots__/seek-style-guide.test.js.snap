@@ -8,7 +8,15 @@ Object {
   \\"react\\",
   \\"react-dom/server\\"
 ]",
-  "index.html": <!DOCTYPE html>
+  "index.html": SCRIPTS: Array [
+    "/runtime-554e53c2f72903d6f45f.js",
+    "/vendors~main-7efe22f8be0a6ad2b461.js",
+    "/main-3592b1a7a275852ff255.js",
+  ]
+CSS: Array [
+    "/vendors~main-492f2c41d9f41ff813a1.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -20,22 +28,22 @@ Object {
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="/vendors~main-df1148368013fce769c9.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime-0fa5444f4a643d55e2a2.js"
+          href="scripts[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main-201038d4d29072011ddb.js"
+          href="scripts[1]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main-3e8c7133f63aa6f3e10c.js"
+          href="scripts[2]"
     >
   </head>
   <body>
@@ -82,25 +90,24 @@ Object {
     </script>
     <script async
             data-chunk="main"
-            src="/runtime-0fa5444f4a643d55e2a2.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main-201038d4d29072011ddb.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main-3e8c7133f63aa6f3e10c.js"
+            src="scripts[2]"
     >
     </script>
   </body>
 </html>,
-  "main-3e8c7133f63aa6f3e10c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-0fa5444f4a643d55e2a2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-201038d4d29072011ddb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-df1148368013fce769c9.css": a,
+  "main-3592b1a7a275852ff255.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-492f2c41d9f41ff813a1.css": a,
 abbr,
 acronym,
 address,
@@ -757,5 +764,6 @@ html {
   }
 }
 ,
+  "vendors~main-7efe22f8be0a6ad2b461.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

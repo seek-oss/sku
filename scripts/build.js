@@ -11,13 +11,21 @@ const {
   cleanRenderJs,
 } = require('../lib/buildFileUtils');
 const { run } = require('../lib/runWebpack');
+const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
+const { isLibrary } = require('../context');
 
 (async () => {
   try {
     await ensureTargetDirectory();
     await cleanTargetDirectory();
-    await run(webpack(makeWebpackConfig()));
+    await run(
+      webpack(
+        makeWebpackConfig({
+          htmlRenderPlugin: !isLibrary ? createHtmlRenderPlugin() : undefined,
+        }),
+      ),
+    );
     await cleanRenderJs();
     await copyPublicFiles();
     console.log(green('Sku build complete!'));

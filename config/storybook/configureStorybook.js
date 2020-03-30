@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 export default () => {
   addDecorator(withKnobs);
-  addDecorator(story =>
+  addDecorator((story) =>
     // When applying a CSS transform to the root element of a component,
     // e.g. when using Basekick (https://github.com/michaeltaranto/basekick),
     // screenshot services (such a Chromatic) would render the element
@@ -34,8 +34,8 @@ export default () => {
   ];
 
   function loadStories() {
-    reqs.forEach(req => {
-      req.keys().forEach(filename => req(filename));
+    reqs.forEach((req) => {
+      req.keys().forEach((filename) => req(filename));
     });
   }
 

@@ -83,6 +83,9 @@ module.exports = validator.compile({
   storybookTarget: {
     type: 'string',
   },
+  provideDefaultChromaticViewports: {
+    type: 'boolean',
+  },
   target: {
     type: 'string',
   },
@@ -138,6 +141,7 @@ module.exports = validator.compile({
   },
   playroomComponents: { type: 'string' },
   playroomThemes: { type: 'string', optional: true },
+  playroomSnippets: { type: 'string', optional: true },
   playroomFrameComponent: { type: 'string', optional: true },
   playroomTarget: { type: 'string', optional: true },
   playroomWidths: {

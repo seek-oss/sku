@@ -10,8 +10,8 @@ module.exports = class ListExternalsWebpackPlugin {
         const externals = uniq(
           modules
             .map(({ identifier }) => identifier)
-            .filter(id => /^external /.test(id))
-            .map(id => id.replace(/^external "/, '').replace(/"$/, ''))
+            .filter((id) => /^external /.test(id))
+            .map((id) => id.replace(/^external "/, '').replace(/"$/, ''))
             .sort(),
         );
 

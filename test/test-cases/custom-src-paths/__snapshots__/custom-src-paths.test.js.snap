@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`custom-src-paths build should create valid app 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4002/runtime-136d81c7eee3fb5a6e19.js",
+  "http://localhost:4002/vendors~main-2d92e57430dea49b3830.js",
+  "http://localhost:4002/main-e2277d6919213c3de4fa.js",
+]
+CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -14,19 +20,19 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/runtime-24a54fdbdb54abcc47b6.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/vendors~main-2aac5030983ae7832a6f.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4002/main-5a4f0bb3837c323d7a18.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
@@ -44,19 +50,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/runtime-24a54fdbdb54abcc47b6.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/vendors~main-2aac5030983ae7832a6f.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4002/main-5a4f0bb3837c323d7a18.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -67,74 +73,12 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "index.html": <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4002/runtime-24a54fdbdb54abcc47b6.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4002/vendors~main-2aac5030983ae7832a6f.js"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="http://localhost:4002/main-5a4f0bb3837c323d7a18.js"
-          crossorigin="anonymous"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello custom src paths
-      </div>
-    </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
-    >
-      []
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4002/runtime-24a54fdbdb54abcc47b6.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4002/vendors~main-2aac5030983ae7832a6f.js"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="http://localhost:4002/main-5a4f0bb3837c323d7a18.js"
-            crossorigin="anonymous"
-    >
-    </script>
-  </body>
-</html>,
-  "main-5a4f0bb3837c323d7a18.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-24a54fdbdb54abcc47b6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-2aac5030983ae7832a6f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`custom-src-paths start should start a development server 1`] = `
+  "index.html": SCRIPTS: Array [
+    "http://localhost:4002/runtime-136d81c7eee3fb5a6e19.js",
+    "http://localhost:4002/vendors~main-2d92e57430dea49b3830.js",
+    "http://localhost:4002/main-e2277d6919213c3de4fa.js",
+  ]
+CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -148,22 +92,97 @@ SOURCE HTML: <!DOCTYPE html>
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/runtime.js"
+          href="scripts[0]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~devServerOnly~main.js"
+          href="scripts[1]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/vendors~main.js"
+          href="scripts[2]"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>,
+  "main-e2277d6919213c3de4fa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-136d81c7eee3fb5a6e19.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-2d92e57430dea49b3830.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`custom-src-paths start should start a development server 1`] = `
+SCRIPTS: Array [
+  "/runtime.js",
+  "/vendors~devServerOnly~main.js",
+  "/vendors~main.js",
+  "/main.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="/main.js"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
     >
   </head>
   <body>
@@ -179,22 +198,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="/runtime.js"
+            src="scripts[0]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~devServerOnly~main.js"
+            src="scripts[1]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/vendors~main.js"
+            src="scripts[2]"
     >
     </script>
     <script async
             data-chunk="main"
-            src="/main.js"
+            src="scripts[3]"
     >
     </script>
   </body>

@@ -9,7 +9,7 @@ const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
-const assertStorybookContent = async url => {
+const assertStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 
@@ -20,14 +20,12 @@ const assertStorybookContent = async url => {
 
     const text = element.innerText;
     const styles = window.getComputedStyle(element);
-    const color = styles.getPropertyValue('color');
     const fontSize = styles.getPropertyValue('font-size');
 
-    return { text, color, fontSize };
+    return { text, fontSize };
   });
 
   expect(content.text).toEqual('Storybook render');
-  expect(content.color).toEqual('rgb(255, 0, 0)');
   expect(content.fontSize).toEqual('32px');
 };
 

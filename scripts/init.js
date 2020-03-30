@@ -74,7 +74,7 @@ const args = require('../config/args');
   `);
 
     const results = [...errors, ...warnings];
-    results.forEach(result => console.error(chalk.red(`  *  ${result}`)));
+    results.forEach((result) => console.error(chalk.red(`  *  ${result}`)));
 
     process.exit(1);
   }
@@ -87,7 +87,7 @@ const args = require('../config/args');
       because a dependency with the same name exists.
       Due to the way npm works, the following names are not allowed:
 
-      ${chalk.cyan(reservedNames.map(depName => `  ${depName}`).join('\n'))}
+      ${chalk.cyan(reservedNames.map((depName) => `  ${depName}`).join('\n'))}
 
       Please choose a different project name.
     `),
@@ -133,7 +133,7 @@ const args = require('../config/args');
 
   const braidThemes = braidThemeFile
     .match(/default as (.*) }/g)
-    .map(themeMatch => themeMatch.match(/default as (.*) }/))
+    .map((themeMatch) => themeMatch.match(/default as (.*) }/))
     .map(([_, themeName]) => themeName)
     .sort();
 
@@ -145,16 +145,16 @@ const args = require('../config/args');
         name: 'sites',
         type: 'checkbox',
         message: 'Which Braid themes would you like?',
-        validate: sites =>
+        validate: (sites) =>
           sites.length > 0 ? true : 'Please select at least one Braid theme',
         choices: braidThemes,
       },
     ],
     move: {
       // Remove leading underscores from filenames:
-      '_*': filepath => filepath.replace(/^_/, ''),
+      '_*': (filepath) => filepath.replace(/^_/, ''),
     },
-    data: answers => ({
+    data: (answers) => ({
       appName,
       gettingStartedDocs: useYarn
         ? dedent`
@@ -179,7 +179,7 @@ const args = require('../config/args');
       formatScript: useYarn ? 'yarn format' : 'npm run format',
       buildScript: useYarn ? 'yarn build' : 'npm run build',
       sites: answers.sites
-        .map(site => {
+        .map((site) => {
           if (site === 'seekAnz') {
             return `{ name: 'seekAnz', host: 'dev.seek.com.au' }`;
           }
@@ -198,7 +198,7 @@ const args = require('../config/args');
   console.log(
     `Installing ${deps
       .concat(devDeps)
-      .map(x => chalk.cyan(x))
+      .map((x) => chalk.cyan(x))
       .join(', ')}...`,
   );
   console.log();

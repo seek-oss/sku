@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-f3a39034449721d83bde.js",
+]
+CSS: Array [
+  "http://localhost:4000/main-fadb2269a374a06075a5.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -13,34 +21,34 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-e70ca1c7b0f254a353f2.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-d592ff38f500806fd402.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-743468208e6af6c19317.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
-        <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
+        <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -51,19 +59,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-e70ca1c7b0f254a353f2.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-d592ff38f500806fd402.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-743468208e6af6c19317.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -73,6 +81,14 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
+SCRIPTS: Array [
+  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
+  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
+  "http://localhost:4000/main-f3a39034449721d83bde.js",
+]
+CSS: Array [
+  "http://localhost:4000/main-fadb2269a374a06075a5.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -85,34 +101,34 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:4000/main-9faf588efead42b43c24.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/runtime-e70ca1c7b0f254a353f2.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/vendors~main-d592ff38f500806fd402.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:4000/main-743468208e6af6c19317.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo Jlnxw97">
-        <div class="_3YtmnHj lwsthgY">
+      <div class="_1brbpTo">
+        <div class="_3YtmnHj">
           Hello World
         </div>
-        <img src="http://localhost:4000/543503d0f8691e33cdf9a03512ad717a.png">
+        <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -123,19 +139,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/runtime-e70ca1c7b0f254a353f2.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/vendors~main-d592ff38f500806fd402.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:4000/main-743468208e6af6c19317.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>
@@ -145,6 +161,14 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
+SCRIPTS: Array [
+  "http://localhost:8100/runtime.js",
+  "http://localhost:8100/vendors~main.js",
+  "http://localhost:8100/main.js",
+]
+CSS: Array [
+  "http://localhost:8100/main.css",
+]
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -157,34 +181,34 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link data-chunk="main"
           rel="stylesheet"
-          href="http://localhost:8100/main.css"
+          href="styles[0]"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/runtime.js"
+          href="scripts[0]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/vendors~main.js"
+          href="scripts[1]"
           crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
-          href="http://localhost:8100/main.js"
+          href="scripts[2]"
           crossorigin="anonymous"
     >
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo jsStyles-css__root___Jlnxw97">
-        <div class="lessStyles__nested___3YtmnHj jsStyles-css__nested___lwsthgY">
+      <div class="lessStyles__root___1brbpTo">
+        <div class="lessStyles__nested___3YtmnHj">
           Hello World
         </div>
-        <img src="http://localhost:8100/543503d0f8691e33cdf9a03512ad717a.png">
+        <img src="http://localhost:8100/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -195,19 +219,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/runtime.js"
+            src="scripts[0]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/vendors~main.js"
+            src="scripts[1]"
             crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
-            src="http://localhost:8100/main.js"
+            src="scripts[2]"
             crossorigin="anonymous"
     >
     </script>

@@ -6,7 +6,7 @@ module.exports = async (...urls) => {
 
   try {
     return await waitOnAsync({
-      resources: urls.map(url => url.replace(/^http/, 'http-get')),
+      resources: urls.map((url) => url.replace(/^http/, 'http-get')),
       headers: { accept: 'text/html, application/javascript' },
       timeout,
       // Log output of wait behaviour timing to allow

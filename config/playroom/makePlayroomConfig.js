@@ -5,7 +5,7 @@ const makeWebpackConfig = require('../webpack/webpack.config');
 
 const clientWebpackConfig = find(
   makeWebpackConfig({ isIntegration: true }),
-  config => config.name === 'client',
+  (config) => config.name === 'client',
 );
 
 try {
@@ -30,6 +30,7 @@ module.exports = () => ({
   outputPath: paths.playroomTarget,
   components: paths.playroomComponents,
   themes: paths.playroomThemes,
+  snippets: paths.playroomSnippets,
   frameComponent: paths.playroomFrameComponent,
   openBrowser: process.env.OPEN_TAB !== 'false',
   ...playroom,
@@ -37,5 +38,8 @@ module.exports = () => ({
     module: clientWebpackConfig.module,
     resolve: clientWebpackConfig.resolve,
     plugins: clientWebpackConfig.plugins,
+    optimization: {
+      concatenateModules: false,
+    },
   }),
 });

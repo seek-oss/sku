@@ -1,29 +1,27 @@
-const { supportedBrowsers, paths } = require('../../../context');
-const { isProductionBuild, isCI } = require('./env');
-const isTypeScript = require('../../../lib/isTypeScript');
-const { resolvePackage } = require('./resolvePackage');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 /**
  * e.g.
  * seek-style-guide -> __SEEK_STYLE_GUIDE__
  * @foo/awesome -> __FOO_AWESOME__
  */
-const packageNameToClassPrefix = packageName =>
+const packageNameToClassPrefix = (packageName) =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
-const makeJsLoaders = ({ target, lang }) => [
+const makeJsLoaders = (options) => [
   {
     loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')({ target, lang }),
+    options: require('../../babel/babelConfig')(options),
   },
 ];
 
 const makeCssLoaders = (options = {}) => {
   const {
-    server = false,
-    packageName = '',
-    js = false,
+    target,
+    isCI,
+    isProductionBuild,
+    MiniCssExtractPlugin,
+    supportedBrowsers,
+    generateCSSTypes = false,
+    packageName,
     hot = false,
     compilePackage = false,
   } = options;
@@ -34,16 +32,11 @@ const makeCssLoaders = (options = {}) => {
         packageName ? packageNameToClassPrefix(packageName) : ''
       }[name]__[local]___`;
 
-  const cssInJsLoaders = [
-    { loader: require.resolve('./cssInJsLoader') },
-    ...makeJsLoaders({ target: 'node' }),
-  ];
-
   // Apply css-modules-typescript-loader for client builds only as
   // we only need to generate type declarations once.
   // Also, ignore compile packages as the types can't be committed
   const cssModuleToTypeScriptLoader =
-    isTypeScript && !server && !compilePackage
+    generateCSSTypes && target === 'browser' && !compilePackage
       ? [
           {
             loader: require.resolve('css-modules-typescript-loader'),
@@ -55,7 +48,7 @@ const makeCssLoaders = (options = {}) => {
       : [];
 
   return [
-    ...(!server
+    ...(target === 'browser'
       ? [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -76,7 +69,7 @@ const makeCssLoaders = (options = {}) => {
 
         // On the server, avoid generating a CSS file with onlyLocals.
         // Only the client build should generate CSS files.
-        onlyLocals: Boolean(server),
+        onlyLocals: target === 'node',
         importLoaders: 3,
       },
     },
@@ -93,27 +86,11 @@ const makeCssLoaders = (options = {}) => {
     {
       loader: require.resolve('less-loader'),
     },
-    ...(js ? cssInJsLoaders : []),
   ];
 };
 
-const makeCssOneOf = (loaderOptions = {}) => [
-  ...paths.compilePackages.map(packageName => ({
-    include: resolvePackage(packageName),
-    use: makeCssLoaders({
-      packageName,
-      compilePackage: true,
-      ...loaderOptions,
-    }),
-  })),
-  {
-    exclude: /node_modules/,
-    use: makeCssLoaders(loaderOptions),
-  },
-];
-
 const makeImageLoaders = (options = {}) => {
-  const { server = false } = options;
+  const { target = 'browser' } = options;
 
   return [
     {
@@ -123,7 +100,7 @@ const makeImageLoaders = (options = {}) => {
         fallback: require.resolve('file-loader'),
         // We only want to emit client assets during the client build.
         // The server build should only emit server-side JS and HTML files.
-        emitFile: !server,
+        emitFile: target === 'browser',
       },
     },
   ];
@@ -155,5 +132,4 @@ module.exports = {
   makeCssLoaders,
   makeImageLoaders,
   makeSvgLoaders,
-  makeCssOneOf,
 };

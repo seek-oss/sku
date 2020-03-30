@@ -1,4 +1,3 @@
-*.css.js.d.ts
 *.less.d.ts
 node_modules
 coverage/
@@ -9,3 +8,5 @@ dist-start/
 dist-storybook/
 report/
 template/
+.changeset/*.md
+CHANGELOG.md

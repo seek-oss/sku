@@ -23,12 +23,10 @@ module.exports = ({
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-syntax-dynamic-import'),
-    require.resolve('babel-plugin-flow-react-proptypes'),
     require.resolve('@babel/plugin-proposal-class-properties'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     require.resolve('@babel/plugin-proposal-optional-chaining'),
     require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
-
     [
       require.resolve('babel-plugin-module-resolver'),
       { root: [cwd()], extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'] },

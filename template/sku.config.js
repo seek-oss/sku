@@ -5,4 +5,5 @@ module.exports = {
     <%- sites %>
   ],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
+  orderImports: true
 };

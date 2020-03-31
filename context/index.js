@@ -125,4 +125,5 @@ module.exports = {
     widths: skuConfig.playroomWidths,
     title: skuConfig.playroomTitle,
   },
+  orderImports: Boolean(skuConfig.orderImports),
 };

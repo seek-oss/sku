@@ -44,4 +44,5 @@ module.exports = {
   playroomFrameComponent: null,
   playroomTitle: null,
   playroomPort: 8082,
+  orderImports: false,
 };

@@ -28,16 +28,13 @@
   },
   "lint-staged": {
     "+(package.json|yarn.lock)": [
-      "npm run check",
-      "git add package.json yarn.lock"
+      "npm run check"
     ],
     "**/*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ],
     "**/*.{js,ts,tsx,md,less,css}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "repository": {

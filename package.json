@@ -82,7 +82,6 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "babel-plugin-dynamic-import-node": "^2.3.0",
-    "babel-plugin-flow-react-proptypes": "^25.1.0",
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-seek-style-guide": "^1.0.0",

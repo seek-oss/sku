@@ -2,14 +2,14 @@
 
 exports[`braid-design-system build should create valid app 1`] = `
 SCRIPTS: Array [
-  "/runtime-f2cce6a4bd563e6f4ba8.js",
-  "/vendors~main-fa2ba4da69fc17b2b66c.js",
+  "/runtime-e0178d7e2b76acf0b8e3.js",
+  "/vendors~main-83577591203b91271cd9.js",
   "/main-9e12bdc6d0a3e0e21c04.js",
-  "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
+  "/vendors~themes-jobStreet-29deb1159f749653cc0e.js",
   "/themes-jobStreet-0fde78850e89104ba0a5.js",
 ]
 CSS: Array [
-  "/vendors~themes-jobStreet-074fb4abdd2f0cecd2ff.css",
+  "/vendors~themes-jobStreet-dd890426e18104ca9b32.css",
   "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -196,14 +196,14 @@ Object {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-f2cce6a4bd563e6f4ba8.js",
-    "/vendors~main-fa2ba4da69fc17b2b66c.js",
+    "/runtime-e0178d7e2b76acf0b8e3.js",
+    "/vendors~main-83577591203b91271cd9.js",
     "/main-9e12bdc6d0a3e0e21c04.js",
-    "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
+    "/vendors~themes-jobStreet-29deb1159f749653cc0e.js",
     "/themes-jobStreet-0fde78850e89104ba0a5.js",
   ]
 CSS: Array [
-    "/vendors~themes-jobStreet-074fb4abdd2f0cecd2ff.css",
+    "/vendors~themes-jobStreet-dd890426e18104ca9b32.css",
     "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -366,16 +366,16 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main-9e12bdc6d0a3e0e21c04.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-f2cce6a4bd563e6f4ba8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-e0178d7e2b76acf0b8e3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-f2cce6a4bd563e6f4ba8.js",
-    "/vendors~main-fa2ba4da69fc17b2b66c.js",
+    "/runtime-e0178d7e2b76acf0b8e3.js",
+    "/vendors~main-83577591203b91271cd9.js",
     "/main-9e12bdc6d0a3e0e21c04.js",
-    "/vendors~themes-seekAnz-9b7f7721bbf1241aa94d.js",
+    "/vendors~themes-seekAnz-597d129cece76509bffb.js",
     "/themes-seekAnz-158b1fe2fa2423a977aa.js",
   ]
 CSS: Array [
-    "/vendors~themes-seekAnz-afb64f100d52d812e604.css",
+    "/vendors~themes-seekAnz-2b6e876e10b6ed1768bb.css",
     "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -593,8 +593,9 @@ SOURCE HTML: <!DOCTYPE html>
 }
 ,
   "themes-wireframe-cc17145e5df370c16a3c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-fa2ba4da69fc17b2b66c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreet-074fb4abdd2f0cecd2ff.css": .FYwKg {
+  "vendors~main-83577591203b91271cd9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobStreet-29deb1159f749653cc0e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobStreet-dd890426e18104ca9b32.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1092,16 +1093,16 @@ SOURCE HTML: <!DOCTYPE html>
   color: #eb0000;
 }
 .u7OQ5_1 {
-  color: #0c4b85;
-}
-._3KSG8_1 {
-  color: #923f92;
-}
-._2TpEq_1 {
   color: #ffc600;
 }
-._1QEQt_1 {
+._3KSG8_1 {
   color: #498307;
+}
+._2TpEq_1 {
+  color: #0c4b85;
+}
+._1QEQt_1 {
+  color: #923f92;
 }
 ._3vlP__1 {
   color: #666;
@@ -1477,16 +1478,16 @@ svg._1E-Nz_1 {
   background: #ffc600;
 }
 ._15OcO_1 {
-  background: #0c4b85;
-}
-._2aEH1_1 {
-  background: #923f92;
-}
-._1InW9_1 {
   background: #498307;
 }
-._2MJ7O_1 {
+._2aEH1_1 {
   background: #666;
+}
+._1InW9_1 {
+  background: #0c4b85;
+}
+._2MJ7O_1 {
+  background: #923f92;
 }
 ._2dmIJ_1 {
   background: #18367f;
@@ -2184,8 +2185,8 @@ svg._1E-Nz_1 {
   display: block;
 }
 ,
-  "vendors~themes-jobStreet-1de1439829dbebd5124c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreetClassic-5184da90cbf183228784.css": .FYwKg {
+  "vendors~themes-jobStreetClassic-df89082a3bf3a17f50ed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobStreetClassic-fd4be778cffaef8f6383.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -2680,16 +2681,16 @@ svg._1E-Nz_1 {
   color: #eb0000;
 }
 .u7OQ5_2oR {
-  color: #142d69;
-}
-._3KSG8_2oR {
-  color: #923f92;
-}
-._2TpEq_2oR {
   color: #ffc600;
 }
-._1QEQt_2oR {
+._3KSG8_2oR {
   color: #498307;
+}
+._2TpEq_2oR {
+  color: #142d69;
+}
+._1QEQt_2oR {
+  color: #923f92;
 }
 ._3vlP__2oR {
   color: #666;
@@ -3069,16 +3070,16 @@ svg._1E-Nz_2oR {
   background: #ffc600;
 }
 ._15OcO_2oR {
-  background: #142d69;
-}
-._2aEH1_2oR {
-  background: #923f92;
-}
-._1InW9_2oR {
   background: #498307;
 }
-._2MJ7O_2oR {
+._2aEH1_2oR {
   background: #666;
+}
+._1InW9_2oR {
+  background: #142d69;
+}
+._2MJ7O_2oR {
+  background: #923f92;
 }
 ._2dmIJ_2oR {
   background: #18367f;
@@ -3776,8 +3777,8 @@ svg._1E-Nz_2oR {
   display: block;
 }
 ,
-  "vendors~themes-jobStreetClassic-f97e224bbcabf8cc147e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobsDb-8404030b80964fd45b56.css": .FYwKg {
+  "vendors~themes-jobsDb-276c3dfd116663035175.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobsDb-8b6ab5315694a0fd6353.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -4273,16 +4274,16 @@ svg._1E-Nz_2oR {
   color: #eb0000;
 }
 .u7OQ5_1Fy {
-  color: #0c4b85;
-}
-._3KSG8_1Fy {
-  color: #923f92;
-}
-._2TpEq_1Fy {
   color: #ffc600;
 }
-._1QEQt_1Fy {
+._3KSG8_1Fy {
   color: #498307;
+}
+._2TpEq_1Fy {
+  color: #0c4b85;
+}
+._1QEQt_1Fy {
+  color: #923f92;
 }
 ._3vlP__1Fy {
   color: #666;
@@ -4658,16 +4659,16 @@ svg._1E-Nz_1Fy {
   background: #ffc600;
 }
 ._15OcO_1Fy {
-  background: #0c4b85;
-}
-._2aEH1_1Fy {
-  background: #923f92;
-}
-._1InW9_1Fy {
   background: #498307;
 }
-._2MJ7O_1Fy {
+._2aEH1_1Fy {
   background: #666;
+}
+._1InW9_1Fy {
+  background: #0c4b85;
+}
+._2MJ7O_1Fy {
+  background: #923f92;
 }
 ._2dmIJ_1Fy {
   background: #247ea4;
@@ -5365,9 +5366,7 @@ svg._1E-Nz_1Fy {
   display: block;
 }
 ,
-  "vendors~themes-jobsDb-db27671119068daf33b0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekAnz-9b7f7721bbf1241aa94d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekAnz-afb64f100d52d812e604.css": .FYwKg {
+  "vendors~themes-seekAnz-2b6e876e10b6ed1768bb.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -5863,16 +5862,16 @@ svg._1E-Nz_1Fy {
   color: #e60278;
 }
 .u7OQ5_2 {
-  color: #1e468c;
-}
-._3KSG8_2 {
-  color: #9556b7;
-}
-._2TpEq_2 {
   color: #ffc600;
 }
-._1QEQt_2 {
+._3KSG8_2 {
   color: #138a08;
+}
+._2TpEq_2 {
+  color: #1e468c;
+}
+._1QEQt_2 {
+  color: #9556b7;
 }
 ._3vlP__2 {
   color: rgba(28, 28, 28, 0.63);
@@ -6233,16 +6232,16 @@ svg._1E-Nz_2 {
   background: #ffc600;
 }
 ._15OcO_2 {
-  background: #1e468c;
-}
-._2aEH1_2 {
-  background: #9556b7;
-}
-._1InW9_2 {
   background: #138a08;
 }
-._2MJ7O_2 {
+._2aEH1_2 {
   background: #747474;
+}
+._1InW9_2 {
+  background: #1e468c;
+}
+._2MJ7O_2 {
+  background: #9556b7;
 }
 ._2dmIJ_2 {
   background: #235bba;
@@ -6940,7 +6939,9 @@ svg._1E-Nz_2 {
   display: block;
 }
 ,
-  "vendors~themes-seekBusiness-53c86d384aaa0f5302fd.css": .FYwKg {
+  "vendors~themes-seekAnz-597d129cece76509bffb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekBusiness-36a208ada6258e30af74.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekBusiness-9b248fc75762b57a65c3.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7438,16 +7439,16 @@ svg._1E-Nz_2 {
   color: #e60278;
 }
 .u7OQ5_1xm {
-  color: #1e468c;
-}
-._3KSG8_1xm {
-  color: #9556b7;
-}
-._2TpEq_1xm {
   color: #ffc600;
 }
-._1QEQt_1xm {
+._3KSG8_1xm {
   color: #138a08;
+}
+._2TpEq_1xm {
+  color: #1e468c;
+}
+._1QEQt_1xm {
+  color: #9556b7;
 }
 ._3vlP__1xm {
   color: rgba(28, 28, 28, 0.63);
@@ -7808,16 +7809,16 @@ svg._1E-Nz_1xm {
   background: #ffc600;
 }
 ._15OcO_1xm {
-  background: #1e468c;
-}
-._2aEH1_1xm {
-  background: #9556b7;
-}
-._1InW9_1xm {
   background: #138a08;
 }
-._2MJ7O_1xm {
+._2aEH1_1xm {
   background: #747474;
+}
+._1InW9_1xm {
+  background: #1e468c;
+}
+._2MJ7O_1xm {
+  background: #9556b7;
 }
 ._2dmIJ_1xm {
   background: #008cbb;
@@ -8515,8 +8516,8 @@ svg._1E-Nz_1xm {
   display: block;
 }
 ,
-  "vendors~themes-seekBusiness-a1c64ba8f47556f09d02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekUnifiedBeta-49d9d80b678523724970.css": .FYwKg {
+  "vendors~themes-seekUnifiedBeta-0a289b7512a0ef09a3e2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekUnifiedBeta-8b762c318052f2febfe4.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -9012,16 +9013,16 @@ svg._1E-Nz_1xm {
   color: #e60278;
 }
 .u7OQ5_1my {
-  color: #1e468c;
-}
-._3KSG8_1my {
-  color: #9556b7;
-}
-._2TpEq_1my {
   color: #ffc600;
 }
-._1QEQt_1my {
+._3KSG8_1my {
   color: #138a08;
+}
+._2TpEq_1my {
+  color: #1e468c;
+}
+._1QEQt_1my {
+  color: #9556b7;
 }
 ._3vlP__1my {
   color: rgba(28, 28, 28, 0.63);
@@ -9382,16 +9383,16 @@ svg._1E-Nz_1my {
   background: #ffc600;
 }
 ._15OcO_1my {
-  background: #1e468c;
-}
-._2aEH1_1my {
-  background: #9556b7;
-}
-._1InW9_1my {
   background: #138a08;
 }
-._2MJ7O_1my {
+._2aEH1_1my {
   background: #747474;
+}
+._1InW9_1my {
+  background: #1e468c;
+}
+._2MJ7O_1my {
+  background: #9556b7;
 }
 ._2dmIJ_1my {
   background: #235bba;
@@ -10089,9 +10090,7 @@ svg._1E-Nz_1my {
   display: block;
 }
 ,
-  "vendors~themes-seekUnifiedBeta-c73e7db85d353bd3b04a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-wireframe-7822b0ff1bf72a4c0147.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-wireframe-dd3e749a58f898df2851.css": .FYwKg {
+  "vendors~themes-wireframe-51c22b202b839b436fed.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -10588,16 +10587,16 @@ svg._1E-Nz_1my {
   color: #ef3e4a;
 }
 .u7OQ5_0 {
-  color: #2c88f7;
-}
-._3KSG8_0 {
-  color: #855be5;
-}
-._2TpEq_0 {
   color: #ffc600;
 }
-._1QEQt_0 {
+._3KSG8_0 {
   color: #00af50;
+}
+._2TpEq_0 {
+  color: #2c88f7;
+}
+._1QEQt_0 {
+  color: #855be5;
 }
 ._3vlP__0 {
   color: #777;
@@ -10960,16 +10959,16 @@ svg._1E-Nz_0 {
   background: #ffc600;
 }
 ._15OcO_0 {
-  background: #2c88f7;
-}
-._2aEH1_0 {
-  background: #855be5;
-}
-._1InW9_0 {
   background: #00af50;
 }
-._2MJ7O_0 {
+._2aEH1_0 {
   background: #edeef1;
+}
+._1InW9_0 {
+  background: #2c88f7;
+}
+._2MJ7O_0 {
+  background: #855be5;
 }
 ._2dmIJ_0 {
   background: #333;
@@ -11667,6 +11666,7 @@ svg._1E-Nz_0 {
   display: block;
 }
 ,
+  "vendors~themes-wireframe-d2191008d07475e4db5a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

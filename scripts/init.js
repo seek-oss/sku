@@ -11,6 +11,7 @@ const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
 const detectYarn = require('../lib/detectYarn');
 const prettierWrite = require('../lib/runPrettier').write;
+const esLintFix = require('../lib/runESLint').fix;
 const configure = require('../lib/configure');
 const install = require('../lib/install');
 const { getMissingHosts } = require('../lib/hosts');
@@ -207,6 +208,7 @@ const args = require('../config/args');
   await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
 
   await configure();
+  await esLintFix();
   await prettierWrite();
 
   // read configured sites from templated sku config

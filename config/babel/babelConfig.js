@@ -23,6 +23,9 @@ module.exports = ({
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-syntax-dynamic-import'),
+    ...(lang === 'js'
+      ? [require.resolve('babel-plugin-flow-react-proptypes')]
+      : []),
     require.resolve('@babel/plugin-proposal-class-properties'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),
     require.resolve('@babel/plugin-proposal-optional-chaining'),

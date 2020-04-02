@@ -19,11 +19,12 @@ module.exports = ({
 
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
+  const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     require.resolve('babel-plugin-syntax-dynamic-import'),
-    ...(lang === 'js'
+    ...(!isProductionBuild && lang === 'js'
       ? [require.resolve('babel-plugin-flow-react-proptypes')]
       : []),
     require.resolve('@babel/plugin-proposal-class-properties'),
@@ -48,7 +49,7 @@ module.exports = ({
     plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
-  if (process.env.NODE_ENV === 'production') {
+  if (isProductionBuild) {
     plugins.push(
       require.resolve('@babel/plugin-transform-react-inline-elements'),
       require.resolve('babel-plugin-transform-react-remove-prop-types'),

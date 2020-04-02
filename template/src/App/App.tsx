@@ -1,5 +1,6 @@
-import React from 'react';
 import 'braid-design-system/reset';
+
+import React from 'react';
 import { BraidLoadableProvider } from 'braid-design-system';
 import NextSteps from './NextSteps';
 

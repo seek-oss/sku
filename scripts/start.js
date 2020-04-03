@@ -63,9 +63,21 @@ const localhost = '0.0.0.0';
     serveIndex: false,
     after: (app) => {
       app.get('*', (req, res, next) => {
-        const matchingRoute = routes.find(({ route }) =>
-          pathToRegexp(route).exec(req.path),
-        );
+        const matchingRoute = routes.find(({ route }) => {
+          const normalisedRoute = route
+            .split('/')
+            .map((part) => {
+              if (part.startsWith('$')) {
+                // Path is dynamic, map to ':id' style syntax supported by pathToRegexp
+                return `:${part.slice(1)}`;
+              }
+
+              return part;
+            })
+            .join('/');
+
+          return pathToRegexp(normalisedRoute).exec(req.path);
+        });
 
         if (!matchingRoute) {
           return next();

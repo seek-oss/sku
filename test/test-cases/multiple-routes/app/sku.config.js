@@ -1,5 +1,5 @@
 module.exports = {
-  routes: ['/', '/details/:id'],
+  routes: ['/', '/details/$id'],
   sites: ['au', 'nz'],
   environments: ['production'],
   port: 8202,

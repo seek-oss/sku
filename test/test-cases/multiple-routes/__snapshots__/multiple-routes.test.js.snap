@@ -108,7 +108,7 @@ Object {
 ,
   "handlers-Home-65fb4288f1865855b7dd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-648b7c92a3febada80f7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/:id/index.html": SCRIPTS: Array [
+  "production/au/details/$id/index.html": SCRIPTS: Array [
     "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
     "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
     "http://localhost:4004/main-648b7c92a3febada80f7.js",
@@ -304,7 +304,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/details/:id/index.html": SCRIPTS: Array [
+  "production/nz/details/$id/index.html": SCRIPTS: Array [
     "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
     "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
     "http://localhost:4004/main-648b7c92a3febada80f7.js",

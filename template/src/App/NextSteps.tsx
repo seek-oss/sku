@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import {
   Box,
   Heading,
@@ -10,6 +9,7 @@ import {
   Bullet,
   Stack,
 } from 'braid-design-system';
+import React, { Fragment } from 'react';
 
 export default () => (
   <Fragment>

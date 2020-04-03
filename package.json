@@ -189,7 +189,7 @@
     "renovate-config-seek": "^0.4.0",
     "seek-asia-style-guide": "^16.0.1",
     "seek-style-guide": "^40.2.8",
-    "serve-handler": "^6.1.0",
+    "serve-handler": "^6.1.2",
     "wait-on": "^3.3.0",
     "webpack-cli": "^3.3.10",
     "webpack-stats-plugin": "^0.3.0"

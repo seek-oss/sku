@@ -9,12 +9,12 @@ const { pathToRegexp } = require('path-to-regexp');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
+const getSiteForHost = require('../lib/getSiteForHost');
 const {
   port,
   initialPath,
   paths,
   routes,
-  sites,
   environments,
   isLibrary,
 } = require('../context');
@@ -42,16 +42,6 @@ const localhost = '0.0.0.0';
   await checkHosts();
 
   const appHosts = getAppHosts();
-
-  const getSiteForHost = (hostname) => {
-    if (sites.length === 0) {
-      return undefined;
-    }
-
-    const matchingSite = sites.find((site) => site.host === hostname);
-
-    return matchingSite ? matchingSite.name : sites[0].name;
-  };
 
   const devServer = new WebpackDevServer(parentCompiler, {
     contentBase: paths.public,

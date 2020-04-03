@@ -1,7 +1,8 @@
 const path = require('path');
 const http = require('http');
 const handler = require('serve-handler');
-const { blue, underline } = require('chalk');
+const partition = require('lodash/partition');
+const { blue, bold, underline, yellow } = require('chalk');
 
 const {
   port,
@@ -30,25 +31,56 @@ console.log({ environment, target: paths.relativeTarget });
     host: '0.0.0.0',
   });
 
+  const [invalidRoutes, validRoutes] = partition(
+    routes,
+    ({ route }) => route.indexOf(':') > -1,
+  );
+
+  if (invalidRoutes.length > 0) {
+    console.log(yellow(`Invalid dynamic routes:\n`));
+
+    invalidRoutes.forEach(({ route }) => {
+      console.log(yellow(underline(route)));
+    });
+
+    console.log(
+      yellow(
+        `\n${bold(
+          'sku serve',
+        )} doesn't support dynamic routes using ':' style syntax.\nPlease upgrade your routes to use '$' instead.`,
+      ),
+    );
+  }
+
   const server = http.createServer((request, response) => {
     const site = getSiteForHost(request.hostname) || '';
 
-    const routeRewrites = routes.map(({ route }) => {
+    const routeRewrites = validRoutes.map(({ route }) => {
+      const normalisedRoute = route
+        .split('/')
+        .map((part) => {
+          if (part.startsWith('$')) {
+            // Path is dynamic, map part to * match
+            return '*';
+          }
+
+          return part;
+        })
+        .join('/');
+
       return {
-        source: route,
+        source: normalisedRoute,
         destination: path.join(environment, site, route, 'index.html'),
       };
     });
 
     const rewrites = [
       ...routeRewrites,
-      // {
-      //   source: path.join(paths.publicPath, ':asset+.:extension'),
-      //   destination: '/:asset.:extension',
-      // },
+      {
+        source: path.join(paths.publicPath, ':asset+.:extension'),
+        destination: '/:asset.:extension',
+      },
     ];
-
-    console.log(rewrites);
 
     return handler(request, response, {
       rewrites,

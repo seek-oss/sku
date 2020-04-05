@@ -16,7 +16,7 @@ const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
-const args = require('../config/args').argv;
+const args = require('../config/args');
 
 const environment = args.environment ? args.environment : environments[0] || '';
 
@@ -36,7 +36,7 @@ const environment = args.environment ? args.environment : environments[0] || '';
   const appHosts = getAppHosts();
 
   const availablePort = await allocatePort({
-    port: port.client,
+    port: args.port || port.client,
     host: '0.0.0.0',
   });
 

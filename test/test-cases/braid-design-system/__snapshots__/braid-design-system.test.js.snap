@@ -1,187 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`braid-design-system build should create valid app 1`] = `
-SCRIPTS: Array [
-  "/runtime-f2cce6a4bd563e6f4ba8.js",
-  "/vendors~main-fa2ba4da69fc17b2b66c.js",
-  "/main-9e12bdc6d0a3e0e21c04.js",
-  "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
-  "/themes-jobStreet-0fde78850e89104ba0a5.js",
-]
-CSS: Array [
-  "/vendors~themes-jobStreet-074fb4abdd2f0cecd2ff.css",
-  "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
-    >
-    <link data-chunk="themes-jobStreet"
-          rel="stylesheet"
-          href="styles[0]"
-    >
-    <link data-chunk="themes-jobStreet"
-          rel="stylesheet"
-          href="styles[1]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-    >
-    <link data-chunk="themes-jobStreet"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-    >
-    <link data-chunk="themes-jobStreet"
-          rel="preload"
-          as="script"
-          href="scripts[4]"
-    >
-    <script>
-      window.SKU_SITE = 'jobStreet';
-    </script>
-  </head>
-  <body>
-    <div id="app">
-      <style type="text/css">
-        body{margin:0;padding:0;background:#e5e5e5}
-      </style>
-      <div>
-        <span class="FYwKg _1GAuD C6ZIU_1 _8QVx6_1 _3NFar_1 _29m7__1 _3srVf_1 _30vru_1">
-          Hello
-          jobStreet
-          <svg viewbox="0 0 24 24"
-               focusable="false"
-               fill="currentColor"
-               width="16"
-               height="16"
-               role="img"
-               class="FYwKg _3VCZm _2Cp5K eO0my _3NFar_1 _1HqaG _2ZfBL pgLNd"
-          >
-            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
-            </path>
-          </svg>
-        </span>
-        <div class="FYwKg af1kF_1 _3gJU3_1 _36Yi4_1 FLByR_1 _2QIfI_1">
-          <div class="FYwKg _3VCZm _3HWgs">
-            <input type="checkbox"
-                   class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_1"
-                   id="id_1"
-            >
-            <div class="FYwKg _2cWXo">
-              <div class="FYwKg _2AIhb_1 _1A6vC_1 _1ZIuI_1 _3VCZm _31blH _3R2vq_1 _1N9cL">
-                <div class="FYwKg _1waOD_1 _1A6vC_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs ZBQ-p">
-                  <div class="FYwKg _2ZhMR_1 _31UWZ _121VT _3PnVZ">
-                    <svg viewbox="0 0 24 24"
-                         focusable="false"
-                         fill="currentColor"
-                         width="16"
-                         height="16"
-                         role="img"
-                         class="FYwKg _31UWZ _20Cd9 _1GAuD _2mc_y_1"
-                    >
-                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-                <div class="FYwKg _1A6vC_1 _2PBxa_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs _22dp5">
-                </div>
-                <div class="FYwKg _1A6vC_1 S6rFp_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs nWwhH">
-                  <div class="FYwKg _2ZhMR_1 _31UWZ _121VT _3PnVZ">
-                    <svg viewbox="0 0 24 24"
-                         focusable="false"
-                         fill="currentColor"
-                         width="16"
-                         height="16"
-                         role="img"
-                         class="FYwKg _31UWZ _20Cd9 _1GAuD _27Shq_1"
-                    >
-                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                      </path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <label class="FYwKg _3RqUb_1 _2Cszt_1 _19iiX _36Q-K"
-                     for="id_1"
-              >
-                <span class="FYwKg _1GAuD C6ZIU_1 _8QVx6_1 _3NFar_1 _29m7__1">
-                  This is a checkbox
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="FYwKg _3QqL3">
-          Custom content
-        </div>
-      </div>
-    </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
-    </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-    >
-      [7,0]
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="themes-jobStreet"
-            src="scripts[3]"
-    >
-    </script>
-    <script async
-            data-chunk="themes-jobStreet"
-            src="scripts[4]"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
-             <input type="checkbox"
-                    class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_1"
-                    id="id_1"
-+                   value
-             >
-             <div class="FYwKg _2cWXo">
-               <div class="FYwKg _2AIhb_1 _1A6vC_1 _1ZIuI_1 _3VCZm _31blH _3R2vq_1 _1N9cL">
-
-`;
-
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
   "externals.json": "[
@@ -11670,7 +11488,553 @@ svg._1E-Nz_0 {
 }
 `;
 
-exports[`braid-design-system start should start a development server 1`] = `
+exports[`braid-design-system build should return built jobStreet site 1`] = `
+SCRIPTS: Array [
+  "/runtime-f2cce6a4bd563e6f4ba8.js",
+  "/vendors~main-fa2ba4da69fc17b2b66c.js",
+  "/main-9e12bdc6d0a3e0e21c04.js",
+  "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
+  "/themes-jobStreet-0fde78850e89104ba0a5.js",
+]
+CSS: Array [
+  "/vendors~themes-jobStreet-074fb4abdd2f0cecd2ff.css",
+  "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="stylesheet"
+          href="styles[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="preload"
+          as="script"
+          href="scripts[4]"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#e5e5e5}
+      </style>
+      <div>
+        <span class="FYwKg _1GAuD C6ZIU_1 _8QVx6_1 _3NFar_1 _29m7__1 _3srVf_1 _30vru_1">
+          Hello
+          jobStreet
+          <svg viewbox="0 0 24 24"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               role="img"
+               class="FYwKg _3VCZm _2Cp5K eO0my _3NFar_1 _1HqaG _2ZfBL pgLNd"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="FYwKg af1kF_1 _3gJU3_1 _36Yi4_1 FLByR_1 _2QIfI_1">
+          <div class="FYwKg _3VCZm _3HWgs">
+            <input type="checkbox"
+                   class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_1"
+                   id="id_1"
+            >
+            <div class="FYwKg _2cWXo">
+              <div class="FYwKg _2AIhb_1 _1A6vC_1 _1ZIuI_1 _3VCZm _31blH _3R2vq_1 _1N9cL">
+                <div class="FYwKg _1waOD_1 _1A6vC_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs ZBQ-p">
+                  <div class="FYwKg _2ZhMR_1 _31UWZ _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="FYwKg _31UWZ _20Cd9 _1GAuD _2mc_y_1"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="FYwKg _1A6vC_1 _2PBxa_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs _22dp5">
+                </div>
+                <div class="FYwKg _1A6vC_1 S6rFp_1 _2ZhMR_1 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs nWwhH">
+                  <div class="FYwKg _2ZhMR_1 _31UWZ _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="FYwKg _31UWZ _20Cd9 _1GAuD _27Shq_1"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <label class="FYwKg _3RqUb_1 _2Cszt_1 _19iiX _36Q-K"
+                     for="id_1"
+              >
+                <span class="FYwKg _1GAuD C6ZIU_1 _8QVx6_1 _3NFar_1 _29m7__1">
+                  This is a checkbox
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="FYwKg _3QqL3">
+          Custom content
+        </div>
+      </div>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [7,0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="themes-jobStreet"
+            src="scripts[3]"
+    >
+    </script>
+    <script async
+            data-chunk="themes-jobStreet"
+            src="scripts[4]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+             <input type="checkbox"
+                    class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_1"
+                    id="id_1"
++                   value
+             >
+             <div class="FYwKg _2cWXo">
+               <div class="FYwKg _2AIhb_1 _1A6vC_1 _1ZIuI_1 _3VCZm _31blH _3R2vq_1 _1N9cL">
+
+`;
+
+exports[`braid-design-system build should return built seekAnz site 1`] = `
+SCRIPTS: Array [
+  "/runtime-f2cce6a4bd563e6f4ba8.js",
+  "/vendors~main-fa2ba4da69fc17b2b66c.js",
+  "/main-9e12bdc6d0a3e0e21c04.js",
+  "/vendors~themes-seekAnz-9b7f7721bbf1241aa94d.js",
+  "/themes-seekAnz-158b1fe2fa2423a977aa.js",
+]
+CSS: Array [
+  "/vendors~themes-seekAnz-afb64f100d52d812e604.css",
+  "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="stylesheet"
+          href="styles[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="preload"
+          as="script"
+          href="scripts[4]"
+    >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#eee}
+      </style>
+      <div>
+        <span class="FYwKg _1GAuD C6ZIU_2 _8QVx6_2 _3NFar_2 _29m7__2 _3srVf_2 _30vru_2">
+          Hello
+          seekAnz
+          <svg viewbox="0 0 24 24"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               role="img"
+               class="FYwKg _3VCZm _2Cp5K eO0my _3NFar_2 _1HqaG _2ZfBL pgLNd"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="FYwKg af1kF_2 _3gJU3_2 _36Yi4_2 FLByR_2 _2QIfI_2">
+          <div class="FYwKg _3VCZm _3HWgs">
+            <input type="checkbox"
+                   class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_2"
+                   id="id_1"
+            >
+            <div class="FYwKg _2cWXo">
+              <div class="FYwKg _2AIhb_2 _1A6vC_2 _1ZIuI_2 _3VCZm _31blH _3R2vq_2 _1N9cL">
+                <div class="FYwKg _1waOD_2 _1A6vC_2 _2ZhMR_2 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs ZBQ-p">
+                  <div class="FYwKg _2ZhMR_2 _31UWZ _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="FYwKg _31UWZ _20Cd9 _1GAuD _2mc_y_2"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="FYwKg _1A6vC_2 _2PBxa_2 _2ZhMR_2 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs _22dp5">
+                </div>
+                <div class="FYwKg _1A6vC_2 S6rFp_2 _2ZhMR_2 _2_vLJ _1zEMW sXF6i _32Ekc _2P1mD IzyLY _1DzSs nWwhH">
+                  <div class="FYwKg _2ZhMR_2 _31UWZ _121VT _3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="FYwKg _31UWZ _20Cd9 _1GAuD _27Shq_2"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <label class="FYwKg _3RqUb_2 _2Cszt_2 _19iiX _36Q-K"
+                     for="id_1"
+              >
+                <span class="FYwKg _1GAuD C6ZIU_2 _8QVx6_2 _3NFar_2 _29m7__2">
+                  This is a checkbox
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="FYwKg _3QqL3">
+          Custom content
+        </div>
+      </div>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"seekAnz"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [10,3]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="themes-seekAnz"
+            src="scripts[3]"
+    >
+    </script>
+    <script async
+            data-chunk="themes-seekAnz"
+            src="scripts[4]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+             <input type="checkbox"
+                    class="FYwKg _3j_fQ _2PHih _1ZS7q _2_vLJ q3uRq _2azEk_2"
+                    id="id_1"
++                   value
+             >
+             <div class="FYwKg _2cWXo">
+               <div class="FYwKg _2AIhb_2 _1A6vC_2 _1ZIuI_2 _3VCZm _31blH _3R2vq_2 _1N9cL">
+
+`;
+
+exports[`braid-design-system start should return development jobStreet site 1`] = `
+SCRIPTS: Array [
+  "/runtime.js",
+  "/vendors~devServerOnly~main.js",
+  "/vendors~main.js",
+  "/main.js",
+  "/themes-jobStreet.js",
+]
+CSS: Array [
+  "/vendors~main.css",
+  "/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="preload"
+          as="script"
+          href="scripts[4]"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        body{margin:0;padding:0;background:#e5e5e5}
+      </style>
+      <div>
+        <span class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-display_block_1GAuD BRAID__typography-fontFamily_C6ZIU_jobStreet BRAID__typography-text_standard_base_8QVx6_jobStreet BRAID__typography-invertableTone_neutral_light_3NFar_jobStreet BRAID__typography-fontWeight_regular_29m7__jobStreet BRAID__typography-text_standard_baseline_3srVf_jobStreet BRAID__typography-text_standard_cropFirstLine_30vru_jobStreet">
+          Hello
+          jobStreet
+          <svg viewbox="0 0 24 24"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               role="img"
+               class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-position_relative_3VCZm BRAID__useBoxStyles-display_inlineBlock_2Cp5K BRAID__IconChevron-root_eO0my BRAID__typography-invertableTone_neutral_light_3NFar_jobStreet BRAID__icon-size_1HqaG BRAID__icon-inline_2ZfBL BRAID__icon-alignY_uppercase_none_pgLNd"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-background_card_af1kF_jobStreet BRAID__useBoxStyles-padding_top_large_3gJU3_jobStreet BRAID__useBoxStyles-padding_bottom_large_36Yi4_jobStreet BRAID__useBoxStyles-padding_left_gutter_FLByR_jobStreet BRAID__useBoxStyles-padding_right_gutter_2QIfI_jobStreet">
+          <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-position_relative_3VCZm BRAID__InlineField-root_3HWgs">
+            <input type="checkbox"
+                   class="BRAID__reset-base_FYwKg BRAID__reset-block_3j_fQ BRAID__reset-appearance_2PHih BRAID__reset-input_1ZS7q BRAID__useBoxStyles-position_absolute_2_vLJ BRAID__InlineField-realFieldBase_q3uRq BRAID__InlineField-realFieldPosition_2azEk_jobStreet"
+                   id="id_1"
+            >
+            <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-display_flex_2cWXo">
+              <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-background_input_2AIhb_jobStreet BRAID__useBoxStyles-borderRadius_standard_1A6vC_jobStreet BRAID__useBoxStyles-boxShadow_borderStandard_1ZIuI_jobStreet BRAID__useBoxStyles-position_relative_3VCZm BRAID__useBoxStyles-flexShrink_0_31blH BRAID__InlineField-fakeFieldSize_3R2vq_jobStreet BRAID__InlineField-fakeFieldBase_1N9cL">
+                <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-background_formAccent_1waOD_jobStreet BRAID__useBoxStyles-borderRadius_standard_1A6vC_jobStreet BRAID__useBoxStyles-transition_fast_2ZhMR_jobStreet BRAID__useBoxStyles-position_absolute_2_vLJ BRAID__useBoxStyles-pointerEvents_none_1zEMW BRAID__useBoxStyles-relativePosition_top_0_sXF6i BRAID__useBoxStyles-relativePosition_bottom_0_32Ekc BRAID__useBoxStyles-relativePosition_right_0_2P1mD BRAID__useBoxStyles-relativePosition_left_0_IzyLY BRAID__Overlay-hidden_1DzSs BRAID__InlineField-selected_ZBQ-p">
+                  <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-transition_fast_2ZhMR_jobStreet BRAID__useBoxStyles-height_full_31UWZ BRAID__InlineField-indicator_121VT BRAID__InlineField-checkboxScale_3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-height_full_31UWZ BRAID__useBoxStyles-width_full_20Cd9 BRAID__useBoxStyles-display_block_1GAuD BRAID__typography-invertableTone_neutral_dark_2mc_y_jobStreet"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-borderRadius_standard_1A6vC_jobStreet BRAID__useBoxStyles-boxShadow_outlineFocus_2PBxa_jobStreet BRAID__useBoxStyles-transition_fast_2ZhMR_jobStreet BRAID__useBoxStyles-position_absolute_2_vLJ BRAID__useBoxStyles-pointerEvents_none_1zEMW BRAID__useBoxStyles-relativePosition_top_0_sXF6i BRAID__useBoxStyles-relativePosition_bottom_0_32Ekc BRAID__useBoxStyles-relativePosition_right_0_2P1mD BRAID__useBoxStyles-relativePosition_left_0_IzyLY BRAID__Overlay-hidden_1DzSs BRAID__InlineField-focusOverlay_22dp5">
+                </div>
+                <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-borderRadius_standard_1A6vC_jobStreet BRAID__useBoxStyles-boxShadow_borderFormHover_S6rFp_jobStreet BRAID__useBoxStyles-transition_fast_2ZhMR_jobStreet BRAID__useBoxStyles-position_absolute_2_vLJ BRAID__useBoxStyles-pointerEvents_none_1zEMW BRAID__useBoxStyles-relativePosition_top_0_sXF6i BRAID__useBoxStyles-relativePosition_bottom_0_32Ekc BRAID__useBoxStyles-relativePosition_right_0_2P1mD BRAID__useBoxStyles-relativePosition_left_0_IzyLY BRAID__Overlay-hidden_1DzSs BRAID__InlineField-hoverOverlay_nWwhH">
+                  <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-transition_fast_2ZhMR_jobStreet BRAID__useBoxStyles-height_full_31UWZ BRAID__InlineField-indicator_121VT BRAID__InlineField-checkboxScale_3PnVZ">
+                    <svg viewbox="0 0 24 24"
+                         focusable="false"
+                         fill="currentColor"
+                         width="16"
+                         height="16"
+                         role="img"
+                         class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-height_full_31UWZ BRAID__useBoxStyles-width_full_20Cd9 BRAID__useBoxStyles-display_block_1GAuD BRAID__typography-formAccent_27Shq_jobStreet"
+                    >
+                      <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <label class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-padding_left_small_3RqUb_jobStreet BRAID__InlineField-label_2Cszt_jobStreet BRAID__useVirtualTouchable-virtualTouchable_19iiX BRAID__useBoxStyles-userSelect_none_36Q-K"
+                     for="id_1"
+              >
+                <span class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-display_block_1GAuD BRAID__typography-fontFamily_C6ZIU_jobStreet BRAID__typography-text_standard_base_8QVx6_jobStreet BRAID__typography-invertableTone_neutral_light_3NFar_jobStreet BRAID__typography-fontWeight_regular_29m7__jobStreet">
+                  This is a checkbox
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="BRAID__reset-base_FYwKg BRAID__App-customBox_3QqL3">
+          Custom content
+        </div>
+      </div>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      ["themes-jobStreet"]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[3]"
+    >
+    </script>
+    <script async
+            data-chunk="themes-jobStreet"
+            src="scripts[4]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+             <input type="checkbox"
+                    class="BRAID__reset-base_FYwKg BRAID__reset-block_3j_fQ BRAID__reset-appearance_2PHih BRAID__reset-input_1ZS7q BRAID__useBoxStyles-position_absolute_2_vLJ BRAID__InlineField-realFieldBase_q3uRq BRAID__InlineField-realFieldPosition_2azEk_jobStreet"
+                    id="id_1"
++                   value
+             >
+             <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-display_flex_2cWXo">
+               <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-background_input_2AIhb_jobStreet BRAID__useBoxStyles-borderRadius_standard_1A6vC_jobStreet BRAID__useBoxStyles-boxShadow_borderStandard_1ZIuI_jobStreet BRAID__useBoxStyles-position_relative_3VCZm BRAID__useBoxStyles-flexShrink_0_31blH BRAID__InlineField-fakeFieldSize_3R2vq_jobStreet BRAID__InlineField-fakeFieldBase_1N9cL">
+
+`;
+
+exports[`braid-design-system start should return development seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
   "/vendors~devServerOnly~main.js",

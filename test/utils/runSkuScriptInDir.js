@@ -5,7 +5,7 @@ const skuBin = `${__dirname}/../../bin/sku.js`;
 
 module.exports = async (script, cwd, args = []) => {
   // When starting a dev server, return a hook to the running process
-  if (/^(start|storybook)/.test(script)) {
+  if (/^(start|storybook|serve)/.test(script)) {
     return gracefulSpawn(skuBin, [script, ...args], { stdio: 'inherit', cwd });
   }
 

@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: 'http://localhost:4005',
+  publicPath: '/static/source-maps',
   port: 8303,
   target: 'dist',
   sourceMapsProd: true,

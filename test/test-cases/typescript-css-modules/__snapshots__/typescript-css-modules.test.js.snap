@@ -2,12 +2,12 @@
 
 exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
-  "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
-  "http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js",
-  "http://localhost:4003/main-527bb92b29ef95a99b2d.js",
+  "/static/typescript/runtime-af90dfb73f645abd9001.js",
+  "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
+  "/static/typescript/main-527bb92b29ef95a99b2d.js",
 ]
 CSS: Array [
-  "http://localhost:4003/main-fadb2269a374a06075a5.css",
+  "/static/typescript/main-fadb2269a374a06075a5.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -27,19 +27,16 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -54,26 +51,22 @@ SOURCE HTML: <!DOCTYPE html>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
@@ -94,12 +87,12 @@ export const border: string;
 export const root: string;
 ",
   "index.html": SCRIPTS: Array [
-    "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
-    "http://localhost:4003/vendors~main-a264bd1d24dfb67ae5a1.js",
-    "http://localhost:4003/main-527bb92b29ef95a99b2d.js",
+    "/static/typescript/runtime-af90dfb73f645abd9001.js",
+    "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
+    "/static/typescript/main-527bb92b29ef95a99b2d.js",
   ]
 CSS: Array [
-    "http://localhost:4003/main-fadb2269a374a06075a5.css",
+    "/static/typescript/main-fadb2269a374a06075a5.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -119,19 +112,16 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -146,26 +136,22 @@ SOURCE HTML: <!DOCTYPE html>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
@@ -189,19 +175,19 @@ export = cssExports;
   font-size: 32px;
 }
 ,
-  "runtime-62bc0856cbb8d47f9471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-a264bd1d24dfb67ae5a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: Array [
-  "http://localhost:4003/runtime-62bc0856cbb8d47f9471.js",
-  "http://localhost:4003/vendors~main-984fab7243c3dc553e6f.js",
-  "http://localhost:4003/main-add4770934962096852c.js",
+  "/static/typescript/runtime-af90dfb73f645abd9001.js",
+  "/static/typescript/vendors~main-984fab7243c3dc553e6f.js",
+  "/static/typescript/main-add4770934962096852c.js",
 ]
 CSS: Array [
-  "http://localhost:4003/main-fadb2269a374a06075a5.css",
+  "/static/typescript/main-fadb2269a374a06075a5.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -221,19 +207,16 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -248,26 +231,22 @@ SOURCE HTML: <!DOCTYPE html>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
@@ -306,7 +285,7 @@ export = cssExports;
   font-size: 32px;
 }
 ,
-  "runtime-62bc0856cbb8d47f9471.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-984fab7243c3dc553e6f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

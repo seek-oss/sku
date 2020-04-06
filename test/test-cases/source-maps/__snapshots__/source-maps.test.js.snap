@@ -3,9 +3,9 @@
 exports[`source-maps build should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
-    "http://localhost:4005/runtime-68847494ac4d9ca53d09.js",
-    "http://localhost:4005/vendors~main-2d92e57430dea49b3830.js",
-    "http://localhost:4005/main-459ec594ac51c1ac1b9e.js",
+    "/static/source-maps/runtime-3bcad8a370c331c4d6c0.js",
+    "/static/source-maps/vendors~main-2d92e57430dea49b3830.js",
+    "/static/source-maps/main-459ec594ac51c1ac1b9e.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -22,19 +22,16 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -45,34 +42,30 @@ SOURCE HTML: <!DOCTYPE html>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "main-459ec594ac51c1ac1b9e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-459ec594ac51c1ac1b9e.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-68847494ac4d9ca53d09.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-68847494ac4d9ca53d09.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-3bcad8a370c331c4d6c0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-3bcad8a370c331c4d6c0.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-2d92e57430dea49b3830.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-2d92e57430dea49b3830.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

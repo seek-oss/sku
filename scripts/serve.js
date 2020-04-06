@@ -3,6 +3,7 @@ const http = require('http');
 const handler = require('serve-handler');
 const partition = require('lodash/partition');
 const { blue, bold, underline, yellow, red } = require('chalk');
+const didYouMean = require('didyoumean2').default;
 
 const {
   port,
@@ -19,8 +20,22 @@ const getSiteForHost = require('../lib/getSiteForHost');
 const args = require('../config/args');
 
 const environment = args.environment ? args.environment : environments[0] || '';
+const prefferedSite = args.site;
 
 (async () => {
+  const availableSites = sites.map(({ name }) => name);
+
+  if (prefferedSite && !availableSites.some((site) => prefferedSite === site)) {
+    console.log(red(`Unknown site '${bold(prefferedSite)}'`));
+    const suggestedSite = didYouMean(prefferedSite, availableSites);
+
+    if (suggestedSite) {
+      console.log(`Did you mean '${bold(suggestedSite)}'?`);
+    }
+
+    process.exit(1);
+  }
+
   if (
     paths.publicPath.startsWith('http') ||
     paths.publicPath.startsWith('//')
@@ -70,7 +85,7 @@ const environment = args.environment ? args.environment : environments[0] || '';
   const server = http.createServer((request, response) => {
     const [hostname] = request.headers.host.split(':');
 
-    const site = getSiteForHost(hostname) || '';
+    const site = getSiteForHost(hostname, prefferedSite) || '';
 
     const rewrites = validRoutes.map(({ route }) => {
       const normalisedRoute = route

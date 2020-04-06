@@ -58,11 +58,6 @@ describe('braid-design-system', () => {
     // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.
     await setUpLocalDependencies();
-    try {
-      await runSkuScriptInDir('setup-hosts', appDir);
-    } catch (e) {
-      console.log(e);
-    }
   });
 
   describe('start', () => {

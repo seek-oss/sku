@@ -1,5 +1,15 @@
 # sku
 
+## 10.0.2
+
+### Patch Changes
+
+- Fix template formatting ([#484](https://github.com/seek-oss/sku/pull/484))
+
+  This updates the template files to be in line with new linting rules
+
+- Fix memory leak in sku start ([#486](https://github.com/seek-oss/sku/pull/486))
+
 ## 10.0.1
 
 ### Patch Changes

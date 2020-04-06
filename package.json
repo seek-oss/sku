@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "npm run format-check && eslint .",
     "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
-    "pretest": "yarn check --integrity && npm run lint",
+    "pretest": "yarn check --integrity",
     "test": "OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
     "test-manual": "node test/manual",
     "setup-test-hosts": "node test/utils/setupTestHosts",

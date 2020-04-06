@@ -3,5 +3,5 @@ module.exports = {
   sites: ['au', 'nz'],
   environments: ['production'],
   port: 8202,
-  publicPath: 'http://localhost:4004',
+  publicPath: '/static/place',
 };

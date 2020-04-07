@@ -114,6 +114,7 @@ const args = require('../config/args');
       start: 'sku start',
       test: 'sku test',
       build: 'sku build',
+      serve: 'sku serve',
       lint: 'sku lint',
       format: 'sku format',
     },

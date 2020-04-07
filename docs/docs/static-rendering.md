@@ -264,20 +264,20 @@ export default {
 
 ### Dynamic routes
 
-Apps using params in their path (eg. `/job/[12345]`) are supported as well. These params are represented in sku using the standard `/job/:id` convention, where `:` marks this part of the path as dynamic.
+Apps using params in their path (eg. `/job/[12345]`) are supported as well. These params are represented in sku like so, `/job/$id`, where `$` marks this part of the path as dynamic.
 
 ```js
 {
-  routes: ['/', '/job/:id'],
+  routes: ['/', '/job/$id'],
 }
 ```
 
-When running `sku start`, requesting `/job/123` will return the rendered HTML for `/job/:id`. Running `sku build` will output the following folder structure.
+When running `sku start`, requesting `/job/123` will return the rendered HTML for `/job/$id`. Running `sku build` will output the following folder structure.
 
 ```
 ├── index.html
 ├── job
-│   ├── :id
+│   ├── $id
 │   │   ├── index.html
 ├── [static-asset].{css,js,jpg,etc}
 ```

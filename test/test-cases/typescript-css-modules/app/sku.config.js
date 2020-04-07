@@ -5,6 +5,6 @@ module.exports = {
   port: 8204,
   serverPort: 8010,
   storybookPort: 8082,
-  publicPath: 'http://localhost:4003',
+  publicPath: '/static/typescript',
   setupTests: 'src/setupTests.ts',
 };

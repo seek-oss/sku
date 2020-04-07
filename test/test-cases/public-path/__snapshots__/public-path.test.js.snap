@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`public path build should create valid app with no unresolved resources 1`] = `
+exports[`public path build and serve should create valid app with no unresolved resources 1`] = `
 SCRIPTS: Array [
   "/static/runtime-6eb1a7f8b78e5abe7b5e.js",
   "/static/vendors~main-2d92e57430dea49b3830.js",

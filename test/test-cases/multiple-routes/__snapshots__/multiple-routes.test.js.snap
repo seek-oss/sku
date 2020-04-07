@@ -1,100 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`multiple-routes build should create valid app 1`] = `
-SCRIPTS: Array [
-  "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
-  "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
-  "http://localhost:4004/main-648b7c92a3febada80f7.js",
-  "http://localhost:4004/handlers-Home-65fb4288f1865855b7dd.js",
-]
-CSS: Array [
-  "http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
-    >
-    <link data-chunk="handlers-Home"
-          rel="stylesheet"
-          href="styles[0]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
-    >
-    <link data-chunk="handlers-Home"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-          crossorigin="anonymous"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="_1QX0Hyt">
-        Welcome to the Home page -
-        au
-      </h1>
-    </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
-    </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
-    >
-      [2]
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
-    >
-    </script>
-    <script async
-            data-chunk="handlers-Home"
-            src="scripts[3]"
-            crossorigin="anonymous"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: NO DIFF
-`;
-
-exports[`multiple-routes build should generate the expected files 1`] = `
+exports[`multiple-routes build and serve should generate the expected files 1`] = `
 Object {
   "AsyncComponent-c44d4a8a700c39761853.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
@@ -108,15 +14,15 @@ Object {
 ,
   "handlers-Home-65fb4288f1865855b7dd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-648b7c92a3febada80f7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/:id/index.html": SCRIPTS: Array [
-    "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
-    "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
-    "http://localhost:4004/main-648b7c92a3febada80f7.js",
-    "http://localhost:4004/handlers-Details-63ddae3291ad6b8dde4d.js",
-    "http://localhost:4004/AsyncComponent-c44d4a8a700c39761853.js",
+  "production/au/details/$id/index.html": SCRIPTS: Array [
+    "/static/place/runtime-3258b63422d127e2544e.js",
+    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+    "/static/place/main-648b7c92a3febada80f7.js",
+    "/static/place/handlers-Details-63ddae3291ad6b8dde4d.js",
+    "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
   ]
 CSS: Array [
-    "http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css",
+    "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -136,31 +42,26 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
     <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
           href="scripts[3]"
-          crossorigin="anonymous"
     >
     <link data-chunk="AsyncComponent"
           rel="preload"
           as="script"
           href="scripts[4]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -178,50 +79,44 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [1,0]
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="handlers-Details"
             src="scripts[3]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="AsyncComponent"
             src="scripts[4]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "production/au/index.html": SCRIPTS: Array [
-    "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
-    "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
-    "http://localhost:4004/main-648b7c92a3febada80f7.js",
-    "http://localhost:4004/handlers-Home-65fb4288f1865855b7dd.js",
+    "/static/place/runtime-3258b63422d127e2544e.js",
+    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+    "/static/place/main-648b7c92a3febada80f7.js",
+    "/static/place/handlers-Home-65fb4288f1865855b7dd.js",
   ]
 CSS: Array [
-    "http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+    "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -241,25 +136,21 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
           href="scripts[3]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -274,45 +165,40 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [2]
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="handlers-Home"
             src="scripts[3]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "production/nz/details/:id/index.html": SCRIPTS: Array [
-    "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
-    "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
-    "http://localhost:4004/main-648b7c92a3febada80f7.js",
-    "http://localhost:4004/handlers-Details-63ddae3291ad6b8dde4d.js",
-    "http://localhost:4004/AsyncComponent-c44d4a8a700c39761853.js",
+  "production/nz/details/$id/index.html": SCRIPTS: Array [
+    "/static/place/runtime-3258b63422d127e2544e.js",
+    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+    "/static/place/main-648b7c92a3febada80f7.js",
+    "/static/place/handlers-Details-63ddae3291ad6b8dde4d.js",
+    "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
   ]
 CSS: Array [
-    "http://localhost:4004/handlers-Details-0e82719ea3ab71aafb06.css",
+    "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -332,31 +218,26 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
     <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
           href="scripts[3]"
-          crossorigin="anonymous"
     >
     <link data-chunk="AsyncComponent"
           rel="preload"
           as="script"
           href="scripts[4]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -374,50 +255,44 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [1,0]
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="handlers-Details"
             src="scripts[3]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="AsyncComponent"
             src="scripts[4]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
   "production/nz/index.html": SCRIPTS: Array [
-    "http://localhost:4004/runtime-1b8326c78bf3df922acc.js",
-    "http://localhost:4004/vendors~main-f9d0092723c71e65e66e.js",
-    "http://localhost:4004/main-648b7c92a3febada80f7.js",
-    "http://localhost:4004/handlers-Home-65fb4288f1865855b7dd.js",
+    "/static/place/runtime-3258b63422d127e2544e.js",
+    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+    "/static/place/main-648b7c92a3febada80f7.js",
+    "/static/place/handlers-Home-65fb4288f1865855b7dd.js",
   ]
 CSS: Array [
-    "http://localhost:4004/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+    "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -437,25 +312,21 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
-          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-          crossorigin="anonymous"
     >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
           href="scripts[3]"
-          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -470,39 +341,227 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
-            crossorigin="anonymous"
     >
       [2]
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="handlers-Home"
             src="scripts[3]"
-            crossorigin="anonymous"
     >
     </script>
   </body>
 </html>,
-  "runtime-1b8326c78bf3df922acc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-3258b63422d127e2544e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-f9d0092723c71e65e66e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
+`;
+
+exports[`multiple-routes build and serve should return details page 1`] = `
+SCRIPTS: Array [
+  "/static/place/runtime-3258b63422d127e2544e.js",
+  "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+  "/static/place/main-648b7c92a3febada80f7.js",
+  "/static/place/handlers-Details-63ddae3291ad6b8dde4d.js",
+  "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
+]
+CSS: Array [
+  "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Details"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="handlers-Details"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="scripts[4]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="_91MnZhe">
+        Welcome to the Details page -
+        au
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [1,0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="handlers-Details"
+            src="scripts[3]"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="scripts[4]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+     <div id="app">
+       <h1 class="_91MnZhe">
+         Welcome to the Details page -
+-        au
++        auID: 123
+         <span>
+           Some special async content
+         </span>
+
+`;
+
+exports[`multiple-routes build and serve should return home page 1`] = `
+SCRIPTS: Array [
+  "/static/place/runtime-3258b63422d127e2544e.js",
+  "/static/place/vendors~main-f9d0092723c71e65e66e.js",
+  "/static/place/main-648b7c92a3febada80f7.js",
+  "/static/place/handlers-Home-65fb4288f1865855b7dd.js",
+]
+CSS: Array [
+  "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="handlers-Home"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="_1QX0Hyt">
+        Welcome to the Home page -
+        au
+      </h1>
+    </div>
+    <script>
+      window.__SKU_CLIENT_CONTEXT__ = {"site":"au"};
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [2]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="scripts[3]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`multiple-routes start should render details page correctly 1`] = `

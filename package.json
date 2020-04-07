@@ -12,9 +12,10 @@
   "scripts": {
     "lint": "npm run format-check && eslint .",
     "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
-    "pretest": "yarn check --integrity && npm run lint",
+    "pretest": "yarn check --integrity",
     "test": "OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
     "test-manual": "node test/manual",
+    "setup-test-hosts": "node test/utils/setupTestHosts",
     "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "node ./scripts/postinstall.js",
@@ -189,7 +190,7 @@
     "renovate-config-seek": "^0.4.0",
     "seek-asia-style-guide": "^16.0.1",
     "seek-style-guide": "^40.2.8",
-    "serve-handler": "^6.1.0",
+    "serve-handler": "^6.1.2",
     "wait-on": "^3.3.0",
     "webpack-cli": "^3.3.10",
     "webpack-stats-plugin": "^0.3.0"

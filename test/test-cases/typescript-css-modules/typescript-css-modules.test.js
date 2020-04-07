@@ -15,19 +15,21 @@ const cssTypes = ['.less.d.ts'];
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
-    let closeAssetServer;
+    const url = 'http://localhost:8204';
+    let process;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      closeAssetServer = await startAssetServer(4003, distDir);
+      process = await runSkuScriptInDir('serve', appDir);
+      await waitForUrls(url);
     });
 
-    afterAll(() => {
-      closeAssetServer();
+    afterAll(async () => {
+      await process.kill();
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4003');
+      const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
 

@@ -73,6 +73,7 @@ const paths = {
     : null,
   serverEntry: getPathFromCwd(skuConfig.serverEntry),
   public: getPathFromCwd(skuConfig.public),
+  relativeTarget: skuConfig.target,
   target: getPathFromCwd(skuConfig.target),
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,

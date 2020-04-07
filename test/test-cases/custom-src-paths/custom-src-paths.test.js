@@ -2,41 +2,41 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
-const startAssetServer = require('../../utils/assetServer');
 const skuConfig = require('./sku.config');
 
 const targetDirectory = `${__dirname}/dist`;
+const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
   describe('start', () => {
-    const devServerUrl = `http://localhost:${skuConfig.port}`;
-    let server;
+    let process;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', __dirname);
-      await waitForUrls(devServerUrl);
+      process = await runSkuScriptInDir('start', __dirname);
+      await waitForUrls(url);
     });
 
     afterAll(async () => {
-      await server.kill();
+      await process.kill();
     });
 
     it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+      const snapshot = await getAppSnapshot(url);
       expect(snapshot).toMatchSnapshot();
     });
   });
 
   describe('build', () => {
-    let closeAssetServer;
+    let process;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = await startAssetServer(4002, targetDirectory);
+      process = await runSkuScriptInDir('serve', __dirname);
+      await waitForUrls(url);
     });
 
-    afterAll(() => {
-      closeAssetServer();
+    afterAll(async () => {
+      await process.kill();
     });
 
     it('should generate the expected files', async () => {
@@ -45,7 +45,7 @@ describe('custom-src-paths', () => {
     });
 
     it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4002');
+      const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
   });

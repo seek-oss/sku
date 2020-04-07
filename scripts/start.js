@@ -9,12 +9,12 @@ const { pathToRegexp } = require('path-to-regexp');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
+const getSiteForHost = require('../lib/getSiteForHost');
 const {
   port,
   initialPath,
   paths,
   routes,
-  sites,
   environments,
   isLibrary,
 } = require('../context');
@@ -43,16 +43,6 @@ const localhost = '0.0.0.0';
 
   const appHosts = getAppHosts();
 
-  const getSiteForHost = (hostname) => {
-    if (sites.length === 0) {
-      return undefined;
-    }
-
-    const matchingSite = sites.find((site) => site.host === hostname);
-
-    return matchingSite ? matchingSite.name : sites[0].name;
-  };
-
   const devServer = new WebpackDevServer(parentCompiler, {
     contentBase: paths.public,
     publicPath: paths.publicPath,
@@ -63,9 +53,21 @@ const localhost = '0.0.0.0';
     serveIndex: false,
     after: (app) => {
       app.get('*', (req, res, next) => {
-        const matchingRoute = routes.find(({ route }) =>
-          pathToRegexp(route).exec(req.path),
-        );
+        const matchingRoute = routes.find(({ route }) => {
+          const normalisedRoute = route
+            .split('/')
+            .map((part) => {
+              if (part.startsWith('$')) {
+                // Path is dynamic, map to ':id' style syntax supported by pathToRegexp
+                return `:${part.slice(1)}`;
+              }
+
+              return part;
+            })
+            .join('/');
+
+          return pathToRegexp(normalisedRoute).exec(req.path);
+        });
 
         if (!matchingRoute) {
           return next();

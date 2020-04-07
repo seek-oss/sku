@@ -46,7 +46,8 @@ const runScript = (scriptName) => {
     case 'build-storybook':
     case 'build':
     case 'build-ssr':
-    case 'chromatic': {
+    case 'chromatic':
+    case 'serve': {
       await configureProject();
 
       // Intentionally not awaiting async function as it's just for logging warnings

@@ -3,32 +3,31 @@ const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
-const startAssetServer = require('../../utils/assetServer');
 const appDir = path.resolve(__dirname, 'app');
 
 const targetDirectory = `${appDir}/dist`;
+const url = `http://localhost:8202`;
 
 describe('multiple-routes', () => {
   describe('start', () => {
-    const devServerUrl = `http://localhost:8202`;
-    let server;
+    let process;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(devServerUrl);
+      process = await runSkuScriptInDir('start', appDir);
+      await waitForUrls(url);
     });
 
     afterAll(async () => {
-      await server.kill();
+      await process.kill();
     });
 
     it('should render home page correctly', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+      const snapshot = await getAppSnapshot(url);
       expect(snapshot).toMatchSnapshot();
     });
 
     it('should render details page correctly', async () => {
-      const snapshot = await getAppSnapshot(`${devServerUrl}/details/123`);
+      const snapshot = await getAppSnapshot(`${url}/details/123`);
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -40,22 +39,26 @@ describe('multiple-routes', () => {
     });
   });
 
-  describe('build', () => {
-    let closeAssetServer;
+  describe('build and serve', () => {
+    let process;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      closeAssetServer = await startAssetServer(4004, targetDirectory, [
-        { source: '/', destination: '/production/au/index.html' },
-      ]);
+      process = await runSkuScriptInDir('serve', appDir);
+      await waitForUrls(url);
     });
 
-    afterAll(() => {
-      closeAssetServer();
+    afterAll(async () => {
+      await process.kill();
     });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot('http://localhost:4004');
+    it('should return home page', async () => {
+      const app = await getAppSnapshot(url);
+      expect(app).toMatchSnapshot();
+    });
+
+    it('should return details page', async () => {
+      const app = await getAppSnapshot(`${url}/details/123`);
       expect(app).toMatchSnapshot();
     });
 

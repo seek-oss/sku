@@ -1,23 +1,24 @@
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
-const startAssetServer = require('../../utils/assetServer');
-const targetDirectory = `${__dirname}/dist`;
+const waitForUrls = require('../../utils/waitForUrls');
 
 describe('public path', () => {
-  describe('build', () => {
-    let closeAssetServer;
+  describe('build and serve', () => {
+    const url = 'http://localhost:4001';
+    let process;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', __dirname);
-      closeAssetServer = await startAssetServer(4001, targetDirectory);
+      process = await runSkuScriptInDir('serve', __dirname);
+      await waitForUrls(url);
     });
 
-    afterAll(() => {
-      closeAssetServer();
+    afterAll(async () => {
+      await process.kill();
     });
 
     it('should create valid app with no unresolved resources', async () => {
-      const app = await getAppSnapshot('http://localhost:4001/static');
+      const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
   });

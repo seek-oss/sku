@@ -23,5 +23,11 @@ jobs:
       - name: Install Dependencies
         run: yarn --frozen-lockfile
 
+      - name: Setup hosts
+        run: sudo yarn setup-test-hosts
+
+      - name: Lint
+        run: yarn lint
+
       - name: Test
         run: yarn test

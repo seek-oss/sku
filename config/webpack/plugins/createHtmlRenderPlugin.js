@@ -1,5 +1,5 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
-const memoize = require('memoizee');
+const memoize = require('memoizee/weak');
 
 const product = require('../../../lib/product');
 const {

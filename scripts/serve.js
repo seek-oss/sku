@@ -1,5 +1,6 @@
 const path = require('path');
 const http = require('http');
+const fs = require('fs-extra');
 const handler = require('serve-handler');
 const partition = require('lodash/partition');
 const { blue, bold, underline, yellow, red } = require('chalk');
@@ -23,6 +24,17 @@ const environment = args.environment ? args.environment : environments[0] || '';
 const prefferedSite = args.site;
 
 (async () => {
+  const targetFolderExists = fs.existsSync(paths.target);
+
+  if (!targetFolderExists) {
+    console.log(
+      red(
+        `${bold('sku build')} must be run before running ${bold('sku serve')}`,
+      ),
+    );
+    process.exit(1);
+  }
+
   const availableSites = sites.map(({ name }) => name);
 
   if (prefferedSite && !availableSites.some((site) => prefferedSite === site)) {

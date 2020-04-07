@@ -1,5 +1,47 @@
 # sku
 
+## 10.1.0
+
+### Minor Changes
+
+- Add sku serve command ([#487](https://github.com/seek-oss/sku/pull/487))
+
+  The `sku serve` command adds the abilty to view the output of `sku build` without deploying to an environment. This is helpful for:
+
+  - Debugging production build only issues
+  - Running integration tests
+  - Viewing the app on legacy browsers (that require `sku build` only features)
+  - Performance testing
+
+  [Site/host routing](https://seek-oss.github.io/sku/#/./docs/multi-site?id=switching-site-by-host) works the same as `sku start`. However, you can set your preferred site via the `--site` argument. e.g. `sku serve --site seekAnz`. By default the first site is used.
+
+  You can specify which [environment](https://seek-oss.github.io/sku/#/./docs/configuration?id=environments) you want to serve via the `--environment` argument. e.g. `sku serve --environment production`. By default the first environment is used.
+
+  **Note**: `sku serve` does not work for apps that use a different domain for their [publicPath](https://seek-oss.github.io/sku/#/./docs/configuration?id=publicpath).
+
+### Patch Changes
+
+- Introduce new dynamic route syntax ([#487](https://github.com/seek-oss/sku/pull/487))
+
+  Dynamic routes should now be indicated by a `# sku character rather than`:`.
+
+  Usage of `:` for dynamic routes is now deprecated and will not work with the new `sku serve` command. However, `sku start` and `sku build` will continue to work.
+
+  **MIGRATION GUIDE**
+
+  Update your routes in `sku.config.js` to use the new `# sku syntax.
+
+  ```diff
+  {
+  - routes: ['/job/:id'],
+  + routes: ['/job/$id'],
+  }
+  ```
+
+  **Warning**: This will cause the affected routes to output a different folder structure. Make sure to update your web server route rules for the affected routes before releasing this change.
+
+  Please reach out to #sku-support if you have any questions.
+
 ## 10.0.2
 
 ### Patch Changes

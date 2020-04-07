@@ -84,16 +84,16 @@ describe('braid-design-system', () => {
   });
 
   describe('build', () => {
-    let server;
+    let process;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      server = await runSkuScriptInDir('serve', appDir);
+      process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(getLocalUrl('seekAnz'));
     });
 
     afterAll(async () => {
-      await server.kill();
+      await process.kill();
     });
 
     it('should return built jobStreet site', async () => {

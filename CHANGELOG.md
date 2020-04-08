@@ -1,5 +1,11 @@
 # sku
 
+## 10.1.1
+
+### Patch Changes
+
+- Add missing dependency for `sku serve` ([#490](https://github.com/seek-oss/sku/pull/490))
+
 ## 10.1.0
 
 ### Minor Changes

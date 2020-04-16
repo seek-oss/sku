@@ -7,6 +7,7 @@ const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
+const MetricsPlugin = require('./plugins/metrics-plugin');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
@@ -185,6 +186,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
               new webpack.NoEmitOnErrorsPlugin(),
+              new MetricsPlugin({ prefix: 'start_ssr', target: 'browser' }),
             ]
           : [
               bundleAnalyzerPlugin({ name: 'client' }),
@@ -269,6 +271,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
               new webpack.NoEmitOnErrorsPlugin(),
+              new MetricsPlugin({ prefix: 'start_ssr', target: 'node' }),
             ]
           : [],
       ),

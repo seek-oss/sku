@@ -9,6 +9,7 @@ let provider = {
 
 try {
   if (process.env.TELEMETRY !== 'false') {
+    // eslint-disable-next-line import/no-unresolved
     provider = require('@seek/sku-telemetry').default({});
   }
 } catch (e) {

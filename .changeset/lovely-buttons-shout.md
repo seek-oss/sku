@@ -2,6 +2,15 @@
 'sku': patch
 ---
 
-Add metrics for core scripts
+Add support for `@seek/sku-telemetry`.
 
-Please add `@seek/sku-telemetry` to your `devDependencies`
+To help improve sku, you should add this as a dev dependency:
+
+```bash
+$ yarn add --dev @seek/sku-telemetry
+```
+or
+
+```bash
+$ npm install --save-dev @seek/sku-telemetry
+```

@@ -9,6 +9,7 @@ const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
+const MetricsPlugin = require('./plugins/metrics-plugin');
 
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
@@ -36,6 +37,7 @@ const makeWebpackConfig = ({
   port = 0,
   isDevServer = false,
   htmlRenderPlugin,
+  metrics = false,
 } = {}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -234,6 +236,9 @@ const makeWebpackConfig = ({
           displayNamesProd,
           MiniCssExtractPlugin,
         }),
+        ...(metrics
+          ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
+          : []),
       ],
     },
     {
@@ -287,6 +292,9 @@ const makeWebpackConfig = ({
           displayNamesProd,
           MiniCssExtractPlugin,
         }),
+        ...(metrics
+          ? [new MetricsPlugin({ type: 'static', target: 'node' })]
+          : []),
       ],
     },
   ].map(webpackDecorator);

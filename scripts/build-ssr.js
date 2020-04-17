@@ -1,6 +1,8 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
+const { performance } = require('perf_hooks');
+const prettyMilliseconds = require('pretty-ms');
 const webpack = require('webpack');
 const { green, red } = require('chalk');
 const { run } = require('../lib/runWebpack');
@@ -11,6 +13,7 @@ const {
 } = require('../lib/buildFileUtils');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const { port } = require('../context');
+const track = require('../telemetry');
 
 (async () => {
   try {
@@ -24,10 +27,20 @@ const { port } = require('../context');
     await run(webpack(serverConfig));
     await copyPublicFiles();
 
-    console.log(green('Sku build complete!'));
-  } catch (e) {
-    console.error(red(e));
+    const timeTaken = performance.now();
+    track.timing('build', timeTaken, { status: 'success', type: 'ssr' });
 
-    process.exit(1);
+    console.log(
+      green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
+    );
+  } catch (error) {
+    const timeTaken = performance.now();
+    track.timing('build', timeTaken, { status: 'failed', type: 'ssr' });
+
+    console.error(red(error));
+
+    process.exitCode = 1;
+  } finally {
+    await track.close();
   }
 })();

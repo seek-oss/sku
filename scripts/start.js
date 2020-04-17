@@ -35,6 +35,7 @@ const localhost = '0.0.0.0';
     port: availablePort,
     isDevServer: true,
     htmlRenderPlugin,
+    metrics: true,
   });
 
   const parentCompiler = webpack(config);

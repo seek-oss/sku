@@ -19,11 +19,14 @@ const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
 const args = require('../config/args');
+const track = require('../telemetry');
 
 const environment = args.environment ? args.environment : environments[0] || '';
 const prefferedSite = args.site;
 
 (async () => {
+  track.count('serve');
+
   const targetFolderExists = fs.existsSync(paths.target);
 
   if (!targetFolderExists) {

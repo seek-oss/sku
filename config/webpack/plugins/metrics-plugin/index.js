@@ -3,10 +3,10 @@ const { performance } = require('perf_hooks');
 const track = require('../../../../telemetry');
 
 class MetricsPlugin {
-  constructor({ prefix, target }) {
+  constructor({ type, target }) {
     this.initial = true;
     this.target = target;
-    this.prefix = prefix;
+    this.type = type;
   }
 
   apply(compiler) {
@@ -16,16 +16,18 @@ class MetricsPlugin {
 
     compiler.hooks.done.tap('sku-metrics-plugin', () => {
       if (this.initial) {
-        track.timing(`${this.prefix}.webpack.initial`, performance.now(), {
+        track.timing('start.webpack.initial', performance.now(), {
           target: this.target,
+          type: this.type,
         });
         this.initial = false;
       } else {
         track.timing(
-          `${this.prefix}.webpack.rebuild`,
+          'start.webpack.rebuild',
           performance.now() - this.startTime,
           {
             target: this.target,
+            type: this.type,
           },
         );
       }

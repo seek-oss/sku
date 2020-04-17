@@ -186,7 +186,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
               new webpack.NoEmitOnErrorsPlugin(),
-              new MetricsPlugin({ prefix: 'start_ssr', target: 'browser' }),
+              new MetricsPlugin({ type: 'ssr', target: 'browser' }),
             ]
           : [
               bundleAnalyzerPlugin({ name: 'client' }),
@@ -271,7 +271,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
               new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
               new webpack.NoEmitOnErrorsPlugin(),
-              new MetricsPlugin({ prefix: 'start_ssr', target: 'node' }),
+              new MetricsPlugin({ type: 'ssr', target: 'node' }),
             ]
           : [],
       ),

@@ -33,14 +33,14 @@ const track = require('../telemetry');
     await copyPublicFiles();
 
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'success' });
+    track.timing('build', timeTaken, { status: 'success', type: 'static' });
 
     console.log(
       green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
     );
   } catch (error) {
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'failed' });
+    track.timing('build', timeTaken, { status: 'failed', type: 'static' });
 
     console.error(red(error));
 

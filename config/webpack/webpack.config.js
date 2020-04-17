@@ -237,7 +237,7 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
         }),
         ...(metrics
-          ? [new MetricsPlugin({ prefix: 'start', target: 'browser' })]
+          ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
       ],
     },
@@ -293,7 +293,7 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
         }),
         ...(metrics
-          ? [new MetricsPlugin({ prefix: 'start', target: 'node' })]
+          ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
       ],
     },

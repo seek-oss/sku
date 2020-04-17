@@ -1,5 +1,23 @@
 # sku
 
+## 10.1.2
+
+### Patch Changes
+
+- Add support for `@seek/sku-telemetry`. ([#495](https://github.com/seek-oss/sku/pull/495))
+
+  To help improve sku, you should add this as a dev dependency:
+
+  ```bash
+  $ yarn add --dev @seek/sku-telemetry
+  ```
+
+  or
+
+  ```bash
+  $ npm install --save-dev @seek/sku-telemetry
+  ```
+
 ## 10.1.1
 
 ### Patch Changes

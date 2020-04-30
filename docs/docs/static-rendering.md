@@ -43,7 +43,7 @@ Running `sku build` with the above config will create the following output in yo
 
 `environments`, `sites` & `routes` are all optional and will not show up in the build output if not specified.
 
-_**NOTE:** `sku start` will default to the first `environment` and `site` in your config if provided._
+_**NOTE:** `sku start` will default to the first `environment` and `site` in your config if provided. You can use any site by passing the `--environment` argument e.g. `sku start --environment production`_
 
 ## Rendering
 

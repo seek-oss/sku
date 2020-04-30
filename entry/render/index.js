@@ -1,6 +1,7 @@
 import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor';
 import clientContextKey from '../clientContextKey';
+import createCSPHandler from '../csp';
 
 import render from '__sku_alias__renderEntry';
 
@@ -51,6 +52,10 @@ export default async (renderParams) => {
     bodyTags,
     app,
   });
+
+  const cspHandler = createCSPHandler();
+
+  cspHandler.handleHtml(result);
 
   return result;
 };

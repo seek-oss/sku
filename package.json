@@ -133,6 +133,7 @@
     "memoizee": "^0.4.14",
     "mini-css-extract-plugin": "^0.8.0",
     "node-emoji": "^1.10.0",
+    "node-html-parser": "^1.2.16",
     "open": "^7.0.0",
     "path-to-regexp": "^6.0.0",
     "playroom": "^0.15.0",

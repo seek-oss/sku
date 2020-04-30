@@ -1,5 +1,17 @@
 # sku
 
+## 10.2.0
+
+### Minor Changes
+
+- Add environment arg support to `sku start` ([#498](https://github.com/seek-oss/sku/pull/498))
+
+  `sku start` defaults to using the first environment in your `environments` array. You can now specify any environment via the `--environment` argument, mimicking the `sku serve` behaviour.
+
+  ```bash
+  $ sku start --environment production
+  ```
+
 ## 10.1.2
 
 ### Patch Changes

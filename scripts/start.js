@@ -10,20 +10,20 @@ const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
-const {
-  port,
-  initialPath,
-  paths,
-  routes,
-  environments,
-  isLibrary,
-} = require('../context');
+const resolveEnvironment = require('../lib/resolveEnvironment');
+const { port, initialPath, paths, routes, isLibrary } = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
 const localhost = '0.0.0.0';
 
 (async () => {
+  console.log(blue(`sku start`));
+
+  const environment = resolveEnvironment();
+
+  console.log();
+
   const availablePort = await allocatePort({
     port: port.client,
     host: localhost,
@@ -79,7 +79,7 @@ const localhost = '0.0.0.0';
             route: matchingRoute.route,
             routeName: matchingRoute.name,
             site: getSiteForHost(req.hostname),
-            environment: environments.length > 0 ? environments[0] : undefined,
+            environment,
           })
           .then((html) => res.send(html))
           .catch((renderError) => {

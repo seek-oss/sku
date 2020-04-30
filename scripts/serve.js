@@ -6,22 +6,15 @@ const partition = require('lodash/partition');
 const { blue, bold, underline, yellow, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 
-const {
-  port,
-  paths,
-  environments,
-  initialPath,
-  routes,
-  sites,
-} = require('../context');
+const { port, paths, initialPath, routes, sites } = require('../context');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
+const resolveEnvironment = require('../lib/resolveEnvironment');
 const args = require('../config/args');
 const track = require('../telemetry');
 
-const environment = args.environment ? args.environment : environments[0] || '';
 const prefferedSite = args.site;
 
 (async () => {
@@ -72,9 +65,7 @@ const prefferedSite = args.site;
 
   console.log(blue(`sku serve`));
 
-  if (environment) {
-    console.log(`Using ${bold(environment)} environment`);
-  }
+  const environment = resolveEnvironment();
 
   const [invalidRoutes, validRoutes] = partition(
     routes,

@@ -7,11 +7,12 @@ import render from '__sku_alias__renderEntry';
 
 const libraryName = SKU_LIBRARY_NAME;
 const publicPath = __SKU_PUBLIC_PATH__;
+const csp = __SKU_CSP__;
 
 export const serializeConfig = (config) =>
-  `<script>window.${clientContextKey} = ${serializeJavascript(
+  `<script id="${clientContextKey}" type="application/json">${serializeJavascript(
     config,
-  )};</script>`;
+  )}</script>`;
 
 export default async (renderParams) => {
   const renderContext = { ...renderParams, libraryName };
@@ -53,9 +54,13 @@ export default async (renderParams) => {
     app,
   });
 
-  const cspHandler = createCSPHandler();
+  if (csp.enabled) {
+    const cspHandler = createCSPHandler({
+      extraHosts: [publicPath, ...csp.extraHosts],
+    });
 
-  cspHandler.handleHtml(result);
+    return cspHandler.handleHtml(result);
+  }
 
   return result;
 };

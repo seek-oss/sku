@@ -4,7 +4,7 @@ exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: Array [
   "/runtime-554e53c2f72903d6f45f.js",
   "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
-  "/main-a11ee3ceb7e73f40a468.js",
+  "/main-62cd95557d74e4ec4a3f.js",
 ]
 CSS: Array [
   "/main-fadb2269a374a06075a5.css",
@@ -88,7 +88,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
     "/vendors~main-de7ea8f2a0d5ba76c5b9.js",
-    "/main-a11ee3ceb7e73f40a468.js",
+    "/main-62cd95557d74e4ec4a3f.js",
   ]
 CSS: Array [
     "/main-fadb2269a374a06075a5.css",
@@ -155,7 +155,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-a11ee3ceb7e73f40a468.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-62cd95557d74e4ec4a3f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-fadb2269a374a06075a5.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;

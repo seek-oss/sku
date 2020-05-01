@@ -5,6 +5,7 @@ SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
   "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
   "http://localhost:4000/main-f3a39034449721d83bde.js",
+  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
   "http://localhost:4000/main-fadb2269a374a06075a5.css",
@@ -18,6 +19,9 @@ SOURCE HTML: <!DOCTYPE html>
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
+    >
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' http://localhost:4000 https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -51,6 +55,11 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
+    <script src="scripts[3]">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
             crossorigin="anonymous"
@@ -85,6 +94,7 @@ SCRIPTS: Array [
   "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
   "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
   "http://localhost:4000/main-f3a39034449721d83bde.js",
+  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
   "http://localhost:4000/main-fadb2269a374a06075a5.css",
@@ -98,6 +108,9 @@ SOURCE HTML: <!DOCTYPE html>
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
+    >
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' http://localhost:4000 https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -131,6 +144,11 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
+    <script src="scripts[3]">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
             crossorigin="anonymous"
@@ -165,6 +183,7 @@ SCRIPTS: Array [
   "http://localhost:8100/runtime.js",
   "http://localhost:8100/vendors~main.js",
   "http://localhost:8100/main.js",
+  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
   "http://localhost:8100/main.css",
@@ -178,6 +197,9 @@ SOURCE HTML: <!DOCTYPE html>
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
+    >
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' http://localhost:8100 https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -211,6 +233,11 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://localhost:8100/a85d2645cc4d80a20b5ba78e8e797449.png">
       </div>
     </div>
+    <script src="scripts[3]">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
             crossorigin="anonymous"

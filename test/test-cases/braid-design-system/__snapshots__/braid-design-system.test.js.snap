@@ -16,7 +16,7 @@ Object {
   "jobStreet/index.html": SCRIPTS: Array [
     "/runtime-f2cce6a4bd563e6f4ba8.js",
     "/vendors~main-fa2ba4da69fc17b2b66c.js",
-    "/main-9e12bdc6d0a3e0e21c04.js",
+    "/main-358a36fce914b3e1b5e4.js",
     "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
     "/themes-jobStreet-0fde78850e89104ba0a5.js",
   ]
@@ -148,8 +148,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"jobStreet"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
@@ -183,12 +185,12 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-9e12bdc6d0a3e0e21c04.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-358a36fce914b3e1b5e4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-f2cce6a4bd563e6f4ba8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
     "/runtime-f2cce6a4bd563e6f4ba8.js",
     "/vendors~main-fa2ba4da69fc17b2b66c.js",
-    "/main-9e12bdc6d0a3e0e21c04.js",
+    "/main-358a36fce914b3e1b5e4.js",
     "/vendors~themes-seekAnz-9b7f7721bbf1241aa94d.js",
     "/themes-seekAnz-158b1fe2fa2423a977aa.js",
   ]
@@ -320,8 +322,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"seekAnz"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"seekAnz"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
@@ -11492,7 +11496,7 @@ exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
   "/runtime-f2cce6a4bd563e6f4ba8.js",
   "/vendors~main-fa2ba4da69fc17b2b66c.js",
-  "/main-9e12bdc6d0a3e0e21c04.js",
+  "/main-358a36fce914b3e1b5e4.js",
   "/vendors~themes-jobStreet-1de1439829dbebd5124c.js",
   "/themes-jobStreet-0fde78850e89104ba0a5.js",
 ]
@@ -11624,8 +11628,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"jobStreet"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
@@ -11674,7 +11680,7 @@ exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime-f2cce6a4bd563e6f4ba8.js",
   "/vendors~main-fa2ba4da69fc17b2b66c.js",
-  "/main-9e12bdc6d0a3e0e21c04.js",
+  "/main-358a36fce914b3e1b5e4.js",
   "/vendors~themes-seekAnz-9b7f7721bbf1241aa94d.js",
   "/themes-seekAnz-158b1fe2fa2423a977aa.js",
 ]
@@ -11806,8 +11812,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"seekAnz"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"seekAnz"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
@@ -11988,8 +11996,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"jobStreet"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"jobStreet"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
@@ -12170,8 +12180,10 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
       </div>
     </div>
-    <script>
-      window.__SKU_CLIENT_CONTEXT__ = {"site":"seekAnz"};
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"seekAnz"}
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"

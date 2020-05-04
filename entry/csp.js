@@ -42,6 +42,10 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
   const registerScript = (script) => {
     const root = parse(script, { script: true });
 
+    if (!root.valid) {
+      console.error(`Invalid script passed to 'csp.registerScript'`);
+    }
+
     root.querySelectorAll('script').forEach(processScriptNode);
   };
 

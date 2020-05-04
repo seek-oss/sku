@@ -8,18 +8,18 @@ const hashScriptContents = (scriptContents) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
 export default function createCSPHandler({ extraHosts = [] } = {}) {
-  const hosts = [];
-  const shas = [];
+  const hosts = new Set();
+  const shas = new Set();
 
   const addScriptContents = (contents) => {
-    shas.push(hashScriptContents(contents));
+    shas.add(hashScriptContents(contents));
   };
 
   const addScriptUrl = (src) => {
     const { origin } = new URL(src, defaultBaseName);
 
     if (origin !== defaultBaseName) {
-      hosts.push(origin);
+      hosts.add(origin);
     }
   };
 
@@ -44,9 +44,18 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
   const createCSPTag = () => {
     const policies = [];
 
-    const inlineCspShas = shas.map((sha) => `'sha256-${sha}'`);
+    const inlineCspShas = [];
 
-    const scriptSrcPolicy = [`'self'`, ...hosts, ...inlineCspShas].join(' ');
+    for (const sha of shas.values()) {
+      inlineCspShas.push(`'sha256-${sha}'`);
+    }
+
+    const scriptSrcPolicy = [
+      `'self'`,
+      ...hosts.values(),
+      ...inlineCspShas,
+    ].join(' ');
+
     policies.push(`script-src ${scriptSrcPolicy};`);
 
     return [

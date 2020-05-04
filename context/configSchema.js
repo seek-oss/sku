@@ -159,5 +159,4 @@ module.exports = validator.compile({
     type: 'array',
     items: { type: 'string' },
   },
-  cspReportingUri: { type: 'string', optional: true },
 });

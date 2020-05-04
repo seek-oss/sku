@@ -2,6 +2,8 @@ import { createHash } from 'crypto';
 import { parse } from 'node-html-parser';
 import { URL } from 'url';
 
+const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
+
 const defaultBaseName = 'http://relative-url';
 
 const hashScriptContents = (scriptContents) =>
@@ -30,7 +32,9 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
 
     if (src) {
       addScriptUrl(src);
-    } else if (scriptNode.getAttribute('type') !== 'application/json') {
+    } else if (
+      !scriptTypeIgnoreList.includes(scriptNode.getAttribute('type'))
+    ) {
       addScriptContents(scriptNode.firstChild.rawText);
     }
   };

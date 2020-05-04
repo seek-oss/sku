@@ -5,5 +5,5 @@ module.exports = {
   port: 8202,
   publicPath: '/static/place',
   cspEnabled: true,
-  cspExtraHosts: ['https://some-tealium-crap.com', 'https://fb-tracking.com'],
+  cspExtraHosts: ['https://error-tracking.com', 'https://fb-tracking.com'],
 };

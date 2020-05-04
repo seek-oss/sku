@@ -29,7 +29,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -133,7 +133,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -225,7 +225,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -329,7 +329,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -427,7 +427,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -544,7 +544,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -641,7 +641,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -769,7 +769,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-tealium-crap.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <meta charset="UTF-8">
     <title>

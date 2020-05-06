@@ -42,6 +42,24 @@ Default: `[]`
 
 An array of `node_modules` to be compiled as if they were part of your source code. This allows the use of packages that make use of CSS Modules or TypeScript without having them be pre compiled. Ideally, this setting should only be used for internally controlled packages.
 
+## cspEnabled
+
+type `boolean`
+
+**Unavailable for libraries**
+
+Default: `false`
+
+Enable content security policy feature. See [`Content Security Policy`](./docs/csp.md) for more info.
+
+## cspExtraHosts
+
+type `Array<string>`
+
+Default: `[]`
+
+Extra external hosts to allow in your [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
+
 ## dangerouslySetESLintConfig
 
 type `function`

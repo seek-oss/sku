@@ -2,6 +2,8 @@
 
 [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app. For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
+**This feature is not available to libraries**
+
 ## Setup
 
 Set `cspEnabled: true` in your `sku.config.js`.

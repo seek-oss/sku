@@ -234,6 +234,7 @@ const makeWebpackConfig = ({
           libraryName,
           generateCSSTypes: isTypeScript,
           displayNamesProd,
+          removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
         }),
         ...(metrics
@@ -290,6 +291,7 @@ const makeWebpackConfig = ({
           mode: webpackMode,
           libraryName,
           displayNamesProd,
+          removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
         }),
         ...(metrics

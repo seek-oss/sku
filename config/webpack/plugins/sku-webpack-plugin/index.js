@@ -50,6 +50,7 @@ class SkuWebpackPlugin {
       mode = compiler.options.mode,
       libraryName,
       displayNamesProd,
+      removeAssertionsInProduction,
       MiniCssExtractPlugin,
     } = this.options;
 
@@ -64,6 +65,7 @@ class SkuWebpackPlugin {
           lang: 'ts',
           supportedBrowsers,
           displayNamesProd,
+          removeAssertionsInProduction,
         }),
       },
       {
@@ -74,6 +76,7 @@ class SkuWebpackPlugin {
           lang: 'js',
           supportedBrowsers,
           displayNamesProd,
+          removeAssertionsInProduction,
         }),
       },
       {

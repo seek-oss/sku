@@ -10,6 +10,7 @@ const hashScriptContents = (scriptContents) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
 export default function createCSPHandler({ extraHosts = [] } = {}) {
+  let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();
 
@@ -40,6 +41,15 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
   };
 
   const registerScript = (script) => {
+    if (tagReturned) {
+      throw new Error(
+        `Unable to register script. Content Security Policy already sent. Try registering scripts before calling flushHeadTags. Script: ${script.substr(
+          0,
+          30,
+        )}`,
+      );
+    }
+
     const root = parse(script, { script: true });
 
     if (!root.valid) {
@@ -50,6 +60,7 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
   };
 
   const createCSPTag = () => {
+    tagReturned = true;
     const policies = [];
 
     const inlineCspShas = [];

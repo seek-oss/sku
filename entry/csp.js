@@ -88,7 +88,9 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
     const root = parse(html, { script: true });
 
     if (!root.valid) {
-      throw new Error('Invalid HTML');
+      throw new Error(
+        `Unable to parse HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${html}`,
+      );
     }
 
     root.querySelectorAll('script').forEach(processScriptNode);

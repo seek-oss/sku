@@ -61,7 +61,6 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
 
   const createCSPTag = () => {
     tagReturned = true;
-    const policies = [];
 
     const inlineCspShas = [];
 
@@ -70,18 +69,13 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
     }
 
     const scriptSrcPolicy = [
+      'script-src',
       `'self'`,
       ...hosts.values(),
       ...inlineCspShas,
     ].join(' ');
 
-    policies.push(`script-src ${scriptSrcPolicy};`);
-
-    return [
-      `<meta http-equiv="Content-Security-Policy" content="`,
-      policies.join(' '),
-      '">',
-    ].join('');
+    return `<meta http-equiv="Content-Security-Policy" content="${scriptSrcPolicy};">`;
   };
 
   const handleHtml = (html) => {

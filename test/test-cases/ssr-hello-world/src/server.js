@@ -6,14 +6,13 @@ const writeFile = promisify(fs.writeFile);
 
 import App from './App';
 
-const initialResponseTemplate = ({ headTags, cspTag }) => `
+const initialResponseTemplate = ({ headTags }) => `
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>hello-world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    ${cspTag}
     ${headTags}
 `;
 
@@ -30,7 +29,7 @@ const template = ({ headTags, bodyTags, app, extraScripts }) => `
 
 export default () => ({
   renderCallback: async (
-    { SkuProvider, getBodyTags, flushHeadTags, csp },
+    { SkuProvider, getBodyTags, flushHeadTags, registerScript },
     req,
     res,
   ) => {
@@ -39,12 +38,11 @@ export default () => ({
       `<script>console.log('Hi');</script>`,
     ];
 
-    extraScripts.forEach((script) => csp.registerScript(script));
+    extraScripts.forEach((script) => registerScript(script));
 
     res.status(200).write(
       initialResponseTemplate({
         headTags: flushHeadTags(),
-        cspTag: csp.createCSPTag(),
       }),
     );
     res.flush();

@@ -83,7 +83,7 @@ export default () => ({
         app,
       }),
     );
-    res.end;
+    res.end();
   },
   middleware: middleware,
   onStart: app => {

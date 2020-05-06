@@ -11,7 +11,7 @@ const getNewTags = ({ before, after }) => {
   return afterArr.filter((tag) => !beforeArr.includes(tag)).join('\n');
 };
 
-export default (stats, publicPath) => {
+export default (stats, publicPath, csp) => {
   const extractor = new ChunkExtractor({
     stats,
     entrypoints: [defaultEntryPoint],
@@ -29,6 +29,7 @@ export default (stats, publicPath) => {
 
   let previouslyReturnedJsHeadTags = '';
   let previouslyReturnedCssHeadTags = '';
+  let hasReturnedCSPTag = false;
 
   const getJsHeadTags = () =>
     extractor
@@ -43,6 +44,10 @@ export default (stats, publicPath) => {
     getHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
+      if (csp) {
+        tags.push(csp.createCSPTag());
+      }
+
       if (!excludeCss) {
         tags.push(getCssHeadTags());
       }
@@ -54,6 +59,12 @@ export default (stats, publicPath) => {
     },
     flushHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
+
+      if (csp && !hasReturnedCSPTag) {
+        tags.push(csp.createCSPTag());
+
+        hasReturnedCSPTag = true;
+      }
 
       if (!excludeCss) {
         const cssHeadTags = getCssHeadTags();

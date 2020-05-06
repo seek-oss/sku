@@ -30,12 +30,19 @@ if (middleware) {
   app.use(middleware);
 }
 app.get('*', (...args) => {
-  const cspHandler = createCSPHandler({
-    extraHosts: [publicPath, ...csp.extraHosts],
-  });
+  let cspHandler;
+
+  if (csp.enabled) {
+    cspHandler = createCSPHandler({
+      extraHosts: [publicPath, ...csp.extraHosts],
+    });
+  }
 
   return renderCallback(
-    { ...makeExtractor(webpackStats, publicPath), csp: cspHandler },
+    {
+      ...makeExtractor(webpackStats, publicPath, cspHandler),
+      registerScript: cspHandler ? cspHandler.registerScript : undefined,
+    },
     ...args,
   );
 });

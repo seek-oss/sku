@@ -49,6 +49,10 @@ const schema = {
     type: 'boolean',
     optional: true,
   },
+  removeAssertionsInProduction: {
+    type: 'boolean',
+    optional: true,
+  },
   supportedBrowsers: {
     type: 'array',
     items: 'string',

@@ -12,6 +12,7 @@ const csp = __SKU_CSP__;
 export const serializeConfig = (config) =>
   `<script id="${clientContextKey}" type="application/json">${serializeJavascript(
     config,
+    { isJSON: true },
   )}</script>`;
 
 export default async (renderParams) => {

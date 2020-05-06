@@ -5,6 +5,7 @@ module.exports = ({
   lang = 'js',
   supportedBrowsers,
   displayNamesProd = false,
+  removeAssertionsInProduction = true,
 }) => {
   const browserEnvOptions = {
     modules: false,
@@ -58,6 +59,10 @@ module.exports = ({
 
     if (displayNamesProd) {
       plugins.push(require.resolve('babel-plugin-add-react-displayname'));
+    }
+
+    if (removeAssertionsInProduction) {
+      plugins.push(require.resolve('babel-plugin-unassert'));
     }
   }
 

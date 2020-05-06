@@ -12,7 +12,7 @@ const {
   ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
-const { port } = require('../context');
+const { port, cspEnabled } = require('../context');
 const track = require('../telemetry');
 
 (async () => {
@@ -28,14 +28,22 @@ const track = require('../telemetry');
     await copyPublicFiles();
 
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'success', type: 'ssr' });
+    track.timing('build', timeTaken, {
+      status: 'success',
+      type: 'ssr',
+      csp: cspEnabled,
+    });
 
     console.log(
       green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
     );
   } catch (error) {
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'failed', type: 'ssr' });
+    track.timing('build', timeTaken, {
+      status: 'failed',
+      type: 'ssr',
+      csp: cspEnabled,
+    });
 
     console.error(red(error));
 

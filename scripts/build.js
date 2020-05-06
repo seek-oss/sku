@@ -15,7 +15,7 @@ const {
 const { run } = require('../lib/runWebpack');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
-const { isLibrary } = require('../context');
+const { isLibrary, cspEnabled } = require('../context');
 const track = require('../telemetry');
 
 (async () => {
@@ -33,14 +33,22 @@ const track = require('../telemetry');
     await copyPublicFiles();
 
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'success', type: 'static' });
+    track.timing('build', timeTaken, {
+      status: 'success',
+      type: 'static',
+      csp: cspEnabled,
+    });
 
     console.log(
       green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
     );
   } catch (error) {
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, { status: 'failed', type: 'static' });
+    track.timing('build', timeTaken, {
+      status: 'failed',
+      type: 'static',
+      csp: cspEnabled,
+    });
 
     console.error(red(error));
 

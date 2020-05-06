@@ -16,7 +16,7 @@ As sku doesn't handle the returned HTML in SSR apps, any extra scripts (scripts 
 
 In the `renderCallback` function, register all extra script tags (inline and external) via the `registerScript` function.
 
-> If you are using multi-part reponses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
+> If you are using multi-part responses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
 
 ```js
 async function renderCallback(

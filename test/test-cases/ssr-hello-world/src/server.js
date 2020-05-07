@@ -16,11 +16,12 @@ const initialResponseTemplate = ({ headTags }) => `
     ${headTags}
 `;
 
-const template = ({ headTags, bodyTags, app }) => `
+const template = ({ headTags, bodyTags, app, extraScripts }) => `
       ${headTags}
     </head>
     <body>
       <div id="app">${app}</div>
+      ${extraScripts.join('\n')}
       ${bodyTags}
     </body>
   </html>
@@ -28,13 +29,22 @@ const template = ({ headTags, bodyTags, app }) => `
 
 export default () => ({
   renderCallback: async (
-    { SkuProvider, getBodyTags, flushHeadTags },
+    { SkuProvider, getBodyTags, flushHeadTags, registerScript },
     req,
     res,
   ) => {
-    res
-      .status(200)
-      .write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    const extraScripts = [
+      `<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>`,
+      `<script>console.log('Hi');</script>`,
+    ];
+
+    extraScripts.forEach((script) => registerScript(script));
+
+    res.status(200).write(
+      initialResponseTemplate({
+        headTags: flushHeadTags(),
+      }),
+    );
     res.flush();
     await Promise.resolve();
 
@@ -44,7 +54,12 @@ export default () => ({
       </SkuProvider>,
     );
     res.write(
-      template({ headTags: flushHeadTags(), bodyTags: getBodyTags(), app }),
+      template({
+        headTags: flushHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+        extraScripts,
+      }),
     );
     res.end();
   },

@@ -127,4 +127,6 @@ module.exports = {
     title: skuConfig.playroomTitle,
   },
   orderImports: Boolean(skuConfig.orderImports),
+  cspEnabled: skuConfig.cspEnabled,
+  cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
 };

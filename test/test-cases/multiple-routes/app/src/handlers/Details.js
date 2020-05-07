@@ -24,10 +24,11 @@ export default class Details extends React.Component {
 
   render() {
     const { id } = this.state;
+    const message = `Welcome to the Details page - ${this.props.site}`;
 
     return (
       <h1 className={styles.root}>
-        Welcome to the Details page - {this.props.site}
+        {message}
         {id && `ID: ${id}`}
         <AsyncComponent />
       </h1>

@@ -4,7 +4,7 @@ exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-af90dfb73f645abd9001.js",
   "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
-  "/static/typescript/main-527bb92b29ef95a99b2d.js",
+  "/static/typescript/main-d7855a590952dcf5e9d0.js",
 ]
 CSS: Array [
   "/static/typescript/main-fadb2269a374a06075a5.css",
@@ -89,7 +89,7 @@ export const root: string;
   "index.html": SCRIPTS: Array [
     "/static/typescript/runtime-af90dfb73f645abd9001.js",
     "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
-    "/static/typescript/main-527bb92b29ef95a99b2d.js",
+    "/static/typescript/main-d7855a590952dcf5e9d0.js",
   ]
 CSS: Array [
     "/static/typescript/main-fadb2269a374a06075a5.css",
@@ -165,7 +165,7 @@ interface CssExports {
 declare const cssExports: CssExports;
 export = cssExports;
 ",
-  "main-527bb92b29ef95a99b2d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d7855a590952dcf5e9d0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-fadb2269a374a06075a5.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;

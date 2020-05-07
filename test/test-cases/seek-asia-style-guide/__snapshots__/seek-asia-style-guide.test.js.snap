@@ -3,15 +3,17 @@
 exports[`seek-asia-style-guide should generate the expected files 1`] = `
 Object {
   "externals.json": "[
+  \\"crypto\\",
   \\"fs\\",
   \\"path\\",
   \\"react\\",
-  \\"react-dom/server\\"
+  \\"react-dom/server\\",
+  \\"url\\"
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
     "/vendors~main-1c0b9580e64e330f9771.js",
-    "/main-843a38c33c7446f80656.js",
+    "/main-ded5fe00c3b3985f41af.js",
   ]
 CSS: Array [
     "/vendors~main-9ee511066e2df2f42c8b.css",
@@ -87,7 +89,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-843a38c33c7446f80656.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-ded5fe00c3b3985f41af.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-1c0b9580e64e330f9771.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-9ee511066e2df2f42c8b.css": a,

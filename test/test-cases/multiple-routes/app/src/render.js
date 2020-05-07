@@ -28,6 +28,8 @@ export default {
           <meta charset="UTF-8">
           <title>hello-world</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+          <script>console.log('Hi');</script>
           ${headTags}
         </head>
         <body>

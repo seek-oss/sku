@@ -1,10 +1,12 @@
 import path from 'path';
 import express from 'express';
 import makeExtractor from '../makeExtractor';
+import createCSPHandler from '../csp';
 import serverExports from '__sku_alias__serverEntry';
 import webpackStats from '__sku_alias__webpackStats';
 
-const publicPath = __SKU_PUBLIC_PATH__; // eslint-disable-line no-undef
+const publicPath = __SKU_PUBLIC_PATH__;
+const csp = __SKU_CSP__;
 
 const serverOptions = serverExports({ publicPath });
 
@@ -27,8 +29,22 @@ if (env !== 'development') {
 if (middleware) {
   app.use(middleware);
 }
-app.get('*', (...args) =>
-  renderCallback(makeExtractor(webpackStats, publicPath), ...args),
-);
+app.get('*', (...args) => {
+  let cspHandler;
+
+  if (csp.enabled) {
+    cspHandler = createCSPHandler({
+      extraHosts: [publicPath, ...csp.extraHosts],
+    });
+  }
+
+  return renderCallback(
+    {
+      ...makeExtractor(webpackStats, publicPath, cspHandler),
+      registerScript: cspHandler ? cspHandler.registerScript : undefined,
+    },
+    ...args,
+  );
+});
 
 export { app, onStart };

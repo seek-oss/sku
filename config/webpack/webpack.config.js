@@ -29,6 +29,8 @@ const {
   sourceMapsProd,
   supportedBrowsers,
   displayNamesProd,
+  cspEnabled,
+  cspExtraScriptSrcHosts,
 } = config;
 
 // port is only required for dev builds
@@ -281,6 +283,10 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
+          __SKU_CSP__: JSON.stringify({
+            enabled: cspEnabled,
+            extraHosts: cspExtraScriptSrcHosts,
+          }),
         }),
         new SkuWebpackPlugin({
           target: 'node',

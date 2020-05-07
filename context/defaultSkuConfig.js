@@ -45,4 +45,6 @@ module.exports = {
   playroomTitle: null,
   playroomPort: 8082,
   orderImports: false,
+  cspEnabled: false,
+  cspExtraScriptSrcHosts: [],
 };

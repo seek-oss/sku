@@ -30,9 +30,9 @@ if (process.env.NODE_ENV === 'development') {
 loadableReady(() => {
   let clientContext = {};
 
-  if (window[clientContextKey]) {
-    clientContext = window[clientContextKey];
-    delete window[clientContextKey];
+  const dataElement = document.getElementById(clientContextKey);
+  if (dataElement) {
+    clientContext = JSON.parse(dataElement.textContent);
   }
 
   client(clientContext);

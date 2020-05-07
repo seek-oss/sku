@@ -11,6 +11,7 @@
 - [Styling](./docs/styling.md)
 - [Code splitting](./docs/code-splitting.md)
 - [Multi-site (Theming)](./docs/multi-site.md)
+- [Content Security Policy](./docs/csp.md)
 - [Extra features](./docs/extra-features.md)
 - **Design**
 - [Storybook](./docs/storybook.md)

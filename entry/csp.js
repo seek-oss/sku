@@ -83,7 +83,9 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
 
     if (!root.valid) {
       throw new Error(
-        `Unable to parse HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${html}`,
+        `Unable to parse HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
+          html.length > 250 ? `${html.substring(0, 200)}...` : html
+        }`,
       );
     }
 

@@ -8,7 +8,7 @@
 
 Set `cspEnabled: true` in your `sku.config.js`.
 
-If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraHosts` array in `sku.config.js`.
+If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in `sku.config.js`.
 
 ### Extra SSR Setup
 

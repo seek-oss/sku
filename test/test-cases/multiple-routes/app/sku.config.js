@@ -5,5 +5,8 @@ module.exports = {
   port: 8202,
   publicPath: '/static/place',
   cspEnabled: true,
-  cspExtraHosts: ['https://error-tracking.com', 'https://fb-tracking.com'],
+  cspExtraScriptSrcHosts: [
+    'https://error-tracking.com',
+    'https://fb-tracking.com',
+  ],
 };

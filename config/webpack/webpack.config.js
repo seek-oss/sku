@@ -30,7 +30,7 @@ const {
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
-  cspExtraHosts,
+  cspExtraScriptSrcHosts,
 } = config;
 
 // port is only required for dev builds
@@ -285,7 +285,7 @@ const makeWebpackConfig = ({
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
-            extraHosts: cspExtraHosts,
+            extraHosts: cspExtraScriptSrcHosts,
           }),
         }),
         new SkuWebpackPlugin({

@@ -24,7 +24,7 @@ const {
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
-  cspExtraHosts,
+  cspExtraScriptSrcHosts,
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
@@ -254,7 +254,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
-            extraHosts: cspExtraHosts,
+            extraHosts: cspExtraScriptSrcHosts,
           }),
         }),
         new SkuWebpackPlugin({

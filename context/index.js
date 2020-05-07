@@ -128,5 +128,5 @@ module.exports = {
   },
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
-  cspExtraHosts: skuConfig.cspExtraHosts,
+  cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
 };

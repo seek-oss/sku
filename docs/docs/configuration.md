@@ -52,13 +52,13 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./docs/csp.md) for more info.
 
-## cspExtraHosts
+## cspExtraScriptSrcHosts
 
 type `Array<string>`
 
 Default: `[]`
 
-Extra external hosts to allow in your [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
+Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
 
 ## dangerouslySetESLintConfig
 

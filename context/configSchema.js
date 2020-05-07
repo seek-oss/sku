@@ -155,7 +155,7 @@ module.exports = validator.compile({
   playroomTitle: { type: 'string', optional: true },
   orderImports: { type: 'boolean' },
   cspEnabled: { type: 'boolean' },
-  cspExtraHosts: {
+  cspExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
   },

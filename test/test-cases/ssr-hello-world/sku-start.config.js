@@ -4,5 +4,5 @@ module.exports = {
   serverPort: 8101,
   target: 'dist-start',
   cspEnabled: true,
-  cspExtraHosts: ['https://some-cdn.com'],
+  cspExtraScriptSrcHosts: ['https://some-cdn.com'],
 };

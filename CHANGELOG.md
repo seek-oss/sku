@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.2
+
+### Patch Changes
+
+- Fix ReferenceError in compilePackages validation ([#508](https://github.com/seek-oss/sku/pull/508))
+
 ## 10.3.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.1
+
+### Patch Changes
+
+- Only target internal images/svgs with loaders ([#505](https://github.com/seek-oss/sku/pull/505))
+
 ## 10.3.0
 
 ### Minor Changes

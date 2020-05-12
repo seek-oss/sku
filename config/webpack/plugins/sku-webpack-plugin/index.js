@@ -112,11 +112,17 @@ class SkuWebpackPlugin {
       },
       {
         test: IMAGE,
+        include: this.include,
         use: makeImageLoaders({ target }),
       },
-      { test: SVG, use: makeSvgLoaders() },
+      {
+        test: SVG,
+        include: this.include,
+        use: makeSvgLoaders(),
+      },
       {
         test: DEPRECATED_CSS_IN_JS,
+        include: this.include,
         use: require.resolve('../deprecatedCssInJsFileLoader'),
       },
     ];

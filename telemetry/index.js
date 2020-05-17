@@ -1,6 +1,7 @@
 const os = require('os');
 
 const { getPathFromCwd } = require('../lib/cwd');
+const isCI = require('../lib/isCI');
 const provider = require('./provider');
 const skuVersion = require('../package.json').version;
 
@@ -12,8 +13,6 @@ try {
     projectName = packageJson.name;
   }
 } catch (e) {}
-
-const isCI = process.env.CI === 'true';
 
 provider.addGlobalTags({
   ci: isCI,

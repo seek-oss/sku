@@ -5,9 +5,11 @@ const baseJestConfig = require('../config/jest/jestConfig');
 const { argv } = require('../config/args');
 const { jestDecorator } = require('../context');
 
+const isCI = require('../lib/isCI');
+
 const jestConfig = jestDecorator(baseJestConfig);
 
-if (!process.env.CI && argv.indexOf('--coverage') < 0) {
+if (!isCI && argv.indexOf('--coverage') < 0) {
   argv.push('--watch');
 }
 

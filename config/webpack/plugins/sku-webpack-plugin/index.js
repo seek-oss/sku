@@ -17,7 +17,7 @@ const createTreatPlugin = require('../createTreatPlugin');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
 const validateOptions = require('./validateOptions');
 
-const isCI = process.env.CI === 'true';
+const isCI = require('../../../../lib/isCI');
 
 class SkuWebpackPlugin {
   constructor(options = {}) {

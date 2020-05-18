@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.3
+
+### Patch Changes
+
+- Automatically identify Buildkite agents as CI ([#510](https://github.com/seek-oss/sku/pull/510))
+
 ## 10.3.2
 
 ### Patch Changes

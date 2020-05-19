@@ -3821,10 +3821,10 @@ braces@^3.0.1:
   dependencies:
     fill-range "^7.0.1"
 
-braid-design-system@^24.3.1:
-  version "24.3.1"
-  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-24.3.1.tgz#600f901071cbf25702c33dcb987ef78fe26f81d7"
-  integrity sha512-QU/m9GzQR/gAiel2TXi5G2lxOujYnBzyL3/3jurnIn4BKYw1x9RNPK/vzk+Uv+U7Nhqf2XXHl6JT/EYfYFVxgw==
+braid-design-system@^27.0.0:
+  version "27.1.1"
+  resolved "https://registry.yarnpkg.com/braid-design-system/-/braid-design-system-27.1.1.tgz#365605c65cd2da3e6facf6417384af592c2cc24b"
+  integrity sha512-+1ouiXb6I/cQ6kMY8b3yIEOXCfikp0eYqJConQRAhoQUDL7PbXU+ZYNrTpo+iJ0YqBWGpCtRE/pHq5sPk3pIWg==
   dependencies:
     "@types/autosuggest-highlight" "^3.1.0"
     "@types/classnames" "^2.2.8"
@@ -3841,6 +3841,7 @@ braid-design-system@^24.3.1:
     isolated-scroll "^0.1.0"
     lodash "^4.17.15"
     polished "^3.0.3"
+    react-keyed-flatten-children "^1.2.0"
     utility-types "^3.7.0"
 
 breakword@^1.0.5:
@@ -12478,7 +12479,7 @@ react-input-autosize@^2.2.2:
   dependencies:
     prop-types "^15.5.8"
 
-react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
+react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -12490,6 +12491,13 @@ react-isolated-scroll@^0.1.1:
   dependencies:
     isolated-scroll "^0.1.0"
     prop-types "^15.5.8"
+
+react-keyed-flatten-children@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-keyed-flatten-children/-/react-keyed-flatten-children-1.2.0.tgz#44c741f9f5acca1a7294c3f7a11f1d31c417c1e1"
+  integrity sha512-gJoD3br3tK59+AOKlzb+7G39YtkSC4gWjQjDbWOmHjW7pxgYomnRBemKXuNBafnPYSKpjp7evOlxtGEHwiP11g==
+  dependencies:
+    react-is "^16.8.6"
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -13372,10 +13380,10 @@ seek-asia-style-guide@^16.0.1:
     react-text-mask "^5.4.3"
     webfontloader "^1.6.28"
 
-seek-style-guide@^40.2.8:
-  version "40.4.1"
-  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-40.4.1.tgz#36b77eb93f1ffbcfc91f4a8d631567dca4b7fdf9"
-  integrity sha512-ucsYPTPr209W5N5ChfFJXTMidhkERAk6d7qA4EpwbSxeF9g/DVH6a2a03wIL8lTNG67t9jbyWILiY2DjaCxUfw==
+seek-style-guide@^41.0.0:
+  version "41.1.0"
+  resolved "https://registry.yarnpkg.com/seek-style-guide/-/seek-style-guide-41.1.0.tgz#12186eae3b2d42e3dc136ae4a3ab598eb34bded4"
+  integrity sha512-+hyKA38wq9fYxQeauabJv2TYsyCVlH18zfie5QTVRjZtg2payt8ovyXtfJX85BHCIfMGgc6p7PZgXLY7PoimIw==
   dependencies:
     basekick "^3.0.0"
     classnames "^2.2.5"

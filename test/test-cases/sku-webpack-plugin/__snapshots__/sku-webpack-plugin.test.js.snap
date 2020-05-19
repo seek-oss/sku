@@ -83,6 +83,9 @@ SOURCE HTML: <!DOCTYPE html>
   vertical-align: baseline;
   -webkit-tap-highlight-color: transparent;
 }
+[data-braid-hidefocusrings] .FYwKg {
+  outline: none;
+}
 ._3j_fQ {
   display: block;
 }
@@ -287,6 +290,12 @@ SOURCE HTML: <!DOCTYPE html>
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+._232ow {
+  outline: none;
+}
+._24Rgf {
+  opacity: 0;
 }
 ._1PRnx {
   white-space: nowrap;
@@ -558,7 +567,7 @@ SOURCE HTML: <!DOCTYPE html>
   background: #fff;
 }
 ._2mOt7_2 {
-  background: #e60278;
+  background: #d0011b;
 }
 ._2yc98_2 {
   background: #ffc600;
@@ -594,7 +603,7 @@ SOURCE HTML: <!DOCTYPE html>
   background: #ebe6ee;
 }
 ._3J10a_2 {
-  background: #f4e3ec;
+  background: #f4e4e6;
 }
 ._3NNv__2 {
   background: #e8f5e7;
@@ -628,7 +637,7 @@ SOURCE HTML: <!DOCTYPE html>
   box-shadow: inset 0 0 0 1px #fff;
 }
 ._3YN6A_2 {
-  box-shadow: inset 0 0 0 1px #e60278;
+  box-shadow: inset 0 0 0 1px #d0011b;
 }
 ._2Rbqf_2 {
   box-shadow: inset 0 0 0 1px #ffc600;
@@ -1410,7 +1419,7 @@ SOURCE HTML: <!DOCTYPE html>
   color: #2765cf;
 }
 ._2DNlq_2 {
-  color: #e60278;
+  color: #d0011b;
 }
 .u7OQ5_2 {
   color: #ffc600;
@@ -1442,11 +1451,9 @@ SOURCE HTML: <!DOCTYPE html>
 .MxhoO_2 {
   color: hsla(0, 0%, 100%, 0.65);
 }
-._1W_Sg_2 {
-  color: #cb016b;
-}
+._1W_Sg_2,
 svg._1W_Sg_2 {
-  color: #e60278;
+  color: #d0011b;
 }
 ._29LNX_2 {
   color: #8c6c00;

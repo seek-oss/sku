@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Add contenthash to storybook/playroom assets
+Add contenthash to storybook/playroom assets in production mode

@@ -92,10 +92,6 @@ const makeWebpackConfig = ({
   const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
   const getFileMask = ({ isMainChunk }) => {
-    if (isIntegration) {
-      return '[name]';
-    }
-
     // Libraries should always have the same file name
     // for the main chunk unless we're building for storybook
     if (isLibrary && isMainChunk) {
@@ -105,7 +101,7 @@ const makeWebpackConfig = ({
     // The client file mask is set to just name in start/dev mode as contenthash
     // is not supported for hot reloading. It can also cause non
     // deterministic snapshots in jest tests.
-    if (isDevServer) {
+    if (!isProductionBuild) {
       return '[name]';
     }
 

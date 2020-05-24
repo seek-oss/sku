@@ -12,7 +12,7 @@ Object {
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
-    "/vendors~main-1958e1d030863d5ec0fc.js",
+    "/vendors~main-b7d73686065affc96348.js",
     "/main-d71c73dff2fcc93ab90d.js",
   ]
 CSS: Array [
@@ -109,7 +109,6 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "main-d71c73dff2fcc93ab90d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-1958e1d030863d5ec0fc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-492f2c41d9f41ff813a1.css": a,
 abbr,
 acronym,
@@ -767,5 +766,6 @@ html {
   }
 }
 ,
+  "vendors~main-b7d73686065affc96348.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

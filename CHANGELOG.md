@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.4
+
+### Patch Changes
+
+- Add contenthash to storybook/playroom assets in production mode ([#512](https://github.com/seek-oss/sku/pull/512))
+
 ## 10.3.3
 
 ### Patch Changes

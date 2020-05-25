@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Validate that there is only one copy of react-treat
+Validate that there is only a single copy of react-treat

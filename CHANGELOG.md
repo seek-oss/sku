@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.5
+
+### Patch Changes
+
+- Validate that there is only a single copy of react-treat ([#514](https://github.com/seek-oss/sku/pull/514))
+
 ## 10.3.4
 
 ### Patch Changes

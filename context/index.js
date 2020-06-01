@@ -125,6 +125,7 @@ module.exports = {
     port: skuConfig.playroomPort,
     widths: skuConfig.playroomWidths,
     title: skuConfig.playroomTitle,
+    paramType: skuConfig.playroomParamType,
   },
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,

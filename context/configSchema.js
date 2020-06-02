@@ -153,6 +153,11 @@ module.exports = validator.compile({
   },
   playroomPort: { type: 'number', optional: true },
   playroomTitle: { type: 'string', optional: true },
+  playroomParamType: {
+    type: 'enum',
+    values: ['search', 'hash'],
+    optional: true,
+  },
   orderImports: { type: 'boolean' },
   cspEnabled: { type: 'boolean' },
   cspExtraScriptSrcHosts: {

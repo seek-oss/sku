@@ -44,6 +44,7 @@ module.exports = {
   playroomFrameComponent: null,
   playroomTitle: null,
   playroomPort: 8082,
+  playroomParamType: null,
   orderImports: false,
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],

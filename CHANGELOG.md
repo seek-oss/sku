@@ -1,5 +1,11 @@
 # sku
 
+## 10.3.6
+
+### Patch Changes
+
+- Playroom: Add passthrough support for `paramType` via `playoomParamType` config option. ([#517](https://github.com/seek-oss/sku/pull/517))
+
 ## 10.3.5
 
 ### Patch Changes

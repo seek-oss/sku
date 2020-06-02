@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Add playoomParamType option
+Playroom: Add passthrough support for `paramType` via `playoomParamType` config option.

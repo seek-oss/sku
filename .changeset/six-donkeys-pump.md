@@ -1,5 +1,5 @@
 ---
-'sku-for-testing': minor
+'sku': minor
 ---
 
 Add ability to turn on HTTPS on the local development server with `useHttpsDevServer` and define express middlewares with `devServerMiddleware`.

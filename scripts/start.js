@@ -11,7 +11,15 @@ const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
-const { port, initialPath, paths, routes, isLibrary } = require('../context');
+const {
+  port,
+  initialPath,
+  paths,
+  routes,
+  isLibrary,
+  useHttpsDevServer,
+  devServerMiddleware,
+} = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 
@@ -44,6 +52,12 @@ const localhost = '0.0.0.0';
 
   const appHosts = getAppHosts();
 
+  const httpsConfig = useHttpsDevServer
+    ? {
+        https: true,
+      }
+    : {};
+
   const devServer = new WebpackDevServer(parentCompiler, {
     contentBase: paths.public,
     publicPath: paths.publicPath,
@@ -52,7 +66,11 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
+    ...httpsConfig,
     after: (app) => {
+      if (devServerMiddleware) {
+        devServerMiddleware(app);
+      }
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) => {
           const normalisedRoute = route
@@ -111,7 +129,9 @@ const localhost = '0.0.0.0';
       return;
     }
 
-    const url = `http://${appHosts[0]}:${availablePort}${initialPath}`;
+    const url = `${useHttpsDevServer ? 'https' : 'http'}://${
+      appHosts[0]
+    }:${availablePort}${initialPath}`;
 
     console.log();
     console.log(blue(`Starting the development server on ${underline(url)}`));

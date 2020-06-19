@@ -164,4 +164,12 @@ module.exports = validator.compile({
     type: 'array',
     items: { type: 'string' },
   },
+  useHttpsDevServer: {
+    type: 'boolean',
+    optional: true,
+  },
+  devServerMiddleware: {
+    type: 'function',
+    optional: true,
+  },
 });

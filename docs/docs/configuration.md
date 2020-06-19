@@ -411,3 +411,30 @@ type `function`
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
+
+## useHttpsDevServer
+
+type `boolean`
+
+Default: `false`
+
+Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
+
+## devServerMiddleware
+
+type `function`
+
+Default: `null`
+
+This can be used to expose the Webpack DevServer's Express server.
+
+Example:
+
+```js
+devServerMiddleware: app => {
+  app.use(somePlugin());
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```

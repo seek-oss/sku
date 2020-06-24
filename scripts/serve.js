@@ -1,5 +1,4 @@
 const path = require('path');
-const http = require('http');
 const fs = require('fs-extra');
 const handler = require('serve-handler');
 const partition = require('lodash/partition');
@@ -14,6 +13,7 @@ const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
 const args = require('../config/args');
 const track = require('../telemetry');
+const createServer = require('../lib/createServer');
 
 const prefferedSite = args.site;
 
@@ -88,7 +88,7 @@ const prefferedSite = args.site;
     );
   }
 
-  const server = http.createServer((request, response) => {
+  const server = await createServer((request, response) => {
     const [hostname] = request.headers.host.split(':');
 
     const site = getSiteForHost(hostname, prefferedSite) || '';

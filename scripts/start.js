@@ -22,6 +22,7 @@ const {
 } = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
+const getCertificate = require('../lib/certificate');
 
 const localhost = '0.0.0.0';
 
@@ -52,13 +53,7 @@ const localhost = '0.0.0.0';
 
   const appHosts = getAppHosts();
 
-  const httpsConfig = useHttpsDevServer
-    ? {
-        https: true,
-      }
-    : {};
-
-  const devServer = new WebpackDevServer(parentCompiler, {
+  const devServerConfig = {
     contentBase: paths.public,
     publicPath: paths.publicPath,
     host: appHosts[0],
@@ -66,7 +61,17 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
-    ...httpsConfig,
+  };
+
+  if (useHttpsDevServer) {
+    const pems = await getCertificate();
+    devServerConfig.https = true;
+    devServerConfig.key = pems;
+    devServerConfig.cert = pems;
+  }
+
+  const devServer = new WebpackDevServer(parentCompiler, {
+    ...devServerConfig,
     after: (app) => {
       if (devServerMiddleware) {
         devServerMiddleware(app);

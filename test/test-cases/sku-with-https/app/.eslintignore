@@ -1,0 +1,8 @@
+# managed by sku
+*.less.d.ts
+coverage/
+dist-build/
+dist-playroom/
+dist-storybook/
+report/
+# end managed by sku

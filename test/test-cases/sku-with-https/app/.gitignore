@@ -1,0 +1,10 @@
+# managed by sku
+.eslintrc
+.prettierrc
+.ssl
+coverage/
+dist-build/
+dist-playroom/
+dist-storybook/
+report/
+# end managed by sku

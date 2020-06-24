@@ -6,6 +6,8 @@ const { getAppSnapshot } = require('../../utils/appSnapshot');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getPathFromCwd } = require('../../../lib/cwd');
 
+const { port, serverPort } = require('./app/sku.config');
+
 const appDir = path.resolve(__dirname, 'app');
 
 async function createPackageLink(name) {
@@ -22,7 +24,6 @@ async function setUpLocalDependencies() {
   await Promise.all(['react', 'react-dom'].map(createPackageLink));
 }
 
-const port = 9483;
 const devServerUrl = `https://localhost:${port}`;
 
 describe('sku-with-https', () => {
@@ -48,7 +49,7 @@ describe('sku-with-https', () => {
       const snapshot = await getAppSnapshot(devServerUrl);
       expect(snapshot).toMatchSnapshot();
     });
-    it('serve up a valid app over HTTPS', async () => {
+    it('should serve up a valid app over HTTPS', async () => {
       const app = await getAppSnapshot(devServerUrl);
       expect(app).toMatchSnapshot();
     });
@@ -57,6 +58,25 @@ describe('sku-with-https', () => {
         `${devServerUrl}/test-middleware`,
       );
       expect(sourceHTML).toEqual('OK');
+    });
+  });
+
+  describe('start-ssr', () => {
+    const backendUrl = `https://localhost:${serverPort}`;
+    let server;
+
+    beforeAll(async () => {
+      server = await runSkuScriptInDir('start-ssr', appDir);
+      await waitForUrls(backendUrl);
+    });
+
+    afterAll(async () => {
+      await server.kill();
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot(backendUrl);
+      expect(snapshot).toMatchSnapshot();
     });
   });
 });

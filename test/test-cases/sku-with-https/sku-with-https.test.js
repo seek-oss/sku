@@ -6,7 +6,8 @@ const { getAppSnapshot } = require('../../utils/appSnapshot');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getPathFromCwd } = require('../../../lib/cwd');
 
-const { port, serverPort } = require('./app/sku.config');
+const port = 9843;
+const serverPort = 9894;
 
 const appDir = path.resolve(__dirname, 'app');
 

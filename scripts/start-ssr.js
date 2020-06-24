@@ -54,7 +54,7 @@ const localhost = '0.0.0.0';
 
   const proto = useHttpsDevServer ? 'https' : 'http';
 
-  const serverUrl = `${proto}://${appHosts[0]}:${serverPort}${initialPath}`;
+  const serverUrl = `http://${appHosts[0]}:${serverPort}${initialPath}`;
   const webpackDevServerUrl = `${proto}://${appHosts[0]}:${clientPort}`;
 
   console.log();

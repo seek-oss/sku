@@ -96,6 +96,8 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
   const sourceHtml = await response.text();
   const clientRenderContent = await page.content();
 
+  console.log(warnings, errors, sourceHtml, clientRenderContent);
+
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);
 

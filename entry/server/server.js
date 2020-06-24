@@ -29,6 +29,7 @@ if (env !== 'development') {
 if (middleware) {
   app.use(middleware);
 }
+
 app.get('*', (...args) => {
   let cspHandler;
 

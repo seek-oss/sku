@@ -1,7 +1,6 @@
+const http = require('http');
 import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
-import createServer from '../../lib/createServer';
-import { devServerMiddleware } from '../../context';
 
 const { port } = commandLineArgs(
   [
@@ -23,13 +22,9 @@ const startCallback = () => {
   }
 };
 
-if (devServerMiddleware) {
-  devServerMiddleware(app);
-}
-
 (async () => {
   if (module.hot) {
-    const server = await createServer(app);
+    const server = http.createServer(app);
     let currentApp = app;
     server.listen(port, startCallback);
     module.hot.accept('./server', () => {

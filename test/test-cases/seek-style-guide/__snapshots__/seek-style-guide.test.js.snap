@@ -16,7 +16,7 @@ Object {
     "/main-d71c73dff2fcc93ab90d.js",
   ]
 CSS: Array [
-    "/vendors~main-492f2c41d9f41ff813a1.css",
+    "/vendors~main-b21ffa8cc07ebf1c8d81.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -109,7 +109,7 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "main-d71c73dff2fcc93ab90d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-492f2c41d9f41ff813a1.css": a,
+  "vendors~main-b21ffa8cc07ebf1c8d81.css": a,
 abbr,
 acronym,
 address,

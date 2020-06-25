@@ -1,3 +1,5 @@
+const ListExternalsWebpackPlugin = require('../../../utils/ListExternalsWebpackPlugin');
+
 module.exports = {
   port: 9843,
   serverPort: 9894,
@@ -10,4 +12,11 @@ module.exports = {
   target: 'dist-build',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
+  dangerouslySetWebpackConfig: (config) => {
+    if (config.name === 'render') {
+      config.plugins.push(new ListExternalsWebpackPlugin());
+    }
+
+    return config;
+  },
 };

@@ -63,11 +63,6 @@ export default () => ({
     );
     res.end();
   },
-  middleware: (app) => {
-    app.get('/test-middleware', (_, res) => {
-      res.status(200).send('OK');
-    });
-  },
   onStart: async () => {
     if (process.env.NODE_ENV === 'production') {
       await writeFile('./started.txt', "Server started, here's your callback");

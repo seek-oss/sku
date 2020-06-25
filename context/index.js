@@ -64,6 +64,7 @@ const publicPath = skuConfig.publicPath.endsWith('/')
   : `${skuConfig.publicPath}/`;
 
 const paths = {
+  skuConfig: getPathFromCwd('sku.config.js'),
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),

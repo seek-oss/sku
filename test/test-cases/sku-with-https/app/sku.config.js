@@ -8,4 +8,6 @@ module.exports = {
     });
   },
   target: 'dist-build',
+  cspEnabled: true,
+  cspExtraScriptSrcHosts: ['https://some-cdn.com'],
 };

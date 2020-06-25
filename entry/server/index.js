@@ -1,3 +1,4 @@
+import fs from 'fs';
 import http from 'http';
 import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
@@ -24,9 +25,15 @@ const startCallback = () => {
 
 (async () => {
   if (module.hot) {
+    if (fs.existsSync(__SKU_SKU_CONFIG_PATH__)) {
+      const { devServerMiddleware } = require(__SKU_SKU_CONFIG_PATH__);
+      if (devServerMiddleware) {
+        devServerMiddleware(app);
+      }
+    }
     const server = (() => {
       if (__SKU_DEV_HTTPS__) {
-        const pems = require('fs').readFileSync('.ssl/self-signed.pem');
+        const pems = fs.readFileSync('.ssl/self-signed.pem');
         return require('https').createServer(
           {
             cert: pems,

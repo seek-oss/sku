@@ -14,14 +14,14 @@ Object {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-d17c974ed7c31086aaa7.js",
+    "/runtime-e642eb986ca7f1a19834.js",
     "/vendors~main-49d20b043bdb5ffdf363.js",
     "/main-d60fd15401f6aeccadf1.js",
     "/vendors~themes-jobStreet-2b9f4e5df154a66b2da4.js",
     "/themes-jobStreet-d53888d7ce40effcbc1c.js",
   ]
 CSS: Array [
-    "/vendors~themes-jobStreet-f4112d543036ad5177e5.css",
+    "/vendors~themes-jobStreet-fe1cbb1db1a75deb2908.css",
     "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -186,16 +186,16 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main-d60fd15401f6aeccadf1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-d17c974ed7c31086aaa7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-e642eb986ca7f1a19834.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-d17c974ed7c31086aaa7.js",
+    "/runtime-e642eb986ca7f1a19834.js",
     "/vendors~main-49d20b043bdb5ffdf363.js",
     "/main-d60fd15401f6aeccadf1.js",
     "/vendors~themes-seekAnz-cee6c4c11f1ea8e7fddf.js",
     "/themes-seekAnz-dbb0f69ef66053e86885.js",
   ]
 CSS: Array [
-    "/vendors~themes-seekAnz-1990a4c6b2a9d6905d56.css",
+    "/vendors~themes-seekAnz-5aa5dbe170e7ff233333.css",
     "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -433,7 +433,7 @@ SOURCE HTML: <!DOCTYPE html>
 ,
   "vendors~main-49d20b043bdb5ffdf363.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-catho-0859bd1b543dda27793b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-catho-5b5a08e5b855ffd73e2b.css": .FYwKg {
+  "vendors~themes-catho-90c0520ed992fe6ae3ea.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1979,7 +1979,7 @@ svg._1E-Nz_2CM {
 }
 ,
   "vendors~themes-jobStreet-2b9f4e5df154a66b2da4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreet-f4112d543036ad5177e5.css": .FYwKg {
+  "vendors~themes-jobStreet-fe1cbb1db1a75deb2908.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -3571,8 +3571,7 @@ svg._1E-Nz_1 {
   display: block;
 }
 ,
-  "vendors~themes-jobStreetClassic-d1b23ad5045c4ccaf154.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobStreetClassic-e7011879326e8750c4c8.css": .FYwKg {
+  "vendors~themes-jobStreetClassic-4c824135d31d1c2a7f99.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -5165,7 +5164,8 @@ svg._1E-Nz_2oR {
   display: block;
 }
 ,
-  "vendors~themes-jobsDb-5bb49b81cafede6a911d.css": .FYwKg {
+  "vendors~themes-jobStreetClassic-d1b23ad5045c4ccaf154.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobsDb-1e3c8a0bbb1850d85209.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -6756,7 +6756,7 @@ svg._1E-Nz_1Fy {
 }
 ,
   "vendors~themes-jobsDb-b538399028dcd6f00746.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-occ-057b4bc1be1ffd951f87.css": .FYwKg {
+  "vendors~themes-occ-99976254fa8abc1463e3.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -8340,7 +8340,7 @@ svg._1E-NzWgE {
 }
 ,
   "vendors~themes-occ-9e4f3dbeb003a2b223ee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekAnz-1990a4c6b2a9d6905d56.css": .FYwKg {
+  "vendors~themes-seekAnz-5aa5dbe170e7ff233333.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -9915,7 +9915,7 @@ svg._1E-Nz_2 {
 ,
   "vendors~themes-seekAnz-cee6c4c11f1ea8e7fddf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekBusiness-1089f4e5b62c757d07fc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekBusiness-2810348693e7ee671d77.css": .FYwKg {
+  "vendors~themes-seekBusiness-ff302caf3f1ea9a81bac.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -11491,7 +11491,7 @@ svg._1E-Nz_1xm {
 }
 ,
   "vendors~themes-seekUnifiedBeta-6882e5da7844e9eaf224.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-seekUnifiedBeta-babcdad4bff7344ba42e.css": .FYwKg {
+  "vendors~themes-seekUnifiedBeta-85db81784489d55b9ade.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -13064,7 +13064,8 @@ svg._1E-Nz_1my {
   display: block;
 }
 ,
-  "vendors~themes-wireframe-1ded32ded8f46c7e7b86.css": .FYwKg {
+  "vendors~themes-wireframe-99fdfac0527902f48945.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-wireframe-ad5216744a320c45822b.css": .FYwKg {
   margin: 0;
   padding: 0;
   border: 0;
@@ -14642,20 +14643,19 @@ svg._1E-Nz_0 {
   display: block;
 }
 ,
-  "vendors~themes-wireframe-99fdfac0527902f48945.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-d17c974ed7c31086aaa7.js",
+  "/runtime-e642eb986ca7f1a19834.js",
   "/vendors~main-49d20b043bdb5ffdf363.js",
   "/main-d60fd15401f6aeccadf1.js",
   "/vendors~themes-jobStreet-2b9f4e5df154a66b2da4.js",
   "/themes-jobStreet-d53888d7ce40effcbc1c.js",
 ]
 CSS: Array [
-  "/vendors~themes-jobStreet-f4112d543036ad5177e5.css",
+  "/vendors~themes-jobStreet-fe1cbb1db1a75deb2908.css",
   "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -14832,14 +14832,14 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-d17c974ed7c31086aaa7.js",
+  "/runtime-e642eb986ca7f1a19834.js",
   "/vendors~main-49d20b043bdb5ffdf363.js",
   "/main-d60fd15401f6aeccadf1.js",
   "/vendors~themes-seekAnz-cee6c4c11f1ea8e7fddf.js",
   "/themes-seekAnz-dbb0f69ef66053e86885.js",
 ]
 CSS: Array [
-  "/vendors~themes-seekAnz-1990a4c6b2a9d6905d56.css",
+  "/vendors~themes-seekAnz-5aa5dbe170e7ff233333.css",
   "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

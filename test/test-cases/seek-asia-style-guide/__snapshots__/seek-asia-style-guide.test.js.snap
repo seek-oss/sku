@@ -16,7 +16,7 @@ Object {
     "/main-ded5fe00c3b3985f41af.js",
   ]
 CSS: Array [
-    "/vendors~main-0981b374552f734f7cd8.css",
+    "/vendors~main-9ee511066e2df2f42c8b.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -91,7 +91,8 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "main-ded5fe00c3b3985f41af.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0981b374552f734f7cd8.css": a,
+  "vendors~main-1c0b9580e64e330f9771.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-9ee511066e2df2f42c8b.css": a,
 abbr,
 acronym,
 address,
@@ -4142,6 +4143,5 @@ html {
   outline: none;
 }
 ,
-  "vendors~main-1c0b9580e64e330f9771.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

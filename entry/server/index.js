@@ -1,4 +1,4 @@
-const http = require('http');
+import http from 'http';
 import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
 
@@ -24,7 +24,19 @@ const startCallback = () => {
 
 (async () => {
   if (module.hot) {
-    const server = http.createServer(app);
+    const server = (() => {
+      if (__SKU_DEV_HTTPS__) {
+        const pems = require('fs').readFileSync('.ssl/self-signed.pem');
+        return require('https').createServer(
+          {
+            cert: pems,
+            key: pems,
+          },
+          app,
+        );
+      }
+      return http.createServer(app);
+    })();
     let currentApp = app;
     server.listen(port, startCallback);
     module.hot.accept('./server', () => {

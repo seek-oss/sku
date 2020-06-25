@@ -12,13 +12,7 @@ const {
   ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const {
-  port,
-  initialPath,
-  paths,
-  useHttpsDevServer,
-  devServerMiddleware,
-} = require('../context');
+const { port, initialPath, paths, useHttpsDevServer } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -54,7 +48,7 @@ const localhost = '0.0.0.0';
 
   const proto = useHttpsDevServer ? 'https' : 'http';
 
-  const serverUrl = `http://${appHosts[0]}:${serverPort}${initialPath}`;
+  const serverUrl = `${proto}://${appHosts[0]}:${serverPort}${initialPath}`;
   const webpackDevServerUrl = `${proto}://${appHosts[0]}:${clientPort}`;
 
   console.log();
@@ -109,10 +103,6 @@ const localhost = '0.0.0.0';
     devServerConfig.https = true;
     devServerConfig.key = pems;
     devServerConfig.cert = pems;
-  }
-
-  if (devServerMiddleware) {
-    devServerConfig.after = devServerMiddleware;
   }
 
   // Start webpack dev server using only the client config

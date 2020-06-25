@@ -59,8 +59,8 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
   const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
   });
-
-  const clientServer = `http://localhost:${clientPort}/`;
+  const proto = useHttpsDevServer ? 'https' : 'http';
+  const clientServer = `${proto}://localhost:${clientPort}/`;
 
   const clientDevServerEntries = [
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,

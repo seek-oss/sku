@@ -9,7 +9,6 @@ module.exports = {
       res.status(200).send('OK');
     });
   },
-  target: 'dist-build',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => {

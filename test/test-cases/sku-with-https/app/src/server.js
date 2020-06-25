@@ -16,12 +16,11 @@ const initialResponseTemplate = ({ headTags }) => `
     ${headTags}
 `;
 
-const template = ({ headTags, bodyTags, app, extraScripts }) => `
+const template = ({ headTags, bodyTags, app }) => `
       ${headTags}
     </head>
     <body>
       <div id="app">${app}</div>
-      ${extraScripts.join('\n')}
       ${bodyTags}
     </body>
   </html>
@@ -29,17 +28,10 @@ const template = ({ headTags, bodyTags, app, extraScripts }) => `
 
 export default () => ({
   renderCallback: async (
-    { SkuProvider, getBodyTags, flushHeadTags, registerScript },
-    req,
+    { SkuProvider, getBodyTags, flushHeadTags },
+    _,
     res,
   ) => {
-    const extraScripts = [
-      `<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>`,
-      `<script>console.log('Hi');</script>`,
-    ];
-
-    extraScripts.forEach((script) => registerScript(script));
-
     res.status(200).write(
       initialResponseTemplate({
         headTags: flushHeadTags(),
@@ -58,7 +50,6 @@ export default () => ({
         headTags: flushHeadTags(),
         bodyTags: getBodyTags(),
         app,
-        extraScripts,
       }),
     );
     res.end();

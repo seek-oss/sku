@@ -67,10 +67,6 @@ describe('sku-with-https', () => {
       await process.kill();
     });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
-    });
     it('should support the supplied middleware', async () => {
       const snapshot = await getAppSnapshot(`${url}/test-middleware`);
       expect(snapshot).toMatchSnapshot();

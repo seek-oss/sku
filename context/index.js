@@ -63,12 +63,16 @@ const publicPath = skuConfig.publicPath.endsWith('/')
   ? skuConfig.publicPath
   : `${skuConfig.publicPath}/`;
 
-const useDevServerMiddleware = fs.existsSync(
-  getPathFromCwd('dev-middleware.js'),
-);
+const devServerMiddleware =
+  skuConfig.devServerMiddleware &&
+  getPathFromCwd(skuConfig.devServerMiddleware);
+
+const useDevServerMiddleware = devServerMiddleware
+  ? fs.existsSync(devServerMiddleware)
+  : false;
 
 const paths = {
-  devMiddleware: getPathFromCwd('dev-middleware.js'),
+  devMiddleware: devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
@@ -136,5 +140,6 @@ module.exports = {
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   useHttpsDevServer: skuConfig.useHttpsDevServer,
+  devServerMiddleware,
   useDevServerMiddleware,
 };

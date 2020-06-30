@@ -4,6 +4,7 @@ module.exports = {
   port: 9843,
   serverPort: 9894,
   useHttpsDevServer: true,
+  devServerMiddleware: './dev-middleware.js',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => {

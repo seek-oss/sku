@@ -12,7 +12,7 @@ const {
   initialPath,
   routes,
   sites,
-  devServerMiddleware,
+  useDevServerMiddleware,
   useHttpsDevServer,
 } = require('../context');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
@@ -99,8 +99,11 @@ const prefferedSite = args.site;
 
   const app = express();
 
-  if (devServerMiddleware) {
-    devServerMiddleware(app);
+  if (useDevServerMiddleware) {
+    const devServerMiddleware = require(paths.devMiddleware);
+    if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+      devServerMiddleware(app);
+    }
   }
 
   app.use((request, response) => {

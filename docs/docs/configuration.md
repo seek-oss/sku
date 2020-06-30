@@ -419,22 +419,3 @@ type `boolean`
 Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
-
-## devServerMiddleware
-
-type `function`
-
-Default: `null`
-
-This can be used to expose the Webpack DevServer's Express server.
-
-Example:
-
-```js
-devServerMiddleware: app => {
-  app.use(somePlugin());
-  app.get('/mock-api', (req, res) => {
-    ...
-  })
-}
-```

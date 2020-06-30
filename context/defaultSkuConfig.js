@@ -49,5 +49,4 @@ module.exports = {
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
   useHttpsDevServer: false,
-  devServerMiddleware: null,
 };

@@ -25,15 +25,11 @@ const startCallback = () => {
 
 (async () => {
   if (module.hot) {
-    try {
-      if (fs.existsSync(__SKU_SKU_CONFIG_PATH__)) {
-        const { devServerMiddleware } = require(__SKU_SKU_CONFIG_PATH__);
-        if (devServerMiddleware) {
-          devServerMiddleware(app);
-        }
+    if (__SKU_DEV_MIDDLEWARE_ENABLED__) {
+      const devServerMiddleware = require(__SKU_DEV_MIDDLEWARE_PATH__);
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(app);
       }
-    } catch {
-      console.warn('Error while loading devServerMiddleware');
     }
     const server = (() => {
       if (__SKU_DEV_HTTPS__) {

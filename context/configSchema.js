@@ -168,8 +168,4 @@ module.exports = validator.compile({
     type: 'boolean',
     optional: true,
   },
-  devServerMiddleware: {
-    type: 'function',
-    optional: true,
-  },
 });

@@ -18,7 +18,7 @@ const {
   routes,
   isLibrary,
   useHttpsDevServer,
-  devServerMiddleware,
+  useDevServerMiddleware,
 } = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
@@ -73,8 +73,11 @@ const localhost = '0.0.0.0';
   const devServer = new WebpackDevServer(parentCompiler, {
     ...devServerConfig,
     after: (app) => {
-      if (devServerMiddleware) {
-        devServerMiddleware(app);
+      if (useDevServerMiddleware) {
+        const devServerMiddleware = require(paths.devMiddleware);
+        if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+          devServerMiddleware(app);
+        }
       }
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) => {

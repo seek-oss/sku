@@ -26,6 +26,7 @@ const {
   cspEnabled,
   cspExtraScriptSrcHosts,
   useHttpsDevServer,
+  useDevServerMiddleware,
 } = require('../../context');
 
 const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
@@ -253,7 +254,10 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
-          __SKU_SKU_CONFIG_PATH__: JSON.stringify(paths.skuConfig),
+          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(paths.skuConfig),
+          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
+            useDevServerMiddleware,
+          ),
           __SKU_DEV_HTTPS__: JSON.stringify(useHttpsDevServer),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,

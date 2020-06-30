@@ -82,3 +82,19 @@ import React from 'react';
 
 export const Rating = ({ rating }) => <div>...</div>;
 ```
+
+## DevServer Middleware
+
+Place a `dev-middleware.js` file in the root of the project. The file must export a function that will receive the express server.
+
+This can be used to expose the Webpack DevServer's Express server.
+
+Example:
+
+```js
+module.exports = app => {
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```

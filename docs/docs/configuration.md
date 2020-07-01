@@ -419,3 +419,21 @@ type `boolean`
 Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
+
+## devServerMiddleware
+
+type `string`
+
+Path to a file in your project that exports a function that can receive the Express server.
+
+This can be used to extend to the dev server middleware.
+
+Example:
+
+```js
+module.exports = app => {
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```

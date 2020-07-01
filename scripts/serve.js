@@ -100,7 +100,7 @@ const prefferedSite = args.site;
   const app = express();
 
   if (useDevServerMiddleware) {
-    const devServerMiddleware = require(paths.devMiddleware);
+    const devServerMiddleware = require(paths.devServerMiddleware);
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {
       devServerMiddleware(app);
     }

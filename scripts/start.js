@@ -74,7 +74,7 @@ const localhost = '0.0.0.0';
     ...devServerConfig,
     after: (app) => {
       if (useDevServerMiddleware) {
-        const devServerMiddleware = require(paths.devMiddleware);
+        const devServerMiddleware = require(paths.devServerMiddleware);
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {
           devServerMiddleware(app);
         }

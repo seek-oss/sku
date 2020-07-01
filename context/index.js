@@ -72,7 +72,7 @@ const useDevServerMiddleware = devServerMiddleware
   : false;
 
 const paths = {
-  devMiddleware: devServerMiddleware,
+  devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),

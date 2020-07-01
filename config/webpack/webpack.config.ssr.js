@@ -254,7 +254,9 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
-          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(paths.skuConfig),
+          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
+            paths.devServerMiddleware,
+          ),
           __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
             useDevServerMiddleware,
           ),

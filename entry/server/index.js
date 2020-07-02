@@ -26,7 +26,6 @@ const startCallback = () => {
 (async () => {
   if (module.hot) {
     if (__SKU_DEV_MIDDLEWARE_ENABLED__) {
-      console.log(`PATH IS ${__SKU_DEV_MIDDLEWARE_PATH__}`);
       const devServerMiddleware = require(__SKU_DEV_MIDDLEWARE_PATH__);
       if (devServerMiddleware && typeof devServerMiddleware === 'function') {
         devServerMiddleware(app);

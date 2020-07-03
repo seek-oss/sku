@@ -71,6 +71,12 @@ const useDevServerMiddleware = devServerMiddleware
   ? fs.existsSync(devServerMiddleware)
   : false;
 
+if (devServerMiddleware && !useDevServerMiddleware) {
+  throw new Error(
+    `${devServerMiddleware} does not exist. Please create the file or remove 'devServerMiddleware' from your sku config.`,
+  );
+}
+
 const paths = {
   devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),

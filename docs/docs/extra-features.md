@@ -85,9 +85,9 @@ export const Rating = ({ rating }) => <div>...</div>;
 
 ## DevServer Middleware
 
-Place a `dev-middleware.js` file in the root of the project. The file must export a function that will receive the express server.
+Supply a `devServerMiddleware` path in your sku config to access the internal dev Express server.
 
-This can be used to expose the Webpack DevServer's Express server.
+The file must export a function that will receive the express server.
 
 Example:
 

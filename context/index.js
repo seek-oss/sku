@@ -140,6 +140,5 @@ module.exports = {
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   useHttpsDevServer: skuConfig.useHttpsDevServer,
-  devServerMiddleware,
   useDevServerMiddleware,
 };

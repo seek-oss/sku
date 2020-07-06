@@ -11,9 +11,18 @@ const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
-const { port, initialPath, paths, routes, isLibrary } = require('../context');
+const {
+  port,
+  initialPath,
+  paths,
+  routes,
+  isLibrary,
+  httpsDevServer,
+  useDevServerMiddleware,
+} = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
+const getCertificate = require('../lib/certificate');
 
 const localhost = '0.0.0.0';
 
@@ -44,7 +53,7 @@ const localhost = '0.0.0.0';
 
   const appHosts = getAppHosts();
 
-  const devServer = new WebpackDevServer(parentCompiler, {
+  const devServerConfig = {
     contentBase: paths.public,
     publicPath: paths.publicPath,
     host: appHosts[0],
@@ -52,7 +61,24 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
+  };
+
+  if (httpsDevServer) {
+    const pems = await getCertificate();
+    devServerConfig.https = true;
+    devServerConfig.key = pems;
+    devServerConfig.cert = pems;
+  }
+
+  const devServer = new WebpackDevServer(parentCompiler, {
+    ...devServerConfig,
     after: (app) => {
+      if (useDevServerMiddleware) {
+        const devServerMiddleware = require(paths.devServerMiddleware);
+        if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+          devServerMiddleware(app);
+        }
+      }
       app.get('*', (req, res, next) => {
         const matchingRoute = routes.find(({ route }) => {
           const normalisedRoute = route
@@ -111,7 +137,9 @@ const localhost = '0.0.0.0';
       return;
     }
 
-    const url = `http://${appHosts[0]}:${availablePort}${initialPath}`;
+    const url = `${httpsDevServer ? 'https' : 'http'}://${
+      appHosts[0]
+    }:${availablePort}${initialPath}`;
 
     console.log();
     console.log(blue(`Starting the development server on ${underline(url)}`));

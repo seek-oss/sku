@@ -6,12 +6,13 @@ const { once } = require('lodash');
 const { blue, underline } = require('chalk');
 
 const { watch } = require('../lib/runWebpack');
+const getCertificate = require('../lib/certificate');
 const {
   copyPublicFiles,
   ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const { port, initialPath, paths } = require('../context');
+const { port, initialPath, paths, httpsDevServer } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -45,8 +46,10 @@ const localhost = '0.0.0.0';
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
 
-  const serverUrl = `http://${appHosts[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `http://${appHosts[0]}:${clientPort}`;
+  const proto = httpsDevServer ? 'https' : 'http';
+
+  const serverUrl = `${proto}://${appHosts[0]}:${serverPort}${initialPath}`;
+  const webpackDevServerUrl = `${proto}://${appHosts[0]}:${clientPort}`;
 
   console.log();
   console.log(
@@ -82,8 +85,7 @@ const localhost = '0.0.0.0';
     startServerWatch();
   });
 
-  // Start webpack dev server using only the client config
-  const devServer = new WebpackDevServer(clientCompiler, {
+  const devServerConfig = {
     contentBase: paths.public,
     publicPath: paths.publicPath,
     host: appHosts[0],
@@ -94,7 +96,17 @@ const localhost = '0.0.0.0';
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     sockPort: clientPort,
-  });
+  };
+
+  if (httpsDevServer) {
+    const pems = await getCertificate();
+    devServerConfig.https = true;
+    devServerConfig.key = pems;
+    devServerConfig.cert = pems;
+  }
+
+  // Start webpack dev server using only the client config
+  const devServer = new WebpackDevServer(clientCompiler, devServerConfig);
 
   devServer.listen(clientPort, localhost, (err) => {
     if (err) {

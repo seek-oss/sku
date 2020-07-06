@@ -10,7 +10,7 @@ const csp = __SKU_CSP__;
 
 const serverOptions = serverExports({ publicPath });
 
-const { renderCallback, middleware, onStart } = serverOptions;
+const { middleware, onStart, renderCallback } = serverOptions;
 
 const app = express();
 
@@ -29,6 +29,7 @@ if (env !== 'development') {
 if (middleware) {
   app.use(middleware);
 }
+
 app.get('*', (...args) => {
   let cspHandler;
 

@@ -82,3 +82,19 @@ import React from 'react';
 
 export const Rating = ({ rating }) => <div>...</div>;
 ```
+
+## DevServer Middleware
+
+Supply a `devServerMiddleware` path in your sku config to access the internal dev Express server.
+
+The file must export a function that will receive the express server.
+
+Example:
+
+```js
+module.exports = app => {
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```

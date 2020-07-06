@@ -1,11 +1,8 @@
 # managed by sku
-.eslintrc
-.prettierrc
-.ssl
+*.less.d.ts
 coverage/
 dist-playroom/
 dist-storybook/
 dist/
 report/
-tsconfig.json
 # end managed by sku

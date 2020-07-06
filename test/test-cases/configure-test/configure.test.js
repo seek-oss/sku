@@ -76,9 +76,10 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(7);
+      expect(ignoreContents.length).toEqual(8);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
+      expect(ignoreContents).toContain(`.ssl`);
       expect(ignoreContents).toContain(`${defaultTargetDir}/`);
       expect(ignoreContents).toContain(`${defaultStorybookTargetDir}/`);
       expect(ignoreContents).toContain(`${defaultPlayroomTargetDir}/`);
@@ -134,9 +135,10 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
-      expect(ignoreContents.length).toEqual(8);
+      expect(ignoreContents.length).toEqual(9);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
+      expect(ignoreContents).toContain(`.ssl`);
       expect(ignoreContents).toContain(`tsconfig.json`);
       expect(ignoreContents).toContain(`${skuConfig.target}/`);
       expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);

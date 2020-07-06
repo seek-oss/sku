@@ -1,12 +1,20 @@
 const path = require('path');
-const http = require('http');
+const express = require('express');
 const fs = require('fs-extra');
 const handler = require('serve-handler');
 const partition = require('lodash/partition');
 const { blue, bold, underline, yellow, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 
-const { port, paths, initialPath, routes, sites } = require('../context');
+const {
+  port,
+  paths,
+  initialPath,
+  routes,
+  sites,
+  useDevServerMiddleware,
+  httpsDevServer,
+} = require('../context');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -14,6 +22,7 @@ const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
 const args = require('../config/args');
 const track = require('../telemetry');
+const createServer = require('../lib/createServer');
 
 const prefferedSite = args.site;
 
@@ -88,7 +97,16 @@ const prefferedSite = args.site;
     );
   }
 
-  const server = http.createServer((request, response) => {
+  const app = express();
+
+  if (useDevServerMiddleware) {
+    const devServerMiddleware = require(paths.devServerMiddleware);
+    if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+      devServerMiddleware(app);
+    }
+  }
+
+  app.use((request, response) => {
     const [hostname] = request.headers.host.split(':');
 
     const site = getSiteForHost(hostname, prefferedSite) || '';
@@ -137,8 +155,13 @@ const prefferedSite = args.site;
     });
   });
 
+  const server = await createServer(app);
+
+  app.on('error', console.error);
+
   server.listen(availablePort, () => {
-    const url = `http://${appHosts[0]}:${availablePort}${initialPath}`;
+    const proto = httpsDevServer ? 'https' : 'http';
+    const url = `${proto}://${appHosts[0]}:${availablePort}${initialPath}`;
 
     console.log();
 
@@ -146,7 +169,7 @@ const prefferedSite = args.site;
 
     if (sitesWithHosts.length > 0) {
       sitesWithHosts.forEach((site) => {
-        const siteUrl = `http://${site.host}:${availablePort}${initialPath}`;
+        const siteUrl = `${proto}://${site.host}:${availablePort}${initialPath}`;
 
         console.log(
           blue(`${bold(site.name)} site available at ${underline(siteUrl)}`),

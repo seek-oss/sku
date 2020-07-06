@@ -63,7 +63,22 @@ const publicPath = skuConfig.publicPath.endsWith('/')
   ? skuConfig.publicPath
   : `${skuConfig.publicPath}/`;
 
+const devServerMiddleware =
+  skuConfig.devServerMiddleware &&
+  getPathFromCwd(skuConfig.devServerMiddleware);
+
+const useDevServerMiddleware = devServerMiddleware
+  ? fs.existsSync(devServerMiddleware)
+  : false;
+
+if (devServerMiddleware && !useDevServerMiddleware) {
+  throw new Error(
+    `${devServerMiddleware} does not exist. Please create the file or remove 'devServerMiddleware' from your sku config.`,
+  );
+}
+
 const paths = {
+  devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
@@ -130,4 +145,6 @@ module.exports = {
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
+  httpsDevServer: skuConfig.httpsDevServer,
+  useDevServerMiddleware,
 };

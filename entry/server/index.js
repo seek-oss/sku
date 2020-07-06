@@ -1,3 +1,4 @@
+import fs from 'fs';
 import http from 'http';
 import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
@@ -22,15 +23,35 @@ const startCallback = () => {
   }
 };
 
-if (module.hot) {
-  const server = http.createServer(app);
-  let currentApp = app;
-  server.listen(port, startCallback);
-  module.hot.accept('./server', () => {
-    server.removeListener('request', currentApp);
-    server.on('request', app);
-    currentApp = app;
-  });
-} else {
-  app.listen(port, startCallback);
-}
+(async () => {
+  if (module.hot) {
+    if (__SKU_DEV_MIDDLEWARE_ENABLED__) {
+      const devServerMiddleware = require(__SKU_DEV_MIDDLEWARE_PATH__);
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(app);
+      }
+    }
+    const server = (() => {
+      if (__SKU_DEV_HTTPS__) {
+        const pems = fs.readFileSync('.ssl/self-signed.pem');
+        return require('https').createServer(
+          {
+            cert: pems,
+            key: pems,
+          },
+          app,
+        );
+      }
+      return http.createServer(app);
+    })();
+    let currentApp = app;
+    server.listen(port, startCallback);
+    module.hot.accept('./server', () => {
+      server.removeListener('request', currentApp);
+      server.on('request', app);
+      currentApp = app;
+    });
+  } else {
+    app.listen(port, startCallback);
+  }
+})();

@@ -25,7 +25,7 @@ const {
   displayNamesProd,
   cspEnabled,
   cspExtraScriptSrcHosts,
-  useHttpsDevServer,
+  httpsDevServer,
   useDevServerMiddleware,
 } = require('../../context');
 
@@ -60,7 +60,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
   const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
   });
-  const proto = useHttpsDevServer ? 'https' : 'http';
+  const proto = httpsDevServer ? 'https' : 'http';
   const clientServer = `${proto}://localhost:${clientPort}/`;
 
   const clientDevServerEntries = [
@@ -260,7 +260,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
             useDevServerMiddleware,
           ),
-          __SKU_DEV_HTTPS__: JSON.stringify(useHttpsDevServer),
+          __SKU_DEV_HTTPS__: JSON.stringify(httpsDevServer),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
             extraHosts: cspExtraScriptSrcHosts,

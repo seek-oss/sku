@@ -17,7 +17,7 @@ const {
   paths,
   routes,
   isLibrary,
-  useHttpsDevServer,
+  httpsDevServer,
   useDevServerMiddleware,
 } = require('../context');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
@@ -63,7 +63,7 @@ const localhost = '0.0.0.0';
     serveIndex: false,
   };
 
-  if (useHttpsDevServer) {
+  if (httpsDevServer) {
     const pems = await getCertificate();
     devServerConfig.https = true;
     devServerConfig.key = pems;
@@ -137,7 +137,7 @@ const localhost = '0.0.0.0';
       return;
     }
 
-    const url = `${useHttpsDevServer ? 'https' : 'http'}://${
+    const url = `${httpsDevServer ? 'https' : 'http'}://${
       appHosts[0]
     }:${availablePort}${initialPath}`;
 

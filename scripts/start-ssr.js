@@ -12,7 +12,7 @@ const {
   ensureTargetDirectory,
 } = require('../lib/buildFileUtils');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
-const { port, initialPath, paths, useHttpsDevServer } = require('../context');
+const { port, initialPath, paths, httpsDevServer } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -46,7 +46,7 @@ const localhost = '0.0.0.0';
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
 
-  const proto = useHttpsDevServer ? 'https' : 'http';
+  const proto = httpsDevServer ? 'https' : 'http';
 
   const serverUrl = `${proto}://${appHosts[0]}:${serverPort}${initialPath}`;
   const webpackDevServerUrl = `${proto}://${appHosts[0]}:${clientPort}`;
@@ -98,7 +98,7 @@ const localhost = '0.0.0.0';
     sockPort: clientPort,
   };
 
-  if (useHttpsDevServer) {
+  if (httpsDevServer) {
     const pems = await getCertificate();
     devServerConfig.https = true;
     devServerConfig.key = pems;

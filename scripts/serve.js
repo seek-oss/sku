@@ -13,7 +13,7 @@ const {
   routes,
   sites,
   useDevServerMiddleware,
-  useHttpsDevServer,
+  httpsDevServer,
 } = require('../context');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
@@ -160,7 +160,7 @@ const prefferedSite = args.site;
   app.on('error', console.error);
 
   server.listen(availablePort, () => {
-    const proto = useHttpsDevServer ? 'https' : 'http';
+    const proto = httpsDevServer ? 'https' : 'http';
     const url = `${proto}://${appHosts[0]}:${availablePort}${initialPath}`;
 
     console.log();

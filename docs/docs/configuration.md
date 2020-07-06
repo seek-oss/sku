@@ -412,7 +412,7 @@ Default: `({ environment = '', site = '', route = '' }) => path.join(environment
 
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
 
-## useHttpsDevServer
+## httpsDevServer
 
 type `boolean`
 

@@ -3,7 +3,7 @@ const ListExternalsWebpackPlugin = require('../../../utils/ListExternalsWebpackP
 module.exports = {
   port: 9843,
   serverPort: 9894,
-  useHttpsDevServer: true,
+  httpsDevServer: true,
   devServerMiddleware: './dev-middleware.js',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],

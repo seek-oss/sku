@@ -48,6 +48,6 @@ module.exports = {
   orderImports: false,
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
-  useHttpsDevServer: false,
+  httpsDevServer: false,
   devServerMiddleware: null,
 };

@@ -145,6 +145,6 @@ module.exports = {
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
-  useHttpsDevServer: skuConfig.useHttpsDevServer,
+  httpsDevServer: skuConfig.httpsDevServer,
   useDevServerMiddleware,
 };

@@ -1,5 +1,11 @@
 # sku
 
+## 10.4.0
+
+### Minor Changes
+
+- Add ability to turn on HTTPS on the local development server with `httpsDevServer` and define express middleware with a `dev-middleware.js` file in the root of the SKU project. ([#523](https://github.com/seek-oss/sku/pull/523))
+
 ## 10.3.6
 
 ### Patch Changes

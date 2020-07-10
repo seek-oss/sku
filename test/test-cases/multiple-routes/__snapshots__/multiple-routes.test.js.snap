@@ -43,6 +43,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Details"
           rel="stylesheet"
           href="styles[0]"
@@ -147,6 +150,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Home"
           rel="stylesheet"
           href="styles[0]"
@@ -239,6 +245,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Details"
           rel="stylesheet"
           href="styles[0]"
@@ -343,6 +352,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Home"
           rel="stylesheet"
           href="styles[0]"
@@ -441,6 +453,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Details"
           rel="stylesheet"
           href="styles[0]"
@@ -558,6 +573,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Home"
           rel="stylesheet"
           href="styles[0]"
@@ -655,6 +673,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Details"
           rel="stylesheet"
           href="styles[0]"
@@ -783,6 +804,9 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
+    <style type="text/css">
+      body{background:pink}
+    </style>
     <link data-chunk="handlers-Home"
           rel="stylesheet"
           href="styles[0]"

@@ -30,6 +30,7 @@ export default {
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
           <script>console.log('Hi');</script>
+          <style type="text/css">body{background:pink}</style>
           ${headTags}
         </head>
         <body>

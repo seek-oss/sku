@@ -79,7 +79,12 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
   };
 
   const handleHtml = (html) => {
-    const root = parse(html, { script: true });
+    const root = parse(html, {
+      script: true,
+      style: true,
+      pre: true,
+      comment: true,
+    });
 
     if (!root.valid) {
       throw new Error(

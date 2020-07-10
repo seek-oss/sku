@@ -1,5 +1,11 @@
 # sku
 
+## 10.4.1
+
+### Patch Changes
+
+- Fix empty style tags in rendered HTML when `cspEnabled` is set to `true` ([#525](https://github.com/seek-oss/sku/pull/525))
+
 ## 10.4.0
 
 ### Minor Changes

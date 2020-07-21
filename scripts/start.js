@@ -61,6 +61,7 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
+    hot: true,
   };
 
   if (httpsDevServer) {

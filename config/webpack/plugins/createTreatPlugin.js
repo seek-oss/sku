@@ -9,6 +9,7 @@ module.exports = ({
   libraryName,
   supportedBrowsers,
   MiniCssExtractPlugin,
+  hot,
 }) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';
 
@@ -39,7 +40,14 @@ module.exports = ({
       include,
     },
     outputCSS: target === 'browser',
-    outputLoaders: [MiniCssExtractPlugin.loader],
+    outputLoaders: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          hmr: hot,
+        },
+      },
+    ],
     localIdentName,
     themeIdentName,
     browsers: supportedBrowsers,

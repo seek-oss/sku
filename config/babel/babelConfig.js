@@ -42,6 +42,10 @@ module.exports = ({
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
   ];
 
+  if (!isProductionBuild && isBrowser) {
+    plugins.push(require.resolve('react-refresh/babel'));
+  }
+
   if (isBrowser) {
     plugins.push(require.resolve('babel-plugin-seek-style-guide'));
   }

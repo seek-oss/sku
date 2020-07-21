@@ -6,6 +6,8 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 
@@ -65,7 +67,6 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
 
   const clientDevServerEntries = [
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
-    `${require.resolve('webpack/hot/only-dev-server')}`,
   ];
 
   // Add polyfills and dev server client to all entries
@@ -73,14 +74,10 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
     ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
     : [...resolvedPolyfills, paths.clientEntry];
 
-  const serverDevServerEntries = [
-    `${require.resolve('webpack/hot/poll')}?1000`,
-  ];
-
   const skuServerEntry = require.resolve('../../entry/server/index.js');
 
   const serverEntry = isDevServer
-    ? [...serverDevServerEntries, skuServerEntry]
+    ? [`${require.resolve('webpack/hot/poll')}?1000`, skuServerEntry]
     : [skuServerEntry];
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
@@ -187,8 +184,12 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
       ].concat(
         isDevServer
           ? [
-              new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPort: 8100,
+                },
+              }),
               new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'browser' }),
             ]
@@ -207,7 +208,6 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
           whitelist: [
-            'webpack/hot/poll?1000',
             // webpack-node-externals compares the `import` or `require` expression to this list,
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.

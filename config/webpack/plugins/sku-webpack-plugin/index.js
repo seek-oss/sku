@@ -144,6 +144,7 @@ class SkuWebpackPlugin {
       libraryName,
       supportedBrowsers,
       MiniCssExtractPlugin,
+      hot,
     }).apply(compiler);
   }
 }

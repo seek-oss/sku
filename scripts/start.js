@@ -6,6 +6,7 @@ const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
 const { pathToRegexp } = require('path-to-regexp');
 
+const { watch } = require('../lib/runWebpack');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -40,16 +41,19 @@ const localhost = '0.0.0.0';
 
   const htmlRenderPlugin = createHtmlRenderPlugin();
 
-  const config = makeWebpackConfig({
+  const [clientWebpackConfig, renderWebpackConfig] = makeWebpackConfig({
     port: availablePort,
     isDevServer: true,
     htmlRenderPlugin,
     metrics: true,
   });
 
-  const parentCompiler = webpack(config);
+  const clientCompiler = webpack(clientWebpackConfig);
+  const renderCompiler = webpack(renderWebpackConfig);
 
   await checkHosts();
+
+  await watch(renderCompiler);
 
   const appHosts = getAppHosts();
 
@@ -71,7 +75,7 @@ const localhost = '0.0.0.0';
     devServerConfig.cert = pems;
   }
 
-  const devServer = new WebpackDevServer(parentCompiler, {
+  const devServer = new WebpackDevServer(clientCompiler, {
     ...devServerConfig,
     after: (app) => {
       if (useDevServerMiddleware) {

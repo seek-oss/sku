@@ -6,6 +6,7 @@ module.exports = ({
   supportedBrowsers,
   displayNamesProd = false,
   removeAssertionsInProduction = true,
+  hot = false,
 }) => {
   const browserEnvOptions = {
     modules: false,
@@ -42,7 +43,7 @@ module.exports = ({
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
   ];
 
-  if (!isProductionBuild && isBrowser) {
+  if (hot && isBrowser) {
     plugins.push(require.resolve('react-refresh/babel'));
   }
 

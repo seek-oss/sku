@@ -66,6 +66,7 @@ class SkuWebpackPlugin {
           supportedBrowsers,
           displayNamesProd,
           removeAssertionsInProduction,
+          hot,
         }),
       },
       {
@@ -77,6 +78,7 @@ class SkuWebpackPlugin {
           supportedBrowsers,
           displayNamesProd,
           removeAssertionsInProduction,
+          hot,
         }),
       },
       {

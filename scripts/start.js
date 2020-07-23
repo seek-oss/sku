@@ -69,6 +69,7 @@ const hot = process.env.SKU_HOT !== 'false';
     allowedHosts: appHosts,
     serveIndex: false,
     hot,
+    clientLogLevel: 'warn',
   };
 
   if (httpsDevServer) {

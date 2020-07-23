@@ -99,6 +99,7 @@ const localhost = '0.0.0.0';
     hot,
     headers: { 'Access-Control-Allow-Origin': '*' },
     sockPort: clientPort,
+    clientLogLevel: 'warn',
   };
 
   if (httpsDevServer) {

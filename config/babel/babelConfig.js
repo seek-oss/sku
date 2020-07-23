@@ -44,7 +44,10 @@ module.exports = ({
   ];
 
   if (hot && isBrowser) {
-    plugins.push(require.resolve('react-refresh/babel'));
+    plugins.push([
+      require.resolve('react-refresh/babel'),
+      { skipEnvCheck: true },
+    ]);
   }
 
   if (isBrowser) {

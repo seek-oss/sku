@@ -18,7 +18,11 @@ module.exports = ({ config }, { isDevServer }) => {
   }
 
   const clientWebpackConfig = find(
-    makeWebpackConfig({ isIntegration: true, isDevServer, hot }),
+    makeWebpackConfig({
+      isIntegration: true,
+      isDevServer,
+      hot: isDevServer && hot,
+    }),
     ({ name }) => name === 'client',
   );
 

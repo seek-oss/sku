@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime-554e53c2f72903d6f45f.js",
-  "/vendors~main-a264bd1d24dfb67ae5a1.js",
-  "/main-147106e0f69abb56387e.js",
+  "/vendors~main-bb22006a59d77a2dca2d.js",
+  "/main-5fba378628c1e73fe243.js",
 ]
 CSS: Array [
   "/main-fadb2269a374a06075a5.css",
@@ -180,7 +180,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+             src="/main.js"
+     >
+     </script>
++    <iframe id="react-refresh-overlay"
++            src="about:blank"
++            style="border: none; height: 100vh; left: 0px; position: fixed; top: 0px; width: 100vw; z-index: 2147483647;"
++    >
++    </iframe>
+   </body>
+ </html>
+\\ No newline at end of file
+
 `;
 
 exports[`sku-with-https start should support the supplied middleware 1`] = `

@@ -12,8 +12,8 @@ Object {
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",
-    "/vendors~main-b7d73686065affc96348.js",
-    "/main-d71c73dff2fcc93ab90d.js",
+    "/vendors~main-ebfb7177d40cef6d20c2.js",
+    "/main-48850423553f340ff116.js",
   ]
 CSS: Array [
     "/vendors~main-492f2c41d9f41ff813a1.css",
@@ -107,7 +107,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-d71c73dff2fcc93ab90d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-48850423553f340ff116.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-492f2c41d9f41ff813a1.css": a,
 abbr,
@@ -766,6 +766,6 @@ html {
   }
 }
 ,
-  "vendors~main-b7d73686065affc96348.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ebfb7177d40cef6d20c2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

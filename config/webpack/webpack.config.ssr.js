@@ -31,7 +31,12 @@ const {
   useDevServerMiddleware,
 } = require('../../context');
 
-const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
+const makeWebpackConfig = ({
+  clientPort,
+  serverPort,
+  isDevServer = false,
+  hot = false,
+}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
@@ -172,7 +177,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         }),
         new SkuWebpackPlugin({
           target: 'browser',
-          hot: isDevServer,
+          hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
           generateCSSTypes: isTypeScript,
@@ -181,23 +186,26 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           displayNamesProd,
           MiniCssExtractPlugin,
         }),
-      ].concat(
-        isDevServer
+        ...(isDevServer
           ? [
-              new webpack.HotModuleReplacementPlugin(),
-              new ReactRefreshWebpackPlugin({
-                overlay: {
-                  sockPort: 8100,
-                },
-              }),
-              new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'browser' }),
+              new webpack.NoEmitOnErrorsPlugin(),
             ]
           : [
               bundleAnalyzerPlugin({ name: 'client' }),
               new webpack.HashedModuleIdsPlugin(),
-            ],
-      ),
+            ]),
+        ...(hot
+          ? [
+              new webpack.HotModuleReplacementPlugin(),
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPort: clientPort,
+                },
+              }),
+            ]
+          : []),
+      ],
     },
     {
       name: 'server',

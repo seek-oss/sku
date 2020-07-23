@@ -27,6 +27,8 @@ const getCertificate = require('../lib/certificate');
 
 const localhost = '0.0.0.0';
 
+const hot = process.env.SKU_HOT !== 'false';
+
 (async () => {
   console.log(blue(`sku start`));
 
@@ -46,6 +48,7 @@ const localhost = '0.0.0.0';
     isDevServer: true,
     htmlRenderPlugin,
     metrics: true,
+    hot,
   });
 
   const clientCompiler = webpack(clientWebpackConfig);
@@ -65,7 +68,7 @@ const localhost = '0.0.0.0';
     stats: 'errors-only',
     allowedHosts: appHosts,
     serveIndex: false,
-    hot: true,
+    hot,
   };
 
   if (httpsDevServer) {

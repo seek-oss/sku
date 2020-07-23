@@ -41,6 +41,7 @@ const makeWebpackConfig = ({
   isDevServer = false,
   htmlRenderPlugin,
   metrics = false,
+  hot = false,
 } = {}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -216,6 +217,10 @@ const makeWebpackConfig = ({
                   path.relative(cwd(), paths.clientEntry),
                 ),
               }),
+            ]
+          : []),
+        ...(hot
+          ? [
               new webpack.HotModuleReplacementPlugin(),
               new ReactRefreshWebpackPlugin(),
             ]
@@ -226,7 +231,7 @@ const makeWebpackConfig = ({
         }),
         new SkuWebpackPlugin({
           target: 'browser',
-          hot: isDevServer,
+          hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
           supportedBrowsers,

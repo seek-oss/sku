@@ -6,6 +6,8 @@ const isCI = require('../../lib/isCI');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');
 
+const hot = process.env.SKU_HOT !== 'false';
+
 module.exports = ({ config }, { isDevServer }) => {
   if (isCI) {
     // Remove noisy progress plugin in CI, currently no official option to disable
@@ -16,7 +18,7 @@ module.exports = ({ config }, { isDevServer }) => {
   }
 
   const clientWebpackConfig = find(
-    makeWebpackConfig({ isIntegration: true, isDevServer }),
+    makeWebpackConfig({ isIntegration: true, isDevServer, hot }),
     ({ name }) => name === 'client',
   );
 

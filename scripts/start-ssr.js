@@ -17,6 +17,8 @@ const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 
+const hot = process.env.SKU_HOT !== 'false';
+
 const localhost = '0.0.0.0';
 
 (async () => {
@@ -34,6 +36,7 @@ const localhost = '0.0.0.0';
     clientPort,
     serverPort,
     isDevServer: true,
+    hot,
   });
 
   await checkHosts();
@@ -93,7 +96,7 @@ const localhost = '0.0.0.0';
     overlay: true,
     stats: 'errors-only',
     allowedHosts: appHosts,
-    hot: true,
+    hot,
     headers: { 'Access-Control-Allow-Origin': '*' },
     sockPort: clientPort,
   };

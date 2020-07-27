@@ -7,7 +7,7 @@ const { getAppSnapshot } = require('../../utils/appSnapshot');
 const waitForUrls = require('../../utils/waitForUrls');
 const { getPathFromCwd } = require('../../../lib/cwd');
 
-const { port, serverPort } = require('./app/sku.config');
+const { port, serverPort } = require('./app/sku-server.config');
 const appDir = path.resolve(__dirname, 'app');
 
 async function createPackageLink(name) {
@@ -59,7 +59,9 @@ describe('sku-with-https', () => {
     let process;
 
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start-ssr', appDir);
+      process = await runSkuScriptInDir('start-ssr', appDir, [
+        '--config=sku-server.config.js',
+      ]);
       await waitForUrls(url, `${url}/test-middleware`);
     });
 

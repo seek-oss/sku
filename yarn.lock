@@ -14981,10 +14981,10 @@ traverse@^0.6.6:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
   integrity sha1-y99WD9e5r2MlAv7UD5GMFX6pcTc=
 
-treat@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/treat/-/treat-1.5.0.tgz#216e1134fb0ab3e3b6ef79e3cab26fcd08f8eea8"
-  integrity sha512-9XMZJKi+gOo9aG52d78ghIDR7xT0Xhszp+I76NFd1gjaz+zX5w5dFeKbB+MhrjG9yaf0BK477/6nTMKd294c/A==
+treat@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/treat/-/treat-1.5.1.tgz#ff17af14f466400723a5f9fbe5040e1f97bbbf49"
+  integrity sha512-roVEhNzudKgGjZoNFbvTqIsGZVu2LwDuU9d9LeSHDSWWkvFDwxniq/J67LPipnT/KkXaWH0lKsaQmeHXxHigcg==
   dependencies:
     "@hapi/joi" "^15.0.3"
     "@types/object-hash" "^1.2.0"

@@ -58,6 +58,7 @@ class SkuWebpackPlugin {
 
     const rules = [
       {
+        compiler: { not: 'treat-webpack-loader' },
         test: TYPESCRIPT,
         include: this.include,
         use: makeJsLoaders({
@@ -70,6 +71,7 @@ class SkuWebpackPlugin {
         }),
       },
       {
+        compiler: { not: 'treat-webpack-loader' },
         test: JAVASCRIPT,
         include: this.include,
         use: makeJsLoaders({
@@ -79,6 +81,32 @@ class SkuWebpackPlugin {
           displayNamesProd,
           removeAssertionsInProduction,
           hot,
+        }),
+      },
+      {
+        compiler: 'treat-webpack-loader',
+        test: TYPESCRIPT,
+        include: this.include,
+        use: makeJsLoaders({
+          target: 'node',
+          lang: 'ts',
+          supportedBrowsers,
+          displayNamesProd,
+          removeAssertionsInProduction,
+          hot: false,
+        }),
+      },
+      {
+        compiler: 'treat-webpack-loader',
+        test: JAVASCRIPT,
+        include: this.include,
+        use: makeJsLoaders({
+          target: 'node',
+          lang: 'js',
+          supportedBrowsers,
+          displayNamesProd,
+          removeAssertionsInProduction,
+          hot: false,
         }),
       },
       {

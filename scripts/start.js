@@ -56,7 +56,7 @@ const hot = process.env.SKU_HOT !== 'false';
 
   await checkHosts();
 
-  await watch(renderCompiler);
+  watch(renderCompiler);
 
   const appHosts = getAppHosts();
 

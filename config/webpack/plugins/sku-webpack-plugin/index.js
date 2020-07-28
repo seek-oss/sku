@@ -58,56 +58,58 @@ class SkuWebpackPlugin {
 
     const rules = [
       {
-        compiler: { not: 'treat-webpack-loader' },
         test: TYPESCRIPT,
         include: this.include,
-        use: makeJsLoaders({
-          target,
-          lang: 'ts',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-          hot,
-        }),
+        oneOf: [
+          {
+            compiler: 'treat-webpack-loader',
+            use: makeJsLoaders({
+              target: 'node',
+              lang: 'ts',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot: false,
+            }),
+          },
+          {
+            use: makeJsLoaders({
+              target,
+              lang: 'ts',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot,
+            }),
+          },
+        ],
       },
       {
-        compiler: { not: 'treat-webpack-loader' },
         test: JAVASCRIPT,
         include: this.include,
-        use: makeJsLoaders({
-          target,
-          lang: 'js',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-          hot,
-        }),
-      },
-      {
-        compiler: 'treat-webpack-loader',
-        test: TYPESCRIPT,
-        include: this.include,
-        use: makeJsLoaders({
-          target: 'node',
-          lang: 'ts',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-          hot: false,
-        }),
-      },
-      {
-        compiler: 'treat-webpack-loader',
-        test: JAVASCRIPT,
-        include: this.include,
-        use: makeJsLoaders({
-          target: 'node',
-          lang: 'js',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-          hot: false,
-        }),
+        oneOf: [
+          {
+            compiler: 'treat-webpack-loader',
+            use: makeJsLoaders({
+              target: 'node',
+              lang: 'js',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot: false,
+            }),
+          },
+          {
+            use: makeJsLoaders({
+              target,
+              lang: 'js',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot,
+            }),
+          },
+        ],
       },
       {
         test: LESS,

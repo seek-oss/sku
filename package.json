@@ -145,7 +145,7 @@
     "pretty-ms": "^6.0.1",
     "raw-loader": "^4.0.0",
     "react-refresh": "^0.8.3",
-    "react-treat": "^1.0.2",
+    "react-treat": "^1.5.1",
     "rimraf": "^3.0.0",
     "selfsigned": "^1.10.7",
     "semver": "^7.0.0",

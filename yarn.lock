@@ -12861,10 +12861,10 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-treat@^1.0.2:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.2.4.tgz#0db41d800f0eb6a56eb2ed534c9788a4a823e5df"
-  integrity sha512-WO+seyOIgxMvf/re78DzU7pgdLODz8P2bD8dAeTkO95ZyatneaisZRA7Og0iusN5Twvygp/bCujWD/0SDT9kvg==
+react-treat@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-treat/-/react-treat-1.5.1.tgz#15ea8a4d5ae532e9367d4dee419caf900faaac55"
+  integrity sha512-j21ZOvfpxhSXrdc2QukIW4T43lXtOn4Bt++lGe8bhzV6BrcXKG6FEDCuUkAx4T3xehtUoPYTtrj3F3J3s59xsw==
 
 react-use@^13.22.3:
   version "13.27.0"

@@ -3,8 +3,8 @@
 exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-af90dfb73f645abd9001.js",
-  "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
-  "/static/typescript/main-d7855a590952dcf5e9d0.js",
+  "/static/typescript/vendors~main-f196002cae30d052c86d.js",
+  "/static/typescript/main-3bcb7ec81a3ef1bfea57.js",
 ]
 CSS: Array [
   "/static/typescript/main-fadb2269a374a06075a5.css",
@@ -88,8 +88,8 @@ export const root: string;
 ",
   "index.html": SCRIPTS: Array [
     "/static/typescript/runtime-af90dfb73f645abd9001.js",
-    "/static/typescript/vendors~main-a264bd1d24dfb67ae5a1.js",
-    "/static/typescript/main-d7855a590952dcf5e9d0.js",
+    "/static/typescript/vendors~main-f196002cae30d052c86d.js",
+    "/static/typescript/main-3bcb7ec81a3ef1bfea57.js",
   ]
 CSS: Array [
     "/static/typescript/main-fadb2269a374a06075a5.css",
@@ -165,7 +165,7 @@ interface CssExports {
 declare const cssExports: CssExports;
 export = cssExports;
 ",
-  "main-d7855a590952dcf5e9d0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-3bcb7ec81a3ef1bfea57.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-fadb2269a374a06075a5.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -176,7 +176,7 @@ export = cssExports;
 }
 ,
   "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-a264bd1d24dfb67ae5a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-f196002cae30d052c86d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -184,7 +184,7 @@ exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-af90dfb73f645abd9001.js",
   "/static/typescript/vendors~main-984fab7243c3dc553e6f.js",
-  "/static/typescript/main-add4770934962096852c.js",
+  "/static/typescript/main-d70fedbf6e448a2f803f.js",
 ]
 CSS: Array [
   "/static/typescript/main-fadb2269a374a06075a5.css",
@@ -275,7 +275,7 @@ interface CssExports {
 declare const cssExports: CssExports;
 export = cssExports;
 ",
-  "main-add4770934962096852c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d70fedbf6e448a2f803f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-fadb2269a374a06075a5.css": ._1brbpTo {
   display: -webkit-flex;
   display: -ms-flexbox;

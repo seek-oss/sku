@@ -13,10 +13,12 @@ interface Props {
   children?: ReactNode;
 }
 
-export default ({ children }: Props) => (
+const App = ({ children }: Props) => (
   <div className={lessStyles.root}>
     <div className={lessStyles.nested} data-automation-text>
       {children || messageRenderer()}
     </div>
   </div>
 );
+
+export default App;

@@ -2,25 +2,25 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 Object {
-  "AsyncComponent-c44d4a8a700c39761853.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-18e291a94ae61b0bfa24.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
   color: #00f;
 }
 ,
-  "handlers-Details-fc954a5e3bc13c0ed2a9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-0b17d8f7e2b78871f7e0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-522fb25a4ee671e27ba6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-62bf94bf0fd2ba3c2aa2.css": ._1QX0Hyt {
   color: red;
 }
 ,
-  "main-14b77b7ba9e854b34419.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-e90deda4bbe0067652a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-3043a664d3b740d1dd46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-ab2a3255dfdb9a617044.js",
-    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-    "/static/place/main-14b77b7ba9e854b34419.js",
-    "/static/place/handlers-Details-fc954a5e3bc13c0ed2a9.js",
-    "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
+    "/static/place/runtime-ce252299d63aafaa3e74.js",
+    "/static/place/vendors~main-16567fe31d1760735260.js",
+    "/static/place/main-3043a664d3b740d1dd46.js",
+    "/static/place/handlers-Details-522fb25a4ee671e27ba6.js",
+    "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
   ]
 CSS: Array [
     "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
@@ -124,10 +124,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-ab2a3255dfdb9a617044.js",
-    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-    "/static/place/main-14b77b7ba9e854b34419.js",
-    "/static/place/handlers-Home-0b17d8f7e2b78871f7e0.js",
+    "/static/place/runtime-ce252299d63aafaa3e74.js",
+    "/static/place/vendors~main-16567fe31d1760735260.js",
+    "/static/place/main-3043a664d3b740d1dd46.js",
+    "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
   ]
 CSS: Array [
     "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
@@ -218,11 +218,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-ab2a3255dfdb9a617044.js",
-    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-    "/static/place/main-14b77b7ba9e854b34419.js",
-    "/static/place/handlers-Details-fc954a5e3bc13c0ed2a9.js",
-    "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
+    "/static/place/runtime-ce252299d63aafaa3e74.js",
+    "/static/place/vendors~main-16567fe31d1760735260.js",
+    "/static/place/main-3043a664d3b740d1dd46.js",
+    "/static/place/handlers-Details-522fb25a4ee671e27ba6.js",
+    "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
   ]
 CSS: Array [
     "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
@@ -326,10 +326,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-ab2a3255dfdb9a617044.js",
-    "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-    "/static/place/main-14b77b7ba9e854b34419.js",
-    "/static/place/handlers-Home-0b17d8f7e2b78871f7e0.js",
+    "/static/place/runtime-ce252299d63aafaa3e74.js",
+    "/static/place/vendors~main-16567fe31d1760735260.js",
+    "/static/place/main-3043a664d3b740d1dd46.js",
+    "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
   ]
 CSS: Array [
     "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
@@ -418,19 +418,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-ab2a3255dfdb9a617044.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-f9d0092723c71e65e66e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-ce252299d63aafaa3e74.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-16567fe31d1760735260.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-ab2a3255dfdb9a617044.js",
-  "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-  "/static/place/main-14b77b7ba9e854b34419.js",
-  "/static/place/handlers-Details-fc954a5e3bc13c0ed2a9.js",
-  "/static/place/AsyncComponent-c44d4a8a700c39761853.js",
+  "/static/place/runtime-ce252299d63aafaa3e74.js",
+  "/static/place/vendors~main-16567fe31d1760735260.js",
+  "/static/place/main-3043a664d3b740d1dd46.js",
+  "/static/place/handlers-Details-522fb25a4ee671e27ba6.js",
+  "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
 ]
 CSS: Array [
   "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
@@ -547,10 +547,10 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-ab2a3255dfdb9a617044.js",
-  "/static/place/vendors~main-f9d0092723c71e65e66e.js",
-  "/static/place/main-14b77b7ba9e854b34419.js",
-  "/static/place/handlers-Home-0b17d8f7e2b78871f7e0.js",
+  "/static/place/runtime-ce252299d63aafaa3e74.js",
+  "/static/place/vendors~main-16567fe31d1760735260.js",
+  "/static/place/main-3043a664d3b740d1dd46.js",
+  "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
 ]
 CSS: Array [
   "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
@@ -649,6 +649,7 @@ SCRIPTS: Array [
   "/vendors~devServerOnly~main.js",
   "/vendors~main.js",
   "/main.js",
+  "/vendors~handlers-Details~handlers-Home.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
 ]
@@ -705,10 +706,15 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[5]"
     >
-    <link data-chunk="AsyncComponent"
+    <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
           href="scripts[6]"
+    >
+    <link data-chunk="AsyncComponent"
+          rel="preload"
+          as="script"
+          href="scripts[7]"
     >
   </head>
   <body>
@@ -728,7 +734,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      ["handlers-Details","AsyncComponent"]
+      ["vendors~handlers-Details~handlers-Home","handlers-Details","AsyncComponent"]
     </script>
     <script async
             data-chunk="main"
@@ -756,8 +762,13 @@ SOURCE HTML: <!DOCTYPE html>
     >
     </script>
     <script async
-            data-chunk="AsyncComponent"
+            data-chunk="handlers-Details"
             src="scripts[6]"
+    >
+    </script>
+    <script async
+            data-chunk="AsyncComponent"
+            src="scripts[7]"
     >
     </script>
   </body>
@@ -781,6 +792,7 @@ SCRIPTS: Array [
   "/vendors~devServerOnly~main.js",
   "/vendors~main.js",
   "/main.js",
+  "/vendors~handlers-Details~handlers-Home.js",
   "/handlers-Home.js",
 ]
 CSS: Array [
@@ -836,6 +848,11 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[5]"
     >
+    <link data-chunk="handlers-Home"
+          rel="preload"
+          as="script"
+          href="scripts[6]"
+    >
   </head>
   <body>
     <div id="app">
@@ -851,7 +868,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      ["handlers-Home"]
+      ["vendors~handlers-Details~handlers-Home","handlers-Home"]
     </script>
     <script async
             data-chunk="main"
@@ -876,6 +893,11 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="handlers-Home"
             src="scripts[5]"
+    >
+    </script>
+    <script async
+            data-chunk="handlers-Home"
+            src="scripts[6]"
     >
     </script>
   </body>

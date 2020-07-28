@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const lodash = require('lodash');
 const path = require('path');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
@@ -40,6 +41,7 @@ const makeWebpackConfig = ({
   isDevServer = false,
   htmlRenderPlugin,
   metrics = false,
+  hot = false,
 } = {}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -217,14 +219,19 @@ const makeWebpackConfig = ({
               }),
             ]
           : []),
+        ...(hot
+          ? [
+              new webpack.HotModuleReplacementPlugin(),
+              new ReactRefreshWebpackPlugin(),
+            ]
+          : []),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
           chunkFilename: cssChunkFileMask,
         }),
-        new webpack.HashedModuleIdsPlugin(),
         new SkuWebpackPlugin({
           target: 'browser',
-          hot: isDevServer,
+          hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
           supportedBrowsers,
@@ -286,7 +293,7 @@ const makeWebpackConfig = ({
         }),
         new SkuWebpackPlugin({
           target: 'node',
-          hot: isDevServer,
+          hot: false,
           include: internalInclude,
           compilePackages: paths.compilePackages,
           supportedBrowsers,

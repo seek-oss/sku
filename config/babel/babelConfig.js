@@ -6,6 +6,7 @@ module.exports = ({
   supportedBrowsers,
   displayNamesProd = false,
   removeAssertionsInProduction = true,
+  hot = false,
 }) => {
   const browserEnvOptions = {
     modules: false,
@@ -41,6 +42,13 @@ module.exports = ({
     require.resolve('@loadable/babel-plugin'),
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
   ];
+
+  if (hot && isBrowser) {
+    plugins.push([
+      require.resolve('react-refresh/babel'),
+      { skipEnvCheck: true },
+    ]);
+  }
 
   if (isBrowser) {
     plugins.push(require.resolve('babel-plugin-seek-style-guide'));

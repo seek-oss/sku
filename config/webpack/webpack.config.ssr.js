@@ -6,6 +6,8 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 
@@ -29,7 +31,12 @@ const {
   useDevServerMiddleware,
 } = require('../../context');
 
-const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
+const makeWebpackConfig = ({
+  clientPort,
+  serverPort,
+  isDevServer = false,
+  hot = false,
+}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
@@ -65,7 +72,6 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
 
   const clientDevServerEntries = [
     `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
-    `${require.resolve('webpack/hot/only-dev-server')}`,
   ];
 
   // Add polyfills and dev server client to all entries
@@ -73,14 +79,10 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
     ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
     : [...resolvedPolyfills, paths.clientEntry];
 
-  const serverDevServerEntries = [
-    `${require.resolve('webpack/hot/poll')}?1000`,
-  ];
-
   const skuServerEntry = require.resolve('../../entry/server/index.js');
 
   const serverEntry = isDevServer
-    ? [...serverDevServerEntries, skuServerEntry]
+    ? [`${require.resolve('webpack/hot/poll')}?1000`, skuServerEntry]
     : [skuServerEntry];
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
@@ -175,7 +177,7 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         }),
         new SkuWebpackPlugin({
           target: 'browser',
-          hot: isDevServer,
+          hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
           generateCSSTypes: isTypeScript,
@@ -184,19 +186,26 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
           displayNamesProd,
           MiniCssExtractPlugin,
         }),
-      ].concat(
-        isDevServer
+        ...(isDevServer
           ? [
-              new webpack.NamedModulesPlugin(),
-              new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'browser' }),
+              new webpack.NoEmitOnErrorsPlugin(),
             ]
           : [
               bundleAnalyzerPlugin({ name: 'client' }),
               new webpack.HashedModuleIdsPlugin(),
-            ],
-      ),
+            ]),
+        ...(hot
+          ? [
+              new webpack.HotModuleReplacementPlugin(),
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPort: clientPort,
+                },
+              }),
+            ]
+          : []),
+      ],
     },
     {
       name: 'server',
@@ -207,7 +216,6 @@ const makeWebpackConfig = ({ clientPort, serverPort, isDevServer = false }) => {
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
           whitelist: [
-            'webpack/hot/poll?1000',
             // webpack-node-externals compares the `import` or `require` expression to this list,
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.

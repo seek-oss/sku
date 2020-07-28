@@ -3,8 +3,8 @@
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: Array [
   "/some-static-place/runtime-86b0612520998a189dfa.js",
-  "/some-static-place/vendors~main-2d92e57430dea49b3830.js",
-  "/some-static-place/main-3bf33a2ff729380f896f.js",
+  "/some-static-place/vendors~main-cd5009cf83279bced273.js",
+  "/some-static-place/main-d3a461a5fa462c2c9ec9.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -68,8 +68,8 @@ exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
     "/some-static-place/runtime-86b0612520998a189dfa.js",
-    "/some-static-place/vendors~main-2d92e57430dea49b3830.js",
-    "/some-static-place/main-3bf33a2ff729380f896f.js",
+    "/some-static-place/vendors~main-cd5009cf83279bced273.js",
+    "/some-static-place/main-d3a461a5fa462c2c9ec9.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -126,9 +126,9 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-3bf33a2ff729380f896f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d3a461a5fa462c2c9ec9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-86b0612520998a189dfa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-2d92e57430dea49b3830.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-cd5009cf83279bced273.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

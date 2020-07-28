@@ -60,24 +60,56 @@ class SkuWebpackPlugin {
       {
         test: TYPESCRIPT,
         include: this.include,
-        use: makeJsLoaders({
-          target,
-          lang: 'ts',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-        }),
+        oneOf: [
+          {
+            compiler: 'treat-webpack-loader',
+            use: makeJsLoaders({
+              target: 'node',
+              lang: 'ts',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot: false,
+            }),
+          },
+          {
+            use: makeJsLoaders({
+              target,
+              lang: 'ts',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot,
+            }),
+          },
+        ],
       },
       {
         test: JAVASCRIPT,
         include: this.include,
-        use: makeJsLoaders({
-          target,
-          lang: 'js',
-          supportedBrowsers,
-          displayNamesProd,
-          removeAssertionsInProduction,
-        }),
+        oneOf: [
+          {
+            compiler: 'treat-webpack-loader',
+            use: makeJsLoaders({
+              target: 'node',
+              lang: 'js',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot: false,
+            }),
+          },
+          {
+            use: makeJsLoaders({
+              target,
+              lang: 'js',
+              supportedBrowsers,
+              displayNamesProd,
+              removeAssertionsInProduction,
+              hot,
+            }),
+          },
+        ],
       },
       {
         test: LESS,
@@ -144,6 +176,7 @@ class SkuWebpackPlugin {
       libraryName,
       supportedBrowsers,
       MiniCssExtractPlugin,
+      hot,
     }).apply(compiler);
   }
 }

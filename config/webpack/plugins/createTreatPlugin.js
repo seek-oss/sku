@@ -1,6 +1,18 @@
 const TreatPlugin = require('treat/webpack-plugin');
 
-const braidThemes = ['wireframe', 'jobStreet', 'seekAnz', 'seekAsia'];
+const braidThemes = [
+  'apac',
+  'jobStreet',
+  'jobStreetClassic',
+  'jobsDb',
+  'seekAnz',
+  'seekBusiness',
+  'seekUnifiedBeta',
+  'occ',
+  'catho',
+  'docs',
+  'wireframe',
+];
 
 module.exports = ({
   target,
@@ -9,6 +21,7 @@ module.exports = ({
   libraryName,
   supportedBrowsers,
   MiniCssExtractPlugin,
+  hot,
 }) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';
 
@@ -39,9 +52,18 @@ module.exports = ({
       include,
     },
     outputCSS: target === 'browser',
-    outputLoaders: [MiniCssExtractPlugin.loader],
+    outputLoaders: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          hmr: hot,
+          reloadAll: true,
+        },
+      },
+    ],
     localIdentName,
     themeIdentName,
     browsers: supportedBrowsers,
+    hmr: hot,
   });
 };

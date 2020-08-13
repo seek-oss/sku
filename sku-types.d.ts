@@ -18,13 +18,13 @@ interface RenderDocumentProps<App> extends RenderAppProps {
 }
 
 export interface Render<App = string> {
-  renderApp(p: RenderAppProps): App;
+  renderApp(p: RenderAppProps): Promise<App> | App;
 
   provideClientContext?(p: {
     environment: string;
     site: string;
     app: App;
-  }): object;
+  }): Promise<object> | object;
 
-  renderDocument(p: RenderDocumentProps<App>): string;
+  renderDocument(p: RenderDocumentProps<App>): Promise<string> | string;
 }

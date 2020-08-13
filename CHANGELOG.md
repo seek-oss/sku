@@ -1,5 +1,11 @@
 # sku
 
+## 10.5.1
+
+### Patch Changes
+
+- Add async render types ([#529](https://github.com/seek-oss/sku/pull/529))
+
 ## 10.5.0
 
 ### Minor Changes

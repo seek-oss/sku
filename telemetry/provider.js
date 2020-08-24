@@ -6,13 +6,21 @@ let provider = {
   count: noop,
   timing: noop,
   addGlobalTags: noop,
+  gauge: noop,
   close: noop,
 };
 
 try {
   if (process.env.SKU_TELEMETRY !== 'false') {
     // eslint-disable-next-line import/no-unresolved
-    provider = require('@seek/sku-telemetry').default({});
+    const realProvider = require('@seek/sku-telemetry').default({});
+
+    // For backwards compat with older versions of @seek/sku-telemetry
+    if (typeof realProvider.gauge !== 'function') {
+      realProvider.gauge = noop;
+    }
+
+    provider = realProvider;
   }
 } catch (e) {
   banner('warning', '@seek/sku-telemetry not installed', [

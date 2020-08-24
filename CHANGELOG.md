@@ -1,5 +1,11 @@
 # sku
 
+## 10.5.2
+
+### Patch Changes
+
+- Add tracking for CSS file types ([#531](https://github.com/seek-oss/sku/pull/531))
+
 ## 10.5.1
 
 ### Patch Changes

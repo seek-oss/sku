@@ -1,5 +1,11 @@
 # sku
 
+## 10.5.3
+
+### Patch Changes
+
+- Allow force exiting build script ([#533](https://github.com/seek-oss/sku/pull/533))
+
 ## 10.5.2
 
 ### Patch Changes

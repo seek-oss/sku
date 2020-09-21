@@ -8,7 +8,7 @@ interface RenderAppProps {
   libraryName: string;
   SkuProvider: ComponentType;
   // Webpack use an any here. PR for better type welcome.
-  webpackStats: object;
+  webpackStats: any;
 }
 
 interface RenderDocumentProps<App> extends RenderAppProps {
@@ -24,7 +24,7 @@ export interface Render<App = string> {
     environment: string;
     site: string;
     app: App;
-  }): Promise<object> | object;
+  }): Promise<any> | any;
 
   renderDocument(p: RenderDocumentProps<App>): Promise<string> | string;
 }

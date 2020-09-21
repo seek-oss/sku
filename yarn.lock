@@ -6307,10 +6307,10 @@ eslint-config-prettier@^6.11.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-seek@^7.0.4:
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-7.0.4.tgz#3348422b7898d75110124a42c907a11b59a3dca1"
-  integrity sha512-7cLzfFgvD++UZQFAy+DTYqR82kbh18V6ywSBkrGcrRAkJyOUy4198lU7ETuti/UoSU7Q933n+RyO6BlxIDfzbA==
+eslint-config-seek@^7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-seek/-/eslint-config-seek-7.0.5.tgz#f20ed7ebed41ca6af6a0857208b5a0f8fee12fd1"
+  integrity sha512-pHa0xZtcY555gE+Vgb7qQi9JEJH9zpZW3RxHuEK8NPUv7y9BgG84/K5YrCtFwer82ZmfRcU0l7KrCrJXjUiVKw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.9.1"
     "@typescript-eslint/parser" "^3.9.1"

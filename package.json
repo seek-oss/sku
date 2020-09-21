@@ -110,7 +110,7 @@
     "env-ci": "^5.0.0",
     "escape-string-regexp": "^2.0.0",
     "eslint": "^7.9.0",
-    "eslint-config-seek": "^7.0.4",
+    "eslint-config-seek": "^7.0.5",
     "eval": "^0.1.4",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",

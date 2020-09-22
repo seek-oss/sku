@@ -5,8 +5,6 @@ enum Message {
   Goodbye = 'Goodbye World',
 }
 
-export const messageRenderer = (): Message => {
-  return Message.Hello;
-};
+export const messageRenderer = (): Message => Message.Hello;
 
 export default () => <div>{messageRenderer()}</div>;

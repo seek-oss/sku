@@ -1,5 +1,11 @@
 # sku
 
+## 10.5.4
+
+### Patch Changes
+
+- Update to TypeScript 4 and ESLint 7 ([#535](https://github.com/seek-oss/sku/pull/535))
+
 ## 10.5.3
 
 ### Patch Changes

@@ -190,7 +190,7 @@
     "jsonc-parser": "^2.1.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.6.0",
-    "puppeteer": "^3.0.0",
+    "puppeteer": "^5.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",

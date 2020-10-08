@@ -17,6 +17,7 @@ const {
   initialPath,
   paths,
   routes,
+  sites,
   isLibrary,
   httpsDevServer,
   useDevServerMiddleware,
@@ -89,7 +90,16 @@ const hot = process.env.SKU_HOT !== 'false';
         }
       }
       app.get('*', (req, res, next) => {
-        const matchingRoute = routes.find(({ route }) => {
+        const matchingSiteName = getSiteForHost(req.hostname);
+
+        const matchingRoute = routes.find(({ route, siteIndex }) => {
+          if (
+            typeof siteIndex === 'number' &&
+            matchingSiteName !== sites[siteIndex].name
+          ) {
+            return false;
+          }
+
           const normalisedRoute = route
             .split('/')
             .map((part) => {
@@ -113,7 +123,7 @@ const hot = process.env.SKU_HOT !== 'false';
           .renderWhenReady({
             route: matchingRoute.route,
             routeName: matchingRoute.name,
-            site: getSiteForHost(req.hostname),
+            site: matchingSiteName,
             environment,
           })
           .then((html) => res.send(html))

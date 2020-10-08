@@ -28,9 +28,25 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
-const normalizedRoutes = skuConfig.routes.map((route) =>
-  typeof route === 'string' ? { route } : route,
-);
+const normalizeRoute = (route) =>
+  typeof route === 'string' ? { route } : route;
+
+const normalizedRoutes = skuConfig.routes.map(normalizeRoute);
+
+skuConfig.sites.forEach((site, siteIndex) => {
+  if (site.routes) {
+    normalizedRoutes.push(
+      ...site.routes.map((route) => ({
+        ...normalizeRoute(route),
+        siteIndex,
+      })),
+    );
+  }
+});
+
+if (normalizedRoutes.length === 0) {
+  normalizedRoutes.push({ name: 'default', route: '/' });
+}
 
 const startTransformPath = ({ site = '', route = '' }) =>
   path.join(site, route);

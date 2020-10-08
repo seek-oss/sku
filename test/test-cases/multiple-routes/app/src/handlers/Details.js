@@ -1,37 +1,27 @@
-/* eslint react/no-did-mount-set-state: off */
 import styles from './Details.less';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '../../../../../../@loadable/component';
+import { useParams } from 'react-router-dom';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));
 
-export default class Details extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      id: null,
-    };
-  }
+export default function Details({ site }) {
+  const { id } = useParams();
+  const [detailsId, setDetailsId] = useState();
+  const message = `Welcome to the Details page - ${site}`;
 
-  componentDidMount() {
-    this.setState({
-      id: window.location.pathname.substr(
-        window.location.pathname.lastIndexOf('/') + 1,
-      ),
-    });
-  }
+  useEffect(() => {
+    if (id) {
+      setDetailsId(id);
+    }
+  }, []);
 
-  render() {
-    const { id } = this.state;
-    const message = `Welcome to the Details page - ${this.props.site}`;
-
-    return (
-      <h1 className={styles.root}>
-        {message}
-        {id && `ID: ${id}`}
-        <AsyncComponent />
-      </h1>
-    );
-  }
+  return (
+    <h1 className={styles.root}>
+      {message}
+      {detailsId && `ID: ${detailsId}`}
+      <AsyncComponent />
+    </h1>
+  );
 }

@@ -9,7 +9,7 @@ module.exports = {
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',
   libraryEntry: null,
-  routes: [{ name: 'default', route: '/' }],
+  routes: [],
   sites: [],
   environments: [],
   transformOutputPath: ({ environment = '', site = '', route = '' }) =>

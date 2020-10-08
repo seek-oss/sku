@@ -48,10 +48,10 @@ const getStartRoutes = () => {
 const getBuildRoutes = () => {
   const allRouteCombinations = [];
 
-  const hackEnvs = environments.length > 0 ? environments : [undefined];
-  const hackSites = sites.length > 0 ? sites : [undefined];
+  const forcedEnvs = environments.length > 0 ? environments : [undefined];
+  const forcedSites = sites.length > 0 ? sites : [undefined];
 
-  for (const environment of hackEnvs) {
+  for (const environment of forcedEnvs) {
     for (const route of routes) {
       if (typeof route.siteIndex === 'number') {
         allRouteCombinations.push({
@@ -61,12 +61,11 @@ const getBuildRoutes = () => {
         });
       } else {
         allRouteCombinations.push(
-          ...hackSites.map((site) => ({ site, route, environment })),
+          ...forcedSites.map((site) => ({ site, route, environment })),
         );
       }
     }
   }
-  console.log(allRouteCombinations);
 
   return allRouteCombinations.map(({ route, site = {}, ...rest }) => ({
     ...rest,
@@ -77,15 +76,13 @@ const getBuildRoutes = () => {
 };
 
 module.exports = () => {
-  const theRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
-
-  console.log(theRoutes);
-
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
+  const allRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
+
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
-    routes: theRoutes,
+    routes: allRoutes,
     skipAssets: isStartScript,
     transformFilePath: transformOutputPath,
     mapStatsToParams,

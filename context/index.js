@@ -36,12 +36,10 @@ const normalizedRoutes = skuConfig.routes.map(normalizeRoute);
 skuConfig.sites.forEach((site, siteIndex) => {
   if (site.routes) {
     normalizedRoutes.push(
-      ...site.routes.map((route) => {
-        return {
-          ...normalizeRoute(route),
-          siteIndex,
-        };
-      }),
+      ...site.routes.map((route) => ({
+        ...normalizeRoute(route),
+        siteIndex,
+      })),
     );
   }
 });

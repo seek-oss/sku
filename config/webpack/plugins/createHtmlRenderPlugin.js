@@ -1,7 +1,6 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 const memoize = require('memoizee/weak');
 
-const product = require('../../../lib/product');
 const {
   isStartScript,
   paths,
@@ -28,42 +27,65 @@ const mapStatsToParams = ({ webpackStats }) => {
 };
 
 const getStartRoutes = () => {
-  // product creates a new array featuring every possible combination
-  // of parameters. This is used to ensure we have a specific HTML file for
-  // every combination of site & route. Environment is always the
-  // first option in start mode.
-  return product({
-    site: sites,
-    route: routes,
-  }).map(({ route, site = {} }) => ({
-    environment: environments.length > 0 ? environments[0] : undefined, // eslint-disable-line no-undefined
+  const allRouteCombinations = [];
+
+  for (const route of routes) {
+    if (typeof route.siteIndex === 'number') {
+      allRouteCombinations.push({ route, site: sites[route.siteIndex] });
+    } else {
+      allRouteCombinations.push(...sites.map((site) => ({ site, route })));
+    }
+  }
+
+  return allRouteCombinations.map(({ route, site = {} }) => ({
+    environment: environments.length > 0 ? environments[0] : undefined,
     site: site.name,
     routeName: route.name,
     route: route.route,
   }));
 };
 
-const getBuildRoutes = () =>
-  // product creates a new array featuring every possible combination
-  // of parameters. This is used to ensure we have a specific HTML file for
-  // every combination of site, environment & route
-  product({
-    environment: environments,
-    site: sites,
-    route: routes,
-  }).map(({ route, site = {}, ...rest }) => ({
+const getBuildRoutes = () => {
+  const allRouteCombinations = [];
+
+  const hackEnvs = environments.length > 0 ? environments : [undefined];
+  const hackSites = sites.length > 0 ? sites : [undefined];
+
+  for (const environment of hackEnvs) {
+    for (const route of routes) {
+      if (typeof route.siteIndex === 'number') {
+        allRouteCombinations.push({
+          route,
+          site: sites[route.siteIndex],
+          environment,
+        });
+      } else {
+        allRouteCombinations.push(
+          ...hackSites.map((site) => ({ site, route, environment })),
+        );
+      }
+    }
+  }
+  console.log(allRouteCombinations);
+
+  return allRouteCombinations.map(({ route, site = {}, ...rest }) => ({
     ...rest,
     site: site.name,
     routeName: route.name,
     route: route.route,
   }));
+};
 
 module.exports = () => {
+  const theRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
+
+  console.log(theRoutes);
+
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
-    routes: isStartScript ? getStartRoutes() : getBuildRoutes(),
+    routes: theRoutes,
     skipAssets: isStartScript,
     transformFilePath: transformOutputPath,
     mapStatsToParams,

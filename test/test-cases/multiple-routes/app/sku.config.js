@@ -1,6 +1,22 @@
 module.exports = {
-  routes: ['/', '/details/$id'],
-  sites: ['au', 'nz'],
+  sites: [
+    {
+      name: 'au',
+      host: 'dev.seek.com.au',
+      routes: [
+        { route: '/', name: 'home' },
+        { route: '/details/$id', name: 'details' },
+      ],
+    },
+    {
+      name: 'nz',
+      routes: [
+        { route: '/nz', name: 'home' },
+        { route: '/nz/details/$id', name: 'details' },
+      ],
+      host: 'dev.seek.co.nz',
+    },
+  ],
   environments: ['production'],
   port: 8202,
   publicPath: '/static/place',

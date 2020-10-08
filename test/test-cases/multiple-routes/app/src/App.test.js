@@ -7,7 +7,7 @@ describe('multiple-routes', () => {
   it('should support loadable components', () => {
     const { container } = render(
       <StaticRouter location="/" context={{}}>
-        <App site="AU" />
+        <App site="au" />
       </StaticRouter>,
     );
 

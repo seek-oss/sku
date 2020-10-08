@@ -2,6 +2,25 @@ const Validator = require('fastest-validator');
 
 const validator = new Validator();
 
+const routes = {
+  type: 'array',
+  items: [
+    { type: 'string' },
+    {
+      type: 'object',
+      props: {
+        route: {
+          type: 'string',
+        },
+        name: {
+          type: 'string',
+          optional: true,
+        },
+      },
+    },
+  ],
+};
+
 module.exports = validator.compile({
   clientEntry: {
     type: 'string',
@@ -16,25 +35,7 @@ module.exports = validator.compile({
     type: 'string',
     optional: true,
   },
-  routes: {
-    type: 'array',
-    items: [
-      { type: 'string' },
-      {
-        type: 'object',
-        props: {
-          route: {
-            type: 'string',
-          },
-          name: {
-            type: 'string',
-            optional: true,
-          },
-        },
-      },
-    ],
-    min: 1,
-  },
+  routes,
   sites: {
     type: 'array',
     items: [
@@ -44,6 +45,7 @@ module.exports = validator.compile({
         props: {
           name: { type: 'string' },
           host: { type: 'string', optional: true },
+          routes: { ...routes, optional: true },
         },
       },
     ],

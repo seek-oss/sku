@@ -1,5 +1,37 @@
 # sku
 
+## 10.6.0
+
+### Minor Changes
+
+- Support site specific routes ([#537](https://github.com/seek-oss/sku/pull/537))
+
+  Configured sites can now contain routes which are specific that site. This is useful for cross-brand applications that have different URLs.
+
+  ```js
+  // sku.config.js
+  module.exports = {
+    sites: [
+      {
+        name: 'alpha',
+        host: 'dev.alpha.com.au',
+        routes: [
+          { route: '/', name: 'home' },
+          { route: '/details', name: 'details' },
+        ],
+      },
+      {
+        name: 'beta',
+        host: 'dev.beta.com.au',
+        routes: [
+          { route: '/home', name: 'home' },
+          { route: '/my-details', name: 'details' },
+        ],
+      },
+    ],
+  };
+  ```
+
 ## 10.5.4
 
 ### Patch Changes

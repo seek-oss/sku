@@ -356,6 +356,12 @@ type `string`
 
 The file that exports a component that wraps each frame within Playroom.
 
+## playroomScope
+
+type `string`
+
+The file that exports a function that provides a custom scope object.
+
 ## playroomWidths
 
 type `Array<number>`

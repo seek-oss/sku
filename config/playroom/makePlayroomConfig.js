@@ -35,6 +35,7 @@ module.exports = () =>
       themes: paths.playroomThemes,
       snippets: paths.playroomSnippets,
       frameComponent: paths.playroomFrameComponent,
+      scope: paths.playroomScope,
       openBrowser: process.env.OPEN_TAB !== 'false',
       ...playroom,
       webpackConfig: () => ({

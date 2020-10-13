@@ -17,6 +17,7 @@ module.exports = {
   playroomThemes: './src/themes.js',
   playroomSnippets: './playroom/snippets.js',
   playroomFrameComponent: './playroom/FrameComponent.js',
+  playroomScope: './playroom/scope.js',
 };
 ```
 

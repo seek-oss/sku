@@ -42,6 +42,7 @@ module.exports = {
   playroomThemes: null,
   playroomSnippets: null,
   playroomFrameComponent: null,
+  playroomScope: null,
   playroomTitle: null,
   playroomPort: 8082,
   playroomParamType: null,

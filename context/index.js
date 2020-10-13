@@ -121,6 +121,9 @@ const paths = {
   playroomFrameComponent: skuConfig.playroomFrameComponent
     ? getPathFromCwd(skuConfig.playroomFrameComponent)
     : null,
+  playroomScope: skuConfig.playroomScope
+    ? getPathFromCwd(skuConfig.playroomScope)
+    : null,
 };
 
 module.exports = {

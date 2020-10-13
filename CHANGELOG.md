@@ -1,5 +1,35 @@
 # sku
 
+## 10.7.0
+
+### Minor Changes
+
+- **Playroom:** Update to v0.22.0, add `playroomScope` option ([#539](https://github.com/seek-oss/sku/pull/539))
+
+  You can now use Playroom's new custom scope feature by providing a `playroomScope` file.
+
+  **EXAMPLE USAGE**
+
+  sku.config.js:
+
+  ```js
+  module.exports = {
+    playroomScope: './playroom/useScope.ts',
+  };
+  ```
+
+  useScope.ts:
+
+  ```js
+  import { useToast } from 'braid-design-system';
+
+  export default function useScope() {
+    return {
+      showToast: useToast(),
+    };
+  }
+  ```
+
 ## 10.6.0
 
 ### Minor Changes

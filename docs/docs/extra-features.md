@@ -13,7 +13,18 @@ Source maps are enabled by default when running the `sku start` command. However
 
 ## Compile packages
 
-Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that this toolkit provides. A great example of this is [seek-style-guide](https://github.com/seek-oss/seek-style-guide). Out of the box sku supports loading the seek-style-guide but if you need to treat other packages in this way you can use `compilePackages`.
+Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that sku provides. A great example of this is [braid](https://github.com/seek-oss/braid-design-system). Out of the box, sku supports loading braid but if you need to treat other packages this way you can use `compilePackages`.
+
+The best way to configure a package as a `compilePackage`, is to set `"skuCompilePackage": true` in the **packages** `package.json`. This method only works for `@seek` scoped packages.
+
+```json
+{
+  "name": "@seek/my-package",
+  "skuCompilePackage": true
+}
+```
+
+Alternatively, you can add any packages you like to the `compilePackages` option in **consuming app** sku config file.
 
 ```js
 module.exports = {
@@ -21,7 +32,7 @@ module.exports = {
 };
 ```
 
-Any `node_modules` passed into this option will be compiled through webpack as if they are part of your app.
+Any `node_modules` marked as a `compilePackage` will be compiled through webpack as if they are part of your app.
 
 ## Polyfills
 

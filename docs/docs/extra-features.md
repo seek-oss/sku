@@ -24,7 +24,7 @@ The best way to configure a package as a `compilePackage`, is to set `"skuCompil
 }
 ```
 
-Alternatively, you can add any packages you like to the `compilePackages` option in **consuming app** sku config file.
+Alternatively, you can add any packages you like to the `compilePackages` option in the **consuming app** sku config file.
 
 ```js
 module.exports = {

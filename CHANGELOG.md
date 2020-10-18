@@ -1,5 +1,11 @@
 # sku
 
+## 10.7.1
+
+### Patch Changes
+
+- Automatically detect compile packages with @seek scope ([#541](https://github.com/seek-oss/sku/pull/541))
+
 ## 10.7.0
 
 ### Minor Changes

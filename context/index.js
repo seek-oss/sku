@@ -9,6 +9,15 @@ const defaultCompilePackages = require('./defaultCompilePackages');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
+const isCompilePackage = () => {
+  try {
+    return Boolean(require(getPathFromCwd('package.json')).skuCompilePackage);
+  } catch (e) {
+    // Assume false if no package.json
+    return false;
+  }
+};
+
 const appSkuConfig = fs.existsSync(appSkuConfigPath)
   ? require(appSkuConfigPath)
   : {};
@@ -166,4 +175,5 @@ module.exports = {
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   httpsDevServer: skuConfig.httpsDevServer,
   useDevServerMiddleware,
+  isCompilePackage: isCompilePackage(),
 };

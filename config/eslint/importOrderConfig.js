@@ -1,14 +1,18 @@
 const path = require('path');
-const { paths } = require('../../context');
+const { paths, isCompilePackage } = require('../../context');
 
 const internalRegex = `^(${paths.src
   .map((srcPath) => path.basename(srcPath))
   .join('|')})/`;
 
-module.exports = {
+const rootResolutionConfig = {
   settings: {
     'import/internal-regex': internalRegex,
   },
+};
+
+module.exports = {
+  ...(!isCompilePackage ? rootResolutionConfig : undefined),
   rules: {
     'import/order': [
       'error',

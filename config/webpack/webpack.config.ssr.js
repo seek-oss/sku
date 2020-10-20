@@ -29,6 +29,7 @@ const {
   cspExtraScriptSrcHosts,
   httpsDevServer,
   useDevServerMiddleware,
+  isCompilePackage,
 } = require('../../context');
 
 const makeWebpackConfig = ({
@@ -185,6 +186,7 @@ const makeWebpackConfig = ({
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
+          rootResolution: !isCompilePackage,
         }),
         ...(isDevServer
           ? [
@@ -283,6 +285,7 @@ const makeWebpackConfig = ({
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
+          rootResolution: !isCompilePackage,
         }),
       ].concat(
         isDevServer

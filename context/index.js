@@ -1,11 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
+const isCompilePackage = require('../lib/isCompilePackage');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
 
@@ -19,6 +21,17 @@ const skuConfig = {
 };
 
 validateConfig(skuConfig);
+
+if (isCompilePackage && skuConfig.rootResolution) {
+  console.log(
+    chalk.red(
+      `Error: "${chalk.bold(
+        'rootResolution',
+      )}" is not safe for compile packages as consuming apps can't resolve them.`,
+    ),
+  );
+  process.exit(1);
+}
 
 const env = {
   ...skuConfig.env,
@@ -166,4 +179,5 @@ module.exports = {
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   httpsDevServer: skuConfig.httpsDevServer,
   useDevServerMiddleware,
+  rootResolution: skuConfig.rootResolution,
 };

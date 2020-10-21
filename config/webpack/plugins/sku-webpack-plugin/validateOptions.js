@@ -62,6 +62,10 @@ const schema = {
     type: 'boolean',
     optional: true,
   },
+  rootResolution: {
+    type: 'boolean',
+    optional: true,
+  },
 };
 
 const validate = validator.compile(schema);

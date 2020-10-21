@@ -29,6 +29,7 @@ class SkuWebpackPlugin {
       generateCSSTypes: false,
       supportedBrowsers: defaultSupportedBrowsers,
       compilePackages: [],
+      rootResolution: false,
       ...options,
     };
     this.compilePackages = uniq([
@@ -52,6 +53,7 @@ class SkuWebpackPlugin {
       displayNamesProd,
       removeAssertionsInProduction,
       MiniCssExtractPlugin,
+      rootResolution,
     } = this.options;
 
     const isProductionBuild = mode === 'production';
@@ -70,6 +72,7 @@ class SkuWebpackPlugin {
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
+              rootResolution,
             }),
           },
           {
@@ -80,6 +83,7 @@ class SkuWebpackPlugin {
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
+              rootResolution,
             }),
           },
         ],
@@ -97,6 +101,7 @@ class SkuWebpackPlugin {
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
+              rootResolution,
             }),
           },
           {
@@ -107,6 +112,7 @@ class SkuWebpackPlugin {
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
+              rootResolution,
             }),
           },
         ],

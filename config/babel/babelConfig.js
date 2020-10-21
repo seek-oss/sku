@@ -7,6 +7,7 @@ module.exports = ({
   displayNamesProd = false,
   removeAssertionsInProduction = true,
   hot = false,
+  rootResolution = false,
 }) => {
   const browserEnvOptions = {
     modules: false,
@@ -35,7 +36,10 @@ module.exports = ({
     require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
     [
       require.resolve('babel-plugin-module-resolver'),
-      { root: [cwd()], extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'] },
+      {
+        root: rootResolution ? [cwd()] : undefined,
+        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+      },
     ],
     require.resolve('@babel/plugin-transform-runtime'),
     require.resolve('babel-plugin-macros'),

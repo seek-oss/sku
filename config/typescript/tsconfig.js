@@ -1,5 +1,5 @@
 const { cwd, getPathFromCwd } = require('../../lib/cwd');
-const { paths, isCompilePackage } = require('../../context');
+const { paths, rootResolution } = require('../../context');
 
 module.exports = () => {
   const config = {
@@ -25,7 +25,7 @@ module.exports = () => {
     exclude: [getPathFromCwd('node_modules')],
   };
 
-  if (!isCompilePackage) {
+  if (rootResolution) {
     config.compilerOptions.paths = {
       '*': ['*'],
     };

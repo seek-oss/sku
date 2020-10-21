@@ -1,8 +1,8 @@
 const babelJest = require('babel-jest');
 
-const { isCompilePackage } = require('../../context');
+const { rootResolution } = require('../../context');
 const babelConfig = require('../babel/babelConfig');
 
 module.exports = babelJest.createTransformer(
-  babelConfig({ target: 'jest', rootResolution: !isCompilePackage }),
+  babelConfig({ target: 'jest', rootResolution }),
 );

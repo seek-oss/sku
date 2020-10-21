@@ -174,4 +174,7 @@ module.exports = validator.compile({
     type: 'string',
     optional: true,
   },
+  rootResolution: {
+    type: 'boolean',
+  },
 });

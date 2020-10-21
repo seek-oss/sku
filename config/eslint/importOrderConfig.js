@@ -1,5 +1,5 @@
 const path = require('path');
-const { paths, isCompilePackage } = require('../../context');
+const { paths, rootResolution } = require('../../context');
 
 const internalRegex = `^(${paths.src
   .map((srcPath) => path.basename(srcPath))
@@ -12,7 +12,7 @@ const rootResolutionConfig = {
 };
 
 module.exports = {
-  ...(!isCompilePackage ? rootResolutionConfig : undefined),
+  ...(rootResolution ? rootResolutionConfig : undefined),
   rules: {
     'import/order': [
       'error',

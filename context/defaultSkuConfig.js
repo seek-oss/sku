@@ -1,6 +1,7 @@
 const supportedBrowsers = require('browserslist-config-seek');
 const path = require('path');
 const isTypeScript = require('../lib/isTypeScript');
+const isCompilePackage = require('../lib/isCompilePackage');
 
 const defaultDecorator = (a) => a;
 
@@ -51,4 +52,5 @@ module.exports = {
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
   devServerMiddleware: null,
+  rootResolution: !isCompilePackage,
 };

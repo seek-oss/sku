@@ -1,22 +1,15 @@
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
+const isCompilePackage = require('../lib/isCompilePackage');
 
 const appSkuConfigPath = getPathFromCwd(args.config);
-
-const isCompilePackage = () => {
-  try {
-    return Boolean(require(getPathFromCwd('package.json')).skuCompilePackage);
-  } catch (e) {
-    // Assume false if no package.json
-    return false;
-  }
-};
 
 const appSkuConfig = fs.existsSync(appSkuConfigPath)
   ? require(appSkuConfigPath)
@@ -28,6 +21,16 @@ const skuConfig = {
 };
 
 validateConfig(skuConfig);
+
+if (isCompilePackage && skuConfig.rootResolution) {
+  console.log(
+    chalk.yellow(
+      `Warning: ${bold(
+        'rootResolution',
+      )} imports are not safe for compile packages as consuming apps can't resolve them.`,
+    ),
+  );
+}
 
 const env = {
   ...skuConfig.env,
@@ -175,5 +178,5 @@ module.exports = {
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   httpsDevServer: skuConfig.httpsDevServer,
   useDevServerMiddleware,
-  isCompilePackage: isCompilePackage(),
+  rootResolution: skuConfig.rootResolution,
 };

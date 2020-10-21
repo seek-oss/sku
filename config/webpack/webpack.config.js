@@ -32,7 +32,7 @@ const {
   displayNamesProd,
   cspEnabled,
   cspExtraScriptSrcHosts,
-  isCompilePackage,
+  rootResolution,
 } = config;
 
 // port is only required for dev builds
@@ -242,7 +242,7 @@ const makeWebpackConfig = ({
           displayNamesProd,
           removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
-          rootResolution: !isCompilePackage,
+          rootResolution,
         }),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
@@ -304,7 +304,7 @@ const makeWebpackConfig = ({
           displayNamesProd,
           removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
-          rootResolution: !isCompilePackage,
+          rootResolution,
         }),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]

@@ -24,12 +24,13 @@ validateConfig(skuConfig);
 
 if (isCompilePackage && skuConfig.rootResolution) {
   console.log(
-    chalk.yellow(
-      `Warning: ${bold(
+    chalk.red(
+      `Error: "${chalk.bold(
         'rootResolution',
-      )} imports are not safe for compile packages as consuming apps can't resolve them.`,
+      )}" is not safe for compile packages as consuming apps can't resolve them.`,
     ),
   );
+  process.exit(1);
 }
 
 const env = {

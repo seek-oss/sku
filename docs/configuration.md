@@ -392,6 +392,14 @@ Default: `dist-playroom`
 
 The directory `sku build-playroom` will output files to.
 
+## rootResolution
+
+type `boolean`
+
+Default: `true` (if `"skuCompilePackage": true` then `false`)
+
+Configures whether imports from the root of the repo are enabled.
+
 ## supportedBrowsers
 
 type `browserslist-query`

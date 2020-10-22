@@ -1,5 +1,15 @@
 # sku
 
+## 10.8.0
+
+### Minor Changes
+
+- Add rootResolution config option and disable for compile packages ([#543](https://github.com/seek-oss/sku/pull/543))
+
+  By default, sku allows you to import modules from the root folder of your repo. e.g. `import something from 'src/modules/something'`. Unfortunately, these kinds of imports only work for apps. In packages, the imports will work locally, but fail when consumed from `node_modules`.
+
+  Adding `"skuCompilePackage": true` to your `package.json` will now disable this behaviour by default. You can also toggle the behaviour by setting `rootResolution` in your sku config.
+
 ## 10.7.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # sku
 
+## 10.8.2
+
+### Patch Changes
+
+- Fix \_addChunk ([#549](https://github.com/seek-oss/sku/pull/549))
+
 ## 10.8.1
 
 ### Patch Changes

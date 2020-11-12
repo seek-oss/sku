@@ -32,7 +32,7 @@ export default async (renderParams) => {
   if (render.renderApp) {
     app = await render.renderApp({
       ...renderContext,
-      _addChunk: extractor.addChunk,
+      _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
     });
   }

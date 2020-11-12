@@ -1,5 +1,11 @@
 # sku
 
+## 10.8.1
+
+### Patch Changes
+
+- Expose \_addChunks function in renderApp ([#547](https://github.com/seek-oss/sku/pull/547))
+
 ## 10.8.0
 
 ### Minor Changes

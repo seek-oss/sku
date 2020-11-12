@@ -1,17 +1,21 @@
 import { ComponentType } from 'react';
 
-interface RenderAppProps {
+interface SharedRenderProps {
   routeName: string;
   route: string;
   environment: string;
   site: string;
   libraryName: string;
-  SkuProvider: ComponentType;
   // Webpack use an any here. PR for better type welcome.
   webpackStats: any;
 }
 
-interface RenderDocumentProps<App> extends RenderAppProps {
+interface RenderAppProps extends SharedRenderProps {
+  SkuProvider: ComponentType;
+  _addChunk: (chunkName: string) => void;
+}
+
+interface RenderDocumentProps<App> extends SharedRenderProps {
   app: App;
   headTags: string;
   bodyTags: string;

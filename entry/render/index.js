@@ -23,7 +23,7 @@ export default async (renderParams) => {
 
   const { webpackStats } = renderContext;
 
-  const { SkuProvider, getBodyTags, getHeadTags } = makeExtractor(
+  const { SkuProvider, getBodyTags, getHeadTags, extractor } = makeExtractor(
     webpackStats,
     publicPath,
   );
@@ -32,6 +32,7 @@ export default async (renderParams) => {
   if (render.renderApp) {
     app = await render.renderApp({
       ...renderContext,
+      _addChunk: extractor.addChunk,
       SkuProvider,
     });
   }

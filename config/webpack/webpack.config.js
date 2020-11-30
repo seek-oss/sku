@@ -11,6 +11,7 @@ const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
+const VocabWebpackPlugin = require('@vocab/webpack').default;
 
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
@@ -33,6 +34,7 @@ const {
   cspEnabled,
   cspExtraScriptSrcHosts,
   rootResolution,
+  languages,
 } = config;
 
 // port is only required for dev builds
@@ -47,6 +49,8 @@ const makeWebpackConfig = ({
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
+
+  const isMultiLanguageMode = Boolean(languages);
 
   const envVars = lodash
     .chain(env)
@@ -247,6 +251,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
+        ...(isMultiLanguageMode ? [new VocabWebpackPlugin()] : []),
       ],
     },
     {
@@ -309,6 +314,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
+        ...(isMultiLanguageMode ? [new VocabWebpackPlugin()] : []),
       ],
     },
   ].map(webpackDecorator);

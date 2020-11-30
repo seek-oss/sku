@@ -177,4 +177,14 @@ module.exports = validator.compile({
   rootResolution: {
     type: 'boolean',
   },
+  languages: {
+    type: 'array',
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: { name: { type: 'string', extends: { type: 'string' } } },
+      },
+    ],
+  },
 });

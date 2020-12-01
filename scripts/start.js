@@ -124,6 +124,7 @@ const hot = process.env.SKU_HOT !== 'false';
             route: matchingRoute.route,
             routeName: matchingRoute.name,
             site: matchingSiteName,
+            language: matchingRoute.language,
             environment,
           })
           .then((html) => res.send(html))

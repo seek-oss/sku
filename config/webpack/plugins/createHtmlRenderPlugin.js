@@ -53,6 +53,7 @@ const getBuildRoutes = () => {
 
   for (const environment of forcedEnvs) {
     for (const route of routes) {
+      console.log({ route });
       if (typeof route.siteIndex === 'number') {
         allRouteCombinations.push({
           route,
@@ -72,6 +73,7 @@ const getBuildRoutes = () => {
     site: site.name,
     routeName: route.name,
     route: route.route,
+    language: route.language,
   }));
 };
 
@@ -79,6 +81,7 @@ module.exports = () => {
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
   const allRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
+  console.log(allRoutes);
 
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,

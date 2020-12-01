@@ -18,6 +18,7 @@ export const serializeConfig = (config) =>
   )}</script>`;
 
 export default async (renderParams) => {
+  console.log({ renderParams });
   const renderContext = { ...renderParams, libraryName };
 
   let app;
@@ -39,7 +40,7 @@ export default async (renderParams) => {
     });
     if (renderContext.language) {
       debug('sku:render:language')(
-        `Using language "${language}" for route "${renderContext.route}"`,
+        `Using language "${renderContext.language}" for route "${renderContext.route}"`,
       );
       extractor.addChunk(getChunkName(renderContext.language));
     } else {

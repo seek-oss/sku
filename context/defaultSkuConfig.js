@@ -53,4 +53,5 @@ module.exports = {
   httpsDevServer: false,
   devServerMiddleware: null,
   rootResolution: !isCompilePackage,
+  languages: null,
 };

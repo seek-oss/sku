@@ -14,7 +14,7 @@ const exitWithErrors = (errors) => {
   errors.forEach((error) => {
     console.log(yellow(emojify(error)));
   });
-  process.exit(1);
+  throw new Error(`An error occurred validing config. See console for errors.`);
 };
 
 module.exports = (skuConfig) => {

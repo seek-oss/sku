@@ -5,6 +5,7 @@ interface SharedRenderProps {
   route: string;
   environment: string;
   site: string;
+  language: string;
   libraryName: string;
   // Webpack use an any here. PR for better type welcome.
   webpackStats: any;

@@ -51,6 +51,10 @@ const makeWebpackConfig = ({
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const isMultiLanguageMode = Boolean(languages);
+  const vocabOptions = {
+    devLanguage: 'en',
+    languages,
+  };
 
   const envVars = lodash
     .chain(env)
@@ -251,7 +255,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
-        ...(isMultiLanguageMode ? [new VocabWebpackPlugin()] : []),
+        ...(isMultiLanguageMode ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
     {
@@ -314,7 +318,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
-        ...(isMultiLanguageMode ? [new VocabWebpackPlugin()] : []),
+        ...(isMultiLanguageMode ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
   ].map(webpackDecorator);

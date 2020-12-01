@@ -178,6 +178,7 @@ module.exports = validator.compile({
     type: 'boolean',
   },
   languages: {
+    optional: true,
     type: 'array',
     items: [
       { type: 'string' },

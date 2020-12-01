@@ -66,6 +66,17 @@ const schema = {
     type: 'boolean',
     optional: true,
   },
+  languages: {
+    optional: true,
+    type: 'array',
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: { name: { type: 'string', extends: { type: 'string' } } },
+      },
+    ],
+  },
 };
 
 const validate = validator.compile(schema);

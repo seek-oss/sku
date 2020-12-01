@@ -51,6 +51,7 @@ const makeWebpackConfig = ({
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const isMultiLanguageMode = Boolean(languages);
+  console.log({ isMultiLanguageMode, languages });
   const vocabOptions = {
     devLanguage: 'en',
     languages,

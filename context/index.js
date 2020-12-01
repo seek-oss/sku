@@ -180,4 +180,5 @@ module.exports = {
   httpsDevServer: skuConfig.httpsDevServer,
   useDevServerMiddleware,
   rootResolution: skuConfig.rootResolution,
+  languages: skuConfig.languages || null,
 };

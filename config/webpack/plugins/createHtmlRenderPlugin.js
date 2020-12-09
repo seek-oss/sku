@@ -1,11 +1,15 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 const memoize = require('memoizee/weak');
+const debug = require('debug');
+
+const { getLanguagesToRender } = require('../../../lib/language-utils');
+
+const log = debug('sku:html-render-plugin');
 
 const {
   isStartScript,
   paths,
   routes,
-  languages,
   environments,
   sites,
   transformOutputPath,
@@ -26,19 +30,6 @@ const mapStatsToParams = ({ webpackStats }) => {
     publicPath,
   };
 };
-
-function getLanguagesToRender({ route }) {
-  const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-  let languagesToRender = [null];
-  if (languages) {
-    if (routeIsForSpecificSite) {
-      languagesToRender = sites[route.siteIndex].languages || languages;
-    } else {
-      languagesToRender = languages;
-    }
-  }
-  return languagesToRender;
-}
 
 const getStartRoutes = () => {
   const allRouteCombinations = [];
@@ -78,7 +69,7 @@ const getBuildRoutes = () => {
     for (const route of routes) {
       const routeIsForSpecificSite = typeof route.siteIndex === 'number';
       for (const language of getLanguagesToRender(route)) {
-        console.log({ route, language });
+        log('Using Route', { route, language });
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({
             route,

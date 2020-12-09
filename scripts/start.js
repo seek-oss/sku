@@ -25,7 +25,7 @@ const {
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
-const getLanguageFromRoute = require('../lib/language-middleware');
+const { getLanguageFromRoute } = require('../lib/language-utils');
 
 const localhost = '0.0.0.0';
 

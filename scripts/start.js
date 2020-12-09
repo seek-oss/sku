@@ -101,7 +101,7 @@ const hot = process.env.SKU_HOT !== 'false';
             return false;
           }
 
-          return routeMatcher(route)(req.path).match;
+          return routeMatcher(route)(req.path);
         });
 
         if (!matchingRoute) {

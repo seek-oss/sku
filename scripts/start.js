@@ -4,7 +4,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
-const { pathToRegexp } = require('path-to-regexp');
 
 const { watch } = require('../lib/runWebpack');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
@@ -12,6 +11,7 @@ const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
+const routeMatcher = require('../lib/routeMatcher');
 const {
   port,
   initialPath,
@@ -93,8 +93,6 @@ const hot = process.env.SKU_HOT !== 'false';
       app.get('*', (req, res, next) => {
         const matchingSiteName = getSiteForHost(req.hostname);
 
-        let normalizedRoute;
-        let matchingSite;
         const matchingRoute = routes.find(({ route, siteIndex }) => {
           if (
             typeof siteIndex === 'number' &&
@@ -102,21 +100,8 @@ const hot = process.env.SKU_HOT !== 'false';
           ) {
             return false;
           }
-          matchingSite = sites[siteIndex];
 
-          normalisedRoute = route
-            .split('/')
-            .map((part) => {
-              if (part.startsWith('$')) {
-                // Path is dynamic, map to ':id' style syntax supported by pathToRegexp
-                return `:${part.slice(1)}`;
-              }
-
-              return part;
-            })
-            .join('/');
-
-          return pathToRegexp(normalisedRoute).exec(req.path);
+          return routeMatcher(route)(req.path).match;
         });
 
         if (!matchingRoute) {

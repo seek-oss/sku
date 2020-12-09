@@ -51,11 +51,12 @@ const getStartRoutes = () => {
     }
   }
 
-  return allRouteCombinations.map(({ route, site = {} }) => ({
+  return allRouteCombinations.map(({ route, language, site = {} }) => ({
     environment: environments.length > 0 ? environments[0] : undefined,
     site: site.name,
     routeName: route.name,
-    route: route.route,
+    route: route.route.replace('$language', language),
+    language,
   }));
 };
 
@@ -91,13 +92,15 @@ const getBuildRoutes = () => {
     }
   }
 
-  return allRouteCombinations.map(({ route, site = {}, ...rest }) => ({
-    ...rest,
-    site: site.name,
-    routeName: route.name,
-    route: route.route,
-    language: route.language,
-  }));
+  return allRouteCombinations.map(
+    ({ route, site = {}, language, ...rest }) => ({
+      ...rest,
+      site: site.name,
+      routeName: route.name,
+      language,
+      route: route.route.replace('$language', language),
+    }),
+  );
 };
 
 module.exports = () => {

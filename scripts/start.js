@@ -108,8 +108,19 @@ const hot = process.env.SKU_HOT !== 'false';
           return next();
         }
 
-        const chosenLanguage = getLanguageFromRoute(req, matchingRoute);
-        console.log({ chosenLanguage });
+        let chosenLanguage;
+
+        try {
+          chosenLanguage = getLanguageFromRoute(req, matchingRoute);
+        } catch (e) {
+          return res.status(500).send(
+            exceptionFormatter(e, {
+              format: 'html',
+              inlineStyle: true,
+              basepath: 'webpack://static/./',
+            }),
+          );
+        }
 
         htmlRenderPlugin
           .renderWhenReady({

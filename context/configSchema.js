@@ -46,6 +46,7 @@ module.exports = validator.compile({
           name: { type: 'string' },
           host: { type: 'string', optional: true },
           routes: { ...routes, optional: true },
+          languages: { type: 'array', items: 'string', optional: true },
         },
       },
     ],

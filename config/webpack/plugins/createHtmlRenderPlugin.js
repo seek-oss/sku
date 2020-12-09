@@ -5,6 +5,7 @@ const {
   isStartScript,
   paths,
   routes,
+  languages,
   environments,
   sites,
   transformOutputPath,
@@ -26,14 +27,36 @@ const mapStatsToParams = ({ webpackStats }) => {
   };
 };
 
+function getLanguagesToRender({ route }) {
+  const routeIsForSpecificSite = typeof route.siteIndex === 'number';
+  let languagesToRender = [null];
+  if (languages) {
+    if (routeIsForSpecificSite) {
+      languagesToRender = sites[route.siteIndex].languages || languages;
+    } else {
+      languagesToRender = languages;
+    }
+  }
+  return languagesToRender;
+}
+
 const getStartRoutes = () => {
   const allRouteCombinations = [];
 
   for (const route of routes) {
-    if (typeof route.siteIndex === 'number') {
-      allRouteCombinations.push({ route, site: sites[route.siteIndex] });
-    } else {
-      allRouteCombinations.push(...sites.map((site) => ({ site, route })));
+    const routeIsForSpecificSite = typeof route.siteIndex === 'number';
+    for (const language of getLanguagesToRender(route)) {
+      if (routeIsForSpecificSite) {
+        allRouteCombinations.push({
+          route,
+          site: sites[route.siteIndex],
+          language,
+        });
+      } else {
+        allRouteCombinations.push(
+          ...sites.map((site) => ({ site, route, language })),
+        );
+      }
     }
   }
 
@@ -53,17 +76,26 @@ const getBuildRoutes = () => {
 
   for (const environment of forcedEnvs) {
     for (const route of routes) {
-      console.log({ route });
-      if (typeof route.siteIndex === 'number') {
-        allRouteCombinations.push({
-          route,
-          site: sites[route.siteIndex],
-          environment,
-        });
-      } else {
-        allRouteCombinations.push(
-          ...forcedSites.map((site) => ({ site, route, environment })),
-        );
+      const routeIsForSpecificSite = typeof route.siteIndex === 'number';
+      for (const language of getLanguagesToRender(route)) {
+        console.log({ route, language });
+        if (routeIsForSpecificSite) {
+          allRouteCombinations.push({
+            route,
+            site: sites[route.siteIndex],
+            environment,
+            language,
+          });
+        } else {
+          allRouteCombinations.push(
+            ...forcedSites.map((site) => ({
+              site,
+              route,
+              environment,
+              language,
+            })),
+          );
+        }
       }
     }
   }

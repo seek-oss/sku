@@ -25,6 +25,7 @@ const {
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
+const getLanguageFromRoute = require('../lib/language-middleware');
 
 const localhost = '0.0.0.0';
 
@@ -92,6 +93,8 @@ const hot = process.env.SKU_HOT !== 'false';
       app.get('*', (req, res, next) => {
         const matchingSiteName = getSiteForHost(req.hostname);
 
+        let normalizedRoute;
+        let matchingSite;
         const matchingRoute = routes.find(({ route, siteIndex }) => {
           if (
             typeof siteIndex === 'number' &&
@@ -99,8 +102,9 @@ const hot = process.env.SKU_HOT !== 'false';
           ) {
             return false;
           }
+          matchingSite = sites[siteIndex];
 
-          const normalisedRoute = route
+          normalisedRoute = route
             .split('/')
             .map((part) => {
               if (part.startsWith('$')) {
@@ -119,12 +123,15 @@ const hot = process.env.SKU_HOT !== 'false';
           return next();
         }
 
+        const chosenLanguage = getLanguageFromRoute(req, matchingRoute);
+        console.log({ chosenLanguage });
+
         htmlRenderPlugin
           .renderWhenReady({
             route: matchingRoute.route,
             routeName: matchingRoute.name,
             site: matchingSiteName,
-            language: matchingRoute.language,
+            language: chosenLanguage,
             environment,
           })
           .then((html) => res.send(html))

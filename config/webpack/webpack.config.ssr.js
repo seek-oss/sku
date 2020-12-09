@@ -10,7 +10,6 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
-const VocabWebpackPlugin = require('@vocab/webpack').default;
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
@@ -208,7 +207,6 @@ const makeWebpackConfig = ({
               }),
             ]
           : []),
-        new VocabWebpackPlugin(),
       ],
     },
     {
@@ -289,7 +287,6 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
           rootResolution,
         }),
-        new VocabWebpackPlugin(),
       ].concat(
         isDevServer
           ? [

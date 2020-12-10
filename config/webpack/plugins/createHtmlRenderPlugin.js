@@ -2,7 +2,7 @@ const HtmlRenderPlugin = require('html-render-webpack-plugin');
 const memoize = require('memoizee/weak');
 const debug = require('debug');
 
-const { getLanguagesToRender } = require('../../../lib/language-utils');
+const { getValidLanguagesForRoute } = require('../../../lib/language-utils');
 
 const log = debug('sku:html-render-plugin');
 
@@ -36,7 +36,7 @@ const getStartRoutes = () => {
 
   for (const route of routes) {
     const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-    for (const language of getLanguagesToRender(route)) {
+    for (const language of getValidLanguagesForRoute(route)) {
       if (routeIsForSpecificSite) {
         allRouteCombinations.push({
           route,
@@ -69,7 +69,7 @@ const getBuildRoutes = () => {
   for (const environment of forcedEnvs) {
     for (const route of routes) {
       const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-      for (const language of getLanguagesToRender(route)) {
+      for (const language of getValidLanguagesForRoute(route)) {
         log('Using Route', { route, language });
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({

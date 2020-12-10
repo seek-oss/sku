@@ -99,4 +99,13 @@ describe('sku-with-https', () => {
       expect(snapshot).toMatchSnapshot();
     });
   });
+
+  describe('.gitignore', () => {
+    it('should add the .ssl directory to .gitignore', async () => {
+      const ignoreContents = await fs
+        .readFile(path.join(appDir, '.gitignore'), 'utf-8')
+        .split('\n');
+      expect(ignoreContents).toContain(`.ssl`);
+    });
+  });
 });

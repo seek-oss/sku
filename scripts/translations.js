@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const args = require('../config/args').argv;
 const { compile, validate } = require('@vocab/core');
 const { push, pull } = require('@vocab/phrase');
-const getVocabConfig = require('../config/vocab/vocab');
+const { getVocabConfig } = require('../config/vocab/vocab');
 
 const vocabCommands = args.length > 0 ? args : undefined;
 

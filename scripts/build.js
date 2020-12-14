@@ -17,7 +17,7 @@ const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRend
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const { isLibrary, cspEnabled } = require('../context');
 const track = require('../telemetry');
-const getVocabConfig = require('../config/vocab/vocab');
+const { getVocabConfig } = require('../config/vocab/vocab');
 const { compile } = require('@vocab/core');
 
 (async () => {

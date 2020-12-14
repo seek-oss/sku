@@ -21,7 +21,7 @@ const isTypeScript = require('../../lib/isTypeScript');
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
-const getVocabConfig = require('../vocab/vocab');
+const { getVocabConfig } = require('../vocab/vocab');
 
 const {
   paths,

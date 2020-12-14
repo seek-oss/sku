@@ -32,7 +32,8 @@ const runScript = (scriptName) => {
     case 'test-ssr':
     case 'lint':
     case 'format':
-    case 'pre-commit': {
+    case 'pre-commit':
+    case 'translations': {
       await configureProject();
       runScript(script);
       break;

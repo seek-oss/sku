@@ -25,7 +25,7 @@ const { compile } = require('@vocab/core');
     const vocabConfig = getVocabConfig();
     if (vocabConfig) {
       console.log('Starting Vocab compile');
-      await compile({ watch: false }, config);
+      await compile({ watch: false }, vocabConfig);
     }
     await ensureTargetDirectory();
     await cleanTargetDirectory();

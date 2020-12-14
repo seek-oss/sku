@@ -40,7 +40,7 @@ const hot = process.env.SKU_HOT !== 'false';
   const vocabConfig = getVocabConfig();
   if (vocabConfig) {
     console.log('Starting Vocab compile in watch mode');
-    await compile({ watch: true }, config);
+    await compile({ watch: true }, vocabConfig);
   }
 
   const environment = resolveEnvironment();

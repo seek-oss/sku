@@ -27,12 +27,21 @@ const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
 const { getLanguageFromRoute } = require('../lib/language-utils');
 
+const getVocabConfig = require('../config/vocab/vocab');
+const { compile } = require('@vocab/core');
+
 const localhost = '0.0.0.0';
 
 const hot = process.env.SKU_HOT !== 'false';
 
 (async () => {
   console.log(blue(`sku start`));
+
+  const vocabConfig = getVocabConfig();
+  if (vocabConfig) {
+    console.log('Starting Vocab compile in watch mode');
+    await compile({ watch: true }, config);
+  }
 
   const environment = resolveEnvironment();
 

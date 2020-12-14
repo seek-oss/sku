@@ -21,6 +21,8 @@ const isTypeScript = require('../../lib/isTypeScript');
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
+const getVocabConfig = require('../vocab/vocab');
+
 const {
   paths,
   env,
@@ -34,7 +36,6 @@ const {
   cspEnabled,
   cspExtraScriptSrcHosts,
   rootResolution,
-  languages,
 } = config;
 
 // port is only required for dev builds
@@ -50,12 +51,7 @@ const makeWebpackConfig = ({
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
-  const isMultiLanguageMode = Boolean(languages);
-  console.log({ isMultiLanguageMode, languages });
-  const vocabOptions = {
-    devLanguage: 'en',
-    languages,
-  };
+  const vocabOptions = getVocabConfig();
 
   const envVars = lodash
     .chain(env)
@@ -256,7 +252,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
-        ...(isMultiLanguageMode ? [new VocabWebpackPlugin(vocabOptions)] : []),
+        ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
     {
@@ -319,7 +315,6 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
-        ...(isMultiLanguageMode ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
   ].map(webpackDecorator);

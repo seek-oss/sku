@@ -18,7 +18,6 @@ export const serializeConfig = (config) =>
   )}</script>`;
 
 export default async (renderParams) => {
-  console.log({ renderParams });
   const renderContext = { ...renderParams, libraryName };
 
   let app;

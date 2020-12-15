@@ -8,6 +8,7 @@ const getVocabConfig = () => {
   }
   const result = {
     devLanguage: 'en',
+    ignore: ['node_modules/sku/**', 'node_modules/vocab/**'],
     languages,
   };
   log('Using Vocab options:', result);

@@ -1,15 +1,15 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
-import { TranslationsProvider } from '@vocab/react';
+import { VocabProvider } from '@vocab/react';
 
 import type { RenderContext } from './types';
 import App from './App';
 
 export default ({ language }: RenderContext) => {
   hydrate(
-    <TranslationsProvider language={language}>
+    <VocabProvider language={language}>
       <App />
-    </TranslationsProvider>,
+    </VocabProvider>,
     document.getElementById('app'),
   );
 };

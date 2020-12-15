@@ -1,18 +1,19 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import dedent from 'dedent';
-import { TranslationsProvider } from '@vocab/react';
+import { VocabProvider } from '@vocab/react';
 
 import type { RenderContext } from './types';
+import type { Render } from '../../../../../sku-types';
 import App from './App';
 
 export default {
   renderApp: ({ SkuProvider, language }) =>
     renderToString(
       <SkuProvider>
-        <TranslationsProvider language={language}>
+        <VocabProvider language={language}>
           <App />
-        </TranslationsProvider>
+        </VocabProvider>
       </SkuProvider>,
     ),
   provideClientContext: ({ language }): RenderContext => ({ language }),
@@ -31,4 +32,4 @@ export default {
       </body>
     </html>
   `,
-};
+} as Render;

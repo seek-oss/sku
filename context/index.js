@@ -61,9 +61,11 @@ if (normalizedRoutes.length === 0) {
   normalizedRoutes.push({ name: 'default', route: '/' });
 }
 
-const normalizedLanguages = skuConfig.languages.map((lang) =>
-  typeof lang === 'string' ? { name: lang } : lang,
-);
+const normalizedLanguages = skuConfig.languages
+  ? skuConfig.languages.map((lang) =>
+      typeof lang === 'string' ? { name: lang } : lang,
+    )
+  : null;
 
 const startTransformPath = ({ site = '', route = '' }) =>
   path.join(site, route);

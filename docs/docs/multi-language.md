@@ -40,11 +40,11 @@ Sometimes when translating a dynamic value, or custom formatting might want to b
 
 This is done using the [ICU Message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/).
 
-# Hierarchy
+## Hierarchy
 
 In general you'll want to create a full set of translations for every supported language. However, some languages may only require small tweeks to a base language.
 
-For example, only needing to translate strings with `color` to `colour` between 'en-US' and 'en-AU'.
+For example, only needing to translate a few strings with different spelling such as `color` to `colour` between 'en-US' and 'en-AU'.
 
 In this case you can have one language extend another. sku will then copy any missing translations from the base language to the more specific language.
 

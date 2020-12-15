@@ -81,7 +81,7 @@
     "@types/webpack": "^4.32.1",
     "@vocab/core": "^0.0.6",
     "@vocab/phrase": "^0.0.6",
-    "@vocab/webpack": "^0.0.13",
+    "@vocab/webpack": "^0.0.14",
     "autoprefixer": "^9.6.1",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",

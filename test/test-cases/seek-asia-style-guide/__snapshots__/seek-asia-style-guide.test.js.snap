@@ -5,10 +5,13 @@ Object {
   "externals.json": "[
   \\"crypto\\",
   \\"fs\\",
+  \\"os\\",
   \\"path\\",
   \\"react\\",
   \\"react-dom/server\\",
-  \\"url\\"
+  \\"tty\\",
+  \\"url\\",
+  \\"util\\"
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-554e53c2f72903d6f45f.js",

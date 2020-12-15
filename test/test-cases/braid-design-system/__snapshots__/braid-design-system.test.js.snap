@@ -6,10 +6,12 @@ Object {
   \\"crypto\\",
   \\"fs\\",
   \\"net\\",
+  \\"os\\",
   \\"path\\",
   \\"react\\",
   \\"react-dom\\",
   \\"react-dom/server\\",
+  \\"tty\\",
   \\"url\\",
   \\"util\\"
 ]",

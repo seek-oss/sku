@@ -107,7 +107,6 @@ module.exports = () => {
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
   const allRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
-  console.log(allRoutes);
 
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,

@@ -2624,12 +2624,12 @@
     "@typescript-eslint/types" "4.1.1"
     eslint-visitor-keys "^2.0.0"
 
-"@vocab/core@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@vocab/core/-/core-0.0.5.tgz#779fe41a309f7ece669d9149e52e7cf1142a36c5"
-  integrity sha512-V1GtNH7UxAes6Xb9CUsbUob12uuP4BU43y89zYVxDJXoSQlvd4wO3fEhUS3ihixFHUvfOeKJ8k2IbA6wuXGE8A==
+"@vocab/core@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@vocab/core/-/core-0.0.6.tgz#16930d0ce3cbad993e14d2a51723ce1c9989a5d0"
+  integrity sha512-cJeK7bMV9JFLh4oHJRk4gYztJ3JJy+flKynyNmWRuudtQDLqho4+4VbfhlqYyECIqZIh810fB2/gd1isjqxcxg==
   dependencies:
-    "@vocab/types" "^0.0.5"
+    "@vocab/types" "^0.0.6"
     chalk "^4.1.0"
     chokidar "^3.4.3"
     debug "^4.3.1"
@@ -2639,13 +2639,13 @@
     intl-messageformat-parser "^6.0.16"
     prettier "^2.1.2"
 
-"@vocab/phrase@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-0.0.5.tgz#9afe19493b19ccbcf435815cce64521b9693363d"
-  integrity sha512-Z5MfhaWMs7aBcRkTO/osgJ539WVIyS00ft3pGG0bIhI8hrm2XoUqxAT6ldBF4n+l+l8nAAR3RVpFLwyxUzj+ew==
+"@vocab/phrase@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-0.0.6.tgz#0701aae79046c76b19df6d1e18b17df6fc6536d8"
+  integrity sha512-+qGx6ca4bQA7nRGwXsrfoBclMoUAYJNF+Al44sAl8TFbo+sIRxtIR8W76SYMXOn5dOFW4APAEsXRiBnjgLJr/Q==
   dependencies:
-    "@vocab/core" "^0.0.5"
-    "@vocab/types" "^0.0.5"
+    "@vocab/core" "^0.0.6"
+    "@vocab/types" "^0.0.6"
     chalk "^4.1.0"
     debug "^4.3.1"
     form-data "^3.0.0"
@@ -2666,6 +2666,13 @@
   dependencies:
     intl-messageformat "^9.3.18"
 
+"@vocab/types@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@vocab/types/-/types-0.0.6.tgz#f49f6643d335e722f4b581ab8662d7d0206b74bd"
+  integrity sha512-PbxsMjrd3aw8TP9d8yuYT58XpDOeiixWAgaysX3B9HIfV2umjyVs+ExMjplUhLk2y5YsBN084enTatqlKFsA1A==
+  dependencies:
+    intl-messageformat "^9.3.18"
+
 "@vocab/unloader@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@vocab/unloader/-/unloader-0.0.1.tgz#2762fa4bc27903cbbc7ffddff2e205723439b60c"
@@ -2673,13 +2680,13 @@
   dependencies:
     loader-utils "^2.0.0"
 
-"@vocab/webpack@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@vocab/webpack/-/webpack-0.0.12.tgz#cfc375da25c231a29a1418447ba14949fa393e16"
-  integrity sha512-wdFUeyaYm/WpI+O0HgaFEwh9/6kadVQhVXoXswaAYddzdeFXLDYZv4SiSv97XsAhgY7hs757qQlBtaHSRLH3Rg==
+"@vocab/webpack@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@vocab/webpack/-/webpack-0.0.13.tgz#586379fe9a59d614b9229afee24195086fb0bf16"
+  integrity sha512-0/FbgOHf5atg581kStm5FIHT7I0w+kBiQIIjgy8iURqCNhfjC/SuDy5+47wcfyQ7uBehbxU8VsSSrSrfYQIqVg==
   dependencies:
-    "@vocab/core" "^0.0.5"
-    "@vocab/types" "^0.0.5"
+    "@vocab/core" "^0.0.6"
+    "@vocab/types" "^0.0.6"
     "@vocab/unloader" "^0.0.1"
     chalk "^4.1.0"
     debug "^4.3.1"

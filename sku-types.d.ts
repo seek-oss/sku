@@ -25,11 +25,11 @@ interface RenderDocumentProps<App> extends SharedRenderProps {
 export interface Render<App = string> {
   renderApp(p: RenderAppProps): Promise<App> | App;
 
-  provideClientContext?(p: {
-    environment: string;
-    site: string;
-    app: App;
-  }): Promise<any> | any;
+  provideClientContext?(
+    p: SharedRenderProps & {
+      app: App;
+    },
+  ): Promise<any> | any;
 
   renderDocument(p: RenderDocumentProps<App>): Promise<string> | string;
 }

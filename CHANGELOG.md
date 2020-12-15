@@ -1,5 +1,11 @@
 # sku
 
+## 10.8.3
+
+### Patch Changes
+
+- Only generate `.ssl` directory when `httpsDevServer` is enabled ([#552](https://github.com/seek-oss/sku/pull/552))
+
 ## 10.8.2
 
 ### Patch Changes

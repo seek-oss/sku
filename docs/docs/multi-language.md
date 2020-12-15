@@ -1,5 +1,7 @@
 # Multi-language applications
 
+**WARNING::** Multi-language support is currently experimental. Expect breaking changes over the coming releases.
+
 (via [Vocab](https://github.com/seek-oss/vocab))
 
 If your application supports in multiple languages you can designate those languages with the `languages` configuration.

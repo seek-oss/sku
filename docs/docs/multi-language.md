@@ -4,7 +4,7 @@
 
 (via [Vocab](https://github.com/seek-oss/vocab))
 
-If your application supports in multiple languages you can designate those languages with the `languages` configuration.
+If your application supports multiple languages you can designate those languages with the `languages` configuration.
 
 Languages can be either a string, e.g. `en` or an object that designates a parent language. E.g `{name: "en-AU", extends: "en"}`
 
@@ -14,7 +14,7 @@ Languages can be either a string, e.g. `en` or an object that designates a paren
 
 To create your first translation you need to create a file ending in `translations.json` anywhere in your source code.
 
-In the file you want to add an array of translations in the form of `translationKey: {message: "The english translation"}`
+In the file add an array of translations in the form of `translationKey: {message: "The english translation"}`
 
 **Recommendation:** Whilst you can use any key that you like we recommended to use a copy, or simplied version of the english translation.
 
@@ -25,7 +25,7 @@ Once created, when `yarn start` or `yarn build` is ran sku will create the appro
 Now with the appropriate files created you can start importing your translations.
 
 ```tsx
-import translations from './translations.json';
+import translations from './translations';
 import { useTranslation } from '@vocab/react';
 
 export function MyComponent() {
@@ -41,6 +41,33 @@ See the [Vocab documentation](https://github.com/seek-oss/vocab) for more the fu
 Sometimes when translating a dynamic value, or custom formatting might want to be applied in the middle of a translation.
 
 This is done using the [ICU Message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/).
+
+## Site specific languages
+
+If one of your sites only supports a subset of languages you can specify them in the site config.
+
+**Example:** Setting an english only site.
+
+```json
+{
+  "languages": ["en", "fr"],
+  "sites": [
+    {
+      "name": "multi-language-site",
+      "host": "my.site",
+      "routes": ["/$language/"]
+    },
+    {
+      "name": "english-only-site",
+      "host": "en.my.site",
+      "routes": ["/"],
+      "languages": ["en"]
+    }
+  ]
+}
+```
+
+**Note:** Any language specified by a site must be included in the top level `languages` field.
 
 ## Hierarchy
 

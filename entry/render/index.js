@@ -1,3 +1,5 @@
+import debug from 'debug';
+import { getChunkName } from '@vocab/webpack/chunk-name';
 import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor';
 import clientContextKey from '../clientContextKey';
@@ -35,6 +37,16 @@ export default async (renderParams) => {
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
     });
+    if (renderContext.language) {
+      debug('sku:render:language')(
+        `Using language "${renderContext.language}" for route "${renderContext.route}"`,
+      );
+      extractor.addChunk(getChunkName(renderContext.language));
+    } else {
+      debug('sku:render:language')(
+        `No language on route "${renderContext.route}"`,
+      );
+    }
   }
 
   if (render.provideClientContext) {

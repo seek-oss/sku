@@ -1,8 +1,12 @@
+translations.ts
+
 # managed by sku
-*.less.d.ts
+.eslintrc
+.prettierrc
 coverage/
 dist-playroom/
 dist-storybook/
 dist/
 report/
+tsconfig.json
 # end managed by sku

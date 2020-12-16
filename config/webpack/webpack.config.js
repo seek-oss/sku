@@ -11,6 +11,7 @@ const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
+const VocabWebpackPlugin = require('@vocab/webpack').default;
 
 const utils = require('./utils');
 const debug = require('debug')('sku:webpack:config');
@@ -19,6 +20,8 @@ const isTypeScript = require('../../lib/isTypeScript');
 
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
+
+const { getVocabConfig } = require('../vocab/vocab');
 
 const {
   paths,
@@ -47,6 +50,8 @@ const makeWebpackConfig = ({
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
+
+  const vocabOptions = getVocabConfig();
 
   const envVars = lodash
     .chain(env)
@@ -247,6 +252,7 @@ const makeWebpackConfig = ({
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
+        ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
     {

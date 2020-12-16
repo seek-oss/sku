@@ -1,5 +1,10 @@
 const HtmlRenderPlugin = require('html-render-webpack-plugin');
 const memoize = require('memoizee/weak');
+const debug = require('debug');
+
+const { getValidLanguagesForRoute } = require('../../../lib/language-utils');
+
+const log = debug('sku:html-render-plugin');
 
 const {
   isStartScript,
@@ -30,18 +35,28 @@ const getStartRoutes = () => {
   const allRouteCombinations = [];
 
   for (const route of routes) {
-    if (typeof route.siteIndex === 'number') {
-      allRouteCombinations.push({ route, site: sites[route.siteIndex] });
-    } else {
-      allRouteCombinations.push(...sites.map((site) => ({ site, route })));
+    const routeIsForSpecificSite = typeof route.siteIndex === 'number';
+    for (const language of getValidLanguagesForRoute(route)) {
+      if (routeIsForSpecificSite) {
+        allRouteCombinations.push({
+          route,
+          site: sites[route.siteIndex],
+          language,
+        });
+      } else {
+        allRouteCombinations.push(
+          ...sites.map((site) => ({ site, route, language })),
+        );
+      }
     }
   }
 
-  return allRouteCombinations.map(({ route, site = {} }) => ({
+  return allRouteCombinations.map(({ route, language, site = {} }) => ({
     environment: environments.length > 0 ? environments[0] : undefined,
     site: site.name,
     routeName: route.name,
-    route: route.route,
+    route: route.route.replace('$language', language),
+    language,
   }));
 };
 
@@ -53,26 +68,39 @@ const getBuildRoutes = () => {
 
   for (const environment of forcedEnvs) {
     for (const route of routes) {
-      if (typeof route.siteIndex === 'number') {
-        allRouteCombinations.push({
-          route,
-          site: sites[route.siteIndex],
-          environment,
-        });
-      } else {
-        allRouteCombinations.push(
-          ...forcedSites.map((site) => ({ site, route, environment })),
-        );
+      const routeIsForSpecificSite = typeof route.siteIndex === 'number';
+      for (const language of getValidLanguagesForRoute(route)) {
+        log('Using Route', { route, language });
+        if (routeIsForSpecificSite) {
+          allRouteCombinations.push({
+            route,
+            site: sites[route.siteIndex],
+            environment,
+            language,
+          });
+        } else {
+          allRouteCombinations.push(
+            ...forcedSites.map((site) => ({
+              site,
+              route,
+              environment,
+              language,
+            })),
+          );
+        }
       }
     }
   }
 
-  return allRouteCombinations.map(({ route, site = {}, ...rest }) => ({
-    ...rest,
-    site: site.name,
-    routeName: route.name,
-    route: route.route,
-  }));
+  return allRouteCombinations.map(
+    ({ route, site = {}, language, ...rest }) => ({
+      ...rest,
+      site: site.name,
+      routeName: route.name,
+      language,
+      route: route.route.replace('$language', language),
+    }),
+  );
 };
 
 module.exports = () => {

@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`translations should render en 1`] = `
+SCRIPTS: Array [
+  "/runtime-21d1ce78195a63cf1497.js",
+  "/vendors~main-52d487213d5b46f5b8c3.js",
+  "/main-3a03b37ed43c8f97e7d4.js",
+  "/en-translations-2cabc9c185c4314249c6.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="en-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"language":"en"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [0]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="en-translations"
+            src="scripts[3]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`translations should render fr 1`] = `
+SCRIPTS: Array [
+  "/runtime-21d1ce78195a63cf1497.js",
+  "/vendors~main-52d487213d5b46f5b8c3.js",
+  "/main-3a03b37ed43c8f97e7d4.js",
+  "/fr-translations-370f2c09fd5f4b3623c8.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="fr-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Bonjour sku
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"language":"fr"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [1]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="fr-translations"
+            src="scripts[3]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;

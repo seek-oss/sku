@@ -1,6 +1,7 @@
+translations.ts
+
 # managed by sku
-.eslintrc
-.prettierrc
+*.less.d.ts
 coverage/
 dist-playroom/
 dist-storybook/

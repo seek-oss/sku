@@ -4,7 +4,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
-const { pathToRegexp } = require('path-to-regexp');
 
 const { watch } = require('../lib/runWebpack');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
@@ -12,6 +11,7 @@ const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const getSiteForHost = require('../lib/getSiteForHost');
 const resolveEnvironment = require('../lib/resolveEnvironment');
+const routeMatcher = require('../lib/routeMatcher');
 const {
   port,
   initialPath,
@@ -25,6 +25,10 @@ const {
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
+const { getLanguageFromRoute } = require('../lib/language-utils');
+
+const { getVocabConfig } = require('../config/vocab/vocab');
+const { compile } = require('@vocab/core');
 
 const localhost = '0.0.0.0';
 
@@ -32,6 +36,12 @@ const hot = process.env.SKU_HOT !== 'false';
 
 (async () => {
   console.log(blue(`sku start`));
+
+  const vocabConfig = getVocabConfig();
+  if (vocabConfig) {
+    console.log('Starting Vocab compile in watch mode');
+    await compile({ watch: true }, vocabConfig);
+  }
 
   const environment = resolveEnvironment();
 
@@ -100,23 +110,25 @@ const hot = process.env.SKU_HOT !== 'false';
             return false;
           }
 
-          const normalisedRoute = route
-            .split('/')
-            .map((part) => {
-              if (part.startsWith('$')) {
-                // Path is dynamic, map to ':id' style syntax supported by pathToRegexp
-                return `:${part.slice(1)}`;
-              }
-
-              return part;
-            })
-            .join('/');
-
-          return pathToRegexp(normalisedRoute).exec(req.path);
+          return routeMatcher(route)(req.path);
         });
 
         if (!matchingRoute) {
           return next();
+        }
+
+        let chosenLanguage;
+
+        try {
+          chosenLanguage = getLanguageFromRoute(req, matchingRoute);
+        } catch (e) {
+          return res.status(500).send(
+            exceptionFormatter(e, {
+              format: 'html',
+              inlineStyle: true,
+              basepath: 'webpack://static/./',
+            }),
+          );
         }
 
         htmlRenderPlugin
@@ -124,6 +136,7 @@ const hot = process.env.SKU_HOT !== 'false';
             route: matchingRoute.route,
             routeName: matchingRoute.name,
             site: matchingSiteName,
+            language: chosenLanguage,
             environment,
           })
           .then((html) => res.send(html))

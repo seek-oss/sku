@@ -46,6 +46,7 @@ module.exports = validator.compile({
           name: { type: 'string' },
           host: { type: 'string', optional: true },
           routes: { ...routes, optional: true },
+          languages: { type: 'array', items: 'string', optional: true },
         },
       },
     ],
@@ -176,5 +177,16 @@ module.exports = validator.compile({
   },
   rootResolution: {
     type: 'boolean',
+  },
+  languages: {
+    optional: true,
+    type: 'array',
+    items: [
+      { type: 'string' },
+      {
+        type: 'object',
+        props: { name: { type: 'string', extends: { type: 'string' } } },
+      },
+    ],
   },
 });

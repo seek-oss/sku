@@ -1,5 +1,13 @@
 # sku
 
+## 10.9.0
+
+### Minor Changes
+
+- Experimental support for multi-language builds using [Vocab](https://github.com/seek-oss/vocab) ([#554](https://github.com/seek-oss/sku/pull/554))
+
+  Not available for SSR applications at this stage.
+
 ## 10.8.3
 
 ### Patch Changes

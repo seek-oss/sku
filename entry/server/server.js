@@ -39,21 +39,25 @@ app.get('*', (...args) => {
       extraHosts: [publicPath, ...csp.extraHosts],
     });
   }
-  const { SkuProvider, getBodyTags, getHeadTags, extractor } = makeExtractor(
-    webpackStats,
-    publicPath,
-    cspHandler,
-  );
+
+  const {
+    SkuProvider,
+    extractor,
+    flushHeadTags,
+    getHeadTags,
+    getBodyTags,
+  } = makeExtractor(webpackStats, publicPath, cspHandler);
   const addLanguageChunk = (language) =>
     extractor.addChunk(getChunkName(language));
 
   const result = renderCallback(
     {
       SkuProvider,
+      addLanguageChunk,
       getBodyTags,
       getHeadTags,
       extractor,
-      addLanguageChunk,
+      flushHeadTags,
       registerScript: cspHandler ? cspHandler.registerScript : undefined,
     },
     ...args,

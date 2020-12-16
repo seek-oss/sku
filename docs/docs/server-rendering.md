@@ -111,7 +111,7 @@ To add the language to the initial render call `addLanguageChunk` from your rend
 
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
-  const language = getLanguageFromUrl(appPath);
+  const language = getLanguageFromPath(appPath);
   addLanguageChunk(language);
   return renderToString(
     <SkuProvider>
@@ -120,7 +120,6 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
           <App />
         </VocabProvider>
       </StaticRouter>
-       
     </SkuProvider>,
   );
 }

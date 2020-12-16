@@ -1,3 +1,4 @@
+import { getChunkName } from '@vocab/webpack/chunk-name';
 import path from 'path';
 import express from 'express';
 import makeExtractor from '../makeExtractor';
@@ -38,14 +39,26 @@ app.get('*', (...args) => {
       extraHosts: [publicPath, ...csp.extraHosts],
     });
   }
+  const { SkuProvider, getBodyTags, getHeadTags, extractor } = makeExtractor(
+    webpackStats,
+    publicPath,
+    cspHandler,
+  );
+  const addLanguageChunk = (language) =>
+    extractor.addChunk(getChunkName(language));
 
-  return renderCallback(
+  const result = renderCallback(
     {
-      ...makeExtractor(webpackStats, publicPath, cspHandler),
+      SkuProvider,
+      getBodyTags,
+      getHeadTags,
+      extractor,
+      addLanguageChunk,
       registerScript: cspHandler ? cspHandler.registerScript : undefined,
     },
     ...args,
   );
+  return result;
 });
 
 export { app, onStart };

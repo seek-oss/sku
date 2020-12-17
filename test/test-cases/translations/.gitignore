@@ -1,3 +1,6 @@
+dist-ssr
+
+
 # managed by sku
 .eslintrc
 .prettierrc

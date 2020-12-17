@@ -2,10 +2,9 @@
 
 exports[`ssr translations should render en 1`] = `
 SCRIPTS: Array [
-  "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-52d487213d5b46f5b8c3.js",
-  "/main-3a03b37ed43c8f97e7d4.js",
-  "/en-translations-2cabc9c185c4314249c6.js",
+  "http://localhost:8313/runtime.js",
+  "http://localhost:8313/vendors~main.js",
+  "http://localhost:8313/main.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -13,7 +12,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta charset="UTF-8">
     <title>
-      My Awesome Project
+      hello-world
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
@@ -22,21 +21,19 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-    >
-    <link data-chunk="en-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -45,34 +42,28 @@ SOURCE HTML: <!DOCTYPE html>
         Hello sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
-    >
-      {"language":"en"}
-    </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
+            crossorigin="anonymous"
     >
-      [0]
+      []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
+            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
+            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="en-translations"
-            src="scripts[3]"
+            crossorigin="anonymous"
     >
     </script>
   </body>
@@ -82,10 +73,9 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`ssr translations should render fr 1`] = `
 SCRIPTS: Array [
-  "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-52d487213d5b46f5b8c3.js",
-  "/main-3a03b37ed43c8f97e7d4.js",
-  "/fr-translations-370f2c09fd5f4b3623c8.js",
+  "http://localhost:8313/runtime.js",
+  "http://localhost:8313/vendors~main.js",
+  "http://localhost:8313/main.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -93,7 +83,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta charset="UTF-8">
     <title>
-      My Awesome Project
+      hello-world
     </title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
@@ -102,21 +92,19 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[0]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[1]"
+          crossorigin="anonymous"
     >
     <link data-chunk="main"
           rel="preload"
           as="script"
           href="scripts[2]"
-    >
-    <link data-chunk="fr-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+          crossorigin="anonymous"
     >
   </head>
   <body>
@@ -125,34 +113,28 @@ SOURCE HTML: <!DOCTYPE html>
         Bonjour sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
-    >
-      {"language":"fr"}
-    </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
+            crossorigin="anonymous"
     >
-      [1]
+      []
     </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
+            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[1]"
+            crossorigin="anonymous"
     >
     </script>
     <script async
             data-chunk="main"
             src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="fr-translations"
-            src="scripts[3]"
+            crossorigin="anonymous"
     >
     </script>
   </body>

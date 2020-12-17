@@ -28,7 +28,7 @@ const template = ({ headTags, bodyTags, app }: any) => `
 
 export default () => ({
   renderCallback: async (
-    { SkuProvider, getBodyTags, flushHeadTags }: any,
+    { SkuProvider, getBodyTags, flushHeadTags, addLanguageChunk }: any,
     req: Request,
     res: Response,
   ) => {
@@ -39,6 +39,7 @@ export default () => ({
     );
     await Promise.resolve();
     const language = req.url.includes('fr') ? 'fr' : 'en';
+    addLanguageChunk(language);
 
     const app = renderToString(
       <SkuProvider>

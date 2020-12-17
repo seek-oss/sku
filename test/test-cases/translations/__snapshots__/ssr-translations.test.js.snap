@@ -5,6 +5,7 @@ SCRIPTS: Array [
   "http://localhost:8313/runtime.js",
   "http://localhost:8313/vendors~main.js",
   "http://localhost:8313/main.js",
+  "http://localhost:8313/en-translations.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -33,6 +34,12 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[2]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="en-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
           crossorigin="anonymous"
     >
   </head>
@@ -46,7 +53,7 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
             crossorigin="anonymous"
     >
-      []
+      ["en-translations"]
     </script>
     <script async
             data-chunk="main"
@@ -66,6 +73,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
     </script>
+    <script async
+            data-chunk="en-translations"
+            src="scripts[3]"
+            crossorigin="anonymous"
+    >
+    </script>
   </body>
 </html>
 POST HYDRATE DIFFS: NO DIFF
@@ -76,6 +89,7 @@ SCRIPTS: Array [
   "http://localhost:8313/runtime.js",
   "http://localhost:8313/vendors~main.js",
   "http://localhost:8313/main.js",
+  "http://localhost:8313/fr-translations.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -106,6 +120,12 @@ SOURCE HTML: <!DOCTYPE html>
           href="scripts[2]"
           crossorigin="anonymous"
     >
+    <link data-chunk="fr-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+          crossorigin="anonymous"
+    >
   </head>
   <body>
     <div id="app">
@@ -117,7 +137,7 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
             crossorigin="anonymous"
     >
-      []
+      ["fr-translations"]
     </script>
     <script async
             data-chunk="main"
@@ -134,6 +154,12 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="fr-translations"
+            src="scripts[3]"
             crossorigin="anonymous"
     >
     </script>

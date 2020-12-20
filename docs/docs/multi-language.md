@@ -12,11 +12,11 @@ Languages can be either a string, e.g. `en` or an object that designates a paren
 
 ## Usage
 
-To create your first translation you need to create a folder ending in `.vocab` and add a file in it called `translations.json` anywhere in your source code.
+To create your first translation you need to create a folder ending in `.vocab` and add a file in it called `translations.json`. This can be anywhere in your source code.
 
 **E.g.** `./App.vocab/translations.json`
 
-In the file add of translations in the form of `translationKey: {message: "The english translation"}`
+In the file, add translations in the form of `translationKey: { message: "The english translation" }`
 
 **Recommendation:** Whilst you can use any key that you like we recommended to use a copy, or simplied version of the english translation.
 
@@ -24,7 +24,7 @@ Once created, when `yarn start` or `yarn build` is ran sku will create the appro
 
 **E.g.** `./App.vocab/index.ts`
 
-**Recommendation:** You can add translations files anywhere in your source code. We recommend co-locating components with their translations. When you want to re-use a translation in multiple places you can move the `translation.json` as needed.
+**Recommendation:** You can add translations files anywhere in your source code, however we recommend co-locating components with their translations. When you want to re-use a translation in multiple places you can move the `translation.json` as needed.
 
 Now with the appropriate files created you can start importing your translations.
 

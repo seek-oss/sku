@@ -98,3 +98,29 @@ Last but not least, please note that commands for SSR are different to the ones 
 - Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.
 - Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
 - Use `sku test-ssr` to test your application
+
+## Multi-language support
+
+When using multiple languages the browser will download the language needed as required. However, this can lead to a delay in page load. To ensure translations are available immediately you need to tell sku what language you are rendering.
+
+**Note:** This is handled automatically for static-rendering and is only required for server-side rendering.
+
+To add the language to the initial render call `addLanguageChunk` from your render params.
+
+**Example:** Using `addLanguageChunk` to set the language during server-render
+
+```jsx
+export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
+  const language = getLanguageFromPath(appPath);
+  addLanguageChunk(language);
+  return renderToString(
+    <SkuProvider>
+      <StaticRouter location={appPath}>
+        <VocabProvider language={language}>
+          <App />
+        </VocabProvider>
+      </StaticRouter>
+    </SkuProvider>,
+  );
+}
+```

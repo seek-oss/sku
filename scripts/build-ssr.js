@@ -15,8 +15,16 @@ const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const { port, cspEnabled } = require('../context');
 const track = require('../telemetry');
 
+const { getVocabConfig } = require('../config/vocab/vocab');
+const { compile } = require('@vocab/core');
+
 (async () => {
   try {
+    const vocabConfig = getVocabConfig();
+    if (vocabConfig) {
+      console.log('Starting Vocab compile');
+      await compile({ watch: false }, vocabConfig);
+    }
     const [clientConfig, serverConfig] = makeWebpackConfig({
       clientPort: port.client,
       serverPort: port.server,

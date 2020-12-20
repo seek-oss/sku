@@ -10,7 +10,6 @@ describe('translations', () => {
   let closeAssetServer;
 
   beforeAll(async () => {
-    await runSkuScriptInDir('translations compile', appDir);
     await runSkuScriptInDir('build', appDir);
     closeAssetServer = await startAssetServer(4758, distDir);
   });

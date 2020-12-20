@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ssr translations should render en 1`] = `
+SCRIPTS: Array [
+  "http://localhost:8313/runtime.js",
+  "http://localhost:8313/vendors~main.js",
+  "http://localhost:8313/main.js",
+  "http://localhost:8313/en-translations.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="en-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      ["en-translations"]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="en-translations"
+            src="scripts[3]"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`ssr translations should render fr 1`] = `
+SCRIPTS: Array [
+  "http://localhost:8313/runtime.js",
+  "http://localhost:8313/vendors~main.js",
+  "http://localhost:8313/main.js",
+  "http://localhost:8313/fr-translations.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="fr-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Bonjour sku
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      ["fr-translations"]
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="fr-translations"
+            src="scripts[3]"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;

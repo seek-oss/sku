@@ -10,6 +10,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
+const VocabWebpackPlugin = require('@vocab/webpack').default;
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
@@ -31,6 +32,7 @@ const {
   useDevServerMiddleware,
   rootResolution,
 } = require('../../context');
+const { getVocabConfig } = require('../vocab/vocab');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -40,6 +42,8 @@ const makeWebpackConfig = ({
 }) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
+
+  const vocabOptions = getVocabConfig();
 
   const envVars = lodash
     .chain(env)
@@ -207,6 +211,7 @@ const makeWebpackConfig = ({
               }),
             ]
           : []),
+        ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
     },
     {

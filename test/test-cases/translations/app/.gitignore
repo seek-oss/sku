@@ -1,4 +1,4 @@
-translations.ts
+/**/*.vocab/index.ts
 
 # managed by sku
 .eslintrc

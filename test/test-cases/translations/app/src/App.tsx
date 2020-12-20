@@ -1,10 +1,10 @@
 import React from 'react';
-import { useTranslation } from '@vocab/react';
+import { useTranslations } from '@vocab/react';
 
-import translations from './translations';
+import translations from './App.vocab';
 
 export default () => {
-  const { t } = useTranslation(translations);
+  const { t } = useTranslations(translations);
 
   return <div>{t('hello')}</div>;
 };

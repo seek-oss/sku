@@ -1,5 +1,20 @@
 # sku
 
+## 10.9.1
+
+### Patch Changes
+
+- Add multi-language support for server rendered applications ([#556](https://github.com/seek-oss/sku/pull/556))
+
+- Upgrade Vocab to v0.0.8 with new .vocab folder ([#558](https://github.com/seek-oss/sku/pull/558))
+
+  - `useTranslation` renamed to `useTranslations`
+  - Support for server-rendered apps with new `addLanguageChunk` render parameter
+  - Support for custom format locales in `<VocabProvider>`
+  - Improved validation for `translation.json`
+
+- Add generated Vocab files to ignore patterns ([#559](https://github.com/seek-oss/sku/pull/559))
+
 ## 10.9.0
 
 ### Minor Changes

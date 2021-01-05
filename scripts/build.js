@@ -17,16 +17,11 @@ const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRend
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const { isLibrary, cspEnabled } = require('../context');
 const track = require('../telemetry');
-const { getVocabConfig } = require('../config/vocab/vocab');
-const { compile } = require('@vocab/core');
+const { runVocabCompile } = require('../lib/runVocab');
 
 (async () => {
   try {
-    const vocabConfig = getVocabConfig();
-    if (vocabConfig) {
-      console.log('Starting Vocab compile');
-      await compile({ watch: false }, vocabConfig);
-    }
+    await runVocabCompile();
     await ensureTargetDirectory();
     await cleanTargetDirectory();
     await run(

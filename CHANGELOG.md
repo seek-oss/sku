@@ -1,5 +1,11 @@
 # sku
 
+## 10.9.2
+
+### Patch Changes
+
+- Compile vocab files before lint and test commands ([#560](https://github.com/seek-oss/sku/pull/560))
+
 ## 10.9.1
 
 ### Patch Changes

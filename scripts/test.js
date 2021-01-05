@@ -5,8 +5,14 @@ const baseJestConfig = require('../config/jest/jestConfig');
 const { argv } = require('../config/args');
 const { jestDecorator } = require('../context');
 
-const jestConfig = jestDecorator(baseJestConfig);
+const { runVocabCompile } = require('../lib/runVocab');
 
-argv.push('--config', JSON.stringify(jestConfig));
+(async () => {
+  await runVocabCompile();
 
-jest.run(argv);
+  const jestConfig = jestDecorator(baseJestConfig);
+
+  argv.push('--config', JSON.stringify(jestConfig));
+
+  jest.run(argv);
+})();

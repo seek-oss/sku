@@ -6,8 +6,12 @@ const runTsc = require('../lib/runTsc');
 const args = require('../config/args').argv;
 const pathsToCheck = args.length > 0 ? args : undefined;
 
+const { runVocabCompile } = require('../lib/runVocab');
+
 (async () => {
   console.log(chalk.cyan('Linting'));
+
+  await runVocabCompile();
 
   try {
     if (isTypeScript) {

@@ -17,19 +17,14 @@ const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 
-const { getVocabConfig } = require('../config/vocab/vocab');
-const { compile } = require('@vocab/core');
+const { watchVocabCompile } = require('../lib/runVocab');
 
 const hot = process.env.SKU_HOT !== 'false';
 
 const localhost = '0.0.0.0';
 
 (async () => {
-  const vocabConfig = getVocabConfig();
-  if (vocabConfig) {
-    console.log('Starting Vocab compile in watch mode');
-    await compile({ watch: true }, vocabConfig);
-  }
+  await watchVocabCompile();
 
   // Find available ports if requested ones aren't available
   const clientPort = await allocatePort({

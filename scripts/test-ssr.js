@@ -7,12 +7,18 @@ const { jestDecorator } = require('../context');
 
 const isCI = require('../lib/isCI');
 
-const jestConfig = jestDecorator(baseJestConfig);
+const { runVocabCompile } = require('../lib/runVocab');
 
-if (!isCI && argv.indexOf('--coverage') < 0) {
-  argv.push('--watch');
-}
+(async () => {
+  await runVocabCompile();
 
-argv.push('--config', JSON.stringify(jestConfig));
+  const jestConfig = jestDecorator(baseJestConfig);
 
-jest.run(argv);
+  if (!isCI && argv.indexOf('--coverage') < 0) {
+    argv.push('--watch');
+  }
+
+  argv.push('--config', JSON.stringify(jestConfig));
+
+  jest.run(argv);
+})();

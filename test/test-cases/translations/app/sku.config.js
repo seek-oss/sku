@@ -8,5 +8,4 @@ module.exports = {
   initialPath: '/en',
   target: 'dist',
   port: 8310,
-  serverPort: 8311,
 };

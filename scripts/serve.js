@@ -3,6 +3,7 @@ const express = require('express');
 const fs = require('fs-extra');
 const handler = require('serve-handler');
 const partition = require('lodash/partition');
+const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, yellow, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 
@@ -23,6 +24,7 @@ const resolveEnvironment = require('../lib/resolveEnvironment');
 const args = require('../config/args');
 const track = require('../telemetry');
 const createServer = require('../lib/createServer');
+const { getValidLanguagesForRoute } = require('../lib/language-utils');
 
 const prefferedSite = args.site;
 
@@ -111,24 +113,28 @@ const prefferedSite = args.site;
 
     const site = getSiteForHost(hostname, prefferedSite) || '';
 
-    const rewrites = validRoutes.map(({ route }) => {
-      const normalisedRoute = route
-        .split('/')
-        .map((part) => {
-          if (part.startsWith('$')) {
-            // Path is dynamic, map part to * match
-            return '*';
-          }
+    const rewrites = flatMap(validRoutes, (route) =>
+      getValidLanguagesForRoute(route).map((lang) => {
+        const langRoute = route.route.replace('$language', lang);
 
-          return part;
-        })
-        .join('/');
+        const normalisedRoute = langRoute
+          .split('/')
+          .map((part) => {
+            if (part.startsWith('$')) {
+              // Path is dynamic, map part to * match
+              return '*';
+            }
 
-      return {
-        source: normalisedRoute,
-        destination: path.join(environment, site, route, 'index.html'),
-      };
-    });
+            return part;
+          })
+          .join('/');
+
+        return {
+          source: normalisedRoute,
+          destination: path.join(environment, site, langRoute, 'index.html'),
+        };
+      }),
+    );
 
     if (paths.publicPath !== '/') {
       rewrites.push({

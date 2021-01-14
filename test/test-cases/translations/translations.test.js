@@ -1,30 +1,33 @@
 /* eslint-disable jest/expect-expect */
 const path = require('path');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const startAssetServer = require('../../utils/assetServer');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
+const waitForUrls = require('../../utils/waitForUrls');
 const appDir = path.resolve(__dirname, 'app');
-const distDir = path.resolve(appDir, 'dist');
+const { port } = require('./app/sku.config');
+
+const baseUrl = `http://localhost:${port}`;
 
 describe('translations', () => {
-  let closeAssetServer;
+  let process;
 
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);
-    closeAssetServer = await startAssetServer(4758, distDir);
+    process = await runSkuScriptInDir('serve', appDir);
+    await waitForUrls(`${baseUrl}/en`);
   });
 
   afterAll(() => {
-    closeAssetServer();
+    process.kill();
   });
 
   it('should render en', async () => {
-    const app = await getAppSnapshot('http://localhost:4758/en');
+    const app = await getAppSnapshot(`${baseUrl}/en`);
     expect(app).toMatchSnapshot();
   });
 
   it('should render fr', async () => {
-    const app = await getAppSnapshot('http://localhost:4758/fr');
+    const app = await getAppSnapshot(`${baseUrl}/fr`);
     expect(app).toMatchSnapshot();
   });
 });

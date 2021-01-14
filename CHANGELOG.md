@@ -1,5 +1,11 @@
 # sku
 
+## 10.9.3
+
+### Patch Changes
+
+- Fix `sku serve` for multi-language apps ([#562](https://github.com/seek-oss/sku/pull/562))
+
 ## 10.9.2
 
 ### Patch Changes

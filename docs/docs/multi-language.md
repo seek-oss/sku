@@ -12,9 +12,9 @@ Languages can be either a string, e.g. `en` or an object that designates a paren
 
 ## Getting started
 
-To opt-in to Multi Language builds you need to perform three steps:
+To opt-in to Multi-language builds you need to perform three steps:
 
-1. Install "`@vocab/react`".
+1. Install "`@vocab/react`" as a dependency.
    This will be used by your code to support dynamically loading the correct language translations inside React components
 2. Add "`languages`" attribute to sku.config with all your supported languages
 

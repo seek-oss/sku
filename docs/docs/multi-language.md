@@ -16,7 +16,7 @@ To opt-in to multi-language builds you need to perform three steps:
 
 1. Install "`@vocab/react`" as a dependency.
    This will be used by your code to support dynamically loading the correct language translations inside React components
-2. Add "`languages`" attribute to sku.config with all your supported languages
+2. Add the list of supported "`languages`" to your [sku configuration](./docs/configuration.md#languages)
 
 ```json
 {

@@ -163,7 +163,7 @@ The browser URL to open when running `sku start` or `sku start-ssr`. It will def
 
 type `Array<string>`
 
-The languages your site supports.
+The languages your application supports.
 
 See [Multi-language support](./docs/multi-language.md) for details.
 

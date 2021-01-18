@@ -1,6 +1,6 @@
 # Multi-language applications
 
-**WARNING::** Multi-language support is currently experimental. Expect breaking changes over the coming releases.
+**WARNING:** Multi-language support is currently experimental. Expect breaking changes over the coming releases.
 
 (via [Vocab](https://github.com/seek-oss/vocab))
 
@@ -9,6 +9,22 @@ If your application supports multiple languages you can designate those language
 Languages can be either a string, e.g. `en` or an object that designates a parent language. E.g `{name: "en-AU", extends: "en"}`
 
 **Note:** sku assumes that the development language is `en`. This will be used as the base language for all development, including your initial translations.
+
+## Getting started
+
+To opt-in to multi-language builds you need to perform three steps:
+
+1. Install "`@vocab/react`" as a dependency.
+   This will be used by your code to support dynamically loading the correct language translations inside React components
+2. Add the list of supported "`languages`" to your [sku configuration](./docs/configuration.md#languages)
+
+```json
+{
+  "languages": ["en", "fr"]
+}
+```
+
+3. Create your first .vocab folder. See [Usage](#usage).
 
 ## Usage
 

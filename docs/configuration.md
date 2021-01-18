@@ -159,6 +159,14 @@ Default: `routes[0].route`
 
 The browser URL to open when running `sku start` or `sku start-ssr`. It will default to the first `route` in the [`routes`](#routes) array.
 
+## languages
+
+type `Array<string>`
+
+The languages your application supports.
+
+See [Multi-language support](./docs/multi-language.md) for details.
+
 ## libraryEntry
 
 type `string`

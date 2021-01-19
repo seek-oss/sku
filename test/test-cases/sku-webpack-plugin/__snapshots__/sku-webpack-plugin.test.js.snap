@@ -1,33 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`sku-webpack-plugin build should create valid app 1`] = `
-SCRIPTS: Array [
-  "main.js",
-]
-CSS: Array [
-  "main.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+"<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset=\\"utf-8\\">
     <title>
       Webpack App
     </title>
-    <link href="styles[0]"
-          rel="stylesheet"
+    <meta name=\\"viewport\\"
+          content=\\"width=device-width,initial-scale=1\\"
+    >
+    <link href=\\"main.css\\"
+          rel=\\"stylesheet\\"
     >
   </head>
   <body>
-    <script type="text/javascript"
-            src="scripts[0]"
-    >
+    <script src=\\"main.js\\">
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
-             src="main.js"
-     >
+-<!doctype html>
++<!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8">
+@@ -15,5 +15,17 @@
+   <body>
+     <script src="main.js">
      </script>
 +    <div>
 +      <style type="text/css">
@@ -49,30 +50,7 @@ POST HYDRATE DIFFS:
 
 exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 Object {
-  "index.html": SCRIPTS: Array [
-    "main.js",
-  ]
-CSS: Array [
-    "main.css",
-  ]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      Webpack App
-    </title>
-    <link href="styles[0]"
-          rel="stylesheet"
-    >
-  </head>
-  <body>
-    <script type="text/javascript"
-            src="scripts[0]"
-    >
-    </script>
-  </body>
-</html>,
+  "index.html": "<!doctype html><html><head><meta charset=\\"utf-8\\"><title>Webpack App</title><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\"><link href=\\"main.css\\" rel=\\"stylesheet\\"></head><body><script src=\\"main.js\\"></script></body></html>",
   "main.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -244,57 +222,57 @@ SOURCE HTML: <!DOCTYPE html>
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
-._10JUT {
+._1zEMW {
   cursor: pointer;
 }
-._1zEMW {
+._29sNS {
   pointer-events: none;
 }
-._29sNS {
+._29S9Q {
   text-align: left;
 }
-._29S9Q {
+._3Pit8 {
   text-align: center;
 }
-._3Pit8 {
+._4I9aG {
   text-align: right;
 }
-._3CTQy {
+._2Nj6k {
   overflow: hidden;
 }
-._2Nj6k {
+._1gtjJ {
   overflow: scroll;
 }
-._1gtjJ {
+.ba2YH {
   overflow: visible;
 }
-.ba2YH {
+.BIdp3 {
   overflow: auto;
 }
-.BIdp3 {
+.sXF6i {
   min-width: 0;
 }
-.sXF6i {
+._32Ekc {
   top: 0;
 }
-._32Ekc {
+.IzyLY {
   bottom: 0;
 }
-.IzyLY {
+._2P1mD {
   left: 0;
 }
-._2P1mD {
+._36Q-K {
   right: 0;
 }
-._36Q-K {
+._232ow {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-._232ow {
+._24Rgf {
   outline: none;
 }
-._24Rgf {
+._3MPd_ {
   opacity: 0;
 }
 ._1PRnx {
@@ -631,34 +609,37 @@ SOURCE HTML: <!DOCTYPE html>
   box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.7);
 }
 ._1ZIuI_4 {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
+  box-shadow: inset 0 0 0 1px #898989;
 }
 ._3yod7_4 {
-  box-shadow: inset 0 0 0 1px #fff;
+  box-shadow: inset 0 0 0 1px #d6d6d6;
 }
 ._3YN6A_4 {
-  box-shadow: inset 0 0 0 1px #d0011b;
+  box-shadow: inset 0 0 0 1px #fff;
 }
 ._2Rbqf_4 {
-  box-shadow: inset 0 0 0 1px #ffc600;
+  box-shadow: inset 0 0 0 1px #d0011b;
 }
 ._3jsGH_4 {
-  box-shadow: inset 0 0 0 1px #138a08;
+  box-shadow: inset 0 0 0 1px #ffc600;
 }
 ._1db9R_4 {
-  box-shadow: inset 0 0 0 1px #1e468c;
+  box-shadow: inset 0 0 0 1px #138a08;
 }
 ._3n0R__4 {
+  box-shadow: inset 0 0 0 1px #1e468c;
+}
+.S6rFp_4 {
   box-shadow: inset 0 0 0 1px #9556b7;
 }
-.Q3F-4_4,
-.S6rFp_4 {
+._368ah_4,
+.Q3F-4_4 {
   box-shadow: inset 0 0 0 1px #2765cf;
 }
-._368ah_4 {
+.Ktic__4 {
   box-shadow: inset 0 0 0 2px #2765cf;
 }
-.Ktic__4 {
+._10JUT_4 {
   box-shadow: inset 0 0 0 2px #fff;
 }
 @media screen and (min-width: 740px) {
@@ -950,13 +931,13 @@ SOURCE HTML: <!DOCTYPE html>
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
-  ._4I9aG_4 {
+  ._3KMTN_4 {
     text-align: left;
   }
-  ._3KMTN_4 {
+  .UWgxb_4 {
     text-align: center;
   }
-  .UWgxb_4 {
+  ._2E2p6_4 {
     text-align: right;
   }
 }
@@ -1249,13 +1230,13 @@ SOURCE HTML: <!DOCTYPE html>
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
-  ._2E2p6_4 {
+  ._1Dj_q_4 {
     text-align: left;
   }
-  ._1Dj_q_4 {
+  ._2PSIb_4 {
     text-align: center;
   }
-  ._2PSIb_4 {
+  ._3CTQy_4 {
     text-align: right;
   }
 }
@@ -1523,24 +1504,25 @@ CSS: Array [
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>
       Webpack App
     </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
     <link href="styles[0]"
           rel="stylesheet"
     >
   </head>
   <body>
-    <script type="text/javascript"
-            src="scripts[0]"
-    >
+    <script src="scripts[0]">
     </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-             src="main.js"
-     >
+   <body>
+     <script src="main.js">
      </script>
 +    <div>
 +      <style type="text/css">

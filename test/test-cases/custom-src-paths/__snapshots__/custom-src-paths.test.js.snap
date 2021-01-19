@@ -3,8 +3,8 @@
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: Array [
   "/some-static-place/runtime-86b0612520998a189dfa.js",
-  "/some-static-place/vendors~main-cd5009cf83279bced273.js",
-  "/some-static-place/main-d3a461a5fa462c2c9ec9.js",
+  "/some-static-place/vendors~main-91908c9f433ff9041c76.js",
+  "/some-static-place/main-1e2504315b6c7aee9e5f.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -44,6 +44,11 @@ SOURCE HTML: <!DOCTYPE html>
     >
       []
     </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
@@ -68,8 +73,8 @@ exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
     "/some-static-place/runtime-86b0612520998a189dfa.js",
-    "/some-static-place/vendors~main-cd5009cf83279bced273.js",
-    "/some-static-place/main-d3a461a5fa462c2c9ec9.js",
+    "/some-static-place/vendors~main-91908c9f433ff9041c76.js",
+    "/some-static-place/main-1e2504315b6c7aee9e5f.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -109,6 +114,11 @@ SOURCE HTML: <!DOCTYPE html>
     >
       []
     </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
@@ -126,9 +136,9 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-d3a461a5fa462c2c9ec9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-1e2504315b6c7aee9e5f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-86b0612520998a189dfa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-cd5009cf83279bced273.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-91908c9f433ff9041c76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -181,6 +191,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"

@@ -55,6 +55,12 @@ SOURCE HTML: <!DOCTYPE html>
     >
       ["en-translations"]
     </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":["en-translations"]}
+    </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
@@ -138,6 +144,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
       ["fr-translations"]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":["fr-translations"]}
     </script>
     <script async
             data-chunk="main"

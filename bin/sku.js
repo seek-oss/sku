@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const log = require('debug')('sku:bin');
 const args = require('../config/args');
 const validatePeersDeps = require('../lib/validatePeersDeps');
 
@@ -7,7 +8,7 @@ const { script, debug } = args;
 if (debug) {
   // Enable all sku:* `debug` logs
   // @see https://www.npmjs.com/package/debug
-  process.env.DEBUG = 'sku:*';
+  process.env.DEBUG = `sku:*${`,${process.env.DEBUG}` || ''}`;
 }
 
 const configureProject = async () => {
@@ -18,6 +19,8 @@ const configureProject = async () => {
 const runScript = (scriptName) => {
   require(`../scripts/${scriptName}`);
 };
+
+log(`Starting script: ${script}`);
 
 (async () => {
   switch (script) {

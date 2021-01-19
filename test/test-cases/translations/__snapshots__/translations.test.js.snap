@@ -3,8 +3,8 @@
 exports[`translations should render en 1`] = `
 SCRIPTS: Array [
   "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-ea4bdf7f36c2d682daff.js",
-  "/main-2aa9d876e70fac066d57.js",
+  "/vendors~main-1a5f236d8685a0ff0d5e.js",
+  "/main-534769f7a806eb99d13c.js",
   "/en-translations-2cabc9c185c4314249c6.js",
 ]
 CSS: Array []
@@ -55,6 +55,11 @@ SOURCE HTML: <!DOCTYPE html>
     >
       [0]
     </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["en-translations"]}
+    </script>
     <script async
             data-chunk="main"
             src="scripts[0]"
@@ -83,8 +88,8 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`translations should render fr 1`] = `
 SCRIPTS: Array [
   "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-ea4bdf7f36c2d682daff.js",
-  "/main-2aa9d876e70fac066d57.js",
+  "/vendors~main-1a5f236d8685a0ff0d5e.js",
+  "/main-534769f7a806eb99d13c.js",
   "/fr-translations-370f2c09fd5f4b3623c8.js",
 ]
 CSS: Array []
@@ -134,6 +139,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [1]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["fr-translations"]}
     </script>
     <script async
             data-chunk="main"

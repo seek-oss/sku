@@ -2,28 +2,28 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 Object {
-  "AsyncComponent-18e291a94ae61b0bfa24.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-0d0b1ffe42314ce7ec56.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-0e82719ea3ab71aafb06.css": ._91MnZhe {
+  "AsyncComponent-3fc8c8c7b7f16fb473b7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-08619fa1ed4faf7f325f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-46218f039cf56e40f0d8.css": ._3BeyXnk {
   color: #00f;
 }
 ,
-  "handlers-Home-62bf94bf0fd2ba3c2aa2.css": ._1QX0Hyt {
+  "handlers-Home-ab64fe924eb8a378ed8b.css": ._2mrfIuP {
   color: red;
 }
 ,
-  "handlers-Home-e90deda4bbe0067652a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-937ac22a9ad9b1691bf9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-c82085b81c8ce196e641.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8d70182abbbf912c7287.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-bb96e3f1250c7e53937e.js",
-    "/static/place/vendors~main-18cb48690c66324719e3.js",
-    "/static/place/main-937ac22a9ad9b1691bf9.js",
-    "/static/place/handlers-Details-0d0b1ffe42314ce7ec56.js",
-    "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
+    "/static/place/runtime-038e1400c151d3f69f54.js",
+    "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+    "/static/place/main-8d70182abbbf912c7287.js",
+    "/static/place/handlers-Details-08619fa1ed4faf7f325f.js",
+    "/static/place/AsyncComponent-3fc8c8c7b7f16fb473b7.js",
   ]
 CSS: Array [
-    "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
+    "/static/place/handlers-Details-46218f039cf56e40f0d8.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -78,7 +78,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_91MnZhe">
+      <h1 class="_3BeyXnk">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -94,6 +94,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [1,0]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Details","AsyncComponent"]}
     </script>
     <script async
             data-chunk="main"
@@ -124,13 +129,13 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-bb96e3f1250c7e53937e.js",
-    "/static/place/vendors~main-18cb48690c66324719e3.js",
-    "/static/place/main-937ac22a9ad9b1691bf9.js",
-    "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
+    "/static/place/runtime-038e1400c151d3f69f54.js",
+    "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+    "/static/place/main-8d70182abbbf912c7287.js",
+    "/static/place/handlers-Home-c82085b81c8ce196e641.js",
   ]
 CSS: Array [
-    "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+    "/static/place/handlers-Home-ab64fe924eb8a378ed8b.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -180,7 +185,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_1QX0Hyt">
+      <h1 class="_2mrfIuP">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -193,6 +198,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [2]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Home"]}
     </script>
     <script async
             data-chunk="main"
@@ -218,14 +228,14 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-bb96e3f1250c7e53937e.js",
-    "/static/place/vendors~main-18cb48690c66324719e3.js",
-    "/static/place/main-937ac22a9ad9b1691bf9.js",
-    "/static/place/handlers-Details-0d0b1ffe42314ce7ec56.js",
-    "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
+    "/static/place/runtime-038e1400c151d3f69f54.js",
+    "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+    "/static/place/main-8d70182abbbf912c7287.js",
+    "/static/place/handlers-Details-08619fa1ed4faf7f325f.js",
+    "/static/place/AsyncComponent-3fc8c8c7b7f16fb473b7.js",
   ]
 CSS: Array [
-    "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
+    "/static/place/handlers-Details-46218f039cf56e40f0d8.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -280,7 +290,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_91MnZhe">
+      <h1 class="_3BeyXnk">
         Welcome to the Details page - nz
         <span>
           Some special async content
@@ -296,6 +306,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [1,0]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Details","AsyncComponent"]}
     </script>
     <script async
             data-chunk="main"
@@ -326,13 +341,13 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-bb96e3f1250c7e53937e.js",
-    "/static/place/vendors~main-18cb48690c66324719e3.js",
-    "/static/place/main-937ac22a9ad9b1691bf9.js",
-    "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
+    "/static/place/runtime-038e1400c151d3f69f54.js",
+    "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+    "/static/place/main-8d70182abbbf912c7287.js",
+    "/static/place/handlers-Home-c82085b81c8ce196e641.js",
   ]
 CSS: Array [
-    "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+    "/static/place/handlers-Home-ab64fe924eb8a378ed8b.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -382,7 +397,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_1QX0Hyt">
+      <h1 class="_2mrfIuP">
         Welcome to the Home page - nz
       </h1>
     </div>
@@ -395,6 +410,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [2]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Home"]}
     </script>
     <script async
             data-chunk="main"
@@ -418,22 +438,22 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-bb96e3f1250c7e53937e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-18cb48690c66324719e3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-038e1400c151d3f69f54.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-4956f9a60ccc9914d1de.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-bb96e3f1250c7e53937e.js",
-  "/static/place/vendors~main-18cb48690c66324719e3.js",
-  "/static/place/main-937ac22a9ad9b1691bf9.js",
-  "/static/place/handlers-Details-0d0b1ffe42314ce7ec56.js",
-  "/static/place/AsyncComponent-18e291a94ae61b0bfa24.js",
+  "/static/place/runtime-038e1400c151d3f69f54.js",
+  "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+  "/static/place/main-8d70182abbbf912c7287.js",
+  "/static/place/handlers-Details-08619fa1ed4faf7f325f.js",
+  "/static/place/AsyncComponent-3fc8c8c7b7f16fb473b7.js",
 ]
 CSS: Array [
-  "/static/place/handlers-Details-0e82719ea3ab71aafb06.css",
+  "/static/place/handlers-Details-46218f039cf56e40f0d8.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -488,7 +508,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_91MnZhe">
+      <h1 class="_3BeyXnk">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -504,6 +524,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [1,0]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Details","AsyncComponent"]}
     </script>
     <script async
             data-chunk="main"
@@ -535,7 +560,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="_91MnZhe">
+       <h1 class="_3BeyXnk">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -547,13 +572,13 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-bb96e3f1250c7e53937e.js",
-  "/static/place/vendors~main-18cb48690c66324719e3.js",
-  "/static/place/main-937ac22a9ad9b1691bf9.js",
-  "/static/place/handlers-Home-e90deda4bbe0067652a8.js",
+  "/static/place/runtime-038e1400c151d3f69f54.js",
+  "/static/place/vendors~main-4956f9a60ccc9914d1de.js",
+  "/static/place/main-8d70182abbbf912c7287.js",
+  "/static/place/handlers-Home-c82085b81c8ce196e641.js",
 ]
 CSS: Array [
-  "/static/place/handlers-Home-62bf94bf0fd2ba3c2aa2.css",
+  "/static/place/handlers-Home-ab64fe924eb8a378ed8b.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -603,7 +628,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_1QX0Hyt">
+      <h1 class="_2mrfIuP">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -616,6 +641,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       [2]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Home"]}
     </script>
     <script async
             data-chunk="main"
@@ -719,7 +749,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Details__root___91MnZhe">
+      <h1 class="Details__root___3BeyXnk">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -735,6 +765,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       ["vendors~handlers-Details~handlers-Home","handlers-Details","AsyncComponent"]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Details","AsyncComponent"]}
     </script>
     <script async
             data-chunk="main"
@@ -776,7 +811,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="Details__root___91MnZhe">
+       <h1 class="Details__root___3BeyXnk">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -856,7 +891,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Home__root___1QX0Hyt">
+      <h1 class="Home__root___2mrfIuP">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -869,6 +904,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       ["vendors~handlers-Details~handlers-Home","handlers-Home"]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["handlers-Home"]}
     </script>
     <script async
             data-chunk="main"

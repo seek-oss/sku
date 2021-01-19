@@ -3,11 +3,11 @@
 exports[`public path build and serve should create valid app with no unresolved resources 1`] = `
 SCRIPTS: Array [
   "/static/runtime-6eb1a7f8b78e5abe7b5e.js",
-  "/static/vendors~main-5905d0d5402631af1c30.js",
-  "/static/main-8020648858f08810f52e.js",
+  "/static/vendors~main-a514a6b5809cf8f3bcc9.js",
+  "/static/main-b49d49f04c1aea9b738d.js",
 ]
 CSS: Array [
-  "/static/main-f401cf2e0fb5e7b2ece2.css",
+  "/static/main-233fca28a3316d9a851c.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -41,13 +41,18 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1oKZ42c">
+      <div class="_2AngTzl">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"

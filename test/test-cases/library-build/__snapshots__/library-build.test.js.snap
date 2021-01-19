@@ -2,8 +2,8 @@
 
 exports[`library-build build should generate the expected files 1`] = `
 Object {
-  "0-b348463fbc95ead58255.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "1-ea2e02d503a095ca0c97.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "0-a1134ee5ec3e8b31e320.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "1-b335803306fb5c0eaf1a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "MyLibrary.css": .cJ_TZ2k {
   color: red;
 }

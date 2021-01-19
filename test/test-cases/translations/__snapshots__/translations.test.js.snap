@@ -2,10 +2,10 @@
 
 exports[`translations should render en 1`] = `
 SCRIPTS: Array [
-  "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-1a5f236d8685a0ff0d5e.js",
-  "/main-534769f7a806eb99d13c.js",
-  "/en-translations-2cabc9c185c4314249c6.js",
+  "/runtime-c23b2036f7ddf87040b9.js",
+  "/vendors~main-92f18a7ac8a07d75b4a1.js",
+  "/main-5b3d1a12d04f71ddd156.js",
+  "/en-translations-e581123a4492c402af5e.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -87,10 +87,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should render fr 1`] = `
 SCRIPTS: Array [
-  "/runtime-21d1ce78195a63cf1497.js",
-  "/vendors~main-1a5f236d8685a0ff0d5e.js",
-  "/main-534769f7a806eb99d13c.js",
-  "/fr-translations-370f2c09fd5f4b3623c8.js",
+  "/runtime-c23b2036f7ddf87040b9.js",
+  "/vendors~main-92f18a7ac8a07d75b4a1.js",
+  "/main-5b3d1a12d04f71ddd156.js",
+  "/fr-translations-f4898ff95f2574ccea80.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>

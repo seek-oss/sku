@@ -86,7 +86,6 @@ Object {
 }
 ._2PHih {
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 ._3JHxg {
@@ -1415,7 +1414,7 @@ Object {
   color: #9556b7;
 }
 ._3vlP__4 {
-  color: rgba(28, 28, 28, 0.63);
+  color: rgba(28, 28, 28, 0.6313725490196078);
 }
 ._1weGM_4 {
   color: #2765cf;
@@ -1427,7 +1426,7 @@ Object {
   color: #fff;
 }
 ._38cx__4 {
-  color: rgba(28, 28, 28, 0.63);
+  color: rgba(28, 28, 28, 0.6313725490196078);
 }
 .MxhoO_4 {
   color: hsla(0, 0%, 100%, 0.65);

@@ -2,9 +2,9 @@
 
 exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
-  "/static/typescript/runtime-af90dfb73f645abd9001.js",
-  "/static/typescript/vendors~main-fb4b5cbe68fb9d7ec131.js",
-  "/static/typescript/main-178ec834d3543caa6d83.js",
+  "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+  "/static/typescript/vendors~main-60b4673832a3280c77f1.js",
+  "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
 ]
 CSS: Array [
   "/static/typescript/main-3d394153f1fe77316782.css",
@@ -92,9 +92,9 @@ export const border: string;
 export const root: string;
 ",
   "index.html": SCRIPTS: Array [
-    "/static/typescript/runtime-af90dfb73f645abd9001.js",
-    "/static/typescript/vendors~main-fb4b5cbe68fb9d7ec131.js",
-    "/static/typescript/main-178ec834d3543caa6d83.js",
+    "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+    "/static/typescript/vendors~main-60b4673832a3280c77f1.js",
+    "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
   ]
 CSS: Array [
     "/static/typescript/main-3d394153f1fe77316782.css",
@@ -175,7 +175,6 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-178ec834d3543caa6d83.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -185,16 +184,17 @@ export default cssExports;
   font-size: 32px;
 }
 ,
-  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-fb4b5cbe68fb9d7ec131.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-74f6b2c1896a09ddb8bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-60b4673832a3280c77f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: Array [
-  "/static/typescript/runtime-af90dfb73f645abd9001.js",
-  "/static/typescript/vendors~main-d6f078a77f58b0a58f54.js",
-  "/static/typescript/main-35be1c9992cd6d1e485f.js",
+  "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+  "/static/typescript/vendors~main-ce37685b665a9cc1e7bd.js",
+  "/static/typescript/main-f9b7a8f9a2f8ad43ba02.js",
 ]
 CSS: Array [
   "/static/typescript/main-3d394153f1fe77316782.css",
@@ -290,7 +290,6 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-35be1c9992cd6d1e485f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -300,9 +299,10 @@ export default cssExports;
   font-size: 32px;
 }
 ,
-  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f9b7a8f9a2f8ad43ba02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-d6f078a77f58b0a58f54.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ce37685b665a9cc1e7bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -2,9 +2,9 @@
 
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: Array [
-  "/runtime-554e53c2f72903d6f45f.js",
-  "/vendors~main-40dd5124003efda2c303.js",
-  "/main-2085bc8fbeb4575a9673.js",
+  "/runtime-65345ce7e7d7d2dcf37c.js",
+  "/vendors~main-60af4b77496fc05c5bf5.js",
+  "/main-863f2674fa7524dcedcd.js",
 ]
 CSS: Array [
   "/main-3d394153f1fe77316782.css",
@@ -91,9 +91,9 @@ POST HYDRATE DIFFS:
 exports[`react-css-modules should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
-    "/runtime-554e53c2f72903d6f45f.js",
-    "/vendors~main-40dd5124003efda2c303.js",
-    "/main-2085bc8fbeb4575a9673.js",
+    "/runtime-65345ce7e7d7d2dcf37c.js",
+    "/vendors~main-60af4b77496fc05c5bf5.js",
+    "/main-863f2674fa7524dcedcd.js",
   ]
 CSS: Array [
     "/main-3d394153f1fe77316782.css",
@@ -165,7 +165,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-2085bc8fbeb4575a9673.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -175,7 +174,8 @@ SOURCE HTML: <!DOCTYPE html>
   font-size: 32px;
 }
 ,
-  "runtime-554e53c2f72903d6f45f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-40dd5124003efda2c303.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-863f2674fa7524dcedcd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-65345ce7e7d7d2dcf37c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-60af4b77496fc05c5bf5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

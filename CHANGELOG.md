@@ -1,5 +1,11 @@
 # sku
 
+## 10.9.4
+
+### Patch Changes
+
+- Upgrade Vocab depenedency ([#566](https://github.com/seek-oss/sku/pull/566))
+
 ## 10.9.3
 
 ### Patch Changes

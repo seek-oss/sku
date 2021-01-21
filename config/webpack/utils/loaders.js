@@ -63,13 +63,13 @@ const makeCssLoaders = (options = {}) => {
       loader: require.resolve('css-loader'),
       options: {
         modules: {
+          // On the server, avoid generating a CSS file with onlyLocals.
+          // Only the client build should generate CSS files.
+          exportOnlyLocals: target === 'node',
           mode: 'local',
           localIdentName: `${debugIdent}[hash:base64:7]`,
         },
 
-        // On the server, avoid generating a CSS file with onlyLocals.
-        // Only the client build should generate CSS files.
-        onlyLocals: target === 'node',
         importLoaders: 3,
       },
     },

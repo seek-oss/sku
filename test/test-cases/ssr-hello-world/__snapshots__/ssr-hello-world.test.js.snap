@@ -2,13 +2,13 @@
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
 SCRIPTS: Array [
-  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
-  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
-  "http://localhost:4000/main-cc5418322af749866f17.js",
+  "http://localhost:4000/runtime-815ebd80d2b329bb79f4.js",
+  "http://localhost:4000/vendors~main-8a3e27ee22b528a039d3.js",
+  "http://localhost:4000/main-d0715ecc2ee82d2e4b37.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
-  "http://localhost:4000/main-fadb2269a374a06075a5.css",
+  "http://localhost:4000/main-3d394153f1fe77316782.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -48,8 +48,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo">
-        <div class="_3YtmnHj">
+      <div class="_1dMllru">
+        <div class="pRp9RFx">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -65,6 +65,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -91,13 +97,13 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 SCRIPTS: Array [
-  "http://localhost:4000/runtime-9b5f97582c0e6c4a5831.js",
-  "http://localhost:4000/vendors~main-293de8fb778fafa23f06.js",
-  "http://localhost:4000/main-cc5418322af749866f17.js",
+  "http://localhost:4000/runtime-815ebd80d2b329bb79f4.js",
+  "http://localhost:4000/vendors~main-8a3e27ee22b528a039d3.js",
+  "http://localhost:4000/main-d0715ecc2ee82d2e4b37.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
-  "http://localhost:4000/main-fadb2269a374a06075a5.css",
+  "http://localhost:4000/main-3d394153f1fe77316782.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -137,8 +143,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo">
-        <div class="_3YtmnHj">
+      <div class="_1dMllru">
+        <div class="pRp9RFx">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -154,6 +160,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -226,8 +238,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo">
-        <div class="lessStyles__nested___3YtmnHj">
+      <div class="lessStyles__root___1dMllru">
+        <div class="lessStyles__nested___pRp9RFx">
           Hello World
         </div>
         <img src="http://localhost:8100/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -243,6 +255,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"

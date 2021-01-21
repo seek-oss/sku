@@ -9,24 +9,27 @@ const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
-const assertStorybookContent = async (url) => {
+const getStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 
-  const content = await page.evaluate(async () => {
-    const element = await window.document
-      .querySelector('iframe')
-      .contentDocument.querySelector('[data-automation-text]');
+  const iframeElement = await page.waitForSelector('#storybook-preview-iframe');
 
-    const text = element.innerText;
-    const styles = window.getComputedStyle(element);
-    const fontSize = styles.getPropertyValue('font-size');
+  const storybookFrame = await iframeElement.contentFrame();
 
-    return { text, fontSize };
-  });
+  if (!storybookFrame) {
+    console.log('Unable to find storybookFrame', storybookFrame);
+    throw new Error('Unable to find iframe by id');
+  }
 
-  expect(content.text).toEqual('Storybook render');
-  expect(content.fontSize).toEqual('32px');
+  const element = await storybookFrame.waitForSelector(
+    '[data-automation-text]',
+  );
+
+  return element.evaluate((e) => ({
+    text: e.innerText,
+    fontSize: window.getComputedStyle(e).getPropertyValue('font-size'),
+  }));
 };
 
 describe('react-css-modules', () => {
@@ -70,7 +73,9 @@ describe('react-css-modules', () => {
     });
 
     it('should start a storybook server', async () => {
-      await assertStorybookContent(storybookUrl);
+      const { text, fontSize } = await getStorybookContent(storybookUrl);
+      expect(text).toEqual('Storybook render');
+      expect(fontSize).toEqual('32px');
     });
   });
 
@@ -87,7 +92,12 @@ describe('react-css-modules', () => {
     });
 
     it('should create valid storybook', async () => {
-      await assertStorybookContent('http://localhost:4297');
+      const { text, fontSize } = await getStorybookContent(
+        'http://localhost:4297',
+      );
+
+      expect(text).toEqual('Storybook render');
+      expect(fontSize).toEqual('32px');
     });
   });
 });

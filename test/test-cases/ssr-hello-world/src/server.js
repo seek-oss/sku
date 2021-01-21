@@ -45,7 +45,6 @@ export default () => ({
         headTags: flushHeadTags(),
       }),
     );
-    res.flush();
     await Promise.resolve();
 
     const app = renderToString(

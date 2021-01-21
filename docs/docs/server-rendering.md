@@ -66,7 +66,6 @@ export default () => ({
     res.status(200);
     // Call `flushHeadTags` early to retrieve whatever tags are available.
     res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
-    res.flush();
     await Promise.resolve();
 
     const app = renderToString(

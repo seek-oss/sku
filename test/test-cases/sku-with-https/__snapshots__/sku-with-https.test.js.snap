@@ -2,12 +2,12 @@
 
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: Array [
-  "/runtime-554e53c2f72903d6f45f.js",
-  "/vendors~main-bb22006a59d77a2dca2d.js",
-  "/main-e28c3a479c94c7d64a19.js",
+  "/runtime-65345ce7e7d7d2dcf37c.js",
+  "/vendors~main-c7e97e561a56e153c250.js",
+  "/main-5af263bd9d40109121f8.js",
 ]
 CSS: Array [
-  "/main-fadb2269a374a06075a5.css",
+  "/main-3d394153f1fe77316782.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -44,10 +44,10 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo"
+      <div class="_1dMllru"
            data-reactroot
       >
-        <div class="_3YtmnHj">
+        <div class="pRp9RFx">
           Hello World
         </div>
         <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -57,6 +57,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -144,10 +149,10 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo"
+      <div class="lessStyles__root___1dMllru"
            data-reactroot
       >
-        <div class="lessStyles__nested___3YtmnHj">
+        <div class="lessStyles__nested___pRp9RFx">
           Hello World
         </div>
         <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -157,6 +162,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -246,8 +256,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo">
-        <div class="lessStyles__nested___3YtmnHj">
+      <div class="lessStyles__root___1dMllru">
+        <div class="lessStyles__nested___pRp9RFx">
           Hello World
         </div>
         <img src="https://localhost:9843/a85d2645cc4d80a20b5ba78e8e797449.png">
@@ -258,6 +268,12 @@ SOURCE HTML: <!DOCTYPE html>
             crossorigin="anonymous"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"

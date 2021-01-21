@@ -2,12 +2,12 @@
 
 exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
-  "/static/typescript/runtime-af90dfb73f645abd9001.js",
-  "/static/typescript/vendors~main-f196002cae30d052c86d.js",
-  "/static/typescript/main-3bcb7ec81a3ef1bfea57.js",
+  "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+  "/static/typescript/vendors~main-60b4673832a3280c77f1.js",
+  "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
 ]
 CSS: Array [
-  "/static/typescript/main-fadb2269a374a06075a5.css",
+  "/static/typescript/main-3d394153f1fe77316782.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -41,8 +41,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo">
-        <div class="_3YtmnHj"
+      <div class="_1dMllru">
+        <div class="pRp9RFx"
              data-automation-text="true"
         >
           Hello World
@@ -53,6 +53,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -87,12 +92,12 @@ export const border: string;
 export const root: string;
 ",
   "index.html": SCRIPTS: Array [
-    "/static/typescript/runtime-af90dfb73f645abd9001.js",
-    "/static/typescript/vendors~main-f196002cae30d052c86d.js",
-    "/static/typescript/main-3bcb7ec81a3ef1bfea57.js",
+    "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+    "/static/typescript/vendors~main-60b4673832a3280c77f1.js",
+    "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
   ]
 CSS: Array [
-    "/static/typescript/main-fadb2269a374a06075a5.css",
+    "/static/typescript/main-3d394153f1fe77316782.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -126,8 +131,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo">
-        <div class="_3YtmnHj"
+      <div class="_1dMllru">
+        <div class="pRp9RFx"
              data-automation-text="true"
         >
           Hello World
@@ -138,6 +143,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -162,32 +172,32 @@ interface CssExports {
   'nested': string;
   'root': string;
 }
-declare const cssExports: CssExports;
-export = cssExports;
+export const cssExports: CssExports;
+export default cssExports;
 ",
-  "main-3bcb7ec81a3ef1bfea57.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-fadb2269a374a06075a5.css": ._1brbpTo {
+  "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1brbpTo ._3YtmnHj {
+._1dMllru .pRp9RFx {
   font-size: 32px;
 }
 ,
-  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-f196002cae30d052c86d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-74f6b2c1896a09ddb8bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-60b4673832a3280c77f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: Array [
-  "/static/typescript/runtime-af90dfb73f645abd9001.js",
-  "/static/typescript/vendors~main-984fab7243c3dc553e6f.js",
-  "/static/typescript/main-d70fedbf6e448a2f803f.js",
+  "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
+  "/static/typescript/vendors~main-ce37685b665a9cc1e7bd.js",
+  "/static/typescript/main-f9b7a8f9a2f8ad43ba02.js",
 ]
 CSS: Array [
-  "/static/typescript/main-fadb2269a374a06075a5.css",
+  "/static/typescript/main-3d394153f1fe77316782.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -221,8 +231,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1brbpTo">
-        <div class="_3YtmnHj"
+      <div class="_1dMllru">
+        <div class="pRp9RFx"
              data-automation-text="true"
         >
           Hello World
@@ -233,6 +243,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"
@@ -272,22 +287,22 @@ interface CssExports {
   'nested': string;
   'root': string;
 }
-declare const cssExports: CssExports;
-export = cssExports;
+export const cssExports: CssExports;
+export default cssExports;
 ",
-  "main-d70fedbf6e448a2f803f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-fadb2269a374a06075a5.css": ._1brbpTo {
+  "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-._1brbpTo ._3YtmnHj {
+._1dMllru .pRp9RFx {
   font-size: 32px;
 }
 ,
-  "runtime-af90dfb73f645abd9001.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f9b7a8f9a2f8ad43ba02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-984fab7243c3dc553e6f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-ce37685b665a9cc1e7bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -338,8 +353,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1brbpTo">
-        <div class="lessStyles__nested___3YtmnHj"
+      <div class="lessStyles__root___1dMllru">
+        <div class="lessStyles__nested___pRp9RFx"
              data-automation-text="true"
         >
           Hello World
@@ -350,6 +365,11 @@ SOURCE HTML: <!DOCTYPE html>
             type="application/json"
     >
       []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
     </script>
     <script async
             data-chunk="main"

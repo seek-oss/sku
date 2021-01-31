@@ -2688,12 +2688,12 @@
     "@typescript-eslint/types" "4.14.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vocab/core@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@vocab/core/-/core-0.0.9.tgz#bd86d021255a5758bcf95284b1b30d29573db0b0"
-  integrity sha512-bKJoLpr20zD4N4PgOzTJ9iC6ZcUQ0qH3hr1+ePNWbCfFC7t3LiR4O42c2VBVClqaMmHvEsJiUr8J9SLZ0QyqJA==
+"@vocab/core@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@vocab/core/-/core-0.0.11.tgz#389df08c069782eb2c86813238c69b9406c7c558"
+  integrity sha512-v6r/2hRAto48HqFS5oUW1f1pAK+b2F8V74YIhnO+vPj4sKOuib+InuoDp+8H9EcyavxfsFkGQ1c9Ustxr8p6xQ==
   dependencies:
-    "@vocab/types" "^0.0.8"
+    "@vocab/types" "^0.0.9"
     chalk "^4.1.0"
     chokidar "^3.4.3"
     debug "^4.3.1"
@@ -2704,30 +2704,30 @@
     intl-messageformat-parser "^6.0.16"
     prettier "^2.1.2"
 
-"@vocab/phrase@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-0.0.9.tgz#d41a0a8f412abbb2c648e1847baa4f9d25ab0efe"
-  integrity sha512-XdRbWDsUfA7c31KL0tz+nQFdqDPGwg4sYB5RWvvcqi4YR+nyd80gkwIJTUguo64YbptruHe31DoJQcSQzq9F9g==
+"@vocab/phrase@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-0.0.11.tgz#85a9c94038070e37db012ba40630df2f0554ba5d"
+  integrity sha512-NsoctqWtbh4WLbxJ8xXqYBU6OuaVA6IWBoR6zjd/Kx0IGixzZy/0ygzVnhop+5xwfmeTRP9vw1MV5+H1HL2alA==
   dependencies:
-    "@vocab/core" "^0.0.9"
-    "@vocab/types" "^0.0.8"
+    "@vocab/core" "^0.0.11"
+    "@vocab/types" "^0.0.9"
     chalk "^4.1.0"
     debug "^4.3.1"
     form-data "^3.0.0"
     node-fetch "^2.6.1"
 
-"@vocab/react@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@vocab/react/-/react-0.0.11.tgz#f428eee8657d5cc0b9362e99c2744c3edab2a787"
-  integrity sha512-o/BPI2gsdxNjyYnx7j8gAM3rWbbFbWBbx/ERwqj6OgNJgqBon6s4DdwPEpiwfKn63E0v7R27DA38xF4mc2JmYw==
+"@vocab/react@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@vocab/react/-/react-0.0.12.tgz#de10b46b0b42b938f3dd48652038df80f7348c06"
+  integrity sha512-4/IW1begYiDVSacFXzRmtAQFm/gqYEESuCGSeICVg+DuV8ZgGGvtjSv2nNCMqjeZkNHs/k6tYRKEu/zNw3I7vw==
   dependencies:
-    "@vocab/types" "^0.0.8"
+    "@vocab/types" "^0.0.9"
     intl-messageformat "^9.3.18"
 
-"@vocab/types@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@vocab/types/-/types-0.0.8.tgz#853f9cedcd0dc4148bed59de0f8b579e32f6b4c5"
-  integrity sha512-DBsuQc0ztcZKHg7LoKjEE2+2CNuruu+vkIa1Gn8zt7oGlP/3Fv+ttje8IyyC9C27SEIYopjmsY54suUMr3DQ0Q==
+"@vocab/types@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@vocab/types/-/types-0.0.9.tgz#0d71288b773ca4afd864b9532f844818e3781b3d"
+  integrity sha512-8qNCV5Sns8j/RRv8faKtAHqQRKFhrrNcygSzYdLLoHLb/oku39j1cOiZmriDFCCvmfFsb/FxXOC9KNVUWBT51Q==
   dependencies:
     intl-messageformat "^9.3.18"
 
@@ -2738,13 +2738,13 @@
   dependencies:
     loader-utils "^2.0.0"
 
-"@vocab/webpack@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@vocab/webpack/-/webpack-0.0.17.tgz#5f031a55106bf4758f20b6110eecc576c9479445"
-  integrity sha512-w3VropzXYt9l+NctHb6U8ZUf7MwQ8KqCFkmpuMhEgv+dJHJ2HZNhtlOzQESVYwGHUAMkFZo3Lmf85a/mV9Sp9A==
+"@vocab/webpack@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@vocab/webpack/-/webpack-0.0.19.tgz#91d6c75af0991ff94e0fda3ed526252d22241a93"
+  integrity sha512-FFLRBn/72h0Pd8Z4p2t804/WpuWnbcPbeLc4uHyLTYfmHZYMxGl0gkLsK8QUjkOnS5nOQMcX43C5s+OtVjUv1w==
   dependencies:
-    "@vocab/core" "^0.0.9"
-    "@vocab/types" "^0.0.8"
+    "@vocab/core" "^0.0.11"
+    "@vocab/types" "^0.0.9"
     "@vocab/unloader" "^0.0.1"
     chalk "^4.1.0"
     debug "^4.3.1"

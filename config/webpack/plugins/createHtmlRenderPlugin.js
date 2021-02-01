@@ -34,9 +34,12 @@ const mapStatsToParams = ({ webpackStats }) => {
 const getStartRoutes = () => {
   const allRouteCombinations = [];
 
+  const forcedSites = sites.length > 0 ? sites : [undefined];
+
   for (const route of routes) {
     const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-    for (const language of getValidLanguagesForRoute(route)) {
+    const languages = getValidLanguagesForRoute(route);
+    for (const language of languages) {
       if (routeIsForSpecificSite) {
         allRouteCombinations.push({
           route,
@@ -45,7 +48,7 @@ const getStartRoutes = () => {
         });
       } else {
         allRouteCombinations.push(
-          ...sites.map((site) => ({ site, route, language })),
+          ...forcedSites.map((site) => ({ site, route, language })),
         );
       }
     }

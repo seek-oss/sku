@@ -25,7 +25,7 @@ const {
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
-const { getLanguageFromRoute } = require('../lib/language-utils');
+const { getRouteWithLanguage } = require('../lib/language-utils');
 
 const { watchVocabCompile } = require('../lib/runVocab');
 
@@ -113,9 +113,12 @@ const hot = process.env.SKU_HOT !== 'false';
         }
 
         let chosenLanguage;
+        let routeWithLanguage;
 
         try {
-          chosenLanguage = getLanguageFromRoute(req, matchingRoute);
+          const routeInfo = getRouteWithLanguage(req, matchingRoute);
+          chosenLanguage = routeInfo.language;
+          routeWithLanguage = routeInfo.route;
         } catch (e) {
           return res.status(500).send(
             exceptionFormatter(e, {
@@ -128,7 +131,7 @@ const hot = process.env.SKU_HOT !== 'false';
 
         htmlRenderPlugin
           .renderWhenReady({
-            route: matchingRoute.route,
+            route: routeWithLanguage || matchingRoute.route,
             routeName: matchingRoute.name,
             site: matchingSiteName,
             language: chosenLanguage,

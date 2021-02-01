@@ -24,7 +24,10 @@ const resolveEnvironment = require('../lib/resolveEnvironment');
 const args = require('../config/args');
 const track = require('../telemetry');
 const createServer = require('../lib/createServer');
-const { getValidLanguagesForRoute } = require('../lib/language-utils');
+const {
+  getRouteWithLanguage,
+  getValidLanguagesForRoute,
+} = require('../lib/language-utils');
 
 const prefferedSite = args.site;
 
@@ -115,7 +118,7 @@ const prefferedSite = args.site;
 
     const rewrites = flatMap(validRoutes, (route) =>
       getValidLanguagesForRoute(route).map((lang) => {
-        const langRoute = route.route.replace('$language', lang);
+        const langRoute = getRouteWithLanguage(route.route, lang);
 
         const normalisedRoute = langRoute
           .split('/')

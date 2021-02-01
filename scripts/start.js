@@ -113,12 +113,9 @@ const hot = process.env.SKU_HOT !== 'false';
         }
 
         let chosenLanguage;
-        let routeWithLanguage;
 
         try {
-          const routeInfo = getRouteWithLanguage(req, matchingRoute);
-          chosenLanguage = routeInfo.language;
-          routeWithLanguage = routeInfo.route;
+          chosenLanguage = getLanguageFromRoute(req, matchingRoute);
         } catch (e) {
           return res.status(500).send(
             exceptionFormatter(e, {
@@ -131,7 +128,7 @@ const hot = process.env.SKU_HOT !== 'false';
 
         htmlRenderPlugin
           .renderWhenReady({
-            route: routeWithLanguage || matchingRoute.route,
+            route: getRouteWithLanguage(matchingRoute.route, chosenLanguage),
             routeName: matchingRoute.name,
             site: matchingSiteName,
             language: chosenLanguage,

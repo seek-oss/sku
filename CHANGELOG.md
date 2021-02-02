@@ -1,5 +1,36 @@
 # sku
 
+## 10.9.5
+
+### Patch Changes
+
+- Upgrade to v0.0.9 Vocab supporting direct usage ([#571](https://github.com/seek-oss/sku/pull/571))
+
+- Replace all instances of \$language in a route not just the first ([#572](https://github.com/seek-oss/sku/pull/572))
+
+- Replace \$language in route when using dev server ([#572](https://github.com/seek-oss/sku/pull/572))
+
+  When implementing `renderApp` for statically rendered applications previously `route` could contain `$language` inside the URL.
+
+  Now `route` will have any `$language` value replaced with the current language being rendered.
+
+  ```ts
+  const skuRender: Render<RenderContext> = {
+    renderApp: ({ SkuProvider, route, language }) => {
+      // e.g. language === "en"
+
+      // previous behaviour
+      // route === "/$language/home"
+
+      // new behaviour
+      // route === "/en/home"
+    },
+    ...
+  }
+  ```
+
+- Upgrade multiple dependencies ([#565](https://github.com/seek-oss/sku/pull/565))
+
 ## 10.9.4
 
 ### Patch Changes

@@ -30,4 +30,9 @@ describe('translations', () => {
     const app = await getAppSnapshot(`${baseUrl}/fr`);
     expect(app).toMatchSnapshot();
   });
+
+  it('should support query parameters', async () => {
+    const app = await getAppSnapshot(`${baseUrl}/en?a=1`);
+    expect(app).toMatchSnapshot();
+  });
 });

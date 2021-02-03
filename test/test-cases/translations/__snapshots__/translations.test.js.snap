@@ -169,3 +169,88 @@ SOURCE HTML: <!DOCTYPE html>
 </html>
 POST HYDRATE DIFFS: NO DIFF
 `;
+
+exports[`translations should support query parameters 1`] = `
+SCRIPTS: Array [
+  "/runtime-c23b2036f7ddf87040b9.js",
+  "/vendors~main-406f6549a0224792b394.js",
+  "/main-d9d72f1d85db19d1536f.js",
+  "/en-translations-e581123a4492c402af5e.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <link data-chunk="en-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"language":"en"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      [0]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":["en-translations"]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+    <script async
+            data-chunk="en-translations"
+            src="scripts[3]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;

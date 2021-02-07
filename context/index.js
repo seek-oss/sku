@@ -61,12 +61,6 @@ if (normalizedRoutes.length === 0) {
   normalizedRoutes.push({ name: 'default', route: '/' });
 }
 
-if (skuConfig.languages) {
-  console.log(
-    chalk.yellow('Multi-language support is currently experimental'),
-    'Expect breaking changes over the coming releases.',
-  );
-}
 const normalizedLanguages = skuConfig.languages
   ? skuConfig.languages.map((lang) =>
       typeof lang === 'string' ? { name: lang } : lang,

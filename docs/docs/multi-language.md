@@ -1,7 +1,5 @@
 # Multi-language applications
 
-**WARNING:** Multi-language support is currently experimental. Expect breaking changes over the coming releases.
-
 (via [Vocab](https://github.com/seek-oss/vocab))
 
 If your application supports multiple languages you can designate those languages with the `languages` configuration.
@@ -91,7 +89,7 @@ If one of your sites only supports a subset of languages you can specify them in
 
 ## Hierarchy
 
-In general, you'll want to create a full set of translations for every supported language. However, some languages may only require small tweeks to a base language.
+In general, you'll want to create a full set of translations for every supported language. However, some languages may only require small tweaks to a base language.
 
 For example, only needing to translate a few strings with different spelling such as `color` to `colour` between 'en-US' and 'en-AU'.
 
@@ -101,7 +99,7 @@ In this case you can have one language extend another. sku will then copy any mi
 
 ## Custom locale
 
-When formatting ICU messages vocab will format values such dates and numbers according to the current language. In general, the language should match the locale that you want to use to format messages. However, where it doesn't, you can set the locale seperately in `<VocabProvider>`.
+When formatting ICU messages vocab will format values such dates and numbers according to the current language. In general, the language should match the locale that you want to use to format messages. However, where it doesn't, you can set the locale separately in `<VocabProvider>`.
 
 **E.g.** Using `en-AU` as the locale but only using one central `en` language.
 

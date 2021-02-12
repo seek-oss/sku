@@ -10,7 +10,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
-const VocabWebpackPlugin = require('@vocab/webpack').default;
+const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const debug = require('debug')('sku:webpack:config');
 const args = require('../args');

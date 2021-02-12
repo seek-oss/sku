@@ -2,6 +2,7 @@
 node_modules
 coverage/
 dist/
+dist-ssr/
 dist-build/
 dist-playroom/
 dist-start/

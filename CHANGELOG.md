@@ -1,5 +1,19 @@
 # sku
 
+## 10.10.0
+
+### Minor Changes
+
+- Stable support for multi-language functionality ([#576](https://github.com/seek-oss/sku/pull/576))
+
+  With Vocab now released v1.0.0 we now offer stable support for using the new multi-language functionality.
+
+  See [multi-language support guide](https://seek-oss.github.io/sku/#/./docs/multi-language) for how to get started.
+
+### Patch Changes
+
+- Fix unable to find language in URLs that contain query parameters ([#573](https://github.com/seek-oss/sku/pull/573))
+
 ## 10.9.5
 
 ### Patch Changes

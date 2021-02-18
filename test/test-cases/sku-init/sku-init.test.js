@@ -11,7 +11,9 @@ describe('sku init', () => {
     const projectName = 'new-project';
     await rmfr(path.join(__dirname, projectName));
 
-    const childPromise = spawnSkuScriptInDir('init', __dirname, [projectName]);
+    const childPromise = spawnSkuScriptInDir('init', __dirname, [projectName], {
+      pipeToParentIo: false,
+    });
     const childProcess = childPromise.childProcess;
 
     childProcess.stdout.on('data', async (data) => {

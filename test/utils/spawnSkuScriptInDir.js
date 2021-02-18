@@ -2,7 +2,7 @@ const { spawn } = require('child-process-promise');
 
 const skuBin = `${__dirname}/../../bin/sku.js`;
 
-module.exports = (script, cwd, args = []) => {
+module.exports = (script, cwd, args = [], options = {}) => {
   const childPromise = spawn(skuBin, [script, ...args], {
     stdio: 'pipe',
     cwd,
@@ -15,7 +15,9 @@ module.exports = (script, cwd, args = []) => {
     // See node v12: https://nodejs.org/docs/latest-v12.x/api/child_process.html#child_process_child_process_exec_command_options_callback
     maxBuffer: 1024 * 1024,
   });
-  childPromise.childProcess.stdout.pipe(process.stdout);
-  childPromise.childProcess.stderr.pipe(process.stderr);
+  if (options.pipeToParentIo) {
+    childPromise.childProcess.stdout.pipe(process.stdout);
+    childPromise.childProcess.stderr.pipe(process.stderr);
+  }
   return childPromise;
 };

@@ -16,6 +16,7 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const { getMissingHosts } = require('../lib/hosts');
 const { getSuggestedScript } = require('../lib/suggestScript');
+const trace = require('debug')('sku:init');
 
 const getFileContent = bent('string');
 
@@ -52,6 +53,8 @@ const args = require('../config/args');
 
   const root = path.resolve(projectName);
   setCwd(root);
+
+  trace(`Creating project "${projectName}" in "${root}"`);
 
   const appName = path.basename(root);
 

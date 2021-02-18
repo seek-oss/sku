@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Fix errors initizating repo after kopy dependency upgrade
+Fix errors initializing repo after kopy dependency upgrade

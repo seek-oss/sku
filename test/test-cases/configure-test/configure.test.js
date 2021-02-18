@@ -3,7 +3,7 @@ const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 const copyFile = promisify(fs.copyFile);
 const makeDir = promisify(fs.mkdir);
-const rimraf = promisify(require('rimraf'));
+const rmfr = require('rmfr');
 const path = require('path');
 const jsonc = require('jsonc-parser');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
@@ -40,7 +40,7 @@ const copyToApp = async (filename, folder) =>
   copyFile(path.join(__dirname, filename), path.join(folder, filename));
 
 const removeAppDir = async (folder) =>
-  rimraf(folder, {
+  rmfr(folder, {
     glob: {
       dot: true,
     },

@@ -3,19 +3,16 @@
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 Object {
   "AsyncComponent-bc5d343df61b02e299cc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-2785fc148c18ac477e17.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-46218f039cf56e40f0d8.css": ._3BeyXnk {
   color: #00f;
 }
 ,
-  "handlers-Details.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-5523da6ae0d23166e768.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-ab64fe924eb8a378ed8b.css": ._2mrfIuP {
   color: red;
 }
 ,
-  "handlers-Home.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-d113c77937161fdb56f4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
@@ -441,7 +438,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-fd9a676b2f9add39597e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-880c2c53e5fe1e5c8519.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

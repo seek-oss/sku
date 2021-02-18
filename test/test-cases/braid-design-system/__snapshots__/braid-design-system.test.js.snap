@@ -197,7 +197,6 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main-7897e25dea25edcb30b4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-51492d5f6786ed97b1b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
     "/runtime-51492d5f6786ed97b1b9.js",
@@ -388,7 +387,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-catho.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-314ae9fadd9e4dc54c8d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -397,7 +395,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-jobStreet.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-ac373823730903d1c270.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -406,7 +403,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-jobStreetClassic.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -415,7 +411,6 @@ SOURCE HTML: <!DOCTYPE html>
 }
 ,
   "themes-jobsDb-d564277060debf787896.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -424,7 +419,6 @@ SOURCE HTML: <!DOCTYPE html>
 }
 ,
   "themes-occ-c78d20b3f91154b9d039.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-occ.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-9baa33404f87a145960d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -433,7 +427,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-seekAnz.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-35741ccd9f738cadd134.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -442,7 +435,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-seekBusiness.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekUnifiedBeta-095aeaba1f5537beae86.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekUnifiedBeta-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -451,7 +443,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-seekUnifiedBeta.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-022a40e6ac55d819a67f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
@@ -460,7 +451,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-wireframe.render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-60f41b371bd621c0e29e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-catho-2de427a080e0e8c2ac72.css": .FYwKg {
   margin: 0;

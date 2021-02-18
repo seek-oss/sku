@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect */
 const path = require('path');
 const { promisify } = require('util');
-const rmfr = require('rmfr');
+const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
@@ -19,7 +19,7 @@ function createPackageLink(name) {
 
 async function linkLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
-  await rmfr(nodeModules);
+  await rimrafAsync(nodeModules);
   await fs.mkdir(nodeModules);
   await Promise.all(
     ['react', 'react-dom', 'seek-style-guide'].map(createPackageLink),

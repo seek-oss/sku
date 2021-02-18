@@ -1,6 +1,7 @@
 const path = require('path');
+const { promisify } = require('util');
 const fs = require('fs-extra');
-const rmfr = require('rmfr');
+const rimrafAsync = promisify(require('rimraf'));
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const waitForUrls = require('../../utils/waitForUrls');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
@@ -23,7 +24,7 @@ async function createPackageCopy(name) {
 
 async function setUpLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
-  await rmfr(nodeModules);
+  await rimrafAsync(nodeModules);
   await createPackageCopy('sku/treat');
 }
 

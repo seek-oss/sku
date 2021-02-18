@@ -1,5 +1,6 @@
 const path = require('path');
-const rmfr = require('rmfr');
+const { promisify } = require('util');
+const rimrafAsync = promisify(require('rimraf'));
 const fs = require('fs-extra');
 const dirContentsToObject = require('../../utils/dirContentsToObject');
 const { getAppSnapshot } = require('../../utils/appSnapshot');
@@ -33,7 +34,7 @@ async function createPackageCopy(name) {
 
 async function setUpLocalDependencies() {
   const nodeModules = `${__dirname}/app/node_modules`;
-  await rmfr(nodeModules);
+  await rimrafAsync(nodeModules);
   await Promise.all(['react', 'react-dom'].map(createPackageLink));
   await Promise.all(
     [

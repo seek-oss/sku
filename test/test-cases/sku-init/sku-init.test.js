@@ -2,19 +2,20 @@ const rmfr = require('rmfr');
 const fs = require('fs');
 const path = require('path');
 const spawnSkuScriptInDir = require('../../utils/spawnSkuScriptInDir');
+const { promptForBraidTheme } = require('../../../lib/prompts');
 
 describe('sku init', () => {
-  it('should pass with no configuration', async () => {
+  it('should create a sku.config.js', async () => {
+    // `sku init` is a long running task and can take some time to complete
+    jest.setTimeout(150 * 1000);
     const projectName = 'new-project';
     await rmfr(path.join(__dirname, projectName));
 
-    const childPromise = spawnSkuScriptInDir('init', __dirname, [projectName], {
-      pipeToParent: false,
-    });
+    const childPromise = spawnSkuScriptInDir('init', __dirname, [projectName]);
     const childProcess = childPromise.childProcess;
 
     childProcess.stdout.on('data', async (data) => {
-      if (data.includes('Which Braid themes would you like? ')) {
+      if (data.includes(promptForBraidTheme)) {
         // Select first theme
         childProcess.stdin.write(' ');
         // Wait for selection to be handled
@@ -35,7 +36,6 @@ describe('sku init', () => {
       'sku.config.js',
     ));
 
-    // sku.config.js should be created with project name in name
     expect(skuConfig).toMatchInlineSnapshot(`
       Object {
         "clientEntry": "src/client.tsx",

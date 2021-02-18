@@ -185,6 +185,7 @@ export default cssExports;
 }
 ,
   "main-74f6b2c1896a09ddb8bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-60b4673832a3280c77f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
@@ -299,9 +300,12 @@ export default cssExports;
   font-size: 32px;
 }
 ,
+  "main-74f6b2c1896a09ddb8bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-f9b7a8f9a2f8ad43ba02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-60b4673832a3280c77f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-ce37685b665a9cc1e7bd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

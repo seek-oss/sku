@@ -17,7 +17,7 @@ describe('sku init', () => {
     const childProcess = childPromise.childProcess;
 
     childProcess.stdout.on('data', async (data) => {
-      if (data.includes(promptForBraidTheme)) {
+      if (data.toString().includes(promptForBraidTheme)) {
         // Select first theme
         childProcess.stdin.write(' ');
         // Wait for selection to be handled

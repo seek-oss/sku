@@ -20,8 +20,10 @@ describe('sku init', () => {
       if (data.toString().includes(promptForBraidTheme)) {
         // Select first theme
         childProcess.stdin.write(' ');
+
         // Wait for selection to be handled
         await new Promise((r) => setTimeout(r, 200));
+
         // Accept selection
         childProcess.stdin.write('\n');
       }

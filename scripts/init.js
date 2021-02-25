@@ -16,6 +16,8 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const { getMissingHosts } = require('../lib/hosts');
 const { getSuggestedScript } = require('../lib/suggestScript');
+const trace = require('debug')('sku:init');
+const { promptForBraidTheme } = require('../lib/prompts');
 
 const getFileContent = bent('string');
 
@@ -52,6 +54,8 @@ const args = require('../config/args');
 
   const root = path.resolve(projectName);
   setCwd(root);
+
+  trace(`Creating project "${projectName}" in "${root}"`);
 
   const appName = path.basename(root);
 
@@ -146,7 +150,7 @@ const args = require('../config/args');
       {
         name: 'sites',
         type: 'checkbox',
-        message: 'Which Braid themes would you like?',
+        message: promptForBraidTheme,
         validate: (sites) =>
           sites.length > 0 ? true : 'Please select at least one Braid theme',
         choices: braidThemes,

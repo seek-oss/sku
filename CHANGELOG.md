@@ -1,5 +1,11 @@
 # sku
 
+## 10.10.1
+
+### Patch Changes
+
+- Fix errors initializing repo after kopy dependency upgrade ([#578](https://github.com/seek-oss/sku/pull/578))
+
 ## 10.10.0
 
 ### Minor Changes

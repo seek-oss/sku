@@ -237,7 +237,7 @@ The render entry file to the app. This file should export the required functions
 
 ## routes
 
-type `Array<string | {route: string, name: string, languages: Array<string>}>`
+type `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
 
 **Only for static apps**
 

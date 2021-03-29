@@ -34,6 +34,10 @@ const routes = {
           type: 'string',
           optional: true,
         },
+        entry: {
+          type: 'string',
+          optional: true,
+        },
         languages: languagesToRender,
       },
     },

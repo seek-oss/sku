@@ -237,13 +237,15 @@ The render entry file to the app. This file should export the required functions
 
 ## routes
 
-type `Array<string>`
+type `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
 
 **Only for static apps**
 
 Default: `['/']`
 
 An array of routes for the app. Each route must specify a name and a route corresponding to the path it is hosted under. Each route may also have a custom client entry, which can help with bundle splitting. See [static-rendering](./docs/static-rendering) for more info.
+
+Can be used to limit the languages rendered for a specific route. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
 
 Example:
 
@@ -283,13 +285,15 @@ Point to a JS file that will run before your tests to setup the testing environm
 
 **Only for static apps**
 
-type `Array<string | { name: string, host: string }>`
+type `Array<string | { name: string, host: string, languages: Array<string>, routes: Array<string> }>`
 
 Default: `[]`
 
 An array of sites the app supports. These usually correspond to each domain the app is hosted under.
 
 Can be an array of site names, or objects with a site name and corresponding host. See [Multi site](./docs/multi-site#switching-site-by-host) for more info.
+
+Can be used to limit the languages rendered for a specific site. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
 
 ## sourceMapsProd
 

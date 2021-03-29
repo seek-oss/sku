@@ -10,6 +10,7 @@ import {
   Box,
 } from 'braid-design-system';
 import * as style from './App.treat';
+import { vanillaBox } from './App.css';
 
 const noop = () => {};
 
@@ -28,6 +29,7 @@ export default ({ themeName }) => {
         />
       </Card>
       <Box className={style.customBox}>Custom content</Box>
+      <Box className={vanillaBox}>🧁 Vanilla content</Box>
     </BraidLoadableProvider>
   );
 };

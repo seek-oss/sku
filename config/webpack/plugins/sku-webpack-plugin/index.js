@@ -1,8 +1,10 @@
 const uniq = require('lodash/uniq');
 const defaultSupportedBrowsers = require('browserslist-config-seek');
+const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const {
   makeJsLoaders,
   makeCssLoaders,
+  makeVanillaCssLoaders,
   makeImageLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
@@ -64,7 +66,7 @@ class SkuWebpackPlugin {
         include: this.include,
         oneOf: [
           {
-            compiler: 'treat-webpack-loader',
+            compiler: /(vanilla-extract|treat-webpack-loader)/,
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
@@ -93,7 +95,7 @@ class SkuWebpackPlugin {
         include: this.include,
         oneOf: [
           {
-            compiler: 'treat-webpack-loader',
+            compiler: /(vanilla-extract|treat-webpack-loader)/,
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
@@ -149,6 +151,16 @@ class SkuWebpackPlugin {
           }),
       },
       {
+        // All CSS created by vanilla-extract
+        test: /\.vanilla.css$/i,
+        use: makeVanillaCssLoaders({
+          isProductionBuild,
+          MiniCssExtractPlugin,
+          hot,
+          supportedBrowsers,
+        }),
+      },
+      {
         test: IMAGE,
         include: this.include,
         use: makeImageLoaders({ target }),
@@ -184,6 +196,10 @@ class SkuWebpackPlugin {
       MiniCssExtractPlugin,
       hot,
     }).apply(compiler);
+
+    if (target === 'browser') {
+      new VanillaExtractPlugin().apply(compiler);
+    }
   }
 }
 

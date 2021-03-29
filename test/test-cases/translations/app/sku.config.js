@@ -4,16 +4,11 @@ module.exports = {
   serverEntry: 'src/server.tsx',
   setupTests: 'src/setupTests.js',
   languages: ['en', 'fr'],
-  sites: [
-    {
-      name: 'main',
-      routes: [
-        { route: '/', languages: ['en'] },
-        { route: '/hello', languages: ['en'] },
-        { route: '/bonjour', languages: ['fr'] },
-        '/$language',
-      ],
-    },
+  routes: [
+    { route: '/', languages: ['en'] },
+    { route: '/hello', languages: ['en'] },
+    { route: '/bonjour', languages: ['fr'] },
+    '/$language',
   ],
   initialPath: '/en/',
   target: 'dist',

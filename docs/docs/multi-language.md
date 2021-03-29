@@ -87,6 +87,24 @@ If one of your sites only supports a subset of languages you can specify them in
 
 **Note:** Any language specified by a site must be included in the top level `languages` field.
 
+## Route specific languages
+
+Like a site, a route can also limit the languages it uses.
+
+**Example:** Language specific URL
+
+```json
+{
+  "languages": ["en", "fr"],
+  "routes": [
+    { "route": "/hello", "languages": ["en"] },
+    { "route": "/bonjour", "languages": ["fr"] }
+  ]
+}
+```
+
+**Note:** Any language specified by a route must be included in the top level `languages` field.
+
 ## Hierarchy
 
 In general, you'll want to create a full set of translations for every supported language. However, some languages may only require small tweaks to a base language.

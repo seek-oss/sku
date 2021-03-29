@@ -2876,7 +2876,7 @@
     "@typescript-eslint/types" "4.14.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vanilla-extract/babel-plugin@^0.1.0":
+"@vanilla-extract/babel-plugin@*":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/babel-plugin/-/babel-plugin-0.1.0.tgz#5e9047471a7b8c91d6100caecc33a8b73e2cc86a"
   integrity sha512-9rLg2it3D3BpsCmrbFz7HxV7QsAG2aAXvyo/gSSmAAXUWhUuVUV1lhLH6w73/YXxgov+ADyahMbuTQVqabquiQ==
@@ -2895,7 +2895,7 @@
     csstype "^3.0.7"
     dedent "^0.7.0"
 
-"@vanilla-extract/webpack-plugin@^0.1.0":
+"@vanilla-extract/webpack-plugin@*":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/webpack-plugin/-/webpack-plugin-0.1.0.tgz#d0d09db7c32fa4024ee5067d62cec2460c408f45"
   integrity sha512-D3Iyy3WKdzTQ+HYkbxd6weFuHsiLMO+A2KBkq5vu9bOz0wOI4jK7USl7GDNCTNeVs+fwO1KE5bW5E+LdPwml3Q==

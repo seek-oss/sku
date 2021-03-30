@@ -1,5 +1,13 @@
 # sku
 
+## 10.12.0
+
+### Minor Changes
+
+- Add support for @vanilla-extract ([#583](https://github.com/seek-oss/sku/pull/583))
+
+  Note: This is not yet intended for use in production.
+
 ## 10.11.0
 
 ### Minor Changes

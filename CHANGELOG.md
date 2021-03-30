@@ -1,5 +1,11 @@
 # sku
 
+## 10.11.0
+
+### Minor Changes
+
+- Add the ability to limit languages to render by route ([#581](https://github.com/seek-oss/sku/pull/581))
+
 ## 10.10.1
 
 ### Patch Changes

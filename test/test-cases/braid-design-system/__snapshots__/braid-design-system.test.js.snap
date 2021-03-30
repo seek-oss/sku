@@ -16,13 +16,14 @@ Object {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-51492d5f6786ed97b1b9.js",
-    "/vendors~main-60f41b371bd621c0e29e.js",
-    "/main-7897e25dea25edcb30b4.js",
-    "/vendors~themes-jobStreet-a24fed74d586beb6df56.js",
-    "/themes-jobStreet-314ae9fadd9e4dc54c8d.js",
+    "/runtime-4c78d5367bb1bc0200b8.js",
+    "/vendors~main-cd9eed607fdd4390f9c9.js",
+    "/main-ae375e1115366d5bf3ec.js",
+    "/vendors~themes-jobStreet-8d176f5e8b52171ad545.js",
+    "/themes-jobStreet-f4e2d55eb5786d31cf63.js",
   ]
 CSS: Array [
+    "/main-aa76fce61ebb7ffd18c8.css",
     "/vendors~themes-jobStreet-34b3f79bd07b4b767547.css",
     "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
   ]
@@ -36,13 +37,17 @@ SOURCE HTML: <!DOCTYPE html>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="themes-jobStreet"
+    <link data-chunk="main"
           rel="stylesheet"
           href="styles[0]"
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
           href="styles[1]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="stylesheet"
+          href="styles[2]"
     >
     <link data-chunk="main"
           rel="preload"
@@ -152,6 +157,9 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="FYwKg _3QqL3">
           Custom content
         </div>
+        <div class="FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
+        </div>
       </div>
     </div>
     <script id="__SKU_CLIENT_CONTEXT__"
@@ -196,16 +204,24 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-7897e25dea25edcb30b4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-51492d5f6786ed97b1b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-aa76fce61ebb7ffd18c8.css": ._1fdi0ej0 {
+  background-color: #8a2be2;
+  color: #fff;
+  font-size: 20px;
+  padding: 100px;
+}
+,
+  "main-ae375e1115366d5bf3ec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-4c78d5367bb1bc0200b8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-51492d5f6786ed97b1b9.js",
-    "/vendors~main-60f41b371bd621c0e29e.js",
-    "/main-7897e25dea25edcb30b4.js",
-    "/vendors~themes-seekAnz-c6140e0c022904a12a72.js",
-    "/themes-seekAnz-9baa33404f87a145960d.js",
+    "/runtime-4c78d5367bb1bc0200b8.js",
+    "/vendors~main-cd9eed607fdd4390f9c9.js",
+    "/main-ae375e1115366d5bf3ec.js",
+    "/vendors~themes-seekAnz-03f1dc84a0e3a7e70374.js",
+    "/themes-seekAnz-b7ac2f33b6c432ce2f6b.js",
   ]
 CSS: Array [
+    "/main-aa76fce61ebb7ffd18c8.css",
     "/vendors~themes-seekAnz-ee6a27d0b59c8d3ae7f5.css",
     "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
   ]
@@ -219,13 +235,17 @@ SOURCE HTML: <!DOCTYPE html>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="themes-seekAnz"
+    <link data-chunk="main"
           rel="stylesheet"
           href="styles[0]"
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
           href="styles[1]"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="stylesheet"
+          href="styles[2]"
     >
     <link data-chunk="main"
           rel="preload"
@@ -335,6 +355,9 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="FYwKg _3QqL3">
           Custom content
         </div>
+        <div class="FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
+        </div>
       </div>
     </div>
     <script id="__SKU_CLIENT_CONTEXT__"
@@ -379,7 +402,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "themes-catho-4b0044780c26f65257c8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-catho-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -387,7 +409,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-jobStreet-314ae9fadd9e4dc54c8d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-b5555daa51f648bf944e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -395,7 +417,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-jobStreetClassic-ac373823730903d1c270.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-f4e2d55eb5786d31cf63.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -403,6 +425,8 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
+  "themes-jobStreetClassic-be5f9e7b9d064caf47dd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-49a672052a4c1b1f8ef7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -410,7 +434,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-jobsDb-d564277060debf787896.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-4cb5fac3b8e946d64076.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -418,8 +442,6 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-occ-c78d20b3f91154b9d039.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-9baa33404f87a145960d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -427,7 +449,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-seekBusiness-35741ccd9f738cadd134.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-b7ac2f33b6c432ce2f6b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -435,7 +457,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-seekUnifiedBeta-095aeaba1f5537beae86.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekBusiness-da1b8cdf84f2fbea3d31.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekUnifiedBeta-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -443,7 +465,7 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "themes-wireframe-022a40e6ac55d819a67f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-f9b488fc354947e6f694.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-b39979c2fe1f2e2bee2f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -451,7 +473,8 @@ SOURCE HTML: <!DOCTYPE html>
   padding: 20px;
 }
 ,
-  "vendors~main-60f41b371bd621c0e29e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-dccd5b9d4f47848e3078.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-cd9eed607fdd4390f9c9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-catho-2de427a080e0e8c2ac72.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -1999,7 +2022,7 @@ svg._1E-Nz_2CM {
   display: block;
 }
 ,
-  "vendors~themes-catho-ac79447610287f8f2fe0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-catho-b0c639df070432ee3aec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobStreet-34b3f79bd07b4b767547.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -3592,7 +3615,8 @@ svg._1E-Nz_1 {
   display: block;
 }
 ,
-  "vendors~themes-jobStreet-a24fed74d586beb6df56.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobStreet-8d176f5e8b52171ad545.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobStreetClassic-0288dc47e74503afffad.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobStreetClassic-7c22b5a7801bf9941193.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -5186,8 +5210,7 @@ svg._1E-Nz_2 {
   display: block;
 }
 ,
-  "vendors~themes-jobStreetClassic-83de3ad2ab978d61e64b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~themes-jobsDb-8e013f6eb2f6ca107396.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-jobsDb-46b086e220b88d1f3a35.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-jobsDb-ea9e60ba5de6e676ebfd.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -6778,7 +6801,7 @@ svg._1E-Nz_3 {
   display: block;
 }
 ,
-  "vendors~themes-occ-3a6780412582275997e3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-occ-0b901098075a7c7040d8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-occ-ca8afe2bd5a2a0d2f9af.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -8362,7 +8385,7 @@ svg._1E-NzWgE {
   display: block;
 }
 ,
-  "vendors~themes-seekAnz-c6140e0c022904a12a72.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekAnz-03f1dc84a0e3a7e70374.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekAnz-ee6a27d0b59c8d3ae7f5.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -9938,7 +9961,7 @@ svg._1E-Nz_4 {
   display: block;
 }
 ,
-  "vendors~themes-seekBusiness-40c99935f5cbb83ef81a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekBusiness-8484e1726a17120163c3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekBusiness-93a95656520e150313cd.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -11516,7 +11539,7 @@ svg._1E-Nz_5 {
   display: block;
 }
 ,
-  "vendors~themes-seekUnifiedBeta-511f44a4b03d170853ac.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-seekUnifiedBeta-18bb5e6109d1460ed8d7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-seekUnifiedBeta-a8e3adc3c548fdd9b541.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -13092,7 +13115,7 @@ svg._1E-Nz_6 {
   display: block;
 }
 ,
-  "vendors~themes-wireframe-9be91f4c525ffaf93375.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~themes-wireframe-0849abbdf10509ac131b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~themes-wireframe-d82aace1cfbf3b47331e.css": .FYwKg {
   margin: 0;
   padding: 0;
@@ -14678,13 +14701,14 @@ svg._1E-Nz_10 {
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-51492d5f6786ed97b1b9.js",
-  "/vendors~main-60f41b371bd621c0e29e.js",
-  "/main-7897e25dea25edcb30b4.js",
-  "/vendors~themes-jobStreet-a24fed74d586beb6df56.js",
-  "/themes-jobStreet-314ae9fadd9e4dc54c8d.js",
+  "/runtime-4c78d5367bb1bc0200b8.js",
+  "/vendors~main-cd9eed607fdd4390f9c9.js",
+  "/main-ae375e1115366d5bf3ec.js",
+  "/vendors~themes-jobStreet-8d176f5e8b52171ad545.js",
+  "/themes-jobStreet-f4e2d55eb5786d31cf63.js",
 ]
 CSS: Array [
+  "/main-aa76fce61ebb7ffd18c8.css",
   "/vendors~themes-jobStreet-34b3f79bd07b4b767547.css",
   "/themes-jobStreet-b39979c2fe1f2e2bee2f.css",
 ]
@@ -14698,13 +14722,17 @@ SOURCE HTML: <!DOCTYPE html>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="themes-jobStreet"
+    <link data-chunk="main"
           rel="stylesheet"
           href="styles[0]"
     >
     <link data-chunk="themes-jobStreet"
           rel="stylesheet"
           href="styles[1]"
+    >
+    <link data-chunk="themes-jobStreet"
+          rel="stylesheet"
+          href="styles[2]"
     >
     <link data-chunk="main"
           rel="preload"
@@ -14814,6 +14842,9 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="FYwKg _3QqL3">
           Custom content
         </div>
+        <div class="FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
+        </div>
       </div>
     </div>
     <script id="__SKU_CLIENT_CONTEXT__"
@@ -14871,13 +14902,14 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-51492d5f6786ed97b1b9.js",
-  "/vendors~main-60f41b371bd621c0e29e.js",
-  "/main-7897e25dea25edcb30b4.js",
-  "/vendors~themes-seekAnz-c6140e0c022904a12a72.js",
-  "/themes-seekAnz-9baa33404f87a145960d.js",
+  "/runtime-4c78d5367bb1bc0200b8.js",
+  "/vendors~main-cd9eed607fdd4390f9c9.js",
+  "/main-ae375e1115366d5bf3ec.js",
+  "/vendors~themes-seekAnz-03f1dc84a0e3a7e70374.js",
+  "/themes-seekAnz-b7ac2f33b6c432ce2f6b.js",
 ]
 CSS: Array [
+  "/main-aa76fce61ebb7ffd18c8.css",
   "/vendors~themes-seekAnz-ee6a27d0b59c8d3ae7f5.css",
   "/themes-seekAnz-b39979c2fe1f2e2bee2f.css",
 ]
@@ -14891,13 +14923,17 @@ SOURCE HTML: <!DOCTYPE html>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="themes-seekAnz"
+    <link data-chunk="main"
           rel="stylesheet"
           href="styles[0]"
     >
     <link data-chunk="themes-seekAnz"
           rel="stylesheet"
           href="styles[1]"
+    >
+    <link data-chunk="themes-seekAnz"
+          rel="stylesheet"
+          href="styles[2]"
     >
     <link data-chunk="main"
           rel="preload"
@@ -15006,6 +15042,9 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
         <div class="FYwKg _3QqL3">
           Custom content
+        </div>
+        <div class="FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
         </div>
       </div>
     </div>
@@ -15200,6 +15239,9 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="BRAID__reset-base_FYwKg BRAID__App-customBox_3QqL3">
           Custom content
         </div>
+        <div class="BRAID__reset-base_FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
+        </div>
       </div>
     </div>
     <script id="__SKU_CLIENT_CONTEXT__"
@@ -15392,6 +15434,9 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
         <div class="BRAID__reset-base_FYwKg BRAID__App-customBox_3QqL3">
           Custom content
+        </div>
+        <div class="BRAID__reset-base_FYwKg App_vanillaBox__1fdi0ej0">
+          🧁 Vanilla content
         </div>
       </div>
     </div>

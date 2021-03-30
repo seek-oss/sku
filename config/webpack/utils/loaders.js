@@ -89,6 +89,37 @@ const makeCssLoaders = (options = {}) => {
   ];
 };
 
+const makeVanillaCssLoaders = (options = {}) => {
+  const {
+    isProductionBuild,
+    MiniCssExtractPlugin,
+    supportedBrowsers,
+    hot = false,
+  } = options;
+
+  return [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        hmr: hot,
+      },
+    },
+    {
+      loader: require.resolve('css-loader'),
+    },
+    {
+      loader: require.resolve('postcss-loader'),
+      options: {
+        plugins: () => [
+          require('autoprefixer')(supportedBrowsers),
+          // Minimize CSS on production builds
+          ...(isProductionBuild ? [require('cssnano')()] : []),
+        ],
+      },
+    },
+  ];
+};
+
 const makeImageLoaders = (options = {}) => {
   const { target = 'browser' } = options;
 
@@ -130,6 +161,7 @@ const makeSvgLoaders = () => [
 module.exports = {
   makeJsLoaders,
   makeCssLoaders,
+  makeVanillaCssLoaders,
   makeImageLoaders,
   makeSvgLoaders,
 };

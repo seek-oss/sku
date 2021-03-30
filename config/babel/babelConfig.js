@@ -45,6 +45,7 @@ module.exports = ({
     require.resolve('babel-plugin-macros'),
     require.resolve('@loadable/babel-plugin'),
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
+    require.resolve('@vanilla-extract/babel-plugin'),
   ];
 
   if (hot && isBrowser) {

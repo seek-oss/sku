@@ -1,5 +1,11 @@
 # sku
 
+## 10.12.1
+
+### Patch Changes
+
+- Exclude vanilla-extract CSS files from Storybook's webpack config ([#587](https://github.com/seek-oss/sku/pull/587))
+
 ## 10.12.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # sku
 
+## 10.12.2
+
+### Patch Changes
+
+- Remove cssnano `calc` optimization ([#589](https://github.com/seek-oss/sku/pull/589))
+
 ## 10.12.1
 
 ### Patch Changes

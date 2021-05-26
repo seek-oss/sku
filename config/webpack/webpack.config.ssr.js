@@ -136,12 +136,17 @@ const makeWebpackConfig = ({
                 {
                   test: utils.JAVASCRIPT,
                   exclude: [
-                    internalInclude,
-                    ...paths.compilePackages.map(utils.resolvePackage),
-
-                    // Prevent running `react-dom` through babel as it's
-                    // too large and already meets our browser support policy
-                    path.dirname(require.resolve('react-dom/package.json')),
+                    ...internalInclude,
+                    /**
+                     * - Playroom source is managed by its own webpack config
+                     * - Prevent running `react-dom` through babel as it's
+                     *   too large and already meets our browser support policy
+                     */
+                    ...[
+                      ...paths.compilePackages,
+                      ...excludeFromBabel,
+                      'react-dom',
+                    ].map(utils.resolvePackage),
                   ],
                   use: [
                     {

@@ -202,4 +202,8 @@ module.exports = validator.compile({
     type: 'boolean',
   },
   languages: languagesToCompile,
+  excludeFromBabel: {
+    type: 'array',
+    items: { type: 'string' },
+  },
 });

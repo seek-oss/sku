@@ -25,4 +25,5 @@ module.exports = {
     'https://error-tracking.com',
     'https://fb-tracking.com',
   ],
+  excludeFromBabel: ['react'],
 };

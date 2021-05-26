@@ -36,6 +36,7 @@ const {
   cspEnabled,
   cspExtraScriptSrcHosts,
   rootResolution,
+  excludeFromBabel,
 } = config;
 
 // port is only required for dev builds
@@ -173,15 +174,18 @@ const makeWebpackConfig = ({
                 {
                   test: utils.JAVASCRIPT,
                   exclude: [
-                    internalInclude,
-                    ...paths.compilePackages.map(utils.resolvePackage),
-
-                    // Playroom source is managed by its own webpack config
-                    path.dirname(require.resolve('playroom/package.json')),
-
-                    // Prevent running `react-dom` through babel as it's
-                    // too large and already meets our browser support policy
-                    path.dirname(require.resolve('react-dom/package.json')),
+                    ...internalInclude,
+                    /**
+                     * - Playroom source is managed by its own webpack config
+                     * - Prevent running `react-dom` through babel as it's
+                     *   too large and already meets our browser support policy
+                     */
+                    ...[
+                      ...paths.compilePackages,
+                      ...excludeFromBabel,
+                      'playroom',
+                      'react-dom',
+                    ].map(utils.resolvePackage),
                   ],
                   use: [
                     {
@@ -320,6 +324,8 @@ const makeWebpackConfig = ({
   ].map(webpackDecorator);
 
   debug(JSON.stringify(webpackConfigs));
+
+  console.log(webpackConfigs[0].module.rules[0]);
 
   return webpackConfigs;
 };

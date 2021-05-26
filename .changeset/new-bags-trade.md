@@ -10,6 +10,6 @@ Example:
 
 ```js
 const config = {
-  excludeFromBabel: ['@bloat/very-large-package', 'hicrash'],
+  excludeFromBabel: ['@bloat/very-large-package', 'lodash'],
 };
 ```

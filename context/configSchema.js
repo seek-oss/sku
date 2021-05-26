@@ -202,7 +202,7 @@ module.exports = validator.compile({
     type: 'boolean',
   },
   languages: languagesToCompile,
-  excludeFromBabel: {
+  skipPackageCompatibilityCompilation: {
     type: 'array',
     items: { type: 'string' },
   },

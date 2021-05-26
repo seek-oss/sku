@@ -31,7 +31,7 @@ const {
   httpsDevServer,
   useDevServerMiddleware,
   rootResolution,
-  excludeFromBabel,
+  skipPackageCompatibilityCompilation,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
 
@@ -139,14 +139,19 @@ const makeWebpackConfig = ({
                   exclude: [
                     ...internalInclude,
                     /**
-                     * - Prevent running `react-dom` through babel as it's
-                     *   too large and already meets our browser support policy
+                     * - Playroom source is managed by its own webpack config
+                     * - Prevent running `react-dom` & `react` as they already meet our browser support policy
                      */
                     ...[
                       ...paths.compilePackages,
-                      ...excludeFromBabel,
+                      ...skipPackageCompatibilityCompilation,
                       'react-dom',
-                    ].map(utils.resolvePackage),
+                      'react',
+                    ].map((packageName) => {
+                      const resolvedPackage = utils.resolvePackage(packageName);
+
+                      return `${resolvedPackage}${path.sep}`;
+                    }),
                   ],
                   use: [
                     {

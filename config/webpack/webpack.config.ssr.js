@@ -31,6 +31,7 @@ const {
   httpsDevServer,
   useDevServerMiddleware,
   rootResolution,
+  skipPackageCompatibilityCompilation,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
 
@@ -136,12 +137,20 @@ const makeWebpackConfig = ({
                 {
                   test: utils.JAVASCRIPT,
                   exclude: [
-                    internalInclude,
-                    ...paths.compilePackages.map(utils.resolvePackage),
+                    ...internalInclude,
+                    /**
+                     * - Prevent running `react-dom` & `react` as they already meet our browser support policy
+                     */
+                    ...[
+                      ...paths.compilePackages,
+                      ...skipPackageCompatibilityCompilation,
+                      'react-dom',
+                      'react',
+                    ].map((packageName) => {
+                      const resolvedPackage = utils.resolvePackage(packageName);
 
-                    // Prevent running `react-dom` through babel as it's
-                    // too large and already meets our browser support policy
-                    path.dirname(require.resolve('react-dom/package.json')),
+                      return `${resolvedPackage}${path.sep}`;
+                    }),
                   ],
                   use: [
                     {

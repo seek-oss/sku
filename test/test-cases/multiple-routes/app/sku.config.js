@@ -25,4 +25,5 @@ module.exports = {
     'https://error-tracking.com',
     'https://fb-tracking.com',
   ],
+  skipPackageCompatibilityCompilation: ['react-router-dom'],
 };

@@ -187,4 +187,6 @@ module.exports = {
   useDevServerMiddleware,
   rootResolution: skuConfig.rootResolution,
   languages: normalizedLanguages,
+  skipPackageCompatibilityCompilation:
+    skuConfig.skipPackageCompatibilityCompilation,
 };

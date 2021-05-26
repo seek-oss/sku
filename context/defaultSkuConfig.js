@@ -54,4 +54,5 @@ module.exports = {
   devServerMiddleware: null,
   rootResolution: !isCompilePackage,
   languages: null,
+  skipPackageCompatibilityCompilation: [],
 };

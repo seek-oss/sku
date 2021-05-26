@@ -138,7 +138,6 @@ const makeWebpackConfig = ({
                   exclude: [
                     ...internalInclude,
                     /**
-                     * - Playroom source is managed by its own webpack config
                      * - Prevent running `react-dom` through babel as it's
                      *   too large and already meets our browser support policy
                      */

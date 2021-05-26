@@ -31,6 +31,7 @@ const {
   httpsDevServer,
   useDevServerMiddleware,
   rootResolution,
+  excludeFromBabel,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
 

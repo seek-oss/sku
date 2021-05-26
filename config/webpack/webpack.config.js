@@ -325,8 +325,6 @@ const makeWebpackConfig = ({
 
   debug(JSON.stringify(webpackConfigs));
 
-  console.log(webpackConfigs[0].module.rules[0]);
-
   return webpackConfigs;
 };
 

@@ -139,7 +139,6 @@ const makeWebpackConfig = ({
                   exclude: [
                     ...internalInclude,
                     /**
-                     * - Playroom source is managed by its own webpack config
                      * - Prevent running `react-dom` & `react` as they already meet our browser support policy
                      */
                     ...[

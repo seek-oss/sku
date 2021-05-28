@@ -2876,36 +2876,56 @@
     "@typescript-eslint/types" "4.14.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vanilla-extract/babel-plugin@*":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/babel-plugin/-/babel-plugin-0.1.0.tgz#5e9047471a7b8c91d6100caecc33a8b73e2cc86a"
-  integrity sha512-9rLg2it3D3BpsCmrbFz7HxV7QsAG2aAXvyo/gSSmAAXUWhUuVUV1lhLH6w73/YXxgov+ADyahMbuTQVqabquiQ==
+"@vanilla-extract/babel-plugin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/babel-plugin/-/babel-plugin-1.0.0.tgz#bdf8e13f40f761680d47001e61856869b1143b90"
+  integrity sha512-UBbycdnKDvpWVOv1j6F8Iod+FhOW2W4Fv+GVT3D/Woq2SleO2JSv/OEDoyerkN1mcCkJCVPuXnVYEdeRdxZgeQ==
   dependencies:
     "@babel/core" "^7.13.10"
     "@babel/template" "^7.12.13"
+    "@vanilla-extract/integration" "^1.0.0"
 
-"@vanilla-extract/css@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/css/-/css-0.1.0.tgz#79315b9772137d81554b766879375e96dd9767bc"
-  integrity sha512-Peix9Io21G2uN6L39rf3FGK9hH6NXZbOu0dneH/yJSoDiFeqcxNNN3tp+rP4+jvZ2RNL8n2wRDwS2xUXKlh8vw==
+"@vanilla-extract/css@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/css/-/css-1.0.0.tgz#6cedddd6243aa7e99d6b6920553a086b19dcd84a"
+  integrity sha512-o52t6Bj1LeEDfdVW6ZIzmHHTQSiq/D7py3yJgZZNzbUIQBNfyByK6W73ITDR5RhhywZLkX8/GVy0V++B+bOZ3A==
   dependencies:
     "@emotion/hash" "^0.8.0"
+    "@vanilla-extract/private" "^1.0.0"
+    chalk "^4.1.1"
     css-selector-parser "^1.4.1"
     cssesc "^3.0.0"
     csstype "^3.0.7"
     dedent "^0.7.0"
+    deep-object-diff "^1.1.0"
 
-"@vanilla-extract/webpack-plugin@*":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/webpack-plugin/-/webpack-plugin-0.1.0.tgz#d0d09db7c32fa4024ee5067d62cec2460c408f45"
-  integrity sha512-D3Iyy3WKdzTQ+HYkbxd6weFuHsiLMO+A2KBkq5vu9bOz0wOI4jK7USl7GDNCTNeVs+fwO1KE5bW5E+LdPwml3Q==
+"@vanilla-extract/integration@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/integration/-/integration-1.0.0.tgz#c97ed3b57cdf7312371650b32c83762cfc3c1936"
+  integrity sha512-NPe+DPKqjg9xBoJA8GUX/Op4hljfjg0IqIQeomDTw9ARn3KhPynJ7bj/Y0BID/oejNmEo2jtlRq9j//pXOzKRA==
   dependencies:
-    "@vanilla-extract/css" "^0.1.0"
-    chalk "^4.1.0"
-    debug "^4.3.1"
+    "@vanilla-extract/css" "^1.0.0"
+    chalk "^4.1.1"
     dedent "^0.7.0"
+    esbuild "^0.11.16"
     eval "^0.1.6"
+    find-up "^5.0.0"
     javascript-stringify "^2.0.1"
+    lodash "^4.17.21"
+
+"@vanilla-extract/private@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.0.tgz#10711c4481decd2f9a2f19cb85dcee60eff3f75c"
+  integrity sha512-NS/Dqenj1Fd9fX1qWz4nFP6hefbTJIpQYLgKQsJBQonJ/E0QYiYtTJ1oeUh7vpoW0ojVuuRdA1URbKb7MCJ4JA==
+
+"@vanilla-extract/webpack-plugin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/webpack-plugin/-/webpack-plugin-1.0.0.tgz#c809447ac526c6b964be6ccd9fb133939e447cca"
+  integrity sha512-KUanRvmFzzfAUey8jyUH3FFSRCmxmbT9GJxjT8M5InTxj7Jprkm1xl+hTpSx1r69J4rI94zYXYRvWHcWl/L2ow==
+  dependencies:
+    "@vanilla-extract/integration" "^1.0.0"
+    chalk "^4.1.1"
+    debug "^4.3.1"
     loader-utils "^2.0.0"
     lodash "^4.17.21"
     virtual-resource-loader "^1.0.0"
@@ -4816,6 +4836,14 @@ chalk@^4.0.0, chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
+  integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
@@ -6638,6 +6666,11 @@ es6-weak-map@^2.0.3:
     es5-ext "^0.10.46"
     es6-iterator "^2.0.3"
     es6-symbol "^3.1.1"
+
+esbuild@^0.11.16:
+  version "0.11.23"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.23.tgz#c42534f632e165120671d64db67883634333b4b8"
+  integrity sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==
 
 escalade@^3.1.1:
   version "3.1.1"

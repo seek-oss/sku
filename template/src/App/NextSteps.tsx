@@ -5,9 +5,8 @@ import {
   Strong,
   Card,
   TextLink,
-  BulletList,
-  Bullet,
   Stack,
+  List,
 } from 'braid-design-system';
 import React, { Fragment } from 'react';
 
@@ -92,18 +91,14 @@ export default () => (
           </Text>
 
           <Box paddingBottom="xsmall">
-            <BulletList>
-              <Bullet>
-                <TextLink href="https://seekchat.slack.com/channels/sku-support">
-                  #sku-support
-                </TextLink>
-              </Bullet>
-              <Bullet>
-                <TextLink href="https://seekchat.slack.com/channels/braid-support">
-                  #braid-support
-                </TextLink>
-              </Bullet>
-            </BulletList>
+            <List>
+              <TextLink href="https://seekchat.slack.com/channels/sku-support">
+                #sku-support
+              </TextLink>
+              <TextLink href="https://seekchat.slack.com/channels/braid-support">
+                #braid-support
+              </TextLink>
+            </List>
           </Box>
 
           <Heading level="4">Design support</Heading>

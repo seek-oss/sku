@@ -92,12 +92,16 @@ export default () => (
 
           <Box paddingBottom="xsmall">
             <List>
-              <TextLink href="https://seekchat.slack.com/channels/sku-support">
-                #sku-support
-              </TextLink>
-              <TextLink href="https://seekchat.slack.com/channels/braid-support">
-                #braid-support
-              </TextLink>
+              <Text>
+                <TextLink href="https://seekchat.slack.com/channels/sku-support">
+                  #sku-support
+                </TextLink>
+              </Text>
+              <Text>
+                <TextLink href="https://seekchat.slack.com/channels/braid-support">
+                  #braid-support
+                </TextLink>
+              </Text>
             </List>
           </Box>
 

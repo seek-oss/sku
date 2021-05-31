@@ -2895,6 +2895,25 @@
     csstype "^3.0.7"
     dedent "^0.7.0"
 
+"@vanilla-extract/css@^0.5.0":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/css/-/css-0.5.3.tgz#8cbcd3b09577f3e9ce44ce5f74e0bfdb4e7ae58d"
+  integrity sha512-UuHQeilJYhU0rTgtyMBhQIzf0nlUbCsv4owTzJu9CrA8zpLtyR4tXDtVuaU2bm0eBBp5x77AMtFD7c4E676gPQ==
+  dependencies:
+    "@emotion/hash" "^0.8.0"
+    "@vanilla-extract/private" "^0.1.2"
+    chalk "^4.1.1"
+    css-selector-parser "^1.4.1"
+    cssesc "^3.0.0"
+    csstype "^3.0.7"
+    dedent "^0.7.0"
+    deep-object-diff "^1.1.0"
+
+"@vanilla-extract/private@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-0.1.2.tgz#79cb16243764c5f51b99e0a7ed137e6c5e06223e"
+  integrity sha512-LuaCxlU4BlsSlK53QQABxo53TqWFiQyjXwDCz+5tpaChhMHrmJ5/XVFQVH3zD03HATfAJcmv8WqAQOZnF0FmGg==
+
 "@vanilla-extract/webpack-plugin@*":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/webpack-plugin/-/webpack-plugin-0.1.0.tgz#d0d09db7c32fa4024ee5067d62cec2460c408f45"
@@ -4812,6 +4831,14 @@ chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
   integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+chalk@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
+  integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"

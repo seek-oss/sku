@@ -183,7 +183,7 @@
     "@types/express": "^4.17.11",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@vanilla-extract/css": "^0.1.0",
+    "@vanilla-extract/css": "^0.5.0",
     "@vocab/react": "^1.0.1",
     "assert": "^2.0.0",
     "async-disk-cache": "^2.1.0",

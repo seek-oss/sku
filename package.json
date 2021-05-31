@@ -187,7 +187,7 @@
     "@vocab/react": "^1.0.1",
     "assert": "^2.0.0",
     "async-disk-cache": "^2.1.0",
-    "braid-design-system": "^27.0.0",
+    "braid-design-system": "^29.0.0",
     "child-process-promise": "^2.2.1",
     "css": "^3.0.0",
     "diffable-html": "^4.0.0",

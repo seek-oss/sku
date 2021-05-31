@@ -87,7 +87,7 @@ describe('sku-webpack-plugin', () => {
     beforeAll(async () => {
       await runBin({
         packageName: 'webpack-cli',
-        args: ['--mode="production"'],
+        args: ['--mode="production"', '--no-stats'],
         options: {
           cwd: appDir,
           stdio: 'inherit',

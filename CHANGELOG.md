@@ -1,5 +1,13 @@
 # sku
 
+## 10.13.1
+
+### Patch Changes
+
+- Update vanilla-extract to v1 ([#593](https://github.com/seek-oss/sku/pull/593))
+
+- Remove deprecated Braid components from `sku init` template ([#595](https://github.com/seek-oss/sku/pull/595))
+
 ## 10.13.0
 
 ### Minor Changes

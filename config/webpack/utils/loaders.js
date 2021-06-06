@@ -117,6 +117,9 @@ const makeVanillaCssLoaders = (options = {}) => {
     },
     {
       loader: require.resolve('css-loader'),
+      options: {
+        url: false,
+      },
     },
     {
       loader: require.resolve('postcss-loader'),

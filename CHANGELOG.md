@@ -1,5 +1,11 @@
 # sku
 
+## 10.13.2
+
+### Patch Changes
+
+- Correctly handle image imports in .css.ts files ([#598](https://github.com/seek-oss/sku/pull/598))
+
 ## 10.13.1
 
 ### Patch Changes

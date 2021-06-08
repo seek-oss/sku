@@ -16,11 +16,9 @@
     {
       "groupName": "webpack packages",
       "packagePatterns": [
-        "webpack|(-loader$)|autoprefixer|less|css|svg|treat"
+        "webpack|(-loader$)|autoprefixer|less|css|svg|treat|@vanilla-extract"
       ],
-      "excludePackagePatterns": [
-        "^@loadable\/webpack"
-      ],
+      "excludePackagePatterns": ["^@loadable/webpack"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },

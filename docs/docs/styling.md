@@ -1,5 +1,33 @@
 # Styling
 
+## vanilla-extract
+
+The `@vanilla-extract/css` package is not available out of the box so it needs to be installed.
+
+```bash
+$ yarn add @vanilla-extract/css
+```
+
+Now you can create `.css.ts` files in your project.
+
+```js
+// BigBox.css.ts
+import { style } from '@vanilla-extract/css';
+
+export const bigBox = style({ width: 500, height: 500 });
+```
+
+```js
+// BigBox.tsx
+import * as styles from './BigBox.css';
+
+export function BigBox() {
+  return <div className={styles.bigBox}>I am a big box</div>;
+}
+```
+
+See [vanilla-extract](https://vanilla-extract.style/documentation/) for full documentation.
+
 ## Locally Scoped CSS
 
 (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
@@ -24,6 +52,8 @@ export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 ```
 
 ## treat
+
+> Usage of treat is deprecated in favour of vanilla-extract
 
 Note: You must access all treat imports through the sku prefix. e.g. `sku/treat`, `sku/react-treat`;
 

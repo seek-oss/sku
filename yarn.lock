@@ -12364,10 +12364,10 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-playroom@^0.22.4:
-  version "0.22.4"
-  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.22.4.tgz#59465a91abe160f776f11cd15420587e161163a8"
-  integrity sha512-dlMTu8hVZ5Co+txhPMZci/3jR+i1pD9OBZGsVM7PnuweTKHO3/RvO1ovncbxIWKJG9NnqnhgV0ChP8W8XqqQjw==
+playroom@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/playroom/-/playroom-0.25.0.tgz#0733932ca1b88deae08bb31af426ace20e6b5b40"
+  integrity sha512-cHE9Imc+llsz8qpqIUiuEHuzoRPYsT5o6hDgXvLtlw8dfadtUFNgJmgjxKYliO/l6AOibap0rpFx8JVgZwT4lA==
   dependencies:
     "@babel/cli" "^7.8.3"
     "@babel/core" "^7.8.3"
@@ -12415,6 +12415,7 @@ playroom@^0.22.4:
     mini-css-extract-plugin "^0.9.0"
     open "^7.0.0"
     parse-prop-types "^0.3.0"
+    portfinder "^1.0.26"
     postcss-loader "^3.0.0"
     prettier "^2.0.5"
     prop-types "^15.7.2"

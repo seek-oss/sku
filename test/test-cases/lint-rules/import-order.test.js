@@ -19,6 +19,7 @@ const tests = [
       `import LocalComponent from './LocalComponent';`,
       `import Parent from '../parent';`,
       `import someModule from 'some-module';`,
+      `import vanillaStyles from './vanillaStyles.css';`,
       `import distantParent from '../../../parent';`,
       `import path from 'path';`,
       `import styles from './styles.less';`,
@@ -39,6 +40,7 @@ const tests = [
       `import LocalComponent from './LocalComponent';`, // sibling
       ``,
       `import styles from './styles.less';`, // styles
+      `import vanillaStyles from './vanillaStyles.css';`, // styles
     ],
   ),
   makeTest(

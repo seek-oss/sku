@@ -1,5 +1,11 @@
 # sku
 
+## 10.13.4
+
+### Patch Changes
+
+- Fix Date `instanceof` checks inside render ([#604](https://github.com/seek-oss/sku/pull/604))
+
 ## 10.13.3
 
 ### Patch Changes

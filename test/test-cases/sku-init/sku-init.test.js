@@ -4,7 +4,8 @@ const path = require('path');
 const spawnSkuScriptInDir = require('../../utils/spawnSkuScriptInDir');
 const { promptForBraidTheme } = require('../../../lib/prompts');
 
-describe('sku init', () => {
+// Skipping test, flaky in CI
+describe.skip('sku init', () => {
   it('should create a sku.config.js', async () => {
     // `sku init` is a long running task and can take some time to complete
     jest.setTimeout(150 * 1000);

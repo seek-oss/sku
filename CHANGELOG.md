@@ -1,5 +1,15 @@
 # sku
 
+## 10.13.3
+
+### Patch Changes
+
+- Group `.css.ts` files with styles when ordering imports ([#600](https://github.com/seek-oss/sku/pull/600))
+
+- Work around a [classnames bug](https://github.com/JedWatson/classnames/issues/240) where dynamic class objects are converted to `[Object object]` during static render ([#602](https://github.com/seek-oss/sku/pull/602))
+
+- Update minimum playroom version ([#600](https://github.com/seek-oss/sku/pull/600))
+
 ## 10.13.2
 
 ### Patch Changes

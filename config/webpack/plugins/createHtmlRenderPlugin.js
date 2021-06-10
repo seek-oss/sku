@@ -124,6 +124,8 @@ module.exports = () => {
       // This fixes an issue where one of treats deps (@hapi/joek)
       // accesses Buffer globally. Not great...
       Buffer,
+      // Allows Date serialization checks to work in render e.g. `myDate instance Date`
+      Date,
     },
   });
 };

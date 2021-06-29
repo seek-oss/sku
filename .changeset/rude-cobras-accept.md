@@ -1,5 +1,5 @@
 ---
-'sku': major
+'sku': minor
 ---
 
 Upgrade to Prettier 2.3

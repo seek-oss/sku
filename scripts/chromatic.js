@@ -7,11 +7,8 @@ const skuPath = require.resolve('../bin/sku');
 (async () => {
   // Handle Travis CI setup: http://docs.chromaticqa.com/setup_ci#travis
   if (ci.service === 'travis') {
-    const {
-      TRAVIS_EVENT_TYPE,
-      TRAVIS_PULL_REQUEST_SLUG,
-      TRAVIS_REPO_SLUG,
-    } = process.env;
+    const { TRAVIS_EVENT_TYPE, TRAVIS_PULL_REQUEST_SLUG, TRAVIS_REPO_SLUG } =
+      process.env;
 
     const isInitialPrBuild = TRAVIS_EVENT_TYPE === 'pull_request';
     const isInternalPr = TRAVIS_PULL_REQUEST_SLUG === TRAVIS_REPO_SLUG;

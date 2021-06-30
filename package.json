@@ -149,7 +149,7 @@
     "prettier": "^2.3.2",
     "pretty-ms": "^7.0.1",
     "raw-loader": "^4.0.2",
-    "react-refresh": "^0.9.0",
+    "react-refresh": "^0.10.0",
     "react-treat": "^1.6.1",
     "rimraf": "^3.0.0",
     "rmfr": "^2.0.0",

@@ -40,13 +40,8 @@ app.get('*', (...args) => {
     });
   }
 
-  const {
-    SkuProvider,
-    extractor,
-    flushHeadTags,
-    getHeadTags,
-    getBodyTags,
-  } = makeExtractor(webpackStats, publicPath, cspHandler);
+  const { SkuProvider, extractor, flushHeadTags, getHeadTags, getBodyTags } =
+    makeExtractor(webpackStats, publicPath, cspHandler);
   const addLanguageChunk = (language) =>
     extractor.addChunk(getChunkName(language));
 

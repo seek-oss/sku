@@ -144,9 +144,10 @@ const hot = process.env.SKU_HOT !== 'false';
             if (renderError.webpackStats && !isLibrary) {
               const webpackStats = renderError.webpackStats.toJson();
 
-              devServerScripts = webpackStats.entrypoints.devServerOnly.assets.map(
-                (asset) => `<script src="/${asset}"></script>`,
-              );
+              devServerScripts =
+                webpackStats.entrypoints.devServerOnly.assets.map(
+                  (asset) => `<script src="/${asset}"></script>`,
+                );
             }
 
             res.status(500).send(

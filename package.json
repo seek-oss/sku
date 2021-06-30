@@ -146,7 +146,7 @@
     "playroom": "^0.25.0",
     "postcss-js": "^3.0.3",
     "postcss-loader": "^3.0.0",
-    "prettier": "2.2.1",
+    "prettier": "^2.3.2",
     "pretty-ms": "^7.0.1",
     "raw-loader": "^4.0.2",
     "react-refresh": "^0.9.0",

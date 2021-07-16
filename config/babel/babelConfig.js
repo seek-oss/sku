@@ -12,12 +12,14 @@ module.exports = ({
   const browserEnvOptions = {
     modules: false,
     targets: supportedBrowsers,
+    shippedProposals: true,
   };
 
   const nodeEnvOptions = {
     targets: {
       node: 'current',
     },
+    shippedProposals: true,
   };
 
   const isBrowser = target === 'browser';

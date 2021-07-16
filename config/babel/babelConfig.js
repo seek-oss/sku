@@ -26,14 +26,6 @@ module.exports = ({
 
   const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
-    require.resolve('babel-plugin-syntax-dynamic-import'),
-    ...(!isProductionBuild && lang === 'js'
-      ? [require.resolve('babel-plugin-flow-react-proptypes')]
-      : []),
-    require.resolve('@babel/plugin-proposal-class-properties'),
-    require.resolve('@babel/plugin-proposal-object-rest-spread'),
-    require.resolve('@babel/plugin-proposal-optional-chaining'),
-    require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
     [
       require.resolve('babel-plugin-module-resolver'),
       {
@@ -79,7 +71,7 @@ module.exports = ({
     }
   }
 
-  const languagePreset =
+  const presets = [
     lang === 'ts'
       ? [
           require.resolve('@babel/preset-typescript'),
@@ -88,16 +80,15 @@ module.exports = ({
             allExtensions: true,
           },
         ]
-      : require.resolve('@babel/preset-flow');
+      : null,
+    [require.resolve('@babel/preset-env'), envPresetOptions],
+    require.resolve('@babel/preset-react'),
+  ].filter(Boolean);
 
   return {
     babelrc: false,
     sourceType: isBrowser ? 'unambiguous' : 'module',
-    presets: [
-      languagePreset,
-      [require.resolve('@babel/preset-env'), envPresetOptions],
-      require.resolve('@babel/preset-react'),
-    ],
+    presets,
     plugins,
   };
 };

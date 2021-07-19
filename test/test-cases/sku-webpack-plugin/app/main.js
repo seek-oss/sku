@@ -1,5 +1,4 @@
 import 'braid-design-system/reset';
-import React from 'react';
 import ReactDom from 'react-dom';
 import theme from 'braid-design-system/themes/seekAnz';
 

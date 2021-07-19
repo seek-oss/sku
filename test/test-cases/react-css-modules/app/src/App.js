@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import lessStyles from './lessStyles.less';
 
 export default ({ children }) => {
-  const [message, setMessage] = React.useState('Initial render');
+  const [message, setMessage] = useState('Initial render');
 
   // This tests that React has boostrapped correctky client side
   setTimeout(() => {

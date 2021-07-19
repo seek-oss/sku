@@ -16,7 +16,9 @@
           "__sku_alias__webpackStats"
         ]
       }
-    ]
+    ],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "globals": {
     "__SKU_SRC_PATHS_0__": true,

@@ -82,7 +82,12 @@ module.exports = ({
         ]
       : null,
     [require.resolve('@babel/preset-env'), envPresetOptions],
-    require.resolve('@babel/preset-react'),
+    [
+      require.resolve('@babel/preset-react'),
+      {
+        runtime: 'automatic',
+      },
+    ],
   ].filter(Boolean);
 
   return {

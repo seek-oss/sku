@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Box, BraidTestProvider } from 'braid-design-system';
 

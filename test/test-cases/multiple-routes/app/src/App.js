@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Route } from 'react-router-dom';
 import loadable from '../../../../../@loadable/component';
 

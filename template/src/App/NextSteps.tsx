@@ -8,7 +8,7 @@ import {
   Stack,
   List,
 } from 'braid-design-system';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 export default () => (
   <Fragment>

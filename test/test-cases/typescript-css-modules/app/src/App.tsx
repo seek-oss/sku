@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import lessStyles from './lessStyles.less';
 import './globalTypes.d';
 

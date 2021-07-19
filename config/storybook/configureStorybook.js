@@ -1,4 +1,4 @@
-import React from 'react';
+import { createElement } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 
@@ -15,7 +15,7 @@ export default () => {
     // prevent margins from collapsing, otherwise screenshot services will
     // ignore bottom margins, leading to missed changes when margin values
     // change, or unwanted diffs when migrating from margin to padding.
-    React.createElement('div', { style: { paddingBottom: '0.05px' } }, story()),
+    createElement('div', { style: { paddingBottom: '0.05px' } }, story()),
   );
 
   const reqs = [

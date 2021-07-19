@@ -1,5 +1,4 @@
 import styles from './RedBlock.less';
-import React from 'react';
 
 interface RedBlockProps {
   border?: boolean;

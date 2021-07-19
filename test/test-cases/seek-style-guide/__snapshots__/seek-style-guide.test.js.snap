@@ -15,11 +15,11 @@ Object {
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-65345ce7e7d7d2dcf37c.js",
-    "/vendors~main-a5deffe4256d463f5046.js",
-    "/main-3936b14da59b45fd7118.js",
+    "/vendors~main-e7aa9c7a3a5fa3d04045.js",
+    "/main-d7b54468e4e9c00b89be.js",
   ]
 CSS: Array [
-    "/vendors~main-b9abdb3d425a46bbfa5a.css",
+    "/vendors~main-28436016679b223262cc.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -61,29 +61,27 @@ SOURCE HTML: <!DOCTYPE html>
         </div>
         <div class>
           <div class="_1sNPWnj">
-            <div class="_2fF0T38">
-              <span class="_3QEejbJ oW4fy8f _3F0JCzU">
-                <span class>
-                  <span data-automation-svg="true">
-                    <span class="_2tCUUx-">
-                      <svg class="_1PyPR1U"
-                           xmlns="http://www.w3.org/2000/svg"
-                           width="16"
-                           height="16"
-                           viewbox="0 0 1024 900"
-                           focusable="false"
-                      >
-                        <path d="M718 188q11 0 22 1.5t22 4.5q16 4 30.5 12t28.5 19q15 13 27 28t21 34h1l3 7q13 27 20 59.5t7 68.5v3q0 15-4.5 32.5T881 496q-11 24-26 47.5T821 590q-39 48-85.5 94T636 774q-46 38-85 67.5T480 891q-31-20-70-49.5T325 774h-1q-52-43-98.5-89T139 590q-19-23-34-46.5T79 496q-10-21-14.5-38.5T60 425v-3q0-37 7-69.5T87 293h1q0-2 1-3.5t2-3.5q10-18 21.5-33t26.5-28q14-11 28.5-19t30.5-12q11-3 22.5-4.5T242 188q24 0 45.5 7t43.5 21q15 9 28 21t24 26q12 15 22.5 32.5T425 333l56 129 54-129q9-20 19-37t22-32q11-14 24.5-26t28.5-22h1q21-14 43-21t45-7zm0-60q-32 0-62 9.5T597 165q-38 25-67.5 61T480 309q-21-47-50-83t-66-61q-29-18-59.5-27.5T242 128q-14 0-29 2t-30 6q-22 6-43 16.5T100 179t-34.5 36T38 259q-1 1-1.5 2t-.5 2l-2 2v1q-17 34-25.5 73T0 422v2q0 22 6 46t19 51q12 27 29 54t39 53q42 52 90.5 100T286 820q49 41 90 71.5t74 51.5q14 9 21.5 13.5t8.5 4.5q1 0 8.5-4.5T510 944q33-22 74-53t90-70q55-46 103.5-94t89.5-99q22-26 39-52.5t29-53.5q13-27 19-51.5t6-46.5v-2q-1-44-9-83t-24-72l-4-8q-13-24-28.5-43.5T860 180t-39.5-27-43.5-17q-15-4-30-6t-29-2z">
-                        </path>
-                      </svg>
-                    </span>
-                  </span>
-                  <span data-automation-text="true">
-                    Hello world!
+            <span class="_3QEejbJ oW4fy8f _3F0JCzU">
+              <span class>
+                <span data-automation-svg="true">
+                  <span class="_2tCUUx-">
+                    <svg class="_1PyPR1U"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         viewbox="0 0 1024 900"
+                         focusable="false"
+                    >
+                      <path d="M718 188q11 0 22 1.5t22 4.5q16 4 30.5 12t28.5 19q15 13 27 28t21 34h1l3 7q13 27 20 59.5t7 68.5v3q0 15-4.5 32.5T881 496q-11 24-26 47.5T821 590q-39 48-85.5 94T636 774q-46 38-85 67.5T480 891q-31-20-70-49.5T325 774h-1q-52-43-98.5-89T139 590q-19-23-34-46.5T79 496q-10-21-14.5-38.5T60 425v-3q0-37 7-69.5T87 293h1q0-2 1-3.5t2-3.5q10-18 21.5-33t26.5-28q14-11 28.5-19t30.5-12q11-3 22.5-4.5T242 188q24 0 45.5 7t43.5 21q15 9 28 21t24 26q12 15 22.5 32.5T425 333l56 129 54-129q9-20 19-37t22-32q11-14 24.5-26t28.5-22h1q21-14 43-21t45-7zm0-60q-32 0-62 9.5T597 165q-38 25-67.5 61T480 309q-21-47-50-83t-66-61q-29-18-59.5-27.5T242 128q-14 0-29 2t-30 6q-22 6-43 16.5T100 179t-34.5 36T38 259q-1 1-1.5 2t-.5 2l-2 2v1q-17 34-25.5 73T0 422v2q0 22 6 46t19 51q12 27 29 54t39 53q42 52 90.5 100T286 820q49 41 90 71.5t74 51.5q14 9 21.5 13.5t8.5 4.5q1 0 8.5-4.5T510 944q33-22 74-53t90-70q55-46 103.5-94t89.5-99q22-26 39-52.5t29-53.5q13-27 19-51.5t6-46.5v-2q-1-44-9-83t-24-72l-4-8q-13-24-28.5-43.5T860 180t-39.5-27-43.5-17q-15-4-30-6t-29-2z">
+                      </path>
+                    </svg>
                   </span>
                 </span>
+                <span data-automation-text="true">
+                  Hello world!
+                </span>
               </span>
-            </div>
+            </span>
           </div>
         </div>
       </div>
@@ -115,10 +113,9 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-3936b14da59b45fd7118.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d7b54468e4e9c00b89be.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-65345ce7e7d7d2dcf37c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-a5deffe4256d463f5046.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-b9abdb3d425a46bbfa5a.css": a,
+  "vendors~main-28436016679b223262cc.css": a,
 abbr,
 acronym,
 address,
@@ -283,73 +280,6 @@ html {
 ._1sNPWnj {
   max-width: 940px;
   margin: 0 auto;
-}
-._2fF0T38 {
-  padding: 18px 20px;
-}
-@media only screen and (min-width: 740px) {
-  ._2fF0T38 {
-    padding-left: 25px;
-    padding-right: 25px;
-  }
-}
-._2fF0T38._1knchpp {
-  margin: 0 -20px;
-}
-@media only screen and (min-width: 740px) {
-  ._2fF0T38._1knchpp {
-    margin: 0 -25px;
-  }
-}
-._2fF0T38.yPyLZDs {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-._2fF0T38._4RHnR77 {
-  color: #169400;
-}
-._2fF0T38._4RHnR77.YxiujDY {
-  background-color: #169400;
-  color: #fff;
-}
-._2fF0T38._4RHnR77._1KnlgCE {
-  background-color: #f3f9f2;
-}
-._2fF0T38.KCxlIXF {
-  color: #9556b7;
-}
-._2fF0T38.KCxlIXF.YxiujDY {
-  background-color: #9556b7;
-  color: #fff;
-}
-._2fF0T38.KCxlIXF._1KnlgCE {
-  background-color: #f9f6fb;
-}
-._2fF0T38._3xVNo7Y {
-  color: #e60278;
-}
-._2fF0T38._3xVNo7Y.YxiujDY,
-._2fF0T38._3xVNo7Y._1KnlgCE {
-  background-color: #fff;
-  color: #e60278;
-}
-._2fF0T38._3MI7WB- {
-  color: #404040;
-}
-._2fF0T38._3MI7WB-.YxiujDY,
-._2fF0T38._3MI7WB-._1KnlgCE {
-  background-color: #fbfbfb;
-  color: #404040;
-}
-._1904yhP {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-@media only screen and (min-width: 740px) {
-  ._1904yhP {
-    padding-top: 42px;
-    padding-bottom: 36px;
-  }
 }
 ._3QEejbJ {
   padding-bottom: 12px;
@@ -775,5 +705,6 @@ html {
   }
 }
 ,
+  "vendors~main-e7aa9c7a3a5fa3d04045.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

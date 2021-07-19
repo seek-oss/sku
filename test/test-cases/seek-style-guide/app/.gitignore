@@ -1,0 +1,9 @@
+# managed by sku
+.eslintrc
+.prettierrc
+coverage/
+dist-playroom/
+dist-storybook/
+dist/
+report/
+# end managed by sku

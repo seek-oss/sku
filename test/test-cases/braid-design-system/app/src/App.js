@@ -1,5 +1,3 @@
-import React from 'react';
-
 import 'braid-design-system/reset';
 import {
   BraidLoadableProvider,

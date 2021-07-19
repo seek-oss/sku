@@ -9,14 +9,15 @@ Object {
   \\"path\\",
   \\"react\\",
   \\"react-dom/server\\",
+  \\"react/jsx-runtime\\",
   \\"tty\\",
   \\"url\\",
   \\"util\\"
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-65345ce7e7d7d2dcf37c.js",
-    "/vendors~main-e7aa9c7a3a5fa3d04045.js",
-    "/main-d7b54468e4e9c00b89be.js",
+    "/vendors~main-013ff2da7470b435d32d.js",
+    "/main-cd158280cb4185dd2c76.js",
   ]
 CSS: Array [
     "/vendors~main-28436016679b223262cc.css",
@@ -113,8 +114,9 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-d7b54468e4e9c00b89be.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-cd158280cb4185dd2c76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-65345ce7e7d7d2dcf37c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-013ff2da7470b435d32d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-28436016679b223262cc.css": a,
 abbr,
 acronym,
@@ -705,6 +707,5 @@ html {
   }
 }
 ,
-  "vendors~main-e7aa9c7a3a5fa3d04045.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

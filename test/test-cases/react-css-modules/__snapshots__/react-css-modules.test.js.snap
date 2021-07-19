@@ -3,8 +3,8 @@
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: Array [
   "/runtime-65345ce7e7d7d2dcf37c.js",
-  "/vendors~main-33e4ebe334fe7975a453.js",
-  "/main-863f2674fa7524dcedcd.js",
+  "/vendors~main-7fa439ba1394b963696e.js",
+  "/main-e86532f3e6b5d28b60b9.js",
 ]
 CSS: Array [
   "/main-3d394153f1fe77316782.css",
@@ -92,8 +92,8 @@ exports[`react-css-modules should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
     "/runtime-65345ce7e7d7d2dcf37c.js",
-    "/vendors~main-33e4ebe334fe7975a453.js",
-    "/main-863f2674fa7524dcedcd.js",
+    "/vendors~main-7fa439ba1394b963696e.js",
+    "/main-e86532f3e6b5d28b60b9.js",
   ]
 CSS: Array [
     "/main-3d394153f1fe77316782.css",
@@ -174,8 +174,8 @@ SOURCE HTML: <!DOCTYPE html>
   font-size: 32px;
 }
 ,
-  "main-863f2674fa7524dcedcd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-e86532f3e6b5d28b60b9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-65345ce7e7d7d2dcf37c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-33e4ebe334fe7975a453.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-7fa439ba1394b963696e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

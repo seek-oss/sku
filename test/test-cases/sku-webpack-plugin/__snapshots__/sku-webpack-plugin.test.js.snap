@@ -26,23 +26,6 @@ POST HYDRATE DIFFS:
  <html>
    <head>
      <meta charset="utf-8">
-@@ -15,5 +15,15 @@
-   <body>
-     <script src="main.js">
-     </script>
-+    <div>
-+      <style type="text/css">
-+        body{margin:0;padding:0;background:#eee}
-+      </style>
-+      <div class="FYwKg _2MJ7O_4 _2Cp5K fB92N_4 _1pAdR_4 FLByR_4 _2QIfI_4">
-+        <span class="FYwKg _2Bz3E C6ZIU_4 _8QVx6_4 _2DNlq_4 _29m7__4 _3srVf_4">
-+          Is it working?
-+        </span>
-+      </div>
-+    </div>
-   </body>
- </html>
-\\ No newline at end of file
 
 `;
 
@@ -1584,22 +1567,5 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: 
-   <body>
-     <script src="main.js">
-     </script>
-+    <div>
-+      <style type="text/css">
-+        body{margin:0;padding:0;background:#eee}
-+      </style>
-+      <div class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-background_card_2MJ7O_seekAnz BRAID__useBoxStyles-position_relative_2Cp5K BRAID__useBoxStyles-padding_top_gutter_fB92N_seekAnz BRAID__useBoxStyles-padding_bottom_gutter_1pAdR_seekAnz BRAID__useBoxStyles-padding_left_gutter_FLByR_seekAnz BRAID__useBoxStyles-padding_right_gutter_2QIfI_seekAnz">
-+        <span class="BRAID__reset-base_FYwKg BRAID__useBoxStyles-display_block_2Bz3E BRAID__typography-fontFamily_C6ZIU_seekAnz BRAID__typography-text_large_base_8QVx6_seekAnz BRAID__typography-invertableTone_neutral_light_2DNlq_seekAnz BRAID__typography-fontWeight_regular_29m7__seekAnz BRAID__typography-text_large_leadingTrim_3srVf_seekAnz">
-+          Is it working?
-+        </span>
-+      </div>
-+    </div>
-   </body>
- </html>
-\\ No newline at end of file
-
+POST HYDRATE DIFFS: NO DIFF
 `;

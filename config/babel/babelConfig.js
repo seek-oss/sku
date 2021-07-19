@@ -86,6 +86,7 @@ module.exports = ({
       require.resolve('@babel/preset-react'),
       {
         runtime: 'automatic',
+        development: !isProductionBuild,
       },
     ],
   ].filter(Boolean);

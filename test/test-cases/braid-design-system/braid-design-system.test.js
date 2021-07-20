@@ -53,7 +53,7 @@ function getLocalUrl(site) {
   return `http://${host}:${skuConfig.port}`;
 }
 
-describe.skip('braid-design-system', () => {
+describe('braid-design-system', () => {
   beforeAll(async () => {
     // "Install" React and braid-design-system into this test app so that webpack-node-externals
     // treats them correctly.

@@ -52,7 +52,6 @@ log(`Starting script: ${script}`);
     case 'build-storybook':
     case 'build':
     case 'build-ssr':
-    case 'chromatic':
     case 'serve': {
       await configureProject();
 

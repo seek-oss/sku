@@ -15,7 +15,7 @@ export const MyComponent => <div>MyComponent</div>;
 
 **MIGRATION GUIDE**
 
-Ensure you app is running at least react `v16.14.0`, although in most cases it will be safe to switch directly to `v17.0.0`. Now your app should be working but you may be seeing lint errors similar to the following:
+Ensure your app is running React 17. React 16.14 is also supported if required. Now your app should be working but you may be seeing lint errors similar to the following:
 
 ```
 'React' is declared but its value is never read

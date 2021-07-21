@@ -91,6 +91,10 @@ describe('sku-webpack-plugin', () => {
         options: {
           cwd: appDir,
           stdio: 'inherit',
+          env: {
+            ...process.env,
+            NODE_ENV: 'production',
+          },
         },
       });
 

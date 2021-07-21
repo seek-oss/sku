@@ -13,12 +13,12 @@ Object {
   color: red;
 }
 ,
-  "main-d2e6fc6769209c6914f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-2a9645785d7ca28e1b1e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-50e85f7b5b30f143d934.js",
     "/static/place/vendors~main-44f6de900ae213468ed3.js",
-    "/static/place/main-d2e6fc6769209c6914f1.js",
+    "/static/place/main-2a9645785d7ca28e1b1e.js",
     "/static/place/handlers-Details-e6be85833a0341f9f714.js",
     "/static/place/AsyncComponent-97c358ff55a75ff4d87a.js",
   ]
@@ -131,7 +131,7 @@ SOURCE HTML: <!DOCTYPE html>
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-50e85f7b5b30f143d934.js",
     "/static/place/vendors~main-44f6de900ae213468ed3.js",
-    "/static/place/main-d2e6fc6769209c6914f1.js",
+    "/static/place/main-2a9645785d7ca28e1b1e.js",
     "/static/place/handlers-Home-2df33a390847973e7389.js",
   ]
 CSS: Array [
@@ -230,7 +230,7 @@ SOURCE HTML: <!DOCTYPE html>
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-50e85f7b5b30f143d934.js",
     "/static/place/vendors~main-44f6de900ae213468ed3.js",
-    "/static/place/main-d2e6fc6769209c6914f1.js",
+    "/static/place/main-2a9645785d7ca28e1b1e.js",
     "/static/place/handlers-Details-e6be85833a0341f9f714.js",
     "/static/place/AsyncComponent-97c358ff55a75ff4d87a.js",
   ]
@@ -343,7 +343,7 @@ SOURCE HTML: <!DOCTYPE html>
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-50e85f7b5b30f143d934.js",
     "/static/place/vendors~main-44f6de900ae213468ed3.js",
-    "/static/place/main-d2e6fc6769209c6914f1.js",
+    "/static/place/main-2a9645785d7ca28e1b1e.js",
     "/static/place/handlers-Home-2df33a390847973e7389.js",
   ]
 CSS: Array [
@@ -448,7 +448,7 @@ SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/static/place/runtime-50e85f7b5b30f143d934.js",
   "/static/place/vendors~main-44f6de900ae213468ed3.js",
-  "/static/place/main-d2e6fc6769209c6914f1.js",
+  "/static/place/main-2a9645785d7ca28e1b1e.js",
   "/static/place/handlers-Details-e6be85833a0341f9f714.js",
   "/static/place/AsyncComponent-97c358ff55a75ff4d87a.js",
 ]
@@ -574,7 +574,7 @@ SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/static/place/runtime-50e85f7b5b30f143d934.js",
   "/static/place/vendors~main-44f6de900ae213468ed3.js",
-  "/static/place/main-d2e6fc6769209c6914f1.js",
+  "/static/place/main-2a9645785d7ca28e1b1e.js",
   "/static/place/handlers-Home-2df33a390847973e7389.js",
 ]
 CSS: Array [

@@ -5,7 +5,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/static/source-maps/runtime-c33506925ecf7931c160.js",
     "/static/source-maps/vendors~main-e5e4f58dab7d6e8be49f.js",
-    "/static/source-maps/main-1a0493399f57e6de3028.js",
+    "/static/source-maps/main-57b3576a6e917f6d38eb.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -67,8 +67,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-1a0493399f57e6de3028.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-1a0493399f57e6de3028.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-57b3576a6e917f6d38eb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-57b3576a6e917f6d38eb.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c33506925ecf7931c160.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c33506925ecf7931c160.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-e5e4f58dab7d6e8be49f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

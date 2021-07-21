@@ -4,7 +4,7 @@ exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: Array [
   "/some-static-place/runtime-48d981f574904a02b04d.js",
   "/some-static-place/vendors~main-e5e4f58dab7d6e8be49f.js",
-  "/some-static-place/main-404f0e3faf8073e2bb14.js",
+  "/some-static-place/main-86f8344a5ac06c595473.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -74,7 +74,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/some-static-place/runtime-48d981f574904a02b04d.js",
     "/some-static-place/vendors~main-e5e4f58dab7d6e8be49f.js",
-    "/some-static-place/main-404f0e3faf8073e2bb14.js",
+    "/some-static-place/main-86f8344a5ac06c595473.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -136,7 +136,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-404f0e3faf8073e2bb14.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-86f8344a5ac06c595473.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-48d981f574904a02b04d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-e5e4f58dab7d6e8be49f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

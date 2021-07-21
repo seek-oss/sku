@@ -4,7 +4,7 @@ exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
   "/static/typescript/vendors~main-88684c66847f96181c08.js",
-  "/static/typescript/main-1d132a38617deb8e41f0.js",
+  "/static/typescript/main-92cfb242b0d08e7774a4.js",
 ]
 CSS: Array [
   "/static/typescript/main-3d394153f1fe77316782.css",
@@ -94,7 +94,7 @@ export const root: string;
   "index.html": SCRIPTS: Array [
     "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
     "/static/typescript/vendors~main-88684c66847f96181c08.js",
-    "/static/typescript/main-1d132a38617deb8e41f0.js",
+    "/static/typescript/main-92cfb242b0d08e7774a4.js",
   ]
 CSS: Array [
     "/static/typescript/main-3d394153f1fe77316782.css",
@@ -175,7 +175,6 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-1d132a38617deb8e41f0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-3d394153f1fe77316782.css": ._1dMllru {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -185,6 +184,7 @@ export default cssExports;
   font-size: 32px;
 }
 ,
+  "main-92cfb242b0d08e7774a4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-88684c66847f96181c08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

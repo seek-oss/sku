@@ -4,7 +4,7 @@ exports[`translations should render en 1`] = `
 SCRIPTS: Array [
   "/runtime-c23b2036f7ddf87040b9.js",
   "/vendors~main-4f16e404805d42391e0e.js",
-  "/main-7f4ec6f5b74c0cc31366.js",
+  "/main-fe89439a566d473b95e7.js",
   "/en-translations-e581123a4492c402af5e.js",
 ]
 CSS: Array []
@@ -89,7 +89,7 @@ exports[`translations should render fr 1`] = `
 SCRIPTS: Array [
   "/runtime-c23b2036f7ddf87040b9.js",
   "/vendors~main-4f16e404805d42391e0e.js",
-  "/main-7f4ec6f5b74c0cc31366.js",
+  "/main-fe89439a566d473b95e7.js",
   "/fr-translations-f4898ff95f2574ccea80.js",
 ]
 CSS: Array []
@@ -174,7 +174,7 @@ exports[`translations should support query parameters 1`] = `
 SCRIPTS: Array [
   "/runtime-c23b2036f7ddf87040b9.js",
   "/vendors~main-4f16e404805d42391e0e.js",
-  "/main-7f4ec6f5b74c0cc31366.js",
+  "/main-fe89439a566d473b95e7.js",
   "/en-translations-e581123a4492c402af5e.js",
 ]
 CSS: Array []

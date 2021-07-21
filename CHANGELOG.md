@@ -1,5 +1,11 @@
 # sku
 
+## 10.14.1
+
+### Patch Changes
+
+- Fix static rendering of vanilla-extract classes in production ([#610](https://github.com/seek-oss/sku/pull/610))
+
 ## 10.14.0
 
 ### Minor Changes

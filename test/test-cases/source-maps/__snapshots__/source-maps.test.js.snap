@@ -4,8 +4,8 @@ exports[`source-maps build should generate the expected files 1`] = `
 Object {
   "index.html": SCRIPTS: Array [
     "/static/source-maps/runtime-c33506925ecf7931c160.js",
-    "/static/source-maps/vendors~main-0ed67bd87d9bf72015eb.js",
-    "/static/source-maps/main-0d37df391f1d1ccbd722.js",
+    "/static/source-maps/vendors~main-e5e4f58dab7d6e8be49f.js",
+    "/static/source-maps/main-57b3576a6e917f6d38eb.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -67,11 +67,11 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-0d37df391f1d1ccbd722.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-0d37df391f1d1ccbd722.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-57b3576a6e917f6d38eb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-57b3576a6e917f6d38eb.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c33506925ecf7931c160.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c33506925ecf7931c160.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0ed67bd87d9bf72015eb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0ed67bd87d9bf72015eb.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-e5e4f58dab7d6e8be49f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-e5e4f58dab7d6e8be49f.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

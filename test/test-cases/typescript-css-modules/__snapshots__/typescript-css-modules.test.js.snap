@@ -3,8 +3,8 @@
 exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
-  "/static/typescript/vendors~main-6e7638001275a0c3ce97.js",
-  "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
+  "/static/typescript/vendors~main-88684c66847f96181c08.js",
+  "/static/typescript/main-92cfb242b0d08e7774a4.js",
 ]
 CSS: Array [
   "/static/typescript/main-3d394153f1fe77316782.css",
@@ -93,8 +93,8 @@ export const root: string;
 ",
   "index.html": SCRIPTS: Array [
     "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
-    "/static/typescript/vendors~main-6e7638001275a0c3ce97.js",
-    "/static/typescript/main-74f6b2c1896a09ddb8bc.js",
+    "/static/typescript/vendors~main-88684c66847f96181c08.js",
+    "/static/typescript/main-92cfb242b0d08e7774a4.js",
   ]
 CSS: Array [
     "/static/typescript/main-3d394153f1fe77316782.css",
@@ -184,9 +184,9 @@ export default cssExports;
   font-size: 32px;
 }
 ,
-  "main-74f6b2c1896a09ddb8bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-92cfb242b0d08e7774a4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-6e7638001275a0c3ce97.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vendors~main-88684c66847f96181c08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -194,7 +194,7 @@ exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: Array [
   "/static/typescript/runtime-22b1ca3a73f4d03fb24b.js",
   "/static/typescript/vendors~main-f3757866d3d62257691f.js",
-  "/static/typescript/main-f9b7a8f9a2f8ad43ba02.js",
+  "/static/typescript/main-75b1c4d41dddf4091db5.js",
 ]
 CSS: Array [
   "/static/typescript/main-3d394153f1fe77316782.css",
@@ -299,7 +299,7 @@ export default cssExports;
   font-size: 32px;
 }
 ,
-  "main-f9b7a8f9a2f8ad43ba02.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-75b1c4d41dddf4091db5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-22b1ca3a73f4d03fb24b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-f3757866d3d62257691f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

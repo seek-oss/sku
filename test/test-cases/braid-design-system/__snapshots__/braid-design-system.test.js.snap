@@ -11,15 +11,16 @@ Object {
   \\"react\\",
   \\"react-dom\\",
   \\"react-dom/server\\",
+  \\"react/jsx-runtime\\",
   \\"tty\\",
   \\"url\\",
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-6a7c2c9ffecbf64c7641.js",
-    "/vendors~main-d944e04d8bc3a19a61f8.js",
-    "/main-4ab425c1c16c8ab4fac8.js",
-    "/themes-jobStreet-30514d880275992f30ea.js",
+    "/runtime-dba9a3e8b4d67d4a7703.js",
+    "/vendors~main-11e08036f178003a4145.js",
+    "/main-db123a63284146f0acab.js",
+    "/themes-jobStreet-2951a44e17b643266f7c.js",
   ]
 CSS: Array [
     "/vendors~main-56b4718c46adba3092d5.css",
@@ -232,13 +233,13 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-4ab425c1c16c8ab4fac8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-6a7c2c9ffecbf64c7641.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-db123a63284146f0acab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-dba9a3e8b4d67d4a7703.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-6a7c2c9ffecbf64c7641.js",
-    "/vendors~main-d944e04d8bc3a19a61f8.js",
-    "/main-4ab425c1c16c8ab4fac8.js",
-    "/themes-seekAnz-d4e2b2b0c212d0b5bc98.js",
+    "/runtime-dba9a3e8b4d67d4a7703.js",
+    "/vendors~main-11e08036f178003a4145.js",
+    "/main-db123a63284146f0acab.js",
+    "/themes-seekAnz-e7081a3972dcaeeddbc1.js",
   ]
 CSS: Array [
     "/vendors~main-56b4718c46adba3092d5.css",
@@ -645,7 +646,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-apac-573336b8c983c89b2b3f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-apac-be7aef3cbaa145119e13.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-catho-50b602eb2afc1d053a55.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -839,8 +840,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-catho-a67351fae9a4d962a7a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-docs-9de8d28b5be643ada668.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-a620555517c46c59b675.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-docs-2a0831b560faa1f4f495.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-docs-acd9dcb6c1a0936a846e.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -1035,7 +1036,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-jobStreet-30514d880275992f30ea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-2951a44e17b643266f7c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-5367cbc5c80a8981db14.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -1230,6 +1231,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
+  "themes-jobStreetClassic-00c6c456392312a55522.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-9b01ee141992c018bffd.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -1423,8 +1425,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreetClassic-a82184823e2519131a58.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobsDb-c66e7b10a17a830ebc07.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-cb57ecdd5fc949f7b1f9.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -1619,7 +1619,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-occ-786df88a1eb9b6bda621.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-ce2cb7272e15f70b5f44.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-45ebe9dc2186087464bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-bd9fe148500205301c6f.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -2007,8 +2008,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekAnz-d4e2b2b0c212d0b5bc98.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekBusiness-4693603d4bc63679e24d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-e7081a3972dcaeeddbc1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekBusiness-374d2943bf880533e2c3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-91deda930053fbca4643.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -2397,8 +2398,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekUnifiedBeta-9d083e9d05d2844bc397.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-wireframe-790cf067ead185bb7c0f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-91cbee02b7b84bcc6b50.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-5a35c552b7bd33940f01.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-d33a287dd20bb09ee758.css": ._3QqL3 {
   background-color: #20b2aa;
   color: #fff;
@@ -2592,6 +2593,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
+  "vendors~main-11e08036f178003a4145.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vendors~main-56b4718c46adba3092d5.css": ._1brbmfo0 {
   margin: 0;
   padding: 0;
@@ -5027,16 +5029,15 @@ svg.jhxt9718 {
   text-overflow: ellipsis;
 }
 ,
-  "vendors~main-d944e04d8bc3a19a61f8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-6a7c2c9ffecbf64c7641.js",
-  "/vendors~main-d944e04d8bc3a19a61f8.js",
-  "/main-4ab425c1c16c8ab4fac8.js",
-  "/themes-jobStreet-30514d880275992f30ea.js",
+  "/runtime-dba9a3e8b4d67d4a7703.js",
+  "/vendors~main-11e08036f178003a4145.js",
+  "/main-db123a63284146f0acab.js",
+  "/themes-jobStreet-2951a44e17b643266f7c.js",
 ]
 CSS: Array [
   "/vendors~main-56b4718c46adba3092d5.css",
@@ -5262,10 +5263,10 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-6a7c2c9ffecbf64c7641.js",
-  "/vendors~main-d944e04d8bc3a19a61f8.js",
-  "/main-4ab425c1c16c8ab4fac8.js",
-  "/themes-seekAnz-d4e2b2b0c212d0b5bc98.js",
+  "/runtime-dba9a3e8b4d67d4a7703.js",
+  "/vendors~main-11e08036f178003a4145.js",
+  "/main-db123a63284146f0acab.js",
+  "/themes-seekAnz-e7081a3972dcaeeddbc1.js",
 ]
 CSS: Array [
   "/vendors~main-56b4718c46adba3092d5.css",
@@ -5626,7 +5627,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5640,7 +5641,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5866,7 +5867,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5880,7 +5881,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">

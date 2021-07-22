@@ -8,13 +8,14 @@ const { argv } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');
 const buildStorybookPath = require.resolve('@storybook/react/bin/build.js');
-const configDir = path.resolve(__dirname, '..', 'config', 'storybook', 'build');
+const configDir = path.resolve(__dirname, '../config/storybook/build');
 
 (async () => {
   await rimraf(storybookTarget);
 
   argv.push('--config-dir', configDir);
   argv.push('--output-dir', storybookTarget);
+  argv.push('--quiet');
 
   const storybookProcess = gracefulSpawn(buildStorybookPath, argv, {
     stdio: 'inherit',

@@ -5,4 +5,4 @@ export default {
   component: App,
 };
 
-export const Default = () => <App>Text</App>;
+export const Default = () => <App>Hello World</App>;

@@ -158,6 +158,7 @@ module.exports = {
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
   storybookTarget: skuConfig.storybookTarget,
+  storybookAddons: skuConfig.storybookAddons,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,

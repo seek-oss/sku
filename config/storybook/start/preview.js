@@ -1,0 +1,1 @@
+export { decorators } from '../decorators';

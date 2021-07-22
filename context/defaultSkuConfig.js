@@ -25,6 +25,7 @@ module.exports = {
   setupTests: null,
   storybookPort: 8081,
   storybookTarget: 'dist-storybook',
+  storybookAddons: [],
   initialPath: null,
   public: 'public',
   publicPath: '/',

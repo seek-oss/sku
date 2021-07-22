@@ -13,6 +13,13 @@ const getStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 
+  const firstStoryButton = await page.waitForSelector(
+    '#storybook-explorer-menu button',
+  );
+
+  // Ensure default story is activated
+  firstStoryButton.click();
+
   const iframeElement = await page.waitForSelector('#storybook-preview-iframe');
 
   const storybookFrame = await iframeElement.contentFrame();

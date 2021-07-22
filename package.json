@@ -69,8 +69,7 @@
     "@loadable/server": "^5.14.0",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@storybook/addon-knobs": "^5.2.0",
-    "@storybook/react": "^5.2.0",
+    "@storybook/react": "^6.3.4",
     "@types/jest": "^26.0.20",
     "@types/loadable__component": "^5.13.1",
     "@types/webpack": "^4.32.1",
@@ -170,6 +169,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.13.0",
     "@changesets/get-github-info": "^0.4.5",
+    "@storybook/addon-controls": "^6.3.4",
     "@testing-library/react": "^11.2.3",
     "@types/dedent": "^0.7.0",
     "@types/express": "^4.17.11",

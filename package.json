@@ -69,6 +69,7 @@
     "@loadable/server": "^5.14.0",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@storybook/addon-essentials": "^6.3.4",
     "@storybook/addon-knobs": "^6.3.0",
     "@storybook/react": "^6.3.4",
     "@types/jest": "^26.0.20",

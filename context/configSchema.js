@@ -109,6 +109,10 @@ module.exports = validator.compile({
   storybookTarget: {
     type: 'string',
   },
+  storybookAddons: {
+    type: 'array',
+    items: 'string',
+  },
   target: {
     type: 'string',
   },

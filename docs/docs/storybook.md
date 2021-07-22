@@ -3,27 +3,36 @@
 Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js` (or `.ts`, or `.tsx`), for example:
 
 ```js
-import React from 'react';
 import Button from './Button';
 
-import { storiesOf } from 'sku/@storybook/react';
-import { text } from 'sku/@storybook/addon-knobs';
+export default {
+  title: 'Button',
+  component: Button,
+};
 
-storiesOf('Button', module)
-  .add('Primary', () => (
-    <Button variant="primary">{text('Children', 'Primary')}</Button>
-  ))
-  .add('Secondary', () => (
-    <Button variant="secondary">{text('Children', 'Secondary')}</Button>
-  ));
+export const Primary = () => <Button variant="primary">Primary</Button>;
+
+export const Primary = () => <Button variant="secondary">Secondary</Button>;
 ```
 
 _**NOTE:** To access the Storybook API, you should import from `sku/@storybook/...`, since your project isn't depending on Storybook packages directly._
 
-The following Storybook packages are included with sku:
+There are no storybook addons configured by default in sku but they can be added through the `storybookAddons` option in `sku.config.js`.
 
-- [@storybook/react](https://www.npmjs.com/package/@storybook/react)
-- [@storybook/addon-knobs](https://www.npmjs.com/package/@storybook/addon-knobs)
+For example, if you want to use `@storybook/addon-essentials`, first install the addon.
+
+```bash
+yarn add --dev @storybook/addon-essentials
+```
+
+Then add it to your `sku.config.js`.
+
+```js
+// sku.config.js
+module.exports = {
+  storybookAddons: ['@storybook/addon-essentials'],
+};
+```
 
 By default, Storybook runs on port `8081`. If you'd like to use a different port, you can provide it via the `storybookPort` option in `sku.config.js`:
 

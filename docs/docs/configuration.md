@@ -352,6 +352,14 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
+## storybookAddons
+
+type `Array<string>`
+
+Default: `[]`
+
+An array of storybook addons to use.
+
 ## playroomComponents
 
 type `string`

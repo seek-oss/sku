@@ -12,7 +12,7 @@ export default {
 
 export const Primary = () => <Button variant="primary">Primary</Button>;
 
-export const Primary = () => <Button variant="secondary">Secondary</Button>;
+export const Secondary = () => <Button variant="secondary">Secondary</Button>;
 ```
 
 _**NOTE:** To access the Storybook API, you should import from `sku/@storybook/...`, since your project isn't depending on Storybook packages directly._

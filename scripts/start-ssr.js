@@ -130,9 +130,6 @@ const localhost = '0.0.0.0';
   });
 
   onDeath(() => {
-    clientCompiler.close(() => {
-      debug('Client compiler closed');
-    });
     serverCompiler.close(() => {
       debug('Server compiler closed');
     });

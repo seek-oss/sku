@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const lodash = require('lodash');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
-const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -12,7 +11,6 @@ const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
-const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
@@ -85,11 +83,7 @@ const makeWebpackConfig = ({
     ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
     : [...resolvedPolyfills, paths.clientEntry];
 
-  const skuServerEntry = require.resolve('../../entry/server/index.js');
-
-  const serverEntry = isDevServer
-    ? [`${require.resolve('webpack/hot/poll')}?1000`, skuServerEntry]
-    : [skuServerEntry];
+  const serverEntry = require.resolve('../../entry/server/index.js');
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
 
@@ -206,10 +200,7 @@ const makeWebpackConfig = ({
               new MetricsPlugin({ type: 'ssr', target: 'browser' }),
               new webpack.NoEmitOnErrorsPlugin(),
             ]
-          : [
-              bundleAnalyzerPlugin({ name: 'client' }),
-              new webpack.HashedModuleIdsPlugin(),
-            ]),
+          : [bundleAnalyzerPlugin({ name: 'client' })]),
         ...(hot
           ? [
               new webpack.HotModuleReplacementPlugin(),
@@ -227,11 +218,16 @@ const makeWebpackConfig = ({
       name: 'server',
       mode: webpackMode,
       entry: serverEntry,
-      watch: isDevServer,
       externals: [
+        {
+          __sku_alias__webpackStats: `commonjs ${path.join(
+            paths.target,
+            webpackStatsFilename,
+          )}`,
+        },
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
-          whitelist: [
+          allowlist: [
             // webpack-node-externals compares the `import` or `require` expression to this list,
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
@@ -244,10 +240,6 @@ const makeWebpackConfig = ({
       resolve: {
         alias: {
           __sku_alias__serverEntry: paths.serverEntry,
-          __sku_alias__webpackStats: path.join(
-            paths.target,
-            webpackStatsFilename,
-          ),
         },
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
       },
@@ -259,6 +251,7 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath,
         filename: 'server.js',
+        library: 'server',
         libraryTarget: 'var',
       },
       optimization: {
@@ -304,12 +297,6 @@ const makeWebpackConfig = ({
       ].concat(
         isDevServer
           ? [
-              new StartServerPlugin({
-                name: 'server.js',
-                signal: false,
-              }),
-              new webpack.NamedModulesPlugin(),
-              new webpack.HotModuleReplacementPlugin(),
               new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'node' }),
             ]
@@ -317,8 +304,6 @@ const makeWebpackConfig = ({
       ),
     },
   ].map(webpackDecorator);
-
-  debug(JSON.stringify(webpackConfigs));
 
   return webpackConfigs;
 };

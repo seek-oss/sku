@@ -271,7 +271,7 @@ const makeWebpackConfig = ({
       externals: [
         // Don't bundle or transpile non-compiled packages
         nodeExternals({
-          whitelist: [
+          allowlist: [
             'classnames', // Workaround for https://github.com/JedWatson/classnames/issues/240
 
             // webpack-node-externals compares the `import` or `require` expression to this list,

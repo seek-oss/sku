@@ -1,4 +1,4 @@
-const HtmlRenderPlugin = require('html-render-webpack-plugin');
+const { HtmlRenderPlugin } = require('html-render-webpack-plugin');
 const memoize = require('memoizee/weak');
 const debug = require('debug');
 

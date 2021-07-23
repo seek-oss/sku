@@ -1,9 +1,12 @@
 process.env.NODE_ENV = 'development';
 
+const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { once } = require('lodash');
 const { blue, underline } = require('chalk');
+const onDeath = require('death');
+const debug = require('debug')('sku:start');
 
 const { watch } = require('../lib/runWebpack');
 const getCertificate = require('../lib/certificate');
@@ -16,6 +19,7 @@ const { port, initialPath, paths, httpsDevServer } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
+const serverWatcher = require('../lib/serverWatcher');
 
 const { watchVocabCompile } = require('../lib/runVocab');
 
@@ -52,6 +56,8 @@ const localhost = '0.0.0.0';
 
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
+
+  serverWatcher(serverCompiler, path.join(paths.target, 'server.js'));
 
   const proto = httpsDevServer ? 'https' : 'http';
 
@@ -121,5 +127,17 @@ const localhost = '0.0.0.0';
       console.log(err);
       return;
     }
+  });
+
+  onDeath(() => {
+    clientCompiler.close(() => {
+      debug('Client compiler closed');
+    });
+    serverCompiler.close(() => {
+      debug('Server compiler closed');
+    });
+    devServer.close(() => {
+      debug('Webpack dev server closed');
+    });
   });
 })();

@@ -22,7 +22,6 @@ const makeCssLoaders = (options = {}) => {
     supportedBrowsers,
     generateCSSTypes = false,
     packageName,
-    hot = false,
     compilePackage = false,
   } = options;
 
@@ -48,16 +47,7 @@ const makeCssLoaders = (options = {}) => {
       : [];
 
   return [
-    ...(target === 'browser'
-      ? [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: hot,
-            },
-          },
-        ]
-      : []),
+    ...(target === 'browser' ? [MiniCssExtractPlugin.loader] : []),
     ...cssModuleToTypeScriptLoader,
     {
       loader: require.resolve('css-loader'),
@@ -76,22 +66,24 @@ const makeCssLoaders = (options = {}) => {
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        plugins: () => [
-          require('autoprefixer')(supportedBrowsers),
-          // Minimize CSS on production builds
-          ...(isProductionBuild
-            ? [
-                require('cssnano')({
-                  preset: [
-                    'default',
-                    {
-                      calc: false,
-                    },
-                  ],
-                }),
-              ]
-            : []),
-        ],
+        postcssOptions: {
+          plugins: [
+            require('autoprefixer')(supportedBrowsers),
+            // Minimize CSS on production builds
+            ...(isProductionBuild
+              ? [
+                  require('cssnano')({
+                    preset: [
+                      'default',
+                      {
+                        calc: false,
+                      },
+                    ],
+                  }),
+                ]
+              : []),
+          ],
+        },
       },
     },
     {
@@ -101,20 +93,11 @@ const makeCssLoaders = (options = {}) => {
 };
 
 const makeVanillaCssLoaders = (options = {}) => {
-  const {
-    isProductionBuild,
-    MiniCssExtractPlugin,
-    supportedBrowsers,
-    hot = false,
-  } = options;
+  const { isProductionBuild, MiniCssExtractPlugin, supportedBrowsers } =
+    options;
 
   return [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: hot,
-      },
-    },
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: {
@@ -124,22 +107,24 @@ const makeVanillaCssLoaders = (options = {}) => {
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        plugins: () => [
-          require('autoprefixer')(supportedBrowsers),
-          // Minimize CSS on production builds
-          ...(isProductionBuild
-            ? [
-                require('cssnano')({
-                  preset: [
-                    'default',
-                    {
-                      calc: false,
-                    },
-                  ],
-                }),
-              ]
-            : []),
-        ],
+        postcssOptions: {
+          plugins: [
+            require('autoprefixer')(supportedBrowsers),
+            // Minimize CSS on production builds
+            ...(isProductionBuild
+              ? [
+                  require('cssnano')({
+                    preset: [
+                      'default',
+                      {
+                        calc: false,
+                      },
+                    ],
+                  }),
+                ]
+              : []),
+          ],
+        },
       },
     },
   ];

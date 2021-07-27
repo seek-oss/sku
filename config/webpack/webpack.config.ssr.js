@@ -74,14 +74,8 @@ const makeWebpackConfig = ({
   const proto = httpsDevServer ? 'https' : 'http';
   const clientServer = `${proto}://localhost:${clientPort}/`;
 
-  const clientDevServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
-  ];
-
-  // Add polyfills and dev server client to all entries
-  const clientEntry = isDevServer
-    ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
-    : [...resolvedPolyfills, paths.clientEntry];
+  // Add polyfills to all entries
+  const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
   const serverEntry = require.resolve('../../entry/server/index.js');
 
@@ -213,6 +207,10 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
+      stats: 'errors-only',
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
     {
       name: 'server',
@@ -249,7 +247,6 @@ const makeWebpackConfig = ({
       },
       output: {
         path: paths.target,
-        publicPath,
         filename: 'server.js',
         library: 'server',
         libraryTarget: 'var',
@@ -302,6 +299,7 @@ const makeWebpackConfig = ({
             ]
           : [],
       ),
+      stats: 'errors-only',
     },
   ].map(webpackDecorator);
 

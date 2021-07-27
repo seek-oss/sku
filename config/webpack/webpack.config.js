@@ -14,7 +14,6 @@ const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const utils = require('./utils');
-const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 const isTypeScript = require('../../lib/isTypeScript');
 
@@ -262,6 +261,10 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
+      stats: 'errors-only',
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
     {
       name: 'render',
@@ -331,10 +334,12 @@ const makeWebpackConfig = ({
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
       ],
+      stats: 'errors-only',
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
   ].map(webpackDecorator);
-
-  debug(JSON.stringify(webpackConfigs));
 
   return webpackConfigs;
 };

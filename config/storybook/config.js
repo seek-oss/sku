@@ -6,4 +6,7 @@ module.exports = {
     path.join(srcPath, '**/*.stories.@(js|ts|tsx)'),
   ),
   addons: storybookAddons,
+  core: {
+    builder: 'webpack5',
+  },
 };

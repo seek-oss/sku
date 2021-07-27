@@ -70,15 +70,18 @@ const hot = process.env.SKU_HOT !== 'false';
   const appHosts = getAppHosts();
 
   const devServerConfig = {
-    contentBase: paths.public,
-    publicPath: paths.publicPath,
+    devMiddleware: {
+      publicPath: paths.publicPath,
+    },
     host: appHosts[0],
-    overlay: true,
-    stats: 'errors-only',
     allowedHosts: appHosts,
-    serveIndex: false,
     hot,
-    clientLogLevel: 'warn',
+    static: [
+      {
+        directory: paths.public,
+        serveIndex: true,
+      },
+    ],
   };
 
   if (httpsDevServer) {
@@ -90,7 +93,7 @@ const hot = process.env.SKU_HOT !== 'false';
 
   const devServer = new WebpackDevServer(clientCompiler, {
     ...devServerConfig,
-    after: (app) => {
+    onAfterSetupMiddleware: ({ app }) => {
       if (useDevServerMiddleware) {
         const devServerMiddleware = require(paths.devServerMiddleware);
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {

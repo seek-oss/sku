@@ -167,7 +167,10 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        new webpack.DefinePlugin(envVars),
+        new webpack.DefinePlugin({
+          ...envVars,
+          'process.env.NODE_DEBUG': JSON.stringify(false),
+        }),
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,

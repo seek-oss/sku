@@ -1,4 +1,5 @@
 import 'braid-design-system/reset';
+import { useState, useEffect } from 'react';
 import {
   BraidLoadableProvider,
   Text,
@@ -13,6 +14,12 @@ import { vanillaBox } from './App.css';
 const noop = () => {};
 
 export default ({ themeName }) => {
+  const [renderLabel, setRenderLabel] = useState('Initial');
+
+  useEffect(() => {
+    setRenderLabel('Client');
+  }, []);
+
   return (
     <BraidLoadableProvider themeName={themeName}>
       <Text>
@@ -26,7 +33,7 @@ export default ({ themeName }) => {
           label="This is a checkbox"
         />
       </Card>
-      <Box className={style.customBox}>Custom content</Box>
+      <Box className={style.customBox}>Custom content {renderLabel}</Box>
       <Box className={vanillaBox}>🧁 Vanilla content</Box>
     </BraidLoadableProvider>
   );

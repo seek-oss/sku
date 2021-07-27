@@ -11,13 +11,15 @@ exports[`sku-webpack-plugin build should create valid app 1`] = `
     <meta name=\\"viewport\\"
           content=\\"width=device-width,initial-scale=1\\"
     >
+    <script defer=\\"defer\\"
+            src=\\"main.js\\"
+    >
+    </script>
     <link href=\\"main.css\\"
           rel=\\"stylesheet\\"
     >
   </head>
   <body>
-    <script src=\\"main.js\\">
-    </script>
   </body>
 </html>"
 POST HYDRATE DIFFS: 
@@ -26,10 +28,10 @@ POST HYDRATE DIFFS:
  <html>
    <head>
      <meta charset="utf-8">
-@@ -15,5 +15,17 @@
+@@ -17,5 +17,17 @@
+     >
+   </head>
    <body>
-     <script src="main.js">
-     </script>
 +    <div>
 +      <style type="text/css">
 +        body{margin:0;padding:0;background:#eee}
@@ -50,16 +52,16 @@ POST HYDRATE DIFFS:
 
 exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 Object {
-  "index.html": "<!doctype html><html><head><meta charset=\\"utf-8\\"><title>Webpack App</title><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\"><link href=\\"main.css\\" rel=\\"stylesheet\\"></head><body><script src=\\"main.js\\"></script></body></html>",
+  "index.html": "<!doctype html><html><head><meta charset=\\"utf-8\\"><title>Webpack App</title><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\"><script defer=\\"defer\\" src=\\"main.js\\"></script><link href=\\"main.css\\" rel=\\"stylesheet\\"></head><body></body></html>",
   "main.css": ._17mn8h20 {
-  margin: 0;
-  padding: 0;
+  -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
   font: inherit;
+  margin: 0;
+  padding: 0;
   vertical-align: baseline;
-  -webkit-tap-highlight-color: transparent;
 }
 [data-braid-hidefocusrings] ._17mn8h20 {
   outline: none;
@@ -103,8 +105,8 @@ Object {
   background: none;
 }
 ._17mn8h2b {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 .tqa1090 {
   background: var(--_1th2mrq18);
@@ -601,38 +603,38 @@ Object {
   margin-left: 0;
 }
 .tqa109bg {
-  -webkit-align-items: flex-start;
   -ms-flex-align: start;
+  -webkit-align-items: flex-start;
   align-items: flex-start;
 }
 .tqa109bk {
-  -webkit-align-items: center;
   -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
 }
 .tqa109bo {
-  -webkit-align-items: flex-end;
   -ms-flex-align: end;
+  -webkit-align-items: flex-end;
   align-items: flex-end;
 }
 .tqa109bs {
-  -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 .tqa109bw {
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 .tqa109c0 {
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 .tqa109c4 {
-  -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
 }
 .tqa109c8 {
@@ -666,18 +668,18 @@ Object {
   flex-wrap: nowrap;
 }
 .tqa109cw {
-  -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
+  -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
 .tqa109d0 {
-  -webkit-flex-grow: 0;
   -ms-flex-positive: 0;
+  -webkit-flex-grow: 0;
   flex-grow: 0;
 }
 .tqa109d4 {
-  -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
+  -webkit-flex-grow: 1;
   flex-grow: 1;
 }
 .tqa109d8 {
@@ -942,38 +944,38 @@ Object {
     margin-left: 0;
   }
   .tqa109bh {
-    -webkit-align-items: flex-start;
     -ms-flex-align: start;
+    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bl {
-    -webkit-align-items: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109bp {
-    -webkit-align-items: flex-end;
     -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bt {
-    -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109bx {
-    -webkit-justify-content: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c1 {
-    -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c5 {
-    -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109c9 {
@@ -1007,18 +1009,18 @@ Object {
     flex-wrap: nowrap;
   }
   .tqa109cx {
-    -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d1 {
-    -webkit-flex-grow: 0;
     -ms-flex-positive: 0;
+    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d5 {
-    -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109d9 {
@@ -1284,38 +1286,38 @@ Object {
     margin-left: 0;
   }
   .tqa109bi {
-    -webkit-align-items: flex-start;
     -ms-flex-align: start;
+    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bm {
-    -webkit-align-items: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109bq {
-    -webkit-align-items: flex-end;
     -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bu {
-    -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109by {
-    -webkit-justify-content: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c2 {
-    -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c6 {
-    -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109ca {
@@ -1349,18 +1351,18 @@ Object {
     flex-wrap: nowrap;
   }
   .tqa109cy {
-    -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d2 {
-    -webkit-flex-grow: 0;
     -ms-flex-positive: 0;
+    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d6 {
-    -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109da {
@@ -1626,38 +1628,38 @@ Object {
     margin-left: 0;
   }
   .tqa109bj {
-    -webkit-align-items: flex-start;
     -ms-flex-align: start;
+    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bn {
-    -webkit-align-items: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109br {
-    -webkit-align-items: flex-end;
     -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bv {
-    -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109bz {
-    -webkit-justify-content: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c3 {
-    -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c7 {
-    -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109cb {
@@ -1691,18 +1693,18 @@ Object {
     flex-wrap: nowrap;
   }
   .tqa109cz {
-    -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d3 {
-    -webkit-flex-grow: 0;
     -ms-flex-positive: 0;
+    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d7 {
-    -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
+    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109db {
@@ -1757,7 +1759,7 @@ Object {
   --_1th2mrq12: #138a08;
   --_1th2mrq13: #1e468c;
   --_1th2mrq14: #9556b7;
-  --_1th2mrq15: rgba(28, 28, 28, 0.6313725490196078);
+  --_1th2mrq15: #1c1c1ca1;
   --_1th2mrq16: hsla(0, 0%, 100%, 0.65);
   --_1th2mrq17: #f57c00;
   --_1th2mrq18: #eee;
@@ -1903,8 +1905,8 @@ Object {
   --_1th2mrq4z: #9556b7;
 }
 .efoy770 {
-  border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 .wa12ji4 {
   font-size: var(--wa12ji0);
@@ -1912,13 +1914,13 @@ Object {
 }
 .wa12ji4:before {
   content: "";
-  margin-bottom: var(--wa12ji2);
   display: table;
+  margin-bottom: var(--wa12ji2);
 }
 .wa12ji4:after {
   content: "";
-  margin-top: var(--wa12ji3);
   display: table;
+  margin-top: var(--wa12ji3);
 }
 .sm1qbb0 {
   font-family: var(--_1th2mrq1z);
@@ -2124,20 +2126,20 @@ svg.sm1qbb18 {
   color: var(--_1th2mrq4z);
 }
 .sm1qbb19 {
-  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq26)) / 2);
   padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq26)) / 2);
+  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq26)) / 2);
 }
 .sm1qbb1a {
-  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2g)) / 2);
   padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq2g)) / 2);
+  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2g)) / 2);
 }
 .sm1qbb1b {
-  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2q)) / 2);
   padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq2q)) / 2);
+  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2q)) / 2);
 }
 .sm1qbb1c {
-  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq30)) / 2);
   padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq30)) / 2);
+  padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq30)) / 2);
 }
 @media screen and (min-width: 740px) {
   .sm1qbb4 {
@@ -2221,28 +2223,70 @@ svg.sm1qbb18 {
     --wa12ji3: var(--_1th2mrq4f);
   }
   .sm1qbb19 {
-    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2b)) / 2);
     padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq2b)) / 2);
+    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2b)) / 2);
   }
   .sm1qbb1a {
-    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2l)) / 2);
     padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq2l)) / 2);
+    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2l)) / 2);
   }
   .sm1qbb1b {
-    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2v)) / 2);
     padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq2v)) / 2);
+    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq2v)) / 2);
   }
   .sm1qbb1c {
-    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq35)) / 2);
     padding-bottom: calc((var(--_1th2mrq8) - var(--_1th2mrq35)) / 2);
+    padding-top: calc((var(--_1th2mrq8) - var(--_1th2mrq35)) / 2);
   }
 }
 .hdx5ep0 {
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 ,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.LICENSE.txt": /*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/** @license React v0.20.1
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+,
 }
 `;
 
@@ -2263,19 +2307,21 @@ SOURCE HTML: <!DOCTYPE html>
     <meta name="viewport"
           content="width=device-width, initial-scale=1"
     >
+    <script defer
+            src="scripts[0]"
+    >
+    </script>
     <link href="styles[0]"
           rel="stylesheet"
     >
   </head>
   <body>
-    <script src="scripts[0]">
-    </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+     >
+   </head>
    <body>
-     <script src="main.js">
-     </script>
 +    <div>
 +      <style type="text/css">
 +        body{margin:0;padding:0;background:#eee}

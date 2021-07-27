@@ -229,7 +229,6 @@ const makeWebpackConfig = ({
                 __SKU_CLIENT_PATH__: JSON.stringify(
                   path.relative(cwd(), paths.clientEntry),
                 ),
-                'process.env.NODE_DEBUG': JSON.stringify(false),
               }),
             ]
           : []),

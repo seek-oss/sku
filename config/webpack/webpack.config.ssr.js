@@ -167,10 +167,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        new webpack.DefinePlugin({
-          ...envVars,
-          'process.env.NODE_DEBUG': JSON.stringify(false),
-        }),
+        new webpack.DefinePlugin(envVars),
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,
@@ -250,6 +247,7 @@ const makeWebpackConfig = ({
       },
       output: {
         path: paths.target,
+        publicPath,
         filename: 'server.js',
         library: 'server',
         libraryTarget: 'var',

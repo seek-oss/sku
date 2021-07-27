@@ -120,9 +120,10 @@ const localhost = '0.0.0.0';
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = true;
-    devServerConfig.key = pems;
-    devServerConfig.cert = pems;
+    devServerConfig.https = {
+      key: pems,
+      cert: pems,
+    };
   }
 
   // Start webpack dev server using only the client config

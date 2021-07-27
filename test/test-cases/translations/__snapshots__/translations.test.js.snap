@@ -2,10 +2,10 @@
 
 exports[`translations should render en 1`] = `
 SCRIPTS: Array [
-  "/runtime-c23b2036f7ddf87040b9.js",
-  "/vendors~main-45ed2c893290d3f604e9.js",
-  "/main-fe89439a566d473b95e7.js",
-  "/en-translations-e581123a4492c402af5e.js",
+  "/runtime-d547714cbd2fdcf6987b.js",
+  "/242-a65d80f9926978d43b8d.js",
+  "/main-e452c403814acf2de0cc.js",
+  "/en-translations-ab2cb593fd365b41b512.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -53,7 +53,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      [0]
+      [938]
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
             type="application/json"
@@ -87,10 +87,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should render fr 1`] = `
 SCRIPTS: Array [
-  "/runtime-c23b2036f7ddf87040b9.js",
-  "/vendors~main-45ed2c893290d3f604e9.js",
-  "/main-fe89439a566d473b95e7.js",
-  "/fr-translations-f4898ff95f2574ccea80.js",
+  "/runtime-d547714cbd2fdcf6987b.js",
+  "/242-a65d80f9926978d43b8d.js",
+  "/main-e452c403814acf2de0cc.js",
+  "/fr-translations-857f97c7d2dfde96a86c.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -138,7 +138,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      [1]
+      [590]
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
             type="application/json"
@@ -172,10 +172,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should support query parameters 1`] = `
 SCRIPTS: Array [
-  "/runtime-c23b2036f7ddf87040b9.js",
-  "/vendors~main-45ed2c893290d3f604e9.js",
-  "/main-fe89439a566d473b95e7.js",
-  "/en-translations-e581123a4492c402af5e.js",
+  "/runtime-d547714cbd2fdcf6987b.js",
+  "/242-a65d80f9926978d43b8d.js",
+  "/main-e452c403814acf2de0cc.js",
+  "/en-translations-ab2cb593fd365b41b512.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -223,7 +223,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
             type="application/json"
     >
-      [0]
+      [938]
     </script>
     <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
             type="application/json"

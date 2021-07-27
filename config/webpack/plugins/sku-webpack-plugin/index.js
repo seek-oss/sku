@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const uniq = require('lodash/uniq');
 const defaultSupportedBrowsers = require('browserslist-config-seek');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
@@ -173,12 +174,22 @@ class SkuWebpackPlugin {
 
     compiler.options.module.rules.push(...rules);
 
-    if (!compiler.options.resolve.extensions.includes('.ts')) {
-      compiler.options.resolve.extensions.push('.ts');
-    }
+    if (!compiler.options.resolve.extensions) {
+      compiler.options.resolve.extensions = [
+        '.mjs',
+        '.js',
+        '.json',
+        '.ts',
+        '.tsx',
+      ];
+    } else {
+      if (!compiler.options.resolve.extensions.includes('.ts')) {
+        compiler.options.resolve.extensions.push('.ts');
+      }
 
-    if (!compiler.options.resolve.extensions.includes('.tsx')) {
-      compiler.options.resolve.extensions.push('.tsx');
+      if (!compiler.options.resolve.extensions.includes('.tsx')) {
+        compiler.options.resolve.extensions.push('.tsx');
+      }
     }
 
     createTreatPlugin({
@@ -193,6 +204,11 @@ class SkuWebpackPlugin {
 
     if (target === 'browser') {
       new VanillaExtractPlugin().apply(compiler);
+
+      // Fixes an issue with the "assert" package used by braid referencing process
+      new webpack.DefinePlugin({
+        'process.env.NODE_DEBUG': JSON.stringify(false),
+      }).apply(compiler);
     }
   }
 }

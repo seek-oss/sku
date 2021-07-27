@@ -2,12 +2,12 @@
 
 exports[`public path build and serve should create valid app with no unresolved resources 1`] = `
 SCRIPTS: Array [
-  "/static/runtime-e0481b83215f725ec553.js",
-  "/static/vendors~main-89b4448e5ff8f051833f.js",
-  "/static/main-2cb0524050cd0e024e91.js",
+  "/static/runtime-9729bb82c0a343375b97.js",
+  "/static/75-428a9cf1a10a275b615d.js",
+  "/static/main-e22efeec9eac6f3af480.js",
 ]
 CSS: Array [
-  "/static/main-233fca28a3316d9a851c.css",
+  "/static/main-72ee89c08faa48e6bbe6.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -41,7 +41,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_2AngTzl">
+      <div class="FT75orK">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"

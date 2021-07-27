@@ -86,9 +86,10 @@ const hot = process.env.SKU_HOT !== 'false';
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = true;
-    devServerConfig.key = pems;
-    devServerConfig.cert = pems;
+    devServerConfig.https = {
+      key: pems,
+      cert: pems,
+    };
   }
 
   const devServer = new WebpackDevServer(clientCompiler, {

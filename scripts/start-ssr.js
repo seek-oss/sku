@@ -111,6 +111,7 @@ const localhost = '0.0.0.0';
     hot,
     headers: { 'Access-Control-Allow-Origin': '*' },
     client: {
+      overlay: false,
       webSocketURL: {
         hostname: appHosts[0],
         port: clientPort,

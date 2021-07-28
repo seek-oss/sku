@@ -81,6 +81,9 @@ const hot = process.env.SKU_HOT !== 'false';
         serveIndex: true,
       },
     ],
+    client: {
+      overlay: false,
+    },
   };
 
   if (httpsDevServer) {

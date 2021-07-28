@@ -2,6 +2,64 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
+  "877-6e461cf18e94a23d5cb7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "877-6e461cf18e94a23d5cb7.js.LICENSE.txt": /*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/** @license React v0.20.1
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.1
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+,
   "externals.json": "[
   \\"crypto\\",
   \\"fs\\",
@@ -14,6 +72,697 @@ Object {
   \\"url\\",
   \\"util\\"
 ]",
-  "render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": SCRIPTS: Array [
+    "/runtime-b411cbd5d2bc91277cbb.js",
+    "/877-6e461cf18e94a23d5cb7.js",
+    "/main-45f535eaac06546d4059.js",
+  ]
+CSS: Array [
+    "/main-f128f0ba11200d94ca85.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="Qkmue78">
+        <div class="Btt36in">
+          <h1>
+            SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site
+          </h1>
+        </div>
+        <div class>
+          <div class="hfHHxvJ">
+            <span class="_F9zh_G akTknqf EpP2DQr">
+              <span class>
+                <span data-automation-svg="true">
+                  <span class="_Gy9bN8">
+                    <svg class="uqJHSmN"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         viewbox="0 0 1024 900"
+                         focusable="false"
+                    >
+                      <path d="M718 188q11 0 22 1.5t22 4.5q16 4 30.5 12t28.5 19q15 13 27 28t21 34h1l3 7q13 27 20 59.5t7 68.5v3q0 15-4.5 32.5T881 496q-11 24-26 47.5T821 590q-39 48-85.5 94T636 774q-46 38-85 67.5T480 891q-31-20-70-49.5T325 774h-1q-52-43-98.5-89T139 590q-19-23-34-46.5T79 496q-10-21-14.5-38.5T60 425v-3q0-37 7-69.5T87 293h1q0-2 1-3.5t2-3.5q10-18 21.5-33t26.5-28q14-11 28.5-19t30.5-12q11-3 22.5-4.5T242 188q24 0 45.5 7t43.5 21q15 9 28 21t24 26q12 15 22.5 32.5T425 333l56 129 54-129q9-20 19-37t22-32q11-14 24.5-26t28.5-22h1q21-14 43-21t45-7zm0-60q-32 0-62 9.5T597 165q-38 25-67.5 61T480 309q-21-47-50-83t-66-61q-29-18-59.5-27.5T242 128q-14 0-29 2t-30 6q-22 6-43 16.5T100 179t-34.5 36T38 259q-1 1-1.5 2t-.5 2l-2 2v1q-17 34-25.5 73T0 422v2q0 22 6 46t19 51q12 27 29 54t39 53q42 52 90.5 100T286 820q49 41 90 71.5t74 51.5q14 9 21.5 13.5t8.5 4.5q1 0 8.5-4.5T510 944q33-22 74-53t90-70q55-46 103.5-94t89.5-99q22-26 39-52.5t29-53.5q13-27 19-51.5t6-46.5v-2q-1-44-9-83t-24-72l-4-8q-13-24-28.5-43.5T860 180t-39.5-27-43.5-17q-15-4-30-6t-29-2z">
+                      </path>
+                    </svg>
+                  </span>
+                </span>
+                <span data-automation-text="true">
+                  Hello world!
+                </span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>,
+  "main-45f535eaac06546d4059.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f128f0ba11200d94ca85.css": a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+mark {
+  background-color: transparent;
+  color: inherit;
+}
+html {
+  min-height: 100%;
+}
+.Qkmue78,
+html {
+  background-color: #eee;
+}
+.Qkmue78 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  color: #1c1c1c;
+  font-family: Roboto, Helvetica Neue, HelveticaNeue, Helvetica, Arial,
+    sans-serif;
+  font-size: 10px;
+}
+.Qkmue78 *,
+.Qkmue78 :after,
+.Qkmue78 :before {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: inherit;
+  font-family: inherit;
+}
+.Qkmue78 input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.UjFteyQ {
+  height: 100%;
+}
+.Btt36in {
+  clip: rect(1px, 1px, 1px, 1px);
+  pointer-events: none;
+  position: absolute !important;
+}
+.hfHHxvJ {
+  margin: 0 auto;
+  max-width: 940px;
+}
+._F9zh_G {
+  display: block;
+  padding-bottom: 12px;
+}
+._F9zh_G ._F9zh_G {
+  outline: 2px solid red;
+  position: relative;
+}
+._F9zh_G ._F9zh_G:after {
+  background: red;
+  color: #fff;
+  content: "ERROR: Multiple <Text> components nested";
+  font-weight: 700;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.akTknqf {
+  padding-bottom: 6px;
+}
+@media only screen and (max-width: 739px) {
+  .akTknqf:not(.EpP2DQr) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .akTknqf:not(.EpP2DQr) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .akTknqf.EpP2DQr {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    -webkit-transform: translateY(0.41em);
+    transform: translateY(0.41em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .akTknqf.EpP2DQr {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    -webkit-transform: translateY(0.41em);
+    transform: translateY(0.41em);
+  }
+}
+._O7FvOO {
+  padding-bottom: 6px;
+}
+@media only screen and (max-width: 739px) {
+  ._O7FvOO:not(.EpP2DQr) {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  ._O7FvOO:not(.EpP2DQr) {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  ._O7FvOO.EpP2DQr {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    -webkit-transform: translateY(0.30285714em);
+    transform: translateY(0.30285714em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  ._O7FvOO.EpP2DQr {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    -webkit-transform: translateY(0.30285714em);
+    transform: translateY(0.30285714em);
+  }
+}
+.O4qn8Cu {
+  padding-bottom: 6px;
+}
+@media only screen and (max-width: 739px) {
+  .O4qn8Cu:not(.EpP2DQr) {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .O4qn8Cu:not(.EpP2DQr) {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .O4qn8Cu.EpP2DQr {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    -webkit-transform: translateY(0.49333333em);
+    transform: translateY(0.49333333em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .O4qn8Cu.EpP2DQr {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    -webkit-transform: translateY(0.49333333em);
+    transform: translateY(0.49333333em);
+  }
+}
+@media only screen and (max-width: 739px) {
+  .Y6oprHw:not(.EpP2DQr) {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .Y6oprHw:not(.EpP2DQr) {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .Y6oprHw.EpP2DQr {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    -webkit-transform: translateY(0.32666667em);
+    transform: translateY(0.32666667em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .Y6oprHw.EpP2DQr {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    -webkit-transform: translateY(0.32666667em);
+    transform: translateY(0.32666667em);
+  }
+}
+@media only screen and (max-width: 739px) {
+  .JkMhQWt:not(.EpP2DQr) {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .JkMhQWt:not(.EpP2DQr) {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .JkMhQWt.EpP2DQr {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+    -webkit-transform: translateY(0.37428571em);
+    transform: translateY(0.37428571em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .JkMhQWt.EpP2DQr {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    -webkit-transform: translateY(0.30285714em);
+    transform: translateY(0.30285714em);
+  }
+}
+@media only screen and (max-width: 739px) {
+  .pT49ABw:not(.EpP2DQr) {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .pT49ABw:not(.EpP2DQr) {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .pT49ABw.EpP2DQr {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+    -webkit-transform: translateY(0.37428571em);
+    transform: translateY(0.37428571em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .pT49ABw.EpP2DQr {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+    -webkit-transform: translateY(0.34181818em);
+    transform: translateY(0.34181818em);
+  }
+}
+@media only screen and (max-width: 739px) {
+  .wKyu43X:not(.EpP2DQr) {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+}
+@media only screen and (min-width: 740px) {
+  .wKyu43X:not(.EpP2DQr) {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 48px;
+  }
+}
+@media only screen and (max-width: 739px) {
+  .wKyu43X.EpP2DQr {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 30px;
+    -webkit-transform: translateY(0.37428571em);
+    transform: translateY(0.37428571em);
+  }
+}
+@media only screen and (min-width: 740px) {
+  .wKyu43X.EpP2DQr {
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 48px;
+    -webkit-transform: translateY(0.23142857em);
+    transform: translateY(0.23142857em);
+  }
+}
+._KMwFCL {
+  font-weight: 300;
+}
+.GGirLxS {
+  padding-bottom: 0;
+}
+.eIQjCqd {
+  display: list-item;
+  list-style-type: disc;
+  margin-left: 30px;
+}
+.kke_QSH {
+  color: #169400;
+}
+.Zf05sNq {
+  color: #e60278;
+}
+.MznMbUM {
+  color: #747474;
+}
+.v0p1rT_ {
+  background-color: rgba(30, 144, 255, 0.12);
+  border-radius: 2px;
+  display: inline-block;
+  margin: -2px;
+  padding: 2px;
+}
+.XPb0AOY {
+  color: #404040;
+}
+._RXKy3g {
+  background-color: rgba(230, 2, 120, 0.12);
+}
+.pI7SDWF {
+  color: #9556b7;
+}
+.mp4VnWi {
+  font-weight: 700;
+}
+.eMwWjmh {
+  font-weight: 400;
+}
+.e9wtuLv {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-name: pk5PcPE;
+  animation-name: pk5PcPE;
+}
+@-webkit-keyframes pk5PcPE {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  65% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+  85% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes pk5PcPE {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  65% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+  85% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+._Gy9bN8 {
+  display: inline-block;
+}
+.uqJHSmN {
+  fill: currentColor;
+  height: 16px;
+  width: 16px;
+}
+.FEKjbuo {
+  height: 29.4px;
+  width: 29.4px;
+}
+@media only screen and (max-width: 739px) {
+  .FEKjbuo {
+    height: 14.7px;
+    width: 14.7px;
+  }
+}
+.YPsD4ik {
+  height: 19.6px;
+  width: 19.6px;
+}
+@media only screen and (max-width: 739px) {
+  .YPsD4ik {
+    height: 14.7px;
+    width: 14.7px;
+  }
+}
+.oeYiYTa {
+  height: 12.6px;
+  width: 12.6px;
+}
+@media only screen and (max-width: 739px) {
+  .oeYiYTa {
+    height: 12.6px;
+    width: 12.6px;
+  }
+}
+._7qgpcz {
+  height: 15.4px;
+  width: 15.4px;
+}
+@media only screen and (max-width: 739px) {
+  ._7qgpcz {
+    height: 14.7px;
+    width: 14.7px;
+  }
+}
+.nIjMwzn {
+  height: 12.6px;
+  width: 12.6px;
+}
+@media only screen and (max-width: 739px) {
+  .nIjMwzn {
+    height: 12.6px;
+    width: 12.6px;
+  }
+}
+.Jr87YSs {
+  height: 11.2px;
+  width: 11.2px;
+}
+@media only screen and (max-width: 739px) {
+  .Jr87YSs {
+    height: 11.2px;
+    width: 11.2px;
+  }
+}
+._p9b8Ne {
+  height: 9.8px;
+  width: 9.8px;
+}
+@media only screen and (max-width: 739px) {
+  ._p9b8Ne {
+    height: 9.8px;
+    width: 9.8px;
+  }
+}
+._UKZJDr {
+  height: 12.6px;
+  width: 12.6px;
+}
+@media only screen and (max-width: 739px) {
+  ._UKZJDr {
+    height: 12.6px;
+    width: 12.6px;
+  }
+}
+,
+  "runtime-b411cbd5d2bc91277cbb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

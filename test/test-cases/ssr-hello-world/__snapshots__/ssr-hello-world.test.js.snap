@@ -193,7 +193,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world start should start a development server 1`] = `
 SCRIPTS: Array [
   "http://localhost:8100/runtime.js",
-  "http://localhost:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-d99770.js",
+  "http://localhost:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-7adaef.js",
   "http://localhost:8100/main.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]

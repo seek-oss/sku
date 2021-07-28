@@ -187,8 +187,7 @@ SOURCE HTML: <!DOCTYPE html>
 exports[`custom-src-paths start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-675169.js",
-  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-39dec2.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-06777c.js",
   "/main.js",
 ]
 CSS: Array []
@@ -216,11 +215,6 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[2]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
     >
   </head>
   <body>
@@ -252,11 +246,6 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[3]"
     >
     </script>
   </body>

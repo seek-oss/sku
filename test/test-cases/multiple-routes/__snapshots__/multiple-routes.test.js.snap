@@ -718,8 +718,7 @@ exports[`multiple-routes start should render details page correctly 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-7be363.js",
-  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-a153e0.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-cc1f75.js",
   "/main.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
@@ -767,20 +766,15 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[3]"
     >
-    <link data-chunk="main"
+    <link data-chunk="handlers-Details"
           rel="preload"
           as="script"
           href="scripts[4]"
     >
-    <link data-chunk="handlers-Details"
-          rel="preload"
-          as="script"
-          href="scripts[5]"
-    >
     <link data-chunk="AsyncComponent"
           rel="preload"
           as="script"
-          href="scripts[6]"
+          href="scripts[5]"
     >
   </head>
   <body>
@@ -823,18 +817,13 @@ SOURCE HTML: <!DOCTYPE html>
     >
     </script>
     <script async
-            data-chunk="main"
+            data-chunk="handlers-Details"
             src="scripts[4]"
     >
     </script>
     <script async
-            data-chunk="handlers-Details"
-            src="scripts[5]"
-    >
-    </script>
-    <script async
             data-chunk="AsyncComponent"
-            src="scripts[6]"
+            src="scripts[5]"
     >
     </script>
   </body>
@@ -855,8 +844,7 @@ exports[`multiple-routes start should render home page correctly 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-7be363.js",
-  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-a153e0.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-cc1f75.js",
   "/main.js",
   "/handlers-Home.js",
 ]
@@ -903,15 +891,10 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[3]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[4]"
-    >
     <link data-chunk="handlers-Home"
           rel="preload"
           as="script"
-          href="scripts[5]"
+          href="scripts[4]"
     >
   </head>
   <body>
@@ -951,13 +934,8 @@ SOURCE HTML: <!DOCTYPE html>
     >
     </script>
     <script async
-            data-chunk="main"
-            src="scripts[4]"
-    >
-    </script>
-    <script async
             data-chunk="handlers-Home"
-            src="scripts[5]"
+            src="scripts[4]"
     >
     </script>
   </body>

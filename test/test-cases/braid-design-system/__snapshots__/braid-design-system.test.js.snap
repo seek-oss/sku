@@ -5520,14 +5520,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development jobStreet site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-a3397e.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ee0463.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.js",
   "/themes-jobStreet.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ee0463.css",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.css",
   "/themes-jobStreet.css",
 ]
@@ -5568,7 +5567,7 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[2]"
     >
-    <link data-chunk="main"
+    <link data-chunk="themes-jobStreet"
           rel="preload"
           as="script"
           href="scripts[3]"
@@ -5577,11 +5576,6 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[4]"
-    >
-    <link data-chunk="themes-jobStreet"
-          rel="preload"
-          as="script"
-          href="scripts[5]"
     >
     <script>
       window.SKU_SITE = 'jobStreet';
@@ -5747,18 +5741,13 @@ SOURCE HTML: <!DOCTYPE html>
     >
     </script>
     <script async
-            data-chunk="main"
+            data-chunk="themes-jobStreet"
             src="scripts[3]"
     >
     </script>
     <script async
             data-chunk="themes-jobStreet"
             src="scripts[4]"
-    >
-    </script>
-    <script async
-            data-chunk="themes-jobStreet"
-            src="scripts[5]"
     >
     </script>
   </body>
@@ -5771,7 +5760,7 @@ POST HYDRATE DIFFS:
                >
                <div class="reset_base__1brbmfo0 sprinkles_flexShrink_0_mobile__8t4tricw sprinkles_position_relative_mobile__8t4tri2s sprinkles_background_input__8t4tri2 sprinkles_borderRadius_standard_mobile__8t4tri3c InlineField_fakeFieldBase__lc4anf4 InlineField_fakeFieldSize_standard__lc4anf5">
                  <div class="reset_base__1brbmfo0 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_pointerEvents_none__8t4tri1r sprinkles_borderRadius_standard_mobile__8t4tri3c sprinkles_boxShadow_borderField__8t4tri1b sprinkles_transition_fast__8t4tri25 sprinkles_top_0__8t4tri1s sprinkles_bottom_0__8t4tri1t sprinkles_left_0__8t4tri1u sprinkles_right_0__8t4tri1v">
-@@ -176,7 +177,7 @@
+@@ -171,7 +172,7 @@
          </div>
          <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
            Custom content
@@ -5786,14 +5775,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-a3397e.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ee0463.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.js",
   "/themes-seekAnz.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ee0463.css",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.css",
   "/themes-seekAnz.css",
 ]
@@ -5834,7 +5822,7 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[2]"
     >
-    <link data-chunk="main"
+    <link data-chunk="themes-seekAnz"
           rel="preload"
           as="script"
           href="scripts[3]"
@@ -5843,11 +5831,6 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[4]"
-    >
-    <link data-chunk="themes-seekAnz"
-          rel="preload"
-          as="script"
-          href="scripts[5]"
     >
     <script>
       window.SKU_SITE = 'seekAnz';
@@ -6013,18 +5996,13 @@ SOURCE HTML: <!DOCTYPE html>
     >
     </script>
     <script async
-            data-chunk="main"
+            data-chunk="themes-seekAnz"
             src="scripts[3]"
     >
     </script>
     <script async
             data-chunk="themes-seekAnz"
             src="scripts[4]"
-    >
-    </script>
-    <script async
-            data-chunk="themes-seekAnz"
-            src="scripts[5]"
     >
     </script>
   </body>
@@ -6037,7 +6015,7 @@ POST HYDRATE DIFFS:
                >
                <div class="reset_base__1brbmfo0 sprinkles_flexShrink_0_mobile__8t4tricw sprinkles_position_relative_mobile__8t4tri2s sprinkles_background_input__8t4tri2 sprinkles_borderRadius_standard_mobile__8t4tri3c InlineField_fakeFieldBase__lc4anf4 InlineField_fakeFieldSize_standard__lc4anf5">
                  <div class="reset_base__1brbmfo0 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_pointerEvents_none__8t4tri1r sprinkles_borderRadius_standard_mobile__8t4tri3c sprinkles_boxShadow_borderField__8t4tri1b sprinkles_transition_fast__8t4tri25 sprinkles_top_0__8t4tri1s sprinkles_bottom_0__8t4tri1t sprinkles_left_0__8t4tri1u sprinkles_right_0__8t4tri1v">
-@@ -176,7 +177,7 @@
+@@ -171,7 +172,7 @@
          </div>
          <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
            Custom content

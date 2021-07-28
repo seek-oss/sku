@@ -389,8 +389,7 @@ export default cssExports;
 exports[`typescript-css-modules start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js-node_mod-a3e43c.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-9b5b55.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-47f493.js",
   "/main.js",
 ]
 CSS: Array [
@@ -424,11 +423,6 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[2]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
     >
   </head>
   <body>
@@ -468,11 +462,6 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[3]"
     >
     </script>
   </body>

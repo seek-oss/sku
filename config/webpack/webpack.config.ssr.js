@@ -274,6 +274,15 @@ const makeWebpackConfig = ({
             enabled: cspEnabled,
             extraHosts: cspExtraScriptSrcHosts,
           }),
+          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
+            isDevServer ? paths.devServerMiddleware : false,
+          ),
+          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
+            isDevServer ? useDevServerMiddleware : false,
+          ),
+          __SKU_DEV_HTTPS__: JSON.stringify(
+            isDevServer ? httpsDevServer : false,
+          ),
         }),
         new SkuWebpackPlugin({
           target: 'node',
@@ -291,15 +300,6 @@ const makeWebpackConfig = ({
           ? [
               new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'node' }),
-              new webpack.DefinePlugin({
-                __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
-                  paths.devServerMiddleware,
-                ),
-                __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
-                  useDevServerMiddleware,
-                ),
-                __SKU_DEV_HTTPS__: JSON.stringify(httpsDevServer),
-              }),
             ]
           : [],
       ),

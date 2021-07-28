@@ -80,17 +80,9 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
-  const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`,
-  ];
-
   const skuClientEntry = require.resolve('../../entry/client/index.js');
 
-  const createEntry = (entry) => [
-    ...resolvedPolyfills,
-    ...(isDevServer ? devServerEntries : []),
-    entry,
-  ];
+  const createEntry = (entry) => [...resolvedPolyfills, entry];
 
   // Add polyfills and dev server client to all entries
   const clientEntry = isLibrary
@@ -132,9 +124,6 @@ const makeWebpackConfig = ({
       mode: webpackMode,
       entry: {
         main: clientEntry,
-        ...(isDevServer && !isLibrary
-          ? { devServerOnly: devServerEntries }
-          : {}),
       },
       devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
@@ -234,8 +223,11 @@ const makeWebpackConfig = ({
           : []),
         ...(hot
           ? [
-              new webpack.HotModuleReplacementPlugin(),
-              new ReactRefreshWebpackPlugin(),
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPath: '/ws',
+                },
+              }),
             ]
           : []),
         new MiniCssExtractPlugin({

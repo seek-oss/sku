@@ -18,7 +18,6 @@ const {
   paths,
   routes,
   sites,
-  isLibrary,
   httpsDevServer,
   useDevServerMiddleware,
 } = require('../context');
@@ -143,23 +142,12 @@ const hot = process.env.SKU_HOT !== 'false';
           })
           .then((html) => res.send(html))
           .catch((renderError) => {
-            let devServerScripts = [];
-
-            if (renderError.webpackStats && !isLibrary) {
-              const webpackStats = renderError.webpackStats.toJson();
-
-              devServerScripts =
-                webpackStats.entrypoints.devServerOnly.assets.map(
-                  (asset) => `<script src="/${asset}"></script>`,
-                );
-            }
-
             res.status(500).send(
               exceptionFormatter(renderError, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
-              }).concat(...devServerScripts),
+              }),
             );
           });
       });

@@ -201,6 +201,7 @@ const makeWebpackConfig = ({
               new ReactRefreshWebpackPlugin({
                 overlay: {
                   sockPort: clientPort,
+                  sockPath: '/ws',
                 },
               }),
             ]
@@ -269,13 +270,6 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
-          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
-            paths.devServerMiddleware,
-          ),
-          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
-            useDevServerMiddleware,
-          ),
-          __SKU_DEV_HTTPS__: JSON.stringify(httpsDevServer),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
             extraHosts: cspExtraScriptSrcHosts,
@@ -297,6 +291,15 @@ const makeWebpackConfig = ({
           ? [
               new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'node' }),
+              new webpack.DefinePlugin({
+                __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
+                  paths.devServerMiddleware,
+                ),
+                __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
+                  useDevServerMiddleware,
+                ),
+                __SKU_DEV_HTTPS__: JSON.stringify(httpsDevServer),
+              }),
             ]
           : [],
       ),

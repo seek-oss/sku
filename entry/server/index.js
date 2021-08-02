@@ -47,3 +47,20 @@ if (__SKU_DEV_HTTPS__) {
 }
 
 server.listen(port, startCallback);
+
+if (import.meta.webpackHot) {
+  process.on('message', () => {
+    if (import.meta.webpackHot.status() === 'idle') {
+      import.meta.webpackHot.check(true);
+    }
+  });
+
+  let currentApp = app;
+
+  import.meta.webpackHot.accept('./server', () => {
+    server.removeListener('request', currentApp);
+    server.on('request', app);
+    currentApp = app;
+    console.log('Server hot reloaded');
+  });
+}

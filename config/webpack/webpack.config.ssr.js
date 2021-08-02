@@ -295,7 +295,12 @@ const makeWebpackConfig = ({
           rootResolution,
         }),
       ].concat(
-        isDevServer ? [new MetricsPlugin({ type: 'ssr', target: 'node' })] : [],
+        isDevServer
+          ? [
+              new webpack.HotModuleReplacementPlugin(),
+              new MetricsPlugin({ type: 'ssr', target: 'node' }),
+            ]
+          : [],
       ),
       stats: 'errors-only',
     },

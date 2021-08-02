@@ -87,6 +87,8 @@ const localhost = '0.0.0.0';
       await copyPublicFiles();
       await watch(serverCompiler);
 
+      serverManager.start();
+
       openBrowser(serverUrl);
     } catch (e) {
       console.log(e);
@@ -102,7 +104,7 @@ const localhost = '0.0.0.0';
   });
 
   serverCompiler.hooks.done.tap(pluginName, () => {
-    serverManager.start();
+    serverManager.hotUpdate();
   });
 
   const devServerConfig = {

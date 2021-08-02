@@ -2,64 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
-  "877-6e461cf18e94a23d5cb7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "877-6e461cf18e94a23d5cb7.js.LICENSE.txt": /*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-
-/** @license React v0.20.1
- * scheduler.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react-dom.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-,
+  "658-74cd5027bc9e5aedb037.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   \\"crypto\\",
   \\"fs\\",
@@ -74,8 +17,8 @@ object-assign
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-b411cbd5d2bc91277cbb.js",
-    "/877-6e461cf18e94a23d5cb7.js",
-    "/main-45f535eaac06546d4059.js",
+    "/658-74cd5027bc9e5aedb037.js",
+    "/main-53995973ef6eb875f490.js",
   ]
 CSS: Array [
     "/main-f128f0ba11200d94ca85.css",
@@ -172,7 +115,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-45f535eaac06546d4059.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-53995973ef6eb875f490.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-f128f0ba11200d94ca85.css": a,
 abbr,
 acronym,

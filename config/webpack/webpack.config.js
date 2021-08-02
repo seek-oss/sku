@@ -5,6 +5,7 @@ const lodash = require('lodash');
 const path = require('path');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
@@ -142,6 +143,7 @@ const makeWebpackConfig = ({
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
+        minimizer: [new TerserPlugin({ extractComments: false })],
         concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {

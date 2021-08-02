@@ -6,6 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
@@ -106,6 +107,7 @@ const makeWebpackConfig = ({
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
+        minimizer: [new TerserPlugin({ extractComments: false })],
         concatenateModules: isProductionBuild,
         splitChunks: {
           chunks: 'all',

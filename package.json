@@ -150,6 +150,7 @@
     "start-server-webpack-plugin": "^2.2.5",
     "svgo": "^2.3.1",
     "svgo-loader": "^3.0.0",
+    "terser-webpack-plugin": "^5.1.4",
     "traverse": "^0.6.6",
     "treat": "^2.0.4",
     "tree-kill": "^1.2.1",

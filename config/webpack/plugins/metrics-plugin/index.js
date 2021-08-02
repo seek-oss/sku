@@ -1,6 +1,6 @@
 const { performance } = require('perf_hooks');
 const prettyMilliseconds = require('pretty-ms');
-const debug = require('debug')('sku:metrics-plugin');
+const debug = require('debug')('sku:metrics');
 
 const track = require('../../../../telemetry');
 

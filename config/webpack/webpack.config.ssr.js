@@ -113,6 +113,7 @@ const makeWebpackConfig = ({
         runtimeChunk: {
           name: 'runtime',
         },
+        emitOnErrors: isProductionBuild,
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
@@ -188,16 +189,13 @@ const makeWebpackConfig = ({
           displayNamesProd,
           MiniCssExtractPlugin,
           rootResolution,
+          removeAssertionsInProduction: true,
         }),
         ...(isDevServer
-          ? [
-              new MetricsPlugin({ type: 'ssr', target: 'browser' }),
-              new webpack.NoEmitOnErrorsPlugin(),
-            ]
+          ? [new MetricsPlugin({ type: 'ssr', target: 'browser' })]
           : [bundleAnalyzerPlugin({ name: 'client' })]),
         ...(hot
           ? [
-              new webpack.HotModuleReplacementPlugin(),
               new ReactRefreshWebpackPlugin({
                 overlay: {
                   sockPort: clientPort,
@@ -255,6 +253,7 @@ const makeWebpackConfig = ({
       },
       optimization: {
         nodeEnv: process.env.NODE_ENV,
+        emitOnErrors: isProductionBuild,
       },
       module: {
         rules: [
@@ -296,12 +295,7 @@ const makeWebpackConfig = ({
           rootResolution,
         }),
       ].concat(
-        isDevServer
-          ? [
-              new webpack.NoEmitOnErrorsPlugin(),
-              new MetricsPlugin({ type: 'ssr', target: 'node' }),
-            ]
-          : [],
+        isDevServer ? [new MetricsPlugin({ type: 'ssr', target: 'node' })] : [],
       ),
       stats: 'errors-only',
     },

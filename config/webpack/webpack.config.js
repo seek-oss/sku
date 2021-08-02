@@ -149,6 +149,7 @@ const makeWebpackConfig = ({
               runtimeChunk: { name: 'runtime' },
             }
           : {}),
+        emitOnErrors: isProductionBuild,
       },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
@@ -212,24 +213,11 @@ const makeWebpackConfig = ({
           ? []
           : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
-        ...(isDevServer
-          ? [
-              new webpack.DefinePlugin({
-                __SKU_CLIENT_PATH__: JSON.stringify(
-                  path.relative(cwd(), paths.clientEntry),
-                ),
-              }),
-            ]
-          : []),
-        ...(hot
-          ? [
-              new ReactRefreshWebpackPlugin({
-                overlay: {
-                  sockPath: '/ws',
-                },
-              }),
-            ]
-          : []),
+        new webpack.DefinePlugin({
+          __SKU_CLIENT_PATH__: JSON.stringify(
+            path.relative(cwd(), paths.clientEntry),
+          ),
+        }),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
           chunkFilename: cssChunkFileMask,
@@ -248,6 +236,15 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
           rootResolution,
         }),
+        ...(hot
+          ? [
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPath: '/ws',
+                },
+              }),
+            ]
+          : []),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),

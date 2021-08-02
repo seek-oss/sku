@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime-35667e64ccb575eb7368.js",
-  "/702-d6470065f851a41fe905.js",
-  "/main-d389ceafca0796d2519c.js",
+  "/702-ef15ca26d5c62a3fad08.js",
+  "/main-f4741f4118995cc8ad8f.js",
 ]
 CSS: Array [
   "/main-21ba36bf1c8257f9aa56.css",
@@ -50,7 +50,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="_KPLLp3">
           Initial
         </div>
-        <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -87,7 +87,7 @@ POST HYDRATE DIFFS:
 -          Initial
 +          Client
          </div>
-         <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+         <img src="/a85d2645cc4d80a20b5b.png">
        </div>
 
 `;
@@ -111,7 +111,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ae10cc.js",
+  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-b7d687.js",
   "/main.js",
 ]
 CSS: Array [
@@ -158,7 +158,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="lessStyles__nested____KPLLp3">
           Initial
         </div>
-        <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -195,7 +195,7 @@ POST HYDRATE DIFFS:
 -          Initial
 +          Client
          </div>
-         <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+         <img src="/a85d2645cc4d80a20b5b.png">
        </div>
 
 `;
@@ -219,7 +219,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: Array [
   "https://localhost:9843/runtime.js",
-  "https://localhost:9843/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_loadable_component_d-6d2df6.js",
+  "https://localhost:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c4b506.js",
   "https://localhost:9843/main.js",
 ]
 CSS: Array [
@@ -267,7 +267,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="lessStyles__nested____KPLLp3">
           Initial
         </div>
-        <img src="https://localhost:9843/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="https://localhost:9843/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -309,7 +309,7 @@ POST HYDRATE DIFFS:
 -          Initial
 +          Client
          </div>
-         <img src="https://localhost:9843/a85d2645cc4d80a20b5ba78e8e797449.png">
+         <img src="https://localhost:9843/a85d2645cc4d80a20b5b.png">
        </div>
 
 `;

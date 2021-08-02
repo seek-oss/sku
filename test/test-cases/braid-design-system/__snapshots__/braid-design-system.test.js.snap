@@ -2451,9 +2451,9 @@ svg.jhxt9718 {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-63d2b2470ffdb44fcbf3.js",
-    "/main-88f0b96e47f44075052d.js",
-    "/themes-jobStreet-fdf34be9d7bf9168a315.js",
+    "/runtime-05aeb90c6d666329e120.js",
+    "/main-7833966f8a8bbad7815e.js",
+    "/themes-jobStreet-249926a5520fd248dd4d.js",
   ]
 CSS: Array [
     "/323-d97db8a941dd55f0dba1.css",
@@ -2657,63 +2657,12 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-88f0b96e47f44075052d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-88f0b96e47f44075052d.js.LICENSE.txt": /*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-/** @license React v0.20.1
- * scheduler.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react-dom.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-/** @license React v17.0.1
- * react.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-,
-  "runtime-63d2b2470ffdb44fcbf3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-7833966f8a8bbad7815e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-05aeb90c6d666329e120.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-63d2b2470ffdb44fcbf3.js",
-    "/main-88f0b96e47f44075052d.js",
-    "/themes-seekAnz-ac02f49bf0a9ae703fc1.js",
+    "/runtime-05aeb90c6d666329e120.js",
+    "/main-7833966f8a8bbad7815e.js",
+    "/themes-seekAnz-c80264af653d1feea24a.js",
   ]
 CSS: Array [
     "/323-d97db8a941dd55f0dba1.css",
@@ -2917,6 +2866,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
+  "themes-apac-5afbaa85f335a03b340c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-apac-a8aead6a904b746c7e82.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -3111,7 +3061,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-apac-ad4ccf5acf7b02b0cfd5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-catho-47c76b48832e21996258.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -3305,7 +3254,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-catho-4da62af3b51e4d462152.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-5bc442aa8b1801855999.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-docs-361d1f16d5cc7dbc1c7f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-docs-aab0929872c537619375.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -3500,7 +3450,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-docs-c6d39bf5024f1781f0a9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-249926a5520fd248dd4d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-d72fcbf0eadde9274206.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -3695,8 +3645,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreet-fdf34be9d7bf9168a315.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-989975939621a013b9bc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-67f1257de08a96cc6bcf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-d661a9be762316740558.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -4084,8 +4033,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobsDb-6064e7a338ba7bd8c816.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-occ-8db7d6c5759e9da0cf46.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-65cc4be36acd58a1e02d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-28e03c601cacc1a96dd1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-ec8dc06772c3b9043953.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -4473,7 +4422,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekAnz-ac02f49bf0a9ae703fc1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-c80264af653d1feea24a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-5ce27166d15240af047d.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -4668,8 +4617,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekBusiness-735f64f3c3e2ebee7057.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekUnifiedBeta-32fc5f01b219b8133b30.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekBusiness-712bf4e03027e1ac6e9a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-0fb2b9cc7624548a81f2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekUnifiedBeta-cccd0822fc9626e33633.css": .lqdro {
   background-color: #20b2aa;
   color: #fff;
@@ -5057,15 +5006,15 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-wireframe-9dcf4070d603c958a9c2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-c06fb089f5cfb252d3d9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-63d2b2470ffdb44fcbf3.js",
-  "/main-88f0b96e47f44075052d.js",
-  "/themes-jobStreet-fdf34be9d7bf9168a315.js",
+  "/runtime-05aeb90c6d666329e120.js",
+  "/main-7833966f8a8bbad7815e.js",
+  "/themes-jobStreet-249926a5520fd248dd4d.js",
 ]
 CSS: Array [
   "/323-d97db8a941dd55f0dba1.css",
@@ -5291,9 +5240,9 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-63d2b2470ffdb44fcbf3.js",
-  "/main-88f0b96e47f44075052d.js",
-  "/themes-seekAnz-ac02f49bf0a9ae703fc1.js",
+  "/runtime-05aeb90c6d666329e120.js",
+  "/main-7833966f8a8bbad7815e.js",
+  "/themes-seekAnz-c80264af653d1feea24a.js",
 ]
 CSS: Array [
   "/323-d97db8a941dd55f0dba1.css",
@@ -5520,13 +5469,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development jobStreet site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
+  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.js",
   "/themes-jobStreet.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
+  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.css",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.css",
   "/themes-jobStreet.css",
 ]
@@ -5775,13 +5724,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
+  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.js",
   "/themes-seekAnz.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
+  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.css",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.css",
   "/themes-seekAnz.css",
 ]

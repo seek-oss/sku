@@ -6,7 +6,6 @@ const {
   makeJsLoaders,
   makeCssLoaders,
   makeVanillaCssLoaders,
-  makeImageLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
   JAVASCRIPT,
@@ -163,11 +162,20 @@ class SkuWebpackPlugin {
       {
         test: IMAGE,
         include: this.include,
-        use: makeImageLoaders({ target }),
+        type: 'asset',
+        generator: {
+          emit: target === 'browser',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10000,
+          },
+        },
       },
       {
         test: SVG,
         include: this.include,
+        type: 'asset/source',
         use: makeSvgLoaders(),
       },
     ];

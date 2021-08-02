@@ -132,27 +132,7 @@ const makeVanillaCssLoaders = (options = {}) => {
   ];
 };
 
-const makeImageLoaders = (options = {}) => {
-  const { target = 'browser' } = options;
-
-  return [
-    {
-      loader: require.resolve('url-loader'),
-      options: {
-        limit: 10000,
-        fallback: require.resolve('file-loader'),
-        // We only want to emit client assets during the client build.
-        // The server build should only emit server-side JS and HTML files.
-        emitFile: target === 'browser',
-      },
-    },
-  ];
-};
-
 const makeSvgLoaders = () => [
-  {
-    loader: require.resolve('raw-loader'),
-  },
   {
     loader: require.resolve('svgo-loader'),
     options: {
@@ -176,6 +156,5 @@ module.exports = {
   makeJsLoaders,
   makeCssLoaders,
   makeVanillaCssLoaders,
-  makeImageLoaders,
   makeSvgLoaders,
 };

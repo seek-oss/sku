@@ -305,7 +305,6 @@ const makeWebpackConfig = ({
             ]
           : [],
       ),
-      stats: { colors: !isCI, preset: args.stats, timings: true },
     },
   ].map(webpackDecorator);
 

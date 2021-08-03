@@ -4,6 +4,7 @@ const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { once } = require('lodash');
+const onDeath = require('death');
 const { blue, underline } = require('chalk');
 const debug = require('debug')('sku:start');
 
@@ -22,7 +23,6 @@ const openBrowser = require('../lib/openBrowser');
 const createServerManager = require('../lib/serverManager');
 
 const { watchVocabCompile } = require('../lib/runVocab');
-const gracefulExit = require('../lib/gracefulExit');
 
 const hot = process.env.SKU_HOT !== 'false';
 
@@ -56,6 +56,7 @@ const localhost = '0.0.0.0';
   // Make sure target directory exists before starting
   ensureTargetDirectory();
   await cleanTargetDirectory();
+  await copyPublicFiles();
 
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
@@ -80,32 +81,26 @@ const localhost = '0.0.0.0';
   );
   console.log();
 
-  // Starts the server webpack config running.
-  // We only want to do this once as it runs in watch mode
-  const startServerWatch = once(async () => {
-    try {
-      await copyPublicFiles();
-    } catch (e) {
-      console.error(e);
+  const onServerDone = once((err, stats) => {
+    if (err) {
+      console.error(err);
+    }
 
+    console.log(stats.toString(statsConfig));
+
+    if (err || stats.hasErrors()) {
       process.exit(1);
     }
 
-    serverCompiler.watch({}, (err, stats) => {
-      if (err) {
-        console.error(err);
-      }
+    serverManager.start();
 
-      console.log(stats.toString(statsConfig));
+    openBrowser(serverUrl);
+  });
 
-      if (err || stats.hasErrors()) {
-        process.exit(1);
-      }
-
-      serverManager.start();
-
-      openBrowser(serverUrl);
-    });
+  // Starts the server webpack config running.
+  // We only want to do this once as it runs in watch mode
+  const startServerWatch = once(() => {
+    serverCompiler.watch({}, onServerDone);
   });
 
   // Make sure the client webpack config is complete before
@@ -150,7 +145,7 @@ const localhost = '0.0.0.0';
     }
   });
 
-  gracefulExit(() => {
+  onDeath(() => {
     serverManager.kill();
 
     devServer.close(() => {

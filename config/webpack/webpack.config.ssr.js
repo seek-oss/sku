@@ -33,6 +33,7 @@ const {
   skipPackageCompatibilityCompilation,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
+const statsConfig = require('./statsConfig');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -208,7 +209,7 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
-      stats: 'errors-only',
+      stats: statsConfig,
       infrastructureLogging: {
         level: 'error',
       },
@@ -304,7 +305,7 @@ const makeWebpackConfig = ({
             ]
           : [],
       ),
-      stats: 'errors-only',
+      stats: { colors: !isCI, preset: args.stats, timings: true },
     },
   ].map(webpackDecorator);
 

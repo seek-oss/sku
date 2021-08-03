@@ -22,6 +22,7 @@ const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const { getVocabConfig } = require('../vocab/vocab');
+const statsConfig = require('./statsConfig');
 
 const {
   paths,
@@ -252,7 +253,7 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
-      stats: 'errors-only',
+      stats: statsConfig,
       infrastructureLogging: {
         level: 'error',
       },
@@ -325,7 +326,6 @@ const makeWebpackConfig = ({
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
       ],
-      stats: 'errors-only',
       infrastructureLogging: {
         level: 'error',
       },

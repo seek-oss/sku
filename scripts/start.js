@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
 
-const { watch } = require('../lib/runWebpack');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -21,6 +20,7 @@ const {
   httpsDevServer,
   useDevServerMiddleware,
 } = require('../context');
+const statsConfig = require('../config/webpack/statsConfig');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
@@ -64,7 +64,13 @@ const hot = process.env.SKU_HOT !== 'false';
 
   await checkHosts();
 
-  watch(renderCompiler);
+  renderCompiler.watch({}, (err, stats) => {
+    if (err) {
+      console.error(err);
+    }
+
+    console.log(stats.toString(statsConfig));
+  });
 
   const appHosts = getAppHosts();
 

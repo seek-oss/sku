@@ -15,8 +15,8 @@ const {
 } = require('../lib/buildFileUtils');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const { port, initialPath, paths, httpsDevServer } = require('../context');
-const { watch } = require('../lib/runWebpack');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
+const statsConfig = require('../config/webpack/statsConfig');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
 const createServerManager = require('../lib/serverManager');
@@ -85,16 +85,27 @@ const localhost = '0.0.0.0';
   const startServerWatch = once(async () => {
     try {
       await copyPublicFiles();
-      await watch(serverCompiler);
+    } catch (e) {
+      console.error(e);
+
+      process.exit(1);
+    }
+
+    serverCompiler.watch({}, (err, stats) => {
+      if (err) {
+        console.error(err);
+      }
+
+      console.log(stats.toString(statsConfig));
+
+      if (err || stats.hasErrors()) {
+        process.exit(1);
+      }
 
       serverManager.start();
 
       openBrowser(serverUrl);
-    } catch (e) {
-      console.log(e);
-
-      process.exit(1);
-    }
+    });
   });
 
   // Make sure the client webpack config is complete before

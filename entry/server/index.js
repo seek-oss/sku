@@ -17,7 +17,7 @@ const { port } = commandLineArgs(
 );
 
 const startCallback = () => {
-  console.log(`App started on port ${port}`);
+  console.log('Server started on port', port);
 
   if (typeof onStart === 'function') {
     onStart(app);

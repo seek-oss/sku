@@ -2451,13 +2451,13 @@ svg.jhxt9718 {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-05aeb90c6d666329e120.js",
-    "/main-7833966f8a8bbad7815e.js",
-    "/themes-jobStreet-249926a5520fd248dd4d.js",
+    "/runtime-8b52c314c2062d3b7cdf.js",
+    "/main-287c4c92a6f9da367229.js",
+    "/themes-jobStreet-b35490bcd0e9c3cd4086.js",
   ]
 CSS: Array [
     "/323-d97db8a941dd55f0dba1.css",
-    "/themes-jobStreet-d72fcbf0eadde9274206.css",
+    "/themes-jobStreet-3bdb23b17052d463b1d1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -2616,7 +2616,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="_1brbmfo0 lqdro">
+        <div class="_1brbmfo0 lqdro_1">
           Custom content
           Initial
         </div>
@@ -2657,16 +2657,16 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-7833966f8a8bbad7815e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-05aeb90c6d666329e120.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-287c4c92a6f9da367229.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-8b52c314c2062d3b7cdf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-05aeb90c6d666329e120.js",
-    "/main-7833966f8a8bbad7815e.js",
-    "/themes-seekAnz-c80264af653d1feea24a.js",
+    "/runtime-8b52c314c2062d3b7cdf.js",
+    "/main-287c4c92a6f9da367229.js",
+    "/themes-seekAnz-1eee6c80dd1dd099f385.js",
   ]
 CSS: Array [
     "/323-d97db8a941dd55f0dba1.css",
-    "/themes-seekAnz-03120a115c31789f1a59.css",
+    "/themes-seekAnz-5fff494d64baabdd84a9.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -2825,7 +2825,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="_1brbmfo0 lqdro">
+        <div class="_1brbmfo0 lqdro_4">
           Custom content
           Initial
         </div>
@@ -2866,9 +2866,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "themes-apac-5afbaa85f335a03b340c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-apac-a8aead6a904b746c7e82.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-apac-3b4aa3e7d56376cdf2a5.css": .lqdro_0 {
+  background-color: #e60278;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -3061,8 +3060,10 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-catho-47c76b48832e21996258.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-apac-5696620ef6ac4ce386c8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-0645fd5be3d7e168efca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-a34faba53b062d5f4ddc.css": .lqdro_1i5 {
+  background-color: #de0059;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -3254,10 +3255,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-catho-5bc442aa8b1801855999.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-docs-361d1f16d5cc7dbc1c7f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-docs-aab0929872c537619375.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-docs-f225157f3c7697b6f0e6.css": .lqdro_9 {
+  background-color: #1a1a1a;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -3450,9 +3449,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-jobStreet-249926a5520fd248dd4d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreet-d72fcbf0eadde9274206.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-docs-fa0f9063912042dbc534.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-3bdb23b17052d463b1d1.css": .lqdro_1 {
+  background-color: #fff200;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -3645,9 +3644,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreetClassic-67f1257de08a96cc6bcf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-d661a9be762316740558.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-jobStreet-b35490bcd0e9c3cd4086.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-7a6fe6f5b11a148acc27.css": .lqdro_2 {
+  background-color: #fff200;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -3839,8 +3838,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobsDb-064a5a39cc04c0948c38.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-jobStreetClassic-a8e890902ceaffc9627a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-5686b5bbf88b8aa6bf22.css": .lqdro_3 {
+  background-color: #ff9000;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -4033,10 +4033,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobsDb-65cc4be36acd58a1e02d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-occ-28e03c601cacc1a96dd1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-occ-ec8dc06772c3b9043953.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-jobsDb-abb61658df71febf3a50.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-1458eee9612a9c15eb15.css": .lqdro_2vM {
+  background-color: #f13465;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -4228,8 +4227,10 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-seekAnz-03120a115c31789f1a59.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-occ-e1a61d8f46f7cef54382.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-1eee6c80dd1dd099f385.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-5fff494d64baabdd84a9.css": .lqdro_4 {
+  background-color: #e60278;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -4422,9 +4423,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekAnz-c80264af653d1feea24a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekBusiness-5ce27166d15240af047d.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-seekBusiness-c63578e563db4d6e31f5.css": .lqdro_5 {
+  background-color: #0d3880;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -4617,10 +4617,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekBusiness-712bf4e03027e1ac6e9a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekUnifiedBeta-0fb2b9cc7624548a81f2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekUnifiedBeta-cccd0822fc9626e33633.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-seekBusiness-df15b98e5f2e90c2dc01.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-31651d7b20c89c91b66b.css": .lqdro_6 {
+  background-color: #e60278;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -4813,8 +4812,9 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-wireframe-78538a265aab10dacabe.css": .lqdro {
-  background-color: #20b2aa;
+  "themes-seekUnifiedBeta-b1fab58072a50d0bb94f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-d8521031612219b6397c.css": .lqdro_10 {
+  background-color: #111;
   color: #fff;
   font-size: 50px;
   padding: 20px;
@@ -5006,19 +5006,19 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-wireframe-c06fb089f5cfb252d3d9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-e1841011b994ff13ae43.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-05aeb90c6d666329e120.js",
-  "/main-7833966f8a8bbad7815e.js",
-  "/themes-jobStreet-249926a5520fd248dd4d.js",
+  "/runtime-8b52c314c2062d3b7cdf.js",
+  "/main-287c4c92a6f9da367229.js",
+  "/themes-jobStreet-b35490bcd0e9c3cd4086.js",
 ]
 CSS: Array [
   "/323-d97db8a941dd55f0dba1.css",
-  "/themes-jobStreet-d72fcbf0eadde9274206.css",
+  "/themes-jobStreet-3bdb23b17052d463b1d1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -5177,7 +5177,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="_1brbmfo0 lqdro">
+        <div class="_1brbmfo0 lqdro_1">
           Custom content
           Initial
         </div>
@@ -5228,7 +5228,7 @@ POST HYDRATE DIFFS:
                  <div class="_1brbmfo0 _8t4tri2w _8t4tri1r _8t4tri3c _8t4tri1b _8t4tri25 _8t4tri1s _8t4tri1t _8t4tri1u _8t4tri1v">
 @@ -157,7 +158,7 @@
          </div>
-         <div class="_1brbmfo0 lqdro">
+         <div class="_1brbmfo0 lqdro_1">
            Custom content
 -          Initial
 +          Client
@@ -5240,13 +5240,13 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-05aeb90c6d666329e120.js",
-  "/main-7833966f8a8bbad7815e.js",
-  "/themes-seekAnz-c80264af653d1feea24a.js",
+  "/runtime-8b52c314c2062d3b7cdf.js",
+  "/main-287c4c92a6f9da367229.js",
+  "/themes-seekAnz-1eee6c80dd1dd099f385.js",
 ]
 CSS: Array [
   "/323-d97db8a941dd55f0dba1.css",
-  "/themes-seekAnz-03120a115c31789f1a59.css",
+  "/themes-seekAnz-5fff494d64baabdd84a9.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -5405,7 +5405,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="_1brbmfo0 lqdro">
+        <div class="_1brbmfo0 lqdro_4">
           Custom content
           Initial
         </div>
@@ -5456,7 +5456,7 @@ POST HYDRATE DIFFS:
                  <div class="_1brbmfo0 _8t4tri2w _8t4tri1r _8t4tri3c _8t4tri1b _8t4tri25 _8t4tri1s _8t4tri1t _8t4tri1u _8t4tri1v">
 @@ -157,7 +158,7 @@
          </div>
-         <div class="_1brbmfo0 lqdro">
+         <div class="_1brbmfo0 lqdro_4">
            Custom content
 -          Initial
 +          Client
@@ -5650,7 +5650,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
+        <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro_jobStreet">
           Custom content
           Initial
         </div>
@@ -5711,7 +5711,7 @@ POST HYDRATE DIFFS:
                  <div class="reset_base__1brbmfo0 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_pointerEvents_none__8t4tri1r sprinkles_borderRadius_standard_mobile__8t4tri3c sprinkles_boxShadow_borderField__8t4tri1b sprinkles_transition_fast__8t4tri25 sprinkles_top_0__8t4tri1s sprinkles_bottom_0__8t4tri1t sprinkles_left_0__8t4tri1u sprinkles_right_0__8t4tri1v">
 @@ -171,7 +172,7 @@
          </div>
-         <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
+         <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro_jobStreet">
            Custom content
 -          Initial
 +          Client
@@ -5905,7 +5905,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
+        <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro_seekAnz">
           Custom content
           Initial
         </div>
@@ -5966,7 +5966,7 @@ POST HYDRATE DIFFS:
                  <div class="reset_base__1brbmfo0 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_pointerEvents_none__8t4tri1r sprinkles_borderRadius_standard_mobile__8t4tri3c sprinkles_boxShadow_borderField__8t4tri1b sprinkles_transition_fast__8t4tri25 sprinkles_top_0__8t4tri1s sprinkles_bottom_0__8t4tri1t sprinkles_left_0__8t4tri1u sprinkles_right_0__8t4tri1v">
 @@ -171,7 +172,7 @@
          </div>
-         <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro">
+         <div class="reset_base__1brbmfo0 BRAID__App-customBox_lqdro_seekAnz">
            Custom content
 -          Initial
 +          Client

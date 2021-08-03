@@ -8,20 +8,23 @@ import {
   IconChevron,
   Box,
 } from 'braid-design-system';
-import * as style from './App.treat';
+import { useStyles } from '../../../../../react-treat';
+
+import * as styleRefs from './App.treat';
 import { vanillaBox } from './App.css';
 
 const noop = () => {};
 
-export default ({ themeName }) => {
+function Stuff({ themeName }) {
   const [renderLabel, setRenderLabel] = useState('Initial');
+  const styles = useStyles(styleRefs);
 
   useEffect(() => {
     setRenderLabel('Client');
   }, []);
 
   return (
-    <BraidLoadableProvider themeName={themeName}>
+    <>
       <Text>
         Hello {themeName} <IconChevron />
       </Text>
@@ -33,8 +36,16 @@ export default ({ themeName }) => {
           label="This is a checkbox"
         />
       </Card>
-      <Box className={style.customBox}>Custom content {renderLabel}</Box>
+      <Box className={styles.customBox}>Custom content {renderLabel}</Box>
       <Box className={vanillaBox}>🧁 Vanilla content</Box>
+    </>
+  );
+}
+
+export default function App({ themeName }) {
+  return (
+    <BraidLoadableProvider themeName={themeName}>
+      <Stuff themeName={themeName} />
     </BraidLoadableProvider>
   );
-};
+}

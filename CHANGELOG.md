@@ -1,5 +1,11 @@
 # sku
 
+## 10.14.2
+
+### Patch Changes
+
+- Fix incorrect "Invalid script passed to 'registerScript'" errors ([#614](https://github.com/seek-oss/sku/pull/614))
+
 ## 10.14.1
 
 ### Patch Changes

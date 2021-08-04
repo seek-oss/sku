@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "10.14.0",
+  "version": "10.14.1",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -132,7 +132,7 @@
     "memoizee": "^0.4.15",
     "mini-css-extract-plugin": "^0.8.0",
     "node-emoji": "^1.10.0",
-    "node-html-parser": "^2.0.2",
+    "node-html-parser": "^4.1.2",
     "open": "^7.3.1",
     "path-to-regexp": "^6.2.0",
     "playroom": "^0.25.0",

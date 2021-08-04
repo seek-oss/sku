@@ -220,10 +220,7 @@ const makeWebpackConfig = ({
       entry: serverEntry,
       externals: [
         {
-          __sku_alias__webpackStats: `commonjs ${path.join(
-            paths.target,
-            webpackStatsFilename,
-          )}`,
+          __sku_alias__webpackStats: `commonjs ./${webpackStatsFilename}`,
         },
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
@@ -257,6 +254,8 @@ const makeWebpackConfig = ({
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         emitOnErrors: isProductionBuild,
+        minimize: false,
+        concatenateModules: false,
       },
       module: {
         rules: [

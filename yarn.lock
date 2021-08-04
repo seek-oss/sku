@@ -11534,11 +11534,12 @@ node-forge@^0.10.0:
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
   integrity sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==
 
-node-html-parser@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/node-html-parser/-/node-html-parser-2.0.2.tgz#168c9cfb77ae58fe4038d84862a0fc8f2ad8e3fd"
-  integrity sha512-N2000Ho9dkabvRZcyiwm6zOpdiAzxAxcJ0Z0WNoh/yXHG0YCuiK2WpNQfN+9vheLNY/h/It11Gk7uwT4QTfk9Q==
+node-html-parser@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/node-html-parser/-/node-html-parser-4.1.2.tgz#340192265b1f711011a5318f63dad5785b4748b0"
+  integrity sha512-O5ZnV40UpZWrFth52D62tMppI/veACiSmXJ7R+b4FToly6dnhNkFSeFcUbCHXsfe4U/2+ANiuaPS2Wf9YI6hCA==
   dependencies:
+    css-select "^4.1.3"
     he "1.2.0"
 
 node-int64@^0.4.0:

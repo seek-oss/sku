@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { parse } from 'node-html-parser';
+import { parse, valid } from 'node-html-parser';
 import { URL } from 'url';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
@@ -50,13 +50,16 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
       );
     }
 
-    const root = parse(script, { script: true });
-
-    if (!root.valid) {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      !valid(script, { script: true })
+    ) {
       console.error(`Invalid script passed to 'registerScript'\n${script}`);
     }
 
-    root.querySelectorAll('script').forEach(processScriptNode);
+    parse(script, { script: true })
+      .querySelectorAll('script')
+      .forEach(processScriptNode);
   };
 
   const createCSPTag = () => {

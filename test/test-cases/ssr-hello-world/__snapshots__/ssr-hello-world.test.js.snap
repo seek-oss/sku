@@ -4,7 +4,7 @@ exports[`ssr-hello-world build custom port should generate a production server r
 SCRIPTS: Array [
   "http://localhost:4000/runtime-0bae85fdde5a9b72f705.js",
   "http://localhost:4000/151-005ecbdae2f3b36e7025.js",
-  "http://localhost:4000/main-6bc066c461bce098498c.js",
+  "http://localhost:4000/main-f5d5d93c5fc2566cd147.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
@@ -99,7 +99,7 @@ exports[`ssr-hello-world build default port should generate a production server 
 SCRIPTS: Array [
   "http://localhost:4000/runtime-0bae85fdde5a9b72f705.js",
   "http://localhost:4000/151-005ecbdae2f3b36e7025.js",
-  "http://localhost:4000/main-6bc066c461bce098498c.js",
+  "http://localhost:4000/main-f5d5d93c5fc2566cd147.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [

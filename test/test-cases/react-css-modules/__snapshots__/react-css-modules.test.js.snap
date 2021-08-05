@@ -4,7 +4,7 @@ exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: Array [
   "/runtime-9729bb82c0a343375b97.js",
   "/702-ef15ca26d5c62a3fad08.js",
-  "/main-7a2fef10e729a96687d1.js",
+  "/main-e301fc6a72eb5b6188d6.js",
 ]
 CSS: Array [
   "/main-21ba36bf1c8257f9aa56.css",
@@ -94,7 +94,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/runtime-9729bb82c0a343375b97.js",
     "/702-ef15ca26d5c62a3fad08.js",
-    "/main-7a2fef10e729a96687d1.js",
+    "/main-e301fc6a72eb5b6188d6.js",
   ]
 CSS: Array [
     "/main-21ba36bf1c8257f9aa56.css",
@@ -175,7 +175,7 @@ SOURCE HTML: <!DOCTYPE html>
   font-size: 32px;
 }
 ,
-  "main-7a2fef10e729a96687d1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-e301fc6a72eb5b6188d6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-9729bb82c0a343375b97.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

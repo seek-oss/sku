@@ -4,7 +4,7 @@ exports[`public path build and serve should create valid app with no unresolved 
 SCRIPTS: Array [
   "/static/runtime-9729bb82c0a343375b97.js",
   "/static/75-f38d941b3620d9e07693.js",
-  "/static/main-eb9daac17699a97935d9.js",
+  "/static/main-1809e2ce069033590d34.js",
 ]
 CSS: Array [
   "/static/main-3c53411ff2c23ae6554b.css",

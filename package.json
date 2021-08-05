@@ -7,7 +7,7 @@
     "sku": "./bin/sku.js"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "lint": "npm run format-check && eslint .",
@@ -201,7 +201,7 @@
     "webpack-stats-plugin": "^1.0.3"
   },
   "volta": {
-    "node": "12.16.1",
+    "node": "14.17.4",
     "yarn": "1.22.4"
   }
 }

@@ -69,7 +69,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              supportedBrowsers,
+              supportedBrowsers: 'current node',
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -98,7 +98,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              supportedBrowsers,
+              supportedBrowsers: 'current node',
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,

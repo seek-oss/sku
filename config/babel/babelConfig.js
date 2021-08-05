@@ -70,7 +70,6 @@ module.exports = ({
     [
       require.resolve('@babel/preset-env'),
       {
-        modules: isJest,
         targets: supportedBrowsers,
         shippedProposals: true,
       },

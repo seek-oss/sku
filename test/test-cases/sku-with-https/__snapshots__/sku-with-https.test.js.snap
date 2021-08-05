@@ -2,9 +2,9 @@
 
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: Array [
-  "/runtime-35667e64ccb575eb7368.js",
-  "/702-ef15ca26d5c62a3fad08.js",
-  "/main-64012946488dde29e263.js",
+  "/runtime-d2beb64170da59323a1a.js",
+  "/702-414b7aae51d08e2ec1ed.js",
+  "/main-42fb52561e84558cb5a3.js",
 ]
 CSS: Array [
   "/main-21ba36bf1c8257f9aa56.css",

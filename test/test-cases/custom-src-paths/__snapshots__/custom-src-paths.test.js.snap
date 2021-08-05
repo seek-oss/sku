@@ -2,9 +2,9 @@
 
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: Array [
-  "/some-static-place/runtime-9729bb82c0a343375b97.js",
-  "/some-static-place/75-f38d941b3620d9e07693.js",
-  "/some-static-place/main-fcd5c7332fb031ba376a.js",
+  "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
+  "/some-static-place/75-ccd3459b48773b5734a5.js",
+  "/some-static-place/main-c3a180251298092f0d76.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -71,11 +71,11 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
-  "75-f38d941b3620d9e07693.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "75-ccd3459b48773b5734a5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: Array [
-    "/some-static-place/runtime-9729bb82c0a343375b97.js",
-    "/some-static-place/75-f38d941b3620d9e07693.js",
-    "/some-static-place/main-fcd5c7332fb031ba376a.js",
+    "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
+    "/some-static-place/75-ccd3459b48773b5734a5.js",
+    "/some-static-place/main-c3a180251298092f0d76.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -137,8 +137,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-fcd5c7332fb031ba376a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-9729bb82c0a343375b97.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c3a180251298092f0d76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-d71e61b408567c9bf4a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

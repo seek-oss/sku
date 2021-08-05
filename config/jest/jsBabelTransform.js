@@ -7,6 +7,6 @@ module.exports = babelJest.createTransformer(
   babelConfig({
     target: 'jest',
     rootResolution,
-    supportedBrowsers: 'current node',
+    browserslist: 'current node',
   }),
 );

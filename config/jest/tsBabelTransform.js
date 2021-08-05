@@ -8,6 +8,6 @@ module.exports = babelJest.createTransformer(
     target: 'jest',
     lang: 'ts',
     rootResolution,
-    supportedBrowsers: 'current node',
+    browserslist: 'current node',
   }),
 );

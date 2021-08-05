@@ -62,7 +62,7 @@ describe('sku-webpack-plugin', () => {
     beforeAll(async () => {
       process = startBin({
         packageName: 'webpack-dev-server',
-        args: ['--mode development'],
+        args: ['--mode', 'development'],
         options: {
           cwd: appDir,
         },
@@ -87,10 +87,9 @@ describe('sku-webpack-plugin', () => {
     beforeAll(async () => {
       await runBin({
         packageName: 'webpack-cli',
-        args: ['--mode="production"', '--no-stats'],
+        args: ['--mode', 'production', '--no-stats'],
         options: {
           cwd: appDir,
-          stdio: 'inherit',
           env: {
             ...process.env,
             NODE_ENV: 'production',

@@ -1,4 +1,6 @@
 const { performance } = require('perf_hooks');
+const prettyMilliseconds = require('pretty-ms');
+const debug = require('debug')('sku:metrics');
 
 const track = require('../../../../telemetry');
 
@@ -20,6 +22,9 @@ class MetricsPlugin {
 
     compiler.hooks.done.tap(smp, () => {
       if (this.initial) {
+        debug('Initial "%s" build complete: %s', this.target, {
+          toString: () => prettyMilliseconds(performance.now()),
+        });
         track.timing('start.webpack.initial', performance.now(), {
           target: this.target,
           type: this.type,
@@ -35,14 +40,14 @@ class MetricsPlugin {
 
         this.initial = false;
       } else {
-        track.timing(
-          'start.webpack.rebuild',
-          performance.now() - this.startTime,
-          {
-            target: this.target,
-            type: this.type,
-          },
-        );
+        const rebuildTime = performance.now() - this.startTime;
+        debug('Rebuild for "%s" complete: %s', this.target, {
+          toString: () => prettyMilliseconds(rebuildTime),
+        });
+        track.timing('start.webpack.rebuild', rebuildTime, {
+          target: this.target,
+          type: this.type,
+        });
         track.gauge('start.files.rebuild.treat', this.builtTreatFiles.size, {
           target: this.target,
           type: this.type,

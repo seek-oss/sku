@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const { paths } = require('../../context');
 const find = require('lodash/find');
-const webpackMerge = require('webpack-merge');
+const { merge: webpackMerge } = require('webpack-merge');
 const isCI = require('../../lib/isCI');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');

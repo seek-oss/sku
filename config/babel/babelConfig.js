@@ -9,24 +9,10 @@ module.exports = ({
   hot = false,
   rootResolution = false,
 }) => {
-  const browserEnvOptions = {
-    modules: false,
-    targets: supportedBrowsers,
-    shippedProposals: true,
-  };
-
-  const nodeEnvOptions = {
-    targets: {
-      node: 'current',
-    },
-    shippedProposals: true,
-  };
-
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
-  const envPresetOptions = isBrowser ? browserEnvOptions : nodeEnvOptions;
   const plugins = [
     [
       require.resolve('babel-plugin-module-resolver'),
@@ -81,7 +67,14 @@ module.exports = ({
           },
         ]
       : null,
-    [require.resolve('@babel/preset-env'), envPresetOptions],
+    [
+      require.resolve('@babel/preset-env'),
+      {
+        modules: isJest,
+        targets: supportedBrowsers,
+        shippedProposals: true,
+      },
+    ],
     [
       require.resolve('@babel/preset-react'),
       {

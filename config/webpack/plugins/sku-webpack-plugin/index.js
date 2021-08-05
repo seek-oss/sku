@@ -203,11 +203,9 @@ class SkuWebpackPlugin {
     createTreatPlugin({
       target,
       isProductionBuild,
-      include: this.include,
       libraryName,
       supportedBrowsers,
       MiniCssExtractPlugin,
-      hot,
     }).apply(compiler);
 
     if (target === 'browser') {

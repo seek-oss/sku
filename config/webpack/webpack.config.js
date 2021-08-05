@@ -144,6 +144,9 @@ const makeWebpackConfig = ({
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
+        // The 'TerserPlugin' is actually the default minimizer for webpack
+        // We add a custom one to ensure licence comments stay inside the final JS assets
+        // Without this a '*.js.LICENSE.txt' file would be created alongside
         minimizer: [new TerserPlugin({ extractComments: false })],
         concatenateModules: isProductionBuild,
         ...(!isLibrary
@@ -155,7 +158,6 @@ const makeWebpackConfig = ({
         emitOnErrors: isProductionBuild,
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: { __sku_alias__clientEntry: paths.clientEntry },
       },
       module: {
@@ -290,7 +292,6 @@ const makeWebpackConfig = ({
         nodeEnv: process.env.NODE_ENV,
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: { __sku_alias__renderEntry: paths.renderEntry },
       },
       module: {

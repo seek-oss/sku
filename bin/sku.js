@@ -34,7 +34,6 @@ log(`Starting script: ${script}`);
     }
 
     case 'test':
-    case 'test-ssr':
     case 'lint':
     case 'format':
     case 'pre-commit':

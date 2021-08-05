@@ -194,7 +194,6 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "renovate-config-seek": "^0.4.0",
-    "seek-asia-style-guide": "^16.0.1",
     "seek-style-guide": "^42.0.0",
     "wait-on": "^5.2.1",
     "webpack-cli": "^4.7.2",

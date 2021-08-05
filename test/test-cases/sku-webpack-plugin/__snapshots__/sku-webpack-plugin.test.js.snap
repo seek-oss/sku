@@ -348,7 +348,6 @@ Object {
   transition: var(--_1th2mrq4l);
 }
 .tqa10927:active {
-  -webkit-transform: var(--_1th2mrq4m);
   transform: var(--_1th2mrq4m);
 }
 .tqa10928 {
@@ -364,8 +363,6 @@ Object {
   display: inline-block;
 }
 .tqa1092o {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 .tqa1092s {
@@ -603,83 +600,51 @@ Object {
   margin-left: 0;
 }
 .tqa109bg {
-  -ms-flex-align: start;
-  -webkit-align-items: flex-start;
   align-items: flex-start;
 }
 .tqa109bk {
-  -ms-flex-align: center;
-  -webkit-align-items: center;
   align-items: center;
 }
 .tqa109bo {
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
   align-items: flex-end;
 }
 .tqa109bs {
-  -ms-flex-pack: start;
-  -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 .tqa109bw {
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 .tqa109c0 {
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 .tqa109c4 {
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
 }
 .tqa109c8 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
 }
 .tqa109cc {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
 .tqa109cg {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 .tqa109ck {
-  -webkit-flex-direction: column-reverse;
-  -ms-flex-direction: column-reverse;
   flex-direction: column-reverse;
 }
 .tqa109co {
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .tqa109cs {
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 .tqa109cw {
-  -ms-flex-negative: 0;
-  -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
 .tqa109d0 {
-  -ms-flex-positive: 0;
-  -webkit-flex-grow: 0;
   flex-grow: 0;
 }
 .tqa109d4 {
-  -ms-flex-positive: 1;
-  -webkit-flex-grow: 1;
   flex-grow: 1;
 }
 .tqa109d8 {
@@ -705,8 +670,6 @@ Object {
     display: inline-block;
   }
   .tqa1092p {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   .tqa1092t {
@@ -944,83 +907,51 @@ Object {
     margin-left: 0;
   }
   .tqa109bh {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bl {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109bp {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bt {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109bx {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c1 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c5 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109c9 {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   .tqa109cd {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   .tqa109ch {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   .tqa109cl {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   .tqa109cp {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   .tqa109ct {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   .tqa109cx {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d1 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d5 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109d9 {
@@ -1047,8 +978,6 @@ Object {
     display: inline-block;
   }
   .tqa1092q {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   .tqa1092u {
@@ -1286,83 +1215,51 @@ Object {
     margin-left: 0;
   }
   .tqa109bi {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bm {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109bq {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bu {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109by {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c2 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c6 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109ca {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   .tqa109ce {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   .tqa109ci {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   .tqa109cm {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   .tqa109cq {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   .tqa109cu {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   .tqa109cy {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d2 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d6 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109da {
@@ -1389,8 +1286,6 @@ Object {
     display: inline-block;
   }
   .tqa1092r {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   .tqa1092v {
@@ -1628,83 +1523,51 @@ Object {
     margin-left: 0;
   }
   .tqa109bj {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   .tqa109bn {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   .tqa109br {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   .tqa109bv {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   .tqa109bz {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   .tqa109c3 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   .tqa109c7 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   .tqa109cb {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   .tqa109cf {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   .tqa109cj {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   .tqa109cn {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   .tqa109cr {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   .tqa109cv {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   .tqa109cz {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   .tqa109d3 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   .tqa109d7 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   .tqa109db {

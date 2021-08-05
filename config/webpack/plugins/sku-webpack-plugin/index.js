@@ -28,7 +28,7 @@ class SkuWebpackPlugin {
       include: [],
       hot: false,
       generateCSSTypes: false,
-      supportedBrowsers: defaultSupportedBrowsers,
+      browserslist: defaultSupportedBrowsers,
       compilePackages: [],
       rootResolution: false,
       ...options,
@@ -48,7 +48,7 @@ class SkuWebpackPlugin {
       target,
       hot,
       generateCSSTypes,
-      supportedBrowsers,
+      browserslist,
       mode = compiler.options.mode,
       libraryName,
       displayNamesProd,
@@ -69,7 +69,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              supportedBrowsers: 'current node',
+              browserslist: ['current node'],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -80,7 +80,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target,
               lang: 'ts',
-              supportedBrowsers,
+              browserslist,
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
@@ -98,7 +98,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              supportedBrowsers: 'current node',
+              browserslist: ['current node'],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -109,7 +109,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target,
               lang: 'js',
-              supportedBrowsers,
+              browserslist,
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
@@ -132,7 +132,7 @@ class SkuWebpackPlugin {
               packageName,
               hot,
               compilePackage: true,
-              supportedBrowsers,
+              browserslist,
             }),
           }))
           .concat({
@@ -145,7 +145,7 @@ class SkuWebpackPlugin {
               MiniCssExtractPlugin,
               hot,
               compilePackage: false,
-              supportedBrowsers,
+              browserslist,
             }),
           }),
       },
@@ -156,7 +156,7 @@ class SkuWebpackPlugin {
           isProductionBuild,
           MiniCssExtractPlugin,
           hot,
-          supportedBrowsers,
+          browserslist,
         }),
       },
       {
@@ -204,7 +204,7 @@ class SkuWebpackPlugin {
       target,
       isProductionBuild,
       libraryName,
-      supportedBrowsers,
+      browserslist,
       MiniCssExtractPlugin,
     }).apply(compiler);
 

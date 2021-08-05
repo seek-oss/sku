@@ -53,7 +53,7 @@ const schema = {
     type: 'boolean',
     optional: true,
   },
-  supportedBrowsers: {
+  browserslist: {
     type: 'array',
     items: 'string',
     optional: true,
@@ -99,14 +99,14 @@ module.exports = (options) => {
     });
   }
 
-  if (options.supportedBrowsers) {
-    // Ensure supportedBrowsers is valid browserslist query
+  if (options.browserslist) {
+    // Ensure 'browserslist' is valid browserslist query
     try {
-      browserslist(options.supportedBrowsers);
+      browserslist(options.browserslist);
     } catch (e) {
       errors.push(
         `:no_entry_sign: '${bold(
-          'supportedBrowsers',
+          'browserslist',
         )}' must be a valid browserslist query. ${white(e.message)}`,
       );
     }

@@ -2,9 +2,9 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 Object {
-  "388-9b19ada9955426c6edd7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "388-39ddc85fb494bd9028a1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent-bdc9f06c38f9e7d5ba74.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-10eb5ad5d878228c16fa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-05149710341a0d54f413.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-c356fae1fa4d368326f6.css": ._itmq_4 {
   color: blue;
 }
@@ -14,13 +14,13 @@ Object {
   color: red;
 }
 ,
-  "main-5abeae43fa5eea7ca3e6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0df909eed98e56f21f4a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-29a889340a08a9ecee47.js",
-    "/static/place/388-9b19ada9955426c6edd7.js",
-    "/static/place/main-5abeae43fa5eea7ca3e6.js",
-    "/static/place/handlers-Details-10eb5ad5d878228c16fa.js",
+    "/static/place/runtime-c649bb7722fe364bf412.js",
+    "/static/place/388-39ddc85fb494bd9028a1.js",
+    "/static/place/main-0df909eed98e56f21f4a.js",
+    "/static/place/handlers-Details-05149710341a0d54f413.js",
     "/static/place/AsyncComponent-bdc9f06c38f9e7d5ba74.js",
   ]
 CSS: Array [
@@ -130,9 +130,9 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-29a889340a08a9ecee47.js",
-    "/static/place/388-9b19ada9955426c6edd7.js",
-    "/static/place/main-5abeae43fa5eea7ca3e6.js",
+    "/static/place/runtime-c649bb7722fe364bf412.js",
+    "/static/place/388-39ddc85fb494bd9028a1.js",
+    "/static/place/main-0df909eed98e56f21f4a.js",
     "/static/place/handlers-Home-9e1535f8f6d80e362b81.js",
   ]
 CSS: Array [
@@ -229,10 +229,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/$id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-29a889340a08a9ecee47.js",
-    "/static/place/388-9b19ada9955426c6edd7.js",
-    "/static/place/main-5abeae43fa5eea7ca3e6.js",
-    "/static/place/handlers-Details-10eb5ad5d878228c16fa.js",
+    "/static/place/runtime-c649bb7722fe364bf412.js",
+    "/static/place/388-39ddc85fb494bd9028a1.js",
+    "/static/place/main-0df909eed98e56f21f4a.js",
+    "/static/place/handlers-Details-05149710341a0d54f413.js",
     "/static/place/AsyncComponent-bdc9f06c38f9e7d5ba74.js",
   ]
 CSS: Array [
@@ -342,9 +342,9 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-29a889340a08a9ecee47.js",
-    "/static/place/388-9b19ada9955426c6edd7.js",
-    "/static/place/main-5abeae43fa5eea7ca3e6.js",
+    "/static/place/runtime-c649bb7722fe364bf412.js",
+    "/static/place/388-39ddc85fb494bd9028a1.js",
+    "/static/place/main-0df909eed98e56f21f4a.js",
     "/static/place/handlers-Home-9e1535f8f6d80e362b81.js",
   ]
 CSS: Array [
@@ -439,17 +439,17 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-29a889340a08a9ecee47.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-c649bb7722fe364bf412.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-29a889340a08a9ecee47.js",
-  "/static/place/388-9b19ada9955426c6edd7.js",
-  "/static/place/main-5abeae43fa5eea7ca3e6.js",
-  "/static/place/handlers-Details-10eb5ad5d878228c16fa.js",
+  "/static/place/runtime-c649bb7722fe364bf412.js",
+  "/static/place/388-39ddc85fb494bd9028a1.js",
+  "/static/place/main-0df909eed98e56f21f4a.js",
+  "/static/place/handlers-Details-05149710341a0d54f413.js",
   "/static/place/AsyncComponent-bdc9f06c38f9e7d5ba74.js",
 ]
 CSS: Array [
@@ -572,9 +572,9 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-29a889340a08a9ecee47.js",
-  "/static/place/388-9b19ada9955426c6edd7.js",
-  "/static/place/main-5abeae43fa5eea7ca3e6.js",
+  "/static/place/runtime-c649bb7722fe364bf412.js",
+  "/static/place/388-39ddc85fb494bd9028a1.js",
+  "/static/place/main-0df909eed98e56f21f4a.js",
   "/static/place/handlers-Home-9e1535f8f6d80e362b81.js",
 ]
 CSS: Array [

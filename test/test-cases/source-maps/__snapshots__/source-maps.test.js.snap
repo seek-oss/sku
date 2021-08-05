@@ -2,11 +2,11 @@
 
 exports[`source-maps build should generate the expected files 1`] = `
 Object {
-  "75-6ede724ea476b5829433.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "75-6ede724ea476b5829433.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "75-4cd699b97b4be1a327da.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "75-4cd699b97b4be1a327da.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: Array [
     "/static/source-maps/runtime-32ffde280edc35016066.js",
-    "/static/source-maps/75-6ede724ea476b5829433.js",
+    "/static/source-maps/75-4cd699b97b4be1a327da.js",
     "/static/source-maps/main-9443b5d022593cc6994f.js",
   ]
 CSS: Array []

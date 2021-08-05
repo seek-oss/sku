@@ -2,7 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
-  "658-3b6025bb293959fa515f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "658-c00d5c9361e60829fa01.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   \\"crypto\\",
   \\"fs\\",
@@ -16,12 +16,12 @@ Object {
   \\"util\\"
 ]",
   "index.html": SCRIPTS: Array [
-    "/runtime-aa2a45d92b6c2fe780d7.js",
-    "/658-3b6025bb293959fa515f.js",
+    "/runtime-64aaa8825b894a3f3430.js",
+    "/658-c00d5c9361e60829fa01.js",
     "/main-acd549acda8750347e45.js",
   ]
 CSS: Array [
-    "/main-f128f0ba11200d94ca85.css",
+    "/main-f19c5e5c943340d8270e.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -116,7 +116,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main-acd549acda8750347e45.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-f128f0ba11200d94ca85.css": a,
+  "main-f19c5e5c943340d8270e.css": a,
 abbr,
 acronym,
 address,
@@ -322,7 +322,6 @@ html {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    -webkit-transform: translateY(0.41em);
     transform: translateY(0.41em);
   }
 }
@@ -331,7 +330,6 @@ html {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    -webkit-transform: translateY(0.41em);
     transform: translateY(0.41em);
   }
 }
@@ -357,7 +355,6 @@ html {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
-    -webkit-transform: translateY(0.30285714em);
     transform: translateY(0.30285714em);
   }
 }
@@ -366,7 +363,6 @@ html {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
-    -webkit-transform: translateY(0.30285714em);
     transform: translateY(0.30285714em);
   }
 }
@@ -392,7 +388,6 @@ html {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
-    -webkit-transform: translateY(0.49333333em);
     transform: translateY(0.49333333em);
   }
 }
@@ -401,7 +396,6 @@ html {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
-    -webkit-transform: translateY(0.49333333em);
     transform: translateY(0.49333333em);
   }
 }
@@ -424,7 +418,6 @@ html {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
-    -webkit-transform: translateY(0.32666667em);
     transform: translateY(0.32666667em);
   }
 }
@@ -433,7 +426,6 @@ html {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
-    -webkit-transform: translateY(0.32666667em);
     transform: translateY(0.32666667em);
   }
 }
@@ -456,7 +448,6 @@ html {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
-    -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
   }
 }
@@ -465,7 +456,6 @@ html {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
-    -webkit-transform: translateY(0.30285714em);
     transform: translateY(0.30285714em);
   }
 }
@@ -488,7 +478,6 @@ html {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
-    -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
   }
 }
@@ -497,7 +486,6 @@ html {
     font-size: 22px;
     font-weight: 700;
     line-height: 30px;
-    -webkit-transform: translateY(0.34181818em);
     transform: translateY(0.34181818em);
   }
 }
@@ -520,7 +508,6 @@ html {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
-    -webkit-transform: translateY(0.37428571em);
     transform: translateY(0.37428571em);
   }
 }
@@ -529,7 +516,6 @@ html {
     font-size: 42px;
     font-weight: 400;
     line-height: 48px;
-    -webkit-transform: translateY(0.23142857em);
     transform: translateY(0.23142857em);
   }
 }
@@ -576,44 +562,20 @@ html {
   font-weight: 400;
 }
 .e9wtuLv {
-  -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
-  -webkit-animation-name: pk5PcPE;
   animation-name: pk5PcPE;
-}
-@-webkit-keyframes pk5PcPE {
-  0% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-  }
-  65% {
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
-  }
-  85% {
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
-  }
-  to {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
 }
 @keyframes pk5PcPE {
   0% {
-    -webkit-transform: scale(0.5);
     transform: scale(0.5);
   }
   65% {
-    -webkit-transform: scale(1.5);
     transform: scale(1.5);
   }
   85% {
-    -webkit-transform: scale(0.8);
     transform: scale(0.8);
   }
   to {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -706,6 +668,6 @@ html {
   }
 }
 ,
-  "runtime-aa2a45d92b6c2fe780d7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-64aaa8825b894a3f3430.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

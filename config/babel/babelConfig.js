@@ -3,7 +3,7 @@ const { cwd } = require('../../lib/cwd');
 module.exports = ({
   target,
   lang = 'js',
-  supportedBrowsers,
+  browserslist,
   displayNamesProd = false,
   removeAssertionsInProduction = true,
   hot = false,
@@ -70,7 +70,7 @@ module.exports = ({
     [
       require.resolve('@babel/preset-env'),
       {
-        targets: supportedBrowsers,
+        targets: browserslist,
         shippedProposals: true,
       },
     ],

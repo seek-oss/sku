@@ -1,13 +1,9 @@
 const { red, yellow, bold } = require('chalk');
-const find = require('lodash/find');
 const omitBy = require('lodash/omitBy');
-const { paths, playroom } = require('../../context');
-const makeWebpackConfig = require('../webpack/webpack.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const clientWebpackConfig = find(
-  makeWebpackConfig({ isIntegration: true }),
-  (config) => config.name === 'client',
-);
+const { paths, playroom, rootResolution } = require('../../context');
+const SkuWebpackPlugin = require('../webpack/plugins/sku-webpack-plugin');
 
 try {
   require.resolve(paths.playroomComponents);
@@ -39,9 +35,21 @@ module.exports = () =>
       openBrowser: process.env.OPEN_TAB !== 'false',
       ...playroom,
       webpackConfig: () => ({
-        module: clientWebpackConfig.module,
-        resolve: clientWebpackConfig.resolve,
-        plugins: clientWebpackConfig.plugins,
+        plugins: [
+          new SkuWebpackPlugin({
+            include: paths.src,
+            compilePackages: paths.compilePackages,
+            target: 'browser',
+            hot: false,
+            generateCSSTypes: false,
+            browserslist: 'last 2 chrome versions',
+            mode: 'development',
+            displayNamesProd: true,
+            removeAssertionsInProduction: false,
+            MiniCssExtractPlugin,
+            rootResolution,
+          }),
+        ],
         optimization: {
           concatenateModules: false,
         },

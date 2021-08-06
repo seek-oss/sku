@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "323-d97db8a941dd55f0dba1.css": ._1brbmfo0 {
+  "323-d1aef978f7f588becc10.css": ._1brbmfo0 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -297,7 +297,6 @@ Object {
   transition: var(--h3207t4l);
 }
 ._8t4tri27:active {
-  -webkit-transform: var(--h3207t4m);
   transform: var(--h3207t4m);
 }
 ._8t4tri28 {
@@ -313,8 +312,6 @@ Object {
   display: inline-block;
 }
 ._8t4tri2o {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 ._8t4tri2s {
@@ -552,83 +549,51 @@ Object {
   margin-left: 0;
 }
 ._8t4tribg {
-  -ms-flex-align: start;
-  -webkit-align-items: flex-start;
   align-items: flex-start;
 }
 ._8t4tribk {
-  -ms-flex-align: center;
-  -webkit-align-items: center;
   align-items: center;
 }
 ._8t4tribo {
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
   align-items: flex-end;
 }
 ._8t4tribs {
-  -ms-flex-pack: start;
-  -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 ._8t4tribw {
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 ._8t4tric0 {
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 ._8t4tric4 {
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
 }
 ._8t4tric8 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
 }
 ._8t4tricc {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
 ._8t4tricg {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 ._8t4trick {
-  -webkit-flex-direction: column-reverse;
-  -ms-flex-direction: column-reverse;
   flex-direction: column-reverse;
 }
 ._8t4trico {
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 ._8t4trics {
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 ._8t4tricw {
-  -ms-flex-negative: 0;
-  -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
 ._8t4trid0 {
-  -ms-flex-positive: 0;
-  -webkit-flex-grow: 0;
   flex-grow: 0;
 }
 ._8t4trid4 {
-  -ms-flex-positive: 1;
-  -webkit-flex-grow: 1;
   flex-grow: 1;
 }
 ._8t4trid8 {
@@ -654,8 +619,6 @@ Object {
     display: inline-block;
   }
   ._8t4tri2p {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   ._8t4tri2t {
@@ -893,83 +856,51 @@ Object {
     margin-left: 0;
   }
   ._8t4tribh {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   ._8t4tribl {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   ._8t4tribp {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   ._8t4tribt {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   ._8t4tribx {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   ._8t4tric1 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   ._8t4tric5 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   ._8t4tric9 {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._8t4tricd {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   ._8t4trich {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   ._8t4tricl {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   ._8t4tricp {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   ._8t4trict {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   ._8t4tricx {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   ._8t4trid1 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   ._8t4trid5 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   ._8t4trid9 {
@@ -996,8 +927,6 @@ Object {
     display: inline-block;
   }
   ._8t4tri2q {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   ._8t4tri2u {
@@ -1235,83 +1164,51 @@ Object {
     margin-left: 0;
   }
   ._8t4tribi {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   ._8t4tribm {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   ._8t4tribq {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   ._8t4tribu {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   ._8t4triby {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   ._8t4tric2 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   ._8t4tric6 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   ._8t4trica {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._8t4trice {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   ._8t4trici {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   ._8t4tricm {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   ._8t4tricq {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   ._8t4tricu {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   ._8t4tricy {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   ._8t4trid2 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   ._8t4trid6 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   ._8t4trida {
@@ -1338,8 +1235,6 @@ Object {
     display: inline-block;
   }
   ._8t4tri2r {
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
   }
   ._8t4tri2v {
@@ -1577,83 +1472,51 @@ Object {
     margin-left: 0;
   }
   ._8t4tribj {
-    -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
   }
   ._8t4tribn {
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
   }
   ._8t4tribr {
-    -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
   }
   ._8t4tribv {
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
   }
   ._8t4tribz {
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
   }
   ._8t4tric3 {
-    -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
   }
   ._8t4tric7 {
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
   }
   ._8t4tricb {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
     flex-direction: row;
   }
   ._8t4tricf {
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
   ._8t4tricj {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
   }
   ._8t4tricn {
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
   }
   ._8t4tricr {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
   ._8t4tricv {
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
   }
   ._8t4tricz {
-    -ms-flex-negative: 0;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
   }
   ._8t4trid3 {
-    -ms-flex-positive: 0;
-    -webkit-flex-grow: 0;
     flex-grow: 0;
   }
   ._8t4trid7 {
-    -ms-flex-positive: 1;
-    -webkit-flex-grow: 1;
     flex-grow: 1;
   }
   ._8t4tridb {
@@ -1673,22 +1536,16 @@ Object {
   padding: 100px;
 }
 ._173azei0 {
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 ._173azei1 {
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 ._173azei2 {
-  -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 ._173azei3 {
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 ._1qtg68u0 {
@@ -2163,19 +2020,15 @@ svg.jhxt9718 {
   opacity: 0.2;
 }
 .lc4anfi {
-  -webkit-transform: scale(0.85);
   transform: scale(0.85);
 }
 .lc4anf1:active + .lc4anf4 > * > .lc4anfi {
-  -webkit-transform: scale(0.75);
   transform: scale(0.75);
 }
 .lc4anfj {
-  -webkit-transform: scale(0.6);
   transform: scale(0.6);
 }
 .lc4anf1:active + .lc4anf4 > * > .lc4anfj {
-  -webkit-transform: scale(0.5);
   transform: scale(0.5);
 }
 [data-braid-hidefocusrings] .a3itwc0 {
@@ -2425,7 +2278,6 @@ svg.jhxt9718 {
   position: absolute;
   right: -10px;
   top: 50%;
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 .qfxe171:after {
@@ -2451,12 +2303,12 @@ svg.jhxt9718 {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-8b52c314c2062d3b7cdf.js",
-    "/main-287c4c92a6f9da367229.js",
-    "/themes-jobStreet-b35490bcd0e9c3cd4086.js",
+    "/runtime-01a053fe7dc60079ee89.js",
+    "/main-77f9b7331eb695907781.js",
+    "/themes-jobStreet-a241d9392b30482764d3.js",
   ]
 CSS: Array [
-    "/323-d97db8a941dd55f0dba1.css",
+    "/323-d1aef978f7f588becc10.css",
     "/themes-jobStreet-3bdb23b17052d463b1d1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2657,15 +2509,15 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-287c4c92a6f9da367229.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-8b52c314c2062d3b7cdf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-77f9b7331eb695907781.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-01a053fe7dc60079ee89.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-8b52c314c2062d3b7cdf.js",
-    "/main-287c4c92a6f9da367229.js",
-    "/themes-seekAnz-1eee6c80dd1dd099f385.js",
+    "/runtime-01a053fe7dc60079ee89.js",
+    "/main-77f9b7331eb695907781.js",
+    "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
   ]
 CSS: Array [
-    "/323-d97db8a941dd55f0dba1.css",
+    "/323-d1aef978f7f588becc10.css",
     "/themes-seekAnz-5fff494d64baabdd84a9.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -3060,8 +2912,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-apac-5696620ef6ac4ce386c8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-catho-0645fd5be3d7e168efca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-apac-a36da130b447c559cdcc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-605c141742656d9e3970.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-catho-a34faba53b062d5f4ddc.css": .lqdro_1i5 {
   background-color: #de0059;
   color: #fff;
@@ -3255,6 +3107,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
+  "themes-docs-d8ea23a5160a37e6b87f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-docs-f225157f3c7697b6f0e6.css": .lqdro_9 {
   background-color: #1a1a1a;
   color: #fff;
@@ -3449,7 +3302,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-docs-fa0f9063912042dbc534.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-3bdb23b17052d463b1d1.css": .lqdro_1 {
   background-color: #fff200;
   color: #fff;
@@ -3644,7 +3496,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreet-b35490bcd0e9c3cd4086.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-a241d9392b30482764d3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-7a6fe6f5b11a148acc27.css": .lqdro_2 {
   background-color: #fff200;
   color: #fff;
@@ -3838,7 +3690,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreetClassic-a8e890902ceaffc9627a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreetClassic-d71cc64f0110977f44e3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-2b988b9dc14828b60b25.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-5686b5bbf88b8aa6bf22.css": .lqdro_3 {
   background-color: #ff9000;
   color: #fff;
@@ -4033,7 +3886,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobsDb-abb61658df71febf3a50.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-1458eee9612a9c15eb15.css": .lqdro_2vM {
   background-color: #f13465;
   color: #fff;
@@ -4227,8 +4079,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-occ-e1a61d8f46f7cef54382.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-1eee6c80dd1dd099f385.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-500c5896975610f7a97e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-391b0e7ab6a74f9e1e84.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-5fff494d64baabdd84a9.css": .lqdro_4 {
   background-color: #e60278;
   color: #fff;
@@ -4423,6 +4275,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
+  "themes-seekBusiness-35f65acf42942859ef9a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-c63578e563db4d6e31f5.css": .lqdro_5 {
   background-color: #0d3880;
   color: #fff;
@@ -4617,7 +4470,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekBusiness-df15b98e5f2e90c2dc01.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekUnifiedBeta-31651d7b20c89c91b66b.css": .lqdro_6 {
   background-color: #e60278;
   color: #fff;
@@ -4812,7 +4664,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekUnifiedBeta-b1fab58072a50d0bb94f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-ed671b0cde072e392098.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-wireframe-16b1af9b27aa667da34e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-d8521031612219b6397c.css": .lqdro_10 {
   background-color: #111;
   color: #fff;
@@ -5006,18 +4859,17 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-wireframe-e1841011b994ff13ae43.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-8b52c314c2062d3b7cdf.js",
-  "/main-287c4c92a6f9da367229.js",
-  "/themes-jobStreet-b35490bcd0e9c3cd4086.js",
+  "/runtime-01a053fe7dc60079ee89.js",
+  "/main-77f9b7331eb695907781.js",
+  "/themes-jobStreet-a241d9392b30482764d3.js",
 ]
 CSS: Array [
-  "/323-d97db8a941dd55f0dba1.css",
+  "/323-d1aef978f7f588becc10.css",
   "/themes-jobStreet-3bdb23b17052d463b1d1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -5240,12 +5092,12 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-8b52c314c2062d3b7cdf.js",
-  "/main-287c4c92a6f9da367229.js",
-  "/themes-seekAnz-1eee6c80dd1dd099f385.js",
+  "/runtime-01a053fe7dc60079ee89.js",
+  "/main-77f9b7331eb695907781.js",
+  "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
 ]
 CSS: Array [
-  "/323-d97db8a941dd55f0dba1.css",
+  "/323-d1aef978f7f588becc10.css",
   "/themes-seekAnz-5fff494d64baabdd84a9.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

@@ -93,10 +93,13 @@ const makeWebpackConfig = ({
   // deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
+  const nodeTarget = 'node 12';
+
   const webpackConfigs = [
     {
       name: 'client',
       mode: webpackMode,
+      target: `browserslist:${supportedBrowsers}`,
       entry: clientEntry,
       devtool: useSourceMaps ? sourceMapStyle : false,
       output: {
@@ -187,7 +190,7 @@ const makeWebpackConfig = ({
           include: internalInclude,
           compilePackages: paths.compilePackages,
           generateCSSTypes: isTypeScript,
-          supportedBrowsers,
+          browserslist: supportedBrowsers,
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
@@ -217,6 +220,7 @@ const makeWebpackConfig = ({
     {
       name: 'server',
       mode: webpackMode,
+      target: `browserslist:${nodeTarget}`,
       entry: serverEntry,
       externals: [
         {
@@ -289,7 +293,7 @@ const makeWebpackConfig = ({
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: [nodeTarget],
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,

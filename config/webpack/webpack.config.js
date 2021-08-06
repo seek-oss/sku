@@ -119,11 +119,13 @@ const makeWebpackConfig = ({
 
   const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
   const useSourceMaps = isDevServer || sourceMapsProd;
+  const nodeTarget = 'current node';
 
   const webpackConfigs = [
     {
       name: 'client',
       mode: webpackMode,
+      target: `browserslist:${supportedBrowsers}`,
       entry: {
         main: clientEntry,
       },
@@ -232,7 +234,7 @@ const makeWebpackConfig = ({
           hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: supportedBrowsers,
           mode: webpackMode,
           libraryName,
           generateCSSTypes: isTypeScript,
@@ -264,7 +266,9 @@ const makeWebpackConfig = ({
       name: 'render',
       mode: 'development',
       entry: { main: isLibrary ? libraryRenderEntry : renderEntry },
-      target: 'node',
+      // Target the currently running version of node as the
+      // render will run within the same process
+      target: `browserslist:${nodeTarget}`,
       externals: [
         // Don't bundle or transpile non-compiled packages
         nodeExternals({
@@ -315,7 +319,7 @@ const makeWebpackConfig = ({
           hot: false,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: [nodeTarget],
           mode: webpackMode,
           libraryName,
           displayNamesProd,

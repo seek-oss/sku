@@ -18,7 +18,7 @@ module.exports = ({
   target,
   isProductionBuild,
   libraryName,
-  supportedBrowsers,
+  browserslist,
   MiniCssExtractPlugin,
 }) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';
@@ -50,6 +50,6 @@ module.exports = ({
     outputLoaders: [MiniCssExtractPlugin.loader],
     localIdentName,
     themeIdentName,
-    browsers: supportedBrowsers,
+    browsers: browserslist,
   });
 };

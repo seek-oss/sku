@@ -21,7 +21,7 @@ const makeCssLoaders = (options = {}) => {
     isCI,
     isProductionBuild,
     MiniCssExtractPlugin,
-    supportedBrowsers,
+    browserslist,
     generateCSSTypes = false,
     packageName,
     compilePackage = false,
@@ -65,29 +65,36 @@ const makeCssLoaders = (options = {}) => {
         importLoaders: 3,
       },
     },
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        postcssOptions: {
-          plugins: [
-            require('autoprefixer')(supportedBrowsers),
-            // Minimize CSS on production builds
-            ...(isProductionBuild
-              ? [
-                  require('cssnano')({
-                    preset: [
-                      'default',
-                      {
-                        calc: false,
-                      },
-                    ],
+    ...(target === 'browser'
+      ? [
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer')({
+                    overrideBrowserslist: browserslist,
                   }),
-                ]
-              : []),
-          ],
-        },
-      },
-    },
+                  // Minimize CSS on production builds
+                  ...(isProductionBuild
+                    ? [
+                        require('cssnano')({
+                          preset: [
+                            'default',
+                            {
+                              calc: false,
+                            },
+                          ],
+                        }),
+                      ]
+                    : []),
+                ],
+              },
+            },
+          },
+        ]
+      : []),
+
     {
       loader: require.resolve('less-loader'),
     },
@@ -95,8 +102,7 @@ const makeCssLoaders = (options = {}) => {
 };
 
 const makeVanillaCssLoaders = (options = {}) => {
-  const { isProductionBuild, MiniCssExtractPlugin, supportedBrowsers } =
-    options;
+  const { isProductionBuild, MiniCssExtractPlugin, browserslist } = options;
 
   return [
     MiniCssExtractPlugin.loader,
@@ -111,7 +117,7 @@ const makeVanillaCssLoaders = (options = {}) => {
       options: {
         postcssOptions: {
           plugins: [
-            require('autoprefixer')(supportedBrowsers),
+            require('autoprefixer')({ overrideBrowserslist: browserslist }),
             // Minimize CSS on production builds
             ...(isProductionBuild
               ? [

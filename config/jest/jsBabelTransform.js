@@ -4,5 +4,9 @@ const { rootResolution } = require('../../context');
 const babelConfig = require('../babel/babelConfig');
 
 module.exports = babelJest.createTransformer(
-  babelConfig({ target: 'jest', rootResolution }),
+  babelConfig({
+    target: 'jest',
+    rootResolution,
+    browserslist: 'current node',
+  }),
 );

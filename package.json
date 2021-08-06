@@ -18,7 +18,6 @@
     "setup-test-hosts": "node test/utils/setupTestHosts",
     "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
-    "postinstall": "node ./scripts/postinstall.js",
     "release": "node ./deploy-docs.js && changeset publish"
   },
   "types": "./sku-types.d.ts",

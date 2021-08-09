@@ -42,7 +42,7 @@ module.exports = () =>
             target: 'browser',
             hot: false,
             generateCSSTypes: false,
-            browserslist: 'last 2 chrome versions',
+            browserslist: ['last 2 chrome versions'],
             mode: 'development',
             displayNamesProd: true,
             removeAssertionsInProduction: false,

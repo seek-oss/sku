@@ -17,7 +17,6 @@
 - [Extra features](./docs/extra-features.md)
 - **Design**
 - [Storybook](./docs/storybook.md)
-- [Playroom](./docs/playroom.md)
 - **Quality**
 - [Testing](./docs/testing.md)
 - [Linting/formatting](./docs/linting.md)

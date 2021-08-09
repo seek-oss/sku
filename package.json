@@ -133,7 +133,6 @@
     "node-html-parser": "^4.1.2",
     "open": "^7.3.1",
     "path-to-regexp": "^6.2.0",
-    "playroom": "^0.25.0",
     "postcss": "^8.3.6",
     "postcss-loader": "^6.1.1",
     "prettier": "^2.3.2",

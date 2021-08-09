@@ -129,20 +129,6 @@ const paths = {
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests),
   storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
-  playroomTarget: getPathFromCwd(skuConfig.playroomTarget),
-  playroomComponents: getPathFromCwd(skuConfig.playroomComponents),
-  playroomThemes: skuConfig.playroomThemes
-    ? getPathFromCwd(skuConfig.playroomThemes)
-    : null,
-  playroomSnippets: skuConfig.playroomSnippets
-    ? getPathFromCwd(skuConfig.playroomSnippets)
-    : null,
-  playroomFrameComponent: skuConfig.playroomFrameComponent
-    ? getPathFromCwd(skuConfig.playroomFrameComponent)
-    : null,
-  playroomScope: skuConfig.playroomScope
-    ? getPathFromCwd(skuConfig.playroomScope)
-    : null,
 };
 
 module.exports = {
@@ -174,12 +160,6 @@ module.exports = {
   supportedBrowsers: skuConfig.supportedBrowsers,
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
   displayNamesProd: Boolean(skuConfig.displayNamesProd),
-  playroom: {
-    port: skuConfig.playroomPort,
-    widths: skuConfig.playroomWidths,
-    title: skuConfig.playroomTitle,
-    paramType: skuConfig.playroomParamType,
-  },
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,

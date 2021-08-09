@@ -6,7 +6,7 @@ Remove `sku playroom` and `sku build-playroom`
 
 BREAKING CHANGE
 
-All playroom scripts have been removed in favour of consumers installing [playroom](https://github.com/seek-oss/playroom) directly. If you'd like to continue using playroom then you can use the [SkuWebpackPlugin](https://seek-oss.github.io/sku/#/./docs/legacy-builds). 
+All playroom scripts have been removed in favour of consumers installing [playroom](https://github.com/seek-oss/playroom) directly. If you'd like to continue using playroom then you can use the [SkuWebpackPlugin](https://seek-oss.github.io/sku/#/./docs/custom-builds). 
 
 
 Example config:

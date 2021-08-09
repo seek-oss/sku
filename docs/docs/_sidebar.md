@@ -5,7 +5,7 @@
 - [Static rendering](./docs/static-rendering.md)
 - [Server rendering](./docs/server-rendering.md)
 - [Libraries](./docs/libraries.md)
-- [Legacy builds](./docs/legacy-builds.md)
+- [Custom builds](./docs/custom-builds.md)
 - **Development**
 - [Building the app](./docs/building-the-app.md)
 - [Compilation](./docs/compilation.md)

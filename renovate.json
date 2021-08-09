@@ -30,7 +30,7 @@
     },
     {
       "groupName": "platform tools",
-      "packagePatterns": ["(browserslist|playroom|storybook)"],
+      "packagePatterns": ["(browserslist|storybook)"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },

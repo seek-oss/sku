@@ -45,9 +45,7 @@ log(`Starting script: ${script}`);
 
     case 'start':
     case 'start-ssr':
-    case 'playroom':
     case 'storybook':
-    case 'build-playroom':
     case 'build-storybook':
     case 'build':
     case 'build-ssr':

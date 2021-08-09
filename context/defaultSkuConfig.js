@@ -1,6 +1,5 @@
 const supportedBrowsers = require('browserslist-config-seek');
 const path = require('path');
-const isTypeScript = require('../lib/isTypeScript');
 const isCompilePackage = require('../lib/isCompilePackage');
 
 const defaultDecorator = (a) => a;
@@ -37,16 +36,6 @@ module.exports = {
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   supportedBrowsers,
-  playroomTarget: 'dist-playroom',
-  playroomWidths: [320, 768, 1024],
-  playroomComponents: `src/components/index.${isTypeScript ? 'ts' : 'js'}`,
-  playroomThemes: null,
-  playroomSnippets: null,
-  playroomFrameComponent: null,
-  playroomScope: null,
-  playroomTitle: null,
-  playroomPort: 8082,
-  playroomParamType: null,
   orderImports: false,
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],

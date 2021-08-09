@@ -33,5 +33,6 @@ module.exports = {
             MiniCssExtractPlugin,
         }),
     ]
+  })
 };
 ```

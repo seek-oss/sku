@@ -37,6 +37,7 @@ app.get('*', (...args) => {
   if (csp.enabled) {
     cspHandler = createCSPHandler({
       extraHosts: [publicPath, ...csp.extraHosts],
+      isDevelopment: env === 'development',
     });
   }
 

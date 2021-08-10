@@ -23,6 +23,7 @@ const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
+const getSourceMapSetting = require('./sourceMaps');
 
 const {
   paths,
@@ -31,7 +32,6 @@ const {
   polyfills,
   isLibrary,
   libraryName,
-  sourceMapsProd,
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
@@ -117,8 +117,6 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
-  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isDevServer || sourceMapsProd;
   const nodeTarget = 'current node';
 
   const webpackConfigs = [
@@ -129,7 +127,7 @@ const makeWebpackConfig = ({
       entry: {
         main: clientEntry,
       },
-      devtool: useSourceMaps ? sourceMapStyle : false,
+      devtool: getSourceMapSetting({ isDevServer }),
       output: {
         path: paths.target,
         publicPath: paths.publicPath,

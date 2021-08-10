@@ -211,7 +211,7 @@ SOURCE HTML: <!DOCTYPE html>
           content="width=device-width, initial-scale=1"
     >
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' http://localhost:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+          content="script-src 'self' http://localhost:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
     >
     <link data-chunk="main"
           rel="stylesheet"

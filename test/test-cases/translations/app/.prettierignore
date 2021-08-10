@@ -4,7 +4,6 @@ translations.ts
 **/*.vocab/index.ts
 *.less.d.ts
 coverage/
-dist-playroom/
 dist-ssr/
 dist-storybook/
 report/

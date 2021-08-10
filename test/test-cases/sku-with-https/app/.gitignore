@@ -3,7 +3,6 @@
 .prettierrc
 .ssl
 coverage/
-dist-playroom/
 dist-storybook/
 dist/
 report/

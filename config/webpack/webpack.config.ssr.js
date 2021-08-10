@@ -22,7 +22,6 @@ const {
   env,
   webpackDecorator,
   polyfills,
-  sourceMapsProd,
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
@@ -34,6 +33,7 @@ const {
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
+const getSourceMapSetting = require('./sourceMaps');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -83,9 +83,6 @@ const makeWebpackConfig = ({
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
 
-  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isDevServer || sourceMapsProd;
-
   const webpackStatsFilename = 'webpackStats.json';
 
   // The file mask is set to just name in start/dev mode as contenthash
@@ -101,7 +98,7 @@ const makeWebpackConfig = ({
       mode: webpackMode,
       target: `browserslist:${supportedBrowsers}`,
       entry: clientEntry,
-      devtool: useSourceMaps ? sourceMapStyle : false,
+      devtool: getSourceMapSetting({ isDevServer }),
       output: {
         path: paths.target,
         publicPath,

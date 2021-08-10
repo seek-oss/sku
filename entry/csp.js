@@ -9,7 +9,10 @@ const defaultBaseName = 'http://relative-url';
 const hashScriptContents = (scriptContents) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
-export default function createCSPHandler({ extraHosts = [] } = {}) {
+export default function createCSPHandler({
+  extraHosts = [],
+  isDevelopment = false,
+} = {}) {
   let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();
@@ -76,9 +79,15 @@ export default function createCSPHandler({ extraHosts = [] } = {}) {
       `'self'`,
       ...hosts.values(),
       ...inlineCspShas,
-    ].join(' ');
+    ];
 
-    return `<meta http-equiv="Content-Security-Policy" content="${scriptSrcPolicy};">`;
+    if (isDevelopment) {
+      scriptSrcPolicy.push(`'unsafe-eval'`);
+    }
+
+    return `<meta http-equiv="Content-Security-Policy" content="${scriptSrcPolicy.join(
+      ' ',
+    )};">`;
   };
 
   const handleHtml = (html) => {

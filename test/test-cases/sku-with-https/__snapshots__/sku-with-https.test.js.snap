@@ -121,7 +121,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-cdn.com;"
+          content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
     >
     <meta charset="UTF-8">
     <title>
@@ -236,7 +236,7 @@ SOURCE HTML: <!DOCTYPE html>
           content="width=device-width, initial-scale=1"
     >
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://localhost:9843 https://some-cdn.com;"
+          content="script-src 'self' https://localhost:9843 https://some-cdn.com 'unsafe-eval';"
     >
     <link data-chunk="main"
           rel="stylesheet"

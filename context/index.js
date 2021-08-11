@@ -113,6 +113,7 @@ if (devServerMiddleware && !useDevServerMiddleware) {
 }
 
 const paths = {
+  appSkuConfigPath,
   devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],

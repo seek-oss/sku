@@ -1,10 +1,11 @@
-const { persistentCache } = require('../../context');
+const { persistentCache, appSkuConfigPath } = require('../../context');
 
 module.exports = function getWebpackCacheSettings({ isDevServer }) {
   if (isDevServer) {
     if (persistentCache) {
       return {
         type: 'filesystem',
+        config: [appSkuConfigPath],
       };
     }
 

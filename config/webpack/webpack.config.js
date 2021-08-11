@@ -24,6 +24,7 @@ const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
+const getCacheSettings = require('./cache');
 
 const {
   paths,
@@ -141,6 +142,7 @@ const makeWebpackConfig = ({
             }
           : {}),
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -288,6 +290,7 @@ const makeWebpackConfig = ({
         library: 'static',
         libraryTarget: 'umd2',
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
       },

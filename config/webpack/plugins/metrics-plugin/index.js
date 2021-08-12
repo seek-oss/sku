@@ -1,7 +1,10 @@
 const { performance } = require('perf_hooks');
 const prettyMilliseconds = require('pretty-ms');
 const debug = require('debug')('sku:metrics');
+const chalk = require('chalk');
 
+const { persistentCache } = require('../../../../context');
+const banner = require('../../../../lib/banner');
 const track = require('../../../../telemetry');
 
 const smp = 'sku-metrics-plugin';
@@ -72,6 +75,32 @@ class MetricsPlugin {
           }
         }
       });
+
+      if (persistentCache) {
+        compilation.hooks.finishModules.tap(smp, () => {
+          const internalTreatFiles = Array.from(this.builtTreatFiles).filter(
+            (treatFile) => !treatFile.match(/node_modules/),
+          );
+
+          if (internalTreatFiles.length > 0) {
+            const treatFileNumMsg =
+              internalTreatFiles.length > 1
+                ? `${internalTreatFiles.length} treat files were`
+                : `A treat file was`;
+
+            banner(
+              'error',
+              `${treatFileNumMsg} detected within your project while using 'persistentCache' mode.`,
+              [
+                `Set '${chalk.bold(
+                  'persistentCache: false',
+                )}' in your sku.config.js until all treat files have been removed from the project.`,
+              ],
+            );
+            process.exit(1);
+          }
+        });
+      }
     });
   }
 }

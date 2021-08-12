@@ -34,6 +34,7 @@ const {
 const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
+const getCacheSettings = require('./cache');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -105,6 +106,7 @@ const makeWebpackConfig = ({
         filename: `${fileMask}.js`,
         chunkFilename: `${fileMask}.js`,
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -251,6 +253,7 @@ const makeWebpackConfig = ({
         library: 'server',
         libraryTarget: 'var',
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         emitOnErrors: isProductionBuild,

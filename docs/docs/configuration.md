@@ -209,6 +209,14 @@ type `string`
 
 The global name of the library. Will be added to the `window` object under `window[libraryName]`.
 
+## persistentCache
+
+type `boolean`
+
+Default: `true`
+
+Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
+
 ## polyfills
 
 type `Array<string>`

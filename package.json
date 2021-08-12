@@ -72,6 +72,7 @@
     "@storybook/builder-webpack5": "^6.3.6",
     "@storybook/manager-webpack5": "^6.3.6",
     "@storybook/react": "^6.3.4",
+    "@types/jest": "^27.0.0",
     "@types/loadable__component": "^5.13.1",
     "@vanilla-extract/babel-plugin": "^1.0.0",
     "@vanilla-extract/webpack-plugin": "^1.0.0",

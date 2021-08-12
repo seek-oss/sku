@@ -4,7 +4,7 @@
 
 Add persistentCache option and enable by default
 
-The new `persistentCache` option will turn on webpack's filesystem  caching between runs of `sku start` and `sku start-ssr`. This should result in much faster dev server start times when the cache is vaild. 
+The new `persistentCache` option will turn on webpack's filesystem caching between runs of `sku start` and `sku start-ssr`. This should result in much faster dev server start times when the cache is vaild. 
 
 BREAKING CHANGE
 

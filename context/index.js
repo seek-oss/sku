@@ -113,6 +113,7 @@ if (devServerMiddleware && !useDevServerMiddleware) {
 }
 
 const paths = {
+  appSkuConfigPath,
   devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
@@ -169,4 +170,5 @@ module.exports = {
   languages: normalizedLanguages,
   skipPackageCompatibilityCompilation:
     skuConfig.skipPackageCompatibilityCompilation,
+  persistentCache: skuConfig.persistentCache,
 };

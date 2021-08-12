@@ -3,4 +3,5 @@ module.exports = {
   renderEntry: 'src/render.js',
   libraryName: 'MyLibrary',
   port: 8082,
+  persistentCache: false,
 };

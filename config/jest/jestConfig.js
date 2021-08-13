@@ -4,6 +4,7 @@ const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages.map(escapeRegex).join('|');
 
 module.exports = {
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
   prettierPath: require.resolve('prettier'),
   testMatch: [

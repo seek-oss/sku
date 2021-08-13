@@ -18,6 +18,8 @@ const { getSuggestedScript } = require('../lib/suggestScript');
 const banner = require('../lib/banner');
 const trace = require('debug')('sku:init');
 
+const args = require('../config/args');
+
 (async () => {
   const projectName = args.argv[0];
 
@@ -190,11 +192,15 @@ const trace = require('debug')('sku:init');
   });
 
   const nextSteps = [
-    'Get started by running:',
     `${chalk.cyan('cd')} ${projectName}`,
     missingHosts.length > 0 ? chalk.cyan(setupHostScript) : null,
     `${chalk.cyan('yarn start')}`,
-  ].filter(Boolean);
+  ]
+    .filter(Boolean)
+    .join('\n');
 
-  banner('info', `${projectName} created`, nextSteps);
+  banner('info', `${projectName} created`, [
+    'Get started by running:',
+    nextSteps,
+  ]);
 })();

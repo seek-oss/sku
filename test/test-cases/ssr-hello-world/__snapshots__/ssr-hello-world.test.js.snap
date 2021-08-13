@@ -192,13 +192,13 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`ssr-hello-world start should start a development server 1`] = `
 SCRIPTS: Array [
-  "http://localhost:8100/runtime.js",
-  "http://localhost:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-7adaef.js",
-  "http://localhost:8100/main.js",
+  "http://127.0.0.1:8100/runtime.js",
+  "http://127.0.0.1:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-7adaef.js",
+  "http://127.0.0.1:8100/main.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: Array [
-  "http://localhost:8100/main.css",
+  "http://127.0.0.1:8100/main.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -211,7 +211,7 @@ SOURCE HTML: <!DOCTYPE html>
           content="width=device-width, initial-scale=1"
     >
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' http://localhost:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
+          content="script-src 'self' http://127.0.0.1:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -242,7 +242,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="lessStyles__nested____KPLLp3">
           Hello World
         </div>
-        <img src="http://localhost:8100/a85d2645cc4d80a20b5b.png">
+        <img src="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script src="scripts[3]">

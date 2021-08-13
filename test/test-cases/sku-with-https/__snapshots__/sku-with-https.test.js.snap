@@ -218,12 +218,12 @@ POST HYDRATE DIFFS:
 
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: Array [
-  "https://localhost:9843/runtime.js",
-  "https://localhost:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c4b506.js",
-  "https://localhost:9843/main.js",
+  "https://127.0.0.1:9843/runtime.js",
+  "https://127.0.0.1:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c4b506.js",
+  "https://127.0.0.1:9843/main.js",
 ]
 CSS: Array [
-  "https://localhost:9843/main.css",
+  "https://127.0.0.1:9843/main.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -236,7 +236,7 @@ SOURCE HTML: <!DOCTYPE html>
           content="width=device-width, initial-scale=1"
     >
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://localhost:9843 https://some-cdn.com 'unsafe-eval';"
+          content="script-src 'self' https://127.0.0.1:9843 https://some-cdn.com 'unsafe-eval';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -267,7 +267,7 @@ SOURCE HTML: <!DOCTYPE html>
         <div class="lessStyles__nested____KPLLp3">
           Initial
         </div>
-        <img src="https://localhost:9843/a85d2645cc4d80a20b5b.png">
+        <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -309,7 +309,7 @@ POST HYDRATE DIFFS:
 -          Initial
 +          Client
          </div>
-         <img src="https://localhost:9843/a85d2645cc4d80a20b5b.png">
+         <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
        </div>
 
 `;

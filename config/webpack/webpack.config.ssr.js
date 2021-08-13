@@ -75,7 +75,7 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
   const proto = httpsDevServer ? 'https' : 'http';
-  const clientServer = `${proto}://localhost:${clientPort}/`;
+  const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];

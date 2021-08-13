@@ -1,3 +1,3 @@
 export interface ClientContext {
-  site: string;
+  environment: 'development' | 'production';
 }

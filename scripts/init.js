@@ -2,7 +2,6 @@
 
 const chalk = require('chalk');
 const fs = require('fs-extra');
-const bent = require('bent');
 const path = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
@@ -16,12 +15,8 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const { getMissingHosts } = require('../lib/hosts');
 const { getSuggestedScript } = require('../lib/suggestScript');
+const banner = require('../lib/banner');
 const trace = require('debug')('sku:init');
-const { promptForBraidTheme } = require('../lib/prompts');
-
-const getFileContent = bent('string');
-
-const args = require('../config/args');
 
 (async () => {
   const projectName = args.argv[0];
@@ -133,34 +128,14 @@ const args = require('../config/args');
   fs.writeFileSync(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
-  const braidThemeFile = await getFileContent(
-    'https://raw.githubusercontent.com/seek-oss/braid-design-system/master/lib/themes/index.ts',
-  );
-
-  const braidThemes = braidThemeFile
-    .match(/default as (.*) }/g)
-    .map((themeMatch) => themeMatch.match(/default as (.*) }/))
-    .map(([_, themeName]) => themeName)
-    .sort();
-
   const useYarn = detectYarn();
 
   await kopy(path.join(__dirname, '../template'), root, {
-    prompts: [
-      {
-        name: 'sites',
-        type: 'checkbox',
-        message: promptForBraidTheme,
-        validate: (sites) =>
-          sites.length > 0 ? true : 'Please select at least one Braid theme',
-        choices: braidThemes,
-      },
-    ],
     move: {
       // Remove leading underscores from filenames:
       '_*': (filepath) => filepath.replace(/^_/, ''),
     },
-    data: (answers) => ({
+    data: () => ({
       appName,
       gettingStartedDocs: useYarn
         ? dedent`
@@ -184,15 +159,6 @@ const args = require('../config/args');
       lintScript: useYarn ? 'yarn lint' : 'npm run lint',
       formatScript: useYarn ? 'yarn format' : 'npm run format',
       buildScript: useYarn ? 'yarn build' : 'npm run build',
-      sites: answers.sites
-        .map((site) => {
-          if (site === 'seekAnz') {
-            return `{ name: 'seekAnz', host: 'dev.seek.com.au' }`;
-          }
-
-          return `{ name: '${site}', host: 'dev.${site.toLowerCase()}.com' }`;
-        })
-        .join(','),
     }),
   });
 
@@ -224,22 +190,11 @@ const args = require('../config/args');
   });
 
   const nextSteps = [
+    'Get started by running:',
     `${chalk.cyan('cd')} ${projectName}`,
     missingHosts.length > 0 ? chalk.cyan(setupHostScript) : null,
     `${chalk.cyan('yarn start')}`,
-  ]
-    .filter(Boolean)
-    .join('\n');
+  ].filter(Boolean);
 
-  console.log(dedent`
-    ---------------------------------------------------------------
-
-    ${chalk.blue(projectName)} created
-
-    Get started by running:
-
-    ${nextSteps}
-
-    ---------------------------------------------------------------
-  `);
+  banner('info', `${projectName} created`, nextSteps);
 })();

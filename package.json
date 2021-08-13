@@ -90,7 +90,6 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-treat": "^1.6.2",
     "babel-plugin-unassert": "^3.0.1",
-    "bent": "^7.3.12",
     "browserslist": "^4.16.1",
     "browserslist-config-seek": "^2.1.0",
     "chalk": "^4.1.0",

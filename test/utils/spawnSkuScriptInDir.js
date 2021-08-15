@@ -4,7 +4,7 @@ const skuBin = `${__dirname}/../../bin/sku.js`;
 
 module.exports = (script, cwd, args = [], options = {}) => {
   const childPromise = spawn(skuBin, [script, ...args], {
-    stdio: 'pipe',
+    stdio: 'ignore',
     cwd,
     env: process.env,
     // Elevates the buffer limit assigned to the child process.
@@ -14,10 +14,8 @@ module.exports = (script, cwd, args = [], options = {}) => {
     // See node v10: https://nodejs.org/docs/latest-v10.x/api/child_process.html#child_process_child_process_exec_command_options_callback
     // See node v12: https://nodejs.org/docs/latest-v12.x/api/child_process.html#child_process_child_process_exec_command_options_callback
     maxBuffer: 1024 * 1024,
+    ...options,
   });
-  if (options.pipeToParentIo) {
-    childPromise.childProcess.stdout.pipe(process.stdout);
-    childPromise.childProcess.stderr.pipe(process.stderr);
-  }
+
   return childPromise;
 };

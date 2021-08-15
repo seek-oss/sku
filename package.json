@@ -140,7 +140,6 @@
     "react-refresh": "^0.10.0",
     "react-treat": "^2.0.1",
     "rimraf": "^3.0.0",
-    "rmfr": "^2.0.0",
     "selfsigned": "^1.10.8",
     "semver": "^7.3.4",
     "serialize-javascript": "^5.0.1",

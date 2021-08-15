@@ -1,13 +1,14 @@
-const rmfr = require('rmfr');
+const { promisify } = require('util');
 const path = require('path');
+const rimraf = promisify(require('rimraf'));
 const spawnSkuScriptInDir = require('../../utils/spawnSkuScriptInDir');
 
-describe.skip('sku init', () => {
+describe('sku init', () => {
   it(
     'should create a sku.config.js',
     async () => {
       const projectName = 'new-project';
-      await rmfr(path.join(__dirname, projectName));
+      await rimraf(path.join(__dirname, projectName));
 
       const childPromise = spawnSkuScriptInDir('init', __dirname, [
         projectName,
@@ -27,19 +28,17 @@ describe.skip('sku init', () => {
       expect(skuConfig).toMatchInlineSnapshot(`
         Object {
           "clientEntry": "src/client.tsx",
+          "environments": Array [
+            "development",
+            "production",
+          ],
           "orderImports": true,
           "publicPath": "/path/to/public/assets/",
           "renderEntry": "src/render.tsx",
-          "sites": Array [
-            Object {
-              "host": "dev.apac.com",
-              "name": "apac",
-            },
-          ],
         }
-        `);
+      `);
     },
     // `sku init` is a long running task and can take some time to complete
-    200 * 1000,
+    150 * 1000,
   );
 });

@@ -85,7 +85,7 @@ export default () => ({
     res.end();
   },
   middleware: middleware,
-  onStart: app => {
+  onStart: (app) => {
     console.log('My app started 👯‍♀️!');
     app.keepAliveTimeout = 20000;
   },

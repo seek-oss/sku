@@ -1,5 +1,25 @@
 # sku
 
+## 10.14.2
+
+### Patch Changes
+
+- Fix incorrect "Invalid script passed to 'registerScript'" errors ([#614](https://github.com/seek-oss/sku/pull/614))
+
+## 10.14.1
+
+### Patch Changes
+
+- Fix static rendering of vanilla-extract classes in production ([#610](https://github.com/seek-oss/sku/pull/610))
+
+## 10.14.0
+
+### Minor Changes
+
+- Upgrade to Prettier 2.3 ([#606](https://github.com/seek-oss/sku/pull/606))
+
+  This will require consumers to run `yarn format` to adopt the new Prettier rules. To reduce the mismatch of prettier versions in the future we are unpinning sku's required version, allowing consumers to relock and accept minor and patch updates.
+
 ## 10.13.4
 
 ### Patch Changes

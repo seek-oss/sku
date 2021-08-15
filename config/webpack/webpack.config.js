@@ -291,6 +291,9 @@ const makeWebpackConfig = ({
         library: 'static',
         libraryTarget: 'umd2',
       },
+      optimization: {
+        nodeEnv: process.env.NODE_ENV,
+      },
       resolve: {
         extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: { __sku_alias__renderEntry: paths.renderEntry },

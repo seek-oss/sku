@@ -17,9 +17,8 @@ module.exports = {
   ],
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg)$': require.resolve(
-      './fileMock',
-    ),
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg)$':
+      require.resolve('./fileMock'),
 
     // Mock seek-style-guide and seek-asia-style-guide components
     // with a proxy object that echoes back the import name as a string,

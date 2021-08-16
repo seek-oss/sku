@@ -84,7 +84,7 @@ const hot = process.env.SKU_HOT !== 'false';
     static: [
       {
         directory: paths.public,
-        serveIndex: true,
+        serveIndex: false,
       },
     ],
     client: {

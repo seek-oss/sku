@@ -79,7 +79,7 @@ class MetricsPlugin {
       if (persistentCache) {
         compilation.hooks.finishModules.tap(smp, () => {
           const internalTreatFiles = Array.from(this.builtTreatFiles).filter(
-            (treatFile) => !treatFile.match(/node_modules/),
+            (treatFile) => !treatFile.match(/node_modules|braid-design-system/),
           );
 
           if (internalTreatFiles.length > 0) {

@@ -17,7 +17,7 @@ module.exports = () => {
       resolveJsonModule: true,
       noUnusedLocals: true,
       strict: true,
-      jsx: 'react-jsx',
+      jsx: 'preserve',
       lib: ['dom', 'es2015'],
       target: 'es5',
     },

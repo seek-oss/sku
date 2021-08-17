@@ -1,6 +1,6 @@
-# Legacy builds
+# Custom builds
 
-If your project has a custom [webpack](https://webpack.js.org) build that predates sku, you can use the `SkuWebpackPlugin` in your webpack config as part of your plugins array:
+If your project has a custom [webpack](https://webpack.js.org) build, you can use the `SkuWebpackPlugin` in your webpack config as part of your plugins array:
 
 ```js
 const SkuWebpackPlugin = require('sku/webpack-plugin');

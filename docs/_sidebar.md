@@ -5,7 +5,7 @@
 - [Static rendering](./docs/static-rendering.md)
 - [Server rendering](./docs/server-rendering.md)
 - [Libraries](./docs/libraries.md)
-- [Legacy builds](./docs/legacy-builds.md)
+- [Custom builds](./docs/custom-builds.md)
 - **Development**
 - [Building the app](./docs/building-the-app.md)
 - [Compilation](./docs/compilation.md)
@@ -17,7 +17,6 @@
 - [Extra features](./docs/extra-features.md)
 - **Design**
 - [Storybook](./docs/storybook.md)
-- [Playroom](./docs/playroom.md)
 - **Quality**
 - [Testing](./docs/testing.md)
 - [Linting/formatting](./docs/linting.md)

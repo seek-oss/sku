@@ -209,6 +209,14 @@ type `string`
 
 The global name of the library. Will be added to the `window` object under `window[libraryName]`.
 
+## persistentCache
+
+type `boolean`
+
+Default: `true`
+
+Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
+
 ## polyfills
 
 type `Array<string>`
@@ -352,83 +360,13 @@ Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
 
-## provideDefaultChromaticViewports
+## storybookAddons
 
-type: `boolean`
+type `Array<string>`
 
-Default: `true`
+Default: `[]`
 
-Configures whether a default set of viewports (`320` and `1200`) should be provided to all screenshots. If you'd like to manually configure Chromatic per story, set this to `false`.
-
-## playroomComponents
-
-type `string`
-
-Default: `src/components/index.{js|ts}`
-
-The file that exports all components available within Playroom.
-
-## playroomThemes
-
-type `string`
-
-The file that exports all themes available within Playroom.
-
-## playroomSnippets
-
-type `string`
-
-The file that exports all snippets available to Playroom.
-
-## playroomFrameComponent
-
-type `string`
-
-The file that exports a component that wraps each frame within Playroom.
-
-## playroomScope
-
-type `string`
-
-The file that exports a function that provides a custom scope object.
-
-## playroomWidths
-
-type `Array<number>`
-
-Default: `[320, 768, 1024]`
-
-The responsive widths for frames within Playroom.
-
-## playroomTitle
-
-type `string`
-
-The title of your Playroom.
-
-## playroomPort
-
-type `number`
-
-Default: `8082`
-
-The port to host Playroom on when running `sku playroom`.
-
-## playroomTarget
-
-type `string`
-
-Default: `dist-playroom`
-
-The directory `sku build-playroom` will output files to.
-
-## rootResolution
-
-type `boolean`
-
-Default: `true` (if `"skuCompilePackage": true` then `false`)
-
-Configures whether imports from the root of the repo are enabled.
+An array of storybook addons to use.
 
 ## supportedBrowsers
 

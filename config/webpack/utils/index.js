@@ -9,5 +9,4 @@ module.exports = {
   LESS: /\.less$/,
   IMAGE: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
   SVG: /\.svg$/,
-  DEPRECATED_CSS_IN_JS: /\.css\.js$/,
 };

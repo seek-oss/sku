@@ -11,7 +11,6 @@ if (process.env.NODE_ENV === 'development') {
     throw new Error(require('dedent')`
       The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrate. e.g.
 
-      import React from 'react';
       import { hydrate } from 'react-dom';
           
       import App from './App';

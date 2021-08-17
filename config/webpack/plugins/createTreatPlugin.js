@@ -1,4 +1,4 @@
-const TreatPlugin = require('treat/webpack-plugin');
+const { TreatPlugin } = require('treat/webpack-plugin');
 
 const braidThemes = [
   'apac',
@@ -17,11 +17,9 @@ const braidThemes = [
 module.exports = ({
   target,
   isProductionBuild,
-  include,
   libraryName,
-  supportedBrowsers,
+  browserslist,
   MiniCssExtractPlugin,
-  hot,
 }) => {
   const libraryPrefix = libraryName ? `${libraryName}_` : '';
 
@@ -47,23 +45,11 @@ module.exports = ({
   const themeIdentName = isProductionBuild ? prodThemeIdent : devThemeIdent;
 
   return new TreatPlugin({
-    test: {
-      test: /\.treat\.ts$/,
-      include,
-    },
+    test: /\.treat\.ts$/,
     outputCSS: target === 'browser',
-    outputLoaders: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          hmr: hot,
-          reloadAll: true,
-        },
-      },
-    ],
+    outputLoaders: [MiniCssExtractPlugin.loader],
     localIdentName,
     themeIdentName,
-    browsers: supportedBrowsers,
-    hmr: hot,
+    browsers: browserslist,
   });
 };

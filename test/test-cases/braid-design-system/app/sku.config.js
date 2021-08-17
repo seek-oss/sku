@@ -7,6 +7,7 @@ module.exports = {
   ],
   publicPath: '/',
   port: 8200,
+  persistentCache: false,
   dangerouslySetWebpackConfig: (config) => {
     if (config.name === 'render') {
       config.plugins.push(new ListExternalsPlugin());

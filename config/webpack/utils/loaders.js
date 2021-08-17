@@ -1,3 +1,5 @@
+const { extendDefaultPlugins } = require('svgo');
+
 /**
  * e.g.
  * seek-style-guide -> __SEEK_STYLE_GUIDE__
@@ -19,10 +21,9 @@ const makeCssLoaders = (options = {}) => {
     isCI,
     isProductionBuild,
     MiniCssExtractPlugin,
-    supportedBrowsers,
+    browserslist,
     generateCSSTypes = false,
     packageName,
-    hot = false,
     compilePackage = false,
   } = options;
 
@@ -48,16 +49,7 @@ const makeCssLoaders = (options = {}) => {
       : [];
 
   return [
-    ...(target === 'browser'
-      ? [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: hot,
-            },
-          },
-        ]
-      : []),
+    ...(target === 'browser' ? [MiniCssExtractPlugin.loader] : []),
     ...cssModuleToTypeScriptLoader,
     {
       loader: require.resolve('css-loader'),
@@ -73,27 +65,36 @@ const makeCssLoaders = (options = {}) => {
         importLoaders: 3,
       },
     },
-    {
-      loader: require.resolve('postcss-loader'),
-      options: {
-        plugins: () => [
-          require('autoprefixer')(supportedBrowsers),
-          // Minimize CSS on production builds
-          ...(isProductionBuild
-            ? [
-                require('cssnano')({
-                  preset: [
-                    'default',
-                    {
-                      calc: false,
-                    },
-                  ],
-                }),
-              ]
-            : []),
-        ],
-      },
-    },
+    ...(target === 'browser'
+      ? [
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer')({
+                    overrideBrowserslist: browserslist,
+                  }),
+                  // Minimize CSS on production builds
+                  ...(isProductionBuild
+                    ? [
+                        require('cssnano')({
+                          preset: [
+                            'default',
+                            {
+                              calc: false,
+                            },
+                          ],
+                        }),
+                      ]
+                    : []),
+                ],
+              },
+            },
+          },
+        ]
+      : []),
+
     {
       loader: require.resolve('less-loader'),
     },
@@ -101,20 +102,10 @@ const makeCssLoaders = (options = {}) => {
 };
 
 const makeVanillaCssLoaders = (options = {}) => {
-  const {
-    isProductionBuild,
-    MiniCssExtractPlugin,
-    supportedBrowsers,
-    hot = false,
-  } = options;
+  const { isProductionBuild, MiniCssExtractPlugin, browserslist } = options;
 
   return [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: hot,
-      },
-    },
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: {
@@ -124,39 +115,24 @@ const makeVanillaCssLoaders = (options = {}) => {
     {
       loader: require.resolve('postcss-loader'),
       options: {
-        plugins: () => [
-          require('autoprefixer')(supportedBrowsers),
-          // Minimize CSS on production builds
-          ...(isProductionBuild
-            ? [
-                require('cssnano')({
-                  preset: [
-                    'default',
-                    {
-                      calc: false,
-                    },
-                  ],
-                }),
-              ]
-            : []),
-        ],
-      },
-    },
-  ];
-};
-
-const makeImageLoaders = (options = {}) => {
-  const { target = 'browser' } = options;
-
-  return [
-    {
-      loader: require.resolve('url-loader'),
-      options: {
-        limit: 10000,
-        fallback: require.resolve('file-loader'),
-        // We only want to emit client assets during the client build.
-        // The server build should only emit server-side JS and HTML files.
-        emitFile: target === 'browser',
+        postcssOptions: {
+          plugins: [
+            require('autoprefixer')({ overrideBrowserslist: browserslist }),
+            // Minimize CSS on production builds
+            ...(isProductionBuild
+              ? [
+                  require('cssnano')({
+                    preset: [
+                      'default',
+                      {
+                        calc: false,
+                      },
+                    ],
+                  }),
+                ]
+              : []),
+          ],
+        },
       },
     },
   ];
@@ -164,21 +140,20 @@ const makeImageLoaders = (options = {}) => {
 
 const makeSvgLoaders = () => [
   {
-    loader: require.resolve('raw-loader'),
-  },
-  {
     loader: require.resolve('svgo-loader'),
     options: {
-      plugins: [
+      plugins: extendDefaultPlugins([
         {
-          addAttributesToSVGElement: {
-            attribute: 'focusable="false"',
+          name: 'addAttributesToSVGElement',
+          params: {
+            attributes: [{ focusable: false }],
           },
         },
         {
-          removeViewBox: false,
+          name: 'removeViewBox',
+          active: false,
         },
-      ],
+      ]),
     },
   },
 ];
@@ -187,6 +162,5 @@ module.exports = {
   makeJsLoaders,
   makeCssLoaders,
   makeVanillaCssLoaders,
-  makeImageLoaders,
   makeSvgLoaders,
 };

@@ -1,10 +1,15 @@
-import React from 'react';
 import App from './App';
 
-// Typically would be importing from 'sku/@storybook/...'
-import { storiesOf } from '../../../../../@storybook/react';
-import { text } from '../../../../../@storybook/addon-knobs';
+export default {
+  title: 'App',
+  component: App,
+  argTypes: {
+    text: {
+      label: 'Text',
+      type: { name: 'string', required: false },
+      defaultValue: 'Storybook render',
+    },
+  },
+};
 
-storiesOf('App', module).add('Default', () => (
-  <App>{text('Text', 'Storybook render')}</App>
-));
+export const Default = ({ text }) => <App>{text}</App>;

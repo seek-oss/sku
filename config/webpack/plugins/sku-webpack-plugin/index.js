@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const uniq = require('lodash/uniq');
 const defaultSupportedBrowsers = require('browserslist-config-seek');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
@@ -5,14 +6,12 @@ const {
   makeJsLoaders,
   makeCssLoaders,
   makeVanillaCssLoaders,
-  makeImageLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
   JAVASCRIPT,
   LESS,
   IMAGE,
   SVG,
-  DEPRECATED_CSS_IN_JS,
   resolvePackage,
 } = require('../../utils');
 const createTreatPlugin = require('../createTreatPlugin');
@@ -29,7 +28,7 @@ class SkuWebpackPlugin {
       include: [],
       hot: false,
       generateCSSTypes: false,
-      supportedBrowsers: defaultSupportedBrowsers,
+      browserslist: defaultSupportedBrowsers,
       compilePackages: [],
       rootResolution: false,
       ...options,
@@ -49,7 +48,7 @@ class SkuWebpackPlugin {
       target,
       hot,
       generateCSSTypes,
-      supportedBrowsers,
+      browserslist,
       mode = compiler.options.mode,
       libraryName,
       displayNamesProd,
@@ -70,7 +69,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              supportedBrowsers,
+              browserslist: ['current node'],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -81,7 +80,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target,
               lang: 'ts',
-              supportedBrowsers,
+              browserslist,
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
@@ -99,7 +98,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              supportedBrowsers,
+              browserslist: ['current node'],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -110,7 +109,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target,
               lang: 'js',
-              supportedBrowsers,
+              browserslist,
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
@@ -133,7 +132,7 @@ class SkuWebpackPlugin {
               packageName,
               hot,
               compilePackage: true,
-              supportedBrowsers,
+              browserslist,
             }),
           }))
           .concat({
@@ -146,7 +145,7 @@ class SkuWebpackPlugin {
               MiniCssExtractPlugin,
               hot,
               compilePackage: false,
-              supportedBrowsers,
+              browserslist,
             }),
           }),
       },
@@ -157,48 +156,65 @@ class SkuWebpackPlugin {
           isProductionBuild,
           MiniCssExtractPlugin,
           hot,
-          supportedBrowsers,
+          browserslist,
         }),
       },
       {
         test: IMAGE,
         include: this.include,
-        use: makeImageLoaders({ target }),
+        type: 'asset',
+        generator: {
+          emit: target === 'browser',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10000,
+          },
+        },
       },
       {
         test: SVG,
         include: this.include,
+        type: 'asset/source',
         use: makeSvgLoaders(),
-      },
-      {
-        test: DEPRECATED_CSS_IN_JS,
-        include: this.include,
-        use: require.resolve('../deprecatedCssInJsFileLoader'),
       },
     ];
 
     compiler.options.module.rules.push(...rules);
 
-    if (!compiler.options.resolve.extensions.includes('.ts')) {
-      compiler.options.resolve.extensions.push('.ts');
-    }
+    if (!compiler.options.resolve.extensions) {
+      compiler.options.resolve.extensions = [
+        '.mjs',
+        '.js',
+        '.json',
+        '.ts',
+        '.tsx',
+      ];
+    } else {
+      if (!compiler.options.resolve.extensions.includes('.ts')) {
+        compiler.options.resolve.extensions.push('.ts');
+      }
 
-    if (!compiler.options.resolve.extensions.includes('.tsx')) {
-      compiler.options.resolve.extensions.push('.tsx');
+      if (!compiler.options.resolve.extensions.includes('.tsx')) {
+        compiler.options.resolve.extensions.push('.tsx');
+      }
     }
 
     createTreatPlugin({
       target,
       isProductionBuild,
-      include: this.include,
       libraryName,
-      supportedBrowsers,
+      browserslist,
       MiniCssExtractPlugin,
-      hot,
     }).apply(compiler);
 
     if (target === 'browser') {
       new VanillaExtractPlugin().apply(compiler);
+
+      // Fixes an issue with the "assert" package used by braid referencing process
+      new webpack.DefinePlugin({
+        'process.env.NODE_DEBUG': JSON.stringify(false),
+      }).apply(compiler);
     }
   }
 }

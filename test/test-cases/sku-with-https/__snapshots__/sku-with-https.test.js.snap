@@ -2,12 +2,12 @@
 
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: Array [
-  "/runtime-65345ce7e7d7d2dcf37c.js",
-  "/vendors~main-c3d070e2e5c4463a331d.js",
-  "/main-5af263bd9d40109121f8.js",
+  "/runtime-d2beb64170da59323a1a.js",
+  "/702-566a1d676e441cb584c7.js",
+  "/main-42fb52561e84558cb5a3.js",
 ]
 CSS: Array [
-  "/main-3d394153f1fe77316782.css",
+  "/main-9c6bd518e9e408ef2fe1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -44,13 +44,13 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="_1dMllru"
+      <div class="lE4bKpu"
            data-reactroot
       >
-        <div class="pRp9RFx">
-          Hello World
+        <div class="_KPLLp3">
+          Initial
         </div>
-        <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -80,7 +80,16 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+            data-reactroot
+       >
+         <div class="_KPLLp3">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+
 `;
 
 exports[`sku-with-https serve should support the supplied middleware 1`] = `
@@ -102,8 +111,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors~devServerOnly~main.js",
-  "/vendors~main.js",
+  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-b7d687.js",
   "/main.js",
 ]
 CSS: Array [
@@ -113,7 +121,7 @@ SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-cdn.com;"
+          content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
     >
     <meta charset="UTF-8">
     <title>
@@ -141,21 +149,16 @@ SOURCE HTML: <!DOCTYPE html>
           as="script"
           href="scripts[2]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-    >
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1dMllru"
+      <div class="lessStyles__root___lE4bKpu"
            data-reactroot
       >
-        <div class="lessStyles__nested___pRp9RFx">
-          Hello World
+        <div class="lessStyles__nested____KPLLp3">
+          Initial
         </div>
-        <img src="/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -183,14 +186,18 @@ SOURCE HTML: <!DOCTYPE html>
             src="scripts[2]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[3]"
-    >
-    </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+            data-reactroot
+       >
+         <div class="lessStyles__nested____KPLLp3">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+
 `;
 
 exports[`sku-with-https start should support the supplied middleware 1`] = `
@@ -211,12 +218,12 @@ POST HYDRATE DIFFS:
 
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: Array [
-  "https://localhost:9843/runtime.js",
-  "https://localhost:9843/vendors~main.js",
-  "https://localhost:9843/main.js",
+  "https://127.0.0.1:9843/runtime.js",
+  "https://127.0.0.1:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c4b506.js",
+  "https://127.0.0.1:9843/main.js",
 ]
 CSS: Array [
-  "https://localhost:9843/main.css",
+  "https://127.0.0.1:9843/main.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -229,7 +236,7 @@ SOURCE HTML: <!DOCTYPE html>
           content="width=device-width, initial-scale=1"
     >
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://localhost:9843 https://some-cdn.com;"
+          content="script-src 'self' https://127.0.0.1:9843 https://some-cdn.com 'unsafe-eval';"
     >
     <link data-chunk="main"
           rel="stylesheet"
@@ -256,11 +263,11 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___1dMllru">
-        <div class="lessStyles__nested___pRp9RFx">
-          Hello World
+      <div class="lessStyles__root___lE4bKpu">
+        <div class="lessStyles__nested____KPLLp3">
+          Initial
         </div>
-        <img src="https://localhost:9843/a85d2645cc4d80a20b5ba78e8e797449.png">
+        <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -295,5 +302,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+     <div id="app">
+       <div class="lessStyles__root___lE4bKpu">
+         <div class="lessStyles__nested____KPLLp3">
+-          Initial
++          Client
+         </div>
+         <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
+       </div>
+
 `;

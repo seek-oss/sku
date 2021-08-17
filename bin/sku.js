@@ -34,7 +34,6 @@ log(`Starting script: ${script}`);
     }
 
     case 'test':
-    case 'test-ssr':
     case 'lint':
     case 'format':
     case 'pre-commit':
@@ -46,13 +45,10 @@ log(`Starting script: ${script}`);
 
     case 'start':
     case 'start-ssr':
-    case 'playroom':
     case 'storybook':
-    case 'build-playroom':
     case 'build-storybook':
     case 'build':
     case 'build-ssr':
-    case 'chromatic':
     case 'serve': {
       await configureProject();
 

@@ -2,9 +2,9 @@
 
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: Array [
-  "/some-static-place/runtime-48d981f574904a02b04d.js",
-  "/some-static-place/vendors~main-0ed67bd87d9bf72015eb.js",
-  "/some-static-place/main-666cf2edc4c169627303.js",
+  "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
+  "/some-static-place/75-aa0e8f456f67ee34e06f.js",
+  "/some-static-place/main-c3a180251298092f0d76.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -71,10 +71,11 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 Object {
+  "75-aa0e8f456f67ee34e06f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: Array [
-    "/some-static-place/runtime-48d981f574904a02b04d.js",
-    "/some-static-place/vendors~main-0ed67bd87d9bf72015eb.js",
-    "/some-static-place/main-666cf2edc4c169627303.js",
+    "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
+    "/some-static-place/75-aa0e8f456f67ee34e06f.js",
+    "/some-static-place/main-c3a180251298092f0d76.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -136,17 +137,15 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-666cf2edc4c169627303.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-48d981f574904a02b04d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vendors~main-0ed67bd87d9bf72015eb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c3a180251298092f0d76.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-d71e61b408567c9bf4a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`custom-src-paths start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors~devServerOnly~main.js",
-  "/vendors~main.js",
+  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c83f94.js",
   "/main.js",
 ]
 CSS: Array []
@@ -174,11 +173,6 @@ SOURCE HTML: <!DOCTYPE html>
           rel="preload"
           as="script"
           href="scripts[2]"
-    >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
     >
   </head>
   <body>
@@ -210,11 +204,6 @@ SOURCE HTML: <!DOCTYPE html>
     <script async
             data-chunk="main"
             src="scripts[2]"
-    >
-    </script>
-    <script async
-            data-chunk="main"
-            src="scripts[3]"
     >
     </script>
   </body>

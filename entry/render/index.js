@@ -71,6 +71,7 @@ export default async (renderParams) => {
   if (csp.enabled) {
     const cspHandler = createCSPHandler({
       extraHosts: [publicPath, ...csp.extraHosts],
+      isDevelopment: process.env.NODE_ENV === 'development',
     });
 
     return cspHandler.handleHtml(result);

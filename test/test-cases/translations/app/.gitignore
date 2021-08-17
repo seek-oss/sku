@@ -5,9 +5,8 @@
 .eslintrc
 .prettierrc
 coverage/
-dist-playroom/
+dist-ssr/
 dist-storybook/
-dist/
 report/
 tsconfig.json
 # end managed by sku

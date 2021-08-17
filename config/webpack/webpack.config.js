@@ -5,6 +5,7 @@ const lodash = require('lodash');
 const path = require('path');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const args = require('../args');
 const config = require('../../context');
@@ -14,7 +15,6 @@ const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const utils = require('./utils');
-const debug = require('debug')('sku:webpack:config');
 const { cwd } = require('../../lib/cwd');
 const isTypeScript = require('../../lib/isTypeScript');
 
@@ -22,6 +22,9 @@ const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const { getVocabConfig } = require('../vocab/vocab');
+const statsConfig = require('./statsConfig');
+const getSourceMapSetting = require('./sourceMaps');
+const getCacheSettings = require('./cache');
 
 const {
   paths,
@@ -30,7 +33,6 @@ const {
   polyfills,
   isLibrary,
   libraryName,
-  sourceMapsProd,
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
@@ -81,17 +83,9 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
-  const devServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?http://localhost:${port}/`,
-  ];
-
   const skuClientEntry = require.resolve('../../entry/client/index.js');
 
-  const createEntry = (entry) => [
-    ...resolvedPolyfills,
-    ...(isDevServer ? devServerEntries : []),
-    entry,
-  ];
+  const createEntry = (entry) => [...resolvedPolyfills, entry];
 
   // Add polyfills and dev server client to all entries
   const clientEntry = isLibrary
@@ -124,20 +118,17 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
-  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isDevServer || sourceMapsProd;
+  const nodeTarget = 'current node';
 
   const webpackConfigs = [
     {
       name: 'client',
       mode: webpackMode,
+      target: `browserslist:${supportedBrowsers}`,
       entry: {
         main: clientEntry,
-        ...(isDevServer && !isLibrary
-          ? { devServerOnly: devServerEntries }
-          : {}),
       },
-      devtool: useSourceMaps ? sourceMapStyle : false,
+      devtool: getSourceMapSetting({ isDevServer }),
       output: {
         path: paths.target,
         publicPath: paths.publicPath,
@@ -151,9 +142,14 @@ const makeWebpackConfig = ({
             }
           : {}),
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
+        // The 'TerserPlugin' is actually the default minimizer for webpack
+        // We add a custom one to ensure licence comments stay inside the final JS assets
+        // Without this a '*.js.LICENSE.txt' file would be created alongside
+        minimizer: [new TerserPlugin({ extractComments: false })],
         concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {
@@ -161,9 +157,9 @@ const makeWebpackConfig = ({
               runtimeChunk: { name: 'runtime' },
             }
           : {}),
+        emitOnErrors: isProductionBuild,
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: { __sku_alias__clientEntry: paths.clientEntry },
       },
       module: {
@@ -176,13 +172,11 @@ const makeWebpackConfig = ({
                   exclude: [
                     ...internalInclude,
                     /**
-                     * - Playroom source is managed by its own webpack config
                      * - Prevent running `react-dom` & `react` as they already meet our browser support policy
                      */
                     ...[
                       ...paths.compilePackages,
                       ...skipPackageCompatibilityCompilation,
-                      'playroom',
                       'react-dom',
                       'react',
                     ].map((packageName) => {
@@ -224,21 +218,11 @@ const makeWebpackConfig = ({
           ? []
           : [bundleAnalyzerPlugin({ name: 'client' })]),
         new webpack.DefinePlugin(envVars),
-        ...(isDevServer
-          ? [
-              new webpack.DefinePlugin({
-                __SKU_CLIENT_PATH__: JSON.stringify(
-                  path.relative(cwd(), paths.clientEntry),
-                ),
-              }),
-            ]
-          : []),
-        ...(hot
-          ? [
-              new webpack.HotModuleReplacementPlugin(),
-              new ReactRefreshWebpackPlugin(),
-            ]
-          : []),
+        new webpack.DefinePlugin({
+          __SKU_CLIENT_PATH__: JSON.stringify(
+            path.relative(cwd(), paths.clientEntry),
+          ),
+        }),
         new MiniCssExtractPlugin({
           filename: cssFileMask,
           chunkFilename: cssChunkFileMask,
@@ -248,7 +232,7 @@ const makeWebpackConfig = ({
           hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: supportedBrowsers,
           mode: webpackMode,
           libraryName,
           generateCSSTypes: isTypeScript,
@@ -257,21 +241,36 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
           rootResolution,
         }),
+        ...(hot
+          ? [
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockPath: '/ws',
+                },
+              }),
+            ]
+          : []),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
+      stats: statsConfig,
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
     {
       name: 'render',
       mode: 'development',
       entry: { main: isLibrary ? libraryRenderEntry : renderEntry },
-      target: 'node',
+      // Target the currently running version of node as the
+      // render will run within the same process
+      target: `browserslist:${nodeTarget}`,
       externals: [
         // Don't bundle or transpile non-compiled packages
         nodeExternals({
-          whitelist: [
+          allowlist: [
             'classnames', // Workaround for https://github.com/JedWatson/classnames/issues/240
 
             // webpack-node-externals compares the `import` or `require` expression to this list,
@@ -291,11 +290,11 @@ const makeWebpackConfig = ({
         library: 'static',
         libraryTarget: 'umd2',
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
       },
       resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
         alias: { __sku_alias__renderEntry: paths.renderEntry },
       },
       module: {
@@ -319,7 +318,7 @@ const makeWebpackConfig = ({
           hot: false,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: [nodeTarget],
           mode: webpackMode,
           libraryName,
           displayNamesProd,
@@ -331,10 +330,11 @@ const makeWebpackConfig = ({
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]
           : []),
       ],
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
   ].map(webpackDecorator);
-
-  debug(JSON.stringify(webpackConfigs));
 
   return webpackConfigs;
 };

@@ -7,10 +7,11 @@ const startAssetServer = require('../../utils/assetServer');
 const gracefulSpawn = require('../../../lib/gracefulSpawn');
 const appDir = path.resolve(__dirname, 'app');
 const distDir = path.resolve(appDir, 'dist');
-const srcDir = path.resolve(appDir, 'src');
-const skuConfig = require('./app/sku.config');
 
-const backendUrl = `http://localhost:${skuConfig.serverPort}`;
+const srcDir = path.resolve(appDir, 'src');
+const ssrSkuConfig = require('./app/sku-ssr.config');
+
+const backendUrl = `http://localhost:${ssrSkuConfig.serverPort}`;
 const cssTypes = ['.less.d.ts'];
 
 describe('typescript-css-modules', () => {
@@ -47,7 +48,9 @@ describe('typescript-css-modules', () => {
     let server, closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', appDir);
+      await runSkuScriptInDir('build-ssr', appDir, [
+        '--config=sku-ssr.config.js',
+      ]);
       server = gracefulSpawn('node', ['server'], {
         cwd: distDir,
         stdio: 'inherit',

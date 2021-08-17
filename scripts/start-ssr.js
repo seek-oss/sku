@@ -1,26 +1,32 @@
 process.env.NODE_ENV = 'development';
 
+const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { once } = require('lodash');
+const onDeath = require('death');
 const { blue, underline } = require('chalk');
+const debug = require('debug')('sku:start');
 
-const { watch } = require('../lib/runWebpack');
 const getCertificate = require('../lib/certificate');
 const {
   copyPublicFiles,
   ensureTargetDirectory,
+  cleanTargetDirectory,
 } = require('../lib/buildFileUtils');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const { port, initialPath, paths, httpsDevServer } = require('../context');
 const makeWebpackConfig = require('../config/webpack/webpack.config.ssr');
+const statsConfig = require('../config/webpack/statsConfig');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
+const createServerManager = require('../lib/serverManager');
 
 const { watchVocabCompile } = require('../lib/runVocab');
 
 const hot = process.env.SKU_HOT !== 'false';
 
+const pluginName = 'sku-start-ssr';
 const localhost = '0.0.0.0';
 
 (async () => {
@@ -49,9 +55,15 @@ const localhost = '0.0.0.0';
 
   // Make sure target directory exists before starting
   ensureTargetDirectory();
+  await cleanTargetDirectory();
+  await copyPublicFiles();
 
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
+
+  const serverManager = createServerManager(
+    path.join(paths.target, 'server.js'),
+  );
 
   const proto = httpsDevServer ? 'https' : 'http';
 
@@ -69,48 +81,58 @@ const localhost = '0.0.0.0';
   );
   console.log();
 
-  // Starts the server webpack config running.
-  // We only want to do this once as it runs in watch mode
-  const startServerWatch = once(async () => {
-    try {
-      console.log('Start server compile');
+  const onServerDone = once((err, stats) => {
+    if (err) {
+      console.error(err);
+    }
 
-      await copyPublicFiles();
-      await watch(serverCompiler);
+    console.log(stats.toString(statsConfig));
 
-      openBrowser(serverUrl);
-    } catch (e) {
-      console.log(e);
-
+    if (err || stats.hasErrors()) {
       process.exit(1);
     }
+
+    serverManager.start();
+
+    openBrowser(serverUrl);
+  });
+
+  // Starts the server webpack config running.
+  // We only want to do this once as it runs in watch mode
+  const startServerWatch = once(() => {
+    serverCompiler.watch({}, onServerDone);
   });
 
   // Make sure the client webpack config is complete before
   // starting the server build. The server relies on the client assets.
-  clientCompiler.hooks.afterEmit.tap('sku start-ssr', () => {
+  clientCompiler.hooks.afterEmit.tap(pluginName, () => {
     startServerWatch();
   });
 
+  serverCompiler.hooks.done.tap(pluginName, () => {
+    serverManager.hotUpdate();
+  });
+
   const devServerConfig = {
-    contentBase: paths.public,
-    publicPath: paths.publicPath,
     host: appHosts[0],
-    historyApiFallback: true,
-    overlay: true,
-    stats: 'errors-only',
     allowedHosts: appHosts,
     hot,
     headers: { 'Access-Control-Allow-Origin': '*' },
-    sockPort: clientPort,
-    clientLogLevel: 'warn',
+    client: {
+      overlay: false,
+      webSocketURL: {
+        hostname: appHosts[0],
+        port: clientPort,
+      },
+    },
   };
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = true;
-    devServerConfig.key = pems;
-    devServerConfig.cert = pems;
+    devServerConfig.https = {
+      key: pems,
+      cert: pems,
+    };
   }
 
   // Start webpack dev server using only the client config
@@ -121,5 +143,16 @@ const localhost = '0.0.0.0';
       console.log(err);
       return;
     }
+  });
+
+  onDeath(() => {
+    serverManager.kill();
+
+    devServer.close(() => {
+      debug('Webpack dev server closed');
+    });
+    serverCompiler.close(() => {
+      debug('Server compiler closed');
+    });
   });
 })();

@@ -2,10 +2,10 @@
 
 exports[`ssr translations should render en 1`] = `
 SCRIPTS: Array [
-  "http://localhost:8313/runtime.js",
-  "http://localhost:8313/vendors~main.js",
-  "http://localhost:8313/main.js",
-  "http://localhost:8313/en-translations.js",
+  "http://127.0.0.1:8313/runtime.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-ac261c.js",
+  "http://127.0.0.1:8313/main.js",
+  "http://127.0.0.1:8313/en-translations.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -92,10 +92,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`ssr translations should render fr 1`] = `
 SCRIPTS: Array [
-  "http://localhost:8313/runtime.js",
-  "http://localhost:8313/vendors~main.js",
-  "http://localhost:8313/main.js",
-  "http://localhost:8313/fr-translations.js",
+  "http://127.0.0.1:8313/runtime.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-ac261c.js",
+  "http://127.0.0.1:8313/main.js",
+  "http://127.0.0.1:8313/fr-translations.js",
 ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>

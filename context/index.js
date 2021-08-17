@@ -113,6 +113,7 @@ if (devServerMiddleware && !useDevServerMiddleware) {
 }
 
 const paths = {
+  appSkuConfigPath,
   devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
@@ -129,20 +130,6 @@ const paths = {
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests),
   storybookTarget: getPathFromCwd(skuConfig.storybookTarget),
-  playroomTarget: getPathFromCwd(skuConfig.playroomTarget),
-  playroomComponents: getPathFromCwd(skuConfig.playroomComponents),
-  playroomThemes: skuConfig.playroomThemes
-    ? getPathFromCwd(skuConfig.playroomThemes)
-    : null,
-  playroomSnippets: skuConfig.playroomSnippets
-    ? getPathFromCwd(skuConfig.playroomSnippets)
-    : null,
-  playroomFrameComponent: skuConfig.playroomFrameComponent
-    ? getPathFromCwd(skuConfig.playroomFrameComponent)
-    : null,
-  playroomScope: skuConfig.playroomScope
-    ? getPathFromCwd(skuConfig.playroomScope)
-    : null,
 };
 
 module.exports = {
@@ -158,7 +145,7 @@ module.exports = {
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
   storybookTarget: skuConfig.storybookTarget,
-  provideDefaultChromaticViewports: skuConfig.provideDefaultChromaticViewports,
+  storybookAddons: skuConfig.storybookAddons,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
@@ -174,12 +161,6 @@ module.exports = {
   supportedBrowsers: skuConfig.supportedBrowsers,
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
   displayNamesProd: Boolean(skuConfig.displayNamesProd),
-  playroom: {
-    port: skuConfig.playroomPort,
-    widths: skuConfig.playroomWidths,
-    title: skuConfig.playroomTitle,
-    paramType: skuConfig.playroomParamType,
-  },
   orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
@@ -189,4 +170,5 @@ module.exports = {
   languages: normalizedLanguages,
   skipPackageCompatibilityCompilation:
     skuConfig.skipPackageCompatibilityCompilation,
+  persistentCache: skuConfig.persistentCache,
 };

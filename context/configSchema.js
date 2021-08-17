@@ -109,8 +109,9 @@ module.exports = validator.compile({
   storybookTarget: {
     type: 'string',
   },
-  provideDefaultChromaticViewports: {
-    type: 'boolean',
+  storybookAddons: {
+    type: 'array',
+    items: 'string',
   },
   target: {
     type: 'string',
@@ -165,26 +166,6 @@ module.exports = validator.compile({
   displayNamesProd: {
     type: 'boolean',
   },
-  playroomComponents: { type: 'string' },
-  playroomThemes: { type: 'string', optional: true },
-  playroomSnippets: { type: 'string', optional: true },
-  playroomFrameComponent: { type: 'string', optional: true },
-  playroomScope: { type: 'string', optional: true },
-  playroomTarget: { type: 'string', optional: true },
-  playroomWidths: {
-    type: 'array',
-    items: {
-      type: 'number',
-    },
-    optional: true,
-  },
-  playroomPort: { type: 'number', optional: true },
-  playroomTitle: { type: 'string', optional: true },
-  playroomParamType: {
-    type: 'enum',
-    values: ['search', 'hash'],
-    optional: true,
-  },
   orderImports: { type: 'boolean' },
   cspEnabled: { type: 'boolean' },
   cspExtraScriptSrcHosts: {
@@ -205,5 +186,8 @@ module.exports = validator.compile({
   skipPackageCompatibilityCompilation: {
     type: 'array',
     items: { type: 'string' },
+  },
+  persistentCache: {
+    type: 'boolean',
   },
 });

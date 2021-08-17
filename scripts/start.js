@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
 
-const { watch } = require('../lib/runWebpack');
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
 const openBrowser = require('../lib/openBrowser');
@@ -18,10 +17,10 @@ const {
   paths,
   routes,
   sites,
-  isLibrary,
   httpsDevServer,
   useDevServerMiddleware,
 } = require('../context');
+const statsConfig = require('../config/webpack/statsConfig');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
 const makeWebpackConfig = require('../config/webpack/webpack.config');
 const getCertificate = require('../lib/certificate');
@@ -65,32 +64,45 @@ const hot = process.env.SKU_HOT !== 'false';
 
   await checkHosts();
 
-  watch(renderCompiler);
+  renderCompiler.watch({}, (err, stats) => {
+    if (err) {
+      console.error(err);
+    }
+
+    console.log(stats.toString(statsConfig));
+  });
 
   const appHosts = getAppHosts();
 
   const devServerConfig = {
-    contentBase: paths.public,
-    publicPath: paths.publicPath,
+    devMiddleware: {
+      publicPath: paths.publicPath,
+    },
     host: appHosts[0],
-    overlay: true,
-    stats: 'errors-only',
     allowedHosts: appHosts,
-    serveIndex: false,
     hot,
-    clientLogLevel: 'warn',
+    static: [
+      {
+        directory: paths.public,
+        serveIndex: false,
+      },
+    ],
+    client: {
+      overlay: false,
+    },
   };
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = true;
-    devServerConfig.key = pems;
-    devServerConfig.cert = pems;
+    devServerConfig.https = {
+      key: pems,
+      cert: pems,
+    };
   }
 
   const devServer = new WebpackDevServer(clientCompiler, {
     ...devServerConfig,
-    after: (app) => {
+    onAfterSetupMiddleware: ({ app }) => {
       if (useDevServerMiddleware) {
         const devServerMiddleware = require(paths.devServerMiddleware);
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {
@@ -139,23 +151,12 @@ const hot = process.env.SKU_HOT !== 'false';
           })
           .then((html) => res.send(html))
           .catch((renderError) => {
-            let devServerScripts = [];
-
-            if (renderError.webpackStats && !isLibrary) {
-              const webpackStats = renderError.webpackStats.toJson();
-
-              devServerScripts =
-                webpackStats.entrypoints.devServerOnly.assets.map(
-                  (asset) => `<script src="/${asset}"></script>`,
-                );
-            }
-
             res.status(500).send(
               exceptionFormatter(renderError, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
-              }).concat(...devServerScripts),
+              }),
             );
           });
       });

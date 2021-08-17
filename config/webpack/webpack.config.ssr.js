@@ -4,15 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const lodash = require('lodash');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
-const StartServerPlugin = require('start-server-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
-const debug = require('debug')('sku:webpack:config');
 const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
@@ -23,7 +22,6 @@ const {
   env,
   webpackDecorator,
   polyfills,
-  sourceMapsProd,
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
@@ -34,6 +32,9 @@ const {
   skipPackageCompatibilityCompilation,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
+const statsConfig = require('./statsConfig');
+const getSourceMapSetting = require('./sourceMaps');
+const getCacheSettings = require('./cache');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -74,27 +75,14 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
   const proto = httpsDevServer ? 'https' : 'http';
-  const clientServer = `${proto}://localhost:${clientPort}/`;
+  const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
-  const clientDevServerEntries = [
-    `${require.resolve('webpack-dev-server/client')}?${clientServer}`,
-  ];
+  // Add polyfills to all entries
+  const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
-  // Add polyfills and dev server client to all entries
-  const clientEntry = isDevServer
-    ? [...resolvedPolyfills, ...clientDevServerEntries, paths.clientEntry]
-    : [...resolvedPolyfills, paths.clientEntry];
-
-  const skuServerEntry = require.resolve('../../entry/server/index.js');
-
-  const serverEntry = isDevServer
-    ? [`${require.resolve('webpack/hot/poll')}?1000`, skuServerEntry]
-    : [skuServerEntry];
+  const serverEntry = require.resolve('../../entry/server/index.js');
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
-
-  const sourceMapStyle = isDevServer ? 'inline-source-map' : 'source-map';
-  const useSourceMaps = isDevServer || sourceMapsProd;
 
   const webpackStatsFilename = 'webpackStats.json';
 
@@ -103,21 +91,29 @@ const makeWebpackConfig = ({
   // deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
+  const nodeTarget = 'node 12';
+
   const webpackConfigs = [
     {
       name: 'client',
       mode: webpackMode,
+      target: `browserslist:${supportedBrowsers}`,
       entry: clientEntry,
-      devtool: useSourceMaps ? sourceMapStyle : false,
+      devtool: getSourceMapSetting({ isDevServer }),
       output: {
         path: paths.target,
         publicPath,
         filename: `${fileMask}.js`,
         chunkFilename: `${fileMask}.js`,
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
+        // The 'TerserPlugin' is actually the default minimizer for webpack
+        // We add a custom one to ensure licence comments stay inside the final JS assets
+        // Without this a '*.js.LICENSE.txt' file would be created alongside
+        minimizer: [new TerserPlugin({ extractComments: false })],
         concatenateModules: isProductionBuild,
         splitChunks: {
           chunks: 'all',
@@ -125,9 +121,7 @@ const makeWebpackConfig = ({
         runtimeChunk: {
           name: 'runtime',
         },
-      },
-      resolve: {
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+        emitOnErrors: isProductionBuild,
       },
       module: {
         rules: [
@@ -195,43 +189,45 @@ const makeWebpackConfig = ({
           include: internalInclude,
           compilePackages: paths.compilePackages,
           generateCSSTypes: isTypeScript,
-          supportedBrowsers,
+          browserslist: supportedBrowsers,
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
           rootResolution,
+          removeAssertionsInProduction: true,
         }),
         ...(isDevServer
-          ? [
-              new MetricsPlugin({ type: 'ssr', target: 'browser' }),
-              new webpack.NoEmitOnErrorsPlugin(),
-            ]
-          : [
-              bundleAnalyzerPlugin({ name: 'client' }),
-              new webpack.HashedModuleIdsPlugin(),
-            ]),
+          ? [new MetricsPlugin({ type: 'ssr', target: 'browser' })]
+          : [bundleAnalyzerPlugin({ name: 'client' })]),
         ...(hot
           ? [
-              new webpack.HotModuleReplacementPlugin(),
               new ReactRefreshWebpackPlugin({
                 overlay: {
                   sockPort: clientPort,
+                  sockPath: '/ws',
                 },
               }),
             ]
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
+      stats: statsConfig,
+      infrastructureLogging: {
+        level: 'error',
+      },
     },
     {
       name: 'server',
       mode: webpackMode,
+      target: `browserslist:${nodeTarget}`,
       entry: serverEntry,
-      watch: isDevServer,
       externals: [
+        {
+          __sku_alias__webpackStats: `commonjs ./${webpackStatsFilename}`,
+        },
         nodeExternals({
           modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
-          whitelist: [
+          allowlist: [
             // webpack-node-externals compares the `import` or `require` expression to this list,
             // not the package name, so we map each packageName to a pattern. This ensures it
             // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
@@ -244,12 +240,7 @@ const makeWebpackConfig = ({
       resolve: {
         alias: {
           __sku_alias__serverEntry: paths.serverEntry,
-          __sku_alias__webpackStats: path.join(
-            paths.target,
-            webpackStatsFilename,
-          ),
         },
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
       },
       target: 'node',
       node: {
@@ -259,10 +250,15 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath,
         filename: 'server.js',
+        library: 'server',
         libraryTarget: 'var',
       },
+      cache: getCacheSettings({ isDevServer }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
+        emitOnErrors: isProductionBuild,
+        minimize: false,
+        concatenateModules: false,
       },
       module: {
         rules: [
@@ -278,24 +274,26 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
-          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
-            paths.devServerMiddleware,
-          ),
-          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
-            useDevServerMiddleware,
-          ),
-          __SKU_DEV_HTTPS__: JSON.stringify(httpsDevServer),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
             extraHosts: cspExtraScriptSrcHosts,
           }),
+          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
+            isDevServer ? paths.devServerMiddleware : false,
+          ),
+          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
+            isDevServer ? useDevServerMiddleware : false,
+          ),
+          __SKU_DEV_HTTPS__: JSON.stringify(
+            isDevServer ? httpsDevServer : false,
+          ),
         }),
         new SkuWebpackPlugin({
           target: 'node',
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          supportedBrowsers,
+          browserslist: [nodeTarget],
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
@@ -304,21 +302,13 @@ const makeWebpackConfig = ({
       ].concat(
         isDevServer
           ? [
-              new StartServerPlugin({
-                name: 'server.js',
-                signal: false,
-              }),
-              new webpack.NamedModulesPlugin(),
               new webpack.HotModuleReplacementPlugin(),
-              new webpack.NoEmitOnErrorsPlugin(),
               new MetricsPlugin({ type: 'ssr', target: 'node' }),
             ]
           : [],
       ),
     },
   ].map(webpackDecorator);
-
-  debug(JSON.stringify(webpackConfigs));
 
   return webpackConfigs;
 };

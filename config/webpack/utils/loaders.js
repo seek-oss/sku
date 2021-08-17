@@ -145,9 +145,7 @@ const makeSvgLoaders = () => [
           name: 'preset-default',
           overrides: {
             addAttributesToSVGElement: {
-              params: {
-                attributes: [{ focusable: false }],
-              },
+              attributes: [{ focusable: false }],
             },
             removeViewBox: false,
           },

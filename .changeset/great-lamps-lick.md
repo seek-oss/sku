@@ -12,10 +12,12 @@ While there is no breaking change from a sku perspective, there are many underly
 
 Things to validate before merging: 
 
-- Remove reliance on [automatic NodeJS polyfills](https://webpack.js.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed)
 - If you use `dangerouslySetWebpackConfig`, check it's working against webpack 5 
 - Static assets are working correctly (e.g. images, fonts, etc)
 - Both start and build scripts are outputting a working application
 
+If you are seeing errors mentioning polyfills after upgrading it's likely your app is relying on [automatic NodeJS polyfills](https://webpack.js.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed) which were removed in Webpack 5. Reach out in `#sku-support` if you're seeing this to discuss options. 
+
 [Webpack 5 migration guide](https://webpack.js.org/migrate/5)
+
 [Webpack 5 release notes](https://webpack.js.org/blog/2020-10-10-webpack-5-release/)

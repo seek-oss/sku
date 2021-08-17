@@ -8,7 +8,7 @@ import {
   Stack,
   List,
 } from 'braid-design-system';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 interface NextStepsProps {
   environment: 'development' | 'production';

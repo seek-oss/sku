@@ -122,7 +122,9 @@
 
 - Switch to the `automatic` JSX React runtime ([#629](https://github.com/seek-oss/sku/pull/629))
 
-  This changes how JSX is transformed into valid JavaScript and comes with some performance benefits. It also means that JSX can be used without needing to import React. [Read more about the change here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
+  > This feature was patched in v11.0.1, ensure you are using at least v11.0.1.
+
+  This changes how JSX is transformed into valid JavaScript and comes with some performance benefits. [Read more about the change here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
   **MIGRATION GUIDE**
 

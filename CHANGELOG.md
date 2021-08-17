@@ -1,5 +1,231 @@
 # sku
 
+## 11.0.0
+
+### Major Changes
+
+- Remove `sku chromatic` script ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Due to changes in the way chromatic is setup, it now makes more sense for consumers to integrate with chromatic directly.
+
+  MIGRATION GUIDE
+
+  Follow the [chromatic install step](https://www.chromatic.com/docs/setup#install).
+
+  Once installed, you can setup CI as follows
+
+  ```bash
+  yarn sku build-storybook
+  yarn chromatic --storybook-build-dir dist-storybook
+  ```
+
+  Your `storybook-build-dir` is whatever you configured your `storybookTarget` as in `sku.config.js`. The default is `dist-storybook`.
+
+  BREAKING CHANGE
+
+  `sku chromatic` script is no longer available.
+
+- Rename the `SkuWebpackPlugin` option `supportedBrowsers` to `browserslist` ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  The `SkuWebpackPlugin` now uses the [browserslist query](https://github.com/browserslist/browserslist) as a compile target for Node code as well.
+
+  BREAKING CHANGE
+
+  If you are consuming the `SkuWebpackPlugin` directly, update uses of `supportedBrowsers` to use `browserslist` instead. If compiling for Node, ensure you pass a valid Node [browserslist query](https://github.com/browserslist/browserslist) (e.g. `current node`).
+
+- Remove `sku playroom` and `sku build-playroom` ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  BREAKING CHANGE
+
+  All playroom scripts have been removed in favour of consumers installing [playroom](https://github.com/seek-oss/playroom) directly. If you'd like to continue using playroom then you can use the [SkuWebpackPlugin](https://seek-oss.github.io/sku/#/./docs/custom-builds).
+
+  Example config:
+
+  ```js
+  // playroom.config.js
+  const SkuWebpackPlugin = require('sku/webpack-plugin');
+  const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+  module.exports = {
+    components: './src/components',
+    outputPath: './dist/playroom',
+
+    webpackConfig: () => ({
+      plugins: [
+        new MiniCssExtractPlugin(),
+        new SkuWebpackPlugin({
+          include: paths.src,
+          target: 'browser',
+          browserslist: ['last 2 chrome versions'],
+          mode: 'development',
+          displayNamesProd: true,
+          removeAssertionsInProduction: false,
+          MiniCssExtractPlugin,
+        }),
+      ],
+    }),
+  };
+  ```
+
+- Remove support for `seek-asia-style-guide` ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  As `seek-asia-style-guide` is no longer used, first class support for it has been removed.
+
+- Upgrade to webpack 5 ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  All start and build scripts, including storybook will now use webpack 5. Along with the webpack upgrade a lot of other related dependencies have been updated.
+
+  MIGRATION GUIDE
+
+  While there is no breaking change from a sku perspective, there are many underlying changes that may require attention.
+
+  Things to validate before merging:
+
+  - If you use `dangerouslySetWebpackConfig`, check it's working against webpack 5
+  - Static assets are working correctly (e.g. images, fonts, etc)
+  - Both start and build scripts are outputting a working application
+
+  If you are seeing errors mentioning polyfills after upgrading it's likely your app is relying on [automatic NodeJS polyfills](https://webpack.js.org/blog/2020-10-10-webpack-5-release/#automatic-nodejs-polyfills-removed) which were removed in Webpack 5. Reach out in `#sku-support` if you're seeing this to discuss options.
+
+  [Webpack 5 migration guide](https://webpack.js.org/migrate/5)
+
+  [Webpack 5 release notes](https://webpack.js.org/blog/2020-10-10-webpack-5-release/)
+
+- Add persistentCache option and enable by default ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  The new `persistentCache` option will turn on webpack's filesystem caching between runs of `sku start` and `sku start-ssr`. This should result in much faster dev server start times when the cache is vaild.
+
+  BREAKING CHANGE
+
+  Unfortunately treat files are not compatible with the `persistentCache` option, so it will need to be disabled in your project until you have migrated them to Braid components or `.css.ts` files.
+
+  ```js
+  // sku.config.js
+  module.exports = {
+    persistentCache: false,
+  };
+  ```
+
+  > This limitation only applies to files inside the current project, any treat files within node_modules can be safely ignored.
+
+- Update the minimum supported Node version to 12.13.0 ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  BREAKING CHANGE
+
+  Node 10 is no longer supported
+
+- Remove `test-ssr` command ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  BREAKING CHANGE
+
+  The `sku test-ssr` command is no longer available. Please use `sku test` instead.
+
+- Switch to the `automatic` JSX React runtime ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  This changes how JSX is transformed into valid JavaScript and comes with some performance benefits. It also means that JSX can be used without needing to import React. [Read more about the change here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
+
+  e.g.
+
+  ```diff
+  -import React from 'react';
+
+  export const MyComponent => <div>MyComponent</div>;
+  ```
+
+  **MIGRATION GUIDE**
+
+  Ensure your app is running React 17. React 16.14 is also supported if required. Now your app should be working but you may be seeing lint errors similar to the following:
+
+  ```
+  'React' is declared but its value is never read
+  ```
+
+  To remove all the redundant react imports use the following codemod:
+
+  ```bash
+  npx react-codemod update-react-imports
+  ```
+
+  **BREAKING CHANGE**
+
+  The minimum supported version of React is now `v16.14.0`.
+
+- Upgrade to Jest 27 ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Jest 27 introduces a bunch of new default settings, primarily switching the default test environment from `jsdom` to `node`. However, sku will remain using `jsdom` by default as we feel it makes more sense as a default for UI development. You can read through the [Jest 27 release post](https://jestjs.io/blog/2021/05/25/jest-27) to see the other breaking changes that have occured.
+
+- Remove support for flow ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Files using [flow types](https://flow.org/) are no longer supported. Any remaining flow types should be migrated to TypeScript.
+
+- Remove `@storybook/addon-knobs` in favor of allowing custom addons. ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  MIGRATION GUIDE
+
+  If you still require the use of `@storybook/addon-knobs` you'll first need to install it.
+
+  **Note**: `@storybook/addon-knobs` has been deprecated in favor of `@storybook/addon-controls`.
+
+  ```bash
+  yarn add --dev @storybook/addon-knobs
+  ```
+
+  Once installed, inside your `sku.config.js` file, pass `@storybook/addon-knobs` to the `storybookAddons` option.
+
+  ```js
+  // sku.config.js
+  module.exports = {
+    storybookAddons: ['@storybook/addon-knobs'],
+  };
+  ```
+
+- Add `webpackStats.json` to `build-ssr` output ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Running `sku build-ssr` will now output a `webpackStats.json` alongside the `server.js` file which is required to be deployed to the same directory as `server.js`.
+
+  BREAKING CHANGE
+
+  SSR applications must now deploy the `webpackStats.json` alongside the `server.js` file.
+
+### Minor Changes
+
+- Add `storybookAddons` config option ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Custom storybook addons can now be used via the `storybookAddons` config option. For example, if you want to use `@storybook/addon-essentials`, first install the addon.
+
+  ```bash
+  yarn add --dev @storybook/addon-essentials
+  ```
+
+  Then add it to your `sku.config.js`.
+
+  ```js
+  // sku.config.js
+  module.exports = {
+    storybookAddons: ['@storybook/addon-essentials'],
+  };
+  ```
+
+- Add `--stats` argument ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  You can now override the default webpack stats preset via the `--stats` option. This is useful for debugging warnings and build issues. You can pass any valid [webpack stats preset](https://webpack.js.org/configuration/stats/#stats-presets).
+
+  ```bash
+  sku start --stats errors-warnings
+  ```
+
+  The default values are as follows:
+
+  **start/start-ssr**: `summary`
+
+  **build/build-ssr**: `errors-only`
+
+- Move to faster source maps setting in development ([#629](https://github.com/seek-oss/sku/pull/629))
+
+  Previously sku used `inline-source-map` in development which is very slow, particularly for rebuilds. Development source maps now use `eval-cheap-module-source-map`.
+
+- Upgrade to storybook 6 ([#629](https://github.com/seek-oss/sku/pull/629))
+
 ## 10.14.2
 
 ### Patch Changes

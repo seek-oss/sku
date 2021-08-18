@@ -1,5 +1,17 @@
 # sku
 
+## 11.0.1
+
+### Patch Changes
+
+- Re-introduce lint rules requiring React import when using JSX ([#631](https://github.com/seek-oss/sku/pull/631))
+
+  As sku v11 moved to the new [JSX transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html), we removed all lint rules ensuring `React` was imported when using JSX. Unfortunately this change only works if all compile packages (e.g. braid-design-system) switch to sku v11 at the same time, which would also constitute a breaking change. To avoid a lot of package update churn, we are re-introducing the need for `React` imports when JSX is present.
+
+- Update svgo config to remove deprecated "extendDefaultPlugins" utility. ([#632](https://github.com/seek-oss/sku/pull/632))
+
+  This requires svgo@2.4.0, so `Unknown builtin plugin "preset-default" specified` errors can be fixed by refreshing the lockfile.
+
 ## 11.0.0
 
 ### Major Changes

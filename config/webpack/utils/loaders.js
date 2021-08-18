@@ -1,5 +1,3 @@
-const { extendDefaultPlugins } = require('svgo');
-
 /**
  * e.g.
  * seek-style-guide -> __SEEK_STYLE_GUIDE__
@@ -142,18 +140,20 @@ const makeSvgLoaders = () => [
   {
     loader: require.resolve('svgo-loader'),
     options: {
-      plugins: extendDefaultPlugins([
+      plugins: [
+        {
+          name: 'preset-default',
+          overrides: {
+            removeViewBox: false,
+          },
+        },
         {
           name: 'addAttributesToSVGElement',
           params: {
             attributes: [{ focusable: false }],
           },
         },
-        {
-          name: 'removeViewBox',
-          active: false,
-        },
-      ]),
+      ],
     },
   },
 ];

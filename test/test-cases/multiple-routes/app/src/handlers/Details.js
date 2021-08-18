@@ -1,6 +1,6 @@
 import styles from './Details.less';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '../../../../../../@loadable/component';
 import { useParams } from 'react-router-dom';
 

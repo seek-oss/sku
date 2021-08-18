@@ -1,3 +1,4 @@
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 import fs from 'fs';
 import { promisify } from 'util';

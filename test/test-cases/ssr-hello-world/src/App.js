@@ -1,3 +1,4 @@
+import React from 'react';
 import lessStyles from './lessStyles.less';
 import logo from './logo.png';
 

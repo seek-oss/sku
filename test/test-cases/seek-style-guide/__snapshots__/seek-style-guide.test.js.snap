@@ -18,7 +18,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/runtime-64aaa8825b894a3f3430.js",
     "/658-c00d5c9361e60829fa01.js",
-    "/main-acd549acda8750347e45.js",
+    "/main-d6f0a6047ee55b6211db.js",
   ]
 CSS: Array [
     "/main-f19c5e5c943340d8270e.css",
@@ -115,7 +115,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-acd549acda8750347e45.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d6f0a6047ee55b6211db.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-f19c5e5c943340d8270e.css": a,
 abbr,
 acronym,

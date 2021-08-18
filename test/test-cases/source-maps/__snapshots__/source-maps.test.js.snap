@@ -7,7 +7,7 @@ Object {
   "index.html": SCRIPTS: Array [
     "/static/source-maps/runtime-32ffde280edc35016066.js",
     "/static/source-maps/75-4cd699b97b4be1a327da.js",
-    "/static/source-maps/main-9443b5d022593cc6994f.js",
+    "/static/source-maps/main-e56e3eb7e6dba3b050e0.js",
   ]
 CSS: Array []
 SOURCE HTML: <!DOCTYPE html>
@@ -69,8 +69,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-9443b5d022593cc6994f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-9443b5d022593cc6994f.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-e56e3eb7e6dba3b050e0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-e56e3eb7e6dba3b050e0.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-32ffde280edc35016066.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-32ffde280edc35016066.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

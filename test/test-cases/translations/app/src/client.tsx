@@ -1,3 +1,4 @@
+import React from 'react';
 import { hydrate } from 'react-dom';
 import { VocabProvider } from '@vocab/react';
 

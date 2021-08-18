@@ -2304,7 +2304,7 @@ svg.jhxt9718 {
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
     "/runtime-01a053fe7dc60079ee89.js",
-    "/main-77f9b7331eb695907781.js",
+    "/main-9d381955bb3b090cf0b3.js",
     "/themes-jobStreet-a241d9392b30482764d3.js",
   ]
 CSS: Array [
@@ -2509,11 +2509,11 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-77f9b7331eb695907781.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-9d381955bb3b090cf0b3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-01a053fe7dc60079ee89.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
     "/runtime-01a053fe7dc60079ee89.js",
-    "/main-77f9b7331eb695907781.js",
+    "/main-9d381955bb3b090cf0b3.js",
     "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
   ]
 CSS: Array [
@@ -4865,7 +4865,7 @@ SOURCE HTML: <!DOCTYPE html>
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
   "/runtime-01a053fe7dc60079ee89.js",
-  "/main-77f9b7331eb695907781.js",
+  "/main-9d381955bb3b090cf0b3.js",
   "/themes-jobStreet-a241d9392b30482764d3.js",
 ]
 CSS: Array [
@@ -5093,7 +5093,7 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime-01a053fe7dc60079ee89.js",
-  "/main-77f9b7331eb695907781.js",
+  "/main-9d381955bb3b090cf0b3.js",
   "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
 ]
 CSS: Array [

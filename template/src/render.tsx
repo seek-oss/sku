@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom/server';
 import type { Render } from 'sku';
 
@@ -12,7 +13,7 @@ const skuRender: Render<RenderContext> = {
   renderApp: ({ SkuProvider, environment }) => {
     const appHtml = ReactDOM.renderToString(
       <SkuProvider>
-        <App environment={environment} />
+        <App environment={environment as ClientContext['environment']} />
       </SkuProvider>,
     );
 

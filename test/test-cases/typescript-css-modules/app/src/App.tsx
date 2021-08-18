@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import lessStyles from './lessStyles.less';
 import './globalTypes.d';
 

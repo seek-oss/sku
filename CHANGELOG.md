@@ -1,5 +1,13 @@
 # sku
 
+## 11.0.2
+
+### Patch Changes
+
+- Run babel transform-runtime in development ([#636](https://github.com/seek-oss/sku/pull/636))
+
+  This fixes an issue where the `regeneratorRuntime` is required to be setup manually only for development.
+
 ## 11.0.1
 
 ### Patch Changes

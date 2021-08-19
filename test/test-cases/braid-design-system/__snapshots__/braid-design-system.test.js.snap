@@ -5321,13 +5321,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development jobStreet site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.js",
   "/themes-jobStreet.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.css",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
   "/vendors-node_modules_braid-design-system_themes_jobStreet_ts.css",
   "/themes-jobStreet.css",
 ]
@@ -5576,13 +5576,13 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system start should return development seekAnz site 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.js",
   "/main.js",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.js",
   "/themes-seekAnz.js",
 ]
 CSS: Array [
-  "/vendors-node_modules_pmmmwh_react-refresh-webpack-plugin_client_ErrorOverlayEntry_js_sockPath-612665.css",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-38bf32.css",
   "/vendors-node_modules_braid-design-system_themes_seekAnz_ts.css",
   "/themes-seekAnz.css",
 ]

@@ -343,7 +343,7 @@ export default cssExports;
 exports[`typescript-css-modules start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-22d334.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-47f493.js",
   "/main.js",
 ]
 CSS: Array [

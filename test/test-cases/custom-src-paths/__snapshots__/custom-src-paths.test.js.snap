@@ -145,7 +145,7 @@ SOURCE HTML: <!DOCTYPE html>
 exports[`custom-src-paths start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c83f94.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-06777c.js",
   "/main.js",
 ]
 CSS: Array []

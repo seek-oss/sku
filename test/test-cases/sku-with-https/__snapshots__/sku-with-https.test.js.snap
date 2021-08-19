@@ -111,7 +111,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: Array [
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-b7d687.js",
+  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-ae10cc.js",
   "/main.js",
 ]
 CSS: Array [
@@ -219,7 +219,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: Array [
   "https://127.0.0.1:9843/runtime.js",
-  "https://127.0.0.1:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-c4b506.js",
+  "https://127.0.0.1:9843/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_loadable_component_d-6d2df6.js",
   "https://127.0.0.1:9843/main.js",
 ]
 CSS: Array [

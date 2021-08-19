@@ -676,7 +676,7 @@ exports[`multiple-routes start should render details page correctly 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-8c2ce9.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-cc1f75.js",
   "/main.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
@@ -802,7 +802,7 @@ exports[`multiple-routes start should render home page correctly 1`] = `
 SCRIPTS: Array [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-8c2ce9.js",
+  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-cc1f75.js",
   "/main.js",
   "/handlers-Home.js",
 ]

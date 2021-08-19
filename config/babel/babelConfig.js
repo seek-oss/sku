@@ -25,6 +25,7 @@ module.exports = ({
     require.resolve('@loadable/babel-plugin'),
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
     require.resolve('@vanilla-extract/babel-plugin'),
+    require.resolve('@babel/plugin-transform-runtime'),
   ];
 
   if (hot && isBrowser) {
@@ -42,7 +43,6 @@ module.exports = ({
 
   if (isProductionBuild) {
     plugins.push(
-      require.resolve('@babel/plugin-transform-runtime'),
       require.resolve('@babel/plugin-transform-react-inline-elements'),
       require.resolve('babel-plugin-transform-react-remove-prop-types'),
       require.resolve('@babel/plugin-transform-react-constant-elements'),

@@ -4,16 +4,21 @@ const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookPort } = require('../context');
 const startStorybookPath = require.resolve('@storybook/react/bin/index.js');
 const configDir = path.resolve(__dirname, '../config/storybook/start');
+const { watchVocabCompile } = require('../lib/runVocab');
 
 argv.push('--port', storybookPort);
 argv.push('--config-dir', configDir);
 argv.push('--quiet');
 
-const storybookProcess = gracefulSpawn(startStorybookPath, argv, {
-  stdio: 'inherit',
-  env: process.env,
-});
+(async () => {
+  await watchVocabCompile();
 
-storybookProcess.on('exit', (exitCode) => {
-  process.exit(exitCode);
-});
+  const storybookProcess = gracefulSpawn(startStorybookPath, argv, {
+    stdio: 'inherit',
+    env: process.env,
+  });
+
+  storybookProcess.on('exit', (exitCode) => {
+    process.exit(exitCode);
+  });
+})();

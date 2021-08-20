@@ -9,8 +9,10 @@ const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');
 const buildStorybookPath = require.resolve('@storybook/react/bin/build.js');
 const configDir = path.resolve(__dirname, '../config/storybook/build');
+const { runVocabCompile } = require('../lib/runVocab');
 
 (async () => {
+  await runVocabCompile();
   await rimraf(storybookTarget);
 
   argv.push('--config-dir', configDir);

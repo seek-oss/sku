@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Compile vocab translations before running storybook-build
+Ensure translations are available when running storybook

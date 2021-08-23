@@ -2189,10 +2189,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@pmmmwh/react-refresh-webpack-plugin@0.5.0-rc.2":
-  version "0.5.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.0-rc.2.tgz#7f1049150d8474cd8bfe21ae0efec581238dc924"
-  integrity sha512-LTZK5rAAiog7FvsDKX7mJBifV9yyzhIXHqlHA8E978Z0iFLsW40j6OVJFZ/AzV3wBIvN3+iPVYvhVGckkoy8OQ==
+"@pmmmwh/react-refresh-webpack-plugin@0.5.0-rc.5":
+  version "0.5.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.0-rc.5.tgz#4e46d22889eaa670f23db4f69dd7694c52b58004"
+  integrity sha512-u9W23sWcG9xUklyI4x+hhrR9YtfSdPTLWx6tVSJV8RjOxpzs73+s38e/aI94ywRAZwRLbLJ8mx6X98xGxRHaZw==
   dependencies:
     ansi-html "^0.0.7"
     core-js-pure "^3.8.1"

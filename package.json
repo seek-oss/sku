@@ -68,7 +68,7 @@
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.0",
     "@loadable/webpack-plugin": "^5.14.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.0-rc.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.0-rc.5",
     "@storybook/builder-webpack5": "^6.3.6",
     "@storybook/manager-webpack5": "^6.3.6",
     "@storybook/react": "^6.3.4",

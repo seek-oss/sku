@@ -1,5 +1,13 @@
 # sku
 
+## 11.0.3
+
+### Patch Changes
+
+- Run `@vanilla-extract/webpack-plugin` in node builds to ensure class name consistency ([#640](https://github.com/seek-oss/sku/pull/640))
+
+- Update `@vanilla-extract/webpack-plugin` to v2.0.0 ([#640](https://github.com/seek-oss/sku/pull/640))
+
 ## 11.0.2
 
 ### Patch Changes

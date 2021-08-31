@@ -208,9 +208,12 @@ class SkuWebpackPlugin {
       MiniCssExtractPlugin,
     }).apply(compiler);
 
-    if (target === 'browser') {
-      new VanillaExtractPlugin().apply(compiler);
+    new VanillaExtractPlugin({
+      identifiers: isProductionBuild ? 'short' : 'debug',
+      outputCss: target === 'browser',
+    }).apply(compiler);
 
+    if (target === 'browser') {
       // Fixes an issue with the "assert" package used by braid referencing process
       new webpack.DefinePlugin({
         'process.env.NODE_DEBUG': JSON.stringify(false),

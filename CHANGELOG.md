@@ -1,5 +1,11 @@
 # sku
 
+## 11.0.4
+
+### Patch Changes
+
+- Correct exclusion of `removeViewBox` svgo plugin ([#647](https://github.com/seek-oss/sku/pull/647))
+
 ## 11.0.3
 
 ### Patch Changes

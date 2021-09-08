@@ -143,8 +143,10 @@ const makeSvgLoaders = () => [
       plugins: [
         {
           name: 'preset-default',
-          overrides: {
-            removeViewBox: false,
+          params: {
+            overrides: {
+              removeViewBox: false,
+            },
           },
         },
         {

@@ -190,4 +190,7 @@ module.exports = validator.compile({
   persistentCache: {
     type: 'boolean',
   },
+  externalizeNodeModules: {
+    type: 'boolean',
+  },
 });

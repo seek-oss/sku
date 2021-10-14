@@ -30,6 +30,7 @@ const {
   useDevServerMiddleware,
   rootResolution,
   skipPackageCompatibilityCompilation,
+  externalizeNodeModules,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
@@ -225,17 +226,20 @@ const makeWebpackConfig = ({
         {
           __sku_alias__webpackStats: `commonjs ./${webpackStatsFilename}`,
         },
-        nodeExternals({
-          modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
-          allowlist: [
-            // webpack-node-externals compares the `import` or `require` expression to this list,
-            // not the package name, so we map each packageName to a pattern. This ensures it
-            // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
-            ...paths.compilePackages.map(
-              (packageName) => new RegExp(`^(${packageName})`),
-            ),
-          ],
-        }),
+        // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
+        externalizeNodeModules
+          ? nodeExternals({
+              modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
+              allowlist: [
+                // webpack-node-externals compares the `import` or `require` expression to this list,
+                // not the package name, so we map each packageName to a pattern. This ensures it
+                // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
+                ...paths.compilePackages.map(
+                  (packageName) => new RegExp(`^(${packageName})`),
+                ),
+              ],
+            })
+          : {},
       ],
       resolve: {
         alias: {

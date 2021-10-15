@@ -2294,10 +2294,7 @@ svg.jhxt971g {
   \\"fs\\",
   \\"os\\",
   \\"path\\",
-  \\"react\\",
-  \\"react-dom\\",
-  \\"react-dom/server\\",
-  \\"react/jsx-runtime\\",
+  \\"stream\\",
   \\"tty\\",
   \\"url\\",
   \\"util\\"

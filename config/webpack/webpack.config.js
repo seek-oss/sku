@@ -39,6 +39,7 @@ const {
   cspExtraScriptSrcHosts,
   rootResolution,
   skipPackageCompatibilityCompilation,
+  externalizeNodeModules,
 } = config;
 
 // port is only required for dev builds
@@ -268,19 +269,21 @@ const makeWebpackConfig = ({
       // render will run within the same process
       target: `browserslist:${nodeTarget}`,
       externals: [
-        // Don't bundle or transpile non-compiled packages
-        nodeExternals({
-          allowlist: [
-            'classnames', // Workaround for https://github.com/JedWatson/classnames/issues/240
+        // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
+        externalizeNodeModules
+          ? nodeExternals({
+              allowlist: [
+                'classnames', // Workaround for https://github.com/JedWatson/classnames/issues/240
 
-            // webpack-node-externals compares the `import` or `require` expression to this list,
-            // not the package name, so we map each packageName to a pattern. This ensures it
-            // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
-            ...paths.compilePackages.map(
-              (packageName) => new RegExp(`^(${packageName})`),
-            ),
-          ],
-        }),
+                // webpack-node-externals compares the `import` or `require` expression to this list,
+                // not the package name, so we map each packageName to a pattern. This ensures it
+                // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
+                ...paths.compilePackages.map(
+                  (packageName) => new RegExp(`^(${packageName})`),
+                ),
+              ],
+            })
+          : {},
       ],
       output: {
         path: paths.target,

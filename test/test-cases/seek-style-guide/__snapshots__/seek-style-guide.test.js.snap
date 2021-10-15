@@ -8,9 +8,7 @@ Object {
   \\"fs\\",
   \\"os\\",
   \\"path\\",
-  \\"react\\",
-  \\"react-dom/server\\",
-  \\"react/jsx-runtime\\",
+  \\"stream\\",
   \\"tty\\",
   \\"url\\",
   \\"util\\"

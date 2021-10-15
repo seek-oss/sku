@@ -171,4 +171,5 @@ module.exports = {
   skipPackageCompatibilityCompilation:
     skuConfig.skipPackageCompatibilityCompilation,
   persistentCache: skuConfig.persistentCache,
+  externalizeNodeModules: skuConfig.externalizeNodeModules,
 };

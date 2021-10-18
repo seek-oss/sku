@@ -143,6 +143,14 @@ Default: `[]`
 
 An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./docs/static-rendering.md) for more info.
 
+## externalizeNodeModules
+
+type `boolean`
+
+Default: `false`
+
+By default, sku compiles all node_modules in builds that target node. Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
+
 ## skipPackageCompatibilityCompilation
 
 type `Array<string>`

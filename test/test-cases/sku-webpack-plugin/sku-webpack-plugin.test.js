@@ -69,7 +69,7 @@ describe('sku-webpack-plugin', () => {
       });
 
       await waitForUrls(devServerUrl);
-    });
+    }, 150000);
 
     afterAll(async () => {
       await process.kill();
@@ -98,7 +98,7 @@ describe('sku-webpack-plugin', () => {
       });
 
       closeAssetServer = await startAssetServer(port, distDir);
-    });
+    }, 150000);
 
     afterAll(() => {
       closeAssetServer();

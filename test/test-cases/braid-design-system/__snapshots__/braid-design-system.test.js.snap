@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "323-d1aef978f7f588becc10.css": ._1brbmfo0 {
+  "390-558f72854c124e8f31e0.css": ._1brbmfo0 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -39,21 +39,21 @@ Object {
   -webkit-appearance: none;
   appearance: none;
 }
-._1brbmfo7 {
+._1brbmfo8 {
   background-color: transparent;
   color: inherit;
 }
-._1brbmfo8::-ms-expand,
-._1brbmfo9::-ms-clear {
+._1brbmfo9::-ms-expand,
+._1brbmfob::-ms-clear {
   display: none;
 }
-._1brbmfo9::-webkit-search-cancel-button {
+._1brbmfob::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
-._1brbmfoa {
+._1brbmfod {
   background: none;
 }
-._1brbmfob {
+._1brbmfoe {
   color: inherit;
   text-decoration: none;
 }
@@ -1661,200 +1661,200 @@ Object {
   --_2dwe9z2: var(--h3207t28);
   --_2dwe9z3: var(--h3207t29);
 }
-.jhxt976 {
+.jhxt977 {
   font-size: var(--h3207t2f);
   line-height: var(--h3207t2g);
 }
-.jhxt977 {
+.jhxt978 {
   --_2dwe9z0: var(--h3207t2f);
   --_2dwe9z1: var(--h3207t2g);
   --_2dwe9z2: var(--h3207t2i);
   --_2dwe9z3: var(--h3207t2j);
 }
-.jhxt978 {
+.jhxt97a {
   font-size: var(--h3207t2p);
   line-height: var(--h3207t2q);
 }
-.jhxt979 {
+.jhxt97b {
   --_2dwe9z0: var(--h3207t2p);
   --_2dwe9z1: var(--h3207t2q);
   --_2dwe9z2: var(--h3207t2s);
   --_2dwe9z3: var(--h3207t2t);
 }
-.jhxt97a {
+.jhxt97d {
   font-size: var(--h3207t2z);
   line-height: var(--h3207t30);
 }
-.jhxt97b {
+.jhxt97e {
   --_2dwe9z0: var(--h3207t2z);
   --_2dwe9z1: var(--h3207t30);
   --_2dwe9z2: var(--h3207t32);
   --_2dwe9z3: var(--h3207t33);
 }
-.jhxt97c {
+.jhxt97g {
   font-weight: var(--h3207t4g);
 }
-.jhxt97d {
+.jhxt97h {
   font-weight: var(--h3207t4h);
 }
-.jhxt97e {
+.jhxt97i {
   font-size: var(--h3207t3c);
   line-height: var(--h3207t3d);
 }
-.jhxt97f {
+.jhxt97j {
   --_2dwe9z0: var(--h3207t3c);
   --_2dwe9z1: var(--h3207t3d);
   --_2dwe9z2: var(--h3207t3f);
   --_2dwe9z3: var(--h3207t3g);
 }
-.jhxt97g {
+.jhxt97l {
   font-size: var(--h3207t3m);
   line-height: var(--h3207t3n);
 }
-.jhxt97h {
+.jhxt97m {
   --_2dwe9z0: var(--h3207t3m);
   --_2dwe9z1: var(--h3207t3n);
   --_2dwe9z2: var(--h3207t3p);
   --_2dwe9z3: var(--h3207t3q);
 }
-.jhxt97i {
+.jhxt97o {
   font-size: var(--h3207t3w);
   line-height: var(--h3207t3x);
 }
-.jhxt97j {
+.jhxt97p {
   --_2dwe9z0: var(--h3207t3w);
   --_2dwe9z1: var(--h3207t3x);
   --_2dwe9z2: var(--h3207t3z);
   --_2dwe9z3: var(--h3207t40);
 }
-.jhxt97k {
+.jhxt97r {
   font-size: var(--h3207t46);
   line-height: var(--h3207t47);
 }
-.jhxt97l {
+.jhxt97s {
   --_2dwe9z0: var(--h3207t46);
   --_2dwe9z1: var(--h3207t47);
   --_2dwe9z2: var(--h3207t49);
   --_2dwe9z3: var(--h3207t4a);
 }
-.jhxt97m {
+.jhxt97u {
   color: var(--h3207tz);
 }
-.jhxt97n {
+.jhxt97v {
   color: var(--h3207t11);
 }
-.jhxt97o {
+.jhxt97w {
   color: var(--h3207t10);
 }
-.jhxt97p {
+.jhxt97x {
   color: var(--h3207ty);
 }
-.jhxt97q {
+.jhxt97y {
   color: var(--h3207t13);
 }
-.jhxt97r {
+.jhxt97z {
   color: var(--h3207t12);
 }
-.jhxt97s {
+.jhxt9710 {
   color: var(--h3207t14);
 }
-.jhxt97t {
-  color: var(--h3207t15);
-}
-.jhxt97u {
-  color: var(--h3207tt);
-}
-.jhxt97u:hover {
-  color: var(--h3207tu);
-}
-.jhxt97u:focus {
-  color: var(--h3207tu);
-}
-.jhxt97v {
-  color: var(--h3207tw);
-}
-.jhxt97w {
-  color: var(--h3207tx);
-}
-.jhxt97x {
-  color: var(--h3207t15);
-}
-.jhxt97y {
-  color: var(--h3207t16);
-}
-.jhxt97z {
-  color: var(--h3207t4q);
-}
-svg.jhxt97z {
-  color: var(--h3207t4r);
-}
-.jhxt9710 {
-  color: var(--h3207t4q);
-}
-svg.jhxt9710 {
-  color: var(--h3207t4r);
-}
 .jhxt9711 {
-  color: var(--h3207t4s);
-}
-svg.jhxt9711 {
-  color: var(--h3207t4t);
+  color: var(--h3207t15);
 }
 .jhxt9712 {
-  color: var(--h3207t4s);
+  color: var(--h3207tt);
 }
-svg.jhxt9712 {
-  color: var(--h3207t4t);
+.jhxt9712:hover {
+  color: var(--h3207tu);
+}
+.jhxt9712:focus {
+  color: var(--h3207tu);
 }
 .jhxt9713 {
-  color: var(--h3207t4u);
-}
-svg.jhxt9713 {
-  color: var(--h3207t4v);
+  color: var(--h3207tw);
 }
 .jhxt9714 {
-  color: var(--h3207t4u);
-}
-svg.jhxt9714 {
-  color: var(--h3207t4v);
+  color: var(--h3207tx);
 }
 .jhxt9715 {
-  color: var(--h3207t4w);
-}
-svg.jhxt9715 {
-  color: var(--h3207t4x);
+  color: var(--h3207t15);
 }
 .jhxt9716 {
-  color: var(--h3207t4w);
-}
-svg.jhxt9716 {
-  color: var(--h3207t4x);
+  color: var(--h3207t16);
 }
 .jhxt9717 {
-  color: var(--h3207t4y);
+  color: var(--h3207t4q);
 }
 svg.jhxt9717 {
-  color: var(--h3207t4z);
+  color: var(--h3207t4r);
 }
 .jhxt9718 {
-  color: var(--h3207t4y);
+  color: var(--h3207t4q);
 }
 svg.jhxt9718 {
-  color: var(--h3207t4z);
+  color: var(--h3207t4r);
 }
 .jhxt9719 {
+  color: var(--h3207t4s);
+}
+svg.jhxt9719 {
+  color: var(--h3207t4t);
+}
+.jhxt971a {
+  color: var(--h3207t4s);
+}
+svg.jhxt971a {
+  color: var(--h3207t4t);
+}
+.jhxt971b {
+  color: var(--h3207t4u);
+}
+svg.jhxt971b {
+  color: var(--h3207t4v);
+}
+.jhxt971c {
+  color: var(--h3207t4u);
+}
+svg.jhxt971c {
+  color: var(--h3207t4v);
+}
+.jhxt971d {
+  color: var(--h3207t4w);
+}
+svg.jhxt971d {
+  color: var(--h3207t4x);
+}
+.jhxt971e {
+  color: var(--h3207t4w);
+}
+svg.jhxt971e {
+  color: var(--h3207t4x);
+}
+.jhxt971f {
+  color: var(--h3207t4y);
+}
+svg.jhxt971f {
+  color: var(--h3207t4z);
+}
+.jhxt971g {
+  color: var(--h3207t4y);
+}
+svg.jhxt971g {
+  color: var(--h3207t4z);
+}
+.jhxt971h {
   padding-bottom: calc((var(--h3207t8) - var(--h3207t26)) / 2);
   padding-top: calc((var(--h3207t8) - var(--h3207t26)) / 2);
 }
-.jhxt971a {
+.jhxt971i {
   padding-bottom: calc((var(--h3207t8) - var(--h3207t2g)) / 2);
   padding-top: calc((var(--h3207t8) - var(--h3207t2g)) / 2);
 }
-.jhxt971b {
+.jhxt971j {
   padding-bottom: calc((var(--h3207t8) - var(--h3207t2q)) / 2);
   padding-top: calc((var(--h3207t8) - var(--h3207t2q)) / 2);
 }
-.jhxt971c {
+.jhxt971k {
   padding-bottom: calc((var(--h3207t8) - var(--h3207t30)) / 2);
   padding-top: calc((var(--h3207t8) - var(--h3207t30)) / 2);
 }
@@ -1869,89 +1869,89 @@ svg.jhxt9718 {
     --_2dwe9z2: var(--h3207t2d);
     --_2dwe9z3: var(--h3207t2e);
   }
-  .jhxt976 {
+  .jhxt977 {
     font-size: var(--h3207t2k);
     line-height: var(--h3207t2l);
   }
-  .jhxt977 {
+  .jhxt978 {
     --_2dwe9z0: var(--h3207t2k);
     --_2dwe9z1: var(--h3207t2l);
     --_2dwe9z2: var(--h3207t2n);
     --_2dwe9z3: var(--h3207t2o);
   }
-  .jhxt978 {
+  .jhxt97a {
     font-size: var(--h3207t2u);
     line-height: var(--h3207t2v);
   }
-  .jhxt979 {
+  .jhxt97b {
     --_2dwe9z0: var(--h3207t2u);
     --_2dwe9z1: var(--h3207t2v);
     --_2dwe9z2: var(--h3207t2x);
     --_2dwe9z3: var(--h3207t2y);
   }
-  .jhxt97a {
+  .jhxt97d {
     font-size: var(--h3207t34);
     line-height: var(--h3207t35);
   }
-  .jhxt97b {
+  .jhxt97e {
     --_2dwe9z0: var(--h3207t34);
     --_2dwe9z1: var(--h3207t35);
     --_2dwe9z2: var(--h3207t37);
     --_2dwe9z3: var(--h3207t38);
   }
-  .jhxt97e {
+  .jhxt97i {
     font-size: var(--h3207t3h);
     line-height: var(--h3207t3i);
   }
-  .jhxt97f {
+  .jhxt97j {
     --_2dwe9z0: var(--h3207t3h);
     --_2dwe9z1: var(--h3207t3i);
     --_2dwe9z2: var(--h3207t3k);
     --_2dwe9z3: var(--h3207t3l);
   }
-  .jhxt97g {
+  .jhxt97l {
     font-size: var(--h3207t3r);
     line-height: var(--h3207t3s);
   }
-  .jhxt97h {
+  .jhxt97m {
     --_2dwe9z0: var(--h3207t3r);
     --_2dwe9z1: var(--h3207t3s);
     --_2dwe9z2: var(--h3207t3u);
     --_2dwe9z3: var(--h3207t3v);
   }
-  .jhxt97i {
+  .jhxt97o {
     font-size: var(--h3207t41);
     line-height: var(--h3207t42);
   }
-  .jhxt97j {
+  .jhxt97p {
     --_2dwe9z0: var(--h3207t41);
     --_2dwe9z1: var(--h3207t42);
     --_2dwe9z2: var(--h3207t44);
     --_2dwe9z3: var(--h3207t45);
   }
-  .jhxt97k {
+  .jhxt97r {
     font-size: var(--h3207t4b);
     line-height: var(--h3207t4c);
   }
-  .jhxt97l {
+  .jhxt97s {
     --_2dwe9z0: var(--h3207t4b);
     --_2dwe9z1: var(--h3207t4c);
     --_2dwe9z2: var(--h3207t4e);
     --_2dwe9z3: var(--h3207t4f);
   }
-  .jhxt9719 {
+  .jhxt971h {
     padding-bottom: calc((var(--h3207t8) - var(--h3207t2b)) / 2);
     padding-top: calc((var(--h3207t8) - var(--h3207t2b)) / 2);
   }
-  .jhxt971a {
+  .jhxt971i {
     padding-bottom: calc((var(--h3207t8) - var(--h3207t2l)) / 2);
     padding-top: calc((var(--h3207t8) - var(--h3207t2l)) / 2);
   }
-  .jhxt971b {
+  .jhxt971j {
     padding-bottom: calc((var(--h3207t8) - var(--h3207t2v)) / 2);
     padding-top: calc((var(--h3207t8) - var(--h3207t2v)) / 2);
   }
-  .jhxt971c {
+  .jhxt971k {
     padding-bottom: calc((var(--h3207t8) - var(--h3207t35)) / 2);
     padding-top: calc((var(--h3207t8) - var(--h3207t35)) / 2);
   }
@@ -2294,21 +2294,18 @@ svg.jhxt9718 {
   \\"fs\\",
   \\"os\\",
   \\"path\\",
-  \\"react\\",
-  \\"react-dom\\",
-  \\"react-dom/server\\",
-  \\"react/jsx-runtime\\",
+  \\"stream\\",
   \\"tty\\",
   \\"url\\",
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-01a053fe7dc60079ee89.js",
-    "/main-9d381955bb3b090cf0b3.js",
+    "/runtime-6197cbbc0527b7fdf914.js",
+    "/main-a84cb9afa5eff4d7f75f.js",
     "/themes-jobStreet-a241d9392b30482764d3.js",
   ]
 CSS: Array [
-    "/323-d1aef978f7f588becc10.css",
+    "/390-558f72854c124e8f31e0.css",
     "/themes-jobStreet-3bdb23b17052d463b1d1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2354,7 +2351,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#e5e5e5}
       </style>
       <div class="_1qpybr80">
-        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
           Hello
           jobStreet
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -2363,7 +2360,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt97v _9v6jbo0 _9v6jbo1 _9v6jbo2"
+               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt9713 _9v6jbo0 _9v6jbo1 _9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -2374,7 +2371,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="_1brbmfo0 _8t4tri2s _8t4triy lc4anf0">
             <div class="_1brbmfo0 _8t4tri2o">
               <input type="checkbox"
-                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -2392,7 +2389,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -2406,7 +2403,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2426,7 +2423,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -2440,7 +2437,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2457,7 +2454,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="_1brbmfo0 _8t4triv _8t4tri2c lc4anf9 lc4anfa qfxe170"
                              for="id_1"
                       >
-                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -2509,15 +2506,15 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-9d381955bb3b090cf0b3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-01a053fe7dc60079ee89.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-a84cb9afa5eff4d7f75f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-6197cbbc0527b7fdf914.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-01a053fe7dc60079ee89.js",
-    "/main-9d381955bb3b090cf0b3.js",
+    "/runtime-6197cbbc0527b7fdf914.js",
+    "/main-a84cb9afa5eff4d7f75f.js",
     "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
   ]
 CSS: Array [
-    "/323-d1aef978f7f588becc10.css",
+    "/390-558f72854c124e8f31e0.css",
     "/themes-seekAnz-5fff494d64baabdd84a9.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2563,7 +2560,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#eee}
       </style>
       <div class="_1kubmhw0">
-        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
           Hello
           seekAnz
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -2572,7 +2569,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt97v _9v6jbo0 _9v6jbo1 _9v6jbo2"
+               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt9713 _9v6jbo0 _9v6jbo1 _9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -2583,7 +2580,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="_1brbmfo0 _8t4tri2s _8t4triy lc4anf0">
             <div class="_1brbmfo0 _8t4tri2o">
               <input type="checkbox"
-                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -2601,7 +2598,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -2615,7 +2612,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2635,7 +2632,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -2649,7 +2646,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2666,7 +2663,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="_1brbmfo0 _8t4triv _8t4tri2c lc4anf9 lc4anfa qfxe170"
                              for="id_1"
                       >
-                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -4864,12 +4861,12 @@ SOURCE HTML: <!DOCTYPE html>
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-01a053fe7dc60079ee89.js",
-  "/main-9d381955bb3b090cf0b3.js",
+  "/runtime-6197cbbc0527b7fdf914.js",
+  "/main-a84cb9afa5eff4d7f75f.js",
   "/themes-jobStreet-a241d9392b30482764d3.js",
 ]
 CSS: Array [
-  "/323-d1aef978f7f588becc10.css",
+  "/390-558f72854c124e8f31e0.css",
   "/themes-jobStreet-3bdb23b17052d463b1d1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -4915,7 +4912,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#e5e5e5}
       </style>
       <div class="_1qpybr80">
-        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
           Hello
           jobStreet
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -4924,7 +4921,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt97v _9v6jbo0 _9v6jbo1 _9v6jbo2"
+               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt9713 _9v6jbo0 _9v6jbo1 _9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -4935,7 +4932,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="_1brbmfo0 _8t4tri2s _8t4triy lc4anf0">
             <div class="_1brbmfo0 _8t4tri2o">
               <input type="checkbox"
-                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -4953,7 +4950,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -4967,7 +4964,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -4987,7 +4984,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5001,7 +4998,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5018,7 +5015,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="_1brbmfo0 _8t4triv _8t4tri2c lc4anf9 lc4anfa qfxe170"
                              for="id_1"
                       >
-                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -5071,7 +5068,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                      class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                      class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                       id="id_1"
                       aria-checked="false"
 +                     value
@@ -5092,12 +5089,12 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-01a053fe7dc60079ee89.js",
-  "/main-9d381955bb3b090cf0b3.js",
+  "/runtime-6197cbbc0527b7fdf914.js",
+  "/main-a84cb9afa5eff4d7f75f.js",
   "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
 ]
 CSS: Array [
-  "/323-d1aef978f7f588becc10.css",
+  "/390-558f72854c124e8f31e0.css",
   "/themes-seekAnz-5fff494d64baabdd84a9.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -5143,7 +5140,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#eee}
       </style>
       <div class="_1kubmhw0">
-        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
           Hello
           seekAnz
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -5152,7 +5149,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt97v _9v6jbo0 _9v6jbo1 _9v6jbo2"
+               class="_1brbmfo0 _8t4tri2k _8t4tri2s _173azei0 jhxt9713 _9v6jbo0 _9v6jbo1 _9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -5163,7 +5160,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="_1brbmfo0 _8t4tri2s _8t4triy lc4anf0">
             <div class="_1brbmfo0 _8t4tri2o">
               <input type="checkbox"
-                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                     class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -5181,7 +5178,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5195,7 +5192,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97w"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5215,7 +5212,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5229,7 +5226,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97p"
+                           class="_1brbmfo0 _8t4tri1y _8t4tri1w _8t4tri2c jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5246,7 +5243,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="_1brbmfo0 _8t4triv _8t4tri2c lc4anf9 lc4anfa qfxe170"
                              for="id_1"
                       >
-                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt97v jhxt971 _2dwe9z4 jhxt979">
+                        <span class="_1brbmfo0 _8t4tri2c jhxt970 jhxt9713 jhxt971 _2dwe9z4 jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -5299,7 +5296,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                      class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfo9 _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
+                      class="_1brbmfo0 _1brbmfo1 _1brbmfo6 _1brbmfob _8t4tri2w _8t4triz _8t4tri1q _8t4trix lc4anf1 lc4anf2"
                       id="id_1"
                       aria-checked="false"
 +                     value
@@ -5388,7 +5385,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#e5e5e5}
       </style>
       <div class="jobsStreetTheme_default__1qpybr80">
-        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt97v typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt979">
+        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt9713 typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt97b">
           Hello
           jobStreet
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -5397,7 +5394,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="reset_base__1brbmfo0 sprinkles_display_inlineBlock_mobile__8t4tri2k sprinkles_position_relative_mobile__8t4tri2s IconChevron_root__173azei0 typography_invertableTone_neutral_light__jhxt97v icon_size__9v6jbo0 icon_inline__9v6jbo1 icon_alignY_uppercase_none__9v6jbo2"
+               class="reset_base__1brbmfo0 sprinkles_display_inlineBlock_mobile__8t4tri2k sprinkles_position_relative_mobile__8t4tri2s IconChevron_root__173azei0 typography_invertableTone_neutral_light__jhxt9713 icon_size__9v6jbo0 icon_inline__9v6jbo1 icon_alignY_uppercase_none__9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -5408,7 +5405,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="reset_base__1brbmfo0 sprinkles_position_relative_mobile__8t4tri2s sprinkles_zIndex_0__8t4triy InlineField_root__lc4anf0">
             <div class="reset_base__1brbmfo0 sprinkles_display_flex_mobile__8t4tri2o">
               <input type="checkbox"
-                     class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfo9 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
+                     class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfob sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -5426,7 +5423,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt97w"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5440,7 +5437,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt97w"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5460,7 +5457,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5474,7 +5471,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5491,7 +5488,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="reset_base__1brbmfo0 sprinkles_userSelect_none__8t4triv sprinkles_display_block_mobile__8t4tri2c InlineField_labelBase__lc4anf9 InlineField_labelOffset_standard__lc4anfa virtualTouchable_virtualTouchable__qfxe170"
                              for="id_1"
                       >
-                        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt97v typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt979">
+                        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt9713 typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -5554,7 +5551,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                      class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfo9 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
+                      class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfob sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
                       id="id_1"
                       aria-checked="false"
 +                     value
@@ -5643,7 +5640,7 @@ SOURCE HTML: <!DOCTYPE html>
         body{margin:0;padding:0;background:#eee}
       </style>
       <div class="seekAnzTheme_default__1kubmhw0">
-        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt97v typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt979">
+        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt9713 typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt97b">
           Hello
           seekAnz
           <svg xmlns="http://www.w3.org/2000/svg"
@@ -5652,7 +5649,7 @@ SOURCE HTML: <!DOCTYPE html>
                fill="currentColor"
                width="16"
                height="16"
-               class="reset_base__1brbmfo0 sprinkles_display_inlineBlock_mobile__8t4tri2k sprinkles_position_relative_mobile__8t4tri2s IconChevron_root__173azei0 typography_invertableTone_neutral_light__jhxt97v icon_size__9v6jbo0 icon_inline__9v6jbo1 icon_alignY_uppercase_none__9v6jbo2"
+               class="reset_base__1brbmfo0 sprinkles_display_inlineBlock_mobile__8t4tri2k sprinkles_position_relative_mobile__8t4tri2s IconChevron_root__173azei0 typography_invertableTone_neutral_light__jhxt9713 icon_size__9v6jbo0 icon_inline__9v6jbo1 icon_alignY_uppercase_none__9v6jbo2"
                aria-hidden="true"
           >
             <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -5663,7 +5660,7 @@ SOURCE HTML: <!DOCTYPE html>
           <div class="reset_base__1brbmfo0 sprinkles_position_relative_mobile__8t4tri2s sprinkles_zIndex_0__8t4triy InlineField_root__lc4anf0">
             <div class="reset_base__1brbmfo0 sprinkles_display_flex_mobile__8t4tri2o">
               <input type="checkbox"
-                     class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfo9 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
+                     class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfob sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
                      id="id_1"
                      aria-checked="false"
               >
@@ -5681,7 +5678,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt97w"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5695,7 +5692,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt97w"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_invertableTone_neutral_dark__jhxt9714"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5715,7 +5712,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
@@ -5729,7 +5726,7 @@ SOURCE HTML: <!DOCTYPE html>
                            fill="currentColor"
                            width="16"
                            height="16"
-                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97p"
+                           class="reset_base__1brbmfo0 sprinkles_width_full__8t4tri1y sprinkles_height_full__8t4tri1w sprinkles_display_block_mobile__8t4tri2c typography_tone_formAccent__jhxt97x"
                            aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -5746,7 +5743,7 @@ SOURCE HTML: <!DOCTYPE html>
                       <label class="reset_base__1brbmfo0 sprinkles_userSelect_none__8t4triv sprinkles_display_block_mobile__8t4tri2c InlineField_labelBase__lc4anf9 InlineField_labelOffset_standard__lc4anfa virtualTouchable_virtualTouchable__qfxe170"
                              for="id_1"
                       >
-                        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt97v typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt979">
+                        <span class="reset_base__1brbmfo0 sprinkles_display_block_mobile__8t4tri2c typography_fontFamily__jhxt970 typography_invertableTone_neutral_light__jhxt9713 typography_fontWeight_regular__jhxt971 prebuilt_className__2dwe9z4 typography_standard__jhxt97b">
                           This is a checkbox
                         </span>
                       </label>
@@ -5809,7 +5806,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-                      class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfo9 sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
+                      class="reset_base__1brbmfo0 reset_block__1brbmfo1 reset_appearance__1brbmfo6 reset__1brbmfob sprinkles_position_absolute_mobile__8t4tri2w sprinkles_zIndex_1__8t4triz sprinkles_cursor_pointer__8t4tri1q sprinkles_opacity_0__8t4trix InlineField_realField__lc4anf1 InlineField_realFieldPosition_standard__lc4anf2"
                       id="id_1"
                       aria-checked="false"
 +                     value

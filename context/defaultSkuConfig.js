@@ -45,4 +45,5 @@ module.exports = {
   languages: null,
   skipPackageCompatibilityCompilation: [],
   persistentCache: true,
+  externalizeNodeModules: false,
 };

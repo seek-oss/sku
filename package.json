@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "11.0.2",
+  "version": "11.1.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -75,7 +75,7 @@
     "@types/jest": "^27.0.0",
     "@types/loadable__component": "^5.13.1",
     "@vanilla-extract/babel-plugin": "^1.0.0",
-    "@vanilla-extract/webpack-plugin": "^1.0.0",
+    "@vanilla-extract/webpack-plugin": "^2.0.0",
     "@vocab/core": "^1.0.1",
     "@vocab/phrase": "^1.0.0",
     "@vocab/webpack": "^1.0.0",

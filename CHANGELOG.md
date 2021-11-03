@@ -1,5 +1,29 @@
 # sku
 
+## 11.1.0
+
+### Minor Changes
+
+- Include node_modules in node builds ([#651](https://github.com/seek-oss/sku/pull/651))
+
+  Previously, sku would only compile code within your src folder, plus any compile packages, for builds targetting the node environment. While this results in faster builds, it can sometimes lead to incorrect versions of packages being resolved due to clashing version range requirements. All node_modules will now included in the compilation by default, ensuring the correct package version is always required.
+
+  The old behaviour can be re-enabled via the new `externalizeNodeModules` config.
+
+## 11.0.4
+
+### Patch Changes
+
+- Correct exclusion of `removeViewBox` svgo plugin ([#647](https://github.com/seek-oss/sku/pull/647))
+
+## 11.0.3
+
+### Patch Changes
+
+- Run `@vanilla-extract/webpack-plugin` in node builds to ensure class name consistency ([#640](https://github.com/seek-oss/sku/pull/640))
+
+- Update `@vanilla-extract/webpack-plugin` to v2.0.0 ([#640](https://github.com/seek-oss/sku/pull/640))
+
 ## 11.0.2
 
 ### Patch Changes

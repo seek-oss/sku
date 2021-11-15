@@ -16,7 +16,6 @@ const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
-const isTypeScript = require('../../lib/isTypeScript');
 const {
   paths,
   env,
@@ -189,7 +188,7 @@ const makeWebpackConfig = ({
           hot,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          generateCSSTypes: isTypeScript,
+          generateCSSTypes: true,
           browserslist: supportedBrowsers,
           mode: webpackMode,
           displayNamesProd,

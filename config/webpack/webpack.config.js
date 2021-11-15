@@ -16,7 +16,6 @@ const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
-const isTypeScript = require('../../lib/isTypeScript');
 
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
@@ -236,7 +235,7 @@ const makeWebpackConfig = ({
           browserslist: supportedBrowsers,
           mode: webpackMode,
           libraryName,
-          generateCSSTypes: isTypeScript,
+          generateCSSTypes: true,
           displayNamesProd,
           removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,

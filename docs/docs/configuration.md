@@ -269,6 +269,18 @@ Default: `./src/render.js`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./docs/static-rendering.md) for more info.
 
+## rootResolution
+
+type `boolean`
+
+Default: `true`
+
+Enable root resolution. By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
+
+Unfortunately, these kinds of imports only work for apps. In packages, the imports will work locally, but fail when consumed from `node_modules`.
+
+You can set this option in `sku.config.js`, or adding `"skuCompilePackage": true` to your `package.json` will disable this behaviour by default.
+
 ## routes
 
 type `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`

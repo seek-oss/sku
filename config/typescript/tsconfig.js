@@ -2,6 +2,10 @@ const { cwd, getPathFromCwd } = require('../../lib/cwd');
 const { paths, rootResolution } = require('../../context');
 
 module.exports = () => {
+  const includePaths = paths.appSkuConfigPath.endsWith('.ts')
+    ? [...paths.src, paths.appSkuConfigPath]
+    : paths.src;
+
   const config = {
     compilerOptions: {
       // This flag allows tsc to be invoked directly by VS Code (via Cmd+Shift+B),
@@ -21,7 +25,7 @@ module.exports = () => {
       lib: ['dom', 'es2015'],
       target: 'es5',
     },
-    include: paths.src,
+    include: includePaths,
     exclude: [getPathFromCwd('node_modules')],
   };
 

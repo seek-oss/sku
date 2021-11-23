@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
+const esbuild = require('esbuild');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
@@ -9,11 +10,60 @@ const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
 
-const appSkuConfigPath = getPathFromCwd(args.config);
+const evaluateConfig = (configSource) => {
+  const exports = {
+    default: {},
+  };
 
-const appSkuConfig = fs.existsSync(appSkuConfigPath)
-  ? require(appSkuConfigPath)
-  : {};
+  // eslint-disable-next-line no-eval
+  eval(configSource);
+
+  return exports.default;
+};
+
+const getSkuConfig = () => {
+  let appSkuConfigPath;
+  const tsPath = getPathFromCwd('sku.config.ts');
+  const jsPath = getPathFromCwd('sku.config.js');
+
+  console.log('args.config: ', args.config);
+  if (args.config) {
+    appSkuConfigPath = getPathFromCwd(args.config);
+  } else if (fs.existsSync(tsPath)) {
+    console.log('TS exists');
+    appSkuConfigPath = tsPath;
+  } else if (fs.existsSync(jsPath)) {
+    console.log('JS exists');
+    appSkuConfigPath = jsPath;
+  } else {
+    console.log('Early return');
+    return {
+      appSkuConfig: {},
+      appSkuConfigPath: 'nothing',
+    };
+  }
+
+  console.log('In FN appSkuConfigPath: ', appSkuConfigPath);
+  const compiledConfig = esbuild.buildSync({
+    entryPoints: [appSkuConfigPath],
+    bundle: true,
+    write: false,
+    outdir: 'out',
+    target: ['node14'],
+    format: 'cjs',
+  });
+
+  const [{ text: configSource }] = compiledConfig.outputFiles;
+  const newConfig = evaluateConfig(configSource);
+
+  return {
+    appSkuConfig: newConfig,
+    appSkuConfigPath,
+  };
+};
+
+const { appSkuConfig, appSkuConfigPath } = getSkuConfig();
+console.log('Top Level appSkuConfigPath: ', appSkuConfigPath);
 
 const skuConfig = {
   ...defaultSkuConfig,

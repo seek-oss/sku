@@ -10,6 +10,7 @@ While sku has a zero configuration mode, the equivalent manual configuration wou
 
 ```ts
 import type { SkuConfig } from 'sku';
+
 const skuConfig: SkuConfig = {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
@@ -17,6 +18,7 @@ const skuConfig: SkuConfig = {
   publicPath: '/',
   target: 'dist',
 };
+
 export default skuConfig;
 ```
 

@@ -45,6 +45,8 @@ export interface SkuConfig {
   compilePackages?: string[];
 
   /**
+   * **Unavailable for libraries**
+   *
    * Enable content security policy feature. More info at https://seek-oss.github.io/sku/#/./docs/csp
    *
    * @default false
@@ -260,6 +262,8 @@ export interface SkuConfig {
   routes?: Array<SkuRoute>;
 
   /**
+   * *Only for SSR apps**
+   *
    * The entry file for the server.
    *
    * @default "./src/server.js"

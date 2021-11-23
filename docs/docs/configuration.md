@@ -121,6 +121,24 @@ const config = {
 };
 ```
 
+## devServerMiddleware
+
+type `string`
+
+Path to a file in your project that exports a function that can receive the Express server.
+
+This can be used to extend to the dev server middleware.
+
+Example:
+
+```js
+module.exports = app => {
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```
+
 ## displayNamesProd
 
 type `boolean`
@@ -155,24 +173,6 @@ Default: `false`
 
 By default, sku compiles all node_modules in builds that target node. Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
 
-## skipPackageCompatibilityCompilation
-
-type `Array<string>`
-
-Default: `[]`
-
-When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
-
-> Note: `react` & `react-dom` are skipped by default.
-
-Example:
-
-```js
-const config = {
-  skipPackageCompatibilityCompilation: ['@bloat/very-large-package', 'lodash'],
-};
-```
-
 ## hosts
 
 type `Array<string>`
@@ -180,6 +180,14 @@ type `Array<string>`
 Default: `['localhost']`
 
 An array of custom hosts the app can be served off when running `sku start`. You must have configured your hosts file to point to localhost as well.
+
+## httpsDevServer
+
+type `boolean`
+
+Default: `false`
+
+Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
 
 ## initialPath
 
@@ -345,6 +353,24 @@ Can be an array of site names, or objects with a site name and corresponding hos
 
 Can be used to limit the languages rendered for a specific site. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
 
+## skipPackageCompatibilityCompilation
+
+type `Array<string>`
+
+Default: `[]`
+
+When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
+
+> Note: `react` & `react-dom` are skipped by default.
+
+Example:
+
+```js
+const config = {
+  skipPackageCompatibilityCompilation: ['@bloat/very-large-package', 'lodash'],
+};
+```
+
 ## sourceMapsProd
 
 type `boolean`
@@ -368,6 +394,14 @@ Default: `['./src']`
 
 An array of directories holding your apps source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
+## storybookAddons
+
+type `Array<string>`
+
+Default: `[]`
+
+An array of storybook addons to use.
+
 ## storybookPort
 
 type `number`
@@ -383,14 +417,6 @@ type `string`
 Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
-
-## storybookAddons
-
-type `Array<string>`
-
-Default: `[]`
-
-An array of storybook addons to use.
 
 ## supportedBrowsers
 
@@ -417,29 +443,3 @@ type `function`
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
-
-## httpsDevServer
-
-type `boolean`
-
-Default: `false`
-
-Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
-
-## devServerMiddleware
-
-type `string`
-
-Path to a file in your project that exports a function that can receive the Express server.
-
-This can be used to extend to the dev server middleware.
-
-Example:
-
-```js
-module.exports = app => {
-  app.get('/mock-api', (req, res) => {
-    ...
-  })
-}
-```

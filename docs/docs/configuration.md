@@ -1,28 +1,32 @@
 # Configuration
 
-If you need to configure sku, first create a `sku.config.js` file in your project root:
+If you need to configure sku, first create a `sku.config.ts` file in your project root:
 
 ```bash
-$ touch sku.config.js
+$ touch sku.config.ts
 ```
 
 While sku has a zero configuration mode, the equivalent manual configuration would look like this:
 
-```js
-module.exports = {
+```ts
+import type { SkuConfig } from 'sku';
+const skuConfig: SkuConfig = {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
 };
+export default skuConfig;
 ```
 
 If you need to specify a different config file you can do so with the `--config` parameter.
 
 ```bash
-$ sku start --config sku.custom.config.js
+$ sku start --config sku.custom.config.ts
 ```
+
+Config files can use either TypeScript or JavaScript.
 
 ## clientEntry
 

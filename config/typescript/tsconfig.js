@@ -2,9 +2,10 @@ const { cwd, getPathFromCwd } = require('../../lib/cwd');
 const { paths, rootResolution } = require('../../context');
 
 module.exports = () => {
-  const includePaths = paths.appSkuConfigPath.endsWith('.ts')
-    ? [...paths.src, paths.appSkuConfigPath]
-    : paths.src;
+  const includePaths =
+    paths.appSkuConfigPath && paths.appSkuConfigPath.endsWith('.ts')
+      ? [...paths.src, paths.appSkuConfigPath]
+      : paths.src;
 
   const config = {
     compilerOptions: {

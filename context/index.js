@@ -35,7 +35,7 @@ const getSkuConfig = () => {
   } else {
     return {
       appSkuConfig: {},
-      appSkuConfigPath: 'nothing',
+      appSkuConfigPath: null,
     };
   }
 

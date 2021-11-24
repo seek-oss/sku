@@ -16,9 +16,9 @@ const evaluateConfig = (configSource) => {
   };
 
   // eslint-disable-next-line no-eval
-  eval(configSource);
+  const moduleExports = eval(configSource);
 
-  return exports.default;
+  return moduleExports || exports.default;
 };
 
 const getSkuConfig = () => {

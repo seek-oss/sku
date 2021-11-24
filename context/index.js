@@ -26,24 +26,19 @@ const getSkuConfig = () => {
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
-  console.log('args.config: ', args.config);
   if (args.config) {
     appSkuConfigPath = getPathFromCwd(args.config);
   } else if (fs.existsSync(tsPath)) {
-    console.log('TS exists');
     appSkuConfigPath = tsPath;
   } else if (fs.existsSync(jsPath)) {
-    console.log('JS exists');
     appSkuConfigPath = jsPath;
   } else {
-    console.log('Early return');
     return {
       appSkuConfig: {},
       appSkuConfigPath: 'nothing',
     };
   }
 
-  console.log('In FN appSkuConfigPath: ', appSkuConfigPath);
   const compiledConfig = esbuild.buildSync({
     entryPoints: [appSkuConfigPath],
     bundle: true,
@@ -63,7 +58,6 @@ const getSkuConfig = () => {
 };
 
 const { appSkuConfig, appSkuConfigPath } = getSkuConfig();
-console.log('Top Level appSkuConfigPath: ', appSkuConfigPath);
 
 const skuConfig = {
   ...defaultSkuConfig,

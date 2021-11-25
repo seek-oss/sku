@@ -13,8 +13,6 @@ const prettierWrite = require('../lib/runPrettier').write;
 const esLintFix = require('../lib/runESLint').fix;
 const configure = require('../lib/configure');
 const install = require('../lib/install');
-const { getMissingHosts } = require('../lib/hosts');
-const { getSuggestedScript } = require('../lib/suggestScript');
 const banner = require('../lib/banner');
 const trace = require('debug')('sku:init');
 
@@ -184,16 +182,8 @@ const args = require('../config/args');
   await esLintFix();
   await prettierWrite();
 
-  // read configured sites from templated sku config
-  const sites = require(path.join(root, 'sku.config.js')).sites;
-  const missingHosts = await getMissingHosts(sites);
-  const setupHostScript = await getSuggestedScript('setup-hosts', {
-    sudo: true,
-  });
-
   const nextSteps = [
     `${chalk.cyan('cd')} ${projectName}`,
-    missingHosts.length > 0 ? chalk.cyan(setupHostScript) : null,
     `${chalk.cyan('yarn start')}`,
   ]
     .filter(Boolean)

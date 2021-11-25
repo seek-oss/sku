@@ -1,11 +1,18 @@
 const { cwd, getPathFromCwd } = require('../../lib/cwd');
 const { paths, rootResolution } = require('../../context');
+const path = require('path');
 
 module.exports = () => {
-  const includePaths =
-    paths.appSkuConfigPath && paths.appSkuConfigPath.endsWith('.ts')
-      ? [...paths.src, paths.appSkuConfigPath]
-      : paths.src;
+  const includePaths = paths.src;
+
+  if (paths.appSkuConfigPath && paths.appSkuConfigPath.endsWith('.ts')) {
+    // If the config file is in TypeScript, it needs to be included in the tsconfig
+    includePaths.push(paths.appSkuConfigPath);
+  } else {
+    // If it isn't, the placeholder file needs to be included so we don't break JS only projects.
+    // See the comments in placeholder.ts
+    includePaths.push(path.join(__dirname, '../../lib/placeholder.ts'));
+  }
 
   const config = {
     compilerOptions: {

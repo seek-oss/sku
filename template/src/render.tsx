@@ -22,7 +22,7 @@ const skuRender: Render<RenderContext> = {
     };
   },
 
-  provideClientContext: ({ environment }): ClientContext => ({
+  provideClientContext: ({ environment }) => ({
     environment
   }),
 

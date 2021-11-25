@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   sites: [
     {
       name: 'au',

@@ -67,21 +67,16 @@ describe('configure', () => {
       expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
     });
 
-    it('should not generate tsconfig config', async () => {
-      await expect(readJsonC(appFolder, 'tsconfig.json')).rejects.toThrow(
-        /ENOENT: no such file or directory, open \'.*\/tsconfig\.json\'/,
-      );
-    });
-
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(6);
+      expect(ignoreContents.length).toEqual(7);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`${defaultTargetDir}/`);
       expect(ignoreContents).toContain(`${defaultStorybookTargetDir}/`);
       expect(ignoreContents).toContain(`${bundleReportFolder}/`);
       expect(ignoreContents).toContain(`${coverageFolder}/`);
+      expect(ignoreContents).toContain('tsconfig.json');
     });
 
     ['.eslintignore', '.prettierignore'].forEach((ignore) =>

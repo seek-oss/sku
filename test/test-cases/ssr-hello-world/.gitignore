@@ -5,4 +5,5 @@ coverage/
 dist-build/
 dist-storybook/
 report/
+tsconfig.json
 # end managed by sku

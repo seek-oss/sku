@@ -9,7 +9,7 @@ module.exports = function getWebpackCacheSettings({ isDevServer }) {
       return {
         type: 'filesystem',
         buildDependencies: {
-          config: [paths.appSkuConfigPath],
+          config: paths.appSkuConfigPath ? [paths.appSkuConfigPath] : [],
         },
       };
     }

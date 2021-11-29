@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const isTypeScript = require('../lib/isTypeScript');
 const esLintCheck = require('../lib/runESLint').check;
 const prettierCheck = require('../lib/runPrettier').check;
 const runTsc = require('../lib/runTsc');
@@ -14,17 +13,15 @@ const { runVocabCompile } = require('../lib/runVocab');
   await runVocabCompile();
 
   try {
-    if (isTypeScript) {
-      const hasPaths = typeof pathsToCheck !== 'undefined';
-      const pathsIncludeTS =
-        hasPaths &&
-        pathsToCheck.filter(
-          (filePath) => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
-        ).length > 0;
+    const hasPaths = typeof pathsToCheck !== 'undefined';
+    const pathsIncludeTS =
+      hasPaths &&
+      pathsToCheck.filter(
+        (filePath) => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
+      ).length > 0;
 
-      if (!hasPaths || pathsIncludeTS) {
-        await runTsc();
-      }
+    if (!hasPaths || pathsIncludeTS) {
+      await runTsc();
     }
 
     await prettierCheck(pathsToCheck);

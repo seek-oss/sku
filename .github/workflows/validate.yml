@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: true
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master

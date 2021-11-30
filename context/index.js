@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const esbuild = require('esbuild');
+const { register } = require('esbuild-register/dist/node');
 const { getPathFromCwd } = require('../lib/cwd');
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
@@ -9,17 +9,6 @@ const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
-
-const evaluateConfig = (configSource) => {
-  const exports = {
-    default: {},
-  };
-
-  // eslint-disable-next-line no-eval
-  const moduleExports = eval(configSource);
-
-  return moduleExports || exports.default;
-};
 
 const getSkuConfig = () => {
   let appSkuConfigPath;
@@ -39,20 +28,14 @@ const getSkuConfig = () => {
     };
   }
 
-  const compiledConfig = esbuild.buildSync({
-    entryPoints: [appSkuConfigPath],
-    bundle: true,
-    write: false,
-    outdir: 'out',
-    target: ['node14'],
-    format: 'cjs',
-  });
+  const { unregister } = register({ target: 'node14' });
 
-  const [{ text: configSource }] = compiledConfig.outputFiles;
-  const newConfig = evaluateConfig(configSource);
+  const newConfig = require(appSkuConfigPath);
+
+  unregister();
 
   return {
-    appSkuConfig: newConfig,
+    appSkuConfig: newConfig.default || newConfig,
     appSkuConfigPath,
   };
 };

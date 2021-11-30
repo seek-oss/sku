@@ -1,4 +1,4 @@
-const { cwd, getPathFromCwd } = require('../../lib/cwd');
+const { cwd } = require('../../lib/cwd');
 const { paths, rootResolution } = require('../../context');
 const path = require('path');
 
@@ -34,7 +34,6 @@ module.exports = () => {
       target: 'es5',
     },
     include: includePaths,
-    exclude: [getPathFromCwd('node_modules')],
   };
 
   if (rootResolution) {

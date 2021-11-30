@@ -1,5 +1,11 @@
 # sku
 
+## 11.2.1
+
+### Patch Changes
+
+- Fix loading of TS config files that use node builtins or external dependencies. ([#657](https://github.com/seek-oss/sku/pull/657))
+
 ## 11.2.0
 
 ### Minor Changes

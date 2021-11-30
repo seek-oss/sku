@@ -1,28 +1,34 @@
 # Configuration
 
-If you need to configure sku, first create a `sku.config.js` file in your project root:
+If you need to configure sku, first create a `sku.config.ts` file in your project root:
 
 ```bash
-$ touch sku.config.js
+$ touch sku.config.ts
 ```
 
 While sku has a zero configuration mode, the equivalent manual configuration would look like this:
 
-```js
-module.exports = {
+```ts
+import type { SkuConfig } from 'sku';
+
+const skuConfig: SkuConfig = {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
 };
+
+export default skuConfig;
 ```
 
 If you need to specify a different config file you can do so with the `--config` parameter.
 
 ```bash
-$ sku start --config sku.custom.config.js
+$ sku start --config sku.custom.config.ts
 ```
+
+Config files can use either TypeScript or JavaScript.
 
 ## clientEntry
 
@@ -117,6 +123,24 @@ const config = {
 };
 ```
 
+## devServerMiddleware
+
+type `string`
+
+Path to a file in your project that exports a function that can receive the Express server.
+
+This can be used to extend to the dev server middleware.
+
+Example:
+
+```js
+module.exports = app => {
+  app.get('/mock-api', (req, res) => {
+    ...
+  })
+}
+```
+
 ## displayNamesProd
 
 type `boolean`
@@ -151,24 +175,6 @@ Default: `false`
 
 By default, sku compiles all node_modules in builds that target node. Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
 
-## skipPackageCompatibilityCompilation
-
-type `Array<string>`
-
-Default: `[]`
-
-When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
-
-> Note: `react` & `react-dom` are skipped by default.
-
-Example:
-
-```js
-const config = {
-  skipPackageCompatibilityCompilation: ['@bloat/very-large-package', 'lodash'],
-};
-```
-
 ## hosts
 
 type `Array<string>`
@@ -176,6 +182,14 @@ type `Array<string>`
 Default: `['localhost']`
 
 An array of custom hosts the app can be served off when running `sku start`. You must have configured your hosts file to point to localhost as well.
+
+## httpsDevServer
+
+type `boolean`
+
+Default: `false`
+
+Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
 
 ## initialPath
 
@@ -269,6 +283,18 @@ Default: `./src/render.js`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./docs/static-rendering.md) for more info.
 
+## rootResolution
+
+type `boolean`
+
+Default: `true`
+
+Enable root resolution. By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
+
+Unfortunately, these kinds of imports only work for apps. In packages, the imports will work locally, but fail when consumed from `node_modules`.
+
+You can set this option in `sku.config.js`, or adding `"skuCompilePackage": true` to your `package.json` will disable this behaviour by default.
+
 ## routes
 
 type `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
@@ -329,6 +355,24 @@ Can be an array of site names, or objects with a site name and corresponding hos
 
 Can be used to limit the languages rendered for a specific site. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
 
+## skipPackageCompatibilityCompilation
+
+type `Array<string>`
+
+Default: `[]`
+
+When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
+
+> Note: `react` & `react-dom` are skipped by default.
+
+Example:
+
+```js
+const config = {
+  skipPackageCompatibilityCompilation: ['@bloat/very-large-package', 'lodash'],
+};
+```
+
 ## sourceMapsProd
 
 type `boolean`
@@ -352,6 +396,14 @@ Default: `['./src']`
 
 An array of directories holding your apps source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
+## storybookAddons
+
+type `Array<string>`
+
+Default: `[]`
+
+An array of storybook addons to use.
+
 ## storybookPort
 
 type `number`
@@ -367,14 +419,6 @@ type `string`
 Default: `dist-storybook`
 
 The directory `sku build-storybook` will output files to.
-
-## storybookAddons
-
-type `Array<string>`
-
-Default: `[]`
-
-An array of storybook addons to use.
 
 ## supportedBrowsers
 
@@ -401,29 +445,3 @@ type `function`
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
-
-## httpsDevServer
-
-type `boolean`
-
-Default: `false`
-
-Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
-
-## devServerMiddleware
-
-type `string`
-
-Path to a file in your project that exports a function that can receive the Express server.
-
-This can be used to extend to the dev server middleware.
-
-Example:
-
-```js
-module.exports = app => {
-  app.get('/mock-api', (req, res) => {
-    ...
-  })
-}
-```

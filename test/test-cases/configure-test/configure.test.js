@@ -119,7 +119,6 @@ describe('configure', () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
       expect(Object.keys(tsconfigContents).sort()).toEqual([
         'compilerOptions',
-        'exclude',
         'include',
       ]);
     });

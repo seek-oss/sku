@@ -106,6 +106,7 @@
     "ensure-gitignore": "^1.1.2",
     "env-ci": "^5.0.0",
     "esbuild": "^0.13.13",
+    "esbuild-register": "^3.2.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^7.18.0",
     "eslint-config-seek": "^7.0.8",

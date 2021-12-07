@@ -25,7 +25,10 @@ module.exports = ({
     require.resolve('@loadable/babel-plugin'),
     [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
     require.resolve('@vanilla-extract/babel-plugin'),
-    require.resolve('@babel/plugin-transform-runtime'),
+    [
+      require.resolve('@babel/plugin-transform-runtime'),
+      { absoluteRuntime: true },
+    ],
   ];
 
   if (hot && isBrowser) {

@@ -274,6 +274,9 @@ const makeWebpackConfig = ({
               allowlist: [
                 'classnames', // Workaround for https://github.com/JedWatson/classnames/issues/240
 
+                // Include '@babel/runtime' in render builds to workaround ESM imports in html-render-webpack-plugin
+                /@babel\/runtime/,
+
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it
                 // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.

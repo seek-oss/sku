@@ -1,7 +1,9 @@
 const escapeRegex = require('escape-string-regexp');
 const { paths } = require('../../context');
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
-const compilePackagesRegex = paths.compilePackages.map(escapeRegex).join('|');
+const compilePackagesRegex = paths.compilePackages
+  .map((pkg) => `.*${escapeRegex(pkg)}`)
+  .join('|');
 
 module.exports = {
   testEnvironment: 'jsdom',

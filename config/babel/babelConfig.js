@@ -1,5 +1,13 @@
 const { cwd } = require('../../lib/cwd');
 
+const nodeModules = 'node_modules';
+const packageJson = 'package.json';
+const babelRuntimePath = require.resolve(`@babel/runtime/${packageJson}`);
+const normalisedBabelRuntimePath = babelRuntimePath.slice(
+  babelRuntimePath.indexOf(nodeModules) + nodeModules.length + 1,
+  babelRuntimePath.length - packageJson.length - 1,
+);
+
 module.exports = ({
   target,
   lang = 'js',
@@ -27,7 +35,7 @@ module.exports = ({
     require.resolve('@vanilla-extract/babel-plugin'),
     [
       require.resolve('@babel/plugin-transform-runtime'),
-      { absoluteRuntime: true },
+      { absoluteRuntime: normalisedBabelRuntimePath },
     ],
   ];
 

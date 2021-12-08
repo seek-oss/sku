@@ -24,6 +24,7 @@ const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
+const modules = require('./resolveModules');
 
 const {
   paths,
@@ -161,6 +162,7 @@ const makeWebpackConfig = ({
       },
       resolve: {
         alias: { __sku_alias__clientEntry: paths.clientEntry },
+        modules,
       },
       module: {
         rules: [
@@ -301,6 +303,7 @@ const makeWebpackConfig = ({
       },
       resolve: {
         alias: { __sku_alias__renderEntry: paths.renderEntry },
+        modules,
       },
       module: {
         rules: [

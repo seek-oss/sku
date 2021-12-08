@@ -35,6 +35,7 @@ const { getVocabConfig } = require('../vocab/vocab');
 const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
+const modules = require('./resolveModules');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -122,6 +123,9 @@ const makeWebpackConfig = ({
           name: 'runtime',
         },
         emitOnErrors: isProductionBuild,
+      },
+      resolve: {
+        modules,
       },
       module: {
         rules: [
@@ -244,6 +248,7 @@ const makeWebpackConfig = ({
         alias: {
           __sku_alias__serverEntry: paths.serverEntry,
         },
+        modules,
       },
       target: 'node',
       node: {

@@ -1,3 +1,5 @@
+const path = require('path');
+
 const modules = ['node_modules'];
 
 try {

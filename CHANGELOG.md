@@ -1,5 +1,13 @@
 # sku
 
+## 11.2.4
+
+### Patch Changes
+
+- Ensure compile packages within nested node_modules are transformed in jest ([#664](https://github.com/seek-oss/sku/pull/664))
+
+- Include `@babel/runtime` in render builds to ensure it is importable ([#664](https://github.com/seek-oss/sku/pull/664))
+
 ## 11.2.3
 
 ### Patch Changes

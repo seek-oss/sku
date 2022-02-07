@@ -1,5 +1,11 @@
 # sku
 
+## 11.2.6
+
+### Patch Changes
+
+- Add "extends" to languages type definition ([#668](https://github.com/seek-oss/sku/pull/668))
+
 ## 11.2.5
 
 ### Patch Changes

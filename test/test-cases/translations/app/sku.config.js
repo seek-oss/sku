@@ -3,7 +3,7 @@ module.exports = {
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
   setupTests: 'src/setupTests.js',
-  languages: ['en', 'fr'],
+  languages: ['en', { name: 'fr', extends: 'en' }],
   routes: [
     { route: '/', languages: ['en'] },
     { route: '/hello', languages: ['en'] },

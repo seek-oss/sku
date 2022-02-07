@@ -9,7 +9,11 @@ const languagesToCompile = {
     { type: 'string' },
     {
       type: 'object',
-      props: { name: { type: 'string', extends: { type: 'string' } } },
+      strict: true,
+      props: {
+        name: { type: 'string' },
+        extends: { type: 'string', optional: true },
+      },
     },
   ],
 };

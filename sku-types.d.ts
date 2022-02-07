@@ -192,7 +192,7 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=languages
    */
-  languages?: Array<string | { name: string }>;
+  languages?: Array<string | { name: string; extends?: string }>;
 
   /**
    * **Only for libraries**

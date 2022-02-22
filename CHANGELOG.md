@@ -1,5 +1,11 @@
 # sku
 
+## 11.2.7
+
+### Patch Changes
+
+- Support static rendering for routes using ':language' ([#670](https://github.com/seek-oss/sku/pull/670))
+
 ## 11.2.6
 
 ### Patch Changes

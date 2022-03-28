@@ -1,5 +1,11 @@
 # sku
 
+## 11.2.8
+
+### Patch Changes
+
+- Force upgrade `@vocab/core` to `^1.0.4` to fix a language hierarchy bug that can result in incorrect translation messages being used for a language. ([#672](https://github.com/seek-oss/sku/pull/672))
+
 ## 11.2.7
 
 ### Patch Changes

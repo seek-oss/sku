@@ -96,7 +96,7 @@ Last but not least, please note that commands for SSR are different to the ones 
 
 - Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.
 - Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
-- Use `sku test-ssr` to test your application
+- Use `sku test` to test your application
 
 ## Multi-language support
 

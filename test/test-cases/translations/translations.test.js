@@ -31,6 +31,11 @@ describe('translations', () => {
     expect(app).toMatchSnapshot();
   });
 
+  it('should render en-PSEUDO post-hydration', async () => {
+    const app = await getAppSnapshot(`${baseUrl}/en?pseudo=true`);
+    expect(app).toMatchSnapshot();
+  });
+
   it('should support query parameters', async () => {
     const app = await getAppSnapshot(`${baseUrl}/en?a=1`);
     expect(app).toMatchSnapshot();

@@ -26,6 +26,7 @@ describe('ssr translations', () => {
   afterAll(async () => {
     await server.kill();
   });
+
   it('should render en', async () => {
     const app = await getAppSnapshot(`${backendUrl}/en`);
     expect(app).toMatchSnapshot();
@@ -33,6 +34,11 @@ describe('ssr translations', () => {
 
   it('should render fr', async () => {
     const app = await getAppSnapshot(`${backendUrl}/fr`);
+    expect(app).toMatchSnapshot();
+  });
+
+  it('should render en-PSEUDO', async () => {
+    const app = await getAppSnapshot(`${backendUrl}/en?pseudo=true`);
     expect(app).toMatchSnapshot();
   });
 });

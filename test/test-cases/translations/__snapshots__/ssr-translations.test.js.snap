@@ -90,6 +90,96 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
+exports[`ssr translations should render en-PSEUDO 1`] = `
+SCRIPTS: Array [
+  "http://127.0.0.1:8313/runtime.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-ac261c.js",
+  "http://127.0.0.1:8313/main.js",
+  "http://127.0.0.1:8313/en-PSEUDO-translations.js",
+]
+CSS: Array []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="en-PSEUDO-translations"
+          rel="preload"
+          as="script"
+          href="scripts[3]"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        [Ḩẽẽẽƚƚööö šķǚǚǚ]
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      ["en-PSEUDO-translations"]
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":["en-PSEUDO-translations"]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="en-PSEUDO-translations"
+            src="scripts[3]"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;
+
 exports[`ssr translations should render fr 1`] = `
 SCRIPTS: Array [
   "http://127.0.0.1:8313/runtime.js",

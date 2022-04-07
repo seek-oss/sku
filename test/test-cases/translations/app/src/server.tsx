@@ -38,7 +38,9 @@ export default () => ({
       }),
     );
     await Promise.resolve();
-    const language = req.url.includes('fr') ? 'fr' : 'en';
+    const isPseudo = Boolean(req.query['pseudo']);
+    const pathLanguage = req.url.includes('fr') ? 'fr' : 'en';
+    const language = isPseudo ? 'en-PSEUDO' : pathLanguage
     addLanguageChunk(language);
 
     const app = renderToString(

@@ -85,7 +85,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`translations should render en-PSEUDO 1`] = `
+exports[`translations should render en-PSEUDO post-hydration 1`] = `
 SCRIPTS: Array [
   "/runtime-b96cdebdb24d3d6d309a.js",
   "/552-3d4ee7abcaa85b24d2e0.js",

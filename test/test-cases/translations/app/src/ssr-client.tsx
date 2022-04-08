@@ -6,7 +6,10 @@ import { loadableReady } from '../../../../../@loadable/component';
 import App from './App';
 
 loadableReady(() => {
-  const language = window.location.pathname.includes('fr') ? 'fr' : 'en';
+  const pathLanguage = window.location.pathname.includes('fr') ? 'fr' : 'en';
+  const urlParameters = new URLSearchParams(window.location.search);
+  const isPseudo = Boolean(urlParameters.get('pseudo'));
+  const language = isPseudo ? 'en-PSEUDO' : pathLanguage;
 
   hydrate(
     <VocabProvider language={language}>

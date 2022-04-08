@@ -131,7 +131,7 @@ When formatting ICU messages vocab will format values such dates and numbers acc
 
 Any app that configures `languages` will automatically have the `en-PSEUDO` language generated for them.
 
-`en-PSEUDO` is a generated language based off existing `en` translation messages.
+`en-PSEUDO` is a generated language created by pseudo-localizing existing `en` translation messages in your app.
 
 An explanation of the pseudo-localization process, as well as possible use cases for this language, can be found in [the Vocab docs](https://github.com/seek-oss/vocab#pseudo-localization).
 

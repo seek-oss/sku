@@ -138,5 +138,7 @@ An explanation of the pseudo-localization process, as well as possible use cases
 `en-PSEUDO` can be consumed just like any other language in your app:
 
 ```jsx
-const App = () => <VocabProvider language="en-PSEUDO">...</VocabProvider>;
+<VocabProvider language="en-PSEUDO">
+  <App />
+</VocabProvider>
 ```

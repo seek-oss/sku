@@ -1,5 +1,11 @@
 # sku
 
+## 11.3.2
+
+### Patch Changes
+
+- Fix banner width in CI ([#680](https://github.com/seek-oss/sku/pull/680))
+
 ## 11.3.1
 
 ### Patch Changes

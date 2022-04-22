@@ -152,6 +152,10 @@ class SkuWebpackPlugin {
       {
         // All CSS created by vanilla-extract
         test: /\.vanilla.css$/i,
+        // Don't process vanilla files from Playroom as they are handled separately.
+        // Virtual file paths will look more realistic in the future allowing
+        // more standard handling of include/exclude path matching.
+        exclude: /node_modules\/playroom/,
         use: makeVanillaCssLoaders({
           isProductionBuild,
           MiniCssExtractPlugin,

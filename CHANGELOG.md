@@ -1,5 +1,19 @@
 # sku
 
+## 11.3.2
+
+### Patch Changes
+
+- Fix banner width in CI ([#680](https://github.com/seek-oss/sku/pull/680))
+
+## 11.3.1
+
+### Patch Changes
+
+- test: Run Jest using the CI flag when in CI environment ([#678](https://github.com/seek-oss/sku/pull/678))
+
+  Tests run in CI should fail if a new snapshot is written, this was not the case and needed to be opted into manually by passing the `--ci` [flag to Jest](https://jestjs.io/docs/cli#--ci).
+
 ## 11.3.0
 
 ### Minor Changes

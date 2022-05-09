@@ -192,7 +192,7 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=languages
    */
-  languages?: Readonly<Array<string | { name: string; extends?: string }>>;
+  languages?: ReadonlyArray<string | { name: string; extends?: string }>;
 
   /**
    * **Only for libraries**

@@ -1,5 +1,11 @@
 # sku
 
+## 11.4.0
+
+### Minor Changes
+
+- The `languages` sku config value now accepts `readonly` types ([#685](https://github.com/seek-oss/sku/pull/685))
+
 ## 11.3.3
 
 ### Patch Changes

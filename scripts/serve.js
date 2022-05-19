@@ -2,9 +2,8 @@ const path = require('path');
 const express = require('express');
 const fs = require('fs-extra');
 const handler = require('serve-handler');
-const partition = require('lodash/partition');
 const flatMap = require('lodash/flatMap');
-const { blue, bold, underline, yellow, red } = require('chalk');
+const { blue, bold, underline, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 const minimatch = require('minimatch');
 

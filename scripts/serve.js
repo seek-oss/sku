@@ -31,7 +31,7 @@ const {
   getValidLanguagesForRoute,
 } = require('../lib/language-utils');
 
-const prefferedSite = args.site;
+const preferredSite = args.site;
 
 (async () => {
   track.count('serve');
@@ -49,9 +49,9 @@ const prefferedSite = args.site;
 
   const availableSites = sites.map(({ name }) => name);
 
-  if (prefferedSite && !availableSites.some((site) => prefferedSite === site)) {
-    console.log(red(`Unknown site '${bold(prefferedSite)}'`));
-    const suggestedSite = didYouMean(prefferedSite, availableSites);
+  if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
+    console.log(red(`Unknown site '${bold(preferredSite)}'`));
+    const suggestedSite = didYouMean(preferredSite, availableSites);
 
     if (suggestedSite) {
       console.log(`Did you mean '${bold(suggestedSite)}'?`);
@@ -95,7 +95,7 @@ const prefferedSite = args.site;
   app.use((request, response) => {
     const [hostname] = request.headers.host.split(':');
 
-    const site = getSiteForHost(hostname, prefferedSite) || '';
+    const site = getSiteForHost(hostname, preferredSite) || '';
 
     const rewrites = flatMap(routes, (route) =>
       getValidLanguagesForRoute(route).map((lang) => {

@@ -81,27 +81,6 @@ const prefferedSite = args.site;
 
   const environment = resolveEnvironment();
 
-  const [invalidRoutes, validRoutes] = partition(
-    routes,
-    ({ route }) => route.indexOf(':') > -1,
-  );
-
-  if (invalidRoutes.length > 0) {
-    console.log(yellow(`Invalid dynamic routes:\n`));
-
-    invalidRoutes.forEach(({ route }) => {
-      console.log(yellow(underline(route)));
-    });
-
-    console.log(
-      yellow(
-        `\n${bold(
-          'sku serve',
-        )} doesn't support dynamic routes using ':' style syntax.\nPlease upgrade your routes to use '$' instead.`,
-      ),
-    );
-  }
-
   const app = express();
 
   if (useDevServerMiddleware) {
@@ -116,16 +95,16 @@ const prefferedSite = args.site;
 
     const site = getSiteForHost(hostname, prefferedSite) || '';
 
-    const rewrites = flatMap(validRoutes, (route) =>
+    const rewrites = flatMap(routes, (route) =>
       getValidLanguagesForRoute(route).map((lang) => {
         const langRoute = getRouteWithLanguage(route.route, lang);
 
         const normalisedRoute = langRoute
           .split('/')
           .map((part) => {
-            if (part.startsWith('$')) {
-              // Path is dynamic, map part to * match
-              return '*';
+            if (part.startsWith('$') || part.startsWith(':')) {
+              // Match the literal value because that's what sku outputs
+              return `\\${part}`;
             }
 
             return part;
@@ -133,8 +112,13 @@ const prefferedSite = args.site;
           .join('/');
 
         return {
-          source: normalisedRoute,
-          destination: path.join(environment, site, langRoute, 'index.html'),
+          source: langRoute,
+          destination: path.join(
+            environment,
+            site,
+            normalisedRoute,
+            'index.html',
+          ),
         };
       }),
     );

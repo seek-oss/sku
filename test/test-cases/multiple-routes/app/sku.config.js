@@ -5,14 +5,14 @@ export default {
       host: 'dev.seek.com.au',
       routes: [
         { route: '/', name: 'home' },
-        { route: '/details/$id', name: 'details' },
+        { route: '/details/:id', name: 'details' },
       ],
     },
     {
       name: 'nz',
       routes: [
         { route: '/nz', name: 'home' },
-        { route: '/nz/details/$id', name: 'details' },
+        { route: '/nz/details/:id', name: 'details' },
       ],
       host: 'dev.seek.co.nz',
     },

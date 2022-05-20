@@ -98,24 +98,31 @@ const preferredSite = args.site;
       getValidLanguagesForRoute(route).map((lang) => {
         const langRoute = getRouteWithLanguage(route.route, lang);
 
-        const normalisedRoute = langRoute
+        // $ and : are both acceptable dynamic path delimiters
+        const normalisedSourceRoute = langRoute
           .split('/')
           .map((part) => {
             if (part.startsWith('$') || part.startsWith(':')) {
-              // Match the literal value because that's what sku outputs
-              return `\\${part}`;
+              // Path is dynamic, map part to * match
+              return '*';
             }
 
             return part;
           })
           .join('/');
 
+        // Segments with : need to be escaped though, because serve expects there to be an equivalent in source
+        const normalisedDestinationRoute = langRoute
+          .split('/')
+          .map((part) => (part.startsWith(':') ? `\\${part}` : part))
+          .join('/');
+
         return {
-          source: langRoute,
+          source: normalisedSourceRoute,
           destination: path.join(
             environment,
             site,
-            normalisedRoute,
+            normalisedDestinationRoute,
             'index.html',
           ),
         };

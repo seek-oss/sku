@@ -5,9 +5,6 @@ const handler = require('serve-handler');
 const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
-const minimatch = require('minimatch');
-
-console.log(minimatch(':id', '*id'));
 
 const {
   port,

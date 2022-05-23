@@ -9,16 +9,16 @@ import clientContextKey from '../clientContextKey';
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
     throw new Error(require('dedent')`
-      The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrate. e.g.
+      The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrateRoot. e.g.
 
-      import { hydrate } from 'react-dom';
-          
+      import { hydrateRoot } from 'react-dom/client';
+
       import App from './App';
-          
+
       export default ({ site }) =>
-        hydrate(
-          <App site={site} />, 
-          document.getElementById('app')
+        hydrateRoot(
+          document.getElementById('app')!,
+          <App site={site} />,
         );
 
       See https://seek-oss.github.io/sku/#/./docs/building-the-app?id=client for more info.

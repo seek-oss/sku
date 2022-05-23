@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import { ComponentType, ReactNode } from 'react';
 
 interface SharedRenderProps {
   routeName: string;
@@ -12,7 +12,7 @@ interface SharedRenderProps {
 }
 
 interface RenderAppProps extends SharedRenderProps {
-  SkuProvider: ComponentType;
+  SkuProvider: ComponentType<{ children: ReactNode }>;
   _addChunk: (chunkName: string) => void;
 }
 

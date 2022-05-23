@@ -1,9 +1,9 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
 import App from './App/App';
 import { ClientContext } from './types';
 
 export default ({ environment }: ClientContext) => {
-  hydrate(<App environment={environment} />, document.getElementById('app'));
+  hydrateRoot(document.getElementById('app')!, <App environment={environment} />);
 };

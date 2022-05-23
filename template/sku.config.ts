@@ -5,7 +5,7 @@ const skuConfig: SkuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
-  orderImports: true
+  orderImports: true,
 };
 
 export default skuConfig;

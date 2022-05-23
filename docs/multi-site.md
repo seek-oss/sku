@@ -102,13 +102,13 @@ export default {
 ```js
 // client.js
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
 import App from './App';
 
 // Pass the site variable from `provideClientContext` to the top level component
 export default ({ site }) =>
-  hydrate(<App site={site} />, document.getElementById('app'));
+  hydrateRoot(document.getElementById('app')!, <App site={site} />);
 ```
 
 ### Loading the theme
@@ -117,15 +117,22 @@ Now the site is available in our `App` component, we use `BraidLoadableProvider`
 
 ```js
 // App.js
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-import { BraidLoadableProvider } from 'braid-design-system';
+import { BraidProvider } from 'braid-design-system';
+import loadable from 'sku/@loadable/component';
+
+const BraidTheme = loadable.lib((props: { themeName }) =>
+  import(`braid-design-system/themes/${props.themeName}`),
+);
 
 export default ({ site }) => {
-  return (
-    <BraidLoadableProvider themeName={site}>
-      <MyPage />
-    </BraidLoadableProvider>
-  );
-};
+  <BraidTheme themeName={site}>
+    {({ default: theme }) => (
+      <BraidProvider theme={theme}>
+        <MyPage />
+      </BraidProvider>
+    )}
+  </BraidTheme>
+);
 ```

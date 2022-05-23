@@ -5,7 +5,7 @@ export default {
       host: 'dev.seek.com.au',
       routes: [
         { route: '/', name: 'home' },
-        { route: '/details/:id', name: 'details' },
+        { route: '/details/$id', name: 'details' },
       ],
     },
     {

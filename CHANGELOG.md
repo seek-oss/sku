@@ -1,5 +1,15 @@
 # sku
 
+## 11.4.1
+
+### Patch Changes
+
+- init: Refresh the next steps page ([#688](https://github.com/seek-oss/sku/pull/688))
+
+  Uplift the design (subjective) of the next steps page and add links to more useful content for fresh projects. Includes `Vocab` and slack channels for support and release announcements.
+
+- React 18 support ([#688](https://github.com/seek-oss/sku/pull/688))
+
 ## 11.4.0
 
 ### Minor Changes

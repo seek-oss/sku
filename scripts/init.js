@@ -164,7 +164,12 @@ const args = require('../config/args');
 
   const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
 
-  const devDeps = ['husky', '@types/react', '@types/react-dom'];
+  const devDeps = [
+    '@vanilla-extract/css',
+    'husky',
+    '@types/react',
+    '@types/react-dom',
+  ];
 
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(

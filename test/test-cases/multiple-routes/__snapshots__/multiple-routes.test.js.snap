@@ -227,7 +227,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/details/$id/index.html": SCRIPTS: Array [
+  "production/nz/nz/details/:id/index.html": SCRIPTS: Array [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-6d8ad2fd0a40dbb9d707.js",
     "/static/place/388-39ddc85fb494bd9028a1.js",

@@ -2,9 +2,8 @@ const path = require('path');
 const express = require('express');
 const fs = require('fs-extra');
 const handler = require('serve-handler');
-const partition = require('lodash/partition');
 const flatMap = require('lodash/flatMap');
-const { blue, bold, underline, yellow, red } = require('chalk');
+const { blue, bold, underline, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 
 const {
@@ -29,7 +28,7 @@ const {
   getValidLanguagesForRoute,
 } = require('../lib/language-utils');
 
-const prefferedSite = args.site;
+const preferredSite = args.site;
 
 (async () => {
   track.count('serve');
@@ -47,9 +46,9 @@ const prefferedSite = args.site;
 
   const availableSites = sites.map(({ name }) => name);
 
-  if (prefferedSite && !availableSites.some((site) => prefferedSite === site)) {
-    console.log(red(`Unknown site '${bold(prefferedSite)}'`));
-    const suggestedSite = didYouMean(prefferedSite, availableSites);
+  if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
+    console.log(red(`Unknown site '${bold(preferredSite)}'`));
+    const suggestedSite = didYouMean(preferredSite, availableSites);
 
     if (suggestedSite) {
       console.log(`Did you mean '${bold(suggestedSite)}'?`);
@@ -81,27 +80,6 @@ const prefferedSite = args.site;
 
   const environment = resolveEnvironment();
 
-  const [invalidRoutes, validRoutes] = partition(
-    routes,
-    ({ route }) => route.indexOf(':') > -1,
-  );
-
-  if (invalidRoutes.length > 0) {
-    console.log(yellow(`Invalid dynamic routes:\n`));
-
-    invalidRoutes.forEach(({ route }) => {
-      console.log(yellow(underline(route)));
-    });
-
-    console.log(
-      yellow(
-        `\n${bold(
-          'sku serve',
-        )} doesn't support dynamic routes using ':' style syntax.\nPlease upgrade your routes to use '$' instead.`,
-      ),
-    );
-  }
-
   const app = express();
 
   if (useDevServerMiddleware) {
@@ -114,16 +92,17 @@ const prefferedSite = args.site;
   app.use((request, response) => {
     const [hostname] = request.headers.host.split(':');
 
-    const site = getSiteForHost(hostname, prefferedSite) || '';
+    const site = getSiteForHost(hostname, preferredSite) || '';
 
-    const rewrites = flatMap(validRoutes, (route) =>
+    const rewrites = flatMap(routes, (route) =>
       getValidLanguagesForRoute(route).map((lang) => {
         const langRoute = getRouteWithLanguage(route.route, lang);
 
-        const normalisedRoute = langRoute
+        // $ and : are both acceptable dynamic path delimiters
+        const normalisedSourceRoute = langRoute
           .split('/')
           .map((part) => {
-            if (part.startsWith('$')) {
+            if (part.startsWith('$') || part.startsWith(':')) {
               // Path is dynamic, map part to * match
               return '*';
             }
@@ -132,9 +111,20 @@ const prefferedSite = args.site;
           })
           .join('/');
 
+        // Segments with : need to be escaped though, because serve expects there to be an equivalent in source
+        const normalisedDestinationRoute = langRoute
+          .split('/')
+          .map((part) => (part.startsWith(':') ? `\\${part}` : part))
+          .join('/');
+
         return {
-          source: normalisedRoute,
-          destination: path.join(environment, site, langRoute, 'index.html'),
+          source: normalisedSourceRoute,
+          destination: path.join(
+            environment,
+            site,
+            normalisedDestinationRoute,
+            'index.html',
+          ),
         };
       }),
     );

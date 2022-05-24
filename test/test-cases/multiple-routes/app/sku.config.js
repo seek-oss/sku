@@ -12,7 +12,7 @@ export default {
       name: 'nz',
       routes: [
         { route: '/nz', name: 'home' },
-        { route: '/nz/details/$id', name: 'details' },
+        { route: '/nz/details/:id', name: 'details' },
       ],
       host: 'dev.seek.co.nz',
     },

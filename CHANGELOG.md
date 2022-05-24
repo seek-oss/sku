@@ -1,5 +1,16 @@
 # sku
 
+## 11.4.2
+
+### Patch Changes
+
+- Allow `:` to be used in dynamic paths again. ([#687](https://github.com/seek-oss/sku/pull/687))
+
+  Previously, dynamic paths were declared using the standard `:param` syntax, but this had been deprecated in favour of `$param`.
+
+  This has now been updated to allow for both.
+  This should allow `sku serve` to work for projects using colon syntax.
+
 ## 11.4.1
 
 ### Patch Changes

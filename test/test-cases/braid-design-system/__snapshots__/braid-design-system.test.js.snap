@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 Object {
-  "390-558f72854c124e8f31e0.css": ._1brbmfo0 {
+  "390-e3f9ef0d56d30d89e84e.css": ._1brbmfo0 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -1764,10 +1764,8 @@ Object {
 .jhxt9712 {
   color: var(--h3207tt);
 }
+.jhxt9712:focus,
 .jhxt9712:hover {
-  color: var(--h3207tu);
-}
-.jhxt9712:focus {
   color: var(--h3207tu);
 }
 .jhxt9713 {
@@ -2005,12 +2003,8 @@ svg.jhxt971g {
   display: block;
 }
 .lc4anf1.lc4anfc + .lc4anf4 > .lc4anfe,
-.lc4anf1:checked + .lc4anf4 > .lc4anfe {
-  opacity: 1;
-}
-.lc4anf1:focus + .lc4anf4 > .lc4anff {
-  opacity: 1;
-}
+.lc4anf1:checked + .lc4anf4 > .lc4anfe,
+.lc4anf1:focus + .lc4anf4 > .lc4anff,
 .lc4anf1:hover:not(:checked):not(.lc4anfc):not(:disabled)
   + .lc4anf4
   > .lc4anfg {
@@ -2300,12 +2294,12 @@ svg.jhxt971g {
   \\"util\\"
 ]",
   "jobStreet/index.html": SCRIPTS: Array [
-    "/runtime-6197cbbc0527b7fdf914.js",
+    "/runtime-0a0e4efeba2032e8ce24.js",
     "/main-a84cb9afa5eff4d7f75f.js",
     "/themes-jobStreet-a241d9392b30482764d3.js",
   ]
 CSS: Array [
-    "/390-558f72854c124e8f31e0.css",
+    "/390-e3f9ef0d56d30d89e84e.css",
     "/themes-jobStreet-3bdb23b17052d463b1d1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2507,14 +2501,14 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main-a84cb9afa5eff4d7f75f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-6197cbbc0527b7fdf914.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0a0e4efeba2032e8ce24.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: Array [
-    "/runtime-6197cbbc0527b7fdf914.js",
+    "/runtime-0a0e4efeba2032e8ce24.js",
     "/main-a84cb9afa5eff4d7f75f.js",
     "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
   ]
 CSS: Array [
-    "/390-558f72854c124e8f31e0.css",
+    "/390-e3f9ef0d56d30d89e84e.css",
     "/themes-seekAnz-5fff494d64baabdd84a9.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -4861,12 +4855,12 @@ SOURCE HTML: <!DOCTYPE html>
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: Array [
-  "/runtime-6197cbbc0527b7fdf914.js",
+  "/runtime-0a0e4efeba2032e8ce24.js",
   "/main-a84cb9afa5eff4d7f75f.js",
   "/themes-jobStreet-a241d9392b30482764d3.js",
 ]
 CSS: Array [
-  "/390-558f72854c124e8f31e0.css",
+  "/390-e3f9ef0d56d30d89e84e.css",
   "/themes-jobStreet-3bdb23b17052d463b1d1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -5089,12 +5083,12 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: Array [
-  "/runtime-6197cbbc0527b7fdf914.js",
+  "/runtime-0a0e4efeba2032e8ce24.js",
   "/main-a84cb9afa5eff4d7f75f.js",
   "/themes-seekAnz-391b0e7ab6a74f9e1e84.js",
 ]
 CSS: Array [
-  "/390-558f72854c124e8f31e0.css",
+  "/390-e3f9ef0d56d30d89e84e.css",
   "/themes-seekAnz-5fff494d64baabdd84a9.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

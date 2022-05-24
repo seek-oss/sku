@@ -37,7 +37,7 @@ module.exports = {
 // render.js
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 import App from './App';
 
@@ -45,7 +45,7 @@ export default {
   renderApp: ({ SkuProvider, route }) => {
     return renderToString(
       <SkuProvider>
-        <StaticRouter location={route} context={{}}>
+        <StaticRouter location={route}>
           <App />
         </StaticRouter>
       </SkuProvider>,
@@ -73,17 +73,17 @@ export default {
 ```js
 // client.js
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
 export default () => {
-  hydrate(
+  hydrateRoot(
+    document.getElementById('app')!,
     <BrowserRouter>
       <App />
     </BrowserRouter>,
-    document.getElementById('app'),
   );
 };
 ```
@@ -91,16 +91,16 @@ export default () => {
 ```js
 // App.js
 import React, { Fragment } from 'react';
-import { Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import loadable from 'sku/@loadable/component';
 
 const Home = loadable(() => import('./handlers/Home'));
 const Details = loadable(() => import('./handlers/Details'));
 
 export default ({ site }) => (
-  <Fragment>
-    <Route path="/" exact component={Home} />
-    <Route path="/details" exact component={Details} />
-  </Fragment>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/details" element={<Details />} />
+  </Routes>
 );
 ```

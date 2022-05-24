@@ -145,16 +145,16 @@ Client entry
 
 ```js
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
 import App from './App';
 
 export default ({ site, analyticsEnabled, appLength }) => {
   console.log('HTML source length', appLength);
 
-  hydrate(
+  hydrateRoot(
+    document.getElementById('app')!,
     <App site={site} analytics={analyticsEnabled} />,
-    document.getElementById('app'),
   );
 };
 ```

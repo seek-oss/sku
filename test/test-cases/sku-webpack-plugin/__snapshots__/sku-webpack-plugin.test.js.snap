@@ -1910,10 +1910,8 @@ Object {
 .sm1qbb12 {
   color: var(--_1th2mrqt);
 }
+.sm1qbb12:focus,
 .sm1qbb12:hover {
-  color: var(--_1th2mrqu);
-}
-.sm1qbb12:focus {
   color: var(--_1th2mrqu);
 }
 .sm1qbb13 {

@@ -19,6 +19,28 @@ const ejs = require('ejs');
 
 const args = require('../config/args');
 
+const removeLeadingUnderscoreFromFileName = (filePath) => {
+  const basename = path.basename(filePath);
+
+  if (basename.startsWith('_')) {
+    const normalizedFileName = basename.replace(/^_/, '');
+    const dirname = path.dirname(filePath);
+
+    return path.join(dirname, normalizedFileName);
+  }
+
+  return filePath;
+};
+
+const getTemplateFileDestinationFromRoot =
+  (projectRoot, templateDirectory) => (filePath) => {
+    const normalizedFilePath = removeLeadingUnderscoreFromFileName(filePath);
+    const filePathRelativeToTemplate =
+      normalizedFilePath.split(templateDirectory)[1];
+
+    return path.join(projectRoot, filePathRelativeToTemplate);
+  };
+
 (async () => {
   const projectName = args.argv[0];
 
@@ -132,25 +154,18 @@ const args = require('../config/args');
   const useYarn = detectYarn();
 
   const templateDirectory = path.join(__dirname, '../template');
-  const templateFilePaths = await glob(`${templateDirectory}/**/*`, {
+  const templateFiles = await glob(`${templateDirectory}/**/*`, {
     onlyFiles: true,
   });
 
-  const templateFileMap = templateFilePaths.map((p) => {
-    const basename = path.basename(p);
-    const normalizedFilePath = basename.startsWith('_')
-      ? path.join(path.dirname(p), basename.replace(/^_/, ''))
-      : p;
-
-    return {
-      src: p,
-      dest: path.join(root, normalizedFilePath.split(templateDirectory)[1]),
-    };
-  });
+  const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
+    root,
+    templateDirectory,
+  );
 
   await Promise.all(
-    templateFileMap.map(async (p) => {
-      const fileContents = await ejs.renderFile(p.src, {
+    templateFiles.map(async (file) => {
+      const fileContents = await ejs.renderFile(file, {
         appName,
         gettingStartedDocs: useYarn
           ? dedent`
@@ -175,9 +190,11 @@ const args = require('../config/args');
         formatScript: useYarn ? 'yarn format' : 'npm run format',
         buildScript: useYarn ? 'yarn build' : 'npm run build',
       });
+      const destination = getTemplateFileDestination(file);
 
-      await fs.mkdirp(path.dirname(p.dest));
-      await fs.writeFile(p.dest, fileContents);
+      // Ensure folders exist before writing files to them
+      await fs.mkdirp(path.dirname(destination));
+      await fs.writeFile(destination, fileContents);
     }),
   );
 

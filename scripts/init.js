@@ -5,7 +5,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
-const kopy = require('kopy');
 const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
 const detectYarn = require('../lib/detectYarn');
@@ -15,8 +14,32 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const banner = require('../lib/banner');
 const trace = require('debug')('sku:init');
+const glob = require('fast-glob');
+const ejs = require('ejs');
 
 const args = require('../config/args');
+
+const removeLeadingUnderscoreFromFileName = (filePath) => {
+  const basename = path.basename(filePath);
+
+  if (basename.startsWith('_')) {
+    const normalizedFileName = basename.replace(/^_/, '');
+    const dirname = path.dirname(filePath);
+
+    return path.join(dirname, normalizedFileName);
+  }
+
+  return filePath;
+};
+
+const getTemplateFileDestinationFromRoot =
+  (projectRoot, templateDirectory) => (filePath) => {
+    const normalizedFilePath = removeLeadingUnderscoreFromFileName(filePath);
+    const filePathRelativeToTemplate =
+      normalizedFilePath.split(templateDirectory)[1];
+
+    return path.join(projectRoot, filePathRelativeToTemplate);
+  };
 
 (async () => {
   const projectName = args.argv[0];
@@ -130,15 +153,22 @@ const args = require('../config/args');
 
   const useYarn = detectYarn();
 
-  await kopy(path.join(__dirname, '../template'), root, {
-    move: {
-      // Remove leading underscores from filenames:
-      '_*': (filepath) => filepath.replace(/^_/, ''),
-    },
-    data: () => ({
-      appName,
-      gettingStartedDocs: useYarn
-        ? dedent`
+  const templateDirectory = path.join(__dirname, '../template');
+  const templateFiles = await glob(`${templateDirectory}/**/*`, {
+    onlyFiles: true,
+  });
+
+  const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
+    root,
+    templateDirectory,
+  );
+
+  await Promise.all(
+    templateFiles.map(async (file) => {
+      const fileContents = await ejs.renderFile(file, {
+        appName,
+        gettingStartedDocs: useYarn
+          ? dedent`
             First of all, make sure you've installed [Yarn](https://yarnpkg.com).
 
             Then, install dependencies:
@@ -147,20 +177,26 @@ const args = require('../config/args');
             $ yarn
             \`\`\`
             `
-        : dedent`
+          : dedent`
             Install dependencies:
 
             \`\`\`bash
             $ npm install
             \`\`\`
             `,
-      startScript: useYarn ? 'yarn start' : 'npm start',
-      testScript: useYarn ? 'yarn test' : 'npm test',
-      lintScript: useYarn ? 'yarn lint' : 'npm run lint',
-      formatScript: useYarn ? 'yarn format' : 'npm run format',
-      buildScript: useYarn ? 'yarn build' : 'npm run build',
+        startScript: useYarn ? 'yarn start' : 'npm start',
+        testScript: useYarn ? 'yarn test' : 'npm test',
+        lintScript: useYarn ? 'yarn lint' : 'npm run lint',
+        formatScript: useYarn ? 'yarn format' : 'npm run format',
+        buildScript: useYarn ? 'yarn build' : 'npm run build',
+      });
+      const destination = getTemplateFileDestination(file);
+
+      // Ensure folders exist before writing files to them
+      await fs.mkdirp(path.dirname(destination));
+      await fs.writeFile(destination, fileContents);
     }),
-  });
+  );
 
   const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
 

@@ -5,7 +5,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
-const kopy = require('kopy');
 const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
 const detectYarn = require('../lib/detectYarn');
@@ -15,6 +14,8 @@ const configure = require('../lib/configure');
 const install = require('../lib/install');
 const banner = require('../lib/banner');
 const trace = require('debug')('sku:init');
+const glob = require('fast-glob');
+const ejs = require('ejs');
 
 const args = require('../config/args');
 
@@ -130,15 +131,29 @@ const args = require('../config/args');
 
   const useYarn = detectYarn();
 
-  await kopy(path.join(__dirname, '../template'), root, {
-    move: {
-      // Remove leading underscores from filenames:
-      '_*': (filepath) => filepath.replace(/^_/, ''),
-    },
-    data: () => ({
-      appName,
-      gettingStartedDocs: useYarn
-        ? dedent`
+  const templateDirectory = path.join(__dirname, '../template');
+  const templateFilePaths = await glob(`${templateDirectory}/**/*`, {
+    onlyFiles: true,
+  });
+
+  const templateFileMap = templateFilePaths.map((p) => {
+    const basename = path.basename(p);
+    const normalizedFilePath = basename.startsWith('_')
+      ? path.join(path.dirname(p), basename.replace(/^_/, ''))
+      : p;
+
+    return {
+      src: p,
+      dest: path.join(root, normalizedFilePath.split(templateDirectory)[1]),
+    };
+  });
+
+  await Promise.all(
+    templateFileMap.map(async (p) => {
+      const fileContents = await ejs.renderFile(p.src, {
+        appName,
+        gettingStartedDocs: useYarn
+          ? dedent`
             First of all, make sure you've installed [Yarn](https://yarnpkg.com).
 
             Then, install dependencies:
@@ -147,20 +162,24 @@ const args = require('../config/args');
             $ yarn
             \`\`\`
             `
-        : dedent`
+          : dedent`
             Install dependencies:
 
             \`\`\`bash
             $ npm install
             \`\`\`
             `,
-      startScript: useYarn ? 'yarn start' : 'npm start',
-      testScript: useYarn ? 'yarn test' : 'npm test',
-      lintScript: useYarn ? 'yarn lint' : 'npm run lint',
-      formatScript: useYarn ? 'yarn format' : 'npm run format',
-      buildScript: useYarn ? 'yarn build' : 'npm run build',
+        startScript: useYarn ? 'yarn start' : 'npm start',
+        testScript: useYarn ? 'yarn test' : 'npm test',
+        lintScript: useYarn ? 'yarn lint' : 'npm run lint',
+        formatScript: useYarn ? 'yarn format' : 'npm run format',
+        buildScript: useYarn ? 'yarn build' : 'npm run build',
+      });
+
+      await fs.mkdirp(path.dirname(p.dest));
+      await fs.writeFile(p.dest, fileContents);
     }),
-  });
+  );
 
   const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
 

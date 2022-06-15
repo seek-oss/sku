@@ -1,5 +1,11 @@
 # sku
 
+## 11.4.3
+
+### Patch Changes
+
+- Update deps ([#692](https://github.com/seek-oss/sku/pull/692))
+
 ## 11.4.2
 
 ### Patch Changes

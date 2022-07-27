@@ -110,7 +110,7 @@ This function provides a way to override the webpack config after sku has create
 
 Ideally, this setting is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
 
-Reliance on this setting will cause issues when upgrading sku as any custom settings may break at anytime. You've been warned!
+Reliance on this setting will cause issues when upgrading sku as any custom settings may break at any time. You've been warned!
 
 Example:
 
@@ -263,7 +263,7 @@ Default: `public`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
 
-> Caution: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching. You may run into caching issues using this option. It may be removed in future.
+> Caution: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching. You may run into caching issues using this option. It may be removed in the future.
 
 ## publicPath
 

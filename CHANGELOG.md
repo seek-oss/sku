@@ -1,5 +1,11 @@
 # sku
 
+## 11.4.5
+
+### Patch Changes
+
+- Roll back typescript version to one that doesn't break vanilla types ([#698](https://github.com/seek-oss/sku/pull/698))
+
 ## 11.4.4
 
 ### Patch Changes

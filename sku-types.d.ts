@@ -149,7 +149,7 @@ export interface SkuConfig {
    * @default []
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=environments
    */
-  environments?: string[];
+  environments?: ReadonlyArray<string>;
 
   /**
    * By default, sku compiles all node_modules in builds that target node.
@@ -167,7 +167,7 @@ export interface SkuConfig {
    * @default ['localhost']
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=hosts
    */
-  hosts?: string[];
+  hosts?: ReadonlyArray<string>;
 
   /**
    * Whether or not to use https for the local development server with a self-signed certificate.

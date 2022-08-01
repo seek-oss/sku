@@ -30,7 +30,7 @@ module.exports = () => {
       noUnusedLocals: true,
       strict: true,
       jsx: 'preserve',
-      lib: ['dom', 'es2015'],
+      lib: ['dom', 'es2019'],
       target: 'es5',
     },
     include: includePaths,

@@ -26,7 +26,7 @@ export function BigBox() {
 }
 ```
 
-See [vanilla-extract](https://vanilla-extract.style/documentation/) for full documentation.
+See [vanilla-extract](https://vanilla-extract.style/documentation/getting-started) for full documentation.
 
 ## Locally Scoped CSS
 

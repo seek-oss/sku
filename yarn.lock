@@ -3975,10 +3975,10 @@
     intl-messageformat "^9.9.0"
     prettier "^2.1.2"
 
-"@vocab/phrase@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-1.0.0.tgz#856d55ce892ebe0c0a4b17cb906ac870ae920055"
-  integrity sha512-a1+bb9X0eeLiQ4xkM+VT7nM72qpFXTBZ/yYm3DdIuW6V9p7epzIF/FOyfonrJmQrwDLzSW6LTaaRLoKRNFnTjg==
+"@vocab/phrase@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@vocab/phrase/-/phrase-1.1.0.tgz#8814440506dd5ba40f864025ac3d469c48b440eb"
+  integrity sha512-CMLrFC9yHKaniIH7cQ6w1ouKJ5Iln1ZLyYcm3JyB2JXJxRn2jSz25kXU8rPWGCpFYCpcf7sCgY9OYAD1YQ7OAg==
   dependencies:
     "@vocab/core" "^1.0.0"
     "@vocab/types" "^1.0.0"

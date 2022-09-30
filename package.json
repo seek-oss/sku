@@ -199,7 +199,7 @@
     "webpack-stats-plugin": "^1.0.3"
   },
   "volta": {
-    "node": "14.17.4",
+    "node": "14.20.1",
     "yarn": "1.22.4"
   }
 }

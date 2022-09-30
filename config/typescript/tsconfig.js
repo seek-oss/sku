@@ -2,6 +2,16 @@ const { cwd } = require('../../lib/cwd');
 const { paths, rootResolution } = require('../../context');
 const path = require('path');
 
+const getRelativePath = (inputPath) => {
+  const relativePath = path.relative(cwd(), inputPath);
+
+  if (relativePath[0] !== '.') {
+    return `./${relativePath}`;
+  }
+
+  return relativePath;
+};
+
 module.exports = () => {
   const includePaths = paths.src;
 
@@ -33,7 +43,7 @@ module.exports = () => {
       lib: ['dom', 'es2019'],
       target: 'es5',
     },
-    include: includePaths,
+    include: includePaths.map(getRelativePath),
   };
 
   if (rootResolution) {
@@ -41,7 +51,7 @@ module.exports = () => {
       '*': ['*'],
     };
 
-    config.compilerOptions.baseUrl = cwd();
+    config.compilerOptions.baseUrl = '.';
   }
 
   return config;

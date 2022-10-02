@@ -2,9 +2,9 @@
 'sku': minor
 ---
 
-Add an optional `delete-unused-keys` flag to the `translations push` command. If set to `true`, unused keys will be deleted from Phrase after translations are pushed.
+Add optional `delete-unused-keys` flag to the `translations push` command
 
-**EXAMPLE USAGE**:
+If this flag is set, unused keys will be deleted from Phrase after translations are pushed.
 
 ```bash
 sku translations push --delete-unused-keys

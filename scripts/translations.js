@@ -7,9 +7,17 @@ const { compile, validate } = require('@vocab/core');
 const { push, pull } = require('@vocab/phrase');
 const { getVocabConfig } = require('../config/vocab/vocab');
 
-const vocabCommands = args.length > 0 ? args : undefined;
+const translationSubCommands = ['compile', 'push', 'pull', 'validate'];
 
-const subCommands = ['compile', 'push', 'pull', 'validate'];
+const commandArguments = args.length > 0 ? args : undefined;
+
+if (!commandArguments) {
+  throw new Error(
+    `No translations command provided. Available commands are: ${translationSubCommands.join(
+      ', ',
+    )}.`,
+  );
+}
 
 const ensureBranch = () => {
   if (!branch) {
@@ -21,7 +29,7 @@ const ensureBranch = () => {
 };
 
 (async () => {
-  const translationSubCommand = vocabCommands[0];
+  const translationSubCommand = commandArguments[0];
 
   console.log(chalk.cyan('Translations', translationSubCommand));
 
@@ -33,9 +41,9 @@ const ensureBranch = () => {
     );
   }
 
-  if (!subCommands.includes(translationSubCommand)) {
+  if (!translationSubCommands.includes(translationSubCommand)) {
     throw new Error(
-      `Unknown command ${translationSubCommand}. Available options are ${subCommands.join(
+      `Unknown command ${translationSubCommand}. Available options are ${translationSubCommands.join(
         ', ',
       )}`,
     );
@@ -49,8 +57,12 @@ const ensureBranch = () => {
       validate(vocabConfig);
     }
     if (translationSubCommand === 'push') {
+      const deleteUnusedKeys = commandArguments.includes(
+        '--delete-unused-keys',
+      );
+
       ensureBranch();
-      push({ branch }, vocabConfig);
+      push({ branch, deleteUnusedKeys }, vocabConfig);
     }
     if (translationSubCommand === 'pull') {
       ensureBranch();

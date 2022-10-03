@@ -1,5 +1,21 @@
 # sku
 
+## 11.5.0
+
+### Minor Changes
+
+- Add optional `delete-unused-keys` flag to the `translations push` command ([#702](https://github.com/seek-oss/sku/pull/702))
+
+  If this flag is set, unused keys will be deleted from Phrase after translations are pushed.
+
+  ```bash
+  sku translations push --delete-unused-keys
+  ```
+
+### Patch Changes
+
+- Display a better error message when no `sku translations` command is provided ([#702](https://github.com/seek-oss/sku/pull/702))
+
 ## 11.4.5
 
 ### Patch Changes

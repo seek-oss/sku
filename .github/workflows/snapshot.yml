@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Node.js 12.x
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version-file: 'package.json'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile

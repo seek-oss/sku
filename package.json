@@ -77,7 +77,7 @@
     "@vanilla-extract/babel-plugin": "^1.0.0",
     "@vanilla-extract/webpack-plugin": "^2.0.0",
     "@vocab/core": "^1.1.0",
-    "@vocab/phrase": "^1.0.0",
+    "@vocab/phrase": "^1.1.0",
     "@vocab/pseudo-localize": "^1.0.0",
     "@vocab/webpack": "^1.1.0",
     "autoprefixer": "^10.3.1",

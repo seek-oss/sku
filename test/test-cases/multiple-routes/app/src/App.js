@@ -15,10 +15,10 @@ const routes = {
 };
 
 const Home = loadable(() => import('./handlers/Home'), {
-  fallback: 'Loading Home...',
+  fallback: <div>Loading Home...</div>,
 });
 const Details = loadable(() => import('./handlers/Details'), {
-  fallback: 'Loading Details...',
+  fallback: <div>Loading Details...</div>,
 });
 
 export default ({ site }) => (

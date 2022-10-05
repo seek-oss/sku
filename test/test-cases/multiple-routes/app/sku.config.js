@@ -10,11 +10,11 @@ export default {
     },
     {
       name: 'nz',
+      host: 'dev.seek.co.nz',
       routes: [
         { route: '/nz', name: 'home' },
         { route: '/nz/details/:id', name: 'details' },
       ],
-      host: 'dev.seek.co.nz',
     },
   ],
   environments: ['production'],

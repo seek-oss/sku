@@ -78,7 +78,8 @@ const hot = process.env.SKU_HOT !== 'false';
     devMiddleware: {
       publicPath: paths.publicPath,
     },
-    host: appHosts[0],
+    port: availablePort,
+    host: localhost,
     allowedHosts: appHosts,
     hot,
     static: [
@@ -94,76 +95,88 @@ const hot = process.env.SKU_HOT !== 'false';
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = {
-      key: pems,
-      cert: pems,
+    devServerConfig.server = {
+      type: 'https',
+      options: {
+        key: pems,
+        cert: pems,
+      },
     };
   }
 
-  const devServer = new WebpackDevServer(clientCompiler, {
-    ...devServerConfig,
-    onAfterSetupMiddleware: ({ app }) => {
-      if (useDevServerMiddleware) {
-        const devServerMiddleware = require(paths.devServerMiddleware);
-        if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-          devServerMiddleware(app);
-        }
-      }
-      app.get('*', (req, res, next) => {
-        const matchingSiteName = getSiteForHost(req.hostname);
-
-        const matchingRoute = routes.find(({ route, siteIndex }) => {
+  const devServer = new WebpackDevServer(
+    {
+      ...devServerConfig,
+      setupMiddlewares: (middlewares, { app }) => {
+        if (useDevServerMiddleware) {
+          const devServerMiddleware = require(paths.devServerMiddleware);
           if (
-            typeof siteIndex === 'number' &&
-            matchingSiteName !== sites[siteIndex].name
+            devServerMiddleware &&
+            typeof devServerMiddleware === 'function'
           ) {
-            return false;
+            devServerMiddleware(app);
+          }
+        }
+
+        middlewares.push((req, res, next) => {
+          const matchingSiteName = getSiteForHost(req.hostname);
+
+          const matchingRoute = routes.find(({ route, siteIndex }) => {
+            if (
+              typeof siteIndex === 'number' &&
+              matchingSiteName !== sites[siteIndex].name
+            ) {
+              return false;
+            }
+
+            return routeMatcher(route)(req.path);
+          });
+
+          if (!matchingRoute) {
+            return next();
           }
 
-          return routeMatcher(route)(req.path);
-        });
+          let chosenLanguage;
 
-        if (!matchingRoute) {
-          return next();
-        }
-
-        let chosenLanguage;
-
-        try {
-          chosenLanguage = getLanguageFromRoute(req, matchingRoute);
-        } catch (e) {
-          return res.status(500).send(
-            exceptionFormatter(e, {
-              format: 'html',
-              inlineStyle: true,
-              basepath: 'webpack://static/./',
-            }),
-          );
-        }
-
-        htmlRenderPlugin
-          .renderWhenReady({
-            route: getRouteWithLanguage(matchingRoute.route, chosenLanguage),
-            routeName: matchingRoute.name,
-            site: matchingSiteName,
-            language: chosenLanguage,
-            environment,
-          })
-          .then((html) => res.send(html))
-          .catch((renderError) => {
-            res.status(500).send(
-              exceptionFormatter(renderError, {
+          try {
+            chosenLanguage = getLanguageFromRoute(req, matchingRoute);
+          } catch (e) {
+            return res.status(500).send(
+              exceptionFormatter(e, {
                 format: 'html',
                 inlineStyle: true,
                 basepath: 'webpack://static/./',
               }),
             );
-          });
-      });
-    },
-  });
+          }
 
-  devServer.listen(availablePort, localhost, (err) => {
+          htmlRenderPlugin
+            .renderWhenReady({
+              route: getRouteWithLanguage(matchingRoute.route, chosenLanguage),
+              routeName: matchingRoute.name,
+              site: matchingSiteName,
+              language: chosenLanguage,
+              environment,
+            })
+            .then((html) => res.send(html))
+            .catch((renderError) => {
+              res.status(500).send(
+                exceptionFormatter(renderError, {
+                  format: 'html',
+                  inlineStyle: true,
+                  basepath: 'webpack://static/./',
+                }),
+              );
+            });
+        });
+
+        return middlewares;
+      },
+    },
+    clientCompiler,
+  );
+
+  devServer.startCallback((err) => {
     if (err) {
       console.log(err);
       return;

@@ -114,7 +114,8 @@ const localhost = '0.0.0.0';
   });
 
   const devServerConfig = {
-    host: appHosts[0],
+    host: localhost,
+    port: clientPort,
     allowedHosts: appHosts,
     hot,
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -129,16 +130,19 @@ const localhost = '0.0.0.0';
 
   if (httpsDevServer) {
     const pems = await getCertificate();
-    devServerConfig.https = {
-      key: pems,
-      cert: pems,
+    devServerConfig.server = {
+      type: 'https',
+      options: {
+        key: pems,
+        cert: pems,
+      },
     };
   }
 
   // Start webpack dev server using only the client config
-  const devServer = new WebpackDevServer(clientCompiler, devServerConfig);
+  const devServer = new WebpackDevServer(devServerConfig, clientCompiler);
 
-  devServer.listen(clientPort, localhost, (err) => {
+  devServer.startCallback((err) => {
     if (err) {
       console.log(err);
       return;
@@ -148,7 +152,7 @@ const localhost = '0.0.0.0';
   onDeath(() => {
     serverManager.kill();
 
-    devServer.close(() => {
+    devServer.stopCallback(() => {
       debug('Webpack dev server closed');
     });
     serverCompiler.close(() => {

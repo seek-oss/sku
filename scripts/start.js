@@ -74,11 +74,15 @@ const hot = process.env.SKU_HOT !== 'false';
 
   const appHosts = getAppHosts();
 
+  /**
+   * @type import('webpack-dev-server').Configuration
+   */
   const devServerConfig = {
     devMiddleware: {
       publicPath: paths.publicPath,
     },
-    host: appHosts[0],
+    port: availablePort,
+    host: localhost,
     allowedHosts: appHosts,
     hot,
     static: [
@@ -90,26 +94,16 @@ const hot = process.env.SKU_HOT !== 'false';
     client: {
       overlay: false,
     },
-  };
-
-  if (httpsDevServer) {
-    const pems = await getCertificate();
-    devServerConfig.https = {
-      key: pems,
-      cert: pems,
-    };
-  }
-
-  const devServer = new WebpackDevServer(clientCompiler, {
-    ...devServerConfig,
-    onAfterSetupMiddleware: ({ app }) => {
+    setupExitSignals: true,
+    setupMiddlewares: (middlewares, { app }) => {
       if (useDevServerMiddleware) {
         const devServerMiddleware = require(paths.devServerMiddleware);
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {
           devServerMiddleware(app);
         }
       }
-      app.get('*', (req, res, next) => {
+
+      middlewares.push((req, res, next) => {
         const matchingSiteName = getSiteForHost(req.hostname);
 
         const matchingRoute = routes.find(({ route, siteIndex }) => {
@@ -160,10 +154,25 @@ const hot = process.env.SKU_HOT !== 'false';
             );
           });
       });
-    },
-  });
 
-  devServer.listen(availablePort, localhost, (err) => {
+      return middlewares;
+    },
+  };
+
+  if (httpsDevServer) {
+    const pems = await getCertificate();
+    devServerConfig.server = {
+      type: 'https',
+      options: {
+        key: pems,
+        cert: pems,
+      },
+    };
+  }
+
+  const devServer = new WebpackDevServer(devServerConfig, clientCompiler);
+
+  devServer.startCallback((err) => {
     if (err) {
       console.log(err);
       return;

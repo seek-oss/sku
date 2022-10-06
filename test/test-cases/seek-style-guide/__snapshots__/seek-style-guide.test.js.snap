@@ -2,7 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 Object {
-  "658-c00d5c9361e60829fa01.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "658-5cca6ff19fb462e20857.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   \\"crypto\\",
   \\"fs\\",
@@ -15,7 +15,7 @@ Object {
 ]",
   "index.html": SCRIPTS: Array [
     "/runtime-64aaa8825b894a3f3430.js",
-    "/658-c00d5c9361e60829fa01.js",
+    "/658-5cca6ff19fb462e20857.js",
     "/main-d6f0a6047ee55b6211db.js",
   ]
 CSS: Array [

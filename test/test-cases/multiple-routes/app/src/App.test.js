@@ -11,6 +11,8 @@ describe('multiple-routes', () => {
       </StaticRouter>,
     );
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"Loading Home..."`);
+    expect(container.innerHTML).toMatchInlineSnapshot(
+      `"<div>Loading Home...</div>"`,
+    );
   });
 });

@@ -126,6 +126,7 @@ const localhost = '0.0.0.0';
         port: clientPort,
       },
     },
+    setupExitSignals: true,
   };
 
   if (httpsDevServer) {
@@ -152,9 +153,6 @@ const localhost = '0.0.0.0';
   onDeath(() => {
     serverManager.kill();
 
-    devServer.stopCallback(() => {
-      debug('Webpack dev server closed');
-    });
     serverCompiler.close(() => {
       debug('Server compiler closed');
     });

@@ -4,8 +4,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const { blue, underline } = require('chalk');
 const exceptionFormatter = require('exception-formatter');
-const onDeath = require('death');
-const debug = require('debug')('sku:start');
 
 const { checkHosts, getAppHosts } = require('../lib/hosts');
 const allocatePort = require('../lib/allocatePort');
@@ -93,6 +91,7 @@ const hot = process.env.SKU_HOT !== 'false';
     client: {
       overlay: false,
     },
+    setupExitSignals: true,
   };
 
   if (httpsDevServer) {
@@ -193,11 +192,5 @@ const hot = process.env.SKU_HOT !== 'false';
     console.log();
 
     openBrowser(url);
-  });
-
-  onDeath(() => {
-    devServer.stopCallback(() => {
-      debug('Webpack dev server closed');
-    });
   });
 })();

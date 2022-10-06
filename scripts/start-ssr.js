@@ -113,6 +113,9 @@ const localhost = '0.0.0.0';
     serverManager.hotUpdate();
   });
 
+  /**
+   * @type import('webpack-dev-server').Configuration
+   */
   const devServerConfig = {
     host: localhost,
     port: clientPort,

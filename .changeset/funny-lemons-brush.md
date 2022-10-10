@@ -4,7 +4,9 @@
 
 Upgrade from jest v27 to v29
 
-See the [v27 to v28 upgrade guide](https://jestjs.io/docs/28.x/upgrading-to-jest28) and [jest v29 announcement](https://jestjs.io/blog/2022/08/25/jest-29) for breaking changes.
+Please take a look at the following upgrade guides as there may be breaking changes that affect your tests:
+- [v27 to v28 upgrade guide](https://jestjs.io/docs/28.x/upgrading-to-jest28) 
+- [v28 to v29 upgrade guide](https://jestjs.io/docs/upgrading-to-jest29)
 
 Likely the most significant change is the new default snapshot format:
 

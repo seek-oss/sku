@@ -1,5 +1,5 @@
 ---
-'sku': major
+'sku': minor
 ---
 
 Upgrade from jest v27 to v29

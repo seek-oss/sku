@@ -1,5 +1,5 @@
 ---
-'sku': major
+'sku': minor
 ---
 
 Update to eslint-config-seek v10

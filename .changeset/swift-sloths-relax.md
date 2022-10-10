@@ -1,5 +1,5 @@
 ---
-'sku': major
+'sku': minor
 ---
 
 Drop support for Node v12

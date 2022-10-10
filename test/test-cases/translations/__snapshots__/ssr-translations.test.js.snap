@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr translations should render en 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
   "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-translations.js",
 ]
-CSS: Array []
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -91,13 +91,13 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr translations should render en-PSEUDO 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
   "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-PSEUDO-translations.js",
 ]
-CSS: Array []
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -181,13 +181,13 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr translations should render fr 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
   "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/fr-translations.js",
 ]
-CSS: Array []
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>

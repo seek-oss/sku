@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
-Object {
+{
   "388-511840688a4a1bc959b0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent-e5dd9b17c3e199e04145.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-a64546ac90263aae4890.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -15,7 +15,7 @@ Object {
 }
 ,
   "main-e8b7ea7017205186f2c7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/$id/index.html": SCRIPTS: Array [
+  "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-e6b377799fa3c39e8111.js",
     "/static/place/388-511840688a4a1bc959b0.js",
@@ -23,7 +23,7 @@ Object {
     "/static/place/handlers-Details-a64546ac90263aae4890.js",
     "/static/place/AsyncComponent-e5dd9b17c3e199e04145.js",
   ]
-CSS: Array [
+CSS: [
     "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -128,14 +128,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/au/index.html": SCRIPTS: Array [
+  "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-e6b377799fa3c39e8111.js",
     "/static/place/388-511840688a4a1bc959b0.js",
     "/static/place/main-e8b7ea7017205186f2c7.js",
     "/static/place/handlers-Home-78bfea94931835aed464.js",
   ]
-CSS: Array [
+CSS: [
     "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -227,7 +227,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/details/:id/index.html": SCRIPTS: Array [
+  "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-e6b377799fa3c39e8111.js",
     "/static/place/388-511840688a4a1bc959b0.js",
@@ -235,7 +235,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/handlers-Details-a64546ac90263aae4890.js",
     "/static/place/AsyncComponent-e5dd9b17c3e199e04145.js",
   ]
-CSS: Array [
+CSS: [
     "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -340,14 +340,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/index.html": SCRIPTS: Array [
+  "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime-e6b377799fa3c39e8111.js",
     "/static/place/388-511840688a4a1bc959b0.js",
     "/static/place/main-e8b7ea7017205186f2c7.js",
     "/static/place/handlers-Home-78bfea94931835aed464.js",
   ]
-CSS: Array [
+CSS: [
     "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -444,7 +444,7 @@ SOURCE HTML: <!DOCTYPE html>
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/static/place/runtime-e6b377799fa3c39e8111.js",
   "/static/place/388-511840688a4a1bc959b0.js",
@@ -452,7 +452,7 @@ SCRIPTS: Array [
   "/static/place/handlers-Details-a64546ac90263aae4890.js",
   "/static/place/AsyncComponent-e5dd9b17c3e199e04145.js",
 ]
-CSS: Array [
+CSS: [
   "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -570,14 +570,14 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`multiple-routes build and serve should return home page 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/static/place/runtime-e6b377799fa3c39e8111.js",
   "/static/place/388-511840688a4a1bc959b0.js",
   "/static/place/main-e8b7ea7017205186f2c7.js",
   "/static/place/handlers-Home-78bfea94931835aed464.js",
 ]
-CSS: Array [
+CSS: [
   "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -673,7 +673,7 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`multiple-routes start should render details page correctly 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
   "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-5e3a44.js",
@@ -681,7 +681,7 @@ SCRIPTS: Array [
   "/handlers-Details.js",
   "/AsyncComponent.js",
 ]
-CSS: Array [
+CSS: [
   "/handlers-Details.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -799,14 +799,14 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`multiple-routes start should render home page correctly 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
   "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-5e3a44.js",
   "/main.js",
   "/handlers-Home.js",
 ]
-CSS: Array [
+CSS: [
   "/handlers-Home.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

@@ -3,8 +3,8 @@
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
 SCRIPTS: [
   "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/151-7e9d9afaeada4dc03cd0.js",
-  "http://localhost:4000/main-f85b9b2ab1bf55a767fc.js",
+  "http://localhost:4000/729-44f62256042f02c7d823.js",
+  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
@@ -98,8 +98,8 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 SCRIPTS: [
   "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/151-7e9d9afaeada4dc03cd0.js",
-  "http://localhost:4000/main-f85b9b2ab1bf55a767fc.js",
+  "http://localhost:4000/729-44f62256042f02c7d823.js",
+  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [

@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-d2beb64170da59323a1a.js",
-  "/702-b9038a5bb4463bace621.js",
-  "/main-3c00d0804c9907718ddb.js",
+  "/555-3d2e2d310183dacd87f7.js",
+  "/main-ea783f8d06ce0a24644c.js",
 ]
 CSS: [
   "/main-9c6bd518e9e408ef2fe1.css",
@@ -111,7 +111,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_babel_runtime_helper-5bffe2.js",
+  "/vendors-node_modules_babel_runtime_helpers_esm_slicedToArray_js-node_modules_babel_runtime_he-7b393d.js",
   "/main.js",
 ]
 CSS: [
@@ -219,7 +219,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: [
   "https://127.0.0.1:9843/runtime.js",
-  "https://127.0.0.1:9843/vendors-node_modules_babel_runtime_helpers_slicedToArray_js-node_modules_loadable_component_d-eebb13.js",
+  "https://127.0.0.1:9843/vendors-node_modules_babel_runtime_helpers_esm_slicedToArray_js-node_modules_loadable_compone-7b8bb5.js",
   "https://127.0.0.1:9843/main.js",
 ]
 CSS: [

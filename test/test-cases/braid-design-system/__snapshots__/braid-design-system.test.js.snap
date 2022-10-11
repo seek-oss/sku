@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "390-e3f9ef0d56d30d89e84e.css": ._1brbmfo0 {
+  "390-5a76331335c80fef2456.css": ._1brbmfo0 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -1535,96 +1535,6 @@ exports[`braid-design-system build should generate the expected files 1`] = `
   font-size: 20px;
   padding: 100px;
 }
-._173azei0 {
-  transform-origin: 50% 50%;
-  transition: transform 0.3s ease;
-}
-._173azei1 {
-  transform: rotate(90deg);
-}
-._173azei2 {
-  transform: rotate(180deg);
-}
-._173azei3 {
-  transform: rotate(270deg);
-}
-._1qtg68u0 {
-  height: var(--h3207t26);
-}
-._1qtg68u1 {
-  height: var(--h3207t2g);
-}
-._1qtg68u2 {
-  height: var(--h3207t2q);
-}
-._1qtg68u3 {
-  height: var(--h3207t30);
-}
-@media screen and (min-width: 740px) {
-  ._1qtg68u0 {
-    height: var(--h3207t2b);
-  }
-  ._1qtg68u1 {
-    height: var(--h3207t2l);
-  }
-  ._1qtg68u2 {
-    height: var(--h3207t2v);
-  }
-  ._1qtg68u3 {
-    height: var(--h3207t35);
-  }
-}
-._9v6jbo0 {
-  height: 1em;
-  width: 1em;
-}
-._9v6jbo1 {
-  vertical-align: middle;
-}
-._9v6jbo2 {
-  top: -0.105em;
-}
-._9v6jbo3 {
-  top: -0.16499999999999998em;
-}
-._9v6jbo4 {
-  top: -0.045em;
-}
-._9v6jbo5 {
-  top: -0.065em;
-}
-._9v6jbo6 {
-  top: -0.125em;
-}
-._9v6jbo7 {
-  top: -0.0050000000000000044em;
-}
-._9v6jbo8 {
-  width: var(--h3207t26);
-}
-._9v6jbo9 {
-  width: var(--h3207t2g);
-}
-._9v6jboa {
-  width: var(--h3207t2q);
-}
-._9v6jbob {
-  width: var(--h3207t30);
-}
-@media screen and (min-width: 740px) {
-  ._9v6jbo8 {
-    width: var(--h3207t2b);
-  }
-  ._9v6jbo9 {
-    width: var(--h3207t2l);
-  }
-  ._9v6jboa {
-    width: var(--h3207t2v);
-  }
-  ._9v6jbob {
-    width: var(--h3207t35);
-  }
-}
 ._2dwe9z4 {
   font-size: var(--_2dwe9z0);
   line-height: var(--_2dwe9z1);
@@ -1954,6 +1864,100 @@ svg.jhxt971g {
     padding-top: calc((var(--h3207t8) - var(--h3207t35)) / 2);
   }
 }
+._185dhpb0 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+._173azei0 {
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease;
+}
+._173azei1 {
+  transform: rotate(90deg);
+}
+._173azei2 {
+  transform: rotate(180deg);
+}
+._173azei3 {
+  transform: rotate(270deg);
+}
+._1qtg68u0 {
+  height: var(--h3207t26);
+}
+._1qtg68u1 {
+  height: var(--h3207t2g);
+}
+._1qtg68u2 {
+  height: var(--h3207t2q);
+}
+._1qtg68u3 {
+  height: var(--h3207t30);
+}
+@media screen and (min-width: 740px) {
+  ._1qtg68u0 {
+    height: var(--h3207t2b);
+  }
+  ._1qtg68u1 {
+    height: var(--h3207t2l);
+  }
+  ._1qtg68u2 {
+    height: var(--h3207t2v);
+  }
+  ._1qtg68u3 {
+    height: var(--h3207t35);
+  }
+}
+._9v6jbo0 {
+  height: 1em;
+  width: 1em;
+}
+._9v6jbo1 {
+  vertical-align: middle;
+}
+._9v6jbo2 {
+  top: -0.105em;
+}
+._9v6jbo3 {
+  top: -0.16499999999999998em;
+}
+._9v6jbo4 {
+  top: -0.045em;
+}
+._9v6jbo5 {
+  top: -0.065em;
+}
+._9v6jbo6 {
+  top: -0.125em;
+}
+._9v6jbo7 {
+  top: -0.0050000000000000044em;
+}
+._9v6jbo8 {
+  width: var(--h3207t26);
+}
+._9v6jbo9 {
+  width: var(--h3207t2g);
+}
+._9v6jboa {
+  width: var(--h3207t2q);
+}
+._9v6jbob {
+  width: var(--h3207t30);
+}
+@media screen and (min-width: 740px) {
+  ._9v6jbo8 {
+    width: var(--h3207t2b);
+  }
+  ._9v6jbo9 {
+    width: var(--h3207t2l);
+  }
+  ._9v6jboa {
+    width: var(--h3207t2v);
+  }
+  ._9v6jbob {
+    width: var(--h3207t35);
+  }
+}
 ._1m7tua20 {
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
@@ -2278,10 +2282,6 @@ svg.jhxt971g {
   left: 0 !important;
   right: 0 !important;
 }
-._185dhpb0 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 ,
   "externals.json": "[
   "crypto",
@@ -2294,12 +2294,12 @@ svg.jhxt971g {
   "util"
 ]",
   "jobStreet/index.html": SCRIPTS: [
-    "/runtime-ae2f6dcdc04100e89075.js",
-    "/main-b6c861ef5c179035a5cf.js",
-    "/themes-jobStreet-b1176f00543604c725c8.js",
+    "/runtime-87337764ca4fe7366b88.js",
+    "/main-0c74ae9c7c67e0e6d285.js",
+    "/themes-jobStreet-e58ac4eeb93c462b761f.js",
   ]
 CSS: [
-    "/390-e3f9ef0d56d30d89e84e.css",
+    "/390-5a76331335c80fef2456.css",
     "/themes-jobStreet-3bdb23b17052d463b1d1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2500,15 +2500,15 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-b6c861ef5c179035a5cf.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime-ae2f6dcdc04100e89075.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0c74ae9c7c67e0e6d285.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-87337764ca4fe7366b88.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": SCRIPTS: [
-    "/runtime-ae2f6dcdc04100e89075.js",
-    "/main-b6c861ef5c179035a5cf.js",
-    "/themes-seekAnz-1fb19a0d260b74ab2f4d.js",
+    "/runtime-87337764ca4fe7366b88.js",
+    "/main-0c74ae9c7c67e0e6d285.js",
+    "/themes-seekAnz-ea69050d718a34533422.js",
   ]
 CSS: [
-    "/390-e3f9ef0d56d30d89e84e.css",
+    "/390-5a76331335c80fef2456.css",
     "/themes-seekAnz-5fff494d64baabdd84a9.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
@@ -2903,8 +2903,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-apac-bf752fa13181c9bee84b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-catho-436a055f56e2343bafb3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-apac-72f386c026b97eea4679.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-catho-479700885d4b1f02c19a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-catho-a34faba53b062d5f4ddc.css": .lqdro_1i5 {
   background-color: #de0059;
   color: #fff;
@@ -3098,6 +3098,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
+  "themes-docs-6ff88857692896e53110.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-docs-f225157f3c7697b6f0e6.css": .lqdro_9 {
   background-color: #1a1a1a;
   color: #fff;
@@ -3292,7 +3293,6 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
-  "themes-docs-fd1d7c311ee1a69b750d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreet-3bdb23b17052d463b1d1.css": .lqdro_1 {
   background-color: #fff200;
   color: #fff;
@@ -3487,8 +3487,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobStreet-b1176f00543604c725c8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-jobStreetClassic-198b4daeda7842b63e54.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobStreet-e58ac4eeb93c462b761f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobStreetClassic-7a6fe6f5b11a148acc27.css": .lqdro_2 {
   background-color: #fff200;
   color: #fff;
@@ -3682,6 +3681,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
+  "themes-jobStreetClassic-949fa257f75fdb64b61a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-jobsDb-5686b5bbf88b8aa6bf22.css": .lqdro_3 {
   background-color: #ff9000;
   color: #fff;
@@ -3876,7 +3876,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #923f92;
 }
 ,
-  "themes-jobsDb-6f955600892326782e9d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-jobsDb-e276bee54f50f21452fa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-occ-1458eee9612a9c15eb15.css": .lqdro_2vM {
   background-color: #f13465;
   color: #fff;
@@ -4070,8 +4070,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #5736ab;
 }
 ,
-  "themes-occ-b2bf48478be3cea53a8c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-seekAnz-1fb19a0d260b74ab2f4d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-occ-648d5543c8635ff9ceea.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekAnz-5fff494d64baabdd84a9.css": .lqdro_4 {
   background-color: #e60278;
   color: #fff;
@@ -4266,7 +4265,8 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekBusiness-66c212a3797d99cb3d73.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekAnz-ea69050d718a34533422.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekBusiness-05f7d5ac2f53fb3321f4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-seekBusiness-c63578e563db4d6e31f5.css": .lqdro_5 {
   background-color: #0d3880;
   color: #fff;
@@ -4655,8 +4655,7 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #9556b7;
 }
 ,
-  "themes-seekUnifiedBeta-47f1e840920d358af835.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "themes-wireframe-4e27b9e63079819da944.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "themes-seekUnifiedBeta-bb0ab821f9b71add2620.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "themes-wireframe-d8521031612219b6397c.css": .lqdro_10 {
   background-color: #111;
   color: #fff;
@@ -4850,17 +4849,18 @@ SOURCE HTML: <!DOCTYPE html>
   --h3207t4z: #855be5;
 }
 ,
+  "themes-wireframe-e206fa408f17a7abe1ca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: [
-  "/runtime-ae2f6dcdc04100e89075.js",
-  "/main-b6c861ef5c179035a5cf.js",
-  "/themes-jobStreet-b1176f00543604c725c8.js",
+  "/runtime-87337764ca4fe7366b88.js",
+  "/main-0c74ae9c7c67e0e6d285.js",
+  "/themes-jobStreet-e58ac4eeb93c462b761f.js",
 ]
 CSS: [
-  "/390-e3f9ef0d56d30d89e84e.css",
+  "/390-5a76331335c80fef2456.css",
   "/themes-jobStreet-3bdb23b17052d463b1d1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -5083,12 +5083,12 @@ POST HYDRATE DIFFS:
 
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: [
-  "/runtime-ae2f6dcdc04100e89075.js",
-  "/main-b6c861ef5c179035a5cf.js",
-  "/themes-seekAnz-1fb19a0d260b74ab2f4d.js",
+  "/runtime-87337764ca4fe7366b88.js",
+  "/main-0c74ae9c7c67e0e6d285.js",
+  "/themes-seekAnz-ea69050d718a34533422.js",
 ]
 CSS: [
-  "/390-e3f9ef0d56d30d89e84e.css",
+  "/390-5a76331335c80fef2456.css",
   "/themes-seekAnz-5fff494d64baabdd84a9.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

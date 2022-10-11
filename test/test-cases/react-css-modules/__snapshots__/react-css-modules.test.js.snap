@@ -3,8 +3,8 @@
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: [
   "/runtime-d71e61b408567c9bf4a8.js",
-  "/702-b9038a5bb4463bace621.js",
-  "/main-f3419f5d0bd4247d699c.js",
+  "/555-3d2e2d310183dacd87f7.js",
+  "/main-10cdc2d23b723be35b4e.js",
 ]
 CSS: [
   "/main-9c6bd518e9e408ef2fe1.css",
@@ -90,11 +90,11 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 {
-  "702-b9038a5bb4463bace621.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "555-3d2e2d310183dacd87f7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/runtime-d71e61b408567c9bf4a8.js",
-    "/702-b9038a5bb4463bace621.js",
-    "/main-f3419f5d0bd4247d699c.js",
+    "/555-3d2e2d310183dacd87f7.js",
+    "/main-10cdc2d23b723be35b4e.js",
   ]
 CSS: [
     "/main-9c6bd518e9e408ef2fe1.css",
@@ -166,6 +166,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
+  "main-10cdc2d23b723be35b4e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-9c6bd518e9e408ef2fe1.css": .lE4bKpu {
   display: flex;
 }
@@ -173,7 +174,6 @@ SOURCE HTML: <!DOCTYPE html>
   font-size: 32px;
 }
 ,
-  "main-f3419f5d0bd4247d699c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-d71e61b408567c9bf4a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

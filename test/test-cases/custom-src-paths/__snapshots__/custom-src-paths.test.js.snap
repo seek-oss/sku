@@ -3,8 +3,8 @@
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: [
   "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
-  "/some-static-place/75-b89c2c633438cd967ef8.js",
-  "/some-static-place/main-fa05ee4f9a94c0959e73.js",
+  "/some-static-place/729-44f62256042f02c7d823.js",
+  "/some-static-place/main-a13eddfbcc9303200a82.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -71,11 +71,11 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 {
-  "75-b89c2c633438cd967ef8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "729-44f62256042f02c7d823.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/some-static-place/runtime-d71e61b408567c9bf4a8.js",
-    "/some-static-place/75-b89c2c633438cd967ef8.js",
-    "/some-static-place/main-fa05ee4f9a94c0959e73.js",
+    "/some-static-place/729-44f62256042f02c7d823.js",
+    "/some-static-place/main-a13eddfbcc9303200a82.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -137,7 +137,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-fa05ee4f9a94c0959e73.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-a13eddfbcc9303200a82.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-d71e61b408567c9bf4a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
@@ -145,7 +145,7 @@ SOURCE HTML: <!DOCTYPE html>
 exports[`custom-src-paths start should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_taggedTemplateLiteral_js-node_modules_loadable_com-369be7.js",
+  "/vendors-node_modules_babel_runtime_helpers_esm_taggedTemplateLiteral_js-node_modules_loadable-cd1c47.js",
   "/main.js",
 ]
 CSS: []

@@ -3,7 +3,7 @@
 exports[`ssr translations should render en 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-5eb91f.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-translations.js",
 ]
@@ -93,7 +93,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr translations should render en-PSEUDO 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-5eb91f.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-PSEUDO-translations.js",
 ]
@@ -183,7 +183,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr translations should render fr 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-171dca.js",
+  "http://127.0.0.1:8313/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-5eb91f.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/fr-translations.js",
 ]

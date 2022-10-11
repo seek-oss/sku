@@ -2,24 +2,24 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 {
-  "695-33f94153214363f21f24.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "927-97b5f99f7417b98c4c74.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
-  "crypto",
-  "fs",
-  "os",
-  "path",
-  "stream",
-  "tty",
-  "url",
-  "util"
+  "external node-commonjs \\"crypto",
+  "external node-commonjs \\"fs",
+  "external node-commonjs \\"os",
+  "external node-commonjs \\"path",
+  "external node-commonjs \\"stream",
+  "external node-commonjs \\"tty",
+  "external node-commonjs \\"url",
+  "external node-commonjs \\"util"
 ]",
   "index.html": SCRIPTS: [
-    "/runtime-64aaa8825b894a3f3430.js",
-    "/695-33f94153214363f21f24.js",
-    "/main-a7f0adc8d7fb42b458e8.js",
+    "/runtime-809e1ad97457d5b9bab0.js",
+    "/927-97b5f99f7417b98c4c74.js",
+    "/main-990f79afe39bc1b1ea14.js",
   ]
 CSS: [
-    "/main-f19c5e5c943340d8270e.css",
+    "/main-ca737daf014d432d7b9d.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -53,19 +53,19 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="Qkmue78">
-        <div class="Btt36in">
+      <div class="WPxrZ0_">
+        <div class="b7gb9q9">
           <h1>
             SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site
           </h1>
         </div>
         <div class>
-          <div class="hfHHxvJ">
-            <span class="_F9zh_G akTknqf EpP2DQr">
+          <div class="IzfAxQf">
+            <span class="Jjq6UT2 qjSF61v vvwPOvq">
               <span class>
                 <span data-automation-svg="true">
-                  <span class="_Gy9bN8">
-                    <svg class="uqJHSmN"
+                  <span class="uHQFAnY">
+                    <svg class="ktKBuYs"
                          xmlns="http://www.w3.org/2000/svg"
                          width="16"
                          height="16"
@@ -113,8 +113,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-a7f0adc8d7fb42b458e8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-f19c5e5c943340d8270e.css": a,
+  "main-990f79afe39bc1b1ea14.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-ca737daf014d432d7b9d.css": a,
 abbr,
 acronym,
 address,
@@ -244,11 +244,11 @@ mark {
 html {
   min-height: 100%;
 }
-.Qkmue78,
+.WPxrZ0_,
 html {
   background-color: #eee;
 }
-.Qkmue78 {
+.WPxrZ0_ {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -257,38 +257,38 @@ html {
     sans-serif;
   font-size: 10px;
 }
-.Qkmue78 *,
-.Qkmue78 :after,
-.Qkmue78 :before {
+.WPxrZ0_ *,
+.WPxrZ0_ :after,
+.WPxrZ0_ :before {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   box-sizing: inherit;
   font-family: inherit;
 }
-.Qkmue78 input[type="search"]::-webkit-search-decoration {
+.WPxrZ0_ input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-.UjFteyQ {
+.vlbXW5h {
   height: 100%;
 }
-.Btt36in {
+.b7gb9q9 {
   clip: rect(1px, 1px, 1px, 1px);
   pointer-events: none;
   position: absolute !important;
 }
-.hfHHxvJ {
+.IzfAxQf {
   margin: 0 auto;
   max-width: 940px;
 }
-._F9zh_G {
+.Jjq6UT2 {
   display: block;
   padding-bottom: 12px;
 }
-._F9zh_G ._F9zh_G {
+.Jjq6UT2 .Jjq6UT2 {
   outline: 2px solid red;
   position: relative;
 }
-._F9zh_G ._F9zh_G:after {
+.Jjq6UT2 .Jjq6UT2:after {
   background: red;
   color: #fff;
   content: "ERROR: Multiple <Text> components nested";
@@ -298,25 +298,25 @@ html {
   right: 0;
   top: 0;
 }
-.akTknqf {
+.qjSF61v {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  .akTknqf:not(.EpP2DQr) {
+  .qjSF61v:not(.vvwPOvq) {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .akTknqf:not(.EpP2DQr) {
+  .qjSF61v:not(.vvwPOvq) {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .akTknqf.EpP2DQr {
+  .qjSF61v.vvwPOvq {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -324,32 +324,32 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .akTknqf.EpP2DQr {
+  .qjSF61v.vvwPOvq {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     transform: translateY(0.41em);
   }
 }
-._O7FvOO {
+.ANQ_5ly {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  ._O7FvOO:not(.EpP2DQr) {
+  .ANQ_5ly:not(.vvwPOvq) {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
   }
 }
 @media only screen and (min-width: 740px) {
-  ._O7FvOO:not(.EpP2DQr) {
+  .ANQ_5ly:not(.vvwPOvq) {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
   }
 }
 @media only screen and (max-width: 739px) {
-  ._O7FvOO.EpP2DQr {
+  .ANQ_5ly.vvwPOvq {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -357,32 +357,32 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  ._O7FvOO.EpP2DQr {
+  .ANQ_5ly.vvwPOvq {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     transform: translateY(0.30285714em);
   }
 }
-.O4qn8Cu {
+.CF6r4BU {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  .O4qn8Cu:not(.EpP2DQr) {
+  .CF6r4BU:not(.vvwPOvq) {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .O4qn8Cu:not(.EpP2DQr) {
+  .CF6r4BU:not(.vvwPOvq) {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .O4qn8Cu.EpP2DQr {
+  .CF6r4BU.vvwPOvq {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -390,7 +390,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .O4qn8Cu.EpP2DQr {
+  .CF6r4BU.vvwPOvq {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -398,21 +398,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .Y6oprHw:not(.EpP2DQr) {
+  .A95F7zl:not(.vvwPOvq) {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .Y6oprHw:not(.EpP2DQr) {
+  .A95F7zl:not(.vvwPOvq) {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .Y6oprHw.EpP2DQr {
+  .A95F7zl.vvwPOvq {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
@@ -420,7 +420,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .Y6oprHw.EpP2DQr {
+  .A95F7zl.vvwPOvq {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
@@ -428,21 +428,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .JkMhQWt:not(.EpP2DQr) {
+  .FLQouK5:not(.vvwPOvq) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .JkMhQWt:not(.EpP2DQr) {
+  .FLQouK5:not(.vvwPOvq) {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .JkMhQWt.EpP2DQr {
+  .FLQouK5.vvwPOvq {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -450,7 +450,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .JkMhQWt.EpP2DQr {
+  .FLQouK5.vvwPOvq {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
@@ -458,21 +458,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .pT49ABw:not(.EpP2DQr) {
+  .mHexMNf:not(.vvwPOvq) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .pT49ABw:not(.EpP2DQr) {
+  .mHexMNf:not(.vvwPOvq) {
     font-size: 22px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .pT49ABw.EpP2DQr {
+  .mHexMNf.vvwPOvq {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -480,7 +480,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .pT49ABw.EpP2DQr {
+  .mHexMNf.vvwPOvq {
     font-size: 22px;
     font-weight: 700;
     line-height: 30px;
@@ -488,21 +488,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .wKyu43X:not(.EpP2DQr) {
+  .i1lHigf:not(.vvwPOvq) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .wKyu43X:not(.EpP2DQr) {
+  .i1lHigf:not(.vvwPOvq) {
     font-size: 42px;
     font-weight: 400;
     line-height: 48px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .wKyu43X.EpP2DQr {
+  .i1lHigf.vvwPOvq {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -510,60 +510,60 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .wKyu43X.EpP2DQr {
+  .i1lHigf.vvwPOvq {
     font-size: 42px;
     font-weight: 400;
     line-height: 48px;
     transform: translateY(0.23142857em);
   }
 }
-._KMwFCL {
+.rXRLzQI {
   font-weight: 300;
 }
-.GGirLxS {
+.l6n420X {
   padding-bottom: 0;
 }
-.eIQjCqd {
+.WolnJfO {
   display: list-item;
   list-style-type: disc;
   margin-left: 30px;
 }
-.kke_QSH {
+.jje98Tb {
   color: #169400;
 }
-.Zf05sNq {
+.Q8FP3yU {
   color: #e60278;
 }
-.MznMbUM {
+.KZDm5UB {
   color: #747474;
 }
-.v0p1rT_ {
+.M5PgWPe {
   background-color: rgba(30, 144, 255, 0.12);
   border-radius: 2px;
   display: inline-block;
   margin: -2px;
   padding: 2px;
 }
-.XPb0AOY {
+.PF8NvAk {
   color: #404040;
 }
-._RXKy3g {
+.WC17Pvd {
   background-color: rgba(230, 2, 120, 0.12);
 }
-.pI7SDWF {
+.LFIAqoX {
   color: #9556b7;
 }
-.mp4VnWi {
+._GXtFBj {
   font-weight: 700;
 }
-.eMwWjmh {
+.WqwxeRB {
   font-weight: 400;
 }
-.e9wtuLv {
+.G1rDML3 {
   animation-duration: 0.4s;
-  animation-name: pk5PcPE;
+  animation-name: dsgVSoW;
 }
-@keyframes pk5PcPE {
+@keyframes dsgVSoW {
   0% {
     transform: scale(0.5);
   }
@@ -577,95 +577,95 @@ html {
     transform: scale(1);
   }
 }
-._Gy9bN8 {
+.uHQFAnY {
   display: inline-block;
 }
-.uqJHSmN {
+.ktKBuYs {
   fill: currentColor;
   height: 16px;
   width: 16px;
 }
-.FEKjbuo {
+.sbsvRc2 {
   height: 29.4px;
   width: 29.4px;
 }
 @media only screen and (max-width: 739px) {
-  .FEKjbuo {
+  .sbsvRc2 {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.YPsD4ik {
+.Wqpb6Ex {
   height: 19.6px;
   width: 19.6px;
 }
 @media only screen and (max-width: 739px) {
-  .YPsD4ik {
+  .Wqpb6Ex {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.oeYiYTa {
+.u34HyLH {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  .oeYiYTa {
+  .u34HyLH {
     height: 12.6px;
     width: 12.6px;
   }
 }
-._7qgpcz {
+.irtszXf {
   height: 15.4px;
   width: 15.4px;
 }
 @media only screen and (max-width: 739px) {
-  ._7qgpcz {
+  .irtszXf {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.nIjMwzn {
+.sSDDmgg {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  .nIjMwzn {
+  .sSDDmgg {
     height: 12.6px;
     width: 12.6px;
   }
 }
-.Jr87YSs {
+.oJniROU {
   height: 11.2px;
   width: 11.2px;
 }
 @media only screen and (max-width: 739px) {
-  .Jr87YSs {
+  .oJniROU {
     height: 11.2px;
     width: 11.2px;
   }
 }
-._p9b8Ne {
+.ui8iF5z {
   height: 9.8px;
   width: 9.8px;
 }
 @media only screen and (max-width: 739px) {
-  ._p9b8Ne {
+  .ui8iF5z {
     height: 9.8px;
     width: 9.8px;
   }
 }
-._UKZJDr {
+.XJ4Er_b {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  ._UKZJDr {
+  .XJ4Er_b {
     height: 12.6px;
     width: 12.6px;
   }
 }
 ,
-  "runtime-64aaa8825b894a3f3430.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-809e1ad97457d5b9bab0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

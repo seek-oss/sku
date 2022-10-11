@@ -2,29 +2,29 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
-  "382-64dbd029f1469d363a43.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-c7814faa29177a38db1e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-b25ca7bb5bb8893dbc88.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-c356fae1fa4d368326f6.css": ._itmq_4 {
+  "864-bd37d6dee65a78328cb9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-3bf8f404d3bae9c6b583.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-05c849904c076344dfee.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
   color: blue;
 }
 ,
-  "handlers-Home-0ccb652c496afedfb250.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-b6a3922b82ffa6cd563b.css": .QyseV26 {
+  "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
   color: red;
 }
 ,
-  "main-cc506eaa517ad60709e3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-4af41fea7f6297bee6b7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-79ff02149a3a916824b8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-    "/static/place/382-64dbd029f1469d363a43.js",
-    "/static/place/main-cc506eaa517ad60709e3.js",
-    "/static/place/handlers-Details-b25ca7bb5bb8893dbc88.js",
-    "/static/place/AsyncComponent-c7814faa29177a38db1e.js",
+    "/static/place/runtime-73ec62b00100d1f376df.js",
+    "/static/place/864-bd37d6dee65a78328cb9.js",
+    "/static/place/main-79ff02149a3a916824b8.js",
+    "/static/place/handlers-Details-05c849904c076344dfee.js",
+    "/static/place/AsyncComponent-3bf8f404d3bae9c6b583.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
+    "/static/place/handlers-Details-065db15fad163b0a609f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -79,7 +79,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_itmq_4">
+      <h1 class="EOTSBbL">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -130,13 +130,13 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-    "/static/place/382-64dbd029f1469d363a43.js",
-    "/static/place/main-cc506eaa517ad60709e3.js",
-    "/static/place/handlers-Home-0ccb652c496afedfb250.js",
+    "/static/place/runtime-73ec62b00100d1f376df.js",
+    "/static/place/864-bd37d6dee65a78328cb9.js",
+    "/static/place/main-79ff02149a3a916824b8.js",
+    "/static/place/handlers-Home-4af41fea7f6297bee6b7.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
+    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -186,7 +186,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="QyseV26">
+      <h1 class="dyLY_sb">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -229,14 +229,14 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-    "/static/place/382-64dbd029f1469d363a43.js",
-    "/static/place/main-cc506eaa517ad60709e3.js",
-    "/static/place/handlers-Details-b25ca7bb5bb8893dbc88.js",
-    "/static/place/AsyncComponent-c7814faa29177a38db1e.js",
+    "/static/place/runtime-73ec62b00100d1f376df.js",
+    "/static/place/864-bd37d6dee65a78328cb9.js",
+    "/static/place/main-79ff02149a3a916824b8.js",
+    "/static/place/handlers-Details-05c849904c076344dfee.js",
+    "/static/place/AsyncComponent-3bf8f404d3bae9c6b583.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
+    "/static/place/handlers-Details-065db15fad163b0a609f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -291,7 +291,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_itmq_4">
+      <h1 class="EOTSBbL">
         Welcome to the Details page - nz
         <span>
           Some special async content
@@ -342,13 +342,13 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-    "/static/place/382-64dbd029f1469d363a43.js",
-    "/static/place/main-cc506eaa517ad60709e3.js",
-    "/static/place/handlers-Home-0ccb652c496afedfb250.js",
+    "/static/place/runtime-73ec62b00100d1f376df.js",
+    "/static/place/864-bd37d6dee65a78328cb9.js",
+    "/static/place/main-79ff02149a3a916824b8.js",
+    "/static/place/handlers-Home-4af41fea7f6297bee6b7.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
+    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -398,7 +398,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="QyseV26">
+      <h1 class="dyLY_sb">
         Welcome to the Home page - nz
       </h1>
     </div>
@@ -439,21 +439,21 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-fe96cb8c821cfb411cf6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-73ec62b00100d1f376df.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-  "/static/place/382-64dbd029f1469d363a43.js",
-  "/static/place/main-cc506eaa517ad60709e3.js",
-  "/static/place/handlers-Details-b25ca7bb5bb8893dbc88.js",
-  "/static/place/AsyncComponent-c7814faa29177a38db1e.js",
+  "/static/place/runtime-73ec62b00100d1f376df.js",
+  "/static/place/864-bd37d6dee65a78328cb9.js",
+  "/static/place/main-79ff02149a3a916824b8.js",
+  "/static/place/handlers-Details-05c849904c076344dfee.js",
+  "/static/place/AsyncComponent-3bf8f404d3bae9c6b583.js",
 ]
 CSS: [
-  "/static/place/handlers-Details-c356fae1fa4d368326f6.css",
+  "/static/place/handlers-Details-065db15fad163b0a609f.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -508,7 +508,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="_itmq_4">
+      <h1 class="EOTSBbL">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -560,7 +560,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="_itmq_4">
+       <h1 class="EOTSBbL">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -572,13 +572,13 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-fe96cb8c821cfb411cf6.js",
-  "/static/place/382-64dbd029f1469d363a43.js",
-  "/static/place/main-cc506eaa517ad60709e3.js",
-  "/static/place/handlers-Home-0ccb652c496afedfb250.js",
+  "/static/place/runtime-73ec62b00100d1f376df.js",
+  "/static/place/864-bd37d6dee65a78328cb9.js",
+  "/static/place/main-79ff02149a3a916824b8.js",
+  "/static/place/handlers-Home-4af41fea7f6297bee6b7.js",
 ]
 CSS: [
-  "/static/place/handlers-Home-b6a3922b82ffa6cd563b.css",
+  "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -628,7 +628,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="QyseV26">
+      <h1 class="dyLY_sb">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -676,7 +676,7 @@ exports[`multiple-routes start should render details page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_esm_taggedTemplateLiteral_js-node_modules_loadable-067aea.js",
+  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-b7c9ae.js",
   "/main.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
@@ -737,7 +737,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Details__root____itmq_4">
+      <h1 class="Details__root___EOTSBbL">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -789,7 +789,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="Details__root____itmq_4">
+       <h1 class="Details__root___EOTSBbL">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -802,7 +802,7 @@ exports[`multiple-routes start should render home page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_babel_runtime_helpers_esm_taggedTemplateLiteral_js-node_modules_loadable-067aea.js",
+  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-b7c9ae.js",
   "/main.js",
   "/handlers-Home.js",
 ]
@@ -857,7 +857,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Home__root___QyseV26">
+      <h1 class="Home__root___dyLY_sb">
         Welcome to the Home page - au
       </h1>
     </div>

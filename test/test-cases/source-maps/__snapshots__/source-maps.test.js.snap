@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`source-maps build should generate the expected files 1`] = `
-Object {
-  "75-70af24fe0b113227bdb6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "75-70af24fe0b113227bdb6.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: Array [
+{
+  "729-1c12f2df5ab6c5e0196d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "729-1c12f2df5ab6c5e0196d.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": SCRIPTS: [
     "/static/source-maps/runtime-32ffde280edc35016066.js",
-    "/static/source-maps/75-70af24fe0b113227bdb6.js",
-    "/static/source-maps/main-e56e3eb7e6dba3b050e0.js",
+    "/static/source-maps/729-1c12f2df5ab6c5e0196d.js",
+    "/static/source-maps/main-0545820c7363a3ca71d2.js",
   ]
-CSS: Array []
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -69,8 +69,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-e56e3eb7e6dba3b050e0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-e56e3eb7e6dba3b050e0.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0545820c7363a3ca71d2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0545820c7363a3ca71d2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-32ffde280edc35016066.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-32ffde280edc35016066.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

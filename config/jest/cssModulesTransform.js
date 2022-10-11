@@ -11,6 +11,6 @@ module.exports = {
       cssModule[className] = `${fileName}__${className}`;
     });
 
-    return `module.exports = ${JSON.stringify(cssModule)}`;
+    return { code: `module.exports = ${JSON.stringify(cssModule)}` };
   },
 };

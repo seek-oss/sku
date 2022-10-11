@@ -1,4 +1,3 @@
-/* eslint-disable-next-line jest/no-jest-import */
 const jest = require('jest');
 
 const isCI = require('../lib/isCI');

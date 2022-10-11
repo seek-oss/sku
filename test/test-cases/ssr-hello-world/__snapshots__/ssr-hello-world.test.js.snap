@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/151-7e9d9afaeada4dc03cd0.js",
-  "http://localhost:4000/main-f85b9b2ab1bf55a767fc.js",
+  "http://localhost:4000/729-44f62256042f02c7d823.js",
+  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
-CSS: Array [
+CSS: [
   "http://localhost:4000/main-9c6bd518e9e408ef2fe1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -96,13 +96,13 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/151-7e9d9afaeada4dc03cd0.js",
-  "http://localhost:4000/main-f85b9b2ab1bf55a767fc.js",
+  "http://localhost:4000/729-44f62256042f02c7d823.js",
+  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
-CSS: Array [
+CSS: [
   "http://localhost:4000/main-9c6bd518e9e408ef2fe1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
@@ -191,13 +191,13 @@ POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world start should start a development server 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "http://127.0.0.1:8100/runtime.js",
   "http://127.0.0.1:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-00ac0a.js",
   "http://127.0.0.1:8100/main.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
-CSS: Array [
+CSS: [
   "http://127.0.0.1:8100/main.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

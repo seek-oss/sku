@@ -4,19 +4,19 @@ exports[`sku-webpack-plugin build should create valid app 1`] = `
 "<!doctype html>
 <html>
   <head>
-    <meta charset=\\"utf-8\\">
+    <meta charset="utf-8">
     <title>
       Webpack App
     </title>
-    <meta name=\\"viewport\\"
-          content=\\"width=device-width,initial-scale=1\\"
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1"
     >
-    <script defer=\\"defer\\"
-            src=\\"main.js\\"
+    <script defer="defer"
+            src="main.js"
     >
     </script>
-    <link href=\\"main.css\\"
-          rel=\\"stylesheet\\"
+    <link href="main.css"
+          rel="stylesheet"
     >
   </head>
   <body>
@@ -51,8 +51,8 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-webpack-plugin build should generate the expected files 1`] = `
-Object {
-  "index.html": "<!doctype html><html><head><meta charset=\\"utf-8\\"><title>Webpack App</title><meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\"><script defer=\\"defer\\" src=\\"main.js\\"></script><link href=\\"main.css\\" rel=\\"stylesheet\\"></head><body></body></html>",
+{
+  "index.html": "<!doctype html><html><head><meta charset="utf-8"><title>Webpack App</title><meta name="viewport" content="width=device-width,initial-scale=1"><script defer="defer" src="main.js"></script><link href="main.css" rel="stylesheet"></head><body></body></html>",
   "main.css": ._17mn8h20 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
@@ -2152,10 +2152,10 @@ object-assign
 `;
 
 exports[`sku-webpack-plugin start should start a development server 1`] = `
-SCRIPTS: Array [
+SCRIPTS: [
   "main.js",
 ]
-CSS: Array [
+CSS: [
   "main.css",
 ]
 SOURCE HTML: <!DOCTYPE html>

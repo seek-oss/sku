@@ -157,7 +157,7 @@
     "validate-npm-package-name": "^4.0.0",
     "webpack": "^5.47.1",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-dev-server": "4.11.0",
+    "webpack-dev-server": "4.11.1",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0",
     "wrap-ansi": "^7.0.0",

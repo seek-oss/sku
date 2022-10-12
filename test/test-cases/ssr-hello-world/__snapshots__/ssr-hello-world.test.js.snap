@@ -2,13 +2,13 @@
 
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
 SCRIPTS: [
-  "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/729-44f62256042f02c7d823.js",
-  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
+  "http://localhost:4000/runtime-21ba7ee762f9d6616967.js",
+  "http://localhost:4000/238-eb3ffcfc256ba2aeca3a.js",
+  "http://localhost:4000/main-2954f5db68960313953f.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-9c6bd518e9e408ef2fe1.css",
+  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -48,8 +48,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lE4bKpu">
-        <div class="_KPLLp3">
+      <div class="eRNyDeb">
+        <div class="MYunKdE">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
@@ -97,13 +97,13 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 SCRIPTS: [
-  "http://localhost:4000/runtime-a2e093d62614d5ba3d31.js",
-  "http://localhost:4000/729-44f62256042f02c7d823.js",
-  "http://localhost:4000/main-c59df1ba9609a8c552c6.js",
+  "http://localhost:4000/runtime-21ba7ee762f9d6616967.js",
+  "http://localhost:4000/238-eb3ffcfc256ba2aeca3a.js",
+  "http://localhost:4000/main-2954f5db68960313953f.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-9c6bd518e9e408ef2fe1.css",
+  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -143,8 +143,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lE4bKpu">
-        <div class="_KPLLp3">
+      <div class="eRNyDeb">
+        <div class="MYunKdE">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
@@ -193,7 +193,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world start should start a development server 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8100/runtime.js",
-  "http://127.0.0.1:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-00ac0a.js",
+  "http://127.0.0.1:8100/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-1ad92a.js",
   "http://127.0.0.1:8100/main.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
@@ -238,8 +238,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___lE4bKpu">
-        <div class="lessStyles__nested____KPLLp3">
+      <div class="lessStyles__root___eRNyDeb">
+        <div class="lessStyles__nested___MYunKdE">
           Hello World
         </div>
         <img src="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png">

@@ -2,12 +2,12 @@
 
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: [
-  "/runtime-d71e61b408567c9bf4a8.js",
-  "/555-3d2e2d310183dacd87f7.js",
-  "/main-10cdc2d23b723be35b4e.js",
+  "/runtime-df7fc58286eea709736e.js",
+  "/249-d7724ec4959806d47a84.js",
+  "/main-6663b56d26bb3eaafb0a.js",
 ]
 CSS: [
-  "/main-9c6bd518e9e408ef2fe1.css",
+  "/main-cb8848ae92e1e9d08128.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -41,8 +41,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lE4bKpu">
-        <div class="_KPLLp3"
+      <div class="eRNyDeb">
+        <div class="MYunKdE"
              data-automation-text="true"
         >
           Initial render
@@ -77,7 +77,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-         <div class="_KPLLp3"
+         <div class="MYunKdE"
               data-automation-text="true"
          >
 -          Initial render
@@ -90,14 +90,14 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 {
-  "555-3d2e2d310183dacd87f7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "249-d7724ec4959806d47a84.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
-    "/runtime-d71e61b408567c9bf4a8.js",
-    "/555-3d2e2d310183dacd87f7.js",
-    "/main-10cdc2d23b723be35b4e.js",
+    "/runtime-df7fc58286eea709736e.js",
+    "/249-d7724ec4959806d47a84.js",
+    "/main-6663b56d26bb3eaafb0a.js",
   ]
 CSS: [
-    "/main-9c6bd518e9e408ef2fe1.css",
+    "/main-cb8848ae92e1e9d08128.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -131,8 +131,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lE4bKpu">
-        <div class="_KPLLp3"
+      <div class="eRNyDeb">
+        <div class="MYunKdE"
              data-automation-text="true"
         >
           Initial render
@@ -166,14 +166,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-10cdc2d23b723be35b4e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-9c6bd518e9e408ef2fe1.css": .lE4bKpu {
+  "main-6663b56d26bb3eaafb0a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }
-.lE4bKpu ._KPLLp3 {
+.eRNyDeb .MYunKdE {
   font-size: 32px;
 }
 ,
-  "runtime-d71e61b408567c9bf4a8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-df7fc58286eea709736e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

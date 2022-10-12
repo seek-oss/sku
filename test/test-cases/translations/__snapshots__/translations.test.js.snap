@@ -2,10 +2,10 @@
 
 exports[`translations should render en 1`] = `
 SCRIPTS: [
-  "/runtime-b96cdebdb24d3d6d309a.js",
-  "/181-78f1b06ef286102ab4ff.js",
-  "/main-10baad8699c253cdc31b.js",
-  "/en-translations-1a3d1b3734b3d976fac4.js",
+  "/runtime-bd9e1e6264cb426a964a.js",
+  "/147-123595624aeac0311172.js",
+  "/main-8f87e33085ba8bdd51d6.js",
+  "/en-translations-14982360d55f2d75e9ea.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -87,10 +87,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should render en-PSEUDO post-hydration 1`] = `
 SCRIPTS: [
-  "/runtime-b96cdebdb24d3d6d309a.js",
-  "/181-78f1b06ef286102ab4ff.js",
-  "/main-10baad8699c253cdc31b.js",
-  "/en-translations-1a3d1b3734b3d976fac4.js",
+  "/runtime-bd9e1e6264cb426a964a.js",
+  "/147-123595624aeac0311172.js",
+  "/main-8f87e33085ba8bdd51d6.js",
+  "/en-translations-14982360d55f2d75e9ea.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -181,10 +181,10 @@ POST HYDRATE DIFFS:
 
 exports[`translations should render fr 1`] = `
 SCRIPTS: [
-  "/runtime-b96cdebdb24d3d6d309a.js",
-  "/181-78f1b06ef286102ab4ff.js",
-  "/main-10baad8699c253cdc31b.js",
-  "/fr-translations-b1096f3821e4b9701e9c.js",
+  "/runtime-bd9e1e6264cb426a964a.js",
+  "/147-123595624aeac0311172.js",
+  "/main-8f87e33085ba8bdd51d6.js",
+  "/fr-translations-100e6008065ffdbd6d4c.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -266,10 +266,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should support query parameters 1`] = `
 SCRIPTS: [
-  "/runtime-b96cdebdb24d3d6d309a.js",
-  "/181-78f1b06ef286102ab4ff.js",
-  "/main-10baad8699c253cdc31b.js",
-  "/en-translations-1a3d1b3734b3d976fac4.js",
+  "/runtime-bd9e1e6264cb426a964a.js",
+  "/147-123595624aeac0311172.js",
+  "/main-8f87e33085ba8bdd51d6.js",
+  "/en-translations-14982360d55f2d75e9ea.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>

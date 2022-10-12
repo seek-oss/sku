@@ -1,13 +1,14 @@
 import 'braid-design-system/reset';
 import React, { useState, useEffect } from 'react';
 import {
-  BraidLoadableProvider,
+  BraidProvider,
   Text,
   Checkbox,
   Card,
   IconChevron,
   Box,
 } from 'braid-design-system';
+import theme from 'braid-design-system/themes/apac';
 import { useStyles } from '../../../../../react-treat';
 
 import * as styleRefs from './App.treat';
@@ -44,8 +45,8 @@ function Stuff({ themeName }) {
 
 export default function App({ themeName }) {
   return (
-    <BraidLoadableProvider themeName={themeName}>
+    <BraidProvider theme={theme}>
       <Stuff themeName={themeName} />
-    </BraidLoadableProvider>
+    </BraidProvider>
   );
 }

@@ -1,5 +1,60 @@
 # sku
 
+## 11.6.0
+
+### Minor Changes
+
+- Update to eslint-config-seek v10 ([#709](https://github.com/seek-oss/sku/pull/709))
+
+  This update involves a few major version jumps, so be sure to read the following release notes for all the breaking changes:
+
+  - [v8.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v8.0.0)
+  - [v9.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v9.0.0)
+  - [v10.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v10.0.0)
+
+  You should be able to automatically fix most lint warnings/errors by running `yarn sku format`.
+
+- Upgrade from jest v27 to v29 ([#709](https://github.com/seek-oss/sku/pull/709))
+
+  Please take a look at the following upgrade guides as there may be breaking changes that affect your tests:
+
+  - [v27 to v28 upgrade guide](https://jestjs.io/docs/28.x/upgrading-to-jest28)
+  - [v28 to v29 upgrade guide](https://jestjs.io/docs/upgrading-to-jest29)
+
+  Likely the most significant change is the new default snapshot format:
+
+  ```diff
+  - Expected: \\"a\\"
+  + Expected: "a"
+
+  - Object {
+  -   Array []
+  - }
+  + {
+  +   []
+  + }
+  ```
+
+  This may require you to update your snapshots.
+
+- Drop support for Node v12 ([#709](https://github.com/seek-oss/sku/pull/709))
+
+  Sku now only supports Node v14.15 and above.
+  Although sku itself does not depend on any Node v14 APIs, Node v12 is [no longer officially supported](https://github.com/nodejs/Release#end-of-life-releases), and many of sku's dependencies no longer support it either.
+  Please ensure you are using a supported version of Node both locally (e.g. via a `.nvmrc` file) and in CI (check your Docker images).
+
+- Update typescript dependency ([#709](https://github.com/seek-oss/sku/pull/709))
+
+  Sku now has a `typescript` dependency of `^4.5.0`.
+  Previously the version was restricted due to a type issue with `braid-design-system` and `typescript@4.5.0`.
+  Please take a look at the release notes for recent typescript versions as there may be breaking changes that need to be addressed.
+
+### Patch Changes
+
+- Close `sku start` dev server properly on `SIGINT` ([#706](https://github.com/seek-oss/sku/pull/706))
+
+- Update deps ([#706](https://github.com/seek-oss/sku/pull/706))
+
 ## 11.5.0
 
 ### Minor Changes

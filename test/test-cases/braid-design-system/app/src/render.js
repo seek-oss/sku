@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import dedent from 'dedent';
 
 import App from './App';
 
@@ -17,7 +16,7 @@ export default {
     site,
   }),
 
-  renderDocument: ({ app, headTags, bodyTags, site }) => dedent`
+  renderDocument: ({ app, headTags, bodyTags, site }) => `
     <!DOCTYPE html>
     <html>
       <head>

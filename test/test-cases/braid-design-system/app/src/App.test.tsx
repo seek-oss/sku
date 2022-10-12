@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Box, BraidTestProvider } from 'braid-design-system';
+import { Box } from 'braid-design-system';
+import { BraidTestProvider } from 'braid-design-system/test';
 
 describe('braid-design-system', () => {
   test('components', () => {

@@ -1,17 +1,11 @@
 import 'braid-design-system/reset';
 import React, { useState, useEffect } from 'react';
-import {
-  BraidLoadableProvider,
-  Text,
-  Checkbox,
-  Card,
-  IconChevron,
-  Box,
-} from 'braid-design-system';
+import { Text, Checkbox, Card, IconChevron, Box } from 'braid-design-system';
 import { useStyles } from '../../../../../react-treat';
 
 import * as styleRefs from './App.treat';
 import { vanillaBox } from './App.css';
+import loadable from '../../../../../@loadable';
 
 const noop = () => {};
 
@@ -42,10 +36,14 @@ function Stuff({ themeName }) {
   );
 }
 
+const BraidTheme = loadable.lib((props) =>
+  import(`braid-design-system/themes/${props.themeName}`),
+);
+
 export default function App({ themeName }) {
   return (
-    <BraidLoadableProvider themeName={themeName}>
+    <BraidTheme themeName={themeName}>
       <Stuff themeName={themeName} />
-    </BraidLoadableProvider>
+    </BraidTheme>
   );
 }

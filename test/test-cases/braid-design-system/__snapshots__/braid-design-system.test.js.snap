@@ -2284,14 +2284,14 @@ svg.jhxt971g {
 }
 ,
   "externals.json": "[
-  "external node-commonjs \\"crypto",
-  "external node-commonjs \\"fs",
-  "external node-commonjs \\"os",
-  "external node-commonjs \\"path",
-  "external node-commonjs \\"stream",
-  "external node-commonjs \\"tty",
-  "external node-commonjs \\"url",
-  "external node-commonjs \\"util"
+  "crypto",
+  "fs",
+  "os",
+  "path",
+  "stream",
+  "tty",
+  "url",
+  "util"
 ]",
   "jobStreet/index.html": SCRIPTS: [
     "/runtime-54989235a0d2be403cec.js",

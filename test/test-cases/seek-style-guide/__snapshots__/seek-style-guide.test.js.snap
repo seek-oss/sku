@@ -4,14 +4,14 @@ exports[`seek-style-guide should generate the expected files 1`] = `
 {
   "927-97b5f99f7417b98c4c74.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
-  "external node-commonjs \\"crypto",
-  "external node-commonjs \\"fs",
-  "external node-commonjs \\"os",
-  "external node-commonjs \\"path",
-  "external node-commonjs \\"stream",
-  "external node-commonjs \\"tty",
-  "external node-commonjs \\"url",
-  "external node-commonjs \\"util"
+  "crypto",
+  "fs",
+  "os",
+  "path",
+  "stream",
+  "tty",
+  "url",
+  "util"
 ]",
   "index.html": SCRIPTS: [
     "/runtime-809e1ad97457d5b9bab0.js",

@@ -58,6 +58,13 @@ module.exports = ({
   }
 
   const presets = [
+    [
+      require.resolve('@babel/preset-env'),
+      {
+        targets: browserslist,
+        shippedProposals: true,
+      },
+    ],
     lang === 'ts'
       ? [
           require.resolve('@babel/preset-typescript'),
@@ -67,13 +74,6 @@ module.exports = ({
           },
         ]
       : null,
-    [
-      require.resolve('@babel/preset-env'),
-      {
-        targets: browserslist,
-        shippedProposals: true,
-      },
-    ],
     [
       require.resolve('@babel/preset-react'),
       {

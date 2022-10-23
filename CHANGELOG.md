@@ -1,5 +1,11 @@
 # sku
 
+## 11.6.1
+
+### Patch Changes
+
+- Fix transpilation of typescript-specific class keywords ([#714](https://github.com/seek-oss/sku/pull/714))
+
 ## 11.6.0
 
 ### Minor Changes

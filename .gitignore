@@ -5,6 +5,7 @@ package-lock.json
 entry/render/startConfig.json
 dist-start/
 dist-build/
+.eslintcache
 
 # managed by sku
 .prettierrc

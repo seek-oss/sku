@@ -20,6 +20,17 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off"
   },
+  "overrides": [
+    {
+      "files": ["test/**"],
+      "env": {
+        "jest": true
+      },
+      "globals": {
+        "browser": true
+      }
+    }
+  ],
   "globals": {
     "__SKU_SRC_PATHS_0__": true,
     "__SKU_SRC_PATHS_1__": true,
@@ -31,8 +42,12 @@
     "__SKU_SRC_PATHS_7__": true,
     "__SKU_SRC_PATHS_8__": true,
     "__SKU_SRC_PATHS_9__": true,
-    "browser": true,
-    "SKU_LIBRARY_NAME": true,
-    "__SKU_PUBLIC_PATH__": true
+    "__SKU_CLIENT_PATH__": true,
+    "__SKU_PUBLIC_PATH__": true,
+    "__SKU_CSP__": true,
+    "__SKU_DEV_HTTPS__": true,
+    "__SKU_DEV_MIDDLEWARE_ENABLED__": true,
+    "__SKU_DEV_MIDDLEWARE_PATH__": true,
+    "SKU_LIBRARY_NAME": true
   }
 }

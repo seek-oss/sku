@@ -3306,7 +3306,7 @@
     javascript-stringify "^2.0.1"
     lodash "^4.17.21"
 
-"@vanilla-extract/private@^1.0.1", "@vanilla-extract/private@^1.0.3":
+"@vanilla-extract/private@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.3.tgz#7ec72bc2ff6fe51f9d650f962e8d1989b073690f"
   integrity sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==

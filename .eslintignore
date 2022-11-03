@@ -8,4 +8,5 @@ dist-start/
 dist-storybook/
 report/
 template/
-test/test-cases
+test/test-cases/*/*
+!test/test-cases/*/*.test.js

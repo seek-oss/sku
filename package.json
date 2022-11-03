@@ -10,7 +10,7 @@
     "node": ">=14.15"
   },
   "scripts": {
-    "lint": "npm run format-check && eslint .",
+    "lint": "yarn format-check && eslint .",
     "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
     "pretest": "yarn check --integrity",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
@@ -29,7 +29,7 @@
   },
   "lint-staged": {
     "+(package.json|yarn.lock)": [
-      "npm run check"
+      "yarn run check"
     ],
     "**/*.js": [
       "eslint --fix"

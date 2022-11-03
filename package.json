@@ -10,7 +10,7 @@
     "node": ">=14.15"
   },
   "scripts": {
-    "lint": "yarn format-check && eslint .",
+    "lint": "yarn format-check && eslint --cache .",
     "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
     "pretest": "yarn check --integrity",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
@@ -32,7 +32,7 @@
       "yarn run check"
     ],
     "**/*.js": [
-      "eslint --fix"
+      "eslint --cache --fix"
     ],
     "**/*.{js,ts,tsx,md,less,css}": [
       "prettier --write"

@@ -1,97 +1,68 @@
 const path = require('path');
 const fs = require('fs-extra');
+const dedent = require('dedent');
 const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
 
 const appDirectory = path.join(__dirname, 'app');
 const srcDirectory = path.join(appDirectory, 'src');
-const skuConfig = path.join(appDirectory, 'sku.config.js');
-const testFile = path.join(srcDirectory, 'index.js');
+const testFile = (fileName) => path.join(srcDirectory, fileName);
 
-function makeTest(input, expected) {
-  return [input.join('\n'), expected.join('\n')];
-}
+expect.addSnapshotSerializer({
+  serialize: (val) => val,
+  test: (val) => typeof val === 'string',
+});
 
-const tests = [
-  makeTest(
-    [
-      `import './reset';`,
-      ``,
-      `import LocalComponent from './LocalComponent';`,
-      `import Parent from '../parent';`,
-      `import someModule from 'some-module';`,
-      `import vanillaStyles from './vanillaStyles.css';`,
-      `import distantParent from '../../../parent';`,
-      `import path from 'path';`,
-      `import styles from './styles.less';`,
-      `import utils from 'src/utils';`,
-    ],
-    [
-      `import './reset';`, // ensure side-effect imports are ignored
-      ``,
-      `import path from 'path';`, //  built-in
-      ``,
-      `import someModule from 'some-module';`, // external
-      ``,
-      `import utils from 'src/utils';`, // internal
-      ``,
-      `import distantParent from '../../../parent';`, // parents
-      `import Parent from '../parent';`,
-      ``,
-      `import LocalComponent from './LocalComponent';`, // sibling
-      ``,
-      `import styles from './styles.less';`, // styles
-      `import vanillaStyles from './vanillaStyles.css';`, // styles
-    ],
-  ),
-  makeTest(
-    [
-      `import aTreat from './a.treat';`,
-      `import bTreat from './b.treat';`,
-      `import cTreat from '../c.treat';`,
-      ``,
-      `import b from './b';`,
-      `import a from './a';`,
-      `import c from '../c';`,
-    ],
-    [
-      `import c from '../c';`,
-      ``,
-      `import a from './a';`,
-      `import b from './b';`,
-      ``,
-      `import cTreat from '../c.treat';`,
-      `import aTreat from './a.treat';`,
-      `import bTreat from './b.treat';`,
-    ],
-  ),
-];
+const files = {
+  'index.ts': dedent/* ts */ `
+    import './reset'; // side-effect imports should stay put
 
-describe('lint import order', () => {
+    import LocalComponent from './LocalComponent'; // sibling
+    import Parent from '../parent'; // parents
+    import someModule from 'some-module'; // external
+    import vanillaStyles from './vanillaStyles.css'; // styles
+    import distantParent from '../../../parent'; // parents
+    import myself from '.'; // index
+    import path from 'path'; //  built-in
+    import styles from './styles.less'; // styles
+    import utils from 'src/utils'; // internal
+  `,
+  'relatives.js': dedent/* js */ `
+    import aTreat from './a.treat';
+    import bTreat from './b.treat';
+    import cTreat from '../c.treat';
+
+    import b from './b';
+    import a from './a';
+    import c from '../c';
+  `,
+  'vanilla.ts': dedent/* ts */ `
+    import aStyle from './a.css';
+    import bStyle from './b.css';
+    import cStyle from '../c.css';
+
+    import b from './b';
+    import a from './a';
+    import c from '../c';
+  `,
+};
+
+describe('import order', () => {
   beforeAll(async () => {
     await fs.ensureDir(srcDirectory);
-    await fs.writeFile(
-      skuConfig,
-      `module.exports = {
-      srcPaths: ['src'],
-      orderImports: true,
-    };
-    `,
-    );
-  });
-
-  test.each(tests)('expect imports are ordered', async (input, expected) => {
-    await fs.writeFile(testFile, input);
-
-    await runSkuScriptInDir('format', appDirectory);
-
-    const result = await (
-      await fs.readFile(testFile, { encoding: 'utf-8' })
-    ).trim();
-
-    expect(result).toBe(expected);
   });
 
   afterAll(async () => {
-    await fs.remove(appDirectory);
+    await fs.remove(srcDirectory);
+  });
+
+  test.each(Object.keys(files))('imports are ordered: %s', async (fileName) => {
+    const filePath = testFile(fileName);
+    await fs.writeFile(filePath, files[fileName]);
+
+    await runSkuScriptInDir('format', appDirectory);
+
+    const result = await fs.readFile(filePath, { encoding: 'utf-8' });
+
+    expect(result).toMatchSnapshot();
   });
 });

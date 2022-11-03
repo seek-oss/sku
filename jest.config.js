@@ -1,9 +1,8 @@
-const path = require('path');
+/** @type {import('jest').Config} */
 module.exports = {
-  setupFilesAfterEnv: [path.resolve(__dirname, 'test/utils/jestSetup.js')],
-  testMatch: ['**/*.test.js'],
-  testPathIgnorePatterns: ['test/.*/src'],
   preset: 'jest-puppeteer',
+  setupFilesAfterEnv: ['<rootDir>/test/utils/jestSetup.js'],
+  testPathIgnorePatterns: ['test/.*/src', '/node_modules/'],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

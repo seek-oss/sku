@@ -1,5 +1,19 @@
 # sku
 
+## 11.6.2
+
+### Patch Changes
+
+- **deps**: `@pmmmwh/react-refresh-webpack-plugin@0.5.8` ([#716](https://github.com/seek-oss/sku/pull/716))
+
+- Update to eslint-config-seek v10.1.1. Read the following release notes for all the changes: ([#718](https://github.com/seek-oss/sku/pull/718))
+
+  - [v10.1.0] brings improved TypeScript support
+  - [v10.1.1] re-enables the `no-undef` rule for JavaScript files
+
+  [v10.1.0]: https://github.com/seek-oss/eslint-config-seek/releases/tag/v10.1.0
+  [v10.1.1]: https://github.com/seek-oss/eslint-config-seek/releases/tag/v10.1.1
+
 ## 11.6.1
 
 ### Patch Changes

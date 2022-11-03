@@ -2,7 +2,8 @@
 module.exports = {
   preset: 'jest-puppeteer',
   setupFilesAfterEnv: ['<rootDir>/test/utils/jestSetup.js'],
-  testPathIgnorePatterns: ['test/.*/src', '/node_modules/'],
+  testMatch: ['<rootDir>/test/**/*.test.js'],
+  testPathIgnorePatterns: ['<rootDir>/test/.*/src', '/node_modules/'],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',

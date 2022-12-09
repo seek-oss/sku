@@ -1,7 +1,9 @@
 #!/usr/bin/env node
+const fs = require('fs-extra');
 const debug = require('debug');
 const args = require('../config/args');
-const validatePeerDeps = require('../lib/validatePeerDeps');
+const _validatePeerDeps = require('../lib/validatePeerDeps');
+const { getPathFromCwd } = require('../lib/cwd');
 const log = debug('sku:bin');
 
 const { script } = args;
@@ -13,9 +15,38 @@ if (args.debug) {
   debug.enable(process.env.DEBUG);
 }
 
+let skipConfigure = false;
+let skipValidatePeerDeps = false;
+const packageJson = getPathFromCwd('./package.json');
+const packageJsonExists = fs.existsSync(packageJson);
+
+if (packageJsonExists) {
+  const {
+    skuSkipConfigure = false,
+    skuSkipValidatePeerDeps = false,
+  } = require(packageJson);
+  skipConfigure = skuSkipConfigure;
+  skipValidatePeerDeps = skuSkipValidatePeerDeps;
+}
+
 const configureProject = async () => {
-  const configure = require('../lib/configure');
-  await configure();
+  if (!skipConfigure) {
+    const configure = require('../lib/configure');
+    await configure();
+  } else {
+    log(`"skuSkipConfigure" set in ${packageJson}, skipping sku cofiguration`);
+  }
+};
+
+const validatePeerDeps = () => {
+  if (!skipValidatePeerDeps) {
+    // Intentionally not awaiting async function as it's just for logging warnings
+    _validatePeerDeps();
+  } else {
+    log(
+      `"skipValidatePeerDeps" set in ${packageJson}, skipping sku peer dep validation`,
+    );
+  }
 };
 
 const runScript = (scriptName) => {

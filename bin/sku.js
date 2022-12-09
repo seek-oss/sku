@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const debug = require('debug');
 const args = require('../config/args');
-const validatePeersDeps = require('../lib/validatePeersDeps');
+const validatePeerDeps = require('../lib/validatePeerDeps');
 const log = debug('sku:bin');
 
 const { script } = args;
@@ -52,8 +52,7 @@ log(`Starting script: ${script}`);
     case 'serve': {
       await configureProject();
 
-      // Intentionally not awaiting async function as it's just for logging warnings
-      validatePeersDeps();
+      validatePeerDeps();
       runScript(script);
       break;
     }

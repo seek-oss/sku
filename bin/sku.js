@@ -34,7 +34,7 @@ const configureProject = async () => {
     const configure = require('../lib/configure');
     await configure();
   } else {
-    log(`"skuSkipConfigure" set in ${packageJson}, skipping sku cofiguration`);
+    log(`"skuSkipConfigure" set in ${packageJson}, skipping sku configuration`);
   }
 };
 

@@ -8,7 +8,7 @@ Add `package.json` configuration flags that enable you to skip sku configuration
 don't want to use them unless you know what you're doing
 
 - `skuSkipConfigure`: Skip generation of config files. E.g. .prettierrc, tsconfig.json, etc.
-- `skuSkipPeerDepValidation`: Skip checking for multiple copies of the same package. You likely want to try and fix the warnings found by this check rather than disabling it.
+- `skuSkipValidatePeerDeps`: Skip checking for multiple copies of the same package. You likely want to try and fix the warnings found by this check rather than disabling it.
 
 **EXAMPLE USAGE**:
 
@@ -16,6 +16,6 @@ don't want to use them unless you know what you're doing
 // package.json
 {
   "skuSkipConfigure": true,
-  "skuSkipPeerDepValidation": true
+  "skuSkipValidatePeerDeps": true
 }
 ```

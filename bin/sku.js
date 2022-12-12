@@ -30,23 +30,25 @@ if (packageJsonExists) {
 }
 
 const configureProject = async () => {
-  if (!skipConfigure) {
-    const configure = require('../lib/configure');
-    await configure();
-  } else {
+  if (skipConfigure) {
     log(`"skuSkipConfigure" set in ${packageJson}, skipping sku configuration`);
+    return;
   }
+
+  const configure = require('../lib/configure');
+  await configure();
 };
 
 const validatePeerDeps = () => {
-  if (!skipValidatePeerDeps) {
-    // Intentionally not awaiting async function as it's just for logging warnings
-    _validatePeerDeps();
-  } else {
+  if (skipValidatePeerDeps) {
     log(
       `"skuSkipValidatePeerDeps" set in ${packageJson}, skipping sku peer dependency validation`,
     );
+    return;
   }
+
+  // Intentionally not awaiting async function as it's just for logging warnings
+  _validatePeerDeps();
 };
 
 const runScript = (scriptName) => {

@@ -44,7 +44,7 @@ const validatePeerDeps = () => {
     _validatePeerDeps();
   } else {
     log(
-      `"skipValidatePeerDeps" set in ${packageJson}, skipping sku peer dep validation`,
+      `"skuSkipValidatePeerDeps" set in ${packageJson}, skipping sku peer dependency validation`,
     );
   }
 };

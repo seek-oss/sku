@@ -197,7 +197,7 @@
     "renovate-config-seek": "^0.4.0",
     "seek-style-guide": "^42.0.0",
     "wait-on": "^5.2.1",
-    "webpack-cli": "^4.7.2",
+    "webpack-cli": "^5.0.0",
     "webpack-stats-plugin": "^1.0.3"
   },
   "volta": {

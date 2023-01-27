@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storybook-dev-middleware storybook should support the supplied middleware 1`] = `
+"OK"
+POST HYDRATE DIFFS: 
+-OK
+\\ No newline at end of file
++<html>
++  <head>
++  </head>
++  <body>
++    OK
++  </body>
++</html>
+\\ No newline at end of file
+
+`;

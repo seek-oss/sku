@@ -3,7 +3,7 @@
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: [
   "/runtime-df7fc58286eea709736e.js",
-  "/249-a67840cd20bd2e4c4dc5.js",
+  "/249-6f8435cb80dc6a802b7d.js",
   "/main-6663b56d26bb3eaafb0a.js",
 ]
 CSS: [
@@ -90,10 +90,10 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 {
-  "249-a67840cd20bd2e4c4dc5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "249-6f8435cb80dc6a802b7d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/runtime-df7fc58286eea709736e.js",
-    "/249-a67840cd20bd2e4c4dc5.js",
+    "/249-6f8435cb80dc6a802b7d.js",
     "/main-6663b56d26bb3eaafb0a.js",
   ]
 CSS: [

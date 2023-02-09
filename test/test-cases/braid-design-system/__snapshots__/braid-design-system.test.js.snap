@@ -21,7 +21,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link data-chunk="main" rel="stylesheet" href="/main-16d11814e4cf292dba68.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
-<link data-chunk="main" rel="preload" as="script" href="/main-b09bd42308bed121b9fa.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-0a9b9ebbbdf68ac77909.js">
         <script>
           window.SKU_SITE = 'jobStreet';
         </script>
@@ -34,10 +34,11 @@ exports[`braid-design-system build should generate the expected files 1`] = `
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime-6ddc02ee59b341569712.js"></script>
-<script async data-chunk="main" src="/main-b09bd42308bed121b9fa.js"></script>
+<script async data-chunk="main" src="/main-0a9b9ebbbdf68ac77909.js"></script>
       </body>
     </html>
   ",
+  "main-0a9b9ebbbdf68ac77909.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-16d11814e4cf292dba68.css": ._1brbmfo0 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
@@ -2935,7 +2936,6 @@ html._8t4triz ._17zdxi9f {
   right: 0 !important;
 }
 ,
-  "main-b09bd42308bed121b9fa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-6ddc02ee59b341569712.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": "
     <!DOCTYPE html>
@@ -2946,7 +2946,7 @@ html._8t4triz ._17zdxi9f {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link data-chunk="main" rel="stylesheet" href="/main-16d11814e4cf292dba68.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
-<link data-chunk="main" rel="preload" as="script" href="/main-b09bd42308bed121b9fa.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-0a9b9ebbbdf68ac77909.js">
         <script>
           window.SKU_SITE = 'seekAnz';
         </script>
@@ -2959,7 +2959,7 @@ html._8t4triz ._17zdxi9f {
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime-6ddc02ee59b341569712.js"></script>
-<script async data-chunk="main" src="/main-b09bd42308bed121b9fa.js"></script>
+<script async data-chunk="main" src="/main-0a9b9ebbbdf68ac77909.js"></script>
       </body>
     </html>
   ",
@@ -2969,7 +2969,7 @@ html._8t4triz ._17zdxi9f {
 exports[`braid-design-system build should return built jobStreet site 1`] = `
 SCRIPTS: [
   "/runtime-6ddc02ee59b341569712.js",
-  "/main-b09bd42308bed121b9fa.js",
+  "/main-0a9b9ebbbdf68ac77909.js",
 ]
 CSS: [
   "/main-16d11814e4cf292dba68.css",
@@ -3187,7 +3187,7 @@ POST HYDRATE DIFFS:
 exports[`braid-design-system build should return built seekAnz site 1`] = `
 SCRIPTS: [
   "/runtime-6ddc02ee59b341569712.js",
-  "/main-b09bd42308bed121b9fa.js",
+  "/main-0a9b9ebbbdf68ac77909.js",
 ]
 CSS: [
   "/main-16d11814e4cf292dba68.css",

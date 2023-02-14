@@ -22,12 +22,8 @@ module.exports = {
 };
 ```
 
-For example, if you're using [Enzyme](https://airbnb.io/enzyme/), your `setupTests` script would look like this:
+For example, if you're using [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) and wish to use the custom jest matchers provided by [`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom), your `setupTests` script would look like this:
 
 ```js
-import 'jest-enzyme';
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+import '@testing-library/jest-dom';
 ```

@@ -173,7 +173,7 @@ The Phrase platform allows you to attach tags to translation keys.
 
 sku will push any tags present in your `translations.json` file to phrase when the `sku translations push` command is used.
 
-See the [Vocab documentation](https://github.com/seek-oss/vocab#Tags) for how to
+See the [Vocab documentation](https://github.com/seek-oss/vocab#Tags) for how to add tags to your translations.
 
 ## Pseudo-localization
 

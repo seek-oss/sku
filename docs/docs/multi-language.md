@@ -138,7 +138,7 @@ Currently the only translations platform supported by sku is [Phrase](https://ph
 
 ### Translation Syncing
 
-sku can be used to synchronize your translations to and from .
+sku can be used to synchronize your translations to and from Phrase.
 
 Phrase syncing requires two environment variables to be set: `PHRASE_PROJECT_ID` and `PHRASE_API_TOKEN`.
 

@@ -13,6 +13,10 @@ module.exports = {
       config.plugins.push(new ListExternalsPlugin());
     }
 
+    // Addresses an issue with this specific test suite where module IDs
+    // were different between local dev and CI
+    config.optimization.moduleIds = 'named';
+
     return config;
   },
 };

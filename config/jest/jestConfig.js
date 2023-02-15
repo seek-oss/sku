@@ -5,6 +5,7 @@ const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 
+/** @type {import('jest').Config} */
 module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
@@ -33,7 +34,8 @@ module.exports = {
   },
   transform: {
     '\\.less$': require.resolve('./cssModulesTransform.js'),
-    '\\.(ts|tsx)$': require.resolve('./tsBabelTransform.js'),
+    '\\.css\\.ts$': require.resolve('@vanilla-extract/jest-transform'),
+    '\\.tsx?$': require.resolve('./tsBabelTransform.js'),
     '\\.js$': require.resolve('./jsBabelTransform.js'),
   },
   transformIgnorePatterns: [

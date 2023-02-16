@@ -27,9 +27,9 @@ import c from '../c';
 import a from './a';
 import b from './b';
 
-import cTreat from '../c.treat';
 import aTreat from './a.treat';
 import bTreat from './b.treat';
+import cTreat from '../c.treat';
 
 `;
 
@@ -39,8 +39,8 @@ import c from '../c';
 import a from './a';
 import b from './b';
 
-import cStyle from '../c.css';
 import aStyle from './a.css';
 import bStyle from './b.css';
+import cStyle from '../c.css';
 
 `;

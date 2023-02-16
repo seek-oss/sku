@@ -100,7 +100,17 @@ exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 ._54r4c4a:disabled {
   opacity: 1;
 }
-._54r4c4a::-ms-expand,
+._54r4c4a::-ms-expand {
+  display: none;
+}
+._54r4c4c[type="number"] {
+  -moz-appearance: textfield;
+}
+._54r4c4c[type="number"]::-webkit-inner-spin-button,
+._54r4c4c[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 ._54r4c4c::-ms-clear {
   display: none;
 }
@@ -2327,7 +2337,7 @@ object-assign
 @license MIT
 */
 
-/** @license React v0.20.1
+/** @license React v0.20.2
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -2336,7 +2346,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -2345,7 +2355,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react-jsx-runtime.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -2354,7 +2364,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v17.0.1
+/** @license React v17.0.2
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.

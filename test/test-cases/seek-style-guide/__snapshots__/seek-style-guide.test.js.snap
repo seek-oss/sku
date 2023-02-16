@@ -2,7 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 {
-  "357-803c09399793ed3daeba.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "357-7cc030350dd5c7b98997.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -15,7 +15,7 @@ exports[`seek-style-guide should generate the expected files 1`] = `
 ]",
   "index.html": SCRIPTS: [
     "/runtime-809e1ad97457d5b9bab0.js",
-    "/357-803c09399793ed3daeba.js",
+    "/357-7cc030350dd5c7b98997.js",
     "/main-843ae8ea7a42314d1131.js",
   ]
 CSS: [

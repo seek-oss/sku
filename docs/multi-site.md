@@ -23,7 +23,7 @@ Switching site by host requires that the hosts are configured on your system to 
 
 First add the following script to your `package.json`.
 
-```JSON
+```json
 {
   "setup-hosts": "sku setup-hosts"
 }

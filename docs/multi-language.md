@@ -4,7 +4,9 @@
 
 If your application supports multiple languages you can designate those languages with the `languages` configuration.
 
-Languages can be either a string, e.g. `en` or an object that designates a parent language. E.g `{name: "en-AU", extends: "en"}`
+Languages can be either a string, e.g. `en` or an object that designates a parent language.
+
+**E.g.** `{name: "en-AU", extends: "en"}`
 
 **Note:** sku assumes that the development language is `en`. This will be used as the base language for all development, including your initial translations.
 
@@ -12,9 +14,9 @@ Languages can be either a string, e.g. `en` or an object that designates a paren
 
 To opt-in to multi-language builds you need to perform three steps:
 
-1. Install "`@vocab/react`" as a dependency.
+1. Install `@vocab/react` as a dependency.
    This will be used by your code to support dynamically loading the correct language translations inside React components
-2. Add the list of supported "`languages`" to your [sku configuration](./docs/configuration.md#languages)
+2. Add the list of supported `languages` to your [sku configuration](./docs/configuration.md#languages)
 
 ```json
 {
@@ -30,7 +32,7 @@ To create your first translation you need to create a folder ending in `.vocab` 
 
 **E.g.** `./App.vocab/translations.json`
 
-In the file, add translations in the form of `translationKey: { message: "The english translation" }`
+In the file, add translations in the form of `translationKey: { message: "The english translation" }`.
 
 **Recommendation:** Whilst you can use any key that you like we recommended to use a copy, or simplied version of the english translation.
 
@@ -48,7 +50,7 @@ import { useTranslations } from '@vocab/react';
 
 export function MyComponent() {
   const { t } = useTranslations(translations);
-  return <div>t('my key')</div>;
+  return <div>{t('my key')}</div>;
 }
 ```
 
@@ -126,6 +128,52 @@ When formatting ICU messages vocab will format values such dates and numbers acc
   <App />
 </VocabProvider>
 ```
+
+## Translation Platforms
+
+sku supports specific features from 3rd-party translation platforms.
+Currently the only translations platform supported by sku is [Phrase](https://phrase.com/).
+
+## Phrase-specific Features
+
+### Translation Syncing
+
+sku can be used to synchronize your translations to and from Phrase.
+
+Phrase syncing requires two environment variables to be set: `PHRASE_PROJECT_ID` and `PHRASE_API_TOKEN`.
+
+`PHRASE_PROJECT_ID` must be set to your projects ID which can be found in your project's settings under the "API" section.
+
+`PHRASE_API_TOKEN` must be set to an access token which can be created on the profile settings page.
+
+To push translations to Phrase:
+
+```bash
+$ sku translations push
+```
+
+To pull translations from Phrase:
+
+```bash
+$ sku translations pull
+```
+
+### Delete Unused Keys
+
+When uploading translations, Phrase identifies keys that exist in the Phrase project, but were not referenced in the upload.
+These keys can be deleted from Phrase by providing the `--delete-unused-keys` flag to `sku translations push`. E.g.
+
+```bash
+$ sku translations push --delete-unused-keys
+```
+
+### Tags
+
+The Phrase platform allows you to attach tags to translation keys.
+
+sku will push any tags present in your `translations.json` file to phrase when the `sku translations push` command is used.
+
+See the [Vocab documentation](https://github.com/seek-oss/vocab#Tags) for how to add tags to your translations.
 
 ## Pseudo-localization
 

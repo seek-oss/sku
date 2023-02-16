@@ -1817,7 +1817,7 @@ html:not(.snqh4ez) .snqh4e4o {
   --yf9sr11n: #c6acf5;
   --yf9sr11o: #f57c00;
   --yf9sr11p: #5a6881;
-  --yf9sr11q: rgba(255, 255, 255, 0.65);
+  --yf9sr11q: hsla(0, 0%, 100%, 0.65);
   --yf9sr11r: #f7f8fb;
   --yf9sr11s: #0e131b;
   --yf9sr11t: #0d3880;

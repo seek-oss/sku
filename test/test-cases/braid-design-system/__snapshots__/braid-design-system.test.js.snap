@@ -19,7 +19,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/main-782944dbe83d82778d9b.css">
+        <link data-chunk="main" rel="stylesheet" href="/main-4c16b4f903ce6e77fa62.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
 <link data-chunk="main" rel="preload" as="script" href="/main-42646399776e43bec8f5.js">
         <script>
@@ -39,7 +39,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
     </html>
   ",
   "main-42646399776e43bec8f5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-782944dbe83d82778d9b.css": ._54r4c40 {
+  "main-4c16b4f903ce6e77fa62.css": ._54r4c40 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -1808,7 +1808,7 @@ html:not(.snqh4ez) .snqh4e4o {
   --yf9sr11n: #c6acf5;
   --yf9sr11o: #f57c00;
   --yf9sr11p: #5a6881;
-  --yf9sr11q: rgba(255, 255, 255, 0.65);
+  --yf9sr11q: hsla(0, 0%, 100%, 0.65);
   --yf9sr11r: #f7f8fb;
   --yf9sr11s: #0e131b;
   --yf9sr11t: #0d3880;
@@ -2944,7 +2944,7 @@ html.snqh4ez .x2z54wf {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/main-782944dbe83d82778d9b.css">
+        <link data-chunk="main" rel="stylesheet" href="/main-4c16b4f903ce6e77fa62.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
 <link data-chunk="main" rel="preload" as="script" href="/main-42646399776e43bec8f5.js">
         <script>
@@ -2972,7 +2972,7 @@ SCRIPTS: [
   "/main-42646399776e43bec8f5.js",
 ]
 CSS: [
-  "/main-782944dbe83d82778d9b.css",
+  "/main-4c16b4f903ce6e77fa62.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3190,7 +3190,7 @@ SCRIPTS: [
   "/main-42646399776e43bec8f5.js",
 ]
 CSS: [
-  "/main-782944dbe83d82778d9b.css",
+  "/main-4c16b4f903ce6e77fa62.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

@@ -1,5 +1,11 @@
 # sku
 
+## 11.7.1
+
+### Patch Changes
+
+- Update dependencies ([#724](https://github.com/seek-oss/sku/pull/724))
+
 ## 11.7.0
 
 ### Minor Changes

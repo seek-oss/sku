@@ -1,5 +1,0 @@
----
-'sku': patch
----
-
-Update dependencies

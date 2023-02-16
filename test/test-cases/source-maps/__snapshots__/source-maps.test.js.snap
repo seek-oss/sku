@@ -2,11 +2,11 @@
 
 exports[`source-maps build should generate the expected files 1`] = `
 {
-  "238-aa651955c93d281e55d5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "238-aa651955c93d281e55d5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "238-f02245799f3292b4fda6.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "238-f02245799f3292b4fda6.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/static/source-maps/runtime-c4af24a6a23c633bcca3.js",
-    "/static/source-maps/238-aa651955c93d281e55d5.js",
+    "/static/source-maps/238-f02245799f3292b4fda6.js",
     "/static/source-maps/main-0a9e99cbb6bb51d552fd.js",
   ]
 CSS: []

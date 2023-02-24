@@ -1,5 +1,6 @@
 const escapeRegex = require('escape-string-regexp');
-const { paths } = require('../../context');
+const { cwd } = require('../../lib/cwd');
+const { paths, rootResolution } = require('../../context');
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
@@ -10,6 +11,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
   prettierPath: require.resolve('prettier'),
+  modulePaths: rootResolution ? [cwd()] : undefined,
   testMatch: [
     // Default values, but with 'ts' + 'tsx' support
     // (https://jestjs.io/docs/en/configuration.html#testmatch-array-string)

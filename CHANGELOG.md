@@ -1,5 +1,11 @@
 # sku
 
+## 11.7.2
+
+### Patch Changes
+
+- Fix a bug that broke root resolution within `.css.ts` files during tests ([#741](https://github.com/seek-oss/sku/pull/741))
+
 ## 11.7.1
 
 ### Patch Changes

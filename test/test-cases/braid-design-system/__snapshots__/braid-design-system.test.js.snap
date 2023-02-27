@@ -19,7 +19,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/main-7d22a3a78ab90e444f0e.css">
+        <link data-chunk="main" rel="stylesheet" href="/main-2be00ff2ba3bd35e23b8.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
 <link data-chunk="main" rel="preload" as="script" href="/main-fc74cddff511d1ee5234.js">
         <script>
@@ -38,7 +38,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
       </body>
     </html>
   ",
-  "main-7d22a3a78ab90e444f0e.css": ._54r4c40 {
+  "main-2be00ff2ba3bd35e23b8.css": ._54r4c40 {
   -webkit-tap-highlight-color: transparent;
   border: 0;
   box-sizing: border-box;
@@ -1963,7 +1963,8 @@ html:not(.snqh4ez) .snqh4e4o {
     0 20px 20px -12px rgba(28, 35, 48, 0.2);
 }
 ._1akvwaz0 {
-  background-color: #8a2be2;
+  --_1d4bx8l0: #8a2be2;
+  background-color: var(--_1d4bx8l0);
   color: #fff;
   font-size: 20px;
   padding: 100px;
@@ -2961,7 +2962,7 @@ html.snqh4ez .x2z54wf {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/main-7d22a3a78ab90e444f0e.css">
+        <link data-chunk="main" rel="stylesheet" href="/main-2be00ff2ba3bd35e23b8.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
 <link data-chunk="main" rel="preload" as="script" href="/main-fc74cddff511d1ee5234.js">
         <script>
@@ -2989,7 +2990,7 @@ SCRIPTS: [
   "/main-fc74cddff511d1ee5234.js",
 ]
 CSS: [
-  "/main-7d22a3a78ab90e444f0e.css",
+  "/main-2be00ff2ba3bd35e23b8.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3207,7 +3208,7 @@ SCRIPTS: [
   "/main-fc74cddff511d1ee5234.js",
 ]
 CSS: [
-  "/main-7d22a3a78ab90e444f0e.css",
+  "/main-2be00ff2ba3bd35e23b8.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

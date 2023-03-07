@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
-  "/249-fc2f4a80f38e7226d71f.js",
-  "/main-2d5936972c528960fa27.js",
+  "/602-699e40ec4d9a2632aa88.js",
+  "/main-075db17b769d0940b981.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -111,7 +111,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
-  "/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-3ffa90.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-f2c6fe.js",
   "/main.js",
 ]
 CSS: [
@@ -219,7 +219,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 SCRIPTS: [
   "https://127.0.0.1:9843/runtime.js",
-  "https://127.0.0.1:9843/vendors-node_modules_loadable_component_dist_loadable_esm_js-node_modules_pmmmwh_react-refres-81a5e8.js",
+  "https://127.0.0.1:9843/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-3641d0.js",
   "https://127.0.0.1:9843/main.js",
 ]
 CSS: [

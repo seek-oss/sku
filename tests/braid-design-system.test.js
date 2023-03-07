@@ -1,51 +1,16 @@
 const path = require('path');
-const { promisify } = require('util');
-const rimrafAsync = promisify(require('rimraf'));
-const fs = require('fs-extra');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const waitForUrls = require('../../utils/waitForUrls');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getPathFromCwd } = require('../../../lib/cwd');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const waitForUrls = require('../test/utils/waitForUrls');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
-const skuConfig = require('./app/sku.config');
+// eslint-disable-next-line import/no-unresolved
+const skuConfig = require('@fixtures/braid-design-system/sku.config.js');
 
-const appDir = path.resolve(__dirname, 'app');
+const appDir = path.dirname(
+  require.resolve('@fixtures/braid-design-system/sku.config.js'),
+);
 const distDir = path.resolve(appDir, 'dist');
-
-async function createPackageLink(name) {
-  await fs.mkdirp(`${__dirname}/app/node_modules`);
-  await fs.symlink(
-    getPathFromCwd(`node_modules/${name}`),
-    `${__dirname}/app/node_modules/${name}`,
-  );
-}
-
-async function createPackageCopy(name) {
-  const srcPath = getPathFromCwd(
-    /^sku\//.test(name)
-      ? `${name.replace('sku/', '')}`
-      : `node_modules/${name}`,
-  );
-  const destPath = `${__dirname}/app/node_modules/${name}`;
-
-  await fs.mkdirp(destPath);
-  await fs.copy(srcPath, destPath);
-}
-
-async function setUpLocalDependencies() {
-  const nodeModules = `${__dirname}/app/node_modules`;
-  await rimrafAsync(nodeModules);
-  await Promise.all(['react', 'react-dom'].map(createPackageLink));
-  await Promise.all(
-    [
-      'braid-design-system',
-      'sku/treat',
-      'sku/react-treat',
-      'sku/@loadable/component',
-    ].map(createPackageCopy),
-  );
-}
 
 function getLocalUrl(site) {
   const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
@@ -54,12 +19,6 @@ function getLocalUrl(site) {
 }
 
 describe('braid-design-system', () => {
-  beforeAll(async () => {
-    // "Install" React and braid-design-system into this test app so that webpack-node-externals
-    // treats them correctly.
-    await setUpLocalDependencies();
-  });
-
   describe('start', () => {
     let server;
 

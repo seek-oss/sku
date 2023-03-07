@@ -1,4 +1,4 @@
-const ListExternalsPlugin = require('../../../utils/ListExternalsWebpackPlugin');
+const ListExternalsPlugin = require('../../test/utils/ListExternalsWebpackPlugin');
 
 module.exports = {
   sites: [

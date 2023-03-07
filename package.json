@@ -10,17 +10,18 @@
     "node": ">=14.15"
   },
   "scripts": {
-    "lint": "yarn format-check && eslint --cache .",
-    "check": "yarn check --integrity && echo 'Ignore paths from lint-staged'",
-    "pretest": "yarn check --integrity",
-    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
+    "lint": "pnpm format-check && eslint --cache .",
+    "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
+    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
     "test-manual": "SKU_TELEMETRY=false node test/manual",
     "setup-test-hosts": "node test/utils/setupTestHosts",
     "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "node ./scripts/postinstall.js",
-    "release": "node ./deploy-docs.js && changeset publish"
+    "release": "node ./deploy-docs.js && changeset publish",
+    "version": "changeset version && pnpm install --lockfile-only"
   },
+  "packageManager": "pnpm@7.29.0",
   "types": "./sku-types.d.ts",
   "husky": {
     "hooks": {
@@ -28,8 +29,8 @@
     }
   },
   "lint-staged": {
-    "+(package.json|yarn.lock)": [
-      "yarn run check"
+    "+(package.json|pnpm-lock.yaml)": [
+      "pnpm run check"
     ],
     "**/*.js": [
       "eslint --cache --fix"
@@ -189,7 +190,7 @@
     "jsonc-parser": "^3.0.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.6.1",
-    "puppeteer": "^19.0.0",
+    "puppeteer": "^19.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
@@ -201,7 +202,6 @@
     "webpack-stats-plugin": "^1.0.3"
   },
   "volta": {
-    "node": "16.19.0",
-    "yarn": "1.22.19"
+    "node": "16.19.0"
   }
 }

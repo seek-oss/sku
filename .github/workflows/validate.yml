@@ -10,22 +10,26 @@ jobs:
       CI: true
     timeout-minutes: 30
     steps:
-      - name: Checkout Repo
+      - name: Check out Repo
         uses: actions/checkout@v3
+
+      - id: pnpm-setup
+        uses: pnpm/action-setup@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version-file: 'package.json'
+          node-version-file: package.json
 
       - name: Install Dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Set up hosts
-        run: sudo yarn setup-test-hosts
+        # Couldn't get `sudo pnpm setup-test-hosts` to work
+        run: sudo ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Test
-        run: yarn test
+        run: pnpm test

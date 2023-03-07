@@ -1,9 +1,12 @@
 const gracefulSpawn = require('../../lib/gracefulSpawn');
 const { exec } = require('child-process-promise');
+const debug = require('debug');
 
 const skuBin = `${__dirname}/../../bin/sku.js`;
+const log = debug('sku:runSkuScriptInDir');
 
 module.exports = async (script, cwd, args = []) => {
+  log(script, cwd, args, skuBin);
   // When starting a dev server, return a hook to the running process
   if (/^(start|storybook|serve)/.test(script)) {
     return gracefulSpawn(skuBin, [script, ...args], { stdio: 'inherit', cwd });

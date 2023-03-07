@@ -1,0 +1,23 @@
+{
+  "name": "@sku-private/tests",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@fixtures/braid-design-system": "workspace:*",
+    "@fixtures/sku-webpack-plugin": "workspace:*",
+    "fs-extra": "^10.0.0",
+    "rimraf": "^3.0.0",
+    "webpack": "^5.52.0",
+    "webpack-dev-server": "4.11.1",
+    "webpack-cli": "^5.0.0"
+  },
+  "skuSkipPostInstall": true
+}

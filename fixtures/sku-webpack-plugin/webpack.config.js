@@ -1,6 +1,6 @@
 const HTMLWebackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SkuWebpackPlugin = require('../../../../webpack-plugin');
+const SkuWebpackPlugin = require('sku/webpack-plugin');
 
 module.exports = {
   entry: './main.js',

@@ -1,0 +1,3889 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`braid-design-system build should generate the expected files 1`] = `
+{
+  "externals.json": "[
+  "crypto",
+  "fs",
+  "os",
+  "path",
+  "stream",
+  "tty",
+  "url",
+  "util"
+]",
+  "jobStreet/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link data-chunk="main" rel="stylesheet" href="/main-2ae72bf09af8080bd7ea.css">
+<link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-385faa4d071d3facf4da.js">
+        <script>
+          window.SKU_SITE = 'jobStreet';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#F7F8FB}
+            html.a8rkez,html.a8rkez body{color-scheme:dark;background:#0E131B}
+          </style><div class="_1o0j0u80 _1np03wo18 _1np03wo1b"><span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">Hello <!-- -->jobStreet<!-- --> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 _1wok1bc0 a8rke52 a8rke5a r3jux50 r3jux52 r3jux53 r3jux54" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span><div class="_1jajid00 a8rke76 a8rke66 a8rke96 a8rke86 a8rke5a _1np03wo18 _1np03wo1b a8rke32 a8rke35"><div class="_1jajid00 a8rke5a a8rke7 _5ejtn70"><div class="_1jajid00 a8rke56"><input type="checkbox" class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72" id="id_1" aria-checked="false"/><div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32"><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 a8rke3k a8rke3p"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7d _1np03wo19 _1np03wo1b a8rke20 a8rke21"><div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h"><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7e a8rke4o a8rke4p"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7f a8rke3u a8rke3z"><div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h"><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1jajid00 a8rke9i a8rkefu"><div class="_1jajid00 f33fq40 f33fq45"><div class="_1jajid00 a8rkefe a8rke56 a8rkeey f33fq425"><div class="_1jajid00 a8rker a8rkedi a8rkeai a8rke4u a8rkeei"><label class="_1jajid00 a8rke4 a8rke4u a8rkeh _5ejtn79 _1c9btc50" for="id_1"><span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">This is a checkbox</span></label></div></div></div></div></div></div></div><div class="_1jajid00 mYnaw_0">Custom content <!-- -->Initial</div><div class="_1jajid00 c5yboh0">🧁 Vanilla content</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/runtime-6ddc02ee59b341569712.js"></script>
+<script async data-chunk="main" src="/main-385faa4d071d3facf4da.js"></script>
+      </body>
+    </html>
+  ",
+  "main-2ae72bf09af8080bd7ea.css": ._1jajid00 {
+  -webkit-tap-highlight-color: transparent;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+[data-braid-hidefocusrings] ._1jajid00 {
+  outline: none;
+}
+._1jajid01 {
+  display: block;
+}
+._1jajid02 {
+  line-height: 1;
+}
+._1jajid03 {
+  list-style: none;
+}
+._1jajid04 {
+  quotes: none;
+}
+._1jajid04:after,
+._1jajid04:before {
+  content: "";
+}
+._1jajid05 {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+._1jajid06 {
+  -webkit-appearance: none;
+  appearance: none;
+}
+._1jajid07 {
+  background-color: transparent;
+}
+._1jajid09 {
+  color: inherit;
+}
+._1jajid0a:disabled {
+  opacity: 1;
+}
+._1jajid0a::-ms-expand {
+  display: none;
+}
+._1jajid0c[type="number"] {
+  -moz-appearance: textfield;
+}
+._1jajid0c[type="number"]::-webkit-inner-spin-button,
+._1jajid0c[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+._1jajid0c::-ms-clear {
+  display: none;
+}
+._1jajid0c::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+._1jajid0f {
+  color: inherit;
+  text-decoration: none;
+}
+._1d0g9qk4 {
+  font-size: var(--_1d0g9qk0);
+  line-height: var(--_1d0g9qk1);
+}
+._1d0g9qk4:before {
+  content: "";
+  display: table;
+  margin-bottom: var(--_1d0g9qk2);
+}
+._1d0g9qk4:after {
+  content: "";
+  display: table;
+  margin-top: var(--_1d0g9qk3);
+}
+.a8rke0 {
+  overflow: hidden;
+}
+.a8rke1 {
+  overflow: scroll;
+}
+.a8rke2 {
+  overflow: visible;
+}
+.a8rke3 {
+  overflow: auto;
+}
+.a8rke4 {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.a8rke5 {
+  outline: none;
+}
+.a8rke6 {
+  opacity: 0;
+}
+.a8rke7 {
+  z-index: 0;
+}
+.a8rke8 {
+  z-index: 1;
+}
+.a8rke9 {
+  z-index: 2;
+}
+.a8rkea {
+  z-index: 90;
+}
+.a8rkeb {
+  z-index: 100;
+}
+.a8rkec {
+  z-index: 200;
+}
+.a8rked {
+  z-index: 290;
+}
+.a8rkee {
+  z-index: 300;
+}
+.a8rkef {
+  z-index: 400;
+}
+.a8rkeg {
+  cursor: default;
+}
+.a8rkeh {
+  cursor: pointer;
+}
+.a8rkei {
+  pointer-events: none;
+}
+.a8rkej {
+  top: 0;
+}
+.a8rkek {
+  bottom: 0;
+}
+.a8rkel {
+  left: 0;
+}
+.a8rkem {
+  right: 0;
+}
+.a8rken {
+  height: 100%;
+}
+.a8rkeo {
+  height: var(--_1m1uaxs8);
+}
+.a8rkep {
+  width: 100%;
+}
+.a8rkeq {
+  width: var(--_1m1uaxs8);
+}
+.a8rker {
+  min-width: 0;
+}
+.a8rkes {
+  max-width: var(--_1m1uaxsz);
+}
+.a8rket {
+  max-width: var(--_1m1uaxs10);
+}
+.a8rkeu {
+  max-width: var(--_1m1uaxs11);
+}
+.a8rkev {
+  max-width: var(--_1m1uaxs12);
+}
+.a8rkew {
+  transition: var(--_1m1uaxs5f);
+}
+.a8rkex {
+  transition: var(--_1m1uaxs5g);
+}
+.a8rkey:active {
+  transform: var(--_1m1uaxs5h);
+}
+html.a8rkez .a8rke11,
+html:not(.a8rkez) .a8rke10 {
+  background: var(--_1m1uaxs1r);
+}
+html.a8rkez .a8rke13,
+html:not(.a8rkez) .a8rke12 {
+  background: var(--_1m1uaxs1s);
+}
+html.a8rkez .a8rke15,
+html:not(.a8rkez) .a8rke14 {
+  background: var(--_1m1uaxs1t);
+}
+html.a8rkez .a8rke17,
+html:not(.a8rkez) .a8rke16 {
+  background: var(--_1m1uaxs1u);
+}
+html.a8rkez .a8rke19,
+html:not(.a8rkez) .a8rke18 {
+  background: var(--_1m1uaxs1v);
+}
+html.a8rkez .a8rke1b,
+html:not(.a8rkez) .a8rke1a {
+  background: var(--_1m1uaxs1w);
+}
+html.a8rkez .a8rke1d,
+html:not(.a8rkez) .a8rke1c {
+  background: var(--_1m1uaxs1x);
+}
+html.a8rkez .a8rke1f,
+html:not(.a8rkez) .a8rke1e {
+  background: var(--_1m1uaxs1y);
+}
+html.a8rkez .a8rke1h,
+html:not(.a8rkez) .a8rke1g {
+  background: var(--_1m1uaxs1z);
+}
+html.a8rkez .a8rke1j,
+html:not(.a8rkez) .a8rke1i {
+  background: var(--_1m1uaxs20);
+}
+html.a8rkez .a8rke1l,
+html:not(.a8rkez) .a8rke1k {
+  background: var(--_1m1uaxs21);
+}
+html.a8rkez .a8rke1n,
+html:not(.a8rkez) .a8rke1m {
+  background: var(--_1m1uaxs22);
+}
+html.a8rkez .a8rke1p,
+html:not(.a8rkez) .a8rke1o {
+  background: var(--_1m1uaxs23);
+}
+html.a8rkez .a8rke1r,
+html:not(.a8rkez) .a8rke1q {
+  background: var(--_1m1uaxs24);
+}
+html.a8rkez .a8rke1t,
+html:not(.a8rkez) .a8rke1s {
+  background: var(--_1m1uaxs25);
+}
+html.a8rkez .a8rke1v,
+html:not(.a8rkez) .a8rke1u {
+  background: var(--_1m1uaxs26);
+}
+html.a8rkez .a8rke1x,
+html:not(.a8rkez) .a8rke1w {
+  background: var(--_1m1uaxs27);
+}
+html.a8rkez .a8rke1z,
+html:not(.a8rkez) .a8rke1y {
+  background: var(--_1m1uaxs28);
+}
+html.a8rkez .a8rke21,
+html:not(.a8rkez) .a8rke20 {
+  background: var(--_1m1uaxs29);
+}
+html.a8rkez .a8rke23,
+html:not(.a8rkez) .a8rke22 {
+  background: var(--_1m1uaxs2a);
+}
+html.a8rkez .a8rke25,
+html:not(.a8rkez) .a8rke24 {
+  background: var(--_1m1uaxs2b);
+}
+html.a8rkez .a8rke27,
+html:not(.a8rkez) .a8rke26 {
+  background: var(--_1m1uaxs2c);
+}
+html.a8rkez .a8rke29,
+html:not(.a8rkez) .a8rke28 {
+  background: var(--_1m1uaxs2d);
+}
+html.a8rkez .a8rke2b,
+html:not(.a8rkez) .a8rke2a {
+  background: var(--_1m1uaxs2e);
+}
+html.a8rkez .a8rke2d,
+html:not(.a8rkez) .a8rke2c {
+  background: var(--_1m1uaxs2f);
+}
+html.a8rkez .a8rke2f,
+html:not(.a8rkez) .a8rke2e {
+  background: var(--_1m1uaxs2g);
+}
+html.a8rkez .a8rke2h,
+html:not(.a8rkez) .a8rke2g {
+  background: var(--_1m1uaxs2h);
+}
+html.a8rkez .a8rke2j,
+html:not(.a8rkez) .a8rke2i {
+  background: var(--_1m1uaxs2i);
+}
+html.a8rkez .a8rke2l,
+html:not(.a8rkez) .a8rke2k {
+  background: var(--_1m1uaxs2j);
+}
+html.a8rkez .a8rke2n,
+html:not(.a8rkez) .a8rke2m {
+  background: var(--_1m1uaxs2k);
+}
+html.a8rkez .a8rke2p,
+html:not(.a8rkez) .a8rke2o {
+  background: var(--_1m1uaxs2l);
+}
+html.a8rkez .a8rke2r,
+html:not(.a8rkez) .a8rke2q {
+  background: var(--_1m1uaxs2m);
+}
+html.a8rkez .a8rke2t,
+html:not(.a8rkez) .a8rke2s {
+  background: var(--_1m1uaxs2n);
+}
+html.a8rkez .a8rke2v,
+html:not(.a8rkez) .a8rke2u {
+  background: var(--_1m1uaxs2o);
+}
+html.a8rkez .a8rke2x,
+html:not(.a8rkez) .a8rke2w {
+  background: var(--_1m1uaxs2p);
+}
+html.a8rkez .a8rke2z,
+html:not(.a8rkez) .a8rke2y {
+  background: var(--_1m1uaxs2q);
+}
+html.a8rkez .a8rke31,
+html:not(.a8rkez) .a8rke30 {
+  background: var(--_1m1uaxs2r);
+}
+html.a8rkez .a8rke33,
+html:not(.a8rkez) .a8rke32 {
+  background: var(--_1m1uaxs2s);
+}
+html.a8rkez .a8rke35,
+html:not(.a8rkez) .a8rke34 {
+  background: var(--_1m1uaxs2t);
+}
+html.a8rkez .a8rke37,
+html:not(.a8rkez) .a8rke36 {
+  box-shadow: var(--_1m1uaxs5i);
+}
+html.a8rkez .a8rke39,
+html:not(.a8rkez) .a8rke38 {
+  box-shadow: var(--_1m1uaxs5j);
+}
+html.a8rkez .a8rke3b,
+html:not(.a8rkez) .a8rke3a {
+  box-shadow: var(--_1m1uaxs5k);
+}
+html.a8rkez .a8rke3d,
+html:not(.a8rkez) .a8rke3c {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsd);
+}
+html.a8rkez .a8rke3f,
+html:not(.a8rkez) .a8rke3e {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxse);
+}
+html.a8rkez .a8rke3h,
+html:not(.a8rkez) .a8rke3g {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsf);
+}
+html.a8rkez .a8rke3j,
+html:not(.a8rkez) .a8rke3i {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsg);
+}
+html.a8rkez .a8rke3l,
+html:not(.a8rkez) .a8rke3k {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsh);
+}
+html.a8rkez .a8rke3n,
+html:not(.a8rkez) .a8rke3m {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsh);
+}
+html.a8rkez .a8rke3p,
+html:not(.a8rkez) .a8rke3o {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsi);
+}
+html.a8rkez .a8rke3r,
+html:not(.a8rkez) .a8rke3q {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsi);
+}
+html.a8rkez .a8rke3t,
+html:not(.a8rkez) .a8rke3s {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsj);
+}
+html.a8rkez .a8rke3v,
+html:not(.a8rkez) .a8rke3u {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsl);
+}
+html.a8rkez .a8rke3x,
+html:not(.a8rkez) .a8rke3w {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsl);
+}
+html.a8rkez .a8rke3z,
+html:not(.a8rkez) .a8rke3y {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsm);
+}
+html.a8rkez .a8rke41,
+html:not(.a8rkez) .a8rke40 {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsm);
+}
+html.a8rkez .a8rke43,
+html:not(.a8rkez) .a8rke42 {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsn);
+}
+html.a8rkez .a8rke45,
+html:not(.a8rkez) .a8rke44 {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxso);
+}
+html.a8rkez .a8rke47,
+html:not(.a8rkez) .a8rke46 {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsp);
+}
+html.a8rkez .a8rke49,
+html:not(.a8rkez) .a8rke48 {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsp);
+}
+html.a8rkez .a8rke4b,
+html:not(.a8rkez) .a8rke4a {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsq);
+}
+html.a8rkez .a8rke4d,
+html:not(.a8rkez) .a8rke4c {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsx) var(--_1m1uaxsq);
+}
+html.a8rkez .a8rke4f,
+html:not(.a8rkez) .a8rke4e {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsr);
+}
+html.a8rkez .a8rke4h,
+html:not(.a8rkez) .a8rke4g {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxss);
+}
+html.a8rkez .a8rke4j,
+html:not(.a8rkez) .a8rke4i {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxst);
+}
+html.a8rkez .a8rke4l,
+html:not(.a8rkez) .a8rke4k {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsu);
+}
+html.a8rkez .a8rke4n,
+html:not(.a8rkez) .a8rke4m {
+  box-shadow: inset 0 0 0 var(--_1m1uaxsw) var(--_1m1uaxsv);
+}
+html.a8rkez .a8rke4p,
+html:not(.a8rkez) .a8rke4o {
+  box-shadow: 0 0 0 var(--_1m1uaxsy) var(--_1m1uaxsk);
+}
+.a8rke4q {
+  display: none;
+}
+.a8rke4u {
+  display: block;
+}
+.a8rke4y {
+  display: inline;
+}
+.a8rke52 {
+  display: inline-block;
+}
+.a8rke56 {
+  display: flex;
+}
+.a8rke5a {
+  position: relative;
+}
+.a8rke5e {
+  position: absolute;
+}
+.a8rke5i {
+  position: fixed;
+}
+.a8rke5m {
+  border-radius: 0;
+}
+.a8rke5q {
+  border-radius: 9999px;
+}
+.a8rke5u {
+  border-radius: var(--_1m1uaxsa);
+}
+.a8rke5y {
+  border-radius: var(--_1m1uaxsb);
+}
+.a8rke62 {
+  border-radius: var(--_1m1uaxsc);
+}
+.a8rke66 {
+  padding-top: var(--_1m1uaxs0);
+}
+.a8rke6a {
+  padding-top: var(--_1m1uaxs1);
+}
+.a8rke6e {
+  padding-top: var(--_1m1uaxs2);
+}
+.a8rke6i {
+  padding-top: var(--_1m1uaxs3);
+}
+.a8rke6m {
+  padding-top: var(--_1m1uaxs4);
+}
+.a8rke6q {
+  padding-top: var(--_1m1uaxs5);
+}
+.a8rke6u {
+  padding-top: var(--_1m1uaxs6);
+}
+.a8rke6y {
+  padding-top: var(--_1m1uaxs7);
+}
+.a8rke72 {
+  padding-top: 0;
+}
+.a8rke76 {
+  padding-bottom: var(--_1m1uaxs0);
+}
+.a8rke7a {
+  padding-bottom: var(--_1m1uaxs1);
+}
+.a8rke7e {
+  padding-bottom: var(--_1m1uaxs2);
+}
+.a8rke7i {
+  padding-bottom: var(--_1m1uaxs3);
+}
+.a8rke7m {
+  padding-bottom: var(--_1m1uaxs4);
+}
+.a8rke7q {
+  padding-bottom: var(--_1m1uaxs5);
+}
+.a8rke7u {
+  padding-bottom: var(--_1m1uaxs6);
+}
+.a8rke7y {
+  padding-bottom: var(--_1m1uaxs7);
+}
+.a8rke82 {
+  padding-bottom: 0;
+}
+.a8rke86 {
+  padding-right: var(--_1m1uaxs0);
+}
+.a8rke8a {
+  padding-right: var(--_1m1uaxs1);
+}
+.a8rke8e {
+  padding-right: var(--_1m1uaxs2);
+}
+.a8rke8i {
+  padding-right: var(--_1m1uaxs3);
+}
+.a8rke8m {
+  padding-right: var(--_1m1uaxs4);
+}
+.a8rke8q {
+  padding-right: var(--_1m1uaxs5);
+}
+.a8rke8u {
+  padding-right: var(--_1m1uaxs6);
+}
+.a8rke8y {
+  padding-right: var(--_1m1uaxs7);
+}
+.a8rke92 {
+  padding-right: 0;
+}
+.a8rke96 {
+  padding-left: var(--_1m1uaxs0);
+}
+.a8rke9a {
+  padding-left: var(--_1m1uaxs1);
+}
+.a8rke9e {
+  padding-left: var(--_1m1uaxs2);
+}
+.a8rke9i {
+  padding-left: var(--_1m1uaxs3);
+}
+.a8rke9m {
+  padding-left: var(--_1m1uaxs4);
+}
+.a8rke9q {
+  padding-left: var(--_1m1uaxs5);
+}
+.a8rke9u {
+  padding-left: var(--_1m1uaxs6);
+}
+.a8rke9y {
+  padding-left: var(--_1m1uaxs7);
+}
+.a8rkea2 {
+  padding-left: 0;
+}
+.a8rkea6 {
+  margin-top: var(--_1m1uaxs0);
+}
+.a8rkeaa {
+  margin-top: var(--_1m1uaxs1);
+}
+.a8rkeae {
+  margin-top: var(--_1m1uaxs2);
+}
+.a8rkeai {
+  margin-top: var(--_1m1uaxs3);
+}
+.a8rkeam {
+  margin-top: var(--_1m1uaxs4);
+}
+.a8rkeaq {
+  margin-top: var(--_1m1uaxs5);
+}
+.a8rkeau {
+  margin-top: var(--_1m1uaxs6);
+}
+.a8rkeay {
+  margin-top: var(--_1m1uaxs7);
+}
+.a8rkeb2 {
+  margin-top: 0;
+}
+.a8rkeb6 {
+  margin-bottom: var(--_1m1uaxs0);
+}
+.a8rkeba {
+  margin-bottom: var(--_1m1uaxs1);
+}
+.a8rkebe {
+  margin-bottom: var(--_1m1uaxs2);
+}
+.a8rkebi {
+  margin-bottom: var(--_1m1uaxs3);
+}
+.a8rkebm {
+  margin-bottom: var(--_1m1uaxs4);
+}
+.a8rkebq {
+  margin-bottom: var(--_1m1uaxs5);
+}
+.a8rkebu {
+  margin-bottom: var(--_1m1uaxs6);
+}
+.a8rkeby {
+  margin-bottom: var(--_1m1uaxs7);
+}
+.a8rkec2 {
+  margin-bottom: 0;
+}
+.a8rkec6 {
+  margin-right: var(--_1m1uaxs0);
+}
+.a8rkeca {
+  margin-right: var(--_1m1uaxs1);
+}
+.a8rkece {
+  margin-right: var(--_1m1uaxs2);
+}
+.a8rkeci {
+  margin-right: var(--_1m1uaxs3);
+}
+.a8rkecm {
+  margin-right: var(--_1m1uaxs4);
+}
+.a8rkecq {
+  margin-right: var(--_1m1uaxs5);
+}
+.a8rkecu {
+  margin-right: var(--_1m1uaxs6);
+}
+.a8rkecy {
+  margin-right: var(--_1m1uaxs7);
+}
+.a8rked2 {
+  margin-right: 0;
+}
+.a8rked6 {
+  margin-left: var(--_1m1uaxs0);
+}
+.a8rkeda {
+  margin-left: var(--_1m1uaxs1);
+}
+.a8rkede {
+  margin-left: var(--_1m1uaxs2);
+}
+.a8rkedi {
+  margin-left: var(--_1m1uaxs3);
+}
+.a8rkedm {
+  margin-left: var(--_1m1uaxs4);
+}
+.a8rkedq {
+  margin-left: var(--_1m1uaxs5);
+}
+.a8rkedu {
+  margin-left: var(--_1m1uaxs6);
+}
+.a8rkedy {
+  margin-left: var(--_1m1uaxs7);
+}
+.a8rkee2 {
+  margin-left: 0;
+}
+.a8rkee6 {
+  align-items: flex-start;
+}
+.a8rkeea {
+  align-items: center;
+}
+.a8rkeee {
+  align-items: flex-end;
+}
+.a8rkeei {
+  justify-content: flex-start;
+}
+.a8rkeem {
+  justify-content: center;
+}
+.a8rkeeq {
+  justify-content: flex-end;
+}
+.a8rkeeu {
+  justify-content: space-between;
+}
+.a8rkeey {
+  flex-direction: row;
+}
+.a8rkef2 {
+  flex-direction: row-reverse;
+}
+.a8rkef6 {
+  flex-direction: column;
+}
+.a8rkefa {
+  flex-direction: column-reverse;
+}
+.a8rkefe {
+  flex-wrap: wrap;
+}
+.a8rkefi {
+  flex-wrap: nowrap;
+}
+.a8rkefm {
+  flex-shrink: 0;
+}
+.a8rkefq {
+  flex-grow: 0;
+}
+.a8rkefu {
+  flex-grow: 1;
+}
+.a8rkefy {
+  text-align: left;
+}
+.a8rkeg2 {
+  text-align: center;
+}
+.a8rkeg6 {
+  text-align: right;
+}
+@media screen and (min-width: 740px) {
+  .a8rke4r {
+    display: none;
+  }
+  .a8rke4v {
+    display: block;
+  }
+  .a8rke4z {
+    display: inline;
+  }
+  .a8rke53 {
+    display: inline-block;
+  }
+  .a8rke57 {
+    display: flex;
+  }
+  .a8rke5b {
+    position: relative;
+  }
+  .a8rke5f {
+    position: absolute;
+  }
+  .a8rke5j {
+    position: fixed;
+  }
+  .a8rke5n {
+    border-radius: 0;
+  }
+  .a8rke5r {
+    border-radius: 9999px;
+  }
+  .a8rke5v {
+    border-radius: var(--_1m1uaxsa);
+  }
+  .a8rke5z {
+    border-radius: var(--_1m1uaxsb);
+  }
+  .a8rke63 {
+    border-radius: var(--_1m1uaxsc);
+  }
+  .a8rke67 {
+    padding-top: var(--_1m1uaxs0);
+  }
+  .a8rke6b {
+    padding-top: var(--_1m1uaxs1);
+  }
+  .a8rke6f {
+    padding-top: var(--_1m1uaxs2);
+  }
+  .a8rke6j {
+    padding-top: var(--_1m1uaxs3);
+  }
+  .a8rke6n {
+    padding-top: var(--_1m1uaxs4);
+  }
+  .a8rke6r {
+    padding-top: var(--_1m1uaxs5);
+  }
+  .a8rke6v {
+    padding-top: var(--_1m1uaxs6);
+  }
+  .a8rke6z {
+    padding-top: var(--_1m1uaxs7);
+  }
+  .a8rke73 {
+    padding-top: 0;
+  }
+  .a8rke77 {
+    padding-bottom: var(--_1m1uaxs0);
+  }
+  .a8rke7b {
+    padding-bottom: var(--_1m1uaxs1);
+  }
+  .a8rke7f {
+    padding-bottom: var(--_1m1uaxs2);
+  }
+  .a8rke7j {
+    padding-bottom: var(--_1m1uaxs3);
+  }
+  .a8rke7n {
+    padding-bottom: var(--_1m1uaxs4);
+  }
+  .a8rke7r {
+    padding-bottom: var(--_1m1uaxs5);
+  }
+  .a8rke7v {
+    padding-bottom: var(--_1m1uaxs6);
+  }
+  .a8rke7z {
+    padding-bottom: var(--_1m1uaxs7);
+  }
+  .a8rke83 {
+    padding-bottom: 0;
+  }
+  .a8rke87 {
+    padding-right: var(--_1m1uaxs0);
+  }
+  .a8rke8b {
+    padding-right: var(--_1m1uaxs1);
+  }
+  .a8rke8f {
+    padding-right: var(--_1m1uaxs2);
+  }
+  .a8rke8j {
+    padding-right: var(--_1m1uaxs3);
+  }
+  .a8rke8n {
+    padding-right: var(--_1m1uaxs4);
+  }
+  .a8rke8r {
+    padding-right: var(--_1m1uaxs5);
+  }
+  .a8rke8v {
+    padding-right: var(--_1m1uaxs6);
+  }
+  .a8rke8z {
+    padding-right: var(--_1m1uaxs7);
+  }
+  .a8rke93 {
+    padding-right: 0;
+  }
+  .a8rke97 {
+    padding-left: var(--_1m1uaxs0);
+  }
+  .a8rke9b {
+    padding-left: var(--_1m1uaxs1);
+  }
+  .a8rke9f {
+    padding-left: var(--_1m1uaxs2);
+  }
+  .a8rke9j {
+    padding-left: var(--_1m1uaxs3);
+  }
+  .a8rke9n {
+    padding-left: var(--_1m1uaxs4);
+  }
+  .a8rke9r {
+    padding-left: var(--_1m1uaxs5);
+  }
+  .a8rke9v {
+    padding-left: var(--_1m1uaxs6);
+  }
+  .a8rke9z {
+    padding-left: var(--_1m1uaxs7);
+  }
+  .a8rkea3 {
+    padding-left: 0;
+  }
+  .a8rkea7 {
+    margin-top: var(--_1m1uaxs0);
+  }
+  .a8rkeab {
+    margin-top: var(--_1m1uaxs1);
+  }
+  .a8rkeaf {
+    margin-top: var(--_1m1uaxs2);
+  }
+  .a8rkeaj {
+    margin-top: var(--_1m1uaxs3);
+  }
+  .a8rkean {
+    margin-top: var(--_1m1uaxs4);
+  }
+  .a8rkear {
+    margin-top: var(--_1m1uaxs5);
+  }
+  .a8rkeav {
+    margin-top: var(--_1m1uaxs6);
+  }
+  .a8rkeaz {
+    margin-top: var(--_1m1uaxs7);
+  }
+  .a8rkeb3 {
+    margin-top: 0;
+  }
+  .a8rkeb7 {
+    margin-bottom: var(--_1m1uaxs0);
+  }
+  .a8rkebb {
+    margin-bottom: var(--_1m1uaxs1);
+  }
+  .a8rkebf {
+    margin-bottom: var(--_1m1uaxs2);
+  }
+  .a8rkebj {
+    margin-bottom: var(--_1m1uaxs3);
+  }
+  .a8rkebn {
+    margin-bottom: var(--_1m1uaxs4);
+  }
+  .a8rkebr {
+    margin-bottom: var(--_1m1uaxs5);
+  }
+  .a8rkebv {
+    margin-bottom: var(--_1m1uaxs6);
+  }
+  .a8rkebz {
+    margin-bottom: var(--_1m1uaxs7);
+  }
+  .a8rkec3 {
+    margin-bottom: 0;
+  }
+  .a8rkec7 {
+    margin-right: var(--_1m1uaxs0);
+  }
+  .a8rkecb {
+    margin-right: var(--_1m1uaxs1);
+  }
+  .a8rkecf {
+    margin-right: var(--_1m1uaxs2);
+  }
+  .a8rkecj {
+    margin-right: var(--_1m1uaxs3);
+  }
+  .a8rkecn {
+    margin-right: var(--_1m1uaxs4);
+  }
+  .a8rkecr {
+    margin-right: var(--_1m1uaxs5);
+  }
+  .a8rkecv {
+    margin-right: var(--_1m1uaxs6);
+  }
+  .a8rkecz {
+    margin-right: var(--_1m1uaxs7);
+  }
+  .a8rked3 {
+    margin-right: 0;
+  }
+  .a8rked7 {
+    margin-left: var(--_1m1uaxs0);
+  }
+  .a8rkedb {
+    margin-left: var(--_1m1uaxs1);
+  }
+  .a8rkedf {
+    margin-left: var(--_1m1uaxs2);
+  }
+  .a8rkedj {
+    margin-left: var(--_1m1uaxs3);
+  }
+  .a8rkedn {
+    margin-left: var(--_1m1uaxs4);
+  }
+  .a8rkedr {
+    margin-left: var(--_1m1uaxs5);
+  }
+  .a8rkedv {
+    margin-left: var(--_1m1uaxs6);
+  }
+  .a8rkedz {
+    margin-left: var(--_1m1uaxs7);
+  }
+  .a8rkee3 {
+    margin-left: 0;
+  }
+  .a8rkee7 {
+    align-items: flex-start;
+  }
+  .a8rkeeb {
+    align-items: center;
+  }
+  .a8rkeef {
+    align-items: flex-end;
+  }
+  .a8rkeej {
+    justify-content: flex-start;
+  }
+  .a8rkeen {
+    justify-content: center;
+  }
+  .a8rkeer {
+    justify-content: flex-end;
+  }
+  .a8rkeev {
+    justify-content: space-between;
+  }
+  .a8rkeez {
+    flex-direction: row;
+  }
+  .a8rkef3 {
+    flex-direction: row-reverse;
+  }
+  .a8rkef7 {
+    flex-direction: column;
+  }
+  .a8rkefb {
+    flex-direction: column-reverse;
+  }
+  .a8rkeff {
+    flex-wrap: wrap;
+  }
+  .a8rkefj {
+    flex-wrap: nowrap;
+  }
+  .a8rkefn {
+    flex-shrink: 0;
+  }
+  .a8rkefr {
+    flex-grow: 0;
+  }
+  .a8rkefv {
+    flex-grow: 1;
+  }
+  .a8rkefz {
+    text-align: left;
+  }
+  .a8rkeg3 {
+    text-align: center;
+  }
+  .a8rkeg7 {
+    text-align: right;
+  }
+}
+@media screen and (min-width: 992px) {
+  .a8rke4s {
+    display: none;
+  }
+  .a8rke4w {
+    display: block;
+  }
+  .a8rke50 {
+    display: inline;
+  }
+  .a8rke54 {
+    display: inline-block;
+  }
+  .a8rke58 {
+    display: flex;
+  }
+  .a8rke5c {
+    position: relative;
+  }
+  .a8rke5g {
+    position: absolute;
+  }
+  .a8rke5k {
+    position: fixed;
+  }
+  .a8rke5o {
+    border-radius: 0;
+  }
+  .a8rke5s {
+    border-radius: 9999px;
+  }
+  .a8rke5w {
+    border-radius: var(--_1m1uaxsa);
+  }
+  .a8rke60 {
+    border-radius: var(--_1m1uaxsb);
+  }
+  .a8rke64 {
+    border-radius: var(--_1m1uaxsc);
+  }
+  .a8rke68 {
+    padding-top: var(--_1m1uaxs0);
+  }
+  .a8rke6c {
+    padding-top: var(--_1m1uaxs1);
+  }
+  .a8rke6g {
+    padding-top: var(--_1m1uaxs2);
+  }
+  .a8rke6k {
+    padding-top: var(--_1m1uaxs3);
+  }
+  .a8rke6o {
+    padding-top: var(--_1m1uaxs4);
+  }
+  .a8rke6s {
+    padding-top: var(--_1m1uaxs5);
+  }
+  .a8rke6w {
+    padding-top: var(--_1m1uaxs6);
+  }
+  .a8rke70 {
+    padding-top: var(--_1m1uaxs7);
+  }
+  .a8rke74 {
+    padding-top: 0;
+  }
+  .a8rke78 {
+    padding-bottom: var(--_1m1uaxs0);
+  }
+  .a8rke7c {
+    padding-bottom: var(--_1m1uaxs1);
+  }
+  .a8rke7g {
+    padding-bottom: var(--_1m1uaxs2);
+  }
+  .a8rke7k {
+    padding-bottom: var(--_1m1uaxs3);
+  }
+  .a8rke7o {
+    padding-bottom: var(--_1m1uaxs4);
+  }
+  .a8rke7s {
+    padding-bottom: var(--_1m1uaxs5);
+  }
+  .a8rke7w {
+    padding-bottom: var(--_1m1uaxs6);
+  }
+  .a8rke80 {
+    padding-bottom: var(--_1m1uaxs7);
+  }
+  .a8rke84 {
+    padding-bottom: 0;
+  }
+  .a8rke88 {
+    padding-right: var(--_1m1uaxs0);
+  }
+  .a8rke8c {
+    padding-right: var(--_1m1uaxs1);
+  }
+  .a8rke8g {
+    padding-right: var(--_1m1uaxs2);
+  }
+  .a8rke8k {
+    padding-right: var(--_1m1uaxs3);
+  }
+  .a8rke8o {
+    padding-right: var(--_1m1uaxs4);
+  }
+  .a8rke8s {
+    padding-right: var(--_1m1uaxs5);
+  }
+  .a8rke8w {
+    padding-right: var(--_1m1uaxs6);
+  }
+  .a8rke90 {
+    padding-right: var(--_1m1uaxs7);
+  }
+  .a8rke94 {
+    padding-right: 0;
+  }
+  .a8rke98 {
+    padding-left: var(--_1m1uaxs0);
+  }
+  .a8rke9c {
+    padding-left: var(--_1m1uaxs1);
+  }
+  .a8rke9g {
+    padding-left: var(--_1m1uaxs2);
+  }
+  .a8rke9k {
+    padding-left: var(--_1m1uaxs3);
+  }
+  .a8rke9o {
+    padding-left: var(--_1m1uaxs4);
+  }
+  .a8rke9s {
+    padding-left: var(--_1m1uaxs5);
+  }
+  .a8rke9w {
+    padding-left: var(--_1m1uaxs6);
+  }
+  .a8rkea0 {
+    padding-left: var(--_1m1uaxs7);
+  }
+  .a8rkea4 {
+    padding-left: 0;
+  }
+  .a8rkea8 {
+    margin-top: var(--_1m1uaxs0);
+  }
+  .a8rkeac {
+    margin-top: var(--_1m1uaxs1);
+  }
+  .a8rkeag {
+    margin-top: var(--_1m1uaxs2);
+  }
+  .a8rkeak {
+    margin-top: var(--_1m1uaxs3);
+  }
+  .a8rkeao {
+    margin-top: var(--_1m1uaxs4);
+  }
+  .a8rkeas {
+    margin-top: var(--_1m1uaxs5);
+  }
+  .a8rkeaw {
+    margin-top: var(--_1m1uaxs6);
+  }
+  .a8rkeb0 {
+    margin-top: var(--_1m1uaxs7);
+  }
+  .a8rkeb4 {
+    margin-top: 0;
+  }
+  .a8rkeb8 {
+    margin-bottom: var(--_1m1uaxs0);
+  }
+  .a8rkebc {
+    margin-bottom: var(--_1m1uaxs1);
+  }
+  .a8rkebg {
+    margin-bottom: var(--_1m1uaxs2);
+  }
+  .a8rkebk {
+    margin-bottom: var(--_1m1uaxs3);
+  }
+  .a8rkebo {
+    margin-bottom: var(--_1m1uaxs4);
+  }
+  .a8rkebs {
+    margin-bottom: var(--_1m1uaxs5);
+  }
+  .a8rkebw {
+    margin-bottom: var(--_1m1uaxs6);
+  }
+  .a8rkec0 {
+    margin-bottom: var(--_1m1uaxs7);
+  }
+  .a8rkec4 {
+    margin-bottom: 0;
+  }
+  .a8rkec8 {
+    margin-right: var(--_1m1uaxs0);
+  }
+  .a8rkecc {
+    margin-right: var(--_1m1uaxs1);
+  }
+  .a8rkecg {
+    margin-right: var(--_1m1uaxs2);
+  }
+  .a8rkeck {
+    margin-right: var(--_1m1uaxs3);
+  }
+  .a8rkeco {
+    margin-right: var(--_1m1uaxs4);
+  }
+  .a8rkecs {
+    margin-right: var(--_1m1uaxs5);
+  }
+  .a8rkecw {
+    margin-right: var(--_1m1uaxs6);
+  }
+  .a8rked0 {
+    margin-right: var(--_1m1uaxs7);
+  }
+  .a8rked4 {
+    margin-right: 0;
+  }
+  .a8rked8 {
+    margin-left: var(--_1m1uaxs0);
+  }
+  .a8rkedc {
+    margin-left: var(--_1m1uaxs1);
+  }
+  .a8rkedg {
+    margin-left: var(--_1m1uaxs2);
+  }
+  .a8rkedk {
+    margin-left: var(--_1m1uaxs3);
+  }
+  .a8rkedo {
+    margin-left: var(--_1m1uaxs4);
+  }
+  .a8rkeds {
+    margin-left: var(--_1m1uaxs5);
+  }
+  .a8rkedw {
+    margin-left: var(--_1m1uaxs6);
+  }
+  .a8rkee0 {
+    margin-left: var(--_1m1uaxs7);
+  }
+  .a8rkee4 {
+    margin-left: 0;
+  }
+  .a8rkee8 {
+    align-items: flex-start;
+  }
+  .a8rkeec {
+    align-items: center;
+  }
+  .a8rkeeg {
+    align-items: flex-end;
+  }
+  .a8rkeek {
+    justify-content: flex-start;
+  }
+  .a8rkeeo {
+    justify-content: center;
+  }
+  .a8rkees {
+    justify-content: flex-end;
+  }
+  .a8rkeew {
+    justify-content: space-between;
+  }
+  .a8rkef0 {
+    flex-direction: row;
+  }
+  .a8rkef4 {
+    flex-direction: row-reverse;
+  }
+  .a8rkef8 {
+    flex-direction: column;
+  }
+  .a8rkefc {
+    flex-direction: column-reverse;
+  }
+  .a8rkefg {
+    flex-wrap: wrap;
+  }
+  .a8rkefk {
+    flex-wrap: nowrap;
+  }
+  .a8rkefo {
+    flex-shrink: 0;
+  }
+  .a8rkefs {
+    flex-grow: 0;
+  }
+  .a8rkefw {
+    flex-grow: 1;
+  }
+  .a8rkeg0 {
+    text-align: left;
+  }
+  .a8rkeg4 {
+    text-align: center;
+  }
+  .a8rkeg8 {
+    text-align: right;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .a8rke4t {
+    display: none;
+  }
+  .a8rke4x {
+    display: block;
+  }
+  .a8rke51 {
+    display: inline;
+  }
+  .a8rke55 {
+    display: inline-block;
+  }
+  .a8rke59 {
+    display: flex;
+  }
+  .a8rke5d {
+    position: relative;
+  }
+  .a8rke5h {
+    position: absolute;
+  }
+  .a8rke5l {
+    position: fixed;
+  }
+  .a8rke5p {
+    border-radius: 0;
+  }
+  .a8rke5t {
+    border-radius: 9999px;
+  }
+  .a8rke5x {
+    border-radius: var(--_1m1uaxsa);
+  }
+  .a8rke61 {
+    border-radius: var(--_1m1uaxsb);
+  }
+  .a8rke65 {
+    border-radius: var(--_1m1uaxsc);
+  }
+  .a8rke69 {
+    padding-top: var(--_1m1uaxs0);
+  }
+  .a8rke6d {
+    padding-top: var(--_1m1uaxs1);
+  }
+  .a8rke6h {
+    padding-top: var(--_1m1uaxs2);
+  }
+  .a8rke6l {
+    padding-top: var(--_1m1uaxs3);
+  }
+  .a8rke6p {
+    padding-top: var(--_1m1uaxs4);
+  }
+  .a8rke6t {
+    padding-top: var(--_1m1uaxs5);
+  }
+  .a8rke6x {
+    padding-top: var(--_1m1uaxs6);
+  }
+  .a8rke71 {
+    padding-top: var(--_1m1uaxs7);
+  }
+  .a8rke75 {
+    padding-top: 0;
+  }
+  .a8rke79 {
+    padding-bottom: var(--_1m1uaxs0);
+  }
+  .a8rke7d {
+    padding-bottom: var(--_1m1uaxs1);
+  }
+  .a8rke7h {
+    padding-bottom: var(--_1m1uaxs2);
+  }
+  .a8rke7l {
+    padding-bottom: var(--_1m1uaxs3);
+  }
+  .a8rke7p {
+    padding-bottom: var(--_1m1uaxs4);
+  }
+  .a8rke7t {
+    padding-bottom: var(--_1m1uaxs5);
+  }
+  .a8rke7x {
+    padding-bottom: var(--_1m1uaxs6);
+  }
+  .a8rke81 {
+    padding-bottom: var(--_1m1uaxs7);
+  }
+  .a8rke85 {
+    padding-bottom: 0;
+  }
+  .a8rke89 {
+    padding-right: var(--_1m1uaxs0);
+  }
+  .a8rke8d {
+    padding-right: var(--_1m1uaxs1);
+  }
+  .a8rke8h {
+    padding-right: var(--_1m1uaxs2);
+  }
+  .a8rke8l {
+    padding-right: var(--_1m1uaxs3);
+  }
+  .a8rke8p {
+    padding-right: var(--_1m1uaxs4);
+  }
+  .a8rke8t {
+    padding-right: var(--_1m1uaxs5);
+  }
+  .a8rke8x {
+    padding-right: var(--_1m1uaxs6);
+  }
+  .a8rke91 {
+    padding-right: var(--_1m1uaxs7);
+  }
+  .a8rke95 {
+    padding-right: 0;
+  }
+  .a8rke99 {
+    padding-left: var(--_1m1uaxs0);
+  }
+  .a8rke9d {
+    padding-left: var(--_1m1uaxs1);
+  }
+  .a8rke9h {
+    padding-left: var(--_1m1uaxs2);
+  }
+  .a8rke9l {
+    padding-left: var(--_1m1uaxs3);
+  }
+  .a8rke9p {
+    padding-left: var(--_1m1uaxs4);
+  }
+  .a8rke9t {
+    padding-left: var(--_1m1uaxs5);
+  }
+  .a8rke9x {
+    padding-left: var(--_1m1uaxs6);
+  }
+  .a8rkea1 {
+    padding-left: var(--_1m1uaxs7);
+  }
+  .a8rkea5 {
+    padding-left: 0;
+  }
+  .a8rkea9 {
+    margin-top: var(--_1m1uaxs0);
+  }
+  .a8rkead {
+    margin-top: var(--_1m1uaxs1);
+  }
+  .a8rkeah {
+    margin-top: var(--_1m1uaxs2);
+  }
+  .a8rkeal {
+    margin-top: var(--_1m1uaxs3);
+  }
+  .a8rkeap {
+    margin-top: var(--_1m1uaxs4);
+  }
+  .a8rkeat {
+    margin-top: var(--_1m1uaxs5);
+  }
+  .a8rkeax {
+    margin-top: var(--_1m1uaxs6);
+  }
+  .a8rkeb1 {
+    margin-top: var(--_1m1uaxs7);
+  }
+  .a8rkeb5 {
+    margin-top: 0;
+  }
+  .a8rkeb9 {
+    margin-bottom: var(--_1m1uaxs0);
+  }
+  .a8rkebd {
+    margin-bottom: var(--_1m1uaxs1);
+  }
+  .a8rkebh {
+    margin-bottom: var(--_1m1uaxs2);
+  }
+  .a8rkebl {
+    margin-bottom: var(--_1m1uaxs3);
+  }
+  .a8rkebp {
+    margin-bottom: var(--_1m1uaxs4);
+  }
+  .a8rkebt {
+    margin-bottom: var(--_1m1uaxs5);
+  }
+  .a8rkebx {
+    margin-bottom: var(--_1m1uaxs6);
+  }
+  .a8rkec1 {
+    margin-bottom: var(--_1m1uaxs7);
+  }
+  .a8rkec5 {
+    margin-bottom: 0;
+  }
+  .a8rkec9 {
+    margin-right: var(--_1m1uaxs0);
+  }
+  .a8rkecd {
+    margin-right: var(--_1m1uaxs1);
+  }
+  .a8rkech {
+    margin-right: var(--_1m1uaxs2);
+  }
+  .a8rkecl {
+    margin-right: var(--_1m1uaxs3);
+  }
+  .a8rkecp {
+    margin-right: var(--_1m1uaxs4);
+  }
+  .a8rkect {
+    margin-right: var(--_1m1uaxs5);
+  }
+  .a8rkecx {
+    margin-right: var(--_1m1uaxs6);
+  }
+  .a8rked1 {
+    margin-right: var(--_1m1uaxs7);
+  }
+  .a8rked5 {
+    margin-right: 0;
+  }
+  .a8rked9 {
+    margin-left: var(--_1m1uaxs0);
+  }
+  .a8rkedd {
+    margin-left: var(--_1m1uaxs1);
+  }
+  .a8rkedh {
+    margin-left: var(--_1m1uaxs2);
+  }
+  .a8rkedl {
+    margin-left: var(--_1m1uaxs3);
+  }
+  .a8rkedp {
+    margin-left: var(--_1m1uaxs4);
+  }
+  .a8rkedt {
+    margin-left: var(--_1m1uaxs5);
+  }
+  .a8rkedx {
+    margin-left: var(--_1m1uaxs6);
+  }
+  .a8rkee1 {
+    margin-left: var(--_1m1uaxs7);
+  }
+  .a8rkee5 {
+    margin-left: 0;
+  }
+  .a8rkee9 {
+    align-items: flex-start;
+  }
+  .a8rkeed {
+    align-items: center;
+  }
+  .a8rkeeh {
+    align-items: flex-end;
+  }
+  .a8rkeel {
+    justify-content: flex-start;
+  }
+  .a8rkeep {
+    justify-content: center;
+  }
+  .a8rkeet {
+    justify-content: flex-end;
+  }
+  .a8rkeex {
+    justify-content: space-between;
+  }
+  .a8rkef1 {
+    flex-direction: row;
+  }
+  .a8rkef5 {
+    flex-direction: row-reverse;
+  }
+  .a8rkef9 {
+    flex-direction: column;
+  }
+  .a8rkefd {
+    flex-direction: column-reverse;
+  }
+  .a8rkefh {
+    flex-wrap: wrap;
+  }
+  .a8rkefl {
+    flex-wrap: nowrap;
+  }
+  .a8rkefp {
+    flex-shrink: 0;
+  }
+  .a8rkeft {
+    flex-grow: 0;
+  }
+  .a8rkefx {
+    flex-grow: 1;
+  }
+  .a8rkeg1 {
+    text-align: left;
+  }
+  .a8rkeg5 {
+    text-align: center;
+  }
+  .a8rkeg9 {
+    text-align: right;
+  }
+}
+.mYnaw_0 {
+  background-color: #e60278;
+  color: #fff;
+  font-size: 50px;
+  padding: 20px;
+}
+._1o0j0u80 {
+  --_1m1uaxs0: 24px;
+  --_1m1uaxs1: 4px;
+  --_1m1uaxs2: 8px;
+  --_1m1uaxs3: 12px;
+  --_1m1uaxs4: 20px;
+  --_1m1uaxs5: 32px;
+  --_1m1uaxs6: 48px;
+  --_1m1uaxs7: 96px;
+  --_1m1uaxs8: 44px;
+  --_1m1uaxs9: 4px;
+  --_1m1uaxsa: 4px;
+  --_1m1uaxsb: 6px;
+  --_1m1uaxsc: 10px;
+  --_1m1uaxsd: #e60278;
+  --_1m1uaxse: #f8b1dc;
+  --_1m1uaxsf: #fdc221;
+  --_1m1uaxsg: #fee384;
+  --_1m1uaxsh: #b91e1e;
+  --_1m1uaxsi: #fb999a;
+  --_1m1uaxsj: #838fa5;
+  --_1m1uaxsk: rgba(159, 176, 245, 0.7);
+  --_1m1uaxsl: #4964e9;
+  --_1m1uaxsm: #9fb0f5;
+  --_1m1uaxsn: #1d559d;
+  --_1m1uaxso: #98c9f1;
+  --_1m1uaxsp: #2e3849;
+  --_1m1uaxsr: #d2d7df;
+  --_1m1uaxsq: #fff;
+  --_1m1uaxss: #12784f;
+  --_1m1uaxst: #8bdec5;
+  --_1m1uaxsu: #512eaa;
+  --_1m1uaxsv: #c6acf5;
+  --_1m1uaxsw: 1px;
+  --_1m1uaxsx: 2px;
+  --_1m1uaxsy: 3px;
+  --_1m1uaxsz: 400px;
+  --_1m1uaxs10: 660px;
+  --_1m1uaxs11: 940px;
+  --_1m1uaxs12: 1280px;
+  --_1m1uaxs13: #e60278;
+  --_1m1uaxs14: #f8b1dc;
+  --_1m1uaxs15: #723d02;
+  --_1m1uaxs16: #fee384;
+  --_1m1uaxs17: #b91e1e;
+  --_1m1uaxs18: #fb999a;
+  --_1m1uaxs19: #4964e9;
+  --_1m1uaxs1a: #9fb0f5;
+  --_1m1uaxs1b: #1d559d;
+  --_1m1uaxs1c: #98c9f1;
+  --_1m1uaxs1d: #4964e9;
+  --_1m1uaxs1f: #9fb0f5;
+  --_1m1uaxs1e: #4964e9;
+  --_1m1uaxs1g: #512eaa;
+  --_1m1uaxs1h: #c6acf5;
+  --_1m1uaxs1i: #2e3849;
+  --_1m1uaxs1j: #fff;
+  --_1m1uaxs1k: #12784f;
+  --_1m1uaxs1l: #8bdec5;
+  --_1m1uaxs1m: #512eaa;
+  --_1m1uaxs1n: #c6acf5;
+  --_1m1uaxs1o: #f57c00;
+  --_1m1uaxs1p: #5a6881;
+  --_1m1uaxs1q: hsla(0, 0%, 100%, 0.65);
+  --_1m1uaxs1r: #f7f8fb;
+  --_1m1uaxs1s: #0e131b;
+  --_1m1uaxs1t: #0d3880;
+  --_1m1uaxs1u: #e60278;
+  --_1m1uaxs1v: #cd026b;
+  --_1m1uaxs1w: #fd0585;
+  --_1m1uaxs1x: #feeffa;
+  --_1m1uaxs1y: #fdd7f3;
+  --_1m1uaxs1z: #fde3f6;
+  --_1m1uaxs20: #fdc221;
+  --_1m1uaxs21: #fef8de;
+  --_1m1uaxs22: #b91e1e;
+  --_1m1uaxs23: #a31a1a;
+  --_1m1uaxs24: #db1616;
+  --_1m1uaxs25: #ffe3e2;
+  --_1m1uaxs26: #fef3f3;
+  --_1m1uaxs27: #fcdbdb;
+  --_1m1uaxs28: #fde7e7;
+  --_1m1uaxs29: #4964e9;
+  --_1m1uaxs2a: #3251e6;
+  --_1m1uaxs2b: #5975ff;
+  --_1m1uaxs2c: #f4f6fe;
+  --_1m1uaxs2d: #dde3fc;
+  --_1m1uaxs2e: #e8ecfd;
+  --_1m1uaxs2f: #1d559d;
+  --_1m1uaxs2g: #e3f2fb;
+  --_1m1uaxs2h: #2e3849;
+  --_1m1uaxs2i: #242c39;
+  --_1m1uaxs2j: #384459;
+  --_1m1uaxs2k: #eaecf1;
+  --_1m1uaxs2l: #f7f8fb;
+  --_1m1uaxs2m: #e6e9f3;
+  --_1m1uaxs2n: #eff1f7;
+  --_1m1uaxs2o: #12784f;
+  --_1m1uaxs2p: #e2f7f1;
+  --_1m1uaxs2q: #512eaa;
+  --_1m1uaxs2r: #f1e8fd;
+  --_1m1uaxs2s: #fff;
+  --_1m1uaxs2t: #1c2330;
+  --_1m1uaxs2u: Roboto, "Helvetica Neue", HelveticaNeue, Helvetica, Arial,
+    sans-serif;
+  --_1m1uaxs2v: 1456;
+  --_1m1uaxs2w: 1900;
+  --_1m1uaxs2x: -500;
+  --_1m1uaxs2y: 0;
+  --_1m1uaxs2z: 2048;
+  --_1m1uaxs30: 12px;
+  --_1m1uaxs31: 20px;
+  --_1m1uaxs32: 8.5313px;
+  --_1m1uaxs33: -0.4642em;
+  --_1m1uaxs34: -0.4915em;
+  --_1m1uaxs35: 12px;
+  --_1m1uaxs36: 20px;
+  --_1m1uaxs37: 8.5313px;
+  --_1m1uaxs38: -0.4642em;
+  --_1m1uaxs39: -0.4915em;
+  --_1m1uaxs3a: 14px;
+  --_1m1uaxs3b: 20px;
+  --_1m1uaxs3c: 9.9531px;
+  --_1m1uaxs3d: -0.3451em;
+  --_1m1uaxs3e: -0.3725em;
+  --_1m1uaxs3f: 14px;
+  --_1m1uaxs3g: 20px;
+  --_1m1uaxs3h: 9.9531px;
+  --_1m1uaxs3i: -0.3451em;
+  --_1m1uaxs3j: -0.3725em;
+  --_1m1uaxs3k: 16px;
+  --_1m1uaxs3l: 24px;
+  --_1m1uaxs3m: 11.375px;
+  --_1m1uaxs3n: -0.3809em;
+  --_1m1uaxs3o: -0.4082em;
+  --_1m1uaxs3p: 16px;
+  --_1m1uaxs3q: 24px;
+  --_1m1uaxs3r: 11.375px;
+  --_1m1uaxs3s: -0.3809em;
+  --_1m1uaxs3t: -0.4082em;
+  --_1m1uaxs3u: 18px;
+  --_1m1uaxs3v: 28px;
+  --_1m1uaxs3w: 12.7969px;
+  --_1m1uaxs3x: -0.4086em;
+  --_1m1uaxs3y: -0.436em;
+  --_1m1uaxs3z: 18px;
+  --_1m1uaxs40: 28px;
+  --_1m1uaxs41: 12.7969px;
+  --_1m1uaxs42: -0.4086em;
+  --_1m1uaxs43: -0.436em;
+  --_1m1uaxs44: 400;
+  --_1m1uaxs45: 500;
+  --_1m1uaxs46: 700;
+  --_1m1uaxs47: 28px;
+  --_1m1uaxs48: 36px;
+  --_1m1uaxs49: 19.9063px;
+  --_1m1uaxs4a: -0.2737em;
+  --_1m1uaxs4b: -0.3011em;
+  --_1m1uaxs4c: 42px;
+  --_1m1uaxs4d: 44px;
+  --_1m1uaxs4e: 29.8594px;
+  --_1m1uaxs4f: -0.1547em;
+  --_1m1uaxs4g: -0.182em;
+  --_1m1uaxs4h: 21px;
+  --_1m1uaxs4i: 32px;
+  --_1m1uaxs4j: 14.9297px;
+  --_1m1uaxs4k: -0.3928em;
+  --_1m1uaxs4l: -0.4201em;
+  --_1m1uaxs4m: 28px;
+  --_1m1uaxs4n: 36px;
+  --_1m1uaxs4o: 19.9063px;
+  --_1m1uaxs4p: -0.2737em;
+  --_1m1uaxs4q: -0.3011em;
+  --_1m1uaxs4r: 21px;
+  --_1m1uaxs4s: 28px;
+  --_1m1uaxs4t: 14.9297px;
+  --_1m1uaxs4u: -0.2975em;
+  --_1m1uaxs4v: -0.3249em;
+  --_1m1uaxs4w: 21px;
+  --_1m1uaxs4x: 28px;
+  --_1m1uaxs4y: 14.9297px;
+  --_1m1uaxs4z: -0.2975em;
+  --_1m1uaxs50: -0.3249em;
+  --_1m1uaxs51: 18px;
+  --_1m1uaxs52: 28px;
+  --_1m1uaxs53: 12.7969px;
+  --_1m1uaxs54: -0.4086em;
+  --_1m1uaxs55: -0.436em;
+  --_1m1uaxs56: 18px;
+  --_1m1uaxs57: 28px;
+  --_1m1uaxs58: 12.7969px;
+  --_1m1uaxs59: -0.4086em;
+  --_1m1uaxs5a: -0.436em;
+  --_1m1uaxs5b: 400;
+  --_1m1uaxs5c: 500;
+  --_1m1uaxs5d: 24px;
+  --_1m1uaxs5e: 20px;
+  --_1m1uaxs5f: transform 0.125s ease, opacity 0.125s ease;
+  --_1m1uaxs5g: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  --_1m1uaxs5h: scale(0.95);
+  --_1m1uaxs5i: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
+    0 2px 2px -2px rgba(28, 35, 48, 0.1), 0 4px 4px -4px rgba(28, 35, 48, 0.2);
+  --_1m1uaxs5j: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
+    0 8px 8px -4px rgba(28, 35, 48, 0.1), 0 12px 12px -8px rgba(28, 35, 48, 0.2);
+  --_1m1uaxs5k: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
+    0 12px 12px -4px rgba(28, 35, 48, 0.1),
+    0 20px 20px -12px rgba(28, 35, 48, 0.2);
+}
+.c5yboh0 {
+  --_16h4j6f0: #8a2be2;
+  background-color: var(--_16h4j6f0);
+  color: #fff;
+  font-size: 20px;
+  padding: 100px;
+}
+._1d7pc1d1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+._1np03wo0 {
+  font-family: var(--_1m1uaxs2u);
+}
+._1np03wo1 {
+  font-weight: var(--_1m1uaxs44);
+}
+._1np03wo2 {
+  font-weight: var(--_1m1uaxs45);
+}
+._1np03wo3 {
+  font-weight: var(--_1m1uaxs46);
+}
+._1np03wo4 {
+  --_1d0g9qk0: var(--_1m1uaxs30);
+  --_1d0g9qk1: var(--_1m1uaxs31);
+  --_1d0g9qk2: var(--_1m1uaxs33);
+  --_1d0g9qk3: var(--_1m1uaxs34);
+}
+._1np03wo7 {
+  --_1d0g9qk0: var(--_1m1uaxs3a);
+  --_1d0g9qk1: var(--_1m1uaxs3b);
+  --_1d0g9qk2: var(--_1m1uaxs3d);
+  --_1d0g9qk3: var(--_1m1uaxs3e);
+}
+._1np03woa {
+  --_1d0g9qk0: var(--_1m1uaxs3k);
+  --_1d0g9qk1: var(--_1m1uaxs3l);
+  --_1d0g9qk2: var(--_1m1uaxs3n);
+  --_1d0g9qk3: var(--_1m1uaxs3o);
+}
+._1np03wod {
+  --_1d0g9qk0: var(--_1m1uaxs3u);
+  --_1d0g9qk1: var(--_1m1uaxs3v);
+  --_1d0g9qk2: var(--_1m1uaxs3x);
+  --_1d0g9qk3: var(--_1m1uaxs3y);
+}
+._1np03wog {
+  font-size: var(--_1m1uaxs30);
+  line-height: var(--_1m1uaxs31);
+}
+._1np03woh {
+  font-size: var(--_1m1uaxs3a);
+  line-height: var(--_1m1uaxs3b);
+}
+._1np03woi {
+  font-size: var(--_1m1uaxs3k);
+  line-height: var(--_1m1uaxs3l);
+}
+._1np03woj {
+  font-size: var(--_1m1uaxs3u);
+  line-height: var(--_1m1uaxs3v);
+}
+._1np03wok {
+  font-weight: var(--_1m1uaxs5b);
+}
+._1np03wol {
+  font-weight: var(--_1m1uaxs5c);
+}
+._1np03wom {
+  --_1d0g9qk0: var(--_1m1uaxs47);
+  --_1d0g9qk1: var(--_1m1uaxs48);
+  --_1d0g9qk2: var(--_1m1uaxs4a);
+  --_1d0g9qk3: var(--_1m1uaxs4b);
+}
+._1np03wop {
+  --_1d0g9qk0: var(--_1m1uaxs4h);
+  --_1d0g9qk1: var(--_1m1uaxs4i);
+  --_1d0g9qk2: var(--_1m1uaxs4k);
+  --_1d0g9qk3: var(--_1m1uaxs4l);
+}
+._1np03wos {
+  --_1d0g9qk0: var(--_1m1uaxs4r);
+  --_1d0g9qk1: var(--_1m1uaxs4s);
+  --_1d0g9qk2: var(--_1m1uaxs4u);
+  --_1d0g9qk3: var(--_1m1uaxs4v);
+}
+._1np03wov {
+  --_1d0g9qk0: var(--_1m1uaxs51);
+  --_1d0g9qk1: var(--_1m1uaxs52);
+  --_1d0g9qk2: var(--_1m1uaxs54);
+  --_1d0g9qk3: var(--_1m1uaxs55);
+}
+html:not(.a8rkez) ._1np03wo18 {
+  --_1np03woy: var(--_1m1uaxs17);
+  --_1np03woz: var(--_1m1uaxs15);
+  --_1np03wo10: var(--_1m1uaxs1b);
+  --_1np03wo11: var(--_1m1uaxs1m);
+  --_1np03wo12: var(--_1m1uaxs1k);
+  --_1np03wo13: var(--_1m1uaxs13);
+  --_1np03wo14: var(--_1m1uaxs19);
+  --_1np03wo15: var(--_1m1uaxs1i);
+  --_1np03wo16: var(--_1m1uaxs1p);
+  --_1np03wo17: var(--_1m1uaxs1d);
+}
+html:not(.a8rkez) ._1np03wo19 {
+  --_1np03woy: var(--_1m1uaxs18);
+  --_1np03woz: var(--_1m1uaxs16);
+  --_1np03wo10: var(--_1m1uaxs1c);
+  --_1np03wo11: var(--_1m1uaxs1n);
+  --_1np03wo12: var(--_1m1uaxs1l);
+  --_1np03wo13: var(--_1m1uaxs14);
+  --_1np03wo14: var(--_1m1uaxs1a);
+  --_1np03wo15: var(--_1m1uaxs1j);
+  --_1np03wo16: var(--_1m1uaxs1q);
+  --_1np03wo17: var(--_1m1uaxs1f);
+}
+html.a8rkez ._1np03wo1a {
+  --_1np03woy: var(--_1m1uaxs17);
+  --_1np03woz: var(--_1m1uaxs15);
+  --_1np03wo10: var(--_1m1uaxs1b);
+  --_1np03wo11: var(--_1m1uaxs1m);
+  --_1np03wo12: var(--_1m1uaxs1k);
+  --_1np03wo13: var(--_1m1uaxs13);
+  --_1np03wo14: var(--_1m1uaxs19);
+  --_1np03wo15: var(--_1m1uaxs1i);
+  --_1np03wo16: var(--_1m1uaxs1p);
+  --_1np03wo17: var(--_1m1uaxs1d);
+}
+html.a8rkez ._1np03wo1b {
+  --_1np03woy: var(--_1m1uaxs18);
+  --_1np03woz: var(--_1m1uaxs16);
+  --_1np03wo10: var(--_1m1uaxs1c);
+  --_1np03wo11: var(--_1m1uaxs1n);
+  --_1np03wo12: var(--_1m1uaxs1l);
+  --_1np03wo13: var(--_1m1uaxs14);
+  --_1np03wo14: var(--_1m1uaxs1a);
+  --_1np03wo15: var(--_1m1uaxs1j);
+  --_1np03wo16: var(--_1m1uaxs1q);
+  --_1np03wo17: var(--_1m1uaxs1f);
+}
+html:not(.a8rkez) ._1np03wo1c,
+html:not(.a8rkez) ._1np03wo1d,
+html:not(.a8rkez) ._1np03wo1e,
+html:not(.a8rkez) ._1np03wo1f {
+  --_1np03wo15: var(--_1np03woy);
+}
+html:not(.a8rkez) ._1np03wo1g,
+html:not(.a8rkez) ._1np03wo1h {
+  --_1np03wo15: var(--_1np03woz);
+}
+html:not(.a8rkez) ._1np03wo1i {
+  --_1np03wo15: var(--_1np03wo12);
+}
+html:not(.a8rkez) ._1np03wo1j {
+  --_1np03wo15: var(--_1np03wo10);
+}
+html:not(.a8rkez) ._1np03wo1k {
+  --_1np03wo15: var(--_1np03wo11);
+}
+html.a8rkez ._1np03wo1l,
+html.a8rkez ._1np03wo1m,
+html.a8rkez ._1np03wo1n,
+html.a8rkez ._1np03wo1o {
+  --_1np03wo15: var(--_1np03woy);
+}
+html.a8rkez ._1np03wo1p,
+html.a8rkez ._1np03wo1q {
+  --_1np03wo15: var(--_1np03woz);
+}
+html.a8rkez ._1np03wo1r {
+  --_1np03wo15: var(--_1np03wo12);
+}
+html.a8rkez ._1np03wo1s {
+  --_1np03wo15: var(--_1np03wo10);
+}
+html.a8rkez ._1np03wo1t {
+  --_1np03wo15: var(--_1np03wo11);
+}
+._1np03wo1u {
+  color: var(--_1np03woy);
+}
+._1np03wo1v {
+  color: var(--_1np03woz);
+}
+._1np03wo1w {
+  color: var(--_1np03wo10);
+}
+._1np03wo1x {
+  color: var(--_1np03wo11);
+}
+._1np03wo1y {
+  color: var(--_1np03wo12);
+}
+._1np03wo1z {
+  color: var(--_1np03wo13);
+}
+._1np03wo20 {
+  color: var(--_1np03wo14);
+}
+._1np03wo21 {
+  color: var(--_1np03wo15);
+}
+._1np03wo22 {
+  color: var(--_1np03wo16);
+}
+._1np03wo23 {
+  color: var(--_1np03wo17);
+}
+._1np03wo24 {
+  padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs31)) / 2);
+  padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs31)) / 2);
+}
+._1np03wo25 {
+  padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3b)) / 2);
+  padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3b)) / 2);
+}
+._1np03wo26 {
+  padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3l)) / 2);
+  padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3l)) / 2);
+}
+._1np03wo27 {
+  padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3v)) / 2);
+  padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3v)) / 2);
+}
+@media screen and (min-width: 740px) {
+  ._1np03wo4 {
+    --_1d0g9qk0: var(--_1m1uaxs35);
+    --_1d0g9qk1: var(--_1m1uaxs36);
+    --_1d0g9qk2: var(--_1m1uaxs38);
+    --_1d0g9qk3: var(--_1m1uaxs39);
+  }
+  ._1np03wo7 {
+    --_1d0g9qk0: var(--_1m1uaxs3f);
+    --_1d0g9qk1: var(--_1m1uaxs3g);
+    --_1d0g9qk2: var(--_1m1uaxs3i);
+    --_1d0g9qk3: var(--_1m1uaxs3j);
+  }
+  ._1np03woa {
+    --_1d0g9qk0: var(--_1m1uaxs3p);
+    --_1d0g9qk1: var(--_1m1uaxs3q);
+    --_1d0g9qk2: var(--_1m1uaxs3s);
+    --_1d0g9qk3: var(--_1m1uaxs3t);
+  }
+  ._1np03wod {
+    --_1d0g9qk0: var(--_1m1uaxs3z);
+    --_1d0g9qk1: var(--_1m1uaxs40);
+    --_1d0g9qk2: var(--_1m1uaxs42);
+    --_1d0g9qk3: var(--_1m1uaxs43);
+  }
+  ._1np03wog {
+    font-size: var(--_1m1uaxs35);
+    line-height: var(--_1m1uaxs36);
+  }
+  ._1np03woh {
+    font-size: var(--_1m1uaxs3f);
+    line-height: var(--_1m1uaxs3g);
+  }
+  ._1np03woi {
+    font-size: var(--_1m1uaxs3p);
+    line-height: var(--_1m1uaxs3q);
+  }
+  ._1np03woj {
+    font-size: var(--_1m1uaxs3z);
+    line-height: var(--_1m1uaxs40);
+  }
+  ._1np03wom {
+    --_1d0g9qk0: var(--_1m1uaxs4c);
+    --_1d0g9qk1: var(--_1m1uaxs4d);
+    --_1d0g9qk2: var(--_1m1uaxs4f);
+    --_1d0g9qk3: var(--_1m1uaxs4g);
+  }
+  ._1np03wop {
+    --_1d0g9qk0: var(--_1m1uaxs4m);
+    --_1d0g9qk1: var(--_1m1uaxs4n);
+    --_1d0g9qk2: var(--_1m1uaxs4p);
+    --_1d0g9qk3: var(--_1m1uaxs4q);
+  }
+  ._1np03wos {
+    --_1d0g9qk0: var(--_1m1uaxs4w);
+    --_1d0g9qk1: var(--_1m1uaxs4x);
+    --_1d0g9qk2: var(--_1m1uaxs4z);
+    --_1d0g9qk3: var(--_1m1uaxs50);
+  }
+  ._1np03wov {
+    --_1d0g9qk0: var(--_1m1uaxs56);
+    --_1d0g9qk1: var(--_1m1uaxs57);
+    --_1d0g9qk2: var(--_1m1uaxs59);
+    --_1d0g9qk3: var(--_1m1uaxs5a);
+  }
+  ._1np03wo24 {
+    padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs36)) / 2);
+    padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs36)) / 2);
+  }
+  ._1np03wo25 {
+    padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3g)) / 2);
+    padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3g)) / 2);
+  }
+  ._1np03wo26 {
+    padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3q)) / 2);
+    padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs3q)) / 2);
+  }
+  ._1np03wo27 {
+    padding-bottom: calc((var(--_1m1uaxs8) - var(--_1m1uaxs40)) / 2);
+    padding-top: calc((var(--_1m1uaxs8) - var(--_1m1uaxs40)) / 2);
+  }
+}
+._1wok1bc0 {
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease;
+}
+._1wok1bc1 {
+  transform: rotate(90deg);
+}
+._1wok1bc2 {
+  transform: rotate(180deg);
+}
+._1wok1bc3 {
+  transform: rotate(270deg);
+}
+._1d0sndt0 {
+  height: var(--_1m1uaxs31);
+}
+._1d0sndt1 {
+  height: var(--_1m1uaxs3b);
+}
+._1d0sndt2 {
+  height: var(--_1m1uaxs3l);
+}
+._1d0sndt3 {
+  height: var(--_1m1uaxs3v);
+}
+@media screen and (min-width: 740px) {
+  ._1d0sndt0 {
+    height: var(--_1m1uaxs36);
+  }
+  ._1d0sndt1 {
+    height: var(--_1m1uaxs3g);
+  }
+  ._1d0sndt2 {
+    height: var(--_1m1uaxs3q);
+  }
+  ._1d0sndt3 {
+    height: var(--_1m1uaxs40);
+  }
+}
+.r3jux50 {
+  height: 1.2em;
+  width: 1.2em;
+}
+.r3jux51 {
+  margin: -0.1em;
+}
+.r3jux52 {
+  margin-bottom: -0.2em;
+  margin-top: -0.2em;
+}
+.r3jux53 {
+  vertical-align: middle;
+}
+.r3jux54 {
+  top: -0.105em;
+}
+.r3jux55 {
+  top: -0.16499999999999998em;
+}
+.r3jux56 {
+  top: -0.045em;
+}
+.r3jux57 {
+  top: -0.065em;
+}
+.r3jux58 {
+  top: -0.125em;
+}
+.r3jux59 {
+  top: -0.0050000000000000044em;
+}
+.r3jux5a {
+  width: var(--_1m1uaxs31);
+}
+.r3jux5b {
+  width: var(--_1m1uaxs3b);
+}
+.r3jux5c {
+  width: var(--_1m1uaxs3l);
+}
+.r3jux5d {
+  width: var(--_1m1uaxs3v);
+}
+@media screen and (min-width: 740px) {
+  .r3jux5a {
+    width: var(--_1m1uaxs36);
+  }
+  .r3jux5b {
+    width: var(--_1m1uaxs3g);
+  }
+  .r3jux5c {
+    width: var(--_1m1uaxs3q);
+  }
+  .r3jux5d {
+    width: var(--_1m1uaxs40);
+  }
+}
+.zbm0n16 {
+  background: var(--zbm0n10);
+}
+.zbm0n17 {
+  background: var(--zbm0n11);
+}
+.zbm0n18 {
+  background: var(--zbm0n12);
+}
+.zbm0n19 {
+  background: var(--zbm0n13);
+}
+.zbm0n1a {
+  background: var(--zbm0n14);
+}
+.zbm0n1b {
+  background: var(--zbm0n15);
+}
+html:not(.a8rkez) .zbm0n1c {
+  --zbm0n10: var(--_1m1uaxsu);
+  --zbm0n11: var(--_1m1uaxsn);
+  --zbm0n12: var(--_1m1uaxss);
+  --zbm0n13: var(--_1m1uaxsf);
+  --zbm0n14: var(--_1m1uaxsh);
+  --zbm0n15: var(--_1m1uaxsl);
+}
+html:not(.a8rkez) .zbm0n1d {
+  --zbm0n10: var(--_1m1uaxsv);
+  --zbm0n11: var(--_1m1uaxso);
+  --zbm0n12: var(--_1m1uaxst);
+  --zbm0n13: var(--_1m1uaxsg);
+  --zbm0n14: var(--_1m1uaxsi);
+  --zbm0n15: var(--_1m1uaxsm);
+}
+html.a8rkez .zbm0n1e {
+  --zbm0n10: var(--_1m1uaxsu);
+  --zbm0n11: var(--_1m1uaxsn);
+  --zbm0n12: var(--_1m1uaxss);
+  --zbm0n13: var(--_1m1uaxsf);
+  --zbm0n14: var(--_1m1uaxsh);
+  --zbm0n15: var(--_1m1uaxsl);
+}
+html.a8rkez .zbm0n1f {
+  --zbm0n10: var(--_1m1uaxsv);
+  --zbm0n11: var(--_1m1uaxso);
+  --zbm0n12: var(--_1m1uaxst);
+  --zbm0n13: var(--_1m1uaxsg);
+  --zbm0n14: var(--_1m1uaxsi);
+  --zbm0n15: var(--_1m1uaxsm);
+}
+.zbm0n1g {
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.zbm0n1h {
+  width: var(--_1m1uaxsc);
+}
+._5ejtn70:hover {
+  z-index: 1;
+}
+._5ejtn71 {
+  height: 44px;
+  width: 44px;
+}
+._5ejtn72 {
+  left: calc(((44px - var(--_1m1uaxs5d)) / 2) * -1);
+  top: calc(((44px - var(--_1m1uaxs5d)) / 2) * -1);
+}
+._5ejtn73 {
+  left: calc(((44px - var(--_1m1uaxs5e)) / 2) * -1);
+  top: calc(((44px - var(--_1m1uaxs5e)) / 2) * -1);
+}
+._5ejtn75 {
+  height: var(--_1m1uaxs5d);
+  width: var(--_1m1uaxs5d);
+}
+._5ejtn76 {
+  height: var(--_1m1uaxs5e);
+  width: var(--_1m1uaxs5e);
+}
+._5ejtn77 {
+  padding-bottom: calc((var(--_1m1uaxs5d) - var(--_1m1uaxs31)) / 2);
+  padding-top: calc((var(--_1m1uaxs5d) - var(--_1m1uaxs31)) / 2);
+}
+._5ejtn78 {
+  padding-bottom: calc((var(--_1m1uaxs5e) - var(--_1m1uaxs31)) / 2);
+  padding-top: calc((var(--_1m1uaxs5e) - var(--_1m1uaxs31)) / 2);
+}
+._5ejtn79 {
+  padding-top: calc((var(--_1m1uaxs5d) - var(--_1m1uaxs3m)) / 2);
+}
+._5ejtn7a {
+  padding-top: calc((var(--_1m1uaxs5e) - var(--_1m1uaxs3c)) / 2);
+}
+._5ejtn71._5ejtn7b ~ * ._5ejtn7c,
+._5ejtn71:checked ~ * ._5ejtn7c {
+  display: block;
+}
+._5ejtn71._5ejtn7b + ._5ejtn74 > ._5ejtn7d,
+._5ejtn71:checked + ._5ejtn74 > ._5ejtn7d,
+._5ejtn71:focus + ._5ejtn74 > ._5ejtn7e,
+._5ejtn71:focus:not(._5ejtn7b) + ._5ejtn74 > ._5ejtn7f,
+._5ejtn71:hover:not(:checked):not(._5ejtn7b):not(:disabled)
+  + ._5ejtn74
+  > ._5ejtn7f {
+  opacity: 1;
+}
+._5ejtn7f > ._5ejtn7g {
+  opacity: 0.2;
+}
+._5ejtn7h {
+  transform: scale(0.85);
+}
+._5ejtn71:active + ._5ejtn74 > * > ._5ejtn7h {
+  transform: scale(0.75);
+}
+._5ejtn7i {
+  transform: scale(0.6);
+}
+._5ejtn71:active + ._5ejtn74 > * > ._5ejtn7i {
+  transform: scale(0.5);
+}
+[data-braid-hidefocusrings] .uvfpki0 {
+  opacity: 0 !important;
+}
+.f33fq40:before,
+.f33fq41:after {
+  content: "";
+  display: table;
+}
+.f33fq42:before {
+  margin-bottom: calc(var(--_1m1uaxs0) * -1);
+}
+.f33fq43:before {
+  margin-bottom: calc(var(--_1m1uaxs1) * -1);
+}
+.f33fq44:before {
+  margin-bottom: calc(var(--_1m1uaxs2) * -1);
+}
+.f33fq45:before {
+  margin-bottom: calc(var(--_1m1uaxs3) * -1);
+}
+.f33fq46:before {
+  margin-bottom: calc(var(--_1m1uaxs4) * -1);
+}
+.f33fq47:before {
+  margin-bottom: calc(var(--_1m1uaxs5) * -1);
+}
+.f33fq48:before {
+  margin-bottom: calc(var(--_1m1uaxs6) * -1);
+}
+.f33fq49:before {
+  margin-bottom: calc(var(--_1m1uaxs7) * -1);
+}
+.f33fq4a:before {
+  margin-bottom: 0;
+}
+.f33fq412:after {
+  margin-top: calc(var(--_1m1uaxs0) * -1);
+}
+.f33fq413:after {
+  margin-top: calc(var(--_1m1uaxs1) * -1);
+}
+.f33fq414:after {
+  margin-top: calc(var(--_1m1uaxs2) * -1);
+}
+.f33fq415:after {
+  margin-top: calc(var(--_1m1uaxs3) * -1);
+}
+.f33fq416:after {
+  margin-top: calc(var(--_1m1uaxs4) * -1);
+}
+.f33fq417:after {
+  margin-top: calc(var(--_1m1uaxs5) * -1);
+}
+.f33fq418:after {
+  margin-top: calc(var(--_1m1uaxs6) * -1);
+}
+.f33fq419:after {
+  margin-top: calc(var(--_1m1uaxs7) * -1);
+}
+.f33fq41a:after {
+  margin-top: 0;
+}
+.f33fq422 {
+  margin-left: calc(var(--_1m1uaxs0) * -1);
+}
+.f33fq423 {
+  margin-left: calc(var(--_1m1uaxs1) * -1);
+}
+.f33fq424 {
+  margin-left: calc(var(--_1m1uaxs2) * -1);
+}
+.f33fq425 {
+  margin-left: calc(var(--_1m1uaxs3) * -1);
+}
+.f33fq426 {
+  margin-left: calc(var(--_1m1uaxs4) * -1);
+}
+.f33fq427 {
+  margin-left: calc(var(--_1m1uaxs5) * -1);
+}
+.f33fq428 {
+  margin-left: calc(var(--_1m1uaxs6) * -1);
+}
+.f33fq429 {
+  margin-left: calc(var(--_1m1uaxs7) * -1);
+}
+.f33fq42a {
+  margin-left: 0;
+}
+.f33fq432 {
+  margin-right: calc(var(--_1m1uaxs0) * -1);
+}
+.f33fq433 {
+  margin-right: calc(var(--_1m1uaxs1) * -1);
+}
+.f33fq434 {
+  margin-right: calc(var(--_1m1uaxs2) * -1);
+}
+.f33fq435 {
+  margin-right: calc(var(--_1m1uaxs3) * -1);
+}
+.f33fq436 {
+  margin-right: calc(var(--_1m1uaxs4) * -1);
+}
+.f33fq437 {
+  margin-right: calc(var(--_1m1uaxs5) * -1);
+}
+.f33fq438 {
+  margin-right: calc(var(--_1m1uaxs6) * -1);
+}
+.f33fq439 {
+  margin-right: calc(var(--_1m1uaxs7) * -1);
+}
+.f33fq43a {
+  margin-right: 0;
+}
+@media screen and (min-width: 740px) {
+  .f33fq4b:before {
+    margin-bottom: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq4c:before {
+    margin-bottom: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq4d:before {
+    margin-bottom: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq4e:before {
+    margin-bottom: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq4f:before {
+    margin-bottom: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq4g:before {
+    margin-bottom: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq4h:before {
+    margin-bottom: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq4i:before {
+    margin-bottom: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq4j:before {
+    margin-bottom: 0;
+  }
+  .f33fq41b:after {
+    margin-top: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq41c:after {
+    margin-top: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq41d:after {
+    margin-top: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq41e:after {
+    margin-top: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq41f:after {
+    margin-top: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq41g:after {
+    margin-top: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq41h:after {
+    margin-top: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq41i:after {
+    margin-top: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq41j:after {
+    margin-top: 0;
+  }
+  .f33fq42b {
+    margin-left: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq42c {
+    margin-left: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq42d {
+    margin-left: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq42e {
+    margin-left: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq42f {
+    margin-left: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq42g {
+    margin-left: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq42h {
+    margin-left: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq42i {
+    margin-left: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq42j {
+    margin-left: 0;
+  }
+  .f33fq43b {
+    margin-right: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq43c {
+    margin-right: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq43d {
+    margin-right: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq43e {
+    margin-right: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq43f {
+    margin-right: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq43g {
+    margin-right: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq43h {
+    margin-right: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq43i {
+    margin-right: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq43j {
+    margin-right: 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .f33fq4k:before {
+    margin-bottom: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq4l:before {
+    margin-bottom: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq4m:before {
+    margin-bottom: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq4n:before {
+    margin-bottom: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq4o:before {
+    margin-bottom: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq4p:before {
+    margin-bottom: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq4q:before {
+    margin-bottom: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq4r:before {
+    margin-bottom: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq4s:before {
+    margin-bottom: 0;
+  }
+  .f33fq41k:after {
+    margin-top: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq41l:after {
+    margin-top: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq41m:after {
+    margin-top: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq41n:after {
+    margin-top: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq41o:after {
+    margin-top: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq41p:after {
+    margin-top: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq41q:after {
+    margin-top: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq41r:after {
+    margin-top: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq41s:after {
+    margin-top: 0;
+  }
+  .f33fq42k {
+    margin-left: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq42l {
+    margin-left: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq42m {
+    margin-left: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq42n {
+    margin-left: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq42o {
+    margin-left: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq42p {
+    margin-left: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq42q {
+    margin-left: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq42r {
+    margin-left: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq42s {
+    margin-left: 0;
+  }
+  .f33fq43k {
+    margin-right: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq43l {
+    margin-right: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq43m {
+    margin-right: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq43n {
+    margin-right: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq43o {
+    margin-right: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq43p {
+    margin-right: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq43q {
+    margin-right: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq43r {
+    margin-right: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq43s {
+    margin-right: 0;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .f33fq4t:before {
+    margin-bottom: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq4u:before {
+    margin-bottom: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq4v:before {
+    margin-bottom: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq4w:before {
+    margin-bottom: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq4x:before {
+    margin-bottom: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq4y:before {
+    margin-bottom: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq4z:before {
+    margin-bottom: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq410:before {
+    margin-bottom: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq411:before {
+    margin-bottom: 0;
+  }
+  .f33fq41t:after {
+    margin-top: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq41u:after {
+    margin-top: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq41v:after {
+    margin-top: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq41w:after {
+    margin-top: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq41x:after {
+    margin-top: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq41y:after {
+    margin-top: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq41z:after {
+    margin-top: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq420:after {
+    margin-top: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq421:after {
+    margin-top: 0;
+  }
+  .f33fq42t {
+    margin-left: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq42u {
+    margin-left: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq42v {
+    margin-left: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq42w {
+    margin-left: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq42x {
+    margin-left: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq42y {
+    margin-left: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq42z {
+    margin-left: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq430 {
+    margin-left: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq431 {
+    margin-left: 0;
+  }
+  .f33fq43t {
+    margin-right: calc(var(--_1m1uaxs0) * -1);
+  }
+  .f33fq43u {
+    margin-right: calc(var(--_1m1uaxs1) * -1);
+  }
+  .f33fq43v {
+    margin-right: calc(var(--_1m1uaxs2) * -1);
+  }
+  .f33fq43w {
+    margin-right: calc(var(--_1m1uaxs3) * -1);
+  }
+  .f33fq43x {
+    margin-right: calc(var(--_1m1uaxs4) * -1);
+  }
+  .f33fq43y {
+    margin-right: calc(var(--_1m1uaxs5) * -1);
+  }
+  .f33fq43z {
+    margin-right: calc(var(--_1m1uaxs6) * -1);
+  }
+  .f33fq440 {
+    margin-right: calc(var(--_1m1uaxs7) * -1);
+  }
+  .f33fq441 {
+    margin-right: 0;
+  }
+}
+._1c9btc50 {
+  position: relative;
+}
+._1c9btc50:after {
+  content: "";
+  height: 100%;
+  left: -10px;
+  min-height: 44px;
+  min-width: 44px;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+._1c9btc51:after {
+  left: 0 !important;
+  right: 0 !important;
+}
+,
+  "main-385faa4d071d3facf4da.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-6ddc02ee59b341569712.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "seekAnz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link data-chunk="main" rel="stylesheet" href="/main-2ae72bf09af8080bd7ea.css">
+<link data-chunk="main" rel="preload" as="script" href="/runtime-6ddc02ee59b341569712.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-385faa4d071d3facf4da.js">
+        <script>
+          window.SKU_SITE = 'seekAnz';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#F7F8FB}
+            html.a8rkez,html.a8rkez body{color-scheme:dark;background:#0E131B}
+          </style><div class="_1o0j0u80 _1np03wo18 _1np03wo1b"><span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">Hello <!-- -->seekAnz<!-- --> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 _1wok1bc0 a8rke52 a8rke5a r3jux50 r3jux52 r3jux53 r3jux54" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span><div class="_1jajid00 a8rke76 a8rke66 a8rke96 a8rke86 a8rke5a _1np03wo18 _1np03wo1b a8rke32 a8rke35"><div class="_1jajid00 a8rke5a a8rke7 _5ejtn70"><div class="_1jajid00 a8rke56"><input type="checkbox" class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72" id="id_1" aria-checked="false"/><div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32"><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 a8rke3k a8rke3p"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7d _1np03wo19 _1np03wo1b a8rke20 a8rke21"><div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h"><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7e a8rke4o a8rke4p"></span><span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7f a8rke3u a8rke3z"><div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h"><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1jajid00 a8rke9i a8rkefu"><div class="_1jajid00 f33fq40 f33fq45"><div class="_1jajid00 a8rkefe a8rke56 a8rkeey f33fq425"><div class="_1jajid00 a8rker a8rkedi a8rkeai a8rke4u a8rkeei"><label class="_1jajid00 a8rke4 a8rke4u a8rkeh _5ejtn79 _1c9btc50" for="id_1"><span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">This is a checkbox</span></label></div></div></div></div></div></div></div><div class="_1jajid00 mYnaw_0">Custom content <!-- -->Initial</div><div class="_1jajid00 c5yboh0">🧁 Vanilla content</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/runtime-6ddc02ee59b341569712.js"></script>
+<script async data-chunk="main" src="/main-385faa4d071d3facf4da.js"></script>
+      </body>
+    </html>
+  ",
+}
+`;
+
+exports[`braid-design-system build should return built jobStreet site 1`] = `
+SCRIPTS: [
+  "/runtime-6ddc02ee59b341569712.js",
+  "/main-385faa4d071d3facf4da.js",
+]
+CSS: [
+  "/main-2ae72bf09af8080bd7ea.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#F7F8FB}
+            html.a8rkez,html.a8rkez body{color-scheme:dark;background:#0E131B}
+      </style>
+      <div class="_1o0j0u80 _1np03wo18 _1np03wo1b">
+        <span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">
+          Hello
+          jobStreet
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewbox="0 0 24 24"
+               xml:space="preserve"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               class="_1jajid00 _1wok1bc0 a8rke52 a8rke5a r3jux50 r3jux52 r3jux53 r3jux54"
+               aria-hidden="true"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="_1jajid00 a8rke76 a8rke66 a8rke96 a8rke86 a8rke5a _1np03wo18 _1np03wo1b a8rke32 a8rke35">
+          <div class="_1jajid00 a8rke5a a8rke7 _5ejtn70">
+            <div class="_1jajid00 a8rke56">
+              <input type="checkbox"
+                     class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72"
+                     id="id_1"
+                     aria-checked="false"
+              >
+              <div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32">
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 a8rke3k a8rke3p">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7d _1np03wo19 _1np03wo1b a8rke20 a8rke21">
+                  <div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h">
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7e a8rke4o a8rke4p">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7f a8rke3u a8rke3z">
+                  <div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h">
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1jajid00 a8rke9i a8rkefu">
+                <div class="_1jajid00 f33fq40 f33fq45">
+                  <div class="_1jajid00 a8rkefe a8rke56 a8rkeey f33fq425">
+                    <div class="_1jajid00 a8rker a8rkedi a8rkeai a8rke4u a8rkeei">
+                      <label class="_1jajid00 a8rke4 a8rke4u a8rkeh _5ejtn79 _1c9btc50"
+                             for="id_1"
+                      >
+                        <span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">
+                          This is a checkbox
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1jajid00 mYnaw_0">
+          Custom content
+          Initial
+        </div>
+        <div class="_1jajid00 c5yboh0">
+          🧁 Vanilla content
+        </div>
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"jobStreet"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+                      class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72"
+                      id="id_1"
+                      aria-checked="false"
++                     value
+               >
+               <div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32">
+                 <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t">
+@@ -154,7 +155,7 @@
+         </div>
+         <div class="_1jajid00 mYnaw_0">
+           Custom content
+-          Initial
++          Client
+         </div>
+         <div class="_1jajid00 c5yboh0">
+           🧁 Vanilla content
+
+`;
+
+exports[`braid-design-system build should return built seekAnz site 1`] = `
+SCRIPTS: [
+  "/runtime-6ddc02ee59b341569712.js",
+  "/main-385faa4d071d3facf4da.js",
+]
+CSS: [
+  "/main-2ae72bf09af8080bd7ea.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#F7F8FB}
+            html.a8rkez,html.a8rkez body{color-scheme:dark;background:#0E131B}
+      </style>
+      <div class="_1o0j0u80 _1np03wo18 _1np03wo1b">
+        <span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">
+          Hello
+          seekAnz
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewbox="0 0 24 24"
+               xml:space="preserve"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               class="_1jajid00 _1wok1bc0 a8rke52 a8rke5a r3jux50 r3jux52 r3jux53 r3jux54"
+               aria-hidden="true"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="_1jajid00 a8rke76 a8rke66 a8rke96 a8rke86 a8rke5a _1np03wo18 _1np03wo1b a8rke32 a8rke35">
+          <div class="_1jajid00 a8rke5a a8rke7 _5ejtn70">
+            <div class="_1jajid00 a8rke56">
+              <input type="checkbox"
+                     class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72"
+                     id="id_1"
+                     aria-checked="false"
+              >
+              <div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32">
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 a8rke3k a8rke3p">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7d _1np03wo19 _1np03wo1b a8rke20 a8rke21">
+                  <div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h">
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7e a8rke4o a8rke4p">
+                </span>
+                <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke6 _5ejtn7f a8rke3u a8rke3z">
+                  <div class="_1jajid00 a8rken a8rkew a8rke5a _5ejtn7g _5ejtn7h">
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkew">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="_1jajid00 a8rkep a8rken a8rke4u _1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1jajid00 a8rke9i a8rkefu">
+                <div class="_1jajid00 f33fq40 f33fq45">
+                  <div class="_1jajid00 a8rkefe a8rke56 a8rkeey f33fq425">
+                    <div class="_1jajid00 a8rker a8rkedi a8rkeai a8rke4u a8rkeei">
+                      <label class="_1jajid00 a8rke4 a8rke4u a8rkeh _5ejtn79 _1c9btc50"
+                             for="id_1"
+                      >
+                        <span class="_1jajid00 a8rke4u _1np03wo0 _1np03wo1 _1np03wo21 _1d0g9qk4 _1np03woa">
+                          This is a checkbox
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1jajid00 mYnaw_0">
+          Custom content
+          Initial
+        </div>
+        <div class="_1jajid00 c5yboh0">
+          🧁 Vanilla content
+        </div>
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"seekAnz"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+                      class="_1jajid00 _1jajid01 _1jajid06 _1jajid07 _1jajid0c a8rke5e a8rke8 a8rkeh a8rke6 _5ejtn71 _5ejtn72"
+                      id="id_1"
+                      aria-checked="false"
++                     value
+               >
+               <div class="_1jajid00 a8rkefm a8rke5a a8rke5u _5ejtn74 _5ejtn75 _1np03wo18  a8rke32">
+                 <span class="_1jajid00 a8rkej a8rkek a8rkel a8rkem a8rke5e a8rkei a8rke5u a8rkew a8rke3s a8rke3t">
+@@ -154,7 +155,7 @@
+         </div>
+         <div class="_1jajid00 mYnaw_0">
+           Custom content
+-          Initial
++          Client
+         </div>
+         <div class="_1jajid00 c5yboh0">
+           🧁 Vanilla content
+
+`;
+
+exports[`braid-design-system start should return development jobStreet site 1`] = `
+SCRIPTS: [
+  "/runtime.js",
+  "/vendors-node_modules_pnpm_braid-design-system_31_24_2_zs4w435fi4ukknzri4j2f34ibq_node_modules-053edc.js",
+  "/main.js",
+]
+CSS: [
+  "/vendors-node_modules_pnpm_braid-design-system_31_24_2_zs4w435fi4ukknzri4j2f34ibq_node_modules-053edc.css",
+  "/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#F7F8FB}
+            html.sprinkles_darkMode__a8rkez,html.sprinkles_darkMode__a8rkez body{color-scheme:dark;background:#0E131B}
+      </style>
+      <div class="apacTheme_default__1o0j0u80 typography_lightModeTone_light__1np03wo18 typography_darkModeTone_dark__1np03wo1b">
+        <span class="reset_base__1jajid00 sprinkles_display_block_mobile__a8rke4u typography_fontFamily__1np03wo0 typography_fontWeight_regular__1np03wo1 typography_tone_neutral__1np03wo21 capsize_capsizeStyle__1d0g9qk4 typography_textSize_standard__1np03woa">
+          Hello
+          jobStreet
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewbox="0 0 24 24"
+               xml:space="preserve"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               class="reset_base__1jajid00 IconChevron_root__1wok1bc0 sprinkles_display_inlineBlock_mobile__a8rke52 sprinkles_position_relative_mobile__a8rke5a icon_size__r3jux50 icon_inlineCrop__r3jux52 icon_inline__r3jux53 icon_alignY_uppercase_none__r3jux54"
+               aria-hidden="true"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="reset_base__1jajid00 sprinkles_paddingBottom_gutter_mobile__a8rke76 sprinkles_paddingTop_gutter_mobile__a8rke66 sprinkles_paddingLeft_gutter_mobile__a8rke96 sprinkles_paddingRight_gutter_mobile__a8rke86 sprinkles_position_relative_mobile__a8rke5a typography_lightModeTone_light__1np03wo18 typography_darkModeTone_dark__1np03wo1b sprinkles_background_surface_lightMode__a8rke32 sprinkles_background_surfaceDark_darkMode__a8rke35">
+          <div class="reset_base__1jajid00 sprinkles_position_relative_mobile__a8rke5a sprinkles_zIndex_0__a8rke7 InlineField_root__5ejtn70">
+            <div class="reset_base__1jajid00 sprinkles_display_flex_mobile__a8rke56">
+              <input type="checkbox"
+                     class="reset_base__1jajid00 reset_block__1jajid01 reset_appearance__1jajid06 reset_transparent__1jajid07 reset_input__1jajid0c sprinkles_position_absolute_mobile__a8rke5e sprinkles_zIndex_1__a8rke8 sprinkles_cursor_pointer__a8rkeh sprinkles_opacity_0__a8rke6 InlineField_realField__5ejtn71 InlineField_realFieldPosition_standard__5ejtn72"
+                     id="id_1"
+                     aria-checked="false"
+              >
+              <div class="reset_base__1jajid00 sprinkles_flexShrink_0_mobile__a8rkefm sprinkles_position_relative_mobile__a8rke5a sprinkles_borderRadius_standard_mobile__a8rke5u InlineField_fakeField__5ejtn74 InlineField_fakeFieldSize_standard__5ejtn75 typography_lightModeTone_light__1np03wo18  sprinkles_background_surface_lightMode__a8rke32">
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_boxShadow_borderField_lightMode__a8rke3s sprinkles_boxShadow_borderField_darkMode__a8rke3t">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 sprinkles_boxShadow_borderCritical_lightMode__a8rke3k sprinkles_boxShadow_borderCriticalLight_darkMode__a8rke3p">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_selected__5ejtn7d typography_lightModeTone_dark__1np03wo19 typography_darkModeTone_dark__1np03wo1b sprinkles_background_formAccent_lightMode__a8rke20 sprinkles_background_formAccent_darkMode__a8rke21">
+                  <div class="reset_base__1jajid00 sprinkles_height_full__a8rken sprinkles_transition_fast__a8rkew sprinkles_position_relative_mobile__a8rke5a InlineField_indicator__5ejtn7g InlineField_checkboxScale__5ejtn7h">
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_neutral__1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_neutral__1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_focusOverlay__5ejtn7e sprinkles_boxShadow_outlineFocus_lightMode__a8rke4o sprinkles_boxShadow_outlineFocus_darkMode__a8rke4p">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_hoverOverlay__5ejtn7f sprinkles_boxShadow_borderFormAccent_lightMode__a8rke3u sprinkles_boxShadow_borderFormAccentLight_darkMode__a8rke3z">
+                  <div class="reset_base__1jajid00 sprinkles_height_full__a8rken sprinkles_transition_fast__a8rkew sprinkles_position_relative_mobile__a8rke5a InlineField_indicator__5ejtn7g InlineField_checkboxScale__5ejtn7h">
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_formAccent__1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_formAccent__1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="reset_base__1jajid00 sprinkles_paddingLeft_small_mobile__a8rke9i sprinkles_flexGrow_1_mobile__a8rkefu">
+                <div class="reset_base__1jajid00 negativeMargin_preventCollapsePseudo_top__f33fq40 negativeMargin_stylesForBreakpoint_small__f33fq45">
+                  <div class="reset_base__1jajid00 sprinkles_flexWrap_wrap_mobile__a8rkefe sprinkles_display_flex_mobile__a8rke56 sprinkles_flexDirection_row_mobile__a8rkeey negativeMargin_stylesForBreakpoint_small__f33fq425">
+                    <div class="reset_base__1jajid00 sprinkles_minWidth_0__a8rker sprinkles_marginLeft_small_mobile__a8rkedi sprinkles_marginTop_small_mobile__a8rkeai sprinkles_display_block_mobile__a8rke4u sprinkles_justifyContent_flexStart_mobile__a8rkeei">
+                      <label class="reset_base__1jajid00 sprinkles_userSelect_none__a8rke4 sprinkles_display_block_mobile__a8rke4u sprinkles_cursor_pointer__a8rkeh InlineField_labelOffset_standard__5ejtn79 virtualTouchable_virtualTouchable__1c9btc50"
+                             for="id_1"
+                      >
+                        <span class="reset_base__1jajid00 sprinkles_display_block_mobile__a8rke4u typography_fontFamily__1np03wo0 typography_fontWeight_regular__1np03wo1 typography_tone_neutral__1np03wo21 capsize_capsizeStyle__1d0g9qk4 typography_textSize_standard__1np03woa">
+                          This is a checkbox
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reset_base__1jajid00 BRAID__App-customBox_mYnaw_apac">
+          Custom content
+          Initial
+        </div>
+        <div class="reset_base__1jajid00 App_vanillaBox__c5yboh0">
+          🧁 Vanilla content
+        </div>
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"jobStreet"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+                      class="reset_base__1jajid00 reset_block__1jajid01 reset_appearance__1jajid06 reset_transparent__1jajid07 reset_input__1jajid0c sprinkles_position_absolute_mobile__a8rke5e sprinkles_zIndex_1__a8rke8 sprinkles_cursor_pointer__a8rkeh sprinkles_opacity_0__a8rke6 InlineField_realField__5ejtn71 InlineField_realFieldPosition_standard__5ejtn72"
+                      id="id_1"
+                      aria-checked="false"
++                     value
+               >
+               <div class="reset_base__1jajid00 sprinkles_flexShrink_0_mobile__a8rkefm sprinkles_position_relative_mobile__a8rke5a sprinkles_borderRadius_standard_mobile__a8rke5u InlineField_fakeField__5ejtn74 InlineField_fakeFieldSize_standard__5ejtn75 typography_lightModeTone_light__1np03wo18  sprinkles_background_surface_lightMode__a8rke32">
+                 <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_boxShadow_borderField_lightMode__a8rke3s sprinkles_boxShadow_borderField_darkMode__a8rke3t">
+@@ -163,7 +164,7 @@
+         </div>
+         <div class="reset_base__1jajid00 BRAID__App-customBox_mYnaw_apac">
+           Custom content
+-          Initial
++          Client
+         </div>
+         <div class="reset_base__1jajid00 App_vanillaBox__c5yboh0">
+           🧁 Vanilla content
+
+`;
+
+exports[`braid-design-system start should return development seekAnz site 1`] = `
+SCRIPTS: [
+  "/runtime.js",
+  "/vendors-node_modules_pnpm_braid-design-system_31_24_2_zs4w435fi4ukknzri4j2f34ibq_node_modules-053edc.js",
+  "/main.js",
+]
+CSS: [
+  "/vendors-node_modules_pnpm_braid-design-system_31_24_2_zs4w435fi4ukknzri4j2f34ibq_node_modules-053edc.css",
+  "/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#F7F8FB}
+            html.sprinkles_darkMode__a8rkez,html.sprinkles_darkMode__a8rkez body{color-scheme:dark;background:#0E131B}
+      </style>
+      <div class="apacTheme_default__1o0j0u80 typography_lightModeTone_light__1np03wo18 typography_darkModeTone_dark__1np03wo1b">
+        <span class="reset_base__1jajid00 sprinkles_display_block_mobile__a8rke4u typography_fontFamily__1np03wo0 typography_fontWeight_regular__1np03wo1 typography_tone_neutral__1np03wo21 capsize_capsizeStyle__1d0g9qk4 typography_textSize_standard__1np03woa">
+          Hello
+          seekAnz
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewbox="0 0 24 24"
+               xml:space="preserve"
+               focusable="false"
+               fill="currentColor"
+               width="16"
+               height="16"
+               class="reset_base__1jajid00 IconChevron_root__1wok1bc0 sprinkles_display_inlineBlock_mobile__a8rke52 sprinkles_position_relative_mobile__a8rke5a icon_size__r3jux50 icon_inlineCrop__r3jux52 icon_inline__r3jux53 icon_alignY_uppercase_none__r3jux54"
+               aria-hidden="true"
+          >
+            <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+            </path>
+          </svg>
+        </span>
+        <div class="reset_base__1jajid00 sprinkles_paddingBottom_gutter_mobile__a8rke76 sprinkles_paddingTop_gutter_mobile__a8rke66 sprinkles_paddingLeft_gutter_mobile__a8rke96 sprinkles_paddingRight_gutter_mobile__a8rke86 sprinkles_position_relative_mobile__a8rke5a typography_lightModeTone_light__1np03wo18 typography_darkModeTone_dark__1np03wo1b sprinkles_background_surface_lightMode__a8rke32 sprinkles_background_surfaceDark_darkMode__a8rke35">
+          <div class="reset_base__1jajid00 sprinkles_position_relative_mobile__a8rke5a sprinkles_zIndex_0__a8rke7 InlineField_root__5ejtn70">
+            <div class="reset_base__1jajid00 sprinkles_display_flex_mobile__a8rke56">
+              <input type="checkbox"
+                     class="reset_base__1jajid00 reset_block__1jajid01 reset_appearance__1jajid06 reset_transparent__1jajid07 reset_input__1jajid0c sprinkles_position_absolute_mobile__a8rke5e sprinkles_zIndex_1__a8rke8 sprinkles_cursor_pointer__a8rkeh sprinkles_opacity_0__a8rke6 InlineField_realField__5ejtn71 InlineField_realFieldPosition_standard__5ejtn72"
+                     id="id_1"
+                     aria-checked="false"
+              >
+              <div class="reset_base__1jajid00 sprinkles_flexShrink_0_mobile__a8rkefm sprinkles_position_relative_mobile__a8rke5a sprinkles_borderRadius_standard_mobile__a8rke5u InlineField_fakeField__5ejtn74 InlineField_fakeFieldSize_standard__5ejtn75 typography_lightModeTone_light__1np03wo18  sprinkles_background_surface_lightMode__a8rke32">
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_boxShadow_borderField_lightMode__a8rke3s sprinkles_boxShadow_borderField_darkMode__a8rke3t">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 sprinkles_boxShadow_borderCritical_lightMode__a8rke3k sprinkles_boxShadow_borderCriticalLight_darkMode__a8rke3p">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_selected__5ejtn7d typography_lightModeTone_dark__1np03wo19 typography_darkModeTone_dark__1np03wo1b sprinkles_background_formAccent_lightMode__a8rke20 sprinkles_background_formAccent_darkMode__a8rke21">
+                  <div class="reset_base__1jajid00 sprinkles_height_full__a8rken sprinkles_transition_fast__a8rkew sprinkles_position_relative_mobile__a8rke5a InlineField_indicator__5ejtn7g InlineField_checkboxScale__5ejtn7h">
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_neutral__1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_neutral__1np03wo21"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_focusOverlay__5ejtn7e sprinkles_boxShadow_outlineFocus_lightMode__a8rke4o sprinkles_boxShadow_outlineFocus_darkMode__a8rke4p">
+                </span>
+                <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6 InlineField_hoverOverlay__5ejtn7f sprinkles_boxShadow_borderFormAccent_lightMode__a8rke3u sprinkles_boxShadow_borderFormAccentLight_darkMode__a8rke3z">
+                  <div class="reset_base__1jajid00 sprinkles_height_full__a8rken sprinkles_transition_fast__a8rkew sprinkles_position_relative_mobile__a8rke5a InlineField_indicator__5ejtn7g InlineField_checkboxScale__5ejtn7h">
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew sprinkles_opacity_0__a8rke6">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_formAccent__1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_transition_fast__a8rkew">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           viewbox="0 0 24 24"
+                           xml:space="preserve"
+                           focusable="false"
+                           fill="currentColor"
+                           width="16"
+                           height="16"
+                           class="reset_base__1jajid00 sprinkles_width_full__a8rkep sprinkles_height_full__a8rken sprinkles_display_block_mobile__a8rke4u typography_tone_formAccent__1np03wo20"
+                           aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="reset_base__1jajid00 sprinkles_paddingLeft_small_mobile__a8rke9i sprinkles_flexGrow_1_mobile__a8rkefu">
+                <div class="reset_base__1jajid00 negativeMargin_preventCollapsePseudo_top__f33fq40 negativeMargin_stylesForBreakpoint_small__f33fq45">
+                  <div class="reset_base__1jajid00 sprinkles_flexWrap_wrap_mobile__a8rkefe sprinkles_display_flex_mobile__a8rke56 sprinkles_flexDirection_row_mobile__a8rkeey negativeMargin_stylesForBreakpoint_small__f33fq425">
+                    <div class="reset_base__1jajid00 sprinkles_minWidth_0__a8rker sprinkles_marginLeft_small_mobile__a8rkedi sprinkles_marginTop_small_mobile__a8rkeai sprinkles_display_block_mobile__a8rke4u sprinkles_justifyContent_flexStart_mobile__a8rkeei">
+                      <label class="reset_base__1jajid00 sprinkles_userSelect_none__a8rke4 sprinkles_display_block_mobile__a8rke4u sprinkles_cursor_pointer__a8rkeh InlineField_labelOffset_standard__5ejtn79 virtualTouchable_virtualTouchable__1c9btc50"
+                             for="id_1"
+                      >
+                        <span class="reset_base__1jajid00 sprinkles_display_block_mobile__a8rke4u typography_fontFamily__1np03wo0 typography_fontWeight_regular__1np03wo1 typography_tone_neutral__1np03wo21 capsize_capsizeStyle__1d0g9qk4 typography_textSize_standard__1np03woa">
+                          This is a checkbox
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reset_base__1jajid00 BRAID__App-customBox_mYnaw_apac">
+          Custom content
+          Initial
+        </div>
+        <div class="reset_base__1jajid00 App_vanillaBox__c5yboh0">
+          🧁 Vanilla content
+        </div>
+      </div>
+    </div>
+    <script id="__SKU_CLIENT_CONTEXT__"
+            type="application/json"
+    >
+      {"site":"seekAnz"}
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+                      class="reset_base__1jajid00 reset_block__1jajid01 reset_appearance__1jajid06 reset_transparent__1jajid07 reset_input__1jajid0c sprinkles_position_absolute_mobile__a8rke5e sprinkles_zIndex_1__a8rke8 sprinkles_cursor_pointer__a8rkeh sprinkles_opacity_0__a8rke6 InlineField_realField__5ejtn71 InlineField_realFieldPosition_standard__5ejtn72"
+                      id="id_1"
+                      aria-checked="false"
++                     value
+               >
+               <div class="reset_base__1jajid00 sprinkles_flexShrink_0_mobile__a8rkefm sprinkles_position_relative_mobile__a8rke5a sprinkles_borderRadius_standard_mobile__a8rke5u InlineField_fakeField__5ejtn74 InlineField_fakeFieldSize_standard__5ejtn75 typography_lightModeTone_light__1np03wo18  sprinkles_background_surface_lightMode__a8rke32">
+                 <span class="reset_base__1jajid00 sprinkles_top_0__a8rkej sprinkles_bottom_0__a8rkek sprinkles_left_0__a8rkel sprinkles_right_0__a8rkem sprinkles_position_absolute_mobile__a8rke5e sprinkles_pointerEvents_none__a8rkei sprinkles_borderRadius_standard_mobile__a8rke5u sprinkles_transition_fast__a8rkew sprinkles_boxShadow_borderField_lightMode__a8rke3s sprinkles_boxShadow_borderField_darkMode__a8rke3t">
+@@ -163,7 +164,7 @@
+         </div>
+         <div class="reset_base__1jajid00 BRAID__App-customBox_mYnaw_apac">
+           Custom content
+-          Initial
++          Client
+         </div>
+         <div class="reset_base__1jajid00 App_vanillaBox__c5yboh0">
+           🧁 Vanilla content
+
+`;

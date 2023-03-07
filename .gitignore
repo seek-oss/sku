@@ -6,6 +6,7 @@ entry/render/startConfig.json
 dist-start/
 dist-build/
 .eslintcache
+yarn.lock
 
 # managed by sku
 .prettierrc

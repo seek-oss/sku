@@ -1,0 +1,97 @@
+{
+  "name": "docsify-cli",
+  "version": "4.4.4",
+  "description": "A magical documentation generator.",
+  "author": {
+    "name": "qingwei-li",
+    "email": "cinwell.li@gmail.com",
+    "url": "https://github.com/QingWei-Li"
+  },
+  "homepage": "https://github.com/docsifyjs/docsify-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docsifyjs/docsify-cli.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10",
+    "npm": ">= 6"
+  },
+  "main": "bin/docsify",
+  "bin": {
+    "docsify": "bin/docsify"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "pretest": "npm run lint",
+    "test": "ava",
+    "prebuild": "rimraf bin",
+    "build": "rollup -c",
+    "prerelease": "npm run build",
+    "release": "standard-version -a"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "ava e2e/cli.test.js -u && git add ."
+    }
+  },
+  "files": [
+    "bin",
+    "lib",
+    "tools/locales"
+  ],
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "connect": "^3.6.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "connect-livereload": "^0.6.0",
+    "cp-file": "^7.0.0",
+    "docsify": "^4.12.2",
+    "docsify-server-renderer": ">=4.10.0",
+    "enquirer": "^2.3.6",
+    "fs-extra": "^8.1.0",
+    "get-port": "^5.0.0",
+    "livereload": "^0.9.2",
+    "lru-cache": "^5.1.1",
+    "open": "^6.4.0",
+    "serve-static": "^1.12.1",
+    "update-notifier": "^4.1.0",
+    "yargonaut": "^1.1.2",
+    "yargs": "^15.3.0"
+  },
+  "devDependencies": {
+    "ava": "^3.13.0",
+    "cli-prompts-test": "^0.3.0",
+    "cors": "^2.8.1",
+    "eslint": "^6.8.0",
+    "eslint-config-xo-space": "^0.22.0",
+    "execa": "^4.0.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.27.13",
+    "rollup-plugin-executable": "^1.5.2",
+    "standard-version": "^9.0.0"
+  },
+  "keywords": [
+    "docsify",
+    "doc",
+    "docs",
+    "documentation",
+    "creator",
+    "generator",
+    "cli"
+  ]
+}

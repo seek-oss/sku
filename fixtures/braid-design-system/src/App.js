@@ -9,7 +9,7 @@ import {
   Box,
 } from 'braid-design-system';
 import theme from 'braid-design-system/themes/apac';
-import { useStyles } from '../../../../../react-treat';
+import { useStyles } from 'sku/react-treat';
 
 import * as styleRefs from './App.treat';
 import { vanillaBox } from './App.css';

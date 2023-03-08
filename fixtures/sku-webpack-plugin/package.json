@@ -1,0 +1,11 @@
+{
+  "name": "@fixtures/sku-webpack-plugin",
+  "private": true,
+  "main": "./main.js",
+  "dependencies": {
+    "braid-design-system": "^31.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sku": "workspace:*"
+  }
+}

@@ -6,6 +6,7 @@ module.exports = {
     '/node_modules/',
     '<rootDir>/scripts/test.js',
     '<rootDir>/test/.*/src',
+    '<rootDir>/fixtures/.*/src',
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',

@@ -4,6 +4,7 @@ const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const waitForUrls = require('../test/utils/waitForUrls');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
+// Actually, it does resolve
 // eslint-disable-next-line import/no-unresolved
 const skuConfig = require('@fixtures/braid-design-system/sku.config.js');
 

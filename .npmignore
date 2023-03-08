@@ -2,3 +2,6 @@ test/
 tests/
 fixtures/
 docs/
+.changeset/
+.github/
+.vscode/

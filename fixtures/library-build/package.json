@@ -1,0 +1,11 @@
+{
+  "name": "@fixtures/library-build",
+  "private": true,
+  "exports": {
+    "./sku.config.js": "./sku.config.js"
+  },
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "sku": "workspace:*"
+  }
+}

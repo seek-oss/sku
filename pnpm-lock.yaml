@@ -96,7 +96,6 @@ importers:
       jest-environment-jsdom: ^29.0.0
       jest-puppeteer: ^7.0.0
       jest-watch-typeahead: ^2.2.0
-      jsonc-parser: ^3.0.0
       less: ^4.1.0
       less-loader: ^11.0.0
       lint-staged: ^11.1.1
@@ -275,7 +274,6 @@ importers:
       html-webpack-plugin: 5.5.0_webpack@5.75.0
       husky: 4.3.8
       jest-puppeteer: 7.0.1_zavcd7x73wcpylrjsm6efq73ei
-      jsonc-parser: 3.2.0
       node-dir: 0.1.17
       node-fetch: 2.6.9
       puppeteer: 19.7.1_typescript@4.9.5
@@ -317,6 +315,16 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/configure:
+    specifiers:
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/sku-webpack-plugin:
     specifiers:
       braid-design-system: ^31.0.0
@@ -333,8 +341,10 @@ importers:
     specifiers:
       '@fixtures/assertion-removal': workspace:*
       '@fixtures/braid-design-system': workspace:*
+      '@fixtures/configure': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
       fs-extra: ^10.0.0
+      jsonc-parser: ^3.0.0
       rimraf: ^3.0.0
       webpack: ^5.52.0
       webpack-cli: ^5.0.0
@@ -342,8 +352,10 @@ importers:
     devDependencies:
       '@fixtures/assertion-removal': link:../fixtures/assertion-removal
       '@fixtures/braid-design-system': link:../fixtures/braid-design-system
+      '@fixtures/configure': link:../fixtures/configure
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
       fs-extra: 10.1.0
+      jsonc-parser: 3.2.0
       rimraf: 3.0.2
       webpack: 5.75.0_webpack-cli@5.0.1
       webpack-cli: 5.0.1_uaydpeuxkjjcxdbyfgk36cjdxi

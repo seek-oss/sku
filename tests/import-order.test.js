@@ -1,9 +1,11 @@
 const path = require('path');
 const fs = require('fs-extra');
 const dedent = require('dedent');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
-const appDirectory = path.join(__dirname, 'app');
+const appDirectory = path.dirname(
+  require.resolve('@fixtures/import-order/sku.config.js'),
+);
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);
 

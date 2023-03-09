@@ -2,16 +2,18 @@ const { promisify } = require('util');
 const path = require('path');
 const fs = require('fs');
 const rimraf = promisify(require('rimraf'));
-const spawnSkuScriptInDir = require('../../utils/spawnSkuScriptInDir');
+const spawnSkuScriptInDir = require('../test/utils/spawnSkuScriptInDir');
+
+const fixtureDirectory = path.join(__dirname, '../fixtures/sku-init');
 
 describe('sku init', () => {
   it(
     'should create a sku.config.ts',
     async () => {
       const projectName = 'new-project';
-      await rimraf(path.join(__dirname, projectName));
+      await rimraf(path.join(fixtureDirectory, projectName));
 
-      const childPromise = spawnSkuScriptInDir('init', __dirname, [
+      const childPromise = spawnSkuScriptInDir('init', fixtureDirectory, [
         projectName,
       ]);
 
@@ -21,7 +23,7 @@ describe('sku init', () => {
       );
 
       const skuConfig = fs.readFileSync(
-        path.join(__dirname, projectName, 'sku.config.ts'),
+        path.join(fixtureDirectory, projectName, 'sku.config.ts'),
         'utf-8',
       );
 

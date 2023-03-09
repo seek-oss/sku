@@ -20,6 +20,13 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off"
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules"]
+      }
+    }
+  },
   "overrides": [
     {
       "files": ["test/**", "tests/**"],

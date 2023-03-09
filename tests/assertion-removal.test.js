@@ -4,8 +4,6 @@ const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const startAssetServer = require('../test/utils/assetServer');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 
-// Actually, it does resolve
-// eslint-disable-next-line import/no-unresolved
 const skuConfig = require('@fixtures/assertion-removal/sku.config.js');
 const appDir = path.dirname(
   require.resolve('@fixtures/assertion-removal/sku.config.js'),

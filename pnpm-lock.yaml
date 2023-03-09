@@ -295,6 +295,16 @@ importers:
     devDependencies:
       docsify-cli: 4.4.4
 
+  fixtures/assertion-removal:
+    specifiers:
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/braid-design-system:
     specifiers:
       braid-design-system: ^31.0.0
@@ -321,6 +331,7 @@ importers:
 
   tests:
     specifiers:
+      '@fixtures/assertion-removal': workspace:*
       '@fixtures/braid-design-system': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
       fs-extra: ^10.0.0
@@ -329,6 +340,7 @@ importers:
       webpack-cli: ^5.0.0
       webpack-dev-server: 4.11.1
     devDependencies:
+      '@fixtures/assertion-removal': link:../fixtures/assertion-removal
       '@fixtures/braid-design-system': link:../fixtures/braid-design-system
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
       fs-extra: 10.1.0

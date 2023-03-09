@@ -1,11 +1,16 @@
 const path = require('path');
-const waitForUrls = require('../../utils/waitForUrls');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const startAssetServer = require('../../utils/assetServer');
-const gracefulSpawn = require('../../../lib/gracefulSpawn');
-const appDir = path.resolve(__dirname, 'app');
+const waitForUrls = require('../test/utils/waitForUrls');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const startAssetServer = require('../test/utils/assetServer');
+const gracefulSpawn = require('../lib/gracefulSpawn');
+
+// Actually, it does resolve
+// eslint-disable-next-line import/no-unresolved
+const skuConfig = require('@fixtures/assertion-removal/sku.config.js');
+const appDir = path.dirname(
+  require.resolve('@fixtures/assertion-removal/sku.config.js'),
+);
 const distDir = path.resolve(appDir, 'dist');
-const skuConfig = require('./app/sku.config');
 
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 

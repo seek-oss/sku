@@ -22,7 +22,7 @@
   },
   "overrides": [
     {
-      "files": ["test/**", "fixtures/**"],
+      "files": ["test/**", "tests/**"],
       "env": {
         "jest": true
       },

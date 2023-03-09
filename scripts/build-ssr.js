@@ -53,5 +53,9 @@ const { runVocabCompile } = require('../lib/runVocab');
     process.exitCode = 1;
   } finally {
     await track.close();
+
+    if (process.env.SKU_FORCE_EXIT) {
+      process.exit();
+    }
   }
 })();

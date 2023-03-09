@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@fixtures/assertion-removal": "workspace:*",
     "@fixtures/braid-design-system": "workspace:*",
     "@fixtures/sku-webpack-plugin": "workspace:*",
     "fs-extra": "^10.0.0",

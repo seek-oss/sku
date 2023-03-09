@@ -6,17 +6,20 @@ const makeDir = promisify(fs.mkdir);
 const rimraf = promisify(require('rimraf'));
 const path = require('path');
 const jsonc = require('jsonc-parser');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const {
   bundleReportFolder,
-} = require('../../../config/webpack/plugins/bundleAnalyzer');
-const prettierConfig = require('../../../config/prettier/prettierConfig');
+} = require('../config/webpack/plugins/bundleAnalyzer');
+const prettierConfig = require('../config/prettier/prettierConfig');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const coverageFolder = 'coverage';
-const appFolder = path.resolve(__dirname, 'App');
-const appFolderTS = path.resolve(__dirname, 'TSApp');
-const skuConfig = require('./sku.config');
+const skuConfig = require('@fixtures/configure/sku.config.js');
+const fixtureFolder = path.dirname(
+  require.resolve('@fixtures/configure/sku.config.js'),
+);
+const appFolder = path.resolve(fixtureFolder, 'App');
+const appFolderTS = path.resolve(fixtureFolder, 'TSApp');
 
 const readFileContents = async (appDir, fileName) => {
   const contents = await readFile(path.join(appDir, fileName), 'utf-8');
@@ -36,7 +39,7 @@ const readIgnore = async (appDir, fileName) => {
 };
 
 const copyToApp = async (filename, folder) =>
-  copyFile(path.join(__dirname, filename), path.join(folder, filename));
+  copyFile(path.join(fixtureFolder, filename), path.join(folder, filename));
 
 const removeAppDir = async (folder) =>
   rimraf(folder, {

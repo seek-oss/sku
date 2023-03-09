@@ -1,0 +1,10 @@
+{
+  "name": "@fixtures/public-path",
+  "private": true,
+  "exports": {
+    "./sku.config.js": "./sku.config.js"
+  },
+  "dependencies": {
+    "sku": "workspace:*"
+  }
+}

@@ -331,6 +331,12 @@ importers:
     dependencies:
       sku: link:../..
 
+  fixtures/public-path:
+    specifiers:
+      sku: workspace:*
+    dependencies:
+      sku: link:../..
+
   fixtures/sku-webpack-plugin:
     specifiers:
       braid-design-system: ^31.0.0
@@ -349,6 +355,7 @@ importers:
       '@fixtures/braid-design-system': workspace:*
       '@fixtures/configure': workspace:*
       '@fixtures/import-order': workspace:*
+      '@fixtures/public-path': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
       dedent: ^0.7.0
       fs-extra: ^10.0.0
@@ -362,6 +369,7 @@ importers:
       '@fixtures/braid-design-system': link:../fixtures/braid-design-system
       '@fixtures/configure': link:../fixtures/configure
       '@fixtures/import-order': link:../fixtures/import-order
+      '@fixtures/public-path': link:../fixtures/public-path
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
       dedent: 0.7.0
       fs-extra: 10.1.0

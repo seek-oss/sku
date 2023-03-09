@@ -1,6 +1,11 @@
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const waitForUrls = require('../../utils/waitForUrls');
+const path = require('path');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const waitForUrls = require('../test/utils/waitForUrls');
+
+const appDir = path.dirname(
+  require.resolve('@fixtures/public-path/sku.config.js'),
+);
 
 describe('public path', () => {
   describe('build and serve', () => {
@@ -8,8 +13,8 @@ describe('public path', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', __dirname);
-      process = await runSkuScriptInDir('serve', __dirname);
+      await runSkuScriptInDir('build', appDir);
+      process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(url);
     });
 

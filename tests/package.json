@@ -15,6 +15,7 @@
     "@fixtures/configure": "workspace:*",
     "@fixtures/braid-design-system": "workspace:*",
     "@fixtures/import-order": "workspace:*",
+    "@fixtures/public-path": "workspace:*",
     "@fixtures/sku-webpack-plugin": "workspace:*",
     "dedent": "^0.7.0",
     "fs-extra": "^10.0.0",

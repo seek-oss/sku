@@ -1,15 +1,17 @@
 const path = require('path');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const waitForUrls = require('../../utils/waitForUrls');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const startAssetServer = require('../../utils/assetServer');
-const gracefulSpawn = require('../../../lib/gracefulSpawn');
-const appDir = path.resolve(__dirname, 'app');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const waitForUrls = require('../test/utils/waitForUrls');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const startAssetServer = require('../test/utils/assetServer');
+const gracefulSpawn = require('../lib/gracefulSpawn');
+const appDir = path.dirname(
+  require.resolve('@fixtures/typescript-css-modules/sku.config'),
+);
 const distDir = path.resolve(appDir, 'dist');
 
 const srcDir = path.resolve(appDir, 'src');
-const ssrSkuConfig = require('./app/sku-ssr.config');
+const ssrSkuConfig = require('@fixtures/typescript-css-modules/sku-ssr.config.js');
 
 const backendUrl = `http://localhost:${ssrSkuConfig.serverPort}`;
 const cssTypes = ['.less.d.ts'];
@@ -144,7 +146,7 @@ describe('typescript-css-modules', () => {
       await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
 
       const content = await page.evaluate(async () => {
-        const element = await window.document
+        const element = window.document
           .querySelector('iframe')
           .contentDocument.querySelector('[data-automation-text]');
 

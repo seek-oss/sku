@@ -19,6 +19,7 @@
     "@fixtures/library-build": "workspace:*",
     "@fixtures/public-path": "workspace:*",
     "@fixtures/react-css-modules": "workspace:*",
+    "@fixtures/typescript-css-modules": "workspace:*",
     "@fixtures/source-maps": "workspace:*",
     "@fixtures/sku-webpack-plugin": "workspace:*",
     "dedent": "^0.7.0",

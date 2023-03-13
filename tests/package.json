@@ -18,6 +18,7 @@
     "@fixtures/import-order": "workspace:*",
     "@fixtures/library-build": "workspace:*",
     "@fixtures/public-path": "workspace:*",
+    "@fixtures/source-maps": "workspace:*",
     "@fixtures/sku-webpack-plugin": "workspace:*",
     "dedent": "^0.7.0",
     "fs-extra": "^10.0.0",

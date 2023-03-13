@@ -4,11 +4,11 @@ const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const waitForUrls = require('../test/utils/waitForUrls');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const skuConfig = require('@fixtures/custom-src-paths/sku.config.js');
-const fixtureDirectory = path.dirname(
+const appDir = path.dirname(
   require.resolve('@fixtures/custom-src-paths/sku.config.js'),
 );
 
-const targetDirectory = `${fixtureDirectory}/dist`;
+const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
@@ -16,7 +16,7 @@ describe('custom-src-paths', () => {
     let process;
 
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start', fixtureDirectory);
+      process = await runSkuScriptInDir('start', appDir);
       await waitForUrls(url);
     });
 
@@ -34,8 +34,8 @@ describe('custom-src-paths', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', fixtureDirectory);
-      process = await runSkuScriptInDir('serve', fixtureDirectory);
+      await runSkuScriptInDir('build', appDir);
+      process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(url);
     });
 
@@ -58,7 +58,7 @@ describe('custom-src-paths', () => {
     it('should format successfully', async () => {
       const {
         childProcess: { exitCode },
-      } = await runSkuScriptInDir('format', fixtureDirectory);
+      } = await runSkuScriptInDir('format', appDir);
       expect(exitCode).toEqual(0);
     });
   });
@@ -67,7 +67,7 @@ describe('custom-src-paths', () => {
     it('should lint successfully', async () => {
       const {
         childProcess: { exitCode },
-      } = await runSkuScriptInDir('lint', fixtureDirectory);
+      } = await runSkuScriptInDir('lint', appDir);
       expect(exitCode).toEqual(0);
     });
   });

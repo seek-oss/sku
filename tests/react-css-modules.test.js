@@ -4,11 +4,11 @@ const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const waitForUrls = require('../test/utils/waitForUrls');
 const startAssetServer = require('../test/utils/assetServer');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const fixtureDirectory = path.dirname(
+const appDir = path.dirname(
   require.resolve('@fixtures/react-css-modules/sku.config.js'),
 );
-const distDir = path.resolve(fixtureDirectory, 'dist');
-const storybookDistDir = path.resolve(fixtureDirectory, 'dist-storybook');
+const distDir = path.resolve(appDir, 'dist');
+const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
 const getStorybookContent = async (url) => {
   const page = await browser.newPage();
@@ -44,7 +44,7 @@ describe('react-css-modules', () => {
   let closeAssetServer;
 
   beforeAll(async () => {
-    await runSkuScriptInDir('build', fixtureDirectory);
+    await runSkuScriptInDir('build', appDir);
     closeAssetServer = await startAssetServer(4293, distDir);
   });
 
@@ -63,7 +63,7 @@ describe('react-css-modules', () => {
   });
 
   it('should handle Less and css.js in tests', async () => {
-    const { childProcess } = await runSkuScriptInDir('test', fixtureDirectory);
+    const { childProcess } = await runSkuScriptInDir('test', appDir);
     expect(childProcess.exitCode).toEqual(0);
   });
 
@@ -72,7 +72,7 @@ describe('react-css-modules', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', fixtureDirectory, ['--ci']);
+      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
       await waitForUrls(storybookUrl);
     });
 
@@ -91,7 +91,7 @@ describe('react-css-modules', () => {
     let closeStorybookServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-storybook', fixtureDirectory);
+      await runSkuScriptInDir('build-storybook', appDir);
       closeStorybookServer = await startAssetServer(4297, storybookDistDir);
     });
 

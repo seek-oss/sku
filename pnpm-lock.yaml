@@ -363,6 +363,18 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/react-css-modules:
+    specifiers:
+      dedent: ^0.7.0
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      dedent: 0.7.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/sku-webpack-plugin:
     specifiers:
       braid-design-system: ^31.0.0
@@ -394,6 +406,7 @@ importers:
       '@fixtures/import-order': workspace:*
       '@fixtures/library-build': workspace:*
       '@fixtures/public-path': workspace:*
+      '@fixtures/react-css-modules': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
       '@fixtures/source-maps': workspace:*
       dedent: ^0.7.0
@@ -411,6 +424,7 @@ importers:
       '@fixtures/import-order': link:../fixtures/import-order
       '@fixtures/library-build': link:../fixtures/library-build
       '@fixtures/public-path': link:../fixtures/public-path
+      '@fixtures/react-css-modules': link:../fixtures/react-css-modules
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
       '@fixtures/source-maps': link:../fixtures/source-maps
       dedent: 0.7.0

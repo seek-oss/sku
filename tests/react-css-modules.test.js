@@ -1,13 +1,14 @@
-/* eslint-disable jest/expect-expect */
 const path = require('path');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const waitForUrls = require('../../utils/waitForUrls');
-const startAssetServer = require('../../utils/assetServer');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const appDir = path.resolve(__dirname, 'app');
-const distDir = path.resolve(appDir, 'dist');
-const storybookDistDir = path.resolve(appDir, 'dist-storybook');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const waitForUrls = require('../test/utils/waitForUrls');
+const startAssetServer = require('../test/utils/assetServer');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const fixtureDirectory = path.dirname(
+  require.resolve('@fixtures/react-css-modules/sku.config.js'),
+);
+const distDir = path.resolve(fixtureDirectory, 'dist');
+const storybookDistDir = path.resolve(fixtureDirectory, 'dist-storybook');
 
 const getStorybookContent = async (url) => {
   const page = await browser.newPage();
@@ -43,7 +44,7 @@ describe('react-css-modules', () => {
   let closeAssetServer;
 
   beforeAll(async () => {
-    await runSkuScriptInDir('build', appDir);
+    await runSkuScriptInDir('build', fixtureDirectory);
     closeAssetServer = await startAssetServer(4293, distDir);
   });
 
@@ -62,7 +63,7 @@ describe('react-css-modules', () => {
   });
 
   it('should handle Less and css.js in tests', async () => {
-    const { childProcess } = await runSkuScriptInDir('test', appDir);
+    const { childProcess } = await runSkuScriptInDir('test', fixtureDirectory);
     expect(childProcess.exitCode).toEqual(0);
   });
 
@@ -71,7 +72,7 @@ describe('react-css-modules', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
+      server = await runSkuScriptInDir('storybook', fixtureDirectory, ['--ci']);
       await waitForUrls(storybookUrl);
     });
 
@@ -90,7 +91,7 @@ describe('react-css-modules', () => {
     let closeStorybookServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-storybook', appDir);
+      await runSkuScriptInDir('build-storybook', fixtureDirectory);
       closeStorybookServer = await startAssetServer(4297, storybookDistDir);
     });
 

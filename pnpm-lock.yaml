@@ -325,6 +325,18 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/custom-src-paths:
+    specifiers:
+      dedent: ^0.7.0
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      dedent: 0.7.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/import-order:
     specifiers:
       sku: workspace:*
@@ -368,6 +380,7 @@ importers:
       '@fixtures/assertion-removal': workspace:*
       '@fixtures/braid-design-system': workspace:*
       '@fixtures/configure': workspace:*
+      '@fixtures/custom-src-paths': workspace:*
       '@fixtures/import-order': workspace:*
       '@fixtures/library-build': workspace:*
       '@fixtures/public-path': workspace:*
@@ -383,6 +396,7 @@ importers:
       '@fixtures/assertion-removal': link:../fixtures/assertion-removal
       '@fixtures/braid-design-system': link:../fixtures/braid-design-system
       '@fixtures/configure': link:../fixtures/configure
+      '@fixtures/custom-src-paths': link:../fixtures/custom-src-paths
       '@fixtures/import-order': link:../fixtures/import-order
       '@fixtures/library-build': link:../fixtures/library-build
       '@fixtures/public-path': link:../fixtures/public-path

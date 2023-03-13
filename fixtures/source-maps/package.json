@@ -1,7 +1,6 @@
 {
   "name": "@fixtures/source-maps",
   "private": true,
-  "main": "./main.js",
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

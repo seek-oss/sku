@@ -1,7 +1,6 @@
 {
   "name": "@fixtures/react-css-modules",
   "private": true,
-  "main": "./main.js",
   "dependencies": {
     "dedent": "^0.7.0",
     "react": "^17.0.1",

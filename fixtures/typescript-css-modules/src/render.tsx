@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import dedent from 'dedent';
 
-import { Render } from 'sku';
+import type { Render } from 'sku';
 import App from 'src/App';
 
 const skuRender: Render = {

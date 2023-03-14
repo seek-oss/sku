@@ -12,7 +12,8 @@
   "scripts": {
     "lint": "pnpm format-check && eslint --cache .",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
-    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand",
+    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand --testPathPattern \"test/\"",
+    "test:concurrent": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --testPathPattern \"tests/|config/|lib\"",
     "test-manual": "SKU_TELEMETRY=false node test/manual",
     "setup-test-hosts": "node test/utils/setupTestHosts",
     "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",

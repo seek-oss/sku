@@ -13,7 +13,7 @@
     "lint": "pnpm format-check && eslint --cache .",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "pnpm test:sequential && pnpm test:concurrent",
-    "test:ci": "pnpm test:sequential --maxWorkers=50% && pnpm test:concurrent --maxWorkers=50%",
+    "test:ci": "pnpm test:sequential && pnpm test:concurrent --maxWorkers=50%",
     "test:sequential": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --detectOpenHandles --runInBand --testPathPattern \"test/\"",
     "test:concurrent": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true SKU_FORCE_EXIT=true OPEN_TAB=false jest --verbose --testPathPattern \"tests/|config/|lib/\"",
     "test-manual": "SKU_TELEMETRY=false node test/manual",

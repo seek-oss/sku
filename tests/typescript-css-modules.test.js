@@ -145,7 +145,7 @@ describe('typescript-css-modules', () => {
       const page = await browser.newPage();
       await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
 
-      const content = await page.evaluate(async () => {
+      const content = await page.evaluate(() => {
         const element = window.document
           .querySelector('iframe')
           .contentDocument.querySelector('[data-automation-text]');

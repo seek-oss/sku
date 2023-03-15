@@ -1,41 +1,24 @@
 /* eslint-disable jest/expect-expect */
 const path = require('path');
-const { promisify } = require('util');
-const rimrafAsync = promisify(require('rimraf'));
-const fs = require('fs-extra');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const waitForUrls = require('../../utils/waitForUrls');
-const appDir = path.resolve(__dirname, 'app');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const waitForUrls = require('../test/utils/waitForUrls');
+
+const appDir = path.dirname(
+  require.resolve('@fixtures/seek-style-guide/sku.config.js'),
+);
 const distDir = path.resolve(appDir, 'dist');
-const { cwd } = require('../../../lib/cwd');
-
-function createPackageLink(name) {
-  return fs.symlink(
-    `${cwd()}/node_modules/${name}`,
-    `${__dirname}/app/node_modules/${name}`,
-  );
-}
-
-async function linkLocalDependencies() {
-  const nodeModules = `${__dirname}/app/node_modules`;
-  await rimrafAsync(nodeModules);
-  await fs.mkdir(nodeModules);
-  await Promise.all(
-    ['react', 'react-dom', 'seek-style-guide'].map(createPackageLink),
-  );
-}
 
 const assertStorybookContent = async (url) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 
-  const content = await page.evaluate(async () => {
-    const svg = await window.document
+  const content = await page.evaluate(() => {
+    const svg = window.document
       .querySelector('iframe')
       .contentDocument.querySelector('[data-automation-svg] svg');
 
-    const textElement = await window.document
+    const textElement = window.document
       .querySelector('iframe')
       .contentDocument.querySelector('[data-automation-text]');
     const text = textElement.innerText;
@@ -49,9 +32,6 @@ const assertStorybookContent = async (url) => {
 
 describe('seek-style-guide', () => {
   beforeAll(async () => {
-    // "Install" React and seek-style-guide into this test app so that webpack-node-externals
-    // treats them correctly.
-    await linkLocalDependencies();
     await runSkuScriptInDir('build', appDir);
   });
 

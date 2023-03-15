@@ -40,6 +40,8 @@ const getStorybookContent = async (url) => {
   }));
 };
 
+jest.setTimeout(200000);
+
 describe('react-css-modules', () => {
   let closeAssetServer;
 
@@ -68,7 +70,7 @@ describe('react-css-modules', () => {
   });
 
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8081';
+    const storybookUrl = 'http://localhost:8084';
     let server;
 
     beforeAll(async () => {

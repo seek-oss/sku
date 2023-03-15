@@ -46,7 +46,7 @@ describe('seek-style-guide', () => {
   });
 
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8081';
+    const storybookUrl = 'http://localhost:8083';
     let server;
 
     beforeAll(async () => {

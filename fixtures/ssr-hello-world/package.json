@@ -1,0 +1,9 @@
+{
+  "name": "@fixtures/ssr-hello-world",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sku": "workspace:*"
+  }
+}

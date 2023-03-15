@@ -1,19 +1,22 @@
 const path = require('path');
-const fs = require('fs');
-const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
+const fs = require('fs/promises');
 
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const gracefulSpawn = require('../../../lib/gracefulSpawn');
-const waitForUrls = require('../../utils/waitForUrls');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const startAssetServer = require('../../utils/assetServer');
-const skuBuildConfig = require('./sku-build.config');
-const skuStartConfig = require('./sku-start.config');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const gracefulSpawn = require('../lib/gracefulSpawn');
+const waitForUrls = require('../test/utils/waitForUrls');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const startAssetServer = require('../test/utils/assetServer');
+
+const skuBuildConfig = require('@fixtures/ssr-hello-world/sku-build.config.js');
+const skuStartConfig = require('@fixtures/ssr-hello-world/sku-start.config.js');
+
+const appDir = path.dirname(
+  require.resolve('@fixtures/ssr-hello-world/sku-build.config.js'),
+);
 
 const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
-  targetDirectory: path.join(__dirname, skuConfig.target),
+  targetDirectory: path.join(appDir, skuConfig.target),
 });
 
 describe('ssr-hello-world', () => {
@@ -22,7 +25,7 @@ describe('ssr-hello-world', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start-ssr', __dirname, [
+      server = await runSkuScriptInDir('start-ssr', appDir, [
         '--config=sku-start.config.js',
       ]);
       await waitForUrls(backendUrl);
@@ -43,7 +46,7 @@ describe('ssr-hello-world', () => {
     let closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', __dirname, [
+      await runSkuScriptInDir('build-ssr', appDir, [
         '--config=sku-build.config.js',
       ]);
 
@@ -76,7 +79,9 @@ describe('ssr-hello-world', () => {
 
       it("should invoke the provided 'onStart' callback", async () => {
         const pathToFile = path.join(targetDirectory, 'started.txt');
-        const startedFile = await readFile(pathToFile, { encoding: 'utf-8' });
+        const startedFile = await fs.readFile(pathToFile, {
+          encoding: 'utf-8',
+        });
 
         expect(startedFile).toMatchInlineSnapshot(
           `"Server started, here's your callback"`,

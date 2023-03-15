@@ -1,8 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import fs from 'fs';
-import { promisify } from 'util';
-const writeFile = promisify(fs.writeFile);
+import fs from 'fs/promises';
 
 import App from './App';
 
@@ -64,7 +62,10 @@ export default () => ({
   },
   onStart: async () => {
     if (process.env.NODE_ENV === 'production') {
-      await writeFile('./started.txt', "Server started, here's your callback");
+      await fs.writeFile(
+        './started.txt',
+        "Server started, here's your callback",
+      );
     }
   },
 });

@@ -397,6 +397,16 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/ssr-hello-world:
+    specifiers:
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/typescript-css-modules:
     specifiers:
       dedent: ^0.7.0
@@ -421,6 +431,7 @@ importers:
       '@fixtures/react-css-modules': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
       '@fixtures/source-maps': workspace:*
+      '@fixtures/ssr-hello-world': workspace:*
       '@fixtures/typescript-css-modules': workspace:*
       dedent: ^0.7.0
       fs-extra: ^10.0.0
@@ -440,6 +451,7 @@ importers:
       '@fixtures/react-css-modules': link:../fixtures/react-css-modules
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
       '@fixtures/source-maps': link:../fixtures/source-maps
+      '@fixtures/ssr-hello-world': link:../fixtures/ssr-hello-world
       '@fixtures/typescript-css-modules': link:../fixtures/typescript-css-modules
       dedent: 0.7.0
       fs-extra: 10.1.0

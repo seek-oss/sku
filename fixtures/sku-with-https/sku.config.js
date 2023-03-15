@@ -1,9 +1,7 @@
-const ListExternalsWebpackPlugin = require('../../../utils/ListExternalsWebpackPlugin');
+const ListExternalsWebpackPlugin = require('../../test/utils/ListExternalsWebpackPlugin');
 
 module.exports = {
-  clientEntry: 'src/serverClient.js',
   port: 9843,
-  serverPort: 9894,
   httpsDevServer: true,
   devServerMiddleware: './dev-middleware.js',
   cspEnabled: true,

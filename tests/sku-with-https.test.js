@@ -1,36 +1,18 @@
 const path = require('path');
-const { promisify } = require('util');
-const rimrafAsync = promisify(require('rimraf'));
-const fs = require('fs-extra');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const waitForUrls = require('../../utils/waitForUrls');
-const { getPathFromCwd } = require('../../../lib/cwd');
+const fs = require('fs/promises');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const waitForUrls = require('../test/utils/waitForUrls');
 
-const { port, serverPort } = require('./app/sku-server.config');
-const appDir = path.resolve(__dirname, 'app');
-
-async function createPackageLink(name) {
-  await fs.mkdirp(`${__dirname}/app/node_modules`);
-  await fs.symlink(
-    getPathFromCwd(`node_modules/${name}`),
-    `${__dirname}/app/node_modules/${name}`,
-  );
-}
-
-async function setUpLocalDependencies() {
-  const nodeModules = `${__dirname}/app/node_modules`;
-  await rimrafAsync(nodeModules);
-  await Promise.all(['react', 'react-dom'].map(createPackageLink));
-}
+const {
+  port,
+  serverPort,
+} = require('@fixtures/sku-with-https/sku-server.config.js');
+const appDir = path.dirname(
+  require.resolve('@fixtures/sku-with-https/sku.config.js'),
+);
 
 describe('sku-with-https', () => {
-  beforeAll(async () => {
-    // "Install" React and braid-design-system into this test app so that webpack-node-externals
-    // treats them correctly.
-    await setUpLocalDependencies();
-  });
-
   describe('start', () => {
     const url = `https://localhost:${port}`;
     let process;

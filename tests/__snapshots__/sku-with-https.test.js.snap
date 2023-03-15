@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
-  "/602-699e40ec4d9a2632aa88.js",
-  "/main-075db17b769d0940b981.js",
+  "/609-fe0c4cee557cf4fafc6a.js",
+  "/main-476ec96ceb26b39d68e9.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -152,10 +152,10 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___eRNyDeb"
+      <div class="__SKU__lessStyles__root___eRNyDeb"
            data-reactroot
       >
-        <div class="lessStyles__nested___MYunKdE">
+        <div class="__SKU__lessStyles__nested___MYunKdE">
           Initial
         </div>
         <img src="/a85d2645cc4d80a20b5b.png">
@@ -191,7 +191,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
             data-reactroot
        >
-         <div class="lessStyles__nested___MYunKdE">
+         <div class="__SKU__lessStyles__nested___MYunKdE">
 -          Initial
 +          Client
          </div>
@@ -263,8 +263,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___eRNyDeb">
-        <div class="lessStyles__nested___MYunKdE">
+      <div class="__SKU__lessStyles__root___eRNyDeb">
+        <div class="__SKU__lessStyles__nested___MYunKdE">
           Initial
         </div>
         <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
@@ -304,8 +304,8 @@ SOURCE HTML: <!DOCTYPE html>
 </html>
 POST HYDRATE DIFFS: 
      <div id="app">
-       <div class="lessStyles__root___eRNyDeb">
-         <div class="lessStyles__nested___MYunKdE">
+       <div class="__SKU__lessStyles__root___eRNyDeb">
+         <div class="__SKU__lessStyles__nested___MYunKdE">
 -          Initial
 +          Client
          </div>

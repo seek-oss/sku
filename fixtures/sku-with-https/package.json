@@ -1,0 +1,10 @@
+{
+  "name": "@fixtures/sku-with-https",
+  "private": true,
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sku": "workspace:*"
+  }
+}

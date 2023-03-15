@@ -417,6 +417,18 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/sku-with-https:
+    specifiers:
+      dedent: ^0.7.0
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      dedent: 0.7.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+
   fixtures/source-maps:
     specifiers:
       react: ^17.0.1
@@ -462,6 +474,7 @@ importers:
       '@fixtures/react-css-modules': workspace:*
       '@fixtures/seek-style-guide': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
+      '@fixtures/sku-with-https': workspace:*
       '@fixtures/source-maps': workspace:*
       '@fixtures/ssr-hello-world': workspace:*
       '@fixtures/typescript-css-modules': workspace:*
@@ -484,6 +497,7 @@ importers:
       '@fixtures/react-css-modules': link:../fixtures/react-css-modules
       '@fixtures/seek-style-guide': link:../fixtures/seek-style-guide
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin
+      '@fixtures/sku-with-https': link:../fixtures/sku-with-https
       '@fixtures/source-maps': link:../fixtures/source-maps
       '@fixtures/ssr-hello-world': link:../fixtures/ssr-hello-world
       '@fixtures/typescript-css-modules': link:../fixtures/typescript-css-modules

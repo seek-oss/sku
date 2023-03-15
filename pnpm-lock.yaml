@@ -351,6 +351,22 @@ importers:
       dedent: 0.7.0
       sku: link:../..
 
+  fixtures/multiple-routes:
+    specifiers:
+      '@testing-library/react': ^11.2.3
+      dedent: ^0.7.0
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      react-router-dom: ^5.2.0
+      sku: workspace:*
+    dependencies:
+      '@testing-library/react': 11.2.7_sfoxds7t5ydpegc3knd667wn6m
+      dedent: 0.7.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-router-dom: 5.3.4_react@17.0.2
+      sku: link:../..
+
   fixtures/public-path:
     specifiers:
       dedent: ^0.7.0
@@ -427,6 +443,7 @@ importers:
       '@fixtures/custom-src-paths': workspace:*
       '@fixtures/import-order': workspace:*
       '@fixtures/library-build': workspace:*
+      '@fixtures/multiple-routes': workspace:*
       '@fixtures/public-path': workspace:*
       '@fixtures/react-css-modules': workspace:*
       '@fixtures/sku-webpack-plugin': workspace:*
@@ -447,6 +464,7 @@ importers:
       '@fixtures/custom-src-paths': link:../fixtures/custom-src-paths
       '@fixtures/import-order': link:../fixtures/import-order
       '@fixtures/library-build': link:../fixtures/library-build
+      '@fixtures/multiple-routes': link:../fixtures/multiple-routes
       '@fixtures/public-path': link:../fixtures/public-path
       '@fixtures/react-css-modules': link:../fixtures/react-css-modules
       '@fixtures/sku-webpack-plugin': link:../fixtures/sku-webpack-plugin

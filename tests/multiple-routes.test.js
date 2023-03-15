@@ -1,9 +1,11 @@
 const path = require('path');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const waitForUrls = require('../../utils/waitForUrls');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const appDir = path.resolve(__dirname, 'app');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const waitForUrls = require('../test/utils/waitForUrls');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const appDir = path.dirname(
+  require.resolve('@fixtures/multiple-routes/sku.config.js'),
+);
 
 const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:8202`;

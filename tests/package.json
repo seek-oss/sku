@@ -17,6 +17,7 @@
     "@fixtures/custom-src-paths": "workspace:*",
     "@fixtures/import-order": "workspace:*",
     "@fixtures/library-build": "workspace:*",
+    "@fixtures/multiple-routes": "workspace:*",
     "@fixtures/public-path": "workspace:*",
     "@fixtures/react-css-modules": "workspace:*",
     "@fixtures/ssr-hello-world": "workspace:*",

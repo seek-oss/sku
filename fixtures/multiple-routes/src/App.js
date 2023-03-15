@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import loadable from '../../../../../@loadable/component';
+import loadable from 'sku/@loadable/component';
 
 const routes = {
   au: {

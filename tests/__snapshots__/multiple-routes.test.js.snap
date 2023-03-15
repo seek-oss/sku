@@ -2,26 +2,26 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
-  "236-01cddb46333c47f6496f.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-59094621706dd6a3ebb3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "550-c266ef310bd4a279ca0a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-32388ccc2585c04e2031.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
   color: blue;
 }
 ,
-  "handlers-Details-162de38603dd3dac742a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-32fcfb46390728657e08.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
   color: red;
 }
 ,
-  "handlers-Home-07031d4f1120adab5bd3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-9e10a2902d6dd8c88834.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-21fda8103cb599627211.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-6b6c6c144b3b2bec1204.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-e491487dae311c0610af.js",
-    "/static/place/236-01cddb46333c47f6496f.js",
-    "/static/place/main-9e10a2902d6dd8c88834.js",
-    "/static/place/handlers-Details-162de38603dd3dac742a.js",
-    "/static/place/AsyncComponent-59094621706dd6a3ebb3.js",
+    "/static/place/runtime-cee66c5b9a70a32381f9.js",
+    "/static/place/550-c266ef310bd4a279ca0a.js",
+    "/static/place/main-6b6c6c144b3b2bec1204.js",
+    "/static/place/handlers-Details-32fcfb46390728657e08.js",
+    "/static/place/AsyncComponent-32388ccc2585c04e2031.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -130,10 +130,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-e491487dae311c0610af.js",
-    "/static/place/236-01cddb46333c47f6496f.js",
-    "/static/place/main-9e10a2902d6dd8c88834.js",
-    "/static/place/handlers-Home-07031d4f1120adab5bd3.js",
+    "/static/place/runtime-cee66c5b9a70a32381f9.js",
+    "/static/place/550-c266ef310bd4a279ca0a.js",
+    "/static/place/main-6b6c6c144b3b2bec1204.js",
+    "/static/place/handlers-Home-21fda8103cb599627211.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -229,11 +229,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-e491487dae311c0610af.js",
-    "/static/place/236-01cddb46333c47f6496f.js",
-    "/static/place/main-9e10a2902d6dd8c88834.js",
-    "/static/place/handlers-Details-162de38603dd3dac742a.js",
-    "/static/place/AsyncComponent-59094621706dd6a3ebb3.js",
+    "/static/place/runtime-cee66c5b9a70a32381f9.js",
+    "/static/place/550-c266ef310bd4a279ca0a.js",
+    "/static/place/main-6b6c6c144b3b2bec1204.js",
+    "/static/place/handlers-Details-32fcfb46390728657e08.js",
+    "/static/place/AsyncComponent-32388ccc2585c04e2031.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -342,10 +342,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-e491487dae311c0610af.js",
-    "/static/place/236-01cddb46333c47f6496f.js",
-    "/static/place/main-9e10a2902d6dd8c88834.js",
-    "/static/place/handlers-Home-07031d4f1120adab5bd3.js",
+    "/static/place/runtime-cee66c5b9a70a32381f9.js",
+    "/static/place/550-c266ef310bd4a279ca0a.js",
+    "/static/place/main-6b6c6c144b3b2bec1204.js",
+    "/static/place/handlers-Home-21fda8103cb599627211.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -439,18 +439,18 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-e491487dae311c0610af.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-cee66c5b9a70a32381f9.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-e491487dae311c0610af.js",
-  "/static/place/236-01cddb46333c47f6496f.js",
-  "/static/place/main-9e10a2902d6dd8c88834.js",
-  "/static/place/handlers-Details-162de38603dd3dac742a.js",
-  "/static/place/AsyncComponent-59094621706dd6a3ebb3.js",
+  "/static/place/runtime-cee66c5b9a70a32381f9.js",
+  "/static/place/550-c266ef310bd4a279ca0a.js",
+  "/static/place/main-6b6c6c144b3b2bec1204.js",
+  "/static/place/handlers-Details-32fcfb46390728657e08.js",
+  "/static/place/AsyncComponent-32388ccc2585c04e2031.js",
 ]
 CSS: [
   "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -572,10 +572,10 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-e491487dae311c0610af.js",
-  "/static/place/236-01cddb46333c47f6496f.js",
-  "/static/place/main-9e10a2902d6dd8c88834.js",
-  "/static/place/handlers-Home-07031d4f1120adab5bd3.js",
+  "/static/place/runtime-cee66c5b9a70a32381f9.js",
+  "/static/place/550-c266ef310bd4a279ca0a.js",
+  "/static/place/main-6b6c6c144b3b2bec1204.js",
+  "/static/place/handlers-Home-21fda8103cb599627211.js",
 ]
 CSS: [
   "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -737,7 +737,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Details__root___EOTSBbL">
+      <h1 class="__SKU__Details__root___EOTSBbL">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -789,7 +789,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="Details__root___EOTSBbL">
+       <h1 class="__SKU__Details__root___EOTSBbL">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -857,7 +857,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Home__root___dyLY_sb">
+      <h1 class="__SKU__Home__root___dyLY_sb">
         Welcome to the Home page - au
       </h1>
     </div>

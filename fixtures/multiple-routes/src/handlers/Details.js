@@ -1,7 +1,7 @@
 import styles from './Details.less';
 
 import React, { useState, useEffect } from 'react';
-import loadable from '../../../../../../@loadable/component';
+import loadable from 'sku/@loadable/component';
 import { useParams } from 'react-router-dom';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));

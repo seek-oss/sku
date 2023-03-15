@@ -1,11 +1,12 @@
-/* eslint-disable jest/expect-expect */
 const path = require('path');
-const dirContentsToObject = require('../../utils/dirContentsToObject');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const waitForUrls = require('../../utils/waitForUrls');
-const startAssetServer = require('../../utils/assetServer');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const appDir = path.resolve(__dirname, 'app');
+const dirContentsToObject = require('../test/utils/dirContentsToObject');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const waitForUrls = require('../test/utils/waitForUrls');
+const startAssetServer = require('../test/utils/assetServer');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const appDir = path.dirname(
+  require.resolve('@fixtures/react-css-modules/sku.config.js'),
+);
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 

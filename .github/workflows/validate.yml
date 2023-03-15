@@ -19,6 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
+          cache: pnpm
           node-version-file: package.json
 
       - name: Install Dependencies
@@ -31,5 +32,13 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Cache Jest cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/jest_rt
+          key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
+
       - name: Test
-        run: pnpm test
+        # Ubuntu runners only have 2 cores, but by default Jest keeps 1 core free, but this is not
+        # necessary on CI
+        run: pnpm run test

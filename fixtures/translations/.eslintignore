@@ -4,7 +4,7 @@ translations.ts
 **/*.vocab/index.ts
 *.less.d.ts
 coverage/
-dist-ssr/
 dist-storybook/
+dist/
 report/
 # end managed by sku

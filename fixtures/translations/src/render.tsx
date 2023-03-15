@@ -4,7 +4,7 @@ import dedent from 'dedent';
 import { VocabProvider } from '@vocab/react';
 
 import type { RenderContext } from './types';
-import type { Render } from '../../../../../sku-types';
+import type { Render } from 'sku';
 import App from './App';
 
 export default {

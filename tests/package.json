@@ -23,6 +23,7 @@
     "@fixtures/seek-style-guide": "workspace:*",
     "@fixtures/sku-with-https": "workspace:*",
     "@fixtures/ssr-hello-world": "workspace:*",
+    "@fixtures/translations": "workspace:*",
     "@fixtures/typescript-css-modules": "workspace:*",
     "@fixtures/source-maps": "workspace:*",
     "@fixtures/sku-webpack-plugin": "workspace:*",

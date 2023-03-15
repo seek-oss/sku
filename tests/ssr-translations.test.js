@@ -1,11 +1,12 @@
-/* eslint-disable jest/expect-expect */
 const path = require('path');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const waitForUrls = require('../../utils/waitForUrls');
-const skuStartConfig = require('./app/sku-ssr.config');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const waitForUrls = require('../test/utils/waitForUrls');
 
-const appDir = path.resolve(__dirname, 'app');
+const skuSsrConfig = require('@fixtures/translations/sku-ssr.config.js');
+const appDir = path.dirname(
+  require.resolve('@fixtures/translations/sku-ssr.config.js'),
+);
 
 const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
@@ -14,7 +15,7 @@ const getTestConfig = (skuConfig) => ({
 
 describe('ssr translations', () => {
   let server;
-  const { backendUrl } = getTestConfig(skuStartConfig);
+  const { backendUrl } = getTestConfig(skuSsrConfig);
 
   beforeAll(async () => {
     server = await runSkuScriptInDir('start-ssr', appDir, [

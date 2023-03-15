@@ -449,6 +449,21 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       sku: link:../..
 
+  fixtures/translations:
+    specifiers:
+      '@types/express': ^4.17.11
+      '@vocab/react': ^1.0.1
+      react: ^17.0.1
+      react-dom: ^17.0.1
+      sku: workspace:*
+    dependencies:
+      '@vocab/react': 1.1.4_react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      sku: link:../..
+    devDependencies:
+      '@types/express': 4.17.17
+
   fixtures/typescript-css-modules:
     specifiers:
       dedent: ^0.7.0
@@ -477,6 +492,7 @@ importers:
       '@fixtures/sku-with-https': workspace:*
       '@fixtures/source-maps': workspace:*
       '@fixtures/ssr-hello-world': workspace:*
+      '@fixtures/translations': workspace:*
       '@fixtures/typescript-css-modules': workspace:*
       dedent: ^0.7.0
       fs-extra: ^10.0.0
@@ -500,6 +516,7 @@ importers:
       '@fixtures/sku-with-https': link:../fixtures/sku-with-https
       '@fixtures/source-maps': link:../fixtures/source-maps
       '@fixtures/ssr-hello-world': link:../fixtures/ssr-hello-world
+      '@fixtures/translations': link:../fixtures/translations
       '@fixtures/typescript-css-modules': link:../fixtures/typescript-css-modules
       dedent: 0.7.0
       fs-extra: 10.1.0
@@ -4853,7 +4870,6 @@ packages:
       '@vocab/types': 1.1.2
       intl-messageformat: 10.3.0
       react: 17.0.2
-    dev: true
 
   /@vocab/types/1.1.2:
     resolution: {integrity: sha512-yyPc5LW0L3JzJxpBq/Yq3SLLPmtDDmHVGbNs2GHjwZbk18N28NiPP+81b5hBksUTQVynnEAgHSRuDPNGOO74wQ==}

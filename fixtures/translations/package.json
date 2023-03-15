@@ -1,0 +1,13 @@
+{
+  "name": "@fixtures/translations",
+  "private": true,
+  "dependencies": {
+    "@vocab/react": "^1.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sku": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11"
+  }
+}

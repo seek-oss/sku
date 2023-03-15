@@ -1,7 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { VocabProvider } from '@vocab/react';
-import { loadableReady } from '../../../../../@loadable/component';
+import { loadableReady } from 'sku/@loadable/component';
 
 import App from './App';
 

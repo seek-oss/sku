@@ -1,10 +1,12 @@
-/* eslint-disable jest/expect-expect */
 const path = require('path');
-const runSkuScriptInDir = require('../../utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../../utils/appSnapshot');
-const waitForUrls = require('../../utils/waitForUrls');
-const appDir = path.resolve(__dirname, 'app');
-const { port } = require('./app/sku.config');
+const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const waitForUrls = require('../test/utils/waitForUrls');
+
+const appDir = path.dirname(
+  require.resolve('@fixtures/translations/sku.config.js'),
+);
+const { port } = require('@fixtures/translations/sku.config.js');
 
 const baseUrl = `http://localhost:${port}`;
 

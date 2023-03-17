@@ -130,13 +130,13 @@ describe('typescript-css-modules', () => {
   });
 
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8082';
+    const storybookUrl = 'http://localhost:8042';
     let server;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
       await waitForUrls(storybookUrl);
-    });
+    }, 200000);
 
     afterAll(async () => {
       await server.kill();

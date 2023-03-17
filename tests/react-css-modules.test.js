@@ -8,7 +8,6 @@ const { getStorybookContent } = require('../test/utils/getStorybookContent');
 const appDir = path.dirname(
   require.resolve('@fixtures/react-css-modules/sku.config.js'),
 );
-console.log({ appDir });
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
@@ -40,13 +39,13 @@ describe('react-css-modules', () => {
   });
 
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8084';
+    const storybookUrl = 'http://localhost:8048';
     let server;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
       await waitForUrls(storybookUrl);
-    });
+    }, 200000);
 
     afterAll(async () => {
       await server.kill();
@@ -64,11 +63,17 @@ describe('react-css-modules', () => {
 
   describe('build-storybook', () => {
     let closeStorybookServer;
+    const asserServerPort = 4297;
+    const assetServerUrl = `http://localhost:${asserServerPort}`;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-storybook', appDir);
-      closeStorybookServer = await startAssetServer(4297, storybookDistDir);
-    });
+      closeStorybookServer = await startAssetServer(
+        asserServerPort,
+        storybookDistDir,
+      );
+      await waitForUrls(assetServerUrl);
+    }, 200000);
 
     afterAll(() => {
       closeStorybookServer();
@@ -76,7 +81,7 @@ describe('react-css-modules', () => {
 
     it('should create valid storybook', async () => {
       const { text, fontSize } = await getStorybookContent(
-        'http://localhost:4297',
+        assetServerUrl,
         '[data-automation-text]',
       );
 

@@ -25,6 +25,17 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Cache Puppeteer
+        id: puppeteer-cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
+
+      - name: Install Puppeteer
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
+        run: node node_modules/puppeteer/install.js
+
       - name: Set up hosts
         # Couldn't get `sudo pnpm setup-test-hosts` to work
         run: sudo ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts

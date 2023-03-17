@@ -1,4 +1,5 @@
 /**/*.vocab/index.ts
+dist-ssr/
 
 # managed by sku
 **/*.vocab/index.ts

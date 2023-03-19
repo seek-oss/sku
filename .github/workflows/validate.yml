@@ -50,6 +50,4 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test
-        # Ubuntu runners only have 2 cores, but by default Jest keeps 1 core free, but this is not
-        # necessary on CI
         run: pnpm run test

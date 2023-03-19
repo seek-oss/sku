@@ -1,9 +1,6 @@
 {
   "name": "@fixtures/public-path",
   "private": true,
-  "exports": {
-    "./sku.config.js": "./sku.config.js"
-  },
   "dependencies": {
     "dedent": "^0.7.0",
     "react": "^17.0.1",

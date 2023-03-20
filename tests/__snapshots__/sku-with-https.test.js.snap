@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sku-with-https serve should start a development server 1`] = `
+SCRIPTS: [
+  "/runtime-a5c914bdf89f464ecb2e.js",
+  "/609-fe0c4cee557cf4fafc6a.js",
+  "/main-476ec96ceb26b39d68e9.js",
+]
+CSS: [
+  "/main-cb8848ae92e1e9d08128.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' https://some-cdn.com;"
+    >
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="eRNyDeb"
+           data-reactroot
+      >
+        <div class="MYunKdE">
+          Initial
+        </div>
+        <img src="/a85d2645cc4d80a20b5b.png">
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+            data-reactroot
+       >
+         <div class="MYunKdE">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+
+`;
+
+exports[`sku-with-https serve should support the supplied middleware 1`] = `
+"OK"
+POST HYDRATE DIFFS: 
+-OK
+\\ No newline at end of file
++<html>
++  <head>
++  </head>
++  <body>
++    OK
++  </body>
++</html>
+\\ No newline at end of file
+
+`;
+
+exports[`sku-with-https start should start a development server 1`] = `
+SCRIPTS: [
+  "/runtime.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-f2c6fe.js",
+  "/main.js",
+]
+CSS: [
+  "/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
+    >
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="__SKU__lessStyles__root___eRNyDeb"
+           data-reactroot
+      >
+        <div class="__SKU__lessStyles__nested___MYunKdE">
+          Initial
+        </div>
+        <img src="/a85d2645cc4d80a20b5b.png">
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+            data-reactroot
+       >
+         <div class="__SKU__lessStyles__nested___MYunKdE">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+
+`;
+
+exports[`sku-with-https start should support the supplied middleware 1`] = `
+"OK"
+POST HYDRATE DIFFS: 
+-OK
+\\ No newline at end of file
++<html>
++  <head>
++  </head>
++  <body>
++    OK
++  </body>
++</html>
+\\ No newline at end of file
+
+`;
+
+exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
+SCRIPTS: [
+  "https://127.0.0.1:9843/runtime.js",
+  "https://127.0.0.1:9843/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-3641d0.js",
+  "https://127.0.0.1:9843/main.js",
+]
+CSS: [
+  "https://127.0.0.1:9843/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"
+    >
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' https://127.0.0.1:9843 https://some-cdn.com 'unsafe-eval';"
+    >
+    <link data-chunk="main"
+          rel="stylesheet"
+          href="styles[0]"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[0]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[1]"
+          crossorigin="anonymous"
+    >
+    <link data-chunk="main"
+          rel="preload"
+          as="script"
+          href="scripts[2]"
+          crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="__SKU__lessStyles__root___eRNyDeb">
+        <div class="__SKU__lessStyles__nested___MYunKdE">
+          Initial
+        </div>
+        <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
+      </div>
+    </div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      []
+    </script>
+    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
+            type="application/json"
+            crossorigin="anonymous"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[0]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[1]"
+            crossorigin="anonymous"
+    >
+    </script>
+    <script async
+            data-chunk="main"
+            src="scripts[2]"
+            crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+     <div id="app">
+       <div class="__SKU__lessStyles__root___eRNyDeb">
+         <div class="__SKU__lessStyles__nested___MYunKdE">
+-          Initial
++          Client
+         </div>
+         <img src="https://127.0.0.1:9843/a85d2645cc4d80a20b5b.png">
+       </div>
+
+`;

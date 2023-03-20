@@ -1,9 +1,6 @@
 {
   "name": "@fixtures/braid-design-system",
   "private": true,
-  "exports": {
-    "./sku.config.js": "./sku.config.js"
-  },
   "dependencies": {
     "braid-design-system": "^31.0.0",
     "react": "^17.0.1",

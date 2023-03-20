@@ -1,0 +1,10 @@
+translations.ts
+
+# managed by sku
+**/*.vocab/index.ts
+*.less.d.ts
+coverage/
+dist-storybook/
+dist/
+report/
+# end managed by sku

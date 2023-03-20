@@ -1,0 +1,13 @@
+/**/*.vocab/index.ts
+dist-ssr/
+
+# managed by sku
+**/*.vocab/index.ts
+.eslintrc
+.prettierrc
+coverage/
+dist-storybook/
+dist/
+report/
+tsconfig.json
+# end managed by sku

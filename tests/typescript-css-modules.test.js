@@ -4,6 +4,7 @@ const waitForUrls = require('../test/utils/waitForUrls');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const startAssetServer = require('../test/utils/assetServer');
+const { getStorybookContent } = require('../test/utils/getStorybookContent');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const appDir = path.dirname(
   require.resolve('@fixtures/typescript-css-modules/sku.config'),
@@ -129,36 +130,26 @@ describe('typescript-css-modules', () => {
   });
 
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8082';
+    const storybookUrl = 'http://localhost:8042';
     let server;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
       await waitForUrls(storybookUrl);
-    });
+    }, 200000);
 
     afterAll(async () => {
       await server.kill();
     });
 
     it('should start a storybook server', async () => {
-      const page = await browser.newPage();
-      await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
+      const { text, fontSize } = await getStorybookContent(
+        storybookUrl,
+        '[data-automation-text]',
+      );
 
-      const content = await page.evaluate(() => {
-        const element = window.document
-          .querySelector('iframe')
-          .contentDocument.querySelector('[data-automation-text]');
-
-        const text = element.innerText;
-        const styles = window.getComputedStyle(element);
-        const fontSize = styles.getPropertyValue('font-size');
-
-        return { text, fontSize };
-      });
-
-      expect(content.text).toEqual('Hello World');
-      expect(content.fontSize).toEqual('32px');
+      expect(text).toEqual('Hello World');
+      expect(fontSize).toEqual('32px');
     });
   });
 });

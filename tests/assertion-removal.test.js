@@ -46,8 +46,8 @@ describe('assertion-removal', () => {
         cwd: distDir,
         stdio: 'inherit',
       });
-      closeAssetServer = await startAssetServer(4003, distDir);
-      await waitForUrls(backendUrl, 'http://localhost:4003');
+      closeAssetServer = await startAssetServer(4004, distDir);
+      await waitForUrls(backendUrl, 'http://localhost:4004');
     });
 
     afterAll(async () => {

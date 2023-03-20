@@ -1,4 +1,4 @@
-const ListExternalsWebpackPlugin = require('../../test/utils/ListExternalsWebpackPlugin');
+const { ListExternalsWebpackPlugin } = require('@sku-private/test-utils');
 
 module.exports = {
   port: 9843,

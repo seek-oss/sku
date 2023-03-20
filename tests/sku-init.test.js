@@ -2,7 +2,7 @@ const { promisify } = require('util');
 const path = require('path');
 const fs = require('fs');
 const rimraf = promisify(require('rimraf'));
-const spawnSkuScriptInDir = require('../test/utils/spawnSkuScriptInDir');
+const { spawnSkuScriptInDir } = require('@sku-private/test-utils');
 
 const fixtureDirectory = path.join(__dirname, '../fixtures/sku-init');
 

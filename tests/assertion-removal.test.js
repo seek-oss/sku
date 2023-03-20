@@ -1,7 +1,9 @@
 const path = require('path');
-const waitForUrls = require('../test/utils/waitForUrls');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const startAssetServer = require('../test/utils/assetServer');
+const {
+  waitForUrls,
+  runSkuScriptInDir,
+  startAssetServer,
+} = require('@sku-private/test-utils');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 
 const skuConfig = require('@sku-fixtures/assertion-removal/sku.config.js');

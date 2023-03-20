@@ -1,7 +1,9 @@
 const path = require('path');
 
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const {
+  runSkuScriptInDir,
+  dirContentsToObject,
+} = require('@sku-private/test-utils');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/source-maps/sku.config.js'),

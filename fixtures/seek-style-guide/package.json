@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/seek-style-guide",
+  "name": "@sku-fixtures/seek-style-guide",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

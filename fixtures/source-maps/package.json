@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/source-maps",
+  "name": "@sku-fixtures/source-maps",
   "private": true,
   "dependencies": {
     "react": "^17.0.1",

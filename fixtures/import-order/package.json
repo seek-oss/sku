@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/import-order",
+  "name": "@sku-fixtures/import-order",
   "private": true,
   "dependencies": {
     "sku": "workspace:*"

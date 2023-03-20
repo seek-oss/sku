@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/custom-src-paths",
+  "name": "@sku-fixtures/custom-src-paths",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

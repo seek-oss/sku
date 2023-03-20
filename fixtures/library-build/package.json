@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/library-build",
+  "name": "@sku-fixtures/library-build",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

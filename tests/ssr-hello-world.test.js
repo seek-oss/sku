@@ -7,11 +7,11 @@ const waitForUrls = require('../test/utils/waitForUrls');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const startAssetServer = require('../test/utils/assetServer');
 
-const skuBuildConfig = require('@fixtures/ssr-hello-world/sku-build.config.js');
-const skuStartConfig = require('@fixtures/ssr-hello-world/sku-start.config.js');
+const skuBuildConfig = require('@sku-fixtures/ssr-hello-world/sku-build.config.js');
+const skuStartConfig = require('@sku-fixtures/ssr-hello-world/sku-start.config.js');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/ssr-hello-world/sku-build.config.js'),
+  require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.js'),
 );
 
 const getTestConfig = (skuConfig) => ({

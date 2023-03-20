@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/react-css-modules",
+  "name": "@sku-fixtures/react-css-modules",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

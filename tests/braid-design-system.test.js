@@ -4,10 +4,10 @@ const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const waitForUrls = require('../test/utils/waitForUrls');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
-const skuConfig = require('@fixtures/braid-design-system/sku.config.js');
+const skuConfig = require('@sku-fixtures/braid-design-system/sku.config.js');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/braid-design-system/sku.config.js'),
+  require.resolve('@sku-fixtures/braid-design-system/sku.config.js'),
 );
 const distDir = path.resolve(appDir, 'dist');
 

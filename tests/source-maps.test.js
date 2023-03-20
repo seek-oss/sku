@@ -4,7 +4,7 @@ const dirContentsToObject = require('../test/utils/dirContentsToObject');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/source-maps/sku.config.js'),
+  require.resolve('@sku-fixtures/source-maps/sku.config.js'),
 );
 
 describe('source-maps', () => {

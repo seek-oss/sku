@@ -4,7 +4,7 @@ const waitForUrls = require('../test/utils/waitForUrls');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const appDir = path.dirname(
-  require.resolve('@fixtures/library-build/sku.config.js'),
+  require.resolve('@sku-fixtures/library-build/sku.config.js'),
 );
 const distDir = path.resolve(appDir, 'dist');
 

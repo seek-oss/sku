@@ -5,7 +5,7 @@ const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const waitForUrls = require('../test/utils/waitForUrls');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/seek-style-guide/sku.config.js'),
+  require.resolve('@sku-fixtures/seek-style-guide/sku.config.js'),
 );
 const distDir = path.resolve(appDir, 'dist');
 

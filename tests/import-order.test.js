@@ -4,7 +4,7 @@ const dedent = require('dedent');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 
 const appDirectory = path.dirname(
-  require.resolve('@fixtures/import-order/sku.config.js'),
+  require.resolve('@sku-fixtures/import-order/sku.config.js'),
 );
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);

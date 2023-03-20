@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/configure",
+  "name": "@sku-fixtures/configure",
   "private": true,
   "dependencies": {
     "react": "^17.0.1",

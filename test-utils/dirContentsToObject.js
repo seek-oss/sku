@@ -10,7 +10,7 @@ const ignoredFilePattern = new RegExp(
   'i',
 );
 
-module.exports = async (dirname, includeExtensions) => {
+const dirContentsToObject = async (dirname, includeExtensions) => {
   const files = {};
 
   const handleFile = (err, content, filePath, next) => {
@@ -37,3 +37,4 @@ module.exports = async (dirname, includeExtensions) => {
 
   return files;
 };
+module.exports = { dirContentsToObject };

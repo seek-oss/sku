@@ -1,7 +1,7 @@
 const { promisify } = require('util');
 const waitOnAsync = promisify(require('wait-on'));
 
-module.exports = async (...urls) => {
+const waitForUrls = async (...urls) => {
   const timeout = 200000;
 
   try {
@@ -22,3 +22,5 @@ module.exports = async (...urls) => {
     throw error;
   }
 };
+
+module.exports = { waitForUrls };

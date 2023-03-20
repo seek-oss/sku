@@ -1,9 +1,9 @@
-const gracefulSpawn = require('../../lib/gracefulSpawn');
+const gracefulSpawn = require('../lib/gracefulSpawn');
 const { exec } = require('child-process-promise');
 
-const skuBin = `${__dirname}/../../bin/sku.js`;
+const skuBin = `${__dirname}/../bin/sku.js`;
 
-module.exports = async (script, cwd, args = []) => {
+const runSkuScriptInDir = async (script, cwd, args = []) => {
   // When starting a dev server, return a hook to the running process
   if (/^(start|storybook|serve)/.test(script)) {
     return gracefulSpawn(skuBin, [script, ...args], { stdio: 'inherit', cwd });
@@ -34,3 +34,4 @@ module.exports = async (script, cwd, args = []) => {
     throw error;
   }
 };
+module.exports = { runSkuScriptInDir };

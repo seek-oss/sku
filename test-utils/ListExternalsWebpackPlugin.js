@@ -3,7 +3,7 @@ const uniq = require('lodash/uniq');
 
 const externalRegex = /^external node-commonjs "/;
 
-module.exports = class ListExternalsWebpackPlugin {
+class ListExternalsWebpackPlugin {
   constructor({ filename = 'externals.json' } = {}) {
     return new StatsWriterPlugin({
       filename,
@@ -21,4 +21,6 @@ module.exports = class ListExternalsWebpackPlugin {
       },
     });
   }
-};
+}
+
+module.exports = { ListExternalsWebpackPlugin };

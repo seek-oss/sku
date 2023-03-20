@@ -1,8 +1,8 @@
 const { spawn } = require('child-process-promise');
 
-const skuBin = `${__dirname}/../../bin/sku.js`;
+const skuBin = `${__dirname}/../bin/sku.js`;
 
-module.exports = (script, cwd, args = [], options = {}) => {
+const spawnSkuScriptInDir = (script, cwd, args = [], options = {}) => {
   const childPromise = spawn(skuBin, [script, ...args], {
     stdio: 'ignore',
     cwd,
@@ -19,3 +19,5 @@ module.exports = (script, cwd, args = [], options = {}) => {
 
   return childPromise;
 };
+
+module.exports = { spawnSkuScriptInDir };

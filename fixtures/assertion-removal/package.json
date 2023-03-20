@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/assertion-removal",
+  "name": "@sku-fixtures/assertion-removal",
   "private": true,
   "dependencies": {
     "react": "^17.0.1",

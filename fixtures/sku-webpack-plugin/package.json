@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/sku-webpack-plugin",
+  "name": "@sku-fixtures/sku-webpack-plugin",
   "private": true,
   "main": "./main.js",
   "dependencies": {

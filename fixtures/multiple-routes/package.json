@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/multiple-routes",
+  "name": "@sku-fixtures/multiple-routes",
   "private": true,
   "dependencies": {
     "@testing-library/react": "^11.2.3",

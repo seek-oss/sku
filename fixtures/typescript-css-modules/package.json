@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/typescript-css-modules",
+  "name": "@sku-fixtures/typescript-css-modules",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

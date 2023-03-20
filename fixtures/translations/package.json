@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/translations",
+  "name": "@sku-fixtures/translations",
   "private": true,
   "dependencies": {
     "@vocab/react": "^1.0.1",

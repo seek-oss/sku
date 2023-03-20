@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/sku-with-https",
+  "name": "@sku-fixtures/sku-with-https",
   "private": true,
   "dependencies": {
     "dedent": "^0.7.0",

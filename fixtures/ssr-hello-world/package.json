@@ -1,5 +1,5 @@
 {
-  "name": "@fixtures/ssr-hello-world",
+  "name": "@sku-fixtures/ssr-hello-world",
   "private": true,
   "dependencies": {
     "react": "^17.0.1",

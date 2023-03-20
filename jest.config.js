@@ -5,7 +5,6 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/scripts/test.js',
-    '<rootDir>/test/.*/src',
     '<rootDir>/fixtures/.*/src',
   ],
   watchPlugins: [

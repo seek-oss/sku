@@ -4,7 +4,7 @@ const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const waitForUrls = require('../test/utils/waitForUrls');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/public-path/sku.config.js'),
+  require.resolve('@sku-fixtures/public-path/sku.config.js'),
 );
 
 describe('public path', () => {

@@ -3,9 +3,9 @@ const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const waitForUrls = require('../test/utils/waitForUrls');
 
-const skuSsrConfig = require('@fixtures/translations/sku-ssr.config.js');
+const skuSsrConfig = require('@sku-fixtures/translations/sku-ssr.config.js');
 const appDir = path.dirname(
-  require.resolve('@fixtures/translations/sku-ssr.config.js'),
+  require.resolve('@sku-fixtures/translations/sku-ssr.config.js'),
 );
 
 const getTestConfig = (skuConfig) => ({

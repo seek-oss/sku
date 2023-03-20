@@ -4,9 +4,9 @@ const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const waitForUrls = require('../test/utils/waitForUrls');
 
 const appDir = path.dirname(
-  require.resolve('@fixtures/translations/sku.config.js'),
+  require.resolve('@sku-fixtures/translations/sku.config.js'),
 );
-const { port } = require('@fixtures/translations/sku.config.js');
+const { port } = require('@sku-fixtures/translations/sku.config.js');
 
 const baseUrl = `http://localhost:${port}`;
 

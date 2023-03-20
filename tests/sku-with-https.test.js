@@ -7,9 +7,9 @@ const waitForUrls = require('../test/utils/waitForUrls');
 const {
   port,
   serverPort,
-} = require('@fixtures/sku-with-https/sku-server.config.js');
+} = require('@sku-fixtures/sku-with-https/sku-server.config.js');
 const appDir = path.dirname(
-  require.resolve('@fixtures/sku-with-https/sku.config.js'),
+  require.resolve('@sku-fixtures/sku-with-https/sku.config.js'),
 );
 
 describe('sku-with-https', () => {

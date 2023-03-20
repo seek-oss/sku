@@ -7,12 +7,12 @@ const startAssetServer = require('../test/utils/assetServer');
 const { getStorybookContent } = require('../test/utils/getStorybookContent');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const appDir = path.dirname(
-  require.resolve('@fixtures/typescript-css-modules/sku.config'),
+  require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
 const srcDir = path.resolve(appDir, 'src');
-const ssrSkuConfig = require('@fixtures/typescript-css-modules/sku-ssr.config.js');
+const ssrSkuConfig = require('@sku-fixtures/typescript-css-modules/sku-ssr.config.js');
 
 const backendUrl = `http://localhost:${ssrSkuConfig.serverPort}`;
 const cssTypes = ['.less.d.ts'];

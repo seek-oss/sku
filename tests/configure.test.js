@@ -14,9 +14,9 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const coverageFolder = 'coverage';
-const skuConfig = require('@fixtures/configure/sku.config.js');
+const skuConfig = require('@sku-fixtures/configure/sku.config.js');
 const fixtureFolder = path.dirname(
-  require.resolve('@fixtures/configure/sku.config.js'),
+  require.resolve('@sku-fixtures/configure/sku.config.js'),
 );
 const appFolder = path.resolve(fixtureFolder, 'App');
 const appFolderTS = path.resolve(fixtureFolder, 'TSApp');

@@ -6,7 +6,7 @@ const startAssetServer = require('../test/utils/assetServer');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
 const { getStorybookContent } = require('../test/utils/getStorybookContent');
 const appDir = path.dirname(
-  require.resolve('@fixtures/react-css-modules/sku.config.js'),
+  require.resolve('@sku-fixtures/react-css-modules/sku.config.js'),
 );
 const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');

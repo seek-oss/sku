@@ -3,9 +3,9 @@ const dirContentsToObject = require('../test/utils/dirContentsToObject');
 const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
 const waitForUrls = require('../test/utils/waitForUrls');
 const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const skuConfig = require('@fixtures/custom-src-paths/sku.config.js');
+const skuConfig = require('@sku-fixtures/custom-src-paths/sku.config.js');
 const appDir = path.dirname(
-  require.resolve('@fixtures/custom-src-paths/sku.config.js'),
+  require.resolve('@sku-fixtures/custom-src-paths/sku.config.js'),
 );
 
 const targetDirectory = `${appDir}/dist`;

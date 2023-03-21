@@ -1,8 +1,10 @@
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const waitForUrls = require('../test/utils/waitForUrls');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const {
+  dirContentsToObject,
+  getAppSnapshot,
+  waitForUrls,
+  runSkuScriptInDir,
+} = require('@sku-private/test-utils');
 
 const skuConfig = require('@sku-fixtures/braid-design-system/sku.config.js');
 

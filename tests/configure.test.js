@@ -1,15 +1,13 @@
-const fs = require('fs');
+const { readFile, copyFile, mkdir: makeDir } = require('fs/promises');
 const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
-const copyFile = promisify(fs.copyFile);
-const makeDir = promisify(fs.mkdir);
 const rimraf = promisify(require('rimraf'));
 const path = require('path');
 const jsonc = require('jsonc-parser');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { runSkuScriptInDir } = require('@sku-private/test-utils');
 const {
   bundleReportFolder,
 } = require('../config/webpack/plugins/bundleAnalyzer');
+
 const prettierConfig = require('../config/prettier/prettierConfig');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';

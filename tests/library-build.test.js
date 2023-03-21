@@ -1,8 +1,11 @@
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const waitForUrls = require('../test/utils/waitForUrls');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
+const {
+  dirContentsToObject,
+  runSkuScriptInDir,
+  waitForUrls,
+  getAppSnapshot,
+} = require('@sku-private/test-utils');
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/library-build/sku.config.js'),
 );

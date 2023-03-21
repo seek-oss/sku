@@ -1,7 +1,9 @@
 const path = require('path');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const waitForUrls = require('../test/utils/waitForUrls');
+const {
+  runSkuScriptInDir,
+  waitForUrls,
+  getAppSnapshot,
+} = require('@sku-private/test-utils');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/public-path/sku.config.js'),

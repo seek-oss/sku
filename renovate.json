@@ -90,7 +90,6 @@
         "find-up",
         "get-port",
         "indent-string",
-        "inquirer",
         "open",
         "pretty-ms",
         "wrap-ansi"

@@ -1,8 +1,10 @@
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const waitForUrls = require('../test/utils/waitForUrls');
-const startAssetServer = require('../test/utils/assetServer');
+const {
+  dirContentsToObject,
+  getAppSnapshot,
+  waitForUrls,
+  startAssetServer,
+} = require('@sku-private/test-utils');
 const { runBin, startBin } = require('../lib/runBin');
 
 const appDir = path.dirname(

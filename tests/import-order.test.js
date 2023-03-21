@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const dedent = require('dedent');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
+const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
 const appDirectory = path.dirname(
   require.resolve('@sku-fixtures/import-order/sku.config.js'),

@@ -29,7 +29,7 @@
   },
   "overrides": [
     {
-      "files": ["test/**", "tests/**"],
+      "files": ["tests/**", "test-utils/**"],
       "env": {
         "jest": true
       },

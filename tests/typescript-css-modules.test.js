@@ -1,16 +1,18 @@
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const waitForUrls = require('../test/utils/waitForUrls');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const startAssetServer = require('../test/utils/assetServer');
-const { getStorybookContent } = require('../test/utils/getStorybookContent');
+const {
+  dirContentsToObject,
+  waitForUrls,
+  runSkuScriptInDir,
+  getAppSnapshot,
+  startAssetServer,
+  getStorybookContent,
+} = require('@sku-private/test-utils');
 const gracefulSpawn = require('../lib/gracefulSpawn');
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),
 );
 const distDir = path.resolve(appDir, 'dist');
-
 const srcDir = path.resolve(appDir, 'src');
 const ssrSkuConfig = require('@sku-fixtures/typescript-css-modules/sku-ssr.config.js');
 

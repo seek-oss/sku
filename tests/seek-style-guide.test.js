@@ -1,8 +1,10 @@
 /* eslint-disable jest/expect-expect */
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const waitForUrls = require('../test/utils/waitForUrls');
+const {
+  dirContentsToObject,
+  runSkuScriptInDir,
+  waitForUrls,
+} = require('@sku-private/test-utils');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/seek-style-guide/sku.config.js'),

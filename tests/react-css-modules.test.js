@@ -1,10 +1,13 @@
 const path = require('path');
-const dirContentsToObject = require('../test/utils/dirContentsToObject');
-const runSkuScriptInDir = require('../test/utils/runSkuScriptInDir');
-const waitForUrls = require('../test/utils/waitForUrls');
-const startAssetServer = require('../test/utils/assetServer');
-const { getAppSnapshot } = require('../test/utils/appSnapshot');
-const { getStorybookContent } = require('../test/utils/getStorybookContent');
+const {
+  dirContentsToObject,
+  runSkuScriptInDir,
+  waitForUrls,
+  startAssetServer,
+  getAppSnapshot,
+  getStorybookContent,
+} = require('@sku-private/test-utils');
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/react-css-modules/sku.config.js'),
 );

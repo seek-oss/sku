@@ -3,16 +3,9 @@ node_modules/
 package-lock.json
 .idea
 entry/render/startConfig.json
-dist-start/
+dist/
 dist-build/
+dist-ssr/
+dist-start/
 .eslintcache
 yarn.lock
-
-# managed by sku
-.prettierrc
-coverage/
-dist-storybook/
-dist/
-report/
-tsconfig.json
-# end managed by sku

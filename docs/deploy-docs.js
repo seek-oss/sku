@@ -1,8 +1,6 @@
-const path = require('path');
 const ghpages = require('gh-pages');
 
-const basePath = path.join(__dirname, './docs');
-const repoUrl = require('./package.json').repository.url;
+const repoUrl = require('../package.json').repository.url;
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const tokenRegex = GITHUB_TOKEN ? new RegExp(GITHUB_TOKEN, 'g') : null;
@@ -24,7 +22,7 @@ const makeConfig = function () {
   };
 };
 
-ghpages.publish(basePath, makeConfig(), function (err) {
+ghpages.publish('.', makeConfig(), function (err) {
   if (err) {
     log('Deployment error');
     log(JSON.stringify(err));

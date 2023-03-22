@@ -17,7 +17,8 @@
     "format": "prettier --write '**/*.{js,ts,tsx,md,less,css}'",
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "postinstall": "node ./scripts/postinstall.js",
-    "release": "node ./deploy-docs.js && changeset publish",
+    "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
+    "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
   },
   "packageManager": "pnpm@7.29.0",
@@ -166,8 +167,6 @@
   "devDependencies": {
     "@changesets/cli": "^2.13.0",
     "@changesets/get-github-info": "^0.4.5",
-    "@storybook/addon-controls": "^6.5.12",
-    "@testing-library/react": "^11.2.3",
     "@types/dedent": "^0.7.0",
     "@types/express": "^4.17.11",
     "@types/react": "^17.0.0",
@@ -177,7 +176,6 @@
     "assert": "^2.0.0",
     "braid-design-system": "^31.0.0",
     "css": "^3.0.0",
-    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^5.3.2",
     "husky": "^4.3.8",
     "jest-puppeteer": "^7.0.0",

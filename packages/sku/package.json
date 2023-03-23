@@ -150,8 +150,5 @@
     "react-router-dom": "^5.2.0",
     "seek-style-guide": "^42.0.0",
     "webpack-cli": "^5.0.0"
-  },
-  "volta": {
-    "node": "16.19.0"
   }
 }

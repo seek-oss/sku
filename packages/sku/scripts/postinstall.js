@@ -9,12 +9,10 @@ const debug = require('debug');
 // must be run first
 setCwd(process.env.INIT_CWD);
 
-const log = debug('sku:postinstall');
-
 const packageJson = getPathFromCwd('./package.json');
 const packageJsonExists = fs.existsSync(packageJson);
 
-log({ packageJson, packageJsonExists });
+const log = debug('sku:postinstall');
 
 // Don't run configure if CWD is not a project (e.g. npx)
 if (packageJsonExists) {

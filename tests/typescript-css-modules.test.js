@@ -7,7 +7,7 @@ const {
   startAssetServer,
   getStorybookContent,
 } = require('@sku-private/test-utils');
-const gracefulSpawn = require('../lib/gracefulSpawn');
+const gracefulSpawn = require('sku/lib/gracefulSpawn');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),

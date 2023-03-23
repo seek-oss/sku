@@ -3,3 +3,4 @@ packages:
   - 'fixtures/*'
   - 'tests'
   - 'test-utils'
+  - 'packages/*'

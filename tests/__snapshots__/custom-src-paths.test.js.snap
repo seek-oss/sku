@@ -3,8 +3,8 @@
 exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: [
   "/some-static-place/runtime-df7fc58286eea709736e.js",
-  "/some-static-place/518-f7884cecb59259337178.js",
-  "/some-static-place/main-0fd1e6e9042e891e76fa.js",
+  "/some-static-place/445-7b995763629a6b26fa0e.js",
+  "/some-static-place/main-0be8584a8e54b6508e34.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -71,11 +71,11 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`custom-src-paths build should generate the expected files 1`] = `
 {
-  "518-f7884cecb59259337178.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "445-7b995763629a6b26fa0e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/some-static-place/runtime-df7fc58286eea709736e.js",
-    "/some-static-place/518-f7884cecb59259337178.js",
-    "/some-static-place/main-0fd1e6e9042e891e76fa.js",
+    "/some-static-place/445-7b995763629a6b26fa0e.js",
+    "/some-static-place/main-0be8584a8e54b6508e34.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -137,7 +137,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-0fd1e6e9042e891e76fa.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-0be8584a8e54b6508e34.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-df7fc58286eea709736e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

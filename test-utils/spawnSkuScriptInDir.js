@@ -1,6 +1,6 @@
 const { spawn } = require('child-process-promise');
 
-const skuBin = `${__dirname}/../bin/sku.js`;
+const skuBin = `${__dirname}/../packages/sku/bin/sku.js`;
 
 const spawnSkuScriptInDir = (script, cwd, args = [], options = {}) => {
   const childPromise = spawn(skuBin, [script, ...args], {

@@ -4,7 +4,7 @@ const {
   runSkuScriptInDir,
   startAssetServer,
 } = require('@sku-private/test-utils');
-const gracefulSpawn = require('../lib/gracefulSpawn');
+const gracefulSpawn = require('sku/lib/gracefulSpawn');
 
 const skuConfig = require('@sku-fixtures/assertion-removal/sku.config.js');
 const appDir = path.dirname(

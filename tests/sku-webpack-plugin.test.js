@@ -5,7 +5,7 @@ const {
   waitForUrls,
   startAssetServer,
 } = require('@sku-private/test-utils');
-const { runBin, startBin } = require('sku/lib/runBin');
+const { runBin, startBin } = require('../packages/sku/lib/runBin');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-webpack-plugin/package.json'),

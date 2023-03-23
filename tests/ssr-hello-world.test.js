@@ -7,7 +7,7 @@ const {
   getAppSnapshot,
   startAssetServer,
 } = require('@sku-private/test-utils');
-const gracefulSpawn = require('sku/lib/gracefulSpawn');
+const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
 
 const skuBuildConfig = require('@sku-fixtures/ssr-hello-world/sku-build.config.js');
 const skuStartConfig = require('@sku-fixtures/ssr-hello-world/sku-start.config.js');

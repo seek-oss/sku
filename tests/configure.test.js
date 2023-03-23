@@ -6,9 +6,9 @@ const jsonc = require('jsonc-parser');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 const {
   bundleReportFolder,
-} = require('sku/config/webpack/plugins/bundleAnalyzer');
+} = require('../packages/sku/config/webpack/plugins/bundleAnalyzer');
 
-const prettierConfig = require('sku/config/prettier/prettierConfig');
+const prettierConfig = require('../packages/sku/config/prettier/prettierConfig');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const coverageFolder = 'coverage';
@@ -69,6 +69,7 @@ describe('configure', () => {
       const eslintrc = await readJsonC(appFolder, '.eslintrc');
       expect(eslintrc.extends).toEqual(
         require.resolve('eslint-config-seek', {
+          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
           paths: [skuPackagePath],
         }),
       );
@@ -120,6 +121,7 @@ describe('configure', () => {
       const eslintrc = await readJsonC(appFolderTS, '.eslintrc');
       expect(eslintrc.extends).toEqual(
         require.resolve('eslint-config-seek', {
+          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
           paths: [skuPackagePath],
         }),
       );

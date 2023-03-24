@@ -4,5 +4,6 @@
   "commit": false,
   "linked": [],
   "access": "public",
+  "ignore": ["@sku-fixtures/*", "@sku-private/*"],
   "baseBranch": "master"
 }

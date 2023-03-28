@@ -17,6 +17,7 @@
     "@sku-fixtures/custom-src-paths": "workspace:*",
     "@sku-fixtures/import-order": "workspace:*",
     "@sku-fixtures/library-build": "workspace:*",
+    "@sku-fixtures/library-file": "workspace:*",
     "@sku-fixtures/multiple-routes": "workspace:*",
     "@sku-fixtures/public-path": "workspace:*",
     "@sku-fixtures/react-css-modules": "workspace:*",

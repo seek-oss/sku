@@ -12,6 +12,18 @@ modules.exports = {
 };
 ```
 
+By default the file name of the library will be based on the `libraryName` option. A distinct library file name may be specified by providing a `libraryFile` option:
+
+```js
+modules.exports = {
+  // …
+  libraryName: 'MyAwesomeLibrary',
+  libraryFile: 'my-awesome-library',
+};
+```
+
+Note that `libraryFile` should _not_ include a `.js` extension as this will be added to the library file name automatically.
+
 Your `library` entry must export its public API via a default export:
 
 ```js

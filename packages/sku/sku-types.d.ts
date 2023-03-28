@@ -7,6 +7,7 @@ interface SharedRenderProps {
   site: string;
   language: string;
   libraryName: string;
+  libraryFile: string;
   // Webpack use an any here. PR for better type welcome.
   webpackStats: any;
 }
@@ -211,6 +212,18 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=libraryname
    */
   libraryName?: string;
+
+  /**
+   * **Only for libraries**
+   *
+   * The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
+   * `.js` extension will be added automatically and should not be included in the configuration option itself.
+   *
+   * If `libraryFile` is not specified then `libraryName` will be used instead.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=libraryfile
+   */
+  libraryFile?: string;
 
   /**
    * Enables linting of import order. This rule supports auto-fix.

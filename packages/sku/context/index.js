@@ -169,6 +169,7 @@ module.exports = {
     server: skuConfig.serverPort,
   },
   libraryName: skuConfig.libraryName,
+  libraryFile: skuConfig.libraryFile,
   isLibrary: Boolean(skuConfig.libraryEntry),
   storybookPort: skuConfig.storybookPort,
   storybookTarget: skuConfig.storybookTarget,

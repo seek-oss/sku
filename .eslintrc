@@ -55,6 +55,7 @@
     "__SKU_DEV_HTTPS__": true,
     "__SKU_DEV_MIDDLEWARE_ENABLED__": true,
     "__SKU_DEV_MIDDLEWARE_PATH__": true,
-    "SKU_LIBRARY_NAME": true
+    "SKU_LIBRARY_NAME": true,
+    "SKU_LIBRARY_FILE": true
   }
 }

@@ -8,6 +8,7 @@ import createCSPHandler from '../csp';
 import render from '__sku_alias__renderEntry';
 
 const libraryName = SKU_LIBRARY_NAME;
+const libraryFile = SKU_LIBRARY_FILE;
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;
 
@@ -18,7 +19,7 @@ export const serializeConfig = (config) =>
   )}</script>`;
 
 export default async (renderParams) => {
-  const renderContext = { ...renderParams, libraryName };
+  const renderContext = { ...renderParams, libraryName, libraryFile };
 
   let app;
   let clientContext = {};

@@ -33,6 +33,7 @@ const {
   polyfills,
   isLibrary,
   libraryName,
+  libraryFile,
   supportedBrowsers,
   displayNamesProd,
   cspEnabled,
@@ -99,7 +100,7 @@ const makeWebpackConfig = ({
     // Libraries should always have the same file name
     // for the main chunk unless we're building for storybook
     if (isLibrary && isMainChunk) {
-      return libraryName;
+      return libraryFile ?? libraryName;
     }
 
     // The client file mask is set to just name in start/dev mode as contenthash
@@ -315,6 +316,7 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
           SKU_LIBRARY_NAME: JSON.stringify(libraryName),
+          SKU_LIBRARY_FILE: JSON.stringify(libraryFile),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,

@@ -4,7 +4,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.js'],
   testPathIgnorePatterns: [
     '/node_modules/',
-    '<rootDir>/scripts/test.js',
+    '<rootDir>/packages/sku/scripts/test.js',
     '<rootDir>/fixtures/.*/src',
   ],
   watchPlugins: [

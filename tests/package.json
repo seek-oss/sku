@@ -35,6 +35,5 @@
     "webpack": "^5.52.0",
     "webpack-dev-server": "4.11.1",
     "webpack-cli": "^5.0.0"
-  },
-  "skuSkipPostInstall": true
+  }
 }

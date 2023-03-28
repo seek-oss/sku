@@ -1,7 +1,7 @@
-const gracefulSpawn = require('../lib/gracefulSpawn');
+const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
 const { exec } = require('child-process-promise');
 
-const skuBin = `${__dirname}/../bin/sku.js`;
+const skuBin = `${__dirname}/../packages/sku/bin/sku.js`;
 
 const runSkuScriptInDir = async (script, cwd, args = []) => {
   // When starting a dev server, return a hook to the running process

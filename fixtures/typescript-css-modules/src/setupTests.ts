@@ -1,1 +1,1 @@
-Object.defineProperty(global, 'SETUP_TESTS_SCRIPT_RAN', { value: true });
+Object.defineProperty(globalThis, 'SETUP_TESTS_SCRIPT_RAN', { value: true });

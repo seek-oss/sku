@@ -6,9 +6,9 @@ const jsonc = require('jsonc-parser');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 const {
   bundleReportFolder,
-} = require('../config/webpack/plugins/bundleAnalyzer');
+} = require('../packages/sku/config/webpack/plugins/bundleAnalyzer');
 
-const prettierConfig = require('../config/prettier/prettierConfig');
+const prettierConfig = require('../packages/sku/config/prettier/prettierConfig');
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const coverageFolder = 'coverage';
@@ -46,6 +46,8 @@ const removeAppDir = async (folder) =>
     },
   });
 
+const skuPackagePath = path.dirname(require.resolve('sku/package.json'));
+
 describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
@@ -65,7 +67,12 @@ describe('configure', () => {
 
     it('should generate a eslint config', async () => {
       const eslintrc = await readJsonC(appFolder, '.eslintrc');
-      expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
+      expect(eslintrc.extends).toEqual(
+        require.resolve('eslint-config-seek', {
+          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
+          paths: [skuPackagePath],
+        }),
+      );
     });
 
     it(`should generate \`.gitignore\``, async () => {
@@ -112,7 +119,12 @@ describe('configure', () => {
 
     it('should generate a custom eslint config', async () => {
       const eslintrc = await readJsonC(appFolderTS, '.eslintrc');
-      expect(eslintrc.extends).toEqual(require.resolve('eslint-config-seek'));
+      expect(eslintrc.extends).toEqual(
+        require.resolve('eslint-config-seek', {
+          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
+          paths: [skuPackagePath],
+        }),
+      );
       expect(eslintrc.rules['no-console']).toEqual(0);
     });
 

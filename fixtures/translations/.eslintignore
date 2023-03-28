@@ -1,5 +1,3 @@
-translations.ts
-
 # managed by sku
 **/*.vocab/index.ts
 *.less.d.ts

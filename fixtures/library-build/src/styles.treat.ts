@@ -1,4 +1,3 @@
-// @ts-ignore
 import { style } from 'sku/treat';
 
 export const customBox = style({

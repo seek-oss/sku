@@ -315,8 +315,8 @@ const makeWebpackConfig = ({
         ...(htmlRenderPlugin ? [htmlRenderPlugin.rendererPlugin] : []),
         new webpack.DefinePlugin(envVars),
         new webpack.DefinePlugin({
-          SKU_LIBRARY_NAME: JSON.stringify(libraryName),
-          SKU_LIBRARY_FILE: JSON.stringify(libraryFile),
+          __SKU_LIBRARY_NAME__: JSON.stringify(libraryName),
+          __SKU_LIBRARY_FILE__: JSON.stringify(libraryFile),
           __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,

@@ -7,8 +7,8 @@ import createCSPHandler from '../csp';
 
 import render from '__sku_alias__renderEntry';
 
-const libraryName = SKU_LIBRARY_NAME;
-const libraryFile = SKU_LIBRARY_FILE;
+const libraryName = __SKU_LIBRARY_NAME__;
+const libraryFile = __SKU_LIBRARY_FILE__;
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;
 

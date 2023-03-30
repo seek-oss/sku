@@ -231,6 +231,17 @@ type `string`
 
 The global name of the library. Will be added to the `window` object under `window[libraryName]`.
 
+## libraryFile
+
+type `string`
+
+**Only for libraries**
+
+The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
+`.js` extension will be added automatically and should not be included in the configuration option itself.
+
+If `libraryFile` is not specified then `libraryName` will be used instead.
+
 ## persistentCache
 
 type `boolean`

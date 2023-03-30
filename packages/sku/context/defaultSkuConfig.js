@@ -30,6 +30,7 @@ module.exports = {
   publicPath: '/',
   polyfills: [],
   libraryName: null,
+  libraryFile: null,
   sourceMapsProd: false,
   displayNamesProd: false,
   dangerouslySetWebpackConfig: defaultDecorator,

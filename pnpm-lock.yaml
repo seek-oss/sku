@@ -114,6 +114,14 @@ importers:
       dedent: 0.7.0
       sku: link:../../packages/sku
 
+  fixtures/library-file:
+    specifiers:
+      dedent: ^0.7.0
+      sku: workspace:*
+    dependencies:
+      dedent: 0.7.0
+      sku: link:../../packages/sku
+
   fixtures/multiple-routes:
     specifiers:
       '@testing-library/react': ^11.2.3
@@ -541,6 +549,7 @@ importers:
       '@sku-fixtures/custom-src-paths': workspace:*
       '@sku-fixtures/import-order': workspace:*
       '@sku-fixtures/library-build': workspace:*
+      '@sku-fixtures/library-file': workspace:*
       '@sku-fixtures/multiple-routes': workspace:*
       '@sku-fixtures/public-path': workspace:*
       '@sku-fixtures/react-css-modules': workspace:*
@@ -566,6 +575,7 @@ importers:
       '@sku-fixtures/custom-src-paths': link:../fixtures/custom-src-paths
       '@sku-fixtures/import-order': link:../fixtures/import-order
       '@sku-fixtures/library-build': link:../fixtures/library-build
+      '@sku-fixtures/library-file': link:../fixtures/library-file
       '@sku-fixtures/multiple-routes': link:../fixtures/multiple-routes
       '@sku-fixtures/public-path': link:../fixtures/public-path
       '@sku-fixtures/react-css-modules': link:../fixtures/react-css-modules

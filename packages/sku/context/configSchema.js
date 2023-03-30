@@ -149,6 +149,10 @@ module.exports = validator.compile({
     type: 'string',
     optional: true,
   },
+  libraryFile: {
+    type: 'string',
+    optional: true,
+  },
   dangerouslySetWebpackConfig: {
     type: 'function',
   },

@@ -4,10 +4,8 @@
 
 Add `libraryFile` configuration option
 
-This option allows the file name of the library to be specified in the sku
-configuration. If this option is not specified then the `libraryName` option
-will be used for this purpose instead (note that this is the previously
-existing behaviour).
+This option allows the file name of the library to be specified in the sku configuration.
+If this option is not specified then the `libraryName` option will be used for this purpose instead (note that this is the previously existing behaviour).
 
 **EXAMPLE USAGE**:
 

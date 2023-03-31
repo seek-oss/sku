@@ -1,5 +1,11 @@
 # sku
 
+## 11.8.1
+
+### Patch Changes
+
+- Re-add `@types/jest` as a dependency ([#757](https://github.com/seek-oss/sku/pull/757))
+
 ## 11.8.0
 
 ### Minor Changes

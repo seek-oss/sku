@@ -44,6 +44,7 @@
     "@storybook/builder-webpack5": "^6.5.12",
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
+    "@types/jest": "^29.0.0",
     "@types/loadable__component": "^5.13.1",
     "@vanilla-extract/jest-transform": "^1.1.0",
     "@vanilla-extract/webpack-plugin": "^2.2.0",

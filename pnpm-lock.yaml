@@ -290,6 +290,7 @@ importers:
       '@storybook/react': ^6.5.12
       '@types/dedent': ^0.7.0
       '@types/express': ^4.17.11
+      '@types/jest': ^29.0.0
       '@types/loadable__component': ^5.13.1
       '@types/react': ^17.0.0
       '@types/react-dom': ^17.0.0
@@ -409,6 +410,7 @@ importers:
       '@storybook/builder-webpack5': 6.5.16_hn4c7uq7dq4rbgnhb3wquw623i
       '@storybook/manager-webpack5': 6.5.16_hn4c7uq7dq4rbgnhb3wquw623i
       '@storybook/react': 6.5.16_5niy7ffxof2ns3pdfb2d2ncfaa
+      '@types/jest': 29.4.0
       '@types/loadable__component': 5.13.4
       '@vanilla-extract/jest-transform': 1.1.0
       '@vanilla-extract/webpack-plugin': 2.2.0_webpack@5.75.0
@@ -4597,7 +4599,6 @@ packages:
     dependencies:
       expect: 29.4.3
       pretty-format: 29.4.3
-    dev: true
 
   /@types/jsdom/20.0.1:
     resolution: {integrity: sha512-d0r18sZPmMQr1eG35u12FZfhIXNrnsPU/g5wvRKCUf/tOGilKKwYMYGqh33BNR6ba+2gkHw1EUiHoN3mn7E5IQ==}
@@ -6020,7 +6021,7 @@ packages:
       loader-utils: 2.0.4
       make-dir: 3.1.0
       schema-utils: 2.7.1
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@5.0.1
     dev: false
 
   /babel-plugin-add-react-displayname/0.0.5:
@@ -16821,7 +16822,7 @@ packages:
       serialize-javascript: 4.0.0
       source-map: 0.6.1
       terser: 4.8.1
-      webpack: 4.46.0
+      webpack: 4.46.0_webpack-cli@5.0.1
       webpack-sources: 1.4.3
       worker-farm: 1.7.0
     dev: false

@@ -11,7 +11,7 @@ const waitForUrls = async (...urls) => {
           .replace(/http(s?)\:/, 'http$1-get:')
           // As of node 17, ipv6 is preferred, so explicitly use ipv4
           // See https://github.com/jeffbski/wait-on/issues/133
-          .replace(/localhost/, '127.0.0.1'),
+          .replace(/localhost/, '0.0.0.0'),
       ),
       headers: { accept: 'text/html, application/javascript' },
       timeout,

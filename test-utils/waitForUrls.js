@@ -6,7 +6,13 @@ const waitForUrls = async (...urls) => {
 
   try {
     return await waitOnAsync({
-      resources: urls.map((url) => url.replace(/http(s?)\:/, 'http$1-get:')),
+      resources: urls.map((url) =>
+        url
+          .replace(/http(s?)\:/, 'http$1-get:')
+          // As of node 17, ipv6 is preferred, so explicitly use ipv4
+          // See https://github.com/jeffbski/wait-on/issues/133
+          .replace(/localhost/, '127.0.0.1'),
+      ),
       headers: { accept: 'text/html, application/javascript' },
       timeout,
       // Log output of wait behaviour timing to allow

@@ -90,6 +90,7 @@
         "find-up",
         "get-port",
         "indent-string",
+        "lint-staged",
         "open",
         "pretty-ms",
         "wrap-ansi"

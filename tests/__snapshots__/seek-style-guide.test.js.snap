@@ -2,7 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 {
-  "952-0c5b90e8382df37333ab.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "346-e4715c530b7bd40ad6fe.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -15,8 +15,8 @@ exports[`seek-style-guide should generate the expected files 1`] = `
 ]",
   "index.html": SCRIPTS: [
     "/runtime-809e1ad97457d5b9bab0.js",
-    "/952-0c5b90e8382df37333ab.js",
-    "/main-f13073d7508cec33814b.js",
+    "/346-e4715c530b7bd40ad6fe.js",
+    "/main-80a7589cd05852dcbb63.js",
   ]
 CSS: [
     "/main-9f810ad2db5899b4e432.css",
@@ -113,6 +113,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
+  "main-80a7589cd05852dcbb63.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-9f810ad2db5899b4e432.css": a,
 abbr,
 acronym,
@@ -665,7 +666,6 @@ html {
   }
 }
 ,
-  "main-f13073d7508cec33814b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-809e1ad97457d5b9bab0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

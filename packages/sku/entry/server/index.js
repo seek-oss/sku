@@ -24,13 +24,6 @@ const startCallback = () => {
   }
 };
 
-if (__SKU_DEV_MIDDLEWARE_ENABLED__) {
-  const devServerMiddleware = require(__SKU_DEV_MIDDLEWARE_PATH__);
-  if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-    devServerMiddleware(app);
-  }
-}
-
 let server;
 
 if (__SKU_DEV_HTTPS__) {

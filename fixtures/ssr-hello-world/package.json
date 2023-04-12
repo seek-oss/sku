@@ -2,6 +2,7 @@
   "name": "@sku-fixtures/ssr-hello-world",
   "private": true,
   "dependencies": {
+    "express": "^4.16.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sku": "workspace:*"

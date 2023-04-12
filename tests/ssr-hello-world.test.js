@@ -41,6 +41,20 @@ describe('ssr-hello-world', () => {
       const snapshot = await getAppSnapshot(backendUrl);
       expect(snapshot).toMatchSnapshot();
     });
+
+    it('should respond to dev middleware route request', async () => {
+      const { sourceHtml } = await getAppSnapshot(
+        `${backendUrl}/test-middleware`,
+      );
+      expect(sourceHtml).toBe('OK');
+    });
+
+    it('should respond to dev middleware static asset request', async () => {
+      const { sourceHtml } = await getAppSnapshot(
+        `${backendUrl}/assets/logo.png`,
+      );
+      expect(sourceHtml).toMatch(/^�PNG/);
+    });
   });
 
   describe('build', () => {

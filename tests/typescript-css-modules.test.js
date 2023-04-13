@@ -1,4 +1,6 @@
 const path = require('path');
+const { promisify } = require('util');
+const rimraf = promisify(require('rimraf'));
 const {
   dirContentsToObject,
   waitForUrls,
@@ -13,6 +15,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),
 );
 const distDir = path.resolve(appDir, 'dist');
+const distSsrDir = path.resolve(appDir, 'dist-ssr');
 const srcDir = path.resolve(appDir, 'src');
 const ssrSkuConfig = require('@sku-fixtures/typescript-css-modules/sku-ssr.config.js');
 
@@ -32,6 +35,8 @@ describe('typescript-css-modules', () => {
 
     afterAll(async () => {
       await process.kill();
+      // Clean up dist dir to prevent pollution of linted files in lint test
+      await rimraf(distDir);
     });
 
     it('should create valid app', async () => {
@@ -57,16 +62,18 @@ describe('typescript-css-modules', () => {
         '--config=sku-ssr.config.js',
       ]);
       server = gracefulSpawn('node', ['server'], {
-        cwd: distDir,
+        cwd: distSsrDir,
         stdio: 'inherit',
       });
-      closeAssetServer = await startAssetServer(4003, distDir);
+      closeAssetServer = await startAssetServer(4003, distSsrDir);
       await waitForUrls(backendUrl, 'http://localhost:4003');
     });
 
     afterAll(async () => {
       await server.kill();
       closeAssetServer();
+      // Clean up dist-ssr dir to prevent pollution of linted files in lint test
+      await rimraf(distSsrDir);
     });
 
     it('should create valid app', async () => {
@@ -75,7 +82,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distDir, ['.js', '.css']);
+      const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
       const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
       expect({
         ...files,

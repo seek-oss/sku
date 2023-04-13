@@ -3,6 +3,7 @@ module.exports = {
   port: 8100,
   serverPort: 8101,
   target: 'dist-start',
+  devServerMiddleware: './dev-middleware.js',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
 };

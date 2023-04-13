@@ -18,6 +18,17 @@ const app = express();
 const env = process.env.NODE_ENV || 'development';
 
 if (env === 'development') {
+  if (__SKU_DEV_MIDDLEWARE_ENABLED__) {
+    const devServerMiddleware = require(__SKU_DEV_MIDDLEWARE_PATH__);
+    if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+      // Allow specific static files to be handled earlier via middleware.
+      // E.g. web fonts, etc.
+      devServerMiddleware(app);
+    }
+  }
+
+  // Fallthrough to serve any static file requests from root
+  // E.g. compiled output files and images
   app.use(express.static(path.join(__dirname, './')));
 }
 

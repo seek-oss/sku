@@ -1,4 +1,6 @@
 const path = require('path');
+const { promisify } = require('util');
+const rimraf = promisify(require('rimraf'));
 const {
   dirContentsToObject,
   waitForUrls,
@@ -33,6 +35,8 @@ describe('typescript-css-modules', () => {
 
     afterAll(async () => {
       await process.kill();
+      // Clean up dist dir to prevent pollution of linted files in lint test
+      await rimraf(distDir);
     });
 
     it('should create valid app', async () => {
@@ -68,6 +72,8 @@ describe('typescript-css-modules', () => {
     afterAll(async () => {
       await server.kill();
       closeAssetServer();
+      // Clean up dist-ssr dir to prevent pollution of linted files in lint test
+      await rimraf(distSsrDir);
     });
 
     it('should create valid app', async () => {

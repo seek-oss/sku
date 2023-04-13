@@ -2,8 +2,7 @@
 process.env.NODE_ENV = 'production';
 
 const path = require('path');
-const { promisify } = require('util');
-const rimraf = promisify(require('rimraf'));
+const { rimraf } = require('rimraf');
 const { argv } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');

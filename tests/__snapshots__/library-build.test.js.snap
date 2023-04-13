@@ -32,12 +32,14 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link rel="stylesheet"
-          type="text/css"
-          href="styles[0]"
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="styles[0]"
     >
   </head>
   <body>

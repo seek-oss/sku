@@ -1,6 +1,5 @@
 const path = require('path');
-const { promisify } = require('util');
-const rimraf = promisify(require('rimraf'));
+const { rimraf } = require('rimraf');
 const {
   dirContentsToObject,
   waitForUrls,

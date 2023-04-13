@@ -8,15 +8,18 @@ exports[`sku-webpack-plugin build should create valid app 1`] = `
     <title>
       Webpack App
     </title>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
     >
-    <script defer="defer"
-            src="main.js"
+    <script
+      defer="defer"
+      src="main.js"
     >
     </script>
-    <link href="main.css"
-          rel="stylesheet"
+    <link
+      href="main.css"
+      rel="stylesheet"
     >
   </head>
   <body>
@@ -28,7 +31,7 @@ POST HYDRATE DIFFS:
  <html>
    <head>
      <meta charset="utf-8">
-@@ -17,5 +17,18 @@
+@@ -20,5 +20,18 @@
      >
    </head>
    <body>
@@ -2390,15 +2393,18 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       Webpack App
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <script defer
-            src="scripts[0]"
+    <script
+      defer
+      src="scripts[0]"
     >
     </script>
-    <link href="styles[0]"
-          rel="stylesheet"
+    <link
+      href="styles[0]"
+      rel="stylesheet"
     >
   </head>
   <body>

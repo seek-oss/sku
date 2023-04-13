@@ -17,33 +17,39 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' http://localhost:4000 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' http://localhost:4000 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -60,34 +66,39 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
   </body>
@@ -112,33 +123,39 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' http://localhost:4000 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' http://localhost:4000 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -155,34 +172,39 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
   </body>
@@ -207,33 +229,39 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' http://127.0.0.1:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' http://127.0.0.1:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -250,34 +278,39 @@ SOURCE HTML: <!DOCTYPE html>
     <script>
       console.log('Hi');
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
   </body>

@@ -13,6 +13,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),
 );
 const distDir = path.resolve(appDir, 'dist');
+const distSsrDir = path.resolve(appDir, 'dist-ssr');
 const srcDir = path.resolve(appDir, 'src');
 const ssrSkuConfig = require('@sku-fixtures/typescript-css-modules/sku-ssr.config.js');
 
@@ -57,10 +58,10 @@ describe('typescript-css-modules', () => {
         '--config=sku-ssr.config.js',
       ]);
       server = gracefulSpawn('node', ['server'], {
-        cwd: distDir,
+        cwd: distSsrDir,
         stdio: 'inherit',
       });
-      closeAssetServer = await startAssetServer(4003, distDir);
+      closeAssetServer = await startAssetServer(4003, distSsrDir);
       await waitForUrls(backendUrl, 'http://localhost:4003');
     });
 
@@ -75,7 +76,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distDir, ['.js', '.css']);
+      const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
       const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
       expect({
         ...files,

@@ -5,4 +5,5 @@ module.exports = {
   serverPort: 8010,
   // Required for test to serve client assets correctly
   publicPath: 'http://localhost:4003/',
+  target: 'dist-ssr',
 };

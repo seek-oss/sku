@@ -5,4 +5,5 @@ export default {
   storybookPort: 8042,
   publicPath: '/static/typescript',
   setupTests: 'src/setupTests.ts',
+  target: 'dist',
 };

@@ -1,5 +1,13 @@
 # sku
 
+## 11.8.2
+
+### Patch Changes
+
+- start-ssr: Enable `devServerMiddleware` to serve static assets ([#765](https://github.com/seek-oss/sku/pull/765))
+
+  Apply `devServerMiddleware` before sku static asset middleware, to support consumers serving custom static assets.
+
 ## 11.8.1
 
 ### Patch Changes

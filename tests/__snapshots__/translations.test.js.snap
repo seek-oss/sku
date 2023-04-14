@@ -15,28 +15,33 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
-    <link data-chunk="en-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
     >
   </head>
   <body>
@@ -45,39 +50,46 @@ SOURCE HTML: <!DOCTYPE html>
         Hello sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
     >
       {"language":"en"}
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       [938]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":["en-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
-    <script async
-            data-chunk="en-translations"
-            src="scripts[3]"
+    <script
+      async
+      data-chunk="en-translations"
+      src="scripts[3]"
     >
     </script>
   </body>
@@ -100,28 +112,33 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
-    <link data-chunk="en-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
     >
   </head>
   <body>
@@ -130,39 +147,46 @@ SOURCE HTML: <!DOCTYPE html>
         Hello sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
     >
       {"language":"en"}
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       [938]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":["en-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
-    <script async
-            data-chunk="en-translations"
-            src="scripts[3]"
+    <script
+      async
+      data-chunk="en-translations"
+      src="scripts[3]"
     >
     </script>
   </body>
@@ -175,7 +199,7 @@ POST HYDRATE DIFFS:
 +        [Ḩẽẽẽƚƚööö šķǚǚǚ]
        </div>
      </div>
-     <script id="__SKU_CLIENT_CONTEXT__"
+     <script
 
 `;
 
@@ -194,28 +218,33 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
-    <link data-chunk="fr-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+    <link
+      data-chunk="fr-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
     >
   </head>
   <body>
@@ -224,39 +253,46 @@ SOURCE HTML: <!DOCTYPE html>
         Bonjour sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
     >
       {"language":"fr"}
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       [590]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":["fr-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
-    <script async
-            data-chunk="fr-translations"
-            src="scripts[3]"
+    <script
+      async
+      data-chunk="fr-translations"
+      src="scripts[3]"
     >
     </script>
   </body>
@@ -279,28 +315,33 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
-    <link data-chunk="en-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
     >
   </head>
   <body>
@@ -309,39 +350,46 @@ SOURCE HTML: <!DOCTYPE html>
         Hello sku
       </div>
     </div>
-    <script id="__SKU_CLIENT_CONTEXT__"
-            type="application/json"
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
     >
       {"language":"en"}
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       [938]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":["en-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
-    <script async
-            data-chunk="en-translations"
-            src="scripts[3]"
+    <script
+      async
+      data-chunk="en-translations"
+      src="scripts[3]"
     >
     </script>
   </body>

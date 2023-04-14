@@ -16,69 +16,80 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
   </head>
   <body>
     <div id="app">
       <div class="eRNyDeb">
-        <div class="MYunKdE"
-             data-automation-text="true"
+        <div
+          class="MYunKdE"
+          data-automation-text="true"
         >
           Initial render
         </div>
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-         <div class="MYunKdE"
-              data-automation-text="true"
+           class="MYunKdE"
+           data-automation-text="true"
          >
 -          Initial render
 +          Updated render
@@ -106,62 +117,73 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       My Awesome Project
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
   </head>
   <body>
     <div id="app">
       <div class="eRNyDeb">
-        <div class="MYunKdE"
-             data-automation-text="true"
+        <div
+          class="MYunKdE"
+          data-automation-text="true"
         >
           Initial render
         </div>
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
   </body>

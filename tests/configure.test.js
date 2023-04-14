@@ -1,6 +1,5 @@
 const { readFile, copyFile, mkdir: makeDir } = require('fs/promises');
-const { promisify } = require('util');
-const rimraf = promisify(require('rimraf'));
+const { rimraf } = require('rimraf');
 const path = require('path');
 const jsonc = require('jsonc-parser');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');

@@ -16,27 +16,32 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
   </head>
   <body>
@@ -44,29 +49,34 @@ SOURCE HTML: <!DOCTYPE html>
       <div class="_7wCPnF3">
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
   </body>

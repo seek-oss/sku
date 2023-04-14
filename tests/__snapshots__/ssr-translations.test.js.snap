@@ -15,32 +15,37 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="en-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -49,40 +54,46 @@ SOURCE HTML: <!DOCTYPE html>
         Hello sku
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       ["en-translations"]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":["en-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="en-translations"
-            src="scripts[3]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="en-translations"
+      src="scripts[3]"
+      crossorigin="anonymous"
     >
     </script>
   </body>
@@ -105,32 +116,37 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="en-PSEUDO-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="en-PSEUDO-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -139,40 +155,46 @@ SOURCE HTML: <!DOCTYPE html>
         [Ḩẽẽẽƚƚööö šķǚǚǚ]
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       ["en-PSEUDO-translations"]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":["en-PSEUDO-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="en-PSEUDO-translations"
-            src="scripts[3]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="en-PSEUDO-translations"
+      src="scripts[3]"
+      crossorigin="anonymous"
     >
     </script>
   </body>
@@ -195,32 +217,37 @@ SOURCE HTML: <!DOCTYPE html>
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+      crossorigin="anonymous"
     >
-    <link data-chunk="fr-translations"
-          rel="preload"
-          as="script"
-          href="scripts[3]"
-          crossorigin="anonymous"
+    <link
+      data-chunk="fr-translations"
+      rel="preload"
+      as="script"
+      href="scripts[3]"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -229,40 +256,46 @@ SOURCE HTML: <!DOCTYPE html>
         Bonjour sku
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+      crossorigin="anonymous"
     >
       ["fr-translations"]
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
-            crossorigin="anonymous"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":["fr-translations"]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+      crossorigin="anonymous"
     >
     </script>
-    <script async
-            data-chunk="fr-translations"
-            src="scripts[3]"
-            crossorigin="anonymous"
+    <script
+      async
+      data-chunk="fr-translations"
+      src="scripts[3]"
+      crossorigin="anonymous"
     >
     </script>
   </body>

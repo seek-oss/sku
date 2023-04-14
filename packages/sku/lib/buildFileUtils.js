@@ -1,11 +1,10 @@
 const path = require('path');
 const fs = require('fs-extra');
-const { promisify } = require('util');
-const rimraf = promisify(require('rimraf'));
+const { rimraf } = require('rimraf');
 
 const { paths } = require('../context');
 
-const cleanTargetDirectory = () => rimraf(`${paths.target}/*`);
+const cleanTargetDirectory = () => rimraf(`${paths.target}/*`, { glob: true });
 
 const copyPublicFiles = () => {
   if (fs.existsSync(paths.public)) {
@@ -23,8 +22,7 @@ const ensureTargetDirectory = () => {
 
 const cleanRenderJs = async () => {
   const renderFileGlob = path.join(paths.target, '*render.js');
-
-  await rimraf(renderFileGlob);
+  await rimraf(renderFileGlob, { glob: true });
 };
 
 module.exports = {

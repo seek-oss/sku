@@ -12,40 +12,47 @@ CSS: [
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-cdn.com;"
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com;"
     >
     <meta charset="UTF-8">
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
   </head>
   <body>
     <div id="app">
-      <div class="eRNyDeb"
-           data-reactroot
+      <div
+        class="eRNyDeb"
+        data-reactroot
       >
         <div class="MYunKdE">
           Initial
@@ -53,35 +60,40 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-            data-reactroot
+         data-reactroot
        >
          <div class="MYunKdE">
 -          Initial
@@ -120,40 +132,47 @@ CSS: [
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
     >
     <meta charset="UTF-8">
     <title>
       hello-world
     </title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
     >
-    <link data-chunk="main"
-          rel="stylesheet"
-          href="styles[0]"
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[0]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[1]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
     >
-    <link data-chunk="main"
-          rel="preload"
-          as="script"
-          href="scripts[2]"
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
     >
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___eRNyDeb"
-           data-reactroot
+      <div
+        class="lessStyles__root___eRNyDeb"
+        data-reactroot
       >
         <div class="lessStyles__nested___MYunKdE">
           Initial
@@ -161,35 +180,40 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
     >
       []
     </script>
-    <script id="__LOADABLE_REQUIRED_CHUNKS___ext"
-            type="application/json"
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
     >
       {"namedChunks":[]}
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[0]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[1]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
     >
     </script>
-    <script async
-            data-chunk="main"
-            src="scripts[2]"
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
     >
     </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-            data-reactroot
+         data-reactroot
        >
          <div class="lessStyles__nested___MYunKdE">
 -          Initial

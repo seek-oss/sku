@@ -1,6 +1,6 @@
 const path = require('path');
+const exists = require('../lib/exists');
 const express = require('express');
-const { access } = require('fs/promises');
 const handler = require('serve-handler');
 const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, red } = require('chalk');
@@ -33,9 +33,9 @@ const preferredSite = args.site;
 (async () => {
   track.count('serve');
 
-  try {
-    await access(paths.target);
-  } catch {
+  const targetFolderExists = await exists(paths.target);
+
+  if (!targetFolderExists) {
     console.log(
       red(
         `${bold('sku build')} must be run before running ${bold('sku serve')}`,

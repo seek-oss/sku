@@ -1,13 +1,7 @@
 const selfsigned = require('selfsigned');
 const { blue } = require('chalk');
-const {
-  access,
-  mkdir,
-  unlink,
-  writeFile,
-  stat,
-  readFile,
-} = require('fs/promises');
+const exists = require('./exists');
+const { mkdir, unlink, writeFile, stat, readFile } = require('fs/promises');
 
 const { getPathFromCwd } = require('../lib/cwd');
 const { hosts } = require('../context');
@@ -72,9 +66,9 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
 
   const pems = createSelfSignedCertificate();
 
-  try {
-    await access(certificateDirPath);
-  } catch {
+  const certificateDirExists = await exists(certificateDirPath);
+
+  if (!certificateDirExists) {
     await mkdir(certificateDirPath, { recursive: true });
   }
 
@@ -91,9 +85,9 @@ const getCertificate = async (certificateDirName = '.ssl') => {
     `./${certificateDirName}/self-signed.pem`,
   );
 
-  try {
-    await access(certificatePath);
-  } catch {
+  const certificateExists = await exists(certificatePath);
+
+  if (!certificateExists) {
     return generateCertificate(certificatePath, certificateDirPath);
   }
 

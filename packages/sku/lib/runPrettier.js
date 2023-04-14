@@ -1,4 +1,4 @@
-const { access } = require('fs/promises');
+const exists = require('./exists');
 const path = require('path');
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
@@ -25,11 +25,9 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
     prettierArgs.push('--list-different');
   }
 
-  try {
-    await access(prettierIgnorePath);
+  const ignoreExists = await exists(prettierIgnorePath);
+  if (ignoreExists) {
     prettierArgs.push('--ignore-path', prettierIgnorePath);
-  } catch (err) {
-    // don't error if `.prettierignore` not found
   }
 
   const pathsToCheck =

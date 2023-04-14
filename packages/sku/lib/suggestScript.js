@@ -1,4 +1,4 @@
-const { access } = require('fs/promises');
+const exists = require('./exists');
 const chalk = require('chalk');
 const { getPathFromCwd, requireFromCwd } = require('./cwd');
 
@@ -19,12 +19,7 @@ const findPackageScript = (scriptContents) => {
 
 const getSuggestedScript = async (scriptName, options = { sudo: false }) => {
   let script = options.sudo ? 'sudo ' : '';
-  let isYarnProject = false;
-
-  try {
-    await access(getPathFromCwd('yarn.lock'));
-    isYarnProject = true;
-  } catch {}
+  const isYarnProject = await exists(getPathFromCwd('yarn.lock'));
 
   try {
     const packageScript = findPackageScript(`sku ${scriptName}`);

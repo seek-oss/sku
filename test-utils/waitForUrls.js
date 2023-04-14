@@ -1,11 +1,10 @@
-const { promisify } = require('util');
-const waitOnAsync = promisify(require('wait-on'));
+const waitOn = require('wait-on');
 
 const waitForUrls = async (...urls) => {
   const timeout = 200000;
 
   try {
-    return await waitOnAsync({
+    return await waitOn({
       resources: urls.map((url) =>
         url
           .replace(/http(s?)\:/, 'http$1-get:')

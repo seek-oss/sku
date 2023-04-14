@@ -1,13 +1,13 @@
 const selfsigned = require('selfsigned');
 const { blue } = require('chalk');
 const {
-  existsSync,
+  access: exists,
   mkdir,
   unlink,
   writeFile,
   stat,
   readFile,
-} = require('fs-extra');
+} = require('fs/promises');
 
 const { getPathFromCwd } = require('../lib/cwd');
 const { hosts } = require('../context');
@@ -72,7 +72,7 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
 
   const pems = await createSelfSignedCertificate();
 
-  const certificateDirExists = existsSync(certificateDirPath);
+  const certificateDirExists = await exists(certificateDirPath);
 
   if (!certificateDirExists) {
     await mkdir(certificateDirPath);
@@ -91,7 +91,7 @@ const getCertificate = async (certificateDirName = '.ssl') => {
     `./${certificateDirName}/self-signed.pem`,
   );
 
-  const certificateExists = existsSync(certificatePath);
+  const certificateExists = await exists(certificatePath);
 
   if (!certificateExists) {
     return generateCertificate(certificatePath, certificateDirPath);

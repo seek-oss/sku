@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const { readFile } = require('fs/promises');
 const glob = require('fast-glob');
 const semver = require('semver');
 const chalk = require('chalk');
@@ -69,7 +69,7 @@ module.exports = async () => {
     const compilePackages = new Map();
 
     await asyncMap(packages, async (p) => {
-      const contents = await fs.readFile(getPathFromCwd(p), {
+      const contents = await readFile(getPathFromCwd(p), {
         encoding: 'utf8',
       });
 

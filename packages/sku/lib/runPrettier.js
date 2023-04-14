@@ -1,12 +1,10 @@
-const fs = require('fs');
+const { access: exists } = require('fs/promises');
 const path = require('path');
-const { promisify } = require('util');
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');
 const { suggestScript } = require('./suggestScript');
 
-const exists = promisify(fs.stat);
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = path.join(
   __dirname,

@@ -193,7 +193,7 @@ const getTemplateFileDestinationFromRoot =
       const destination = getTemplateFileDestination(file);
 
       // Ensure folders exist before writing files to them
-      await fs.mkdirp(path.dirname(destination));
+      await fs.ensureDir(path.dirname(destination));
       await fs.writeFile(destination, fileContents);
     }),
   );

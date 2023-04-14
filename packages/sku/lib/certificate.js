@@ -75,7 +75,7 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
   try {
     await access(certificateDirPath);
   } catch {
-    await mkdir(certificateDirPath, { force: true, recursive: true });
+    await mkdir(certificateDirPath, { recursive: true });
   }
 
   await writeFile(certificatePath, `${pems.private}${pems.cert}`);

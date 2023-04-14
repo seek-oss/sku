@@ -72,10 +72,10 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
 
   const pems = await createSelfSignedCertificate();
 
-  const certificateDirExists = await exists(certificateDirPath);
-
-  if (!certificateDirExists) {
-    await mkdir(certificateDirPath);
+  try {
+    await exists(certificateDirPath);
+  } catch {
+    await mkdir(certificateDirPath, { force: true, recursive: true });
   }
 
   await writeFile(certificatePath, `${pems.private}${pems.cert}`);
@@ -91,9 +91,9 @@ const getCertificate = async (certificateDirName = '.ssl') => {
     `./${certificateDirName}/self-signed.pem`,
   );
 
-  const certificateExists = await exists(certificatePath);
-
-  if (!certificateExists) {
+  try {
+    await exists(certificatePath);
+  } catch {
     return generateCertificate(certificatePath, certificateDirPath);
   }
 
@@ -107,7 +107,7 @@ const getCertificate = async (certificateDirName = '.ssl') => {
     return generateCertificate(certificatePath, certificateDirPath);
   }
 
-  return readFile(certificatePath);
+  return readFile(certificatePath, { encoding: 'utf8' });
 };
 
 module.exports = getCertificate;

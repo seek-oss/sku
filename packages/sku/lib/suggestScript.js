@@ -19,7 +19,12 @@ const findPackageScript = (scriptContents) => {
 
 const getSuggestedScript = async (scriptName, options = { sudo: false }) => {
   let script = options.sudo ? 'sudo ' : '';
-  const isYarnProject = await exists(getPathFromCwd('yarn.lock'));
+  let isYarnProject = false;
+
+  try {
+    await exists(getPathFromCwd('yarn.lock'));
+    isYarnProject = true;
+  } catch {}
 
   try {
     const packageScript = findPackageScript(`sku ${scriptName}`);

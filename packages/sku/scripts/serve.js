@@ -33,9 +33,9 @@ const preferredSite = args.site;
 (async () => {
   track.count('serve');
 
-  const targetFolderExists = await exists(paths.target);
-
-  if (!targetFolderExists) {
+  try {
+    await exists(paths.target);
+  } catch {
     console.log(
       red(
         `${bold('sku build')} must be run before running ${bold('sku serve')}`,

@@ -26,10 +26,8 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   }
 
   try {
-    const ignoreExists = await exists(prettierIgnorePath);
-    if (ignoreExists) {
-      prettierArgs.push('--ignore-path', prettierIgnorePath);
-    }
+    await exists(prettierIgnorePath);
+    prettierArgs.push('--ignore-path', prettierIgnorePath);
   } catch (err) {
     // don't error if `.prettierignore` not found
   }

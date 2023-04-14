@@ -1,6 +1,6 @@
 const path = require('path');
+const exists = require('../lib/exists');
 const express = require('express');
-const fs = require('fs-extra');
 const handler = require('serve-handler');
 const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, red } = require('chalk');
@@ -33,7 +33,7 @@ const preferredSite = args.site;
 (async () => {
   track.count('serve');
 
-  const targetFolderExists = fs.existsSync(paths.target);
+  const targetFolderExists = await exists(paths.target);
 
   if (!targetFolderExists) {
     console.log(

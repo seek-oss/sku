@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs-extra');
+const fs = require('fs');
 const { rimraf } = require('rimraf');
 
 const { paths } = require('../context');
@@ -17,7 +17,7 @@ const copyPublicFiles = () => {
 };
 
 const ensureTargetDirectory = () => {
-  fs.ensureDirSync(paths.target);
+  fs.mkdirSync(paths.target, { recursive: true });
 };
 
 const cleanRenderJs = async () => {

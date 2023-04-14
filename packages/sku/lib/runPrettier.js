@@ -1,12 +1,10 @@
-const fs = require('fs');
+const exists = require('./exists');
 const path = require('path');
-const { promisify } = require('util');
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');
 const { suggestScript } = require('./suggestScript');
 
-const exists = promisify(fs.stat);
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = path.join(
   __dirname,
@@ -27,13 +25,9 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
     prettierArgs.push('--list-different');
   }
 
-  try {
-    const ignoreExists = await exists(prettierIgnorePath);
-    if (ignoreExists) {
-      prettierArgs.push('--ignore-path', prettierIgnorePath);
-    }
-  } catch (err) {
-    // don't error if `.prettierignore` not found
+  const ignoreExists = await exists(prettierIgnorePath);
+  if (ignoreExists) {
+    prettierArgs.push('--ignore-path', prettierIgnorePath);
   }
 
   const pathsToCheck =

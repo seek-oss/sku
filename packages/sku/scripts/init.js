@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk');
-const fs = require('fs-extra');
+const fs = require('fs/promises');
 const path = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
@@ -118,7 +118,7 @@ const getTemplateFileDestinationFromRoot =
     process.exit(1);
   }
 
-  fs.ensureDirSync(projectName);
+  await fs.mkdir(projectName, { recursive: true });
 
   if (!emptyDir.sync(root)) {
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
@@ -148,7 +148,7 @@ const getTemplateFileDestinationFromRoot =
   };
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
-  fs.writeFileSync(path.join(root, 'package.json'), packageJsonString);
+  await fs.writeFile(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
   const useYarn = detectYarn();
@@ -193,7 +193,7 @@ const getTemplateFileDestinationFromRoot =
       const destination = getTemplateFileDestination(file);
 
       // Ensure folders exist before writing files to them
-      await fs.mkdirp(path.dirname(destination));
+      await fs.mkdir(path.dirname(destination), { recursive: true });
       await fs.writeFile(destination, fileContents);
     }),
   );

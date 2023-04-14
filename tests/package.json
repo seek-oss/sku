@@ -30,7 +30,6 @@
     "@sku-fixtures/sku-webpack-plugin": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
     "dedent": "^0.7.0",
-    "fs-extra": "^11.0.0",
     "jsonc-parser": "^3.0.0",
     "rimraf": "^5.0.0",
     "webpack": "^5.52.0",

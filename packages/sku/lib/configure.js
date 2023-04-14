@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs-extra');
+const { writeFile, rm } = require('fs/promises');
 const path = require('path');
 
 const ensureGitignore = require('ensure-gitignore');
@@ -25,7 +25,7 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
   const str = JSON.stringify(content, null, 2);
   const contentStr = banner ? prependBanner(str) : str;
 
-  await fs.writeFile(outPath, contentStr);
+  await writeFile(outPath, contentStr);
 };
 
 module.exports = async () => {
@@ -97,7 +97,10 @@ module.exports = async () => {
     await getCertificate(selfSignedCertificateDirName);
     gitIgnorePatterns.push(selfSignedCertificateDirName);
   } else {
-    await fs.remove(getPathFromCwd(selfSignedCertificateDirName));
+    await rm(getPathFromCwd(selfSignedCertificateDirName), {
+      recursive: true,
+      force: true,
+    });
   }
 
   // Write `.gitignore`

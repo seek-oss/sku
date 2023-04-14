@@ -1,5 +1,4 @@
-const { promisify } = require('util');
-const exists = promisify(require('fs').exists);
+const exists = require('./exists');
 const chalk = require('chalk');
 const { getPathFromCwd, requireFromCwd } = require('./cwd');
 

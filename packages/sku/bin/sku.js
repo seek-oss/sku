@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs-extra');
+const fs = require('fs');
 const debug = require('debug');
 const args = require('../config/args');
 const _validatePeerDeps = require('../lib/validatePeerDeps');

@@ -148,7 +148,7 @@ const getTemplateFileDestinationFromRoot =
   };
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
-  fs.writeFile(path.join(root, 'package.json'), packageJsonString);
+  await fs.writeFile(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
   const useYarn = detectYarn();

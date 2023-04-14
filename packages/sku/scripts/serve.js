@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const { access: exists } = require('fs/promises');
+const { access } = require('fs/promises');
 const handler = require('serve-handler');
 const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, red } = require('chalk');
@@ -34,7 +34,7 @@ const preferredSite = args.site;
   track.count('serve');
 
   try {
-    await exists(paths.target);
+    await access(paths.target);
   } catch {
     console.log(
       red(

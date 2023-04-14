@@ -1,7 +1,7 @@
 const selfsigned = require('selfsigned');
 const { blue } = require('chalk');
 const {
-  access: exists,
+  access,
   mkdir,
   unlink,
   writeFile,
@@ -70,10 +70,10 @@ const createSelfSignedCertificate = () => {
 const generateCertificate = async (certificatePath, certificateDirPath) => {
   const startTime = performance.now();
 
-  const pems = await createSelfSignedCertificate();
+  const pems = createSelfSignedCertificate();
 
   try {
-    await exists(certificateDirPath);
+    await access(certificateDirPath);
   } catch {
     await mkdir(certificateDirPath, { force: true, recursive: true });
   }
@@ -92,7 +92,7 @@ const getCertificate = async (certificateDirName = '.ssl') => {
   );
 
   try {
-    await exists(certificatePath);
+    await access(certificatePath);
   } catch {
     return generateCertificate(certificatePath, certificateDirPath);
   }

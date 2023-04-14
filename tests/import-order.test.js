@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs-extra');
+const fs = require('fs/promises');
 const dedent = require('dedent');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
@@ -50,11 +50,11 @@ const files = {
 
 describe('import order', () => {
   beforeAll(async () => {
-    await fs.ensureDir(srcDirectory);
+    await fs.mkdir(srcDirectory, { recursive: true });
   });
 
   afterAll(async () => {
-    await fs.remove(srcDirectory);
+    await fs.rm(srcDirectory, { recursive: true, force: true });
   });
 
   test.each(Object.keys(files))('imports are ordered: %s', async (fileName) => {

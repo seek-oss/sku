@@ -1,4 +1,4 @@
-const { access: exists } = require('fs/promises');
+const { access } = require('fs/promises');
 const chalk = require('chalk');
 const { getPathFromCwd, requireFromCwd } = require('./cwd');
 
@@ -22,7 +22,7 @@ const getSuggestedScript = async (scriptName, options = { sudo: false }) => {
   let isYarnProject = false;
 
   try {
-    await exists(getPathFromCwd('yarn.lock'));
+    await access(getPathFromCwd('yarn.lock'));
     isYarnProject = true;
   } catch {}
 

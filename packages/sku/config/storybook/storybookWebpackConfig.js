@@ -1,22 +1,12 @@
-const webpack = require('webpack');
 const { paths } = require('../../context');
 const find = require('lodash/find');
 const { merge: webpackMerge } = require('webpack-merge');
-const isCI = require('../../lib/isCI');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');
 
 const hot = process.env.SKU_HOT !== 'false';
 
 module.exports = ({ config }, { isDevServer }) => {
-  if (isCI) {
-    // Remove noisy progress plugin in CI, currently no official option to disable
-    // https://github.com/storybookjs/storybook/issues/1260#issuecomment-308036626
-    config.plugins = config.plugins.filter(
-      (plugin) => !(plugin instanceof webpack.ProgressPlugin),
-    );
-  }
-
   const clientWebpackConfig = find(
     makeWebpackConfig({
       isIntegration: true,

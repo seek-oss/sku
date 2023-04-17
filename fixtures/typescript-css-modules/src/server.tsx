@@ -20,7 +20,7 @@ export default () => ({
       </SkuProvider>,
     );
 
-    res.send(`
+    res.send(/* html */ `
       <!DOCTYPE html>
       <html>
         <head>

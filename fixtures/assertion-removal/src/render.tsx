@@ -13,7 +13,7 @@ const skuRender: Render = {
       </SkuProvider>,
     ),
 
-  renderDocument: ({ app, headTags, bodyTags }) => dedent`
+  renderDocument: ({ app, headTags, bodyTags }) => dedent/* html */ `
     <!DOCTYPE html>
     <html>
       <head>

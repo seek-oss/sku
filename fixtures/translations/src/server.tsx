@@ -6,7 +6,7 @@ import type { Request, Response } from 'express';
 
 import App from './App';
 
-const initialResponseTemplate = ({ headTags }: any) => `
+const initialResponseTemplate = ({ headTags }: any) => /* html */ `
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +16,7 @@ const initialResponseTemplate = ({ headTags }: any) => `
     ${headTags}
 `;
 
-const template = ({ headTags, bodyTags, app }: any) => `
+const template = ({ headTags, bodyTags, app }: any) => /* html */ `
       ${headTags}
     </head>
     <body>

@@ -11,7 +11,7 @@ export default {
       </SkuProvider>,
     ),
 
-  renderDocument: ({ app, bodyTags, headTags }) => dedent`
+  renderDocument: ({ app, bodyTags, headTags }) => dedent/* html */ `
     <!DOCTYPE html>
     <html>
       <head>

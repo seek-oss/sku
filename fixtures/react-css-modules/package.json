@@ -2,10 +2,12 @@
   "name": "@sku-fixtures/react-css-modules",
   "private": true,
   "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
     "@storybook/addon-controls": "^6.5.12",
     "dedent": "^0.7.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "sku": "workspace:*"
   }
 }

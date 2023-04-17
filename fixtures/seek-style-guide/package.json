@@ -2,11 +2,13 @@
   "name": "@sku-fixtures/seek-style-guide",
   "private": true,
   "dependencies": {
-    "@sku-private/test-utils": "workspace:*",
-    "dedent": "^0.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "seek-style-guide": "*",
+    "seek-style-guide": "*"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "dedent": "^0.7.0",
     "sku": "workspace:*"
   }
 }

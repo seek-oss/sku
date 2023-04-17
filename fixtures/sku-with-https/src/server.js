@@ -4,7 +4,7 @@ import { writeFile } from 'fs/promises';
 
 import App from './App';
 
-const initialResponseTemplate = ({ headTags }) => `
+const initialResponseTemplate = ({ headTags }) => /* html */ `
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +14,7 @@ const initialResponseTemplate = ({ headTags }) => `
     ${headTags}
 `;
 
-const template = ({ headTags, bodyTags, app }) => `
+const template = ({ headTags, bodyTags, app }) => /* html */ `
       ${headTags}
     </head>
     <body>

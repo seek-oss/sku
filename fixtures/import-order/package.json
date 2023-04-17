@@ -1,7 +1,7 @@
 {
   "name": "@sku-fixtures/import-order",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "sku": "workspace:*"
   }
 }

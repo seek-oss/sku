@@ -3,7 +3,10 @@
   "private": true,
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "dedent": "^0.7.0",
     "sku": "workspace:*"
   }
 }

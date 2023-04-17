@@ -21,7 +21,7 @@ export default {
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => {
-    return dedent`
+    return dedent/* html */ `
       <!DOCTYPE html>
       <html>
         <head>

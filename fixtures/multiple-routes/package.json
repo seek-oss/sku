@@ -2,11 +2,13 @@
   "name": "@sku-fixtures/multiple-routes",
   "private": true,
   "dependencies": {
-    "@testing-library/react": "^11.2.3",
-    "dedent": "^0.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.3",
+    "dedent": "^0.7.0",
     "sku": "workspace:*"
   }
 }

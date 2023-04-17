@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 
 export default {
-  renderDocument: ({ libraryName, headTags, bodyTags }) => dedent`
+  renderDocument: ({ libraryName, headTags, bodyTags }) => dedent/* html */ `
   <!DOCTYPE html>
   <html>
     <head>

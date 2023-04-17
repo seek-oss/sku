@@ -31,7 +31,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -47,7 +47,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Details"
@@ -159,7 +161,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -175,7 +177,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Home"
@@ -273,7 +277,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -289,7 +293,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Details"
@@ -401,7 +407,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -417,7 +423,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Home"
@@ -520,7 +528,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -536,7 +544,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Details"
@@ -661,7 +671,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <meta charset="UTF-8">
     <title>
@@ -677,7 +687,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Home"
@@ -779,7 +791,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'unsafe-eval';"
     >
     <meta charset="UTF-8">
     <title>
@@ -795,7 +807,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Details"
@@ -920,7 +934,7 @@ SOURCE HTML: <!DOCTYPE html>
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'unsafe-eval';"
     >
     <meta charset="UTF-8">
     <title>
@@ -936,7 +950,9 @@ SOURCE HTML: <!DOCTYPE html>
       console.log('Hi');
     </script>
     <style type="text/css">
-      body{background:pink}
+      body {
+        background: pink;
+      }
     </style>
     <link
       data-chunk="handlers-Home"

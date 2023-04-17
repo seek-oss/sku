@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import dedent from 'dedent';
+import html from 'dedent';
 import App from './app';
 
 export default {
@@ -10,13 +10,13 @@ export default {
         <App />
       </SkuProvider>,
     ),
-  renderDocument: ({ app, bodyTags, headTags }) => dedent`
+  renderDocument: ({ app, bodyTags, headTags }) => html/* html */ `
     <!DOCTYPE html>
     <html>
       <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>hello-world</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${headTags}
       </head>
       <body>

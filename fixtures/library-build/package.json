@@ -1,7 +1,7 @@
 {
   "name": "@sku-fixtures/library-build",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "dedent": "^0.7.0",
     "sku": "workspace:*"
   }

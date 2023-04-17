@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import dedent from 'dedent';
+import html from 'dedent';
 
 import type { Render } from 'sku';
 import App from 'src/App';
@@ -13,13 +13,13 @@ const skuRender: Render = {
       </SkuProvider>,
     ),
 
-  renderDocument: ({ app, headTags, bodyTags }) => dedent`
+  renderDocument: ({ app, headTags, bodyTags }) => html/* html */ `
     <!DOCTYPE html>
     <html>
       <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>My Awesome Project</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${headTags}
       </head>
       <body>

@@ -1,9 +1,14 @@
+import type { Meta, StoryObj } from 'sku/@storybook/react';
 import React from 'react';
 import App from './App';
 
-export default {
+const meta: Meta = {
   title: 'App',
   component: App,
 };
 
-export const Default = () => <App>Hello World</App>;
+export default meta;
+
+type Story = StoryObj<typeof App>;
+
+export const Default: Story = { render: () => <App>Hello World</App> };

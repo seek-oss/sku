@@ -1,5 +1,45 @@
 # sku
 
+## 11.9.0
+
+### Minor Changes
+
+- Re-export `Meta` and `StoryObj` types from `@storybook/react` ([#773](https://github.com/seek-oss/sku/pull/773))
+
+  The `Meta` and `StoryObj` types are now re-exported under `sku/@storybook/react`.
+
+  These types are useful for typing [CSF 3 stories] which are the new recommended way of writing stories.
+
+  **EXAMPLE USAGE**:
+
+  ```ts
+  import type { Meta } from 'sku/@storybook/react';
+
+  import { MyComponent } from './MyComponent';
+
+  const meta: Meta<typeof MyComponent> = {
+    title: 'Path/To/MyComponent',
+    component: MyComponent,
+  };
+  export default meta;
+
+  type Story = StoryObj<typeof MyComponent>;
+
+  export const Basic: Story = {};
+
+  export const WithProp: Story = {
+    render: () => <MyComponent prop="value" />,
+  };
+  ```
+
+  [CSF 3 stories]: https://storybook.js.org/docs/react/api/csf
+
+### Patch Changes
+
+- Remove dependency on `fs-extra` ([#770](https://github.com/seek-oss/sku/pull/770))
+
+- Update dependencies ([#768](https://github.com/seek-oss/sku/pull/768))
+
 ## 11.8.2
 
 ### Patch Changes

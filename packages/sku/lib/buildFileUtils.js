@@ -11,9 +11,7 @@ const copyPublicFiles = async () => {
   if (await exists(paths.public)) {
     console.log(`Copying ${paths.public} to ${paths.target}`);
 
-    await copyFile(paths.public, paths.target, {
-      dereference: true,
-    });
+    await copyFile(paths.public, paths.target);
   }
 };
 

@@ -1,5 +1,11 @@
 # sku
 
+## 11.9.1
+
+### Patch Changes
+
+- Fix a bug where a function that didn't exist was being called ([#774](https://github.com/seek-oss/sku/pull/774))
+
 ## 11.9.0
 
 ### Minor Changes

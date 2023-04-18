@@ -11,6 +11,8 @@ import {
   storiesOf,
   forceReRender,
   getStorybook,
+  type Meta,
+  type StoryObj,
 } from '@storybook/react';
 
 export {
@@ -21,4 +23,6 @@ export {
   storiesOf,
   forceReRender,
   getStorybook,
+  type Meta,
+  type StoryObj,
 };

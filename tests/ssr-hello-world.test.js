@@ -127,5 +127,11 @@ describe('ssr-hello-world', () => {
         expect(snapshot).toMatchSnapshot();
       });
     });
+
+    it('should copy all public assets to the target folder', async () => {
+      const files = await fs.readdir(path.join(appDir, 'dist-build'));
+
+      expect(files).toMatchSnapshot();
+    });
   });
 });

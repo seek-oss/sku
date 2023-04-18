@@ -3,6 +3,7 @@ module.exports = {
   port: 8000,
   serverPort: 8001,
   target: 'dist-build',
+  public: 'assets',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
 };

@@ -54,7 +54,7 @@ const localhost = '0.0.0.0';
   const appHosts = getAppHosts();
 
   // Make sure target directory exists before starting
-  ensureTargetDirectory();
+  await ensureTargetDirectory();
   await cleanTargetDirectory();
   await copyPublicFiles();
 

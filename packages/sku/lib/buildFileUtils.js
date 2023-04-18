@@ -1,23 +1,24 @@
 const path = require('path');
-const fs = require('fs');
+const { copyFile, mkdir } = require('fs/promises');
 const { rimraf } = require('rimraf');
 
 const { paths } = require('../context');
+const exists = require('./exists');
 
 const cleanTargetDirectory = () => rimraf(`${paths.target}/*`, { glob: true });
 
-const copyPublicFiles = () => {
-  if (fs.existsSync(paths.public)) {
+const copyPublicFiles = async () => {
+  if (await exists(paths.public)) {
     console.log(`Copying ${paths.public} to ${paths.target}`);
 
-    fs.copySync(paths.public, paths.target, {
+    await copyFile(paths.public, paths.target, {
       dereference: true,
     });
   }
 };
 
-const ensureTargetDirectory = () => {
-  fs.mkdirSync(paths.target, { recursive: true });
+const ensureTargetDirectory = async () => {
+  await mkdir(paths.target, { recursive: true });
 };
 
 const cleanRenderJs = async () => {

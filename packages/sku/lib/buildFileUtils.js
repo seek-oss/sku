@@ -1,5 +1,5 @@
 const path = require('path');
-const { copyFile, mkdir } = require('fs/promises');
+const fs = require('fs/promises');
 const { rimraf } = require('rimraf');
 
 const { paths } = require('../context');
@@ -9,14 +9,19 @@ const cleanTargetDirectory = () => rimraf(`${paths.target}/*`, { glob: true });
 
 const copyPublicFiles = async () => {
   if (await exists(paths.public)) {
-    console.log(`Copying ${paths.public} to ${paths.target}`);
+    const files = await fs.readdir(paths.public);
 
-    await copyFile(paths.public, paths.target);
+    for (const file of files) {
+      await fs.copyFile(
+        path.join(paths.public, file),
+        path.join(paths.target, file),
+      );
+    }
   }
 };
 
 const ensureTargetDirectory = async () => {
-  await mkdir(paths.target, { recursive: true });
+  await fs.mkdir(paths.target, { recursive: true });
 };
 
 const cleanRenderJs = async () => {

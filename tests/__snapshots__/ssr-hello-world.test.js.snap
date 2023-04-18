@@ -212,6 +212,20 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
+exports[`ssr-hello-world build should copy all public assets to the target folder 1`] = `
+[
+  "497-dc030950b95c64882531.js",
+  "a85d2645cc4d80a20b5b.png",
+  "logo.png",
+  "main-2bee8904f80654a0d455.js",
+  "main-cb8848ae92e1e9d08128.css",
+  "runtime-21ba7ee762f9d6616967.js",
+  "server.js",
+  "started.txt",
+  "webpackStats.json",
+]
+`;
+
 exports[`ssr-hello-world start should start a development server 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8100/runtime.js",

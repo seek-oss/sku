@@ -130,8 +130,18 @@ describe('ssr-hello-world', () => {
 
     it('should copy all public assets to the target folder', async () => {
       const files = await fs.readdir(path.join(appDir, 'dist-build'));
+      expect(files).toContain('logo.png');
+      expect(files).toContain('logo2.png');
+      expect(files).toContain('foo');
 
-      expect(files).toMatchSnapshot();
+      const fooFiles = await fs.readdir(path.join(appDir, 'dist-build/foo'));
+      expect(fooFiles).toContain('logo.png');
+      expect(fooFiles).toContain('bar');
+
+      const barFiles = await fs.readdir(
+        path.join(appDir, 'dist-build/foo/bar'),
+      );
+      expect(barFiles).toContain('logo.png');
     });
   });
 });

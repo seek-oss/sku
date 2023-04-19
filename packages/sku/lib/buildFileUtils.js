@@ -4,19 +4,13 @@ const { rimraf } = require('rimraf');
 
 const { paths } = require('../context');
 const exists = require('./exists');
+const copyDirContents = require('./copyDirContents');
 
 const cleanTargetDirectory = () => rimraf(`${paths.target}/*`, { glob: true });
 
 const copyPublicFiles = async () => {
   if (await exists(paths.public)) {
-    const files = await fs.readdir(paths.public);
-
-    for (const file of files) {
-      await fs.copyFile(
-        path.join(paths.public, file),
-        path.join(paths.target, file),
-      );
-    }
+    await copyDirContents(path.join(paths.public), path.join(paths.target));
   }
 };
 

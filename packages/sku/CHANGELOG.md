@@ -1,5 +1,11 @@
 # sku
 
+## 11.9.2
+
+### Patch Changes
+
+- Fix a bug that could occur when running `sku build` or `sku build-ssr` that caused the copying of assets from the `public` folder to the `target` folder to fail ([#776](https://github.com/seek-oss/sku/pull/776))
+
 ## 11.9.1
 
 ### Patch Changes

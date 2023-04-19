@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Fix a bug when running `sku build` that caused the copying of built files to fail
+Fix a bug that could occur when running `sku build` or `sku build-ssr` that caused the copying of assets from the `public` folder to the `target` folder to fail

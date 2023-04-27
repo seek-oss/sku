@@ -263,17 +263,17 @@ importers:
       '@types/express': ^4.17.11
       '@types/react': ^17.0.0
       '@types/react-dom': ^17.0.0
-      '@vocab/core': ^1.1.0
-      '@vocab/react': ^1.0.1
-      '@vocab/webpack': ^1.1.0
+      '@vocab/core': ^1.3.0
+      '@vocab/react': ^1.1.5
+      '@vocab/webpack': ^1.2.1
       dedent: ^0.7.0
       react: ^17.0.1
       react-dom: ^17.0.1
       sku: workspace:*
     dependencies:
-      '@vocab/core': 1.2.5
-      '@vocab/react': 1.1.4_react@17.0.2
-      '@vocab/webpack': 1.1.6
+      '@vocab/core': 1.3.0
+      '@vocab/react': 1.1.5_react@17.0.2
+      '@vocab/webpack': 1.2.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
@@ -327,11 +327,11 @@ importers:
       '@vanilla-extract/css': ^1.0.0
       '@vanilla-extract/jest-transform': ^1.1.0
       '@vanilla-extract/webpack-plugin': ^2.2.0
-      '@vocab/core': ^1.1.0
-      '@vocab/phrase': ^1.1.0
-      '@vocab/pseudo-localize': ^1.0.0
+      '@vocab/core': ^1.3.0
+      '@vocab/phrase': ^1.2.4
+      '@vocab/pseudo-localize': ^1.0.1
       '@vocab/react': ^1.0.1
-      '@vocab/webpack': ^1.1.0
+      '@vocab/webpack': ^1.2.1
       assert: ^2.0.0
       autoprefixer: ^10.3.1
       babel-jest: ^29.0.0
@@ -443,10 +443,10 @@ importers:
       '@types/loadable__component': 5.13.4
       '@vanilla-extract/jest-transform': 1.1.1_less@4.1.3
       '@vanilla-extract/webpack-plugin': 2.2.0_less@4.1.3+webpack@5.78.0
-      '@vocab/core': 1.2.5
-      '@vocab/phrase': 1.2.3
+      '@vocab/core': 1.3.0
+      '@vocab/phrase': 1.2.4
       '@vocab/pseudo-localize': 1.0.1
-      '@vocab/webpack': 1.1.6_webpack@5.78.0
+      '@vocab/webpack': 1.2.1_webpack@5.78.0
       autoprefixer: 10.4.14_postcss@8.4.21
       babel-jest: 29.5.0_@babel+core@7.21.4
       babel-loader: 8.3.0_2bpkfvz2mezbew2j5yjox7n6pu
@@ -5118,11 +5118,10 @@ packages:
       - terser
     dev: false
 
-  /@vocab/core/1.2.5:
-    resolution: {integrity: sha512-a2BzEBHKxRRXJ1MDQb+cn62EOk+MiVSlmORxhPDjGYsYeUNe322g5Mc/JEmaTa3rHP4JhhA3txfZBrzAqhkGCw==}
+  /@vocab/core/1.3.0:
+    resolution: {integrity: sha512-WqZpUZ5u03yM5xnXwbmItWaA/StaA52J24eTMtIIia6ggHDHrxkHxK2VN5CWYWya3FqVDWSbfK1AuzUevPEm+A==}
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.3.0
-      '@vocab/types': 1.2.0
       chalk: 4.1.2
       chokidar: 3.5.3
       debug: 4.3.4
@@ -5135,11 +5134,10 @@ packages:
       - supports-color
     dev: false
 
-  /@vocab/phrase/1.2.3:
-    resolution: {integrity: sha512-Gzxey/oTGAL8uKzl6M01SzzlgAppMcHG6o7Fp3DoSprzrWRxKpwD6HJVnbOG/ezF7WkUMcDPWQIZUqrTudNT6g==}
+  /@vocab/phrase/1.2.4:
+    resolution: {integrity: sha512-FU7XMEfW4H6Ji3tvqWwvaEuYD6RSgIpvOYKyuoK+f2FeCCawi9N9IJ2XP4qoAMPb0tGcDNSqLKGquJn0UD6dtA==}
     dependencies:
-      '@vocab/core': 1.2.5
-      '@vocab/types': 1.2.0
+      '@vocab/core': 1.3.0
       chalk: 4.1.2
       csv-stringify: 6.3.0
       debug: 4.3.4
@@ -5162,35 +5160,51 @@ packages:
       '@vocab/types': 1.2.0
       intl-messageformat: 10.3.3
       react: 17.0.2
+    dev: true
+
+  /@vocab/react/1.1.5_react@17.0.2:
+    resolution: {integrity: sha512-fHddDJvucTOOIY3n81bX7ddgJCkc2PoEAmFMP3iOOjcE1ND1jYMHAWwBE+nU0jwkAZdYW2ZrpiSubOd4ThMaEw==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      '@vocab/core': 1.3.0
+      intl-messageformat: 10.3.3
+      react: 17.0.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@vocab/types/1.2.0:
     resolution: {integrity: sha512-rKY/YKIcU5/fr78uoy3lrbuZCrtUerpdOxYh5aGFaE9rRKgg0Pfb+JX8yD5QUll5TYqjlKnLtmiJWoxI0s/3cQ==}
     dependencies:
       intl-messageformat: 10.3.3
+    dev: true
 
-  /@vocab/webpack/1.1.6:
-    resolution: {integrity: sha512-PWWMFZj9R8fnvi0U8S2N60Et0K9FbjgBUNWCeuHgH3UA7TblB/wliZdYzZOo6HssYaewiMoyK7Be2B4W9qEzrw==}
+  /@vocab/webpack/1.2.1:
+    resolution: {integrity: sha512-DVo6H3B+npwDEQUJ/VEeEoj9aojQLe9PPwSIFqxg2AJ/SC3zg2xba0UJ5n8YTmDj6vTFem8VrBfP/vJZ/nu7zQ==}
     peerDependencies:
       webpack: ^5.37.0
     dependencies:
-      '@vocab/core': 1.2.5
-      '@vocab/types': 1.2.0
+      '@vocab/core': 1.3.0
       chalk: 4.1.2
+      cjs-module-lexer: 1.2.2
       debug: 4.3.4
+      es-module-lexer: 0.9.3
       virtual-resource-loader: 1.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@vocab/webpack/1.1.6_webpack@5.78.0:
-    resolution: {integrity: sha512-PWWMFZj9R8fnvi0U8S2N60Et0K9FbjgBUNWCeuHgH3UA7TblB/wliZdYzZOo6HssYaewiMoyK7Be2B4W9qEzrw==}
+  /@vocab/webpack/1.2.1_webpack@5.78.0:
+    resolution: {integrity: sha512-DVo6H3B+npwDEQUJ/VEeEoj9aojQLe9PPwSIFqxg2AJ/SC3zg2xba0UJ5n8YTmDj6vTFem8VrBfP/vJZ/nu7zQ==}
     peerDependencies:
       webpack: ^5.37.0
     dependencies:
-      '@vocab/core': 1.2.5
-      '@vocab/types': 1.2.0
+      '@vocab/core': 1.3.0
       chalk: 4.1.2
+      cjs-module-lexer: 1.2.2
       debug: 4.3.4
+      es-module-lexer: 0.9.3
       virtual-resource-loader: 1.0.1
       webpack: 5.78.0_2mtfwo6qacryk7vz2y35qcf42e
     transitivePeerDependencies:
@@ -9869,7 +9883,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
     requiresBuild: true
     dependencies:
       bindings: 1.5.0

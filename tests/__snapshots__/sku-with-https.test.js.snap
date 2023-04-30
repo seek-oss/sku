@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
-  "/36-063fd938315cc77ccb24.js",
-  "/main-ea154deb231f5fde1e36.js",
+  "/407-363474a0b378921717d3.js",
+  "/main-fb843306c30681031cbc.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -123,7 +123,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-00f745.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-126440.js",
   "/main.js",
 ]
 CSS: [

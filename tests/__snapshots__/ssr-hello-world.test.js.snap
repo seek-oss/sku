@@ -3,8 +3,8 @@
 exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
 SCRIPTS: [
   "http://localhost:4000/runtime-21ba7ee762f9d6616967.js",
-  "http://localhost:4000/190-104b18762fd30ef9a7ba.js",
-  "http://localhost:4000/main-d1be235b95eafb95d634.js",
+  "http://localhost:4000/497-dc030950b95c64882531.js",
+  "http://localhost:4000/main-2bee8904f80654a0d455.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
@@ -109,8 +109,8 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
 SCRIPTS: [
   "http://localhost:4000/runtime-21ba7ee762f9d6616967.js",
-  "http://localhost:4000/190-104b18762fd30ef9a7ba.js",
-  "http://localhost:4000/main-d1be235b95eafb95d634.js",
+  "http://localhost:4000/497-dc030950b95c64882531.js",
+  "http://localhost:4000/main-2bee8904f80654a0d455.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
@@ -215,7 +215,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr-hello-world start should start a development server 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8100/runtime.js",
-  "http://127.0.0.1:8100/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-1e8c01.js",
+  "http://127.0.0.1:8100/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-7a1f2b.js",
   "http://127.0.0.1:8100/main.js",
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]

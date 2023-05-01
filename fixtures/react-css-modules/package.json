@@ -6,7 +6,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@storybook/addon-controls": "^6.5.12",
+    "@storybook/addon-controls": "^7.0.0",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
   }

@@ -1,5 +1,21 @@
 # sku
 
+## 11.10.0
+
+### Minor Changes
+
+- Update Vocab libraries ([#781](https://github.com/seek-oss/sku/pull/781))
+
+  The `@vocab/types` package has been absorbed into the `@vocab/core` package and the generated translation file will import types from the `@vocab/core` package instead.
+
+  `@vocab/webpack/loader` has been updated to work with more file types (`.js`, `.cjs`, `.mjs`)
+
+- Update to eslint-config-seek v11.0.0. ([#779](https://github.com/seek-oss/sku/pull/779))
+
+  This version of the ESLint config adds additional rules enforcing consistent type imports/exports, as explained in [this article](https://typescript-eslint.io/blog/consistent-type-imports-and-exports-why-and-how/).
+
+  Any reported errors can be auto-fixed with `sku format`.
+
 ## 11.9.2
 
 ### Patch Changes

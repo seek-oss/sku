@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from 'sku/@storybook/react';
 import React from 'react';
-import { TestComponent } from './TestComponent';
-import { StorybookDecorator } from './StorybookDecorator';
+import type { Meta, StoryObj } from 'sku/@storybook/react';
 
-const meta: Meta = {
+import { StorybookDecorator } from './StorybookDecorator';
+import { TestComponent } from './TestComponent';
+
+export default {
   title: 'TestComponent',
   component: TestComponent,
   decorators: [
@@ -13,9 +14,7 @@ const meta: Meta = {
       </StorybookDecorator>
     ),
   ],
-};
-
-export default meta;
+} satisfies Meta;
 
 type Story = StoryObj<typeof TestComponent>;
 

@@ -1,5 +1,5 @@
 import { Card, Text } from 'braid-design-system';
-import React, { ComponentProps } from 'react';
+import React, { type ComponentProps } from 'react';
 
 type TestComponentProps = {
   tone: ComponentProps<typeof Text>['tone'];
@@ -8,7 +8,7 @@ type TestComponentProps = {
 
 export const TestComponent = ({ children, tone }: TestComponentProps) => (
   <Card>
-    <Text tone={tone} data={{ ['automation-text']: true }}>
+    <Text tone={tone} data={{ 'automation-text': true }}>
       {children}
     </Text>
   </Card>

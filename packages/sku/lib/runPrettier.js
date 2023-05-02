@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');
 const { suggestScript } = require('./suggestScript');
+const extensions = require('eslint-config-seek/extensions');
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = path.join(
@@ -31,7 +32,9 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   }
 
   const pathsToCheck =
-    paths && paths.length > 0 ? paths : ['**/*.{js,ts,tsx,md,less,css}'];
+    paths && paths.length > 0
+      ? paths
+      : [`**/*.{${[...extensions.ts, ...extensions.js]},md,less,css}`];
 
   prettierArgs.push(...pathsToCheck);
   /*

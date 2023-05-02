@@ -1,6 +1,12 @@
 const { yellow, cyan, gray } = require('chalk');
 const EslintCLI = require('eslint').CLIEngine;
 const eslintConfig = require('../config/eslint/eslintConfig');
+const {
+  js: jsExtensions,
+  ts: tsExtensions,
+} = require('eslint-config-seek/extensions');
+
+const extensions = [...tsExtensions, ...jsExtensions].map((ext) => `.${ext}`);
 
 const runESLint = ({ fix = false, paths }) =>
   new Promise((resolve, reject) => {
@@ -8,7 +14,7 @@ const runESLint = ({ fix = false, paths }) =>
 
     const cli = new EslintCLI({
       baseConfig: eslintConfig,
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      extensions,
       useEslintrc: false,
       fix,
     });
@@ -16,13 +22,8 @@ const runESLint = ({ fix = false, paths }) =>
     /* Whitelist the file extensions that our ESLint setup currently supports */
     const filteredFilePaths = checkAll
       ? ['.']
-      : paths.filter(
-          (filePath) =>
-            filePath.endsWith('.ts') ||
-            filePath.endsWith('.tsx') ||
-            filePath.endsWith('.js') ||
-            filePath.endsWith('.jsx') ||
-            filePath.endsWith('.json'),
+      : paths.filter((filePath) =>
+          [...extensions, '.json'].some((ext) => filePath.endsWith(ext)),
         );
 
     if (filteredFilePaths.length === 0) {

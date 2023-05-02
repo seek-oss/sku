@@ -1,0 +1,14 @@
+{
+  "name": "@sku-fixtures/storybook-config",
+  "private": true,
+  "dependencies": {
+    "braid-design-system": "^31.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "sku": "workspace:*"
+  }
+}

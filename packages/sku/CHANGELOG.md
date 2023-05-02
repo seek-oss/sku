@@ -1,5 +1,11 @@
 # sku
 
+## 11.10.1
+
+### Patch Changes
+
+- Lint all extensions supported by the ESLint config ([#784](https://github.com/seek-oss/sku/pull/784))
+
 ## 11.10.0
 
 ### Minor Changes

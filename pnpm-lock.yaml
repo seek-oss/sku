@@ -365,7 +365,7 @@ importers:
       esbuild-register: ^3.3.3
       escape-string-regexp: ^4.0.0
       eslint: ^7.18.0
-      eslint-config-seek: ^11.0.0
+      eslint-config-seek: ^11.1.0
       exception-formatter: ^2.1.2
       express: ^4.16.3
       fast-glob: ^3.2.5
@@ -478,7 +478,7 @@ importers:
       esbuild-register: 3.4.2_esbuild@0.17.16
       escape-string-regexp: 4.0.0
       eslint: 7.32.0
-      eslint-config-seek: 11.0.0_wid5pzwryku7btkwopdb2fye5u
+      eslint-config-seek: 11.1.0_wid5pzwryku7btkwopdb2fye5u
       exception-formatter: 2.1.2
       express: 4.18.2
       fast-glob: 3.2.12
@@ -8772,8 +8772,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-config-seek/11.0.0_wid5pzwryku7btkwopdb2fye5u:
-    resolution: {integrity: sha512-HTsXrAt+AeDWd1a8mdzEsjmYm39O/1LsDBHzdTN2iSK1gmaEOjoBOCOdy83KhnurjZ15zo/6h2SDuliwVvZNPw==}
+  /eslint-config-seek/11.1.0_wid5pzwryku7btkwopdb2fye5u:
+    resolution: {integrity: sha512-PQZd9gpeOcO91V8feCpVb+ambVytczikQUl1eEedKxdxGcsE42mcRSR8nr712HJnaEkj2gGhrjvok5i5X8sA3Q==}
     peerDependencies:
       eslint: '>=6'
       typescript: '>=4.5'

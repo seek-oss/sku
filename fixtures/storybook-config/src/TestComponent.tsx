@@ -1,8 +1,8 @@
 import { Card, Text } from 'braid-design-system';
-import React, { type ComponentProps } from 'react';
+import React from 'react';
 
 type TestComponentProps = {
-  tone: ComponentProps<typeof Text>['tone'];
+  tone: React.ComponentProps<typeof Text>['tone'];
   children: React.ReactNode;
 };
 

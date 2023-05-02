@@ -1,48 +1,19 @@
 const path = require('path');
 const {
-  dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
   startAssetServer,
-  getAppSnapshot,
   getStorybookContent,
 } = require('@sku-private/test-utils');
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/react-css-modules/sku.config.js'),
+  require.resolve('@sku-fixtures/storybook-config/sku.config.ts'),
 );
-const distDir = path.resolve(appDir, 'dist');
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
-describe('react-css-modules', () => {
-  let closeAssetServer;
-
-  beforeAll(async () => {
-    await runSkuScriptInDir('build', appDir);
-    closeAssetServer = await startAssetServer(4293, distDir);
-  });
-
-  afterAll(() => {
-    closeAssetServer();
-  });
-
-  it('should create valid app', async () => {
-    const app = await getAppSnapshot('http://localhost:4293');
-    expect(app).toMatchSnapshot();
-  });
-
-  it('should generate the expected files', async () => {
-    const files = await dirContentsToObject(distDir);
-    expect(files).toMatchSnapshot();
-  });
-
-  it('should handle Less and css.js in tests', async () => {
-    const { childProcess } = await runSkuScriptInDir('test', appDir);
-    expect(childProcess.exitCode).toEqual(0);
-  });
-
+describe('storybook-config', () => {
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8048';
+    const storybookUrl = 'http://localhost:8089';
     let server;
 
     beforeAll(async () => {
@@ -59,14 +30,14 @@ describe('react-css-modules', () => {
         storybookUrl,
         '[data-automation-text]',
       );
-      expect(text).toEqual('Storybook render');
-      expect(fontSize).toEqual('32px');
+      expect(text).toEqual('Hello world');
+      expect(fontSize).toEqual('16px');
     });
   });
 
   describe('build-storybook', () => {
     let closeStorybookServer;
-    const assetServerPort = 4297;
+    const assetServerPort = 4232;
     const assetServerUrl = `http://localhost:${assetServerPort}`;
 
     beforeAll(async () => {
@@ -88,8 +59,8 @@ describe('react-css-modules', () => {
         '[data-automation-text]',
       );
 
-      expect(text).toEqual('Storybook render');
-      expect(fontSize).toEqual('32px');
+      expect(text).toEqual('Hello world');
+      expect(fontSize).toEqual('16px');
     });
   });
 });

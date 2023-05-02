@@ -258,6 +258,23 @@ importers:
     devDependencies:
       sku: link:../../packages/sku
 
+  fixtures/storybook-config:
+    specifiers:
+      '@types/react': ^17.0.2
+      '@types/react-dom': ^17.0.2
+      braid-design-system: ^31.0.0
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      sku: workspace:*
+    dependencies:
+      braid-design-system: 31.24.2_dn4qbqame6jqsnglqqup56g4ru
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    devDependencies:
+      '@types/react': 17.0.57
+      '@types/react-dom': 17.0.19
+      sku: link:../../packages/sku
+
   fixtures/translations:
     specifiers:
       '@types/express': ^4.17.11
@@ -588,6 +605,7 @@ importers:
       '@sku-fixtures/sku-with-https': workspace:*
       '@sku-fixtures/source-maps': workspace:*
       '@sku-fixtures/ssr-hello-world': workspace:*
+      '@sku-fixtures/storybook-config': workspace:*
       '@sku-fixtures/translations': workspace:*
       '@sku-fixtures/typescript-css-modules': workspace:*
       '@sku-private/test-utils': workspace:*
@@ -613,6 +631,7 @@ importers:
       '@sku-fixtures/sku-with-https': link:../fixtures/sku-with-https
       '@sku-fixtures/source-maps': link:../fixtures/source-maps
       '@sku-fixtures/ssr-hello-world': link:../fixtures/ssr-hello-world
+      '@sku-fixtures/storybook-config': link:../fixtures/storybook-config
       '@sku-fixtures/translations': link:../fixtures/translations
       '@sku-fixtures/typescript-css-modules': link:../fixtures/typescript-css-modules
       '@sku-private/test-utils': link:../test-utils

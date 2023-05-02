@@ -24,6 +24,7 @@
     "@sku-fixtures/seek-style-guide": "workspace:*",
     "@sku-fixtures/sku-with-https": "workspace:*",
     "@sku-fixtures/ssr-hello-world": "workspace:*",
+    "@sku-fixtures/storybook-config": "workspace:*",
     "@sku-fixtures/translations": "workspace:*",
     "@sku-fixtures/typescript-css-modules": "workspace:*",
     "@sku-fixtures/source-maps": "workspace:*",

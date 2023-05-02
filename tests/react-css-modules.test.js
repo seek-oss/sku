@@ -66,13 +66,13 @@ describe('react-css-modules', () => {
 
   describe('build-storybook', () => {
     let closeStorybookServer;
-    const asserServerPort = 4297;
-    const assetServerUrl = `http://localhost:${asserServerPort}`;
+    const assetServerPort = 4297;
+    const assetServerUrl = `http://localhost:${assetServerPort}`;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-storybook', appDir);
       closeStorybookServer = await startAssetServer(
-        asserServerPort,
+        assetServerPort,
         storybookDistDir,
       );
       await waitForUrls(assetServerUrl);

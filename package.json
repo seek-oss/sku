@@ -17,7 +17,7 @@
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
   },
-  "packageManager": "pnpm@7.29.0",
+  "packageManager": "pnpm@8.4.0",
   "lint-staged": {
     "+(package.json|pnpm-lock.yaml)": [
       "pnpm run check"

@@ -6,6 +6,7 @@ const skuConfig: SkuConfig = {
   environments: ['development', 'production'],
   storybookPort: 8089,
   orderImports: true,
+  devServerMiddleware: './dev-middleware.js',
 };
 
 export default skuConfig;

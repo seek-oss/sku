@@ -5,6 +5,7 @@ const {
   startAssetServer,
   getStorybookContent,
 } = require('@sku-private/test-utils');
+const fetch = require('node-fetch');
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/storybook-config/sku.config.ts'),
@@ -14,11 +15,12 @@ const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 describe('storybook-config', () => {
   describe('storybook', () => {
     const storybookUrl = 'http://localhost:8089';
+    const middlewareUrl = `${storybookUrl}/test-middleware`;
     let server;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
-      await waitForUrls(storybookUrl);
+      await waitForUrls(storybookUrl, middlewareUrl);
     }, 200000);
 
     afterAll(async () => {
@@ -32,6 +34,13 @@ describe('storybook-config', () => {
       );
       expect(text).toEqual('Hello world');
       expect(fontSize).toEqual('16px');
+    });
+
+    it('should start sku dev middleware if configured', async () => {
+      const response = await fetch(middlewareUrl);
+
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe('OK');
     });
   });
 

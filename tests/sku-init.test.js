@@ -42,6 +42,6 @@ export default skuConfig;
 `);
     },
     // `sku init` is a long running task and can take some time to complete
-    150 * 1000,
+    200 * 1000,
   );
 });

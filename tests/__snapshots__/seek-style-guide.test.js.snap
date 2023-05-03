@@ -2,7 +2,7 @@
 
 exports[`seek-style-guide should generate the expected files 1`] = `
 {
-  "403-ee6a47cdc86625b31c65.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "982-9af0d09ad4e792fb2180.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -15,11 +15,11 @@ exports[`seek-style-guide should generate the expected files 1`] = `
 ]",
   "index.html": SCRIPTS: [
     "/runtime-809e1ad97457d5b9bab0.js",
-    "/403-ee6a47cdc86625b31c65.js",
-    "/main-bb82b7211f2cdc7e6324.js",
+    "/982-9af0d09ad4e792fb2180.js",
+    "/main-82ed4305fc63e7ccbc52.js",
   ]
 CSS: [
-    "/main-9f810ad2db5899b4e432.css",
+    "/main-81b31d8b44798cd7733f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -58,20 +58,20 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="LA4NIPb">
-        <div class="kKyygCZ">
+      <div class="BtrQ01J">
+        <div class="grFDFtw">
           <h1>
             SEEK - Australia&#x27;s no. 1 jobs, employment, career and recruitment site
           </h1>
         </div>
         <div class>
-          <div class="QqjGnE2">
-            <span class="a3YqhIM ucedCT7 UrE2lfH">
+          <div class="fB3LTo7">
+            <span class="TeXy7Q2 PoGsiDr RslwwAx">
               <span class>
                 <span data-automation-svg="true">
-                  <span class="EkNtYHl">
+                  <span class="gaejJrj">
                     <svg
-                      class="n5z9w0i"
+                      class="rC_tI8K"
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -124,7 +124,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-9f810ad2db5899b4e432.css": a,
+  "main-81b31d8b44798cd7733f.css": a,
 abbr,
 acronym,
 address,
@@ -254,11 +254,11 @@ mark {
 html {
   min-height: 100%;
 }
-.LA4NIPb,
+.BtrQ01J,
 html {
   background-color: #eee;
 }
-.LA4NIPb {
+.BtrQ01J {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -267,38 +267,38 @@ html {
     sans-serif;
   font-size: 10px;
 }
-.LA4NIPb *,
-.LA4NIPb :after,
-.LA4NIPb :before {
+.BtrQ01J *,
+.BtrQ01J :after,
+.BtrQ01J :before {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   box-sizing: inherit;
   font-family: inherit;
 }
-.LA4NIPb input[type="search"]::-webkit-search-decoration {
+.BtrQ01J input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
-.nl7aQqy {
+.eyBn0wO {
   height: 100%;
 }
-.kKyygCZ {
+.grFDFtw {
   clip: rect(1px, 1px, 1px, 1px);
   pointer-events: none;
   position: absolute !important;
 }
-.QqjGnE2 {
+.fB3LTo7 {
   margin: 0 auto;
   max-width: 940px;
 }
-.a3YqhIM {
+.TeXy7Q2 {
   display: block;
   padding-bottom: 12px;
 }
-.a3YqhIM .a3YqhIM {
+.TeXy7Q2 .TeXy7Q2 {
   outline: 2px solid red;
   position: relative;
 }
-.a3YqhIM .a3YqhIM:after {
+.TeXy7Q2 .TeXy7Q2:after {
   background: red;
   color: #fff;
   content: "ERROR: Multiple <Text> components nested";
@@ -308,25 +308,25 @@ html {
   right: 0;
   top: 0;
 }
-.ucedCT7 {
+.PoGsiDr {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  .ucedCT7:not(.UrE2lfH) {
+  .PoGsiDr:not(.RslwwAx) {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .ucedCT7:not(.UrE2lfH) {
+  .PoGsiDr:not(.RslwwAx) {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .ucedCT7.UrE2lfH {
+  .PoGsiDr.RslwwAx {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -334,32 +334,32 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .ucedCT7.UrE2lfH {
+  .PoGsiDr.RslwwAx {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     transform: translateY(0.41em);
   }
 }
-.YFwEAvh {
+.jgQK0tf {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  .YFwEAvh:not(.UrE2lfH) {
+  .jgQK0tf:not(.RslwwAx) {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .YFwEAvh:not(.UrE2lfH) {
+  .jgQK0tf:not(.RslwwAx) {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .YFwEAvh.UrE2lfH {
+  .jgQK0tf.RslwwAx {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -367,32 +367,32 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .YFwEAvh.UrE2lfH {
+  .jgQK0tf.RslwwAx {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     transform: translateY(0.30285714em);
   }
 }
-.sAUCobp {
+.FOHALT1 {
   padding-bottom: 6px;
 }
 @media only screen and (max-width: 739px) {
-  .sAUCobp:not(.UrE2lfH) {
+  .FOHALT1:not(.RslwwAx) {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .sAUCobp:not(.UrE2lfH) {
+  .FOHALT1:not(.RslwwAx) {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .sAUCobp.UrE2lfH {
+  .FOHALT1.RslwwAx {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -400,7 +400,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .sAUCobp.UrE2lfH {
+  .FOHALT1.RslwwAx {
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -408,21 +408,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .q8WiTVW:not(.UrE2lfH) {
+  .AKa9OOd:not(.RslwwAx) {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .q8WiTVW:not(.UrE2lfH) {
+  .AKa9OOd:not(.RslwwAx) {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .q8WiTVW.UrE2lfH {
+  .AKa9OOd.RslwwAx {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
@@ -430,7 +430,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .q8WiTVW.UrE2lfH {
+  .AKa9OOd.RslwwAx {
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
@@ -438,21 +438,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .DBCZQ2H:not(.UrE2lfH) {
+  .XMWW6oe:not(.RslwwAx) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .DBCZQ2H:not(.UrE2lfH) {
+  .XMWW6oe:not(.RslwwAx) {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .DBCZQ2H.UrE2lfH {
+  .XMWW6oe.RslwwAx {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -460,7 +460,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .DBCZQ2H.UrE2lfH {
+  .XMWW6oe.RslwwAx {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
@@ -468,21 +468,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .NDv4mwF:not(.UrE2lfH) {
+  .QMJwzpx:not(.RslwwAx) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .NDv4mwF:not(.UrE2lfH) {
+  .QMJwzpx:not(.RslwwAx) {
     font-size: 22px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .NDv4mwF.UrE2lfH {
+  .QMJwzpx.RslwwAx {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -490,7 +490,7 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .NDv4mwF.UrE2lfH {
+  .QMJwzpx.RslwwAx {
     font-size: 22px;
     font-weight: 700;
     line-height: 30px;
@@ -498,21 +498,21 @@ html {
   }
 }
 @media only screen and (max-width: 739px) {
-  .yGG7Sh5:not(.UrE2lfH) {
+  .tAvIcyu:not(.RslwwAx) {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
   }
 }
 @media only screen and (min-width: 740px) {
-  .yGG7Sh5:not(.UrE2lfH) {
+  .tAvIcyu:not(.RslwwAx) {
     font-size: 42px;
     font-weight: 400;
     line-height: 48px;
   }
 }
 @media only screen and (max-width: 739px) {
-  .yGG7Sh5.UrE2lfH {
+  .tAvIcyu.RslwwAx {
     font-size: 21px;
     font-weight: 700;
     line-height: 30px;
@@ -520,60 +520,60 @@ html {
   }
 }
 @media only screen and (min-width: 740px) {
-  .yGG7Sh5.UrE2lfH {
+  .tAvIcyu.RslwwAx {
     font-size: 42px;
     font-weight: 400;
     line-height: 48px;
     transform: translateY(0.23142857em);
   }
 }
-.JfsMHgO {
+.KEuPqfs {
   font-weight: 300;
 }
-.BO2SZNS {
+.OGlfwQa {
   padding-bottom: 0;
 }
-.wP0g3sg {
+.Jbx6BHR {
   display: list-item;
   list-style-type: disc;
   margin-left: 30px;
 }
-.yojLet0 {
+.lmN6saO {
   color: #169400;
 }
-.igeymRT {
+.glwIw1s {
   color: #e60278;
 }
-.kxauBAq {
+.XSJRtCa {
   color: #747474;
 }
-.XggRrIV {
+.Pu751L3 {
   background-color: rgba(30, 144, 255, 0.12);
   border-radius: 2px;
   display: inline-block;
   margin: -2px;
   padding: 2px;
 }
-.pxuB37w {
+.KMVrcnA {
   color: #404040;
 }
-.MOwZ_VU {
+.WSb10G6 {
   background-color: rgba(230, 2, 120, 0.12);
 }
-.FGcPm1q {
+.enqVE3R {
   color: #9556b7;
 }
-.pXhk0hH {
+.mzTkZXx {
   font-weight: 700;
 }
-.eDwxxJg {
+.k2LJtbi {
   font-weight: 400;
 }
-.C4hDKnh {
+.KjKcKbL {
   animation-duration: 0.4s;
-  animation-name: jdTC3YO;
+  animation-name: Cvk1H72;
 }
-@keyframes jdTC3YO {
+@keyframes Cvk1H72 {
   0% {
     transform: scale(0.5);
   }
@@ -587,96 +587,96 @@ html {
     transform: scale(1);
   }
 }
-.EkNtYHl {
+.gaejJrj {
   display: inline-block;
 }
-.n5z9w0i {
+.rC_tI8K {
   fill: currentColor;
   height: 16px;
   width: 16px;
 }
-.KlXqWjP {
+.nj75SzU {
   height: 29.4px;
   width: 29.4px;
 }
 @media only screen and (max-width: 739px) {
-  .KlXqWjP {
+  .nj75SzU {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.j7b5G9y {
+.JWm0DD2 {
   height: 19.6px;
   width: 19.6px;
 }
 @media only screen and (max-width: 739px) {
-  .j7b5G9y {
+  .JWm0DD2 {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.hJigY6O {
+.QVxDaHT {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  .hJigY6O {
+  .QVxDaHT {
     height: 12.6px;
     width: 12.6px;
   }
 }
-.EgQnENm {
+.PHh6pXP {
   height: 15.4px;
   width: 15.4px;
 }
 @media only screen and (max-width: 739px) {
-  .EgQnENm {
+  .PHh6pXP {
     height: 14.7px;
     width: 14.7px;
   }
 }
-.O5TUWct {
+.igLpl5H {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  .O5TUWct {
+  .igLpl5H {
     height: 12.6px;
     width: 12.6px;
   }
 }
-.fP1g34I {
+.r4g__ty {
   height: 11.2px;
   width: 11.2px;
 }
 @media only screen and (max-width: 739px) {
-  .fP1g34I {
+  .r4g__ty {
     height: 11.2px;
     width: 11.2px;
   }
 }
-.XXOkB_c {
+.U8TTiMu {
   height: 9.8px;
   width: 9.8px;
 }
 @media only screen and (max-width: 739px) {
-  .XXOkB_c {
+  .U8TTiMu {
     height: 9.8px;
     width: 9.8px;
   }
 }
-.Ym8IMVv {
+.rq_r8en {
   height: 12.6px;
   width: 12.6px;
 }
 @media only screen and (max-width: 739px) {
-  .Ym8IMVv {
+  .rq_r8en {
     height: 12.6px;
     width: 12.6px;
   }
 }
 ,
-  "main-bb82b7211f2cdc7e6324.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-82ed4305fc63e7ccbc52.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-809e1ad97457d5b9bab0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

@@ -3,7 +3,7 @@
 exports[`ssr translations should render en 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-ec9ef2.js",
+  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-811597.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-translations.js",
 ]
@@ -104,7 +104,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr translations should render en-PSEUDO 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-ec9ef2.js",
+  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-811597.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/en-PSEUDO-translations.js",
 ]
@@ -205,7 +205,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`ssr translations should render fr 1`] = `
 SCRIPTS: [
   "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-ec9ef2.js",
+  "http://127.0.0.1:8313/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-811597.js",
   "http://127.0.0.1:8313/main.js",
   "http://127.0.0.1:8313/fr-translations.js",
 ]

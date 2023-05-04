@@ -2,12 +2,12 @@
   "name": "@sku-fixtures/typescript-css-modules",
   "private": true,
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
   }

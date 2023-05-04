@@ -1,5 +1,13 @@
 # sku
 
+## 11.11.0
+
+### Minor Changes
+
+- Start sku dev server middleware when running storybook ([#787](https://github.com/seek-oss/sku/pull/787))
+
+  When running `sku storybook`, if you have configured `devServerMiddleware` in your sku config, that middleware will now be passed through to storybook and injected into its own middleware stack.
+
 ## 11.10.1
 
 ### Patch Changes

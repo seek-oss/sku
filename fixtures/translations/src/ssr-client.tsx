@@ -1,5 +1,5 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { VocabProvider } from '@vocab/react';
 import { loadableReady } from 'sku/@loadable/component';
 
@@ -11,10 +11,10 @@ loadableReady(() => {
   const isPseudo = Boolean(urlParameters.get('pseudo'));
   const language = isPseudo ? 'en-PSEUDO' : pathLanguage;
 
-  hydrate(
+  hydrateRoot(
+    document.getElementById('app')!,
     <VocabProvider language={language}>
       <App />
     </VocabProvider>,
-    document.getElementById('app'),
   );
 });

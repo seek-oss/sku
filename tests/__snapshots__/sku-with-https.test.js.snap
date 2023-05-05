@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
-  "/909-e79ed22ec93a236ee1a4.js",
-  "/main-13c31986130c446c9181.js",
+  "/346-88ab3790c9838febdf72.js",
+  "/main-0db35b25fac2fe718dc1.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -50,10 +50,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div
-        class="eRNyDeb"
-        data-reactroot
-      >
+      <div class="eRNyDeb">
         <div class="MYunKdE">
           Initial
         </div>
@@ -93,8 +90,8 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-         data-reactroot
-       >
+     <div id="app">
+       <div class="eRNyDeb">
          <div class="MYunKdE">
 -          Initial
 +          Client
@@ -123,7 +120,7 @@ POST HYDRATE DIFFS:
 exports[`sku-with-https start should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_17_0_2_node_modules_loadable_compon-ab3108.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-95075d.js",
   "/main.js",
 ]
 CSS: [
@@ -170,10 +167,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div
-        class="lessStyles__root___eRNyDeb"
-        data-reactroot
-      >
+      <div class="lessStyles__root___eRNyDeb">
         <div class="lessStyles__nested___MYunKdE">
           Initial
         </div>
@@ -213,8 +207,8 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
-         data-reactroot
-       >
+     <div id="app">
+       <div class="lessStyles__root___eRNyDeb">
          <div class="lessStyles__nested___MYunKdE">
 -          Initial
 +          Client

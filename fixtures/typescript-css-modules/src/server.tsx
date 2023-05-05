@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import App from './App';
 
 interface SkuProps {
-  SkuProvider: React.FunctionComponent;
+  SkuProvider: React.FunctionComponent<{ children: React.ReactNode }>;
   getHeadTags: () => string;
   getBodyTags: () => string;
 }

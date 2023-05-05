@@ -15,7 +15,8 @@
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
-    "version": "changeset version && pnpm install --lockfile-only"
+    "version": "changeset version && pnpm install --lockfile-only",
+    "postinstall": "node ./postinstall.js"
   },
   "packageManager": "pnpm@8.4.0",
   "lint-staged": {
@@ -62,7 +63,7 @@
     "rimraf": "^5.0.0"
   },
   "volta": {
-    "node": "16.19.0"
+    "node": "16.20.0"
   },
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,

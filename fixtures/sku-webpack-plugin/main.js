@@ -1,6 +1,6 @@
 import React from 'react';
 import 'braid-design-system/reset';
-import ReactDom from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import theme from 'braid-design-system/themes/apac';
 
 import { BraidProvider, Card, Text } from 'braid-design-system';
@@ -13,7 +13,8 @@ const App = () => (
   </BraidProvider>
 );
 
-ReactDom.render(
-  <App />,
+const root = createRoot(
   document.body.appendChild(document.createElement('div')),
 );
+
+root.render(<App />);

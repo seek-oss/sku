@@ -1,5 +1,5 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { VocabProvider } from '@vocab/react';
 
 import type { RenderContext } from './types';
@@ -17,5 +17,5 @@ export default ({ language: skuLanguage }: RenderContext) => {
       </VocabProvider>
     );
   };
-  hydrate(<Client />, document.getElementById('app'));
+  hydrateRoot(document.getElementById('app')!, <Client />);
 };

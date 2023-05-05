@@ -7,7 +7,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.3",
+    "@testing-library/react": "^14.0.0",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
   }

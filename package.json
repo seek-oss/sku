@@ -6,6 +6,7 @@
     "node": ">=14.15"
   },
   "scripts": {
+    "postinstall": "node ./postinstall.js",
     "prepare": "husky install",
     "lint": "pnpm format-check && eslint --cache .",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
@@ -62,7 +63,7 @@
     "rimraf": "^5.0.0"
   },
   "volta": {
-    "node": "16.19.0"
+    "node": "16.20.0"
   },
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,

@@ -6,6 +6,7 @@
     "node": ">=14.15"
   },
   "scripts": {
+    "postinstall": "node ./postinstall.js",
     "prepare": "husky install",
     "lint": "pnpm format-check && eslint --cache .",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
@@ -15,8 +16,7 @@
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
-    "version": "changeset version && pnpm install --lockfile-only",
-    "postinstall": "node ./postinstall.js"
+    "version": "changeset version && pnpm install --lockfile-only"
   },
   "packageManager": "pnpm@8.4.0",
   "lint-staged": {

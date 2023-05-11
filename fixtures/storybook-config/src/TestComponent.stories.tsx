@@ -14,10 +14,23 @@ export default {
       </StorybookDecorator>
     ),
   ],
+  argTypes: {
+    text: {
+      label: 'Text',
+      type: { name: 'string', required: true },
+    },
+  },
 } satisfies Meta;
 
 type Story = StoryObj<typeof TestComponent>;
 
 export const Default: Story = {
-  render: () => <TestComponent tone="caution">Hello world</TestComponent>,
+  args: {
+    tone: 'caution',
+    text: 'Hello world',
+  },
+};
+
+export const Positive: Story = {
+  render: () => <TestComponent tone="positive" text="Primary text" />,
 };

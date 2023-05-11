@@ -35,6 +35,8 @@ const getStorybookElement = async (url, elementSelector) => {
   return await storybookFrame.waitForSelector(elementSelector);
 };
 
+// NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
+// font size of an element
 describe('storybook-config', () => {
   describe('storybook', () => {
     const storybookUrl = 'http://localhost:8089';

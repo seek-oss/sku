@@ -7,7 +7,7 @@ const getStorybookContent = async (url, elementSelector) => {
   );
 
   // Ensure default story is activated
-  firstStoryButton.click();
+  await firstStoryButton.click();
 
   const iframeElement = await page.waitForSelector('#storybook-preview-iframe');
 

@@ -15,6 +15,7 @@ if (args.debug) {
   debug.enable(process.env.DEBUG);
 }
 
+let hasSku = false;
 let skipConfigure = false;
 let skipValidatePeerDeps = false;
 const packageJson = getPathFromCwd('./package.json');
@@ -22,11 +23,21 @@ const packageJsonExists = fs.existsSync(packageJson);
 
 if (packageJsonExists) {
   const {
+    dependencies,
+    devDependencies,
     skuSkipConfigure = false,
     skuSkipValidatePeerDeps = false,
   } = require(packageJson);
   skipConfigure = skuSkipConfigure;
   skipValidatePeerDeps = skuSkipValidatePeerDeps;
+  hasSku =
+    Boolean(devDependencies?.sku) ||
+    // TODO: get rid of this part when we remove treat
+    Boolean(dependencies?.sku);
+}
+
+if (!hasSku) {
+  process.exit();
 }
 
 const configureProject = async () => {

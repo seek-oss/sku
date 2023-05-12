@@ -85,7 +85,7 @@ module.exports = {
 
 To build your Storybook, first add the following npm script:
 
-```js
+```json
 {
   "scripts": {
     "build-storybook": "sku build-storybook"

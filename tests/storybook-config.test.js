@@ -59,6 +59,15 @@ describe('storybook-config', () => {
       expect(await response.text()).toBe('OK');
     });
 
+    it('should render decorators defined in the storybook preview file', async () => {
+      const { text, fontSize } = await getStorybookContent(
+        storybookUrl,
+        '[data-automation-decorator]',
+      );
+      expect(text).toEqual('Braid Text decorator');
+      expect(fontSize).toEqual('16px');
+    });
+
     it('should render a component inside a story', async () => {
       const { text, fontSize } = await getStorybookContent(
         storybookUrl,
@@ -120,6 +129,15 @@ describe('storybook-config', () => {
 
     afterAll(() => {
       closeStorybookServer();
+    });
+
+    it('should render decorators defined in the storybook preview file', async () => {
+      const { text, fontSize } = await getStorybookContent(
+        assetServerUrl,
+        '[data-automation-decorator]',
+      );
+      expect(text).toEqual('Braid Text decorator');
+      expect(fontSize).toEqual('16px');
     });
 
     it('should render a component inside a story', async () => {

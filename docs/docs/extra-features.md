@@ -9,13 +9,16 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 
 ## Source maps
 
-Source maps are enabled by default when running the `sku start` command. However, if you want to generate source maps when running `sku build`, you can do so by enabling [`sourceMapsProd`](./docs/configuration#sourcemapsprod).
+Source maps are enabled by default when running the `sku start` command.
+However, if you want to generate source maps when running `sku build`, you can do so by enabling [`sourceMapsProd`](./docs/configuration#sourcemapsprod).
 
 ## Compile packages
 
-Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that sku provides. A great example of this is [braid](https://github.com/seek-oss/braid-design-system). Out of the box, sku supports loading braid but if you need to treat other packages this way you can use `compilePackages`.
+Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that sku provides.
+sku supports loading packages as if they were part of your app via the `compilePackages` feature.
 
-The best way to configure a package as a `compilePackage`, is to set `"skuCompilePackage": true` in the **packages** `package.json`. This method only works for `@seek` scoped packages.
+The best way to configure a package as a `compilePackage` is to set `"skuCompilePackage": true` in the **package's** `package.json`.
+This method only works for `@seek` scoped packages.
 
 ```json
 {
@@ -24,7 +27,7 @@ The best way to configure a package as a `compilePackage`, is to set `"skuCompil
 }
 ```
 
-Alternatively, you can add any packages you like to the `compilePackages` option in the **consuming app** sku config file.
+Alternatively, you can add any packages you like to the `compilePackages` option in the **consuming app's** sku config file.
 
 ```js
 module.exports = {
@@ -55,23 +58,34 @@ module.exports = {
 
 `sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.
 
-## Pre-commit hooks
+## Pre-commit hook
 
-To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI. To make use of this, it's recommended that you install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it in `package.json` as follows:
+To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI.
+To make use of this hook, it's recommended to install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it as follows:
 
-```js
+```json
 // package.json
 
-"husky": {
-  "hooks": {
-    "pre-commit": "sku pre-commit"
+{
+  "scripts": {
+    "prepare": "husky install"
   }
-},
+}
+```
+
+```sh
+# .husky/pre-commit
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+yarn sku pre-commit
 ```
 
 ## Assertion removal
 
-If you use [Node's `assert` library](https://nodejs.org/api/assert.html) or its [browser port](https://www.npmjs.com/package/assert), your assertions will be automatically removed in production via [`babel-plugin-unassert`](https://github.com/unassert-js/babel-plugin-unassert). This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
+If you use [Node's `assert` library](https://nodejs.org/api/assert.html) or its [browser port](https://www.npmjs.com/package/assert), your assertions will be automatically removed in production via [`babel-plugin-unassert`](https://github.com/unassert-js/babel-plugin-unassert).
+This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
 
 For example, let's assume you wrote the following code:
 
@@ -96,16 +110,18 @@ export const Rating = ({ rating }) => <div>...</div>;
 
 ## DevServer Middleware
 
-Supply a `devServerMiddleware` path in your sku config to access the internal dev Express server.
+Supply a `devServerMiddleware` path in your sku config to access the internal dev [Express] server.
 
 The file must export a function that will receive the express server.
 
 Example:
 
 ```js
-module.exports = app => {
+module.exports = (app) => {
   app.get('/mock-api', (req, res) => {
-    ...
-  })
-}
+    // ...
+  });
+};
 ```
+
+[express]: http://expressjs.com/

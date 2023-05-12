@@ -140,11 +140,6 @@ const getTemplateFileDestinationFromRoot =
       lint: 'sku lint',
       format: 'sku format',
     },
-    husky: {
-      hooks: {
-        'pre-commit': 'sku pre-commit',
-      },
-    },
   };
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
@@ -200,12 +195,7 @@ const getTemplateFileDestinationFromRoot =
 
   const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
 
-  const devDeps = [
-    '@vanilla-extract/css',
-    'husky',
-    '@types/react',
-    '@types/react-dom',
-  ];
+  const devDeps = ['@vanilla-extract/css', '@types/react', '@types/react-dom'];
 
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(

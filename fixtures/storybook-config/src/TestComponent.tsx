@@ -1,7 +1,7 @@
 import { Box, Card, Text } from 'braid-design-system';
 import React from 'react';
-// @ts-expect-error no types
-import * as ssg from 'seek-style-guide/react';
+// @ts-expect-error
+import { Text as SSGText, HeartIcon } from 'seek-style-guide/react';
 
 import * as styles from './TestComponent.css';
 import stylesRefs from './TestComponent.less';
@@ -22,9 +22,9 @@ export const TestComponent = ({ tone, text }: TestComponentProps) => (
     <Box className={stylesRefs.root} data={{ 'automation-less': true }}>
       32px less text
     </Box>
-    <ssg.Text large data-automation-seek-style-guide>
+    <SSGText large data-automation-seek-style-guide>
       Style guide text
-    </ssg.Text>
-    <ssg.HeartIcon data-automation-svg />
+    </SSGText>
+    <HeartIcon data-automation-svg />
   </Card>
 );

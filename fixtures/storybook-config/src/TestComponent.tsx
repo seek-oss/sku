@@ -1,6 +1,6 @@
 import { Box, Card, Text } from 'braid-design-system';
 import React from 'react';
-// @ts-expect-error
+// @ts-expect-error no types
 import { Text as SSGText, HeartIcon } from 'seek-style-guide/react';
 
 import * as styles from './TestComponent.css';

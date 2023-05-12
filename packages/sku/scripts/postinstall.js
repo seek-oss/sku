@@ -27,9 +27,9 @@ if (packageJsonExists) {
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSku =
-    devDependencies.sku ||
+    Boolean(devDependencies?.sku) ||
     // TODO: get rid of this part when we remove treat
-    dependencies.sku;
+    Boolean(dependencies?.sku);
 
   // Don't run configure script on sku itself
   // Don't run configure script if sku is not installed

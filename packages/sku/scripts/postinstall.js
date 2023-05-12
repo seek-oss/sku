@@ -19,40 +19,49 @@ if (packageJsonExists) {
   log('postinstall', 'packageJsonExists');
   const {
     name: packageName,
+    dependencies,
+    devDependencies,
     skuSkipPostInstall = false,
     skuSkipPostinstall = false,
   } = require(packageJson);
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
+  const hasSku =
+    devDependencies.sku ||
+    // TODO: get rid of this part when we remove treat
+    dependencies.sku;
 
   // Don't run configure script on sku itself
-  // Also ignore projects that are opting out of sku's postinstall script
-  if (packageName !== 'sku' && !skipPostInstall) {
-    log('postinstall', 'configuring');
-    let configure;
-    try {
-      log('postinstall', 'starting load of configure');
-      log('postinstall', require.resolve('../lib/configure'));
-      configure = require('../lib/configure');
-    } catch (error) {
-      console.error(
-        'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
-      );
-      console.error(error);
-      throw error;
-    }
-    log('postinstall', 'loaded configure');
+  // Don't run configure script if sku is not installed
+  // Ignore projects that are opting out of sku's postinstall script
+  if (packageName === 'sku' || !hasSku || skipPostInstall) {
+    process.exit();
+  }
 
-    try {
-      log('postinstall', 'running configure');
-      configure();
-      log('postinstall', 'successfully configured');
-    } catch (error) {
-      console.error(
-        'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',
-      );
-      console.error(error);
-      throw error;
-    }
+  log('postinstall', 'configuring');
+  let configure;
+  try {
+    log('postinstall', 'starting load of configure');
+    log('postinstall', require.resolve('../lib/configure'));
+    configure = require('../lib/configure');
+  } catch (error) {
+    console.error(
+      'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
+    );
+    console.error(error);
+    throw error;
+  }
+  log('postinstall', 'loaded configure');
+
+  try {
+    log('postinstall', 'running configure');
+    configure();
+    log('postinstall', 'successfully configured');
+  } catch (error) {
+    console.error(
+      'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',
+    );
+    console.error(error);
+    throw error;
   }
 }

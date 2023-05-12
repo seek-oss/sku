@@ -2,7 +2,7 @@ import 'braid-design-system/reset';
 import { BraidProvider } from 'braid-design-system';
 import apac from 'braid-design-system/themes/apac';
 import React from 'react';
-// @ts-expect-error
+// @ts-expect-error no types
 import { StyleGuideProvider } from 'seek-style-guide/react';
 
 export const StorybookDecorator = ({

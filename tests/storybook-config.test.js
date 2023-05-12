@@ -12,7 +12,7 @@ const appDir = path.dirname(
 );
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
-const getStorybookElement = async (url, elementSelector) => {
+const getElementWithinStorybookFrame = async (url, elementSelector) => {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
 
@@ -96,7 +96,7 @@ describe('storybook-config', () => {
     });
 
     it('should render a seek style guide icon', async () => {
-      const svg = await getStorybookElement(
+      const svg = await getElementWithinStorybookFrame(
         storybookUrl,
         '[data-automation-svg] svg',
       );
@@ -159,7 +159,7 @@ describe('storybook-config', () => {
     });
 
     it('should render a seek style guide icon', async () => {
-      const svg = await getStorybookElement(
+      const svg = await getElementWithinStorybookFrame(
         assetServerUrl,
         '[data-automation-svg] svg',
       );

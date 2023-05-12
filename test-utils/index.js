@@ -2,7 +2,10 @@ const { ListExternalsWebpackPlugin } = require('./ListExternalsWebpackPlugin');
 const appSnapshot = require('./appSnapshot');
 const { startAssetServer } = require('./assetServer');
 const { dirContentsToObject } = require('./dirContentsToObject');
-const { getStorybookContent } = require('./getStorybookContent');
+const {
+  getStorybookFrame,
+  getTextContentFromStorybookFrame,
+} = require('./storybook');
 const { runSkuScriptInDir } = require('./runSkuScriptInDir');
 const { spawnSkuScriptInDir } = require('./spawnSkuScriptInDir');
 const { waitForUrls } = require('./waitForUrls');
@@ -12,7 +15,8 @@ module.exports = {
   ...appSnapshot,
   startAssetServer,
   dirContentsToObject,
-  getStorybookContent,
+  getStorybookFrame,
+  getTextContentFromStorybookFrame,
   runSkuScriptInDir,
   spawnSkuScriptInDir,
   waitForUrls,

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const { setCwd, getPathFromCwd } = require('../lib/cwd');
+const { setCwd, getPathFromCwd, cwd } = require('../lib/cwd');
 const debug = require('debug');
+
+const log = debug('sku:postinstall');
 
 // npm scripts can have an incorrect cwd
 // in this case INIT_CWD should be set
@@ -9,10 +11,10 @@ const debug = require('debug');
 // must be run first
 setCwd(process.env.INIT_CWD);
 
+log('postinstall', `changed cwd to ${cwd()}`);
+
 const packageJson = getPathFromCwd('./package.json');
 const packageJsonExists = fs.existsSync(packageJson);
-
-const log = debug('sku:postinstall');
 
 // Don't run configure if CWD is not a project (e.g. npx)
 if (packageJsonExists) {

@@ -1,5 +1,11 @@
 # sku
 
+## 11.11.1
+
+### Patch Changes
+
+- Check only directories for Storybook stories ([#797](https://github.com/seek-oss/sku/pull/797))
+
 ## 11.11.0
 
 ### Minor Changes

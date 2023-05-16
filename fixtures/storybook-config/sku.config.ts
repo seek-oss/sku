@@ -7,6 +7,7 @@ const skuConfig: SkuConfig = {
   storybookPort: 8089,
   orderImports: true,
   devServerMiddleware: './dev-middleware.js',
+  storybookAddons: ['@storybook/addon-controls'],
 };
 
 export default skuConfig;

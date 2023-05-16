@@ -6,7 +6,6 @@ const {
   runSkuScriptInDir,
   getAppSnapshot,
   startAssetServer,
-  getStorybookContent,
 } = require('@sku-private/test-utils');
 const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
 
@@ -134,30 +133,6 @@ describe('typescript-css-modules', () => {
 
     it('should handle tsc and eslint', async () => {
       expect(exitCode).toEqual(0);
-    });
-  });
-
-  describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8042';
-    let server;
-
-    beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
-      await waitForUrls(storybookUrl);
-    }, 200000);
-
-    afterAll(async () => {
-      await server.kill();
-    });
-
-    it('should start a storybook server', async () => {
-      const { text, fontSize } = await getStorybookContent(
-        storybookUrl,
-        '[data-automation-text]',
-      );
-
-      expect(text).toEqual('Hello World');
-      expect(fontSize).toEqual('32px');
     });
   });
 });

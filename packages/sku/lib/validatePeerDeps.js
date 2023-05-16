@@ -9,6 +9,10 @@ const detectYarn = require('./detectYarn');
 const { cwd, getPathFromCwd } = require('../lib/cwd');
 const { paths } = require('../context');
 
+/**
+ * @param {unknown[]} list
+ * @param {Function} fn
+ * */
 const asyncMap = (list, fn) => {
   return Promise.all(list.map((item) => fn(item)));
 };

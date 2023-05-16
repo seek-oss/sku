@@ -35,9 +35,9 @@ const setupHosts = async () => {
   }
 };
 
-const getMissingHosts = async (sites) => {
+const getMissingHosts = async () => {
   const systemHosts = await getSystemHosts(false);
-  const appHosts = getAppHosts(sites);
+  const appHosts = getAppHosts();
 
   return appHosts.filter(
     (appHost) => !systemHosts.find(([_, host]) => appHost === host),

@@ -1,5 +1,8 @@
 const statsConfig = require('../config/webpack/statsConfig');
 
+/**
+ * @param {import('webpack').Compiler} compiler
+ * */
 const run = async (compiler) => {
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {

@@ -2,7 +2,13 @@ const chalk = require('chalk');
 const wrap = require('wrap-ansi');
 const identString = require('indent-string');
 
-module.exports = (type, heading, messages = []) => {
+/**
+ * @param {'info' | 'error' | 'warning'} type
+ * @param {string} heading
+ * @param {string[]} messages
+ *
+ * */
+const banner = (type, heading, messages = []) => {
   let highlight;
 
   switch (type) {
@@ -35,11 +41,13 @@ module.exports = (type, heading, messages = []) => {
 
   console.log(`
 ${border}
-  
+
 ${renderContent(chalk.bold(highlight(heading)))}
-  
+
 ${renderContent(messages.join('\n\n'))}
-  
+
 ${border}
   `);
 };
+
+module.exports = banner;

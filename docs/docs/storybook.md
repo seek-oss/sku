@@ -23,7 +23,7 @@ _**NOTE:** To access the Storybook API, you should import from `sku/@storybook/.
 
 Story rendering can be customized globally by creating a `.storybook/preview.js` (or `.ts`, or `.tsx`) file.
 
-```ts
+```tsx
 import 'braid-design-system/reset';
 
 import apac from 'braid-design-system/themes/apac';

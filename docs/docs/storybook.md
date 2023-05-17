@@ -19,6 +19,34 @@ export const Secondary = () => <Button variant="secondary">Secondary</Button>;
 
 _**NOTE:** To access the Storybook API, you should import from `sku/@storybook/...`, since your project isn't depending on Storybook packages directly._
 
+### Story Rendering
+
+Story rendering can be customized globally by creating a `.storybook/preview.js` (or `.ts`, or `.tsx`) file.
+
+```tsx
+import 'braid-design-system/reset';
+
+import apac from 'braid-design-system/themes/apac';
+import { BraidProvider } from 'braid-design-system';
+
+import React from 'react';
+
+import type { DecoratorFn } from 'sku/@storybook/react';
+
+// This will wrap every story in a BraidProvider
+export const decorators: DecoratorFn[] = [
+  (Story) => (
+    <BraidProvider theme={apac}>
+      <Story />
+    </BraidProvider>
+  ),
+];
+```
+
+See [the Storybook docs][storybook preview.js] for more info.
+
+[storybook preview.js]: https://storybook.js.org/docs/react/configure/overview#configure-story-rendering
+
 ### DevServer Middleware
 
 When running `sku storybook`, if you have configured [`devServerMiddleware`][devserver middleware] in your sku config, that middleware will be passed through to storybook and injected into its own middleware stack.
@@ -59,7 +87,7 @@ module.exports = {
 
 To build your Storybook, first add the following npm script:
 
-```js
+```json
 {
   "scripts": {
     "build-storybook": "sku build-storybook"

@@ -9,10 +9,12 @@ const { storybookTarget } = require('../context');
 const buildStorybookPath = require.resolve('@storybook/react/bin/build.js');
 const configDir = path.resolve(__dirname, '../config/storybook/build');
 const { runVocabCompile } = require('../lib/runVocab');
+const { setUpStorybookPreviewFile } = require('../lib/storybook');
 
 (async () => {
   await runVocabCompile();
   await rimraf(storybookTarget);
+  await setUpStorybookPreviewFile(configDir);
 
   argv.push('--config-dir', configDir);
   argv.push('--output-dir', storybookTarget);

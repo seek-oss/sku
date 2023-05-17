@@ -2,9 +2,6 @@
   "name": "@sku-private/monorepo",
   "private": true,
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
-  "engines": {
-    "node": ">=14.15"
-  },
   "scripts": {
     "postinstall": "node ./postinstall.js",
     "prepare": "husky install",
@@ -64,7 +61,7 @@
     "rimraf": "^5.0.0"
   },
   "volta": {
-    "node": "16.20.0"
+    "node": "18.16.0"
   },
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,

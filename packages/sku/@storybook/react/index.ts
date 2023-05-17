@@ -11,4 +11,5 @@ export {
   getStorybook,
   type Meta,
   type StoryObj,
+  type DecoratorFn,
 } from '@storybook/react';

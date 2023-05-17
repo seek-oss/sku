@@ -61,6 +61,11 @@ const createSelfSignedCertificate = () => {
   });
 };
 
+/**
+ * @typedef {import("fs").PathLike} PathLike
+ * @param {PathLike} certificatePath
+ * @param {PathLike} certificateDirPath
+ */
 const generateCertificate = async (certificatePath, certificateDirPath) => {
   const startTime = performance.now();
 

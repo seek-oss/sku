@@ -27,7 +27,7 @@ function getProjectDependencies(readFileSync) {
  *
  * This wrapper let's us inject fs and require dependencies for testing.
  *
- * @param {Object} fs - Node's fs module
+ * @param {object} fs - Node's fs module
  * @param {Function} resolve - Node's require.resolve
  */
 const createPackageResolver = (fs, resolve) => {

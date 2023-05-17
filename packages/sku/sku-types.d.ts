@@ -62,6 +62,8 @@ type TranformOutputPathFunction = (
   input: TranformOutputPathFunctionParams,
 ) => string;
 
+type SkuLanguage = string | { name: string; extends?: string };
+
 export interface SkuConfig {
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
@@ -193,7 +195,7 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=languages
    */
-  languages?: ReadonlyArray<string | { name: string; extends?: string }>;
+  languages?: ReadonlyArray<SkuLanguage>;
 
   /**
    * **Only for libraries**
@@ -311,7 +313,7 @@ export interface SkuConfig {
   routes?: Array<SkuRoute>;
 
   /**
-   * *Only for SSR apps**
+   * **Only for SSR apps**
    *
    * The entry file for the server.
    *

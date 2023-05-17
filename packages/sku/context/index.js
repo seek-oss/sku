@@ -7,9 +7,13 @@ const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
+
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
 
+/** @typedef {import("../").SkuConfig} SkuConfig */
+
+/** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
 const getSkuConfig = () => {
   let appSkuConfigPath;
   const tsPath = getPathFromCwd('sku.config.ts');
@@ -42,6 +46,7 @@ const getSkuConfig = () => {
 
 const { appSkuConfig, appSkuConfigPath } = getSkuConfig();
 
+/** @type {SkuConfig} */
 const skuConfig = {
   ...defaultSkuConfig,
   ...appSkuConfig,
@@ -68,13 +73,22 @@ const env = {
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
+/**
+ * @typedef {import('../').SkuRouteObject} SkuRouteObject
+ * @typedef {SkuRouteObject & { siteIndex?: number }} NormalizedSkuRoute
+ */
+
+/**
+ * @param {import('../').SkuRoute} route
+ * @returns {NormalizedSkuRoute}
+ */
 const normalizeRoute = (route) =>
   typeof route === 'string' ? { route } : route;
 
 const normalizedRoutes = skuConfig.routes.map(normalizeRoute);
 
 skuConfig.sites.forEach((site, siteIndex) => {
-  if (site.routes) {
+  if (typeof site !== 'string' && site.routes) {
     normalizedRoutes.push(
       ...site.routes.map((route) => ({
         ...normalizeRoute(route),
@@ -143,6 +157,7 @@ const paths = {
   appSkuConfigPath,
   devServerMiddleware,
   src: skuConfig.srcPaths.map(getPathFromCwd),
+  /** @type {string[]} */
   compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
   clientEntry: getPathFromCwd(skuConfig.clientEntry),
   renderEntry: getPathFromCwd(skuConfig.renderEntry),

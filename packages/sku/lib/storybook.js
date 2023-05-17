@@ -23,7 +23,7 @@ const previewFileAbsolutePath = path.join(
  * Does nothing if 0 or >1 files are found.
  *
  * @param {string} storybookConfigDirectory The path to the storybook config directory
- * */
+ */
 const setUpStorybookPreviewFile = async (storybookConfigDirectory) => {
   const symlinkFileAsbolutePath = path.join(
     storybookConfigDirectory,

@@ -12,6 +12,9 @@ const prettierConfigPath = path.join(
   '../config/prettier/prettierConfig.js',
 );
 
+/**
+ * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }}
+ */
 const runPrettier = async ({ write, listDifferent, paths }) => {
   console.log(
     chalk.cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`),

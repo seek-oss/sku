@@ -1,5 +1,11 @@
 # sku
 
+## 11.11.2
+
+### Patch Changes
+
+- Don't run postinstall script if a project isn't using sku ([#794](https://github.com/seek-oss/sku/pull/794))
+
 ## 11.11.1
 
 ### Patch Changes

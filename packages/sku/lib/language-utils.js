@@ -7,14 +7,14 @@ const log = debug('sku:language-middleware');
 
 /**
  * @param {import("../context").NormalizedSkuRoute} route
- * */
+ */
 function getValidLanguagesForRoute(route) {
   const routeIsForSpecificSite = typeof route.siteIndex === 'number';
 
   /**
    * @typedef {import("../").SkuLanguage} SkuLanguage
    * @type {(SkuLanguage | null)[]} SkuLanguage
-   * */
+   */
   let languagesToRender = [null];
   if (languages) {
     if (route.languages) {
@@ -40,7 +40,7 @@ const LANGUAGE_NAMED_PARAM = 'language';
 /**
  * @param {string} pathname
  * @param {string} route
- * */
+ */
 function getLanguageParamFromUrl(pathname, route) {
   const match = routeMatcher(route)(pathname);
 
@@ -51,7 +51,7 @@ function getLanguageParamFromUrl(pathname, route) {
  * @param {import("express").Request} req
  * @param {import("../").SkuRouteObject} route
  * @returns {(string | null)}
- * */
+ */
 function getLanguageFromRoute(req, route) {
   const supportedLanguagesForRoute = getValidLanguagesForRoute(route);
 
@@ -107,7 +107,7 @@ function getLanguageFromRoute(req, route) {
 /**
  * @param {string} routePath
  * @param {string | null} language
- * */
+ */
 function getRouteWithLanguage(routePath, language) {
   return routePath.replace(/(\$|\:)language/g, language);
 }

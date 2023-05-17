@@ -2,7 +2,7 @@ const { match } = require('path-to-regexp');
 
 /**
  * @param {string} route
- * */
+ */
 module.exports = (route) => {
   const normalisedRoute = route
     .split('/')

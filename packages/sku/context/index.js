@@ -13,7 +13,7 @@ const isCompilePackage = require('../lib/isCompilePackage');
 
 /** @typedef {import("../").SkuConfig} SkuConfig */
 
-/** @returns {{appSkuConfig: SkuConfig, appSkuConfigPath: string | null}} */
+/** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
 const getSkuConfig = () => {
   let appSkuConfigPath;
   const tsPath = getPathFromCwd('sku.config.ts');

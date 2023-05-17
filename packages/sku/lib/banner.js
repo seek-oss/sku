@@ -6,8 +6,7 @@ const identString = require('indent-string');
  * @param {'info' | 'error' | 'warning'} type
  * @param {string} heading
  * @param {string[]} messages
- *
- * */
+ */
 const banner = (type, heading, messages = []) => {
   let highlight;
 

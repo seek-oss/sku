@@ -9,7 +9,7 @@ const {
 const extensions = [...tsExtensions, ...jsExtensions].map((ext) => `.${ext}`);
 
 /**
- * @param {{fix?: boolean, paths?: string[]}}
+ * @param {{ fix?: boolean, paths?: string[] }}
  * */
 const runESLint = ({ fix = false, paths }) =>
   new Promise((resolve, reject) => {

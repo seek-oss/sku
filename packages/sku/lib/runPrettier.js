@@ -13,7 +13,7 @@ const prettierConfigPath = path.join(
 );
 
 /**
- * @param {{write?: boolean, listDifferent?: boolean, paths?: string[]}}
+ * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }}
  * */
 const runPrettier = async ({ write, listDifferent, paths }) => {
   console.log(

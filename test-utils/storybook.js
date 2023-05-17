@@ -2,7 +2,7 @@
  * Returns the iframe of the first story at the provided storybook URL
  *
  * @param {string} storybookUrl A URL pointing to a storybook
- * */
+ */
 const getStorybookFrame = async (storybookUrl) => {
   const page = await browser.newPage();
   await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
@@ -31,7 +31,7 @@ const getStorybookFrame = async (storybookUrl) => {
  *
  * @param {import('puppeteer').Frame} storybookFrame The iframe of a single storybook story
  * @param {string} elementSelector An element selector for targetting a specific element within the story frame
- * */
+ */
 const getTextContentFromStorybookFrame = async (
   storybookFrame,
   elementSelector,

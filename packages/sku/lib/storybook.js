@@ -18,8 +18,8 @@ const previewFileAbsolutePath = path.join(
 /**
  * This function first cleans up any existing preview.{js,ts,tsx} files in the provided storybook config directory.
  * This includes any potentially dangling symlinks.
- * Then it looks for a `.storybook/preview.{js,ts,tsx}` file relative to the sku config folder.
- * If 1 file is found, a symlink is created to it from the provided storybook config directory.
+ * Then it looks for a `.storybook/preview.{js,ts,tsx}` file relative to the sku config.
+ * If 1 file is found, a symlink pointing to it is created in the provided storybook config directory.
  * Does nothing if 0 or >1 files are found.
  *
  * @param {string} storybookConfigDirectory The path to the storybook config directory

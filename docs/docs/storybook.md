@@ -23,7 +23,7 @@ _**NOTE:** To access the Storybook API, you should import from `sku/@storybook/.
 
 Story rendering can be customized globally by creating a `.storybook/preview.js` (or `.ts`, or `.tsx`) file.
 
-```js
+```ts
 import 'braid-design-system/reset';
 
 import apac from 'braid-design-system/themes/apac';
@@ -31,8 +31,10 @@ import { BraidProvider } from 'braid-design-system';
 
 import React from 'react';
 
+import type { DecoratorFn } from 'sku/@storybook/react';
+
 // This will wrap every story in a BraidProvider
-export const decorators = [
+export const decorators: DecoratorFn[] = [
   (Story) => (
     <BraidProvider theme={apac}>
       <Story />

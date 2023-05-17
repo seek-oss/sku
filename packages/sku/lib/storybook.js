@@ -43,10 +43,10 @@ const setUpStorybookPreviewFile = async (storybookConfigDirectory) => {
   const previewFiles = await glob(previewFileAbsolutePath);
 
   if (previewFiles.length > 1) {
-    console.log(
+    console.error(
       'Multiple storybook preview files found. Please only define a single preview file.',
     );
-    console.log(previewFiles);
+    console.error(previewFiles);
 
     return;
   }

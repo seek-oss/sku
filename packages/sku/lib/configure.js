@@ -120,16 +120,22 @@ module.exports = async () => {
       .filter((srcPath) => fs.statSync(srcPath).isDirectory())
       .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
   );
-  const srcHasLessFiles = lessFileGlobResults.some((fileArray) => {
-    return fileArray.length > 0;
-  });
+  const srcHasLessFiles = lessFileGlobResults.some(
+    (fileArray) => fileArray.length > 0,
+  );
   if (srcHasLessFiles) {
-    printBanner('warning', 'Less styles detected', [
-      `Vanilla Extract is the preferred styling solution supported by sku. Support for ${chalk.bold(
-        '.less',
-      )} styles may be removed in the future. Please migrate all ${chalk.bold(
-        '.less',
-      )} styles to Vanilla Extract styles.`,
+    printBanner('warning', 'LESS styles detected', [
+      `Support for ${chalk.bold('LESS')} has been deprecated.`,
+      `${chalk.bold(
+        'Vanilla Extract',
+      )} is the preferred styling solution supported by ${chalk.bold(
+        'sku',
+      )}, and support for ${chalk.bold(
+        'LESS',
+      )} will be removed in a future release.`,
+      `Consumers are encouraged to migrate to ${chalk.bold(
+        'Vanilla Extract',
+      )} at their earliest opportunity.`,
       'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
     ]);
   }

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const { writeFile, rm } = require('fs/promises');
 const path = require('path');
+const glob = require('fast-glob');
+const fs = require('fs');
 
 const ensureGitignore = require('ensure-gitignore');
 const { cwd, getPathFromCwd } = require('./cwd');
@@ -9,6 +11,8 @@ const { paths, httpsDevServer, languages } = require('../context');
 const {
   bundleReportFolder,
 } = require('../config/webpack/plugins/bundleAnalyzer');
+const printBanner = require('../lib/banner');
+const chalk = require('chalk');
 const prettierConfig = require('../config/prettier/prettierConfig');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const createTSConfig = require('../config/typescript/tsconfig.js');
@@ -109,4 +113,24 @@ module.exports = async () => {
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
+
+  // Check for `.less` files
+  const lessFileGlobResults = await Promise.all(
+    paths.src
+      .filter((srcPath) => fs.statSync(srcPath).isDirectory())
+      .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
+  );
+  const srcHasLessFiles = lessFileGlobResults.some((fileArray) => {
+    return fileArray.length > 0;
+  });
+  if (srcHasLessFiles) {
+    printBanner('warning', 'Less styles detected', [
+      `Vanilla Extract is the preferred styling solution supported by sku. Support for ${chalk.bold(
+        '.less',
+      )} styles may be removed in the future. Please migrate all ${chalk.bold(
+        '.less',
+      )} styles to Vanilla Extract styles.`,
+      'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
+    ]);
+  }
 };

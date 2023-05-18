@@ -33,16 +33,18 @@ import { BraidProvider } from 'braid-design-system';
 
 import React from 'react';
 
-import type { DecoratorFn } from 'sku/@storybook/react';
+import type { Preview } from 'sku/@storybook/react';
 
 // This will wrap every story in a BraidProvider
-export const decorators: DecoratorFn[] = [
-  (Story) => (
-    <BraidProvider theme={apac}>
-      <Story />
-    </BraidProvider>
-  ),
-];
+export default {
+  decorators: [
+    (Story) => (
+      <BraidProvider theme={apac}>
+        <Story />
+      </BraidProvider>
+    ),
+  ],
+} satisfies Preview;
 ```
 
 See [the Storybook docs][storybook preview.js] for more info.

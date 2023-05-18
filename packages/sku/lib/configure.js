@@ -135,7 +135,7 @@ module.exports = async () => {
       )} will be removed in a future release.`,
       `Consumers are encouraged to migrate to ${chalk.bold(
         'Vanilla Extract',
-      )} at their earliest opportunity.`,
+      )} at the earliest opportunity.`,
       'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
     ]);
   }

@@ -23,21 +23,19 @@ export default {
   features: {
     storyStoryV7: storybookStoryStore,
   },
-  babel: (config) => {
-    return {
-      ...config,
-      presets: [
-        ...config.presets,
-        [
-          '@babel/preset-env',
-          {
-            targets: {
-              chrome: 100,
-            },
+  babel: (config) => ({
+    ...config,
+    presets: [
+      ...config.presets,
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            chrome: 100,
           },
-        ],
-        '@babel/preset-typescript',
+        },
       ],
-    };
-  },
+      '@babel/preset-typescript',
+    ],
+  }),
 };

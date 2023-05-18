@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from 'sku/@storybook/react';
 
 import { TestComponent } from './TestComponent';
 
-export default {
+const meta = {
   title: 'TestComponent',
   component: TestComponent,
   argTypes: {
@@ -26,7 +26,9 @@ export default {
   ],
 } satisfies Meta;
 
-type Story = StoryObj<typeof TestComponent>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -36,5 +38,8 @@ export const Default: Story = {
 };
 
 export const Positive: Story = {
-  render: () => <TestComponent tone="positive" text="Primary text" />,
+  args: {
+    tone: 'positive',
+    text: 'Positive text',
+  },
 };

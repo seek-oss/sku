@@ -1,7 +1,7 @@
 # managed by sku
 *.less.d.ts
 coverage/
-dist-build/
+dist-start/
 dist-storybook/
 report/
 # end managed by sku

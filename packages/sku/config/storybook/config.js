@@ -1,13 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const {
-  paths,
-  storybookAddons,
-  storybookStoryStore,
-} = require('../../context');
+import fs from 'fs';
+import path from 'path';
+import { paths, storybookAddons, storybookStoryStore } from '../../context';
 
 /** @type {import("@storybook/react-webpack5").StorybookConfig} */
-module.exports = {
+export default {
   stories: paths.src
     .filter((srcPath) => fs.statSync(srcPath).isDirectory())
     .map((srcPath) => path.join(srcPath, '**/*.stories.@(js|ts|tsx)')),
@@ -26,5 +22,22 @@ module.exports = {
   },
   features: {
     storyStoryV7: storybookStoryStore,
+  },
+  babel: (config) => {
+    return {
+      ...config,
+      presets: [
+        ...config.presets,
+        [
+          '@babel/preset-env',
+          {
+            targets: {
+              chrome: 100,
+            },
+          },
+        ],
+        '@babel/preset-typescript',
+      ],
+    };
   },
 };

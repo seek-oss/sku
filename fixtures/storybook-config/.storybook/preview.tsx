@@ -3,10 +3,11 @@ import 'braid-design-system/reset';
 import { BraidProvider, Text } from 'braid-design-system';
 import apac from 'braid-design-system/themes/apac';
 
-import React from 'react';
 import type { Preview } from 'sku/@storybook/react';
 
-export default {
+import React from 'react';
+
+const preview: Preview = {
   decorators: [
     (Story) => (
       <div>
@@ -22,4 +23,6 @@ export default {
       </BraidProvider>
     ),
   ],
-} satisfies Preview;
+};
+
+export default preview;

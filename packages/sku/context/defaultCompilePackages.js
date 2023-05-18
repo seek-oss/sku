@@ -29,9 +29,4 @@ try {
   console.error(e);
 }
 
-module.exports = [
-  'sku',
-  'seek-style-guide',
-  'braid-design-system',
-  ...detectedCompilePackages,
-];
+module.exports = ['sku', 'braid-design-system', ...detectedCompilePackages];

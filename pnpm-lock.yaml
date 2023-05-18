@@ -237,28 +237,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/seek-style-guide:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      seek-style-guide:
-        specifier: '*'
-        version: 42.0.0(react-dom@18.2.0)(react-helmet@6.1.0)(react@18.2.0)
-    devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../test-utils
-      dedent:
-        specifier: ^0.7.0
-        version: 0.7.0
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
   fixtures/sku-webpack-plugin:
     dependencies:
       braid-design-system:
@@ -343,9 +321,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      seek-style-guide:
-        specifier: ^42.0.0
-        version: 42.0.0(react-dom@18.2.0)(react-helmet@6.1.0)(react@18.2.0)
     devDependencies:
       '@storybook/addon-controls':
         specifier: ^6.5.12
@@ -514,9 +489,6 @@ importers:
       babel-plugin-module-resolver:
         specifier: ^4.1.0
         version: 4.1.0
-      babel-plugin-seek-style-guide:
-        specifier: ^1.0.0
-        version: 1.0.0
       babel-plugin-transform-react-remove-prop-types:
         specifier: ^0.4.24
         version: 0.4.24
@@ -773,9 +745,6 @@ importers:
       react-router-dom:
         specifier: ^5.2.0
         version: 5.3.4(react@18.2.0)
-      seek-style-guide:
-        specifier: ^42.0.0
-        version: 42.0.0(react-dom@18.2.0)(react-helmet@6.1.0)(react@18.2.0)
       webpack-cli:
         specifier: ^5.0.0
         version: 5.0.1(webpack-bundle-analyzer@4.8.0)(webpack-dev-server@4.11.1)(webpack@5.78.0)
@@ -848,9 +817,6 @@ importers:
       '@sku-fixtures/react-css-modules':
         specifier: workspace:*
         version: link:../fixtures/react-css-modules
-      '@sku-fixtures/seek-style-guide':
-        specifier: workspace:*
-        version: link:../fixtures/seek-style-guide
       '@sku-fixtures/sku-webpack-plugin':
         specifier: workspace:*
         version: link:../fixtures/sku-webpack-plugin
@@ -6217,12 +6183,6 @@ packages:
       - supports-color
     dev: false
 
-  /babel-plugin-seek-style-guide@1.0.0:
-    resolution: {integrity: sha512-Xmwn2vXcPjri8ELq86E3MWeyOgJAmng25qQ7RD6NYav9smY95FQW0IiroAfMbC7jDTJPqyZdFpXfcsmMZyALiA==}
-    dependencies:
-      babel-types: 6.26.0
-    dev: false
-
   /babel-plugin-transform-react-remove-prop-types@0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
     dev: false
@@ -6264,22 +6224,6 @@ packages:
       babel-plugin-jest-hoist: 29.5.0
       babel-preset-current-node-syntax: 1.0.1(@babel/core@7.21.4)
 
-  /babel-runtime@6.26.0:
-    resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==}
-    dependencies:
-      core-js: 2.6.12
-      regenerator-runtime: 0.11.1
-    dev: false
-
-  /babel-types@6.26.0:
-    resolution: {integrity: sha512-zhe3V/26rCWsEZK8kZN+HaQj5yQ1CilTObixFzKW1UWjqG7618Twz6YEsCnjfg5gBcJh02DrpCkS9h98ZqDY+g==}
-    dependencies:
-      babel-runtime: 6.26.0
-      esutils: 2.0.3
-      lodash: 4.17.21
-      to-fast-properties: 1.0.3
-    dev: false
-
   /bail@1.0.5:
     resolution: {integrity: sha512-xFbRxM1tahm08yHBP16MMjVUAvDaBMD38zsM9EMAUN61omwLmKlOpB/Zku5QkjZ8TZ4vn53pj+t518cH0S03RQ==}
     dev: false
@@ -6301,10 +6245,6 @@ packages:
       isobject: 3.0.1
       mixin-deep: 1.3.2
       pascalcase: 0.1.1
-
-  /basekick@3.1.1:
-    resolution: {integrity: sha512-F6IBL9SDlf8rJLKnNcvi1/LqnzkDALVmjTT99/+ZKBsrZyLIZ+tEbuHsrMfjkqY7R6h55vjIF1yjHJvHhZAq3w==}
-    deprecated: This package has been deprecated in favour of @capsizecss/core
 
   /batch@0.6.1:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
@@ -6969,9 +6909,6 @@ packages:
       isobject: 3.0.1
       static-extend: 0.1.2
 
-  /classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
-
   /clean-css@4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
     engines: {node: '>= 4.0'}
@@ -7337,12 +7274,6 @@ packages:
 
   /core-js-pure@3.30.0:
     resolution: {integrity: sha512-+2KbMFGeBU0ln/csoPqTe0i/yfHbrd2EUhNMObsGtXMKS/RTtlkYyi+/3twLcevbgNR0yM/r0Psa3TEoQRpFMQ==}
-    requiresBuild: true
-    dev: false
-
-  /core-js@2.6.12:
-    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
-    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
     requiresBuild: true
     dev: false
 
@@ -11264,9 +11195,6 @@ packages:
     resolution: {integrity: sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==}
     engines: {node: '>=0.10.0'}
 
-  /isolated-scroll@0.1.0:
-    resolution: {integrity: sha512-7O3p+oU14d6QwvOtyEgysZOmTcxrPxls0NiC2mAYrQely3ez20l0t0ZJyTDL2eqDwj/luWMMbH68JZxIztxEhQ==}
-
   /isomorphic-unfetch@3.1.0:
     resolution: {integrity: sha512-geDJjpoZ8N0kWexiwkX8F9NkTsXhetLPVbZFQ+JTW239QNOwvB0gniuR1Wc6f0AMTn7/mFGyXvHTifrCp/GH8Q==}
     dependencies:
@@ -13043,10 +12971,6 @@ packages:
   /nwsapi@2.2.3:
     resolution: {integrity: sha512-jscxIO4/VKScHlbmFBdV1Z6LXnLO+ZR4VMtypudUdfwtKxUN3TQcNFIHLwKtrUbDyHN4/GycY9+oRGZ2XMXYPw==}
 
-  /object-assign@3.0.0:
-    resolution: {integrity: sha512-jHP15vXVGeVh1HuaA2wY6lxk+whK/x4KBG88VXeRma7CCun7iGD5qPc4eYykQ9sdQvg8jkwFKsSxHln2ybW3xQ==}
-    engines: {node: '>=0.10.0'}
-
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -13357,12 +13281,6 @@ packages:
       registry-url: 5.1.0
       semver: 6.3.0
     dev: true
-
-  /pad-left@2.1.0:
-    resolution: {integrity: sha512-HJxs9K9AztdIQIAIa/OIazRAUW/L6B9hbQDxO4X07roW3eo9XqZc2ur9bn1StH9CnbbI9EgvejHQX7CBpCF1QA==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      repeat-string: 1.6.1
 
   /pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
@@ -14720,16 +14638,6 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
-  /react-autowhatever@10.1.1(react@18.2.0):
-    resolution: {integrity: sha512-fcwjDnk1zKMYoJyKmEukw8eWJlwT6UVKZagY+Lfhj79Nx0D8Brj38ZLNtQOFrRLAZrIA+QX4UUjW0MUISqT9OA==}
-    peerDependencies:
-      react: '>=0.14.7'
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-themeable: 1.1.0
-      section-iterator: 2.0.0
-
   /react-clientside-effect@1.2.6(react@18.2.0):
     resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==}
     peerDependencies:
@@ -14818,6 +14726,7 @@ packages:
       react: 18.2.0
       react-fast-compare: 3.2.1
       react-side-effect: 2.1.2(react@18.2.0)
+    dev: true
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -14827,15 +14736,6 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-
-  /react-isolated-scroll@0.1.1(react@18.2.0):
-    resolution: {integrity: sha512-a0KtRWcdtnrdDSQSvPrbgMQ9yBLqi/O+fiUTiq67lNP/s6ilw87lIAAoTVmRu6rCXBs7UrdC2AL32EL2i5wmzA==}
-    peerDependencies:
-      react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
-    dependencies:
-      isolated-scroll: 0.1.0
-      prop-types: 15.8.1
-      react: 18.2.0
 
   /react-keyed-flatten-children@1.3.0(react@18.2.0):
     resolution: {integrity: sha512-qB7A6n+NHU0x88qTZGAJw6dsqwI941jcRPBB640c/CyWqjPQQ+YUmXOuzPziuHb7iqplM3xksWAbGYwkQT0tXA==}
@@ -14949,6 +14849,7 @@ packages:
       react: ^16.3.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: true
 
   /react-style-singleton@2.2.1(@types/react@18.2.3)(react@18.2.0):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
@@ -14965,11 +14866,6 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.5.0
-
-  /react-themeable@1.1.0:
-    resolution: {integrity: sha512-kl5tQ8K+r9IdQXZd8WLa+xxYN04lLnJXRVhHfdgwsUJr/SlKJxIejoc9z9obEkx1mdqbTw1ry43fxEUwyD9u7w==}
-    dependencies:
-      object-assign: 3.0.0
 
   /react-treat@2.0.1(react@18.2.0)(treat@2.0.4):
     resolution: {integrity: sha512-sa+gKdOxJ4UXRuyUnXY8BjhPmyU4nGq/LehpDf8t0nxLiok2IWpOd9OpcNyfK/by8rO7UxnoJ3mjEVa3naFRYw==}
@@ -15107,10 +15003,6 @@ packages:
 
   /regenerate@1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
-
-  /regenerator-runtime@0.11.1:
-    resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
-    dev: false
 
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
@@ -15517,30 +15409,6 @@ packages:
       ajv-formats: 2.1.1(ajv@8.12.0)
       ajv-keywords: 5.1.0(ajv@8.12.0)
 
-  /section-iterator@2.0.0:
-    resolution: {integrity: sha512-xvTNwcbeDayXotnV32zLb3duQsP+4XosHpb/F+tu6VzEZFmIjzPdNk6/O+QOOx5XTh08KL2ufdXeCO33p380pQ==}
-
-  /seek-style-guide@42.0.0(react-dom@18.2.0)(react-helmet@6.1.0)(react@18.2.0):
-    resolution: {integrity: sha512-C96Y8TPLA+cwqhPm0fX0yrLnM5wYfKOkhzKvu3Tm8jbGZLgBOiKJxs3/C163ibdMIShij7oD3KH+rxlxWHj+XQ==}
-    engines: {node: '>=6.0.0'}
-    deprecated: This project has been deprecated in favour of braid-design-system.
-    peerDependencies:
-      react: ^16.3.0
-      react-dom: ^16.3.0
-      react-helmet: ^5.0.0 || ^6.0.0
-    dependencies:
-      basekick: 3.1.1
-      classnames: 2.3.2
-      lodash: 4.17.21
-      pad-left: 2.1.0
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-autowhatever: 10.1.1(react@18.2.0)
-      react-dom: 18.2.0(react@18.2.0)
-      react-helmet: 6.1.0(react@18.2.0)
-      react-isolated-scroll: 0.1.1(react@18.2.0)
-      shallow-equal: 1.2.1
-
   /select-hose@2.0.0:
     resolution: {integrity: sha512-mEugaLK+YfkijB4fx0e6kImuJdCIt2LxCRcbEYPqRGCs4F2ogyfZU5IAZRdjCP8JPq2AtdNoC/Dux63d9Kiryg==}
 
@@ -15700,9 +15568,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       kind-of: 6.0.3
-
-  /shallow-equal@1.2.1:
-    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
 
   /shebang-command@1.2.0:
     resolution: {integrity: sha512-EV3L1+UQWGor21OmnvojK36mhg+TyIKDh3iFBKBohr5xeXIhNBcx8oWdgkTEEQ+BEFFYdLRuqMfd5L84N1V5Vg==}
@@ -16585,11 +16450,6 @@ packages:
 
   /to-arraybuffer@1.0.1:
     resolution: {integrity: sha512-okFlQcoGTi4LQBG/PgSYblw9VOyptsz2KJZqc6qtgGdes8VktzUQkj4BI2blit072iS8VODNcMA+tvnS9dnuMA==}
-
-  /to-fast-properties@1.0.3:
-    resolution: {integrity: sha512-lxrWP8ejsq+7E3nNjwYmUBMAgjMTZoTI+sdBOpvNyijeDLa29LUn9QaoXAHv4+Z578hbmHHJKZknzxVtvo77og==}
-    engines: {node: '>=0.10.0'}
-    dev: false
 
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}

@@ -198,11 +198,12 @@ const getTemplateFileDestinationFromRoot =
     }),
   );
 
-  const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
+  const deps = ['braid-design-system', 'react', 'react-dom'];
 
   const devDeps = [
     '@vanilla-extract/css',
     'husky',
+    'sku',
     '@types/react',
     '@types/react-dom',
   ];

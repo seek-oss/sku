@@ -16,6 +16,7 @@ module.exports = {
     // Addresses an issue with this specific test suite where module IDs
     // were different between local dev and CI
     config.optimization.moduleIds = 'named';
+    config.optimization.chunkIds = 'named';
 
     return config;
   },

@@ -4,7 +4,7 @@ exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: [
   "/static/typescript/runtime-df7fc58286eea709736e.js",
   "/static/typescript/346-88ab3790c9838febdf72.js",
-  "/static/typescript/main-c2c0bc83265232a30b43.js",
+  "/static/typescript/main-34db14c522cdcf3ac809.js",
 ]
 CSS: [
   "/static/typescript/main-cb8848ae92e1e9d08128.css",
@@ -119,7 +119,7 @@ export const root: string;
   "index.html": SCRIPTS: [
     "/static/typescript/runtime-df7fc58286eea709736e.js",
     "/static/typescript/346-88ab3790c9838febdf72.js",
-    "/static/typescript/main-c2c0bc83265232a30b43.js",
+    "/static/typescript/main-34db14c522cdcf3ac809.js",
   ]
 CSS: [
     "/static/typescript/main-cb8848ae92e1e9d08128.css",
@@ -215,7 +215,7 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-c2c0bc83265232a30b43.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-34db14c522cdcf3ac809.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }
@@ -231,7 +231,7 @@ exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: [
   "http://localhost:4003/runtime-424bd133a78585db66ac.js",
   "http://localhost:4003/252-57e915d1539ee5804c65.js",
-  "http://localhost:4003/main-140c4ef4cae11665f589.js",
+  "http://localhost:4003/main-7a116c3482083be4a662.js",
 ]
 CSS: [
   "http://localhost:4003/main-cb8848ae92e1e9d08128.css",
@@ -360,7 +360,7 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-140c4ef4cae11665f589.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-7a116c3482083be4a662.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }

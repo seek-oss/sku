@@ -4,7 +4,7 @@ exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
   "/346-88ab3790c9838febdf72.js",
-  "/main-88ef074bbade3031c579.js",
+  "/main-c4c151542d1c0591de96.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",

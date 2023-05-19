@@ -74,13 +74,10 @@ To make use of this hook, it's recommended to install [husky](https://www.npmjs.
 ```
 
 ```sh
-# .husky/pre-commit
-
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-yarn sku pre-commit
+yarn husky add .husky/pre-commit "yarn sku pre-commit"
 ```
+
+For more details configuring hooks, please see Husky's [documentation](https://typicode.github.io/husky/#create-a-hook).
 
 ## Assertion removal
 

@@ -219,7 +219,7 @@ const getTemplateFileDestinationFromRoot =
   await install({ deps, verbose, useYarn });
   await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
 
-  await configure();
+  await configure({ isPostInit: true });
   await esLintFix();
   await prettierWrite();
 

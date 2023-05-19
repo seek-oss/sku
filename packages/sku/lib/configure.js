@@ -32,7 +32,12 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
   await writeFile(outPath, contentStr);
 };
 
-module.exports = async () => {
+/**
+ * @typedef {object} Options
+ * @property {boolean | undefined} isPostInit
+ * @param {Options}
+ */
+module.exports = async ({ isPostInit } = {}) => {
   // Ignore webpack bundle report output
   const gitIgnorePatterns = [
     addSep(bundleReportFolder),
@@ -114,29 +119,34 @@ module.exports = async () => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  // Check for `.less` files
-  const lessFileGlobResults = await Promise.all(
-    paths.src
-      .filter((srcPath) => fs.statSync(srcPath).isDirectory())
-      .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
-  );
-  const srcHasLessFiles = lessFileGlobResults.some(
-    (fileArray) => fileArray.length > 0,
-  );
-  if (srcHasLessFiles) {
-    printBanner('warning', 'LESS styles detected', [
-      `Support for ${chalk.bold('LESS')} has been deprecated.`,
-      `${chalk.bold(
-        'Vanilla Extract',
-      )} is the preferred styling solution supported by ${chalk.bold(
-        'sku',
-      )}, and support for ${chalk.bold(
-        'LESS',
-      )} will be removed in a future release.`,
-      `Consumers are encouraged to migrate to ${chalk.bold(
-        'Vanilla Extract',
-      )} at the earliest opportunity.`,
-      'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
-    ]);
+  // Check for `.less` files only if we haven't just done an init
+  if (!isPostInit) {
+    const lessFileGlobResults = await Promise.all(
+      paths.src
+        .filter((srcPath) => fs.statSync(srcPath).isDirectory())
+        .map(async (srcPath) => {
+          console.log('actually globbing');
+          return await glob(path.join(srcPath, '**/*.less'));
+        }),
+    );
+    const srcHasLessFiles = lessFileGlobResults.some(
+      (fileArray) => fileArray.length > 0,
+    );
+    if (srcHasLessFiles) {
+      printBanner('warning', 'LESS styles detected', [
+        `Support for ${chalk.bold('LESS')} has been deprecated.`,
+        `${chalk.bold(
+          'Vanilla Extract',
+        )} is the preferred styling solution supported by ${chalk.bold(
+          'sku',
+        )}, and support for ${chalk.bold(
+          'LESS',
+        )} will be removed in a future release.`,
+        `Consumers are encouraged to migrate to ${chalk.bold(
+          'Vanilla Extract',
+        )} at the earliest opportunity.`,
+        'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
+      ]);
+    }
   }
 };

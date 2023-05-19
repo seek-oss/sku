@@ -56,8 +56,8 @@ importers:
         specifier: ^11.1.1
         version: 11.2.6
       prettier:
-        specifier: ^2.3.2
-        version: 2.8.7
+        specifier: ^2.8.8
+        version: 2.8.8
       puppeteer:
         specifier: ^20.0.0
         version: 20.0.0(typescript@4.9.5)
@@ -634,8 +634,8 @@ importers:
         specifier: ^7.0.1
         version: 7.2.4(@types/node@16.18.23)(postcss@8.4.21)(ts-node@10.9.1)(typescript@4.9.5)(webpack@5.78.0)
       prettier:
-        specifier: ^2.3.2
-        version: 2.8.7
+        specifier: ^2.8.8
+        version: 2.8.8
       pretty-ms:
         specifier: ^7.0.1
         version: 7.0.1
@@ -770,8 +770,8 @@ importers:
         specifier: ^0.1.17
         version: 0.1.17
       prettier:
-        specifier: ^2.3.2
-        version: 2.8.7
+        specifier: ^2.8.8
+        version: 2.8.8
       serve-handler:
         specifier: ^6.1.3
         version: 6.1.5
@@ -2301,7 +2301,7 @@ packages:
       fs-extra: 7.0.1
       lodash.startcase: 4.4.0
       outdent: 0.5.0
-      prettier: 2.8.7
+      prettier: 2.8.8
       resolve-from: 5.0.0
       semver: 5.7.1
     dev: true
@@ -2478,7 +2478,7 @@ packages:
       '@changesets/types': 5.2.1
       fs-extra: 7.0.1
       human-id: 1.0.2
-      prettier: 2.8.7
+      prettier: 2.8.8
     dev: true
 
   /@colors/colors@1.5.0:
@@ -5194,7 +5194,7 @@ packages:
       fastest-validator: 1.16.0
       find-up: 5.0.0
       intl-messageformat: 10.3.3
-      prettier: 2.8.7
+      prettier: 2.8.8
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -14302,8 +14302,8 @@ packages:
     hasBin: true
     dev: false
 
-  /prettier@2.8.7:
-    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
+  /prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 

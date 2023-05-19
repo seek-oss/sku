@@ -124,10 +124,7 @@ module.exports = async ({ isPostInit } = {}) => {
     const lessFileGlobResults = await Promise.all(
       paths.src
         .filter((srcPath) => fs.statSync(srcPath).isDirectory())
-        .map(async (srcPath) => {
-          console.log('actually globbing');
-          return await glob(path.join(srcPath, '**/*.less'));
-        }),
+        .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
     );
     const srcHasLessFiles = lessFileGlobResults.some(
       (fileArray) => fileArray.length > 0,

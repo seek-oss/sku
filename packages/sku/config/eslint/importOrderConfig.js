@@ -29,7 +29,7 @@ module.exports = {
         ],
         pathGroups: [
           {
-            pattern: '*.+(less|css)',
+            pattern: '*.@(less|css)',
             group: 'index',
             position: 'after',
             patternOptions: { matchBase: true },

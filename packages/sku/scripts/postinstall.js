@@ -2,6 +2,8 @@
 const fs = require('fs');
 const { setCwd, getPathFromCwd, cwd } = require('../lib/cwd');
 const debug = require('debug');
+const banner = require('../lib/banner');
+const chalk = require('chalk');
 
 const log = debug('sku:postinstall');
 
@@ -28,16 +30,25 @@ if (packageJsonExists) {
   } = require(packageJson);
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
-  const hasSku =
-    Boolean(devDependencies?.sku) ||
-    // sku should always be a dev dependency, but some repos may still have it as a regular dependency
-    Boolean(dependencies?.sku);
-
+  const hasSkuDep = Boolean(dependencies?.sku);
+  // sku should always be a dev dependency now that sku init installs it as one, but some repos may still have it as a regular dependency
+  const hasSku = Boolean(devDependencies?.sku) || hasSkuDep;
   // Don't run configure script on sku itself
   // Don't run configure script if sku is not installed
   // Ignore projects that are opting out of sku's postinstall script
   if (packageName === 'sku' || !hasSku || skipPostInstall) {
     process.exit();
+  }
+
+  if (hasSkuDep) {
+    banner('warning', 'sku dependency detected', [
+      `${chalk.bold('sku')} is present as a ${chalk.bold(
+        'dependency',
+      )} in ${chalk.bold(packageJson)}.`,
+      `${chalk.bold('sku')} should be installed in ${chalk.bold(
+        'devDependencies',
+      )}.`,
+    ]);
   }
 
   log('postinstall', 'configuring');

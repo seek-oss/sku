@@ -4,4 +4,4 @@
  * Since all projects get a tsconfig.json now, having zero TS files would cause an error.
  *
  * Support for purely JS projects will be removed in a future major version, and this file can be removed.
- * */
+ */

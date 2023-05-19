@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const { writeFile, rm } = require('fs/promises');
 const path = require('path');
+const glob = require('fast-glob');
+const fs = require('fs');
 
 const ensureGitignore = require('ensure-gitignore');
 const { cwd, getPathFromCwd } = require('./cwd');
@@ -9,6 +11,8 @@ const { paths, httpsDevServer, languages } = require('../context');
 const {
   bundleReportFolder,
 } = require('../config/webpack/plugins/bundleAnalyzer');
+const printBanner = require('../lib/banner');
+const chalk = require('chalk');
 const prettierConfig = require('../config/prettier/prettierConfig');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const createTSConfig = require('../config/typescript/tsconfig.js');
@@ -28,7 +32,12 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
   await writeFile(outPath, contentStr);
 };
 
-module.exports = async () => {
+/**
+ * @typedef {object} Options
+ * @property {boolean | undefined} isPostInit
+ * @param {Options}
+ */
+module.exports = async ({ isPostInit } = {}) => {
   // Ignore webpack bundle report output
   const gitIgnorePatterns = [
     addSep(bundleReportFolder),
@@ -109,4 +118,32 @@ module.exports = async () => {
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
+
+  // Check for `.less` files only if we haven't just done an init
+  if (!isPostInit) {
+    const lessFileGlobResults = await Promise.all(
+      paths.src
+        .filter((srcPath) => fs.statSync(srcPath).isDirectory())
+        .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
+    );
+    const srcHasLessFiles = lessFileGlobResults.some(
+      (fileArray) => fileArray.length > 0,
+    );
+    if (srcHasLessFiles) {
+      printBanner('warning', 'LESS styles detected', [
+        `Support for ${chalk.bold('LESS')} has been deprecated.`,
+        `${chalk.bold(
+          'Vanilla Extract',
+        )} is the preferred styling solution supported by ${chalk.bold(
+          'sku',
+        )}, and support for ${chalk.bold(
+          'LESS',
+        )} will be removed in a future release.`,
+        `Consumers are encouraged to migrate to ${chalk.bold(
+          'Vanilla Extract',
+        )} at the earliest opportunity.`,
+        'https://seek-oss.github.io/sku/#/./docs/styling?id=vanilla-extract',
+      ]);
+    }
+  }
 };

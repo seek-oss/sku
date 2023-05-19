@@ -1,6 +1,9 @@
 const debug = require('debug')('sku:server-watcher');
 const cluster = require('cluster');
 
+/**
+ * @param {string} serverFilePath
+ */
 function createServerManager(serverFilePath) {
   let activeWorker;
   cluster.setupMaster({

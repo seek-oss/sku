@@ -32,6 +32,10 @@ See [vanilla-extract](https://vanilla-extract.style/documentation/getting-starte
 
 (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
 
+> Support for LESS has been deprecated.
+> [Vanilla Extract](#vanilla-extract) is the preferred styling solution supported by sku, and support for LESS will be removed in a future release.
+> Consumers are encouraged to migrate to Vanilla Extract at the earliest opportunity.
+
 Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.
 
 For example, given the following Less file:
@@ -53,7 +57,7 @@ export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 
 ## treat
 
-> Usage of treat is deprecated in favour of vanilla-extract
+> Usage of treat is deprecated in favour of [Vanilla Extract](#vanilla-extract)
 
 Note: You must access all treat imports through the sku prefix. e.g. `sku/treat`, `sku/react-treat`;
 

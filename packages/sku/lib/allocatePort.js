@@ -2,7 +2,10 @@ const { yellow, bold } = require('chalk');
 const getPort = require('get-port');
 const debug = require('debug')('sku:allocatePort');
 
-module.exports = async ({ port, host }) => {
+/**
+ * @param {{ port?: number, host?: string }}
+ */
+const allocatePort = async ({ port, host }) => {
   debug(`Finding available port with request for ${port}`);
   const actualPort = await getPort({ port, host });
 
@@ -18,3 +21,5 @@ module.exports = async ({ port, host }) => {
 
   return actualPort;
 };
+
+module.exports = allocatePort;

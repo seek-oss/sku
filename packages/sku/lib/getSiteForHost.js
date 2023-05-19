@@ -1,6 +1,10 @@
 const { sites } = require('../context');
 
-module.exports = (hostname, defaultSite) => {
+/**
+ * @param {string} hostname
+ * @param {string | undefined} defaultSite
+ */
+const getSiteForHost = (hostname, defaultSite) => {
   if (sites.length === 0) {
     return undefined;
   }
@@ -13,3 +17,5 @@ module.exports = (hostname, defaultSite) => {
 
   return defaultSite ? defaultSite : sites[0].name;
 };
+
+module.exports = getSiteForHost;

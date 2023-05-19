@@ -4,6 +4,7 @@ const isCompilePackage = require('../lib/isCompilePackage');
 
 const defaultDecorator = (a) => a;
 
+/** @type {import("../").SkuConfig} */
 module.exports = {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',

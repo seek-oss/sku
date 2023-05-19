@@ -4,6 +4,7 @@ const glob = require('fast-glob');
 
 const { cwd } = require('../lib/cwd');
 
+/** @type {string[]} */
 let detectedCompilePackages = [];
 
 try {

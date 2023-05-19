@@ -51,7 +51,9 @@ describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
       await makeDir(appFolder);
-      await copyToApp('App.js', appFolder);
+      await makeDir(path.join(appFolder, './src'));
+      await copyToApp('App.js', path.join(appFolder, './src'));
+      await copyToApp('package.json', appFolder);
       await runSkuScriptInDir('configure', appFolder);
     });
 
@@ -102,7 +104,9 @@ describe('configure', () => {
   describe('custom', () => {
     beforeAll(async () => {
       await makeDir(appFolderTS);
-      await copyToApp('App.tsx', appFolderTS);
+      await makeDir(path.join(appFolderTS, './src'));
+      await copyToApp('App.tsx', path.join(appFolderTS, './src'));
+      await copyToApp('package.json', appFolderTS);
       await copyToApp('sku.config.js', appFolderTS);
       await runSkuScriptInDir('configure', appFolderTS);
     });

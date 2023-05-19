@@ -54,7 +54,7 @@ const optionDefinitions = [
  * Supports parsing args that look like:
  * [/path/to/node/node, /path/to/sku, scriptName, arg1, arg2]
  *
- * @param {String[]} args - should look like process.argv
+ * @param {string[]} args - should look like process.argv
  */
 module.exports = (args) => {
   const options = commandLineArgs(optionDefinitions, {

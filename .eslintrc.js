@@ -1,6 +1,12 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   extends: 'seek',
+  plugins: ['jsdoc'],
   rules: {
+    'jsdoc/check-alignment': 2,
+    'jsdoc/check-types': 2,
+    'jsdoc/no-multi-asterisks': ['error', { allowWhitespace: true }],
+    'jsdoc/require-asterisk-prefix': ['error', 'always'],
     'no-console': 'off',
     'no-process-exit': 'off',
     'no-sync': 'off',
@@ -39,7 +45,11 @@ module.exports = {
         jest: true,
       },
       globals: {
+        page: true,
         browser: true,
+        context: true,
+        puppeteerConfig: true,
+        jestPuppeteer: true,
       },
     },
   ],

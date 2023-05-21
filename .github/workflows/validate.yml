@@ -50,7 +50,7 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test
-        run: pnpm run test --maxWorkers=2 braid-design-system
+        run: dpkg -L zlib1g && pnpm run test --maxWorkers=2 braid-design-system
 
       - name: Upload files
         if: always()

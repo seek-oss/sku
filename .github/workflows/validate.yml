@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     name: Lint & Test
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     env:
       CI: true
     timeout-minutes: 30
@@ -50,11 +50,4 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test
-        run: sudo apt install zlib1g zlib1g-dev && dpkg -L zlib1g && pnpm run test --maxWorkers=2 braid-design-system
-
-      - name: Upload files
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Debug braid fixture
-          path: fixtures/braid-design-system/dist
+        run: pnpm run test --maxWorkers=2 braid-design-system

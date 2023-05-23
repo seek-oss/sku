@@ -1,5 +1,5 @@
 const { yellow, cyan, gray } = require('chalk');
-const EslintCLI = require('eslint').CLIEngine;
+const ESLint = require('eslint').ESLint;
 const eslintConfig = require('../config/eslint/eslintConfig');
 const {
   js: jsExtensions,
@@ -11,56 +11,53 @@ const extensions = [...tsExtensions, ...jsExtensions].map((ext) => `.${ext}`);
 /**
  * @param {{ fix?: boolean, paths?: string[] }}
  */
-const runESLint = ({ fix = false, paths }) =>
-  new Promise((resolve, reject) => {
-    console.log(cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
+const runESLint = async ({ fix = false, paths }) => {
+  console.log(cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
-    const cli = new EslintCLI({
-      baseConfig: eslintConfig,
-      extensions,
-      useEslintrc: false,
-      fix,
-    });
-    const checkAll = typeof paths === 'undefined';
-    /* Whitelist the file extensions that our ESLint setup currently supports */
-    const filteredFilePaths = checkAll
-      ? ['.']
-      : paths.filter((filePath) =>
-          [...extensions, '.json'].some((ext) => filePath.endsWith(ext)),
-        );
+  const eslint = new ESLint({
+    baseConfig: eslintConfig,
+    extensions,
+    useEslintrc: false,
+    fix,
+  });
+  const checkAll = typeof paths === 'undefined';
+  /* Whitelist the file extensions that our ESLint setup currently supports */
+  const filteredFilePaths = checkAll
+    ? ['.']
+    : paths.filter((filePath) =>
+        [...extensions, '.json'].some((ext) => filePath.endsWith(ext)),
+      );
 
-    if (filteredFilePaths.length === 0) {
-      console.log(gray(`No JS files to lint`));
-    } else {
-      console.log(gray(`Paths: ${filteredFilePaths.join(' ')}`));
-      try {
-        const report = cli.executeOnFiles(filteredFilePaths);
+  if (filteredFilePaths.length === 0) {
+    console.log(gray(`No JS files to lint`));
+  } else {
+    console.log(gray(`Paths: ${filteredFilePaths.join(' ')}`));
+    try {
+      const report = await eslint.lintFiles(filteredFilePaths);
 
-        if (fix) {
-          EslintCLI.outputFixes(report);
-        } else {
-          const { errorCount, warningCount, results } = report;
+      if (fix) {
+        ESLint.outputFixes(report);
+      } else {
+        const { errorCount, warningCount, results } = report;
 
-          if (errorCount || warningCount) {
-            const formatter = cli.getFormatter();
-            console.log(formatter(results));
-          }
-
-          if (errorCount > 0) {
-            reject();
-          }
+        if (errorCount || warningCount) {
+          const formatter = await eslint.loadFormatter();
+          console.log(formatter(results));
         }
-      } catch (e) {
-        if (e && e.message && e.message.includes('No files matching')) {
-          console.warn(yellow(`Warning: ${e.message}`));
-        } else {
-          reject(e);
+
+        if (errorCount > 0) {
+          return Promise.reject();
         }
       }
+    } catch (e) {
+      if (e && e.message && e.message.includes('No files matching')) {
+        console.warn(yellow(`Warning: ${e.message}`));
+      } else {
+        return Promise.reject();
+      }
     }
-
-    resolve();
-  });
+  }
+};
 
 module.exports = {
   check: (paths) => runESLint({ paths }),

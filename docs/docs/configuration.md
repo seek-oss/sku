@@ -423,6 +423,16 @@ Default: `8081`
 
 The port to host storybook on when running `sku storybook`.
 
+## storybookStoryStore
+
+type `boolean`
+
+Default: `true`
+
+Allows disabling Storybook's `storyStoreV7` feature flag.
+This will result in all stories being loaded upfront instead of on demand.
+Disabling this feature will allow stories that use the deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf` to the Component Story Format (CSF) instead.
+
 ## storybookTarget
 
 type `string`

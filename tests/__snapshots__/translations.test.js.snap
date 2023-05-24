@@ -2,10 +2,10 @@
 
 exports[`translations should render en 1`] = `
 SCRIPTS: [
-  "/runtime-373678e24e415d97d48a.js",
+  "/runtime-c90bedc6c1e41d593d60.js",
   "/579-82f09b8f4068b7b87cca.js",
-  "/main-b33751bd6bdd1424382d.js",
-  "/en-translations-28027b3b2d76574f2835.js",
+  "/main-e30a4c5e58673756167f.js",
+  "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -48,6 +48,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Hello sku
+        Company name
       </div>
     </div>
     <script
@@ -99,10 +100,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should render en-PSEUDO post-hydration 1`] = `
 SCRIPTS: [
-  "/runtime-373678e24e415d97d48a.js",
+  "/runtime-c90bedc6c1e41d593d60.js",
   "/579-82f09b8f4068b7b87cca.js",
-  "/main-b33751bd6bdd1424382d.js",
-  "/en-translations-28027b3b2d76574f2835.js",
+  "/main-e30a4c5e58673756167f.js",
+  "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -145,6 +146,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Hello sku
+        Company name
       </div>
     </div>
     <script
@@ -196,7 +198,8 @@ POST HYDRATE DIFFS:
      <div id="app">
        <div>
 -        Hello sku
-+        [Ḩẽẽẽƚƚööö šķǚǚǚ]
+-        Company name
++        [Ḩẽẽẽƚƚööö šķǚǚǚ] [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
        </div>
      </div>
      <script
@@ -205,10 +208,10 @@ POST HYDRATE DIFFS:
 
 exports[`translations should render fr 1`] = `
 SCRIPTS: [
-  "/runtime-373678e24e415d97d48a.js",
+  "/runtime-c90bedc6c1e41d593d60.js",
   "/579-82f09b8f4068b7b87cca.js",
-  "/main-b33751bd6bdd1424382d.js",
-  "/fr-translations-066c40d8ddd4e4079126.js",
+  "/main-e30a4c5e58673756167f.js",
+  "/fr-translations-8d39ba177a70a2aa4224.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -251,6 +254,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Bonjour sku
+        บริษัท
       </div>
     </div>
     <script
@@ -302,10 +306,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should support query parameters 1`] = `
 SCRIPTS: [
-  "/runtime-373678e24e415d97d48a.js",
+  "/runtime-c90bedc6c1e41d593d60.js",
   "/579-82f09b8f4068b7b87cca.js",
-  "/main-b33751bd6bdd1424382d.js",
-  "/en-translations-28027b3b2d76574f2835.js",
+  "/main-e30a4c5e58673756167f.js",
+  "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -348,6 +352,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Hello sku
+        Company name
       </div>
     </div>
     <script

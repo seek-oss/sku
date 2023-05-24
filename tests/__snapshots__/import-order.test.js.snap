@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`import order imports are ordered: index.ts 1`] = `
-"import './reset'; // side-effect imports should stay put
+import './reset'; // side-effect imports should stay put
 
 import path from 'path'; //  built-in
 
@@ -18,11 +18,11 @@ import myself from '.'; // index
 
 import styles from './styles.less'; // styles
 import vanillaStyles from './vanillaStyles.css'; // styles
-"
+
 `;
 
 exports[`import order imports are ordered: relatives.js 1`] = `
-"import c from '../c';
+import c from '../c';
 
 import a from './a';
 import b from './b';
@@ -30,11 +30,11 @@ import b from './b';
 import aTreat from './a.treat';
 import bTreat from './b.treat';
 import cTreat from '../c.treat';
-"
+
 `;
 
 exports[`import order imports are ordered: vanilla.ts 1`] = `
-"import c from '../c';
+import c from '../c';
 
 import a from './a';
 import b from './b';
@@ -42,5 +42,5 @@ import b from './b';
 import aStyle from './a.css';
 import bStyle from './b.css';
 import cStyle from '../c.css';
-"
+
 `;

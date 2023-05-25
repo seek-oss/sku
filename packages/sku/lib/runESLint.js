@@ -1,5 +1,5 @@
 const { yellow, cyan, gray } = require('chalk');
-const ESLint = require('eslint').ESLint;
+const { ESLint } = require('eslint');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const {
   js: jsExtensions,

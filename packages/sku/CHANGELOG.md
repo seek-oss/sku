@@ -1,5 +1,11 @@
 # sku
 
+## 11.13.0
+
+### Minor Changes
+
+- Upgrade ESLint to v8 ([#814](https://github.com/seek-oss/sku/pull/814))
+
 ## 11.12.1
 
 ### Patch Changes

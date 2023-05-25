@@ -2,26 +2,26 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
-  "614-c9045a5975102a44eb0d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-e402475c021f572ea087.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "138-1374b213efd669d458ed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-e8788e0d365ac22fad34.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
   color: blue;
 }
 ,
-  "handlers-Details-0ea0a42be2713a04e2da.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-be19914bbeacf6c5c683.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
   color: red;
 }
 ,
-  "handlers-Home-4239862f0949956371d4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-2c75f294a093576ce864.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-763562d981898f458a05.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-02dafc5c1ea70ae715f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-    "/static/place/614-c9045a5975102a44eb0d.js",
-    "/static/place/main-2c75f294a093576ce864.js",
-    "/static/place/handlers-Details-0ea0a42be2713a04e2da.js",
-    "/static/place/AsyncComponent-e402475c021f572ea087.js",
+    "/static/place/runtime-eaa3878a0e14597bb756.js",
+    "/static/place/138-1374b213efd669d458ed.js",
+    "/static/place/main-02dafc5c1ea70ae715f1.js",
+    "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
+    "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -148,10 +148,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-    "/static/place/614-c9045a5975102a44eb0d.js",
-    "/static/place/main-2c75f294a093576ce864.js",
-    "/static/place/handlers-Home-4239862f0949956371d4.js",
+    "/static/place/runtime-eaa3878a0e14597bb756.js",
+    "/static/place/138-1374b213efd669d458ed.js",
+    "/static/place/main-02dafc5c1ea70ae715f1.js",
+    "/static/place/handlers-Home-763562d981898f458a05.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -263,11 +263,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-    "/static/place/614-c9045a5975102a44eb0d.js",
-    "/static/place/main-2c75f294a093576ce864.js",
-    "/static/place/handlers-Details-0ea0a42be2713a04e2da.js",
-    "/static/place/AsyncComponent-e402475c021f572ea087.js",
+    "/static/place/runtime-eaa3878a0e14597bb756.js",
+    "/static/place/138-1374b213efd669d458ed.js",
+    "/static/place/main-02dafc5c1ea70ae715f1.js",
+    "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
+    "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -394,10 +394,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-    "/static/place/614-c9045a5975102a44eb0d.js",
-    "/static/place/main-2c75f294a093576ce864.js",
-    "/static/place/handlers-Home-4239862f0949956371d4.js",
+    "/static/place/runtime-eaa3878a0e14597bb756.js",
+    "/static/place/138-1374b213efd669d458ed.js",
+    "/static/place/main-02dafc5c1ea70ae715f1.js",
+    "/static/place/handlers-Home-763562d981898f458a05.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -507,18 +507,18 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-fe6d01a73427cb5bfca7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-eaa3878a0e14597bb756.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-  "/static/place/614-c9045a5975102a44eb0d.js",
-  "/static/place/main-2c75f294a093576ce864.js",
-  "/static/place/handlers-Details-0ea0a42be2713a04e2da.js",
-  "/static/place/AsyncComponent-e402475c021f572ea087.js",
+  "/static/place/runtime-eaa3878a0e14597bb756.js",
+  "/static/place/138-1374b213efd669d458ed.js",
+  "/static/place/main-02dafc5c1ea70ae715f1.js",
+  "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
+  "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
 ]
 CSS: [
   "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -658,10 +658,10 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-fe6d01a73427cb5bfca7.js",
-  "/static/place/614-c9045a5975102a44eb0d.js",
-  "/static/place/main-2c75f294a093576ce864.js",
-  "/static/place/handlers-Home-4239862f0949956371d4.js",
+  "/static/place/runtime-eaa3878a0e14597bb756.js",
+  "/static/place/138-1374b213efd669d458ed.js",
+  "/static/place/main-02dafc5c1ea70ae715f1.js",
+  "/static/place/handlers-Home-763562d981898f458a05.js",
 ]
 CSS: [
   "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -778,7 +778,7 @@ exports[`multiple-routes start should render details page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-93a86d.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-b9ee74.js",
   "/main.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
@@ -922,7 +922,7 @@ exports[`multiple-routes start should render home page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-93a86d.js",
+  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-b9ee74.js",
   "/main.js",
   "/handlers-Home.js",
 ]

@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { createRequire } from 'module';
 import { paths, storybookAddons, storybookStoryStore } from '../../context';
 
+const require = createRequire(import.meta.url);
+
+/** @type {import("@storybook/react-webpack5").StorybookConfig} */
 export default {
   stories: paths.src
     .filter((srcPath) => fs.statSync(srcPath).isDirectory())
@@ -27,14 +31,14 @@ export default {
     presets: [
       ...config.presets,
       [
-        '@babel/preset-env',
+        require.resolve('@babel/preset-env'),
         {
           targets: {
             chrome: 100,
           },
         },
       ],
-      '@babel/preset-typescript',
+      require.resolve('@babel/preset-typescript'),
     ],
   }),
 };

@@ -3,8 +3,8 @@
 exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: [
   "/runtime-df7fc58286eea709736e.js",
-  "/346-88ab3790c9838febdf72.js",
-  "/main-912ad2d39a3ede73615a.js",
+  "/983-7e081b75ea8ba172af1b.js",
+  "/main-8fd671b3b4e8f765f588.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -101,11 +101,11 @@ POST HYDRATE DIFFS:
 
 exports[`react-css-modules should generate the expected files 1`] = `
 {
-  "346-88ab3790c9838febdf72.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "983-7e081b75ea8ba172af1b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/runtime-df7fc58286eea709736e.js",
-    "/346-88ab3790c9838febdf72.js",
-    "/main-912ad2d39a3ede73615a.js",
+    "/983-7e081b75ea8ba172af1b.js",
+    "/main-8fd671b3b4e8f765f588.js",
   ]
 CSS: [
     "/main-cb8848ae92e1e9d08128.css",
@@ -188,7 +188,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-912ad2d39a3ede73615a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8fd671b3b4e8f765f588.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }

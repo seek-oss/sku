@@ -17,7 +17,7 @@ const asyncMap = (list, fn) => {
   return Promise.all(list.map((item) => fn(item)));
 };
 
-const singletonPackages = ['react-treat'];
+const singletonPackages = ['@vanilla-extract/css'];
 
 module.exports = async () => {
   try {

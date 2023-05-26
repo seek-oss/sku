@@ -16,7 +16,7 @@
     {
       "groupName": "webpack packages",
       "packagePatterns": [
-        "webpack|(-loader$)|autoprefixer|less|css|svg|treat|@vanilla-extract"
+        "webpack|(-loader$)|autoprefixer|less|css|svg|@vanilla-extract"
       ],
       "excludePackagePatterns": ["^@loadable/webpack"],
       "enabled": true,

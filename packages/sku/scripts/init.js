@@ -195,7 +195,12 @@ const getTemplateFileDestinationFromRoot =
 
   const deps = ['braid-design-system', 'react', 'react-dom'];
 
-  const devDeps = ['@vanilla-extract/css', '@types/react', '@types/react-dom'];
+  const devDeps = [
+    '@vanilla-extract/css',
+    'sku',
+    '@types/react',
+    '@types/react-dom',
+  ];
 
   console.log('Installing packages. This might take a couple of minutes.');
   console.log(

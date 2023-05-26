@@ -2,9 +2,6 @@
   "name": "@sku-private/monorepo",
   "private": true,
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
-  "engines": {
-    "node": ">=14.15"
-  },
   "scripts": {
     "postinstall": "node ./postinstall.js",
     "prepare": "husky install",
@@ -48,14 +45,14 @@
     "@types/jest": "^29.0.0",
     "debug": "^4.3.1",
     "dedent": "^0.7.0",
-    "eslint": "^7.18.0",
-    "eslint-config-seek": "^11.0.0",
+    "eslint": "^8.41.0",
+    "eslint-config-seek": "^11.1.2",
     "eslint-plugin-jsdoc": "^44.2.4",
     "gh-pages": "^3.1.0",
     "husky": "^8.0.3",
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^29.0.0",
-    "jest-puppeteer": "^8.0.6",
+    "jest-puppeteer": "^9.0.0",
     "jest-watch-typeahead": "^2.2.0",
     "lint-staged": "^11.1.1",
     "prettier": "^2.8.8",
@@ -64,7 +61,7 @@
     "rimraf": "^5.0.0"
   },
   "volta": {
-    "node": "16.20.0"
+    "node": "18.16.0"
   },
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,

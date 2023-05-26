@@ -6,7 +6,7 @@ const { rimraf } = require('rimraf');
 const { argv } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');
-const buildStorybookPath = require.resolve('@storybook/react/bin/build.js');
+const buildStorybookPath = require.resolve('@storybook/cli/bin/index');
 const configDir = path.resolve(__dirname, '../config/storybook/build');
 const { runVocabCompile } = require('../lib/runVocab');
 const { setUpStorybookPreviewFile } = require('../lib/storybook');
@@ -16,6 +16,7 @@ const { setUpStorybookPreviewFile } = require('../lib/storybook');
   await rimraf(storybookTarget);
   await setUpStorybookPreviewFile(configDir);
 
+  argv.push('build');
   argv.push('--config-dir', configDir);
   argv.push('--output-dir', storybookTarget);
   argv.push('--quiet');

@@ -2,26 +2,26 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
-  "138-1374b213efd669d458ed.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-e8788e0d365ac22fad34.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "283-b65dde74011b05bfcfb2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-f564c97a79efa014bb45.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
   color: blue;
 }
 ,
-  "handlers-Details-be19914bbeacf6c5c683.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-9c1864199b6a7016df98.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
   color: red;
 }
 ,
-  "handlers-Home-763562d981898f458a05.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-02dafc5c1ea70ae715f1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-3e7d301f15c04b169344.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-d8f14e095ad2c003e052.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-eaa3878a0e14597bb756.js",
-    "/static/place/138-1374b213efd669d458ed.js",
-    "/static/place/main-02dafc5c1ea70ae715f1.js",
-    "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
-    "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
+    "/static/place/runtime-0ed7145f525217f5c0de.js",
+    "/static/place/283-b65dde74011b05bfcfb2.js",
+    "/static/place/main-d8f14e095ad2c003e052.js",
+    "/static/place/handlers-Details-9c1864199b6a7016df98.js",
+    "/static/place/AsyncComponent-f564c97a79efa014bb45.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -148,10 +148,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-eaa3878a0e14597bb756.js",
-    "/static/place/138-1374b213efd669d458ed.js",
-    "/static/place/main-02dafc5c1ea70ae715f1.js",
-    "/static/place/handlers-Home-763562d981898f458a05.js",
+    "/static/place/runtime-0ed7145f525217f5c0de.js",
+    "/static/place/283-b65dde74011b05bfcfb2.js",
+    "/static/place/main-d8f14e095ad2c003e052.js",
+    "/static/place/handlers-Home-3e7d301f15c04b169344.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -263,11 +263,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-eaa3878a0e14597bb756.js",
-    "/static/place/138-1374b213efd669d458ed.js",
-    "/static/place/main-02dafc5c1ea70ae715f1.js",
-    "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
-    "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
+    "/static/place/runtime-0ed7145f525217f5c0de.js",
+    "/static/place/283-b65dde74011b05bfcfb2.js",
+    "/static/place/main-d8f14e095ad2c003e052.js",
+    "/static/place/handlers-Details-9c1864199b6a7016df98.js",
+    "/static/place/AsyncComponent-f564c97a79efa014bb45.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -394,10 +394,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-eaa3878a0e14597bb756.js",
-    "/static/place/138-1374b213efd669d458ed.js",
-    "/static/place/main-02dafc5c1ea70ae715f1.js",
-    "/static/place/handlers-Home-763562d981898f458a05.js",
+    "/static/place/runtime-0ed7145f525217f5c0de.js",
+    "/static/place/283-b65dde74011b05bfcfb2.js",
+    "/static/place/main-d8f14e095ad2c003e052.js",
+    "/static/place/handlers-Home-3e7d301f15c04b169344.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -507,18 +507,18 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-eaa3878a0e14597bb756.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-0ed7145f525217f5c0de.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-eaa3878a0e14597bb756.js",
-  "/static/place/138-1374b213efd669d458ed.js",
-  "/static/place/main-02dafc5c1ea70ae715f1.js",
-  "/static/place/handlers-Details-be19914bbeacf6c5c683.js",
-  "/static/place/AsyncComponent-e8788e0d365ac22fad34.js",
+  "/static/place/runtime-0ed7145f525217f5c0de.js",
+  "/static/place/283-b65dde74011b05bfcfb2.js",
+  "/static/place/main-d8f14e095ad2c003e052.js",
+  "/static/place/handlers-Details-9c1864199b6a7016df98.js",
+  "/static/place/AsyncComponent-f564c97a79efa014bb45.js",
 ]
 CSS: [
   "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -658,10 +658,10 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-eaa3878a0e14597bb756.js",
-  "/static/place/138-1374b213efd669d458ed.js",
-  "/static/place/main-02dafc5c1ea70ae715f1.js",
-  "/static/place/handlers-Home-763562d981898f458a05.js",
+  "/static/place/runtime-0ed7145f525217f5c0de.js",
+  "/static/place/283-b65dde74011b05bfcfb2.js",
+  "/static/place/main-d8f14e095ad2c003e052.js",
+  "/static/place/handlers-Home-3e7d301f15c04b169344.js",
 ]
 CSS: [
   "/static/place/handlers-Home-0076e4d4a98910c8f902.css",

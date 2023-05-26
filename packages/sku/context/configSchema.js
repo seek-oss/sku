@@ -201,4 +201,7 @@ module.exports = validator.compile({
   externalizeNodeModules: {
     type: 'boolean',
   },
+  storybookStoryStore: {
+    type: 'boolean',
+  },
 });

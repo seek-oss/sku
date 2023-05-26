@@ -14,7 +14,6 @@ const {
   SVG,
   resolvePackage,
 } = require('../../utils');
-const createTreatPlugin = require('../createTreatPlugin');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
 const validateOptions = require('./validateOptions');
 
@@ -50,7 +49,6 @@ class SkuWebpackPlugin {
       generateCSSTypes,
       browserslist,
       mode = compiler.options.mode,
-      libraryName,
       displayNamesProd,
       removeAssertionsInProduction,
       MiniCssExtractPlugin,
@@ -65,7 +63,7 @@ class SkuWebpackPlugin {
         include: this.include,
         oneOf: [
           {
-            compiler: /(vanilla-extract|treat-webpack-loader)/,
+            compiler: /(vanilla-extract)/,
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
@@ -94,7 +92,7 @@ class SkuWebpackPlugin {
         include: this.include,
         oneOf: [
           {
-            compiler: /(vanilla-extract|treat-webpack-loader)/,
+            compiler: /(vanilla-extract)/,
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
@@ -203,14 +201,6 @@ class SkuWebpackPlugin {
         compiler.options.resolve.extensions.push('.tsx');
       }
     }
-
-    createTreatPlugin({
-      target,
-      isProductionBuild,
-      libraryName,
-      browserslist,
-      MiniCssExtractPlugin,
-    }).apply(compiler);
 
     new VanillaExtractPlugin({
       identifiers: isProductionBuild ? 'short' : 'debug',

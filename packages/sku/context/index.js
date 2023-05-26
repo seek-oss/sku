@@ -214,4 +214,5 @@ module.exports = {
     skuConfig.skipPackageCompatibilityCompilation,
   persistentCache: skuConfig.persistentCache,
   externalizeNodeModules: skuConfig.externalizeNodeModules,
+  storybookStoryStore: skuConfig.storybookStoryStore,
 };

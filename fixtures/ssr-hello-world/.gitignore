@@ -2,7 +2,7 @@
 .eslintrc
 .prettierrc
 coverage/
-dist-build/
+dist-start/
 dist-storybook/
 report/
 tsconfig.json

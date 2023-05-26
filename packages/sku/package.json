@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "11.12.0",
+  "version": "11.13.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -83,8 +83,8 @@
     "esbuild": "^0.17.0",
     "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
-    "eslint": "^7.18.0",
-    "eslint-config-seek": "^11.1.0",
+    "eslint": "^8.41.0",
+    "eslint-config-seek": "^11.1.2",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",
     "fast-glob": "^3.2.5",

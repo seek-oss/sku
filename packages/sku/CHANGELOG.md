@@ -1,5 +1,23 @@
 # sku
 
+## 11.13.0
+
+### Minor Changes
+
+- Upgrade ESLint to v8 ([#814](https://github.com/seek-oss/sku/pull/814))
+
+## 11.12.1
+
+### Patch Changes
+
+- Allow Webpack to interpret all `.mjs` files as modules, not just those from `node_modules` ([#811](https://github.com/seek-oss/sku/pull/811))
+
+  This fixes an error with compiled Vocab translation files because Webpack would not parse `require.resolveWeak` in `.mjs` files.
+
+- Bump Prettier to ensure parity with TypeScript and ESLint rules ([#808](https://github.com/seek-oss/sku/pull/808))
+
+- Add warning banner about `.less` files ([#802](https://github.com/seek-oss/sku/pull/802))
+
 ## 11.12.0
 
 ### Minor Changes

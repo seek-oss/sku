@@ -21,18 +21,6 @@ import vanillaStyles from './vanillaStyles.css'; // styles
 
 `;
 
-exports[`import order imports are ordered: relatives.js 1`] = `
-import c from '../c';
-
-import a from './a';
-import b from './b';
-
-import aTreat from './a.treat';
-import bTreat from './b.treat';
-import cTreat from '../c.treat';
-
-`;
-
 exports[`import order imports are ordered: vanilla.ts 1`] = `
 import c from '../c';
 

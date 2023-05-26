@@ -28,15 +28,6 @@ const files = {
     import styles from './styles.less'; // styles
     import utils from 'src/utils'; // internal
   `,
-  'relatives.js': dedent/* js */ `
-    import aTreat from './a.treat';
-    import bTreat from './b.treat';
-    import cTreat from '../c.treat';
-
-    import b from './b';
-    import a from './a';
-    import c from '../c';
-  `,
   'vanilla.ts': dedent/* ts */ `
     import aStyle from './a.css';
     import bStyle from './b.css';

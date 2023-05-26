@@ -10,17 +10,17 @@ import React from 'react';
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <BraidProvider theme={apac}>
-        <Story />
-      </BraidProvider>
-    ),
-    (Story) => (
       <div>
         <Text data={{ 'automation-decorator': true }}>
           Braid Text decorator
         </Text>
         <Story />
       </div>
+    ),
+    (Story) => (
+      <BraidProvider theme={apac}>
+        <Story />
+      </BraidProvider>
     ),
   ],
 };

@@ -52,6 +52,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Hello sku
+        Company name
       </div>
     </div>
     <script
@@ -153,6 +154,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         [Ḩẽẽẽƚƚööö šķǚǚǚ]
+        [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
       </div>
     </div>
     <script
@@ -254,6 +256,7 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <div>
         Bonjour sku
+        บริษัท
       </div>
     </div>
     <script

@@ -169,11 +169,7 @@ const makeWebpackConfig = ({
                   ],
                 },
               ]),
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
+          { test: /\.mjs$/, type: 'javascript/auto' },
         ],
       },
       plugins: [
@@ -269,13 +265,7 @@ const makeWebpackConfig = ({
         concatenateModules: false,
       },
       module: {
-        rules: [
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
-        ],
+        rules: [{ test: /\.mjs$/, type: 'javascript/auto' }],
       },
       plugins: [
         new webpack.DefinePlugin(envVars),

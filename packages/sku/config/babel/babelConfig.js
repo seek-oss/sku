@@ -23,7 +23,6 @@ module.exports = ({
     ],
     require.resolve('babel-plugin-macros'),
     require.resolve('@loadable/babel-plugin'),
-    [require.resolve('babel-plugin-treat'), { alias: 'sku/treat' }],
     require.resolve('@babel/plugin-transform-runtime'),
   ];
 
@@ -36,8 +35,6 @@ module.exports = ({
 
   if (isJest) {
     plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
-  } else {
-    plugins.push(require.resolve('babel-plugin-seek-style-guide'));
   }
 
   if (isProductionBuild) {

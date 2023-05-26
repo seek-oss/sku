@@ -4,8 +4,7 @@
   "dependencies": {
     "braid-design-system": "^32.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "seek-style-guide": "^42.0.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@storybook/addon-controls": "^7.0.0",

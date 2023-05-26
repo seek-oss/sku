@@ -3,8 +3,8 @@
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime-a5c914bdf89f464ecb2e.js",
-  "/346-88ab3790c9838febdf72.js",
-  "/main-0db35b25fac2fe718dc1.js",
+  "/949-f5148835e9a3fc7d011a.js",
+  "/main-107b657248829a12241c.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",

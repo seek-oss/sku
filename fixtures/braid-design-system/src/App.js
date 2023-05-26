@@ -10,7 +10,6 @@ import {
 } from 'braid-design-system';
 import theme from 'braid-design-system/themes/apac';
 
-import * as styles from './App.treat';
 import { vanillaBox } from './App.css';
 
 const noop = () => {};
@@ -35,8 +34,7 @@ function Stuff({ themeName }) {
           label="This is a checkbox"
         />
       </Card>
-      <Box className={styles.customBox}>Custom content {renderLabel}</Box>
-      <Box className={vanillaBox}>🧁 Vanilla content</Box>
+      <Box className={vanillaBox}>🧁 Vanilla content {renderLabel}</Box>
     </>
   );
 }

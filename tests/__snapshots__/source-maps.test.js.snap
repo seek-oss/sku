@@ -2,12 +2,12 @@
 
 exports[`source-maps build should generate the expected files 1`] = `
 {
-  "209-3ad0105af127aad30c47.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "209-3ad0105af127aad30c47.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "850-5133c1643ef6ad81ee28.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "850-5133c1643ef6ad81ee28.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/static/source-maps/runtime-c4af24a6a23c633bcca3.js",
-    "/static/source-maps/209-3ad0105af127aad30c47.js",
-    "/static/source-maps/main-075ea7ac89b144aa78df.js",
+    "/static/source-maps/850-5133c1643ef6ad81ee28.js",
+    "/static/source-maps/main-a240015cd3b20610bb4b.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -78,8 +78,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-075ea7ac89b144aa78df.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-075ea7ac89b144aa78df.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-a240015cd3b20610bb4b.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-a240015cd3b20610bb4b.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c4af24a6a23c633bcca3.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-c4af24a6a23c633bcca3.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

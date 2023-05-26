@@ -1,6 +1,5 @@
 /**
  * e.g.
- * seek-style-guide -> __SEEK_STYLE_GUIDE__
  * @foo/awesome -> __FOO_AWESOME__
  */
 const packageNameToClassPrefix = (packageName) =>

@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { paths, storybookAddons, storybookStoryStore } from '../../context';
 
-/** @type {import("@storybook/react-webpack5").StorybookConfig} */
 export default {
   stories: paths.src
     .filter((srcPath) => fs.statSync(srcPath).isDirectory())
@@ -21,7 +20,7 @@ export default {
     },
   },
   features: {
-    storyStoryV7: storybookStoryStore,
+    storyStoreV7: storybookStoryStore,
   },
   babel: (config) => ({
     ...config,

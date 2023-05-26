@@ -77,7 +77,7 @@ To make use of this hook, it's recommended to install [husky](https://www.npmjs.
 yarn husky add .husky/pre-commit "yarn sku pre-commit"
 ```
 
-For more details configuring hooks, please see husky's [documentation](https://typicode.github.io/husky/#create-a-hook).
+For more details on configuring hooks, please see husky's [documentation](https://typicode.github.io/husky/#create-a-hook).
 
 ## Assertion removal
 

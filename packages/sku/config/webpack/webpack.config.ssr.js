@@ -169,11 +169,7 @@ const makeWebpackConfig = ({
                   ],
                 },
               ]),
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
+          { test: /\.mjs$/, type: 'javascript/auto' },
         ],
       },
       plugins: [
@@ -236,7 +232,7 @@ const makeWebpackConfig = ({
               allowlist: [
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it
-                // matches when importing a file within a package e.g. import { Text } from 'seek-style-guide/react'.
+                // matches when importing a file within a package e.g. import { MyComponent } from '@seek/my-component-package'.
                 ...paths.compilePackages.map(
                   (packageName) => new RegExp(`^(${packageName})`),
                 ),
@@ -269,13 +265,7 @@ const makeWebpackConfig = ({
         concatenateModules: false,
       },
       module: {
-        rules: [
-          {
-            test: /\.mjs$/,
-            include: /node_modules/,
-            type: 'javascript/auto',
-          },
-        ],
+        rules: [{ test: /\.mjs$/, type: 'javascript/auto' }],
       },
       plugins: [
         new webpack.DefinePlugin(envVars),

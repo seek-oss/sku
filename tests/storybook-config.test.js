@@ -80,24 +80,6 @@ describe('storybook-config', () => {
       expect(text).toEqual('32px less text');
       expect(fontSize).toEqual('32px');
     });
-
-    it('should render seek style guide text', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
-        '[data-automation-seek-style-guide]',
-      );
-
-      expect(text).toEqual('Style guide text');
-      expect(fontSize).toEqual('18px');
-    });
-
-    it('should render a seek style guide icon', async () => {
-      const svg = await storybookFrame.waitForSelector(
-        '[data-automation-svg] svg',
-      );
-
-      expect(svg).not.toBe(null);
-    });
   });
 
   describe('build-storybook', () => {
@@ -160,24 +142,6 @@ describe('storybook-config', () => {
 
       expect(text).toEqual('32px less text');
       expect(fontSize).toEqual('32px');
-    });
-
-    it('should render seek style guide text', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
-        '[data-automation-seek-style-guide]',
-      );
-
-      expect(text).toEqual('Style guide text');
-      expect(fontSize).toEqual('18px');
-    });
-
-    it('should render a seek style guide icon', async () => {
-      const svg = await storybookFrame.waitForSelector(
-        '[data-automation-svg] svg',
-      );
-
-      expect(svg).not.toBe(null);
     });
   });
 });

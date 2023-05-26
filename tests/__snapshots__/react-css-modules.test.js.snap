@@ -4,7 +4,7 @@ exports[`react-css-modules should create valid app 1`] = `
 SCRIPTS: [
   "/runtime-df7fc58286eea709736e.js",
   "/983-7e081b75ea8ba172af1b.js",
-  "/main-243d4d60bf91742796ef.js",
+  "/main-8fd671b3b4e8f765f588.js",
 ]
 CSS: [
   "/main-cb8848ae92e1e9d08128.css",
@@ -105,7 +105,7 @@ exports[`react-css-modules should generate the expected files 1`] = `
   "index.html": SCRIPTS: [
     "/runtime-df7fc58286eea709736e.js",
     "/983-7e081b75ea8ba172af1b.js",
-    "/main-243d4d60bf91742796ef.js",
+    "/main-8fd671b3b4e8f765f588.js",
   ]
 CSS: [
     "/main-cb8848ae92e1e9d08128.css",
@@ -188,7 +188,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-243d4d60bf91742796ef.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8fd671b3b4e8f765f588.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }

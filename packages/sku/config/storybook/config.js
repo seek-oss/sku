@@ -27,14 +27,14 @@ export default {
     presets: [
       ...config.presets,
       [
-        '@babel/preset-env',
+        require.resolve('@babel/preset-env'),
         {
           targets: {
             chrome: 100,
           },
         },
       ],
-      '@babel/preset-typescript',
+      require.resolve('@babel/preset-typescript'),
     ],
   }),
 };

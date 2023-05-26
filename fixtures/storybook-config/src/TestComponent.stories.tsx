@@ -8,12 +8,6 @@ import { TestComponent } from './TestComponent';
 const meta = {
   title: 'TestComponent',
   component: TestComponent,
-  argTypes: {
-    text: {
-      label: 'Text',
-      type: { name: 'string', required: true },
-    },
-  },
   decorators: [
     (Story) => (
       // Storybook doesn't like style guide usage in `preview.tsx` because it tries to import

@@ -21,7 +21,6 @@
     "@sku-fixtures/multiple-routes": "workspace:*",
     "@sku-fixtures/public-path": "workspace:*",
     "@sku-fixtures/react-css-modules": "workspace:*",
-    "@sku-fixtures/seek-style-guide": "workspace:*",
     "@sku-fixtures/sku-with-https": "workspace:*",
     "@sku-fixtures/ssr-hello-world": "workspace:*",
     "@sku-fixtures/storybook-config": "workspace:*",

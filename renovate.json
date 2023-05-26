@@ -42,9 +42,7 @@
     },
     {
       "groupName": "test packages",
-      "packagePatterns": [
-        "(testing-library|jest|puppeteer|identity-obj-proxy)"
-      ],
+      "packagePatterns": ["(testing-library|jest|puppeteer)"],
       "enabled": true,
       "schedule": ["before 9am on Tuesday"]
     },

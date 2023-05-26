@@ -36,8 +36,6 @@ module.exports = ({
 
   if (isJest) {
     plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
-  } else {
-    plugins.push(require.resolve('babel-plugin-seek-style-guide'));
   }
 
   if (isProductionBuild) {

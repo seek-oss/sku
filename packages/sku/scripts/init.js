@@ -193,7 +193,7 @@ const getTemplateFileDestinationFromRoot =
     }),
   );
 
-  const deps = ['braid-design-system', 'sku', 'react', 'react-dom'];
+  const deps = ['braid-design-system', 'react', 'react-dom'];
 
   const devDeps = ['@vanilla-extract/css', '@types/react', '@types/react-dom'];
 
@@ -209,7 +209,7 @@ const getTemplateFileDestinationFromRoot =
   await install({ deps, verbose, useYarn });
   await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
 
-  await configure();
+  await configure({ isPostInit: true });
   await esLintFix();
   await prettierWrite();
 

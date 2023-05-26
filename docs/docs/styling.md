@@ -10,14 +10,14 @@ $ yarn add @vanilla-extract/css
 
 Now you can create `.css.ts` files in your project.
 
-```js
+```ts
 // BigBox.css.ts
 import { style } from '@vanilla-extract/css';
 
 export const bigBox = style({ width: 500, height: 500 });
 ```
 
-```js
+```tsx
 // BigBox.tsx
 import * as styles from './BigBox.css';
 
@@ -26,11 +26,15 @@ export function BigBox() {
 }
 ```
 
-See [vanilla-extract](https://vanilla-extract.style/documentation/getting-started) for full documentation.
+See [Vanilla Extract](https://vanilla-extract.style/documentation/getting-started) for full documentation.
 
 ## Locally Scoped CSS
 
 (via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
+
+> Support for LESS has been deprecated.
+> [Vanilla Extract](#vanilla-extract) is the preferred styling solution supported by sku, and support for LESS will be removed in a future release.
+> Consumers are encouraged to migrate to Vanilla Extract at the earliest opportunity.
 
 Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.
 
@@ -53,25 +57,7 @@ export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
 
 ## treat
 
-> Usage of treat is deprecated in favour of vanilla-extract
+As of sku v12, [treat] support has been removed in favour of [Vanilla Extract].
 
-Note: You must access all treat imports through the sku prefix. e.g. `sku/treat`, `sku/react-treat`;
-
-See treat's [docs](https://seek-oss.github.io/treat/) for details on proper usage.
-
-```js
-import { style } from 'sku/treat';
-
-export const bigBox = style({ width: 500, height: 500 });
-```
-
-```js
-import { useStyles } from 'sku/react-treat';
-import * as styleRefs from './example.treat';
-
-export default () => {
-  const styles = useStyles(styleRefs);
-
-  return <div className={styles.bigBox}>I am a big box</div>;
-};
-```
+[treat]: https://seek-oss.github.io/treat/
+[vanilla extract]: #vanilla-extract

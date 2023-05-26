@@ -1,5 +1,118 @@
 # sku
 
+## 12.0.0
+
+### Major Changes
+
+- Drop support for styling with [treat]. Please [migrate] styles to [Vanilla Extract]. ([#809](https://github.com/seek-oss/sku/pull/809))
+
+  [treat]: https://seek-oss.github.io/treat/
+  [migrate]: https://github.com/seek-oss/braid-design-system/blob/e42c6f9168904f6b607c74157cafebf9b0147489/docs/treat%20to%20vanilla-extract%20migration.md
+  [Vanilla Extract]: https://vanilla-extract.style/documentation/getting-started
+
+- Remove workaround for `classnames` package issue ([#803](https://github.com/seek-oss/sku/pull/803))
+
+  A workaround for [a bug in the `classnames`][bug] package has been removed now that the bug has been fixed.
+
+  Please evaluate whether you need to use `classnames` library in your app.
+  Prefer using [Braid's `Box` component, which supports the full `clsx` API][box], instead.
+  If you need to construct class name strings for components other than `Box`, prefer [the `clsx` package][clsx] over the `classnames` package.
+
+  [bug]: https://github.com/JedWatson/classnames/issues/240
+  [box]: https://seek-oss.github.io/braid-design-system/components/Box/#dynamic-css-classes
+  [clsx]: https://github.com/lukeed/clsx
+
+- `sku init` no longer installs and configures husky for you ([#804](https://github.com/seek-oss/sku/pull/804))
+
+  BREAKING CHANGE
+
+  `sku init` no longer adds `husky` as a dependecy nor does it configure husky for you out of the box.
+  For instructions on how to set up `husky` to use sku's pre-commit hook, see [the docs].
+
+  [the docs]: https://seek-oss.github.io/sku/#/./docs/extra-features?id=pre-commit-hook
+
+- Support Storybook v7 ([#810](https://github.com/seek-oss/sku/pull/810))
+
+  sku now supports Storybook v7. Please read [the Storybook migration guide] for a high-level overview of what has changed. For a more detailed list of changes, take a look at [the full migration notes].
+  **NOTE**: Since sku installs and configures Storybook for you, a lot of the changes will not be relevant to users.
+
+  **BREAKING CHANGE**
+
+  As of Storybook v7, stories that use the `storiesOf` API will not work by default. The `storiesOf` API is deprecated and will be removed in Storybook v8, so it is highly encouraged to migrate your stories to the [Component Story Format (CSF)][csf].
+
+  Migration can be done automatically via the migration tools provided by Storybook:
+
+  ```sh
+  npx storybook@7 migrate storiesof-to-csf --glob="src/**/*.stories.tsx"
+  ```
+
+  After doing this migration, your stories may need some manual cleanup to function correctly, such as adding [a default metadata export][meta].
+
+  When your stories are working, you can also optionally migrate to the newer [CSF 3]:
+
+  ```sh
+  npx storybook@7 migrate csf-2-to-3 --glob="src/**/*.stories.tsx"
+  ```
+
+  If you cannot migrate your stories to CSF, or you need to dynamically generate stories with `storiesOf` (see [this issue][storiesof issue] for more info on the future of the `storiesOf` API), you can set the `storybookStoryStore` flag to `false` in your sku config:
+
+  ```ts
+  import { type SkuConfig } from 'sku';
+
+  export default {
+    storybookStoryStore: false,
+  } satisfies SkuConfig;
+  ```
+
+  [the storybook migration guide]: https://storybook.js.org/docs/react/migration-guide#page-top
+  [the full migration notes]: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#from-version-65x-to-700
+  [csf]: https://storybook.js.org/docs/react/api/csf
+  [meta]: https://storybook.js.org/docs/react/api/csf#default-export
+  [csf 3]: https://storybook.js.org/blog/storybook-csf3-is-here/
+  [storiesof issue]: https://github.com/storybookjs/storybook/issues/9828#issuecomment-1370291568
+
+- Drop support for [`seek-style-guide`] ([#803](https://github.com/seek-oss/sku/pull/803))
+
+  BREAKING CHANGE
+
+  `seek-style-guide` is no longer supported by sku. Flow support was already removed from sku in [v11], so
+  any `seek-style-guide` components that use flow currently don't work with sku. However, there were remnants
+  of `seek-style-guide` still present in sku's codebase. Specifically, import optimization and
+  component mocking. These features have now been removed. Please migrate to [`braid-design-system`].
+
+  [`seek-style-guide`]: https://github.com/seek-oss/seek-style-guide
+  [v11]: https://github.com/seek-oss/sku/releases/tag/v11.0.0
+  [`braid-design-system`]: https://seek-oss.github.io/braid-design-system/
+
+- Require Node.js 18.12+ ([#805](https://github.com/seek-oss/sku/pull/805))
+
+  **BREAKING CHANGE**
+
+  Node 14 has already reached end of life as of April 2023, and Node.js 16 had its end of life date [brought forward to September 2023][node 16 eol], so in the interest of preventing another breaking change in 4 months time, we're pre-emptively dropping support for Node.js 16 in addition to Node.js 14.
+  We've chosen to support Node.js versions from v18.12 onwards as this version was the first [Node.js 18 LTS release][node 18.12 release].
+
+  Consider upgrading the Node.js version for your project across:
+
+  - `.nvmrc`
+  - `package.json#/engines/node`
+  - `@types/node` package version
+  - CI/CD configuration (`.buildkite/pipeline.yml`, `Dockerfile`, etc.)
+
+  [node 16 eol]: https://nodejs.org/en/blog/announcements/nodejs16-eol
+  [node 18.12 release]: https://nodejs.org/en/blog/release/v18.12.0
+
+### Minor Changes
+
+- Re-export all of `@storybook/react` ([#810](https://github.com/seek-oss/sku/pull/810))
+
+  Previously, only specific APIs were re-exported under `sku/@storybook/react`. All APIs are now re-exported.
+
+- Upgrade to TypeScript 5.0 ([#813](https://github.com/seek-oss/sku/pull/813))
+
+  This major release includes breaking changes. See the [TypeScript 5.0 announcement][ts5] for more information.
+
+  [ts5]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/
+
 ## 11.13.0
 
 ### Minor Changes

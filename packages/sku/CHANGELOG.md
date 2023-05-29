@@ -1,5 +1,11 @@
 # sku
 
+## 12.0.1
+
+### Patch Changes
+
+- Check that paths exist before looking for `*.less` files in them ([#817](https://github.com/seek-oss/sku/pull/817))
+
 ## 12.0.0
 
 ### Major Changes

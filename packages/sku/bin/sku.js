@@ -3,6 +3,7 @@ const fs = require('fs');
 const debug = require('debug');
 const args = require('../config/args');
 const _validatePeerDeps = require('../lib/validatePeerDeps');
+const validateLessFiles = require('../lib/validateLessFiles');
 const { getPathFromCwd } = require('../lib/cwd');
 const log = debug('sku:bin');
 
@@ -62,8 +63,10 @@ log(`Starting script: ${script}`);
     case 'setup-hosts':
     case 'init':
     case 'configure': {
-      runScript(script);
-      break;
+      if (script !== 'init') {
+        validateLessFiles();
+      }
+      return runScript(script);
     }
 
     case 'test':
@@ -72,8 +75,8 @@ log(`Starting script: ${script}`);
     case 'pre-commit':
     case 'translations': {
       await configureProject();
-      runScript(script);
-      break;
+      validateLessFiles();
+      return runScript(script);
     }
 
     case 'start':
@@ -84,10 +87,9 @@ log(`Starting script: ${script}`);
     case 'build-ssr':
     case 'serve': {
       await configureProject();
-
+      validateLessFiles();
       validatePeerDeps();
-      runScript(script);
-      break;
+      return runScript(script);
     }
 
     default: {

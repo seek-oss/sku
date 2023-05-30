@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "12.0.1",
+  "version": "12.0.2",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {

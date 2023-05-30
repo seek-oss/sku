@@ -1,5 +1,11 @@
 # sku
 
+## 12.0.2
+
+### Patch Changes
+
+- Ensure `sku pre-commit` lints the same files as `sku lint` ([#821](https://github.com/seek-oss/sku/pull/821))
+
 ## 12.0.1
 
 ### Patch Changes

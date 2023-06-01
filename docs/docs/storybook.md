@@ -63,8 +63,6 @@ By default, Storybook runs on port `8081`.
 If you'd like to use a different port, you can provide it via the `storybookPort` option in `sku.config.ts`:
 
 ```ts
-import type { SkuConfig } from 'sku';
-
 export default {
   storybookPort: 9000,
 } satisfies SkuConfig;
@@ -83,8 +81,6 @@ yarn add --dev @storybook/addon-essentials
 Then add it to your `sku.config.ts`.
 
 ```ts
-import type { SkuConfig } from 'sku';
-
 export default {
   storybookAddons: ['@storybook/addon-essentials'],
 } satisfies SkuConfig;
@@ -108,8 +104,6 @@ By default, Storybook assets are generated in the `dist-storybook` directory in 
 If you would like to specify a custom target directory, you can provide it via the `storybookTarget` option in `sku.config.ts`:
 
 ```ts
-import type { SkuConfig } from 'sku';
-
 export default {
   storybookTarget: './dist/storybook',
 } satisfies SkuConfig;

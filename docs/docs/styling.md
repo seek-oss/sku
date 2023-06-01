@@ -4,7 +4,7 @@
 
 The `@vanilla-extract/css` package is not available out of the box so it needs to be installed.
 
-```bash
+```sh
 $ yarn add @vanilla-extract/css
 ```
 
@@ -47,9 +47,9 @@ For example, given the following Less file:
 }
 ```
 
-You can then import the classes into your JavaScript code like so:
+You can then import the classes into your code like so:
 
-```js
+```tsx
 import styles from './example.less';
 
 export default () => <div className={styles.exampleWrapper}>Hello World!</div>;

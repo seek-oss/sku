@@ -15,7 +15,7 @@ Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with 
 
 If you'd like use a package that requires adding a Babel plugin, try [Babel Macros](https://github.com/kentcdodds/babel-plugin-macros). Macros allow packages to apply the configuration changes for you when they are imported. For example, to use [Emotion](https://emotion.sh/):
 
-```js
+```ts
 import styled from 'react-emotion/macro';
 import { css } from 'emotion/macro';
 ```

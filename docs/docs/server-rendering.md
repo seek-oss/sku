@@ -4,8 +4,8 @@ The default mode for sku is to statically render projects. However, Server-Side 
 
 First, you need to create a `sku.config.js` file, which will contain the following setup at minimum:
 
-```js
-module.exports = {
+```ts
+export default {
   clientEntry: 'src/client.js',
   serverEntry: 'src/server/server.js',
   public: 'src/public',
@@ -13,7 +13,7 @@ module.exports = {
   target: 'dist',
   port: 3300,
   serverPort: 3301,
-};
+} satisfies SkuConfig;
 ```
 
 If you have an existing configuration, for example generated with `sku init`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above.

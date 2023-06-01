@@ -6,13 +6,13 @@ Client-side apps all suffer the same performance pitfall of not being able to sh
 
 The sku config contains route specific options.
 
-```js
-module.exports = {
+```ts
+export default {
   routes: ['/', '/details'],
   environments: ['development', 'production'],
   sites: ['australia', 'asia'],
   target: 'dist', // Optional, this is the default value
-};
+} satisfies SkuConfig;
 ```
 
 > The first listed route will be the default route opened by `sku start`. If you want to change this, set the `initialPath` option.
@@ -51,9 +51,11 @@ After configuring sku, the render entry needs to return the HTML required to cre
 
 **Example render entry**
 
-```js
+```ts
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
+
 import App from './App';
 
 export default {
@@ -79,7 +81,7 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;
 ```
 
 ### renderApp
@@ -98,9 +100,11 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 
 The function receives `environment`, `site` & the result of `renderApp`.
 
-```js
+```tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
+
 import App from './App';
 
 export default {
@@ -138,18 +142,25 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;
 ```
 
 Client entry
 
-```js
+```tsx
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 import App from './App';
 
-export default ({ site, analyticsEnabled, appLength }) => {
+// The return type of `provideClientContext` in your render entry
+type ClientContext = {
+  site: string;
+  analyticsEnabled: boolean;
+  appLength: number;
+};
+
+export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
   console.log('HTML source length', appLength);
 
   hydrateRoot(
@@ -173,17 +184,18 @@ export default ({ site, analyticsEnabled, appLength }) => {
 
 If your app uses TypeScript, sku provides the type definitions for the render entry.
 
-```ts
+```tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Render } from 'sku';
+import type { Render } from 'sku';
 import App from './App';
 
 interface RenderContext {
   html: string;
   otherThing: number;
 }
-const skuRender: Render<RenderContext> = {
+
+export default {
   renderApp: () => ({
     html: renderToString(<App />),
     otherThing: 10,
@@ -204,72 +216,68 @@ const skuRender: Render<RenderContext> = {
       </body>
     </html>
   `,
-};
-
-export default skuRender;
+} satisfies Render<RenderContext>;
 ```
 
 ### React Helmet
 
 [React Helmet](https://github.com/nfl/react-helmet) requires extra work after React is finished rendering to extract static meta information. This is also a common pattern used by some other libraries (e.g. [react-loadable](https://github.com/jamiebuilds/react-loadable), [emotion](https://emotion.sh/docs/ssr)).
 
-```js
+```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Helmet from 'react-helmet';
+import type { Render } from 'sku';
+
 import App from './App/App';
 
-const renderApp = () => {
-  const appHtml = ReactDOM.renderToString(<App />);
-  const helmet = Helmet.renderStatic();
-
-  const htmlAttributes = helmet.htmlAttributes.toString();
-  const bodyAttributes = helmet.bodyAttributes.toString();
-  const metaStrings = [
-    helmet.title.toString(),
-    helmet.meta.toString(),
-    helmet.link.toString(),
-  ];
-  const metaHtml = metaStrings.filter(Boolean).join('\n    ');
-
-  return {
-    appHtml,
-    metaHtml,
-    htmlAttributes,
-    bodyAttributes,
-  };
-};
-
-const renderDocument = ({ app, bodyTags, headTags }) => `
-  <!DOCTYPE html>
-  <html${app.htmlAttributes ? ` ${app.htmlAttributes}` : ''}>
-    <head>
-      ${app.metaHtml}
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      ${headTags}
-    </head>
-    <body${app.bodyAttributes ? ` ${app.bodyAttributes}` : ''}>
-      <div id="app">${app.appHtml}</div>
-      ${bodyTags}
-    </body>
-  </html>
-`;
-
 export default {
-  renderApp,
-  renderDocument,
-};
+  renderApp: () => {
+    const appHtml = ReactDOM.renderToString(<App />);
+    const helmet = Helmet.renderStatic();
+
+    const htmlAttributes = helmet.htmlAttributes.toString();
+    const bodyAttributes = helmet.bodyAttributes.toString();
+    const metaStrings = [
+      helmet.title.toString(),
+      helmet.meta.toString(),
+      helmet.link.toString(),
+    ];
+    const metaHtml = metaStrings.filter(Boolean).join('\n    ');
+
+    return {
+      appHtml,
+      metaHtml,
+      htmlAttributes,
+      bodyAttributes,
+    };
+  },
+  renderDocument: ({ app, bodyTags, headTags }) => `
+    <!DOCTYPE html>
+    <html${app.htmlAttributes ? ` ${app.htmlAttributes}` : ''}>
+      <head>
+        ${app.metaHtml}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        ${headTags}
+      </head>
+      <body${app.bodyAttributes ? ` ${app.bodyAttributes}` : ''}>
+        <div id="app">${app.appHtml}</div>
+        ${bodyTags}
+      </body>
+    </html>
+  `,
+} satisfies Render;
 ```
 
 ### Dynamic routes
 
 Apps using params in their path (eg. `/job/[12345]`) are supported as well. These params are represented in sku like so, `/job/$id`, where `$` marks this part of the path as dynamic.
 
-```js
-{
+```ts
+export default {
   routes: ['/', '/job/$id'],
-}
+} satisfies SkuConfig;
 ```
 
 When running `sku start`, requesting `/job/123` will return the rendered HTML for `/job/$id`. Running `sku build` will output the following folder structure.

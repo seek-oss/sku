@@ -18,7 +18,7 @@ In the `renderCallback` function, register all extra script tags (inline and ext
 
 > If you are using multi-part responses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
 
-```js
+```tsx
 async function renderCallback(
   { SkuProvider, getBodyTags, registerScript },
   req,

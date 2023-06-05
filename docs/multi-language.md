@@ -18,10 +18,10 @@ To opt-in to multi-language builds you need to perform three steps:
    This will be used by your code to support dynamically loading the correct language translations inside React components
 2. Add the list of supported `languages` to your [sku configuration](./docs/configuration.md#languages)
 
-```json
-{
-  "languages": ["en", "fr"]
-}
+```ts
+export default {
+  languages: ['en', 'fr'],
+} satisfies SkuConfig;
 ```
 
 3. Create your first .vocab folder. See [Usage](#usage).
@@ -68,23 +68,23 @@ If one of your sites only supports a subset of languages you can specify them in
 
 **Example:** Setting an english only site.
 
-```json
-{
-  "languages": ["en", "fr"],
-  "sites": [
+```ts
+export default {
+  languages: ['en', 'fr'],
+  sites: [
     {
-      "name": "multi-language-site",
-      "host": "my.site",
-      "routes": ["/$language/"]
+      name: 'multi-language-site',
+      host: 'my.site',
+      routes: ['/$language/'],
     },
     {
-      "name": "english-only-site",
-      "host": "en.my.site",
-      "routes": ["/"],
-      "languages": ["en"]
-    }
-  ]
-}
+      name: 'english-only-site',
+      host: 'en.my.site',
+      routes: ['/'],
+      languages: ['en'],
+    },
+  ],
+} satisfies SkuConfig;
 ```
 
 **Note:** Any language specified by a site must be included in the top level `languages` field.
@@ -95,14 +95,14 @@ Like a site, a route can also limit the languages it uses.
 
 **Example:** Language specific URL
 
-```json
-{
-  "languages": ["en", "fr"],
-  "routes": [
-    { "route": "/hello", "languages": ["en"] },
-    { "route": "/bonjour", "languages": ["fr"] }
-  ]
-}
+```ts
+export default {
+  languages: ['en', 'fr'],
+  routes: [
+    { route: '/hello', languages: ['en'] },
+    { route: '/bonjour', languages: ['fr'] },
+  ],
+} satisfies SkuConfig;
 ```
 
 **Note:** Any language specified by a route must be included in the top level `languages` field.
@@ -148,13 +148,13 @@ Phrase syncing requires two environment variables to be set: `PHRASE_PROJECT_ID`
 
 To push translations to Phrase:
 
-```bash
+```sh
 $ sku translations push
 ```
 
 To pull translations from Phrase:
 
-```bash
+```sh
 $ sku translations pull
 ```
 
@@ -163,7 +163,7 @@ $ sku translations pull
 When uploading translations, Phrase identifies keys that exist in the Phrase project, but were not referenced in the upload.
 These keys can be deleted from Phrase by providing the `--delete-unused-keys` flag to `sku translations push`. E.g.
 
-```bash
+```sh
 $ sku translations push --delete-unused-keys
 ```
 

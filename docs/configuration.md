@@ -2,7 +2,7 @@
 
 If you need to configure sku, first create a `sku.config.ts` file in your project root:
 
-```bash
+```sh
 $ touch sku.config.ts
 ```
 
@@ -11,20 +11,18 @@ While sku has a zero configuration mode, the equivalent manual configuration wou
 ```ts
 import type { SkuConfig } from 'sku';
 
-const skuConfig: SkuConfig = {
+export default {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
-};
-
-export default skuConfig;
+} satisfies SkuConfig;
 ```
 
 If you need to specify a different config file you can do so with the `--config` parameter.
 
-```bash
+```sh
 $ sku start --config sku.custom.config.ts
 ```
 
@@ -74,13 +72,13 @@ Similar to `dangerouslySetWebpackConfig` but for [eslint](https://eslint.org/) c
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   dangerouslySetESLintConfig: (skuEslintConfig) => ({
     ...skuEslintConfig,
     someOtherConfig: 'dangerousValue',
   }),
-};
+} satisfies SkuConfig;
 ```
 
 ## dangerouslySetJestConfig
@@ -93,13 +91,13 @@ Please speak with the `sku-support` group before using.
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   dangerouslySetJestConfig: (skuJestConfig) => ({
     ...skuJestConfig,
     someOtherConfig: 'dangerousValue',
   }),
-};
+} satisfies SkuConfig;
 ```
 
 ## dangerouslySetWebpackConfig
@@ -114,13 +112,13 @@ Reliance on this setting will cause issues when upgrading sku as any custom sett
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   dangerouslySetWebpackConfig: (skuWebpackConfig) => ({
     ...skuWebpackConfig,
     someOtherConfig: 'dangerousValue',
   }),
-};
+} satisfies SkuConfig;
 ```
 
 ## devServerMiddleware
@@ -151,10 +149,10 @@ Adds static `displayName` properties to React components in production. This set
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   displayNamesProd: true,
-};
+} satisfies SkuConfig;
 ```
 
 ## environments
@@ -320,10 +318,10 @@ Can be used to limit the languages rendered for a specific route. Any listed lan
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   routes: ['/', '/details'],
-};
+} satisfies SkuConfig;
 ```
 
 ## serverEntry
@@ -393,10 +391,10 @@ Set to `true` to enable source maps in production.
 
 Example:
 
-```js
-const config = {
+```ts
+export default {
   sourceMapsProd: true,
-};
+} satisfies SkuConfig;
 ```
 
 ## srcPaths

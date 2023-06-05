@@ -1,5 +1,11 @@
 # sku
 
+## 12.0.3
+
+### Patch Changes
+
+- Fix ESLint warning and error reporting ([#826](https://github.com/seek-oss/sku/pull/826))
+
 ## 12.0.2
 
 ### Patch Changes

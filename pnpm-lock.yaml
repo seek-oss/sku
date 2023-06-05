@@ -32,8 +32,8 @@ importers:
         specifier: ^11.1.2
         version: 11.1.2(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
       eslint-plugin-jsdoc:
-        specifier: ^45.0.0
-        version: 45.0.0(eslint@8.41.0)
+        specifier: ^46.0.0
+        version: 46.0.0(eslint@8.41.0)
       gh-pages:
         specifier: ^3.1.0
         version: 3.2.3
@@ -7654,8 +7654,8 @@ packages:
       - supports-color
       - typescript
 
-  /eslint-plugin-jsdoc@45.0.0(eslint@8.41.0):
-    resolution: {integrity: sha512-l2+Jcs/Ps7oFA+SWY+0sweU/e5LgricnEl6EsDlyRTF5y0+NWL1y9Qwz9PHwHAxtdJq6lxPjEQWmYLMkvhzD4g==}
+  /eslint-plugin-jsdoc@46.0.0(eslint@8.41.0):
+    resolution: {integrity: sha512-xmB5WleBcPCFYlrFfdjrcfSKOJBLwyGmKa+i+fVqlIHp8g5aAoeQpBGugUzToFtQgd4hNZYlfIcP7QSxC9NYWQ==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0

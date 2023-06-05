@@ -15,7 +15,7 @@
     "@sku-fixtures/configure": "workspace:*",
     "@sku-fixtures/braid-design-system": "workspace:*",
     "@sku-fixtures/custom-src-paths": "workspace:*",
-    "@sku-fixtures/import-order": "workspace:*",
+    "@sku-fixtures/lint-format": "workspace:*",
     "@sku-fixtures/library-build": "workspace:*",
     "@sku-fixtures/library-file": "workspace:*",
     "@sku-fixtures/multiple-routes": "workspace:*",

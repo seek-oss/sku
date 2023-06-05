@@ -1,5 +1,5 @@
 {
-  "name": "@sku-fixtures/import-order",
+  "name": "@sku-fixtures/lint-format",
   "private": true,
   "devDependencies": {
     "sku": "workspace:*"

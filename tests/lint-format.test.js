@@ -36,7 +36,7 @@ const filesToLint = {
 };
 
 const filesToFormat = {
-  'index.ts': dedent/* ts */ `
+  'importOrder1.ts': dedent/* ts */ `
     import './reset'; // side-effect imports should stay put
 
     import LocalComponent from './LocalComponent'; // sibling
@@ -49,7 +49,7 @@ const filesToFormat = {
     import styles from './styles.less'; // styles
     import utils from 'src/utils'; // internal
   `,
-  'vanilla.ts': dedent/* ts */ `
+  'importOrder2.ts': dedent/* ts */ `
     import aStyle from './a.css';
     import bStyle from './b.css';
     import cStyle from '../c.css';
@@ -57,6 +57,11 @@ const filesToFormat = {
     import b from './b';
     import a from './a';
     import c from '../c';
+  `,
+  'fixableLintError.ts': dedent/* ts */ `
+    const foo = () => {
+      return 'foo';
+    };
   `,
   'unformattedFile2.ts': dedent/* ts */ `
     import { something } from "with-double-quotes";
@@ -72,11 +77,11 @@ const filesToFormat = {
   `,
 };
 
-beforeAll(async () => {
+beforeEach(async () => {
   await fs.mkdir(srcDirectory, { recursive: true });
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await fs.rm(srcDirectory, { recursive: true, force: true });
 });
 

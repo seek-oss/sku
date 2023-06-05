@@ -6,13 +6,13 @@ One of the features that makes sku unique, is it can handle a multi site/brand a
 
 By default, sku will render the first site in the [`sites`](./docs/configuration#sites) array when using `sku start`. However, if you want to be able to switch between sites without restarting the server, you can do so by setting a `host` for each site.
 
-```js
-module.exports = {
+```ts
+export default {
   sites: [
     { name: 'seekAnz', host: 'dev.seek.com.au' },
     { name: 'jobStreet', host: 'dev.jobstreet.com' },
   ],
-};
+} satisfies SkuConfig;
 ```
 
 Now, if you request `http://dev.seek.com.au`, you will receive the `seekAnz` version of the app, and `http://dev.jobstreet.com` will return the `jobStreet` one.
@@ -25,13 +25,15 @@ First add the following script to your `package.json`.
 
 ```json
 {
-  "setup-hosts": "sku setup-hosts"
+  "scripts": {
+    "setup-hosts": "sku setup-hosts"
+  }
 }
 ```
 
 Then you can run the script to configure you machine with the required hosts.
 
-```bash
+```sh
 $ sudo npm run setup-hosts
 ```
 
@@ -49,20 +51,21 @@ Firstly, add a [`sites`](./docs/configuration#sites) option to your `sku.config.
 
 _**NOTE:** For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site._
 
-```js
-module.exports = {
+```ts
+export default {
   sites: ['seekAnz', 'jobStreet'],
-};
+} satisfies SkuConfig;
 ```
 
 ### Rendering the site
 
 Now handle the site variable in our render and client entries.
 
-```js
-// render.js
+```tsx
+// render.tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
 
 import App from './App';
 
@@ -96,18 +99,18 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;
 ```
 
-```js
-// client.js
+```tsx
+// client.tsx
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 import App from './App';
 
 // Pass the site variable from `provideClientContext` to the top level component
-export default ({ site }) =>
+export default ({ site }: { site: string }) =>
   hydrateRoot(document.getElementById('app')!, <App site={site} />);
 ```
 
@@ -115,18 +118,19 @@ export default ({ site }) =>
 
 Now the site is available in our `App` component, we use `BraidLoadableProvider` (which uses [loadable-components](./docs/code-splitting) internally) to configure the specified theme.
 
-```js
-// App.js
+```tsx
+// App.tsx
 import React, { ReactNode } from 'react';
 
 import { BraidProvider } from 'braid-design-system';
 import loadable from 'sku/@loadable/component';
 
-const BraidTheme = loadable.lib((props: { themeName }) =>
-  import(`braid-design-system/themes/${props.themeName}`),
+const BraidTheme = loadable.lib(
+  ({ themeName }: { themeName: string }) =>
+    import(`braid-design-system/themes/${themeName}`),
 );
 
-export default ({ site }) => {
+export default ({ site }: { site: string }) => (
   <BraidTheme themeName={site}>
     {({ default: theme }) => (
       <BraidProvider theme={theme}>

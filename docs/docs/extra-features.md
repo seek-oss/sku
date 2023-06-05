@@ -29,10 +29,10 @@ This method only works for `@seek` scoped packages.
 
 Alternatively, you can add any packages you like to the `compilePackages` option in the **consuming app's** sku config file.
 
-```js
-module.exports = {
+```ts
+export default {
   compilePackages: ['awesome-shared-components'],
-};
+} satisfies SkuConfig;
 ```
 
 Any `node_modules` marked as a `compilePackage` will be compiled through webpack as if they are part of your app.
@@ -43,15 +43,14 @@ Since sku injects its own code into your bundle in development mode, it's import
 
 _**NOTE:** Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node._
 
-```js
-module.exports = {
-  ...,
+```ts
+export default {
   polyfills: [
     'promise-polyfill',
     'core-js/modules/es6.symbol',
-    'regenerator-runtime/runtime'
-  ]
-}
+    'regenerator-runtime/runtime',
+  ],
+} satisfies SkuConfig;
 ```
 
 ## Bundle analysis
@@ -86,11 +85,11 @@ This allows you to perform more expensive checks during development without worr
 
 For example, let's assume you wrote the following code:
 
-```js
+```tsx
 import React from 'react';
 import assert from 'assert';
 
-export const Rating = ({ rating }) => {
+export const Rating = ({ rating }: { rating: number }) => {
   assert(rating >= 0 && rating <= 5, 'Rating must be between 0 and 5');
 
   return <div>...</div>;

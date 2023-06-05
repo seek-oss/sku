@@ -4,7 +4,7 @@
 
 You should have the following scripts in your `package.json`.
 
-```js
+```json
 {
   "scripts": {
     "start": "sku start" // or `sku start-ssr` for SSR projects
@@ -15,14 +15,14 @@ You should have the following scripts in your `package.json`.
 
 To start a local development server and open a new browser tab:
 
-```bash
+```sh
 $ npm start
 ```
 
 Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.
 
 ```js
-module.exports = {
+export default {
   // The preferred port you want the server to run on. sku will automatically
   // find a free port if this one is busy.
   port: 5000,
@@ -58,7 +58,7 @@ The client entry is the entrypoint for all your client side code (code that runs
 
 Example client entry
 
-```js
+```tsx
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 

@@ -10,20 +10,20 @@ Note: `sku` will forward all command line args to `jest`.
 
 Example running tests in watch mode:
 
-```bash
+```sh
 $ sku test --watch
 ```
 
 If you need to set up your test framework, you can provide a `setupTests` script in your config:
 
-```js
-module.exports = {
-  setupTests: 'src/setupTests.js',
-};
+```ts
+export default {
+  setupTests: 'src/setupTests.ts',
+} satisfies SkuConfig;
 ```
 
 For example, if you're using [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) and wish to use the custom jest matchers provided by [`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom), your `setupTests` script would look like this:
 
-```js
+```ts
 import '@testing-library/jest-dom';
 ```

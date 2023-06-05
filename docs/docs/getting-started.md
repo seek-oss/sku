@@ -2,7 +2,7 @@
 
 Create a new project and start a local development environment:
 
-```bash
+```sh
 $ npx sku init my-app
 $ cd my-app
 $ npm start
@@ -10,6 +10,6 @@ $ npm start
 
 Don't have [npx](https://www.npmjs.com/package/npx)?
 
-```bash
+```sh
 $ npm install -g npx
 ```

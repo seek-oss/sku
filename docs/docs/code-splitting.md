@@ -27,17 +27,18 @@ The most common use case for code splitting is splitting out each top level rout
 
 ```js
 // sku.config.js
-module.exports = {
+export default {
   routes: ['/', '/details']
   publicPath: 'https://somecdn.com'
 };
 ```
 
-```js
-// render.js
+```tsx
+// render.tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
+import type { Render } from 'sku';
 
 import App from './App';
 
@@ -67,11 +68,11 @@ export default {
       </html>
     `;
   },
-};
+} satisfies Render;
 ```
 
-```js
-// client.js
+```tsx
+// client.tsx
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -88,8 +89,8 @@ export default () => {
 };
 ```
 
-```js
-// App.js
+```tsx
+// App.tsx
 import React, { Fragment } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import loadable from 'sku/@loadable/component';
@@ -97,7 +98,7 @@ import loadable from 'sku/@loadable/component';
 const Home = loadable(() => import('./handlers/Home'));
 const Details = loadable(() => import('./handlers/Details'));
 
-export default ({ site }) => (
+export default ({ site }: { site: string }) => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/details" element={<Details />} />

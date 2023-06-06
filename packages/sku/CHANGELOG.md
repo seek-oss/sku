@@ -1,5 +1,11 @@
 # sku
 
+## 12.0.4
+
+### Patch Changes
+
+- Bump `eslint-config-seek` to `11.2.0` ([#830](https://github.com/seek-oss/sku/pull/830))
+
 ## 12.0.3
 
 ### Patch Changes

@@ -159,12 +159,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/import-order:
-    devDependencies:
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
   fixtures/library-build:
     devDependencies:
       dedent:
@@ -179,6 +173,12 @@ importers:
       dedent:
         specifier: ^0.7.0
         version: 0.7.0
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
+  fixtures/lint-format:
+    devDependencies:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -790,15 +790,15 @@ importers:
       '@sku-fixtures/custom-src-paths':
         specifier: workspace:*
         version: link:../fixtures/custom-src-paths
-      '@sku-fixtures/import-order':
-        specifier: workspace:*
-        version: link:../fixtures/import-order
       '@sku-fixtures/library-build':
         specifier: workspace:*
         version: link:../fixtures/library-build
       '@sku-fixtures/library-file':
         specifier: workspace:*
         version: link:../fixtures/library-file
+      '@sku-fixtures/lint-format':
+        specifier: workspace:*
+        version: link:../fixtures/lint-format
       '@sku-fixtures/multiple-routes':
         specifier: workspace:*
         version: link:../fixtures/multiple-routes

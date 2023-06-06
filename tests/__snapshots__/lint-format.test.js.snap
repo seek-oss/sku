@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sku format errors are fixed: fixableLintError.ts 1`] = `
+const foo = () => 'foo';
+
+`;
+
+exports[`sku format errors are fixed: importOrder1.ts 1`] = `
+import './reset'; // side-effect imports should stay put
+
+import path from 'path'; //  built-in
+
+import someModule from 'some-module'; // external
+
+import utils from 'src/utils'; // internal
+
+import distantParent from '../../../parent'; // parents
+import Parent from '../parent'; // parents
+
+import LocalComponent from './LocalComponent'; // sibling
+
+import myself from '.'; // index
+
+import styles from './styles.less'; // styles
+import vanillaStyles from './vanillaStyles.css'; // styles
+
+`;
+
+exports[`sku format errors are fixed: importOrder2.ts 1`] = `
+import c from '../c';
+
+import a from './a';
+import b from './b';
+
+import aStyle from './a.css';
+import bStyle from './b.css';
+import cStyle from '../c.css';
+
+`;
+
+exports[`sku format errors are fixed: unformattedFile2.ts 1`] = `
+import { something } from 'with-double-quotes';
+
+const indented = 'indented';
+
+const foo = [
+  'something "really" long',
+  'that has to be moved',
+  'to multiple lines',
+  "so we can 'test' trailing commas",
+];
+
+`;
+
+exports[`sku lint lint errors are reported: typescriptFile.ts 1`] = `
+stdout: Linting
+Checking code with TypeScript compiler
+src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
+`;
+
+exports[`sku lint lint errors are reported: unformattedFile1.js 1`] = `
+stdout: Linting
+Checking code with TypeScript compiler
+Checking code with Prettier
+Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,less,css}
+src/unformattedFile1.js
+To fix this issue, run 'npx sku format'
+`;
+
+exports[`sku lint lint errors are reported: utils.test.ts 1`] = `
+stdout: Linting
+Checking code with TypeScript compiler
+Checking code with Prettier
+Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,less,css}
+Checking code with ESLint
+Paths: .
+
+1:1  error  Unexpected console statement                    no-console
+3:4  error  Unexpected focused test                         jest/no-focused-tests
+4:7  error  'foo' is never reassigned. Use 'const' instead  prefer-const
+
+✖ 3 problems (3 errors, 0 warnings)
+1 error and 0 warnings potentially fixable with the \`--fix\` option.
+`;

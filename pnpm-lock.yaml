@@ -29,8 +29,8 @@ importers:
         specifier: ^8.41.0
         version: 8.41.0
       eslint-config-seek:
-        specifier: ^11.1.2
-        version: 11.1.2(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
+        specifier: ^11.2.0
+        version: 11.2.0(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
       eslint-plugin-jsdoc:
         specifier: ^46.0.0
         version: 46.0.0(eslint@8.41.0)
@@ -559,8 +559,8 @@ importers:
         specifier: ^8.41.0
         version: 8.41.0
       eslint-config-seek:
-        specifier: ^11.1.2
-        version: 11.1.2(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
+        specifier: ^11.2.0
+        version: 11.2.0(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
       exception-formatter:
         specifier: ^2.1.2
         version: 2.1.2
@@ -7517,8 +7517,8 @@ packages:
     dependencies:
       eslint: 8.41.0
 
-  /eslint-config-seek@11.1.2(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2):
-    resolution: {integrity: sha512-L7EtzOdQAKWM9/eepWPjLV4CEHHwGBt6XjkkzXbLnxmc6f9MtiFVVA7YCpq6KuhSl3/cHKAVVLBrZmJvyYCHwA==}
+  /eslint-config-seek@11.2.0(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2):
+    resolution: {integrity: sha512-yGzFg+qqM7R43Qof8ZvexYH8Mm6T505S9sjt1eVs/wO9b9mvZ85iokQdEzXUSyT+3IgPx2aT6kIFSh/MIR+zXQ==}
     peerDependencies:
       eslint: '>=6'
       typescript: '>=4.5'
@@ -7534,9 +7534,9 @@ packages:
       eslint-import-resolver-typescript: 3.5.3(eslint-plugin-import@2.27.5)(eslint@8.41.0)
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.3)(eslint@8.41.0)
       eslint-plugin-jest: 27.2.1(@typescript-eslint/eslint-plugin@5.58.0)(eslint@8.41.0)(jest@29.5.0)(typescript@5.0.2)
-      eslint-plugin-local-rules: 1.3.2
       eslint-plugin-react: 7.32.2(eslint@8.41.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.41.0)
+      eslint-plugin-rulesdir: 0.2.2
       find-root: 1.1.0
       typescript: 5.0.2
     transitivePeerDependencies:
@@ -7673,9 +7673,6 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-local-rules@1.3.2:
-    resolution: {integrity: sha512-X4ziX+cjlCYnZa+GB1ly3mmj44v2PeIld3tQVAxelY6AMrhHSjz6zsgsT6nt0+X5b7eZnvL/O7Q3pSSK2kF/+Q==}
-
   /eslint-plugin-react-hooks@4.6.0(eslint@8.41.0):
     resolution: {integrity: sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==}
     engines: {node: '>=10'}
@@ -7706,6 +7703,10 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+
+  /eslint-plugin-rulesdir@0.2.2:
+    resolution: {integrity: sha512-qhBtmrWgehAIQeMDJ+Q+PnOz1DWUZMPeVrI0wE9NZtnpIMFUfh3aPKFYt2saeMSemZRrvUtjWfYwepsC8X+mjQ==}
+    engines: {node: '>=4.0.0'}
 
   /eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}

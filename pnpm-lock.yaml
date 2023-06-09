@@ -483,9 +483,6 @@ importers:
       babel-plugin-add-react-displayname:
         specifier: ^0.0.5
         version: 0.0.5
-      babel-plugin-dynamic-import-node:
-        specifier: ^2.3.3
-        version: 2.3.3
       babel-plugin-macros:
         specifier: ^3.1.0
         version: 3.1.0
@@ -5539,12 +5536,6 @@ packages:
 
   /babel-plugin-add-react-displayname@0.0.5:
     resolution: {integrity: sha512-LY3+Y0XVDYcShHHorshrDbt4KFWL4bSeniCtl4SYZbask+Syngk1uMPCeN9+nSiZo6zX5s0RTq/J9Pnaaf/KHw==}
-    dev: false
-
-  /babel-plugin-dynamic-import-node@2.3.3:
-    resolution: {integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==}
-    dependencies:
-      object.assign: 4.1.4
     dev: false
 
   /babel-plugin-istanbul@6.1.1:

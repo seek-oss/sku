@@ -6,6 +6,6 @@ const path = require('path');
  * @param {string} inputPath
  */
 const toPosixPath = (inputPath) =>
-  inputPath.split(path.win32.sep).join(path.posix.sep);
+  inputPath.replaceAll(path.win32.sep, path.posix.sep);
 
 module.exports = toPosixPath;

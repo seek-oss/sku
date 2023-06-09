@@ -598,8 +598,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.3
       less-loader:
-        specifier: ^11.0.0
-        version: 11.1.0(less@4.1.3)(webpack@5.78.0)
+        specifier: ^11.1.3
+        version: 11.1.3(less@4.1.3)(webpack@5.78.0)
       lint-staged:
         specifier: ^11.1.1
         version: 11.2.6
@@ -10167,14 +10167,13 @@ packages:
       dotenv: 16.0.3
       dotenv-expand: 10.0.0
 
-  /less-loader@11.1.0(less@4.1.3)(webpack@5.78.0):
-    resolution: {integrity: sha512-C+uDBV7kS7W5fJlUjq5mPBeBVhYpTIm5gB09APT9o3n/ILeaXVsiSFTbZpTJCJwQ/Crczfn3DmfQFwxYusWFug==}
+  /less-loader@11.1.3(less@4.1.3)(webpack@5.78.0):
+    resolution: {integrity: sha512-A5b7O8dH9xpxvkosNrP0dFp2i/dISOJa9WwGF3WJflfqIERE2ybxh1BFDj5CovC2+jCE4M354mk90hN6ziXlVw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       less: ^3.5.0 || ^4.0.0
       webpack: ^5.0.0
     dependencies:
-      klona: 2.0.6
       less: 4.1.3
       webpack: 5.78.0(esbuild@0.17.6)(webpack-cli@5.0.1)
     dev: false

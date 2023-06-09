@@ -2,7 +2,7 @@
 
 const chalk = require('chalk');
 const fs = require('fs/promises');
-const path = require('path');
+const { posix: path } = require('path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
 const dedent = require('dedent');
@@ -13,6 +13,7 @@ const esLintFix = require('../lib/runESLint').fix;
 const configure = require('../lib/configure');
 const install = require('../lib/install');
 const banner = require('../lib/banner');
+const toPosixPath = require('../lib/toPosixPath');
 const trace = require('debug')('sku:init');
 const glob = require('fast-glob');
 const ejs = require('ejs');
@@ -148,7 +149,7 @@ const getTemplateFileDestinationFromRoot =
 
   const useYarn = detectYarn();
 
-  const templateDirectory = path.join(__dirname, '../template');
+  const templateDirectory = path.join(toPosixPath(__dirname), '../template');
   const templateFiles = await glob(`${templateDirectory}/**/*`, {
     onlyFiles: true,
   });

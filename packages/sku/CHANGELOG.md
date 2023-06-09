@@ -1,5 +1,11 @@
 # sku
 
+## 12.0.5
+
+### Patch Changes
+
+- Fix `sku init` on Windows ([#833](https://github.com/seek-oss/sku/pull/833))
+
 ## 12.0.4
 
 ### Patch Changes

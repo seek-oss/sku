@@ -4,7 +4,7 @@ exports[`typescript-css-modules build should create valid app 1`] = `
 SCRIPTS: [
   "/static/typescript/runtime-df7fc58286eea709736e.js",
   "/static/typescript/235-fed19355ef816e81a74f.js",
-  "/static/typescript/main-6d1257200649b9f86c56.js",
+  "/static/typescript/main-de1d4e09150e0bc9c99c.js",
 ]
 CSS: [
   "/static/typescript/main-cb8848ae92e1e9d08128.css",
@@ -119,7 +119,7 @@ export const root: string;
   "index.html": SCRIPTS: [
     "/static/typescript/runtime-df7fc58286eea709736e.js",
     "/static/typescript/235-fed19355ef816e81a74f.js",
-    "/static/typescript/main-6d1257200649b9f86c56.js",
+    "/static/typescript/main-de1d4e09150e0bc9c99c.js",
   ]
 CSS: [
     "/static/typescript/main-cb8848ae92e1e9d08128.css",
@@ -215,7 +215,6 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-6d1257200649b9f86c56.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }
@@ -223,6 +222,7 @@ export default cssExports;
   font-size: 32px;
 }
 ,
+  "main-de1d4e09150e0bc9c99c.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-df7fc58286eea709736e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
@@ -231,7 +231,7 @@ exports[`typescript-css-modules build-ssr should create valid app 1`] = `
 SCRIPTS: [
   "http://localhost:4003/runtime-424bd133a78585db66ac.js",
   "http://localhost:4003/16-930bbb195bedab324553.js",
-  "http://localhost:4003/main-4f61eaece6b2c126eb62.js",
+  "http://localhost:4003/main-c8ea5e9cdab04ac07aa7.js",
 ]
 CSS: [
   "http://localhost:4003/main-cb8848ae92e1e9d08128.css",
@@ -360,7 +360,7 @@ interface CssExports {
 export const cssExports: CssExports;
 export default cssExports;
 ",
-  "main-4f61eaece6b2c126eb62.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c8ea5e9cdab04ac07aa7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main-cb8848ae92e1e9d08128.css": .eRNyDeb {
   display: flex;
 }

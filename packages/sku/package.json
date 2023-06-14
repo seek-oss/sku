@@ -101,7 +101,7 @@
     "lodash": "^4.17.21",
     "memoizee": "^0.4.15",
     "mini-css-extract-plugin": "^2.6.1",
-    "node-emoji": "^1.10.0",
+    "node-emoji": "^2.0.0",
     "node-html-parser": "^6.1.1",
     "open": "^7.3.1",
     "path-to-regexp": "^6.2.0",

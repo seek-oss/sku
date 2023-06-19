@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Remove unused dependency, update `less-loader`
+Update `less-loader` and `node-emoji` dependencies

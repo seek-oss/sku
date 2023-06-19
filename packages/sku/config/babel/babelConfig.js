@@ -10,7 +10,6 @@ module.exports = ({
   rootResolution = false,
 }) => {
   const isBrowser = target === 'browser';
-  const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const plugins = [
@@ -31,10 +30,6 @@ module.exports = ({
       require.resolve('react-refresh/babel'),
       { skipEnvCheck: true },
     ]);
-  }
-
-  if (isJest) {
-    plugins.push(require.resolve('babel-plugin-dynamic-import-node'));
   }
 
   if (isProductionBuild) {

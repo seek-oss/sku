@@ -1,5 +1,20 @@
 # sku
 
+## 12.1.0
+
+### Minor Changes
+
+- Remove `babel-plugin-dynamic-import-node` dependency ([#835](https://github.com/seek-oss/sku/pull/835))
+
+  This plugin was used to transform dynamic imports into deferred requires within jest tests.
+  However, dynamic imports are well supported in Node, so this plugin is no longer required.
+
+### Patch Changes
+
+- Surface unhandled ESLint errors ([#838](https://github.com/seek-oss/sku/pull/838))
+
+- Update `less-loader` and `node-emoji` dependencies ([#835](https://github.com/seek-oss/sku/pull/835))
+
 ## 12.0.5
 
 ### Patch Changes

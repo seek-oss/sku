@@ -59,6 +59,8 @@ const runESLint = async ({ fix = false, paths }) => {
       if (e && e.message && e.message.includes('No files matching')) {
         console.warn(yellow(`Warning: ${e.message}`));
       } else {
+        console.warn(yellow('ESLint encountered an error:'));
+        console.log(e.message);
         return Promise.reject();
       }
     }

@@ -8,6 +8,7 @@ const skuConfig: SkuConfig = {
   orderImports: true,
   devServerMiddleware: './dev-middleware.js',
   storybookAddons: ['@storybook/addon-controls'],
+  storybookStoryStore: false,
 };
 
 export default skuConfig;

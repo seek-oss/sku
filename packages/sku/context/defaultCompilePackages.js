@@ -9,9 +9,15 @@ let detectedCompilePackages = [];
 
 try {
   detectedCompilePackages = glob
-    .sync([`node_modules/@seek/*/package.json`], {
-      cwd: cwd(),
-    })
+    .sync(
+      [
+        'node_modules/@seek/*/package.json',
+        'node_modules/.pnpm/@seek*/node_modules/@seek/*/package.json',
+      ],
+      {
+        cwd: cwd(),
+      },
+    )
     .map((packagePath) => {
       const packageJson = require(path.join(cwd(), packagePath));
 

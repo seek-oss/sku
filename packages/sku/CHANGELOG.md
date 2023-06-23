@@ -1,5 +1,16 @@
 # sku
 
+## 12.1.1
+
+### Patch Changes
+
+- Improve compile package detection in PNPM apps ([#840](https://github.com/seek-oss/sku/pull/840))
+
+- Makes some more of the array types in the sku config type into readonly versions. ([#843](https://github.com/seek-oss/sku/pull/843))
+  This allows for arrays that have been declared with `as const` to be passed in.
+
+  Affected fields are `sites`, `sites[].routes`, `site[].languages`, `routes`, and `routes[].languages`.
+
 ## 12.1.0
 
 ### Minor Changes

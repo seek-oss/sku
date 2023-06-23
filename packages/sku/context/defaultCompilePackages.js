@@ -30,7 +30,7 @@ try {
       cwd,
     })
     .map((packagePath) => {
-      const packageJson = require(path.join(cwd(), packagePath));
+      const packageJson = require(path.join(cwd, packagePath));
 
       return {
         isCompilePackage: Boolean(packageJson.skuCompilePackage),

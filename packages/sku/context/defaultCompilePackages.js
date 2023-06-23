@@ -23,9 +23,10 @@ try {
     pnpmVirtualStorePath,
     '@seek*/node_modules/@seek/*/package.json',
   );
+  const packageDependenciesGlob = 'node_modules/@seek/*/package.json';
 
   detectedCompilePackages = glob
-    .sync(['node_modules/@seek/*/package.json', pnpmVirtualStoreGlob], {
+    .sync([pnpmVirtualStoreGlob, packageDependenciesGlob], {
       cwd,
     })
     .map((packagePath) => {

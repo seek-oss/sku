@@ -39,7 +39,7 @@ interface SkuRouteObject {
   route: string;
   name?: string;
   entry?: string;
-  languages?: string[];
+  languages?: ReadonlyArray<string>;
 }
 
 type SkuRoute = string | SkuRouteObject;
@@ -47,8 +47,8 @@ type SkuRoute = string | SkuRouteObject;
 interface SkuSiteObject {
   name: string;
   host?: string;
-  routes?: Array<SkuRoute>;
-  languages?: string[];
+  routes?: ReadonlyArray<SkuRoute>;
+  languages?: ReadonlyArray<string>;
 }
 
 type SkuSite = string | SkuSiteObject;
@@ -320,7 +320,7 @@ export interface SkuConfig {
    * @default ['/']
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=routes
    */
-  routes?: Array<SkuRoute>;
+  routes?: ReadonlyArray<SkuRoute>;
 
   /**
    * **Only for SSR apps**
@@ -357,7 +357,7 @@ export interface SkuConfig {
    * @default []
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=sites
    */
-  sites?: Array<SkuSite>;
+  sites?: ReadonlyArray<SkuSite>;
 
   /**
    * When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`.

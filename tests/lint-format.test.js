@@ -8,6 +8,7 @@ const appDirectory = path.dirname(
 );
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);
+const stripAnsi = require('strip-ansi');
 
 const filesToLint = {
   'utils.test.ts': dedent/* ts */ `
@@ -85,23 +86,23 @@ afterEach(async () => {
   await fs.rm(srcDirectory, { recursive: true, force: true });
 });
 
-describe('sku lint', () => {
-  expect.addSnapshotSerializer({
-    serialize: (val) => {
-      const { stdout } = val;
-      // Remove some logs that contain file paths that are unique to the machine
-      const sanitizedStdout = stdout
-        .split('\n')
-        .filter((line) => !line.includes('sku/fixtures/lint-format'))
-        .join('\n');
+expect.addSnapshotSerializer({
+  serialize: (val) => {
+    const { stdout } = val;
+    // Remove some logs that contain file paths that are unique to the machine
+    const sanitizedStdout = stdout
+      .split('\n')
+      .filter((line) => !line.includes('sku/fixtures/lint-format'))
+      .join('\n');
 
-      return dedent`
-      stdout: ${sanitizedStdout}
+    return dedent`
+      stdout: ${stripAnsi(sanitizedStdout)}
     `;
-    },
-    test: (val) => typeof val === 'object' && val.hasOwnProperty('stdout'),
-  });
+  },
+  test: (val) => typeof val === 'object' && val.hasOwnProperty('stdout'),
+});
 
+describe('sku lint', () => {
   test.each(Object.keys(filesToLint))(
     'lint errors are reported: %s',
     async (fileName) => {

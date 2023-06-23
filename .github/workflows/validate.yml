@@ -41,11 +41,15 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Set Puppeteer Cache Directory
+        id: set-puppeteer-cache
+        run: echo "PUPPETEER_CACHE_DIR=$HOME/.cache/puppeteer" >> $GITHUB_OUTPUT
+
       - name: Cache Puppeteer
         id: puppeteer-cache
         uses: actions/cache@v3
         with:
-          path: /home/runner/.cache/puppeteer
+          path: ${{ steps.set-puppeteer-cache.outputs.PUPPETEER_CACHE_DIR }}
           key: puppeteer-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Install Puppeteer
@@ -59,10 +63,14 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Set Jest Cache Directory
+        id: set-jest-cache
+        run: echo "JEST_CACHE_DIR=$(pnpm jest --showConfig | jq '.configs[0].cacheDirectory' | tr -d '"')" >> $GITHUB_OUTPUT
+
       - name: Cache Jest cache
         uses: actions/cache@v3
         with:
-          path: /tmp/jest_rt
+          path: ${{ steps.set-jest-cache.outputs.JEST_CACHE_DIR }}
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test

@@ -9,6 +9,7 @@ const getStorybookFrame = async (storybookUrl) => {
 
   const firstStoryButton = await page.waitForSelector(
     '#storybook-explorer-menu button',
+    { timeout: 100_000 },
   );
 
   // Ensure default story is activated

@@ -1,19 +1,38 @@
-const path = require('path');
+const { posix: path } = require('path');
 const chalk = require('chalk');
 const glob = require('fast-glob');
+const { execSync } = require('child_process');
 
-const { cwd } = require('../lib/cwd');
+const { cwd: skuCwd } = require('../lib/cwd');
+const toPosixPath = require('../lib/toPosixPath');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
 
 try {
+  const cwd = skuCwd();
+  const gitRepoRoot = execSync('git rev-parse --show-toplevel', { cwd })
+    .toString()
+    .trim();
+
+  const pnpmVirtualStorePath = path.join(
+    toPosixPath(gitRepoRoot),
+    'node_modules/.pnpm',
+  );
+  const pnpmVirtualStoreRelativePath = path.relative('.', pnpmVirtualStorePath);
+  const pnpmVirtualStoreGlob = path.join(
+    pnpmVirtualStoreRelativePath,
+    '@seek*/node_modules/@seek/*/package.json',
+  );
+
+  const packageDependenciesGlob = 'node_modules/@seek/*/package.json';
+
   detectedCompilePackages = glob
-    .sync([`node_modules/@seek/*/package.json`], {
-      cwd: cwd(),
+    .sync([pnpmVirtualStoreGlob, packageDependenciesGlob], {
+      cwd,
     })
     .map((packagePath) => {
-      const packageJson = require(path.join(cwd(), packagePath));
+      const packageJson = require(path.join(cwd, packagePath));
 
       return {
         isCompilePackage: Boolean(packageJson.skuCompilePackage),
@@ -29,4 +48,8 @@ try {
   console.error(e);
 }
 
-module.exports = ['sku', 'braid-design-system', ...detectedCompilePackages];
+module.exports = [
+  'sku',
+  'braid-design-system',
+  ...new Set(detectedCompilePackages),
+];

@@ -19,10 +19,12 @@ try {
     toPosixPath(gitRepoRoot),
     'node_modules/.pnpm',
   );
+  const pnpmVirtualStoreRelativePath = path.relative('.', pnpmVirtualStorePath);
   const pnpmVirtualStoreGlob = path.join(
-    pnpmVirtualStorePath,
+    pnpmVirtualStoreRelativePath,
     '@seek*/node_modules/@seek/*/package.json',
   );
+
   const packageDependenciesGlob = 'node_modules/@seek/*/package.json';
 
   detectedCompilePackages = glob

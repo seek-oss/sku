@@ -51,6 +51,7 @@ try {
   console.log(
     chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
   );
+  console.error(e);
 }
 
 module.exports = [

@@ -38,7 +38,6 @@ try {
       cwd,
     })
     .map((packagePath) => {
-      console.log({ packagePath });
       const packageJson = require(path.join(cwd, packagePath));
 
       return {

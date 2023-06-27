@@ -60,7 +60,7 @@ describe('custom-src-paths', () => {
   describe('format', () => {
     it('should format successfully', async () => {
       const {
-        childProcess: { exitCode },
+        child: { exitCode },
       } = await runSkuScriptInDir('format', appDir);
       expect(exitCode).toEqual(0);
     });
@@ -69,7 +69,7 @@ describe('custom-src-paths', () => {
   describe('lint', () => {
     it('should lint successfully', async () => {
       const {
-        childProcess: { exitCode },
+        child: { exitCode },
       } = await runSkuScriptInDir('lint', appDir);
       expect(exitCode).toEqual(0);
     });

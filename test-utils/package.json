@@ -2,7 +2,6 @@
   "name": "@sku-private/test-utils",
   "private": true,
   "dependencies": {
-    "child-process-promise": "^2.2.1",
     "css": "^3.0.0",
     "diffable-html": "^5.0.0",
     "git-diff": "^2.0.6",

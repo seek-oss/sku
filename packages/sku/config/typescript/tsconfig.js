@@ -37,7 +37,6 @@ module.exports = () => {
       // misc
       strict: true,
       forceConsistentCasingInFileNames: true,
-      noUnusedLocals: true,
       jsx: 'react-jsx',
       lib: ['dom', 'es2022'],
       target: 'es2022',

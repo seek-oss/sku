@@ -4,7 +4,7 @@ exports[`translations should render en 1`] = `
 SCRIPTS: [
   "/runtime-c90bedc6c1e41d593d60.js",
   "/795-5968f008d8b17bd38091.js",
-  "/main-dd0d89a35505d89bd9f4.js",
+  "/main-5984ff380a1f02700497.js",
   "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []
@@ -102,7 +102,7 @@ exports[`translations should render en-PSEUDO post-hydration 1`] = `
 SCRIPTS: [
   "/runtime-c90bedc6c1e41d593d60.js",
   "/795-5968f008d8b17bd38091.js",
-  "/main-dd0d89a35505d89bd9f4.js",
+  "/main-5984ff380a1f02700497.js",
   "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []
@@ -210,7 +210,7 @@ exports[`translations should render fr 1`] = `
 SCRIPTS: [
   "/runtime-c90bedc6c1e41d593d60.js",
   "/795-5968f008d8b17bd38091.js",
-  "/main-dd0d89a35505d89bd9f4.js",
+  "/main-5984ff380a1f02700497.js",
   "/fr-translations-8d39ba177a70a2aa4224.js",
 ]
 CSS: []
@@ -308,7 +308,7 @@ exports[`translations should support query parameters 1`] = `
 SCRIPTS: [
   "/runtime-c90bedc6c1e41d593d60.js",
   "/795-5968f008d8b17bd38091.js",
-  "/main-dd0d89a35505d89bd9f4.js",
+  "/main-5984ff380a1f02700497.js",
   "/en-translations-b17efc1aa5d571ed56f2.js",
 ]
 CSS: []

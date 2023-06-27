@@ -4,7 +4,7 @@ exports[`custom-src-paths build should create valid app 1`] = `
 SCRIPTS: [
   "/some-static-place/runtime-df7fc58286eea709736e.js",
   "/some-static-place/258-86dcf2d36390f340021b.js",
-  "/some-static-place/main-bd0401533d6a21f69e43.js",
+  "/some-static-place/main-f5ea2fc875b8a11ffa9e.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -84,7 +84,7 @@ exports[`custom-src-paths build should generate the expected files 1`] = `
   "index.html": SCRIPTS: [
     "/some-static-place/runtime-df7fc58286eea709736e.js",
     "/some-static-place/258-86dcf2d36390f340021b.js",
-    "/some-static-place/main-bd0401533d6a21f69e43.js",
+    "/some-static-place/main-f5ea2fc875b8a11ffa9e.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -155,7 +155,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-bd0401533d6a21f69e43.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f5ea2fc875b8a11ffa9e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-df7fc58286eea709736e.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

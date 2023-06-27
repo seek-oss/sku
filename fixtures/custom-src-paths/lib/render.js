@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import html from 'dedent';
 import App from '../another-folder/App';

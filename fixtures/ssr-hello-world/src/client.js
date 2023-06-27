@@ -1,4 +1,3 @@
-import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { loadableReady } from 'sku/@loadable/component';
 

@@ -1,5 +1,4 @@
 import { Box, Card, Text } from 'braid-design-system';
-import React from 'react';
 
 import * as styles from './TestComponent.css';
 import stylesRefs from './TestComponent.less';

@@ -1,5 +1,11 @@
 # sku
 
+## 12.1.2
+
+### Patch Changes
+
+- Don't use `.git` folder to find root, only glob PNPM virtual store if PNPM is detected as the package manager ([#845](https://github.com/seek-oss/sku/pull/845))
+
 ## 12.1.1
 
 ### Patch Changes

@@ -432,6 +432,9 @@ importers:
       '@loadable/webpack-plugin':
         specifier: ^5.14.0
         version: 5.15.2(webpack@5.78.0)
+      '@manypkg/find-root':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: 0.5.10
         version: 0.5.10(react-refresh@0.14.0)(webpack-dev-server@4.11.1)(webpack@5.78.0)
@@ -3219,6 +3222,16 @@ packages:
       fs-extra: 8.1.0
     dev: true
 
+  /@manypkg/find-root@2.2.0:
+    resolution: {integrity: sha512-NET+BNIMmBWUUUfFtuDgaTIav6pVlkkSdI2mt+2rFWPd6TQ0DXyhQH47Ql+d7x2oIkJ69dkVKwsTErRt2ROPbw==}
+    engines: {node: '>=14.18.0'}
+    dependencies:
+      '@manypkg/tools': 1.1.0
+      '@types/node': 12.20.55
+      find-up: 4.1.0
+      fs-extra: 8.1.0
+    dev: false
+
   /@manypkg/get-packages@1.1.3:
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
     dependencies:
@@ -3229,6 +3242,16 @@ packages:
       globby: 11.1.0
       read-yaml-file: 1.1.0
     dev: true
+
+  /@manypkg/tools@1.1.0:
+    resolution: {integrity: sha512-SkAyKAByB9l93Slyg8AUHGuM2kjvWioUTCckT/03J09jYnfEzMO/wSXmEhnKGYs6qx9De8TH4yJCl0Y9lRgnyQ==}
+    engines: {node: '>=14.18.0'}
+    dependencies:
+      fs-extra: 8.1.0
+      globby: 11.1.0
+      jju: 1.4.0
+      read-yaml-file: 1.1.0
+    dev: false
 
   /@ndelangen/get-tarball@3.0.7:
     resolution: {integrity: sha512-NqGfTZIZpRFef1GoVaShSSRwDC3vde3ThtTeqFdcYd6ipKqnfEVhjK2hUeHjCQUcptyZr2TONqcloFXM+5QBrQ==}
@@ -4575,7 +4598,6 @@ packages:
 
   /@types/node@12.20.55:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
-    dev: true
 
   /@types/node@16.18.23:
     resolution: {integrity: sha512-XAMpaw1s1+6zM+jn2tmw8MyaRDIJfXxqmIQIS0HfoGYPuf7dUWeiUKopwq13KFX9lEp1+THGtlaaYx39Nxr58g==}
@@ -8342,7 +8364,6 @@ packages:
       graceful-fs: 4.2.11
       jsonfile: 4.0.0
       universalify: 0.1.2
-    dev: true
 
   /fs-minipass@2.1.0:
     resolution: {integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==}
@@ -9962,6 +9983,10 @@ packages:
       - supports-color
       - ts-node
 
+  /jju@1.4.0:
+    resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
+    dev: false
+
   /joi@17.9.1:
     resolution: {integrity: sha512-FariIi9j6QODKATGBrEX7HZcja8Bsh3rfdGYy/Sb65sGlZWK/QWesU1ghk7aJWDj95knjXlQfSmzFSPPkLVsfw==}
     dependencies:
@@ -10106,7 +10131,6 @@ packages:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
     optionalDependencies:
       graceful-fs: 4.2.11
-    dev: true
 
   /jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
@@ -12300,7 +12324,6 @@ packages:
       js-yaml: 3.14.1
       pify: 4.0.1
       strip-bom: 3.0.0
-    dev: true
 
   /readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
@@ -13703,7 +13726,6 @@ packages:
   /universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
-    dev: true
 
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}

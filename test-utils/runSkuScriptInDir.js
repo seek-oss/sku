@@ -29,7 +29,7 @@ const runSkuScriptInDir = async (script, cwd, args = []) => {
       maxBuffer: 5 * 1024 * 1024,
     });
     await promise;
-    return { child: promise.child };
+    return { ...promise };
   } catch (error) {
     // Print the stdout of a failed command so we can see it in the jest output.
     if (error.stdout) {

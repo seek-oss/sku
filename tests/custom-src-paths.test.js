@@ -59,19 +59,15 @@ describe('custom-src-paths', () => {
 
   describe('format', () => {
     it('should format successfully', async () => {
-      const {
-        child: { exitCode },
-      } = await runSkuScriptInDir('format', appDir);
-      expect(exitCode).toEqual(0);
+      const { child } = await runSkuScriptInDir('format', appDir);
+      expect(child.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async () => {
-      const {
-        child: { exitCode },
-      } = await runSkuScriptInDir('lint', appDir);
-      expect(exitCode).toEqual(0);
+      const { child } = await runSkuScriptInDir('lint', appDir);
+      expect(child.exitCode).toEqual(0);
     });
   });
 });

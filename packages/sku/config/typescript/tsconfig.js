@@ -31,6 +31,7 @@ module.exports = () => {
       module: 'es2022',
 
       // resolution-related
+      allowImportingTsExtensions: true,
       allowSyntheticDefaultImports: true,
       esModuleInterop: true,
       isolatedModules: true,

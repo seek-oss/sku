@@ -27,6 +27,8 @@ module.exports = () => {
       // When dependencies have `type: module` TypeScript doesn't know how to resolve them,
       // so we need to set this to `bundler` or `node`
       moduleResolution: 'bundler',
+      // This is required by `bundler` and for dynamic `import()`
+      module: 'es2022',
 
       // resolution-related
       allowSyntheticDefaultImports: true,

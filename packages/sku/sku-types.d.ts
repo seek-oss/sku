@@ -243,16 +243,6 @@ export interface SkuConfig {
   persistentCache?: boolean;
 
   /**
-   * Allows disabling Storybook's `storyStoreV7` feature flag. This will result in all stories being
-   * loaded upfront instead of on demand. Disabling this feature will allow stories that use the
-   * deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf`
-   * to the Component Story Format (CSF) instead.
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookStoryStore
-   */
-  storybookStoryStore?: boolean;
-
-  /**
    * An array of polyfills to be included into all client entry points.
    *
    * @default []
@@ -406,6 +396,16 @@ export interface SkuConfig {
   storybookPort?: number;
 
   /**
+   * Allows disabling Storybook's `storyStoreV7` feature flag. This will result in all stories being
+   * loaded upfront instead of on demand. Disabling this feature will allow stories that use the
+   * deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf`
+   * to the Component Story Format (CSF) instead.
+   * @default true
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookStoryStore
+   */
+  storybookStoryStore?: boolean;
+
+  /**
    * The directory `sku build-storybook` will output files to.
    *
    * @default 'dist-storybook'
@@ -439,4 +439,22 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=transformoutputpath
    */
   transformOutputPath?: TranformOutputPathFunction;
+
+  /**
+   * Manually specify which files should be included in TypeScript compilation.
+   *
+   * This option directly maps to the [`include` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#include).
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=tsconfiginclude
+   */
+  tsconfigInclude?: string[];
+
+  /**
+   * Exclude files from TypeScript compilation.
+   *
+   * This option directly maps to the [`exclude` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#exclude).
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=tsconfigexclude
+   */
+  tsconfigExclude?: string[];
 }

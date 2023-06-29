@@ -188,6 +188,7 @@ module.exports = {
   storybookPort: skuConfig.storybookPort,
   storybookTarget: skuConfig.storybookTarget,
   storybookAddons: skuConfig.storybookAddons,
+  storybookStoryStore: skuConfig.storybookStoryStore,
   polyfills: skuConfig.polyfills,
   initialPath,
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
@@ -214,5 +215,6 @@ module.exports = {
     skuConfig.skipPackageCompatibilityCompilation,
   persistentCache: skuConfig.persistentCache,
   externalizeNodeModules: skuConfig.externalizeNodeModules,
-  storybookStoryStore: skuConfig.storybookStoryStore,
+  tsconfigInclude: skuConfig.tsconfigInclude,
+  tsconfigExclude: skuConfig.tsconfigExclude,
 };

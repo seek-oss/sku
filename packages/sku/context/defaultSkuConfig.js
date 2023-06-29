@@ -26,6 +26,7 @@ module.exports = {
   storybookPort: 8081,
   storybookTarget: 'dist-storybook',
   storybookAddons: [],
+  storybookStoryStore: true,
   initialPath: null,
   public: 'public',
   publicPath: '/',
@@ -48,5 +49,6 @@ module.exports = {
   skipPackageCompatibilityCompilation: [],
   persistentCache: true,
   externalizeNodeModules: false,
-  storybookStoryStore: true,
+  tsconfigInclude: undefined,
+  tsconfigExclude: undefined,
 };

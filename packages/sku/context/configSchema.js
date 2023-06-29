@@ -117,6 +117,9 @@ module.exports = validator.compile({
     type: 'array',
     items: 'string',
   },
+  storybookStoryStore: {
+    type: 'boolean',
+  },
   target: {
     type: 'string',
   },
@@ -201,7 +204,14 @@ module.exports = validator.compile({
   externalizeNodeModules: {
     type: 'boolean',
   },
-  storybookStoryStore: {
-    type: 'boolean',
+  tsconfigInclude: {
+    type: 'array',
+    items: { type: 'string' },
+    optional: true,
+  },
+  tsconfigExclude: {
+    type: 'array',
+    items: { type: 'string' },
+    optional: true,
   },
 });

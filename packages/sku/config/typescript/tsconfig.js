@@ -1,19 +1,13 @@
 const { cwd } = require('../../lib/cwd');
-const { paths, rootResolution } = require('../../context');
+const {
+  paths,
+  rootResolution,
+  tsconfigInclude,
+  tsconfigExclude,
+} = require('../../context');
 const path = require('path');
 
 module.exports = () => {
-  const includePaths = paths.src;
-
-  if (paths.appSkuConfigPath && paths.appSkuConfigPath.endsWith('.ts')) {
-    // If the config file is in TypeScript, it needs to be included in the tsconfig
-    includePaths.push(paths.appSkuConfigPath);
-  } else {
-    // If it isn't, the placeholder file needs to be included so we don't break JS only projects.
-    // See the comments in placeholder.ts
-    includePaths.push(path.join(__dirname, '../../lib/placeholder.ts'));
-  }
-
   const config = {
     compilerOptions: {
       // This flag allows tsc to be invoked directly by VS Code (via Cmd+Shift+B),
@@ -44,14 +38,23 @@ module.exports = () => {
       lib: ['dom', 'es2022'],
       target: 'es2022',
     },
-    include: includePaths,
+    include: tsconfigInclude,
+    exclude: tsconfigExclude,
   };
+
+  if (!paths?.appSkuConfigPath?.endsWith('.ts')) {
+    // The placeholder file needs to be included so we don't break JS only projects.
+    // See the comments in placeholder.ts
+    config.include = [
+      path.join(__dirname, '../../lib/placeholder.ts'),
+      ...(config.include || []),
+    ];
+  }
 
   if (rootResolution) {
     config.compilerOptions.paths = {
       '*': ['*'],
     };
-
     config.compilerOptions.baseUrl = cwd();
   }
 

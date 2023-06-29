@@ -464,3 +464,32 @@ type `function`
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
+
+## tsconfigInclude
+
+type `Array<string>`
+
+Manually specify which files should be included in TypeScript compilation. This option directly maps to the [`include` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#include).
+
+Example:
+
+```js
+const config = {
+  tsconfigInclude: ['packages', 'site'],
+};
+```
+
+## tsconfigExclude
+
+type `Array<string>`
+
+Exclude files from TypeScript compilation. This is useful for excluding files that are not part of the app, such as scripts, or when using a different `tsconfig.json` for those directories. This option directly maps to the [`exclude` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#exclude).
+
+Example:
+
+```js
+const config = {
+  tsconfigInclude: ['packages', 'site'],
+  tsconfigExclude: ['**/scripts'],
+};
+```

@@ -1,34 +1,40 @@
 const { posix: path } = require('path');
 const chalk = require('chalk');
 const glob = require('fast-glob');
-const { execSync } = require('child_process');
 
 const { cwd: skuCwd } = require('../lib/cwd');
 const toPosixPath = require('../lib/toPosixPath');
+
+const { findRootSync } = require('@manypkg/find-root');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
 
 try {
+  const globs = ['node_modules/@seek/*/package.json'];
   const cwd = skuCwd();
-  const gitRepoRoot = execSync('git rev-parse --show-toplevel', { cwd })
-    .toString()
-    .trim();
 
-  const pnpmVirtualStorePath = path.join(
-    toPosixPath(gitRepoRoot),
-    'node_modules/.pnpm',
-  );
-  const pnpmVirtualStoreRelativePath = path.relative('.', pnpmVirtualStorePath);
-  const pnpmVirtualStoreGlob = path.join(
-    pnpmVirtualStoreRelativePath,
-    '@seek*/node_modules/@seek/*/package.json',
-  );
+  const { rootDir, tool } = findRootSync(cwd);
 
-  const packageDependenciesGlob = 'node_modules/@seek/*/package.json';
+  if (tool === 'pnpm') {
+    const pnpmVirtualStorePath = path.join(
+      toPosixPath(rootDir),
+      'node_modules/.pnpm',
+    );
+    const pnpmVirtualStoreRelativePath = path.relative(
+      '.',
+      pnpmVirtualStorePath,
+    );
+    const pnpmVirtualStoreGlob = path.join(
+      pnpmVirtualStoreRelativePath,
+      '@seek*/node_modules/@seek/*/package.json',
+    );
+
+    globs.push(pnpmVirtualStoreGlob);
+  }
 
   detectedCompilePackages = glob
-    .sync([pnpmVirtualStoreGlob, packageDependenciesGlob], {
+    .sync(globs, {
       cwd,
     })
     .map((packagePath) => {

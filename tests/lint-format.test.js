@@ -4,7 +4,7 @@ const dedent = require('dedent');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
 const appDirectory = path.dirname(
-  require.resolve('@sku-fixtures/lint-format/sku.config.js'),
+  require.resolve('@sku-fixtures/lint-format/sku.config.ts'),
 );
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);

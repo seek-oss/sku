@@ -1,1 +1,10 @@
-{}
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": false,
+    "types": ["jest", "jest-puppeteer"]
+  }
+}

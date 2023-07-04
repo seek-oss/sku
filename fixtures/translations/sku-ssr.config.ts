@@ -1,4 +1,4 @@
-import { SkuConfig } from 'sku';
+import type { SkuConfig } from 'sku';
 
 export default {
   clientEntry: 'src/ssr-client.tsx',

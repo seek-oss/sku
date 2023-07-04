@@ -49,6 +49,4 @@ module.exports = {
   skipPackageCompatibilityCompilation: [],
   persistentCache: true,
   externalizeNodeModules: false,
-  tsconfigInclude: undefined,
-  tsconfigExclude: undefined,
 };

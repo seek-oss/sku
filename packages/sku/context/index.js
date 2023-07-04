@@ -194,6 +194,7 @@ module.exports = {
   webpackDecorator: skuConfig.dangerouslySetWebpackConfig,
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
+  tsconfigDecorator: skuConfig.dangerouslySetTSConfig,
   routes: normalizedRoutes,
   sites,
   environments: skuConfig.environments,
@@ -215,6 +216,4 @@ module.exports = {
     skuConfig.skipPackageCompatibilityCompilation,
   persistentCache: skuConfig.persistentCache,
   externalizeNodeModules: skuConfig.externalizeNodeModules,
-  tsconfigInclude: skuConfig.tsconfigInclude,
-  tsconfigExclude: skuConfig.tsconfigExclude,
 };

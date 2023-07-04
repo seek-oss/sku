@@ -165,6 +165,9 @@ module.exports = validator.compile({
   dangerouslySetESLintConfig: {
     type: 'function',
   },
+  dangerouslySetTSConfig: {
+    type: 'function',
+  },
   supportedBrowsers: {
     type: 'array',
     items: {
@@ -203,15 +206,5 @@ module.exports = validator.compile({
   },
   externalizeNodeModules: {
     type: 'boolean',
-  },
-  tsconfigInclude: {
-    type: 'array',
-    items: { type: 'string' },
-    optional: true,
-  },
-  tsconfigExclude: {
-    type: 'array',
-    items: { type: 'string' },
-    optional: true,
   },
 });

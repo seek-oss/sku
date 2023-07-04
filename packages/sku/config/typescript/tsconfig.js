@@ -1,10 +1,5 @@
 const { cwd } = require('../../lib/cwd');
-const {
-  paths,
-  rootResolution,
-  tsconfigInclude,
-  tsconfigExclude,
-} = require('../../context');
+const { paths, rootResolution, tsconfigDecorator } = require('../../context');
 const path = require('path');
 
 module.exports = () => {
@@ -38,8 +33,6 @@ module.exports = () => {
       lib: ['dom', 'es2022'],
       target: 'es2022',
     },
-    include: tsconfigInclude,
-    exclude: tsconfigExclude,
   };
 
   if (!paths?.appSkuConfigPath?.endsWith('.ts')) {
@@ -58,5 +51,5 @@ module.exports = () => {
     config.compilerOptions.baseUrl = cwd();
   }
 
-  return config;
+  return tsconfigDecorator(config);
 };

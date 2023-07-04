@@ -102,19 +102,26 @@ export interface SkuConfig {
   cspExtraScriptSrcHosts?: string[];
 
   /**
-   * Similar to {@link dangerouslySetWebpackConfig} but for eslint config.
+   * Similar to {@link dangerouslySetWebpackConfig}, but for ESLint config.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslyseteslintconfig
    */
   dangerouslySetESLintConfig?: (existingESLintConfig: any) => any;
 
   /**
-   * Similar to {@link dangerouslySetWebpackConfig} but for jest config. Make sure {@link setupTests} definitely doesn’t cover your needs before using.
+   * Similar to {@link dangerouslySetWebpackConfig}, but for Jest config. Make sure {@link setupTests} definitely doesn’t cover your needs before using.
    * Please speak with the `sku-support` group before using.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetjestconfig
    */
   dangerouslySetJestConfig?: (existingJestConfig: any) => any;
+
+  /**
+   * Similar to {@link dangerouslySetWebpackConfig}, but for TypeScript (`tsconfig.json`).
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig
+   */
+  dangerouslySetTSConfig?: (existingTSConfig: any) => any;
 
   /**
    * This function provides a way to override the webpack config after sku has created it.
@@ -439,22 +446,4 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=transformoutputpath
    */
   transformOutputPath?: TranformOutputPathFunction;
-
-  /**
-   * Manually specify which files should be included in TypeScript compilation.
-   *
-   * This option directly maps to the [`include` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#include).
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=tsconfiginclude
-   */
-  tsconfigInclude?: string[];
-
-  /**
-   * Exclude files from TypeScript compilation.
-   *
-   * This option directly maps to the [`exclude` field in `tsconfig.json`](https://www.typescriptlang.org/tsconfig#exclude).
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=tsconfigexclude
-   */
-  tsconfigExclude?: string[];
 }

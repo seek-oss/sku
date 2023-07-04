@@ -38,6 +38,7 @@ module.exports = {
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
+  dangerouslySetTSConfig: defaultDecorator,
   supportedBrowsers,
   orderImports: false,
   cspEnabled: false,

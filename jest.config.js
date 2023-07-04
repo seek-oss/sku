@@ -1,7 +1,10 @@
+const { defaults: tsjPreset } = require('ts-jest/presets');
+
 /** @type {import('jest').Config} */
 module.exports = {
+  ...tsjPreset,
   preset: 'jest-puppeteer',
-  setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.js'],
+  setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [
     '<rootDir>/test-utils/appSnapshotSerializer.js',
     '<rootDir>/test-utils/htmlSnapshotSerializer.js',

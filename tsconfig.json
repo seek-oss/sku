@@ -4,7 +4,6 @@
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "noEmit": true,
-    "strict": false,
-    "types": ["jest", "jest-puppeteer"]
+    "strict": false
   }
 }

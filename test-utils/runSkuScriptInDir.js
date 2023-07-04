@@ -1,9 +1,8 @@
-const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
 
-const skuBin = path.resolve(__dirname, '../packages/sku/bin/sku.js');
+const skuBin = require.resolve('sku/bin/sku.js');
 
 const runSkuScriptInDir = async (script, cwd, args = []) => {
   // When starting a dev server, return a hook to the running process

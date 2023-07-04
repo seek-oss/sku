@@ -1,18 +1,20 @@
 const util = require('util');
-const spawn = util.promisify(require('child_process').spawn);
+// spwan can't be promisify'ed so we use execFile, which just wraps spawn and can be promisify'ed
+// https://github.com/nodejs/node/blob/2f369ccacfb60c034de806f24164524910301825/lib/child_process.js#L326
+const spawn = util.promisify(require('child_process').execFile);
 
-const skuBin = `${__dirname}/../packages/sku/bin/sku.js`;
+const skuBin = require.resolve('sku/bin/sku.js');
 
-const spawnSkuScriptInDir = (script, cwd, args = [], options = {}) => {
-  const childPromise = spawn(skuBin, [script, ...args], {
+const spawnSkuScriptInDir = async (script, cwd, args = [], options = {}) => {
+  const promise = spawn(skuBin, [script, ...args], {
     stdio: 'ignore',
     cwd,
     env: process.env,
-    maxBuffer: 1024 * 1024,
     ...options,
   });
+  await promise;
 
-  return childPromise;
+  return { ...promise };
 };
 
 module.exports = { spawnSkuScriptInDir };

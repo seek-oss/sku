@@ -1,17 +1,19 @@
-const path = require('path');
-const {
+import assert from 'assert';
+import path from 'path';
+import {
   waitForUrls,
   runSkuScriptInDir,
   startAssetServer,
-} = require('@sku-private/test-utils');
-const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
+} from '@sku-private/test-utils';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
 
-const skuConfig = require('@sku-fixtures/assertion-removal/sku.config.js');
+import skuConfig from '@sku-fixtures/assertion-removal/sku.config.ts';
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/assertion-removal/sku.config.js'),
+  require.resolve('@sku-fixtures/assertion-removal/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
+assert(skuConfig.serverPort, 'skuConfig has serverPort');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 
 describe('assertion-removal', () => {

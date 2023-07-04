@@ -1,19 +1,18 @@
-const { readFile, copyFile, mkdir: makeDir } = require('fs/promises');
-const { rimraf } = require('rimraf');
-const path = require('path');
-const jsonc = require('jsonc-parser');
-const { runSkuScriptInDir } = require('@sku-private/test-utils');
-const {
-  bundleReportFolder,
-} = require('../packages/sku/config/webpack/plugins/bundleAnalyzer');
+import { readFile, copyFile, mkdir as makeDir } from 'fs/promises';
+import { rimraf } from 'rimraf';
+import path from 'path';
+import * as jsonc from 'jsonc-parser';
+import { runSkuScriptInDir } from '@sku-private/test-utils';
 
-const prettierConfig = require('../packages/sku/config/prettier/prettierConfig');
+import { bundleReportFolder } from '../packages/sku/config/webpack/plugins/bundleAnalyzer';
+import prettierConfig from '../packages/sku/config/prettier/prettierConfig';
+import skuConfig from '@sku-fixtures/configure/sku.config.ts';
+
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
 const coverageFolder = 'coverage';
-const skuConfig = require('@sku-fixtures/configure/sku.config.js');
 const fixtureFolder = path.dirname(
-  require.resolve('@sku-fixtures/configure/sku.config.js'),
+  require.resolve('@sku-fixtures/configure/sku.config.ts'),
 );
 const appFolder = path.resolve(fixtureFolder, 'App');
 const appFolderTS = path.resolve(fixtureFolder, 'TSApp');
@@ -107,7 +106,7 @@ describe('configure', () => {
       await makeDir(path.join(appFolderTS, './src'));
       await copyToApp('App.tsx', path.join(appFolderTS, './src'));
       await copyToApp('package.json', appFolderTS);
-      await copyToApp('sku.config.js', appFolderTS);
+      await copyToApp('sku.config.ts', appFolderTS);
       await runSkuScriptInDir('configure', appFolderTS);
     });
 

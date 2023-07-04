@@ -1,16 +1,19 @@
-const path = require('path');
-const {
+import assert from 'assert';
+import path from 'path';
+import {
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
+
+import skuConfig from '@sku-fixtures/translations/sku.config.ts';
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/translations/sku.config.js'),
+  require.resolve('@sku-fixtures/translations/sku.config.ts'),
 );
-const { port } = require('@sku-fixtures/translations/sku.config.js');
 
-const baseUrl = `http://localhost:${port}`;
+assert(skuConfig.port, 'sku config has port');
+const baseUrl = `http://localhost:${skuConfig.port}`;
 
 describe('translations', () => {
   let process;

@@ -1,15 +1,17 @@
-const path = require('path');
-const {
+import assert from 'assert';
+import path from 'path';
+import {
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const skuSsrConfig = require('@sku-fixtures/translations/sku-ssr.config.js');
+import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.ts';
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/translations/sku-ssr.config.js'),
+  require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),
 );
 
+assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
   targetDirectory: path.join(__dirname, skuConfig.target),
@@ -21,7 +23,7 @@ describe('ssr translations', () => {
 
   beforeAll(async () => {
     server = await runSkuScriptInDir('start-ssr', appDir, [
-      '--config=sku-ssr.config.js',
+      '--config=sku-ssr.config.ts',
     ]);
     await waitForUrls(backendUrl);
   });

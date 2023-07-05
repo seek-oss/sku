@@ -34,7 +34,7 @@ describe('react-css-modules', () => {
   });
 
   it('should handle Less and css.js in tests', async () => {
-    const { childProcess } = await runSkuScriptInDir('test', appDir);
-    expect(childProcess.exitCode).toEqual(0);
+    const { child } = await runSkuScriptInDir('test', appDir);
+    expect(child.exitCode).toEqual(0);
   });
 });

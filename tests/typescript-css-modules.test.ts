@@ -117,8 +117,8 @@ describe('typescript-css-modules', () => {
     let exitCode;
 
     beforeAll(async () => {
-      const { childProcess } = await runSkuScriptInDir('test', appDir);
-      exitCode = childProcess.exitCode;
+      const { child } = await runSkuScriptInDir('test', appDir);
+      exitCode = child.exitCode;
     });
 
     it('should handle Less and css.js in tests', async () => {
@@ -132,8 +132,8 @@ describe('typescript-css-modules', () => {
     beforeAll(async () => {
       // run build first to ensure typescript declarations are generated
       await runSkuScriptInDir('build', appDir);
-      const { childProcess } = await runSkuScriptInDir('lint', appDir);
-      exitCode = childProcess.exitCode;
+      const { child } = await runSkuScriptInDir('lint', appDir);
+      exitCode = child.exitCode;
     });
 
     it('should handle tsc and eslint', async () => {

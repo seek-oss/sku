@@ -73,7 +73,7 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async () => {
-    const { childProcess } = await runSkuScriptInDir('test', appDir);
-    expect(childProcess.exitCode).toEqual(0);
+    const { child } = await runSkuScriptInDir('test', appDir);
+    expect(child.exitCode).toEqual(0);
   });
 });

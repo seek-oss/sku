@@ -1,0 +1,7 @@
+{
+  "name": "@sku-fixtures/sku-test",
+  "private": true,
+  "devDependencies": {
+    "sku": "workspace:*"
+  }
+}

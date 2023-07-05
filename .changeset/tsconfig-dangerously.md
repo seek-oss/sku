@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-`srcPaths` no longer affects `tsconfig.json#include`. Instead, you can use the [`dangerouslySetTSConfig`][dangerous] option to have more control over which files are included in the TypeScript compilation process.
+`srcPaths` no longer affects `tsconfig.json#include`. Instead, you can use the [`dangerouslySetTSConfig`][dangerous] option to have more control over which files are included in the type checking process.
 
 Previously, sku managed the `include` field in `tsconfig.json`, but this was problematic for projects that wanted more fine grained control over what was included and/or excluded from compilation.
 

@@ -3,8 +3,8 @@
 exports[`public path build and serve should create valid app with no unresolved resources 1`] = `
 SCRIPTS: [
   "/static/runtime-df7fc58286eea709736e.js",
-  "/static/258-86dcf2d36390f340021b.js",
-  "/static/main-f99a1e88665d307c7ee3.js",
+  "/static/368-71848a4430911287eca3.js",
+  "/static/main-67c813f9cc057307fb1f.js",
 ]
 CSS: [
   "/static/main-c06e2768c0d8ec21c207.css",

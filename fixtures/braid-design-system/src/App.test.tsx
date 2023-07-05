@@ -16,7 +16,7 @@ describe('braid-design-system', () => {
       "<style type="text/css">
                   html,body{margin:0;padding:0;background:#F7F8FB}
                   html.darkMode__17jnngiz,html.darkMode__17jnngiz body{color-scheme:dark;background:#0E131B}
-                </style><div class="apac__sgdhw10 lightModeTone_light__1ngbg0u18 darkModeTone_dark__1ngbg0u1b"><div class="base__1thy3kk0 paddingTop_large_mobile__17jnngi6q App_vanillaBox__inn18b0"></div></div>"
+                </style><div class="apac__sgdhw10 lightModeTone_light__1ngbg0u18 darkModeTone_dark__1ngbg0u1b"><div class="base__1thy3kk0 paddingTop_large_mobile__17jnngi6y App_vanillaBox__inn18b0"></div></div>"
     `);
   });
 });

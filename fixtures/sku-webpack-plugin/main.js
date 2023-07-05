@@ -1,4 +1,3 @@
-import React from 'react';
 import 'braid-design-system/reset';
 import { createRoot } from 'react-dom/client';
 import theme from 'braid-design-system/themes/apac';

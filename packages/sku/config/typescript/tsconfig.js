@@ -24,14 +24,25 @@ module.exports = () => {
       // Fixes https://github.com/cypress-io/cypress/issues/1087
       skipLibCheck: true,
 
-      esModuleInterop: true,
+      // When dependencies have `type: module` TypeScript doesn't know how to resolve them,
+      // so we need to set this to `bundler` or `node`
+      moduleResolution: 'bundler',
+      // This is required by `bundler` and for dynamic `import()`
+      module: 'es2022',
+
+      // resolution-related
+      allowImportingTsExtensions: true,
       allowSyntheticDefaultImports: true,
+      esModuleInterop: true,
+      isolatedModules: true,
       resolveJsonModule: true,
-      noUnusedLocals: true,
+
+      // misc
       strict: true,
-      jsx: 'preserve',
-      lib: ['dom', 'es2019'],
-      target: 'es5',
+      forceConsistentCasingInFileNames: true,
+      jsx: 'react-jsx',
+      lib: ['dom', 'es2022'],
+      target: 'es2022',
     },
     include: includePaths,
   };

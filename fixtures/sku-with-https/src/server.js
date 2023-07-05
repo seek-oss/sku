@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { writeFile } from 'fs/promises';
 

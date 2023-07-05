@@ -8,7 +8,6 @@ import {
   Stack,
   List,
 } from 'braid-design-system';
-import React from 'react';
 
 import * as styles from './NextSteps.css';
 

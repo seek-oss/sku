@@ -132,10 +132,7 @@ describe('configure', () => {
 
     it('should generate tsconfig config', async () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
-      expect(Object.keys(tsconfigContents).sort()).toEqual([
-        'compilerOptions',
-        'include',
-      ]);
+      expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);
     });
 
     it(`should generate \`.gitignore\``, async () => {

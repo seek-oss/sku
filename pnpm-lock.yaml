@@ -3614,7 +3614,7 @@ packages:
       process: 0.11.10
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      semver: 7.5.1
+      semver: 7.5.3
       style-loader: 3.3.3(webpack@5.88.0)
       terser-webpack-plugin: 5.3.9(esbuild@0.17.6)(webpack@5.88.0)
       ts-dedent: 2.2.0
@@ -3709,7 +3709,7 @@ packages:
       prompts: 2.4.2
       puppeteer-core: 2.1.1
       read-pkg-up: 7.0.1
-      semver: 7.5.1
+      semver: 7.5.3
       shelljs: 0.8.5
       simple-update-notifier: 1.1.0
       strip-json-comments: 3.1.1
@@ -3903,7 +3903,7 @@ packages:
       pretty-hrtime: 1.0.3
       prompts: 2.4.2
       read-pkg-up: 7.0.1
-      semver: 7.5.1
+      semver: 7.5.3
       serve-favicon: 2.5.0
       telejson: 7.1.0
       ts-dedent: 2.2.0
@@ -4011,7 +4011,7 @@ packages:
       memoizerific: 1.11.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      semver: 7.5.1
+      semver: 7.5.3
       store2: 2.14.2
       telejson: 7.1.0
       ts-dedent: 2.2.0
@@ -4036,7 +4036,7 @@ packages:
       memoizerific: 1.11.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      semver: 7.5.1
+      semver: 7.5.3
       store2: 2.14.2
       telejson: 7.1.0
       ts-dedent: 2.2.0
@@ -4095,7 +4095,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-refresh: 0.11.0
-      semver: 7.5.1
+      semver: 7.5.3
       typescript: 5.1.3
       webpack: 5.88.0(esbuild@0.17.6)(webpack-cli@5.0.1)
     transitivePeerDependencies:
@@ -4749,7 +4749,7 @@ packages:
       grapheme-splitter: 1.0.4
       ignore: 5.2.4
       natural-compare-lite: 1.4.0
-      semver: 7.5.1
+      semver: 7.5.3
       tsutils: 3.21.0(typescript@5.1.3)
       typescript: 5.1.3
     transitivePeerDependencies:
@@ -5955,7 +5955,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.5.1
+      semver: 7.5.3
     dev: false
 
   /bytes@3.0.0:
@@ -6550,7 +6550,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.21)
       postcss-modules-values: 4.0.0(postcss@8.4.21)
       postcss-value-parser: 4.2.0
-      semver: 7.5.1
+      semver: 7.5.3
       webpack: 5.88.0(esbuild@0.17.6)(webpack-cli@5.0.1)
     dev: false
 
@@ -7720,7 +7720,7 @@ packages:
       escape-string-regexp: 4.0.0
       eslint: 8.41.0
       esquery: 1.5.0
-      semver: 7.5.1
+      semver: 7.5.3
       spdx-expression-parse: 3.0.1
     transitivePeerDependencies:
       - supports-color
@@ -8330,7 +8330,7 @@ packages:
       minimatch: 3.1.2
       node-abort-controller: 3.1.1
       schema-utils: 3.3.0
-      semver: 7.5.1
+      semver: 7.5.3
       tapable: 2.2.1
       typescript: 5.1.3
       webpack: 5.88.0(esbuild@0.17.6)(webpack-cli@5.0.1)
@@ -11542,7 +11542,7 @@ packages:
       cosmiconfig-typescript-loader: 4.3.0(@types/node@18.0.0)(cosmiconfig@8.1.3)(ts-node@10.9.1)(typescript@5.1.3)
       klona: 2.0.6
       postcss: 8.4.21
-      semver: 7.5.1
+      semver: 7.5.3
       ts-node: 10.9.1(@types/node@18.0.0)(typescript@5.1.3)
       typescript: 5.1.3
       webpack: 5.88.0(esbuild@0.17.6)(webpack-cli@5.0.1)
@@ -12747,13 +12747,6 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: false
-
-  /semver@7.5.1:
-    resolution: {integrity: sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
 
   /semver@7.5.3:
     resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}

@@ -117,6 +117,9 @@ module.exports = validator.compile({
     type: 'array',
     items: 'string',
   },
+  storybookStoryStore: {
+    type: 'boolean',
+  },
   target: {
     type: 'string',
   },
@@ -162,6 +165,9 @@ module.exports = validator.compile({
   dangerouslySetESLintConfig: {
     type: 'function',
   },
+  dangerouslySetTSConfig: {
+    type: 'function',
+  },
   supportedBrowsers: {
     type: 'array',
     items: {
@@ -199,9 +205,6 @@ module.exports = validator.compile({
     type: 'boolean',
   },
   externalizeNodeModules: {
-    type: 'boolean',
-  },
-  storybookStoryStore: {
     type: 'boolean',
   },
 });

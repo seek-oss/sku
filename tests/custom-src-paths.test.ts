@@ -1,14 +1,14 @@
-const path = require('path');
-const {
+import path from 'path';
+import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const skuConfig = require('@sku-fixtures/custom-src-paths/sku.config.js');
+import skuConfig from '@sku-fixtures/custom-src-paths/sku.config.ts';
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/custom-src-paths/sku.config.js'),
+  require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
 
 const targetDirectory = `${appDir}/dist`;

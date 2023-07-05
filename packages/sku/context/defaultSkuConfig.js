@@ -26,6 +26,7 @@ module.exports = {
   storybookPort: 8081,
   storybookTarget: 'dist-storybook',
   storybookAddons: [],
+  storybookStoryStore: true,
   initialPath: null,
   public: 'public',
   publicPath: '/',
@@ -37,6 +38,7 @@ module.exports = {
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
+  dangerouslySetTSConfig: defaultDecorator,
   supportedBrowsers,
   orderImports: false,
   cspEnabled: false,
@@ -48,5 +50,4 @@ module.exports = {
   skipPackageCompatibilityCompilation: [],
   persistentCache: true,
   externalizeNodeModules: false,
-  storybookStoryStore: true,
 };

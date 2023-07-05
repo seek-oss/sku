@@ -102,19 +102,26 @@ export interface SkuConfig {
   cspExtraScriptSrcHosts?: string[];
 
   /**
-   * Similar to {@link dangerouslySetWebpackConfig} but for eslint config.
+   * Similar to {@link dangerouslySetWebpackConfig}, but for ESLint config.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslyseteslintconfig
    */
   dangerouslySetESLintConfig?: (existingESLintConfig: any) => any;
 
   /**
-   * Similar to {@link dangerouslySetWebpackConfig} but for jest config. Make sure {@link setupTests} definitely doesn’t cover your needs before using.
+   * Similar to {@link dangerouslySetWebpackConfig}, but for Jest config. Make sure {@link setupTests} definitely doesn’t cover your needs before using.
    * Please speak with the `sku-support` group before using.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetjestconfig
    */
   dangerouslySetJestConfig?: (existingJestConfig: any) => any;
+
+  /**
+   * Similar to {@link dangerouslySetWebpackConfig}, but for TypeScript (`tsconfig.json`).
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig
+   */
+  dangerouslySetTSConfig?: (existingTSConfig: any) => any;
 
   /**
    * This function provides a way to override the webpack config after sku has created it.
@@ -241,16 +248,6 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=persistentcache
    */
   persistentCache?: boolean;
-
-  /**
-   * Allows disabling Storybook's `storyStoreV7` feature flag. This will result in all stories being
-   * loaded upfront instead of on demand. Disabling this feature will allow stories that use the
-   * deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf`
-   * to the Component Story Format (CSF) instead.
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookStoryStore
-   */
-  storybookStoryStore?: boolean;
 
   /**
    * An array of polyfills to be included into all client entry points.
@@ -404,6 +401,16 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookport
    */
   storybookPort?: number;
+
+  /**
+   * Allows disabling Storybook's `storyStoreV7` feature flag. This will result in all stories being
+   * loaded upfront instead of on demand. Disabling this feature will allow stories that use the
+   * deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf`
+   * to the Component Story Format (CSF) instead.
+   * @default true
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookStoryStore
+   */
+  storybookStoryStore?: boolean;
 
   /**
    * The directory `sku build-storybook` will output files to.

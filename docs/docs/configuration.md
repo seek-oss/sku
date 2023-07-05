@@ -111,7 +111,7 @@ Example:
 ```ts
 export default {
   dangerouslySetTSConfig: (skuTSConfig) => ({
-    ...skuJestConfig,
+    ...skuTSConfig,
     include: ['packages', 'site'],
     exclude: ['**/scripts'],
   }),

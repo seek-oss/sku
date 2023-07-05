@@ -2,7 +2,7 @@
 'sku': patch
 ---
 
-`sku.config.js` previously had an effect on what was included in the `tsconfig.json#include` array. With the removal of the default `include` array, this is no longer the case and you might see a TypeScript error like this:
+The presence of a `sku.config.js` file previously had an effect on what was included in the `tsconfig.json#include` array. With the removal of the default `include` array, this is no longer the case and you might see a TypeScript error like this:
 
 ```
 error TS18003: No inputs were found in config file '/path/to/project/tsconfig.json'. Specified 'include' paths were '["**/*"]' and 'exclude' paths were '[]'.

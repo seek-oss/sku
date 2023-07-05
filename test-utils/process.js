@@ -1,7 +1,7 @@
-const util = require('util');
+const { promisify } = require('util');
 // spwan can't be promisify'ed so we use execFile, which just wraps spawn and can be promisify'ed
 // https://github.com/nodejs/node/blob/2f369ccacfb60c034de806f24164524910301825/lib/child_process.js#L326
-const execFile = util.promisify(require('child_process').execFile);
+const execFile = promisify(require('child_process').execFile);
 const gracefulSpawn = require('sku/lib/gracefulSpawn');
 
 const skuBin = require.resolve('sku/bin/sku.js');
@@ -19,7 +19,7 @@ const run = async (file, args = [], options = {}) => {
       ...options,
     });
     // Yes, this is a bit odd.
-    // If we don't await the promise, the child process is not returned, only stdout and stderr.
+    // If we don't spread the promise the child process is not returned, only stdout and stderr.
     const result = await promise;
     return { ...promise, ...result };
   } catch (error) {

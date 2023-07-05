@@ -1,4 +1,6 @@
-module.exports = {
+import type { SkuConfig } from 'sku';
+
+export default {
   clientEntry: 'src/ssr-client.tsx',
   serverEntry: 'src/server.tsx',
   setupTests: 'src/setupTests.js',
@@ -7,4 +9,4 @@ module.exports = {
   target: 'dist-ssr',
   port: 8313,
   serverPort: 8314,
-};
+} satisfies SkuConfig;

@@ -1,28 +1,33 @@
-const path = require('path');
-const { rimraf } = require('rimraf');
-const {
+import assert from 'assert';
+import path from 'path';
+import { rimraf } from 'rimraf';
+import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
   getAppSnapshot,
   startAssetServer,
-} = require('@sku-private/test-utils');
-const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
+} from '@sku-private/test-utils';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
+
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/typescript-css-modules/sku.config'),
+  require.resolve('@sku-fixtures/typescript-css-modules/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
 const distSsrDir = path.resolve(appDir, 'dist-ssr');
 const srcDir = path.resolve(appDir, 'src');
-const ssrSkuConfig = require('@sku-fixtures/typescript-css-modules/sku-ssr.config.js');
 
-const backendUrl = `http://localhost:${ssrSkuConfig.serverPort}`;
+assert(skuSsrConfig.serverPort, 'sku config has serverPort');
+const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 const cssTypes = ['.less.d.ts'];
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
-    const url = 'http://localhost:8204';
+    assert(skuConfig.port, 'sku config has port');
+    const url = `http://localhost:${skuConfig.port}`;
     let process;
 
     beforeAll(async () => {
@@ -57,7 +62,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-ssr.config.js',
+        '--config=sku-ssr.config.ts',
       ]);
       server = gracefulSpawn('node', ['server'], {
         cwd: distSsrDir,
@@ -112,8 +117,8 @@ describe('typescript-css-modules', () => {
     let exitCode;
 
     beforeAll(async () => {
-      const { childProcess } = await runSkuScriptInDir('test', appDir);
-      exitCode = childProcess.exitCode;
+      const { child } = await runSkuScriptInDir('test', appDir);
+      exitCode = child.exitCode;
     });
 
     it('should handle Less and css.js in tests', async () => {
@@ -127,8 +132,8 @@ describe('typescript-css-modules', () => {
     beforeAll(async () => {
       // run build first to ensure typescript declarations are generated
       await runSkuScriptInDir('build', appDir);
-      const { childProcess } = await runSkuScriptInDir('lint', appDir);
-      exitCode = childProcess.exitCode;
+      const { child } = await runSkuScriptInDir('lint', appDir);
+      exitCode = child.exitCode;
     });
 
     it('should handle tsc and eslint', async () => {

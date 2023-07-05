@@ -12,14 +12,11 @@ describe('sku init', () => {
       const projectName = 'new-project';
       await rimraf(path.join(fixtureDirectory, projectName));
 
-      const childPromise = spawnSkuScriptInDir('init', fixtureDirectory, [
+      const { child } = await spawnSkuScriptInDir('init', fixtureDirectory, [
         projectName,
       ]);
 
-      // Should exit with exit code 0
-      await expect(childPromise).resolves.toEqual(
-        expect.objectContaining({ code: 0 }),
-      );
+      expect(child.exitCode).toBe(0);
 
       const skuConfig = fs.readFileSync(
         path.join(fixtureDirectory, projectName, 'sku.config.ts'),

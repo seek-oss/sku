@@ -75,8 +75,8 @@ describe('assertion-removal', () => {
     let exitCode;
 
     beforeAll(async () => {
-      const { childProcess } = await runSkuScriptInDir('test', appDir);
-      exitCode = childProcess.exitCode;
+      const { child } = await runSkuScriptInDir('test', appDir);
+      exitCode = child.exitCode;
     });
 
     it('should keep "assert" in tests', async () => {

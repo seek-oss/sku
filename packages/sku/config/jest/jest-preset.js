@@ -1,13 +1,14 @@
 const escapeRegex = require('escape-string-regexp');
 const { cwd } = require('../../lib/cwd');
-const { paths, rootResolution } = require('../../context');
+const { paths, rootResolution, jestDecorator } = require('../../context');
+
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 
 /** @type {import('jest').Config} */
-module.exports = {
+module.exports = jestDecorator({
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
   prettierPath: require.resolve('prettier'),
@@ -41,4 +42,4 @@ module.exports = {
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
   ],
-};
+});

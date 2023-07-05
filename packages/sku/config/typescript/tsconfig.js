@@ -1,6 +1,5 @@
 const { cwd } = require('../../lib/cwd');
-const { paths, rootResolution, tsconfigDecorator } = require('../../context');
-const path = require('path');
+const { rootResolution, tsconfigDecorator } = require('../../context');
 
 module.exports = () => {
   const config = {
@@ -34,15 +33,6 @@ module.exports = () => {
       target: 'es2022',
     },
   };
-
-  if (!paths?.appSkuConfigPath?.endsWith('.ts')) {
-    // The placeholder file needs to be included so we don't break JS only projects.
-    // See the comments in placeholder.ts
-    config.include = [
-      path.join(__dirname, '../../lib/placeholder.ts'),
-      ...(config.include || []),
-    ];
-  }
 
   if (rootResolution) {
     config.compilerOptions.paths = {

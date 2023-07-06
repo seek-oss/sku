@@ -6,6 +6,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
   }

@@ -1,4 +1,6 @@
 import type { SkuConfig } from 'sku';
+// @ts-ignore no types
+import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
   srcPaths: ['src', 'sku-ssr.config.ts'],
@@ -8,4 +10,5 @@ export default {
   publicPath: '/static/typescript',
   setupTests: 'src/setupTests.ts',
   target: 'dist',
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

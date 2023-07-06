@@ -1,4 +1,7 @@
-const { ListExternalsWebpackPlugin } = require('@sku-private/test-utils');
+const {
+  ListExternalsWebpackPlugin,
+  makeStableHashes,
+} = require('@sku-private/test-utils');
 
 module.exports = {
   clientEntry: 'src/serverClient.js',
@@ -12,6 +15,8 @@ module.exports = {
     if (config.name === 'render') {
       config.plugins.push(new ListExternalsWebpackPlugin());
     }
+
+    makeStableHashes(config);
 
     return config;
   },

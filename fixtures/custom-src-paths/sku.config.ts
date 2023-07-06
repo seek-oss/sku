@@ -1,4 +1,5 @@
 import type { SkuConfig } from 'sku';
+import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
   srcPaths: ['lib', 'another-folder'],
@@ -6,4 +7,5 @@ export default {
   renderEntry: 'lib/render.js',
   port: 8201,
   publicPath: '/some-static-place',
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

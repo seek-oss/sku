@@ -1,4 +1,5 @@
 import type { SkuConfig } from 'sku';
+import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
   clientEntry: 'src/client-ssr.tsx',
@@ -8,4 +9,5 @@ export default {
   // Required for test to serve client assets correctly
   publicPath: 'http://localhost:4003/',
   target: 'dist-ssr',
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

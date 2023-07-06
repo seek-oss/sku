@@ -1,3 +1,5 @@
+import { makeStableHashes } from '@sku-private/test-utils';
+
 export default {
   sites: [
     {
@@ -25,5 +27,6 @@ export default {
     'https://error-tracking.com',
     'https://fb-tracking.com',
   ],
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],
 };

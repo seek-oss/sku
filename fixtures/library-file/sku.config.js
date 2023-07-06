@@ -1,3 +1,5 @@
+const { makeStableHashes } = require('@sku-private/test-utils');
+
 module.exports = {
   libraryEntry: 'src/library.js',
   renderEntry: 'src/render.js',
@@ -5,4 +7,5 @@ module.exports = {
   libraryFile: 'my-library',
   port: 8086,
   persistentCache: false,
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 };

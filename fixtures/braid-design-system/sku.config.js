@@ -1,4 +1,7 @@
-const { ListExternalsWebpackPlugin } = require('@sku-private/test-utils');
+const {
+  ListExternalsWebpackPlugin,
+  makeStableHashes,
+} = require('@sku-private/test-utils');
 
 module.exports = {
   sites: [
@@ -13,9 +16,7 @@ module.exports = {
       config.plugins.push(new ListExternalsWebpackPlugin());
     }
 
-    // Addresses an issue with this specific test suite where module IDs
-    // were different between local dev and CI
-    config.optimization.moduleIds = 'named';
+    makeStableHashes(config);
 
     return config;
   },

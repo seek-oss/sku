@@ -2,6 +2,7 @@ const { ListExternalsWebpackPlugin } = require('./ListExternalsWebpackPlugin');
 const appSnapshot = require('./appSnapshot');
 const { startAssetServer } = require('./assetServer');
 const { dirContentsToObject } = require('./dirContentsToObject');
+const { makeStableHashes } = require('./skuConfig');
 const {
   getStorybookFrame,
   getTextContentFromStorybookFrame,
@@ -17,6 +18,7 @@ module.exports = {
   dirContentsToObject,
   getStorybookFrame,
   getTextContentFromStorybookFrame,
+  makeStableHashes,
   runSkuScriptInDir,
   spawnSkuScriptInDir,
   waitForUrls,

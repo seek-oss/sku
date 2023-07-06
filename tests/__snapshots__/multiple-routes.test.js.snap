@@ -2,26 +2,26 @@
 
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
-  "934-a0df7b24ff10927c8627.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-20f07888fafa02130f88.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
   color: blue;
 }
 ,
-  "handlers-Details-a8f1cb0224237f0cb6da.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
   color: red;
 }
 ,
-  "handlers-Home-bdc80619e5abd3aacf6a.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-9be29564f0f17feee320.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-6538ab30ea18de462fe8.js",
-    "/static/place/934-a0df7b24ff10927c8627.js",
-    "/static/place/main-9be29564f0f17feee320.js",
-    "/static/place/handlers-Details-a8f1cb0224237f0cb6da.js",
-    "/static/place/AsyncComponent-20f07888fafa02130f88.js",
+    "/static/place/runtime.js",
+    "/static/place/5.js",
+    "/static/place/main.js",
+    "/static/place/handlers-Details.chunk.js",
+    "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -106,7 +106,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [247,100]
+      [1,0]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -148,10 +148,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-6538ab30ea18de462fe8.js",
-    "/static/place/934-a0df7b24ff10927c8627.js",
-    "/static/place/main-9be29564f0f17feee320.js",
-    "/static/place/handlers-Home-bdc80619e5abd3aacf6a.js",
+    "/static/place/runtime.js",
+    "/static/place/5.js",
+    "/static/place/main.js",
+    "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -227,7 +227,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [507]
+      [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -263,11 +263,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-6538ab30ea18de462fe8.js",
-    "/static/place/934-a0df7b24ff10927c8627.js",
-    "/static/place/main-9be29564f0f17feee320.js",
-    "/static/place/handlers-Details-a8f1cb0224237f0cb6da.js",
-    "/static/place/AsyncComponent-20f07888fafa02130f88.js",
+    "/static/place/runtime.js",
+    "/static/place/5.js",
+    "/static/place/main.js",
+    "/static/place/handlers-Details.chunk.js",
+    "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
     "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -352,7 +352,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [247,100]
+      [1,0]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -394,10 +394,10 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/runtime-6538ab30ea18de462fe8.js",
-    "/static/place/934-a0df7b24ff10927c8627.js",
-    "/static/place/main-9be29564f0f17feee320.js",
-    "/static/place/handlers-Home-bdc80619e5abd3aacf6a.js",
+    "/static/place/runtime.js",
+    "/static/place/5.js",
+    "/static/place/main.js",
+    "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
     "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -473,7 +473,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [507]
+      [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -507,18 +507,18 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime-6538ab30ea18de462fe8.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`multiple-routes build and serve should return details page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-6538ab30ea18de462fe8.js",
-  "/static/place/934-a0df7b24ff10927c8627.js",
-  "/static/place/main-9be29564f0f17feee320.js",
-  "/static/place/handlers-Details-a8f1cb0224237f0cb6da.js",
-  "/static/place/AsyncComponent-20f07888fafa02130f88.js",
+  "/static/place/runtime.js",
+  "/static/place/5.js",
+  "/static/place/main.js",
+  "/static/place/handlers-Details.chunk.js",
+  "/static/place/AsyncComponent.chunk.js",
 ]
 CSS: [
   "/static/place/handlers-Details-065db15fad163b0a609f.css",
@@ -603,7 +603,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [247,100]
+      [1,0]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -658,10 +658,10 @@ POST HYDRATE DIFFS:
 exports[`multiple-routes build and serve should return home page 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime-6538ab30ea18de462fe8.js",
-  "/static/place/934-a0df7b24ff10927c8627.js",
-  "/static/place/main-9be29564f0f17feee320.js",
-  "/static/place/handlers-Home-bdc80619e5abd3aacf6a.js",
+  "/static/place/runtime.js",
+  "/static/place/5.js",
+  "/static/place/main.js",
+  "/static/place/handlers-Home.chunk.js",
 ]
 CSS: [
   "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
@@ -737,7 +737,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [507]
+      [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -778,7 +778,7 @@ exports[`multiple-routes start should render details page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-8d0a02.js",
+  "/5.js",
   "/main.js",
   "/handlers-Details.js",
   "/AsyncComponent.js",
@@ -866,7 +866,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      ["handlers-Details","AsyncComponent"]
+      [1,0]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -922,7 +922,7 @@ exports[`multiple-routes start should render home page correctly 1`] = `
 SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
   "/runtime.js",
-  "/vendors-node_modules_pnpm_loadable_component_5_15_3_react_18_2_0_node_modules_loadable_compon-8d0a02.js",
+  "/5.js",
   "/main.js",
   "/handlers-Home.js",
 ]
@@ -1000,7 +1000,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      ["handlers-Home"]
+      [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"

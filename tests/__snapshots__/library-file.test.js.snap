@@ -2,8 +2,8 @@
 
 exports[`library-file build should generate the expected files 1`] = `
 {
-  "51-3b2a2dfee566d990ef1d.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "724-5153040ecd2a787cdddb.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "1.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "my-library.css": .LfCbsbg {
   color: red;
 }

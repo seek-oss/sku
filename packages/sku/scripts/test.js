@@ -1,21 +1,23 @@
+const path = require('path');
+const debug = require('debug');
 const jest = require('jest');
 
 const isCI = require('../lib/isCI');
-const baseJestConfig = require('../config/jest/jestConfig');
 const { argv } = require('../config/args');
-const { jestDecorator } = require('../context');
-
 const { runVocabCompile } = require('../lib/runVocab');
 
+const log = debug('sku:jest');
 // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#configuring-your-testing-environment
 process.env.IS_REACT_ACT_ENVIRONMENT = true;
 
 (async () => {
   await runVocabCompile();
 
-  const jestConfig = jestDecorator(baseJestConfig);
+  // https://jestjs.io/docs/configuration#preset-string
+  const jestPreset = require.resolve('../config/jest/jest-preset');
+  log(`Using Jest preset at ${jestPreset}`);
 
-  argv.push('--config', JSON.stringify(jestConfig));
+  argv.push('--preset', path.dirname(jestPreset));
 
   if (isCI) {
     argv.push('--ci');

@@ -27,3 +27,14 @@ For example, if you're using [React Testing Library](https://testing-library.com
 ```ts
 import '@testing-library/jest-dom';
 ```
+
+sku's Jest configuration can also be used as a [preset](https://jestjs.io/docs/configuration#preset-string), by specifying the `sku/config/jest` preset in your `jest.config.js`:
+
+```js
+/** @type {import('jest').Config} */
+module.exports = {
+  preset: 'sku/config/jest',
+};
+```
+
+This enables debugging tests in VS Code using the [Jest extension](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest), by following the instructions in the [Jest documentation](https://jestjs.io/docs/en/troubleshooting#debugging-in-vs-code).

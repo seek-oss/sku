@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { rimraf } = require('rimraf');
-const { spawnSkuScriptInDir } = require('@sku-private/test-utils');
+const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
 const fixtureDirectory = path.join(__dirname, '../fixtures/sku-init');
 
@@ -12,7 +12,7 @@ describe('sku init', () => {
       const projectName = 'new-project';
       await rimraf(path.join(fixtureDirectory, projectName));
 
-      const { child } = await spawnSkuScriptInDir('init', fixtureDirectory, [
+      const { child } = await runSkuScriptInDir('init', fixtureDirectory, [
         projectName,
       ]);
 
@@ -39,6 +39,6 @@ export default skuConfig;
 `);
     },
     // `sku init` is a long running task and can take some time to complete
-    250 * 1000,
+    5 * 60 * 1000,
   );
 });

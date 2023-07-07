@@ -5,8 +5,6 @@ import apac from 'braid-design-system/themes/apac';
 
 import type { Preview } from 'sku/@storybook/react';
 
-import React from 'react';
-
 const preview: Preview = {
   decorators: [
     (Story) => (

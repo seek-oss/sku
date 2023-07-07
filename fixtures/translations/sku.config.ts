@@ -1,4 +1,6 @@
 import type { SkuConfig } from 'sku';
+// @ts-ignore no types
+import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
   clientEntry: 'src/client.tsx',
@@ -15,4 +17,5 @@ export default {
   initialPath: '/en/',
   target: 'dist',
   port: 8310,
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

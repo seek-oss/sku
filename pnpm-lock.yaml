@@ -404,6 +404,9 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../test-utils
       '@types/express':
         specifier: ^4.17.11
         version: 4.17.17

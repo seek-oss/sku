@@ -3,6 +3,7 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "allowJs": true,
+    "jsx": "react-jsx",
     "noEmit": true,
     "strict": false
   }

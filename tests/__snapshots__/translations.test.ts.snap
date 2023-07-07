@@ -2,10 +2,10 @@
 
 exports[`translations should render en 1`] = `
 SCRIPTS: [
-  "/runtime-c90bedc6c1e41d593d60.js",
-  "/70-7d9885a3167f20977033.js",
-  "/main-d831be30390546eaedba.js",
-  "/en-translations-b17efc1aa5d571ed56f2.js",
+  "/runtime.js",
+  "/5.js",
+  "/main.js",
+  "/en-translations.chunk.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -61,7 +61,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [938]
+      [1]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -100,10 +100,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should render en-PSEUDO post-hydration 1`] = `
 SCRIPTS: [
-  "/runtime-c90bedc6c1e41d593d60.js",
-  "/70-7d9885a3167f20977033.js",
-  "/main-d831be30390546eaedba.js",
-  "/en-translations-b17efc1aa5d571ed56f2.js",
+  "/runtime.js",
+  "/5.js",
+  "/main.js",
+  "/en-translations.chunk.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -159,7 +159,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [938]
+      [1]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -208,10 +208,10 @@ POST HYDRATE DIFFS:
 
 exports[`translations should render fr 1`] = `
 SCRIPTS: [
-  "/runtime-c90bedc6c1e41d593d60.js",
-  "/70-7d9885a3167f20977033.js",
-  "/main-d831be30390546eaedba.js",
-  "/fr-translations-8d39ba177a70a2aa4224.js",
+  "/runtime.js",
+  "/5.js",
+  "/main.js",
+  "/fr-translations.chunk.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -267,7 +267,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [590]
+      [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
@@ -306,10 +306,10 @@ POST HYDRATE DIFFS: NO DIFF
 
 exports[`translations should support query parameters 1`] = `
 SCRIPTS: [
-  "/runtime-c90bedc6c1e41d593d60.js",
-  "/70-7d9885a3167f20977033.js",
-  "/main-d831be30390546eaedba.js",
-  "/en-translations-b17efc1aa5d571ed56f2.js",
+  "/runtime.js",
+  "/5.js",
+  "/main.js",
+  "/en-translations.chunk.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -365,7 +365,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [938]
+      [1]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"

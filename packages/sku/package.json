@@ -82,7 +82,7 @@
     "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^8.41.0",
-    "eslint-config-seek": "^11.3.0",
+    "eslint-config-seek": "^11.3.1",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",
     "fast-glob": "^3.2.5",

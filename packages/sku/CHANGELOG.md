@@ -1,5 +1,48 @@
 # sku
 
+## 12.2.0
+
+### Minor Changes
+
+- Export internal Jest configuration as a [preset](https://jestjs.io/docs/configuration#preset-string) under `sku/config/jest`. This allows consumers to debug tests in their IDE by specifying the preset in their `jest.config.js`: ([#850](https://github.com/seek-oss/sku/pull/850))
+
+  ```js
+  /** @type {import('jest').Config} */
+  module.exports = {
+    preset: 'sku/config/jest',
+  };
+  ```
+
+- `srcPaths` no longer affects `tsconfig.json#include`. Instead, you can use the [`dangerouslySetTSConfig`][dangerous] option to have more control over which files are included in the type checking process. ([#848](https://github.com/seek-oss/sku/pull/848))
+
+  Previously, sku managed the `include` field in `tsconfig.json`, but this was problematic for projects that wanted more fine grained control over what was included and/or excluded from compilation.
+
+  > **Note**: If you were previously using [`srcPaths`][srcpaths] for this purpose, you should remove the paths which are not source files.
+
+  [dangerous]: https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig
+  [srcpaths]: https://seek-oss.github.io/sku/#/./docs/configuration?id=srcpaths
+
+- Update `tsconfig.json` options to match the latest version of the TypeScript compiler. ([#844](https://github.com/seek-oss/sku/pull/844))
+
+### Patch Changes
+
+- Upgrade to TypeScript 5.1 ([#844](https://github.com/seek-oss/sku/pull/844))
+
+- Update dependency `eslint-config-seek`. ([#844](https://github.com/seek-oss/sku/pull/844))
+
+  This reverts [the autofix for a Cypress rule][rule] and [improves the performance][eslint] of linting TypeScript files.
+
+  [rule]: https://github.com/seek-oss/eslint-config-seek/releases/tag/v11.2.1
+  [eslint]: https://github.com/seek-oss/eslint-config-seek/releases/tag/v11.3.0
+
+- The presence of a `sku.config.js` file previously had an effect on what was included in the `tsconfig.json#include` array. With the removal of the default `include` array, this is no longer the case and you might see a TypeScript error like this: ([#848](https://github.com/seek-oss/sku/pull/848))
+
+  ```
+  error TS18003: No inputs were found in config file '/path/to/project/tsconfig.json'. Specified 'include' paths were '["**/*"]' and 'exclude' paths were '[]'.
+  ```
+
+  If your project contains only JavaScript files and you see the above error, you should rename `sku.config.js` to `sku.config.ts` and the error will go away.
+
 ## 12.1.2
 
 ### Patch Changes

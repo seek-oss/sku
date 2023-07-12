@@ -68,7 +68,7 @@ Extra external hosts to allow in your `script-src` [content security policy](htt
 
 type `function`
 
-Similar to `dangerouslySetWebpackConfig` but for [eslint](https://eslint.org/) config.
+Similar to `dangerouslySetWebpackConfig`, but for [ESLint](https://eslint.org/) config.
 
 Example:
 
@@ -85,7 +85,7 @@ export default {
 
 type `function`
 
-Similar to `dangerouslySetWebpackConfig` but for [jest](https://jestjs.io/docs/en/configuration) config. Make sure [`setupTests`](#setuptests) definitely doesn't cover your needs before using.
+Similar to `dangerouslySetWebpackConfig`, but for [Jest](https://jestjs.io/docs/en/configuration) config. Make sure [`setupTests`](#setuptests) definitely doesn't cover your needs before using.
 
 Please speak with the `sku-support` group before using.
 
@@ -96,6 +96,24 @@ export default {
   dangerouslySetJestConfig: (skuJestConfig) => ({
     ...skuJestConfig,
     someOtherConfig: 'dangerousValue',
+  }),
+} satisfies SkuConfig;
+```
+
+## dangerouslySetTSConfig
+
+type `function`
+
+Similar to `dangerouslySetWebpackConfig`, but for [TypeScript (`tsconfig.json`)](https://www.typescriptlang.org/tsconfig).
+
+Example:
+
+```ts
+export default {
+  dangerouslySetTSConfig: (skuTSConfig) => ({
+    ...skuTSConfig,
+    include: ['packages', 'site'],
+    exclude: ['**/scripts'],
   }),
 } satisfies SkuConfig;
 ```
@@ -403,7 +421,7 @@ type `Array<string>`
 
 Default: `['./src']`
 
-An array of directories holding your apps source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
+An array of directories holding your app's source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
 ## storybookAddons
 
@@ -445,7 +463,7 @@ type `browserslist-query`
 
 Default: [browserslist-config-seek](https://github.com/seek-oss/browserslist-config-seek)
 
-The [`browserslist`](https://github.com/browserslist/browserslist) query describing the apps browser support policy.
+The [`browserslist`](https://github.com/browserslist/browserslist) query describing the app's browser support policy.
 
 ## target
 

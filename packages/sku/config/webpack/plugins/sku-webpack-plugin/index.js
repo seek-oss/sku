@@ -5,7 +5,7 @@ const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const {
   makeJsLoaders,
   makeCssLoaders,
-  makeVanillaCssLoaders,
+  makeExternalCssLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
   JAVASCRIPT,
@@ -148,18 +148,35 @@ class SkuWebpackPlugin {
           }),
       },
       {
-        // All CSS created by vanilla-extract
-        test: /\.vanilla.css$/i,
-        // Don't process vanilla files from Playroom as they are handled separately.
-        // Virtual file paths will look more realistic in the future allowing
-        // more standard handling of include/exclude path matching.
-        exclude: /node_modules\/playroom/,
-        use: makeVanillaCssLoaders({
-          isProductionBuild,
-          MiniCssExtractPlugin,
-          hot,
-          browserslist,
-        }),
+        test: /\.css$/i,
+        oneOf: [
+          {
+            // All CSS created by vanilla-extract
+            test: /\.vanilla\.css$/i,
+            // Don't process vanilla files from Playroom as they are handled separately.
+            // Virtual file paths will look more realistic in the future allowing
+            // more standard handling of include/exclude path matching.
+            exclude: /node_modules\/playroom/,
+            use: makeExternalCssLoaders({
+              isProductionBuild,
+              MiniCssExtractPlugin,
+              hot,
+              browserslist,
+            }),
+          },
+          {
+            test: /\.css$/i,
+            include: /node_modules/,
+            exclude: /node_modules\/playroom/,
+            use: makeExternalCssLoaders({
+              target,
+              isProductionBuild,
+              MiniCssExtractPlugin,
+              hot,
+              browserslist,
+            }),
+          },
+        ],
       },
       {
         test: IMAGE,

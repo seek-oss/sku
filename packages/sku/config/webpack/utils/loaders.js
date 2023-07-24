@@ -91,18 +91,18 @@ const makeCssLoaders = (options = {}) => {
           },
         ]
       : []),
-
     {
       loader: require.resolve('less-loader'),
     },
   ];
 };
 
-const makeVanillaCssLoaders = (options = {}) => {
-  const { isProductionBuild, MiniCssExtractPlugin, browserslist } = options;
+const makeExternalCssLoaders = (options = {}) => {
+  const { target, isProductionBuild, MiniCssExtractPlugin, browserslist } =
+    options;
 
   return [
-    MiniCssExtractPlugin.loader,
+    ...(!target || target === 'browser' ? [MiniCssExtractPlugin.loader] : []),
     {
       loader: require.resolve('css-loader'),
       options: {
@@ -162,6 +162,6 @@ const makeSvgLoaders = () => [
 module.exports = {
   makeJsLoaders,
   makeCssLoaders,
-  makeVanillaCssLoaders,
+  makeExternalCssLoaders,
   makeSvgLoaders,
 };

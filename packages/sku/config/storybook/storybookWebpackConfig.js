@@ -26,7 +26,7 @@ module.exports = ({ config }, { isDevServer }) => {
           : [previousExclude]), // Ensure we don't clobber any existing exclusions
         ...paths.src,
         ...paths.compilePackages.map(resolvePackage),
-        /\.vanilla\.css$/,
+        /(\.vanilla)?\.css$/,
       ];
     });
   }

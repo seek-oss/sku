@@ -52,6 +52,12 @@ SOURCE HTML: <!DOCTYPE html>
           Initial
         </div>
         <div class="ss2a6DC">
+          <span
+            class="external"
+            data-automation-external="true"
+          >
+            This should be invisible
+          </span>
           <div
             class="x5z4AMj"
             data-automation-less="true"
@@ -62,12 +68,6 @@ SOURCE HTML: <!DOCTYPE html>
             data-automation-vanilla="true"
           >
           </div>
-          <span
-            class="external"
-            data-automation-external="true"
-          >
-            This should be invisible
-          </span>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@ POST HYDRATE DIFFS:
 +          Client
          </div>
          <div class="ss2a6DC">
-           <div
+           <span
 
 `;
 
@@ -178,6 +178,12 @@ SOURCE HTML: <!DOCTYPE html>
           Initial
         </div>
         <div class="ss2a6DC">
+          <span
+            class="external"
+            data-automation-external="true"
+          >
+            This should be invisible
+          </span>
           <div
             class="x5z4AMj"
             data-automation-less="true"
@@ -188,12 +194,6 @@ SOURCE HTML: <!DOCTYPE html>
             data-automation-vanilla="true"
           >
           </div>
-          <span
-            class="external"
-            data-automation-external="true"
-          >
-            This should be invisible
-          </span>
         </div>
       </div>
     </div>

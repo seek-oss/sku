@@ -1,3 +1,6 @@
+// eslint-disable-next-line spaced-comment
+/// <reference lib="dom" />
+
 /**
  * Returns the iframe of the first story at the provided storybook URL
  *

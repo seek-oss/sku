@@ -8,4 +8,5 @@ export const root = style({
   width: '100px',
   height: '100px',
   background: 'blue',
+  fontSize: '64px',
 });

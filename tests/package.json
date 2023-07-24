@@ -28,6 +28,7 @@
     "@sku-fixtures/source-maps": "workspace:*",
     "@sku-fixtures/ssr-hello-world": "workspace:*",
     "@sku-fixtures/storybook-config": "workspace:*",
+    "@sku-fixtures/styling": "workspace:*",
     "@sku-fixtures/translations": "workspace:*",
     "@sku-fixtures/typescript-css-modules": "workspace:*",
     "@sku-private/test-utils": "workspace:*",

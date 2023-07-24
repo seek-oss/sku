@@ -1,3 +1,6 @@
 configure/App/*
 configure/TSApp/*
 configure/.*
+
+# we need the external dependency with styles to be in node_modules, so we're faking the path
+!styling/fake/node_modules/

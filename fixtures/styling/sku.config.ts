@@ -1,5 +1,5 @@
 import type { SkuConfig } from 'sku';
-// @ts-expect-error no types
+// @ts-ignore no types
 import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {

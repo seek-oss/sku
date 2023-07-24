@@ -386,6 +386,37 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/styling:
+    dependencies:
+      '@sku-fixtures/package-with-styles':
+        specifier: ./fake/node_modules/package-with-styles
+        version: link:fake/node_modules/package-with-styles
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.11.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../test-utils
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.2.3
+      '@types/react-dom':
+        specifier: ^18.2.3
+        version: 18.2.3
+      dedent:
+        specifier: ^0.7.0
+        version: 0.7.0
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/translations:
     dependencies:
       '@vocab/core':
@@ -883,6 +914,9 @@ importers:
       '@sku-fixtures/storybook-config':
         specifier: workspace:*
         version: link:../fixtures/storybook-config
+      '@sku-fixtures/styling':
+        specifier: workspace:*
+        version: link:../fixtures/styling
       '@sku-fixtures/translations':
         specifier: workspace:*
         version: link:../fixtures/translations

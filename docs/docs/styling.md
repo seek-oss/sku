@@ -78,3 +78,5 @@ export const MyComponent = () => {
   return <SomeComponent>{/* ... */}</SomeComponent>;
 };
 ```
+
+_**NOTE:** This should only be used when importing CSS dependencies from a third-party package in `node_modules`. If you are writing custom CSS, please see the [Vanilla Extract](#vanilla-extract) section above._

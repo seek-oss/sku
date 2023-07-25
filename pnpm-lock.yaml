@@ -580,6 +580,9 @@ importers:
       babel-plugin-transform-react-remove-prop-types:
         specifier: ^0.4.24
         version: 0.4.24
+      babel-plugin-transform-remove-imports:
+        specifier: ^1.7.0
+        version: 1.7.0(@babel/core@7.22.8)
       babel-plugin-unassert:
         specifier: ^3.1.0
         version: 3.2.0
@@ -6787,6 +6790,14 @@ packages:
 
   /babel-plugin-transform-react-remove-prop-types@0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
+    dev: false
+
+  /babel-plugin-transform-remove-imports@1.7.0(@babel/core@7.22.8):
+    resolution: {integrity: sha512-gprmWf6ry5qrnxMyiDaxZpXzZJP6R9FRA+p0AImLIWRmSEGtlKcFprHKeGMZYkII9rJR6Q1hYou+n1fk6rWf2g==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.22.8
     dev: false
 
   /babel-plugin-unassert@3.2.0:

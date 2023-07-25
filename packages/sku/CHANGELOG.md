@@ -1,5 +1,11 @@
 # sku
 
+## 12.3.1
+
+### Patch Changes
+
+- Remove external CSS imports when running Jest ([#865](https://github.com/seek-oss/sku/pull/865))
+
 ## 12.3.0
 
 ### Minor Changes

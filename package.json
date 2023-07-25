@@ -12,7 +12,7 @@
     "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
     "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
-    "release": "pnpm deploy-docs && changeset publish",
+    "release": "changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
   },
   "packageManager": "pnpm@8.4.0",

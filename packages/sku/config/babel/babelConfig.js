@@ -10,6 +10,7 @@ module.exports = ({
   rootResolution = false,
 }) => {
   const isBrowser = target === 'browser';
+  const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const plugins = [
@@ -29,6 +30,16 @@ module.exports = ({
     plugins.push([
       require.resolve('react-refresh/babel'),
       { skipEnvCheck: true },
+    ]);
+  }
+
+  if (isJest) {
+    plugins.push([
+      require.resolve('babel-plugin-transform-remove-imports'),
+      {
+        test: /\.css$/,
+        remove: 'effects',
+      },
     ]);
   }
 

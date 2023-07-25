@@ -1,5 +1,23 @@
 # sku
 
+## 12.3.0
+
+### Minor Changes
+
+- Allow importing external CSS from `node_modules`. ([#861](https://github.com/seek-oss/sku/pull/861))
+
+  CSS from third-party dependencies can be loaded using a side-effect import, e.g.
+
+  ```tsx
+  import { SomeComponent } from 'some-package';
+
+  import 'some-package/dist/styles.css';
+
+  export const MyComponent = () => {
+    return <SomeComponent>{/* ... */}</SomeComponent>;
+  };
+  ```
+
 ## 12.2.0
 
 ### Minor Changes

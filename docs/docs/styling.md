@@ -1,6 +1,6 @@
 # Styling
 
-## vanilla-extract
+## Vanilla Extract
 
 The `@vanilla-extract/css` package is not available out of the box so it needs to be installed.
 
@@ -14,7 +14,10 @@ Now you can create `.css.ts` files in your project.
 // BigBox.css.ts
 import { style } from '@vanilla-extract/css';
 
-export const bigBox = style({ width: 500, height: 500 });
+export const bigBox = style({
+  width: 500,
+  height: 500,
+});
 ```
 
 ```tsx
@@ -30,7 +33,7 @@ See [Vanilla Extract](https://vanilla-extract.style/documentation/getting-starte
 
 ## Locally Scoped CSS
 
-(via [CSS Modules](https://github.com/css-modules/css-modules) and [Less](http://lesscss.org/))
+(via [CSS Modules](https://github.com/css-modules/css-modules) and [LESS](http://lesscss.org/))
 
 > Support for LESS has been deprecated.
 > [Vanilla Extract](#vanilla-extract) is the preferred styling solution supported by sku, and support for LESS will be removed in a future release.
@@ -38,7 +41,7 @@ See [Vanilla Extract](https://vanilla-extract.style/documentation/getting-starte
 
 Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.
 
-For example, given the following Less file:
+For example, given the following LESS file:
 
 ```less
 .exampleWrapper {
@@ -61,3 +64,17 @@ As of sku v12, [treat] support has been removed in favour of [Vanilla Extract].
 
 [treat]: https://seek-oss.github.io/treat/
 [vanilla extract]: #vanilla-extract
+
+## External CSS
+
+CSS from third-party dependencies can be loaded using a side-effect import, e.g.
+
+```tsx
+import { SomeComponent } from 'some-package';
+
+import 'some-package/dist/styles.css';
+
+export const MyComponent = () => {
+  return <SomeComponent>{/* ... */}</SomeComponent>;
+};
+```

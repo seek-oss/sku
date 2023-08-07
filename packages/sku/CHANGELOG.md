@@ -1,5 +1,11 @@
 # sku
 
+## 12.3.2
+
+### Patch Changes
+
+- Fixes a bug where `.cjs` and `.mjs` files where not being transformed by babel in jest tests ([#868](https://github.com/seek-oss/sku/pull/868))
+
 ## 12.3.1
 
 ### Patch Changes

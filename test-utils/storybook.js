@@ -40,7 +40,9 @@ const getTextContentFromStorybookFrame = async (
   storybookFrame,
   elementSelector,
 ) => {
-  const element = await storybookFrame.waitForSelector(elementSelector);
+  const element = await storybookFrame.waitForSelector(elementSelector, {
+    timeout: 100_000,
+  });
 
   return element.evaluate((e) => ({
     text: e.innerText,

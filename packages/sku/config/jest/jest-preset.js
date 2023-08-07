@@ -31,7 +31,7 @@ module.exports = jestDecorator({
     '\\.less$': require.resolve('./cssModulesTransform.js'),
     '\\.css\\.ts$': require.resolve('@vanilla-extract/jest-transform'),
     '\\.tsx?$': require.resolve('./tsBabelTransform.js'),
-    '\\.js$': require.resolve('./jsBabelTransform.js'),
+    '\\.[cm]?js$': require.resolve('./jsBabelTransform.js'),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding

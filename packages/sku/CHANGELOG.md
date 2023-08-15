@@ -1,5 +1,13 @@
 # sku
 
+## 12.3.3
+
+### Patch Changes
+
+- Revert storybook config to CJS ([#873](https://github.com/seek-oss/sku/pull/873))
+
+  Fixes a bug where newer storybook versions (>=7.1.0) could not load sku's storybook config
+
 ## 12.3.2
 
 ### Patch Changes

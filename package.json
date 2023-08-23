@@ -15,7 +15,6 @@
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
   },
-  "packageManager": "pnpm@8.4.0",
   "lint-staged": {
     "+(package.json|pnpm-lock.yaml)": [
       "pnpm run check"
@@ -64,8 +63,10 @@
     "ts-jest": "^29.1.1"
   },
   "volta": {
-    "node": "18.16.0"
+    "node": "18.16.0",
+    "pnpm": "8.6.12"
   },
+  "packageManager": "pnpm@8.6.12",
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true

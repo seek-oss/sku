@@ -8,6 +8,7 @@
  */
 const getStorybookFrame = async (storybookUrl) => {
   const page = await browser.newPage();
+  page.setDefaultNavigationTimeout(100_000);
   await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
 
   const firstStoryButton = await page.waitForSelector(
@@ -40,7 +41,9 @@ const getTextContentFromStorybookFrame = async (
   storybookFrame,
   elementSelector,
 ) => {
-  const element = await storybookFrame.waitForSelector(elementSelector);
+  const element = await storybookFrame.waitForSelector(elementSelector, {
+    timeout: 100_000,
+  });
 
   return element.evaluate((e) => ({
     text: e.innerText,

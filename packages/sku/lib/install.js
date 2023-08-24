@@ -1,11 +1,11 @@
 const spawn = require('cross-spawn');
 
-module.exports = ({ deps, type, exact = true, verbose, useYarn }) =>
+module.exports = ({ deps, type, exact = true, verbose, isYarn }) =>
   new Promise((resolve, reject) => {
-    const command = useYarn ? 'yarnpkg' : 'npm';
+    const command = isYarn ? 'yarnpkg' : 'npm';
     const isDev = type === 'dev';
 
-    const args = useYarn
+    const args = isYarn
       ? [
           'add',
           isDev ? '--dev' : null,

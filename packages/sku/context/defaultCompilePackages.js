@@ -5,7 +5,7 @@ const glob = require('fast-glob');
 const { cwd: skuCwd } = require('../lib/cwd');
 const toPosixPath = require('../lib/toPosixPath');
 
-const { findRootSync } = require('@manypkg/find-root');
+const { rootDir, isPnpm } = require('../lib/packageManager');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
@@ -14,9 +14,7 @@ try {
   const globs = ['node_modules/@seek/*/package.json'];
   const cwd = skuCwd();
 
-  const { rootDir, tool } = findRootSync(cwd);
-
-  if (tool === 'pnpm') {
+  if (isPnpm) {
     const pnpmVirtualStorePath = path.join(
       toPosixPath(rootDir),
       'node_modules/.pnpm',

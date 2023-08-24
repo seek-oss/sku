@@ -1,4 +1,4 @@
-const isYarn = require('../../lib/isYarn');
+const { isYarn } = require('../../lib/packageManager');
 const { lintExtensions } = require('../../lib/lint');
 
 const steps = {};

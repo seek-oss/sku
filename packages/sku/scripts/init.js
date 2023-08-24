@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const { isYarn, runCommand } = require('../lib/packageManager');
+
 const chalk = require('chalk');
 const fs = require('fs/promises');
 const { posix: path } = require('path');
@@ -7,7 +9,6 @@ const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
 const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
-const detectYarn = require('../lib/detectYarn');
 const prettierWrite = require('../lib/runPrettier').write;
 const esLintFix = require('../lib/runESLint').fix;
 const configure = require('../lib/configure');
@@ -147,7 +148,7 @@ const getTemplateFileDestinationFromRoot =
   await fs.writeFile(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
-  const useYarn = detectYarn();
+  const useYarn = isYarn;
 
   const templateDirectory = path.join(toPosixPath(__dirname), '../template');
   const templateFiles = await glob(`${templateDirectory}/**/*`, {
@@ -221,7 +222,7 @@ const getTemplateFileDestinationFromRoot =
 
   const nextSteps = [
     `${chalk.cyan('cd')} ${projectName}`,
-    `${chalk.cyan('yarn start')}`,
+    `${chalk.cyan(`${runCommand} start`)}`,
   ]
     .filter(Boolean)
     .join('\n');

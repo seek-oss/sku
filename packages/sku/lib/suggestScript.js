@@ -1,14 +1,16 @@
-const exists = require('./exists');
+const { runCommand, isNpm, packageManager } = require('./packageManager');
+
 const chalk = require('chalk');
-const { getPathFromCwd, requireFromCwd } = require('./cwd');
+const { requireFromCwd } = require('./cwd');
 
 /**
- * @param {scriptContents} string
+ * @param {string} scriptContents
  */
 const findPackageScript = (scriptContents) => {
   let pkg;
   try {
-    pkg = requireFromCwd('package.json');
+    // CWD should be the root of the package
+    pkg = requireFromCwd('./package.json');
   } catch (err) {
     pkg = { scripts: {} };
   }
@@ -21,6 +23,18 @@ const findPackageScript = (scriptContents) => {
 };
 
 /**
+ * @param {boolean} isPackageScript
+ */
+const resolvePackageManagerCommand = (isPackageScript) => {
+  if (isPackageScript) {
+    return runCommand;
+  }
+
+  // npm is the odd one out
+  return isNpm ? 'npx' : packageManager;
+};
+
+/**
  * @typedef {object} Options
  * @property {boolean} sudo
  */
@@ -30,22 +44,19 @@ const findPackageScript = (scriptContents) => {
  * @param {Options | undefined} options
  */
 const getSuggestedScript = async (scriptName, options = { sudo: false }) => {
-  let script = options.sudo ? 'sudo ' : '';
-  const isYarnProject = await exists(getPathFromCwd('yarn.lock'));
+  const packageScript = findPackageScript(`sku ${scriptName}`);
 
-  try {
-    const packageScript = findPackageScript(`sku ${scriptName}`);
+  const packageManagerCommand = resolvePackageManagerCommand(
+    Boolean(packageScript),
+  );
 
-    if (packageScript) {
-      script += `${isYarnProject ? 'yarn' : 'npm run'} ${packageScript}`;
-    } else {
-      script += `${isYarnProject ? 'yarn' : 'npx'} sku ${scriptName}`;
-    }
-  } catch (err) {
-    script += `npx sku ${scriptName}`;
-  }
+  const packageOrSkuScript = packageScript
+    ? packageScript
+    : `sku ${scriptName}`;
 
-  return script;
+  const sudoPrefix = options.sudo ? 'sudo ' : '';
+
+  return `${sudoPrefix}${packageManagerCommand} ${packageOrSkuScript}`;
 };
 
 /**
@@ -62,5 +73,4 @@ const suggestScript = async (scriptName, options) => {
 
 module.exports = {
   suggestScript,
-  getSuggestedScript,
 };

@@ -1,3 +1,5 @@
+const { packageManager } = require('./packageManager');
+
 const { readFile } = require('fs/promises');
 const glob = require('fast-glob');
 const semver = require('semver');
@@ -5,7 +7,6 @@ const chalk = require('chalk');
 
 const banner = require('./banner');
 const track = require('../telemetry');
-const detectYarn = require('./detectYarn');
 const { cwd, getPathFromCwd } = require('../lib/cwd');
 const { paths } = require('../context');
 
@@ -55,11 +56,9 @@ module.exports = async () => {
             .join('\n'),
         );
 
-        if (detectYarn()) {
-          messages.push(
-            chalk`Try running "{blue.bold yarn why} {bold ${packageName}}" to diagnose the issue`,
-          );
-        }
+        messages.push(
+          chalk`Try running "{blue.bold ${packageManager} why} {bold ${packageName}}" to diagnose the issue`,
+        );
 
         track.count('duplicate_compile_package', {
           compile_package: packageName,

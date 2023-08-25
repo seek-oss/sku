@@ -77,9 +77,10 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(7);
+      expect(ignoreContents.length).toEqual(8);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
+      expect(ignoreContents).toContain(`.storybook/main.js`);
       expect(ignoreContents).toContain(`${defaultTargetDir}/`);
       expect(ignoreContents).toContain(`${defaultStorybookTargetDir}/`);
       expect(ignoreContents).toContain(`${bundleReportFolder}/`);
@@ -90,8 +91,9 @@ describe('configure', () => {
     ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolder, ignore);
-        expect(ignoreContents.length).toEqual(5);
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
+        expect(ignoreContents).toContain(`.storybook/main.js`);
         expect(ignoreContents).toContain(`${defaultTargetDir}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);
         expect(ignoreContents).toContain(`${coverageFolder}/`);
@@ -137,10 +139,11 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
-      expect(ignoreContents.length).toEqual(7);
+      expect(ignoreContents.length).toEqual(8);
       expect(ignoreContents).toContain(`.eslintrc`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`tsconfig.json`);
+      expect(ignoreContents).toContain(`.storybook/main.js`);
       expect(ignoreContents).toContain(`${skuConfig.target}/`);
       expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);
       expect(ignoreContents).toContain(`${bundleReportFolder}/`);
@@ -150,8 +153,9 @@ describe('configure', () => {
     ['.eslintignore', '.prettierignore'].forEach((ignore) =>
       it(`should generate \`${ignore}\``, async () => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
-        expect(ignoreContents.length).toEqual(5);
+        expect(ignoreContents.length).toEqual(6);
         expect(ignoreContents).toContain('*.less.d.ts');
+        expect(ignoreContents).toContain(`.storybook/main.js`);
         expect(ignoreContents).toContain(`${skuConfig.target}/`);
         expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);
         expect(ignoreContents).toContain(`${bundleReportFolder}/`);

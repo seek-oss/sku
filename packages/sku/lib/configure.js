@@ -28,16 +28,20 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
   await writeFile(outPath, contentStr);
 };
 
+const storybookMainConfig = '.storybook/main.js';
+
 module.exports = async () => {
   // Ignore webpack bundle report output
   const gitIgnorePatterns = [
     addSep(bundleReportFolder),
     addSep(coverageFolder),
+    storybookMainConfig,
   ];
   const lintIgnorePatterns = [
     addSep(bundleReportFolder),
     addSep(coverageFolder),
     '*.less.d.ts',
+    storybookMainConfig,
   ];
 
   // Ignore webpack target directories

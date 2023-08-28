@@ -1,6 +1,7 @@
 # managed by sku
 .eslintrc
 .prettierrc
+.storybook/main.js
 coverage/
 dist-storybook/
 dist/

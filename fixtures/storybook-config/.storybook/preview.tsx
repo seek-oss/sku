@@ -5,7 +5,7 @@ import apac from 'braid-design-system/themes/apac';
 
 import type { Preview } from 'sku/@storybook/react';
 
-const preview: Preview = {
+export default {
   decorators: [
     (Story) => (
       <div>
@@ -21,6 +21,4 @@ const preview: Preview = {
       </BraidProvider>
     ),
   ],
-};
-
-export default preview;
+} satisfies Preview;

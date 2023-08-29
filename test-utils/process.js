@@ -43,14 +43,15 @@ const run = async (file, args = [], options = {}) => {
 const runSkuScriptInDir = async (script, cwd, args = [], options = {}) => {
   const processOptions = {
     cwd,
-    env: {
-      ...process.env,
-      STORYBOOK_DISABLE_TELEMETRY: 1,
-    },
     // Increased from 1024 * 1024 because Storybook can produce very large outputs.
     // https://nodejs.org/docs/latest-v18.x/api/child_process.html#child_process_child_process_exec_command_options_callback
     maxBuffer: 5 * 1024 * 1024,
     ...options,
+    env: {
+      ...process.env,
+      ...options.env,
+      STORYBOOK_DISABLE_TELEMETRY: 1,
+    },
   };
 
   // When starting a dev server, return a hook to the running process

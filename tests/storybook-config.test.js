@@ -8,8 +8,9 @@ const {
 } = require('@sku-private/test-utils');
 const fetch = require('node-fetch');
 
+const skuConfigFileName = 'sku.storybook.config.ts';
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/storybook-config/sku.config.ts'),
+  require.resolve(`@sku-fixtures/storybook-config/${skuConfigFileName}`),
 );
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
@@ -25,7 +26,11 @@ describe('storybook-config', () => {
     let storybookFrame;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
+      server = await runSkuScriptInDir('storybook', appDir, [
+        '--ci',
+        '--config',
+        skuConfigFileName,
+      ]);
       await waitForUrls(storybookUrl, middlewareUrl);
       storybookFrame = await getStorybookFrame(storybookUrl);
     }, 200000);
@@ -91,7 +96,10 @@ describe('storybook-config', () => {
     let storybookFrame;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-storybook', appDir);
+      await runSkuScriptInDir('build-storybook', appDir, [
+        '--config',
+        skuConfigFileName,
+      ]);
       closeStorybookServer = await startAssetServer(
         assetServerPort,
         storybookDistDir,

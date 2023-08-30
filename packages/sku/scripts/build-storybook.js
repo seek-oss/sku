@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'production';
 
 const { rimraf } = require('rimraf');
-const { argv } = require('../config/args');
+const { argv, config } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');
 const buildStorybookPath = require.resolve('@storybook/cli/bin/index');
@@ -20,7 +20,7 @@ const { setUpStorybookConfigDirectory } = require('../lib/storybook');
 
   const storybookProcess = gracefulSpawn(buildStorybookPath, argv, {
     stdio: 'inherit',
-    env: process.env,
+    env: { ...process.env, SKU_CONFIG: config },
   });
 
   storybookProcess.on('exit', (exitCode) => {

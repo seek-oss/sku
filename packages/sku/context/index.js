@@ -19,8 +19,10 @@ const getSkuConfig = () => {
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
-  if (args.config) {
-    appSkuConfigPath = getPathFromCwd(args.config);
+  const customSkuConfig = args.config || process.env.SKU_CONFIG;
+
+  if (customSkuConfig) {
+    appSkuConfigPath = getPathFromCwd(customSkuConfig);
   } else if (fs.existsSync(tsPath)) {
     appSkuConfigPath = tsPath;
   } else if (fs.existsSync(jsPath)) {

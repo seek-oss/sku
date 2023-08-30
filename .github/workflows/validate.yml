@@ -21,7 +21,7 @@ jobs:
     name: Lint & Test
     needs: skip_check
     if: needs.skip_check.outputs.should_skip != 'true'
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     env:
       CI: true
     timeout-minutes: 30
@@ -74,4 +74,4 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test
-        run: pnpm run test --maxWorkers=3
+        run: pnpm run test --maxWorkers=2

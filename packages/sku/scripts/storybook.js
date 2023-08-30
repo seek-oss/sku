@@ -1,5 +1,5 @@
 const path = require('path');
-const { argv } = require('../config/args');
+const { argv, config } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookPort } = require('../context');
 const startStorybookPath = require.resolve('@storybook/cli/bin/index');
@@ -19,7 +19,7 @@ argv.unshift('dev');
 
   const storybookProcess = gracefulSpawn(startStorybookPath, argv, {
     stdio: 'inherit',
-    env: process.env,
+    env: { ...process.env, SKU_CONFIG: config },
   });
 
   storybookProcess.on('exit', (exitCode) => {

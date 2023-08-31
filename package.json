@@ -10,7 +10,7 @@
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "setup-test-hosts": "node test-utils/setupTestHosts",
     "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
-    "format-check": "prettier --list-different '**/*.{js,ts,tsx,md,less,css}'",
+    "format-check": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"

@@ -56,8 +56,9 @@ module.exports = async () => {
 
   // Generate ESLint configuration
   const eslintConfigFilename = '.eslintrc';
+  const eslintCacheFilename = '.eslintcache';
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
-  gitIgnorePatterns.push(eslintConfigFilename);
+  gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);
 
   // Generate Prettier configuration
   // NOTE: We are not generating a banner as prettier does not support the `JSON

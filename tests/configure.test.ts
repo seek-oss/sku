@@ -77,8 +77,9 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(8);
+      expect(ignoreContents.length).toEqual(9);
       expect(ignoreContents).toContain(`.eslintrc`);
+      expect(ignoreContents).toContain(`.eslintcache`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`.storybook/main.js`);
       expect(ignoreContents).toContain(`${defaultTargetDir}/`);
@@ -139,8 +140,9 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
-      expect(ignoreContents.length).toEqual(8);
+      expect(ignoreContents.length).toEqual(9);
       expect(ignoreContents).toContain(`.eslintrc`);
+      expect(ignoreContents).toContain(`.eslintcache`);
       expect(ignoreContents).toContain(`.prettierrc`);
       expect(ignoreContents).toContain(`tsconfig.json`);
       expect(ignoreContents).toContain(`.storybook/main.js`);

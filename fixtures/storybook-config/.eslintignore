@@ -1,5 +1,6 @@
 # managed by sku
 *.less.d.ts
+.storybook/main.js
 coverage/
 dist-storybook/
 dist/

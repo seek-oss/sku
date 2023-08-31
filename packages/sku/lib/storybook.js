@@ -1,70 +1,35 @@
 const path = require('path');
-
-const { paths } = require('../context');
 const fs = require('fs/promises');
 const debug = require('debug');
-const glob = require('fast-glob');
 
 const log = debug('sku:storybook');
 
-const previewFileName = 'preview.{js,ts,tsx}';
+const managedConfigBanner = require('./managedConfigBanner');
 
-const previewFileAbsolutePath = path.join(
-  path.dirname(paths.appSkuConfigPath),
-  '.storybook',
-  previewFileName,
-);
+// Since this config will be in the user's project, we can use ESM
+// Spread `storybookConfig` to prevent warning
+// https://github.com/storybookjs/storybook/issues/23675
+const mainConfigFileContents = `${managedConfigBanner}
+import storybookConfig from 'sku/config/storybook';
 
-/**
- * This function first cleans up any existing preview.{js,ts,tsx} files in the provided storybook config directory.
- * This includes any potentially dangling symlinks.
- * Then it looks for a `.storybook/preview.{js,ts,tsx}` file relative to the sku config.
- * If 1 file is found, a symlink pointing to it is created in the provided storybook config directory.
- * Does nothing if 0 or >1 files are found.
- *
- * @param {string} storybookConfigDirectory The path to the storybook config directory
- */
-const setUpStorybookPreviewFile = async (storybookConfigDirectory) => {
-  const symlinkFileAsbolutePath = path.join(
-    storybookConfigDirectory,
-    previewFileName,
-  );
-  const symlinkFiles = await glob(symlinkFileAsbolutePath, {
-    dot: true,
-    onlyFiles: false, // Required to find dangling symlinks
-  });
+export default { ...storybookConfig };
+`;
 
-  // Clean up any existing files in the storybook config folder so we have a clean slate
-  for (const symlinkFile of symlinkFiles) {
-    await fs.unlink(symlinkFile);
-    log(`Cleaning up exising file ${symlinkFile}.`);
-  }
+const storybookMainConfigPath = '.storybook/main.js';
+const storybookConfigDirectory = path.dirname(storybookMainConfigPath);
 
-  const previewFiles = await glob(previewFileAbsolutePath);
-
-  if (previewFiles.length > 1) {
-    console.error(
-      'Multiple storybook preview files found. Please only define a single preview file.',
-    );
-    console.error(previewFiles);
-
-    return;
-  }
-
-  const previewFile = previewFiles?.[0];
-
-  if (previewFile) {
-    const previewFileExtension = path.extname(previewFile);
-    const symlinkFile = path.join(
+const setUpStorybookConfigDirectory = async () => {
+  await fs.mkdir(storybookConfigDirectory, { recursive: true });
+  log(
+    `Created '${path.resolve(
       storybookConfigDirectory,
-      `preview${previewFileExtension}`,
-    );
+    )}' directory if it didn't exist`,
+  );
 
-    log(`Found preview file at ${previewFile}`);
-    log(`Creating symlink from ${symlinkFile} to ${previewFile}`);
-
-    await fs.symlink(previewFile, symlinkFile);
-  }
+  await fs.writeFile(storybookMainConfigPath, mainConfigFileContents);
+  log(
+    `Wrote storybook config file to '${path.resolve(storybookMainConfigPath)}'`,
+  );
 };
 
-module.exports = { setUpStorybookPreviewFile };
+module.exports = { setUpStorybookConfigDirectory, storybookMainConfigPath };

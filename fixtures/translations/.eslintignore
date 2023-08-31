@@ -1,6 +1,7 @@
 # managed by sku
 **/*.vocab/index.ts
 *.less.d.ts
+.storybook/main.js
 coverage/
 dist-ssr/
 dist-storybook/

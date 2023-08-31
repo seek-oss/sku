@@ -6,7 +6,11 @@ const { resolvePackage } = require('../webpack/utils/resolvePackage');
 
 const hot = process.env.SKU_HOT !== 'false';
 
-module.exports = ({ config }, { isDevServer }) => {
+/**
+ * @param {import("webpack").Configuration} config
+ * @param {{isDevServer: boolean}}
+ */
+module.exports = (config, { isDevServer }) => {
   const clientWebpackConfig = find(
     makeWebpackConfig({
       isIntegration: true,

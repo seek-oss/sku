@@ -4,6 +4,7 @@
 **/*.vocab/index.ts
 .eslintrc
 .prettierrc
+.storybook/main.js
 coverage/
 dist-ssr/
 dist-storybook/

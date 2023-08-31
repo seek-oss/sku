@@ -2,6 +2,7 @@
 .eslintrc
 .prettierrc
 .ssl
+.storybook/main.js
 coverage/
 dist-storybook/
 dist/

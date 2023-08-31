@@ -9,7 +9,6 @@ const { requireFromCwd } = require('./cwd');
 const findPackageScript = (scriptContents) => {
   let pkg;
   try {
-    // CWD should be the root of the package
     pkg = requireFromCwd('./package.json');
   } catch (err) {
     pkg = { scripts: {} };
@@ -30,7 +29,6 @@ const resolvePackageManagerCommand = (isPackageScript) => {
     return runCommand;
   }
 
-  // npm is the odd one out
   return isNpm ? 'npx' : packageManager;
 };
 

@@ -16,7 +16,6 @@ const detectPackageManagerCommand = (commandName) =>
   which(commandName, { nothrow: true }) ? commandName : null;
 
 const detectPackageManager = () => {
-  // TODO: BREAKING CHANGE - Prefer pnpm over yarn
   return (
     detectPackageManagerCommand('yarn') ||
     detectPackageManagerCommand('pnpm') ||

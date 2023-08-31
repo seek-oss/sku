@@ -14,7 +14,9 @@ try {
   const globs = ['node_modules/@seek/*/package.json'];
   const cwd = skuCwd();
 
-  if (isPnpm) {
+  // rootDir may be null, for example during sku init, but we don't really care about detecting
+  // compile packages at that point anyway
+  if (isPnpm && rootDir) {
     const pnpmVirtualStorePath = path.join(
       toPosixPath(rootDir),
       'node_modules/.pnpm',

@@ -17,6 +17,7 @@ const runESLint = async ({ fix = false, paths }) => {
     extensions,
     useEslintrc: false,
     fix,
+    cache: true,
   });
   const checkAll = typeof paths === 'undefined';
   /* Whitelist the file extensions that our ESLint setup currently supports */

@@ -20,7 +20,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
     chalk.cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
   );
 
-  const prettierArgs = ['--config', prettierConfigPath];
+  const prettierArgs = ['--config', prettierConfigPath, '--cache'];
 
   if (write) {
     prettierArgs.push('--write');

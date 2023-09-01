@@ -1,4 +1,5 @@
 # managed by sku
+.eslintcache
 .eslintrc
 .prettierrc
 .ssl

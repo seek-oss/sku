@@ -2,7 +2,6 @@ const path = require('path');
 const exists = require('../lib/exists');
 const express = require('express');
 const handler = require('serve-handler');
-const flatMap = require('lodash/flatMap');
 const { blue, bold, underline, red } = require('chalk');
 const didYouMean = require('didyoumean2').default;
 
@@ -94,7 +93,7 @@ const preferredSite = args.site;
 
     const site = getSiteForHost(hostname, preferredSite) || '';
 
-    const rewrites = flatMap(routes, (route) =>
+    const rewrites = routes.flatMap((route) =>
       getValidLanguagesForRoute(route).map((lang) => {
         const langRoute = getRouteWithLanguage(route.route, lang);
 

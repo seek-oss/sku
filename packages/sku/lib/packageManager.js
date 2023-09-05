@@ -33,11 +33,11 @@ const getPackageManager = () => {
   try {
     const { tool, rootDir } = findRootSync(cwd());
 
-    if (supportedPackageManagers.includes(tool.type)) {
-      return { packageManager: tool.type, rootDir };
+    if (!supportedPackageManagers.includes(tool.type)) {
+      throw new Error('Unsupported package manager found');
     }
 
-    throw new Error('Unsupported package manager found');
+    return { packageManager: tool.type, rootDir };
   } catch {
     const packageManager = detectPackageManager();
 

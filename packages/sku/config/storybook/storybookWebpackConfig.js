@@ -1,5 +1,4 @@
 const { paths } = require('../../context');
-const find = require('lodash/find');
 const { merge: webpackMerge } = require('webpack-merge');
 const makeWebpackConfig = require('../webpack/webpack.config');
 const { resolvePackage } = require('../webpack/utils/resolvePackage');
@@ -11,14 +10,11 @@ const hot = process.env.SKU_HOT !== 'false';
  * @param {{isDevServer: boolean}}
  */
 module.exports = (config, { isDevServer }) => {
-  const clientWebpackConfig = find(
-    makeWebpackConfig({
-      isIntegration: true,
-      isDevServer,
-      hot: isDevServer && hot,
-    }),
-    ({ name }) => name === 'client',
-  );
+  const clientWebpackConfig = makeWebpackConfig({
+    isIntegration: true,
+    isDevServer,
+    hot: isDevServer && hot,
+  }).find(({ name }) => name === 'client');
 
   // Ensure Storybook's webpack loaders ignore our code :(
   if (config && config.module && Array.isArray(config.module.rules)) {

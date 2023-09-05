@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const lodash = require('lodash');
 const nodeExternals = require('webpack-node-externals');
 const findUp = require('find-up');
 const LoadablePlugin = require('@loadable/webpack-plugin');
@@ -16,6 +15,7 @@ const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
+const { stringifyEnvarValues } = require('../../lib/env');
 const {
   paths,
   env,
@@ -48,27 +48,10 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig();
 
-  const envVars = lodash
-    .chain(env)
-    .mapValues((value, key) => {
-      if (typeof value !== 'object') {
-        return JSON.stringify(value);
-      }
-
-      const valueForEnv = value[args.env];
-
-      if (typeof valueForEnv === 'undefined') {
-        console.log(
-          `WARNING: Environment variable "${key}" is missing a value for the "${args.env}" environment`,
-        );
-        process.exit(1);
-      }
-
-      return JSON.stringify(valueForEnv);
-    })
-    .set('SKU_ENV', JSON.stringify(args.env))
-    .mapKeys((value, key) => `process.env.${key}`)
-    .value();
+  const envars = stringifyEnvarValues({
+    ...env,
+    SKU_ENV: args.env,
+  });
 
   const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
@@ -173,7 +156,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        new webpack.DefinePlugin(envVars),
+        new webpack.DefinePlugin(envars),
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,
@@ -268,7 +251,7 @@ const makeWebpackConfig = ({
         rules: [{ test: /\.mjs$/, type: 'javascript/auto' }],
       },
       plugins: [
-        new webpack.DefinePlugin(envVars),
+        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),

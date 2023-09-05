@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const uniq = require('lodash/uniq');
 const defaultSupportedBrowsers = require('browserslist-config-seek');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const {
@@ -32,10 +31,9 @@ class SkuWebpackPlugin {
       rootResolution: false,
       ...options,
     };
-    this.compilePackages = uniq([
-      ...defaultCompilePackages,
-      ...this.options.compilePackages,
-    ]);
+    this.compilePackages = [
+      ...new Set([...defaultCompilePackages, ...this.options.compilePackages]),
+    ];
     this.include = [
       ...this.options.include,
       ...this.compilePackages.map(resolvePackage),

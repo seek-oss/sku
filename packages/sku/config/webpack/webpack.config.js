@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
-const lodash = require('lodash');
 const path = require('path');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -16,6 +15,7 @@ const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
+const { stringifyEnvarValues } = require('../../lib/env');
 
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
@@ -58,28 +58,11 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig();
 
-  const envVars = lodash
-    .chain(env)
-    .mapValues((value, key) => {
-      if (typeof value !== 'object') {
-        return JSON.stringify(value);
-      }
-
-      const valueForEnv = value[args.env];
-
-      if (typeof valueForEnv === 'undefined') {
-        console.log(
-          `WARNING: Environment variable "${key}" is missing a value for the "${args.env}" environment`,
-        );
-        process.exit(1);
-      }
-
-      return JSON.stringify(valueForEnv);
-    })
-    .set('SKU_ENV', JSON.stringify(args.env))
-    .set('PORT', JSON.stringify(port))
-    .mapKeys((value, key) => `process.env.${key}`)
-    .value();
+  const envars = stringifyEnvarValues({
+    ...env,
+    SKU_ENV: args.env,
+    PORT: port,
+  });
 
   const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
@@ -220,7 +203,7 @@ const makeWebpackConfig = ({
         ...(isDevServer || isIntegration
           ? []
           : [bundleAnalyzerPlugin({ name: 'client' })]),
-        new webpack.DefinePlugin(envVars),
+        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_CLIENT_PATH__: JSON.stringify(
             path.relative(cwd(), paths.clientEntry),
@@ -309,7 +292,7 @@ const makeWebpackConfig = ({
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin.rendererPlugin] : []),
-        new webpack.DefinePlugin(envVars),
+        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_LIBRARY_NAME__: JSON.stringify(libraryName),
           __SKU_LIBRARY_FILE__: JSON.stringify(libraryFile),

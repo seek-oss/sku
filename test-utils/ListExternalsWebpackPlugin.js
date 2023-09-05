@@ -1,5 +1,4 @@
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
-const uniq = require('lodash/uniq');
 
 const externalRegex = /^external node-commonjs "/;
 
@@ -9,13 +8,15 @@ class ListExternalsWebpackPlugin {
       filename,
       fields: ['modules'],
       transform({ modules }) {
-        const externals = uniq(
-          modules
-            .map(({ identifier }) => identifier)
-            .filter((id) => externalRegex.test(id))
-            .map((id) => id.replace(externalRegex, '').replace(/"$/, ''))
-            .sort(),
-        );
+        const externals = [
+          ...new Set(
+            modules
+              .map(({ identifier }) => identifier)
+              .filter((id) => externalRegex.test(id))
+              .map((id) => id.replace(externalRegex, '').replace(/"$/, ''))
+              .sort(),
+          ),
+        ];
 
         return JSON.stringify(externals, null, 2);
       },

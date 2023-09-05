@@ -67,6 +67,9 @@ if (isCompilePackage && skuConfig.rootResolution) {
   process.exit(1);
 }
 
+/**
+ * @type {Record<string, unknown>}
+ */
 const env = {
   ...skuConfig.env,
   SKU_TENANT: args.tenant,

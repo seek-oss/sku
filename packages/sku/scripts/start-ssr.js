@@ -3,7 +3,6 @@ process.env.NODE_ENV = 'development';
 const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-const { once } = require('lodash');
 const onDeath = require('death');
 const { blue, underline } = require('chalk');
 const debug = require('debug')('sku:start');
@@ -28,6 +27,20 @@ const hot = process.env.SKU_HOT !== 'false';
 
 const pluginName = 'sku-start-ssr';
 const localhost = '0.0.0.0';
+
+const once = (fn) => {
+  let called = false;
+  let result;
+
+  return (...fnArgs) => {
+    if (!called) {
+      result = fn(...fnArgs);
+      called = true;
+    }
+
+    return result;
+  };
+};
 
 (async () => {
   await watchVocabCompile();

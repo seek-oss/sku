@@ -19,7 +19,6 @@ const detectPackageManager = () => {
   return (
     detectPackageManagerCommand('yarn') ||
     detectPackageManagerCommand('pnpm') ||
-    detectPackageManagerCommand('npm') ||
     'npm'
   );
 };

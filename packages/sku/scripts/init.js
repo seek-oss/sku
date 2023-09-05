@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-const { isYarn, runCommand } = require('../lib/packageManager');
+const { isYarn, packageManager } = require('../lib/packageManager');
 
+const { getCommand } = require('@antfu/ni');
 const chalk = require('chalk');
 const fs = require('fs/promises');
 const { posix: path } = require('path');
@@ -222,7 +223,7 @@ const getTemplateFileDestinationFromRoot =
 
   const nextSteps = [
     `${chalk.cyan('cd')} ${projectName}`,
-    `${chalk.cyan(`${runCommand} start`)}`,
+    `${chalk.cyan(`${getCommand(packageManager, 'run')} start`)}`,
   ]
     .filter(Boolean)
     .join('\n');

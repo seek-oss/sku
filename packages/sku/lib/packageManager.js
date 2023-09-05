@@ -53,15 +53,4 @@ const isYarn = packageManager === 'yarn';
 const isPnpm = packageManager === 'pnpm';
 const isNpm = packageManager === 'npm';
 
-/**
- * @type {Record<SupportedPackageManager, string>}
- */
-const runCommandByPackageManager = {
-  yarn: 'yarn',
-  npm: 'npm run',
-  pnpm: 'pnpm run',
-};
-
-const runCommand = runCommandByPackageManager[packageManager];
-
-module.exports = { rootDir, packageManager, isYarn, isPnpm, isNpm, runCommand };
+module.exports = { rootDir, packageManager, isYarn, isPnpm, isNpm };

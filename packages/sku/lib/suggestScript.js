@@ -1,4 +1,5 @@
-const { runCommand, isNpm, packageManager } = require('./packageManager');
+const { getCommand } = require('@antfu/ni');
+const { packageManager } = require('./packageManager');
 
 const chalk = require('chalk');
 const { requireFromCwd } = require('./cwd');
@@ -26,10 +27,10 @@ const findPackageScript = (scriptContents) => {
  */
 const resolvePackageManagerCommand = (isPackageScript) => {
   if (isPackageScript) {
-    return runCommand;
+    return getCommand(packageManager, 'run');
   }
 
-  return isNpm ? 'npx' : packageManager;
+  return getCommand(packageManager, 'execute');
 };
 
 /**

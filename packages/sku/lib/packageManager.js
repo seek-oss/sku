@@ -129,7 +129,7 @@ const getAddCommand = ({ type, logLevel, deps, exact }) => {
 const getInstallCommand = () => getCommand(packageManager, 'install', []);
 
 const getWhyCommand = () => {
-  const whyCommand = isPnpm ? '-r why' : 'why';
+  const whyCommand = isPnpm ? 'why -r' : 'why';
 
   return `${packageManager} ${whyCommand}`;
 };

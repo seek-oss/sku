@@ -1,6 +1,4 @@
-const { packageManager, isYarn } = require('../lib/packageManager');
-const { getCommand } = require('@antfu/ni');
-
+const { getAddCommand } = require('../lib/packageManager');
 const banner = require('../lib/banner');
 
 function noop() {}
@@ -26,11 +24,10 @@ try {
     provider = realProvider;
   }
 } catch (e) {
-  const addDevDepFlag = isYarn ? '--dev' : '--save-dev';
-  const addCommand = getCommand(packageManager, 'add', [
-    addDevDepFlag,
-    '@seek/sku-telemetry',
-  ]);
+  const addCommand = getAddCommand({
+    deps: ['@seek/sku-telemetry'],
+    type: 'dev',
+  });
 
   banner('warning', '@seek/sku-telemetry not installed', [
     'To help us improve sku, please install our private telemetry package that gives us insights on usage, errors and performance.',

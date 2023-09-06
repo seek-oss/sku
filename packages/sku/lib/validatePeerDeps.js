@@ -1,4 +1,4 @@
-const { packageManager, isPnpm } = require('./packageManager');
+const { getWhyCommand } = require('./packageManager');
 
 const { readFile } = require('fs/promises');
 const glob = require('fast-glob');
@@ -56,10 +56,8 @@ module.exports = async () => {
             .join('\n'),
         );
 
-        const whyCommand = isPnpm ? '-r why' : 'why';
-
         messages.push(
-          chalk`Try running "{blue.bold ${packageManager} ${whyCommand}} {bold ${packageName}}" to diagnose the issue`,
+          chalk`Try running "{blue.bold ${getWhyCommand()}} {bold ${packageName}}" to diagnose the issue`,
         );
 
         track.count('duplicate_compile_package', {

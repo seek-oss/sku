@@ -37,6 +37,10 @@ const optionDefinitions = [
     type: String,
   },
   {
+    name: 'packageManager',
+    type: String,
+  },
+  {
     name: 'port',
     type: Number,
   },

@@ -69,7 +69,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
             'Error: The file(s) listed above failed the prettier check',
           ),
         );
-        await suggestScript('format');
+        suggestScript('format');
       } else {
         console.error(
           chalk.red('Error: Prettier check exited with exit code', exitCode),

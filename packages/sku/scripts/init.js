@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const { isYarn, packageManager } = require('../lib/packageManager');
+const {
+  packageManager,
+  getRunCommand,
+  getPackageManagerInstallPage,
+  getInstallCommand,
+} = require('../lib/packageManager');
 
-const { getCommand } = require('@antfu/ni');
 const chalk = require('chalk');
 const fs = require('fs/promises');
 const { posix: path } = require('path');
@@ -70,8 +74,6 @@ const getTemplateFileDestinationFromRoot =
     usage();
     process.exit(1);
   }
-
-  const verbose = args.argv.indexOf('--verbose') >= 0;
 
   const root = path.resolve(projectName);
   setCwd(root);
@@ -149,8 +151,6 @@ const getTemplateFileDestinationFromRoot =
   await fs.writeFile(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
-  const useYarn = isYarn;
-
   const templateDirectory = path.join(toPosixPath(__dirname), '../template');
   const templateFiles = await glob(`${templateDirectory}/**/*`, {
     onlyFiles: true,
@@ -161,33 +161,27 @@ const getTemplateFileDestinationFromRoot =
     templateDirectory,
   );
 
+  const templateData = {
+    appName,
+    gettingStartedDocs: dedent`
+      First of all, make sure you've installed [${packageManager}](${getPackageManagerInstallPage()}).
+
+      Then, install dependencies:
+
+      \`\`\`sh
+      $ ${getInstallCommand()}
+      \`\`\`
+      `,
+    startScript: getRunCommand('start'),
+    testScript: getRunCommand('test'),
+    lintScript: getRunCommand('lint'),
+    formatScript: getRunCommand('format'),
+    buildScript: getRunCommand('build'),
+  };
+
   await Promise.all(
     templateFiles.map(async (file) => {
-      const fileContents = await ejs.renderFile(file, {
-        appName,
-        gettingStartedDocs: useYarn
-          ? dedent`
-            First of all, make sure you've installed [Yarn](https://yarnpkg.com).
-
-            Then, install dependencies:
-
-            \`\`\`bash
-            $ yarn
-            \`\`\`
-            `
-          : dedent`
-            Install dependencies:
-
-            \`\`\`bash
-            $ npm install
-            \`\`\`
-            `,
-        startScript: useYarn ? 'yarn start' : 'npm start',
-        testScript: useYarn ? 'yarn test' : 'npm test',
-        lintScript: useYarn ? 'yarn lint' : 'npm run lint',
-        formatScript: useYarn ? 'yarn format' : 'npm run format',
-        buildScript: useYarn ? 'yarn build' : 'npm run build',
-      });
+      const fileContents = await ejs.renderFile(file, templateData);
       const destination = getTemplateFileDestination(file);
 
       // Ensure folders exist before writing files to them
@@ -205,7 +199,11 @@ const getTemplateFileDestinationFromRoot =
     '@types/react-dom',
   ];
 
-  console.log('Installing packages. This might take a couple of minutes.');
+  console.log(
+    `Installing packages with ${chalk.bold(
+      packageManager,
+    )}. This might take a couple of minutes.`,
+  );
   console.log(
     `Installing ${deps
       .concat(devDeps)
@@ -214,8 +212,15 @@ const getTemplateFileDestinationFromRoot =
   );
   console.log();
 
-  await install({ deps, verbose, useYarn });
-  await install({ deps: devDeps, type: 'dev', exact: false, verbose, useYarn });
+  const logLevel = args.argv.indexOf('--verbose') >= 0 ? 'verbose' : 'regular';
+
+  await install({ deps, logLevel });
+  await install({
+    deps: devDeps,
+    type: 'dev',
+    logLevel,
+    exact: false,
+  });
 
   await configure();
   await esLintFix();
@@ -223,7 +228,7 @@ const getTemplateFileDestinationFromRoot =
 
   const nextSteps = [
     `${chalk.cyan('cd')} ${projectName}`,
-    `${chalk.cyan(`${getCommand(packageManager, 'run')} start`)}`,
+    `${chalk.cyan(getRunCommand('start'))}`,
   ]
     .filter(Boolean)
     .join('\n');

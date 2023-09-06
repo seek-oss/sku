@@ -7,7 +7,7 @@ const { requireFromCwd } = require('./cwd');
  * @param {string} scriptContents
  * @returns {string | undefined}
  */
-const findPackageScript = (scriptContents) => {
+const findPackageScriptName = (scriptContents) => {
   let pkg;
 
   try {
@@ -33,11 +33,11 @@ const findPackageScript = (scriptContents) => {
  * @param {Options | undefined} options
  */
 const getSuggestedScript = (scriptName, options = { sudo: false }) => {
-  const packageScript = findPackageScript(`sku ${scriptName}`);
+  const packageScriptName = findPackageScriptName(`sku ${scriptName}`);
 
-  const command = packageScript
-    ? getRunCommand(packageScript)
-    : getExecuteCommand(['sku', packageScript]);
+  const command = packageScriptName
+    ? getRunCommand(packageScriptName)
+    : getExecuteCommand(['sku', scriptName]);
 
   const sudoPrefix = options.sudo ? 'sudo ' : '';
 

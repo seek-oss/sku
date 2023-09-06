@@ -45,7 +45,6 @@ const getPackageManager = () => {
   }
 };
 
-// NOTE: I can't for the life of me get `rootDir` to show as nullable using JSDoc comments
 const { rootDir, packageManager } = getPackageManager();
 
 const isYarn = packageManager === 'yarn';

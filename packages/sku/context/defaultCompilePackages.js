@@ -5,7 +5,7 @@ const glob = require('fast-glob');
 const { cwd: skuCwd } = require('../lib/cwd');
 const toPosixPath = require('../lib/toPosixPath');
 
-const { findRootSync } = require('@manypkg/find-root');
+const { rootDir, isPnpm } = require('../lib/packageManager');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
@@ -14,9 +14,9 @@ try {
   const globs = ['node_modules/@seek/*/package.json'];
   const cwd = skuCwd();
 
-  const { rootDir, tool } = findRootSync(cwd);
-
-  if (tool === 'pnpm') {
+  // `rootDir` is nullable, but while we have `strict: false` in our TSConfig it won't appear nullable
+  // It will be null during sku init, but we don't really care about detecting compile packages at that point anyway
+  if (isPnpm && rootDir) {
     const pnpmVirtualStorePath = path.join(
       toPosixPath(rootDir),
       'node_modules/.pnpm',

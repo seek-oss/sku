@@ -1,11 +1,14 @@
-const isYarn = require('../../lib/isYarn');
+const { isYarn } = require('../../lib/packageManager');
 const { lintExtensions } = require('../../lib/lint');
+const { getCommand } = require('@antfu/ni');
 
 const steps = {};
 
 // Yarn lock integrity check
 if (isYarn) {
-  steps['+(package.json|yarn.lock)'] = [() => 'yarn install --check-files'];
+  steps['+(package.json|yarn.lock)'] = [
+    () => getCommand('yarn', 'install', ['--check-files']),
+  ];
 }
 
 // Format & lint

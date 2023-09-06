@@ -3,5 +3,8 @@
   "private": true,
   "devDependencies": {
     "sku": "workspace:*"
+  },
+  "scripts": {
+    "format": "sku format"
   }
 }

@@ -1,14 +1,15 @@
-const { getCommand } = require('@antfu/ni');
-const { packageManager } = require('./packageManager');
+const { getRunCommand, getExecuteCommand } = require('./packageManager');
 
 const chalk = require('chalk');
 const { requireFromCwd } = require('./cwd');
 
 /**
  * @param {string} scriptContents
+ * @returns {string | undefined}
  */
-const findPackageScript = (scriptContents) => {
+const findPackageScriptName = (scriptContents) => {
   let pkg;
+
   try {
     pkg = requireFromCwd('./package.json');
   } catch (err) {
@@ -23,17 +24,6 @@ const findPackageScript = (scriptContents) => {
 };
 
 /**
- * @param {boolean} isPackageScript
- */
-const resolvePackageManagerCommand = (isPackageScript) => {
-  if (isPackageScript) {
-    return getCommand(packageManager, 'run');
-  }
-
-  return getCommand(packageManager, 'execute');
-};
-
-/**
  * @typedef {object} Options
  * @property {boolean} sudo
  */
@@ -42,28 +32,24 @@ const resolvePackageManagerCommand = (isPackageScript) => {
  * @param {string} scriptName
  * @param {Options | undefined} options
  */
-const getSuggestedScript = async (scriptName, options = { sudo: false }) => {
-  const packageScript = findPackageScript(`sku ${scriptName}`);
+const getSuggestedScript = (scriptName, options = { sudo: false }) => {
+  const packageScriptName = findPackageScriptName(`sku ${scriptName}`);
 
-  const packageManagerCommand = resolvePackageManagerCommand(
-    Boolean(packageScript),
-  );
-
-  const packageOrSkuScript = packageScript
-    ? packageScript
-    : `sku ${scriptName}`;
+  const command = packageScriptName
+    ? getRunCommand(packageScriptName)
+    : getExecuteCommand(['sku', scriptName]);
 
   const sudoPrefix = options.sudo ? 'sudo ' : '';
 
-  return `${sudoPrefix}${packageManagerCommand} ${packageOrSkuScript}`;
+  return `${sudoPrefix}${command}`;
 };
 
 /**
  * @param {string} scriptName
  * @param {Options | undefined} options
  */
-const suggestScript = async (scriptName, options) => {
-  const suggestedScript = await getSuggestedScript(scriptName, options);
+const suggestScript = (scriptName, options) => {
+  const suggestedScript = getSuggestedScript(scriptName, options);
 
   console.log(
     chalk.blue(`To fix this issue, run '${chalk.bold(suggestedScript)}'`),

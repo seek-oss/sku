@@ -1,5 +1,63 @@
 # sku
 
+## 12.4.0
+
+### Minor Changes
+
+- Enable caching for ESLint and Prettier ([#881](https://github.com/seek-oss/sku/pull/881))
+
+- Add `--packageManager` flag ([#884](https://github.com/seek-oss/sku/pull/884))
+
+  Sku detects package managers in the following order: `yarn` -> `pnpm` -> `npm`.
+  The `--packageManager` flag can be used to override the package manager used for the `sku init` script.
+  This affects what package manager is used to install dependencies, as well as the scripts present in the initialized app template.
+
+  ```sh
+  $ pnpm dlx sku init --packageManager pnpm my-app
+  ```
+
+- Adds support for Storybook configuration via the `.storybook` directory ([#878](https://github.com/seek-oss/sku/pull/878))
+
+  sku now supports the standard `.storybook` configuration directory, as documented in [Storybook's configuration documentation].
+  Please read [sku's storybook documentation][sku storybook docs] for more info.
+
+  [Storybook's configuration documentation]: https://storybook.js.org/docs/react/configure/overview
+  [sku storybook docs]: https://seek-oss.github.io/sku/#/./docs/storybook
+
+- Drop support for running `devServerMiddleware` alongside `sku storybook` ([#878](https://github.com/seek-oss/sku/pull/878))
+
+  Now that sku supports Storybook configuration via the `.storybook` directory, this feature is unnecessary.
+  Storybook middleware can be configured by creating a `middleware.js` file in the `.storybook` directory.
+  See [the sku docs][sku storybook middleware] for more info.
+
+  **NOTE**: While this is technically a breaking change, it does not affect app builds, therefore it has been downgraded to a `minor` release.
+
+  [sku storybook middleware]: https://seek-oss.github.io/sku/#/./docs/storybook?id=devserver-middleware
+
+- Update TypeScript to 5.2 ([#886](https://github.com/seek-oss/sku/pull/886))
+
+  This release includes breaking changes. See the [TypeScript 5.2 announcement][ts52] for more information.
+
+  [ts52]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-2/
+
+### Patch Changes
+
+- Fixes a bug where sku would fail to suggest existing `package.json` scripts before suggesting its own commands ([#876](https://github.com/seek-oss/sku/pull/876))
+
+- Remove `lodash` dependency ([#883](https://github.com/seek-oss/sku/pull/883))
+
+- Propagate `--config` argument to Storybook process ([#879](https://github.com/seek-oss/sku/pull/879))
+
+  Fixes a bug where `sku storybook` and `sku build-storybook` would not honour a custom sku config specified via the `--config` flag
+
+- Fixes a bug where `pnpm` was not detected correctly when detecting [compile packages](https://seek-oss.github.io/sku/#/./docs/extra-features?id=compile-packages) ([#876](https://github.com/seek-oss/sku/pull/876))
+
+- Bump `@pmmmwh/react-refresh-webpack-plugin` and `webpack-dev-server` dependencies. Remove unused dependencies. ([#885](https://github.com/seek-oss/sku/pull/885))
+
+- Adds support for `pnpm` when suggesting commands ([#876](https://github.com/seek-oss/sku/pull/876))
+
+- Disable Storybook telemetry ([#878](https://github.com/seek-oss/sku/pull/878))
+
 ## 12.3.3
 
 ### Patch Changes

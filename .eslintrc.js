@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   extends: 'seek',
-  plugins: ['jsdoc'],
+  plugins: ['jsdoc', 'unicorn'],
   rules: {
     'jsdoc/check-alignment': 2,
     'jsdoc/check-types': 2,
@@ -25,6 +25,7 @@ module.exports = {
     ],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    'unicorn/prefer-node-protocol': 'error',
   },
   settings: {
     // react isn't a dependency of the monorepo, so we need to tell ESLint which version to use

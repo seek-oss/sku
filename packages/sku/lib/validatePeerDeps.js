@@ -1,6 +1,6 @@
 const { getWhyCommand } = require('./packageManager');
 
-const { readFile } = require('fs/promises');
+const { readFile } = require('node:fs/promises');
 const glob = require('fast-glob');
 const semver = require('semver');
 const chalk = require('chalk');

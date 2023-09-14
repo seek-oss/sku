@@ -1,5 +1,5 @@
 const exists = require('./exists');
-const path = require('path');
+const path = require('node:path');
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');

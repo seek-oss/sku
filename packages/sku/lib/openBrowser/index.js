@@ -1,7 +1,7 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/openBrowser.js
 
-const execSync = require('child_process').execSync;
+const execSync = require('node:child_process').execSync;
 const defaultBrowser = require('x-default-browser');
 const open = require('open');
 

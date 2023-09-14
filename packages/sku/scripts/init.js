@@ -8,8 +8,8 @@ const {
 } = require('../lib/packageManager');
 
 const chalk = require('chalk');
-const fs = require('fs/promises');
-const { posix: path } = require('path');
+const fs = require('node:fs/promises');
+const { posix: path } = require('node:path');
 const emptyDir = require('empty-dir');
 const validatePackageName = require('validate-npm-package-name');
 const dedent = require('dedent');

@@ -1,5 +1,5 @@
 // @ts-check
-const path = require('path');
+const path = require('node:path');
 
 /**
  * Replaces all win32 path separators (\) with posix path separators (/)

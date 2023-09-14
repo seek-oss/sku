@@ -1,4 +1,4 @@
-const os = require('os');
+const os = require('node:os');
 
 const { getPathFromCwd } = require('../lib/cwd');
 const isCI = require('../lib/isCI');

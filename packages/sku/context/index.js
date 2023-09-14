@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const chalk = require('chalk');
 const { register } = require('esbuild-register/dist/node');
 const { getPathFromCwd } = require('../lib/cwd');

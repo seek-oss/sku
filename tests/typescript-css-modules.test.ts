@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import path from 'path';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
 import {
   dirContentsToObject,

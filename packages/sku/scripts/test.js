@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const debug = require('debug');
 const jest = require('jest');
 

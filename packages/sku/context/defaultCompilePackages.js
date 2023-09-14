@@ -14,8 +14,6 @@ try {
   const globs = ['node_modules/@seek/*/package.json'];
   const cwd = skuCwd();
 
-  // `rootDir` is nullable, but while we have `strict: false` in our TSConfig it won't appear nullable
-  // It will be null during sku init, but we don't really care about detecting compile packages at that point anyway
   if (isPnpm && rootDir) {
     const pnpmVirtualStorePath = path.join(
       toPosixPath(rootDir),

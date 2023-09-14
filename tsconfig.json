@@ -5,6 +5,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "noEmit": true,
-    "strict": false
-  }
+    "incremental": true
+  },
+  "include": ["tests/**/*", "test-utils/**/*"]
 }

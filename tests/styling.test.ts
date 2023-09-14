@@ -9,6 +9,7 @@ import {
   getStorybookFrame,
   getTextContentFromStorybookFrame,
 } from '@sku-private/test-utils';
+import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
@@ -28,7 +29,7 @@ const cssTypes = ['.less.d.ts'];
 
 describe('styling', () => {
   describe('build', () => {
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
@@ -56,7 +57,7 @@ describe('styling', () => {
   });
 
   describe('start', () => {
-    let server;
+    let server: ChildProcess;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start', appDir);
@@ -74,7 +75,7 @@ describe('styling', () => {
   });
 
   describe('test', () => {
-    let exitCode;
+    let exitCode: number | null;
 
     beforeAll(async () => {
       const { child } = await runSkuScriptInDir('test', appDir);
@@ -87,7 +88,7 @@ describe('styling', () => {
   });
 
   describe('storybook', () => {
-    let server;
+    let server: ChildProcess;
     let storybookFrame: Frame;
 
     beforeAll(async () => {

@@ -6,7 +6,7 @@ import { runSkuScriptInDir } from '@sku-private/test-utils';
 
 import { bundleReportFolder } from '../packages/sku/config/webpack/plugins/bundleAnalyzer';
 import prettierConfig from '../packages/sku/config/prettier/prettierConfig';
-import skuConfig from '@sku-fixtures/configure/sku.config.ts';
+import skuConfig from '@sku-fixtures/configure/sku.config';
 
 const defaultTargetDir = 'dist';
 const defaultStorybookTargetDir = 'dist-storybook';
@@ -17,27 +17,27 @@ const fixtureFolder = path.dirname(
 const appFolder = path.resolve(fixtureFolder, 'App');
 const appFolderTS = path.resolve(fixtureFolder, 'TSApp');
 
-const readFileContents = async (appDir, fileName) => {
+const readFileContents = async (appDir: string, fileName: string) => {
   const contents = await readFile(path.join(appDir, fileName), 'utf-8');
   return contents;
 };
 
-const readJsonC = async (appDir, fileName) => {
+const readJsonC = async (appDir: string, fileName: string) => {
   const contents = await readFileContents(appDir, fileName);
   return jsonc.parse(contents);
 };
 
-const readIgnore = async (appDir, fileName) => {
+const readIgnore = async (appDir: string, fileName: string) => {
   const contents = await readFileContents(appDir, fileName);
   return contents
     .split('\n')
     .filter((ignore) => ignore && !ignore.startsWith('#')); // remove blanks and comments
 };
 
-const copyToApp = async (filename, folder) =>
+const copyToApp = async (filename: string, folder: string) =>
   copyFile(path.join(fixtureFolder, filename), path.join(folder, filename));
 
-const removeAppDir = async (folder) =>
+const removeAppDir = async (folder: string) =>
   rimraf(folder, {
     glob: {
       dot: true,

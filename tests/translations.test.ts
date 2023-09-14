@@ -6,7 +6,8 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfig from '@sku-fixtures/translations/sku.config.ts';
+import skuConfig from '@sku-fixtures/translations/sku.config';
+import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku.config.ts'),
@@ -16,7 +17,7 @@ assert(skuConfig.port, 'sku config has port');
 const baseUrl = `http://localhost:${skuConfig.port}`;
 
 describe('translations', () => {
-  let process;
+  let process: ChildProcess;
 
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);

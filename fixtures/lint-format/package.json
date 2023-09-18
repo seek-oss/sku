@@ -6,5 +6,6 @@
   },
   "scripts": {
     "format": "sku format"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

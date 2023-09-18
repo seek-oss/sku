@@ -15,5 +15,6 @@
     "@types/react-dom": "^18.2.3",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

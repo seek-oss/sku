@@ -12,5 +12,6 @@
     "assert": "^2.0.0",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

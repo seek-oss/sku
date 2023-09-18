@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "@sku-fixtures/package-with-styles": "./fake/node_modules/package-with-styles",
-    "@vanilla-extract/css": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -11,7 +10,9 @@
     "@sku-private/test-utils": "workspace:*",
     "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
+    "@vanilla-extract/css": "^1.0.0",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

@@ -11,5 +11,6 @@
     "mini-css-extract-plugin": "^2.6.1",
     "html-webpack-plugin": "^5.3.2",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

@@ -12,5 +12,6 @@
     "sku": "workspace:*",
     "wait-on": "^7.0.0",
     "webpack-stats-plugin": "^1.0.3"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

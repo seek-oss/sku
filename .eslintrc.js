@@ -23,6 +23,7 @@ module.exports = {
         ],
       },
     ],
+    'one-var': ['error', 'never'],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'unicorn/prefer-node-protocol': 'error',

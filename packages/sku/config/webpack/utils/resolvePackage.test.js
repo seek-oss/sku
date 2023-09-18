@@ -3,7 +3,9 @@ const { cwd } = require('../../../lib/cwd');
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {
-    let resolvePackage, fs, resolve;
+    let resolvePackage;
+    let fs;
+    let resolve;
 
     beforeEach(() => {
       fs = {

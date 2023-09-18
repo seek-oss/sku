@@ -44,7 +44,8 @@ describe('assertion-removal', () => {
   });
 
   describe('build-ssr', () => {
-    let server: ChildProcess, closeAssetServer: () => void;
+    let server: ChildProcess;
+    let closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);

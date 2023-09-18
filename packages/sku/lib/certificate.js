@@ -1,11 +1,17 @@
 const selfsigned = require('selfsigned');
 const { blue } = require('chalk');
 const exists = require('./exists');
-const { mkdir, unlink, writeFile, stat, readFile } = require('fs/promises');
+const {
+  mkdir,
+  unlink,
+  writeFile,
+  stat,
+  readFile,
+} = require('node:fs/promises');
 
 const { getPathFromCwd } = require('../lib/cwd');
 const { hosts } = require('../context');
-const { performance } = require('perf_hooks');
+const { performance } = require('node:perf_hooks');
 const track = require('../telemetry');
 
 const certificateTtl = 1000 * 60 * 60 * 24;

@@ -1,4 +1,4 @@
-const { promisify } = require('util');
+const { promisify } = require('node:util');
 const spawn = require('cross-spawn');
 const treeKillAsync = promisify(require('tree-kill'));
 const onDeath = require('death');

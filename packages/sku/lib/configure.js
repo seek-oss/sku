@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const { writeFile, rm } = require('fs/promises');
-const path = require('path');
+const { writeFile, rm } = require('node:fs/promises');
+const path = require('node:path');
 
 const ensureGitignore = require('ensure-gitignore');
 const { cwd, getPathFromCwd } = require('./cwd');

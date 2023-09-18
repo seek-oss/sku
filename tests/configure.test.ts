@@ -1,6 +1,6 @@
-import { readFile, copyFile, mkdir as makeDir } from 'fs/promises';
+import { readFile, copyFile, mkdir as makeDir } from 'node:fs/promises';
 import { rimraf } from 'rimraf';
-import path from 'path';
+import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 

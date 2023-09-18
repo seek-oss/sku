@@ -1,4 +1,4 @@
-const { promisify } = require('util');
+const { promisify } = require('node:util');
 const hostile = require('hostile');
 
 const setSystemHost = promisify(hostile.set);

@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const getClassNames = require('./getClassNames');
 
 module.exports = {

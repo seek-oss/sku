@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'production';
 const prettyMilliseconds = require('pretty-ms');
 const { green, red } = require('chalk');
 const webpack = require('webpack');
-const { performance } = require('perf_hooks');
+const { performance } = require('node:perf_hooks');
 
 const {
   copyPublicFiles,

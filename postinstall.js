@@ -1,4 +1,4 @@
-const { writeFileSync } = require('fs');
+const { writeFileSync } = require('node:fs');
 const {
   volta: { node: nodeVersion },
 } = require('./package.json');

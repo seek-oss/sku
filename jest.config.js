@@ -1,8 +1,8 @@
-const { defaults: tsjPreset } = require('ts-jest/presets');
-
 /** @type {import('jest').Config} */
 module.exports = {
-  ...tsjPreset,
+  transform: {
+    '^.+\\.(t|j)sx?$': '@swc/jest',
+  },
   preset: 'jest-puppeteer',
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [

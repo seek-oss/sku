@@ -6,7 +6,8 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfig from '@sku-fixtures/custom-src-paths/sku.config.ts';
+import skuConfig from '@sku-fixtures/custom-src-paths/sku.config';
+import type { ChildProcess } from 'node:child_process';
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
@@ -16,7 +17,7 @@ const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
   describe('start', () => {
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       process = await runSkuScriptInDir('start', appDir);
@@ -34,7 +35,7 @@ describe('custom-src-paths', () => {
   });
 
   describe('build', () => {
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);

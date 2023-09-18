@@ -5,12 +5,14 @@
   "scripts": {
     "postinstall": "node ./postinstall.js",
     "prepare": "husky install",
-    "lint": "pnpm format-check && eslint --cache .",
+    "lint": "concurrently -c auto --group 'pnpm:lint:*'",
+    "lint:eslint": "eslint --cache .",
+    "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
+    "lint:tsc": "tsc",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "setup-test-hosts": "node test-utils/setupTestHosts",
     "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
-    "format-check": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
@@ -40,10 +42,13 @@
     "@changesets/cli": "^2.13.0",
     "@changesets/get-github-info": "^0.4.5",
     "@sku-private/test-utils": "workspace:*",
+    "@swc/core": "^1.3.84",
+    "@swc/jest": "^0.2.29",
     "@tsconfig/node-lts": "^18.12.3",
     "@types/dedent": "^0.7.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.16.19",
+    "concurrently": "^8.2.1",
     "debug": "^4.3.1",
     "dedent": "^0.7.0",
     "eslint": "^8.41.0",
@@ -60,7 +65,7 @@
     "puppeteer": "^20.0.0",
     "renovate-config-seek": "^0.4.0",
     "rimraf": "^5.0.0",
-    "ts-jest": "^29.1.1"
+    "typescript": "*"
   },
   "volta": {
     "node": "18.16.0",

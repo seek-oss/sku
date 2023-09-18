@@ -10,8 +10,9 @@ import {
 } from '@sku-private/test-utils';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
 
-import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
-import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config';
+import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config.ts'),
@@ -28,7 +29,7 @@ describe('typescript-css-modules', () => {
   describe('build', () => {
     assert(skuConfig.port, 'sku config has port');
     const url = `http://localhost:${skuConfig.port}`;
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
@@ -58,7 +59,7 @@ describe('typescript-css-modules', () => {
   });
 
   describe('build-ssr', () => {
-    let server, closeAssetServer;
+    let server: ChildProcess, closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, [
@@ -96,7 +97,7 @@ describe('typescript-css-modules', () => {
 
   describe('start', () => {
     const devServerUrl = `http://localhost:8204`;
-    let server;
+    let server: ChildProcess;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start', appDir);
@@ -114,7 +115,7 @@ describe('typescript-css-modules', () => {
   });
 
   describe('test', () => {
-    let exitCode;
+    let exitCode: number | null;
 
     beforeAll(async () => {
       const { child } = await runSkuScriptInDir('test', appDir);
@@ -127,7 +128,7 @@ describe('typescript-css-modules', () => {
   });
 
   describe('lint', () => {
-    let exitCode;
+    let exitCode: number | null;
 
     beforeAll(async () => {
       // run build first to ensure typescript declarations are generated

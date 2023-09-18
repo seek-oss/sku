@@ -7,7 +7,9 @@ import {
 } from '@sku-private/test-utils';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
 
-import skuConfig from '@sku-fixtures/assertion-removal/sku.config.ts';
+import skuConfig from '@sku-fixtures/assertion-removal/sku.config';
+import type { ChildProcess } from 'node:child_process';
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/assertion-removal/sku.config.ts'),
 );
@@ -19,7 +21,7 @@ const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 describe('assertion-removal', () => {
   describe('build', () => {
     const url = 'http://localhost:8239';
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
@@ -34,7 +36,7 @@ describe('assertion-removal', () => {
     it('should not contain "assert" in production', async () => {
       const page = await browser.newPage();
       const response = await page.goto(url, { waitUntil: 'networkidle0' });
-      const sourceHtml = await response.text();
+      const sourceHtml = await response?.text();
       expect(sourceHtml).toContain(
         'It rendered without throwing an assertion error',
       );
@@ -42,7 +44,7 @@ describe('assertion-removal', () => {
   });
 
   describe('build-ssr', () => {
-    let server, closeAssetServer;
+    let server: ChildProcess, closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);
@@ -64,7 +66,7 @@ describe('assertion-removal', () => {
       const response = await page.goto(backendUrl, {
         waitUntil: 'networkidle0',
       });
-      const sourceHtml = await response.text();
+      const sourceHtml = await response?.text();
       expect(sourceHtml).toContain(
         'It rendered without throwing an assertion error',
       );
@@ -72,7 +74,7 @@ describe('assertion-removal', () => {
   });
 
   describe('test', () => {
-    let exitCode;
+    let exitCode: number | null;
 
     beforeAll(async () => {
       const { child } = await runSkuScriptInDir('test', appDir);

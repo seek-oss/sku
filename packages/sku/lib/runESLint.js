@@ -3,6 +3,7 @@ const { yellow, cyan, gray } = require('chalk');
 const { ESLint } = require('eslint');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const { lintExtensions } = require('./lint');
+const assert = require('node:assert');
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
@@ -57,7 +58,9 @@ const runESLint = async ({ fix = false, paths }) => {
         }
       }
     } catch (e) {
-      if (e && e.message && e.message.includes('No files matching')) {
+      assert(e instanceof Error);
+
+      if (e.message.includes('No files matching')) {
         console.warn(yellow(`Warning: ${e.message}`));
       } else {
         console.warn(yellow('ESLint encountered an error:'));

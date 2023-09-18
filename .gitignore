@@ -2,10 +2,10 @@ node_modules/
 *.log
 package-lock.json
 .idea
-entry/render/startConfig.json
 dist/
 dist-build/
 dist-ssr/
 dist-start/
 .eslintcache
 yarn.lock
+tsconfig.tsbuildinfo

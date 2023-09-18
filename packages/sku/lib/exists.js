@@ -1,4 +1,4 @@
-const { access } = require('fs/promises');
+const { access } = require('node:fs/promises');
 
 /**
  * Convenience wrapper for fs.access that returns `true` if the access check was successful and `false` otherwise

@@ -1,5 +1,5 @@
 const supportedBrowsers = require('browserslist-config-seek');
-const path = require('path');
+const path = require('node:path');
 const isCompilePackage = require('../lib/isCompilePackage');
 
 const defaultDecorator = (a) => a;

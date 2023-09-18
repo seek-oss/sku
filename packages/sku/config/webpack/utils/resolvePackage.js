@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const memoize = require('memoizee');
 const debug = require('debug')('sku:resolvePackage');
 const { cwd } = require('../../../lib/cwd');
@@ -75,6 +75,6 @@ const createPackageResolver = (fs, resolve) => {
 };
 
 module.exports = {
-  resolvePackage: createPackageResolver(require('fs'), require.resolve),
+  resolvePackage: createPackageResolver(require('node:fs'), require.resolve),
   createPackageResolver,
 };

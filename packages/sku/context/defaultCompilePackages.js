@@ -1,4 +1,4 @@
-const { posix: path } = require('path');
+const { posix: path } = require('node:path');
 const chalk = require('chalk');
 const glob = require('fast-glob');
 

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 
 const appDir = path.dirname(

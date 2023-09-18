@@ -1,6 +1,6 @@
-const { promisify } = require('util');
+const { promisify } = require('node:util');
 const readFilesAsync = promisify(require('node-dir').readFiles);
-const { relative } = require('path');
+const { relative } = require('node:path');
 
 // Ignore contents of files where the content changes
 // regularly or is non-deterministic.

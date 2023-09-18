@@ -1,5 +1,5 @@
 import { getChunkName } from '@vocab/webpack/chunk-name';
-import path from 'path';
+import path from 'node:path';
 import express from 'express';
 import makeExtractor from '../makeExtractor';
 import createCSPHandler from '../csp';

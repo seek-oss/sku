@@ -1,5 +1,5 @@
 const handler = require('serve-handler');
-const http = require('http');
+const http = require('node:http');
 
 const startAssetServer = async (port, targetDirectory, rewrites = []) =>
   new Promise((resolve) => {

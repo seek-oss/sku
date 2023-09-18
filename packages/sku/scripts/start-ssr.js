@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'development';
 
-const path = require('path');
+const path = require('node:path');
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 const onDeath = require('death');

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs = require('fs');
+const fs = require('node:fs');
 const { setCwd, getPathFromCwd, cwd } = require('../lib/cwd');
 const debug = require('debug');
 const banner = require('../lib/banner');

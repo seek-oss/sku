@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const exists = require('../lib/exists');
 const express = require('express');
 const handler = require('serve-handler');

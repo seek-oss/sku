@@ -1,6 +1,6 @@
-import fs from 'fs';
-import http from 'http';
-import https from 'https';
+import fs from 'node:fs';
+import http from 'node:http';
+import https from 'node:https';
 import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
 

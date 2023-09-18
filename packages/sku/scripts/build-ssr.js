@@ -1,7 +1,7 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const { performance } = require('perf_hooks');
+const { performance } = require('node:perf_hooks');
 const prettyMilliseconds = require('pretty-ms');
 const webpack = require('webpack');
 const { green, red } = require('chalk');

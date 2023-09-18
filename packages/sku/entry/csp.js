@@ -1,6 +1,6 @@
-import { createHash } from 'crypto';
+import { createHash } from 'node:crypto';
 import { parse, valid } from 'node-html-parser';
-import { URL } from 'url';
+import { URL } from 'node:url';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 

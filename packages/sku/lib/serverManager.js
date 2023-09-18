@@ -1,5 +1,5 @@
 const debug = require('debug')('sku:server-watcher');
-const cluster = require('cluster');
+const cluster = require('node:cluster');
 
 /**
  * @param {string} serverFilePath

@@ -4982,11 +4982,12 @@ html:not(._17efb20z) .xmpw2hm {
   "assert",
   "crypto",
   "fs",
+  "node:crypto",
+  "node:url",
   "os",
   "path",
   "stream",
   "tty",
-  "url",
   "util"
 ]",
   "jobStreet/index.html": "

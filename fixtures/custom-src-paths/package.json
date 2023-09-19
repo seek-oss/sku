@@ -10,5 +10,6 @@
     "@sku-private/test-utils": "workspace:*",
     "dedent": "^0.7.0",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

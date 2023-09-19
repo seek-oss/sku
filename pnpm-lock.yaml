@@ -410,9 +410,6 @@ importers:
       '@sku-fixtures/package-with-styles':
         specifier: ./fake/node_modules/package-with-styles
         version: link:fake/node_modules/package-with-styles
-      '@vanilla-extract/css':
-        specifier: ^1.0.0
-        version: 1.13.0
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -429,6 +426,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.3
         version: 18.2.7
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.13.0
       dedent:
         specifier: ^0.7.0
         version: 0.7.0

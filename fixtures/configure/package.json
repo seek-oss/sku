@@ -8,5 +8,6 @@
   "devDependencies": {
     "@types/react": "^18.2.3",
     "sku": "workspace:*"
-  }
+  },
+  "skuSkipValidatePeerDeps": true
 }

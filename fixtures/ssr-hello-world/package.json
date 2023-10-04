@@ -9,7 +9,6 @@
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "sku": "workspace:*"
-  }
-,
+  },
   "skuSkipValidatePeerDeps": true
 }

@@ -39,7 +39,7 @@ interface SkuRouteObject {
   route: string;
   name?: string;
   entry?: string;
-  languages?: ReadonlyArray<string>;
+  languages?: readonly string[];
 }
 
 type SkuRoute = string | SkuRouteObject;
@@ -47,8 +47,8 @@ type SkuRoute = string | SkuRouteObject;
 interface SkuSiteObject {
   name: string;
   host?: string;
-  routes?: ReadonlyArray<SkuRoute>;
-  languages?: ReadonlyArray<string>;
+  routes?: readonly SkuRoute[];
+  languages?: readonly string[];
 }
 
 type SkuSite = string | SkuSiteObject;
@@ -159,7 +159,7 @@ export interface SkuConfig {
    * @default []
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=environments
    */
-  environments?: ReadonlyArray<string>;
+  environments?: readonly string[];
 
   /**
    * By default, sku compiles all node_modules in builds that target node.
@@ -177,7 +177,7 @@ export interface SkuConfig {
    * @default ['localhost']
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=hosts
    */
-  hosts?: ReadonlyArray<string>;
+  hosts?: readonly string[];
 
   /**
    * Whether or not to use https for the local development server with a self-signed certificate.
@@ -202,7 +202,7 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=languages
    */
-  languages?: ReadonlyArray<SkuLanguage>;
+  languages?: readonly SkuLanguage[];
 
   /**
    * **Only for libraries**
@@ -317,7 +317,7 @@ export interface SkuConfig {
    * @default ['/']
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=routes
    */
-  routes?: ReadonlyArray<SkuRoute>;
+  routes?: readonly SkuRoute[];
 
   /**
    * **Only for SSR apps**
@@ -354,7 +354,7 @@ export interface SkuConfig {
    * @default []
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=sites
    */
-  sites?: ReadonlyArray<SkuSite>;
+  sites?: readonly SkuSite[];
 
   /**
    * When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`.

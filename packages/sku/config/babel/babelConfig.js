@@ -51,7 +51,7 @@ module.exports = ({
     );
 
     if (displayNamesProd) {
-      plugins.push(require.resolve('babel-plugin-add-react-displayname'));
+      plugins.push(require.resolve('@zendesk/babel-plugin-react-displayname'));
     }
 
     if (removeAssertionsInProduction) {

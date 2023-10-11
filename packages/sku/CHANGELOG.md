@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.2
+
+### Patch Changes
+
+- Better support for setting `displayName` on React components when [`displayNamesProd`](https://seek-oss.github.io/sku/#/./docs/configuration?id=displaynamesprod) is true. ([#894](https://github.com/seek-oss/sku/pull/894))
+
 ## 12.4.1
 
 ### Patch Changes

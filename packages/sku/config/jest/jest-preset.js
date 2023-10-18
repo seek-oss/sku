@@ -20,7 +20,7 @@ module.exports = jestDecorator({
     '**/?(*.)+(spec|test).(js|ts|tsx)',
   ],
   testPathIgnorePatterns: [
-    `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
+    `<rootDir>${slash}(${paths.target}|node_modules|.pnpm_store)${slash}`,
   ],
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {

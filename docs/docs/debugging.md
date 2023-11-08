@@ -22,11 +22,11 @@ For more detailed information about webpack warnings/errors, the `--stats` CLI a
 yarn sku start --stats=detailed
 ```
 
-The default values are as follows:
+The default value of the `--stats` argument is as follows:
 
-| sku command       | webpack stats value |
-| ----------------- | ------------------- |
-| `start/start-ssr` | `summary`           |
-| `build/build-ssr` | `errors-only`       |
+| sku command       | webpack stats preset |
+| ----------------- | -------------------- |
+| `start/start-ssr` | `summary`            |
+| `build/build-ssr` | `errors-only`        |
 
 [webpack stats preset]: https://webpack.js.org/configuration/stats/#stats-presets

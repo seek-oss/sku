@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import { Routes, Route } from 'react-router-dom';
 import loadable from 'sku/@loadable/component';
 

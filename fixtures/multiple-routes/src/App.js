@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
-import { Fragment } from 'react';
-import { Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import loadable from 'sku/@loadable/component';
 
 const routes = {
@@ -22,8 +20,8 @@ const Details = loadable(() => import('./handlers/Details'), {
 });
 
 export default ({ site }) => (
-  <Fragment>
-    <Route path={routes[site].home} exact render={() => <Home site={site} />} />
-    <Route path={routes[site].details} render={() => <Details site={site} />} />
-  </Fragment>
+  <Routes>
+    <Route path={routes[site].home} element={<Home site={site} />} />
+    <Route path={routes[site].details} element={<Details site={site} />} />
+  </Routes>
 );

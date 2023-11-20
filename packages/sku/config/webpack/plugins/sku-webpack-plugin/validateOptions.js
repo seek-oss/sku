@@ -6,11 +6,9 @@ const didYouMean = require('didyoumean2').default;
 const validator = new Validator();
 
 const exitWithErrors = async (errors) => {
-  const { emojify } = await import('node-emoji');
-
   console.log(bold(underline(red('SkuWebpackPlugin: Invalid options'))));
   errors.forEach((error) => {
-    console.log(yellow(emojify(error)));
+    console.log(yellow(error));
   });
   process.exit(1);
 };
@@ -85,7 +83,7 @@ module.exports = (options) => {
       const suggestedMessage = suggestedKey
         ? ` Did you mean '${bold(suggestedKey)}'?`
         : '';
-      errors.push(`:question: ${unknownMessage}${suggestedMessage}`);
+      errors.push(`❓ ${unknownMessage}${suggestedMessage}`);
     });
 
   // Validate schema types
@@ -93,8 +91,8 @@ module.exports = (options) => {
   if (schemaCheckResult !== true) {
     schemaCheckResult.forEach(({ message, field }) => {
       const errorMessage = message
-        ? `:no_entry_sign: ${message.replace(field, `${bold(field)}`)}`
-        : `:no_entry_sign: '${bold(field)}' is invalid`;
+        ? `🚫 ${message.replace(field, `${bold(field)}`)}`
+        : `🚫 '${bold(field)}' is invalid`;
 
       errors.push(errorMessage);
     });
@@ -106,7 +104,7 @@ module.exports = (options) => {
       browserslist(options.browserslist);
     } catch (e) {
       errors.push(
-        `:no_entry_sign: '${bold(
+        `🚫 '${bold(
           'browserslist',
         )}' must be a valid browserslist query. ${white(e.message)}`,
       );

@@ -2,11 +2,12 @@ const Validator = require('fastest-validator');
 const browserslist = require('browserslist');
 const { yellow, red, bold, underline, white } = require('chalk');
 const didYouMean = require('didyoumean2').default;
-const { emojify } = require('node-emoji');
 
 const validator = new Validator();
 
-const exitWithErrors = (errors) => {
+const exitWithErrors = async (errors) => {
+  const { emojify } = await import('node-emoji');
+
   console.log(bold(underline(red('SkuWebpackPlugin: Invalid options'))));
   errors.forEach((error) => {
     console.log(yellow(emojify(error)));

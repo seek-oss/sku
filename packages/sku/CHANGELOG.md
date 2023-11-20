@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.3
+
+### Patch Changes
+
+- Asynchronously import `node-emoji` to fix ESM require issue ([#900](https://github.com/seek-oss/sku/pull/900))
+
 ## 12.4.2
 
 ### Patch Changes

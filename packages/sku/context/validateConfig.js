@@ -9,11 +9,9 @@ const defaultClientEntry = require('./defaultClientEntry');
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
 const exitWithErrors = async (errors) => {
-  const { emojify } = await import('node-emoji');
-
   console.log(bold(underline(red('Errors in sku config:'))));
   errors.forEach((error) => {
-    console.log(yellow(emojify(error)));
+    console.log(yellow(error));
   });
   process.exit(1);
 };
@@ -30,7 +28,7 @@ module.exports = (skuConfig) => {
       const suggestedMessage = suggestedKey
         ? ` Did you mean '${bold(suggestedKey)}'?`
         : '';
-      errors.push(`:question: ${unknownMessage}${suggestedMessage}`);
+      errors.push(`❓ ${unknownMessage}${suggestedMessage}`);
     });
 
   // Validate schema types
@@ -38,8 +36,8 @@ module.exports = (skuConfig) => {
   if (schemaCheckResult !== true) {
     schemaCheckResult.forEach(({ message, field }) => {
       const errorMessage = message
-        ? `:no_entry_sign: ${message.replace(field, `${bold(field)}`)}`
-        : `:no_entry_sign: '${bold(field)}' is invalid`;
+        ? `🚫 ${message.replace(field, `${bold(field)}`)}`
+        : `🚫 '${bold(field)}' is invalid`;
 
       errors.push(errorMessage);
     });
@@ -48,9 +46,7 @@ module.exports = (skuConfig) => {
   // Validate library entry has corresponding libraryName
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {
     errors.push(
-      `:no_entry_sign: '${bold(
-        'libraryEntry',
-      )}' must have a corresponding '${bold(
+      `🚫 '${bold('libraryEntry')}' must have a corresponding '${bold(
         'libraryName',
       )}' option. More details: ${underline(
         'https://github.com/seek-oss/sku#building-a-library',
@@ -62,7 +58,7 @@ module.exports = (skuConfig) => {
   skuConfig.routes.forEach(({ name }) => {
     if (name === defaultClientEntry) {
       errors.push(
-        `:no_entry_sign: Invalid route name: '${bold(
+        `🚫 Invalid route name: '${bold(
           defaultClientEntry,
         )}', please use a different route name`,
       );
@@ -74,7 +70,7 @@ module.exports = (skuConfig) => {
     browserslist(skuConfig.supportedBrowsers);
   } catch (e) {
     errors.push(
-      `:no_entry_sign: '${bold(
+      `🚫 '${bold(
         'supportedBrowsers',
       )}' must be a valid browserslist query. ${white(e.message)}`,
     );

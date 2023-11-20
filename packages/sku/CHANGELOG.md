@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.4
+
+### Patch Changes
+
+- Remove `node-emoji` dependency ([#902](https://github.com/seek-oss/sku/pull/902))
+
 ## 12.4.3
 
 ### Patch Changes

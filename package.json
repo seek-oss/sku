@@ -10,7 +10,7 @@
     "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "lint:tsc": "tsc",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
-    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --randomize",
+    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "setup-test-hosts": "node test-utils/setupTestHosts",
     "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",

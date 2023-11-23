@@ -101,16 +101,6 @@ describe('styling', () => {
       await server.kill();
     });
 
-    it('should render external styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
-        '[data-automation-external]',
-      );
-
-      expect(text).toEqual('This should be invisible');
-      expect(fontSize).toEqual('9px');
-    });
-
     it('should render LESS styles', async () => {
       const { fontSize } = await getTextContentFromStorybookFrame(
         storybookFrame,
@@ -127,6 +117,31 @@ describe('styling', () => {
       );
 
       expect(fontSize).toEqual('64px');
+    });
+  });
+
+  describe('storybook again', () => {
+    let server: ChildProcess;
+    let storybookFrame: Frame;
+
+    beforeAll(async () => {
+      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
+      await waitForUrls(storybookUrl);
+      storybookFrame = await getStorybookFrame(storybookUrl);
+    }, 200000);
+
+    afterAll(async () => {
+      await server.kill();
+    });
+
+    it('should render external styles', async () => {
+      const { text, fontSize } = await getTextContentFromStorybookFrame(
+        storybookFrame,
+        '[data-automation-external]',
+      );
+
+      expect(text).toEqual('This should be invisible');
+      expect(fontSize).toEqual('9px');
     });
   });
 });

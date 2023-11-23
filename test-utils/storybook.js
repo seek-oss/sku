@@ -9,7 +9,7 @@
 const getStorybookFrame = async (storybookUrl) => {
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(100_000);
-  await page.goto(storybookUrl, { waitUntil: 'networkidle2' });
+  await page.goto(storybookUrl, { waitUntil: 'load' });
 
   const firstStoryButton = await page.waitForSelector(
     '#storybook-explorer-menu button',

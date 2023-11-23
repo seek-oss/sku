@@ -14,7 +14,7 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
     }
   });
 
-  const response = await page.goto(url, { waitUntil: 'networkidle0' });
+  const response = await page.goto(url, { waitUntil: 'load' });
   const sourceHtml = await response.text();
   const clientRenderContent = await page.content();
 

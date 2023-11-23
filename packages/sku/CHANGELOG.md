@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.5
+
+### Patch Changes
+
+- Bump some dependencies ([#904](https://github.com/seek-oss/sku/pull/904))
+
 ## 12.4.4
 
 ### Patch Changes

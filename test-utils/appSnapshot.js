@@ -15,6 +15,7 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
   });
 
   let response = await page.goto(url, { waitUntil: 'load' });
+  console.log({ status: response.status() });
   if (response.status() === 404) {
     const delay = 10_000;
     console.log(`Received 404, retrying in ${delay} ms`);

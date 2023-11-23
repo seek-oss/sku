@@ -16,9 +16,11 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
 
   let response = await page.goto(url, { waitUntil: 'load' });
   if (response.status() === 404) {
+    const delay = 10_000;
+    console.log(`Received 404, retrying in ${delay} ms`);
     // Wait a bit and retry to account for inconsistent behavior in CI
     await new Promise((resolve) => {
-      setTimeout(resolve, 2_000);
+      setTimeout(resolve, delay);
     });
     response = await page.goto(url, { waitUntil: 'load' });
   }

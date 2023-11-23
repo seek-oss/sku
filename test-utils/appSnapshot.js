@@ -14,7 +14,14 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
     }
   });
 
-  const response = await page.goto(url, { waitUntil: 'load' });
+  let response = await page.goto(url, { waitUntil: 'load' });
+  if (response.status() === 404) {
+    // Wait a bit and retry to account for inconsistent behavior in CI
+    await new Promise((resolve) => {
+      setTimeout(resolve, 2_000);
+    });
+    response = await page.goto(url, { waitUntil: 'load' });
+  }
   const sourceHtml = await response.text();
   const clientRenderContent = await page.content();
 

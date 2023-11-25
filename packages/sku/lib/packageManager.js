@@ -1,6 +1,8 @@
+const { existsSync } = require('node:fs');
+const { join } = require('node:path');
 const { cwd } = require('../lib/cwd');
 const { findRootSync } = require('@manypkg/find-root');
-const { getCommand, INSTALL_PAGE } = require('@antfu/ni');
+const { getCommand, INSTALL_PAGE, LOCKS } = require('@antfu/ni');
 
 const { sync: which } = require('which');
 const skuArgs = require('../config/args');
@@ -9,6 +11,19 @@ const skuArgs = require('../config/args');
 
 /** @type {Array<SupportedPackageManager>} */
 const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+
+/** @type {Record<SupportedPackageManager, string>} */
+const lockfileForPackageManager = Object.fromEntries(
+  Object.entries(LOCKS)
+    .filter(([, packageManager]) =>
+      supportedPackageManagers.includes(packageManager),
+    )
+    .map(([lockfileName, packageManager]) => [packageManager, lockfileName]),
+);
+
+const supportedLockfiles = supportedPackageManagers.map(
+  (packageManager) => lockfileForPackageManager[packageManager],
+);
 
 /**
  * @param {SupportedPackageManager} commandName
@@ -24,18 +39,28 @@ const detectPackageManager = () =>
 
 /**
  * Get the package manager and root directory of the project. If the project does not have a
- * project manager configured, a supported package manager will be detected in your `PATH`, and
+ * package manager configured, a supported package manager will be detected in your `PATH`, and
  * `rootDir` will be `null`.
  * @returns {{packageManager: SupportedPackageManager, rootDir: string | null}}
  */
 const getPackageManager = () => {
   let _packageManager = skuArgs?.packageManager;
 
+  // @manypkg/find-root only returns a tool if it finds a monorepo.
+  // If it finds a regular repo, it will return a 'root' tool, which is absolutely useless.
+  // So we need to detect the package manager ourselves. I'd use `detect` from from `@antfu/ni` or
+  // `detect-package-manager`, but they're async only and we can't make getPackageManager async.
   try {
-    const {
-      tool: { type: foundPackageManager },
-      rootDir,
-    } = findRootSync(cwd());
+    const { rootDir } = findRootSync(cwd());
+
+    let foundPackageManager;
+
+    for (const supportedLockfile of supportedLockfiles) {
+      if (existsSync(join(rootDir, supportedLockfile))) {
+        foundPackageManager = LOCKS[supportedLockfile];
+        break;
+      }
+    }
 
     if (!supportedPackageManagers.includes(foundPackageManager)) {
       throw new Error('Unsupported package manager found');
@@ -126,7 +151,7 @@ const getAddCommand = ({ type, logLevel, deps, exact }) => {
   return getCommand(packageManager, 'add', args);
 };
 
-const getInstallCommand = () => getCommand(packageManager, 'install', []);
+const getInstallCommand = () => getCommand(packageManager, 'install');
 
 const getWhyCommand = () => {
   const whyCommand = isPnpm ? 'why -r' : 'why';

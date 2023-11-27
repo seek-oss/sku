@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.7
+
+### Patch Changes
+
+- Fixes a bug where `.cjs` and `.mjs` files were not being transpiled for browser targets ([#906](https://github.com/seek-oss/sku/pull/906))
+
 ## 12.4.6
 
 ### Patch Changes

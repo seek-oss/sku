@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.6
+
+### Patch Changes
+
+- Fix package manager detection in non-monorepos ([#907](https://github.com/seek-oss/sku/pull/907))
+
 ## 12.4.5
 
 ### Patch Changes

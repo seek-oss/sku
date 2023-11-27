@@ -1,11 +1,12 @@
 const chalk = require('chalk');
+
+const config = require('../config/lintStaged/lintStagedConfig');
 const lintStaged = require('lint-staged');
-const configPath = require.resolve('../config/lintStaged/lintStagedConfig');
 
 module.exports = async () => {
   let success = false;
   try {
-    success = await lintStaged({ configPath });
+    success = await lintStaged({ config });
   } catch (e) {
     console.error(chalk.red(e));
   }

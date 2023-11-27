@@ -1,12 +1,18 @@
 const loaders = require('./loaders');
 const { resolvePackage } = require('./resolvePackage');
-const { js, ts } = require('eslint-config-seek/extensions');
+
+// TODO: Figure out a better way to share this config. This is currently copy-pasted from
+// `eslint-config-seek`
+const extensions = {
+  js: ['js', 'cjs', 'mjs', 'jsx'],
+  ts: ['ts', 'cts', 'mts', 'tsx'],
+};
 
 module.exports = {
   ...loaders,
   resolvePackage,
-  TYPESCRIPT: new RegExp(`\.(${ts.join('|')})$`),
-  JAVASCRIPT: new RegExp(`\.(${js.join('|')})$`),
+  TYPESCRIPT: new RegExp(`\.(${extensions.ts.join('|')})$`),
+  JAVASCRIPT: new RegExp(`\.(${extensions.js.join('|')})$`),
   LESS: /\.less$/,
   IMAGE: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
   SVG: /\.svg$/,

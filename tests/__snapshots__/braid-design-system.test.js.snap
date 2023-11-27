@@ -4985,7 +4985,6 @@ html:not(.vtjip3z) .ht7o11m {
 ,
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
-  "assert",
   "crypto",
   "fs",
   "node:crypto",

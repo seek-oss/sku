@@ -5026,14 +5026,7 @@ html._3ylw6xz ._2h419fj {
 }
 ,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.LICENSE.txt": /*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
- */
-
-/**
+  "main.js.LICENSE.txt": /**
  * @license React
  * react-dom.production.min.js
  *

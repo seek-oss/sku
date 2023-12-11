@@ -54,7 +54,7 @@ jobs:
 
       - name: Install Puppeteer
         if: steps.puppeteer-cache.outputs.cache-hit != 'true'
-        run: node node_modules/puppeteer/install.mjs
+        run: pnpm puppeteer browsers install chrome
 
       - name: Set up hosts
         # Couldn't get `sudo pnpm setup-test-hosts` to work

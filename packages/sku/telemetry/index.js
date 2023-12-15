@@ -21,7 +21,11 @@ try {
   ), [cwd()]);
 
   braidVersion = braidPackageJson.version;
-} catch (e) {}
+} catch (e) {
+  require('debug')('sku:telemetry')(
+    `Error getting app name or braid version: ${e}`,
+  );
+}
 
 provider.addGlobalTags({
   ci: isCI,

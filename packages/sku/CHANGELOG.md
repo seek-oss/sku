@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.8
+
+### Patch Changes
+
+- Fix running lint-staged when `package.json` files are staged ([#918](https://github.com/seek-oss/sku/pull/918))
+
 ## 12.4.7
 
 ### Patch Changes

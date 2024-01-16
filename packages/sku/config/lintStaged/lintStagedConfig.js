@@ -11,9 +11,10 @@ const config = {
 
 // Yarn lock integrity check
 if (isYarn) {
-  config['+(package.json|yarn.lock)'] = [
-    getCommand('yarn', 'install', ['--check-files']),
-  ];
+  config['+(package.json|yarn.lock)'] =
+    // The function form allows running the command without file arguments
+    // https://github.com/lint-staged/lint-staged#example-run-tsc-on-changes-to-typescript-files-but-do-not-pass-any-filename-arguments
+    () => getCommand('yarn', 'install', ['--check-files']);
 }
 
 module.exports = config;

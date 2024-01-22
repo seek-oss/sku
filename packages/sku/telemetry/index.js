@@ -20,7 +20,7 @@ try {
   braidVersion = braidPackageJson.version;
 } catch (e) {
   require('debug')('sku:telemetry')(
-    `Error getting app name or braid version: ${e}`,
+    `Error getting project name or braid version: ${e}`,
   );
 }
 

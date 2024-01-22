@@ -20,12 +20,8 @@ exports[`multiple-routes build and serve should generate the expected files 1`] 
     "/static/place/runtime.js",
     "/static/place/5.js",
     "/static/place/main.js",
-    "/static/place/handlers-Details.chunk.js",
-    "/static/place/AsyncComponent.chunk.js",
   ]
-CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
-  ]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -52,11 +48,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -74,27 +65,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="scripts[5]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
-        Welcome to the Details page - au
-        <span>
-          Some special async content
-        </span>
-      </h1>
+      <div>
+        Loading Details...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -106,13 +82,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [1,0]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -130,18 +106,6 @@ SOURCE HTML: <!DOCTYPE html>
       async
       data-chunk="main"
       src="scripts[3]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="scripts[4]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="scripts[5]"
     >
     </script>
   </body>
@@ -151,11 +115,8 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/runtime.js",
     "/static/place/5.js",
     "/static/place/main.js",
-    "/static/place/handlers-Home.chunk.js",
   ]
-CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
-  ]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -182,11 +143,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Home"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -204,18 +160,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Home"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
-        Welcome to the Home page - au
-      </h1>
+      <div>
+        Loading Home...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -227,13 +177,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [2]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Home"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -251,12 +201,6 @@ SOURCE HTML: <!DOCTYPE html>
       async
       data-chunk="main"
       src="scripts[3]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Home"
-      src="scripts[4]"
     >
     </script>
   </body>
@@ -266,12 +210,8 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/runtime.js",
     "/static/place/5.js",
     "/static/place/main.js",
-    "/static/place/handlers-Details.chunk.js",
-    "/static/place/AsyncComponent.chunk.js",
   ]
-CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
-  ]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -298,11 +238,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -320,27 +255,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="scripts[5]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
-        Welcome to the Details page - nz
-        <span>
-          Some special async content
-        </span>
-      </h1>
+      <div>
+        Loading Details...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -352,13 +272,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [1,0]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -376,18 +296,6 @@ SOURCE HTML: <!DOCTYPE html>
       async
       data-chunk="main"
       src="scripts[3]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="scripts[4]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="scripts[5]"
     >
     </script>
   </body>
@@ -397,11 +305,8 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/runtime.js",
     "/static/place/5.js",
     "/static/place/main.js",
-    "/static/place/handlers-Home.chunk.js",
   ]
-CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
-  ]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -428,11 +333,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Home"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -450,18 +350,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Home"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
-        Welcome to the Home page - nz
-      </h1>
+      <div>
+        Loading Home...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -473,13 +367,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [2]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Home"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -497,12 +391,6 @@ SOURCE HTML: <!DOCTYPE html>
       async
       data-chunk="main"
       src="scripts[3]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Home"
-      src="scripts[4]"
     >
     </script>
   </body>
@@ -517,12 +405,8 @@ SCRIPTS: [
   "/static/place/runtime.js",
   "/static/place/5.js",
   "/static/place/main.js",
-  "/static/place/handlers-Details.chunk.js",
-  "/static/place/AsyncComponent.chunk.js",
 ]
-CSS: [
-  "/static/place/handlers-Details-065db15fad163b0a609f.css",
-]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -549,11 +433,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -571,27 +450,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="scripts[5]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
-        Welcome to the Details page - au
-        <span>
-          Some special async content
-        </span>
-      </h1>
+      <div>
+        Loading Details...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -603,13 +467,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [1,0]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -629,29 +493,32 @@ SOURCE HTML: <!DOCTYPE html>
       src="scripts[3]"
     >
     </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="scripts[4]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="scripts[5]"
-    >
-    </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+       as="script"
+       href="/static/place/main.js"
+     >
++    <link
++      rel="stylesheet"
++      type="text/css"
++      href="/static/place/handlers-Details-065db15fad163b0a609f.css"
++    >
+   </head>
    <body>
      <div id="app">
-       <h1 class="EOTSBbL">
--        Welcome to the Details page - au
+-      <div>
+-        Loading Details...
+-      </div>
++      <h1 class="EOTSBbL">
 +        Welcome to the Details page - auID: 123
-         <span>
-           Some special async content
-         </span>
++        <span>
++          Some special async content
++        </span>
++      </h1>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
 
 `;
 
@@ -661,11 +528,8 @@ SCRIPTS: [
   "/static/place/runtime.js",
   "/static/place/5.js",
   "/static/place/main.js",
-  "/static/place/handlers-Home.chunk.js",
 ]
-CSS: [
-  "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
-]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -692,11 +556,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Home"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -714,18 +573,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Home"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
-        Welcome to the Home page - au
-      </h1>
+      <div>
+        Loading Home...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -737,13 +590,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [2]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Home"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -763,15 +616,30 @@ SOURCE HTML: <!DOCTYPE html>
       src="scripts[3]"
     >
     </script>
-    <script
-      async
-      data-chunk="handlers-Home"
-      src="scripts[4]"
-    >
-    </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+       as="script"
+       href="/static/place/main.js"
+     >
++    <link
++      rel="stylesheet"
++      type="text/css"
++      href="/static/place/handlers-Home-0076e4d4a98910c8f902.css"
++    >
+   </head>
+   <body>
+     <div id="app">
+-      <div>
+-        Loading Home...
+-      </div>
++      <h1 class="dyLY_sb">
++        Welcome to the Home page - au
++      </h1>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+
 `;
 
 exports[`multiple-routes start should render details page correctly 1`] = `
@@ -780,12 +648,8 @@ SCRIPTS: [
   "/runtime.js",
   "/5.js",
   "/main.js",
-  "/handlers-Details.js",
-  "/AsyncComponent.js",
 ]
-CSS: [
-  "/handlers-Details.css",
-]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -812,11 +676,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -834,27 +693,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="scripts[5]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="Details__root___EOTSBbL">
-        Welcome to the Details page - au
-        <span>
-          Some special async content
-        </span>
-      </h1>
+      <div>
+        Loading Details...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -866,13 +710,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [1,0]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -892,29 +736,32 @@ SOURCE HTML: <!DOCTYPE html>
       src="scripts[3]"
     >
     </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="scripts[4]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="scripts[5]"
-    >
-    </script>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+       as="script"
+       href="/main.js"
+     >
++    <link
++      rel="stylesheet"
++      type="text/css"
++      href="/handlers-Details.css"
++    >
+   </head>
    <body>
      <div id="app">
-       <h1 class="Details__root___EOTSBbL">
--        Welcome to the Details page - au
+-      <div>
+-        Loading Details...
+-      </div>
++      <h1 class="Details__root___EOTSBbL">
 +        Welcome to the Details page - auID: 123
-         <span>
-           Some special async content
-         </span>
++        <span>
++          Some special async content
++        </span>
++      </h1>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
 
 `;
 
@@ -924,11 +771,8 @@ SCRIPTS: [
   "/runtime.js",
   "/5.js",
   "/main.js",
-  "/handlers-Home.js",
 ]
-CSS: [
-  "/handlers-Home.css",
-]
+CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
@@ -955,11 +799,6 @@ SOURCE HTML: <!DOCTYPE html>
       }
     </style>
     <link
-      data-chunk="handlers-Home"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
       data-chunk="main"
       rel="preload"
       as="script"
@@ -977,18 +816,12 @@ SOURCE HTML: <!DOCTYPE html>
       as="script"
       href="scripts[3]"
     >
-    <link
-      data-chunk="handlers-Home"
-      rel="preload"
-      as="script"
-      href="scripts[4]"
-    >
   </head>
   <body>
     <div id="app">
-      <h1 class="Home__root___dyLY_sb">
-        Welcome to the Home page - au
-      </h1>
+      <div>
+        Loading Home...
+      </div>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
@@ -1000,13 +833,13 @@ SOURCE HTML: <!DOCTYPE html>
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
     >
-      [2]
+      []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
     >
-      {"namedChunks":["handlers-Home"]}
+      {"namedChunks":[]}
     </script>
     <script
       async
@@ -1026,13 +859,28 @@ SOURCE HTML: <!DOCTYPE html>
       src="scripts[3]"
     >
     </script>
-    <script
-      async
-      data-chunk="handlers-Home"
-      src="scripts[4]"
-    >
-    </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+       as="script"
+       href="/main.js"
+     >
++    <link
++      rel="stylesheet"
++      type="text/css"
++      href="/handlers-Home.css"
++    >
+   </head>
+   <body>
+     <div id="app">
+-      <div>
+-        Loading Home...
+-      </div>
++      <h1 class="Home__root___dyLY_sb">
++        Welcome to the Home page - au
++      </h1>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+
 `;

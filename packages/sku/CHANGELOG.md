@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.9
+
+### Patch Changes
+
+- Report `braid-design-system` version via telemetry ([#913](https://github.com/seek-oss/sku/pull/913))
+
 ## 12.4.8
 
 ### Patch Changes

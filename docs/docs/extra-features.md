@@ -55,7 +55,8 @@ export default {
 
 ## Bundle analysis
 
-`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer). A report is generated in the `/report` directory when `sku build` is run.
+`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).
+A report is generated in the `/report` directory when `sku build` is run.
 
 ## Pre-commit hook
 
@@ -67,13 +68,13 @@ To make use of this hook, it's recommended to install [husky](https://www.npmjs.
 
 {
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky"
   }
 }
 ```
 
 ```sh
-yarn husky add .husky/pre-commit "yarn sku pre-commit"
+echo "yarn sku pre-commit" > .husky/pre-commit
 ```
 
 For more details on configuring hooks, please see husky's [documentation](https://typicode.github.io/husky/#create-a-hook).

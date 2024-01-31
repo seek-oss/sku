@@ -4,7 +4,7 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "scripts": {
     "postinstall": "node ./postinstall.js",
-    "prepare": "husky install",
+    "prepare": "husky",
     "lint": "concurrently -c auto --group 'pnpm:lint:*'",
     "lint:eslint": "eslint --cache .",
     "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",

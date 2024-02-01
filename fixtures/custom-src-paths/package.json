@@ -2,13 +2,12 @@
   "name": "@sku-fixtures/custom-src-paths",
   "private": true,
   "dependencies": {
-    "dedent": "^1.0.0",
+    "dedent": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
-    "dedent": "^0.7.0",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

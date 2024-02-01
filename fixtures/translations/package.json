@@ -13,7 +13,7 @@
     "@types/express": "^4.17.11",
     "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
-    "dedent": "^0.7.0",
+    "dedent": "^1.5.1",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

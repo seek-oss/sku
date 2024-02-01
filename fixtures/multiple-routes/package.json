@@ -9,7 +9,7 @@
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@testing-library/react": "^14.0.0",
-    "dedent": "^0.7.0",
+    "dedent": "^1.5.1",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

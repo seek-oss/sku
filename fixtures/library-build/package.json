@@ -3,7 +3,7 @@
   "private": true,
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
-    "dedent": "^0.7.0",
+    "dedent": "^1.5.1",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

@@ -1,5 +1,11 @@
 # sku
 
+## 12.4.10
+
+### Patch Changes
+
+- Update dependencies ([#917](https://github.com/seek-oss/sku/pull/917))
+
 ## 12.4.9
 
 ### Patch Changes

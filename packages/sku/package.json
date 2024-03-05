@@ -122,7 +122,7 @@
     "validate-npm-package-name": "^5.0.0",
     "webpack": "^5.52.0",
     "webpack-bundle-analyzer": "^4.6.1",
-    "webpack-dev-server": "^4.15.1",
+    "webpack-dev-server": "^5.0.2",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0",
     "which": "^4.0.0",

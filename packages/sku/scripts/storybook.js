@@ -6,7 +6,6 @@ const { watchVocabCompile } = require('../lib/runVocab');
 const { setUpStorybookConfigDirectory } = require('../lib/storybook');
 
 // Unshift args to allow pushing --ci as an arg during storybook-config tests
-argv.unshift('--quiet');
 argv.unshift('--port', storybookPort);
 argv.unshift('dev');
 

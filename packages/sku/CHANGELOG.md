@@ -1,5 +1,24 @@
 # sku
 
+## 12.4.11
+
+### Patch Changes
+
+- Update `webpack-dev-server` to v5 ([#930](https://github.com/seek-oss/sku/pull/930))
+
+- Stop passing `--quiet` flag to the Storybook CLI when running `sku storybook` ([#929](https://github.com/seek-oss/sku/pull/929))
+
+  This flag was added to suppress verbose CLI output, but as of [Storybook CLI v7.1.0][release notes] this also hides the dev server info which includes the URL to access the Storybook UI.
+
+  The flag has now been removed to provide a better default experience when using the Storybook CLI.
+  Users can still pass `--quiet` to suppress verbose output if desired:
+
+  ```sh
+  pnpm run sku storybook --quiet
+  ```
+
+  [release notes]: https://github.com/storybookjs/storybook/releases/tag/v7.1.0-alpha.38
+
 ## 12.4.10
 
 ### Patch Changes

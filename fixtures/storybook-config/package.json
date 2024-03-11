@@ -7,7 +7,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-controls": "^7.0.0",
+    "@storybook/addon-controls": "^8.0.0",
     "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
     "@vanilla-extract/css": "^1.0.0",

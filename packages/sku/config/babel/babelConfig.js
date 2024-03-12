@@ -26,12 +26,12 @@ module.exports = ({
     require.resolve('@babel/plugin-transform-runtime'),
   ];
 
-  if (hot && isBrowser) {
-    plugins.push([
-      require.resolve('react-refresh/babel'),
-      { skipEnvCheck: true },
-    ]);
-  }
+  // if (hot && isBrowser) {
+  //   plugins.push([
+  //     require.resolve('react-refresh/babel'),
+  //     { skipEnvCheck: true },
+  //   ]);
+  // }
 
   if (isJest) {
     plugins.push([
@@ -59,36 +59,36 @@ module.exports = ({
     }
   }
 
-  const presets = [
-    [
-      require.resolve('@babel/preset-env'),
-      {
-        targets: browserslist,
-        shippedProposals: true,
-      },
-    ],
-    lang === 'ts'
-      ? [
-          require.resolve('@babel/preset-typescript'),
-          {
-            isTSX: true,
-            allExtensions: true,
-          },
-        ]
-      : null,
-    [
-      require.resolve('@babel/preset-react'),
-      {
-        runtime: 'automatic',
-        development: !isProductionBuild,
-      },
-    ],
-  ].filter(Boolean);
+  // const presets = [
+  //   [
+  //     require.resolve('@babel/preset-env'),
+  //     {
+  //       targets: browserslist,
+  //       shippedProposals: true,
+  //     },
+  //   ],
+  //   lang === 'ts'
+  //     ? [
+  //         require.resolve('@babel/preset-typescript'),
+  //         {
+  //           isTSX: true,
+  //           allExtensions: true,
+  //         },
+  //       ]
+  //     : null,
+  //   [
+  //     require.resolve('@babel/preset-react'),
+  //     {
+  //       runtime: 'automatic',
+  //       development: !isProductionBuild,
+  //     },
+  //   ],
+  // ].filter(Boolean);
 
   return {
     babelrc: false,
     sourceType: isBrowser ? 'unambiguous' : 'module',
-    presets,
+    // presets,
     plugins,
   };
 };

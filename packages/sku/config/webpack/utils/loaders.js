@@ -10,6 +10,30 @@ const makeJsLoaders = (options) => [
     loader: require.resolve('babel-loader'),
     options: require('../../babel/babelConfig')(options),
   },
+  {
+    loader: require.resolve('swc-loader'),
+    options: {
+      // sourceMaps: true,
+      parseMap: true,
+      jsc: {
+        parser: {
+          syntax: options.lang === 'js' ? 'ecmascript' : 'typescript',
+          jsx: true,
+        },
+        transform: {
+          react: {
+            // for "ReferenceError: React is not defined" error
+            runtime: 'automatic',
+            refresh: options.hot && options.target === 'browser',
+          },
+        },
+      },
+      env: {
+        targets: options.browserslist,
+        shippedProposals: true,
+      },
+    },
+  },
 ];
 
 const makeCssLoaders = (options = {}) => {

@@ -74,4 +74,4 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Test
-        run: pnpm run test --maxWorkers=2
+        run: pnpm run test

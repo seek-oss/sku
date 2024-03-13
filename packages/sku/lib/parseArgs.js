@@ -12,12 +12,6 @@ const optionDefinitions = [
     defaultValue: 'production',
   },
   {
-    name: 'tenant',
-    alias: 't',
-    type: String,
-    defaultValue: '',
-  },
-  {
     name: 'build',
     alias: 'b',
     type: String,

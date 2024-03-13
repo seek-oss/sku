@@ -16,7 +16,6 @@ module.exports = {
   transformOutputPath: ({ environment = '', site = '', route = '' }) =>
     path.join(environment, site, route),
   srcPaths: ['./src'],
-  env: {},
   compilePackages: [],
   hosts: ['localhost'],
   port: 8080,

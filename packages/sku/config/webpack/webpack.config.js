@@ -14,7 +14,6 @@ const { VocabWebpackPlugin } = require('@vocab/webpack');
 
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
-const { stringifyEnvarValues } = require('../../lib/env');
 
 const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
@@ -27,7 +26,6 @@ const modules = require('./resolveModules');
 
 const {
   paths,
-  env,
   webpackDecorator,
   polyfills,
   isLibrary,
@@ -42,10 +40,8 @@ const {
   externalizeNodeModules,
 } = config;
 
-// port is only required for dev builds
 const makeWebpackConfig = ({
   isIntegration = false,
-  port = 0,
   isDevServer = false,
   htmlRenderPlugin,
   metrics = false,
@@ -56,11 +52,6 @@ const makeWebpackConfig = ({
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const vocabOptions = getVocabConfig();
-
-  const envars = stringifyEnvarValues({
-    ...env,
-    PORT: port,
-  });
 
   const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
@@ -201,7 +192,6 @@ const makeWebpackConfig = ({
         ...(isDevServer || isIntegration
           ? []
           : [bundleAnalyzerPlugin({ name: 'client' })]),
-        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_CLIENT_PATH__: JSON.stringify(
             path.relative(cwd(), paths.clientEntry),
@@ -290,7 +280,6 @@ const makeWebpackConfig = ({
       },
       plugins: [
         ...(htmlRenderPlugin ? [htmlRenderPlugin.rendererPlugin] : []),
-        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_LIBRARY_NAME__: JSON.stringify(libraryName),
           __SKU_LIBRARY_FILE__: JSON.stringify(libraryFile),

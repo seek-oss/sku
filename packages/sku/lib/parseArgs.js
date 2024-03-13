@@ -6,11 +6,6 @@ const optionDefinitions = [
     defaultOption: true,
   },
   {
-    name: 'build',
-    alias: 'b',
-    type: String,
-  },
-  {
     name: 'config',
     alias: 'c',
     type: String,
@@ -57,21 +52,10 @@ module.exports = (args) => {
     partial: true,
   });
 
-  const { script, _unknown: argv = [] } = options;
-
-  // Backwards compatibility for unnamed build name argument, to be deprecated
-  const buildName = () => {
-    if (options.build) {
-      return options.build;
-    } else if (argv.length) {
-      return argv[0];
-    }
-    return undefined; // eslint-disable-line no-undefined
-  };
+  const { _unknown: argv = [] } = options;
 
   return {
     ...options,
-    buildName: script === 'start' ? buildName() : null,
     argv,
   };
 };

@@ -2,30 +2,30 @@ const parseArgs = require('./parseArgs');
 
 describe('arg parsing', () => {
   test('sku exec', () => {
-    const { script, argv, env } = parseArgs([
+    const { script, argv, environment } = parseArgs([
       '/path/to/node',
       '/path/to/bin/sku',
       'lint',
-      '-e',
+      '--environment',
       'test',
     ]);
     expect(script).toEqual('lint');
     expect(argv).toEqual([]);
-    expect(env).toEqual('test');
+    expect(environment).toEqual('test');
   });
 
   test('sku exec with args', () => {
-    const { script, argv, env } = parseArgs([
+    const { script, argv, environment } = parseArgs([
       '/path/to/node',
       '/path/to/bin/sku',
       'lint',
       'src/components/**',
-      '-e',
+      '--environment',
       'test',
     ]);
     expect(script).toEqual('lint');
     expect(argv).toEqual(['src/components/**']);
-    expect(env).toEqual('test');
+    expect(environment).toEqual('test');
   });
 
   test('debug', () => {

@@ -11,7 +11,6 @@ const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
-const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
@@ -48,10 +47,7 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig();
 
-  const envars = stringifyEnvarValues({
-    ...env,
-    SKU_ENV: args.env,
-  });
+  const envars = stringifyEnvarValues(env);
 
   const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 

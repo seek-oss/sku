@@ -6,12 +6,6 @@ const optionDefinitions = [
     defaultOption: true,
   },
   {
-    name: 'env',
-    alias: 'e',
-    type: String,
-    defaultValue: 'production',
-  },
-  {
     name: 'build',
     alias: 'b',
     type: String,
@@ -78,7 +72,6 @@ module.exports = (args) => {
   return {
     ...options,
     buildName: script === 'start' ? buildName() : null,
-    env: script === 'start' ? 'development' : options.env,
     argv,
   };
 };

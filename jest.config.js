@@ -4,7 +4,6 @@ module.exports = {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   preset: 'jest-puppeteer',
-  ...(process.env.CI ? { maxWorkers: '100%' } : {}),
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [
     '<rootDir>/test-utils/appSnapshotSerializer.js',

@@ -4,10 +4,14 @@ const { rootResolution, tsconfigDecorator } = require('../../context');
 module.exports = () => {
   const config = {
     compilerOptions: {
-      // This flag allows tsc to be invoked directly by VS Code (via Cmd+Shift+B),
-      // otherwise it would emit a bunch of useless JS/JSX files in your project.
-      // We emit compiled JavaScript into `dist` via webpack + Babel, not tsc.
+      // Don't compile anything, only perform type checking
       noEmit: true,
+
+      // Emit build information for faster subsequent type checking
+      incremental: true,
+      // Emit build information to `node_modules` to avoid bloating the project root
+      // and ignore files
+      outDir: 'node_modules',
 
       // Fixes https://github.com/cypress-io/cypress/issues/1087
       skipLibCheck: true,

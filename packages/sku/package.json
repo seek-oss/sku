@@ -124,7 +124,6 @@
     "webpack-dev-server": "^5.0.2",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0",
-    "which": "^4.0.0",
     "wrap-ansi": "^7.0.0",
     "x-default-browser": "^0.5.0"
   },

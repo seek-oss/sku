@@ -32,27 +32,23 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
 };
 
 module.exports = async () => {
-  // Ignore webpack bundle report output
-  const gitIgnorePatterns = [
-    addSep(bundleReportFolder),
-    addSep(coverageFolder),
-    storybookMainConfigPath,
-  ];
-  const lintIgnorePatterns = [
-    addSep(bundleReportFolder),
-    addSep(coverageFolder),
-    '*.less.d.ts',
-    storybookMainConfigPath,
-  ];
-
-  // Ignore webpack target directories
-  const targetDirectory = addSep(paths.target.replace(addSep(cwd()), ''));
+  // Ignore target directories
+  const webpackTargetDirectory = addSep(
+    paths.target.replace(addSep(cwd()), ''),
+  );
   const storybookTargetDirectory = addSep(
     paths.storybookTarget.replace(addSep(cwd()), ''),
   );
 
-  gitIgnorePatterns.push(targetDirectory, storybookTargetDirectory);
-  lintIgnorePatterns.push(targetDirectory, storybookTargetDirectory);
+  const gitIgnorePatterns = [
+    // Ignore webpack bundle report output
+    addSep(bundleReportFolder),
+    addSep(coverageFolder),
+    webpackTargetDirectory,
+    storybookTargetDirectory,
+    storybookMainConfigPath,
+  ];
+  const lintIgnorePatterns = [...gitIgnorePatterns, '*.less.d.ts'];
 
   // Generate ESLint configuration
   const eslintConfigFilename = '.eslintrc';

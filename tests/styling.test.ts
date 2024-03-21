@@ -92,7 +92,10 @@ describe('styling', () => {
     let storybookFrame: Frame;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, ['--ci']);
+      server = await runSkuScriptInDir('storybook', appDir, [
+        '--ci',
+        '--quiet',
+      ]);
       await waitForUrls(storybookUrl);
       storybookFrame = await getStorybookFrame(storybookUrl);
     }, 200000);

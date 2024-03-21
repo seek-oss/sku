@@ -28,6 +28,7 @@ describe('storybook-config', () => {
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, [
         '--ci',
+        '--quiet',
         '--config',
         skuConfigFileName,
       ]);

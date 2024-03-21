@@ -10,7 +10,7 @@ const {
 const chalk = require('chalk');
 const fs = require('node:fs/promises');
 const { posix: path } = require('node:path');
-const emptyDir = require('empty-dir');
+const { isEmptyDir } = require('../lib/isEmptyDir');
 const validatePackageName = require('validate-npm-package-name');
 const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
@@ -125,7 +125,7 @@ const getTemplateFileDestinationFromRoot =
 
   await fs.mkdir(projectName, { recursive: true });
 
-  if (!emptyDir.sync(root)) {
+  if (!isEmptyDir(root)) {
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }

@@ -644,9 +644,6 @@ importers:
       ejs:
         specifier: ^3.1.8
         version: 3.1.9
-      empty-dir:
-        specifier: ^3.0.0
-        version: 3.0.0
       ensure-gitignore:
         specifier: ^1.1.2
         version: 1.2.0
@@ -8045,11 +8042,6 @@ packages:
   /emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
     engines: {node: '>= 4'}
-    dev: false
-
-  /empty-dir@3.0.0:
-    resolution: {integrity: sha512-BVrc23tc2khY2AiAAaNsAlhSHBPdDU/gAMAYzA8QwBqqLpZ3PGedNNeatONxk4nYGuY852VlgSDrQxmjKHP/yw==}
-    engines: {node: '>=10.13.0'}
     dev: false
 
   /encodeurl@1.0.2:

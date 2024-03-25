@@ -2,25 +2,22 @@ import type React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import App from './App';
+import type { Server } from 'sku';
 
-interface SkuProps {
-  SkuProvider: React.FunctionComponent<{ children: React.ReactNode }>;
-  getHeadTags: () => string;
-  getBodyTags: () => string;
-}
-export default () => ({
-  renderCallback: (
-    { SkuProvider, getBodyTags, getHeadTags }: SkuProps,
-    _: any,
-    res: any,
-  ): void => {
-    const app = renderToString(
-      <SkuProvider>
-        <App />
-      </SkuProvider>,
-    );
+export default () =>
+  ({
+    renderCallback: (
+      { SkuProvider, getBodyTags, getHeadTags },
+      _,
+      res,
+    ): void => {
+      const app = renderToString(
+        <SkuProvider>
+          <App />
+        </SkuProvider>,
+      );
 
-    res.send(/* html */ `
+      res.send(/* html */ `
       <!DOCTYPE html>
       <html>
         <head>
@@ -35,5 +32,5 @@ export default () => ({
         </body>
       </html>
     `);
-  },
-});
+    },
+  } satisfies Server);

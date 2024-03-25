@@ -1,5 +1,23 @@
 # sku
 
+## 12.5.0
+
+### Minor Changes
+
+- Update TypeScript to 5.3 ([#938](https://github.com/seek-oss/sku/pull/938))
+
+  This release includes breaking changes. See the [TypeScript 5.3 announcement] for more information.
+
+  [TypeScript 5.3 announcement]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-3/
+
+### Patch Changes
+
+- Remove `empty-dir` dependency ([#935](https://github.com/seek-oss/sku/pull/935))
+
+- Replace `command-line-args` with `minimist` for parsing CLI arguments ([#940](https://github.com/seek-oss/sku/pull/940))
+
+- Emit incremental TypeScript build info for faster subsequent type checking ([#938](https://github.com/seek-oss/sku/pull/938))
+
 ## 12.4.11
 
 ### Patch Changes

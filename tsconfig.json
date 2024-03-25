@@ -5,6 +5,8 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "noEmit": true,
+    // Output incremental build info to node_modules
+    "outDir": "node_modules/.cache/typescript",
     "incremental": true
   },
   "include": ["tests/**/*", "test-utils/**/*"]

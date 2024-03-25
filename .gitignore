@@ -6,6 +6,4 @@ dist/
 dist-build/
 dist-ssr/
 dist-start/
-.eslintcache
 yarn.lock
-tsconfig.tsbuildinfo

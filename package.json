@@ -6,7 +6,7 @@
     "postinstall": "node ./postinstall.js",
     "prepare": "husky",
     "lint": "concurrently -c auto --group 'pnpm:lint:*'",
-    "lint:eslint": "eslint --cache .",
+    "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
     "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
     "lint:tsc": "tsc",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",

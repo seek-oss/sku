@@ -1,20 +1,14 @@
 import fs from 'node:fs';
 import http from 'node:http';
 import https from 'node:https';
-import commandLineArgs from 'command-line-args';
 import { app, onStart } from './server';
+import minimist from 'minimist';
 
-const { port } = commandLineArgs(
-  [
-    {
-      name: 'port',
-      alias: 'p',
-      type: Number,
-      defaultValue: __SKU_DEFAULT_SERVER_PORT__, // eslint-disable-line no-undef
-    },
-  ],
-  { partial: true },
-);
+const { port } = minimist(process.argv.slice(2), {
+  alias: { p: 'port' },
+  // eslint-disable-next-line no-undef
+  default: { port: __SKU_DEFAULT_SERVER_PORT__ },
+});
 
 const startCallback = () => {
   console.log('Server started on port', port);

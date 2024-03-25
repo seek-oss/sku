@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const parseArgs = require('./parseArgs');
 
 describe('parseArgs', () => {
@@ -52,7 +56,7 @@ describe('parseArgs', () => {
   test('debug', () => {
     expect(
       parseArgs(['/path/to/node', '/path/to/bin/sku', 'build']).debug,
-    ).toBeUndefined();
+    ).toBe(false);
 
     expect(
       parseArgs(['/path/to/node', '/path/to/bin/sku', '-D', 'build']).debug,

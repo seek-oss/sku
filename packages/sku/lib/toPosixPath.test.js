@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 const toPosixPath = require('./toPosixPath');
 
 describe('toPosixPath', () => {

@@ -289,31 +289,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/sku-init/new-project:
-    dependencies:
-      braid-design-system:
-        specifier: ^32.0.0
-        version: 32.15.1(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(sku@packages+sku)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-    devDependencies:
-      '@types/react':
-        specifier: ^18.2.3
-        version: 18.2.48
-      '@types/react-dom':
-        specifier: ^18.2.3
-        version: 18.2.18
-      '@vanilla-extract/css':
-        specifier: ^1.0.0
-        version: 1.14.1
-      sku:
-        specifier: workspace:^
-        version: link:../../../packages/sku
-
   fixtures/sku-test:
     devDependencies:
       sku:

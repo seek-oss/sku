@@ -9,5 +9,5 @@
     "outDir": "node_modules/.cache/typescript",
     "incremental": true
   },
-  "include": ["tests/**/*", "test-utils/**/*"]
+  "exclude": ["node_modules", "fixtures"]
 }

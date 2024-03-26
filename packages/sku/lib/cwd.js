@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('node:path');
 
 let currentCwd = process.cwd();

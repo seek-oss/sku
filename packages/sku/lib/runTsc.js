@@ -1,3 +1,4 @@
+// @ts-check
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { cwd } = require('./cwd');

@@ -1,3 +1,4 @@
+// @ts-check
 const { statSync, readdirSync } = require('node:fs');
 
 /**

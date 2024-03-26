@@ -1,3 +1,4 @@
+// @ts-check
 const { getRunCommand, getExecuteCommand } = require('./packageManager');
 
 const chalk = require('chalk');

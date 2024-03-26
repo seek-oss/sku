@@ -1,3 +1,4 @@
+// @ts-check
 const args = require('../config/args');
 
 /**

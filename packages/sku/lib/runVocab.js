@@ -1,3 +1,4 @@
+// @ts-check
 const { compile } = require('@vocab/core');
 const { getVocabConfig } = require('../config/vocab/vocab');
 

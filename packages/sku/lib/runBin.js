@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('node:path');
 const spawn = require('cross-spawn');
 
@@ -45,13 +46,13 @@ const spawnPromise = (commandPath, args, options) => {
  */
 
 /**
- * @param {Options}
+ * @param {Options} options
  */
 const runBin = ({ packageName, binName, args, options }) =>
   spawnPromise(resolveBin(packageName, binName), args, options);
 
 /**
- * @param {Options}
+ * @param {Options} options
  */
 const startBin = ({ packageName, binName, args, options }) => {
   const childProcess = spawn(resolveBin(packageName, binName), args, options);

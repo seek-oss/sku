@@ -1,3 +1,4 @@
+// @ts-check
 const http = require('node:http');
 const https = require('node:https');
 

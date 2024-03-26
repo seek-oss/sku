@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('node:path');
 const fs = require('node:fs/promises');
 const debug = require('debug');

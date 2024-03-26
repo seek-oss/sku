@@ -1,3 +1,4 @@
+// @ts-check
 const { match } = require('path-to-regexp');
 
 /**

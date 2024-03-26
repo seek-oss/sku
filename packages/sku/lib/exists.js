@@ -1,3 +1,4 @@
+// @ts-check
 const { access } = require('node:fs/promises');
 
 /**

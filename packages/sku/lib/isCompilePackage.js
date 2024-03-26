@@ -1,3 +1,4 @@
+// @ts-check
 const { getPathFromCwd } = require('./cwd');
 
 const isCompilePackage = () => {

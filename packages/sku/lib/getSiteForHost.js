@@ -1,3 +1,4 @@
+// @ts-check
 const { sites } = require('../context');
 
 /**

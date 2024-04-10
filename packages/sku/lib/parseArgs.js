@@ -1,5 +1,3 @@
-// @ts-check
-
 const minimist = require('minimist');
 /**
  * Supports parsing args that look like:
@@ -51,21 +49,9 @@ module.exports = (processArgv) => {
 
   const [script, ...argv] = unknown;
 
-  // Backwards compatibility for unnamed build name argument, to be deprecated
-  const buildName = () => {
-    if (options.build) {
-      return options.build;
-    } else if (argv.length) {
-      return argv[0];
-    }
-
-    return undefined;
-  };
-
   return {
     ...options,
     script,
-    buildName: script === 'start' ? buildName() : null,
     argv,
   };
 };

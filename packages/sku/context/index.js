@@ -172,7 +172,6 @@ const paths = {
 
 module.exports = {
   paths,
-  env: skuConfig.env,
   locales: skuConfig.locales,
   hosts: skuConfig.hosts,
   port: {

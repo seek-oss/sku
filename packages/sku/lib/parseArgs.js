@@ -1,4 +1,5 @@
 // @ts-check
+
 const minimist = require('minimist');
 
 /**
@@ -20,8 +21,6 @@ module.exports = (processArgv) => {
     processArgv.slice(2),
     {
       string: [
-        'env',
-        'tenant',
         'build',
         'config',
         'environment',
@@ -31,10 +30,10 @@ module.exports = (processArgv) => {
       ],
       default: {
         env: 'production',
-        tenant: '',
       },
       alias: {
         e: 'env',
+        e: 'environment',
         t: 'tenant',
         b: 'build',
         c: 'config',

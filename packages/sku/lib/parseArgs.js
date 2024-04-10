@@ -1,7 +1,6 @@
 // @ts-check
 
 const minimist = require('minimist');
-
 /**
  * Supports parsing args that look like:
  * [/path/to/node/node, /path/to/sku, scriptName, arg1, arg2]
@@ -28,11 +27,7 @@ module.exports = (processArgv) => {
         'site',
         'stats',
       ],
-      default: {
-        env: 'production',
-      },
       alias: {
-        e: 'env',
         e: 'environment',
         t: 'tenant',
         b: 'build',
@@ -71,7 +66,6 @@ module.exports = (processArgv) => {
     ...options,
     script,
     buildName: script === 'start' ? buildName() : null,
-    env: script === 'start' ? 'development' : options.env,
     argv,
   };
 };

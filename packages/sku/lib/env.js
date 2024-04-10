@@ -18,7 +18,7 @@ const stringifyEnvarValues = (envars) => {
 
     if (typeof value === 'undefined') {
       console.log(
-        `WARNING: Environment variable "${key}" is missing a value for the "${args.env}" environment`,
+        `WARNING: Environment variable "${key}" is missing a value for the "${args.environment}" environment`,
       );
       process.exit(1);
     }

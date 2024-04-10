@@ -6,7 +6,6 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const args = require('../args');
 const config = require('../../context');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
@@ -60,7 +59,6 @@ const makeWebpackConfig = ({
 
   const envars = stringifyEnvarValues({
     ...env,
-    SKU_ENV: args.env,
     PORT: port,
   });
 

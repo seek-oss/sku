@@ -79,6 +79,10 @@ module.exports = ({
           {
             isTSX: true,
             allExtensions: true,
+            // babel equivalent of tsconfig `verbatimModuleSyntax: true`
+            onlyRemoveTypeImports: true,
+            // babel equivalent of tsconfig `allowImportingTsExtension: true`
+            rewriteImportExtensions: true,
           },
         ]
       : null,

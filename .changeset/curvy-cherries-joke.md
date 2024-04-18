@@ -1,0 +1,5 @@
+---
+'sku': minor
+---
+
+Support `dangerouslySetPrettierConfig`

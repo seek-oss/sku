@@ -1,5 +1,4 @@
 const exists = require('./exists');
-const path = require('node:path');
 const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');
@@ -7,10 +6,7 @@ const { suggestScript } = require('./suggestScript');
 const extensions = require('eslint-config-seek/extensions');
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
-const prettierConfigPath = path.join(
-  __dirname,
-  '../config/prettier/prettierConfig.js',
-);
+const prettierConfigPath = getPathFromCwd('.prettierrc');
 
 /**
  * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }}

@@ -200,6 +200,7 @@ module.exports = {
   jestDecorator: skuConfig.dangerouslySetJestConfig,
   eslintDecorator: skuConfig.dangerouslySetESLintConfig,
   tsconfigDecorator: skuConfig.dangerouslySetTSConfig,
+  prettierDecorator: skuConfig.dangerouslySetPrettierConfig,
   routes: normalizedRoutes,
   sites,
   environments: skuConfig.environments,

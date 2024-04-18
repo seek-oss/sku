@@ -39,6 +39,7 @@ module.exports = {
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
+  dangerouslySetPrettierConfig: defaultDecorator,
   supportedBrowsers,
   orderImports: false,
   cspEnabled: false,

@@ -124,6 +124,13 @@ export interface SkuConfig {
   dangerouslySetTSConfig?: (existingTSConfig: any) => any;
 
   /**
+   * Similar to {@link dangerouslySetWebpackConfig}, but for Prettier.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetprettierconfig
+   */
+  dangerouslySetPrettierConfig?: (existingPrettierConfig: any) => any;
+
+  /**
    * This function provides a way to override the webpack config after sku has created it.
    * Ideally, this setting is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
    *

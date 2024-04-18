@@ -117,9 +117,10 @@ describe('configure', () => {
       await removeAppDir(appFolderTS);
     });
 
-    it('should generate a prettier config', async () => {
+    it('should generate a custom prettier config', async () => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
-      expect(prettierRc).toEqual(prettierConfig);
+      expect(prettierRc).not.toEqual(prettierConfig);
+      expect(prettierRc).toEqual({ ...prettierConfig, semi: false });
     });
 
     it('should generate a custom eslint config', async () => {

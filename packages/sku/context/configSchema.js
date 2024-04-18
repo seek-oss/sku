@@ -168,6 +168,9 @@ module.exports = validator.compile({
   dangerouslySetTSConfig: {
     type: 'function',
   },
+  dangerouslySetPrettierConfig: {
+    type: 'function',
+  },
   supportedBrowsers: {
     type: 'array',
     items: {

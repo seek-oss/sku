@@ -8,4 +8,8 @@ export default {
     config.rules['no-console'] = 0;
     return config;
   },
+  dangerouslySetPrettierConfig: (config) => {
+    config.semi = false;
+    return config;
+  },
 } satisfies SkuConfig;

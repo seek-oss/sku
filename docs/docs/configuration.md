@@ -118,6 +118,30 @@ export default {
 } satisfies SkuConfig;
 ```
 
+## dangerouslySetPrettierConfig
+
+type `function`
+
+Similar to `dangerouslySetWebpackConfig`, but for [Prettier](https://prettier.io/docs/en/configuration).
+
+Example:
+
+```ts
+export default {
+  dangerouslySetPrettierConfig: (skuPrettierConfig) => ({
+    ...skuPrettierConfig,
+    overrides: [
+      {
+        files: '*.html',
+        options: {
+          tabWidth: 4,
+        },
+      },
+    ],
+  }),
+} satisfies SkuConfig;
+```
+
 ## dangerouslySetWebpackConfig
 
 type `function`

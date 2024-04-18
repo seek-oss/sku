@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { rimraf } from 'rimraf';
+import { rm } from 'node:fs/promises';
 import {
   dirContentsToObject,
   waitForUrls,
@@ -40,7 +40,7 @@ describe('typescript-css-modules', () => {
     afterAll(async () => {
       await process.kill();
       // Clean up dist dir to prevent pollution of linted files in lint test
-      await rimraf(distDir);
+      await rm(distDir, { recursive: true, force: true });
     });
 
     it('should create valid app', async () => {
@@ -78,7 +78,7 @@ describe('typescript-css-modules', () => {
       await server.kill();
       closeAssetServer();
       // Clean up dist-ssr dir to prevent pollution of linted files in lint test
-      await rimraf(distSsrDir);
+      await rm(distSsrDir, { recursive: true, force: true });
     });
 
     it('should create valid app', async () => {

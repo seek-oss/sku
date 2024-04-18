@@ -1,5 +1,4 @@
-import { readFile, copyFile, mkdir as makeDir } from 'node:fs/promises';
-import { rimraf } from 'rimraf';
+import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
@@ -33,10 +32,9 @@ const copyToApp = async (filename: string, folder: string) =>
   copyFile(path.join(fixtureFolder, filename), path.join(folder, filename));
 
 const removeAppDir = async (folder: string) =>
-  rimraf(folder, {
-    glob: {
-      dot: true,
-    },
+  rm(folder, {
+    recursive: true,
+    force: true,
   });
 
 const skuPackagePath = path.dirname(require.resolve('sku/package.json'));

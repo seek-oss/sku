@@ -1,6 +1,5 @@
 const path = require('node:path');
-const fs = require('node:fs');
-const { rimraf } = require('rimraf');
+const fs = require('node:fs/promises');
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
 const fixtureDirectory = path.join(__dirname, '../fixtures/sku-init');
@@ -10,7 +9,10 @@ describe('sku init', () => {
     'should create a sku.config.ts',
     async () => {
       const projectName = 'new-project';
-      await rimraf(path.join(fixtureDirectory, projectName));
+      await fs.rm(path.join(fixtureDirectory, projectName), {
+        recursive: true,
+        force: true,
+      });
 
       const { child } = await runSkuScriptInDir('init', fixtureDirectory, [
         projectName,
@@ -18,7 +20,7 @@ describe('sku init', () => {
 
       expect(child.exitCode).toBe(0);
 
-      const skuConfig = fs.readFileSync(
+      const skuConfig = await fs.readFile(
         path.join(fixtureDirectory, projectName, 'sku.config.ts'),
         'utf-8',
       );

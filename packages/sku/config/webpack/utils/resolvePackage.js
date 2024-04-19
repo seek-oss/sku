@@ -1,5 +1,5 @@
 const path = require('node:path');
-const memoize = require('memoizee');
+const { default: memoize } = require('nano-memoize');
 const debug = require('debug')('sku:resolvePackage');
 const { cwd } = require('../../../lib/cwd');
 
@@ -37,6 +37,7 @@ const createPackageResolver = (fs, resolve) => {
    *
    * Throws if a package is listed in the project's dependencies and cannot be resolved.
    */
+  /** @param {string} packageName  */
   function resolvePackage(packageName) {
     try {
       // First, try to use require.resolve to find the package.

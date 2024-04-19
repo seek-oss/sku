@@ -1,7 +1,6 @@
 const fs = require('node:fs');
-const path = require('node:path');
-const glob = require('fast-glob');
 const chalk = require('chalk');
+const { fdir: Fdir } = require('fdir');
 
 const printBanner = require('./banner');
 const exists = require('./exists');
@@ -14,11 +13,18 @@ module.exports = async () => {
   const lessFileGlobResults = await Promise.all(
     srcPathsExist
       .filter((srcPath) => srcPath && fs.statSync(srcPath).isDirectory())
-      .map(async (srcPath) => await glob(path.join(srcPath, '**/*.less'))),
+      .map(async (srcPath) =>
+        new Fdir()
+          .filter((file) => file.endsWith('.less'))
+          .crawl(srcPath)
+          .withPromise(),
+      ),
   );
+
   const srcHasLessFiles = lessFileGlobResults.some(
     (fileArray) => fileArray.length > 0,
   );
+
   if (srcHasLessFiles) {
     printBanner('warning', 'LESS styles detected', [
       `Support for ${chalk.bold('LESS')} has been deprecated.`,

@@ -21,7 +21,7 @@ const install = require('../lib/install');
 const banner = require('../lib/banner');
 const toPosixPath = require('../lib/toPosixPath');
 const trace = require('debug')('sku:init');
-const glob = require('fast-glob');
+const { fdir: Fdir } = require('fdir');
 const ejs = require('ejs');
 
 const args = require('../config/args');
@@ -152,9 +152,11 @@ const getTemplateFileDestinationFromRoot =
   process.chdir(root);
 
   const templateDirectory = path.join(toPosixPath(__dirname), '../template');
-  const templateFiles = await glob(`${templateDirectory}/**/*`, {
-    onlyFiles: true,
-  });
+
+  const templateFiles = await new Fdir()
+    .withBasePath()
+    .crawl(templateDirectory)
+    .withPromise();
 
   const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
     root,

@@ -6,7 +6,8 @@
 
 Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Vanilla Extract](https://vanilla-extract.style/), [CSS Modules](https://github.com/css-modules/css-modules), [Less](http://lesscss.org/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/), [Jest](https://facebook.github.io/jest/) and [Storybook](https://storybook.js.org/).
 
-Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed. Designed for usage with [braid-design-system](https://github.com/seek-oss/braid-design-system), although this isn't a requirement.
+Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed.
+Designed for usage with [braid-design-system](https://github.com/seek-oss/braid-design-system), although this isn't a requirement.
 
 This tool is heavily inspired by other work, most notably:
 
@@ -14,7 +15,9 @@ This tool is heavily inspired by other work, most notably:
 - [insin/nwb](https://github.com/insin/nwb)
 - [NYTimes/kyt](https://github.com/NYTimes/kyt)
 
-**WARNING: While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK. As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.**
+> [!WARNING]
+> While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK.
+> As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.
 
 ## Getting Started
 
@@ -40,7 +43,8 @@ $ pnpm start
 
 ## Contributing
 
-Refer to [CONTRIBUTING.md](/CONTRIBUTING.md). If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/sku/issues/new).
+Refer to [CONTRIBUTING.md](/CONTRIBUTING.md).
+If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/sku/issues/new).
 
 ## License
 

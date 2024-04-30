@@ -15,8 +15,6 @@ We'd be happy to help out!
 1. Clone the repo
 1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc`. This repo is configured to use [`volta`]
    for managing toolchain dependencies, but feel free to use `nvm`, `corepack`, or whatever suits you best.
-1. Setup your hosts file for tests by running `sudo pnpm setup-test-hosts`
-1. Run `pnpm run test` to ensure everything is working as expected
 
 [`volta`]: https://volta.sh/
 
@@ -36,6 +34,19 @@ git checkout -b add-my-cool-new-feature
 ```
 
 ## Testing Your Changes
+
+Before running tests, some entries need to be added to your `/etc/hosts` file.
+
+| Hostname            | IP Address  |
+| ------------------- | ----------- |
+| `dev.seek.com.au`   | `127.0.0.1` |
+| `dev.jobstreet.com` | `127.0.0.1` |
+
+This can either be done manually, or via the following script:
+
+```sh
+sudo pnpm setup-test-hosts
+```
 
 To run the test suite locally:
 

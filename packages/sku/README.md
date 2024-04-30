@@ -17,7 +17,11 @@ This tool is heavily inspired by other work, most notably:
 
 > [!WARNING]
 > While this software is open source, its primary purpose is to improve consistency, cross-team collaboration and code quality at SEEK.
-> As a result, it’s likely that we will introduce more breaking API changes to this project than you’ll find in its alternatives.
+> As a result, it’s likely that this tool may not exactly suit your needs, or may be overkill for your use case.
+> It may be worth considering alternatives such as [Vite] or [Parcel].
+
+[Vite]: https://vitejs.dev/
+[Parcel]: https://parceljs.org/
 
 ## Getting Started
 

@@ -607,7 +607,7 @@ importers:
         version: 4.23.0
       browserslist-config-seek:
         specifier: ^2.1.0
-        version: 2.1.0
+        version: 2.1.1
       chalk:
         specifier: ^4.1.0
         version: 4.1.2
@@ -1168,6 +1168,10 @@ packages:
     resolution: {integrity: sha512-9cUznXMG0+FxRuJfvL82QlTqIzhVW9sL0KjMPHhAOOvpQGL8QtdxnBKILjBqxlHyliz0yCa1G903ZXI/FuHy2w==}
     engines: {node: '>=6.9.0'}
 
+  /@babel/helper-plugin-utils@7.24.5:
+    resolution: {integrity: sha512-xjNLDopRzW2o6ba0gKbkZq5YWEBaK3PCyTOY1K2P/O07LGMhMqlMXPxwN4S5/RhWuCobT8z0jrlKGlYmeR1OhQ==}
+    engines: {node: '>=6.9.0'}
+
   /@babel/helper-remap-async-to-generator@7.22.20(@babel/core@7.24.3):
     resolution: {integrity: sha512-pBGyV4uBqOns+0UvhsTO8qgl8hO89PmiDYv+/COyp1aeMcmfrfruz+/nCMFiYyFF/Knn0yfrC85ZzNFjembFTw==}
     engines: {node: '>=6.9.0'}
@@ -1314,7 +1318,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
 
   /@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.24.3):
     resolution: {integrity: sha512-fm4idjKla0YahUNgFNLCB0qySdsoPiZP3iQE3rky0mBUtMZ23yDJ9SJdg6dXTSDnulOVqiF3Hgr9nbXvXTQZYA==}
@@ -1359,7 +1363,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
     dev: false
 
   /@babel/plugin-syntax-import-assertions@7.24.1(@babel/core@7.24.3):
@@ -1671,7 +1675,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
       '@babel/plugin-syntax-flow': 7.24.1(@babel/core@7.24.3)
     dev: false
 
@@ -2226,7 +2230,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
       '@babel/helper-validator-option': 7.23.5
       '@babel/plugin-transform-flow-strip-types': 7.24.1(@babel/core@7.24.3)
     dev: false
@@ -6612,7 +6616,7 @@ packages:
     resolution: {integrity: sha512-Y1IQok9821cC9onCx5otgFfRm7Lm+I+wwxOx738M/WLPZ9Q42m4IG5W0FNX8WLL2gYMZo3JkuXIH2DOpWM+qwA==}
     engines: {node: '>=8'}
     dependencies:
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
       '@istanbuljs/load-nyc-config': 1.1.0
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-instrument: 5.2.1
@@ -6913,8 +6917,8 @@ packages:
       pako: 0.2.9
     dev: false
 
-  /browserslist-config-seek@2.1.0:
-    resolution: {integrity: sha512-BYXX1ABWAfkb+ZXaxAV8vElKwAFu0vOKHzzddj8Nh8elrD8xChm1+rYePNZ+eW7sYKYzfvVMIST2I4r6s8IJ7g==}
+  /browserslist-config-seek@2.1.1:
+    resolution: {integrity: sha512-UODCHasqCtP8J8uzLOoCdXkJ3MvUX6/jw/VUciZdd17+5r/eWCn0mXRpG0vyD33Ta3b0//wDFj18KbESMANsfg==}
     dev: false
 
   /browserslist@4.23.0:
@@ -16315,6 +16319,6 @@ packages:
       '@babel/preset-react': ^7.0.0
     dependencies:
       '@babel/core': 7.24.3
-      '@babel/helper-plugin-utils': 7.24.0
+      '@babel/helper-plugin-utils': 7.24.5
       '@babel/preset-react': 7.24.1(@babel/core@7.24.3)
     dev: false

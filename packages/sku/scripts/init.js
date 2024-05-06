@@ -11,7 +11,6 @@ const chalk = require('chalk');
 const fs = require('node:fs/promises');
 const { posix: path } = require('node:path');
 const { isEmptyDir } = require('../lib/isEmptyDir');
-const validatePackageName = require('validate-npm-package-name');
 const dedent = require('dedent');
 const { setCwd } = require('../lib/cwd');
 const prettierWrite = require('../lib/runPrettier').write;
@@ -21,7 +20,7 @@ const install = require('../lib/install');
 const banner = require('../lib/banner');
 const toPosixPath = require('../lib/toPosixPath');
 const trace = require('debug')('sku:init');
-const glob = require('fast-glob');
+const { fdir: Fdir } = require('fdir');
 const ejs = require('ejs');
 
 const args = require('../config/args');
@@ -47,6 +46,11 @@ const getTemplateFileDestinationFromRoot =
 
     return path.join(projectRoot, filePathRelativeToTemplate);
   };
+
+// Copied from `package-name-regex@4.0.0`
+// See https://github.com/dword-design/package-name-regex/blob/acae7d482b1d03379003899df4d484238625364d/src/index.js#L1-L2
+const packageNameRegex =
+  /^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
 
 (async () => {
   const projectName = args.argv[0];
@@ -89,20 +93,15 @@ const getTemplateFileDestinationFromRoot =
     'braid-design-system',
   ].sort();
 
-  const {
-    validForNewPackages,
-    errors = [],
-    warnings = [],
-  } = validatePackageName(appName);
+  const isValidPackageName = packageNameRegex.test(appName);
 
-  if (!validForNewPackages) {
+  if (!isValidPackageName) {
     console.error(dedent`
-    Could not create a project called ${chalk.red(`"${appName}"`)} \
-    because of npm naming restrictions:
+    Could not create a project called ${chalk.red(
+      `"${appName}"`,
+    )} because of npm naming restrictions. \
+    Please see https://docs.npmjs.com/cli/configuring-npm/package-json for package name rules.
   `);
-
-    const results = [...errors, ...warnings];
-    results.forEach((result) => console.error(chalk.red(`  *  ${result}`)));
 
     process.exit(1);
   }
@@ -152,9 +151,11 @@ const getTemplateFileDestinationFromRoot =
   process.chdir(root);
 
   const templateDirectory = path.join(toPosixPath(__dirname), '../template');
-  const templateFiles = await glob(`${templateDirectory}/**/*`, {
-    onlyFiles: true,
-  });
+
+  const templateFiles = await new Fdir()
+    .withBasePath()
+    .crawl(templateDirectory)
+    .withPromise();
 
   const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
     root,

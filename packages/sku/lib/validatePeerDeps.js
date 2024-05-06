@@ -1,13 +1,13 @@
-const { getWhyCommand } = require('./packageManager');
+const { getWhyCommand, isPnpm } = require('./packageManager');
 
 const { readFile } = require('node:fs/promises');
-const glob = require('fast-glob');
+const { fdir: Fdir } = require('fdir');
 const semver = require('semver');
 const chalk = require('chalk');
 
 const banner = require('./banner');
 const track = require('../telemetry');
-const { cwd, getPathFromCwd } = require('../lib/cwd');
+const { getPathFromCwd } = require('../lib/cwd');
 const { paths } = require('../context');
 
 /**
@@ -21,30 +21,42 @@ const asyncMap = (list, fn) => {
 const singletonPackages = ['@vanilla-extract/css'];
 
 module.exports = async () => {
-  try {
-    const packages = [];
+  if (isPnpm) {
+    // pnpm doesn't nest dependencies in the same way as yarn or npm, so the method used below won't
+    // work for detecting duplicate packages
+    return;
+  }
 
-    for (const packageName of [
-      ...paths.compilePackages,
-      ...singletonPackages,
-    ]) {
-      const results = await glob(
-        [
-          `node_modules/${packageName}/package.json`,
-          `node_modules/**/node_modules/${packageName}/package.json`,
-        ],
-        {
-          cwd: cwd(),
-        },
+  try {
+    /** @type {string[]} */
+    const duplicatePackages = [];
+    const packagesToCheck = [...paths.compilePackages, ...singletonPackages];
+
+    const packagePatterns = packagesToCheck.map((packageName) => [
+      packageName,
+      `node_modules/${packageName}/package.json`,
+    ]);
+
+    const patterns = packagePatterns.map(([, pattern]) => pattern);
+
+    const results = await new Fdir()
+      .withBasePath()
+      .filter((file) => patterns.some((pattern) => file.endsWith(pattern)))
+      .crawl('./node_modules')
+      .withPromise();
+
+    for (const [packageName, pattern] of packagePatterns) {
+      const resultsForPackage = results.filter((result) =>
+        result.endsWith(pattern),
       );
 
-      if (results.length > 1) {
+      if (resultsForPackage.length > 1) {
         const messages = [
           chalk`Multiple copies of {bold ${packageName}} are present in node_modules. This is likely to cause errors, but even if it works, it will probably result in an unnecessarily large bundle size.`,
         ];
 
         messages.push(
-          results
+          resultsForPackage
             .map((depLocation) => {
               const { version } = require(getPathFromCwd(depLocation));
 
@@ -64,14 +76,14 @@ module.exports = async () => {
           compile_package: packageName,
         });
         banner('error', 'Error: Duplicate packages detected', messages);
-      }
 
-      packages.push(...results);
+        duplicatePackages.push(...resultsForPackage);
+      }
     }
 
     const compilePackages = new Map();
 
-    await asyncMap(packages, async (p) => {
+    await asyncMap(duplicatePackages, async (p) => {
       const contents = await readFile(getPathFromCwd(p), {
         encoding: 'utf8',
       });

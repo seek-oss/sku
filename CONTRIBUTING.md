@@ -2,71 +2,91 @@
 
 ⚠️ 🌏 👀 First and foremost, remember that this repo is **open source**.
 
-Don't post anything or commit any code that isn't ready for the entire world to see. Avoid making specific reference to internal processes or features under development. While a lot of this information is probably harmless, it's better to be safe than sorry.
+Don't post anything or commit any code that isn't ready for the entire world to see.
+Avoid making specific reference to internal processes or features under development.
+While a lot of this information is probably harmless, it's better to be safe than sorry.
 
-If you work at SEEK and run into issues along the way, or even if you find some of these steps confusing or intimidating, please reach out to your friendly neighbourhood developer in the sku development Slack channel. We'll be super excited to help out!
+If you work at SEEK and run into issues along the way, or even if you find some of these steps confusing or intimidating, please reach out to your friendly neighbourhood developer `#sku-support` channel.
+We'd be happy to help out!
 
 ## Setup
 
-First, install [Node.js v8+](https://nodejs.org/).
+1. (Optional) Fork the repo if you do not have write access
+1. Clone the repo
+1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc`. This repo is configured to use [`volta`]
+   for managing toolchain dependencies, but feel free to use `nvm`, `corepack`, or whatever suits you best.
 
-After cloning the project, install the dependencies:
+[`volta`]: https://volta.sh/
 
-```bash
-$ npm install
-```
+## Making Changes
 
-## Before Starting
+Before starting your work, first ensure you've checked out the `master` branch and have pulled down the latest changes.
 
-If you're planning to change the public API, please [open a new issue](https://github.com/seek-oss/sku/issues/new) and follow the provided RFC template. If you think it's a more straightforward API change and doesn't require a formal RFC, feel free to raise it in Slack first to see what others think.
-
-## Workflow
-
-Before starting your work, first ensure you're in the `master` branch and that you've pulled down the latest changes:
-
-```bash
-$ git checkout master
-$ git pull
+```sh
+git checkout master
+git pull
 ```
 
 Next, create a new branch for your work, with an appropriate name for your change:
 
-```bash
-$ git checkout -b add-my-cool-new-feature
+```sh
+git checkout -b add-my-cool-new-feature
+```
+
+## Testing Your Changes
+
+Before running tests, some entries need to be added to your `/etc/hosts` file.
+
+| Hostname            | IP Address  |
+| ------------------- | ----------- |
+| `dev.seek.com.au`   | `127.0.0.1` |
+| `dev.jobstreet.com` | `127.0.0.1` |
+
+This can either be done manually, or via the following script:
+
+```sh
+sudo pnpm setup-test-hosts
 ```
 
 To run the test suite locally:
 
-```bash
-$ npm test
+```sh
+pnpm run test
 ```
 
-Note that the test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and before committing.
+If snapshots are out of date, you can update them with:
 
-Once you've made the desired changes and you're ready to commit, stage your local changes, being careful to exclude irrelevant changes.
-
-## Semantic Release
-
-Before committing, consider the scope of your changes according to [semantic versioning](http://semver.org), noting whether this is a breaking change, a feature release or a patch.
-
-New versions are published automatically from [Travis CI](https://travis-ci.org) using [semantic-release](https://github.com/semantic-release/semantic-release). In order to automatically increment version numbers correctly, commit messages must follow our [semantic commit message convention](https://github.com/seek-oss/commitlint-config-seek). If your commit includes a breaking change, be sure to prefix your commit body with `BREAKING CHANGE:`. To make this process easier, we have a commit script (powered by [commitizen](https://github.com/commitizen/cz-cli)) to help guide you through the commit process:
-
-```bash
-$ npm run commit
+```sh
+pnpm run test -u
 ```
 
-Once you've committed your work, push your changes to an upstream branch of the same name, and create a new pull request from your branch. You'll be presented with a pull request template, which provides separate outlines for major, minor, patch and non-release branches. Please follow this guide carefully, but raise any questions and concerns along the way if anything is unclear.
+> [!TIP]
+> The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
 
-In order for your pull request to be accepted, the [Travis CI](https://travis-ci.org) build needs to pass, and another contributor needs to approve your work. It's likely that you might need to make some changes for your work to be accepted, but don't take this personally! Ultimately, the aim is to make it feel like the codebase was written by a single person, but this takes a lot of work and constant review of each others' work.
+Occasionally, snapshot tests from within an app fixture may fail the test suite.
+Running `pnpm run test -u` at the top-level of the repo won't update these snapshots.
+Instead, `cd` into the fixture directory and run that fixture's tests directly:
 
-### Merging
+```sh
+cd fixtures/braid-design-system
+pnpm exec sku test -u
+```
 
-Once your work is approved and ready to go, follow these steps:
+You can also run any `sku` CLI command against any of the app fixtures.
+This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
 
-1. Hit the merge button
-2. Ensure the commit message matches the title of the PR (it may have been edited!)
-3. Copy and paste the text under **"Commit Message For Review"** into the commit body (again, it may have been edited!)
+1. `cd` into the fixture you want to test. E.g. `cd fixtures/styling`.
+1. Run your sku command. E.g. `pnpm run sku build`.
 
-Finally, take a deep breath, hit the green "confirm" button, and we have liftoff—your work should be automatically deployed!
+Once you've made the desired changes and you're ready to commit, stage your local changes.
 
-🎨📦🚀
+> [!NOTE]
+> Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.
+> These changes should not be committed and can be safely discard.
+
+## Publishing a New Version
+
+This repo uses [changesets] for publishing new versions.
+If this is your first time using changesets, please read the documentation available in the changesets repo.
+
+[changesets]: https://github.com/changesets/changesets

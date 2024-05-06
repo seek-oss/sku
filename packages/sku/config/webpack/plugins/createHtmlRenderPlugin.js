@@ -1,5 +1,5 @@
 const { HtmlRenderPlugin } = require('html-render-webpack-plugin');
-const memoize = require('memoizee/weak');
+const { default: memoize } = require('nano-memoize');
 const debug = require('debug');
 
 const {

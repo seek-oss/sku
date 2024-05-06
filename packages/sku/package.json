@@ -42,7 +42,7 @@
     "@loadable/server": "^5.14.0",
     "@loadable/webpack-plugin": "^5.14.0",
     "@manypkg/find-root": "^2.2.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.11",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.12",
     "@storybook/builder-webpack5": "^7.0.17",
     "@storybook/cli": "^7.0.17",
     "@storybook/react": "^7.0.17",

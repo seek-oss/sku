@@ -4,13 +4,8 @@ import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 
-import { bundleReportFolder } from '../packages/sku/config/webpack/plugins/bundleAnalyzer';
 import prettierConfig from '../packages/sku/config/prettier/prettierConfig';
-import skuConfig from '@sku-fixtures/configure/sku.config';
 
-const defaultTargetDir = 'dist';
-const defaultStorybookTargetDir = 'dist-storybook';
-const coverageFolder = 'coverage';
 const fixtureFolder = path.dirname(
   require.resolve('@sku-fixtures/configure/sku.config.ts'),
 );
@@ -62,11 +57,13 @@ describe('configure', () => {
 
     it('should generate a prettier config', async () => {
       const prettierRc = await readJsonC(appFolder, '.prettierrc');
+
       expect(prettierRc).toEqual(prettierConfig);
     });
 
     it('should generate a eslint config', async () => {
       const eslintrc = await readJsonC(appFolder, '.eslintrc');
+
       expect(eslintrc.extends).toEqual(
         require.resolve('eslint-config-seek', {
           // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
@@ -77,29 +74,29 @@ describe('configure', () => {
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
-      expect(ignoreContents.length).toEqual(9);
-      expect(ignoreContents).toContain(`.eslintrc`);
-      expect(ignoreContents).toContain(`.eslintcache`);
-      expect(ignoreContents).toContain(`.prettierrc`);
-      expect(ignoreContents).toContain(`.storybook/main.js`);
-      expect(ignoreContents).toContain(`${defaultTargetDir}/`);
-      expect(ignoreContents).toContain(`${defaultStorybookTargetDir}/`);
-      expect(ignoreContents).toContain(`${bundleReportFolder}/`);
-      expect(ignoreContents).toContain(`${coverageFolder}/`);
-      expect(ignoreContents).toContain('tsconfig.json');
+
+      expect(ignoreContents).toMatchInlineSnapshot(`
+        [
+          ".eslintcache",
+          ".eslintrc",
+          ".prettierrc",
+          ".storybook/main.js",
+          "coverage/",
+          "dist-storybook/",
+          "dist/",
+          "report/",
+          "tsconfig.json",
+        ]
+      `);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
-      it(`should generate \`${ignore}\``, async () => {
+    it.each(['.eslintignore', '.prettierignore'])(
+      'should generate $ignore',
+      async (ignore) => {
         const ignoreContents = await readIgnore(appFolder, ignore);
-        expect(ignoreContents.length).toEqual(6);
-        expect(ignoreContents).toContain('*.less.d.ts');
-        expect(ignoreContents).toContain(`.storybook/main.js`);
-        expect(ignoreContents).toContain(`${defaultTargetDir}/`);
-        expect(ignoreContents).toContain(`${bundleReportFolder}/`);
-        expect(ignoreContents).toContain(`${coverageFolder}/`);
-        expect(ignoreContents).toContain(`${defaultStorybookTargetDir}/`);
-      }),
+
+        expect(ignoreContents).toMatchSnapshot();
+      },
     );
   });
 
@@ -119,11 +116,13 @@ describe('configure', () => {
 
     it('should generate a prettier config', async () => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
+
       expect(prettierRc).toEqual(prettierConfig);
     });
 
     it('should generate a custom eslint config', async () => {
       const eslintrc = await readJsonC(appFolderTS, '.eslintrc');
+
       expect(eslintrc.extends).toEqual(
         require.resolve('eslint-config-seek', {
           // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
@@ -135,34 +134,35 @@ describe('configure', () => {
 
     it('should generate tsconfig config', async () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
+
       expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);
     });
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
-      expect(ignoreContents.length).toEqual(9);
-      expect(ignoreContents).toContain(`.eslintrc`);
-      expect(ignoreContents).toContain(`.eslintcache`);
-      expect(ignoreContents).toContain(`.prettierrc`);
-      expect(ignoreContents).toContain(`tsconfig.json`);
-      expect(ignoreContents).toContain(`.storybook/main.js`);
-      expect(ignoreContents).toContain(`${skuConfig.target}/`);
-      expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);
-      expect(ignoreContents).toContain(`${bundleReportFolder}/`);
-      expect(ignoreContents).toContain(`${coverageFolder}/`);
+
+      expect(ignoreContents).toMatchInlineSnapshot(`
+        [
+          ".eslintcache",
+          ".eslintrc",
+          ".prettierrc",
+          ".storybook/main.js",
+          "coverage/",
+          "foo/bar/",
+          "report/",
+          "storybook/foobar/",
+          "tsconfig.json",
+        ]
+      `);
     });
 
-    ['.eslintignore', '.prettierignore'].forEach((ignore) =>
-      it(`should generate \`${ignore}\``, async () => {
+    it.each(['.eslintignore', '.prettierignore'])(
+      'should generate $ignore',
+      async (ignore) => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
-        expect(ignoreContents.length).toEqual(6);
-        expect(ignoreContents).toContain('*.less.d.ts');
-        expect(ignoreContents).toContain(`.storybook/main.js`);
-        expect(ignoreContents).toContain(`${skuConfig.target}/`);
-        expect(ignoreContents).toContain(`${skuConfig.storybookTarget}/`);
-        expect(ignoreContents).toContain(`${bundleReportFolder}/`);
-        expect(ignoreContents).toContain(`${coverageFolder}/`);
-      }),
+
+        expect(ignoreContents).toMatchSnapshot();
+      },
     );
   });
 });

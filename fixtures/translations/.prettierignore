@@ -3,6 +3,9 @@ translations.ts
 # managed by sku
 **/*.vocab/index.ts
 *.less.d.ts
+.eslintcache
+.eslintrc
+.prettierrc
 .storybook/main.js
 coverage/
 dist-ssr/

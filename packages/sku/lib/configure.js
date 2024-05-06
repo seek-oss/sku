@@ -48,7 +48,6 @@ module.exports = async () => {
     storybookTargetDirectory,
     storybookMainConfigPath,
   ];
-  const lintIgnorePatterns = [...gitIgnorePatterns, '*.less.d.ts'];
 
   // Generate ESLint configuration
   const eslintConfigFilename = '.eslintrc';
@@ -66,6 +65,8 @@ module.exports = async () => {
     banner: false,
   });
   gitIgnorePatterns.push(prettierConfigFilename);
+
+  const lintIgnorePatterns = [...gitIgnorePatterns, '*.less.d.ts'];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';

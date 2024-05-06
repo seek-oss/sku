@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configure custom should generate $ignore 1`] = `
+[
+  "*.less.d.ts",
+  ".eslintcache",
+  ".eslintrc",
+  ".prettierrc",
+  ".storybook/main.js",
+  "coverage/",
+  "foo/bar/",
+  "report/",
+  "storybook/foobar/",
+]
+`;
+
+exports[`configure custom should generate $ignore 2`] = `
+[
+  "*.less.d.ts",
+  ".eslintcache",
+  ".eslintrc",
+  ".prettierrc",
+  ".storybook/main.js",
+  "coverage/",
+  "foo/bar/",
+  "report/",
+  "storybook/foobar/",
+]
+`;
+
+exports[`configure default should generate $ignore 1`] = `
+[
+  "*.less.d.ts",
+  ".eslintcache",
+  ".eslintrc",
+  ".prettierrc",
+  ".storybook/main.js",
+  "coverage/",
+  "dist-storybook/",
+  "dist/",
+  "report/",
+]
+`;
+
+exports[`configure default should generate $ignore 2`] = `
+[
+  "*.less.d.ts",
+  ".eslintcache",
+  ".eslintrc",
+  ".prettierrc",
+  ".storybook/main.js",
+  "coverage/",
+  "dist-storybook/",
+  "dist/",
+  "report/",
+]
+`;

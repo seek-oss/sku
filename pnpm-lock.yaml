@@ -537,8 +537,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.1
       '@pmmmwh/react-refresh-webpack-plugin':
-        specifier: 0.5.11
-        version: 0.5.11(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+        specifier: ^0.5.12
+        version: 0.5.13(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
       '@storybook/builder-webpack5':
         specifier: ^7.0.17
         version: 7.6.19(esbuild@0.19.12)(typescript@5.3.3)
@@ -3708,8 +3708,8 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  /@pmmmwh/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0):
-    resolution: {integrity: sha512-7j/6vdTym0+qZ6u4XbSAxrWBGYSdCfTzySkj7WAFgDLmSyWlOrWvpyzxlFh5jtw9dn0oL/jtW+06XfFiisN3JQ==}
+  /@pmmmwh/react-refresh-webpack-plugin@0.5.13(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0):
+    resolution: {integrity: sha512-odZVYXly+JwzYri9rKqqUAk0cY6zLpv4dxoKinhoJNShV36Gpxf+CyDIILJ4tYsJ1ZxIWs233Y39iVnynvDA/g==}
     engines: {node: '>= 10.13'}
     peerDependencies:
       '@types/webpack': 4.x || 5.x
@@ -3717,7 +3717,7 @@ packages:
       sockjs-client: ^1.4.0
       type-fest: '>=0.17.0 <5.0.0'
       webpack: '>=4.43.0 <6.0.0'
-      webpack-dev-server: 3.x || 4.x
+      webpack-dev-server: 3.x || 4.x || 5.x
       webpack-hot-middleware: 2.x
       webpack-plugin-serve: 0.x || 1.x
     peerDependenciesMeta:
@@ -3735,10 +3735,8 @@ packages:
         optional: true
     dependencies:
       ansi-html-community: 0.0.8
-      common-path-prefix: 3.0.0
       core-js-pure: 3.37.0
       error-stack-parser: 2.1.4
-      find-up: 5.0.0
       html-entities: 2.5.2
       loader-utils: 2.0.4
       react-refresh: 0.14.2
@@ -4930,7 +4928,7 @@ packages:
       '@babel/core': 7.24.5
       '@babel/preset-flow': 7.24.1(@babel/core@7.24.5)
       '@babel/preset-react': 7.24.1(@babel/core@7.24.5)
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.13(react-refresh@0.14.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
       '@storybook/core-webpack': 7.6.19
       '@storybook/docs-tools': 7.6.19
       '@storybook/node-logger': 7.6.19

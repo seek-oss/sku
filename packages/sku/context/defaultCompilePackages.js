@@ -1,56 +1,82 @@
 const { posix: path } = require('node:path');
 const chalk = require('chalk');
-const glob = require('fast-glob');
+const { fdir: Fdir } = require('fdir');
 
-const { cwd: skuCwd } = require('../lib/cwd');
+const { cwd } = require('../lib/cwd');
 const toPosixPath = require('../lib/toPosixPath');
 
 const { rootDir, isPnpm } = require('../lib/packageManager');
+const debug = require('debug')('sku:compilePackages');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
 
-try {
-  const globs = ['node_modules/@seek/*/package.json'];
-  const cwd = skuCwd();
+// If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+// package manager. In either case, we can't correctly detect compile packages.
+if (rootDir) {
+  try {
+    let crawler = new Fdir();
 
-  if (isPnpm && rootDir) {
-    const pnpmVirtualStorePath = path.join(
-      toPosixPath(rootDir),
-      'node_modules/.pnpm',
-    );
-    const pnpmVirtualStoreRelativePath = path.relative(
-      '.',
-      pnpmVirtualStorePath,
-    );
-    const pnpmVirtualStoreGlob = path.join(
-      pnpmVirtualStoreRelativePath,
-      '@seek*/node_modules/@seek/*/package.json',
-    );
+    if (isPnpm) {
+      // Follow symlinks inside node_modules into the pnpm virtual store
+      crawler = crawler.withSymlinks().withRelativePaths();
+    } else {
+      crawler = crawler.withBasePath();
+    }
 
-    globs.push(pnpmVirtualStoreGlob);
+    const seekDependencyGlob = '**/@seek/*/package.json';
+
+    let results = crawler
+      .glob(seekDependencyGlob)
+      .crawl('./node_modules/@seek')
+      .sync();
+
+    if (isPnpm) {
+      const pnpmVirtualStorePath = path.join(
+        toPosixPath(rootDir),
+        'node_modules/.pnpm',
+      );
+
+      const pnpmVirtualStoreRelativePath = path.relative(
+        '.',
+        pnpmVirtualStorePath,
+      );
+
+      const pnpmVirtualStoreResults = new Fdir()
+        .withRelativePaths()
+        .glob(seekDependencyGlob)
+        .crawl(pnpmVirtualStoreRelativePath)
+        .sync();
+
+      results.push(...pnpmVirtualStoreResults);
+
+      // All results will be relative to the virtual store directory, so we need
+      // to prepend the relative path from the current directory to the virtual store
+      results = results.map((file) =>
+        path.join(pnpmVirtualStoreRelativePath, file),
+      );
+    }
+
+    detectedCompilePackages = results
+      .map((packagePath) => {
+        const packageJson = require(path.join(cwd(), packagePath));
+
+        return {
+          isCompilePackage: Boolean(packageJson.skuCompilePackage),
+          packageName: packageJson.name,
+        };
+      })
+      .filter(({ isCompilePackage }) => isCompilePackage)
+      .map(({ packageName }) => packageName);
+  } catch (e) {
+    console.log(
+      chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
+    );
+    console.error(e);
   }
-
-  detectedCompilePackages = glob
-    .sync(globs, {
-      cwd,
-    })
-    .map((packagePath) => {
-      const packageJson = require(path.join(cwd, packagePath));
-
-      return {
-        isCompilePackage: Boolean(packageJson.skuCompilePackage),
-        packageName: packageJson.name,
-      };
-    })
-    .filter(({ isCompilePackage }) => isCompilePackage)
-    .map(({ packageName }) => packageName);
-} catch (e) {
-  console.log(
-    chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
-  );
-  console.error(e);
 }
+
+debug(detectedCompilePackages);
 
 module.exports = [
   'sku',

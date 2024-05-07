@@ -4,7 +4,7 @@ const { promisify } = require('node:util');
 const exec = promisify(require('node:child_process').exec);
 const { runSkuScriptInDir } = require('@sku-private/test-utils');
 
-const fixtureDirectory = path.join(__dirname, '../fixtures/sku-init');
+const fixtureDirectory = __dirname;
 const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
 
@@ -20,6 +20,7 @@ describe('sku init', () => {
       "Running 'pnpm install' to clean up lockfile after sku-init test...",
     );
     await exec('pnpm install');
+    console.log('Cleanup complete');
   });
 
   it(

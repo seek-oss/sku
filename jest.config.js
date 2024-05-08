@@ -3,6 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
+  maxWorkers: process.env.CI ? 2 : undefined,
   preset: 'jest-puppeteer',
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [
@@ -13,7 +14,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/packages/sku/scripts/test.js',
-    '<rootDir>/fixtures/.*/src',
+    '<rootDir>/fixtures/.*',
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',

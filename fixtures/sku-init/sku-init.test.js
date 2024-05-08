@@ -26,6 +26,12 @@ describe('sku init', () => {
   it(
     'should create a sku.config.ts',
     async () => {
+      const projectName = 'new-project';
+      await fs.rm(path.join(fixtureDirectory, projectName), {
+        recursive: true,
+        force: true,
+      });
+
       const { child } = await runSkuScriptInDir('init', fixtureDirectory, [
         projectName,
       ]);

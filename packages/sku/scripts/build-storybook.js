@@ -1,7 +1,7 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const { rimraf } = require('rimraf');
+const { rm } = require('node:fs/promises');
 const { argv, config } = require('../config/args');
 const gracefulSpawn = require('../lib/gracefulSpawn');
 const { storybookTarget } = require('../context');
@@ -11,7 +11,7 @@ const { setUpStorybookConfigDirectory } = require('../lib/storybook');
 
 (async () => {
   await runVocabCompile();
-  await rimraf(storybookTarget);
+  await rm(storybookTarget, { recursive: true, force: true });
   await setUpStorybookConfigDirectory();
 
   argv.push('build');

@@ -3,7 +3,11 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
-  maxWorkers: process.env.CI ? 2 : undefined,
+  ...(process.env.CI
+    ? {
+        maxWorkers: 2,
+      }
+    : {}),
   preset: 'jest-puppeteer',
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [

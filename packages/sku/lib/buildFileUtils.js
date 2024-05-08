@@ -1,13 +1,15 @@
 // @ts-check
 const path = require('node:path');
 const fs = require('node:fs/promises');
-const { rimraf } = require('rimraf');
+const { fdir: Fdir } = require('fdir');
 
 const { paths } = require('../context');
 const exists = require('./exists');
 const copyDirContents = require('./copyDirContents');
 
-const cleanTargetDirectory = () => rimraf(`${paths.target}/*`, { glob: true });
+const cleanTargetDirectory = async () => {
+  fs.rm(paths.target, { recursive: true, force: true });
+};
 
 const copyPublicFiles = async () => {
   if (await exists(paths.public)) {
@@ -19,14 +21,21 @@ const ensureTargetDirectory = async () => {
   await fs.mkdir(paths.target, { recursive: true });
 };
 
-const cleanRenderJs = async () => {
-  const renderFileGlob = path.join(paths.target, '*render.js');
-  await rimraf(renderFileGlob, { glob: true });
+const cleanStaticRenderEntry = async () => {
+  const files = await new Fdir()
+    .withBasePath()
+    .filter((file) => file.endsWith('render.js'))
+    .crawl(paths.target)
+    .withPromise();
+
+  for (const file of files) {
+    await fs.rm(file);
+  }
 };
 
 module.exports = {
   cleanTargetDirectory,
   copyPublicFiles,
   ensureTargetDirectory,
-  cleanRenderJs,
+  cleanStaticRenderEntry,
 };

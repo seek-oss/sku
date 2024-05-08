@@ -10,7 +10,7 @@ const {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-  cleanRenderJs,
+  cleanStaticRenderEntry,
 } = require('../lib/buildFileUtils');
 const { run } = require('../lib/runWebpack');
 const createHtmlRenderPlugin = require('../config/webpack/plugins/createHtmlRenderPlugin');
@@ -31,7 +31,7 @@ const { runVocabCompile } = require('../lib/runVocab');
         }),
       ),
     );
-    await cleanRenderJs();
+    await cleanStaticRenderEntry();
     await copyPublicFiles();
 
     const timeTaken = performance.now();

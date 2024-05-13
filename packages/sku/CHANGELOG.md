@@ -1,5 +1,47 @@
 # sku
 
+## 12.5.1
+
+### Patch Changes
+
+- Remove `rimraf` dependency in favour of Node.js's `rm` ([#961](https://github.com/seek-oss/sku/pull/961))
+
+- Unpin and bump `@pmmmwh/react-refresh-webpack-plugin` ([#959](https://github.com/seek-oss/sku/pull/959))
+
+- Ensure all sku-generated gitignored files are present in `.prettierignore` and `.eslintignore` too ([#957](https://github.com/seek-oss/sku/pull/957))
+
+  Consumers should notice a few new files being added to the sku-managed sections within `.prettierignore` and `.eslintignore` the next time a `sku` command is run:
+
+  ```diff
+  # managed by sku
+  *.less.d.ts
+  +.eslintcache
+  +.eslintrc
+  +.prettierrc
+  .storybook/main.js
+  coverage/
+  dist-storybook/
+  dist/
+  report/
+  # end managed by sku
+  ```
+
+  These changes should be committed to your repo.
+
+- Disable peer dependency validation for PNPM ([#952](https://github.com/seek-oss/sku/pull/952))
+
+  The method we currently use to validate peer dependencies and warn users about duplicate package is not compatible with how PNPM organizes dependencies in `node_modules`. This feature has been disabled for PNPM repos until further notice.
+
+- Replace `memoizee` dependency with `nano-memoize` ([#953](https://github.com/seek-oss/sku/pull/953))
+
+- Replace `fast-glob` with `fdir` and `picomatch` ([#952](https://github.com/seek-oss/sku/pull/952))
+
+- Replace `validate-npm-package-name` dependency with a regexp ([#954](https://github.com/seek-oss/sku/pull/954))
+
+- Improve performance of peer dependency validation ([#952](https://github.com/seek-oss/sku/pull/952))
+
+  Peer dependency validation shoould now complete within a few seconds, rather than a few minutes.
+
 ## 12.5.0
 
 ### Minor Changes

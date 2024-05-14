@@ -55,7 +55,13 @@ module.exports = ({
     }
 
     if (removeAssertionsInProduction) {
-      plugins.push(require.resolve('babel-plugin-unassert'));
+      plugins.push([
+        require.resolve('babel-plugin-unassert'),
+        {
+          variables: ['assert', 'invariant'],
+          modules: ['assert', 'node:assert', 'tiny-invariant'],
+        },
+      ]);
     }
   }
 

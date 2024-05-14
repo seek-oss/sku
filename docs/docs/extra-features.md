@@ -109,8 +109,8 @@ export const Rating = ({ rating }) => <div>...</div>;
 
 ### Supported Assertion Function Names
 
-- `assert`
 - `invariant`
+- `assert`
 
 ### Supported Assertion Libraries
 
@@ -119,6 +119,7 @@ export const Rating = ({ rating }) => <div>...</div>;
 - `node:assert` ([Node.js built-in])
 
 Any combination of function name and library name is supported.
+[`tiny-invariant`] is recommended over [`assert`][browser port] due to its simplicity and size.
 
 [`tiny-invariant`]: https://www.npmjs.com/package/tiny-invariant
 [Node.js built-in]: https://nodejs.org/api/assert.html

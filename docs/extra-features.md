@@ -81,10 +81,10 @@ For more details on configuring hooks, please see husky's [documentation](https:
 
 ## Assertion removal
 
-If you use [Node's `assert` library](https://nodejs.org/api/assert.html) or its [browser port](https://www.npmjs.com/package/assert), your assertions will be automatically removed in production via [`babel-plugin-unassert`](https://github.com/unassert-js/babel-plugin-unassert).
+By default, sku will remove assertions in your production builds with [`babel-plugin-unassert`].
 This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
 
-For example, let's assume you wrote the following code:
+For example, given the following code:
 
 ```tsx
 import React from 'react';
@@ -97,13 +97,33 @@ export const Rating = ({ rating }: { rating: number }) => {
 };
 ```
 
-In production, the code above would be logically equivalent to this:
+In production, sku would transform the code above into code roughly equivalent to:
 
 ```js
 import React from 'react';
 
 export const Rating = ({ rating }) => <div>...</div>;
 ```
+
+[`babel-plugin-unassert`]: https://github.com/unassert-js/babel-plugin-unassert
+
+### Supported Assertion Function Names
+
+- `invariant`
+- `assert`
+
+### Supported Assertion Libraries
+
+- [`tiny-invariant`] (Recommended)
+- `assert` ([Node.js built-in] or [browser port])
+- `node:assert` ([Node.js built-in])
+
+Any combination of function name and library name is supported.
+[`tiny-invariant`] is recommended over [`assert`][browser port] due to its simplicity and size.
+
+[`tiny-invariant`]: https://www.npmjs.com/package/tiny-invariant
+[Node.js built-in]: https://nodejs.org/api/assert.html
+[browser port]: https://www.npmjs.com/package/assert
 
 ## DevServer Middleware
 

@@ -114,7 +114,7 @@ export const Rating = ({ rating }) => <div>...</div>;
 
 ### Supported Assertion Libraries
 
-- [`tiny-invariant`]
+- [`tiny-invariant`] (Recommended)
 - `assert` ([Node.js built-in] or [browser port])
 - `node:assert` ([Node.js built-in])
 

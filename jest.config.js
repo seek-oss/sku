@@ -5,7 +5,7 @@ module.exports = {
   },
   ...(process.env.CI
     ? {
-        maxWorkers: 2,
+        maxWorkers: 4,
       }
     : {}),
   preset: 'jest-puppeteer',

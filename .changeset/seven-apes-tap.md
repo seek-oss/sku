@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-Add support for removing assertion functions named `invariant` and assertions from the `tiny-invariant` library
+Add support for removing assertion functions named `invariant` and assertions from the `tiny-invariant` library, a lightweight altnerative to `assert`
 
 **EXAMPLE USAGE**:
 

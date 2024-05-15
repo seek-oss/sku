@@ -8,7 +8,18 @@ const exists = require('./exists');
 const copyDirContents = require('./copyDirContents');
 
 const cleanTargetDirectory = async () => {
-  fs.rm(paths.target, { recursive: true, force: true });
+  const files = await new Fdir()
+    .withBasePath()
+    .withMaxDepth(1)
+    .withDirs()
+    // This glob pattern is used to exclude the target directory itself
+    .glob(`${paths.target}/*`)
+    .crawl(paths.target)
+    .withPromise();
+
+  for (const file of files) {
+    await fs.rm(file, { recursive: true, force: true });
+  }
 };
 
 const copyPublicFiles = async () => {

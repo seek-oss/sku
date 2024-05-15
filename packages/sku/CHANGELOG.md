@@ -1,5 +1,11 @@
 # sku
 
+## 12.6.1
+
+### Patch Changes
+
+- When cleaning the build output directory, only delete files within the directory, rather than the entire directory ([#969](https://github.com/seek-oss/sku/pull/969))
+
 ## 12.6.0
 
 ### Minor Changes

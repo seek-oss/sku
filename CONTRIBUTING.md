@@ -54,6 +54,11 @@ To run the test suite locally:
 pnpm run test
 ```
 
+> [!NOTE]
+> The [`sku-init` test suite] is not run as part of the `test` script.
+> The test is run separately as it can conflict with other tests running in parallel.
+> It is always run on CI, but it can be run locally with `pnpm run test:sku-init`.
+
 If snapshots are out of date, you can update them with:
 
 ```sh
@@ -83,6 +88,8 @@ Once you've made the desired changes and you're ready to commit, stage your loca
 > [!NOTE]
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.
 > These changes should not be committed and can be safely discard.
+
+[`sku-init` test suite]: ./fixtures/sku-init/sku-init.test.js
 
 ## Publishing a New Version
 

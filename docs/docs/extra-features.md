@@ -84,7 +84,7 @@ For more details on configuring hooks, please see husky's [documentation](https:
 By default, sku will remove assertions in your production builds with [`babel-plugin-unassert`].
 This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
 
-For example, let's assume you wrote the following code:
+For example, given the following code:
 
 ```tsx
 import React from 'react';
@@ -97,7 +97,7 @@ export const Rating = ({ rating }: { rating: number }) => {
 };
 ```
 
-In production, the code above would be logically equivalent to this:
+In production, sku would transform the code above into code roughly equivalent to:
 
 ```js
 import React from 'react';

@@ -33,7 +33,7 @@ describe('assertion-removal', () => {
       await process.kill();
     });
 
-    it('should not contain "assert" in production', async () => {
+    it('should not contain "assert" or "invariant" in production', async () => {
       const page = await browser.newPage();
       const response = await page.goto(url, { waitUntil: 'networkidle0' });
       const sourceHtml = await response?.text();
@@ -62,7 +62,7 @@ describe('assertion-removal', () => {
       closeAssetServer();
     });
 
-    it('should not contain "assert" in production', async function () {
+    it('should not contain "assert" or "invariant" in production', async function () {
       const page = await browser.newPage();
       const response = await page.goto(backendUrl, {
         waitUntil: 'networkidle0',
@@ -82,7 +82,7 @@ describe('assertion-removal', () => {
       exitCode = child.exitCode;
     });
 
-    it('should keep "assert" in tests', async () => {
+    it('should keep "assert" and "invariant" in tests', async () => {
       // App.test.tsx expects the code to throw, which means that the sku test script passes
       expect(exitCode).toEqual(0);
     });

@@ -11,7 +11,8 @@
     "@types/react-dom": "^18.2.3",
     "assert": "^2.0.0",
     "dedent": "^1.5.1",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "tiny-invariant": "^1.3.3"
   },
   "skuSkipValidatePeerDeps": true
 }

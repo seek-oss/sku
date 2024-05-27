@@ -106,18 +106,16 @@ sku format
 
 ### `storybook`
 
-Starts a local Storybook server.
+Start a local Storybook server.
 See the [Storybook documentation] for more information.
 
 ```sh
 sku storybook
 ```
 
-[Storybook documentation]: ./docs/storybook.md
-
 ### `build-storybook`
 
-Builds a static version of your Storybook.
+Build a static version of your Storybook.
 See the [Storybook documentation] for more information.
 
 ```sh
@@ -128,7 +126,7 @@ sku build-storybook
 
 ### `pre-commit`
 
-Runs the `sku` pre-commit hook.
+Run the `sku` pre-commit hook.
 See the [pre-commit hook documentation] for more information.
 
 ```sh
@@ -139,7 +137,7 @@ sku pre-commit
 
 ### `setup-hosts`
 
-Updates your hosts file to point any configured [`hosts`] to your local machine.
+Update your hosts file to point any configured [`hosts`] to your local machine.
 
 ```sh
 sudo sku setup-hosts
@@ -149,7 +147,7 @@ sudo sku setup-hosts
 
 ### `configure`
 
-Emits and updates configuration files for your project.
+Emit and update configuration files for your project.
 This command is run before most other `sku` CLI commands, so you shouldn't need to run it manually.
 
 ```sh
@@ -173,7 +171,7 @@ sku translations compile
 
 ### `translations push`
 
-Pushes translations to Phrase.
+Push translations to Phrase.
 See the documentation on [phrase-specific features] for more information.
 
 ```sh
@@ -190,7 +188,7 @@ This command supports the following options:
 
 ### `translations pull`
 
-Pulls translations from Phrase.
+Pull translations from Phrase.
 See the documentation on [phrase-specific features] for more information.
 
 ```sh

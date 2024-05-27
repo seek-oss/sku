@@ -2,7 +2,6 @@ const { posix: path } = require('node:path');
 const chalk = require('chalk');
 const { fdir: Fdir } = require('fdir');
 
-const { cwd } = require('../lib/cwd');
 const toPosixPath = require('../lib/toPosixPath');
 
 const { rootDir, isPnpm } = require('../lib/packageManager');
@@ -15,18 +14,17 @@ let detectedCompilePackages = [];
 // package manager. In either case, we can't correctly detect compile packages.
 if (rootDir) {
   try {
-    let crawler = new Fdir();
+    // Always use full paths so we don't need to worry about joining paths later
+    let crawler = new Fdir().withFullPaths();
 
     if (isPnpm) {
       // Follow symlinks inside node_modules into the pnpm virtual store
-      crawler = crawler.withSymlinks().withRelativePaths();
-    } else {
-      crawler = crawler.withBasePath();
+      crawler = crawler.withSymlinks();
     }
 
     const seekDependencyGlob = '**/@seek/*/package.json';
 
-    let results = crawler
+    const results = crawler
       .glob(seekDependencyGlob)
       .crawl('./node_modules/@seek')
       .sync();
@@ -43,23 +41,17 @@ if (rootDir) {
       );
 
       const pnpmVirtualStoreResults = new Fdir()
-        .withRelativePaths()
+        .withFullPaths()
         .glob(seekDependencyGlob)
         .crawl(pnpmVirtualStoreRelativePath)
         .sync();
 
       results.push(...pnpmVirtualStoreResults);
-
-      // All results will be relative to the virtual store directory, so we need
-      // to prepend the relative path from the current directory to the virtual store
-      results = results.map((file) =>
-        path.join(pnpmVirtualStoreRelativePath, file),
-      );
     }
 
     detectedCompilePackages = results
       .map((packagePath) => {
-        const packageJson = require(path.join(cwd(), packagePath));
+        const packageJson = require(packagePath);
 
         return {
           isCompilePackage: Boolean(packageJson.skuCompilePackage),

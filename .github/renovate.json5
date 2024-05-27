@@ -82,8 +82,8 @@
     {
       groupName: 'Design system packages',
       packagePatterns: ['^braid-design-system$'],
-      matchUpdateTypes: 'major',
-      enabled: true,
+      matchUpdateTypes: ['patch', 'minor'],
+      enabled: false,
       schedule: ['before 8am on the first day of the month'],
     },
     {

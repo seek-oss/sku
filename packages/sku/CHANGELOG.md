@@ -1,5 +1,11 @@
 # sku
 
+## 12.6.2
+
+### Patch Changes
+
+- Fix default compile package detection in PNPM repos ([#975](https://github.com/seek-oss/sku/pull/975))
+
 ## 12.6.1
 
 ### Patch Changes

@@ -63,7 +63,7 @@ sku build-ssr
 ### `serve`
 
 Serve a production build of a [statically-rendered application][static rendering].
-Will not work unless [`sku build`] has been run.
+Requires [`sku build`] to be run first.
 
 ```sh
 sku serve
@@ -95,6 +95,7 @@ sku lint
 
 ### `format`
 
+Apply all available lint and formatting fixes.
 See [linting/formatting documentation] for more information.
 
 ```sh
@@ -106,7 +107,7 @@ sku format
 ### `storybook`
 
 Starts a local Storybook server.
-See the Storybook documentation for more information.
+See the [Storybook documentation] for more information.
 
 ```sh
 sku storybook
@@ -117,7 +118,7 @@ sku storybook
 ### `build-storybook`
 
 Builds a static version of your Storybook.
-See the Storybook documentation for more information.
+See the [Storybook documentation] for more information.
 
 ```sh
 sku build-storybook

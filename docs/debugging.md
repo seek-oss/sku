@@ -6,10 +6,10 @@ Below are some strategies for debugging issues in your sku app.
 
 By default, sku's [debug] logs are disabled.
 These logs can offer insights into sku's config resolution, package resolution, dev server routing, and more.
-They can be enabled by setting the `DEBUG` environment variable:
+They can be enabled by passing the `--debug` flag to the `sku` CLI:
 
 ```sh
-DEBUG="sku*" yarn sku start
+yarn sku start --debug
 ```
 
 [debug]: https://www.npmjs.com/package/debug

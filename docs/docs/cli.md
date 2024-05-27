@@ -1,13 +1,19 @@
 # CLI
 
-The `sku` command line interface (CLI) is the primary way to interact with your project. It provides a number of commands to help you develop, build and test your application.
+The `sku` command line interface (CLI) is the primary way to interact with your project.
+It provides a number of commands to help you develop, test and build your application.
 
 ## CLI Options
 
-| Options       | Description                                                                              |
-| ------------- | ---------------------------------------------------------------------------------------- |
-| `-D, --debug` | Enable debug logging <br> `sku start --debug`                                            |
-| `--config`    | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config` |
+| Options         | Description                                                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `-D, --debug`   | Enable debug logging <br> `sku start --debug`                                                                                |
+| `--config`      | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config`                                     |
+| `--environment` | Specify the [environment] to use (only valid for [`start`] and [`serve`] commands) <br> `sku start --environment production` |
+
+[environment]: ./docs/configuration.md#environments
+[`start`]: #start
+[`serve`]: #serve
 
 ## CLI Commands
 
@@ -62,7 +68,7 @@ sku build-ssr
 
 ### `serve`
 
-Serve a production build of a [statically-rendered application][static rendering].
+Serve a production build of a [statically-rendered application][static rendering] from your local machine.
 Requires [`sku build`] to be run first.
 
 ```sh
@@ -85,7 +91,7 @@ sku test
 ### `lint`
 
 Run lint tooling over your code.
-See [linting/formatting documentation] for more information.
+See the [linting/formatting documentation] for more information.
 
 ```sh
 sku lint
@@ -96,7 +102,7 @@ sku lint
 ### `format`
 
 Apply all available lint and formatting fixes.
-See [linting/formatting documentation] for more information.
+See the [linting/formatting documentation] for more information.
 
 ```sh
 sku format

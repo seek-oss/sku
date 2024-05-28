@@ -14,7 +14,7 @@ import type { SkuConfig, Render } from 'sku';
 
 ## `sku/@loadable/component`
 
-A re-export of the `@loadble/component` package, which `sku` provides as a dependency.
+A re-export of the `@loadable/component` package, which `sku` provides as a dependency.
 
 Example:
 

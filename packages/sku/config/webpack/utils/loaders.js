@@ -6,6 +6,7 @@ const packageNameToClassPrefix = (packageName) =>
   `__${packageName.toUpperCase().replace(/[\/\-]/g, '_')}__`;
 
 const makeJsLoaders = (options) => [
+  require.resolve('thread-loader'),
   {
     loader: require.resolve('babel-loader'),
     options: require('../../babel/babelConfig')(options),

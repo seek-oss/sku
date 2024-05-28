@@ -172,6 +172,7 @@ const makeWebpackConfig = ({
                     }),
                   ],
                   use: [
+                    require.resolve('thread-loader'),
                     {
                       loader: require.resolve('babel-loader'),
                       options: {

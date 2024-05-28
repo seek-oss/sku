@@ -761,6 +761,9 @@ importers:
       terser-webpack-plugin:
         specifier: ^5.1.4
         version: 5.3.10(@swc/core@1.5.7)(esbuild@0.19.12)(webpack@5.91.0(@swc/core@1.5.7)(esbuild@0.19.12))
+      thread-loader:
+        specifier: ^4.0.2
+        version: 4.0.2(webpack@5.91.0(@swc/core@1.5.7)(esbuild@0.19.12))
       tree-kill:
         specifier: ^1.2.1
         version: 1.2.2
@@ -6438,6 +6441,9 @@ packages:
   json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
 
+  json-parse-better-errors@1.0.2:
+    resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
+
   json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
 
@@ -8571,6 +8577,12 @@ packages:
     engines: {node: '>=10.18'}
     peerDependencies:
       tslib: ^2
+
+  thread-loader@4.0.2:
+    resolution: {integrity: sha512-UOk/KBydsQjh4Ja5kocxDUzhv11KYptHN/h8gdSwo6/MBkYrWqQua6K2qwlpXnCXS9c/uLs8F/JF8rpveF0+fA==}
+    engines: {node: '>= 16.10.0'}
+    peerDependencies:
+      webpack: ^5.0.0
 
   through2@2.0.5:
     resolution: {integrity: sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==}
@@ -16224,6 +16236,8 @@ snapshots:
 
   json-buffer@3.0.1: {}
 
+  json-parse-better-errors@1.0.2: {}
+
   json-parse-even-better-errors@2.3.1: {}
 
   json-schema-traverse@0.4.1: {}
@@ -18608,6 +18622,14 @@ snapshots:
   thingies@1.21.0(tslib@2.6.2):
     dependencies:
       tslib: 2.6.2
+
+  thread-loader@4.0.2(webpack@5.91.0(@swc/core@1.5.7)(esbuild@0.19.12)):
+    dependencies:
+      json-parse-better-errors: 1.0.2
+      loader-runner: 4.3.0
+      neo-async: 2.6.2
+      schema-utils: 4.2.0
+      webpack: 5.91.0(@swc/core@1.5.7)(esbuild@0.19.12)
 
   through2@2.0.5:
     dependencies:

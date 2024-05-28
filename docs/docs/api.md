@@ -63,7 +63,7 @@ import storybookConfig from 'sku/config/storybook';
 ## `sku/webpack-plugin`
 
 A plugin that provides `sku` functionality to custom webpack builds.
-See [custom builds] for more information.
+See the [custom builds documentation] for more information.
 
 Example:
 
@@ -71,4 +71,4 @@ Example:
 import SkuWebpackPlugin from 'sku/webpack-plugin';
 ```
 
-[custom builds]: ./docs/custom-builds.md
+[custom builds documentation]: ./docs/custom-builds.md

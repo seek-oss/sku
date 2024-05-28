@@ -1,6 +1,7 @@
 - [Getting started](./docs/getting-started.md)
 - [Configuration](./docs/configuration.md)
 - [CLI](./docs/cli.md)
+- [API](./docs/api.md)
 - [FAQ](./docs/faq)
 - [Debugging](./docs/debugging.md)
 - **Project types**

@@ -6,3 +6,4 @@
   - [v9.0.0](./migration-guides/v9.0.0.md)
   - [v10.0.0](./migration-guides/v10.0.0.md)
   - [v11.0.0](./migration-guides/v11.0.0.md)
+  - [v12.0.0](./migration-guides/v12.0.0.md)

@@ -5,15 +5,14 @@ Create a new project and start a local development environment:
 ```bash
 $ npx sku init my-app
 $ cd my-app
-$ yarn start
+$ npm start
 ```
 
-By default, a new project's dependencies will be installed with the first supported package manager detected on your system.
-Package managers are detected in the following order: `yarn` -> `pnpm` -> `npm`.
+By default, a new project's dependencies will be installed using the package manager it was run with.
 This can be overridden via the `--packageManager` flag:
 
 ```bash
-$ pnpm dlx sku init --packageManager pnpm my-app
+$ npx sku init --packageManager pnpm my-app
 $ cd my-app
 $ pnpm start
 ```

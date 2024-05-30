@@ -1,79 +1,45 @@
-const { existsSync } = require('node:fs');
-const { join } = require('node:path');
 const { cwd } = require('../lib/cwd');
 const { findRootSync } = require('@manypkg/find-root');
-const { getCommand, INSTALL_PAGE, LOCKS } = require('@antfu/ni');
+const { getCommand, INSTALL_PAGE } = require('@antfu/ni');
 
-const { sync: which } = require('which');
 const skuArgs = require('../config/args');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
-/** @type {Array<SupportedPackageManager>} */
-const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+const getPackageManagerFromUserAgent = () => {
+  const userAgent = process.env.npm_config_user_agent || '';
 
-/** @type {Record<SupportedPackageManager, string>} */
-const lockfileForPackageManager = Object.fromEntries(
-  Object.entries(LOCKS)
-    .filter(([, packageManager]) =>
-      supportedPackageManagers.includes(packageManager),
-    )
-    .map(([lockfileName, packageManager]) => [packageManager, lockfileName]),
-);
+  if (userAgent.includes('yarn')) {
+    return 'yarn';
+  }
 
-const supportedLockfiles = supportedPackageManagers.map(
-  (packageManager) => lockfileForPackageManager[packageManager],
-);
+  if (userAgent.includes('pnpm')) {
+    return 'pnpm';
+  }
+
+  return 'npm';
+};
 
 /**
- * @param {SupportedPackageManager} commandName
- * @returns {SupportedPackageManager | null}
- */
-const detectPackageManagerCommand = (commandName) =>
-  which(commandName, { nothrow: true }) ? commandName : null;
-
-const detectPackageManager = () =>
-  detectPackageManagerCommand('yarn') ||
-  detectPackageManagerCommand('pnpm') ||
-  'npm';
-
-/**
- * Get the package manager and root directory of the project. If the project does not have a
- * package manager configured, a supported package manager will be detected in your `PATH`, and
- * `rootDir` will be `null`.
- * @returns {{packageManager: SupportedPackageManager, rootDir: string | null}}
+ * Get the package manager and root directory of the project. The package manager is derived from
+ * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
+ * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
-  let _packageManager = skuArgs?.packageManager;
+  /** @type {SupportedPackageManager} */
+  const packageManager =
+    skuArgs?.packageManager || getPackageManagerFromUserAgent();
 
-  // @manypkg/find-root only returns a tool if it finds a monorepo.
-  // If it finds a regular repo, it will return a 'root' tool, which is absolutely useless.
-  // So we need to detect the package manager ourselves. I'd use `detect` from from `@antfu/ni` or
-  // `detect-package-manager`, but they're async only and we can't make getPackageManager async.
+  /** @type {string | null} */
+  let rootDir = null;
+
   try {
-    const { rootDir } = findRootSync(cwd());
-
-    let foundPackageManager;
-
-    for (const supportedLockfile of supportedLockfiles) {
-      if (existsSync(join(rootDir, supportedLockfile))) {
-        foundPackageManager = LOCKS[supportedLockfile];
-        break;
-      }
-    }
-
-    if (!supportedPackageManagers.includes(foundPackageManager)) {
-      throw new Error('Unsupported package manager found');
-    }
-
-    _packageManager ||= foundPackageManager;
-
-    return { packageManager: _packageManager, rootDir };
+    rootDir = findRootSync(cwd()).rootDir;
   } catch {
-    _packageManager ||= detectPackageManager();
-
-    return { packageManager: _packageManager, rootDir: null };
+    // No root found (occurs during `sku init`), `rootDir` will stay `null`
   }
+
+  return { packageManager, rootDir };
 };
 
 const { rootDir, packageManager } = getPackageManager();
@@ -162,7 +128,6 @@ const getWhyCommand = () => {
 const getPackageManagerInstallPage = () => INSTALL_PAGE[packageManager];
 
 module.exports = {
-  supportedPackageManagers,
   rootDir,
   packageManager,
   isYarn,

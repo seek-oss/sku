@@ -407,6 +407,7 @@ type `boolean`
 Default: `true`
 
 Source maps are always generated for development builds.
+It is recommended to enable source maps for production builds in order to aid debugging.
 To disable source maps for production builds, set this option to `false`.
 
 Example:

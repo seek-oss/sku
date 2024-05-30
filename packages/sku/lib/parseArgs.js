@@ -17,18 +17,10 @@ module.exports = (processArgv) => {
     // We need the first arg we give to minimist to be the script name.
     processArgv.slice(2),
     {
-      string: [
-        'build',
-        'config',
-        'environment',
-        'packageManager',
-        'site',
-        'stats',
-      ],
+      string: ['config', 'environment', 'packageManager', 'site', 'stats'],
       alias: {
         e: 'environment',
         t: 'tenant',
-        b: 'build',
         c: 'config',
         D: 'debug',
       },

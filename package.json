@@ -47,7 +47,7 @@
     "@swc/jest": "^0.2.29",
     "@tsconfig/node-lts": "^18.12.3",
     "@types/jest": "^29.0.0",
-    "@types/node": "^18.16.19",
+    "@types/node": "^18.19.31",
     "debug": "^4.3.1",
     "dedent": "^1.5.1",
     "eslint": "^8.41.0",
@@ -66,8 +66,11 @@
     "renovate-config-seek": "^0.4.0",
     "typescript": "*"
   },
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "volta": {
-    "node": "18.16.0",
+    "node": "18.20.1",
     "pnpm": "9.1.0"
   },
   "packageManager": "pnpm@9.1.0",

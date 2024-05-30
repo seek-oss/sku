@@ -7,7 +7,7 @@
     "sku": "./bin/sku.js"
   },
   "engines": {
-    "node": ">=18.12"
+    "node": ">=18.18.0"
   },
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js"

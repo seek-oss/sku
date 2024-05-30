@@ -554,12 +554,21 @@ importers:
       '@storybook/react-webpack5':
         specifier: ^7.0.17
         version: 7.6.19(@babel/core@7.24.6)(@swc/core@1.5.7)(esbuild@0.19.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@2.19.0)(typescript@5.3.3)(webpack-dev-server@5.0.4(debug@4.3.4)(webpack@5.91.0(@swc/core@1.5.7)(esbuild@0.19.12)))(webpack-hot-middleware@2.26.1)
+      '@types/express':
+        specifier: ^4.17.11
+        version: 4.17.21
       '@types/jest':
         specifier: ^29.0.0
         version: 29.5.12
       '@types/loadable__component':
         specifier: ^5.13.1
         version: 5.13.9
+      '@types/loadable__server':
+        specifier: ^5.12.10
+        version: 5.12.11
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.3.3
       '@vanilla-extract/jest-transform':
         specifier: ^1.1.0
         version: 1.1.5(@types/node@18.19.33)(babel-plugin-macros@3.1.0)(less@4.2.0)(terser@5.31.0)
@@ -798,18 +807,12 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
-      '@types/express':
-        specifier: ^4.17.11
-        version: 4.17.21
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.3
-      '@types/react':
-        specifier: ^18.2.3
-        version: 18.3.3
       '@types/react-dom':
         specifier: ^18.2.3
         version: 18.3.0
@@ -3257,6 +3260,9 @@ packages:
 
   '@types/loadable__component@5.13.9':
     resolution: {integrity: sha512-QWOtIkwZqHNdQj3nixQ8oyihQiTMKZLk/DNuvNxMSbTfxf47w+kqcbnxlUeBgAxdOtW0Dh48dTAIp83iJKtnrQ==}
+
+  '@types/loadable__server@5.12.11':
+    resolution: {integrity: sha512-GACLW+PTT5tXZgFc+wVxICMXCFACPEws+34a75qcYG7CkLaj2nItGE0xzor57H0hpkF59wHZJalMbg7n/wGCKw==}
 
   '@types/lodash@4.17.4':
     resolution: {integrity: sha512-wYCP26ZLxaT3R39kiN2+HcJ4kTd3U1waI/cY7ivWYqFP6pW3ZNpvi6Wd6PHZx7T/t8z0vlkXMg3QYLa7DZ/IJQ==}
@@ -12082,6 +12088,10 @@ snapshots:
       '@types/node': 18.19.33
 
   '@types/loadable__component@5.13.9':
+    dependencies:
+      '@types/react': 18.3.3
+
+  '@types/loadable__server@5.12.11':
     dependencies:
       '@types/react': 18.3.3
 

@@ -31,24 +31,23 @@ import template from './template';
 import middleware from './middleware';
 import type { Server } from 'sku';
 
-export default () =>
-  ({
-    renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
-      const app = renderToString(
-        <SkuProvider>
-          <App />
-        </SkuProvider>,
-      );
-      res.send(
-        template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
-      );
-    },
-    middleware: middleware,
-    onStart: (app) => {
-      console.log('My app started 👯‍♀️!');
-      app.keepAliveTimeout = 20000;
-    },
-  } satisfies Server);
+export default (): Server => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
+    res.send(
+      template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
+    );
+  },
+  middleware: middleware,
+  onStart: (app) => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  },
+});
 ```
 
 ## Multi-part response
@@ -64,36 +63,35 @@ import { initialResponseTemplate, followupResponseTemplate } from './template';
 import middleware from './middleware';
 import type { Server } from 'sku';
 
-export default () =>
-  ({
-    renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
-      res.status(200);
-      // Call `flushHeadTags` early to retrieve whatever tags are available.
-      res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
-      await Promise.resolve();
+export default (): Server => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+    res.status(200);
+    // Call `flushHeadTags` early to retrieve whatever tags are available.
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    await Promise.resolve();
 
-      const app = renderToString(
-        <SkuProvider>
-          <App />
-        </SkuProvider>,
-      );
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
 
-      res.write(
-        // Call `flushHeadTags` again just in case new tags are available.
-        followupResponseTemplate({
-          headTags: flushHeadTags(),
-          bodyTags: getBodyTags(),
-          app,
-        }),
-      );
-      res.end();
-    },
-    middleware: middleware,
-    onStart: (app) => {
-      console.log('My app started 👯‍♀️!');
-      app.keepAliveTimeout = 20000;
-    },
-  } satisfies Server);
+    res.write(
+      // Call `flushHeadTags` again just in case new tags are available.
+      followupResponseTemplate({
+        headTags: flushHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+      }),
+    );
+    res.end();
+  },
+  middleware: middleware,
+  onStart: (app) => {
+    console.log('My app started 👯‍♀️!');
+    app.keepAliveTimeout = 20000;
+  },
+});
 ```
 
 Last but not least, please note that commands for SSR are different to the ones used normally:

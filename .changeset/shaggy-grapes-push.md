@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Export a `Server` type for the server entrypoint
+Export a `Server` type for `sku`'s server entrypoint
 
 **BREAKING CHANGE**
 
@@ -12,21 +12,19 @@ The `Server` type may conflict with existing attempts in projects to define a `S
 
 ```tsx
 // server.tsx
+import { renderToString } from 'react-dom/server';
 import type { Server } from 'sku';
 import { App } from './App';
 
-export default (
-  { SkuProvider, getHeadTags, getBodyTags },
-  _req,
-  res,
-) => {
-  const app = renderToString(
-    <SkuProvider>
-      <App />
-    </SkuProvider>,
-  );
+export default (): Server => ({
+  renderCallback: ({ SkuProvider, getHeadTags, getBodyTags }, _req, res) => {
+    const app = renderToString(
+      <SkuProvider>
+        <App />
+      </SkuProvider>,
+    );
 
-  res.send(/* html */`
+    res.send(/* html */ `
    <!DOCTYPE html>
     <html>
       <head>
@@ -40,5 +38,6 @@ export default (
         ${getBodyTags()}
       </body>
     </html>`);
-} satisfies Server;
+  },
+});
 ```

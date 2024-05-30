@@ -24,38 +24,37 @@ const template = ({ headTags, bodyTags, app }: any) => /* html */ `
   </html>
 `;
 
-export default () =>
-  ({
-    renderCallback: async (
-      { SkuProvider, getBodyTags, flushHeadTags, addLanguageChunk },
-      req,
-      res,
-    ) => {
-      res.status(200).write(
-        initialResponseTemplate({
-          headTags: flushHeadTags(),
-        }),
-      );
-      await Promise.resolve();
-      const isPseudo = Boolean(req.query.pseudo);
-      const pathLanguage = req.url.includes('fr') ? 'fr' : 'en';
-      const language = isPseudo ? 'en-PSEUDO' : pathLanguage;
-      addLanguageChunk(language);
+export default (): Server => ({
+  renderCallback: async (
+    { SkuProvider, getBodyTags, flushHeadTags, addLanguageChunk },
+    req,
+    res,
+  ) => {
+    res.status(200).write(
+      initialResponseTemplate({
+        headTags: flushHeadTags(),
+      }),
+    );
+    await Promise.resolve();
+    const isPseudo = Boolean(req.query.pseudo);
+    const pathLanguage = req.url.includes('fr') ? 'fr' : 'en';
+    const language = isPseudo ? 'en-PSEUDO' : pathLanguage;
+    addLanguageChunk(language);
 
-      const app = renderToString(
-        <SkuProvider>
-          <VocabProvider language={language}>
-            <App />
-          </VocabProvider>
-        </SkuProvider>,
-      );
-      res.write(
-        template({
-          headTags: flushHeadTags(),
-          bodyTags: getBodyTags(),
-          app,
-        }),
-      );
-      res.end();
-    },
-  } satisfies Server);
+    const app = renderToString(
+      <SkuProvider>
+        <VocabProvider language={language}>
+          <App />
+        </VocabProvider>
+      </SkuProvider>,
+    );
+    res.write(
+      template({
+        headTags: flushHeadTags(),
+        bodyTags: getBodyTags(),
+        app,
+      }),
+    );
+    res.end();
+  },
+});

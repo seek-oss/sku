@@ -8,7 +8,7 @@ SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
+  "http://localhost:4000/main-510391b5c7153e0be91a.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -114,7 +114,7 @@ SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
+  "http://localhost:4000/main-510391b5c7153e0be91a.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

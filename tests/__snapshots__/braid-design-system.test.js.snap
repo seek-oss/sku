@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "2-dfcbbec9d6df2d7db31d.css": ._2gz3ih0 {
+  "2-15dbc35db3da1e37e669.css": ._2gz3ih0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -3099,7 +3099,10 @@ html:not(.fgg5chz) ._15pwmtga {
     0 12px 12px -4px rgba(28, 35, 48, 0.1),
     0 20px 20px -12px rgba(28, 35, 48, 0.2);
 }
+
+/*# sourceMappingURL=2-15dbc35db3da1e37e669.css.map*/
 ,
+  "2-15dbc35db3da1e37e669.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -3118,7 +3121,7 @@ html:not(.fgg5chz) ._15pwmtga {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-dfcbbec9d6df2d7db31d.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-15dbc35db3da1e37e669.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3138,7 +3141,9 @@ html:not(.fgg5chz) ._15pwmtga {
     </html>
   ",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "seekAnz/index.html": "
     <!DOCTYPE html>
     <html>
@@ -3146,7 +3151,7 @@ html:not(.fgg5chz) ._15pwmtga {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-dfcbbec9d6df2d7db31d.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-15dbc35db3da1e37e669.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3174,7 +3179,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-dfcbbec9d6df2d7db31d.css",
+  "/2-15dbc35db3da1e37e669.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3407,7 +3412,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-dfcbbec9d6df2d7db31d.css",
+  "/2-15dbc35db3da1e37e669.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

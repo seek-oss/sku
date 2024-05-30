@@ -369,8 +369,10 @@ export interface SkuConfig {
   skipPackageCompatibilityCompilation?: string[];
 
   /**
-   * By default source maps will be generated only for development builds. Set to `true` to enable source maps in production.
+   * Source maps are always generated for development builds.
+   * To disable source maps for production builds, set this option to `false`.
    *
+   * @default true
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=sourcemapsprod
    */
   sourceMapsProd?: boolean;

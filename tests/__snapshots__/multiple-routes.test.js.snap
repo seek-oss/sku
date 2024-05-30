@@ -3,18 +3,29 @@
 exports[`multiple-routes build and serve should generate the expected files 1`] = `
 {
   "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
+  "AsyncComponent.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-da8170bc219649c692b1.css": .EOTSBbL {
   color: blue;
 }
+
+/*# sourceMappingURL=handlers-Details-da8170bc219649c692b1.css.map*/
 ,
+  "handlers-Details-da8170bc219649c692b1.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
+  "handlers-Details.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home-6c08fa51d0f7685d7b77.css": .dyLY_sb {
   color: red;
 }
+
+/*# sourceMappingURL=handlers-Home-6c08fa51d0f7685d7b77.css.map*/
 ,
+  "handlers-Home-6c08fa51d0f7685d7b77.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Home.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime.js",
@@ -24,7 +35,7 @@ exports[`multiple-routes build and serve should generate the expected files 1`] 
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
+    "/static/place/handlers-Details-da8170bc219649c692b1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -154,7 +165,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+    "/static/place/handlers-Home-6c08fa51d0f7685d7b77.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -270,7 +281,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
+    "/static/place/handlers-Details-da8170bc219649c692b1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -400,7 +411,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+    "/static/place/handlers-Home-6c08fa51d0f7685d7b77.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -508,6 +519,7 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -521,7 +533,7 @@ SCRIPTS: [
   "/static/place/AsyncComponent.chunk.js",
 ]
 CSS: [
-  "/static/place/handlers-Details-065db15fad163b0a609f.css",
+  "/static/place/handlers-Details-da8170bc219649c692b1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -664,7 +676,7 @@ SCRIPTS: [
   "/static/place/handlers-Home.chunk.js",
 ]
 CSS: [
-  "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+  "/static/place/handlers-Home-6c08fa51d0f7685d7b77.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

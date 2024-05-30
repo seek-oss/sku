@@ -404,14 +404,16 @@ const config = {
 
 type `boolean`
 
-By default source maps will be generated only for development builds.
-Set to `true` to enable source maps in production.
+Default: `true`
+
+Source maps are always generated for development builds.
+To disable source maps for production builds, set this option to `false`.
 
 Example:
 
 ```ts
 export default {
-  sourceMapsProd: true,
+  sourceMapsProd: false,
 } satisfies SkuConfig;
 ```
 

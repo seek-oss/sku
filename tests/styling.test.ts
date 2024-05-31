@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import type { Frame } from 'puppeteer';
+import type { Page } from 'puppeteer';
 import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
   getAppSnapshot,
-  getStorybookFrame,
-  getTextContentFromStorybookFrame,
+  getTextContentFromFrameOrPage,
+  getStoryPage,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
 
@@ -21,9 +21,8 @@ const srcDir = path.resolve(appDir, 'src');
 const { default: skuConfig } = require(`${appDir}/sku.config.ts`);
 
 assert(skuConfig.port, 'sku config has port');
-const devServerUrl = `http://localhost:${skuConfig.port}`;
 assert(skuConfig.storybookPort, 'sku config has storybookPort');
-const storybookUrl = `http://localhost:${skuConfig.storybookPort}`;
+const devServerUrl = `http://localhost:${skuConfig.port}`;
 
 const cssTypes = ['.less.d.ts'];
 
@@ -89,15 +88,19 @@ describe('styling', () => {
 
   describe('storybook', () => {
     let server: ChildProcess;
-    let storybookFrame: Frame;
+    let storyPage: Page;
+
+    const storybookBaseUrl = `http://localhost:${skuConfig.storybookPort}`;
+    const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
+    const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, [
         '--ci',
         '--quiet',
       ]);
-      await waitForUrls(storybookUrl);
-      storybookFrame = await getStorybookFrame(storybookUrl);
+      await waitForUrls(storyIframeUrl);
+      storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);
 
     afterAll(async () => {
@@ -105,8 +108,8 @@ describe('styling', () => {
     });
 
     it('should render external styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-external]',
       );
 
@@ -115,8 +118,8 @@ describe('styling', () => {
     });
 
     it('should render LESS styles', async () => {
-      const { fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-less]',
       );
 
@@ -124,8 +127,8 @@ describe('styling', () => {
     });
 
     it('should render Vanilla Extract styles', async () => {
-      const { fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-vanilla]',
       );
 

@@ -3,8 +3,9 @@ const {
   runSkuScriptInDir,
   waitForUrls,
   startAssetServer,
-  getStorybookFrame,
-  getTextContentFromStorybookFrame,
+  getStoryFrame,
+  getTextContentFromFrameOrPage,
+  getStoryPage,
 } = require('@sku-private/test-utils');
 const fetch = require('node-fetch');
 
@@ -14,16 +15,22 @@ const appDir = path.dirname(
 );
 const storybookDistDir = path.resolve(appDir, 'dist-storybook');
 
+const { default: skuConfig } = require(`${appDir}/sku.storybook.config.ts`);
+
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
 describe('storybook-config', () => {
   describe('storybook', () => {
-    const storybookUrl = 'http://localhost:8089';
-    const middlewareUrl = `${storybookUrl}/test-middleware`;
+    const storybookBaseUrl = `http://localhost:${skuConfig.storybookPort}`;
+    const middlewareUrl = `${storybookBaseUrl}/test-middleware`;
+
+    const storyIframePath =
+      '/iframe.html?viewMode=story&id=testcomponent--default';
+    const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
     let server;
-    /** @type {import("puppeteer").Frame} */
-    let storybookFrame;
+    /** @type {import("puppeteer").Page} */
+    let storyPage;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, [
@@ -32,8 +39,8 @@ describe('storybook-config', () => {
         '--config',
         skuConfigFileName,
       ]);
-      await waitForUrls(storybookUrl, middlewareUrl);
-      storybookFrame = await getStorybookFrame(storybookUrl);
+      await waitForUrls(storyIframeUrl, middlewareUrl);
+      storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);
 
     afterAll(async () => {
@@ -48,8 +55,8 @@ describe('storybook-config', () => {
     });
 
     it('should render decorators defined in the storybook preview file', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-decorator]',
       );
 
@@ -58,8 +65,8 @@ describe('storybook-config', () => {
     });
 
     it('should render a component inside a story', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-text]',
       );
 
@@ -68,8 +75,8 @@ describe('storybook-config', () => {
     });
 
     it('should render vanilla styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-vanilla]',
       );
 
@@ -78,8 +85,8 @@ describe('storybook-config', () => {
     });
 
     it('should render less styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-less]',
       );
 
@@ -94,7 +101,7 @@ describe('storybook-config', () => {
 
     let closeStorybookServer;
     /** @type {import("puppeteer").Frame} */
-    let storybookFrame;
+    let storyFrame;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-storybook', appDir, [
@@ -106,7 +113,7 @@ describe('storybook-config', () => {
         storybookDistDir,
       );
       await waitForUrls(assetServerUrl);
-      storybookFrame = await getStorybookFrame(assetServerUrl);
+      storyFrame = await getStoryFrame(assetServerUrl);
     }, 200000);
 
     afterAll(() => {
@@ -114,8 +121,8 @@ describe('storybook-config', () => {
     });
 
     it('should render decorators defined in the storybook preview file', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyFrame,
         '[data-automation-decorator]',
       );
 
@@ -124,8 +131,8 @@ describe('storybook-config', () => {
     });
 
     it('should render a component inside a story', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyFrame,
         '[data-automation-text]',
       );
 
@@ -134,8 +141,8 @@ describe('storybook-config', () => {
     });
 
     it('should render vanilla styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyFrame,
         '[data-automation-vanilla]',
       );
 
@@ -144,8 +151,8 @@ describe('storybook-config', () => {
     });
 
     it('should render less styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyFrame,
         '[data-automation-less]',
       );
 

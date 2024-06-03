@@ -5,8 +5,9 @@ const { dirContentsToObject } = require('./dirContentsToObject');
 const { run, runSkuScriptInDir } = require('./process');
 const { makeStableHashes } = require('./skuConfig');
 const {
-  getStorybookFrame,
-  getTextContentFromStorybookFrame,
+  getStoryFrame,
+  getStoryPage,
+  getTextContentFromFrameOrPage,
 } = require('./storybook');
 const { waitForUrls } = require('./waitForUrls');
 
@@ -15,8 +16,9 @@ module.exports = {
   ...appSnapshot,
   startAssetServer,
   dirContentsToObject,
-  getStorybookFrame,
-  getTextContentFromStorybookFrame,
+  getStoryFrame,
+  getStoryPage,
+  getTextContentFromFrameOrPage,
   makeStableHashes,
   run,
   runSkuScriptInDir,

@@ -66,11 +66,6 @@
     "renovate-config-seek": "^0.4.0",
     "typescript": "*"
   },
-  "pnpm": {
-    "overrides": {
-      "braid-design-system>sku": "workspace:*"
-    }
-  },
   "volta": {
     "node": "18.16.0",
     "pnpm": "9.1.0"

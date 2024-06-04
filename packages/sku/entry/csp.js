@@ -75,9 +75,7 @@ export default function createCSPHandler({
       console.error(`Invalid script passed to 'registerScript'\n${script}`);
     }
 
-    parse(script, { blockTextElements: { script: true } })
-      .querySelectorAll('script')
-      .forEach(processScriptNode);
+    parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
   /**
@@ -113,7 +111,9 @@ export default function createCSPHandler({
    * @returns {string}
    */
   const handleHtml = (html) => {
-    const root = parse(html);
+    const root = parse(html, {
+      comment: true,
+    });
 
     if (!root) {
       throw new Error(

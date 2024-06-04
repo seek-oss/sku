@@ -20,7 +20,6 @@ module.exports = (processArgv) => {
       string: ['config', 'environment', 'packageManager', 'site', 'stats'],
       alias: {
         e: 'environment',
-        t: 'tenant',
         c: 'config',
         D: 'debug',
       },

@@ -74,7 +74,7 @@ Its purpose is to reduce the time it takes to start the local development server
 This cache stores the result of module transpilation performed by `babel-loader`.
 It is emitted during both local development and production builds.
 Its purpose is to speed up transpilation of TypeScript/JavaScript code.
-This can benefit both local develpoment (when the webpack cache is invalidated) and production builds.
+This can benefit both local development (when the webpack cache is invalidated) and production builds.
 For applications with a large number of source files and/or dependencies, this cache can significantly reduce build times.
 
 > This cache is stored in `node_modules/.cache/babel-loader` and can be safely deleted at any time.

@@ -10,4 +10,4 @@ The `sku translations compile` command now accepts a `--watch` flag. When this f
 
 ```sh
 sku translations compile --watch
-``````
+```

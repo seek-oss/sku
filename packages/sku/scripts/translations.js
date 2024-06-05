@@ -2,7 +2,11 @@ const envCi = require('env-ci');
 
 const { branch } = envCi();
 const chalk = require('chalk');
-const args = require('../config/args').argv;
+const {
+  argv: args,
+  watch,
+  'delete-unused-keys': deleteUnusedKeys,
+} = require('../config/args');
 const { compile, validate } = require('@vocab/core');
 const { push, pull } = require('@vocab/phrase');
 const { getVocabConfig } = require('../config/vocab/vocab');
@@ -51,16 +55,13 @@ const ensureBranch = () => {
 
   try {
     if (translationSubCommand === 'compile') {
-      compile({ watch: false }, vocabConfig);
+      console.log('Watching for changes to translations');
+      compile({ watch }, vocabConfig);
     }
     if (translationSubCommand === 'validate') {
       validate(vocabConfig);
     }
     if (translationSubCommand === 'push') {
-      const deleteUnusedKeys = commandArguments.includes(
-        '--delete-unused-keys',
-      );
-
       ensureBranch();
       push({ branch, deleteUnusedKeys }, vocabConfig);
     }
@@ -75,5 +76,8 @@ const ensureBranch = () => {
 
     process.exit(1);
   }
-  console.log(chalk.cyan('Translations complete'));
+
+  if (!watch) {
+    console.log(chalk.cyan('Translations complete'));
+  }
 })();

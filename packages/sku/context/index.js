@@ -67,14 +67,6 @@ if (isCompilePackage && skuConfig.rootResolution) {
   process.exit(1);
 }
 
-/**
- * @type {Record<string, unknown>}
- */
-const env = {
-  ...skuConfig.env,
-  SKU_TENANT: args.tenant,
-};
-
 const isStartScript = args.script === 'start-ssr' || args.script === 'start';
 const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
 
@@ -180,7 +172,6 @@ const paths = {
 
 module.exports = {
   paths,
-  env,
   locales: skuConfig.locales,
   hosts: skuConfig.hosts,
   port: {

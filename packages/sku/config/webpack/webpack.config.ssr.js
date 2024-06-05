@@ -11,14 +11,11 @@ const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
 const MetricsPlugin = require('./plugins/metrics-plugin');
 const { VocabWebpackPlugin } = require('@vocab/webpack');
 
-const args = require('../args');
 const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
 const utils = require('./utils');
 const { cwd } = require('../../lib/cwd');
-const { stringifyEnvarValues } = require('../../lib/env');
 const {
   paths,
-  env,
   webpackDecorator,
   polyfills,
   supportedBrowsers,
@@ -47,11 +44,6 @@ const makeWebpackConfig = ({
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const vocabOptions = getVocabConfig();
-
-  const envars = stringifyEnvarValues({
-    ...env,
-    SKU_ENV: args.env,
-  });
 
   const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
 
@@ -157,7 +149,6 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        new webpack.DefinePlugin(envars),
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,
@@ -252,7 +243,6 @@ const makeWebpackConfig = ({
         rules: [{ test: /\.mjs$/, type: 'javascript/auto' }],
       },
       plugins: [
-        new webpack.DefinePlugin(envars),
         new webpack.DefinePlugin({
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
           __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),

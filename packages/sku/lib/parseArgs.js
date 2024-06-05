@@ -1,6 +1,4 @@
-// @ts-check
 const minimist = require('minimist');
-
 /**
  * Supports parsing args that look like:
  * [/path/to/node/node, /path/to/sku, scriptName, arg1, arg2]
@@ -19,24 +17,9 @@ module.exports = (processArgv) => {
     // We need the first arg we give to minimist to be the script name.
     processArgv.slice(2),
     {
-      string: [
-        'env',
-        'tenant',
-        'build',
-        'config',
-        'environment',
-        'packageManager',
-        'site',
-        'stats',
-      ],
-      default: {
-        env: 'production',
-        tenant: '',
-      },
+      string: ['config', 'environment', 'packageManager', 'site', 'stats'],
       alias: {
-        e: 'env',
-        t: 'tenant',
-        b: 'build',
+        e: 'environment',
         c: 'config',
         D: 'debug',
       },
@@ -58,22 +41,9 @@ module.exports = (processArgv) => {
 
   const [script, ...argv] = unknown;
 
-  // Backwards compatibility for unnamed build name argument, to be deprecated
-  const buildName = () => {
-    if (options.build) {
-      return options.build;
-    } else if (argv.length) {
-      return argv[0];
-    }
-
-    return undefined;
-  };
-
   return {
     ...options,
     script,
-    buildName: script === 'start' ? buildName() : null,
-    env: script === 'start' ? 'development' : options.env,
     argv,
   };
 };

@@ -90,9 +90,6 @@ module.exports = validator.compile({
     items: 'string',
     min: 1,
   },
-  env: {
-    type: 'object',
-  },
   compilePackages: {
     type: 'array',
     items: 'string',

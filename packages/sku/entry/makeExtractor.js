@@ -18,7 +18,7 @@ export default (stats, publicPath, csp) => {
     entrypoints: [defaultEntryPoint],
   });
 
-  /** @type {import("../sku-types.d.ts").RenderCallbackParams['SkuProvider']} */
+  /** @type {RenderCallbackParams['SkuProvider']} */
   const SkuProvider = ({ children }) => (
     <ChunkExtractorManager extractor={extractor}>
       {children}

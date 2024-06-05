@@ -5,7 +5,7 @@ It provides a number of commands to help you develop, test and build your applic
 
 ## CLI Options
 
-| Options         | Description                                                                                                                  |
+| Option          | Description                                                                                                                  |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `-D, --debug`   | Enable debug logging <br> `sku start --debug`                                                                                |
 | `--config`      | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config`                                     |
@@ -175,6 +175,12 @@ Compile translations defined in `.vocab` directories.
 sku translations compile
 ```
 
+This command supports the following options:
+
+| Option    | Description                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| `--watch` | Re-compile translations whenever changes are detected <br> `sku translations compile  --watch` |
+
 ### `translations push`
 
 Push translations to Phrase.
@@ -186,7 +192,7 @@ sku translations push
 
 This command supports the following options:
 
-| Options                | Description                                                                                           |
+| Option                 | Description                                                                                           |
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
 | `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys` |
 

@@ -47,6 +47,7 @@
     "@storybook/cli": "^7.0.17",
     "@storybook/react": "^7.0.17",
     "@storybook/react-webpack5": "^7.0.17",
+    "@swc/core": "^1.5.25",
     "@types/jest": "^29.0.0",
     "@types/loadable__component": "^5.13.1",
     "@vanilla-extract/jest-transform": "^1.1.0",

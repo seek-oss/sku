@@ -134,7 +134,17 @@ const makeWebpackConfig = ({
         // The 'TerserPlugin' is actually the default minimizer for webpack
         // We add a custom one to ensure licence comments stay inside the final JS assets
         // Without this a '*.js.LICENSE.txt' file would be created alongside
-        minimizer: [new TerserPlugin({ extractComments: false })],
+        minimizer: [
+          new TerserPlugin({
+            extractComments: false,
+            minify: TerserPlugin.swcMinify,
+            parallel: true,
+            terserOptions: {
+              compress: true,
+              mangle: true,
+            },
+          }),
+        ],
         concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {

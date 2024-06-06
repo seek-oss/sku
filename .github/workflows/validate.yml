@@ -80,6 +80,7 @@ jobs:
         with:
           path: ${{ steps.set-jest-cache.outputs.JEST_CACHE_DIR }}
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
+          restore-keys: jest-${{ runner.os }}-
 
       - name: Test
         run: pnpm run test && pnpm run test:sku-init

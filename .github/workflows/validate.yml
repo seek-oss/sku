@@ -47,14 +47,14 @@ jobs:
 
       - name: Cache Puppeteer
         id: puppeteer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.set-puppeteer-cache.outputs.PUPPETEER_CACHE_DIR }}
           key: puppeteer-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Cache babel-loader
         id: babel-loader-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: 'fixtures/*/node_modules/.cache/babel-loader'
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
@@ -76,7 +76,7 @@ jobs:
         run: echo "JEST_CACHE_DIR=$(pnpm jest --showConfig | jq '.configs[0].cacheDirectory' | tr -d '"')" >> $GITHUB_OUTPUT
 
       - name: Cache Jest cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.set-jest-cache.outputs.JEST_CACHE_DIR }}
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}

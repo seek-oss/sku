@@ -28,12 +28,14 @@ For example, if you're using [React Testing Library](https://testing-library.com
 import '@testing-library/jest-dom';
 ```
 
-sku's Jest configuration can also be used as a [preset](https://jestjs.io/docs/configuration#preset-string), by specifying the `sku/config/jest` preset in your `jest.config.js`:
+sku's Jest configuration can also be used as a [preset](https://jestjs.io/docs/configuration#preset-string):
 
 ```js
+const { preset } = require('sku/config/jest');
+
 /** @type {import('jest').Config} */
 module.exports = {
-  preset: 'sku/config/jest',
+  preset,
 };
 ```
 

@@ -7,10 +7,10 @@ import {
   type ChildProcess,
   type ExecFileOptions,
 } from 'node:child_process';
-import gracefulSpawn from 'sku/lib/gracefulSpawn';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 const execFile = promisify(_execFile);
-const skuBin = require.resolve('sku/bin/sku.js');
+const skuBin = require.resolve('../packages/sku/bin/sku.js');
 
 export const run = async (
   file: string,

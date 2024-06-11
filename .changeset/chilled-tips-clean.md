@@ -21,7 +21,7 @@ pnpm install -D storybook
 -    "storybook": "sku storybook",
 +    "storybook": "storybook dev",
 -    "build:storybook": "sku build-storybook"
-+    "storybook-build": "storybook build"
++    "build:storybook": "storybook build"
   }
 }
 ```

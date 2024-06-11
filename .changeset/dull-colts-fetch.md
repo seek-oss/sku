@@ -6,12 +6,12 @@ Remove Storybook dependencies and `@storybook/react` entrypoint
 
 **BREAKING CHANGE**
 
-Sku no longer installs Storybook dependencies. Additionally, it no longer provides the `sku/@storybook/react` entrypoint. If you are using Storybook, you will need to install the dependencies yourself. See the [Storybook docs] for more information.
+Sku no longer installs Storybook dependencies. Additionally, it no longer provides the `sku/@storybook/react` entrypoint. If you are using Storybook, you will need to install Storybook dependencies yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
 
 **MIGRATION GUIDE**:
 
 ```sh
-pnpm install -D storybook @storybook/react @storybook/react-webpack5
+pnpm install -D @storybook/react
 ```
 
 ```diff

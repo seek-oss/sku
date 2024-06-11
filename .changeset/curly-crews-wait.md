@@ -6,7 +6,7 @@ Remove automatic configuration of Storybook
 
 **BREAKING CHANGE**
 
-Sku no longer configures your `.storybook/main.ts` file for you. If you are using Storybook, you will need to configure it yourself. See the [Storybook docs] for more information.
+Sku no longer configures your `.storybook/main.ts` file for you. If you are using Storybook, you will need to configure it yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
 
 **MIGRATION GUIDE**:
 
@@ -28,6 +28,8 @@ export default {
       },
     },
   },
+  // Required for Storybook >=8.0.0
+  addons: ['@storybook/addon-webpack5-compiler-babel'],
   babel,
   webpackFinal,
 } satisfies StorybookConfig;

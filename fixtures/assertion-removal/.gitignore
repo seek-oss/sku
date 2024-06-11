@@ -2,9 +2,7 @@
 .eslintcache
 .eslintrc
 .prettierrc
-.storybook/main.js
 coverage/
-dist-storybook/
 dist/
 report/
 tsconfig.json

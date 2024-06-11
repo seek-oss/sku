@@ -1,11 +1,11 @@
+storybook-static/
+
 # managed by sku
 *.less.d.ts
 .eslintcache
 .eslintrc
 .prettierrc
-.storybook/main.js
 coverage/
-dist-storybook/
 dist/
 report/
 # end managed by sku

@@ -387,40 +387,6 @@ export interface SkuConfig {
   srcPaths?: string[];
 
   /**
-   * An array of storybook addons to use.
-   *
-   * @default []
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookaddons
-   */
-  storybookAddons?: string[];
-
-  /**
-   * The port to host storybook on when running `sku storybook`.
-   *
-   * @default 8081
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookport
-   */
-  storybookPort?: number;
-
-  /**
-   * Allows disabling Storybook's `storyStoreV7` feature flag. This will result in all stories being
-   * loaded upfront instead of on demand. Disabling this feature will allow stories that use the
-   * deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf`
-   * to the Component Story Format (CSF) instead.
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybookStoryStore
-   */
-  storybookStoryStore?: boolean;
-
-  /**
-   * The directory `sku build-storybook` will output files to.
-   *
-   * @default 'dist-storybook'
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=storybooktarget
-   */
-  storybookTarget?: string;
-
-  /**
    * The `browserslist` query describing the apps browser support policy.
    *
    * @default browserslist-config-seek

@@ -4,9 +4,8 @@ coverage/
 dist/
 dist-ssr/
 dist-build/
-dist-playroom/
 dist-start/
-dist-storybook/
+storybook-static/
 report/
 template/
 .changeset/*.md

@@ -14,7 +14,6 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const createTSConfig = require('../config/typescript/tsconfig.js');
 const getCertificate = require('./certificate');
-const { storybookMainConfigPath } = require('./storybook');
 const managedConfigBanner = require('./managedConfigBanner.js');
 
 const coverageFolder = 'coverage';
@@ -36,17 +35,12 @@ module.exports = async () => {
   const webpackTargetDirectory = addSep(
     paths.target.replace(addSep(cwd()), ''),
   );
-  const storybookTargetDirectory = addSep(
-    paths.storybookTarget.replace(addSep(cwd()), ''),
-  );
 
   const gitIgnorePatterns = [
     // Ignore webpack bundle report output
     addSep(bundleReportFolder),
     addSep(coverageFolder),
     webpackTargetDirectory,
-    storybookTargetDirectory,
-    storybookMainConfigPath,
   ];
 
   // Generate ESLint configuration

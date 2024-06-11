@@ -90,7 +90,7 @@ export async function runSkuScriptInDir(
   };
 
   // When starting a dev server, return a hook to the running process
-  if (/^(start|storybook|serve)/.test(script)) {
+  if (/^(start|serve)/.test(script)) {
     return gracefulSpawn(skuBin, [script, ...(args || [])], {
       stdio: 'inherit',
       ...processOptions,

@@ -22,16 +22,6 @@ Example:
 import { loadableReady } from 'sku/@loadable/component';
 ```
 
-## `sku/@storybook/react`
-
-A re-export of the `@storybook/react` package, which `sku` provides as a dependency.
-
-Example:
-
-```ts
-import type { StoryObj } from 'sku/@storybook/react';
-```
-
 ## `sku/config/jest`
 
 A jest preset for consuming `sku`'s Jest configuration.

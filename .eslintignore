@@ -3,9 +3,8 @@ node_modules
 coverage/
 dist/
 dist-build/
-dist-playroom/
 dist-start/
-dist-storybook/
+storybook-static/
 report/
 template/
 test/test-cases/*/*

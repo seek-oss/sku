@@ -107,19 +107,6 @@ module.exports = validator.compile({
   serverPort: {
     type: 'number',
   },
-  storybookPort: {
-    type: 'number',
-  },
-  storybookTarget: {
-    type: 'string',
-  },
-  storybookAddons: {
-    type: 'array',
-    items: 'string',
-  },
-  storybookStoryStore: {
-    type: 'boolean',
-  },
   target: {
     type: 'string',
   },

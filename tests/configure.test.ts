@@ -78,9 +78,7 @@ describe('configure', () => {
           ".eslintcache",
           ".eslintrc",
           ".prettierrc",
-          ".storybook/main.js",
           "coverage/",
-          "dist-storybook/",
           "dist/",
           "report/",
           "tsconfig.json",
@@ -144,11 +142,9 @@ describe('configure', () => {
           ".eslintcache",
           ".eslintrc",
           ".prettierrc",
-          ".storybook/main.js",
           "coverage/",
           "foo/bar/",
           "report/",
-          "storybook/foobar/",
           "tsconfig.json",
         ]
       `);

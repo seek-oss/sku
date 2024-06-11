@@ -1,46 +1,47 @@
+const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
 const path = require('node:path');
+const { sync: spawnSync } = require('cross-spawn');
 const {
-  runSkuScriptInDir,
   waitForUrls,
   startAssetServer,
-  getTextContentFromFrameOrPage,
   getStoryPage,
+  getTextContentFromFrameOrPage,
 } = require('@sku-private/test-utils');
 const fetch = require('node-fetch');
 
-const skuConfigFileName = 'sku.storybook.config.ts';
+const skuConfigFileName = 'sku.config.ts';
 const appDir = path.dirname(
   require.resolve(`@sku-fixtures/storybook-config/${skuConfigFileName}`),
 );
-const storybookDistDir = path.resolve(appDir, 'dist-storybook');
-
-const { default: skuConfig } = require(`${appDir}/sku.storybook.config.ts`);
-
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
 describe('storybook-config', () => {
   describe('storybook', () => {
-    const storybookBaseUrl = `http://localhost:${skuConfig.storybookPort}`;
-    const middlewareUrl = `${storybookBaseUrl}/test-middleware`;
+    const port = 8089;
+    const storybookBaseUrl = `http://localhost:${port}`;
 
+    const middlewareUrl = `${storybookBaseUrl}/test-middleware`;
     const storyIframePath =
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
+    /** @type {ChildProcess} */
     let server;
     /** @type {import("puppeteer").Page} */
     let storyPage;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, [
-        '--ci',
-        '--quiet',
-        '--config',
-        skuConfigFileName,
-      ]);
+      server = gracefulSpawn(
+        'pnpm',
+        ['storybook', 'dev', '--ci', '--quiet', '--port', port.toString()],
+        {
+          cwd: appDir,
+          stdio: 'inherit',
+        },
+      );
       await waitForUrls(storyIframeUrl, middlewareUrl);
       storyPage = await getStoryPage(storyIframeUrl);
-    }, 200000);
+    }, 100000);
 
     afterAll(async () => {
       await server.kill();
@@ -100,16 +101,18 @@ describe('storybook-config', () => {
     const storyIframePath =
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
+    const storybookDistDir = path.resolve(appDir, 'storybook-static');
 
     let closeStorybookServer;
     /** @type {import("puppeteer").Page} */
     let storyPage;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-storybook', appDir, [
-        '--config',
-        skuConfigFileName,
-      ]);
+      spawnSync('pnpm', ['storybook', 'build', '--quiet'], {
+        cwd: appDir,
+        stdio: 'inherit',
+      });
+
       closeStorybookServer = await startAssetServer(
         assetServerPort,
         storybookDistDir,

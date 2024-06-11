@@ -3,7 +3,6 @@ const {
   runSkuScriptInDir,
   waitForUrls,
   startAssetServer,
-  getStoryFrame,
   getTextContentFromFrameOrPage,
   getStoryPage,
 } = require('@sku-private/test-utils');
@@ -98,10 +97,13 @@ describe('storybook-config', () => {
   describe('build-storybook', () => {
     const assetServerPort = 4232;
     const assetServerUrl = `http://localhost:${assetServerPort}`;
+    const storyIframePath =
+      '/iframe.html?viewMode=story&id=testcomponent--default';
+    const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
 
     let closeStorybookServer;
-    /** @type {import("puppeteer").Frame} */
-    let storyFrame;
+    /** @type {import("puppeteer").Page} */
+    let storyPage;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-storybook', appDir, [
@@ -112,8 +114,8 @@ describe('storybook-config', () => {
         assetServerPort,
         storybookDistDir,
       );
-      await waitForUrls(assetServerUrl);
-      storyFrame = await getStoryFrame(assetServerUrl);
+      await waitForUrls(storyIframeUrl);
+      storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);
 
     afterAll(() => {
@@ -122,7 +124,7 @@ describe('storybook-config', () => {
 
     it('should render decorators defined in the storybook preview file', async () => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyFrame,
+        storyPage,
         '[data-automation-decorator]',
       );
 
@@ -132,7 +134,7 @@ describe('storybook-config', () => {
 
     it('should render a component inside a story', async () => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyFrame,
+        storyPage,
         '[data-automation-text]',
       );
 
@@ -142,7 +144,7 @@ describe('storybook-config', () => {
 
     it('should render vanilla styles', async () => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyFrame,
+        storyPage,
         '[data-automation-vanilla]',
       );
 
@@ -152,7 +154,7 @@ describe('storybook-config', () => {
 
     it('should render less styles', async () => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyFrame,
+        storyPage,
         '[data-automation-less]',
       );
 

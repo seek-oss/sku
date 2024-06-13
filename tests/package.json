@@ -21,7 +21,6 @@
     "@sku-fixtures/lint-format": "workspace:*",
     "@sku-fixtures/multiple-routes": "workspace:*",
     "@sku-fixtures/public-path": "workspace:*",
-    "@sku-fixtures/react-css-modules": "workspace:*",
     "@sku-fixtures/sku-test": "workspace:*",
     "@sku-fixtures/sku-webpack-plugin": "workspace:*",
     "@sku-fixtures/sku-with-https": "workspace:*",

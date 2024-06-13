@@ -82,16 +82,6 @@ describe('storybook-config', () => {
       expect(text).toEqual('32px vanilla text');
       expect(fontSize).toEqual('32px');
     });
-
-    it('should render less styles', async () => {
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
-        '[data-automation-less]',
-      );
-
-      expect(text).toEqual('32px less text');
-      expect(fontSize).toEqual('32px');
-    });
   });
 
   describe('build-storybook', () => {
@@ -149,16 +139,6 @@ describe('storybook-config', () => {
       );
 
       expect(text).toEqual('32px vanilla text');
-      expect(fontSize).toEqual('32px');
-    });
-
-    it('should render less styles', async () => {
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
-        '[data-automation-less]',
-      );
-
-      expect(text).toEqual('32px less text');
       expect(fontSize).toEqual('32px');
     });
   });

@@ -65,7 +65,7 @@
     "babel-plugin-transform-remove-imports": "^1.7.0",
     "babel-plugin-unassert": "^3.1.0",
     "browserslist": "^4.16.1",
-    "browserslist-config-seek": "^2.1.0",
+    "browserslist-config-seek": "^3.0.0",
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.7.1",

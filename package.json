@@ -67,7 +67,7 @@
     "typescript": "*"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=18.20.0"
   },
   "volta": {
     "node": "18.20.1",

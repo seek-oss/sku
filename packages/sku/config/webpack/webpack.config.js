@@ -176,6 +176,7 @@ const makeWebpackConfig = ({
                       loader: require.resolve('babel-loader'),
                       options: {
                         babelrc: false,
+                        cacheDirectory: true,
                         presets: [
                           [
                             require.resolve('@babel/preset-env'),

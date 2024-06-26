@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "12.6.2",
+  "version": "12.7.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -48,6 +48,7 @@
     "@storybook/react": "^7.0.17",
     "@storybook/react-webpack5": "^7.0.17",
     "@types/express": "^4.17.11",
+    "@swc/core": "^1.5.25",
     "@types/jest": "^29.0.0",
     "@types/loadable__component": "^5.13.1",
     "@types/loadable__server": "^5.12.10",
@@ -120,7 +121,7 @@
     "svgo-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.1.4",
     "tree-kill": "^1.2.1",
-    "typescript": "~5.3.0",
+    "typescript": "~5.5.0",
     "webpack": "^5.52.0",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-dev-server": "^5.0.2",

@@ -554,6 +554,9 @@ importers:
       '@storybook/react-webpack5':
         specifier: ^7.0.17
         version: 7.6.19(@babel/core@7.24.7)(@swc/core@1.5.25)(esbuild@0.19.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@2.19.0)(typescript@5.5.2)(webpack-dev-server@5.0.4(debug@4.3.5)(webpack@5.91.0(@swc/core@1.5.25)(esbuild@0.19.12)))(webpack-hot-middleware@2.26.1)
+      '@swc/core':
+        specifier: ^1.5.25
+        version: 1.5.25
       '@types/jest':
         specifier: ^29.0.0
         version: 29.5.12

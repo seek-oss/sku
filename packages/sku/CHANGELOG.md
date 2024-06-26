@@ -1,5 +1,43 @@
 # sku
 
+## 12.7.0
+
+### Minor Changes
+
+- Update TypeScript from 5.3 to 5.5 ([#1003](https://github.com/seek-oss/sku/pull/1003))
+
+  Both the 5.4 and 5.5 releases include breaking changes. See the [TypeScript 5.4 announcement] and [TypeScript 5.5 announcement] for more information.
+
+  [typescript 5.4 announcement]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-4/
+  [typeScript 5.5 announcement]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-5/
+
+- Add support for `--watch` flag to `sku translations compile` ([#989](https://github.com/seek-oss/sku/pull/989))
+
+  The `sku translations compile` command now accepts a `--watch` flag. When this flag is provided, `translations.json` files will be re-compiled whenever changes are detected.
+
+  **EXAMPLE USAGE**:
+
+  ```sh
+  sku translations compile --watch
+  ```
+
+### Patch Changes
+
+- Update all `@vocab/*` dependencies ([#989](https://github.com/seek-oss/sku/pull/989))
+
+- Fixes a bug where the project name was not being reported correctly when sending telemetry ([#1001](https://github.com/seek-oss/sku/pull/1001))
+
+- Enable `babel-loader` cache ([#990](https://github.com/seek-oss/sku/pull/990))
+
+  Sku's webpack configuration now configures `babel-loader` to emit a cache to `node_modules/.cache/babel-loader`. The primary use case for this cache is speeding up production builds. It can also speed up local development in situations where the webpack cache is invalidated.
+
+- Minify build output with [SWC] ([#992](https://github.com/seek-oss/sku/pull/992))
+
+  Minification of production build output is now performed by [SWC]. Previously this was performed by [Terser]. This should result in a noticeable reduction in build times for larger projects, as well as a slight decrease in bundle size.
+
+  [swc]: https://swc.rs/docs/configuration/minification
+  [terser]: https://terser.org/
+
 ## 12.6.2
 
 ### Patch Changes

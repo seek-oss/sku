@@ -2,18 +2,10 @@ import type React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import App from './App';
+import type { Server } from 'sku';
 
-interface SkuProps {
-  SkuProvider: React.FunctionComponent<{ children: React.ReactNode }>;
-  getHeadTags: () => string;
-  getBodyTags: () => string;
-}
-export default () => ({
-  renderCallback: (
-    { SkuProvider, getBodyTags, getHeadTags }: SkuProps,
-    _: any,
-    res: any,
-  ): void => {
+export default (): Server => ({
+  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, _, res): void => {
     const app = renderToString(
       <SkuProvider>
         <App />

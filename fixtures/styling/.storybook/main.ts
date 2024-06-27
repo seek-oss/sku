@@ -5,15 +5,13 @@ export default {
   stories: ['../src/**/*.stories.tsx'],
   framework: {
     name: '@storybook/react-webpack5',
-    options: {},
-  },
-  core: {
-    builder: {
-      name: '@storybook/builder-webpack5',
-      options: {
+    options: {
+      builder: {
         fsCache: true,
       },
     },
+  },
+  core: {
     disableTelemetry: true,
   },
   addons: ['@storybook/addon-webpack5-compiler-babel'],

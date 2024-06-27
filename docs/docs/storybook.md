@@ -25,17 +25,17 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 
 export default {
   stories: ['../src/**/*.stories.tsx'],
-  framework: '@storybook/react-webpack5',
-  core: {
-    builder: {
-      name: '@storybook/builder-webpack5',
-      options: {
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      builder: {
         fsCache: true, // For faster startup times after the first `storybook dev`
       },
     },
   },
-  // Required for Storybook >=8.0.0
-  addons: ['@storybook/addon-webpack5-compiler-babel'],
+  addons: [
+    '@storybook/addon-webpack5-compiler-babel', // Required for Storybook >=8.0.0
+  ],
   babel,
   webpackFinal,
 } satisfies StorybookConfig;

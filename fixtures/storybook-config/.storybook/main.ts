@@ -3,14 +3,15 @@ import { babel, webpackFinal } from 'sku/config/storybook';
 
 export default {
   stories: ['../src/**/*.stories.tsx'],
-  framework: '@storybook/react-webpack5',
-  core: {
-    builder: {
-      name: '@storybook/builder-webpack5',
-      options: {
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      builder: {
         fsCache: true,
       },
     },
+  },
+  core: {
     disableTelemetry: true,
   },
   addons: ['@storybook/addon-webpack5-compiler-babel'],

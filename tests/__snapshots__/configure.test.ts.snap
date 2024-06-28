@@ -2,7 +2,6 @@
 
 exports[`configure custom should generate $ignore 1`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
@@ -16,7 +15,6 @@ exports[`configure custom should generate $ignore 1`] = `
 
 exports[`configure custom should generate $ignore 2`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
@@ -30,7 +28,6 @@ exports[`configure custom should generate $ignore 2`] = `
 
 exports[`configure default should generate $ignore 1`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
@@ -44,7 +41,6 @@ exports[`configure default should generate $ignore 1`] = `
 
 exports[`configure default should generate $ignore 2`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",

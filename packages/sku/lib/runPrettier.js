@@ -37,7 +37,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   const pathsToCheck =
     paths && paths.length > 0
       ? paths
-      : [`**/*.{${[...extensions.ts, ...extensions.js]},md,less,css}`];
+      : [`**/*.{${[...extensions.ts, ...extensions.js]},md,css}`];
 
   prettierArgs.push(...pathsToCheck);
   /*

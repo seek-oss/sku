@@ -6,7 +6,7 @@ const { getCommand } = require('@antfu/ni');
  * @type {import('lint-staged').Config}
  */
 const config = {
-  [`**/*.{${lintExtensions},md,less}`]: ['sku format', 'sku lint'],
+  [`**/*.{${lintExtensions},md}`]: ['sku format', 'sku lint'],
 };
 
 // Yarn lock integrity check

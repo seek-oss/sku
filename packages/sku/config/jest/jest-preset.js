@@ -28,7 +28,6 @@ module.exports = jestDecorator({
       require.resolve('./fileMock'),
   },
   transform: {
-    '\\.less$': require.resolve('./cssModulesTransform.js'),
     '\\.css\\.ts$': require.resolve('@vanilla-extract/jest-transform'),
     '\\.tsx?$': require.resolve('./tsBabelTransform.js'),
     '\\.[cm]?js$': require.resolve('./jsBabelTransform.js'),

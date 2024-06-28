@@ -1,5 +1,4 @@
 # managed by sku
-*.less.d.ts
 .eslintcache
 .eslintrc
 .prettierrc

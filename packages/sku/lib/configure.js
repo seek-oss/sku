@@ -66,7 +66,7 @@ module.exports = async () => {
   });
   gitIgnorePatterns.push(prettierConfigFilename);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns, '*.less.d.ts'];
+  const lintIgnorePatterns = [...gitIgnorePatterns];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';

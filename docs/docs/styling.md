@@ -33,30 +33,10 @@ See [Vanilla Extract](https://vanilla-extract.style/documentation/getting-starte
 
 ## Locally Scoped CSS
 
-(via [CSS Modules](https://github.com/css-modules/css-modules) and [LESS](http://lesscss.org/))
+As of sku v13, [LESS] support has been removed in favour of [Vanilla Extract].
 
-> Support for LESS has been deprecated.
-> [Vanilla Extract](#vanilla-extract) is the preferred styling solution supported by sku, and support for LESS will be removed in a future release.
-> Consumers are encouraged to migrate to Vanilla Extract at the earliest opportunity.
-
-Import any `.less` file into your Javascript as a `styles` object and use its properties as class names.
-
-For example, given the following LESS file:
-
-```less
-.exampleWrapper {
-  font-family: comic sans ms;
-  color: blue;
-}
-```
-
-You can then import the classes into your code like so:
-
-```tsx
-import styles from './example.less';
-
-export default () => <div className={styles.exampleWrapper}>Hello World!</div>;
-```
+[LESS]: http://lesscss.org/
+[vanilla extract]: #vanilla-extract
 
 ## treat
 

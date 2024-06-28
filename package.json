@@ -1,19 +1,18 @@
 {
   "name": "@sku-private/monorepo",
   "private": true,
-  "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "scripts": {
     "postinstall": "node ./postinstall.js",
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
-    "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,less,css}'",
+    "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,,css}'",
     "lint:tsc": "tsc",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "test:sku-init": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --config=jest.config.sku-init.js",
     "setup-test-hosts": "node test-utils/setupTestHosts",
-    "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
+    "format": "prettier --cache --write '**/*.{js,ts,tsx,md,css}' && eslint --cache --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
@@ -25,7 +24,7 @@
     "**/*.js": [
       "eslint --cache --fix"
     ],
-    "**/*.{js,ts,tsx,md,less,css}": [
+    "**/*.{js,ts,tsx,md,css}": [
       "prettier --cache --write"
     ]
   },

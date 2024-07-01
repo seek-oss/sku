@@ -15,6 +15,7 @@ const {
 } = require('../../utils');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
 const validateOptions = require('./validateOptions');
+const targets = require('../../targets.json');
 
 const isCI = require('../../../../lib/isCI');
 
@@ -65,7 +66,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              browserslist: ['current node'],
+              browserslist: [targets.currentNode],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -94,7 +95,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              browserslist: ['current node'],
+              browserslist: [targets.currentNode],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,

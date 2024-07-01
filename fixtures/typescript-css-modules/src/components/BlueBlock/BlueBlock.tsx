@@ -1,4 +1,4 @@
-import styles from './BlueBlock.less';
+import * as styles from './BlueBlock.css.ts';
 
 interface BlueBlockProps {
   border?: boolean;

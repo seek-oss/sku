@@ -26,11 +26,12 @@ Then, you need to create your `server` entry. Sku will automatically provide an 
 
 This can be done as follows:
 
-```js
+```tsx
 import template from './template';
 import middleware from './middleware';
+import type { Server } from 'sku';
 
-export default () => ({
+export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     const app = renderToString(
       <SkuProvider>
@@ -57,11 +58,12 @@ New head tags can be added during render, typically this is due to dynamic chunk
 
 For example, you may want to send back an initial response before you are done rendering your response:
 
-```js
+```tsx
 import { initialResponseTemplate, followupResponseTemplate } from './template';
 import middleware from './middleware';
+import type { Server } from 'sku';
 
-export default () => ({
+export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     res.status(200);
     // Call `flushHeadTags` early to retrieve whatever tags are available.

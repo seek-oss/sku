@@ -1,4 +1,31 @@
 import type { ComponentType, ReactNode } from 'react';
+import type { Express, RequestHandler } from 'express';
+import type { ChunkExtractor } from '@loadable/server';
+
+export interface RenderCallbackParams {
+  SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
+  addLanguageChunk: (language: string) => void;
+  getBodyTags: () => string;
+  getHeadTags: (options?: {
+    excludeJs?: boolean;
+    excludeCss?: boolean;
+  }) => string;
+  flushHeadTags: (options?: {
+    excludeJs?: boolean;
+    excludeCss?: boolean;
+  }) => string;
+  extractor: ChunkExtractor;
+  registerScript?: (script: string) => void;
+}
+
+export interface Server {
+  renderCallback: (
+    params: RenderCallbackParams,
+    ...requestHandlerParams: Parameters<RequestHandler>
+  ) => void;
+  onStart?: (app: Express) => void;
+  middleware?: RequestHandler | RequestHandler[];
+}
 
 interface SharedRenderProps {
   routeName: string;

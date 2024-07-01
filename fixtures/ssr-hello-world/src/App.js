@@ -1,9 +1,9 @@
-import lessStyles from './lessStyles.less';
+import * as styles from './styles.css.js';
 import logo from './logo.png';
 
 const App = () => (
-  <div className={lessStyles.root}>
-    <div className={lessStyles.nested}>Hello World</div>
+  <div className={styles.root}>
+    <div className={styles.nested}>Hello World</div>
     <img src={logo} />
   </div>
 );

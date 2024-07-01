@@ -19,11 +19,9 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'dist');
 const distSsrDir = path.resolve(appDir, 'dist-ssr');
-const srcDir = path.resolve(appDir, 'src');
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
-const cssTypes = ['.less.d.ts'];
 
 describe('typescript-css-modules', () => {
   describe('build', () => {
@@ -50,11 +48,7 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
-      expect({
-        ...files,
-        ...cssTypeFiles,
-      }).toMatchSnapshot();
+      expect(files).toMatchSnapshot();
     });
   });
 
@@ -88,11 +82,7 @@ describe('typescript-css-modules', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
-      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
-      expect({
-        ...files,
-        ...cssTypeFiles,
-      }).toMatchSnapshot();
+      expect(files).toMatchSnapshot();
     });
   });
 
@@ -123,7 +113,7 @@ describe('typescript-css-modules', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle Less and css.js in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async () => {
       expect(exitCode).toEqual(0);
     });
   });

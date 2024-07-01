@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "12.6.2",
+  "version": "12.8.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
   "main": "index.js",
   "bin": {
@@ -47,8 +47,12 @@
     "@storybook/cli": "^7.0.17",
     "@storybook/react": "^7.0.17",
     "@storybook/react-webpack5": "^7.0.17",
+    "@types/express": "^4.17.11",
+    "@swc/core": "^1.5.25",
     "@types/jest": "^29.0.0",
     "@types/loadable__component": "^5.13.1",
+    "@types/loadable__server": "^5.12.10",
+    "@types/react": "^18.2.3",
     "@vanilla-extract/jest-transform": "^1.1.0",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "@vocab/core": "^1.6.2",
@@ -130,10 +134,8 @@
   "devDependencies": {
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
-    "@types/express": "^4.17.11",
     "@types/minimist": "^1.2.5",
     "@types/picomatch": "^2.3.3",
-    "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
     "@types/which": "^3.0.0",
     "@vanilla-extract/css": "^1.0.0",

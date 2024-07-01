@@ -10,12 +10,15 @@ const getNewTags = ({ before, after }) => {
   return afterArr.filter((tag) => !beforeArr.includes(tag)).join('\n');
 };
 
+/** @typedef {import("../sku-types.d.ts").RenderCallbackParams} RenderCallbackParams */
+
 export default (stats, publicPath, csp) => {
   const extractor = new ChunkExtractor({
     stats,
     entrypoints: [defaultEntryPoint],
   });
 
+  /** @type {RenderCallbackParams['SkuProvider']} */
   const SkuProvider = ({ children }) => (
     <ChunkExtractorManager extractor={extractor}>
       {children}
@@ -40,6 +43,7 @@ export default (stats, publicPath, csp) => {
   const getCssHeadTags = () => extractor.getStyleTags();
 
   return {
+    /** @type RenderCallbackParams['getHeadTags'] */
     getHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
@@ -56,6 +60,7 @@ export default (stats, publicPath, csp) => {
       }
       return tags.join('\n');
     },
+    /** @type RenderCallbackParams['flushHeadTags'] */
     flushHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
@@ -92,6 +97,7 @@ export default (stats, publicPath, csp) => {
       }
       return tags.join('\n');
     },
+    /** @type RenderCallbackParams['getBodyTags'] */
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
     SkuProvider,
     extractor,

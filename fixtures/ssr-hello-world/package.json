@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
+    "@vanilla-extract/css": "^1.0.0",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

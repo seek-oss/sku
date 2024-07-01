@@ -1,4 +1,4 @@
-import styles from './RedBlock.less';
+import * as styles from './RedBlock.css.ts';
 
 interface RedBlockProps {
   border?: boolean;

@@ -1,4 +1,4 @@
-import lessStyles from './lessStyles.less';
+import * as styles from './styles.css.ts';
 
 declare const SETUP_TESTS_SCRIPT_RAN: boolean;
 
@@ -7,8 +7,8 @@ describe('App', () => {
     expect(SETUP_TESTS_SCRIPT_RAN).toEqual(true);
   });
 
-  test('Less Styles', () => {
-    expect(lessStyles.root).toEqual('lessStyles__root');
-    expect(lessStyles.nested).toEqual('lessStyles__nested');
+  test('Vanilla Extract styles', () => {
+    expect(styles.root).toEqual(expect.stringContaining('styles_root'));
+    expect(styles.nested).toEqual(expect.stringContaining('styles_nested'));
   });
 });

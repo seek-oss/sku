@@ -19,11 +19,13 @@ In the `renderCallback` function, register all extra script tags (inline and ext
 > If you are using multi-part responses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
 
 ```tsx
-async function renderCallback(
-  { SkuProvider, getBodyTags, registerScript },
+import type { Server } from 'sku';
+
+const renderCallback: Server['renderCallback'] = (
+  { SkuProvider, getHeadTags, getBodyTags, registerScript },
   req,
   res,
-) {
+) => {
   const someExternalScript = `<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>`;
   const someInlineScript = `<script>console.log('Hi');</script>`;
 
@@ -43,14 +45,14 @@ async function renderCallback(
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        ${headTags}
+        ${getHeadTags()}
       </head>
       <body>
         <div id="app">${app}</div>
         ${someInlineScript}
-        ${bodyTags}
+        ${getBodyTags()}
         ${someExternalScript}
       </body>
     </html>`);
-}
+};
 ```

@@ -7,7 +7,7 @@ SCRIPTS: [
   "/static/typescript/main.js",
 ]
 CSS: [
-  "/static/typescript/main-cb5c558f16bd36d80f00.css",
+  "/static/typescript/main-4bad37555f2de4beeb21.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -106,13 +106,14 @@ POST HYDRATE DIFFS:
 exports[`typescript-css-modules build should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/static/typescript/runtime.js",
     "/static/typescript/2.js",
     "/static/typescript/main.js",
   ]
 CSS: [
-    "/static/typescript/main-cb5c558f16bd36d80f00.css",
+    "/static/typescript/main-4bad37555f2de4beeb21.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -196,15 +197,20 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-cb5c558f16bd36d80f00.css": ._19hsk3y0 {
+  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
   display: flex;
 }
 ._19hsk3y0 ._19hsk3y1 {
   font-size: 32px;
 }
+
+/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
 ,
+  "main-4bad37555f2de4beeb21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -215,7 +221,7 @@ SCRIPTS: [
   "http://localhost:4003/main.js",
 ]
 CSS: [
-  "http://localhost:4003/main-cb5c558f16bd36d80f00.css",
+  "http://localhost:4003/main-4bad37555f2de4beeb21.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -322,12 +328,14 @@ POST HYDRATE DIFFS:
 exports[`typescript-css-modules build-ssr should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-cb5c558f16bd36d80f00.css": ._19hsk3y0 {
+  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
   display: flex;
 }
 ._19hsk3y0 ._19hsk3y1 {
   font-size: 32px;
 }
+
+/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
 ,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

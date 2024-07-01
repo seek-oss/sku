@@ -9,8 +9,8 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 
 ## Source maps
 
-Source maps are enabled by default when running the `sku start` command.
-However, if you want to generate source maps when running `sku build`, you can do so by enabling [`sourceMapsProd`](./docs/configuration#sourcemapsprod).
+Source maps are enabled by default when running both `sku start` and `sku build`.
+If you want to disable source map generation for production builds, you can set [`sourceMapsProd`](./docs/configuration#sourcemapsprod) to `false`.
 
 ## Compile packages
 

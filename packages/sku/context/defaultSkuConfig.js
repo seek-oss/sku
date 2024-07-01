@@ -33,7 +33,7 @@ module.exports = {
   polyfills: [],
   libraryName: null,
   libraryFile: null,
-  sourceMapsProd: false,
+  sourceMapsProd: true,
   displayNamesProd: false,
   dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,

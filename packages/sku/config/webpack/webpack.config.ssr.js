@@ -36,6 +36,7 @@ const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
+const targets = require('./targets.json');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -74,8 +75,6 @@ const makeWebpackConfig = ({
   // is not supported for hot reloading. It can also cause non
   // deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
-
-  const nodeTarget = 'node 12';
 
   const webpackConfigs = [
     {
@@ -213,7 +212,7 @@ const makeWebpackConfig = ({
     {
       name: 'server',
       mode: webpackMode,
-      target: `browserslist:${nodeTarget}`,
+      target: `browserslist:${targets.currentNode}`,
       entry: serverEntry,
       externals: [
         {
@@ -248,8 +247,7 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath,
         filename: 'server.js',
-        library: 'server',
-        libraryTarget: 'var',
+        library: { name: 'server', type: 'var' },
       },
       cache: getCacheSettings({ isDevServer }),
       optimization: {
@@ -285,7 +283,7 @@ const makeWebpackConfig = ({
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          browserslist: [nodeTarget],
+          browserslist: [targets.currentNode],
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,

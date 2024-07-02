@@ -6,9 +6,7 @@ translations.ts
 .eslintcache
 .eslintrc
 .prettierrc
-.storybook/main.js
 coverage/
-dist-ssr/
-dist-storybook/
+dist/
 report/
 # end managed by sku

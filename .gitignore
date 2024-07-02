@@ -6,4 +6,5 @@ dist/
 dist-build/
 dist-ssr/
 dist-start/
+storybook-static/
 yarn.lock

@@ -25,7 +25,13 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "peerDependencies": {
-    "react": "^16.14.0 || ^17.0.0 || ^18.0.0"
+    "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
+    "@storybook/react-webpack5": "^7.0.0 || ^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@storybook/react-webpack5": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@antfu/ni": "^0.21.8",

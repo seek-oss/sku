@@ -15,7 +15,6 @@ const distDir = path.resolve(appDir, 'dist');
 
 function getLocalUrl(site) {
   const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
-
   return `http://${host}:${skuConfig.port}`;
 }
 

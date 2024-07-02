@@ -2,6 +2,7 @@
   "name": "@sku-private/test-utils",
   "private": true,
   "dependencies": {
+    "@types/wait-on": "5.3.4",
     "css": "^3.0.0",
     "diffable-html": "^5.0.0",
     "git-diff": "^2.0.6",

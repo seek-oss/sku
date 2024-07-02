@@ -1,88 +1,95 @@
 # [Storybook](https://storybook.js.org/)
 
-## Start Storybook
+This page will guide you through the process of setting up Storybook in your project.
+The configuration outlined on this page should work for most projects, but you may customize it further to suit your needs.
 
-Running `sku storybook` will open up a local component explorer, displaying all component instances declared in files named `*.stories.js` (or `.ts`, or `.tsx`), for example:
+## Installing Storybook Dependencies
 
-```tsx
-import Button from './Button';
+To set up Storybook, you will need to install the following dev dependencies:
 
-import type { Meta } from 'sku/@storybook/react';
-
-export default {
-  title: 'Button',
-  component: Button,
-} satisfies Meta;
-
-export const Primary = () => <Button variant="primary">Primary</Button>;
-
-export const Secondary = () => <Button variant="secondary">Secondary</Button>;
+```sh
+pnpm install -D storybook @storybook/react @storybook/react-webpack5 @storybook/addon-webpack5-compiler-babel
 ```
 
-_**NOTE:** To access the Storybook API, you should import from `sku/@storybook/...`, since your project isn't depending on Storybook packages directly._
+## Configuring Storybook
 
-## Configuration
+Storybook can be configured by creating specially-named files inside a `.storybook` folder within your repo.
+Take a look at the [Storybook configuration documentation] for all the ways to customize Storybook.
 
-Storybook can be configured by creating specially-named files inside the `.storybook` folder of your app.
-Take a look at the [Storybook configuration docs] for all the ways to customize your Storybook.
-
-_**NOTE:** sku maintains control of the `main.js` configuration file as it is critical to ensuring compatibility between Storybook and your app.
-If you have a valid use case for customizing this file, please reach out in [`#sku-support`]._
-
-[Storybook configuration docs]: https://storybook.js.org/docs/react/configure/overview
-[`#sku-support`]: https://seekchat.slack.com/channels/sku-support
-
-### Addons
-
-There are no storybook addons configured by default in sku but they can be added through the `storybookAddons` option in `sku.config.ts`.
-
-For example, if you want to use `@storybook/addon-essentials`, first install the addon.
-
-```bash
-yarn add --dev @storybook/addon-essentials
-```
-
-Then add it to your `sku.config.ts`.
+Here's an example of a minimal, sku-compatible Storybook configuration:
 
 ```ts
+// .storybook/main.ts
+import { babel, webpackFinal } from 'sku/config/storybook';
+import type { StorybookConfig } from '@storybook/react-webpack5';
+
 export default {
-  storybookAddons: ['@storybook/addon-essentials'],
+  stories: ['../src/**/*.stories.tsx'],
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      builder: {
+        fsCache: true, // For faster startup times after the first `storybook dev`
+      },
+    },
+  },
+  addons: [
+    '@storybook/addon-webpack5-compiler-babel', // Required for Storybook >=8.0.0
+  ],
+  babel,
+  webpackFinal,
+} satisfies StorybookConfig;
+```
+
+> We strongly recommend using the `babel` and `webpackFinal` configurations provided by `sku`.
+> These configurations and are tested as part of `sku`'s integration tests in order to ensure they function correctly.
+> While you are free to use alternative configurations, we cannot provide any guarantees that Storybook will work correctly in such cases.
+
+If you want to typecheck the files within the `.storybook` directory, you will need to add them to your [`tsconfig.json`'s `include`][tsconfig include] field.
+This is necessary because the implicit default value of `include` is `['**/*']` which does not include any directories prefixed with `.`, such as `.storybook`.
+
+This can be done via [`sku`'s `dangerouslySetTSConfig` configuration option][dangerouslySetTSConfig]:
+
+```ts
+// sku.config.ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  dangerouslySetTSConfig: (config) => ({
+    ...config,
+    include: [
+      '**/*', // Implicit default value if `include` is not set and `files` is not set
+      '.storybook/*', // 👈 Add this line
+    ],
+  }),
 } satisfies SkuConfig;
 ```
 
-### Story Rendering
+[Storybook configuration documentation]: https://storybook.js.org/docs/react/configure/overview
+[tsconfig include]: https://www.typescriptlang.org/tsconfig/#include
+[dangerouslySetTSConfig]: ./docs/configuration.md#dangerouslysettsconfig
 
-Story rendering can be customized globally by creating a `.storybook/preview.js` (or `.ts`, or `.tsx`) file.
+## Developing and Building Your Storybook
 
-```tsx
-import 'braid-design-system/reset';
+To serve a development version of your Storybook, run:
 
-import apac from 'braid-design-system/themes/apac';
-import { BraidProvider } from 'braid-design-system';
-
-import React from 'react';
-
-import type { Preview } from 'sku/@storybook/react';
-
-// This will wrap every story in a BraidProvider
-export default {
-  decorators: [
-    (Story) => (
-      <BraidProvider theme={apac}>
-        <Story />
-      </BraidProvider>
-    ),
-  ],
-} satisfies Preview;
+```sh
+pnpm exec storybook dev
 ```
 
-See [the Storybook docs][storybook preview.js] for more info.
+To build a deployable, production version of your Storybook, run:
 
-[storybook preview.js]: https://storybook.js.org/docs/react/configure/overview#configure-story-rendering
+```sh
+pnpm exec storybook build
+```
 
-### DevServer Middleware
+Please read the [Storybook CLI documentation] for more information.
 
-When running `sku storybook`, if you want to run your [`devServerMiddleware`][devserver middleware] at the same time, add a `middleware.js` file to the `.storybook` folder and export it:
+[Storybook CLI documentation]: https://storybook.js.org/docs/cli/
+
+## DevServer Middleware
+
+When running `storybook dev`, if you want to run your [`devServerMiddleware`][devserver middleware] at the same time, add a `middleware.js` file to the `.storybook` folder and re-export your middleware inside it:
 
 ```js
 // .storybook/middleware.js
@@ -92,37 +99,3 @@ export default devServerMiddleware;
 ```
 
 [devserver middleware]: ./docs/extra-features.md#devserver-middleware
-
-### Storybook Port
-
-By default, Storybook runs on port `8081`.
-If you'd like to use a different port, you can provide it via the `storybookPort` option in `sku.config.ts`:
-
-```ts
-export default {
-  storybookPort: 9000,
-} satisfies SkuConfig;
-```
-
-## Build Storybook
-
-To build your Storybook, first add the following npm script:
-
-```json
-{
-  "scripts": {
-    "build-storybook": "sku build-storybook"
-  }
-}
-```
-
-Then run `npm run build-storybook`.
-
-By default, Storybook assets are generated in the `dist-storybook` directory in your project root folder.
-If you would like to specify a custom target directory, you can provide it via the `storybookTarget` option in `sku.config.ts`:
-
-```ts
-export default {
-  storybookTarget: './dist/storybook',
-} satisfies SkuConfig;
-```

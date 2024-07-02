@@ -1,9 +1,0 @@
-# managed by sku
-.eslintcache
-.eslintrc
-.prettierrc
-coverage/
-dist/
-report/
-tsconfig.json
-# end managed by sku

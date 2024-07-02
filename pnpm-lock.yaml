@@ -260,25 +260,9 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
-      dedent:
-        specifier: ^1.5.1
-        version: 1.5.3(babel-plugin-macros@3.1.0)
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
-  fixtures/react-css-modules:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-    devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../test-utils
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.15.2(babel-plugin-macros@3.1.0)
       dedent:
         specifier: ^1.5.1
         version: 1.5.3(babel-plugin-macros@3.1.0)
@@ -338,6 +322,9 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.15.2(babel-plugin-macros@3.1.0)
       dedent:
         specifier: ^1.5.1
         version: 1.5.3(babel-plugin-macros@3.1.0)
@@ -379,6 +366,9 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.15.2(babel-plugin-macros@3.1.0)
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -518,6 +508,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.3
         version: 18.3.0
+      '@vanilla-extract/css':
+        specifier: ^1.0.0
+        version: 1.15.2(babel-plugin-macros@3.1.0)
       dedent:
         specifier: ^1.5.1
         version: 1.5.3(babel-plugin-macros@3.1.0)
@@ -942,9 +935,6 @@ importers:
       '@sku-fixtures/public-path':
         specifier: workspace:*
         version: link:../fixtures/public-path
-      '@sku-fixtures/react-css-modules':
-        specifier: workspace:*
-        version: link:../fixtures/react-css-modules
       '@sku-fixtures/sku-test':
         specifier: workspace:*
         version: link:../fixtures/sku-test

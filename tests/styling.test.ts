@@ -17,11 +17,9 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
-const srcDir = path.resolve(appDir, 'src');
 
 assert(skuConfig.port, 'sku config has port');
 const devServerUrl = `http://localhost:${skuConfig.port}`;
-const cssTypes = ['.less.d.ts'];
 
 describe('styling', () => {
   describe('build', () => {
@@ -44,11 +42,7 @@ describe('styling', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
-      expect({
-        ...files,
-        ...cssTypeFiles,
-      }).toMatchSnapshot();
+      expect(files).toMatchSnapshot();
     });
   });
 
@@ -78,7 +72,7 @@ describe('styling', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle LESS in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async () => {
       expect(exitCode).toEqual(0);
     });
   });
@@ -125,15 +119,6 @@ describe('styling', () => {
 
       expect(text).toEqual('This should be invisible');
       expect(fontSize).toEqual('9px');
-    });
-
-    it('should render LESS styles', async () => {
-      const { fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
-        '[data-automation-less]',
-      );
-
-      expect(fontSize).toEqual('32px');
     });
 
     it('should render Vanilla Extract styles', async () => {

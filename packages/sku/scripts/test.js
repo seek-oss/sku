@@ -23,5 +23,9 @@ process.env.IS_REACT_ACT_ENVIRONMENT = true;
     argv.push('--ci');
   }
 
-  jest.run([...argv, ...(watch ? ['--watch'] : [])]);
+  if (watch) {
+    argv.push('--watch');
+  }
+
+  jest.run(argv);
 })();

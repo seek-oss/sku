@@ -3,7 +3,7 @@ const debug = require('debug');
 const jest = require('jest');
 
 const isCI = require('../lib/isCI');
-const { argv } = require('../config/args');
+const { argv, watch } = require('../config/args');
 const { runVocabCompile } = require('../lib/runVocab');
 
 const log = debug('sku:jest');
@@ -17,11 +17,17 @@ process.env.IS_REACT_ACT_ENVIRONMENT = true;
   const jestPreset = require.resolve('../config/jest/jest-preset');
   log(`Using Jest preset at ${jestPreset}`);
 
-  argv.push('--preset', path.dirname(jestPreset));
+  const jestArgv = [...argv];
+
+  jestArgv.push('--preset', path.dirname(jestPreset));
 
   if (isCI) {
-    argv.push('--ci');
+    jestArgv.push('--ci');
   }
 
-  jest.run(argv);
+  if (watch) {
+    jestArgv.push('--watch');
+  }
+
+  jest.run(jestArgv);
 })();

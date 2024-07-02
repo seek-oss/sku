@@ -17,15 +17,17 @@ process.env.IS_REACT_ACT_ENVIRONMENT = true;
   const jestPreset = require.resolve('../config/jest/jest-preset');
   log(`Using Jest preset at ${jestPreset}`);
 
-  argv.push('--preset', path.dirname(jestPreset));
+  const jestArgv = [...argv];
+
+  jestArgv.push('--preset', path.dirname(jestPreset));
 
   if (isCI) {
-    argv.push('--ci');
+    jestArgv.push('--ci');
   }
 
   if (watch) {
-    argv.push('--watch');
+    jestArgv.push('--watch');
   }
 
-  jest.run(argv);
+  jest.run(jestArgv);
 })();

@@ -81,6 +81,57 @@ For applications with a large number of source files and/or dependencies, this c
 
 [`babel-loader` cache]: https://github.com/babel/babel-loader?tab=readme-ov-file#options
 
+### Utilizing the `babel-loader` cache in CI
+
+#### Buildkite
+
+To utilize the `babel-loader` cache in Buildkite, you can use the [cache plugin] to cache the `node_modules/.cache/babel-loader` directory.
+
+> The example below stores the cache in an S3 bucket.
+> It is recommended to add a [lifecycle configuration] to your bucket in order to automatically delete old cache files.
+
+```yaml
+# .buildkite/pipeline.yaml
+plugins:
+  # Add these items to your pipeline steps that run `sku build`
+  - cache#v1.0.1:
+      path: ./node_modules/.cache/babel-loader
+      restore: pipeline
+      save: file
+      manifest: pnpm-lock.yaml
+      backend: s3
+      compression: tgz
+  # Second cache plugin entry creates a pipeline-level cache as a stale fallback if the manifest doesn't match.
+  # Ideally this would be defined in a single cache plugin entry.
+  # See https://github.com/buildkite-plugins/cache-buildkite-plugin/issues/70
+  - cache#v1.0.1:
+      path: ./node_modules/.cache/babel-loader
+      save: pipeline
+      backend: s3
+      compression: tgz
+```
+
+[cache plugin]: https://github.com/buildkite-plugins/cache-buildkite-plugin
+[lifecycle configuration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfiguration.html
+
+#### GitHub actions
+
+To utilize the `babel-loader` cache in GitHub actions, you can use the [cache action] to cache the `node_modules/.cache/babel-loader` directory.
+
+```yaml
+# .github/workflows/deploy-site.yaml
+# Add this step before the step that runs `sku build`
+- name: Cache babel-loader
+  id: cache-babel-loader
+  uses: actions/cache@v4
+  with:
+    path: 'node_modules/.cache/babel-loader'
+    key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
+    restore-keys: babel-loader-${{ runner.os }}-
+```
+
+[cache action]: https://github.com/actions/cache
+
 ## Bundle analysis
 
 `sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).

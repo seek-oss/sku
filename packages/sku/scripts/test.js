@@ -3,7 +3,7 @@ const debug = require('debug');
 const jest = require('jest');
 
 const isCI = require('../lib/isCI');
-const { argv } = require('../config/args');
+const { argv, watch } = require('../config/args');
 const { runVocabCompile } = require('../lib/runVocab');
 
 const log = debug('sku:jest');
@@ -23,5 +23,5 @@ process.env.IS_REACT_ACT_ENVIRONMENT = true;
     argv.push('--ci');
   }
 
-  jest.run(argv);
+  jest.run([...argv, ...(watch ? ['--watch'] : [])]);
 })();

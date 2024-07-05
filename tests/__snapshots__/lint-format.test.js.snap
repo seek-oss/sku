@@ -21,7 +21,6 @@ import LocalComponent from './LocalComponent'; // sibling
 
 import myself from '.'; // index
 
-import styles from './styles.less'; // styles
 import vanillaStyles from './vanillaStyles.css'; // styles
 
 `;

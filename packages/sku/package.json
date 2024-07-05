@@ -1,7 +1,7 @@
 {
   "name": "sku",
   "version": "12.8.1",
-  "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
+  "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
     "sku": "./bin/sku.js"
@@ -86,7 +86,6 @@
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.7.1",
-    "css-modules-typescript-loader": "4.0.1",
     "cssnano": "^6.0.0",
     "death": "^1.1.0",
     "debug": "^4.3.1",
@@ -112,8 +111,6 @@
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^29.0.0",
     "jest-watch-typeahead": "^2.2.0",
-    "less": "^4.1.0",
-    "less-loader": "^12.0.0",
     "lint-staged": "^11.1.1",
     "mini-css-extract-plugin": "^2.6.1",
     "minimist": "^1.2.8",

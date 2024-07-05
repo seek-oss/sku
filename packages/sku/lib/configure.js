@@ -71,7 +71,7 @@ module.exports = async () => {
   await writeFileToCWD(tsConfigFileName, createTSConfig());
   gitIgnorePatterns.push(tsConfigFileName);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns, '*.less.d.ts'];
+  const lintIgnorePatterns = [...gitIgnorePatterns];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';

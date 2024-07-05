@@ -2,15 +2,14 @@
 'sku': major
 ---
 
-Simplify package manager detection
+`sku init`: Install dependencies with the package manager that was used to run the command
 
-By default, the package manager used to run a sku command will be used by sku for installing dependencies (during `sku init`) or suggesting commands.
-This can be overridden via the `--packageManager` flag:
+**BREAKING CHANGE**:
+
+The `sku init` command will now install dependencies with the package manager that was used to run the command. This can be overridden via the `--packageManager` flag:
 
 ```sh
-$ npx sku init --packageManager pnpm my-app
-$ cd my-app
-$ pnpm start
+npx sku init my-app # Will install dependencies using npm
+pnpm dlx sku init my-app # Will install dependencies using pnpm
+npx sku init --packageManager yarn my-app # Will install dependencies using yarn
 ```
-
-If a package manager cannot be detected, _and_ the `--packageManager` flag is not used, sku will now default to using `npm`.

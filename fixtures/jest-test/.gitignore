@@ -1,6 +1,8 @@
 # managed by sku
+.eslintcache
 .eslintrc
 .prettierrc
+.storybook/main.js
 coverage/
 dist-storybook/
 dist/

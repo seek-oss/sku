@@ -1,4 +1,4 @@
-import styles from './Details.less';
+import * as styles from './Details.css.js';
 
 import { useState, useEffect } from 'react';
 import loadable from 'sku/@loadable/component';

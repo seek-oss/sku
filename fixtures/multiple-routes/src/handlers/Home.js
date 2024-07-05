@@ -1,4 +1,4 @@
-import styles from './Home.less';
+import * as styles from './Home.css.js';
 
 export default ({ site }) => {
   const message = `Welcome to the Home page - ${site}`;

@@ -13,7 +13,7 @@
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "test:sku-init": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --config=jest.config.sku-init.js",
     "setup-test-hosts": "node test-utils/setupTestHosts",
-    "format": "prettier --cache --write '**/*.{js,ts,tsx,md,less,css}' && eslint --cache --fix .",
+    "format": "prettier --cache --write . && eslint --cache --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"
@@ -58,13 +58,13 @@
     "husky": "^9.0.0",
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^29.0.0",
-    "jest-puppeteer": "^9.0.1",
+    "jest-puppeteer": "^10.0.1",
     "jest-watch-typeahead": "^2.2.0",
     "lint-staged": "^11.1.1",
     "prettier": "^2.8.8",
-    "puppeteer": "^21.6.0",
+    "puppeteer": "^22.10.0",
     "renovate-config-seek": "^0.4.0",
-    "typescript": "*"
+    "typescript": "~5.5.0"
   },
   "volta": {
     "node": "18.16.0",

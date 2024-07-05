@@ -39,7 +39,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   /*
    * Show Prettier output with stdio: inherit
    * The child process will use the parent process's stdin/stdout/stderr
-  * See https://nodejs.org/api/child_process.html#child_process_options_stdio
+   * See https://nodejs.org/api/child_process.html#child_process_options_stdio
    */
   const processOptions = {
     stdio: 'inherit',

@@ -6,7 +6,7 @@
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
-    "lint:prettier": "prettier --cache --list-different '**/*.{js,ts,tsx,md,,css}'",
+    "lint:prettier": "prettier --cache --list-different .",
     "lint:tsc": "tsc",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",

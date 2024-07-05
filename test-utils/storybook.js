@@ -2,47 +2,31 @@
 /// <reference lib="dom" />
 
 /**
- * Returns the iframe of the first story at the provided storybook URL
+ * Returns the page for the given story iframe URL
  *
  * @param {string} storybookUrl A URL pointing to a storybook
  */
-const getStorybookFrame = async (storybookUrl) => {
-  const page = await browser.newPage();
-  page.setDefaultNavigationTimeout(100_000);
-  await page.goto(storybookUrl, { waitUntil: 'load' });
+export const getStoryPage = async (storyIframeUrl) => {
+  const storyPage = await browser.newPage();
+  storyPage.setDefaultNavigationTimeout(10_000);
 
-  const firstStoryButton = await page.waitForSelector(
-    '#storybook-explorer-menu button',
-    { timeout: 100_000 },
-  );
+  await storyPage.goto(storyIframeUrl, { waitUntil: ['load'] });
 
-  // Ensure default story is activated
-  await firstStoryButton.click();
-
-  const iframeElement = await page.waitForSelector('#storybook-preview-iframe');
-
-  const storybookFrame = await iframeElement.contentFrame();
-
-  if (!storybookFrame) {
-    console.log('Unable to find storybookFrame', storybookFrame);
-    throw new Error('Unable to find iframe by id');
-  }
-
-  return storybookFrame;
+  return storyPage;
 };
 
 /**
  * Runs the provided element selector on the provided frame and returns the text content and font size of the selected element
  *
- * @param {import('puppeteer').Frame} storybookFrame The iframe of a single storybook story
+ * @param {import('puppeteer').Page | import('puppeteer').Frame} frameOrPage The iframe or page of a storybook story
  * @param {string} elementSelector An element selector for targetting a specific element within the story frame
  */
-const getTextContentFromStorybookFrame = async (
-  storybookFrame,
+export const getTextContentFromFrameOrPage = async (
+  frameOrPage,
   elementSelector,
 ) => {
-  const element = await storybookFrame.waitForSelector(elementSelector, {
-    timeout: 100_000,
+  const element = await frameOrPage.waitForSelector(elementSelector, {
+    timeout: 10_000,
   });
 
   return element.evaluate((e) => ({
@@ -50,5 +34,3 @@ const getTextContentFromStorybookFrame = async (
     fontSize: window.getComputedStyle(e).getPropertyValue('font-size'),
   }));
 };
-
-module.exports = { getStorybookFrame, getTextContentFromStorybookFrame };

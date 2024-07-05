@@ -34,8 +34,8 @@ describe('assertion-removal', () => {
     });
 
     it('should not contain "assert" or "invariant" in production', async () => {
-      const page = await browser.newPage();
-      const response = await page.goto(url, { waitUntil: 'networkidle0' });
+      const appPage = await browser.newPage();
+      const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
       const sourceHtml = await response?.text();
       expect(sourceHtml).toContain(
         'It rendered without throwing an assertion error',
@@ -63,8 +63,8 @@ describe('assertion-removal', () => {
     });
 
     it('should not contain "assert" or "invariant" in production', async function () {
-      const page = await browser.newPage();
-      const response = await page.goto(backendUrl, {
+      const appPage = await browser.newPage();
+      const response = await appPage.goto(backendUrl, {
         waitUntil: 'networkidle0',
       });
       const sourceHtml = await response?.text();

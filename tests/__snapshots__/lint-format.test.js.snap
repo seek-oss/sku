@@ -61,8 +61,9 @@ exports[`sku lint lint errors are reported: unformattedFile1.js 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,css}
+Paths: .
 src/unformattedFile1.js
+tsconfig.json
 To fix this issue, run 'pnpm run format'
 `;
 
@@ -70,14 +71,7 @@ exports[`sku lint lint errors are reported: utils.test.ts 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,css}
-Checking code with ESLint
 Paths: .
-
-1:1  error  Unexpected console statement                    no-console
-3:4  error  Unexpected focused test                         jest/no-focused-tests
-4:7  error  'foo' is never reassigned. Use 'const' instead  prefer-const
-
-✖ 3 problems (3 errors, 0 warnings)
-1 error and 0 warnings potentially fixable with the \`--fix\` option.
+tsconfig.json
+To fix this issue, run 'pnpm run format'
 `;

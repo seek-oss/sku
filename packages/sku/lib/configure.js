@@ -67,6 +67,10 @@ module.exports = async () => {
   gitIgnorePatterns.push(prettierConfigFilename);
 
   const lintIgnorePatterns = [...gitIgnorePatterns];
+  // Generate TypeScript configuration
+  const tsConfigFileName = 'tsconfig.json';
+  await writeFileToCWD(tsConfigFileName, createTSConfig());
+  gitIgnorePatterns.push(tsConfigFileName);
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';
@@ -75,9 +79,8 @@ module.exports = async () => {
   }
 
   // Write `.eslintignore`
-  const eslintignorePath = getPathFromCwd('.eslintignore');
   await ensureGitignore({
-    filepath: eslintignorePath,
+    filepath: getPathFromCwd('.eslintignore'),
     comment: 'managed by sku',
     patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
   });
@@ -88,11 +91,6 @@ module.exports = async () => {
     comment: 'managed by sku',
     patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
   });
-
-  // Generate TypeScript configuration
-  const tsConfigFileName = 'tsconfig.json';
-  await writeFileToCWD(tsConfigFileName, createTSConfig());
-  gitIgnorePatterns.push(tsConfigFileName);
 
   // Generate self-signed certificate and ignore
   const selfSignedCertificateDirName = '.ssl';

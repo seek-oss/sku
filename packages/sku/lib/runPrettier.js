@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const { runBin } = require('./runBin');
 const { getPathFromCwd } = require('./cwd');
 const { suggestScript } = require('./suggestScript');
-const extensions = require('eslint-config-seek/extensions');
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = path.join(
@@ -34,16 +33,13 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
     prettierArgs.push('--ignore-path', prettierIgnorePath);
   }
 
-  const pathsToCheck =
-    paths && paths.length > 0
-      ? paths
-      : [`**/*.{${[...extensions.ts, ...extensions.js]},md,css}`];
+  const pathsToCheck = paths && paths.length > 0 ? paths : ['.'];
 
   prettierArgs.push(...pathsToCheck);
   /*
    * Show Prettier output with stdio: inherit
    * The child process will use the parent process's stdin/stdout/stderr
-   * See https://nodejs.org/api/child_process.html#child_process_options_stdio
+  * See https://nodejs.org/api/child_process.html#child_process_options_stdio
    */
   const processOptions = {
     stdio: 'inherit',

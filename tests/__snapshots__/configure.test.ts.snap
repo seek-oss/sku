@@ -10,6 +10,7 @@ exports[`configure custom should generate $ignore 1`] = `
   "foo/bar/",
   "report/",
   "storybook/foobar/",
+  "tsconfig.json",
 ]
 `;
 
@@ -23,6 +24,7 @@ exports[`configure custom should generate $ignore 2`] = `
   "foo/bar/",
   "report/",
   "storybook/foobar/",
+  "tsconfig.json",
 ]
 `;
 
@@ -36,6 +38,7 @@ exports[`configure default should generate $ignore 1`] = `
   "dist-storybook/",
   "dist/",
   "report/",
+  "tsconfig.json",
 ]
 `;
 
@@ -49,5 +52,6 @@ exports[`configure default should generate $ignore 2`] = `
   "dist-storybook/",
   "dist/",
   "report/",
+  "tsconfig.json",
 ]
 `;

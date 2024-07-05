@@ -109,7 +109,6 @@ class SkuWebpackPlugin {
           },
         ],
       },
-      ,
       {
         test: /\.css$/i,
         oneOf: [

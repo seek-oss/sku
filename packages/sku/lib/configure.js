@@ -66,11 +66,12 @@ module.exports = async () => {
   });
   gitIgnorePatterns.push(prettierConfigFilename);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns];
   // Generate TypeScript configuration
   const tsConfigFileName = 'tsconfig.json';
   await writeFileToCWD(tsConfigFileName, createTSConfig());
   gitIgnorePatterns.push(tsConfigFileName);
+
+  const lintIgnorePatterns = [...gitIgnorePatterns];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';

@@ -1,10 +1,24 @@
 {
   "name": "sku",
-  "version": "12.8.0",
+  "version": "12.8.1",
   "description": "Front-end development toolkit, powered by Webpack, Babel, CSS Modules, Less and Jest",
-  "main": "index.js",
+  "types": "./sku-types.d.ts",
   "bin": {
     "sku": "./bin/sku.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./sku-types.d.ts"
+    },
+    "./config/jest": {
+      "default": "./config/jest/index.js",
+      "types": "./config/jest/index.d.ts"
+    },
+    "./config/storybook": "./config/storybook/index.js",
+    "./@loadable/component": "./@loadable/component/index.ts",
+    "./@storybook/react": "./@storybook/react/index.ts",
+    "./webpack-plugin": "./config/webpack/plugins/sku-webpack-plugin/index.js",
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=18.20.0"
@@ -12,7 +26,6 @@
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js"
   },
-  "types": "./sku-types.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/seek-oss/sku.git",
@@ -127,7 +140,6 @@
     "webpack-dev-server": "^5.0.2",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0",
-    "which": "^4.0.0",
     "wrap-ansi": "^7.0.0",
     "x-default-browser": "^0.5.0"
   },
@@ -137,7 +149,6 @@
     "@types/minimist": "^1.2.5",
     "@types/picomatch": "^2.3.3",
     "@types/react-dom": "^18.2.3",
-    "@types/which": "^3.0.0",
     "@vanilla-extract/css": "^1.0.0",
     "@vocab/react": "^1.1.11",
     "braid-design-system": "^32.0.0",

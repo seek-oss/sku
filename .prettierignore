@@ -11,3 +11,6 @@ report/
 template/
 .changeset/*.md
 CHANGELOG.md
+.vscode/
+pnpm-lock.yaml
+.eslintcache

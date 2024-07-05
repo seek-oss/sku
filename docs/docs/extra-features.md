@@ -53,6 +53,34 @@ export default {
 } satisfies SkuConfig;
 ```
 
+## Caching
+
+`sku` emits two different caches that can help speed up local and production builds.
+
+### [Webpack filesystem cache]
+
+This cache stores generated webpack modules and chunks.
+It is only emitted during local development.
+Its purpose is to reduce the time it takes to start the local development server.
+`sku` enables this cache by default, but it can be disabled via the [`persistentCache` configuration].
+
+> This cache is stored in `node_modules/.cache/webpack` and can be safely deleted at any time.
+
+[webpack filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
+[`persistentCache` configuration]: ./docs/configuration#persistentcache
+
+### [`babel-loader` cache]
+
+This cache stores the result of module transpilation performed by `babel-loader`.
+It is emitted during both local development and production builds.
+Its purpose is to speed up transpilation of TypeScript/JavaScript code.
+This can benefit both local development (when the webpack cache is invalidated) and production builds.
+For applications with a large number of source files and/or dependencies, this cache can significantly reduce build times.
+
+> This cache is stored in `node_modules/.cache/babel-loader` and can be safely deleted at any time.
+
+[`babel-loader` cache]: https://github.com/babel/babel-loader?tab=readme-ov-file#options
+
 ## Bundle analysis
 
 `sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).

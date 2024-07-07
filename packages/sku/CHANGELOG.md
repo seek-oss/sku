@@ -1,5 +1,11 @@
 # sku
 
+## 12.8.1
+
+### Patch Changes
+
+- Fixes a bug causing `sku test --watch` to not put `jest` in watch mode ([#1009](https://github.com/seek-oss/sku/pull/1009))
+
 ## 12.8.0
 
 ### Minor Changes

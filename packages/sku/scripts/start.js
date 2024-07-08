@@ -52,7 +52,6 @@ const hot = process.env.SKU_HOT !== 'false';
   const htmlRenderPlugin = createHtmlRenderPlugin();
 
   const [clientWebpackConfig, renderWebpackConfig] = makeWebpackConfig({
-    port: availablePort,
     isDevServer: true,
     htmlRenderPlugin,
     metrics: true,

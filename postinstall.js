@@ -10,7 +10,9 @@ const {
 writeFileSync('./.nvmrc', `${nodeVersion}\n`);
 
 /**
- * Keeps the current node target for use with `@babel/preset-env` in sync with the node version defined in the engines config in sku's package.json
+ * Keeps the current node target for use with `@babel/preset-env` in sync with the node version defined in the
+ * engines config in sku's package.json. `browserlist` doesn't seem to support node 18.20 yet, so
+ * for now it's just using the major version.
  */
 
 const {
@@ -18,7 +20,8 @@ const {
 } = require('./packages/sku/package.json');
 
 const [, minimumSupportedVersion] = node.split('=');
-const targets = { currentNode: `node ${minimumSupportedVersion}` };
+const [majorVersion] = minimumSupportedVersion.split('.');
+const targets = { currentNode: `node ${majorVersion}` };
 const prettier = require('prettier');
 
 writeFileSync(

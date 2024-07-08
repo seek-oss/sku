@@ -563,20 +563,11 @@ importers:
         specifier: ^2.2.0
         version: 2.2.1
       '@pmmmwh/react-refresh-webpack-plugin':
-        specifier: ^0.5.12
+        specifier: ^0.5.15
         version: 0.5.15(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-dev-server@5.0.4(debug@4.3.5)(webpack@5.91.0(@swc/core@1.5.25)(esbuild@0.19.12)))(webpack-hot-middleware@2.26.1)(webpack@5.91.0(@swc/core@1.5.25)(esbuild@0.19.12))
-      '@storybook/builder-webpack5':
-        specifier: ^7.0.17
-        version: 7.6.19(esbuild@0.19.12)(typescript@5.5.2)
-      '@storybook/cli':
-        specifier: ^7.0.17
-        version: 7.6.19
-      '@storybook/react':
-        specifier: ^7.0.17
-        version: 7.6.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.2)
       '@storybook/react-webpack5':
-        specifier: ^7.0.17
-        version: 7.6.19(@babel/core@7.24.7)(@swc/core@1.5.25)(esbuild@0.19.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@2.19.0)(typescript@5.5.2)(webpack-dev-server@5.0.4(debug@4.3.5)(webpack@5.91.0(@swc/core@1.5.25)(esbuild@0.19.12)))(webpack-hot-middleware@2.26.1)
+        specifier: ^7.0.0 || ^8.0.0
+        version: 8.1.5(@swc/core@1.5.25)(esbuild@0.19.12)(prettier@3.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.2)
       '@swc/core':
         specifier: ^1.5.25
         version: 1.5.25
@@ -2441,7 +2432,6 @@ packages:
   '@pmmmwh/react-refresh-webpack-plugin@0.5.15':
     resolution: {integrity: sha512-LFWllMA55pzB9D34w/wXUCf8+c+IYKuJDgxiZ3qMhl64KRMBHYM1I3VdGaD2BV5FNPV2/S2596bppxHbv2ZydQ==}
     engines: {node: '>= 10.13'}
-    deprecated: this version contains a critical bug which might crash the error overlay, please upgrade to v0.5.15
     peerDependencies:
       '@types/webpack': 4.x || 5.x
       react-refresh: '>=0.10.0 <1.0.0'
@@ -2675,9 +2665,6 @@ packages:
 
   '@storybook/csf-tools@8.1.5':
     resolution: {integrity: sha512-jOfUo0arlaG4LlsdWaRfZCS0I1FhUnkf06ThzRBrrp8mFAPtOpf9iW16J3fYMS5vAdE/v+Z1RxuTRich4/JGdQ==}
-
-  '@storybook/csf@0.1.7':
-    resolution: {integrity: sha512-53JeLZBibjQxi0Ep+/AJTfxlofJlxy1jXcSKENlnKxHjWEYyHQCumMP5yTFjf7vhNnMjEpV3zx6t23ssFiGRyw==}
 
   '@storybook/csf@0.1.8':
     resolution: {integrity: sha512-Ntab9o7LjBCbFIao5l42itFiaSh/Qu+l16l/r/9qmV9LnYZkO+JQ7tzhdlwpgJfhs+B5xeejpdAtftDRyXNajw==}
@@ -11398,7 +11385,7 @@ snapshots:
 
   '@storybook/core-events@8.1.5':
     dependencies:
-      '@storybook/csf': 0.1.7
+      '@storybook/csf': 0.1.8
       ts-dedent: 2.2.0
 
   '@storybook/core-server@7.6.19':
@@ -11460,7 +11447,7 @@ snapshots:
       '@storybook/channels': 8.1.5
       '@storybook/core-common': 8.1.5(prettier@3.3.0)
       '@storybook/core-events': 8.1.5
-      '@storybook/csf': 0.1.7
+      '@storybook/csf': 0.1.8
       '@storybook/csf-tools': 8.1.5
       '@storybook/docs-mdx': 3.1.0-next.0
       '@storybook/global': 5.0.0
@@ -11550,17 +11537,13 @@ snapshots:
       '@babel/parser': 7.24.7
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
-      '@storybook/csf': 0.1.7
+      '@storybook/csf': 0.1.8
       '@storybook/types': 8.1.5
       fs-extra: 11.2.0
       recast: 0.23.9
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - supports-color
-
-  '@storybook/csf@0.1.7':
-    dependencies:
-      type-fest: 2.19.0
 
   '@storybook/csf@0.1.8':
     dependencies:
@@ -11610,7 +11593,7 @@ snapshots:
       '@storybook/channels': 8.1.5
       '@storybook/client-logger': 8.1.5
       '@storybook/core-events': 8.1.5
-      '@storybook/csf': 0.1.7
+      '@storybook/csf': 0.1.8
       '@storybook/global': 5.0.0
       '@storybook/icons': 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/router': 8.1.5
@@ -11724,7 +11707,7 @@ snapshots:
       '@storybook/channels': 8.1.5
       '@storybook/client-logger': 8.1.5
       '@storybook/core-events': 8.1.5
-      '@storybook/csf': 0.1.7
+      '@storybook/csf': 0.1.8
       '@storybook/global': 5.0.0
       '@storybook/types': 8.1.5
       '@types/qs': 6.9.15

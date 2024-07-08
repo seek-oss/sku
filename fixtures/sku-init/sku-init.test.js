@@ -32,9 +32,16 @@ describe('sku init', () => {
         force: true,
       });
 
-      const { child } = await runSkuScriptInDir('init', fixtureDirectory, [
-        projectName,
-      ]);
+      const { child, stdout, stderr } = await runSkuScriptInDir(
+        'init',
+        fixtureDirectory,
+        [projectName],
+      );
+
+      console.log('sku init stdout');
+      console.log(stdout);
+      console.log('sku init stderr');
+      console.error(stderr);
 
       expect(child.exitCode).toBe(0);
 

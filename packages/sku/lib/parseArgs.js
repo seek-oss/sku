@@ -27,6 +27,7 @@ module.exports = (processArgv) => {
         'debug',
         // Passed to Vocab in the `translations` script
         'delete-unused-keys',
+        'watch',
       ],
       // `minimist` does not push unknown flags to `_` even if this function returns `true`, so we
       // need to track them ourselves

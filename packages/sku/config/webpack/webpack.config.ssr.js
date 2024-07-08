@@ -33,6 +33,7 @@ const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
+const targets = require('./targets.json');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -67,8 +68,6 @@ const makeWebpackConfig = ({
   // deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
-  const nodeTarget = 'node 12';
-
   const webpackConfigs = [
     {
       name: 'client',
@@ -89,7 +88,17 @@ const makeWebpackConfig = ({
         // The 'TerserPlugin' is actually the default minimizer for webpack
         // We add a custom one to ensure licence comments stay inside the final JS assets
         // Without this a '*.js.LICENSE.txt' file would be created alongside
-        minimizer: [new TerserPlugin({ extractComments: false })],
+        minimizer: [
+          new TerserPlugin({
+            extractComments: false,
+            minify: TerserPlugin.swcMinify,
+            parallel: true,
+            terserOptions: {
+              compress: true,
+              mangle: true,
+            },
+          }),
+        ],
         concatenateModules: isProductionBuild,
         splitChunks: {
           chunks: 'all',
@@ -130,6 +139,7 @@ const makeWebpackConfig = ({
                       loader: require.resolve('babel-loader'),
                       options: {
                         babelrc: false,
+                        cacheDirectory: true,
                         presets: [
                           [
                             require.resolve('@babel/preset-env'),
@@ -193,7 +203,7 @@ const makeWebpackConfig = ({
     {
       name: 'server',
       mode: webpackMode,
-      target: `browserslist:${nodeTarget}`,
+      target: `browserslist:${targets.currentNode}`,
       entry: serverEntry,
       externals: [
         {
@@ -228,8 +238,7 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath,
         filename: 'server.js',
-        library: 'server',
-        libraryTarget: 'var',
+        library: { name: 'server', type: 'var' },
       },
       cache: getCacheSettings({ isDevServer }),
       optimization: {
@@ -264,7 +273,7 @@ const makeWebpackConfig = ({
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          browserslist: [nodeTarget],
+          browserslist: [targets.currentNode],
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,

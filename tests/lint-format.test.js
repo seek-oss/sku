@@ -47,7 +47,6 @@ const filesToFormat = {
     import distantParent from '../../../parent'; // parents
     import myself from '.'; // index
     import path from 'path'; //  built-in
-    import styles from './styles.less'; // styles
     import utils from 'src/utils'; // internal
   `,
   'importOrder2.ts': dedent/* ts */ `

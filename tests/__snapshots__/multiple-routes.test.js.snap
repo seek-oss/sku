@@ -4,12 +4,12 @@ exports[`multiple-routes build and serve should generate the expected files 1`] 
 {
   "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-065db15fad163b0a609f.css": .EOTSBbL {
+  "handlers-Details-f390f327b19b16af7923.css": ._1hpn1da0 {
   color: blue;
 }
 ,
   "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-0076e4d4a98910c8f902.css": .dyLY_sb {
+  "handlers-Home-17aa52f5474e9553d3f1.css": .ms22la0 {
   color: red;
 }
 ,
@@ -24,7 +24,7 @@ exports[`multiple-routes build and serve should generate the expected files 1`] 
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
+    "/static/place/handlers-Details-f390f327b19b16af7923.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -89,7 +89,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
+      <h1 class="_1hpn1da0">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -154,7 +154,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+    "/static/place/handlers-Home-17aa52f5474e9553d3f1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -213,7 +213,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
+      <h1 class="ms22la0">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -270,7 +270,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-065db15fad163b0a609f.css",
+    "/static/place/handlers-Details-f390f327b19b16af7923.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -335,7 +335,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
+      <h1 class="_1hpn1da0">
         Welcome to the Details page - nz
         <span>
           Some special async content
@@ -400,7 +400,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/handlers-Home.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+    "/static/place/handlers-Home-17aa52f5474e9553d3f1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -459,7 +459,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
+      <h1 class="ms22la0">
         Welcome to the Home page - nz
       </h1>
     </div>
@@ -521,7 +521,7 @@ SCRIPTS: [
   "/static/place/AsyncComponent.chunk.js",
 ]
 CSS: [
-  "/static/place/handlers-Details-065db15fad163b0a609f.css",
+  "/static/place/handlers-Details-f390f327b19b16af7923.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -586,7 +586,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="EOTSBbL">
+      <h1 class="_1hpn1da0">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -646,7 +646,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="EOTSBbL">
+       <h1 class="_1hpn1da0">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -664,7 +664,7 @@ SCRIPTS: [
   "/static/place/handlers-Home.chunk.js",
 ]
 CSS: [
-  "/static/place/handlers-Home-0076e4d4a98910c8f902.css",
+  "/static/place/handlers-Home-17aa52f5474e9553d3f1.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -723,7 +723,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="dyLY_sb">
+      <h1 class="ms22la0">
         Welcome to the Home page - au
       </h1>
     </div>
@@ -849,7 +849,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Details__root___EOTSBbL">
+      <h1 class="Details_root__1hpn1da0">
         Welcome to the Details page - au
         <span>
           Some special async content
@@ -909,7 +909,7 @@ SOURCE HTML: <!DOCTYPE html>
 POST HYDRATE DIFFS: 
    <body>
      <div id="app">
-       <h1 class="Details__root___EOTSBbL">
+       <h1 class="Details_root__1hpn1da0">
 -        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
          <span>
@@ -986,7 +986,7 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <h1 class="Home__root___dyLY_sb">
+      <h1 class="Home_root__ms22la0">
         Welcome to the Home page - au
       </h1>
     </div>

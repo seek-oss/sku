@@ -10,7 +10,7 @@ const { languages } = require('../context');
 let projectName = 'unknown';
 let braidVersion = 'unknown';
 try {
-  const packageJson = requireFromCwd('package.json');
+  const packageJson = requireFromCwd('./package.json');
 
   if (packageJson.name) {
     projectName = packageJson.name;

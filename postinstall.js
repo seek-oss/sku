@@ -19,8 +19,9 @@ const {
 
 const [, minimumSupportedVersion] = node.split('=');
 const targets = { currentNode: `node ${minimumSupportedVersion}` };
+const prettier = require('prettier');
 
 writeFileSync(
   './packages/sku/config/webpack/targets.json',
-  JSON.stringify(targets, null, 2),
+  prettier.format(JSON.stringify(targets, null, 2), { parser: 'json' }),
 );

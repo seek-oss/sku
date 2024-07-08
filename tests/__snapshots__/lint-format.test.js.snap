@@ -21,7 +21,6 @@ import LocalComponent from './LocalComponent'; // sibling
 
 import myself from '.'; // index
 
-import styles from './styles.less'; // styles
 import vanillaStyles from './vanillaStyles.css'; // styles
 
 `;
@@ -62,7 +61,7 @@ exports[`sku lint lint errors are reported: unformattedFile1.js 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,less,css}
+Paths: .
 src/unformattedFile1.js
 To fix this issue, run 'pnpm run format'
 `;
@@ -71,7 +70,7 @@ exports[`sku lint lint errors are reported: utils.test.ts 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: **/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,md,less,css}
+Paths: .
 Checking code with ESLint
 Paths: .
 

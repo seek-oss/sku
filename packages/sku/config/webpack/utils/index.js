@@ -13,7 +13,6 @@ module.exports = {
   resolvePackage,
   TYPESCRIPT: new RegExp(`\.(${extensions.ts.join('|')})$`),
   JAVASCRIPT: new RegExp(`\.(${extensions.js.join('|')})$`),
-  LESS: /\.less$/,
   IMAGE: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
   SVG: /\.svg$/,
 };

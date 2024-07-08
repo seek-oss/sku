@@ -1,3 +1,4 @@
+// @ts-check
 import { createHash } from 'node:crypto';
 import { parse, valid } from 'node-html-parser';
 import { URL } from 'node:url';
@@ -6,9 +7,18 @@ const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 
 const defaultBaseName = 'http://relative-url';
 
+/** @typedef {import("node:crypto").BinaryLike} BinaryLike */
+
+/** @param {BinaryLike} scriptContents */
 const hashScriptContents = (scriptContents) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
+/**
+ * @typedef {object} CreateCSPHandlerOptions
+ * @property {string[]} [extraHosts=[]]
+ * @property {boolean} [isDevelopment=false]
+ * @param {CreateCSPHandlerOptions} [options={}]
+ */
 export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,
@@ -17,10 +27,14 @@ export default function createCSPHandler({
   const hosts = new Set();
   const shas = new Set();
 
+  /** @param {BinaryLike | undefined?} contents */
   const addScriptContents = (contents) => {
-    shas.add(hashScriptContents(contents));
+    if (contents) {
+      shas.add(hashScriptContents(contents));
+    }
   };
 
+  /** @param {string} src */
   const addScriptUrl = (src) => {
     const { origin } = new URL(src, defaultBaseName);
 
@@ -31,18 +45,22 @@ export default function createCSPHandler({
 
   extraHosts.forEach((host) => addScriptUrl(host));
 
+  /** @param {import("node-html-parser").HTMLElement} scriptNode */
   const processScriptNode = (scriptNode) => {
     const src = scriptNode.getAttribute('src');
 
     if (src) {
       addScriptUrl(src);
-    } else if (
-      !scriptTypeIgnoreList.includes(scriptNode.getAttribute('type'))
-    ) {
-      addScriptContents(scriptNode.firstChild.rawText);
+      return;
+    }
+
+    const scriptType = scriptNode.getAttribute('type');
+    if (scriptType == null || !scriptTypeIgnoreList.includes(scriptType)) {
+      addScriptContents(scriptNode.firstChild?.rawText);
     }
   };
 
+  /** @type {import("../sku-types.d.ts").RenderCallbackParams['registerScript']} */
   const registerScript = (script) => {
     if (tagReturned) {
       throw new Error(
@@ -53,18 +71,16 @@ export default function createCSPHandler({
       );
     }
 
-    if (
-      process.env.NODE_ENV !== 'production' &&
-      !valid(script, { script: true })
-    ) {
+    if (process.env.NODE_ENV !== 'production' && !valid(script)) {
       console.error(`Invalid script passed to 'registerScript'\n${script}`);
     }
 
-    parse(script, { script: true })
-      .querySelectorAll('script')
-      .forEach(processScriptNode);
+    parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
+  /**
+   * @returns {string}
+   */
   const createCSPTag = () => {
     tagReturned = true;
 
@@ -90,11 +106,12 @@ export default function createCSPHandler({
     )};">`;
   };
 
+  /**
+   * @param {string} html
+   * @returns {string}
+   */
   const handleHtml = (html) => {
     const root = parse(html, {
-      script: true,
-      style: true,
-      pre: true,
       comment: true,
     });
 
@@ -108,7 +125,16 @@ export default function createCSPHandler({
 
     root.querySelectorAll('script').forEach(processScriptNode);
 
-    root.querySelector('head').insertAdjacentHTML('afterbegin', createCSPTag());
+    const headElement = root.querySelector('head');
+    if (!headElement) {
+      throw new Error(
+        `Unable to find 'head' element in HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
+          html.length > 250 ? `${html.substring(0, 200)}...` : html
+        }`,
+      );
+    }
+
+    headElement.insertAdjacentHTML('afterbegin', createCSPTag());
 
     return root.toString();
   };

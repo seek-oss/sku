@@ -25,6 +25,7 @@ const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
+const targets = require('./targets.json');
 
 const {
   paths,
@@ -103,8 +104,6 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
-  const nodeTarget = 'current node';
-
   const webpackConfigs = [
     {
       name: 'client',
@@ -121,9 +120,11 @@ const makeWebpackConfig = ({
         chunkFilename: jsChunkFileMask,
         ...(isLibrary
           ? {
-              library: libraryName,
-              libraryTarget: 'umd',
-              libraryExport: 'default',
+              library: {
+                name: libraryName,
+                type: 'umd',
+                export: 'default',
+              },
             }
           : {}),
       },
@@ -134,7 +135,17 @@ const makeWebpackConfig = ({
         // The 'TerserPlugin' is actually the default minimizer for webpack
         // We add a custom one to ensure licence comments stay inside the final JS assets
         // Without this a '*.js.LICENSE.txt' file would be created alongside
-        minimizer: [new TerserPlugin({ extractComments: false })],
+        minimizer: [
+          new TerserPlugin({
+            extractComments: false,
+            minify: TerserPlugin.swcMinify,
+            parallel: true,
+            terserOptions: {
+              compress: true,
+              mangle: true,
+            },
+          }),
+        ],
         concatenateModules: isProductionBuild,
         ...(!isLibrary
           ? {
@@ -253,7 +264,7 @@ const makeWebpackConfig = ({
       entry: { main: isLibrary ? libraryRenderEntry : renderEntry },
       // Target the currently running version of node as the
       // render will run within the same process
-      target: `browserslist:${nodeTarget}`,
+      target: `browserslist:${targets.currentNode}`,
       externals: [
         // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
         externalizeNodeModules
@@ -276,9 +287,7 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath: paths.publicPath,
         filename: 'render.js',
-        libraryExport: 'default',
-        library: 'static',
-        libraryTarget: 'umd2',
+        library: { name: 'static', type: 'umd2', export: 'default' },
       },
       cache: getCacheSettings({ isDevServer }),
       optimization: {
@@ -308,7 +317,7 @@ const makeWebpackConfig = ({
           hot: false,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          browserslist: [nodeTarget],
+          browserslist: [targets.currentNode],
           mode: webpackMode,
           libraryName,
           displayNamesProd,

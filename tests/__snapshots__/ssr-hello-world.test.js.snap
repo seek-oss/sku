@@ -8,7 +8,7 @@ SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
+  "http://localhost:4000/main-f3b971c536c8a1f55a47.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -54,8 +54,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="eRNyDeb">
-        <div class="MYunKdE">
+      <div class="qixxyt0">
+        <div class="qixxyt1">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
@@ -114,7 +114,7 @@ SCRIPTS: [
   "https://code.jquery.com/jquery-3.5.0.slim.min.js",
 ]
 CSS: [
-  "http://localhost:4000/main-cb8848ae92e1e9d08128.css",
+  "http://localhost:4000/main-f3b971c536c8a1f55a47.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -160,8 +160,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="eRNyDeb">
-        <div class="MYunKdE">
+      <div class="qixxyt0">
+        <div class="qixxyt1">
           Hello World
         </div>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
@@ -266,8 +266,8 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
-      <div class="lessStyles__root___eRNyDeb">
-        <div class="lessStyles__nested___MYunKdE">
+      <div class="styles_root__qixxyt0">
+        <div class="styles_nested__qixxyt1">
           Hello World
         </div>
         <img src="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png">

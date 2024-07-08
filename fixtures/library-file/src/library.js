@@ -1,4 +1,4 @@
-import styles from './styles.less';
+import * as styles from './styles.css.js';
 
 export default () => {
   const dynamicImport = 'used';

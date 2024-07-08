@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useState } from 'react';
-import lessStyles from './lessStyles.less';
+import * as styles from './styles.css.ts';
 import './globalTypes.d';
 
 enum Message {
@@ -27,8 +27,8 @@ const App = ({ children }: Props) => {
   }, []);
 
   return (
-    <div className={lessStyles.root}>
-      <div className={lessStyles.nested} data-automation-text>
+    <div className={styles.root}>
+      <div className={styles.nested} data-automation-text>
         {children || messageRenderer()}
       </div>
       <div>Render type: {renderLabel}</div>

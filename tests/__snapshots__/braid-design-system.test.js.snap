@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "2-07fafa59b5872fc8269f.css": ._1toce6t0 {
+  "2-23364ec71aff53dc0261.css": ._1toce6t0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -37,7 +37,6 @@ exports[`braid-design-system build should generate the expected files 1`] = `
 }
 ._1toce6t6 {
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 ._1toce6t7 {
@@ -84,7 +83,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
 }
 ._19jnx864 {
   -webkit-user-select: none;
-  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 ._19jnx865 {
@@ -3119,7 +3118,7 @@ html:not(._19jnx86z) .ad2p4ma {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-07fafa59b5872fc8269f.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-23364ec71aff53dc0261.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3147,7 +3146,7 @@ html:not(._19jnx86z) .ad2p4ma {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-07fafa59b5872fc8269f.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-23364ec71aff53dc0261.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3175,7 +3174,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-07fafa59b5872fc8269f.css",
+  "/2-23364ec71aff53dc0261.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3408,7 +3407,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-07fafa59b5872fc8269f.css",
+  "/2-23364ec71aff53dc0261.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

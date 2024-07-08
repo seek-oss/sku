@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import type { Frame } from 'puppeteer';
+import type { Page } from 'puppeteer';
 import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
   getAppSnapshot,
-  getStorybookFrame,
-  getTextContentFromStorybookFrame,
+  getTextContentFromFrameOrPage,
+  getStoryPage,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
 
@@ -15,17 +15,13 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
-const srcDir = path.resolve(appDir, 'src');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { default: skuConfig } = require(`${appDir}/sku.config.ts`);
 
 assert(skuConfig.port, 'sku config has port');
-const devServerUrl = `http://localhost:${skuConfig.port}`;
 assert(skuConfig.storybookPort, 'sku config has storybookPort');
-const storybookUrl = `http://localhost:${skuConfig.storybookPort}`;
-
-const cssTypes = ['.less.d.ts'];
+const devServerUrl = `http://localhost:${skuConfig.port}`;
 
 describe('styling', () => {
   describe('build', () => {
@@ -48,11 +44,7 @@ describe('styling', () => {
 
     it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
-      const cssTypeFiles = await dirContentsToObject(srcDir, cssTypes);
-      expect({
-        ...files,
-        ...cssTypeFiles,
-      }).toMatchSnapshot();
+      expect(files).toMatchSnapshot();
     });
   });
 
@@ -82,22 +74,26 @@ describe('styling', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle LESS in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async () => {
       expect(exitCode).toEqual(0);
     });
   });
 
   describe('storybook', () => {
     let server: ChildProcess;
-    let storybookFrame: Frame;
+    let storyPage: Page;
+
+    const storybookBaseUrl = `http://localhost:${skuConfig.storybookPort}`;
+    const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
+    const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('storybook', appDir, [
         '--ci',
         '--quiet',
       ]);
-      await waitForUrls(storybookUrl);
-      storybookFrame = await getStorybookFrame(storybookUrl);
+      await waitForUrls(storyIframeUrl);
+      storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);
 
     afterAll(async () => {
@@ -105,8 +101,8 @@ describe('styling', () => {
     });
 
     it('should render external styles', async () => {
-      const { text, fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-external]',
       );
 
@@ -114,18 +110,9 @@ describe('styling', () => {
       expect(fontSize).toEqual('9px');
     });
 
-    it('should render LESS styles', async () => {
-      const { fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
-        '[data-automation-less]',
-      );
-
-      expect(fontSize).toEqual('32px');
-    });
-
     it('should render Vanilla Extract styles', async () => {
-      const { fontSize } = await getTextContentFromStorybookFrame(
-        storybookFrame,
+      const { fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
         '[data-automation-vanilla]',
       );
 

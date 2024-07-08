@@ -98,6 +98,13 @@ module.exports = ({
   return {
     babelrc: false,
     sourceType: isBrowser ? 'unambiguous' : 'module',
+    // `babel-jest` does not support the `cacheDirectory` option.
+    // It is only used by `babel-loader`.
+    ...(!isJest
+      ? {
+          cacheDirectory: true,
+        }
+      : {}),
     presets,
     plugins,
   };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import lessStyles from './lessStyles.less';
+import * as styles from './styles.css.js';
 import logo from './logo.png';
 
 export default function App() {
@@ -10,8 +10,8 @@ export default function App() {
   }, []);
 
   return (
-    <div className={lessStyles.root}>
-      <div className={lessStyles.nested}>{renderLabel}</div>
+    <div className={styles.root}>
+      <div className={styles.nested}>{renderLabel}</div>
       <img src={logo} />
     </div>
   );

@@ -2,9 +2,9 @@
   "name": "@sku-fixtures/translations",
   "private": true,
   "dependencies": {
-    "@vocab/core": "^1.3.0",
-    "@vocab/react": "^1.1.5",
-    "@vocab/webpack": "^1.2.1",
+    "@vocab/core": "^1.6.2",
+    "@vocab/react": "^1.1.11",
+    "@vocab/webpack": "^1.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

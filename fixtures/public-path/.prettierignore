@@ -1,9 +1,9 @@
 # managed by sku
-*.less.d.ts
 .eslintcache
 .eslintrc
 .prettierrc
 coverage/
 dist/static/
 report/
+tsconfig.json
 # end managed by sku

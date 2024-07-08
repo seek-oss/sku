@@ -3,20 +3,17 @@ const defaultSupportedBrowsers = require('browserslist-config-seek');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const {
   makeJsLoaders,
-  makeCssLoaders,
   makeExternalCssLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
   JAVASCRIPT,
-  LESS,
   IMAGE,
   SVG,
   resolvePackage,
 } = require('../../utils');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
 const validateOptions = require('./validateOptions');
-
-const isCI = require('../../../../lib/isCI');
+const targets = require('../../targets.json');
 
 class SkuWebpackPlugin {
   constructor(options = {}) {
@@ -44,7 +41,6 @@ class SkuWebpackPlugin {
     const {
       target,
       hot,
-      generateCSSTypes,
       browserslist,
       mode = compiler.options.mode,
       displayNamesProd,
@@ -65,7 +61,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              browserslist: ['current node'],
+              browserslist: [targets.currentNode],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -94,7 +90,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              browserslist: ['current node'],
+              browserslist: [targets.currentNode],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -113,37 +109,6 @@ class SkuWebpackPlugin {
             }),
           },
         ],
-      },
-      {
-        test: LESS,
-        oneOf: this.compilePackages
-          .map((packageName) => ({
-            include: resolvePackage(packageName),
-            use: makeCssLoaders({
-              target,
-              isCI,
-              isProductionBuild,
-              generateCSSTypes,
-              MiniCssExtractPlugin,
-              packageName,
-              hot,
-              compilePackage: true,
-              browserslist,
-            }),
-          }))
-          .concat({
-            include: this.include,
-            use: makeCssLoaders({
-              target,
-              isCI,
-              isProductionBuild,
-              generateCSSTypes,
-              MiniCssExtractPlugin,
-              hot,
-              compilePackage: false,
-              browserslist,
-            }),
-          }),
       },
       {
         test: /\.css$/i,

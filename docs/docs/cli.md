@@ -5,11 +5,11 @@ It provides a number of commands to help you develop, test and build your applic
 
 ## CLI Options
 
-| Option          | Description                                                                                                                  |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `-D, --debug`   | Enable debug logging <br> `sku start --debug`                                                                                |
-| `--config`      | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config`                                     |
-| `--environment` | Specify the [environment] to use (only valid for [`start`] and [`serve`] commands) <br> `sku start --environment production` |
+| Option              | Description                                                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `--debug, -D`       | Enable debug logging <br> `sku start --debug`                                                                                |
+| `--config, -c`      | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config`                                     |
+| `--environment, -e` | Specify the [environment] to use (only valid for [`start`] and [`serve`] commands) <br> `sku start --environment production` |
 
 [environment]: ./docs/configuration.md#environments
 [`start`]: #start

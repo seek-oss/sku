@@ -2,48 +2,48 @@
 
 exports[`configure custom should generate $ignore 1`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
   "coverage/",
   "foo/bar/",
   "report/",
+  "tsconfig.json",
 ]
 `;
 
 exports[`configure custom should generate $ignore 2`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
   "coverage/",
   "foo/bar/",
   "report/",
+  "tsconfig.json",
 ]
 `;
 
 exports[`configure default should generate $ignore 1`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
   "coverage/",
   "dist/",
   "report/",
+  "tsconfig.json",
 ]
 `;
 
 exports[`configure default should generate $ignore 2`] = `
 [
-  "*.less.d.ts",
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
   "coverage/",
   "dist/",
   "report/",
+  "tsconfig.json",
 ]
 `;

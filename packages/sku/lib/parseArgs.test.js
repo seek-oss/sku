@@ -6,11 +6,11 @@ const parseArgs = require('./parseArgs');
 
 describe('parseArgs', () => {
   test('sku script with short and long flag', () => {
-    const { script, argv, env, config } = parseArgs([
+    const { script, argv, environment, config } = parseArgs([
       '/path/to/node',
       '/path/to/bin/sku',
       'lint',
-      '-e',
+      '--environment',
       'test',
       '--config',
       'custom.sku.config.ts',
@@ -18,27 +18,27 @@ describe('parseArgs', () => {
 
     expect(script).toEqual('lint');
     expect(argv).toEqual([]);
-    expect(env).toEqual('test');
+    expect(environment).toEqual('test');
     expect(config).toEqual('custom.sku.config.ts');
   });
 
   test('sku script with flag and argument', () => {
-    const { script, argv, env } = parseArgs([
+    const { script, argv, environment } = parseArgs([
       '/path/to/node',
       '/path/to/bin/sku',
       'lint',
       'src/components/**',
-      '-e',
+      '--environment',
       'test',
     ]);
 
     expect(script).toEqual('lint');
     expect(argv).toEqual(['src/components/**']);
-    expect(env).toEqual('test');
+    expect(environment).toEqual('test');
   });
 
   test('sku script with argument, known flag and unknown flag', () => {
-    const { script, argv, env } = parseArgs([
+    const { script, argv, environment } = parseArgs([
       '/path/to/node',
       '/path/to/bin/sku',
       'test',
@@ -50,7 +50,7 @@ describe('parseArgs', () => {
 
     expect(script).toEqual('test');
     expect(argv).toEqual(['testFilter', '--someJestFlag']);
-    expect(env).toEqual('test');
+    expect(environment).toEqual('test');
   });
 
   test('debug', () => {

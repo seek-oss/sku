@@ -2,8 +2,10 @@
 .eslintcache
 .eslintrc
 .prettierrc
+.storybook/main.js
 coverage/
-dist-build/
+dist-storybook/
+dist/
 report/
 tsconfig.json
 # end managed by sku

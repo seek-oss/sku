@@ -6,7 +6,7 @@ Export jest preset path
 
 **BREAKING CHANGE**:
 
-The jest preset is now accessible via a relative path rather than pointing to a module. This may affect users that require a jest config for debugging tests in their CLI. See the [testing documentation] for more information.
+The jest preset is now accessible via a relative path rather than pointing to a module. This may affect users that require a jest config for debugging tests in their IDE. See the [testing documentation] for more information.
 
 **MIGRATION GUIDE**:
 

@@ -6,7 +6,7 @@ Remove support for `persistentCache` configuration option
 
 **BREAKING CHANGE:**
 
-Disabling `persistentCache` was previously necessary when using [treat], which is no longer supported in `sku`. `persistentCache` is now always enabled has been removed from the configuration options.
+Disabling `persistentCache` was previously necessary when using [treat], which is no longer supported in `sku`. `persistentCache` is now always enabled and has been removed from the configuration options.
 
 [treat]: https://seek-oss.github.io/treat/
 

@@ -10,7 +10,6 @@ class MetricsPlugin {
     this.initial = true;
     this.target = target;
     this.type = type;
-    this.builtLessFiles = new Set();
   }
 
   apply(compiler) {
@@ -27,10 +26,6 @@ class MetricsPlugin {
           target: this.target,
           type: this.type,
         });
-        track.gauge('start.files.initial.less', this.builtLessFiles.size, {
-          target: this.target,
-          type: this.type,
-        });
 
         this.initial = false;
       } else {
@@ -42,23 +37,7 @@ class MetricsPlugin {
           target: this.target,
           type: this.type,
         });
-        track.gauge('start.files.rebuild.less', this.builtLessFiles.size, {
-          target: this.target,
-          type: this.type,
-        });
       }
-
-      this.builtLessFiles.clear();
-    });
-
-    compiler.hooks.thisCompilation.tap(smp, (compilation) => {
-      compilation.hooks.buildModule.tap(smp, (module) => {
-        if (module.resource) {
-          if (module.resource.endsWith('.less')) {
-            this.builtLessFiles.add(module.resource);
-          }
-        }
-      });
     });
   }
 }

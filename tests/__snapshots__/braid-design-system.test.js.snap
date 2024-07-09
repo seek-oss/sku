@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "2-b8b1137936bee7bfbafc.css": ._1toce6t0 {
+  "2-057ed479da430777bc0c.css": ._1toce6t0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -37,6 +37,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
 }
 ._1toce6t6 {
   -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
 }
 ._1toce6t7 {
@@ -83,7 +84,7 @@ exports[`braid-design-system build should generate the expected files 1`] = `
 }
 ._19jnx864 {
   -webkit-user-select: none;
-  -ms-user-select: none;
+  -moz-user-select: none;
   user-select: none;
 }
 ._19jnx865 {
@@ -3100,9 +3101,9 @@ html:not(._19jnx86z) .ad2p4ma {
     0 20px 20px -12px rgba(28, 35, 48, 0.2);
 }
 
-/*# sourceMappingURL=2-b8b1137936bee7bfbafc.css.map*/
+/*# sourceMappingURL=2-057ed479da430777bc0c.css.map*/
 ,
-  "2-b8b1137936bee7bfbafc.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-057ed479da430777bc0c.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -3121,7 +3122,7 @@ html:not(._19jnx86z) .ad2p4ma {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-b8b1137936bee7bfbafc.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-057ed479da430777bc0c.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3151,7 +3152,7 @@ html:not(._19jnx86z) .ad2p4ma {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-b8b1137936bee7bfbafc.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-057ed479da430777bc0c.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -3179,7 +3180,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-b8b1137936bee7bfbafc.css",
+  "/2-057ed479da430777bc0c.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3412,7 +3413,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-b8b1137936bee7bfbafc.css",
+  "/2-057ed479da430777bc0c.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>

@@ -29,11 +29,15 @@ module.exports = () => {
       isolatedModules: true,
       resolveJsonModule: true,
 
+      // Not strictly required since we don't use tsc to compile, but aligns with the
+      // babel-preset-typescript `onlyRemoveTypeImports` option
+      verbatimModuleSyntax: true,
+
       // misc
       strict: true,
       forceConsistentCasingInFileNames: true,
       jsx: 'react-jsx',
-      lib: ['dom', 'es2022'],
+      lib: ['dom', 'dom.iterable', 'es2022'],
       target: 'es2022',
     },
   };

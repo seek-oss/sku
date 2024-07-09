@@ -12,7 +12,7 @@ All Storybook-related features have been removed from `sku`. Sku no longer insta
 
 **MIGRATION GUIDE**:
 
-#### Commiting your Storybook configuration
+#### Commit your Storybook configuration
 
 Run `sku configure` to update your ignore files:
 
@@ -22,9 +22,11 @@ pnpm exec sku configure
 
 This will allow you to check in the `.storybook/main.ts` file to your repository. Ensure you include both of these changes **in the same commit**.
 
-#### Installing Storybook dependencies
+#### Install Storybook dependencies
 
 `sku` was previously installing Storybook v7 dependencies for you. The first command below will install the latest (v8) Storybook dependencies. If you wish to stay on Storybook v7 for the time being, ensure you specify the appropriate versions of these dependencies in your app's `package.json`.
+
+**NOTE**: Consumers that still depend on the deprecated `storiesOf` API will need to stay on Storybook v7 until they migrate away from this API.
 
 ```sh
 pnpm install -D storybook @storybook/react @storybook/react-webpack5
@@ -33,7 +35,7 @@ pnpm install -D storybook @storybook/react @storybook/react-webpack5
 pnpm install -D @storybook/addon-webpack5-compiler-babel
 ```
 
-#### Configuring Storybook
+#### Configure Storybook
 
 Sku no longer configures your `.storybook/main.ts` file for you. You will now need to configure it yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
 
@@ -64,7 +66,7 @@ export default {
 } satisfies StorybookConfig;
 ```
 
-#### Updating `package.json` scripts
+#### Update `package.json` scripts
 
 The `sku` CLI no longer provides the `sku storybook` and `sku build-storybook` commands. Please migrate to [the official Storybook CLI][storybook cli]:
 
@@ -93,3 +95,14 @@ The `sku` CLI no longer provides the `sku storybook` and `sku build-storybook` c
 -import type { Meta } from 'sku/@storybook/react';
 +import type { Meta } from '@storybook/react';
 ```
+
+#### Update `sku` configuration
+
+The following `sku` configuration options have been removed:
+
+- `storybookAddons`
+- `storybookPort`
+- `storybookStoryStore`
+- `storybookTarget`
+
+Please remove them from your sku configuration file.

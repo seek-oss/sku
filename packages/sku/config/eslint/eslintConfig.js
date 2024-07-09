@@ -1,11 +1,7 @@
-const { eslintDecorator, orderImports } = require('../../context');
+const { eslintDecorator } = require('../../context');
 
 const coreConfig = require.resolve('eslint-config-seek');
 
-const baseConfig = {
-  extends: orderImports
-    ? [coreConfig, require.resolve('./importOrderConfig')]
-    : coreConfig,
-};
+const baseConfig = [coreConfig, require.resolve('./importOrderConfig')];
 
 module.exports = eslintDecorator(baseConfig);

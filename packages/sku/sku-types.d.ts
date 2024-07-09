@@ -262,13 +262,6 @@ export interface SkuConfig {
   libraryFile?: string;
 
   /**
-   * Enables linting of import order. This rule supports auto-fix.
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/linting?id=import-ordering
-   */
-  orderImports?: boolean;
-
-  /**
    * Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
    *
    * @default true

@@ -210,6 +210,5 @@ module.exports = {
   languages: normalizedLanguages,
   skipPackageCompatibilityCompilation:
     skuConfig.skipPackageCompatibilityCompilation,
-  persistentCache: skuConfig.persistentCache,
   externalizeNodeModules: skuConfig.externalizeNodeModules,
 };

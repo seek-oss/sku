@@ -47,6 +47,5 @@ module.exports = {
   rootResolution: !isCompilePackage,
   languages: null,
   skipPackageCompatibilityCompilation: [],
-  persistentCache: true,
   externalizeNodeModules: false,
 };

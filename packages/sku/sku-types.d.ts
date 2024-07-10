@@ -269,14 +269,6 @@ export interface SkuConfig {
   orderImports?: boolean;
 
   /**
-   * Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
-   *
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=persistentcache
-   */
-  persistentCache?: boolean;
-
-  /**
    * An array of polyfills to be included into all client entry points.
    *
    * @default []

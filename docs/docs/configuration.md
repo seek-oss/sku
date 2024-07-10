@@ -258,14 +258,6 @@ The file name of the library. The main bundle of the library will be output to `
 
 If `libraryFile` is not specified then `libraryName` will be used instead.
 
-## persistentCache
-
-type `boolean`
-
-Default: `true`
-
-Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
-
 ## polyfills
 
 type `Array<string>`

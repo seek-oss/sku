@@ -35,7 +35,7 @@ You will need to re-add your `storybookTarget` value (from the previous step) to
 
 #### Install Storybook dependencies
 
-`sku` was previously installing Storybook v7 dependencies for you. The first command below will install the latest (v8) Storybook dependencies. 
+`sku` was previously installing Storybook v7 dependencies for you. The first command below will install the latest (v8) Storybook dependencies.
 
 If you wish to stay on Storybook v7 for the time being, use the second command below.
 
@@ -53,9 +53,7 @@ pnpm install -D storybook@^7.6.17 @storybook/react@^7.6.17 @storybook/react-webp
 
 #### Configure Storybook
 
-Sku no longer configures your [Storybook main configuration file][sb main] for you. You will now need to configure it yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
-
-Locate your `.storybook/main.js` file.
+Sku no longer configures your [Storybook main configuration file][sb main] for you. To migrate to a minimal, `sku`-compatible Storybook configuration, first locate your `.storybook/main.js` file.
 
 ```js
 // .storybook/main.js - Old configuration
@@ -66,9 +64,7 @@ import storybookConfig from 'sku/config/storybook';
 export default { ...storybookConfig };
 ```
 
-Rename this file to `.storybook/main.ts` and configure it as needed.
-
-Here's an example of a minimal, `sku`-compatible Storybook configuration:
+Rename this file to `.storybook/main.ts` and replace its contents with the following, making adjustments as necessary for your project:
 
 ```ts
 // .storybook/main.ts - New configuration
@@ -100,7 +96,10 @@ export default {
 } satisfies StorybookConfig;
 ```
 
+See [`sku`'s Storybook documentation][storybook docs] for more information on configuring Storybook.
+
 [sb main]: https://storybook.js.org/docs/api/main-config/main-config
+[storybook docs]: https://seek-oss.github.io/sku/#/./docs/storybook
 
 #### Update `package.json` scripts
 

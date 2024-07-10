@@ -1,8 +1,8 @@
 import type React from 'react';
 import { renderToString } from 'react-dom/server';
+import type { Server } from 'sku';
 
 import App from './App';
-import type { Server } from 'sku';
 
 export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, _, res): void => {

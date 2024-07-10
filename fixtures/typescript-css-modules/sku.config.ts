@@ -1,6 +1,6 @@
-import type { SkuConfig } from 'sku';
 // @ts-ignore no types
 import { makeStableHashes } from '@sku-private/test-utils';
+import type { SkuConfig } from 'sku';
 
 export default {
   srcPaths: ['src', 'sku-ssr.config.ts'],

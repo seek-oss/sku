@@ -12,7 +12,7 @@ All Storybook-related features have been removed from `sku`. Sku no longer insta
 
 **MIGRATION GUIDE**:
 
-#### Update your `sku.config.js`
+#### Update your `sku` config
 
 The following `sku` configuration options have been removed:
 
@@ -21,14 +21,11 @@ The following `sku` configuration options have been removed:
 - `storybookStoryStore`
 - `storybookTarget`
 
-Please remove them from your sku configuration file.
-
-Save the value of `storybookTarget` to use later in the migration.
-
+Please remove these properties from your sku configuration file, but keep the values around for use later in the migration.
 #### Update your ignore files
 
-Sku no longer manages certain storybook related ignorefile entries.
-Run `sku configure` to update your ignorefiles:
+Sku no longer manages certain Storybook-related ignore file entries.
+Run `sku configure` to update your ignore files:
 
 ```sh
 pnpm exec sku configure
@@ -56,7 +53,7 @@ pnpm install -D storybook@^7.6.17 @storybook/react@^7.6.17 @storybook/react-webp
 
 #### Configure Storybook
 
-Sku no longer configures your `.storybook/main` file for you. You will now need to configure it yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
+Sku no longer configures your [Storybook main configuration file][sb main] for you. You will now need to configure it yourself. See [`sku`'s Storybook documentation][storybook docs] for more information.
 
 Locate your `.storybook/main.js` file.
 
@@ -102,6 +99,8 @@ export default {
   webpackFinal,
 } satisfies StorybookConfig;
 ```
+
+[sb main]: https://storybook.js.org/docs/api/main-config/main-config
 
 #### Update `package.json` scripts
 

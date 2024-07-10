@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Remove type-only imports during transpilation
+Remove type-only imports during transpilation and enforce correct type-only import syntax with `verbatimModuleSyntax: true`
 
 This change enables babel to mimic the behaviour of TypeScript's [`verbatimModuleSyntax`] compiler option. The following code demonstrates the result of this change when transpiling TypeScript to JavaScript:
 
@@ -17,6 +17,6 @@ import { b, type c, type d } from "bcd";
 import { type xyz } from "xyz";
 ```
 
-Since bundled code should not contain `import` statements, this change should not affect the output of most app code. Additionally, since our ESLint config ensures that `import { type xyz }` is transformed into `import type { xyz }`, this change is unlikely to affect library code either.
+This change is not expected to have an affect on bundled application code or library code. However, it may surface some TypeScript errors in `compilePackage` dependencies that do not adhere to the correct type-only import syntax. These errors should be fixed in the dependency's codebase.
 
 [`verbatimModuleSyntax`]: https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax

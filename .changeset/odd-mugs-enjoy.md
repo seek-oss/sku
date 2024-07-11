@@ -17,6 +17,6 @@ import { b, type c, type d } from "bcd";
 import { type xyz } from "xyz";
 ```
 
-This change is not expected to have an affect on bundled application code or library code. However, it may surface some TypeScript errors in `compilePackage` dependencies that do not adhere to the correct type-only import syntax. These errors should be fixed in the dependency's codebase.
+This change is not expected to have an effect on bundled application code or library code. However, it may surface some TypeScript errors in `compilePackage` dependencies that do not adhere to the correct type-only import syntax. These errors should be fixed in the dependency's codebase.
 
 [`verbatimModuleSyntax`]: https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax

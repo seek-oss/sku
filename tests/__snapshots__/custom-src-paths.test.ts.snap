@@ -81,6 +81,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`custom-src-paths build should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/some-static-place/runtime.js",
     "/some-static-place/2.js",
@@ -156,7 +157,9 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

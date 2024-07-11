@@ -3,12 +3,18 @@
 exports[`library-file build should generate the expected files 1`] = `
 {
   "1.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "1.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "my-library.css": ._1h1dzz60 {
   color: red;
 }
+
+/*# sourceMappingURL=my-library.css.map*/
 ,
+  "my-library.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "my-library.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "my-library.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

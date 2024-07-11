@@ -27,8 +27,4 @@ export default {
 
 Then run `sku format`.
 
-**Note:**
-
-Changing import order can affect the behaviour of your application. After running sku format, please ensure your app still works and looks as expected.
-
-Any existing comments (e.g. `@ts-ignore`) above imports will **not** be moved as part of the autofix. If your app has `@ts-ignore` comments above import statements then these will need be moved manually.
+**Note:** Changing import order can affect the behaviour of your application. After running sku format, please ensure your app still works and looks as expected. Additionally, `@ts-ignore` comments above imports will **not** be moved as part of the autofix. These comments will need be moved manually.

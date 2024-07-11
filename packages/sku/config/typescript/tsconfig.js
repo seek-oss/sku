@@ -29,8 +29,8 @@ module.exports = () => {
       isolatedModules: true,
       resolveJsonModule: true,
 
-      // Not strictly required since we don't use tsc to compile, but aligns with the
-      // babel-preset-typescript `onlyRemoveTypeImports` option
+      // Simplifies import elision, and enforces correct usage of type-only imports.
+      // Aligns with `babel-preset-typescript`'s `onlyRemoveTypeImports` option.
       verbatimModuleSyntax: true,
 
       // misc

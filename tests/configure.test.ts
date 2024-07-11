@@ -62,12 +62,13 @@ describe('configure', () => {
     it('should generate a eslint config', async () => {
       const eslintrc = await readJsonC(appFolder, '.eslintrc');
 
-      expect(eslintrc.extends).toEqual(
+      expect(eslintrc.extends).toEqual([
         require.resolve('eslint-config-seek', {
           // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
           paths: [skuPackagePath],
         }),
-      );
+        path.join(skuPackagePath, 'config/eslint/importOrderConfig.js'),
+      ]);
     });
 
     it(`should generate \`.gitignore\``, async () => {
@@ -119,12 +120,13 @@ describe('configure', () => {
     it('should generate a custom eslint config', async () => {
       const eslintrc = await readJsonC(appFolderTS, '.eslintrc');
 
-      expect(eslintrc.extends).toEqual(
+      expect(eslintrc.extends).toEqual([
         require.resolve('eslint-config-seek', {
           // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
           paths: [skuPackagePath],
         }),
-      );
+        path.join(skuPackagePath, 'config/eslint/importOrderConfig.js'),
+      ]);
       expect(eslintrc.rules['no-console']).toEqual(0);
     });
 

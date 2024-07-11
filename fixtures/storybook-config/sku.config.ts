@@ -4,7 +4,6 @@ const skuConfig: SkuConfig = {
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
-  orderImports: true,
   devServerMiddleware: './dev-middleware.js',
   dangerouslySetTSConfig: (config) => ({
     ...config,

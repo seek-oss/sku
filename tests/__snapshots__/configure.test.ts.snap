@@ -5,11 +5,9 @@ exports[`configure custom should generate $ignore 1`] = `
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
-  ".storybook/main.js",
   "coverage/",
   "foo/bar/",
   "report/",
-  "storybook/foobar/",
   "tsconfig.json",
 ]
 `;
@@ -19,11 +17,9 @@ exports[`configure custom should generate $ignore 2`] = `
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
-  ".storybook/main.js",
   "coverage/",
   "foo/bar/",
   "report/",
-  "storybook/foobar/",
   "tsconfig.json",
 ]
 `;
@@ -33,9 +29,7 @@ exports[`configure default should generate $ignore 1`] = `
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
-  ".storybook/main.js",
   "coverage/",
-  "dist-storybook/",
   "dist/",
   "report/",
   "tsconfig.json",
@@ -47,9 +41,7 @@ exports[`configure default should generate $ignore 2`] = `
   ".eslintcache",
   ".eslintrc",
   ".prettierrc",
-  ".storybook/main.js",
   "coverage/",
-  "dist-storybook/",
   "dist/",
   "report/",
   "tsconfig.json",

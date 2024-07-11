@@ -24,7 +24,16 @@ export const getStoryPage = async (storyIframeUrl) => {
 export const getTextContentFromFrameOrPage = async (
   frameOrPage,
   elementSelector,
+  { logDebugScreenshot = false } = {},
 ) => {
+  if (logDebugScreenshot) {
+    console.log(
+      `data:image/png;base64, ${await frameOrPage
+        .page()
+        .screenshot({ encoding: 'base64' })}`,
+    );
+  }
+
   const element = await frameOrPage.waitForSelector(elementSelector, {
     timeout: 10_000,
   });

@@ -432,40 +432,6 @@ Default: `['./src']`
 
 An array of directories holding your app's source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
-## storybookAddons
-
-type `Array<string>`
-
-Default: `[]`
-
-An array of storybook addons to use.
-
-## storybookPort
-
-type `number`
-
-Default: `8081`
-
-The port to host storybook on when running `sku storybook`.
-
-## storybookStoryStore
-
-type `boolean`
-
-Default: `true`
-
-Allows disabling Storybook's `storyStoreV7` feature flag.
-This will result in all stories being loaded upfront instead of on demand.
-Disabling this feature will allow stories that use the deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf` to the Component Story Format (CSF) instead.
-
-## storybookTarget
-
-type `string`
-
-Default: `dist-storybook`
-
-The directory `sku build-storybook` will output files to.
-
 ## supportedBrowsers
 
 type `browserslist-query`

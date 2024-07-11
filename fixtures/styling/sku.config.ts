@@ -6,8 +6,11 @@ export default {
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   port: 8205,
-  storybookPort: 8090,
   publicPath: '/styling',
   target: 'dist',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
+  dangerouslySetTSConfig: (config) => ({
+    ...config,
+    include: ['**/*', '.storybook/*'],
+  }),
 } satisfies SkuConfig;

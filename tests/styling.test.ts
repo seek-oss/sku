@@ -6,21 +6,19 @@ import {
   waitForUrls,
   runSkuScriptInDir,
   getAppSnapshot,
-  getTextContentFromFrameOrPage,
   getStoryPage,
+  getTextContentFromFrameOrPage,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
+import skuConfig from '../fixtures/styling/sku.config.ts';
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { default: skuConfig } = require(`${appDir}/sku.config.ts`);
-
 assert(skuConfig.port, 'sku config has port');
-assert(skuConfig.storybookPort, 'sku config has storybookPort');
 const devServerUrl = `http://localhost:${skuConfig.port}`;
 
 describe('styling', () => {
@@ -80,18 +78,31 @@ describe('styling', () => {
   });
 
   describe('storybook', () => {
-    let server: ChildProcess;
-    let storyPage: Page;
+    const storybookPort = 8090;
+    const storybookBaseUrl = `http://localhost:${storybookPort}`;
 
-    const storybookBaseUrl = `http://localhost:${skuConfig.storybookPort}`;
     const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
+    let server: ChildProcess;
+    let storyPage: Page;
+
     beforeAll(async () => {
-      server = await runSkuScriptInDir('storybook', appDir, [
-        '--ci',
-        '--quiet',
-      ]);
+      server = gracefulSpawn(
+        'pnpm',
+        [
+          'storybook',
+          'dev',
+          '--ci',
+          '--quiet',
+          '--port',
+          storybookPort.toString(),
+        ],
+        {
+          cwd: appDir,
+          stdio: 'inherit',
+        },
+      );
       await waitForUrls(storyIframeUrl);
       storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);

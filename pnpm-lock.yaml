@@ -593,8 +593,8 @@ importers:
         specifier: ^1.6.2
         version: 1.6.2
       '@vocab/phrase':
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       '@vocab/pseudo-localize':
         specifier: ^1.0.1
         version: 1.0.1
@@ -3337,8 +3337,8 @@ packages:
   '@vocab/core@1.6.2':
     resolution: {integrity: sha512-IkMim1fTeUuOwPG0+wUnxrjis7peha2wHv74GjNw2hR4CFs9sYsdbueAuD+Z2n4zU0rqCqbpt1o4zJeqXXZf6A==}
 
-  '@vocab/phrase@2.0.0':
-    resolution: {integrity: sha512-3upXynwZOAPOS9bJyNJTdcVQ0xOMQIaQ5GlGN2j0sqKfijDBElKo6xYqbD7V0xt/CpnBysj55K5pQUeNKAOw2Q==}
+  '@vocab/phrase@2.0.1':
+    resolution: {integrity: sha512-OBbnJni+WNJiJTbTL9QpF0bC+ZYBdNw1GvvbKuT069Jabzl8p/3ADrJTLIlGnPeFhgcfuVVduup7vYritm30pQ==}
     engines: {node: '>=18'}
 
   '@vocab/pseudo-localize@1.0.1':
@@ -12615,12 +12615,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/phrase@2.0.0':
+  '@vocab/phrase@2.0.1':
     dependencies:
       '@vocab/core': 1.6.2
       csv-stringify: 6.5.0
       debug: 4.3.5(supports-color@8.1.1)
-      form-data: 4.0.0
       picocolors: 1.0.1
     transitivePeerDependencies:
       - supports-color
@@ -18473,7 +18472,7 @@ snapshots:
       '@vanilla-extract/jest-transform': 1.1.5(@types/node@18.19.34)(babel-plugin-macros@3.1.0)(less@4.2.0)(terser@5.31.1)
       '@vanilla-extract/webpack-plugin': 2.3.9(@types/node@18.19.34)(babel-plugin-macros@3.1.0)(less@4.2.0)(terser@5.31.1)(webpack@5.91.0(@swc/core@1.6.13)(esbuild@0.19.12))
       '@vocab/core': 1.6.2
-      '@vocab/phrase': 2.0.0
+      '@vocab/phrase': 2.0.1
       '@vocab/pseudo-localize': 1.0.1
       '@vocab/webpack': 1.2.9(webpack@5.91.0(@swc/core@1.6.13)(esbuild@0.19.12))
       '@zendesk/babel-plugin-react-displayname': https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.24.7)(@babel/preset-react@7.24.7(@babel/core@7.24.7))

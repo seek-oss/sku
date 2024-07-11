@@ -396,16 +396,33 @@ const config = {
 
 type `boolean`
 
-By default source maps will be generated only for development builds.
-Set to `true` to enable source maps in production.
+Default: `true`
+
+Source maps are always generated for development builds.
+It is recommended to enable source maps for production builds in order to aid debugging.
+To disable source maps for production builds, set this option to `false`.
 
 Example:
 
 ```ts
 export default {
-  sourceMapsProd: true,
+  sourceMapsProd: false,
 } satisfies SkuConfig;
 ```
+
+**NOTE**: Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
+If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
+
+For example:
+
+```sh
+NODE_OPTIONS=--max-old-space-size=4096 sku build
+```
+
+### When to disable `sourceMapsProd`
+
+Production source maps can be expensive.
+If your application does not utilize production source maps, e.g. you have no tracking of production errors, you can disable them to potentially reduce build times and memory usage.
 
 ## srcPaths
 

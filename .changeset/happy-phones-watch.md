@@ -10,7 +10,7 @@ Remove support for `orderImports` config option
 
 **MIGRATION GUIDE**
 
-> To reduce the number of changes when migrating to sku 13 you may choose to enable `orderImports` and run sku format before upgrading.
+> To reduce the number of changes when migrating to `sku` v13 you may choose to enable `orderImports` and run `sku format` before upgrading.
 
 Remove `orderImports` from `sku.config.ts`
 ```diff

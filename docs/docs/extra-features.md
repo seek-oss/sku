@@ -62,12 +62,10 @@ export default {
 This cache stores generated webpack modules and chunks.
 It is only emitted during local development.
 Its purpose is to reduce the time it takes to start the local development server.
-`sku` enables this cache by default, but it can be disabled via the [`persistentCache` configuration].
 
 > This cache is stored in `node_modules/.cache/webpack` and can be safely deleted at any time.
 
 [webpack filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
-[`persistentCache` configuration]: ./docs/configuration#persistentcache
 
 ### [`babel-loader` cache]
 

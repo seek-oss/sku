@@ -177,7 +177,6 @@ module.exports = validator.compile({
   displayNamesProd: {
     type: 'boolean',
   },
-  orderImports: { type: 'boolean' },
   cspEnabled: { type: 'boolean' },
   cspExtraScriptSrcHosts: {
     type: 'array',
@@ -197,9 +196,6 @@ module.exports = validator.compile({
   skipPackageCompatibilityCompilation: {
     type: 'array',
     items: { type: 'string' },
-  },
-  persistentCache: {
-    type: 'boolean',
   },
   externalizeNodeModules: {
     type: 'boolean',

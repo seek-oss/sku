@@ -5,6 +5,5 @@ module.exports = {
   renderEntry: 'src/render.js',
   libraryName: 'MyLibrary',
   port: 8085,
-  persistentCache: false,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 };

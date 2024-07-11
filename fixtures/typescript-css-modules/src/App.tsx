@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useState } from 'react';
+
 import * as styles from './styles.css.ts';
 import './globalTypes.d';
 

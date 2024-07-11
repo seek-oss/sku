@@ -6,6 +6,5 @@ module.exports = {
   libraryName: 'MyLibrary',
   libraryFile: 'my-library',
   port: 8086,
-  persistentCache: false,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 };

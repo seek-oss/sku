@@ -1,7 +1,7 @@
-import { renderToString } from 'react-dom/server';
 import html from 'dedent';
-
+import { renderToString } from 'react-dom/server';
 import type { Render } from 'sku';
+
 import App from 'src/App';
 
 const skuRender: Render = {

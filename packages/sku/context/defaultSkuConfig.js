@@ -39,7 +39,6 @@ module.exports = {
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
   supportedBrowsers,
-  orderImports: false,
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
@@ -47,6 +46,5 @@ module.exports = {
   rootResolution: !isCompilePackage,
   languages: null,
   skipPackageCompatibilityCompilation: [],
-  persistentCache: true,
   externalizeNodeModules: false,
 };

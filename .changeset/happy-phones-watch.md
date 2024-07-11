@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Remove support for `orderImports` config option.
+Remove support for `orderImports` config option
 
 **BREAKING CHANGE:**
 

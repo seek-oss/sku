@@ -1,5 +1,6 @@
-import { renderToString } from 'react-dom/server';
 import html from 'dedent';
+import { renderToString } from 'react-dom/server';
+
 import App from '../another-folder/App';
 
 export default {

@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 
@@ -40,7 +40,7 @@ interface SharedRenderProps {
 }
 
 interface RenderAppProps extends SharedRenderProps {
-  SkuProvider: ComponentType<{ children: ReactNode }>;
+  SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
   _addChunk: (chunkName: string) => void;
 }
 

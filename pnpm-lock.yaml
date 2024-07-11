@@ -583,9 +583,6 @@ importers:
       '@types/loadable__server':
         specifier: ^5.12.10
         version: 5.12.11
-      '@types/react':
-        specifier: ^18.2.3
-        version: 18.3.3
       '@vanilla-extract/jest-transform':
         specifier: ^1.1.0
         version: 1.1.5(@types/node@18.19.34)(babel-plugin-macros@3.1.0)(less@4.2.0)(terser@5.31.1)
@@ -818,6 +815,9 @@ importers:
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.3
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.3.3
       '@types/react-dom':
         specifier: ^18.2.3
         version: 18.3.0

@@ -7,7 +7,7 @@ SCRIPTS: [
   "/styling/main.js",
 ]
 CSS: [
-  "/styling/main-1a83a1ba0e49241a7187.css",
+  "/styling/main-f11c7eb5d7d4b8c58e2e.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -113,13 +113,14 @@ POST HYDRATE DIFFS:
 exports[`styling build should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/styling/runtime.js",
     "/styling/2.js",
     "/styling/main.js",
   ]
 CSS: [
-    "/styling/main-1a83a1ba0e49241a7187.css",
+    "/styling/main-f11c7eb5d7d4b8c58e2e.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -210,7 +211,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-1a83a1ba0e49241a7187.css": .external {
+  "main-f11c7eb5d7d4b8c58e2e.css": .external {
   display: none;
   font-size: 9px;
 }
@@ -223,9 +224,14 @@ SOURCE HTML: <!DOCTYPE html>
   height: 100px;
   width: 100px;
 }
+
+/*# sourceMappingURL=main-f11c7eb5d7d4b8c58e2e.css.map*/
 ,
+  "main-f11c7eb5d7d4b8c58e2e.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

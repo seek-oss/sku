@@ -262,13 +262,6 @@ export interface SkuConfig {
   libraryFile?: string;
 
   /**
-   * Enables linting of import order. This rule supports auto-fix.
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/linting?id=import-ordering
-   */
-  orderImports?: boolean;
-
-  /**
    * An array of polyfills to be included into all client entry points.
    *
    * @default []

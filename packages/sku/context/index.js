@@ -201,7 +201,6 @@ module.exports = {
   supportedBrowsers: skuConfig.supportedBrowsers,
   sourceMapsProd: Boolean(skuConfig.sourceMapsProd),
   displayNamesProd: Boolean(skuConfig.displayNamesProd),
-  orderImports: Boolean(skuConfig.orderImports),
   cspEnabled: skuConfig.cspEnabled,
   cspExtraScriptSrcHosts: skuConfig.cspExtraScriptSrcHosts,
   httpsDevServer: skuConfig.httpsDevServer,

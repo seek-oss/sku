@@ -5,7 +5,6 @@ const skuConfig: SkuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   storybookPort: 8089,
-  orderImports: true,
   devServerMiddleware: './dev-middleware.js',
   storybookAddons: ['@storybook/addon-controls'],
   storybookStoryStore: false,

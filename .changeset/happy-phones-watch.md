@@ -25,7 +25,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Then run `sku format`
+Then run `sku format`.
 
 **Note:**
 

@@ -4,7 +4,7 @@
 <img src="https://github.com/seek-oss/sku/raw/master/docs/logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
 <br />
 
-Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Vanilla Extract](https://vanilla-extract.style/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/), [Jest](https://facebook.github.io/jest/) and [Storybook](https://storybook.js.org/).
+Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Vanilla Extract](https://vanilla-extract.style/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/) and [Jest](https://facebook.github.io/jest/).
 
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed.
 Designed for usage with [braid-design-system](https://github.com/seek-oss/braid-design-system), although this isn't a requirement.
@@ -28,19 +28,18 @@ This tool is heavily inspired by other work, most notably:
 Create a new project and start a local development environment:
 
 ```sh
-$ npx sku init my-app
+$ pnpm dlx sku init my-app
 $ cd my-app
-$ yarn start
+$ pnpm start
 ```
 
-By default, a new project's dependencies will be installed with the first supported package manager detected on your system.
-Package managers are detected in the following order: `yarn` -> `pnpm` -> `npm`.
+By default, a new project's dependencies will be installed with the same package manager used to run `sku init`.
 This can be overridden via the `--packageManager` flag:
 
 ```sh
-$ pnpm dlx sku init --packageManager pnpm my-app
+$ pnpm dlx sku init --packageManager yarn my-app
 $ cd my-app
-$ pnpm start
+$ yarn start
 ```
 
 ## [Documentation](https://seek-oss.github.io/sku)

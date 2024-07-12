@@ -258,14 +258,6 @@ The file name of the library. The main bundle of the library will be output to `
 
 If `libraryFile` is not specified then `libraryName` will be used instead.
 
-## persistentCache
-
-type `boolean`
-
-Default: `true`
-
-Disables the use of webpack filesystem caching for `sku start` and `sku start-ssr`.
-
 ## polyfills
 
 type `Array<string>`
@@ -404,16 +396,33 @@ const config = {
 
 type `boolean`
 
-By default source maps will be generated only for development builds.
-Set to `true` to enable source maps in production.
+Default: `true`
+
+Source maps are always generated for development builds.
+It is recommended to enable source maps for production builds in order to aid debugging.
+To disable source maps for production builds, set this option to `false`.
 
 Example:
 
 ```ts
 export default {
-  sourceMapsProd: true,
+  sourceMapsProd: false,
 } satisfies SkuConfig;
 ```
+
+**NOTE**: Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
+If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
+
+For example:
+
+```sh
+NODE_OPTIONS=--max-old-space-size=4096 sku build
+```
+
+### When to disable `sourceMapsProd`
+
+Production source maps can be expensive.
+If your application does not utilize production source maps, e.g. you have no tracking of production errors, you can disable them to potentially reduce build times and memory usage.
 
 ## srcPaths
 
@@ -422,40 +431,6 @@ type `Array<string>`
 Default: `['./src']`
 
 An array of directories holding your app's source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
-
-## storybookAddons
-
-type `Array<string>`
-
-Default: `[]`
-
-An array of storybook addons to use.
-
-## storybookPort
-
-type `number`
-
-Default: `8081`
-
-The port to host storybook on when running `sku storybook`.
-
-## storybookStoryStore
-
-type `boolean`
-
-Default: `true`
-
-Allows disabling Storybook's `storyStoreV7` feature flag.
-This will result in all stories being loaded upfront instead of on demand.
-Disabling this feature will allow stories that use the deprecated `storiesOf` API to work, however it's highly recommended to migrate off `storiesOf` to the Component Story Format (CSF) instead.
-
-## storybookTarget
-
-type `string`
-
-Default: `dist-storybook`
-
-The directory `sku build-storybook` will output files to.
 
 ## supportedBrowsers
 

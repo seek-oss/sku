@@ -15,6 +15,7 @@ import type { SkuConfig, Render } from 'sku';
 ## `sku/@loadable/component`
 
 A re-export of the `@loadable/component` package, which `sku` provides as a dependency.
+See the [code splitting documentation] for more information.
 
 Example:
 
@@ -22,15 +23,7 @@ Example:
 import { loadableReady } from 'sku/@loadable/component';
 ```
 
-## `sku/@storybook/react`
-
-A re-export of the `@storybook/react` package, which `sku` provides as a dependency.
-
-Example:
-
-```ts
-import type { StoryObj } from 'sku/@storybook/react';
-```
+[code splitting documentation]: ./docs/code-splitting.md
 
 ## `sku/config/jest`
 
@@ -47,18 +40,20 @@ module.exports = {
 };
 ```
 
+[testing documentation]: ./docs/testing.md
+
 ## `sku/config/storybook`
 
-Exports storybook config compatible with `sku`.
-`sku` creates your Storybook configuration for you, so you don't need to use this directly.
+Exports `sku`-compatible Storybook configuration for use within your `.storybook/main.ts` file.
+See the [Storybook documentation] for more information.
 
 Example:
 
 ```ts
-import storybookConfig from 'sku/config/storybook';
+import { babel, webpackFinal } from 'sku/config/storybook';
 ```
 
-[testing documentation]: ./docs/testing.md
+[Storybook documentation]: ./docs/storybook.md
 
 ## `sku/webpack-plugin`
 

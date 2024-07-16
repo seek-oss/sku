@@ -19,6 +19,7 @@ exports[`configure custom should generate $ignore 2`] = `
   ".prettierrc",
   "coverage/",
   "foo/bar/",
+  "pnpm-lock.yaml",
   "report/",
   "tsconfig.json",
 ]
@@ -43,6 +44,7 @@ exports[`configure default should generate $ignore 2`] = `
   ".prettierrc",
   "coverage/",
   "dist/",
+  "pnpm-lock.yaml",
   "report/",
   "tsconfig.json",
 ]

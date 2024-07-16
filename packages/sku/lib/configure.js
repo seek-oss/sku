@@ -77,16 +77,16 @@ module.exports = async () => {
   await ensureGitignore({
     filepath: getPathFromCwd('.eslintignore'),
     comment: 'managed by sku',
-    patterns: lintIgnorePatterns
-      .concat('pnpm-lock.yaml')
-      .map(convertToForwardSlashPaths),
+    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
   // Write `.prettierignore`
   await ensureGitignore({
     filepath: getPathFromCwd('.prettierignore'),
     comment: 'managed by sku',
-    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
+    patterns: lintIgnorePatterns
+      .concat('pnpm-lock.yaml')
+      .map(convertToForwardSlashPaths),
   });
 
   // Generate self-signed certificate and ignore

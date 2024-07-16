@@ -6,7 +6,8 @@ translations.ts
 .eslintrc
 .prettierrc
 coverage/
-dist-ssr/
+dist/
 report/
 tsconfig.json
+pnpm-lock.yaml
 # end managed by sku

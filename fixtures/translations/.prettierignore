@@ -6,7 +6,7 @@ translations.ts
 .eslintrc
 .prettierrc
 coverage/
-dist/
+dist-ssr/
 report/
 tsconfig.json
 # end managed by sku

@@ -77,7 +77,9 @@ module.exports = async () => {
   await ensureGitignore({
     filepath: getPathFromCwd('.eslintignore'),
     comment: 'managed by sku',
-    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
+    patterns: lintIgnorePatterns
+      .concat('pnpm-lock.yaml')
+      .map(convertToForwardSlashPaths),
   });
 
   // Write `.prettierignore`

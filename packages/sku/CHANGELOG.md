@@ -1,5 +1,11 @@
 # sku
 
+## 13.0.1
+
+### Patch Changes
+
+- Add `pnpm-lock.yaml` to `.prettierignore` and `.eslintignore` ([#1021](https://github.com/seek-oss/sku/pull/1021))
+
 ## 13.0.0
 
 ### Major Changes

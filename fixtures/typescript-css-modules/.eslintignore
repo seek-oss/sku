@@ -6,4 +6,5 @@ coverage/
 dist/
 report/
 tsconfig.json
+pnpm-lock.yaml
 # end managed by sku

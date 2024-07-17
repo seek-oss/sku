@@ -65,7 +65,7 @@ module.exports = async () => {
   await writeFileToCWD(tsConfigFileName, createTSConfig());
   gitIgnorePatterns.push(tsConfigFileName);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns];
+  const lintIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';

@@ -170,6 +170,26 @@
   }
   ```
 
+  If you have a [multi-language] application, you will want to compile your translations before running the Storybook CLI:
+
+  ```jsonc
+  // package.json
+  {
+    "scripts": {
+      "storybook": "sku translations compile && storybook dev" // or storybook build
+    }
+  }
+  ```
+
+  If you want to run a development Storybook and see Vocab translations update in real time, you can run the [`sku translations compile --watch`][translations compile watch] command at the same time as `storybook dev`.
+  This can be achieved via a package such as [`concurrently`], or if you are using `pnpm` you can use `pnpm`'s built-in support for [running multiple scripts] in parallel.
+
+  Please read the [Storybook CLI documentation] for more information.
+
+  [multi-language]: ./docs/multi-language
+  [translations compile watch]: ./docs/cli?id=translations-compile
+  [`concurrently`]: https://www.npmjs.com/package/concurrently
+  [running multiple scripts]: https://pnpm.io/8.x/cli/run#running-multiple-scripts
   [storybook cli]: https://storybook.js.org/docs/cli/
 
   #### Update Storybook imports

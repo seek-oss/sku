@@ -74,17 +74,30 @@ export default {
 To serve a development version of your Storybook, run:
 
 ```sh
-pnpm exec storybook dev
+pnpm storybook dev
 ```
 
 To build a deployable, production version of your Storybook, run:
 
 ```sh
-pnpm exec storybook build
+pnpm storybook build
 ```
+
+If you have a [multi-language] application, you will want to compile your translations before running the Storybook CLI:
+
+```sh
+pnpm sku translations compile && pnpm storybook dev # or pnpm storybook build
+```
+
+If you want to run a development Storybook and see Vocab translations update in real time, you can run the [`sku translations compile --watch`][translations compile watch] command at the same time as `storybook dev`.
+This can be achieved via a package such as [`concurrently`], or if you are using `pnpm` you can use `pnpm`'s built-in support for [running multiple scripts] in parallel.
 
 Please read the [Storybook CLI documentation] for more information.
 
+[multi-language]: ./docs/multi-language
+[translations compile watch]: ./docs/cli?id=translations-compile
+[`concurrently`]: https://www.npmjs.com/package/concurrently
+[running multiple scripts]: https://pnpm.io/8.x/cli/run#running-multiple-scripts
 [Storybook CLI documentation]: https://storybook.js.org/docs/cli/
 
 ## DevServer Middleware

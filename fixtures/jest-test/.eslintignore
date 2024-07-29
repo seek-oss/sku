@@ -1,13 +1,10 @@
 # managed by sku
-*.less.d.ts
 .eslintcache
 .eslintrc
 .prettierrc
-.storybook/main.js
 coverage/
-dist-storybook/
 dist/
+pnpm-lock.yaml
 report/
 tsconfig.json
-pnpm-lock.yaml
 # end managed by sku

@@ -148,6 +148,7 @@
   "devDependencies": {
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
+    "@types/eslint": "^8.56.10",
     "@types/minimist": "^1.2.5",
     "@types/picomatch": "^2.3.3",
     "@types/react": "^18.2.3",

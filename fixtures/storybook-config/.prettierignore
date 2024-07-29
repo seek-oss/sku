@@ -6,7 +6,7 @@ storybook-static/
 .prettierrc
 coverage/
 dist/
+pnpm-lock.yaml
 report/
 tsconfig.json
-pnpm-lock.yaml
 # end managed by sku

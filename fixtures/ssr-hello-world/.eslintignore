@@ -3,8 +3,8 @@
 .eslintrc
 .prettierrc
 coverage/
-dist-build/
+dist/
+pnpm-lock.yaml
 report/
 tsconfig.json
-pnpm-lock.yaml
 # end managed by sku

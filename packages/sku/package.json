@@ -7,13 +7,8 @@
     "sku": "./bin/sku.js"
   },
   "exports": {
-    ".": {
-      "types": "./sku-types.d.ts"
-    },
-    "./config/jest": {
-      "default": "./config/jest/index.js",
-      "types": "./config/jest/index.d.ts"
-    },
+    ".": "./sku-types.d.ts",
+    "./jest-preset": "./config/jest/jest-preset.js",
     "./config/storybook": {
       "default": "./config/storybook/index.js",
       "types": "./config/storybook/index.d.ts"

@@ -25,9 +25,9 @@ import { loadableReady } from 'sku/@loadable/component';
 
 [code splitting documentation]: ./docs/code-splitting.md
 
-## `sku/config/jest`
+## `sku/jest-preset`
 
-A jest preset for consuming `sku`'s Jest configuration.
+A [jest preset] for consuming `sku`'s Jest configuration.
 See the [testing documentation] for more information.
 
 Example:
@@ -36,10 +36,11 @@ Example:
 // jest.config.js
 /** @type {import('jest').Config} */
 module.exports = {
-  preset: 'sku/config/jest',
+  preset: 'sku',
 };
 ```
 
+[jest preset]: https://jestjs.io/docs/configuration#preset-string
 [testing documentation]: ./docs/testing.md
 
 ## `sku/config/storybook`

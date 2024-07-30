@@ -10,22 +10,20 @@
 
 ### Major Changes
 
-- Export jest preset path ([#984](https://github.com/seek-oss/sku/pull/984))
+- Export jest preset ([#984](https://github.com/seek-oss/sku/pull/984))
 
   **BREAKING CHANGE**:
 
-  The jest preset is now accessible via a relative path rather than pointing to a module. This may affect users that require a jest config for debugging tests in their IDE. See the [testing documentation] for more information.
+  The jest preset is now accessible via the `sku` preset. This may affect users that require a jest config for debugging tests in their IDE. See the [testing documentation] for more information.
 
   **MIGRATION GUIDE**:
 
   ```diff
   // jest.config.js
-  + const { preset } = require('sku/config/jest');
-
   /** @type {import('jest').Config} */
   module.exports = {
   -  preset: 'sku/config/jest',
-  +  preset,
+  +  preset: 'sku',
   };
   ```
 

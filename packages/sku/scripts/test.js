@@ -11,12 +11,12 @@ const log = debug('sku:jest');
   await runVocabCompile();
 
   // https://jestjs.io/docs/configuration#preset-string
-  const { preset } = require('../config/jest');
-  log(`Using Jest preset at ${preset}`);
+  const jestPreset = 'sku';
+  log(`Using '${jestPreset}' Jest preset`);
 
   const jestArgv = [...argv];
 
-  jestArgv.push('--preset', preset);
+  jestArgv.push('--preset', jestPreset);
 
   if (isCI) {
     jestArgv.push('--ci');

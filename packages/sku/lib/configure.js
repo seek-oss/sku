@@ -4,7 +4,7 @@ const { writeFile, rm } = require('node:fs/promises');
 const path = require('node:path');
 
 const ensureGitignore = require('ensure-gitignore');
-const { cwd, getPathFromCwd } = require('./cwd');
+const { getPathFromCwd } = require('./cwd');
 
 const { paths, httpsDevServer, languages } = require('../context');
 const {
@@ -32,9 +32,7 @@ const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
 
 module.exports = async () => {
   // Ignore target directories
-  const webpackTargetDirectory = addSep(
-    paths.target.replace(addSep(cwd()), ''),
-  );
+  const webpackTargetDirectory = addSep(paths.relativeTarget);
 
   const gitIgnorePatterns = [
     // Ignore webpack bundle report output

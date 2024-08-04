@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sku init should create .eslintignore 1`] = `
+"# managed by sku
+.eslintcache
+.eslintrc
+.prettierrc
+coverage/
+dist/
+pnpm-lock.yaml
+report/
+tsconfig.json
+# end managed by sku
+"
+`;
+
+exports[`sku init should create .gitignore 1`] = `
+"node_modules
+npm-debug.log
+
+# managed by sku
+.eslintcache
+.eslintrc
+.prettierrc
+coverage/
+dist/
+report/
+tsconfig.json
+# end managed by sku
+"
+`;
+
+exports[`sku init should create .prettierignore 1`] = `
+"# managed by sku
+.eslintcache
+.eslintrc
+.prettierrc
+coverage/
+dist/
+pnpm-lock.yaml
+report/
+tsconfig.json
+# end managed by sku
+"
+`;
+
+exports[`sku init should create package.json 1`] = `
+{
+  "dependencies": {
+    "braid-design-system": "VERSION_IGNORED",
+    "react": "VERSION_IGNORED",
+    "react-dom": "VERSION_IGNORED",
+  },
+  "devDependencies": {
+    "@types/react": "VERSION_IGNORED",
+    "@types/react-dom": "VERSION_IGNORED",
+    "@vanilla-extract/css": "VERSION_IGNORED",
+    "sku": "VERSION_IGNORED",
+  },
+  "name": "new-project",
+  "private": true,
+  "scripts": {
+    "build": "sku build",
+    "format": "sku format",
+    "lint": "sku lint",
+    "serve": "sku serve",
+    "start": "sku start",
+    "test": "sku test",
+  },
+  "version": "0.1.0",
+}
+`;
+
+exports[`sku init should create sku.config.ts 1`] = `
+"import type { SkuConfig } from 'sku';
+
+const skuConfig: SkuConfig = {
+  clientEntry: 'src/client.tsx',
+  renderEntry: 'src/render.tsx',
+  environments: ['development', 'production'],
+  publicPath: '/path/to/public/assets/', // <-- Required for sku build output
+};
+
+export default skuConfig;
+"
+`;

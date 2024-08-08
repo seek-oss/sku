@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "13.0.2",
+  "version": "13.0.3",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {

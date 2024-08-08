@@ -1,5 +1,17 @@
 # sku
 
+## 13.0.3
+
+### Patch Changes
+
+- Fix incorrect path in ignore files when running `sku init` ([#1028](https://github.com/seek-oss/sku/pull/1028))
+
+  sku generates ignore files (e.g. `.eslintignore`) for the project.
+  When ran as part of `sku init`, the current working directory (CWD) would sometimes be incorrect.
+  It should now give the same result as `sku configure`.
+
+  This change includes a refactor to how the webpack target directory is set in ignore files.
+
 ## 13.0.2
 
 ### Patch Changes

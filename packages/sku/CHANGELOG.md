@@ -1,5 +1,11 @@
 # sku
 
+## 13.0.4
+
+### Patch Changes
+
+- Fixes a bug preventing `.mdx` files from loading in Storybook when using `sku`'s `webpackFinal` Storybook configuration ([#1032](https://github.com/seek-oss/sku/pull/1032))
+
 ## 13.0.3
 
 ### Patch Changes

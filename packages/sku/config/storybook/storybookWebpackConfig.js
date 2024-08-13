@@ -5,6 +5,9 @@ const { resolvePackage } = require('../webpack/utils/resolvePackage');
 
 const hot = process.env.SKU_HOT !== 'false';
 
+const EXAMPLE_CSS_FILE = 'example.css';
+const EXAMPLE_MDX_FILE = 'example.mdx';
+
 /**
  * @param {import("webpack").Configuration} config
  * @param {{isDevServer: boolean}}
@@ -24,11 +27,33 @@ module.exports = (config, { isDevServer }) => {
         ...(Array.isArray(previousExclude)
           ? previousExclude
           : [previousExclude]), // Ensure we don't clobber any existing exclusions
-        ...paths.src,
-        ...paths.compilePackages.map(resolvePackage),
-        /\.vanilla\.css$/, // Vanilla Extract virtual modules
-        /\.css$/, // external CSS
       ];
+
+      if (rule.test instanceof RegExp) {
+        // Only exclude sku app source code and compile packages if the rule is not for MDX files
+        if (!rule.test.test(EXAMPLE_MDX_FILE)) {
+          rule.exclude.push(
+            ...paths.src,
+            ...paths.compilePackages.map(resolvePackage),
+          );
+        }
+
+        // Only exclude vanilla extract virtual CSS files if the rule is for CSS files
+        if (rule.test.test(EXAMPLE_CSS_FILE)) {
+          rule.exclude.push(
+            /\.vanilla\.css$/, // Vanilla Extract virtual modules
+            /\.css$/, // external CSS
+          );
+        }
+      } else {
+        // To be safe, exclude everything if the rule's test isn't a RegExp
+        rule.exclude.push(
+          ...paths.src,
+          ...paths.compilePackages.map(resolvePackage),
+          /\.vanilla\.css$/, // Vanilla Extract virtual modules
+          /\.css$/, // external CSS
+        );
+      }
     });
   }
 

@@ -83,6 +83,33 @@ describe('storybook-config', () => {
       expect(text).toEqual('32px vanilla text');
       expect(fontSize).toEqual('32px');
     });
+
+    it('should render a ".mdx" file', async () => {
+      const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
+      const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
+      const docsPage = await getStoryPage(docsIframeUrl);
+      await waitForUrls(docsIframeUrl);
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test',
+        );
+
+        expect(text).toEqual('Docs Test');
+        expect(fontSize).toEqual('32px');
+      }
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test + p',
+        );
+
+        expect(text).toEqual('I am a test document.');
+        expect(fontSize).toEqual('14px');
+      }
+    });
   });
 
   describe('build-storybook', () => {
@@ -143,6 +170,33 @@ describe('storybook-config', () => {
 
       expect(text).toEqual('32px vanilla text');
       expect(fontSize).toEqual('32px');
+    });
+
+    it('should render a ".mdx" file', async () => {
+      const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
+      const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
+      const docsPage = await getStoryPage(docsIframeUrl);
+      await waitForUrls(docsIframeUrl);
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test',
+        );
+
+        expect(text).toEqual('Docs Test');
+        expect(fontSize).toEqual('32px');
+      }
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test + p',
+        );
+
+        expect(text).toEqual('I am a test document.');
+        expect(fontSize).toEqual('14px');
+      }
     });
   });
 });

@@ -93,24 +93,20 @@ To utilize the `babel-loader` cache in Buildkite, you can use the [cache plugin]
 steps:
   - label: 'Build sku app'
     command: 'pnpm exec sku build'
-    # Add these environment variables and plugin items to your pipeline steps that run `sku build`
+    # Add these environment variables and plugin item to your pipeline steps that run `sku build`
     env:
       BUILDKITE_PLUGIN_S3_CACHE_BUCKET: my-buildkite-cache-bucket
       BUILDKITE_PLUGIN_S3_CACHE_PREFIX: my-app-babel-loader-cache
     plugins:
-      - cache#v1.0.1:
+      # v1.1.0 allows saving the cache at multiple levels
+      - cache#v1.1.0:
           path: ./node_modules/.cache/babel-loader
           restore: pipeline
-          save: file
+          save:
+            - file
+            # Pipeline-level cache is used as a stale fallback if the manifest doesn't match
+            - pipeline
           manifest: pnpm-lock.yaml
-          backend: s3
-          compression: tgz
-      # Second cache plugin entry creates a pipeline-level cache as a stale fallback if the manifest doesn't match.
-      # Ideally this would be defined in a single cache plugin entry.
-      # See https://github.com/buildkite-plugins/cache-buildkite-plugin/issues/70
-      - cache#v1.0.1:
-          path: ./node_modules/.cache/babel-loader
-          save: pipeline
           backend: s3
           compression: tgz
 ```

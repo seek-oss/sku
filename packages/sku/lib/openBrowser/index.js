@@ -10,8 +10,8 @@ const OSX_CHROME = 'google chrome';
 
 module.exports = async (url) => {
   if (process.env.OPEN_TAB !== 'false' && !isCI) {
-    const getDefaultBrowser = (await import('default-browser')).default;
-    const defaultBrowser = (await getDefaultBrowser()).name;
+    const { default: getDefaultBrowser } = await import('default-browser');
+    const { name: defaultBrowser } = await getDefaultBrowser();
 
     const availableBrowser = process.env.BROWSER;
 
@@ -32,9 +32,7 @@ module.exports = async (url) => {
         'Arc',
       ];
 
-      const uniqueSupportedChromiumBrowsers = Array.from(
-        new Set(supportedChromiumBrowsers),
-      );
+      const uniqueSupportedChromiumBrowsers = new Set(supportedChromiumBrowsers);
 
       for (const chromiumBrowser of uniqueSupportedChromiumBrowsers) {
         try {

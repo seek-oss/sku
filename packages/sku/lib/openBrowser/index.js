@@ -8,26 +8,35 @@ const isCI = require('../isCI');
 
 const OSX_CHROME = 'google chrome';
 
-module.exports = (url) => {
+module.exports = async (url) => {
   if (process.env.OPEN_TAB !== 'false' && !isCI) {
-    const browser = process.env.BROWSER;
+    const getDefaultBrowser = (await import('default-browser')).default;
+    const defaultBrowser = (await getDefaultBrowser()).name;
+
+    const availableBrowser = process.env.BROWSER;
 
     const shouldTryOpenChromiumWithAppleScript =
       process.platform === 'darwin' &&
-      (typeof browser !== 'string' || browser === OSX_CHROME);
+      (typeof availableBrowser !== 'string' || availableBrowser === OSX_CHROME);
 
     if (shouldTryOpenChromiumWithAppleScript) {
       // Will use the first open browser found from list
       const supportedChromiumBrowsers = [
+        defaultBrowser,
         'Google Chrome Canary',
         'Google Chrome',
         'Microsoft Edge',
         'Brave Browser',
         'Vivaldi',
         'Chromium',
+        'Arc',
       ];
 
-      for (const chromiumBrowser of supportedChromiumBrowsers) {
+      const uniqueSupportedChromiumBrowsers = Array.from(
+        new Set(supportedChromiumBrowsers),
+      );
+
+      for (const chromiumBrowser of uniqueSupportedChromiumBrowsers) {
         try {
           // Try our best to reuse existing tab
           // on OS X Google Chrome with AppleScript

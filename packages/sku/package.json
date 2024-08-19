@@ -138,7 +138,7 @@
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0",
     "wrap-ansi": "^7.0.0",
-    "x-default-browser": "^0.5.0"
+    "default-browser": "^5.2.1"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.3",

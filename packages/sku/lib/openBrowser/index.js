@@ -1,5 +1,5 @@
 // Inspired by create-react-app
-// https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/openBrowser.js
+// https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
 const execSync = require('node:child_process').execSync;
 const open = require('open');

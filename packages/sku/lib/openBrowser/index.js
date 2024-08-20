@@ -1,33 +1,64 @@
 // Inspired by create-react-app
-// https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/openBrowser.js
+// https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
 const execSync = require('node:child_process').execSync;
-const defaultBrowser = require('x-default-browser');
 const open = require('open');
 
 const isCI = require('../isCI');
 
-module.exports = (url) => {
-  if (process.env.OPEN_TAB !== 'false' && !isCI) {
-    defaultBrowser((err, res) => {
-      const useChrome = err ? false : res.isChrome;
+const OSX_CHROME = 'google chrome';
 
-      if (process.platform === 'darwin' && useChrome) {
+const supportedChromiumBrowsers = [
+  'Google Chrome',
+  'Google Chrome Canary',
+  'Microsoft Edge',
+  'Brave Browser',
+  'Vivaldi',
+  'Chromium',
+  'Arc',
+];
+
+module.exports = async (url) => {
+  if (process.env.OPEN_TAB !== 'false' && !isCI) {
+    const { default: getDefaultBrowser } = await import('default-browser');
+    const { name: defaultBrowser } = await getDefaultBrowser();
+
+    const availableBrowser = process.env.BROWSER;
+
+    const shouldTryOpenChromiumWithAppleScript =
+      process.platform === 'darwin' &&
+      (typeof availableBrowser !== 'string' ||
+        availableBrowser === OSX_CHROME) &&
+      supportedChromiumBrowsers.includes(defaultBrowser);
+
+    if (shouldTryOpenChromiumWithAppleScript) {
+      // Will use the first open browser found from list
+      const supportedChromiumBrowsersByPreference = new Set([
+        defaultBrowser,
+        ...supportedChromiumBrowsers,
+      ]);
+
+      for (const chromiumBrowser of supportedChromiumBrowsersByPreference) {
         try {
           // Try our best to reuse existing tab
           // on OS X Google Chrome with AppleScript
-          execSync('ps cax | grep "Google Chrome"');
-          execSync(`osascript openChrome.applescript "${encodeURI(url)}"`, {
-            cwd: __dirname,
-            stdio: 'ignore',
-          });
-          return;
+          execSync(`ps cax | grep "${chromiumBrowser}"`);
+          execSync(
+            `osascript openChrome.applescript "${encodeURI(
+              url,
+            )}" "${chromiumBrowser}"`,
+            {
+              cwd: __dirname,
+              stdio: 'ignore',
+            },
+          );
+          return true;
         } catch (e) {
           // Ignore errors.
         }
       }
+    }
 
-      open(url, { url: true });
-    });
+    open(url, { url: true });
   }
 };

@@ -22,5 +22,3 @@ A tab will be reused if:
 * The user has an existing tab open in a supported Chromium browser with the exact same URL.
 
 If any of the above is not true, a new tab will be created in the user's default browser.
-
-The supported Chromium browsers are:

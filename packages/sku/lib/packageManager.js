@@ -1,6 +1,6 @@
 // @ts-check
-const { cwd } = require('../lib/cwd');
-const { findRootSync } = require('@manypkg/find-root');
+const findUp = require('find-up');
+const path = require('node:path');
 const {
   resolveCommand,
   // eslint-plugin import can't resolve subpath imports inside js files
@@ -30,6 +30,13 @@ const getPackageManagerFromUserAgent = () => {
   return 'npm';
 };
 
+/** @type {Record<SupportedPackageManager, string>} */
+const lockfileByPackageManager = {
+  yarn: 'yarn.lock',
+  pnpm: 'pnpm-lock.yaml',
+  npm: 'package-lock.json',
+};
+
 /**
  * Get the package manager and root directory of the project. The package manager is derived from
  * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
@@ -41,14 +48,12 @@ const getPackageManager = () => {
     // @ts-expect-error skuArgs is missing the arguments parsed by minimist
     skuArgs?.packageManager || getPackageManagerFromUserAgent();
 
-  /** @type {string | null} */
-  let rootDir = null;
+  const lockFile = lockfileByPackageManager[packageManager];
+  const lockFilePath = findUp.sync(lockFile);
 
-  try {
-    rootDir = findRootSync(cwd()).rootDir;
-  } catch {
-    // No root found (occurs during `sku init`), `rootDir` will stay `null`
-  }
+  // No root found (occurs during `sku init`), `rootDir` will be `null`
+  /** @type {string | null} */
+  const rootDir = lockFilePath ? path.dirname(lockFilePath) : null;
 
   return { packageManager, rootDir };
 };

@@ -387,16 +387,16 @@ importers:
     devDependencies:
       '@storybook/addon-docs':
         specifier: ^8.2.8
-        version: 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+        version: 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.3(webpack@5.94.0(@swc/core@1.7.18)(esbuild@0.21.5))
+        version: 3.0.3(webpack@5.94.0(@swc/core@1.7.18))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.2.9(@swc/core@1.7.18)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+        version: 8.2.9(@swc/core@1.7.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.4
@@ -430,13 +430,13 @@ importers:
         version: link:../../test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.3(webpack@5.94.0(@swc/core@1.7.18))
+        version: 3.0.3(webpack@5.94.0(@swc/core@1.7.18)(esbuild@0.21.5))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.2.9(@swc/core@1.7.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
+        version: 8.2.9(@swc/core@1.7.18)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.4
@@ -559,9 +559,6 @@ importers:
       '@loadable/webpack-plugin':
         specifier: ^5.14.0
         version: 5.15.2(webpack@5.94.0(@swc/core@1.7.18)(esbuild@0.23.1))
-      '@manypkg/find-root':
-        specifier: ^2.2.0
-        version: 2.2.3
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.15
         version: 0.5.15(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-dev-server@5.0.4(debug@4.3.6)(webpack@5.94.0(@swc/core@1.7.18)(esbuild@0.23.1)))(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.18)(esbuild@0.23.1))
@@ -7001,6 +6998,7 @@ packages:
 
   react-focus-lock@2.13.0:
     resolution: {integrity: sha512-w7aIcTwZwNzUp2fYQDMICy+khFwVmKmOrLF8kNsPS+dz4Oi/oxoVJ2wCMVvX6rWGriM/+mYaTyp1MRmkcs2amw==}
+    deprecated: incorrect typescript definition
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -10156,12 +10154,12 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@storybook/addon-docs@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/addon-docs@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
       '@babel/core': 7.25.2
       '@mdx-js/react': 3.0.1(@types/react@18.3.4)(react@18.3.1)
-      '@storybook/blocks': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/csf-plugin': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/blocks': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/csf-plugin': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@storybook/global': 5.0.0
       '@storybook/react-dom-shim': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/react': 18.3.4
@@ -10191,7 +10189,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@storybook/blocks@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/blocks@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
       '@storybook/csf': 0.1.11
       '@storybook/global': 5.0.0
@@ -10380,7 +10378,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@storybook/csf-plugin@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/csf-plugin@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
       storybook: 8.2.9(@babel/preset-env@7.25.4)
       unplugin: 1.12.2

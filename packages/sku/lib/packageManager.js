@@ -1,6 +1,16 @@
+// @ts-check
 const { cwd } = require('../lib/cwd');
 const { findRootSync } = require('@manypkg/find-root');
-const { getCommand, INSTALL_PAGE } = require('@antfu/ni');
+const {
+  resolveCommand,
+  // eslint-plugin import can't resolve subpath imports inside js files
+  // eslint-disable-next-line import/no-unresolved
+} = require('package-manager-detector/commands');
+const {
+  INSTALL_PAGE,
+  // eslint-plugin import can't resolve subpath imports inside js files
+  // eslint-disable-next-line import/no-unresolved
+} = require('package-manager-detector/constants');
 
 const skuArgs = require('../config/args');
 
@@ -28,6 +38,7 @@ const getPackageManagerFromUserAgent = () => {
 const getPackageManager = () => {
   /** @type {SupportedPackageManager} */
   const packageManager =
+    // @ts-expect-error skuArgs is missing the arguments parsed by minimist
     skuArgs?.packageManager || getPackageManagerFromUserAgent();
 
   /** @type {string | null} */
@@ -43,6 +54,21 @@ const getPackageManager = () => {
 };
 
 const { rootDir, packageManager } = getPackageManager();
+
+/**
+ * @param {SupportedPackageManager} agent
+ * @param {import("package-manager-detector").Command} command
+ * @param {string[]} args
+ */
+const getCommand = (agent, command, args) => {
+  const resolvedCommand = resolveCommand(agent, command, args);
+
+  if (!resolvedCommand) {
+    throw new Error(`Unable to resolve command: ${agent} ${command} ${args}`);
+  }
+
+  return `${resolvedCommand.command} ${resolvedCommand.args.join(' ')}`;
+};
 
 const isYarn = packageManager === 'yarn';
 const isPnpm = packageManager === 'pnpm';
@@ -117,7 +143,7 @@ const getAddCommand = ({ type, logLevel, deps, exact }) => {
   return getCommand(packageManager, 'add', args);
 };
 
-const getInstallCommand = () => getCommand(packageManager, 'install');
+const getInstallCommand = () => getCommand(packageManager, 'install', []);
 
 const getWhyCommand = () => {
   const whyCommand = isPnpm ? 'why -r' : 'why';

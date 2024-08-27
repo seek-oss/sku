@@ -1,6 +1,6 @@
 const { isYarn } = require('../../lib/packageManager');
 const { lintExtensions } = require('../../lib/lint');
-const { getCommand } = require('@antfu/ni');
+const { getCommand } = require('../../lib/packageManager');
 
 /**
  * @type {import('lint-staged').Config}

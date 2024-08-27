@@ -164,6 +164,7 @@ module.exports = {
   isYarn,
   isPnpm,
   isNpm,
+  getCommand,
   getRunCommand,
   getExecuteCommand,
   getAddCommand,

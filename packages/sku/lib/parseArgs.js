@@ -1,4 +1,7 @@
+// @ts-check
+
 const minimist = require('minimist');
+
 /**
  * Supports parsing args that look like:
  * [/path/to/node/node, /path/to/sku, scriptName, arg1, arg2]

@@ -16,6 +16,24 @@ const skuArgs = require('../config/args');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
+const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+
+/**
+ * @param {string} packageManager
+ * @returns {SupportedPackageManager}
+ */
+const validatePackageManager = (packageManager) => {
+  if (!supportedPackageManagers.includes(packageManager)) {
+    throw new Error(
+      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
+        ', ',
+      )}`,
+    );
+  }
+
+  return /** @type {SupportedPackageManager} */ (packageManager);
+};
+
 const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
@@ -43,10 +61,9 @@ const lockfileByPackageManager = {
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
-  /** @type {SupportedPackageManager} */
-  const packageManager =
-    // @ts-expect-error skuArgs is missing the arguments parsed by minimist
-    skuArgs?.packageManager || getPackageManagerFromUserAgent();
+  const packageManager = validatePackageManager(
+    skuArgs?.packageManager || getPackageManagerFromUserAgent(),
+  );
 
   const lockFile = lockfileByPackageManager[packageManager];
   const lockFilePath = findUp.sync(lockFile);

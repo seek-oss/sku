@@ -1,3 +1,4 @@
+// @ts-check
 const { environments } = require('../context');
 const args = require('../config/args');
 const { bold, red } = require('chalk');
@@ -5,10 +6,10 @@ const { bold, red } = require('chalk');
 module.exports = () => {
   const environment = args.environment
     ? args.environment
-    : environments[0] || '';
+    : environments?.[0] || '';
 
   if (environment) {
-    if (environments.indexOf(environment) === -1) {
+    if (!environments?.includes(environment)) {
       console.log(red(`Unknown environment: ${bold(environment)}`));
       process.exit(1);
     }

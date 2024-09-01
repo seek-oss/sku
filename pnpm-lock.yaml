@@ -815,6 +815,9 @@ importers:
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
+      '@types/node':
+        specifier: ^18.19.31
+        version: 18.19.45
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.4

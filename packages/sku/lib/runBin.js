@@ -40,7 +40,7 @@ const spawnPromise = (commandPath, args, options) => {
 /**
  * @typedef Options
  * @property {string} packageName
- * @property {string | undefined} binName
+ * @property {string | undefined} [binName]
  * @property {string[] | undefined} args
  * @property {SpawnOptions | undefined} options
  */

@@ -1,12 +1,25 @@
 // @ts-check
-
 const minimist = require('minimist');
+
+// The eslint-jsdoc struggles to format this nicely
+/** @typedef {{
+ * script: string,
+ * argv: string[],
+ * config?: string,
+ * environment?: string,
+ * packageManager?: string,
+ * site?: string,
+ * stats?: string,
+ * debug?: boolean,
+ * 'delete-unused-keys'?: boolean,
+  watch?: boolean}} Args */
 
 /**
  * Supports parsing args that look like:
  * [/path/to/node/node, /path/to/sku, scriptName, arg1, arg2]
  *
  * @param {string[]} processArgv - should look like process.argv
+ * @returns {Args}
  */
 module.exports = (processArgv) => {
   /**

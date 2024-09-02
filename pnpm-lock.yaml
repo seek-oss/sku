@@ -393,7 +393,7 @@ importers:
         version: 3.0.3(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.21.5))
       '@storybook/react':
         specifier: ^8.1.5
-        version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+        version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
         version: 8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
@@ -411,7 +411,7 @@ importers:
         version: link:../../packages/sku
       storybook:
         specifier: ^8.1.5
-        version: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+        version: 8.2.9(@babel/preset-env@7.25.4)
 
   fixtures/styling:
     dependencies:
@@ -433,10 +433,10 @@ importers:
         version: 3.0.3(webpack@5.94.0(@swc/core@1.7.22))
       '@storybook/react':
         specifier: ^8.1.5
-        version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+        version: 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+        version: 8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.5
@@ -454,7 +454,7 @@ importers:
         version: link:../../packages/sku
       storybook:
         specifier: ^8.1.5
-        version: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+        version: 8.2.9(@babel/preset-env@7.25.4)
 
   fixtures/translations:
     dependencies:
@@ -599,7 +599,7 @@ importers:
         specifier: ^1.2.9
         version: 1.2.9(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.23.1))
       '@zendesk/babel-plugin-react-displayname':
-        specifier: zendesk/babel-plugin-react-displayname#7a837f2
+        specifier: https://github.com/zendesk/babel-plugin-react-displayname.git#7a837f2
         version: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.25.2)(@babel/preset-react@7.24.7(@babel/core@7.25.2))
       autoprefixer:
         specifier: ^10.3.1
@@ -10178,14 +10178,14 @@ snapshots:
       '@storybook/blocks': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
       '@storybook/csf-plugin': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
       '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/react-dom-shim': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/react': 18.3.5
       fs-extra: 11.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       rehype-external-links: 3.0.0
       rehype-slug: 6.0.0
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - supports-color
@@ -10219,7 +10219,7 @@ snapshots:
       memoizerific: 1.11.3
       polished: 4.3.1
       react-colorful: 5.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       telejson: 7.2.0
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
@@ -10229,7 +10229,7 @@ snapshots:
 
   '@storybook/builder-webpack5@8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
       browser-assert: 1.2.1
@@ -10246,7 +10246,7 @@ snapshots:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       style-loader: 3.3.4(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.21.5))
       terser-webpack-plugin: 5.3.10(@swc/core@1.7.22)(esbuild@0.21.5)(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.21.5))
       ts-dedent: 2.2.0
@@ -10269,7 +10269,7 @@ snapshots:
 
   '@storybook/builder-webpack5@8.2.9(@swc/core@1.7.22)(esbuild@0.23.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
       browser-assert: 1.2.1
@@ -10286,7 +10286,7 @@ snapshots:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       style-loader: 3.3.4(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.23.1))
       terser-webpack-plugin: 5.3.10(@swc/core@1.7.22)(esbuild@0.23.1)(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.23.1))
       ts-dedent: 2.2.0
@@ -10307,9 +10307,9 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/builder-webpack5@8.2.9(@swc/core@1.7.22)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
+  '@storybook/builder-webpack5@8.2.9(@swc/core@1.7.22)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
       browser-assert: 1.2.1
@@ -10326,7 +10326,7 @@ snapshots:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       style-loader: 3.3.4(webpack@5.94.0(@swc/core@1.7.22))
       terser-webpack-plugin: 5.3.10(@swc/core@1.7.22)(webpack@5.94.0(@swc/core@1.7.22))
       ts-dedent: 2.2.0
@@ -10357,7 +10357,7 @@ snapshots:
       '@types/cross-spawn': 6.0.6
       cross-spawn: 7.0.3
       globby: 14.0.2
-      jscodeshift: 0.15.2(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      jscodeshift: 0.15.2(@babel/preset-env@7.25.4)
       lodash: 4.17.21
       prettier: 3.3.3
       recast: 0.23.9
@@ -10367,14 +10367,14 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@storybook/components@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/components@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
 
-  '@storybook/core-webpack@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/core-webpack@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
       '@types/node': 18.19.48
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       ts-dedent: 2.2.0
 
   '@storybook/core@8.2.9':
@@ -10397,7 +10397,7 @@ snapshots:
 
   '@storybook/csf-plugin@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
     dependencies:
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       unplugin: 1.12.3
 
   '@storybook/csf@0.1.11':
@@ -10411,14 +10411,14 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/manager-api@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/manager-api@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
 
   '@storybook/preset-react-webpack@8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.5.4)(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.21.5))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
@@ -10430,7 +10430,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       tsconfig-paths: 4.2.0
       webpack: 5.94.0(@swc/core@1.7.22)(esbuild@0.21.5)
     optionalDependencies:
@@ -10444,8 +10444,8 @@ snapshots:
 
   '@storybook/preset-react-webpack@8.2.9(@swc/core@1.7.22)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.5.4)(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.23.1))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
@@ -10457,7 +10457,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       tsconfig-paths: 4.2.0
       webpack: 5.94.0(@swc/core@1.7.22)(esbuild@0.23.1)
     optionalDependencies:
@@ -10469,10 +10469,10 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/preset-react-webpack@8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
+  '@storybook/preset-react-webpack@8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)':
     dependencies:
-      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/core-webpack': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.5.4)(webpack@5.94.0(@swc/core@1.7.22))
       '@types/node': 18.19.48
       '@types/semver': 7.5.8
@@ -10484,7 +10484,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       tsconfig-paths: 4.2.0
       webpack: 5.94.0(@swc/core@1.7.22)
     optionalDependencies:
@@ -10496,9 +10496,9 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/preview-api@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/preview-api@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
 
   '@storybook/react-docgen-typescript-plugin@1.0.6--canary.9.0c3f3b7.0(typescript@5.5.4)(webpack@5.94.0(@swc/core@1.7.22)(esbuild@0.21.5))':
     dependencies:
@@ -10542,21 +10542,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/react-dom-shim@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/react-dom-shim@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
 
   '@storybook/react-webpack5@8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
       '@storybook/builder-webpack5': 8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/preset-react-webpack': 8.2.9(@swc/core@1.7.22)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@types/node': 18.19.48
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10571,11 +10571,11 @@ snapshots:
     dependencies:
       '@storybook/builder-webpack5': 8.2.9(@swc/core@1.7.22)(esbuild@0.23.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/preset-react-webpack': 8.2.9(@swc/core@1.7.22)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@types/node': 18.19.48
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10586,15 +10586,15 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/react-webpack5@8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
+  '@storybook/react-webpack5@8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)':
     dependencies:
-      '@storybook/builder-webpack5': 8.2.9(@swc/core@1.7.22)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
-      '@storybook/preset-react-webpack': 8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
-      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/builder-webpack5': 8.2.9(@swc/core@1.7.22)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
+      '@storybook/preset-react-webpack': 8.2.9(@swc/core@1.7.22)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
+      '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)
       '@types/node': 18.19.48
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10605,14 +10605,14 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/react@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))(typescript@5.5.4)':
+  '@storybook/react@8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))(typescript@5.5.4)':
     dependencies:
-      '@storybook/components': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/components': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/preview-api': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/react-dom-shim': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
-      '@storybook/theming': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
+      '@storybook/manager-api': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/preview-api': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/react-dom-shim': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.4))
+      '@storybook/theming': 8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
       '@types/node': 18.19.48
@@ -10627,16 +10627,16 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-element-to-jsx-string: 15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       semver: 7.6.3
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       util-deprecate: 1.0.2
     optionalDependencies:
       typescript: 5.5.4
 
-  '@storybook/theming@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)))':
+  '@storybook/theming@8.2.9(storybook@8.2.9(@babel/preset-env@7.25.4))':
     dependencies:
-      storybook: 8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      storybook: 8.2.9(@babel/preset-env@7.25.4)
 
   '@swc/core-darwin-arm64@1.7.22':
     optional: true
@@ -14821,7 +14821,7 @@ snapshots:
 
   jsbn@1.1.0: {}
 
-  jscodeshift@0.15.2(@babel/preset-env@7.25.4(@babel/core@7.25.2)):
+  jscodeshift@0.15.2(@babel/preset-env@7.25.4):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/parser': 7.25.6
@@ -16838,7 +16838,7 @@ snapshots:
     dependencies:
       internal-slot: 1.0.7
 
-  storybook@8.2.9(@babel/preset-env@7.25.4(@babel/core@7.25.2)):
+  storybook@8.2.9(@babel/preset-env@7.25.4):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/types': 7.25.6
@@ -16858,7 +16858,7 @@ snapshots:
       fs-extra: 11.2.0
       giget: 1.2.3
       globby: 14.0.2
-      jscodeshift: 0.15.2(@babel/preset-env@7.25.4(@babel/core@7.25.2))
+      jscodeshift: 0.15.2(@babel/preset-env@7.25.4)
       leven: 3.1.0
       ora: 5.4.1
       prettier: 3.3.3

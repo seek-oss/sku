@@ -47,7 +47,7 @@ const getSuggestedScript = (scriptName, options = { sudo: false }) => {
 
 /**
  * @param {string} scriptName
- * @param {Options | undefined} options
+ * @param {Options | undefined} [options]
  */
 const suggestScript = (scriptName, options) => {
   const suggestedScript = getSuggestedScript(scriptName, options);

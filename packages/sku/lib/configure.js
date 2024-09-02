@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const { writeFile, rm } = require('node:fs/promises');
 const path = require('node:path');
 

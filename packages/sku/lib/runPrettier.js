@@ -1,3 +1,4 @@
+// @ts-check
 const exists = require('./exists');
 const path = require('node:path');
 const chalk = require('chalk');
@@ -12,7 +13,7 @@ const prettierConfigPath = path.join(
 );
 
 /**
- * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }}
+ * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }} options
  */
 const runPrettier = async ({ write, listDifferent, paths }) => {
   console.log(
@@ -36,14 +37,6 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   const pathsToCheck = paths && paths.length > 0 ? paths : ['.'];
 
   prettierArgs.push(...pathsToCheck);
-  /*
-   * Show Prettier output with stdio: inherit
-   * The child process will use the parent process's stdin/stdout/stderr
-   * See https://nodejs.org/api/child_process.html#child_process_options_stdio
-   */
-  const processOptions = {
-    stdio: 'inherit',
-  };
 
   console.log(chalk.gray(`Paths: ${pathsToCheck.join(' ')}`));
 
@@ -51,7 +44,12 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
     await runBin({
       packageName: 'prettier',
       args: prettierArgs,
-      options: processOptions,
+      /**
+       * Show Prettier output with stdio: inherit
+       * The child process will use the parent process's stdin/stdout/stderr
+       * See https://nodejs.org/api/child_process.html#child_process_options_stdio
+       */
+      options: { stdio: 'inherit' },
     });
   } catch (exitCode) {
     if (exitCode === 2) {
@@ -77,6 +75,8 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
 };
 
 module.exports = {
+  /** @param {string[] | undefined} paths */
   check: (paths) => runPrettier({ listDifferent: true, paths }),
+  /** @param {string[] | undefined} paths */
   write: (paths) => runPrettier({ write: true, paths }),
 };

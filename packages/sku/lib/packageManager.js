@@ -1,10 +1,38 @@
-const { cwd } = require('../lib/cwd');
-const { findRootSync } = require('@manypkg/find-root');
-const { getCommand, INSTALL_PAGE } = require('@antfu/ni');
+// @ts-check
+const findUp = require('find-up');
+const path = require('node:path');
+const {
+  resolveCommand,
+  // eslint-plugin import can't resolve subpath imports inside js files
+  // eslint-disable-next-line import/no-unresolved
+} = require('package-manager-detector/commands');
+const {
+  INSTALL_PAGE,
+  // eslint-plugin import can't resolve subpath imports inside js files
+  // eslint-disable-next-line import/no-unresolved
+} = require('package-manager-detector/constants');
 
 const skuArgs = require('../config/args');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
+
+const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+
+/**
+ * @param {string} packageManager
+ * @returns {SupportedPackageManager}
+ */
+const validatePackageManager = (packageManager) => {
+  if (!supportedPackageManagers.includes(packageManager)) {
+    throw new Error(
+      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
+        ', ',
+      )}`,
+    );
+  }
+
+  return /** @type {SupportedPackageManager} */ (packageManager);
+};
 
 const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
@@ -20,29 +48,49 @@ const getPackageManagerFromUserAgent = () => {
   return 'npm';
 };
 
+/** @type {Record<SupportedPackageManager, string>} */
+const lockfileByPackageManager = {
+  yarn: 'yarn.lock',
+  pnpm: 'pnpm-lock.yaml',
+  npm: 'package-lock.json',
+};
+
 /**
  * Get the package manager and root directory of the project. The package manager is derived from
  * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
-  /** @type {SupportedPackageManager} */
-  const packageManager =
-    skuArgs?.packageManager || getPackageManagerFromUserAgent();
+  const packageManager = validatePackageManager(
+    skuArgs?.packageManager || getPackageManagerFromUserAgent(),
+  );
 
+  const lockFile = lockfileByPackageManager[packageManager];
+  const lockFilePath = findUp.sync(lockFile);
+
+  // No root found (occurs during `sku init`), `rootDir` will be `null`
   /** @type {string | null} */
-  let rootDir = null;
-
-  try {
-    rootDir = findRootSync(cwd()).rootDir;
-  } catch {
-    // No root found (occurs during `sku init`), `rootDir` will stay `null`
-  }
+  const rootDir = lockFilePath ? path.dirname(lockFilePath) : null;
 
   return { packageManager, rootDir };
 };
 
 const { rootDir, packageManager } = getPackageManager();
+
+/**
+ * @param {SupportedPackageManager} agent
+ * @param {import("package-manager-detector").Command} command
+ * @param {string[]} args
+ */
+const getCommand = (agent, command, args) => {
+  const resolvedCommand = resolveCommand(agent, command, args);
+
+  if (!resolvedCommand) {
+    throw new Error(`Unable to resolve command: ${agent} ${command} ${args}`);
+  }
+
+  return `${resolvedCommand.command} ${resolvedCommand.args.join(' ')}`;
+};
 
 const isYarn = packageManager === 'yarn';
 const isPnpm = packageManager === 'pnpm';
@@ -117,7 +165,7 @@ const getAddCommand = ({ type, logLevel, deps, exact }) => {
   return getCommand(packageManager, 'add', args);
 };
 
-const getInstallCommand = () => getCommand(packageManager, 'install');
+const getInstallCommand = () => getCommand(packageManager, 'install', []);
 
 const getWhyCommand = () => {
   const whyCommand = isPnpm ? 'why -r' : 'why';
@@ -133,6 +181,7 @@ module.exports = {
   isYarn,
   isPnpm,
   isNpm,
+  getCommand,
   getRunCommand,
   getExecuteCommand,
   getAddCommand,

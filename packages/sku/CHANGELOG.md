@@ -1,5 +1,15 @@
 # sku
 
+## 13.1.1
+
+### Patch Changes
+
+- Use HTTPS URL for `zendesk/babel-plugin-react-displayname` dependency to hopefully prevent it from being cloned via SSH ([#1039](https://github.com/seek-oss/sku/pull/1039))
+
+- Replace `@manypkg/find-root` dependency with `find-up` ([#1040](https://github.com/seek-oss/sku/pull/1040))
+
+- Replace `@antfu/ni` dependency with `package-manager-detector` ([#1040](https://github.com/seek-oss/sku/pull/1040))
+
 ## 13.1.0
 
 ### Minor Changes

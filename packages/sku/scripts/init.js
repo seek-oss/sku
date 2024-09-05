@@ -21,7 +21,7 @@ const banner = require('../lib/banner');
 const toPosixPath = require('../lib/toPosixPath');
 const trace = require('debug')('sku:init');
 const { fdir: Fdir } = require('fdir');
-const ejs = require('ejs');
+const { Eta } = require('eta');
 
 const args = require('../config/args');
 
@@ -180,9 +180,24 @@ const packageNameRegex =
     buildScript: getRunCommand('build'),
   };
 
+  const eta = new Eta({
+    views: templateDirectory,
+    // Defaults to `it`
+    varName: 'data',
+    // Defaults to `.eta`, setting it to an empty string lets us use any file extension, which
+    // mimics how `ejs` works by default
+    defaultExtension: '',
+    // Defaults to trimming trailing newlines, which we don't want
+    autoTrim: false,
+  });
+
   await Promise.all(
     templateFiles.map(async (file) => {
-      const fileContents = await ejs.renderFile(file, templateData);
+      const fileContents = await eta.renderAsync(
+        path.relative(templateDirectory, file),
+        templateData,
+      );
+
       const destination = getTemplateFileDestination(file);
 
       // Ensure folders exist before writing files to them

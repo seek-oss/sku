@@ -35,7 +35,7 @@ export function NextSteps({ environment }: NextStepsProps) {
             </Stack>
             <Stack space="medium" align="center">
               <Text size="large">
-                <Strong>{'<%= appName %>'}</Strong> has been successfully
+                <Strong>{'<%= data.appName %>'}</Strong> has been successfully
                 initialised.
               </Text>
               <Text>Current environment: {environment}</Text>

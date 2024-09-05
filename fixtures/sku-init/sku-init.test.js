@@ -60,17 +60,21 @@ describe('sku init', () => {
     expect(replaceDependencyVersions(JSON.parse(contents))).toMatchSnapshot();
   });
 
-  it.each(['sku.config.ts', '.gitignore', '.eslintignore', '.prettierignore'])(
-    'should create %s',
-    async (file) => {
-      const contents = await fs.readFile(
-        path.join(fixtureDirectory, projectName, file),
-        'utf-8',
-      );
+  it.each([
+    'sku.config.ts',
+    '.gitignore',
+    '.eslintignore',
+    '.prettierignore',
+    'README.md',
+    'src/App/NextSteps.tsx',
+  ])('should create %s', async (file) => {
+    const contents = await fs.readFile(
+      path.join(fixtureDirectory, projectName, file),
+      'utf-8',
+    );
 
-      expect(contents).toMatchSnapshot();
-    },
-  );
+    expect(contents).toMatchSnapshot();
+  });
 });
 
 /**

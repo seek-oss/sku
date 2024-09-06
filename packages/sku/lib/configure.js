@@ -10,7 +10,7 @@ const {
 } = require('../config/webpack/plugins/bundleAnalyzer');
 const prettierConfig = require('../config/prettier/prettierConfig');
 const eslintConfig = require('../config/eslint/eslintConfig');
-const createTSConfig = require('../config/typescript/tsconfig.js');
+const { createTsConfig } = require('../config/typescript/createTsConfig.js');
 const getCertificate = require('./certificate');
 const managedConfigBanner = require('./managedConfigBanner.js');
 
@@ -58,7 +58,7 @@ module.exports = async () => {
 
   // Generate TypeScript configuration
   const tsConfigFileName = 'tsconfig.json';
-  await writeFileToCWD(tsConfigFileName, createTSConfig());
+  await writeFileToCWD(tsConfigFileName, createTsConfig());
   gitIgnorePatterns.push(tsConfigFileName);
 
   const lintIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];

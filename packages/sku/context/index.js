@@ -10,7 +10,7 @@ const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
-const createTSConfig = require('../config/typescript/tsconfig.js');
+const { baseTsConfig } = require('../config/typescript/tsconfig.js');
 
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
@@ -38,7 +38,7 @@ const getSkuConfig = () => {
     };
   }
 
-  const unregister = register(createTSConfig()?.compilerOptions);
+  const unregister = register(baseTsConfig.compilerOptions);
 
   const newConfig = require(appSkuConfigPath);
 

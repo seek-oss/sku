@@ -63,7 +63,7 @@ describe('sku init', () => {
   it.each([
     'sku.config.ts',
     '.gitignore',
-    '.eslintignore',
+    'eslint.config.js',
     '.prettierignore',
     'README.md',
     'src/App/NextSteps.tsx',
@@ -73,7 +73,7 @@ describe('sku init', () => {
       'utf-8',
     );
 
-    expect(contents).toMatchSnapshot();
+    expect(contents.replace(process.cwd(), '<cwd>')).toMatchSnapshot();
   });
 });
 

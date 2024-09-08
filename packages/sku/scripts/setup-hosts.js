@@ -5,7 +5,7 @@ const track = require('../telemetry');
   try {
     await setupHosts();
     track.count('setup_hosts', { status: 'success' });
-  } catch (e) {
+  } catch {
     track.count('setup_hosts', { status: 'failed' });
 
     process.exitCode = 1;

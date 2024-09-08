@@ -53,7 +53,7 @@ module.exports = async (url) => {
             },
           );
           return true;
-        } catch (e) {
+        } catch {
           // Ignore errors.
         }
       }

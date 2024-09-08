@@ -1,7 +1,8 @@
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
-import * as jsonc from 'jsonc-parser';
+
 import { runSkuScriptInDir } from '@sku-private/test-utils';
+import * as jsonc from 'jsonc-parser';
 
 import prettierConfig from '../packages/sku/config/prettier/prettierConfig';
 
@@ -37,8 +38,6 @@ const removeAppDir = async (folder: string) =>
     force: true,
   });
 
-const skuPackagePath = path.dirname(require.resolve('sku/package.json'));
-
 describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
@@ -59,17 +58,7 @@ describe('configure', () => {
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate a eslint config', async () => {
-      const eslintrc = await readJsonC(appFolder, '.eslintrc');
-
-      expect(eslintrc.extends).toEqual([
-        require.resolve('eslint-config-seek', {
-          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
-          paths: [skuPackagePath],
-        }),
-        path.join(skuPackagePath, 'config/eslint/importOrderConfig.js'),
-      ]);
-    });
+    it.todo('should generate a eslint config');
 
     it(`should generate \`.gitignore\``, async () => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
@@ -77,24 +66,21 @@ describe('configure', () => {
       expect(ignoreContents).toMatchInlineSnapshot(`
         [
           ".eslintcache",
-          ".eslintrc",
           ".prettierrc",
           "coverage/",
           "dist/",
+          "eslint.config.js",
           "report/",
           "tsconfig.json",
         ]
       `);
     });
 
-    it.each(['.eslintignore', '.prettierignore'])(
-      'should generate $ignore',
-      async (ignore) => {
-        const ignoreContents = await readIgnore(appFolder, ignore);
+    it('should generate .prettierignore', async () => {
+      const ignoreContents = await readIgnore(appFolder, '.prettierignore');
 
-        expect(ignoreContents).toMatchSnapshot();
-      },
-    );
+      expect(ignoreContents).toMatchSnapshot();
+    });
   });
 
   describe('custom', () => {
@@ -117,18 +103,7 @@ describe('configure', () => {
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate a custom eslint config', async () => {
-      const eslintrc = await readJsonC(appFolderTS, '.eslintrc');
-
-      expect(eslintrc.extends).toEqual([
-        require.resolve('eslint-config-seek', {
-          // Explicitly resolve from sku's node_modules so we don't pick up the monorepo's eslint-config-seek
-          paths: [skuPackagePath],
-        }),
-        path.join(skuPackagePath, 'config/eslint/importOrderConfig.js'),
-      ]);
-      expect(eslintrc.rules['no-console']).toEqual(0);
-    });
+    it.todo('should generate a custom eslint config');
 
     it('should generate tsconfig config', async () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
@@ -142,9 +117,9 @@ describe('configure', () => {
       expect(ignoreContents).toMatchInlineSnapshot(`
         [
           ".eslintcache",
-          ".eslintrc",
           ".prettierrc",
           "coverage/",
+          "eslint.config.js",
           "foo/bar/",
           "report/",
           "tsconfig.json",
@@ -152,13 +127,10 @@ describe('configure', () => {
       `);
     });
 
-    it.each(['.eslintignore', '.prettierignore'])(
-      'should generate $ignore',
-      async (ignore) => {
-        const ignoreContents = await readIgnore(appFolderTS, ignore);
+    it('should generate .prettierignore', async () => {
+      const ignoreContents = await readIgnore(appFolderTS, '.prettierignore');
 
-        expect(ignoreContents).toMatchSnapshot();
-      },
-    );
+      expect(ignoreContents).toMatchSnapshot();
+    });
   });
 });

@@ -7,14 +7,14 @@ const internalRegex = `^(${paths.src
 
 const rootResolutionConfig = {
   settings: {
-    'import/internal-regex': internalRegex,
+    'import-x/internal-regex': internalRegex,
   },
 };
 
 module.exports = {
   ...(rootResolution ? rootResolutionConfig : undefined),
   rules: {
-    'import/order': [
+    'import-x/order': [
       'error',
       {
         'newlines-between': 'always',

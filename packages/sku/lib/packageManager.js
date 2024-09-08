@@ -4,12 +4,10 @@ const path = require('node:path');
 const {
   resolveCommand,
   // eslint-plugin import can't resolve subpath imports inside js files
-  // eslint-disable-next-line import/no-unresolved
 } = require('package-manager-detector/commands');
 const {
   INSTALL_PAGE,
   // eslint-plugin import can't resolve subpath imports inside js files
-  // eslint-disable-next-line import/no-unresolved
 } = require('package-manager-detector/constants');
 
 const skuArgs = require('../config/args');

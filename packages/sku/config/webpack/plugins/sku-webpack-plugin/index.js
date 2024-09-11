@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const defaultSupportedBrowsers = require('browserslist-config-seek');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const {
-  makeJsLoaders,
+  makeJsLoaders: _makeJsLoaders,
+  makeExperimentalSwcJsLoaders,
   makeExternalCssLoaders,
   makeSvgLoaders,
   TYPESCRIPT,
@@ -50,6 +51,10 @@ class SkuWebpackPlugin {
     } = this.options;
 
     const isProductionBuild = mode === 'production';
+
+    const makeJsLoaders = process.env.SKU_EXPERIMENTAL_SWC
+      ? makeExperimentalSwcJsLoaders
+      : _makeJsLoaders;
 
     const rules = [
       {

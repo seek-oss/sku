@@ -5,6 +5,60 @@ const makeJsLoaders = (options) => [
   },
 ];
 
+const { cwd } = require('../../../lib/cwd');
+
+const makeExperimentalSwcJsLoaders = (options) => [
+  {
+    loader: require.resolve('swc-loader'),
+    options: {
+      minify: false,
+      sourceMaps: true,
+      jsc: {
+        parser: {
+          jsx: true,
+          syntax: 'typescript',
+          tsx: true,
+        },
+        transform: {
+          react: {
+            development: process.env.NODE_ENV !== 'production',
+            refresh: options.hot && options.target === 'browser',
+            runtime: 'automatic',
+          },
+        },
+        target: 'es2020',
+        // Try changing to true and installing @swc/helpers
+        externalHelpers: true,
+        ...(options.rootResolution
+          ? {
+              baseUrl: cwd(),
+            }
+          : {}),
+        experimental: {
+          cacheRoot: 'node_modules/.cache/swc',
+          plugins: [
+            [
+              require.resolve('@swc/plugin-loadable-components'),
+              {
+                signatures: [
+                  {
+                    name: 'default',
+                    from: 'sku/@loadable/component',
+                  },
+                  {
+                    name: 'loadableReady',
+                    from: 'sku/@loadable/component',
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+    },
+  },
+];
+
 const makeExternalCssLoaders = (options = {}) => {
   const { target, isProductionBuild, MiniCssExtractPlugin, browserslist } =
     options;
@@ -69,6 +123,7 @@ const makeSvgLoaders = () => [
 
 module.exports = {
   makeJsLoaders,
+  makeExperimentalSwcJsLoaders,
   makeExternalCssLoaders,
   makeSvgLoaders,
 };

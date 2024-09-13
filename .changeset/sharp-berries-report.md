@@ -2,20 +2,22 @@
 'sku': minor
 ---
 
-Add Experimental `render` parameter in `renderApp`
+Add experimental `render` parameter in `renderApp`
 
 The new `render` method can be called instead of React DOM's `renderToString`. It is an asynchronous function, but once awaited should return the same result.
 
-This new function won't error when hitting suspending during a static render, instead it'll wait for all suspended boundaries to resolve.
+This new function won't error when hitting suspended components during a static render, instead it'll wait for all suspended boundaries to resolve.
+
+The function is being provided to enable teams to trial the behaviour, but is not encouraged for production use.
 
 ```diff
 -import { renderToString } from 'react-dom/server';
 
 const skuRender: Render<RenderContext> = {
-  -renderApp: ({ SkuProvider, environment }) => {
-  +renderApp: ({ SkuProvider, environment, render }) => {
-    -const appHtml = renderToString(
-    +const appHtml = render(
+-  renderApp: ({ SkuProvider, environment }) => {
++  renderApp: ({ SkuProvider, environment, render }) => {
+-    const appHtml = renderToString(
++    const appHtml = render(
       <SkuProvider>
         <App environment={environment as ClientContext['environment']} />
       </SkuProvider>,

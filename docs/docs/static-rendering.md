@@ -94,7 +94,7 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 
 > The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
 
-_**EXPERIMENTAL:** `renderApp` now provides a `render` function which can be used in-place of calling `React.renderToString`. See [Supporting React Suspense]_
+_**EXPERIMENTAL:** `renderApp` now provides a `render` function parameter which can be used in-place of calling `React.renderToString`. See [Supporting React Suspense]_
 
 ### provideClientContext
 
@@ -182,19 +182,21 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 
 ## Supporting React Suspense
 
-[React Suspense] allows renders to complete asynchronously, waiting for code or data to become available.
-When this occurs during static rendering [`renderToString`] will not work, as it expects the render to complete immediately.
+[React Suspense][react suspense documentation] allows renders to complete asynchronously, waiting for modules or data to become available.
+When this occurs during static rendering, [`renderToString`] will throw and error, as it expects the render to complete immediately.
 To avoid this error you have a few options:
 
 1. Never throw Suspense boundaries. Either don't use React Suspense in the first place, or ensure component don't suspend on the initial render.
 2. Use [`renderToPipeableStream`] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
 3. **Experimental:** sku provides a `render` function to your `renderApp` function that will perform 2. for you.
 
-Regardless of how you support it, please consider that [React Suspense] is a new feature for React, it's API hasn't been stable, and is partially undocumented. See [Note on Suspense-enabled data sources]:
+Regardless of how you support it, please consider that [React Suspense] is a new feature for React, it's APIs and use are rapidly evolving, and is partially undocumented (see [Note on Suspense-enabled data sources]).
 
 > Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
 > The requirements for implementing a Suspense-enabled data source are unstable and undocumented.
 > An official API for integrating data sources with Suspense will be released in a future version of React.
+>
+> - [React Suspense Documentation]
 
 **Example `renderApp`'s `render` parameter**
 
@@ -220,7 +222,7 @@ export default {
 } satisfies Render;
 ```
 
-[react suspense]: https://react.dev/reference/react/Suspense
+[react suspense documentation]: https://react.dev/reference/react/Suspense
 [renderToString]: https://react.dev/reference/react-dom/server/renderToString
 [renderToPipeableStream]: https://react.dev/reference/react-dom/server/renderToPipeableStream
 [note on suspense-enabled data sources]: https://react.dev/reference/react/Suspense#displaying-a-fallback-while-content-is-loading

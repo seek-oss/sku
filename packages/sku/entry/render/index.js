@@ -5,6 +5,8 @@ import makeExtractor from '../makeExtractor';
 import clientContextKey from '../clientContextKey';
 import createCSPHandler from '../csp';
 
+import { renderToString } from './render-to-string';
+
 import render from '__sku_alias__renderEntry';
 
 const libraryName = __SKU_LIBRARY_NAME__;
@@ -37,6 +39,7 @@ export default async (renderParams) => {
       ...renderContext,
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
+      render: renderToString,
     });
     if (renderContext.language) {
       debug('sku:render:language')(

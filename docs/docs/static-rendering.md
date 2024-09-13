@@ -183,7 +183,7 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 ## Supporting React Suspense
 
 [React Suspense][react suspense documentation] allows renders to complete asynchronously, waiting for modules or data to become available.
-When this occurs during static rendering, [`renderToString`] will throw and error, as it expects the render to complete immediately.
+When this occurs during static rendering, [`renderToString`] will throw an error, as it expects the render to complete immediately.
 To avoid this error you have a few options:
 
 1. Never throw Suspense boundaries. Either don't use React Suspense in the first place, or ensure component don't suspend on the initial render.

@@ -208,7 +208,7 @@ import App from './App';
 
 export default {
   renderApp: ({ SkuProvider, environment, site, route, render }) => {
-    const html = render(
+    const html = await render(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />
       </SkuProvider>,

@@ -17,7 +17,7 @@ const skuRender: Render<RenderContext> = {
 -  renderApp: ({ SkuProvider, environment }) => {
 +  renderApp: ({ SkuProvider, environment, render }) => {
 -    const appHtml = renderToString(
-+    const appHtml = render(
++    const appHtml = await render(
       <SkuProvider>
         <App environment={environment as ClientContext['environment']} />
       </SkuProvider>,

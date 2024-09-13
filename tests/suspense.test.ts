@@ -5,6 +5,7 @@ import {
   waitForUrls,
   getAppSnapshot,
 } from '@sku-private/test-utils';
+import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/suspense/sku.config.js'),
@@ -15,7 +16,7 @@ const url = `http://localhost:8202`;
 
 describe('suspense', () => {
   describe('build and serve', () => {
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);

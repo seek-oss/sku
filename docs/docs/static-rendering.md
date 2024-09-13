@@ -94,7 +94,7 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 
 > The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
 
-_**EXPERIMENTAL:** `renderApp` now provides a `render` function parameter which can be used in-place of calling `React.renderToString`. See [Supporting React Suspense]_
+_**EXPERIMENTAL:** `renderApp` now provides a `render` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
 
 ### provideClientContext
 

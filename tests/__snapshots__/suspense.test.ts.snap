@@ -15,10 +15,6 @@ CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com;"
-    >
     <meta charset="UTF-8">
     <title>
       hello-world
@@ -64,7 +60,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":1726199727203,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
+      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":1726205638552,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -162,7 +158,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":1726199732338,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
+      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":1726205643637,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"

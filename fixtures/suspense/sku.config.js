@@ -11,11 +11,6 @@ export default {
   environments: ['production'],
   port: 8202,
   publicPath: '/static/place',
-  cspEnabled: true,
-  cspExtraScriptSrcHosts: [
-    'https://error-tracking.com',
-    'https://fb-tracking.com',
-  ],
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],
 };

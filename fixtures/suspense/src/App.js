@@ -26,11 +26,9 @@ function TodoList() {
 }
 
 export default () => {
-  const [open, setOpen] = useState(true);
-
   return (
     <Suspense fallback={<div>loading...</div>}>
-      {open ? <TodoList /> : null}
+      <TodoList />
     </Suspense>
   );
 };

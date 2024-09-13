@@ -24,13 +24,10 @@ export function renderToString(
       onShellError(error) {
         debug('sku:render:renderToString')('Shell Error', {
           error,
-          event: 'onShellError',
         });
       },
       onShellReady() {
-        debug('sku:render:renderToString')('Shell Ready: No action', {
-          event: 'onShellReady',
-        });
+        debug('sku:render:renderToString')('Shell Ready: No action');
         if (!waitForAllReady) {
           startRender();
         }
@@ -38,9 +35,6 @@ export function renderToString(
       async onAllReady() {
         debug('sku:render:renderToString')(
           'All Ready: Writing Stream to String',
-          {
-            event: 'onAllReady',
-          },
         );
         if (waitForAllReady) {
           startRender();
@@ -49,7 +43,6 @@ export function renderToString(
       onError(error) {
         debug('sku:render:renderToString')('Render Error:', {
           error,
-          event: 'onError',
         });
         hasErrored = true;
         reject(error);
@@ -61,7 +54,7 @@ export function renderToString(
       }
       abort(
         new Error(
-          'Timeout. Render did not complete in time. Check for Suspense boundaries that are not resolving.',
+          'Timeout during Render. Render did not complete in time (5 seconds). You may may have a hanging promise or perpetually Suspense component.',
         ),
       );
     }, timeout);

@@ -58,7 +58,7 @@ export function renderToString(reactNode, { timeout = 5000 } = {}) {
       );
 
       abort(
-        'Timeout during Render. Render did not complete in time. You may may have a hanging promise or perpetually Suspense component.',
+        'Timeout during Render. Render did not complete in time. You may may have a hanging promise or perpetually suspended component.',
       );
     }, timeout);
 

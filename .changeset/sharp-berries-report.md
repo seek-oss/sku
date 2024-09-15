@@ -8,6 +8,8 @@ The new `renderToString` method can be called instead of React DOM's `renderToSt
 
 This new function won't error when hitting suspended components during a static render, instead it'll wait for all suspended boundaries to resolve.
 
+**Note:** `react-dom` is now an optional peer dependency for use in this function. All known uses of static rendering use `react-dom` and shouldn't need to make a change.
+
 The function is being provided to enable teams to trial the behaviour, but is not encouraged for production use.
 
 ```diff
@@ -32,3 +34,4 @@ const skuRender: Render<RenderContext> = {
 ```
 
 This new feature is experimental, and is likely to change in implementation or may be removed completely.
+

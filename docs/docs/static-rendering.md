@@ -199,7 +199,7 @@ It's APIs and use are rapidly evolving, and is partially undocumented (see [Note
 >
 > - [React Suspense Documentation]
 
-**Example `renderApp`'s `render` parameter**
+**Example `renderApp`'s `renderToString` parameter**
 
 ```tsx
 import React from 'react';

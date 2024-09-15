@@ -183,21 +183,19 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 ## Supporting React Suspense
 
 [React Suspense][react suspense documentation] allows renders to complete asynchronously, waiting for modules or data to become available.
-When this occurs during static rendering, [`renderToString`] will throw an error, as it expects the render to complete immediately.
+When this occurs during static rendering, [renderToString] will throw an error, as it expects the render to complete immediately.
 To avoid this error you have a few options:
 
 1. Never throw Suspense boundaries. Either don't use React Suspense in the first place, or ensure component don't suspend on the initial render.
-2. Use [`renderToPipeableStream`] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
+2. Use [renderToPipeableStream] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
 3. **Experimental:** sku provides a `renderToString` function to your `renderApp` function that will perform 2. for you.
 
-Regardless of how you support it, please consider that [React Suspense] is a new feature for React.
+Regardless of how you support it, please consider that [Suspense][react suspense documentation] is a new feature for React.
 It's APIs and use are rapidly evolving, and is partially undocumented (see [Note on Suspense-enabled data sources]).
 
-> Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
+> "Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
 > The requirements for implementing a Suspense-enabled data source are unstable and undocumented.
-> An official API for integrating data sources with Suspense will be released in a future version of React.
->
-> - [React Suspense Documentation]
+> An official API for integrating data sources with Suspense will be released in a future version of React." \- [React Suspense Documentation]
 
 **Example `renderApp`'s `renderToString` parameter**
 

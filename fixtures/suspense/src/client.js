@@ -9,7 +9,6 @@ import {
 import App from './App';
 
 export default ({ site, dehydratedState }) => {
-  console.log({ dehydratedState });
   const queryClient = new QueryClient({
     defaultOptions: { queries: { staleTime: 2 * 1000 } },
   });

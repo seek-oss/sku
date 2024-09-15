@@ -7,6 +7,7 @@ const useTodos = () =>
     enabled: true,
     queryKey: ['todos'],
     queryFn: async () => {
+      console.log('Loading todos...');
       await new Promise((resolve) => setTimeout(resolve, 10));
       return [`todo1`, `todo2`, `todo3`];
     },

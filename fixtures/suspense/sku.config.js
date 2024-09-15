@@ -10,7 +10,7 @@ export default {
   ],
   environments: ['production'],
   port: 8202,
-  publicPath: '/static/place',
+  publicPath: '/static/suspense',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],
 };

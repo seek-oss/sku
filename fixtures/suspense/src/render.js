@@ -15,17 +15,24 @@ export default {
       defaultOptions: { queries: { staleTime: 60 * 1000 } },
     });
 
+    const appHtml = await renderToString(
+      <SkuProvider>
+        <StaticRouter location={route} context={{}}>
+          <QueryClientProvider client={queryClient}>
+            <App site={site} />
+          </QueryClientProvider>
+        </StaticRouter>
+      </SkuProvider>,
+    );
+
+    const dehydratedState = dehydrate(queryClient);
+
+    // Set deterministic future dataUpdatedAt for snapshot consistency
+    dehydratedState.queries[0].state.dataUpdatedAt = 4323283200000;
+
     return {
-      appHtml: await renderToString(
-        <SkuProvider>
-          <StaticRouter location={route} context={{}}>
-            <QueryClientProvider client={queryClient}>
-              <App site={site} />
-            </QueryClientProvider>
-          </StaticRouter>
-        </SkuProvider>,
-      ),
-      dehydratedState: dehydrate(queryClient),
+      appHtml,
+      dehydratedState,
     };
   },
 

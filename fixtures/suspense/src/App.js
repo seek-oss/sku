@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 
 const useTodos = () =>
   useQuery({
@@ -7,9 +7,7 @@ const useTodos = () =>
     enabled: true,
     queryKey: ['todos'],
     queryFn: async () => {
-      console.log('fetching todos...');
       await new Promise((resolve) => setTimeout(resolve, 10));
-      console.log('fetched todos!');
       return [`todo1`, `todo2`, `todo3`];
     },
   });

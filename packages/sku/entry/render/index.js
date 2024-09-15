@@ -39,7 +39,7 @@ export default async (renderParams) => {
       ...renderContext,
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
-      render: (node) => renderToString(node),
+      renderToString: (node) => renderToString(node),
     });
     if (renderContext.language) {
       debug('sku:render:language')(

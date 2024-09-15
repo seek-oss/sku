@@ -94,7 +94,7 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 
 > The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
 
-_**EXPERIMENTAL:** `renderApp` now provides a `render` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
+_**EXPERIMENTAL:** `renderApp` provides a `renderToString` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
 
 ### provideClientContext
 
@@ -188,9 +188,10 @@ To avoid this error you have a few options:
 
 1. Never throw Suspense boundaries. Either don't use React Suspense in the first place, or ensure component don't suspend on the initial render.
 2. Use [`renderToPipeableStream`] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
-3. **Experimental:** sku provides a `render` function to your `renderApp` function that will perform 2. for you.
+3. **Experimental:** sku provides a `renderToString` function to your `renderApp` function that will perform 2. for you.
 
-Regardless of how you support it, please consider that [React Suspense] is a new feature for React, it's APIs and use are rapidly evolving, and is partially undocumented (see [Note on Suspense-enabled data sources]).
+Regardless of how you support it, please consider that [React Suspense] is a new feature for React.
+It's APIs and use are rapidly evolving, and is partially undocumented (see [Note on Suspense-enabled data sources]).
 
 > Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
 > The requirements for implementing a Suspense-enabled data source are unstable and undocumented.
@@ -207,8 +208,8 @@ import type { Render } from 'sku';
 import App from './App';
 
 export default {
-  renderApp: ({ SkuProvider, environment, site, route, render }) => {
-    const html = await render(
+  renderApp: ({ SkuProvider, environment, site, route, renderToString }) => {
+    const html = await renderToString(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />
       </SkuProvider>,

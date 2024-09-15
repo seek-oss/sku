@@ -10,13 +10,13 @@ import {
 import App from './App';
 
 export default {
-  renderApp: async ({ SkuProvider, route, site, render }) => {
+  renderApp: async ({ SkuProvider, route, site, renderToString }) => {
     const queryClient = new QueryClient({
       defaultOptions: { queries: { staleTime: 60 * 1000 } },
     });
 
     return {
-      appHtml: await render(
+      appHtml: await renderToString(
         <SkuProvider>
           <StaticRouter location={route} context={{}}>
             <QueryClientProvider client={queryClient}>

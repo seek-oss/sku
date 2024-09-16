@@ -599,7 +599,7 @@ importers:
         specifier: ^1.2.9
         version: 1.2.9(webpack@5.94.0(@swc/core@1.7.26)(esbuild@0.23.1))
       '@zendesk/babel-plugin-react-displayname':
-        specifier: https://github.com/zendesk/babel-plugin-react-displayname.git#7a837f2
+        specifier: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2
         version: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.25.2)(@babel/preset-react@7.24.7(@babel/core@7.25.2))
       autoprefixer:
         specifier: ^10.3.1

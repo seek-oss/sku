@@ -191,7 +191,7 @@ To avoid this error you have a few options:
 3. **Experimental:** sku provides a `renderToString` function to your `renderApp` function that will perform option 2 for you.
 
 Regardless of how you support it, please consider that [Suspense][react suspense documentation] is a new feature for React.
-It's APIs and use are rapidly evolving, and is partially undocumented (see [Note on Suspense-enabled data sources]).
+Its APIs and use are rapidly evolving, and it is partially undocumented (see [Note on Suspense-enabled data sources]).
 
 > "Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
 > The requirements for implementing a Suspense-enabled data source are unstable and undocumented.

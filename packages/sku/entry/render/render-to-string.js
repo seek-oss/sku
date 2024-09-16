@@ -3,6 +3,8 @@ import { Writable } from 'node:stream';
 import debug from 'debug';
 import { renderToPipeableStream } from 'react-dom/server';
 
+const RENDER_TIMEOUT_MS = 5000;
+
 let hasWarned = false;
 
 /**
@@ -10,14 +12,14 @@ let hasWarned = false;
  * Will await all Suspense boundaries before resolving the promise.
  * @returns Promise that resolves with the rendered HTML string.
  */
-export function renderToString(reactNode, { timeout = 5000 } = {}) {
+export function renderToStringAsync(reactNode) {
   if (!hasWarned) {
     console.log(
-      "Warning: The use of `renderApp`'s `renderToString` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",
+      "Warning: The use of `renderApp`'s `renderToStringAsync` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",
     );
     hasWarned = true;
   }
-  debug('sku:render:renderToString')('Starting render');
+  debug('sku:render:renderToStringAsync')('Starting render');
 
   return new Promise((resolve, reject) => {
     let hasErrored = false;
@@ -26,22 +28,22 @@ export function renderToString(reactNode, { timeout = 5000 } = {}) {
     const { pipe, abort } = renderToPipeableStream(reactNode, {
       onShellError(error) {
         // A Shell Error is unrecoverable. Reject so that Error handling can resolve the response.
-        debug('sku:render:renderToString')('Shell Render Error:', error);
+        debug('sku:render:renderToStringAsync')('Shell Render Error:', error);
         hasErrored = true;
         reject(error);
       },
 
       onError(error) {
         // Non-shell errors are recoverable. HTML shell can still be returned.
-        debug('sku:render:renderToString')('Render Error:', error);
+        debug('sku:render:renderToStringAsync')('Render Error:', error);
       },
 
       onShellReady() {
-        debug('sku:render:renderToString')('Shell Ready: No action');
+        debug('sku:render:renderToStringAsync')('Shell Ready: No action');
       },
 
       async onAllReady() {
-        debug('sku:render:renderToString')(
+        debug('sku:render:renderToStringAsync')(
           'All Ready: Ready to stream to string',
         );
         startStreamToString();
@@ -53,20 +55,20 @@ export function renderToString(reactNode, { timeout = 5000 } = {}) {
         return;
       }
 
-      debug('sku:render:renderToString')(
-        `Timeout after having not errored or rendered in ${timeout}ms`,
+      debug('sku:render:renderToStringAsync')(
+        `Timeout after having not errored or rendered in ${RENDER_TIMEOUT_MS}ms`,
       );
 
       abort(
         'Timeout during Render. Render did not complete in time. You may may have a hanging promise or perpetually suspended component.',
       );
-    }, timeout);
+    }, RENDER_TIMEOUT_MS);
 
     function startStreamToString() {
       if (hasErrored) {
         return;
       }
-      debug('sku:render:renderToString')('Starting streaming to string');
+      debug('sku:render:renderToStringAsync')('Starting streaming to string');
       hasRendered = true;
       let html = '';
       const stream = new Writable({
@@ -75,7 +77,9 @@ export function renderToString(reactNode, { timeout = 5000 } = {}) {
           callback();
         },
         destroy(callback) {
-          debug('sku:render:renderToString')('Stream ended. Returning HTML');
+          debug('sku:render:renderToStringAsync')(
+            'Stream ended. Returning HTML',
+          );
           resolve(html);
           callback();
         },

@@ -94,7 +94,7 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 
 > The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
 
-_**EXPERIMENTAL:** `renderApp` provides a `renderToString` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
+_**EXPERIMENTAL:** `renderApp` provides a `renderToStringAsync` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
 
 ### provideClientContext
 
@@ -188,7 +188,7 @@ To avoid this error you have a few options:
 
 1. Never suspend a component during an initial render. Either don't use React Suspense in the first place, or ensure suspended components aren't used until after the initial load.
 2. Use [renderToPipeableStream] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
-3. **Experimental:** sku provides a `renderToString` function to your `renderApp` function that will perform option 2 for you.
+3. **Experimental:** sku provides a `renderToStringAsync` function to your `renderApp` function that will perform option 2 for you.
 
 Regardless of how you support it, please consider that [Suspense][react suspense documentation] is a new feature for React.
 Its APIs and use are rapidly evolving, and it is partially undocumented (see [Note on Suspense-enabled data sources]).
@@ -197,7 +197,7 @@ Its APIs and use are rapidly evolving, and it is partially undocumented (see [No
 > The requirements for implementing a Suspense-enabled data source are unstable and undocumented.
 > An official API for integrating data sources with Suspense will be released in a future version of React." \- [React Suspense Documentation]
 
-**Example `renderApp`'s `renderToString` parameter**
+**Example `renderApp`'s `renderToStringAsync` parameter**
 
 ```tsx
 import React from 'react';
@@ -211,9 +211,9 @@ export default {
     environment,
     site,
     route,
-    renderToString,
+    renderToStringAsync,
   }) => {
-    const html = await renderToString(
+    const html = await renderToStringAsync(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />
       </SkuProvider>,

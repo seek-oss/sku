@@ -5,7 +5,7 @@ import makeExtractor from '../makeExtractor';
 import clientContextKey from '../clientContextKey';
 import createCSPHandler from '../csp';
 
-import { renderToString } from './render-to-string';
+import { renderToStringAsync } from './render-to-string';
 
 import render from '__sku_alias__renderEntry';
 
@@ -39,7 +39,7 @@ export default async (renderParams) => {
       ...renderContext,
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
-      renderToString: (node) => renderToString(node),
+      renderToStringAsync,
     });
     if (renderContext.language) {
       debug('sku:render:language')(

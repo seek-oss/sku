@@ -1,5 +1,13 @@
 # sku
 
+## 13.1.3
+
+### Patch Changes
+
+- Reverts #1039 ([#1053](https://github.com/seek-oss/sku/pull/1053))
+
+  This change was causing a dependency to be cloned via `git` which may not be available in all CI envrionments.
+
 ## 13.1.2
 
 ### Patch Changes

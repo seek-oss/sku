@@ -13,7 +13,7 @@ let hasWarned = false;
 export function renderToString(reactNode, { timeout = 5000 } = {}) {
   if (!hasWarned) {
     console.log(
-      "Warning: The use of `renderApp`'s `renderToString` parameter is experimental. It's API and behaviour may change, and you may experience unexpected behaviours.",
+      "Warning: The use of `renderApp`'s `renderToString` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",
     );
     hasWarned = true;
   }

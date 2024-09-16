@@ -1,5 +1,13 @@
 # sku
 
+## 13.1.2
+
+### Patch Changes
+
+- Replace `ejs` dependency with `eta` ([#1044](https://github.com/seek-oss/sku/pull/1044))
+
+- Update `didyoumean2` dependency to fix issue when running `npx sku init` ([#1051](https://github.com/seek-oss/sku/pull/1051))
+
 ## 13.1.1
 
 ### Patch Changes

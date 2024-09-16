@@ -9,7 +9,7 @@ export default {
     },
   ],
   environments: ['production'],
-  port: 8202,
+  port: 8203,
   publicPath: '/static/suspense',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],

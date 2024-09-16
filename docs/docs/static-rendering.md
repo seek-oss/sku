@@ -186,7 +186,7 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 When this occurs during static rendering, [renderToString] will throw an error, as it expects the render to complete immediately.
 To avoid this error you have a few options:
 
-1. Never throw Suspense boundaries. Either don't use React Suspense in the first place, or ensure component don't suspend on the initial render.
+1. Never suspend a component during an initial render. Either don't use React Suspense in the first place, or ensure suspended components aren't used until after the initial load.
 2. Use [renderToPipeableStream] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
 3. **Experimental:** sku provides a `renderToString` function to your `renderApp` function that will perform option 2 for you.
 
@@ -206,7 +206,13 @@ import type { Render } from 'sku';
 import App from './App';
 
 export default {
-  renderApp: async ({ SkuProvider, environment, site, route, renderToString }) => {
+  renderApp: async ({
+    SkuProvider,
+    environment,
+    site,
+    route,
+    renderToString,
+  }) => {
     const html = await renderToString(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />

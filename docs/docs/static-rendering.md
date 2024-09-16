@@ -206,7 +206,7 @@ import type { Render } from 'sku';
 import App from './App';
 
 export default {
-  renderApp: ({ SkuProvider, environment, site, route, renderToString }) => {
+  renderApp: async ({ SkuProvider, environment, site, route, renderToString }) => {
     const html = await renderToString(
       <SkuProvider>
         <App environment={environment} site={site} route={route} />

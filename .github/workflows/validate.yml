@@ -20,7 +20,7 @@ jobs:
   test:
     name: Lint & Test
     needs: skip_check
-    if: needs.skip_check.outputs.should_skip != 'true'
+    if: needs.skip_check.outputs.should_skip != 'true' && github.ref != 'refs/heads/changeset-release/master'
     runs-on: ubuntu-latest
     env:
       CI: true

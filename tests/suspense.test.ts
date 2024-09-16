@@ -12,7 +12,7 @@ const appDir = path.dirname(
 );
 
 const targetDirectory = `${appDir}/dist`;
-const url = `http://localhost:8202`;
+const url = `http://localhost:8203`;
 
 describe('suspense', () => {
   describe('build and serve', () => {

@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "13.1.1",
+  "version": "13.1.2",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
@@ -93,7 +93,7 @@
     "debug": "^4.3.1",
     "dedent": "^1.5.1",
     "default-browser": "^5.2.1",
-    "didyoumean2": "^6.0.1",
+    "didyoumean2": "^7.0.2",
     "ensure-gitignore": "^1.1.2",
     "env-ci": "^7.0.0",
     "esbuild": ">0.19.7 <1",

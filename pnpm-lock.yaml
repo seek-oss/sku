@@ -9,11 +9,11 @@ importers:
   .:
     devDependencies:
       '@changesets/cli':
-        specifier: ^2.13.0
+        specifier: ^2.27.0
         version: 2.27.8
       '@changesets/get-github-info':
-        specifier: ^0.4.5
-        version: 0.4.5
+        specifier: ^0.6.0
+        version: 0.6.0
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:test-utils
@@ -869,7 +869,7 @@ importers:
         version: 1.1.11(react@18.3.1)
       braid-design-system:
         specifier: ^32.0.0
-        version: 32.23.1(@types/react@18.3.5)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.1.1(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1))
+        version: 32.23.1(@types/react@18.3.5)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.1.2(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1))
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -1711,8 +1711,8 @@ packages:
   '@changesets/get-dependents-graph@2.1.2':
     resolution: {integrity: sha512-sgcHRkiBY9i4zWYBwlVyAjEM9sAzs4wYVwJUdnbDLnVG3QwAaia1Mk5P8M7kraTOZN+vBET7n8KyB0YXCbFRLQ==}
 
-  '@changesets/get-github-info@0.4.5':
-    resolution: {integrity: sha512-tknjYi9ti3AIbGrDHfeJ1bBbXJi/FdV6AWH0oA4JFrCRe2IoczAJo2MeU+3banQx5TlL1fOTeUOM1YAK+sJB2g==}
+  '@changesets/get-github-info@0.6.0':
+    resolution: {integrity: sha512-v/TSnFVXI8vzX9/w3DU2Ol+UlTZcu3m0kXTjTT4KlAdwSvwutcByYwyYn9hwerPWfPkT2JfpoX0KgvCEi8Q/SA==}
 
   '@changesets/get-release-plan@4.0.4':
     resolution: {integrity: sha512-SicG/S67JmPTrdcc9Vpu0wSQt7IiuN0dc8iR5VScnnTVPfIaLvKmEGRvIaF0kcn8u5ZqLbormZNTO77bCEvyWw==}
@@ -3302,9 +3302,6 @@ packages:
   async@2.6.4:
     resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==}
 
-  async@3.2.6:
-    resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
-
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
@@ -4068,10 +4065,6 @@ packages:
   devtools-protocol@0.0.1312386:
     resolution: {integrity: sha512-DPnhUXvmvKT2dFA/j7B+riVLUt9Q6RKJlcppojL5CoRywJJKLDYnRlw0gTFKfgDPHP5E04UoB71SxoJlVZy8FA==}
 
-  didyoumean2@6.0.1:
-    resolution: {integrity: sha512-PSy0zQwMg5O+LjT5Mz7vnKC8I7DfWLPF6M7oepqW7WP5mn2CY3hz46xZOa1GJY+KVfyXhdmz6+tdgXwrHlZc5g==}
-    engines: {node: ^16.14.0 || >=18.12.0}
-
   didyoumean2@7.0.2:
     resolution: {integrity: sha512-zK9I8vmMjmhwhFv52Trd4we5cr++mvhPp2HWswZK/+8vmozMNR7WelZqtCNV+4OHspgKfMvHexBp9wxgCGs56w==}
     engines: {node: ^18.12.0 || >=20.9.0}
@@ -4176,11 +4169,6 @@ packages:
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
-
-  ejs@3.1.10:
-    resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
-    engines: {node: '>=0.10.0'}
-    hasBin: true
 
   electron-to-chromium@1.5.23:
     resolution: {integrity: sha512-mBhODedOXg4v5QWwl21DjM5amzjmI1zw9EPrPK/5Wx7C8jt33bpZNrC7OhHUG3pxRtbLpr3W2dXT+Ph1SsfRZA==}
@@ -4613,9 +4601,6 @@ packages:
   file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
-
-  filelist@1.0.4:
-    resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
 
   filename-reserved-regex@2.0.0:
     resolution: {integrity: sha512-lc1bnsSr4L4Bdif8Xb/qrtokGbq5zlsms/CYH8PP+WtCkGNF65DPiQY8vG3SakEdRn8Dlnm+gW/qWKKjS5sZzQ==}
@@ -5443,11 +5428,6 @@ packages:
   iterator.prototype@1.1.2:
     resolution: {integrity: sha512-DR33HMMr8EzwuRL8Y9D3u2BMj8+RqSE850jfGu59kS7tbmPLzGkZmVSfyCFSDxuZiEY6Rzt3T2NA/qU+NwVj1w==}
 
-  jake@10.9.2:
-    resolution: {integrity: sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   java-properties@1.0.2:
     resolution: {integrity: sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==}
     engines: {node: '>= 0.6.0'}
@@ -5968,10 +5948,6 @@ packages:
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
-
-  minimatch@5.1.6:
-    resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
-    engines: {node: '>=10'}
 
   minimatch@8.0.4:
     resolution: {integrity: sha512-W0Wvr9HyFXZRGIDgCicunpQ299OKXs9RgZfaukz4qAW/pJhcpUfupc9c+OObPOFueNy8VSrZgEmDtk6Kh4WzDA==}
@@ -7228,8 +7204,8 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
-  sku@13.1.1:
-    resolution: {integrity: sha512-LclZC+PPCCk1QZ4oIrW8WfTLC97w/hG+jEcH69rqK+g+v4kizWpK3b4PDwzMrwHU1v/GMFxI5au3AnuMbuE+KQ==}
+  sku@13.1.2:
+    resolution: {integrity: sha512-+rUWqebEr8LbeypgtMZcy1OzB7DvHHfh1DO7Ep5gHEUtacgs12I9tTOL2Q4dFTeSN2ED1LQFJhwu86hkTqdhwA==}
     engines: {node: '>=18.20'}
     hasBin: true
     peerDependencies:
@@ -9149,7 +9125,7 @@ snapshots:
       picocolors: 1.1.0
       semver: 7.6.3
 
-  '@changesets/get-github-info@0.4.5':
+  '@changesets/get-github-info@0.6.0':
     dependencies:
       dataloader: 1.4.0
       node-fetch: 2.7.0
@@ -11119,8 +11095,6 @@ snapshots:
     dependencies:
       lodash: 4.17.21
 
-  async@3.2.6: {}
-
   asynckit@0.4.0: {}
 
   atob@2.1.2: {}
@@ -11363,7 +11337,7 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  braid-design-system@32.23.1(@types/react@18.3.5)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.1.1(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)):
+  braid-design-system@32.23.1(@types/react@18.3.5)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.1.2(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)):
     dependencies:
       '@capsizecss/core': 4.1.2
       '@capsizecss/metrics': 3.2.0
@@ -11387,7 +11361,7 @@ snapshots:
       react-is: 18.3.1
       react-popper-tooltip: 4.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-remove-scroll: 2.6.0(@types/react@18.3.5)(react@18.3.1)
-      sku: 13.1.1(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)
+      sku: 13.1.2(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)
       utility-types: 3.11.0
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -12052,12 +12026,6 @@ snapshots:
 
   devtools-protocol@0.0.1312386: {}
 
-  didyoumean2@6.0.1:
-    dependencies:
-      '@babel/runtime': 7.25.6
-      fastest-levenshtein: 1.0.16
-      lodash.deburr: 4.1.0
-
   didyoumean2@7.0.2:
     dependencies:
       '@babel/runtime': 7.25.6
@@ -12207,10 +12175,6 @@ snapshots:
   duplexer@0.1.2: {}
 
   ee-first@1.1.1: {}
-
-  ejs@3.1.10:
-    dependencies:
-      jake: 10.9.2
 
   electron-to-chromium@1.5.23: {}
 
@@ -12872,10 +12836,6 @@ snapshots:
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.2.0
-
-  filelist@1.0.4:
-    dependencies:
-      minimatch: 5.1.6
 
   filename-reserved-regex@2.0.0: {}
 
@@ -13789,13 +13749,6 @@ snapshots:
       reflect.getprototypeof: 1.0.6
       set-function-name: 2.0.2
 
-  jake@10.9.2:
-    dependencies:
-      async: 3.2.6
-      chalk: 4.1.2
-      filelist: 1.0.4
-      minimatch: 3.1.2
-
   java-properties@1.0.2: {}
 
   javascript-stringify@2.1.0: {}
@@ -14528,10 +14481,6 @@ snapshots:
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
-
-  minimatch@5.1.6:
-    dependencies:
-      brace-expansion: 2.0.1
 
   minimatch@8.0.4:
     dependencies:
@@ -15829,7 +15778,7 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  sku@13.1.1(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1):
+  sku@13.1.2(@storybook/react-webpack5@8.3.0(@swc/core@1.7.26)(esbuild@0.23.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)(typescript@5.5.4))(@types/node@18.19.50)(@types/react@18.3.5)(react@18.3.1)(terser@5.32.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/plugin-transform-react-constant-elements': 7.25.1(@babel/core@7.25.2)
@@ -15875,8 +15824,7 @@ snapshots:
       debug: 4.3.7(supports-color@8.1.1)
       dedent: 1.5.3(babel-plugin-macros@3.1.0)
       default-browser: 5.2.1
-      didyoumean2: 6.0.1
-      ejs: 3.1.10
+      didyoumean2: 7.0.2
       ensure-gitignore: 1.2.0
       env-ci: 7.3.0
       esbuild: 0.23.1
@@ -15884,6 +15832,7 @@ snapshots:
       escape-string-regexp: 4.0.0
       eslint: 8.57.0
       eslint-config-seek: 13.1.1(eslint@8.57.0)(jest@29.7.0(@types/node@18.19.50)(babel-plugin-macros@3.1.0))(typescript@5.5.4)
+      eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.0
       fastest-validator: 1.19.0

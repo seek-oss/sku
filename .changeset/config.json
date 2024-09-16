@@ -1,9 +1,15 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@1.5.0/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@3.0.3/schema.json",
   "changelog": "./changelog",
   "commit": false,
   "linked": [],
   "access": "public",
-  "ignore": ["@sku-fixtures/*", "@sku-private/*"],
-  "baseBranch": "master"
+  "baseBranch": "master",
+  "privatePackages": {
+    "tag": false,
+    "version": false
+  },
+  "snapshot": {
+    "useCalculatedVersion": true
+  }
 }

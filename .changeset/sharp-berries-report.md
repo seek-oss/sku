@@ -17,7 +17,7 @@ The function is being provided to enable teams to trial the behaviour, but is no
 
 const skuRender: Render<RenderContext> = {
 -  renderApp: ({ SkuProvider, environment }) => {
-+  renderApp: ({ SkuProvider, environment, renderToString }) => {
++  renderApp: async ({ SkuProvider, environment, renderToString }) => {
 -    const appHtml = renderToString(
 +    const appHtml = await renderToString(
       <SkuProvider>

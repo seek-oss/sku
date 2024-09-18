@@ -42,8 +42,8 @@ importers:
         specifier: ^9.10.0
         version: 9.10.0(jiti@1.21.6)
       eslint-config-seek:
-        specifier: 0.0.0-eslint-9-etc-20240908074137
-        version: 0.0.0-eslint-9-etc-20240908074137(eslint-plugin-import@2.29.1(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4)
+        specifier: 0.0.0-eslint-9-etc-20240918015504
+        version: 0.0.0-eslint-9-etc-20240918015504(eslint-plugin-import@2.29.1(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4)
       eslint-plugin-jsdoc:
         specifier: ^50.2.2
         version: 50.2.2(eslint@9.10.0(jiti@1.21.6))
@@ -680,8 +680,8 @@ importers:
         specifier: ^9.10.0
         version: 9.10.0(jiti@1.21.6)
       eslint-config-seek:
-        specifier: 0.0.0-eslint-9-etc-20240908074137
-        version: 0.0.0-eslint-9-etc-20240908074137(eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.0))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4)
+        specifier: 0.0.0-eslint-9-etc-20240918015504
+        version: 0.0.0-eslint-9-etc-20240918015504(eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.0))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4)
       eta:
         specifier: ^3.5.0
         version: 3.5.0
@@ -4475,8 +4475,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-seek@0.0.0-eslint-9-etc-20240908074137:
-    resolution: {integrity: sha512-6OKj6bUKO/wbM7a6tQvCchulmy/90AnLwQPliPt1PFwxj+NIw+/VhqvE9MvdB2JBIjWmBu2TG9OfA9/oKVji4w==}
+  eslint-config-seek@0.0.0-eslint-9-etc-20240918015504:
+    resolution: {integrity: sha512-momjhsLOf884pdd7Co18JfUvo/nAwrErhIk6KNoeW1rChmTI5hJJlCB2L91WcIGSxYcp5RX8qGl5/aOrNzMxZw==}
     engines: {node: '>=18.18.0'}
     peerDependencies:
       eslint: '>=9.9.1'
@@ -8613,14 +8613,6 @@ snapshots:
       '@babel/core': 7.25.2
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
       eslint: 8.57.0
-      eslint-visitor-keys: 2.1.0
-      semver: 6.3.1
-
-  '@babel/eslint-parser@7.25.1(@babel/core@7.25.2)(eslint@9.10.0(jiti@1.21.6))':
-    dependencies:
-      '@babel/core': 7.25.2
-      '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
-      eslint: 9.10.0(jiti@1.21.6)
       eslint-visitor-keys: 2.1.0
       semver: 6.3.1
 
@@ -13215,11 +13207,8 @@ snapshots:
     dependencies:
       eslint: 9.10.0(jiti@1.21.6)
 
-  eslint-config-seek@0.0.0-eslint-9-etc-20240908074137(eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.0))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4):
+  eslint-config-seek@0.0.0-eslint-9-etc-20240918015504(eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.18.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.0))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4):
     dependencies:
-      '@babel/core': 7.25.2
-      '@babel/eslint-parser': 7.25.1(@babel/core@7.25.2)(eslint@9.10.0(jiti@1.21.6))
-      '@babel/preset-react': 7.24.7(@babel/core@7.25.2)
       '@eslint/compat': 1.1.1
       '@eslint/eslintrc': 3.1.0
       '@eslint/js': 9.10.0
@@ -13242,11 +13231,8 @@ snapshots:
       - jest
       - supports-color
 
-  eslint-config-seek@0.0.0-eslint-9-etc-20240908074137(eslint-plugin-import@2.29.1(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4):
+  eslint-config-seek@0.0.0-eslint-9-etc-20240918015504(eslint-plugin-import@2.29.1(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(jest@29.7.0(@types/node@18.19.48)(babel-plugin-macros@3.1.0))(typescript@5.5.4):
     dependencies:
-      '@babel/core': 7.25.2
-      '@babel/eslint-parser': 7.25.1(@babel/core@7.25.2)(eslint@9.10.0(jiti@1.21.6))
-      '@babel/preset-react': 7.24.7(@babel/core@7.25.2)
       '@eslint/compat': 1.1.1
       '@eslint/eslintrc': 3.1.0
       '@eslint/js': 9.10.0

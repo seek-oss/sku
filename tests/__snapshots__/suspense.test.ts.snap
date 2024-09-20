@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`suspense build and serve should generate the expected files 1`] = `
+{
+  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "production/au/index.html": SCRIPTS: [
+    "/static/suspense/runtime.js",
+    "/static/suspense/2.js",
+    "/static/suspense/main.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li>
+          todo1
+        </li>
+        <li>
+          todo2
+        </li>
+        <li>
+          todo3
+        </li>
+      </ul>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":4323283200000,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>,
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`suspense build and serve should return home page 1`] = `
+SCRIPTS: [
+  "/static/suspense/runtime.js",
+  "/static/suspense/2.js",
+  "/static/suspense/main.js",
+]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li>
+          todo1
+        </li>
+        <li>
+          todo2
+        </li>
+        <li>
+          todo3
+        </li>
+      </ul>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"dehydratedState":{"mutations":[],"queries":[{"state":{"data":["todo1","todo2","todo3"],"dataUpdateCount":1,"dataUpdatedAt":4323283200000,"error":null,"errorUpdateCount":0,"errorUpdatedAt":0,"fetchFailureCount":0,"fetchFailureReason":null,"fetchMeta":null,"isInvalidated":false,"status":"success","fetchStatus":"idle"},"queryKey":["todos"],"queryHash":"[\\"todos\\"]"}]},"site":"au"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;

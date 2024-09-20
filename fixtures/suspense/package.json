@@ -1,0 +1,19 @@
+{
+  "name": "@sku-fixtures/suspense",
+  "private": true,
+  "dependencies": {
+    "@tanstack/react-query": "^5.56.2",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "dedent": "^1.5.1",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

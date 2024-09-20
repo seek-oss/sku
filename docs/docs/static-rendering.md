@@ -51,7 +51,7 @@ After configuring sku, the render entry needs to return the HTML required to cre
 
 **Example render entry**
 
-```ts
+```tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import type { Render } from 'sku';
@@ -93,6 +93,8 @@ _**NOTE:** Make sure to wrap your app with the `SkuProvider`. This is **required
 `renderApp` will be called once for each combination of settings in sku config. Specifically, `environment`, `site` & `route`.
 
 > The `SkuProvider` watches your render for dynamic imports. This allows sku to provide all the required script tags for this page to work client side.
+
+_**EXPERIMENTAL:** `renderApp` provides a `renderToStringAsync` function parameter which can be used instead of calling `React.renderToString`. See [Supporting React Suspense]_
 
 ### provideClientContext
 
@@ -177,6 +179,60 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 - `app` - the value returned from the `renderApp` function
 - `headTags` - html tags to be placed in the head of the html
 - `bodyTags` - html tags to be placed at the **end** of the html body
+
+## Supporting React Suspense
+
+[React Suspense][react suspense documentation] allows renders to complete asynchronously, waiting for modules or data to become available.
+When this occurs during static rendering, [renderToString] will throw an error, as it expects the render to complete immediately.
+To avoid this error you have a few options:
+
+1. Never suspend a component during an initial render. Either don't use React Suspense in the first place, or ensure suspended components aren't used until after hydration.
+2. Use [renderToPipeableStream] in your `renderApp` function. You'll need to wait for the stream to end and return all the HTML at once.
+3. **Experimental:** sku provides a `renderToStringAsync` function to your `renderApp` function that will perform option 2 for you.
+
+Regardless of how you support it, please consider that [Suspense][react suspense documentation] is a new feature for React.
+Its APIs and use are rapidly evolving, and it is partially undocumented (see [Note on Suspense-enabled data sources]).
+
+> "Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
+> The requirements for implementing a Suspense-enabled data source are unstable and undocumented.
+> An official API for integrating data sources with Suspense will be released in a future version of React." \- [React Suspense Documentation]
+
+**Example `renderApp`'s `renderToStringAsync` parameter**
+
+```tsx
+import React from 'react';
+import type { Render } from 'sku';
+
+import App from './App';
+
+export default {
+  renderApp: async ({
+    SkuProvider,
+    environment,
+    site,
+    route,
+    renderToStringAsync,
+  }) => {
+    const html = await renderToStringAsync(
+      <SkuProvider>
+        <App environment={environment} site={site} route={route} />
+      </SkuProvider>,
+    );
+
+    return {
+      html,
+    };
+  },
+  // ...
+} satisfies Render;
+```
+
+[react suspense documentation]: https://react.dev/reference/react/Suspense
+[renderToString]: https://react.dev/reference/react-dom/server/renderToString
+[renderToPipeableStream]: https://react.dev/reference/react-dom/server/renderToPipeableStream
+[note on suspense-enabled data sources]: https://react.dev/reference/react/Suspense#displaying-a-fallback-while-content-is-loading
+[renderApp]: #renderApp
+[supporting react suspense]: #supporting-react-suspense
 
 ## Common use cases
 

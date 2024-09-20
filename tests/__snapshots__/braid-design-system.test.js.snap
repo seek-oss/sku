@@ -2626,6 +2626,7 @@ html.ho7jppz ._1aprknde {
   "crypto",
   "fs",
   "node:crypto",
+  "node:stream",
   "node:url",
   "os",
   "path",

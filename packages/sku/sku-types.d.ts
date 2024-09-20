@@ -42,6 +42,7 @@ interface SharedRenderProps {
 interface RenderAppProps extends SharedRenderProps {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
   _addChunk: (chunkName: string) => void;
+  renderToStringAsync: (element: ReactNode) => Promise<string>;
 }
 
 interface RenderDocumentProps<App> extends SharedRenderProps {

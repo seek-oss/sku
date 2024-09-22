@@ -38,10 +38,14 @@
   "peerDependencies": {
     "@storybook/react-webpack5": "^7.0.0 || ^8.0.0",
     "@types/react": "^17.0.0 || ^18.0.0",
-    "react": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "peerDependenciesMeta": {
     "@storybook/react-webpack5": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     }
   },

@@ -1,6 +1,6 @@
 // @ts-check
 const { yellow, cyan, gray } = require('chalk');
-const { ESLint } = require('eslint');
+const { loadESLint } = require('eslint');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const { lintExtensions } = require('./lint');
 const assert = require('node:assert');
@@ -13,10 +13,9 @@ const extensions = lintExtensions.map((ext) => `.${ext}`);
 const runESLint = async ({ fix = false, paths }) => {
   console.log(cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
+  const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
     baseConfig: eslintConfig,
-    extensions,
-    useEslintrc: false,
     fix,
     cache: true,
   });

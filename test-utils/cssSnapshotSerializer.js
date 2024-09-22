@@ -6,7 +6,7 @@ const cssSnapshotSerializer = {
   test: (value) => {
     try {
       css.parse(value);
-    } catch (e) {
+    } catch {
       return false;
     }
     return true;

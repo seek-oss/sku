@@ -4,7 +4,7 @@ const preCommit = require('../lib/preCommit');
 (async () => {
   try {
     await preCommit();
-  } catch (e) {
+  } catch {
     process.exit(1);
   }
 })();

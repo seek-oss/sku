@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`configure custom should generate $ignore 1`] = `
+exports[`configure custom should generate .prettierignore 1`] = `
 [
   ".eslintcache",
-  ".eslintrc",
   ".prettierrc",
   "coverage/",
+  "eslint.config.js",
   "foo/bar/",
   "pnpm-lock.yaml",
   "report/",
@@ -13,39 +13,13 @@ exports[`configure custom should generate $ignore 1`] = `
 ]
 `;
 
-exports[`configure custom should generate $ignore 2`] = `
+exports[`configure default should generate .prettierignore 1`] = `
 [
   ".eslintcache",
-  ".eslintrc",
-  ".prettierrc",
-  "coverage/",
-  "foo/bar/",
-  "pnpm-lock.yaml",
-  "report/",
-  "tsconfig.json",
-]
-`;
-
-exports[`configure default should generate $ignore 1`] = `
-[
-  ".eslintcache",
-  ".eslintrc",
   ".prettierrc",
   "coverage/",
   "dist/",
-  "pnpm-lock.yaml",
-  "report/",
-  "tsconfig.json",
-]
-`;
-
-exports[`configure default should generate $ignore 2`] = `
-[
-  ".eslintcache",
-  ".eslintrc",
-  ".prettierrc",
-  "coverage/",
-  "dist/",
+  "eslint.config.js",
   "pnpm-lock.yaml",
   "report/",
   "tsconfig.json",

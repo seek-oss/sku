@@ -29,6 +29,7 @@ if (env === 'development') {
 
   // Fallthrough to serve any static file requests from root
   // E.g. compiled output files and images
+  // eslint-disable-next-line import-x/no-named-as-default-member -- static is a reserved keyword
   app.use(express.static(path.join(__dirname, './')));
 }
 

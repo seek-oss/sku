@@ -7,13 +7,15 @@ const repo = 'seek-oss/sku';
 
 const changelogFunctions = {
   getDependencyReleaseLine: async (changesets, dependenciesUpdated) => {
-    if (dependenciesUpdated.length === 0) return '';
+    if (dependenciesUpdated.length === 0) {
+      return '';
+    }
 
     const changesetLink = `- Updated dependencies [${(
       await Promise.all(
         changesets.map(async (cs) => {
           if (cs.commit) {
-            let { links } = await getInfo({
+            const { links } = await getInfo({
               repo,
               commit: cs.commit,
             });
@@ -37,7 +39,7 @@ const changelogFunctions = {
       .map((l) => l.trimRight());
 
     if (changeset.commit) {
-      let { links } = await getInfo({
+      const { links } = await getInfo({
         repo,
         commit: changeset.commit,
       });
@@ -47,11 +49,8 @@ const changelogFunctions = {
       const summary = `- ${firstLine} (${versionInfo})`;
 
       return `${summary}\n${futureLines.map((l) => `  ${l}`).join('\n')}`;
-    } else {
-      return `\n\n- ${firstLine}\n${futureLines
-        .map((l) => `  ${l}`)
-        .join('\n')}`;
     }
+    return `\n\n- ${firstLine}\n${futureLines.map((l) => `  ${l}`).join('\n')}`;
   },
 };
 

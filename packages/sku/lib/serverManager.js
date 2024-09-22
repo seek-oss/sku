@@ -12,7 +12,6 @@ function createServerManager(serverFilePath) {
   });
 
   const killIfNotDead = () => {
-    // eslint-disable-next-line guard-for-in
     for (const id in cluster.workers) {
       if (cluster.workers[id].isConnected() && !cluster.workers[id].isDead()) {
         debug('Killing server worker: %s', id);

@@ -59,7 +59,7 @@ const checkHosts = async () => {
 
       suggestScript('setup-hosts', { sudo: true });
     }
-  } catch (e) {
+  } catch {
     // swallow error as this just a warning check
   }
 };

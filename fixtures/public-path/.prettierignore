@@ -1,9 +1,9 @@
 # managed by sku
 .eslintcache
-.eslintrc
 .prettierrc
 coverage/
 dist/static/
+eslint.config.js
 pnpm-lock.yaml
 report/
 tsconfig.json

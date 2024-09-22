@@ -4,7 +4,7 @@ const { getPathFromCwd } = require('./cwd');
 const isCompilePackage = () => {
   try {
     return Boolean(require(getPathFromCwd('package.json')).skuCompilePackage);
-  } catch (e) {
+  } catch {
     // Assume false if no package.json
     return false;
   }

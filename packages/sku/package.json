@@ -100,7 +100,7 @@
     "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "0.0.0-eslint-9-etc-20240922064021",
+    "eslint-config-seek": "0.0.0-eslint-9-etc-20240922070719",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",

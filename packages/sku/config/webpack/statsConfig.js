@@ -8,5 +8,6 @@ module.exports = {
   colors: !isCI,
   preset: args.stats || defaultPreset,
   timings: isStartScript,
+  loggingDebug: ['babel-loader'],
   errors: true,
 };

@@ -58,7 +58,6 @@ jobs:
         with:
           path: 'fixtures/*/node_modules/.cache/babel-loader'
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
-          restore-keys: babel-loader-${{ runner.os }}-
 
       - name: Install Puppeteer
         if: steps.puppeteer-cache.outputs.cache-hit != 'true'

@@ -13,3 +13,8 @@ CHANGELOG.md
 .vscode/
 pnpm-lock.yaml
 .eslintcache
+
+# Emitted by sku fixtures
+fixtures/*/tsconfig.json
+fixtures/*/.eslintrc
+fixtures/*/.prettierrc

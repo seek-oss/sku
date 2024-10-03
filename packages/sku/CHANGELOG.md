@@ -1,5 +1,50 @@
 # sku
 
+## 13.2.0
+
+### Minor Changes
+
+- Add experimental `renderToStringAsync` parameter in `renderApp` ([#1050](https://github.com/seek-oss/sku/pull/1050))
+
+  The new `renderToStringAsync` method can be called instead of React DOM's `renderToString`. It is an asynchronous function, but once awaited should return the same result.
+
+  This new function won't error when hitting suspended components during a static render, instead it'll wait for all suspended boundaries to resolve.
+
+  **Note:** `react-dom` is now an optional peer dependency for use in this function. All known uses of static rendering use `react-dom` and shouldn't need to make a change.
+
+  The function is being provided to enable teams to trial the behaviour, but is not encouraged for production use.
+
+  ```diff
+  -import { renderToString } from 'react-dom/server';
+
+  const skuRender: Render<RenderContext> = {
+  -  renderApp: ({ SkuProvider, environment }) => {
+  +  renderApp: async ({ SkuProvider, environment, renderToStringAsync }) => {
+  -    const appHtml = renderToString(
+  +    const appHtml = await renderToStringAsync(
+        <SkuProvider>
+          <App environment={environment as ClientContext['environment']} />
+        </SkuProvider>,
+      );
+
+      return {
+        appHtml,
+      };
+    },
+    // ...
+  };
+  ```
+
+  This new feature is experimental, and is likely to change in implementation or may be removed completely.
+
+### Patch Changes
+
+- Disable `babel-loader` cache compression ([#1060](https://github.com/seek-oss/sku/pull/1060))
+
+  `sku` applications tend to transpile many modules and upload all cache files as a single compressed file. This makes compressing each individual cache file superfluous, so this feature has been disabled.
+
+- Adds "Chrome" and "Edge" as fallback browser names for reusing existing tabs, improving compatibility with different Chromium browser versions which may use abbreviated browser names. ([#1061](https://github.com/seek-oss/sku/pull/1061))
+
 ## 13.1.3
 
 ### Patch Changes

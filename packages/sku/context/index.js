@@ -1,8 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const chalk = require('chalk');
-const { register } = require('esbuild-register/dist/node');
 const { getPathFromCwd } = require('../lib/cwd');
+// eslint-plugin import can't resolve subpath imports inside js files
+// eslint-disable-next-line import/no-unresolved
+const { register } = require('@swc-node/register/register');
+
 const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
@@ -34,7 +37,7 @@ const getSkuConfig = () => {
     };
   }
 
-  const { unregister } = register({ target: 'node14' });
+  const unregister = register({ target: 'ES2023' });
 
   const newConfig = require(appSkuConfigPath);
 

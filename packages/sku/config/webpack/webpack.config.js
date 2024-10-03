@@ -177,6 +177,7 @@ const makeWebpackConfig = ({
                       options: {
                         babelrc: false,
                         cacheDirectory: true,
+                        cacheCompression: false,
                         presets: [
                           [
                             require.resolve('@babel/preset-env'),

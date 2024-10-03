@@ -101,6 +101,7 @@ module.exports = ({
     ...(!isJest
       ? {
           cacheDirectory: true,
+          cacheCompression: false,
         }
       : {}),
     presets,

@@ -9,8 +9,10 @@ const isCI = require('../isCI');
 const OSX_CHROME = 'google chrome';
 
 const supportedChromiumBrowsers = [
+  'Chrome',
   'Google Chrome',
   'Google Chrome Canary',
+  'Edge',
   'Microsoft Edge',
   'Brave Browser',
   'Vivaldi',

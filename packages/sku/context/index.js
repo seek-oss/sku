@@ -38,10 +38,10 @@ const getSkuConfig = () => {
     };
   }
 
-  const unregister = register(baseTsConfig.compilerOptions);
-
+  // `register` mutates the provided compiler options for some reason, so we clone `compilerOptions`
+  // so our baseTsConfig is not mutated
+  const unregister = register({ ...baseTsConfig.compilerOptions });
   const newConfig = require(appSkuConfigPath);
-
   unregister();
 
   return {

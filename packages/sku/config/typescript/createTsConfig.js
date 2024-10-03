@@ -1,16 +1,26 @@
 const { cwd } = require('../../lib/cwd');
 const { rootResolution, tsconfigDecorator } = require('../../context');
-const { baseTsConfig } = require('./tsconfig.js');
+const { baseTsConfig } = require('./tsconfig');
 
 const createTsConfig = () => {
+  let newTsConfig = {
+    ...baseTsConfig,
+  };
+
   if (rootResolution) {
-    baseTsConfig.compilerOptions.paths = {
-      '*': ['*'],
+    const newCompilerOptions = {
+      ...newTsConfig.compilerOptions,
+      paths: { '*': ['*'] },
+      baseUrl: cwd(),
     };
-    baseTsConfig.compilerOptions.baseUrl = cwd();
+
+    newTsConfig = {
+      ...newTsConfig,
+      compilerOptions: newCompilerOptions,
+    };
   }
 
-  return tsconfigDecorator(baseTsConfig);
+  return tsconfigDecorator(newTsConfig);
 };
 
-module.exports = { createTsConfig, baseTsConfig };
+module.exports = { createTsConfig };

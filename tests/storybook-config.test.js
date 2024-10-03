@@ -7,7 +7,6 @@ const {
   getStoryPage,
   getTextContentFromFrameOrPage,
 } = require('@sku-private/test-utils');
-const fetch = require('node-fetch');
 
 const skuConfigFileName = 'sku.config.ts';
 const appDir = path.dirname(

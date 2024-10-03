@@ -8,7 +8,7 @@ const appDirectory = path.dirname(
 );
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);
-const stripAnsi = require('strip-ansi');
+const { stripVTControlCharacters: stripAnsi } = require('node:util');
 
 const filesToLint = {
   'utils.test.ts': dedent/* ts */ `

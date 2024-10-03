@@ -98,14 +98,11 @@ steps:
       BUILDKITE_PLUGIN_S3_CACHE_BUCKET: my-buildkite-cache-bucket
       BUILDKITE_PLUGIN_S3_CACHE_PREFIX: my-app-babel-loader-cache
     plugins:
-      # v1.1.0 allows saving the cache at multiple levels
       - cache#v1.1.0:
           path: ./node_modules/.cache/babel-loader
-          restore: pipeline
+          restore: file
           save:
             - file
-            # Pipeline-level cache is used as a stale fallback if the manifest doesn't match
-            - pipeline
           manifest: pnpm-lock.yaml
           backend: s3
           compression: tgz
@@ -127,7 +124,6 @@ To utilize the `babel-loader` cache in GitHub actions, you can use the [cache ac
   with:
     path: 'node_modules/.cache/babel-loader'
     key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
-    restore-keys: babel-loader-${{ runner.os }}-
 ```
 
 [cache action]: https://github.com/actions/cache

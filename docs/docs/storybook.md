@@ -59,7 +59,7 @@ export default {
     ...config,
     include: [
       '**/*', // Implicit default value if `include` is not set and `files` is not set
-      '.storybook/*', // 👈 Add this line
+      '.storybook/**/*', // 👈 Add this line
     ],
   }),
 } satisfies SkuConfig;

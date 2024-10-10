@@ -990,12 +990,6 @@ importers:
       jsonc-parser:
         specifier: ^3.0.0
         version: 3.3.1
-      node-fetch:
-        specifier: ^2.6.9
-        version: 2.7.0
-      strip-ansi:
-        specifier: ^6.0.1
-        version: 6.0.1
       webpack:
         specifier: ^5.52.0
         version: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)

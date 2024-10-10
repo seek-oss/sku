@@ -200,6 +200,60 @@ Any combination of function name and library name is supported.
 [Node.js built-in]: https://nodejs.org/api/assert.html
 [browser port]: https://www.npmjs.com/package/assert
 
+## Environment-specific code
+
+`sku` [configures][nodeEnv optimization] webpack to replace all instances of `process.env.NODE_ENV` with its actual value.
+During the `start` and `start-ssr` commands, `process.env.NODE_ENV` is replaced with `'development'`.
+During the `build` and `build-ssr` commands, `process.env.NODE_ENV` is replaced with `'production'`.
+
+Combined with dead code elimination during minification, this allows you to write environment-specific code that is removed in production.
+
+For example, consider the following code:
+
+```js
+import someDevOnlyFunction from './some-dev-only-function';
+import someProdOnlyFunction from './some-prod-only-function';
+
+if (process.env.NODE_ENV === 'development') {
+  someDevOnlyFunction();
+}
+
+if (process.env.NODE_ENV === 'production') {
+  someProdOnlyFunction();
+}
+```
+
+In development this code would be transformed into:
+
+```js
+import someDevOnlyFunction from './some-dev-only-function';
+import someProdOnlyFunction from './some-prod-only-function';
+
+if ('development' === 'development') {
+  someDevOnlyFunction();
+}
+
+if ('development' === 'production') {
+  someProdOnlyFunction();
+}
+```
+
+Note that both `if` statements are still present in the code, but clearly only `someDevOnlyFunction` will be called.
+
+However, in production, the code would be transformed into:
+
+```js
+import someProdOnlyFunction from './some-prod-only-function';
+
+someProdOnlyFunction();
+```
+
+The first `if` block is removed entirely as its condition is always `false`.
+This allows the `someDevOnlyFunction` import to be removed as well.
+The second `if` block is removed, however the contents of the block are kept as its condition is always `true`.
+
+[nodeEnv optimization]: https://webpack.js.org/configuration/optimization/#optimizationnodeenv
+
 ## DevServer Middleware
 
 Supply a `devServerMiddleware` path in your sku config to access the internal dev [Express] server.

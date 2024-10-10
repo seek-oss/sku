@@ -249,6 +249,7 @@ someProdOnlyFunction();
 ```
 
 The first `if` block is removed entirely as its condition is always `false`.
+This allows the `someDevOnlyFunction` import to be removed as well.
 The second `if` block is removed, however the contents of the block are kept as its condition is always `true`.
 
 [nodeEnv optimization]: https://webpack.js.org/configuration/optimization/#optimizationnodeenv

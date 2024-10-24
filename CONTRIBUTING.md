@@ -97,3 +97,11 @@ This repo uses [changesets] for publishing new versions.
 If this is your first time using changesets, please read the documentation available in the changesets repo.
 
 [changesets]: https://github.com/changesets/changesets
+
+## Troubleshooting
+
+When running `lint`, if you encounter an error about a missing ESLint configuration file, you can run the following command to regenerate all sku fixture configuration files:
+
+```sh
+pnpm --filter="@sku-fixtures/*" exec sku configure
+```

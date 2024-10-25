@@ -1,5 +1,14 @@
 # sku
 
+## 13.2.1
+
+### Patch Changes
+
+- Improve error handling and messaging when opening the user's browser during the `start`, `start-ssr` and `serve` scripts ([#1069](https://github.com/seek-oss/sku/pull/1069))
+
+  This fixes a macOS error where `sku` would crash when failing to detect the user's default browser.
+  Instead, the user will be shown a warning message with instructions to enable the system permission required to fix the issue.
+
 ## 13.2.0
 
 ### Minor Changes

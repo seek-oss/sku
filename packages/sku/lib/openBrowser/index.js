@@ -1,6 +1,7 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
+const { yellow, italic } = require('chalk');
 const execSync = require('node:child_process').execSync;
 const open = require('open');
 
@@ -23,7 +24,20 @@ const supportedChromiumBrowsers = [
 module.exports = async (url) => {
   if (process.env.OPEN_TAB !== 'false' && !isCI) {
     const { default: getDefaultBrowser } = await import('default-browser');
-    const { name: defaultBrowser } = await getDefaultBrowser();
+    let defaultBrowser;
+    try {
+      const { name } = await getDefaultBrowser();
+      defaultBrowser = name;
+    } catch (e) {
+      console.log(yellow.bold('Failed to detect default browser.'));
+      console.log(
+        yellow(
+          `For a better ${italic('start')} experience on macOS, go to ${italic(
+            'System Preferences > Privacy & Security > Automation > Terminal/Application',
+          )} and enable Finder permissions.`,
+        ),
+      );
+    }
 
     const availableBrowser = process.env.BROWSER;
 

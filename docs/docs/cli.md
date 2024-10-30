@@ -110,26 +110,6 @@ sku format
 
 [linting/formatting documentation]: ./docs/linting.md
 
-### `storybook`
-
-Start a local Storybook server.
-See the [Storybook documentation] for more information.
-
-```sh
-sku storybook
-```
-
-### `build-storybook`
-
-Build a static version of your Storybook.
-See the [Storybook documentation] for more information.
-
-```sh
-sku build-storybook
-```
-
-[Storybook documentation]: ./docs/storybook.md
-
 ### `pre-commit`
 
 Run the `sku` pre-commit hook.

@@ -12,6 +12,7 @@
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose",
     "test:sku-init": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false jest --verbose --config=jest.config.sku-init.js",
     "setup-test-hosts": "node test-utils/setupTestHosts",
+    "start:docs": "pnpm run --filter @sku-private/docs start",
     "format": "prettier --cache --write . && eslint --cache --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",

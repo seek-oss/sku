@@ -98,6 +98,17 @@ If this is your first time using changesets, please read the documentation avail
 
 [changesets]: https://github.com/changesets/changesets
 
+## Editing Documentation
+
+The documentation site is generated from markdown files in [the `docs` directory].
+To start a local development server for the documentation site, run the following script:
+
+```sh
+pnpm start:docs
+```
+
+[the `docs` directory]: ./docs/docs
+
 ## Troubleshooting
 
 When running `lint`, if you encounter an error about a missing ESLint configuration file, you can run the following command to regenerate all sku fixture configuration files:

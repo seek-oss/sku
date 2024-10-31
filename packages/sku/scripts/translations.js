@@ -32,52 +32,70 @@ const ensureBranch = () => {
   console.log(`Using branch ${branch} for Phrase translations`);
 };
 
+const log = (message) => console.log(chalk.cyan(message));
+
 (async () => {
   const translationSubCommand = commandArguments[0];
-
-  console.log(chalk.cyan('Translations', translationSubCommand));
 
   const vocabConfig = getVocabConfig();
 
   if (!vocabConfig) {
     console.log(
-      'No languages configured. Please set languages in sku.config.js before running translation commands',
+      'No languages configured. Please set languages in  before running translation commands',
     );
   }
 
   if (!translationSubCommands.includes(translationSubCommand)) {
     throw new Error(
-      `Unknown command ${translationSubCommand}. Available options are ${translationSubCommands.join(
+      `Unknown sub-command ${translationSubCommand}. Available options are ${translationSubCommands.join(
         ', ',
-      )}`,
+      )}.`,
     );
   }
 
   try {
     if (translationSubCommand === 'compile') {
-      console.log('Watching for changes to translations');
-      compile({ watch }, vocabConfig);
+      log('Compiling translations...');
+
+      if (watch) {
+        log('Watching for changes to translations');
+        // Don't await so it can run in the background
+        compile({ watch }, vocabConfig);
+      } else {
+        await compile({}, vocabConfig);
+        log('Successfully compiled translations');
+      }
     }
+
     if (translationSubCommand === 'validate') {
-      validate(vocabConfig);
+      log('Validating translations...');
+      await validate(vocabConfig);
+      log('Successfully validated translations');
     }
+
     if (translationSubCommand === 'push') {
       ensureBranch();
-      push({ branch, deleteUnusedKeys }, vocabConfig);
+
+      log('Pushing translations to Phrase...');
+      await push({ branch, deleteUnusedKeys }, vocabConfig);
+      log('Successfully pushed translations to Phrase');
     }
+
     if (translationSubCommand === 'pull') {
       ensureBranch();
-      pull({ branch }, vocabConfig);
+
+      log('Pulling translations from Phrase...');
+      await pull({ branch }, vocabConfig);
+      log('Successfully pulled translations from Phrase');
     }
   } catch (e) {
     if (e) {
-      console.error(`Error running Translations ${translationSubCommand}:`, e);
+      console.error(
+        `Error running ${chalk.bold(`translations ${translationSubCommand}`)}:`,
+        e,
+      );
     }
 
     process.exit(1);
-  }
-
-  if (!watch) {
-    console.log(chalk.cyan('Translations complete'));
   }
 })();

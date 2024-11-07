@@ -34,7 +34,7 @@ const getSkuConfig = () => {
     };
   }
 
-  const { unregister } = register({ target: 'node14' });
+  const { unregister } = register({ target: 'node18' });
 
   const newConfig = require(appSkuConfigPath);
 

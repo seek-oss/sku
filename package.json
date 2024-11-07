@@ -48,6 +48,7 @@
     "@tsconfig/node-lts": "^18.12.3",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.19.31",
+    "@types/prettier": "^2.7.3",
     "debug": "^4.3.1",
     "dedent": "^1.5.1",
     "eslint": "^8.56.0",

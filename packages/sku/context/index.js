@@ -34,7 +34,8 @@ const getSkuConfig = () => {
     };
   }
 
-  const { unregister } = register({ target: 'node18' });
+  // Target sku's minimum supported node version
+  const { unregister } = register({ target: 'node18.20.0' });
 
   const newConfig = require(appSkuConfigPath);
 

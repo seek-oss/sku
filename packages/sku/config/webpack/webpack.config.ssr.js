@@ -33,7 +33,7 @@ const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
-const targets = require('./targets.json');
+const targets = require('../targets.json');
 
 const makeWebpackConfig = ({
   clientPort,
@@ -204,7 +204,7 @@ const makeWebpackConfig = ({
     {
       name: 'server',
       mode: webpackMode,
-      target: `browserslist:${targets.currentNode}`,
+      target: `browserslist:${targets.browserslistNodeTarget}`,
       entry: serverEntry,
       externals: [
         {
@@ -274,7 +274,7 @@ const makeWebpackConfig = ({
           hot: isDevServer,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          browserslist: [targets.currentNode],
+          browserslist: [targets.browserslistNodeTarget],
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,

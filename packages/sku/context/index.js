@@ -10,6 +10,7 @@ const validateConfig = require('./validateConfig');
 
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
+const targets = require('../config/targets.json');
 
 /** @typedef {import("../").SkuConfig} SkuConfig */
 
@@ -35,7 +36,7 @@ const getSkuConfig = () => {
   }
 
   // Target sku's minimum supported node version
-  const { unregister } = register({ target: 'node18.20.0' });
+  const { unregister } = register({ target: targets.esbuildNodeTarget });
 
   const newConfig = require(appSkuConfigPath);
 

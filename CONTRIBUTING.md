@@ -51,7 +51,7 @@ sudo pnpm setup-test-hosts
 To run the test suite locally:
 
 ```sh
-pnpm run test
+pnpm run test:update
 ```
 
 > [!NOTE]
@@ -65,25 +65,7 @@ If snapshots are out of date, you can update them with:
 pnpm run test -u
 ```
 
-> [!TIP]
-> The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
-
-Occasionally, snapshot tests from within an app fixture may fail the test suite.
-Running `pnpm run test -u` at the top-level of the repo won't update these snapshots.
-Instead, `cd` into the fixture directory and run that fixture's tests directly:
-
-```sh
-cd fixtures/braid-design-system
-pnpm exec sku test -u
-```
-
-You can also run any `sku` CLI command against any of the app fixtures.
-This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
-
-1. `cd` into the fixture you want to test. E.g. `cd fixtures/styling`.
-1. Run your sku command. E.g. `pnpm run sku build`.
-
-Once you've made the desired changes and you're ready to commit, stage your local changes.
+The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
 
 > [!NOTE]
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.

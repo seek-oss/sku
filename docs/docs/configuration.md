@@ -68,7 +68,19 @@ Extra external hosts to allow in your `script-src` [content security policy](htt
 
 type `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [ESLint](https://eslint.org/) config.
+This function provides a way to modify sku's ESLint configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your ESLint configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+
+ESLint rules help to maintain code quality and consistency.
+Some rules even prevent potential bugs in your code, e.g. React rules.
+Rather than disabling a rule purely because it causes frequent errors, consider whether these errors may be a symptom of a larger problem in your codebase.
+
+If you believe other consumers would benefit from the addition/removal/modificaton of a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
+
+> Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -85,9 +97,15 @@ export default {
 
 type `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [Jest](https://jestjs.io/docs/en/configuration) config. Make sure [`setupTests`](#setuptests) definitely doesn't cover your needs before using.
+This function provides a way to modify sku's Jest configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Please speak with the `sku-support` group before using.
+Make sure {@link setupTests} definitely doesn’t cover your needs before using.
+
+Before customizing your Jest configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+
+> Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -104,7 +122,13 @@ export default {
 
 type `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [TypeScript (`tsconfig.json`)](https://www.typescriptlang.org/tsconfig).
+This function provides a way to modify sku's TypeScript configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your TypeScript configuration, please reach out in [`#sku-support`]() to discuss your requirements and potential alternative solutions.
+
+> Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -122,11 +146,16 @@ export default {
 
 type `function`
 
-This function provides a way to override the webpack config after sku has created it. As sku creates two webpack configs (`client` & `server|render`) this function will actually run twice, if you only need to modify one, then you can check `config.name`.
+This function provides a way to modify sku's Webpack configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Ideally, this setting is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
+Before customizing your Webpack configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
 
-Reliance on this setting will cause issues when upgrading sku as any custom settings may break at any time. You've been warned!
+As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
+If you only need to modify one of these configs, then you can check `config.name`.
+
+> Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -456,4 +485,6 @@ type `function`
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
-This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
+This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
+
+[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU

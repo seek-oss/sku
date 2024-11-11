@@ -65,7 +65,16 @@ If snapshots are out of date, you can update them with:
 pnpm run test:update
 ```
 
-The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
+> [!TIP]
+> The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
+
+You can also run any `sku` CLI command against any of the app fixtures.
+This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
+
+1. `cd` into the fixture you want to test. E.g. `cd fixtures/styling`.
+1. Run your sku command. E.g. `pnpm run sku build`.
+
+Once you've made the desired changes and you're ready to commit, stage your local changes.
 
 > [!NOTE]
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.

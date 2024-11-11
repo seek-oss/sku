@@ -51,7 +51,7 @@ sudo pnpm setup-test-hosts
 To run the test suite locally:
 
 ```sh
-pnpm run test:update
+pnpm run test
 ```
 
 > [!NOTE]
@@ -62,7 +62,7 @@ pnpm run test:update
 If snapshots are out of date, you can update them with:
 
 ```sh
-pnpm run test -u
+pnpm run test:update
 ```
 
 The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.

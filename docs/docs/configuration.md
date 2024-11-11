@@ -100,7 +100,7 @@ Type: `function`
 This function provides a way to modify sku's Jest configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Make sure {@link setupTests} definitely doesn’t cover your needs before using.
+Make sure [`setupTests`] definitely doesn’t cover your needs before using.
 
 Before customizing your Jest configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
 
@@ -117,6 +117,8 @@ export default {
   }),
 } satisfies SkuConfig;
 ```
+
+[`setupTests`]: #setupTests
 
 ## dangerouslySetTSConfig
 

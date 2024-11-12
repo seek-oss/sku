@@ -11,7 +11,7 @@ const rootResolutionConfig = {
   },
 };
 
-module.exports = {
+const importOrderConfig = {
   ...(rootResolution ? rootResolutionConfig : undefined),
   rules: {
     'import-x/order': [
@@ -39,3 +39,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = { importOrderConfig };

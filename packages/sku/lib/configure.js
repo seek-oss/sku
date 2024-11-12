@@ -1,5 +1,9 @@
-const { writeFile, rm } = require('node:fs/promises');
+const { rm } = require('node:fs/promises');
 const path = require('node:path');
+
+const debug = require('debug');
+const log = debug('sku:configure');
+const dedent = require('dedent');
 
 const ensureGitignore = require('ensure-gitignore');
 
@@ -9,25 +13,19 @@ const {
   bundleReportFolder,
 } = require('../config/webpack/plugins/bundleAnalyzer');
 const { paths, httpsDevServer, languages } = require('../context');
+const {
+  shouldMigrateEslintIgnore,
+  migrateEslintignore,
+  cleanUpOldEslintFiles,
+} = require('./eslintMigration');
 
 const getCertificate = require('./certificate');
-const { getPathFromCwd } = require('./cwd');
-const managedConfigBanner = require('./managedConfigBanner.js');
+const { getPathFromCwd, writeFileToCWD } = require('./cwd');
 
 const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr) => pathStr.replace(/\\/g, '/');
 const addSep = (p) => `${p}${path.sep}`;
-const prependBanner = (str) => `${managedConfigBanner}\n${str}`;
-
-const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
-  const outPath = getPathFromCwd(fileName);
-  const str =
-    typeof content === 'string' ? content : JSON.stringify(content, null, 2);
-  const contentStr = banner ? prependBanner(str) : str;
-
-  await writeFile(outPath, contentStr);
-};
 
 module.exports = async () => {
   // Ignore target directories
@@ -40,20 +38,23 @@ module.exports = async () => {
     webpackTargetDirectory,
   ];
 
-  // Generate ESLint configuration
-  const eslintConfigFilename = 'eslint.config.js';
-  const eslintCacheFilename = '.eslintcache';
-  await writeFileToCWD(
-    eslintConfigFilename,
-    `module.exports = require('${require.resolve(
-      '../config/eslint/eslintConfig',
-    )}')`,
-  );
-  gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);
+  // TODO: Remove this migration before releasing sku v15.
+  if (await shouldMigrateEslintIgnore()) {
+    log('Old eslint config or ignore file detected. Attempting migration');
+    const eslintIgnorePath = getPathFromCwd('.eslintignore');
+    const userIgnores = migrateEslintignore(eslintIgnorePath);
 
-  // Delete .eslintignore and .eslintrc files from older versions of sku
-  await rm(getPathFromCwd('.eslintignore'), { force: true });
-  await rm(getPathFromCwd('.eslintrc.js'), { force: true });
+    await cleanUpOldEslintFiles();
+  }
+
+  const newEslintConfigFilename = 'eslint.config.js';
+  const eslintCacheFilename = '.eslintcache';
+  const eslintConfig = dedent`const { eslintConfigSku } = require('sku/config/eslint');
+
+                              module.exports = eslintConfigSku;`;
+  await writeFileToCWD(newEslintConfigFilename, eslintConfig);
+
+  gitIgnorePatterns.push(newEslintConfigFilename, eslintCacheFilename);
 
   // Generate Prettier configuration
   // NOTE: We are not generating a banner as prettier does not support the `JSON
@@ -71,19 +72,19 @@ module.exports = async () => {
   await writeFileToCWD(tsConfigFileName, createTSConfig());
   gitIgnorePatterns.push(tsConfigFileName);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
+  const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';
     gitIgnorePatterns.push(generatedVocabFileGlob);
-    lintIgnorePatterns.push(generatedVocabFileGlob);
+    prettierIgnorePatterns.push(generatedVocabFileGlob);
   }
 
   // Write `.prettierignore`
   await ensureGitignore({
     filepath: getPathFromCwd('.prettierignore'),
     comment: 'managed by sku',
-    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
+    patterns: prettierIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
   // Generate self-signed certificate and ignore

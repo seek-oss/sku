@@ -152,6 +152,13 @@ module.exports = validator.compile({
   dangerouslySetTSConfig: {
     type: 'function',
   },
+  eslintIgnore: {
+    type: 'array',
+    items: {
+      type: 'string',
+    },
+    optional: true,
+  },
   supportedBrowsers: {
     type: 'array',
     items: {

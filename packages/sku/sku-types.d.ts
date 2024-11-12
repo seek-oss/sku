@@ -190,6 +190,13 @@ export interface SkuConfig {
   environments?: readonly string[];
 
   /**
+   * TODO: Document this
+   *
+   * @default []
+   */
+  eslintIgnore?: readonly string[];
+
+  /**
    * By default, sku compiles all node_modules in builds that target node.
    * Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
    *

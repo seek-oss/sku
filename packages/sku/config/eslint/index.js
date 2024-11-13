@@ -7,7 +7,7 @@ const _eslintConfigSku = [
   skuEslintIgnores,
   ...eslintConfigSeek,
   importOrderConfig,
-  ...(eslintIgnore.length > 0 ? [eslintIgnore] : []),
+  ...(eslintIgnore.length > 0 ? [{ ignores: eslintIgnore }] : []),
 ];
 
 module.exports = {

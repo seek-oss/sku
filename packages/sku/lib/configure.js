@@ -17,6 +17,7 @@ const {
   shouldMigrateEslintIgnore,
   migrateEslintignore,
   cleanUpOldEslintFiles,
+  addEslintIgnoreToSkuConfig,
 } = require('./eslintMigration');
 
 const getCertificate = require('./certificate');
@@ -41,8 +42,16 @@ module.exports = async () => {
   // TODO: Remove this migration before releasing sku v15.
   if (await shouldMigrateEslintIgnore()) {
     log('Old eslint config or ignore file detected. Attempting migration');
+
     const eslintIgnorePath = getPathFromCwd('.eslintignore');
-    const userIgnores = migrateEslintignore(eslintIgnorePath);
+    const { ignores } = migrateEslintignore(eslintIgnorePath);
+
+    if (true || ignores.length > 0) {
+      await addEslintIgnoreToSkuConfig({
+        skuConfigPath: paths.appSkuConfigPath,
+        eslintIgnore: ignores,
+      });
+    }
 
     await cleanUpOldEslintFiles();
   }

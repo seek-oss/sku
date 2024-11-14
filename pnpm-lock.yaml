@@ -598,7 +598,7 @@ importers:
         version: 0.5.15(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-dev-server@5.1.0(debug@4.3.7)(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0)))(webpack-hot-middleware@2.26.1)(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0))
       '@storybook/react-webpack5':
         specifier: ^7.0.0 || ^8.0.0
-        version: 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)
+        version: 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       '@swc/core':
         specifier: ^1.6.13
         version: 1.7.36
@@ -696,8 +696,8 @@ importers:
         specifier: ^1.1.2
         version: 1.2.0
       env-ci:
-        specifier: ^7.0.0
-        version: 7.3.0
+        specifier: ^11.1.0
+        version: 11.1.0
       esbuild:
         specifier: '>0.19.7 <1'
         version: 0.24.0
@@ -843,6 +843,9 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
+      '@types/env-ci':
+        specifier: ^3.1.4
+        version: 3.1.4
       '@types/eslint':
         specifier: ^8.56.10
         version: 8.56.12
@@ -869,7 +872,7 @@ importers:
         version: 1.1.11(react@18.3.1)
       braid-design-system:
         specifier: ^32.0.0
-        version: 32.24.1(@types/react@18.3.11)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1))
+        version: 32.24.1(@types/react@18.3.11)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1))
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -2838,6 +2841,9 @@ packages:
   '@types/doctrine@0.0.9':
     resolution: {integrity: sha512-eOIHzCUSH7SMfonMG1LsC2f8vxBFtho6NGBznK41R84YzPuvSBzrhEps33IsQiOW9+VL6NQ9DbjQJznk/S4uRA==}
 
+  '@types/env-ci@3.1.4':
+    resolution: {integrity: sha512-WwSUcrqHNzRz+3nIZYO+p1OxJ/yDNSKFTpor06W+L2ie/K76a/Wb49LxHHiJMH44UeK7GM2kyWpL++e09v4qkA==}
+
   '@types/escodegen@0.0.6':
     resolution: {integrity: sha512-AjwI4MvWx3HAOaZqYsjKWyEObT9lcVV0Y0V8nXo6cXzN8ZiMxVhf6F3d/UNvXVGKrEzL/Dluc5p+y9GkzlTWig==}
 
@@ -4363,6 +4369,10 @@ packages:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
 
+  env-ci@11.1.0:
+    resolution: {integrity: sha512-Z8dnwSDbV1XYM9SBF2J0GcNVvmfmfh3a49qddGIROhBoVro6MZVTji15z/sJbQ2ko2ei8n988EU1wzoLU/tF+g==}
+    engines: {node: ^18.17 || >=20.6.1}
+
   env-ci@7.3.0:
     resolution: {integrity: sha512-L8vK54CSjKB4pwlwx0YaqeBdUSGufaLHl/pEgD+EqnMrYCVUA8HzMjURALSyvOlC57e953yN7KyXS63qDoc3Rg==}
     engines: {node: '>=12.20'}
@@ -4655,6 +4665,10 @@ packages:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
 
+  execa@8.0.1:
+    resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
+    engines: {node: '>=16.17'}
+
   exit@0.1.2:
     resolution: {integrity: sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==}
     engines: {node: '>= 0.8.0'}
@@ -4940,6 +4954,10 @@ packages:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
 
+  get-stream@8.0.1:
+    resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
+    engines: {node: '>=16'}
+
   get-symbol-description@1.0.2:
     resolution: {integrity: sha512-g0QYk1dZBxGwk+Ngc+ltRH2IBp2f7zBkBMBJZCDerh6EhlhSR6+9irMCuT/09zD6qkarHUSn529sK/yL4S27mg==}
     engines: {node: '>= 0.4'}
@@ -5204,6 +5222,10 @@ packages:
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+
+  human-signals@5.0.0:
+    resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
+    engines: {node: '>=16.17.0'}
 
   husky@9.1.6:
     resolution: {integrity: sha512-sqbjZKK7kf44hfdE94EoX8MZNk0n7HeW37O4YrVGCF4wzgQjp+akPAkfUK5LZ6KuR/6sqeAVuXHji+RzQgOn5A==}
@@ -5478,6 +5500,10 @@ packages:
   is-stream@2.0.1:
     resolution: {integrity: sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg==}
     engines: {node: '>=8'}
+
+  is-stream@3.0.0:
+    resolution: {integrity: sha512-LnQR4bZ9IADDRSkvpqMGvt/tEJWclzklNgSw48V5EAaAeDd6qGvN8ei6k5p0tvxSR171VmGyHuTiAOfxAbr8kA==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   is-string@1.0.7:
     resolution: {integrity: sha512-tE2UXzivje6ofPW7l23cjDOMa09gb7xlAqG6jG5ej6uPV32TlWP3NKPigtaGeHNu9fohccRYvIiZMfOOnOYUtg==}
@@ -6073,6 +6099,10 @@ packages:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
 
+  mimic-fn@4.0.0:
+    resolution: {integrity: sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==}
+    engines: {node: '>=12'}
+
   mimic-response@1.0.1:
     resolution: {integrity: sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==}
     engines: {node: '>=4'}
@@ -6215,6 +6245,10 @@ packages:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
 
+  npm-run-path@5.3.0:
+    resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
@@ -6281,6 +6315,10 @@ packages:
   onetime@5.1.2:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
+
+  onetime@6.0.0:
+    resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
+    engines: {node: '>=12'}
 
   open@10.1.0:
     resolution: {integrity: sha512-mnkeQ1qP5Ue2wd+aivTD3NHd/lZ96Lu0jgf0pwktLPtx6cTZiH7tyeGRRHs0zX0rbrahXPnXlUnbeXyaBBuIaw==}
@@ -6465,6 +6503,10 @@ packages:
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
+
+  path-key@4.0.0:
+    resolution: {integrity: sha512-haREypq7xkM7ErfgIyA0z+Bj4AGKlMSdlQE2jvJo6huWD1EdkKYV+G/T4nq0YEF2vgTT8kqMFKo1uHn950r4SQ==}
+    engines: {node: '>=12'}
 
   path-parse@1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
@@ -7560,6 +7602,10 @@ packages:
   strip-final-newline@2.0.0:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
+
+  strip-final-newline@3.0.0:
+    resolution: {integrity: sha512-dOESqjYr96iWYylGObzd39EuNTa5VJxyvVAEm5Jnh7KGo75V43Hk1odPQkNDyXNmUR6k+gEiDVXnjB8HJ3crXw==}
+    engines: {node: '>=12'}
 
   strip-indent@3.0.0:
     resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==}
@@ -10099,7 +10145,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/builder-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(storybook@8.3.6)(typescript@5.5.4)':
+  '@storybook/builder-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(typescript@5.5.4)':
     dependencies:
       '@storybook/core-webpack': 8.3.6(storybook@8.3.6)
       '@types/node': 22.7.7
@@ -10118,7 +10164,6 @@ snapshots:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.6.3
-      storybook: 8.3.6
       style-loader: 3.3.4(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0))
       terser-webpack-plugin: 5.3.10(@swc/core@1.7.36)(esbuild@0.24.0)(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0))
       ts-dedent: 2.2.0
@@ -10259,7 +10304,7 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/preset-react-webpack@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)':
+  '@storybook/preset-react-webpack@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)':
     dependencies:
       '@storybook/core-webpack': 8.3.6(storybook@8.3.6)
       '@storybook/react': 8.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)
@@ -10274,7 +10319,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resolve: 1.22.8
       semver: 7.6.3
-      storybook: 8.3.6
       tsconfig-paths: 4.2.0
       webpack: 5.95.0(@swc/core@1.7.36)(esbuild@0.24.0)
     optionalDependencies:
@@ -10387,15 +10431,14 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)':
+  '@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)':
     dependencies:
-      '@storybook/builder-webpack5': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(storybook@8.3.6)(typescript@5.5.4)
-      '@storybook/preset-react-webpack': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)
+      '@storybook/builder-webpack5': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(typescript@5.5.4)
+      '@storybook/preset-react-webpack': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       '@storybook/react': 8.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)
       '@types/node': 22.7.7
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      storybook: 8.3.6
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10606,6 +10649,8 @@ snapshots:
       '@types/ms': 0.7.34
 
   '@types/doctrine@0.0.9': {}
+
+  '@types/env-ci@3.1.4': {}
 
   '@types/escodegen@0.0.6': {}
 
@@ -11649,7 +11694,7 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  braid-design-system@32.24.1(@types/react@18.3.11)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)):
+  braid-design-system@32.24.1(@types/react@18.3.11)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)):
     dependencies:
       '@capsizecss/core': 4.1.2
       '@capsizecss/metrics': 3.3.0
@@ -11673,7 +11718,7 @@ snapshots:
       react-is: 18.3.1
       react-popper-tooltip: 4.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-remove-scroll: 2.6.0(@types/react@18.3.11)(react@18.3.1)
-      sku: 13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)
+      sku: 13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)
       utility-types: 3.11.0
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -12545,6 +12590,11 @@ snapshots:
 
   entities@4.5.0: {}
 
+  env-ci@11.1.0:
+    dependencies:
+      execa: 8.0.1
+      java-properties: 1.0.2
+
   env-ci@7.3.0:
     dependencies:
       execa: 5.1.1
@@ -13075,6 +13125,18 @@ snapshots:
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
 
+  execa@8.0.1:
+    dependencies:
+      cross-spawn: 7.0.3
+      get-stream: 8.0.1
+      human-signals: 5.0.0
+      is-stream: 3.0.0
+      merge-stream: 2.0.0
+      npm-run-path: 5.3.0
+      onetime: 6.0.0
+      signal-exit: 4.1.0
+      strip-final-newline: 3.0.0
+
   exit@0.1.2: {}
 
   expand-tilde@1.2.2:
@@ -13445,6 +13507,8 @@ snapshots:
 
   get-stream@6.0.1: {}
 
+  get-stream@8.0.1: {}
+
   get-symbol-description@1.0.2:
     dependencies:
       call-bind: 1.0.7
@@ -13813,6 +13877,8 @@ snapshots:
 
   human-signals@2.1.0: {}
 
+  human-signals@5.0.0: {}
+
   husky@9.1.6: {}
 
   hyperdyperid@1.2.0: {}
@@ -14031,6 +14097,8 @@ snapshots:
       call-bind: 1.0.7
 
   is-stream@2.0.1: {}
+
+  is-stream@3.0.0: {}
 
   is-string@1.0.7:
     dependencies:
@@ -14845,6 +14913,8 @@ snapshots:
 
   mimic-fn@2.1.0: {}
 
+  mimic-fn@4.0.0: {}
+
   mimic-response@1.0.1: {}
 
   min-indent@1.0.1: {}
@@ -14962,6 +15032,10 @@ snapshots:
     dependencies:
       path-key: 3.1.1
 
+  npm-run-path@5.3.0:
+    dependencies:
+      path-key: 4.0.0
+
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
@@ -15032,6 +15106,10 @@ snapshots:
   onetime@5.1.2:
     dependencies:
       mimic-fn: 2.1.0
+
+  onetime@6.0.0:
+    dependencies:
+      mimic-fn: 4.0.0
 
   open@10.1.0:
     dependencies:
@@ -15212,6 +15290,8 @@ snapshots:
   path-is-inside@1.0.2: {}
 
   path-key@3.1.1: {}
+
+  path-key@4.0.0: {}
 
   path-parse@1.0.7: {}
 
@@ -16170,7 +16250,7 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1):
+  sku@13.2.1(@storybook/react-webpack5@8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@18.19.57)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1):
     dependencies:
       '@babel/core': 7.25.8
       '@babel/plugin-transform-react-constant-elements': 7.25.7(@babel/core@7.25.8)
@@ -16267,7 +16347,7 @@ snapshots:
       webpack-node-externals: 3.0.0
       wrap-ansi: 7.0.0
     optionalDependencies:
-      '@storybook/react-webpack5': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.6)(typescript@5.5.4)
+      '@storybook/react-webpack5': 8.3.6(@swc/core@1.7.36)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
       - '@rspack/core'
@@ -16535,6 +16615,8 @@ snapshots:
   strip-bom@4.0.0: {}
 
   strip-final-newline@2.0.0: {}
+
+  strip-final-newline@3.0.0: {}
 
   strip-indent@3.0.0:
     dependencies:

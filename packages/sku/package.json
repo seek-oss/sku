@@ -95,7 +95,7 @@
     "default-browser": "^5.2.1",
     "didyoumean2": "^7.0.2",
     "ensure-gitignore": "^1.1.2",
-    "env-ci": "^7.0.0",
+    "env-ci": "^11.1.0",
     "esbuild": ">0.19.7 <1",
     "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
@@ -146,6 +146,7 @@
   "devDependencies": {
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
+    "@types/env-ci": "^3.1.4",
     "@types/eslint": "^8.56.10",
     "@types/minimist": "^1.2.5",
     "@types/node": "^18.19.31",

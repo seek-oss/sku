@@ -54,8 +54,8 @@ class SkuConfigUpdater {
       const lastStatement = skuConfigModule.$ast.body.at(-1);
       t.assertExpressionStatement(lastStatement);
 
-      t.assertAssignmentExpression(lastStatement.expression);
       const { expression } = lastStatement;
+      t.assertAssignmentExpression(expression);
       t.assertMemberExpression(expression.left);
       t.assertIdentifier(expression.left.object, {
         name: 'module',

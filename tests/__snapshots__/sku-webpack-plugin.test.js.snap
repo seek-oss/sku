@@ -92,7 +92,6 @@ exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 }
 ._1m61nqo6 {
   -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 ._1m61nqo7 {
@@ -139,7 +138,6 @@ exports[`sku-webpack-plugin build should generate the expected files 1`] = `
 }
 ._1dc46084 {
   -webkit-user-select: none;
-  -moz-user-select: none;
   user-select: none;
 }
 ._1dc46085 {

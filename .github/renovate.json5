@@ -91,7 +91,6 @@
       matchUpdateTypes: 'major',
       matchPackageNames: [
         'chalk',
-        'env-ci',
         'escape-string-regexp',
         'find-up',
         'get-port',

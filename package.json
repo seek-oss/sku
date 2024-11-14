@@ -14,7 +14,7 @@
     "test:update": "pnpm run test -u && pnpm --filter @sku-fixtures/braid-design-system exec sku test -u",
     "setup-test-hosts": "node test-utils/setupTestHosts",
     "start:docs": "pnpm run --filter @sku-private/docs start",
-    "format": "prettier --cache --write . && eslint --cache --fix .",
+    "format": "prettier --cache --write . && eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"

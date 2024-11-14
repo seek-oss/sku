@@ -62,10 +62,11 @@ const log = (message) => console.log(chalk.cyan(message));
 
       if (watch) {
         log('Watching for changes to translations');
-        // Don't await so it can run in the background
-        compile({ watch }, vocabConfig);
-      } else {
-        await compile({}, vocabConfig);
+      }
+
+      await compile({ watch }, vocabConfig);
+
+      if (!watch) {
         log('Successfully compiled translations');
       }
     }

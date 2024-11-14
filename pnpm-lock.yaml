@@ -663,8 +663,8 @@ importers:
         specifier: ^4.16.1
         version: 4.24.0
       browserslist-config-seek:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       chalk:
         specifier: ^4.1.0
         version: 4.1.2
@@ -3612,8 +3612,8 @@ packages:
   browser-assert@1.2.1:
     resolution: {integrity: sha512-nfulgvOR6S4gt9UKCeGJOuSGBPGiFT6oQ/2UBnvTY/5aQ1PnksW72fhZkM30DzoRRv2WpwZf1vHHEr3mtuXIWQ==}
 
-  browserslist-config-seek@3.1.0:
-    resolution: {integrity: sha512-UTP8ReaA1d5Yn+MtljwD75B/Fuzwdw9TnRRTACAKRcLWeOTnAlnQSTExv/12rcOFDk6aZGZn3WLPUtrbSkjAaQ==}
+  browserslist-config-seek@3.2.0:
+    resolution: {integrity: sha512-bModvV9yhT2MA6MXhMGHiRW3vbBs79XxpIYKTg5qJZQZMZc5tbnOmkwMwazowUTzWlQhzQwZAhw/ReS948EtWg==}
 
   browserslist@4.24.0:
     resolution: {integrity: sha512-Rmb62sR1Zpjql25eSanFGEhAxcFwfA1K0GuQcLoaJBAcENegrQut3hYdhXFF1obQfiDyqIW/cLM5HSJ/9k884A==}
@@ -11758,7 +11758,7 @@ snapshots:
 
   browser-assert@1.2.1: {}
 
-  browserslist-config-seek@3.1.0: {}
+  browserslist-config-seek@3.2.0: {}
 
   browserslist@4.24.0:
     dependencies:
@@ -16287,7 +16287,7 @@ snapshots:
       babel-plugin-transform-remove-imports: 1.8.0(@babel/core@7.25.8)
       babel-plugin-unassert: 3.2.0
       browserslist: 4.24.0
-      browserslist-config-seek: 3.1.0
+      browserslist-config-seek: 3.2.0
       chalk: 4.1.2
       cross-spawn: 7.0.3
       css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0))

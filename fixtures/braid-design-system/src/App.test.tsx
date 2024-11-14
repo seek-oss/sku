@@ -7,7 +7,7 @@ describe('braid-design-system', () => {
   test('components', () => {
     expect(
       renderToString(
-        <BraidTestProvider themeName="apac">
+        <BraidTestProvider themeName="seekJobs">
           <Box paddingTop="large" className={vanillaBox} />
         </BraidTestProvider>,
       ),

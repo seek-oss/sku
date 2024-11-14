@@ -13,7 +13,7 @@ const {
 } = require('../../utils');
 const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
 const validateOptions = require('./validateOptions');
-const targets = require('../../targets.json');
+const targets = require('../../../targets.json');
 
 class SkuWebpackPlugin {
   constructor(options = {}) {
@@ -61,7 +61,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'ts',
-              browserslist: [targets.currentNode],
+              browserslist: [targets.browserslistNodeTarget],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
@@ -90,7 +90,7 @@ class SkuWebpackPlugin {
             use: makeJsLoaders({
               target: 'node',
               lang: 'js',
-              browserslist: [targets.currentNode],
+              browserslist: [targets.browserslistNodeTarget],
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,

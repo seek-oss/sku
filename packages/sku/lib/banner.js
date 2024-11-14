@@ -1,3 +1,4 @@
+// @ts-check
 const chalk = require('chalk');
 const wrap = require('wrap-ansi');
 const identString = require('indent-string');
@@ -35,6 +36,9 @@ const banner = (type, heading, messages = []) => {
 
   const border = highlight(Array(fullWidth).fill('-').join(''));
 
+  /**
+   * @param {string} message
+   */
   const renderContent = (message) =>
     identString(wrap(message, contentWidth), gutter);
 

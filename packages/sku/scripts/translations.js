@@ -1,6 +1,3 @@
-const envCi = require('env-ci');
-
-const { branch } = envCi();
 const chalk = require('chalk');
 const {
   argv: args,
@@ -23,13 +20,19 @@ if (!commandArguments) {
   );
 }
 
-const ensureBranch = () => {
+const ensureBranch = async () => {
+  const { default: envCi } = await import('env-ci');
+  const { branch } = envCi();
+
   if (!branch) {
     throw new Error(
       'Unable to determine branch from environment variables. Branch is required for this command.',
     );
   }
+
   console.log(`Using branch ${branch} for Phrase translations`);
+
+  return branch;
 };
 
 (async () => {
@@ -62,11 +65,11 @@ const ensureBranch = () => {
       validate(vocabConfig);
     }
     if (translationSubCommand === 'push') {
-      ensureBranch();
+      const branch = await ensureBranch();
       push({ branch, deleteUnusedKeys }, vocabConfig);
     }
     if (translationSubCommand === 'pull') {
-      ensureBranch();
+      const branch = await ensureBranch();
       pull({ branch }, vocabConfig);
     }
   } catch (e) {

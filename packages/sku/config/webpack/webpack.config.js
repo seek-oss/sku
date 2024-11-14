@@ -23,7 +23,7 @@ const statsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
-const targets = require('./targets.json');
+const targets = require('../targets.json');
 
 const {
   paths,
@@ -253,7 +253,7 @@ const makeWebpackConfig = ({
       entry: { main: isLibrary ? libraryRenderEntry : renderEntry },
       // Target the currently running version of node as the
       // render will run within the same process
-      target: `browserslist:${targets.currentNode}`,
+      target: `browserslist:${targets.browserslistNodeTarget}`,
       externals: [
         // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
         externalizeNodeModules
@@ -305,7 +305,7 @@ const makeWebpackConfig = ({
           hot: false,
           include: internalInclude,
           compilePackages: paths.compilePackages,
-          browserslist: [targets.currentNode],
+          browserslist: [targets.browserslistNodeTarget],
           mode: webpackMode,
           libraryName,
           displayNamesProd,

@@ -1,0 +1,14 @@
+# this fixture doesn't use sku's CLI, and doesn't need these files either
+# these should never be committed 
+.eslintignore
+.prettierignore
+
+# managed by sku
+.eslintcache
+.eslintrc
+.prettierrc
+coverage/
+dist/
+report/
+tsconfig.json
+# end managed by sku

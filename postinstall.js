@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Keeps the .nvmrc file in sync with the node version defined in the volta config in the monorepo's package.json
  */
@@ -20,11 +21,15 @@ const {
 } = require('./packages/sku/package.json');
 
 const [, minimumSupportedVersion] = node.split('=');
-const [majorVersion] = minimumSupportedVersion.split('.');
-const targets = { currentNode: `node ${majorVersion}` };
+const targets = {
+  // https://github.com/browserslist/browserslist?tab=readme-ov-file#full-list
+  browserslistNodeTarget: `node ${minimumSupportedVersion}`,
+  // https://esbuild.github.io/api/#target
+  esbuildNodeTarget: `node${minimumSupportedVersion}`,
+};
 const prettier = require('prettier');
 
 writeFileSync(
-  './packages/sku/config/webpack/targets.json',
+  './packages/sku/config/targets.json',
   prettier.format(JSON.stringify(targets, null, 2), { parser: 'json' }),
 );

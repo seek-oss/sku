@@ -62,20 +62,11 @@ pnpm run test
 If snapshots are out of date, you can update them with:
 
 ```sh
-pnpm run test -u
+pnpm run test:update
 ```
 
 > [!TIP]
 > The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
-
-Occasionally, snapshot tests from within an app fixture may fail the test suite.
-Running `pnpm run test -u` at the top-level of the repo won't update these snapshots.
-Instead, `cd` into the fixture directory and run that fixture's tests directly:
-
-```sh
-cd fixtures/braid-design-system
-pnpm exec sku test -u
-```
 
 You can also run any `sku` CLI command against any of the app fixtures.
 This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
@@ -97,3 +88,22 @@ This repo uses [changesets] for publishing new versions.
 If this is your first time using changesets, please read the documentation available in the changesets repo.
 
 [changesets]: https://github.com/changesets/changesets
+
+## Editing Documentation
+
+The documentation site is generated from markdown files in [the `docs` directory].
+To start a local development server for the documentation site, run the following script:
+
+```sh
+pnpm start:docs
+```
+
+[the `docs` directory]: ./docs/docs
+
+## Troubleshooting
+
+When running `lint`, if you encounter an error about a missing ESLint configuration file, you can run the following command to regenerate all sku fixture configuration files:
+
+```sh
+pnpm --filter="@sku-fixtures/*" exec sku configure
+```

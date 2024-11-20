@@ -40,13 +40,19 @@ const log = (message) => console.log(chalk.cyan(message));
 (async () => {
   const translationSubCommand = commandArguments[0];
 
-  const vocabConfig = getVocabConfig();
+  const vocabConfigFromSkuConfig = getVocabConfig();
+  const resolvedVocabConfig = await resolveConfig();
 
-  if (!vocabConfig) {
+  if (vocabConfigFromSkuConfig && resolvedVocabConfig) {
+    console.log(
+      `Ignoring vocab config file in ${resolvedVocabConfig.projectRoot}. Sku only supports multi-language applications by configuring the "languages" property in your sku config.`,
+    );
+  }
+
+  if (!vocabConfigFromSkuConfig) {
     let errorMessage =
       'No "languages" configured. Please configure "languages" in your sku config before running translation commands.';
 
-    const resolvedVocabConfig = await resolveConfig();
     if (resolvedVocabConfig) {
       errorMessage += `\nIt looks like you have a vocab config file in ${resolvedVocabConfig.projectRoot}. Perhaps you intended to run "vocab ${translationSubCommand}" instead?`;
     }
@@ -70,7 +76,7 @@ const log = (message) => console.log(chalk.cyan(message));
         log('Watching for changes to translations');
       }
 
-      await compile({ watch }, vocabConfig);
+      await compile({ watch }, vocabConfigFromSkuConfig);
 
       if (!watch) {
         log('Successfully compiled translations');
@@ -79,7 +85,7 @@ const log = (message) => console.log(chalk.cyan(message));
 
     if (translationSubCommand === 'validate') {
       log('Validating translations...');
-      await validate(vocabConfig);
+      await validate(vocabConfigFromSkuConfig);
       log('Successfully validated translations');
     }
 
@@ -87,7 +93,7 @@ const log = (message) => console.log(chalk.cyan(message));
       const branch = await ensureBranch();
 
       log('Pushing translations to Phrase...');
-      await push({ branch, deleteUnusedKeys }, vocabConfig);
+      await push({ branch, deleteUnusedKeys }, vocabConfigFromSkuConfig);
       log('Successfully pushed translations to Phrase');
     }
 
@@ -95,7 +101,7 @@ const log = (message) => console.log(chalk.cyan(message));
       const branch = await ensureBranch();
 
       log('Pulling translations from Phrase...');
-      await pull({ branch }, vocabConfig);
+      await pull({ branch }, vocabConfigFromSkuConfig);
       log('Successfully pulled translations from Phrase');
     }
   } catch (e) {

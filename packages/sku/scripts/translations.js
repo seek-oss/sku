@@ -43,8 +43,8 @@ const log = (message) => console.log(chalk.cyan(message));
   const vocabConfig = getVocabConfig();
 
   if (!vocabConfig) {
-    console.log(
-      'No languages configured. Please set languages in  before running translation commands',
+    throw new Error(
+      'No "languages" configured. Please configure "languages" in your sku config before running translation commands',
     );
   }
 

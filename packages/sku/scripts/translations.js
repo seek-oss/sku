@@ -4,7 +4,7 @@ const {
   watch,
   'delete-unused-keys': deleteUnusedKeys,
 } = require('../config/args');
-const { compile, validate } = require('@vocab/core');
+const { compile, validate, resolveConfig } = require('@vocab/core');
 const { push, pull } = require('@vocab/phrase');
 const { getVocabConfig } = require('../config/vocab/vocab');
 
@@ -43,9 +43,15 @@ const log = (message) => console.log(chalk.cyan(message));
   const vocabConfig = getVocabConfig();
 
   if (!vocabConfig) {
-    throw new Error(
-      'No "languages" configured. Please configure "languages" in your sku config before running translation commands',
-    );
+    let errorMessage =
+      'No "languages" configured. Please configure "languages" in your sku config before running translation commands.';
+
+    const resolvedVocabConfig = await resolveConfig();
+    if (resolvedVocabConfig) {
+      errorMessage += `\nIt looks like you have a vocab config file in ${resolvedVocabConfig.projectRoot}. Perhaps you intended to run "vocab ${translationSubCommand}" instead?`;
+    }
+
+    throw new Error(errorMessage);
   }
 
   if (!translationSubCommands.includes(translationSubCommand)) {

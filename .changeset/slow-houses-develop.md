@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Improve logging for `sku translations` CLI commands
+`sku translations`: Improve log messages

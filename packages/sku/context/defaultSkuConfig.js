@@ -34,6 +34,7 @@ module.exports = {
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
+  eslintIgnore: [],
   supportedBrowsers,
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],

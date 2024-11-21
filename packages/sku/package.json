@@ -153,7 +153,7 @@
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
     "@types/env-ci": "^3.1.4",
-    "@types/eslint": "^8.56.10",
+    "@types/eslint": "^9.6.1",
     "@types/minimist": "^1.2.5",
     "@types/node": "^18.19.31",
     "@types/picomatch": "^2.3.3",

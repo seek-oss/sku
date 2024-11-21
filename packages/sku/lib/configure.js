@@ -1,15 +1,26 @@
 const { rm } = require('node:fs/promises');
 const path = require('node:path');
 
+const debug = require('debug');
+const log = debug('sku:configure');
+const dedent = require('dedent');
+const chalk = require('chalk');
+
 const ensureGitignore = require('ensure-gitignore');
 
-const { paths, httpsDevServer, languages } = require('../context');
+const prettierConfig = require('../config/prettier/prettierConfig');
+const createTSConfig = require('../config/typescript/tsconfig.js');
 const {
   bundleReportFolder,
 } = require('../config/webpack/plugins/bundleAnalyzer');
-const prettierConfig = require('../config/prettier/prettierConfig');
-const eslintConfig = require('../config/eslint/eslintConfig');
-const createTSConfig = require('../config/typescript/tsconfig.js');
+const { paths, httpsDevServer, languages } = require('../context');
+const {
+  shouldMigrateEslintIgnore,
+  migrateEslintignore,
+  cleanUpOldEslintFiles,
+  addEslintIgnoreToSkuConfig,
+} = require('./eslintMigration');
+
 const getCertificate = require('./certificate');
 const { getPathFromCwd, writeFileToCWD } = require('./cwd');
 
@@ -29,10 +40,41 @@ module.exports = async () => {
     webpackTargetDirectory,
   ];
 
-  // Generate ESLint configuration
-  const eslintConfigFilename = '.eslintrc';
+  // TODO: Remove this migration before releasing sku v15.
+  if (await shouldMigrateEslintIgnore()) {
+    log('Old eslint config or ignore file detected. Attempting migration');
+
+    const eslintIgnorePath = getPathFromCwd('.eslintignore');
+    const userIgnores = migrateEslintignore(eslintIgnorePath);
+
+    if (userIgnores.length > 0) {
+      try {
+        await addEslintIgnoreToSkuConfig({
+          skuConfigPath: paths.appSkuConfigPath,
+          eslintIgnore: userIgnores,
+        });
+      } catch (e) {
+        console.log("Failed to automatically migrate '.eslintignore' file.");
+        console.log('Error:', e.message, '\n');
+
+        console.log('Please manually add the following to your sku config:');
+        console.log(
+          chalk.green('eslintIgnore:'),
+          chalk.green(JSON.stringify(userIgnores, null, 2)),
+        );
+      }
+    }
+
+    await cleanUpOldEslintFiles();
+  }
+
+  const eslintConfigFilename = 'eslint.config.js';
   const eslintCacheFilename = '.eslintcache';
+  const eslintConfig = dedent`const { eslintConfigSku } = require('sku/config/eslint');
+
+                              module.exports = eslintConfigSku;`;
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
+
   gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);
 
   // Generate Prettier configuration
@@ -51,26 +93,19 @@ module.exports = async () => {
   await writeFileToCWD(tsConfigFileName, createTSConfig());
   gitIgnorePatterns.push(tsConfigFileName);
 
-  const lintIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
+  const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 
   if (languages) {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';
     gitIgnorePatterns.push(generatedVocabFileGlob);
-    lintIgnorePatterns.push(generatedVocabFileGlob);
+    prettierIgnorePatterns.push(generatedVocabFileGlob);
   }
-
-  // Write `.eslintignore`
-  await ensureGitignore({
-    filepath: getPathFromCwd('.eslintignore'),
-    comment: 'managed by sku',
-    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
-  });
 
   // Write `.prettierignore`
   await ensureGitignore({
     filepath: getPathFromCwd('.prettierignore'),
     comment: 'managed by sku',
-    patterns: lintIgnorePatterns.map(convertToForwardSlashPaths),
+    patterns: prettierIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
   // Generate self-signed certificate and ignore

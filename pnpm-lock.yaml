@@ -584,6 +584,9 @@ importers:
       '@babel/runtime':
         specifier: ^7.21.0
         version: 7.26.0
+      '@babel/types':
+        specifier: ^7.26.0
+        version: 7.26.0
       '@loadable/babel-plugin':
         specifier: ^5.13.2
         version: 5.16.1(@babel/core@7.26.0)
@@ -758,6 +761,9 @@ importers:
       lint-staged:
         specifier: ^15.2.10
         version: 15.2.10
+      magicast:
+        specifier: ^0.3.5
+        version: 0.3.5
       mini-css-extract-plugin:
         specifier: ^2.6.1
         version: 2.9.2(webpack@5.96.1(@swc/core@1.9.2)(esbuild@0.24.0))
@@ -861,6 +867,9 @@ importers:
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.4
+      '@types/prettier':
+        specifier: ^2.7.3
+        version: 2.7.3
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.12
@@ -882,6 +891,9 @@ importers:
       braid-design-system:
         specifier: ^32.0.0
         version: 32.24.1(@types/react@18.3.12)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@13.2.1(@storybook/react-webpack5@8.4.4(@swc/core@1.9.2)(esbuild@0.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.4(prettier@2.8.8))(typescript@5.6.3))(@types/node@18.19.64)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.36.0)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1))
+      fs-fixture:
+        specifier: ^2.6.0
+        version: 2.6.0
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4926,6 +4938,10 @@ packages:
     resolution: {integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==}
     engines: {node: '>=6 <7 || >=8'}
 
+  fs-fixture@2.6.0:
+    resolution: {integrity: sha512-XQNHBGYgth08BSgThjQNrUuzE9XUmr7CDgGFStKaAeB9Oq+kxUHd1zS6hp1YO11B501Sjv9Jq+B2VFn+CdwmIg==}
+    engines: {node: '>=18.0.0'}
+
   fs-monkey@1.0.6:
     resolution: {integrity: sha512-b1FMfwetIKymC0eioW7mTywihSQE4oLzQn1dB6rZB5fx/3NpNEdAWeCSMB+60/AeT0TCXsxzAlcYVEFCTAksWg==}
 
@@ -6032,6 +6048,9 @@ packages:
 
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
+
+  magicast@0.3.5:
+    resolution: {integrity: sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ==}
 
   make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
@@ -13535,6 +13554,8 @@ snapshots:
       jsonfile: 4.0.0
       universalify: 0.1.2
 
+  fs-fixture@2.6.0: {}
+
   fs-monkey@1.0.6: {}
 
   fs.realpath@1.0.0: {}
@@ -14920,6 +14941,12 @@ snapshots:
   magic-string@0.30.12:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  magicast@0.3.5:
+    dependencies:
+      '@babel/parser': 7.26.2
+      '@babel/types': 7.26.0
+      source-map-js: 1.2.1
 
   make-dir@3.1.0:
     dependencies:

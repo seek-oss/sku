@@ -30,7 +30,7 @@ Config files can use either TypeScript or JavaScript.
 
 ## clientEntry
 
-type `string`
+Type: `string`
 
 Default: `./src/client.js`
 
@@ -40,7 +40,7 @@ Each `route` can also specify a client entry, if none is specified the `clientEn
 
 ## compilePackages
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `[]`
 
@@ -48,7 +48,7 @@ An array of `node_modules` to be compiled as if they were part of your source co
 
 ## cspEnabled
 
-type `boolean`
+Type: `boolean`
 
 **Unavailable for libraries**
 
@@ -58,7 +58,7 @@ Enable content security policy feature. See [`Content Security Policy`](./docs/c
 
 ## cspExtraScriptSrcHosts
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `[]`
 
@@ -66,9 +66,21 @@ Extra external hosts to allow in your `script-src` [content security policy](htt
 
 ## dangerouslySetESLintConfig
 
-type `function`
+Type: `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [ESLint](https://eslint.org/) config.
+This function provides a way to modify sku's ESLint configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your ESLint configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+
+ESLint rules help to maintain code quality and consistency.
+Some rules even prevent potential bugs in your code, e.g. React rules.
+Rather than disabling a rule purely because it causes frequent errors, consider whether these errors may be a symptom of a larger problem in your codebase.
+
+If you believe other consumers would benefit from the addition/removal/modificaton of a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
+
+> Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -83,11 +95,17 @@ export default {
 
 ## dangerouslySetJestConfig
 
-type `function`
+Type: `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [Jest](https://jestjs.io/docs/en/configuration) config. Make sure [`setupTests`](#setuptests) definitely doesn't cover your needs before using.
+This function provides a way to modify sku's Jest configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Please speak with the `sku-support` group before using.
+Make sure [`setupTests`] definitely doesn’t cover your needs before using.
+
+Before customizing your Jest configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+
+> Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -100,11 +118,19 @@ export default {
 } satisfies SkuConfig;
 ```
 
+[`setupTests`]: #setupTests
+
 ## dangerouslySetTSConfig
 
-type `function`
+Type: `function`
 
-Similar to `dangerouslySetWebpackConfig`, but for [TypeScript (`tsconfig.json`)](https://www.typescriptlang.org/tsconfig).
+This function provides a way to modify sku's TypeScript configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your TypeScript configuration, please reach out in [`#sku-support`]() to discuss your requirements and potential alternative solutions.
+
+> Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -120,13 +146,18 @@ export default {
 
 ## dangerouslySetWebpackConfig
 
-type `function`
+Type: `function`
 
-This function provides a way to override the webpack config after sku has created it. As sku creates two webpack configs (`client` & `server|render`) this function will actually run twice, if you only need to modify one, then you can check `config.name`.
+This function provides a way to modify sku's Webpack configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Ideally, this setting is not needed and only used for experimenting/debugging. If you require webpack features not currently supported by sku please speak to the `sku-support` group.
+Before customizing your Webpack configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
 
-Reliance on this setting will cause issues when upgrading sku as any custom settings may break at any time. You've been warned!
+As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
+If you only need to modify one of these configs, then you can check `config.name`.
+
+> Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
 Example:
 
@@ -141,7 +172,7 @@ export default {
 
 ## devServerMiddleware
 
-type `string`
+Type: `string`
 
 Path to a file in your project that exports a function that can receive the Express server.
 
@@ -159,7 +190,7 @@ module.exports = app => {
 
 ## displayNamesProd
 
-type `boolean`
+Type: `boolean`
 
 Default: `false`
 
@@ -177,7 +208,7 @@ export default {
 
 **Only for static apps**
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `[]`
 
@@ -185,7 +216,7 @@ An array of environments the app supports. Apps should have one environment for 
 
 ## externalizeNodeModules
 
-type `boolean`
+Type: `boolean`
 
 Default: `false`
 
@@ -193,7 +224,7 @@ By default, sku compiles all node_modules in builds that target node. Setting th
 
 ## hosts
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `['localhost']`
 
@@ -201,7 +232,7 @@ An array of custom hosts the app can be served off when running `sku start`. You
 
 ## httpsDevServer
 
-type `boolean`
+Type: `boolean`
 
 Default: `false`
 
@@ -209,7 +240,7 @@ Whether or not to use `https` for the local development server with a self-signe
 
 ## initialPath
 
-type `string`
+Type: `string`
 
 Default: `routes[0].route`
 
@@ -217,7 +248,7 @@ The browser URL to open when running `sku start` or `sku start-ssr`. It will def
 
 ## languages
 
-type `Array<string | { name: string, extends: string }>`
+Type: `Array<string | { name: string, extends: string }>`
 
 The languages your application supports.
 
@@ -225,7 +256,7 @@ See [Multi-language support](./docs/multi-language.md) for details.
 
 ## libraryEntry
 
-type `string`
+Type: `string`
 
 **Only for libraries**
 
@@ -241,7 +272,7 @@ export default () => {
 
 ## libraryName
 
-type `string`
+Type: `string`
 
 **Only for libraries**
 
@@ -249,7 +280,7 @@ The global name of the library. Will be added to the `window` object under `wind
 
 ## libraryFile
 
-type `string`
+Type: `string`
 
 **Only for libraries**
 
@@ -260,7 +291,7 @@ If `libraryFile` is not specified then `libraryName` will be used instead.
 
 ## polyfills
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `[]`
 
@@ -268,7 +299,7 @@ An array of polyfills to be included into all client entry points.
 
 ## port
 
-type `number`
+Type: `number`
 
 Default: `8080`
 
@@ -276,7 +307,7 @@ The port the app is hosted on when running `sku start`.
 
 ## public
 
-type `string`
+Type: `string`
 
 Default: `public`
 
@@ -286,7 +317,7 @@ A folder of public assets to be copied into the `target` directory after `sku bu
 
 ## publicPath
 
-type `string`
+Type: `string`
 
 Default: `/`
 
@@ -294,7 +325,7 @@ The URL all the static assets of the app are accessible under.
 
 ## renderEntry
 
-type `string`
+Type: `string`
 
 **Only for static apps and libraries**
 
@@ -304,7 +335,7 @@ The render entry file to the app. This file should export the required functions
 
 ## rootResolution
 
-type `boolean`
+Type: `boolean`
 
 Default: `true`
 
@@ -316,7 +347,7 @@ You can set this option in `sku.config.js`, or adding `"skuCompilePackage": true
 
 ## routes
 
-type `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
+Type: `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
 
 **Only for static apps**
 
@@ -336,7 +367,7 @@ export default {
 
 ## serverEntry
 
-type `string`
+Type: `string`
 
 **Only for SSR apps**
 
@@ -346,7 +377,7 @@ The entry file for the server.
 
 ## serverPort
 
-type `number`
+Type: `number`
 
 **Only for SSR apps**
 
@@ -356,7 +387,7 @@ The port the server is hosted on when running `sku start-ssr`.
 
 ## setupTests
 
-type `string`
+Type: `string`
 
 Point to a JS file that will run before your tests to setup the testing environment.
 
@@ -364,7 +395,7 @@ Point to a JS file that will run before your tests to setup the testing environm
 
 **Only for static apps**
 
-type `Array<string | { name: string, host: string, languages: Array<string>, routes: Array<string> }>`
+Type: `Array<string | { name: string, host: string, languages: Array<string>, routes: Array<string> }>`
 
 Default: `[]`
 
@@ -376,7 +407,7 @@ Can be used to limit the languages rendered for a specific site. Any listed lang
 
 ## skipPackageCompatibilityCompilation
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `[]`
 
@@ -394,7 +425,7 @@ const config = {
 
 ## sourceMapsProd
 
-type `boolean`
+Type: `boolean`
 
 Default: `true`
 
@@ -426,7 +457,7 @@ If your application does not utilize production source maps, e.g. you have no tr
 
 ## srcPaths
 
-type `Array<string>`
+Type: `Array<string>`
 
 Default: `['./src']`
 
@@ -434,7 +465,7 @@ An array of directories holding your app's source code. By default, sku expects 
 
 ## supportedBrowsers
 
-type `browserslist-query`
+Type: `browserslist-query`
 
 Default: [browserslist-config-seek](https://github.com/seek-oss/browserslist-config-seek)
 
@@ -442,7 +473,7 @@ The [`browserslist`](https://github.com/browserslist/browserslist) query describ
 
 ## target
 
-type `string`
+Type: `string`
 
 Default: `dist`
 
@@ -450,10 +481,12 @@ The directory to build your assets into when running `sku build` or `sku build-s
 
 ## transformOutputPath
 
-type `function`
+Type: `function`
 
 **Only for static apps**
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
-This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
+This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
+
+[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU

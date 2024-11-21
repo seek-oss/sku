@@ -1,5 +1,46 @@
 # sku
 
+## 13.3.0
+
+### Minor Changes
+
+- Update TypeScript to 5.6 ([#1048](https://github.com/seek-oss/sku/pull/1048))
+
+  This release includes breaking changes. See the [TypeScript 5.6 announcement] for more information.
+
+  [TypeScript 5.6 announcement]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-6/
+
+- Update and pin `browserslist-config-seek` to version `3.2.0` ([#1078](https://github.com/seek-oss/sku/pull/1078))
+
+  `sku` applications and libraries now default to supporting the following browser versions:
+
+  | Browser          | Oldest supported version |
+  | ---------------- | ------------------------ |
+  | Chrome           | 84                       |
+  | Edge             | 84                       |
+  | Safari           | 14.1                     |
+  | Firefox          | 86                       |
+  | Samsung Internet | 14                       |
+
+### Patch Changes
+
+- Set `esbuild-register` target to `node18.20` ([#1076](https://github.com/seek-oss/sku/pull/1076))
+
+- `sku translations`: Throw an error when `languages` has not been configured ([#1090](https://github.com/seek-oss/sku/pull/1090))
+
+  Previously, if `languages` was not configured, the `sku translations` command would log a message and continue to run the command, which would eventually error due to the lack of a vocab config (generated from the `languages` config).
+  We now throw an error sooner to make it clear that the `languages` configuration is required to run any `sku translations` commands.
+
+- `sku translations`: Suggest using the `vocab` CLI when `languages` is not configured and a vocab config file is detected ([#1090](https://github.com/seek-oss/sku/pull/1090))
+
+- `sku translations`: Improve log messages and align timing of log messages with actual command execution ([#1075](https://github.com/seek-oss/sku/pull/1075))
+
+- `sku pre-commit`: Update `lint-staged` dependency to `^15.2.10` ([#1084](https://github.com/seek-oss/sku/pull/1084))
+
+- Update `env-ci` dependency to `^11.1.0` ([#1082](https://github.com/seek-oss/sku/pull/1082))
+
+- `sku translations`: When `languages` is configured in sku config _and_ a vocab config file is found, a warning will be shown telling the user that the vocab config file will be ignored ([#1090](https://github.com/seek-oss/sku/pull/1090))
+
 ## 13.2.1
 
 ### Patch Changes

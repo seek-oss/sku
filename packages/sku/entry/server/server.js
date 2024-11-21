@@ -1,6 +1,6 @@
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import path from 'node:path';
-import express from 'express';
+import express, { static as expressStatic } from 'express';
 import makeExtractor from '../makeExtractor';
 import createCSPHandler from '../csp';
 import serverExports from '__sku_alias__serverEntry';
@@ -29,7 +29,7 @@ if (env === 'development') {
 
   // Fallthrough to serve any static file requests from root
   // E.g. compiled output files and images
-  app.use(express.static(path.join(__dirname, './')));
+  app.use(expressStatic(path.join(__dirname, './')));
 }
 
 if (env !== 'development') {

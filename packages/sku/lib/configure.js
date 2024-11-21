@@ -1,8 +1,7 @@
-const { writeFile, rm } = require('node:fs/promises');
+const { rm } = require('node:fs/promises');
 const path = require('node:path');
 
 const ensureGitignore = require('ensure-gitignore');
-const { getPathFromCwd } = require('./cwd');
 
 const { paths, httpsDevServer, languages } = require('../context');
 const {
@@ -12,21 +11,12 @@ const prettierConfig = require('../config/prettier/prettierConfig');
 const eslintConfig = require('../config/eslint/eslintConfig');
 const createTSConfig = require('../config/typescript/tsconfig.js');
 const getCertificate = require('./certificate');
-const managedConfigBanner = require('./managedConfigBanner.js');
+const { getPathFromCwd, writeFileToCWD } = require('./cwd');
 
 const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr) => pathStr.replace(/\\/g, '/');
 const addSep = (p) => `${p}${path.sep}`;
-const prependBanner = (str) => `${managedConfigBanner}\n${str}`;
-
-const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
-  const outPath = getPathFromCwd(fileName);
-  const str = JSON.stringify(content, null, 2);
-  const contentStr = banner ? prependBanner(str) : str;
-
-  await writeFile(outPath, contentStr);
-};
 
 module.exports = async () => {
   // Ignore target directories

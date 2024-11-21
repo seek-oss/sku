@@ -9,6 +9,10 @@
   "exports": {
     ".": "./sku-types.d.ts",
     "./jest-preset": "./config/jest/jest-preset.js",
+    "./config/eslint": {
+      "default": "./config/eslint/index.js",
+      "types": "./config/eslint/index.d.ts"
+    },
     "./config/storybook": {
       "default": "./config/storybook/index.js",
       "types": "./config/storybook/index.d.ts"

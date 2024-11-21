@@ -219,6 +219,15 @@ export interface SkuConfig {
   environments?: readonly string[];
 
   /**
+   * Paths and files to be ignored by ESLint.
+   * See [the ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore#ignoring-files) for more information.
+   *
+   * @default []
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=eslintIgnore
+   */
+  eslintIgnore?: readonly string[];
+
+  /**
    * By default, sku compiles all node_modules in builds that target node.
    * Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
    *

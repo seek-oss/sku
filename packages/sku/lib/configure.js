@@ -43,7 +43,11 @@ module.exports = async () => {
     console.log("'.eslintignore' file detected. Attempting migration...");
 
     const eslintIgnorePath = getPathFromCwd('.eslintignore');
-    const customIgnores = migrateEslintignore(eslintIgnorePath);
+    const customIgnores = migrateEslintignore({
+      eslintIgnorePath,
+      hasLanguagesConfig: Boolean(languages),
+      target: paths.relativeTarget,
+    });
 
     if (customIgnores.length > 0) {
       try {
@@ -52,7 +56,7 @@ module.exports = async () => {
           eslintIgnore: customIgnores,
         });
         console.log(
-          "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config",
+          "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config.",
         );
       } catch (e) {
         console.log("Failed to automatically migrate '.eslintignore' file");
@@ -64,6 +68,10 @@ module.exports = async () => {
           chalk.green(JSON.stringify(customIgnores, null, 2)),
         );
       }
+
+      console.log(
+        "Please note that this is a best-effort migration and you should manually review the 'eslintIgnore' property in your sku config.",
+      );
     } else {
       console.log("No custom ignores found in '.eslintignore' file");
     }

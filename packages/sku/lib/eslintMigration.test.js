@@ -29,13 +29,42 @@ describe('eslintMigration', () => {
           pnpm-lock.yaml`,
       });
 
-      const result = migrateEslintignore(fixture.getPath('.eslintignore'));
-
+      const result = migrateEslintignore({
+        eslintignorePath: fixture.getPath('.eslintignore'),
+        hasLanguagesConfig: false,
+        target: 'dist',
+      });
       expect(result).toMatchInlineSnapshot(`
         [
           "src/graphql/types.ts",
         ]
       `);
+
+      await fixture.rm();
+    });
+
+    it("should return the correct config when a 'languages' and a custom 'target' are configured", async () => {
+      const fixture = await createFixture({
+        '.eslintignore': dedent`
+          # managed by sku
+          **/*.vocab/index.ts
+          .eslintcache
+          .prettierrc
+          coverage/
+          dist/foo/
+          report/
+          tsconfig.json
+          pnpm-lock.yaml
+          # end managed by sku
+          `,
+      });
+
+      const result = migrateEslintignore({
+        eslintignorePath: fixture.getPath('.eslintignore'),
+        hasLanguagesConfig: true,
+        target: 'dist/foo',
+      });
+      expect(result).toMatchInlineSnapshot(`[]`);
 
       await fixture.rm();
     });

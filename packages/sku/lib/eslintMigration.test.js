@@ -1,9 +1,10 @@
+// @ts-check
 const {
   migrateEslintignore,
   addEslintIgnoreToSkuConfig,
 } = require('./eslintMigration');
 const { createFixture } = require('fs-fixture');
-const dedent = require('dedent');
+const { default: dedent } = require('dedent');
 
 describe('eslintMigration', () => {
   describe('migrateEslintignore', () => {
@@ -30,7 +31,7 @@ describe('eslintMigration', () => {
       });
 
       const result = migrateEslintignore({
-        eslintignorePath: fixture.getPath('.eslintignore'),
+        eslintIgnorePath: fixture.getPath('.eslintignore'),
         hasLanguagesConfig: false,
         target: 'dist',
       });
@@ -60,7 +61,7 @@ describe('eslintMigration', () => {
       });
 
       const result = migrateEslintignore({
-        eslintignorePath: fixture.getPath('.eslintignore'),
+        eslintIgnorePath: fixture.getPath('.eslintignore'),
         hasLanguagesConfig: true,
         target: 'dist/foo',
       });

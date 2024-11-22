@@ -42,9 +42,7 @@ module.exports = async () => {
   if (await shouldMigrateOldEslintConfig()) {
     console.log("'.eslintignore' file detected. Attempting migration...");
 
-    const eslintIgnorePath = getPathFromCwd('.eslintignore');
     const customIgnores = migrateEslintignore({
-      eslintIgnorePath,
       hasLanguagesConfig: Boolean(languages),
       target: paths.relativeTarget,
     });

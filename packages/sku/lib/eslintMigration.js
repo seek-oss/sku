@@ -49,18 +49,18 @@ const isCustomIgnoreEntry =
  * be ignored.
  *
  * @param {object} options
- * @param {string} options.eslintignorePath - Path to the .eslintignore file
+ * @param {string | undefined} options.eslintIgnorePath - Path to the .eslintignore file
  * @param {boolean} options.hasLanguagesConfig - Whether 'languages' is configured in sku config
  * @param {string | undefined} options.target - The configured 'target' directory in sku config
  *
  * @returns {string[]}}
  */
 const migrateEslintignore = ({
-  eslintignorePath,
+  eslintIgnorePath: _eslintIgnorePath = getPathFromCwd('.eslintignore'),
   hasLanguagesConfig,
   target,
 }) => {
-  const result = includeIgnoreFile(eslintignorePath);
+  const result = includeIgnoreFile(_eslintIgnorePath);
   const { ignores: skuEslintIgnores } = createEslintIgnoresConfig({
     hasLanguagesConfig,
     target,

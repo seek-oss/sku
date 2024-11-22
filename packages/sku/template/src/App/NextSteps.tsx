@@ -117,7 +117,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                   <Heading level="3">Brand resources</Heading>
                   <Text>
                     To align your project to SEEK's brand standards it is
-                    reccomended to install{' '}
+                    recommended to install{' '}
                     <TextLink href="https://github.com/SEEK-Jobs/shared-web-assets">
                       Shared web assets
                     </TextLink>

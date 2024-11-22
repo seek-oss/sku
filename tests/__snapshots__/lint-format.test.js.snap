@@ -71,6 +71,13 @@ stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
 Paths: .
-src/unformattedFile1.js
-To fix this issue, run 'pnpm run format'
+Checking code with ESLint
+Paths: .
+
+1:1  error  Unexpected console statement                    no-console
+3:4  error  Unexpected focused test                         jest/no-focused-tests
+4:7  error  'foo' is never reassigned. Use 'const' instead  prefer-const
+
+✖ 3 problems (3 errors, 0 warnings)
+1 error and 0 warnings potentially fixable with the \`--fix\` option.
 `;

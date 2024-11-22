@@ -1,8 +1,6 @@
 const { rm } = require('node:fs/promises');
 const path = require('node:path');
 
-const debug = require('debug');
-const log = debug('sku:configure');
 const dedent = require('dedent');
 const chalk = require('chalk');
 
@@ -15,7 +13,7 @@ const {
 } = require('../config/webpack/plugins/bundleAnalyzer');
 const { paths, httpsDevServer, languages } = require('../context');
 const {
-  shouldMigrateEslintIgnore,
+  shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
@@ -41,30 +39,36 @@ module.exports = async () => {
   ];
 
   // TODO: Remove this migration before releasing sku v15.
-  if (await shouldMigrateEslintIgnore()) {
-    log('Old eslint config or ignore file detected. Attempting migration');
+  if (await shouldMigrateOldEslintConfig()) {
+    console.log("'.eslintignore' file detected. Attempting migration...");
 
     const eslintIgnorePath = getPathFromCwd('.eslintignore');
-    const userIgnores = migrateEslintignore(eslintIgnorePath);
+    const customIgnores = migrateEslintignore(eslintIgnorePath);
 
-    if (userIgnores.length > 0) {
+    if (customIgnores.length > 0) {
       try {
         await addEslintIgnoreToSkuConfig({
           skuConfigPath: paths.appSkuConfigPath,
-          eslintIgnore: userIgnores,
+          eslintIgnore: customIgnores,
         });
+        console.log(
+          "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config",
+        );
       } catch (e) {
-        console.log("Failed to automatically migrate '.eslintignore' file.");
+        console.log("Failed to automatically migrate '.eslintignore' file");
         console.log('Error:', e.message, '\n');
 
         console.log('Please manually add the following to your sku config:');
         console.log(
           chalk.green('eslintIgnore:'),
-          chalk.green(JSON.stringify(userIgnores, null, 2)),
+          chalk.green(JSON.stringify(customIgnores, null, 2)),
         );
       }
+    } else {
+      console.log("No custom ignores found in '.eslintignore' file");
     }
 
+    console.log("Deleting '.eslintrc' and '.eslintignore' files...");
     await cleanUpOldEslintFiles();
     console.log("Successfully deleted '.eslintrc' and '.eslintignore' files.");
   }

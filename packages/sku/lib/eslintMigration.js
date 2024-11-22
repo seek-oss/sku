@@ -2,7 +2,7 @@
 const { rm } = require('node:fs/promises');
 const { includeIgnoreFile } = require('@eslint/compat');
 
-const { ignores: skuEslintIgnores } = require('../config/eslint/ignores.js');
+const { createEslintIgnoresConfig } = require('../config/eslint/ignores.js');
 
 const { getPathFromCwd } = require('./cwd.js');
 const exists = require('./exists.js');
@@ -10,8 +10,12 @@ const { SkuConfigUpdater } = require('./SkuConfigUpdater.js');
 
 const oldEslintConfigPath = getPathFromCwd('.eslintrc');
 const eslintIgnorePath = getPathFromCwd('.eslintignore');
+const {
+  paths: { relativeTarget },
+  languages,
+} = require('../context');
 
-const shouldMigrateEslintIgnore = async () =>
+const shouldMigrateOldEslintConfig = async () =>
   (
     await Promise.all([exists(oldEslintConfigPath), exists(eslintIgnorePath)])
   ).some(Boolean);
@@ -19,6 +23,26 @@ const shouldMigrateEslintIgnore = async () =>
 const cleanUpOldEslintFiles = async () => {
   await rm(oldEslintConfigPath, { force: true });
   await rm(eslintIgnorePath, { force: true });
+};
+
+// Old ignore entries that no longer need to be ignored
+const oldIgnoreEntries = ['**/.eslintrc'];
+
+/**
+ * Returns true if the provided ignore entry is not already ignored by sku's eslint config or is an
+ * old ignore entry that no longer needs to be ignored.
+ * @param {string} ignore
+ */
+const isCustomIgnoreEntry = (ignore) => {
+  const hasLanguagesConfig = Boolean(languages);
+  const { ignores: skuEslintIgnores } = createEslintIgnoresConfig({
+    hasLanguagesConfig,
+    target: relativeTarget,
+  });
+
+  return !(
+    skuEslintIgnores.includes(ignore) || oldIgnoreEntries.includes(ignore)
+  );
 };
 
 /**
@@ -32,12 +56,9 @@ const cleanUpOldEslintFiles = async () => {
  */
 const migrateEslintignore = (eslintignorePath) => {
   const result = includeIgnoreFile(eslintignorePath);
-  const userIgnores =
-    result.ignores?.filter(
-      (ignore) => !skuEslintIgnores.ignores.includes(ignore),
-    ) || [];
+  const customIgnores = result.ignores?.filter(isCustomIgnoreEntry) || [];
 
-  return userIgnores;
+  return customIgnores;
 };
 
 /**
@@ -53,7 +74,7 @@ const addEslintIgnoreToSkuConfig = async ({ skuConfigPath, eslintIgnore }) => {
 };
 
 module.exports = {
-  shouldMigrateEslintIgnore,
+  shouldMigrateOldEslintConfig,
   cleanUpOldEslintFiles,
   migrateEslintignore,
   addEslintIgnoreToSkuConfig,

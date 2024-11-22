@@ -7,14 +7,14 @@ const dedent = require('dedent');
 
 describe('eslintMigration', () => {
   describe('migrateEslintignore', () => {
-    it("should return a migrated eslint ignore config exluding any of sku's ignore entries", async () => {
+    it("should return a migrated eslint ignore config exluding any of sku's ignore entries or old ignore entries", async () => {
       const fixture = await createFixture({
         '.eslintignore': dedent`
-          src/graphql/types.ts
-
           # managed by sku
           .eslintcache
           .prettierrc
+          # no longer ignored by sku
+          .eslintrc
           coverage/
           dist/
           report/
@@ -22,6 +22,10 @@ describe('eslintMigration', () => {
           pnpm-lock.yaml
           # end managed by sku
 
+          # custom user ignore
+          src/graphql/types.ts
+
+          # duplicate of a sku ignore
           pnpm-lock.yaml`,
       });
 

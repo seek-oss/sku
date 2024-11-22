@@ -139,6 +139,7 @@ exports[`sku init should create src/App/NextSteps.tsx 1`] = `
   TextLink,
   Stack,
   List,
+  Divider,
 } from 'braid-design-system';
 
 import * as styles from './NextSteps.css';
@@ -180,12 +181,9 @@ export function NextSteps({ environment }: NextStepsProps) {
             boxShadow="large"
             padding={{ mobile: 'large', tablet: 'xlarge', desktop: 'xxlarge' }}
           >
-            <Stack
-              space={{ mobile: 'xlarge', desktop: 'xxlarge' }}
-              dividers="strong"
-            >
+            <Stack space={{ mobile: 'xlarge', desktop: 'xxlarge' }}>
               <Stack space="large">
-                <Heading level="2">🏃🏾‍♀️ Next steps</Heading>
+                <Heading level="2">🧰 Features and Tooling</Heading>
                 <Text>
                   The project comes pre-configured with a lot of standardised
                   tooling to make authoring web applications easier.
@@ -239,6 +237,41 @@ export function NextSteps({ environment }: NextStepsProps) {
                 </Stack>
               </Stack>
 
+              <Divider weight="strong" />
+
+              <Stack space="large">
+                <Heading level="2">🏃‍♀️ Next steps</Heading>
+                <Text>
+                  Ensure you’re fully set up with these additional
+                  recommendations.
+                </Text>
+                <Stack space="gutter">
+                  <Heading level="3">Brand resources</Heading>
+                  <Text>
+                    To align your project to SEEK's brand standards it is
+                    reccomended to install{' '}
+                    <TextLink href="https://github.com/SEEK-Jobs/shared-web-assets">
+                      Shared web assets
+                    </TextLink>
+                    .
+                  </Text>
+                </Stack>
+
+                <Stack space="gutter">
+                  <Heading level="3">Telemetry</Heading>
+                  <Text>
+                    To help us improve sku, please install our private{' '}
+                    <TextLink href="https://github.com/SEEK-Jobs/sku-telemetry">
+                      sku telemetry
+                    </TextLink>{' '}
+                    package that gives us insights on usage, errors and
+                    performance.
+                  </Text>
+                </Stack>
+              </Stack>
+
+              <Divider weight="strong" />
+
               <Stack space="large">
                 <Heading level="2">🙋‍♂️ Support</Heading>
 
@@ -281,6 +314,8 @@ export function NextSteps({ environment }: NextStepsProps) {
                   </Text>
                 </Stack>
               </Stack>
+
+              <Divider weight="strong" />
 
               <Stack space="large">
                 <Heading level="2">📣 Announcements</Heading>

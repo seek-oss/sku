@@ -66,6 +66,7 @@ module.exports = async () => {
     }
 
     await cleanUpOldEslintFiles();
+    console.log("Successfully deleted '.eslintrc' and '.eslintignore' files.");
   }
 
   const eslintConfigFilename = 'eslint.config.js';

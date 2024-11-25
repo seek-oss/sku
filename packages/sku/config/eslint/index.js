@@ -1,15 +1,28 @@
+// @ts-check
+// @ts-expect-error `eslint-config-seek` has no types yet
 const eslintConfigSeek = require('eslint-config-seek');
 const { importOrderConfig } = require('./importOrder.js');
-const { ignores: skuEslintIgnores } = require('./ignores.js');
-const { eslintDecorator, eslintIgnore } = require('../../context/index.js');
+const { createEslintIgnoresConfig } = require('./ignores.js');
+const {
+  eslintDecorator,
+  eslintIgnore,
+  languages,
+  paths: { relativeTarget },
+} = require('../../context/index.js');
 
 const _eslintConfigSku = [
-  skuEslintIgnores,
+  createEslintIgnoresConfig({
+    hasLanguagesConfig: Boolean(languages && languages.length > 0),
+    target: relativeTarget,
+  }),
   ...eslintConfigSeek,
   importOrderConfig,
-  ...(eslintIgnore.length > 0 ? [{ ignores: eslintIgnore }] : []),
+  ...(eslintIgnore && eslintIgnore.length > 0
+    ? [{ ignores: eslintIgnore }]
+    : []),
 ];
 
 module.exports = {
-  eslintConfigSku: eslintDecorator(_eslintConfigSku),
+  // @ts-expect-error TypeScript will complain until `eslint-config-seek` has types
+  eslintConfigSku: eslintDecorator?.(_eslintConfigSku),
 };

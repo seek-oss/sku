@@ -1,6 +1,6 @@
 import 'braid-design-system/reset';
 import { createRoot } from 'react-dom/client';
-import theme from 'braid-design-system/themes/apac';
+import theme from 'braid-design-system/themes/seekJobs';
 
 import { BraidProvider, Card, Text } from 'braid-design-system';
 

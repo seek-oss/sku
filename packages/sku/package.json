@@ -160,7 +160,7 @@
     "@types/wrap-ansi": "^3.0.0",
     "@vanilla-extract/css": "^1.0.0",
     "@vocab/react": "^1.1.11",
-    "braid-design-system": "^32.0.0",
+    "braid-design-system": "^33.1.0",
     "fs-fixture": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

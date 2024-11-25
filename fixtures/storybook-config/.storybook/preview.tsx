@@ -1,7 +1,7 @@
 import 'braid-design-system/reset';
 
 import { BraidProvider, Text } from 'braid-design-system';
-import apac from 'braid-design-system/themes/apac';
+import seekJobs from 'braid-design-system/themes/seekJobs';
 
 import type { Preview } from '@storybook/react';
 
@@ -16,7 +16,7 @@ export default {
       </div>
     ),
     (Story) => (
-      <BraidProvider theme={apac}>
+      <BraidProvider theme={seekJobs}>
         <Story />
       </BraidProvider>
     ),

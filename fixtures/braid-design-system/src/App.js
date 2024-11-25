@@ -8,7 +8,7 @@ import {
   IconChevron,
   Box,
 } from 'braid-design-system';
-import theme from 'braid-design-system/themes/apac';
+import theme from 'braid-design-system/themes/seekJobs';
 
 import { vanillaBox } from './App.css';
 

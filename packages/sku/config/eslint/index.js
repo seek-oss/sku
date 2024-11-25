@@ -23,6 +23,5 @@ const _eslintConfigSku = [
 ];
 
 module.exports = {
-  // @ts-expect-error TypeScript will complain until `eslint-config-seek` has types
   eslintConfigSku: eslintDecorator?.(_eslintConfigSku),
 };

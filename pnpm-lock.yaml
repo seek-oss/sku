@@ -611,6 +611,9 @@ importers:
       '@swc/core':
         specifier: ^1.6.13
         version: 1.9.2
+      '@types/eslint':
+        specifier: ^9.6.1
+        version: 9.6.1
       '@types/express':
         specifier: ^4.17.11
         version: 4.17.21
@@ -858,9 +861,6 @@ importers:
       '@types/env-ci':
         specifier: ^3.1.4
         version: 3.1.4
-      '@types/eslint':
-        specifier: ^9.6.1
-        version: 9.6.1
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5

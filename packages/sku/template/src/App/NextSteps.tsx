@@ -72,7 +72,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                     </TextLink>
                     , <TextLink href="https://jestjs.io/">Jest</TextLink>,{' '}
                     <TextLink href="https://eslint.org/">ESLint</TextLink>,{' '}
-                    , and more.
+                    and more.
                   </Text>
                 </Stack>
 

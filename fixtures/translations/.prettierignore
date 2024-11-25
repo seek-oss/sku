@@ -6,7 +6,7 @@ translations.ts
 .eslintrc
 .prettierrc
 coverage/
-dist-ssr/
+dist/
 pnpm-lock.yaml
 report/
 tsconfig.json

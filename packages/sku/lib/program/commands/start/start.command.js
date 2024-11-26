@@ -1,4 +1,5 @@
 const { Command } = require('commander');
+const statsOption = require("../../options/stats/stats.option");
 
 const start = new Command('start');
 
@@ -6,9 +7,10 @@ start
   .description(
     'Start the sku development server for a statically-rendered application.',
   )
-  .action(() => {
+  .addOption(statsOption)
+  .action(({ stats }) => {
     const startAction = require('./start.action');
-    startAction();
+    startAction({ stats });
   });
 
 module.exports = start;

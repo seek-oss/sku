@@ -39,7 +39,7 @@ const localhost = '0.0.0.0';
 
 const hot = process.env.SKU_HOT !== 'false';
 
-const startAction = async () => {
+const startAction = async ({ stats }) => {
   await configureProject();
   validatePeerDeps();
   console.log(blue(`sku start`));
@@ -62,6 +62,8 @@ const startAction = async () => {
     htmlRenderPlugin,
     metrics: true,
     hot,
+    isStartScript: true,
+    stats,
   });
 
   const clientCompiler = webpack(clientWebpackConfig);

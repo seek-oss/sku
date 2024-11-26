@@ -19,7 +19,7 @@ const renderEntry = require.resolve('../../entry/render');
 const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const { getVocabConfig } = require('../vocab/vocab');
-const statsConfig = require('./statsConfig');
+const getStatsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
@@ -47,6 +47,8 @@ const makeWebpackConfig = ({
   htmlRenderPlugin,
   metrics = false,
   hot = false,
+  isStartScript = false,
+  stats,
 } = {}) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -242,7 +244,10 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
-      stats: statsConfig,
+      stats: getStatsConfig({
+        stats,
+        isStartScript,
+      }),
       infrastructureLogging: {
         level: 'error',
       },

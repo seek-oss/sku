@@ -1,5 +1,5 @@
 // @ts-check
-const statsConfig = require('../config/webpack/statsConfig');
+const getStatsConfig = require('../config/webpack/statsConfig');
 
 /**
  * @param {import('webpack').Compiler} compiler
@@ -12,7 +12,14 @@ const run = async (compiler) =>
         reject(err);
       }
 
-      console.log(stats?.toString(statsConfig));
+      console.log(
+        stats?.toString(
+          getStatsConfig({
+            stats: '',
+            isStartScript: false,
+          }),
+        ),
+      );
 
       if (stats?.hasErrors()) {
         reject('Sku build failed');

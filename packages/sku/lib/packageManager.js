@@ -12,7 +12,9 @@ const {
   // eslint-disable-next-line import/no-unresolved
 } = require('package-manager-detector/constants');
 
-const skuArgs = require('../config/args');
+const program = require('./program');
+
+console.log('program: ', program);
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
@@ -61,9 +63,12 @@ const lockfileByPackageManager = {
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
+  console.log('program.opts(): ', program.opts());
   const packageManager = validatePackageManager(
-    skuArgs?.packageManager || getPackageManagerFromUserAgent(),
+    program.opts()?.packageManager || getPackageManagerFromUserAgent(),
   );
+
+  console.log('packageManager: ', packageManager);
 
   const lockFile = lockfileByPackageManager[packageManager];
   const lockFilePath = findUp.sync(lockFile);

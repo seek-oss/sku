@@ -22,7 +22,8 @@
     "node": ">=18.20"
   },
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "node ./scripts/postinstall.js",
+    "plop": "plop"
   },
   "repository": {
     "type": "git",
@@ -87,6 +88,7 @@
     "browserslist": "^4.16.1",
     "browserslist-config-seek": "3.2.0",
     "chalk": "^4.1.0",
+    "commander": "^12.1.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.7.1",
     "cssnano": "^6.0.0",
@@ -116,6 +118,7 @@
     "jest-environment-jsdom": "^29.0.0",
     "jest-watch-typeahead": "^2.2.0",
     "lint-staged": "^15.2.10",
+    "lodash": "^4.17.21",
     "magicast": "^0.3.5",
     "mini-css-extract-plugin": "^2.6.1",
     "minimist": "^1.2.8",
@@ -125,6 +128,7 @@
     "package-manager-detector": "^0.2.0",
     "path-to-regexp": "^6.2.0",
     "picomatch": "^3.0.1",
+    "plop": "^4.0.1",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
     "prettier": "^2.8.8",

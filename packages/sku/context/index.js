@@ -3,7 +3,6 @@ const path = require('node:path');
 const chalk = require('chalk');
 const { register } = require('esbuild-register/dist/node');
 const { getPathFromCwd } = require('../lib/cwd');
-const args = require('../config/args');
 const defaultSkuConfig = require('./defaultSkuConfig');
 const defaultClientEntry = require('./defaultClientEntry');
 const validateConfig = require('./validateConfig');
@@ -11,6 +10,7 @@ const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
 const targets = require('../config/targets.json');
+const program = require('../lib/program');
 
 /** @typedef {import("../").SkuConfig} SkuConfig */
 
@@ -20,7 +20,9 @@ const getSkuConfig = () => {
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
-  const customSkuConfig = args.config || process.env.SKU_CONFIG;
+  const config = program.opts()?.config;
+
+  const customSkuConfig = config || process.env.SKU_CONFIG;
 
   if (customSkuConfig) {
     appSkuConfigPath = getPathFromCwd(customSkuConfig);
@@ -69,8 +71,10 @@ if (isCompilePackage && skuConfig.rootResolution) {
   process.exit(1);
 }
 
-const isStartScript = args.script === 'start-ssr' || args.script === 'start';
-const isBuildScript = args.script === 'build-ssr' || args.script === 'build';
+const firstArg = process.argv[2];
+
+const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
+const isBuildScript = firstArg === 'build' || firstArg === 'build-ssr';
 
 /**
  * @typedef {import('../').SkuRouteObject} SkuRouteObject

@@ -1,5 +1,5 @@
 const { Command } = require('commander');
-const statsOption = require("../../options/stats/stats.option");
+const statsOption = require('../../options/stats/stats.option');
 
 const start = new Command('start');
 

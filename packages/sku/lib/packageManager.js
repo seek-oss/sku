@@ -14,8 +14,6 @@ const {
 
 const program = require('./program');
 
-console.log('program: ', program);
-
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
 const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
@@ -63,12 +61,9 @@ const lockfileByPackageManager = {
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
-  console.log('program.opts(): ', program.opts());
   const packageManager = validatePackageManager(
     program.opts()?.packageManager || getPackageManagerFromUserAgent(),
   );
-
-  console.log('packageManager: ', packageManager);
 
   const lockFile = lockfileByPackageManager[packageManager];
   const lockFilePath = findUp.sync(lockFile);

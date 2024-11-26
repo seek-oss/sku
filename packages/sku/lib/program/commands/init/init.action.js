@@ -124,7 +124,7 @@ const initAction = async (projectName, { verbose }) => {
 
   const templateDirectory = path.join(
     toPosixPath(__dirname),
-    '../../../template',
+    '../../../../template',
   );
 
   const templateFiles = await new Fdir()

@@ -203,7 +203,6 @@ const initAction = async (projectName, { verbose }) => {
   );
   console.log();
 
-  // TODO: add loglevel to sku init as option.
   const logLevel = verbose ? 'verbose' : 'regular';
 
   await install({ deps, logLevel });

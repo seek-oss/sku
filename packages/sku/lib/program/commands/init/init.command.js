@@ -5,7 +5,10 @@ const init = new Command('init');
 init
   .description('Initialize a new sku project')
   .argument('[packageName]', 'Package name')
-  .option('--verbose', 'Verbose log output')
+  .option(
+    '--verbose',
+    "Sets the underlying packageManager's log level to `verbose`",
+  )
   .action((packageName, verbose) => {
     const initAction = require('./init.action');
     initAction(packageName, { verbose });

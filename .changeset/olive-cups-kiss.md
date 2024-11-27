@@ -21,7 +21,7 @@ The following option flags are now available in their respective scope
 - __new:__ the `-h, --help` flag now shows you the full CLI usage of any command or subcommand
 - __new:__ the `-v, --version` flag now shows you the version of the CLI
 
-#### scoped options:
+#### Scoped options
 
 - the `build`, `build-ssr`, `start`, and `start-ssr commands` have the following options
   - `-s, --stats` the webpack preset to use. This option now only accepts a valid webpack stats preset.

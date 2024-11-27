@@ -4,13 +4,14 @@ const packageManagerOption = require('./options/packageManager/packageManager.op
 const debugOption = require('./options/debug/debug.option');
 const configOption = require('./options/config/config.option');
 const environmentOption = require('./options/environment/environment.option');
+const { name, description, version } = require('../../package.json');
 
 const program = new Command();
 
 program
-  .name('sku')
-  .description('sku description')
-  .version('sku version')
+  .name(name)
+  .description(description)
+  .version(version)
   .allowUnknownOption(true)
   .addOption(environmentOption)
   .addOption(configOption)

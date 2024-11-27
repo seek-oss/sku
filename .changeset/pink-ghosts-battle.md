@@ -38,7 +38,7 @@ For example:
 import type { SkuConfig } from 'sku';
 
 export default {
-  eslintIgnore: ['a-large-file.js', '**/generated/]
+  eslintIgnore: ['a-large-file.js', '**/generated/']
 } satisfies SkuConfig;
 ```
 

@@ -15,7 +15,7 @@ The following option flags are now available in their respective scope
 #### Global options
 
 - the `-e, --environment` option accepts a string for the environment you want to run in
-- the `-c, --config option` accepts the path to the sku.config.js file
+- the `-c, --config` option accepts the path to the sku.config.js file
 - the `-d, --debug` option sets debugging to true
 - __new:__ the `-h, --help` flag now shows you the full CLI usage of any command or subcommand
 - __new:__ the `-v, --version` flag now shows you the version of the CLI

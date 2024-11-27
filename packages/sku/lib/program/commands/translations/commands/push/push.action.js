@@ -4,7 +4,7 @@ const {
   getResolvedVocabConfig,
 } = require('../../helpers/translation-helpers');
 const { push } = require('@vocab/phrase');
-const { configureProject } = require('../../../../../utils/config-validators');
+const { configureProject } = require('../../../../../utils/configure');
 
 const log = (message) => console.log(chalk.cyan(message));
 

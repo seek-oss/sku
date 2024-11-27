@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { configureProject } = require('../../../utils/config-validators');
+const { configureProject } = require('../../../utils/configure');
 const esLintFix = require('../../../runESLint').fix;
 const prettierWrite = require('../../../runPrettier').write;
 

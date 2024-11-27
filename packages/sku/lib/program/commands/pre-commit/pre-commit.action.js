@@ -1,5 +1,5 @@
 const preCommit = require('../../../preCommit');
-const { configureProject } = require('../../../utils/config-validators');
+const { configureProject } = require('../../../utils/configure');
 
 const preCommitAction = async () => {
   await configureProject();

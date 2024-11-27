@@ -4,7 +4,7 @@ const prettierCheck = require('../../../runPrettier').check;
 const runTsc = require('../../../runTsc');
 
 const { runVocabCompile } = require('../../../runVocab');
-const { configureProject } = require('../../../utils/config-validators');
+const { configureProject } = require('../../../utils/configure');
 
 const lintAction = async (paths) => {
   await configureProject();

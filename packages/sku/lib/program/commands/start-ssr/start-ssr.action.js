@@ -30,7 +30,7 @@ const { watchVocabCompile } = require('../../../runVocab');
 const {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/config-validators');
+} = require('../../../utils/configure');
 
 const hot = process.env.SKU_HOT !== 'false';
 

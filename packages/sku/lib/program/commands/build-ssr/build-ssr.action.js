@@ -19,7 +19,7 @@ const { runVocabCompile } = require('../../../runVocab');
 const {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/config-validators');
+} = require('../../../utils/configure');
 
 const buildSsrAction = async ({ stats }) => {
   await configureProject();

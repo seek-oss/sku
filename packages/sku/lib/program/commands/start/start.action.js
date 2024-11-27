@@ -33,7 +33,7 @@ const { watchVocabCompile } = require('../../../runVocab');
 const {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/config-validators');
+} = require('../../../utils/configure');
 
 const localhost = '0.0.0.0';
 

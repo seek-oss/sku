@@ -28,7 +28,7 @@ const {
 const {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/config-validators');
+} = require('../../../utils/configure');
 
 const serveAction = async ({ site: preferredSite, port: preferredPort }) => {
   await configureProject();

@@ -770,9 +770,6 @@ importers:
       mini-css-extract-plugin:
         specifier: ^2.6.1
         version: 2.9.2(webpack@5.96.1(@swc/core@1.9.2)(esbuild@0.24.0))
-      minimist:
-        specifier: ^1.2.8
-        version: 1.2.8
       nano-memoize:
         specifier: ^3.0.16
         version: 3.0.16

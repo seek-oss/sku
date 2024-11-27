@@ -3,11 +3,11 @@ const jest = require('jest');
 
 const isCI = require('../../../isCI');
 const { runVocabCompile } = require('../../../runVocab');
-const { configureProject } = require('../../../utils/config-validators');
+const { configureProject } = require('../../../utils/configure');
 
 const log = debug('sku:jest');
 
-const testAction = async ({ watch, args }) => {
+const testAction = async ({ args }) => {
   await configureProject();
   await runVocabCompile();
 
@@ -21,10 +21,6 @@ const testAction = async ({ watch, args }) => {
 
   if (isCI) {
     jestArgv.push('--ci');
-  }
-
-  if (watch) {
-    jestArgv.push('--watch');
   }
 
   jest.run(jestArgv);

@@ -12,7 +12,7 @@ const {
   // eslint-disable-next-line import/no-unresolved
 } = require('package-manager-detector/constants');
 
-const program = require('./program');
+const initCommand = require('./program/commands/init/init.command');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
@@ -62,7 +62,7 @@ const lockfileByPackageManager = {
  */
 const getPackageManager = () => {
   const packageManager = validatePackageManager(
-    program.opts()?.packageManager || getPackageManagerFromUserAgent(),
+    initCommand.opts()?.packageManager || getPackageManagerFromUserAgent(),
   );
 
   const lockFile = lockfileByPackageManager[packageManager];

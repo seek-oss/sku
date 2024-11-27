@@ -120,7 +120,6 @@
     "lint-staged": "^15.2.10",
     "magicast": "^0.3.5",
     "mini-css-extract-plugin": "^2.6.1",
-    "minimist": "^1.2.8",
     "nano-memoize": "^3.0.16",
     "node-html-parser": "^6.1.1",
     "open": "^7.3.1",

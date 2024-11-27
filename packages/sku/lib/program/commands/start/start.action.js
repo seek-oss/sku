@@ -79,7 +79,7 @@ const startAction = async ({ stats: statsOption }) => {
     console.log(
       stats.toString(
         getStatsConfig({
-          stats: '',
+          stats: statsOption,
           isStartScript: true,
         }),
       ),

@@ -1,6 +1,12 @@
+// @ts-check
 const isCI = require('../../lib/isCI');
 
-const getStatsConfig = ({ stats, isStartScript }) => {
+/**
+ * @param {object} [options]
+ * @param {string} [options.stats]
+ * @param {boolean} [options.isStartScript]
+ */
+const getStatsConfig = ({ stats, isStartScript = false } = {}) => {
   const defaultPreset = isStartScript ? 'summary' : 'errors-only';
 
   return {

@@ -3,9 +3,11 @@ const getStatsConfig = require('../config/webpack/statsConfig');
 
 /**
  * @param {import('webpack').Compiler} compiler
+ * @param {object} [options]
+ * @param {string} [options.stats]
  * @returns {Promise<void>}
  */
-const run = async (compiler) =>
+const run = async (compiler, { stats: statsOption } = {}) =>
   new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
@@ -15,8 +17,7 @@ const run = async (compiler) =>
       console.log(
         stats?.toString(
           getStatsConfig({
-            stats: '',
-            isStartScript: false,
+            stats: statsOption,
           }),
         ),
       );

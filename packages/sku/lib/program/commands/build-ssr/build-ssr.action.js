@@ -33,8 +33,8 @@ const buildSsrAction = async ({ stats }) => {
     });
     await ensureTargetDirectory();
     await cleanTargetDirectory();
-    await run(webpack(clientConfig));
-    await run(webpack(serverConfig));
+    await run(webpack(clientConfig), { stats });
+    await run(webpack(serverConfig), { stats });
     await copyPublicFiles();
 
     const timeTaken = performance.now();

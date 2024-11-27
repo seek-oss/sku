@@ -37,6 +37,7 @@ const buildAction = async ({ stats }) => {
           stats,
         }),
       ),
+      { stats },
     );
     await cleanStaticRenderEntry();
     await copyPublicFiles();

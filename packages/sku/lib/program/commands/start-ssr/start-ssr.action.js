@@ -51,7 +51,7 @@ const once = (fn) => {
   };
 };
 
-const startSsrAction = async () => {
+const startSsrAction = async ({ stats: statsOption }) => {
   await configureProject();
   validatePeerDeps();
   await watchVocabCompile();
@@ -71,6 +71,8 @@ const startSsrAction = async () => {
     serverPort,
     isDevServer: true,
     hot,
+    isStartScript: true,
+    stats: statsOption,
   });
 
   await checkHosts();
@@ -113,7 +115,7 @@ const startSsrAction = async () => {
     console.log(
       stats.toString(
         getStatsConfig({
-          stats: '',
+          stats: statsOption,
           isStartScript: true,
         }),
       ),

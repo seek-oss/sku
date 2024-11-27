@@ -764,9 +764,6 @@ importers:
       lint-staged:
         specifier: ^15.2.10
         version: 15.2.10
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       magicast:
         specifier: ^0.3.5
         version: 0.3.5
@@ -794,9 +791,6 @@ importers:
       picomatch:
         specifier: ^3.0.1
         version: 3.0.1
-      plop:
-        specifier: ^4.0.1
-        version: 4.0.1
       postcss:
         specifier: ^8.4.0
         version: 8.4.49
@@ -903,6 +897,12 @@ importers:
       fs-fixture:
         specifier: ^2.6.0
         version: 2.6.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      plop:
+        specifier: ^4.0.1
+        version: 4.0.1
       react:
         specifier: ^18.2.0
         version: 18.3.1

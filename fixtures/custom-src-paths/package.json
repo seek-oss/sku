@@ -10,8 +10,5 @@
     "@sku-private/test-utils": "workspace:*",
     "sku": "workspace:*"
   },
-  "scripts": {
-    "test": "sku build"
-  },
   "skuSkipValidatePeerDeps": true
 }

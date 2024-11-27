@@ -36,9 +36,6 @@ const addCommandGenerator = (plop) => {
       const hasExistingSubCommands = fs.existsSync(
         `./lib/program/commands/${data.parentCommand}/commands`,
       );
-
-      console.log('parentCommand', data);
-
       return [
         {
           type: 'add',

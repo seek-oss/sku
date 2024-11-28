@@ -5,7 +5,7 @@ const preCommitAction = async () => {
   await configureProject();
   try {
     await preCommit();
-  } catch (e) {
+  } catch {
     process.exit(1);
   }
 };

@@ -13,7 +13,7 @@ const findPackageScriptName = (scriptContents) => {
 
   try {
     pkg = requireFromCwd('./package.json');
-  } catch (err) {
+  } catch {
     pkg = { scripts: {} };
   }
 

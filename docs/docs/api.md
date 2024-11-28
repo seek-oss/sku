@@ -43,6 +43,22 @@ module.exports = {
 [jest preset]: https://jestjs.io/docs/configuration#preset-string
 [testing documentation]: ./docs/testing.md
 
+## `sku/config/eslint`
+
+Exports `sku`'s custom eslint config based on [`eslint-config-seek`].
+
+> Sku configures eslint for you, so you shouldn't need to use this directly
+
+Example:
+
+```ts
+const { eslintConfigSku } = require('sku/config/eslint');
+
+module.exports = eslintConfigSku;
+```
+
+[`eslint-config-seek`]: https://github.com/seek-oss/eslint-config-seek
+
 ## `sku/config/storybook`
 
 Exports `sku`-compatible Storybook configuration for use within your `.storybook/main.ts` file.

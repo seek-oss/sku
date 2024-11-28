@@ -1,7 +1,7 @@
 // @ts-check
 const { yellow, cyan, gray } = require('chalk');
-const { ESLint } = require('eslint');
-const eslintConfig = require('../config/eslint/eslintConfig');
+const { loadESLint } = require('eslint');
+const { eslintConfigSku } = require('../config/eslint');
 const { lintExtensions } = require('./lint');
 const assert = require('node:assert');
 
@@ -13,13 +13,18 @@ const extensions = lintExtensions.map((ext) => `.${ext}`);
 const runESLint = async ({ fix = false, paths }) => {
   console.log(cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
+  const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
-    baseConfig: eslintConfig,
-    extensions,
-    useEslintrc: false,
+    baseConfig: eslintConfigSku,
     fix,
     cache: true,
+    overrideConfig: {
+      linterOptions: {
+        reportUnusedDisableDirectives: true,
+      },
+    },
   });
+
   const checkAll = typeof paths === 'undefined';
   /* Whitelist the file extensions that our ESLint setup currently supports */
   const filteredFilePaths = checkAll
@@ -29,44 +34,45 @@ const runESLint = async ({ fix = false, paths }) => {
       );
 
   if (filteredFilePaths.length === 0) {
-    console.log(gray(`No JS files to lint`));
-  } else {
-    console.log(gray(`Paths: ${filteredFilePaths.join(' ')}`));
-    try {
-      const lintResults = await eslint.lintFiles(filteredFilePaths);
+    console.log(gray(`No files to lint`));
+    return Promise.resolve();
+  }
 
-      if (fix) {
-        ESLint.outputFixes(lintResults);
-      } else {
-        const { warningCount, errorCount } = lintResults.reduce(
-          (acc, result) => {
-            return {
-              warningCount: acc.warningCount + result.warningCount,
-              errorCount: acc.errorCount + result.errorCount,
-            };
-          },
-          { warningCount: 0, errorCount: 0 },
-        );
+  console.log(gray(`Paths: ${filteredFilePaths.join(' ')}`));
+  try {
+    const lintResults = await eslint.lintFiles(filteredFilePaths);
 
-        if (errorCount || warningCount) {
-          const formatter = await eslint.loadFormatter();
-          console.log(await formatter.format(lintResults));
-        }
+    if (fix) {
+      ESLint.outputFixes(lintResults);
+    } else {
+      const { warningCount, errorCount } = lintResults.reduce(
+        (acc, result) => {
+          return {
+            warningCount: acc.warningCount + result.warningCount,
+            errorCount: acc.errorCount + result.errorCount,
+          };
+        },
+        { warningCount: 0, errorCount: 0 },
+      );
 
-        if (errorCount > 0) {
-          return Promise.reject();
-        }
+      if (errorCount || warningCount) {
+        const formatter = await eslint.loadFormatter();
+        console.log(await formatter.format(lintResults));
       }
-    } catch (e) {
-      assert(e instanceof Error);
 
-      if (e.message.includes('No files matching')) {
-        console.warn(yellow(`Warning: ${e.message}`));
-      } else {
-        console.warn(yellow('ESLint encountered an error:'));
-        console.log(e.message);
+      if (errorCount > 0) {
         return Promise.reject();
       }
+    }
+  } catch (e) {
+    assert(e instanceof Error);
+
+    if (e.message.includes('No files matching')) {
+      console.warn(yellow(`Warning: ${e.message}`));
+    } else {
+      console.warn(yellow('ESLint encountered an error:'));
+      console.log(e.message);
+      return Promise.reject();
     }
   }
 };

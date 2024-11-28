@@ -9,6 +9,7 @@ const skuConfig: SkuConfig = {
     ...config,
     include: ['**/*', '.storybook/*'],
   }),
+  eslintIgnore: ['**/storybook-static/'],
 };
 
 export default skuConfig;

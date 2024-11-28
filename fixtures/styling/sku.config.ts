@@ -9,8 +9,11 @@ export default {
   publicPath: '/styling',
   target: 'dist',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
+
   dangerouslySetTSConfig: (config) => ({
     ...config,
     include: ['**/*', '.storybook/*'],
   }),
+
+  eslintIgnore: ['**/storybook-static/'],
 } satisfies SkuConfig;

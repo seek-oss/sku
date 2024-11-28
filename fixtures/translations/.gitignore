@@ -3,10 +3,10 @@
 # managed by sku
 **/*.vocab/index.ts
 .eslintcache
-.eslintrc
 .prettierrc
 coverage/
 dist/
+eslint.config.js
 report/
 tsconfig.json
 # end managed by sku

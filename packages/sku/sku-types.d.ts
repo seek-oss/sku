@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
+import type { Linter } from 'eslint';
 
 export interface RenderCallbackParams {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
@@ -146,7 +147,9 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslyseteslintconfig
    */
-  dangerouslySetESLintConfig?: (skuESLintConfig: any) => any;
+  dangerouslySetESLintConfig?: (
+    skuESLintConfig: Linter.Config[],
+  ) => Linter.Config[];
 
   /**
    * This function provides a way to modify sku's Jest configuration.
@@ -217,6 +220,15 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=environments
    */
   environments?: readonly string[];
+
+  /**
+   * Paths and files to be ignored by ESLint.
+   * See [the ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore#ignoring-files) for more information.
+   *
+   * @default []
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=eslintIgnore
+   */
+  eslintIgnore?: readonly string[];
 
   /**
    * By default, sku compiles all node_modules in builds that target node.

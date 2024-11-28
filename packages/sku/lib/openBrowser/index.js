@@ -28,7 +28,7 @@ module.exports = async (url) => {
     try {
       const { name } = await getDefaultBrowser();
       defaultBrowser = name;
-    } catch (e) {
+    } catch {
       console.log(yellow.bold('Failed to detect default browser.'));
       console.log(
         yellow(
@@ -69,7 +69,7 @@ module.exports = async (url) => {
             },
           );
           return true;
-        } catch (e) {
+        } catch {
           // Ignore errors.
         }
       }

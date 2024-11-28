@@ -13,7 +13,8 @@ let provider = {
 
 try {
   if (process.env.SKU_TELEMETRY !== 'false') {
-    // eslint-disable-next-line import/no-unresolved
+    // Consumers install this private dependency
+    // eslint-disable-next-line import-x/no-unresolved
     const realProvider = require('@seek/sku-telemetry').default({});
 
     // For backwards compat with older versions of @seek/sku-telemetry
@@ -23,7 +24,7 @@ try {
 
     provider = realProvider;
   }
-} catch (e) {
+} catch {
   const addCommand = getAddCommand({
     deps: ['@seek/sku-telemetry'],
     type: 'dev',

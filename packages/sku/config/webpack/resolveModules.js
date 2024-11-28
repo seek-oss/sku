@@ -12,7 +12,7 @@ try {
   if (skuPath.includes('.pnpm')) {
     modules.push(path.join(skuPath, '../..'));
   }
-} catch (e) {
+} catch {
   // Ignore errors as if sku isn't resolvable then we don't need to apply the pnpm fix
 }
 

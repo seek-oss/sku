@@ -4,8 +4,6 @@ const assert = require('node:assert');
 const { readFile, writeFile } = require('node:fs/promises');
 const t = require('@babel/types');
 const { parseModule, builders, generateCode } = require('magicast');
-// eslint-plugin-import doesn't support subpath imports
-// eslint-disable-next-line import/no-unresolved
 const { getConfigFromVariableDeclaration } = require('magicast/helpers');
 
 const debug = require('debug');

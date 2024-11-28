@@ -37,4 +37,4 @@ The following option flags are now available in their respective scope
 
 #### Node version change
 
-Moved to node `v20.18.1`
+Moved to node `v20.15`

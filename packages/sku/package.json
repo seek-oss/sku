@@ -19,7 +19,7 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": ">=20.18.1"
+    "node": ">=20.15"
   },
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",

@@ -34,10 +34,10 @@ $ pnpm start
 ```
 
 By default, a new project's dependencies will be installed with the same package manager used to run `sku init`.
-This can be overridden via the `--packageManager` flag:
+This can be overridden via the `--package-manager` flag:
 
 ```sh
-$ pnpm dlx sku init --packageManager yarn my-app
+$ pnpm dlx sku init --package-manager yarn my-app
 $ cd my-app
 $ yarn start
 ```

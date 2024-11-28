@@ -26,11 +26,11 @@ The following option flags are now available in their respective scope
   - `-s, --stats` option
 - the `serve` command now has the following options
   - `--port` option
-  - `--site` optionnr te
+  - `--site` option
 - the `translation compile` command now has the following options
   - `-w, --watch` option
 - the `translation push` command now has the following option
   - `--delete-unused-keys` option
 - the `init` command now has the following options
-  - `-p, --package-manager` option
+  - `-p, --package-manager` option. This has changed from `--packageManager` preferring `kebab-case` over `camelCase` for option flags.
   - `--verbose` option

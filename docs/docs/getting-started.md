@@ -9,10 +9,10 @@ $ npm start
 ```
 
 By default, a new project's dependencies will be installed using the package manager it was run with.
-This can be overridden via the `--packageManager` flag:
+This can be overridden via the `--package-manager` flag:
 
 ```bash
-$ npx sku init --packageManager pnpm my-app
+$ npx sku init --package-manager pnpm my-app
 $ cd my-app
 $ pnpm start
 ```

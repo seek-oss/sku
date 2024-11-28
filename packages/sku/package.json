@@ -23,10 +23,11 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": ">=18.20"
+    "node": ">=20.15"
   },
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "node ./scripts/postinstall.js",
+    "plop": "plop"
   },
   "repository": {
     "type": "git",
@@ -93,6 +94,7 @@
     "browserslist": "^4.16.1",
     "browserslist-config-seek": "3.2.0",
     "chalk": "^4.1.0",
+    "commander": "^12.1.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.7.1",
     "cssnano": "^6.0.0",
@@ -124,7 +126,6 @@
     "lint-staged": "^15.2.10",
     "magicast": "^0.3.5",
     "mini-css-extract-plugin": "^2.6.1",
-    "minimist": "^1.2.8",
     "nano-memoize": "^3.0.16",
     "node-html-parser": "^6.1.1",
     "open": "^7.3.1",
@@ -167,6 +168,8 @@
     "@vocab/react": "^1.1.11",
     "braid-design-system": "^33.1.0",
     "fs-fixture": "^2.6.0",
+    "lodash": "^4.17.21",
+    "plop": "^4.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

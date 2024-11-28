@@ -70,10 +70,10 @@
     "typescript": "~5.6.0"
   },
   "engines": {
-    "node": ">=18.20.0"
+    "node": ">=20.15"
   },
   "volta": {
-    "node": "18.20.1",
+    "node": "20.15",
     "pnpm": "9.6.0"
   },
   "packageManager": "pnpm@9.6.0",

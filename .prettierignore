@@ -16,3 +16,4 @@ pnpm-lock.yaml
 fixtures/*/eslint.config.js
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
+*.hbs

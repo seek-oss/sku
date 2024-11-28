@@ -4,7 +4,7 @@ const path = require('node:path');
 const { resolveCommand } = require('package-manager-detector/commands');
 const { INSTALL_PAGE } = require('package-manager-detector/constants');
 
-const skuArgs = require('../config/args');
+const initCommand = require('./program/commands/init/init.command');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
@@ -54,7 +54,7 @@ const lockfileByPackageManager = {
  */
 const getPackageManager = () => {
   const packageManager = validatePackageManager(
-    skuArgs?.packageManager || getPackageManagerFromUserAgent(),
+    initCommand.opts()?.packageManager || getPackageManagerFromUserAgent(),
   );
 
   const lockFile = lockfileByPackageManager[packageManager];

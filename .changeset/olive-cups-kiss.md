@@ -26,7 +26,7 @@ The following option flags are now available in their respective scope
   - `-s, --stats` option
 - the `serve` command now has the following options
   - `--port` option
-  - `--site` option
+  - `--site` optionnr te
 - the `translation compile` command now has the following options
   - `-w, --watch` option
 - the `translation push` command now has the following option
@@ -34,7 +34,3 @@ The following option flags are now available in their respective scope
 - the `init` command now has the following options
   - `-p, --package-manager` option
   - `--verbose` option
-
-#### Node version change
-
-Moved to node `v20.15`

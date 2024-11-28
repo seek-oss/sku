@@ -29,7 +29,7 @@ const {
   externalizeNodeModules,
 } = require('../../context');
 const { getVocabConfig } = require('../vocab/vocab');
-const statsConfig = require('./statsConfig');
+const getStatsConfig = require('./statsConfig');
 const getSourceMapSetting = require('./sourceMaps');
 const getCacheSettings = require('./cache');
 const modules = require('./resolveModules');
@@ -40,6 +40,8 @@ const makeWebpackConfig = ({
   serverPort,
   isDevServer = false,
   hot = false,
+  isStartScript = false,
+  stats,
 }) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
@@ -196,7 +198,10 @@ const makeWebpackConfig = ({
           : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
-      stats: statsConfig,
+      stats: getStatsConfig({
+        stats,
+        isStartScript,
+      }),
       infrastructureLogging: {
         level: 'error',
       },

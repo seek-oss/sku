@@ -1,12 +1,20 @@
-const args = require('../args');
+// @ts-check
 const isCI = require('../../lib/isCI');
 
-const isStartScript = args.script === 'start-ssr' || args.script === 'start';
-const defaultPreset = isStartScript ? 'summary' : 'errors-only';
+/**
+ * @param {object} [options]
+ * @param {string} [options.stats]
+ * @param {boolean} [options.isStartScript]
+ */
+const getStatsConfig = ({ stats, isStartScript = false } = {}) => {
+  const defaultPreset = isStartScript ? 'summary' : 'errors-only';
 
-module.exports = {
-  colors: !isCI,
-  preset: args.stats || defaultPreset,
-  timings: isStartScript,
-  errors: true,
+  return {
+    colors: !isCI,
+    preset: stats || defaultPreset,
+    timings: isStartScript,
+    errors: true,
+  };
 };
+
+module.exports = getStatsConfig;

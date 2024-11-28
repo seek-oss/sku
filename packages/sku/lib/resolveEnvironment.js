@@ -1,11 +1,11 @@
 // @ts-check
 const { environments } = require('../context');
-const args = require('../config/args');
 const { bold, red } = require('chalk');
+const program = require('./program');
 
 module.exports = () => {
-  const environment = args.environment
-    ? args.environment
+  const environment = program.opts()?.environment
+    ? program.opts()?.environment
     : environments?.[0] || '';
 
   if (environment) {

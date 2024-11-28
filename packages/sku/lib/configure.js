@@ -39,39 +39,44 @@ module.exports = async () => {
   ];
 
   // TODO: Remove this migration before releasing sku v15.
-  if (await shouldMigrateOldEslintConfig()) {
+  const { shouldMigrate, eslintIgnoreExists } =
+    await shouldMigrateOldEslintConfig();
+
+  if (shouldMigrate) {
     console.log("'.eslintignore' file detected. Attempting migration...");
 
-    const customIgnores = migrateEslintignore({
-      hasLanguagesConfig: Boolean(languages && languages.length > 0),
-      target: paths.relativeTarget,
-    });
+    if (eslintIgnoreExists) {
+      const customIgnores = migrateEslintignore({
+        hasLanguagesConfig: Boolean(languages && languages.length > 0),
+        target: paths.relativeTarget,
+      });
 
-    if (customIgnores.length > 0) {
-      try {
-        await addEslintIgnoreToSkuConfig({
-          skuConfigPath: paths.appSkuConfigPath,
-          eslintIgnore: customIgnores,
-        });
-        console.log(
-          "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config.",
-        );
-      } catch (e) {
-        console.log("Failed to automatically migrate '.eslintignore' file");
-        console.log('Error:', e.message, '\n');
+      if (customIgnores.length > 0) {
+        try {
+          await addEslintIgnoreToSkuConfig({
+            skuConfigPath: paths.appSkuConfigPath,
+            eslintIgnore: customIgnores,
+          });
+          console.log(
+            "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config.",
+          );
+        } catch (e) {
+          console.log("Failed to automatically migrate '.eslintignore' file");
+          console.log('Error:', e.message, '\n');
 
-        console.log('Please manually add the following to your sku config:');
+          console.log('Please manually add the following to your sku config:');
+          console.log(
+            chalk.green('eslintIgnore:'),
+            chalk.green(JSON.stringify(customIgnores, null, 2)),
+          );
+        }
+
         console.log(
-          chalk.green('eslintIgnore:'),
-          chalk.green(JSON.stringify(customIgnores, null, 2)),
+          "Please note that this is a best-effort migration and you should manually review the 'eslintIgnore' property in your sku config.",
         );
+      } else {
+        console.log("No custom ignores found in '.eslintignore' file");
       }
-
-      console.log(
-        "Please note that this is a best-effort migration and you should manually review the 'eslintIgnore' property in your sku config.",
-      );
-    } else {
-      console.log("No custom ignores found in '.eslintignore' file");
     }
 
     console.log("Deleting '.eslintrc' and '.eslintignore' files...");

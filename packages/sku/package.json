@@ -9,6 +9,10 @@
   "exports": {
     ".": "./sku-types.d.ts",
     "./jest-preset": "./config/jest/jest-preset.js",
+    "./config/eslint": {
+      "default": "./config/eslint/index.js",
+      "types": "./config/eslint/index.d.ts"
+    },
     "./config/storybook": {
       "default": "./config/storybook/index.js",
       "types": "./config/storybook/index.d.ts"
@@ -60,6 +64,7 @@
     "@babel/preset-typescript": "^7.21.5",
     "@babel/runtime": "^7.21.0",
     "@babel/types": "^7.26.0",
+    "@eslint/compat": "^1.2.1",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.0",
@@ -67,6 +72,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@swc/core": "^1.6.13",
     "@types/express": "^4.17.11",
+    "@types/eslint": "^9.6.1",
     "@types/jest": "^29.0.0",
     "@types/loadable__component": "^5.13.1",
     "@types/loadable__server": "^5.12.10",
@@ -102,8 +108,8 @@
     "esbuild": ">0.19.7 <1",
     "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
-    "eslint": "^8.56.0",
-    "eslint-config-seek": "^13.0.0",
+    "eslint": "^9.10.0",
+    "eslint-config-seek": "^14.2.0",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",
@@ -150,7 +156,6 @@
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
     "@types/env-ci": "^3.1.4",
-    "@types/eslint": "^8.56.10",
     "@types/minimist": "^1.2.5",
     "@types/node": "^18.19.31",
     "@types/picomatch": "^2.3.3",

@@ -63,8 +63,8 @@ describe('sku init', () => {
   it.each([
     'sku.config.ts',
     '.gitignore',
-    '.eslintignore',
     '.prettierignore',
+    'eslint.config.js',
     'README.md',
     'src/App/NextSteps.tsx',
   ])('should create %s', async (file) => {

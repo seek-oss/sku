@@ -1,16 +1,8 @@
 // @ts-check
 const findUp = require('find-up');
 const path = require('node:path');
-const {
-  resolveCommand,
-  // eslint-plugin import can't resolve subpath imports inside js files
-  // eslint-disable-next-line import/no-unresolved
-} = require('package-manager-detector/commands');
-const {
-  INSTALL_PAGE,
-  // eslint-plugin import can't resolve subpath imports inside js files
-  // eslint-disable-next-line import/no-unresolved
-} = require('package-manager-detector/constants');
+const { resolveCommand } = require('package-manager-detector/commands');
+const { INSTALL_PAGE } = require('package-manager-detector/constants');
 
 const initCommand = require('./program/commands/init/init.command');
 

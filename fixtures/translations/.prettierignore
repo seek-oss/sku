@@ -3,10 +3,10 @@ translations.ts
 # managed by sku
 **/*.vocab/index.ts
 .eslintcache
-.eslintrc
 .prettierrc
 coverage/
-dist-ssr/
+dist/
+eslint.config.js
 pnpm-lock.yaml
 report/
 tsconfig.json

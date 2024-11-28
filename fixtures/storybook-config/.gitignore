@@ -4,10 +4,10 @@ storybook-static/
 
 # managed by sku
 .eslintcache
-.eslintrc
 .prettierrc
 coverage/
 dist/
+eslint.config.js
 report/
 tsconfig.json
 # end managed by sku

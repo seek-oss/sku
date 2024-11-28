@@ -13,7 +13,7 @@ CHANGELOG.md
 .vscode/
 pnpm-lock.yaml
 .eslintcache
-fixtures/*/.eslintrc
+fixtures/*/eslint.config.js
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
 *.hbs

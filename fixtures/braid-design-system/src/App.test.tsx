@@ -1,6 +1,7 @@
-import { renderToString } from 'react-dom/server';
 import { Box } from 'braid-design-system';
 import { BraidTestProvider } from 'braid-design-system/test';
+import { renderToString } from 'react-dom/server';
+
 import { vanillaBox } from './App.css';
 
 describe('braid-design-system', () => {

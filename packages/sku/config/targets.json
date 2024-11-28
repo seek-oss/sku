@@ -1,4 +1,4 @@
 {
-  "browserslistNodeTarget": "node 18.20",
-  "esbuildNodeTarget": "node18.20"
+  "browserslistNodeTarget": "node 20.15",
+  "esbuildNodeTarget": "node20.15"
 }

@@ -43,9 +43,9 @@ module.exports = async () => {
     await shouldMigrateOldEslintConfig();
 
   if (shouldMigrate) {
-    console.log("'.eslintignore' file detected. Attempting migration...");
-
     if (eslintIgnoreExists) {
+      console.log("'.eslintignore' file detected. Attempting migration...");
+
       const customIgnores = migrateEslintignore({
         hasLanguagesConfig: Boolean(languages && languages.length > 0),
         target: paths.relativeTarget,
@@ -79,9 +79,10 @@ module.exports = async () => {
       }
     }
 
-    console.log("Deleting '.eslintrc' and '.eslintignore' files...");
+    console.log(
+      "Deleting '.eslintrc' and '.eslintignore' files if they exist...",
+    );
     await cleanUpOldEslintFiles();
-    console.log("Successfully deleted '.eslintrc' and '.eslintignore' files.");
   }
 
   const eslintConfigFilename = 'eslint.config.js';

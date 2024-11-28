@@ -14,23 +14,27 @@ The following option flags are now available in their respective scope
 
 #### Global options
 
-- the `-e, --environment` option accepts a string for the environment you want to run in
-- the `-c, --config` option accepts the path to the sku.config.js file
-- the `-d, --debug` option sets debugging to true
-- __new:__ the `-h, --help` flag now shows you the full CLI usage of any command or subcommand
-- __new:__ the `-v, --version` flag now shows you the version of the CLI
+- the `-e, --environment` option
+- the `-c, --config` option
+- the `-d, --debug` option
+- __new:__ the `-h, --help` option
+- __new:__ the `-v, --version` option
 
 #### Scoped options
 
 - the `build`, `build-ssr`, `start`, and `start-ssr` commands have the following options
-  - `-s, --stats` the webpack preset to use. This option now only accepts a valid webpack stats preset
+  - `-s, --stats` option
 - the `serve` command now has the following options
-  - `--port` the port you want to serve on. This option accepts a port as a number
-  - `--site` the url you want to serve on. This option accepts a site as a string
+  - `--port` option
+  - `--site` option
 - the `translation compile` command now has the following options
-  - `-w, --watch` makes the commands watch for changes
+  - `-w, --watch` option
 - the `translation push` command now has the following option
-  - `--delete-unused-keys` removes unused keys from translation files when pushing to Phrase
+  - `--delete-unused-keys` option
 - the `init` command now has the following options
-  - `-p, --package-manager` sets the package manager you want to use
-  - `--verbose` sets the log level of the package manager used to `verbose`
+  - `-p, --package-manager` option
+  - `--verbose` option
+
+#### Node version change
+
+Moved to node `v20.18.1`

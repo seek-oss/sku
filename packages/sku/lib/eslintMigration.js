@@ -11,10 +11,19 @@ const { SkuConfigUpdater } = require('./SkuConfigUpdater.js');
 const oldEslintConfigPath = getPathFromCwd('.eslintrc');
 const eslintIgnorePath = getPathFromCwd('.eslintignore');
 
-const shouldMigrateOldEslintConfig = async () =>
-  (
-    await Promise.all([exists(oldEslintConfigPath), exists(eslintIgnorePath)])
-  ).some(Boolean);
+const shouldMigrateOldEslintConfig = async () => {
+  const [oldEslintConfigExists, eslintIgnoreExists] = await Promise.all([
+    exists(oldEslintConfigPath),
+    exists(eslintIgnorePath),
+  ]);
+
+  const shouldMigrate = oldEslintConfigExists || eslintIgnoreExists;
+
+  return {
+    shouldMigrate,
+    eslintIgnoreExists,
+  };
+};
 
 const cleanUpOldEslintFiles = async () => {
   await rm(oldEslintConfigPath, { force: true });

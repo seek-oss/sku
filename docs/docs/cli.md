@@ -30,11 +30,11 @@ pnpm dlx sku init my-app
 
 This command supports the following options and arguments:
 
-| Type     | Name                           | Description                                                                                                   |
-| -------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| argument | `project-name` <br> _required_ | The name of the project to create <br> `pnpm dlx sku init my-app`                                             |
-| option   | `--package-manager, -p`        | The package manager to use when installing dependencies <br> `pnpm dlx sku init my-app --package-manager=npm` |
-| option   | `--verbose`                    | Enable verbose logging for the package manager <br> `pnpm dlx sku init my-app --verbose`                      |
+| Type     | Name                           | Description                                                                                                                                                                                  |
+| -------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| argument | `project-name` <br> _required_ | The name of the project to create <br> `pnpm dlx sku init my-app`                                                                                                                            |
+| option   | `--package-manager, -p`        | Overrides the package manager used when installing dependencies <br> This defaults to the package manager being used to run `sku init` <br> `pnpm dlx sku init my-app --package-manager=npm` |
+| option   | `--verbose`                    | Enable verbose logging for the package manager <br> `pnpm dlx sku init my-app --verbose`                                                                                                     |
 
 ### `start`
 

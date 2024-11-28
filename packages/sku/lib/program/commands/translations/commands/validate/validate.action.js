@@ -19,6 +19,7 @@ const validateAction = async () => {
     if (e) {
       console.error(`Error running ${chalk.bold(`translations validate`)}:`, e);
     }
+    process.exit(1);
   }
 };
 

@@ -7,7 +7,7 @@ const { configureProject } = require('../../../utils/configure');
 
 const log = debug('sku:jest');
 
-const testAction = async ({ args }) => {
+const testAction = async ({ args = [] } = {}) => {
   await configureProject();
   await runVocabCompile();
 

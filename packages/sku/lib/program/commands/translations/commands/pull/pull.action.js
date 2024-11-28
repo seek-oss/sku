@@ -23,6 +23,7 @@ const pullAction = async () => {
     if (e) {
       console.error(`Error running ${chalk.bold(`translations push`)}:`, e);
     }
+    process.exit(1);
   }
 };
 

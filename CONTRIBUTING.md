@@ -33,6 +33,23 @@ Next, create a new branch for your work, with an appropriate name for your chang
 git checkout -b add-my-cool-new-feature
 ```
 
+### Boilerplate Generation
+
+This repo uses [plop] to scaffold new features. You can run `pnpm run plop` to see a list of available generators.
+
+> [!NOTE]
+> Always use plop to generate boilerplate before starting your changes. This ensures consistency across the codebase.
+
+Once you select the plop generator you want to use, you will be prompted for additional information to generate the desired boilerplate files.
+
+The following generators are available:
+
+| Generator     | Description                                                                                                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `add-command` | **Create a new command for the `CLI` program** <br><br> This generator allows for sub-command generation with a depth of one. This will modify the parent command file |
+
+[plop]: https://plopjs.com/
+
 ## Testing Your Changes
 
 Before running tests, some entries need to be added to your `/etc/hosts` file.

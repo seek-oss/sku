@@ -1,17 +1,15 @@
-process.env.NODE_ENV = 'development';
+import WebpackDevServer from 'webpack-dev-server';
+import webpack from 'webpack';
+import { blue, underline } from 'chalk';
+import exceptionFormatter from 'exception-formatter';
 
-const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
-const { blue, underline } = require('chalk');
-const exceptionFormatter = require('exception-formatter');
-
-const { checkHosts, getAppHosts } = require('../../../hosts');
-const allocatePort = require('../../../allocatePort');
-const openBrowser = require('../../../openBrowser');
-const getSiteForHost = require('../../../getSiteForHost');
-const { resolveEnvironment } = require('../../../resolveEnvironment');
-const routeMatcher = require('../../../routeMatcher');
-const {
+import { checkHosts, getAppHosts } from '../../../hosts.js';
+import allocatePort from '../../../allocatePort.js';
+import openBrowser from '../../../openBrowser/index.js';
+import getSiteForHost from '../../../getSiteForHost.js';
+import { resolveEnvironment } from '../../../resolveEnvironment.js';
+import routeMatcher from '../../../routeMatcher.js';
+import {
   port,
   initialPath,
   paths,
@@ -19,27 +17,29 @@ const {
   sites,
   httpsDevServer,
   useDevServerMiddleware,
-} = require('../../../../context');
-const getStatsConfig = require('../../../../config/webpack/statsConfig');
-const createHtmlRenderPlugin = require('../../../../config/webpack/plugins/createHtmlRenderPlugin');
-const makeWebpackConfig = require('../../../../config/webpack/webpack.config');
-const getCertificate = require('../../../certificate');
-const {
+} from '../../../../context/index.js';
+import getStatsConfig from '../../../../config/webpack/statsConfig.js';
+import createHtmlRenderPlugin from '../../../../config/webpack/plugins/createHtmlRenderPlugin.js';
+import makeWebpackConfig from '../../../../config/webpack/webpack.config.js';
+import getCertificate from '../../../certificate.js';
+import {
   getLanguageFromRoute,
   getRouteWithLanguage,
-} = require('../../../language-utils');
+} from '../../../language-utils.js';
 
-const { watchVocabCompile } = require('../../../runVocab');
-const {
+import { watchVocabCompile } from '../../../runVocab.js';
+import {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/configure');
+} from '../../../utils/configure.js';
 
 const localhost = '0.0.0.0';
 
+process.env.NODE_ENV = 'development';
+
 const hot = process.env.SKU_HOT !== 'false';
 
-const startAction = async ({
+export const startAction = async ({
   stats: statsOption,
   environment: environmentOption,
 }) => {
@@ -91,6 +91,8 @@ const startAction = async ({
 
   const appHosts = getAppHosts();
 
+  const devServerMiddleware = await import(paths.devServerMiddleware);
+
   /**
    * @type import('webpack-dev-server').Configuration
    */
@@ -114,7 +116,7 @@ const startAction = async ({
     setupExitSignals: true,
     setupMiddlewares: (middlewares, { app }) => {
       if (useDevServerMiddleware) {
-        const devServerMiddleware = require(paths.devServerMiddleware);
+        // Still using require here to avoid turning this function into an async function.
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {
           devServerMiddleware(app);
         }
@@ -209,5 +211,3 @@ const startAction = async ({
     openBrowser(url);
   });
 };
-
-module.exports = startAction;

@@ -1,7 +1,7 @@
-const { setupHosts } = require('../../../hosts');
-const track = require('../../../../telemetry');
+import { setupHosts } from '../../../hosts.js';
+import track from '../../../../telemetry/index.js';
 
-const setupHostsAction = async () => {
+export const setupHostsAction = async () => {
   try {
     await setupHosts();
     track.count('setup_hosts', { status: 'success' });
@@ -13,5 +13,3 @@ const setupHostsAction = async () => {
     await track.close();
   }
 };
-
-module.exports = setupHostsAction;

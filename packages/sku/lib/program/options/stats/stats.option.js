@@ -1,5 +1,6 @@
-const { Option } = require('commander');
-const statsOption = new Option(
+import { Option } from 'commander';
+
+export const statsOption = new Option(
   '-s, --stats <preset>',
   'Webpack stats preset to pass through to webpack',
 ).choices([
@@ -12,5 +13,3 @@ const statsOption = new Option(
   'detailed',
   'summary',
 ]);
-
-module.exports = statsOption;

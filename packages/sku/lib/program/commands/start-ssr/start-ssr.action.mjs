@@ -1,36 +1,38 @@
-process.env.NODE_ENV = 'development';
+import path from 'node:path';
+import WebpackDevServer from 'webpack-dev-server';
+import webpack from 'webpack';
+import onDeath from 'death';
+import { blue, underline } from 'chalk';
+import debug from 'debug';
 
-const path = require('node:path');
-const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
-const onDeath = require('death');
-const { blue, underline } = require('chalk');
-const debug = require('debug')('sku:start');
-
-const getCertificate = require('../../../certificate');
-const {
+import getCertificate from '../../../certificate.js';
+import {
   copyPublicFiles,
   ensureTargetDirectory,
   cleanTargetDirectory,
-} = require('../../../buildFileUtils');
-const { checkHosts, getAppHosts } = require('../../../hosts');
-const {
+} from '../../../buildFileUtils.js';
+import { checkHosts, getAppHosts } from '../../../hosts.js';
+import {
   port,
   initialPath,
   paths,
   httpsDevServer,
-} = require('../../../../context');
-const makeWebpackConfig = require('../../../../config/webpack/webpack.config.ssr');
-const getStatsConfig = require('../../../../config/webpack/statsConfig');
-const allocatePort = require('../../../allocatePort');
-const openBrowser = require('../../../openBrowser');
-const createServerManager = require('../../../serverManager');
+} from '../../../../context/index.js';
+import makeWebpackConfig from '../../../../config/webpack/webpack.config.ssr.js';
+import getStatsConfig from '../../../../config/webpack/statsConfig.js';
+import allocatePort from '../../../allocatePort.js';
+import openBrowser from '../../../openBrowser/index.js';
+import createServerManager from '../../../serverManager.js';
 
-const { watchVocabCompile } = require('../../../runVocab');
-const {
+import { watchVocabCompile } from '../../../runVocab.js';
+import {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/configure');
+} from '../../../utils/configure.js';
+
+debug('sku:start-ssr');
+
+process.env.NODE_ENV = 'development';
 
 const hot = process.env.SKU_HOT !== 'false';
 
@@ -51,7 +53,7 @@ const once = (fn) => {
   };
 };
 
-const startSsrAction = async ({ stats: statsOption }) => {
+export const startSsrAction = async ({ stats: statsOption }) => {
   await configureProject();
   validatePeerDeps();
   await watchVocabCompile();
@@ -194,5 +196,3 @@ const startSsrAction = async ({ stats: statsOption }) => {
     });
   });
 };
-
-module.exports = startSsrAction;

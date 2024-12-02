@@ -1,5 +1,5 @@
-const { Command } = require('commander');
-const statsOption = require('../../options/stats/stats.option');
+import { Command } from 'commander';
+import { statsOption } from '../../options/stats/stats.option';
 
 const buildCommand = new Command('build');
 

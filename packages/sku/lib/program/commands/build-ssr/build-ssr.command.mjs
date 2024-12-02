@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import statsOption from '../../options/stats/stats.option';
+import { statsOption } from '../../options/stats/stats.option';
 
 export const buildSsrCommand = new Command('build-ssr');
 

@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase.js';
+import { camelCase } from 'change-case';
 
 const camelCaseHelper = (plop) => {
   plop.setHelper('camelCase', (text) => {

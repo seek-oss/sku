@@ -53,7 +53,7 @@ const addCommandGenerator = (plop) => {
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }{{commandName}}/{{commandName}}.action.js`,
         },
-        ...(!hasExistingSubCommands
+        ...(data.isSubCommand && !hasExistingSubCommands
           ? [
               {
                 type: 'add',

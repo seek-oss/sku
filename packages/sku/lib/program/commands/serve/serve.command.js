@@ -10,9 +10,11 @@ serve
   )
   .addOption(siteOption)
   .addOption(portOption)
-  .action(({ site, port }) => {
+  .action(({ site, port }, command) => {
+    const environment = command.parent.opts()?.environment;
+
     const serveAction = require('./serve.action');
-    serveAction({ site, port });
+    serveAction({ site, port, environment });
   });
 
 module.exports = serve;

@@ -1,12 +1,12 @@
 // @ts-check
 const { environments } = require('../context');
 const { bold, red } = require('chalk');
-const program = require('./program');
 
-module.exports = () => {
-  const environment = program.opts()?.environment
-    ? program.opts()?.environment
-    : environments?.[0] || '';
+/**
+ * @param {{environment?: string}} options
+ */
+const resolveEnvironment = ({ environment: environmentOption }) => {
+  const environment = environmentOption || environments?.[0] || '';
 
   if (environment) {
     if (!environments?.includes(environment)) {
@@ -19,3 +19,5 @@ module.exports = () => {
 
   return environment;
 };
+
+module.exports = { resolveEnvironment };

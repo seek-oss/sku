@@ -3,7 +3,7 @@ import { buildSsrCommand } from './build-ssr/build-ssr.command.mjs';
 import { configureCommand } from './configure/configure.command.mjs';
 import { formatCommand } from './format/format.command.mjs';
 import lintCommand from './lint/lint.command.js';
-import preCommitCommand from './pre-commit/pre-commit.command.js';
+import { preCommitCommand } from './pre-commit/pre-commit.command.mjs';
 import serveCommand from './serve/serve.command.js';
 import setupHostsCommand from './setup-hosts/setup-hosts.command.js';
 import startCommand from './start/start.command.js';

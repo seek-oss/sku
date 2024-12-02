@@ -11,7 +11,7 @@ const startSsrCommand = require('./start-ssr/start-ssr.command');
 const translationsCommand = require('./translations/translations.command');
 const buildCommand = require('./build/build.command');
 const testCommand = require('./test/test.command');
-/* [add-command-generator: import] */
+/* [add-sku-command-generator: import] */
 
 const commands = [
   initCommand,
@@ -27,7 +27,7 @@ const commands = [
   translationsCommand,
   buildCommand,
   testCommand,
-  /* [add-command-generator: invocation] */
+  /* [add-sku-command-generator: invocation] */
 ];
 
 module.exports = commands;

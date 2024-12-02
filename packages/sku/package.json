@@ -26,8 +26,7 @@
     "node": ">=20.15"
   },
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js",
-    "plop": "../../plop"
+    "postinstall": "node ./scripts/postinstall.js"
   },
   "repository": {
     "type": "git",

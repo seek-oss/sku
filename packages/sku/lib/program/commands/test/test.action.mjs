@@ -1,5 +1,5 @@
 import debug from 'debug';
-import jest from 'jest';
+import { run } from 'jest';
 
 import isCI from '../../../isCI.js';
 import { runVocabCompile } from '../../../runVocab.js';
@@ -7,7 +7,7 @@ import { configureProject } from '../../../utils/configure.js';
 
 const log = debug('sku:jest');
 
-export const testAction = async ({ args = [] } = {}) => {
+const testAction = async ({ args = [] } = {}) => {
   await configureProject();
   await runVocabCompile();
 
@@ -23,5 +23,7 @@ export const testAction = async ({ args = [] } = {}) => {
     jestArgv.push('--ci');
   }
 
-  jest.run(jestArgv);
+  run(jestArgv);
 };
+
+export { testAction };

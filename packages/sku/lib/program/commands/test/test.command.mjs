@@ -1,8 +1,8 @@
 import { Command } from 'commander';
 
-const test = new Command('test');
+const testCommand = new Command('test');
 
-test
+testCommand
   .description('Run unit tests.')
   .allowUnknownOption(true)
   .action(async ({ args }) => {
@@ -10,4 +10,4 @@ test
     testAction({ args });
   });
 
-module.exports = test;
+export { testCommand };

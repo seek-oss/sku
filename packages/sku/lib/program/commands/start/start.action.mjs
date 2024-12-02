@@ -91,7 +91,10 @@ export const startAction = async ({
 
   const appHosts = getAppHosts();
 
-  const devServerMiddleware = await import(paths.devServerMiddleware);
+  let devServerMiddleware = null;
+  if (useDevServerMiddleware) {
+    devServerMiddleware = await import(paths.devServerMiddleware);
+  }
 
   /**
    * @type import('webpack-dev-server').Configuration
@@ -115,10 +118,8 @@ export const startAction = async ({
     },
     setupExitSignals: true,
     setupMiddlewares: (middlewares, { app }) => {
-      if (useDevServerMiddleware) {
-        if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-          devServerMiddleware(app);
-        }
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(app);
       }
 
       middlewares.push(

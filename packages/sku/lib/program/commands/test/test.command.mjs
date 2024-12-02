@@ -1,12 +1,12 @@
-const { Command } = require('commander');
+import { Command } from 'commander';
 
 const test = new Command('test');
 
 test
   .description('Run unit tests.')
   .allowUnknownOption(true)
-  .action(({ args }) => {
-    const testAction = require('./test.action');
+  .action(async ({ args }) => {
+    const { testAction } = await import('./test.action.mjs');
     testAction({ args });
   });
 

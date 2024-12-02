@@ -1,13 +1,13 @@
-const debug = require('debug');
-const jest = require('jest');
+import debug from 'debug';
+import jest from 'jest';
 
-const isCI = require('../../../isCI');
-const { runVocabCompile } = require('../../../runVocab');
-const { configureProject } = require('../../../utils/configure');
+import isCI from '../../../isCI.js';
+import { runVocabCompile } from '../../../runVocab.js';
+import { configureProject } from '../../../utils/configure.js';
 
 const log = debug('sku:jest');
 
-const testAction = async ({ args = [] } = {}) => {
+export const testAction = async ({ args = [] } = {}) => {
   await configureProject();
   await runVocabCompile();
 
@@ -25,5 +25,3 @@ const testAction = async ({ args = [] } = {}) => {
 
   jest.run(jestArgv);
 };
-
-module.exports = testAction;

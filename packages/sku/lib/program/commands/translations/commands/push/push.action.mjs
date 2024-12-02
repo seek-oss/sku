@@ -1,14 +1,15 @@
-const chalk = require('chalk');
-const {
+import chalk from 'chalk';
+import { push } from '@vocab/phrase';
+
+import {
   ensureBranch,
   getResolvedVocabConfig,
-} = require('../../helpers/translation-helpers');
-const { push } = require('@vocab/phrase');
-const { configureProject } = require('../../../../../utils/configure');
+} from '../../helpers/translation-helpers';
+import { configureProject } from '../../../../../utils/configure.js';
 
 const log = (message) => console.log(chalk.cyan(message));
 
-const pushAction = async ({ deleteUnusedKeys }) => {
+export const pushAction = async ({ deleteUnusedKeys }) => {
   await configureProject();
   try {
     const vocabConfigFromSkuConfig = await getResolvedVocabConfig({
@@ -26,5 +27,3 @@ const pushAction = async ({ deleteUnusedKeys }) => {
     process.exit(1);
   }
 };
-
-module.exports = pushAction;

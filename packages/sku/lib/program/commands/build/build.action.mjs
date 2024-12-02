@@ -1,27 +1,27 @@
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
 
-const prettyMilliseconds = require('pretty-ms');
-const { green, red } = require('chalk');
-const webpack = require('webpack');
-const { performance } = require('node:perf_hooks');
+import prettyMilliseconds from 'pretty-ms';
+import { green, red } from 'chalk';
+import webpack from 'webpack';
+import { performance } from 'node:perf_hooks';
 
-const {
+import {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
   cleanStaticRenderEntry,
-} = require('../../../buildFileUtils');
-const { run } = require('../../../runWebpack');
-const createHtmlRenderPlugin = require('../../../../config/webpack/plugins/createHtmlRenderPlugin');
-const makeWebpackConfig = require('../../../../config/webpack/webpack.config');
-const { isLibrary, cspEnabled } = require('../../../../context');
-const track = require('../../../../telemetry');
-const { runVocabCompile } = require('../../../runVocab');
-const {
+} from '../../../buildFileUtils.js';
+import { run } from '../../../runWebpack.js';
+import createHtmlRenderPlugin from '../../../../config/webpack/plugins/createHtmlRenderPlugin.js';
+import makeWebpackConfig from '../../../../config/webpack/webpack.config.js';
+import { isLibrary, cspEnabled } from '../../../../context/index.js';
+import track from '../../../../telemetry/index.js';
+import { runVocabCompile } from '../../../runVocab.js';
+import {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/configure');
+} from '../../../utils/configure.js';
 
 const buildAction = async ({ stats }) => {
   await configureProject();
@@ -72,4 +72,4 @@ const buildAction = async ({ stats }) => {
   }
 };
 
-module.exports = buildAction;
+export { buildAction };

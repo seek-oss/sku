@@ -1,6 +1,6 @@
 import { initCommand } from './init/init.command.mjs';
 import { buildSsrCommand } from './build-ssr/build-ssr.command.mjs';
-import configureCommand from './configure/configure.command.js';
+import { configureCommand } from './configure/configure.command.mjs';
 import formatCommand from './format/format.command.js';
 import lintCommand from './lint/lint.command.js';
 import preCommitCommand from './pre-commit/pre-commit.command.js';
@@ -10,7 +10,7 @@ import startCommand from './start/start.command.js';
 import startSsrCommand from './start-ssr/start-ssr.command.js';
 import translationsCommand from './translations/translations.command.js';
 import buildCommand from './build/build.command.js';
-import testCommand from './test/test.command.js';
+import { testCommand } from './test/test.command.mjs';
 /* [add-sku-command-generator: import] */
 
 export const commands = [

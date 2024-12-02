@@ -1,7 +1,8 @@
-const { getVocabConfig } = require('../../../../../config/vocab/vocab');
-const { resolveConfig } = require('@vocab/core');
+import { resolveConfig } from '@vocab/core';
 
-const ensureBranch = async () => {
+import { getVocabConfig } from '../../../../../config/vocab/vocab.js';
+
+export const ensureBranch = async () => {
   const { default: envCi } = await import('env-ci');
   const { branch } = envCi();
 
@@ -16,7 +17,7 @@ const ensureBranch = async () => {
   return branch;
 };
 
-const getResolvedVocabConfig = async ({ translationSubCommand }) => {
+export const getResolvedVocabConfig = async ({ translationSubCommand }) => {
   const vocabConfigFromSkuConfig = getVocabConfig();
   const resolvedVocabConfig = await resolveConfig();
 
@@ -38,9 +39,4 @@ const getResolvedVocabConfig = async ({ translationSubCommand }) => {
   }
 
   return vocabConfigFromSkuConfig;
-};
-
-module.exports = {
-  getResolvedVocabConfig,
-  ensureBranch,
 };

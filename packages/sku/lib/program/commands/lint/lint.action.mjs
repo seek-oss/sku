@@ -1,16 +1,16 @@
-const chalk = require('chalk');
-const esLintCheck = require('../../../runESLint').check;
-const prettierCheck = require('../../../runPrettier').check;
-const runTsc = require('../../../runTsc');
+import { cyan } from 'chalk';
+import { check as esLintCheck } from '../../../runESLint.js';
+import { check as prettierCheck } from '../../../runPrettier.js';
+import runTsc from '../../../runTsc.js';
 
-const { runVocabCompile } = require('../../../runVocab');
-const { configureProject } = require('../../../utils/configure');
+import { runVocabCompile } from '../../../runVocab.js';
+import { configureProject } from '../../../utils/configure.js';
 
-const lintAction = async (paths) => {
+export const lintAction = async (paths) => {
   await configureProject();
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 
-  console.log(chalk.cyan('Linting'));
+  console.log(cyan('Linting'));
 
   await runVocabCompile();
 
@@ -36,7 +36,5 @@ const lintAction = async (paths) => {
     process.exit(1);
   }
 
-  console.log(chalk.cyan('Linting complete'));
+  console.log(cyan('Linting complete'));
 };
-
-module.exports = lintAction;

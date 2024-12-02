@@ -1,4 +1,4 @@
-import initCommand from './init/init.command.js';
+import { initCommand } from './init/init.command.mjs';
 import buildSsrCommand from './build-ssr/build-ssr.command.js';
 import configureCommand from './configure/configure.command.js';
 import formatCommand from './format/format.command.js';

@@ -1,27 +1,27 @@
-#!/usr/bin/env node
-
-const {
+import {
   packageManager,
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
-} = require('../../../packageManager');
+} from '../../../packageManager.js';
 
-const chalk = require('chalk');
-const fs = require('node:fs/promises');
-const { posix: path } = require('node:path');
-const { isEmptyDir } = require('../../../isEmptyDir');
-const dedent = require('dedent');
-const { setCwd } = require('../../../cwd');
-const prettierWrite = require('../../../runPrettier').write;
-const esLintFix = require('../../../runESLint').fix;
-const configure = require('../../../configure');
-const install = require('../../../install');
-const banner = require('../../../banner');
-const toPosixPath = require('../../../toPosixPath');
-const trace = require('debug')('sku:init');
-const { fdir: Fdir } = require('fdir');
-const { Eta } = require('eta');
+import { red, green, cyan, bold } from 'chalk';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { posix as path } from 'node:path';
+import { isEmptyDir } from '../../../isEmptyDir.js';
+import dedent from 'dedent';
+import { setCwd } from '../../../cwd.js';
+import { write as prettierWrite } from '../../../runPrettier.js';
+import { fix as esLintFix } from '../../../runESLint.js';
+import configure from '../../../configure.js';
+import install from '../../../install.js';
+import banner from '../../../banner.js';
+import toPosixPath from '../../../toPosixPath.js';
+import { fdir as Fdir } from 'fdir';
+import { Eta } from 'eta';
+import debug from 'debug';
+
+const trace = debug('sku:init');
 
 const removeLeadingUnderscoreFromFileName = (filePath) => {
   const basename = path.basename(filePath);
@@ -50,11 +50,14 @@ const getTemplateFileDestinationFromRoot =
 const packageNameRegex =
   /^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
 
-const initAction = async (projectName, { verbose }) => {
+export const initAction = async (projectName, { verbose }) => {
   const root = path.resolve(projectName);
   setCwd(root);
 
   trace(`Creating project "${projectName}" in "${root}"`);
+  console.log({
+    packageManager,
+  });
 
   const appName = path.basename(root);
 
@@ -69,7 +72,7 @@ const initAction = async (projectName, { verbose }) => {
 
   if (!isValidPackageName) {
     console.error(dedent`
-  Could not create a project called ${chalk.red(
+  Could not create a project called ${red(
     `"${appName}"`,
   )} because of npm naming restrictions. \
   Please see https://docs.npmjs.com/cli/configuring-npm/package-json for package name rules.
@@ -80,13 +83,13 @@ const initAction = async (projectName, { verbose }) => {
 
   if (reservedNames.indexOf(appName) >= 0) {
     console.error(
-      chalk.red(dedent`
+      red(dedent`
     We cannot create a project called \
-    ${chalk.green(appName)} \
+    ${green(appName)} \
     because a dependency with the same name exists.
     Due to the way npm works, the following names are not allowed:
 
-    ${chalk.cyan(reservedNames.map((depName) => `  ${depName}`).join('\n'))}
+    ${cyan(reservedNames.map((depName) => `  ${depName}`).join('\n'))}
 
     Please choose a different project name.
   `),
@@ -94,14 +97,14 @@ const initAction = async (projectName, { verbose }) => {
     process.exit(1);
   }
 
-  await fs.mkdir(projectName, { recursive: true });
+  await mkdir(projectName, { recursive: true });
 
   if (!isEmptyDir(root)) {
-    console.log(`The directory ${chalk.green(projectName)} is not empty.`);
+    console.log(`The directory ${green(projectName)} is not empty.`);
     process.exit(1);
   }
 
-  console.log(`Creating a new sku project in ${chalk.green(root)}.`);
+  console.log(`Creating a new sku project in ${green(root)}.`);
   console.log();
 
   const packageJson = {
@@ -119,7 +122,7 @@ const initAction = async (projectName, { verbose }) => {
   };
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
-  await fs.writeFile(path.join(root, 'package.json'), packageJsonString);
+  await writeFile(path.join(root, 'package.json'), packageJsonString);
   process.chdir(root);
 
   const templateDirectory = path.join(
@@ -176,8 +179,8 @@ const initAction = async (projectName, { verbose }) => {
       const destination = getTemplateFileDestination(file);
 
       // Ensure folders exist before writing files to them
-      await fs.mkdir(path.dirname(destination), { recursive: true });
-      await fs.writeFile(destination, fileContents);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await writeFile(destination, fileContents);
     }),
   );
 
@@ -191,14 +194,14 @@ const initAction = async (projectName, { verbose }) => {
   ];
 
   console.log(
-    `Installing packages with ${chalk.bold(
+    `Installing packages with ${bold(
       packageManager,
     )}. This might take a couple of minutes.`,
   );
   console.log(
     `Installing ${deps
       .concat(devDeps)
-      .map((x) => chalk.cyan(x))
+      .map((x) => cyan(x))
       .join(', ')}...`,
   );
   console.log();
@@ -218,8 +221,8 @@ const initAction = async (projectName, { verbose }) => {
   await prettierWrite();
 
   const nextSteps = [
-    `${chalk.cyan('cd')} ${projectName}`,
-    `${chalk.cyan(getRunCommand('start'))}`,
+    `${cyan('cd')} ${projectName}`,
+    `${cyan(getRunCommand('start'))}`,
   ]
     .filter(Boolean)
     .join('\n');
@@ -229,5 +232,3 @@ const initAction = async (projectName, { verbose }) => {
     nextSteps,
   ]);
 };
-
-module.exports = initAction;

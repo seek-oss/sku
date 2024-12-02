@@ -3,8 +3,7 @@ const findUp = require('find-up');
 const path = require('node:path');
 const { resolveCommand } = require('package-manager-detector/commands');
 const { INSTALL_PAGE } = require('package-manager-detector/constants');
-
-const initCommand = require('./program/commands/init/init.command');
+const { getPackageManager } = require('../context/packageManager');
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
@@ -52,9 +51,9 @@ const lockfileByPackageManager = {
  * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
-const getPackageManager = () => {
+const resolvePackageManager = () => {
   const packageManager = validatePackageManager(
-    initCommand.opts()?.packageManager || getPackageManagerFromUserAgent(),
+    getPackageManager() || getPackageManagerFromUserAgent(),
   );
 
   const lockFile = lockfileByPackageManager[packageManager];
@@ -67,7 +66,7 @@ const getPackageManager = () => {
   return { packageManager, rootDir };
 };
 
-const { rootDir, packageManager } = getPackageManager();
+const { rootDir, packageManager } = resolvePackageManager();
 
 /**
  * @param {SupportedPackageManager} agent

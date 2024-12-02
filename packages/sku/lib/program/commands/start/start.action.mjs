@@ -116,7 +116,6 @@ export const startAction = async ({
     setupExitSignals: true,
     setupMiddlewares: (middlewares, { app }) => {
       if (useDevServerMiddleware) {
-        // Still using require here to avoid turning this function into an async function.
         if (devServerMiddleware && typeof devServerMiddleware === 'function') {
           devServerMiddleware(app);
         }

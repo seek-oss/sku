@@ -18,7 +18,7 @@ const { checkHosts, getAppHosts } = require('../../../hosts');
 const allocatePort = require('../../../allocatePort');
 const openBrowser = require('../../../openBrowser');
 const getSiteForHost = require('../../../getSiteForHost');
-const resolveEnvironment = require('../../../resolveEnvironment');
+const { resolveEnvironment } = require('../../../resolveEnvironment');
 const track = require('../../../../telemetry');
 const createServer = require('../../../createServer');
 const {
@@ -30,7 +30,11 @@ const {
   validatePeerDeps,
 } = require('../../../utils/configure');
 
-const serveAction = async ({ site: preferredSite, port: preferredPort }) => {
+const serveAction = async ({
+  site: preferredSite,
+  port: preferredPort,
+  environment: environmentOption,
+}) => {
   await configureProject();
   validatePeerDeps();
   track.count('serve');
@@ -80,7 +84,7 @@ const serveAction = async ({ site: preferredSite, port: preferredPort }) => {
 
   console.log(blue(`sku serve`));
 
-  const environment = resolveEnvironment();
+  const environment = resolveEnvironment({ environment: environmentOption });
 
   const app = express();
 

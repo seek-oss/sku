@@ -9,7 +9,7 @@ const { checkHosts, getAppHosts } = require('../../../hosts');
 const allocatePort = require('../../../allocatePort');
 const openBrowser = require('../../../openBrowser');
 const getSiteForHost = require('../../../getSiteForHost');
-const resolveEnvironment = require('../../../resolveEnvironment');
+const { resolveEnvironment } = require('../../../resolveEnvironment');
 const routeMatcher = require('../../../routeMatcher');
 const {
   port,
@@ -39,14 +39,17 @@ const localhost = '0.0.0.0';
 
 const hot = process.env.SKU_HOT !== 'false';
 
-const startAction = async ({ stats: statsOption }) => {
+const startAction = async ({
+  stats: statsOption,
+  environment: environmentOption,
+}) => {
   await configureProject();
   validatePeerDeps();
   console.log(blue(`sku start`));
 
   await watchVocabCompile();
 
-  const environment = resolveEnvironment();
+  const environment = resolveEnvironment({ environment: environmentOption });
 
   console.log();
 

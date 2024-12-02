@@ -10,7 +10,7 @@ const validateConfig = require('./validateConfig');
 const defaultCompilePackages = require('./defaultCompilePackages');
 const isCompilePackage = require('../lib/isCompilePackage');
 const targets = require('../config/targets.json');
-const program = require('../lib/program');
+const { getConfigPath } = require('./configPath.js');
 
 /** @typedef {import("../").SkuConfig} SkuConfig */
 
@@ -20,9 +20,7 @@ const getSkuConfig = () => {
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
-  const config = program.opts()?.config;
-
-  const customSkuConfig = config || process.env.SKU_CONFIG;
+  const customSkuConfig = getConfigPath() || process.env.SKU_CONFIG;
 
   if (customSkuConfig) {
     appSkuConfigPath = getPathFromCwd(customSkuConfig);

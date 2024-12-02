@@ -7,7 +7,7 @@ const getCommandsList = () => {
   return commands.filter((command) => command !== 'index.mjs');
 };
 
-const addCommandGenerator = (plop) => {
+const addSkuCommandGenerator = (plop) => {
   const subCommands = getCommandsList();
 
   plop.setGenerator('add-sku-command', {
@@ -97,4 +97,4 @@ const addCommandGenerator = (plop) => {
   });
 };
 
-export default addCommandGenerator;
+export default addSkuCommandGenerator;

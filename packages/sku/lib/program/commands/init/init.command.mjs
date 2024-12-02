@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import packageManagerOption from '../../options/packageManager/packageManager.option.js';
 import { setPackageManager } from '../../../../context/packageManager.js';
 
-const initCommand = new Command('init');
+export const initCommand = new Command('init');
 
 initCommand
   .description('Initialize a new sku project')
@@ -19,5 +19,3 @@ initCommand
     const { initAction } = await import('./init.action.mjs');
     initAction(projectName, { verbose });
   });
-
-export { initCommand };

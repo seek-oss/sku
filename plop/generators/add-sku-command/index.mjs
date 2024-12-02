@@ -80,7 +80,7 @@ const addCommandGenerator = (plop) => {
           path: `./packages/sku/lib/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }index.js`,
-          pattern: /(\/\* \[add-command-generator: import] \*\/)/g,
+          pattern: /(\/\* \[add-sku-command-generator: import] \*\/)/g,
           template:
             "const {{camelCase commandName}}Command = require('./{{commandName}}/{{commandName}}.command.js');\n$1",
         },
@@ -89,7 +89,7 @@ const addCommandGenerator = (plop) => {
           path: `./packages/sku/lib/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }index.js`,
-          pattern: /(\/\* \[add-command-generator: invocation] \*\/)/g,
+          pattern: /(\/\* \[add-sku-command-generator: invocation] \*\/)/g,
           template: '{{camelCase commandName}}Command,\n  $1',
         },
       ];

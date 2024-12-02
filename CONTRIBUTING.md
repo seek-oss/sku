@@ -44,9 +44,9 @@ Once you select the plop generator you want to use, you will be prompted for add
 
 The following generators are available:
 
-| Generator     | Description                                                                                                                                                            |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `add-command` | **Create a new command for the `CLI` program** <br><br> This generator allows for sub-command generation with a depth of one. This will modify the parent command file |
+| Generator         | Description                                                                                                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `add-sku-command` | **Create a new command for the `sku` `CLI` program** <br><br> This generator allows for sub-command generation with a depth of one. This will modify the parent command file |
 
 [plop]: https://plopjs.com/
 

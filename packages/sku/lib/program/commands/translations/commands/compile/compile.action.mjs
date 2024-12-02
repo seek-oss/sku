@@ -1,11 +1,12 @@
-const { compile } = require('@vocab/core');
-const chalk = require('chalk');
-const { getResolvedVocabConfig } = require('../../helpers/translation-helpers');
-const { configureProject } = require('../../../../../utils/configure');
+import { compile } from '@vocab/core';
+import chalk from 'chalk';
+
+import { getResolvedVocabConfig } from '../../helpers/translation-helpers';
+import { configureProject } from '../../../../../utils/configure.js';
 
 const log = (message) => console.log(chalk.cyan(message));
 
-const compileAction = async ({ watch }) => {
+export const compileAction = async ({ watch }) => {
   await configureProject();
   try {
     const vocabConfigFromSkuConfig = await getResolvedVocabConfig({
@@ -30,5 +31,3 @@ const compileAction = async ({ watch }) => {
     process.exit(1);
   }
 };
-
-module.exports = compileAction;

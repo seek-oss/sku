@@ -8,7 +8,7 @@ import serveCommand from './serve/serve.command.js';
 import setupHostsCommand from './setup-hosts/setup-hosts.command.js';
 import startCommand from './start/start.command.js';
 import startSsrCommand from './start-ssr/start-ssr.command.js';
-import translationsCommand from './translations/translations.command.js';
+import { translationsCommand } from './translations/translations.command.mjs';
 import { buildCommand } from './build/build.command.mjs';
 import { testCommand } from './test/test.command.mjs';
 /* [add-sku-command-generator: import] */

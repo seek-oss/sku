@@ -5,7 +5,7 @@ translations.ts
 .eslintcache
 .prettierrc
 coverage/
-dist-ssr/
+dist/
 eslint.config.js
 pnpm-lock.yaml
 report/

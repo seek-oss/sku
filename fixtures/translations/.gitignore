@@ -5,7 +5,7 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-ssr/
+dist/
 eslint.config.js
 report/
 tsconfig.json

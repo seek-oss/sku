@@ -1,5 +1,5 @@
 import { initCommand } from './init/init.command.mjs';
-import buildSsrCommand from './build-ssr/build-ssr.command.js';
+import { buildSsrCommand } from './build-ssr/build-ssr.command.mjs';
 import { configureCommand } from './configure/configure.command.mjs';
 import formatCommand from './format/format.command.js';
 import lintCommand from './lint/lint.command.js';

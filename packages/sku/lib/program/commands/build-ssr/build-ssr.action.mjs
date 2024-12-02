@@ -1,27 +1,24 @@
-// First, ensure the build is running in production mode
-process.env.NODE_ENV = 'production';
-
-const { performance } = require('node:perf_hooks');
-const prettyMilliseconds = require('pretty-ms');
-const webpack = require('webpack');
-const { green, red } = require('chalk');
-const { run } = require('../../../runWebpack');
-const {
+import { performance } from 'node:perf_hooks';
+import prettyMilliseconds from 'pretty-ms';
+import { webpack } from 'webpack';
+import { green, red } from 'chalk';
+import { run } from '../../../runWebpack';
+import {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-} = require('../../../buildFileUtils');
-const makeWebpackConfig = require('../../../../config/webpack/webpack.config.ssr');
-const { port, cspEnabled } = require('../../../../context');
-const track = require('../../../../telemetry');
+} from '../../../buildFileUtils';
+import makeWebpackConfig from '../../../../config/webpack/webpack.config.ssr';
+import { port, cspEnabled } from '../../../../context';
+import track from '../../../../telemetry';
 
-const { runVocabCompile } = require('../../../runVocab');
-const {
-  configureProject,
-  validatePeerDeps,
-} = require('../../../utils/configure');
+import { runVocabCompile } from '../../../runVocab';
+import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
-const buildSsrAction = async ({ stats }) => {
+// First, ensure the build is running in production mode
+process.env.NODE_ENV = 'production';
+
+export const buildSsrAction = async ({ stats }) => {
   await configureProject();
   validatePeerDeps();
   try {
@@ -66,5 +63,3 @@ const buildSsrAction = async ({ stats }) => {
     }
   }
 };
-
-module.exports = buildSsrAction;

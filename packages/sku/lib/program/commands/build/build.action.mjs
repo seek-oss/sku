@@ -1,6 +1,3 @@
-// First, ensure the build is running in production mode
-process.env.NODE_ENV = 'production';
-
 import prettyMilliseconds from 'pretty-ms';
 import { green, red } from 'chalk';
 import webpack from 'webpack';
@@ -22,6 +19,9 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+
+// First, ensure the build is running in production mode
+process.env.NODE_ENV = 'production';
 
 const buildAction = async ({ stats }) => {
   await configureProject();

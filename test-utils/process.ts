@@ -10,7 +10,7 @@ import {
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 const execFile = promisify(_execFile);
-const skuBin = require.resolve('../packages/sku/bin/sku.js');
+const skuBin = require.resolve('../packages/sku/bin/sku.mjs');
 
 export const run = async (
   file: string,

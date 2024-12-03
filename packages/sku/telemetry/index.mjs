@@ -1,14 +1,15 @@
-const os = require('node:os');
+import os from 'node:os';
 
-const { requireFromCwd } = require('../lib/cwd');
-const isCI = require('../lib/isCI');
-const provider = require('./provider');
-const skuVersion = require('../package.json').version;
+import { requireFromCwd } from '../lib/cwd';
+import isCI from '../lib/isCI';
+import provider from './provider';
+import skuPackageJson from '../package.json' with { type: 'json' };
 
-const { languages } = require('../context');
+import { languages } from '../context';
 
 let projectName = 'unknown';
 let braidVersion = 'unknown';
+const skuVersion = skuPackageJson.version;
 try {
   const packageJson = requireFromCwd('./package.json');
 
@@ -33,4 +34,4 @@ provider.addGlobalTags({
   languageSupport: Boolean(languages) ? 'multi' : 'single',
 });
 
-module.exports = provider;
+export default provider;

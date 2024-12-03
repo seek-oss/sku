@@ -1,5 +1,7 @@
-const debug = require('debug')('sku:server-watcher');
-const cluster = require('node:cluster');
+import debug from 'debug';
+import cluster from 'node:cluster';
+
+debug('sku:server-watcher');
 
 /**
  * @param {string} serverFilePath
@@ -57,4 +59,4 @@ function createServerManager(serverFilePath) {
   return { start, hotUpdate, kill: killIfNotDead };
 }
 
-module.exports = createServerManager;
+export default createServerManager;

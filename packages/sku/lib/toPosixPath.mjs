@@ -1,5 +1,5 @@
 // @ts-check
-const path = require('node:path');
+import path from 'node:path';
 
 /**
  * Replaces all win32 path separators (\) with posix path separators (/)
@@ -8,4 +8,4 @@ const path = require('node:path');
 const toPosixPath = (inputPath) =>
   inputPath.replaceAll(path.win32.sep, path.posix.sep);
 
-module.exports = toPosixPath;
+export default toPosixPath;

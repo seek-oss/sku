@@ -1,8 +1,8 @@
 import path from 'node:path';
 import WebpackDevServer from 'webpack-dev-server';
-import webpack from 'webpack';
+import { webpack } from 'webpack';
 import onDeath from 'death';
-import { blue, underline } from 'chalk';
+import chalk from 'chalk';
 import debug from 'debug';
 
 import getCertificate from '../../../certificate.js';
@@ -25,7 +25,10 @@ import openBrowser from '../../../openBrowser/index.js';
 import createServerManager from '../../../serverManager.js';
 
 import { watchVocabCompile } from '../../../runVocab.js';
-import { configureProject, validatePeerDeps } from '../../../utils/configure';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
 
 const log = debug('sku:start-ssr');
 
@@ -97,12 +100,14 @@ export const startSsrAction = async ({ stats: statsOption }) => {
 
   console.log();
   console.log(
-    blue(
-      `Starting the webpack dev server on ${underline(webpackDevServerUrl)}`,
+    chalk.blue(
+      `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
     ),
   );
   console.log(
-    blue(`Starting the SSR development server on ${underline(serverUrl)}`),
+    chalk.blue(
+      `Starting the SSR development server on ${chalk.underline(serverUrl)}`,
+    ),
   );
   console.log();
 

@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import exists from '../../../exists.js';
 import express from 'express';
 import handler from 'serve-handler';
-import { blue, bold, underline, red } from 'chalk';
+import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
 
 import {
@@ -25,7 +25,10 @@ import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
 } from '../../../language-utils.js';
-import { configureProject, validatePeerDeps } from '../../../utils/configure';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
 
 export const serveAction = async ({
   site: preferredSite,
@@ -40,8 +43,8 @@ export const serveAction = async ({
 
   if (!targetFolderExists) {
     console.log(
-      red(
-        `${bold('sku build')} must be run before running ${bold('sku serve')}`,
+      chalk.red(
+        `${chalk.bold('sku build')} must be run before running ${chalk.bold('sku serve')}`,
       ),
     );
     process.exit(1);
@@ -50,11 +53,11 @@ export const serveAction = async ({
   const availableSites = sites.map(({ name }) => name);
 
   if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
-    console.log(red(`Unknown site '${bold(preferredSite)}'`));
+    console.log(chalk.red(`Unknown site '${chalk.bold(preferredSite)}'`));
     const suggestedSite = didYouMean(preferredSite, availableSites);
 
     if (suggestedSite) {
-      console.log(`Did you mean '${bold(suggestedSite)}'?`);
+      console.log(`Did you mean '${chalk.bold(suggestedSite)}'?`);
     }
 
     process.exit(1);
@@ -65,7 +68,9 @@ export const serveAction = async ({
     paths.publicPath.startsWith('//')
   ) {
     console.log(
-      red('sku serve not supported when publicPath is on a separate domain.'),
+      chalk.red(
+        'sku serve not supported when publicPath is on a separate domain.',
+      ),
     );
     process.exit(1);
   }
@@ -79,7 +84,7 @@ export const serveAction = async ({
     host: '0.0.0.0',
   });
 
-  console.log(blue(`sku serve`));
+  console.log(chalk.blue(`sku serve`));
 
   const environment = resolveEnvironment({ environment: environmentOption });
 
@@ -174,11 +179,13 @@ export const serveAction = async ({
         const siteUrl = `${proto}://${site.host}:${availablePort}${initialPath}`;
 
         console.log(
-          blue(`${bold(site.name)} site available at ${underline(siteUrl)}`),
+          chalk.blue(
+            `${chalk.bold(site.name)} site available at ${chalk.underline(siteUrl)}`,
+          ),
         );
       });
     } else {
-      console.log(blue(`Started server on ${underline(url)}`));
+      console.log(chalk.blue(`Started server on ${chalk.underline(url)}`));
     }
 
     console.log();

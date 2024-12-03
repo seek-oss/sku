@@ -1,16 +1,16 @@
-import { cyan } from 'chalk';
+import chalk from 'chalk';
 import { check as esLintCheck } from '../../../runESLint.js';
 import { check as prettierCheck } from '../../../runPrettier.js';
 import runTsc from '../../../runTsc.js';
 
 import { runVocabCompile } from '../../../runVocab.js';
-import { configureProject } from '../../../utils/configure';
+import { configureProject } from '../../../utils/configure.js';
 
 export const lintAction = async (paths) => {
   await configureProject();
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 
-  console.log(cyan('Linting'));
+  console.log(chalk.cyan('Linting'));
 
   await runVocabCompile();
 
@@ -36,5 +36,5 @@ export const lintAction = async (paths) => {
     process.exit(1);
   }
 
-  console.log(cyan('Linting complete'));
+  console.log(chalk.cyan('Linting complete'));
 };

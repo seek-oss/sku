@@ -1,19 +1,22 @@
 import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import { webpack } from 'webpack';
-import { green, red } from 'chalk';
-import { run } from '../../../runWebpack';
+import chalk from 'chalk';
+import { run } from '../../../runWebpack.js';
 import {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-} from '../../../buildFileUtils';
-import makeWebpackConfig from '../../../../config/webpack/webpack.config.ssr';
-import { port, cspEnabled } from '../../../../context';
-import provider from '../../../../telemetry';
+} from '../../../buildFileUtils.js';
+import makeWebpackConfig from '../../../../config/webpack/webpack.config.ssr.js';
+import { port, cspEnabled } from '../../../../context/index.js';
+import provider from '../../../../telemetry/index.js';
 
-import { runVocabCompile } from '../../../runVocab';
-import { configureProject, validatePeerDeps } from '../../../utils/configure';
+import { runVocabCompile } from '../../../runVocab.js';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
 
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';
@@ -42,7 +45,7 @@ export const buildSsrAction = async ({ stats }) => {
     });
 
     console.log(
-      green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
+      chalk.green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
     );
   } catch (error) {
     const timeTaken = performance.now();
@@ -52,7 +55,7 @@ export const buildSsrAction = async ({ stats }) => {
       csp: cspEnabled,
     });
 
-    console.error(red(error));
+    console.error(chalk.red(error));
 
     process.exitCode = 1;
   } finally {

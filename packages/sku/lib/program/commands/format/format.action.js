@@ -1,5 +1,5 @@
-import { cyan } from 'chalk';
-import { configureProject } from '../../../utils/configure';
+import chalk from 'chalk';
+import { configureProject } from '../../../utils/configure.js';
 import { fix as esLintFix } from '../../../runESLint.js';
 import { write as prettierWrite } from '../../../runPrettier.js';
 
@@ -7,7 +7,7 @@ export const formatAction = async (paths) => {
   await configureProject();
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 
-  console.log(cyan('Formatting'));
+  console.log(chalk.cyan('Formatting'));
 
   try {
     await esLintFix(pathsToCheck);
@@ -19,5 +19,5 @@ export const formatAction = async (paths) => {
 
     process.exit(1);
   }
-  console.log(cyan('Formatting complete'));
+  console.log(chalk.cyan('Formatting complete'));
 };

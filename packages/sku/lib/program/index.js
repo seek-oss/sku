@@ -3,10 +3,10 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
 import { commands } from './commands/index.js';
-import { debugOption } from './options/debug/debug.option';
-import { configOption } from './options/config/config.option';
-import { environmentOption } from './options/environment/environment.option';
-import { initDebug } from '../utils/debug';
+import { debugOption } from './options/debug/debug.option.js';
+import { configOption } from './options/config/config.option.js';
+import { environmentOption } from './options/environment/environment.option.js';
+import { initDebug } from '../utils/debug.js';
 import { setConfigPath } from '../../context/configPath.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

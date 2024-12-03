@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { commands } from './commands';
+import { commands } from './commands/index.js';
 
 const translationsCommand = new Command('translations');
 

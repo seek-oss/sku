@@ -5,7 +5,7 @@ import {
   getInstallCommand,
 } from '../../../packageManager.js';
 
-import { red, green, cyan, bold } from 'chalk';
+import chalk from 'chalk';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { posix as path } from 'node:path';
 import { isEmptyDir } from '../../../isEmptyDir.js';
@@ -72,7 +72,7 @@ export const initAction = async (projectName, { verbose }) => {
 
   if (!isValidPackageName) {
     console.error(dedent`
-  Could not create a project called ${red(
+  Could not create a project called ${chalk.red(
     `"${appName}"`,
   )} because of npm naming restrictions. \
   Please see https://docs.npmjs.com/cli/configuring-npm/package-json for package name rules.
@@ -83,13 +83,13 @@ export const initAction = async (projectName, { verbose }) => {
 
   if (reservedNames.indexOf(appName) >= 0) {
     console.error(
-      red(dedent`
+      chalk.red(dedent`
     We cannot create a project called \
-    ${green(appName)} \
+    ${chalk.green(appName)} \
     because a dependency with the same name exists.
     Due to the way npm works, the following names are not allowed:
 
-    ${cyan(reservedNames.map((depName) => `  ${depName}`).join('\n'))}
+    ${chalk.cyan(reservedNames.map((depName) => `  ${depName}`).join('\n'))}
 
     Please choose a different project name.
   `),
@@ -100,11 +100,11 @@ export const initAction = async (projectName, { verbose }) => {
   await mkdir(projectName, { recursive: true });
 
   if (!isEmptyDir(root)) {
-    console.log(`The directory ${green(projectName)} is not empty.`);
+    console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }
 
-  console.log(`Creating a new sku project in ${green(root)}.`);
+  console.log(`Creating a new sku project in ${chalk.green(root)}.`);
   console.log();
 
   const packageJson = {
@@ -194,14 +194,14 @@ export const initAction = async (projectName, { verbose }) => {
   ];
 
   console.log(
-    `Installing packages with ${bold(
+    `Installing packages with ${chalk.bold(
       packageManager,
     )}. This might take a couple of minutes.`,
   );
   console.log(
     `Installing ${deps
       .concat(devDeps)
-      .map((x) => cyan(x))
+      .map((x) => chalk.cyan(x))
       .join(', ')}...`,
   );
   console.log();
@@ -221,8 +221,8 @@ export const initAction = async (projectName, { verbose }) => {
   await prettierWrite();
 
   const nextSteps = [
-    `${cyan('cd')} ${projectName}`,
-    `${cyan(getRunCommand('start'))}`,
+    `${chalk.cyan('cd')} ${projectName}`,
+    `${chalk.cyan(getRunCommand('start'))}`,
   ]
     .filter(Boolean)
     .join('\n');

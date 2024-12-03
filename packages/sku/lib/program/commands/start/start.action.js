@@ -1,6 +1,6 @@
 import WebpackDevServer from 'webpack-dev-server';
 import { webpack } from 'webpack';
-import { blue, underline } from 'chalk';
+import chalk from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 
 import { checkHosts, getAppHosts } from '../../../hosts.js';
@@ -28,7 +28,10 @@ import {
 } from '../../../language-utils.js';
 
 import { watchVocabCompile } from '../../../runVocab.js';
-import { configureProject, validatePeerDeps } from '../../../utils/configure';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
 
 const localhost = '0.0.0.0';
 
@@ -42,7 +45,7 @@ export const startAction = async ({
 }) => {
   await configureProject();
   validatePeerDeps();
-  console.log(blue(`sku start`));
+  console.log(chalk.blue(`sku start`));
 
   await watchVocabCompile();
 
@@ -202,7 +205,9 @@ export const startAction = async ({
     }:${availablePort}${initialPath}`;
 
     console.log();
-    console.log(blue(`Starting the development server on ${underline(url)}`));
+    console.log(
+      chalk.blue(`Starting the development server on ${chalk.underline(url)}`),
+    );
     console.log();
 
     openBrowser(url);

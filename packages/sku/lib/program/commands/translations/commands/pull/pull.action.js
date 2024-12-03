@@ -4,8 +4,8 @@ import { pull } from '@vocab/phrase';
 import {
   ensureBranch,
   getResolvedVocabConfig,
-} from '../../helpers/translation-helpers';
-import { configureProject } from '../../../../../utils/configure';
+} from '../../helpers/translation-helpers.js';
+import { configureProject } from '../../../../../utils/configure.js';
 
 const log = (message) => console.log(chalk.cyan(message));
 

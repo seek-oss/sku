@@ -1,8 +1,8 @@
 import { compile } from '@vocab/core';
 import chalk from 'chalk';
 
-import { getResolvedVocabConfig } from '../../helpers/translation-helpers';
-import { configureProject } from '../../../../../utils/configure';
+import { getResolvedVocabConfig } from '../../helpers/translation-helpers.js';
+import { configureProject } from '../../../../../utils/configure.js';
 
 const log = (message) => console.log(chalk.cyan(message));
 

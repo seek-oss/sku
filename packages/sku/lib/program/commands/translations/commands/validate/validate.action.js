@@ -1,10 +1,10 @@
 import { validate } from '@vocab/core';
-import { bold, cyan } from 'chalk';
+import chalk from 'chalk';
 
-import { getResolvedVocabConfig } from '../../helpers/translation-helpers';
-import { configureProject } from '../../../../../utils/configure';
+import { getResolvedVocabConfig } from '../../helpers/translation-helpers.js';
+import { configureProject } from '../../../../../utils/configure.js';
 
-const log = (message) => console.log(cyan(message));
+const log = (message) => console.log(chalk.cyan(message));
 
 export const validateAction = async () => {
   await configureProject();
@@ -18,7 +18,7 @@ export const validateAction = async () => {
     log('Successfully validated translations');
   } catch (e) {
     if (e) {
-      console.error(`Error running ${bold(`translations validate`)}:`, e);
+      console.error(`Error running ${chalk.bold(`translations validate`)}:`, e);
     }
     process.exit(1);
   }

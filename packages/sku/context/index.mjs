@@ -145,9 +145,8 @@ const devServerMiddleware =
   skuConfig.devServerMiddleware &&
   getPathFromCwd(skuConfig.devServerMiddleware);
 
-const useDevServerMiddleware = devServerMiddleware
-  ? existsSync(devServerMiddleware)
-  : false;
+const useDevServerMiddleware = Boolean(devServerMiddleware) ||
+  existsSync(devServerMiddleware);
 
 if (devServerMiddleware && !useDevServerMiddleware) {
   throw new Error(

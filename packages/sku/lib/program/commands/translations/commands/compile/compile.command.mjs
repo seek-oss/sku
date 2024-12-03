@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import watchOption from '../../../../options/watch/watch.option.js';
+import { watchOption } from '../../../../options/watch/watch.option';
 
 const compileCommand = new Command('compile');
 

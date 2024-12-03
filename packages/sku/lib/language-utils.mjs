@@ -1,14 +1,14 @@
-const debug = require('debug');
+import debug from 'debug';
 
-const routeMatcher = require('../lib/routeMatcher');
-const { languages, sites } = require('../context');
+import routeMatcher from '../lib/routeMatcher';
+import { languages, sites } from '../context';
 
 const log = debug('sku:language-middleware');
 
 /**
  * @param {import("../context").NormalizedSkuRoute} route
  */
-function getValidLanguagesForRoute(route) {
+export function getValidLanguagesForRoute(route) {
   const routeIsForSpecificSite = typeof route.siteIndex === 'number';
 
   /**
@@ -52,7 +52,7 @@ function getLanguageParamFromUrl(pathname, route) {
  * @param {import("../").SkuRouteObject} route
  * @returns {(string | null)}
  */
-function getLanguageFromRoute(req, route) {
+export function getLanguageFromRoute(req, route) {
   const supportedLanguagesForRoute = getValidLanguagesForRoute(route);
 
   log('Looking for language in requested path', {
@@ -108,12 +108,6 @@ function getLanguageFromRoute(req, route) {
  * @param {string} routePath
  * @param {string | null} language
  */
-function getRouteWithLanguage(routePath, language) {
+export function getRouteWithLanguage(routePath, language) {
   return routePath.replace(/(\$|\:)language/g, language);
 }
-
-module.exports = {
-  getLanguageFromRoute,
-  getRouteWithLanguage,
-  getValidLanguagesForRoute,
-};

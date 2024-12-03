@@ -1,11 +1,11 @@
 // @ts-check
-const { environments } = require('../context');
-const { bold, red } = require('chalk');
+import { environments } from '../context';
+import { bold, red } from 'chalk';
 
 /**
  * @param {{environment?: string}} options
  */
-const resolveEnvironment = ({ environment: environmentOption }) => {
+export const resolveEnvironment = ({ environment: environmentOption }) => {
   const environment = environmentOption || environments?.[0] || '';
 
   if (environment) {
@@ -19,5 +19,3 @@ const resolveEnvironment = ({ environment: environmentOption }) => {
 
   return environment;
 };
-
-module.exports = { resolveEnvironment };

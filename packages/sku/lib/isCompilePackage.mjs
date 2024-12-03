@@ -1,5 +1,5 @@
 // @ts-check
-const { getPathFromCwd } = require('./cwd');
+import { getPathFromCwd } from './cwd';
 
 const isCompilePackage = () => {
   try {
@@ -10,4 +10,4 @@ const isCompilePackage = () => {
   }
 };
 
-module.exports = isCompilePackage();
+export default isCompilePackage();

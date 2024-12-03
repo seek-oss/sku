@@ -1,11 +1,11 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
-const { yellow, italic } = require('chalk');
-const execSync = require('node:child_process').execSync;
-const open = require('open');
-
-const isCI = require('../isCI');
+import { yellow, italic } from 'chalk';
+import { execSync } from 'node:child_process';
+import open from 'open';
+import isCI from '../isCI';
+import getDefaultBrowser from 'default-browser';
 
 const OSX_CHROME = 'google chrome';
 
@@ -21,9 +21,8 @@ const supportedChromiumBrowsers = [
   'Arc',
 ];
 
-module.exports = async (url) => {
+export default async (url) => {
   if (process.env.OPEN_TAB !== 'false' && !isCI) {
-    const { default: getDefaultBrowser } = await import('default-browser');
     let defaultBrowser;
     try {
       const { name } = await getDefaultBrowser();

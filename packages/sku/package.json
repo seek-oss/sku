@@ -4,7 +4,7 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
-    "sku": "bin/sku.mjs"
+    "sku": "bin/sku.js"
   },
   "exports": {
     ".": "./sku-types.d.ts",
@@ -93,7 +93,7 @@
     "babel-plugin-unassert": "^3.1.0",
     "browserslist": "^4.16.1",
     "browserslist-config-seek": "3.2.0",
-    "chalk": "^4.1.0",
+    "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.7.1",
@@ -134,7 +134,7 @@
     "picomatch": "^3.0.1",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.4.1",
     "pretty-ms": "^7.0.1",
     "react-refresh": "^0.14.0",
     "selfsigned": "^2.1.1",
@@ -159,7 +159,6 @@
     "@types/minimist": "^1.2.5",
     "@types/node": "^18.19.31",
     "@types/picomatch": "^2.3.3",
-    "@types/prettier": "^2.7.3",
     "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
     "@types/webpack-bundle-analyzer": "^4.7.0",

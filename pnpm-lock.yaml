@@ -684,8 +684,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0
       chalk:
-        specifier: ^4.1.0
-        version: 4.1.2
+        specifier: ^5.3.0
+        version: 5.3.0
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -807,8 +807,8 @@ importers:
         specifier: ^8.0.0
         version: 8.1.1(postcss@8.4.47)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.36)(esbuild@0.24.0))
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.4.1
+        version: 3.4.1
       pretty-ms:
         specifier: ^7.0.1
         version: 7.0.1
@@ -876,9 +876,6 @@ importers:
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.4
-      '@types/prettier':
-        specifier: ^2.7.3
-        version: 2.7.3
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.12
@@ -3006,9 +3003,6 @@ packages:
 
   '@types/picomatch@2.3.4':
     resolution: {integrity: sha512-0so8lU8O5zatZS/2Fi4zrwks+vZv7e0dygrgEZXljODXBig97l4cPQD+9LabXfGJOWwoRkTVz6Q4edZvD12UOA==}
-
-  '@types/prettier@2.7.3':
-    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
 
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
@@ -11214,8 +11208,6 @@ snapshots:
   '@types/parse-json@4.0.2': {}
 
   '@types/picomatch@2.3.4': {}
-
-  '@types/prettier@2.7.3': {}
 
   '@types/prop-types@15.7.13': {}
 

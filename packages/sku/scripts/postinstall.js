@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { setCwd, getPathFromCwd, cwd } from '../lib/cwd.js';
 import debug from 'debug';
 import banner from '../lib/banner.js';
-import { bold } from 'chalk';
+import chalk from 'chalk';
 import exists from '../lib/exists.js';
 
 const log = debug('sku:postinstall');
@@ -48,10 +48,10 @@ if (packageJsonExists) {
 
   if (hasSkuDep) {
     banner('warning', 'sku dependency detected', [
-      `${bold('sku')} is present as a ${bold('dependency')} in ${bold(
+      `${chalk.bold('sku')} is present as a ${chalk.bold('dependency')} in ${chalk.bold(
         packageJson,
       )}.`,
-      `${bold('sku')} should be installed in ${bold('devDependencies')}.`,
+      `${chalk.bold('sku')} should be installed in ${chalk.bold('devDependencies')}.`,
     ]);
   }
 
@@ -60,7 +60,7 @@ if (packageJsonExists) {
   try {
     log('postinstall', 'starting load of configure');
     log('postinstall', require.resolve('../lib/configure'));
-    configure = require('../lib/configure');
+    configure = require('../lib/configure').default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',

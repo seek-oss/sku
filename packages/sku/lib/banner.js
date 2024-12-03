@@ -1,5 +1,5 @@
 // @ts-check
-import { blue, red, yellow, bold } from 'chalk';
+import chalk from 'chalk';
 import wrap from 'wrap-ansi';
 import identString from 'indent-string';
 
@@ -13,15 +13,15 @@ const banner = (type, heading, messages = []) => {
 
   switch (type) {
     case 'info': {
-      highlight = blue;
+      highlight = chalk.blue;
       break;
     }
     case 'error': {
-      highlight = red;
+      highlight = chalk.red;
       break;
     }
     case 'warning': {
-      highlight = yellow;
+      highlight = chalk.yellow;
       break;
     }
     default: {
@@ -45,7 +45,7 @@ const banner = (type, heading, messages = []) => {
   console.log(`
 ${border}
 
-${renderContent(bold(highlight(heading)))}
+${renderContent(chalk.bold(highlight(heading)))}
 
 ${renderContent(messages.join('\n\n'))}
 

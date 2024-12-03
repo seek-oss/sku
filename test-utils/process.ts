@@ -1,4 +1,4 @@
-import { promisify } from 'node:util';
+import { promisify } from "node:util";
 // spawn can't be promisified so we use execFile, which just wraps spawn and can be promisifyied
 // https://github.com/nodejs/node/blob/2f369ccacfb60c034de806f24164524910301825/lib/child_process.js#L326
 import {
@@ -6,16 +6,16 @@ import {
   type SpawnOptions,
   type ChildProcess,
   type ExecFileOptions,
-} from 'node:child_process';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
+} from "node:child_process";
+import gracefulSpawn from "../packages/sku/lib/gracefulSpawn.js";
 
 const execFile = promisify(_execFile);
-const skuBin = require.resolve('../packages/sku/bin/sku.mjs');
+const skuBin = require.resolve("../packages/sku/bin/sku.js");
 
 export const run = async (
   file: string,
   args: string[] = [],
-  options: ExecFileOptions = {},
+  options: ExecFileOptions = {}
 ) => {
   try {
     const promise = execFile(file, args, {
@@ -45,35 +45,35 @@ export const run = async (
   }
 };
 
-type DevServerSkuScripts = 'serve' | 'start' | 'start-ssr' | 'storybook';
+type DevServerSkuScripts = "serve" | "start" | "start-ssr" | "storybook";
 type SkuScript =
   | DevServerSkuScripts
-  | 'build'
-  | 'build-ssr'
-  | 'build-storybook'
-  | 'configure'
-  | 'format'
-  | 'init'
-  | 'lint'
-  | 'test';
+  | "build"
+  | "build-ssr"
+  | "build-storybook"
+  | "configure"
+  | "format"
+  | "init"
+  | "lint"
+  | "test";
 
 export async function runSkuScriptInDir(
   script: DevServerSkuScripts,
   cwd: string,
   args?: string[],
-  options?: SpawnOptions,
+  options?: SpawnOptions
 ): Promise<ReturnType<typeof gracefulSpawn>>;
 export async function runSkuScriptInDir(
   script: Exclude<SkuScript, DevServerSkuScripts>,
   cwd: string,
   args?: string[],
-  options?: SpawnOptions,
+  options?: SpawnOptions
 ): Promise<{ stdout: string; stderr: string; child: ChildProcess }>;
 export async function runSkuScriptInDir(
   script: SkuScript,
   cwd: string,
   args?: string[],
-  options?: SpawnOptions,
+  options?: SpawnOptions
 ): Promise<
   ChildProcess | { stdout: string; stderr: string; child: ChildProcess }
 > {
@@ -92,7 +92,7 @@ export async function runSkuScriptInDir(
   // When starting a dev server, return a hook to the running process
   if (/^(start|serve)/.test(script)) {
     return gracefulSpawn(skuBin, [script, ...(args || [])], {
-      stdio: 'inherit',
+      stdio: "inherit",
       ...processOptions,
     });
   }

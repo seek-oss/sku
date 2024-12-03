@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "plop": "plop",
-    "postinstall": "node ./postinstall.js",
+    "postinstall": "node ./postinstall.mjs",
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",

@@ -1,7 +1,9 @@
 // @ts-check
-const { yellow, bold } = require('chalk');
-const getPort = require('get-port');
-const debug = require('debug')('sku:allocatePort');
+import { yellow, bold } from 'chalk';
+import getPort from 'get-port';
+import _debug from 'debug';
+
+const debug = _debug('sku:allocatePort');
 
 /**
  * @param {{ port?: number, host?: string }} options
@@ -23,4 +25,4 @@ const allocatePort = async ({ port, host }) => {
   return actualPort;
 };
 
-module.exports = allocatePort;
+export default allocatePort;

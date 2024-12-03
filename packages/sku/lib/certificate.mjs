@@ -1,18 +1,12 @@
-const selfsigned = require('selfsigned');
-const { blue } = require('chalk');
-const exists = require('./exists');
-const {
-  mkdir,
-  unlink,
-  writeFile,
-  stat,
-  readFile,
-} = require('node:fs/promises');
+import selfsigned from 'selfsigned';
+import { blue } from 'chalk';
+import exists from './exists';
+import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 
-const { getPathFromCwd } = require('../lib/cwd');
-const { hosts } = require('../context');
-const { performance } = require('node:perf_hooks');
-const track = require('../telemetry');
+import { getPathFromCwd } from './cwd';
+import { hosts } from '../context';
+import { performance } from 'node:perf_hooks';
+import { timing } from '../telemetry';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 
@@ -85,7 +79,7 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
 
   await writeFile(certificatePath, `${pems.private}${pems.cert}`);
 
-  track.timing('certificate.generate', performance.now() - startTime);
+  timing('certificate.generate', performance.now() - startTime);
 
   return pems.private + pems.cert;
 };
@@ -115,4 +109,4 @@ const getCertificate = async (certificateDirName = '.ssl') => {
   return readFile(certificatePath, { encoding: 'utf8' });
 };
 
-module.exports = getCertificate;
+export default getCertificate;

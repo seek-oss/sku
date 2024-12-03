@@ -1,20 +1,20 @@
-const { promisify } = require('node:util');
-const hostile = require('hostile');
-const { red, yellow, bold } = require('chalk');
+import { promisify } from 'node:util';
+import { set, get } from 'hostile';
+import { red, yellow, bold } from 'chalk';
 
-const { hosts, sites: contextSites } = require('../context');
-const { suggestScript } = require('./suggestScript');
+import { hosts, sites as contextSites } from '../context';
+import { suggestScript } from './suggestScript';
 
-const setSystemHost = promisify(hostile.set);
-const getSystemHosts = promisify(hostile.get);
+const setSystemHost = promisify(set);
+const getSystemHosts = promisify(get);
 
-const getAppHosts = (configuredSites = contextSites) =>
+export const getAppHosts = (configuredSites = contextSites) =>
   configuredSites
     .filter((site) => site.host)
     .map((site) => site.host)
     .concat(hosts);
 
-const setupHosts = async () => {
+export const setupHosts = async () => {
   try {
     const appHosts = getAppHosts().filter((host) => host !== 'localhost');
 
@@ -44,7 +44,7 @@ const getMissingHosts = async () => {
   );
 };
 
-const checkHosts = async () => {
+export const checkHosts = async () => {
   try {
     const missingHosts = await getMissingHosts();
 
@@ -62,11 +62,4 @@ const checkHosts = async () => {
   } catch {
     // swallow error as this just a warning check
   }
-};
-
-module.exports = {
-  setupHosts,
-  checkHosts,
-  getAppHosts,
-  getMissingHosts,
 };

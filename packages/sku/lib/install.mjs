@@ -1,13 +1,13 @@
 // @ts-check
-const { getAddCommand } = require('./packageManager');
+import { getAddCommand } from './packageManager.js';
 
-const spawn = require('cross-spawn');
+import { spawn } from 'cross-spawn';
 
 /**
- * @param {import("../lib/packageManager").GetAddCommandOptions} options
+ * @param {import("./packageManager.js").GetAddCommandOptions} options
  * @returns {Promise<void>}
  */
-module.exports = ({ deps, type, logLevel, exact = true }) =>
+export default ({ deps, type, logLevel, exact = true }) =>
   new Promise((resolve, reject) => {
     const addCommand = getAddCommand({ deps, type, logLevel, exact });
     const [command, ...args] = addCommand.split(' ');

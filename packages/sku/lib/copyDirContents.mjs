@@ -1,7 +1,7 @@
 // @ts-check
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const exists = require('./exists');
+import { resolve } from 'node:path';
+import { stat, mkdir, readdir, copyFile } from 'node:fs/promises';
+import exists from './exists.js';
 
 /**
  * Recursively copy the contents of a directory into another directory
@@ -12,31 +12,31 @@ const exists = require('./exists');
  * @param {string} destPath A path to a file or directory
  */
 const copyDirContents = async (srcPath, destPath) => {
-  const srcStat = await fs.stat(srcPath);
+  const srcStat = await stat(srcPath);
   if (!srcStat.isDirectory()) {
     throw new Error(`Source ${srcPath} is not a directory`);
   }
 
   if (await exists(destPath)) {
-    const destStat = await fs.stat(destPath);
+    const destStat = await stat(destPath);
     if (!destStat.isDirectory()) {
       throw new Error(`Destination ${destPath} is not a directory`);
     }
   } else {
-    await fs.mkdir(destPath);
+    await mkdir(destPath);
   }
 
-  const srcItems = await fs.readdir(srcPath);
+  const srcItems = await readdir(srcPath);
 
   for (const srcItem of srcItems) {
-    const srcItemPath = path.resolve(srcPath, srcItem);
-    const srcItemStat = await fs.stat(srcItemPath);
+    const srcItemPath = resolve(srcPath, srcItem);
+    const srcItemStat = await stat(srcItemPath);
 
-    const destItemPath = path.resolve(destPath, srcItem);
+    const destItemPath = resolve(destPath, srcItem);
 
     if (srcItemStat.isFile()) {
       // destItemPath will also be a file path, not a folder
-      await fs.copyFile(srcItemPath, destItemPath);
+      await copyFile(srcItemPath, destItemPath);
     } else if (srcItemStat.isDirectory()) {
       // recursively copy src item directory contents
       await copyDirContents(srcItemPath, destItemPath);
@@ -44,4 +44,4 @@ const copyDirContents = async (srcPath, destPath) => {
   }
 };
 
-module.exports = copyDirContents;
+export default copyDirContents;

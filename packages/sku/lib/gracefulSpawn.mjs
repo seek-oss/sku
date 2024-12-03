@@ -1,9 +1,11 @@
-const { promisify } = require('node:util');
-const spawn = require('cross-spawn');
-const treeKillAsync = promisify(require('tree-kill'));
-const onDeath = require('death');
+import { promisify } from 'node:util';
+import { spawn } from 'cross-spawn';
+import treeKill from 'tree-kill';
+import onDeath from 'death';
 
-module.exports = (...args) => {
+const treeKillAsync = promisify(treeKill);
+
+export default (...args) => {
   const childProcess = spawn(...args);
 
   childProcess.kill = async (signal) => {

@@ -2,18 +2,31 @@
 
 import assert from 'node:assert';
 import { readFile, writeFile } from 'node:fs/promises';
-import t from '@babel/types';
+import {
+  assertProgram,
+  assertExpressionStatement,
+  assertAssignmentExpression,
+  assertMemberExpression,
+  assertIdentifier,
+  isObjectExpression,
+  isIdentifier,
+  isVariableDeclaration,
+  assertVariableDeclaration,
+  assertVariableDeclarator,
+  assertObjectExpression,
+  isObjectProperty,
+  assertObjectProperty,
+} from '@babel/types';
 import { parseModule, builders, generateCode } from 'magicast';
 import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 
-import debug from 'debug';
-
-import prettier from 'prettier';
-import prettierConfig from '../config/prettier/prettierConfig.js';
-
+const debug = require('debug');
 const log = debug('sku:update-sku-config');
 
-class SkuConfigUpdater {
+const prettier = require('prettier');
+const prettierConfig = require('../config/prettier/prettierConfig.js');
+
+export class SkuConfigUpdater {
   /** @typedef {import("sku").SkuConfig} SkuConfig */
   /** @typedef {import("magicast").ProxifiedObject<SkuConfig>} ProxifiedSkuConfig */
   /** @typedef {import("@babel/types").ObjectExpression} ObjectExpression */
@@ -49,34 +62,34 @@ class SkuConfigUpdater {
         'No default export found in sku config. Config is either CJS or invalid.',
       );
 
-      t.assertProgram(skuConfigModule.$ast);
+      assertProgram(skuConfigModule.$ast);
       const lastStatement = skuConfigModule.$ast.body.at(-1);
-      t.assertExpressionStatement(lastStatement);
+      assertExpressionStatement(lastStatement);
 
       const { expression } = lastStatement;
-      t.assertAssignmentExpression(expression);
-      t.assertMemberExpression(expression.left);
-      t.assertIdentifier(expression.left.object, {
+      assertAssignmentExpression(expression);
+      assertMemberExpression(expression.left);
+      assertIdentifier(expression.left.object, {
         name: 'module',
       });
-      t.assertIdentifier(expression.left.property, {
+      assertIdentifier(expression.left.property, {
         name: 'exports',
       });
 
-      if (t.isObjectExpression(expression.right)) {
+      if (isObjectExpression(expression.right)) {
         configAst = expression.right;
-      } else if (t.isIdentifier(expression.right)) {
+      } else if (isIdentifier(expression.right)) {
         const skuConfigIdentifierName = expression.right.name;
         const skuConfigDeclaration = skuConfigModule.$ast.body.find(
           (node) =>
-            t.isVariableDeclaration(node) &&
-            t.isIdentifier(node.declarations[0].id) &&
+            isVariableDeclaration(node) &&
+            isIdentifier(node.declarations[0].id) &&
             node.declarations[0].id.name === skuConfigIdentifierName,
         );
         assert(skuConfigDeclaration, 'Expected skuConfig to be defined');
-        t.assertVariableDeclaration(skuConfigDeclaration);
-        t.assertVariableDeclarator(skuConfigDeclaration.declarations[0]);
-        t.assertObjectExpression(skuConfigDeclaration.declarations[0].init);
+        assertVariableDeclaration(skuConfigDeclaration);
+        assertVariableDeclarator(skuConfigDeclaration.declarations[0]);
+        assertObjectExpression(skuConfigDeclaration.declarations[0].init);
         configAst = skuConfigDeclaration.declarations[0].init;
       } else {
         throw new Error("Couldn't find config object in CJS sku config");
@@ -132,13 +145,13 @@ class SkuConfigUpdater {
     if (this.#config.type === 'cjs') {
       const propertyToUpdate = this.#config.configAst.properties.find(
         (prop) =>
-          t.isObjectProperty(prop) &&
-          t.isIdentifier(prop.key) &&
+          isObjectProperty(prop) &&
+          isIdentifier(prop.key) &&
           prop.key.name === property,
       );
 
       if (propertyToUpdate) {
-        t.assertObjectProperty(propertyToUpdate);
+        assertObjectProperty(propertyToUpdate);
         propertyToUpdate.value = builders.literal(value);
       } else {
         const {
@@ -181,5 +194,3 @@ class SkuConfigUpdater {
     await writeFile(this.#path, formattedNewContents);
   }
 }
-
-export { SkuConfigUpdater };

@@ -1,10 +1,10 @@
 // @ts-check
-const { match } = require('path-to-regexp');
+import { match } from 'path-to-regexp';
 
 /**
  * @param {string} route
  */
-module.exports = (route) => {
+const routeMatcher = (route) => {
   const normalisedRoute = route
     .split('/')
     .map((part) => {
@@ -19,3 +19,5 @@ module.exports = (route) => {
 
   return match(normalisedRoute);
 };
+
+export default routeMatcher;

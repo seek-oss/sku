@@ -1,9 +1,9 @@
 // @ts-check
-const findUp = require('find-up');
-const path = require('node:path');
-const { resolveCommand } = require('package-manager-detector/commands');
-const { INSTALL_PAGE } = require('package-manager-detector/constants');
-const { getPackageManager } = require('../context/packageManager');
+import findUp from 'find-up';
+import { dirname } from 'node:path';
+import { resolveCommand } from 'package-manager-detector/commands';
+import { INSTALL_PAGE } from 'package-manager-detector/constants';
+import { getPackageManager } from '../context/packageManager';
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 
@@ -61,19 +61,21 @@ const resolvePackageManager = () => {
 
   // No root found (occurs during `sku init`), `rootDir` will be `null`
   /** @type {string | null} */
-  const rootDir = lockFilePath ? path.dirname(lockFilePath) : null;
+  const rootDir = lockFilePath ? dirname(lockFilePath) : null;
 
   return { packageManager, rootDir };
 };
 
 const { rootDir, packageManager } = resolvePackageManager();
 
+export { rootDir, packageManager };
+
 /**
  * @param {SupportedPackageManager} agent
  * @param {import("package-manager-detector").Command} command
  * @param {string[]} args
  */
-const getCommand = (agent, command, args) => {
+export const getCommand = (agent, command, args) => {
   const resolvedCommand = resolveCommand(agent, command, args);
 
   if (!resolvedCommand) {
@@ -83,20 +85,21 @@ const getCommand = (agent, command, args) => {
   return `${resolvedCommand.command} ${resolvedCommand.args.join(' ')}`;
 };
 
-const isYarn = packageManager === 'yarn';
-const isPnpm = packageManager === 'pnpm';
-const isNpm = packageManager === 'npm';
+export const isYarn = packageManager === 'yarn';
+export const isPnpm = packageManager === 'pnpm';
+export const isNpm = packageManager === 'npm';
 
 /**
  * @param {string} scriptName
  */
-const getRunCommand = (scriptName) =>
+export const getRunCommand = (scriptName) =>
   getCommand(packageManager, 'run', [scriptName]);
 
 /**
  * @param {string[]} args
  */
-const getExecuteCommand = (args) => getCommand(packageManager, 'execute', args);
+export const getExecuteCommand = (args) =>
+  getCommand(packageManager, 'execute', args);
 
 /** @type {Record<SupportedPackageManager, string[]>} */
 const regularLoglevelArgsByPackageManager = {
@@ -132,7 +135,7 @@ const resolveLogLevelArgs = (logLevel) => {
  * @property {string[]} deps
  * @param {GetAddCommandOptions} options
  */
-const getAddCommand = ({ type, logLevel, deps, exact }) => {
+export const getAddCommand = ({ type, logLevel, deps, exact }) => {
   const args = [];
 
   const addingDevDeps = type === 'dev';
@@ -156,27 +159,13 @@ const getAddCommand = ({ type, logLevel, deps, exact }) => {
   return getCommand(packageManager, 'add', args);
 };
 
-const getInstallCommand = () => getCommand(packageManager, 'install', []);
+export const getInstallCommand = () =>
+  getCommand(packageManager, 'install', []);
 
-const getWhyCommand = () => {
+export const getWhyCommand = () => {
   const whyCommand = isPnpm ? 'why -r' : 'why';
 
   return `${packageManager} ${whyCommand}`;
 };
 
-const getPackageManagerInstallPage = () => INSTALL_PAGE[packageManager];
-
-module.exports = {
-  rootDir,
-  packageManager,
-  isYarn,
-  isPnpm,
-  isNpm,
-  getCommand,
-  getRunCommand,
-  getExecuteCommand,
-  getAddCommand,
-  getInstallCommand,
-  getWhyCommand,
-  getPackageManagerInstallPage,
-};
+export const getPackageManagerInstallPage = () => INSTALL_PAGE[packageManager];

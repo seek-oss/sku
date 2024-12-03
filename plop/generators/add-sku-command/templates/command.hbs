@@ -6,7 +6,7 @@ const {{camelCase commandName}} = new Command('{{commandName}}');
   .description('<YOUR_DESCRIPTION_HERE>')
   .argument('<ARGUMENTS_HERE>', '<ARGUMENT_DESCRIPTION>')
   .action(() => {
-    const {{camelCase commandName}}Action = require('./{{commandName}}.action');
+    const {{camelCase commandName}}Action = require('./{{commandName}}.action.js');
     {{camelCase commandName}}Action();
   });
 

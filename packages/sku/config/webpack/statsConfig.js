@@ -1,5 +1,5 @@
 // @ts-check
-import isCI from '../../lib/isCI';
+import isCI from '../../lib/isCI.js';
 
 /**
  * @param {object} [options]

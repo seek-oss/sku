@@ -1,7 +1,7 @@
-import { getPathFromCwd } from '../cwd';
+import { getPathFromCwd } from '../cwd.js';
 import fs from 'node:fs';
 import _validatePeerDeps from '../validatePeerDeps.js';
-import { log } from './debug';
+import { log } from './debug.js';
 
 let skipConfigure = false;
 let skipValidatePeerDeps = false;

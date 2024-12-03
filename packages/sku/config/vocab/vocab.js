@@ -1,4 +1,4 @@
-import { languages } from '../../context';
+import { languages } from '../../context/index.js';
 import debug from 'debug';
 import { generator } from '@vocab/pseudo-localize';
 

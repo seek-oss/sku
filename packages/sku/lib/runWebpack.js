@@ -1,5 +1,5 @@
 // @ts-check
-import getStatsConfig from '../config/webpack/statsConfig';
+import getStatsConfig from '../config/webpack/statsConfig.js';
 
 /**
  * @param {import('webpack').Compiler} compiler

@@ -1,4 +1,4 @@
-import { getWhyCommand, isPnpm } from './packageManager';
+import { getWhyCommand, isPnpm } from './packageManager.js';
 
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
@@ -6,11 +6,11 @@ import { fdir as Fdir } from 'fdir';
 import semver from 'semver';
 import chalk from 'chalk';
 
-import banner from './banner';
+import banner from './banner.js';
 import provider from '../telemetry/index.js';
 
-import { getPathFromCwd } from '../lib/cwd';
-import { paths } from '../context';
+import { getPathFromCwd } from '../lib/cwd.js';
+import { paths } from '../context/index.js';
 
 /**
  * @param {unknown[]} list

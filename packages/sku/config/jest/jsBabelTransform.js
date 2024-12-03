@@ -1,7 +1,7 @@
 import { default as babelJest } from 'babel-jest';
 
-import { rootResolution } from '../../context';
-import babelConfig from '../babel/babelConfig';
+import { rootResolution } from '../../context/index.js';
+import babelConfig from '../babel/babelConfig.js';
 import targets from '../targets.json';
 
 export default babelJest.createTransformer(

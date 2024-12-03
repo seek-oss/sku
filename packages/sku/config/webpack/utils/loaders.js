@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import babelConfig from '../../babel/babelConfig';
+import babelConfig from '../../babel/babelConfig.js';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 

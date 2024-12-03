@@ -1,4 +1,4 @@
-import { paths } from '../../context';
+import { paths } from '../../context/index.js';
 import { merge as webpackMerge } from 'webpack-merge';
 import makeWebpackConfig from '../webpack/webpack.config';
 import { resolvePackage } from '../webpack/utils/resolvePackage';

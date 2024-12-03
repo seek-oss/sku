@@ -1,7 +1,7 @@
 import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
-import { cwd } from '../../lib/cwd';
-import { paths, rootResolution, jestDecorator } from '../../context';
+import { cwd } from '../../lib/cwd.js';
+import { paths, rootResolution, jestDecorator } from '../../context/index.js';
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages

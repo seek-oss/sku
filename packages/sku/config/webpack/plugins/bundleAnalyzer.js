@@ -1,5 +1,5 @@
 // @ts-check
-import { getPathFromCwd } from '../../../lib/cwd';
+import { getPathFromCwd } from '../../../lib/cwd.js';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export const bundleReportFolder = 'report';

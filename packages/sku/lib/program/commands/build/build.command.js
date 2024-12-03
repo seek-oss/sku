@@ -9,7 +9,7 @@ buildCommand
   )
   .addOption(statsOption)
   .action(async ({ stats }) => {
-    const { buildAction } = await import('./build.action');
+    const { buildAction } = await import('./build.action.js');
     buildAction({ stats });
   });
 

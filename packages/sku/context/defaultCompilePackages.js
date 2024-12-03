@@ -1,10 +1,10 @@
 import { posix as path } from 'node:path';
-import { red } from 'chalk';
+import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
 
-import toPosixPath from '../lib/toPosixPath';
+import toPosixPath from '../lib/toPosixPath.js';
 
-import { rootDir, isPnpm } from '../lib/packageManager';
+import { rootDir, isPnpm } from '../lib/packageManager.js';
 import _debug from 'debug';
 
 const debug = _debug('sku:compilePackages');
@@ -64,7 +64,7 @@ if (rootDir) {
       .map(({ packageName }) => packageName);
   } catch (e) {
     console.log(
-      red`Warning: Failed to detect compile packages. Contact #sku-support.`,
+      chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
     );
     console.error(e);
   }

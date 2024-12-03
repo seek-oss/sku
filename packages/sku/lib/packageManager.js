@@ -3,7 +3,7 @@ import findUp from 'find-up';
 import { dirname } from 'node:path';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
-import { getPackageManager } from '../context/packageManager';
+import { getPackageManager } from '../context/packageManager.js';
 
 /** @typedef {'yarn' | 'pnpm' | 'npm'} SupportedPackageManager */
 

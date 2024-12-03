@@ -1,9 +1,9 @@
 import { promisify } from 'node:util';
 import { set, get } from 'hostile';
-import { red, yellow, bold } from 'chalk';
+import chalk from 'chalk';
 
-import { hosts, sites as contextSites } from '../context';
-import { suggestScript } from './suggestScript';
+import { hosts, sites as contextSites } from '../context/index.js';
+import { suggestScript } from './suggestScript.js';
 
 const setSystemHost = promisify(set);
 const getSystemHosts = promisify(get);
@@ -22,11 +22,15 @@ export const setupHosts = async () => {
       const host = appHosts[i];
 
       await setSystemHost('127.0.0.1', host);
-      console.log(`Successfully added '${bold(host)}' to your hosts file`);
+      console.log(
+        `Successfully added '${chalk.bold(host)}' to your hosts file`,
+      );
     }
   } catch (e) {
     if (e.code === 'EACCES') {
-      console.log(red('Error: setup-hosts must be run with root privileges'));
+      console.log(
+        chalk.red('Error: setup-hosts must be run with root privileges'),
+      );
     } else {
       console.error(e);
     }
@@ -51,8 +55,8 @@ export const checkHosts = async () => {
     if (missingHosts.length > 0) {
       missingHosts.forEach((appHost) => {
         console.log(
-          yellow(
-            `Host '${bold(appHost)}' is not configured in your hosts file`,
+          chalk.yellow(
+            `Host '${chalk.bold(appHost)}' is not configured in your hosts file`,
           ),
         );
       });

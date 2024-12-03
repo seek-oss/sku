@@ -7,7 +7,7 @@ setupHostsCommand
     'Update your hosts file to point any configured hosts to your local machine.',
   )
   .action(async () => {
-    const { setupHostsAction } = await import('./setup-hosts.action');
+    const { setupHostsAction } = await import('./setup-hosts.action.js');
     setupHostsAction();
   });
 

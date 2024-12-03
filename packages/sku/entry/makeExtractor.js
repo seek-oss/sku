@@ -1,6 +1,6 @@
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
-import defaultEntryPoint from '../context/defaultClientEntry';
+import defaultEntryPoint from '../context/defaultClientEntry.js';
 
 const getNewTags = ({ before, after }) => {
   const beforeArr = before.split('\n');

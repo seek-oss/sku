@@ -1,4 +1,4 @@
-import { sourceMapsProd } from '../../context';
+import { sourceMapsProd } from '../../context/index.js';
 
 function getSourceMapSetting({ isDevServer }) {
   if (isDevServer) {

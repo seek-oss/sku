@@ -2,7 +2,7 @@ import { join, dirname } from 'node:path';
 import nodeFs from 'node:fs';
 import { default as memoize } from 'nano-memoize';
 import debug from 'debug';
-import { cwd } from '../../../lib/cwd';
+import { cwd } from '../../../lib/cwd.js';
 import { createRequire } from 'node:module';
 
 const log = debug('sku:resolvePackage');

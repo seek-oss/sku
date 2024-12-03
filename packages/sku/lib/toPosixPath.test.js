@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import toPosixPath from './toPosixPath';
+import toPosixPath from './toPosixPath.js';
 
 describe('toPosixPath', () => {
   it('should leave a posix path as-is', () => {

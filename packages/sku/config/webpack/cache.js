@@ -1,5 +1,5 @@
-import { paths } from '../../context';
-import isCI from '../../lib/isCI';
+import { paths } from '../../context/index.js';
+import isCI from '../../lib/isCI.js';
 
 const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 

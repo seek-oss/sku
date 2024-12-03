@@ -1,5 +1,5 @@
 import { basename } from 'node:path';
-import { paths, rootResolution } from '../../context';
+import { paths, rootResolution } from '../../context/index.js';
 
 const internalRegex = `^(${paths.src
   .map((srcPath) => basename(srcPath))

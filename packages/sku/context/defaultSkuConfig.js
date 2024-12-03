@@ -1,6 +1,6 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
-import isCompilePackage from '../lib/isCompilePackage';
+import isCompilePackage from '../lib/isCompilePackage.js';
 
 const defaultDecorator = (a) => a;
 

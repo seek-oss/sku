@@ -1,10 +1,10 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
-import { yellow, italic } from 'chalk';
+import chalk from 'chalk';
 import { execSync } from 'node:child_process';
 import open from 'open';
-import isCI from '../isCI';
+import isCI from '../isCI.js';
 import getDefaultBrowser from 'default-browser';
 
 const OSX_CHROME = 'google chrome';
@@ -28,10 +28,10 @@ export default async (url) => {
       const { name } = await getDefaultBrowser();
       defaultBrowser = name;
     } catch {
-      console.log(yellow.bold('Failed to detect default browser.'));
+      console.log(chalk.yellow.bold('Failed to detect default browser.'));
       console.log(
-        yellow(
-          `For a better ${italic('start')} experience on macOS, go to ${italic(
+        chalk.yellow(
+          `For a better ${chalk.italic('start')} experience on macOS, go to ${chalk.italic(
             'System Preferences > Privacy & Security > Automation > Terminal/Application',
           )} and enable Finder permissions.`,
         ),

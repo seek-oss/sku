@@ -1,5 +1,5 @@
-import { createPackageResolver } from './resolvePackage';
-import { cwd } from '../../../lib/cwd';
+import { createPackageResolver } from './resolvePackage.js';
+import { cwd } from '../../../lib/cwd.js';
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {

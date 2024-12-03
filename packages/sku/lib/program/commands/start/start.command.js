@@ -11,7 +11,7 @@ startCommand
   .action(async ({ stats }, command) => {
     const environment = command.parent.opts()?.environment;
 
-    const { startAction } = await import('./start.action');
+    const { startAction } = await import('./start.action.js');
     startAction({ stats, environment });
   });
 

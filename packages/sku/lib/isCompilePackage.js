@@ -1,5 +1,5 @@
 // @ts-check
-import { getPathFromCwd } from './cwd';
+import { getPathFromCwd } from './cwd.js';
 
 const isCompilePackage = () => {
   try {

@@ -1,7 +1,7 @@
 import debug from 'debug';
 
-import routeMatcher from '../lib/routeMatcher';
-import { languages, sites } from '../context';
+import routeMatcher from '../lib/routeMatcher.js';
+import { languages, sites } from '../context/index.js';
 
 const log = debug('sku:language-middleware');
 

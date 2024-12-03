@@ -1,5 +1,5 @@
 // @ts-check
-import { yellow, bold } from 'chalk';
+import chalk from 'chalk';
 import getPort from 'get-port';
 import _debug from 'debug';
 
@@ -14,10 +14,10 @@ const allocatePort = async ({ port, host }) => {
 
   if (port !== actualPort) {
     console.log(
-      yellow(
-        `Warning: Requested port ${bold(
+      chalk.yellow(
+        `Warning: Requested port ${chalk.bold(
           port,
-        )} is unavailable. Falling back to ${bold(actualPort)}.`,
+        )} is unavailable. Falling back to ${chalk.bold(actualPort)}.`,
       ),
     );
   }

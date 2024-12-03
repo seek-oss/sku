@@ -5,7 +5,7 @@
 // @ts-check
 import { createFixture } from 'fs-fixture';
 import dedent from 'dedent';
-import { SkuConfigUpdater } from './SkuConfigUpdater';
+import { SkuConfigUpdater } from './SkuConfigUpdater.js';
 
 describe('updateSkuConfig', () => {
   describe('SkuConfigUpdater', () => {

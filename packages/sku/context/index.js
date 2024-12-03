@@ -1,16 +1,18 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { red, bold } from 'chalk';
+import chalk from 'chalk';
 import { register } from 'esbuild-register/dist/node';
-import { getPathFromCwd } from '../lib/cwd';
-import defaultSkuConfig from './defaultSkuConfig';
-import validateConfig from './validateConfig';
+import { getPathFromCwd } from '../lib/cwd.js';
+import defaultSkuConfig from './defaultSkuConfig.js';
+import validateConfig from './validateConfig.js';
 
-import defaultCompilePackages from './defaultCompilePackages';
-import isCompilePackage from '../lib/isCompilePackage';
-import { esbuildNodeTarget } from '../config/targets.json' with { type: 'json' };
+import defaultCompilePackages from './defaultCompilePackages.js';
+import isCompilePackage from '../lib/isCompilePackage.js';
+import targets from '../config/targets.json' with { type: 'json' };
 import { getConfigPath } from './configPath.js';
 import { createRequire } from 'node:module';
+
+const { esbuildNodeTarget } = targets;
 
 /** @typedef {import("../sku-types.d.ts").SkuConfig} SkuConfig */
 
@@ -61,8 +63,8 @@ validateConfig(skuConfig);
 
 if (isCompilePackage && skuConfig.rootResolution) {
   console.log(
-    red(
-      `Error: "${bold(
+    chalk.red(
+      `Error: "${chalk.bold(
         'rootResolution',
       )}" is not safe for compile packages as consuming apps can't resolve them.`,
     ),
@@ -192,7 +194,7 @@ export const displayNamesProd = Boolean(skuConfig.displayNamesProd);
 export const cspEnabled = skuConfig.cspEnabled;
 export const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
 export const httpsDevServer = skuConfig.httpsDevServer;
-export { default as defaultClientEntry } from './defaultClientEntry';
+export { default as defaultClientEntry } from './defaultClientEntry.js';
 export const rootResolution = skuConfig.rootResolution;
 export const languages = normalizedLanguages;
 export const skipPackageCompatibilityCompilation =

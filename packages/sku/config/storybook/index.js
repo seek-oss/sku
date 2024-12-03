@@ -3,8 +3,8 @@
  * https://github.com/storybookjs/storybook/pull/23018
  */
 
-import makeStorybookWebpackConfig from './storybookWebpackConfig';
-import createBabelConfig from '../babel/babelConfig';
+import makeStorybookWebpackConfig from './storybookWebpackConfig.js';
+import createBabelConfig from '../babel/babelConfig.js';
 
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 

@@ -1,5 +1,5 @@
-import { isYarn, getCommand } from '../../lib/packageManager';
-import { lintExtensions } from '../../lib/lint';
+import { isYarn, getCommand } from '../../lib/packageManager.js';
+import { lintExtensions } from '../../lib/lint.js';
 
 /**
  * @type {import('lint-staged').Config}

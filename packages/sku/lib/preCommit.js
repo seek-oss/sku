@@ -1,7 +1,7 @@
 // @ts-check
-import { red } from 'chalk';
+import chalk from 'chalk';
 
-import config from '../config/lintStaged/lintStagedConfig';
+import config from '../config/lintStaged/lintStagedConfig.js';
 
 const preCommit = async () => {
   let success = false;
@@ -12,7 +12,7 @@ const preCommit = async () => {
     const { default: lintStaged } = await import('lint-staged');
     success = await lintStaged({ config });
   } catch (e) {
-    console.error(red(e));
+    console.error(chalk.red(e));
   }
 
   if (!success) {

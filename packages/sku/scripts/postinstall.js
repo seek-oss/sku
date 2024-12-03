@@ -59,8 +59,7 @@ if (packageJsonExists) {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    log('postinstall', require.resolve('../lib/configure'));
-    configure = require('../lib/configure').default;
+    configure = (await import('../lib/configure.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',

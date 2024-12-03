@@ -1,6 +1,6 @@
 // @ts-check
-import { environments } from '../context';
-import { bold, red } from 'chalk';
+import { environments } from '../context/index.js';
+import chalk from 'chalk';
 
 /**
  * @param {{environment?: string}} options
@@ -10,11 +10,11 @@ export const resolveEnvironment = ({ environment: environmentOption }) => {
 
   if (environment) {
     if (!environments?.includes(environment)) {
-      console.log(red(`Unknown environment: ${bold(environment)}`));
+      console.log(chalk.red(`Unknown environment: ${chalk.bold(environment)}`));
       process.exit(1);
     }
 
-    console.log(`Using ${bold(environment)} environment`);
+    console.log(`Using ${chalk.bold(environment)} environment`);
   }
 
   return environment;

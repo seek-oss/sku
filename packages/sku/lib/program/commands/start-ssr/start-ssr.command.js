@@ -9,7 +9,7 @@ startSsrCommand
   )
   .addOption(statsOption)
   .action(async ({ stats }) => {
-    const { startSsrAction } = await import('./start-ssr.action');
+    const { startSsrAction } = await import('./start-ssr.action.js');
     startSsrAction({ stats });
   });
 

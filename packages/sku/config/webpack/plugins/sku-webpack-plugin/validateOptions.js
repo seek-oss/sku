@@ -1,14 +1,16 @@
 import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
-import { yellow, red, bold, underline, white } from 'chalk';
+import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
 
 const validator = new Validator();
 
 const exitWithErrors = async (errors) => {
-  console.log(bold(underline(red('SkuWebpackPlugin: Invalid options'))));
+  console.log(
+    chalk.bold(chalk.underline(chalk.red('SkuWebpackPlugin: Invalid options'))),
+  );
   errors.forEach((error) => {
-    console.log(yellow(error));
+    console.log(chalk.yellow(error));
   });
   process.exit(1);
 };
@@ -78,10 +80,10 @@ const validateOptions = (options) => {
   Object.keys(options)
     .filter((key) => !availableOptions.includes(key))
     .forEach((key) => {
-      const unknownMessage = `Unknown option '${bold(key)}'.`;
+      const unknownMessage = `Unknown option '${chalk.bold(key)}'.`;
       const suggestedKey = didYouMean(key, availableOptions);
       const suggestedMessage = suggestedKey
-        ? ` Did you mean '${bold(suggestedKey)}'?`
+        ? ` Did you mean '${chalk.bold(suggestedKey)}'?`
         : '';
       errors.push(`❓ ${unknownMessage}${suggestedMessage}`);
     });
@@ -91,8 +93,8 @@ const validateOptions = (options) => {
   if (schemaCheckResult !== true) {
     schemaCheckResult.forEach(({ message, field }) => {
       const errorMessage = message
-        ? `🚫 ${message.replace(field, `${bold(field)}`)}`
-        : `🚫 '${bold(field)}' is invalid`;
+        ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
+        : `🚫 '${chalk.bold(field)}' is invalid`;
 
       errors.push(errorMessage);
     });
@@ -104,9 +106,9 @@ const validateOptions = (options) => {
       browserslist(options.browserslist);
     } catch (e) {
       errors.push(
-        `🚫 '${bold(
+        `🚫 '${chalk.bold(
           'browserslist',
-        )}' must be a valid browserslist query. ${white(e.message)}`,
+        )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
       );
     }
   }

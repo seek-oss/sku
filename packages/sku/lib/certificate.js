@@ -1,18 +1,18 @@
 // eslint-disable-next-line import-x/named
 import { generate } from 'selfsigned';
-import { blue } from 'chalk';
-import exists from './exists';
+import chalk from 'chalk';
+import exists from './exists.js';
 import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 
-import { getPathFromCwd } from './cwd';
-import { hosts } from '../context';
+import { getPathFromCwd } from './cwd.js';
+import { hosts } from '../context/index.js';
 import { performance } from 'node:perf_hooks';
 import provider from '../telemetry/index.js';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 
 const createSelfSignedCertificate = () => {
-  console.log(blue`Generating self-signed certificate`);
+  console.log(chalk.blue`Generating self-signed certificate`);
   const attributes = [
     {
       name: 'commonName',

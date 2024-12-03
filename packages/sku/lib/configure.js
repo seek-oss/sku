@@ -18,7 +18,7 @@ import {
 } from './eslintMigration.js';
 
 import getCertificate from './certificate.js';
-import { getPathFromCwd, writeFileToCWD } from './cwd';
+import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 
 const coverageFolder = 'coverage';
 

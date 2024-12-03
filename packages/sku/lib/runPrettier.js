@@ -1,10 +1,10 @@
 // @ts-check
-import exists from './exists';
+import exists from './exists.js';
 import path, { dirname } from 'node:path';
-import { yellow, red, gray, cyan } from 'chalk';
-import { runBin } from './runBin';
-import { getPathFromCwd } from './cwd';
-import { suggestScript } from './suggestScript';
+import chalk from 'chalk';
+import { runBin } from './runBin.js';
+import { getPathFromCwd } from './cwd.js';
+import { suggestScript } from './suggestScript.js';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -19,7 +19,9 @@ const prettierConfigPath = path.join(
  * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }} options
  */
 const runPrettier = async ({ write, listDifferent, paths }) => {
-  console.log(cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`));
+  console.log(
+    chalk.cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
+  );
 
   const prettierArgs = ['--config', prettierConfigPath, '--cache'];
 
@@ -39,7 +41,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
 
   prettierArgs.push(...pathsToCheck);
 
-  console.log(gray(`Paths: ${pathsToCheck.join(' ')}`));
+  console.log(chalk.gray(`Paths: ${pathsToCheck.join(' ')}`));
 
   try {
     await runBin({
@@ -55,17 +57,19 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   } catch (exitCode) {
     if (exitCode === 2) {
       console.warn(
-        yellow('Warning: No files matching', pathsToCheck.join(' ')),
+        chalk.yellow('Warning: No files matching', pathsToCheck.join(' ')),
       );
     } else {
       if (listDifferent && exitCode === 1) {
         console.error(
-          red('Error: The file(s) listed above failed the prettier check'),
+          chalk.red(
+            'Error: The file(s) listed above failed the prettier check',
+          ),
         );
         suggestScript('format');
       } else {
         console.error(
-          red('Error: Prettier check exited with exit code', exitCode),
+          chalk.red('Error: Prettier check exited with exit code', exitCode),
         );
       }
       throw new Error();

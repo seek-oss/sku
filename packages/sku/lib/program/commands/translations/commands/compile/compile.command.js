@@ -7,7 +7,7 @@ compileCommand
   .description('Compile translations defined in .vocab directories.')
   .addOption(watchOption)
   .action(async ({ watch }) => {
-    const { compileAction } = await import('./compile.action');
+    const { compileAction } = await import('./compile.action.js');
     compileAction({ watch });
   });
 

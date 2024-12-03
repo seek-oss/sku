@@ -1,17 +1,17 @@
 import browserslist from 'browserslist';
-import { yellow, red, bold, underline, white } from 'chalk';
+import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
 
 import configSchema from './configSchema.js';
-import defaultSkuConfig from './defaultSkuConfig';
-import defaultClientEntry from './defaultClientEntry';
+import defaultSkuConfig from './defaultSkuConfig.js';
+import defaultClientEntry from './defaultClientEntry.js';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
 const exitWithErrors = async (errors) => {
-  console.log(bold(underline(red('Errors in sku config:'))));
+  console.log(chalk.bold(chalk.underline(chalk.red('Errors in sku config:'))));
   errors.forEach((error) => {
-    console.log(yellow(error));
+    console.log(chalk.yellow(error));
   });
   process.exit(1);
 };
@@ -23,10 +23,10 @@ export default (skuConfig) => {
   Object.keys(skuConfig)
     .filter((key) => !availableConfigKeys.includes(key))
     .forEach((key) => {
-      const unknownMessage = `Unknown key '${bold(key)}'.`;
+      const unknownMessage = `Unknown key '${chalk.bold(key)}'.`;
       const suggestedKey = didYouMean(key, availableConfigKeys);
       const suggestedMessage = suggestedKey
-        ? ` Did you mean '${bold(suggestedKey)}'?`
+        ? ` Did you mean '${chalk.bold(suggestedKey)}'?`
         : '';
       errors.push(`❓ ${unknownMessage}${suggestedMessage}`);
     });
@@ -36,8 +36,8 @@ export default (skuConfig) => {
   if (schemaCheckResult !== true) {
     schemaCheckResult.forEach(({ message, field }) => {
       const errorMessage = message
-        ? `🚫 ${message.replace(field, `${bold(field)}`)}`
-        : `🚫 '${bold(field)}' is invalid`;
+        ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
+        : `🚫 '${chalk.bold(field)}' is invalid`;
 
       errors.push(errorMessage);
     });
@@ -46,9 +46,9 @@ export default (skuConfig) => {
   // Validate library entry has corresponding libraryName
   if (skuConfig.libraryEntry && !skuConfig.libraryName) {
     errors.push(
-      `🚫 '${bold('libraryEntry')}' must have a corresponding '${bold(
+      `🚫 '${chalk.bold('libraryEntry')}' must have a corresponding '${chalk.bold(
         'libraryName',
-      )}' option. More details: ${underline(
+      )}' option. More details: ${chalk.underline(
         'https://github.com/seek-oss/sku#building-a-library',
       )}`,
     );
@@ -58,7 +58,7 @@ export default (skuConfig) => {
   skuConfig.routes.forEach(({ name }) => {
     if (name === defaultClientEntry) {
       errors.push(
-        `🚫 Invalid route name: '${bold(
+        `🚫 Invalid route name: '${chalk.bold(
           defaultClientEntry,
         )}', please use a different route name`,
       );
@@ -70,9 +70,9 @@ export default (skuConfig) => {
     browserslist(skuConfig.supportedBrowsers);
   } catch (e) {
     errors.push(
-      `🚫 '${bold(
+      `🚫 '${chalk.bold(
         'supportedBrowsers',
-      )}' must be a valid browserslist query. ${white(e.message)}`,
+      )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
     );
   }
 

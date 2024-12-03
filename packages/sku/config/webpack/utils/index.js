@@ -1,5 +1,5 @@
-export * from './loaders';
-export { resolvePackage } from './resolvePackage';
+export * from './loaders.js';
+export { resolvePackage } from './resolvePackage.js';
 
 // TODO: Figure out a better way to share this config. This is currently copy-pasted from
 // `eslint-config-seek`

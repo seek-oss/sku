@@ -22,20 +22,20 @@ import {
   rootResolution,
   skipPackageCompatibilityCompilation,
   externalizeNodeModules,
-} from '../../context';
-import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer';
+} from '../../context/index.js';
+import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import SkuWebpackPlugin from './plugins/sku-webpack-plugin';
 import MetricsPlugin from './plugins/metrics-plugin';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
-import utils from './utils';
-import { cwd } from '../../lib/cwd';
+import utils from './utils/index.js';
+import { cwd } from '../../lib/cwd.js';
 
-import { getVocabConfig } from '../vocab/vocab';
-import getStatsConfig from './statsConfig';
-import getSourceMapSetting from './sourceMaps';
-import getCacheSettings from './cache';
-import modules from './resolveModules';
+import { getVocabConfig } from '../vocab/vocab.js';
+import getStatsConfig from './statsConfig.js';
+import getSourceMapSetting from './sourceMaps.js';
+import getCacheSettings from './cache.js';
+import modules from './resolveModules.js';
 import targets from '../targets.json';
 
 const renderEntry = fileURLToPath(import.meta.resolve('../../entry/render'));

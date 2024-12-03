@@ -1,5 +1,5 @@
-import { cwd } from '../../lib/cwd';
-import { rootResolution, tsconfigDecorator } from '../../context';
+import { cwd } from '../../lib/cwd.js';
+import { rootResolution, tsconfigDecorator } from '../../context/index.js';
 
 export default () => {
   const config = {

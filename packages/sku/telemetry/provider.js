@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module';
 
-import { getAddCommand } from '../lib/packageManager';
-import banner from '../lib/banner';
+import { getAddCommand } from '../lib/packageManager.js';
+import banner from '../lib/banner.js';
 
 const require = createRequire(import.meta.url);
 

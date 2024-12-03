@@ -10,9 +10,9 @@ import {
   IMAGE,
   SVG,
   resolvePackage,
-} from '../../utils';
-import defaultCompilePackages from '../../../../context/defaultCompilePackages';
-import validateOptions from './validateOptions';
+} from '../../utils/index.js';
+import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
+import validateOptions from './validateOptions.js';
 import targets from '../../../targets.json';
 
 class SkuWebpackPlugin {

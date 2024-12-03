@@ -1,32 +1,37 @@
-const makeJsLoaders = (options) => [
+import { fileURLToPath } from 'node:url';
+import babelConfig from '../../babel/babelConfig';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+
+export const makeJsLoaders = (options) => [
   {
-    loader: require.resolve('babel-loader'),
-    options: require('../../babel/babelConfig')(options),
+    loader: fileURLToPath(import.meta.resolve('babel-loader')),
+    options: babelConfig(options),
   },
 ];
 
-const makeExternalCssLoaders = (options = {}) => {
+export const makeExternalCssLoaders = (options = {}) => {
   const { target, isProductionBuild, MiniCssExtractPlugin, browserslist } =
     options;
 
   return [
     ...(!target || target === 'browser' ? [MiniCssExtractPlugin.loader] : []),
     {
-      loader: require.resolve('css-loader'),
+      loader: fileURLToPath(import.meta.resolve('css-loader')),
       options: {
         url: false,
       },
     },
     {
-      loader: require.resolve('postcss-loader'),
+      loader: fileURLToPath(import.meta.resolve('postcss-loader')),
       options: {
         postcssOptions: {
           plugins: [
-            require('autoprefixer')({ overrideBrowserslist: browserslist }),
+            autoprefixer({ overrideBrowserslist: browserslist }),
             // Minimize CSS on production builds
             ...(isProductionBuild
               ? [
-                  require('cssnano')({
+                  cssnano({
                     preset: [
                       'default',
                       {
@@ -43,9 +48,9 @@ const makeExternalCssLoaders = (options = {}) => {
   ];
 };
 
-const makeSvgLoaders = () => [
+export const makeSvgLoaders = () => [
   {
-    loader: require.resolve('svgo-loader'),
+    loader: fileURLToPath(import.meta.resolve('svgo-loader')),
     options: {
       plugins: [
         {
@@ -66,9 +71,3 @@ const makeSvgLoaders = () => [
     },
   },
 ];
-
-module.exports = {
-  makeJsLoaders,
-  makeExternalCssLoaders,
-  makeSvgLoaders,
-};

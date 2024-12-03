@@ -1,7 +1,7 @@
-const Validator = require('fastest-validator');
-const browserslist = require('browserslist');
-const { yellow, red, bold, underline, white } = require('chalk');
-const didYouMean = require('didyoumean2').default;
+import Validator from 'fastest-validator';
+import browserslist from 'browserslist';
+import { yellow, red, bold, underline, white } from 'chalk';
+import didYouMean from 'didyoumean2';
 
 const validator = new Validator();
 
@@ -71,7 +71,7 @@ const validate = validator.compile(schema);
 
 const availableOptions = Object.keys(schema);
 
-module.exports = (options) => {
+const validateOptions = (options) => {
   const errors = [];
 
   // Validate extra keys
@@ -115,3 +115,5 @@ module.exports = (options) => {
     exitWithErrors(errors);
   }
 };
+
+export default validateOptions;

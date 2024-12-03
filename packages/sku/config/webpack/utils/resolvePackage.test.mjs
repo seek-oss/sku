@@ -1,5 +1,5 @@
-const { createPackageResolver } = require('./resolvePackage');
-const { cwd } = require('../../../lib/cwd');
+import { createPackageResolver } from './resolvePackage';
+import { cwd } from '../../../lib/cwd';
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {

@@ -1,7 +1,7 @@
-const webpack = require('webpack');
-const defaultSupportedBrowsers = require('browserslist-config-seek');
-const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
-const {
+import webpack from 'webpack';
+import defaultSupportedBrowsers from 'browserslist-config-seek';
+import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
+import {
   makeJsLoaders,
   makeExternalCssLoaders,
   makeSvgLoaders,
@@ -10,10 +10,10 @@ const {
   IMAGE,
   SVG,
   resolvePackage,
-} = require('../../utils');
-const defaultCompilePackages = require('../../../../context/defaultCompilePackages');
-const validateOptions = require('./validateOptions');
-const targets = require('../../../targets.json');
+} from '../../utils';
+import defaultCompilePackages from '../../../../context/defaultCompilePackages';
+import validateOptions from './validateOptions';
+import targets from '../../../targets.json';
 
 class SkuWebpackPlugin {
   constructor(options = {}) {
@@ -196,4 +196,4 @@ class SkuWebpackPlugin {
   }
 }
 
-module.exports = SkuWebpackPlugin;
+export default SkuWebpackPlugin;

@@ -5,7 +5,7 @@ import debug from 'debug';
 import { cwd } from '../../../lib/cwd';
 import { createRequire } from 'node:module';
 
-debug('sku:resolvePackage');
+const log = debug('sku:resolvePackage');
 
 const require = createRequire(import.meta.url);
 
@@ -55,7 +55,7 @@ export const createPackageResolver = (fs, resolve) => {
       const result = dirname(
         resolve(`${packageName}/package.json`, { paths: [cwd()] }),
       );
-      debug(`Resolved ${packageName} to ${result}`);
+      log(`Resolved ${packageName} to ${result}`);
       return result;
     } catch (error) {
       if (error.code === 'MODULE_NOT_FOUND') {
@@ -67,7 +67,7 @@ export const createPackageResolver = (fs, resolve) => {
           // This branch handles the scenario where we're trying to resolve a design system module because
           // it's in the default list of compilePackages, but it's not actually being used in the project.
           const localPackage = join(cwd(), 'node_modules', packageName);
-          debug(`Resolved unused package ${packageName} to ${localPackage}`);
+          log(`Resolved unused package ${packageName} to ${localPackage}`);
           return localPackage;
         }
       }

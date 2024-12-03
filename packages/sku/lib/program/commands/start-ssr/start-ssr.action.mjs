@@ -27,7 +27,7 @@ import createServerManager from '../../../serverManager.js';
 import { watchVocabCompile } from '../../../runVocab.js';
 import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
-debug('sku:start-ssr');
+const log = debug('sku:start-ssr');
 
 process.env.NODE_ENV = 'development';
 
@@ -189,7 +189,7 @@ export const startSsrAction = async ({ stats: statsOption }) => {
     serverManager.kill();
 
     serverCompiler.close(() => {
-      debug('Server compiler closed');
+      log('Server compiler closed');
     });
   });
 };

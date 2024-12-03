@@ -1,10 +1,13 @@
 // @ts-check
-const exists = require('./exists');
-const path = require('node:path');
-const chalk = require('chalk');
-const { runBin } = require('./runBin');
-const { getPathFromCwd } = require('./cwd');
-const { suggestScript } = require('./suggestScript');
+import exists from './exists';
+import path, { dirname } from 'node:path';
+import { yellow, red, gray, cyan } from 'chalk';
+import { runBin } from './runBin';
+import { getPathFromCwd } from './cwd';
+import { suggestScript } from './suggestScript';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = path.join(
@@ -16,9 +19,7 @@ const prettierConfigPath = path.join(
  * @param {{ write?: boolean, listDifferent?: boolean, paths?: string[] }} options
  */
 const runPrettier = async ({ write, listDifferent, paths }) => {
-  console.log(
-    chalk.cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
-  );
+  console.log(cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`));
 
   const prettierArgs = ['--config', prettierConfigPath, '--cache'];
 
@@ -38,7 +39,7 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
 
   prettierArgs.push(...pathsToCheck);
 
-  console.log(chalk.gray(`Paths: ${pathsToCheck.join(' ')}`));
+  console.log(gray(`Paths: ${pathsToCheck.join(' ')}`));
 
   try {
     await runBin({
@@ -54,19 +55,17 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   } catch (exitCode) {
     if (exitCode === 2) {
       console.warn(
-        chalk.yellow('Warning: No files matching', pathsToCheck.join(' ')),
+        yellow('Warning: No files matching', pathsToCheck.join(' ')),
       );
     } else {
       if (listDifferent && exitCode === 1) {
         console.error(
-          chalk.red(
-            'Error: The file(s) listed above failed the prettier check',
-          ),
+          red('Error: The file(s) listed above failed the prettier check'),
         );
         suggestScript('format');
       } else {
         console.error(
-          chalk.red('Error: Prettier check exited with exit code', exitCode),
+          red('Error: Prettier check exited with exit code', exitCode),
         );
       }
       throw new Error();
@@ -74,9 +73,8 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   }
 };
 
-module.exports = {
-  /** @param {string[] | undefined} paths */
-  check: (paths) => runPrettier({ listDifferent: true, paths }),
-  /** @param {string[] | undefined} paths */
-  write: (paths) => runPrettier({ write: true, paths }),
-};
+/** @param {string[] | undefined} paths */
+export const check = (paths) => runPrettier({ listDifferent: true, paths });
+
+/** @param {string[] | undefined} paths */
+export const write = (paths) => runPrettier({ write: true, paths });

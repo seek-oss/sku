@@ -1,4 +1,4 @@
-module.exports = (css) => {
+export default (css) => {
   const classNames = [];
 
   const classNameRegEx = /\.([-_a-zA-Z0-9]+)(?=[\.:\[\s{]|$)/gm;

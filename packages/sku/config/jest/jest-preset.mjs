@@ -1,6 +1,7 @@
-const escapeRegex = require('escape-string-regexp');
-const { cwd } = require('../../lib/cwd');
-const { paths, rootResolution, jestDecorator } = require('../../context');
+import escapeRegex from 'escape-string-regexp';
+import { fileURLToPath } from 'node:url';
+import { cwd } from '../../lib/cwd';
+import { paths, rootResolution, jestDecorator } from '../../context';
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages
@@ -8,10 +9,10 @@ const compilePackagesRegex = paths.compilePackages
   .join('|');
 
 /** @type {import('jest').Config} */
-module.exports = jestDecorator({
+export default jestDecorator({
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
-  prettierPath: require.resolve('prettier'),
+  prettierPath: fileURLToPath(import.meta.resolve('prettier')),
   modulePaths: rootResolution ? [cwd()] : undefined,
   testMatch: [
     // Default values, but with 'ts' + 'tsx' support
@@ -25,12 +26,14 @@ module.exports = jestDecorator({
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg)$':
-      require.resolve('./fileMock'),
+      fileURLToPath(import.meta.resolve('./fileMock')),
   },
   transform: {
-    '\\.css\\.ts$': require.resolve('@vanilla-extract/jest-transform'),
-    '\\.tsx?$': require.resolve('./tsBabelTransform.js'),
-    '\\.[cm]?js$': require.resolve('./jsBabelTransform.js'),
+    '\\.css\\.ts$': fileURLToPath(
+      import.meta.resolve('@vanilla-extract/jest-transform'),
+    ),
+    '\\.tsx?$': fileURLToPath(import.meta.resolve('./tsBabelTransform.js')),
+    '\\.[cm]?js$': fileURLToPath(import.meta.resolve('./jsBabelTransform.js')),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding
@@ -38,7 +41,7 @@ module.exports = jestDecorator({
     `node_modules${slash}(?!(${compilePackagesRegex}))`,
   ],
   watchPlugins: [
-    require.resolve('jest-watch-typeahead/filename'),
-    require.resolve('jest-watch-typeahead/testname'),
+    fileURLToPath(import.meta.resolve('jest-watch-typeahead/filename')),
+    fileURLToPath(import.meta.resolve('jest-watch-typeahead/testname')),
   ],
 });

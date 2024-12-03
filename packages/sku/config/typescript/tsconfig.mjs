@@ -1,7 +1,7 @@
-const { cwd } = require('../../lib/cwd');
-const { rootResolution, tsconfigDecorator } = require('../../context');
+import { cwd } from '../../lib/cwd';
+import { rootResolution, tsconfigDecorator } from '../../context';
 
-module.exports = () => {
+export default () => {
   const config = {
     compilerOptions: {
       // Don't compile anything, only perform type checking

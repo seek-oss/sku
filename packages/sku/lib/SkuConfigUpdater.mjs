@@ -20,11 +20,11 @@ import {
 import { parseModule, builders, generateCode } from 'magicast';
 import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 
-const debug = require('debug');
+import debug from 'debug';
 const log = debug('sku:update-sku-config');
 
-const prettier = require('prettier');
-const prettierConfig = require('../config/prettier/prettierConfig.js');
+import prettier from 'prettier';
+import prettierConfig from '../config/prettier/prettierConfig.mjs';
 
 export class SkuConfigUpdater {
   /** @typedef {import("sku").SkuConfig} SkuConfig */

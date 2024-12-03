@@ -7,7 +7,8 @@ import semver from 'semver';
 import chalk from 'chalk';
 
 import banner from './banner';
-import { count } from '../telemetry';
+import provider from '../telemetry/index.js';
+
 import { getPathFromCwd } from '../lib/cwd';
 import { paths } from '../context';
 
@@ -75,7 +76,7 @@ const validatePeerDeps = async () => {
           chalk`Try running "{blue.bold ${getWhyCommand()}} {bold ${packageName}}" to diagnose the issue`,
         );
 
-        count('duplicate_compile_package', {
+        provider.count('duplicate_compile_package', {
           compile_package: packageName,
         });
         banner('error', 'Error: Duplicate packages detected', messages);
@@ -109,7 +110,7 @@ const validatePeerDeps = async () => {
         const dep = compilePackages.get(peerName);
 
         if (dep && !semver.satisfies(dep.version, peerVersionRange)) {
-          count('peer_dep_version_mismatch', {
+          provider.count('peer_dep_version_mismatch', {
             compile_package: packageName,
           });
 

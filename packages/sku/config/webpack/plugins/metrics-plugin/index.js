@@ -1,7 +1,7 @@
 import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import debug from 'debug';
-import { timing } from '../../../../telemetry';
+import provider from '../../../../telemetry';
 
 const log = debug('sku:metrics');
 
@@ -24,7 +24,7 @@ class MetricsPlugin {
         log('Initial "%s" build complete: %s', this.target, {
           toString: () => prettyMilliseconds(performance.now()),
         });
-        timing('start.webpack.initial', performance.now(), {
+        provider.rtiming('start.webpack.initial', performance.now(), {
           target: this.target,
           type: this.type,
         });
@@ -35,7 +35,7 @@ class MetricsPlugin {
         log('Rebuild for "%s" complete: %s', this.target, {
           toString: () => prettyMilliseconds(rebuildTime),
         });
-        timing('start.webpack.rebuild', rebuildTime, {
+        provider.timing('start.webpack.rebuild', rebuildTime, {
           target: this.target,
           type: this.type,
         });

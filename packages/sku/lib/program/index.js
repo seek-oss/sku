@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
-import { commands } from './commands/index.mjs';
+import { commands } from './commands/index.js';
 import { debugOption } from './options/debug/debug.option';
 import { configOption } from './options/config/config.option';
 import { environmentOption } from './options/environment/environment.option';

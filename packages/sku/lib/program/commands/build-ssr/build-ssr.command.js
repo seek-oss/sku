@@ -9,6 +9,6 @@ buildSsrCommand
   )
   .addOption(statsOption)
   .action(async ({ stats }) => {
-    const { buildSsrAction } = await import('./build-ssr.action.mjs');
+    const { buildSsrAction } = await import('./build-ssr.action.js');
     buildSsrAction({ stats });
   });

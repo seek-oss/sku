@@ -19,7 +19,7 @@ import allocatePort from '../../../allocatePort.js';
 import openBrowser from '../../../openBrowser/index.js';
 import getSiteForHost from '../../../getSiteForHost.js';
 import { resolveEnvironment } from '../../../resolveEnvironment.js';
-import { count } from '../../../../telemetry/index.js';
+import provider from '../../../../telemetry/index.js';
 import createServer from '../../../createServer.js';
 import {
   getRouteWithLanguage,
@@ -34,7 +34,7 @@ export const serveAction = async ({
 }) => {
   await configureProject();
   validatePeerDeps();
-  count('serve');
+  provider.count('serve');
 
   const targetFolderExists = await exists(paths.target);
 

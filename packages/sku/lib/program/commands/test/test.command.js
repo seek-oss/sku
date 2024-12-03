@@ -6,7 +6,7 @@ testCommand
   .description('Run unit tests.')
   .allowUnknownOption(true)
   .action(async ({ args }) => {
-    const { testAction } = await import('./test.action.mjs');
+    const { testAction } = await import('./test.action.js');
     testAction({ args });
   });
 

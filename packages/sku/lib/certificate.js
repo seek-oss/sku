@@ -1,4 +1,5 @@
-import selfsigned from 'selfsigned';
+// eslint-disable-next-line import-x/named
+import { generate } from 'selfsigned';
 import { blue } from 'chalk';
 import exists from './exists';
 import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
@@ -6,7 +7,7 @@ import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 import { getPathFromCwd } from './cwd';
 import { hosts } from '../context';
 import { performance } from 'node:perf_hooks';
-import { timing } from '../telemetry';
+import provider from '../telemetry/index.js';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 
@@ -36,7 +37,7 @@ const createSelfSignedCertificate = () => {
     ip: 'fe80::1',
   });
 
-  return selfsigned.generate(attributes, {
+  return generate(attributes, {
     algorithm: 'sha256',
     days: 30,
     keySize: 2048,
@@ -79,7 +80,7 @@ const generateCertificate = async (certificatePath, certificateDirPath) => {
 
   await writeFile(certificatePath, `${pems.private}${pems.cert}`);
 
-  timing('certificate.generate', performance.now() - startTime);
+  provider.timing('certificate.generate', performance.now() - startTime);
 
   return pems.private + pems.cert;
 };

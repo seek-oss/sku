@@ -10,7 +10,7 @@ import {
 } from '../../../buildFileUtils';
 import makeWebpackConfig from '../../../../config/webpack/webpack.config.ssr';
 import { port, cspEnabled } from '../../../../context';
-import track from '../../../../telemetry';
+import provider from '../../../../telemetry';
 
 import { runVocabCompile } from '../../../runVocab';
 import { configureProject, validatePeerDeps } from '../../../utils/configure';
@@ -35,7 +35,7 @@ export const buildSsrAction = async ({ stats }) => {
     await copyPublicFiles();
 
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, {
+    provider.timing('build', timeTaken, {
       status: 'success',
       type: 'ssr',
       csp: cspEnabled,
@@ -46,7 +46,7 @@ export const buildSsrAction = async ({ stats }) => {
     );
   } catch (error) {
     const timeTaken = performance.now();
-    track.timing('build', timeTaken, {
+    provider.timing('build', timeTaken, {
       status: 'failed',
       type: 'ssr',
       csp: cspEnabled,
@@ -56,7 +56,7 @@ export const buildSsrAction = async ({ stats }) => {
 
     process.exitCode = 1;
   } finally {
-    await track.close();
+    await provider.close();
 
     if (process.env.SKU_FORCE_EXIT) {
       process.exit();

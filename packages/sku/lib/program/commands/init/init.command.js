@@ -16,6 +16,6 @@ initCommand
     setPackageManager(packageManager);
   })
   .action(async (projectName, verbose) => {
-    const { initAction } = await import('./init.action.mjs');
+    const { initAction } = await import('./init.action.js');
     initAction(projectName, { verbose });
   });

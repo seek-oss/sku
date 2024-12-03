@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import { webpack } from 'webpack';
 import defaultSupportedBrowsers from 'browserslist-config-seek';
 import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
 import {

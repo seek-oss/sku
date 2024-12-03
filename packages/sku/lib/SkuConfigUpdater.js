@@ -24,7 +24,7 @@ import debug from 'debug';
 const log = debug('sku:update-sku-config');
 
 import prettier from 'prettier';
-import prettierConfig from '../config/prettier/prettierConfig.mjs';
+import prettierConfig from '../config/prettier/prettierConfig.js';
 
 export class SkuConfigUpdater {
   /** @typedef {import("sku").SkuConfig} SkuConfig */

@@ -1,5 +1,5 @@
 import WebpackDevServer from 'webpack-dev-server';
-import webpack from 'webpack';
+import { webpack } from 'webpack';
 import { blue, underline } from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 

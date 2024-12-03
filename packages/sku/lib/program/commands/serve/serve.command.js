@@ -1,6 +1,6 @@
 import { Command } from 'commander';
-import { siteOption } from '../../options/site/site.option.mjs';
-import { portOption } from '../../options/port/port.option.mjs';
+import { siteOption } from '../../options/site/site.option.js';
+import { portOption } from '../../options/port/port.option.js';
 
 export const serveCommand = new Command('serve');
 
@@ -13,6 +13,6 @@ serveCommand
   .action(async ({ site, port }, command) => {
     const environment = command.parent.opts()?.environment;
 
-    const { serveAction } = await import('./serve.action.mjs');
+    const { serveAction } = await import('./serve.action.js');
     serveAction({ site, port, environment });
   });

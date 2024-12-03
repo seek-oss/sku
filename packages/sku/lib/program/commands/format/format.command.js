@@ -6,6 +6,6 @@ formatCommand
   .description('Apply all available lint and formatting fixes.')
   .argument('[paths...]', 'paths to format')
   .action(async (paths) => {
-    const { formatAction } = await import('./format.action.mjs');
+    const { formatAction } = await import('./format.action.js');
     formatAction(paths);
   });

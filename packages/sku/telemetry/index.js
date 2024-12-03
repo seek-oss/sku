@@ -1,11 +1,11 @@
 import os from 'node:os';
 
-import { requireFromCwd } from '../lib/cwd';
-import isCI from '../lib/isCI';
-import provider from './provider';
+import { requireFromCwd } from '../lib/cwd.js';
+import isCI from '../lib/isCI.js';
+import provider from './provider.js';
 import skuPackageJson from '../package.json' with { type: 'json' };
 
-import { languages } from '../context';
+import { languages } from '../context/index.js';
 
 let projectName = 'unknown';
 let braidVersion = 'unknown';

@@ -3,7 +3,7 @@ import { createServer as createHttpServer } from 'node:http';
 import { createServer as createHttpsServer } from 'node:https';
 
 import { httpsDevServer } from '../context/index.js';
-import getCertificate from './certificate.mjs';
+import getCertificate from './certificate.js';
 
 /**
  * @param {import("http").RequestListener} requestListener

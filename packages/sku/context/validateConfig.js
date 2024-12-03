@@ -2,7 +2,7 @@ import browserslist from 'browserslist';
 import { yellow, red, bold, underline, white } from 'chalk';
 import didYouMean from 'didyoumean2';
 
-import configSchema from './configSchema.mjs';
+import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig';
 import defaultClientEntry from './defaultClientEntry';
 

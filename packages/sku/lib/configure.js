@@ -6,18 +6,18 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '../config/prettier/prettierConfig';
-import createTSConfig from '../config/typescript/tsconfig';
-import { bundleReportFolder } from '../config/webpack/plugins/bundleAnalyzer';
-import { paths, httpsDevServer, languages } from '../context';
+import prettierConfig from '../config/prettier/prettierConfig.js';
+import createTSConfig from '../config/typescript/tsconfig.js';
+import { bundleReportFolder } from '../config/webpack/plugins/bundleAnalyzer.js';
+import { paths, httpsDevServer, languages } from '../context/index.js';
 import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} from './eslintMigration';
+} from './eslintMigration.js';
 
-import getCertificate from './certificate';
+import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from './cwd';
 
 const coverageFolder = 'coverage';

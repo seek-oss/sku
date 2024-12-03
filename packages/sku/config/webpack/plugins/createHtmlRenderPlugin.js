@@ -17,7 +17,7 @@ import {
   sites,
   transformOutputPath,
   publicPath,
-} from '../../../context';
+} from '../../../context/index.js';
 
 const getClientStats = (webpackStats) => webpackStats.toJson();
 

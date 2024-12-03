@@ -2,7 +2,7 @@
 import {
   migrateEslintignore,
   addEslintIgnoreToSkuConfig,
-} from './eslintMigration.mjs';
+} from './eslintMigration.js';
 import { createFixture } from 'fs-fixture';
 import { default as dedent } from 'dedent';
 

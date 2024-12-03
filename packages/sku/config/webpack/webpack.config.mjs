@@ -1,31 +1,14 @@
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeExternals = require('webpack-node-externals');
-const path = require('node:path');
-const LoadablePlugin = require('@loadable/webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import nodeExternals from 'webpack-node-externals';
+import LoadablePlugin from '@loadable/webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
-const config = require('../../context');
-const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
-const MetricsPlugin = require('./plugins/metrics-plugin');
-const { VocabWebpackPlugin } = require('@vocab/webpack');
-
-const utils = require('./utils');
-const { cwd } = require('../../lib/cwd');
-
-const renderEntry = require.resolve('../../entry/render');
-const libraryRenderEntry = require.resolve('../../entry/libraryRender');
-
-const { getVocabConfig } = require('../vocab/vocab');
-const getStatsConfig = require('./statsConfig');
-const getSourceMapSetting = require('./sourceMaps');
-const getCacheSettings = require('./cache');
-const modules = require('./resolveModules');
-const targets = require('../targets.json');
-
-const {
+import {
   paths,
   webpackDecorator,
   polyfills,
@@ -39,7 +22,30 @@ const {
   rootResolution,
   skipPackageCompatibilityCompilation,
   externalizeNodeModules,
-} = config;
+} from '../../context';
+import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer';
+import SkuWebpackPlugin from './plugins/sku-webpack-plugin';
+import MetricsPlugin from './plugins/metrics-plugin';
+import { VocabWebpackPlugin } from '@vocab/webpack';
+
+import utils from './utils';
+import { cwd } from '../../lib/cwd';
+
+import { getVocabConfig } from '../vocab/vocab';
+import getStatsConfig from './statsConfig';
+import getSourceMapSetting from './sourceMaps';
+import getCacheSettings from './cache';
+import modules from './resolveModules';
+import targets from '../targets.json';
+
+const renderEntry = fileURLToPath(import.meta.resolve('../../entry/render'));
+const libraryRenderEntry = fileURLToPath(
+  import.meta.resolve('../../entry/libraryRender'),
+);
+
+const require = createRequire(import.meta.url);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const makeWebpackConfig = ({
   isIntegration = false,
@@ -60,7 +66,9 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
-  const skuClientEntry = require.resolve('../../entry/client/index.js');
+  const skuClientEntry = fileURLToPath(
+    import.meta.resolve('../../entry/client/index.js'),
+  );
 
   const createEntry = (entry) => [...resolvedPolyfills, entry];
 
@@ -175,14 +183,18 @@ const makeWebpackConfig = ({
                   ],
                   use: [
                     {
-                      loader: require.resolve('babel-loader'),
+                      loader: fileURLToPath(
+                        import.meta.resolve('babel-loader'),
+                      ),
                       options: {
                         babelrc: false,
                         cacheDirectory: true,
                         cacheCompression: false,
                         presets: [
                           [
-                            require.resolve('@babel/preset-env'),
+                            fileURLToPath(
+                              import.meta.resolve('@babel/preset-env'),
+                            ),
                             { modules: false, targets: supportedBrowsers },
                           ],
                         ],
@@ -331,4 +343,4 @@ const makeWebpackConfig = ({
   return webpackConfigs;
 };
 
-module.exports = makeWebpackConfig;
+export default makeWebpackConfig;

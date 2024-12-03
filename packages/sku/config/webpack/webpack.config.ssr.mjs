@@ -1,20 +1,22 @@
-const path = require('node:path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeExternals = require('webpack-node-externals');
-const findUp = require('find-up');
-const LoadablePlugin = require('@loadable/webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+import { dirname, join, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import nodeExternals from 'webpack-node-externals';
+import findUp from 'find-up';
+import LoadablePlugin from '@loadable/webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
-const SkuWebpackPlugin = require('./plugins/sku-webpack-plugin');
-const MetricsPlugin = require('./plugins/metrics-plugin');
-const { VocabWebpackPlugin } = require('@vocab/webpack');
+import SkuWebpackPlugin from './plugins/sku-webpack-plugin';
+import MetricsPlugin from './plugins/metrics-plugin';
+import { VocabWebpackPlugin } from '@vocab/webpack';
 
-const { bundleAnalyzerPlugin } = require('./plugins/bundleAnalyzer');
-const utils = require('./utils');
-const { cwd } = require('../../lib/cwd');
-const {
+import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer';
+import utils from './utils';
+import { cwd } from '../../lib/cwd';
+import {
   paths,
   webpackDecorator,
   polyfills,
@@ -27,13 +29,17 @@ const {
   rootResolution,
   skipPackageCompatibilityCompilation,
   externalizeNodeModules,
-} = require('../../context');
-const { getVocabConfig } = require('../vocab/vocab');
-const getStatsConfig = require('./statsConfig');
-const getSourceMapSetting = require('./sourceMaps');
-const getCacheSettings = require('./cache');
-const modules = require('./resolveModules');
-const targets = require('../targets.json');
+} from '../../context';
+import { getVocabConfig } from '../vocab/vocab';
+import getStatsConfig from './statsConfig';
+import getSourceMapSetting from './sourceMaps';
+import getCacheSettings from './cache';
+import modules from './resolveModules';
+import targets from '../targets.json';
+
+const require = createRequire(import.meta.url);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const makeWebpackConfig = ({
   clientPort,
@@ -48,7 +54,7 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig();
 
-  const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
+  const internalInclude = [join(__dirname, '../../entry'), ...paths.src];
 
   const resolvedPolyfills = polyfills.map((polyfill) => {
     return require.resolve(polyfill, { paths: [cwd()] });
@@ -59,7 +65,9 @@ const makeWebpackConfig = ({
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
-  const serverEntry = require.resolve('../../entry/server/index.js');
+  const serverEntry = fileURLToPath(
+    import.meta.resolve('../../entry/server/index.js'),
+  );
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
 
@@ -133,19 +141,23 @@ const makeWebpackConfig = ({
                     ].map((packageName) => {
                       const resolvedPackage = utils.resolvePackage(packageName);
 
-                      return `${resolvedPackage}${path.sep}`;
+                      return `${resolvedPackage}${sep}`;
                     }),
                   ],
                   use: [
                     {
-                      loader: require.resolve('babel-loader'),
+                      loader: fileURLToPath(
+                        import.meta.resolve('babel-loader'),
+                      ),
                       options: {
                         babelrc: false,
                         cacheDirectory: true,
                         cacheCompression: false,
                         presets: [
                           [
-                            require.resolve('@babel/preset-env'),
+                            fileURLToPath(
+                              import.meta.resolve('@babel/preset-env'),
+                            ),
                             {
                               modules: false,
                               targets: supportedBrowsers,
@@ -299,4 +311,4 @@ const makeWebpackConfig = ({
   return webpackConfigs;
 };
 
-module.exports = makeWebpackConfig;
+export default makeWebpackConfig;

@@ -1,7 +1,9 @@
-const { performance } = require('node:perf_hooks');
-const prettyMilliseconds = require('pretty-ms');
-const debug = require('debug')('sku:metrics');
-const track = require('../../../../telemetry');
+import { performance } from 'node:perf_hooks';
+import prettyMilliseconds from 'pretty-ms';
+import debug from 'debug';
+import { timing } from '../../../../telemetry';
+
+debug('sku:metrics');
 
 const smp = 'sku-metrics-plugin';
 
@@ -22,7 +24,7 @@ class MetricsPlugin {
         debug('Initial "%s" build complete: %s', this.target, {
           toString: () => prettyMilliseconds(performance.now()),
         });
-        track.timing('start.webpack.initial', performance.now(), {
+        timing('start.webpack.initial', performance.now(), {
           target: this.target,
           type: this.type,
         });
@@ -33,7 +35,7 @@ class MetricsPlugin {
         debug('Rebuild for "%s" complete: %s', this.target, {
           toString: () => prettyMilliseconds(rebuildTime),
         });
-        track.timing('start.webpack.rebuild', rebuildTime, {
+        timing('start.webpack.rebuild', rebuildTime, {
           target: this.target,
           type: this.type,
         });
@@ -42,4 +44,4 @@ class MetricsPlugin {
   }
 }
 
-module.exports = MetricsPlugin;
+export default MetricsPlugin;

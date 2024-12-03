@@ -1,5 +1,5 @@
 // @ts-check
-const isCI = require('../../lib/isCI');
+import isCI from '../../lib/isCI';
 
 /**
  * @param {object} [options]
@@ -17,4 +17,4 @@ const getStatsConfig = ({ stats, isStartScript = false } = {}) => {
   };
 };
 
-module.exports = getStatsConfig;
+export default getStatsConfig;

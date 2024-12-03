@@ -1,15 +1,15 @@
-const { HtmlRenderPlugin } = require('html-render-webpack-plugin');
-const { default: memoize } = require('nano-memoize');
-const debug = require('debug');
+import { HtmlRenderPlugin } from 'html-render-webpack-plugin';
+import { default as memoize } from 'nano-memoize';
+import debug from 'debug';
 
-const {
+import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} = require('../../../lib/language-utils');
+} from '../../../lib/language-utils';
 
 const log = debug('sku:html-render-plugin');
 
-const {
+import {
   isStartScript,
   paths,
   routes,
@@ -17,7 +17,7 @@ const {
   sites,
   transformOutputPath,
   publicPath,
-} = require('../../../context');
+} from '../../../context';
 
 const getClientStats = (webpackStats) => webpackStats.toJson();
 
@@ -109,7 +109,7 @@ const getBuildRoutes = () => {
   );
 };
 
-module.exports = () => {
+const createHtmlRenderPlugin = () => {
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
   const allRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
@@ -126,3 +126,5 @@ module.exports = () => {
     },
   });
 };
+
+export default createHtmlRenderPlugin;

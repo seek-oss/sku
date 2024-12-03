@@ -1,9 +1,9 @@
-const { paths } = require('../../context');
-const isCI = require('../../lib/isCI');
+import { paths } from '../../context';
+import isCI from '../../lib/isCI';
 
 const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 
-module.exports = function getWebpackCacheSettings({ isDevServer }) {
+function getWebpackCacheSettings({ isDevServer }) {
   if (isDevServer && !isCI && !disableCacheOverride) {
     return {
       type: 'filesystem',
@@ -14,4 +14,6 @@ module.exports = function getWebpackCacheSettings({ isDevServer }) {
   }
 
   return false;
-};
+}
+
+export default getWebpackCacheSettings;

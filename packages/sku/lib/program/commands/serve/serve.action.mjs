@@ -1,11 +1,11 @@
-const path = require('node:path');
-const exists = require('../../../exists');
-const express = require('express');
-const handler = require('serve-handler');
-const { blue, bold, underline, red } = require('chalk');
-const didYouMean = require('didyoumean2').default;
+import { join } from 'node:path';
+import exists from '../../../exists.js';
+import express from 'express';
+import handler from 'serve-handler';
+import { blue, bold, underline, red } from 'chalk';
+import didYouMean from 'didyoumean2';
 
-const {
+import {
   port,
   paths,
   initialPath,
@@ -13,31 +13,31 @@ const {
   sites,
   useDevServerMiddleware,
   httpsDevServer,
-} = require('../../../../context');
-const { checkHosts, getAppHosts } = require('../../../hosts');
-const allocatePort = require('../../../allocatePort');
-const openBrowser = require('../../../openBrowser');
-const getSiteForHost = require('../../../getSiteForHost');
-const { resolveEnvironment } = require('../../../resolveEnvironment');
-const track = require('../../../../telemetry');
-const createServer = require('../../../createServer');
-const {
+} from '../../../../context/index.js';
+import { checkHosts, getAppHosts } from '../../../hosts.js';
+import allocatePort from '../../../allocatePort.js';
+import openBrowser from '../../../openBrowser/index.js';
+import getSiteForHost from '../../../getSiteForHost.js';
+import { resolveEnvironment } from '../../../resolveEnvironment.js';
+import { count } from '../../../../telemetry/index.js';
+import createServer from '../../../createServer.js';
+import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} = require('../../../language-utils');
-const {
+} from '../../../language-utils.js';
+import {
   configureProject,
   validatePeerDeps,
-} = require('../../../utils/configure');
+} from '../../../utils/configure.js';
 
-const serveAction = async ({
+export const serveAction = async ({
   site: preferredSite,
   port: preferredPort,
   environment: environmentOption,
 }) => {
   await configureProject();
   validatePeerDeps();
-  track.count('serve');
+  count('serve');
 
   const targetFolderExists = await exists(paths.target);
 
@@ -89,7 +89,7 @@ const serveAction = async ({
   const app = express();
 
   if (useDevServerMiddleware) {
-    const devServerMiddleware = require(paths.devServerMiddleware);
+    const devServerMiddleware = await import(paths.devServerMiddleware);
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {
       devServerMiddleware(app);
     }
@@ -125,7 +125,7 @@ const serveAction = async ({
 
         return {
           source: normalisedSourceRoute,
-          destination: path.join(
+          destination: join(
             environment,
             site,
             normalisedDestinationRoute,
@@ -137,7 +137,7 @@ const serveAction = async ({
 
     if (paths.publicPath !== '/') {
       rewrites.push({
-        source: path.join(paths.publicPath, ':asset+.:extension'),
+        source: join(paths.publicPath, ':asset+.:extension'),
         destination: '/:asset.:extension',
       });
     }
@@ -189,5 +189,3 @@ const serveAction = async ({
     openBrowser(url);
   });
 };
-
-module.exports = serveAction;

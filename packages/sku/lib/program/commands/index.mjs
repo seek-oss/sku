@@ -4,7 +4,7 @@ import { configureCommand } from './configure/configure.command.mjs';
 import { formatCommand } from './format/format.command.mjs';
 import { lintCommand } from './lint/lint.command.mjs';
 import { preCommitCommand } from './pre-commit/pre-commit.command.mjs';
-import serveCommand from './serve/serve.command.js';
+import { serveCommand } from './serve/serve.command.mjs';
 import { setupHostsCommand } from './setup-hosts/setup-hosts.command.mjs';
 import { startCommand } from './start/start.command.mjs';
 import { startSsrCommand } from './start-ssr/start-ssr.command.mjs';

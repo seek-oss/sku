@@ -7,7 +7,7 @@
  * @param {boolean} options.hasLanguagesConfig - Whether 'languages' is configured in sku config
  * @param {string | undefined} options.target - The configured target directory in sku config
  */
-const createEslintIgnoresConfig = ({ hasLanguagesConfig, target }) => {
+export const createEslintIgnoresConfig = ({ hasLanguagesConfig, target }) => {
   // ESLint migrates ignore entries differently depending on whether a path contains a subdirectory.
   // We want the sku target to match the migrated entry so it ends up excluded in the migrated
   // output.
@@ -33,8 +33,4 @@ const createEslintIgnoresConfig = ({ hasLanguagesConfig, target }) => {
   return {
     ignores,
   };
-};
-
-module.exports = {
-  createEslintIgnoresConfig,
 };

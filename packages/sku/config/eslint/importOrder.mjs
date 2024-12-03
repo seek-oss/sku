@@ -1,8 +1,8 @@
-const path = require('node:path');
-const { paths, rootResolution } = require('../../context');
+import { basename } from 'node:path';
+import { paths, rootResolution } from '../../context';
 
 const internalRegex = `^(${paths.src
-  .map((srcPath) => path.basename(srcPath))
+  .map((srcPath) => basename(srcPath))
   .join('|')})/`;
 
 const rootResolutionConfig = {
@@ -11,7 +11,7 @@ const rootResolutionConfig = {
   },
 };
 
-const importOrderConfig = {
+export const importOrderConfig = {
   ...(rootResolution ? rootResolutionConfig : undefined),
   rules: {
     'import-x/order': [
@@ -39,5 +39,3 @@ const importOrderConfig = {
     ],
   },
 };
-
-module.exports = { importOrderConfig };

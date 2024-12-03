@@ -1,8 +1,10 @@
-const { languages } = require('../../context');
-const log = require('debug')('sku:vocab:config');
-const { generator } = require('@vocab/pseudo-localize');
+import { languages } from '../../context';
+import debug from 'debug';
+import { generator } from '@vocab/pseudo-localize';
 
-const getVocabConfig = () => {
+const log = debug('sku:vocab:config');
+
+export const getVocabConfig = () => {
   if (!languages) {
     log('No languagages set. Skipping vocab');
     return null;
@@ -23,5 +25,3 @@ const getVocabConfig = () => {
 
   return result;
 };
-
-module.exports = { getVocabConfig };

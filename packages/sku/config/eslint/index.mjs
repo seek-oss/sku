@@ -1,14 +1,16 @@
 // @ts-check
 // @ts-expect-error `eslint-config-seek` has no types yet
-const eslintConfigSeek = require('eslint-config-seek');
-const { importOrderConfig } = require('./importOrder.js');
-const { createEslintIgnoresConfig } = require('./ignores.js');
-const {
+import eslintConfigSeek from 'eslint-config-seek';
+import { importOrderConfig } from './importOrder';
+import { createEslintIgnoresConfig } from './ignores';
+import {
   eslintDecorator,
   eslintIgnore,
   languages,
-  paths: { relativeTarget },
-} = require('../../context/index.js');
+  paths,
+} from '../../context/index.js';
+
+const { relativeTarget } = paths;
 
 const _eslintConfigSku = [
   createEslintIgnoresConfig({
@@ -22,6 +24,4 @@ const _eslintConfigSku = [
     : []),
 ];
 
-module.exports = {
-  eslintConfigSku: eslintDecorator?.(_eslintConfigSku),
-};
+export const eslintConfigSku = eslintDecorator?.(_eslintConfigSku);

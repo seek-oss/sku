@@ -1,5 +1,5 @@
 // @ts-check
-import { prependWithManagedConfigBanner } from './managedConfigBanner.js';
+import { prependWithManagedConfigBanner } from './managedConfigBanner.mjs';
 import { writeFile } from 'node:fs/promises';
 
 import { join } from 'node:path';

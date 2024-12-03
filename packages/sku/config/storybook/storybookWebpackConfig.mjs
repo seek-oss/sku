@@ -1,7 +1,7 @@
-const { paths } = require('../../context');
-const { merge: webpackMerge } = require('webpack-merge');
-const makeWebpackConfig = require('../webpack/webpack.config');
-const { resolvePackage } = require('../webpack/utils/resolvePackage');
+import { paths } from '../../context';
+import { merge as webpackMerge } from 'webpack-merge';
+import makeWebpackConfig from '../webpack/webpack.config';
+import { resolvePackage } from '../webpack/utils/resolvePackage';
 
 const hot = process.env.SKU_HOT !== 'false';
 
@@ -12,7 +12,7 @@ const EXAMPLE_MDX_FILE = 'example.mdx';
  * @param {import("webpack").Configuration} config
  * @param {{isDevServer: boolean}}
  */
-module.exports = (config, { isDevServer }) => {
+export default (config, { isDevServer }) => {
   const clientWebpackConfig = makeWebpackConfig({
     isIntegration: true,
     isDevServer,

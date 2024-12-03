@@ -1,33 +1,31 @@
-const { rm } = require('node:fs/promises');
-const path = require('node:path');
+import { rm } from 'node:fs/promises';
+import path from 'node:path';
 
-const dedent = require('dedent');
-const chalk = require('chalk');
+import dedent from 'dedent';
+import chalk from 'chalk';
 
-const ensureGitignore = require('ensure-gitignore');
+import ensureGitignore from 'ensure-gitignore';
 
-const prettierConfig = require('../config/prettier/prettierConfig');
-const createTSConfig = require('../config/typescript/tsconfig.js');
-const {
-  bundleReportFolder,
-} = require('../config/webpack/plugins/bundleAnalyzer');
-const { paths, httpsDevServer, languages } = require('../context');
-const {
+import prettierConfig from '../config/prettier/prettierConfig';
+import createTSConfig from '../config/typescript/tsconfig';
+import { bundleReportFolder } from '../config/webpack/plugins/bundleAnalyzer';
+import { paths, httpsDevServer, languages } from '../context';
+import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} = require('./eslintMigration');
+} from './eslintMigration';
 
-const getCertificate = require('./certificate');
-const { getPathFromCwd, writeFileToCWD } = require('./cwd');
+import getCertificate from './certificate';
+import { getPathFromCwd, writeFileToCWD } from './cwd';
 
 const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr) => pathStr.replace(/\\/g, '/');
 const addSep = (p) => `${p}${path.sep}`;
 
-module.exports = async () => {
+export default async () => {
   // Ignore target directories
   const webpackTargetDirectory = addSep(paths.relativeTarget);
 

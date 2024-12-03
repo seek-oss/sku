@@ -3,13 +3,13 @@
  * https://github.com/storybookjs/storybook/pull/23018
  */
 
-const makeStorybookWebpackConfig = require('./storybookWebpackConfig');
-const createBabelConfig = require('../babel/babelConfig');
+import makeStorybookWebpackConfig from './storybookWebpackConfig';
+import createBabelConfig from '../babel/babelConfig';
 
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 
 /** @type {NonNullable<StorybookConfig['webpackFinal']>} */
-const webpackFinal = (config, { configType }) =>
+export const webpackFinal = (config, { configType }) =>
   makeStorybookWebpackConfig(config, {
     // sku storybook -> configType === 'DEVELOPMENT'
     // sku build-storybook -> configType === 'PRODUCTION'
@@ -17,16 +17,11 @@ const webpackFinal = (config, { configType }) =>
   });
 
 /** @type {NonNullable<StorybookConfig['babel']>} */
-const babel = () => {
+export const babel = () => {
   return createBabelConfig({
     target: 'browser',
     lang: 'ts',
     browserslist: ['chrome > 122'],
     displayNamesProd: true,
   });
-};
-
-module.exports = {
-  webpackFinal,
-  babel,
 };

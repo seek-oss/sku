@@ -1,4 +1,4 @@
-const Validator = require('fastest-validator');
+import Validator from 'fastest-validator';
 
 const validator = new Validator();
 
@@ -48,7 +48,7 @@ const routes = {
   ],
 };
 
-module.exports = validator.compile({
+export default validator.compile({
   clientEntry: {
     type: 'string',
   },

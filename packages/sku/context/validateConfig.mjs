@@ -1,10 +1,10 @@
-const browserslist = require('browserslist');
-const { yellow, red, bold, underline, white } = require('chalk');
-const didYouMean = require('didyoumean2').default;
+import browserslist from 'browserslist';
+import { yellow, red, bold, underline, white } from 'chalk';
+import didYouMean from 'didyoumean2';
 
-const configSchema = require('./configSchema');
-const defaultSkuConfig = require('./defaultSkuConfig');
-const defaultClientEntry = require('./defaultClientEntry');
+import configSchema from './configSchema.mjs';
+import defaultSkuConfig from './defaultSkuConfig';
+import defaultClientEntry from './defaultClientEntry';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
@@ -16,7 +16,7 @@ const exitWithErrors = async (errors) => {
   process.exit(1);
 };
 
-module.exports = (skuConfig) => {
+export default (skuConfig) => {
   const errors = [];
 
   // Validate extra keys

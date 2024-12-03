@@ -25,10 +25,7 @@ import openBrowser from '../../../openBrowser/index.js';
 import createServerManager from '../../../serverManager.js';
 
 import { watchVocabCompile } from '../../../runVocab.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
 debug('sku:start-ssr');
 

@@ -4,7 +4,7 @@ import { check as prettierCheck } from '../../../runPrettier.js';
 import runTsc from '../../../runTsc.js';
 
 import { runVocabCompile } from '../../../runVocab.js';
-import { configureProject } from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure';
 
 export const lintAction = async (paths) => {
   await configureProject();

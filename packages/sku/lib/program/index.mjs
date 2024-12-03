@@ -6,7 +6,7 @@ import { commands } from './commands/index.mjs';
 import { debugOption } from './options/debug/debug.option';
 import { configOption } from './options/config/config.option';
 import { environmentOption } from './options/environment/environment.option';
-import { initDebug } from '../utils/debug.js';
+import { initDebug } from '../utils/debug';
 import { setConfigPath } from '../../context/configPath.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

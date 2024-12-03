@@ -2,7 +2,7 @@ import { validate } from '@vocab/core';
 import { bold, cyan } from 'chalk';
 
 import { getResolvedVocabConfig } from '../../helpers/translation-helpers';
-import { configureProject } from '../../../../../utils/configure.js';
+import { configureProject } from '../../../../../utils/configure';
 
 const log = (message) => console.log(cyan(message));
 

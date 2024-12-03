@@ -25,10 +25,7 @@ import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
 } from '../../../language-utils.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
 export const serveAction = async ({
   site: preferredSite,

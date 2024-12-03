@@ -5,7 +5,7 @@ import {
   ensureBranch,
   getResolvedVocabConfig,
 } from '../../helpers/translation-helpers';
-import { configureProject } from '../../../../../utils/configure.js';
+import { configureProject } from '../../../../../utils/configure';
 
 const log = (message) => console.log(chalk.cyan(message));
 

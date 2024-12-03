@@ -15,10 +15,7 @@ import makeWebpackConfig from '../../../../config/webpack/webpack.config.js';
 import { isLibrary, cspEnabled } from '../../../../context/index.js';
 import track from '../../../../telemetry/index.js';
 import { runVocabCompile } from '../../../runVocab.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
 // First, ensure the build is running in production mode
 process.env.NODE_ENV = 'production';

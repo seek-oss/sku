@@ -3,7 +3,7 @@ import { run } from 'jest';
 
 import isCI from '../../../isCI.js';
 import { runVocabCompile } from '../../../runVocab.js';
-import { configureProject } from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure';
 
 const log = debug('sku:jest');
 

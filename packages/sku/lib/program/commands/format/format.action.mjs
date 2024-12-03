@@ -1,5 +1,5 @@
 import { cyan } from 'chalk';
-import { configureProject } from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure';
 import { fix as esLintFix } from '../../../runESLint.js';
 import { write as prettierWrite } from '../../../runPrettier.js';
 

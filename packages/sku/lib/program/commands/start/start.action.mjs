@@ -28,10 +28,7 @@ import {
 } from '../../../language-utils.js';
 
 import { watchVocabCompile } from '../../../runVocab.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject, validatePeerDeps } from '../../../utils/configure';
 
 const localhost = '0.0.0.0';
 

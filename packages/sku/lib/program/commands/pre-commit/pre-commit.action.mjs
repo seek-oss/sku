@@ -1,5 +1,5 @@
 import preCommit from '../../../preCommit.js';
-import { configureProject } from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure';
 
 export const preCommitAction = async () => {
   await configureProject();

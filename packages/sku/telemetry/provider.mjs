@@ -1,5 +1,9 @@
-const { getAddCommand } = require('../lib/packageManager');
-const banner = require('../lib/banner');
+import { createRequire } from 'node:module';
+
+import { getAddCommand } from '../lib/packageManager';
+import banner from '../lib/banner';
+
+const require = createRequire(import.meta.url);
 
 function noop() {}
 
@@ -37,4 +41,4 @@ try {
   ]);
 }
 
-module.exports = provider;
+export default provider;

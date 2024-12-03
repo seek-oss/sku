@@ -1,9 +1,9 @@
 // @ts-check
-const { yellow, cyan, gray } = require('chalk');
-const { loadESLint } = require('eslint');
-const { eslintConfigSku } = require('../config/eslint');
-const { lintExtensions } = require('./lint');
-const assert = require('node:assert');
+import { yellow, cyan, gray } from 'chalk';
+import { loadESLint } from 'eslint';
+import { eslintConfigSku } from '../config/eslint';
+import { lintExtensions } from './lint';
+import assert from 'node:assert';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
@@ -77,9 +77,7 @@ const runESLint = async ({ fix = false, paths }) => {
   }
 };
 
-module.exports = {
-  /** @param {string[] | undefined} paths */
-  check: (paths) => runESLint({ paths }),
-  /** @param {string[] | undefined} paths */
-  fix: (paths) => runESLint({ fix: true, paths }),
-};
+/** @param {string[] | undefined} paths */
+export const check = (paths) => runESLint({ paths });
+/** @param {string[] | undefined} paths */
+export const fix = (paths) => runESLint({ fix: true, paths });

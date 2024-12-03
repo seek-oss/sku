@@ -1,8 +1,8 @@
 // @ts-check
-const { compile } = require('@vocab/core');
-const { getVocabConfig } = require('../config/vocab/vocab');
+import { compile } from '@vocab/core';
+import { getVocabConfig } from '../config/vocab/vocab';
 
-const runVocabCompile = async () => {
+export const runVocabCompile = async () => {
   const vocabConfig = getVocabConfig();
   if (vocabConfig) {
     console.log('Running Vocab compile');
@@ -10,15 +10,10 @@ const runVocabCompile = async () => {
   }
 };
 
-const watchVocabCompile = async () => {
+export const watchVocabCompile = async () => {
   const vocabConfig = getVocabConfig();
   if (vocabConfig) {
     console.log('Starting Vocab compile in watch mode');
     await compile({ watch: true }, vocabConfig);
   }
-};
-
-module.exports = {
-  runVocabCompile,
-  watchVocabCompile,
 };

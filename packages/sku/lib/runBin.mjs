@@ -1,6 +1,9 @@
 // @ts-check
-const path = require('node:path');
-const spawn = require('cross-spawn');
+import path from 'node:path';
+import spawn from 'cross-spawn';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 /**
  * @param {string} packageName
@@ -13,7 +16,7 @@ const resolveBin = (packageName, binName) => {
       ? packageJson.bin
       : packageJson.bin[binName || packageName];
 
-  return require.resolve(path.join(packageName, binPath));
+  return import.meta.resolve(path.join(packageName, binPath));
 };
 
 /** @typedef {import('child_process').SpawnOptions} SpawnOptions */
@@ -48,19 +51,14 @@ const spawnPromise = (commandPath, args, options) => {
 /**
  * @param {Options} options
  */
-const runBin = ({ packageName, binName, args, options }) =>
+export const runBin = ({ packageName, binName, args, options }) =>
   spawnPromise(resolveBin(packageName, binName), args, options);
 
 /**
  * @param {Options} options
  */
-const startBin = ({ packageName, binName, args, options }) => {
+export const startBin = ({ packageName, binName, args, options }) => {
   const childProcess = spawn(resolveBin(packageName, binName), args, options);
 
   return childProcess;
-};
-
-module.exports = {
-  runBin,
-  startBin,
 };

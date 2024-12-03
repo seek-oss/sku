@@ -1,5 +1,5 @@
 // @ts-check
-const getStatsConfig = require('../config/webpack/statsConfig');
+import getStatsConfig from '../config/webpack/statsConfig';
 
 /**
  * @param {import('webpack').Compiler} compiler
@@ -7,7 +7,7 @@ const getStatsConfig = require('../config/webpack/statsConfig');
  * @param {string} [options.stats]
  * @returns {Promise<void>}
  */
-const run = async (compiler, { stats: statsOption } = {}) =>
+export const run = async (compiler, { stats: statsOption } = {}) =>
   new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
@@ -29,7 +29,3 @@ const run = async (compiler, { stats: statsOption } = {}) =>
       resolve();
     });
   });
-
-module.exports = {
-  run,
-};

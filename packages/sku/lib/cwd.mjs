@@ -1,8 +1,8 @@
 // @ts-check
-const { prependWithManagedConfigBanner } = require('./managedConfigBanner');
-const { writeFile } = require('node:fs/promises');
+import { prependWithManagedConfigBanner } from './managedConfigBanner.js';
+import { writeFile } from 'node:fs/promises';
 
-const path = require('node:path');
+import { join } from 'node:path';
 
 let currentCwd = process.cwd();
 
@@ -13,23 +13,23 @@ let currentCwd = process.cwd();
  *
  * @param {string} newCwd
  */
-const setCwd = (newCwd) => {
+export const setCwd = (newCwd) => {
   if (newCwd) {
     currentCwd = newCwd;
   }
 };
 
-const cwd = () => currentCwd;
+export const cwd = () => currentCwd;
 
 /**
  * @param {string} filePath
  */
-const getPathFromCwd = (filePath) => path.join(currentCwd, filePath);
+export const getPathFromCwd = (filePath) => join(currentCwd, filePath);
 
 /**
  * @param {string} modulePath
  */
-const requireFromCwd = (modulePath) =>
+export const requireFromCwd = (modulePath) =>
   require(require.resolve(modulePath, { paths: [cwd()] }));
 
 /**
@@ -42,19 +42,15 @@ const requireFromCwd = (modulePath) =>
  * @param {string | Record<string, unknown>} content
  * @param {{ banner?: boolean }} [options]
  */
-const writeFileToCWD = async (fileName, content, { banner = true } = {}) => {
+export const writeFileToCWD = async (
+  fileName,
+  content,
+  { banner = true } = {},
+) => {
   const outPath = getPathFromCwd(fileName);
   const str =
     typeof content === 'string' ? content : JSON.stringify(content, null, 2);
   const contentStr = banner ? prependWithManagedConfigBanner(str) : str;
 
   await writeFile(outPath, contentStr);
-};
-
-module.exports = {
-  cwd,
-  setCwd,
-  getPathFromCwd,
-  requireFromCwd,
-  writeFileToCWD,
 };

@@ -1,7 +1,7 @@
 // @ts-check
-const chalk = require('chalk');
-const wrap = require('wrap-ansi');
-const identString = require('indent-string');
+import { blue, red, yellow, bold } from 'chalk';
+import wrap from 'wrap-ansi';
+import identString from 'indent-string';
 
 /**
  * @param {'info' | 'error' | 'warning'} type
@@ -13,15 +13,15 @@ const banner = (type, heading, messages = []) => {
 
   switch (type) {
     case 'info': {
-      highlight = chalk.blue;
+      highlight = blue;
       break;
     }
     case 'error': {
-      highlight = chalk.red;
+      highlight = red;
       break;
     }
     case 'warning': {
-      highlight = chalk.yellow;
+      highlight = yellow;
       break;
     }
     default: {
@@ -45,7 +45,7 @@ const banner = (type, heading, messages = []) => {
   console.log(`
 ${border}
 
-${renderContent(chalk.bold(highlight(heading)))}
+${renderContent(bold(highlight(heading)))}
 
 ${renderContent(messages.join('\n\n'))}
 
@@ -53,4 +53,4 @@ ${border}
   `);
 };
 
-module.exports = banner;
+export default banner;

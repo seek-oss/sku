@@ -1,8 +1,8 @@
 // @ts-check
-const { getRunCommand, getExecuteCommand } = require('./packageManager');
+import { getRunCommand, getExecuteCommand } from './packageManager';
 
-const chalk = require('chalk');
-const { requireFromCwd } = require('./cwd');
+import { blue, bold } from 'chalk';
+import { requireFromCwd } from './cwd';
 
 /**
  * @param {string} scriptContents
@@ -49,14 +49,8 @@ const getSuggestedScript = (scriptName, options = { sudo: false }) => {
  * @param {string} scriptName
  * @param {Options | undefined} [options]
  */
-const suggestScript = (scriptName, options) => {
+export const suggestScript = (scriptName, options) => {
   const suggestedScript = getSuggestedScript(scriptName, options);
 
-  console.log(
-    chalk.blue(`To fix this issue, run '${chalk.bold(suggestedScript)}'`),
-  );
-};
-
-module.exports = {
-  suggestScript,
+  console.log(blue(`To fix this issue, run '${bold(suggestedScript)}'`));
 };

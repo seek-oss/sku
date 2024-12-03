@@ -1,14 +1,15 @@
-const { getWhyCommand, isPnpm } = require('./packageManager');
+import { getWhyCommand, isPnpm } from './packageManager';
 
-const { readFile } = require('node:fs/promises');
-const { fdir: Fdir } = require('fdir');
-const semver = require('semver');
-const chalk = require('chalk');
+import { readFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+import { fdir as Fdir } from 'fdir';
+import semver from 'semver';
+import chalk from 'chalk';
 
-const banner = require('./banner');
-const track = require('../telemetry');
-const { getPathFromCwd } = require('../lib/cwd');
-const { paths } = require('../context');
+import banner from './banner';
+import { count } from '../telemetry';
+import { getPathFromCwd } from '../lib/cwd';
+import { paths } from '../context';
 
 /**
  * @param {unknown[]} list
@@ -20,7 +21,7 @@ const asyncMap = (list, fn) => {
 
 const singletonPackages = ['@vanilla-extract/css'];
 
-module.exports = async () => {
+const validatePeerDeps = async () => {
   if (isPnpm) {
     // pnpm doesn't nest dependencies in the same way as yarn or npm, so the method used below won't
     // work for detecting duplicate packages
@@ -58,7 +59,9 @@ module.exports = async () => {
         messages.push(
           resultsForPackage
             .map((depLocation) => {
-              const { version } = require(getPathFromCwd(depLocation));
+              const { version } = JSON.parse(
+                readFileSync(getPathFromCwd(depLocation), 'utf8'),
+              );
 
               return chalk`${depLocation.replace(
                 '/package.json',
@@ -72,7 +75,7 @@ module.exports = async () => {
           chalk`Try running "{blue.bold ${getWhyCommand()}} {bold ${packageName}}" to diagnose the issue`,
         );
 
-        track.count('duplicate_compile_package', {
+        count('duplicate_compile_package', {
           compile_package: packageName,
         });
         banner('error', 'Error: Duplicate packages detected', messages);
@@ -106,7 +109,7 @@ module.exports = async () => {
         const dep = compilePackages.get(peerName);
 
         if (dep && !semver.satisfies(dep.version, peerVersionRange)) {
-          track.count('peer_dep_version_mismatch', {
+          count('peer_dep_version_mismatch', {
             compile_package: packageName,
           });
 
@@ -130,3 +133,5 @@ module.exports = async () => {
     console.error(e);
   }
 };
+
+export default validatePeerDeps;

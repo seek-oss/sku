@@ -1,16 +1,17 @@
 // @ts-check
 
-const assert = require('node:assert');
-const { readFile, writeFile } = require('node:fs/promises');
-const t = require('@babel/types');
-const { parseModule, builders, generateCode } = require('magicast');
-const { getConfigFromVariableDeclaration } = require('magicast/helpers');
+import assert from 'node:assert';
+import { readFile, writeFile } from 'node:fs/promises';
+import t from '@babel/types';
+import { parseModule, builders, generateCode } from 'magicast';
+import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 
-const debug = require('debug');
+import debug from 'debug';
+
+import prettier from 'prettier';
+import prettierConfig from '../config/prettier/prettierConfig.js';
+
 const log = debug('sku:update-sku-config');
-
-const prettier = require('prettier');
-const prettierConfig = require('../config/prettier/prettierConfig.js');
 
 class SkuConfigUpdater {
   /** @typedef {import("sku").SkuConfig} SkuConfig */
@@ -181,4 +182,4 @@ class SkuConfigUpdater {
   }
 }
 
-module.exports = { SkuConfigUpdater };
+export { SkuConfigUpdater };

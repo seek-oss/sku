@@ -1,17 +1,17 @@
 // @ts-check
-const { rm } = require('node:fs/promises');
-const { includeIgnoreFile } = require('@eslint/compat');
+import { rm } from 'node:fs/promises';
+import { includeIgnoreFile } from '@eslint/compat';
 
-const { createEslintIgnoresConfig } = require('../config/eslint/ignores.js');
+import { createEslintIgnoresConfig } from '../config/eslint/ignores.js';
 
-const { getPathFromCwd } = require('./cwd.js');
-const exists = require('./exists.js');
-const { SkuConfigUpdater } = require('./SkuConfigUpdater.js');
+import { getPathFromCwd } from './cwd.js';
+import exists from './exists.js';
+import { SkuConfigUpdater } from './SkuConfigUpdater.js';
 
 const oldEslintConfigPath = getPathFromCwd('.eslintrc');
 const eslintIgnorePath = getPathFromCwd('.eslintignore');
 
-const shouldMigrateOldEslintConfig = async () => {
+export const shouldMigrateOldEslintConfig = async () => {
   const [oldEslintConfigExists, eslintIgnoreExists] = await Promise.all([
     exists(oldEslintConfigPath),
     exists(eslintIgnorePath),
@@ -25,7 +25,7 @@ const shouldMigrateOldEslintConfig = async () => {
   };
 };
 
-const cleanUpOldEslintFiles = async () => {
+export const cleanUpOldEslintFiles = async () => {
   await rm(oldEslintConfigPath, { force: true });
   await rm(eslintIgnorePath, { force: true });
 };
@@ -64,7 +64,7 @@ const isCustomIgnoreEntry =
  *
  * @returns {string[]}}
  */
-const migrateEslintignore = ({
+export const migrateEslintignore = ({
   eslintIgnorePath: _eslintIgnorePath = getPathFromCwd('.eslintignore'),
   hasLanguagesConfig,
   target,
@@ -87,15 +87,11 @@ const migrateEslintignore = ({
  * @param {string} options.skuConfigPath - Path to the sku config file
  * @param {string[]} options.eslintIgnore - Array of paths to ignore
  */
-const addEslintIgnoreToSkuConfig = async ({ skuConfigPath, eslintIgnore }) => {
+export const addEslintIgnoreToSkuConfig = async ({
+  skuConfigPath,
+  eslintIgnore,
+}) => {
   const updater = await SkuConfigUpdater.fromFile(skuConfigPath);
   updater.upsertConfig({ property: 'eslintIgnore', value: eslintIgnore });
   await updater.commitConfig();
-};
-
-module.exports = {
-  shouldMigrateOldEslintConfig,
-  cleanUpOldEslintFiles,
-  migrateEslintignore,
-  addEslintIgnoreToSkuConfig,
 };

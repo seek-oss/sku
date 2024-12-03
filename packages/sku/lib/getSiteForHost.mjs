@@ -1,5 +1,5 @@
 // @ts-check
-const { sites } = require('../context');
+import { sites } from '../context/index.js';
 
 /**
  * @param {string} hostname
@@ -19,4 +19,4 @@ const getSiteForHost = (hostname, defaultSite) => {
   return defaultSite ? defaultSite : sites[0].name;
 };
 
-module.exports = getSiteForHost;
+export default getSiteForHost;

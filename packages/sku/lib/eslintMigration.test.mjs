@@ -1,10 +1,10 @@
 // @ts-check
-const {
+import {
   migrateEslintignore,
   addEslintIgnoreToSkuConfig,
-} = require('./eslintMigration');
-const { createFixture } = require('fs-fixture');
-const { default: dedent } = require('dedent');
+} from './eslintMigration.mjs';
+import { createFixture } from 'fs-fixture';
+import { default as dedent } from 'dedent';
 
 describe('eslintMigration', () => {
   describe('migrateEslintignore', () => {

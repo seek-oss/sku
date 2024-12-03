@@ -1,5 +1,5 @@
 // @ts-check
-const { access } = require('node:fs/promises');
+import { access } from 'node:fs/promises';
 
 /**
  * Convenience wrapper for fs.access that returns `true` if the access check was successful and `false` otherwise
@@ -16,4 +16,4 @@ const exists = async (path) => {
   }
 };
 
-module.exports = exists;
+export default exists;

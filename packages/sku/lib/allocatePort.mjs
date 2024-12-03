@@ -1,7 +1,9 @@
 // @ts-check
 import { yellow, bold } from 'chalk';
 import getPort from 'get-port';
-const debug = require('debug')('sku:allocatePort');
+import _debug from 'debug';
+
+const debug = _debug('sku:allocatePort');
 
 /**
  * @param {{ port?: number, host?: string }} options

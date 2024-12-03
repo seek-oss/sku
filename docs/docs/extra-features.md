@@ -3,7 +3,16 @@
 ## Images
 
 The following images types are supported in sku:
-`bmp`, `gif`, `jpeg`, `png` and `svg`.
+`bmp`, `gif`, `jpeg`, `png`, `svg`, `webp` and `avif`.
+
+> Browser support for `webp` and `avif` varies. To ensure compatability across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
+>
+> ```html
+> <picture>
+>   <source srcset="image.webp" type="image/webp" />
+>   <img src="image.png" />
+> </picture>
+> ```
 
 If you want to use a currently unsupported format feel free to submit a PR or contact #sku-support.
 

@@ -1,18 +1,19 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const chalk = require('chalk');
-const { register } = require('esbuild-register/dist/node');
-const { getPathFromCwd } = require('../lib/cwd');
-const defaultSkuConfig = require('./defaultSkuConfig');
-const defaultClientEntry = require('./defaultClientEntry');
-const validateConfig = require('./validateConfig');
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { red, bold } from 'chalk';
+import { register } from 'esbuild-register/dist/node';
+import { getPathFromCwd } from '../lib/cwd';
+import defaultSkuConfig from './defaultSkuConfig';
+import defaultClientEntry from './defaultClientEntry';
+import validateConfig from './validateConfig';
 
-const defaultCompilePackages = require('./defaultCompilePackages');
-const isCompilePackage = require('../lib/isCompilePackage');
-const targets = require('../config/targets.json');
-const { getConfigPath } = require('./configPath.js');
+import defaultCompilePackages from './defaultCompilePackages';
+import isCompilePackage from '../lib/isCompilePackage';
+import { esbuildNodeTarget } from '../config/targets.json' with { type: 'json' };
+import { getConfigPath } from './configPath.js';
+import { createRequire } from 'node:module';
 
-/** @typedef {import("../").SkuConfig} SkuConfig */
+/** @typedef {import("../sku-types.d.ts").SkuConfig} SkuConfig */
 
 /** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
 const getSkuConfig = () => {
@@ -24,9 +25,9 @@ const getSkuConfig = () => {
 
   if (customSkuConfig) {
     appSkuConfigPath = getPathFromCwd(customSkuConfig);
-  } else if (fs.existsSync(tsPath)) {
+  } else if (existsSync(tsPath)) {
     appSkuConfigPath = tsPath;
-  } else if (fs.existsSync(jsPath)) {
+  } else if (existsSync(jsPath)) {
     appSkuConfigPath = jsPath;
   } else {
     return {
@@ -35,8 +36,9 @@ const getSkuConfig = () => {
     };
   }
 
+  const require = createRequire(import.meta.url);
   // Target sku's minimum supported node version
-  const { unregister } = register({ target: targets.esbuildNodeTarget });
+  const { unregister } = register({ target: esbuildNodeTarget });
 
   const newConfig = require(appSkuConfigPath);
 
@@ -60,8 +62,8 @@ validateConfig(skuConfig);
 
 if (isCompilePackage && skuConfig.rootResolution) {
   console.log(
-    chalk.red(
-      `Error: "${chalk.bold(
+    red(
+      `Error: "${bold(
         'rootResolution',
       )}" is not safe for compile packages as consuming apps can't resolve them.`,
     ),
@@ -75,12 +77,12 @@ const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
 const isBuildScript = firstArg === 'build' || firstArg === 'build-ssr';
 
 /**
- * @typedef {import('../').SkuRouteObject} SkuRouteObject
+ * @typedef {import('../sku-types.d.ts').SkuRouteObject} SkuRouteObject
  * @typedef {SkuRouteObject & { siteIndex?: number }} NormalizedSkuRoute
  */
 
 /**
- * @param {import('../').SkuRoute} route
+ * @param {import('../sku-types.d.ts').SkuRoute} route
  * @returns {NormalizedSkuRoute}
  */
 const normalizeRoute = (route) =>
@@ -109,8 +111,7 @@ const normalizedLanguages = skuConfig.languages
     )
   : null;
 
-const startTransformPath = ({ site = '', route = '' }) =>
-  path.join(site, route);
+const startTransformPath = ({ site = '', route = '' }) => join(site, route);
 
 const transformOutputPath = isStartScript
   ? startTransformPath
@@ -144,9 +145,8 @@ const devServerMiddleware =
   skuConfig.devServerMiddleware &&
   getPathFromCwd(skuConfig.devServerMiddleware);
 
-const useDevServerMiddleware = devServerMiddleware
-  ? fs.existsSync(devServerMiddleware)
-  : false;
+const useDevServerMiddleware = Boolean(devServerMiddleware) ||
+  existsSync(devServerMiddleware);
 
 if (devServerMiddleware && !useDevServerMiddleware) {
   throw new Error(
@@ -173,7 +173,7 @@ const paths = {
   setupTests: getSetupTests(skuConfig.setupTests),
 };
 
-module.exports = {
+export default {
   paths,
   locales: skuConfig.locales,
   hosts: skuConfig.hosts,

@@ -2,18 +2,13 @@
 /** @type {string | undefined} */
 let configPath;
 
-const getConfigPath = () => {
+export const getConfigPath = () => {
   return configPath;
 };
 
 /**
  * @param {string | undefined} path
  */
-const setConfigPath = (path) => {
+export const setConfigPath = (path) => {
   configPath = path;
-};
-
-module.exports = {
-  getConfigPath,
-  setConfigPath,
 };

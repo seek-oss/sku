@@ -2,18 +2,13 @@
 /** @type {string | undefined} */
 let packageManager;
 
-const getPackageManager = () => {
+export const getPackageManager = () => {
   return packageManager;
 };
 
 /**
  * @param {string | undefined} pm
  */
-const setPackageManager = (pm) => {
+export const setPackageManager = (pm) => {
   packageManager = pm;
-};
-
-module.exports = {
-  getPackageManager,
-  setPackageManager,
 };

@@ -1,11 +1,13 @@
-const { posix: path } = require('node:path');
-const chalk = require('chalk');
-const { fdir: Fdir } = require('fdir');
+import { posix as path } from 'node:path';
+import { red } from 'chalk';
+import { fdir as Fdir } from 'fdir';
 
-const toPosixPath = require('../lib/toPosixPath');
+import toPosixPath from '../lib/toPosixPath';
 
-const { rootDir, isPnpm } = require('../lib/packageManager');
-const debug = require('debug')('sku:compilePackages');
+import { rootDir, isPnpm } from '../lib/packageManager';
+import _debug from 'debug';
+
+const debug = _debug('sku:compilePackages');
 
 /** @type {string[]} */
 let detectedCompilePackages = [];
@@ -62,7 +64,7 @@ if (rootDir) {
       .map(({ packageName }) => packageName);
   } catch (e) {
     console.log(
-      chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
+      red`Warning: Failed to detect compile packages. Contact #sku-support.`,
     );
     console.error(e);
   }
@@ -70,7 +72,7 @@ if (rootDir) {
 
 debug(detectedCompilePackages);
 
-module.exports = [
+export default [
   'sku',
   'braid-design-system',
   ...new Set(detectedCompilePackages),

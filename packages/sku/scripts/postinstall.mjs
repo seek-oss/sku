@@ -1,9 +1,11 @@
 #!/usr/bin/env node
-const fs = require('node:fs');
-const { setCwd, getPathFromCwd, cwd } = require('../lib/cwd');
-const debug = require('debug');
-const banner = require('../lib/banner');
-const chalk = require('chalk');
+// @ts-check
+import { readFile } from 'node:fs/promises';
+import { setCwd, getPathFromCwd, cwd } from '../lib/cwd.js';
+import debug from 'debug';
+import banner from '../lib/banner.js';
+import { bold } from 'chalk';
+import exists from '../lib/exists.js';
 
 const log = debug('sku:postinstall');
 
@@ -11,23 +13,27 @@ const log = debug('sku:postinstall');
 // in this case INIT_CWD should be set
 // see: https://docs.npmjs.com/cli/run-script
 // must be run first
-setCwd(process.env.INIT_CWD);
+const initCwd = process.env.INIT_CWD;
+if (initCwd) {
+  setCwd(initCwd);
+}
 
 log('postinstall', `changed cwd to ${cwd()}`);
 
 const packageJson = getPathFromCwd('./package.json');
-const packageJsonExists = fs.existsSync(packageJson);
+const packageJsonExists = await exists(packageJson);
 
 // Don't run configure if CWD is not a project (e.g. npx)
 if (packageJsonExists) {
   log('postinstall', 'packageJsonExists');
+  const packageJsonContents = await readFile(packageJson, 'utf-8');
   const {
     name: packageName,
     dependencies,
     devDependencies,
     skuSkipPostInstall = false,
     skuSkipPostinstall = false,
-  } = require(packageJson);
+  } = JSON.parse(packageJsonContents);
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSkuDep = Boolean(dependencies?.sku);
@@ -42,12 +48,10 @@ if (packageJsonExists) {
 
   if (hasSkuDep) {
     banner('warning', 'sku dependency detected', [
-      `${chalk.bold('sku')} is present as a ${chalk.bold(
-        'dependency',
-      )} in ${chalk.bold(packageJson)}.`,
-      `${chalk.bold('sku')} should be installed in ${chalk.bold(
-        'devDependencies',
+      `${bold('sku')} is present as a ${bold('dependency')} in ${bold(
+        packageJson,
       )}.`,
+      `${bold('sku')} should be installed in ${bold('devDependencies')}.`,
     ]);
   }
 

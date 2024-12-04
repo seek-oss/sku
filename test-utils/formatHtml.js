@@ -1,5 +1,5 @@
-const diffableHtml = require('diffable-html');
+// @ts-check
+import diffableHtml from 'diffable-html';
 
-const formatHtml = (html) => diffableHtml(html).trim();
-
-module.exports = { formatHtml };
+/** @param {string} html */
+export const formatHtml = (html) => diffableHtml(html).trim();

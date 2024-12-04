@@ -1,8 +1,15 @@
-const { formatHtml } = require('./formatHtml');
+// @ts-check
+import { formatHtml } from './formatHtml.js';
 
 const htmlSnapshotSerializer = {
+  /**
+   * @param {string} html
+   * @param {(s: unknown) => string} serializer
+   */
   print: (html, serializer) => {
+    /** @type {unknown[]} */
     const scripts = [];
+    /** @type {unknown[]} */
     const styles = [];
 
     const extractedHtml = formatHtml(html).replace(
@@ -28,9 +35,10 @@ const htmlSnapshotSerializer = {
       `SOURCE HTML: ${formatHtml(extractedHtml)}`,
     ].join('\n');
   },
+  /** @param {string} value */
   test: (value) => {
     return typeof value === 'string' && value.startsWith('<!DOCTYPE html>');
   },
 };
 
-module.exports = htmlSnapshotSerializer;
+export default htmlSnapshotSerializer;

@@ -6,7 +6,7 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config';
+import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(

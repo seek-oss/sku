@@ -10,7 +10,7 @@ import {
   getTextContentFromFrameOrPage,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 import skuConfig from '../fixtures/styling/sku.config.ts';
 
 const appDir = path.dirname(

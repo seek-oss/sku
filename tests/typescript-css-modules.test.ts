@@ -8,10 +8,10 @@ import {
   getAppSnapshot,
   startAssetServer,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config';
-import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config';
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
 const appDir = path.dirname(

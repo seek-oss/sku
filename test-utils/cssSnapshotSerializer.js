@@ -1,11 +1,14 @@
-const prettier = require('prettier');
-const css = require('css');
+// @ts-check
+import { format } from 'prettier';
+import { parse } from 'css';
 
 const cssSnapshotSerializer = {
-  print: (value) => prettier.format(value, { parser: 'css' }),
+  /** @param {string} value */
+  print: (value) => format(value, { parser: 'css' }),
+  /** @param {string} value */
   test: (value) => {
     try {
-      css.parse(value);
+      parse(value);
     } catch {
       return false;
     }
@@ -13,4 +16,4 @@ const cssSnapshotSerializer = {
   },
 };
 
-module.exports = cssSnapshotSerializer;
+export default cssSnapshotSerializer;

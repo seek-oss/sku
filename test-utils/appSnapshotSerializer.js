@@ -1,13 +1,18 @@
-const diff = require('git-diff');
-const { formatHtml } = require('./formatHtml');
+// @ts-check
+import diff from 'git-diff';
+import { formatHtml } from './formatHtml.js';
 
 const appSnapshotSerializer = {
+  /**
+   * @param {{sourceHtml: string, clientRenderContent: string}} html
+   * @param {(s: unknown) => string} serializer
+   */
   print: ({ sourceHtml, clientRenderContent }, serializer) => {
     const formattedSourceHtml = formatHtml(sourceHtml);
     const formattedClientHtml = formatHtml(clientRenderContent);
 
     const htmlDiff = diff(formattedSourceHtml, formattedClientHtml, {
-      colors: false,
+      color: false,
       noHeaders: true,
     });
 
@@ -19,10 +24,11 @@ const appSnapshotSerializer = {
     return snapshotItems.join('\n');
   },
 
+  /** @param {unknown} val */
   test: (val) =>
     val &&
     val.hasOwnProperty('clientRenderContent') &&
     val.hasOwnProperty('sourceHtml'),
 };
 
-module.exports = appSnapshotSerializer;
+export default appSnapshotSerializer;

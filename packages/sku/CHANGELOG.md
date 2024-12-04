@@ -1,5 +1,13 @@
 # sku
 
+## 13.4.0
+
+### Minor Changes
+
+- Add WebP and AVIF image format support to sku ([#1119](https://github.com/seek-oss/sku/pull/1119))
+
+  Support for `webp` and `avif` image formats has been added. Note that browser support for these formats may vary. To ensure compatibility across browsers, consumers are advised to use the `<picture>` element with fallback formats.
+
 ## 13.3.0
 
 ### Minor Changes

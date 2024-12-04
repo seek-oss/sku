@@ -1,12 +1,16 @@
-const path = require('node:path');
-const {
+import path from 'node:path';
+import {
   dirContentsToObject,
   getAppSnapshot,
   waitForUrls,
   runSkuScriptInDir,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const skuConfig = require('@sku-fixtures/braid-design-system/sku.config.js');
+import skuConfig from '@sku-fixtures/braid-design-system/sku.config.js';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/braid-design-system/sku.config.js'),

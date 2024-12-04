@@ -1,16 +1,19 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
+import path from 'node:path';
+import fs from 'node:fs/promises';
 
-const {
+import {
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
   startAssetServer,
-} = require('@sku-private/test-utils');
-const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
+} from '@sku-private/test-utils';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-const skuBuildConfig = require('@sku-fixtures/ssr-hello-world/sku-build.config.js');
-const skuStartConfig = require('@sku-fixtures/ssr-hello-world/sku-start.config.js');
+import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.js';
+import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.js';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.js'),

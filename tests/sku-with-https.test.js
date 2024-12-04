@@ -1,15 +1,20 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const {
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import {
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const {
+import {
   port,
   serverPort,
-} = require('@sku-fixtures/sku-with-https/sku-server.config.js');
+} from '@sku-fixtures/sku-with-https/sku-server.config.js';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-with-https/sku.config.js'),
 );

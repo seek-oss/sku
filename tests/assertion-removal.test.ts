@@ -5,10 +5,14 @@ import {
   runSkuScriptInDir,
   startAssetServer,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn';
+import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-import skuConfig from '@sku-fixtures/assertion-removal/sku.config';
+import skuConfig from '@sku-fixtures/assertion-removal/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/assertion-removal/sku.config.ts'),

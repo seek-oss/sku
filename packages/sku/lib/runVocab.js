@@ -1,6 +1,6 @@
 // @ts-check
 import { compile } from '@vocab/core';
-import { getVocabConfig } from '../config/vocab/vocab';
+import { getVocabConfig } from '../config/vocab/vocab.js';
 
 export const runVocabCompile = async () => {
   const vocabConfig = getVocabConfig();

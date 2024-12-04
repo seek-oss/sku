@@ -1,13 +1,15 @@
-import { HtmlRenderPlugin } from "html-render-webpack-plugin";
-import { default as memoize } from "nano-memoize";
-import debug from "debug";
+import { HtmlRenderPlugin } from 'html-render-webpack-plugin';
+import nanoMemoize from 'nano-memoize';
+import debug from 'debug';
+
+const { default: memoize } = nanoMemoize;
 
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} from "../../../lib/language-utils";
+} from '../../../lib/language-utils.js';
 
-const log = debug("sku:html-render-plugin");
+const log = debug('sku:html-render-plugin');
 
 import {
   isStartScript,
@@ -17,7 +19,7 @@ import {
   sites,
   transformOutputPath,
   publicPath,
-} from "../../../context/index.js";
+} from '../../../context/index.js';
 
 const getClientStats = (webpackStats) => webpackStats.toJson();
 
@@ -40,7 +42,7 @@ const getStartRoutes = () => {
   const forcedSites = sites.length > 0 ? sites : [undefined];
 
   for (const route of routes) {
-    const routeIsForSpecificSite = typeof route.siteIndex === "number";
+    const routeIsForSpecificSite = typeof route.siteIndex === 'number';
     const languages = getValidLanguagesForRoute(route);
     for (const language of languages) {
       if (routeIsForSpecificSite) {
@@ -51,7 +53,7 @@ const getStartRoutes = () => {
         });
       } else {
         allRouteCombinations.push(
-          ...forcedSites.map((site) => ({ site, route, language }))
+          ...forcedSites.map((site) => ({ site, route, language })),
         );
       }
     }
@@ -74,9 +76,9 @@ const getBuildRoutes = () => {
 
   for (const environment of forcedEnvs) {
     for (const route of routes) {
-      const routeIsForSpecificSite = typeof route.siteIndex === "number";
+      const routeIsForSpecificSite = typeof route.siteIndex === 'number';
       for (const language of getValidLanguagesForRoute(route)) {
-        log("Using Route", { route, language });
+        log('Using Route', { route, language });
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({
             route,
@@ -91,7 +93,7 @@ const getBuildRoutes = () => {
               route,
               environment,
               language,
-            }))
+            })),
           );
         }
       }
@@ -105,7 +107,7 @@ const getBuildRoutes = () => {
       routeName: route.name,
       language,
       route: getRouteWithLanguage(route.route, language),
-    })
+    }),
   );
 };
 

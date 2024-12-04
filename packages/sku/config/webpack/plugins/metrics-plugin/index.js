@@ -24,7 +24,7 @@ class MetricsPlugin {
         log('Initial "%s" build complete: %s', this.target, {
           toString: () => prettyMilliseconds(performance.now()),
         });
-        provider.rtiming('start.webpack.initial', performance.now(), {
+        provider.timing('start.webpack.initial', performance.now(), {
           target: this.target,
           type: this.type,
         });

@@ -1,4 +1,4 @@
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import defaultSupportedBrowsers from 'browserslist-config-seek';
 import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
 import {
@@ -13,7 +13,7 @@ import {
 } from '../../utils/index.js';
 import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
 import validateOptions from './validateOptions.js';
-import targets from '../../../targets.json';
+import targets from '../../../targets.json' with { type: 'json' };
 
 class SkuWebpackPlugin {
   constructor(options = {}) {

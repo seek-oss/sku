@@ -1,6 +1,6 @@
 import prettyMilliseconds from 'pretty-ms';
 import chalk from 'chalk';
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import { performance } from 'node:perf_hooks';
 
 import {

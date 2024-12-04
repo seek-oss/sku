@@ -24,11 +24,11 @@ import {
   externalizeNodeModules,
 } from '../../context/index.js';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
-import SkuWebpackPlugin from './plugins/sku-webpack-plugin';
-import MetricsPlugin from './plugins/metrics-plugin';
+import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
+import MetricsPlugin from './plugins/metrics-plugin/index.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
-import utils from './utils/index.js';
+import { JAVASCRIPT, resolvePackage } from './utils/index.js';
 import { cwd } from '../../lib/cwd.js';
 
 import { getVocabConfig } from '../vocab/vocab.js';
@@ -36,7 +36,7 @@ import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '../targets.json';
+import targets from '../targets.json' with { type: 'json' };
 
 const renderEntry = fileURLToPath(import.meta.resolve('../../entry/render'));
 const libraryRenderEntry = fileURLToPath(
@@ -164,7 +164,7 @@ const makeWebpackConfig = ({
             ? []
             : [
                 {
-                  test: utils.JAVASCRIPT,
+                  test: JAVASCRIPT,
                   exclude: [
                     ...internalInclude,
                     /**
@@ -176,7 +176,7 @@ const makeWebpackConfig = ({
                       'react-dom',
                       'react',
                     ].map((packageName) => {
-                      const resolvedPackage = utils.resolvePackage(packageName);
+                      const resolvedPackage = resolvePackage(packageName);
 
                       return `${resolvedPackage}${path.sep}`;
                     }),

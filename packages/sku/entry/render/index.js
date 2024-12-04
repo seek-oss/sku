@@ -1,11 +1,11 @@
 import debug from 'debug';
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import serializeJavascript from 'serialize-javascript';
-import makeExtractor from '../makeExtractor';
-import clientContextKey from '../clientContextKey';
-import createCSPHandler from '../csp';
+import makeExtractor from '../makeExtractor.js';
+import clientContextKey from '../clientContextKey.js';
+import createCSPHandler from '../csp.js';
 
-import { renderToStringAsync } from './render-to-string';
+import { renderToStringAsync } from './render-to-string.js';
 
 import render from '__sku_alias__renderEntry';
 

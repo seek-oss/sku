@@ -21,7 +21,7 @@ export const configureProject = async () => {
     return;
   }
 
-  const configure = await import('../configure');
+  const configure = (await import('../configure.js')).default;
   await configure();
 };
 

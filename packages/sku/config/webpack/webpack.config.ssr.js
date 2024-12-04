@@ -1,7 +1,7 @@
 import { dirname, join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
 import findUp from 'find-up';
@@ -9,12 +9,12 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
-import SkuWebpackPlugin from './plugins/sku-webpack-plugin';
-import MetricsPlugin from './plugins/metrics-plugin';
+import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
+import MetricsPlugin from './plugins/metrics-plugin/index.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
-import utils from './utils/index.js';
+import { JAVASCRIPT, resolvePackage } from './utils/index.js';
 import { cwd } from '../../lib/cwd.js';
 import {
   paths,
@@ -35,7 +35,7 @@ import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '../targets.json';
+import targets from '../targets.json' with { type: 'json' };
 
 const require = createRequire(import.meta.url);
 
@@ -127,7 +127,7 @@ const makeWebpackConfig = ({
             ? []
             : [
                 {
-                  test: utils.JAVASCRIPT,
+                  test: JAVASCRIPT,
                   exclude: [
                     ...internalInclude,
                     /**
@@ -139,7 +139,7 @@ const makeWebpackConfig = ({
                       'react-dom',
                       'react',
                     ].map((packageName) => {
-                      const resolvedPackage = utils.resolvePackage(packageName);
+                      const resolvedPackage = resolvePackage(packageName);
 
                       return `${resolvedPackage}${sep}`;
                     }),
@@ -221,7 +221,6 @@ const makeWebpackConfig = ({
     {
       name: 'server',
       mode: webpackMode,
-      target: `browserslist:${targets.browserslistNodeTarget}`,
       entry: serverEntry,
       externals: [
         {

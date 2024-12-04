@@ -1,10 +1,11 @@
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import path from 'node:path';
 import express, { static as expressStatic } from 'express';
-import makeExtractor from '../makeExtractor';
-import createCSPHandler from '../csp';
+import makeExtractor from '../makeExtractor.js';
+import createCSPHandler from '../csp.js';
 import serverExports from '__sku_alias__serverEntry';
 import webpackStats from '__sku_alias__webpackStats';
+import { createRequire } from 'node:module';
 
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;
@@ -16,6 +17,8 @@ const { middleware, onStart, renderCallback } = serverOptions;
 const app = express();
 
 const env = process.env.NODE_ENV || 'development';
+
+const require = createRequire(import.meta.url);
 
 if (env === 'development') {
   if (__SKU_DEV_MIDDLEWARE_ENABLED__) {

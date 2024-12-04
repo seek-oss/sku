@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import http from 'node:http';
 import https from 'node:https';
-import { app, onStart } from './server';
+import { app, onStart } from './server.js';
 import { parseArgs } from 'node:util';
 
 const { values } = parseArgs({
@@ -54,7 +54,7 @@ if (import.meta.webpackHot) {
 
   let currentApp = app;
 
-  import.meta.webpackHot.accept('./server', () => {
+  import.meta.webpackHot.accept('./server.js', () => {
     server.removeListener('request', currentApp);
     server.on('request', app);
     currentApp = app;

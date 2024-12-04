@@ -1,9 +1,11 @@
 import { join, dirname } from 'node:path';
 import nodeFs from 'node:fs';
-import { default as memoize } from 'nano-memoize';
+import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
 import { cwd } from '../../../lib/cwd.js';
 import { createRequire } from 'node:module';
+
+const { default: memoize } = nanoMemoize;
 
 const log = debug('sku:resolvePackage');
 

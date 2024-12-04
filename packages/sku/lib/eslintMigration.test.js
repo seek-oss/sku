@@ -4,7 +4,7 @@ import {
   addEslintIgnoreToSkuConfig,
 } from './eslintMigration.js';
 import { createFixture } from 'fs-fixture';
-import { default as dedent } from 'dedent';
+import dedent from 'dedent';
 
 describe('eslintMigration', () => {
   describe('migrateEslintignore', () => {

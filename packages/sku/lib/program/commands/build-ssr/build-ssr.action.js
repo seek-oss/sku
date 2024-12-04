@@ -1,6 +1,6 @@
 import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import chalk from 'chalk';
 import { run } from '../../../runWebpack.js';
 import {

@@ -2,9 +2,9 @@
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
 
-import { loadableReady } from '../../@loadable/component';
+import { loadableReady } from '../../@loadable/component/index.ts';
 
-import clientContextKey from '../clientContextKey';
+import clientContextKey from '../clientContextKey.js';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {

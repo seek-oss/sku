@@ -1,6 +1,6 @@
 import path from 'node:path';
 import WebpackDevServer from 'webpack-dev-server';
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';

@@ -1,6 +1,9 @@
-const { cwd } = require('../../lib/cwd');
+import { cwd } from '../../lib/cwd.js';
+import { createRequire } from 'node:module';
 
-module.exports = ({
+const require = createRequire(import.meta.url);
+
+export default ({
   target,
   lang = 'js',
   browserslist,

@@ -83,11 +83,11 @@ export default async () => {
     await cleanUpOldEslintFiles();
   }
 
-  const eslintConfigFilename = 'eslint.config.js';
+  const eslintConfigFilename = 'eslint.config.mjs';
   const eslintCacheFilename = '.eslintcache';
-  const eslintConfig = dedent`const { eslintConfigSku } = require('sku/config/eslint');
+  const eslintConfig = dedent`import { eslintConfigSku } from 'sku/config/eslint';
 
-                              module.exports = eslintConfigSku;`;
+                              export default eslintConfigSku;`;
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
 
   gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);

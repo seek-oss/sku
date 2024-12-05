@@ -2,8 +2,8 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-start/
-eslint.config.js
+dist-build/
+eslint.config.mjs
 pnpm-lock.yaml
 report/
 tsconfig.json

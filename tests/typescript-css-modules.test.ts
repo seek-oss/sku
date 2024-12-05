@@ -14,6 +14,10 @@ import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
 import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/typescript-css-modules/sku.config.ts'),
 );

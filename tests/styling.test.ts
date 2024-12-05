@@ -13,6 +13,10 @@ import type { ChildProcess } from 'node:child_process';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 import skuConfig from '../fixtures/styling/sku.config.ts';
 
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );

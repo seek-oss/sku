@@ -6,7 +6,7 @@ translations.ts
 .prettierrc
 coverage/
 dist/
-eslint.config.js
+eslint.config.mjs
 pnpm-lock.yaml
 report/
 tsconfig.json

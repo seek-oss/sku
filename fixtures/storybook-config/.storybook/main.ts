@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import { babel, webpackFinal } from 'sku/config/storybook';
+import getStorybookConfig from 'sku/config/storybook';
 
 export default {
   stories: ['../src/**/*.stories.tsx', '../src/**/*.mdx'],
@@ -15,6 +15,14 @@ export default {
     disableTelemetry: true,
   },
   addons: ['@storybook/addon-webpack5-compiler-babel', '@storybook/addon-docs'],
-  babel,
-  webpackFinal,
+  babel: async (options: any) => {
+    const { babel } = await getStorybookConfig();
+
+    return babel(options);
+  },
+  webpackFinal: async (...args) => {
+    const { webpackFinal } = await getStorybookConfig();
+
+    return webpackFinal(...args);
+  },
 } satisfies StorybookConfig;

@@ -186,7 +186,7 @@ export class SkuConfigUpdater {
    */
   async commitConfig() {
     const newContents = this.#module.generate().code;
-    const formattedNewContents = prettier.format(newContents, {
+    const formattedNewContents = await prettier.format(newContents, {
       parser: 'typescript',
       ...prettierConfig,
     });

@@ -2,8 +2,8 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-start/
-eslint.config.js
+dist-build/
+eslint.config.mjs
 report/
 tsconfig.json
 # end managed by sku

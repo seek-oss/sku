@@ -1,3 +1,4 @@
+import { expect, jest, test } from '@jest/globals';
 import path from 'node:path';
 import {
   dirContentsToObject,

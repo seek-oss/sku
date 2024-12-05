@@ -8,6 +8,11 @@ import {
 
 import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),

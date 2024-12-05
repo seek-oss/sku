@@ -1,5 +1,5 @@
 // @ts-check
-import { formatHtml } from './formatHtml.js';
+const { formatHtml } = require("./formatHtml.cjs");
 
 const htmlSnapshotSerializer = {
   /**
@@ -15,9 +15,9 @@ const htmlSnapshotSerializer = {
     const extractedHtml = formatHtml(html).replace(
       /(href|src)="(.*\.(?:js|css))"/g,
       (_match, key, url) => {
-        const [type, assets] = url.endsWith('.js')
-          ? ['scripts', scripts]
-          : ['styles', styles];
+        const [type, assets] = url.endsWith(".js")
+          ? ["scripts", scripts]
+          : ["styles", styles];
 
         let assetIndex = assets.indexOf(url);
 
@@ -26,19 +26,19 @@ const htmlSnapshotSerializer = {
         }
 
         return `${key}="${type}[${assetIndex}]"`;
-      },
+      }
     );
 
     return [
       `SCRIPTS: ${serializer(scripts)}`,
       `CSS: ${serializer(styles)}`,
       `SOURCE HTML: ${formatHtml(extractedHtml)}`,
-    ].join('\n');
+    ].join("\n");
   },
   /** @param {string} value */
   test: (value) => {
-    return typeof value === 'string' && value.startsWith('<!DOCTYPE html>');
+    return typeof value === "string" && value.startsWith("<!DOCTYPE html>");
   },
 };
 
-export default htmlSnapshotSerializer;
+module.exports = htmlSnapshotSerializer;

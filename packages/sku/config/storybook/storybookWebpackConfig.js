@@ -1,6 +1,6 @@
 import { paths } from '../../context/index.js';
 import { merge as webpackMerge } from 'webpack-merge';
-import makeWebpackConfig from '../webpack/webpack.config';
+import makeWebpackConfig from '../webpack/webpack.config.js';
 import { resolvePackage } from '../webpack/utils/resolvePackage.js';
 
 const hot = process.env.SKU_HOT !== 'false';

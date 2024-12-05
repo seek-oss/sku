@@ -11,7 +11,7 @@ import {
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
-import skuConfigImport from '../fixtures/styling/sku.config.ts';
+import skuConfig from '../fixtures/styling/sku.config.mts';
 
 import { createRequire } from 'node:module';
 
@@ -21,8 +21,6 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
-
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuConfig.port, 'sku config has port');
 const devServerUrl = `http://localhost:${skuConfig.port}`;

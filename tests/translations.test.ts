@@ -6,7 +6,7 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfigImport from '@sku-fixtures/translations/sku.config.ts';
+import skuConfig from '@sku-fixtures/translations/sku.config.mts';
 import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 
@@ -15,8 +15,6 @@ const require = createRequire(import.meta.url);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku.config.ts'),
 );
-
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuConfig.port, 'sku config has port');
 const baseUrl = `http://localhost:${skuConfig.port}`;

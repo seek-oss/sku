@@ -10,8 +10,8 @@ import {
 } from '@sku-private/test-utils';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
-import skuSsrConfigImport from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.mts';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.mts';
 import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
@@ -23,11 +23,6 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'dist');
 const distSsrDir = path.resolve(appDir, 'dist-ssr');
-
-// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
-const skuSsrConfig =
-  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;

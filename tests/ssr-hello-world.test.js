@@ -9,14 +9,15 @@ import {
 } from '@sku-private/test-utils';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.js';
-import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.js';
+import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.mjs';
+import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.mjs';
+
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.js'),
+  require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.mjs'),
 );
 
 const getTestConfig = (skuConfig) => ({
@@ -31,7 +32,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start-ssr', appDir, [
-        '--config=sku-start.config.js',
+        '--config=sku-start.config.mjs',
       ]);
       await waitForUrls(backendUrl);
     });
@@ -66,7 +67,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-build.config.js',
+        '--config=sku-build.config.mjs',
       ]);
 
       closeAssetServer = await startAssetServer(4000, targetDirectory);

@@ -93,7 +93,7 @@ export const startAction = async ({
 
   let devServerMiddleware = null;
   if (useDevServerMiddleware) {
-    devServerMiddleware = await import(paths.devServerMiddleware);
+    devServerMiddleware = (await import(paths.devServerMiddleware)).default;
   }
 
   /**

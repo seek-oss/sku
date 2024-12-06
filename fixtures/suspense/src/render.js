@@ -1,6 +1,6 @@
 import React from 'react';
 import html from 'dedent';
-import { StaticRouter 'react-router-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
 import {
   dehydrate,
   QueryClient,

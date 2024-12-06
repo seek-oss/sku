@@ -1,9 +1,11 @@
 import debug from 'debug';
-import { run } from 'jest';
+import jest from 'jest';
 
 import isCI from '../../../isCI.js';
 import { runVocabCompile } from '../../../runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
+
+const { run } = jest;
 
 const log = debug('sku:jest');
 

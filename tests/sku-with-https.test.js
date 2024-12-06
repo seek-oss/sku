@@ -6,18 +6,23 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import {
-  port,
-  serverPort,
-} from '@sku-fixtures/sku-with-https/sku-server.config.js';
+import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
 
 import { createRequire } from 'node:module';
 
+const { port, serverPort } = skuServerConfig;
+
 const require = createRequire(import.meta.url);
 
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/sku-with-https/sku.config.js'),
-);
+let appDir;
+
+try {
+  appDir = path.dirname(
+    require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
+  );
+} catch (error) {
+  console.error(error);
+}
 
 describe('sku-with-https', () => {
   describe('start', () => {
@@ -25,7 +30,9 @@ describe('sku-with-https', () => {
     let process;
 
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
+      process = await runSkuScriptInDir('start', appDir, [
+        '--config=sku.config.mjs',
+      ]);
       await waitForUrls(url, `${url}/test-middleware`);
     });
 
@@ -49,7 +56,7 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       process = await runSkuScriptInDir('start-ssr', appDir, [
-        '--config=sku-server.config.js',
+        '--config=sku-server.config.mjs',
       ]);
       await waitForUrls(url, `${url}/test-middleware`);
     });
@@ -69,8 +76,10 @@ describe('sku-with-https', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
+      process = await runSkuScriptInDir('serve', appDir, [
+        '--config=sku.config.mjs',
+      ]);
       await waitForUrls(url, `${url}/test-middleware`);
     });
 

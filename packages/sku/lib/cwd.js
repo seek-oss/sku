@@ -3,8 +3,11 @@ import { prependWithManagedConfigBanner } from './managedConfigBanner.js';
 import { writeFile } from 'node:fs/promises';
 
 import { join } from 'node:path';
+import { createRequire } from 'node:module';
 
 let currentCwd = process.cwd();
+
+const require = createRequire(import.meta.url);
 
 /**
  * If you are setting cwd in your script

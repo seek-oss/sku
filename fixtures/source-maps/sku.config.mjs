@@ -1,6 +1,6 @@
-const { makeStableHashes } = require('@sku-private/test-utils');
+import { makeStableHashes } from '@sku-private/test-utils';
 
-module.exports = {
+export default {
   publicPath: '/static/source-maps',
   port: 8303,
   target: 'dist',

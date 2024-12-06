@@ -6,14 +6,14 @@ import {
   runSkuScriptInDir,
 } from '@sku-private/test-utils';
 
-import skuConfig from '@sku-fixtures/braid-design-system/sku.config.js';
+import skuConfig from '@sku-fixtures/braid-design-system/sku.config.mjs';
 
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/braid-design-system/sku.config.js'),
+  require.resolve('@sku-fixtures/braid-design-system/sku.config.mjs'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
@@ -28,7 +28,9 @@ describe('braid-design-system', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      server = await runSkuScriptInDir('start', appDir, [
+        '--config=sku.config.mjs',
+      ]);
       await waitForUrls(getLocalUrl('seekAnz'));
     }, 230000);
 
@@ -51,8 +53,10 @@ describe('braid-design-system', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
+      process = await runSkuScriptInDir('serve', appDir, [
+        '--config=sku.config.mjs',
+      ]);
       await waitForUrls(getLocalUrl('seekAnz'));
     }, 230000);
 
@@ -77,7 +81,9 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async () => {
-    const { child } = await runSkuScriptInDir('test', appDir);
+    const { child } = await runSkuScriptInDir('test', appDir, [
+      '--config=sku.config.mjs',
+    ]);
     expect(child.exitCode).toEqual(0);
   });
 });

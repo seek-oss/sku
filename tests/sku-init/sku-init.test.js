@@ -1,8 +1,12 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const { promisify } = require('node:util');
-const exec = promisify(require('node:child_process').exec);
-const { runSkuScriptInDir } = require('@sku-private/test-utils');
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import { promisify } from 'node:util';
+import { exec as childProcessExec } from 'node:child_process';
+import { runSkuScriptInDir } from '@sku-private/test-utils';
+
+const exec = promisify(childProcessExec);
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const fixtureDirectory = __dirname;
 const projectName = 'new-project';
@@ -17,7 +21,6 @@ describe('sku init', () => {
     async () => {
       await fs.rm(projectDirectory, { recursive: true, force: true });
 
-      const projectName = 'new-project';
       await fs.rm(path.join(fixtureDirectory, projectName), {
         recursive: true,
         force: true,
@@ -64,7 +67,7 @@ describe('sku init', () => {
     'sku.config.ts',
     '.gitignore',
     '.prettierignore',
-    'eslint.config.js',
+    'eslint.config.mjs',
     'README.md',
     'src/App/NextSteps.tsx',
   ])('should create %s', async (file) => {
@@ -84,10 +87,12 @@ describe('sku init', () => {
 function replaceDependencyVersions(packageJson) {
   const newPackageJson = structuredClone(packageJson);
 
+  // eslint-disable-next-line guard-for-in
   for (const dep in newPackageJson.dependencies) {
     newPackageJson.dependencies[dep] = 'VERSION_IGNORED';
   }
 
+  // eslint-disable-next-line guard-for-in
   for (const dep in newPackageJson.devDependencies) {
     newPackageJson.devDependencies[dep] = 'VERSION_IGNORED';
   }

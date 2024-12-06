@@ -91,7 +91,8 @@ export const serveAction = async ({
   const app = express();
 
   if (useDevServerMiddleware) {
-    const devServerMiddleware = await import(paths.devServerMiddleware);
+    const devServerMiddleware = (await import(paths.devServerMiddleware))
+      .default;
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {
       devServerMiddleware(app);
     }

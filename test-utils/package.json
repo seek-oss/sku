@@ -19,5 +19,9 @@
     "wait-on": "^8.0.1",
     "webpack-stats-plugin": "^1.0.3"
   },
-  "skuSkipValidatePeerDeps": true
+  "skuSkipValidatePeerDeps": true,
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@prettier/sync": "^0.5.2"
+  }
 }

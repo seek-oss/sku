@@ -1,9 +1,9 @@
-const {
+import {
   ListExternalsWebpackPlugin,
   makeStableHashes,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-module.exports = {
+export default {
   sites: [
     { name: 'seekAnz', host: 'dev.seek.com.au' },
     { name: 'jobStreet', host: 'dev.jobstreet.com' },

@@ -1,23 +1,20 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import chalk from 'chalk';
-import { register } from 'esbuild-register/dist/node';
+import { createJiti } from 'jiti';
 import { getPathFromCwd } from '../lib/cwd.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
 
 import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
-import targets from '../config/targets.json' with { type: 'json' };
 import { getConfigPath } from './configPath.js';
-import { createRequire } from 'node:module';
 
-const { esbuildNodeTarget } = targets;
-
+const jiti = createJiti(import.meta.url);
 /** @typedef {import("../sku-types.d.ts").SkuConfig} SkuConfig */
 
 /** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
-const getSkuConfig = () => {
+const getSkuConfig = async () => {
   let appSkuConfigPath;
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
@@ -37,13 +34,7 @@ const getSkuConfig = () => {
     };
   }
 
-  const require = createRequire(import.meta.url);
-  // Target sku's minimum supported node version
-  const { unregister } = register({ target: esbuildNodeTarget });
-
-  const newConfig = require(appSkuConfigPath);
-
-  unregister();
+  const newConfig = await jiti.import(appSkuConfigPath);
 
   return {
     appSkuConfig: newConfig.default || newConfig,
@@ -51,7 +42,7 @@ const getSkuConfig = () => {
   };
 };
 
-const { appSkuConfig, appSkuConfigPath } = getSkuConfig();
+const { appSkuConfig, appSkuConfigPath } = await getSkuConfig();
 
 /** @type {SkuConfig} */
 const skuConfig = {

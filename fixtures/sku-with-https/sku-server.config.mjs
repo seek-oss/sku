@@ -1,9 +1,9 @@
-const {
+import {
   ListExternalsWebpackPlugin,
   makeStableHashes,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-module.exports = {
+export default {
   clientEntry: 'src/serverClient.js',
   port: 9843,
   serverPort: 9894,

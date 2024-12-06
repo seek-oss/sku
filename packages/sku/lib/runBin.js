@@ -2,7 +2,6 @@
 import path from 'node:path';
 import spawn from 'cross-spawn';
 import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 
@@ -17,7 +16,7 @@ const resolveBin = (packageName, binName) => {
       ? packageJson.bin
       : packageJson.bin[binName || packageName];
 
-  return fileURLToPath(import.meta.resolve(path.join(packageName, binPath)));
+  return require.resolve(path.join(packageName, binPath));
 };
 
 /** @typedef {import('child_process').SpawnOptions} SpawnOptions */

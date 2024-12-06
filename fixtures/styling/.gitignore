@@ -5,7 +5,7 @@ storybook-static/
 .prettierrc
 coverage/
 dist/
-eslint.config.js
+eslint.config.mjs
 report/
 tsconfig.json
 # end managed by sku

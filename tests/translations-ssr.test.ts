@@ -6,7 +6,7 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.mts';
+import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 
@@ -17,6 +17,10 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),
 );
+
+// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
+const skuSsrConfig =
+  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({

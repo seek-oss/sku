@@ -1,3 +1,4 @@
+// @ts-ignore TS1479
 import type { SkuConfig } from 'sku';
 
 export default {

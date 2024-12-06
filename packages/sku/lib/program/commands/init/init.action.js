@@ -23,6 +23,8 @@ import debug from 'debug';
 
 const trace = debug('sku:init');
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 const removeLeadingUnderscoreFromFileName = (filePath) => {
   const basename = path.basename(filePath);
 

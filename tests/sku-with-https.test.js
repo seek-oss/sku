@@ -14,15 +14,9 @@ const { port, serverPort } = skuServerConfig;
 
 const require = createRequire(import.meta.url);
 
-let appDir;
-
-try {
-  appDir = path.dirname(
-    require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
-  );
-} catch (error) {
-  console.error(error);
-}
+const appDir = path.dirname(
+  require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
+);
 
 describe('sku-with-https', () => {
   describe('start', () => {

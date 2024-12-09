@@ -105,8 +105,6 @@
     "didyoumean2": "^7.0.2",
     "ensure-gitignore": "^1.1.2",
     "env-ci": "^11.1.0",
-    "esbuild": ">0.19.7 <1",
-    "esbuild-register": "^3.3.3",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
     "eslint-config-seek": "^14.2.0",

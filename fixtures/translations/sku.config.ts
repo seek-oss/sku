@@ -1,7 +1,6 @@
 // @ts-ignore no types
 import { makeStableHashes } from '@sku-private/test-utils';
-// @ts-ignore TS1479
-import type { SkuConfig } from 'sku';
+import type { SkuConfig } from 'sku' with { 'resolution-mode': 'import' };
 
 export default {
   clientEntry: 'src/client.tsx',

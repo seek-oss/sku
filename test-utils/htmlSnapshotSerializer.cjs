@@ -1,5 +1,5 @@
 // @ts-check
-import { formatHtml } from './formatHtml.js';
+const { formatHtml } = require('./formatHtml.cjs');
 
 const htmlSnapshotSerializer = {
   /**
@@ -41,4 +41,4 @@ const htmlSnapshotSerializer = {
   },
 };
 
-export default htmlSnapshotSerializer;
+module.exports = htmlSnapshotSerializer;

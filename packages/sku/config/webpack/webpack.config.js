@@ -38,12 +38,10 @@ import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
 import targets from '../targets.json' with { type: 'json' };
 
-const renderEntry = fileURLToPath(import.meta.resolve('../../entry/render'));
-const libraryRenderEntry = fileURLToPath(
-  import.meta.resolve('../../entry/libraryRender'),
-);
-
 const require = createRequire(import.meta.url);
+
+const renderEntry = require.resolve('../../entry/render');
+const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -66,9 +64,7 @@ const makeWebpackConfig = ({
     return require.resolve(polyfill, { paths: [cwd()] });
   });
 
-  const skuClientEntry = fileURLToPath(
-    import.meta.resolve('../../entry/client/index.js'),
-  );
+  const skuClientEntry = require.resolve('../../entry/client/index.js');
 
   const createEntry = (entry) => [...resolvedPolyfills, entry];
 
@@ -183,18 +179,14 @@ const makeWebpackConfig = ({
                   ],
                   use: [
                     {
-                      loader: fileURLToPath(
-                        import.meta.resolve('babel-loader'),
-                      ),
+                      loader: require.resolve('babel-loader'),
                       options: {
                         babelrc: false,
                         cacheDirectory: true,
                         cacheCompression: false,
                         presets: [
                           [
-                            fileURLToPath(
-                              import.meta.resolve('@babel/preset-env'),
-                            ),
+                            require.resolve('@babel/preset-env'),
                             { modules: false, targets: supportedBrowsers },
                           ],
                         ],

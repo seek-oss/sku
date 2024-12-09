@@ -1,6 +1,6 @@
 // @ts-ignore no types
 import { makeStableHashes } from '@sku-private/test-utils';
-import type { SkuConfig } from 'sku';
+import type { SkuConfig } from 'sku' with { 'resolution-mode': 'import' };
 
 export default {
   srcPaths: ['lib', 'another-folder'],

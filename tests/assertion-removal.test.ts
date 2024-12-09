@@ -7,7 +7,7 @@ import {
 } from '@sku-private/test-utils';
 import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
-import skuConfig from '@sku-fixtures/assertion-removal/sku.config.ts';
+import skuConfigImport from '@sku-fixtures/assertion-removal/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
@@ -18,6 +18,8 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/assertion-removal/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
+// TODO: fix this casting.
+const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuConfig.serverPort, 'skuConfig has serverPort');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;

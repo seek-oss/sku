@@ -1,6 +1,6 @@
 // @ts-check
-import diff from 'git-diff';
-import { formatHtml } from './formatHtml.js';
+const diff = require('git-diff');
+const { formatHtml } = require('./formatHtml.cjs');
 
 const appSnapshotSerializer = {
   /**
@@ -31,4 +31,4 @@ const appSnapshotSerializer = {
     val.hasOwnProperty('sourceHtml'),
 };
 
-export default appSnapshotSerializer;
+module.exports = appSnapshotSerializer;

@@ -1,6 +1,6 @@
 // @ts-check
-import { format } from 'prettier';
-import { parse } from 'css';
+const { format } = require('@prettier/sync');
+const { parse } = require('css');
 
 const cssSnapshotSerializer = {
   /** @param {string} value */
@@ -16,4 +16,4 @@ const cssSnapshotSerializer = {
   },
 };
 
-export default cssSnapshotSerializer;
+module.exports = cssSnapshotSerializer;

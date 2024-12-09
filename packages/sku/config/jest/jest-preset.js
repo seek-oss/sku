@@ -8,7 +8,6 @@ const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 
-
 /** @type {import('jest').Config} */
 export default jestDecorator({
   testEnvironment: 'jsdom',

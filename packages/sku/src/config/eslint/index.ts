@@ -1,5 +1,7 @@
 // @ts-expect-error `eslint-config-seek` has no types yet
 import eslintConfigSeek from 'eslint-config-seek';
+import type { Linter } from 'eslint';
+
 import { importOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
 import {
@@ -23,4 +25,5 @@ const _eslintConfigSku = [
     : []),
 ];
 
-export const eslintConfigSku = eslintDecorator?.(_eslintConfigSku);
+export const eslintConfigSku: Linter.Config[] | undefined =
+  eslintDecorator?.(_eslintConfigSku);

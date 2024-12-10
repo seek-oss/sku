@@ -11,7 +11,8 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true
   },
   "include": ["./src/**/*"],
   "exclude": ["./src/@loadable/component/index.ts"]

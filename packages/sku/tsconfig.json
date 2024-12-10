@@ -12,10 +12,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "./src/@loadable/component/index.ts"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["./src/@loadable/component/index.ts"]
 }

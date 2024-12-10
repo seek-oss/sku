@@ -1,4 +1,5 @@
 {
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
     "target": "ESNext",

@@ -5,7 +5,7 @@ import {
   waitForUrls,
   startAssetServer,
 } from '@sku-private/test-utils';
-import { runBin, startBin } from '../packages/sku/lib/runBin.js';
+import { runBin, startBin } from '../packages/sku/dist/lib/runBin.js';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);

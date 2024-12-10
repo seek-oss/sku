@@ -3,7 +3,7 @@ import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 
-import prettierConfig from '../packages/sku/config/prettier/prettierConfig.js';
+import prettierConfig from '../packages/sku/dist/config/prettier/prettierConfig.js';
 
 import { createRequire } from 'node:module';
 

@@ -9,7 +9,7 @@ import chalk from 'chalk';
 import banner from './banner.js';
 import provider from '../telemetry/index.js';
 
-import { getPathFromCwd } from '../lib/cwd.js';
+import { getPathFromCwd } from './cwd.js';
 import { paths } from '../context/index.js';
 
 /**

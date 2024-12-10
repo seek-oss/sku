@@ -7,8 +7,8 @@ import {
   runSkuScriptInDir,
   getAppSnapshot,
   startAssetServer,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
 import skuSsrConfigImport from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
@@ -45,7 +45,7 @@ describe('typescript-css-modules', () => {
     });
 
     afterAll(async () => {
-      await process.kill();
+      process.kill();
       // Clean up dist dir to prevent pollution of linted files in lint test
       await rm(distDir, { recursive: true, force: true });
     });
@@ -78,7 +78,7 @@ describe('typescript-css-modules', () => {
     });
 
     afterAll(async () => {
-      await server.kill();
+      server.kill();
       closeAssetServer();
       // Clean up dist-ssr dir to prevent pollution of linted files in lint test
       await rm(distSsrDir, { recursive: true, force: true });
@@ -105,7 +105,7 @@ describe('typescript-css-modules', () => {
     });
 
     afterAll(async () => {
-      await server.kill();
+      server.kill();
     });
 
     it('should start a development server', async () => {

@@ -57,7 +57,7 @@ app.get('*', (...args) => {
 
   const { SkuProvider, extractor, flushHeadTags, getHeadTags, getBodyTags } =
     makeExtractor(webpackStats, publicPath, cspHandler);
-  /** @type {import("../../sku-types.d.ts").RenderCallbackParams['addLanguageChunk']} */
+  /** @type {import("../../../sku-types.d.ts").RenderCallbackParams['addLanguageChunk']} */
   const addLanguageChunk = (language) =>
     extractor.addChunk(getChunkName(language));
 

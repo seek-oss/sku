@@ -2,7 +2,7 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-build/
+dist-start/
 eslint.config.mjs
 pnpm-lock.yaml
 report/

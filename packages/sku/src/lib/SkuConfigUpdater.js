@@ -27,7 +27,7 @@ import prettier from 'prettier';
 import prettierConfig from '../config/prettier/prettierConfig.js';
 
 export class SkuConfigUpdater {
-  /** @typedef {import("sku").SkuConfig} SkuConfig */
+  /** @typedef {import("../../sku-types.d.ts").SkuConfig} SkuConfig */
   /** @typedef {import("magicast").ProxifiedObject<SkuConfig>} ProxifiedSkuConfig */
   /** @typedef {import("@babel/types").ObjectExpression} ObjectExpression */
   /** @typedef {import("@babel/types").VariableDeclarator} VariableDeclarator */

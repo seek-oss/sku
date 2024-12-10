@@ -3,7 +3,7 @@ import os from 'node:os';
 import { requireFromCwd } from '../lib/cwd.js';
 import isCI from '../lib/isCI.js';
 import provider from './provider.js';
-import skuPackageJson from '../package.json' with { type: 'json' };
+import skuPackageJson from '../../package.json' with { type: 'json' };
 import debug from 'debug';
 
 import { languages } from '../context/index.js';

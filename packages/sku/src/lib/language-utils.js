@@ -1,18 +1,18 @@
 import debug from 'debug';
 
-import routeMatcher from '../lib/routeMatcher.js';
+import routeMatcher from './routeMatcher.js';
 import { languages, sites } from '../context/index.js';
 
 const log = debug('sku:language-middleware');
 
 /**
- * @param {import("../context").NormalizedSkuRoute} route
+ * @param {import("../context/index.js").NormalizedSkuRoute} route
  */
 export function getValidLanguagesForRoute(route) {
   const routeIsForSpecificSite = typeof route.siteIndex === 'number';
 
   /**
-   * @typedef {import("../").SkuLanguage} SkuLanguage
+   * @typedef {import("../../sku-types.js").SkuLanguage} SkuLanguage
    * @type {(SkuLanguage | null)[]} SkuLanguage
    */
   let languagesToRender = [null];
@@ -49,7 +49,7 @@ function getLanguageParamFromUrl(pathname, route) {
 
 /**
  * @param {import("express").Request} req
- * @param {import("../").SkuRouteObject} route
+ * @param {import("../../sku-types.js").SkuRouteObject} route
  * @returns {(string | null)}
  */
 export function getLanguageFromRoute(req, route) {

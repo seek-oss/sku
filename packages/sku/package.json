@@ -4,22 +4,22 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
-    "sku": "bin/sku.js"
+    "sku": "/dist/bin/sku.js"
   },
   "exports": {
     ".": "./sku-types.d.ts",
-    "./jest-preset": "./config/jest/jest-preset.js",
+    "./jest-preset": "./dist/config/jest/jest-preset.js",
     "./config/eslint": {
-      "default": "./config/eslint/index.js",
-      "types": "./config/eslint/index.d.ts"
+      "default": "./dist/config/eslint/index.js",
+      "types": "./dist/config/eslint/index.d.ts"
     },
     "./config/storybook": {
-      "default": "./config/storybook/index.cjs",
-      "types": "./config/storybook/index.d.ts"
+      "default": "./dist/config/storybook/index.cjs",
+      "types": "./dist/config/storybook/index.d.ts"
     },
-    "./@loadable/component": "./@loadable/component/index.ts",
+    "./@loadable/component": "./src/@loadable/component/index.js",
     "./@storybook/react": "./@storybook/react/index.ts",
-    "./webpack-plugin": "./config/webpack/plugins/sku-webpack-plugin/index.js",
+    "./webpack-plugin": "./dist/config/webpack/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"
   },
   "engines": {
@@ -27,7 +27,8 @@
   },
   "type": "module",
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js"
+    "postinstall": "node ./scripts/postinstall.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -142,7 +143,6 @@
     "serve-handler": "^6.1.3",
     "svgo-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.1.4",
-    "tree-kill": "^1.2.1",
     "typescript": "~5.6.0",
     "webpack": "^5.52.0",
     "webpack-bundle-analyzer": "^4.6.1",

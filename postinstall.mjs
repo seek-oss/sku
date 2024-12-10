@@ -32,6 +32,6 @@ const targets = {
 };
 
 await writeFile(
-  './packages/sku/config/targets.json',
+  './packages/sku/src/config/targets.json',
   await format(JSON.stringify(targets, null, 2), { parser: 'json' }),
 );

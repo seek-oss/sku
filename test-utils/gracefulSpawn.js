@@ -5,7 +5,7 @@ import onDeath from 'death';
 
 const treeKillAsync = promisify(treeKill);
 
-export default (...args) => {
+export const gracefulSpawn = (...args) => {
   const childProcess = spawn(...args);
 
   childProcess.kill = async (signal) => {

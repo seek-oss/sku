@@ -7,8 +7,8 @@ import {
   runSkuScriptInDir,
   getAppSnapshot,
   startAssetServer,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
 import skuSsrConfigImport from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';

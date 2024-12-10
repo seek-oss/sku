@@ -11,7 +11,7 @@ import isCompilePackage from '../lib/isCompilePackage.js';
 import { getConfigPath } from './configPath.js';
 
 const jiti = createJiti(import.meta.url);
-/** @typedef {import("../sku-types.d.ts").SkuConfig} SkuConfig */
+/** @typedef {import("../../sku-types.d.ts").SkuConfig} SkuConfig */
 
 /** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
 const getSkuConfig = async () => {
@@ -69,12 +69,12 @@ export const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
 export const isBuildScript = firstArg === 'build' || firstArg === 'build-ssr';
 
 /**
- * @typedef {import('../sku-types.d.ts').SkuRouteObject} SkuRouteObject
+ * @typedef {import('../../sku-types.d.ts').SkuRouteObject} SkuRouteObject
  * @typedef {SkuRouteObject & { siteIndex?: number }} NormalizedSkuRoute
  */
 
 /**
- * @param {import('../sku-types.d.ts').SkuRoute} route
+ * @param {import('../../sku-types.d.ts').SkuRoute} route
  * @returns {NormalizedSkuRoute}
  */
 const normalizeRoute = (route) =>

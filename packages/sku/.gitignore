@@ -1,2 +1,2 @@
-config/storybook/build/preview.*
-config/storybook/start/preview.*
+src/config/storybook/build/preview.*
+src/config/storybook/start/preview.*

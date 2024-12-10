@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // @ts-check
 import { readFile } from 'node:fs/promises';
-import { setCwd, getPathFromCwd, cwd } from '../lib/cwd.js';
+import { setCwd, getPathFromCwd, cwd } from '../src/lib/cwd.js';
 import debug from 'debug';
-import banner from '../lib/banner.js';
+import banner from '../src/lib/banner.js';
 import chalk from 'chalk';
-import exists from '../lib/exists.js';
+import exists from '../src/lib/exists.js';
 
 const log = debug('sku:postinstall');
 
@@ -59,7 +59,7 @@ if (packageJsonExists) {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    configure = (await import('../lib/configure.js')).default;
+    configure = (await import('../src/lib/configure.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',

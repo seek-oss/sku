@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "target": "ESNext",
+    "outDir": "./dist",
+    "allowJs": true,
+    "module": "Node16",
+    "baseUrl": "./",
+    "moduleResolution": "Node16",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./src/@loadable/component/index.ts"
+  ]
+}

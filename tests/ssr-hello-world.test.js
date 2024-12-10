@@ -6,8 +6,8 @@ import {
   waitForUrls,
   getAppSnapshot,
   startAssetServer,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.mjs';
 import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.mjs';
@@ -19,6 +19,8 @@ const require = createRequire(import.meta.url);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.mjs'),
 );
+
+console.log('skuStartConfig', skuStartConfig);
 
 const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,

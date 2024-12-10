@@ -1,5 +1,3 @@
-// @ts-check
-// @ts-expect-error `eslint-config-seek` has no types yet
 import eslintConfigSeek from 'eslint-config-seek';
 import { importOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';

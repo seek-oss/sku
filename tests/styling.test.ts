@@ -8,9 +8,9 @@ import {
   getAppSnapshot,
   getStoryPage,
   getTextContentFromFrameOrPage,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 import skuConfigImport from '../fixtures/styling/sku.config.ts';
 
 import { createRequire } from 'node:module';

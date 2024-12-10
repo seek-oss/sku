@@ -60,7 +60,7 @@ export default function createCSPHandler({
     }
   };
 
-  /** @type {import("../sku-types.d.ts").RenderCallbackParams['registerScript']} */
+  /** @type {import("../../sku-types.d.ts").RenderCallbackParams['registerScript']} */
   const registerScript = (script) => {
     if (tagReturned) {
       throw new Error(

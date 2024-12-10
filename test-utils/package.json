@@ -18,7 +18,7 @@
     "node-dir": "^0.1.17",
     "prettier": "^3.4.1",
     "serve-handler": "^6.1.3",
-    "tree-kill": "^1.2.2",
+    "tree-kill": "^1.2.1",
     "wait-on": "^8.0.1",
     "webpack-stats-plugin": "^1.0.3"
   },

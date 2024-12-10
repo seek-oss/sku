@@ -958,7 +958,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.6
       tree-kill:
-        specifier: ^1.2.2
+        specifier: ^1.2.1
         version: 1.2.2
       wait-on:
         specifier: ^8.0.1

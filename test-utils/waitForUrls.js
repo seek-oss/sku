@@ -16,7 +16,7 @@ export const waitForUrls = async (...urls) => {
       timeout,
       // Log output of wait behaviour timing to allow
       //  increased debugging when service fails to start
-      log: true,
+      log: false,
       strictSSL: false,
     });
   } catch (error) {

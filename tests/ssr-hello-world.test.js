@@ -20,8 +20,6 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.mjs'),
 );
 
-console.log('skuStartConfig', skuStartConfig);
-
 const getTestConfig = (skuConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
   targetDirectory: path.join(appDir, skuConfig.target),

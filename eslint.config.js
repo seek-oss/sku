@@ -18,6 +18,7 @@ module.exports = [
       'test/test-cases/*/*',
       '!test/test-cases/*/*.test.js',
       'fixtures/*/*',
+      '**/@loadable/**/*',
     ],
   },
   ...seek,

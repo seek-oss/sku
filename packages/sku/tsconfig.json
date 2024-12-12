@@ -15,5 +15,4 @@
     "declaration": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["@loadable/**/*"]
 }

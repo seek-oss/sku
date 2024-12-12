@@ -35,7 +35,7 @@ try {
 
   const { setCwd } = await import('../dist/lib/cwd.js');
 
-  const banner = await import('../dist/lib/banner.js');
+  const banner = (await import('../dist/lib/banner.js')).default;
 
   const log = debug('sku:postinstall');
 

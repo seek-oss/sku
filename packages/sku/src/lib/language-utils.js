@@ -12,7 +12,7 @@ export function getValidLanguagesForRoute(route) {
   const routeIsForSpecificSite = typeof route.siteIndex === 'number';
 
   /**
-   * @typedef {import("../../sku-types.js").SkuLanguage} SkuLanguage
+   * @typedef {import("../../sku-types.d.ts").SkuLanguage} SkuLanguage
    * @type {(SkuLanguage | null)[]} SkuLanguage
    */
   let languagesToRender = [null];
@@ -49,7 +49,7 @@ function getLanguageParamFromUrl(pathname, route) {
 
 /**
  * @param {import("express").Request} req
- * @param {import("../../sku-types.js").SkuRouteObject} route
+ * @param {import("../../sku-types.d.ts").SkuRouteObject} route
  * @returns {(string | null)}
  */
 export function getLanguageFromRoute(req, route) {

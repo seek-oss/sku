@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "plop": "plop",
+    "install:sku": "pnpm install --filter sku",
     "postinstall": "node ./postinstall.mjs",
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",

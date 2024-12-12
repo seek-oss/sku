@@ -4,7 +4,7 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
-    "sku": "/dist/bin/sku.js"
+    "sku": "dist/bin/sku.js"
   },
   "exports": {
     ".": "./sku-types.d.ts",
@@ -17,8 +17,7 @@
       "default": "./dist/config/storybook/index.cjs",
       "types": "./dist/config/storybook/index.d.ts"
     },
-    "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./@storybook/react": "./@storybook/react/index.ts",
+    "./@loadable/component": "./@loadable/component/index.ts",
     "./webpack-plugin": "./dist/config/webpack/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"
   },

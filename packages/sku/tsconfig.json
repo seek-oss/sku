@@ -15,5 +15,5 @@
     "declaration": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["./src/@loadable/component/index.ts"]
+  "exclude": ["@loadable/**/*"]
 }

@@ -4,7 +4,7 @@ import isCompilePackage from '../lib/isCompilePackage.js';
 
 const defaultDecorator = (a) => a;
 
-/** @type {import("../../sku-types.js").SkuConfig} */
+/** @type {import("../../sku-types.d.ts").SkuConfig} */
 export default {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',

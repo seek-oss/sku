@@ -32,9 +32,9 @@ try {
   }
 
   // Suppressing eslint. These imports will work after the build steps for postinstall.
-   
+
   const { setCwd } = await import('../dist/lib/cwd.js');
-   
+
   const banner = await import('../dist/lib/banner.js');
 
   const log = debug('sku:postinstall');

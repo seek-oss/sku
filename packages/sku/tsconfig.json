@@ -1,0 +1,19 @@
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "target": "ESNext",
+    "outDir": "./dist",
+    "allowJs": true,
+    "module": "Node16",
+    "baseUrl": "./",
+    "moduleResolution": "Node16",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "**/@loadable"]
+}

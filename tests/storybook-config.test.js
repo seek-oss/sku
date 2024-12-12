@@ -1,4 +1,3 @@
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 import path from 'node:path';
 import { sync as spawnSync } from 'cross-spawn';
 import {
@@ -6,6 +5,7 @@ import {
   startAssetServer,
   getStoryPage,
   getTextContentFromFrameOrPage,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
 

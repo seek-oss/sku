@@ -7,3 +7,4 @@ export { run, runSkuScriptInDir } from './process.ts';
 export { makeStableHashes } from './skuConfig.js';
 export { getStoryPage, getTextContentFromFrameOrPage } from './storybook.js';
 export { waitForUrls } from './waitForUrls.js';
+export { gracefulSpawn } from './gracefulSpawn.js';

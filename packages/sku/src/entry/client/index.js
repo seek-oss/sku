@@ -2,7 +2,7 @@
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
 
-import { loadableReady } from '../../@loadable/component/index.ts';
+import { loadableReady } from '@loadable/component';
 
 import clientContextKey from '../clientContextKey.js';
 

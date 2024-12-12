@@ -34,6 +34,7 @@ module.exports = {
     '/node_modules/',
     '<rootDir>/packages/sku/scripts/test.js',
     '<rootDir>/fixtures/.*',
+    '<rootDir>/tests/sku-init/sku-init.test.js',
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',

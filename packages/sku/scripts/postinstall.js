@@ -1,31 +1,15 @@
 #!/usr/bin/env node
 // @ts-check
 import { readFile } from 'node:fs/promises';
-import { setCwd, getPathFromCwd, cwd } from '../lib/cwd.js';
+import { join } from 'node:path';
 import debug from 'debug';
-import banner from '../lib/banner.js';
 import chalk from 'chalk';
-import exists from '../lib/exists.js';
 
-const log = debug('sku:postinstall');
+try {
+  const initCwd = process.env.INIT_CWD;
 
-// npm scripts can have an incorrect cwd
-// in this case INIT_CWD should be set
-// see: https://docs.npmjs.com/cli/run-script
-// must be run first
-const initCwd = process.env.INIT_CWD;
-if (initCwd) {
-  setCwd(initCwd);
-}
-
-log('postinstall', `changed cwd to ${cwd()}`);
-
-const packageJson = getPathFromCwd('./package.json');
-const packageJsonExists = await exists(packageJson);
-
-// Don't run configure if CWD is not a project (e.g. npx)
-if (packageJsonExists) {
-  log('postinstall', 'packageJsonExists');
+  const localCwd = initCwd || process.cwd();
+  const packageJson = join(localCwd, './package.json');
   const packageJsonContents = await readFile(packageJson, 'utf-8');
   const {
     name: packageName,
@@ -43,7 +27,24 @@ if (packageJsonExists) {
   // Don't run configure script if sku is not installed
   // Ignore projects that are opting out of sku's postinstall script
   if (packageName === 'sku' || !hasSku || skipPostInstall) {
+    console.log('sku postinstall script skipped');
     process.exit();
+  }
+
+  // Suppressing eslint. These imports will work after the build steps for postinstall.
+
+  const { setCwd } = await import('../dist/lib/cwd.js');
+
+  const banner = (await import('../dist/lib/banner.js')).default;
+
+  const log = debug('sku:postinstall');
+
+  // npm scripts can have an incorrect cwd
+  // in this case INIT_CWD should be set
+  // see: https://docs.npmjs.com/cli/run-script
+  // must be run first
+  if (initCwd) {
+    setCwd(initCwd);
   }
 
   if (hasSkuDep) {
@@ -59,7 +60,7 @@ if (packageJsonExists) {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    configure = (await import('../lib/configure.js')).default;
+    configure = (await import('../src/lib/configure.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
@@ -80,4 +81,7 @@ if (packageJsonExists) {
     console.error(error);
     throw error;
   }
+} catch {
+  console.log('package.json does not exist');
+  process.exit();
 }

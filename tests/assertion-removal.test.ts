@@ -4,8 +4,8 @@ import {
   waitForUrls,
   runSkuScriptInDir,
   startAssetServer,
+  gracefulSpawn,
 } from '@sku-private/test-utils';
-import gracefulSpawn from '../packages/sku/lib/gracefulSpawn.js';
 
 import skuConfigImport from '@sku-fixtures/assertion-removal/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';

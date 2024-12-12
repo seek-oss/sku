@@ -10,7 +10,7 @@ const getNewTags = ({ before, after }) => {
   return afterArr.filter((tag) => !beforeArr.includes(tag)).join('\n');
 };
 
-/** @typedef {import("../sku-types.d.ts").RenderCallbackParams} RenderCallbackParams */
+/** @typedef {import("../../sku-types.d.ts").RenderCallbackParams} RenderCallbackParams */
 
 export default (stats, publicPath, csp) => {
   const extractor = new ChunkExtractor({

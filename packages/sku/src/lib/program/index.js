@@ -14,7 +14,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export const program = new Command();
 
 const { name, description, version } = JSON.parse(
-  fs.readFileSync(resolve(__dirname, '../../package.json'), 'utf-8'),
+  fs.readFileSync(resolve(__dirname, '../../../package.json'), 'utf-8'),
 );
 
 program

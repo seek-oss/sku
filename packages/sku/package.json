@@ -24,6 +24,14 @@
   "engines": {
     "node": ">=20.15"
   },
+  "files": [
+    "dist",
+    "scripts",
+    "template",
+    "CHANGELOG.md",
+    "sku-types.d.ts",
+    "tsconfig.json"
+  ],
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",

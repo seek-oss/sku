@@ -17,7 +17,7 @@
       "default": "./dist/config/storybook/index.cjs",
       "types": "./dist/config/storybook/index.d.ts"
     },
-    "./@loadable/component": "./@loadable/component/index.ts",
+    "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/config/webpack/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"
   },

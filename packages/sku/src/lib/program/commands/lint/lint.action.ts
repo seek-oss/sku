@@ -6,7 +6,7 @@ import runTsc from '../../../runTsc.js';
 import { runVocabCompile } from '../../../runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
 
-export const lintAction = async (paths) => {
+export const lintAction = async (paths: string[]) => {
   await configureProject();
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 

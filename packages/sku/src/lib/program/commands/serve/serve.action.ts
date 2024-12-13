@@ -34,6 +34,10 @@ export const serveAction = async ({
   site: preferredSite,
   port: preferredPort,
   environment: environmentOption,
+}: {
+  site: string;
+  port: number;
+  environment: string;
 }) => {
   await configureProject();
   validatePeerDeps();
@@ -99,7 +103,7 @@ export const serveAction = async ({
   }
 
   app.use((request, response) => {
-    const [hostname] = request.headers.host.split(':');
+    const [hostname] = request.headers.host?.split(':') || [];
 
     const site = getSiteForHost(hostname, preferredSite) || '';
 

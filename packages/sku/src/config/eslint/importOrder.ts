@@ -2,7 +2,7 @@ import { basename } from 'node:path';
 import { paths, rootResolution } from '../../context/index.js';
 
 const internalRegex = `^(${paths.src
-  .map((srcPath) => basename(srcPath))
+  .map((srcPath: string) => basename(srcPath))
   .join('|')})/`;
 
 const rootResolutionConfig = {

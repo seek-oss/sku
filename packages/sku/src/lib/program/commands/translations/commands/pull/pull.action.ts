@@ -7,7 +7,7 @@ import {
 } from '../../helpers/translation-helpers.js';
 import { configureProject } from '../../../../../utils/configure.js';
 
-const log = (message) => console.log(chalk.cyan(message));
+const log = (message: string) => console.log(chalk.cyan(message));
 
 export const pullAction = async () => {
   await configureProject();

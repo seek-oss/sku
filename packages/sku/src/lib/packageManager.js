@@ -129,9 +129,9 @@ const resolveLogLevelArgs = (logLevel) => {
 
 /**
  * @typedef {object} GetAddCommandOptions
- * @property {'dev' | 'prod'} type
- * @property {'verbose' | 'regular' | undefined} logLevel
- * @property {boolean} exact
+ * @property {'dev' | 'prod'} [type]
+ * @property {'verbose' | 'regular' | undefined} [logLevel]
+ * @property {boolean} [exact]
  * @property {string[]} deps
  * @param {GetAddCommandOptions} options
  */

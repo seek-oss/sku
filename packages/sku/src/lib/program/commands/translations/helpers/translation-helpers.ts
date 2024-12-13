@@ -17,7 +17,11 @@ export const ensureBranch = async () => {
   return branch;
 };
 
-export const getResolvedVocabConfig = async ({ translationSubCommand }) => {
+export const getResolvedVocabConfig = async ({
+  translationSubCommand,
+}: {
+  translationSubCommand: 'push' | 'pull' | 'compile' | 'validate';
+}) => {
   const vocabConfigFromSkuConfig = getVocabConfig();
   const resolvedVocabConfig = await resolveConfig();
 

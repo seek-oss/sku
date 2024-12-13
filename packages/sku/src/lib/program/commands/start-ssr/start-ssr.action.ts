@@ -1,5 +1,5 @@
 import path from 'node:path';
-import WebpackDevServer from 'webpack-dev-server';
+import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
 import onDeath from 'death';
 import chalk from 'chalk';
@@ -29,6 +29,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import type { StatsChoices } from '../../options/stats/stats.option.js';
 
 const log = debug('sku:start-ssr');
 
@@ -39,11 +40,11 @@ const hot = process.env.SKU_HOT !== 'false';
 const pluginName = 'sku-start-ssr';
 const localhost = '0.0.0.0';
 
-const once = (fn) => {
+const once = (fn: (...args: any[]) => void) => {
   let called = false;
-  let result;
+  let result: unknown;
 
-  return (...fnArgs) => {
+  return (...fnArgs: any[]) => {
     if (!called) {
       result = fn(...fnArgs);
       called = true;
@@ -53,7 +54,11 @@ const once = (fn) => {
   };
 };
 
-export const startSsrAction = async ({ stats: statsOption }) => {
+export const startSsrAction = async ({
+  stats: statsOption,
+}: {
+  stats: StatsChoices;
+}) => {
   await configureProject();
   validatePeerDeps();
   await watchVocabCompile();
@@ -79,7 +84,7 @@ export const startSsrAction = async ({ stats: statsOption }) => {
 
   await checkHosts();
 
-  const appHosts = getAppHosts();
+  const appHosts = getAppHosts() as string | string[] | undefined;
 
   // Make sure target directory exists before starting
   await ensureTargetDirectory();
@@ -95,8 +100,8 @@ export const startSsrAction = async ({ stats: statsOption }) => {
 
   const proto = httpsDevServer ? 'https' : 'http';
 
-  const serverUrl = `${proto}://${appHosts[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `${proto}://${appHosts[0]}:${clientPort}`;
+  const serverUrl = `${proto}://${appHosts?.[0]}:${serverPort}${initialPath}`;
+  const webpackDevServerUrl = `${proto}://${appHosts?.[0]}:${clientPort}`;
 
   console.log();
   console.log(
@@ -150,10 +155,7 @@ export const startSsrAction = async ({ stats: statsOption }) => {
     serverManager.hotUpdate();
   });
 
-  /**
-   * @type import('webpack-dev-server').Configuration
-   */
-  const devServerConfig = {
+  const devServerConfig: Configuration = {
     host: localhost,
     port: clientPort,
     allowedHosts: appHosts,
@@ -162,7 +164,7 @@ export const startSsrAction = async ({ stats: statsOption }) => {
     client: {
       overlay: false,
       webSocketURL: {
-        hostname: appHosts[0],
+        hostname: appHosts?.[0],
         port: clientPort,
       },
     },

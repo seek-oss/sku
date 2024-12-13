@@ -16,6 +16,7 @@ import {
   routes,
   httpsDevServer,
   useDevServerMiddleware,
+  sites,
 } from '../../../../context/index.js';
 import getStatsConfig from '../../../../config/webpack/statsConfig.js';
 import createHtmlRenderPlugin from '../../../../config/webpack/plugins/createHtmlRenderPlugin.js';
@@ -126,16 +127,15 @@ export const startAction = async ({
       middlewares.push(((req, res, next) => {
         const matchingSiteName = getSiteForHost(req.hostname, undefined);
 
-        const matchingRoute = routes.find(({ route }) =>
-          // Comments on this? SiteIndex does not exist on the route type. I am unaware if this is irrelevant now.
-          // if (
-          //   typeof siteIndex === 'number' &&
-          //   matchingSiteName !== sites[siteIndex].name
-          // ) {
-          //   return false;
-          // }
-          routeMatcher(route)(req.path),
-        );
+        const matchingRoute = routes.find(({ route, siteIndex }) => {
+          if (
+            typeof siteIndex === 'number' &&
+            matchingSiteName !== sites[siteIndex].name
+          ) {
+            return false;
+          }
+          return routeMatcher(route)(req.path);
+        });
 
         if (!matchingRoute) {
           return next();

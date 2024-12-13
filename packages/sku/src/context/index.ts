@@ -9,7 +9,7 @@ import validateConfig from './validateConfig.js';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
 import { getConfigPath } from './configPath.js';
-import type { SkuConfig, SkuRoute } from 'sku-types.d.ts';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from 'sku-types.d.ts';
 
 const jiti = createJiti(import.meta.url);
 
@@ -76,7 +76,8 @@ const firstArg = process.argv[2];
 
 export const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
 
-const normalizeRoute = (route: SkuRoute) =>
+type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
+const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
   typeof route === 'string' ? { route } : route;
 
 const normalizedRoutes = skuConfig.routes?.map(normalizeRoute);

@@ -1,3 +1,4 @@
+// @ts-check
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -45,6 +46,19 @@ const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// TODO: HtmlRenderPlugin needs proper typing.
+
+/**
+ * @typedef {object} MakeWebpackConfigOptions
+ * @property {boolean} [isIntegration]
+ * @property {boolean} [isDevServer]
+ * @property {boolean} [metrics]
+ * @property {any} [htmlRenderPlugin]
+ * @property {boolean} [hot]
+ * @property {boolean} [isStartScript]
+ * @property {string} [stats]
+ * @param {MakeWebpackConfigOptions} options
+ */
 const makeWebpackConfig = ({
   isIntegration = false,
   isDevServer = false,
@@ -60,21 +74,34 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig();
 
-  const resolvedPolyfills = polyfills.map((polyfill) => {
-    return require.resolve(polyfill, { paths: [cwd()] });
-  });
+  const resolvedPolyfills =
+    polyfills?.map((polyfill) => {
+      return require.resolve(polyfill, { paths: [cwd()] });
+    }) || [];
 
   const skuClientEntry = require.resolve('../../entry/client/index.js');
 
+  /**
+   * @param {string} entry
+   * @returns {string[]}
+   */
   const createEntry = (entry) => [...resolvedPolyfills, entry];
 
   // Add polyfills and dev server client to all entries
   const clientEntry = isLibrary
-    ? createEntry(paths.libraryEntry)
+    ? createEntry(paths.libraryEntry || '')
     : createEntry(skuClientEntry);
 
-  const internalInclude = [path.join(__dirname, '../../entry'), ...paths.src];
+  const internalInclude = [
+    path.join(__dirname, '../../entry'),
+    ...(paths.src || []),
+  ];
 
+  /**
+   * @param {object} props
+   * @param {boolean} props.isMainChunk
+   * @returns {any|string}
+   */
   const getFileMask = ({ isMainChunk }) => {
     // Libraries should always have the same file name
     // for the main chunk unless we're building for storybook
@@ -99,6 +126,7 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
+  // @ts-ignore
   const webpackConfigs = [
     {
       name: 'client',
@@ -202,6 +230,8 @@ const makeWebpackConfig = ({
         ...(htmlRenderPlugin
           ? [
               htmlRenderPlugin.statsCollectorPlugin,
+              // Ignoring this error here. The type seems to be wrong? It does not pick up the class declaration.
+              // @ts-ignore
               new LoadablePlugin({
                 writeToDisk: false,
                 outputAsset: false,

@@ -7,12 +7,22 @@ const require = createRequire(import.meta.url);
 
 function noop() {}
 
-let provider = {
+type TagMap = Record<string, string | number | boolean>;
+
+interface TelemetryProvider {
+  count: (path: string, tagMap?: TagMap, increment?: number) => void;
+  timing: (path: string, duration: number, tagMap?: TagMap) => void;
+  close: () => Promise<void>;
+  gauge: (path: string, duration: number, tagMap?: TagMap) => void;
+  addGlobalTags: (tagMap: TagMap) => void;
+}
+
+let provider: TelemetryProvider = {
   count: noop,
   timing: noop,
   addGlobalTags: noop,
   gauge: noop,
-  close: noop,
+  close: () => Promise.resolve(),
 };
 
 try {

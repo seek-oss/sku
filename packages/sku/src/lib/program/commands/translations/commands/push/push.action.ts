@@ -7,9 +7,13 @@ import {
 } from '../../helpers/translation-helpers.js';
 import { configureProject } from '../../../../../utils/configure.js';
 
-const log = (message) => console.log(chalk.cyan(message));
+const log = (message: string) => console.log(chalk.cyan(message));
 
-export const pushAction = async ({ deleteUnusedKeys }) => {
+export const pushAction = async ({
+  deleteUnusedKeys,
+}: {
+  deleteUnusedKeys?: boolean;
+}) => {
   await configureProject();
   try {
     const vocabConfigFromSkuConfig = await getResolvedVocabConfig({

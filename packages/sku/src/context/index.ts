@@ -9,12 +9,14 @@ import validateConfig from './validateConfig.js';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
 import { getConfigPath } from './configPath.js';
+import type { SkuConfig, SkuRoute } from 'sku-types.d.ts';
 
 const jiti = createJiti(import.meta.url);
-/** @typedef {import("../../sku-types.d.ts").SkuConfig} SkuConfig */
 
-/** @returns {{ appSkuConfig: SkuConfig, appSkuConfigPath: string | null }} */
-const getSkuConfig = async () => {
+const getSkuConfig = async (): Promise<{
+  appSkuConfig: SkuConfig;
+  appSkuConfigPath: string | null;
+}> => {
   let appSkuConfigPath;
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
@@ -34,17 +36,24 @@ const getSkuConfig = async () => {
     };
   }
 
-  const newConfig = await jiti.import(appSkuConfigPath);
+  type SkuConfigImportType = SkuConfig | { default: SkuConfig };
+
+  const newConfig = await jiti.import<SkuConfigImportType>(appSkuConfigPath);
+
+  function isDefaultConfig(
+    config: SkuConfigImportType,
+  ): config is { default: SkuConfig } {
+    return (config as { default: SkuConfig }).default !== undefined;
+  }
 
   return {
-    appSkuConfig: newConfig.default || newConfig,
+    appSkuConfig: isDefaultConfig(newConfig) ? newConfig.default : newConfig,
     appSkuConfigPath,
   };
 };
 
 const { appSkuConfig, appSkuConfigPath } = await getSkuConfig();
 
-/** @type {SkuConfig} */
 const skuConfig = {
   ...defaultSkuConfig,
   ...appSkuConfig,
@@ -66,25 +75,15 @@ if (isCompilePackage && skuConfig.rootResolution) {
 const firstArg = process.argv[2];
 
 export const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
-export const isBuildScript = firstArg === 'build' || firstArg === 'build-ssr';
 
-/**
- * @typedef {import('../../sku-types.d.ts').SkuRouteObject} SkuRouteObject
- * @typedef {SkuRouteObject & { siteIndex?: number }} NormalizedSkuRoute
- */
-
-/**
- * @param {import('../../sku-types.d.ts').SkuRoute} route
- * @returns {NormalizedSkuRoute}
- */
-const normalizeRoute = (route) =>
+const normalizeRoute = (route: SkuRoute) =>
   typeof route === 'string' ? { route } : route;
 
-const normalizedRoutes = skuConfig.routes.map(normalizeRoute);
+const normalizedRoutes = skuConfig.routes?.map(normalizeRoute);
 
-skuConfig.sites.forEach((site, siteIndex) => {
+skuConfig.sites?.forEach((site, siteIndex) => {
   if (typeof site !== 'string' && site.routes) {
-    normalizedRoutes.push(
+    normalizedRoutes?.push(
       ...site.routes.map((route) => ({
         ...normalizeRoute(route),
         siteIndex,
@@ -93,8 +92,8 @@ skuConfig.sites.forEach((site, siteIndex) => {
   }
 });
 
-if (normalizedRoutes.length === 0) {
-  normalizedRoutes.push({ name: 'default', route: '/' });
+if (normalizedRoutes?.length === 0) {
+  normalizedRoutes?.push({ name: 'default', route: '/' });
 }
 
 export const normalizedLanguages = skuConfig.languages
@@ -109,7 +108,7 @@ export const transformOutputPath = isStartScript
   ? startTransformPath
   : skuConfig.transformOutputPath;
 
-const getSetupTests = (setupTests) => {
+const getSetupTests = (setupTests: string | string[]) => {
   if (!setupTests) {
     return [];
   }
@@ -122,14 +121,15 @@ const getSetupTests = (setupTests) => {
 };
 
 // normalize sites to object syntax
-export const sites = skuConfig.sites.map((site) =>
-  typeof site === 'string' ? { name: site } : site,
-);
+export const sites =
+  skuConfig.sites?.map((site) =>
+    typeof site === 'string' ? { name: site } : site,
+  ) || [];
 
 // Default initialPath to the first route
-export const initialPath = skuConfig.initialPath || normalizedRoutes[0].route;
+export const initialPath = skuConfig.initialPath || normalizedRoutes?.[0].route;
 
-export const publicPath = skuConfig.publicPath.endsWith('/')
+export const publicPath = skuConfig.publicPath?.endsWith('/')
   ? skuConfig.publicPath
   : `${skuConfig.publicPath}/`;
 
@@ -138,7 +138,7 @@ const devServerMiddleware =
   getPathFromCwd(skuConfig.devServerMiddleware);
 
 export const useDevServerMiddleware =
-  Boolean(devServerMiddleware) || existsSync(devServerMiddleware);
+  Boolean(devServerMiddleware) || existsSync(devServerMiddleware!);
 
 if (devServerMiddleware && !useDevServerMiddleware) {
   throw new Error(
@@ -147,47 +147,45 @@ if (devServerMiddleware && !useDevServerMiddleware) {
 }
 
 export const paths = {
-  appSkuConfigPath,
-  devServerMiddleware,
-  src: skuConfig.srcPaths.map(getPathFromCwd),
-  /** @type {string[]} */
-  compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages],
-  clientEntry: getPathFromCwd(skuConfig.clientEntry),
-  renderEntry: getPathFromCwd(skuConfig.renderEntry),
+  appSkuConfigPath: appSkuConfigPath!,
+  devServerMiddleware: devServerMiddleware!,
+  src: skuConfig.srcPaths!.map(getPathFromCwd),
+  compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages!],
+  clientEntry: getPathFromCwd(skuConfig.clientEntry!),
+  renderEntry: getPathFromCwd(skuConfig.renderEntry!),
   libraryEntry: skuConfig.libraryEntry
     ? getPathFromCwd(skuConfig.libraryEntry)
     : null,
-  serverEntry: getPathFromCwd(skuConfig.serverEntry),
-  public: getPathFromCwd(skuConfig.public),
-  target: getPathFromCwd(skuConfig.target),
+  serverEntry: getPathFromCwd(skuConfig.serverEntry!),
+  public: getPathFromCwd(skuConfig.public!),
+  target: getPathFromCwd(skuConfig.target!),
   relativeTarget: skuConfig.target,
   publicPath: isStartScript ? '/' : publicPath,
-  setupTests: getSetupTests(skuConfig.setupTests),
+  setupTests: getSetupTests(skuConfig.setupTests!),
 };
 
-export const locales = skuConfig.locales;
-export const hosts = skuConfig.hosts;
+export const hosts = skuConfig.hosts!;
 export const port = { client: skuConfig.port, server: skuConfig.serverPort };
-export const libraryName = skuConfig.libraryName;
-export const libraryFile = skuConfig.libraryFile;
+export const libraryName = skuConfig.libraryName!;
+export const libraryFile = skuConfig.libraryFile!;
 export const isLibrary = Boolean(skuConfig.libraryEntry);
-export const polyfills = skuConfig.polyfills;
-export const webpackDecorator = skuConfig.dangerouslySetWebpackConfig;
-export const jestDecorator = skuConfig.dangerouslySetJestConfig;
-export const eslintDecorator = skuConfig.dangerouslySetESLintConfig;
-export const tsconfigDecorator = skuConfig.dangerouslySetTSConfig;
-export const eslintIgnore = skuConfig.eslintIgnore;
-export const routes = normalizedRoutes;
-export const environments = skuConfig.environments;
-export const supportedBrowsers = skuConfig.supportedBrowsers;
+export const polyfills = skuConfig.polyfills!;
+export const webpackDecorator = skuConfig.dangerouslySetWebpackConfig!;
+export const jestDecorator = skuConfig.dangerouslySetJestConfig!;
+export const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;
+export const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;
+export const eslintIgnore = skuConfig.eslintIgnore!;
+export const routes = normalizedRoutes!;
+export const environments = skuConfig.environments!;
+export const supportedBrowsers = skuConfig.supportedBrowsers!;
 export const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
 export const displayNamesProd = Boolean(skuConfig.displayNamesProd);
-export const cspEnabled = skuConfig.cspEnabled;
-export const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
-export const httpsDevServer = skuConfig.httpsDevServer;
+export const cspEnabled = skuConfig.cspEnabled!;
+export const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts!;
+export const httpsDevServer = skuConfig.httpsDevServer!;
 export { default as defaultClientEntry } from './defaultClientEntry.js';
-export const rootResolution = skuConfig.rootResolution;
-export const languages = normalizedLanguages;
+export const rootResolution = skuConfig.rootResolution!;
+export const languages = normalizedLanguages!;
 export const skipPackageCompatibilityCompilation =
-  skuConfig.skipPackageCompatibilityCompilation;
-export const externalizeNodeModules = skuConfig.externalizeNodeModules;
+  skuConfig.skipPackageCompatibilityCompilation!;
+export const externalizeNodeModules = skuConfig.externalizeNodeModules!;

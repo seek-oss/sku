@@ -77,8 +77,8 @@ const runPrettier = async ({ write, listDifferent, paths }) => {
   }
 };
 
-/** @param {string[] | undefined} paths */
+/** @param {string[] | undefined} [paths] */
 export const check = (paths) => runPrettier({ listDifferent: true, paths });
 
-/** @param {string[] | undefined} paths */
+/** @param {string[] | undefined} [paths] */
 export const write = (paths) => runPrettier({ write: true, paths });

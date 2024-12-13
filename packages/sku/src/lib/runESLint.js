@@ -77,7 +77,7 @@ const runESLint = async ({ fix = false, paths }) => {
   }
 };
 
-/** @param {string[] | undefined} paths */
+/** @param {string[] | undefined} [paths] */
 export const check = (paths) => runESLint({ paths });
-/** @param {string[] | undefined} paths */
+/** @param {string[] | undefined} [paths] */
 export const fix = (paths) => runESLint({ fix: true, paths });

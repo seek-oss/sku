@@ -3,7 +3,7 @@ import { configureProject } from '../../../utils/configure.js';
 import { fix as esLintFix } from '../../../runESLint.js';
 import { write as prettierWrite } from '../../../runPrettier.js';
 
-export const formatAction = async (paths) => {
+export const formatAction = async (paths: string[]) => {
   await configureProject();
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 

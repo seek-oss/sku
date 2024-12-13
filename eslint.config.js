@@ -101,6 +101,14 @@ module.exports = [
     },
   },
   {
+    settings: {
+      '@typescript-eslint/parser': {
+        projectRoot: __dirname,
+        project: true,
+      },
+    },
+  },
+  {
     files: ['tests/**', 'test-utils/**'],
 
     languageOptions: {

@@ -25,7 +25,7 @@ const trace = debug('sku:init');
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const removeLeadingUnderscoreFromFileName = (filePath) => {
+const removeLeadingUnderscoreFromFileName = (filePath: string) => {
   const basename = path.basename(filePath);
 
   if (basename.startsWith('_')) {
@@ -39,7 +39,7 @@ const removeLeadingUnderscoreFromFileName = (filePath) => {
 };
 
 const getTemplateFileDestinationFromRoot =
-  (projectRoot, templateDirectory) => (filePath) => {
+  (projectRoot: string, templateDirectory: string) => (filePath: string) => {
     const normalizedFilePath = removeLeadingUnderscoreFromFileName(filePath);
     const filePathRelativeToTemplate =
       normalizedFilePath.split(templateDirectory)[1];
@@ -52,7 +52,10 @@ const getTemplateFileDestinationFromRoot =
 const packageNameRegex =
   /^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
 
-export const initAction = async (projectName, { verbose }) => {
+export const initAction = async (
+  projectName: string,
+  { verbose }: { verbose: boolean },
+) => {
   const root = path.resolve(projectName);
   setCwd(root);
 

@@ -9,7 +9,7 @@ const { run } = jest;
 
 const log = debug('sku:jest');
 
-const testAction = async ({ args = [] } = {}) => {
+const testAction = async ({ args = [] }: { args: string[] }) => {
   await configureProject();
   await runVocabCompile();
 

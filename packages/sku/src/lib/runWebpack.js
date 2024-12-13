@@ -2,7 +2,7 @@
 import getStatsConfig from '../config/webpack/statsConfig.js';
 
 /**
- * @param {import('webpack').Compiler} compiler
+ * @param {import('webpack-dev-server').Compiler | import('webpack-dev-server').MultiCompiler} compiler
  * @param {object} [options]
  * @param {string} [options.stats]
  * @returns {Promise<void>}

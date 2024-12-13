@@ -126,7 +126,6 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
-  // @ts-ignore
   const webpackConfigs = [
     {
       name: 'client',
@@ -230,8 +229,7 @@ const makeWebpackConfig = ({
         ...(htmlRenderPlugin
           ? [
               htmlRenderPlugin.statsCollectorPlugin,
-              // Ignoring this error here. The type seems to be wrong? It does not pick up the class declaration.
-              // @ts-ignore
+              // @ts-expect-error ts2351
               new LoadablePlugin({
                 writeToDisk: false,
                 outputAsset: false,

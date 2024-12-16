@@ -76,7 +76,7 @@ const firstArg = process.argv[2];
 
 export const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
 
-type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
+export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
   typeof route === 'string' ? { route } : route;
 
@@ -160,7 +160,7 @@ export const paths = {
   serverEntry: getPathFromCwd(skuConfig.serverEntry!),
   public: getPathFromCwd(skuConfig.public!),
   target: getPathFromCwd(skuConfig.target!),
-  relativeTarget: skuConfig.target,
+  relativeTarget: skuConfig.target!,
   publicPath: isStartScript ? '/' : publicPath,
   setupTests: getSetupTests(skuConfig.setupTests!),
 };

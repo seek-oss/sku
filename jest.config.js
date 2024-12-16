@@ -23,6 +23,9 @@ module.exports = {
       }
     : {}),
   preset: 'jest-puppeteer',
+  moduleNameMapper: {
+    '(.+)\\.js': '$1',
+  },
   setupFilesAfterEnv: ['<rootDir>/test-utils/jestSetup.ts'],
   snapshotSerializers: [
     '<rootDir>/test-utils/appSnapshotSerializer.cjs',

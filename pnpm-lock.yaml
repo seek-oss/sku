@@ -867,6 +867,9 @@ importers:
       '@types/env-ci':
         specifier: ^3.1.4
         version: 3.1.4
+      '@types/hostile':
+        specifier: ^1.3.5
+        version: 1.3.5
       '@types/loadable__webpack-plugin':
         specifier: ^5.7.6
         version: 5.7.6
@@ -885,6 +888,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.3
         version: 18.3.1
+      '@types/semver':
+        specifier: ^7.5.8
+        version: 7.5.8
       '@types/serve-handler':
         specifier: ^6.1.4
         version: 6.1.4

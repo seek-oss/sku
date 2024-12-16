@@ -18,7 +18,6 @@ describe('webpack utils', () => {
 
     test('defaults to require.resolve', () => {
       resolve.mockReturnValue('./node_modules/test/package.json');
-
       expect(resolvePackage('test')).toEqual('./node_modules/test');
     });
 

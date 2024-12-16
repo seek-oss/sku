@@ -2,14 +2,10 @@ import { HtmlRenderPlugin } from 'html-render-webpack-plugin';
 import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
 
-const { default: memoize } = nanoMemoize;
-
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
 } from '../../../lib/language-utils.js';
-
-const log = debug('sku:html-render-plugin');
 
 import {
   isStartScript,
@@ -21,7 +17,12 @@ import {
   publicPath,
 } from '../../../context/index.js';
 
-const getClientStats = (webpackStats) => webpackStats.toJson();
+// @ts-expect-error
+const { default: memoize } = nanoMemoize;
+
+const log = debug('sku:html-render-plugin');
+
+const getClientStats = (webpackStats: any) => webpackStats.toJson();
 
 const getCachedClientStats = memoize(getClientStats);
 

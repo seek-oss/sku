@@ -1,10 +1,8 @@
 import { isYarn, getCommand } from '../../lib/packageManager.js';
 import { lintExtensions } from '../../lib/lint.js';
+import type { Config } from 'lint-staged';
 
-/**
- * @type {import('lint-staged').Config}
- */
-const config = {
+const config: Config = {
   [`**/*.{${lintExtensions},md}`]: ['sku format', 'sku lint'],
   // Yarn lock integrity check
   ...(isYarn

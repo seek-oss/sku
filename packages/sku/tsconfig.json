@@ -15,5 +15,5 @@
     "declaration": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "**/@loadable", "**/*.test.ts", "**/*.test.tsx"]
+  "exclude": ["node_modules", "**/@loadable", "**/*.test.ts", "**/*.test.tsx", "**/*.test.js"]
 }

@@ -52,11 +52,11 @@ export const migrateEslintignore = ({
   hasLanguagesConfig,
   target,
 }: {
-  // Path to the .eslintignore file
+  /** Path to the .eslintignore file */
   eslintIgnorePath?: string;
-  // Whether 'languages' is configured in sku config
+  /** Whether 'languages' is configured in sku config */
   hasLanguagesConfig: boolean;
-  // The configured 'target' directory in sku config
+  /** The configured 'target' directory in sku config */
   target?: string;
 }): string[] => {
   const result = includeIgnoreFile(_eslintIgnorePath);
@@ -78,9 +78,9 @@ export const addEslintIgnoreToSkuConfig = async ({
   skuConfigPath,
   eslintIgnore,
 }: {
-  // Path to the sku config file
+  /** Path to the sku config file */
   skuConfigPath: string;
-  // Array of paths to ignore
+  /** Array of paths to ignore */
   eslintIgnore: string[];
 }) => {
   const updater = await SkuConfigUpdater.fromFile(skuConfigPath);

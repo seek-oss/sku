@@ -35,7 +35,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {

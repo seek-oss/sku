@@ -13,12 +13,11 @@ export function getValidLanguagesForRoute(route: NormalizedRoute) {
   let languagesToRender: Array<SkuLanguage | null> = [null];
   if (languages) {
     if (route.languages) {
-      // Escaping readonly here. I don't know the best solution here.
-      languagesToRender = route.languages as SkuLanguage[];
+      languagesToRender = route.languages.slice();
     } else if (routeIsForSpecificSite) {
       if (route.siteIndex) {
         languagesToRender =
-          (sites[route.siteIndex].languages as SkuLanguage[]) || languages;
+          sites[route.siteIndex].languages?.slice() || languages;
       }
     } else {
       languagesToRender = languages;
@@ -36,12 +35,10 @@ export function getValidLanguagesForRoute(route: NormalizedRoute) {
 
 const LANGUAGE_NAMED_PARAM = 'language';
 
-function getLanguageParamFromUrl(pathname: string, route: any) {
+function getLanguageParamFromUrl(pathname: string, route: string) {
   const match = routeMatcher(route)(pathname);
 
-  return match
-    ? (match.params as Record<string, any>)[LANGUAGE_NAMED_PARAM]
-    : null;
+  return match ? match.params[LANGUAGE_NAMED_PARAM] : null;
 }
 
 export function getLanguageFromRoute(req: Request, route: NormalizedRoute) {

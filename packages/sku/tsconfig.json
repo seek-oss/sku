@@ -3,7 +3,6 @@
   "compilerOptions": {
     "rootDir": "./src",
     "target": "ESNext",
-    "outDir": "./dist",
     "allowJs": true,
     "module": "nodenext",
     "baseUrl": "./",
@@ -18,8 +17,5 @@
   "exclude": [
     "node_modules",
     "**/@loadable",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.test.js"
   ]
 }

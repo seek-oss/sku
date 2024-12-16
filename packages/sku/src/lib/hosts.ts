@@ -14,6 +14,9 @@ export const getAppHosts = (configuredSites = contextSites) =>
     .map((site) => site.host)
     .concat(hosts);
 
+const hasErrorCode = (e: unknown): e is { code: string } =>
+  (e as { code: string }).code !== undefined;
+
 export const setupHosts = async () => {
   try {
     const appHosts = getAppHosts().filter((host) => host !== 'localhost');
@@ -26,8 +29,8 @@ export const setupHosts = async () => {
         );
       }
     }
-  } catch (e: any & { code: string }) {
-    if (e.code === 'EACCES') {
+  } catch (e: unknown) {
+    if (hasErrorCode(e) && e.code === 'EACCES') {
       console.log(
         chalk.red('Error: setup-hosts must be run with root privileges'),
       );

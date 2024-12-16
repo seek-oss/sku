@@ -23,7 +23,10 @@ import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 const coverageFolder = 'coverage';
 
 const hasErrorMessage = (e: unknown): e is { message: string } =>
-  (e as { message: string }).message !== undefined;
+  typeof e === 'object' &&
+  e !== null &&
+  'message' in e &&
+  typeof e.message === 'string';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
   pathStr.replace(/\\/g, '/');

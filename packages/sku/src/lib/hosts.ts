@@ -15,7 +15,10 @@ export const getAppHosts = (configuredSites = contextSites) =>
     .concat(hosts);
 
 const hasErrorCode = (e: unknown): e is { code: string } =>
-  (e as { code: string }).code !== undefined;
+  typeof e === 'object' &&
+  e !== null &&
+  'code' in e &&
+  typeof e.code === 'string';
 
 export const setupHosts = async () => {
   try {

@@ -4,6 +4,7 @@ import chalk from 'chalk';
 
 import { hosts, sites as contextSites } from '../context/index.js';
 import { suggestScript } from './suggestScript.js';
+import { hasErrorCode } from './utils/error-guards.js';
 
 const setSystemHost = promisify(set);
 const getSystemHosts = promisify(get);
@@ -26,8 +27,8 @@ export const setupHosts = async () => {
         );
       }
     }
-  } catch (e: any & { code: string }) {
-    if (e.code === 'EACCES') {
+  } catch (e: unknown) {
+    if (hasErrorCode(e) && e.code === 'EACCES') {
       console.log(
         chalk.red('Error: setup-hosts must be run with root privileges'),
       );

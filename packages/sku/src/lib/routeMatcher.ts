@@ -13,7 +13,7 @@ const routeMatcher = (route: string) => {
     })
     .join('/');
 
-  return match(normalisedRoute);
+  return match<Record<string, string>>(normalisedRoute);
 };
 
 export default routeMatcher;

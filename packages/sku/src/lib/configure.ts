@@ -20,6 +20,8 @@ import {
 import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 
+import { hasErrorMessage } from './utils/error-guards.js';
+
 const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
@@ -60,9 +62,11 @@ export default async () => {
           console.log(
             "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config.",
           );
-        } catch (e: any extends { message: string } ? any : never) {
+        } catch (e: unknown) {
           console.log("Failed to automatically migrate '.eslintignore' file");
-          console.log('Error:', e.message, '\n');
+          if (hasErrorMessage(e)) {
+            console.log('Error:', e.message, '\n');
+          }
 
           console.log('Please manually add the following to your sku config:');
           console.log(

@@ -54,9 +54,9 @@ export class SkuConfigUpdater {
     path,
     contents,
   }: {
-    // An absolute path to a sku config
+    /** An absolute path to a sku config */
     path: string;
-    // The contents of the sku config
+    /** The contents of the sku config */
     contents: string;
   }) {
     this.#path = path;
@@ -145,12 +145,12 @@ export class SkuConfigUpdater {
    *
    * This method does not write the changes to the file system. Use `commitConfig` to do that.
    */
-  upsertConfig({
+  upsertConfig<T extends keyof SkuConfig>({
     property,
     value,
   }: {
-    property: keyof SkuConfig;
-    value: SkuConfig[keyof SkuConfig];
+    property: T;
+    value: SkuConfig[T];
   }) {
     if (this.#config.type === 'cjs') {
       const propertyToUpdate = this.#config.configAst.properties.find(

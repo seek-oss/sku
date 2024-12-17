@@ -39,15 +39,16 @@ export default () => {
       jsx: 'react-jsx',
       lib: ['dom', 'dom.iterable', 'es2022'],
       target: 'es2022',
+      ...(rootResolution
+        ? {
+            paths: {
+              '*': ['*'],
+            },
+            baseUrl: cwd(),
+          }
+        : {}),
     },
   };
-
-  if (rootResolution) {
-    config.compilerOptions.paths = {
-      '*': ['*'],
-    };
-    config.compilerOptions.baseUrl = cwd();
-  }
 
   return tsconfigDecorator(config);
 };

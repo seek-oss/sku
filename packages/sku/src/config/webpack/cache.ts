@@ -3,7 +3,7 @@ import isCI from '../../lib/isCI.js';
 
 const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 
-function getWebpackCacheSettings({ isDevServer }) {
+function getWebpackCacheSettings({ isDevServer }: { isDevServer: boolean }) {
   if (isDevServer && !isCI && !disableCacheOverride) {
     return {
       type: 'filesystem',

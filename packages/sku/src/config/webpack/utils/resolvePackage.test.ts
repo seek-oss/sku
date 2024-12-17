@@ -4,9 +4,9 @@ import { jest } from '@jest/globals';
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {
-    let resolvePackage;
-    let fs;
-    let resolve;
+    let resolvePackage: ReturnType<typeof createPackageResolver>;
+    let fs: any; // No idea how to type this properly here. I tried jest.Mocked<> but I couldnt get it to play nice with the readFileSync mock
+    let resolve: any; // Same here.
 
     beforeEach(() => {
       fs = {
@@ -22,7 +22,7 @@ describe('webpack utils', () => {
     });
 
     test('returns a naive path when require.resolve fails and the package is not a project dependency', () => {
-      const error = new Error('Module not found');
+      const error = new Error('Module not found') as Error & { code: string };
       error.code = 'MODULE_NOT_FOUND';
       resolve.mockImplementation(() => {
         throw error;
@@ -32,13 +32,17 @@ describe('webpack utils', () => {
     });
 
     test('handles missing package.json when looking for dependencies', () => {
-      const resolveError = new Error('Module not found');
+      const resolveError = new Error('Module not found') as Error & {
+        code: string;
+      };
       resolveError.code = 'MODULE_NOT_FOUND';
       resolve.mockImplementation(() => {
         throw resolveError;
       });
 
-      const packageError = new Error('File not found');
+      const packageError = new Error('File not found') as Error & {
+        code: string;
+      };
       packageError.code = 'ENOENT';
       fs.readFileSync.mockImplementation(() => {
         throw packageError;
@@ -48,7 +52,9 @@ describe('webpack utils', () => {
     });
 
     describe('throws when require.resolve fails and the package is listed', () => {
-      const resolveError = new Error('Module not found');
+      const resolveError = new Error('Module not found') as Error & {
+        code: string;
+      };
       resolveError.code = 'MODULE_NOT_FOUND';
 
       beforeEach(() => {

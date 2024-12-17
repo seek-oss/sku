@@ -1,7 +1,18 @@
 import { cwd } from '../../lib/cwd.js';
 import { createRequire } from 'node:module';
+import type { PluginItem } from '@babel/core';
 
 const require = createRequire(import.meta.url);
+
+type BabelConfigOptions = {
+  target: 'node' | 'browser' | 'jest';
+  lang: 'js' | 'ts';
+  browserslist?: string[];
+  displayNamesProd?: boolean;
+  removeAssertionsInProduction?: boolean;
+  hot?: boolean;
+  rootResolution?: boolean;
+};
 
 export default ({
   target,
@@ -11,12 +22,12 @@ export default ({
   removeAssertionsInProduction = true,
   hot = false,
   rootResolution = false,
-}) => {
+}: BabelConfigOptions) => {
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
-  const plugins = [
+  const plugins: PluginItem[] = [
     [
       require.resolve('babel-plugin-module-resolver'),
       {

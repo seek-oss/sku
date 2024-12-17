@@ -1,12 +1,9 @@
-// @ts-check
 import isCI from '../../lib/isCI.js';
 
-/**
- * @param {object} [options]
- * @param {string} [options.stats]
- * @param {boolean} [options.isStartScript]
- */
-const getStatsConfig = ({ stats, isStartScript = false } = {}) => {
+const getStatsConfig = ({
+  stats,
+  isStartScript = false,
+}: { stats?: string; isStartScript?: boolean } = {}) => {
   const defaultPreset = isStartScript ? 'summary' : 'errors-only';
 
   return {

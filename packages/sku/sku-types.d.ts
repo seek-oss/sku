@@ -82,13 +82,14 @@ interface SkuSiteObject {
 
 type SkuSite = string | SkuSiteObject;
 
-interface TranformOutputPathFunctionParams {
-  environment: string;
-  site: string;
-  path: string;
+interface TransformOutputPathFunctionParams {
+  environment: string | undefined;
+  site: string | undefined;
+  route: string;
 }
-type TranformOutputPathFunction = (
-  input: TranformOutputPathFunctionParams,
+
+type TransformOutputPathFunction = (
+  input: TransformOutputPathFunctionParams,
 ) => string;
 
 type SkuLanguage = string | { name: string; extends?: string };
@@ -467,5 +468,5 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=transformoutputpath
    */
-  transformOutputPath?: TranformOutputPathFunction;
+  transformOutputPath?: TransformOutputPathFunction;
 }

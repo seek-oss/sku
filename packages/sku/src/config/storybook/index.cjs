@@ -6,7 +6,18 @@
 
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 
-/** @type {StorybookConfig['webpackFinal']} */
+/** @typedef {import("webpack").Configuration} Configuration */
+
+/**
+ * @typedef {object} WebpackOptions
+ * @property {'PRODUCTION' | 'DEVELOPMENT' | undefined} [configType]
+ */
+
+/**
+ * @typedef {function(Configuration, WebpackOptions): Promise<Configuration>} AsyncWebpackFinal
+ */
+
+/** @type AsyncWebpackFinal */
 const webpackFinal = async (config, { configType }) => {
   const makeStorybookWebpackConfig = (
     await import('./storybookWebpackConfig.js')

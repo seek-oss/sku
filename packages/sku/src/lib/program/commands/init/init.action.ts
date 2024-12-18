@@ -3,7 +3,7 @@ import {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
-} from '../../../packageManager.js';
+} from '../../../../services/packageManager/packageManager.js';
 
 import chalk from 'chalk';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -12,7 +12,7 @@ import { isEmptyDir } from '../../../isEmptyDir.js';
 import dedent from 'dedent';
 import { setCwd } from '../../../cwd.js';
 import { write as prettierWrite } from '../../../runPrettier.js';
-import { fix as esLintFix } from '../../../runESLint.js';
+import { fix as esLintFix } from '../../../../services/eslint/runESLint.js';
 import configure from '../../../configure.js';
 import install from '../../../install.js';
 import banner from '../../../banner.js';

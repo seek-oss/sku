@@ -1,4 +1,7 @@
-import { getRunCommand, getExecuteCommand } from './packageManager.js';
+import {
+  getRunCommand,
+  getExecuteCommand,
+} from '../services/packageManager/packageManager.js';
 
 import chalk from 'chalk';
 import { requireFromCwd } from './cwd.js';

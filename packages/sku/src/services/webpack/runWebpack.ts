@@ -1,4 +1,4 @@
-import getStatsConfig from '../config/webpack/statsConfig.js';
+import getStatsConfig from './config/statsConfig.js';
 import type { Compiler, MultiCompiler } from 'webpack-dev-server';
 
 export const run = async (

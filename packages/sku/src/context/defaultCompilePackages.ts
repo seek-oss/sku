@@ -6,7 +6,7 @@ import { createRequire } from 'node:module';
 
 import toPosixPath from '../lib/toPosixPath.js';
 
-import { rootDir, isPnpm } from '../lib/packageManager.js';
+import { rootDir, isPnpm } from '../services/packageManager/packageManager.js';
 
 const debug = _debug('sku:compilePackages');
 

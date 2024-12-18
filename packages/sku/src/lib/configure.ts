@@ -15,7 +15,7 @@ import {
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} from './eslintMigration.js';
+} from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from './cwd.js';

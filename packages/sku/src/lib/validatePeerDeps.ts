@@ -1,4 +1,7 @@
-import { getWhyCommand, isPnpm } from './packageManager.js';
+import {
+  getWhyCommand,
+  isPnpm,
+} from '../services/packageManager/packageManager.js';
 
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';

@@ -9,7 +9,7 @@ import {
   eslintIgnore,
   languages,
   paths,
-} from '../../context/index.js';
+} from '../../../context/index.js';
 
 const { relativeTarget } = paths;
 

@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { loadESLint } from 'eslint';
-import { eslintConfigSku } from '../config/eslint/index.js';
+import { eslintConfigSku } from '../../config/eslint/index.js';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
 

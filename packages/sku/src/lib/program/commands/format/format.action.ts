@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { configureProject } from '../../../utils/configure.js';
-import { fix as esLintFix } from '../../../runESLint.js';
+import { fix as esLintFix } from '../../../../services/eslint/runESLint.js';
 import { write as prettierWrite } from '../../../runPrettier.js';
 
 export const formatAction = async (paths: string[]) => {

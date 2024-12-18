@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { check as esLintCheck } from '../../../runESLint.js';
+import { check as esLintCheck } from '../../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../runPrettier.js';
 import runTsc from '../../../runTsc.js';
 

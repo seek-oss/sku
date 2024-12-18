@@ -9,7 +9,7 @@ import {
   ensureTargetDirectory,
   cleanStaticRenderEntry,
 } from '../../../buildFileUtils.js';
-import { run } from '../../../runWebpack.js';
+import { run } from '../../../../services/webpack/runWebpack.js';
 import createHtmlRenderPlugin from '../../../../config/webpack/plugins/createHtmlRenderPlugin.js';
 import makeWebpackConfig from '../../../../config/webpack/webpack.config.js';
 import { isLibrary, cspEnabled } from '../../../../context/index.js';

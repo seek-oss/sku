@@ -1,4 +1,7 @@
-import { getAddCommand, type GetAddCommandOptions } from './packageManager.js';
+import {
+  getAddCommand,
+  type GetAddCommandOptions,
+} from '../services/packageManager/packageManager.js';
 
 import { spawn } from 'cross-spawn';
 

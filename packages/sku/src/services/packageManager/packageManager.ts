@@ -3,7 +3,7 @@ import { dirname } from 'node:path';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
-import { getPackageManager } from '../context/packageManager.js';
+import { getPackageManager } from './context/packageManager.js';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 

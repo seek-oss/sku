@@ -1,15 +1,15 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
 import isCompilePackage from '../lib/isCompilePackage.js';
+import type { SkuConfig } from '../../sku-types.d.ts';
 
-const defaultDecorator = (a) => a;
+const defaultDecorator = (a: any) => a;
 
-/** @type {import("../../sku-types.d.ts").SkuConfig} */
 export default {
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',
-  libraryEntry: null,
+  libraryEntry: undefined,
   routes: [],
   sites: [],
   environments: [],
@@ -21,13 +21,13 @@ export default {
   port: 8080,
   serverPort: 8181,
   target: 'dist',
-  setupTests: null,
-  initialPath: null,
+  setupTests: undefined,
+  initialPath: undefined,
   public: 'public',
   publicPath: '/',
   polyfills: [],
-  libraryName: null,
-  libraryFile: null,
+  libraryName: undefined,
+  libraryFile: undefined,
   sourceMapsProd: true,
   displayNamesProd: false,
   dangerouslySetWebpackConfig: defaultDecorator,
@@ -39,9 +39,9 @@ export default {
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
-  devServerMiddleware: null,
+  devServerMiddleware: undefined,
   rootResolution: !isCompilePackage,
-  languages: null,
+  languages: undefined,
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,
-};
+} satisfies SkuConfig;

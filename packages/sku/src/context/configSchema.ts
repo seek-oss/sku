@@ -1,5 +1,6 @@
 import Validator from 'fastest-validator';
 
+// @ts-expect-error
 const validator = new Validator();
 
 const languagesToCompile = {

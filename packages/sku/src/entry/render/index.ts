@@ -4,6 +4,7 @@ import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor.js';
 import clientContextKey from '../clientContextKey.js';
 import createCSPHandler from '../csp.js';
+import type { RenderAppProps } from '../../../sku-types.d.ts';
 
 import { renderToStringAsync } from './render-to-string.js';
 
@@ -14,13 +15,13 @@ const libraryFile = __SKU_LIBRARY_FILE__;
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;
 
-export const serializeConfig = (config) =>
+export const serializeConfig = (config: object) =>
   `<script id="${clientContextKey}" type="application/json">${serializeJavascript(
     config,
     { isJSON: true },
   )}</script>`;
 
-export default async (renderParams) => {
+export default async (renderParams: RenderAppProps) => {
   const renderContext = { ...renderParams, libraryName, libraryFile };
 
   let app;
@@ -37,6 +38,7 @@ export default async (renderParams) => {
   if (render.renderApp) {
     app = await render.renderApp({
       ...renderContext,
+      // @ts-expect-error - addChunk is not on the ChunkExtractor type
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
       renderToStringAsync,
@@ -45,6 +47,7 @@ export default async (renderParams) => {
       debug('sku:render:language')(
         `Using language "${renderContext.language}" for route "${renderContext.route}"`,
       );
+      // @ts-expect-error - addChunk is not on the ChunkExtractor type
       extractor.addChunk(getChunkName(renderContext.language));
     } else {
       debug('sku:render:language')(

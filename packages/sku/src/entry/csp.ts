@@ -1,41 +1,35 @@
-// @ts-check
-import { createHash } from 'node:crypto';
-import { parse, valid } from 'node-html-parser';
+import { createHash, type BinaryLike } from 'node:crypto';
+import { parse, valid, type HTMLElement } from 'node-html-parser';
 import { URL } from 'node:url';
+import type { RenderCallbackParams } from '../../sku-types.d.ts';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 
 const defaultBaseName = 'http://relative-url';
 
-/** @typedef {import("node:crypto").BinaryLike} BinaryLike */
-
-/** @param {BinaryLike} scriptContents */
-const hashScriptContents = (scriptContents) =>
+const hashScriptContents = (scriptContents: BinaryLike) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
-/**
- * @typedef {object} CreateCSPHandlerOptions
- * @property {string[]} [extraHosts=[]]
- * @property {boolean} [isDevelopment=false]
- * @param {CreateCSPHandlerOptions} [options={}]
- */
+interface CreateCSPHandlerOptions {
+  extraHosts?: string[];
+  isDevelopment?: boolean;
+}
+
 export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,
-} = {}) {
+}: CreateCSPHandlerOptions = {}) {
   let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();
 
-  /** @param {BinaryLike | undefined?} contents */
-  const addScriptContents = (contents) => {
+  const addScriptContents = (contents: BinaryLike | undefined) => {
     if (contents) {
       shas.add(hashScriptContents(contents));
     }
   };
 
-  /** @param {string} src */
-  const addScriptUrl = (src) => {
+  const addScriptUrl = (src: string) => {
     const { origin } = new URL(src, defaultBaseName);
 
     if (origin !== defaultBaseName) {
@@ -45,8 +39,7 @@ export default function createCSPHandler({
 
   extraHosts.forEach((host) => addScriptUrl(host));
 
-  /** @param {import("node-html-parser").HTMLElement} scriptNode */
-  const processScriptNode = (scriptNode) => {
+  const processScriptNode = (scriptNode: HTMLElement) => {
     const src = scriptNode.getAttribute('src');
 
     if (src) {
@@ -60,8 +53,7 @@ export default function createCSPHandler({
     }
   };
 
-  /** @type {import("../../sku-types.d.ts").RenderCallbackParams['registerScript']} */
-  const registerScript = (script) => {
+  const registerScript: RenderCallbackParams['registerScript'] = (script) => {
     if (tagReturned) {
       throw new Error(
         `Unable to register script. Content Security Policy already sent. Try registering scripts before calling flushHeadTags. Script: ${script.substr(
@@ -78,9 +70,6 @@ export default function createCSPHandler({
     parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
-  /**
-   * @returns {string}
-   */
   const createCSPTag = () => {
     tagReturned = true;
 
@@ -106,11 +95,7 @@ export default function createCSPHandler({
     )};">`;
   };
 
-  /**
-   * @param {string} html
-   * @returns {string}
-   */
-  const handleHtml = (html) => {
+  const handleHtml = (html: string) => {
     const root = parse(html, {
       comment: true,
     });

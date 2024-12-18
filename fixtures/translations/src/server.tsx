@@ -1,8 +1,8 @@
-import { renderToString } from 'react-dom/server';
 import { VocabProvider } from '@vocab/react';
+import { renderToString } from 'react-dom/server';
+import type { Server } from 'sku';
 
 import App from './App';
-import type { Server } from 'sku';
 
 const initialResponseTemplate = ({ headTags }: any) => /* html */ `
 <!DOCTYPE html>

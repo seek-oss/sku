@@ -1,11 +1,12 @@
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import path from 'node:path';
-import express, { static as expressStatic } from 'express';
+import express, { static as expressStatic, type Express } from 'express';
 import makeExtractor from '../makeExtractor.js';
 import createCSPHandler from '../csp.js';
 import serverExports from '__sku_alias__serverEntry';
 import webpackStats from '__sku_alias__webpackStats';
 import { createRequire } from 'node:module';
+import type { RenderCallbackParams } from '../../../sku-types.d.ts';
 
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;
@@ -14,7 +15,7 @@ const serverOptions = serverExports({ publicPath });
 
 const { middleware, onStart, renderCallback } = serverOptions;
 
-const app = express();
+const app: Express = express();
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -57,12 +58,14 @@ app.get('*', (...args) => {
 
   const { SkuProvider, extractor, flushHeadTags, getHeadTags, getBodyTags } =
     makeExtractor(webpackStats, publicPath, cspHandler);
-  /** @type {import("../../../sku-types.d.ts").RenderCallbackParams['addLanguageChunk']} */
-  const addLanguageChunk = (language) =>
+
+  const addLanguageChunk: RenderCallbackParams['addLanguageChunk'] = (
+    language,
+  ) =>
+    // @ts-expect-error - addChunk is not defined in ChunkExtractor
     extractor.addChunk(getChunkName(language));
 
-  /** @type {import('express').Express} */
-  const result = renderCallback(
+  const result: Express = renderCallback(
     {
       SkuProvider,
       addLanguageChunk,

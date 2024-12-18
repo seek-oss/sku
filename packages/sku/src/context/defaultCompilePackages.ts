@@ -1,16 +1,18 @@
 import { posix as path } from 'node:path';
 import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
+import _debug from 'debug';
+import { createRequire } from 'node:module';
 
 import toPosixPath from '../lib/toPosixPath.js';
 
 import { rootDir, isPnpm } from '../lib/packageManager.js';
-import _debug from 'debug';
 
 const debug = _debug('sku:compilePackages');
 
-/** @type {string[]} */
-let detectedCompilePackages = [];
+const require = createRequire(import.meta.url);
+
+let detectedCompilePackages: string[] = [];
 
 // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
 // package manager. In either case, we can't correctly detect compile packages.

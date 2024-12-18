@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "types": ["webpack/module", "jest", "node"],
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "**/@loadable"]

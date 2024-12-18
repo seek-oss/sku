@@ -1,29 +1,51 @@
-import { fileURLToPath } from 'node:url';
 import babelConfig from '../../babel/babelConfig.js';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import { createRequire } from 'node:module';
 
-export const makeJsLoaders = (options) => [
+type BabelConfigOptions = {
+  target: 'node' | 'browser';
+  lang: 'js' | 'ts';
+  browserslist?: string[];
+  displayNamesProd?: boolean;
+  removeAssertionsInProduction?: boolean;
+  hot?: boolean;
+  rootResolution?: boolean;
+};
+
+const require = createRequire(import.meta.url);
+
+export const makeJsLoaders = (options: BabelConfigOptions) => [
   {
-    loader: fileURLToPath(import.meta.resolve('babel-loader')),
+    loader: require.resolve('babel-loader'),
     options: babelConfig(options),
   },
 ];
 
-export const makeExternalCssLoaders = (options = {}) => {
+type MakeExternalCssLoadersOptions = {
+  target: 'node' | 'browser';
+  isProductionBuild: boolean;
+  MiniCssExtractPlugin: any;
+  browserslist?: string[];
+  hot?: boolean;
+};
+
+export const makeExternalCssLoaders = (
+  options: MakeExternalCssLoadersOptions,
+) => {
   const { target, isProductionBuild, MiniCssExtractPlugin, browserslist } =
-    options;
+    options || {};
 
   return [
     ...(!target || target === 'browser' ? [MiniCssExtractPlugin.loader] : []),
     {
-      loader: fileURLToPath(import.meta.resolve('css-loader')),
+      loader: require.resolve('css-loader'),
       options: {
         url: false,
       },
     },
     {
-      loader: fileURLToPath(import.meta.resolve('postcss-loader')),
+      loader: require.resolve('postcss-loader'),
       options: {
         postcssOptions: {
           plugins: [
@@ -50,7 +72,7 @@ export const makeExternalCssLoaders = (options = {}) => {
 
 export const makeSvgLoaders = () => [
   {
-    loader: fileURLToPath(import.meta.resolve('svgo-loader')),
+    loader: require.resolve('svgo-loader'),
     options: {
       plugins: [
         {

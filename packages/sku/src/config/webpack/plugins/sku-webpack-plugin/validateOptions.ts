@@ -2,10 +2,12 @@ import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
 import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
+import { hasErrorMessage } from '../../../../lib/utils/error-guards.js';
 
+// @ts-expect-error
 const validator = new Validator();
 
-const exitWithErrors = async (errors) => {
+const exitWithErrors = async (errors: string[]) => {
   console.log(
     chalk.bold(chalk.underline(chalk.red('SkuWebpackPlugin: Invalid options'))),
   );
@@ -13,6 +15,21 @@ const exitWithErrors = async (errors) => {
     console.log(chalk.yellow(error));
   });
   process.exit(1);
+};
+
+export type SkuWebpackPluginOptions = {
+  target: 'node' | 'browser';
+  MiniCssExtractPlugin: any;
+  mode?: 'development' | 'production';
+  hot?: boolean;
+  include?: string[];
+  compilePackages?: string[];
+  libraryName?: string;
+  generateCSSTypes?: boolean;
+  removeAssertionsInProduction?: boolean;
+  browserslist?: string[];
+  displayNamesProd?: boolean;
+  rootResolution?: boolean;
 };
 
 const schema = {
@@ -73,7 +90,7 @@ const validate = validator.compile(schema);
 
 const availableOptions = Object.keys(schema);
 
-const validateOptions = (options) => {
+const validateOptions = (options: SkuWebpackPluginOptions) => {
   const errors = [];
 
   // Validate extra keys
@@ -91,13 +108,15 @@ const validateOptions = (options) => {
   // Validate schema types
   const schemaCheckResult = validate(options);
   if (schemaCheckResult !== true) {
-    schemaCheckResult.forEach(({ message, field }) => {
-      const errorMessage = message
-        ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
-        : `🚫 '${chalk.bold(field)}' is invalid`;
+    schemaCheckResult.forEach(
+      ({ message, field }: { message: string; field: string }) => {
+        const errorMessage = message
+          ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
+          : `🚫 '${chalk.bold(field)}' is invalid`;
 
-      errors.push(errorMessage);
-    });
+        errors.push(errorMessage);
+      },
+    );
   }
 
   if (options.browserslist) {
@@ -105,11 +124,13 @@ const validateOptions = (options) => {
     try {
       browserslist(options.browserslist);
     } catch (e) {
-      errors.push(
-        `🚫 '${chalk.bold(
-          'browserslist',
-        )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
-      );
+      if (hasErrorMessage(e)) {
+        errors.push(
+          `🚫 '${chalk.bold(
+            'browserslist',
+          )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
+        );
+      }
     }
   }
 

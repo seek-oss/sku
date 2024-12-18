@@ -1,10 +1,12 @@
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const modules = ['node_modules'];
 
 try {
-  const skuPath = fileURLToPath(import.meta.resolve('sku/package.json'));
+  const skuPath = require.resolve('sku/package.json');
 
   // If the project is using pnpm then we add the sku node_modules directory
   // to the modules array. This allows dependecies of sku to be importable

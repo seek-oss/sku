@@ -2,14 +2,10 @@ import { HtmlRenderPlugin } from 'html-render-webpack-plugin';
 import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
 
-const { default: memoize } = nanoMemoize;
-
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
 } from '../../../lib/language-utils.js';
-
-const log = debug('sku:html-render-plugin');
 
 import {
   isStartScript,
@@ -20,14 +16,20 @@ import {
   transformOutputPath,
   publicPath,
 } from '../../../context/index.js';
+import type { Stats } from 'webpack';
 
-const getClientStats = (webpackStats) => webpackStats.toJson();
+// @ts-expect-error
+const { default: memoize } = nanoMemoize;
+
+const log = debug('sku:html-render-plugin');
+
+const getClientStats = (webpackStats: any) => webpackStats.toJson();
 
 const getCachedClientStats = memoize(getClientStats);
 
 // mapStatsToParams runs once for each render. It's purpose is
 // to forward the client webpack stats to the render function
-const mapStatsToParams = ({ webpackStats }) => {
+const mapStatsToParams = ({ webpackStats }: { webpackStats: Stats }) => {
   const stats = getCachedClientStats(webpackStats);
 
   return {
@@ -48,7 +50,7 @@ const getStartRoutes = () => {
       if (routeIsForSpecificSite) {
         allRouteCombinations.push({
           route,
-          site: sites[route.siteIndex],
+          site: sites[route.siteIndex!],
           language,
         });
       } else {
@@ -82,7 +84,7 @@ const getBuildRoutes = () => {
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({
             route,
-            site: sites[route.siteIndex],
+            site: sites[route.siteIndex!],
             environment,
             language,
           });
@@ -120,6 +122,11 @@ const createHtmlRenderPlugin = () => {
     renderDirectory: paths.target,
     routes: allRoutes,
     skipAssets: isStartScript,
+    // Incompatible type here. In the SkuConfig type the `transformOutputPath` input is the following type:
+    // environment: string;
+    // site: string;
+    // path: string; Path does not exist in the transformFilePath type that the HTMLRenderPLugin accepts.
+    // @ts-expect-error
     transformFilePath: transformOutputPath,
     mapStatsToParams,
     extraGlobals: {

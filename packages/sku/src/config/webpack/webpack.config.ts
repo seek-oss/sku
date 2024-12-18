@@ -1,4 +1,3 @@
-// @ts-check
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -38,6 +37,7 @@ import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
 import targets from '../targets.json' with { type: 'json' };
+import type { MakeWebpackConfigOptions } from './types.js';
 
 const require = createRequire(import.meta.url);
 
@@ -47,18 +47,6 @@ const libraryRenderEntry = require.resolve('../../entry/libraryRender');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.
-
-/**
- * @typedef {object} MakeWebpackConfigOptions
- * @property {boolean} [isIntegration]
- * @property {boolean} [isDevServer]
- * @property {boolean} [metrics]
- * @property {any} [htmlRenderPlugin]
- * @property {boolean} [hot]
- * @property {boolean} [isStartScript]
- * @property {string} [stats]
- * @param {MakeWebpackConfigOptions} options
- */
 const makeWebpackConfig = ({
   isIntegration = false,
   isDevServer = false,
@@ -67,7 +55,7 @@ const makeWebpackConfig = ({
   hot = false,
   isStartScript = false,
   stats,
-} = {}) => {
+}: MakeWebpackConfigOptions) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
@@ -75,17 +63,16 @@ const makeWebpackConfig = ({
   const vocabOptions = getVocabConfig();
 
   const resolvedPolyfills =
-    polyfills?.map((polyfill) => {
-      return require.resolve(polyfill, { paths: [cwd()] });
-    }) || [];
+    polyfills?.map((polyfill) =>
+      require.resolve(polyfill, { paths: [cwd()] }),
+    ) || [];
 
   const skuClientEntry = require.resolve('../../entry/client/index.js');
 
-  /**
-   * @param {string} entry
-   * @returns {string[]}
-   */
-  const createEntry = (entry) => [...resolvedPolyfills, entry];
+  const createEntry = (entry: string): string[] => [
+    ...resolvedPolyfills,
+    entry,
+  ];
 
   // Add polyfills and dev server client to all entries
   const clientEntry = isLibrary
@@ -97,12 +84,11 @@ const makeWebpackConfig = ({
     ...(paths.src || []),
   ];
 
-  /**
-   * @param {object} props
-   * @param {boolean} props.isMainChunk
-   * @returns {any|string}
-   */
-  const getFileMask = ({ isMainChunk }) => {
+  const getFileMask = ({
+    isMainChunk,
+  }: {
+    isMainChunk: boolean;
+  }): any | string => {
     // Libraries should always have the same file name
     // for the main chunk unless we're building for storybook
     if (isLibrary && isMainChunk) {

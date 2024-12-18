@@ -4,6 +4,7 @@ import chalk from 'chalk';
 
 import { hosts, sites as contextSites } from '../context/index.js';
 import { suggestScript } from './suggestScript.js';
+import { hasErrorCode } from './utils/error-guards.js';
 
 const setSystemHost = promisify(set);
 const getSystemHosts = promisify(get);
@@ -13,12 +14,6 @@ export const getAppHosts = (configuredSites = contextSites) =>
     .filter((site) => site.host)
     .map((site) => site.host)
     .concat(hosts);
-
-const hasErrorCode = (e: unknown): e is { code: string } =>
-  typeof e === 'object' &&
-  e !== null &&
-  'code' in e &&
-  typeof e.code === 'string';
 
 export const setupHosts = async () => {
   try {

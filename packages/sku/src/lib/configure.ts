@@ -20,13 +20,9 @@ import {
 import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 
-const coverageFolder = 'coverage';
+import { hasErrorMessage } from './utils/error-guards.js';
 
-const hasErrorMessage = (e: unknown): e is { message: string } =>
-  typeof e === 'object' &&
-  e !== null &&
-  'message' in e &&
-  typeof e.message === 'string';
+const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
   pathStr.replace(/\\/g, '/');

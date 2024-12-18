@@ -36,6 +36,7 @@ import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
 import targets from '../targets.json' with { type: 'json' };
+import type { MakeWebpackConfigOptions } from './types.js';
 
 const require = createRequire(import.meta.url);
 
@@ -48,7 +49,7 @@ const makeWebpackConfig = ({
   hot = false,
   isStartScript = false,
   stats,
-}) => {
+}: MakeWebpackConfigOptions) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
@@ -56,26 +57,24 @@ const makeWebpackConfig = ({
 
   const internalInclude = [join(__dirname, '../../entry'), ...paths.src];
 
-  const resolvedPolyfills = polyfills.map((polyfill) => {
-    return require.resolve(polyfill, { paths: [cwd()] });
-  });
+  const resolvedPolyfills = polyfills.map((polyfill) =>
+    require.resolve(polyfill, { paths: [cwd()] }),
+  );
   const proto = httpsDevServer ? 'https' : 'http';
   const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
-  const serverEntry = fileURLToPath(
-    import.meta.resolve('../../entry/server/index.js'),
-  );
+  const serverEntry = require.resolve('../../entry/server/index.js');
 
   const publicPath = isDevServer ? clientServer : paths.publicPath;
 
   const webpackStatsFilename = 'webpackStats.json';
 
   // The file mask is set to just name in start/dev mode as contenthash
-  // is not supported for hot reloading. It can also cause non
-  // deterministic snapshots in jest tests.
+  // is not supported for hot reloading. It can also cause
+  // non-deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
   const webpackConfigs = [
@@ -146,18 +145,14 @@ const makeWebpackConfig = ({
                   ],
                   use: [
                     {
-                      loader: fileURLToPath(
-                        import.meta.resolve('babel-loader'),
-                      ),
+                      loader: require.resolve('babel-loader'),
                       options: {
                         babelrc: false,
                         cacheDirectory: true,
                         cacheCompression: false,
                         presets: [
                           [
-                            fileURLToPath(
-                              import.meta.resolve('@babel/preset-env'),
-                            ),
+                            require.resolve('@babel/preset-env'),
                             {
                               modules: false,
                               targets: supportedBrowsers,
@@ -173,6 +168,7 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
+        // @ts-expect-error
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,
@@ -267,36 +263,38 @@ const makeWebpackConfig = ({
       module: {
         rules: [{ test: /\.mjs$/, type: 'javascript/auto' }],
       },
-      plugins: [
-        new webpack.DefinePlugin({
-          __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
-          __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
-          __SKU_CSP__: JSON.stringify({
-            enabled: cspEnabled,
-            extraHosts: cspExtraScriptSrcHosts,
+      plugins: (
+        [
+          new webpack.DefinePlugin({
+            __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(serverPort),
+            __SKU_PUBLIC_PATH__: JSON.stringify(publicPath),
+            __SKU_CSP__: JSON.stringify({
+              enabled: cspEnabled,
+              extraHosts: cspExtraScriptSrcHosts,
+            }),
+            __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
+              isDevServer ? paths.devServerMiddleware : false,
+            ),
+            __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
+              isDevServer ? useDevServerMiddleware : false,
+            ),
+            __SKU_DEV_HTTPS__: JSON.stringify(
+              isDevServer ? httpsDevServer : false,
+            ),
           }),
-          __SKU_DEV_MIDDLEWARE_PATH__: JSON.stringify(
-            isDevServer ? paths.devServerMiddleware : false,
-          ),
-          __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
-            isDevServer ? useDevServerMiddleware : false,
-          ),
-          __SKU_DEV_HTTPS__: JSON.stringify(
-            isDevServer ? httpsDevServer : false,
-          ),
-        }),
-        new SkuWebpackPlugin({
-          target: 'node',
-          hot: isDevServer,
-          include: internalInclude,
-          compilePackages: paths.compilePackages,
-          browserslist: [targets.browserslistNodeTarget],
-          mode: webpackMode,
-          displayNamesProd,
-          MiniCssExtractPlugin,
-          rootResolution,
-        }),
-      ].concat(
+          new SkuWebpackPlugin({
+            target: 'node',
+            hot: isDevServer,
+            include: internalInclude,
+            compilePackages: paths.compilePackages,
+            browserslist: [targets.browserslistNodeTarget],
+            mode: webpackMode,
+            displayNamesProd,
+            MiniCssExtractPlugin,
+            rootResolution,
+          }),
+        ] as webpack.WebpackPluginInstance[]
+      ).concat(
         isDevServer
           ? [
               new webpack.HotModuleReplacementPlugin(),

@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import webpack, { type Compiler, type WebpackPluginInstance } from 'webpack';
 import defaultSupportedBrowsers from 'browserslist-config-seek';
 import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
 import {
@@ -12,32 +12,42 @@ import {
   resolvePackage,
 } from '../../utils/index.js';
 import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
-import validateOptions from './validateOptions.js';
+import validateOptions, {
+  type SkuWebpackPluginOptions,
+} from './validateOptions.js';
 import targets from '../../../targets.json' with { type: 'json' };
 
-class SkuWebpackPlugin {
-  constructor(options = {}) {
+class SkuWebpackPlugin implements WebpackPluginInstance {
+  options: SkuWebpackPluginOptions;
+  compilePackages: string[];
+  include: string[];
+
+  constructor(options: SkuWebpackPluginOptions) {
     validateOptions(options);
 
     this.options = {
+      // Is this default value correct? I imagine it will be set via the options.
       include: [],
       hot: false,
       generateCSSTypes: false,
-      browserslist: defaultSupportedBrowsers,
+      browserslist: defaultSupportedBrowsers as unknown as string[],
       compilePackages: [],
       rootResolution: false,
       ...options,
     };
     this.compilePackages = [
-      ...new Set([...defaultCompilePackages, ...this.options.compilePackages]),
+      ...new Set([
+        ...defaultCompilePackages,
+        ...(this.options.compilePackages || []),
+      ]),
     ];
     this.include = [
-      ...this.options.include,
+      ...(this.options.include || []),
       ...this.compilePackages.map(resolvePackage),
     ];
   }
 
-  apply(compiler) {
+  apply(compiler: Compiler) {
     const {
       target,
       hot,
@@ -121,6 +131,7 @@ class SkuWebpackPlugin {
             // more standard handling of include/exclude path matching.
             exclude: /node_modules\/playroom/,
             use: makeExternalCssLoaders({
+              target,
               isProductionBuild,
               MiniCssExtractPlugin,
               hot,

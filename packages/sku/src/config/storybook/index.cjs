@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * This file and all its dependencies must be CJS
  * https://github.com/storybookjs/storybook/pull/23018
@@ -5,7 +6,18 @@
 
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 
-/** @type {NonNullable<StorybookConfig['webpackFinal']>} */
+/** @typedef {import("webpack").Configuration} Configuration */
+
+/**
+ * @typedef {object} WebpackOptions
+ * @property {'PRODUCTION' | 'DEVELOPMENT' | undefined} [configType]
+ */
+
+/**
+ * @typedef {function(Configuration, WebpackOptions): Promise<Configuration>} AsyncWebpackFinal
+ */
+
+/** @type AsyncWebpackFinal */
 const webpackFinal = async (config, { configType }) => {
   const makeStorybookWebpackConfig = (
     await import('./storybookWebpackConfig.js')

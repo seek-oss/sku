@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": true,
-    "types": ["webpack/module"],
+    "types": ["webpack/module", "jest", "node"],
     "lib": ["ESNext", "DOM"],
   },
   "include": ["./src/**/*"],

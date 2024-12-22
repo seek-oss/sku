@@ -2,28 +2,32 @@
 import eslintConfigSeek from 'eslint-config-seek';
 import type { Linter } from 'eslint';
 
-import { importOrderConfig } from './importOrder.js';
+import { createImportOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
-import {
-  eslintDecorator,
-  eslintIgnore,
-  languages,
-  paths,
-} from '../../../context/index.js';
+import { getSkuContext, SkuContext } from '@/context/createSkuContext.js';
 
-const { relativeTarget } = paths;
+export const createEslintConfig = (skuContext: SkuContext) => {
+  const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
+  const { relativeTarget } = paths;
 
-const _eslintConfigSku = [
-  createEslintIgnoresConfig({
-    hasLanguagesConfig: Boolean(languages && languages.length > 0),
-    target: relativeTarget,
-  }),
-  ...eslintConfigSeek,
-  importOrderConfig,
-  ...(eslintIgnore && eslintIgnore.length > 0
-    ? [{ ignores: eslintIgnore }]
-    : []),
-];
+  const _eslintConfigSku = [
+    createEslintIgnoresConfig({
+      hasLanguagesConfig: Boolean(languages && languages.length > 0),
+      target: relativeTarget,
+    }),
+    ...eslintConfigSeek,
+    createImportOrderConfig(skuContext),
+    ...(eslintIgnore && eslintIgnore.length > 0
+      ? [{ ignores: eslintIgnore }]
+      : []),
+  ];
 
-export const eslintConfigSku: Linter.Config[] | undefined =
-  eslintDecorator?.(_eslintConfigSku);
+  const eslintConfigSku: Linter.Config[] | undefined =
+    eslintDecorator?.(_eslintConfigSku);
+
+  return eslintConfigSku;
+};
+
+const skuContext = await getSkuContext();
+
+export const eslintConfigSku = createEslintConfig(skuContext);

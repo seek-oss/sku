@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { program } from '../lib/program/index.js';
+import { program } from '@/program/index.js';
 
-program.parse();
+program.parseAsync();

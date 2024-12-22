@@ -10,15 +10,15 @@
     ".": "./sku-types.d.ts",
     "./jest-preset": "./dist/config/jest/jest-preset.js",
     "./config/eslint": {
-      "default": "./dist/config/eslint/index.js",
-      "types": "./dist/config/eslint/index.d.ts"
+      "default": "./dist/services/eslint/config/index.js",
+      "types": "./dist/services/eslint/config/index.d.ts"
     },
     "./config/storybook": {
       "default": "./dist/config/storybook/index.cjs",
       "types": "./dist/config/storybook/index.d.ts"
     },
     "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./webpack-plugin": "./dist/config/webpack/plugins/sku-webpack-plugin/index.js",
+    "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"
   },
   "engines": {
@@ -35,8 +35,9 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc --project tsconfig.build.json",
-    "lint:tsc": "tsc --noEmit"
+    "build": "tspc --project tsconfig.build.json",
+    "lint:tsc": "tsc --noEmit",
+    "prepare": "ts-patch install -s"
   },
   "repository": {
     "type": "git",
@@ -187,6 +188,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.0.0"
+    "react-router-dom": "^6.0.0",
+    "ts-patch": "^3.3.0",
+    "typescript-transform-paths": "^3.5.2"
   }
 }

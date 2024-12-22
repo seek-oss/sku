@@ -2,7 +2,7 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-build/
+dist/
 eslint.config.mjs
 report/
 tsconfig.json

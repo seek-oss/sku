@@ -4,7 +4,7 @@
 import chalk from 'chalk';
 import { execSync } from 'node:child_process';
 import open from 'open';
-import isCI from '../isCI.js';
+import isCI from '@/utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
 
 const OSX_CHROME = 'google chrome';

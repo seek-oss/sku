@@ -8,41 +8,26 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
-import {
-  paths,
-  webpackDecorator,
-  polyfills,
-  isLibrary,
-  libraryName,
-  libraryFile,
-  supportedBrowsers,
-  displayNamesProd,
-  cspEnabled,
-  cspExtraScriptSrcHosts,
-  rootResolution,
-  skipPackageCompatibilityCompilation,
-  externalizeNodeModules,
-} from '../../context/index.js';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
 import MetricsPlugin from './plugins/metrics-plugin/index.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '../../lib/cwd.js';
+import { cwd } from '@/utils/cwd.js';
 
-import { getVocabConfig } from '../vocab/vocab.js';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '../targets.json' with { type: 'json' };
+import targets from '@/config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('../../entry/render');
-const libraryRenderEntry = require.resolve('../../entry/libraryRender');
+const renderEntry = require.resolve('../../../entry/render');
+const libraryRenderEntry = require.resolve('../../../entry/libraryRender');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -55,19 +40,36 @@ const makeWebpackConfig = ({
   hot = false,
   isStartScript = false,
   stats,
+  skuContext,
 }: MakeWebpackConfigOptions) => {
+  const {
+    paths,
+    webpackDecorator,
+    polyfills,
+    isLibrary,
+    libraryName,
+    libraryFile,
+    supportedBrowsers,
+    displayNamesProd,
+    cspEnabled,
+    cspExtraScriptSrcHosts,
+    rootResolution,
+    skipPackageCompatibilityCompilation,
+    externalizeNodeModules,
+    sourceMapsProd,
+  } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
-  const vocabOptions = getVocabConfig();
+  const vocabOptions = getVocabConfig(skuContext);
 
   const resolvedPolyfills =
     polyfills?.map((polyfill) =>
       require.resolve(polyfill, { paths: [cwd()] }),
     ) || [];
 
-  const skuClientEntry = require.resolve('../../entry/client/index.jsx');
+  const skuClientEntry = require.resolve('../../../entry/client/index.jsx');
 
   const createEntry = (entry: string): string[] => [
     ...resolvedPolyfills,
@@ -80,7 +82,7 @@ const makeWebpackConfig = ({
     : createEntry(skuClientEntry);
 
   const internalInclude = [
-    path.join(__dirname, '../../entry'),
+    path.join(__dirname, '../../../entry'),
     ...(paths.src || []),
   ];
 
@@ -120,7 +122,7 @@ const makeWebpackConfig = ({
       entry: {
         main: clientEntry,
       },
-      devtool: getSourceMapSetting({ isDevServer }),
+      devtool: getSourceMapSetting({ isDevServer, sourceMapsProd }),
       output: {
         path: paths.target,
         publicPath: paths.publicPath,
@@ -136,7 +138,7 @@ const makeWebpackConfig = ({
             }
           : {}),
       },
-      cache: getCacheSettings({ isDevServer }),
+      cache: getCacheSettings({ isDevServer, paths }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -301,7 +303,7 @@ const makeWebpackConfig = ({
         filename: 'render.js',
         library: { name: 'static', type: 'umd2', export: 'default' },
       },
-      cache: getCacheSettings({ isDevServer }),
+      cache: getCacheSettings({ isDevServer, paths }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
       },

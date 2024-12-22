@@ -2,9 +2,10 @@ import { join, dirname } from 'node:path';
 import nodeFs from 'node:fs';
 import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
-import { cwd } from '../../../lib/cwd.js';
 import { createRequire } from 'node:module';
-import { hasErrorCode } from '../../../lib/utils/error-guards.js';
+
+import { cwd } from '@/utils/cwd.js';
+import { hasErrorCode } from '@/utils/error-guards.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;

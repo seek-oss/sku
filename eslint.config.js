@@ -2,6 +2,7 @@ const seek = require('eslint-config-seek');
 const jsdoc = require('eslint-plugin-jsdoc');
 const unicorn = require('eslint-plugin-unicorn');
 const globals = require('globals');
+const importPlugin = require('eslint-plugin-import');
 
 module.exports = [
   {
@@ -26,6 +27,7 @@ module.exports = [
     plugins: {
       jsdoc,
       unicorn,
+      import: importPlugin,
     },
 
     languageOptions: {
@@ -60,6 +62,7 @@ module.exports = [
         node: {
           moduleDirectory: ['node_modules'],
         },
+        typescript: true,
       },
     },
 
@@ -106,6 +109,9 @@ module.exports = [
         projectRoot: __dirname,
         project: true,
       },
+    },
+    parserOptions: {
+      project: true,
     },
   },
   {

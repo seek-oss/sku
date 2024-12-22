@@ -5,18 +5,10 @@ import debug from 'debug';
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} from '../../../lib/language-utils.js';
+} from '@/utils/language-utils.js';
 
-import {
-  isStartScript,
-  paths,
-  routes,
-  environments,
-  sites,
-  transformOutputPath,
-  publicPath,
-} from '../../../context/index.js';
 import type { Stats } from 'webpack';
+import { SkuContext } from '@/context/createSkuContext.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;
@@ -29,23 +21,39 @@ const getCachedClientStats = memoize(getClientStats);
 
 // mapStatsToParams runs once for each render. It's purpose is
 // to forward the client webpack stats to the render function
-const mapStatsToParams = ({ webpackStats }: { webpackStats: Stats }) => {
-  const stats = getCachedClientStats(webpackStats);
+const mapStatsToParams =
+  ({ publicPath }: { publicPath: string }) =>
+  ({ webpackStats }: { webpackStats: Stats }) => {
+    const stats = getCachedClientStats(webpackStats);
 
-  return {
-    webpackStats: stats,
-    publicPath,
+    return {
+      webpackStats: stats,
+      publicPath,
+    };
   };
-};
 
-const getStartRoutes = () => {
+const getStartRoutes = ({
+  sites,
+  routes,
+  languages: skuLanguages,
+  environments,
+}: {
+  sites: SkuContext['sites'];
+  routes: SkuContext['routes'];
+  languages: SkuContext['languages'];
+  environments: SkuContext['environments'];
+}) => {
   const allRouteCombinations = [];
 
   const forcedSites = sites.length > 0 ? sites : [undefined];
 
   for (const route of routes) {
     const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-    const languages = getValidLanguagesForRoute(route);
+    const languages = getValidLanguagesForRoute({
+      route,
+      sites,
+      languages: skuLanguages,
+    });
     for (const language of languages) {
       if (routeIsForSpecificSite) {
         allRouteCombinations.push({
@@ -71,7 +79,17 @@ const getStartRoutes = () => {
   }));
 };
 
-const getBuildRoutes = () => {
+const getBuildRoutes = ({
+  sites,
+  routes,
+  languages: skuLanguages,
+  environments,
+}: {
+  sites: SkuContext['sites'];
+  routes: SkuContext['routes'];
+  languages: SkuContext['languages'];
+  environments: SkuContext['environments'];
+}) => {
   const allRouteCombinations = [];
 
   const forcedEnvs = environments.length > 0 ? environments : [undefined];
@@ -80,7 +98,11 @@ const getBuildRoutes = () => {
   for (const environment of forcedEnvs) {
     for (const route of routes) {
       const routeIsForSpecificSite = typeof route.siteIndex === 'number';
-      for (const language of getValidLanguagesForRoute(route)) {
+      for (const language of getValidLanguagesForRoute({
+        route,
+        sites,
+        languages: skuLanguages,
+      })) {
         log('Using Route', { route, language });
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({
@@ -114,17 +136,44 @@ const getBuildRoutes = () => {
   );
 };
 
-const createHtmlRenderPlugin = () => {
+const createHtmlRenderPlugin = ({
+  isStartScript,
+  skuContext,
+}: {
+  isStartScript?: boolean;
+  skuContext: SkuContext;
+}) => {
+  const {
+    paths,
+    routes,
+    environments,
+    sites,
+    transformOutputPath,
+    publicPath,
+    languages,
+  } = skuContext;
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
-  const allRoutes = isStartScript ? getStartRoutes() : getBuildRoutes();
+  const allRoutes = isStartScript
+    ? getStartRoutes({
+        sites,
+        routes,
+        environments,
+        languages,
+      })
+    : getBuildRoutes({
+        sites,
+        routes,
+        environments,
+        languages,
+      });
 
   return new HtmlRenderPlugin({
     renderDirectory: paths.target,
     routes: allRoutes,
     skipAssets: isStartScript,
     transformFilePath: transformOutputPath,
-    mapStatsToParams,
+    mapStatsToParams: mapStatsToParams({ publicPath }),
     extraGlobals: {
       // Allows Date serialization checks to work in render e.g. `myDate instance Date`
       Date,

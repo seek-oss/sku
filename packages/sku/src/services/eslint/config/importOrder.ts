@@ -1,18 +1,20 @@
 import { basename } from 'node:path';
-import { paths, rootResolution } from '../../../context/index.js';
+import { SkuContext } from '@/context/createSkuContext.js';
 
-const internalRegex = `^(${paths.src
-  .map((srcPath: string) => basename(srcPath))
-  .join('|')})/`;
+const internalRegex = (paths: SkuContext['paths']) =>
+  `^(${paths.src.map((srcPath: string) => basename(srcPath)).join('|')})/`;
 
-const rootResolutionConfig = {
+const rootResolutionConfig = (paths: SkuContext['paths']) => ({
   settings: {
-    'import-x/internal-regex': internalRegex,
+    'import-x/internal-regex': internalRegex(paths),
   },
-};
+});
 
-export const importOrderConfig = {
-  ...(rootResolution ? rootResolutionConfig : undefined),
+export const createImportOrderConfig = ({
+  paths,
+  rootResolution,
+}: SkuContext) => ({
+  ...(rootResolution ? rootResolutionConfig(paths) : undefined),
   rules: {
     'import-x/order': [
       'error',
@@ -38,4 +40,4 @@ export const importOrderConfig = {
       },
     ],
   },
-};
+});

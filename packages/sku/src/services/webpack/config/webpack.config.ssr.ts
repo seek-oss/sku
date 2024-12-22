@@ -1,7 +1,7 @@
 import { dirname, join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-import webpack from 'webpack';
+import webpack, { type Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
 import findUp from 'find-up';
@@ -15,27 +15,13 @@ import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '../../lib/cwd.js';
-import {
-  paths,
-  webpackDecorator,
-  polyfills,
-  supportedBrowsers,
-  displayNamesProd,
-  cspEnabled,
-  cspExtraScriptSrcHosts,
-  httpsDevServer,
-  useDevServerMiddleware,
-  rootResolution,
-  skipPackageCompatibilityCompilation,
-  externalizeNodeModules,
-} from '../../context/index.js';
-import { getVocabConfig } from '../vocab/vocab.js';
+import { cwd } from '@/utils/cwd.js';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '../targets.json' with { type: 'json' };
+import targets from '@/config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 
 const require = createRequire(import.meta.url);
@@ -49,13 +35,29 @@ const makeWebpackConfig = ({
   hot = false,
   isStartScript = false,
   stats,
+  skuContext,
 }: MakeWebpackConfigOptions) => {
+  const {
+    paths,
+    webpackDecorator,
+    polyfills,
+    supportedBrowsers,
+    displayNamesProd,
+    cspEnabled,
+    cspExtraScriptSrcHosts,
+    httpsDevServer,
+    useDevServerMiddleware,
+    rootResolution,
+    skipPackageCompatibilityCompilation,
+    externalizeNodeModules,
+    sourceMapsProd,
+  } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
-  const vocabOptions = getVocabConfig();
+  const vocabOptions = getVocabConfig(skuContext);
 
-  const internalInclude = [join(__dirname, '../../entry'), ...paths.src];
+  const internalInclude = [join(__dirname, '../../../entry'), ...paths.src];
 
   const resolvedPolyfills = polyfills.map((polyfill) =>
     require.resolve(polyfill, { paths: [cwd()] }),
@@ -66,7 +68,7 @@ const makeWebpackConfig = ({
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
-  const serverEntry = require.resolve('../../entry/server/index.js');
+  const serverEntry = require.resolve('../../../entry/server/index.js');
 
   console.log('serverEntry', serverEntry);
 
@@ -79,20 +81,20 @@ const makeWebpackConfig = ({
   // non-deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
-  const webpackConfigs = [
+  const webpackConfigs: Configuration[] = [
     {
       name: 'client',
       mode: webpackMode,
       target: `browserslist:${supportedBrowsers}`,
       entry: clientEntry,
-      devtool: getSourceMapSetting({ isDevServer }),
+      devtool: getSourceMapSetting({ isDevServer, sourceMapsProd }),
       output: {
         path: paths.target,
         publicPath,
         filename: `${fileMask}.js`,
         chunkFilename: `${fileMask}.js`,
       },
-      cache: getCacheSettings({ isDevServer }),
+      cache: getCacheSettings({ isDevServer, paths }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -255,7 +257,7 @@ const makeWebpackConfig = ({
         filename: 'server.js',
         library: { name: 'server', type: 'var' },
       },
-      cache: getCacheSettings({ isDevServer }),
+      cache: getCacheSettings({ isDevServer, paths }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         emitOnErrors: isProductionBuild,

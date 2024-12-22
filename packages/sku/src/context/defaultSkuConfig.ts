@@ -1,6 +1,6 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
-import isCompilePackage from '../lib/isCompilePackage.js';
+import isCompilePackage from '@/utils/isCompilePackage.js';
 import type { SkuConfig } from '../../sku-types.d.ts';
 
 const defaultDecorator = (a: any) => a;

@@ -11,11 +11,11 @@ import {
   SVG,
   resolvePackage,
 } from '../../utils/index.js';
-import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
+import defaultCompilePackages from '@/context/defaultCompilePackages.js';
 import validateOptions, {
   type SkuWebpackPluginOptions,
 } from './validateOptions.js';
-import targets from '../../../targets.json' with { type: 'json' };
+import targets from '@/config/targets.json' with { type: 'json' };
 
 class SkuWebpackPlugin implements WebpackPluginInstance {
   options: SkuWebpackPluginOptions;

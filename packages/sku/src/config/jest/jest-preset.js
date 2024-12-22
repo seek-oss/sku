@@ -1,12 +1,26 @@
 import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
-import { cwd } from '../../lib/cwd.js';
-import { paths, rootResolution, jestDecorator } from '../../context/index.js';
+import { cwd } from '@/utils/cwd.js';
+import { getSkuContext } from '@/context/createSkuContext.js';
+
+const { paths, rootResolution, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
+
+const asyncFunction = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('asyncFunction');
+      resolve();
+    }, 2000);
+  });
+};
+
+await asyncFunction();
+console.log('returning the decorator');
 
 /** @type {import('jest').Config} */
 export default jestDecorator({

@@ -1,4 +1,4 @@
-import { cwd } from '../../lib/cwd.js';
+import { cwd } from '@/utils/cwd.js';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
 

@@ -1,6 +1,10 @@
-import { sourceMapsProd } from '../../context/index.js';
-
-function getSourceMapSetting({ isDevServer }: { isDevServer: boolean }) {
+function getSourceMapSetting({
+  isDevServer,
+  sourceMapsProd,
+}: {
+  isDevServer: boolean;
+  sourceMapsProd: boolean;
+}) {
   if (isDevServer) {
     return 'eval-cheap-module-source-map';
   }

@@ -9,11 +9,11 @@ import { fdir as Fdir } from 'fdir';
 import semver from 'semver';
 import chalk from 'chalk';
 
-import banner from './banner.js';
+import banner from '@/utils/banners/banner.js';
 import provider from '../telemetry/index.js';
 
-import { getPathFromCwd } from './cwd.js';
-import { paths } from '../context/index.js';
+import { getPathFromCwd } from '@/utils/cwd.js';
+import { SkuContext } from '@/context/createSkuContext.js';
 
 const asyncMap = (
   list: unknown[],
@@ -22,7 +22,7 @@ const asyncMap = (
 
 const singletonPackages = ['@vanilla-extract/css'];
 
-const validatePeerDeps = async () => {
+const validatePeerDeps = async ({ paths }: SkuContext) => {
   if (isPnpm) {
     // pnpm doesn't nest dependencies in the same way as yarn or npm, so the method used below won't
     // work for detecting duplicate packages

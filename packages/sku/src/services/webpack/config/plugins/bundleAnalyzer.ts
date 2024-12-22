@@ -1,4 +1,4 @@
-import { getPathFromCwd } from '../../../lib/cwd.js';
+import { getPathFromCwd } from '@/utils/cwd.js';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export const bundleReportFolder = 'report';

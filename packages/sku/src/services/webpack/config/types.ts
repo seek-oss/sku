@@ -1,3 +1,5 @@
+import type { SkuContext } from '@/context/createSkuContext.js';
+
 export interface MakeWebpackConfigOptions {
   isIntegration?: boolean;
   isDevServer?: boolean;
@@ -8,4 +10,5 @@ export interface MakeWebpackConfigOptions {
   stats?: string;
   clientPort?: number;
   serverPort?: number;
+  skuContext: SkuContext;
 }

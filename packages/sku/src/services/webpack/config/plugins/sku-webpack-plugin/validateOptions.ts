@@ -2,7 +2,7 @@ import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
 import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
-import { hasErrorMessage } from '../../../../lib/utils/error-guards.js';
+import { hasErrorMessage } from '@/utils/error-guards.js';
 
 // @ts-expect-error
 const validator = new Validator();

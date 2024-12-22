@@ -1,9 +1,15 @@
-import { paths } from '../../context/index.js';
-import isCI from '../../lib/isCI.js';
+import isCI from '@/utils/isCI.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 
-function getWebpackCacheSettings({ isDevServer }: { isDevServer: boolean }) {
+function getWebpackCacheSettings({
+  isDevServer,
+  paths,
+}: {
+  isDevServer: boolean;
+  paths: SkuContext['paths'];
+}) {
   if (isDevServer && !isCI && !disableCacheOverride) {
     return {
       type: 'filesystem',

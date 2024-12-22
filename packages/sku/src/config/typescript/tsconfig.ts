@@ -1,7 +1,7 @@
-import { cwd } from '../../lib/cwd.js';
-import { rootResolution, tsconfigDecorator } from '../../context/index.js';
+import { cwd } from '@/utils/cwd.js';
+import { SkuContext } from '@/context/createSkuContext.js';
 
-export default () => {
+export default ({ rootResolution, tsconfigDecorator }: SkuContext) => {
   const config = {
     compilerOptions: {
       // Don't compile anything, only perform type checking

@@ -1,7 +1,7 @@
-import { paths } from '../../context/index.js';
 import { merge as webpackMerge } from 'webpack-merge';
-import makeWebpackConfig from '../webpack/webpack.config.js';
-import { resolvePackage } from '../webpack/utils/resolvePackage.js';
+import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
+import { resolvePackage } from '@/services/webpack/config/utils/resolvePackage.js';
+import { getSkuContext } from '@/context/createSkuContext.js';
 
 const hot = process.env.SKU_HOT !== 'false';
 
@@ -12,11 +12,14 @@ const EXAMPLE_MDX_FILE = 'example.mdx';
  * @param {import("webpack").Configuration} config
  * @param {{isDevServer: boolean}}
  */
-export default (config, { isDevServer }) => {
+export default async (config, { isDevServer }) => {
+  const skuContext = await getSkuContext();
+  const { paths } = skuContext;
   const clientWebpackConfig = makeWebpackConfig({
     isIntegration: true,
     isDevServer,
     hot: isDevServer && hot,
+    skuContext,
   }).find(({ name }) => name === 'client');
 
   // Ensure Storybook's webpack loaders ignore our code :(

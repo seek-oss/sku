@@ -1,17 +1,22 @@
+import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
+import { performance } from 'node:perf_hooks';
+import type { PathLike } from 'node:fs';
+
 import { generate } from 'selfsigned';
 import chalk from 'chalk';
-import exists from './exists.js';
-import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 
-import { getPathFromCwd } from './cwd.js';
-import { hosts } from '../context/index.js';
-import { performance } from 'node:perf_hooks';
 import provider from '../telemetry/index.js';
-import type { PathLike } from 'node:fs';
+import { getPathFromCwd } from '@/utils/cwd.js';
+import exists from '@/utils/exists.js';
+import { SkuContext } from '@/context/createSkuContext.js';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 
-const createSelfSignedCertificate = () => {
+const createSelfSignedCertificate = ({
+  hosts,
+}: {
+  hosts: SkuContext['hosts'];
+}) => {
   console.log(chalk.blue`Generating self-signed certificate`);
   const attributes = [
     {
@@ -71,10 +76,11 @@ const createSelfSignedCertificate = () => {
 const generateCertificate = async (
   certificatePath: PathLike,
   certificateDirPath: PathLike,
+  hosts: SkuContext['hosts'],
 ) => {
   const startTime = performance.now();
 
-  const pems = createSelfSignedCertificate();
+  const pems = createSelfSignedCertificate({ hosts });
 
   const certificateDirExists = await exists(certificateDirPath);
 
@@ -89,7 +95,10 @@ const generateCertificate = async (
   return pems.private + pems.cert;
 };
 
-const getCertificate = async (certificateDirName = '.ssl') => {
+const getCertificate = async (
+  certificateDirName = '.ssl',
+  hosts: SkuContext['hosts'],
+) => {
   const certificateDirPath = getPathFromCwd(`./${certificateDirName}`);
   const certificatePath = getPathFromCwd(
     `./${certificateDirName}/self-signed.pem`,
@@ -98,7 +107,7 @@ const getCertificate = async (certificateDirName = '.ssl') => {
   const certificateExists = await exists(certificatePath);
 
   if (!certificateExists) {
-    return generateCertificate(certificatePath, certificateDirPath);
+    return generateCertificate(certificatePath, certificateDirPath, hosts);
   }
 
   const certificateStat = await stat(certificatePath);
@@ -108,7 +117,7 @@ const getCertificate = async (certificateDirName = '.ssl') => {
   if ((now.valueOf() - certificateStat.ctime.valueOf()) / certificateTtl > 30) {
     await unlink(certificatePath);
 
-    return generateCertificate(certificatePath, certificateDirPath);
+    return generateCertificate(certificatePath, certificateDirPath, hosts);
   }
 
   return readFile(certificatePath, { encoding: 'utf8' });

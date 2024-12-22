@@ -1,16 +1,39 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '../../sku-types.js';
-import { getPathFromCwd } from '../lib/cwd.js';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../../sku-types.d.ts';
+import { getPathFromCwd } from '@/utils/cwd.js';
 import { getConfigPath } from './configPath.js';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
-import isCompilePackage from '../lib/isCompilePackage.js';
+import isCompilePackage from '@/utils/isCompilePackage.js';
 import chalk from 'chalk';
 import { join } from 'node:path';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
+import { createJiti } from 'jiti';
 
-const getSkuConfig = async (): Promise<{
+const jiti = createJiti(import.meta.url);
+
+let storedSkuContext: SkuContext | null = null;
+
+export const getSkuContext = async ({
+  isStartScript,
+  configPath,
+}: {
+  isStartScript?: boolean;
+  configPath?: string;
+} = {}) => {
+  if (storedSkuContext) {
+    return storedSkuContext;
+  }
+  storedSkuContext = await createSkuContext({ isStartScript, configPath });
+  return storedSkuContext;
+};
+
+const getSkuConfig = async ({
+  configPath,
+}: {
+  configPath?: string;
+}): Promise<{
   appSkuConfig: SkuConfig;
   appSkuConfigPath: string | null;
 }> => {
@@ -18,7 +41,7 @@ const getSkuConfig = async (): Promise<{
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
-  const customSkuConfig = getConfigPath() || process.env.SKU_CONFIG;
+  const customSkuConfig = configPath || process.env.SKU_CONFIG;
 
   if (customSkuConfig) {
     appSkuConfigPath = getPathFromCwd(customSkuConfig);
@@ -49,8 +72,16 @@ const getSkuConfig = async (): Promise<{
   };
 };
 
-export const createSkuContext = async () => {
-  const { appSkuConfig, appSkuConfigPath } = await getSkuConfig();
+export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
+
+export const createSkuContext = async ({
+  isStartScript,
+  configPath,
+}: {
+  isStartScript?: boolean;
+  configPath?: string;
+}) => {
+  const { appSkuConfig, appSkuConfigPath } = await getSkuConfig({ configPath });
 
   const skuConfig = {
     ...defaultSkuConfig,
@@ -70,11 +101,8 @@ export const createSkuContext = async () => {
     process.exit(1);
   }
 
-  const firstArg = process.argv[2];
-
-  const isStartScript = firstArg === 'start' || firstArg === 'start-ssr';
-
   type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
+
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
     typeof route === 'string' ? { route } : route;
 
@@ -187,4 +215,44 @@ export const createSkuContext = async () => {
   const skipPackageCompatibilityCompilation =
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
+
+  const skuContext = {
+    publicPath,
+    skuConfig,
+    paths,
+    hosts,
+    port,
+    libraryName,
+    libraryFile,
+    isLibrary,
+    polyfills,
+    webpackDecorator,
+    jestDecorator,
+    eslintDecorator,
+    tsconfigDecorator,
+    eslintIgnore,
+    routes,
+    environments,
+    supportedBrowsers,
+    sourceMapsProd,
+    displayNamesProd,
+    cspEnabled,
+    cspExtraScriptSrcHosts,
+    httpsDevServer,
+    rootResolution,
+    languages,
+    initialPath,
+    transformOutputPath,
+    sites,
+    useDevServerMiddleware,
+    skipPackageCompatibilityCompilation,
+    externalizeNodeModules,
+    defaultClientEntry,
+  };
+
+  storedSkuContext = skuContext;
+
+  return skuContext;
 };
+
+export type SkuContext = Awaited<ReturnType<typeof createSkuContext>>;

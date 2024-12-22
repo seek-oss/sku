@@ -1,4 +1,4 @@
-import babelConfig from '../../babel/babelConfig.js';
+import babelConfig from '@/config/babel/babelConfig.js';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { createRequire } from 'node:module';

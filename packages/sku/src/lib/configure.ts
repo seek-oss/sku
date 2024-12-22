@@ -8,8 +8,7 @@ import ensureGitignore from 'ensure-gitignore';
 
 import prettierConfig from '../config/prettier/prettierConfig.js';
 import createTSConfig from '../config/typescript/tsconfig.js';
-import { bundleReportFolder } from '../config/webpack/plugins/bundleAnalyzer.js';
-import { paths, httpsDevServer, languages } from '../context/index.js';
+import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
@@ -18,9 +17,10 @@ import {
 } from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
-import { getPathFromCwd, writeFileToCWD } from './cwd.js';
+import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
-import { hasErrorMessage } from './utils/error-guards.js';
+import { hasErrorMessage } from '@/utils/error-guards.js';
+import { SkuContext } from '@/context/createSkuContext.js';
 
 const coverageFolder = 'coverage';
 
@@ -29,7 +29,8 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
-export default async () => {
+export default async (skuContext: SkuContext) => {
+  const { paths, httpsDevServer, languages, hosts } = skuContext;
   // Ignore target directories
   const webpackTargetDirectory = addSep(paths.relativeTarget);
 
@@ -111,7 +112,7 @@ export default async () => {
 
   // Generate TypeScript configuration
   const tsConfigFileName = 'tsconfig.json';
-  await writeFileToCWD(tsConfigFileName, createTSConfig());
+  await writeFileToCWD(tsConfigFileName, createTSConfig(skuContext));
   gitIgnorePatterns.push(tsConfigFileName);
 
   const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
@@ -133,7 +134,7 @@ export default async () => {
   // Generate self-signed certificate and ignore
   const selfSignedCertificateDirName = '.ssl';
   if (httpsDevServer) {
-    await getCertificate(selfSignedCertificateDirName);
+    await getCertificate(selfSignedCertificateDirName, hosts);
     gitIgnorePatterns.push(selfSignedCertificateDirName);
   } else {
     await rm(getPathFromCwd(selfSignedCertificateDirName), {

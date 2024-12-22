@@ -6,7 +6,7 @@ import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import type { SkuConfig } from '../../sku-types.d.ts';
-import { hasErrorMessage } from '../lib/utils/error-guards.js';
+import { hasErrorMessage } from '@/utils/error-guards.js';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 

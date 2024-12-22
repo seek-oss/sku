@@ -1,7 +1,7 @@
 import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import debug from 'debug';
-import provider from '../../../../telemetry/index.js';
+import provider from '@/telemetry/index.js';
 import type { Compiler, WebpackPluginInstance } from 'webpack';
 
 const log = debug('sku:metrics');

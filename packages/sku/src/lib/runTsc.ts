@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import { runBin } from './runBin.js';
-import { cwd } from './cwd.js';
+import { runBin } from '@/utils/runBin.js';
+import { cwd } from '@/utils/cwd.js';
 
 const runTsc = () => {
   console.log(chalk.cyan(`Checking code with TypeScript compiler`));

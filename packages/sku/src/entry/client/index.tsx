@@ -3,11 +3,8 @@
 import client from '__sku_alias__clientEntry';
 
 import { loadableReady } from '@loadable/component';
-import { createRequire } from 'node:module';
 
 import clientContextKey from '../clientContextKey.js';
-
-const require = createRequire(import.meta.url);
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {

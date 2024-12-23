@@ -17,8 +17,5 @@
     "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/**/*"],
-  "exclude": [
-    "node_modules",
-    "**/@loadable",
-  ]
+  "exclude": ["node_modules", "**/@loadable"]
 }

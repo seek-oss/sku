@@ -8,7 +8,7 @@ import { configOption } from './options/config/config.option.js';
 import { environmentOption } from './options/environment/environment.option.js';
 import { initDebug } from '@/utils/debug.js';
 import { createSkuContext, getSkuContext } from '@/context/createSkuContext.js';
-import { initializeTelemetry } from '@/telemetry/index.js';
+import { initializeTelemetry } from '@/services/telemetry/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

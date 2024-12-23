@@ -19,7 +19,7 @@ import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
 import { fix as esLintFix } from '@/services/eslint/runESLint.js';
 import install from '@/services/packageManager/install.js';
 
-import configure from '@/lib/configure.js';
+import configure from '@/utils/configureApp.js';
 
 import { setCwd } from '@/utils/cwd.js';
 import banner from '@/utils/banners/banner.js';

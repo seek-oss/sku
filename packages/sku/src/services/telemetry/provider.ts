@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
 
-import { getAddCommand } from '../services/packageManager/packageManager.js';
+import { getAddCommand } from '../packageManager/packageManager.js';
 import banner from '@/utils/banners/banner.js';
 
 const require = createRequire(import.meta.url);

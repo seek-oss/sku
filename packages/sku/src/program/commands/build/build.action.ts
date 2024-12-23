@@ -12,7 +12,7 @@ import {
 import { run } from '@/services/webpack/runWebpack.js';
 import createHtmlRenderPlugin from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
-import provider from '@/telemetry/index.js';
+import provider from '@/services/telemetry/index.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import type { StatsChoices } from '@/program/options/stats/stats.option.js';

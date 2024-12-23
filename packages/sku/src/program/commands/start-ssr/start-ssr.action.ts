@@ -5,7 +5,7 @@ import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';
 
-import getCertificate from '../../../lib/certificate.js';
+import getCertificate from '../../../utils/certificate.js';
 import {
   copyPublicFiles,
   ensureTargetDirectory,
@@ -15,7 +15,7 @@ import { checkHosts, getAppHosts } from '@/utils/contextUtils/hosts.js';
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '@/services/webpack/config/statsConfig.js';
 import allocatePort from '@/utils/allocatePort.js';
-import openBrowser from '../../../lib/openBrowser/index.js';
+import openBrowser from '@/openBrowser/index.js';
 import createServerManager from '@/services/serverManager.js';
 
 import { watchVocabCompile } from '@/services/vocab/runVocab.js';

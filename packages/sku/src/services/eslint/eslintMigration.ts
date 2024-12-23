@@ -5,7 +5,7 @@ import { createEslintIgnoresConfig } from '@/services/eslint/config/ignores.js';
 
 import { getPathFromCwd } from '@/utils/cwd.js';
 import exists from '@/utils/exists.js';
-import { SkuConfigUpdater } from '@/lib/SkuConfigUpdater.js';
+import { SkuConfigUpdater } from '@/utils/SkuConfigUpdater.js';
 
 const oldEslintConfigPath = getPathFromCwd('.eslintrc');
 const eslintIgnorePath = getPathFromCwd('.eslintignore');

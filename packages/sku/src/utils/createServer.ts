@@ -4,7 +4,7 @@ import {
 } from 'node:http';
 import { createServer as createHttpsServer } from 'node:https';
 
-import getCertificate from '../lib/certificate.js';
+import getCertificate from './certificate.js';
 import { SkuContext } from '@/context/createSkuContext.js';
 
 const createServer = async ({

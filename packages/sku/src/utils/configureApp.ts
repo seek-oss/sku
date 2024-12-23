@@ -6,15 +6,15 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '../config/prettier/prettierConfig.js';
-import createTSConfig from '../config/typescript/tsconfig.js';
-import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
+import prettierConfig from '@/config/prettier/prettierConfig.js';
+import createTSConfig from '@/config/typescript/tsconfig.js';
+import { bundleReportFolder } from '@/services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} from '../services/eslint/eslintMigration.js';
+} from '@/services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';

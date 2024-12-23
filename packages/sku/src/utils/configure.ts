@@ -1,6 +1,6 @@
 import { getPathFromCwd } from './cwd.js';
 import fs from 'node:fs';
-import _validatePeerDeps from '../lib/validatePeerDeps.js';
+import _validatePeerDeps from './validatePeerDeps.js';
 import { log } from './debug.js';
 import { SkuContext } from '@/context/createSkuContext.js';
 
@@ -22,7 +22,7 @@ export const configureProject = async (skuContext: SkuContext) => {
     return;
   }
 
-  const configure = (await import('../lib/configure.js')).default;
+  const configure = (await import('../utils/configureApp.js')).default;
   await configure(skuContext);
 };
 

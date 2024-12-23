@@ -1,4 +1,4 @@
-import preCommit from '../../../lib/preCommit.js';
+import preCommit from '../../../utils/preCommit.js';
 import { configureProject } from '@/utils/configure.js';
 import { SkuContext } from '@/context/createSkuContext.js';
 

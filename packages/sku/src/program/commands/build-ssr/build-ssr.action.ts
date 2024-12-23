@@ -9,7 +9,7 @@ import {
   ensureTargetDirectory,
 } from '@/utils/buildFileUtils.js';
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
-import provider from '@/telemetry/index.js';
+import provider from '@/services/telemetry/index.js';
 
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';

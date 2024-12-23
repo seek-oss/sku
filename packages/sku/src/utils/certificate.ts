@@ -5,7 +5,7 @@ import type { PathLike } from 'node:fs';
 import { generate } from 'selfsigned';
 import chalk from 'chalk';
 
-import provider from '../telemetry/index.js';
+import provider from '@/services/telemetry/index.js';
 import { getPathFromCwd } from '@/utils/cwd.js';
 import exists from '@/utils/exists.js';
 import { SkuContext } from '@/context/createSkuContext.js';

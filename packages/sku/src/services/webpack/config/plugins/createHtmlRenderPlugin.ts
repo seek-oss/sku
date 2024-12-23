@@ -9,6 +9,7 @@ import {
 
 import type { Stats } from 'webpack';
 import { SkuContext } from '@/context/createSkuContext.js';
+import { join } from 'node:path';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;
@@ -136,6 +137,8 @@ const getBuildRoutes = ({
   );
 };
 
+const startTransformPath = ({ site = '', route = '' }) => join(site, route);
+
 const createHtmlRenderPlugin = ({
   isStartScript,
   skuContext,
@@ -172,7 +175,7 @@ const createHtmlRenderPlugin = ({
     renderDirectory: paths.target,
     routes: allRoutes,
     skipAssets: isStartScript,
-    transformFilePath: transformOutputPath,
+    transformFilePath: isStartScript ? startTransformPath : transformOutputPath,
     mapStatsToParams: mapStatsToParams({ publicPath }),
     extraGlobals: {
       // Allows Date serialization checks to work in render e.g. `myDate instance Date`

@@ -7,7 +7,7 @@ import { debugOption } from './options/debug/debug.option.js';
 import { configOption } from './options/config/config.option.js';
 import { environmentOption } from './options/environment/environment.option.js';
 import { initDebug } from '@/utils/debug.js';
-import { getSkuContext } from '@/context/createSkuContext.js';
+import { createSkuContext, getSkuContext } from '@/context/createSkuContext.js';
 import { initializeTelemetry } from '@/telemetry/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -32,11 +32,7 @@ program
     }
   })
   .hook('preAction', async (_thisCommand, actionCommand) => {
-    const isStartScript = actionCommand.name().includes('start');
-    console.log('isStartScript', isStartScript);
-    console.log('beforeStart', program.opts()?.config);
     const skuContext = await getSkuContext({
-      isStartScript,
       configPath: program.opts()?.config,
     });
     initializeTelemetry(skuContext);

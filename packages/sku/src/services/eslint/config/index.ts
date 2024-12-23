@@ -4,9 +4,14 @@ import type { Linter } from 'eslint';
 
 import { createImportOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
-import { getSkuContext, SkuContext } from '@/context/createSkuContext.js';
+import { getSkuContext } from '@/context/createSkuContext.js';
 
-export const createEslintConfig = (skuContext: SkuContext) => {
+export const createEslintConfig = async ({
+  configPath,
+}: {
+  configPath?: string;
+}) => {
+  const skuContext = await getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;
 
@@ -27,7 +32,3 @@ export const createEslintConfig = (skuContext: SkuContext) => {
 
   return eslintConfigSku;
 };
-
-const skuContext = await getSkuContext();
-
-export const eslintConfigSku = createEslintConfig(skuContext);

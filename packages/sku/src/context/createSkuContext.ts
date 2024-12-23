@@ -1,31 +1,28 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../../sku-types.d.ts';
 import { getPathFromCwd } from '@/utils/cwd.js';
-import { getConfigPath } from './configPath.js';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
 import isCompilePackage from '@/utils/isCompilePackage.js';
 import chalk from 'chalk';
-import { join } from 'node:path';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import { createJiti } from 'jiti';
 
 const jiti = createJiti(import.meta.url);
 
-let storedSkuContext: SkuContext | null = null;
+let storedSkuContext: SkuContext;
 
 export const getSkuContext = async ({
-  isStartScript,
   configPath,
 }: {
-  isStartScript?: boolean;
   configPath?: string;
 } = {}) => {
   if (storedSkuContext) {
     return storedSkuContext;
   }
-  storedSkuContext = await createSkuContext({ isStartScript, configPath });
+  const skuContext = await createSkuContext({ configPath });
+  storedSkuContext = skuContext;
   return storedSkuContext;
 };
 
@@ -35,9 +32,11 @@ const getSkuConfig = async ({
   configPath?: string;
 }): Promise<{
   appSkuConfig: SkuConfig;
-  appSkuConfigPath: string | null;
+  appSkuConfigPath?: string;
+  configPath?: string;
 }> => {
   let appSkuConfigPath;
+  let appConfigPath;
   const tsPath = getPathFromCwd('sku.config.ts');
   const jsPath = getPathFromCwd('sku.config.js');
 
@@ -45,14 +44,18 @@ const getSkuConfig = async ({
 
   if (customSkuConfig) {
     appSkuConfigPath = getPathFromCwd(customSkuConfig);
+    appConfigPath = customSkuConfig;
   } else if (existsSync(tsPath)) {
     appSkuConfigPath = tsPath;
+    appConfigPath = 'sku.config.ts';
   } else if (existsSync(jsPath)) {
     appSkuConfigPath = jsPath;
+    appConfigPath = 'sku.config.js';
   } else {
     return {
       appSkuConfig: {},
-      appSkuConfigPath: null,
+      appSkuConfigPath: undefined,
+      configPath: undefined,
     };
   }
 
@@ -69,19 +72,22 @@ const getSkuConfig = async ({
   return {
     appSkuConfig: isDefaultConfig(newConfig) ? newConfig.default : newConfig,
     appSkuConfigPath,
+    configPath: appConfigPath,
   };
 };
 
 export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 
 export const createSkuContext = async ({
-  isStartScript,
   configPath,
 }: {
-  isStartScript?: boolean;
   configPath?: string;
 }) => {
-  const { appSkuConfig, appSkuConfigPath } = await getSkuConfig({ configPath });
+  const {
+    appSkuConfig,
+    appSkuConfigPath,
+    configPath: appConfigPath,
+  } = await getSkuConfig({ configPath });
 
   const skuConfig = {
     ...defaultSkuConfig,
@@ -128,12 +134,6 @@ export const createSkuContext = async ({
         typeof lang === 'string' ? { name: lang } : lang,
       )
     : null;
-
-  const startTransformPath = ({ site = '', route = '' }) => join(site, route);
-
-  const transformOutputPath = isStartScript
-    ? startTransformPath
-    : skuConfig.transformOutputPath;
 
   const getSetupTests = (setupTests: string | string[]) => {
     if (!setupTests) {
@@ -187,7 +187,7 @@ export const createSkuContext = async ({
     public: getPathFromCwd(skuConfig.public!),
     target: getPathFromCwd(skuConfig.target!),
     relativeTarget: skuConfig.target!,
-    publicPath: isStartScript ? '/' : publicPath,
+    publicPath,
     setupTests: getSetupTests(skuConfig.setupTests!),
   };
 
@@ -217,6 +217,7 @@ export const createSkuContext = async ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   const skuContext = {
+    configPath: appConfigPath,
     publicPath,
     skuConfig,
     paths,
@@ -242,15 +243,13 @@ export const createSkuContext = async ({
     rootResolution,
     languages,
     initialPath,
-    transformOutputPath,
+    transformOutputPath: skuConfig.transformOutputPath,
     sites,
     useDevServerMiddleware,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
   };
-
-  storedSkuContext = skuContext;
 
   return skuContext;
 };

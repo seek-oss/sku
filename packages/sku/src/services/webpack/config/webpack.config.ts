@@ -125,7 +125,7 @@ const makeWebpackConfig = ({
       devtool: getSourceMapSetting({ isDevServer, sourceMapsProd }),
       output: {
         path: paths.target,
-        publicPath: paths.publicPath,
+        publicPath: isStartScript ? '/' : paths.publicPath,
         filename: jsFileMask,
         chunkFilename: jsChunkFileMask,
         ...(isLibrary
@@ -299,7 +299,7 @@ const makeWebpackConfig = ({
       ],
       output: {
         path: paths.target,
-        publicPath: paths.publicPath,
+        publicPath: isStartScript ? '/' : paths.publicPath,
         filename: 'render.js',
         library: { name: 'static', type: 'umd2', export: 'default' },
       },
@@ -319,7 +319,9 @@ const makeWebpackConfig = ({
         new webpack.DefinePlugin({
           __SKU_LIBRARY_NAME__: JSON.stringify(libraryName),
           __SKU_LIBRARY_FILE__: JSON.stringify(libraryFile),
-          __SKU_PUBLIC_PATH__: JSON.stringify(paths.publicPath),
+          __SKU_PUBLIC_PATH__: JSON.stringify(
+            isStartScript ? '/' : paths.publicPath,
+          ),
           __SKU_CSP__: JSON.stringify({
             enabled: cspEnabled,
             extraHosts: cspExtraScriptSrcHosts,

@@ -72,7 +72,11 @@ const makeWebpackConfig = ({
 
   console.log('serverEntry', serverEntry);
 
-  const publicPath = isDevServer ? clientServer : paths.publicPath;
+  const publicPath = isDevServer
+    ? clientServer
+    : isStartScript
+      ? '/'
+      : paths.publicPath;
 
   const webpackStatsFilename = 'webpackStats.json';
 

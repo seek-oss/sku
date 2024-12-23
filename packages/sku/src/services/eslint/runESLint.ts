@@ -18,7 +18,9 @@ const runESLint = async ({
 }) => {
   console.log(chalk.cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
-  const eslintConfigSku = createEslintConfig(skuContext);
+  const eslintConfigSku = await createEslintConfig({
+    configPath: skuContext.configPath,
+  });
 
   const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({

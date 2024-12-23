@@ -112,7 +112,7 @@ export const startAction = async ({
 
   const devServerConfig: Configuration = {
     devMiddleware: {
-      publicPath: paths.publicPath,
+      publicPath: '/',
     },
     port: availablePort,
     host: localhost,

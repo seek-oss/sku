@@ -3,14 +3,12 @@
 import client from '__sku_alias__clientEntry';
 
 import { loadableReady } from '@loadable/component';
-import { createRequire } from 'node:module';
 
 import clientContextKey from '../clientContextKey.js';
 
-const require = createRequire(import.meta.url);
-
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
+    // eslint-disable-next-line
     throw new Error(require('dedent')`
       The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrateRoot. e.g.
 

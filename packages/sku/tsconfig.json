@@ -20,8 +20,5 @@
   "exclude": [
     "node_modules",
     "**/@loadable",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.test.js"
   ]
 }

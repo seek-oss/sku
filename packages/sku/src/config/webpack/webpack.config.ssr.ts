@@ -68,8 +68,6 @@ const makeWebpackConfig = ({
 
   const serverEntry = require.resolve('../../entry/server/index.js');
 
-  console.log('serverEntry', serverEntry);
-
   const publicPath = isDevServer ? clientServer : paths.publicPath;
 
   const webpackStatsFilename = 'webpackStats.json';

@@ -17,5 +17,11 @@
     "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "**/@loadable"]
+  "exclude": [
+    "node_modules",
+    "**/@loadable",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.test.js"
+  ]
 }

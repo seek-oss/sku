@@ -7,6 +7,7 @@ import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import type { SkuConfig } from '../../sku-types.d.ts';
 import { hasErrorMessage } from '../lib/utils/error-guards.js';
+import type { ValidationError } from 'fastest-validator';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
@@ -34,17 +35,17 @@ export default (skuConfig: SkuConfig) => {
     });
 
   // Validate schema types
-  const schemaCheckResult = configSchema(skuConfig);
-  if (schemaCheckResult !== true) {
-    schemaCheckResult.forEach(
-      ({ message, field }: { message: string; field: string }) => {
+  if (!configSchema.async) {
+    const schemaCheckResult = configSchema(skuConfig);
+    if (schemaCheckResult !== true) {
+      schemaCheckResult.forEach(({ message, field }: ValidationError) => {
         const errorMessage = message
           ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
           : `🚫 '${chalk.bold(field)}' is invalid`;
 
         errors.push(errorMessage);
-      },
-    );
+      });
+    }
   }
 
   // Validate library entry has corresponding libraryName

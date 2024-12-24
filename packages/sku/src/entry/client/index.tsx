@@ -1,6 +1,7 @@
 // '__sku_alias__clientEntry' is a webpack alias
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
+import dedent from 'dedent';
 
 import { loadableReady } from '@loadable/component';
 
@@ -8,8 +9,7 @@ import clientContextKey from '../clientContextKey.js';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
-    // eslint-disable-next-line
-    throw new Error(require('dedent')`
+    throw new Error(dedent`
       The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrateRoot. e.g.
 
       import { hydrateRoot } from 'react-dom/client';

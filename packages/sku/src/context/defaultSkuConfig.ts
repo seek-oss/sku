@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import isCompilePackage from '../lib/isCompilePackage.js';
 import type { SkuConfig } from '../../sku-types.d.ts';
 
-const defaultDecorator = (a: any) => a;
+const defaultDecorator = <T>(a: T) => a;
 
 export default {
   clientEntry: 'src/client.js',

@@ -1,0 +1,24 @@
+{
+  "name": "@sku-fixtures/vite-source-maps",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/server.jsx --outDir dist/server",
+    "preview": "cross-env NODE_ENV=production node server"
+  },
+  "dependencies": {
+    "@vitejs/plugin-legacy": "^5.4.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "dedent": "^1.5.1",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

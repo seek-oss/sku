@@ -5,7 +5,7 @@ import App from './App';
 
 export default ({ site }) => {
   hydrateRoot(
-    document.getElementById('app'),
+    document.getElementById('root'),
     <BrowserRouter>
       <App site={site} />
     </BrowserRouter>,

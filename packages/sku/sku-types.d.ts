@@ -2,6 +2,15 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
+import type { RenderToPipeableStreamOptions } from 'react-dom/server';
+import type { ChunkCollector } from 'vite-preload';
+
+export interface ViteRenderCallbackParams {
+  collector: ChunkCollector;
+  url?: string;
+  site?: string;
+  options: RenderToPipeableStreamOptions;
+}
 
 export interface RenderCallbackParams {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
@@ -95,6 +104,13 @@ type TransformOutputPathFunction = (
 type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfig {
+  /**
+   * The bundler to use for the app. 'vite' is currently experimental.
+   *
+   * @default 'webpack'
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=bundler
+   */
+  bundler?: 'webpack' | 'vite';
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *

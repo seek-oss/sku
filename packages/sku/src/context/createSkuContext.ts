@@ -217,6 +217,7 @@ export const createSkuContext = async ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   const skuContext = {
+    bundler: skuConfig.bundler,
     configPath: appConfigPath,
     publicPath,
     skuConfig,

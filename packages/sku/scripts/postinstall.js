@@ -4,11 +4,13 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import debug from 'debug';
 import chalk from 'chalk';
+import { createSkuContext } from '../dist/context/createSkuContext.js';
 
 try {
   const initCwd = process.env.INIT_CWD;
 
   const localCwd = initCwd || process.cwd();
+
   const packageJson = join(localCwd, './package.json');
   const packageJsonContents = await readFile(packageJson, 'utf-8');
   const {
@@ -18,7 +20,6 @@ try {
     skuSkipPostInstall = false,
     skuSkipPostinstall = false,
   } = JSON.parse(packageJsonContents);
-
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSkuDep = Boolean(dependencies?.sku);
   // sku should always be a dev dependency now that sku init installs it as one, but some repos may still have it as a regular dependency
@@ -32,20 +33,13 @@ try {
   }
 
   // Suppressing eslint. These imports will work after the build steps for postinstall.
+  const { setCwd } = await import('../dist/utils/cwd.js');
 
-  const { setCwd } = await import('../dist/lib/cwd.js');
-
-  const banner = (await import('../dist/lib/banner.js')).default;
+  const banner = (await import('../dist/utils/banners/banner.js')).default;
 
   const log = debug('sku:postinstall');
 
-  // npm scripts can have an incorrect cwd
-  // in this case INIT_CWD should be set
-  // see: https://docs.npmjs.com/cli/run-script
-  // must be run first
-  if (initCwd) {
-    setCwd(initCwd);
-  }
+  setCwd(localCwd);
 
   if (hasSkuDep) {
     banner('warning', 'sku dependency detected', [
@@ -60,7 +54,7 @@ try {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    configure = (await import('../src/utils/configureApp.js')).default;
+    configure = (await import('../dist/utils/configureApp.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
@@ -72,7 +66,8 @@ try {
 
   try {
     log('postinstall', 'running configure');
-    configure();
+    const skuContext = await createSkuContext({});
+    configure(skuContext);
     log('postinstall', 'successfully configured');
   } catch (error) {
     console.error(

@@ -80,7 +80,7 @@ const getStartRoutes = ({
   }));
 };
 
-const getBuildRoutes = ({
+export const getBuildRoutes = ({
   sites,
   routes,
   languages: skuLanguages,

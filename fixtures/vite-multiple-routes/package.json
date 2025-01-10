@@ -1,0 +1,19 @@
+{
+  "name": "@sku-fixtures/vite-multiple-routes",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vanilla-extract/css": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "6.28.1",
+    "react-router-dom": "^6.28.1"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "@testing-library/react": "^14.0.0",
+    "dedent": "^1.5.1",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

@@ -82,4 +82,4 @@ jobs:
           restore-keys: jest-${{ runner.os }}-
 
       - name: Test
-        run: pnpm run test && pnpm run test:sku-init
+        run: aa-exec --profile=chrome pnpm run test && aa-exec --profile=chrome pnpm run test:sku-init

@@ -52,7 +52,6 @@
   "dependencies": {
     "@babel/core": "^7.21.8",
     "@babel/plugin-transform-react-constant-elements": "^7.21.3",
-    "@babel/plugin-transform-react-inline-elements": "^7.21.0",
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",

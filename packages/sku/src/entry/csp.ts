@@ -15,10 +15,21 @@ interface CreateCSPHandlerOptions {
   isDevelopment?: boolean;
 }
 
+export type CSPHandler = {
+  registerScript: (script: string) => void;
+  createCSPTag: () => string;
+  handleHtml: (html: string) => string;
+};
+
+export type SkuCSP = {
+  enabled: boolean;
+  extraHosts: string[];
+};
+
 export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,
-}: CreateCSPHandlerOptions = {}) {
+}: CreateCSPHandlerOptions = {}): CSPHandler {
   let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();

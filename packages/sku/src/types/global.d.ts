@@ -1,3 +1,5 @@
+import type { SkuCSP } from '../entry/csp.js';
+
 declare module '__sku_alias__serverEntry';
 declare module '__sku_alias__clientEntry';
 declare module '__sku_alias__libraryEntry';
@@ -17,14 +19,3 @@ declare const __SKU_DEV_HTTPS__: boolean;
 
 declare const __SKU_LIBRARY_NAME__: string;
 declare const __SKU_LIBRARY_FILE__: string;
-
-type CSPHandler = {
-  registerScript: (script: string) => void;
-  createCSPTag: () => string;
-  handleHtml: (html: string) => string;
-};
-
-type SkuCSP = {
-  enabled: boolean;
-  extraHosts: string[];
-};

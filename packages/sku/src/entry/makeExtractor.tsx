@@ -1,6 +1,7 @@
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import type { RenderCallbackParams } from '../../sku-types.d.ts';
 import defaultEntryPoint from '../context/defaultClientEntry.js';
+import type { CSPHandler } from './csp.js';
 
 const getNewTags = ({ before, after }: { before: string; after: string }) => {
   const beforeArr = before.split('\n');
@@ -10,7 +11,16 @@ const getNewTags = ({ before, after }: { before: string; after: string }) => {
   return afterArr.filter((tag: string) => !beforeArr.includes(tag)).join('\n');
 };
 
-export default (stats: object, publicPath: string, csp?: CSPHandler) => {
+type ExtractorContext = Pick<
+  RenderCallbackParams,
+  'getHeadTags' | 'flushHeadTags' | 'getBodyTags' | 'SkuProvider' | 'extractor'
+>;
+
+export default (
+  stats: object,
+  publicPath: string,
+  csp?: CSPHandler,
+): ExtractorContext => {
   const extractor = new ChunkExtractor({
     stats,
     entrypoints: [defaultEntryPoint],
@@ -39,14 +49,7 @@ export default (stats: object, publicPath: string, csp?: CSPHandler) => {
 
   const getCssHeadTags = () => extractor.getStyleTags();
 
-  const extractorContext: Pick<
-    RenderCallbackParams,
-    | 'getHeadTags'
-    | 'flushHeadTags'
-    | 'getBodyTags'
-    | 'SkuProvider'
-    | 'extractor'
-  > = {
+  return {
     getHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
@@ -103,5 +106,4 @@ export default (stats: object, publicPath: string, csp?: CSPHandler) => {
     SkuProvider,
     extractor,
   };
-  return extractorContext;
 };

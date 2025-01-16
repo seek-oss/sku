@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import { lazy } from 'sku/vite-preload';
+import { loadable } from 'sku/@vite-preload';
+
+import { TestComponent } from './TestComponent.jsx';
 
 const routes = {
   au: {
@@ -12,14 +14,17 @@ const routes = {
   },
 };
 
-const Home = lazy(() => import('./handlers/Home'));
-const Details = lazy(() => import('./handlers/Details'));
+const Home = loadable(() => import('./handlers/Home'));
+const Details = loadable(() => import('./handlers/Details'));
 
 export default ({ site }) => {
   return (
-    <Routes>
-      <Route path={routes[site].home} element={<Home site={site} />} />
-      <Route path={routes[site].details} element={<Details site={site} />} />
-    </Routes>
+    <div>
+      <TestComponent />
+      <Routes>
+        <Route path={routes[site].home} element={<Home site={site} />} />
+        <Route path={routes[site].details} element={<Details site={site} />} />
+      </Routes>
+    </div>
   );
 };

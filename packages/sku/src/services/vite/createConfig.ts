@@ -1,16 +1,13 @@
 import type { SkuContext } from '@/context/createSkuContext.js';
 import react from '@vitejs/plugin-react';
 import type { InlineConfig } from 'vite';
-import preloadPlugin from 'vite-preload/plugin';
-import legacy from '@vitejs/plugin-legacy';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { cssFileFilter } from '@vanilla-extract/integration';
 import resolveFrom from 'resolve-from';
 import type { Plugin } from 'esbuild';
 import { dirname } from 'path';
-import { fileURLToPath } from 'node:url';
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = dirname(__filename);
+
+import preloadPlugin from './preload/plugin.js';
 
 export const fixViteVanillaExtractDepScanPlugin = (): Plugin => ({
   name: 'fix-vite-vanilla-extract-dep-scan',
@@ -40,15 +37,12 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
-      vanillaExtractPlugin(),
       react(),
-      preloadPlugin({
-        __internal_importHelperModuleName: 'sku/vite-preload/__internal',
+      vanillaExtractPlugin({
+        // @ts-ignore
+        pluginFilter: (plugin) => !plugin.name.startsWith('vite:react-'),
       }),
-      legacy({
-        modernPolyfills: true,
-        renderLegacyChunks: false,
-      }),
+      preloadPlugin(),
       ...plugins,
     ],
     resolve: {
@@ -59,6 +53,7 @@ export const createViteConfig = ({
     },
     define: {
       VITE_SKU_CONTEXT: JSON.stringify(skuContext),
+      'process.env': process.env,
     },
     build: {
       outDir: outDir[configType],
@@ -87,9 +82,6 @@ export const createViteConfig = ({
     },
     ssr: {
       noExternal: ['@vanilla-extract/css', 'braid-design-system'],
-    },
-    html: {
-      cspNonce: '%NONCE%',
     },
   } satisfies InlineConfig;
 };

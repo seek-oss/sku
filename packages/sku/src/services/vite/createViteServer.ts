@@ -28,11 +28,7 @@ const SkuViteMiddleware = (skuContext: SkuContext): Plugin => ({
           // TODO: fix the title here.
           const headTags = `<title>Sku Project</title>\n`;
 
-          const indexHtml = createDefaultHtmlIndex({
-            headTags,
-            entryPath: `/${clientEntry}`,
-            bodyTags: serializeConfig({ site: site?.name }),
-          });
+          const indexHtml = '';
 
           const html = await server.transformIndexHtml(
             req.url || '/',
@@ -53,12 +49,10 @@ export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';
   const root = process.cwd();
 
-  // const sites = skuContext.sites;
-
   const server = await createServer({
     ...createViteConfig({
       skuContext,
-      plugins: [SkuViteMiddleware(skuContext)],
+      plugins: skuContext.sites ? [SkuViteMiddleware(skuContext)] : [],
     }),
     root,
     base,

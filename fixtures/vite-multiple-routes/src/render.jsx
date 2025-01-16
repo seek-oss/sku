@@ -2,23 +2,22 @@ import html from 'dedent';
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
-import { preloadAll, ChunkCollectorContext } from 'sku/vite-preload';
+import { preloadAll } from 'sku/@vite-preload';
+import { LoadableProvider } from 'sku/@vite-preload/provider';
 
 import App from './App';
 
 export default {
-  render: async ({ url, site, options, collector }) => {
+  render: async ({ url, site, options, loadableCollector }) => {
     await preloadAll();
-
-    // TODO: Do a react helmet test here.
 
     const pipeableStream = renderToPipeableStream(
       <StrictMode>
-        <ChunkCollectorContext collector={collector}>
+        <LoadableProvider value={loadableCollector}>
           <StaticRouter location={url} context={{}}>
             <App site={site} />
           </StaticRouter>
-        </ChunkCollectorContext>
+        </LoadableProvider>
       </StrictMode>,
       options,
     );
@@ -59,7 +58,8 @@ export default {
     };
   },
 
-  provideClientContext: ({ site }) => ({
+  provideClientContext: ({ site, url }) => ({
     site,
+    initialRoute: url,
   }),
 };

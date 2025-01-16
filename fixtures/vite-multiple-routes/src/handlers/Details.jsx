@@ -1,10 +1,17 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { lazy } from 'sku/vite-preload';
+import { loadable } from 'sku/@vite-preload';
 
 import * as styles from './Details.css.js';
 
-const AsyncComponent = lazy(() => import('./AsyncComponent'));
+const slowImport = (promise) => () =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(promise()), 1000);
+  });
+
+export const AsyncComponent = loadable(
+  slowImport(() => import('./AsyncComponent')),
+);
 
 export default function Details({ site }) {
   const { id } = useParams();

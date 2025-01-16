@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AsyncComponent = () => {
+function AsyncComponent() {
   const [num, setNumber] = useState(0);
 
   return (
@@ -8,6 +8,6 @@ const AsyncComponent = () => {
       Some special async content {num}
     </span>
   );
-};
+}
 
 export default AsyncComponent;

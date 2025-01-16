@@ -22,13 +22,8 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
   const manifest = JSON.parse(
     fs.readFileSync(resolve('./dist/.vite/manifest.json'), 'utf-8'),
   );
-  const template = fs.readFileSync(resolve('./dist/index.html'), 'utf-8');
 
   const routes = getBuildRoutes(skuContext);
-  console.log(
-    'Prerendering routes:',
-    routes.map((r) => r.route),
-  );
 
   for (const route of routes) {
     const render = (await import(resolve('./dist/render/render.js'))).default;
@@ -36,7 +31,6 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
       url: route.route,
       render,
       site: route.site,
-      template,
       manifest,
     });
 
@@ -57,5 +51,8 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const filePath = getFileName(route);
     ensureDirectoryExistence(filePath);
     fs.writeFileSync(resolve(filePath), html);
+
+    // Make this a nicer log.
+    console.log(`Prerendered route: ${route.route} to ${filePath}`);
   }
 };

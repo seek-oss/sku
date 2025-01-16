@@ -1,42 +1,59 @@
 import type { SkuContext } from '@/context/createSkuContext.js';
 import dedent from 'dedent';
 
-export const APP_HEAD = '<!--app-head-->';
-export const APP_HTML = '<!--app-html-->';
+export const APP_BODY = '<!--app-body-->';
 
-export const createDefaultHtmlIndex = ({
-  entryPath,
+export const getOpeningHtml = ({
   headTags,
-  bodyTags,
   rootId = 'root',
+  nonce = '%NONCE%',
+  title = 'Sku Project',
 }: {
-  entryPath: string;
-  headTags: string;
-  bodyTags?: string;
+  headTags?: string;
   rootId?: string;
+  title?: string;
+  nonce?: string;
 }) => dedent`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
     ${headTags}
-    ${APP_HEAD}
   </head>
   <body>
-    <div id="${rootId}">${APP_HTML}</div>
-    <script type="module" src="${entryPath}"></script>
-    ${bodyTags || ''}
-  </body>
+    <div id="${rootId}">`;
+
+export const getClosingHtml = ({
+  bodyTags,
+}: {
+  bodyTags?: string;
+}) => dedent`</div>
+${bodyTags}
+</body>
 </html>`;
+
+export const createDefaultHtmlIndex = ({
+  title,
+  entryPath,
+}: {
+  title: string;
+  entryPath: string;
+}) => {
+  const openingHtml = getOpeningHtml({ title });
+  const closingHtml = getClosingHtml({
+    bodyTags: `<script type="module" src="${entryPath}"></script>`,
+  });
+
+  return `${openingHtml}${APP_BODY}${closingHtml}`;
+};
 
 export const createIndexFile = (skuContext: SkuContext) => {
   const { skuConfig } = skuContext;
   const { clientEntry } = skuConfig;
 
-  const headTags = `<title>Sku Project</title>\n`;
-
   const indexHtml = createDefaultHtmlIndex({
-    headTags,
+    title: 'Sku Project',
     entryPath: clientEntry,
   });
 

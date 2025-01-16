@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { preloadAll, ChunkCollectorContext } from 'sku/vite-preload';
 
-import App from './App.jsx';
+import { App } from './App.jsx';
 
 export default {
   render: async ({ options, collector }) => {

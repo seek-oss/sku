@@ -1,14 +1,14 @@
 import crypto from 'node:crypto';
-import { createChunkCollector } from 'vite-preload';
 import { Transform } from 'node:stream';
 import createCSPHandler from '@/entry/csp.js';
 import clientContextKey from '@/entry/clientContextKey.js';
 import serializeJavascript from 'serialize-javascript';
+import { createCollector } from '@/services/vite/preload/collector.js';
+import { getClosingHtml, getOpeningHtml } from '@/services/vite/createIndex.js';
 
 type CreatePreRenderedHtmlOptions = {
   url: string;
   render: any;
-  template: string;
   manifest: any;
   site: any;
 };
@@ -22,7 +22,6 @@ export const serializeConfig = (config: object) =>
 export const createPreRenderedHtml = async ({
   url,
   render,
-  template,
   manifest,
   site,
 }: CreatePreRenderedHtmlOptions): Promise<string> => {
@@ -31,21 +30,19 @@ export const createPreRenderedHtml = async ({
 
     let didError = false;
 
-    const collector = createChunkCollector({
+    const loadableCollector = createCollector({
+      externalJsFiles: ['@vite/client'],
       manifest,
-      preloadAssets: true,
-      preloadFonts: true,
       nonce,
     });
 
-    const [head, rest] = template.split(`<!--app-html-->`);
-    let html = '';
     let clientContext = {};
 
     if (render.provideClientContext) {
       // Check what kind of context needs to be passed into this function.
       clientContext = await render.provideClientContext({
         site,
+        url,
       });
     }
 
@@ -55,31 +52,12 @@ export const createPreRenderedHtml = async ({
     const renderedBodyTags = render.bodyTags ? await render.bodyTags() : '';
     const renderedHeadTags = render.headTags ? await render.headTags() : '';
 
-    const bodyTags =
-      Object.keys(clientContext).length > 0
-        ? [serializeConfig(clientContext), renderedBodyTags].join('\n')
-        : renderedBodyTags;
-
-    // const result = await render.renderDocument({
-    //   ...renderContext,
-    //   headTags: getHeadTags(),
-    //   bodyTags,
-    //   app,
-    // });
-
-    // if (csp.enabled) {
-    //   const cspHandler = createCSPHandler({
-    //     extraHosts: [publicPath, ...csp.extraHosts],
-    //     isDevelopment: process.env.NODE_ENV === 'development',
-    //   });
-    //
-    //   return cspHandler.hanzdleHtml(result);
-    // }
+    let html = '';
 
     const { pipe } = await render.render({
       url,
       site,
-      collector,
+      loadableCollector,
       options: {
         nonce,
         onShellError(error: any) {
@@ -87,32 +65,34 @@ export const createPreRenderedHtml = async ({
           reject(error);
         },
         onShellReady() {
-          console.log('onShellReady');
+          const bodyTags = [
+            Object.keys(clientContext).length > 0 &&
+              serializeConfig(clientContext),
+            renderedBodyTags,
+            loadableCollector.getAllScripts(),
+          ].join('\n');
+          const headTags = [
+            renderedHeadTags,
+            loadableCollector.getAllPreloads(),
+          ].join('\n');
 
-          const links = collector.getLinkHeaders();
-
-          console.log('Links', links);
-
-          const modules = collector.getChunks();
-
-          console.log('Modules used', modules);
-
-          const tags = collector.getTags();
-
-          html += head
-            .replaceAll('%NONCE%', nonce)
-            .replace('<!--app-head-->', `${renderedHeadTags}\n${tags}`);
+          html += getOpeningHtml({
+            nonce,
+            title: 'Sku Project',
+            headTags,
+          });
 
           const transformStream = new Transform({
             transform(chunk, encoding, callback) {
               html += chunk.toString();
-              console.log('Chunk', chunk.length);
               callback();
             },
           });
 
           transformStream.on('finish', () => {
-            html = `${html}\n${bodyTags}\n${rest}`;
+            html += getClosingHtml({
+              bodyTags,
+            });
             resolve(html);
           });
 

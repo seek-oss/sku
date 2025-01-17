@@ -21,11 +21,6 @@ export type CSPHandler = {
   handleHtml: (html: string) => string;
 };
 
-export type SkuCSP = {
-  enabled: boolean;
-  extraHosts: string[];
-};
-
 export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,

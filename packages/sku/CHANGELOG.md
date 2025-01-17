@@ -1,5 +1,19 @@
 # sku
 
+## 13.4.0
+
+### Minor Changes
+
+- Add WebP and AVIF image format support to sku ([#1119](https://github.com/seek-oss/sku/pull/1119))
+
+  Support for `webp` and `avif` image formats has been added. Note that browser support for these formats may vary. To ensure compatibility across browsers, consumers are advised to use the `<picture>` element with fallback formats.
+
+### Patch Changes
+
+- Fixes a bug that caused React 19 applications to fail during `sku build` ([#1143](https://github.com/seek-oss/sku/pull/1143))
+
+  Note: remaining on React 18 is recommended until `sku` officially supports React 19. Updating your application to React 19 may require overriding dependency versions by configuring your package manager. Additionally, there may be other incompatibilities that haven't been found yet.
+
 ## 13.3.0
 
 ### Minor Changes

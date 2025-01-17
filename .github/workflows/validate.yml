@@ -88,4 +88,4 @@ jobs:
         run: sudo chmod +x /home/runner/work/sku/sku/packages/sku/dist/bin/sku.js
 
       - name: Test
-        run: pnpm run test && pnpm run test:sku-init
+        run: aa-exec --profile=chrome pnpm run test && aa-exec --profile=chrome pnpm run test:sku-init

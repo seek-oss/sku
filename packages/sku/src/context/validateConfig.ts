@@ -5,10 +5,13 @@ import didYouMean from 'didyoumean2';
 import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
+import type { SkuConfig } from '../../sku-types.d.ts';
+import { hasErrorMessage } from '../lib/utils/error-guards.js';
+import type { ValidationError } from 'fastest-validator';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
-const exitWithErrors = async (errors) => {
+const exitWithErrors = async (errors: string[]) => {
   console.log(chalk.bold(chalk.underline(chalk.red('Errors in sku config:'))));
   errors.forEach((error) => {
     console.log(chalk.yellow(error));
@@ -16,7 +19,7 @@ const exitWithErrors = async (errors) => {
   process.exit(1);
 };
 
-export default (skuConfig) => {
+export default (skuConfig: SkuConfig) => {
   const errors = [];
 
   // Validate extra keys
@@ -32,15 +35,17 @@ export default (skuConfig) => {
     });
 
   // Validate schema types
-  const schemaCheckResult = configSchema(skuConfig);
-  if (schemaCheckResult !== true) {
-    schemaCheckResult.forEach(({ message, field }) => {
-      const errorMessage = message
-        ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
-        : `🚫 '${chalk.bold(field)}' is invalid`;
+  if (!configSchema.async) {
+    const schemaCheckResult = configSchema(skuConfig);
+    if (schemaCheckResult !== true) {
+      schemaCheckResult.forEach(({ message, field }: ValidationError) => {
+        const errorMessage = message
+          ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
+          : `🚫 '${chalk.bold(field)}' is invalid`;
 
-      errors.push(errorMessage);
-    });
+        errors.push(errorMessage);
+      });
+    }
   }
 
   // Validate library entry has corresponding libraryName
@@ -55,13 +60,15 @@ export default (skuConfig) => {
   }
 
   // Ensure defaultClientEntry is not configured as a route name
-  skuConfig.routes.forEach(({ name }) => {
-    if (name === defaultClientEntry) {
-      errors.push(
-        `🚫 Invalid route name: '${chalk.bold(
-          defaultClientEntry,
-        )}', please use a different route name`,
-      );
+  skuConfig.routes?.forEach((skuRoute) => {
+    if (typeof skuRoute !== 'string') {
+      if (skuRoute.name === defaultClientEntry) {
+        errors.push(
+          `🚫 Invalid route name: '${chalk.bold(
+            defaultClientEntry,
+          )}', please use a different route name`,
+        );
+      }
     }
   });
 
@@ -69,11 +76,13 @@ export default (skuConfig) => {
   try {
     browserslist(skuConfig.supportedBrowsers);
   } catch (e) {
-    errors.push(
-      `🚫 '${chalk.bold(
-        'supportedBrowsers',
-      )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
-    );
+    if (hasErrorMessage(e)) {
+      errors.push(
+        `🚫 '${chalk.bold(
+          'supportedBrowsers',
+        )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
+      );
+    }
   }
 
   if (errors.length > 0) {

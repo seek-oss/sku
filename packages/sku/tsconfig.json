@@ -4,6 +4,7 @@
     "rootDir": "./src",
     "target": "ESNext",
     "allowJs": true,
+    "jsx": "preserve",
     "module": "nodenext",
     "baseUrl": "./",
     "moduleResolution": "nodenext",
@@ -11,14 +12,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "types": ["webpack/module", "jest", "node"],
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["./src/**/*"],
-  "exclude": [
-    "node_modules",
-    "**/@loadable",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.test.js"
-  ]
+  "exclude": ["node_modules", "**/@loadable"]
 }

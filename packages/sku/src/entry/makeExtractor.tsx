@@ -1,25 +1,32 @@
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
-
+import type { RenderCallbackParams } from '../../sku-types.d.ts';
 import defaultEntryPoint from '../context/defaultClientEntry.js';
+import type { CSPHandler } from './csp.js';
 
-const getNewTags = ({ before, after }) => {
+const getNewTags = ({ before, after }: { before: string; after: string }) => {
   const beforeArr = before.split('\n');
 
   const afterArr = after.split('\n');
 
-  return afterArr.filter((tag) => !beforeArr.includes(tag)).join('\n');
+  return afterArr.filter((tag: string) => !beforeArr.includes(tag)).join('\n');
 };
 
-/** @typedef {import("../../sku-types.d.ts").RenderCallbackParams} RenderCallbackParams */
+type ExtractorContext = Pick<
+  RenderCallbackParams,
+  'getHeadTags' | 'flushHeadTags' | 'getBodyTags' | 'SkuProvider' | 'extractor'
+>;
 
-export default (stats, publicPath, csp) => {
+export default (
+  stats: object,
+  publicPath: string,
+  csp?: CSPHandler,
+): ExtractorContext => {
   const extractor = new ChunkExtractor({
     stats,
     entrypoints: [defaultEntryPoint],
   });
 
-  /** @type {RenderCallbackParams['SkuProvider']} */
-  const SkuProvider = ({ children }) => (
+  const SkuProvider: RenderCallbackParams['SkuProvider'] = ({ children }) => (
     <ChunkExtractorManager extractor={extractor}>
       {children}
     </ChunkExtractorManager>
@@ -43,7 +50,6 @@ export default (stats, publicPath, csp) => {
   const getCssHeadTags = () => extractor.getStyleTags();
 
   return {
-    /** @type RenderCallbackParams['getHeadTags'] */
     getHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
@@ -60,7 +66,6 @@ export default (stats, publicPath, csp) => {
       }
       return tags.join('\n');
     },
-    /** @type RenderCallbackParams['flushHeadTags'] */
     flushHeadTags: ({ excludeJs, excludeCss } = {}) => {
       const tags = [];
 
@@ -97,7 +102,6 @@ export default (stats, publicPath, csp) => {
       }
       return tags.join('\n');
     },
-    /** @type RenderCallbackParams['getBodyTags'] */
     getBodyTags: () => extractor.getScriptTags(extraScriptTagAttributes),
     SkuProvider,
     extractor,

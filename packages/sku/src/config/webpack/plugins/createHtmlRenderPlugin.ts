@@ -67,6 +67,7 @@ const getStartRoutes = () => {
     routeName: route.name,
     route: getRouteWithLanguage(route.route, language),
     language,
+    path: '',
   }));
 };
 
@@ -122,11 +123,6 @@ const createHtmlRenderPlugin = () => {
     renderDirectory: paths.target,
     routes: allRoutes,
     skipAssets: isStartScript,
-    // Incompatible type here. In the SkuConfig type the `transformOutputPath` input is the following type:
-    // environment: string;
-    // site: string;
-    // path: string; Path does not exist in the transformFilePath type that the HTMLRenderPLugin accepts.
-    // @ts-expect-error
     transformFilePath: transformOutputPath,
     mapStatsToParams,
     extraGlobals: {

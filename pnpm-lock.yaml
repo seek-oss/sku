@@ -566,9 +566,6 @@ importers:
       '@babel/plugin-transform-react-constant-elements':
         specifier: ^7.21.3
         version: 7.25.7(@babel/core@7.25.8)
-      '@babel/plugin-transform-react-inline-elements':
-        specifier: ^7.21.0
-        version: 7.25.7(@babel/core@7.25.8)
       '@babel/plugin-transform-runtime':
         specifier: ^7.21.4
         version: 7.25.7(@babel/core@7.25.8)
@@ -1061,10 +1058,6 @@ packages:
     resolution: {integrity: sha512-12xfNeKNH7jubQNm7PAkzlLwEmCs1tfuX3UjIw6vP6QXi+leKh6+LyC/+Ed4EIQermwd58wsyh070yjDHFlNGg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helper-builder-react-jsx@7.25.7':
-    resolution: {integrity: sha512-fqUfgY1k8uhv8T9boCLTF5fVVJFkHZ9qE3C62UQeVRxSgVtLvWpCfutxGdC+RNOjWTjJu7x7xFEJZiQQeP+gIw==}
-    engines: {node: '>=6.9.0'}
-
   '@babel/helper-compilation-targets@7.25.7':
     resolution: {integrity: sha512-DniTEax0sv6isaw6qSQSfV4gVRNtw2rte8HHM45t9ZR0xILaufBRNkpMifCRiAPyvL4ACD6v0gfCwCmtOQaV4A==}
     engines: {node: '>=6.9.0'}
@@ -1541,12 +1534,6 @@ packages:
 
   '@babel/plugin-transform-react-display-name@7.25.7':
     resolution: {integrity: sha512-r0QY7NVU8OnrwE+w2IWiRom0wwsTbjx4+xH2RTd7AVdof3uurXOF+/mXHQDRk+2jIvWgSaCHKMgggfvM4dyUGA==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
-  '@babel/plugin-transform-react-inline-elements@7.25.7':
-    resolution: {integrity: sha512-X92N1hWgUkZCvFJPFepIhd3XfiEmdkIC5IEckJ1sUpP7xlWwetHRfJtHtcuS5/7pKGgCAEB6ensiIY2QTP6MqA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -8527,11 +8514,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-builder-react-jsx@7.25.7':
-    dependencies:
-      '@babel/helper-annotate-as-pure': 7.25.7
-      '@babel/types': 7.26.0
-
   '@babel/helper-compilation-targets@7.25.7':
     dependencies:
       '@babel/compat-data': 7.25.8
@@ -9068,12 +9050,6 @@ snapshots:
   '@babel/plugin-transform-react-display-name@7.25.7(@babel/core@7.25.8)':
     dependencies:
       '@babel/core': 7.25.8
-      '@babel/helper-plugin-utils': 7.25.7
-
-  '@babel/plugin-transform-react-inline-elements@7.25.7(@babel/core@7.25.8)':
-    dependencies:
-      '@babel/core': 7.25.8
-      '@babel/helper-builder-react-jsx': 7.25.7
       '@babel/helper-plugin-utils': 7.25.7
 
   '@babel/plugin-transform-react-jsx-development@7.25.7(@babel/core@7.25.8)':

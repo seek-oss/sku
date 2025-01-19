@@ -19,8 +19,6 @@
     },
     "./@vite-preload/provider": "./dist/services/vite/preload/PreloadContext.jsx",
     "./@vite-preload": "./dist/services/vite/preload/loadable.jsx",
-    "./vite-preload": "./src/vite-preload/index.ts",
-    "./vite-preload/__internal": "./src/vite-preload/__internal.ts",
     "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"

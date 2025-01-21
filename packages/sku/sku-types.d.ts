@@ -3,13 +3,13 @@ import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
 import type { RenderToPipeableStreamOptions } from 'react-dom/server';
-import type { ChunkCollector } from 'vite-preload';
+import type { Collector } from '@/services/vite/preload/collector.js';
 
 export interface ViteRenderCallbackParams {
-  collector: ChunkCollector;
   url?: string;
   site?: string;
   options: RenderToPipeableStreamOptions;
+  collector: Collector;
 }
 
 export interface RenderCallbackParams {

@@ -1,4 +1,3 @@
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
@@ -15,15 +14,13 @@ import prettyMilliseconds from 'pretty-ms';
 import { viteService } from '@/services/vite/index.js';
 
 export const viteBuildHandler = async ({
-  stats,
   skuContext,
 }: {
-  stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
-  // TODO: build vite here.
+
   const { isLibrary, cspEnabled, paths } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
@@ -34,26 +31,10 @@ export const viteBuildHandler = async ({
     await ensureTargetDirectory({ paths });
     await cleanTargetDirectory({ paths });
 
-    await viteService.build(skuContext);
     await viteService.buildSsg(skuContext);
 
-    // await run(
-    //   webpack(
-    //     makeWebpackConfig({
-    //       htmlRenderPlugin: !isLibrary
-    //         ? createHtmlRenderPlugin({
-    //           isStartScript: false,
-    //           skuContext,
-    //         })
-    //         : undefined,
-    //       stats,
-    //       skuContext,
-    //     }),
-    //   ),
-    //   { stats },
-    // );
-    // await cleanStaticRenderEntry({ paths });
-    // await copyPublicFiles({ paths });
+    await cleanStaticRenderEntry({ paths });
+    await copyPublicFiles({ paths });
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

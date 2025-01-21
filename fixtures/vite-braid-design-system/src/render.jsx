@@ -1,18 +1,19 @@
 import { StrictMode } from 'react';
 import { renderToString, renderToPipeableStream } from 'react-dom/server';
-import { preloadAll, ChunkCollectorContext } from 'sku/vite-preload';
+import { preloadAll } from 'sku/@vite-preload';
+import { LoadableProvider } from 'sku/@vite-preload/provider';
 
 import App from './App';
 
 export default {
-  render: async ({ site, options, collector }) => {
+  render: async ({ site, options, loadableCollector }) => {
     await preloadAll();
 
     return renderToPipeableStream(
       <StrictMode>
-        <ChunkCollectorContext collector={collector}>
-          <App themeName={site} />
-        </ChunkCollectorContext>
+        <LoadableProvider value={loadableCollector}>
+          <App themeName={site.name} />
+        </LoadableProvider>
       </StrictMode>,
       options,
     );

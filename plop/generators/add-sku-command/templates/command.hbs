@@ -1,13 +1,11 @@
-const { Command } = require('commander');
+import { Command } from 'commander';
+import { {{camelCase commandName}}Action } from './{{commandName}}.action.js';
 
-const {{camelCase commandName}} = new Command('{{commandName}}');
+const {{camelCase commandName}}Command = new Command('{{commandName}}');
 
-{{camelCase commandName}}
+{{camelCase commandName}}Command
   .description('<YOUR_DESCRIPTION_HERE>')
   .argument('<ARGUMENTS_HERE>', '<ARGUMENT_DESCRIPTION>')
-  .action(() => {
-    const {{camelCase commandName}}Action = require('./{{commandName}}.action.js');
-    {{camelCase commandName}}Action();
-  });
+  .action({{camelCase commandName}}Action);
 
-module.exports = {{camelCase commandName}};
+export { {{camelCase commandName}}Command };

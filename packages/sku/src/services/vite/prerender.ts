@@ -1,6 +1,3 @@
-// Pre-render the app into static HTML.
-// run `npm run generate` and then `dist/static` can be served as a static site.
-
 import fs from 'node:fs';
 import path from 'node:path';
 import { SkuContext } from '@/context/createSkuContext.js';

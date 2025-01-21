@@ -4,27 +4,21 @@ import { Transform } from 'node:stream';
 import { setTimeout } from 'node:timers/promises';
 import express from 'express';
 import type { ViteDevServer } from 'vite';
-import { createChunkCollector } from 'vite-preload';
 import crypto from 'node:crypto';
 import { createServer as createHttpServer, type Server } from 'http';
 
 import { createViteConfig } from '@/services/vite/createConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
-import {
-  createDefaultHtmlIndex,
-  getClosingHtml,
-  getOpeningHtml,
-} from '@/services/vite/createIndex.js';
+import { getClosingHtml, getOpeningHtml } from '@/services/vite/createIndex.js';
 import { createCollector } from '@/services/vite/preload/collector.js';
-import react from '@vitejs/plugin-react';
-import preloadPlugin from '@/services/vite/preload/plugin.js';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { createRequire } from 'node:module';
 
 const isTest = process.env.VITEST;
 
 const base = process.env.BASE || '/';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
+const require = createRequire(import.meta.url);
 
 type CreateServerOptions = {
   root?: string;
@@ -44,10 +38,7 @@ export const createServer: (options: CreateServerOptions) => Promise<{
   try {
     const manifest = isProduction
       ? JSON.parse(
-          await fs.readFile(
-            resolve('./dist/client/.vite/manifest.json'),
-            'utf-8',
-          ),
+          await fs.readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
         )
       : null;
 
@@ -77,7 +68,7 @@ export const createServer: (options: CreateServerOptions) => Promise<{
       const compression = (await import('compression')).default;
       const sirv = (await import('sirv')).default;
       app.use(compression());
-      app.use(base, sirv(resolve('./dist/client'), { extensions: [] }));
+      app.use(base, sirv(resolve('./dist'), { extensions: [] }));
     }
 
     // Serve HTML
@@ -91,7 +82,24 @@ export const createServer: (options: CreateServerOptions) => Promise<{
         if (!isProduction && vite) {
           // Always read fresh template in development
           let html = getOpeningHtml({
-            nonce,
+            title: 'Sku Project',
+            headTags: '<!-- head tags -->',
+          });
+
+          html += '<!-- app tags -->';
+
+          const clientEntry = require.resolve('./entries/vite-client.jsx');
+
+          html += getClosingHtml({
+            bodyTags: `<script type="module" src="${clientEntry}"></script>\n<!-- body tags -->`,
+          });
+
+          viteHtml = (await vite.transformIndexHtml(url, html)) || '';
+
+          render = (await vite.ssrLoadModule(skuContext.paths.serverEntry))
+            .render;
+        } else {
+          let html = getOpeningHtml({
             title: 'Sku Project',
             headTags: '<!-- head tags -->',
           });
@@ -99,16 +107,11 @@ export const createServer: (options: CreateServerOptions) => Promise<{
           html += '<!-- app tags -->';
 
           html += getClosingHtml({
-            bodyTags: `<script type="module" src="/${skuContext.skuConfig.clientEntry}"></script>\n<!-- body tags -->`,
+            bodyTags: `<!-- body tags -->`,
           });
 
-          viteHtml = (await vite.transformIndexHtml(url, html)) || '';
+          viteHtml = html;
 
-          console.log('viteHtml', viteHtml);
-          render = (await vite.ssrLoadModule(skuContext.paths.serverEntry))
-            .render;
-        } else {
-          // skuContext.paths.serverEntry.split('/').pop() || fix this by removing the mimetype.
           const serverEntryFile = 'server.js';
           render = (await import(resolve(`./dist/server/${serverEntryFile}`)))
             .render;
@@ -160,19 +163,6 @@ export const createServer: (options: CreateServerOptions) => Promise<{
 
               const [startHtml, endHtml] = viteHtml.split('<!-- app tags -->');
 
-              //               const startHtml = getOpeningHtml({
-              //                 title: 'Sku Project',
-              //                 headTags: `<script type="module">
-              //             import RefreshRuntime from "/@react-refresh"
-              //             RefreshRuntime.injectIntoGlobalHook(window)
-              //             window.$RefreshReg$ = () => {}
-              //             window.$RefreshSig$ = () => (type) => type
-              //             window.__vite_plugin_react_preamble_installed__ = true
-              //             </script>
-              //     <script type="module" src="/@vite/client"></script>
-              // ${tags}`,
-              //               });
-
               res.write(startHtml.replace('<!-- head tags -->', tags));
 
               const transformStream = new Transform({
@@ -183,11 +173,7 @@ export const createServer: (options: CreateServerOptions) => Promise<{
               });
 
               transformStream.on('finish', () => {
-                const scripts = loadableCollector.getAllScripts();
-                const bodyTags = scripts;
-                // const endHtml = getClosingHtml({
-                //   bodyTags,
-                // });
+                const bodyTags = loadableCollector.getAllScripts();
                 res.end(endHtml.replace('<!-- body tags -->', bodyTags));
               });
 

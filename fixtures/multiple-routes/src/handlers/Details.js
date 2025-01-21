@@ -15,7 +15,7 @@ export default function Details({ site }) {
     if (id) {
       setDetailsId(id);
     }
-  }, [id]);
+  }, []);
 
   return (
     <h1 className={styles.root}>

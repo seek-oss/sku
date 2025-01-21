@@ -40,7 +40,7 @@ export default function preloadPlugin({ debug }: PluginOptions = {}): Plugin {
   let count = 0;
 
   return {
-    name: 'sku/@vite-preload',
+    name: 'vite-plugin-sku-vite-preload',
 
     apply(config) {
       // Enable on SSR builds (--ssr)
@@ -91,8 +91,11 @@ export default function preloadPlugin({ debug }: PluginOptions = {}): Plugin {
                       );
                       let files = readdirSync(dirname(absolutePath));
                       let name = pathParse(absolutePath).base;
+
                       let found = files.find(
-                        (x) => x.replace(extname(x), '') === name,
+                        (x) =>
+                          x.replace(extname(x), '') ===
+                          name.replace(extname(name), ''),
                       );
                       const relativePath = getRelativePath(
                         dirname(absolutePath) + '/' + found,

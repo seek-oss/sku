@@ -1,40 +1,45 @@
-import type { SkuContext } from '@/context/createSkuContext.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
+import { performance } from 'node:perf_hooks';
+import prettyMilliseconds from 'pretty-ms';
+import webpack from 'webpack';
+import chalk from 'chalk';
+import { run } from '@/services/webpack/runWebpack.js';
 import {
-  cleanStaticRenderEntry,
-  cleanTargetDirectory,
   copyPublicFiles,
+  cleanTargetDirectory,
   ensureTargetDirectory,
 } from '@/utils/buildFileUtils.js';
-import { performance } from 'node:perf_hooks';
+import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
 import provider from '@/services/telemetry/index.js';
-import chalk from 'chalk';
-import prettyMilliseconds from 'pretty-ms';
-import { viteService } from '@/services/vite/index.js';
 
-export const viteBuildSsrHandler = async ({
+import { runVocabCompile } from '@/services/vocab/runVocab.js';
+import { configureProject, validatePeerDeps } from '@/utils/configure.js';
+import type { StatsChoices } from '@/program/options/stats/stats.option.js';
+import { SkuContext } from '@/context/createSkuContext.js';
+
+export const webpackBuildSsrHandler = async ({
+  stats,
   skuContext,
 }: {
+  stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
-
-  const { isLibrary, cspEnabled, paths } = skuContext;
+  const { port, cspEnabled } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
-
-  // TODO: Build Vite Index Here.
   try {
     await runVocabCompile(skuContext);
-    await ensureTargetDirectory({ paths });
-    await cleanTargetDirectory({ paths });
-
-    await viteService.buildSsr(skuContext);
-
-    await cleanStaticRenderEntry({ paths });
-    await copyPublicFiles({ paths });
+    const [clientConfig, serverConfig] = makeWebpackConfig({
+      clientPort: port.client,
+      serverPort: port.server,
+      stats,
+      skuContext,
+    });
+    await ensureTargetDirectory(skuContext);
+    await cleanTargetDirectory(skuContext);
+    await run(webpack(clientConfig), { stats });
+    await run(webpack(serverConfig), { stats });
     await copyPublicFiles(skuContext);
 
     const timeTaken = performance.now();

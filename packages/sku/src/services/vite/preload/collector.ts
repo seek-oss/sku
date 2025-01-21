@@ -21,23 +21,26 @@ export class Collector {
 
   constructor(
     public manifest: Manifest,
-    public nonce: string,
-    public externalJsFiles: string[],
+    public nonce?: string,
+    public externalJsFiles?: string[],
+    public entry?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
 
-    for (const file of externalJsFiles) {
-      this.scriptIds.set(file, {
-        src: file,
-        isEntry: false,
-        nonce,
-      });
+    if (externalJsFiles) {
+      for (const file of externalJsFiles) {
+        this.scriptIds.set(file, {
+          src: file,
+          isEntry: false,
+          nonce,
+        });
+      }
     }
 
     parseManifestForEntry({
       manifest,
-      entry: 'index.html',
+      entry: entry || 'index.html',
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce,
@@ -77,8 +80,7 @@ export class Collector {
     const linkTags = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createLinkTag)
-      .filter(Boolean)
-      .join('\n');
+      .filter(Boolean);
 
     return linkTags;
   }
@@ -93,10 +95,13 @@ const parseManifestForEntry = ({
 }: {
   manifest: Manifest;
   entry: string;
-  nonce: string;
+  nonce?: string;
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
 }) => {
+  if (!manifest) {
+    return;
+  }
   const entryChunk = manifest[entry];
   if (!entryChunk) {
     console.error('Entry chunk not found in manifest', entry);
@@ -146,7 +151,7 @@ const addFileToPreloads = ({
   preloads: Map<string, Preload>;
   entryChunk: any;
   entry: string;
-  nonce: string;
+  nonce?: string;
 }) => {
   preloads.set(entry, {
     rel: 'modulepreload',
@@ -162,7 +167,7 @@ const addStylesheetToPreloads = ({
 }: {
   preloads: Map<string, Preload>;
   chunk: string;
-  nonce: string;
+  nonce?: string;
 }) => {
   preloads.set(chunk, {
     rel: 'stylesheet',
@@ -179,7 +184,7 @@ const addAssetToPreloads = ({
 }: {
   preloads: Map<string, Preload>;
   chunk: string;
-  nonce: string;
+  nonce?: string;
 }) => {
   const ext = extname(chunk).substring(1);
   let as;
@@ -210,18 +215,29 @@ const addAssetToPreloads = ({
 };
 
 type CreateCollectorOptions = {
-  externalJsFiles: string[];
+  externalJsFiles?: string[];
   manifest: Manifest;
-  nonce: string;
+  nonce?: string;
+  entry?: string;
 };
 
 export const createCollector = ({
   externalJsFiles,
   manifest,
   nonce,
+  entry,
 }: CreateCollectorOptions) => {
-  // Something here to set the manifest properly.
+  let entryPoint = entry || 'index.html';
   const internalManifest = manifest || {};
+  if (!internalManifest[entryPoint]) {
+    const entryChunk = Object.entries(internalManifest).find(
+      ([_, { name }]) => name === 'vite-client',
+    );
+    if (entryChunk) {
+      entryPoint = entryChunk[0];
+    }
+  }
+  // Something here to set the manifest properly.
 
-  return new Collector(internalManifest, nonce, externalJsFiles);
+  return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
 };

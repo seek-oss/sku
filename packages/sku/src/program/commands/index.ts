@@ -11,6 +11,7 @@ import { startSsrCommand } from './start-ssr/start-ssr.command.js';
 import { translationsCommand } from './translations/translations.command.js';
 import { buildCommand } from './build/build.command.js';
 import { testCommand } from './test/test.command.js';
+import { serveSsrCommand } from './serve-ssr/serve-ssr.command.js';
 /* [add-sku-command-generator: import] */
 
 export const commands = [
@@ -27,5 +28,6 @@ export const commands = [
   translationsCommand,
   buildCommand,
   testCommand,
+  serveSsrCommand,
   /* [add-sku-command-generator: invocation] */
 ];

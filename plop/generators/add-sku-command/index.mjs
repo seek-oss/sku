@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 
 const getCommandsList = () => {
-  const commands = fs.readdirSync('./packages/sku/lib/program/commands', {
+  const commands = fs.readdirSync('./packages/sku/src/program/commands', {
     encoding: 'utf-8',
   });
-  return commands.filter((command) => command !== 'index.mjs');
+  return commands.filter((command) => command !== 'index.ts');
 };
 
 const addSkuCommandGenerator = (plop) => {
@@ -34,24 +34,24 @@ const addSkuCommandGenerator = (plop) => {
     actions: (data) => {
       // check if parent has subcommands.
       const hasExistingSubCommands = fs.existsSync(
-        `./packages/sku/lib/program/commands/${data.parentCommand}/commands`,
+        `./packages/sku/src/program/commands/${data.parentCommand}/commands`,
       );
       return [
         {
           type: 'add',
           templateFile:
             './plop/generators/add-sku-command/templates/command.hbs',
-          path: `./packages/sku/lib/program/commands/${
+          path: `./packages/sku/src/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
-          }{{commandName}}/{{commandName}}.command.js`,
+          }{{commandName}}/{{commandName}}.command.ts`,
         },
         {
           type: 'add',
           templateFile:
             './plop/generators/add-sku-command/templates/action.hbs',
-          path: `./packages/sku/lib/program/commands/${
+          path: `./packages/sku/src/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
-          }{{commandName}}/{{commandName}}.action.js`,
+          }{{commandName}}/{{commandName}}.action.ts`,
         },
         ...(data.isSubCommand && !hasExistingSubCommands
           ? [
@@ -59,36 +59,36 @@ const addSkuCommandGenerator = (plop) => {
                 type: 'add',
                 templateFile:
                   './plop/generators/add-sku-command/templates/command-index.hbs',
-                path: `./packages/sku/lib/program/commands/{{parentCommand}}/commands/index.js`,
+                path: `./packages/sku/src/program/commands/{{parentCommand}}/commands/index.ts`,
               },
               {
                 type: 'modify',
-                path: `./packages/sku/lib/program/commands/{{parentCommand}}/{{parentCommand}}.command.js`,
-                pattern: /(const \{ Command } = require\('commander'\);)/g,
-                template: "$1\nconst commands = require('./commands');",
+                path: `./packages/sku/src/program/commands/{{parentCommand}}/{{parentCommand}}.command.ts`,
+                pattern: /(import \{ Command } from 'commander';)/g,
+                template: "$1\nimport { commands } from './commands';",
               },
               {
                 type: 'modify',
-                path: `./packages/sku/lib/program/commands/{{parentCommand}}/{{parentCommand}}.command.js`,
-                pattern: /(module\.exports =)/g,
+                path: `./packages/sku/src/program/commands/{{parentCommand}}/{{parentCommand}}.command.ts`,
+                pattern: /(export \{)/g,
                 template: `for (const command of commands) {\n  {{camelCase parentCommand}}.addCommand(command);\n}\n\n$1`,
               },
             ]
           : []),
         {
           type: 'modify',
-          path: `./packages/sku/lib/program/commands/${
+          path: `./packages/sku/src/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
-          }index.js`,
+          }index.ts`,
           pattern: /(\/\* \[add-sku-command-generator: import] \*\/)/g,
           template:
-            "const {{camelCase commandName}}Command = require('./{{commandName}}/{{commandName}}.command.js');\n$1",
+            "import { {{camelCase commandName}}Command } from './{{commandName}}/{{commandName}}.command.ts';\n$1",
         },
         {
           type: 'modify',
-          path: `./packages/sku/lib/program/commands/${
+          path: `./packages/sku/src/program/commands/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
-          }index.js`,
+          }index.ts`,
           pattern: /(\/\* \[add-sku-command-generator: invocation] \*\/)/g,
           template: '{{camelCase commandName}}Command,\n  $1',
         },

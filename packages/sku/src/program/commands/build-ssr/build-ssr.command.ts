@@ -10,10 +10,4 @@ buildSsrCommand
     'Create a production build of a server-side rendered application.',
   )
   .addOption(statsOption)
-  .action(async ({ stats, skuContext }) => {
-    if (skuContext.bundler !== 'vite') {
-      buildSsrAction({ stats, skuContext });
-    } else {
-      viteBuildSsrHandler({ stats, skuContext });
-    }
-  });
+  .action(buildSsrAction);

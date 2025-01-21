@@ -12,9 +12,8 @@ const buildAction = async ({
 }) => {
   console.log('Building your application...', skuContext.bundler);
   if (skuContext.bundler === 'vite') {
-    await viteBuildHandler({ stats, skuContext });
-  }
-  if (skuContext.bundler === 'webpack') {
+    await viteBuildHandler({ skuContext });
+  } else {
     await webpackBuildHandler({ stats, skuContext });
   }
 };

@@ -15,6 +15,7 @@ const require = createRequire(import.meta.url);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/braid-design-system/sku.config.mjs'),
 );
+
 const distDir = path.resolve(appDir, 'dist');
 
 function getLocalUrl(site) {

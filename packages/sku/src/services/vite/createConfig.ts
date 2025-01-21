@@ -1,23 +1,18 @@
-import type { SkuContext } from '@/context/createSkuContext.js';
-import react from '@vitejs/plugin-react';
+import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
+
+import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
-import { cssFileFilter } from '@vanilla-extract/integration';
-import resolveFrom from 'resolve-from';
-import type { Plugin } from 'esbuild';
-import { dirname } from 'path';
 
-import preloadPlugin from './preload/plugin.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
+import { skuGenerateIndexPlugin } from '@/services/vite/plugins/skuGenerateIndexPlugin.js';
+import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 
-export const fixViteVanillaExtractDepScanPlugin = (): Plugin => ({
-  name: 'fix-vite-vanilla-extract-dep-scan',
-  setup(build) {
-    build.onResolve({ filter: cssFileFilter }, async ({ importer, path }) => ({
-      path: resolveFrom(dirname(importer), path),
-      external: true,
-    }));
-  },
-});
+import skuVitePreloadPlugin from './plugins/skuVitePreloadPlugin.js';
+
+const require = createRequire(import.meta.url);
+
+const entry = require.resolve('./entries/vite-client.jsx');
 
 export const createViteConfig = ({
   skuContext,
@@ -37,12 +32,13 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
+      skuGenerateIndexPlugin(),
       react(),
       vanillaExtractPlugin({
         // @ts-ignore
         pluginFilter: (plugin) => !plugin.name.startsWith('vite:react-'),
       }),
-      preloadPlugin(),
+      skuVitePreloadPlugin(),
       ...plugins,
     ],
     resolve: {
@@ -70,6 +66,7 @@ export const createViteConfig = ({
               input: skuContext.paths.renderEntry,
             }
           : {}),
+        ...(configType === 'client' ? { input: entry } : {}),
         output: {
           experimentalMinChunkSize: undefined,
         },

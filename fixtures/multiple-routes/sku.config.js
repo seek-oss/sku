@@ -21,7 +21,7 @@ export default {
   ],
   environments: ['production'],
   port: 8202,
-  publicPath: '/',
+  publicPath: '/static/place',
   cspEnabled: true,
   cspExtraScriptSrcHosts: [
     'https://error-tracking.com',

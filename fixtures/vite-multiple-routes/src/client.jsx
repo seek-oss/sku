@@ -17,13 +17,4 @@ const client = async ({ site, initialRoute }) => {
   );
 };
 
-// preloadAll().then(() => {
-let clientContext = {};
-
-const dataElement = document.getElementById('__SKU_CLIENT_CONTEXT__');
-if (dataElement) {
-  clientContext = JSON.parse(dataElement.textContent || '{}');
-}
-
-client(clientContext);
-// });
+export default client;

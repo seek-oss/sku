@@ -1,6 +1,4 @@
-import crypto from 'node:crypto';
 import { Transform } from 'node:stream';
-import createCSPHandler from '@/entry/csp.js';
 import clientContextKey from '@/entry/clientContextKey.js';
 import serializeJavascript from 'serialize-javascript';
 import { createCollector } from '@/services/vite/preload/collector.js';
@@ -11,6 +9,8 @@ type CreatePreRenderedHtmlOptions = {
   render: any;
   manifest: any;
   site: any;
+  extraHeadTags?: string;
+  extraBodyTags?: string;
 };
 
 export const serializeConfig = (config: object) =>
@@ -24,16 +24,14 @@ export const createPreRenderedHtml = async ({
   render,
   manifest,
   site,
+  extraBodyTags = '',
+  extraHeadTags = '',
 }: CreatePreRenderedHtmlOptions): Promise<string> => {
   return new Promise(async (resolve, reject) => {
-    const nonce = crypto.randomBytes(16).toString('base64');
-
     let didError = false;
 
     const loadableCollector = createCollector({
-      externalJsFiles: ['@vite/client'],
       manifest,
-      nonce,
     });
 
     let clientContext = {};
@@ -59,7 +57,6 @@ export const createPreRenderedHtml = async ({
       site,
       loadableCollector,
       options: {
-        nonce,
         onShellError(error: any) {
           didError = true;
           reject(error);
@@ -69,18 +66,24 @@ export const createPreRenderedHtml = async ({
             Object.keys(clientContext).length > 0 &&
               serializeConfig(clientContext),
             renderedBodyTags,
+            extraBodyTags,
             loadableCollector.getAllScripts(),
-          ].join('\n');
+          ]
+            .filter(Boolean)
+            .join('\n');
+
           const headTags = [
             renderedHeadTags,
+            extraHeadTags,
             loadableCollector.getAllPreloads(),
           ].join('\n');
 
-          html += getOpeningHtml({
-            nonce,
+          const startHtml = getOpeningHtml({
             title: 'Sku Project',
             headTags,
           });
+
+          html += startHtml;
 
           const transformStream = new Transform({
             transform(chunk, encoding, callback) {
@@ -90,9 +93,7 @@ export const createPreRenderedHtml = async ({
           });
 
           transformStream.on('finish', () => {
-            html += getClosingHtml({
-              bodyTags,
-            });
+            html += getClosingHtml({ bodyTags });
             resolve(html);
           });
 

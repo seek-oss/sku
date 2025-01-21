@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "2-5397df69572f21ade391.css": ._1tt74zu0 {
+  "2-f35bdcaec5763228cbed.css": ._1tt74zu0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -179,280 +179,418 @@ exports[`braid-design-system build should generate the expected files 1`] = `
 ._1wfawj2z:active {
   transform: var(--_18u1kke5k);
 }
-html._1wfawj210 ._1wfawj212,
 html:not(._1wfawj210) ._1wfawj211 {
   background: var(--_18u1kke1t);
 }
-html._1wfawj210 ._1wfawj214,
+html._1wfawj210 ._1wfawj212 {
+  background: var(--_18u1kke1t);
+}
 html:not(._1wfawj210) ._1wfawj213 {
   background: var(--_18u1kke1u);
 }
-html._1wfawj210 ._1wfawj216,
+html._1wfawj210 ._1wfawj214 {
+  background: var(--_18u1kke1u);
+}
 html:not(._1wfawj210) ._1wfawj215 {
   background: var(--_18u1kke1v);
 }
-html._1wfawj210 ._1wfawj218,
+html._1wfawj210 ._1wfawj216 {
+  background: var(--_18u1kke1v);
+}
 html:not(._1wfawj210) ._1wfawj217 {
   background: var(--_18u1kke1w);
 }
-html._1wfawj210 ._1wfawj21a,
+html._1wfawj210 ._1wfawj218 {
+  background: var(--_18u1kke1w);
+}
 html:not(._1wfawj210) ._1wfawj219 {
   background: var(--_18u1kke1x);
 }
-html._1wfawj210 ._1wfawj21c,
+html._1wfawj210 ._1wfawj21a {
+  background: var(--_18u1kke1x);
+}
 html:not(._1wfawj210) ._1wfawj21b {
   background: var(--_18u1kke1y);
 }
-html._1wfawj210 ._1wfawj21e,
+html._1wfawj210 ._1wfawj21c {
+  background: var(--_18u1kke1y);
+}
 html:not(._1wfawj210) ._1wfawj21d {
   background: var(--_18u1kke1z);
 }
-html._1wfawj210 ._1wfawj21g,
+html._1wfawj210 ._1wfawj21e {
+  background: var(--_18u1kke1z);
+}
 html:not(._1wfawj210) ._1wfawj21f {
   background: var(--_18u1kke20);
 }
-html._1wfawj210 ._1wfawj21i,
+html._1wfawj210 ._1wfawj21g {
+  background: var(--_18u1kke20);
+}
 html:not(._1wfawj210) ._1wfawj21h {
   background: var(--_18u1kke21);
 }
-html._1wfawj210 ._1wfawj21k,
+html._1wfawj210 ._1wfawj21i {
+  background: var(--_18u1kke21);
+}
 html:not(._1wfawj210) ._1wfawj21j {
   background: var(--_18u1kke22);
 }
-html._1wfawj210 ._1wfawj21m,
+html._1wfawj210 ._1wfawj21k {
+  background: var(--_18u1kke22);
+}
 html:not(._1wfawj210) ._1wfawj21l {
   background: var(--_18u1kke23);
 }
-html._1wfawj210 ._1wfawj21o,
+html._1wfawj210 ._1wfawj21m {
+  background: var(--_18u1kke23);
+}
 html:not(._1wfawj210) ._1wfawj21n {
   background: var(--_18u1kke24);
 }
-html._1wfawj210 ._1wfawj21q,
+html._1wfawj210 ._1wfawj21o {
+  background: var(--_18u1kke24);
+}
 html:not(._1wfawj210) ._1wfawj21p {
   background: var(--_18u1kke25);
 }
-html._1wfawj210 ._1wfawj21s,
+html._1wfawj210 ._1wfawj21q {
+  background: var(--_18u1kke25);
+}
 html:not(._1wfawj210) ._1wfawj21r {
   background: var(--_18u1kke26);
 }
-html._1wfawj210 ._1wfawj21u,
+html._1wfawj210 ._1wfawj21s {
+  background: var(--_18u1kke26);
+}
 html:not(._1wfawj210) ._1wfawj21t {
   background: var(--_18u1kke27);
 }
-html._1wfawj210 ._1wfawj21w,
+html._1wfawj210 ._1wfawj21u {
+  background: var(--_18u1kke27);
+}
 html:not(._1wfawj210) ._1wfawj21v {
   background: var(--_18u1kke28);
 }
-html._1wfawj210 ._1wfawj21y,
+html._1wfawj210 ._1wfawj21w {
+  background: var(--_18u1kke28);
+}
 html:not(._1wfawj210) ._1wfawj21x {
   background: var(--_18u1kke29);
 }
-html._1wfawj210 ._1wfawj220,
+html._1wfawj210 ._1wfawj21y {
+  background: var(--_18u1kke29);
+}
 html:not(._1wfawj210) ._1wfawj21z {
   background: var(--_18u1kke2a);
 }
-html._1wfawj210 ._1wfawj222,
+html._1wfawj210 ._1wfawj220 {
+  background: var(--_18u1kke2a);
+}
 html:not(._1wfawj210) ._1wfawj221 {
   background: var(--_18u1kke2b);
 }
-html._1wfawj210 ._1wfawj224,
+html._1wfawj210 ._1wfawj222 {
+  background: var(--_18u1kke2b);
+}
 html:not(._1wfawj210) ._1wfawj223 {
   background: var(--_18u1kke2c);
 }
-html._1wfawj210 ._1wfawj226,
+html._1wfawj210 ._1wfawj224 {
+  background: var(--_18u1kke2c);
+}
 html:not(._1wfawj210) ._1wfawj225 {
   background: var(--_18u1kke2d);
 }
-html._1wfawj210 ._1wfawj228,
+html._1wfawj210 ._1wfawj226 {
+  background: var(--_18u1kke2d);
+}
 html:not(._1wfawj210) ._1wfawj227 {
   background: var(--_18u1kke2e);
 }
-html._1wfawj210 ._1wfawj22a,
+html._1wfawj210 ._1wfawj228 {
+  background: var(--_18u1kke2e);
+}
 html:not(._1wfawj210) ._1wfawj229 {
   background: var(--_18u1kke2f);
 }
-html._1wfawj210 ._1wfawj22c,
+html._1wfawj210 ._1wfawj22a {
+  background: var(--_18u1kke2f);
+}
 html:not(._1wfawj210) ._1wfawj22b {
   background: var(--_18u1kke2g);
 }
-html._1wfawj210 ._1wfawj22e,
+html._1wfawj210 ._1wfawj22c {
+  background: var(--_18u1kke2g);
+}
 html:not(._1wfawj210) ._1wfawj22d {
   background: var(--_18u1kke2h);
 }
-html._1wfawj210 ._1wfawj22g,
+html._1wfawj210 ._1wfawj22e {
+  background: var(--_18u1kke2h);
+}
 html:not(._1wfawj210) ._1wfawj22f {
   background: var(--_18u1kke2i);
 }
-html._1wfawj210 ._1wfawj22i,
+html._1wfawj210 ._1wfawj22g {
+  background: var(--_18u1kke2i);
+}
 html:not(._1wfawj210) ._1wfawj22h {
   background: var(--_18u1kke2j);
 }
-html._1wfawj210 ._1wfawj22k,
+html._1wfawj210 ._1wfawj22i {
+  background: var(--_18u1kke2j);
+}
 html:not(._1wfawj210) ._1wfawj22j {
   background: var(--_18u1kke2k);
 }
-html._1wfawj210 ._1wfawj22m,
+html._1wfawj210 ._1wfawj22k {
+  background: var(--_18u1kke2k);
+}
 html:not(._1wfawj210) ._1wfawj22l {
   background: var(--_18u1kke2l);
 }
-html._1wfawj210 ._1wfawj22o,
+html._1wfawj210 ._1wfawj22m {
+  background: var(--_18u1kke2l);
+}
 html:not(._1wfawj210) ._1wfawj22n {
   background: var(--_18u1kke2m);
 }
-html._1wfawj210 ._1wfawj22q,
+html._1wfawj210 ._1wfawj22o {
+  background: var(--_18u1kke2m);
+}
 html:not(._1wfawj210) ._1wfawj22p {
   background: var(--_18u1kke2n);
 }
-html._1wfawj210 ._1wfawj22s,
+html._1wfawj210 ._1wfawj22q {
+  background: var(--_18u1kke2n);
+}
 html:not(._1wfawj210) ._1wfawj22r {
   background: var(--_18u1kke2o);
 }
-html._1wfawj210 ._1wfawj22u,
+html._1wfawj210 ._1wfawj22s {
+  background: var(--_18u1kke2o);
+}
 html:not(._1wfawj210) ._1wfawj22t {
   background: var(--_18u1kke2p);
 }
-html._1wfawj210 ._1wfawj22w,
+html._1wfawj210 ._1wfawj22u {
+  background: var(--_18u1kke2p);
+}
 html:not(._1wfawj210) ._1wfawj22v {
   background: var(--_18u1kke2q);
 }
-html._1wfawj210 ._1wfawj22y,
+html._1wfawj210 ._1wfawj22w {
+  background: var(--_18u1kke2q);
+}
 html:not(._1wfawj210) ._1wfawj22x {
   background: var(--_18u1kke2r);
 }
-html._1wfawj210 ._1wfawj230,
+html._1wfawj210 ._1wfawj22y {
+  background: var(--_18u1kke2r);
+}
 html:not(._1wfawj210) ._1wfawj22z {
   background: var(--_18u1kke2s);
 }
-html._1wfawj210 ._1wfawj232,
+html._1wfawj210 ._1wfawj230 {
+  background: var(--_18u1kke2s);
+}
 html:not(._1wfawj210) ._1wfawj231 {
   background: var(--_18u1kke2t);
 }
-html._1wfawj210 ._1wfawj234,
+html._1wfawj210 ._1wfawj232 {
+  background: var(--_18u1kke2t);
+}
 html:not(._1wfawj210) ._1wfawj233 {
   background: var(--_18u1kke2u);
 }
-html._1wfawj210 ._1wfawj236,
+html._1wfawj210 ._1wfawj234 {
+  background: var(--_18u1kke2u);
+}
 html:not(._1wfawj210) ._1wfawj235 {
   background: var(--_18u1kke2v);
 }
-html._1wfawj210 ._1wfawj238,
+html._1wfawj210 ._1wfawj236 {
+  background: var(--_18u1kke2v);
+}
 html:not(._1wfawj210) ._1wfawj237 {
   box-shadow: var(--_18u1kke5l);
 }
-html._1wfawj210 ._1wfawj23a,
+html._1wfawj210 ._1wfawj238 {
+  box-shadow: var(--_18u1kke5l);
+}
 html:not(._1wfawj210) ._1wfawj239 {
   box-shadow: var(--_18u1kke5m);
 }
-html._1wfawj210 ._1wfawj23c,
+html._1wfawj210 ._1wfawj23a {
+  box-shadow: var(--_18u1kke5m);
+}
 html:not(._1wfawj210) ._1wfawj23b {
   box-shadow: var(--_18u1kke5n);
 }
-html._1wfawj210 ._1wfawj23e,
+html._1wfawj210 ._1wfawj23c {
+  box-shadow: var(--_18u1kke5n);
+}
 html:not(._1wfawj210) ._1wfawj23d {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkef);
 }
-html._1wfawj210 ._1wfawj23g,
+html._1wfawj210 ._1wfawj23e {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkef);
+}
 html:not(._1wfawj210) ._1wfawj23f {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeg);
 }
-html._1wfawj210 ._1wfawj23i,
+html._1wfawj210 ._1wfawj23g {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeg);
+}
 html:not(._1wfawj210) ._1wfawj23h {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkef);
 }
-html._1wfawj210 ._1wfawj23k,
+html._1wfawj210 ._1wfawj23i {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkef);
+}
 html:not(._1wfawj210) ._1wfawj23j {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkeg);
 }
-html._1wfawj210 ._1wfawj23m,
+html._1wfawj210 ._1wfawj23k {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkeg);
+}
 html:not(._1wfawj210) ._1wfawj23l {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeh);
 }
-html._1wfawj210 ._1wfawj23o,
+html._1wfawj210 ._1wfawj23m {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeh);
+}
 html:not(._1wfawj210) ._1wfawj23n {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkei);
 }
-html._1wfawj210 ._1wfawj23q,
+html._1wfawj210 ._1wfawj23o {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkei);
+}
 html:not(._1wfawj210) ._1wfawj23p {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkej);
 }
-html._1wfawj210 ._1wfawj23s,
+html._1wfawj210 ._1wfawj23q {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkej);
+}
 html:not(._1wfawj210) ._1wfawj23r {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkej);
 }
-html._1wfawj210 ._1wfawj23u,
+html._1wfawj210 ._1wfawj23s {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkej);
+}
 html:not(._1wfawj210) ._1wfawj23t {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkek);
 }
-html._1wfawj210 ._1wfawj23w,
+html._1wfawj210 ._1wfawj23u {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkek);
+}
 html:not(._1wfawj210) ._1wfawj23v {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkek);
 }
-html._1wfawj210 ._1wfawj23y,
+html._1wfawj210 ._1wfawj23w {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkek);
+}
 html:not(._1wfawj210) ._1wfawj23x {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkel);
 }
-html._1wfawj210 ._1wfawj240,
+html._1wfawj210 ._1wfawj23y {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkel);
+}
 html:not(._1wfawj210) ._1wfawj23z {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kken);
 }
-html._1wfawj210 ._1wfawj242,
+html._1wfawj210 ._1wfawj240 {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kken);
+}
 html:not(._1wfawj210) ._1wfawj241 {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kken);
 }
-html._1wfawj210 ._1wfawj244,
+html._1wfawj210 ._1wfawj242 {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kken);
+}
 html:not(._1wfawj210) ._1wfawj243 {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeo);
 }
-html._1wfawj210 ._1wfawj246,
+html._1wfawj210 ._1wfawj244 {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeo);
+}
 html:not(._1wfawj210) ._1wfawj245 {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkeo);
 }
-html._1wfawj210 ._1wfawj248,
+html._1wfawj210 ._1wfawj246 {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkeo);
+}
 html:not(._1wfawj210) ._1wfawj247 {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkep);
 }
-html._1wfawj210 ._1wfawj24a,
+html._1wfawj210 ._1wfawj248 {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkep);
+}
 html:not(._1wfawj210) ._1wfawj249 {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeq);
 }
-html._1wfawj210 ._1wfawj24c,
+html._1wfawj210 ._1wfawj24a {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeq);
+}
 html:not(._1wfawj210) ._1wfawj24b {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kker);
 }
-html._1wfawj210 ._1wfawj24e,
+html._1wfawj210 ._1wfawj24c {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kker);
+}
 html:not(._1wfawj210) ._1wfawj24d {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kker);
 }
-html._1wfawj210 ._1wfawj24g,
+html._1wfawj210 ._1wfawj24e {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kker);
+}
 html:not(._1wfawj210) ._1wfawj24f {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkes);
 }
-html._1wfawj210 ._1wfawj24i,
+html._1wfawj210 ._1wfawj24g {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkes);
+}
 html:not(._1wfawj210) ._1wfawj24h {
   box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkes);
 }
-html._1wfawj210 ._1wfawj24k,
+html._1wfawj210 ._1wfawj24i {
+  box-shadow: inset 0 0 0 var(--_18u1kkez) var(--_18u1kkes);
+}
 html:not(._1wfawj210) ._1wfawj24j {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kket);
 }
-html._1wfawj210 ._1wfawj24m,
+html._1wfawj210 ._1wfawj24k {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kket);
+}
 html:not(._1wfawj210) ._1wfawj24l {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeu);
 }
-html._1wfawj210 ._1wfawj24o,
+html._1wfawj210 ._1wfawj24m {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkeu);
+}
 html:not(._1wfawj210) ._1wfawj24n {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkev);
 }
-html._1wfawj210 ._1wfawj24q,
+html._1wfawj210 ._1wfawj24o {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkev);
+}
 html:not(._1wfawj210) ._1wfawj24p {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkew);
 }
-html._1wfawj210 ._1wfawj24s,
+html._1wfawj210 ._1wfawj24q {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkew);
+}
 html:not(._1wfawj210) ._1wfawj24r {
   box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkex);
 }
-html._1wfawj210 ._1wfawj24u,
+html._1wfawj210 ._1wfawj24s {
+  box-shadow: inset 0 0 0 var(--_18u1kkey) var(--_18u1kkex);
+}
 html:not(._1wfawj210) ._1wfawj24t {
+  box-shadow: 0 0 0 var(--_18u1kke10) var(--_18u1kkem);
+}
+html._1wfawj210 ._1wfawj24u {
   box-shadow: 0 0 0 var(--_18u1kke10) var(--_18u1kkem);
 }
 ._1wfawj24v {
@@ -1944,19 +2082,19 @@ html:not(._1wfawj210) ._1wfawj24t {
   font-size: 20px;
   padding: 100px;
 }
-.x4xfpn4 {
-  font-size: var(--x4xfpn0);
-  line-height: var(--x4xfpn1);
+.kz289y4 {
+  font-size: var(--kz289y0);
+  line-height: var(--kz289y1);
 }
-.x4xfpn4:before {
+.kz289y4:before {
   content: "";
   display: table;
-  margin-bottom: var(--x4xfpn2);
+  margin-bottom: var(--kz289y2);
 }
-.x4xfpn4:after {
+.kz289y4:after {
   content: "";
   display: table;
-  margin-top: var(--x4xfpn3);
+  margin-top: var(--kz289y3);
 }
 .xo198d0 {
   font-family: var(--_18u1kke2w);
@@ -1971,28 +2109,28 @@ html:not(._1wfawj210) ._1wfawj24t {
   font-weight: var(--_18u1kke48);
 }
 .xo198d4 {
-  --x4xfpn0: var(--_18u1kke32);
-  --x4xfpn1: var(--_18u1kke33);
-  --x4xfpn2: var(--_18u1kke35);
-  --x4xfpn3: var(--_18u1kke36);
+  --kz289y0: var(--_18u1kke32);
+  --kz289y1: var(--_18u1kke33);
+  --kz289y2: var(--_18u1kke35);
+  --kz289y3: var(--_18u1kke36);
 }
 .xo198d7 {
-  --x4xfpn0: var(--_18u1kke3c);
-  --x4xfpn1: var(--_18u1kke3d);
-  --x4xfpn2: var(--_18u1kke3f);
-  --x4xfpn3: var(--_18u1kke3g);
+  --kz289y0: var(--_18u1kke3c);
+  --kz289y1: var(--_18u1kke3d);
+  --kz289y2: var(--_18u1kke3f);
+  --kz289y3: var(--_18u1kke3g);
 }
 .xo198da {
-  --x4xfpn0: var(--_18u1kke3m);
-  --x4xfpn1: var(--_18u1kke3n);
-  --x4xfpn2: var(--_18u1kke3p);
-  --x4xfpn3: var(--_18u1kke3q);
+  --kz289y0: var(--_18u1kke3m);
+  --kz289y1: var(--_18u1kke3n);
+  --kz289y2: var(--_18u1kke3p);
+  --kz289y3: var(--_18u1kke3q);
 }
 .xo198dd {
-  --x4xfpn0: var(--_18u1kke3w);
-  --x4xfpn1: var(--_18u1kke3x);
-  --x4xfpn2: var(--_18u1kke3z);
-  --x4xfpn3: var(--_18u1kke40);
+  --kz289y0: var(--_18u1kke3w);
+  --kz289y1: var(--_18u1kke3x);
+  --kz289y2: var(--_18u1kke3z);
+  --kz289y3: var(--_18u1kke40);
 }
 .xo198dg {
   font-size: var(--_18u1kke32);
@@ -2017,28 +2155,28 @@ html:not(._1wfawj210) ._1wfawj24t {
   font-weight: var(--_18u1kke5e);
 }
 .xo198dm {
-  --x4xfpn0: var(--_18u1kke49);
-  --x4xfpn1: var(--_18u1kke4a);
-  --x4xfpn2: var(--_18u1kke4c);
-  --x4xfpn3: var(--_18u1kke4d);
+  --kz289y0: var(--_18u1kke49);
+  --kz289y1: var(--_18u1kke4a);
+  --kz289y2: var(--_18u1kke4c);
+  --kz289y3: var(--_18u1kke4d);
 }
 .xo198dp {
-  --x4xfpn0: var(--_18u1kke4j);
-  --x4xfpn1: var(--_18u1kke4k);
-  --x4xfpn2: var(--_18u1kke4m);
-  --x4xfpn3: var(--_18u1kke4n);
+  --kz289y0: var(--_18u1kke4j);
+  --kz289y1: var(--_18u1kke4k);
+  --kz289y2: var(--_18u1kke4m);
+  --kz289y3: var(--_18u1kke4n);
 }
 .xo198ds {
-  --x4xfpn0: var(--_18u1kke4t);
-  --x4xfpn1: var(--_18u1kke4u);
-  --x4xfpn2: var(--_18u1kke4w);
-  --x4xfpn3: var(--_18u1kke4x);
+  --kz289y0: var(--_18u1kke4t);
+  --kz289y1: var(--_18u1kke4u);
+  --kz289y2: var(--_18u1kke4w);
+  --kz289y3: var(--_18u1kke4x);
 }
 .xo198dv {
-  --x4xfpn0: var(--_18u1kke53);
-  --x4xfpn1: var(--_18u1kke54);
-  --x4xfpn2: var(--_18u1kke56);
-  --x4xfpn3: var(--_18u1kke57);
+  --kz289y0: var(--_18u1kke53);
+  --kz289y1: var(--_18u1kke54);
+  --kz289y2: var(--_18u1kke56);
+  --kz289y3: var(--_18u1kke57);
 }
 html:not(._1wfawj210) .xo198d18 {
   --xo198dy: var(--_18u1kke19);
@@ -2088,13 +2226,21 @@ html._1wfawj210 .xo198d1b {
   --xo198d16: var(--_18u1kke1s);
   --xo198d17: var(--_18u1kke1h);
 }
-html:not(._1wfawj210) .xo198d1c,
-html:not(._1wfawj210) .xo198d1d,
-html:not(._1wfawj210) .xo198d1e,
+html:not(._1wfawj210) .xo198d1c {
+  --xo198d15: var(--xo198dy);
+}
+html:not(._1wfawj210) .xo198d1d {
+  --xo198d15: var(--xo198dy);
+}
+html:not(._1wfawj210) .xo198d1e {
+  --xo198d15: var(--xo198dy);
+}
 html:not(._1wfawj210) .xo198d1f {
   --xo198d15: var(--xo198dy);
 }
-html:not(._1wfawj210) .xo198d1g,
+html:not(._1wfawj210) .xo198d1g {
+  --xo198d15: var(--xo198dz);
+}
 html:not(._1wfawj210) .xo198d1h {
   --xo198d15: var(--xo198dz);
 }
@@ -2174,28 +2320,28 @@ html._1wfawj210 .xo198d1t {
 }
 @media screen and (min-width: 740px) {
   .xo198d4 {
-    --x4xfpn0: var(--_18u1kke37);
-    --x4xfpn1: var(--_18u1kke38);
-    --x4xfpn2: var(--_18u1kke3a);
-    --x4xfpn3: var(--_18u1kke3b);
+    --kz289y0: var(--_18u1kke37);
+    --kz289y1: var(--_18u1kke38);
+    --kz289y2: var(--_18u1kke3a);
+    --kz289y3: var(--_18u1kke3b);
   }
   .xo198d7 {
-    --x4xfpn0: var(--_18u1kke3h);
-    --x4xfpn1: var(--_18u1kke3i);
-    --x4xfpn2: var(--_18u1kke3k);
-    --x4xfpn3: var(--_18u1kke3l);
+    --kz289y0: var(--_18u1kke3h);
+    --kz289y1: var(--_18u1kke3i);
+    --kz289y2: var(--_18u1kke3k);
+    --kz289y3: var(--_18u1kke3l);
   }
   .xo198da {
-    --x4xfpn0: var(--_18u1kke3r);
-    --x4xfpn1: var(--_18u1kke3s);
-    --x4xfpn2: var(--_18u1kke3u);
-    --x4xfpn3: var(--_18u1kke3v);
+    --kz289y0: var(--_18u1kke3r);
+    --kz289y1: var(--_18u1kke3s);
+    --kz289y2: var(--_18u1kke3u);
+    --kz289y3: var(--_18u1kke3v);
   }
   .xo198dd {
-    --x4xfpn0: var(--_18u1kke41);
-    --x4xfpn1: var(--_18u1kke42);
-    --x4xfpn2: var(--_18u1kke44);
-    --x4xfpn3: var(--_18u1kke45);
+    --kz289y0: var(--_18u1kke41);
+    --kz289y1: var(--_18u1kke42);
+    --kz289y2: var(--_18u1kke44);
+    --kz289y3: var(--_18u1kke45);
   }
   .xo198dg {
     font-size: var(--_18u1kke37);
@@ -2214,28 +2360,28 @@ html._1wfawj210 .xo198d1t {
     line-height: var(--_18u1kke42);
   }
   .xo198dm {
-    --x4xfpn0: var(--_18u1kke4e);
-    --x4xfpn1: var(--_18u1kke4f);
-    --x4xfpn2: var(--_18u1kke4h);
-    --x4xfpn3: var(--_18u1kke4i);
+    --kz289y0: var(--_18u1kke4e);
+    --kz289y1: var(--_18u1kke4f);
+    --kz289y2: var(--_18u1kke4h);
+    --kz289y3: var(--_18u1kke4i);
   }
   .xo198dp {
-    --x4xfpn0: var(--_18u1kke4o);
-    --x4xfpn1: var(--_18u1kke4p);
-    --x4xfpn2: var(--_18u1kke4r);
-    --x4xfpn3: var(--_18u1kke4s);
+    --kz289y0: var(--_18u1kke4o);
+    --kz289y1: var(--_18u1kke4p);
+    --kz289y2: var(--_18u1kke4r);
+    --kz289y3: var(--_18u1kke4s);
   }
   .xo198ds {
-    --x4xfpn0: var(--_18u1kke4y);
-    --x4xfpn1: var(--_18u1kke4z);
-    --x4xfpn2: var(--_18u1kke51);
-    --x4xfpn3: var(--_18u1kke52);
+    --kz289y0: var(--_18u1kke4y);
+    --kz289y1: var(--_18u1kke4z);
+    --kz289y2: var(--_18u1kke51);
+    --kz289y3: var(--_18u1kke52);
   }
   .xo198dv {
-    --x4xfpn0: var(--_18u1kke58);
-    --x4xfpn1: var(--_18u1kke59);
-    --x4xfpn2: var(--_18u1kke5b);
-    --x4xfpn3: var(--_18u1kke5c);
+    --kz289y0: var(--_18u1kke58);
+    --kz289y1: var(--_18u1kke59);
+    --kz289y2: var(--_18u1kke5b);
+    --kz289y3: var(--_18u1kke5c);
   }
   .xo198d24 {
     padding-bottom: calc((var(--_18u1kke9) - var(--_18u1kke38)) / 2);
@@ -2472,7 +2618,9 @@ html._1wfawj210 .buwwlhf {
 html:not(._1wfawj210) ._77pdy9a {
   opacity: 0;
 }
-._77pdy94:focus + ._77pdy95 > ._77pdy9b,
+._77pdy94:focus + ._77pdy95 > ._77pdy9b {
+  opacity: 1;
+}
 ._77pdy94:focus:not(._77pdy97) + ._77pdy95 > ._77pdy9c,
 ._77pdy94:hover:not(:checked):not(._77pdy97):not(:disabled)
   + ._77pdy95
@@ -2740,9 +2888,9 @@ html._1wfawj210 ._77pdy9e {
     0 20px 20px -12px rgba(28, 35, 48, 0.2);
 }
 
-/*# sourceMappingURL=2-5397df69572f21ade391.css.map*/
+/*# sourceMappingURL=2-f35bdcaec5763228cbed.css.map*/
 ,
-  "2-5397df69572f21ade391.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-f35bdcaec5763228cbed.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -2762,7 +2910,7 @@ html._1wfawj210 ._77pdy9e {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-5397df69572f21ade391.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-f35bdcaec5763228cbed.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -2773,7 +2921,7 @@ html._1wfawj210 ._77pdy9e {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html._1wfawj210,html._1wfawj210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_11z6chf0 xo198d18 xo198d1b"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">Hello <!-- -->jobStreet<!-- --> <span class="_1tt74zu0 _1wfawj257"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1tet12k0 _1wfawj257 _1wfawj25f _1v4d5e40 _1v4d5e42 _1v4d5e43 _1v4d5e44" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1tt74zu0 _1wfawj28n _1wfawj27j _1wfawj2av _1wfawj29r _1wfawj25f _1wfawj267 _1wfawj2i7 _1wfawj24j _1wfawj24c xo198d18 xo198d1b _1wfawj233 _1wfawj236"><div class="_1tt74zu0 _1wfawj25f"><div class="_1tt74zu0 _1wfawj25b _1wfawj2i7"><input class="_1tt74zu0 _1tt74zu1 _1tt74zu6 _1tt74zu7 _1tt74zuc _1wfawj25j _1wfawj28 _1wfawj2h _1wfawj26 _77pdy94 _77pdy92" type="checkbox" id="id_1" aria-checked="false"/><div class="_1tt74zu0 _1wfawj2hv _1wfawj25f _1wfawj263 _77pdy95 _77pdy92 xo198d18  _1wfawj233"><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy99 xo198d19 xo198d1b _1wfawj221 _1wfawj222"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj23x _1wfawj23y"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _1wfawj23p _1wfawj23u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9b _1wfawj24t _1wfawj24u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9c _1wfawj23z _1wfawj244"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1tt74zu0 _1wfawj2b3 _1wfawj2i3"><div class="_1tt74zu0 _1wfawj25b _77pdy92 _77pdy96"><label class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30" for="id_1"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">This is a checkbox</span></label></div></div></div></div></div><div class="_1tt74zu0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_11z6chf0 xo198d18 xo198d1b"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">Hello <!-- -->jobStreet<!-- --> <span class="_1tt74zu0 _1wfawj257"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1tet12k0 _1wfawj257 _1wfawj25f _1v4d5e40 _1v4d5e42 _1v4d5e43 _1v4d5e44" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1tt74zu0 _1wfawj28n _1wfawj27j _1wfawj2av _1wfawj29r _1wfawj25f _1wfawj267 _1wfawj2i7 _1wfawj24j _1wfawj24c xo198d18 xo198d1b _1wfawj233 _1wfawj236"><div class="_1tt74zu0 _1wfawj25f"><div class="_1tt74zu0 _1wfawj25b _1wfawj2i7"><input class="_1tt74zu0 _1tt74zu1 _1tt74zu6 _1tt74zu7 _1tt74zuc _1wfawj25j _1wfawj28 _1wfawj2h _1wfawj26 _77pdy94 _77pdy92" type="checkbox" id="id_1" aria-checked="false"/><div class="_1tt74zu0 _1wfawj2hv _1wfawj25f _1wfawj263 _77pdy95 _77pdy92 xo198d18  _1wfawj233"><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy99 xo198d19 xo198d1b _1wfawj221 _1wfawj222"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj23x _1wfawj23y"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _1wfawj23p _1wfawj23u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9b _1wfawj24t _1wfawj24u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9c _1wfawj23z _1wfawj244"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1tt74zu0 _1wfawj2b3 _1wfawj2i3"><div class="_1tt74zu0 _1wfawj25b _77pdy92 _77pdy96"><label class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30" for="id_1"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">This is a checkbox</span></label></div></div></div></div></div><div class="_1tt74zu0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -2792,7 +2940,7 @@ html._1wfawj210 ._77pdy9e {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-5397df69572f21ade391.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-f35bdcaec5763228cbed.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -2803,7 +2951,7 @@ html._1wfawj210 ._77pdy9e {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html._1wfawj210,html._1wfawj210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_11z6chf0 xo198d18 xo198d1b"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">Hello <!-- -->seekAnz<!-- --> <span class="_1tt74zu0 _1wfawj257"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1tet12k0 _1wfawj257 _1wfawj25f _1v4d5e40 _1v4d5e42 _1v4d5e43 _1v4d5e44" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1tt74zu0 _1wfawj28n _1wfawj27j _1wfawj2av _1wfawj29r _1wfawj25f _1wfawj267 _1wfawj2i7 _1wfawj24j _1wfawj24c xo198d18 xo198d1b _1wfawj233 _1wfawj236"><div class="_1tt74zu0 _1wfawj25f"><div class="_1tt74zu0 _1wfawj25b _1wfawj2i7"><input class="_1tt74zu0 _1tt74zu1 _1tt74zu6 _1tt74zu7 _1tt74zuc _1wfawj25j _1wfawj28 _1wfawj2h _1wfawj26 _77pdy94 _77pdy92" type="checkbox" id="id_1" aria-checked="false"/><div class="_1tt74zu0 _1wfawj2hv _1wfawj25f _1wfawj263 _77pdy95 _77pdy92 xo198d18  _1wfawj233"><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy99 xo198d19 xo198d1b _1wfawj221 _1wfawj222"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj23x _1wfawj23y"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _1wfawj23p _1wfawj23u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9b _1wfawj24t _1wfawj24u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9c _1wfawj23z _1wfawj244"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1tt74zu0 _1wfawj2b3 _1wfawj2i3"><div class="_1tt74zu0 _1wfawj25b _77pdy92 _77pdy96"><label class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30" for="id_1"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">This is a checkbox</span></label></div></div></div></div></div><div class="_1tt74zu0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_11z6chf0 xo198d18 xo198d1b"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">Hello <!-- -->seekAnz<!-- --> <span class="_1tt74zu0 _1wfawj257"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1tet12k0 _1wfawj257 _1wfawj25f _1v4d5e40 _1v4d5e42 _1v4d5e43 _1v4d5e44" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1tt74zu0 _1wfawj28n _1wfawj27j _1wfawj2av _1wfawj29r _1wfawj25f _1wfawj267 _1wfawj2i7 _1wfawj24j _1wfawj24c xo198d18 xo198d1b _1wfawj233 _1wfawj236"><div class="_1tt74zu0 _1wfawj25f"><div class="_1tt74zu0 _1wfawj25b _1wfawj2i7"><input class="_1tt74zu0 _1tt74zu1 _1tt74zu6 _1tt74zu7 _1tt74zuc _1wfawj25j _1wfawj28 _1wfawj2h _1wfawj26 _77pdy94 _77pdy92" type="checkbox" id="id_1" aria-checked="false"/><div class="_1tt74zu0 _1wfawj2hv _1wfawj25f _1wfawj263 _77pdy95 _77pdy92 xo198d18  _1wfawj233"><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy99 xo198d19 xo198d1b _1wfawj221 _1wfawj222"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj23x _1wfawj23y"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _1wfawj23p _1wfawj23u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9b _1wfawj24t _1wfawj24u"></span><span class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2i _1wfawj263 _1wfawj2x _1wfawj26 _77pdy9c _1wfawj23z _1wfawj244"><div class="_1tt74zu0 _1wfawj2n _1wfawj2x _1wfawj25f _77pdy9d _77pdy9f"><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x _1wfawj26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1tt74zu0 _1wfawj2j _1wfawj2k _1wfawj2l _1wfawj2m _1wfawj25j _1wfawj2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1tt74zu0 _1wfawj2p _1wfawj2n _1wfawj24z xo198d20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1tt74zu0 _1wfawj2b3 _1wfawj2i3"><div class="_1tt74zu0 _1wfawj25b _77pdy92 _77pdy96"><label class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30" for="id_1"><span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">This is a checkbox</span></label></div></div></div></div></div><div class="_1tt74zu0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -2820,7 +2968,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-5397df69572f21ade391.css",
+  "/2-f35bdcaec5763228cbed.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -2861,7 +3009,7 @@ SOURCE HTML: <!DOCTYPE html>
             html._1wfawj210,html._1wfawj210 body{color-scheme:dark;background:#1C2330}
       </style>
       <div class="_11z6chf0 xo198d18 xo198d1b">
-        <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">
+        <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">
           Hello
           jobStreet
           <span class="_1tt74zu0 _1wfawj257">
@@ -2976,7 +3124,7 @@ SOURCE HTML: <!DOCTYPE html>
                     class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30"
                     for="id_1"
                   >
-                    <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">
+                    <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">
                       This is a checkbox
                     </span>
                   </label>
@@ -3049,7 +3197,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-5397df69572f21ade391.css",
+  "/2-f35bdcaec5763228cbed.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3090,7 +3238,7 @@ SOURCE HTML: <!DOCTYPE html>
             html._1wfawj210,html._1wfawj210 body{color-scheme:dark;background:#1C2330}
       </style>
       <div class="_11z6chf0 xo198d18 xo198d1b">
-        <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">
+        <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">
           Hello
           seekAnz
           <span class="_1tt74zu0 _1wfawj257">
@@ -3205,7 +3353,7 @@ SOURCE HTML: <!DOCTYPE html>
                     class="_1tt74zu0 _1wfawj24 _1wfawj24z _1wfawj2h _1hc13z30"
                     for="id_1"
                   >
-                    <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 x4xfpn4 xo198da">
+                    <span class="_1tt74zu0 _1wfawj24z xo198d0 xo198d1 xo198d21 kz289y4 xo198da">
                       This is a checkbox
                     </span>
                   </label>
@@ -3326,7 +3474,7 @@ SOURCE HTML: <!DOCTYPE html>
             html.sprinkles_darkMode__1wfawj210,html.sprinkles_darkMode__1wfawj210 body{color-scheme:dark;background:#1C2330}
       </style>
       <div class="seekJobs_seekJobs__11z6chf0 typography_lightModeTone_light__xo198d18 typography_darkModeTone_dark__xo198d1b">
-        <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__x4xfpn4 typography_textSize_standard__xo198da">
+        <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__kz289y4 typography_textSize_standard__xo198da">
           Hello
           jobStreet
           <span class="reset_base__1tt74zu0 sprinkles_display_inlineBlock_mobile__1wfawj257">
@@ -3441,7 +3589,7 @@ SOURCE HTML: <!DOCTYPE html>
                     class="reset_base__1tt74zu0 sprinkles_userSelect_none__1wfawj24 sprinkles_display_block_mobile__1wfawj24z sprinkles_cursor_pointer__1wfawj2h virtualTouchable_virtualTouchable__1hc13z30"
                     for="id_1"
                   >
-                    <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__x4xfpn4 typography_textSize_standard__xo198da">
+                    <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__kz289y4 typography_textSize_standard__xo198da">
                       This is a checkbox
                     </span>
                   </label>
@@ -3568,7 +3716,7 @@ SOURCE HTML: <!DOCTYPE html>
             html.sprinkles_darkMode__1wfawj210,html.sprinkles_darkMode__1wfawj210 body{color-scheme:dark;background:#1C2330}
       </style>
       <div class="seekJobs_seekJobs__11z6chf0 typography_lightModeTone_light__xo198d18 typography_darkModeTone_dark__xo198d1b">
-        <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__x4xfpn4 typography_textSize_standard__xo198da">
+        <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__kz289y4 typography_textSize_standard__xo198da">
           Hello
           seekAnz
           <span class="reset_base__1tt74zu0 sprinkles_display_inlineBlock_mobile__1wfawj257">
@@ -3683,7 +3831,7 @@ SOURCE HTML: <!DOCTYPE html>
                     class="reset_base__1tt74zu0 sprinkles_userSelect_none__1wfawj24 sprinkles_display_block_mobile__1wfawj24z sprinkles_cursor_pointer__1wfawj2h virtualTouchable_virtualTouchable__1hc13z30"
                     for="id_1"
                   >
-                    <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__x4xfpn4 typography_textSize_standard__xo198da">
+                    <span class="reset_base__1tt74zu0 sprinkles_display_block_mobile__1wfawj24z typography_fontFamily__xo198d0 typography_fontWeight_regular__xo198d1 typography_tone_neutral__xo198d21 capsize_capsizeStyle__kz289y4 typography_textSize_standard__xo198da">
                       This is a checkbox
                     </span>
                   </label>

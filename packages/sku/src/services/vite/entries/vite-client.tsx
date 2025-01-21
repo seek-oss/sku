@@ -2,8 +2,6 @@
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
 
-import { preloadAll } from 'vite-preload';
-
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
     throw new Error(require('dedent')`
@@ -30,5 +28,7 @@ const dataElement = document.getElementById('__SKU_CLIENT_CONTEXT__');
 if (dataElement) {
   clientContext = JSON.parse(dataElement.textContent || '{}');
 }
+
+console.log('Client context:', clientContext);
 
 client(clientContext);

@@ -1,19 +1,20 @@
 // import html from 'dedent';
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
-import { preloadAll, ChunkCollectorContext } from 'sku/vite-preload';
+import { preloadAll } from 'sku/@vite-preload';
+import { LoadableProvider } from 'sku/@vite-preload/provider';
 
 import { App } from './App.jsx';
 
 export default {
-  render: async ({ options, collector }) => {
+  render: async ({ options, loadableCollector }) => {
     await preloadAll();
 
     return renderToPipeableStream(
       <StrictMode>
-        <ChunkCollectorContext collector={collector}>
+        <LoadableProvider value={loadableCollector}>
           <App />
-        </ChunkCollectorContext>
+        </LoadableProvider>
       </StrictMode>,
       options,
     );

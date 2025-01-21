@@ -971,9 +971,6 @@ importers:
       vite:
         specifier: ^5.4.11
         version: 5.4.11(@types/node@18.19.57)(terser@5.36.0)
-      vite-preload:
-        specifier: ^1.0.3
-        version: 1.0.3(react@18.3.1)(vite@5.4.11(@types/node@18.19.57)(terser@5.36.0))
       webpack:
         specifier: ^5.52.0
         version: 5.95.0(@swc/core@1.7.36)(esbuild@0.21.5)
@@ -1161,7 +1158,7 @@ importers:
         version: link:../fixtures/assertion-removal
       '@sku-fixtures/braid-design-system':
         specifier: workspace:*
-        version: link:../fixtures/vite-braid-design-system
+        version: link:../fixtures/braid-design-system
       '@sku-fixtures/configure':
         specifier: workspace:*
         version: link:../fixtures/configure
@@ -2337,10 +2334,6 @@ packages:
 
   '@babel/types@7.26.0':
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/types@7.26.3':
-    resolution: {integrity: sha512-vN5p+1kl59GVKMvTHt55NzzmYVxprfJD+ql7U9NFIfKCBkYE55LYtS+WtPlaYOyzydrKI8Nezd+aZextrd+FMA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/types@7.26.5':
@@ -7895,9 +7888,6 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-lazy-with-preload@2.2.1:
-    resolution: {integrity: sha512-ONSb8gizLE5jFpdHAclZ6EAAKuFX2JydnFXPPPjoUImZlLjGtKzyBS8SJgJq7CpLgsGKh9QCZdugJyEEOVC16Q==}
-
   react-popper-tooltip@4.4.2:
     resolution: {integrity: sha512-y48r0mpzysRTZAIh8m2kpZ8S1YPNqGtQPDrlXYSGvDS1c1GpG/NUXbsbIdfbhXfmSaRJuTcaT6N1q3CKuHRVbg==}
     peerDependencies:
@@ -9035,12 +9025,6 @@ packages:
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
-
-  vite-preload@1.0.3:
-    resolution: {integrity: sha512-bc5wnIGZUlWmBvMQ9INT5RlRcTR9/zgrgXlAlVOIVCR1e1iQiWXcpQtQ47jJ1YNOJ4u1LRlWkz7hBXXoOSs7Fg==}
-    peerDependencies:
-      react: ^18 || ^19.0.0-rc || ^19
-      vite: ^5 || ^6.0.0-beta || ^6
 
   vite@5.4.11:
     resolution: {integrity: sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==}
@@ -10846,11 +10830,6 @@ snapshots:
       - supports-color
 
   '@babel/types@7.26.0':
-    dependencies:
-      '@babel/helper-string-parser': 7.25.9
-      '@babel/helper-validator-identifier': 7.25.9
-
-  '@babel/types@7.26.3':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
@@ -17733,8 +17712,6 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-lazy-with-preload@2.2.1: {}
-
   react-popper-tooltip@4.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.25.7
@@ -19060,18 +19037,6 @@ snapshots:
       - sugarss
       - supports-color
       - terser
-
-  vite-preload@1.0.3(react@18.3.1)(vite@5.4.11(@types/node@18.19.57)(terser@5.36.0)):
-    dependencies:
-      '@babel/generator': 7.26.5
-      '@babel/parser': 7.26.5
-      '@babel/traverse': 7.26.5
-      '@babel/types': 7.26.3
-      react: 18.3.1
-      react-lazy-with-preload: 2.2.1
-      vite: 5.4.11(@types/node@18.19.57)(terser@5.36.0)
-    transitivePeerDependencies:
-      - supports-color
 
   vite@5.4.11(@types/node@18.19.57)(terser@5.36.0):
     dependencies:

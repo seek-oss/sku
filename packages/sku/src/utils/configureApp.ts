@@ -16,8 +16,6 @@ import {
   addEslintIgnoreToSkuConfig,
 } from '@/services/eslint/eslintMigration.js';
 
-import { createIndexFile } from '@/services/vite/createIndex.js';
-
 import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
@@ -127,13 +125,6 @@ export default async (skuContext: SkuContext) => {
     const generatedVocabFileGlob = '**/*.vocab/index.ts';
     gitIgnorePatterns.push(generatedVocabFileGlob);
     prettierIgnorePatterns.push(generatedVocabFileGlob);
-  }
-
-  // TODO: VITE: this needs to be improved.
-  // This needs to be updated in a nice function via the vite service.
-  if (skuContext.bundler === 'vite') {
-    const viteIndexFileContent = createIndexFile(skuContext);
-    await writeFileToCWD('index.html', viteIndexFileContent, { banner: false });
   }
 
   // Write `.prettierignore`

@@ -5,19 +5,21 @@ import { LoadableProvider } from 'sku/@vite-preload/provider';
 
 import App from './App';
 
-export default {
-  render: async ({ site, options, loadableCollector }) => {
-    await preloadAll();
+const render = async ({ site, options, loadableCollector }) => {
+  await preloadAll();
 
-    return renderToPipeableStream(
-      <StrictMode>
-        <LoadableProvider value={loadableCollector}>
-          <App themeName={site.name} />
-        </LoadableProvider>
-      </StrictMode>,
-      options,
-    );
-  },
+  return renderToPipeableStream(
+    <StrictMode>
+      <LoadableProvider value={loadableCollector}>
+        <App themeName={site.name} />
+      </LoadableProvider>
+    </StrictMode>,
+    options,
+  );
+};
+
+export default {
+  render,
   renderApp: ({ site }) => {
     return renderToString(
       <StrictMode>

@@ -29,6 +29,4 @@ if (dataElement) {
   clientContext = JSON.parse(dataElement.textContent || '{}');
 }
 
-console.log('Client context:', clientContext);
-
 client(clientContext);

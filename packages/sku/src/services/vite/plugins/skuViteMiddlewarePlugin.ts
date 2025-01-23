@@ -1,6 +1,10 @@
 import { SkuContext } from '@/context/createSkuContext.js';
 import type { Plugin } from 'vite';
-import { createPreRenderedHtml } from '@/services/vite/createPreRenderedHtml.js';
+import { createRequire } from 'node:module';
+import path from 'path';
+import resolveSync from 'resolve-from';
+
+const require = createRequire(import.meta.url);
 
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
@@ -12,24 +16,21 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         const site =
           skuContext.sites.find((site) => site.host === hostname) || '';
         const isHtml = req.url === '/index.html';
-        // TODO: get path url from req.url
         if (isHtml) {
-          // TODO: Both this and start-ssr need to work with vanilla extract. I feel like this is an upgrade path.
-          // The build works but the server does not because vanilla extract doesnt transform outside of a build.
+          const resolveFromSku = (...paths: string[]) => {
+            const skuRoot = path.dirname(resolveSync('.', 'sku'));
+            return path.join(skuRoot, ...paths);
+          };
 
           const render = (
-            await server.ssrLoadModule(skuContext.paths.renderEntry)
-          ).default;
+            await server.ssrLoadModule(
+              resolveFromSku('./src/services/vite/entries/vite-render.tsx'),
+            )
+          ).viteRender;
 
-          const clientEntry = require.resolve('./entries/vite-client.jsx');
+          const clientEntry = require.resolve('../entries/vite-client.jsx');
 
-          const html = await createPreRenderedHtml({
-            url: req.url!,
-            render,
-            site,
-            manifest: {},
-            extraBodyTags: `<script type="module" src="${clientEntry}"></script>`,
-          });
+          const html = await render({ url: req.url!, site: site, clientEntry });
 
           const viteHtml = await server.transformIndexHtml(
             req.url || '/',

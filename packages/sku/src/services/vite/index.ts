@@ -1,7 +1,7 @@
+import { createViteServer } from '@/services/vite/createViteServer.js';
 import { build } from 'vite';
 import { createServer } from '@/services/vite/serve.js';
 import { SkuContext } from '@/context/createSkuContext.js';
-import { createViteServer } from '@/services/vite/createViteServer.js';
 import { createViteConfig } from '@/services/vite/createConfig.js';
 import { prerenderRoutes } from '@/services/vite/prerender.js';
 
@@ -10,6 +10,7 @@ export const viteService = {
     await build(createViteConfig({ skuContext }));
   },
   buildSsg: async (skuContext: SkuContext) => {
+    await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
       await prerenderRoutes(skuContext);
@@ -27,7 +28,11 @@ export const viteService = {
       isProduction: process.env.NODE_ENV === 'production',
     }).then(({ app }) =>
       app.listen(skuContext.port.server, () => {
-        console.log(`http://localhost:${skuContext.port.server}`);
+        skuContext.sites.forEach((site) => {
+          console.log(
+            `Running ${site.name} on 'http://${site.host}:${skuContext.port.server}'`,
+          );
+        });
       }),
     );
   },
@@ -39,7 +44,11 @@ export const viteService = {
       isProduction: process.env.NODE_ENV === 'production',
     }).then(({ app }) =>
       app.listen(skuContext.port.server, () => {
-        console.log(`http://localhost:${skuContext.port.server}`);
+        skuContext.sites.forEach((site) => {
+          console.log(
+            `Running ${site.name} on 'http://${site.host}:${skuContext.port.server}'`,
+          );
+        });
       }),
     );
   },
@@ -66,7 +75,11 @@ export const viteService = {
       isProduction: false,
     }).then(({ app }) =>
       app.listen(skuContext.port.server, () => {
-        console.log(`http://localhost:${skuContext.port.server}`);
+        skuContext.sites.forEach((site) => {
+          console.log(
+            `Running ${site.name} on 'http://${site.host}:${skuContext.port.server}'`,
+          );
+        });
       }),
     );
   },

@@ -1,8 +1,7 @@
 import { Transform } from 'node:stream';
-import clientContextKey from '@/entry/clientContextKey.js';
-import serializeJavascript from 'serialize-javascript';
-import { createCollector } from '@/services/vite/preload/collector.js';
-import { getClosingHtml, getOpeningHtml } from '@/services/vite/createIndex.js';
+import { createCollector } from './preload/collector.js';
+import { getClosingHtml, getOpeningHtml } from './createIndex.js';
+import { serializeConfig } from './helpers/serializeConfig.js';
 
 type CreatePreRenderedHtmlOptions = {
   url: string;
@@ -12,12 +11,6 @@ type CreatePreRenderedHtmlOptions = {
   extraHeadTags?: string;
   extraBodyTags?: string;
 };
-
-export const serializeConfig = (config: object) =>
-  `<script id="${clientContextKey}" type="application/json">${serializeJavascript(
-    config,
-    { isJSON: true },
-  )}</script>`;
 
 export const createPreRenderedHtml = async ({
   url,

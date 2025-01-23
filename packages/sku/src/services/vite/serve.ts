@@ -12,8 +12,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import { getClosingHtml, getOpeningHtml } from '@/services/vite/createIndex.js';
 import { createCollector } from '@/services/vite/preload/collector.js';
 import { createRequire } from 'node:module';
-
-const isTest = process.env.VITEST;
+import { serializeConfig } from './helpers/serializeConfig.js';
 
 const base = process.env.BASE || '/';
 
@@ -71,15 +70,32 @@ export const createServer: (options: CreateServerOptions) => Promise<{
       app.use(base, sirv(resolve('./dist'), { extensions: [] }));
     }
 
+    // TODO: make this work with site config in the skuConfig
     // Serve HTML
     app.use('*', async (req, res) => {
       try {
+        const host = req.headers['host']; // This includes the hostname and port
+        const hostname = host?.split(':')[0];
+        const site =
+          skuContext.sites.find((site) => site.host === hostname) || '';
+
         const url = req.originalUrl.replace(base, '');
 
         let render;
+        let clientContext = {};
         let viteHtml = '';
         const nonce = crypto.randomBytes(16).toString('base64');
         if (!isProduction && vite) {
+          render = (await vite.ssrLoadModule(skuContext.paths.serverEntry))
+            .default;
+
+          if (render.provideClientContext) {
+            // Check what kind of context needs to be passed into this function.
+            clientContext = await render.provideClientContext({
+              site,
+              url,
+            });
+          }
           // Always read fresh template in development
           let html = getOpeningHtml({
             title: 'Sku Project',
@@ -91,14 +107,23 @@ export const createServer: (options: CreateServerOptions) => Promise<{
           const clientEntry = require.resolve('./entries/vite-client.jsx');
 
           html += getClosingHtml({
-            bodyTags: `<script type="module" src="${clientEntry}"></script>\n<!-- body tags -->`,
+            bodyTags: `<script type="module" src="${clientEntry}"></script>\n${serializeConfig(clientContext)}<!-- body tags -->`,
           });
 
           viteHtml = (await vite.transformIndexHtml(url, html)) || '';
-
-          render = (await vite.ssrLoadModule(skuContext.paths.serverEntry))
-            .render;
         } else {
+          const serverEntryFile = 'server.js';
+          render = (await import(resolve(`./dist/server/${serverEntryFile}`)))
+            .default;
+
+          if (render.provideClientContext) {
+            // Check what kind of context needs to be passed into this function.
+            clientContext = await render.provideClientContext({
+              site,
+              url,
+            });
+          }
+
           let html = getOpeningHtml({
             title: 'Sku Project',
             headTags: '<!-- head tags -->',
@@ -107,14 +132,10 @@ export const createServer: (options: CreateServerOptions) => Promise<{
           html += '<!-- app tags -->';
 
           html += getClosingHtml({
-            bodyTags: `<!-- body tags -->`,
+            bodyTags: `${serializeConfig(clientContext)}<!-- body tags -->`,
           });
 
           viteHtml = html;
-
-          const serverEntryFile = 'server.js';
-          render = (await import(resolve(`./dist/server/${serverEntryFile}`)))
-            .render;
         }
 
         // res.setHeader(
@@ -145,9 +166,10 @@ export const createServer: (options: CreateServerOptions) => Promise<{
           }
         }
 
-        const { pipe } = await render({
+        const { pipe } = await render.render({
           url,
           loadableCollector,
+          site,
           options: {
             nonce,
             onShellError() {
@@ -172,8 +194,9 @@ export const createServer: (options: CreateServerOptions) => Promise<{
                 },
               });
 
-              transformStream.on('finish', () => {
+              transformStream.on('finish', async () => {
                 const bodyTags = loadableCollector.getAllScripts();
+
                 res.end(endHtml.replace('<!-- body tags -->', bodyTags));
               });
 

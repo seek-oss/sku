@@ -25,7 +25,6 @@ export const viteBuildSsrHandler = async ({
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
 
-  // TODO: Build Vite Index Here.
   try {
     await runVocabCompile(skuContext);
     await ensureTargetDirectory({ paths });

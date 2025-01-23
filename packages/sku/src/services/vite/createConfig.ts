@@ -10,9 +10,11 @@ import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbu
 
 import skuVitePreloadPlugin from './plugins/skuVitePreloadPlugin.js';
 
+import { builtinModules } from 'node:module';
+
 const require = createRequire(import.meta.url);
 
-const entry = require.resolve('./entries/vite-client.jsx');
+const clientEntry = require.resolve('./entries/vite-client.jsx');
 
 export const createViteConfig = ({
   skuContext,
@@ -32,11 +34,11 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
-      skuGenerateIndexPlugin(),
       react(),
       vanillaExtractPlugin({
         // @ts-ignore
         pluginFilter: (plugin) => !plugin.name.startsWith('vite:react-'),
+        // unstable_mode: 'transform',
       }),
       skuVitePreloadPlugin(),
       ...plugins,
@@ -45,6 +47,7 @@ export const createViteConfig = ({
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
+        __sku_alias__renderEntry: skuContext.paths.renderEntry,
       },
     },
     define: {
@@ -66,19 +69,29 @@ export const createViteConfig = ({
               input: skuContext.paths.renderEntry,
             }
           : {}),
-        ...(configType === 'client' ? { input: entry } : {}),
+        ...(configType === 'client' ? { input: clientEntry } : {}),
         output: {
           experimentalMinChunkSize: undefined,
         },
       },
     },
     optimizeDeps: {
+      include: ['react-dom'],
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
     },
     ssr: {
+      external: [
+        ...builtinModules,
+        '@vanilla-extract/css/adapter',
+        'serialize-javascript',
+        'used-styles',
+      ],
       noExternal: ['@vanilla-extract/css', 'braid-design-system'],
+      // resolve: {
+      //   externalConditions: ['module'],
+      // },
     },
   } satisfies InlineConfig;
 };

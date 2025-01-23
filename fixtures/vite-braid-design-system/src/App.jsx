@@ -7,7 +7,7 @@ import {
   IconChevron,
   Box,
 } from 'braid-design-system';
-import theme from 'braid-design-system/themes/seekJobs';
+import theme from 'braid-design-system/themes/apac';
 import { useState, useEffect } from 'react';
 
 import { vanillaBox } from './App.css';

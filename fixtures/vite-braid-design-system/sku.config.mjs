@@ -6,6 +6,7 @@ import {
 export default {
   clientEntry: './src/client.jsx',
   renderEntry: './src/render.jsx',
+  serverEntry: './src/server.jsx',
   bundler: 'vite',
   sites: [
     { name: 'seekAnz', host: 'dev.seek.com.au' },

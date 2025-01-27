@@ -4,7 +4,6 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import debug from 'debug';
 import chalk from 'chalk';
-import { createSkuContext } from '../dist/context/createSkuContext.js';
 
 try {
   const initCwd = process.env.INIT_CWD;
@@ -36,6 +35,7 @@ try {
   const { setCwd } = await import('../dist/utils/cwd.js');
 
   const banner = (await import('../dist/utils/banners/banner.js')).default;
+  const createSkuContext = (await import('../dist/context/createSkuContext.js')).createSkuContext;
 
   const log = debug('sku:postinstall');
 

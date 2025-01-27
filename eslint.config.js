@@ -105,9 +105,10 @@ module.exports = [
   },
   {
     settings: {
-      '@typescript-eslint/parser': {
-        projectRoot: __dirname,
-        project: true,
+      'import-x/resolver': {
+        typescript: {
+          project: '**/*/tsconfig.json',
+        },
       },
     },
   },

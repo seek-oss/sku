@@ -110,9 +110,6 @@ module.exports = [
         project: true,
       },
     },
-    parserOptions: {
-      project: true,
-    },
   },
   {
     files: ['tests/**', 'test-utils/**'],

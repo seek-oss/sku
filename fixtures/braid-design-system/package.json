@@ -1,7 +1,6 @@
 {
   "name": "@sku-fixtures/braid-design-system",
   "private": true,
-  "type": "module",
   "dependencies": {
     "braid-design-system": "^33.1.0",
     "react": "^18.2.0",

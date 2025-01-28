@@ -69,7 +69,7 @@ const makeWebpackConfig = ({
       require.resolve(polyfill, { paths: [cwd()] }),
     ) || [];
 
-  const skuClientEntry = require.resolve('../../../entry/client/index.jsx');
+  const skuClientEntry = require.resolve('../../../entry/client/index.js');
 
   const createEntry = (entry: string): string[] => [
     ...resolvedPolyfills,

@@ -86,6 +86,11 @@
   "pnpm": {
     "overrides": {
       "@types/react": "^18.3.0"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "@types/react": ">=18.3.0"
+      }
     }
   },
   "packageManager": "pnpm@9.6.0",

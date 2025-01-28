@@ -256,6 +256,9 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.3.1(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dedent:
         specifier: ^1.5.1
         version: 1.5.3(babel-plugin-macros@3.1.0)
@@ -405,13 +408,13 @@ importers:
         version: 8.5.2(@types/react@18.3.18)(storybook@8.5.2(prettier@3.4.2))
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.5(webpack@5.97.1(@swc/core@1.10.11)(esbuild@0.21.5))
+        version: 3.0.5(webpack@5.97.1(@swc/core@1.10.11))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.5.2(@swc/core@1.10.11)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
+        version: 8.5.2(@swc/core@1.10.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
       '@types/react':
         specifier: ^18.3.0
         version: 18.3.18
@@ -445,13 +448,13 @@ importers:
         version: link:../../test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.5(webpack@5.97.1(@swc/core@1.10.11))
+        version: 3.0.5(webpack@5.97.1(@swc/core@1.10.11)(esbuild@0.21.5))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.5.2(@swc/core@1.10.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
+        version: 8.5.2(@swc/core@1.10.11)(esbuild@0.21.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.5.2(prettier@3.4.2))(typescript@5.6.3)
       '@types/react':
         specifier: ^18.3.0
         version: 18.3.18

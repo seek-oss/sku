@@ -19,10 +19,8 @@ export const createPreRenderedHtml = async ({
   site,
   extraBodyTags = '',
   extraHeadTags = '',
-}: CreatePreRenderedHtmlOptions): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
-    let didError = false;
-
+}: CreatePreRenderedHtmlOptions): Promise<string> =>
+  new Promise(async (resolve, reject) => {
     const loadableCollector = createCollector({
       manifest,
     });
@@ -51,7 +49,6 @@ export const createPreRenderedHtml = async ({
       loadableCollector,
       options: {
         onShellError(error: any) {
-          didError = true;
           reject(error);
         },
         onShellReady() {
@@ -93,7 +90,6 @@ export const createPreRenderedHtml = async ({
           pipe(transformStream);
         },
         onError(error: any) {
-          didError = true;
           console.error(error);
         },
         onAllReady() {
@@ -102,4 +98,3 @@ export const createPreRenderedHtml = async ({
       },
     });
   });
-};

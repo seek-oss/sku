@@ -1,5 +1,5 @@
 import { basename } from 'node:path';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const internalRegex = (paths: SkuContext['paths']) =>
   `^(${paths.src.map((srcPath: string) => basename(srcPath)).join('|')})/`;

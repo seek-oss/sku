@@ -1,7 +1,7 @@
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
-import path from 'path';
+import path from 'node:path';
 import resolveSync from 'resolve-from';
 
 const require = createRequire(import.meta.url);
@@ -11,10 +11,10 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   configureServer(server) {
     return () => {
       server.middlewares.use(async (req, res, next) => {
-        const host = req.headers['host']; // This includes the hostname and port
+        const host = req.headers.host; // This includes the hostname and port
         const hostname = host?.split(':')[0];
         const site =
-          skuContext.sites.find((site) => site.host === hostname) || '';
+          skuContext.sites.find((skuSite) => skuSite.host === hostname) || '';
         const isHtml = req.url === '/index.html';
         if (isHtml) {
           const resolveFromSku = (...paths: string[]) => {
@@ -30,7 +30,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
           const clientEntry = require.resolve('../entries/vite-client.jsx');
 
-          const html = await render({ url: req.url!, site: site, clientEntry });
+          const html = await render({ url: req.url!, site, clientEntry });
 
           const viteHtml = await server.transformIndexHtml(
             req.url || '/',

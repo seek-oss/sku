@@ -9,7 +9,7 @@ import {
   parse as pathParse,
   extname,
 } from 'node:path';
-import { Plugin } from 'vite';
+import type { Plugin } from 'vite';
 import { readdirSync } from 'node:fs';
 
 const traverse = _traverse.default;
@@ -76,11 +76,11 @@ export default function preloadPlugin({ debug }: PluginOptions = {}): Plugin {
               importArg.traverse({
                 Import(importPath) {
                   // @ts-expect-error
-                  if (!importPath.parent['arguments']) {
+                  if (!importPath.parent.arguments) {
                     return;
                   }
                   // @ts-expect-error
-                  const importArgument = importPath.parent['arguments'][0];
+                  const importArgument = importPath.parent.arguments[0];
 
                   if (importArgument) {
                     // Dynamic import of a dynamic module is not supported
@@ -89,16 +89,16 @@ export default function preloadPlugin({ debug }: PluginOptions = {}): Plugin {
                         dirname(id),
                         importArgument.value,
                       );
-                      let files = readdirSync(dirname(absolutePath));
-                      let name = pathParse(absolutePath).base;
+                      const files = readdirSync(dirname(absolutePath));
+                      const name = pathParse(absolutePath).base;
 
-                      let found = files.find(
+                      const found = files.find(
                         (x) =>
                           x.replace(extname(x), '') ===
                           name.replace(extname(name), ''),
                       );
                       const relativePath = getRelativePath(
-                        dirname(absolutePath) + '/' + found,
+                        `${dirname(absolutePath)}/${found}`,
                       );
 
                       callPath.node.arguments.push(

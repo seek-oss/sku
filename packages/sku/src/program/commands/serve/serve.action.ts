@@ -16,7 +16,7 @@ import {
   getValidLanguagesForRoute,
 } from '@/utils/language-utils.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const serveAction = async ({
   site: preferredSite,

@@ -5,7 +5,7 @@ import { setTimeout } from 'node:timers/promises';
 import express from 'express';
 import type { ViteDevServer } from 'vite';
 import crypto from 'node:crypto';
-import { createServer as createHttpServer, type Server } from 'http';
+import { createServer as createHttpServer, type Server } from 'node:http';
 
 import { createViteConfig } from '@/services/vite/createConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -49,9 +49,9 @@ export const createServer: (options: CreateServerOptions) => Promise<{
     // Add Vite or respective production middlewares
     let vite: ViteDevServer | undefined;
     if (!isProduction) {
-      const { createServer } = await import('vite');
+      const { createServer: createViteSever } = await import('vite');
 
-      vite = await createServer({
+      vite = await createViteSever({
         ...createViteConfig({ skuContext, configType: 'ssr' }),
         root,
         server: {
@@ -74,10 +74,10 @@ export const createServer: (options: CreateServerOptions) => Promise<{
     // Serve HTML
     app.use('*', async (req, res) => {
       try {
-        const host = req.headers['host']; // This includes the hostname and port
+        const host = req.headers.host; // This includes the hostname and port
         const hostname = host?.split(':')[0];
         const site =
-          skuContext.sites.find((site) => site.host === hostname) || '';
+          skuContext.sites.find((skuSite) => skuSite.host === hostname) || '';
 
         const url = req.originalUrl.replace(base, '');
 

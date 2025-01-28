@@ -3,7 +3,7 @@ import { loadESLint } from 'eslint';
 import { createEslintConfig } from './config/index.js';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 

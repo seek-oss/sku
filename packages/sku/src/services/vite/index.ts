@@ -1,7 +1,7 @@
 import { createViteServer } from '@/services/vite/createViteServer.js';
 import { build } from 'vite';
 import { createServer } from '@/services/vite/serve.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 import { createViteConfig } from '@/services/vite/createConfig.js';
 import { prerenderRoutes } from '@/services/vite/prerender.js';
 

@@ -1,5 +1,5 @@
 import type { StatsChoices } from '../../options/stats/stats.option.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 import { viteStartSsrHandler } from '@/program/commands/start-ssr/vite-start-ssr-handler.js';
 import { webpackStartSsrHandler } from '@/program/commands/start-ssr/webpack-start-ssr-handler.js';
 

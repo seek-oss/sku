@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Collector, type ModuleId } from './collector.js';
+import type { Collector, ModuleId } from './collector.js';
 
 const context = createContext<null | Collector>(null);
 

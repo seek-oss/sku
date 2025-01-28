@@ -21,7 +21,7 @@ import createServerManager from '@/services/serverManager.js';
 import { watchVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:start-ssr');
 

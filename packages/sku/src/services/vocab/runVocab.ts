@@ -1,6 +1,6 @@
 import { compile } from '@vocab/core';
 import { getVocabConfig } from './config/vocab.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const runVocabCompile = async (skuContext: SkuContext) => {
   const vocabConfig = getVocabConfig(skuContext);

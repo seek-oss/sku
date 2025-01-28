@@ -1,8 +1,14 @@
-import { ComponentType, createElement, forwardRef, lazy, useRef } from 'react';
-import { ModuleId } from './collector.js';
+import {
+  type ComponentType,
+  createElement,
+  forwardRef,
+  lazy,
+  useRef,
+} from 'react';
+import type { ModuleId } from './collector.js';
 import { useRegisterComponent } from './PreloadContext.jsx';
 
-let preloads: (() => Promise<any>)[] = [];
+let preloads: Array<() => Promise<any>> = [];
 
 export type PreloadableComponent<T extends ComponentType<any>> = T & {
   preload: () => Promise<T>;

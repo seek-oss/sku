@@ -1,4 +1,4 @@
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const getSiteForHost = (
   hostname: string,

@@ -107,8 +107,6 @@ export const createSkuContext = async ({
     process.exit(1);
   }
 
-  type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
-
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
     typeof route === 'string' ? { route } : route;
 

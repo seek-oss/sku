@@ -4,7 +4,7 @@ import chalk from 'chalk';
 
 import { suggestScript } from '../suggestScript.js';
 import { hasErrorCode } from '../error-guards.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const setSystemHost = promisify(set);
 const getSystemHosts = promisify(get);

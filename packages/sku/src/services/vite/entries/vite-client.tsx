@@ -1,10 +1,11 @@
 // '__sku_alias__clientEntry' is a vite alias
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
+import dedent from 'dedent';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
-    throw new Error(require('dedent')`
+    throw new Error(dedent`
       The sku client entry ('${__SKU_CLIENT_PATH__}') must export a function that calls hydrateRoot. e.g.
 
       import { hydrateRoot } from 'react-dom/client';

@@ -10,9 +10,7 @@ export type Preload = {
   asyncScript?: boolean;
 };
 
-const getNonce = (nonce?: string) => {
-  return nonce ? ` nonce="${nonce}"` : '';
-};
+const getNonce = (nonce?: string) => (nonce ? ` nonce="${nonce}"` : '');
 
 const tagTypes = {
   stylesheet: ({ href, nonce }: Preload) =>

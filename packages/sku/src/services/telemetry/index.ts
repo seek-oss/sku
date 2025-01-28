@@ -6,7 +6,7 @@ import provider from './provider.js';
 import skuPackageJson from '../../../package.json' with { type: 'json' };
 import debug from 'debug';
 
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:telemetry');
 

@@ -5,7 +5,7 @@ import {
 import { createServer as createHttpsServer } from 'node:https';
 
 import getCertificate from './certificate.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const createServer = async ({
   requestListener,

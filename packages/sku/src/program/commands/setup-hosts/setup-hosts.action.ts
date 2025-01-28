@@ -1,6 +1,6 @@
 import { setupHosts } from '@/utils/contextUtils/hosts.js';
 import provider from '@/services/telemetry/index.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const setupHostsAction = async ({
   skuContext,

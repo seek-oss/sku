@@ -33,9 +33,9 @@ try {
 
   // Suppressing eslint. These imports will work after the build steps for postinstall.
   const { setCwd } = await import('../dist/utils/cwd.js');
-
   const banner = (await import('../dist/utils/banners/banner.js')).default;
-  const createSkuContext = (await import('../dist/context/createSkuContext.js')).createSkuContext;
+  const createSkuContext = (await import('../dist/context/createSkuContext.js'))
+    .createSkuContext;
 
   const log = debug('sku:postinstall');
 

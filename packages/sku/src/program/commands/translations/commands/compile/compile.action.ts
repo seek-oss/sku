@@ -3,7 +3,7 @@ import chalk from 'chalk';
 
 import { getResolvedVocabConfig } from '../../helpers/translation-helpers.js';
 import { configureProject } from '@/utils/configure.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = (message: string) => console.log(chalk.cyan(message));
 

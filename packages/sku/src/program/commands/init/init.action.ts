@@ -7,7 +7,7 @@ import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
 
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 import {
   packageManager,

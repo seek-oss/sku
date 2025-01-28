@@ -1,5 +1,5 @@
 import type { Manifest } from 'vite';
-import { extname } from 'path';
+import { extname } from 'node:path';
 import {
   type Preload,
   sortPreloads,
@@ -197,11 +197,13 @@ const addAssetToPreloads = ({
     case 'svg':
       as = 'image';
       mimeType = ext === 'svg' ? 'image/svg+xml' : `image/${ext}`;
+      break;
     case 'woff2':
     case 'woff':
     case 'ttf':
       as = 'font';
       mimeType = `font/${ext}`;
+      break;
   }
 
   // This requires a type check for the asset type and then set the type and 'as' attribute.

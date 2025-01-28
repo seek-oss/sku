@@ -1,6 +1,6 @@
 import debug from 'debug';
 import { generator } from '@vocab/pseudo-localize';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:vocab:config');
 

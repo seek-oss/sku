@@ -20,7 +20,7 @@ import getCertificate from './certificate.js';
 import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
 import { hasErrorMessage } from '@/utils/error-guards.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const coverageFolder = 'coverage';
 
@@ -30,7 +30,7 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 const addSep = (p: string) => `${p}${path.sep}`;
 
 export default async (skuContext: SkuContext) => {
-  const { paths, httpsDevServer, languages, hosts, skuConfig } = skuContext;
+  const { paths, httpsDevServer, languages, hosts } = skuContext;
   // Ignore target directories
   const webpackTargetDirectory = addSep(paths.relativeTarget);
 

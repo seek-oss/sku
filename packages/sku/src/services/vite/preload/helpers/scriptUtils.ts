@@ -4,10 +4,8 @@ export type InjectableScript = {
   nonce?: string;
 };
 
-export const createScriptTag = (injectableScript: InjectableScript) => {
-  return `<script type="module" src="/${injectableScript.src}" ${injectableScript.nonce ? `nonce="${injectableScript.nonce}"` : ''}></script>`;
-};
+export const createScriptTag = (injectableScript: InjectableScript) =>
+  `<script type="module" src="/${injectableScript.src}" ${injectableScript.nonce ? `nonce="${injectableScript.nonce}"` : ''}></script>`;
 
-export const sortInjectableScript = (a: InjectableScript) => {
-  return a.isEntry ? 1 : -1;
-};
+export const sortInjectableScript = (a: InjectableScript) =>
+  a.isEntry ? 1 : -1;

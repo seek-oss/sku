@@ -1,16 +1,13 @@
-import { createRequire } from 'node:module';
+import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
-import { skuGenerateIndexPlugin } from '@/services/vite/plugins/skuGenerateIndexPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 
 import skuVitePreloadPlugin from './plugins/skuVitePreloadPlugin.js';
-
-import { builtinModules } from 'node:module';
 
 const require = createRequire(import.meta.url);
 

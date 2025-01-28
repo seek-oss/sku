@@ -8,7 +8,7 @@ import {
 } from '@/utils/language-utils.js';
 
 import type { Stats } from 'webpack';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 import { join } from 'node:path';
 
 // @ts-expect-error

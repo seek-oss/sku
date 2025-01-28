@@ -14,13 +14,6 @@ export const viteRender = async ({
 }) => {
   const criticalCssPlaceholder = '<!-- critical-css-placeholder -->';
 
-  const app = render.renderApp({ site });
-
-  const appWithInlineCss = await inlineCriticalCss(
-    app + criticalCssPlaceholder,
-    criticalCssPlaceholder,
-  );
-
   const html = await createPreRenderedHtml({
     url,
     render,

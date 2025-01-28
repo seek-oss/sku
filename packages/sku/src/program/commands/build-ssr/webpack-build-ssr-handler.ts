@@ -14,7 +14,7 @@ import provider from '@/services/telemetry/index.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const webpackBuildSsrHandler = async ({
   stats,

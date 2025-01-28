@@ -93,6 +93,7 @@ module.exports = [
             '__sku_alias__serverEntry',
             '__sku_alias__clientEntry',
             '__sku_alias__webpackStats',
+            '\/dist\/',
           ],
         },
       ],

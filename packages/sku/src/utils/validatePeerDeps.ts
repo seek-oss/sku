@@ -13,7 +13,7 @@ import banner from '@/utils/banners/banner.js';
 import provider from '@/services/telemetry/index.js';
 
 import { getPathFromCwd } from '@/utils/cwd.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 const asyncMap = (
   list: unknown[],

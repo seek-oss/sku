@@ -5,7 +5,7 @@ import runTsc from '@/utils/runTsc.js';
 
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject } from '@/utils/configure.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const lintAction = async (
   paths: string[],

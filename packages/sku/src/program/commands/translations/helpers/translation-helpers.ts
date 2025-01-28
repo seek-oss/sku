@@ -1,7 +1,7 @@
 import { resolveConfig } from '@vocab/core';
 
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
-import { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const ensureBranch = async () => {
   const { default: envCi } = await import('env-ci');

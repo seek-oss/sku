@@ -21,7 +21,7 @@ export const viteBuildHandler = async ({
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
 
-  const { isLibrary, cspEnabled, paths } = skuContext;
+  const { cspEnabled, paths } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
 

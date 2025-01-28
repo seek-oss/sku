@@ -198,7 +198,7 @@ export const initAction = async (
 
   const devDeps = [
     '@vanilla-extract/css',
-    ...(process.env.INIT_SKU_WORKSPACE ? ['sku@workspace:*'] : ['sku']),
+    'sku',
     '@types/react',
     '@types/react-dom',
   ];

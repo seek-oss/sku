@@ -3,9 +3,9 @@ import {
   getCommand,
 } from '@/services/packageManager/packageManager.js';
 import { lintExtensions } from '@/services/eslint/lint.js';
-import type { Config } from 'lint-staged';
+import type { Configuration } from 'lint-staged';
 
-const config: Config = {
+const config: Configuration = {
   [`**/*.{${lintExtensions},md}`]: ['sku format', 'sku lint'],
   // Yarn lock integrity check
   ...(isYarn

@@ -8,7 +8,6 @@ const preCommit = async () => {
     // existing JSDoc type definitions.
     // https://github.com/lint-staged/lint-staged/issues/1359
     const { default: lintStaged } = await import('lint-staged');
-    // @ts-expect-error `@types/lint-staged` is wrong, and for some reason `tsc` doesn't pick up the
     success = await lintStaged({ config });
   } catch (e) {
     console.error(chalk.red(e));

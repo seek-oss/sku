@@ -95,7 +95,7 @@ export default async (skuContext: SkuContext) => {
 
   const configPath = skuContext.configPath
     ? `{ configPath: '${skuContext.configPath}' }`
-    : '';
+    : '{}';
   const eslintConfig = dedent`import { createEslintConfig } from 'sku/config/eslint';
 
                               export default await createEslintConfig(${configPath});`;

@@ -137,7 +137,7 @@ export const initAction = async (
 
   const templateDirectory = path.join(
     toPosixPath(__dirname),
-    '../../../../../template',
+    '../../../../template',
   );
 
   const templateFiles = await new Fdir()
@@ -198,7 +198,7 @@ export const initAction = async (
 
   const devDeps = [
     '@vanilla-extract/css',
-    'sku',
+    ...(process.env.INIT_SKU_WORKSPACE ? ['sku@workspace:*'] : ['sku']),
     '@types/react',
     '@types/react-dom',
   ];
@@ -225,6 +225,8 @@ export const initAction = async (
     logLevel,
     exact: false,
   });
+
+  skuContext.configPath = 'sku.config.ts';
 
   await configure(skuContext);
   await esLintFix({ skuContext });

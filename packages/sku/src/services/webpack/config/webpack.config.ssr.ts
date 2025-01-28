@@ -174,7 +174,6 @@ const makeWebpackConfig = ({
         ],
       },
       plugins: [
-        // @ts-expect-error
         new LoadablePlugin({
           filename: webpackStatsFilename,
           writeToDisk: true,

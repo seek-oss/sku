@@ -13,7 +13,7 @@ export interface ViteRenderCallbackParams {
 }
 
 export interface RenderCallbackParams {
-  SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
+  SkuProvider: ({ children }: { children: ReactNode }) => ReactNode;
   addLanguageChunk: (language: string) => void;
   getBodyTags: () => string;
   getHeadTags: (options?: {

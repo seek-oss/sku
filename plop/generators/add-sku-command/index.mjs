@@ -4,10 +4,10 @@ const getCommandsList = () => {
   const commands = fs.readdirSync('./packages/sku/lib/program/commands', {
     encoding: 'utf-8',
   });
-  return commands.filter((command) => command !== 'index.js');
+  return commands.filter((command) => command !== 'index.mjs');
 };
 
-const addCommandGenerator = (plop) => {
+const addSkuCommandGenerator = (plop) => {
   const subCommands = getCommandsList();
 
   plop.setGenerator('add-sku-command', {
@@ -97,4 +97,4 @@ const addCommandGenerator = (plop) => {
   });
 };
 
-export default addCommandGenerator;
+export default addSkuCommandGenerator;

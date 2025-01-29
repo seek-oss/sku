@@ -1,33 +1,23 @@
 #!/usr/bin/env node
-const fs = require('node:fs');
-const { setCwd, getPathFromCwd, cwd } = require('../lib/cwd');
-const debug = require('debug');
-const banner = require('../lib/banner');
-const chalk = require('chalk');
+// @ts-check
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import debug from 'debug';
+import chalk from 'chalk';
 
-const log = debug('sku:postinstall');
+try {
+  const initCwd = process.env.INIT_CWD;
 
-// npm scripts can have an incorrect cwd
-// in this case INIT_CWD should be set
-// see: https://docs.npmjs.com/cli/run-script
-// must be run first
-setCwd(process.env.INIT_CWD);
-
-log('postinstall', `changed cwd to ${cwd()}`);
-
-const packageJson = getPathFromCwd('./package.json');
-const packageJsonExists = fs.existsSync(packageJson);
-
-// Don't run configure if CWD is not a project (e.g. npx)
-if (packageJsonExists) {
-  log('postinstall', 'packageJsonExists');
+  const localCwd = initCwd || process.cwd();
+  const packageJson = join(localCwd, './package.json');
+  const packageJsonContents = await readFile(packageJson, 'utf-8');
   const {
     name: packageName,
     dependencies,
     devDependencies,
     skuSkipPostInstall = false,
     skuSkipPostinstall = false,
-  } = require(packageJson);
+  } = JSON.parse(packageJsonContents);
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSkuDep = Boolean(dependencies?.sku);
@@ -37,17 +27,32 @@ if (packageJsonExists) {
   // Don't run configure script if sku is not installed
   // Ignore projects that are opting out of sku's postinstall script
   if (packageName === 'sku' || !hasSku || skipPostInstall) {
+    console.log('sku postinstall script skipped');
     process.exit();
+  }
+
+  // Suppressing eslint. These imports will work after the build steps for postinstall.
+
+  const { setCwd } = await import('../dist/lib/cwd.js');
+
+  const banner = (await import('../dist/lib/banner.js')).default;
+
+  const log = debug('sku:postinstall');
+
+  // npm scripts can have an incorrect cwd
+  // in this case INIT_CWD should be set
+  // see: https://docs.npmjs.com/cli/run-script
+  // must be run first
+  if (initCwd) {
+    setCwd(initCwd);
   }
 
   if (hasSkuDep) {
     banner('warning', 'sku dependency detected', [
-      `${chalk.bold('sku')} is present as a ${chalk.bold(
-        'dependency',
-      )} in ${chalk.bold(packageJson)}.`,
-      `${chalk.bold('sku')} should be installed in ${chalk.bold(
-        'devDependencies',
+      `${chalk.bold('sku')} is present as a ${chalk.bold('dependency')} in ${chalk.bold(
+        packageJson,
       )}.`,
+      `${chalk.bold('sku')} should be installed in ${chalk.bold('devDependencies')}.`,
     ]);
   }
 
@@ -55,8 +60,7 @@ if (packageJsonExists) {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    log('postinstall', require.resolve('../lib/configure'));
-    configure = require('../lib/configure');
+    configure = (await import('../src/lib/configure.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
@@ -77,4 +81,7 @@ if (packageJsonExists) {
     console.error(error);
     throw error;
   }
+} catch {
+  console.log('package.json does not exist');
+  process.exit();
 }

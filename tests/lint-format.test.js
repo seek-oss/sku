@@ -1,14 +1,17 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const dedent = require('dedent');
-const { runSkuScriptInDir } = require('@sku-private/test-utils');
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import dedent from 'dedent';
+import { runSkuScriptInDir } from '@sku-private/test-utils';
+import { createRequire } from 'node:module';
+import { stripVTControlCharacters as stripAnsi } from 'node:util';
+
+const require = createRequire(import.meta.url);
 
 const appDirectory = path.dirname(
   require.resolve('@sku-fixtures/lint-format/sku.config.ts'),
 );
 const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName) => path.join(srcDirectory, fileName);
-const { stripVTControlCharacters: stripAnsi } = require('node:util');
 
 const filesToLint = {
   'utils.test.ts': dedent/* ts */ `

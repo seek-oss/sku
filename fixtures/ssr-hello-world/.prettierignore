@@ -3,7 +3,7 @@
 .prettierrc
 coverage/
 dist-build/
-eslint.config.js
+eslint.config.mjs
 pnpm-lock.yaml
 report/
 tsconfig.json

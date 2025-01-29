@@ -1,0 +1,21 @@
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "target": "ESNext",
+    "allowJs": true,
+    "jsx": "preserve",
+    "module": "nodenext",
+    "baseUrl": "./",
+    "moduleResolution": "nodenext",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "types": ["webpack/module", "jest", "node"],
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "**/@loadable"]
+}

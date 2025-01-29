@@ -1,12 +1,15 @@
-const gracefulSpawn = require('../packages/sku/lib/gracefulSpawn');
-const path = require('node:path');
-const { sync: spawnSync } = require('cross-spawn');
-const {
+import path from 'node:path';
+import { sync as spawnSync } from 'cross-spawn';
+import {
   waitForUrls,
   startAssetServer,
   getStoryPage,
   getTextContentFromFrameOrPage,
-} = require('@sku-private/test-utils');
+  gracefulSpawn,
+} from '@sku-private/test-utils';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const skuConfigFileName = 'sku.config.ts';
 const appDir = path.dirname(

@@ -1,11 +1,17 @@
-const getAppSnapshot = async (url, warningFilter = () => true) => {
+// @ts-check
+/**
+ * @param {string} url
+ */
+export const getAppSnapshot = async (url, warningFilter = () => true) => {
+  /** @type {string[]} */
   const warnings = [];
+  /** @type {string[]} */
   const errors = [];
 
   const appPage = await browser.newPage();
 
   appPage.on('console', (msg) => {
-    if (msg.type() === 'warning') {
+    if (msg.type() === 'warn') {
       warnings.filter(warningFilter).push(msg.text());
     }
 
@@ -13,7 +19,7 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
       let isFaviconError = false;
       msg.stackTrace().forEach((frame) => {
         // Ignore 404s for favicons
-        if (frame.url.endsWith('favicon.ico')) {
+        if (frame?.url?.endsWith('favicon.ico')) {
           isFaviconError = true;
           return;
         }
@@ -30,15 +36,11 @@ const getAppSnapshot = async (url, warningFilter = () => true) => {
   });
 
   const response = await appPage.goto(url, { waitUntil: 'load' });
-  const sourceHtml = await response.text();
+  const sourceHtml = await response?.text();
   const clientRenderContent = await appPage.content();
 
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);
 
   return { sourceHtml, clientRenderContent };
-};
-
-module.exports = {
-  getAppSnapshot,
 };

@@ -10,5 +10,5 @@
     "incremental": true,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "fixtures", "packages/sku/template"]
+  "exclude": ["node_modules", "fixtures", "packages/sku"]
 }

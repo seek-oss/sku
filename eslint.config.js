@@ -18,6 +18,7 @@ module.exports = [
       'test/test-cases/*/*',
       '!test/test-cases/*/*.test.js',
       'fixtures/*/*',
+      '**/@loadable/**/*',
     ],
   },
   ...seek,
@@ -97,6 +98,14 @@ module.exports = [
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'unicorn/prefer-node-protocol': 'error',
+    },
+  },
+  {
+    settings: {
+      '@typescript-eslint/parser': {
+        projectRoot: __dirname,
+        project: true,
+      },
     },
   },
   {

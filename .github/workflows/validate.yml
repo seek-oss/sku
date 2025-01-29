@@ -41,6 +41,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build Sku
+        run: pnpm build
+
       - name: Set Puppeteer Cache Directory
         id: set-puppeteer-cache
         run: echo "PUPPETEER_CACHE_DIR=$HOME/.cache/puppeteer" >> $GITHUB_OUTPUT
@@ -81,5 +84,8 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
           restore-keys: jest-${{ runner.os }}-
 
+      - name: restore access to dist/sku
+        run: sudo chmod +x /home/runner/work/sku/sku/packages/sku/dist/bin/sku.js
+
       - name: Test
-        run: pnpm run test && pnpm run test:sku-init
+        run: aa-exec --profile=chrome pnpm run test && aa-exec --profile=chrome pnpm run test:sku-init

@@ -1,9 +1,9 @@
-const handler = require('serve-handler');
-const http = require('node:http');
+import handler from 'serve-handler';
+import { createServer } from 'node:http';
 
-const startAssetServer = async (port, targetDirectory, rewrites = []) =>
+export const startAssetServer = async (port, targetDirectory, rewrites = []) =>
   new Promise((resolve) => {
-    const server = http.createServer((request, response) => {
+    const server = createServer((request, response) => {
       return handler(request, response, {
         public: targetDirectory,
         // So we can test storybook iframe pages when serving a built storybook
@@ -27,5 +27,3 @@ const startAssetServer = async (port, targetDirectory, rewrites = []) =>
       resolve(() => server.close());
     });
   });
-
-module.exports = { startAssetServer };

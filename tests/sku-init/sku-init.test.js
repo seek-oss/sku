@@ -1,10 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { promisify } from 'node:util';
-import { exec as childProcessExec } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
-
-const exec = promisify(childProcessExec);
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -46,7 +43,8 @@ describe('sku init', () => {
     console.log(
       "Running 'pnpm install' to clean up lockfile after sku-init test...",
     );
-    await exec('pnpm install --verbose');
+
+    spawnSync('pnpm', ['install', '--verbose']);
     console.log('Cleanup complete');
   });
 

@@ -46,7 +46,7 @@ describe('sku init', () => {
     console.log(
       "Running 'pnpm install' to clean up lockfile after sku-init test...",
     );
-    await exec('pnpm install');
+    await exec('pnpm install --verbose');
     console.log('Cleanup complete');
   });
 

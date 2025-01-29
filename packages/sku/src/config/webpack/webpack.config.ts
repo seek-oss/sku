@@ -215,7 +215,6 @@ const makeWebpackConfig = ({
         ...(htmlRenderPlugin
           ? [
               htmlRenderPlugin.statsCollectorPlugin,
-              // @ts-expect-error ts2351
               new LoadablePlugin({
                 writeToDisk: false,
                 outputAsset: false,

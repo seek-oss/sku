@@ -79,7 +79,7 @@
   },
   "volta": {
     "node": "20.15.0",
-    "pnpm": "9.6.0"
+    "pnpm": "9.15.5"
   },
   "packageManager": "pnpm@9.6.0",
   "skuSkipPostInstall": true,

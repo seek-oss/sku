@@ -78,10 +78,9 @@
     "node": ">=20.15"
   },
   "volta": {
-    "node": "20.15.0",
-    "pnpm": "9.15.5"
+    "node": "20.15.0"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.15.5",
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true

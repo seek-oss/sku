@@ -60,7 +60,7 @@ try {
   let configure;
   try {
     log('postinstall', 'starting load of configure');
-    configure = (await import('../src/lib/configure.js')).default;
+    configure = (await import('../dist/lib/configure.js')).default;
   } catch (error) {
     console.error(
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',

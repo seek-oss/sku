@@ -4,7 +4,7 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
-    "sku": "dist/bin/sku.js"
+    "sku": "bin.js"
   },
   "exports": {
     ".": "./sku-types.d.ts",
@@ -31,7 +31,8 @@
     "CHANGELOG.md",
     "sku-types.d.ts",
     "tsconfig.json",
-    "src/@loadable"
+    "src/@loadable",
+    "bin.js"
   ],
   "type": "module",
   "scripts": {

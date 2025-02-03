@@ -12,7 +12,7 @@ import { createRequire } from 'node:module';
 
 const execFile = promisify(_execFile);
 const require = createRequire(import.meta.url);
-const skuBin = require.resolve('../packages/sku/dist/bin/sku.js');
+const skuBin = require.resolve('../packages/sku/bin.js');
 
 export const run = async (
   file: string,

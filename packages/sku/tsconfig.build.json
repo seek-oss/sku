@@ -3,5 +3,5 @@
   "compilerOptions": {
     "outDir": "./dist"
   },
-  "exclude": ["**/*.test.ts", "**/*.test.js"]
+  "exclude": ["**/*.test.ts", "**/*.test.js", "src/@loadable/component/index.ts"]
 }

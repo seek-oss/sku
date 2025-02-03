@@ -30,7 +30,8 @@
     "template",
     "CHANGELOG.md",
     "sku-types.d.ts",
-    "tsconfig.json"
+    "tsconfig.json",
+    "src/@loadable"
   ],
   "type": "module",
   "scripts": {

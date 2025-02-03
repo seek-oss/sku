@@ -59,7 +59,7 @@ jobs:
         id: babel-loader-cache
         uses: actions/cache@v4
         with:
-          path: 'fixtures/*/node_modules/.cache/babel-loader'
+          path: "fixtures/*/node_modules/.cache/babel-loader"
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Install Puppeteer
@@ -85,7 +85,7 @@ jobs:
           restore-keys: jest-${{ runner.os }}-
 
       - name: restore access to dist/sku
-        run: sudo chmod +x /home/runner/work/sku/sku/packages/sku/dist/bin/sku.js
+        run: sudo chmod +x /home/runner/work/sku/sku/packages/sku/bin.js
 
       - name: Test
         run: aa-exec --profile=chrome pnpm run test && aa-exec --profile=chrome pnpm run test:sku-init

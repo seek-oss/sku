@@ -2,6 +2,7 @@
   "name": "@sku-private/test-utils",
   "private": true,
   "type": "module",
+  "main": "index.js",
   "dependencies": {
     "@types/css": "^0.0.38",
     "@types/diffable-html": "^5.0.2",

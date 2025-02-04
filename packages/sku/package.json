@@ -118,7 +118,7 @@
     "env-ci": "^11.1.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.2.0",
+    "eslint-config-seek": "^14.2.2",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",

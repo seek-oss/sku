@@ -726,7 +726,7 @@ importers:
         specifier: ^9.10.0
         version: 9.19.0(jiti@2.4.2)
       eslint-config-seek:
-        specifier: ^14.2.0
+        specifier: ^14.2.2
         version: 14.2.2(@typescript-eslint/eslint-plugin@8.23.0(eslint@9.19.0(jiti@2.4.2))(typescript@5.6.3))(eslint-plugin-import@2.31.0(eslint@9.19.0(jiti@2.4.2)))(eslint@9.19.0(jiti@2.4.2))(jest@29.7.0(@types/node@18.19.75)(babel-plugin-macros@3.1.0))(typescript@5.6.3)
       eta:
         specifier: ^3.5.0

@@ -4,7 +4,7 @@
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./sku-types.d.ts",
   "bin": {
-    "sku": "dist/bin/sku.js"
+    "sku": "bin.js"
   },
   "exports": {
     ".": "./sku-types.d.ts",
@@ -30,7 +30,9 @@
     "template",
     "CHANGELOG.md",
     "sku-types.d.ts",
-    "tsconfig.json"
+    "tsconfig.json",
+    "src/@loadable",
+    "bin.js"
   ],
   "type": "module",
   "scripts": {
@@ -116,7 +118,7 @@
     "env-ci": "^11.1.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.2.0",
+    "eslint-config-seek": "^14.2.2",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.16.3",

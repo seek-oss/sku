@@ -29,7 +29,7 @@ import debug from 'debug';
 
 import prettier from 'prettier';
 import prettierConfig from '../config/prettier/prettierConfig.js';
-import type { SkuConfig } from '../../sku-types.d.ts';
+import type { SkuConfig } from '../types/types.js';
 
 type ProxifiedSkuConfig = ProxifiedObject<SkuConfig>;
 type EsmConfig = { type: 'esm'; configAst: ProxifiedSkuConfig };

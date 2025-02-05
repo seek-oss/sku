@@ -23,8 +23,4 @@ If you are using `require()` to import `sku/webpack-plugin` you will have to cha
 
 ___
 
-`sku/config/eslint` is a new entrypoint that exposes `sku`'s ESLint configuration.
-
-`sku@14` now uses `eslint` flat config and it will try to migrate your `.eslintignore` and `.eslintrc` files automatically.
-
-If a custom `eslint` configuration is required and you want to use the `sku/config/eslint` you will need to convert your `eslint.config.js` file to ESM.
+`sku/config/eslint` is a new entrypoint that exposes `sku`'s flat ESLint configuration. It now only supports ESM.

@@ -3,7 +3,7 @@ import type { Request } from 'express';
 
 import routeMatcher from './routeMatcher.js';
 import { languages, sites, type NormalizedRoute } from '../context/index.js';
-import type { SkuLanguage } from '../../sku-types.js';
+import type { SkuLanguage } from '../types/types.js';
 
 const log = debug('sku:language-middleware');
 

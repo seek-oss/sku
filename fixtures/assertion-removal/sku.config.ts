@@ -1,4 +1,4 @@
-import type { SkuConfig } from 'sku' with { 'resolution-mode': 'import' };
+import type { SkuConfig } from 'sku';
 
 export default {
   clientEntry: 'src/client.tsx',

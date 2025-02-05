@@ -40,7 +40,7 @@ interface SharedRenderProps {
   webpackStats: any;
 }
 
-interface RenderAppProps extends SharedRenderProps {
+export interface RenderAppProps extends SharedRenderProps {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
   _addChunk: (chunkName: string) => void;
   renderToStringAsync: (element: ReactNode) => Promise<string>;
@@ -64,16 +64,16 @@ export interface Render<App = string> {
   renderDocument(p: RenderDocumentProps<App>): Promise<string> | string;
 }
 
-interface SkuRouteObject {
+export interface SkuRouteObject {
   route: string;
   name?: string;
   entry?: string;
   languages?: readonly string[];
 }
 
-type SkuRoute = string | SkuRouteObject;
+export type SkuRoute = string | SkuRouteObject;
 
-interface SkuSiteObject {
+export interface SkuSiteObject {
   name: string;
   host?: string;
   routes?: readonly SkuRoute[];
@@ -82,7 +82,7 @@ interface SkuSiteObject {
 
 type SkuSite = string | SkuSiteObject;
 
-interface TransformOutputPathFunctionParams {
+export interface TransformOutputPathFunctionParams {
   environment: string | undefined;
   site: string | undefined;
   route: string;
@@ -92,7 +92,7 @@ type TransformOutputPathFunction = (
   input: TransformOutputPathFunctionParams,
 ) => string;
 
-type SkuLanguage = string | { name: string; extends?: string };
+export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfig {
   /**

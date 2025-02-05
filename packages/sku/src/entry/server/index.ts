@@ -10,7 +10,6 @@ const { values } = parseArgs({
     port: {
       type: 'string',
       short: 'p',
-      // eslint-disable-next-line no-undef
       default: `${__SKU_DEFAULT_SERVER_PORT__}`,
     },
   },

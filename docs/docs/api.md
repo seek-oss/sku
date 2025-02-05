@@ -52,9 +52,9 @@ Exports `sku`'s custom eslint config based on [`eslint-config-seek`].
 Example:
 
 ```ts
-const { eslintConfigSku } = require('sku/config/eslint');
+import { eslintConfigSku } from 'sku/config/eslint';
 
-module.exports = eslintConfigSku;
+export default eslintConfigSku;
 ```
 
 [`eslint-config-seek`]: https://github.com/seek-oss/eslint-config-seek

@@ -1,6 +1,6 @@
-// @ts-ignore no types
+// @ts-expect-error no types
 import { makeStableHashes } from '@sku-private/test-utils';
-import type { SkuConfig } from 'sku' with { 'resolution-mode': 'import' };
+import type { SkuConfig } from 'sku';
 
 export default {
   srcPaths: ['src', 'sku-ssr.config.ts'],

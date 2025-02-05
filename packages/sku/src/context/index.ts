@@ -8,8 +8,8 @@ import validateConfig from './validateConfig.js';
 
 import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
-import { getConfigPath } from './configPath.js';
-import type { SkuConfig, SkuRoute, SkuRouteObject } from 'sku-types.d.ts';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
+import { resolveAppSkuConfigPath } from './configPath.js';
 
 const jiti = createJiti(import.meta.url);
 
@@ -17,37 +17,23 @@ const getSkuConfig = async (): Promise<{
   appSkuConfig: SkuConfig;
   appSkuConfigPath: string | null;
 }> => {
-  let appSkuConfigPath;
-  const tsPath = getPathFromCwd('sku.config.ts');
-  const jsPath = getPathFromCwd('sku.config.js');
+  const appSkuConfigPath = resolveAppSkuConfigPath();
 
-  const customSkuConfig = getConfigPath() || process.env.SKU_CONFIG;
-
-  if (customSkuConfig) {
-    appSkuConfigPath = getPathFromCwd(customSkuConfig);
-  } else if (existsSync(tsPath)) {
-    appSkuConfigPath = tsPath;
-  } else if (existsSync(jsPath)) {
-    appSkuConfigPath = jsPath;
-  } else {
+  if (!appSkuConfigPath) {
+    console.warn('No sku config file found. Using default configuration.');
     return {
       appSkuConfig: {},
       appSkuConfigPath: null,
     };
   }
 
-  type SkuConfigImportType = SkuConfig | { default: SkuConfig };
-
-  const newConfig = await jiti.import<SkuConfigImportType>(appSkuConfigPath);
-
-  function isDefaultConfig(
-    config: SkuConfigImportType,
-  ): config is { default: SkuConfig } {
-    return (config as { default: SkuConfig }).default !== undefined;
-  }
+  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
+    // Shortcut for `mod?.default || mod`
+    default: true,
+  });
 
   return {
-    appSkuConfig: isDefaultConfig(newConfig) ? newConfig.default : newConfig,
+    appSkuConfig,
     appSkuConfigPath,
   };
 };

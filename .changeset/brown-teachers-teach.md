@@ -6,20 +6,10 @@ Migrating `sku` to ESM from commonjs
 
 **BREAKING CHANGE**:
 
-`sku` now uses ESM modules instead of commonjs.
-
-If your project is not already using ESM modules you will have to make the following changes:
-
+Most of [`sku`s API entrypoints](https://seek-oss.github.io/sku/#/./docs/api) are now ESM. Consumers that use the following API entrypoints may need to convert some of their configuration files to ESM:
 ___
 
-`sku.config` files must now be written in TypeScript or ESM.
-
-If you are already using a `sku.config.ts` file no changes are required.
-If you are using a `sku.config.js` file you will either have to move to a `ts` or `mjs` file and update the `sku.config` accordingly.
-
-___
-
-`sku/webpack-plugin` is now an ESM module and has to be imported as such.
+`sku/webpack-plugin` is now an ES module and has to be imported as such.
 
 If you are using `require()` to import `sku/webpack-plugin` you will have to change it to `import`.
 
@@ -29,9 +19,12 @@ If you are using `require()` to import `sku/webpack-plugin` you will have to cha
 ```
 
 > [!NOTE]
-> The file that is importing `sku/webpack-plugin` must also be an ESM module so further changes may be required.
+> The file that is importing `sku/webpack-plugin` must also be an ES module so further changes may be required.
 
 ___
 
-`sku@14` uses `eslint` flat config and it will try to migrate your `.eslintignore` and `.eslintrc` files automatically.
-If a custom eslint configuration is required and you want to use the `sku/config/eslint` it will have to be ESM.
+`sku/config/eslint` is a new entrypoint that exposes `sku`'s ESLint configuration.
+
+`sku@14` now uses `eslint` flat config and it will try to migrate your `.eslintignore` and `.eslintrc` files automatically.
+
+If a custom `eslint` configuration is required and you want to use the `sku/config/eslint` you will need to convert your `eslint.config.js` file to ESM.

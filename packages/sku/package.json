@@ -2,12 +2,17 @@
   "name": "sku",
   "version": "13.3.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
-  "types": "./sku-types.d.ts",
+  "types": "./dist/index.d.ts",
   "bin": {
     "sku": "bin.js"
   },
   "exports": {
-    ".": "./sku-types.d.ts",
+    ".": {
+      "types": {
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
+      }
+    },
     "./jest-preset": "./dist/config/jest/jest-preset.js",
     "./config/eslint": {
       "default": "./dist/config/eslint/index.js",
@@ -29,7 +34,6 @@
     "scripts",
     "template",
     "CHANGELOG.md",
-    "sku-types.d.ts",
     "tsconfig.json",
     "src/@loadable",
     "bin.js"
@@ -37,7 +41,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json && cp dist/index.d.ts dist/index.d.cts",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {

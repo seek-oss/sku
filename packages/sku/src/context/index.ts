@@ -8,7 +8,7 @@ import validateConfig from './validateConfig.js';
 
 import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
-import type { SkuConfig, SkuRoute, SkuRouteObject } from 'sku-types.d.ts';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { resolveAppSkuConfigPath } from './configPath.js';
 
 const jiti = createJiti(import.meta.url);

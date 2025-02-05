@@ -5,7 +5,7 @@ import didYouMean from 'didyoumean2';
 import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import type { SkuConfig } from '../../sku-types.d.ts';
+import type { SkuConfig } from '../types/types.js';
 import { hasErrorMessage } from '../lib/utils/error-guards.js';
 import type { ValidationError } from 'fastest-validator';
 

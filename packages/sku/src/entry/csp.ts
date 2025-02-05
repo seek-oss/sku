@@ -1,7 +1,7 @@
 import { createHash, type BinaryLike } from 'node:crypto';
 import { parse, valid, type HTMLElement } from 'node-html-parser';
 import { URL } from 'node:url';
-import type { RenderCallbackParams } from '../../sku-types.d.ts';
+import type { RenderCallbackParams } from '../types/types.js';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 

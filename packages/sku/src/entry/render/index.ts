@@ -4,7 +4,7 @@ import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor.jsx';
 import clientContextKey from '../clientContextKey.js';
 import createCSPHandler from '../csp.js';
-import type { RenderAppProps } from '../../../sku-types.d.ts';
+import type { RenderAppProps } from '../../types/types.js';
 
 import { renderToStringAsync } from './render-to-string.js';
 

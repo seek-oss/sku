@@ -51,7 +51,7 @@ export const resolveAppSkuConfigPath = (): string | null => {
   }
 
   console.warn(
-    `Failed to find a supported ${chalk.bold('sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}}`).join(', ')})`,
+    `Failed to find a supported ${chalk.bold('sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}`).join(', ')})`,
   );
 
   return null;

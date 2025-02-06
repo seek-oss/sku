@@ -60,9 +60,6 @@ export const initAction = async (
   setCwd(root);
 
   trace(`Creating project "${projectName}" in "${root}"`);
-  console.log({
-    packageManager,
-  });
 
   const appName = path.basename(root);
 
@@ -189,13 +186,14 @@ export const initAction = async (
     }),
   );
 
-  const deps = ['braid-design-system', 'react', 'react-dom'];
+  // TODO: Remove versions from react deps once we support React 19
+  const deps = ['braid-design-system', 'react@^18.3.1', 'react-dom@^18.3.1'];
 
   const devDeps = [
     '@vanilla-extract/css',
     'sku',
-    '@types/react',
-    '@types/react-dom',
+    '@types/react@^18.3.12',
+    '@types/react-dom@^18.3.1',
   ];
 
   console.log(

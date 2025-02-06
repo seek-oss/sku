@@ -75,10 +75,10 @@
     "typescript": "~5.6.0"
   },
   "engines": {
-    "node": ">=20.15"
+    "node": ">=20.18.2"
   },
   "volta": {
-    "node": "20.15.0"
+    "node": "20.18.2"
   },
   "packageManager": "pnpm@9.15.5",
   "skuSkipPostInstall": true,

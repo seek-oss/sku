@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Test
+Fix release

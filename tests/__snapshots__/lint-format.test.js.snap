@@ -35,6 +35,8 @@ import aStyle from './a.css';
 import bStyle from './b.css';
 import cStyle from '../c.css';
 
+
+
 `;
 
 exports[`sku format errors are fixed: unformattedFile2.ts 1`] = `

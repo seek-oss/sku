@@ -155,6 +155,7 @@
     "@types/prettier": "^2.7.3",
     "@types/react": "^18.2.3",
     "@types/react-dom": "^18.2.3",
+    "@types/semver": "^7.5.8",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/wrap-ansi": "^3.0.0",
     "@vanilla-extract/css": "^1.0.0",

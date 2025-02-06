@@ -1,5 +1,11 @@
 # sku
 
+## 14.0.1
+
+### Patch Changes
+
+- Fix release ([#1165](https://github.com/seek-oss/sku/pull/1165))
+
 ## 14.0.0
 
 - Migrating `sku` to ESM from commonjs ([#1156](https://github.com/seek-oss/sku/pull/1156))
@@ -552,8 +558,8 @@
   // package.json
   {
     "scripts": {
-      "storybook": "sku translations compile && storybook dev" // or storybook build
-    }
+      "storybook": "sku translations compile && storybook dev", // or storybook build
+    },
   }
   ```
 
@@ -1593,7 +1599,7 @@
   // package.json
   {
     "skuSkipConfigure": true,
-    "skuSkipValidatePeerDeps": true
+    "skuSkipValidatePeerDeps": true,
   }
   ```
 

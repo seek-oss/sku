@@ -222,6 +222,17 @@ Default: `false`
 
 By default, sku compiles all node_modules in builds that target node. Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
 
+## eslintIgnore
+
+Type: `Array<string>`
+
+Default: `[]`
+
+Sku ignores [a number of files and directories][default ignores] by default when running ESLint.
+This option allows you to add additional files and directories to be ignored.
+
+[default ignores]: ./docs/linting
+
 ## hosts
 
 Type: `Array<string>`

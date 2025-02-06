@@ -10,7 +10,7 @@ import loadable from 'sku/@loadable/component';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));
 
-const MyComponent => () => (
+const MyComponent = () => (
   <div>
     <AsyncComponent />
   </div>
@@ -28,8 +28,8 @@ The most common use case for code splitting is splitting out each top level rout
 ```js
 // sku.config.js
 export default {
-  routes: ['/', '/details']
-  publicPath: 'https://somecdn.com'
+  routes: ['/', '/details'],
+  publicPath: 'https://somecdn.com',
 };
 ```
 

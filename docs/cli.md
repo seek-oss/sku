@@ -10,6 +10,8 @@ It provides a number of commands to help you develop, test and build your applic
 | `--debug, -D`       | Enable debug logging <br> `sku start --debug`                                                                                |
 | `--config, -c`      | Specify a custom path to your sku config <br> `sku build --config path/to/custom/config`                                     |
 | `--environment, -e` | Specify the [environment] to use (only valid for [`start`] and [`serve`] commands) <br> `sku start --environment production` |
+| `--help, -h`        | Show help output for the current command <br> `sku --help`                                                                   |
+| `--version, -v`     | Show the version of `sku` that is currently installed <br> `sku --version`                                                   |
 
 [environment]: ./docs/configuration.md#environments
 [`start`]: #start
@@ -26,6 +28,14 @@ Unless you've installed `sku` globally (not recommended), you should use `npx` o
 pnpm dlx sku init my-app
 ```
 
+This command supports the following options and arguments:
+
+| Type     | Name                           | Description                                                                                                                                                                                  |
+| -------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| argument | `project-name` <br> _required_ | The name of the project to create <br> `pnpm dlx sku init my-app`                                                                                                                            |
+| option   | `--package-manager, -p`        | Overrides the package manager used when installing dependencies <br> This defaults to the package manager being used to run `sku init` <br> `pnpm dlx sku init my-app --package-manager=npm` |
+| option   | `--verbose`                    | Enable verbose logging for the package manager <br> `pnpm dlx sku init my-app --verbose`                                                                                                     |
+
 ### `start`
 
 Start the `sku` development server for a [statically-rendered application][static rendering].
@@ -33,6 +43,12 @@ Start the `sku` development server for a [statically-rendered application][stati
 ```sh
 sku start
 ```
+
+This command supports the following options:
+
+| Option        | Description                                                                                 | Defaults to |
+| ------------- | ------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `summary`   |
 
 [static rendering]: ./docs/building-the-app.md#render
 
@@ -44,6 +60,12 @@ Start the `sku` development server for a [server-rendered application][server re
 sku start-ssr
 ```
 
+This command supports the following options:
+
+| Option        | Description                                                                                 | Defaults to |
+| ------------- | ------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `summary`   |
+
 [server rendering]: ./docs/building-the-app.md#server
 
 ### `build`
@@ -53,6 +75,12 @@ Create a production build of a [statically-rendered application][static renderin
 ```sh
 sku build
 ```
+
+This command supports the following options:
+
+| Option        | Description                                                                                 | Defaults to   |
+| ------------- | ------------------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `errors-only` |
 
 [static rendering]: ./docs/building-the-app.md#render
 
@@ -64,6 +92,12 @@ Create a production build of a [server-rendered application][server rendering].
 sku build-ssr
 ```
 
+This command supports the following options:
+
+| Option        | Description                                                                                 | Defaults to   |
+| ------------- | ------------------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `errors-only` |
+
 [server rendering]: ./docs/building-the-app.md#server
 
 ### `serve`
@@ -74,6 +108,13 @@ Requires [`sku build`] to be run first.
 ```sh
 sku serve
 ```
+
+This command supports the following options:
+
+| Option   | Description                                                            |
+| -------- | ---------------------------------------------------------------------- |
+| `--port` | The `port` to serve the application on <br> `sku serve --port=8080`    |
+| `--site` | The `site` to serve the application on <br> `sku serve --site=seekAnz` |
 
 [`sku build`]: #sku-build
 
@@ -157,9 +198,9 @@ sku translations compile
 
 This command supports the following options:
 
-| Option    | Description                                                                                    |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `--watch` | Re-compile translations whenever changes are detected <br> `sku translations compile  --watch` |
+| Option        | Description                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------- |
+| `--watch, -w` | Re-compile translations whenever changes are detected <br> `sku translations compile  --watch` |
 
 ### `translations push`
 
@@ -187,4 +228,13 @@ See the documentation on [phrase-specific features] for more information.
 sku translations pull
 ```
 
+### `translations validate`
+
+Validate translations defined in `.vocab` directories.
+
+```sh
+sku translations validate
+```
+
 [phrase-specific features]: ./docs/multi-language-applications.md#phrase-specific-features
+[stats preset]: https://webpack.js.org/configuration/stats/#stats-presets

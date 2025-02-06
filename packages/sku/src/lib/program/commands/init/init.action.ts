@@ -3,8 +3,8 @@ import {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
+  packageManagerVersion,
 } from '../../../packageManager.js';
-
 import chalk from 'chalk';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { posix as path } from 'node:path';
@@ -20,6 +20,7 @@ import toPosixPath from '../../../toPosixPath.js';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
+import semver from 'semver';
 
 const trace = debug('sku:init');
 
@@ -109,7 +110,7 @@ export const initAction = async (
   console.log(`Creating a new sku project in ${chalk.green(root)}.`);
   console.log();
 
-  const packageJson = {
+  const packageJson: Record<string, any> = {
     name: appName,
     version: '0.1.0',
     private: true,
@@ -122,6 +123,23 @@ export const initAction = async (
       format: 'sku format',
     },
   };
+
+  const isAtLeastPnpmV10 =
+    packageManager === 'pnpm' &&
+    packageManagerVersion &&
+    semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+  if (isAtLeastPnpmV10) {
+    trace(
+      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
+    );
+    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
+    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
+    packageJson.pnpm = {
+      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
+    };
+  }
+
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await writeFile(path.join(root, 'package.json'), packageJsonString);

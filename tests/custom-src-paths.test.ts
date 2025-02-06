@@ -6,11 +6,19 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfig from '@sku-fixtures/custom-src-paths/sku.config';
+import skuConfigImport from '@sku-fixtures/custom-src-paths/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
+
+// TODO: fix this casting.
+const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:${skuConfig.port}`;

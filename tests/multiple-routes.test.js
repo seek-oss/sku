@@ -1,10 +1,14 @@
-const path = require('node:path');
-const {
+import path from 'node:path';
+import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/multiple-routes/sku.config.js'),

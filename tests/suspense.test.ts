@@ -6,6 +6,9 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 import type { ChildProcess } from 'node:child_process';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/suspense/sku.config.js'),

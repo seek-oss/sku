@@ -1,6 +1,8 @@
-const { promisify } = require('node:util');
-const readFilesAsync = promisify(require('node-dir').readFiles);
-const { relative } = require('node:path');
+import { promisify } from 'node:util';
+import { readFiles } from 'node-dir';
+import { relative } from 'node:path';
+
+const readFilesAsync = promisify(readFiles);
 
 // Ignore contents of files where the content changes
 // regularly or is non-deterministic.
@@ -10,7 +12,7 @@ const ignoredFilePattern = new RegExp(
   'i',
 );
 
-const dirContentsToObject = async (dirname, includeExtensions) => {
+export const dirContentsToObject = async (dirname, includeExtensions) => {
   const files = {};
 
   const handleFile = (err, content, filePath, next) => {
@@ -37,4 +39,3 @@ const dirContentsToObject = async (dirname, includeExtensions) => {
 
   return files;
 };
-module.exports = { dirContentsToObject };

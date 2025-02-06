@@ -1,7 +1,8 @@
-const { promisify } = require('node:util');
-const hostile = require('hostile');
+// @ts-check
+import { promisify } from 'node:util';
+import { set } from 'hostile';
 
-const setSystemHost = promisify(hostile.set);
+const setSystemHost = promisify(set);
 
 const hosts = ['dev.seek.com.au', 'dev.jobstreet.com'];
 

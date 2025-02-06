@@ -1,6 +1,6 @@
-import type { SkuConfig } from 'sku';
-// @ts-ignore no types
+// @ts-expect-error no types
 import { makeStableHashes } from '@sku-private/test-utils';
+import type { SkuConfig } from 'sku';
 
 export default {
   clientEntry: 'src/ssr-client.tsx',

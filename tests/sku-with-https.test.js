@@ -1,17 +1,21 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const {
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import {
   runSkuScriptInDir,
   waitForUrls,
   getAppSnapshot,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const {
-  port,
-  serverPort,
-} = require('@sku-fixtures/sku-with-https/sku-server.config.js');
+import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
+
+import { createRequire } from 'node:module';
+
+const { port, serverPort } = skuServerConfig;
+
+const require = createRequire(import.meta.url);
+
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/sku-with-https/sku.config.js'),
+  require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
 );
 
 describe('sku-with-https', () => {
@@ -44,7 +48,7 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       process = await runSkuScriptInDir('start-ssr', appDir, [
-        '--config=sku-server.config.js',
+        '--config=sku-server.config.mjs',
       ]);
       await waitForUrls(url, `${url}/test-middleware`);
     });

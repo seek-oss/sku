@@ -1,0 +1,13 @@
+import { Command } from 'commander';
+
+const {{camelCase commandName}}Command = new Command('{{commandName}}');
+
+{{camelCase commandName}}Command
+  .description('<YOUR_DESCRIPTION_HERE>')
+  .argument('<ARGUMENTS_HERE>', '<ARGUMENT_DESCRIPTION>')
+  .action(async () => {
+    const { {{camelCase commandName}}Action } = await import('./{{commandName}}.action.js');
+    {{camelCase commandName}}Action();
+  });
+
+export { {{camelCase commandName}}Command };

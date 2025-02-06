@@ -1,8 +1,8 @@
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
+import { StatsWriterPlugin } from 'webpack-stats-plugin';
 
 const externalRegex = /^external node-commonjs "/;
 
-class ListExternalsWebpackPlugin {
+export class ListExternalsWebpackPlugin {
   constructor({ filename = 'externals.json' } = {}) {
     return new StatsWriterPlugin({
       filename,
@@ -23,5 +23,3 @@ class ListExternalsWebpackPlugin {
     });
   }
 }
-
-module.exports = { ListExternalsWebpackPlugin };

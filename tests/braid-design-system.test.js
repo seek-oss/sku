@@ -1,15 +1,19 @@
-const path = require('node:path');
-const {
+import path from 'node:path';
+import {
   dirContentsToObject,
   getAppSnapshot,
   waitForUrls,
   runSkuScriptInDir,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
 
-const skuConfig = require('@sku-fixtures/braid-design-system/sku.config.js');
+import skuConfig from '@sku-fixtures/braid-design-system/sku.config.mjs';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/braid-design-system/sku.config.js'),
+  require.resolve('@sku-fixtures/braid-design-system/sku.config.mjs'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
@@ -47,7 +51,7 @@ describe('braid-design-system', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
+      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
       process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(getLocalUrl('seekAnz'));
     }, 230000);

@@ -1,15 +1,19 @@
-const path = require('node:path');
-const {
+import path from 'node:path';
+import {
   dirContentsToObject,
   getAppSnapshot,
   waitForUrls,
   startAssetServer,
-} = require('@sku-private/test-utils');
-const { runBin, startBin } = require('../packages/sku/lib/runBin');
+} from '@sku-private/test-utils';
+import { runBin, startBin } from '../packages/sku/dist/lib/runBin.js';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-webpack-plugin/package.json'),
 );
+
 const distDir = path.resolve(appDir, 'dist');
 
 const port = 9876;

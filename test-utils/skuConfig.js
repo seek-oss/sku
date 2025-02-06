@@ -1,4 +1,4 @@
-const makeStableHashes = (config) => {
+export const makeStableHashes = (config) => {
   // Addresses an issue where module IDs were different between local dev and CI
   config.optimization.chunkIds = 'natural';
   config.optimization.moduleIds = 'natural';
@@ -12,8 +12,4 @@ const makeStableHashes = (config) => {
   }
 
   return config;
-};
-
-module.exports = {
-  makeStableHashes,
 };

@@ -1,18 +1,22 @@
-const path = require('node:path');
+import path from 'node:path';
 
-const {
+import {
   runSkuScriptInDir,
   dirContentsToObject,
-} = require('@sku-private/test-utils');
+} from '@sku-private/test-utils';
+
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/source-maps/sku.config.js'),
+  require.resolve('@sku-fixtures/source-maps/sku.config.mjs'),
 );
 
 describe('source-maps', () => {
   describe('build', () => {
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
+      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
     });
 
     it('should generate the expected files', async () => {

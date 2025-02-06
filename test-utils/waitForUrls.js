@@ -1,6 +1,6 @@
-const waitOn = require('wait-on');
+import waitOn from 'wait-on';
 
-const waitForUrls = async (...urls) => {
+export const waitForUrls = async (...urls) => {
   const timeout = 200000;
 
   try {
@@ -27,5 +27,3 @@ const waitForUrls = async (...urls) => {
     throw error;
   }
 };
-
-module.exports = { waitForUrls };

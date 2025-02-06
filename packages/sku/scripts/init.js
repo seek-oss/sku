@@ -5,6 +5,7 @@ const {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
+  packageManagerVersion,
 } = require('../lib/packageManager');
 
 const chalk = require('chalk');
@@ -22,6 +23,7 @@ const toPosixPath = require('../lib/toPosixPath');
 const trace = require('debug')('sku:init');
 const { fdir: Fdir } = require('fdir');
 const { Eta } = require('eta');
+const semver = require('semver');
 
 const args = require('../config/args');
 
@@ -145,6 +147,23 @@ const packageNameRegex =
       format: 'sku format',
     },
   };
+
+  const isAtLeastPnpmV10 =
+    packageManager === 'pnpm' &&
+    packageManagerVersion &&
+    semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+  if (isAtLeastPnpmV10) {
+    trace(
+      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
+    );
+    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
+    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
+    packageJson.pnpm = {
+      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
+    };
+  }
+
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await fs.writeFile(path.join(root, 'package.json'), packageJsonString);

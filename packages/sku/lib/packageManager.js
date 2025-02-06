@@ -37,15 +37,24 @@ const validatePackageManager = (packageManager) => {
 const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
+  // Default to 'npm'
+  let packageManager = 'npm';
+
+  let version = null;
+  if (userAgent) {
+    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
+    version = userAgent.split(' ')?.[0].split('/')?.[1];
+  }
+
   if (userAgent.includes('yarn')) {
-    return 'yarn';
+    packageManager = 'yarn';
   }
 
   if (userAgent.includes('pnpm')) {
-    return 'pnpm';
+    packageManager = 'pnpm';
   }
 
-  return 'npm';
+  return { packageManager, version };
 };
 
 /** @type {Record<SupportedPackageManager, string>} */
@@ -61,8 +70,9 @@ const lockfileByPackageManager = {
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const getPackageManager = () => {
+  const userAgentPackageManager = getPackageManagerFromUserAgent();
   const packageManager = validatePackageManager(
-    skuArgs?.packageManager || getPackageManagerFromUserAgent(),
+    skuArgs?.packageManager || userAgentPackageManager.packageManager,
   );
 
   const lockFile = lockfileByPackageManager[packageManager];
@@ -72,10 +82,14 @@ const getPackageManager = () => {
   /** @type {string | null} */
   const rootDir = lockFilePath ? path.dirname(lockFilePath) : null;
 
-  return { packageManager, rootDir };
+  return {
+    packageManager,
+    rootDir,
+    packageManagerVersion: userAgentPackageManager.version,
+  };
 };
 
-const { rootDir, packageManager } = getPackageManager();
+const { rootDir, packageManager, packageManagerVersion } = getPackageManager();
 
 /**
  * @param {SupportedPackageManager} agent
@@ -178,6 +192,7 @@ const getPackageManagerInstallPage = () => INSTALL_PAGE[packageManager];
 module.exports = {
   rootDir,
   packageManager,
+  packageManagerVersion,
   isYarn,
   isPnpm,
   isNpm,

@@ -136,6 +136,7 @@ export const initAction = async (
     // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
     // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
     packageJson.pnpm = {
+      // We transitively depend on `esbuild` via Vanilla Extract
       onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
     };
   }

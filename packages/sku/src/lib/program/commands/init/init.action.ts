@@ -60,9 +60,6 @@ export const initAction = async (
   setCwd(root);
 
   trace(`Creating project "${projectName}" in "${root}"`);
-  console.log({
-    packageManager,
-  });
 
   const appName = path.basename(root);
 

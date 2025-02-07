@@ -50,7 +50,7 @@ export const resolveAppSkuConfigPath = (): string | null => {
     return supportedSkuConfigPath;
   }
 
-  console.warn(
+  debug(
     `Failed to find a supported ${chalk.bold('sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}`).join(', ')})`,
   );
 

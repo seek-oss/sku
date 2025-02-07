@@ -1,6 +1,9 @@
 import chalk from 'chalk';
 import { existsSync } from 'node:fs';
 import { getPathFromCwd } from '../lib/cwd.js';
+import _debug from 'debug';
+
+const debug = _debug('sku:config');
 
 let configPath: string | undefined;
 
@@ -31,26 +34,23 @@ export const resolveAppSkuConfigPath = (): string | null => {
     const resolvedCustomConfigPath = getPathFromCwd(customSkuConfigPath);
 
     if (existsSync(resolvedCustomConfigPath)) {
-      console.log('Loading custom sku config:', resolvedCustomConfigPath);
+      debug('Loading custom sku config:', resolvedCustomConfigPath);
 
       return resolvedCustomConfigPath;
     }
 
-    console.warn(
-      'Custom sku config file does not exist:',
-      resolvedCustomConfigPath,
-    );
+    debug('Custom sku config file does not exist:', resolvedCustomConfigPath);
   }
 
   const supportedSkuConfigPath = resolveSupportedSkuConfigPath();
 
   if (supportedSkuConfigPath) {
-    console.log('Loading sku config:', supportedSkuConfigPath);
+    debug('Loading sku config:', supportedSkuConfigPath);
 
     return supportedSkuConfigPath;
   }
 
-  console.warn(
+  debug(
     `Failed to find a supported ${chalk.bold('sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}`).join(', ')})`,
   );
 

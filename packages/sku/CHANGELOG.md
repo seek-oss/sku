@@ -1,5 +1,11 @@
 # sku
 
+## 14.0.2
+
+### Patch Changes
+
+- Reduce config loading log noise ([#1169](https://github.com/seek-oss/sku/pull/1169))
+
 ## 14.0.1
 
 ### Patch Changes

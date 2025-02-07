@@ -10,6 +10,9 @@ import defaultCompilePackages from './defaultCompilePackages.js';
 import isCompilePackage from '../lib/isCompilePackage.js';
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { resolveAppSkuConfigPath } from './configPath.js';
+import _debug from 'debug';
+
+const debug = _debug('sku:config');
 
 const jiti = createJiti(import.meta.url);
 
@@ -20,7 +23,7 @@ const getSkuConfig = async (): Promise<{
   const appSkuConfigPath = resolveAppSkuConfigPath();
 
   if (!appSkuConfigPath) {
-    console.warn('No sku config file found. Using default configuration.');
+    debug('No sku config file found. Using default configuration.');
     return {
       appSkuConfig: {},
       appSkuConfigPath: null,

@@ -166,6 +166,12 @@
 
   In addition to `sku.config.ts` and `sku.config.js`, sku will now also look for a `sku.config.mjs` file when attempting to resolve your application's configuration file.
 
+- Update `prettier` from `^2.8.8` to `^3.4.1`
+
+  [Prettier V3] brings various code formatting changes than can be automatically fixed by running `sku format`.
+
+  [Prettier V3]: https://prettier.io/blog/2023/07/05/3.0.0.html
+
 ### Patch Changes
 
 - `sku init`: Ensure latest React 18 version is installed in new projects as React 19 is not yet supported ([#1156](https://github.com/seek-oss/sku/pull/1156))

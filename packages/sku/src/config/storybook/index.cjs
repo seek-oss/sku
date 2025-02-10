@@ -7,6 +7,18 @@
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 
 /** @type {StorybookConfig['webpackFinal']} */
+/** @typedef {import("webpack").Configuration} Configuration */
+
+/**
+ * @typedef {object} WebpackOptions
+ * @property {'PRODUCTION' | 'DEVELOPMENT' | undefined} [configType]
+ */
+
+/**
+ * @typedef {function(Configuration, WebpackOptions): Promise<Configuration>} AsyncWebpackFinal
+ */
+
+/** @type AsyncWebpackFinal */
 const webpackFinal = async (config, { configType }) => {
   const makeStorybookWebpackConfig = (
     await import('./storybookWebpackConfig.js')
@@ -14,7 +26,7 @@ const webpackFinal = async (config, { configType }) => {
 
   return makeStorybookWebpackConfig(config, {
     // sku storybook -> configType === 'DEVELOPMENT'
-    // sku build-storybook -> configType === 'PRODUCTION'g
+    // sku build-storybook -> configType === 'PRODUCTION'
     isDevServer: configType === 'DEVELOPMENT',
   });
 };

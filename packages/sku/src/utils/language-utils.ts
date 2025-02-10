@@ -2,7 +2,7 @@ import debug from 'debug';
 import type { Request } from 'express';
 
 import routeMatcher from './routeMatcher.js';
-import type { SkuLanguage } from '../../sku-types.js';
+import type { SkuLanguage } from '@/types/types.js';
 import type {
   SkuContext,
   NormalizedRoute,

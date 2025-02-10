@@ -1,4 +1,4 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '../../sku-types.d.ts';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '@/types/types.d.ts';
 import { getPathFromCwd } from '@/utils/cwd.js';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
@@ -10,6 +10,11 @@ import defaultClientEntry from './defaultClientEntry.js';
 import { createJiti } from 'jiti';
 
 const jiti = createJiti(import.meta.url);
+
+import _debug from 'debug';
+import { resolveAppSkuConfigPath } from '@/context/configPath.js';
+
+const debug = _debug('sku:config');
 
 let storedSkuContext: SkuContext;
 
@@ -35,44 +40,25 @@ const getSkuConfig = async ({
   appSkuConfigPath?: string;
   configPath?: string;
 }> => {
-  let appSkuConfigPath;
-  let appConfigPath;
-  const tsPath = getPathFromCwd('sku.config.ts');
-  const jsPath = getPathFromCwd('sku.config.js');
+  const appSkuConfigPath = resolveAppSkuConfigPath({ configPath });
 
-  const customSkuConfig = configPath || process.env.SKU_CONFIG;
-
-  if (customSkuConfig) {
-    appSkuConfigPath = getPathFromCwd(customSkuConfig);
-    appConfigPath = customSkuConfig;
-  } else if (existsSync(tsPath)) {
-    appSkuConfigPath = tsPath;
-    appConfigPath = 'sku.config.ts';
-  } else if (existsSync(jsPath)) {
-    appSkuConfigPath = jsPath;
-    appConfigPath = 'sku.config.js';
-  } else {
+  if (!appSkuConfigPath) {
+    debug('No sku config file found. Using default configuration.');
     return {
       appSkuConfig: {},
       appSkuConfigPath: undefined,
-      configPath: undefined,
     };
   }
 
-  type SkuConfigImportType = SkuConfig | { default: SkuConfig };
-
-  const newConfig = await jiti.import<SkuConfigImportType>(appSkuConfigPath);
-
-  function isDefaultConfig(
-    config: SkuConfigImportType,
-  ): config is { default: SkuConfig } {
-    return (config as { default: SkuConfig }).default !== undefined;
-  }
+  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
+    // Shortcut for `mod?.default || mod`
+    default: true,
+  });
 
   return {
-    appSkuConfig: isDefaultConfig(newConfig) ? newConfig.default : newConfig,
+    appSkuConfig,
     appSkuConfigPath,
-    configPath: appConfigPath,
+    configPath: appSkuConfigPath.split('/').pop(),
   };
 };
 
@@ -92,7 +78,7 @@ export const createSkuContext = async ({
   const skuConfig = {
     ...defaultSkuConfig,
     ...appSkuConfig,
-  };
+  } satisfies SkuConfig;
 
   validateConfig(skuConfig);
 

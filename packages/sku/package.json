@@ -1,13 +1,18 @@
 {
   "name": "sku",
-  "version": "13.3.0",
+  "version": "14.0.1",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
-  "types": "./sku-types.d.ts",
+  "types": "./dist/index.d.ts",
   "bin": {
-    "sku": "dist/bin/sku.js"
+    "sku": "bin.js"
   },
   "exports": {
-    ".": "./sku-types.d.ts",
+    ".": {
+      "types": {
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
+      }
+    },
     "./jest-preset": "./dist/config/jest/jest-preset.js",
     "./config/eslint": {
       "default": "./dist/services/eslint/config/index.js",
@@ -31,13 +36,14 @@
     "scripts",
     "template",
     "CHANGELOG.md",
-    "sku-types.d.ts",
-    "tsconfig.json"
+    "tsconfig.json",
+    "src/@loadable",
+    "bin.js"
   ],
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tspc --project tsconfig.build.json",
+    "build": "tspc --project tsconfig.build.json && cp dist/index.d.ts dist/index.d.cts",
     "lint:tsc": "tsc --noEmit",
     "prepare": "ts-patch install -s"
   },
@@ -71,7 +77,6 @@
     "@babel/generator": "^7.26.5",
     "@babel/parser": "^7.26.5",
     "@babel/plugin-transform-react-constant-elements": "^7.21.3",
-    "@babel/plugin-transform-react-inline-elements": "^7.21.0",
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
@@ -128,10 +133,10 @@
     "didyoumean2": "^7.0.2",
     "ensure-gitignore": "^1.1.2",
     "env-ci": "^11.1.0",
-    "esbuild": "^0.21.5",
+    "esbuild": "0.21.5",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.2.0",
+    "eslint-config-seek": "^14.2.2",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.19.2",

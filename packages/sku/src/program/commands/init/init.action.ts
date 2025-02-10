@@ -6,6 +6,7 @@ import dedent from 'dedent';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
+import semver from 'semver';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 
@@ -14,6 +15,7 @@ import {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
+  packageManagerVersion,
 } from '@/services/packageManager/packageManager.js';
 import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
 import { fix as esLintFix } from '@/services/eslint/runESLint.js';
@@ -117,7 +119,7 @@ export const initAction = async (
   console.log(`Creating a new sku project in ${chalk.green(root)}.`);
   console.log();
 
-  const packageJson = {
+  const packageJson: Record<string, any> = {
     name: appName,
     version: '0.1.0',
     private: true,
@@ -130,6 +132,24 @@ export const initAction = async (
       format: 'sku format',
     },
   };
+
+  const isAtLeastPnpmV10 =
+    packageManager === 'pnpm' &&
+    packageManagerVersion &&
+    semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+  if (isAtLeastPnpmV10) {
+    trace(
+      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
+    );
+    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
+    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
+    packageJson.pnpm = {
+      // We transitively depend on `esbuild` via Vanilla Extract
+      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
+    };
+  }
+
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await writeFile(path.join(root, 'package.json'), packageJsonString);
@@ -194,13 +214,14 @@ export const initAction = async (
     }),
   );
 
-  const deps = ['braid-design-system', 'react', 'react-dom'];
+  // TODO: Remove versions from react deps once we support React 19
+  const deps = ['braid-design-system', 'react@^18.3.1', 'react-dom@^18.3.1'];
 
   const devDeps = [
     '@vanilla-extract/css',
     'sku',
-    '@types/react',
-    '@types/react-dom',
+    '@types/react@^18.3.12',
+    '@types/react-dom@^18.3.1',
   ];
 
   console.log(

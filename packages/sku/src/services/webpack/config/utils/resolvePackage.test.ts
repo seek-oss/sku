@@ -1,5 +1,6 @@
 import { createPackageResolver } from './resolvePackage.js';
-import { cwd } from '../../../../utils/cwd.js';
+
+import { cwd } from '@/utils/cwd.js';
 import { jest } from '@jest/globals';
 
 describe('webpack utils', () => {

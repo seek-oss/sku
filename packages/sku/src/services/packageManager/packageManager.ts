@@ -24,15 +24,24 @@ const validatePackageManager = (packageManager: string) => {
 const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
+  // Default to 'npm'
+  let packageManager = 'npm';
+
+  let version = null;
+  if (userAgent) {
+    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
+    version = userAgent.split(' ')?.[0].split('/')?.[1];
+  }
+
   if (userAgent.includes('yarn')) {
-    return 'yarn';
+    packageManager = 'yarn';
   }
 
   if (userAgent.includes('pnpm')) {
-    return 'pnpm';
+    packageManager = 'pnpm';
   }
 
-  return 'npm';
+  return { packageManager, version };
 };
 
 const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
@@ -47,8 +56,9 @@ const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const resolvePackageManager = () => {
+  const userAgentPackageManager = getPackageManagerFromUserAgent();
   const packageManager = validatePackageManager(
-    getPackageManager() || getPackageManagerFromUserAgent(),
+    getPackageManager() || userAgentPackageManager.packageManager,
   );
 
   const lockFile = lockfileByPackageManager[packageManager];
@@ -57,12 +67,17 @@ const resolvePackageManager = () => {
   // No root found (occurs during `sku init`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;
 
-  return { packageManager, rootDir };
+  return {
+    packageManager,
+    rootDir,
+    packageManagerVersion: userAgentPackageManager.version,
+  };
 };
 
-const { rootDir, packageManager } = resolvePackageManager();
+const { rootDir, packageManager, packageManagerVersion } =
+  resolvePackageManager();
 
-export { rootDir, packageManager };
+export { rootDir, packageManager, packageManagerVersion };
 
 export const getCommand = (
   agent: SupportedPackageManager,

@@ -19,6 +19,7 @@ try {
     skuSkipPostInstall = false,
     skuSkipPostinstall = false,
   } = JSON.parse(packageJsonContents);
+
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSkuDep = Boolean(dependencies?.sku);
   // sku should always be a dev dependency now that sku init installs it as one, but some repos may still have it as a regular dependency

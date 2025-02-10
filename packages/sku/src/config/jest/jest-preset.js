@@ -10,18 +10,6 @@ const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 
-const asyncFunction = async () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('asyncFunction');
-      resolve();
-    }, 2000);
-  });
-};
-
-await asyncFunction();
-console.log('returning the decorator');
-
 /** @type {import('jest').Config} */
 export default jestDecorator({
   testEnvironment: 'jsdom',
@@ -40,7 +28,7 @@ export default jestDecorator({
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg)$':
-      fileURLToPath(import.meta.resolve('./fileMock')),
+      fileURLToPath(import.meta.resolve('./fileMock.cjs')),
   },
   transform: {
     '\\.css\\.ts$': fileURLToPath(

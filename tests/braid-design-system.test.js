@@ -15,7 +15,6 @@ const require = createRequire(import.meta.url);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/braid-design-system/sku.config.mjs'),
 );
-
 const distDir = path.resolve(appDir, 'dist');
 
 function getLocalUrl(site) {
@@ -29,9 +28,7 @@ describe('braid-design-system', () => {
     let server;
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir, [
-        '--config=sku.config.mjs',
-      ]);
+      server = await runSkuScriptInDir('start', appDir);
       await waitForUrls(getLocalUrl('seekAnz'));
     }, 230000);
 
@@ -54,10 +51,8 @@ describe('braid-design-system', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
-      process = await runSkuScriptInDir('serve', appDir, [
-        '--config=sku.config.mjs',
-      ]);
+      await runSkuScriptInDir('build', appDir);
+      process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(getLocalUrl('seekAnz'));
     }, 230000);
 
@@ -82,9 +77,7 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async () => {
-    const { child } = await runSkuScriptInDir('test', appDir, [
-      '--config=sku.config.mjs',
-    ]);
+    const { child } = await runSkuScriptInDir('test', appDir);
     expect(child.exitCode).toEqual(0);
   });
 });

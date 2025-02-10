@@ -5,7 +5,7 @@ import {
   waitForUrls,
   startAssetServer,
 } from '@sku-private/test-utils';
-import { runBin, startBin } from '../packages/sku/dist/utils/runBin.js';
+import { runBin, startBin } from '../packages/sku/dist/lib/runBin.js';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -32,7 +32,6 @@ describe('sku-webpack-plugin', () => {
         },
       });
 
-      console.log('started dev server');
       await waitForUrls(devServerUrl);
     }, 150000);
 

@@ -3,7 +3,8 @@ import path, { dirname } from 'node:path';
 import chalk from 'chalk';
 import { runBin } from '@/utils/runBin.js';
 import { getPathFromCwd } from '@/utils/cwd.js';
-import { suggestScript } from '../../utils/suggestScript.js';
+import { suggestScript } from '@/utils/suggestScript.js';
+
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

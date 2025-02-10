@@ -5,7 +5,8 @@ import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';
 
-import getCertificate from '../../../utils/certificate.js';
+import getCertificate from '@/utils/certificate.js';
+
 import {
   copyPublicFiles,
   ensureTargetDirectory,

@@ -1,9 +1,9 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
 import isCompilePackage from '@/utils/isCompilePackage.js';
-import type { SkuConfig } from '../../sku-types.d.ts';
+import type { SkuConfig } from '@/types/types.js';
 
-const defaultDecorator = (a: any) => a;
+const defaultDecorator = <T>(a: T) => a;
 
 export default {
   bundler: 'webpack',

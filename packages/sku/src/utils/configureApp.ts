@@ -6,7 +6,7 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '@/config/prettier/prettierConfig.js';
+import prettierConfig from '@/services/prettier/config/prettierConfig.js';
 import createTSConfig from '@/config/typescript/tsconfig.js';
 import { bundleReportFolder } from '@/services/webpack/config/plugins/bundleAnalyzer.js';
 import {

@@ -27,8 +27,6 @@ const [, minimumSupportedVersion] = node.split('=');
 const targets = {
   // https://github.com/browserslist/browserslist?tab=readme-ov-file#full-list
   browserslistNodeTarget: `node ${minimumSupportedVersion}`,
-  // https://esbuild.github.io/api/#target
-  esbuildNodeTarget: `node${minimumSupportedVersion}`,
 };
 
 await writeFile(

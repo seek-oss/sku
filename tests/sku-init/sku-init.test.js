@@ -43,8 +43,7 @@ describe('sku init', () => {
     console.log(
       "Running 'pnpm install' to clean up lockfile after sku-init test...",
     );
-
-    spawnSync('pnpm', ['install', '--verbose']);
+    spawnSync('pnpm', ['install']);
     console.log('Cleanup complete');
   });
 

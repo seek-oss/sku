@@ -1,11 +1,11 @@
 // '__sku_alias__clientEntry' is a webpack alias
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
+import dedent from 'dedent';
 
 import { loadableReady } from '@loadable/component';
 
 import clientContextKey from '../clientContextKey.js';
-import dedent from 'dedent';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {

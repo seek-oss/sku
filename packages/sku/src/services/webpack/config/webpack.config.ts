@@ -7,7 +7,6 @@ import nodeExternals from 'webpack-node-externals';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
 import MetricsPlugin from './plugins/metrics-plugin/index.js';
@@ -28,7 +27,6 @@ const require = createRequire(import.meta.url);
 
 const renderEntry = require.resolve('../../../entry/render');
 const libraryRenderEntry = require.resolve('../../../entry/libraryRender');
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.

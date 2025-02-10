@@ -1,7 +1,7 @@
 import { createHash, type BinaryLike } from 'node:crypto';
 import { parse, valid, type HTMLElement } from 'node-html-parser';
 import { URL } from 'node:url';
-import type { RenderCallbackParams } from '../../sku-types.d.ts';
+import type { RenderCallbackParams } from '../types/types.js';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 
@@ -15,10 +15,16 @@ interface CreateCSPHandlerOptions {
   isDevelopment?: boolean;
 }
 
+export type CSPHandler = {
+  registerScript: (script: string) => void;
+  createCSPTag: () => string;
+  handleHtml: (html: string) => string;
+};
+
 export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,
-}: CreateCSPHandlerOptions = {}) {
+}: CreateCSPHandlerOptions = {}): CSPHandler {
   let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();

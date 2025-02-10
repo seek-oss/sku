@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 
+const programRoot = './packages/sku/src/program/commands';
+
 const getCommandsList = () => {
-  const commands = fs.readdirSync('./packages/sku/src/program/commands', {
+  const commands = fs.readdirSync(programRoot, {
     encoding: 'utf-8',
   });
   return commands.filter((command) => command !== 'index.ts');
@@ -34,14 +36,14 @@ const addSkuCommandGenerator = (plop) => {
     actions: (data) => {
       // check if parent has subcommands.
       const hasExistingSubCommands = fs.existsSync(
-        `./packages/sku/src/program/commands/${data.parentCommand}/commands`,
+        `${programRoot}/${data.parentCommand}/commands`,
       );
       return [
         {
           type: 'add',
           templateFile:
             './plop/generators/add-sku-command/templates/command.hbs',
-          path: `./packages/sku/src/program/commands/${
+          path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }{{commandName}}/{{commandName}}.command.ts`,
         },
@@ -49,7 +51,7 @@ const addSkuCommandGenerator = (plop) => {
           type: 'add',
           templateFile:
             './plop/generators/add-sku-command/templates/action.hbs',
-          path: `./packages/sku/src/program/commands/${
+          path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }{{commandName}}/{{commandName}}.action.ts`,
         },
@@ -59,34 +61,34 @@ const addSkuCommandGenerator = (plop) => {
                 type: 'add',
                 templateFile:
                   './plop/generators/add-sku-command/templates/command-index.hbs',
-                path: `./packages/sku/src/program/commands/{{parentCommand}}/commands/index.ts`,
+                path: `${programRoot}/{{parentCommand}}/commands/index.ts`,
               },
               {
                 type: 'modify',
-                path: `./packages/sku/src/program/commands/{{parentCommand}}/{{parentCommand}}.command.ts`,
+                path: `${programRoot}/{{parentCommand}}/{{parentCommand}}.command.ts`,
                 pattern: /(import \{ Command } from 'commander';)/g,
                 template: "$1\nimport { commands } from './commands';",
               },
               {
                 type: 'modify',
-                path: `./packages/sku/src/program/commands/{{parentCommand}}/{{parentCommand}}.command.ts`,
+                path: `${programRoot}/{{parentCommand}}/{{parentCommand}}.command.ts`,
                 pattern: /(export \{)/g,
-                template: `for (const command of commands) {\n  {{camelCase parentCommand}}.addCommand(command);\n}\n\n$1`,
+                template: `for (const command of commands) {\n  {{camelCase parentCommand}}Command.addCommand(command);\n}\n\n$1`,
               },
             ]
           : []),
         {
           type: 'modify',
-          path: `./packages/sku/src/program/commands/${
+          path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }index.ts`,
           pattern: /(\/\* \[add-sku-command-generator: import] \*\/)/g,
           template:
-            "import { {{camelCase commandName}}Command } from './{{commandName}}/{{commandName}}.command.ts';\n$1",
+            "import { {{camelCase commandName}}Command } from './{{commandName}}/{{commandName}}.command.js';\n$1",
         },
         {
           type: 'modify',
-          path: `./packages/sku/src/program/commands/${
+          path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }index.ts`,
           pattern: /(\/\* \[add-sku-command-generator: invocation] \*\/)/g,

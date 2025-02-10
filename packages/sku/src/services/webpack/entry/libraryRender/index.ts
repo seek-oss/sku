@@ -1,5 +1,5 @@
 import render from '__sku_alias__renderEntry';
-import type { RenderAppProps } from '../../types/types.js';
+import type { RenderAppProps } from '../../../../types/types.js';
 
 const libraryName = __SKU_LIBRARY_NAME__;
 const libraryFile = __SKU_LIBRARY_FILE__;

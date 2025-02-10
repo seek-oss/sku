@@ -12,8 +12,8 @@ const EXAMPLE_MDX_FILE = 'example.mdx';
  * @param {import("webpack").Configuration} config
  * @param {{isDevServer: boolean}}
  */
-export default async (config, { isDevServer }) => {
-  const skuContext = await getSkuContext();
+export default (config, { isDevServer }) => {
+  const skuContext = getSkuContext();
   const { paths } = skuContext;
   const clientWebpackConfig = makeWebpackConfig({
     isIntegration: true,

@@ -11,7 +11,7 @@ export const createEslintConfig = async ({
 }: {
   configPath?: string;
 }) => {
-  const skuContext = await getSkuContext({ configPath });
+  const skuContext = getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;
 

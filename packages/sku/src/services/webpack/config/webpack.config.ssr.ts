@@ -57,7 +57,7 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig(skuContext);
 
-  const internalInclude = [join(__dirname, '../../../entry'), ...paths.src];
+  const internalInclude = [join(__dirname, '../entry'), ...paths.src];
 
   const resolvedPolyfills = polyfills.map((polyfill) =>
     require.resolve(polyfill, { paths: [cwd()] }),
@@ -68,7 +68,7 @@ const makeWebpackConfig = ({
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
-  const serverEntry = require.resolve('../../../entry/server/index.js');
+  const serverEntry = require.resolve('../entry/server/index.js');
 
   console.log('serverEntry', serverEntry);
 

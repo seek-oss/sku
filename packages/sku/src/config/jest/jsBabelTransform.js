@@ -1,11 +1,11 @@
 import babelJest from 'babel-jest';
 
-import babelConfig from '../babel/babelConfig.js';
+import babelConfig from '../babel/babelConfig.ts';
 import targets from '../targets.json' with { type: 'json' };
 
-import { getSkuContext } from '@/context/createSkuContext.js';
+import { getSkuContext } from '@/context/createSkuContext.ts';
 
-const { rootResolution } = await getSkuContext();
+const { rootResolution } = getSkuContext();
 
 export default babelJest.createTransformer(
   babelConfig({

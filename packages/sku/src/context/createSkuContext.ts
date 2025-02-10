@@ -7,18 +7,22 @@ import isCompilePackage from '@/utils/isCompilePackage.js';
 import chalk from 'chalk';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import { createJiti } from 'jiti';
-
-const jiti = createJiti(import.meta.url);
-
 import _debug from 'debug';
 import { resolveAppSkuConfigPath } from '@/context/configPath.js';
+
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+
+const createJiti = require('jiti');
+const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
 let storedSkuContext: SkuContext;
 
-export const getSkuContext = async ({
+export const getSkuContext = ({
   configPath,
 }: {
   configPath?: string;
@@ -26,20 +30,19 @@ export const getSkuContext = async ({
   if (storedSkuContext) {
     return storedSkuContext;
   }
-  const skuContext = await createSkuContext({ configPath });
-  storedSkuContext = skuContext;
+  storedSkuContext = createSkuContext({ configPath });
   return storedSkuContext;
 };
 
-const getSkuConfig = async ({
+const getSkuConfig = ({
   configPath,
 }: {
   configPath?: string;
-}): Promise<{
+}): {
   appSkuConfig: SkuConfig;
   appSkuConfigPath?: string;
   configPath?: string;
-}> => {
+} => {
   const appSkuConfigPath = resolveAppSkuConfigPath({ configPath });
 
   if (!appSkuConfigPath) {
@@ -50,10 +53,9 @@ const getSkuConfig = async ({
     };
   }
 
-  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
-    // Shortcut for `mod?.default || mod`
-    default: true,
-  });
+  const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
+  // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
+  const appSkuConfig = mod?.default ?? mod;
 
   return {
     appSkuConfig,
@@ -64,16 +66,12 @@ const getSkuConfig = async ({
 
 export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 
-export const createSkuContext = async ({
-  configPath,
-}: {
-  configPath?: string;
-}) => {
+export const createSkuContext = ({ configPath }: { configPath?: string }) => {
   const {
     appSkuConfig,
     appSkuConfigPath,
     configPath: appConfigPath,
-  } = await getSkuConfig({ configPath });
+  } = getSkuConfig({ configPath });
 
   const skuConfig = {
     ...defaultSkuConfig,
@@ -201,7 +199,6 @@ export const createSkuContext = async ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   const skuContext = {
-    bundler: skuConfig.bundler,
     configPath: appConfigPath,
     publicPath,
     skuConfig,

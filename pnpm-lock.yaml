@@ -570,87 +570,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/vite-braid-design-system:
-    dependencies:
-      '@vanilla-extract/css':
-        specifier: 1.17.0
-        version: 1.17.0(babel-plugin-macros@3.1.0)
-      braid-design-system:
-        specifier: 32.1.0
-        version: 32.1.0(@types/react@18.3.18)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@packages+sku)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-    devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../test-utils
-      '@types/react':
-        specifier: ^18.2.3
-        version: 18.3.18
-      '@types/react-dom':
-        specifier: ^18.2.3
-        version: 18.3.5(@types/react@18.3.18)
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
-  fixtures/vite-multiple-routes:
-    dependencies:
-      '@vanilla-extract/css':
-        specifier: ^1.0.0
-        version: 1.17.0(babel-plugin-macros@3.1.0)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      react-router:
-        specifier: 6.28.1
-        version: 6.28.1(react@18.3.1)
-      react-router-dom:
-        specifier: ^6.28.1
-        version: 6.28.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../test-utils
-      dedent:
-        specifier: ^1.5.1
-        version: 1.5.3(babel-plugin-macros@3.1.0)
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
-  fixtures/vite-source-maps:
-    dependencies:
-      '@vitejs/plugin-legacy':
-        specifier: ^5.4.2
-        version: 5.4.3(terser@5.37.0)(vite@5.4.14(@types/node@18.19.74)(terser@5.37.0))
-      '@vitejs/plugin-react':
-        specifier: ^4.3.4
-        version: 4.3.4(vite@5.4.14(@types/node@18.19.74)(terser@5.37.0))
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-    devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../test-utils
-      dedent:
-        specifier: ^1.5.1
-        version: 1.5.3(babel-plugin-macros@3.1.0)
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
   packages/sku:
     dependencies:
       '@babel/core':
@@ -1882,19 +1801,11 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@capsizecss/core@3.1.1':
-    resolution: {integrity: sha512-1YxfErFXdxcyDyc8peDwH2hiJF5U8sBY5i5HX0f/tpvabbu40w9r8VHYMOOw9Fox5O/+kf2gAhyfVe+sLnaaBA==}
-
   '@capsizecss/core@4.1.2':
     resolution: {integrity: sha512-5tMjLsVsaEEwJ816y3eTfhhTIyUWNFt58x6YcHni0eV5tta8MGDOAIe+CV5ICb5pguXgDpNGLprqhPqBWtkFSg==}
 
   '@capsizecss/metrics@3.4.0':
     resolution: {integrity: sha512-hIn8MAHxLvwyUh6ZvLQHDt2GPShBz6+gxBs1JTD9GleBkht1AZvtCFo0adr7bQvYYuQzUJeKi69zqlAwgKMHNA==}
-
-  '@capsizecss/vanilla-extract@1.0.1':
-    resolution: {integrity: sha512-rx0t14CVPHtwplOS075NqvquTaAa7Q6ir6uAH3Za1vm37k2Gn7TmafTE8kaepB+r42K0E6NvTAIv/8PJoRlcoQ==}
-    peerDependencies:
-      '@vanilla-extract/css': ^1.2.1
 
   '@capsizecss/vanilla-extract@2.0.0':
     resolution: {integrity: sha512-6FNLEOcAYo2AklxT7XVEm9Yam2hv76DLEhD6RWK3hJ87Nb9i95Y+rdYHJ3LBlbrzb+ZVJXxzZvg5OAZAqr/K3Q==}
@@ -2557,10 +2468,6 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@remix-run/router@1.21.0':
-    resolution: {integrity: sha512-xfSkCAchbdG5PnbrKqFWwia4Bi61nH+wm8wLEqfHDyp7Y3dZzgqS2itV8i4gAq9pC2HsTpwyBC6Ds8VHZ96JlA==}
-    engines: {node: '>=14.0.0'}
-
   '@remix-run/router@1.21.1':
     resolution: {integrity: sha512-KeBYSwohb8g4/wCcnksvKTYlg69O62sQeLynn2YE+5z7JWEj95if27kclW9QqbrlsQ2DINI8fjbV3zyuKfwjKg==}
     engines: {node: '>=14.0.0'}
@@ -2939,9 +2846,6 @@ packages:
   '@types/aria-query@5.0.4':
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
 
-  '@types/autosuggest-highlight@3.2.3':
-    resolution: {integrity: sha512-8Mb21KWtpn6PvRQXjsKhrXIcxbSloGqNH50RntwGeJsGPW4xvNhfml+3kKulaKpO/7pgZfOmzsJz7VbepArlGQ==}
-
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -2984,9 +2888,6 @@ packages:
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
-
-  '@types/dedent@0.7.2':
-    resolution: {integrity: sha512-kRiitIeUg1mPV9yH4VUJ/1uk2XjyANfeL8/7rH1tsjvHeO9PJLBHJIYsFWmAvmGj5u8rj+1TZx7PZzW2qLw3Lw==}
 
   '@types/diffable-html@5.0.2':
     resolution: {integrity: sha512-VS6yWnAFw8Dm1BhrTwt84V5VWbdysOOF32vbCtQJMtJxzpLGAIZ5P+1NfRX0elYluZ70vwPkm9msdrHBB2ijFQ==}
@@ -3077,9 +2978,6 @@ packages:
 
   '@types/loadable__webpack-plugin@5.15.0':
     resolution: {integrity: sha512-f5Zar+qXoVZOqo3RTA/AT6+JBmFPB/2+5vCBJ+XfI+NHUZKpIv/F1O5QWwt9j/XibuhS/lAkGq63KjeiYyaM/w==}
-
-  '@types/lodash@4.17.15':
-    resolution: {integrity: sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==}
 
   '@types/mdx@2.0.13':
     resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
@@ -3807,14 +3705,6 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  braid-design-system@32.1.0:
-    resolution: {integrity: sha512-b0CeBr9ItxTaOdqOd0ZaS7HWFuFw58u2tFfKtjkxL63BwVkdmDD2hhUtntkO0fIw5HU6ZLY97F0yjdtrOfbR9Q==}
-    hasBin: true
-    peerDependencies:
-      react: ^17 || ^18
-      react-dom: ^17 || ^18
-      sku: '>=10.13.1'
-
   braid-design-system@33.4.0:
     resolution: {integrity: sha512-gXq4P/0Tn5w0yJT83maPs8A547853h0fMzXviTWfUAJBOYRGuJsDGgww3V77SYnsvBAJuD7P/ondCrSQwsv/2g==}
     hasBin: true
@@ -4041,10 +3931,6 @@ packages:
   clone@1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
-
-  clsx@1.2.1:
-    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
-    engines: {node: '>=6'}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -5795,9 +5681,6 @@ packages:
   is-map@2.0.3:
     resolution: {integrity: sha512-1Qed0/Hr2m+YqxnM09CjA2d/i6YZNfF6R2oRAOj36eUdS6qIV/huPJNSEpKbupewFs+ZsJlxsjjPbc0/afW6Lw==}
     engines: {node: '>= 0.4'}
-
-  is-mobile@2.2.2:
-    resolution: {integrity: sha512-wW/SXnYJkTjs++tVK5b6kVITZpAZPtUrt9SF80vvxGiF/Oywal+COk1jlRkiVq15RFNEQKQY31TkV24/1T5cVg==}
 
   is-mobile@4.0.0:
     resolution: {integrity: sha512-mlcHZA84t1qLSuWkt2v0I2l61PYdyQDt4aG1mLIXF5FDMm4+haBCxCPYSr/uwqQNRk1MiTizn0ypEuRAOLRAew==}
@@ -7565,12 +7448,6 @@ packages:
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
-
-  react-router@6.28.1:
-    resolution: {integrity: sha512-2omQTA3rkMljmrvvo6WtewGdVh45SpL9hGiCI9uUrwGGfNFDIvGK4gYJsKlJoNVi6AQZcopSCballL+QGOm7fA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: '>=16.8'
 
   react-router@6.28.2:
     resolution: {integrity: sha512-BgFY7+wEGVjHCiqaj2XiUBQ1kkzfg6UoKYwEe0wv+FF+HNPCxtS/MVPvLAPH++EsuCMReZl9RYVGqcHLk5ms3A==}
@@ -9789,20 +9666,11 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@capsizecss/core@3.1.1':
-    dependencies:
-      csstype: 3.1.3
-
   '@capsizecss/core@4.1.2':
     dependencies:
       csstype: 3.1.3
 
   '@capsizecss/metrics@3.4.0': {}
-
-  '@capsizecss/vanilla-extract@1.0.1(@vanilla-extract/css@1.17.0(babel-plugin-macros@3.1.0))':
-    dependencies:
-      '@capsizecss/core': 3.1.1
-      '@vanilla-extract/css': 1.17.0(babel-plugin-macros@3.1.0)
 
   '@capsizecss/vanilla-extract@2.0.0(@vanilla-extract/css@1.17.0(babel-plugin-macros@3.1.0))':
     dependencies:
@@ -10520,8 +10388,6 @@ snapshots:
       - bare-buffer
       - supports-color
 
-  '@remix-run/router@1.21.0': {}
-
   '@remix-run/router@1.21.1': {}
 
   '@rollup/rollup-android-arm-eabi@4.32.1':
@@ -11020,8 +10886,6 @@ snapshots:
 
   '@types/aria-query@5.0.4': {}
 
-  '@types/autosuggest-highlight@3.2.3': {}
-
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.26.7
@@ -11080,8 +10944,6 @@ snapshots:
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 2.1.0
-
-  '@types/dedent@0.7.2': {}
 
   '@types/diffable-html@5.0.2': {}
 
@@ -11192,8 +11054,6 @@ snapshots:
   '@types/loadable__webpack-plugin@5.15.0':
     dependencies:
       '@types/webpack': 4.41.40
-
-  '@types/lodash@4.17.15': {}
 
   '@types/mdx@2.0.13': {}
 
@@ -12237,39 +12097,6 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  braid-design-system@32.1.0(@types/react@18.3.18)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sku@packages+sku):
-    dependencies:
-      '@capsizecss/core': 3.1.1
-      '@capsizecss/vanilla-extract': 1.0.1(@vanilla-extract/css@1.17.0(babel-plugin-macros@3.1.0))
-      '@types/autosuggest-highlight': 3.2.3
-      '@types/dedent': 0.7.2
-      '@types/lodash': 4.17.15
-      '@vanilla-extract/css': 1.17.0(babel-plugin-macros@3.1.0)
-      '@vanilla-extract/css-utils': 0.1.4
-      '@vanilla-extract/dynamic': 2.1.2
-      '@vanilla-extract/sprinkles': 1.6.3(@vanilla-extract/css@1.17.0(babel-plugin-macros@3.1.0))
-      assert: 2.1.0
-      autosuggest-highlight: 3.3.4
-      clsx: 1.2.1
-      csstype: 3.1.3
-      dedent: 0.7.0
-      gradient-parser: 1.0.2
-      is-mobile: 2.2.2
-      lodash: 4.17.21
-      polished: 4.3.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-focus-lock: 2.13.5(@types/react@18.3.18)(react@18.3.1)
-      react-is: 18.3.1
-      react-popper-tooltip: 4.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-remove-scroll: 2.6.3(@types/react@18.3.18)(react@18.3.1)
-      sku: link:packages/sku
-      utility-types: 3.11.0
-      uuid: 8.3.2
-    transitivePeerDependencies:
-      - '@types/react'
-      - babel-plugin-macros
-
   braid-design-system@33.4.0(@types/react@18.3.18)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@capsizecss/core': 4.1.2
@@ -12569,8 +12396,6 @@ snapshots:
       mimic-response: 1.0.1
 
   clone@1.0.4: {}
-
-  clsx@1.2.1: {}
 
   clsx@2.1.1: {}
 
@@ -14749,8 +14574,6 @@ snapshots:
 
   is-map@2.0.3: {}
 
-  is-mobile@2.2.2: {}
-
   is-mobile@4.0.0: {}
 
   is-nan@1.3.2:
@@ -16748,11 +16571,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-router: 6.28.2(react@18.3.1)
-
-  react-router@6.28.1(react@18.3.1):
-    dependencies:
-      '@remix-run/router': 1.21.0
-      react: 18.3.1
 
   react-router@6.28.2(react@18.3.1):
     dependencies:

@@ -25,8 +25,8 @@ import type { MakeWebpackConfigOptions } from './types.js';
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('../../../entry/render');
-const libraryRenderEntry = require.resolve('../../../entry/libraryRender');
+const renderEntry = require.resolve('../entry/render');
+const libraryRenderEntry = require.resolve('../entry/libraryRender');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.
@@ -67,7 +67,7 @@ const makeWebpackConfig = ({
       require.resolve(polyfill, { paths: [cwd()] }),
     ) || [];
 
-  const skuClientEntry = require.resolve('../../../entry/client/index.js');
+  const skuClientEntry = require.resolve('../entry/client/index.js');
 
   const createEntry = (entry: string): string[] => [
     ...resolvedPolyfills,
@@ -80,7 +80,7 @@ const makeWebpackConfig = ({
     : createEntry(skuClientEntry);
 
   const internalInclude = [
-    path.join(__dirname, '../../../entry'),
+    path.join(__dirname, '../entry'),
     ...(paths.src || []),
   ];
 

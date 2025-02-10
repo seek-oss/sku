@@ -31,8 +31,8 @@ program
       initDebug();
     }
   })
-  .hook('preAction', async (_thisCommand, actionCommand) => {
-    const skuContext = await getSkuContext({
+  .hook('preAction', (_thisCommand, actionCommand) => {
+    const skuContext = getSkuContext({
       configPath: program.opts()?.config,
     });
     initializeTelemetry(skuContext);

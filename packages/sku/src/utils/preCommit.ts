@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import config from '@/services/lint/config/lintStagedConfig.js';
+import config from '@/utils/lintStagedConfig.js';
 
 const preCommit = async () => {
   let success = false;

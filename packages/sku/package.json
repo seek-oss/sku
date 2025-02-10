@@ -22,8 +22,6 @@
       "default": "./dist/config/storybook/index.cjs",
       "types": "./dist/config/storybook/index.d.ts"
     },
-    "./@vite-preload/provider": "./dist/services/vite/preload/PreloadContext.jsx",
-    "./@vite-preload": "./dist/services/vite/preload/loadable.jsx",
     "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"

@@ -198,7 +198,7 @@ export const createSkuContext = ({ configPath }: { configPath?: string }) => {
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
-  const skuContext = {
+  return {
     configPath: appConfigPath,
     publicPath,
     skuConfig,
@@ -232,8 +232,6 @@ export const createSkuContext = ({ configPath }: { configPath?: string }) => {
     externalizeNodeModules,
     defaultClientEntry,
   };
-
-  return skuContext;
 };
 
-export type SkuContext = Awaited<ReturnType<typeof createSkuContext>>;
+export type SkuContext = ReturnType<typeof createSkuContext>;

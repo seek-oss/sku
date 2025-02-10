@@ -1,7 +1,7 @@
 import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
-import { cwd } from '@/utils/cwd.ts';
-import { getSkuContext } from '@/context/createSkuContext.ts';
+import { cwd } from '@/utils/cwd.js';
+import { getSkuContext } from '@/context/createSkuContext.js';
 
 const { paths, rootResolution, jestDecorator } = getSkuContext();
 

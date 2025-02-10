@@ -1,5 +1,13 @@
 # sku
 
+## 14.0.3
+
+### Patch Changes
+
+- `sku test`: Fixes a bug where `jest` would fail to run tests on Node versions that enable require(esm) by default (>=[22.12.0][node 22.12]) ([#1173](https://github.com/seek-oss/sku/pull/1173))
+
+  [node 22.12]: https://nodejs.org/en/blog/release/v22.12.0
+
 ## 14.0.2
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # sku
 
+## 14.0.3
+
+### Patch Changes
+
+- `sku test`: Fixes a bug where `jest` would fail to run tests on Node versions that enable require(esm) by default (>=[22.12.0][node 22.12]) ([#1173](https://github.com/seek-oss/sku/pull/1173))
+
+  [node 22.12]: https://nodejs.org/en/blog/release/v22.12.0
+
+## 14.0.2
+
+### Patch Changes
+
+- Reduce config loading log noise ([#1169](https://github.com/seek-oss/sku/pull/1169))
+
 ## 14.0.1
 
 ### Patch Changes
@@ -159,6 +173,12 @@
 - Add support for `.mjs` sku configuration files ([#1156](https://github.com/seek-oss/sku/pull/1156))
 
   In addition to `sku.config.ts` and `sku.config.js`, sku will now also look for a `sku.config.mjs` file when attempting to resolve your application's configuration file.
+
+- Update `prettier` from `^2.8.8` to `^3.4.1`
+
+  [Prettier V3] brings various code formatting changes than can be automatically fixed by running `sku format`.
+
+  [Prettier V3]: https://prettier.io/blog/2023/07/05/3.0.0.html
 
 ### Patch Changes
 

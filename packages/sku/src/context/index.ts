@@ -1,7 +1,6 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import chalk from 'chalk';
-import { createJiti } from 'jiti';
 import { getPathFromCwd } from '../lib/cwd.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
@@ -11,15 +10,20 @@ import isCompilePackage from '../lib/isCompilePackage.js';
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { resolveAppSkuConfigPath } from './configPath.js';
 import _debug from 'debug';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+
+const createJiti = require('jiti');
+const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
-const jiti = createJiti(import.meta.url);
-
-const getSkuConfig = async (): Promise<{
+const getSkuConfig = (): {
   appSkuConfig: SkuConfig;
   appSkuConfigPath: string | null;
-}> => {
+} => {
   const appSkuConfigPath = resolveAppSkuConfigPath();
 
   if (!appSkuConfigPath) {
@@ -30,10 +34,9 @@ const getSkuConfig = async (): Promise<{
     };
   }
 
-  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
-    // Shortcut for `mod?.default || mod`
-    default: true,
-  });
+  const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
+  // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
+  const appSkuConfig = mod?.default ?? mod;
 
   return {
     appSkuConfig,
@@ -41,7 +44,7 @@ const getSkuConfig = async (): Promise<{
   };
 };
 
-const { appSkuConfig, appSkuConfigPath } = await getSkuConfig();
+const { appSkuConfig, appSkuConfigPath } = getSkuConfig();
 
 const skuConfig = {
   ...defaultSkuConfig,

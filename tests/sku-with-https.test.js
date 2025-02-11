@@ -68,10 +68,8 @@ describe('sku-with-https', () => {
     let process;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
-      process = await runSkuScriptInDir('serve', appDir, [
-        '--config=sku.config.mjs',
-      ]);
+      await runSkuScriptInDir('build', appDir);
+      process = await runSkuScriptInDir('serve', appDir);
       await waitForUrls(url, `${url}/test-middleware`);
     });
 

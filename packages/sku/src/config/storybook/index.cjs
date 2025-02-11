@@ -6,7 +6,6 @@
 
 /** @typedef {import("@storybook/react-webpack5").StorybookConfig} StorybookConfig */
 
-/** @type {StorybookConfig['webpackFinal']} */
 /** @typedef {import("webpack").Configuration} Configuration */
 
 /**

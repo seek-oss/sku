@@ -84,8 +84,5 @@ jobs:
           key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
           restore-keys: jest-${{ runner.os }}-
 
-      - name: restore access to dist/sku
-        run: sudo chmod +x /home/runner/work/sku/sku/packages/sku/dist/bin/sku.js
-
       - name: Test
         run: aa-exec --profile=chrome pnpm run test && aa-exec --profile=chrome pnpm run test:sku-init

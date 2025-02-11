@@ -6,11 +6,11 @@ import { createImportOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
 import { getSkuContext } from '@/context/createSkuContext.js';
 
-export const createEslintConfig = async ({
+export const createEslintConfig = ({
   configPath,
 }: {
   configPath?: string;
-}) => {
+} = {}) => {
   const skuContext = getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;

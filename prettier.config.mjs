@@ -1,1 +1,1 @@
-export { default } from './packages/sku/dist/config/prettier/prettierConfig.js';
+export { default } from './packages/sku/dist/services/prettier/config/prettierConfig.js';

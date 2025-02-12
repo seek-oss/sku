@@ -14,6 +14,12 @@ module.exports = {
           noInterop: false,
           preserveImportMeta: true,
         },
+        jsc: {
+          baseUrl: '.',
+          paths: {
+            '@/*': ['./packages/sku/src/*'],
+          },
+        },
       },
     ],
   },

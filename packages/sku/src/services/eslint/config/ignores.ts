@@ -19,7 +19,7 @@ export const createEslintIgnoresConfig = ({
   const ignores = [
     hasLanguagesConfig && '**/*.vocab/index.ts',
     '**/.eslintcache',
-    '**/eslint.config.js',
+    '**/eslint.config.mjs',
     '**/.prettierrc',
     '**/coverage/',
     targetIgnore,

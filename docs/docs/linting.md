@@ -11,7 +11,7 @@ By default, `sku` ignores the following files and directories:
 [
   '**/*.vocab/index.ts', // If `languages` is configured in your sku config
   '**/.eslintcache',
-  '**/eslint.config.js',
+  '**/eslint.config.mjs',
   '**/.prettierrc',
   '**/coverage/',
   '**/dist/', // Or your custom configured `target`

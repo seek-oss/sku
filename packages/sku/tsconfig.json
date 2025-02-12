@@ -6,7 +6,7 @@
     "allowJs": true,
     "jsx": "preserve",
     "module": "nodenext",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -14,7 +14,17 @@
     "esModuleInterop": true,
     "declaration": true,
     "types": ["webpack/module", "jest", "node"],
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "@/*": ["src/*"] // enables us to use @components/MyComponent
+    },
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "**/@loadable"]

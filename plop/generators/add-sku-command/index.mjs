@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 
-const programRoot = './packages/sku/src/lib/program/commands';
+const programRoot = './packages/sku/src/program/commands';
 
 const getCommandsList = () => {
   const commands = fs.readdirSync(programRoot, {
     encoding: 'utf-8',
   });
-  return commands.filter((command) => command !== 'index.mjs');
+  return commands.filter((command) => command !== 'index.ts');
 };
 
 const addSkuCommandGenerator = (plop) => {

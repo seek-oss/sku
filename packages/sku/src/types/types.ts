@@ -4,7 +4,7 @@ import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
 
 export interface RenderCallbackParams {
-  SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
+  SkuProvider: ({ children }: { children: ReactNode }) => ReactNode;
   addLanguageChunk: (language: string) => void;
   getBodyTags: () => string;
   getHeadTags: (options?: {

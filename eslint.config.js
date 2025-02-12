@@ -60,6 +60,7 @@ module.exports = [
         node: {
           moduleDirectory: ['node_modules'],
         },
+        typescript: true,
       },
     },
 

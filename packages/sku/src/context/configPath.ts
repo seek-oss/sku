@@ -1,17 +1,9 @@
 import chalk from 'chalk';
 import { existsSync } from 'node:fs';
-import { getPathFromCwd } from '../lib/cwd.js';
+import { getPathFromCwd } from '@/utils/cwd.js';
 import _debug from 'debug';
 
 const debug = _debug('sku:config');
-
-let configPath: string | undefined;
-
-const getConfigPath = () => configPath;
-
-export const setConfigPath = (path: string | undefined) => {
-  configPath = path;
-};
 
 const supportedSkuConfigExtensions = ['ts', 'js', 'mjs'];
 
@@ -27,8 +19,12 @@ const resolveSupportedSkuConfigPath = () => {
   return null;
 };
 
-export const resolveAppSkuConfigPath = (): string | null => {
-  const customSkuConfigPath = getConfigPath() || process.env.SKU_CONFIG;
+export const resolveAppSkuConfigPath = ({
+  configPath,
+}: {
+  configPath?: string;
+}): string | null => {
+  const customSkuConfigPath = configPath || process.env.SKU_CONFIG;
 
   if (customSkuConfigPath) {
     const resolvedCustomConfigPath = getPathFromCwd(customSkuConfigPath);

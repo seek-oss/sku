@@ -58,6 +58,7 @@
     "dedent": "^1.5.1",
     "eslint": "^9.10.0",
     "eslint-config-seek": "^14.2.2",
+    "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-jsdoc": "^50.2.2",
     "eslint-plugin-unicorn": "^56.0.1",
     "gh-pages": "^3.1.0",

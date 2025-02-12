@@ -1,8 +1,8 @@
-import * as styles from './Details.css.js';
-
 import { useState, useEffect } from 'react';
-import loadable from 'sku/@loadable/component';
 import { useParams } from 'react-router-dom';
+import loadable from 'sku/@loadable/component';
+
+import * as styles from './Details.css.js';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'));
 

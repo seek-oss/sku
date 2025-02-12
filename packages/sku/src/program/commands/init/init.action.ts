@@ -67,9 +67,6 @@ export const initAction = async (
   setCwd(root);
 
   trace(`Creating project "${projectName}" in "${root}"`);
-  console.log({
-    packageManager,
-  });
 
   const appName = path.basename(root);
 
@@ -246,8 +243,6 @@ export const initAction = async (
     logLevel,
     exact: false,
   });
-
-  skuContext.configPath = 'sku.config.ts';
 
   await configure(skuContext);
   await esLintFix({ skuContext });

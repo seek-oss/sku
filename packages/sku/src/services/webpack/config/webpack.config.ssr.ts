@@ -36,7 +36,7 @@ const makeWebpackConfig = ({
   isStartScript = false,
   stats,
   skuContext,
-}: MakeWebpackConfigOptions) => {
+}: MakeWebpackConfigOptions): Configuration[] => {
   const {
     paths,
     webpackDecorator,
@@ -70,8 +70,6 @@ const makeWebpackConfig = ({
 
   const serverEntry = require.resolve('../entry/server/index.js');
 
-  console.log('serverEntry', serverEntry);
-
   const prodPath = isStartScript ? '/' : paths.publicPath;
 
   const publicPath = isDevServer ? clientServer : prodPath;
@@ -83,7 +81,7 @@ const makeWebpackConfig = ({
   // non-deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
-  const webpackConfigs: Configuration[] = [
+  return [
     {
       name: 'client',
       mode: webpackMode,
@@ -309,8 +307,6 @@ const makeWebpackConfig = ({
       ),
     },
   ].map(webpackDecorator);
-
-  return webpackConfigs;
 };
 
 export default makeWebpackConfig;

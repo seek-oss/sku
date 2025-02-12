@@ -1,7 +1,7 @@
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-import webpack from 'webpack';
+import webpack, { type Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
 import LoadablePlugin from '@loadable/webpack-plugin';
@@ -39,7 +39,7 @@ const makeWebpackConfig = ({
   isStartScript = false,
   stats,
   skuContext,
-}: MakeWebpackConfigOptions) => {
+}: MakeWebpackConfigOptions): Configuration[] => {
   const {
     paths,
     webpackDecorator,
@@ -112,7 +112,7 @@ const makeWebpackConfig = ({
   const cssFileMask = `${getFileMask({ isMainChunk: true })}.css`;
   const cssChunkFileMask = `${getFileMask({ isMainChunk: false })}.css`;
 
-  const webpackConfigs = [
+  return [
     {
       name: 'client',
       mode: webpackMode,
@@ -346,8 +346,6 @@ const makeWebpackConfig = ({
       },
     },
   ].map(webpackDecorator);
-
-  return webpackConfigs;
 };
 
 export default makeWebpackConfig;

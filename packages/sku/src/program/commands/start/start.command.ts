@@ -9,9 +9,6 @@ startCommand
     'Start the sku development server for a statically-rendered application.',
   )
   .addOption(statsOption)
-  .action(async ({ stats, skuContext }, command) => {
-    const environment = command.parent.opts()?.environment;
-    startAction({ environment, stats, skuContext });
-  });
+  .action(startAction);
 
 export { startCommand };

@@ -1,0 +1,17 @@
+{
+  "name": "@sku-fixtures/vite-test-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "sku start"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "dedent": "^1.5.1",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

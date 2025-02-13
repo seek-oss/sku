@@ -1,4 +1,4 @@
-import { builtinModules } from 'node:module';
+import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';
@@ -6,19 +6,21 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 
+const require = createRequire(import.meta.url);
+
+const clientEntry = require.resolve('./entries/vite-client.jsx');
+
 export const createViteConfig = ({
   skuContext,
   configType = 'client',
   plugins = [],
 }: {
   skuContext: SkuContext;
-  configType?: 'client' | 'ssr' | 'ssg';
+  configType?: 'client';
   plugins?: InlineConfig['plugins'];
 }) => {
   const outDir = {
     client: 'dist',
-    ssr: 'dist/server',
-    ssg: 'dist/render',
   };
 
   return {
@@ -39,31 +41,19 @@ export const createViteConfig = ({
       },
     },
     define: {
-      VITE_SKU_CONTEXT: JSON.stringify(skuContext),
       'process.env': process.env,
     },
     build: {
       outDir: outDir[configType],
       emptyOutDir: true,
-      ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
       rollupOptions: {
-        ...(configType === 'ssr'
-          ? { input: skuContext.paths.serverEntry }
-          : {}),
-        ...(configType === 'ssg'
-          ? {
-              input: skuContext.paths.renderEntry,
-            }
-          : {}),
+        ...(configType === 'client' ? { input: clientEntry } : {}),
         output: {
           experimentalMinChunkSize: undefined,
         },
       },
-    },
-    optimizeDeps: {
-      include: ['react-dom'],
     },
     ssr: {
       external: [

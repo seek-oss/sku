@@ -96,6 +96,12 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfig {
   /**
+   * The specified bundler that sku uses to build the application.
+   * !NOTE: This option is experimental and not fully supported.
+   * @default: "'webpack'"
+   */
+  bundler?: 'webpack' | 'vite';
+  /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
    * @default "./src/client.js"

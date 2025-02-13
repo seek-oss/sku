@@ -26,8 +26,8 @@ export const createViteConfig = ({
     plugins: [
       react(),
       vanillaExtractPlugin({
-        // @ts-ignore
-        pluginFilter: (plugin) => !plugin.name.startsWith('vite:react-'),
+        unstable_pluginFilter: (plugin) =>
+          !plugin.name.startsWith('vite:react-'),
       }),
       ...plugins,
     ],

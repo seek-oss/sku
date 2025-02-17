@@ -15,12 +15,10 @@ const base = process.env.BASE || '/';
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
 type CreateServerOptions = {
-  root?: string;
   skuContext: SkuContext;
 };
 
 export const createViteServerSsr = async ({
-  root,
   skuContext,
 }: CreateServerOptions) => {
   const isProduction = process.env.NODE_ENV === 'production';
@@ -34,7 +32,6 @@ export const createViteServerSsr = async ({
 
       vite = await createViteSever({
         ...createViteConfig({ skuContext, configType: 'ssr' }),
-        root,
         server: {
           middlewareMode: true,
           hmr: true,

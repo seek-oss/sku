@@ -1,7 +1,7 @@
 import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -25,14 +25,7 @@ export const createViteConfig = ({
 
   return {
     root: process.cwd(),
-    plugins: [
-      react(),
-      vanillaExtractPlugin({
-        unstable_pluginFilter: (plugin) =>
-          !plugin.name.startsWith('vite:react-'),
-      }),
-      ...plugins,
-    ],
+    plugins: [react(), vanillaExtractPlugin(), ...plugins],
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
@@ -41,7 +34,7 @@ export const createViteConfig = ({
       },
     },
     define: {
-      'process.env': process.env,
+      'process.env.NODE_ENV': process.env.NODE_ENV,
     },
     build: {
       outDir: outDir[configType],

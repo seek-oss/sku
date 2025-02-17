@@ -5,7 +5,6 @@ import { createServer } from 'vite';
 
 export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';
-  const root = process.cwd();
 
   return await createServer({
     ...createViteConfig({
@@ -14,10 +13,9 @@ export const createViteServer = async (skuContext: SkuContext) => {
     }),
     server: {
       allowedHosts: skuContext.sites
-        .map((site) => site.host ?? false)
+        .map(({ host }) => host || false)
         .filter((host) => typeof host === 'string'),
     },
-    root,
     base,
   });
 };

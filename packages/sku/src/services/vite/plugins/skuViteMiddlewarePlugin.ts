@@ -1,6 +1,7 @@
 import type { SkuContext } from '@/context/createSkuContext.js';
 import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
+import type { ViteRenderFunction } from '@/types/types.js';
 
 const require = createRequire(import.meta.url);
 
@@ -21,8 +22,8 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
-          const renderedHtml = await viteRender({
-            url: req.url!,
+          const renderedHtml = await (viteRender as ViteRenderFunction)({
+            url: req.url,
             site,
             clientEntry,
           });

@@ -2,6 +2,45 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
+import type {
+  RenderToPipeableStreamOptions,
+  PipeableStream,
+} from 'react-dom/server';
+
+/* START --- Vite-render types */
+/* Notes:
+ *  These types are still incomplete.
+ *  There may be some missing types here.
+ *  Full types will come once Vite is fully supported in sku.
+ * */
+export type ViteRenderFunction = (options: {
+  url?: string;
+  site?: SkuSiteObject | string;
+  clientEntry: string;
+}) => Promise<string>;
+
+export type RenderContext = Record<string, any>;
+
+export interface ViteRenderAppProps {
+  url?: string;
+  site?: SkuSiteObject | string;
+  renderContext?: RenderContext;
+  options: RenderToPipeableStreamOptions;
+}
+
+export interface ViteRender {
+  render(p: ViteRenderAppProps): Promise<PipeableStream>;
+
+  provideClientContext?(context: {
+    site?: SkuSiteObject | string;
+    url?: string;
+  }): Promise<any> | any;
+
+  bodyTags: () => string;
+  headTags: () => string;
+}
+
+/* END --- Vite-render types */
 
 export interface RenderCallbackParams {
   SkuProvider: ({ children }: { children: ReactNode }) => ReactNode;

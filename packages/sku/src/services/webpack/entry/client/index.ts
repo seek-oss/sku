@@ -5,7 +5,7 @@ import dedent from 'dedent';
 
 import { loadableReady } from '@loadable/component';
 
-import clientContextKey from '../clientContextKey.js';
+import clientContextKey from '../../../../utils/constants/clientContextKey.js';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {

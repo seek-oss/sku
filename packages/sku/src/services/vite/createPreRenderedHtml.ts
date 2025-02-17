@@ -1,20 +1,17 @@
 import { Transform } from 'node:stream';
 import { getClosingHtml, getOpeningHtml } from './createIndex.js';
 import { serializeConfig } from './helpers/serializeConfig.js';
+import type { ViteRender, ViteRenderAppProps } from '@/types/types.js';
 
 // Has to be strongly typed once the first entity in renderContext is known.
-type RenderContext = Record<string, any>;
 
 type CreatePreRenderedHtmlOptions = {
-  url: string;
-  render: any;
-  site: any;
-  renderContext?: RenderContext;
+  render: ViteRender;
   hooks: {
     getBodyTags?: () => string;
     getHeadTags?: () => string;
   };
-};
+} & Omit<ViteRenderAppProps, 'options'>;
 
 export function createPreRenderedHtml({
   url,

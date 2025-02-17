@@ -1,11 +1,7 @@
-// '__sku_alias__clientEntry' is a webpack alias
+// '__sku_alias__clientEntry' is a vite alias
 // pointing to the consuming apps client entry
 import client from '__sku_alias__clientEntry';
 import dedent from 'dedent';
-
-import { loadableReady } from '@loadable/component';
-
-import clientContextKey from '../../../../utils/constants/clientContextKey.js';
 
 if (process.env.NODE_ENV === 'development') {
   if (typeof client !== 'function') {
@@ -27,13 +23,11 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-loadableReady(() => {
-  let clientContext = {};
+let clientContext = {};
 
-  const dataElement = document.getElementById(clientContextKey);
-  if (dataElement) {
-    clientContext = JSON.parse(dataElement.textContent || '{}');
-  }
+const dataElement = document.getElementById('__SKU_CLIENT_CONTEXT__');
+if (dataElement) {
+  clientContext = JSON.parse(dataElement.textContent || '{}');
+}
 
-  client(clientContext);
-});
+client(clientContext);

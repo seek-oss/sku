@@ -1,6 +1,6 @@
 import { Transform } from 'node:stream';
 import { getClosingHtml, getOpeningHtml } from './createIndex.js';
-import { serializeConfig } from './helpers/serializeConfig.js';
+import { serializeConfig } from '../serializeConfig.js';
 import type { ViteRender, ViteRenderAppProps } from '@/types/types.js';
 
 // Has to be strongly typed once the first entity in renderContext is known.

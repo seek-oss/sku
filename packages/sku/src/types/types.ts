@@ -135,9 +135,13 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfig {
   /**
-   * The specified bundler that sku uses to build the application.
-   * !NOTE: This option is experimental and not fully supported.
-   * @default: "'webpack'"
+   * The bundler that sku uses to build the application.
+   * This is an experimental option that may change or be removed without notice.
+   *
+   * NOTE: Not all sku functionality is supported by the `vite` option.
+   * Production applications should not use the `vite` option.
+   *
+   * @default "webpack"
    */
   bundler?: 'webpack' | 'vite';
   /**

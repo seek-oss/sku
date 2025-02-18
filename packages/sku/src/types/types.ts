@@ -36,9 +36,11 @@ export interface ViteRender {
     url?: string;
   }): Promise<any> | any;
 
-  bodyTags: () => string;
-  headTags: () => string;
+  bodyTags?: () => string;
+  headTags?: () => string;
 }
+
+export type ViteRenderServer = ViteRender;
 
 /* END --- Vite-render types */
 

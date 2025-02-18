@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "dedent": "^1.5.1",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

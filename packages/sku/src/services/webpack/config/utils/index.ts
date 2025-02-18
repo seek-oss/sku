@@ -10,5 +10,12 @@ const extensions = {
 
 export const TYPESCRIPT = new RegExp(`\.(${extensions.ts.join('|')})$`);
 export const JAVASCRIPT = new RegExp(`\.(${extensions.js.join('|')})$`);
-export const IMAGE = [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/];
+export const IMAGE = [
+  /\.bmp$/,
+  /\.gif$/,
+  /\.jpe?g$/,
+  /\.png$/,
+  /\.webp$/,
+  /\.avif$/,
+];
 export const SVG = /\.svg$/;

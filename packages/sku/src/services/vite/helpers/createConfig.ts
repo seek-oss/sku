@@ -16,12 +16,13 @@ export const createViteConfig = ({
   plugins = [],
 }: {
   skuContext: SkuContext;
-  configType?: 'client' | 'ssr';
+  configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
 }) => {
   const outDir = {
     client: 'dist',
     ssr: 'dist/server',
+    ssg: 'dist/render',
   };
 
   return {
@@ -40,12 +41,17 @@ export const createViteConfig = ({
     build: {
       outDir: outDir[configType],
       emptyOutDir: true,
-      ssr: configType === 'ssr',
+      ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
       rollupOptions: {
         ...(configType === 'ssr'
           ? { input: skuContext.paths.serverEntry }
+          : {}),
+        ...(configType === 'ssg'
+          ? {
+              input: skuContext.paths.renderEntry,
+            }
           : {}),
         ...(configType === 'client' ? { input: clientEntry } : {}),
         output: {

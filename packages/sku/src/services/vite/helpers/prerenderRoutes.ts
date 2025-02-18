@@ -3,7 +3,7 @@ import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
-import { createCollector } from '@/services/vite/preload/collector.js';
+import { createCollector } from '../preload/collector.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 

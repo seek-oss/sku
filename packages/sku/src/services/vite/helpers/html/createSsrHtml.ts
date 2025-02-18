@@ -1,8 +1,5 @@
-import {
-  getClosingHtml,
-  getOpeningHtml,
-} from '@/services/vite/helpers/html/createIndex.js';
-import { serializeConfig } from '@/services/vite/helpers/serializeConfig.js';
+import { getClosingHtml, getOpeningHtml } from './createIndex.js';
+import { serializeConfig } from '../serializeConfig.js';
 import type { ViteDevServer } from 'vite';
 import { createRequire } from 'node:module';
 

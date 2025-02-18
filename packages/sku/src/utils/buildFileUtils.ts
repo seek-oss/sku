@@ -6,13 +6,16 @@ import exists from './exists.js';
 import copyDirContents from './copyDirContents.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-export const cleanTargetDirectory = async (target: string) => {
+export const cleanTargetDirectory = async (
+  target: string,
+  includeDirectory: boolean = false,
+) => {
   const files = await new Fdir()
     .withBasePath()
     .withMaxDepth(1)
     .withDirs()
     // This glob pattern is used to exclude the target directory itself
-    .glob(`${target}/*`)
+    .glob(includeDirectory ? '**/*' : `${target}/*`)
     .crawl(target)
     .withPromise();
 

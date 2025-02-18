@@ -1,4 +1,4 @@
-import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
+import { writeFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
@@ -41,8 +41,7 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     };
 
     const filePath = getFileName(route);
-    // Refactor that file.
-    await ensureTargetDirectory(filePath);
+    await ensureTargetDirectory(filePath.split('/').slice(0, -1).join('/'));
     try {
       await writeFile(resolve(filePath), html);
     } catch (e) {

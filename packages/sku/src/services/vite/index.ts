@@ -17,8 +17,8 @@ export const viteService = {
     if (skuContext.routes) {
       await prerenderRoutes(skuContext);
     }
-    await cleanTargetDirectory(`${process.cwd()}/dist/render`);
-    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`);
+    await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
+    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
   start: async (skuContext: SkuContext) => {
     const server = await createViteServer(skuContext);

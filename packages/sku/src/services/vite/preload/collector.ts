@@ -209,7 +209,6 @@ const addAssetToPreloads = ({
       break;
   }
 
-  // This requires a type check for the asset type and then set the type and 'as' attribute.
   preloads.set(chunk, {
     rel: 'preload',
     href: chunk,
@@ -242,7 +241,6 @@ export const createCollector = ({
       entryPoint = entryChunk[0];
     }
   }
-  // Something here to set the manifest properly.
 
   return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
 };

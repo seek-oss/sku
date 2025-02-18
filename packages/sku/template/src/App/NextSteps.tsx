@@ -113,7 +113,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                 <Stack space="gutter">
                   <Heading level="3">Brand resources</Heading>
                   <Text>
-                    To align your project to SEEK's brand standards it is
+                    To align your project to SEEK&rsquo;s brand standards it is
                     recommended to install{' '}
                     <TextLink href="https://github.com/SEEK-Jobs/shared-web-assets">
                       Shared web assets

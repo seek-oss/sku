@@ -8,7 +8,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('./entries/vite-client.jsx');
+const clientEntry = require.resolve('../entries/vite-client.jsx');
 
 export const createViteConfig = ({
   skuContext,
@@ -16,11 +16,12 @@ export const createViteConfig = ({
   plugins = [],
 }: {
   skuContext: SkuContext;
-  configType?: 'client';
+  configType?: 'client' | 'ssr';
   plugins?: InlineConfig['plugins'];
 }) => {
   const outDir = {
     client: 'dist',
+    ssr: 'dist/server',
   };
 
   return {
@@ -34,14 +35,18 @@ export const createViteConfig = ({
       },
     },
     define: {
-      'process.env.NODE_ENV': process.env.NODE_ENV,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     build: {
       outDir: outDir[configType],
       emptyOutDir: true,
+      ssr: configType === 'ssr',
       manifest: configType === 'client',
       ssrManifest: false,
       rollupOptions: {
+        ...(configType === 'ssr'
+          ? { input: skuContext.paths.serverEntry }
+          : {}),
         ...(configType === 'client' ? { input: clientEntry } : {}),
         output: {
           experimentalMinChunkSize: undefined,

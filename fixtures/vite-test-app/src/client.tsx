@@ -5,7 +5,7 @@ import { App } from './App';
 
 export default () => {
   hydrateRoot(
-    document.getElementById('root'),
+    document.getElementById('root')!,
     <StrictMode>
       <App />
     </StrictMode>,

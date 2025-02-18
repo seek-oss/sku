@@ -1,5 +1,5 @@
 import render from '__sku_alias__renderEntry';
-import { createPreRenderedHtml } from '../createPreRenderedHtml.js';
+import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
 import type { ViteRenderAppProps } from '@/types/types.js';
 
 export const viteRender = async ({

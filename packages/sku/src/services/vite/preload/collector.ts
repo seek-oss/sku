@@ -191,16 +191,19 @@ const addAssetToPreloads = ({
   let mimeType;
 
   switch (ext) {
-    case 'png':
+    case 'avif':
+    case 'bmp':
     case 'jpg':
-    case 'webp':
+    case 'jpeg':
+    case 'png':
     case 'svg':
+    case 'webp':
       as = 'image';
       mimeType = ext === 'svg' ? 'image/svg+xml' : `image/${ext}`;
       break;
+    case 'ttf':
     case 'woff2':
     case 'woff':
-    case 'ttf':
       as = 'font';
       mimeType = `font/${ext}`;
       break;

@@ -1,25 +1,17 @@
-import fs from 'node:fs';
+import { mkdir, writeFile, readFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 import { createCollector } from '../preload/collector.js';
+import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
-
-function ensureDirectoryExistence(filePath: string) {
-  const dirname = path.dirname(filePath);
-  if (fs.existsSync(dirname)) {
-    return true;
-  }
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
-}
 
 export const prerenderRoutes = async (skuContext: SkuContext) => {
   const routes = getBuildRoutes(skuContext);
   const manifest = JSON.parse(
-    fs.readFileSync(resolve('./dist/.vite/manifest.json'), 'utf-8'),
+    await readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
   );
   for (const route of routes) {
     const render = (await import(resolve('./dist/render/render.js'))).default;
@@ -39,7 +31,7 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {
       let renderDirectory = skuContext.skuConfig.target;
       const relativeFilePath = skuContext.transformOutputPath(skuRoute);
-      const includesHtmlInFilePath = relativeFilePath.substr(-5) === '.html';
+      const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
       if (!path.isAbsolute(renderDirectory)) {
         renderDirectory = path.resolve(renderDirectory);
       }
@@ -49,8 +41,13 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     };
 
     const filePath = getFileName(route);
-    ensureDirectoryExistence(filePath);
-    fs.writeFileSync(resolve(filePath), html);
+    // Refactor that file.
+    await ensureTargetDirectory(filePath);
+    try {
+      await writeFile(resolve(filePath), html);
+    } catch (e) {
+      console.error('Error writing file', filePath, e);
+    }
 
     // Make this a nicer log.
     console.log(

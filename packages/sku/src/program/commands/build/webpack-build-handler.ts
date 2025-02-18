@@ -32,8 +32,8 @@ export const webpackBuildHandler = async ({
   validatePeerDeps(skuContext);
   try {
     await runVocabCompile(skuContext);
-    await ensureTargetDirectory({ paths });
-    await cleanTargetDirectory({ paths });
+    await ensureTargetDirectory(paths.target);
+    await cleanTargetDirectory(paths.target);
     await run(
       webpack(
         makeWebpackConfig({

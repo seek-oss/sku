@@ -5,7 +5,7 @@ import { createViteServer } from './helpers/server/createViteServer.js';
 import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import { createViteConfig } from './helpers/createConfig.js';
 import { prerenderRoutes } from './helpers/prerenderRoutes.js';
-import { cleanupSsgBuild } from './helpers/cleanup/cleanupSsgBuild.js';
+import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
@@ -17,7 +17,8 @@ export const viteService = {
     if (skuContext.routes) {
       await prerenderRoutes(skuContext);
     }
-    await cleanupSsgBuild();
+    await cleanTargetDirectory(`${process.cwd()}/dist/render`);
+    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`);
   },
   start: async (skuContext: SkuContext) => {
     const server = await createViteServer(skuContext);

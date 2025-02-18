@@ -25,6 +25,12 @@ export const createViteConfig = ({
     ssg: 'dist/render',
   };
 
+  const input = {
+    client: clientEntry,
+    ssr: skuContext.paths.serverEntry,
+    ssg: skuContext.paths.renderEntry,
+  };
+
   return {
     root: process.cwd(),
     plugins: [react(), vanillaExtractPlugin(), ...plugins],
@@ -45,15 +51,7 @@ export const createViteConfig = ({
       manifest: configType === 'client',
       ssrManifest: false,
       rollupOptions: {
-        ...(configType === 'ssr'
-          ? { input: skuContext.paths.serverEntry }
-          : {}),
-        ...(configType === 'ssg'
-          ? {
-              input: skuContext.paths.renderEntry,
-            }
-          : {}),
-        ...(configType === 'client' ? { input: clientEntry } : {}),
+        input: input[configType],
         output: {
           experimentalMinChunkSize: undefined,
         },

@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
+import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
 
 const require = createRequire(import.meta.url);
 
@@ -33,7 +34,12 @@ export const createViteConfig = ({
 
   return {
     root: process.cwd(),
-    plugins: [react(), vanillaExtractPlugin(), ...plugins],
+    plugins: [
+      react(),
+      vanillaExtractPlugin(),
+      skuVitePreloadPlugin(),
+      ...plugins,
+    ],
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,

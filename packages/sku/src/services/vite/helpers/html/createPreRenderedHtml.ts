@@ -70,6 +70,7 @@ export function createPreRenderedHtml({
 
           const transformStream = new Transform({
             transform(chunk, encoding, callback) {
+              console.log('chunk', chunk.toString());
               html += chunk.toString();
               callback();
             },

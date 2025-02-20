@@ -191,24 +191,22 @@ const addAssetToPreloads = ({
   let mimeType;
 
   switch (ext) {
-    case 'avif':
-    case 'bmp':
-    case 'jpg':
-    case 'jpeg':
     case 'png':
-    case 'svg':
+    case 'jpg':
     case 'webp':
+    case 'svg':
       as = 'image';
       mimeType = ext === 'svg' ? 'image/svg+xml' : `image/${ext}`;
       break;
-    case 'ttf':
     case 'woff2':
     case 'woff':
+    case 'ttf':
       as = 'font';
       mimeType = `font/${ext}`;
       break;
   }
 
+  // This requires a type check for the asset type and then set the type and 'as' attribute.
   preloads.set(chunk, {
     rel: 'preload',
     href: chunk,
@@ -241,6 +239,7 @@ export const createCollector = ({
       entryPoint = entryChunk[0];
     }
   }
+  // Something here to set the manifest properly.
 
   return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
 };

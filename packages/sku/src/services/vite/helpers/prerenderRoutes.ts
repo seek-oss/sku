@@ -18,15 +18,20 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const loadableCollector = createCollector({
       manifest,
     });
+    console.log('Prerendering route', route.route);
     const html = await createPreRenderedHtml({
       url: route.route,
       site: route.site,
       render,
+      renderContext: {
+        loadableCollector,
+      },
       hooks: {
         getBodyTags: () => loadableCollector.getAllScripts(),
         getHeadTags: () => loadableCollector.getAllPreloads(),
       },
     });
+    console.log('created html for pre-rendered route');
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {
       let renderDirectory = skuContext.skuConfig.target;

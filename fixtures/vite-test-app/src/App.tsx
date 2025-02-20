@@ -3,8 +3,6 @@ import { type ComponentType, Suspense } from 'react';
 import { Routes, Route } from 'react-router';
 import { loadable } from 'sku/vite/loadable';
 
-import Details from './handlers/Details';
-
 type SiteObject = {
   home: string;
   details: string;
@@ -24,9 +22,10 @@ const routes: Record<string, SiteObject> = {
 const slowLoad = (
   fn: () => Promise<{ default: ComponentType<any> }>,
 ): Promise<{ default: ComponentType<any> }> =>
-  new Promise((resolve) => setTimeout(() => resolve(fn()), 10000));
+  new Promise((resolve) => setTimeout(() => resolve(fn()), 1000));
 
 const Home = loadable(() => slowLoad(() => import('./handlers/Home')));
+const Details = loadable(() => slowLoad(() => import('./handlers/Details')));
 
 export const App = ({ site }: { site: string }) => (
   <>
@@ -40,7 +39,14 @@ export const App = ({ site }: { site: string }) => (
           </Suspense>
         }
       />
-      <Route path={routes[site].details} element={<Details site={site} />} />
+      <Route
+        path={routes[site].details}
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Details site={site} />
+          </Suspense>
+        }
+      />
     </Routes>
   </>
 );

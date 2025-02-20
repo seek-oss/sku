@@ -2,14 +2,15 @@ import React, { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import type { ViteRender } from 'sku';
-import { LoadableProvider } from 'sku/vite/loadable';
+import { LoadableProvider, preloadAll } from 'sku/vite/loadable';
 
 import { App } from './App.jsx';
 
 export default {
   render: async ({ options, renderContext, site, url }) => {
-    console.log('RenderContext is still unused', renderContext);
     const { loadableCollector } = renderContext;
+
+    await preloadAll();
 
     const appSite = typeof site === 'string' ? site : site?.name;
 

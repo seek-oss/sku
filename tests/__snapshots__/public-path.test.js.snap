@@ -7,7 +7,7 @@ SCRIPTS: [
   "/static/main.js",
 ]
 CSS: [
-  "/static/main-2805b6163358bccd828d.css",
+  "/static/main-319b8cbb3480f1f49310.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -47,6 +47,16 @@ SOURCE HTML: <!DOCTYPE html>
   <body>
     <div id="app">
       <div class="_1eysbi80">
+      </div>
+      <div class="_1eysbi81">
+      </div>
+      <div class="_1eysbi82">
+      </div>
+      <div class="_1eysbi83">
+      </div>
+      <div class="_1eysbi84">
+      </div>
+      <div class="_1eysbi85">
       </div>
     </div>
     <script

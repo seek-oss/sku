@@ -53,7 +53,7 @@ const validatePeerDeps = async ({ paths }: SkuContext) => {
 
       if (resultsForPackage.length > 1) {
         const messages = [
-          chalk`Multiple copies of {bold ${packageName}} are present in node_modules. This is likely to cause errors, but even if it works, it will probably result in an unnecessarily large bundle size.`,
+          `Multiple copies of ${chalk.bold(packageName)} are present in node_modules. This is likely to cause errors, but even if it works, it will probably result in an unnecessarily large bundle size.`,
         ];
 
         messages.push(
@@ -63,16 +63,16 @@ const validatePeerDeps = async ({ paths }: SkuContext) => {
                 readFileSync(getPathFromCwd(depLocation), 'utf8'),
               );
 
-              return chalk`${depLocation.replace(
+              return `${depLocation.replace(
                 '/package.json',
                 '',
-              )} ({bold ${version}})`;
+              )} (${chalk.bold(version)})`;
             })
             .join('\n'),
         );
 
         messages.push(
-          chalk`Try running "{blue.bold ${getWhyCommand()}} {bold ${packageName}}" to diagnose the issue`,
+          `Try running "${chalk.blue.bold(getWhyCommand())} ${chalk.bold(packageName)}" to diagnose the issue`,
         );
 
         provider.count('duplicate_compile_package', {
@@ -115,11 +115,11 @@ const validatePeerDeps = async ({ paths }: SkuContext) => {
 
           const peerIsBehind = semver.gtr(dep.version, peerVersionRange);
 
-          const errorMessage = chalk`{bold ${packageName}} expected to find {bold ${peerName}} {yellow ${peerVersionRange}} but found {yellow ${dep.version}}.`;
+          const errorMessage = `${chalk.bold(packageName)} expected to find ${chalk.bold(peerName)} ${chalk.yellow(peerVersionRange)} but found ${chalk.yellow(dep.version)}.`;
 
-          const peerBehindMessage = chalk`The best way to fix this is for {bold ${packageName}} to update its peer dependency on {bold ${peerName}}.`;
+          const peerBehindMessage = `The best way to fix this is for ${chalk.bold(packageName)} to update its peer dependency on ${chalk.bold(peerName)}.`;
 
-          const peerAheadMessage = chalk`The best way to fix this is to update your dependency on {bold ${peerName}}.`;
+          const peerAheadMessage = `The best way to fix this is to update your dependency on ${chalk.bold(peerName)}.`;
 
           banner('warning', 'Warning: Package version mismatch', [
             errorMessage,

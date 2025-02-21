@@ -23,8 +23,8 @@
       "types": "./dist/config/storybook/index.d.ts"
     },
     "./vite/loadable": {
-      "default": "./dist/services/vite/preload/index.js",
-      "types": "./dist/services/vite/preload/index.d.ts"
+      "default": "./dist/services/vite/loadable/index.js",
+      "types": "./dist/services/vite/loadable/index.d.ts"
     },
     "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",

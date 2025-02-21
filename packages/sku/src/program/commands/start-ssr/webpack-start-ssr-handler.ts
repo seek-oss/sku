@@ -83,8 +83,8 @@ export const webpackStartSsrHandler = async ({
   const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
 
   // Make sure target directory exists before starting
-  await ensureTargetDirectory(skuContext);
-  await cleanTargetDirectory(skuContext);
+  await ensureTargetDirectory(skuContext.paths.target);
+  await cleanTargetDirectory(skuContext.paths.target);
   await copyPublicFiles(skuContext);
 
   const clientCompiler = webpack(clientWebpackConfig);

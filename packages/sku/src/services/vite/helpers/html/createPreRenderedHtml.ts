@@ -7,7 +7,7 @@ import type { ViteRender, ViteRenderAppProps } from '@/types/types.js';
 
 type CreatePreRenderedHtmlOptions = {
   render: ViteRender;
-  hooks: {
+  hooks?: {
     getBodyTags?: () => string;
     getHeadTags?: () => string;
   };
@@ -17,9 +17,9 @@ export function createPreRenderedHtml({
   url,
   render,
   site,
-  hooks: { getBodyTags, getHeadTags },
+  hooks: { getBodyTags, getHeadTags } = {},
   renderContext,
-}: CreatePreRenderedHtmlOptions) {
+}: CreatePreRenderedHtmlOptions): Promise<string> {
   return new Promise(async (resolve, reject) => {
     let clientContext = {};
 

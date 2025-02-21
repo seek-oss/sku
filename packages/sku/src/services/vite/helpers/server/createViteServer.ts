@@ -1,7 +1,8 @@
-import { skuViteMiddlewarePlugin } from '@/services/vite/plugins/skuViteMiddlewarePlugin.js';
-import { createViteConfig } from '@/services/vite/helpers/createConfig.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
 import { createServer } from 'vite';
+import { skuViteMiddlewarePlugin } from '@/services/vite/plugins/skuViteMiddlewarePlugin.js';
+import type { SkuContext } from '@/context/createSkuContext.js';
+
+import { createViteConfig } from '../createConfig.js';
 
 export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';

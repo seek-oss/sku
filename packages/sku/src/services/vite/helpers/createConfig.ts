@@ -16,12 +16,19 @@ export const createViteConfig = ({
   plugins = [],
 }: {
   skuContext: SkuContext;
-  configType?: 'client' | 'ssr';
+  configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
 }) => {
   const outDir = {
     client: 'dist',
     ssr: 'dist/server',
+    ssg: 'dist/render',
+  };
+
+  const input = {
+    client: clientEntry,
+    ssr: skuContext.paths.serverEntry,
+    ssg: skuContext.paths.renderEntry,
   };
 
   return {
@@ -40,14 +47,11 @@ export const createViteConfig = ({
     build: {
       outDir: outDir[configType],
       emptyOutDir: true,
-      ssr: configType === 'ssr',
+      ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
       rollupOptions: {
-        ...(configType === 'ssr'
-          ? { input: skuContext.paths.serverEntry }
-          : {}),
-        ...(configType === 'client' ? { input: clientEntry } : {}),
+        input: input[configType],
         output: {
           experimentalMinChunkSize: undefined,
         },

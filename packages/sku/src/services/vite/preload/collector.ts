@@ -209,7 +209,6 @@ const addAssetToPreloads = ({
       break;
   }
 
-  // This requires a type check for the asset type and then set the type and 'as' attribute.
   preloads.set(chunk, {
     rel: 'preload',
     href: chunk,

@@ -6,7 +6,9 @@ const context = createContext<null | Collector>(null);
 export const LoadableProvider = context.Provider;
 
 export const useRegisterComponent = (moduleId: ModuleId) => {
-  const components = useContext(context);
-  if (!components) return;
-  components.register(moduleId);
+  const collector = useContext(context);
+  if (!collector) {
+    throw new Error('`loadable` must be used inside the `LoadableProvider`');
+  }
+  collector.register(moduleId);
 };

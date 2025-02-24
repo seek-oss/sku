@@ -139,9 +139,10 @@ export default function skuVitePreloadPlugin({
 
     buildEnd() {
       if (debug) {
-        const s = lazyImportedModules.difference(injectedModules);
-        for (const z of s) {
-          this.warn(`${z} was not injected`);
+        for (const lazyModule of lazyImportedModules) {
+          if (!injectedModules.has(lazyModule)) {
+            this.warn(`${lazyModule} was not injected FOR`);
+          }
         }
       }
       this.info(`${count} hook calls injected`);

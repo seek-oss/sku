@@ -142,6 +142,16 @@ export default () => (
 );
 ```
 
+### Using vite types
+
+If `vite/client` reference types are needed in your project, you can import them from `sku/vite/client`.
+
+```typescript
+/// <reference types="sku/vite/client" />
+
+// ... rest of your application
+````
+
 ### Running `sku` with the `--experimental-bundler` flag
 
 Now you can run your `sku` command with the new `--experimental-bundler` flag

@@ -6,6 +6,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
+import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 
 const require = createRequire(import.meta.url);
 
@@ -61,6 +62,11 @@ export const createViteConfig = ({
         output: {
           experimentalMinChunkSize: undefined,
         },
+      },
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
     },
     ssr: {

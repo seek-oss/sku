@@ -11,12 +11,11 @@ export const experimentalBundlersHook = ({
 }) => {
   if (!blockedCommands.includes(command)) {
     if (experimentalBundler) {
-      throw new Error(
-        `The experimental bundler flag is only supported with the following commands: ${blockedCommands.join(
-          ', ',
-        )}.`,
+      console.warn(
+        `The experimental bundler flag is only needed for the following commands: ${blockedCommands.join(', ')}.`,
       );
     }
+    return;
   }
   if (experimentalBundler && bundler !== 'vite') {
     throw new Error(

@@ -10,7 +10,13 @@ export const experimentalBundlersHook = ({
   bundler: string;
 }) => {
   if (!blockedCommands.includes(command)) {
-    return;
+    if (experimentalBundler) {
+      throw new Error(
+        `The experimental bundler flag is only supported with the following commands: ${blockedCommands.join(
+          ', ',
+        )}.`,
+      );
+    }
   }
   if (experimentalBundler && bundler !== 'vite') {
     throw new Error(

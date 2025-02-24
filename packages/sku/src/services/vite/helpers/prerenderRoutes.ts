@@ -3,7 +3,7 @@ import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
-import { createCollector } from '../preload/collector.js';
+import { createCollector } from '@/services/vite/loadable/collector.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
@@ -18,10 +18,14 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const loadableCollector = createCollector({
       manifest,
     });
+
     const html = await createPreRenderedHtml({
       url: route.route,
       site: route.site,
       render,
+      renderContext: {
+        loadableCollector,
+      },
       hooks: {
         getBodyTags: () => loadableCollector.getAllScripts(),
         getHeadTags: () => loadableCollector.getAllPreloads(),

@@ -1,8 +1,7 @@
 import './index.css';
+import { type ComponentType, Suspense } from 'react';
 import { Routes, Route } from 'react-router';
-
-import Details from './handlers/Details';
-import Home from './handlers/Home';
+import { loadable } from 'sku/vite/loadable';
 
 type SiteObject = {
   home: string;
@@ -20,12 +19,34 @@ const routes: Record<string, SiteObject> = {
   },
 };
 
+const slowLoad = (
+  fn: () => Promise<{ default: ComponentType<any> }>,
+): Promise<{ default: ComponentType<any> }> =>
+  new Promise((resolve) => setTimeout(() => resolve(fn()), 1000));
+
+const Home = loadable(() => slowLoad(() => import('./handlers/Home')));
+const Details = loadable(() => slowLoad(() => import('./handlers/Details')));
+
 export const App = ({ site }: { site: string }) => (
   <>
     <div>I&#39;m an app! 🚀</div>
     <Routes>
-      <Route path={routes[site].home} element={<Home site={site} />} />
-      <Route path={routes[site].details} element={<Details site={site} />} />
+      <Route
+        path={routes[site].home}
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home site={site} />
+          </Suspense>
+        }
+      />
+      <Route
+        path={routes[site].details}
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <Details site={site} />
+          </Suspense>
+        }
+      />
     </Routes>
   </>
 );

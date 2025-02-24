@@ -15,6 +15,7 @@ export const viteRender = async ({
     url,
     render,
     site,
+    renderContext: {},
     hooks: {
       getBodyTags: () => `<script type="module" src="${clientEntry}"></script>`,
     },

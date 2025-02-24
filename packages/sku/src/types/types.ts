@@ -6,6 +6,7 @@ import type {
   RenderToPipeableStreamOptions,
   PipeableStream,
 } from 'react-dom/server';
+import type { Collector } from '@/services/vite/loadable/collector.js';
 
 /* START --- Vite-render types */
 /* Notes:
@@ -19,12 +20,14 @@ export type ViteRenderFunction = (options: {
   clientEntry: string;
 }) => Promise<string>;
 
-export type RenderContext = Record<string, any>;
+export type RenderContext = {
+  loadableCollector?: Collector;
+};
 
 export interface ViteRenderAppProps {
   url?: string;
   site?: SkuSiteObject | string;
-  renderContext?: RenderContext;
+  renderContext: RenderContext;
   options: RenderToPipeableStreamOptions;
 }
 

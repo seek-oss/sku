@@ -17,13 +17,15 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
         const isHtml = req.url === '/index.html';
         if (isHtml) {
-          const renderEntry = require.resolve('../../entries/vite-render.jsx');
-          const clientEntry = require.resolve('../../entries/vite-client.jsx');
+          const renderEntry = require.resolve('../entries/vite-render.jsx');
+          const clientEntry = require.resolve('../entries/vite-client.jsx');
 
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
+          const url = req.originalUrl || req.url || '/';
+
           const renderedHtml = await (viteRender as ViteRenderFunction)({
-            url: req.url,
+            url,
             site,
             clientEntry,
           });

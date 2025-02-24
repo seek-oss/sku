@@ -6,11 +6,18 @@ import { webpackStartSsrHandler } from '@/program/commands/start-ssr/webpack-sta
 export const startSsrAction = async ({
   stats,
   skuContext,
+  experimentalBundler,
 }: {
   stats: StatsChoices;
   skuContext: SkuContext;
+  experimentalBundler: boolean;
 }) => {
-  if (skuContext.bundler === 'vite') {
+  if (skuContext.bundler === 'vite' && !experimentalBundler) {
+    throw new Error(
+      'The `vite` bundler is experimental. If you want to use it please use the `--experimental-bundler` flag.',
+    );
+  }
+  if (skuContext.bundler === 'vite' && experimentalBundler) {
     viteStartSsrHandler(skuContext);
   } else {
     webpackStartSsrHandler({ stats, skuContext });

@@ -29,6 +29,9 @@ export default {
 With `vite` the `index.html` will be generated with a different id for the root element.
 Make sure that your client entrypoint exports a function that hydrates the root element as the default export.
 
+> [!NOTE]
+> This is a temporary change. In the future the `renderDocument` function will be re-enabled allowing you to customize the `index.html` template.
+
 ```diff
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
@@ -52,9 +55,9 @@ The interface for the render entrypoint has seen some more significant changes.
 
 - The `renderToString` function has been replaced with `renderToPipeableStream`.
 - The `renderApp` function has been renamed to `render`.
-- The `SkuProvider` component has been removed from the `renderApp` function. Instead, you have to use the `LoadableProvider` from the `sku/vite/loadable` export.
+- The `SkuProvider` component has been removed from the `renderApp` function. Instead, you have to use the `LoadableProvider` from the `sku/vite/loadable` entrypoint. This is only needed if you're using `loadable` components.
 - The `preloadAll` function has been added. Awaiting this function ensures that all `loadable` imported files will be preloaded before sku renders the page.
-- The `renderDocument` function has been removed. It's functionality will be added in a future update.
+- The `renderDocument` function has been temporarily removed. Its functionality will be enabled again in a future update.
 
 ```diff
 import { StaticRouter } from 'react-router-dom/server';
@@ -119,9 +122,9 @@ export default {
 
 ### Migrating from `sku/@loadable/components` to `sku/vite/loadable`
 
-The `sku/@loadable/components` package has been replaced with `sku/vite/loadable`.
+The `sku/@loadable/components` entrypoint has been replaced with `sku/vite/loadable`.
 
-The new `sku/vite/loadable` package relies on the `react <Suspense>` component for the loading fallback.
+The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https://react.dev/reference/react/Suspense) component for the loading fallback.
 
 ```diff
 - import loadable from 'sku/@loadable/component';
@@ -150,7 +153,7 @@ If `vite/client` reference types are needed in your project, you can import them
 /// <reference types="sku/vite/client" />
 
 // ... rest of your application
-````
+```
 
 ### Running `sku` with the `--experimental-bundler` flag
 

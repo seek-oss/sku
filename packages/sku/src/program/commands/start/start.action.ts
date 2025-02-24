@@ -8,21 +8,14 @@ export const startAction = async (
   {
     stats,
     skuContext,
-    experimentalBundler,
   }: {
     stats: StatsChoices;
     skuContext: SkuContext;
-    experimentalBundler: boolean;
   },
   command: Command,
 ) => {
-  const environment = command.parent?.opts()?.environment;
-  if (skuContext.bundler === 'vite' && !experimentalBundler) {
-    throw new Error(
-      'The `vite` bundler is experimental. If you want to use it please use the `--experimental-bundler` flag.',
-    );
-  }
-  if (skuContext.bundler === 'vite' && experimentalBundler) {
+  const { environment } = command.optsWithGlobals();
+  if (skuContext.bundler === 'vite') {
     viteStartHandler(skuContext);
   } else {
     webpackStartHandler({ stats, environment, skuContext });

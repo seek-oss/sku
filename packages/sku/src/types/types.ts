@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+/// <reference types="vite/client" />
 import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';

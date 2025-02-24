@@ -8,6 +8,11 @@ export const LoadableProvider = context.Provider;
 export const useRegisterComponent = (moduleId: ModuleId) => {
   const collector = useContext(context);
   if (!collector) {
+    if (import.meta.env.SSR) {
+      throw new Error(
+        'useRegisterComponent must be used inside LoadableProvider',
+      );
+    }
     return;
   }
   collector.register(moduleId);

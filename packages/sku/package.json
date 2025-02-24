@@ -26,6 +26,9 @@
       "default": "./dist/services/vite/loadable/index.js",
       "types": "./dist/services/vite/loadable/index.d.ts"
     },
+    "./vite/client": {
+      "types": "./dist/services/vite/client.d.ts"
+    },
     "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
     "./package.json": "./package.json"
@@ -45,7 +48,8 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tspc --project tsconfig.build.json && cp dist/index.d.ts dist/index.d.cts",
+    "build": "tspc --project tsconfig.build.json",
+    "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit",
     "prepare": "ts-patch install -s"
   },
@@ -77,6 +81,8 @@
   "dependencies": {
     "@babel/core": "^7.21.8",
     "@babel/generator": "^7.26.9",
+    "@babel/plugin-syntax-jsx": "^7.25.9",
+    "@babel/plugin-syntax-typescript": "^7.25.9",
     "@babel/plugin-transform-react-constant-elements": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",

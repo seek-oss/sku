@@ -16,7 +16,7 @@
     "types": ["webpack/module", "jest", "node"],
     "lib": ["ESNext", "DOM"],
     "paths": {
-      "@/*": ["src/*"] // enables us to use @components/MyComponent
+      "@/*": ["src/*"]
     },
     "plugins": [
       // Transform paths in output .js files

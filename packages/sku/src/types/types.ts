@@ -6,7 +6,7 @@ import type {
   RenderToPipeableStreamOptions,
   PipeableStream,
 } from 'react-dom/server';
-import type { Collector } from '@/services/vite/preload/collector.js';
+import type { Collector } from '@/services/vite/loadable/collector.js';
 
 /* START --- Vite-render types */
 /* Notes:

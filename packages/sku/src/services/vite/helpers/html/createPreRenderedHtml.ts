@@ -47,7 +47,10 @@ export function createPreRenderedHtml({
         onShellError(error: any) {
           reject(error);
         },
-        onShellReady() {
+        onError(error: any) {
+          console.error(error);
+        },
+        onAllReady() {
           const extraBodyTags = getBodyTags ? getBodyTags() : '';
           const bodyTags = [
             Object.keys(clientContext).length > 0 &&
@@ -81,12 +84,6 @@ export function createPreRenderedHtml({
           });
 
           pipe(transformStream);
-        },
-        onError(error: any) {
-          console.error(error);
-        },
-        onAllReady() {
-          console.log('onAllReady');
         },
       },
     });

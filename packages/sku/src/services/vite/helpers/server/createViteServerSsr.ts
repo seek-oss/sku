@@ -10,7 +10,7 @@ import { createViteConfig } from '@/services/vite/helpers/createConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
-import { createCollector } from '@/services/vite/preload/collector.js';
+import { createCollector } from '@/services/vite/loadable/collector.js';
 
 const base = process.env.BASE || '/';
 

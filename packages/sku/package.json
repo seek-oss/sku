@@ -23,8 +23,11 @@
       "types": "./dist/config/storybook/index.d.ts"
     },
     "./vite/loadable": {
-      "default": "./dist/services/vite/preload/index.js",
-      "types": "./dist/services/vite/preload/index.d.ts"
+      "default": "./dist/services/vite/loadable/index.js",
+      "types": "./dist/services/vite/loadable/index.d.ts"
+    },
+    "./vite/client": {
+      "types": "./dist/services/vite/client.d.ts"
     },
     "./@loadable/component": "./src/@loadable/component/index.ts",
     "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
@@ -45,7 +48,8 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tspc --project tsconfig.build.json && cp dist/index.d.ts dist/index.d.cts",
+    "build": "tspc --project tsconfig.build.json",
+    "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit",
     "prepare": "ts-patch install -s"
   },
@@ -92,8 +96,6 @@
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@swc/core": "^1.6.13",
-    "@types/babel__generator": "^7.6.8",
-    "@types/babel__traverse": "^7.20.6",
     "@types/eslint": "^9.6.1",
     "@types/express": "^4.17.11",
     "@types/jest": "^29.0.0",
@@ -183,6 +185,8 @@
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@types/babel__core": "^7.20.5",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.6",
     "@types/compression": "^1.7.5",
     "@types/cross-spawn": "^6.0.3",
     "@types/death": "^1.1.5",

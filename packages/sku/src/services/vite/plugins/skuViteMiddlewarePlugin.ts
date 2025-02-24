@@ -22,8 +22,10 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
+          const url = req.originalUrl || req.url || '/';
+
           const renderedHtml = await (viteRender as ViteRenderFunction)({
-            url: req.url,
+            url,
             site,
             clientEntry,
           });

@@ -14,7 +14,7 @@ export const startAction = async (
   },
   command: Command,
 ) => {
-  const environment = command.parent?.opts()?.environment;
+  const { environment } = command.optsWithGlobals();
   if (skuContext.bundler === 'vite') {
     viteStartHandler(skuContext);
   } else {

@@ -10,7 +10,6 @@ const buildAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  console.log('Building your application...', skuContext.bundler);
   if (skuContext.bundler === 'vite') {
     await viteBuildHandler({ skuContext });
   } else {

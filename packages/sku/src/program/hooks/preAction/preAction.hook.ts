@@ -4,12 +4,9 @@ import { getSkuContext } from '@/context/createSkuContext.js';
 import { initializeTelemetry } from '@/services/telemetry/index.js';
 import { experimentalBundlersHook } from '@/program/hooks/preAction/experimentalBundlersHook.js';
 
-export const preActionHook = (
-  _thisCommand: Command,
-  actionCommand: Command,
-) => {
+export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
   const skuContext = getSkuContext({
-    configPath: _thisCommand.opts()?.config,
+    configPath: rootCommand.opts()?.config,
   });
   initializeTelemetry(skuContext);
   actionCommand.setOptionValue('skuContext', skuContext);
@@ -17,7 +14,7 @@ export const preActionHook = (
   // TODO: remove once experimental bundlers are stable
   experimentalBundlersHook({
     command: actionCommand.name(),
-    experimentalBundler: _thisCommand.opts()?.experimentalBundler,
+    experimentalBundler: rootCommand.opts()?.experimentalBundler,
     bundler: skuContext.bundler,
   });
 };

@@ -85,11 +85,20 @@ If you believe other consumers would benefit from the addition/removal/modificat
 Example:
 
 ```ts
+import customPlugin from 'custom-eslint-plugin';
+
 export default {
-  dangerouslySetESLintConfig: (skuEslintConfig) => ({
+  dangerouslySetESLintConfig: (skuEslintConfig) => [
     ...skuEslintConfig,
-    someOtherConfig: 'dangerousValue',
-  }),
+    {
+      plugins: {
+        customPlugin,
+      },
+      rules: {
+        'customPlugin/rule1': 'warn',
+      },
+    },
+  ],
 } satisfies SkuConfig;
 ```
 

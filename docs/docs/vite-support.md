@@ -1,8 +1,8 @@
-# Using Vite
+# Vite Support
 
-`vite` experimental support.
+> ⚠️ Vite support is currently experimental. Not all of sku's features are supported when using vite. Vite should _not_ be used for production applications.
 
-### Getting started
+## Getting started
 
 To enable `vite` as the bundler you have to change your bundler in the `sku.config.ts` file.
 
@@ -32,11 +32,11 @@ The following commands are supported:
 
 ### Static rendering
 
-Before starting with `vite` static rendering make sure you've read the [static rendering](static-rendering.md) documentation for webpack.
+Before starting with `vite` static rendering make sure you've read the [static rendering](./docs/static-rendering.md) documentation for webpack.
 
 ### Client entrypoint
 
-For static rendering you would still need the same client entrypoint. There is one small change and thats the id of the root element. This has changed to `'root'`. See the example below.
+The only difference between the webpack and the vite client entrypoint is the name of the root element. In the future, this change will not be necessary.
 
 ```diff
 import { hydrateRoot } from 'react-dom/client';
@@ -57,9 +57,9 @@ export default ({ site }: { site: string }) => {
 
 ### Render entrypoint
 
-The render entrypoint file has to export a `ViteRender` object. The `ViteRender` object has two functions `render` and `provideClientContext`.
+The render entrypoint file has to export a `ViteRender` object. The `ViteRender` object has two functions: `render` and `provideClientContext`.
 
-**render**
+#### render
 
 The `render` function should return your application as a pipeable stream (using `React.renderToPipeableString`).
 
@@ -68,11 +68,9 @@ The `render` function should return your application as a pipeable stream (using
 If you are using `loadable` components, you should wrap your application in a `LoadableProvider` from `sku/vite/loadable`. This will search your rendered application for dynamic imports that are wrapped in a `loadable` function.
 By calling the `await preloadAll()` function, you can ensure that all `loadable` imported files will be preloaded before sku renders the page.
 
-**provideClientContext**
+#### provideClientContext
 
-`provideClientContext` is an optional function that runs after `render`. It is used to pass context between the static render and the client code. This is useful for passing config values (e.g. API endpoints, feature switches) or state information (e.g. redux state). The object this function returns will be passed to the client entry.
-
-The function receives `environment` and `site`
+The `provideClientContext` is the same as that of the webpack render entrypoint. See [provideClientContext](./docs/static-rendering.md#provideclientcontext) for more information.
 
 **Example of a render entrypoint with `vite`**
 
@@ -131,7 +129,7 @@ export default () => (
 
 ### Using vite types
 
-If `vite/client` reference types are needed in your project, you can import them from `sku/vite/client`.
+If [`vite/client` types](https://vite.dev/guide/features#client-types) are needed in your project, you can reference them via the `sku/vite/client` entrypoint:
 
 ```typescript
 /// <reference types="sku/vite/client" />

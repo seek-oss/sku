@@ -15,6 +15,7 @@ interface TelemetryProvider {
   close: () => Promise<void>;
   gauge: (path: string, duration: number, tagMap?: TagMap) => void;
   addGlobalTags: (tagMap: TagMap) => void;
+  isRealProvider: boolean;
 }
 
 let provider: TelemetryProvider = {
@@ -23,6 +24,7 @@ let provider: TelemetryProvider = {
   addGlobalTags: noop,
   gauge: noop,
   close: () => Promise.resolve(),
+  isRealProvider: false,
 };
 
 try {
@@ -37,6 +39,8 @@ try {
     }
 
     provider = realProvider;
+    // we now know that telemetry is enabled
+    provider.isRealProvider = true;
   }
 } catch {
   const addCommand = getAddCommand({

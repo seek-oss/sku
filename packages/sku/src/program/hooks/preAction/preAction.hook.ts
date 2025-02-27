@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 
 import { getSkuContext } from '@/context/createSkuContext.js';
-import { initializeTelemetry } from '@/services/telemetry/index.js';
+import provider, { initializeTelemetry } from '@/services/telemetry/index.js';
 import { experimentalBundlersHook } from '@/program/hooks/preAction/experimentalBundlersHook.js';
 
 export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
@@ -16,5 +16,6 @@ export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
     command: actionCommand.name(),
     experimentalBundler: rootCommand.opts()?.experimentalBundler,
     bundler: skuContext.bundler,
+    isTelemetryInstalled: provider.isRealProvider,
   });
 };

@@ -10,7 +10,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:telemetry');
 
-export const initializeTelemetry = ({ languages }: SkuContext) => {
+export const initializeTelemetry = ({ languages, bundler }: SkuContext) => {
   let projectName = 'unknown';
   let braidVersion = 'unknown';
   const skuVersion = skuPackageJson.version;
@@ -34,6 +34,7 @@ export const initializeTelemetry = ({ languages }: SkuContext) => {
     project: projectName,
     os: os.platform(),
     languageSupport: Boolean(languages) ? 'multi' : 'single',
+    bundler,
   });
 };
 

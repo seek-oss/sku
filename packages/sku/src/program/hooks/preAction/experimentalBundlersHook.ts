@@ -1,13 +1,18 @@
+import { getAddCommand } from '@/services/packageManager/packageManager.js';
+import banner from '@/utils/banners/banner.js';
+
 const blockedCommands = ['build', 'start', 'start-ssr'];
 
 export const experimentalBundlersHook = ({
   command,
   experimentalBundler,
   bundler,
+  isTelemetryInstalled,
 }: {
   command: string;
   experimentalBundler: boolean;
   bundler: string;
+  isTelemetryInstalled: boolean;
 }) => {
   if (!blockedCommands.includes(command)) {
     if (experimentalBundler) {
@@ -16,6 +21,18 @@ export const experimentalBundlersHook = ({
       );
     }
     return;
+  }
+  if (!isTelemetryInstalled && bundler === 'vite') {
+    const addCommand = getAddCommand({
+      deps: ['@seek/sku-telemetry'],
+      type: 'dev',
+    });
+
+    banner('error', '@seek/sku-telemetry not installed', [
+      'In order to run `vite` as your bundler you must install our private telemetry package that gives us insights on usage, errors and performance.',
+      addCommand,
+      'Non SEEK based usage can disable this message with `SKU_TELEMETRY=false`',
+    ]);
   }
   if (experimentalBundler && bundler !== 'vite') {
     throw new Error(

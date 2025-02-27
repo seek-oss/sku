@@ -14,6 +14,7 @@ import {
 
 export type ModuleId = string;
 
+// TODO: improve log levels for this class.
 export class Collector {
   moduleIds = new Set<string>();
   preloadIds = new Map<string, Preload>();
@@ -104,7 +105,6 @@ const parseManifestForEntry = ({
   }
   const entryChunk = manifest[entry];
   if (!entryChunk) {
-    console.error('Entry chunk not found in manifest', entry);
     return;
   }
 
@@ -220,7 +220,7 @@ const addAssetToPreloads = ({
 
 type CreateCollectorOptions = {
   externalJsFiles?: string[];
-  manifest: Manifest;
+  manifest?: Manifest;
   nonce?: string;
   entry?: string;
 };

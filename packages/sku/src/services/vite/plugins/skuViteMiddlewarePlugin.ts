@@ -13,7 +13,9 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         const host = req.headers.host;
         const hostname = host?.split(':')[0];
         const site =
-          skuContext.sites.find((skuSite) => skuSite.host === hostname) || '';
+          skuContext.sites.find((skuSite) => skuSite.host === hostname) ||
+          skuContext.sites[0] ||
+          '';
 
         const isHtml = req.url === '/index.html';
         if (isHtml) {

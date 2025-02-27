@@ -36,8 +36,8 @@ export const buildSsrAction = async ({
       stats,
       skuContext,
     });
-    await ensureTargetDirectory(skuContext);
-    await cleanTargetDirectory(skuContext);
+    await ensureTargetDirectory(skuContext.paths.target);
+    await cleanTargetDirectory(skuContext.paths.target);
     await run(webpack(clientConfig), { stats });
     await run(webpack(serverConfig), { stats });
     await copyPublicFiles(skuContext);

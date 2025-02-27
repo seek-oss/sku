@@ -10,13 +10,14 @@ const { run } = jest;
 
 const log = debug('sku:jest');
 
-const testAction = async ({
-  args = [],
-  skuContext,
-}: {
-  args: string[];
-  skuContext: SkuContext;
-}) => {
+const testAction = async (
+  {
+    skuContext,
+  }: {
+    skuContext: SkuContext;
+  },
+  { args = [] }: { args: string[] },
+) => {
   await configureProject(skuContext);
   await runVocabCompile(skuContext);
 

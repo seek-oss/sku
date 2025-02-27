@@ -6,18 +6,17 @@ import exists from './exists.js';
 import copyDirContents from './copyDirContents.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-export const cleanTargetDirectory = async ({
-  paths,
-}: {
-  paths: SkuContext['paths'];
-}) => {
+export const cleanTargetDirectory = async (
+  target: string,
+  includeDirectory: boolean = false,
+) => {
   const files = await new Fdir()
     .withBasePath()
     .withMaxDepth(1)
     .withDirs()
     // This glob pattern is used to exclude the target directory itself
-    .glob(`${paths.target}/*`)
-    .crawl(paths.target)
+    .glob(includeDirectory ? '**/*' : `${target}/*`)
+    .crawl(target)
     .withPromise();
 
   for (const file of files) {
@@ -35,12 +34,8 @@ export const copyPublicFiles = async ({
   }
 };
 
-export const ensureTargetDirectory = async ({
-  paths,
-}: {
-  paths: SkuContext['paths'];
-}) => {
-  await mkdir(paths.target, { recursive: true });
+export const ensureTargetDirectory = async (target: string) => {
+  await mkdir(target, { recursive: true });
 };
 
 export const cleanStaticRenderEntry = async ({

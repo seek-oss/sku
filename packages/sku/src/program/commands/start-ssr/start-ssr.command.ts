@@ -1,6 +1,6 @@
 import { Command } from 'commander';
-import { statsOption } from '../../options/stats/stats.option.js';
 import { startSsrAction } from './start-ssr.action.js';
+import { statsOption } from '@/program/options/stats/stats.option.js';
 
 const startSsrCommand = new Command('start-ssr');
 

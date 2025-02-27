@@ -12,6 +12,6 @@ serveCommand
   .addOption(siteOption)
   .addOption(portOption)
   .action(async ({ site, port, skuContext }, command) => {
-    const environment = command.parent.opts()?.environment;
+    const { environment } = command.optsWithGlobals();
     serveAction({ site, port, environment, skuContext });
   });

@@ -25,7 +25,7 @@ export const experimentalBundlersHook = ({
   if (
     !isTelemetryInstalled &&
     bundler === 'vite' &&
-    !process.env.SKU_TELEMETRY
+    !process.env.SKU_BUNDLER_TELEMETRY
   ) {
     const addCommand = getAddCommand({
       deps: ['@seek/sku-telemetry'],
@@ -35,7 +35,7 @@ export const experimentalBundlersHook = ({
     banner('error', '@seek/sku-telemetry not installed', [
       'In order to run `vite` as your bundler you must install our private telemetry package that gives us insights on usage, errors and performance.',
       addCommand,
-      'Non SEEK based usage can disable this message with `SKU_TELEMETRY=false`',
+      'Non SEEK based usage can disable this message with `SKU_BUNDLER_TELEMETRY=false`',
     ]);
   }
   if (experimentalBundler && bundler !== 'vite') {

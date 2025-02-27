@@ -1,7 +1,7 @@
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite',
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
   sites: [
     {
       name: 'au',

@@ -199,7 +199,7 @@ export const createSkuContext = ({ configPath }: { configPath?: string }) => {
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   return {
-    bundler: skuConfig.bundler,
+    bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
     configPath: appConfigPath,
     publicPath,
     skuConfig,

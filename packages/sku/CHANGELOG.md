@@ -1,5 +1,11 @@
 # sku
 
+## 14.0.5
+
+### Patch Changes
+
+- `sku test`: Fixes a bug where extra CLI arguments were not being passed through to `jest` ([#1193](https://github.com/seek-oss/sku/pull/1193))
+
 ## 14.0.4
 
 ### Patch Changes

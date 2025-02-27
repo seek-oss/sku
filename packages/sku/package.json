@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "14.0.4",
+  "version": "14.0.5",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./dist/index.d.ts",
   "bin": {

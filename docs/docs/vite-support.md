@@ -11,7 +11,7 @@ To enable `vite` as the bundler you have to change your bundler in the `sku.conf
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite', // sku will use vite as the bundler.
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite', // sku will use vite as the bundler.
   ...
 } satisfies SkuConfig;
 ```

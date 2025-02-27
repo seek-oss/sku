@@ -6,7 +6,7 @@ import type { SkuConfig } from '@/types/types.js';
 const defaultDecorator = <T>(a: T) => a;
 
 export default {
-  bundler: 'webpack',
+  __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',

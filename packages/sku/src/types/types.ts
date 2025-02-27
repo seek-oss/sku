@@ -148,7 +148,7 @@ export interface SkuConfig {
    *
    * @default "webpack"
    */
-  bundler?: 'webpack' | 'vite';
+  __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | 'vite';
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *

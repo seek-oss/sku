@@ -22,7 +22,11 @@ export const experimentalBundlersHook = ({
     }
     return;
   }
-  if (!isTelemetryInstalled && bundler === 'vite') {
+  if (
+    !isTelemetryInstalled &&
+    bundler === 'vite' &&
+    !process.env.SKU_TELEMETRY
+  ) {
     const addCommand = getAddCommand({
       deps: ['@seek/sku-telemetry'],
       type: 'dev',

@@ -35,12 +35,11 @@ export const experimentalBundlersHook = ({
     banner('error', '@seek/sku-telemetry not installed', [
       'In order to run `vite` as your bundler you must install our private telemetry package that gives us insights on usage, errors and performance.',
       addCommand,
-      'Non SEEK based usage can disable this message with `SKU_BUNDLER_TELEMETRY=false`',
     ]);
   }
   if (experimentalBundler && bundler !== 'vite') {
     throw new Error(
-      'Experimental bundlers are only supported with `vite` at the moment. Either remove the `gi--experimental-bundler` flag or switch to the `vite` bundler.',
+      'Experimental bundlers are only supported with `vite` at the moment. Either remove the `--experimental-bundler` flag or switch to the `vite` bundler.',
     );
   }
   if (bundler === 'vite' && !experimentalBundler) {

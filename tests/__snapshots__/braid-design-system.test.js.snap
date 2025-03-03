@@ -2,7 +2,7 @@
 
 exports[`braid-design-system build should generate the expected files 1`] = `
 {
-  "2-77f00337ef4ad2879291.css": .sqfpyo0 {
+  "2-facd3ccbba2a2e974f05.css": ._1gdwseo0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -12,1928 +12,1928 @@ exports[`braid-design-system build should generate the expected files 1`] = `
   vertical-align: baseline;
   -webkit-tap-highlight-color: transparent;
 }
-[data-braid-hidefocusrings] .sqfpyo0 {
+[data-braid-hidefocusrings] ._1gdwseo0 {
   outline: none;
 }
-.sqfpyo1 {
+._1gdwseo1 {
   display: block;
 }
-.sqfpyo2 {
+._1gdwseo2 {
   line-height: 1;
 }
-.sqfpyo3 {
+._1gdwseo3 {
   list-style: none;
 }
-.sqfpyo4 {
+._1gdwseo4 {
   quotes: none;
 }
-.sqfpyo4:after,
-.sqfpyo4:before {
+._1gdwseo4:after,
+._1gdwseo4:before {
   content: "";
 }
-.sqfpyo5 {
+._1gdwseo5 {
   border-collapse: collapse;
   border-spacing: 0;
 }
-.sqfpyo6 {
+._1gdwseo6 {
   -webkit-appearance: none;
   appearance: none;
 }
-.sqfpyo7 {
+._1gdwseo7 {
   background-color: transparent;
 }
-.sqfpyo9 {
+._1gdwseo9 {
   color: inherit;
 }
-.sqfpyoa:disabled {
+._1gdwseoa:disabled {
   opacity: 1;
 }
-.sqfpyoa::-ms-expand {
+._1gdwseoa::-ms-expand {
   display: none;
 }
-.sqfpyoc[type="number"] {
+._1gdwseoc[type="number"] {
   -moz-appearance: textfield;
 }
-.sqfpyoc[type="number"]::-webkit-inner-spin-button,
-.sqfpyoc[type="number"]::-webkit-outer-spin-button {
+._1gdwseoc[type="number"]::-webkit-inner-spin-button,
+._1gdwseoc[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.sqfpyoc::-ms-clear {
+._1gdwseoc::-ms-clear {
   display: none;
 }
-.sqfpyoc::-webkit-search-cancel-button {
+._1gdwseoc::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
-.sqfpyof {
+._1gdwseof {
   color: inherit;
   text-decoration: none;
 }
-._2b382h0 {
+.o1ubka0 {
   overflow: hidden;
 }
-._2b382h1 {
+.o1ubka1 {
   overflow: scroll;
 }
-._2b382h2 {
+.o1ubka2 {
   overflow: visible;
 }
-._2b382h3 {
+.o1ubka3 {
   overflow: auto;
 }
-._2b382h4 {
+.o1ubka4 {
   -webkit-user-select: none;
   user-select: none;
 }
-._2b382h5 {
+.o1ubka5 {
   outline: none;
 }
-._2b382h6 {
+.o1ubka6 {
   opacity: 0;
 }
-._2b382h7 {
+.o1ubka7 {
   z-index: 0;
 }
-._2b382h8 {
+.o1ubka8 {
   z-index: 1;
 }
-._2b382h9 {
+.o1ubka9 {
   z-index: 2;
 }
-._2b382ha {
+.o1ubkaa {
   z-index: 90;
 }
-._2b382hb {
+.o1ubkab {
   z-index: 100;
 }
-._2b382hc {
+.o1ubkac {
   z-index: 200;
 }
-._2b382hd {
+.o1ubkad {
   z-index: 290;
 }
-._2b382he {
+.o1ubkae {
   z-index: 300;
 }
-._2b382hf {
+.o1ubkaf {
   z-index: 400;
 }
-._2b382hg {
+.o1ubkag {
   cursor: default;
 }
-._2b382hh {
+.o1ubkah {
   cursor: pointer;
 }
-._2b382hi {
+.o1ubkai {
   pointer-events: none;
 }
-._2b382hj {
+.o1ubkaj {
   top: 0;
 }
-._2b382hk {
+.o1ubkak {
   bottom: 0;
 }
-._2b382hl {
+.o1ubkal {
   left: 0;
 }
-._2b382hm {
+.o1ubkam {
   right: 0;
 }
-._2b382hn {
+.o1ubkan {
   height: 100%;
 }
-._2b382ho {
-  height: var(--qvowxa9);
+.o1ubkao {
+  height: var(--_1vwoat49);
 }
-._2b382hp {
+.o1ubkap {
   width: 100%;
 }
-._2b382hq {
-  width: var(--qvowxa9);
+.o1ubkaq {
+  width: var(--_1vwoat49);
 }
-._2b382hr {
+.o1ubkar {
   min-width: 0;
 }
-._2b382hs {
-  max-width: var(--qvowxa11);
+.o1ubkas {
+  max-width: var(--_1vwoat411);
 }
-._2b382ht {
-  max-width: var(--qvowxa12);
+.o1ubkat {
+  max-width: var(--_1vwoat412);
 }
-._2b382hu {
-  max-width: var(--qvowxa13);
+.o1ubkau {
+  max-width: var(--_1vwoat413);
 }
-._2b382hv {
-  max-width: var(--qvowxa14);
+.o1ubkav {
+  max-width: var(--_1vwoat414);
 }
-._2b382hw {
+.o1ubkaw {
   max-width: -moz-fit-content;
   max-width: fit-content;
 }
-._2b382hx {
-  transition: var(--qvowxa5i);
+.o1ubkax {
+  transition: var(--_1vwoat45i);
 }
-._2b382hy {
-  transition: var(--qvowxa5j);
+.o1ubkay {
+  transition: var(--_1vwoat45j);
 }
-._2b382hz:active {
-  transform: var(--qvowxa5k);
+.o1ubkaz:active {
+  transform: var(--_1vwoat45k);
 }
-html._2b382h10 ._2b382h12,
-html:not(._2b382h10) ._2b382h11 {
-  background: var(--qvowxa1t);
+html.o1ubka10 .o1ubka12,
+html:not(.o1ubka10) .o1ubka11 {
+  background: var(--_1vwoat41t);
 }
-html._2b382h10 ._2b382h14,
-html:not(._2b382h10) ._2b382h13 {
-  background: var(--qvowxa1u);
+html.o1ubka10 .o1ubka14,
+html:not(.o1ubka10) .o1ubka13 {
+  background: var(--_1vwoat41u);
 }
-html._2b382h10 ._2b382h16,
-html:not(._2b382h10) ._2b382h15 {
-  background: var(--qvowxa1v);
+html.o1ubka10 .o1ubka16,
+html:not(.o1ubka10) .o1ubka15 {
+  background: var(--_1vwoat41v);
 }
-html._2b382h10 ._2b382h18,
-html:not(._2b382h10) ._2b382h17 {
-  background: var(--qvowxa1w);
+html.o1ubka10 .o1ubka18,
+html:not(.o1ubka10) .o1ubka17 {
+  background: var(--_1vwoat41w);
 }
-html._2b382h10 ._2b382h1a,
-html:not(._2b382h10) ._2b382h19 {
-  background: var(--qvowxa1x);
+html.o1ubka10 .o1ubka1a,
+html:not(.o1ubka10) .o1ubka19 {
+  background: var(--_1vwoat41x);
 }
-html._2b382h10 ._2b382h1c,
-html:not(._2b382h10) ._2b382h1b {
-  background: var(--qvowxa1y);
+html.o1ubka10 .o1ubka1c,
+html:not(.o1ubka10) .o1ubka1b {
+  background: var(--_1vwoat41y);
 }
-html._2b382h10 ._2b382h1e,
-html:not(._2b382h10) ._2b382h1d {
-  background: var(--qvowxa1z);
+html.o1ubka10 .o1ubka1e,
+html:not(.o1ubka10) .o1ubka1d {
+  background: var(--_1vwoat41z);
 }
-html._2b382h10 ._2b382h1g,
-html:not(._2b382h10) ._2b382h1f {
-  background: var(--qvowxa20);
+html.o1ubka10 .o1ubka1g,
+html:not(.o1ubka10) .o1ubka1f {
+  background: var(--_1vwoat420);
 }
-html._2b382h10 ._2b382h1i,
-html:not(._2b382h10) ._2b382h1h {
-  background: var(--qvowxa21);
+html.o1ubka10 .o1ubka1i,
+html:not(.o1ubka10) .o1ubka1h {
+  background: var(--_1vwoat421);
 }
-html._2b382h10 ._2b382h1k,
-html:not(._2b382h10) ._2b382h1j {
-  background: var(--qvowxa22);
+html.o1ubka10 .o1ubka1k,
+html:not(.o1ubka10) .o1ubka1j {
+  background: var(--_1vwoat422);
 }
-html._2b382h10 ._2b382h1m,
-html:not(._2b382h10) ._2b382h1l {
-  background: var(--qvowxa23);
+html.o1ubka10 .o1ubka1m,
+html:not(.o1ubka10) .o1ubka1l {
+  background: var(--_1vwoat423);
 }
-html._2b382h10 ._2b382h1o,
-html:not(._2b382h10) ._2b382h1n {
-  background: var(--qvowxa24);
+html.o1ubka10 .o1ubka1o,
+html:not(.o1ubka10) .o1ubka1n {
+  background: var(--_1vwoat424);
 }
-html._2b382h10 ._2b382h1q,
-html:not(._2b382h10) ._2b382h1p {
-  background: var(--qvowxa25);
+html.o1ubka10 .o1ubka1q,
+html:not(.o1ubka10) .o1ubka1p {
+  background: var(--_1vwoat425);
 }
-html._2b382h10 ._2b382h1s,
-html:not(._2b382h10) ._2b382h1r {
-  background: var(--qvowxa26);
+html.o1ubka10 .o1ubka1s,
+html:not(.o1ubka10) .o1ubka1r {
+  background: var(--_1vwoat426);
 }
-html._2b382h10 ._2b382h1u,
-html:not(._2b382h10) ._2b382h1t {
-  background: var(--qvowxa27);
+html.o1ubka10 .o1ubka1u,
+html:not(.o1ubka10) .o1ubka1t {
+  background: var(--_1vwoat427);
 }
-html._2b382h10 ._2b382h1w,
-html:not(._2b382h10) ._2b382h1v {
-  background: var(--qvowxa28);
+html.o1ubka10 .o1ubka1w,
+html:not(.o1ubka10) .o1ubka1v {
+  background: var(--_1vwoat428);
 }
-html._2b382h10 ._2b382h1y,
-html:not(._2b382h10) ._2b382h1x {
-  background: var(--qvowxa29);
+html.o1ubka10 .o1ubka1y,
+html:not(.o1ubka10) .o1ubka1x {
+  background: var(--_1vwoat429);
 }
-html._2b382h10 ._2b382h20,
-html:not(._2b382h10) ._2b382h1z {
-  background: var(--qvowxa2a);
+html.o1ubka10 .o1ubka20,
+html:not(.o1ubka10) .o1ubka1z {
+  background: var(--_1vwoat42a);
 }
-html._2b382h10 ._2b382h22,
-html:not(._2b382h10) ._2b382h21 {
-  background: var(--qvowxa2b);
+html.o1ubka10 .o1ubka22,
+html:not(.o1ubka10) .o1ubka21 {
+  background: var(--_1vwoat42b);
 }
-html._2b382h10 ._2b382h24,
-html:not(._2b382h10) ._2b382h23 {
-  background: var(--qvowxa2c);
+html.o1ubka10 .o1ubka24,
+html:not(.o1ubka10) .o1ubka23 {
+  background: var(--_1vwoat42c);
 }
-html._2b382h10 ._2b382h26,
-html:not(._2b382h10) ._2b382h25 {
-  background: var(--qvowxa2d);
+html.o1ubka10 .o1ubka26,
+html:not(.o1ubka10) .o1ubka25 {
+  background: var(--_1vwoat42d);
 }
-html._2b382h10 ._2b382h28,
-html:not(._2b382h10) ._2b382h27 {
-  background: var(--qvowxa2e);
+html.o1ubka10 .o1ubka28,
+html:not(.o1ubka10) .o1ubka27 {
+  background: var(--_1vwoat42e);
 }
-html._2b382h10 ._2b382h2a,
-html:not(._2b382h10) ._2b382h29 {
-  background: var(--qvowxa2f);
+html.o1ubka10 .o1ubka2a,
+html:not(.o1ubka10) .o1ubka29 {
+  background: var(--_1vwoat42f);
 }
-html._2b382h10 ._2b382h2c,
-html:not(._2b382h10) ._2b382h2b {
-  background: var(--qvowxa2g);
+html.o1ubka10 .o1ubka2c,
+html:not(.o1ubka10) .o1ubka2b {
+  background: var(--_1vwoat42g);
 }
-html._2b382h10 ._2b382h2e,
-html:not(._2b382h10) ._2b382h2d {
-  background: var(--qvowxa2h);
+html.o1ubka10 .o1ubka2e,
+html:not(.o1ubka10) .o1ubka2d {
+  background: var(--_1vwoat42h);
 }
-html._2b382h10 ._2b382h2g,
-html:not(._2b382h10) ._2b382h2f {
-  background: var(--qvowxa2i);
+html.o1ubka10 .o1ubka2g,
+html:not(.o1ubka10) .o1ubka2f {
+  background: var(--_1vwoat42i);
 }
-html._2b382h10 ._2b382h2i,
-html:not(._2b382h10) ._2b382h2h {
-  background: var(--qvowxa2j);
+html.o1ubka10 .o1ubka2i,
+html:not(.o1ubka10) .o1ubka2h {
+  background: var(--_1vwoat42j);
 }
-html._2b382h10 ._2b382h2k,
-html:not(._2b382h10) ._2b382h2j {
-  background: var(--qvowxa2k);
+html.o1ubka10 .o1ubka2k,
+html:not(.o1ubka10) .o1ubka2j {
+  background: var(--_1vwoat42k);
 }
-html._2b382h10 ._2b382h2m,
-html:not(._2b382h10) ._2b382h2l {
-  background: var(--qvowxa2l);
+html.o1ubka10 .o1ubka2m,
+html:not(.o1ubka10) .o1ubka2l {
+  background: var(--_1vwoat42l);
 }
-html._2b382h10 ._2b382h2o,
-html:not(._2b382h10) ._2b382h2n {
-  background: var(--qvowxa2m);
+html.o1ubka10 .o1ubka2o,
+html:not(.o1ubka10) .o1ubka2n {
+  background: var(--_1vwoat42m);
 }
-html._2b382h10 ._2b382h2q,
-html:not(._2b382h10) ._2b382h2p {
-  background: var(--qvowxa2n);
+html.o1ubka10 .o1ubka2q,
+html:not(.o1ubka10) .o1ubka2p {
+  background: var(--_1vwoat42n);
 }
-html._2b382h10 ._2b382h2s,
-html:not(._2b382h10) ._2b382h2r {
-  background: var(--qvowxa2o);
+html.o1ubka10 .o1ubka2s,
+html:not(.o1ubka10) .o1ubka2r {
+  background: var(--_1vwoat42o);
 }
-html._2b382h10 ._2b382h2u,
-html:not(._2b382h10) ._2b382h2t {
-  background: var(--qvowxa2p);
+html.o1ubka10 .o1ubka2u,
+html:not(.o1ubka10) .o1ubka2t {
+  background: var(--_1vwoat42p);
 }
-html._2b382h10 ._2b382h2w,
-html:not(._2b382h10) ._2b382h2v {
-  background: var(--qvowxa2q);
+html.o1ubka10 .o1ubka2w,
+html:not(.o1ubka10) .o1ubka2v {
+  background: var(--_1vwoat42q);
 }
-html._2b382h10 ._2b382h2y,
-html:not(._2b382h10) ._2b382h2x {
-  background: var(--qvowxa2r);
+html.o1ubka10 .o1ubka2y,
+html:not(.o1ubka10) .o1ubka2x {
+  background: var(--_1vwoat42r);
 }
-html._2b382h10 ._2b382h30,
-html:not(._2b382h10) ._2b382h2z {
-  background: var(--qvowxa2s);
+html.o1ubka10 .o1ubka30,
+html:not(.o1ubka10) .o1ubka2z {
+  background: var(--_1vwoat42s);
 }
-html._2b382h10 ._2b382h32,
-html:not(._2b382h10) ._2b382h31 {
-  background: var(--qvowxa2t);
+html.o1ubka10 .o1ubka32,
+html:not(.o1ubka10) .o1ubka31 {
+  background: var(--_1vwoat42t);
 }
-html._2b382h10 ._2b382h34,
-html:not(._2b382h10) ._2b382h33 {
-  background: var(--qvowxa2u);
+html.o1ubka10 .o1ubka34,
+html:not(.o1ubka10) .o1ubka33 {
+  background: var(--_1vwoat42u);
 }
-html._2b382h10 ._2b382h36,
-html:not(._2b382h10) ._2b382h35 {
-  background: var(--qvowxa2v);
+html.o1ubka10 .o1ubka36,
+html:not(.o1ubka10) .o1ubka35 {
+  background: var(--_1vwoat42v);
 }
-html._2b382h10 ._2b382h38,
-html:not(._2b382h10) ._2b382h37 {
-  box-shadow: var(--qvowxa5l);
+html.o1ubka10 .o1ubka38,
+html:not(.o1ubka10) .o1ubka37 {
+  box-shadow: var(--_1vwoat45l);
 }
-html._2b382h10 ._2b382h3a,
-html:not(._2b382h10) ._2b382h39 {
-  box-shadow: var(--qvowxa5m);
+html.o1ubka10 .o1ubka3a,
+html:not(.o1ubka10) .o1ubka39 {
+  box-shadow: var(--_1vwoat45m);
 }
-html._2b382h10 ._2b382h3c,
-html:not(._2b382h10) ._2b382h3b {
-  box-shadow: var(--qvowxa5n);
+html.o1ubka10 .o1ubka3c,
+html:not(.o1ubka10) .o1ubka3b {
+  box-shadow: var(--_1vwoat45n);
 }
-html._2b382h10 ._2b382h3e,
-html:not(._2b382h10) ._2b382h3d {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxaf);
+html.o1ubka10 .o1ubka3e,
+html:not(.o1ubka10) .o1ubka3d {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4f);
 }
-html._2b382h10 ._2b382h3g,
-html:not(._2b382h10) ._2b382h3f {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxag);
+html.o1ubka10 .o1ubka3g,
+html:not(.o1ubka10) .o1ubka3f {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4g);
 }
-html._2b382h10 ._2b382h3i,
-html:not(._2b382h10) ._2b382h3h {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxaf);
+html.o1ubka10 .o1ubka3i,
+html:not(.o1ubka10) .o1ubka3h {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4f);
 }
-html._2b382h10 ._2b382h3k,
-html:not(._2b382h10) ._2b382h3j {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxag);
+html.o1ubka10 .o1ubka3k,
+html:not(.o1ubka10) .o1ubka3j {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4g);
 }
-html._2b382h10 ._2b382h3m,
-html:not(._2b382h10) ._2b382h3l {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxah);
+html.o1ubka10 .o1ubka3m,
+html:not(.o1ubka10) .o1ubka3l {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4h);
 }
-html._2b382h10 ._2b382h3o,
-html:not(._2b382h10) ._2b382h3n {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxai);
+html.o1ubka10 .o1ubka3o,
+html:not(.o1ubka10) .o1ubka3n {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4i);
 }
-html._2b382h10 ._2b382h3q,
-html:not(._2b382h10) ._2b382h3p {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxaj);
+html.o1ubka10 .o1ubka3q,
+html:not(.o1ubka10) .o1ubka3p {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4j);
 }
-html._2b382h10 ._2b382h3s,
-html:not(._2b382h10) ._2b382h3r {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxaj);
+html.o1ubka10 .o1ubka3s,
+html:not(.o1ubka10) .o1ubka3r {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4j);
 }
-html._2b382h10 ._2b382h3u,
-html:not(._2b382h10) ._2b382h3t {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxak);
+html.o1ubka10 .o1ubka3u,
+html:not(.o1ubka10) .o1ubka3t {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4k);
 }
-html._2b382h10 ._2b382h3w,
-html:not(._2b382h10) ._2b382h3v {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxak);
+html.o1ubka10 .o1ubka3w,
+html:not(.o1ubka10) .o1ubka3v {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4k);
 }
-html._2b382h10 ._2b382h3y,
-html:not(._2b382h10) ._2b382h3x {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxal);
+html.o1ubka10 .o1ubka3y,
+html:not(.o1ubka10) .o1ubka3x {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4l);
 }
-html._2b382h10 ._2b382h40,
-html:not(._2b382h10) ._2b382h3z {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxan);
+html.o1ubka10 .o1ubka40,
+html:not(.o1ubka10) .o1ubka3z {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4n);
 }
-html._2b382h10 ._2b382h42,
-html:not(._2b382h10) ._2b382h41 {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxan);
+html.o1ubka10 .o1ubka42,
+html:not(.o1ubka10) .o1ubka41 {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4n);
 }
-html._2b382h10 ._2b382h44,
-html:not(._2b382h10) ._2b382h43 {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxao);
+html.o1ubka10 .o1ubka44,
+html:not(.o1ubka10) .o1ubka43 {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4o);
 }
-html._2b382h10 ._2b382h46,
-html:not(._2b382h10) ._2b382h45 {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxao);
+html.o1ubka10 .o1ubka46,
+html:not(.o1ubka10) .o1ubka45 {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4o);
 }
-html._2b382h10 ._2b382h48,
-html:not(._2b382h10) ._2b382h47 {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxap);
+html.o1ubka10 .o1ubka48,
+html:not(.o1ubka10) .o1ubka47 {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4p);
 }
-html._2b382h10 ._2b382h4a,
-html:not(._2b382h10) ._2b382h49 {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxaq);
+html.o1ubka10 .o1ubka4a,
+html:not(.o1ubka10) .o1ubka49 {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4q);
 }
-html._2b382h10 ._2b382h4c,
-html:not(._2b382h10) ._2b382h4b {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxar);
+html.o1ubka10 .o1ubka4c,
+html:not(.o1ubka10) .o1ubka4b {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4r);
 }
-html._2b382h10 ._2b382h4e,
-html:not(._2b382h10) ._2b382h4d {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxar);
+html.o1ubka10 .o1ubka4e,
+html:not(.o1ubka10) .o1ubka4d {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4r);
 }
-html._2b382h10 ._2b382h4g,
-html:not(._2b382h10) ._2b382h4f {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxas);
+html.o1ubka10 .o1ubka4g,
+html:not(.o1ubka10) .o1ubka4f {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4s);
 }
-html._2b382h10 ._2b382h4i,
-html:not(._2b382h10) ._2b382h4h {
-  box-shadow: inset 0 0 0 var(--qvowxaz) var(--qvowxas);
+html.o1ubka10 .o1ubka4i,
+html:not(.o1ubka10) .o1ubka4h {
+  box-shadow: inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4s);
 }
-html._2b382h10 ._2b382h4k,
-html:not(._2b382h10) ._2b382h4j {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxat);
+html.o1ubka10 .o1ubka4k,
+html:not(.o1ubka10) .o1ubka4j {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4t);
 }
-html._2b382h10 ._2b382h4m,
-html:not(._2b382h10) ._2b382h4l {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxau);
+html.o1ubka10 .o1ubka4m,
+html:not(.o1ubka10) .o1ubka4l {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4u);
 }
-html._2b382h10 ._2b382h4o,
-html:not(._2b382h10) ._2b382h4n {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxav);
+html.o1ubka10 .o1ubka4o,
+html:not(.o1ubka10) .o1ubka4n {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4v);
 }
-html._2b382h10 ._2b382h4q,
-html:not(._2b382h10) ._2b382h4p {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxaw);
+html.o1ubka10 .o1ubka4q,
+html:not(.o1ubka10) .o1ubka4p {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4w);
 }
-html._2b382h10 ._2b382h4s,
-html:not(._2b382h10) ._2b382h4r {
-  box-shadow: inset 0 0 0 var(--qvowxay) var(--qvowxax);
+html.o1ubka10 .o1ubka4s,
+html:not(.o1ubka10) .o1ubka4r {
+  box-shadow: inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4x);
 }
-html._2b382h10 ._2b382h4u,
-html:not(._2b382h10) ._2b382h4t {
-  box-shadow: 0 0 0 var(--qvowxa10) var(--qvowxam);
+html.o1ubka10 .o1ubka4u,
+html:not(.o1ubka10) .o1ubka4t {
+  box-shadow: 0 0 0 var(--_1vwoat410) var(--_1vwoat4m);
 }
-._2b382h4v {
+.o1ubka4v {
   display: none;
 }
-._2b382h4z {
+.o1ubka4z {
   display: block;
 }
-._2b382h53 {
+.o1ubka53 {
   display: inline;
 }
-._2b382h57 {
+.o1ubka57 {
   display: inline-block;
 }
-._2b382h5b {
+.o1ubka5b {
   display: flex;
 }
-._2b382h5f {
+.o1ubka5f {
   position: relative;
 }
-._2b382h5j {
+.o1ubka5j {
   position: absolute;
 }
-._2b382h5n {
+.o1ubka5n {
   position: fixed;
 }
-._2b382h5r {
+.o1ubka5r {
   border-radius: 0;
 }
-._2b382h5v {
+.o1ubka5v {
   border-radius: 9999px;
 }
-._2b382h5z {
-  border-radius: var(--qvowxab);
+.o1ubka5z {
+  border-radius: var(--_1vwoat4b);
 }
-._2b382h63 {
-  border-radius: var(--qvowxac);
+.o1ubka63 {
+  border-radius: var(--_1vwoat4c);
 }
-._2b382h67 {
-  border-radius: var(--qvowxad);
+.o1ubka67 {
+  border-radius: var(--_1vwoat4d);
 }
-._2b382h6b {
-  border-radius: var(--qvowxae);
+.o1ubka6b {
+  border-radius: var(--_1vwoat4e);
 }
-._2b382h6f {
-  gap: var(--qvowxa0);
+.o1ubka6f {
+  gap: var(--_1vwoat40);
 }
-._2b382h6j {
-  gap: var(--qvowxa1);
+.o1ubka6j {
+  gap: var(--_1vwoat41);
 }
-._2b382h6n {
-  gap: var(--qvowxa2);
+.o1ubka6n {
+  gap: var(--_1vwoat42);
 }
-._2b382h6r {
-  gap: var(--qvowxa3);
+.o1ubka6r {
+  gap: var(--_1vwoat43);
 }
-._2b382h6v {
-  gap: var(--qvowxa4);
+.o1ubka6v {
+  gap: var(--_1vwoat44);
 }
-._2b382h6z {
-  gap: var(--qvowxa5);
+.o1ubka6z {
+  gap: var(--_1vwoat45);
 }
-._2b382h73 {
-  gap: var(--qvowxa6);
+.o1ubka73 {
+  gap: var(--_1vwoat46);
 }
-._2b382h77 {
-  gap: var(--qvowxa7);
+.o1ubka77 {
+  gap: var(--_1vwoat47);
 }
-._2b382h7b {
-  gap: var(--qvowxa8);
+.o1ubka7b {
+  gap: var(--_1vwoat48);
 }
-._2b382h7f {
+.o1ubka7f {
   gap: 0;
 }
-._2b382h7j {
-  padding-top: var(--qvowxa0);
+.o1ubka7j {
+  padding-top: var(--_1vwoat40);
 }
-._2b382h7n {
-  padding-top: var(--qvowxa1);
+.o1ubka7n {
+  padding-top: var(--_1vwoat41);
 }
-._2b382h7r {
-  padding-top: var(--qvowxa2);
+.o1ubka7r {
+  padding-top: var(--_1vwoat42);
 }
-._2b382h7v {
-  padding-top: var(--qvowxa3);
+.o1ubka7v {
+  padding-top: var(--_1vwoat43);
 }
-._2b382h7z {
-  padding-top: var(--qvowxa4);
+.o1ubka7z {
+  padding-top: var(--_1vwoat44);
 }
-._2b382h83 {
-  padding-top: var(--qvowxa5);
+.o1ubka83 {
+  padding-top: var(--_1vwoat45);
 }
-._2b382h87 {
-  padding-top: var(--qvowxa6);
+.o1ubka87 {
+  padding-top: var(--_1vwoat46);
 }
-._2b382h8b {
-  padding-top: var(--qvowxa7);
+.o1ubka8b {
+  padding-top: var(--_1vwoat47);
 }
-._2b382h8f {
-  padding-top: var(--qvowxa8);
+.o1ubka8f {
+  padding-top: var(--_1vwoat48);
 }
-._2b382h8j {
+.o1ubka8j {
   padding-top: 0;
 }
-._2b382h8n {
-  padding-bottom: var(--qvowxa0);
+.o1ubka8n {
+  padding-bottom: var(--_1vwoat40);
 }
-._2b382h8r {
-  padding-bottom: var(--qvowxa1);
+.o1ubka8r {
+  padding-bottom: var(--_1vwoat41);
 }
-._2b382h8v {
-  padding-bottom: var(--qvowxa2);
+.o1ubka8v {
+  padding-bottom: var(--_1vwoat42);
 }
-._2b382h8z {
-  padding-bottom: var(--qvowxa3);
+.o1ubka8z {
+  padding-bottom: var(--_1vwoat43);
 }
-._2b382h93 {
-  padding-bottom: var(--qvowxa4);
+.o1ubka93 {
+  padding-bottom: var(--_1vwoat44);
 }
-._2b382h97 {
-  padding-bottom: var(--qvowxa5);
+.o1ubka97 {
+  padding-bottom: var(--_1vwoat45);
 }
-._2b382h9b {
-  padding-bottom: var(--qvowxa6);
+.o1ubka9b {
+  padding-bottom: var(--_1vwoat46);
 }
-._2b382h9f {
-  padding-bottom: var(--qvowxa7);
+.o1ubka9f {
+  padding-bottom: var(--_1vwoat47);
 }
-._2b382h9j {
-  padding-bottom: var(--qvowxa8);
+.o1ubka9j {
+  padding-bottom: var(--_1vwoat48);
 }
-._2b382h9n {
+.o1ubka9n {
   padding-bottom: 0;
 }
-._2b382h9r {
-  padding-right: var(--qvowxa0);
+.o1ubka9r {
+  padding-right: var(--_1vwoat40);
 }
-._2b382h9v {
-  padding-right: var(--qvowxa1);
+.o1ubka9v {
+  padding-right: var(--_1vwoat41);
 }
-._2b382h9z {
-  padding-right: var(--qvowxa2);
+.o1ubka9z {
+  padding-right: var(--_1vwoat42);
 }
-._2b382ha3 {
-  padding-right: var(--qvowxa3);
+.o1ubkaa3 {
+  padding-right: var(--_1vwoat43);
 }
-._2b382ha7 {
-  padding-right: var(--qvowxa4);
+.o1ubkaa7 {
+  padding-right: var(--_1vwoat44);
 }
-._2b382hab {
-  padding-right: var(--qvowxa5);
+.o1ubkaab {
+  padding-right: var(--_1vwoat45);
 }
-._2b382haf {
-  padding-right: var(--qvowxa6);
+.o1ubkaaf {
+  padding-right: var(--_1vwoat46);
 }
-._2b382haj {
-  padding-right: var(--qvowxa7);
+.o1ubkaaj {
+  padding-right: var(--_1vwoat47);
 }
-._2b382han {
-  padding-right: var(--qvowxa8);
+.o1ubkaan {
+  padding-right: var(--_1vwoat48);
 }
-._2b382har {
+.o1ubkaar {
   padding-right: 0;
 }
-._2b382hav {
-  padding-left: var(--qvowxa0);
+.o1ubkaav {
+  padding-left: var(--_1vwoat40);
 }
-._2b382haz {
-  padding-left: var(--qvowxa1);
+.o1ubkaaz {
+  padding-left: var(--_1vwoat41);
 }
-._2b382hb3 {
-  padding-left: var(--qvowxa2);
+.o1ubkab3 {
+  padding-left: var(--_1vwoat42);
 }
-._2b382hb7 {
-  padding-left: var(--qvowxa3);
+.o1ubkab7 {
+  padding-left: var(--_1vwoat43);
 }
-._2b382hbb {
-  padding-left: var(--qvowxa4);
+.o1ubkabb {
+  padding-left: var(--_1vwoat44);
 }
-._2b382hbf {
-  padding-left: var(--qvowxa5);
+.o1ubkabf {
+  padding-left: var(--_1vwoat45);
 }
-._2b382hbj {
-  padding-left: var(--qvowxa6);
+.o1ubkabj {
+  padding-left: var(--_1vwoat46);
 }
-._2b382hbn {
-  padding-left: var(--qvowxa7);
+.o1ubkabn {
+  padding-left: var(--_1vwoat47);
 }
-._2b382hbr {
-  padding-left: var(--qvowxa8);
+.o1ubkabr {
+  padding-left: var(--_1vwoat48);
 }
-._2b382hbv {
+.o1ubkabv {
   padding-left: 0;
 }
-._2b382hbz {
-  margin-top: var(--qvowxa0);
+.o1ubkabz {
+  margin-top: var(--_1vwoat40);
 }
-._2b382hc3 {
-  margin-top: var(--qvowxa1);
+.o1ubkac3 {
+  margin-top: var(--_1vwoat41);
 }
-._2b382hc7 {
-  margin-top: var(--qvowxa2);
+.o1ubkac7 {
+  margin-top: var(--_1vwoat42);
 }
-._2b382hcb {
-  margin-top: var(--qvowxa3);
+.o1ubkacb {
+  margin-top: var(--_1vwoat43);
 }
-._2b382hcf {
-  margin-top: var(--qvowxa4);
+.o1ubkacf {
+  margin-top: var(--_1vwoat44);
 }
-._2b382hcj {
-  margin-top: var(--qvowxa5);
+.o1ubkacj {
+  margin-top: var(--_1vwoat45);
 }
-._2b382hcn {
-  margin-top: var(--qvowxa6);
+.o1ubkacn {
+  margin-top: var(--_1vwoat46);
 }
-._2b382hcr {
-  margin-top: var(--qvowxa7);
+.o1ubkacr {
+  margin-top: var(--_1vwoat47);
 }
-._2b382hcv {
-  margin-top: var(--qvowxa8);
+.o1ubkacv {
+  margin-top: var(--_1vwoat48);
 }
-._2b382hcz {
+.o1ubkacz {
   margin-top: 0;
 }
-._2b382hd3 {
-  margin-bottom: var(--qvowxa0);
+.o1ubkad3 {
+  margin-bottom: var(--_1vwoat40);
 }
-._2b382hd7 {
-  margin-bottom: var(--qvowxa1);
+.o1ubkad7 {
+  margin-bottom: var(--_1vwoat41);
 }
-._2b382hdb {
-  margin-bottom: var(--qvowxa2);
+.o1ubkadb {
+  margin-bottom: var(--_1vwoat42);
 }
-._2b382hdf {
-  margin-bottom: var(--qvowxa3);
+.o1ubkadf {
+  margin-bottom: var(--_1vwoat43);
 }
-._2b382hdj {
-  margin-bottom: var(--qvowxa4);
+.o1ubkadj {
+  margin-bottom: var(--_1vwoat44);
 }
-._2b382hdn {
-  margin-bottom: var(--qvowxa5);
+.o1ubkadn {
+  margin-bottom: var(--_1vwoat45);
 }
-._2b382hdr {
-  margin-bottom: var(--qvowxa6);
+.o1ubkadr {
+  margin-bottom: var(--_1vwoat46);
 }
-._2b382hdv {
-  margin-bottom: var(--qvowxa7);
+.o1ubkadv {
+  margin-bottom: var(--_1vwoat47);
 }
-._2b382hdz {
-  margin-bottom: var(--qvowxa8);
+.o1ubkadz {
+  margin-bottom: var(--_1vwoat48);
 }
-._2b382he3 {
+.o1ubkae3 {
   margin-bottom: 0;
 }
-._2b382he7 {
-  margin-right: var(--qvowxa0);
+.o1ubkae7 {
+  margin-right: var(--_1vwoat40);
 }
-._2b382heb {
-  margin-right: var(--qvowxa1);
+.o1ubkaeb {
+  margin-right: var(--_1vwoat41);
 }
-._2b382hef {
-  margin-right: var(--qvowxa2);
+.o1ubkaef {
+  margin-right: var(--_1vwoat42);
 }
-._2b382hej {
-  margin-right: var(--qvowxa3);
+.o1ubkaej {
+  margin-right: var(--_1vwoat43);
 }
-._2b382hen {
-  margin-right: var(--qvowxa4);
+.o1ubkaen {
+  margin-right: var(--_1vwoat44);
 }
-._2b382her {
-  margin-right: var(--qvowxa5);
+.o1ubkaer {
+  margin-right: var(--_1vwoat45);
 }
-._2b382hev {
-  margin-right: var(--qvowxa6);
+.o1ubkaev {
+  margin-right: var(--_1vwoat46);
 }
-._2b382hez {
-  margin-right: var(--qvowxa7);
+.o1ubkaez {
+  margin-right: var(--_1vwoat47);
 }
-._2b382hf3 {
-  margin-right: var(--qvowxa8);
+.o1ubkaf3 {
+  margin-right: var(--_1vwoat48);
 }
-._2b382hf7 {
+.o1ubkaf7 {
   margin-right: 0;
 }
-._2b382hfb {
-  margin-left: var(--qvowxa0);
+.o1ubkafb {
+  margin-left: var(--_1vwoat40);
 }
-._2b382hff {
-  margin-left: var(--qvowxa1);
+.o1ubkaff {
+  margin-left: var(--_1vwoat41);
 }
-._2b382hfj {
-  margin-left: var(--qvowxa2);
+.o1ubkafj {
+  margin-left: var(--_1vwoat42);
 }
-._2b382hfn {
-  margin-left: var(--qvowxa3);
+.o1ubkafn {
+  margin-left: var(--_1vwoat43);
 }
-._2b382hfr {
-  margin-left: var(--qvowxa4);
+.o1ubkafr {
+  margin-left: var(--_1vwoat44);
 }
-._2b382hfv {
-  margin-left: var(--qvowxa5);
+.o1ubkafv {
+  margin-left: var(--_1vwoat45);
 }
-._2b382hfz {
-  margin-left: var(--qvowxa6);
+.o1ubkafz {
+  margin-left: var(--_1vwoat46);
 }
-._2b382hg3 {
-  margin-left: var(--qvowxa7);
+.o1ubkag3 {
+  margin-left: var(--_1vwoat47);
 }
-._2b382hg7 {
-  margin-left: var(--qvowxa8);
+.o1ubkag7 {
+  margin-left: var(--_1vwoat48);
 }
-._2b382hgb {
+.o1ubkagb {
   margin-left: 0;
 }
-._2b382hgf {
+.o1ubkagf {
   align-items: flex-start;
 }
-._2b382hgj {
+.o1ubkagj {
   align-items: center;
 }
-._2b382hgn {
+.o1ubkagn {
   align-items: flex-end;
 }
-._2b382hgr {
+.o1ubkagr {
   justify-content: flex-start;
 }
-._2b382hgv {
+.o1ubkagv {
   justify-content: center;
 }
-._2b382hgz {
+.o1ubkagz {
   justify-content: flex-end;
 }
-._2b382hh3 {
+.o1ubkah3 {
   justify-content: space-between;
 }
-._2b382hh7 {
+.o1ubkah7 {
   flex-direction: row;
 }
-._2b382hhb {
+.o1ubkahb {
   flex-direction: row-reverse;
 }
-._2b382hhf {
+.o1ubkahf {
   flex-direction: column;
 }
-._2b382hhj {
+.o1ubkahj {
   flex-direction: column-reverse;
 }
-._2b382hhn {
+.o1ubkahn {
   flex-wrap: wrap;
 }
-._2b382hhr {
+.o1ubkahr {
   flex-wrap: nowrap;
 }
-._2b382hhv {
+.o1ubkahv {
   flex-shrink: 0;
 }
-._2b382hhz {
+.o1ubkahz {
   flex-grow: 0;
 }
-._2b382hi3 {
+.o1ubkai3 {
   flex-grow: 1;
 }
-._2b382hi7 {
+.o1ubkai7 {
   text-align: left;
 }
-._2b382hib {
+.o1ubkaib {
   text-align: center;
 }
-._2b382hif {
+.o1ubkaif {
   text-align: right;
 }
 @media screen and (min-width: 740px) {
-  ._2b382h4w {
+  .o1ubka4w {
     display: none;
   }
-  ._2b382h50 {
+  .o1ubka50 {
     display: block;
   }
-  ._2b382h54 {
+  .o1ubka54 {
     display: inline;
   }
-  ._2b382h58 {
+  .o1ubka58 {
     display: inline-block;
   }
-  ._2b382h5c {
+  .o1ubka5c {
     display: flex;
   }
-  ._2b382h5g {
+  .o1ubka5g {
     position: relative;
   }
-  ._2b382h5k {
+  .o1ubka5k {
     position: absolute;
   }
-  ._2b382h5o {
+  .o1ubka5o {
     position: fixed;
   }
-  ._2b382h5s {
+  .o1ubka5s {
     border-radius: 0;
   }
-  ._2b382h5w {
+  .o1ubka5w {
     border-radius: 9999px;
   }
-  ._2b382h60 {
-    border-radius: var(--qvowxab);
+  .o1ubka60 {
+    border-radius: var(--_1vwoat4b);
   }
-  ._2b382h64 {
-    border-radius: var(--qvowxac);
+  .o1ubka64 {
+    border-radius: var(--_1vwoat4c);
   }
-  ._2b382h68 {
-    border-radius: var(--qvowxad);
+  .o1ubka68 {
+    border-radius: var(--_1vwoat4d);
   }
-  ._2b382h6c {
-    border-radius: var(--qvowxae);
+  .o1ubka6c {
+    border-radius: var(--_1vwoat4e);
   }
-  ._2b382h6g {
-    gap: var(--qvowxa0);
+  .o1ubka6g {
+    gap: var(--_1vwoat40);
   }
-  ._2b382h6k {
-    gap: var(--qvowxa1);
+  .o1ubka6k {
+    gap: var(--_1vwoat41);
   }
-  ._2b382h6o {
-    gap: var(--qvowxa2);
+  .o1ubka6o {
+    gap: var(--_1vwoat42);
   }
-  ._2b382h6s {
-    gap: var(--qvowxa3);
+  .o1ubka6s {
+    gap: var(--_1vwoat43);
   }
-  ._2b382h6w {
-    gap: var(--qvowxa4);
+  .o1ubka6w {
+    gap: var(--_1vwoat44);
   }
-  ._2b382h70 {
-    gap: var(--qvowxa5);
+  .o1ubka70 {
+    gap: var(--_1vwoat45);
   }
-  ._2b382h74 {
-    gap: var(--qvowxa6);
+  .o1ubka74 {
+    gap: var(--_1vwoat46);
   }
-  ._2b382h78 {
-    gap: var(--qvowxa7);
+  .o1ubka78 {
+    gap: var(--_1vwoat47);
   }
-  ._2b382h7c {
-    gap: var(--qvowxa8);
+  .o1ubka7c {
+    gap: var(--_1vwoat48);
   }
-  ._2b382h7g {
+  .o1ubka7g {
     gap: 0;
   }
-  ._2b382h7k {
-    padding-top: var(--qvowxa0);
+  .o1ubka7k {
+    padding-top: var(--_1vwoat40);
   }
-  ._2b382h7o {
-    padding-top: var(--qvowxa1);
+  .o1ubka7o {
+    padding-top: var(--_1vwoat41);
   }
-  ._2b382h7s {
-    padding-top: var(--qvowxa2);
+  .o1ubka7s {
+    padding-top: var(--_1vwoat42);
   }
-  ._2b382h7w {
-    padding-top: var(--qvowxa3);
+  .o1ubka7w {
+    padding-top: var(--_1vwoat43);
   }
-  ._2b382h80 {
-    padding-top: var(--qvowxa4);
+  .o1ubka80 {
+    padding-top: var(--_1vwoat44);
   }
-  ._2b382h84 {
-    padding-top: var(--qvowxa5);
+  .o1ubka84 {
+    padding-top: var(--_1vwoat45);
   }
-  ._2b382h88 {
-    padding-top: var(--qvowxa6);
+  .o1ubka88 {
+    padding-top: var(--_1vwoat46);
   }
-  ._2b382h8c {
-    padding-top: var(--qvowxa7);
+  .o1ubka8c {
+    padding-top: var(--_1vwoat47);
   }
-  ._2b382h8g {
-    padding-top: var(--qvowxa8);
+  .o1ubka8g {
+    padding-top: var(--_1vwoat48);
   }
-  ._2b382h8k {
+  .o1ubka8k {
     padding-top: 0;
   }
-  ._2b382h8o {
-    padding-bottom: var(--qvowxa0);
+  .o1ubka8o {
+    padding-bottom: var(--_1vwoat40);
   }
-  ._2b382h8s {
-    padding-bottom: var(--qvowxa1);
+  .o1ubka8s {
+    padding-bottom: var(--_1vwoat41);
   }
-  ._2b382h8w {
-    padding-bottom: var(--qvowxa2);
+  .o1ubka8w {
+    padding-bottom: var(--_1vwoat42);
   }
-  ._2b382h90 {
-    padding-bottom: var(--qvowxa3);
+  .o1ubka90 {
+    padding-bottom: var(--_1vwoat43);
   }
-  ._2b382h94 {
-    padding-bottom: var(--qvowxa4);
+  .o1ubka94 {
+    padding-bottom: var(--_1vwoat44);
   }
-  ._2b382h98 {
-    padding-bottom: var(--qvowxa5);
+  .o1ubka98 {
+    padding-bottom: var(--_1vwoat45);
   }
-  ._2b382h9c {
-    padding-bottom: var(--qvowxa6);
+  .o1ubka9c {
+    padding-bottom: var(--_1vwoat46);
   }
-  ._2b382h9g {
-    padding-bottom: var(--qvowxa7);
+  .o1ubka9g {
+    padding-bottom: var(--_1vwoat47);
   }
-  ._2b382h9k {
-    padding-bottom: var(--qvowxa8);
+  .o1ubka9k {
+    padding-bottom: var(--_1vwoat48);
   }
-  ._2b382h9o {
+  .o1ubka9o {
     padding-bottom: 0;
   }
-  ._2b382h9s {
-    padding-right: var(--qvowxa0);
+  .o1ubka9s {
+    padding-right: var(--_1vwoat40);
   }
-  ._2b382h9w {
-    padding-right: var(--qvowxa1);
+  .o1ubka9w {
+    padding-right: var(--_1vwoat41);
   }
-  ._2b382ha0 {
-    padding-right: var(--qvowxa2);
+  .o1ubkaa0 {
+    padding-right: var(--_1vwoat42);
   }
-  ._2b382ha4 {
-    padding-right: var(--qvowxa3);
+  .o1ubkaa4 {
+    padding-right: var(--_1vwoat43);
   }
-  ._2b382ha8 {
-    padding-right: var(--qvowxa4);
+  .o1ubkaa8 {
+    padding-right: var(--_1vwoat44);
   }
-  ._2b382hac {
-    padding-right: var(--qvowxa5);
+  .o1ubkaac {
+    padding-right: var(--_1vwoat45);
   }
-  ._2b382hag {
-    padding-right: var(--qvowxa6);
+  .o1ubkaag {
+    padding-right: var(--_1vwoat46);
   }
-  ._2b382hak {
-    padding-right: var(--qvowxa7);
+  .o1ubkaak {
+    padding-right: var(--_1vwoat47);
   }
-  ._2b382hao {
-    padding-right: var(--qvowxa8);
+  .o1ubkaao {
+    padding-right: var(--_1vwoat48);
   }
-  ._2b382has {
+  .o1ubkaas {
     padding-right: 0;
   }
-  ._2b382haw {
-    padding-left: var(--qvowxa0);
+  .o1ubkaaw {
+    padding-left: var(--_1vwoat40);
   }
-  ._2b382hb0 {
-    padding-left: var(--qvowxa1);
+  .o1ubkab0 {
+    padding-left: var(--_1vwoat41);
   }
-  ._2b382hb4 {
-    padding-left: var(--qvowxa2);
+  .o1ubkab4 {
+    padding-left: var(--_1vwoat42);
   }
-  ._2b382hb8 {
-    padding-left: var(--qvowxa3);
+  .o1ubkab8 {
+    padding-left: var(--_1vwoat43);
   }
-  ._2b382hbc {
-    padding-left: var(--qvowxa4);
+  .o1ubkabc {
+    padding-left: var(--_1vwoat44);
   }
-  ._2b382hbg {
-    padding-left: var(--qvowxa5);
+  .o1ubkabg {
+    padding-left: var(--_1vwoat45);
   }
-  ._2b382hbk {
-    padding-left: var(--qvowxa6);
+  .o1ubkabk {
+    padding-left: var(--_1vwoat46);
   }
-  ._2b382hbo {
-    padding-left: var(--qvowxa7);
+  .o1ubkabo {
+    padding-left: var(--_1vwoat47);
   }
-  ._2b382hbs {
-    padding-left: var(--qvowxa8);
+  .o1ubkabs {
+    padding-left: var(--_1vwoat48);
   }
-  ._2b382hbw {
+  .o1ubkabw {
     padding-left: 0;
   }
-  ._2b382hc0 {
-    margin-top: var(--qvowxa0);
+  .o1ubkac0 {
+    margin-top: var(--_1vwoat40);
   }
-  ._2b382hc4 {
-    margin-top: var(--qvowxa1);
+  .o1ubkac4 {
+    margin-top: var(--_1vwoat41);
   }
-  ._2b382hc8 {
-    margin-top: var(--qvowxa2);
+  .o1ubkac8 {
+    margin-top: var(--_1vwoat42);
   }
-  ._2b382hcc {
-    margin-top: var(--qvowxa3);
+  .o1ubkacc {
+    margin-top: var(--_1vwoat43);
   }
-  ._2b382hcg {
-    margin-top: var(--qvowxa4);
+  .o1ubkacg {
+    margin-top: var(--_1vwoat44);
   }
-  ._2b382hck {
-    margin-top: var(--qvowxa5);
+  .o1ubkack {
+    margin-top: var(--_1vwoat45);
   }
-  ._2b382hco {
-    margin-top: var(--qvowxa6);
+  .o1ubkaco {
+    margin-top: var(--_1vwoat46);
   }
-  ._2b382hcs {
-    margin-top: var(--qvowxa7);
+  .o1ubkacs {
+    margin-top: var(--_1vwoat47);
   }
-  ._2b382hcw {
-    margin-top: var(--qvowxa8);
+  .o1ubkacw {
+    margin-top: var(--_1vwoat48);
   }
-  ._2b382hd0 {
+  .o1ubkad0 {
     margin-top: 0;
   }
-  ._2b382hd4 {
-    margin-bottom: var(--qvowxa0);
+  .o1ubkad4 {
+    margin-bottom: var(--_1vwoat40);
   }
-  ._2b382hd8 {
-    margin-bottom: var(--qvowxa1);
+  .o1ubkad8 {
+    margin-bottom: var(--_1vwoat41);
   }
-  ._2b382hdc {
-    margin-bottom: var(--qvowxa2);
+  .o1ubkadc {
+    margin-bottom: var(--_1vwoat42);
   }
-  ._2b382hdg {
-    margin-bottom: var(--qvowxa3);
+  .o1ubkadg {
+    margin-bottom: var(--_1vwoat43);
   }
-  ._2b382hdk {
-    margin-bottom: var(--qvowxa4);
+  .o1ubkadk {
+    margin-bottom: var(--_1vwoat44);
   }
-  ._2b382hdo {
-    margin-bottom: var(--qvowxa5);
+  .o1ubkado {
+    margin-bottom: var(--_1vwoat45);
   }
-  ._2b382hds {
-    margin-bottom: var(--qvowxa6);
+  .o1ubkads {
+    margin-bottom: var(--_1vwoat46);
   }
-  ._2b382hdw {
-    margin-bottom: var(--qvowxa7);
+  .o1ubkadw {
+    margin-bottom: var(--_1vwoat47);
   }
-  ._2b382he0 {
-    margin-bottom: var(--qvowxa8);
+  .o1ubkae0 {
+    margin-bottom: var(--_1vwoat48);
   }
-  ._2b382he4 {
+  .o1ubkae4 {
     margin-bottom: 0;
   }
-  ._2b382he8 {
-    margin-right: var(--qvowxa0);
+  .o1ubkae8 {
+    margin-right: var(--_1vwoat40);
   }
-  ._2b382hec {
-    margin-right: var(--qvowxa1);
+  .o1ubkaec {
+    margin-right: var(--_1vwoat41);
   }
-  ._2b382heg {
-    margin-right: var(--qvowxa2);
+  .o1ubkaeg {
+    margin-right: var(--_1vwoat42);
   }
-  ._2b382hek {
-    margin-right: var(--qvowxa3);
+  .o1ubkaek {
+    margin-right: var(--_1vwoat43);
   }
-  ._2b382heo {
-    margin-right: var(--qvowxa4);
+  .o1ubkaeo {
+    margin-right: var(--_1vwoat44);
   }
-  ._2b382hes {
-    margin-right: var(--qvowxa5);
+  .o1ubkaes {
+    margin-right: var(--_1vwoat45);
   }
-  ._2b382hew {
-    margin-right: var(--qvowxa6);
+  .o1ubkaew {
+    margin-right: var(--_1vwoat46);
   }
-  ._2b382hf0 {
-    margin-right: var(--qvowxa7);
+  .o1ubkaf0 {
+    margin-right: var(--_1vwoat47);
   }
-  ._2b382hf4 {
-    margin-right: var(--qvowxa8);
+  .o1ubkaf4 {
+    margin-right: var(--_1vwoat48);
   }
-  ._2b382hf8 {
+  .o1ubkaf8 {
     margin-right: 0;
   }
-  ._2b382hfc {
-    margin-left: var(--qvowxa0);
+  .o1ubkafc {
+    margin-left: var(--_1vwoat40);
   }
-  ._2b382hfg {
-    margin-left: var(--qvowxa1);
+  .o1ubkafg {
+    margin-left: var(--_1vwoat41);
   }
-  ._2b382hfk {
-    margin-left: var(--qvowxa2);
+  .o1ubkafk {
+    margin-left: var(--_1vwoat42);
   }
-  ._2b382hfo {
-    margin-left: var(--qvowxa3);
+  .o1ubkafo {
+    margin-left: var(--_1vwoat43);
   }
-  ._2b382hfs {
-    margin-left: var(--qvowxa4);
+  .o1ubkafs {
+    margin-left: var(--_1vwoat44);
   }
-  ._2b382hfw {
-    margin-left: var(--qvowxa5);
+  .o1ubkafw {
+    margin-left: var(--_1vwoat45);
   }
-  ._2b382hg0 {
-    margin-left: var(--qvowxa6);
+  .o1ubkag0 {
+    margin-left: var(--_1vwoat46);
   }
-  ._2b382hg4 {
-    margin-left: var(--qvowxa7);
+  .o1ubkag4 {
+    margin-left: var(--_1vwoat47);
   }
-  ._2b382hg8 {
-    margin-left: var(--qvowxa8);
+  .o1ubkag8 {
+    margin-left: var(--_1vwoat48);
   }
-  ._2b382hgc {
+  .o1ubkagc {
     margin-left: 0;
   }
-  ._2b382hgg {
+  .o1ubkagg {
     align-items: flex-start;
   }
-  ._2b382hgk {
+  .o1ubkagk {
     align-items: center;
   }
-  ._2b382hgo {
+  .o1ubkago {
     align-items: flex-end;
   }
-  ._2b382hgs {
+  .o1ubkags {
     justify-content: flex-start;
   }
-  ._2b382hgw {
+  .o1ubkagw {
     justify-content: center;
   }
-  ._2b382hh0 {
+  .o1ubkah0 {
     justify-content: flex-end;
   }
-  ._2b382hh4 {
+  .o1ubkah4 {
     justify-content: space-between;
   }
-  ._2b382hh8 {
+  .o1ubkah8 {
     flex-direction: row;
   }
-  ._2b382hhc {
+  .o1ubkahc {
     flex-direction: row-reverse;
   }
-  ._2b382hhg {
+  .o1ubkahg {
     flex-direction: column;
   }
-  ._2b382hhk {
+  .o1ubkahk {
     flex-direction: column-reverse;
   }
-  ._2b382hho {
+  .o1ubkaho {
     flex-wrap: wrap;
   }
-  ._2b382hhs {
+  .o1ubkahs {
     flex-wrap: nowrap;
   }
-  ._2b382hhw {
+  .o1ubkahw {
     flex-shrink: 0;
   }
-  ._2b382hi0 {
+  .o1ubkai0 {
     flex-grow: 0;
   }
-  ._2b382hi4 {
+  .o1ubkai4 {
     flex-grow: 1;
   }
-  ._2b382hi8 {
+  .o1ubkai8 {
     text-align: left;
   }
-  ._2b382hic {
+  .o1ubkaic {
     text-align: center;
   }
-  ._2b382hig {
+  .o1ubkaig {
     text-align: right;
   }
 }
 @media screen and (min-width: 992px) {
-  ._2b382h4x {
+  .o1ubka4x {
     display: none;
   }
-  ._2b382h51 {
+  .o1ubka51 {
     display: block;
   }
-  ._2b382h55 {
+  .o1ubka55 {
     display: inline;
   }
-  ._2b382h59 {
+  .o1ubka59 {
     display: inline-block;
   }
-  ._2b382h5d {
+  .o1ubka5d {
     display: flex;
   }
-  ._2b382h5h {
+  .o1ubka5h {
     position: relative;
   }
-  ._2b382h5l {
+  .o1ubka5l {
     position: absolute;
   }
-  ._2b382h5p {
+  .o1ubka5p {
     position: fixed;
   }
-  ._2b382h5t {
+  .o1ubka5t {
     border-radius: 0;
   }
-  ._2b382h5x {
+  .o1ubka5x {
     border-radius: 9999px;
   }
-  ._2b382h61 {
-    border-radius: var(--qvowxab);
+  .o1ubka61 {
+    border-radius: var(--_1vwoat4b);
   }
-  ._2b382h65 {
-    border-radius: var(--qvowxac);
+  .o1ubka65 {
+    border-radius: var(--_1vwoat4c);
   }
-  ._2b382h69 {
-    border-radius: var(--qvowxad);
+  .o1ubka69 {
+    border-radius: var(--_1vwoat4d);
   }
-  ._2b382h6d {
-    border-radius: var(--qvowxae);
+  .o1ubka6d {
+    border-radius: var(--_1vwoat4e);
   }
-  ._2b382h6h {
-    gap: var(--qvowxa0);
+  .o1ubka6h {
+    gap: var(--_1vwoat40);
   }
-  ._2b382h6l {
-    gap: var(--qvowxa1);
+  .o1ubka6l {
+    gap: var(--_1vwoat41);
   }
-  ._2b382h6p {
-    gap: var(--qvowxa2);
+  .o1ubka6p {
+    gap: var(--_1vwoat42);
   }
-  ._2b382h6t {
-    gap: var(--qvowxa3);
+  .o1ubka6t {
+    gap: var(--_1vwoat43);
   }
-  ._2b382h6x {
-    gap: var(--qvowxa4);
+  .o1ubka6x {
+    gap: var(--_1vwoat44);
   }
-  ._2b382h71 {
-    gap: var(--qvowxa5);
+  .o1ubka71 {
+    gap: var(--_1vwoat45);
   }
-  ._2b382h75 {
-    gap: var(--qvowxa6);
+  .o1ubka75 {
+    gap: var(--_1vwoat46);
   }
-  ._2b382h79 {
-    gap: var(--qvowxa7);
+  .o1ubka79 {
+    gap: var(--_1vwoat47);
   }
-  ._2b382h7d {
-    gap: var(--qvowxa8);
+  .o1ubka7d {
+    gap: var(--_1vwoat48);
   }
-  ._2b382h7h {
+  .o1ubka7h {
     gap: 0;
   }
-  ._2b382h7l {
-    padding-top: var(--qvowxa0);
+  .o1ubka7l {
+    padding-top: var(--_1vwoat40);
   }
-  ._2b382h7p {
-    padding-top: var(--qvowxa1);
+  .o1ubka7p {
+    padding-top: var(--_1vwoat41);
   }
-  ._2b382h7t {
-    padding-top: var(--qvowxa2);
+  .o1ubka7t {
+    padding-top: var(--_1vwoat42);
   }
-  ._2b382h7x {
-    padding-top: var(--qvowxa3);
+  .o1ubka7x {
+    padding-top: var(--_1vwoat43);
   }
-  ._2b382h81 {
-    padding-top: var(--qvowxa4);
+  .o1ubka81 {
+    padding-top: var(--_1vwoat44);
   }
-  ._2b382h85 {
-    padding-top: var(--qvowxa5);
+  .o1ubka85 {
+    padding-top: var(--_1vwoat45);
   }
-  ._2b382h89 {
-    padding-top: var(--qvowxa6);
+  .o1ubka89 {
+    padding-top: var(--_1vwoat46);
   }
-  ._2b382h8d {
-    padding-top: var(--qvowxa7);
+  .o1ubka8d {
+    padding-top: var(--_1vwoat47);
   }
-  ._2b382h8h {
-    padding-top: var(--qvowxa8);
+  .o1ubka8h {
+    padding-top: var(--_1vwoat48);
   }
-  ._2b382h8l {
+  .o1ubka8l {
     padding-top: 0;
   }
-  ._2b382h8p {
-    padding-bottom: var(--qvowxa0);
+  .o1ubka8p {
+    padding-bottom: var(--_1vwoat40);
   }
-  ._2b382h8t {
-    padding-bottom: var(--qvowxa1);
+  .o1ubka8t {
+    padding-bottom: var(--_1vwoat41);
   }
-  ._2b382h8x {
-    padding-bottom: var(--qvowxa2);
+  .o1ubka8x {
+    padding-bottom: var(--_1vwoat42);
   }
-  ._2b382h91 {
-    padding-bottom: var(--qvowxa3);
+  .o1ubka91 {
+    padding-bottom: var(--_1vwoat43);
   }
-  ._2b382h95 {
-    padding-bottom: var(--qvowxa4);
+  .o1ubka95 {
+    padding-bottom: var(--_1vwoat44);
   }
-  ._2b382h99 {
-    padding-bottom: var(--qvowxa5);
+  .o1ubka99 {
+    padding-bottom: var(--_1vwoat45);
   }
-  ._2b382h9d {
-    padding-bottom: var(--qvowxa6);
+  .o1ubka9d {
+    padding-bottom: var(--_1vwoat46);
   }
-  ._2b382h9h {
-    padding-bottom: var(--qvowxa7);
+  .o1ubka9h {
+    padding-bottom: var(--_1vwoat47);
   }
-  ._2b382h9l {
-    padding-bottom: var(--qvowxa8);
+  .o1ubka9l {
+    padding-bottom: var(--_1vwoat48);
   }
-  ._2b382h9p {
+  .o1ubka9p {
     padding-bottom: 0;
   }
-  ._2b382h9t {
-    padding-right: var(--qvowxa0);
+  .o1ubka9t {
+    padding-right: var(--_1vwoat40);
   }
-  ._2b382h9x {
-    padding-right: var(--qvowxa1);
+  .o1ubka9x {
+    padding-right: var(--_1vwoat41);
   }
-  ._2b382ha1 {
-    padding-right: var(--qvowxa2);
+  .o1ubkaa1 {
+    padding-right: var(--_1vwoat42);
   }
-  ._2b382ha5 {
-    padding-right: var(--qvowxa3);
+  .o1ubkaa5 {
+    padding-right: var(--_1vwoat43);
   }
-  ._2b382ha9 {
-    padding-right: var(--qvowxa4);
+  .o1ubkaa9 {
+    padding-right: var(--_1vwoat44);
   }
-  ._2b382had {
-    padding-right: var(--qvowxa5);
+  .o1ubkaad {
+    padding-right: var(--_1vwoat45);
   }
-  ._2b382hah {
-    padding-right: var(--qvowxa6);
+  .o1ubkaah {
+    padding-right: var(--_1vwoat46);
   }
-  ._2b382hal {
-    padding-right: var(--qvowxa7);
+  .o1ubkaal {
+    padding-right: var(--_1vwoat47);
   }
-  ._2b382hap {
-    padding-right: var(--qvowxa8);
+  .o1ubkaap {
+    padding-right: var(--_1vwoat48);
   }
-  ._2b382hat {
+  .o1ubkaat {
     padding-right: 0;
   }
-  ._2b382hax {
-    padding-left: var(--qvowxa0);
+  .o1ubkaax {
+    padding-left: var(--_1vwoat40);
   }
-  ._2b382hb1 {
-    padding-left: var(--qvowxa1);
+  .o1ubkab1 {
+    padding-left: var(--_1vwoat41);
   }
-  ._2b382hb5 {
-    padding-left: var(--qvowxa2);
+  .o1ubkab5 {
+    padding-left: var(--_1vwoat42);
   }
-  ._2b382hb9 {
-    padding-left: var(--qvowxa3);
+  .o1ubkab9 {
+    padding-left: var(--_1vwoat43);
   }
-  ._2b382hbd {
-    padding-left: var(--qvowxa4);
+  .o1ubkabd {
+    padding-left: var(--_1vwoat44);
   }
-  ._2b382hbh {
-    padding-left: var(--qvowxa5);
+  .o1ubkabh {
+    padding-left: var(--_1vwoat45);
   }
-  ._2b382hbl {
-    padding-left: var(--qvowxa6);
+  .o1ubkabl {
+    padding-left: var(--_1vwoat46);
   }
-  ._2b382hbp {
-    padding-left: var(--qvowxa7);
+  .o1ubkabp {
+    padding-left: var(--_1vwoat47);
   }
-  ._2b382hbt {
-    padding-left: var(--qvowxa8);
+  .o1ubkabt {
+    padding-left: var(--_1vwoat48);
   }
-  ._2b382hbx {
+  .o1ubkabx {
     padding-left: 0;
   }
-  ._2b382hc1 {
-    margin-top: var(--qvowxa0);
+  .o1ubkac1 {
+    margin-top: var(--_1vwoat40);
   }
-  ._2b382hc5 {
-    margin-top: var(--qvowxa1);
+  .o1ubkac5 {
+    margin-top: var(--_1vwoat41);
   }
-  ._2b382hc9 {
-    margin-top: var(--qvowxa2);
+  .o1ubkac9 {
+    margin-top: var(--_1vwoat42);
   }
-  ._2b382hcd {
-    margin-top: var(--qvowxa3);
+  .o1ubkacd {
+    margin-top: var(--_1vwoat43);
   }
-  ._2b382hch {
-    margin-top: var(--qvowxa4);
+  .o1ubkach {
+    margin-top: var(--_1vwoat44);
   }
-  ._2b382hcl {
-    margin-top: var(--qvowxa5);
+  .o1ubkacl {
+    margin-top: var(--_1vwoat45);
   }
-  ._2b382hcp {
-    margin-top: var(--qvowxa6);
+  .o1ubkacp {
+    margin-top: var(--_1vwoat46);
   }
-  ._2b382hct {
-    margin-top: var(--qvowxa7);
+  .o1ubkact {
+    margin-top: var(--_1vwoat47);
   }
-  ._2b382hcx {
-    margin-top: var(--qvowxa8);
+  .o1ubkacx {
+    margin-top: var(--_1vwoat48);
   }
-  ._2b382hd1 {
+  .o1ubkad1 {
     margin-top: 0;
   }
-  ._2b382hd5 {
-    margin-bottom: var(--qvowxa0);
+  .o1ubkad5 {
+    margin-bottom: var(--_1vwoat40);
   }
-  ._2b382hd9 {
-    margin-bottom: var(--qvowxa1);
+  .o1ubkad9 {
+    margin-bottom: var(--_1vwoat41);
   }
-  ._2b382hdd {
-    margin-bottom: var(--qvowxa2);
+  .o1ubkadd {
+    margin-bottom: var(--_1vwoat42);
   }
-  ._2b382hdh {
-    margin-bottom: var(--qvowxa3);
+  .o1ubkadh {
+    margin-bottom: var(--_1vwoat43);
   }
-  ._2b382hdl {
-    margin-bottom: var(--qvowxa4);
+  .o1ubkadl {
+    margin-bottom: var(--_1vwoat44);
   }
-  ._2b382hdp {
-    margin-bottom: var(--qvowxa5);
+  .o1ubkadp {
+    margin-bottom: var(--_1vwoat45);
   }
-  ._2b382hdt {
-    margin-bottom: var(--qvowxa6);
+  .o1ubkadt {
+    margin-bottom: var(--_1vwoat46);
   }
-  ._2b382hdx {
-    margin-bottom: var(--qvowxa7);
+  .o1ubkadx {
+    margin-bottom: var(--_1vwoat47);
   }
-  ._2b382he1 {
-    margin-bottom: var(--qvowxa8);
+  .o1ubkae1 {
+    margin-bottom: var(--_1vwoat48);
   }
-  ._2b382he5 {
+  .o1ubkae5 {
     margin-bottom: 0;
   }
-  ._2b382he9 {
-    margin-right: var(--qvowxa0);
+  .o1ubkae9 {
+    margin-right: var(--_1vwoat40);
   }
-  ._2b382hed {
-    margin-right: var(--qvowxa1);
+  .o1ubkaed {
+    margin-right: var(--_1vwoat41);
   }
-  ._2b382heh {
-    margin-right: var(--qvowxa2);
+  .o1ubkaeh {
+    margin-right: var(--_1vwoat42);
   }
-  ._2b382hel {
-    margin-right: var(--qvowxa3);
+  .o1ubkael {
+    margin-right: var(--_1vwoat43);
   }
-  ._2b382hep {
-    margin-right: var(--qvowxa4);
+  .o1ubkaep {
+    margin-right: var(--_1vwoat44);
   }
-  ._2b382het {
-    margin-right: var(--qvowxa5);
+  .o1ubkaet {
+    margin-right: var(--_1vwoat45);
   }
-  ._2b382hex {
-    margin-right: var(--qvowxa6);
+  .o1ubkaex {
+    margin-right: var(--_1vwoat46);
   }
-  ._2b382hf1 {
-    margin-right: var(--qvowxa7);
+  .o1ubkaf1 {
+    margin-right: var(--_1vwoat47);
   }
-  ._2b382hf5 {
-    margin-right: var(--qvowxa8);
+  .o1ubkaf5 {
+    margin-right: var(--_1vwoat48);
   }
-  ._2b382hf9 {
+  .o1ubkaf9 {
     margin-right: 0;
   }
-  ._2b382hfd {
-    margin-left: var(--qvowxa0);
+  .o1ubkafd {
+    margin-left: var(--_1vwoat40);
   }
-  ._2b382hfh {
-    margin-left: var(--qvowxa1);
+  .o1ubkafh {
+    margin-left: var(--_1vwoat41);
   }
-  ._2b382hfl {
-    margin-left: var(--qvowxa2);
+  .o1ubkafl {
+    margin-left: var(--_1vwoat42);
   }
-  ._2b382hfp {
-    margin-left: var(--qvowxa3);
+  .o1ubkafp {
+    margin-left: var(--_1vwoat43);
   }
-  ._2b382hft {
-    margin-left: var(--qvowxa4);
+  .o1ubkaft {
+    margin-left: var(--_1vwoat44);
   }
-  ._2b382hfx {
-    margin-left: var(--qvowxa5);
+  .o1ubkafx {
+    margin-left: var(--_1vwoat45);
   }
-  ._2b382hg1 {
-    margin-left: var(--qvowxa6);
+  .o1ubkag1 {
+    margin-left: var(--_1vwoat46);
   }
-  ._2b382hg5 {
-    margin-left: var(--qvowxa7);
+  .o1ubkag5 {
+    margin-left: var(--_1vwoat47);
   }
-  ._2b382hg9 {
-    margin-left: var(--qvowxa8);
+  .o1ubkag9 {
+    margin-left: var(--_1vwoat48);
   }
-  ._2b382hgd {
+  .o1ubkagd {
     margin-left: 0;
   }
-  ._2b382hgh {
+  .o1ubkagh {
     align-items: flex-start;
   }
-  ._2b382hgl {
+  .o1ubkagl {
     align-items: center;
   }
-  ._2b382hgp {
+  .o1ubkagp {
     align-items: flex-end;
   }
-  ._2b382hgt {
+  .o1ubkagt {
     justify-content: flex-start;
   }
-  ._2b382hgx {
+  .o1ubkagx {
     justify-content: center;
   }
-  ._2b382hh1 {
+  .o1ubkah1 {
     justify-content: flex-end;
   }
-  ._2b382hh5 {
+  .o1ubkah5 {
     justify-content: space-between;
   }
-  ._2b382hh9 {
+  .o1ubkah9 {
     flex-direction: row;
   }
-  ._2b382hhd {
+  .o1ubkahd {
     flex-direction: row-reverse;
   }
-  ._2b382hhh {
+  .o1ubkahh {
     flex-direction: column;
   }
-  ._2b382hhl {
+  .o1ubkahl {
     flex-direction: column-reverse;
   }
-  ._2b382hhp {
+  .o1ubkahp {
     flex-wrap: wrap;
   }
-  ._2b382hht {
+  .o1ubkaht {
     flex-wrap: nowrap;
   }
-  ._2b382hhx {
+  .o1ubkahx {
     flex-shrink: 0;
   }
-  ._2b382hi1 {
+  .o1ubkai1 {
     flex-grow: 0;
   }
-  ._2b382hi5 {
+  .o1ubkai5 {
     flex-grow: 1;
   }
-  ._2b382hi9 {
+  .o1ubkai9 {
     text-align: left;
   }
-  ._2b382hid {
+  .o1ubkaid {
     text-align: center;
   }
-  ._2b382hih {
+  .o1ubkaih {
     text-align: right;
   }
 }
 @media screen and (min-width: 1200px) {
-  ._2b382h4y {
+  .o1ubka4y {
     display: none;
   }
-  ._2b382h52 {
+  .o1ubka52 {
     display: block;
   }
-  ._2b382h56 {
+  .o1ubka56 {
     display: inline;
   }
-  ._2b382h5a {
+  .o1ubka5a {
     display: inline-block;
   }
-  ._2b382h5e {
+  .o1ubka5e {
     display: flex;
   }
-  ._2b382h5i {
+  .o1ubka5i {
     position: relative;
   }
-  ._2b382h5m {
+  .o1ubka5m {
     position: absolute;
   }
-  ._2b382h5q {
+  .o1ubka5q {
     position: fixed;
   }
-  ._2b382h5u {
+  .o1ubka5u {
     border-radius: 0;
   }
-  ._2b382h5y {
+  .o1ubka5y {
     border-radius: 9999px;
   }
-  ._2b382h62 {
-    border-radius: var(--qvowxab);
+  .o1ubka62 {
+    border-radius: var(--_1vwoat4b);
   }
-  ._2b382h66 {
-    border-radius: var(--qvowxac);
+  .o1ubka66 {
+    border-radius: var(--_1vwoat4c);
   }
-  ._2b382h6a {
-    border-radius: var(--qvowxad);
+  .o1ubka6a {
+    border-radius: var(--_1vwoat4d);
   }
-  ._2b382h6e {
-    border-radius: var(--qvowxae);
+  .o1ubka6e {
+    border-radius: var(--_1vwoat4e);
   }
-  ._2b382h6i {
-    gap: var(--qvowxa0);
+  .o1ubka6i {
+    gap: var(--_1vwoat40);
   }
-  ._2b382h6m {
-    gap: var(--qvowxa1);
+  .o1ubka6m {
+    gap: var(--_1vwoat41);
   }
-  ._2b382h6q {
-    gap: var(--qvowxa2);
+  .o1ubka6q {
+    gap: var(--_1vwoat42);
   }
-  ._2b382h6u {
-    gap: var(--qvowxa3);
+  .o1ubka6u {
+    gap: var(--_1vwoat43);
   }
-  ._2b382h6y {
-    gap: var(--qvowxa4);
+  .o1ubka6y {
+    gap: var(--_1vwoat44);
   }
-  ._2b382h72 {
-    gap: var(--qvowxa5);
+  .o1ubka72 {
+    gap: var(--_1vwoat45);
   }
-  ._2b382h76 {
-    gap: var(--qvowxa6);
+  .o1ubka76 {
+    gap: var(--_1vwoat46);
   }
-  ._2b382h7a {
-    gap: var(--qvowxa7);
+  .o1ubka7a {
+    gap: var(--_1vwoat47);
   }
-  ._2b382h7e {
-    gap: var(--qvowxa8);
+  .o1ubka7e {
+    gap: var(--_1vwoat48);
   }
-  ._2b382h7i {
+  .o1ubka7i {
     gap: 0;
   }
-  ._2b382h7m {
-    padding-top: var(--qvowxa0);
+  .o1ubka7m {
+    padding-top: var(--_1vwoat40);
   }
-  ._2b382h7q {
-    padding-top: var(--qvowxa1);
+  .o1ubka7q {
+    padding-top: var(--_1vwoat41);
   }
-  ._2b382h7u {
-    padding-top: var(--qvowxa2);
+  .o1ubka7u {
+    padding-top: var(--_1vwoat42);
   }
-  ._2b382h7y {
-    padding-top: var(--qvowxa3);
+  .o1ubka7y {
+    padding-top: var(--_1vwoat43);
   }
-  ._2b382h82 {
-    padding-top: var(--qvowxa4);
+  .o1ubka82 {
+    padding-top: var(--_1vwoat44);
   }
-  ._2b382h86 {
-    padding-top: var(--qvowxa5);
+  .o1ubka86 {
+    padding-top: var(--_1vwoat45);
   }
-  ._2b382h8a {
-    padding-top: var(--qvowxa6);
+  .o1ubka8a {
+    padding-top: var(--_1vwoat46);
   }
-  ._2b382h8e {
-    padding-top: var(--qvowxa7);
+  .o1ubka8e {
+    padding-top: var(--_1vwoat47);
   }
-  ._2b382h8i {
-    padding-top: var(--qvowxa8);
+  .o1ubka8i {
+    padding-top: var(--_1vwoat48);
   }
-  ._2b382h8m {
+  .o1ubka8m {
     padding-top: 0;
   }
-  ._2b382h8q {
-    padding-bottom: var(--qvowxa0);
+  .o1ubka8q {
+    padding-bottom: var(--_1vwoat40);
   }
-  ._2b382h8u {
-    padding-bottom: var(--qvowxa1);
+  .o1ubka8u {
+    padding-bottom: var(--_1vwoat41);
   }
-  ._2b382h8y {
-    padding-bottom: var(--qvowxa2);
+  .o1ubka8y {
+    padding-bottom: var(--_1vwoat42);
   }
-  ._2b382h92 {
-    padding-bottom: var(--qvowxa3);
+  .o1ubka92 {
+    padding-bottom: var(--_1vwoat43);
   }
-  ._2b382h96 {
-    padding-bottom: var(--qvowxa4);
+  .o1ubka96 {
+    padding-bottom: var(--_1vwoat44);
   }
-  ._2b382h9a {
-    padding-bottom: var(--qvowxa5);
+  .o1ubka9a {
+    padding-bottom: var(--_1vwoat45);
   }
-  ._2b382h9e {
-    padding-bottom: var(--qvowxa6);
+  .o1ubka9e {
+    padding-bottom: var(--_1vwoat46);
   }
-  ._2b382h9i {
-    padding-bottom: var(--qvowxa7);
+  .o1ubka9i {
+    padding-bottom: var(--_1vwoat47);
   }
-  ._2b382h9m {
-    padding-bottom: var(--qvowxa8);
+  .o1ubka9m {
+    padding-bottom: var(--_1vwoat48);
   }
-  ._2b382h9q {
+  .o1ubka9q {
     padding-bottom: 0;
   }
-  ._2b382h9u {
-    padding-right: var(--qvowxa0);
+  .o1ubka9u {
+    padding-right: var(--_1vwoat40);
   }
-  ._2b382h9y {
-    padding-right: var(--qvowxa1);
+  .o1ubka9y {
+    padding-right: var(--_1vwoat41);
   }
-  ._2b382ha2 {
-    padding-right: var(--qvowxa2);
+  .o1ubkaa2 {
+    padding-right: var(--_1vwoat42);
   }
-  ._2b382ha6 {
-    padding-right: var(--qvowxa3);
+  .o1ubkaa6 {
+    padding-right: var(--_1vwoat43);
   }
-  ._2b382haa {
-    padding-right: var(--qvowxa4);
+  .o1ubkaaa {
+    padding-right: var(--_1vwoat44);
   }
-  ._2b382hae {
-    padding-right: var(--qvowxa5);
+  .o1ubkaae {
+    padding-right: var(--_1vwoat45);
   }
-  ._2b382hai {
-    padding-right: var(--qvowxa6);
+  .o1ubkaai {
+    padding-right: var(--_1vwoat46);
   }
-  ._2b382ham {
-    padding-right: var(--qvowxa7);
+  .o1ubkaam {
+    padding-right: var(--_1vwoat47);
   }
-  ._2b382haq {
-    padding-right: var(--qvowxa8);
+  .o1ubkaaq {
+    padding-right: var(--_1vwoat48);
   }
-  ._2b382hau {
+  .o1ubkaau {
     padding-right: 0;
   }
-  ._2b382hay {
-    padding-left: var(--qvowxa0);
+  .o1ubkaay {
+    padding-left: var(--_1vwoat40);
   }
-  ._2b382hb2 {
-    padding-left: var(--qvowxa1);
+  .o1ubkab2 {
+    padding-left: var(--_1vwoat41);
   }
-  ._2b382hb6 {
-    padding-left: var(--qvowxa2);
+  .o1ubkab6 {
+    padding-left: var(--_1vwoat42);
   }
-  ._2b382hba {
-    padding-left: var(--qvowxa3);
+  .o1ubkaba {
+    padding-left: var(--_1vwoat43);
   }
-  ._2b382hbe {
-    padding-left: var(--qvowxa4);
+  .o1ubkabe {
+    padding-left: var(--_1vwoat44);
   }
-  ._2b382hbi {
-    padding-left: var(--qvowxa5);
+  .o1ubkabi {
+    padding-left: var(--_1vwoat45);
   }
-  ._2b382hbm {
-    padding-left: var(--qvowxa6);
+  .o1ubkabm {
+    padding-left: var(--_1vwoat46);
   }
-  ._2b382hbq {
-    padding-left: var(--qvowxa7);
+  .o1ubkabq {
+    padding-left: var(--_1vwoat47);
   }
-  ._2b382hbu {
-    padding-left: var(--qvowxa8);
+  .o1ubkabu {
+    padding-left: var(--_1vwoat48);
   }
-  ._2b382hby {
+  .o1ubkaby {
     padding-left: 0;
   }
-  ._2b382hc2 {
-    margin-top: var(--qvowxa0);
+  .o1ubkac2 {
+    margin-top: var(--_1vwoat40);
   }
-  ._2b382hc6 {
-    margin-top: var(--qvowxa1);
+  .o1ubkac6 {
+    margin-top: var(--_1vwoat41);
   }
-  ._2b382hca {
-    margin-top: var(--qvowxa2);
+  .o1ubkaca {
+    margin-top: var(--_1vwoat42);
   }
-  ._2b382hce {
-    margin-top: var(--qvowxa3);
+  .o1ubkace {
+    margin-top: var(--_1vwoat43);
   }
-  ._2b382hci {
-    margin-top: var(--qvowxa4);
+  .o1ubkaci {
+    margin-top: var(--_1vwoat44);
   }
-  ._2b382hcm {
-    margin-top: var(--qvowxa5);
+  .o1ubkacm {
+    margin-top: var(--_1vwoat45);
   }
-  ._2b382hcq {
-    margin-top: var(--qvowxa6);
+  .o1ubkacq {
+    margin-top: var(--_1vwoat46);
   }
-  ._2b382hcu {
-    margin-top: var(--qvowxa7);
+  .o1ubkacu {
+    margin-top: var(--_1vwoat47);
   }
-  ._2b382hcy {
-    margin-top: var(--qvowxa8);
+  .o1ubkacy {
+    margin-top: var(--_1vwoat48);
   }
-  ._2b382hd2 {
+  .o1ubkad2 {
     margin-top: 0;
   }
-  ._2b382hd6 {
-    margin-bottom: var(--qvowxa0);
+  .o1ubkad6 {
+    margin-bottom: var(--_1vwoat40);
   }
-  ._2b382hda {
-    margin-bottom: var(--qvowxa1);
+  .o1ubkada {
+    margin-bottom: var(--_1vwoat41);
   }
-  ._2b382hde {
-    margin-bottom: var(--qvowxa2);
+  .o1ubkade {
+    margin-bottom: var(--_1vwoat42);
   }
-  ._2b382hdi {
-    margin-bottom: var(--qvowxa3);
+  .o1ubkadi {
+    margin-bottom: var(--_1vwoat43);
   }
-  ._2b382hdm {
-    margin-bottom: var(--qvowxa4);
+  .o1ubkadm {
+    margin-bottom: var(--_1vwoat44);
   }
-  ._2b382hdq {
-    margin-bottom: var(--qvowxa5);
+  .o1ubkadq {
+    margin-bottom: var(--_1vwoat45);
   }
-  ._2b382hdu {
-    margin-bottom: var(--qvowxa6);
+  .o1ubkadu {
+    margin-bottom: var(--_1vwoat46);
   }
-  ._2b382hdy {
-    margin-bottom: var(--qvowxa7);
+  .o1ubkady {
+    margin-bottom: var(--_1vwoat47);
   }
-  ._2b382he2 {
-    margin-bottom: var(--qvowxa8);
+  .o1ubkae2 {
+    margin-bottom: var(--_1vwoat48);
   }
-  ._2b382he6 {
+  .o1ubkae6 {
     margin-bottom: 0;
   }
-  ._2b382hea {
-    margin-right: var(--qvowxa0);
+  .o1ubkaea {
+    margin-right: var(--_1vwoat40);
   }
-  ._2b382hee {
-    margin-right: var(--qvowxa1);
+  .o1ubkaee {
+    margin-right: var(--_1vwoat41);
   }
-  ._2b382hei {
-    margin-right: var(--qvowxa2);
+  .o1ubkaei {
+    margin-right: var(--_1vwoat42);
   }
-  ._2b382hem {
-    margin-right: var(--qvowxa3);
+  .o1ubkaem {
+    margin-right: var(--_1vwoat43);
   }
-  ._2b382heq {
-    margin-right: var(--qvowxa4);
+  .o1ubkaeq {
+    margin-right: var(--_1vwoat44);
   }
-  ._2b382heu {
-    margin-right: var(--qvowxa5);
+  .o1ubkaeu {
+    margin-right: var(--_1vwoat45);
   }
-  ._2b382hey {
-    margin-right: var(--qvowxa6);
+  .o1ubkaey {
+    margin-right: var(--_1vwoat46);
   }
-  ._2b382hf2 {
-    margin-right: var(--qvowxa7);
+  .o1ubkaf2 {
+    margin-right: var(--_1vwoat47);
   }
-  ._2b382hf6 {
-    margin-right: var(--qvowxa8);
+  .o1ubkaf6 {
+    margin-right: var(--_1vwoat48);
   }
-  ._2b382hfa {
+  .o1ubkafa {
     margin-right: 0;
   }
-  ._2b382hfe {
-    margin-left: var(--qvowxa0);
+  .o1ubkafe {
+    margin-left: var(--_1vwoat40);
   }
-  ._2b382hfi {
-    margin-left: var(--qvowxa1);
+  .o1ubkafi {
+    margin-left: var(--_1vwoat41);
   }
-  ._2b382hfm {
-    margin-left: var(--qvowxa2);
+  .o1ubkafm {
+    margin-left: var(--_1vwoat42);
   }
-  ._2b382hfq {
-    margin-left: var(--qvowxa3);
+  .o1ubkafq {
+    margin-left: var(--_1vwoat43);
   }
-  ._2b382hfu {
-    margin-left: var(--qvowxa4);
+  .o1ubkafu {
+    margin-left: var(--_1vwoat44);
   }
-  ._2b382hfy {
-    margin-left: var(--qvowxa5);
+  .o1ubkafy {
+    margin-left: var(--_1vwoat45);
   }
-  ._2b382hg2 {
-    margin-left: var(--qvowxa6);
+  .o1ubkag2 {
+    margin-left: var(--_1vwoat46);
   }
-  ._2b382hg6 {
-    margin-left: var(--qvowxa7);
+  .o1ubkag6 {
+    margin-left: var(--_1vwoat47);
   }
-  ._2b382hga {
-    margin-left: var(--qvowxa8);
+  .o1ubkaga {
+    margin-left: var(--_1vwoat48);
   }
-  ._2b382hge {
+  .o1ubkage {
     margin-left: 0;
   }
-  ._2b382hgi {
+  .o1ubkagi {
     align-items: flex-start;
   }
-  ._2b382hgm {
+  .o1ubkagm {
     align-items: center;
   }
-  ._2b382hgq {
+  .o1ubkagq {
     align-items: flex-end;
   }
-  ._2b382hgu {
+  .o1ubkagu {
     justify-content: flex-start;
   }
-  ._2b382hgy {
+  .o1ubkagy {
     justify-content: center;
   }
-  ._2b382hh2 {
+  .o1ubkah2 {
     justify-content: flex-end;
   }
-  ._2b382hh6 {
+  .o1ubkah6 {
     justify-content: space-between;
   }
-  ._2b382hha {
+  .o1ubkaha {
     flex-direction: row;
   }
-  ._2b382hhe {
+  .o1ubkahe {
     flex-direction: row-reverse;
   }
-  ._2b382hhi {
+  .o1ubkahi {
     flex-direction: column;
   }
-  ._2b382hhm {
+  .o1ubkahm {
     flex-direction: column-reverse;
   }
-  ._2b382hhq {
+  .o1ubkahq {
     flex-wrap: wrap;
   }
-  ._2b382hhu {
+  .o1ubkahu {
     flex-wrap: nowrap;
   }
-  ._2b382hhy {
+  .o1ubkahy {
     flex-shrink: 0;
   }
-  ._2b382hi2 {
+  .o1ubkai2 {
     flex-grow: 0;
   }
-  ._2b382hi6 {
+  .o1ubkai6 {
     flex-grow: 1;
   }
-  ._2b382hia {
+  .o1ubkaia {
     text-align: left;
   }
-  ._2b382hie {
+  .o1ubkaie {
     text-align: center;
   }
-  ._2b382hii {
+  .o1ubkaii {
     text-align: right;
   }
 }
@@ -1958,563 +1958,563 @@ html:not(._2b382h10) ._2b382h4t {
   display: table;
   margin-top: var(--_1vgffpw3);
 }
-._193fbho0 {
-  font-family: var(--qvowxa2w);
+._1jw6vm00 {
+  font-family: var(--_1vwoat42w);
 }
-._193fbho1 {
-  font-weight: var(--qvowxa46);
+._1jw6vm01 {
+  font-weight: var(--_1vwoat446);
 }
-._193fbho2 {
-  font-weight: var(--qvowxa47);
+._1jw6vm02 {
+  font-weight: var(--_1vwoat447);
 }
-._193fbho3 {
-  font-weight: var(--qvowxa48);
+._1jw6vm03 {
+  font-weight: var(--_1vwoat448);
 }
-._193fbho4 {
-  --_1vgffpw0: var(--qvowxa32);
-  --_1vgffpw1: var(--qvowxa33);
-  --_1vgffpw2: var(--qvowxa35);
-  --_1vgffpw3: var(--qvowxa36);
+._1jw6vm04 {
+  --_1vgffpw0: var(--_1vwoat432);
+  --_1vgffpw1: var(--_1vwoat433);
+  --_1vgffpw2: var(--_1vwoat435);
+  --_1vgffpw3: var(--_1vwoat436);
 }
-._193fbho7 {
-  --_1vgffpw0: var(--qvowxa3c);
-  --_1vgffpw1: var(--qvowxa3d);
-  --_1vgffpw2: var(--qvowxa3f);
-  --_1vgffpw3: var(--qvowxa3g);
+._1jw6vm07 {
+  --_1vgffpw0: var(--_1vwoat43c);
+  --_1vgffpw1: var(--_1vwoat43d);
+  --_1vgffpw2: var(--_1vwoat43f);
+  --_1vgffpw3: var(--_1vwoat43g);
 }
-._193fbhoa {
-  --_1vgffpw0: var(--qvowxa3m);
-  --_1vgffpw1: var(--qvowxa3n);
-  --_1vgffpw2: var(--qvowxa3p);
-  --_1vgffpw3: var(--qvowxa3q);
+._1jw6vm0a {
+  --_1vgffpw0: var(--_1vwoat43m);
+  --_1vgffpw1: var(--_1vwoat43n);
+  --_1vgffpw2: var(--_1vwoat43p);
+  --_1vgffpw3: var(--_1vwoat43q);
 }
-._193fbhod {
-  --_1vgffpw0: var(--qvowxa3w);
-  --_1vgffpw1: var(--qvowxa3x);
-  --_1vgffpw2: var(--qvowxa3z);
-  --_1vgffpw3: var(--qvowxa40);
+._1jw6vm0d {
+  --_1vgffpw0: var(--_1vwoat43w);
+  --_1vgffpw1: var(--_1vwoat43x);
+  --_1vgffpw2: var(--_1vwoat43z);
+  --_1vgffpw3: var(--_1vwoat440);
 }
-._193fbhog {
-  font-size: var(--qvowxa32);
-  line-height: var(--qvowxa33);
+._1jw6vm0g {
+  font-size: var(--_1vwoat432);
+  line-height: var(--_1vwoat433);
 }
-._193fbhoh {
-  font-size: var(--qvowxa3c);
-  line-height: var(--qvowxa3d);
+._1jw6vm0h {
+  font-size: var(--_1vwoat43c);
+  line-height: var(--_1vwoat43d);
 }
-._193fbhoi {
-  font-size: var(--qvowxa3m);
-  line-height: var(--qvowxa3n);
+._1jw6vm0i {
+  font-size: var(--_1vwoat43m);
+  line-height: var(--_1vwoat43n);
 }
-._193fbhoj {
-  font-size: var(--qvowxa3w);
-  line-height: var(--qvowxa3x);
+._1jw6vm0j {
+  font-size: var(--_1vwoat43w);
+  line-height: var(--_1vwoat43x);
 }
-._193fbhok {
-  font-weight: var(--qvowxa5d);
+._1jw6vm0k {
+  font-weight: var(--_1vwoat45d);
 }
-._193fbhol {
-  font-weight: var(--qvowxa5e);
+._1jw6vm0l {
+  font-weight: var(--_1vwoat45e);
 }
-._193fbhom {
-  --_1vgffpw0: var(--qvowxa49);
-  --_1vgffpw1: var(--qvowxa4a);
-  --_1vgffpw2: var(--qvowxa4c);
-  --_1vgffpw3: var(--qvowxa4d);
+._1jw6vm0m {
+  --_1vgffpw0: var(--_1vwoat449);
+  --_1vgffpw1: var(--_1vwoat44a);
+  --_1vgffpw2: var(--_1vwoat44c);
+  --_1vgffpw3: var(--_1vwoat44d);
 }
-._193fbhop {
-  --_1vgffpw0: var(--qvowxa4j);
-  --_1vgffpw1: var(--qvowxa4k);
-  --_1vgffpw2: var(--qvowxa4m);
-  --_1vgffpw3: var(--qvowxa4n);
+._1jw6vm0p {
+  --_1vgffpw0: var(--_1vwoat44j);
+  --_1vgffpw1: var(--_1vwoat44k);
+  --_1vgffpw2: var(--_1vwoat44m);
+  --_1vgffpw3: var(--_1vwoat44n);
 }
-._193fbhos {
-  --_1vgffpw0: var(--qvowxa4t);
-  --_1vgffpw1: var(--qvowxa4u);
-  --_1vgffpw2: var(--qvowxa4w);
-  --_1vgffpw3: var(--qvowxa4x);
+._1jw6vm0s {
+  --_1vgffpw0: var(--_1vwoat44t);
+  --_1vgffpw1: var(--_1vwoat44u);
+  --_1vgffpw2: var(--_1vwoat44w);
+  --_1vgffpw3: var(--_1vwoat44x);
 }
-._193fbhov {
-  --_1vgffpw0: var(--qvowxa53);
-  --_1vgffpw1: var(--qvowxa54);
-  --_1vgffpw2: var(--qvowxa56);
-  --_1vgffpw3: var(--qvowxa57);
+._1jw6vm0v {
+  --_1vgffpw0: var(--_1vwoat453);
+  --_1vgffpw1: var(--_1vwoat454);
+  --_1vgffpw2: var(--_1vwoat456);
+  --_1vgffpw3: var(--_1vwoat457);
 }
-html:not(._2b382h10) ._193fbho18 {
-  --_193fbhoy: var(--qvowxa19);
-  --_193fbhoz: var(--qvowxa17);
-  --_193fbho10: var(--qvowxa1d);
-  --_193fbho11: var(--qvowxa1o);
-  --_193fbho12: var(--qvowxa1m);
-  --_193fbho13: var(--qvowxa15);
-  --_193fbho14: var(--qvowxa1b);
-  --_193fbho15: var(--qvowxa1k);
-  --_193fbho16: var(--qvowxa1r);
-  --_193fbho17: var(--qvowxa1f);
+html:not(.o1ubka10) ._1jw6vm018 {
+  --_1jw6vm0y: var(--_1vwoat419);
+  --_1jw6vm0z: var(--_1vwoat417);
+  --_1jw6vm010: var(--_1vwoat41d);
+  --_1jw6vm011: var(--_1vwoat41o);
+  --_1jw6vm012: var(--_1vwoat41m);
+  --_1jw6vm013: var(--_1vwoat415);
+  --_1jw6vm014: var(--_1vwoat41b);
+  --_1jw6vm015: var(--_1vwoat41k);
+  --_1jw6vm016: var(--_1vwoat41r);
+  --_1jw6vm017: var(--_1vwoat41f);
 }
-html:not(._2b382h10) ._193fbho19 {
-  --_193fbhoy: var(--qvowxa1a);
-  --_193fbhoz: var(--qvowxa18);
-  --_193fbho10: var(--qvowxa1e);
-  --_193fbho11: var(--qvowxa1p);
-  --_193fbho12: var(--qvowxa1n);
-  --_193fbho13: var(--qvowxa16);
-  --_193fbho14: var(--qvowxa1c);
-  --_193fbho15: var(--qvowxa1l);
-  --_193fbho16: var(--qvowxa1s);
-  --_193fbho17: var(--qvowxa1h);
+html:not(.o1ubka10) ._1jw6vm019 {
+  --_1jw6vm0y: var(--_1vwoat41a);
+  --_1jw6vm0z: var(--_1vwoat418);
+  --_1jw6vm010: var(--_1vwoat41e);
+  --_1jw6vm011: var(--_1vwoat41p);
+  --_1jw6vm012: var(--_1vwoat41n);
+  --_1jw6vm013: var(--_1vwoat416);
+  --_1jw6vm014: var(--_1vwoat41c);
+  --_1jw6vm015: var(--_1vwoat41l);
+  --_1jw6vm016: var(--_1vwoat41s);
+  --_1jw6vm017: var(--_1vwoat41h);
 }
-html._2b382h10 ._193fbho1a {
-  --_193fbhoy: var(--qvowxa19);
-  --_193fbhoz: var(--qvowxa17);
-  --_193fbho10: var(--qvowxa1d);
-  --_193fbho11: var(--qvowxa1o);
-  --_193fbho12: var(--qvowxa1m);
-  --_193fbho13: var(--qvowxa15);
-  --_193fbho14: var(--qvowxa1b);
-  --_193fbho15: var(--qvowxa1k);
-  --_193fbho16: var(--qvowxa1r);
-  --_193fbho17: var(--qvowxa1f);
+html.o1ubka10 ._1jw6vm01a {
+  --_1jw6vm0y: var(--_1vwoat419);
+  --_1jw6vm0z: var(--_1vwoat417);
+  --_1jw6vm010: var(--_1vwoat41d);
+  --_1jw6vm011: var(--_1vwoat41o);
+  --_1jw6vm012: var(--_1vwoat41m);
+  --_1jw6vm013: var(--_1vwoat415);
+  --_1jw6vm014: var(--_1vwoat41b);
+  --_1jw6vm015: var(--_1vwoat41k);
+  --_1jw6vm016: var(--_1vwoat41r);
+  --_1jw6vm017: var(--_1vwoat41f);
 }
-html._2b382h10 ._193fbho1b {
-  --_193fbhoy: var(--qvowxa1a);
-  --_193fbhoz: var(--qvowxa18);
-  --_193fbho10: var(--qvowxa1e);
-  --_193fbho11: var(--qvowxa1p);
-  --_193fbho12: var(--qvowxa1n);
-  --_193fbho13: var(--qvowxa16);
-  --_193fbho14: var(--qvowxa1c);
-  --_193fbho15: var(--qvowxa1l);
-  --_193fbho16: var(--qvowxa1s);
-  --_193fbho17: var(--qvowxa1h);
+html.o1ubka10 ._1jw6vm01b {
+  --_1jw6vm0y: var(--_1vwoat41a);
+  --_1jw6vm0z: var(--_1vwoat418);
+  --_1jw6vm010: var(--_1vwoat41e);
+  --_1jw6vm011: var(--_1vwoat41p);
+  --_1jw6vm012: var(--_1vwoat41n);
+  --_1jw6vm013: var(--_1vwoat416);
+  --_1jw6vm014: var(--_1vwoat41c);
+  --_1jw6vm015: var(--_1vwoat41l);
+  --_1jw6vm016: var(--_1vwoat41s);
+  --_1jw6vm017: var(--_1vwoat41h);
 }
-html:not(._2b382h10) ._193fbho1c,
-html:not(._2b382h10) ._193fbho1d,
-html:not(._2b382h10) ._193fbho1e,
-html:not(._2b382h10) ._193fbho1f {
-  --_193fbho15: var(--_193fbhoy);
+html:not(.o1ubka10) ._1jw6vm01c,
+html:not(.o1ubka10) ._1jw6vm01d,
+html:not(.o1ubka10) ._1jw6vm01e,
+html:not(.o1ubka10) ._1jw6vm01f {
+  --_1jw6vm015: var(--_1jw6vm0y);
 }
-html:not(._2b382h10) ._193fbho1g,
-html:not(._2b382h10) ._193fbho1h {
-  --_193fbho15: var(--_193fbhoz);
+html:not(.o1ubka10) ._1jw6vm01g,
+html:not(.o1ubka10) ._1jw6vm01h {
+  --_1jw6vm015: var(--_1jw6vm0z);
 }
-html:not(._2b382h10) ._193fbho1i {
-  --_193fbho15: var(--_193fbho12);
+html:not(.o1ubka10) ._1jw6vm01i {
+  --_1jw6vm015: var(--_1jw6vm012);
 }
-html:not(._2b382h10) ._193fbho1j {
-  --_193fbho15: var(--_193fbho10);
+html:not(.o1ubka10) ._1jw6vm01j {
+  --_1jw6vm015: var(--_1jw6vm010);
 }
-html:not(._2b382h10) ._193fbho1k {
-  --_193fbho15: var(--_193fbho11);
+html:not(.o1ubka10) ._1jw6vm01k {
+  --_1jw6vm015: var(--_1jw6vm011);
 }
-html._2b382h10 ._193fbho1l,
-html._2b382h10 ._193fbho1m,
-html._2b382h10 ._193fbho1n,
-html._2b382h10 ._193fbho1o {
-  --_193fbho15: var(--_193fbhoy);
+html.o1ubka10 ._1jw6vm01l,
+html.o1ubka10 ._1jw6vm01m,
+html.o1ubka10 ._1jw6vm01n,
+html.o1ubka10 ._1jw6vm01o {
+  --_1jw6vm015: var(--_1jw6vm0y);
 }
-html._2b382h10 ._193fbho1p,
-html._2b382h10 ._193fbho1q {
-  --_193fbho15: var(--_193fbhoz);
+html.o1ubka10 ._1jw6vm01p,
+html.o1ubka10 ._1jw6vm01q {
+  --_1jw6vm015: var(--_1jw6vm0z);
 }
-html._2b382h10 ._193fbho1r {
-  --_193fbho15: var(--_193fbho12);
+html.o1ubka10 ._1jw6vm01r {
+  --_1jw6vm015: var(--_1jw6vm012);
 }
-html._2b382h10 ._193fbho1s {
-  --_193fbho15: var(--_193fbho10);
+html.o1ubka10 ._1jw6vm01s {
+  --_1jw6vm015: var(--_1jw6vm010);
 }
-html._2b382h10 ._193fbho1t {
-  --_193fbho15: var(--_193fbho11);
+html.o1ubka10 ._1jw6vm01t {
+  --_1jw6vm015: var(--_1jw6vm011);
 }
-._193fbho1u {
-  color: var(--_193fbhoy);
+._1jw6vm01u {
+  color: var(--_1jw6vm0y);
 }
-._193fbho1v {
-  color: var(--_193fbhoz);
+._1jw6vm01v {
+  color: var(--_1jw6vm0z);
 }
-._193fbho1w {
-  color: var(--_193fbho10);
+._1jw6vm01w {
+  color: var(--_1jw6vm010);
 }
-._193fbho1x {
-  color: var(--_193fbho11);
+._1jw6vm01x {
+  color: var(--_1jw6vm011);
 }
-._193fbho1y {
-  color: var(--_193fbho12);
+._1jw6vm01y {
+  color: var(--_1jw6vm012);
 }
-._193fbho1z {
-  color: var(--_193fbho13);
+._1jw6vm01z {
+  color: var(--_1jw6vm013);
 }
-._193fbho20 {
-  color: var(--_193fbho14);
+._1jw6vm020 {
+  color: var(--_1jw6vm014);
 }
-._193fbho21 {
-  color: var(--_193fbho15);
+._1jw6vm021 {
+  color: var(--_1jw6vm015);
 }
-._193fbho22 {
-  color: var(--_193fbho16);
+._1jw6vm022 {
+  color: var(--_1jw6vm016);
 }
-._193fbho23 {
-  color: var(--_193fbho17);
+._1jw6vm023 {
+  color: var(--_1jw6vm017);
 }
-._193fbho24 {
-  padding-bottom: calc((var(--qvowxa9) - var(--qvowxa33)) / 2);
-  padding-top: calc((var(--qvowxa9) - var(--qvowxa33)) / 2);
+._1jw6vm024 {
+  padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2);
+  padding-top: calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2);
 }
-._193fbho25 {
-  padding-bottom: calc((var(--qvowxa9) - var(--qvowxa3d)) / 2);
-  padding-top: calc((var(--qvowxa9) - var(--qvowxa3d)) / 2);
+._1jw6vm025 {
+  padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2);
+  padding-top: calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2);
 }
-._193fbho26 {
-  padding-bottom: calc((var(--qvowxa9) - var(--qvowxa3n)) / 2);
-  padding-top: calc((var(--qvowxa9) - var(--qvowxa3n)) / 2);
+._1jw6vm026 {
+  padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2);
+  padding-top: calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2);
 }
-._193fbho27 {
-  padding-bottom: calc((var(--qvowxa9) - var(--qvowxa3x)) / 2);
-  padding-top: calc((var(--qvowxa9) - var(--qvowxa3x)) / 2);
+._1jw6vm027 {
+  padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2);
+  padding-top: calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2);
 }
 @media screen and (min-width: 740px) {
-  ._193fbho4 {
-    --_1vgffpw0: var(--qvowxa37);
-    --_1vgffpw1: var(--qvowxa38);
-    --_1vgffpw2: var(--qvowxa3a);
-    --_1vgffpw3: var(--qvowxa3b);
+  ._1jw6vm04 {
+    --_1vgffpw0: var(--_1vwoat437);
+    --_1vgffpw1: var(--_1vwoat438);
+    --_1vgffpw2: var(--_1vwoat43a);
+    --_1vgffpw3: var(--_1vwoat43b);
   }
-  ._193fbho7 {
-    --_1vgffpw0: var(--qvowxa3h);
-    --_1vgffpw1: var(--qvowxa3i);
-    --_1vgffpw2: var(--qvowxa3k);
-    --_1vgffpw3: var(--qvowxa3l);
+  ._1jw6vm07 {
+    --_1vgffpw0: var(--_1vwoat43h);
+    --_1vgffpw1: var(--_1vwoat43i);
+    --_1vgffpw2: var(--_1vwoat43k);
+    --_1vgffpw3: var(--_1vwoat43l);
   }
-  ._193fbhoa {
-    --_1vgffpw0: var(--qvowxa3r);
-    --_1vgffpw1: var(--qvowxa3s);
-    --_1vgffpw2: var(--qvowxa3u);
-    --_1vgffpw3: var(--qvowxa3v);
+  ._1jw6vm0a {
+    --_1vgffpw0: var(--_1vwoat43r);
+    --_1vgffpw1: var(--_1vwoat43s);
+    --_1vgffpw2: var(--_1vwoat43u);
+    --_1vgffpw3: var(--_1vwoat43v);
   }
-  ._193fbhod {
-    --_1vgffpw0: var(--qvowxa41);
-    --_1vgffpw1: var(--qvowxa42);
-    --_1vgffpw2: var(--qvowxa44);
-    --_1vgffpw3: var(--qvowxa45);
+  ._1jw6vm0d {
+    --_1vgffpw0: var(--_1vwoat441);
+    --_1vgffpw1: var(--_1vwoat442);
+    --_1vgffpw2: var(--_1vwoat444);
+    --_1vgffpw3: var(--_1vwoat445);
   }
-  ._193fbhog {
-    font-size: var(--qvowxa37);
-    line-height: var(--qvowxa38);
+  ._1jw6vm0g {
+    font-size: var(--_1vwoat437);
+    line-height: var(--_1vwoat438);
   }
-  ._193fbhoh {
-    font-size: var(--qvowxa3h);
-    line-height: var(--qvowxa3i);
+  ._1jw6vm0h {
+    font-size: var(--_1vwoat43h);
+    line-height: var(--_1vwoat43i);
   }
-  ._193fbhoi {
-    font-size: var(--qvowxa3r);
-    line-height: var(--qvowxa3s);
+  ._1jw6vm0i {
+    font-size: var(--_1vwoat43r);
+    line-height: var(--_1vwoat43s);
   }
-  ._193fbhoj {
-    font-size: var(--qvowxa41);
-    line-height: var(--qvowxa42);
+  ._1jw6vm0j {
+    font-size: var(--_1vwoat441);
+    line-height: var(--_1vwoat442);
   }
-  ._193fbhom {
-    --_1vgffpw0: var(--qvowxa4e);
-    --_1vgffpw1: var(--qvowxa4f);
-    --_1vgffpw2: var(--qvowxa4h);
-    --_1vgffpw3: var(--qvowxa4i);
+  ._1jw6vm0m {
+    --_1vgffpw0: var(--_1vwoat44e);
+    --_1vgffpw1: var(--_1vwoat44f);
+    --_1vgffpw2: var(--_1vwoat44h);
+    --_1vgffpw3: var(--_1vwoat44i);
   }
-  ._193fbhop {
-    --_1vgffpw0: var(--qvowxa4o);
-    --_1vgffpw1: var(--qvowxa4p);
-    --_1vgffpw2: var(--qvowxa4r);
-    --_1vgffpw3: var(--qvowxa4s);
+  ._1jw6vm0p {
+    --_1vgffpw0: var(--_1vwoat44o);
+    --_1vgffpw1: var(--_1vwoat44p);
+    --_1vgffpw2: var(--_1vwoat44r);
+    --_1vgffpw3: var(--_1vwoat44s);
   }
-  ._193fbhos {
-    --_1vgffpw0: var(--qvowxa4y);
-    --_1vgffpw1: var(--qvowxa4z);
-    --_1vgffpw2: var(--qvowxa51);
-    --_1vgffpw3: var(--qvowxa52);
+  ._1jw6vm0s {
+    --_1vgffpw0: var(--_1vwoat44y);
+    --_1vgffpw1: var(--_1vwoat44z);
+    --_1vgffpw2: var(--_1vwoat451);
+    --_1vgffpw3: var(--_1vwoat452);
   }
-  ._193fbhov {
-    --_1vgffpw0: var(--qvowxa58);
-    --_1vgffpw1: var(--qvowxa59);
-    --_1vgffpw2: var(--qvowxa5b);
-    --_1vgffpw3: var(--qvowxa5c);
+  ._1jw6vm0v {
+    --_1vgffpw0: var(--_1vwoat458);
+    --_1vgffpw1: var(--_1vwoat459);
+    --_1vgffpw2: var(--_1vwoat45b);
+    --_1vgffpw3: var(--_1vwoat45c);
   }
-  ._193fbho24 {
-    padding-bottom: calc((var(--qvowxa9) - var(--qvowxa38)) / 2);
-    padding-top: calc((var(--qvowxa9) - var(--qvowxa38)) / 2);
+  ._1jw6vm024 {
+    padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2);
+    padding-top: calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2);
   }
-  ._193fbho25 {
-    padding-bottom: calc((var(--qvowxa9) - var(--qvowxa3i)) / 2);
-    padding-top: calc((var(--qvowxa9) - var(--qvowxa3i)) / 2);
+  ._1jw6vm025 {
+    padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2);
+    padding-top: calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2);
   }
-  ._193fbho26 {
-    padding-bottom: calc((var(--qvowxa9) - var(--qvowxa3s)) / 2);
-    padding-top: calc((var(--qvowxa9) - var(--qvowxa3s)) / 2);
+  ._1jw6vm026 {
+    padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2);
+    padding-top: calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2);
   }
-  ._193fbho27 {
-    padding-bottom: calc((var(--qvowxa9) - var(--qvowxa42)) / 2);
-    padding-top: calc((var(--qvowxa9) - var(--qvowxa42)) / 2);
+  ._1jw6vm027 {
+    padding-bottom: calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2);
+    padding-top: calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2);
   }
 }
-.r1lrlf0 {
+._1fw3bkm0 {
   margin-bottom: -0.1em;
 }
-.r1lrlf2 {
+._1fw3bkm2 {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.r1lrlf0 .r1lrlf2 {
+._1fw3bkm0 ._1fw3bkm2 {
   padding-bottom: 0.1em;
 }
 @supports (display: -webkit-box) and (-webkit-line-clamp: 1) {
-  .r1lrlf4 {
+  ._1fw3bkm4 {
     display: -webkit-box;
     white-space: normal;
-    -webkit-line-clamp: var(--r1lrlf3);
+    -webkit-line-clamp: var(--_1fw3bkm3);
     -webkit-box-orient: vertical;
   }
 }
-.wsnh3d0 {
+._1jxquog0 {
   height: 1.2em;
   width: 1.2em;
 }
-.wsnh3d1 {
+._1jxquog1 {
   margin: -0.1em;
 }
-.wsnh3d2 {
+._1jxquog2 {
   margin-bottom: -0.2em;
   margin-top: -0.2em;
 }
-.wsnh3d3 {
+._1jxquog3 {
   vertical-align: middle;
 }
-.wsnh3d4 {
+._1jxquog4 {
   top: -0.105em;
 }
-.wsnh3d5 {
+._1jxquog5 {
   top: -0.16499999999999998em;
 }
-.wsnh3d6 {
+._1jxquog6 {
   top: -0.045em;
 }
-.wsnh3d7 {
+._1jxquog7 {
   top: -0.065em;
 }
-.wsnh3d8 {
+._1jxquog8 {
   top: -0.125em;
 }
-.wsnh3d9 {
+._1jxquog9 {
   top: -0.0050000000000000044em;
 }
-.wsnh3da {
-  width: var(--qvowxa33);
+._1jxquoga {
+  width: var(--_1vwoat433);
 }
-.wsnh3db {
-  width: var(--qvowxa3d);
+._1jxquogb {
+  width: var(--_1vwoat43d);
 }
-.wsnh3dc {
-  width: var(--qvowxa3n);
+._1jxquogc {
+  width: var(--_1vwoat43n);
 }
-.wsnh3dd {
-  width: var(--qvowxa3x);
-}
-@media screen and (min-width: 740px) {
-  .wsnh3da {
-    width: var(--qvowxa38);
-  }
-  .wsnh3db {
-    width: var(--qvowxa3i);
-  }
-  .wsnh3dc {
-    width: var(--qvowxa3s);
-  }
-  .wsnh3dd {
-    width: var(--qvowxa42);
-  }
-}
-._1crl7ig0 {
-  height: var(--qvowxa33);
-}
-._1crl7ig1 {
-  height: var(--qvowxa3d);
-}
-._1crl7ig2 {
-  height: var(--qvowxa3n);
-}
-._1crl7ig3 {
-  height: var(--qvowxa3x);
+._1jxquogd {
+  width: var(--_1vwoat43x);
 }
 @media screen and (min-width: 740px) {
-  ._1crl7ig0 {
-    height: var(--qvowxa38);
+  ._1jxquoga {
+    width: var(--_1vwoat438);
   }
-  ._1crl7ig1 {
-    height: var(--qvowxa3i);
+  ._1jxquogb {
+    width: var(--_1vwoat43i);
   }
-  ._1crl7ig2 {
-    height: var(--qvowxa3s);
+  ._1jxquogc {
+    width: var(--_1vwoat43s);
   }
-  ._1crl7ig3 {
-    height: var(--qvowxa42);
+  ._1jxquogd {
+    width: var(--_1vwoat442);
   }
 }
-.vqnzg00 {
+._1vhw3mh0 {
+  height: var(--_1vwoat433);
+}
+._1vhw3mh1 {
+  height: var(--_1vwoat43d);
+}
+._1vhw3mh2 {
+  height: var(--_1vwoat43n);
+}
+._1vhw3mh3 {
+  height: var(--_1vwoat43x);
+}
+@media screen and (min-width: 740px) {
+  ._1vhw3mh0 {
+    height: var(--_1vwoat438);
+  }
+  ._1vhw3mh1 {
+    height: var(--_1vwoat43i);
+  }
+  ._1vhw3mh2 {
+    height: var(--_1vwoat43s);
+  }
+  ._1vhw3mh3 {
+    height: var(--_1vwoat442);
+  }
+}
+._1cqqig50 {
   transform-origin: 50% 50%;
   transition: transform 0.3s ease;
 }
-.vqnzg01 {
+._1cqqig51 {
   transform: rotate(90deg);
 }
-.vqnzg02 {
+._1cqqig52 {
   transform: rotate(180deg);
 }
-.vqnzg03 {
+._1cqqig53 {
   transform: rotate(270deg);
 }
-.z8rym76 {
-  background: var(--z8rym70);
+.oaw05w6 {
+  background: var(--oaw05w0);
 }
-.z8rym77 {
-  background: var(--z8rym71);
+.oaw05w7 {
+  background: var(--oaw05w1);
 }
-.z8rym78 {
-  background: var(--z8rym72);
+.oaw05w8 {
+  background: var(--oaw05w2);
 }
-.z8rym79 {
-  background: var(--z8rym73);
+.oaw05w9 {
+  background: var(--oaw05w3);
 }
-.z8rym7a {
-  background: var(--z8rym74);
+.oaw05wa {
+  background: var(--oaw05w4);
 }
-.z8rym7b {
-  background: var(--z8rym75);
+.oaw05wb {
+  background: var(--oaw05w5);
 }
-html:not(._2b382h10) .z8rym7c {
-  --z8rym70: var(--qvowxaw);
-  --z8rym71: var(--qvowxap);
-  --z8rym72: var(--qvowxau);
-  --z8rym73: var(--qvowxah);
-  --z8rym74: var(--qvowxaj);
-  --z8rym75: var(--qvowxan);
+html:not(.o1ubka10) .oaw05wc {
+  --oaw05w0: var(--_1vwoat4w);
+  --oaw05w1: var(--_1vwoat4p);
+  --oaw05w2: var(--_1vwoat4u);
+  --oaw05w3: var(--_1vwoat4h);
+  --oaw05w4: var(--_1vwoat4j);
+  --oaw05w5: var(--_1vwoat4n);
 }
-html:not(._2b382h10) .z8rym7d {
-  --z8rym70: var(--qvowxax);
-  --z8rym71: var(--qvowxaq);
-  --z8rym72: var(--qvowxav);
-  --z8rym73: var(--qvowxai);
-  --z8rym74: var(--qvowxak);
-  --z8rym75: var(--qvowxao);
+html:not(.o1ubka10) .oaw05wd {
+  --oaw05w0: var(--_1vwoat4x);
+  --oaw05w1: var(--_1vwoat4q);
+  --oaw05w2: var(--_1vwoat4v);
+  --oaw05w3: var(--_1vwoat4i);
+  --oaw05w4: var(--_1vwoat4k);
+  --oaw05w5: var(--_1vwoat4o);
 }
-html._2b382h10 .z8rym7e {
-  --z8rym70: var(--qvowxaw);
-  --z8rym71: var(--qvowxap);
-  --z8rym72: var(--qvowxau);
-  --z8rym73: var(--qvowxah);
-  --z8rym74: var(--qvowxaj);
-  --z8rym75: var(--qvowxan);
+html.o1ubka10 .oaw05we {
+  --oaw05w0: var(--_1vwoat4w);
+  --oaw05w1: var(--_1vwoat4p);
+  --oaw05w2: var(--_1vwoat4u);
+  --oaw05w3: var(--_1vwoat4h);
+  --oaw05w4: var(--_1vwoat4j);
+  --oaw05w5: var(--_1vwoat4n);
 }
-html._2b382h10 .z8rym7f {
-  --z8rym70: var(--qvowxax);
-  --z8rym71: var(--qvowxaq);
-  --z8rym72: var(--qvowxav);
-  --z8rym73: var(--qvowxai);
-  --z8rym74: var(--qvowxak);
-  --z8rym75: var(--qvowxao);
+html.o1ubka10 .oaw05wf {
+  --oaw05w0: var(--_1vwoat4x);
+  --oaw05w1: var(--_1vwoat4q);
+  --oaw05w2: var(--_1vwoat4v);
+  --oaw05w3: var(--_1vwoat4i);
+  --oaw05w4: var(--_1vwoat4k);
+  --oaw05w5: var(--_1vwoat4o);
 }
-.z8rym7g {
+.oaw05wg {
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
-.z8rym7h {
-  width: var(--qvowxae);
+.oaw05wh {
+  width: var(--_1vwoat4e);
 }
-.z8rym7i {
-  width: var(--qvowxaa);
+.oaw05wi {
+  width: var(--_1vwoat4a);
 }
-[data-braid-hidefocusrings] .q95w5d0 {
+[data-braid-hidefocusrings] ._1ixccu70 {
   opacity: 0 !important;
 }
-.xhtqv82 {
-  --xhtqv80: var(--qvowxa5g);
-  --xhtqv81: var(--qvowxa3o);
+._16e5k4g2 {
+  --_16e5k4g0: var(--_1vwoat45g);
+  --_16e5k4g1: var(--_1vwoat43o);
 }
-.xhtqv83 {
-  --xhtqv80: var(--qvowxa5h);
-  --xhtqv81: var(--qvowxa3e);
+._16e5k4g3 {
+  --_16e5k4g0: var(--_1vwoat45h);
+  --_16e5k4g1: var(--_1vwoat43e);
 }
-.xhtqv84 {
+._16e5k4g4 {
   height: 44px;
-  left: calc(((44px - var(--xhtqv80)) / 2) * -1);
-  top: calc(((44px - var(--xhtqv80)) / 2) * -1);
+  left: calc(((44px - var(--_16e5k4g0)) / 2) * -1);
+  top: calc(((44px - var(--_16e5k4g0)) / 2) * -1);
   width: 44px;
 }
-[data-braid-debug] .xhtqv84 {
+[data-braid-debug] ._16e5k4g4 {
   background: red;
   opacity: 0.2;
 }
-.xhtqv85 {
-  height: var(--xhtqv80);
-  width: var(--xhtqv80);
+._16e5k4g5 {
+  height: var(--_16e5k4g0);
+  width: var(--_16e5k4g0);
 }
-.xhtqv84[type="checkbox"]:checked ~ .xhtqv85 {
+._16e5k4g4[type="checkbox"]:checked ~ ._16e5k4g5 {
   background: transparent;
 }
-.xhtqv86 {
-  padding-top: calc((var(--xhtqv80) - var(--xhtqv81)) / 2);
+._16e5k4g6 {
+  padding-top: calc((var(--_16e5k4g0) - var(--_16e5k4g1)) / 2);
 }
-.xhtqv84.xhtqv87 ~ * .xhtqv88,
-.xhtqv84:checked ~ * .xhtqv88 {
+._16e5k4g4._16e5k4g7 ~ * ._16e5k4g8,
+._16e5k4g4:checked ~ * ._16e5k4g8 {
   display: block;
   z-index: 1;
 }
-.xhtqv84.xhtqv87 + .xhtqv85 > .xhtqv89,
-.xhtqv84:checked + .xhtqv85 > .xhtqv89 {
+._16e5k4g4._16e5k4g7 + ._16e5k4g5 > ._16e5k4g9,
+._16e5k4g4:checked + ._16e5k4g5 > ._16e5k4g9 {
   opacity: 1;
 }
-html:not(._2b382h10) .xhtqv8a {
+html:not(.o1ubka10) ._16e5k4ga {
   opacity: 0;
 }
-.xhtqv84:focus + .xhtqv85 > .xhtqv8b,
-.xhtqv84:focus:not(.xhtqv87) + .xhtqv85 > .xhtqv8c,
-.xhtqv84:hover:not(:checked):not(.xhtqv87):not(:disabled)
-  + .xhtqv85
-  > .xhtqv8c {
+._16e5k4g4:focus + ._16e5k4g5 > ._16e5k4gb,
+._16e5k4g4:focus:not(._16e5k4g7) + ._16e5k4g5 > ._16e5k4gc,
+._16e5k4g4:hover:not(:checked):not(._16e5k4g7):not(:disabled)
+  + ._16e5k4g5
+  > ._16e5k4gc {
   opacity: 1;
 }
-.xhtqv8c > .xhtqv8d {
+._16e5k4gc > ._16e5k4gd {
   opacity: 0.2;
 }
-.xhtqv8e {
+._16e5k4ge {
   opacity: 0.3;
 }
-html:not(._2b382h10) .xhtqv8e {
-  background-color: var(--qvowxa1r);
+html:not(.o1ubka10) ._16e5k4ge {
+  background-color: var(--_1vwoat41r);
 }
-html._2b382h10 .xhtqv8e {
-  background-color: var(--qvowxa1s);
+html.o1ubka10 ._16e5k4ge {
+  background-color: var(--_1vwoat41s);
 }
-.xhtqv8f {
+._16e5k4gf {
   transform: scale(0.85);
 }
-.xhtqv84:active + .xhtqv85 > * > .xhtqv8f {
+._16e5k4g4:active + ._16e5k4g5 > * > ._16e5k4gf {
   transform: scale(0.75);
 }
-.xhtqv8g {
+._16e5k4gg {
   transform: scale(0.6);
 }
-.xhtqv84:active + .xhtqv85 > * > .xhtqv8g {
+._16e5k4g4:active + ._16e5k4g5 > * > ._16e5k4gg {
   transform: scale(0.5);
 }
 @media screen and (min-width: 740px) {
-  .xhtqv82 {
-    --xhtqv81: var(--qvowxa3t);
+  ._16e5k4g2 {
+    --_16e5k4g1: var(--_1vwoat43t);
   }
-  .xhtqv83 {
-    --xhtqv81: var(--qvowxa3j);
+  ._16e5k4g3 {
+    --_16e5k4g1: var(--_1vwoat43j);
   }
 }
-.wuuhl40 {
+._1iq6bbh0 {
   position: relative;
 }
-.wuuhl40:after {
+._1iq6bbh0:after {
   content: "";
   height: 100%;
   left: 50%;
@@ -2525,224 +2525,226 @@ html._2b382h10 .xhtqv8e {
   transform: translate(-50%, -50%);
   width: 100%;
 }
-[data-braid-debug] .wuuhl40:after {
+[data-braid-debug] ._1iq6bbh0:after {
   background: red;
   opacity: 0.2;
 }
-.oalf5l0 {
-  --qvowxa0: 24px;
-  --qvowxa1: 8px;
-  --qvowxa2: 12px;
-  --qvowxa3: 16px;
-  --qvowxa4: 24px;
-  --qvowxa5: 32px;
-  --qvowxa6: 48px;
-  --qvowxa7: 64px;
-  --qvowxa8: 96px;
-  --qvowxa9: 48px;
-  --qvowxaa: 4px;
-  --qvowxab: 4px;
-  --qvowxac: 8px;
-  --qvowxad: 16px;
-  --qvowxae: 24px;
-  --qvowxaf: #e60278;
-  --qvowxag: #f8b1dc;
-  --qvowxah: #fdc221;
-  --qvowxai: #fee384;
-  --qvowxaj: #b91e1e;
-  --qvowxak: #fb999a;
-  --qvowxal: #838fa5;
-  --qvowxam: rgba(153, 191, 247, 0.7);
-  --qvowxan: #1e47a9;
-  --qvowxao: #99bff7;
-  --qvowxap: #1d559d;
-  --qvowxaq: #98c9f1;
-  --qvowxar: #2e3849;
-  --qvowxat: #eaecf1;
-  --qvowxas: #fff;
-  --qvowxau: #12784f;
-  --qvowxav: #8bdec5;
-  --qvowxaw: #7f35a9;
-  --qvowxax: #e1b2f5;
-  --qvowxay: 2px;
-  --qvowxaz: 4px;
-  --qvowxa10: 6px;
-  --qvowxa11: 400px;
-  --qvowxa12: 660px;
-  --qvowxa13: 940px;
-  --qvowxa14: 1280px;
-  --qvowxa15: #e60278;
-  --qvowxa16: #f8b1dc;
-  --qvowxa17: #723d02;
-  --qvowxa18: #fee384;
-  --qvowxa19: #b91e1e;
-  --qvowxa1a: #fb999a;
-  --qvowxa1b: #1e47a9;
-  --qvowxa1c: #99bff7;
-  --qvowxa1d: #1d559d;
-  --qvowxa1e: #98c9f1;
-  --qvowxa1f: #2e3849;
-  --qvowxa1h: #fff;
-  --qvowxa1g: #2e3849;
-  --qvowxa1i: #5b2084;
-  --qvowxa1j: #f0d6fa;
-  --qvowxa1k: #2e3849;
-  --qvowxa1l: #fff;
-  --qvowxa1m: #12784f;
-  --qvowxa1n: #8bdec5;
-  --qvowxa1o: #7f35a9;
-  --qvowxa1p: #e1b2f5;
-  --qvowxa1q: #e60278;
-  --qvowxa1r: #5a6881;
-  --qvowxa1s: hsla(0, 0%, 100%, 0.65);
-  --qvowxa1t: #fff;
-  --qvowxa1u: #1c2330;
-  --qvowxa1v: #051a49;
-  --qvowxa1w: #e60278;
-  --qvowxa1x: #cd026b;
-  --qvowxa1y: #fd0585;
-  --qvowxa1z: #feeffa;
-  --qvowxa20: #fdd7f3;
-  --qvowxa21: #fde3f6;
-  --qvowxa22: #fdc221;
-  --qvowxa23: #fef8de;
-  --qvowxa24: #b91e1e;
-  --qvowxa25: #a31a1a;
-  --qvowxa26: #db1616;
-  --qvowxa27: #ffe3e2;
-  --qvowxa28: #fef3f3;
-  --qvowxa29: #fcdbdb;
-  --qvowxa2a: #fde7e7;
-  --qvowxa2b: #1e47a9;
-  --qvowxa2c: #1a3e93;
-  --qvowxa2d: #2455c9;
-  --qvowxa2e: #f0f7fe;
-  --qvowxa2f: #d8eafc;
-  --qvowxa2g: #e4f1fd;
-  --qvowxa2h: #1d559d;
-  --qvowxa2i: #e3f2fb;
-  --qvowxa2j: #2e3849;
-  --qvowxa2k: #242c39;
-  --qvowxa2l: #384459;
-  --qvowxa2m: #f3f5f7;
-  --qvowxa2n: #f3f5f7;
-  --qvowxa2o: #e4e8ed;
-  --qvowxa2p: #ebeff2;
-  --qvowxa2q: #12784f;
-  --qvowxa2r: #e2f7f1;
-  --qvowxa2s: #7f35a9;
-  --qvowxa2t: #f9ebfd;
-  --qvowxa2u: #fff;
-  --qvowxa2v: #1c2330;
-  --qvowxa2w: SeekSans, "SeekSans Fallback", Arial, Tahoma, sans-serif;
-  --qvowxa2x: 783;
-  --qvowxa2y: 1057;
-  --qvowxa2z: -274;
-  --qvowxa30: 0;
-  --qvowxa31: 1000;
-  --qvowxa32: 12px;
-  --qvowxa33: 18.396px;
-  --qvowxa34: 9.396px;
-  --qvowxa35: -0.375em;
-  --qvowxa36: -0.375em;
-  --qvowxa37: 12px;
-  --qvowxa38: 18.396px;
-  --qvowxa39: 9.396px;
-  --qvowxa3a: -0.375em;
-  --qvowxa3b: -0.375em;
-  --qvowxa3c: 14px;
-  --qvowxa3d: 20.962px;
-  --qvowxa3e: 10.962px;
-  --qvowxa3f: -0.3571em;
-  --qvowxa3g: -0.3571em;
-  --qvowxa3h: 14px;
-  --qvowxa3i: 20.962px;
-  --qvowxa3j: 10.962px;
-  --qvowxa3k: -0.3571em;
-  --qvowxa3l: -0.3571em;
-  --qvowxa3m: 16px;
-  --qvowxa3n: 24.528px;
-  --qvowxa3o: 12.528px;
-  --qvowxa3p: -0.375em;
-  --qvowxa3q: -0.375em;
-  --qvowxa3r: 16px;
-  --qvowxa3s: 24.528px;
-  --qvowxa3t: 12.528px;
-  --qvowxa3u: -0.375em;
-  --qvowxa3v: -0.375em;
-  --qvowxa3w: 18px;
-  --qvowxa3x: 27.094px;
-  --qvowxa3y: 14.094px;
-  --qvowxa3z: -0.3611em;
-  --qvowxa40: -0.3611em;
-  --qvowxa41: 18px;
-  --qvowxa42: 27.094px;
-  --qvowxa43: 14.094px;
-  --qvowxa44: -0.3611em;
-  --qvowxa45: -0.3611em;
-  --qvowxa46: 400;
-  --qvowxa47: 500;
-  --qvowxa48: 700;
-  --qvowxa49: 28px;
-  --qvowxa4a: 32.924px;
-  --qvowxa4b: 21.924px;
-  --qvowxa4c: -0.1964em;
-  --qvowxa4d: -0.1964em;
-  --qvowxa4e: 36px;
-  --qvowxa4f: 42.188px;
-  --qvowxa4g: 28.188px;
-  --qvowxa4h: -0.1944em;
-  --qvowxa4i: -0.1944em;
-  --qvowxa4j: 24px;
-  --qvowxa4k: 29.792px;
-  --qvowxa4l: 18.792px;
-  --qvowxa4m: -0.2292em;
-  --qvowxa4n: -0.2292em;
-  --qvowxa4o: 30px;
-  --qvowxa4p: 36.49px;
-  --qvowxa4q: 23.49px;
-  --qvowxa4r: -0.2167em;
-  --qvowxa4s: -0.2167em;
-  --qvowxa4t: 22px;
-  --qvowxa4u: 27.226px;
-  --qvowxa4v: 17.226px;
-  --qvowxa4w: -0.2273em;
-  --qvowxa4x: -0.2273em;
-  --qvowxa4y: 24px;
-  --qvowxa4z: 29.792px;
-  --qvowxa50: 18.792px;
-  --qvowxa51: -0.2292em;
-  --qvowxa52: -0.2292em;
-  --qvowxa53: 20px;
-  --qvowxa54: 24.66px;
-  --qvowxa55: 15.66px;
-  --qvowxa56: -0.225em;
-  --qvowxa57: -0.225em;
-  --qvowxa58: 20px;
-  --qvowxa59: 24.66px;
-  --qvowxa5a: 15.66px;
-  --qvowxa5b: -0.225em;
-  --qvowxa5c: -0.225em;
-  --qvowxa5d: 400;
-  --qvowxa5e: 500;
-  --qvowxa5f: underline;
-  --qvowxa5g: 24px;
-  --qvowxa5h: 20px;
-  --qvowxa5i: transform 0.125s ease, opacity 0.125s ease;
-  --qvowxa5j: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
-  --qvowxa5k: scale(0.95);
-  --qvowxa5l: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
-    0 2px 2px -2px rgba(28, 35, 48, 0.1), 0 4px 4px -4px rgba(28, 35, 48, 0.2);
-  --qvowxa5m: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
-    0 8px 8px -4px rgba(28, 35, 48, 0.1), 0 12px 12px -8px rgba(28, 35, 48, 0.2);
-  --qvowxa5n: 0 2px 4px 0px rgba(28, 35, 48, 0.1),
-    0 12px 12px -4px rgba(28, 35, 48, 0.1),
+.tqc3z80 {
+  --_1vwoat40: 24px;
+  --_1vwoat41: 8px;
+  --_1vwoat42: 12px;
+  --_1vwoat43: 16px;
+  --_1vwoat44: 24px;
+  --_1vwoat45: 32px;
+  --_1vwoat46: 48px;
+  --_1vwoat47: 64px;
+  --_1vwoat48: 96px;
+  --_1vwoat49: 48px;
+  --_1vwoat4a: 4px;
+  --_1vwoat4b: 4px;
+  --_1vwoat4c: 8px;
+  --_1vwoat4d: 16px;
+  --_1vwoat4e: 24px;
+  --_1vwoat4f: #e60278;
+  --_1vwoat4g: #f8b1dc;
+  --_1vwoat4h: #fdc221;
+  --_1vwoat4i: #fee384;
+  --_1vwoat4j: #b91e1e;
+  --_1vwoat4k: #fb999a;
+  --_1vwoat4l: #838fa5;
+  --_1vwoat4m: rgba(153, 191, 247, 0.7);
+  --_1vwoat4n: #1e47a9;
+  --_1vwoat4o: #99bff7;
+  --_1vwoat4p: #1d559d;
+  --_1vwoat4q: #98c9f1;
+  --_1vwoat4r: #2e3849;
+  --_1vwoat4t: #eaecf1;
+  --_1vwoat4s: #fff;
+  --_1vwoat4u: #12784f;
+  --_1vwoat4v: #8bdec5;
+  --_1vwoat4w: #7f35a9;
+  --_1vwoat4x: #e1b2f5;
+  --_1vwoat4y: 2px;
+  --_1vwoat4z: 4px;
+  --_1vwoat410: 6px;
+  --_1vwoat411: 400px;
+  --_1vwoat412: 660px;
+  --_1vwoat413: 940px;
+  --_1vwoat414: 1280px;
+  --_1vwoat415: #e60278;
+  --_1vwoat416: #f8b1dc;
+  --_1vwoat417: #723d02;
+  --_1vwoat418: #fee384;
+  --_1vwoat419: #b91e1e;
+  --_1vwoat41a: #fb999a;
+  --_1vwoat41b: #1e47a9;
+  --_1vwoat41c: #99bff7;
+  --_1vwoat41d: #1d559d;
+  --_1vwoat41e: #98c9f1;
+  --_1vwoat41f: #2e3849;
+  --_1vwoat41h: #fff;
+  --_1vwoat41g: #2e3849;
+  --_1vwoat41i: #5b2084;
+  --_1vwoat41j: #f0d6fa;
+  --_1vwoat41k: #2e3849;
+  --_1vwoat41l: #fff;
+  --_1vwoat41m: #12784f;
+  --_1vwoat41n: #8bdec5;
+  --_1vwoat41o: #7f35a9;
+  --_1vwoat41p: #e1b2f5;
+  --_1vwoat41q: #e60278;
+  --_1vwoat41r: #5a6881;
+  --_1vwoat41s: hsla(0, 0%, 100%, 0.65);
+  --_1vwoat41t: #fff;
+  --_1vwoat41u: #1c2330;
+  --_1vwoat41v: #051a49;
+  --_1vwoat41w: #e60278;
+  --_1vwoat41x: #cd026b;
+  --_1vwoat41y: #fd0585;
+  --_1vwoat41z: #feeffa;
+  --_1vwoat420: #fdd7f3;
+  --_1vwoat421: #fde3f6;
+  --_1vwoat422: #fdc221;
+  --_1vwoat423: #fef8de;
+  --_1vwoat424: #b91e1e;
+  --_1vwoat425: #a31a1a;
+  --_1vwoat426: #db1616;
+  --_1vwoat427: #ffe3e2;
+  --_1vwoat428: #fef3f3;
+  --_1vwoat429: #fcdbdb;
+  --_1vwoat42a: #fde7e7;
+  --_1vwoat42b: #1e47a9;
+  --_1vwoat42c: #1a3e93;
+  --_1vwoat42d: #2455c9;
+  --_1vwoat42e: #f0f7fe;
+  --_1vwoat42f: #d8eafc;
+  --_1vwoat42g: #e4f1fd;
+  --_1vwoat42h: #1d559d;
+  --_1vwoat42i: #e3f2fb;
+  --_1vwoat42j: #2e3849;
+  --_1vwoat42k: #242c39;
+  --_1vwoat42l: #384459;
+  --_1vwoat42m: #f3f5f7;
+  --_1vwoat42n: #f3f5f7;
+  --_1vwoat42o: #e4e8ed;
+  --_1vwoat42p: #ebeff2;
+  --_1vwoat42q: #12784f;
+  --_1vwoat42r: #e2f7f1;
+  --_1vwoat42s: #7f35a9;
+  --_1vwoat42t: #f9ebfd;
+  --_1vwoat42u: #fff;
+  --_1vwoat42v: #1c2330;
+  --_1vwoat42w: SeekSans, "SeekSans Fallback", Arial, Tahoma, sans-serif;
+  --_1vwoat42x: 783;
+  --_1vwoat42y: 1057;
+  --_1vwoat42z: -274;
+  --_1vwoat430: 0;
+  --_1vwoat431: 1000;
+  --_1vwoat432: 12px;
+  --_1vwoat433: 18.396px;
+  --_1vwoat434: 9.396px;
+  --_1vwoat435: -0.375em;
+  --_1vwoat436: -0.375em;
+  --_1vwoat437: 12px;
+  --_1vwoat438: 18.396px;
+  --_1vwoat439: 9.396px;
+  --_1vwoat43a: -0.375em;
+  --_1vwoat43b: -0.375em;
+  --_1vwoat43c: 14px;
+  --_1vwoat43d: 20.962px;
+  --_1vwoat43e: 10.962px;
+  --_1vwoat43f: -0.3571em;
+  --_1vwoat43g: -0.3571em;
+  --_1vwoat43h: 14px;
+  --_1vwoat43i: 20.962px;
+  --_1vwoat43j: 10.962px;
+  --_1vwoat43k: -0.3571em;
+  --_1vwoat43l: -0.3571em;
+  --_1vwoat43m: 16px;
+  --_1vwoat43n: 24.528px;
+  --_1vwoat43o: 12.528px;
+  --_1vwoat43p: -0.375em;
+  --_1vwoat43q: -0.375em;
+  --_1vwoat43r: 16px;
+  --_1vwoat43s: 24.528px;
+  --_1vwoat43t: 12.528px;
+  --_1vwoat43u: -0.375em;
+  --_1vwoat43v: -0.375em;
+  --_1vwoat43w: 18px;
+  --_1vwoat43x: 27.094px;
+  --_1vwoat43y: 14.094px;
+  --_1vwoat43z: -0.3611em;
+  --_1vwoat440: -0.3611em;
+  --_1vwoat441: 18px;
+  --_1vwoat442: 27.094px;
+  --_1vwoat443: 14.094px;
+  --_1vwoat444: -0.3611em;
+  --_1vwoat445: -0.3611em;
+  --_1vwoat446: 400;
+  --_1vwoat447: 500;
+  --_1vwoat448: 700;
+  --_1vwoat449: 28px;
+  --_1vwoat44a: 32.924px;
+  --_1vwoat44b: 21.924px;
+  --_1vwoat44c: -0.1964em;
+  --_1vwoat44d: -0.1964em;
+  --_1vwoat44e: 36px;
+  --_1vwoat44f: 42.188px;
+  --_1vwoat44g: 28.188px;
+  --_1vwoat44h: -0.1944em;
+  --_1vwoat44i: -0.1944em;
+  --_1vwoat44j: 24px;
+  --_1vwoat44k: 29.792px;
+  --_1vwoat44l: 18.792px;
+  --_1vwoat44m: -0.2292em;
+  --_1vwoat44n: -0.2292em;
+  --_1vwoat44o: 30px;
+  --_1vwoat44p: 36.49px;
+  --_1vwoat44q: 23.49px;
+  --_1vwoat44r: -0.2167em;
+  --_1vwoat44s: -0.2167em;
+  --_1vwoat44t: 22px;
+  --_1vwoat44u: 27.226px;
+  --_1vwoat44v: 17.226px;
+  --_1vwoat44w: -0.2273em;
+  --_1vwoat44x: -0.2273em;
+  --_1vwoat44y: 24px;
+  --_1vwoat44z: 29.792px;
+  --_1vwoat450: 18.792px;
+  --_1vwoat451: -0.2292em;
+  --_1vwoat452: -0.2292em;
+  --_1vwoat453: 20px;
+  --_1vwoat454: 24.66px;
+  --_1vwoat455: 15.66px;
+  --_1vwoat456: -0.225em;
+  --_1vwoat457: -0.225em;
+  --_1vwoat458: 20px;
+  --_1vwoat459: 24.66px;
+  --_1vwoat45a: 15.66px;
+  --_1vwoat45b: -0.225em;
+  --_1vwoat45c: -0.225em;
+  --_1vwoat45d: 400;
+  --_1vwoat45e: 500;
+  --_1vwoat45f: underline;
+  --_1vwoat45g: 24px;
+  --_1vwoat45h: 20px;
+  --_1vwoat45i: transform 0.125s ease, opacity 0.125s ease;
+  --_1vwoat45j: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
+  --_1vwoat45k: scale(0.95);
+  --_1vwoat45l:
+    0 2px 4px 0px rgba(28, 35, 48, 0.1), 0 2px 2px -2px rgba(28, 35, 48, 0.1),
+    0 4px 4px -4px rgba(28, 35, 48, 0.2);
+  --_1vwoat45m:
+    0 2px 4px 0px rgba(28, 35, 48, 0.1), 0 8px 8px -4px rgba(28, 35, 48, 0.1),
+    0 12px 12px -8px rgba(28, 35, 48, 0.2);
+  --_1vwoat45n:
+    0 2px 4px 0px rgba(28, 35, 48, 0.1), 0 12px 12px -4px rgba(28, 35, 48, 0.1),
     0 20px 20px -12px rgba(28, 35, 48, 0.2);
 }
 
-/*# sourceMappingURL=2-77f00337ef4ad2879291.css.map*/
+/*# sourceMappingURL=2-facd3ccbba2a2e974f05.css.map*/
 ,
-  "2-77f00337ef4ad2879291.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-facd3ccbba2a2e974f05.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "crypto",
   "fs",
@@ -2762,7 +2764,7 @@ html._2b382h10 .xhtqv8e {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-77f00337ef4ad2879291.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-facd3ccbba2a2e974f05.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -2772,8 +2774,8 @@ html._2b382h10 .xhtqv8e {
       <body>
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
-            html._2b382h10,html._2b382h10 body{color-scheme:dark;background:#1C2330}
-          </style><div class="oalf5l0 _193fbho18 _193fbho1b"><span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">Hello <!-- -->jobStreet<!-- --> <span class="sqfpyo0 _2b382h57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 vqnzg00 _2b382h57 _2b382h5f wsnh3d0 wsnh3d2 wsnh3d3 wsnh3d4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sqfpyo0 _2b382h8n _2b382h7j _2b382hav _2b382h9r _2b382h5f _2b382h67 _2b382hi7 _2b382h4j _2b382h4c _193fbho18 _193fbho1b _2b382h33 _2b382h36"><div class="sqfpyo0 _2b382h5f"><div class="sqfpyo0 _2b382h5b _2b382hi7"><input class="sqfpyo0 sqfpyo1 sqfpyo6 sqfpyo7 sqfpyoc _2b382h5j _2b382h8 _2b382hh _2b382h6 xhtqv84 xhtqv82" type="checkbox" id="id_1" aria-checked="false"/><div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33"><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22"><div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f"><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h3x _2b382h3y"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 _2b382h3p _2b382h3u"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8b _2b382h4t _2b382h4u"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8c _2b382h3z _2b382h44"><div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f"><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sqfpyo0 _2b382hb3 _2b382hi3"><div class="sqfpyo0 _2b382h5b xhtqv82 xhtqv86"><label class="sqfpyo0 _2b382h4 _2b382h4z _2b382hh wuuhl40" for="id_1"><span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">This is a checkbox</span></label></div></div></div></div></div><div class="sqfpyo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->jobStreet<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -2792,7 +2794,7 @@ html._2b382h10 .xhtqv8e {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-77f00337ef4ad2879291.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-facd3ccbba2a2e974f05.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -2802,8 +2804,8 @@ html._2b382h10 .xhtqv8e {
       <body>
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
-            html._2b382h10,html._2b382h10 body{color-scheme:dark;background:#1C2330}
-          </style><div class="oalf5l0 _193fbho18 _193fbho1b"><span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">Hello <!-- -->seekAnz<!-- --> <span class="sqfpyo0 _2b382h57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 vqnzg00 _2b382h57 _2b382h5f wsnh3d0 wsnh3d2 wsnh3d3 wsnh3d4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sqfpyo0 _2b382h8n _2b382h7j _2b382hav _2b382h9r _2b382h5f _2b382h67 _2b382hi7 _2b382h4j _2b382h4c _193fbho18 _193fbho1b _2b382h33 _2b382h36"><div class="sqfpyo0 _2b382h5f"><div class="sqfpyo0 _2b382h5b _2b382hi7"><input class="sqfpyo0 sqfpyo1 sqfpyo6 sqfpyo7 sqfpyoc _2b382h5j _2b382h8 _2b382hh _2b382h6 xhtqv84 xhtqv82" type="checkbox" id="id_1" aria-checked="false"/><div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33"><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22"><div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f"><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h3x _2b382h3y"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 _2b382h3p _2b382h3u"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8b _2b382h4t _2b382h4u"></span><span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8c _2b382h3z _2b382h44"><div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f"><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sqfpyo0 _2b382hb3 _2b382hi3"><div class="sqfpyo0 _2b382h5b xhtqv82 xhtqv86"><label class="sqfpyo0 _2b382h4 _2b382h4z _2b382hh wuuhl40" for="id_1"><span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">This is a checkbox</span></label></div></div></div></div></div><div class="sqfpyo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->seekAnz<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -2820,7 +2822,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-77f00337ef4ad2879291.css",
+  "/2-facd3ccbba2a2e974f05.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -2858,13 +2860,13 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html._2b382h10,html._2b382h10 body{color-scheme:dark;background:#1C2330}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="oalf5l0 _193fbho18 _193fbho1b">
-        <span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
           Hello
           jobStreet
-          <span class="sqfpyo0 _2b382h57">
+          <span class="_1gdwseo0 o1ubka57">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -2873,7 +2875,7 @@ SOURCE HTML: <!DOCTYPE html>
               fill="currentColor"
               width="16"
               height="16"
-              class="sqfpyo0 vqnzg00 _2b382h57 _2b382h5f wsnh3d0 wsnh3d2 wsnh3d3 wsnh3d4"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -2881,19 +2883,19 @@ SOURCE HTML: <!DOCTYPE html>
             </svg>
           </span>
         </span>
-        <div class="sqfpyo0 _2b382h8n _2b382h7j _2b382hav _2b382h9r _2b382h5f _2b382h67 _2b382hi7 _2b382h4j _2b382h4c _193fbho18 _193fbho1b _2b382h33 _2b382h36">
-          <div class="sqfpyo0 _2b382h5f">
-            <div class="sqfpyo0 _2b382h5b _2b382hi7">
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
               <input
-                class="sqfpyo0 sqfpyo1 sqfpyo6 sqfpyo7 sqfpyoc _2b382h5j _2b382h8 _2b382hh _2b382h6 xhtqv84 xhtqv82"
+                class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33">
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22">
-                  <div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f">
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -2902,14 +2904,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -2918,7 +2920,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2927,15 +2929,15 @@ SOURCE HTML: <!DOCTYPE html>
                     </div>
                   </div>
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h3x _2b382h3y">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 _2b382h3p _2b382h3u">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8b _2b382h4t _2b382h4u">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8c _2b382h3z _2b382h44">
-                  <div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f">
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -2944,14 +2946,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -2960,7 +2962,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -2970,13 +2972,13 @@ SOURCE HTML: <!DOCTYPE html>
                   </div>
                 </span>
               </div>
-              <div class="sqfpyo0 _2b382hb3 _2b382hi3">
-                <div class="sqfpyo0 _2b382h5b xhtqv82 xhtqv86">
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
                   <label
-                    class="sqfpyo0 _2b382h4 _2b382h4z _2b382hh wuuhl40"
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
                     for="id_1"
                   >
-                    <span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
                       This is a checkbox
                     </span>
                   </label>
@@ -2985,7 +2987,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="sqfpyo0 inn18b0">
+        <div class="_1gdwseo0 inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3029,11 +3031,11 @@ POST HYDRATE DIFFS:
                  aria-checked="false"
 +                value
                >
-               <div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33">
-                 <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22">
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
 @@ -163,7 +164,7 @@
          </div>
-         <div class="sqfpyo0 inn18b0">
+         <div class="_1gdwseo0 inn18b0">
            🧁 Vanilla content
 -          Initial
 +          Client
@@ -3049,7 +3051,7 @@ SCRIPTS: [
   "/main.js",
 ]
 CSS: [
-  "/2-77f00337ef4ad2879291.css",
+  "/2-facd3ccbba2a2e974f05.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -3087,13 +3089,13 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html._2b382h10,html._2b382h10 body{color-scheme:dark;background:#1C2330}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="oalf5l0 _193fbho18 _193fbho1b">
-        <span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
           Hello
           seekAnz
-          <span class="sqfpyo0 _2b382h57">
+          <span class="_1gdwseo0 o1ubka57">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -3102,7 +3104,7 @@ SOURCE HTML: <!DOCTYPE html>
               fill="currentColor"
               width="16"
               height="16"
-              class="sqfpyo0 vqnzg00 _2b382h57 _2b382h5f wsnh3d0 wsnh3d2 wsnh3d3 wsnh3d4"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -3110,19 +3112,19 @@ SOURCE HTML: <!DOCTYPE html>
             </svg>
           </span>
         </span>
-        <div class="sqfpyo0 _2b382h8n _2b382h7j _2b382hav _2b382h9r _2b382h5f _2b382h67 _2b382hi7 _2b382h4j _2b382h4c _193fbho18 _193fbho1b _2b382h33 _2b382h36">
-          <div class="sqfpyo0 _2b382h5f">
-            <div class="sqfpyo0 _2b382h5b _2b382hi7">
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
               <input
-                class="sqfpyo0 sqfpyo1 sqfpyo6 sqfpyo7 sqfpyoc _2b382h5j _2b382h8 _2b382hh _2b382h6 xhtqv84 xhtqv82"
+                class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33">
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22">
-                  <div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f">
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3131,14 +3133,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3147,7 +3149,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho21"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3156,15 +3158,15 @@ SOURCE HTML: <!DOCTYPE html>
                     </div>
                   </div>
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h3x _2b382h3y">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 _2b382h3p _2b382h3u">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8b _2b382h4t _2b382h4u">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
                 </span>
-                <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv8c _2b382h3z _2b382h44">
-                  <div class="sqfpyo0 _2b382hn _2b382hx _2b382h5f xhtqv8d xhtqv8f">
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx _2b382h6">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3173,14 +3175,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hx">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3189,7 +3191,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="sqfpyo0 _2b382hp _2b382hn _2b382h4z _193fbho20"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3199,13 +3201,13 @@ SOURCE HTML: <!DOCTYPE html>
                   </div>
                 </span>
               </div>
-              <div class="sqfpyo0 _2b382hb3 _2b382hi3">
-                <div class="sqfpyo0 _2b382h5b xhtqv82 xhtqv86">
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
                   <label
-                    class="sqfpyo0 _2b382h4 _2b382h4z _2b382hh wuuhl40"
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
                     for="id_1"
                   >
-                    <span class="sqfpyo0 _2b382h4z _193fbho0 _193fbho1 _193fbho21 _1vgffpw4 _193fbhoa">
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
                       This is a checkbox
                     </span>
                   </label>
@@ -3214,7 +3216,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="sqfpyo0 inn18b0">
+        <div class="_1gdwseo0 inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3258,11 +3260,11 @@ POST HYDRATE DIFFS:
                  aria-checked="false"
 +                value
                >
-               <div class="sqfpyo0 _2b382hhv _2b382h5f _2b382h63 xhtqv85 xhtqv82 _193fbho18  _2b382h33">
-                 <span class="sqfpyo0 _2b382hj _2b382hk _2b382hl _2b382hm _2b382h5j _2b382hi _2b382h63 _2b382hx _2b382h6 xhtqv89 _193fbho19 _193fbho1b _2b382h21 _2b382h22">
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
 @@ -163,7 +164,7 @@
          </div>
-         <div class="sqfpyo0 inn18b0">
+         <div class="_1gdwseo0 inn18b0">
            🧁 Vanilla content
 -          Initial
 +          Client
@@ -3323,13 +3325,13 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html.sprinkles_darkMode__2b382h10,html.sprinkles_darkMode__2b382h10 body{color-scheme:dark;background:#1C2330}
+            html.sprinkles_darkMode__o1ubka10,html.sprinkles_darkMode__o1ubka10 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="seekJobs_seekJobs__oalf5l0 typography_lightModeTone_light__193fbho18 typography_darkModeTone_dark__193fbho1b">
-        <span class="reset_base__sqfpyo0 sprinkles_display_block_mobile__2b382h4z typography_fontFamily__193fbho0 typography_fontWeight_regular__193fbho1 typography_tone_neutral__193fbho21 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__193fbhoa">
+      <div class="seekJobs_seekJobs__tqc3z80 typography_lightModeTone_light__1jw6vm018 typography_darkModeTone_dark__1jw6vm01b">
+        <span class="reset_base__1gdwseo0 sprinkles_display_block_mobile__o1ubka4z typography_fontFamily__1jw6vm00 typography_fontWeight_regular__1jw6vm01 typography_tone_neutral__1jw6vm021 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__1jw6vm0a">
           Hello
           jobStreet
-          <span class="reset_base__sqfpyo0 sprinkles_display_inlineBlock_mobile__2b382h57">
+          <span class="reset_base__1gdwseo0 sprinkles_display_inlineBlock_mobile__o1ubka57">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -3338,7 +3340,7 @@ SOURCE HTML: <!DOCTYPE html>
               fill="currentColor"
               width="16"
               height="16"
-              class="reset_base__sqfpyo0 IconChevron_root__vqnzg00 sprinkles_display_inlineBlock_mobile__2b382h57 sprinkles_position_relative_mobile__2b382h5f icon_size__wsnh3d0 icon_inlineCrop__wsnh3d2 icon_inline__wsnh3d3 icon_alignY_uppercase_none__wsnh3d4"
+              class="reset_base__1gdwseo0 IconChevron_root__1cqqig50 sprinkles_display_inlineBlock_mobile__o1ubka57 sprinkles_position_relative_mobile__o1ubka5f icon_size__1jxquog0 icon_inlineCrop__1jxquog2 icon_inline__1jxquog3 icon_alignY_uppercase_none__1jxquog4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -3346,19 +3348,19 @@ SOURCE HTML: <!DOCTYPE html>
             </svg>
           </span>
         </span>
-        <div class="reset_base__sqfpyo0 sprinkles_paddingBottom_gutter_mobile__2b382h8n sprinkles_paddingTop_gutter_mobile__2b382h7j sprinkles_paddingLeft_gutter_mobile__2b382hav sprinkles_paddingRight_gutter_mobile__2b382h9r sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_large_mobile__2b382h67 sprinkles_textAlign_left_mobile__2b382hi7 sprinkles_boxShadow_borderNeutralLight_lightMode__2b382h4j sprinkles_boxShadow_borderNeutral_darkMode__2b382h4c typography_lightModeTone_light__193fbho18 typography_darkModeTone_dark__193fbho1b sprinkles_background_surface_lightMode__2b382h33 sprinkles_background_surfaceDark_darkMode__2b382h36">
-          <div class="reset_base__sqfpyo0 sprinkles_position_relative_mobile__2b382h5f">
-            <div class="reset_base__sqfpyo0 sprinkles_display_flex_mobile__2b382h5b sprinkles_textAlign_left_mobile__2b382hi7">
+        <div class="reset_base__1gdwseo0 sprinkles_paddingBottom_gutter_mobile__o1ubka8n sprinkles_paddingTop_gutter_mobile__o1ubka7j sprinkles_paddingLeft_gutter_mobile__o1ubkaav sprinkles_paddingRight_gutter_mobile__o1ubka9r sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_large_mobile__o1ubka67 sprinkles_textAlign_left_mobile__o1ubkai7 sprinkles_boxShadow_borderNeutralLight_lightMode__o1ubka4j sprinkles_boxShadow_borderNeutral_darkMode__o1ubka4c typography_lightModeTone_light__1jw6vm018 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_surface_lightMode__o1ubka33 sprinkles_background_surfaceDark_darkMode__o1ubka36">
+          <div class="reset_base__1gdwseo0 sprinkles_position_relative_mobile__o1ubka5f">
+            <div class="reset_base__1gdwseo0 sprinkles_display_flex_mobile__o1ubka5b sprinkles_textAlign_left_mobile__o1ubkai7">
               <input
-                class="reset_base__sqfpyo0 reset_block__sqfpyo1 reset_appearance__sqfpyo6 reset_transparent__sqfpyo7 reset_input__sqfpyoc sprinkles_position_absolute_mobile__2b382h5j sprinkles_zIndex_1__2b382h8 sprinkles_cursor_pointer__2b382hh sprinkles_opacity_0__2b382h6 InlineField_realField__xhtqv84 InlineField_sizeVars_standard__xhtqv82"
+                class="reset_base__1gdwseo0 reset_block__1gdwseo1 reset_appearance__1gdwseo6 reset_transparent__1gdwseo7 reset_input__1gdwseoc sprinkles_position_absolute_mobile__o1ubka5j sprinkles_zIndex_1__o1ubka8 sprinkles_cursor_pointer__o1ubkah sprinkles_opacity_0__o1ubka6 InlineField_realField__16e5k4g4 InlineField_sizeVars_standard__16e5k4g2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="reset_base__sqfpyo0 sprinkles_flexShrink_0_mobile__2b382hhv sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_standard_mobile__2b382h63 InlineField_fakeField__xhtqv85 InlineField_sizeVars_standard__xhtqv82 typography_lightModeTone_light__193fbho18  sprinkles_background_surface_lightMode__2b382h33">
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_selected__xhtqv89 typography_lightModeTone_dark__193fbho19 typography_darkModeTone_dark__193fbho1b sprinkles_background_formAccent_lightMode__2b382h21 sprinkles_background_formAccent_darkMode__2b382h22">
-                  <div class="reset_base__sqfpyo0 sprinkles_height_full__2b382hn sprinkles_transition_fast__2b382hx sprinkles_position_relative_mobile__2b382h5f InlineField_indicator__xhtqv8d InlineField_checkboxScale__xhtqv8f">
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+              <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
+                  <div class="reset_base__1gdwseo0 sprinkles_height_full__o1ubkan sprinkles_transition_fast__o1ubkax sprinkles_position_relative_mobile__o1ubka5f InlineField_indicator__16e5k4gd InlineField_checkboxScale__16e5k4gf">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3367,14 +3369,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_neutral__193fbho21"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_neutral__1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3383,7 +3385,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_neutral__193fbho21"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_neutral__1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3392,15 +3394,15 @@ SOURCE HTML: <!DOCTYPE html>
                     </div>
                   </div>
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_boxShadow_borderField_lightMode__2b382h3x sprinkles_boxShadow_borderField_darkMode__2b382h3y">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_boxShadow_borderField_lightMode__o1ubka3x sprinkles_boxShadow_borderField_darkMode__o1ubka3y">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 sprinkles_boxShadow_borderCritical_lightMode__2b382h3p sprinkles_boxShadow_borderCriticalLight_darkMode__2b382h3u">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 sprinkles_boxShadow_borderCritical_lightMode__o1ubka3p sprinkles_boxShadow_borderCriticalLight_darkMode__o1ubka3u">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_focusOverlay__xhtqv8b sprinkles_boxShadow_outlineFocus_lightMode__2b382h4t sprinkles_boxShadow_outlineFocus_darkMode__2b382h4u">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_focusOverlay__16e5k4gb sprinkles_boxShadow_outlineFocus_lightMode__o1ubka4t sprinkles_boxShadow_outlineFocus_darkMode__o1ubka4u">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_hoverOverlay__xhtqv8c sprinkles_boxShadow_borderFormAccent_lightMode__2b382h3z sprinkles_boxShadow_borderFormAccentLight_darkMode__2b382h44">
-                  <div class="reset_base__sqfpyo0 sprinkles_height_full__2b382hn sprinkles_transition_fast__2b382hx sprinkles_position_relative_mobile__2b382h5f InlineField_indicator__xhtqv8d InlineField_checkboxScale__xhtqv8f">
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_hoverOverlay__16e5k4gc sprinkles_boxShadow_borderFormAccent_lightMode__o1ubka3z sprinkles_boxShadow_borderFormAccentLight_darkMode__o1ubka44">
+                  <div class="reset_base__1gdwseo0 sprinkles_height_full__o1ubkan sprinkles_transition_fast__o1ubkax sprinkles_position_relative_mobile__o1ubka5f InlineField_indicator__16e5k4gd InlineField_checkboxScale__16e5k4gf">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3409,14 +3411,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_formAccent__193fbho20"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_formAccent__1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3425,7 +3427,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_formAccent__193fbho20"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_formAccent__1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3435,13 +3437,13 @@ SOURCE HTML: <!DOCTYPE html>
                   </div>
                 </span>
               </div>
-              <div class="reset_base__sqfpyo0 sprinkles_paddingLeft_xsmall_mobile__2b382hb3 sprinkles_flexGrow_1_mobile__2b382hi3">
-                <div class="reset_base__sqfpyo0 sprinkles_display_flex_mobile__2b382h5b InlineField_sizeVars_standard__xhtqv82 InlineField_labelOffset__xhtqv86">
+              <div class="reset_base__1gdwseo0 sprinkles_paddingLeft_xsmall_mobile__o1ubkab3 sprinkles_flexGrow_1_mobile__o1ubkai3">
+                <div class="reset_base__1gdwseo0 sprinkles_display_flex_mobile__o1ubka5b InlineField_sizeVars_standard__16e5k4g2 InlineField_labelOffset__16e5k4g6">
                   <label
-                    class="reset_base__sqfpyo0 sprinkles_userSelect_none__2b382h4 sprinkles_display_block_mobile__2b382h4z sprinkles_cursor_pointer__2b382hh virtualTouchable_virtualTouchable__wuuhl40"
+                    class="reset_base__1gdwseo0 sprinkles_userSelect_none__o1ubka4 sprinkles_display_block_mobile__o1ubka4z sprinkles_cursor_pointer__o1ubkah virtualTouchable_virtualTouchable__1iq6bbh0"
                     for="id_1"
                   >
-                    <span class="reset_base__sqfpyo0 sprinkles_display_block_mobile__2b382h4z typography_fontFamily__193fbho0 typography_fontWeight_regular__193fbho1 typography_tone_neutral__193fbho21 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__193fbhoa">
+                    <span class="reset_base__1gdwseo0 sprinkles_display_block_mobile__o1ubka4z typography_fontFamily__1jw6vm00 typography_fontWeight_regular__1jw6vm01 typography_tone_neutral__1jw6vm021 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__1jw6vm0a">
                       This is a checkbox
                     </span>
                   </label>
@@ -3450,7 +3452,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="reset_base__sqfpyo0 App_vanillaBox__inn18b0">
+        <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3500,11 +3502,11 @@ POST HYDRATE DIFFS:
                  aria-checked="false"
 +                value
                >
-               <div class="reset_base__sqfpyo0 sprinkles_flexShrink_0_mobile__2b382hhv sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_standard_mobile__2b382h63 InlineField_fakeField__xhtqv85 InlineField_sizeVars_standard__xhtqv82 typography_lightModeTone_light__193fbho18  sprinkles_background_surface_lightMode__2b382h33">
-                 <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_selected__xhtqv89 typography_lightModeTone_dark__193fbho19 typography_darkModeTone_dark__193fbho1b sprinkles_background_formAccent_lightMode__2b382h21 sprinkles_background_formAccent_darkMode__2b382h22">
+               <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
+                 <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
 @@ -169,7 +170,7 @@
          </div>
-         <div class="reset_base__sqfpyo0 App_vanillaBox__inn18b0">
+         <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
            🧁 Vanilla content
 -          Initial
 +          Client
@@ -3565,13 +3567,13 @@ SOURCE HTML: <!DOCTYPE html>
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html.sprinkles_darkMode__2b382h10,html.sprinkles_darkMode__2b382h10 body{color-scheme:dark;background:#1C2330}
+            html.sprinkles_darkMode__o1ubka10,html.sprinkles_darkMode__o1ubka10 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="seekJobs_seekJobs__oalf5l0 typography_lightModeTone_light__193fbho18 typography_darkModeTone_dark__193fbho1b">
-        <span class="reset_base__sqfpyo0 sprinkles_display_block_mobile__2b382h4z typography_fontFamily__193fbho0 typography_fontWeight_regular__193fbho1 typography_tone_neutral__193fbho21 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__193fbhoa">
+      <div class="seekJobs_seekJobs__tqc3z80 typography_lightModeTone_light__1jw6vm018 typography_darkModeTone_dark__1jw6vm01b">
+        <span class="reset_base__1gdwseo0 sprinkles_display_block_mobile__o1ubka4z typography_fontFamily__1jw6vm00 typography_fontWeight_regular__1jw6vm01 typography_tone_neutral__1jw6vm021 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__1jw6vm0a">
           Hello
           seekAnz
-          <span class="reset_base__sqfpyo0 sprinkles_display_inlineBlock_mobile__2b382h57">
+          <span class="reset_base__1gdwseo0 sprinkles_display_inlineBlock_mobile__o1ubka57">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -3580,7 +3582,7 @@ SOURCE HTML: <!DOCTYPE html>
               fill="currentColor"
               width="16"
               height="16"
-              class="reset_base__sqfpyo0 IconChevron_root__vqnzg00 sprinkles_display_inlineBlock_mobile__2b382h57 sprinkles_position_relative_mobile__2b382h5f icon_size__wsnh3d0 icon_inlineCrop__wsnh3d2 icon_inline__wsnh3d3 icon_alignY_uppercase_none__wsnh3d4"
+              class="reset_base__1gdwseo0 IconChevron_root__1cqqig50 sprinkles_display_inlineBlock_mobile__o1ubka57 sprinkles_position_relative_mobile__o1ubka5f icon_size__1jxquog0 icon_inlineCrop__1jxquog2 icon_inline__1jxquog3 icon_alignY_uppercase_none__1jxquog4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -3588,19 +3590,19 @@ SOURCE HTML: <!DOCTYPE html>
             </svg>
           </span>
         </span>
-        <div class="reset_base__sqfpyo0 sprinkles_paddingBottom_gutter_mobile__2b382h8n sprinkles_paddingTop_gutter_mobile__2b382h7j sprinkles_paddingLeft_gutter_mobile__2b382hav sprinkles_paddingRight_gutter_mobile__2b382h9r sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_large_mobile__2b382h67 sprinkles_textAlign_left_mobile__2b382hi7 sprinkles_boxShadow_borderNeutralLight_lightMode__2b382h4j sprinkles_boxShadow_borderNeutral_darkMode__2b382h4c typography_lightModeTone_light__193fbho18 typography_darkModeTone_dark__193fbho1b sprinkles_background_surface_lightMode__2b382h33 sprinkles_background_surfaceDark_darkMode__2b382h36">
-          <div class="reset_base__sqfpyo0 sprinkles_position_relative_mobile__2b382h5f">
-            <div class="reset_base__sqfpyo0 sprinkles_display_flex_mobile__2b382h5b sprinkles_textAlign_left_mobile__2b382hi7">
+        <div class="reset_base__1gdwseo0 sprinkles_paddingBottom_gutter_mobile__o1ubka8n sprinkles_paddingTop_gutter_mobile__o1ubka7j sprinkles_paddingLeft_gutter_mobile__o1ubkaav sprinkles_paddingRight_gutter_mobile__o1ubka9r sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_large_mobile__o1ubka67 sprinkles_textAlign_left_mobile__o1ubkai7 sprinkles_boxShadow_borderNeutralLight_lightMode__o1ubka4j sprinkles_boxShadow_borderNeutral_darkMode__o1ubka4c typography_lightModeTone_light__1jw6vm018 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_surface_lightMode__o1ubka33 sprinkles_background_surfaceDark_darkMode__o1ubka36">
+          <div class="reset_base__1gdwseo0 sprinkles_position_relative_mobile__o1ubka5f">
+            <div class="reset_base__1gdwseo0 sprinkles_display_flex_mobile__o1ubka5b sprinkles_textAlign_left_mobile__o1ubkai7">
               <input
-                class="reset_base__sqfpyo0 reset_block__sqfpyo1 reset_appearance__sqfpyo6 reset_transparent__sqfpyo7 reset_input__sqfpyoc sprinkles_position_absolute_mobile__2b382h5j sprinkles_zIndex_1__2b382h8 sprinkles_cursor_pointer__2b382hh sprinkles_opacity_0__2b382h6 InlineField_realField__xhtqv84 InlineField_sizeVars_standard__xhtqv82"
+                class="reset_base__1gdwseo0 reset_block__1gdwseo1 reset_appearance__1gdwseo6 reset_transparent__1gdwseo7 reset_input__1gdwseoc sprinkles_position_absolute_mobile__o1ubka5j sprinkles_zIndex_1__o1ubka8 sprinkles_cursor_pointer__o1ubkah sprinkles_opacity_0__o1ubka6 InlineField_realField__16e5k4g4 InlineField_sizeVars_standard__16e5k4g2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="reset_base__sqfpyo0 sprinkles_flexShrink_0_mobile__2b382hhv sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_standard_mobile__2b382h63 InlineField_fakeField__xhtqv85 InlineField_sizeVars_standard__xhtqv82 typography_lightModeTone_light__193fbho18  sprinkles_background_surface_lightMode__2b382h33">
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_selected__xhtqv89 typography_lightModeTone_dark__193fbho19 typography_darkModeTone_dark__193fbho1b sprinkles_background_formAccent_lightMode__2b382h21 sprinkles_background_formAccent_darkMode__2b382h22">
-                  <div class="reset_base__sqfpyo0 sprinkles_height_full__2b382hn sprinkles_transition_fast__2b382hx sprinkles_position_relative_mobile__2b382h5f InlineField_indicator__xhtqv8d InlineField_checkboxScale__xhtqv8f">
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+              <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
+                  <div class="reset_base__1gdwseo0 sprinkles_height_full__o1ubkan sprinkles_transition_fast__o1ubkax sprinkles_position_relative_mobile__o1ubka5f InlineField_indicator__16e5k4gd InlineField_checkboxScale__16e5k4gf">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3609,14 +3611,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_neutral__193fbho21"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_neutral__1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3625,7 +3627,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_neutral__193fbho21"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_neutral__1jw6vm021"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3634,15 +3636,15 @@ SOURCE HTML: <!DOCTYPE html>
                     </div>
                   </div>
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_boxShadow_borderField_lightMode__2b382h3x sprinkles_boxShadow_borderField_darkMode__2b382h3y">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_boxShadow_borderField_lightMode__o1ubka3x sprinkles_boxShadow_borderField_darkMode__o1ubka3y">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 sprinkles_boxShadow_borderCritical_lightMode__2b382h3p sprinkles_boxShadow_borderCriticalLight_darkMode__2b382h3u">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 sprinkles_boxShadow_borderCritical_lightMode__o1ubka3p sprinkles_boxShadow_borderCriticalLight_darkMode__o1ubka3u">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_focusOverlay__xhtqv8b sprinkles_boxShadow_outlineFocus_lightMode__2b382h4t sprinkles_boxShadow_outlineFocus_darkMode__2b382h4u">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_focusOverlay__16e5k4gb sprinkles_boxShadow_outlineFocus_lightMode__o1ubka4t sprinkles_boxShadow_outlineFocus_darkMode__o1ubka4u">
                 </span>
-                <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_hoverOverlay__xhtqv8c sprinkles_boxShadow_borderFormAccent_lightMode__2b382h3z sprinkles_boxShadow_borderFormAccentLight_darkMode__2b382h44">
-                  <div class="reset_base__sqfpyo0 sprinkles_height_full__2b382hn sprinkles_transition_fast__2b382hx sprinkles_position_relative_mobile__2b382h5f InlineField_indicator__xhtqv8d InlineField_checkboxScale__xhtqv8f">
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6">
+                <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_hoverOverlay__16e5k4gc sprinkles_boxShadow_borderFormAccent_lightMode__o1ubka3z sprinkles_boxShadow_borderFormAccentLight_darkMode__o1ubka44">
+                  <div class="reset_base__1gdwseo0 sprinkles_height_full__o1ubkan sprinkles_transition_fast__o1ubkax sprinkles_position_relative_mobile__o1ubka5f InlineField_indicator__16e5k4gd InlineField_checkboxScale__16e5k4gf">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3651,14 +3653,14 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_formAccent__193fbho20"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_formAccent__1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_transition_fast__2b382hx">
+                    <div class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_transition_fast__o1ubkax">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3667,7 +3669,7 @@ SOURCE HTML: <!DOCTYPE html>
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="reset_base__sqfpyo0 sprinkles_width_full__2b382hp sprinkles_height_full__2b382hn sprinkles_display_block_mobile__2b382h4z typography_tone_formAccent__193fbho20"
+                        class="reset_base__1gdwseo0 sprinkles_width_full__o1ubkap sprinkles_height_full__o1ubkan sprinkles_display_block_mobile__o1ubka4z typography_tone_formAccent__1jw6vm020"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3677,13 +3679,13 @@ SOURCE HTML: <!DOCTYPE html>
                   </div>
                 </span>
               </div>
-              <div class="reset_base__sqfpyo0 sprinkles_paddingLeft_xsmall_mobile__2b382hb3 sprinkles_flexGrow_1_mobile__2b382hi3">
-                <div class="reset_base__sqfpyo0 sprinkles_display_flex_mobile__2b382h5b InlineField_sizeVars_standard__xhtqv82 InlineField_labelOffset__xhtqv86">
+              <div class="reset_base__1gdwseo0 sprinkles_paddingLeft_xsmall_mobile__o1ubkab3 sprinkles_flexGrow_1_mobile__o1ubkai3">
+                <div class="reset_base__1gdwseo0 sprinkles_display_flex_mobile__o1ubka5b InlineField_sizeVars_standard__16e5k4g2 InlineField_labelOffset__16e5k4g6">
                   <label
-                    class="reset_base__sqfpyo0 sprinkles_userSelect_none__2b382h4 sprinkles_display_block_mobile__2b382h4z sprinkles_cursor_pointer__2b382hh virtualTouchable_virtualTouchable__wuuhl40"
+                    class="reset_base__1gdwseo0 sprinkles_userSelect_none__o1ubka4 sprinkles_display_block_mobile__o1ubka4z sprinkles_cursor_pointer__o1ubkah virtualTouchable_virtualTouchable__1iq6bbh0"
                     for="id_1"
                   >
-                    <span class="reset_base__sqfpyo0 sprinkles_display_block_mobile__2b382h4z typography_fontFamily__193fbho0 typography_fontWeight_regular__193fbho1 typography_tone_neutral__193fbho21 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__193fbhoa">
+                    <span class="reset_base__1gdwseo0 sprinkles_display_block_mobile__o1ubka4z typography_fontFamily__1jw6vm00 typography_fontWeight_regular__1jw6vm01 typography_tone_neutral__1jw6vm021 capsize_capsizeStyle__1vgffpw4 typography_textSize_standard__1jw6vm0a">
                       This is a checkbox
                     </span>
                   </label>
@@ -3692,7 +3694,7 @@ SOURCE HTML: <!DOCTYPE html>
             </div>
           </div>
         </div>
-        <div class="reset_base__sqfpyo0 App_vanillaBox__inn18b0">
+        <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3742,11 +3744,11 @@ POST HYDRATE DIFFS:
                  aria-checked="false"
 +                value
                >
-               <div class="reset_base__sqfpyo0 sprinkles_flexShrink_0_mobile__2b382hhv sprinkles_position_relative_mobile__2b382h5f sprinkles_borderRadius_standard_mobile__2b382h63 InlineField_fakeField__xhtqv85 InlineField_sizeVars_standard__xhtqv82 typography_lightModeTone_light__193fbho18  sprinkles_background_surface_lightMode__2b382h33">
-                 <span class="reset_base__sqfpyo0 sprinkles_top_0__2b382hj sprinkles_bottom_0__2b382hk sprinkles_left_0__2b382hl sprinkles_right_0__2b382hm sprinkles_position_absolute_mobile__2b382h5j sprinkles_pointerEvents_none__2b382hi sprinkles_borderRadius_standard_mobile__2b382h63 sprinkles_transition_fast__2b382hx sprinkles_opacity_0__2b382h6 InlineField_selected__xhtqv89 typography_lightModeTone_dark__193fbho19 typography_darkModeTone_dark__193fbho1b sprinkles_background_formAccent_lightMode__2b382h21 sprinkles_background_formAccent_darkMode__2b382h22">
+               <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
+                 <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
 @@ -169,7 +170,7 @@
          </div>
-         <div class="reset_base__sqfpyo0 App_vanillaBox__inn18b0">
+         <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
            🧁 Vanilla content
 -          Initial
 +          Client

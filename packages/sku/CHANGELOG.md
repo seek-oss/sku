@@ -1,5 +1,11 @@
 # sku
 
+## 14.1.0
+
+### Minor Changes
+
+- Vite support is currently being internally prototyped. This is not ready for use in applications, stay tuned for updates in future releases. ([#1192](https://github.com/seek-oss/sku/pull/1192))
+
 ## 14.0.5
 
 ### Patch Changes

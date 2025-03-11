@@ -2,6 +2,7 @@ import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react-swc';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -36,6 +37,9 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
+      cjsInterop({
+        dependencies: ['@apollo/client', 'lodash'],
+      }),
       react(),
       vanillaExtractPlugin(),
       skuVitePreloadPlugin(),

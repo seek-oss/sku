@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/seek-oss/sku.git"
+    "url": "git+https://github.com/seek-oss/sku.git"
   },
   "author": "SEEK",
   "license": "MIT",

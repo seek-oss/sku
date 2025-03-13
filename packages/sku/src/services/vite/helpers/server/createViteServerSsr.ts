@@ -13,7 +13,7 @@ import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
 
-const base = process.env.BASE || './';
+const base = process.env.BASE || '/';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 

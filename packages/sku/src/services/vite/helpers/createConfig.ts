@@ -35,7 +35,6 @@ export const createViteConfig = ({
   };
 
   return {
-    base: './',
     root: process.cwd(),
     plugins: [
       cjsInterop({

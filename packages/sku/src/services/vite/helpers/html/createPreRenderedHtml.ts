@@ -28,6 +28,7 @@ export function createPreRenderedHtml({
       clientContext = await render.provideClientContext({
         site,
         url,
+        environment: process.env.NODE_ENV,
       });
     }
 

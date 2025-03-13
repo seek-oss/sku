@@ -61,6 +61,7 @@ export const createViteConfig = ({
       ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
+      assetsDir: skuContext.publicPath.replace(/(^\/|\/$)/g, ''),
       rollupOptions: {
         input: input[configType],
         output: {

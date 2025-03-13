@@ -1,0 +1,19 @@
+{
+  "epilog": "文档地址:\n  https://docsifyjs.github.io/docsify\n  https://docsifyjs.github.io/docsify-cli\n\n开发:\n  https://github.com/docsifyjs/docsify-cli/blob/master/CONTRIBUTING.md\n",
+  "group.globaloptions": "全局选项",
+  "help": "帮助",
+  "start": "Server for SSR",
+  "init": "创建 docs",
+  "init.local": "拷贝 docsify 到本地",
+  "init.theme": "选择主题",
+  "init.plugins": "选择插件",
+  "serve": "本地预览",
+  "serve.open": "自动打开浏览器",
+  "serve.port": "设置端口",
+  "serve.indexname": "自定义入口文件名，代替默认的 index.html",
+  "generate": "docsify 的生成器",
+  "generate.sidebar": "生成侧边栏文件",
+  "livereload.port": "设置 livereload 端口",
+  "usage": "例子",
+  "version": "当前版本号"
+}

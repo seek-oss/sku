@@ -9,7 +9,7 @@ Publish files to a `gh-pages` branch on GitHub (or any other branch anywhere els
 npm install gh-pages --save-dev
 ```
 
-This module requires Git `>=1.9`.
+This module requires Git >= 1.9 and Node > 14.
 
 ## Basic Usage
 
@@ -64,14 +64,14 @@ ghpages.publish('dist', callback);
 
 ### Options
 
-The default options work for simple cases.  The options described below let you push to alternate branches, customize your commit messages, and more.
+The default options work for simple cases.  The options described below let you push to alternate branches, customize your commit messages and more.
 
 
 #### <a id="optionssrc">options.src</a>
  * type: `string|Array<string>`
  * default: `'**/*'`
 
-The [minimatch](https://github.com/isaacs/minimatch) pattern or array of patterns used to select which files should be published.
+The [minimatch](https://github.com/isaacs/minimatch) pattern or array of patterns is used to select which files should be published.
 
 
 #### <a id="optionsbranch">options.branch</a>
@@ -126,6 +126,35 @@ Example use of the `dotfiles` option:
  * that otherwise match the `src` pattern.
  */
 ghpages.publish('dist', {dotfiles: true}, callback);
+```
+
+#### <a id="optionsnojekyll">options.nojekyll</a>
+ * type: `boolean`
+ * default: `false`
+
+Write out a `.nojekyll` file to [bypass Jekyll on GitHub Pages](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/).
+
+Example use of the `nojekyll` option:
+
+```js
+/**
+ * The usage below will add a `.nojekyll` file to the output.
+ */
+ghpages.publish('dist', {nojekyll: true}, callback);
+```
+
+#### <a id="optionscname">options.cname</a>
+ * type: `string`
+
+Write out a `CNAME` file with a custom domain name.
+
+Example use of the `cname` option:
+
+```js
+/**
+ * The usage below will add a `CNAME` file to the output.
+ */
+ghpages.publish('dist', {cname: 'custom-domain.com'}, callback);
 ```
 
 
@@ -355,6 +384,18 @@ And then to publish everything from your `dist` folder to your `gh-pages` branch
 npm run deploy
 ```
 
+## GitHub Pages Project Sites
+
+There are three types of GitHub Pages sites: [project, user, and organization](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites). Since project sites are not hosted on the root `<user|org>.github.io` domain and instead under a URL path based on the repository name, they often require configuration tweaks for various build tools and frameworks. If not configured properly, a browser will usually log `net::ERR_ABORTED 404` errors when looking for compiled assets.
+
+Examples:
+- Create React App (which uses webpack under the hood) [requires the user to set a `"homepage"` property in their `package.json` so that built assets are referenced correctly in the final compiled HTML](https://create-react-app.dev/docs/deployment/#building-for-relative-paths).
+  - This [has been often been thought of as an issue with `gh-pages`](https://github.com/tschaub/gh-pages/issues/285#issuecomment-805321474), though this package isn't able to control a project's build configuration.
+- Vite [requires a `"base"` property in its `vite.config.js`](https://vitejs.dev/guide/static-deploy.html#github-pages)
+- Next.js [requires a `"basePath"` property in its `next.config.js`](https://nextjs.org/docs/pages/api-reference/next-config-js/basePath)
+
+When using a project site, be sure to read the documentation for your particular build tool or framework to learn how to configure correct asset paths.
+
 ## Debugging
 
 To get additional output from the `gh-pages` script, set `NODE_DEBUG=gh-pages`.  For example:
@@ -390,10 +431,10 @@ If `gh-pages` fails, you may find that you need to manually clean up the cache d
 
 ### Deploying to github pages with custom domain
 
-Modify the deployment line to your deploy script if you use custom domain. This will prevent the deployment from removing the domain settings in GitHub.
+Use the `--cname` option to create a `CNAME` file with the name of your custom domain.  See [the GitHub docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) for more detail.
 
 ```
-echo 'your_cutom_domain.online' > ./build/CNAME && gh-pages -d build"
+gh-pages -d build --cname custom-domain.com"
 ```
 
 ### Deploying with GitHub Actions

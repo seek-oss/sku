@@ -151,7 +151,7 @@ const parseManifestForEntry = ({
 
 const parseEntryChunk = (
   entryChunk: ManifestChunk,
-  { base = '' }: { base?: string },
+  { base = '/' }: { base?: string },
 ) => ({
   ...entryChunk,
   // Overriding the path urls to include the base path.

@@ -1,5 +1,17 @@
 # sku
 
+## 14.1.0
+
+### Minor Changes
+
+- Vite support is currently being internally prototyped. This is not ready for use in applications, stay tuned for updates in future releases. ([#1192](https://github.com/seek-oss/sku/pull/1192))
+
+### Patch Changes
+
+- Fix package entrypoint ordering errors raised by [publint](https://publint.dev/sku@14.0.5) ([#1202](https://github.com/seek-oss/sku/pull/1202))
+
+- Fixes a bug where multi-language sites would not generate a reference to a translation chunk in some cases ([#1204](https://github.com/seek-oss/sku/pull/1204))
+
 ## 14.0.5
 
 ### Patch Changes

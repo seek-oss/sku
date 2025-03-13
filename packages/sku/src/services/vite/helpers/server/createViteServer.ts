@@ -6,7 +6,7 @@ import { createViteConfig } from '../createConfig.js';
 import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
 
 export const createViteServer = async (skuContext: SkuContext) => {
-  const base = process.env.BASE || '/';
+  const base = process.env.BASE || './';
 
   return await createServer({
     ...createViteConfig({

@@ -22,7 +22,6 @@ export const createSsrHtml = async ({
     ? await render.provideClientContext({
         site,
         url,
-        environment: process.env.NODE_ENV,
       })
     : {};
 

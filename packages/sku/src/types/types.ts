@@ -37,7 +37,6 @@ export interface ViteRender {
   provideClientContext?(context: {
     site?: SkuSiteObject | string;
     url?: string;
-    environment?: string;
   }): Promise<any> | any;
 
   bodyTags?: () => string;

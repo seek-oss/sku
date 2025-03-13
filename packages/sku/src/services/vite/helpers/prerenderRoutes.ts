@@ -17,6 +17,8 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const render = (await import(resolve('./dist/render/render.js'))).default;
     const loadableCollector = createCollector({
       manifest,
+      // ? We could set this as a SKU config. Hardcoding for now to force relative paths.
+      base: './',
     });
 
     const html = await createPreRenderedHtml({

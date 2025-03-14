@@ -25,7 +25,6 @@ export class Collector {
     public nonce?: string,
     public externalJsFiles?: string[],
     public entry?: string,
-    public base?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
@@ -46,7 +45,6 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce,
-      base,
     });
   }
 
@@ -58,7 +56,6 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce: this.nonce,
-      base: this.base,
     });
   }
   getAllModules() {
@@ -108,8 +105,7 @@ const parseManifestForEntry = ({
   if (!manifest) {
     return;
   }
-  const entryChunk: ManifestChunk | undefined =
-    manifest[entry] && parseEntryChunk(manifest[entry], { base });
+  const entryChunk: ManifestChunk | undefined = manifest[entry];
   if (!entryChunk) {
     return;
   }
@@ -148,17 +144,6 @@ const parseManifestForEntry = ({
     }
   }
 };
-
-const parseEntryChunk = (
-  entryChunk: ManifestChunk,
-  { base = '/' }: { base?: string },
-) => ({
-  ...entryChunk,
-  // Overriding the path urls to include the base path.
-  css: entryChunk.css?.map((path) => `${base}${path}`),
-  assets: entryChunk.assets?.map((path) => `${base}${path}`),
-  file: `${base}${entryChunk.file}`,
-});
 
 const addFileToPreloads = ({
   preloads,
@@ -241,7 +226,6 @@ type CreateCollectorOptions = {
   manifest?: Manifest;
   nonce?: string;
   entry?: string;
-  base?: string;
 };
 
 export const createCollector = ({
@@ -249,7 +233,6 @@ export const createCollector = ({
   manifest,
   nonce,
   entry,
-  base,
 }: CreateCollectorOptions) => {
   let entryPoint = entry || 'index.html';
   const internalManifest = manifest || {};
@@ -262,11 +245,5 @@ export const createCollector = ({
     }
   }
 
-  return new Collector(
-    internalManifest,
-    nonce,
-    externalJsFiles,
-    entryPoint,
-    base,
-  );
+  return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
 };

@@ -17,6 +17,10 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     const render = (await import(resolve('./dist/render/render.js'))).default;
     const loadableCollector = createCollector({
       manifest,
+      //
+      base: skuContext.publicPath.startsWith('/')
+        ? `/${skuContext.publicPath}`
+        : '',
     });
 
     const html = await createPreRenderedHtml({

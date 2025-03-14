@@ -26,14 +26,13 @@ export function getValidLanguagesForRoute({
     if (route.languages) {
       languagesToRender = route.languages.slice();
     } else if (routeIsForSpecificSite) {
-      if (route.siteIndex) {
-        languagesToRender =
-          sites[route.siteIndex].languages?.slice() || languages;
-      }
+      languagesToRender =
+        sites[route.siteIndex ?? 0].languages?.slice() || languages;
     } else {
       languagesToRender = languages;
     }
   }
+
   const languageNames = languagesToRender.map((lang) =>
     lang && typeof lang !== 'string' ? lang.name : lang,
   );

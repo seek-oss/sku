@@ -93,14 +93,12 @@ const parseManifestForEntry = ({
   nonce,
   preloads,
   scripts,
-  base,
 }: {
   manifest: Manifest;
   entry: string;
   nonce?: string;
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
-  base?: string;
 }) => {
   if (!manifest) {
     return;
@@ -138,7 +136,6 @@ const parseManifestForEntry = ({
           nonce,
           preloads,
           scripts,
-          base,
         });
       }
     }

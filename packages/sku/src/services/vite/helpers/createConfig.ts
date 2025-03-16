@@ -2,6 +2,7 @@ import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react-swc';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -36,6 +37,9 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
+      cjsInterop({
+        dependencies: ['@apollo/client', 'lodash'],
+      }),
       react(),
       vanillaExtractPlugin(),
       skuVitePreloadPlugin(),
@@ -57,6 +61,9 @@ export const createViteConfig = ({
       ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
+      // TODO Fix URL paths as a publicPath value. Absolute and relative paths work, but Vite removes the first `/` in URLs (http://foo.com -> http:/foo.com).
+      // TODO URL paths also output to url folders. e.g., /http:/foo.com/assets/[filename].js.
+      assetsDir: skuContext.publicPath.replace(/(^\/|\/$)/g, ''),
       rollupOptions: {
         input: input[configType],
         output: {

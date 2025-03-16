@@ -14,14 +14,14 @@ const getNonce = (nonce?: string) => (nonce ? ` nonce="${nonce}"` : '');
 
 const tagTypes = {
   stylesheet: ({ href, nonce }: Preload) =>
-    `<link rel="stylesheet" href="/${href}" crossorigin${getNonce(nonce)} />`,
+    `<link rel="stylesheet" href="${href}" crossorigin${getNonce(nonce)} />`,
   modulepreload: ({ href, nonce }: Preload) =>
-    `<link rel="modulepreload" href="/${href}" crossorigin${getNonce(nonce)} />`,
+    `<link rel="modulepreload" href="${href}" crossorigin${getNonce(nonce)} />`,
   module: ({ href, asyncScript, nonce }: Preload) =>
-    `<script type="module"${asyncScript ? ' async' : ''} src="/${href}" crossorigin${getNonce(nonce)}></script>`,
+    `<script type="module"${asyncScript ? ' async' : ''} src="${href}" crossorigin${getNonce(nonce)}></script>`,
   preload: ({ as, href, type }: Preload) => {
     const crossorigin = as === 'font' || as === 'fetch';
-    return `<link rel="preload" href="/${href}" as="${as}" type="${type}"${crossorigin ? ' crossorigin' : ''} />`;
+    return `<link rel="preload" href="${href}" as="${as}" type="${type}"${crossorigin ? ' crossorigin' : ''} />`;
   },
 };
 

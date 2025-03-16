@@ -1,4 +1,4 @@
-import type { Manifest } from 'vite';
+import type { Manifest, ManifestChunk } from 'vite';
 import { extname } from 'node:path';
 import {
   type Preload,
@@ -25,6 +25,7 @@ export class Collector {
     public nonce?: string,
     public externalJsFiles?: string[],
     public entry?: string,
+    public base?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
@@ -45,6 +46,7 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce,
+      base,
     });
   }
 
@@ -56,6 +58,7 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce: this.nonce,
+      base: this.base,
     });
   }
   getAllModules() {
@@ -93,17 +96,20 @@ const parseManifestForEntry = ({
   nonce,
   preloads,
   scripts,
+  base,
 }: {
   manifest: Manifest;
   entry: string;
   nonce?: string;
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
+  base?: string;
 }) => {
   if (!manifest) {
     return;
   }
-  const entryChunk = manifest[entry];
+  const entryChunk: ManifestChunk | undefined =
+    manifest[entry] && parseEntryChunk(manifest[entry], { base });
   if (!entryChunk) {
     return;
   }
@@ -136,11 +142,23 @@ const parseManifestForEntry = ({
           nonce,
           preloads,
           scripts,
+          base,
         });
       }
     }
   }
 };
+
+const parseEntryChunk = (
+  entryChunk: ManifestChunk,
+  { base = '/' }: { base?: string },
+) => ({
+  ...entryChunk,
+  // Overriding the path urls to include the base path.
+  css: entryChunk.css?.map((path) => `${base}${path}`),
+  assets: entryChunk.assets?.map((path) => `${base}${path}`),
+  file: `${base}${entryChunk.file}`,
+});
 
 const addFileToPreloads = ({
   preloads,
@@ -149,7 +167,7 @@ const addFileToPreloads = ({
   nonce,
 }: {
   preloads: Map<string, Preload>;
-  entryChunk: any;
+  entryChunk: ManifestChunk;
   entry: string;
   nonce?: string;
 }) => {
@@ -223,6 +241,7 @@ type CreateCollectorOptions = {
   manifest?: Manifest;
   nonce?: string;
   entry?: string;
+  base?: string;
 };
 
 export const createCollector = ({
@@ -230,6 +249,7 @@ export const createCollector = ({
   manifest,
   nonce,
   entry,
+  base,
 }: CreateCollectorOptions) => {
   let entryPoint = entry || 'index.html';
   const internalManifest = manifest || {};
@@ -242,5 +262,11 @@ export const createCollector = ({
     }
   }
 
-  return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
+  return new Collector(
+    internalManifest,
+    nonce,
+    externalJsFiles,
+    entryPoint,
+    base,
+  );
 };

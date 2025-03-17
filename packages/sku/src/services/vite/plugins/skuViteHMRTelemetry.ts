@@ -1,8 +1,14 @@
 import type { Plugin } from 'vite';
 import provider from '@/services/telemetry/index.js';
 import debug from 'debug';
+import js from 'dedent';
 
 const log = debug('sku:metrics');
+
+// Couldn't quite get the documented method for typing custom payloads working
+// https://vite.dev/guide/api-plugin.html#typescript-for-custom-events
+const customHmrEvent = 'sku:vite-hmr' as const;
+type ViteHmrTimePayload = { durationInMs: number; timestamp: number };
 
 export default function skuViteHMRTelemetryPlugin({
   target,
@@ -11,35 +17,60 @@ export default function skuViteHMRTelemetryPlugin({
   target: string;
   type: string;
 }): Plugin[] {
-  let startTime = 0;
+  const hmrUpdateTimestamps = new Set();
 
   return [
     {
-      name: 'vite-plugin-sku-hmr-telemetry-pre',
-      enforce: 'pre',
+      name: 'vite-plugin-sku-hmr-telemetry',
+      transformIndexHtml: {
+        // Vite needs to process the script in order to pick up the HMR context
+        order: 'pre',
+        handler: () => [
+          {
+            tag: 'script',
+            attrs: { type: 'module' },
+            children: skuHmrTelemetryClient,
+            injectTo: 'head',
+          },
+        ],
+      },
       handleHotUpdate: {
         order: 'pre',
-        handler() {
-          startTime = performance.now();
+        handler: (ctx) => {
+          hmrUpdateTimestamps.add(ctx.timestamp);
         },
       },
-    },
-    {
-      name: 'vite-plugin-sku-hmr-telemetry-post',
-      enforce: 'post',
-      handleHotUpdate: {
-        order: 'post',
-        handler() {
-          const rebuildTime = performance.now() - startTime;
-          log('Rebuild complete: %s', {
-            toString: () => `${Math.round(rebuildTime * 100) / 100}ms`,
-          });
-          provider.timing('start.webpack.rebuild', rebuildTime, {
-            target,
-            type,
-          });
-        },
+      configureServer: (server) => {
+        server.ws.on(customHmrEvent, (data: ViteHmrTimePayload) => {
+          const { durationInMs, timestamp } = data;
+
+          // Only send telemetry for one update per HMR update timestamp as multiple clients may be connected
+          if (hmrUpdateTimestamps.has(timestamp)) {
+            hmrUpdateTimestamps.delete(timestamp);
+
+            log('HMR update completed in %dms', durationInMs);
+            provider.timing('start.webpack.rebuild', durationInMs, {
+              target,
+              type,
+            });
+          }
+        });
       },
     },
   ];
 }
+
+const skuHmrTelemetryClient = js/* js */ `
+  if (import.meta.hot) {
+    import.meta.hot.on('vite:beforeUpdate', () => {
+      performance.mark("vite-hmr");
+    })
+
+    import.meta.hot.on('vite:afterUpdate', (ctx) => {
+      const result = performance.measure("hmr-time", "vite-hmr");
+      const timestamp = ctx.updates[0].timestamp;
+
+      import.meta.hot.send('${customHmrEvent}', { durationInMs: result.duration, timestamp });
+    })
+  }
+`;

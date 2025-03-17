@@ -1,5 +1,11 @@
 # sku
 
+## 14.1.1
+
+### Patch Changes
+
+- vite build (experimental): Allowing specific cjs package interop and support publicPath values ([#1203](https://github.com/seek-oss/sku/pull/1203))
+
 ## 14.1.0
 
 ### Minor Changes

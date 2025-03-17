@@ -1,5 +1,5 @@
 ---
-'sku': patch
+'sku': minor
 ---
 
 Change `prettier` dependency range from minor-version flexible to patch-version flexible. Update `prettier` dependency to `~3.5.0`.

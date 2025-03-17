@@ -850,7 +850,7 @@ importers:
         specifier: ^8.0.0
         version: 8.1.1(postcss@8.5.3)(typescript@5.8.2)(webpack@5.98.0(@swc/core@1.11.8)(esbuild@0.25.0))
       prettier:
-        specifier: ^3.4.1
+        specifier: ~3.5.0
         version: 3.5.3
       pretty-ms:
         specifier: ^7.0.1

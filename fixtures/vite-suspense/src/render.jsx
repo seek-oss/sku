@@ -32,15 +32,15 @@ export default {
 
     return {
       appHtml,
-      dehydratedState,
+      dehydratedState,provideClientContext: ({ site, app }) => ({
+        dehydratedState: app.dehydratedState,
+        site,
+      })
     };
     
   },
 
-  provideClientContext: ({ site, app }) => ({
-    dehydratedState: app.dehydratedState,
-    site,
-  }),
+  ,
 
   renderDocument: ({ app, bodyTags, headTags }) => {
     return html/* html */ `

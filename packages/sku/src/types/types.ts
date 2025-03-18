@@ -47,8 +47,10 @@ export type ViteRenderServer = ViteRender;
 
 /* END --- Vite-render types */
 
+export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
+
 export interface RenderCallbackParams {
-  SkuProvider: ({ children }: { children: ReactNode }) => ReactNode;
+  SkuProvider: SkuProvider;
   addLanguageChunk: (language: string) => void;
   getBodyTags: () => string;
   getHeadTags: (options?: {

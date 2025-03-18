@@ -19,6 +19,22 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
         const isHtml = req.url === '/index.html';
         if (isHtml) {
+          const matchingRoute = skuContext.routes.find(
+            ({ route, siteIndex }) => {
+              if (
+                typeof siteIndex === 'number' &&
+                matchingSiteName !== sites[siteIndex].name
+              ) {
+                return false;
+              }
+              return routeMatcher(route)(req.path);
+            },
+          );
+
+          if (!matchingRoute) {
+            next();
+          }
+
           const renderEntry = require.resolve('../entries/vite-render.jsx');
           const clientEntry = require.resolve('../entries/vite-client.jsx');
 
@@ -30,6 +46,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
             url,
             site,
             clientEntry,
+            route: matchingRoute,
           });
 
           const transformedHtml = await server.transformIndexHtml(

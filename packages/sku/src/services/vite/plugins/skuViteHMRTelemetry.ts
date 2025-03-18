@@ -16,48 +16,46 @@ export default function skuViteHMRTelemetryPlugin({
 }: {
   target: string;
   type: string;
-}): Plugin[] {
+}): Plugin {
   const hmrUpdateTimestamps = new Set();
 
-  return [
-    {
-      name: 'vite-plugin-sku-hmr-telemetry',
-      transformIndexHtml: {
-        // Vite needs to process the script in order to pick up the HMR context
-        order: 'pre',
-        handler: () => [
-          {
-            tag: 'script',
-            attrs: { type: 'module' },
-            children: skuHmrTelemetryClient,
-            injectTo: 'head',
-          },
-        ],
-      },
-      handleHotUpdate: {
-        order: 'pre',
-        handler: (ctx) => {
-          hmrUpdateTimestamps.add(ctx.timestamp);
+  return {
+    name: 'vite-plugin-sku-hmr-telemetry',
+    transformIndexHtml: {
+      // Vite needs to process the script in order to pick up the HMR context
+      order: 'pre',
+      handler: () => [
+        {
+          tag: 'script',
+          attrs: { type: 'module' },
+          children: skuHmrTelemetryClient,
+          injectTo: 'head',
         },
-      },
-      configureServer: (server) => {
-        server.ws.on(customHmrEvent, (data: ViteHmrTimePayload) => {
-          const { durationInMs, timestamp } = data;
-
-          // Only send telemetry for one update per HMR update timestamp as multiple clients may be connected
-          if (hmrUpdateTimestamps.has(timestamp)) {
-            hmrUpdateTimestamps.delete(timestamp);
-
-            log('HMR update completed in %dms', durationInMs);
-            provider.timing('start.webpack.rebuild', durationInMs, {
-              target,
-              type,
-            });
-          }
-        });
+      ],
+    },
+    handleHotUpdate: {
+      order: 'pre',
+      handler: (ctx) => {
+        hmrUpdateTimestamps.add(ctx.timestamp);
       },
     },
-  ];
+    configureServer: (server) => {
+      server.ws.on(customHmrEvent, (data: ViteHmrTimePayload) => {
+        const { durationInMs, timestamp } = data;
+
+        // Only send telemetry for one update per HMR update timestamp as multiple clients may be connected
+        if (hmrUpdateTimestamps.has(timestamp)) {
+          hmrUpdateTimestamps.delete(timestamp);
+
+          log('HMR update completed in %dms', durationInMs);
+          provider.timing('start.webpack.rebuild', durationInMs, {
+            target,
+            type,
+          });
+        }
+      });
+    },
+  };
 }
 
 const skuHmrTelemetryClient = js/* js */ `

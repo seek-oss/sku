@@ -30,7 +30,6 @@ const Details = loadable(() => slowLoad(() => import('./handlers/Details')));
 export const App = ({ site }: { site: string }) => (
   <>
     <div>I&#39;m an app! 🚀</div>
-    asdfsdasdfasdfasdfasasdfasdfasdjfieijos
     <Routes>
       <Route
         path={routes[site].home}

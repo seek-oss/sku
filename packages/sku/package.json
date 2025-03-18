@@ -163,7 +163,7 @@
     "picomatch": "^3.0.1",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
-    "prettier": "^3.4.1",
+    "prettier": "~3.5.0",
     "pretty-ms": "^7.0.1",
     "react-refresh": "^0.14.0",
     "resolve-from": "^5.0.0",

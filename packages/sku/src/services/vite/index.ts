@@ -8,10 +8,10 @@ import { prerenderRoutes } from './helpers/prerenderRoutes.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 
 export const viteService = {
-  build: async (skuContext: SkuContext) => {
+  buildSsr: async (skuContext: SkuContext) => {
     await build(createViteConfig({ skuContext }));
   },
-  buildSsg: async (skuContext: SkuContext) => {
+  build: async (skuContext: SkuContext) => {
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {

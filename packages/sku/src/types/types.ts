@@ -7,6 +7,7 @@ import type {
   PipeableStream,
 } from 'react-dom/server';
 import type { Collector } from '@/services/vite/loadable/collector.js';
+import type { NormalizedRoute } from '@/context/createSkuContext.js';
 
 /* START --- Vite-render types */
 /* Notes:
@@ -15,9 +16,12 @@ import type { Collector } from '@/services/vite/loadable/collector.js';
  *  Full types will come once Vite is fully supported in sku.
  * */
 export type ViteRenderFunction = (options: {
+  // TODO: Perhaps shouldn't be null. Might want to force all renders to have a language.
+  language: string | null;
   url?: string;
   site?: SkuSiteObject | string;
   clientEntry: string;
+  route: NormalizedRoute;
 }) => Promise<string>;
 
 export type RenderContext = {
@@ -80,10 +84,12 @@ interface SharedRenderProps {
   environment: string;
   site: string;
   language: string;
-  libraryName: string;
-  libraryFile: string;
+  // TODO: This could be strongly typed. e.g. if type is library they exist. For now just making optional.
+  libraryName?: string;
+  libraryFile?: string;
   // Webpack use an any here. PR for better type welcome.
-  webpackStats: any;
+  // TODO: This could be strongly typed. e.g. if bundler is webpack it's there. For now just making it optional.
+  webpackStats?: any;
 }
 
 export interface RenderAppProps extends SharedRenderProps {

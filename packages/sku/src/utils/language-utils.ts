@@ -1,5 +1,6 @@
 import debug from 'debug';
 import type { Request } from 'express';
+import type { IncomingMessage } from 'node:http';
 
 import routeMatcher from './routeMatcher.js';
 import type { SkuLanguage } from '@/types/types.js';
@@ -52,7 +53,7 @@ function getLanguageParamFromUrl(pathname: string, route: string) {
 }
 
 export function getLanguageFromRoute(
-  req: Request,
+  path: string,
   route: NormalizedRoute,
   skuConfig: SkuContext,
 ) {
@@ -63,14 +64,10 @@ export function getLanguageFromRoute(
   });
 
   log('Looking for language in requested path', {
-    url: req.url,
-    path: req.path,
+    path,
     route: route.route,
   });
-  const requestedLanguageByRoute = getLanguageParamFromUrl(
-    req.path,
-    route.route,
-  );
+  const requestedLanguageByRoute = getLanguageParamFromUrl(path, route.route);
   if (requestedLanguageByRoute) {
     if (supportedLanguagesForRoute.includes(requestedLanguageByRoute)) {
       log(`Returning language from URL "${requestedLanguageByRoute}"`);
@@ -79,12 +76,11 @@ export function getLanguageFromRoute(
 
     log('Invalid language requested', {
       supportedLanguagesForRoute,
-      url: req.url,
       requestedLanguageByRoute,
     });
     throw new Error(
       `Invalid language requested. Request: ${
-        req.url
+        path
       } Possible languages: ${supportedLanguagesForRoute.join(
         ', ',
       )} Language detected: ${requestedLanguageByRoute}`,
@@ -94,12 +90,12 @@ export function getLanguageFromRoute(
   if (supportedLanguagesForRoute.length > 1) {
     log('Unable to find language in route that supports multiple languages', {
       supportedLanguagesForRoute,
-      url: req.url,
+      path,
       route,
     });
     throw new Error(
       `Unable to find language in route that supports multiple languages. Request: ${
-        req.url
+        path
       } Possible languages: ${supportedLanguagesForRoute.join(', ')}
       Did you forget to put "$language" in your route?`,
     );

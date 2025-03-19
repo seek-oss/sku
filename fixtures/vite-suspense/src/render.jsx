@@ -1,11 +1,11 @@
-import React from 'react';
-import html from 'dedent';
-import { StaticRouter } from 'react-router-dom/server';
 import {
   dehydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import html from 'dedent';
+import React from 'react';
+import { StaticRouter } from 'react-router-dom/server';
 
 import App from './App';
 
@@ -32,15 +32,17 @@ export default {
 
     return {
       appHtml,
-      dehydratedState,provideClientContext: ({ site, app }) => ({
-        dehydratedState: app.dehydratedState,
-        site,
-      })
+      dehydratedState,
     };
-    
   },
 
-  ,
+  provideClientContext: ({ site, app, ...rest }) => {
+    console.log('provideClientContext', app, rest);
+    return {
+      dehydratedState: app.dehydratedState,
+      site,
+    };
+  },
 
   renderDocument: ({ app, bodyTags, headTags }) => {
     return html/* html */ `

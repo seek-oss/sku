@@ -1,19 +1,20 @@
 import render from '__sku_alias__renderEntry';
 import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
-import type { ViteRenderAppProps } from '@/types/types.js';
+import type { ViteRenderFunction } from '@/types/types.js';
+import { createCollector } from '@/services/vite/loadable/collector.js';
 
-export const viteRender = async ({
-  url,
-  site,
+export const viteRender: ViteRenderFunction = async ({
   clientEntry,
-}: {
-  url: ViteRenderAppProps['url'];
-  site: ViteRenderAppProps['site'];
-  clientEntry: string;
+  ...context
 }) => {
+  const loadableCollector = createCollector({});
+
   return await createPreRenderedHtml({
-    url,
+    ...context,
     render,
-    site,
+    hooks: {
+      getBodyTags: () => `<script type="module" src="${clientEntry}"></script>`,
+    },
+    collector: loadableCollector,
   });
 };

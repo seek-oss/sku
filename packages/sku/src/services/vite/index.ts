@@ -12,6 +12,7 @@ export const viteService = {
     await build(createViteConfig({ skuContext }));
   },
   buildSsg: async (skuContext: SkuContext) => {
+    // TODO Get this to be backwards compat with webpack
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
@@ -21,6 +22,7 @@ export const viteService = {
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
   start: async (skuContext: SkuContext) => {
+    // TODO Get this to be backwards compat with webpack
     const server = await createViteServer(skuContext);
     await server.listen(skuContext.port.client);
 

@@ -33,7 +33,7 @@ const mapStatsToParams =
     };
   };
 
-const getStartRoutes = ({
+export const getStartRoutes = ({
   sites,
   routes,
   languages: skuLanguages,

@@ -2,10 +2,7 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
-import type {
-  RenderToPipeableStreamOptions,
-  PipeableStream,
-} from 'react-dom/server';
+import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import type { Collector } from '@/services/vite/loadable/collector.js';
 
 /* START --- Vite-render types */
@@ -14,11 +11,11 @@ import type { Collector } from '@/services/vite/loadable/collector.js';
  *  There may be some missing types here.
  *  Full types will come once Vite is fully supported in sku.
  * */
-export type ViteRenderFunction = (options: {
-  url?: string;
-  site?: SkuSiteObject | string;
-  clientEntry: string;
-}) => Promise<string>;
+export type ViteRenderFunction = (
+  options: {
+    clientEntry: string;
+  } & SharedRenderProps,
+) => Promise<string>;
 
 export type RenderContext = {
   loadableCollector?: Collector;
@@ -31,13 +28,13 @@ export interface ViteRenderAppProps {
   options: RenderToPipeableStreamOptions;
 }
 
-export interface ViteRender {
-  render(p: ViteRenderAppProps): Promise<PipeableStream>;
+export interface ViteRender<App = string> {
+  renderApp(p: RenderAppProps): Promise<App> | App;
 
   provideClientContext?(context: {
     site?: SkuSiteObject | string;
     url?: string;
-  }): Promise<any> | any;
+  }): Promise<any>;
 
   bodyTags?: () => string;
   headTags?: () => string;
@@ -75,15 +72,15 @@ export interface Server {
 }
 
 interface SharedRenderProps {
-  routeName: string;
+  routeName: string | undefined;
   route: string;
-  environment: string;
-  site: string;
-  language: string;
-  libraryName: string;
-  libraryFile: string;
+  environment: string | undefined;
+  site: string | undefined;
+  language: string | null;
+  libraryName?: string;
+  libraryFile?: string;
   // Webpack use an any here. PR for better type welcome.
-  webpackStats: any;
+  webpackStats?: any;
 }
 
 export interface RenderAppProps extends SharedRenderProps {

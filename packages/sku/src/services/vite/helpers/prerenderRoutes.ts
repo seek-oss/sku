@@ -2,18 +2,18 @@ import { writeFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
+import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
 export const prerenderRoutes = async (skuContext: SkuContext) => {
-  const routes = getBuildRoutes(skuContext);
+  const allRoutes = getBuildRoutes(skuContext);
   const manifest = JSON.parse(
     await readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
   );
-  for (const route of routes) {
+  for (const route of allRoutes) {
     const render = (await import(resolve('./dist/render/render.js'))).default;
     const loadableCollector = createCollector({
       manifest,
@@ -21,16 +21,15 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     });
 
     const html = await createPreRenderedHtml({
-      url: route.route,
-      site: route.site,
+      ...route,
+      libraryFile: skuContext.libraryFile,
+      libraryName: skuContext.libraryName,
       render,
-      renderContext: {
-        loadableCollector,
-      },
       hooks: {
         getBodyTags: () => loadableCollector.getAllScripts(),
         getHeadTags: () => loadableCollector.getAllPreloads(),
       },
+      collector: loadableCollector,
     });
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {

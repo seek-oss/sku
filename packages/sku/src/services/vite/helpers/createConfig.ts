@@ -11,7 +11,7 @@ import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbu
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('../entries/vite-client.jsx');
+const clientEntry = require.resolve('../entries/vite-client.js');
 
 export const createViteConfig = ({
   skuContext,

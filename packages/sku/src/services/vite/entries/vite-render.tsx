@@ -3,25 +3,27 @@ import { LoadableProvider } from '@/services/vite/loadable/PreloadContext.jsx';
 import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
 import debug from 'debug';
 import type { ReactNode } from 'react';
-import type { NormalizedRoute } from '@/context/createSkuContext.js';
 
 import render from '__sku_alias__renderEntry';
-import type { ViteRenderAppProps } from '@/types/types.js';
+import type { ViteRenderFunction } from '@/types/types.js';
 
-export const viteRender = async ({
-  site,
-  route,
+export const viteRender: ViteRenderFunction = async ({
+  environment,
   language,
-}: {
-  url: ViteRenderAppProps['url'];
-  site: string;
-  language: string;
-  clientEntry: string;
-  route: NormalizedRoute;
+  route,
+  routeName,
+  site,
 }) => {
   const loadableCollector = createCollector({});
-  const clientContext = {};
-  // const renderContext = { ...route };
+
+  const renderContext = {
+    environment,
+    language,
+    renderToStringAsync,
+    route,
+    routeName,
+    site,
+  };
 
   const SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element = ({
     children,
@@ -34,24 +36,19 @@ export const viteRender = async ({
     throw new Error('Not Implemented: Libraries are not supported yet.');
   }
 
-  if (!route.name) {
+  if (!routeName) {
     // TODO: I think this is a types issue. Routes should always exist and always have a name.
     throw new Error('Not Implemented: Unable to handle unnamed routes.');
   }
 
   const app = await render.renderApp({
-    // ...renderContext,
+    ...renderContext,
     _addChunk: (chunkName: string) => {
       loadableCollector.register(chunkName);
     },
     SkuProvider,
-    renderToStringAsync,
-    environment: 'server',
-    language,
-    route: route.route,
-    routeName: route.name,
-    site,
   });
+
   if (language) {
     debug('sku:render:language')(
       `Using language "${language}" for route "${route}"`,
@@ -70,10 +67,24 @@ export const viteRender = async ({
       url,
     })) || {};
 
+  // const result = await render.renderDocument({
+  //   ...renderContext,
+  //   headTags: loadableCollector.getHeadTags(),
+  //   bodyTags,
+  //   app,
+  // });
+
+  const bodyTags =
+    Object.keys(clientContext).length > 0
+      ? [serializeConfig(clientContext), hooks?.getBodyTags?.()]
+          .filter(Boolean)
+          .join('\n')
+      : hooks?.getBodyTags?.();
+
   const result = await render.renderDocument({
     ...renderContext,
-    headTags: loadableCollector.getHeadTags(),
-    bodyTags,
+    headTags: hooks?.getHeadTags?.() ?? '',
+    bodyTags: bodyTags ?? '',
     app,
   });
 

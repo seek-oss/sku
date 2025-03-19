@@ -2,10 +2,7 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
-import type {
-  RenderToPipeableStreamOptions,
-  PipeableStream,
-} from 'react-dom/server';
+import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import type { Collector } from '@/services/vite/loadable/collector.js';
 import type { NormalizedRoute } from '@/context/createSkuContext.js';
 
@@ -15,14 +12,11 @@ import type { NormalizedRoute } from '@/context/createSkuContext.js';
  *  There may be some missing types here.
  *  Full types will come once Vite is fully supported in sku.
  * */
-export type ViteRenderFunction = (options: {
-  // TODO: Perhaps shouldn't be null. Might want to force all renders to have a language.
-  language: string | null;
-  url?: string;
-  site?: SkuSiteObject | string;
-  clientEntry: string;
-  route: NormalizedRoute;
-}) => Promise<string>;
+export type ViteRenderFunction = (
+  options: {
+    clientEntry: string;
+  } & SharedRenderProps,
+) => Promise<string>;
 
 export type RenderContext = {
   loadableCollector?: Collector;
@@ -35,13 +29,13 @@ export interface ViteRenderAppProps {
   options: RenderToPipeableStreamOptions;
 }
 
-export interface ViteRender {
-  render(p: ViteRenderAppProps): Promise<PipeableStream>;
+export interface ViteRender<App = string> {
+  renderApp(p: RenderAppProps): Promise<App> | App;
 
   provideClientContext?(context: {
     site?: SkuSiteObject | string;
     url?: string;
-  }): Promise<any> | any;
+  }): Promise<any>;
 
   bodyTags?: () => string;
   headTags?: () => string;
@@ -79,7 +73,7 @@ export interface Server {
 }
 
 interface SharedRenderProps {
-  routeName: string;
+  routeName: string | undefined;
   route: string;
   environment: string;
   site: string;

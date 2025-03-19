@@ -77,12 +77,20 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
         const url = req.originalUrl || req.url || '/';
 
+        if (!language) {
+          // TODO: This should probably just call next() instead of throwing an error
+          throw new Error(
+            'Not Implemented. Handling when no language is provided not yet supported.',
+          );
+        }
+
         const renderedHtml = await (viteRender as ViteRenderFunction)({
+          environment: 'development',
           language,
-          url,
-          site,
+          route: matchingRoute.route,
+          routeName: matchingRoute.name,
+          site: site.name,
           clientEntry,
-          route: matchingRoute,
         });
 
         const transformedHtml = await server.transformIndexHtml(

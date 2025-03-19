@@ -149,7 +149,11 @@ export const webpackStartHandler = async ({
         let chosenLanguage;
 
         try {
-          chosenLanguage = getLanguageFromRoute(req, matchingRoute, skuContext);
+          chosenLanguage = getLanguageFromRoute(
+            req.path,
+            matchingRoute,
+            skuContext,
+          );
         } catch (e: any) {
           return res.status(500).send(
             exceptionFormatter(e, {

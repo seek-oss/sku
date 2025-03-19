@@ -21,11 +21,11 @@ export class Collector {
   scriptIds = new Map<string, InjectableScript>();
 
   constructor(
-    public manifest: Manifest,
-    public nonce?: string,
-    public externalJsFiles?: string[],
-    public entry?: string,
-    public base?: string,
+    private manifest: Manifest,
+    private nonce?: string,
+    private externalJsFiles?: string[],
+    private entry?: string,
+    private base?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
@@ -50,7 +50,7 @@ export class Collector {
     });
   }
 
-  register(moduleId: ModuleId) {
+  public register(moduleId: ModuleId) {
     this.moduleIds.add(moduleId);
     parseManifestForEntry({
       manifest: this.manifest,
@@ -61,10 +61,10 @@ export class Collector {
       base: this.base,
     });
   }
-  getAllModules() {
+  private getAllModules() {
     return [...this.moduleIds];
   }
-  getAllPreloads() {
+  private getAllPreloads() {
     const preloadHtml = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createHtmlTag)
@@ -72,7 +72,7 @@ export class Collector {
 
     return preloadHtml;
   }
-  getAllScripts() {
+  private getAllScripts() {
     const scriptHtml = [...this.scriptIds.values()]
       .sort(sortInjectableScript)
       .map(createScriptTag)
@@ -80,13 +80,17 @@ export class Collector {
 
     return scriptHtml;
   }
-  getAllLinks() {
+  private getAllLinks() {
     const linkTags = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createLinkTag)
       .filter(Boolean);
 
     return linkTags;
+  }
+  public getHeadTags() {
+    // TODO: Likely needs to call some of the above methods.
+    console.error('Not Implemented: Returning no head tags.');
   }
 }
 

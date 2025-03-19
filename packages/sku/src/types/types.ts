@@ -72,7 +72,7 @@ export interface Server {
 }
 
 interface SharedRenderProps {
-  routeName: string | undefined;
+  routeName: string;
   route: string;
   environment: string;
   site: string;

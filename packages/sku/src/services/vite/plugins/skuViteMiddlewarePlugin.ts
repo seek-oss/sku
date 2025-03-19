@@ -2,6 +2,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
 import type { ViteRenderFunction } from '@/types/types.js';
+import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
 
 const require = createRequire(import.meta.url);
 
@@ -10,6 +11,10 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   configureServer(server) {
     return () => {
       server.middlewares.use(async (req, res, next) => {
+        if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+          metricsMeasurers.initialPageLoad.mark();
+        }
+
         const host = req.headers.host;
         const hostname = host?.split(':')[0];
         const site =

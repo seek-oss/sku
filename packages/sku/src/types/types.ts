@@ -4,7 +4,6 @@ import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
 import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import type { Collector } from '@/services/vite/loadable/collector.js';
-import type { NormalizedRoute } from '@/context/createSkuContext.js';
 
 /* START --- Vite-render types */
 /* Notes:

@@ -1,90 +1,111 @@
-// // import { Transform } from 'node:stream';
-// // import { getClosingHtml, getOpeningHtml } from './createIndex.js';
-// // import { serializeConfig } from '../serializeConfig.js';
-// // Has to be strongly typed once the first entity in renderContext is known.
+import type { Collector } from '@/services/vite/loadable/collector.js';
+import { LoadableProvider } from '@/services/vite/loadable/PreloadContext.jsx';
+import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
+import debug from 'debug';
+import type { ReactNode } from 'react';
 
-// type CreatePreRenderedHtmlOptions<App> = {
-//   language: string | null;
-//   route: NormalizedRoute;
-//   render: Render<App>;
-//   clientEntry: string;
-//   hooks?: {
-//     getBodyTags?: () => string;
-//     getHeadTags?: () => string;
-//   };
+import type { Render, RenderAppProps } from '@/types/types.js';
+import { serializeConfig } from '../serializeConfig.js';
 
-// export async function createPreRenderedHtml<App>({
-//   render,
-//   site,
-//   clientEntry,
-//   language,
-//   route,
-// }: CreatePreRenderedHtmlOptions<App>): Promise<string> {
+type CreatePreRenderedHtmlOptions<App> = {
+  render: Render<App>;
+  hooks?: {
+    getBodyTags?: () => string[];
+    getHeadTags?: () => string[];
+  };
+  loadableCollector: Collector;
+} & Omit<
+  RenderAppProps,
+  | 'options'
+  | '_addChunk'
+  | 'SkuProvider'
+  | 'renderToStringAsync'
+  | 'webpackStats'
+>;
 
-//   // if (render.provideClientContext) {
-//   //   // Check what kind of context needs to be passed into this function.
-//   //   clientContext = await render.provideClientContext({
-//   //     app,
-//   //     site,
-//   //     url,
-//   //   });
-//   // }
+export const createPreRenderedHtml = async <App,>({
+  environment,
+  language,
+  route,
+  routeName,
+  site,
+  render,
+  hooks,
+  loadableCollector,
+}: CreatePreRenderedHtmlOptions<App>) => {
+  const renderContext = {
+    environment,
+    language,
+    renderToStringAsync,
+    route,
+    routeName,
+    site,
+  };
 
-//   // This can be improved? Thinking of the interface can improve.
-//   // We need to use the client generated header for the SSG/SSR rendering so using a html document is not the best way to do it.
-//   // That was what .renderDocument was doing.
-//   // const renderedBodyTags = render.bodyTags ? await render.bodyTags() : '';
-//   // const renderedHeadTags = render.headTags ? await render.headTags() : '';
+  const SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element = ({
+    children,
+  }) => (
+    <LoadableProvider value={loadableCollector}>{children}</LoadableProvider>
+  );
 
-//   // let html = '';
+  if (!render.renderApp) {
+    // TODO: Support library mode
+    throw new Error('Not Implemented: Libraries are not supported yet.');
+  }
 
-//   //   const { pipe } = await render.render({
-//   //     url,
-//   //     site,
-//   //     renderContext,
-//   //     options: {
-//   //       onShellError(error: any) {
-//   //         reject(error);
-//   //       },
-//   //       onError(error: any) {
-//   //         console.error(error);
-//   //       },
-//   //       onAllReady() {
-//   //         const extraBodyTags = getBodyTags ? getBodyTags() : '';
-//   //         const bodyTags = [
-//   //           Object.keys(clientContext).length > 0 &&
-//   //             serializeConfig(clientContext),
-//   //           renderedBodyTags,
-//   //           extraBodyTags,
-//   //         ]
-//   //           .filter(Boolean)
-//   //           .join('\n');
+  if (!routeName) {
+    // TODO: I think this is a types issue. Routes should always exist and always have a name.
+    throw new Error('Not Implemented: Unable to handle unnamed routes.');
+  }
 
-//   //         const extraHeadTags = getHeadTags ? getHeadTags() : '';
-//   //         const headTags = [renderedHeadTags, extraHeadTags].join('\n');
+  const app = await render.renderApp({
+    ...renderContext,
+    _addChunk: (chunkName: string) => {
+      loadableCollector.register(chunkName);
+    },
+    SkuProvider,
+  });
 
-//   //         const startHtml = getOpeningHtml({
-//   //           title: 'Sku Project',
-//   //           headTags,
-//   //         });
+  if (language) {
+    debug('sku:render:language')(
+      `Using language "${language}" for route "${route}"`,
+    );
+    // TODO: Add chunk for language
+    console.error('Not Implemented: Add chunk for language');
+    // extractor.addChunk(getChunkName(language));
+  } else {
+    debug('sku:render:language')(`No language on route "${route}"`);
+  }
 
-//   //         html += startHtml;
+  const clientContext =
+    (await render.provideClientContext?.({
+      ...renderContext,
+      app,
+      site,
+    })) || {};
 
-//   //         const transformStream = new Transform({
-//   //           transform(chunk, encoding, callback) {
-//   //             html += chunk.toString();
-//   //             callback();
-//   //           },
-//   //         });
+  function getHeadTags() {
+    return [
+      ...loadableCollector.getAllLinks(),
+      ...loadableCollector.getAllPreloads(),
+    ];
+  }
 
-//   //         transformStream.on('finish', () => {
-//   //           html += getClosingHtml({ bodyTags });
-//   //           resolve(html);
-//   //         });
+  const bodyTags: string[] = [];
+  if (hooks?.getBodyTags) {
+    bodyTags.push(...hooks.getBodyTags());
+  }
+  if (Object.keys(clientContext).length > 0) {
+    serializeConfig(clientContext);
+  }
+  bodyTags.push(...loadableCollector.getAllScripts());
 
-//   //         pipe(transformStream);
-//   //       },
-//   //     },
-//   // });
-//   // });
-// }
+  const result = await render.renderDocument({
+    ...renderContext,
+    headTags: getHeadTags().join('\n'),
+    bodyTags: bodyTags.join('\n'),
+    app,
+  });
+
+  return result;
+};

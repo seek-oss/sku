@@ -64,33 +64,27 @@ export class Collector {
   private getAllModules() {
     return [...this.moduleIds];
   }
-  private getAllPreloads() {
+  public getAllPreloads() {
     const preloadHtml = [...this.preloadIds.values()]
       .sort(sortPreloads)
-      .map(createHtmlTag)
-      .join('\n');
+      .map(createHtmlTag);
 
     return preloadHtml;
   }
-  private getAllScripts() {
+  public getAllScripts() {
     const scriptHtml = [...this.scriptIds.values()]
       .sort(sortInjectableScript)
-      .map(createScriptTag)
-      .join('\n');
+      .map(createScriptTag);
 
     return scriptHtml;
   }
-  private getAllLinks() {
+  public getAllLinks() {
     const linkTags = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createLinkTag)
       .filter(Boolean);
 
     return linkTags;
-  }
-  public getHeadTags() {
-    // TODO: Likely needs to call some of the above methods.
-    console.error('Not Implemented: Returning no head tags.');
   }
 }
 

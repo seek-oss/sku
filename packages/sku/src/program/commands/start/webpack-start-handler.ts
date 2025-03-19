@@ -16,7 +16,7 @@ import { checkHosts, getAppHosts } from '@/utils/contextUtils/hosts.js';
 import allocatePort from '@/utils/allocatePort.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
 import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
-import routeMatcher, { getMatchingRoute } from '@/utils/routeMatcher.js';
+import { getMatchingRoute } from '@/utils/routeMatcher.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import {
   getLanguageFromRoute,

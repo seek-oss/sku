@@ -75,8 +75,6 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
         const { viteRender } = await server.ssrLoadModule(renderEntry);
 
-        const url = req.originalUrl || req.url || '/';
-
         if (!language) {
           // TODO: This should probably just call next() instead of throwing an error
           throw new Error(

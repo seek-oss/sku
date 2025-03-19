@@ -1,6 +1,4 @@
 import debug from 'debug';
-import type { Request } from 'express';
-import type { IncomingMessage } from 'node:http';
 
 import routeMatcher from './routeMatcher.js';
 import type { SkuLanguage } from '@/types/types.js';
@@ -102,7 +100,7 @@ export function getLanguageFromRoute(
   }
 
   log(
-    `Returning only valid language for URL: ${req.url} Language: ${supportedLanguagesForRoute[0]}`,
+    `Returning only valid language for URL: ${path} Language: ${supportedLanguagesForRoute[0]}`,
   );
   return supportedLanguagesForRoute[0];
 }

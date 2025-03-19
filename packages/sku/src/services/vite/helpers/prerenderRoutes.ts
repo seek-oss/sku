@@ -2,34 +2,50 @@ import { writeFile, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
+import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
-import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
 export const prerenderRoutes = async (skuContext: SkuContext) => {
-  const allRoutes = getBuildRoutes(skuContext);
+  const routes = getBuildRoutes(skuContext);
   const manifest = JSON.parse(
     await readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
   );
-  for (const route of allRoutes) {
+  for (const route of routes) {
     const render = (await import(resolve('./dist/render/render.js'))).default;
     const loadableCollector = createCollector({
       manifest,
       base: skuContext.publicPath.startsWith('/') ? '/' : '',
     });
 
+    if (!route.site) {
+      // TODO: Consider edge case of not having site
+      throw new Error('Not implemented. Site required.');
+    }
+    if (!route.language) {
+      // TODO: Consider edge case of not having language
+      throw new Error('Not implemented. Language required.');
+    }
+    if (!route.environment) {
+      // TODO: Consider edge case of not having environment
+      throw new Error('Not implemented. Environment required.');
+    }
+
     const html = await createPreRenderedHtml({
-      ...route,
-      libraryFile: skuContext.libraryFile,
-      libraryName: skuContext.libraryName,
+      environment: route.environment,
+      language: route.language,
+      route: route.route,
+      routeName: route.routeName,
+
+      site: route.site,
       render,
-      hooks: {
-        getBodyTags: () => loadableCollector.getAllScripts(),
-        getHeadTags: () => loadableCollector.getAllPreloads(),
-      },
-      collector: loadableCollector,
+      loadableCollector,
+      // hooks: {
+      //   getBodyTags: () => loadableCollector.getAllScripts(),
+      //   getHeadTags: () => loadableCollector.getAllPreloads(),
+      // },
     });
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {

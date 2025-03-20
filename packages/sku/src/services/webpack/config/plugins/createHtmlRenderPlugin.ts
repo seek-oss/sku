@@ -10,6 +10,7 @@ import {
 import type { Stats } from 'webpack';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { join } from 'node:path';
+import { RenderableRoute } from '@/types/types.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;
@@ -33,7 +34,7 @@ const mapStatsToParams =
     };
   };
 
-export const getStartRoutes = ({
+const getStartRoutes = ({
   sites,
   routes,
   languages: skuLanguages,
@@ -43,7 +44,7 @@ export const getStartRoutes = ({
   routes: SkuContext['routes'];
   languages: SkuContext['languages'];
   environments: SkuContext['environments'];
-}) => {
+}): RenderableRoute[] => {
   const allRouteCombinations = [];
 
   const forcedSites = sites.length > 0 ? sites : [undefined];
@@ -90,7 +91,7 @@ export const getBuildRoutes = ({
   routes: SkuContext['routes'];
   languages: SkuContext['languages'];
   environments: SkuContext['environments'];
-}) => {
+}): RenderableRoute[] => {
   const allRouteCombinations = [];
 
   const forcedEnvs = environments.length > 0 ? environments : [undefined];

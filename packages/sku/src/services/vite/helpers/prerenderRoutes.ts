@@ -20,19 +20,6 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
       base: skuContext.publicPath.startsWith('/') ? '/' : '',
     });
 
-    if (!route.site) {
-      // TODO: Consider edge case of not having site
-      throw new Error('Not implemented. Site required.');
-    }
-    if (!route.language) {
-      // TODO: Consider edge case of not having language
-      throw new Error('Not implemented. Language required.');
-    }
-    if (!route.environment) {
-      // TODO: Consider edge case of not having environment
-      throw new Error('Not implemented. Environment required.');
-    }
-
     const html = await createPreRenderedHtml({
       environment: route.environment,
       language: route.language,

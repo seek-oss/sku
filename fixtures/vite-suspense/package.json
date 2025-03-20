@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "sku build --experimental-bundler",
-    "start": "sku start --experimental-bundler"
+    "build": "sku build --experimental-bundler --debug",
+    "start": "sku start --experimental-bundler --debug",
+    "serve": "sku serve --experimental-bundler --debug"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.56.2",

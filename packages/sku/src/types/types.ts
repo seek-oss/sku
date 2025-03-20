@@ -71,12 +71,15 @@ export interface Server {
   middleware?: RequestHandler | RequestHandler[];
 }
 
-interface SharedRenderProps {
-  routeName: string;
+export interface RenderableRoute {
+  routeName: string | undefined;
   route: string;
-  environment: string;
-  site: string;
-  language: string;
+  environment: string | undefined;
+  site: string | undefined;
+  language: string | null;
+}
+
+interface SharedRenderProps extends RenderableRoute {
   // TODO: This could be strongly typed. e.g. if type is library they exist. For now just making optional.
   libraryName?: string;
   libraryFile?: string;

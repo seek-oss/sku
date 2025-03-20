@@ -1,6 +1,6 @@
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import debug from 'debug';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.jsx';
+import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
 
 import render from '__sku_alias__renderEntry';
 import type { ViteRenderFunction } from '@/types/types.js';

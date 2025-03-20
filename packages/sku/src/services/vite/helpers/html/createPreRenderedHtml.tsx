@@ -1,11 +1,13 @@
 import type { Collector } from '@/services/vite/loadable/collector.js';
-import { LoadableProvider } from '@/services/vite/loadable/PreloadContext.jsx';
+import { LoadableProvider } from '@/services/vite/loadable/PreloadContext.js';
 import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
 import debug from 'debug';
 import type { ReactNode } from 'react';
 
 import type { Render, RenderAppProps } from '@/types/types.js';
 import { serializeConfig } from '../serializeConfig.js';
+
+const log = debug('sku:render:html');
 
 type CreatePreRenderedHtmlOptions<App> = {
   render: Render<App>;
@@ -42,6 +44,8 @@ export const createPreRenderedHtml = async <App,>({
     site,
   };
 
+  log('Rendering app for route:', route, renderContext);
+
   const SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element = ({
     children,
   }) => (
@@ -55,7 +59,7 @@ export const createPreRenderedHtml = async <App,>({
 
   if (!routeName) {
     // TODO: I think this is a types issue. Routes should always exist and always have a name.
-    throw new Error('Not Implemented: Unable to handle unnamed routes.');
+    throw new Error('Not Implemented: Unable to handle unnamed routes 2.');
   }
 
   const app = await render.renderApp({
@@ -86,7 +90,7 @@ export const createPreRenderedHtml = async <App,>({
 
   function getHeadTags() {
     return [
-      ...loadableCollector.getAllLinks(),
+      // ...loadableCollector.getAllLinks(),
       ...loadableCollector.getAllPreloads(),
     ];
   }
@@ -96,7 +100,7 @@ export const createPreRenderedHtml = async <App,>({
     bodyTags.push(...hooks.getBodyTags());
   }
   if (Object.keys(clientContext).length > 0) {
-    serializeConfig(clientContext);
+    bodyTags.push(serializeConfig(clientContext));
   }
   bodyTags.push(...loadableCollector.getAllScripts());
 

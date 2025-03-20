@@ -11,6 +11,9 @@ import {
   type InjectableScript,
   sortInjectableScript,
 } from './helpers/scriptUtils.js';
+import debug from 'debug';
+
+const log = debug('sku:loadable:collector');
 
 export type ModuleId = string;
 
@@ -68,6 +71,7 @@ export class Collector {
     const preloadHtml = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createHtmlTag);
+    log('getAllPreloads', preloadHtml);
 
     return preloadHtml;
   }
@@ -75,7 +79,7 @@ export class Collector {
     const scriptHtml = [...this.scriptIds.values()]
       .sort(sortInjectableScript)
       .map(createScriptTag);
-
+    log('getAllScripts', scriptHtml);
     return scriptHtml;
   }
   public getAllLinks() {
@@ -83,6 +87,7 @@ export class Collector {
       .sort(sortPreloads)
       .map(createLinkTag)
       .filter(Boolean);
+    log('getAllLinks', linkTags);
 
     return linkTags;
   }

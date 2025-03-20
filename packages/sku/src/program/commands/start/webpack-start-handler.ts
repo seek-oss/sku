@@ -23,7 +23,11 @@ import {
   getRouteWithLanguage,
 } from '@/utils/language-utils.js';
 import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type {
+  NormalizedRoute,
+  SkuContext,
+} from '@/context/createSkuContext.js';
+import { RenderableRoute } from '@/types/types.js';
 
 const localhost = '0.0.0.0';
 

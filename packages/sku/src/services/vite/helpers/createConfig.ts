@@ -8,6 +8,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
+import { outDir, renderEntryChunkName } from './bundleConfig.js';
 
 const require = createRequire(import.meta.url);
 
@@ -22,12 +23,6 @@ export const createViteConfig = ({
   configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
 }) => {
-  const outDir = {
-    client: 'dist',
-    ssr: 'dist/server',
-    ssg: 'dist/render',
-  };
-
   const input = {
     client: clientEntry,
     ssr: skuContext.paths.serverEntry,
@@ -67,6 +62,8 @@ export const createViteConfig = ({
       rollupOptions: {
         input: input[configType],
         output: {
+          entryFileNames:
+            configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
         },
       },

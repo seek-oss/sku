@@ -24,6 +24,7 @@ export const setupHosts = async (skuContext: SkuContext) => {
     for (const host of appHosts) {
       if (host) {
         await setSystemHost('127.0.0.1', host);
+        await setSystemHost('::1', host);
         console.log(
           `Successfully added '${chalk.bold(host)}' to your hosts file`,
         );

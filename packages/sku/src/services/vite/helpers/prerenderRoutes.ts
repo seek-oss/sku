@@ -5,6 +5,7 @@ import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRend
 import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
+import { outDir, renderEntryChunkName } from './bundleConfig.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
@@ -14,7 +15,9 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     await readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
   );
   for (const route of routes) {
-    const render = (await import(resolve('./dist/render/render.js'))).default;
+    const render = (
+      await import(resolve(path.join(outDir.ssg, renderEntryChunkName)))
+    ).default;
     const loadableCollector = createCollector({
       manifest,
       base: skuContext.publicPath.startsWith('/') ? '/' : '',

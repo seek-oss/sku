@@ -16,6 +16,7 @@ const appSnapshotSerializer = {
       noHeaders: true,
     });
 
+    process.stdout.write(htmlDiff || '');
     const snapshotItems = [
       serializer(formattedSourceHtml),
       `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`,

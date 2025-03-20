@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 
-import App from './App';
+import { App } from './App.jsx';
 
 export default {
   renderApp: ({ site, SkuProvider }) => {
@@ -13,6 +13,7 @@ export default {
 
   provideClientContext: ({ site }) => ({
     site,
+    rootElementId: 'app',
   }),
 
   renderDocument: ({ app, headTags, bodyTags, site }) => `

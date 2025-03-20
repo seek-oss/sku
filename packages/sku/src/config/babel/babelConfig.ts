@@ -32,7 +32,7 @@ export default ({
       require.resolve('babel-plugin-module-resolver'),
       {
         root: rootResolution ? [cwd()] : undefined,
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+        extensions: ['.js', '.jsx', '.mjs', '.cjs', '.json', '.ts', '.tsx'],
       },
     ],
     require.resolve('babel-plugin-macros'),

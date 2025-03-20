@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { backgroundColor } from 'src/vars.css';
+
+import { backgroundColor } from 'src/vars.css.ts';
 
 export const vanillaBox = style({
   vars: {

@@ -1,5 +1,32 @@
 # sku
 
+## 14.2.0
+
+### Minor Changes
+
+- Change `prettier` dependency range from minor-version flexible to patch-version flexible. Update `prettier` dependency to `~3.5.0`. ([#1210](https://github.com/seek-oss/sku/pull/1210))
+
+  This change may result in some code formatting changes. Please review the [Prettier 3.5.0 release notes].
+
+  [Prettier 3.5.0 release notes]: https://prettier.io/blog/2025/02/09/3.5.0
+
+- `vite`: Emit start time metric for `sku start` ([#1214](https://github.com/seek-oss/sku/pull/1214))
+
+- Update TypeScript dependency from `~5.6.0` to `~5.8.0` ([#1095](https://github.com/seek-oss/sku/pull/1095))
+
+  These 2 major release include breaking changes. See the [TypeScript 5.7] and [TypeScript 5.8] announcements for more information.
+
+  [TypeScript 5.7]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-7/
+  [TypeScript 5.8]: https://devblogs.microsoft.com/typescript/announcing-typescript-5-8/
+
+### Patch Changes
+
+- `vite`: Emit more accurate HMR rebuild timing metrics during `sku start` ([#1211](https://github.com/seek-oss/sku/pull/1211))
+
+  Previously this metric was captured server-side by relying on plugin hooks firing in the correct order. This proved to be inaccurate, so we now capture this metric client-side and send the data back to the dev server.
+
+- Update `eslint-config-seek` dependency to `^14.4.0` ([#1208](https://github.com/seek-oss/sku/pull/1208))
+
 ## 14.1.1
 
 ### Patch Changes

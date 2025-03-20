@@ -17,7 +17,6 @@ const log = debug('sku:loadable:collector');
 
 export type ModuleId = string;
 
-// TODO: improve log levels for this class.
 export class Collector {
   moduleIds = new Set<string>();
   preloadIds = new Map<string, Preload>();
@@ -26,8 +25,8 @@ export class Collector {
   constructor(
     private manifest: Manifest,
     private nonce?: string,
-    private externalJsFiles?: string[],
-    private entry?: string,
+    externalJsFiles?: string[],
+    entry?: string,
     private base?: string,
   ) {
     this.manifest = manifest;
@@ -63,9 +62,6 @@ export class Collector {
       nonce: this.nonce,
       base: this.base,
     });
-  }
-  private getAllModules() {
-    return [...this.moduleIds];
   }
   public getAllPreloads() {
     const preloadHtml = [...this.preloadIds.values()]

@@ -20,16 +20,14 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
     server.middlewares.use(async (req, res, next) => {
       log('Handling request:', req.url);
       if (!req.url) {
-        // TODO: This should probably just call next() instead of throwing an error
-        throw new Error(
-          'Internal error occurred. No URL Found when handling middleware.',
-        );
+        log('No url found for request. Skipping render.');
+        next();
+        return;
       }
       const host = req.headers.host;
       const hostname = host?.split(':')[0];
 
       if (!hostname) {
-        // TODO: I don't think this should be required
         throw new Error(
           'Internal error occurred. No hostname found when handling middleware. Host header required.',
         );
@@ -37,20 +35,6 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
       const site =
         skuContext.sites.find((skuSite) => skuSite.host === hostname) ||
         skuContext.sites[0];
-
-      if (!site) {
-        // TODO: If there are no sites we might want to allow this, otherwise likely needs to call next()
-        throw new Error(
-          'Internal error occurred. No site found when handling middleware. Site required.',
-        );
-      }
-
-      if (!req.url) {
-        // TODO: Consider defaulting this value. But it's should be guaranteed for all requests. Something very wrong has occurred if it does not exist.
-        throw new Error(
-          'Internal error occurred. No URL Found when handling middleware.',
-        );
-      }
 
       const matchingRoute = getMatchingRoute({
         hostname: host,
@@ -60,6 +44,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
       });
 
       if (!matchingRoute) {
+        log('No matching route found for request. Skipping render.');
         next();
         return;
       }

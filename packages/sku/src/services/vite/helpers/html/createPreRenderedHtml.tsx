@@ -52,23 +52,14 @@ export const createPreRenderedHtml = async <App,>({
     <LoadableProvider value={loadableCollector}>{children}</LoadableProvider>
   );
 
-  if (!render.renderApp) {
-    // TODO: Support library mode
-    throw new Error('Not Implemented: Libraries are not supported yet.');
-  }
-
-  if (!routeName) {
-    // TODO: I think this is a types issue. Routes should always exist and always have a name.
-    throw new Error('Not Implemented: Unable to handle unnamed routes 2.');
-  }
-
-  const app = await render.renderApp({
-    ...renderContext,
-    _addChunk: (chunkName: string) => {
-      loadableCollector.register(chunkName);
-    },
-    SkuProvider,
-  });
+  const app =
+    (await render.renderApp?.({
+      ...renderContext,
+      _addChunk: (chunkName: string) => {
+        loadableCollector.register(chunkName);
+      },
+      SkuProvider,
+    })) || null;
 
   if (language) {
     debug('sku:render:language')(

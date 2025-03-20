@@ -29,10 +29,6 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
       site: route.site,
       render,
       loadableCollector,
-      // hooks: {
-      //   getBodyTags: () => loadableCollector.getAllScripts(),
-      //   getHeadTags: () => loadableCollector.getAllPreloads(),
-      // },
     });
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {

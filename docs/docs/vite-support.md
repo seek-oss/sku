@@ -28,36 +28,14 @@ The following commands are supported:
 
 - `build` static site generation.
 - `start` start the development server for static site generation.
-- `start-ssr` start the development server for server side rendering.
 
 ### Static rendering
 
 Before starting with `vite` static rendering make sure you've read the [static rendering](./docs/static-rendering.md) documentation for webpack.
 
-### Client entrypoint
-
-The only difference between the webpack and the vite client entrypoint is the name of the root element. In the future, this change will not be necessary.
-
-```diff
-import { hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
-
-import { App } from './App';
-
-export default ({ site }: { site: string }) => {
-  hydrateRoot(
-+    document.getElementById('root')!,
--    document.getElementById('app')!,
-    <BrowserRouter>
-      <App site={site} />
-    </BrowserRouter>,
-  );
-};
-```
-
 ### Render entrypoint
 
-The render entrypoint file has to export a `ViteRender` object. The `ViteRender` object has two functions: `render` and `provideClientContext`.
+The render entrypoint file uses the same to export a `Render` object. The `ViteRender` object has two functions: `render` and `provideClientContext`.
 
 #### render
 

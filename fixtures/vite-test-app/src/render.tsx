@@ -1,32 +1,43 @@
 import { StrictMode } from 'react';
-import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
-import type { ViteRender } from 'sku';
-import { LoadableProvider, preloadAll } from 'sku/vite/loadable';
+import type { Render } from 'sku';
 
 import { App } from './App.jsx';
+import React from 'react';
+import html from 'dedent';
 
 export default {
-  render: async ({ options, renderContext, site, url }) => {
-    const { loadableCollector } = renderContext;
-
-    await preloadAll();
-
-    const appSite = typeof site === 'string' ? site : site?.name;
-
-    return renderToPipeableStream(
+  renderApp: async ({ site, renderToStringAsync, SkuProvider, route }) => {
+    return renderToStringAsync(
       <StrictMode>
-        <LoadableProvider value={loadableCollector!}>
-          <StaticRouter location={url || '/'}>
-            <App site={appSite || ''} />
+        <SkuProvider>
+          <StaticRouter location={route}>
+            <App site={site || ''} />
           </StaticRouter>
-        </LoadableProvider>
+        </SkuProvider>
       </StrictMode>,
-      options,
     );
   },
 
   provideClientContext: async ({ site }) => ({
-    site: typeof site === 'string' ? site : site?.name,
+    site,
   }),
-} satisfies ViteRender;
+
+  renderDocument: ({ app, bodyTags, headTags }) => {
+    return html/* html */ `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8" />
+          <title>hello-world</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          ${headTags}
+        </head>
+        <body>
+          <div id="app">${app}</div>
+          ${bodyTags}
+        </body>
+      </html>
+    `;
+  },
+} satisfies Render;

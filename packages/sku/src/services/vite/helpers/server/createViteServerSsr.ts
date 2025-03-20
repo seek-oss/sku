@@ -11,7 +11,6 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
-import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
 
 const base = process.env.BASE || '/';
 
@@ -42,12 +41,6 @@ export const createViteServerSsr = async ({
         ...createViteConfig({
           skuContext,
           configType: 'ssr',
-          plugins: [
-            skuViteHMRTelemetryPlugin({
-              target: 'node',
-              type: 'ssr',
-            }),
-          ],
         }),
         server: {
           middlewareMode: true,

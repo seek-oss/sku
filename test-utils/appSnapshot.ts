@@ -1,12 +1,9 @@
-// @ts-check
-/**
- * @param {string} url
- */
-export const getAppSnapshot = async (url, warningFilter = () => true) => {
-  /** @type {string[]} */
-  const warnings = [];
-  /** @type {string[]} */
-  const errors = [];
+export const getAppSnapshot = async (
+  url: string,
+  warningFilter = () => true,
+) => {
+  const warnings: string[] = [];
+  const errors: string[] = [];
 
   const appPage = await browser.newPage();
 
@@ -36,11 +33,15 @@ export const getAppSnapshot = async (url, warningFilter = () => true) => {
   });
 
   const response = await appPage.goto(url, { waitUntil: 'load' });
-  const sourceHtml = await response?.text();
-  const clientRenderContent = await appPage.content();
+  const sourceHtml = sanitizeHtml((await response?.text()) || '');
+  const clientRenderContent = sanitizeHtml(await appPage.content());
 
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);
 
   return { sourceHtml, clientRenderContent };
 };
+
+function sanitizeHtml(str: string) {
+  return str.replaceAll(process.cwd(), '{cwd}');
+}

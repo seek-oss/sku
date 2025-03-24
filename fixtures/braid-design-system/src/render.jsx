@@ -13,6 +13,7 @@ export default {
 
   provideClientContext: ({ site }) => ({
     site,
+    rootElementId: 'app',
   }),
 
   renderDocument: ({ app, headTags, bodyTags, site }) => `

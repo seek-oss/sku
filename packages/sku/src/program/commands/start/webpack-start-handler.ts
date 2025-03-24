@@ -12,7 +12,11 @@ import createHtmlRenderPlugin from '@/services/webpack/config/plugins/createHtml
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
 import { watchVocabCompile } from '@/services/vocab/runVocab.js';
 
-import { checkHosts, getAppHosts } from '@/utils/contextUtils/hosts.js';
+import {
+  checkHosts,
+  getAppHosts,
+  withHostile,
+} from '@/utils/contextUtils/hosts.js';
 import allocatePort from '@/utils/allocatePort.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
 import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
@@ -85,7 +89,7 @@ export const webpackStartHandler = async ({
   const clientCompiler = webpack(clientWebpackConfig);
   const renderCompiler = webpack(renderWebpackConfig);
 
-  await checkHosts(skuContext);
+  await withHostile(checkHosts)(skuContext);
 
   renderCompiler.watch({}, (err, stats) => {
     if (err) {

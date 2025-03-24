@@ -16,6 +16,7 @@ import validateOptions, {
   type SkuWebpackPluginOptions,
 } from './validateOptions.js';
 import targets from '@/config/targets.json' with { type: 'json' };
+import { rootResolutionFileExtensions } from '@/config/fileResolutionExtensions.js';
 
 class SkuWebpackPlugin implements WebpackPluginInstance {
   options: SkuWebpackPluginOptions;
@@ -176,21 +177,14 @@ class SkuWebpackPlugin implements WebpackPluginInstance {
     compiler.options.module.rules.push(...rules);
 
     if (!compiler.options.resolve.extensions) {
-      compiler.options.resolve.extensions = [
-        '.mjs',
-        '.js',
-        '.json',
-        '.ts',
-        '.tsx',
-      ];
+      compiler.options.resolve.extensions = rootResolutionFileExtensions;
     } else {
-      if (!compiler.options.resolve.extensions.includes('.ts')) {
-        compiler.options.resolve.extensions.push('.ts');
-      }
+      const dedupedExtensions = new Set([
+        ...rootResolutionFileExtensions,
+        ...compiler.options.resolve.extensions,
+      ]);
 
-      if (!compiler.options.resolve.extensions.includes('.tsx')) {
-        compiler.options.resolve.extensions.push('.tsx');
-      }
+      compiler.options.resolve.extensions = Array.from(dedupedExtensions);
     }
 
     new VanillaExtractPlugin({

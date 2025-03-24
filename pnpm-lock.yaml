@@ -1011,16 +1011,22 @@ importers:
         version: 3.5.5(typescript@5.8.2)
 
   test-utils:
-    dependencies:
+    devDependencies:
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
+      '@prettier/sync':
+        specifier: ^0.5.2
+        version: 0.5.2(prettier@3.5.3)
       '@types/css':
         specifier: ^0.0.38
         version: 0.0.38
+      '@types/diff':
+        specifier: ^7.0.1
+        version: 7.0.1
       '@types/diffable-html':
         specifier: ^5.0.2
         version: 5.0.2
-      '@types/git-diff':
-        specifier: ^2.0.7
-        version: 2.0.7
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -1039,12 +1045,12 @@ importers:
       death:
         specifier: ^1.1.0
         version: 1.1.0
+      diff:
+        specifier: ^7.0.0
+        version: 7.0.0
       diffable-html:
         specifier: ^5.0.0
         version: 5.0.0
-      git-diff:
-        specifier: ^2.0.6
-        version: 2.0.6
       hostile:
         specifier: ^1.3.3
         version: 1.4.0
@@ -1066,13 +1072,6 @@ importers:
       webpack-stats-plugin:
         specifier: ^1.0.3
         version: 1.1.3
-    devDependencies:
-      '@jest/globals':
-        specifier: ^29.7.0
-        version: 29.7.0
-      '@prettier/sync':
-        specifier: ^0.5.2
-        version: 0.5.2(prettier@3.5.3)
 
   tests:
     devDependencies:
@@ -2813,6 +2812,9 @@ packages:
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
+  '@types/diff@7.0.1':
+    resolution: {integrity: sha512-R/BHQFripuhW6XPXy05hIvXJQdQ4540KnTvEFHSLjXfHYM41liOLKgIJEyYYiQe796xpaMHfe4Uj/p7Uvng2vA==}
+
   '@types/diffable-html@5.0.2':
     resolution: {integrity: sha512-VS6yWnAFw8Dm1BhrTwt84V5VWbdysOOF32vbCtQJMtJxzpLGAIZ5P+1NfRX0elYluZ70vwPkm9msdrHBB2ijFQ==}
 
@@ -2845,9 +2847,6 @@ packages:
 
   '@types/gh-pages@6.1.0':
     resolution: {integrity: sha512-Ma9bmKkE+WUtywENLC1rSLXTW66cJHJMWX2RQrJTMKhYM8o+73bRJ1ebfo3RWXUcG+HW3khky2nhVaN7nCsa3Q==}
-
-  '@types/git-diff@2.0.7':
-    resolution: {integrity: sha512-hipFAUcmf3c+45+Y8+J/xk7gT+0HBuT3O8OTtrnoP6R9gI0r2xESZNdYiA0pj7kQyPCwmkgbnxmfwQ9Ld2lZLQ==}
 
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
@@ -4387,8 +4386,8 @@ packages:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  diff@3.5.0:
-    resolution: {integrity: sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==}
+  diff@7.0.0:
+    resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
     engines: {node: '>=0.3.1'}
 
   diffable-html@5.0.0:
@@ -5158,10 +5157,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  git-diff@2.0.6:
-    resolution: {integrity: sha512-/Iu4prUrydE3Pb3lCBMbcSNIf81tgGt0W1ZwknnyF62t3tHmtiJTRj0f+1ZIhp3+Rh0ktz1pJVoa7ZXUCskivA==}
-    engines: {node: '>= 4.8.0'}
-
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -5504,10 +5499,6 @@ packages:
   internal-slot@1.1.0:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
-
-  interpret@1.4.0:
-    resolution: {integrity: sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==}
-    engines: {node: '>= 0.10'}
 
   interpret@3.1.1:
     resolution: {integrity: sha512-6xwYfHbajpoF0xLW+iwLkhwgvLoZDfjYfoFNu8ftMoXINzwuymNLd9u/KmwtdT2GbR+/Cz66otEGEVVUHX9QLQ==}
@@ -7455,10 +7446,6 @@ packages:
     resolution: {integrity: sha512-YTUo+Flmw4ZXiWfQKGcwwc11KnoRAYgzAE2E7mXKCjSviTKShtxBsN6YUUBB2gtaBzKzeKunxhUwNHQuRryhWA==}
     engines: {node: '>= 4'}
 
-  rechoir@0.6.2:
-    resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
-    engines: {node: '>= 0.10'}
-
   rechoir@0.8.0:
     resolution: {integrity: sha512-/vxpCXddiX8NGfGO/mTafwjq4aFa/71pvamip0++IQk3zG8cbCj0fifNPrjjF1XMXUne91jL9OoxmdykoEtifQ==}
     engines: {node: '>= 10.13.0'}
@@ -7758,15 +7745,6 @@ packages:
   shell-quote@1.8.2:
     resolution: {integrity: sha512-AzqKpGKjrj7EM6rKVQEPpB288oCfnrEIuyoT9cyF4nmGa7V8Zk6f7RRqYisX8X9m+Q7bd632aZW4ky7EhbQztA==}
     engines: {node: '>= 0.4'}
-
-  shelljs.exec@1.1.8:
-    resolution: {integrity: sha512-vFILCw+lzUtiwBAHV8/Ex8JsFjelFMdhONIsgKNLgTzeRckp2AOYRQtHJE/9LhNvdMmE27AGtzWx0+DHpwIwSw==}
-    engines: {node: '>= 4.0.0'}
-
-  shelljs@0.8.5:
-    resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
-    engines: {node: '>=4'}
-    hasBin: true
 
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
@@ -10874,6 +10852,8 @@ snapshots:
     dependencies:
       '@types/ms': 2.1.0
 
+  '@types/diff@7.0.1': {}
+
   '@types/diffable-html@5.0.2': {}
 
   '@types/doctrine@0.0.9': {}
@@ -10916,8 +10896,6 @@ snapshots:
   '@types/fined@1.1.5': {}
 
   '@types/gh-pages@6.1.0': {}
-
-  '@types/git-diff@2.0.7': {}
 
   '@types/graceful-fs@4.1.9':
     dependencies:
@@ -12761,7 +12739,7 @@ snapshots:
 
   diff-sequences@29.6.3: {}
 
-  diff@3.5.0: {}
+  diff@7.0.0: {}
 
   diffable-html@5.0.0:
     dependencies:
@@ -13841,14 +13819,6 @@ snapshots:
       fs-extra: 11.3.0
       globby: 11.1.0
 
-  git-diff@2.0.6:
-    dependencies:
-      chalk: 2.4.2
-      diff: 3.5.0
-      loglevel: 1.9.2
-      shelljs: 0.8.5
-      shelljs.exec: 1.1.8
-
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -14263,8 +14233,6 @@ snapshots:
       es-errors: 1.3.0
       hasown: 2.0.2
       side-channel: 1.1.0
-
-  interpret@1.4.0: {}
 
   interpret@3.1.1: {}
 
@@ -16436,10 +16404,6 @@ snapshots:
       tiny-invariant: 1.3.3
       tslib: 2.8.1
 
-  rechoir@0.6.2:
-    dependencies:
-      resolve: 1.22.10
-
   rechoir@0.8.0:
     dependencies:
       resolve: 1.22.10
@@ -16821,14 +16785,6 @@ snapshots:
   shebang-regex@3.0.0: {}
 
   shell-quote@1.8.2: {}
-
-  shelljs.exec@1.1.8: {}
-
-  shelljs@0.8.5:
-    dependencies:
-      glob: 7.2.3
-      interpret: 1.4.0
-      rechoir: 0.6.2
 
   side-channel-list@1.0.0:
     dependencies:

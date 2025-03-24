@@ -1,5 +1,5 @@
 // @ts-check
-const Diff = require('diff');
+const diff = require('diff');
 const { formatHtml } = require('./formatHtml.cjs');
 
 const emptyDiff = `===================================================================

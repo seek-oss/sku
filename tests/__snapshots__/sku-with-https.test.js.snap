@@ -90,6 +90,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -41,7 +41,7 @@
      <div id="app">
        <div class="_2vdre50">
          <div class="_2vdre51">
@@ -98,12 +102,15 @@ POST HYDRATE DIFFS:
          </div>
          <img src="/a85d2645cc4d80a20b5b.png">
        </div>
-
 `;
 
 exports[`sku-with-https serve should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,7 @@
 -OK
 \\ No newline at end of file
 +<html>
@@ -114,7 +121,6 @@ POST HYDRATE DIFFS:
 +  </body>
 +</html>
 \\ No newline at end of file
-
 `;
 
 exports[`sku-with-https start should start a development server 1`] = `
@@ -207,6 +213,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -41,7 +41,7 @@
      <div id="app">
        <div class="styles_root__2vdre50">
          <div class="styles_nested__2vdre51">
@@ -215,12 +225,15 @@ POST HYDRATE DIFFS:
          </div>
          <img src="/a85d2645cc4d80a20b5b.png">
        </div>
-
 `;
 
 exports[`sku-with-https start should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,7 @@
 -OK
 \\ No newline at end of file
 +<html>
@@ -231,12 +244,15 @@ POST HYDRATE DIFFS:
 +  </body>
 +</html>
 \\ No newline at end of file
-
 `;
 
 exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,7 @@
 -OK
 \\ No newline at end of file
 +<html>
@@ -247,5 +263,4 @@ POST HYDRATE DIFFS:
 +  </body>
 +</html>
 \\ No newline at end of file
-
 `;

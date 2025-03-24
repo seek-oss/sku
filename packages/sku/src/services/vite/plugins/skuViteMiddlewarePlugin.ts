@@ -8,6 +8,7 @@ import {
   getLanguageFromRoute,
   getRouteWithLanguage,
 } from '@/utils/language-utils.js';
+import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
 
 const log = debug('sku:middleware:vite');
 
@@ -16,6 +17,9 @@ const require = createRequire(import.meta.url);
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   configureServer(server) {
+    if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+      metricsMeasurers.initialPageLoad.mark();
+    }
     log('Configuring server middleware');
     server.middlewares.use(async (req, res, next) => {
       log('Handling request:', req.url);

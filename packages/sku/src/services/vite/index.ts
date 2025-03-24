@@ -43,8 +43,8 @@ export const viteService = {
     const server = await createViteServerSsr({
       skuContext,
     });
+    server.listen(skuContext.port.server);
 
-    await server.listen(skuContext.port.server);
     if (skuContext.sites.length > 1) {
       skuContext.sites.forEach((site) => {
         console.log(

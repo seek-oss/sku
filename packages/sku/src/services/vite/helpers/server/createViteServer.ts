@@ -4,6 +4,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createViteConfig } from '../createConfig.js';
 import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
+import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry.js';
 
 export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';
@@ -13,6 +14,10 @@ export const createViteServer = async (skuContext: SkuContext) => {
       skuContext,
       plugins: [
         skuViteMiddlewarePlugin(skuContext),
+        skuViteStartTelemetryPlugin({
+          target: 'node',
+          type: 'static',
+        }),
         skuViteHMRTelemetryPlugin({
           target: 'node',
           type: 'static',

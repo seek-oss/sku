@@ -92,6 +92,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -44,7 +44,7 @@
          </div>
          <div>
            Render type:
@@ -100,7 +104,6 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
-
 `;
 
 exports[`typescript-css-modules build should generate the expected files 1`] = `
@@ -314,6 +317,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -47,7 +47,7 @@
          </div>
          <div>
            Render type:
@@ -322,7 +329,6 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
-
 `;
 
 exports[`typescript-css-modules build-ssr should generate the expected files 1`] = `
@@ -435,6 +441,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -44,7 +44,7 @@
          </div>
          <div>
            Render type:
@@ -443,5 +453,4 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
-
 `;

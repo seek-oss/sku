@@ -3,7 +3,7 @@
 exports[`suspense bundler vite build and serve should generate the expected files 1`] = `
 {
   "production/au/index.html": SCRIPTS: [
-    "/static/suspense/vite-client-DAj1xAnO.js",
+    "/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -50,13 +50,13 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "static/suspense/vite-client-DAj1xAnO.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`suspense bundler vite build and serve should return home page 1`] = `
 SCRIPTS: [
-  "/static/suspense/vite-client-DAj1xAnO.js",
+  "/vite-client.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>

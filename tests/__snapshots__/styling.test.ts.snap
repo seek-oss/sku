@@ -99,6 +99,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -38,7 +38,7 @@
        <div>
          <div>
            Render type:
@@ -107,7 +111,6 @@ POST HYDRATE DIFFS:
          </div>
          <div>
            <span
-
 `;
 
 exports[`styling build should generate the expected files 1`] = `
@@ -334,6 +337,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -38,7 +38,7 @@
        <div>
          <div>
            Render type:
@@ -342,5 +349,4 @@ POST HYDRATE DIFFS:
          </div>
          <div>
            <span
-
 `;

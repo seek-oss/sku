@@ -15,15 +15,17 @@ const appSnapshotSerializer = {
     const formattedSourceHtml = formatHtml(sourceHtml);
     const formattedClientHtml = formatHtml(clientRenderContent);
 
-    const htmlDiff = Diff.createTwoFilesPatch(
-      'sourceHtml',
-      'clientHtml',
-      formattedSourceHtml,
-      formattedClientHtml,
-      undefined,
-      undefined,
-      { ignoreNewlineAtEof: true, context: 3 },
-    ).trim();
+    const htmlDiff = diff
+      .createTwoFilesPatch(
+        'sourceHtml',
+        'clientHtml',
+        formattedSourceHtml,
+        formattedClientHtml,
+        undefined,
+        undefined,
+        { ignoreNewlineAtEof: true, context: 3 },
+      )
+      .trim();
 
     const isEmptyDiff = htmlDiff === emptyDiff;
 

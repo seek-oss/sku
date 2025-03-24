@@ -1,5 +1,5 @@
 import type { Collector } from '@/services/vite/loadable/collector.js';
-import { LoadableProvider } from '@/services/vite/loadable/PreloadContext.js';
+import { LoadableProvider } from '@/services/vite/loadable/index.js';
 import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
 import debug from 'debug';
 import type { ReactNode } from 'react';
@@ -52,14 +52,13 @@ export const createPreRenderedHtml = async <App,>({
     <LoadableProvider value={loadableCollector}>{children}</LoadableProvider>
   );
 
-  const app =
-    (await render.renderApp?.({
-      ...renderContext,
-      _addChunk: (chunkName: string) => {
-        loadableCollector.register(chunkName);
-      },
-      SkuProvider,
-    })) || null;
+  const app = await render.renderApp({
+    ...renderContext,
+    _addChunk: (chunkName: string) => {
+      loadableCollector.register(chunkName);
+    },
+    SkuProvider,
+  });
 
   if (language) {
     debug('sku:render:language')(

@@ -8,6 +8,8 @@ export default {
       routes: [{ route: '/', name: 'home' }],
     },
   ],
+  clientEntry: 'src/client.jsx',
+  renderEntry: 'src/render.jsx',
   environments: ['production'],
   port: 8203,
   publicPath: '/static/suspense',

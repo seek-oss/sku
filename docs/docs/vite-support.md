@@ -29,58 +29,13 @@ The following commands are supported:
 - `build` static site generation.
 - `start` start the development server for static site generation.
 
-### Static rendering
+### Rendering
 
-Before starting with `vite` static rendering make sure you've read the [static rendering](./docs/static-rendering.md) documentation for webpack.
+Before starting with `vite` rendering make sure you've read the [static rendering](./docs/static-rendering.md) documentation for webpack.
 
-### Render entrypoint
-
-The render entrypoint file uses the same to export a `Render` object. The `ViteRender` object has two functions: `render` and `provideClientContext`.
-
-#### render
-
-The `render` function should return your application as a pipeable stream (using `React.renderToPipeableString`).
-
-`render` will be called once for each combination of settings in sku config. Specifically, `environment`, `site` & `route`.
-
-If you are using `loadable` components, you should wrap your application in a `LoadableProvider` from `sku/vite/loadable`. This will search your rendered application for dynamic imports that are wrapped in a `loadable` function.
-By calling the `await preloadAll()` function, you can ensure that all `loadable` imported files will be preloaded before sku renders the page.
-
-#### provideClientContext
-
-The `provideClientContext` is the same as that of the webpack render entrypoint. See [provideClientContext](./docs/static-rendering.md#provideclientcontext) for more information.
-
-**Example of a render entrypoint with `vite`**
-
-```tsx
-import { StaticRouter } from 'react-router-dom/server';
-import type { ViteRender } from 'sku';
-import { renderToPipeableStream } from 'react-dom/server';
-import { LoadableProvider, preloadAll } from 'sku/vite/loadable';
-
-import App from './App';
-
-export default {
-  render: async ({ options, renderContext, site, url }) => {
-    const { loadableCollector } = renderContext;
-
-    await preloadAll();
-
-    return renderToPipeableStream(
-      <LoadableProvider value={loadableCollector}>
-        <StaticRouter location={url} context={{}}>
-          <App site={site} />
-        </StaticRouter>
-      </LoadableProvider>,
-      options,
-    );
-  },
-
-  provideClientContext: ({ site }) => ({
-    site,
-  }),
-} satisfies ViteRender;
-```
+> [!NOTE]
+> There are some differences between the two renderers.
+> You can find a detailed explanation of the changes and how to migrate over down below.
 
 ### Code splitting
 

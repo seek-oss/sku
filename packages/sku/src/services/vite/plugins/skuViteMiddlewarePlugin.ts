@@ -2,12 +2,29 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
 import type { ViteRenderFunction } from '@/types/types.js';
+import debug from 'debug';
 
 const require = createRequire(import.meta.url);
 
+const log = debug('sku:vite-middleware-plugin');
+
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
-  configureServer(server) {
+  async configureServer(server) {
+    if (skuContext.useDevServerMiddleware) {
+      log(
+        'Using dev server middleware at %s',
+        skuContext.paths.devServerMiddleware,
+      );
+      const devServerMiddleware = (
+        await import(skuContext.paths.devServerMiddleware)
+      ).default;
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(server);
+        log('Dev server middleware loaded');
+      }
+    }
+
     return () => {
       server.middlewares.use(async (req, res, next) => {
         const host = req.headers.host;

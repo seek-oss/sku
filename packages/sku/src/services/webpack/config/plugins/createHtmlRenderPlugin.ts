@@ -10,7 +10,7 @@ import {
 import type { Stats } from 'webpack';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { join } from 'node:path';
-import { RenderableRoute } from '@/types/types.js';
+import type { RenderableRoute } from '@/types/types.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;

@@ -1,6 +1,10 @@
 // @ts-check
-const diff = require('git-diff');
+const Diff = require('diff');
 const { formatHtml } = require('./formatHtml.cjs');
+
+const emptyDiff = `===================================================================
+--- sourceHtml
++++ clientHtml`;
 
 const appSnapshotSerializer = {
   /**
@@ -11,14 +15,21 @@ const appSnapshotSerializer = {
     const formattedSourceHtml = formatHtml(sourceHtml);
     const formattedClientHtml = formatHtml(clientRenderContent);
 
-    const htmlDiff = diff(formattedSourceHtml, formattedClientHtml, {
-      color: false,
-      noHeaders: true,
-    });
+    const htmlDiff = Diff.createTwoFilesPatch(
+      'sourceHtml',
+      'clientHtml',
+      formattedSourceHtml,
+      formattedClientHtml,
+      undefined,
+      undefined,
+      { ignoreNewlineAtEof: true, context: 3 },
+    ).trim();
+
+    const isEmptyDiff = htmlDiff === emptyDiff;
 
     const snapshotItems = [
       serializer(formattedSourceHtml),
-      `POST HYDRATE DIFFS: ${htmlDiff ? `\n${htmlDiff}` : 'NO DIFF'}`,
+      `POST HYDRATE DIFFS: ${isEmptyDiff ? 'NO DIFF' : `\n${htmlDiff}`}`,
     ];
 
     return snapshotItems.join('\n');

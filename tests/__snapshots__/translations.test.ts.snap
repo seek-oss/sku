@@ -194,6 +194,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -37,8 +37,7 @@
    <body>
      <div id="app">
        <div>
@@ -203,7 +207,6 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
-
 `;
 
 exports[`translations should render fr 1`] = `

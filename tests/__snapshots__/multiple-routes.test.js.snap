@@ -656,6 +656,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -62,7 +62,7 @@
    <body>
      <div id="app">
        <h1 class="_1hpn1da0">
@@ -664,7 +668,6 @@ POST HYDRATE DIFFS:
          <span>
            Some special async content
          </span>
-
 `;
 
 exports[`multiple-routes build and serve should return home page 1`] = `
@@ -919,6 +922,10 @@ SOURCE HTML: <!DOCTYPE html>
   </body>
 </html>
 POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -62,7 +62,7 @@
    <body>
      <div id="app">
        <h1 class="Details_root__1hpn1da0">
@@ -927,7 +934,6 @@ POST HYDRATE DIFFS:
          <span>
            Some special async content
          </span>
-
 `;
 
 exports[`multiple-routes start should render home page correctly 1`] = `

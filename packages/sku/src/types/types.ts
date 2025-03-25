@@ -2,47 +2,12 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
-import type { RenderToPipeableStreamOptions } from 'react-dom/server';
-import type { Collector } from '@/services/vite/loadable/collector.js';
 
-/* START --- Vite-render types */
-/* Notes:
- *  These types are still incomplete.
- *  There may be some missing types here.
- *  Full types will come once Vite is fully supported in sku.
- * */
 export type ViteRenderFunction = (
   options: {
     clientEntry: string;
   } & SharedRenderProps,
 ) => Promise<string>;
-
-export type RenderContext = {
-  loadableCollector?: Collector;
-};
-
-export interface ViteRenderAppProps {
-  url?: string;
-  site?: SkuSiteObject | string;
-  renderContext: RenderContext;
-  options: RenderToPipeableStreamOptions;
-}
-
-export interface ViteRender<App = string> {
-  renderApp(p: RenderAppProps): Promise<App> | App;
-
-  provideClientContext?(context: {
-    site?: SkuSiteObject | string;
-    url?: string;
-  }): Promise<any>;
-
-  bodyTags?: () => string;
-  headTags?: () => string;
-}
-
-export type ViteRenderServer = ViteRender;
-
-/* END --- Vite-render types */
 
 export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
 
@@ -80,9 +45,6 @@ export interface RenderableRoute {
 }
 
 interface SharedRenderProps extends RenderableRoute {
-  // TODO: This could be strongly typed. e.g. if type is library they exist. For now just making optional.
-  libraryName?: string;
-  libraryFile?: string;
   // Webpack use an any here. PR for better type welcome.
   // TODO: This could be strongly typed. e.g. if bundler is webpack it's there. For now just making it optional.
   webpackStats?: any;
@@ -94,10 +56,22 @@ export interface RenderAppProps extends SharedRenderProps {
   renderToStringAsync: (element: ReactNode) => Promise<string>;
 }
 
-interface RenderDocumentProps<App> extends SharedRenderProps {
-  app: App;
+interface SharedDocumentRenderProps extends SharedRenderProps {
   headTags: string;
   bodyTags: string;
+}
+
+interface RenderDocumentProps<App> extends SharedDocumentRenderProps {
+  app: App;
+}
+
+interface RenderLibraryDocument extends SharedDocumentRenderProps {
+  libraryName: string;
+  libraryFile: string;
+}
+
+export interface LibraryRender {
+  renderDocument(p: RenderLibraryDocument): Promise<string> | string;
 }
 
 export interface Render<App = string> {

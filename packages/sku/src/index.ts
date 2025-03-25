@@ -1,8 +1,7 @@
 export type {
+  LibraryRender,
   Render,
   RenderCallbackParams,
   Server,
   SkuConfig,
-  ViteRender,
-  ViteRenderServer,
 } from './types/types.js';

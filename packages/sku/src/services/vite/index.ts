@@ -34,7 +34,7 @@ export const viteService = {
     if (skuContext.sites.length > 1) {
       skuContext.sites.forEach((site) => {
         console.log(
-          `Running ${site.name} on 'http://${site.host ?? 'localhost'}:${skuContext.port.client}'`,
+          `Running ${site.name} on '${proto}://${site.host ?? 'localhost'}:${skuContext.port.client}'`,
         );
       });
     } else {

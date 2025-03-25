@@ -21,7 +21,7 @@ const supportedChromiumBrowsers = [
   'Arc',
 ];
 
-export default async (url: string) => {
+export const openBrowser = async (url: string) => {
   if (process.env.OPEN_TAB !== 'false' && !isCI) {
     let defaultBrowser = ''; // Has to be set to string otherwise it may be undefined on line 47.
     try {

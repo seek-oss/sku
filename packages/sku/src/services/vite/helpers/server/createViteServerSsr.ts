@@ -1,9 +1,8 @@
 import path from 'node:path';
 import { Transform } from 'node:stream';
-import express, { type RequestHandler } from 'express';
+import express, { type RequestHandler, type Express } from 'express';
 import type { Manifest, ViteDevServer } from 'vite';
 import crypto from 'node:crypto';
-import { createServer as createHttpServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 
 import { createViteConfig } from '@/services/vite/helpers/createConfig.js';
@@ -22,11 +21,11 @@ type CreateServerOptions = {
 
 export const createViteServerSsr = async ({
   skuContext,
-}: CreateServerOptions) => {
+}: CreateServerOptions): Promise<Express> => {
   const isProduction = process.env.NODE_ENV === 'production';
   try {
     const app = express();
-    const server = createHttpServer(app);
+
     const manifest = isProduction
       ? JSON.parse(
           await readFile(resolve('./dist/.vite/manifest.json'), 'utf-8'),
@@ -63,10 +62,10 @@ export const createViteServerSsr = async ({
 
     app.use('*', createRequestHandler({ skuContext, vite, manifest }));
 
-    return server;
+    return app;
   } catch (e: any) {
     console.error(e);
-    return createHttpServer();
+    return express();
   }
 };
 

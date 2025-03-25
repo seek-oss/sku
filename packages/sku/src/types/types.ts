@@ -45,6 +45,9 @@ export interface RenderableRoute {
 }
 
 interface SharedRenderProps extends RenderableRoute {
+  // TODO: This could be strongly typed. e.g. if the project is a library. For now just making it optional.
+  libraryName?: string;
+  libraryFile?: string;
   // Webpack use an any here. PR for better type welcome.
   // TODO: This could be strongly typed. e.g. if bundler is webpack it's there. For now just making it optional.
   webpackStats?: any;
@@ -56,26 +59,14 @@ export interface RenderAppProps extends SharedRenderProps {
   renderToStringAsync: (element: ReactNode) => Promise<string>;
 }
 
-interface SharedDocumentRenderProps extends SharedRenderProps {
+interface RenderDocumentProps<App> extends SharedRenderProps {
+  app: App;
   headTags: string;
   bodyTags: string;
 }
 
-interface RenderDocumentProps<App> extends SharedDocumentRenderProps {
-  app: App;
-}
-
-interface RenderLibraryDocument extends SharedDocumentRenderProps {
-  libraryName: string;
-  libraryFile: string;
-}
-
-export interface LibraryRender {
-  renderDocument(p: RenderLibraryDocument): Promise<string> | string;
-}
-
 export interface Render<App = string> {
-  renderApp(p: RenderAppProps): Promise<App> | App;
+  renderApp?(p: RenderAppProps): Promise<App> | App;
 
   provideClientContext?(
     p: SharedRenderProps & {

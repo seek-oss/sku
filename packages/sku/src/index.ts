@@ -1,5 +1,4 @@
 export type {
-  LibraryRender,
   Render,
   RenderCallbackParams,
   Server,

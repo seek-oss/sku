@@ -52,7 +52,7 @@ export const createPreRenderedHtml = async <App,>({
     <LoadableProvider value={loadableCollector}>{children}</LoadableProvider>
   );
 
-  const app = await render.renderApp({
+  const app = await render.renderApp?.({
     ...renderContext,
     _addChunk: (chunkName: string) => {
       loadableCollector.register(chunkName);
@@ -69,6 +69,14 @@ export const createPreRenderedHtml = async <App,>({
     // extractor.addChunk(getChunkName(language));
   } else {
     debug('sku:render:language')(`No language on route "${route}"`);
+  }
+
+  if (app === undefined) {
+    // there is no `renderApp` function. Throw for now.
+    log('No renderApp function provided');
+    throw new Error(
+      'No renderApp function provided when trying to render html',
+    );
   }
 
   const clientContext =

@@ -87,10 +87,7 @@ export const createPreRenderedHtml = async <App,>({
     })) || {};
 
   function getHeadTags() {
-    return [
-      // ...loadableCollector.getAllLinks(),
-      ...loadableCollector.getAllPreloads(),
-    ];
+    return [...loadableCollector.getAllPreloads()];
   }
 
   const bodyTags: string[] = [];

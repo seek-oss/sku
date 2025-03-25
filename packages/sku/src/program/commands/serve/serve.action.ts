@@ -4,7 +4,11 @@ import express from 'express';
 import handler from 'serve-handler';
 import chalk from 'chalk';
 import didYouMean from 'didyoumean2';
-import { checkHosts, getAppHosts } from '@/utils/contextUtils/hosts.js';
+import {
+  checkHosts,
+  getAppHosts,
+  withHostile,
+} from '@/utils/contextUtils/hosts.js';
 import allocatePort from '@/utils/allocatePort.js';
 import openBrowser from '@/openBrowser/index.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
@@ -80,7 +84,7 @@ export const serveAction = async ({
     process.exit(1);
   }
 
-  await checkHosts(skuContext);
+  await withHostile(checkHosts)(skuContext);
 
   const appHosts = getAppHosts(skuContext);
 

@@ -66,7 +66,7 @@ interface RenderDocumentProps<App> extends SharedRenderProps {
 }
 
 export interface Render<App = string> {
-  renderApp?(p: RenderAppProps): Promise<App> | App;
+  renderApp(p: RenderAppProps): Promise<App> | App;
 
   provideClientContext?(
     p: SharedRenderProps & {

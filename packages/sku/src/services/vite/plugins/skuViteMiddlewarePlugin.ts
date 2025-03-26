@@ -14,6 +14,9 @@ const log = debug('sku:middleware:vite');
 
 const require = createRequire(import.meta.url);
 
+const renderEntry = require.resolve('../entries/vite-render.js');
+const clientEntry = require.resolve('../entries/vite-client.js');
+
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   configureServer(server) {
@@ -57,9 +60,6 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
       const language =
         getLanguageFromRoute(req.url, matchingRoute, skuContext) || '';
-
-      const renderEntry = require.resolve('../entries/vite-render.js');
-      const clientEntry = require.resolve('../entries/vite-client.js');
 
       const { viteRender } = await server.ssrLoadModule(renderEntry);
 

@@ -20,7 +20,7 @@ import {
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '@/services/webpack/config/statsConfig.js';
 import allocatePort from '@/utils/allocatePort.js';
-import openBrowser from '@/openBrowser/index.js';
+import { openBrowser } from '@/openBrowser/index.js';
 import createServerManager from '@/services/serverManager.js';
 
 import { watchVocabCompile } from '@/services/vocab/runVocab.js';

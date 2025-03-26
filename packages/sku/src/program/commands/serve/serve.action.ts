@@ -10,7 +10,7 @@ import {
   withHostile,
 } from '@/utils/contextUtils/hosts.js';
 import allocatePort from '@/utils/allocatePort.js';
-import openBrowser from '@/openBrowser/index.js';
+import { openBrowser } from '@/openBrowser/index.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
 import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
 import provider from '@/services/telemetry/index.js';

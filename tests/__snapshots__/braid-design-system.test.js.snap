@@ -2,362 +2,56 @@
 
 exports[`braid-design-system bundler vite build should generate the expected files 1`] = `
 {
-  "jobStreet/index.html": SCRIPTS: [
-    "/vite-client.js",
-  ]
-CSS: [
-    "/vite-client-BhFiESAO.css",
-  ]
-SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    >
-    <title>
-      Sku Project
-    </title>
-    <link
-      rel="stylesheet"
-      href="styles[0]"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="scripts[0]"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="root">
-      <style type="text/css">
-        html,body{margin:0;padding:0;background:#fff}
+  "jobStreet/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client-BhFiESAO.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'jobStreet';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
-      </style>
-      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
-        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
-          Hello
-          jobStreet
-          <span class="_1gdwseo0 o1ubka57">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewbox="0 0 24 24"
-              xml:space="preserve"
-              focusable="false"
-              fill="currentColor"
-              width="16"
-              height="16"
-              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
-              aria-hidden="true"
-            >
-              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
-              </path>
-            </svg>
-          </span>
-        </span>
-        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
-          <div class="_1gdwseo0 o1ubka5f">
-            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
-              <input
-                class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
-                type="checkbox"
-                id="id_1"
-                aria-checked="false"
-              >
-              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
-                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                        </path>
-                      </svg>
-                    </div>
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
-                        aria-hidden="true"
-                      >
-                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                        </path>
-                      </svg>
-                    </div>
-                  </div>
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
-                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                        </path>
-                      </svg>
-                    </div>
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
-                        aria-hidden="true"
-                      >
-                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                        </path>
-                      </svg>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
-                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
-                  <label
-                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
-                    for="id_1"
-                  >
-                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
-                      This is a checkbox
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="_1gdwseo0 inn18b0">
-          🧁 Vanilla content
-          Initial
-        </div>
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"site":"jobStreet","rootElementId":"root"}
-    </script>
-    <script
-      type="module"
-      src="scripts[0]"
-    >
-    </script>
-  </body>
-</html>,
-  "seekAnz/index.html": SCRIPTS: [
-    "/vite-client.js",
-  ]
-CSS: [
-    "/vite-client-BhFiESAO.css",
-  ]
-SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    >
-    <title>
-      Sku Project
-    </title>
-    <link
-      rel="stylesheet"
-      href="styles[0]"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="scripts[0]"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="root">
-      <style type="text/css">
-        html,body{margin:0;padding:0;background:#fff}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">Hello <!-- -->jobStreet<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
+<script type="module" src="/vite-client.js" ></script>
+      </body>
+    </html>
+  ",
+  "seekAnz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client-BhFiESAO.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'seekAnz';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
-      </style>
-      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
-        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
-          Hello
-          seekAnz
-          <span class="_1gdwseo0 o1ubka57">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewbox="0 0 24 24"
-              xml:space="preserve"
-              focusable="false"
-              fill="currentColor"
-              width="16"
-              height="16"
-              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
-              aria-hidden="true"
-            >
-              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
-              </path>
-            </svg>
-          </span>
-        </span>
-        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
-          <div class="_1gdwseo0 o1ubka5f">
-            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
-              <input
-                class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
-                type="checkbox"
-                id="id_1"
-                aria-checked="false"
-              >
-              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
-                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                        </path>
-                      </svg>
-                    </div>
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
-                        aria-hidden="true"
-                      >
-                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                        </path>
-                      </svg>
-                    </div>
-                  </div>
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
-                </span>
-                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
-                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                        </path>
-                      </svg>
-                    </div>
-                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewbox="0 0 24 24"
-                        xml:space="preserve"
-                        focusable="false"
-                        fill="currentColor"
-                        width="16"
-                        height="16"
-                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
-                        aria-hidden="true"
-                      >
-                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-                        </path>
-                      </svg>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
-                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
-                  <label
-                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
-                    for="id_1"
-                  >
-                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
-                      This is a checkbox
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="_1gdwseo0 inn18b0">
-          🧁 Vanilla content
-          Initial
-        </div>
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"site":"seekAnz","rootElementId":"root"}
-    </script>
-    <script
-      type="module"
-      src="scripts[0]"
-    >
-    </script>
-  </body>
-</html>,
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">Hello <!-- -->seekAnz<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
+<script type="module" src="/vite-client.js" ></script>
+      </body>
+    </html>
+  ",
   "vite-client-BhFiESAO.css": ._1gdwseo0 {
   margin: 0;
   padding: 0;
@@ -3258,16 +2952,16 @@ CSS: [
   "/vite-client-BhFiESAO.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1"
     >
-    <title>
-      Sku Project
-    </title>
     <link
       rel="stylesheet"
       href="styles[0]"
@@ -3278,9 +2972,12 @@ SOURCE HTML: <!DOCTYPE html>
       href="scripts[0]"
       crossorigin
     >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
   </head>
   <body>
-    <div id="root">
+    <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
@@ -3420,7 +3117,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"jobStreet","rootElementId":"root"}
+      {"site":"jobStreet"}
     </script>
     <script
       type="module"
@@ -3433,7 +3130,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -55,6 +55,7 @@
+@@ -58,6 +58,7 @@
                  type="checkbox"
                  id="id_1"
                  aria-checked="false"
@@ -3441,7 +3138,7 @@ POST HYDRATE DIFFS:
                >
                <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
                  <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
-@@ -153,7 +154,7 @@
+@@ -156,7 +157,7 @@
          </div>
          <div class="_1gdwseo0 inn18b0">
            🧁 Vanilla content
@@ -3460,16 +3157,16 @@ CSS: [
   "/vite-client-BhFiESAO.css",
 ]
 SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1"
     >
-    <title>
-      Sku Project
-    </title>
     <link
       rel="stylesheet"
       href="styles[0]"
@@ -3480,9 +3177,12 @@ SOURCE HTML: <!DOCTYPE html>
       href="scripts[0]"
       crossorigin
     >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
   </head>
   <body>
-    <div id="root">
+    <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
@@ -3622,7 +3322,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"seekAnz","rootElementId":"root"}
+      {"site":"seekAnz"}
     </script>
     <script
       type="module"
@@ -3635,7 +3335,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -55,6 +55,7 @@
+@@ -58,6 +58,7 @@
                  type="checkbox"
                  id="id_1"
                  aria-checked="false"
@@ -3643,7 +3343,7 @@ POST HYDRATE DIFFS:
                >
                <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
                  <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
-@@ -153,7 +154,7 @@
+@@ -156,7 +157,7 @@
          </div>
          <div class="_1gdwseo0 inn18b0">
            🧁 Vanilla content
@@ -3658,10 +3358,11 @@ exports[`braid-design-system bundler vite start should return development jobStr
 SCRIPTS: [
   "/@id/__x00__/index.html?html-proxy&index=0.js",
   "/@id/__x00__/index.html?html-proxy&index=1.js",
+  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
@@ -3675,13 +3376,16 @@ window.$RefreshSig$ = () => (type) => type;
     >
     </script>
     <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1"
     >
-    <title>
-      Sku Project
-    </title>
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
     <script
       type="module"
       src="scripts[0]"
@@ -3694,7 +3398,7 @@ window.$RefreshSig$ = () => (type) => type;
     </script>
   </head>
   <body>
-    <div id="root">
+    <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
             html.sprinkles_darkMode__o1ubka10,html.sprinkles_darkMode__o1ubka10 body{color-scheme:dark;background:#1C2330}
@@ -3831,15 +3535,15 @@ window.$RefreshSig$ = () => (type) => type;
       </div>
     </div>
     <script
+      type="module"
+      src="scripts[2]"
+    >
+    </script>
+    <script
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"jobStreet","rootElementId":"root"}
-    </script>
-    <script
-      type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.jsx"
-    >
+      {"site":"jobStreet"}
     </script>
   </body>
 </html>
@@ -3847,8 +3551,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -22,14 +22,4792 @@
-     </title>
+@@ -25,14 +25,4792 @@
+     </script>
      <script
        type="module"
 -      src="/@id/__x00__/index.html?html-proxy&index=0.js"
@@ -8641,8 +8345,8 @@ POST HYDRATE DIFFS:
 +    </style>
    </head>
    <body>
-     <div id="root">
-@@ -66,6 +4844,7 @@
+     <div id="app">
+@@ -69,6 +4847,7 @@
                  type="checkbox"
                  id="id_1"
                  aria-checked="false"
@@ -8650,7 +8354,7 @@ POST HYDRATE DIFFS:
                >
                <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
                  <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
-@@ -164,7 +4943,7 @@
+@@ -167,7 +4946,7 @@
          </div>
          <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
            🧁 Vanilla content
@@ -8665,10 +8369,11 @@ exports[`braid-design-system bundler vite start should return development seekAn
 SCRIPTS: [
   "/@id/__x00__/index.html?html-proxy&index=0.js",
   "/@id/__x00__/index.html?html-proxy&index=1.js",
+  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
@@ -8682,13 +8387,16 @@ window.$RefreshSig$ = () => (type) => type;
     >
     </script>
     <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1"
     >
-    <title>
-      Sku Project
-    </title>
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
     <script
       type="module"
       src="scripts[0]"
@@ -8701,7 +8409,7 @@ window.$RefreshSig$ = () => (type) => type;
     </script>
   </head>
   <body>
-    <div id="root">
+    <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
             html.sprinkles_darkMode__o1ubka10,html.sprinkles_darkMode__o1ubka10 body{color-scheme:dark;background:#1C2330}
@@ -8838,15 +8546,15 @@ window.$RefreshSig$ = () => (type) => type;
       </div>
     </div>
     <script
+      type="module"
+      src="scripts[2]"
+    >
+    </script>
+    <script
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"seekAnz","rootElementId":"root"}
-    </script>
-    <script
-      type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.jsx"
-    >
+      {"site":"seekAnz"}
     </script>
   </body>
 </html>
@@ -8854,8 +8562,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -22,14 +22,4792 @@
-     </title>
+@@ -25,14 +25,4792 @@
+     </script>
      <script
        type="module"
 -      src="/@id/__x00__/index.html?html-proxy&index=0.js"
@@ -13648,8 +13356,8 @@ POST HYDRATE DIFFS:
 +    </style>
    </head>
    <body>
-     <div id="root">
-@@ -66,6 +4844,7 @@
+     <div id="app">
+@@ -69,6 +4847,7 @@
                  type="checkbox"
                  id="id_1"
                  aria-checked="false"
@@ -13657,7 +13365,7 @@ POST HYDRATE DIFFS:
                >
                <div class="reset_base__1gdwseo0 sprinkles_flexShrink_0_mobile__o1ubkahv sprinkles_position_relative_mobile__o1ubka5f sprinkles_borderRadius_standard_mobile__o1ubka63 InlineField_fakeField__16e5k4g5 InlineField_sizeVars_standard__16e5k4g2 typography_lightModeTone_light__1jw6vm018  sprinkles_background_surface_lightMode__o1ubka33">
                  <span class="reset_base__1gdwseo0 sprinkles_top_0__o1ubkaj sprinkles_bottom_0__o1ubkak sprinkles_left_0__o1ubkal sprinkles_right_0__o1ubkam sprinkles_position_absolute_mobile__o1ubka5j sprinkles_pointerEvents_none__o1ubkai sprinkles_borderRadius_standard_mobile__o1ubka63 sprinkles_transition_fast__o1ubkax sprinkles_opacity_0__o1ubka6 InlineField_selected__16e5k4g9 typography_lightModeTone_dark__1jw6vm019 typography_darkModeTone_dark__1jw6vm01b sprinkles_background_formAccent_lightMode__o1ubka21 sprinkles_background_formAccent_darkMode__o1ubka22">
-@@ -164,7 +4943,7 @@
+@@ -167,7 +4946,7 @@
          </div>
          <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
            🧁 Vanilla content
@@ -16444,7 +16152,7 @@ html.o1ubka10 ._16e5k4ge {
             html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
           </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->jobStreet<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
-        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet","rootElementId":"app"}</script>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
 <script async data-chunk="main" src="/main.js"></script>
@@ -16474,7 +16182,7 @@ html.o1ubka10 ._16e5k4ge {
             html,body{margin:0;padding:0;background:#fff}
             html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
           </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->seekAnz<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
-        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz","rootElementId":"app"}</script>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
 <script async data-chunk="main" src="/main.js"></script>
@@ -16665,7 +16373,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"jobStreet","rootElementId":"app"}
+      {"site":"jobStreet"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -16897,7 +16605,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"seekAnz","rootElementId":"app"}
+      {"site":"seekAnz"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -17136,7 +16844,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"jobStreet","rootElementId":"app"}
+      {"site":"jobStreet"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
@@ -17381,7 +17089,7 @@ SOURCE HTML: <!DOCTYPE html>
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
-      {"site":"seekAnz","rootElementId":"app"}
+      {"site":"seekAnz"}
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"

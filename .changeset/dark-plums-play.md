@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-`vite (start|start-ssr)`: opening default browser on server start in `start` and `start-ssr` commands
+`vite (start|start-ssr)`: Open default browser on server start

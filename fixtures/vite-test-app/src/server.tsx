@@ -18,7 +18,7 @@ export default {
       <StrictMode>
         <LoadableProvider value={loadableCollector!}>
           <StaticRouter location={url || '/'}>
-            <App site={appSite || ''} />
+            <App site={appSite || 'au'} />
           </StaticRouter>
         </LoadableProvider>
       </StrictMode>,

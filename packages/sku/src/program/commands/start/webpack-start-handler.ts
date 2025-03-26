@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 import type { RequestHandler } from 'express';
 
-import openBrowser from '@/openBrowser/index.js';
+import { openBrowser } from '@/openBrowser/index.js';
 import getCertificate from '@/utils/certificate.js';
 
 import getStatsConfig from '@/services/webpack/config/statsConfig.js';

@@ -9,7 +9,7 @@ export default ({ site }: { site: string }) => {
     document.getElementById('root')!,
     <StrictMode>
       <BrowserRouter>
-        <App site={site} />
+        <App site={site || 'au'} />
       </BrowserRouter>
     </StrictMode>,
   );

@@ -1,28 +1,36 @@
-import render from '__sku_alias__renderEntry';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
-import type { ViteRenderAppProps } from '@/types/types.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
+import debug from 'debug';
+import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
 
-export const viteRender = async ({
-  url,
+import render from '__sku_alias__renderEntry';
+import type { ViteRenderFunction } from '@/types/types.js';
+
+const log = debug('sku:vite-render');
+
+export const viteRender: ViteRenderFunction = async ({
+  environment,
+  language,
+  route,
+  routeName,
   site,
   clientEntry,
-}: {
-  url: ViteRenderAppProps['url'];
-  site: ViteRenderAppProps['site'];
-  clientEntry: string;
 }) => {
+  log(`Rendering route: ${routeName}:${route}`);
+
   const loadableCollector = createCollector({});
 
-  return await createPreRenderedHtml({
-    url,
-    render,
+  return createPreRenderedHtml({
+    environment,
+    language,
+    route,
+    routeName,
     site,
-    renderContext: {
-      loadableCollector,
-    },
+    render,
+    loadableCollector,
     hooks: {
-      getBodyTags: () => `<script type="module" src="${clientEntry}"></script>`,
+      getBodyTags: () => [
+        `<script type="module" src="${clientEntry}"></script>`,
+      ],
     },
   });
 };

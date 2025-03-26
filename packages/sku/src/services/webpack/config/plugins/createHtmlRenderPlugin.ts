@@ -10,6 +10,7 @@ import {
 import type { Stats } from 'webpack';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import { join } from 'node:path';
+import type { RenderableRoute } from '@/types/types.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;
@@ -43,7 +44,7 @@ const getStartRoutes = ({
   routes: SkuContext['routes'];
   languages: SkuContext['languages'];
   environments: SkuContext['environments'];
-}) => {
+}): RenderableRoute[] => {
   const allRouteCombinations = [];
 
   const forcedSites = sites.length > 0 ? sites : [undefined];
@@ -71,11 +72,11 @@ const getStartRoutes = ({
   }
 
   return allRouteCombinations.map(({ route, language, site = {} }) => ({
-    environment: environments.length > 0 ? environments[0] : undefined,
-    site: site.name,
-    routeName: route.name,
+    environment: environments.length > 0 ? environments[0] : '',
+    site: site.name || '',
+    routeName: route.name || '',
     route: getRouteWithLanguage(route.route, language),
-    language,
+    language: language || '',
     path: '',
   }));
 };
@@ -90,7 +91,7 @@ export const getBuildRoutes = ({
   routes: SkuContext['routes'];
   languages: SkuContext['languages'];
   environments: SkuContext['environments'];
-}) => {
+}): RenderableRoute[] => {
   const allRouteCombinations = [];
 
   const forcedEnvs = environments.length > 0 ? environments : [undefined];
@@ -127,11 +128,12 @@ export const getBuildRoutes = ({
   }
 
   return allRouteCombinations.map(
-    ({ route, site = {}, language, ...rest }) => ({
+    ({ route, site = {}, language, environment, ...rest }) => ({
       ...rest,
-      site: site.name,
-      routeName: route.name,
-      language,
+      environment: environment || '',
+      site: site.name || '',
+      routeName: route.name || '',
+      language: language || '',
       route: getRouteWithLanguage(route.route, language),
     }),
   );

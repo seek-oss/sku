@@ -55,7 +55,8 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
 
       log('Matching route found:', matchingRoute);
 
-      const language = getLanguageFromRoute(req.url, matchingRoute, skuContext);
+      const language =
+        getLanguageFromRoute(req.url, matchingRoute, skuContext) || '';
 
       const renderEntry = require.resolve('../entries/vite-render.js');
       const clientEntry = require.resolve('../entries/vite-client.js');
@@ -66,7 +67,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         environment: 'development',
         language,
         route: getRouteWithLanguage(matchingRoute.route, language),
-        routeName: matchingRoute.name,
+        routeName: matchingRoute.name || '',
         site: site.name,
         clientEntry,
       });

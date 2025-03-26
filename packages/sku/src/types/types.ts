@@ -37,11 +37,11 @@ export interface Server {
 }
 
 export interface RenderableRoute {
-  routeName: string | undefined;
+  routeName: string;
   route: string;
-  environment: string | undefined;
-  site: string | undefined;
-  language: string | null;
+  environment: string;
+  site: string;
+  language: string;
 }
 
 interface SharedRenderProps extends RenderableRoute {

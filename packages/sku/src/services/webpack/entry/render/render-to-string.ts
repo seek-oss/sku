@@ -13,7 +13,7 @@ let hasWarned = false;
  * Will await all Suspense boundaries before resolving the promise.
  * @returns Promise that resolves with the rendered HTML string.
  */
-export function renderToStringAsync(reactNode: ReactNode) {
+export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
   if (!hasWarned) {
     console.log(
       "Warning: The use of `renderApp`'s `renderToStringAsync` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",
@@ -22,7 +22,7 @@ export function renderToStringAsync(reactNode: ReactNode) {
   }
   debug('sku:render:renderToStringAsync')('Starting render');
 
-  return new Promise((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     let hasErrored = false;
     let hasRendered = false;
 

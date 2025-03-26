@@ -22,7 +22,7 @@ export const viteBuildHandler = async ({
   try {
     await runVocabCompile(skuContext);
 
-    await viteService.buildSsg(skuContext);
+    await viteService.build(skuContext);
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

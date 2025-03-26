@@ -4,11 +4,13 @@ import {
 } from '@sku-private/test-utils';
 
 export default {
-  clientEntry: 'src/serverClient.js',
+  clientEntry: 'src/serverClient.jsx',
+  serverEntry: 'src/server.jsx',
+  renderEntry: 'src/render.jsx',
   port: 9843,
   serverPort: 9894,
   httpsDevServer: true,
-  devServerMiddleware: './dev-middleware.js',
+  devServerMiddleware: './dev-middleware.cjs',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => {

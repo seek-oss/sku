@@ -2,53 +2,17 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
-import type {
-  RenderToPipeableStreamOptions,
-  PipeableStream,
-} from 'react-dom/server';
-import type { Collector } from '@/services/vite/loadable/collector.js';
 
-/* START --- Vite-render types */
-/* Notes:
- *  These types are still incomplete.
- *  There may be some missing types here.
- *  Full types will come once Vite is fully supported in sku.
- * */
-export type ViteRenderFunction = (options: {
-  url?: string;
-  site?: SkuSiteObject | string;
-  clientEntry: string;
-}) => Promise<string>;
+export type ViteRenderFunction = (
+  options: {
+    clientEntry: string;
+  } & SharedRenderProps,
+) => Promise<string>;
 
-export type RenderContext = {
-  loadableCollector?: Collector;
-};
-
-export interface ViteRenderAppProps {
-  url?: string;
-  site?: SkuSiteObject | string;
-  renderContext: RenderContext;
-  options: RenderToPipeableStreamOptions;
-}
-
-export interface ViteRender {
-  render(p: ViteRenderAppProps): Promise<PipeableStream>;
-
-  provideClientContext?(context: {
-    site?: SkuSiteObject | string;
-    url?: string;
-  }): Promise<any> | any;
-
-  bodyTags?: () => string;
-  headTags?: () => string;
-}
-
-export type ViteRenderServer = ViteRender;
-
-/* END --- Vite-render types */
+export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
 
 export interface RenderCallbackParams {
-  SkuProvider: ({ children }: { children: ReactNode }) => ReactNode;
+  SkuProvider: SkuProvider;
   addLanguageChunk: (language: string) => void;
   getBodyTags: () => string;
   getHeadTags: (options?: {
@@ -72,16 +36,21 @@ export interface Server {
   middleware?: RequestHandler | RequestHandler[];
 }
 
-interface SharedRenderProps {
+export interface RenderableRoute {
   routeName: string;
   route: string;
   environment: string;
   site: string;
   language: string;
-  libraryName: string;
-  libraryFile: string;
+}
+
+interface SharedRenderProps extends RenderableRoute {
+  // TODO: This could be strongly typed. e.g. if the project is a library. For now just making it optional.
+  libraryName?: string;
+  libraryFile?: string;
   // Webpack use an any here. PR for better type welcome.
-  webpackStats: any;
+  // TODO: This could be strongly typed. e.g. if bundler is webpack it's there. For now just making it optional.
+  webpackStats?: any;
 }
 
 export interface RenderAppProps extends SharedRenderProps {

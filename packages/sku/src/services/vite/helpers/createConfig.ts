@@ -2,15 +2,17 @@ import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react-swc';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
+import { outDir, renderEntryChunkName } from './bundleConfig.js';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('../entries/vite-client.jsx');
+const clientEntry = require.resolve('../entries/vite-client.js');
 
 export const createViteConfig = ({
   skuContext,
@@ -21,12 +23,6 @@ export const createViteConfig = ({
   configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
 }) => {
-  const outDir = {
-    client: 'dist',
-    ssr: 'dist/server',
-    ssg: 'dist/render',
-  };
-
   const input = {
     client: clientEntry,
     ssr: skuContext.paths.serverEntry,
@@ -36,6 +32,9 @@ export const createViteConfig = ({
   return {
     root: process.cwd(),
     plugins: [
+      cjsInterop({
+        dependencies: ['@apollo/client', 'lodash'],
+      }),
       react(),
       vanillaExtractPlugin(),
       skuVitePreloadPlugin(),
@@ -57,9 +56,14 @@ export const createViteConfig = ({
       ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
+      // TODO Fix URL paths as a publicPath value. Absolute and relative paths work, but Vite removes the first `/` in URLs (http://foo.com -> http:/foo.com).
+      // TODO URL paths also output to url folders. e.g., /http:/foo.com/assets/[filename].js.
+      assetsDir: skuContext.publicPath.replace(/(^\/|\/$)/g, ''),
       rollupOptions: {
         input: input[configType],
         output: {
+          entryFileNames:
+            configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
         },
       },

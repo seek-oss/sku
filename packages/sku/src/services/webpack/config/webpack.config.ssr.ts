@@ -253,7 +253,7 @@ const makeWebpackConfig = ({
       output: {
         path: paths.target,
         publicPath,
-        filename: 'server.js',
+        filename: 'server.cjs',
         library: { name: 'server', type: 'var' },
       },
       cache: getCacheSettings({ isDevServer, paths }),

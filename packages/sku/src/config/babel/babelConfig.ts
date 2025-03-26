@@ -1,6 +1,7 @@
 import { cwd } from '@/utils/cwd.js';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
+import { rootResolutionFileExtensions } from '../fileResolutionExtensions.js';
 
 const require = createRequire(import.meta.url);
 
@@ -32,7 +33,7 @@ export default ({
       require.resolve('babel-plugin-module-resolver'),
       {
         root: rootResolution ? [cwd()] : undefined,
-        extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
+        extensions: rootResolutionFileExtensions,
       },
     ],
     require.resolve('babel-plugin-macros'),

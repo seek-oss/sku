@@ -1,4 +1,4 @@
-import type { Manifest } from 'vite';
+import type { Manifest, ManifestChunk } from 'vite';
 import { extname } from 'node:path';
 import {
   type Preload,
@@ -11,20 +11,23 @@ import {
   type InjectableScript,
   sortInjectableScript,
 } from './helpers/scriptUtils.js';
+import debug from 'debug';
+
+const log = debug('sku:loadable:collector');
 
 export type ModuleId = string;
 
-// TODO: improve log levels for this class.
 export class Collector {
   moduleIds = new Set<string>();
   preloadIds = new Map<string, Preload>();
   scriptIds = new Map<string, InjectableScript>();
 
   constructor(
-    public manifest: Manifest,
-    public nonce?: string,
-    public externalJsFiles?: string[],
-    public entry?: string,
+    private manifest: Manifest,
+    private nonce?: string,
+    externalJsFiles?: string[],
+    entry?: string,
+    private base?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
@@ -45,10 +48,11 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce,
+      base,
     });
   }
 
-  register(moduleId: ModuleId) {
+  public register(moduleId: ModuleId) {
     this.moduleIds.add(moduleId);
     parseManifestForEntry({
       manifest: this.manifest,
@@ -56,32 +60,30 @@ export class Collector {
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce: this.nonce,
+      base: this.base,
     });
   }
-  getAllModules() {
-    return [...this.moduleIds];
-  }
-  getAllPreloads() {
+  public getAllPreloads() {
     const preloadHtml = [...this.preloadIds.values()]
       .sort(sortPreloads)
-      .map(createHtmlTag)
-      .join('\n');
+      .map(createHtmlTag);
+    log('getAllPreloads', preloadHtml);
 
     return preloadHtml;
   }
-  getAllScripts() {
+  public getAllScripts() {
     const scriptHtml = [...this.scriptIds.values()]
       .sort(sortInjectableScript)
-      .map(createScriptTag)
-      .join('\n');
-
+      .map(createScriptTag);
+    log('getAllScripts', scriptHtml);
     return scriptHtml;
   }
-  getAllLinks() {
+  public getAllLinks() {
     const linkTags = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createLinkTag)
       .filter(Boolean);
+    log('getAllLinks', linkTags);
 
     return linkTags;
   }
@@ -93,17 +95,20 @@ const parseManifestForEntry = ({
   nonce,
   preloads,
   scripts,
+  base,
 }: {
   manifest: Manifest;
   entry: string;
   nonce?: string;
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
+  base?: string;
 }) => {
   if (!manifest) {
     return;
   }
-  const entryChunk = manifest[entry];
+  const entryChunk: ManifestChunk | undefined =
+    manifest[entry] && parseEntryChunk(manifest[entry], { base });
   if (!entryChunk) {
     return;
   }
@@ -136,11 +141,23 @@ const parseManifestForEntry = ({
           nonce,
           preloads,
           scripts,
+          base,
         });
       }
     }
   }
 };
+
+const parseEntryChunk = (
+  entryChunk: ManifestChunk,
+  { base = '/' }: { base?: string },
+) => ({
+  ...entryChunk,
+  // Overriding the path urls to include the base path.
+  css: entryChunk.css?.map((path) => `${base}${path}`),
+  assets: entryChunk.assets?.map((path) => `${base}${path}`),
+  file: `${base}${entryChunk.file}`,
+});
 
 const addFileToPreloads = ({
   preloads,
@@ -149,7 +166,7 @@ const addFileToPreloads = ({
   nonce,
 }: {
   preloads: Map<string, Preload>;
-  entryChunk: any;
+  entryChunk: ManifestChunk;
   entry: string;
   nonce?: string;
 }) => {
@@ -223,6 +240,7 @@ type CreateCollectorOptions = {
   manifest?: Manifest;
   nonce?: string;
   entry?: string;
+  base?: string;
 };
 
 export const createCollector = ({
@@ -230,6 +248,7 @@ export const createCollector = ({
   manifest,
   nonce,
   entry,
+  base,
 }: CreateCollectorOptions) => {
   let entryPoint = entry || 'index.html';
   const internalManifest = manifest || {};
@@ -242,5 +261,11 @@ export const createCollector = ({
     }
   }
 
-  return new Collector(internalManifest, nonce, externalJsFiles, entryPoint);
+  return new Collector(
+    internalManifest,
+    nonce,
+    externalJsFiles,
+    entryPoint,
+    base,
+  );
 };

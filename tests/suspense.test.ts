@@ -18,27 +18,33 @@ const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:8203`;
 
 describe('suspense', () => {
-  describe('build and serve', () => {
-    let process: ChildProcess;
+  describe.each(['vite', 'webpack'])('bundler %s', (bundler) => {
+    const args =
+      bundler === 'vite'
+        ? ['--config', 'sku.config.vite.js', '--experimental-bundler']
+        : [];
+    describe('build and serve', () => {
+      let process: ChildProcess;
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(url);
-    });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir);
+        await waitForUrls(url);
+      });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      afterAll(async () => {
+        await process.kill();
+      });
 
-    it('should return home page', async () => {
-      const app = await getAppSnapshot(url);
-      expect(app).toMatchSnapshot();
-    });
+      it('should return home page', async () => {
+        const app = await getAppSnapshot(url);
+        expect(app).toMatchSnapshot();
+      });
 
-    it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
+      it('should generate the expected files', async () => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
     });
   });
 });

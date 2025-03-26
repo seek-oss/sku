@@ -3,6 +3,4 @@ export type {
   RenderCallbackParams,
   Server,
   SkuConfig,
-  ViteRender,
-  ViteRenderServer,
 } from './types/types.js';

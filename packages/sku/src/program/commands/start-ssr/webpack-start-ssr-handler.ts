@@ -12,11 +12,15 @@ import {
   ensureTargetDirectory,
   cleanTargetDirectory,
 } from '@/utils/buildFileUtils.js';
-import { checkHosts, getAppHosts } from '@/utils/contextUtils/hosts.js';
+import {
+  checkHosts,
+  getAppHosts,
+  withHostile,
+} from '@/utils/contextUtils/hosts.js';
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '@/services/webpack/config/statsConfig.js';
 import allocatePort from '@/utils/allocatePort.js';
-import openBrowser from '@/openBrowser/index.js';
+import { openBrowser } from '@/openBrowser/index.js';
 import createServerManager from '@/services/serverManager.js';
 
 import { watchVocabCompile } from '@/services/vocab/runVocab.js';
@@ -78,7 +82,7 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
-  await checkHosts(skuContext);
+  await withHostile(checkHosts)(skuContext);
 
   const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
 
@@ -91,7 +95,7 @@ export const webpackStartSsrHandler = async ({
   const serverCompiler = webpack(serverWebpackConfig);
 
   const serverManager = createServerManager(
-    path.join(paths.target, 'server.js'),
+    path.join(paths.target, 'server.cjs'),
   );
 
   const proto = httpsDevServer ? 'https' : 'http';

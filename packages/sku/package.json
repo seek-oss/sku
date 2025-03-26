@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "14.0.5",
+  "version": "14.2.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -15,16 +15,16 @@
     },
     "./jest-preset": "./dist/config/jest/jest-preset.js",
     "./config/eslint": {
-      "default": "./dist/services/eslint/config/index.js",
-      "types": "./dist/services/eslint/config/index.d.ts"
+      "types": "./dist/services/eslint/config/index.d.ts",
+      "default": "./dist/services/eslint/config/index.js"
     },
     "./config/storybook": {
-      "default": "./dist/config/storybook/index.cjs",
-      "types": "./dist/config/storybook/index.d.ts"
+      "types": "./dist/config/storybook/index.d.ts",
+      "default": "./dist/config/storybook/index.cjs"
     },
     "./vite/loadable": {
-      "default": "./dist/services/vite/loadable/index.js",
-      "types": "./dist/services/vite/loadable/index.d.ts"
+      "types": "./dist/services/vite/loadable/index.d.ts",
+      "default": "./dist/services/vite/loadable/index.js"
     },
     "./vite/client": {
       "types": "./dist/services/vite/client.d.ts"
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/seek-oss/sku.git",
+    "url": "git+https://github.com/seek-oss/sku.git",
     "directory": "packages/sku"
   },
   "author": "SEEK",
@@ -90,6 +90,7 @@
     "@babel/traverse": "^7.26.9",
     "@babel/types": "^7.26.0",
     "@eslint/compat": "^1.2.1",
+    "@jest/transform": "^29.7.0",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.0",
@@ -136,7 +137,7 @@
     "env-ci": "^11.1.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.2.2",
+    "eslint-config-seek": "^14.4.0",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.19.2",
@@ -162,7 +163,7 @@
     "picomatch": "^3.0.1",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
-    "prettier": "^3.4.1",
+    "prettier": "~3.5.0",
     "pretty-ms": "^7.0.1",
     "react-refresh": "^0.14.0",
     "resolve-from": "^5.0.0",
@@ -173,8 +174,9 @@
     "sirv": "^3.0.1",
     "svgo-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.1.4",
-    "typescript": "~5.6.0",
+    "typescript": "~5.8.0",
     "vite": "^6.1.0",
+    "vite-plugin-cjs-interop": "^2.1.6",
     "webpack": "^5.52.0",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-dev-server": "^5.0.2",
@@ -208,7 +210,7 @@
     "@vanilla-extract/css": "^1.17.0",
     "@vocab/react": "^1.1.11",
     "braid-design-system": "^33.1.0",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.0",
     "fs-fixture": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

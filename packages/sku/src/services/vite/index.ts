@@ -10,10 +10,11 @@ import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 
 export const viteService = {
-  build: async (skuContext: SkuContext) => {
+  buildSsr: async (skuContext: SkuContext) => {
+    // TODO: This isn't fully implemented?
     await build(createViteConfig({ skuContext }));
   },
-  buildSsg: async (skuContext: SkuContext) => {
+  build: async (skuContext: SkuContext) => {
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
@@ -23,6 +24,7 @@ export const viteService = {
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
   start: async (skuContext: SkuContext) => {
+    // TODO Get this to be backwards compat with webpack
     const server = await createViteServer(skuContext);
     await server.listen(skuContext.port.client);
 

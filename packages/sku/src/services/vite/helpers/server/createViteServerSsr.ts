@@ -146,7 +146,7 @@ const createRequestHandler =
             const tags = loadableCollector.getAllPreloads();
             const [startHtml, endHtml] = viteHtml.split('<!-- app tags -->');
 
-            res.write(startHtml.replace('<!-- head tags -->', tags));
+            res.write(startHtml.replace('<!-- head tags -->', tags.join('\n')));
 
             const transformStream = new Transform({
               transform(chunk, encoding, callback) {
@@ -157,7 +157,9 @@ const createRequestHandler =
 
             transformStream.on('finish', async () => {
               const bodyTags = loadableCollector.getAllScripts();
-              res.end(endHtml.replace('<!-- body tags -->', bodyTags));
+              res.end(
+                endHtml.replace('<!-- body tags -->', bodyTags.join('\n')),
+              );
             });
 
             pipe(transformStream);

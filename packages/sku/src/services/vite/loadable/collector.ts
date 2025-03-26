@@ -11,21 +11,23 @@ import {
   type InjectableScript,
   sortInjectableScript,
 } from './helpers/scriptUtils.js';
+import debug from 'debug';
+
+const log = debug('sku:loadable:collector');
 
 export type ModuleId = string;
 
-// TODO: improve log levels for this class.
 export class Collector {
   moduleIds = new Set<string>();
   preloadIds = new Map<string, Preload>();
   scriptIds = new Map<string, InjectableScript>();
 
   constructor(
-    public manifest: Manifest,
-    public nonce?: string,
-    public externalJsFiles?: string[],
-    public entry?: string,
-    public base?: string,
+    private manifest: Manifest,
+    private nonce?: string,
+    externalJsFiles?: string[],
+    entry?: string,
+    private base?: string,
   ) {
     this.manifest = manifest;
     this.nonce = nonce;
@@ -50,7 +52,7 @@ export class Collector {
     });
   }
 
-  register(moduleId: ModuleId) {
+  public register(moduleId: ModuleId) {
     this.moduleIds.add(moduleId);
     parseManifestForEntry({
       manifest: this.manifest,
@@ -61,30 +63,27 @@ export class Collector {
       base: this.base,
     });
   }
-  getAllModules() {
-    return [...this.moduleIds];
-  }
-  getAllPreloads() {
+  public getAllPreloads() {
     const preloadHtml = [...this.preloadIds.values()]
       .sort(sortPreloads)
-      .map(createHtmlTag)
-      .join('\n');
+      .map(createHtmlTag);
+    log('getAllPreloads', preloadHtml);
 
     return preloadHtml;
   }
-  getAllScripts() {
+  public getAllScripts() {
     const scriptHtml = [...this.scriptIds.values()]
       .sort(sortInjectableScript)
-      .map(createScriptTag)
-      .join('\n');
-
+      .map(createScriptTag);
+    log('getAllScripts', scriptHtml);
     return scriptHtml;
   }
-  getAllLinks() {
+  public getAllLinks() {
     const linkTags = [...this.preloadIds.values()]
       .sort(sortPreloads)
       .map(createLinkTag)
       .filter(Boolean);
+    log('getAllLinks', linkTags);
 
     return linkTags;
   }

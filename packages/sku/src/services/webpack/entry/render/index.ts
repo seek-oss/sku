@@ -1,7 +1,7 @@
 import debug from 'debug';
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import serializeJavascript from 'serialize-javascript';
-import makeExtractor from '../makeExtractor.jsx';
+import makeExtractor from '../makeExtractor.js';
 import clientContextKey from '@/utils/constants/clientContextKey.js';
 import createCSPHandler from '../csp.js';
 import type { RenderAppProps } from '@/types/types.js';

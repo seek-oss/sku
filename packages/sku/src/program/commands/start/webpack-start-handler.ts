@@ -20,7 +20,7 @@ import {
 import allocatePort from '@/utils/allocatePort.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
 import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
-import routeMatcher from '@/utils/routeMatcher.js';
+import { getMatchingRoute } from '@/utils/routeMatcher.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import {
   getLanguageFromRoute,
@@ -137,26 +137,25 @@ export const webpackStartHandler = async ({
       }
 
       middlewares.push(((req, res, next) => {
-        const matchingSiteName = getSiteForHost(req.hostname, undefined, sites);
+        const matchingSiteName =
+          getSiteForHost(req.hostname, undefined, sites) || '';
 
-        const matchingRoute = routes.find(({ route, siteIndex }) => {
-          if (
-            typeof siteIndex === 'number' &&
-            matchingSiteName !== sites[siteIndex].name
-          ) {
-            return false;
-          }
-          return routeMatcher(route)(req.path);
-        });
+        const matchingRoute = getMatchingRoute({
+          routes,
+          hostname: req.hostname,
+          path: req.path,
+          sites,
+        }) || { route: '' };
 
         if (!matchingRoute) {
           return next();
         }
 
-        let chosenLanguage;
+        let chosenLanguage = '';
 
         try {
-          chosenLanguage = getLanguageFromRoute(req, matchingRoute, skuContext);
+          chosenLanguage =
+            getLanguageFromRoute(req.path, matchingRoute, skuContext) || '';
         } catch (e: any) {
           return res.status(500).send(
             exceptionFormatter(e, {
@@ -170,7 +169,7 @@ export const webpackStartHandler = async ({
         htmlRenderPlugin
           .renderWhenReady({
             route: getRouteWithLanguage(matchingRoute.route, chosenLanguage),
-            routeName: matchingRoute.name,
+            routeName: matchingRoute.name || '',
             site: matchingSiteName,
             language: chosenLanguage,
             environment,

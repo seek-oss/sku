@@ -6,7 +6,7 @@ import {
   useRef,
 } from 'react';
 import type { ModuleId } from './collector.js';
-import { useRegisterComponent } from './PreloadContext.jsx';
+import { useRegisterComponent } from './PreloadContext.js';
 
 let preloads: Array<() => Promise<any>> = [];
 

@@ -24,16 +24,14 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     });
 
     const html = await createPreRenderedHtml({
-      url: route.route,
+      environment: route.environment,
+      language: route.language,
+      route: route.route,
+      routeName: route.routeName,
+
       site: route.site,
       render,
-      renderContext: {
-        loadableCollector,
-      },
-      hooks: {
-        getBodyTags: () => loadableCollector.getAllScripts(),
-        getHeadTags: () => loadableCollector.getAllPreloads(),
-      },
+      loadableCollector,
     });
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {

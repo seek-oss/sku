@@ -10,7 +10,6 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
-import createCSPHandler from '@/services/webpack/entry/csp.js';
 
 const base = process.env.BASE || '/';
 
@@ -145,23 +144,6 @@ const createRequestHandler =
             res.set('Content-Type', 'text/html');
 
             const tags = loadableCollector.getAllPreloads();
-
-            // This requires refactoring after we make ssr match webpack.
-            if (skuContext.cspEnabled) {
-              const cspHandler = createCSPHandler({
-                extraHosts: [
-                  skuContext.paths.publicPath,
-                  ...skuContext.cspExtraScriptSrcHosts,
-                ],
-                isDevelopment: process.env.NODE_ENV === 'development',
-              });
-
-              loadableCollector
-                .getAllScripts()
-                .forEach(cspHandler.registerScript);
-              tags.push(cspHandler.createCSPTag());
-            }
-
             const [startHtml, endHtml] = viteHtml.split('<!-- app tags -->');
 
             res.write(startHtml.replace('<!-- head tags -->', tags.join('\n')));

@@ -5,6 +5,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import { createViteConfig } from '../createConfig.js';
 import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
 import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry.js';
+import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 
 export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';
@@ -25,9 +26,9 @@ export const createViteServer = async (skuContext: SkuContext) => {
       ],
     }),
     server: {
-      allowedHosts: skuContext.sites
-        .map(({ host }) => host || false)
-        .filter((host) => typeof host === 'string'),
+      allowedHosts: getAppHosts(skuContext).filter(
+        (host) => typeof host === 'string',
+      ),
     },
     base,
   });

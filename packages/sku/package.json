@@ -106,6 +106,7 @@
     "@vanilla-extract/jest-transform": "^1.1.0",
     "@vanilla-extract/vite-plugin": "^5.0.1",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
     "@vitejs/plugin-react-swc": "^3.8.0",
     "@vocab/core": "^1.6.2",
     "@vocab/phrase": "^2.0.1",

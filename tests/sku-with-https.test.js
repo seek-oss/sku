@@ -19,26 +19,33 @@ const appDir = path.dirname(
 );
 
 describe('sku-with-https', () => {
-  describe('start', () => {
-    const url = `https://localhost:${port}`;
-    let process;
+  describe.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
+    const args =
+      bundler === 'vite'
+        ? ['--experimental-bundler', '--config', 'sku.config.vite.mjs']
+        : [];
+    describe('start', () => {
+      const url = `http${bundler === 'vite' ? '' : 's'}://${bundler === 'vite' ? '[::1]' : 'localhost'}:${port}`;
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(url, `${url}/test-middleware`);
-    });
+      let process;
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url, `${url}/test-middleware`);
+      });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
-    });
-    it('should support the supplied middleware', async () => {
-      const snapshot = await getAppSnapshot(`${url}/test-middleware`);
-      expect(snapshot).toMatchSnapshot();
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      it('should start a development server', async () => {
+        const snapshot = await getAppSnapshot(url);
+        expect(snapshot).toMatchSnapshot();
+      });
+      it('should support the supplied middleware', async () => {
+        const snapshot = await getAppSnapshot(`${url}/test-middleware`);
+        expect(snapshot).toMatchSnapshot();
+      });
     });
   });
 

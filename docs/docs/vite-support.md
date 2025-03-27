@@ -60,6 +60,31 @@ export default () => (
 );
 ```
 
+### Dev server middleware
+
+The `vite` dev server runs on a [`Connect`](https://github.com/senchalabs/connect) instance instead of [`Express`](https://expressjs.com/) so the middleware setup is slightly different. A middleware file still exports a single function however it now takes the [`ViteDevServer`](https://vite.dev/guide/api-javascript.html#vitedevserver) as the only parameter.
+To add middleware to the dev server you should follow the connect guide [here](https://github.com/senchalabs/connect#use-middleware).
+
+**Example of using `devServerMiddleware` with `vite`**
+
+```typescript
+// custom-middleware.ts
+import type { ViteDevServer } from 'vite';
+
+export default function (server: ViteDevServer) {
+  server.middlewares.use((req, res, next) => {
+    // your middleware logic
+    next();
+  });
+
+  // or use a path
+  server.middlewares.use('/api', (req, res, next) => {
+    // your middleware logic
+    next();
+  });
+}
+```
+
 ### Using vite types
 
 If [`vite/client` types](https://vite.dev/guide/features#client-types) are needed in your project, you can reference them via the `sku/vite/client` entrypoint:

@@ -19,10 +19,24 @@ const clientEntry = require.resolve('../entries/vite-client.js');
 
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
-  configureServer(server) {
+  async configureServer(server) {
     if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
       metricsMeasurers.initialPageLoad.mark();
     }
+    if (skuContext.useDevServerMiddleware) {
+      log(
+        'Using dev server middleware at %s',
+        skuContext.paths.devServerMiddleware,
+      );
+      const devServerMiddleware = (
+        await import(skuContext.paths.devServerMiddleware)
+      ).default;
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(server);
+        log('Dev server middleware loaded');
+      }
+    }
+
     log('Configuring server middleware');
     server.middlewares.use(async (req, res, next) => {
       log('Handling request:', req.url);
@@ -68,7 +82,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         language,
         route: getRouteWithLanguage(matchingRoute.route, language),
         routeName: matchingRoute.name || '',
-        site: site.name,
+        site: site?.name || '',
         clientEntry,
       });
 

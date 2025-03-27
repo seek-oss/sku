@@ -6,14 +6,14 @@ import {
   runSkuScriptInDir,
 } from '@sku-private/test-utils';
 
-import skuConfig from '@sku-fixtures/braid-design-system/sku.config.mjs';
+import skuConfig from '@sku-fixtures/braid-design-system/sku.config.js';
 
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/braid-design-system/sku.config.mjs'),
+  require.resolve('@sku-fixtures/braid-design-system/sku.config.js'),
 );
 const distDir = path.resolve(appDir, 'dist');
 
@@ -24,55 +24,62 @@ function getLocalUrl(site) {
 }
 
 describe('braid-design-system', () => {
-  describe('start', () => {
-    let server;
+  describe.each(['vite', 'webpack'])('bundler %s', (bundler) => {
+    const args =
+      bundler === 'vite'
+        ? ['--config', 'sku.config.vite.js', '--experimental-bundler']
+        : [];
 
-    beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(getLocalUrl('seekAnz'));
-    }, 230000);
+    describe('start', () => {
+      let server;
 
-    afterAll(async () => {
-      await server.kill();
+      beforeAll(async () => {
+        server = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(getLocalUrl('seekAnz'));
+      }, 230000);
+
+      afterAll(async () => {
+        await server.kill();
+      });
+
+      it('should return development seekAnz site', async () => {
+        const snapshot = await getAppSnapshot(getLocalUrl('seekAnz'));
+        expect(snapshot).toMatchSnapshot();
+      });
+
+      it('should return development jobStreet site', async () => {
+        const snapshot = await getAppSnapshot(getLocalUrl('jobStreet'));
+        expect(snapshot).toMatchSnapshot();
+      });
     });
 
-    it('should return development seekAnz site', async () => {
-      const snapshot = await getAppSnapshot(getLocalUrl('seekAnz'));
-      expect(snapshot).toMatchSnapshot();
-    });
+    describe('build', () => {
+      let process;
 
-    it('should return development jobStreet site', async () => {
-      const snapshot = await getAppSnapshot(getLocalUrl('jobStreet'));
-      expect(snapshot).toMatchSnapshot();
-    });
-  });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir, args);
+        await waitForUrls(getLocalUrl('seekAnz'));
+      }, 230000);
 
-  describe('build', () => {
-    let process;
+      afterAll(async () => {
+        await process.kill();
+      });
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(getLocalUrl('seekAnz'));
-    }, 230000);
+      it('should return built jobStreet site', async () => {
+        const app = await getAppSnapshot(getLocalUrl('jobStreet'));
+        expect(app).toMatchSnapshot();
+      });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      it('should return built seekAnz site', async () => {
+        const app = await getAppSnapshot(getLocalUrl('seekAnz'));
+        expect(app).toMatchSnapshot();
+      });
 
-    it('should return built jobStreet site', async () => {
-      const app = await getAppSnapshot(getLocalUrl('jobStreet'));
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should return built seekAnz site', async () => {
-      const app = await getAppSnapshot(getLocalUrl('seekAnz'));
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distDir);
-      expect(files).toMatchSnapshot();
+      it('should generate the expected files', async () => {
+        const files = await dirContentsToObject(distDir);
+        expect(files).toMatchSnapshot();
+      });
     });
   });
 

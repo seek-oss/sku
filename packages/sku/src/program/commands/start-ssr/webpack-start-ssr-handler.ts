@@ -27,6 +27,7 @@ import { watchVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
+import { requireFromCwd } from '@/utils/cwd.js';
 
 const log = debug('sku:start-ssr');
 
@@ -58,6 +59,7 @@ export const webpackStartSsrHandler = async ({
 }) => {
   process.env.NODE_ENV = 'development';
   const { port, initialPath, paths, httpsDevServer, hosts } = skuContext;
+  const { type } = requireFromCwd('./package.json');
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
   await watchVocabCompile(skuContext);
@@ -95,7 +97,7 @@ export const webpackStartSsrHandler = async ({
   const serverCompiler = webpack(serverWebpackConfig);
 
   const serverManager = createServerManager(
-    path.join(paths.target, 'server.cjs'),
+    path.join(paths.target, `server.${type === 'module' ? 'c' : ''}js`),
   );
 
   const proto = httpsDevServer ? 'https' : 'http';

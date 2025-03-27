@@ -10,6 +10,10 @@ CSS: []
 SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';"
+    >
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
 injectIntoGlobalHook(window);
@@ -60,7 +64,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -22,20 +22,31 @@
+@@ -26,20 +26,31 @@
      >
      <script
        type="module"

@@ -4,7 +4,7 @@ exports[`sku-with-https bundler: vite start should start a development server 1`
 SCRIPTS: [
   "/@id/__x00__/index.html?html-proxy&index=0.js",
   "/@id/__x00__/index.html?html-proxy&index=1.js",
-  "/Users/ddrory/Work/sku/packages/sku/dist/services/vite/entries/vite-client.js",
+  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -76,7 +76,7 @@ POST HYDRATE DIFFS:
      </script>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="/Users/ddrory/Work/sku/fixtures/sku-with-https/src/styles.css.js.vanilla.css"
++      data-vite-dev-id="{cwd}/fixtures/sku-with-https/src/styles.css.js.vanilla.css"
 +    >
 +      .styles_root__2vdre50 {
 +  display: flex;

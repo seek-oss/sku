@@ -45,7 +45,10 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         next();
         return;
       }
-      const host = req.headers.host;
+
+      // `host` header is available in vite http requests. `:authority` pseudo-header is available in vite https requests. `:authority` is used in HTTP/2.
+      // @see https://stackoverflow.com/questions/70502726/what-is-the-purpose-of-http2-pseudo-headers-authority-method
+      const host = req.headers.host ?? (req.headers[':authority'] as string);
       const hostname = host?.split(':')[0];
 
       if (!hostname) {

@@ -25,7 +25,7 @@ describe('sku-with-https', () => {
         ? ['--experimental-bundler', '--config', 'sku.config.vite.mjs']
         : [];
     describe('start', () => {
-      const url = `http${bundler === 'vite' ? '' : 's'}://${bundler === 'vite' ? '[::1]' : 'localhost'}:${port}`;
+      const url = `https://localhost:${port}`;
 
       let process;
 

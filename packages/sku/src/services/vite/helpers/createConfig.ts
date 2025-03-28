@@ -4,14 +4,11 @@ import type { InlineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
-import basicSsl from '@vitejs/plugin-basic-ssl';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
-import path from 'node:path';
-import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 
 const require = createRequire(import.meta.url);
 
@@ -41,14 +38,6 @@ export const createViteConfig = ({
       react(),
       vanillaExtractPlugin(),
       skuVitePreloadPlugin(),
-      skuContext.httpsDevServer
-        ? basicSsl({
-            domains: getAppHosts(skuContext).filter(
-              (host) => host !== undefined,
-            ),
-            certDir: path.join(process.cwd(), '.ssl'),
-          })
-        : undefined,
       ...plugins,
     ],
     resolve: {

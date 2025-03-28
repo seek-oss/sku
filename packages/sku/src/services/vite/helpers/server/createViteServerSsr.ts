@@ -44,6 +44,7 @@ export const createViteServerSsr = async ({
           configType: 'ssr',
         }),
         server: {
+          host: 'localhost',
           middlewareMode: true,
           hmr: true,
           allowedHosts: getAppHosts(skuContext).filter(

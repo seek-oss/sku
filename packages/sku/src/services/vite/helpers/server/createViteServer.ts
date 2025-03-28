@@ -28,6 +28,7 @@ export const createViteServer = async (skuContext: SkuContext) => {
       ],
     }),
     server: {
+      host: 'localhost',
       allowedHosts: getAppHosts(skuContext).filter(
         (host) => typeof host === 'string',
       ),

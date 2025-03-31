@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-vite (start): Enable httpsDevServer config option
+`vite (start)`: Enable `httpsDevServer` config option

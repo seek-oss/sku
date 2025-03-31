@@ -10,6 +10,8 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
+import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import { skuViteHttpsDevServer } from '../../plugins/skuViteHttpsDevServer.js';
 
 const base = process.env.BASE || '/';
 
@@ -42,12 +44,16 @@ export const createViteServerSsr = async ({
           configType: 'ssr',
         }),
         server: {
+          host: 'localhost',
           middlewareMode: true,
           hmr: true,
-          allowedHosts: skuContext.sites
-            .map(({ host }) => host || false)
-            .filter((host) => typeof host === 'string'),
+          allowedHosts: getAppHosts(skuContext).filter(
+            (host) => typeof host === 'string',
+          ),
         },
+        plugins: [
+          skuContext.httpsDevServer && skuViteHttpsDevServer(skuContext),
+        ],
         appType: 'custom',
         base,
       });

@@ -64,8 +64,6 @@ In order to use `loadable` with the fallback option you would need to render the
 
 If you run the vite command with the `--convert-loadable` flag, sku will automatically convert all the `loadable` components from `sku/@loadable/component` to the new imports.
 
-````bash
-
 ### Dev server middleware
 
 The `vite` dev server runs on a [`Connect`](https://github.com/senchalabs/connect) instance instead of [`Express`](https://expressjs.com/) so the middleware setup is slightly different. A middleware file still exports a single function however it now takes the [`ViteDevServer`](https://vite.dev/guide/api-javascript.html#vitedevserver) as the only parameter.
@@ -89,7 +87,7 @@ export default function (server: ViteDevServer) {
     next();
   });
 }
-````
+```
 
 ### Using vite types
 

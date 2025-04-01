@@ -8,15 +8,17 @@ export const startAction = async (
   {
     stats,
     skuContext,
+    convertLoadable,
   }: {
     stats: StatsChoices;
     skuContext: SkuContext;
+    convertLoadable: boolean;
   },
   command: Command,
 ) => {
   const { environment } = command.optsWithGlobals();
   if (skuContext.bundler === 'vite') {
-    viteStartHandler(skuContext);
+    viteStartHandler(skuContext, convertLoadable);
   } else {
     webpackStartHandler({ stats, environment, skuContext });
   }

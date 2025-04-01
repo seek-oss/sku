@@ -49,16 +49,22 @@ The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https:
 import { Suspense } from 'react';
 import { loadable } from 'sku/vite/loadable';
 
-const Home = loadable(() => import('./Home'));
+const Home = loadable(() => import('./Home'), {
+  fallback: <div>Loading Home...</div>,
+});
 
 export default () => (
   <div>
-    <Suspense fallback={<div>Loading Home...</div>}>
-      <Home />
-    </Suspense>
+    <Home />
   </div>
 );
 ```
+
+In order to use `loadable` with the fallback option you would need to render the application inside the `renderToStringAsync` function in the `render.tsx` file. See the example [here](./docs/static-rendering.md#renderApp) for more information.
+
+If you run the vite command with the `--convert-loadable` flag, sku will automatically convert all the `loadable` components from `sku/@loadable/component` to the new imports.
+
+````bash
 
 ### Dev server middleware
 
@@ -83,7 +89,7 @@ export default function (server: ViteDevServer) {
     next();
   });
 }
-```
+````
 
 ### Using vite types
 

@@ -14,18 +14,20 @@ export const viteService = {
     // TODO: This isn't fully implemented?
     await build(createViteConfig({ skuContext }));
   },
-  build: async (skuContext: SkuContext) => {
-    await build(createViteConfig({ skuContext }));
-    await build(createViteConfig({ skuContext, configType: 'ssg' }));
+  build: async (skuContext: SkuContext, convertLoadable?: boolean) => {
+    await build(createViteConfig({ skuContext, convertLoadable }));
+    await build(
+      createViteConfig({ skuContext, convertLoadable, configType: 'ssg' }),
+    );
     if (skuContext.routes) {
       await prerenderRoutes(skuContext);
     }
-    await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
-    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
+    // await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
+    // await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
-  start: async (skuContext: SkuContext) => {
+  start: async (skuContext: SkuContext, convertLoadable?: boolean) => {
     // TODO Get this to be backwards compat with webpack
-    const server = await createViteServer(skuContext);
+    const server = await createViteServer(skuContext, convertLoadable);
     await server.listen(skuContext.port.client);
 
     const hosts = getAppHosts(skuContext);

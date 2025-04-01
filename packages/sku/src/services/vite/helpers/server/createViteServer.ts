@@ -6,12 +6,16 @@ import { createViteConfig } from '../createConfig.js';
 import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
 import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry.js';
 
-export const createViteServer = async (skuContext: SkuContext) => {
+export const createViteServer = async (
+  skuContext: SkuContext,
+  convertLoadable?: boolean,
+) => {
   const base = process.env.BASE || '/';
 
   return await createServer({
     ...createViteConfig({
       skuContext,
+      convertLoadable,
       plugins: [
         skuViteMiddlewarePlugin(skuContext),
         skuViteStartTelemetryPlugin({

@@ -3,6 +3,8 @@ import {
   createElement,
   forwardRef,
   lazy,
+  type ReactNode,
+  Suspense,
   useRef,
 } from 'react';
 import type { ModuleId } from './collector.js';
@@ -16,6 +18,9 @@ export type PreloadableComponent<T extends ComponentType<any>> = T & {
 
 export function loadable<T extends ComponentType<any>>(
   factory: () => Promise<{ default: T }>,
+  options?: {
+    fallback?: NonNullable<ReactNode> | null;
+  },
   moduleId: ModuleId = '', // Gets set via the plugin
 ): PreloadableComponent<T> {
   const ReactLazyComponent = lazy(factory);
@@ -28,6 +33,16 @@ export function loadable<T extends ComponentType<any>>(
     // underlying component to be unmounted and remounted.
     const ComponentToRender = useRef(PreloadedComponent ?? ReactLazyComponent);
     useRegisterComponent(moduleId);
+    if (options?.fallback) {
+      return (
+        <Suspense fallback={options?.fallback}>
+          {createElement(
+            ComponentToRender.current,
+            Object.assign(ref ? { ref } : {}, props) as any,
+          )}
+        </Suspense>
+      );
+    }
     return createElement(
       ComponentToRender.current,
       Object.assign(ref ? { ref } : {}, props) as any,

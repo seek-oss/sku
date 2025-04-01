@@ -25,7 +25,7 @@ const testAction = async (
   const jestPreset = 'sku';
   log(`Using '${jestPreset}' Jest preset`);
 
-  const jestArgv = args;
+  const jestArgv = [...args];
 
   jestArgv.push('--preset', jestPreset);
 

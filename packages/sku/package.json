@@ -81,6 +81,7 @@
   "dependencies": {
     "@babel/core": "^7.21.8",
     "@babel/generator": "^7.26.9",
+    "@babel/parser": "7.26.10",
     "@babel/plugin-transform-react-constant-elements": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",

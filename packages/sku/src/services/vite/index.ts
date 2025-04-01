@@ -22,8 +22,8 @@ export const viteService = {
     if (skuContext.routes) {
       await prerenderRoutes(skuContext);
     }
-    // await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
-    // await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
+    await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
+    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
   start: async (skuContext: SkuContext, convertLoadable?: boolean) => {
     // TODO Get this to be backwards compat with webpack

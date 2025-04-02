@@ -9,6 +9,7 @@ import {
   getRouteWithLanguage,
 } from '@/utils/language-utils.js';
 import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
+import createCSPHandler from '@/services/webpack/entry/csp.js';
 
 const log = debug('sku:middleware:vite');
 
@@ -93,6 +94,21 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         req.url || '/',
         renderedHtml,
       );
+
+      if (skuContext.cspEnabled) {
+        const cspHandler = createCSPHandler({
+          extraHosts: [
+            skuContext.paths.publicPath,
+            ...skuContext.cspExtraScriptSrcHosts,
+          ],
+          isDevelopment: process.env.NODE_ENV === 'development',
+        });
+
+        const cspHtml = cspHandler.handleHtml(transformedHtml);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(cspHtml);
+        return;
+      }
 
       res.writeHead(200, { 'Content-Type': 'text/html' });
       res.end(transformedHtml);

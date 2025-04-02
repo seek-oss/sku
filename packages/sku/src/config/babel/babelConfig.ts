@@ -37,7 +37,6 @@ export default ({
       },
     ],
     require.resolve('babel-plugin-macros'),
-    require.resolve('@loadable/babel-plugin'),
     require.resolve('@babel/plugin-transform-runtime'),
   ];
 
@@ -56,6 +55,8 @@ export default ({
         remove: 'effects',
       },
     ]);
+  } else {
+    plugins.push(require.resolve('@loadable/babel-plugin'));
   }
 
   if (isProductionBuild) {

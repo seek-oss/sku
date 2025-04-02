@@ -2,54 +2,6 @@
 
 exports[`multiple-routes bundler: vite build and serve should generate the expected files 1`] = `
 {
-  ".vite/manifest.json": "{
-  "../../packages/sku/dist/services/vite/entries/vite-client.js": {
-    "file": "vite-client.js",
-    "name": "vite-client",
-    "src": "../../packages/sku/dist/services/vite/entries/vite-client.js",
-    "isEntry": true,
-    "dynamicImports": [
-      "src/handlers/Home.jsx",
-      "src/handlers/Details.jsx"
-    ]
-  },
-  "src/handlers/AsyncComponent.jsx": {
-    "file": "static/place/AsyncComponent-DVAF_X3r.js",
-    "name": "AsyncComponent",
-    "src": "src/handlers/AsyncComponent.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "../../packages/sku/dist/services/vite/entries/vite-client.js"
-    ]
-  },
-  "src/handlers/Details.jsx": {
-    "file": "static/place/Details-6RdzEJpv.js",
-    "name": "Details",
-    "src": "src/handlers/Details.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "../../packages/sku/dist/services/vite/entries/vite-client.js"
-    ],
-    "dynamicImports": [
-      "src/handlers/AsyncComponent.jsx"
-    ],
-    "css": [
-      "static/place/Details-DGJnH813.css"
-    ]
-  },
-  "src/handlers/Home.jsx": {
-    "file": "static/place/Home-jITKoP4k.js",
-    "name": "Home",
-    "src": "src/handlers/Home.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "../../packages/sku/dist/services/vite/entries/vite-client.js"
-    ],
-    "css": [
-      "static/place/Home-D-106MY_.css"
-    ]
-  }
-}",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/vite-client.js",
@@ -354,10 +306,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "render/render.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "render/static/place/AsyncComponent-BlKfhEtr.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "render/static/place/Details-Ds7rqp3Z.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "render/static/place/Home-B7SmMaqJ.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "static/place/AsyncComponent-DVAF_X3r.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "static/place/Details-6RdzEJpv.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "static/place/Details-DGJnH813.css": ._1hpn1da0 {

@@ -425,7 +425,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -47,7 +47,7 @@
+   <body>
+     <div id="app">
+       <h1 class="_1hpn1da0">
+-        Welcome to the Details page - au
++        Welcome to the Details page - auID: 123
+         <span>
+           Some special async content
+         </span>
 `;
 
 exports[`multiple-routes bundler: vite build and serve should render home page correctly 1`] = `
@@ -586,7 +598,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -36,12 +36,12 @@
+@@ -36,19 +36,27 @@
      </style>
      <script
        type="module"
@@ -600,7 +612,23 @@ POST HYDRATE DIFFS:
 +      src="/@id/__x00__/details/123?html-proxy&amp;index=1.js"
      >
      </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Details.css.js.vanilla.css"
++    >
++      .Details_root__1hpn1da0 {
++  color: blue;
++}
++    </style>
    </head>
+   <body>
+     <div id="app">
+       <h1 class="Details_root__1hpn1da0">
+-        Welcome to the Details page - au
++        Welcome to the Details page - auID: 123
+         <span>
+           Some special async content
+         </span>
 `;
 
 exports[`multiple-routes bundler: vite start should render home page correctly 1`] = `
@@ -681,7 +709,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -36,12 +36,12 @@
+@@ -36,14 +36,22 @@
      </style>
      <script
        type="module"
@@ -695,7 +723,17 @@ POST HYDRATE DIFFS:
 +      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
      </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Home.css.js.vanilla.css"
++    >
++      .Home_root__ms22la0 {
++  color: red;
++}
++    </style>
    </head>
+   <body>
+     <div id="app">
 `;
 
 exports[`multiple-routes bundler: webpack build and serve should generate the expected files 1`] = `

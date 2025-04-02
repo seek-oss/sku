@@ -653,6 +653,9 @@ importers:
       '@vanilla-extract/webpack-plugin':
         specifier: ^2.2.0
         version: 2.3.18(babel-plugin-macros@3.1.0)(webpack@5.98.0(@swc/core@1.11.11)(esbuild@0.25.1))
+      '@vitejs/plugin-basic-ssl':
+        specifier: ^2.0.0
+        version: 2.0.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@vitejs/plugin-react-swc':
         specifier: ^3.8.0
         version: 3.8.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
@@ -699,8 +702,8 @@ importers:
         specifier: ^4.16.1
         version: 4.24.4
       browserslist-config-seek:
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.3.0
+        version: 3.3.0
       chalk:
         specifier: ^5.3.0
         version: 5.4.1
@@ -3195,6 +3198,12 @@ packages:
     peerDependencies:
       webpack: ^4.30.0 || ^5.20.2
 
+  '@vitejs/plugin-basic-ssl@2.0.0':
+    resolution: {integrity: sha512-gc9Tjg8bUxBVSTzeWT3Njc0Cl3PakHFKdNfABnZWiUgbxqmHDEn7uECv3fHVylxoYgNzAcmU7ZrILz+BwSo3sA==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      vite: ^6.0.0
+
   '@vitejs/plugin-react-swc@3.8.0':
     resolution: {integrity: sha512-T4sHPvS+DIqDP51ifPqa9XIRAz/kIvIi8oXcnOZZgHmMotgmmdxe/DD5tMFlt5nuIRzT0/QuiwmKlH0503Aapw==}
     peerDependencies:
@@ -3694,8 +3703,8 @@ packages:
   browser-assert@1.2.1:
     resolution: {integrity: sha512-nfulgvOR6S4gt9UKCeGJOuSGBPGiFT6oQ/2UBnvTY/5aQ1PnksW72fhZkM30DzoRRv2WpwZf1vHHEr3mtuXIWQ==}
 
-  browserslist-config-seek@3.2.0:
-    resolution: {integrity: sha512-bModvV9yhT2MA6MXhMGHiRW3vbBs79XxpIYKTg5qJZQZMZc5tbnOmkwMwazowUTzWlQhzQwZAhw/ReS948EtWg==}
+  browserslist-config-seek@3.3.0:
+    resolution: {integrity: sha512-k9q8Zslsl3yR790gKmdBeD3dItwIhDWlVQKJCiS8Ykg0u9wTsrvnK0aLb9Wa/AMibpUInBVr5A4aVgpo+hPFGg==}
 
   browserslist@4.24.4:
     resolution: {integrity: sha512-KDi1Ny1gSePi1vm0q4oxSF8b4DR44GF4BbmS2YdhPLOEqd8pDviZOGH/GsmRwoWJ2+5Lr085X7naowMwKHDG1A==}
@@ -11319,6 +11328,10 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
+  '@vitejs/plugin-basic-ssl@2.0.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+    dependencies:
+      vite: 6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
+
   '@vitejs/plugin-react-swc@3.8.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
       '@swc/core': 1.11.11
@@ -11984,7 +11997,7 @@ snapshots:
 
   browser-assert@1.2.1: {}
 
-  browserslist-config-seek@3.2.0: {}
+  browserslist-config-seek@3.3.0: {}
 
   browserslist@4.24.4:
     dependencies:

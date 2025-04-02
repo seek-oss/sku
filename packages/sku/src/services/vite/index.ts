@@ -8,6 +8,7 @@ import { prerenderRoutes } from './helpers/prerenderRoutes.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import chalk from 'chalk';
 
 export const viteService = {
   buildSsr: async (skuContext: SkuContext) => {
@@ -33,15 +34,8 @@ export const viteService = {
     const url = `${proto}://${hosts[0]}:${skuContext.port.client}${skuContext.initialPath}`;
     openBrowser(url);
 
-    if (skuContext.sites.length > 1) {
-      skuContext.sites.forEach((site) => {
-        console.log(
-          `Running ${site.name} on '${proto}://${site.host ?? 'localhost'}:${skuContext.port.client}'`,
-        );
-      });
-    } else {
-      server.printUrls();
-    }
+    printUrls(hosts, skuContext);
+
     server.bindCLIShortcuts({ print: true });
   },
   startSsr: async (skuContext: SkuContext) => {
@@ -57,14 +51,18 @@ export const viteService = {
     const url = `${proto}://${hosts[0]}:${skuContext.port.server}${skuContext.initialPath}`;
     openBrowser(url);
 
-    if (skuContext.sites.length > 1) {
-      skuContext.sites.forEach((site) => {
-        console.log(
-          `Running ${site.name} on '${proto}://${site.host ?? 'localhost'}:${skuContext.port.server}'`,
-        );
-      });
-    } else {
-      console.log(`Running on 'http://localhost:${skuContext.port.server}'`);
-    }
+    printUrls(hosts, skuContext);
   },
+};
+
+const printUrls = (
+  hosts: Array<string | undefined>,
+  skuContext: SkuContext,
+) => {
+  const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  hosts.forEach((site) => {
+    console.log(
+      `${chalk.green('➜')}  ${chalk.bold('Local')}: ${chalk.cyan(`${proto}://${site}:${chalk.bold(skuContext.port.client)}`)}`,
+    );
+  });
 };

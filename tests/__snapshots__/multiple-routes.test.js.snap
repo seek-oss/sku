@@ -425,19 +425,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -47,7 +47,7 @@
-   <body>
-     <div id="app">
-       <h1 class="_1hpn1da0">
--        Welcome to the Details page - au
-+        Welcome to the Details page - auID: 123
-         <span>
-           Some special async content
-         </span>
+POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`multiple-routes bundler: vite build and serve should render home page correctly 1`] = `

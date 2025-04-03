@@ -1,5 +1,31 @@
 # sku
 
+## 14.3.0
+
+### Minor Changes
+
+- `vite (start|start-ssr)`: Open default browser on server start ([#1223](https://github.com/seek-oss/sku/pull/1223))
+
+- `vite start`: Enable `devServerMiddleware` for vite projects ([#1225](https://github.com/seek-oss/sku/pull/1225))
+
+- `vite (start|build)`: Enable `csp` functionality ([#1226](https://github.com/seek-oss/sku/pull/1226))
+
+- Support root resolution of `.jsx` and `.cjs` files ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+- `setup-hosts` ipv6 hosts are now added alongside their ipv4 counterpart ([#1221](https://github.com/seek-oss/sku/pull/1221))
+
+- `vite (start)`: Enable `httpsDevServer` config option ([#1227](https://github.com/seek-oss/sku/pull/1227))
+
+### Patch Changes
+
+- `vite`: Ensure bundled pre-render entrypoint has a consistent name, regardless of the configured ([#1216](https://github.com/seek-oss/sku/pull/1216))
+  `renderEntry`
+- `vite`: Change render entrypoint file `api` to match that of `webpack` rendering ([#1222](https://github.com/seek-oss/sku/pull/1222))
+
+- Re-order root resolution file extensions in order of most common to least common file types ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+  Files with no extension will now be resolved in the following order: `.ts` -> `.tsx` -> `.mts` -> `.cts` -> `.js` -> `.jsx` -> `.mjs` -> `.cjs` -> `.json`
+
 ## 14.2.0
 
 ### Minor Changes

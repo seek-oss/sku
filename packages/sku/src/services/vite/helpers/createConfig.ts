@@ -31,6 +31,7 @@ export const createViteConfig = ({
 
   return {
     root: process.cwd(),
+    clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],

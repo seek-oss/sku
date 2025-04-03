@@ -9,8 +9,10 @@ import { viteService } from '@/services/vite/index.js';
 
 export const viteBuildHandler = async ({
   skuContext,
+  convertLoadable,
 }: {
   skuContext: SkuContext;
+  convertLoadable?: boolean;
 }) => {
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
@@ -22,7 +24,7 @@ export const viteBuildHandler = async ({
   try {
     await runVocabCompile(skuContext);
 
-    await viteService.build(skuContext);
+    await viteService.build(skuContext, convertLoadable);
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

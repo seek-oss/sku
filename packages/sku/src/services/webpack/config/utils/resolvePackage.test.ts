@@ -1,7 +1,7 @@
+import { describe, beforeEach, test, expect, vi } from 'vitest';
 import { createPackageResolver } from './resolvePackage.js';
 
 import { cwd } from '@/utils/cwd.js';
-import { jest } from '@jest/globals';
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {
@@ -11,9 +11,9 @@ describe('webpack utils', () => {
 
     beforeEach(() => {
       fs = {
-        readFileSync: jest.fn(() => '{}'),
+        readFileSync: vi.fn(() => '{}'),
       };
-      resolve = jest.fn();
+      resolve = vi.fn();
       resolvePackage = createPackageResolver(fs, resolve);
     });
 

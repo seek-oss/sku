@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import path from 'node:path';
 import { run } from '@sku-private/test-utils';
 

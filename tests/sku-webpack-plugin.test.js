@@ -1,7 +1,8 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import {
   dirContentsToObject,
-  getAppSnapshot,
   waitForUrls,
   startAssetServer,
 } from '@sku-private/test-utils';

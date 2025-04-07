@@ -1,3 +1,4 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';

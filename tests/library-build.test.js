@@ -1,10 +1,12 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
-  getAppSnapshot,
 } from '@sku-private/test-utils';
+
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
 

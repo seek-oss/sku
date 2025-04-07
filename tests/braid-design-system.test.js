@@ -1,10 +1,12 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
-  getAppSnapshot,
   waitForUrls,
   runSkuScriptInDir,
 } from '@sku-private/test-utils';
+
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import skuConfig from '@sku-fixtures/braid-design-system/sku.config.mjs';
 

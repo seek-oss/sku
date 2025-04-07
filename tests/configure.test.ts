@@ -1,3 +1,4 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';

@@ -1,14 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`translations should render en 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/en-translations.chunk.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`translations > should render en 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -23,25 +16,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
     <link
       data-chunk="en-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="/en-translations.chunk.js"
     >
   </head>
   <body>
@@ -72,41 +65,34 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="en-translations"
-      src="scripts[3]"
+      src="/en-translations.chunk.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`translations should render en-PSEUDO post-hydration 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/en-translations.chunk.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`translations > should render en-PSEUDO post-hydration 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -121,25 +107,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
     <link
       data-chunk="en-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="/en-translations.chunk.js"
     >
   </head>
   <body>
@@ -170,29 +156,29 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="en-translations"
-      src="scripts[3]"
+      src="/en-translations.chunk.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -209,15 +195,8 @@ POST HYDRATE DIFFS:
      <script
 `;
 
-exports[`translations should render fr 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/fr-translations.chunk.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`translations > should render fr 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -232,25 +211,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
     <link
       data-chunk="fr-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="/fr-translations.chunk.js"
     >
   </head>
   <body>
@@ -281,41 +260,34 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="fr-translations"
-      src="scripts[3]"
+      src="/fr-translations.chunk.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`translations should support query parameters 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/en-translations.chunk.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`translations > should support query parameters 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -330,25 +302,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
     <link
       data-chunk="en-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="/en-translations.chunk.js"
     >
   </head>
   <body>
@@ -379,28 +351,28 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="en-translations"
-      src="scripts[3]"
+      src="/en-translations.chunk.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;

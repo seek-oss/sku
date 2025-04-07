@@ -54,6 +54,7 @@ const getSkuConfig = ({
   }
 
   const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
+
   // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
   const appSkuConfig = mod?.default ?? mod;
 

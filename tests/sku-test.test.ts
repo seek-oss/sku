@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import path from 'node:path';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';

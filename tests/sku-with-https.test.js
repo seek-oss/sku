@@ -1,10 +1,8 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import {
-  runSkuScriptInDir,
-  waitForUrls,
-  getAppSnapshot,
-} from '@sku-private/test-utils';
+import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
 

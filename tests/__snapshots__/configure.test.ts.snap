@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`configure custom should generate .prettierignore 1`] = `
+exports[`configure > custom > should generate .prettierignore 1`] = `
 [
   ".eslintcache",
   ".prettierrc",
@@ -13,7 +13,7 @@ exports[`configure custom should generate .prettierignore 1`] = `
 ]
 `;
 
-exports[`configure default should generate .prettierignore 1`] = `
+exports[`configure > default > should generate .prettierignore 1`] = `
 [
   ".eslintcache",
   ".prettierrc",

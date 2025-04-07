@@ -1,3 +1,4 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import {

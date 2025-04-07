@@ -1,6 +1,7 @@
 {
   "name": "@sku-private/monorepo",
   "private": true,
+  "type": "module",
   "scripts": {
     "plop": "plop",
     "install:sku": "pnpm install --filter sku",
@@ -13,6 +14,7 @@
     "lint:tsc:sku": "pnpm --filter 'sku' lint:tsc",
     "build": "pnpm --filter 'sku' build",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
+    "vitest": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' OPEN_TAB=false jest --verbose",
     "test:sku-init": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' OPEN_TAB=false jest --verbose --config=jest.config.sku-init.js",
     "test:update": "pnpm run test -u && pnpm --filter @sku-fixtures/braid-design-system exec sku test -u",
@@ -72,7 +74,10 @@
     "prettier": "^3.4.1",
     "puppeteer": "^22.10.0",
     "renovate-config-seek": "^0.4.0",
-    "typescript": "~5.8.0"
+    "typescript": "~5.8.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1",
+    "vitest-environment-puppeteer": "^11.0.3"
   },
   "engines": {
     "node": ">=20.18.2"

@@ -1,10 +1,8 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import {
-  runSkuScriptInDir,
-  waitForUrls,
-  getAppSnapshot,
-} from '@sku-private/test-utils';
+import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/translations/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';

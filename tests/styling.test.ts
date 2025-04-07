@@ -1,3 +1,5 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import type { Page } from 'puppeteer';
@@ -5,7 +7,6 @@ import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
-  getAppSnapshot,
   getStoryPage,
   getTextContentFromFrameOrPage,
   gracefulSpawn,

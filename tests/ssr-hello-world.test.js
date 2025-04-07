@@ -1,10 +1,11 @@
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
 import {
   runSkuScriptInDir,
   waitForUrls,
-  getAppSnapshot,
   startAssetServer,
   gracefulSpawn,
 } from '@sku-private/test-utils';

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import createCSPHandler from './csp.js';
 
 describe('createCSPHandler', () => {

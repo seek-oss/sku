@@ -1,3 +1,4 @@
+import { describe, test, beforeEach, afterEach, expect } from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import dedent from 'dedent';

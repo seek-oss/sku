@@ -1,5 +1,5 @@
 module.exports = {
   launch: {
-    ignoreHTTPSErrors: true,
+    acceptInsecureCerts: true,
   },
 };

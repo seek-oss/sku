@@ -28,7 +28,6 @@ export const serveAction = async ({
   skuContext,
 }: {
   site: string;
-  port: number;
   environment: string;
   skuContext: SkuContext;
 }) => {

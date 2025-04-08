@@ -1,6 +1,9 @@
 import { Option } from 'commander';
 
-export const portOption = new Option('--port [port]', 'Port to serve on');
+export const portOption = new Option(
+  '--port [port]',
+  'Port to serve on',
+).argParser(Number);
 
 export const strictPortOption = new Option(
   '--strict-port',

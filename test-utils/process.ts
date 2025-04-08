@@ -9,6 +9,7 @@ import {
 } from 'node:child_process';
 import { gracefulSpawn } from './gracefulSpawn.js';
 import { createRequire } from 'node:module';
+import { getPort } from './get-port.ts';
 
 const execFile = promisify(_execFile);
 const require = createRequire(import.meta.url);

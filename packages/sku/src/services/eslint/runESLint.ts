@@ -24,9 +24,21 @@ const runESLint = async ({
 
   console.log('eslintConfigSku', eslintConfigSku);
 
+  const namedEslintConfigSku = eslintConfigSku.map((config, index) => {
+    if (config.name) {
+      return config;
+    }
+    return {
+      ...config,
+      name: `sku=${index}`,
+    };
+  });
+
+  console.log('named config', namedEslintConfigSku);
+
   const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
-    baseConfig: eslintConfigSku,
+    baseConfig: namedEslintConfigSku,
     fix,
     cache: false,
     overrideConfig: {
@@ -65,6 +77,7 @@ const runESLint = async ({
       );
 
       if (errorCount || warningCount) {
+        console.log('formatting');
         const formatter = await eslint.loadFormatter();
         console.log(await formatter.format(lintResults));
       }

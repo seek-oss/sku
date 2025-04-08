@@ -27,7 +27,7 @@ interface SkuContextOptions {
 }
 let storedSkuContext: SkuContext;
 
-export const getSkuContext = (skuContextOptions: SkuContextOptions) => {
+export const getSkuContext = (skuContextOptions: SkuContextOptions = {}) => {
   if (storedSkuContext) {
     return storedSkuContext;
   }

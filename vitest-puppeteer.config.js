@@ -1,6 +1,6 @@
 export default {
   launch: {
-    ignoreHTTPSErrors: true,
+    acceptInsecureCerts: true,
     headless: true,
   },
 };

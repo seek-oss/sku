@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -32,22 +32,22 @@ describe('translations', () => {
     process.kill();
   });
 
-  it('should render en', async () => {
-    const app = await getAppSnapshot(`${baseUrl}/en`);
+  it('should render en', async ({ expect }) => {
+    const app = await getAppSnapshot(`${baseUrl}/en`, expect);
     expect(app).toMatchSnapshot();
   });
 
-  it('should render fr', async () => {
+  it('should render fr', async ({ expect }) => {
     const app = await getAppSnapshot(`${baseUrl}/fr`);
     expect(app).toMatchSnapshot();
   });
 
-  it('should render en-PSEUDO post-hydration', async () => {
+  it('should render en-PSEUDO post-hydration', async ({ expect }) => {
     const app = await getAppSnapshot(`${baseUrl}/en?pseudo=true`);
     expect(app).toMatchSnapshot();
   });
 
-  it('should support query parameters', async () => {
+  it('should support query parameters', async ({ expect }) => {
     const app = await getAppSnapshot(`${baseUrl}/en?a=1`);
     expect(app).toMatchSnapshot();
   });

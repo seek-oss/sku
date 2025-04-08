@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
@@ -48,11 +48,11 @@ describe('sku init', () => {
     console.log('Cleanup complete');
   });
 
-  it('should exit with code 0', async () => {
+  it('should exit with code 0', async ({ expect }) => {
     expect(child.exitCode).toBe(0);
   });
 
-  it('should create package.json', async () => {
+  it('should create package.json', async ({ expect }) => {
     const contents = await fs.readFile(
       path.join(fixtureDirectory, projectName, 'package.json'),
       'utf-8',
@@ -61,14 +61,14 @@ describe('sku init', () => {
     expect(replaceDependencyVersions(JSON.parse(contents))).toMatchSnapshot();
   });
 
-  it.each([
+  it.for([
     'sku.config.ts',
     '.gitignore',
     '.prettierignore',
     'eslint.config.mjs',
     'README.md',
     'src/App/NextSteps.tsx',
-  ])('should create %s', async (file) => {
+  ])('should create %s', async ([file], { expect }) => {
     const contents = await fs.readFile(
       path.join(fixtureDirectory, projectName, file),
       'utf-8',

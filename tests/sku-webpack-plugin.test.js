@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import {
@@ -40,7 +40,7 @@ describe('sku-webpack-plugin', () => {
       await process.kill();
     });
 
-    it('should start a development server', async () => {
+    it('should start a development server', async ({ expect }) => {
       const snapshot = await getAppSnapshot(devServerUrl);
       expect(snapshot).toMatchSnapshot();
     });
@@ -69,12 +69,12 @@ describe('sku-webpack-plugin', () => {
       closeAssetServer();
     });
 
-    it('should create valid app', async () => {
+    it('should create valid app', async ({ expect }) => {
       const app = await getAppSnapshot(devServerUrl);
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });

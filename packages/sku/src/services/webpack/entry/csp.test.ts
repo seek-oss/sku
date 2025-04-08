@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import createCSPHandler from './csp.js';
 
 describe('createCSPHandler', () => {
-  it('should create a CSP tag', () => {
+  it('should create a CSP tag', ({ expect }) => {
     const cspHandler = createCSPHandler();
 
     cspHandler.registerScript('<script>console.log("Hello, World!")</script>');
@@ -16,7 +16,7 @@ describe('createCSPHandler', () => {
     );
   });
 
-  it('should inject a CSP tag into HTML', () => {
+  it('should inject a CSP tag into HTML', ({ expect }) => {
     const cspHandler = createCSPHandler();
 
     cspHandler.registerScript('<script>console.log("Hello, World!")</script>');
@@ -79,7 +79,7 @@ describe('createCSPHandler', () => {
                   }
                 </style>
               </head>
-              
+
                 <div>
                   Welcome to my App!
                 </div>

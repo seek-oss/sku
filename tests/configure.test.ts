@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
@@ -56,13 +56,13 @@ describe('configure', () => {
       await removeAppDir(appFolder);
     });
 
-    it('should generate a prettier config', async () => {
+    it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolder, '.prettierrc');
 
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate a eslint config', async () => {
+    it('should generate a eslint config', async ({ expect }) => {
       const eslintConfig = await readFileContents(
         appFolder,
         'eslint.config.mjs',
@@ -76,7 +76,7 @@ describe('configure', () => {
       `);
     });
 
-    it(`should generate \`.gitignore\``, async () => {
+    it(`should generate \`.gitignore\``, async ({ expect }) => {
       const ignoreContents = await readIgnore(appFolder, '.gitignore');
 
       expect(ignoreContents).toMatchInlineSnapshot(`
@@ -92,11 +92,14 @@ describe('configure', () => {
       `);
     });
 
-    it.each(['.prettierignore'])('should generate %s', async (ignore) => {
-      const ignoreContents = await readIgnore(appFolder, ignore);
+    it.for(['.prettierignore'])(
+      'should generate %s',
+      async ([ignore], { expect }) => {
+        const ignoreContents = await readIgnore(appFolder, ignore);
 
-      expect(ignoreContents).toMatchSnapshot();
-    });
+        expect(ignoreContents).toMatchSnapshot();
+      },
+    );
   });
 
   describe('custom', () => {
@@ -113,13 +116,13 @@ describe('configure', () => {
       await removeAppDir(appFolderTS);
     });
 
-    it('should generate a prettier config', async () => {
+    it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
 
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate an eslint config', async () => {
+    it('should generate an eslint config', async ({ expect }) => {
       const eslintConfig = await readFileContents(
         appFolderTS,
         'eslint.config.mjs',
@@ -133,13 +136,13 @@ describe('configure', () => {
       `);
     });
 
-    it('should generate tsconfig config', async () => {
+    it('should generate tsconfig config', async ({ expect }) => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
 
       expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);
     });
 
-    it('should generate `.gitignore`', async () => {
+    it('should generate `.gitignore`', async ({ expect }) => {
       const ignoreContents = await readIgnore(appFolderTS, '.gitignore');
 
       expect(ignoreContents).toMatchInlineSnapshot(`
@@ -155,10 +158,13 @@ describe('configure', () => {
       `);
     });
 
-    it.each(['.prettierignore'])('should generate %s', async (ignore) => {
-      const ignoreContents = await readIgnore(appFolderTS, ignore);
+    it.for(['.prettierignore'])(
+      'should generate %s',
+      async ([ignore], { expect }) => {
+        const ignoreContents = await readIgnore(appFolderTS, ignore);
 
-      expect(ignoreContents).toMatchSnapshot();
-    });
+        expect(ignoreContents).toMatchSnapshot();
+      },
+    );
   });
 });

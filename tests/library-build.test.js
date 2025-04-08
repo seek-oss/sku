@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
@@ -23,7 +23,7 @@ describe('library-build', () => {
       await runSkuScriptInDir('build', appDir);
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
@@ -42,7 +42,7 @@ describe('library-build', () => {
       await server.kill();
     });
 
-    it('should start a development server', async () => {
+    it('should start a development server', async ({ expect }) => {
       const snapshot = await getAppSnapshot(devServerUrl);
       expect(snapshot).toMatchSnapshot();
     });

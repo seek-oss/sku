@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
@@ -38,7 +38,7 @@ describe('custom-src-paths', () => {
       await process.kill();
     });
 
-    it('should start a development server', async () => {
+    it('should start a development server', async ({ expect }) => {
       const snapshot = await getAppSnapshot(url);
       expect(snapshot).toMatchSnapshot();
     });
@@ -57,26 +57,26 @@ describe('custom-src-paths', () => {
       await process.kill();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(targetDirectory);
       expect(files).toMatchSnapshot();
     });
 
-    it('should create valid app', async () => {
+    it('should create valid app', async ({ expect }) => {
       const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
   });
 
   describe('format', () => {
-    it('should format successfully', async () => {
+    it('should format successfully', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('format', appDir);
       expect(child.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
-    it('should lint successfully', async () => {
+    it('should lint successfully', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('lint', appDir);
       expect(child.exitCode).toEqual(0);
     });

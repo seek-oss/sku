@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import { sync as spawnSync } from 'cross-spawn';
 import {
@@ -50,14 +50,16 @@ describe('storybook-config', () => {
       await server.kill();
     });
 
-    it('should start sku dev middleware if configured', async () => {
+    it('should start sku dev middleware if configured', async ({ expect }) => {
       const response = await fetch(middlewareUrl);
 
       expect(response.status).toBe(200);
       expect(await response.text()).toBe('OK');
     });
 
-    it('should render decorators defined in the storybook preview file', async () => {
+    it('should render decorators defined in the storybook preview file', async ({
+      expect,
+    }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-decorator]',
@@ -67,7 +69,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async () => {
+    it('should render a component inside a story', async ({ expect }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-text]',
@@ -77,7 +79,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async () => {
+    it('should render vanilla styles', async ({ expect }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',
@@ -87,7 +89,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async () => {
+    it('should render a ".mdx" file', async ({ expect }) => {
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
       const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
       const docsPage = await getStoryPage(docsIframeUrl);
@@ -145,7 +147,9 @@ describe('storybook-config', () => {
       closeStorybookServer();
     });
 
-    it('should render decorators defined in the storybook preview file', async () => {
+    it('should render decorators defined in the storybook preview file', async ({
+      expect,
+    }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-decorator]',
@@ -155,7 +159,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async () => {
+    it('should render a component inside a story', async ({ expect }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-text]',
@@ -165,7 +169,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async () => {
+    it('should render vanilla styles', async ({ expect }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',
@@ -175,7 +179,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async () => {
+    it('should render a ".mdx" file', async ({ expect }) => {
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
       const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
       const docsPage = await getStoryPage(docsIframeUrl);

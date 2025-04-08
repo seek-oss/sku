@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -51,12 +51,12 @@ describe('typescript-css-modules', () => {
       await rm(distDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async () => {
+    it('should create valid app', async ({ expect }) => {
       const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
@@ -85,12 +85,12 @@ describe('typescript-css-modules', () => {
       await rm(distSsrDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async () => {
+    it('should create valid app', async ({ expect }) => {
       const app = await getAppSnapshot(backendUrl);
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
       expect(files).toMatchSnapshot();
     });
@@ -109,7 +109,7 @@ describe('typescript-css-modules', () => {
       await server.kill();
     });
 
-    it('should start a development server', async () => {
+    it('should start a development server', async ({ expect }) => {
       const snapshot = await getAppSnapshot(devServerUrl);
       expect(snapshot).toMatchSnapshot();
     });
@@ -123,7 +123,7 @@ describe('typescript-css-modules', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle Vanilla Extract styles in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
       expect(exitCode).toEqual(0);
     });
   });
@@ -138,7 +138,7 @@ describe('typescript-css-modules', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle tsc and eslint', async () => {
+    it('should handle tsc and eslint', async ({ expect }) => {
       expect(exitCode).toEqual(0);
     });
   });

@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
@@ -26,7 +26,9 @@ describe('public path', () => {
       await process.kill();
     });
 
-    it('should create valid app with no unresolved resources', async () => {
+    it('should create valid app with no unresolved resources', async ({
+      expect,
+    }) => {
       const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });

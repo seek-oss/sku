@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
@@ -31,19 +31,19 @@ describe('multiple-routes', () => {
       await process.kill();
     });
 
-    it('should render home page correctly', async () => {
+    it('should render home page correctly', async ({ expect }) => {
       const snapshot = await getAppSnapshot(url);
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should render details page correctly', async () => {
+    it('should render details page correctly', async ({ expect }) => {
       const snapshot = await getAppSnapshot(`${url}/details/123`);
       expect(snapshot).toMatchSnapshot();
     });
   });
 
   describe('test', () => {
-    it('should handle dynamic imports in tests', async () => {
+    it('should handle dynamic imports in tests', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('test', appDir);
       expect(child.exitCode).toEqual(0);
     });
@@ -62,17 +62,17 @@ describe('multiple-routes', () => {
       await process.kill();
     });
 
-    it('should return home page', async () => {
+    it('should return home page', async ({ expect }) => {
       const app = await getAppSnapshot(url);
       expect(app).toMatchSnapshot();
     });
 
-    it('should return details page', async () => {
+    it('should return details page', async ({ expect }) => {
       const app = await getAppSnapshot(`${url}/details/123`);
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(targetDirectory);
       expect(files).toMatchSnapshot();
     });

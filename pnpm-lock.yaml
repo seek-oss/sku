@@ -26,9 +26,6 @@ importers:
       '@tsconfig/node-lts':
         specifier: ^18.12.3
         version: 18.12.5
-      '@types/jest':
-        specifier: ^29.0.0
-        version: 29.5.14
       '@types/node':
         specifier: ^18.19.31
         version: 18.19.80

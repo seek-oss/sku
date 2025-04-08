@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
@@ -38,12 +38,12 @@ describe('braid-design-system', () => {
       await server.kill();
     });
 
-    it('should return development seekAnz site', async () => {
+    it('should return development seekAnz site', async ({ expect }) => {
       const snapshot = await getAppSnapshot(getLocalUrl('seekAnz'));
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should return development jobStreet site', async () => {
+    it('should return development jobStreet site', async ({ expect }) => {
       const snapshot = await getAppSnapshot(getLocalUrl('jobStreet'));
       expect(snapshot).toMatchSnapshot();
     });
@@ -62,23 +62,23 @@ describe('braid-design-system', () => {
       await process.kill();
     });
 
-    it('should return built jobStreet site', async () => {
+    it('should return built jobStreet site', async ({ expect }) => {
       const app = await getAppSnapshot(getLocalUrl('jobStreet'));
       expect(app).toMatchSnapshot();
     });
 
-    it('should return built seekAnz site', async () => {
+    it('should return built seekAnz site', async ({ expect }) => {
       const app = await getAppSnapshot(getLocalUrl('seekAnz'));
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
   });
 
-  it('should handle braid-design-system in tests', async () => {
+  it('should handle braid-design-system in tests', async ({ expect }) => {
     const { child } = await runSkuScriptInDir('test', appDir);
     expect(child.exitCode).toEqual(0);
   });

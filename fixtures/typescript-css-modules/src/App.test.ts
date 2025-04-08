@@ -3,11 +3,11 @@ import * as styles from './styles.css.ts';
 declare const SETUP_TESTS_SCRIPT_RAN: boolean;
 
 describe('App', () => {
-  test('"setupTests" script', () => {
+  test('"setupTests" script', ({ expect }) => {
     expect(SETUP_TESTS_SCRIPT_RAN).toEqual(true);
   });
 
-  test('Vanilla Extract styles', () => {
+  test('Vanilla Extract styles', ({ expect }) => {
     expect(styles.root).toEqual(expect.stringContaining('styles_root'));
     expect(styles.nested).toEqual(expect.stringContaining('styles_nested'));
   });

@@ -1,13 +1,18 @@
-import { expect } from 'vitest';
+import type { ExpectStatic } from 'vitest';
 
 function sanitizeHtml(str: string) {
   return str.replaceAll(process.cwd(), '{cwd}');
 }
 
-export const getAppSnapshot = async (
-  url: string,
+export const getAppSnapshot = async ({
+  url,
   warningFilter = () => true,
-) => {
+  expect,
+}: {
+  url: string;
+  warningFilter?: (warning: string) => boolean;
+  expect: ExpectStatic;
+}) => {
   const warnings: string[] = [];
   const errors: string[] = [];
 

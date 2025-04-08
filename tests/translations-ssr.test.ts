@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -41,17 +41,17 @@ describe('ssr translations', () => {
     await server.kill();
   });
 
-  it('should render en', async () => {
+  it('should render en', async ({ expect }) => {
     const app = await getAppSnapshot(`${backendUrl}/en`);
     expect(app).toMatchSnapshot();
   });
 
-  it('should render fr', async () => {
+  it('should render fr', async ({ expect }) => {
     const app = await getAppSnapshot(`${backendUrl}/fr`);
     expect(app).toMatchSnapshot();
   });
 
-  it('should render en-PSEUDO', async () => {
+  it('should render en-PSEUDO', async ({ expect }) => {
     const app = await getAppSnapshot(`${backendUrl}/en?pseudo=true`);
     expect(app).toMatchSnapshot();
   });

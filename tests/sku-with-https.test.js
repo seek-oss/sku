@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -36,13 +36,17 @@ describe('sku-with-https', () => {
         await process.kill();
       });
 
-      it('should start a development server', async () => {
+      it('should start a development server', async ({
+        expect: localExpect,
+      }) => {
         const snapshot = await getAppSnapshot(url);
-        expect(snapshot).toMatchSnapshot();
+        localExpect(snapshot).toMatchSnapshot();
       });
-      it('should support the supplied middleware', async () => {
+      it('should support the supplied middleware', async ({
+        expect: localExpect,
+      }) => {
         const snapshot = await getAppSnapshot(`${url}/test-middleware`);
-        expect(snapshot).toMatchSnapshot();
+        localExpect(snapshot).toMatchSnapshot();
       });
     });
   });
@@ -62,7 +66,7 @@ describe('sku-with-https', () => {
       await process.kill();
     });
 
-    it('should support the supplied middleware', async () => {
+    it('should support the supplied middleware', async ({ expect }) => {
       const snapshot = await getAppSnapshot(`${url}/test-middleware`);
       expect(snapshot).toMatchSnapshot();
     });
@@ -82,19 +86,21 @@ describe('sku-with-https', () => {
       await process.kill();
     });
 
-    it('should start a development server', async () => {
+    it('should start a development server', async ({ expect: localExpect }) => {
       const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
+      localExpect(snapshot).toMatchSnapshot();
     });
 
-    it('should support the supplied middleware', async () => {
+    it('should support the supplied middleware', async ({
+      expect: localExpect,
+    }) => {
       const snapshot = await getAppSnapshot(`${url}/test-middleware`);
-      expect(snapshot).toMatchSnapshot();
+      localExpect(snapshot).toMatchSnapshot();
     });
   });
 
   describe('.gitignore', () => {
-    it('should add the .ssl directory to .gitignore', async () => {
+    it('should add the .ssl directory to .gitignore', async ({ expect }) => {
       const ignoreContents = await fs.readFile(
         path.join(appDir, '.gitignore'),
         'utf-8',

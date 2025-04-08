@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect } from 'vitest';
+import { describe, beforeAll, it } from 'vitest';
 
 import path from 'node:path';
 
@@ -21,7 +21,7 @@ describe('source-maps', () => {
       await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(`${appDir}/dist`);
       expect(files).toMatchSnapshot();
     });

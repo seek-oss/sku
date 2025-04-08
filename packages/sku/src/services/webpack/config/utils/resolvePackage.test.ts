@@ -1,4 +1,4 @@
-import { describe, beforeEach, test, expect, vi } from 'vitest';
+import { describe, beforeEach, test, vi } from 'vitest';
 import { createPackageResolver } from './resolvePackage.js';
 
 import { cwd } from '@/utils/cwd.js';
@@ -17,12 +17,14 @@ describe('webpack utils', () => {
       resolvePackage = createPackageResolver(fs, resolve);
     });
 
-    test('defaults to require.resolve', () => {
+    test('defaults to require.resolve', ({ expect }) => {
       resolve.mockReturnValue('./node_modules/test/package.json');
       expect(resolvePackage('test')).toEqual('./node_modules/test');
     });
 
-    test('returns a naive path when require.resolve fails and the package is not a project dependency', () => {
+    test('returns a naive path when require.resolve fails and the package is not a project dependency', ({
+      expect,
+    }) => {
       const error = new Error('Module not found') as Error & { code: string };
       error.code = 'MODULE_NOT_FOUND';
       resolve.mockImplementation(() => {
@@ -32,7 +34,9 @@ describe('webpack utils', () => {
       expect(resolvePackage('test')).toEqual(`${cwd()}/node_modules/test`);
     });
 
-    test('handles missing package.json when looking for dependencies', () => {
+    test('handles missing package.json when looking for dependencies', ({
+      expect,
+    }) => {
       const resolveError = new Error('Module not found') as Error & {
         code: string;
       };
@@ -64,7 +68,7 @@ describe('webpack utils', () => {
         });
       });
 
-      test('in dependencies', () => {
+      test('in dependencies', ({ expect }) => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             dependencies: {
@@ -76,7 +80,7 @@ describe('webpack utils', () => {
         expect(() => resolvePackage('test')).toThrow(resolveError);
       });
 
-      test('in devDependencies', () => {
+      test('in devDependencies', ({ expect }) => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             devDependencies: {
@@ -89,7 +93,7 @@ describe('webpack utils', () => {
       });
     });
 
-    test('caches results', () => {
+    test('caches results', ({ expect }) => {
       resolve.mockReturnValue('./node_modules/test/package.json');
 
       resolvePackage('test');

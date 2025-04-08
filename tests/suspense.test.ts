@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import {
@@ -37,12 +37,12 @@ describe('suspense', () => {
         await process.kill();
       });
 
-      it('should return home page', async () => {
+      it('should return home page', async ({ expect }) => {
         const app = await getAppSnapshot(url);
         expect(app).toMatchSnapshot();
       });
 
-      it('should generate the expected files', async () => {
+      it('should generate the expected files', async ({ expect }) => {
         const files = await dirContentsToObject(targetDirectory);
         expect(files).toMatchSnapshot();
       });

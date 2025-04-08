@@ -28,7 +28,7 @@ const runESLint = async ({
   const eslint = new ESLint({
     baseConfig: eslintConfigSku,
     fix,
-    cache: true,
+    cache: false,
     overrideConfig: {
       linterOptions: {
         reportUnusedDisableDirectives: true,

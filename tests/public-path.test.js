@@ -29,7 +29,7 @@ describe('public path', () => {
     it('should create valid app with no unresolved resources', async ({
       expect,
     }) => {
-      const app = await getAppSnapshot(url);
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
   });

@@ -43,23 +43,25 @@ describe('ssr-hello-world', () => {
     });
 
     it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(backendUrl);
+      const snapshot = await getAppSnapshot({ url: backendUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
 
     it('should respond to dev middleware route request', async ({ expect }) => {
-      const { sourceHtml } = await getAppSnapshot(
-        `${backendUrl}/test-middleware`,
-      );
+      const { sourceHtml } = await getAppSnapshot({
+        url: `${backendUrl}/test-middleware`,
+        expect,
+      });
       expect(sourceHtml).toBe('OK');
     });
 
     it('should respond to dev middleware static asset request', async ({
       expect,
     }) => {
-      const { sourceHtml } = await getAppSnapshot(
-        `${backendUrl}/assets/logo.png`,
-      );
+      const { sourceHtml } = await getAppSnapshot({
+        url: `${backendUrl}/assets/logo.png`,
+        expect,
+      });
       expect(sourceHtml).toMatch(/^�PNG/);
     });
   });
@@ -98,7 +100,7 @@ describe('ssr-hello-world', () => {
       it('should generate a production server based on config', async ({
         expect,
       }) => {
-        const snapshot = await getAppSnapshot(backendUrl);
+        const snapshot = await getAppSnapshot({ url: backendUrl, expect });
         expect(snapshot).toMatchSnapshot();
       });
 
@@ -136,7 +138,7 @@ describe('ssr-hello-world', () => {
       it('should generate a production server running on custom port', async ({
         expect,
       }) => {
-        const snapshot = await getAppSnapshot(customPortUrl);
+        const snapshot = await getAppSnapshot({ url: customPortUrl, expect });
         expect(snapshot).toMatchSnapshot();
       });
     });

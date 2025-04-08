@@ -32,12 +32,15 @@ describe('multiple-routes', () => {
     });
 
     it('should render home page correctly', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(url);
+      const snapshot = await getAppSnapshot({ url, expect });
       expect(snapshot).toMatchSnapshot();
     });
 
     it('should render details page correctly', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(`${url}/details/123`);
+      const snapshot = await getAppSnapshot({
+        url: `${url}/details/123`,
+        expect,
+      });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -63,12 +66,12 @@ describe('multiple-routes', () => {
     });
 
     it('should return home page', async ({ expect }) => {
-      const app = await getAppSnapshot(url);
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
 
     it('should return details page', async ({ expect }) => {
-      const app = await getAppSnapshot(`${url}/details/123`);
+      const app = await getAppSnapshot({ url: `${url}/details/123`, expect });
       expect(app).toMatchSnapshot();
     });
 

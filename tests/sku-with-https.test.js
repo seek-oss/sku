@@ -36,17 +36,16 @@ describe('sku-with-https', () => {
         await process.kill();
       });
 
-      it('should start a development server', async ({
-        expect: localExpect,
-      }) => {
-        const snapshot = await getAppSnapshot(url);
-        localExpect(snapshot).toMatchSnapshot();
+      it('should start a development server', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({ url, expect });
+        expect(snapshot).toMatchSnapshot();
       });
-      it('should support the supplied middleware', async ({
-        expect: localExpect,
-      }) => {
-        const snapshot = await getAppSnapshot(`${url}/test-middleware`);
-        localExpect(snapshot).toMatchSnapshot();
+      it('should support the supplied middleware', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({
+          url: `${url}/test-middleware`,
+          expect,
+        });
+        expect(snapshot).toMatchSnapshot();
       });
     });
   });
@@ -67,7 +66,10 @@ describe('sku-with-https', () => {
     });
 
     it('should support the supplied middleware', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(`${url}/test-middleware`);
+      const snapshot = await getAppSnapshot({
+        url: `${url}/test-middleware`,
+        expect,
+      });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -86,16 +88,17 @@ describe('sku-with-https', () => {
       await process.kill();
     });
 
-    it('should start a development server', async ({ expect: localExpect }) => {
-      const snapshot = await getAppSnapshot(url);
-      localExpect(snapshot).toMatchSnapshot();
+    it('should start a development server', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({ url, expect });
+      expect(snapshot).toMatchSnapshot();
     });
 
-    it('should support the supplied middleware', async ({
-      expect: localExpect,
-    }) => {
-      const snapshot = await getAppSnapshot(`${url}/test-middleware`);
-      localExpect(snapshot).toMatchSnapshot();
+    it('should support the supplied middleware', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({
+        url: `${url}/test-middleware`,
+        expect,
+      });
+      expect(snapshot).toMatchSnapshot();
     });
   });
 

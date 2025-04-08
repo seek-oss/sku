@@ -42,7 +42,7 @@ describe('library-file', () => {
     });
 
     it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });

@@ -39,12 +39,18 @@ describe('braid-design-system', () => {
     });
 
     it('should return development seekAnz site', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(getLocalUrl('seekAnz'));
+      const snapshot = await getAppSnapshot({
+        url: getLocalUrl('seekAnz'),
+        expect,
+      });
       expect(snapshot).toMatchSnapshot();
     });
 
     it('should return development jobStreet site', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(getLocalUrl('jobStreet'));
+      const snapshot = await getAppSnapshot({
+        url: getLocalUrl('jobStreet'),
+        expect,
+      });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -63,12 +69,15 @@ describe('braid-design-system', () => {
     });
 
     it('should return built jobStreet site', async ({ expect }) => {
-      const app = await getAppSnapshot(getLocalUrl('jobStreet'));
+      const app = await getAppSnapshot({
+        url: getLocalUrl('jobStreet'),
+        expect,
+      });
       expect(app).toMatchSnapshot();
     });
 
     it('should return built seekAnz site', async ({ expect }) => {
-      const app = await getAppSnapshot(getLocalUrl('seekAnz'));
+      const app = await getAppSnapshot({ url: getLocalUrl('seekAnz'), expect });
       expect(app).toMatchSnapshot();
     });
 

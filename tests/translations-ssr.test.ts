@@ -42,17 +42,20 @@ describe('ssr translations', () => {
   });
 
   it('should render en', async ({ expect }) => {
-    const app = await getAppSnapshot(`${backendUrl}/en`);
+    const app = await getAppSnapshot({ expect, url: `${backendUrl}/en` });
     expect(app).toMatchSnapshot();
   });
 
   it('should render fr', async ({ expect }) => {
-    const app = await getAppSnapshot(`${backendUrl}/fr`);
+    const app = await getAppSnapshot({ expect, url: `${backendUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
   it('should render en-PSEUDO', async ({ expect }) => {
-    const app = await getAppSnapshot(`${backendUrl}/en?pseudo=true`);
+    const app = await getAppSnapshot({
+      expect,
+      url: `${backendUrl}/en?pseudo=true`,
+    });
     expect(app).toMatchSnapshot();
   });
 });

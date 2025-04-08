@@ -39,7 +39,7 @@ describe('custom-src-paths', () => {
     });
 
     it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(url);
+      const snapshot = await getAppSnapshot({ url, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -63,7 +63,7 @@ describe('custom-src-paths', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const app = await getAppSnapshot(url);
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
   });

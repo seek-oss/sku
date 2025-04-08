@@ -43,7 +43,7 @@ describe('styling', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const app = await getAppSnapshot(devServerUrl);
+      const app = await getAppSnapshot({ url: devServerUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
@@ -66,7 +66,7 @@ describe('styling', () => {
     });
 
     it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });

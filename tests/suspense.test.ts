@@ -38,7 +38,7 @@ describe('suspense', () => {
       });
 
       it('should return home page', async ({ expect }) => {
-        const app = await getAppSnapshot(url);
+        const app = await getAppSnapshot({ url, expect });
         expect(app).toMatchSnapshot();
       });
 

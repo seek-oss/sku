@@ -94,7 +94,7 @@ describe('configure', () => {
 
     it.for(['.prettierignore'])(
       'should generate %s',
-      async ([ignore], { expect }) => {
+      async (ignore, { expect }) => {
         const ignoreContents = await readIgnore(appFolder, ignore);
 
         expect(ignoreContents).toMatchSnapshot();
@@ -160,7 +160,7 @@ describe('configure', () => {
 
     it.for(['.prettierignore'])(
       'should generate %s',
-      async ([ignore], { expect }) => {
+      async (ignore, { expect }) => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
 
         expect(ignoreContents).toMatchSnapshot();

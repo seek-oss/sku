@@ -16,14 +16,14 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
 );
 
-describe('sku-with-https', () => {
-  describe.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
+describe.sequential('sku-with-https', () => {
+  describe.concurrent.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
     const args =
       bundler === 'vite'
         ? ['--experimental-bundler', '--config', 'sku.config.vite.mjs']
         : [];
     describe('start', () => {
-      const url = `https://localhost:${port}`;
+      const url = `https://localhost:${bundler === 'vite' ? port + 10000 : port}`;
 
       let process;
 

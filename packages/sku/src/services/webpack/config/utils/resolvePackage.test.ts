@@ -3,7 +3,7 @@ import { createPackageResolver } from './resolvePackage.js';
 
 import { cwd } from '@/utils/cwd.js';
 
-describe('webpack utils', () => {
+describe.sequential('webpack utils', () => {
   describe('resolvePackage()', () => {
     let resolvePackage: ReturnType<typeof createPackageResolver>;
     let fs: any; // No idea how to type this properly here. I tried jest.Mocked<> but I couldnt get it to play nice with the readFileSync mock

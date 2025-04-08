@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import createCSPHandler from './csp.js';
 
-describe('createCSPHandler', () => {
+describe.sequential('createCSPHandler', () => {
   it('should create a CSP tag', ({ expect }) => {
     const cspHandler = createCSPHandler();
 
@@ -79,7 +79,7 @@ describe('createCSPHandler', () => {
                   }
                 </style>
               </head>
-
+              
                 <div>
                   Welcome to my App!
                 </div>

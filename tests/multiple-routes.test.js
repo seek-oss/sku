@@ -17,27 +17,80 @@ const appDir = path.dirname(
 const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:8202`;
 
+const renderPageCorrectly = async ({ page, pageUrl, checkForLoadingText }) => {
+  it(`should render ${page} page correctly`, async () => {
+    const snapshot = await getAppSnapshot(pageUrl);
+    expect(snapshot).toMatchSnapshot();
+    expect(snapshot.sourceHtml).not.toContain(checkForLoadingText);
+  });
+};
+
 describe('multiple-routes', () => {
-  describe('start', () => {
-    let process;
+  describe.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
+    const args =
+      bundler === 'vite'
+        ? [
+            '--convert-loadable',
+            '--experimental-bundler',
+            '--config',
+            'sku.config.vite.js',
+          ]
+        : [];
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(url);
+    describe('start', () => {
+      let process;
+
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url);
+      });
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      renderPageCorrectly({
+        page: 'home',
+        pageUrl: url,
+        checkForLoadingText: 'Loading Home...',
+      });
+
+      renderPageCorrectly({
+        page: 'details',
+        pageUrl: `${url}/details/123`,
+        checkForLoadingText: 'Loading Details...',
+      });
     });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+    describe('build and serve', () => {
+      let process;
 
-    it('should render home page correctly', async () => {
-      const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
-    });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir);
+        await waitForUrls(url);
+      });
 
-    it('should render details page correctly', async () => {
-      const snapshot = await getAppSnapshot(`${url}/details/123`);
-      expect(snapshot).toMatchSnapshot();
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      renderPageCorrectly({
+        page: 'home',
+        pageUrl: url,
+        checkForLoadingText: 'Loading Home...',
+      });
+
+      renderPageCorrectly({
+        page: 'details',
+        pageUrl: `${url}/details/123`,
+        checkForLoadingText: 'Loading Details...',
+      });
+
+      it('should generate the expected files', async () => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
     });
   });
 
@@ -45,35 +98,6 @@ describe('multiple-routes', () => {
     it('should handle dynamic imports in tests', async () => {
       const { child } = await runSkuScriptInDir('test', appDir);
       expect(child.exitCode).toEqual(0);
-    });
-  });
-
-  describe('build and serve', () => {
-    let process;
-
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(url);
-    });
-
-    afterAll(async () => {
-      await process.kill();
-    });
-
-    it('should return home page', async () => {
-      const app = await getAppSnapshot(url);
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should return details page', async () => {
-      const app = await getAppSnapshot(`${url}/details/123`);
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
     });
   });
 });

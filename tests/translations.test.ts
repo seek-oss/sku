@@ -33,22 +33,25 @@ describe('translations', () => {
   });
 
   it('should render en', async ({ expect }) => {
-    const app = await getAppSnapshot(`${baseUrl}/en`, expect);
+    const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
     expect(app).toMatchSnapshot();
   });
 
   it('should render fr', async ({ expect }) => {
-    const app = await getAppSnapshot(`${baseUrl}/fr`);
+    const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
   it('should render en-PSEUDO post-hydration', async ({ expect }) => {
-    const app = await getAppSnapshot(`${baseUrl}/en?pseudo=true`);
+    const app = await getAppSnapshot({
+      expect,
+      url: `${baseUrl}/en?pseudo=true`,
+    });
     expect(app).toMatchSnapshot();
   });
 
   it('should support query parameters', async ({ expect }) => {
-    const app = await getAppSnapshot(`${baseUrl}/en?a=1`);
+    const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
     expect(app).toMatchSnapshot();
   });
 });

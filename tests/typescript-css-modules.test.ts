@@ -52,7 +52,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const app = await getAppSnapshot(url);
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
 
@@ -86,7 +86,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const app = await getAppSnapshot(backendUrl);
+      const app = await getAppSnapshot({ url: backendUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
@@ -110,7 +110,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });

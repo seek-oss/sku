@@ -22,6 +22,8 @@ const runESLint = async ({
     configPath: skuContext.configPath,
   });
 
+  console.log('eslintConfigSku', eslintConfigSku);
+
   const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
     baseConfig: eslintConfigSku,

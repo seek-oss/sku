@@ -1,7 +1,6 @@
 import { Writable } from 'node:stream';
 
 import debug from 'debug';
-import { renderToPipeableStream } from 'react-dom/server';
 import type { ReactNode } from 'react';
 
 const RENDER_TIMEOUT_MS = 5000;
@@ -13,7 +12,10 @@ let hasWarned = false;
  * Will await all Suspense boundaries before resolving the promise.
  * @returns Promise that resolves with the rendered HTML string.
  */
-export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
+export async function renderToStringAsync(
+  reactNode: ReactNode,
+): Promise<string> {
+  const { renderToPipeableStream } = await import('react-dom/server');
   if (!hasWarned) {
     console.log(
       "Warning: The use of `renderApp`'s `renderToStringAsync` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",

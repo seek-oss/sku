@@ -4,11 +4,10 @@ import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
+  getPort,
 } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
-
-import skuConfig from '@sku-fixtures/braid-design-system/sku.config.mjs';
 
 import { createRequire } from 'node:module';
 
@@ -19,19 +18,21 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'dist');
 
-function getLocalUrl(site) {
+function getLocalUrl(site, port) {
   const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
 
-  return `http://${host}:${skuConfig.port}`;
+  return `http://${host}:${port}`;
 }
 
-describe('braid-design-system', () => {
-  describe('start', () => {
+describe.sequential('braid-design-system', () => {
+  describe('start', async () => {
     let server;
+
+    const port = await getPort();
 
     beforeAll(async () => {
       server = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(getLocalUrl('seekAnz'));
+      await waitForUrls(getLocalUrl('seekAnz', port));
     }, 230000);
 
     afterAll(async () => {
@@ -40,7 +41,7 @@ describe('braid-design-system', () => {
 
     it('should return development seekAnz site', async ({ expect }) => {
       const snapshot = await getAppSnapshot({
-        url: getLocalUrl('seekAnz'),
+        url: getLocalUrl('seekAnz', port),
         expect,
       });
       expect(snapshot).toMatchSnapshot();
@@ -48,20 +49,23 @@ describe('braid-design-system', () => {
 
     it('should return development jobStreet site', async ({ expect }) => {
       const snapshot = await getAppSnapshot({
-        url: getLocalUrl('jobStreet'),
+        url: getLocalUrl('jobStreet', port),
         expect,
       });
       expect(snapshot).toMatchSnapshot();
     });
   });
 
-  describe('build', () => {
+  describe('build', async () => {
     let process;
+
+    const port = await getPort();
+    const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(getLocalUrl('seekAnz'));
+      process = await runSkuScriptInDir('serve', appDir, args);
+      await waitForUrls(getLocalUrl('seekAnz', port));
     }, 230000);
 
     afterAll(async () => {
@@ -70,14 +74,17 @@ describe('braid-design-system', () => {
 
     it('should return built jobStreet site', async ({ expect }) => {
       const app = await getAppSnapshot({
-        url: getLocalUrl('jobStreet'),
+        url: getLocalUrl('jobStreet', port),
         expect,
       });
       expect(app).toMatchSnapshot();
     });
 
     it('should return built seekAnz site', async ({ expect }) => {
-      const app = await getAppSnapshot({ url: getLocalUrl('seekAnz'), expect });
+      const app = await getAppSnapshot({
+        url: getLocalUrl('seekAnz', port),
+        expect,
+      });
       expect(app).toMatchSnapshot();
     });
 

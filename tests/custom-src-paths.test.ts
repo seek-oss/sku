@@ -2,13 +2,13 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
+  getPort,
   runSkuScriptInDir,
   waitForUrls,
 } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
-import skuConfigImport from '@sku-fixtures/custom-src-paths/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
@@ -19,18 +19,18 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
 
-// TODO: fix this casting.
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
-
 const targetDirectory = `${appDir}/dist`;
-const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
-  describe('start', () => {
+  describe('start', async () => {
     let process: ChildProcess;
 
+    const port = await getPort();
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
+
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
+      process = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(url);
     });
 
@@ -44,12 +44,16 @@ describe('custom-src-paths', () => {
     });
   });
 
-  describe('build', () => {
+  describe('build', async () => {
     let process: ChildProcess;
+
+    const port = await getPort();
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      process = await runSkuScriptInDir('serve', appDir, args);
       await waitForUrls(url);
     });
 

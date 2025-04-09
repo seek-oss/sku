@@ -9,6 +9,7 @@ import {
   runSkuScriptInDir,
   startAssetServer,
   gracefulSpawn,
+  getPort,
 } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
@@ -31,17 +32,19 @@ const skuSsrConfig =
 const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
-const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
-describe('typescript-css-modules', () => {
-  describe('build', () => {
+describe.sequential('typescript-css-modules', () => {
+  describe('build', async () => {
     assert(skuConfig.port, 'sku config has port');
-    const url = `http://localhost:${skuConfig.port}`;
+
+    const port = await getPort();
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
     let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      process = await runSkuScriptInDir('serve', appDir, args);
       await waitForUrls(url);
     });
 
@@ -62,9 +65,12 @@ describe('typescript-css-modules', () => {
     });
   });
 
-  describe('build-ssr', () => {
+  describe('build-ssr', async () => {
     let server: ChildProcess;
     let closeAssetServer: () => void;
+
+    const assetServerPort = 4003;
+    const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, [
@@ -74,8 +80,8 @@ describe('typescript-css-modules', () => {
         cwd: distSsrDir,
         stdio: 'inherit',
       });
-      closeAssetServer = await startAssetServer(4003, distSsrDir);
-      await waitForUrls(backendUrl, 'http://localhost:4003');
+      closeAssetServer = await startAssetServer(assetServerPort, distSsrDir);
+      await waitForUrls(backendUrl, `http://localhost:${assetServerPort}`);
     });
 
     afterAll(async () => {
@@ -96,12 +102,15 @@ describe('typescript-css-modules', () => {
     });
   });
 
-  describe('start', () => {
-    const devServerUrl = `http://localhost:8204`;
+  describe('start', async () => {
     let server: ChildProcess;
 
+    const port = await getPort();
+    const devServerUrl = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
+
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      server = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(devServerUrl);
     });
 

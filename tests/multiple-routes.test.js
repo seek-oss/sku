@@ -2,6 +2,7 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
+  getPort,
   runSkuScriptInDir,
   waitForUrls,
 } from '@sku-private/test-utils';
@@ -16,14 +17,17 @@ const appDir = path.dirname(
 );
 
 const targetDirectory = `${appDir}/dist`;
-const url = `http://localhost:8202`;
 
 describe('multiple-routes', () => {
-  describe('start', () => {
+  describe('start', async () => {
+    const port = await getPort();
+
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
     let process;
 
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
+      process = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(url);
     });
 
@@ -52,12 +56,16 @@ describe('multiple-routes', () => {
     });
   });
 
-  describe('build and serve', () => {
+  describe('build and serve', async () => {
     let process;
+    const port = await getPort();
+
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      process = await runSkuScriptInDir('serve', appDir, args);
       await waitForUrls(url);
     });
 

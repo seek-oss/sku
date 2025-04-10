@@ -115,7 +115,7 @@ describe.sequential('typescript-css-modules', () => {
     });
 
     afterAll(async () => {
-      await server.kill();
+      await server?.kill();
     });
 
     it('should start a development server', async ({ expect }) => {

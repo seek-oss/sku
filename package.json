@@ -14,7 +14,7 @@
     "lint:tsc:sku": "pnpm --filter 'sku' lint:tsc",
     "build": "pnpm --filter 'sku' build",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
-    "vitest": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run --fileParallelism=false",
+    "vitest": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run --fileParallelism=true",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' OPEN_TAB=false jest --verbose",
     "test:sku-init": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' OPEN_TAB=false jest --verbose --config=jest.config.sku-init.js",
     "test:update": "pnpm run test -u && pnpm --filter @sku-fixtures/braid-design-system exec sku test -u",

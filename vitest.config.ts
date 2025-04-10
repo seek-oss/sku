@@ -6,7 +6,8 @@ export default defineConfig({
   test: {
     environment: 'puppeteer',
     setupFiles: ['./vite-test-utils/vitest-setup.ts'],
-    globalSetup: 'vitest-environment-puppeteer/global-init',
+    globalSetup:
+      'node_modules/vitest-environment-puppeteer/dist/global-init.js',
     hookTimeout: 10000,
     testTimeout: 10000,
     exclude: [

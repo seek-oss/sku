@@ -29,12 +29,10 @@ describe('braid-design-system', () => {
     let server;
 
     const port = await getPort();
+    const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir, [
-        '--strict-port',
-        `--port=${port}`,
-      ]);
+      server = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(getLocalUrl('seekAnz', port));
     }, 20000);
 

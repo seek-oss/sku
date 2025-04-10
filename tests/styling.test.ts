@@ -115,6 +115,7 @@ describe('styling', () => {
     }, 200000);
 
     afterAll(async () => {
+      await storyPage?.close();
       await server.kill();
     });
 

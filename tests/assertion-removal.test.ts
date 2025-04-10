@@ -46,6 +46,7 @@ describe('assertion-removal', () => {
       const appPage = await browser.newPage();
       const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
       const sourceHtml = await response?.text();
+      await appPage.close();
       expect(sourceHtml).toContain(
         'It rendered without throwing an assertion error',
       );

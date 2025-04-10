@@ -49,6 +49,8 @@ export const getAppSnapshot = async ({
   const sourceHtml = sanitizeHtml((await response?.text()) || '');
   const clientRenderContent = sanitizeHtml(await appPage.content());
 
+  appPage.close();
+
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);
 

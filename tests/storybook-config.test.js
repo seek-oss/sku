@@ -47,6 +47,7 @@ describe('storybook-config', () => {
     }, 100000);
 
     afterAll(async () => {
+      await storyPage?.close();
       await server.kill();
     });
 
@@ -89,31 +90,37 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async ({ expect }) => {
-      const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
-      const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
-      const docsPage = await getStoryPage(docsIframeUrl);
-      await waitForUrls(docsIframeUrl);
+    describe('Docs Page', () => {
+      let docsPage;
+      afterEach(async () => {
+        await docsPage?.close();
+      });
+      it('should render a ".mdx" file', async ({ expect }) => {
+        const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
+        const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
+        docsPage = await getStoryPage(docsIframeUrl);
+        await waitForUrls(docsIframeUrl);
 
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test',
-        );
+        {
+          const { text, fontSize } = await getTextContentFromFrameOrPage(
+            docsPage,
+            '#docs-test',
+          );
 
-        expect(text).toEqual('Docs Test');
-        expect(fontSize).toEqual('32px');
-      }
+          expect(text).toEqual('Docs Test');
+          expect(fontSize).toEqual('32px');
+        }
 
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test + p',
-        );
+        {
+          const { text, fontSize } = await getTextContentFromFrameOrPage(
+            docsPage,
+            '#docs-test + p',
+          );
 
-        expect(text).toEqual('I am a test document.');
-        expect(fontSize).toEqual('14px');
-      }
+          expect(text).toEqual('I am a test document.');
+          expect(fontSize).toEqual('14px');
+        }
+      });
     });
   });
 
@@ -144,6 +151,7 @@ describe('storybook-config', () => {
     }, 200000);
 
     afterAll(() => {
+      storyPage?.close();
       closeStorybookServer();
     });
 
@@ -200,6 +208,8 @@ describe('storybook-config', () => {
           docsPage,
           '#docs-test + p',
         );
+
+        await docsPage.close();
 
         expect(text).toEqual('I am a test document.');
         expect(fontSize).toEqual('14px');

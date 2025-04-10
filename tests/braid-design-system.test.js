@@ -24,16 +24,19 @@ function getLocalUrl(site, port) {
   return `http://${host}:${port}`;
 }
 
-describe.sequential('braid-design-system', () => {
+describe('braid-design-system', () => {
   describe('start', async () => {
     let server;
 
     const port = await getPort();
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      server = await runSkuScriptInDir('start', appDir, [
+        '--strict-port',
+        `--port=${port}`,
+      ]);
       await waitForUrls(getLocalUrl('seekAnz', port));
-    }, 230000);
+    }, 20000);
 
     afterAll(async () => {
       await server.kill();

@@ -34,7 +34,7 @@ describe('braid-design-system', () => {
     beforeAll(async () => {
       server = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(getLocalUrl('seekAnz', port));
-    }, 20000);
+    });
 
     afterAll(async () => {
       await server.kill();

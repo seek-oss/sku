@@ -43,13 +43,11 @@ export const getAppSnapshot = async ({
     }
   });
 
-  console.log(`Visiting ${url}`);
-
   const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
   const sourceHtml = sanitizeHtml((await response?.text()) || '');
   const clientRenderContent = sanitizeHtml(await appPage.content());
 
-  appPage.close();
+  await appPage.close();
 
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);

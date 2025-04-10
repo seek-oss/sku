@@ -47,7 +47,7 @@ describe('configure', () => {
     beforeAll(async () => {
       await makeDir(appFolder);
       await makeDir(path.join(appFolder, './src'));
-      await copyToApp('src/App.js', appFolder);
+      await copyToApp('src/App.tsx', appFolder);
       await copyToApp('package.json', appFolder);
       await runSkuScriptInDir('configure', appFolder);
     });

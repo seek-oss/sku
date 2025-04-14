@@ -86,6 +86,9 @@ importers:
       vitest-environment-puppeteer:
         specifier: ^11.0.3
         version: 11.0.3(debug@4.4.0)(typescript@5.8.2)
+      vitest-puppeteer:
+        specifier: ^11.0.3
+        version: 11.0.3(debug@4.4.0)(puppeteer@24.6.0(typescript@5.8.2))(typescript@5.8.2)
 
   docs:
     devDependencies:
@@ -194,6 +197,10 @@ importers:
         version: link:../../packages/sku
 
   fixtures/jest-test:
+    dependencies:
+      jest:
+        specifier: ^29.0.0
+        version: 29.7.0(@types/node@18.19.80)(babel-plugin-macros@3.1.0)
     devDependencies:
       sku:
         specifier: workspace:*
@@ -4847,6 +4854,10 @@ packages:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
 
+  expect-puppeteer@11.0.0:
+    resolution: {integrity: sha512-fgxsbOD+HqwOCMitYqEDzRoJM2fxKbCKPYfUoukK+qdZm/nC+cTOI74Au2MfmMZmF/5CgQGO4+1Ywq2GgD8zCQ==}
+    engines: {node: '>=18'}
+
   expect-type@1.2.1:
     resolution: {integrity: sha512-/kP8CAwxzLVEeFrMm4kMmy4CCDlpipyA7MYLVrdJIkV0fYF0UaigQHRsxHiuY/GEea+bh4KSv3TIlgr+2UL6bw==}
     engines: {node: '>=12.0.0'}
@@ -8545,6 +8556,12 @@ packages:
   vitest-environment-puppeteer@11.0.3:
     resolution: {integrity: sha512-Z74YeB1fSk1cF3NSLsK7Yr2q60wvtxHPTv7xj4yhZ4LTe5CZHRC6h6Rbf7gZKjXz6Z9bsM9WVbA3UyxAcPaYDw==}
     engines: {node: '>=18'}
+
+  vitest-puppeteer@11.0.3:
+    resolution: {integrity: sha512-TJCcrFX7bZ0iFdDjgP1goqK24yAl293pPTbYpvU2fnOsTiR19mqp8TI7wdPKyGNjDnnOfjb4fP+8GVEIx31RWQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      puppeteer: '>=19'
 
   vitest@3.1.1:
     resolution: {integrity: sha512-kiZc/IYmKICeBAZr9DQ5rT7/6bD9G7uqQEki4fxazi1jdVl2mWGzedtBs5s6llz59yQhVb7FFY2MbHzHCnT79Q==}
@@ -13522,6 +13539,8 @@ snapshots:
     dependencies:
       homedir-polyfill: 1.0.3
 
+  expect-puppeteer@11.0.0: {}
+
   expect-type@1.2.1: {}
 
   expect@29.7.0:
@@ -17750,6 +17769,15 @@ snapshots:
       cosmiconfig: 9.0.0(typescript@5.8.2)
       deepmerge: 4.3.1
       vitest-dev-server: 11.0.3(debug@4.4.0)
+    transitivePeerDependencies:
+      - debug
+      - typescript
+
+  vitest-puppeteer@11.0.3(debug@4.4.0)(puppeteer@24.6.0(typescript@5.8.2))(typescript@5.8.2):
+    dependencies:
+      expect-puppeteer: 11.0.0
+      puppeteer: 24.6.0(typescript@5.8.2)
+      vitest-environment-puppeteer: 11.0.3(debug@4.4.0)(typescript@5.8.2)
     transitivePeerDependencies:
       - debug
       - typescript

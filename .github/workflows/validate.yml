@@ -74,4 +74,4 @@ jobs:
         run: pnpm lint
 
       - name: Test
-        run: aa-exec --profile=chrome pnpm run vitest
+        run: aa-exec --profile=chrome pnpm run test

@@ -73,16 +73,5 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-#      - name: Set Jest Cache Directory
-#        id: set-jest-cache
-#        run: echo "JEST_CACHE_DIR=$(pnpm jest --showConfig | jq '.configs[0].cacheDirectory' | tr -d '"')" >> $GITHUB_OUTPUT
-#
-#      - name: Cache Jest cache
-#        uses: actions/cache@v4
-#        with:
-#          path: ${{ steps.set-jest-cache.outputs.JEST_CACHE_DIR }}
-#          key: jest-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
-#          restore-keys: jest-${{ runner.os }}-
-
       - name: Test
         run: aa-exec --profile=chrome pnpm run vitest

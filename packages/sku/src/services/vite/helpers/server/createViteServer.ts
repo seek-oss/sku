@@ -8,16 +8,12 @@ import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import { skuViteHttpsDevServer } from '../../plugins/skuViteHttpsDevServer.js';
 
-export const createViteServer = async (
-  skuContext: SkuContext,
-  convertLoadable?: boolean,
-) => {
+export const createViteServer = async (skuContext: SkuContext) => {
   const base = process.env.BASE || '/';
 
   return await createServer({
     ...createViteConfig({
       skuContext,
-      convertLoadable,
       plugins: [
         skuViteMiddlewarePlugin(skuContext),
         skuViteStartTelemetryPlugin({

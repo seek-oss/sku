@@ -579,7 +579,7 @@ importers:
         specifier: ^7.26.9
         version: 7.26.10
       '@babel/parser':
-        specifier: 7.26.10
+        specifier: ^7.26.10
         version: 7.26.10
       '@babel/plugin-transform-react-constant-elements':
         specifier: ^7.21.3

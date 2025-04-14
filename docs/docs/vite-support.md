@@ -41,7 +41,7 @@ Before starting with `vite` rendering make sure you've read the [static renderin
 
 Code splitting is possible with the new `sku/vite/loadable` entrypoint.
 
-The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https://react.dev/reference/react/Suspense) component for the loading of a fallback state.
+The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https://react.dev/reference/react/Suspense) component for the loading of a fallback state. You can wrap the `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you.
 
 **Example of using `sku/vite/loadable`**
 

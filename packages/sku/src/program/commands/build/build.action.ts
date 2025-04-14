@@ -6,14 +6,12 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 const buildAction = async ({
   stats,
   skuContext,
-  convertLoadable,
 }: {
   stats: StatsChoices;
   skuContext: SkuContext;
-  convertLoadable: boolean;
 }) => {
   if (skuContext.bundler === 'vite') {
-    await viteBuildHandler({ skuContext, convertLoadable });
+    await viteBuildHandler({ skuContext });
   } else {
     await webpackBuildHandler({ stats, skuContext });
   }

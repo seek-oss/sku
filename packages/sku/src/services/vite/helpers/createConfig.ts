@@ -18,12 +18,10 @@ export const createViteConfig = ({
   skuContext,
   configType = 'client',
   plugins = [],
-  convertLoadable,
 }: {
   skuContext: SkuContext;
   configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
-  convertLoadable?: boolean;
 }) => {
   const input = {
     client: clientEntry,
@@ -40,7 +38,7 @@ export const createViteConfig = ({
       react(),
       vanillaExtractPlugin(),
       skuVitePreloadPlugin({
-        convertFromWebpack: convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
+        convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
       ...plugins,
     ],

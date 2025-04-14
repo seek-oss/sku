@@ -1,12 +1,11 @@
-import { renderToString } from 'react-dom/server';
 import html from 'dedent';
 import { StaticRouter } from 'react-router-dom/server';
 
 import App from './App';
 
 export default {
-  renderApp: ({ SkuProvider, route, site }) => {
-    return renderToString(
+  renderApp: async ({ SkuProvider, route, site, renderToStringAsync }) => {
+    return await renderToStringAsync(
       <SkuProvider>
         <StaticRouter location={route} context={{}}>
           <App site={site} />

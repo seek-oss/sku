@@ -8,6 +8,9 @@ export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
   const skuContext = getSkuContext({
     configPath: rootCommand.opts()?.config,
   });
+  // Set extra options:
+  skuContext.convertLoadable = rootCommand.opts()?.convertLoadable;
+
   initializeTelemetry(skuContext);
   actionCommand.setOptionValue('skuContext', skuContext);
 

@@ -235,4 +235,9 @@ export const createSkuContext = ({ configPath }: { configPath?: string }) => {
   };
 };
 
-export type SkuContext = ReturnType<typeof createSkuContext>;
+type ExtraSkuContextOptions = {
+  convertLoadable?: boolean;
+};
+
+export type SkuContext = ReturnType<typeof createSkuContext> &
+  ExtraSkuContextOptions;

@@ -4,11 +4,11 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import { createViteServer } from './helpers/server/createViteServer.js';
 import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import { createViteConfig } from './helpers/createConfig.js';
-import { prerenderRoutes } from './helpers/prerenderRoutes.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
+import { startPrerenderWorkers } from '@/services/vite/helpers/prerenderRoutesWorker.js';
 
 export const viteService = {
   buildSsr: async (skuContext: SkuContext) => {
@@ -19,7 +19,7 @@ export const viteService = {
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
-      await prerenderRoutes(skuContext);
+      await startPrerenderWorkers(skuContext);
     }
     await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);

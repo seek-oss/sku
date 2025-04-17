@@ -1,6 +1,11 @@
 {
   "name": "@sku-fixtures/sku-with-https",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "sku start",
+    "start:vite": "sku start --experimental-bundler --config sku.config.vite.mjs"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

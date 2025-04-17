@@ -6,7 +6,10 @@ import {
 export default {
   port: 9843,
   httpsDevServer: true,
-  devServerMiddleware: './dev-middleware.js',
+  clientEntry: './src/client.jsx',
+  renderEntry: './src/render.jsx',
+  serverEntry: './src/server.jsx',
+  devServerMiddleware: './dev-middleware.cjs',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => {

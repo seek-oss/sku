@@ -9,6 +9,7 @@ import {
   getRouteWithLanguage,
 } from '@/utils/language-utils.js';
 import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
+import createCSPHandler from '@/services/webpack/entry/csp.js';
 
 const log = debug('sku:middleware:vite');
 
@@ -19,10 +20,24 @@ const clientEntry = require.resolve('../entries/vite-client.js');
 
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
-  configureServer(server) {
+  async configureServer(server) {
     if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
       metricsMeasurers.initialPageLoad.mark();
     }
+    if (skuContext.useDevServerMiddleware) {
+      log(
+        'Using dev server middleware at %s',
+        skuContext.paths.devServerMiddleware,
+      );
+      const devServerMiddleware = (
+        await import(skuContext.paths.devServerMiddleware)
+      ).default;
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(server);
+        log('Dev server middleware loaded');
+      }
+    }
+
     log('Configuring server middleware');
     server.middlewares.use(async (req, res, next) => {
       log('Handling request:', req.url);
@@ -31,7 +46,10 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         next();
         return;
       }
-      const host = req.headers.host;
+
+      // `host` header is available in vite http requests. `:authority` pseudo-header is available in vite https requests. `:authority` is used in HTTP/2.
+      // @see https://stackoverflow.com/questions/70502726/what-is-the-purpose-of-http2-pseudo-headers-authority-method
+      const host = req.headers.host ?? (req.headers[':authority'] as string);
       const hostname = host?.split(':')[0];
 
       if (!hostname) {
@@ -68,7 +86,7 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         language,
         route: getRouteWithLanguage(matchingRoute.route, language),
         routeName: matchingRoute.name || '',
-        site: site.name,
+        site: site?.name || '',
         clientEntry,
       });
 
@@ -76,6 +94,21 @@ export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
         req.url || '/',
         renderedHtml,
       );
+
+      if (skuContext.cspEnabled) {
+        const cspHandler = createCSPHandler({
+          extraHosts: [
+            skuContext.paths.publicPath,
+            ...skuContext.cspExtraScriptSrcHosts,
+          ],
+          isDevelopment: process.env.NODE_ENV === 'development',
+        });
+
+        const cspHtml = cspHandler.handleHtml(transformedHtml);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(cspHtml);
+        return;
+      }
 
       res.writeHead(200, { 'Content-Type': 'text/html' });
       res.end(transformedHtml);

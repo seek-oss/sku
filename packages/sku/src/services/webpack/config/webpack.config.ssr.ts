@@ -15,7 +15,7 @@ import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '@/utils/cwd.js';
+import { cwd, requireFromCwd } from '@/utils/cwd.js';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
@@ -80,6 +80,8 @@ const makeWebpackConfig = ({
   // is not supported for hot reloading. It can also cause
   // non-deterministic snapshots in jest tests.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
+
+  const { type } = requireFromCwd('./package.json');
 
   return [
     {
@@ -253,7 +255,7 @@ const makeWebpackConfig = ({
       output: {
         path: paths.target,
         publicPath,
-        filename: 'server.js',
+        filename: `server.${type === 'module' ? 'c' : ''}js`,
         library: { name: 'server', type: 'var' },
       },
       cache: getCacheSettings({ isDevServer, paths }),

@@ -1,5 +1,254 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sku-with-https bundler: vite start should start a development server 1`] = `
+SCRIPTS: [
+  "/@id/__x00__/index.html?html-proxy&index=0.js",
+  "/@id/__x00__/index.html?html-proxy&index=1.js",
+  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
+]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';"
+    >
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+    >
+    </script>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script
+      type="module"
+      src="scripts[0]"
+    >
+    </script>
+    <script
+      type="module"
+      src="scripts[1]"
+    >
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="styles_root__2vdre50">
+        <div class="styles_nested__2vdre51">
+          Initial
+        </div>
+        <img src="/src/logo.png">
+      </div>
+    </div>
+    <script
+      type="module"
+      src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -26,20 +26,31 @@
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/sku-with-https/src/styles.css.js.vanilla.css"
++    >
++      .styles_root__2vdre50 {
++  display: flex;
++}
++.styles_root__2vdre50 .styles_nested__2vdre51 {
++  font-size: 32px;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <div class="styles_root__2vdre50">
+         <div class="styles_nested__2vdre51">
+-          Initial
++          Client
+         </div>
+         <img src="/src/logo.png">
+       </div>
+`;
+
+exports[`sku-with-https bundler: vite start should support the supplied middleware 1`] = `
+"OK"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,13 @@
+-OK
+\\ No newline at end of file
++<html>
++  <head>
++    <meta
++      name="color-scheme"
++      content="light dark"
++    >
++  </head>
++  <body>
++    <pre style="word-wrap: break-word; white-space: pre-wrap;">
++      OK
++    </pre>
++  </body>
++</html>
+\\ No newline at end of file
+`;
+
+exports[`sku-with-https bundler: webpack start should start a development server 1`] = `
+SCRIPTS: [
+  "/runtime.js",
+  "/2.js",
+  "/main.js",
+]
+CSS: [
+  "/main.css",
+]
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
+    >
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="styles[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="scripts[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="styles_root__2vdre50">
+        <div class="styles_nested__2vdre51">
+          Initial
+        </div>
+        <img src="/a85d2645cc4d80a20b5b.png">
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="scripts[2]"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -41,7 +41,7 @@
+     <div id="app">
+       <div class="styles_root__2vdre50">
+         <div class="styles_nested__2vdre51">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+`;
+
+exports[`sku-with-https bundler: webpack start should support the supplied middleware 1`] = `
+"OK"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,7 @@
+-OK
+\\ No newline at end of file
++<html>
++  <head>
++  </head>
++  <body>
++    OK
++  </body>
++</html>
+\\ No newline at end of file
+`;
+
 exports[`sku-with-https serve should start a development server 1`] = `
 SCRIPTS: [
   "/runtime.js",
@@ -105,129 +354,6 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https serve should support the supplied middleware 1`] = `
-"OK"
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -1,1 +1,7 @@
--OK
-\\ No newline at end of file
-+<html>
-+  <head>
-+  </head>
-+  <body>
-+    OK
-+  </body>
-+</html>
-\\ No newline at end of file
-`;
-
-exports[`sku-with-https start should start a development server 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/2.js",
-  "/main.js",
-]
-CSS: [
-  "/main.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
-    >
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="stylesheet"
-      href="styles[0]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[0]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[1]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[2]"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div class="styles_root__2vdre50">
-        <div class="styles_nested__2vdre51">
-          Initial
-        </div>
-        <img src="/a85d2645cc4d80a20b5b.png">
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[0]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[1]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[2]"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -41,7 +41,7 @@
-     <div id="app">
-       <div class="styles_root__2vdre50">
-         <div class="styles_nested__2vdre51">
--          Initial
-+          Client
-         </div>
-         <img src="/a85d2645cc4d80a20b5b.png">
-       </div>
-`;
-
-exports[`sku-with-https start should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================

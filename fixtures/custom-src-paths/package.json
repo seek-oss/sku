@@ -1,6 +1,7 @@
 {
   "name": "@sku-fixtures/custom-src-paths",
   "private": true,
+  "type": "module",
   "dependencies": {
     "dedent": "^1.5.1",
     "react": "^18.2.0",

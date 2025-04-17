@@ -58,7 +58,7 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir);
         await waitForUrls(getLocalUrl('seekAnz'));
       }, 230000);
 

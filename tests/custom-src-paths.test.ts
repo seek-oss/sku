@@ -6,7 +6,7 @@ import {
   getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfigImport from '@sku-fixtures/custom-src-paths/sku.config.ts';
+import skuConfig from '@sku-fixtures/custom-src-paths/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
@@ -17,52 +17,55 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
 
-// TODO: fix this casting.
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
-
 const targetDirectory = `${appDir}/dist`;
 const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
-  describe('start', () => {
-    let process: ChildProcess;
+  describe.each(['vite', 'webpack'])('bundler %s', (bundler) => {
+    const args =
+      bundler === 'vite'
+        ? ['--experimental-bundler', '--config', 'sku.config.vite.ts']
+        : [];
+    describe('start', () => {
+      let process: ChildProcess;
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(url);
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url);
+      });
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      it('should start a development server', async () => {
+        const snapshot = await getAppSnapshot(url);
+        expect(snapshot).toMatchSnapshot();
+      });
     });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+    describe('build', () => {
+      let process: ChildProcess;
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
-    });
-  });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir);
+        await waitForUrls(url);
+      });
 
-  describe('build', () => {
-    let process: ChildProcess;
+      afterAll(async () => {
+        await process.kill();
+      });
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(url);
-    });
+      it('should generate the expected files', async () => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
 
-    afterAll(async () => {
-      await process.kill();
-    });
-
-    it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
-    });
-
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(url);
-      expect(app).toMatchSnapshot();
+      it('should create valid app', async () => {
+        const app = await getAppSnapshot(url);
+        expect(app).toMatchSnapshot();
+      });
     });
   });
 

@@ -3,7 +3,7 @@
 exports[`suspense bundler vite build and serve should generate the expected files 1`] = `
 {
   "production/au/index.html": SCRIPTS: [
-    "/vite-client.js",
+    "/static/suspense/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -56,7 +56,7 @@ SOURCE HTML: <!DOCTYPE html>
 
 exports[`suspense bundler vite build and serve should return home page 1`] = `
 SCRIPTS: [
-  "/vite-client.js",
+  "/static/suspense/vite-client.js",
 ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>

@@ -1,3 +1,4 @@
+import { describe, it } from 'vitest';
 /**
  * @jest-environment node
  */
@@ -7,7 +8,9 @@ import { SkuConfigUpdater } from './SkuConfigUpdater.js';
 
 describe('updateSkuConfig', () => {
   describe('SkuConfigUpdater', () => {
-    it('Should update a TypeScript sku config with a literal ESM default export', async () => {
+    it('Should update a TypeScript sku config with a literal ESM default export', async ({
+      expect,
+    }) => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
@@ -44,7 +47,9 @@ describe('updateSkuConfig', () => {
       await fixture.rm();
     });
 
-    it('Should update a TypeScript sku config with a literal ESM default export and "satisfies"', async () => {
+    it('Should update a TypeScript sku config with a literal ESM default export and "satisfies"', async ({
+      expect,
+    }) => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
@@ -85,7 +90,9 @@ describe('updateSkuConfig', () => {
       await fixture.rm();
     });
 
-    it('Should update a TypeScript sku config with a non-literal ESM default export', async () => {
+    it('Should update a TypeScript sku config with a non-literal ESM default export', async ({
+      expect,
+    }) => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
@@ -130,7 +137,9 @@ describe('updateSkuConfig', () => {
       await fixture.rm();
     });
 
-    it('Should update a JavaScript sku config with a literal CJS default export', async () => {
+    it('Should update a JavaScript sku config with a literal CJS default export', async ({
+      expect,
+    }) => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
@@ -167,7 +176,9 @@ describe('updateSkuConfig', () => {
       await fixture.rm();
     });
 
-    it('Should update a JavaScript sku config with a non-literal CJS default export', async () => {
+    it('Should update a JavaScript sku config with a non-literal CJS default export', async ({
+      expect,
+    }) => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({

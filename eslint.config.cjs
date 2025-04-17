@@ -1,7 +1,6 @@
 const seek = require('eslint-config-seek');
 const jsdoc = require('eslint-plugin-jsdoc');
 const unicorn = require('eslint-plugin-unicorn');
-const globals = require('globals');
 
 module.exports = [
   {
@@ -115,7 +114,6 @@ module.exports = [
 
     languageOptions: {
       globals: {
-        ...globals.jest,
         browser: true,
       },
     },

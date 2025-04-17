@@ -8,7 +8,7 @@ import { cwd } from '@/utils/cwd.js';
 import { hasErrorCode } from '@/utils/error-guards.js';
 
 // @ts-expect-error
-const { default: memoize } = nanoMemoize;
+const memoize = nanoMemoize?.default || nanoMemoize;
 
 const log = debug('sku:resolvePackage');
 

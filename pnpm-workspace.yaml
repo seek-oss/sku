@@ -3,4 +3,5 @@ packages:
   - 'fixtures/*'
   - 'tests'
   - 'test-utils'
+  - 'vite-test-utils'
   - 'packages/*'

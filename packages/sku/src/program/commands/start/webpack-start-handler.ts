@@ -53,6 +53,7 @@ export const webpackStartHandler = async ({
     sites,
     hosts,
   } = skuContext;
+
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
   console.log(chalk.blue(`sku start`));
@@ -69,6 +70,7 @@ export const webpackStartHandler = async ({
   const availablePort = await allocatePort({
     port: port.client,
     host: localhost,
+    strictPort: port.strictPort,
   });
 
   const htmlRenderPlugin = createHtmlRenderPlugin({

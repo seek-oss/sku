@@ -32,6 +32,7 @@
     "@sku-fixtures/translations": "workspace:*",
     "@sku-fixtures/typescript-css-modules": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
+    "@sku-private/vitest-utils": "workspace:*",
     "@types/cross-spawn": "^6.0.3",
     "cross-spawn": "^7.0.3",
     "dedent": "^1.5.1",

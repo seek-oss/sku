@@ -1,0 +1,20 @@
+{
+  "name": "@sku-private/vitest-utils",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/diff": "^7.0.1",
+    "@types/diffable-html": "^5.0.2",
+    "diff": "^7.0.0",
+    "diffable-html": "^5.0.0"
+  }
+}

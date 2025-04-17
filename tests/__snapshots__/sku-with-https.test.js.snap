@@ -1,13 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sku-with-https bundler: vite start should start a development server 1`] = `
-SCRIPTS: [
-  "/@id/__x00__/index.html?html-proxy&index=0.js",
-  "/@id/__x00__/index.html?html-proxy&index=1.js",
-  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`sku-with-https > bundler: vite > start > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -35,12 +29,12 @@ window.$RefreshSig$ = () => (type) => type;
     >
     <script
       type="module"
-      src="scripts[0]"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
     >
     </script>
     <script
       type="module"
-      src="scripts[1]"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
     >
     </script>
   </head>
@@ -55,11 +49,11 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="scripts[2]"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -101,7 +95,7 @@ POST HYDRATE DIFFS:
        </div>
 `;
 
-exports[`sku-with-https bundler: vite start should support the supplied middleware 1`] = `
+exports[`sku-with-https > bundler: vite > start > should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================
@@ -126,16 +120,8 @@ POST HYDRATE DIFFS:
 \\ No newline at end of file
 `;
 
-exports[`sku-with-https bundler: webpack start should start a development server 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/2.js",
-  "/main.js",
-]
-CSS: [
-  "/main.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`sku-with-https > bundler: webpack > start > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -153,25 +139,25 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="/main.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
   </head>
   <body>
@@ -198,23 +184,23 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -230,7 +216,7 @@ POST HYDRATE DIFFS:
        </div>
 `;
 
-exports[`sku-with-https bundler: webpack start should support the supplied middleware 1`] = `
+exports[`sku-with-https > bundler: webpack > start > should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================
@@ -249,16 +235,8 @@ POST HYDRATE DIFFS:
 \\ No newline at end of file
 `;
 
-exports[`sku-with-https serve should start a development server 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/2.js",
-  "/main.js",
-]
-CSS: [
-  "/main-20b517520995ff660440.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`sku-with-https > serve > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -276,25 +254,25 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="/main-20b517520995ff660440.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
   </head>
   <body>
@@ -321,23 +299,23 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -353,7 +331,7 @@ POST HYDRATE DIFFS:
        </div>
 `;
 
-exports[`sku-with-https serve should support the supplied middleware 1`] = `
+exports[`sku-with-https > serve > should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================
@@ -372,7 +350,7 @@ POST HYDRATE DIFFS:
 \\ No newline at end of file
 `;
 
-exports[`sku-with-https start-ssr should support the supplied middleware 1`] = `
+exports[`sku-with-https > start-ssr > should support the supplied middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================

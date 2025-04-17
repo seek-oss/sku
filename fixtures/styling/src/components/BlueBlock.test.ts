@@ -1,4 +1,5 @@
 import BlueBlock from './BlueBlock';
+
 import * as styles from './BlueBlock.css';
 
 test('Vanilla Extract styles', () => {

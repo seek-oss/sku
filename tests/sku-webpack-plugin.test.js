@@ -1,7 +1,8 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import {
   dirContentsToObject,
-  getAppSnapshot,
   waitForUrls,
   startAssetServer,
 } from '@sku-private/test-utils';
@@ -39,8 +40,11 @@ describe('sku-webpack-plugin', () => {
       await process.kill();
     });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+    it('should start a development server', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({
+        url: devServerUrl,
+        expect,
+      });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -68,12 +72,12 @@ describe('sku-webpack-plugin', () => {
       closeAssetServer();
     });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(devServerUrl);
+    it('should create valid app', async ({ expect }) => {
+      const app = await getAppSnapshot({ url: devServerUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });

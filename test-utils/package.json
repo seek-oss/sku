@@ -17,6 +17,7 @@
     "death": "^1.1.0",
     "diff": "^7.0.0",
     "diffable-html": "^5.0.0",
+    "get-port": "^7.1.0",
     "hostile": "^1.3.3",
     "node-dir": "^0.1.17",
     "prettier": "^3.4.1",

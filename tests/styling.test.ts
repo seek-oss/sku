@@ -1,3 +1,5 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import type { Page } from 'puppeteer';
@@ -5,7 +7,6 @@ import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
-  getAppSnapshot,
   getStoryPage,
   getTextContentFromFrameOrPage,
   gracefulSpawn,
@@ -41,12 +42,12 @@ describe('styling', () => {
       await process.kill();
     });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(devServerUrl);
+    it('should create valid app', async ({ expect }) => {
+      const app = await getAppSnapshot({ url: devServerUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
@@ -64,8 +65,8 @@ describe('styling', () => {
       await server.kill();
     });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+    it('should start a development server', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -78,7 +79,7 @@ describe('styling', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle Vanilla Extract styles in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
       expect(exitCode).toEqual(0);
     });
   });
@@ -114,10 +115,11 @@ describe('styling', () => {
     }, 200000);
 
     afterAll(async () => {
+      await storyPage?.close();
       await server.kill();
     });
 
-    it('should render external styles', async () => {
+    it('should render external styles', async ({ expect }) => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-external]',
@@ -127,7 +129,7 @@ describe('styling', () => {
       expect(fontSize).toEqual('9px');
     });
 
-    it('should render Vanilla Extract styles', async () => {
+    it('should render Vanilla Extract styles', async ({ expect }) => {
       const { fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',

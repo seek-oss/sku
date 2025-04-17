@@ -1,3 +1,4 @@
+import { describe, it } from 'vitest';
 import path from 'node:path';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
@@ -10,12 +11,12 @@ const appDir = path.dirname(
 );
 
 describe('sku-test', () => {
-  it('should run tests', async () => {
+  it('should run tests', async ({ expect }) => {
     const { child } = await runSkuScriptInDir('test', appDir);
     expect(child.exitCode).toEqual(0);
   });
 
-  it('should pass through unknown flags to jest', async () => {
+  it('should pass through unknown flags to jest', async ({ expect }) => {
     const { stdout } = await runSkuScriptInDir('test', appDir, ['--listTests']);
     const output = stdout.replaceAll(cwd(), 'sku');
 

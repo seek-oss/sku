@@ -20,17 +20,18 @@ const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
+interface SkuContextOptions {
+  configPath?: string;
+  port?: number;
+  strictPort?: boolean;
+}
 let storedSkuContext: SkuContext;
 
-export const getSkuContext = ({
-  configPath,
-}: {
-  configPath?: string;
-} = {}) => {
+export const getSkuContext = (skuContextOptions: SkuContextOptions = {}) => {
   if (storedSkuContext) {
     return storedSkuContext;
   }
-  storedSkuContext = createSkuContext({ configPath });
+  storedSkuContext = createSkuContext(skuContextOptions);
   return storedSkuContext;
 };
 
@@ -54,6 +55,7 @@ const getSkuConfig = ({
   }
 
   const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
+
   // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
   const appSkuConfig = mod?.default ?? mod;
 
@@ -66,7 +68,11 @@ const getSkuConfig = ({
 
 export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 
-export const createSkuContext = ({ configPath }: { configPath?: string }) => {
+export const createSkuContext = ({
+  configPath,
+  port: portArg,
+  strictPort,
+}: SkuContextOptions) => {
   const {
     appSkuConfig,
     appSkuConfigPath,
@@ -174,7 +180,11 @@ export const createSkuContext = ({ configPath }: { configPath?: string }) => {
   };
 
   const hosts = skuConfig.hosts!;
-  const port = { client: skuConfig.port, server: skuConfig.serverPort };
+  const port = {
+    client: portArg || skuConfig.port,
+    server: skuConfig.serverPort,
+    strictPort: strictPort || false,
+  };
   const libraryName = skuConfig.libraryName!;
   const libraryFile = skuConfig.libraryFile!;
   const isLibrary = Boolean(skuConfig.libraryEntry);

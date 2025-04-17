@@ -68,10 +68,12 @@ export const webpackStartSsrHandler = async ({
   const clientPort = await allocatePort({
     port: port.client,
     host: localhost,
+    strictPort: port.strictPort,
   });
   const serverPort = await allocatePort({
     port: port.server,
     host: localhost,
+    strictPort: port.strictPort,
   });
 
   const [clientWebpackConfig, serverWebpackConfig] = makeWebpackConfig({

@@ -1,14 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ssr translations should render en 1`] = `
-SCRIPTS: [
-  "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/5.js",
-  "http://127.0.0.1:8313/main.js",
-  "http://127.0.0.1:8313/en-translations.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr translations > should render en 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -23,28 +16,28 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="en-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="http://127.0.0.1:8313/en-translations.js"
       crossorigin="anonymous"
     >
   </head>
@@ -72,45 +65,38 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="en-translations"
-      src="scripts[3]"
+      src="http://127.0.0.1:8313/en-translations.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`ssr translations should render en-PSEUDO 1`] = `
-SCRIPTS: [
-  "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/5.js",
-  "http://127.0.0.1:8313/main.js",
-  "http://127.0.0.1:8313/en-PSEUDO-translations.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr translations > should render en-PSEUDO 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -125,28 +111,28 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="en-PSEUDO-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="http://127.0.0.1:8313/en-PSEUDO-translations.js"
       crossorigin="anonymous"
     >
   </head>
@@ -174,45 +160,38 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="en-PSEUDO-translations"
-      src="scripts[3]"
+      src="http://127.0.0.1:8313/en-PSEUDO-translations.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`ssr translations should render fr 1`] = `
-SCRIPTS: [
-  "http://127.0.0.1:8313/runtime.js",
-  "http://127.0.0.1:8313/5.js",
-  "http://127.0.0.1:8313/main.js",
-  "http://127.0.0.1:8313/fr-translations.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr translations > should render fr 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -227,28 +206,28 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="fr-translations"
       rel="preload"
       as="script"
-      href="scripts[3]"
+      href="http://127.0.0.1:8313/fr-translations.js"
       crossorigin="anonymous"
     >
   </head>
@@ -276,32 +255,32 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://127.0.0.1:8313/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://127.0.0.1:8313/5.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://127.0.0.1:8313/main.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="fr-translations"
-      src="scripts[3]"
+      src="http://127.0.0.1:8313/fr-translations.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;

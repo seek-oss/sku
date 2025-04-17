@@ -1,3 +1,5 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { rm } from 'node:fs/promises';
@@ -5,9 +7,9 @@ import {
   dirContentsToObject,
   waitForUrls,
   runSkuScriptInDir,
-  getAppSnapshot,
   startAssetServer,
   gracefulSpawn,
+  getPort,
 } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
@@ -30,17 +32,19 @@ const skuSsrConfig =
 const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
-const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
-describe('typescript-css-modules', () => {
-  describe('build', () => {
+describe.sequential('typescript-css-modules', () => {
+  describe('build', async () => {
     assert(skuConfig.port, 'sku config has port');
-    const url = `http://localhost:${skuConfig.port}`;
+
+    const port = await getPort();
+    const url = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
     let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      process = await runSkuScriptInDir('serve', appDir, args);
       await waitForUrls(url);
     });
 
@@ -50,20 +54,23 @@ describe('typescript-css-modules', () => {
       await rm(distDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(url);
+    it('should create valid app', async ({ expect }) => {
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
   });
 
-  describe('build-ssr', () => {
+  describe('build-ssr', async () => {
     let server: ChildProcess;
     let closeAssetServer: () => void;
+
+    const assetServerPort = 4003;
+    const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, [
@@ -73,8 +80,8 @@ describe('typescript-css-modules', () => {
         cwd: distSsrDir,
         stdio: 'inherit',
       });
-      closeAssetServer = await startAssetServer(4003, distSsrDir);
-      await waitForUrls(backendUrl, 'http://localhost:4003');
+      closeAssetServer = await startAssetServer(assetServerPort, distSsrDir);
+      await waitForUrls(backendUrl, `http://localhost:${assetServerPort}`);
     });
 
     afterAll(async () => {
@@ -84,32 +91,35 @@ describe('typescript-css-modules', () => {
       await rm(distSsrDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(backendUrl);
+    it('should create valid app', async ({ expect }) => {
+      const app = await getAppSnapshot({ url: backendUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
       expect(files).toMatchSnapshot();
     });
   });
 
-  describe('start', () => {
-    const devServerUrl = `http://localhost:8204`;
+  describe('start', async () => {
     let server: ChildProcess;
 
+    const port = await getPort();
+    const devServerUrl = `http://localhost:${port}`;
+    const args = ['--strict-port', `--port=${port}`];
+
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      server = await runSkuScriptInDir('start', appDir, args);
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await server.kill();
+      await server?.kill();
     });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+    it('should start a development server', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -122,7 +132,7 @@ describe('typescript-css-modules', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle Vanilla Extract styles in tests', async () => {
+    it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
       expect(exitCode).toEqual(0);
     });
   });
@@ -137,7 +147,7 @@ describe('typescript-css-modules', () => {
       exitCode = child.exitCode;
     });
 
-    it('should handle tsc and eslint', async () => {
+    it('should handle tsc and eslint', async ({ expect }) => {
       expect(exitCode).toEqual(0);
     });
   });

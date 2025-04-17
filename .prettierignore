@@ -14,6 +14,7 @@ CHANGELOG.md
 pnpm-lock.yaml
 .eslintcache
 fixtures/*/eslint.config.js
+fixtures/*/eslint.config.mjs
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
 *.hbs

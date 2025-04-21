@@ -1,10 +1,8 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import {
-  runSkuScriptInDir,
-  waitForUrls,
-  getAppSnapshot,
-} from '@sku-private/test-utils';
+import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
@@ -43,18 +41,21 @@ describe('ssr translations', () => {
     await server.kill();
   });
 
-  it('should render en', async () => {
-    const app = await getAppSnapshot(`${backendUrl}/en`);
+  it('should render en', async ({ expect }) => {
+    const app = await getAppSnapshot({ expect, url: `${backendUrl}/en` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render fr', async () => {
-    const app = await getAppSnapshot(`${backendUrl}/fr`);
+  it('should render fr', async ({ expect }) => {
+    const app = await getAppSnapshot({ expect, url: `${backendUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render en-PSEUDO', async () => {
-    const app = await getAppSnapshot(`${backendUrl}/en?pseudo=true`);
+  it('should render en-PSEUDO', async ({ expect }) => {
+    const app = await getAppSnapshot({
+      expect,
+      url: `${backendUrl}/en?pseudo=true`,
+    });
     expect(app).toMatchSnapshot();
   });
 });

@@ -4,5 +4,11 @@
   "devDependencies": {
     "sku": "workspace:*"
   },
-  "skuSkipValidatePeerDeps": true
+  "scripts": {
+    "test": "jest"
+  },
+  "skuSkipValidatePeerDeps": true,
+  "dependencies": {
+    "jest": "^29.0.0"
+  }
 }

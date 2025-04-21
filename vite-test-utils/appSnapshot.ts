@@ -1,7 +1,18 @@
-export const getAppSnapshot = async (
-  url: string,
+import type { ExpectStatic } from 'vitest';
+
+function sanitizeHtml(str: string) {
+  return str.replaceAll(process.cwd(), '{cwd}');
+}
+
+export const getAppSnapshot = async ({
+  url,
   warningFilter = () => true,
-) => {
+  expect,
+}: {
+  url: string;
+  warningFilter?: (warning: string) => boolean;
+  expect: ExpectStatic;
+}) => {
   const warnings: string[] = [];
   const errors: string[] = [];
 
@@ -32,16 +43,14 @@ export const getAppSnapshot = async (
     }
   });
 
-  const response = await appPage.goto(url, { waitUntil: 'load' });
+  const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
   const sourceHtml = sanitizeHtml((await response?.text()) || '');
   const clientRenderContent = sanitizeHtml(await appPage.content());
+
+  await appPage.close();
 
   expect(warnings).toEqual([]);
   expect(errors).toEqual([]);
 
   return { sourceHtml, clientRenderContent };
 };
-
-function sanitizeHtml(str: string) {
-  return str.replaceAll(process.cwd(), '{cwd}');
-}

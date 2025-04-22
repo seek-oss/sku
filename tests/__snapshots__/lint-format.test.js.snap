@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sku format errors are fixed: fixableLintError.ts 1`] = `
+exports[`lint-format > sku format > errors are fixed: fixableLintError.ts 1`] = `
 const foo = () => 'foo';
 
 `;
 
-exports[`sku format errors are fixed: importOrder1.ts 1`] = `
+exports[`lint-format > sku format > errors are fixed: importOrder1.ts 1`] = `
 import './reset'; // side-effect imports should stay put
 
 import path from 'path'; //  built-in
@@ -25,7 +25,7 @@ import vanillaStyles from './vanillaStyles.css'; // styles
 
 `;
 
-exports[`sku format errors are fixed: importOrder2.ts 1`] = `
+exports[`lint-format > sku format > errors are fixed: importOrder2.ts 1`] = `
 import c from '../c';
 
 import a from './a';
@@ -37,7 +37,7 @@ import cStyle from '../c.css';
 
 `;
 
-exports[`sku format errors are fixed: unformattedFile2.ts 1`] = `
+exports[`lint-format > sku format > errors are fixed: unformattedFile2.ts 1`] = `
 import { something } from 'with-double-quotes';
 
 const indented = 'indented';
@@ -51,28 +51,24 @@ const foo = [
 
 `;
 
-exports[`sku lint lint errors are reported: typescriptFile.ts 1`] = `
+exports[`lint-format > sku lint > lint errors are reported: typescriptFile.ts 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
 `;
 
-exports[`sku lint lint errors are reported: unformattedFile1.js 1`] = `
+exports[`lint-format > sku lint > lint errors are reported: unformattedFile1.js 1`] = `
 stdout: Linting
-Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: .
 src/unformattedFile1.js
 To fix this issue, run 'pnpm run format'
 `;
 
-exports[`sku lint lint errors are reported: utils.test.ts 1`] = `
+exports[`lint-format > sku lint > lint errors are reported: utils.test.ts 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: .
 Checking code with ESLint
-Paths: .
 
 1:1  error  Unexpected console statement                    no-console
 3:4  error  Unexpected focused test                         jest/no-focused-tests

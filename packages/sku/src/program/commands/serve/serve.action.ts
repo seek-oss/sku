@@ -24,12 +24,10 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 
 export const serveAction = async ({
   site: preferredSite,
-  port: preferredPort,
   environment: environmentOption,
   skuContext,
 }: {
   site: string;
-  port: number;
   environment: string;
   skuContext: SkuContext;
 }) => {
@@ -89,8 +87,9 @@ export const serveAction = async ({
   const appHosts = getAppHosts(skuContext);
 
   const availablePort = await allocatePort({
-    port: preferredPort || port.client,
+    port: port.client,
     host: '0.0.0.0',
+    strictPort: port.strictPort,
   });
 
   console.log(chalk.blue(`sku serve`));

@@ -1,3 +1,10 @@
+import {
+  describe,
+  test,
+  beforeAll,
+  afterAll,
+  expect as globalExpect,
+} from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import dedent from 'dedent';
@@ -80,15 +87,7 @@ const filesToFormat = {
   `,
 };
 
-beforeEach(async () => {
-  await fs.mkdir(srcDirectory, { recursive: true });
-});
-
-afterEach(async () => {
-  await fs.rm(srcDirectory, { recursive: true, force: true });
-});
-
-expect.addSnapshotSerializer({
+globalExpect.addSnapshotSerializer({
   serialize: (val) => {
     const { stdout } = val;
     // Remove some logs that contain file paths that are unique to the machine
@@ -104,44 +103,54 @@ expect.addSnapshotSerializer({
   test: (val) => typeof val === 'object' && val.hasOwnProperty('stdout'),
 });
 
-describe('sku lint', () => {
-  test.each(Object.keys(filesToLint))(
-    'lint errors are reported: %s',
-    async (fileName) => {
-      const filePath = testFile(fileName);
-      await fs.writeFile(filePath, filesToLint[fileName]);
-
-      let result;
-
-      try {
-        await runSkuScriptInDir('lint', appDirectory);
-      } catch (err) {
-        result = { stderr: err.stderr, stdout: err.stdout };
-      }
-
-      expect(result).toBeDefined();
-      expect(result).toMatchSnapshot();
-    },
-  );
-});
-
-describe('sku format', () => {
-  expect.addSnapshotSerializer({
-    serialize: (val) => val,
-    test: (val) => typeof val === 'string',
+describe('lint-format', () => {
+  beforeAll(async () => {
+    await fs.mkdir(srcDirectory, { recursive: true });
   });
 
-  test.each(Object.keys(filesToFormat))(
-    'errors are fixed: %s',
-    async (fileName) => {
-      const filePath = testFile(fileName);
-      await fs.writeFile(filePath, filesToFormat[fileName]);
+  afterAll(async () => {
+    await fs.rm(srcDirectory, { recursive: true, force: true });
+  });
 
-      await runSkuScriptInDir('format', appDirectory);
+  describe('sku lint', () => {
+    test.for(Object.keys(filesToLint))(
+      'lint errors are reported: %s',
+      async (fileName, { expect }) => {
+        const filePath = testFile(fileName);
+        await fs.writeFile(filePath, filesToLint[fileName]);
 
-      const result = await fs.readFile(filePath, { encoding: 'utf-8' });
+        let result;
 
-      expect(result).toMatchSnapshot();
-    },
-  );
+        try {
+          await runSkuScriptInDir('lint', appDirectory, [filePath]);
+        } catch (err) {
+          result = { stderr: err.stderr, stdout: err.stdout };
+        }
+
+        expect(result).toBeDefined();
+        expect(result).toMatchSnapshot();
+      },
+    );
+  });
+
+  describe('sku format', () => {
+    globalExpect.addSnapshotSerializer({
+      serialize: (val) => val,
+      test: (val) => typeof val === 'string',
+    });
+
+    test.for(Object.keys(filesToFormat))(
+      'errors are fixed: %s',
+      async (fileName, { expect }) => {
+        const filePath = testFile(fileName);
+        await fs.writeFile(filePath, filesToFormat[fileName]);
+
+        await runSkuScriptInDir('format', appDirectory);
+
+        const result = await fs.readFile(filePath, { encoding: 'utf-8' });
+
+        expect(result).toMatchSnapshot();
+      },
+    );
+  });
 });

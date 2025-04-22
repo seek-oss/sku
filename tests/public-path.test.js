@@ -1,9 +1,7 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
-import {
-  runSkuScriptInDir,
-  waitForUrls,
-  getAppSnapshot,
-} from '@sku-private/test-utils';
+import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import { createRequire } from 'node:module';
 
@@ -28,8 +26,10 @@ describe('public path', () => {
       await process.kill();
     });
 
-    it('should create valid app with no unresolved resources', async () => {
-      const app = await getAppSnapshot(url);
+    it('should create valid app with no unresolved resources', async ({
+      expect,
+    }) => {
+      const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
   });

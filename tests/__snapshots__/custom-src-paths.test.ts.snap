@@ -1,91 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`custom-src-paths bundler vite build should create valid app 1`] = `
-SCRIPTS: [
-  "/some-static-place/vite-client.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="scripts[0]"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello custom src paths
-      </div>
-    </div>
-    <script
-      type="module"
-      src="scripts[0]"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: NO DIFF
-`;
-
-exports[`custom-src-paths bundler vite build should generate the expected files 1`] = `
-{
-  "index.html": SCRIPTS: [
-    "/some-static-place/vite-client.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="scripts[0]"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello custom src paths
-      </div>
-    </div>
-    <script
-      type="module"
-      src="scripts[0]"
-    >
-    </script>
-  </body>
-</html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`custom-src-paths bundler vite start should start a development server 1`] = `
-SCRIPTS: [
-  "/@id/__x00__/index.html?html-proxy&index=0.js",
-  "/@id/__x00__/index.html?html-proxy&index=1.js",
-  "{cwd}/packages/sku/dist/services/vite/entries/vite-client.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`custom-src-paths > bundler vite > start > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <script type="module">
@@ -109,12 +25,12 @@ window.$RefreshSig$ = () => (type) => type;
     >
     <script
       type="module"
-      src="scripts[0]"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
     >
     </script>
     <script
       type="module"
-      src="scripts[1]"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
     >
     </script>
   </head>
@@ -126,11 +42,11 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="scripts[2]"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -152,14 +68,8 @@ POST HYDRATE DIFFS:
    </head>
 `;
 
-exports[`custom-src-paths bundler webpack build should create valid app 1`] = `
-SCRIPTS: [
-  "/some-static-place/runtime.js",
-  "/some-static-place/2.js",
-  "/some-static-place/main.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`custom-src-paths > bundler webpack > start > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -174,19 +84,19 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/main.js"
     >
   </head>
   <body>
@@ -210,185 +120,22 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/main.js"
     >
     </script>
   </body>
-</html>
-POST HYDRATE DIFFS: NO DIFF
-`;
-
-exports[`custom-src-paths bundler webpack build should generate the expected files 1`] = `
-{
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
-    "/some-static-place/runtime.js",
-    "/some-static-place/2.js",
-    "/some-static-place/main.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[0]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[1]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[2]"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello custom src paths
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[0]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[1]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[2]"
-    >
-    </script>
-  </body>
-</html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`custom-src-paths bundler webpack start should start a development server 1`] = `
-SCRIPTS: [
-  "/runtime.js",
-  "/2.js",
-  "/main.js",
-]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[0]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[1]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[2]"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello custom src paths
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[0]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[1]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[2]"
-    >
-    </script>
-  </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;

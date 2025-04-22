@@ -1,3 +1,4 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import {
@@ -39,10 +40,13 @@ describe('assertion-removal', () => {
       await process.kill();
     });
 
-    it('should not contain "assert" or "invariant" in production', async () => {
+    it('should not contain "assert" or "invariant" in production', async ({
+      expect,
+    }) => {
       const appPage = await browser.newPage();
       const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
       const sourceHtml = await response?.text();
+      await appPage.close();
       expect(sourceHtml).toContain(
         'It rendered without throwing an assertion error',
       );
@@ -68,7 +72,9 @@ describe('assertion-removal', () => {
       closeAssetServer();
     });
 
-    it('should not contain "assert" or "invariant" in production', async function () {
+    it('should not contain "assert" or "invariant" in production', async function ({
+      expect,
+    }) {
       const appPage = await browser.newPage();
       const response = await appPage.goto(backendUrl, {
         waitUntil: 'networkidle0',
@@ -88,7 +94,7 @@ describe('assertion-removal', () => {
       exitCode = child.exitCode;
     });
 
-    it('should keep "assert" and "invariant" in tests', async () => {
+    it('should keep "assert" and "invariant" in tests', async ({ expect }) => {
       // App.test.tsx expects the code to throw, which means that the sku test script passes
       expect(exitCode).toEqual(0);
     });

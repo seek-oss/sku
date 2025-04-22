@@ -122,7 +122,7 @@ describe('lint-format', () => {
         let result;
 
         try {
-          await runSkuScriptInDir('lint', appDirectory);
+          await runSkuScriptInDir('lint', appDirectory, [filePath]);
         } catch (err) {
           result = { stderr: err.stderr, stdout: err.stdout };
         }

@@ -22,53 +22,64 @@ const appDir = path.dirname(
 const targetDirectory = `${appDir}/dist`;
 
 describe('custom-src-paths', () => {
-  describe('start', async () => {
-    let process: ChildProcess;
+  describe.for(['vite', 'webpack'])('bundler %s', (bundler: string) => {
+    describe('start', async () => {
+      let process: ChildProcess;
 
-    const port = await getPort();
-    const url = `http://localhost:${port}`;
-    const args = ['--strict-port', `--port=${port}`];
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+      const args = ['--strict-port', `--port=${port}`];
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir, args);
-      await waitForUrls(url);
+      if (bundler === 'vite') {
+        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
+      }
+
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url);
+      });
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      it('should start a development server', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({ url, expect });
+        expect(snapshot).toMatchSnapshot();
+      });
     });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+    describe('build', async () => {
+      let process: ChildProcess;
 
-    it('should start a development server', async ({ expect }) => {
-      const snapshot = await getAppSnapshot({ url, expect });
-      expect(snapshot).toMatchSnapshot();
-    });
-  });
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+      const portArgs = ['--strict-port', `--port=${port}`];
+      const args: string[] = [];
 
-  describe('build', async () => {
-    let process: ChildProcess;
+      if (bundler === 'vite') {
+        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
+      }
 
-    const port = await getPort();
-    const url = `http://localhost:${port}`;
-    const args = ['--strict-port', `--port=${port}`];
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        await waitForUrls(url);
+      });
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir, args);
-      await waitForUrls(url);
-    });
+      afterAll(async () => {
+        await process.kill();
+      });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      it('should generate the expected files', async ({ expect }) => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
 
-    it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
-    });
-
-    it('should create valid app', async ({ expect }) => {
-      const app = await getAppSnapshot({ url, expect });
-      expect(app).toMatchSnapshot();
+      it('should create valid app', async ({ expect }) => {
+        const app = await getAppSnapshot({ expect, url });
+        expect(app).toMatchSnapshot();
+      });
     });
   });
 

@@ -1,6 +1,128 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`custom-src-paths > build > should create valid app 1`] = `
+exports[`custom-src-paths > bundler vite > build > should create valid app 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/some-static-place/vite-client.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script
+      type="module"
+      src="/some-static-place/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`custom-src-paths > bundler vite > build > should generate the expected files 1`] = `
+{
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="modulepreload" href="/some-static-place/vite-client.js" crossorigin />
+
+  </head>
+  <body>
+    <div id="app"><div>Hello custom src paths</div></div>
+    <script type="module" src="/some-static-place/vite-client.js" ></script>
+  </body>
+</html>",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`custom-src-paths > bundler vite > start > should start a development server 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+    >
+    </script>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
+    >
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script
+      type="module"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -22,12 +22,12 @@
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+   </head>
+`;
+
+exports[`custom-src-paths > bundler webpack > build > should create valid app 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -72,7 +194,7 @@ exports[`custom-src-paths > build > should create valid app 1`] = `
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`custom-src-paths > build > should generate the expected files 1`] = `
+exports[`custom-src-paths > bundler webpack > build > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -102,7 +224,7 @@ exports[`custom-src-paths > build > should generate the expected files 1`] = `
 }
 `;
 
-exports[`custom-src-paths > start > should start a development server 1`] = `
+exports[`custom-src-paths > bundler webpack > start > should start a development server 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>

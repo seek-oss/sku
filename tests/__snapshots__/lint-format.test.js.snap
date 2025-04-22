@@ -59,17 +59,16 @@ src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to typ
 
 exports[`lint-format > sku lint > lint errors are reported: unformattedFile1.js 1`] = `
 stdout: Linting
-Checking code with TypeScript compiler
-src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
+Checking code with Prettier
+src/unformattedFile1.js
+To fix this issue, run 'pnpm run format'
 `;
 
 exports[`lint-format > sku lint > lint errors are reported: utils.test.ts 1`] = `
 stdout: Linting
 Checking code with TypeScript compiler
 Checking code with Prettier
-Paths: .
 Checking code with ESLint
-Paths: .
 
 1:1  error  Unexpected console statement                    no-console
 3:4  error  Unexpected focused test                         jest/no-focused-tests

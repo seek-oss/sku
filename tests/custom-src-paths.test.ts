@@ -54,7 +54,8 @@ describe('custom-src-paths', () => {
 
       const port = await getPort();
       const url = `http://localhost:${port}`;
-      const args = ['--strict-port', `--port=${port}`];
+      const portArgs = ['--strict-port', `--port=${port}`];
+      const args: string[] = [];
 
       if (bundler === 'vite') {
         args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
@@ -62,7 +63,7 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir);
+        process = await runSkuScriptInDir('serve', appDir, portArgs);
         await waitForUrls(url);
       });
 

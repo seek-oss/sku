@@ -40,7 +40,7 @@ await Promise.all(
       // TODO: It would be nice to type this file properly
       const loadableCollector = createCollector({
         manifest,
-        base: publicPath.startsWith('/') ? '/' : '',
+        base: publicPath,
       });
 
       let html = await createPreRenderedHtml({

@@ -16,9 +16,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),
 );
 
-// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
-const skuSsrConfig =
-  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
+const skuSsrConfig = skuSsrConfigImport;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({

@@ -14,7 +14,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku.config.ts'),
 );
 
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
+const skuConfig = skuConfigImport;
 
 assert(skuConfig.port, 'sku config has port');
 const baseUrl = `http://localhost:${skuConfig.port}`;

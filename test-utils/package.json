@@ -2,7 +2,7 @@
   "name": "@sku-private/test-utils",
   "private": true,
   "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@prettier/sync": "^0.5.2",

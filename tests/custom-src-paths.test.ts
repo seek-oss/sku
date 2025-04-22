@@ -1,12 +1,14 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
+  getPort,
   runSkuScriptInDir,
   waitForUrls,
-  getAppSnapshot,
 } from '@sku-private/test-utils';
 
-import skuConfigImport from '@sku-fixtures/custom-src-paths/sku.config.ts';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
+
 import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
@@ -17,64 +19,79 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
 );
 
-// TODO: fix this casting.
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
-
 const targetDirectory = `${appDir}/dist`;
-const url = `http://localhost:${skuConfig.port}`;
 
 describe('custom-src-paths', () => {
-  describe('start', () => {
-    let process: ChildProcess;
+  describe.for(['vite', 'webpack'])('bundler %s', (bundler: string) => {
+    describe('start', async () => {
+      let process: ChildProcess;
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir);
-      await waitForUrls(url);
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+      const args = ['--strict-port', `--port=${port}`];
+
+      if (bundler === 'vite') {
+        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
+      }
+
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url);
+      });
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      it('should start a development server', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({ url, expect });
+        expect(snapshot).toMatchSnapshot();
+      });
     });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+    describe('build', async () => {
+      let process: ChildProcess;
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(url);
-      expect(snapshot).toMatchSnapshot();
-    });
-  });
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+      const portArgs = ['--strict-port', `--port=${port}`];
+      const args: string[] = [];
 
-  describe('build', () => {
-    let process: ChildProcess;
+      if (bundler === 'vite') {
+        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
+      }
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
-      await waitForUrls(url);
-    });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        await waitForUrls(url);
+      });
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      afterAll(async () => {
+        await process.kill();
+      });
 
-    it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
-    });
+      it('should generate the expected files', async ({ expect }) => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
 
-    it('should create valid app', async () => {
-      const app = await getAppSnapshot(url);
-      expect(app).toMatchSnapshot();
+      it('should create valid app', async ({ expect }) => {
+        const app = await getAppSnapshot({ expect, url });
+        expect(app).toMatchSnapshot();
+      });
     });
   });
 
   describe('format', () => {
-    it('should format successfully', async () => {
+    it('should format successfully', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('format', appDir);
       expect(child.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
-    it('should lint successfully', async () => {
+    it('should lint successfully', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('lint', appDir);
       expect(child.exitCode).toEqual(0);
     });

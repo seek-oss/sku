@@ -1,9 +1,10 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 import path from 'node:path';
 import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
-  getAppSnapshot,
 } from '@sku-private/test-utils';
 
 import { createRequire } from 'node:module';
@@ -21,7 +22,7 @@ describe('library-file', () => {
       await runSkuScriptInDir('build', appDir);
     });
 
-    it('should generate the expected files', async () => {
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
@@ -40,8 +41,8 @@ describe('library-file', () => {
       await server.kill();
     });
 
-    it('should start a development server', async () => {
-      const snapshot = await getAppSnapshot(devServerUrl);
+    it('should start a development server', async ({ expect }) => {
+      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
   });

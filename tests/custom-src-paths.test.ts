@@ -55,16 +55,19 @@ describe('custom-src-paths', () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;
       const portArgs = ['--strict-port', `--port=${port}`];
-      const args: string[] = [];
-
-      if (bundler === 'vite') {
-        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
-      }
+      const args =
+        bundler === 'vite'
+          ? ['--experimental-bundler', '--config', 'sku.config.vite.ts']
+          : [];
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir, portArgs);
-        await waitForUrls(url);
+        try {
+          await runSkuScriptInDir('build', appDir, args);
+          process = await runSkuScriptInDir('serve', appDir, portArgs);
+          await waitForUrls(url);
+        } catch (e) {
+          console.log('Error running build', e);
+        }
       });
 
       afterAll(async () => {

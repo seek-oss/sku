@@ -9,6 +9,7 @@ import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
+import { watchVocabCompile } from '../vocab/runVocab.js';
 
 export const viteService = {
   buildSsr: async (skuContext: SkuContext) => {
@@ -26,6 +27,7 @@ export const viteService = {
   },
   start: async (skuContext: SkuContext) => {
     // TODO Get this to be backwards compat with webpack
+    await watchVocabCompile(skuContext);
     const server = await createViteServer(skuContext);
     await server.listen(skuContext.port.client);
 
@@ -41,6 +43,7 @@ export const viteService = {
   startSsr: async (skuContext: SkuContext) => {
     process.env.NODE_ENV = 'development';
 
+    await watchVocabCompile(skuContext);
     const server = await createViteServerSsr({
       skuContext,
     });

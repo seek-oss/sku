@@ -9,6 +9,9 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
+import vocabPluginVite from '@vocab/vite';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { createVocabChunks } from '@vocab/vite/create-vocab-chunks';
 
 const require = createRequire(import.meta.url);
 
@@ -28,10 +31,12 @@ export const createViteConfig = ({
     ssr: skuContext.paths.serverEntry,
     ssg: skuContext.paths.renderEntry,
   };
+  const vocabConfig = getVocabConfig(skuContext);
 
   return {
     root: process.cwd(),
     plugins: [
+      vocabConfig && vocabPluginVite.default({ vocabConfig }),
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
       }),
@@ -65,6 +70,14 @@ export const createViteConfig = ({
           entryFileNames:
             configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
+          manualChunks: (id, ctx) => {
+            // handle your own manual chunks before or after the vocab chunks.
+            const languageChunkName = createVocabChunks(id, ctx);
+            if (languageChunkName) {
+              // vocab has found a language chunk. Either return it or handle it in your own way.
+              return languageChunkName;
+            }
+          },
         },
       },
     },

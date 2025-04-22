@@ -104,14 +104,14 @@ const parseManifestForEntry = ({
   scripts: Map<string, InjectableScript>;
   base?: string;
 }) => {
-  if (!manifest) {
+  const foundChunk =
+    manifest[entry] ??
+    Object.values(manifest).find((chunk) => chunk.name === entry);
+
+  if (!foundChunk) {
     return;
   }
-  const entryChunk: ManifestChunk | undefined =
-    manifest[entry] && parseEntryChunk(manifest[entry], { base });
-  if (!entryChunk) {
-    return;
-  }
+  const entryChunk = parseEntryChunk(foundChunk, { base });
 
   if (entryChunk.css) {
     for (const chunk of entryChunk.css) {

@@ -1,8 +1,7 @@
 import { useTranslations } from '@vocab/react';
 
 import translations from './App.vocab';
-// @ts-expect-error no types
-import compiledTranslations from './compiled.vocab/index.mjs';
+import compiledTranslations from './compiled.vocab';
 
 export default () => {
   const { t } = useTranslations(translations);
@@ -10,7 +9,8 @@ export default () => {
 
   return (
     <div>
-      {t('hello')} {compiled.t('Company name')}
+      {t('hello')}
+      {compiled.t('Company name')}
     </div>
   );
 };

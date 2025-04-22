@@ -19,7 +19,7 @@ const appDir = path.dirname(
 const targetDirectory = `${appDir}/dist`;
 
 describe('suspense', () => {
-  describe.sequential.each(['vite', 'webpack'])(
+  describe.sequential.for(['vite', 'webpack'])(
     'bundler %s',
     async (bundler) => {
       const port = await getPort();

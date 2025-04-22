@@ -35,6 +35,7 @@ export const createViteConfig = ({
 
   return {
     root: process.cwd(),
+    clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
       vocabConfig && vocabPluginVite.default({ vocabConfig }),
       cjsInterop({
@@ -61,9 +62,7 @@ export const createViteConfig = ({
       ssr: configType === 'ssr' || configType === 'ssg',
       manifest: configType === 'client',
       ssrManifest: false,
-      // TODO Fix URL paths as a publicPath value. Absolute and relative paths work, but Vite removes the first `/` in URLs (http://foo.com -> http:/foo.com).
-      // TODO URL paths also output to url folders. e.g., /http:/foo.com/assets/[filename].js.
-      assetsDir: skuContext.publicPath.replace(/(^\/|\/$)/g, ''),
+      assetsDir: '',
       rollupOptions: {
         input: input[configType],
         output: {

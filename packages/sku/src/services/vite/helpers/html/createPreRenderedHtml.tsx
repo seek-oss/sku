@@ -88,6 +88,7 @@ export const createPreRenderedHtml = async <App,>({
   if (Object.keys(clientContext).length > 0) {
     bodyTags.push(serializeConfig(clientContext));
   }
+
   bodyTags.push(...loadableCollector.getAllScripts());
 
   return await render.renderDocument({

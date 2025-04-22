@@ -46,7 +46,7 @@
     },
     {
       groupName: 'test packages',
-      packagePatterns: ['(testing-library|jest|puppeteer)'],
+      packagePatterns: ['(testing-library|vitest|puppeteer)'],
       matchUpdateTypes: 'major',
       enabled: true,
       schedule: ['before 9am on Tuesday'],

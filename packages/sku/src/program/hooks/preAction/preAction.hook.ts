@@ -5,8 +5,11 @@ import provider, { initializeTelemetry } from '@/services/telemetry/index.js';
 import { experimentalBundlersHook } from '@/program/hooks/preAction/experimentalBundlersHook.js';
 
 export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
+  const { port, strictPort } = actionCommand.opts();
   const skuContext = getSkuContext({
     configPath: rootCommand.opts()?.config,
+    port,
+    strictPort,
   });
   initializeTelemetry(skuContext);
   actionCommand.setOptionValue('skuContext', skuContext);

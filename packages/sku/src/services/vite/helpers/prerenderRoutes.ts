@@ -6,6 +6,7 @@ import { createPreRenderedHtml } from './html/createPreRenderedHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
+import createCSPHandler from '@/services/webpack/entry/csp.js';
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
@@ -20,10 +21,10 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
     ).default;
     const loadableCollector = createCollector({
       manifest,
-      base: skuContext.publicPath.startsWith('/') ? '/' : '',
+      base: skuContext.publicPath,
     });
 
-    const html = await createPreRenderedHtml({
+    let html = await createPreRenderedHtml({
       environment: route.environment,
       language: route.language,
       route: route.route,
@@ -33,6 +34,18 @@ export const prerenderRoutes = async (skuContext: SkuContext) => {
       render,
       loadableCollector,
     });
+
+    if (skuContext.cspEnabled) {
+      const cspHandler = createCSPHandler({
+        extraHosts: [
+          skuContext.paths.publicPath,
+          ...skuContext.cspExtraScriptSrcHosts,
+        ],
+        isDevelopment: process.env.NODE_ENV === 'development',
+      });
+
+      html = cspHandler.handleHtml(html);
+    }
 
     const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {
       let renderDirectory = skuContext.skuConfig.target;

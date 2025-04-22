@@ -1,83 +1,28 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`source-maps build should generate the expected files 1`] = `
+exports[`source-maps > build > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
-    "/static/source-maps/runtime.js",
-    "/static/source-maps/2.js",
-    "/static/source-maps/main.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+  "index.html": "<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[0]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[1]"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="scripts[2]"
-    >
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/runtime.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/2.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/main.js">
   </head>
   <body>
-    <div id="app">
-      <div>
-        Hello source maps
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[0]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[1]"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="scripts[2]"
-    >
-    </script>
+    <div id="app"><div>Hello source maps</div></div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/static/source-maps/runtime.js"></script>
+<script async data-chunk="main" src="/static/source-maps/2.js"></script>
+<script async data-chunk="main" src="/static/source-maps/main.js"></script>
   </body>
-</html>,
+</html>",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

@@ -9,6 +9,7 @@ import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
+import allocatePort from '@/utils/allocatePort.js';
 import { watchVocabCompile } from '../vocab/runVocab.js';
 
 export const viteService = {
@@ -29,11 +30,18 @@ export const viteService = {
     // TODO Get this to be backwards compat with webpack
     await watchVocabCompile(skuContext);
     const server = await createViteServer(skuContext);
-    await server.listen(skuContext.port.client);
+
+    const availablePort = await allocatePort({
+      port: skuContext.port.client,
+      host: '0.0.0.0',
+      strictPort: skuContext.port.strictPort,
+    });
+
+    await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
     const proto = skuContext.httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${hosts[0]}:${skuContext.port.client}${skuContext.initialPath}`;
+    const url = `${proto}://${hosts[0]}:${availablePort}${skuContext.initialPath}`;
     openBrowser(url);
 
     printUrls(hosts, skuContext);

@@ -1,16 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ssr-hello-world build custom port should generate a production server running on custom port 1`] = `
-SCRIPTS: [
-  "http://localhost:4000/runtime.js",
-  "http://localhost:4000/2.js",
-  "http://localhost:4000/main.js",
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-]
-CSS: [
-  "http://localhost:4000/main-1f5c2cf64419575cffa6.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr-hello-world > build > custom port > should generate a production server running on custom port 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -28,27 +19,27 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="http://localhost:4000/main-1f5c2cf64419575cffa6.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://localhost:4000/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://localhost:4000/2.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://localhost:4000/main.js"
       crossorigin="anonymous"
     >
   </head>
@@ -61,7 +52,7 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
-    <script src="scripts[3]">
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
     </script>
     <script>
       console.log('Hi');
@@ -83,40 +74,31 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://localhost:4000/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://localhost:4000/2.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://localhost:4000/main.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`ssr-hello-world build default port should generate a production server based on config 1`] = `
-SCRIPTS: [
-  "http://localhost:4000/runtime.js",
-  "http://localhost:4000/2.js",
-  "http://localhost:4000/main.js",
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-]
-CSS: [
-  "http://localhost:4000/main-1f5c2cf64419575cffa6.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr-hello-world > build > default port > should generate a production server based on config 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -134,27 +116,27 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="http://localhost:4000/main-1f5c2cf64419575cffa6.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://localhost:4000/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://localhost:4000/2.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://localhost:4000/main.js"
       crossorigin="anonymous"
     >
   </head>
@@ -167,7 +149,7 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
-    <script src="scripts[3]">
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
     </script>
     <script>
       console.log('Hi');
@@ -189,40 +171,31 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://localhost:4000/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://localhost:4000/2.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://localhost:4000/main.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`ssr-hello-world start should start a development server 1`] = `
-SCRIPTS: [
-  "http://127.0.0.1:8100/runtime.js",
-  "http://127.0.0.1:8100/2.js",
-  "http://127.0.0.1:8100/main.js",
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-]
-CSS: [
-  "http://127.0.0.1:8100/main.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`ssr-hello-world > start > should start a development server 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -240,27 +213,27 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="http://127.0.0.1:8100/main.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="http://127.0.0.1:8100/runtime.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="http://127.0.0.1:8100/2.js"
       crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="http://127.0.0.1:8100/main.js"
       crossorigin="anonymous"
     >
   </head>
@@ -273,7 +246,7 @@ SOURCE HTML: <!DOCTYPE html>
         <img src="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
-    <script src="scripts[3]">
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
     </script>
     <script>
       console.log('Hi');
@@ -295,25 +268,25 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="http://127.0.0.1:8100/runtime.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="http://127.0.0.1:8100/2.js"
       crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="http://127.0.0.1:8100/main.js"
       crossorigin="anonymous"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;

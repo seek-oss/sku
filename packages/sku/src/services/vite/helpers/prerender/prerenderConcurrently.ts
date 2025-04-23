@@ -38,7 +38,7 @@ const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
   });
 };
 
-export const startPrerenderWorkers = async (skuContext: SkuContext) => {
+export const prerenderConcurrently = async (skuContext: SkuContext) => {
   const routes = getBuildRoutes(skuContext);
 
   const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {

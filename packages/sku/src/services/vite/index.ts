@@ -8,7 +8,7 @@ import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
-import { startPrerenderWorkers } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
+import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '@/utils/allocatePort.js';
 
 export const viteService = {
@@ -20,7 +20,7 @@ export const viteService = {
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
-      await startPrerenderWorkers(skuContext);
+      await prerenderConcurrently(skuContext);
     }
     await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);

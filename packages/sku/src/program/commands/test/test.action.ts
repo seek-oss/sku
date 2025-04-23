@@ -1,5 +1,5 @@
 import debug from 'debug';
-import { execSync } from 'node:child_process';
+import jest from 'jest';
 
 import isCI from '@/utils/isCI.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
@@ -7,6 +7,8 @@ import { configureProject } from '@/utils/configure.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:jest');
+
+const { run } = jest;
 
 const testAction = async (
   {
@@ -31,10 +33,7 @@ const testAction = async (
     jestArgv.push('--ci');
   }
 
-  execSync(
-    `NODE_OPTIONS='--experimental-vm-modules --disable-warning=ExperimentalWarning' npx jest ${jestArgv.join(' ')}`,
-    { stdio: 'inherit' },
-  );
+  run(jestArgv);
 };
 
 export { testAction };

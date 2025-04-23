@@ -24,12 +24,20 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
         background: pink;
       }
     </style>
-    <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+    <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
 
   </head>
   <body>
-    <div id="app"><div>Loading Details...</div></div>
+    <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
+<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
+<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -48,12 +56,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
         background: pink;
       }
     </style>
-    <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+    <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
 
   </head>
   <body>
-    <div id="app"><div>Loading Home...</div></div>
+    <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - au</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -72,12 +85,20 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
         background: pink;
       }
     </style>
-    <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+    <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
 
   </head>
   <body>
-    <div id="app"><div>Loading Details...</div></div>
+    <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
+<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
+<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -96,12 +117,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
         background: pink;
       }
     </style>
-    <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+    <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
 
   </head>
   <body>
-    <div id="app"><div>Loading Home...</div></div>
+    <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - nz</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -136,22 +162,50 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
       }
     </style>
     <link
+      rel="stylesheet"
+      href="/static/place/Details-DGJnH813.css"
+      crossorigin
+    >
+    <link
       rel="modulepreload"
       href="/static/place/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/Details-CaxrQeMv.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/AsyncComponent-DtuSLDgp.js"
       crossorigin
     >
   </head>
   <body>
     <div id="app">
-      <div>
-        Loading Details...
-      </div>
+      <h1 class="_1hpn1da0">
+        Welcome to the Details page - au
+        <span>
+          Some special async content
+        </span>
+      </h1>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
       {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="/static/place/AsyncComponent-DtuSLDgp.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/static/place/Details-CaxrQeMv.js"
+    >
     </script>
     <script
       type="module"
@@ -164,8 +218,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -28,12 +28,38 @@
-       href="/static/place/vite-client.js"
+@@ -43,11 +43,34 @@
+       href="/static/place/AsyncComponent-DtuSLDgp.js"
        crossorigin
      >
 +    <link
@@ -194,18 +248,12 @@ POST HYDRATE DIFFS:
    </head>
    <body>
      <div id="app">
--      <div>
--        Loading Details...
--      </div>
-+      <h1 class="_1hpn1da0">
+       <h1 class="_1hpn1da0">
+-        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
-+        <span>
-+          Some special async content
-+        </span>
-+      </h1>
-     </div>
-     <script
-       id="__SKU_CLIENT_CONTEXT__"
+         <span>
+           Some special async content
+         </span>
 `;
 
 exports[`multiple-routes > bundler: vite > build and serve > should render home page correctly 1`] = `
@@ -235,22 +283,37 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
       }
     </style>
     <link
+      rel="stylesheet"
+      href="/static/place/Home-D-106MY_.css"
+      crossorigin
+    >
+    <link
       rel="modulepreload"
       href="/static/place/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/Home-DQBwRi9y.js"
       crossorigin
     >
   </head>
   <body>
     <div id="app">
-      <div>
-        Loading Home...
-      </div>
+      <h1 class="ms22la0">
+        Welcome to the Home page - au
+      </h1>
     </div>
     <script
       id="__SKU_CLIENT_CONTEXT__"
       type="application/json"
     >
       {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="/static/place/Home-DQBwRi9y.js"
+    >
     </script>
     <script
       type="module"
@@ -263,8 +326,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -28,12 +28,23 @@
-       href="/static/place/vite-client.js"
+@@ -38,6 +38,17 @@
+       href="/static/place/Home-DQBwRi9y.js"
        crossorigin
      >
 +    <link
@@ -281,15 +344,6 @@ POST HYDRATE DIFFS:
    </head>
    <body>
      <div id="app">
--      <div>
--        Loading Home...
--      </div>
-+      <h1 class="ms22la0">
-+        Welcome to the Home page - au
-+      </h1>
-     </div>
-     <script
-       id="__SKU_CLIENT_CONTEXT__"
 `;
 
 exports[`multiple-routes > bundler: vite > start > should render details page correctly 1`] = `
@@ -342,9 +396,12 @@ window.$RefreshSig$ = () => (type) => type;
   </head>
   <body>
     <div id="app">
-      <div>
-        Loading Details...
-      </div>
+      <h1 class="Details_root__1hpn1da0">
+        Welcome to the Details page - au
+        <span>
+          Some special async content
+        </span>
+      </h1>
     </div>
     <script
       type="module"
@@ -363,7 +420,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -36,20 +36,31 @@
+@@ -36,19 +36,27 @@
      </style>
      <script
        type="module"
@@ -388,18 +445,110 @@ POST HYDRATE DIFFS:
    </head>
    <body>
      <div id="app">
--      <div>
--        Loading Details...
--      </div>
-+      <h1 class="Details_root__1hpn1da0">
+       <h1 class="Details_root__1hpn1da0">
+-        Welcome to the Details page - au
 +        Welcome to the Details page - auID: 123
-+        <span>
-+          Some special async content
-+        </span>
-+      </h1>
-     </div>
+         <span>
+           Some special async content
+         </span>
+`;
+
+exports[`multiple-routes > bundler: vite > start > should render home page correctly 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+    >
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+    >
+    </script>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
+    >
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="Home_root__ms22la0">
+        Welcome to the Home page - au
+      </h1>
+    </div>
+    <script
+      type="module"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+    >
+    </script>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"au"}
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -36,14 +36,22 @@
+     </style>
      <script
        type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Home.css.js.vanilla.css"
++    >
++      .Home_root__ms22la0 {
++  color: red;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
 `;
 
 exports[`multiple-routes > bundler: webpack > build and serve > should generate the expected files 1`] = `
@@ -936,584 +1085,8 @@ POST HYDRATE DIFFS:
          </span>
 `;
 
-exports[`multiple-routes build and serve should generate the expected files 1`] = `
-{
-  "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-791506971640531b9f92.css": "._1hpn1da0{color:blue}
-
-/*# sourceMappingURL=handlers-Details-791506971640531b9f92.css.map*/",
-  "handlers-Details-791506971640531b9f92.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-2d237e279ab26e7d9ff4.css": ".ms22la0{color:red}
-
-/*# sourceMappingURL=handlers-Home-2d237e279ab26e7d9ff4.css.map*/",
-  "handlers-Home-2d237e279ab26e7d9ff4.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/$id/index.html": "<!DOCTYPE html>
-<html>
-  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
-    <meta charset="UTF-8" >
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link data-chunk="handlers-Details" rel="stylesheet" href="/static/place/handlers-Details-791506971640531b9f92.css">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/5.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/main.js">
-<link data-chunk="handlers-Details" rel="preload" as="script" href="/static/place/handlers-Details.chunk.js">
-<link data-chunk="AsyncComponent" rel="preload" as="script" href="/static/place/AsyncComponent.chunk.js">
-  </head>
-  <body>
-    <div id="app"><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1></div>
-    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[1,0]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":["handlers-Details","AsyncComponent"]}</script>
-<script async data-chunk="main" src="/static/place/runtime.js"></script>
-<script async data-chunk="main" src="/static/place/5.js"></script>
-<script async data-chunk="main" src="/static/place/main.js"></script>
-<script async data-chunk="handlers-Details" src="/static/place/handlers-Details.chunk.js"></script>
-<script async data-chunk="AsyncComponent" src="/static/place/AsyncComponent.chunk.js"></script>
-  </body>
-</html>",
-  "production/au/index.html": "<!DOCTYPE html>
-<html>
-  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
-    <meta charset="UTF-8" >
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link data-chunk="handlers-Home" rel="stylesheet" href="/static/place/handlers-Home-2d237e279ab26e7d9ff4.css">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/5.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/main.js">
-<link data-chunk="handlers-Home" rel="preload" as="script" href="/static/place/handlers-Home.chunk.js">
-  </head>
-  <body>
-    <div id="app"><h1 class="ms22la0">Welcome to the Home page - au</h1></div>
-    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[2]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":["handlers-Home"]}</script>
-<script async data-chunk="main" src="/static/place/runtime.js"></script>
-<script async data-chunk="main" src="/static/place/5.js"></script>
-<script async data-chunk="main" src="/static/place/main.js"></script>
-<script async data-chunk="handlers-Home" src="/static/place/handlers-Home.chunk.js"></script>
-  </body>
-</html>",
-  "production/nz/nz/details/:id/index.html": "<!DOCTYPE html>
-<html>
-  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
-    <meta charset="UTF-8" >
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link data-chunk="handlers-Details" rel="stylesheet" href="/static/place/handlers-Details-791506971640531b9f92.css">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/5.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/main.js">
-<link data-chunk="handlers-Details" rel="preload" as="script" href="/static/place/handlers-Details.chunk.js">
-<link data-chunk="AsyncComponent" rel="preload" as="script" href="/static/place/AsyncComponent.chunk.js">
-  </head>
-  <body>
-    <div id="app"><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1></div>
-    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[1,0]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":["handlers-Details","AsyncComponent"]}</script>
-<script async data-chunk="main" src="/static/place/runtime.js"></script>
-<script async data-chunk="main" src="/static/place/5.js"></script>
-<script async data-chunk="main" src="/static/place/main.js"></script>
-<script async data-chunk="handlers-Details" src="/static/place/handlers-Details.chunk.js"></script>
-<script async data-chunk="AsyncComponent" src="/static/place/AsyncComponent.chunk.js"></script>
-  </body>
-</html>",
-  "production/nz/nz/index.html": "<!DOCTYPE html>
-<html>
-  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
-    <meta charset="UTF-8" >
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link data-chunk="handlers-Home" rel="stylesheet" href="/static/place/handlers-Home-2d237e279ab26e7d9ff4.css">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/5.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/place/main.js">
-<link data-chunk="handlers-Home" rel="preload" as="script" href="/static/place/handlers-Home.chunk.js">
-  </head>
-  <body>
-    <div id="app"><h1 class="ms22la0">Welcome to the Home page - nz</h1></div>
-    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[2]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":["handlers-Home"]}</script>
-<script async data-chunk="main" src="/static/place/runtime.js"></script>
-<script async data-chunk="main" src="/static/place/5.js"></script>
-<script async data-chunk="main" src="/static/place/main.js"></script>
-<script async data-chunk="handlers-Home" src="/static/place/handlers-Home.chunk.js"></script>
-  </body>
-</html>",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`multiple-routes build and serve should return details page 1`] = `
-SCRIPTS: [
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime.js",
-  "/static/place/5.js",
-  "/static/place/main.js",
-  "/static/place/handlers-Details.chunk.js",
-  "/static/place/AsyncComponent.chunk.js",
-]
-CSS: [
-  "/static/place/handlers-Details-791506971640531b9f92.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
-    >
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
-    </script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="/static/place/handlers-Details-791506971640531b9f92.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/5.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/main.js"
-    >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="/static/place/handlers-Details.chunk.js"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="/static/place/AsyncComponent.chunk.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="_1hpn1da0">
-        Welcome to the Details page - au
-        <span>
-          Some special async content
-        </span>
-      </h1>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"site":"au"}
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      [1,0]
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/5.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/main.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="/static/place/handlers-Details.chunk.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="/static/place/AsyncComponent.chunk.js"
-    >
-    </script>
-  </body>
-</html>"
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -62,7 +62,7 @@
-   <body>
-     <div id="app">
-       <h1 class="_1hpn1da0">
--        Welcome to the Details page - au
-+        Welcome to the Details page - auID: 123
-         <span>
-           Some special async content
-         </span>
-`;
-
-exports[`multiple-routes build and serve should return home page 1`] = `
-SCRIPTS: [
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/static/place/runtime.js",
-  "/static/place/5.js",
-  "/static/place/main.js",
-  "/static/place/handlers-Home.chunk.js",
-]
-CSS: [
-  "/static/place/handlers-Home-2d237e279ab26e7d9ff4.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
-    >
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
-    </script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link
-      data-chunk="handlers-Home"
-      rel="stylesheet"
-      href="/static/place/handlers-Home-2d237e279ab26e7d9ff4.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/5.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/place/main.js"
-    >
-    <link
-      data-chunk="handlers-Home"
-      rel="preload"
-      as="script"
-      href="/static/place/handlers-Home.chunk.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="ms22la0">
-        Welcome to the Home page - au
-      </h1>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"site":"au"}
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      [2]
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":["handlers-Home"]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/5.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/place/main.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Home"
-      src="/static/place/handlers-Home.chunk.js"
-    >
-    </script>
-  </body>
-</html>"
-POST HYDRATE DIFFS: NO DIFF
-`;
-
-exports[`multiple-routes start should render details page correctly 1`] = `
-SCRIPTS: [
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/handlers-Details.js",
-  "/AsyncComponent.js",
-]
-CSS: [
-  "/handlers-Details.css",
-]
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'unsafe-eval';"
-    >
-    <meta charset="UTF-8">
-    <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
-    </script>
-    <script>
-      console.log('Hi');
-    </script>
-    <style type="text/css">
-      body {
-        background: pink;
-      }
-    </style>
-    <link
-      data-chunk="handlers-Details"
-      rel="stylesheet"
-      href="/handlers-Details.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/5.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/main.js"
-    >
-    <link
-      data-chunk="handlers-Details"
-      rel="preload"
-      as="script"
-      href="/handlers-Details.js"
-    >
-    <link
-      data-chunk="AsyncComponent"
-      rel="preload"
-      as="script"
-      href="/AsyncComponent.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="Details_root__1hpn1da0">
-        Welcome to the Details page - au
-        <span>
-          Some special async content
-        </span>
-      </h1>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"site":"au"}
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      [1,0]
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":["handlers-Details","AsyncComponent"]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/5.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/main.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="handlers-Details"
-      src="/handlers-Details.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="AsyncComponent"
-      src="/AsyncComponent.js"
-    >
-    </script>
-  </body>
-</html>"
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -62,7 +62,7 @@
-   <body>
-     <div id="app">
-       <h1 class="Details_root__1hpn1da0">
--        Welcome to the Details page - au
-+        Welcome to the Details page - auID: 123
-         <span>
-           Some special async content
-         </span>
-`;
-
-exports[`multiple-routes start should render home page correctly 1`] = `
-SCRIPTS: [
-  "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-  "/runtime.js",
-  "/5.js",
-  "/main.js",
-  "/handlers-Home.js",
-]
-CSS: [
-  "/handlers-Home.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`multiple-routes > bundler: webpack > start > should render home page correctly 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta

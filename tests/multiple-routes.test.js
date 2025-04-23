@@ -26,7 +26,7 @@ const renderPageCorrectly = async ({ page, pageUrl }) => {
 };
 
 describe('multiple-routes', () => {
-  describe.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
+  describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
     describe('start', async () => {
       let process;
 
@@ -55,7 +55,7 @@ describe('multiple-routes', () => {
 
       renderPageCorrectly({
         page: 'home',
-        url,
+        pageUrl: url,
       });
 
       renderPageCorrectly({

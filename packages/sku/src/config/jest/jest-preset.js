@@ -22,7 +22,6 @@ export default jestDecorator({
     '**/__tests__/**/*.(js|ts|tsx)',
     '**/?(*.)+(spec|test).(js|ts|tsx)',
   ],
-  extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx'],
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
   ],

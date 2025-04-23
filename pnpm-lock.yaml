@@ -669,6 +669,9 @@ importers:
       '@vocab/pseudo-localize':
         specifier: ^1.0.1
         version: 1.0.1
+      '@vocab/vite':
+        specifier: ^0.1.1
+        version: 0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.10(webpack@5.98.0(@swc/core@1.11.11)(esbuild@0.25.1))
@@ -3267,6 +3270,11 @@ packages:
     resolution: {integrity: sha512-Yqe+MDERS18QsO82dN/z39PeldtFwsLhFvSHFR3GNo1t3QH+QGHKJVLUZgV3jsqb3EycdICYbbMeVjrV+6Fghw==}
     peerDependencies:
       react: '>=16.3.0'
+
+  '@vocab/vite@0.1.1':
+    resolution: {integrity: sha512-IuKOP6X+oBwsBjz8jmN6qrOCnyrMV6UiSnhUb/Gi0DUmNklr4uE0aIbaPH4Hup9XP7OYdu+rJoIa/DOYY75q7w==}
+    peerDependencies:
+      vite: ^5.4.8
 
   '@vocab/webpack@1.2.10':
     resolution: {integrity: sha512-R4PHgHdlqILwc/j6rZPqrDMLAlfqvaOq9fPPsBpmynN4uW27SUh9fT3eoCm4F6RbJuyZPbjYZo72gEx7NmOoIA==}
@@ -11546,6 +11554,17 @@ snapshots:
       '@vocab/core': 1.6.3
       intl-messageformat: 10.7.15
       react: 18.3.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vocab/vite@0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+    dependencies:
+      '@vocab/core': 1.6.3
+      cjs-module-lexer: 1.4.3
+      debug: 4.4.0(supports-color@8.1.1)
+      es-module-lexer: 1.6.0
+      picocolors: 1.1.1
+      vite: 6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 

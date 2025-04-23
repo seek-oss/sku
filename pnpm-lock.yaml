@@ -236,6 +236,31 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/many-routes:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.0.0
+        version: 6.30.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../test-utils
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.3.1(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      dedent:
+        specifier: ^1.5.1
+        version: 1.5.3(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/multiple-routes:
     dependencies:
       react:

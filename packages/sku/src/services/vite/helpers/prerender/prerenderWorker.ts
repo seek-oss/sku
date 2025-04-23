@@ -11,7 +11,8 @@ import { createCollector } from '@/services/vite/loadable/collector.js';
 import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
 import createCSPHandler from '@/services/webpack/entry/csp.js';
 import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
-import type { JobWorkerData } from '@/services/vite/helpers/prerenderRoutesWorker.js';
+
+import type { JobWorkerData } from './prerenderConcurrently.js';
 
 setAdapter(mockAdapter);
 

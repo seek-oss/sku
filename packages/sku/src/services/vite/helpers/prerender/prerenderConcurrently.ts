@@ -21,7 +21,7 @@ export type JobWorkerData = {
 };
 
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
-  const worker = new Worker(toAbsolute('./prerenderBatch.js'), {
+  const worker = new Worker(toAbsolute('./prerenderWorker.js'), {
     workerData: jobs,
   });
 

@@ -9,8 +9,7 @@ export default () => {
 
   return (
     <div>
-      {t('hello')}
-      {compiled.t('Company name')}
+      {t('hello')} {compiled.t('Company name')}
     </div>
   );
 };

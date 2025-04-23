@@ -4,11 +4,11 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import { createViteServer } from './helpers/server/createViteServer.js';
 import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import { createViteConfig } from './helpers/createConfig.js';
-import { prerenderRoutes } from './helpers/prerenderRoutes.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
+import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '@/utils/allocatePort.js';
 import { watchVocabCompile } from '../vocab/runVocab.js';
 
@@ -21,7 +21,7 @@ export const viteService = {
     await build(createViteConfig({ skuContext }));
     await build(createViteConfig({ skuContext, configType: 'ssg' }));
     if (skuContext.routes) {
-      await prerenderRoutes(skuContext);
+      await prerenderConcurrently(skuContext);
     }
     await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);

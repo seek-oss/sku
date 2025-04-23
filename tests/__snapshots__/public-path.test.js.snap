@@ -1,15 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`public path build and serve should create valid app with no unresolved resources 1`] = `
-SCRIPTS: [
-  "/static/runtime.js",
-  "/static/2.js",
-  "/static/main.js",
-]
-CSS: [
-  "/static/main-319b8cbb3480f1f49310.css",
-]
-SOURCE HTML: <!DOCTYPE html>
+exports[`public path > build and serve > should create valid app with no unresolved resources 1`] = `
+"<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -23,25 +15,25 @@ SOURCE HTML: <!DOCTYPE html>
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="styles[0]"
+      href="/static/main-319b8cbb3480f1f49310.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[0]"
+      href="/static/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[1]"
+      href="/static/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="scripts[2]"
+      href="/static/main.js"
     >
   </head>
   <body>
@@ -74,22 +66,22 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="scripts[0]"
+      src="/static/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[1]"
+      src="/static/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="scripts[2]"
+      src="/static/main.js"
     >
     </script>
   </body>
-</html>
+</html>"
 POST HYDRATE DIFFS: NO DIFF
 `;

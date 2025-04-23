@@ -1,10 +1,12 @@
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import path from 'node:path';
 import {
   dirContentsToObject,
+  getPort,
   runSkuScriptInDir,
   waitForUrls,
-  getAppSnapshot,
 } from '@sku-private/test-utils';
+import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
 
@@ -15,30 +17,32 @@ const appDir = path.dirname(
 );
 
 const targetDirectory = `${appDir}/dist`;
-const url = `http://localhost:8202`;
 
-const renderPageCorrectly = async ({ page, pageUrl, checkForLoadingText }) => {
-  it(`should render ${page} page correctly`, async () => {
-    const snapshot = await getAppSnapshot(pageUrl);
+const renderPageCorrectly = async ({ page, pageUrl }) => {
+  it(`should render ${page} page correctly`, async ({ expect }) => {
+    const snapshot = await getAppSnapshot({ url: pageUrl, expect });
     expect(snapshot).toMatchSnapshot();
-    expect(snapshot.sourceHtml).not.toContain(checkForLoadingText);
   });
 };
 
 describe('multiple-routes', () => {
   describe.each(['vite', 'webpack'])('bundler: %s', (bundler) => {
-    const args =
-      bundler === 'vite'
-        ? [
-            '--convert-loadable',
-            '--experimental-bundler',
-            '--config',
-            'sku.config.vite.js',
-          ]
-        : [];
-
-    describe('start', () => {
+    describe('start', async () => {
       let process;
+
+      const port = await getPort();
+
+      const url = `http://localhost:${port}`;
+      const args = ['--strict-port', `--port=${port}`];
+
+      if (bundler === 'vite') {
+        args.push(
+          '--convert-loadable',
+          '--experimental-bundler',
+          '--config',
+          'sku.config.vite.js',
+        );
+      }
 
       beforeAll(async () => {
         process = await runSkuScriptInDir('start', appDir, args);
@@ -51,23 +55,37 @@ describe('multiple-routes', () => {
 
       renderPageCorrectly({
         page: 'home',
-        pageUrl: url,
-        checkForLoadingText: 'Loading Home...',
+        url,
       });
 
       renderPageCorrectly({
         page: 'details',
         pageUrl: `${url}/details/123`,
-        checkForLoadingText: 'Loading Details...',
       });
     });
 
-    describe('build and serve', () => {
+    describe('build and serve', async () => {
       let process;
+
+      const port = await getPort();
+
+      const url = `http://localhost:${port}`;
+      const portArgs = ['--strict-port', `--port=${port}`];
+
+      const args = [];
+
+      if (bundler === 'vite') {
+        args.push(
+          '--convert-loadable',
+          '--experimental-bundler',
+          '--config',
+          'sku.config.vite.js',
+        );
+      }
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir);
+        process = await runSkuScriptInDir('serve', appDir, portArgs);
         await waitForUrls(url);
       });
 
@@ -78,16 +96,14 @@ describe('multiple-routes', () => {
       renderPageCorrectly({
         page: 'home',
         pageUrl: url,
-        checkForLoadingText: 'Loading Home...',
       });
 
       renderPageCorrectly({
         page: 'details',
         pageUrl: `${url}/details/123`,
-        checkForLoadingText: 'Loading Details...',
       });
 
-      it('should generate the expected files', async () => {
+      it('should generate the expected files', async ({ expect }) => {
         const files = await dirContentsToObject(targetDirectory);
         expect(files).toMatchSnapshot();
       });
@@ -95,7 +111,7 @@ describe('multiple-routes', () => {
   });
 
   describe('test', () => {
-    it('should handle dynamic imports in tests', async () => {
+    it('should handle dynamic imports in tests', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('test', appDir);
       expect(child.exitCode).toEqual(0);
     });

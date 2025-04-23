@@ -8,6 +8,8 @@ export default {
     { name: 'seekAnz', host: 'dev.seek.com.au' },
     { name: 'jobStreet', host: 'dev.jobstreet.com' },
   ],
+  clientEntry: 'src/client.jsx',
+  renderEntry: 'src/render.jsx',
   publicPath: '/',
   port: 8200,
   dangerouslySetWebpackConfig: (config) => {

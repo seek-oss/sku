@@ -45,7 +45,6 @@ export const getAppSnapshot = async ({
 
   const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
   const sourceHtml = sanitizeHtml((await response?.text()) || '');
-  await appPage.waitForNetworkIdle();
   const clientRenderContent = sanitizeHtml(await appPage.content());
 
   await appPage.close();

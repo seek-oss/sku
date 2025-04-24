@@ -6,9 +6,9 @@ import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject } from '@/utils/configure.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-const { run } = jest;
-
 const log = debug('sku:jest');
+
+const { run } = jest;
 
 const testAction = async (
   {
@@ -25,7 +25,7 @@ const testAction = async (
   const jestPreset = 'sku';
   log(`Using '${jestPreset}' Jest preset`);
 
-  const jestArgv = args;
+  const jestArgv = [...args];
 
   jestArgv.push('--preset', jestPreset);
 

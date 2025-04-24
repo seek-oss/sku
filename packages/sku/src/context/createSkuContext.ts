@@ -245,4 +245,9 @@ export const createSkuContext = ({
   };
 };
 
-export type SkuContext = ReturnType<typeof createSkuContext>;
+type ExtraSkuContextOptions = {
+  convertLoadable?: boolean;
+};
+
+export type SkuContext = ReturnType<typeof createSkuContext> &
+  ExtraSkuContextOptions;

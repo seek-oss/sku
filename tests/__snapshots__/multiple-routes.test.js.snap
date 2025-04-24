@@ -1,6 +1,557 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`multiple-routes > build and serve > should generate the expected files 1`] = `
+exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
+{
+  "AsyncComponent-DtuSLDgp.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-CaxrQeMv.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-DGJnH813.css": "._1hpn1da0{color:#00f}
+",
+  "Home-D-106MY_.css": ".ms22la0{color:red}
+",
+  "Home-DQBwRi9y.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "production/au/details/$id/index.html": "<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
+    <meta charset="UTF-8" >
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
+
+  </head>
+  <body>
+    <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1><!--/$--></div>
+    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
+<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
+<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
+  </body>
+</html>",
+  "production/au/index.html": "<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
+    <meta charset="UTF-8" >
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
+
+  </head>
+  <body>
+    <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - au</h1><!--/$--></div>
+    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
+  </body>
+</html>",
+  "production/nz/nz/details/:id/index.html": "<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
+    <meta charset="UTF-8" >
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
+
+  </head>
+  <body>
+    <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1><!--/$--></div>
+    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
+<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
+<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
+  </body>
+</html>",
+  "production/nz/nz/index.html": "<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
+    <meta charset="UTF-8" >
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
+
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
+
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
+
+  </head>
+  <body>
+    <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - nz</h1><!--/$--></div>
+    <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
+  </body>
+</html>",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`multiple-routes > bundler: vite > build and serve > should render details page correctly 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+    >
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="/static/place/Details-DGJnH813.css"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/Details-CaxrQeMv.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/AsyncComponent-DtuSLDgp.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="_1hpn1da0">
+        Welcome to the Details page - au
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="/static/place/AsyncComponent-DtuSLDgp.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/static/place/Details-CaxrQeMv.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/static/place/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -43,11 +43,34 @@
+       href="/static/place/AsyncComponent-DtuSLDgp.js"
+       crossorigin
+     >
++    <link
++      rel="modulepreload"
++      as="script"
++      crossorigin
++      href="/Details-CaxrQeMv.js"
++    >
++    <link
++      rel="stylesheet"
++      crossorigin
++      href="/Details-DGJnH813.css"
++    >
++    <link
++      rel="modulepreload"
++      as="script"
++      crossorigin
++      href="/AsyncComponent-DtuSLDgp.js"
++    >
++    <link
++      rel="modulepreload"
++      as="script"
++      crossorigin
++      href="/vite-client.js"
++    >
+   </head>
+   <body>
+     <div id="app">
+       <h1 class="_1hpn1da0">
+-        Welcome to the Details page - au
++        Welcome to the Details page - auID: 123
+         <span>
+           Some special async content
+         </span>
+`;
+
+exports[`multiple-routes > bundler: vite > build and serve > should render home page correctly 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+    >
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="/static/place/Home-D-106MY_.css"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/static/place/Home-DQBwRi9y.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="ms22la0">
+        Welcome to the Home page - au
+      </h1>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="/static/place/Home-DQBwRi9y.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/static/place/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -38,6 +38,17 @@
+       href="/static/place/Home-DQBwRi9y.js"
+       crossorigin
+     >
++    <link
++      rel="modulepreload"
++      as="script"
++      crossorigin
++      href="/Home-DQBwRi9y.js"
++    >
++    <link
++      rel="stylesheet"
++      crossorigin
++      href="/Home-D-106MY_.css"
++    >
+   </head>
+   <body>
+     <div id="app">
+`;
+
+exports[`multiple-routes > bundler: vite > start > should render details page correctly 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+    >
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+    >
+    </script>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <script
+      type="module"
+      src="/@id/__x00__/details/123?html-proxy&index=0.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/@id/__x00__/details/123?html-proxy&index=1.js"
+    >
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="Details_root__1hpn1da0">
+        Welcome to the Details page - au
+        <span>
+          Some special async content
+        </span>
+      </h1>
+    </div>
+    <script
+      type="module"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+    >
+    </script>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"au"}
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -36,19 +36,27 @@
+     </style>
+     <script
+       type="module"
+-      src="/@id/__x00__/details/123?html-proxy&index=0.js"
++      src="/@id/__x00__/details/123?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/details/123?html-proxy&index=1.js"
++      src="/@id/__x00__/details/123?html-proxy&amp;index=1.js"
+     >
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Details.css.js.vanilla.css"
++    >
++      .Details_root__1hpn1da0 {
++  color: blue;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <h1 class="Details_root__1hpn1da0">
+-        Welcome to the Details page - au
++        Welcome to the Details page - auID: 123
+         <span>
+           Some special async content
+         </span>
+`;
+
+exports[`multiple-routes > bundler: vite > start > should render home page correctly 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+    >
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+    >
+    </script>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+    </script>
+    <script>
+      console.log('Hi');
+    </script>
+    <style type="text/css">
+      body {
+        background: pink;
+      }
+    </style>
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
+    >
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="Home_root__ms22la0">
+        Welcome to the Home page - au
+      </h1>
+    </div>
+    <script
+      type="module"
+      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+    >
+    </script>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"au"}
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -36,14 +36,22 @@
+     </style>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Home.css.js.vanilla.css"
++    >
++      .Home_root__ms22la0 {
++  color: red;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+`;
+
+exports[`multiple-routes > bundler: webpack > build and serve > should generate the expected files 1`] = `
 {
   "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -153,7 +704,7 @@ exports[`multiple-routes > build and serve > should generate the expected files 
 }
 `;
 
-exports[`multiple-routes > build and serve > should return details page 1`] = `
+exports[`multiple-routes > bundler: webpack > build and serve > should render details page correctly 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -289,7 +840,7 @@ POST HYDRATE DIFFS:
          </span>
 `;
 
-exports[`multiple-routes > build and serve > should return home page 1`] = `
+exports[`multiple-routes > bundler: webpack > build and serve > should render home page correctly 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -398,7 +949,7 @@ exports[`multiple-routes > build and serve > should return home page 1`] = `
 POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`multiple-routes > start > should render details page correctly 1`] = `
+exports[`multiple-routes > bundler: webpack > start > should render details page correctly 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -534,7 +1085,7 @@ POST HYDRATE DIFFS:
          </span>
 `;
 
-exports[`multiple-routes > start > should render home page correctly 1`] = `
+exports[`multiple-routes > bundler: webpack > start > should render home page correctly 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>

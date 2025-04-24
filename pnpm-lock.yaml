@@ -263,6 +263,9 @@ importers:
 
   fixtures/multiple-routes:
     dependencies:
+      '@vanilla-extract/css':
+        specifier: ^1.17.1
+        version: 1.17.1(babel-plugin-macros@3.1.0)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -428,13 +431,13 @@ importers:
         version: 8.6.7(@types/react@18.3.18)(storybook@8.6.7(prettier@3.5.3))
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.5(webpack@5.98.0(@swc/core@1.11.11)(esbuild@0.25.1))
+        version: 3.0.5(webpack@5.98.0(@swc/core@1.11.11))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.6.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.6.7(@swc/core@1.11.11)(esbuild@0.25.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+        version: 8.6.7(@swc/core@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.18
@@ -468,13 +471,13 @@ importers:
         version: link:../../test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.5(webpack@5.98.0(@swc/core@1.11.11))
+        version: 3.0.5(webpack@5.98.0(@swc/core@1.11.11)(esbuild@0.25.1))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.6.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.6.7(@swc/core@1.11.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
+        version: 8.6.7(@swc/core@1.11.11)(esbuild@0.25.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.7(prettier@3.5.3))(typescript@5.8.2)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.18
@@ -600,6 +603,9 @@ importers:
         version: 7.26.10
       '@babel/generator':
         specifier: ^7.26.9
+        version: 7.26.10
+      '@babel/parser':
+        specifier: ^7.26.10
         version: 7.26.10
       '@babel/plugin-transform-react-constant-elements':
         specifier: ^7.21.3

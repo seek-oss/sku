@@ -1,6 +1,8 @@
 import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
+  clientEntry: './src/client.jsx',
+  renderEntry: './src/render.jsx',
   sites: [
     {
       name: 'au',

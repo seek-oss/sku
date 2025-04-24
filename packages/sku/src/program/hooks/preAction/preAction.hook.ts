@@ -11,6 +11,10 @@ export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
     port,
     strictPort,
   });
+
+  // Set extra options:
+  skuContext.convertLoadable = actionCommand.opts()?.convertLoadable;
+
   initializeTelemetry(skuContext);
   actionCommand.setOptionValue('skuContext', skuContext);
 

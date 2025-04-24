@@ -22,7 +22,7 @@ const appDir = path.dirname(
 const targetDirectory = `${appDir}/dist`;
 
 describe('custom-src-paths', () => {
-  describe.for(['vite', 'webpack'])('bundler %s', (bundler: string) => {
+  describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
     describe('start', async () => {
       let process: ChildProcess;
 

@@ -1,0 +1,38 @@
+{
+  "name": "@sku/codemod",
+  "version": "0.0.0",
+  "description": "Codemods for sku",
+  "type": "module",
+  "bin": {
+    "sku-codemods": "./bin.js"
+  },
+  "scripts": {
+    "build": "tspc --project tsconfig.build.json",
+    "prepare": "ts-patch install -s"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "execa": "^9.5.2",
+    "globby": "^14.1.0",
+    "jscodeshift": "^17.3.0",
+    "prompts": "^2.4.2",
+    "typescript": "~5.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/sku-codemod"
+  },
+  "author": "SEEK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seek-oss/sku/issues"
+  },
+  "homepage": "https://github.com/seek-oss/sku/packages/sku-codemod#readme",
+  "devDependencies": {
+    "@types/jscodeshift": "^17.3.0",
+    "@types/prompts": "^2.4.9",
+    "ts-patch": "^3.3.0",
+    "typescript-transform-paths": "^3.5.2"
+  }
+}

@@ -21,26 +21,29 @@ const clientEntry = require.resolve('../entries/vite-client.js');
 export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
-    return async () => {
-      if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
-        metricsMeasurers.initialPageLoad.mark();
+    if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+      metricsMeasurers.initialPageLoad.mark();
+    }
+    // We need to start loading the devMiddleware before Vite's middleware runs.
+    // Trying to lazy load it after Vite's middleware causes the Vite 404 middleware to take over the requests because this hook is run async.
+    if (skuContext.useDevServerMiddleware) {
+      log(
+        'Using dev server middleware at %s',
+        skuContext.paths.devServerMiddleware,
+      );
+      const devServerMiddleware = (
+        await import(skuContext.paths.devServerMiddleware)
+      ).default;
+      if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+        devServerMiddleware(server);
+        log('Dev server middleware loaded');
       }
-      if (skuContext.useDevServerMiddleware) {
-        log(
-          'Using dev server middleware at %s',
-          skuContext.paths.devServerMiddleware,
-        );
-        const devServerMiddleware = (
-          await import(skuContext.paths.devServerMiddleware)
-        ).default;
-        if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-          devServerMiddleware(server);
-          log('Dev server middleware loaded');
-        }
-      }
+    }
 
+    // Code returned from here will run *after* Vite's middleware. Lazy loading middleware should happen outside (before) this return.
+    return async () => {
       log('Configuring server middleware');
-      server.middlewares.use(async (req, res, next) => {
+      server.middlewares.use('/', async (req, res, next) => {
         log('Handling request:', req.url);
         // Check that the request is for the index.html file (i.e., a valid route in our app)
         // If we don't check for index.html, the middleware will run for every request, including static assets.

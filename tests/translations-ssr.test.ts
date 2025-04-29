@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
-import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
+import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.ts';
 import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 
@@ -15,8 +15,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),
 );
-
-const skuSsrConfig = skuSsrConfigImport;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({

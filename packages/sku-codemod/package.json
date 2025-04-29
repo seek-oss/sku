@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "description": "Codemods for sku",
   "type": "module",
-  "bin": {
-    "sku-codemods": "./bin.js"
-  },
+  "bin": "./bin.js",
   "scripts": {
     "build": "tspc --project tsconfig.build.json",
     "prepare": "ts-patch install -s"
@@ -28,6 +26,11 @@
   "bugs": {
     "url": "https://github.com/seek-oss/sku/issues"
   },
+  "files": [
+    "bin.js",
+    "dist",
+    "tsconfig.json"
+  ],
   "homepage": "https://github.com/seek-oss/sku/packages/sku-codemod#readme",
   "devDependencies": {
     "@types/jscodeshift": "^17.3.0",

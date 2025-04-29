@@ -279,6 +279,9 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
+      '@sku/codemod':
+        specifier: workspace:*
+        version: link:../../packages/sku-codemod
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1056,12 +1059,6 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.2)
-
-  packages/sku-codemods:
-    dependencies:
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
 
   test-utils:
     devDependencies:

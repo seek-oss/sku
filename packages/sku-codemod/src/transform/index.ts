@@ -1,17 +1,21 @@
-// @ts-expect-error
-import execa from 'execa';
-// @ts-expect-error
-import globby from 'globby';
+import { execa } from 'execa';
+import { globbySync } from 'globby';
 import prompts from 'prompts';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const require = createRequire(import.meta.url);
 
 const expandFilePathsIfNeeded = (filesBeforeExpansion: string[]) => {
   const shouldExpandFiles = filesBeforeExpansion.some((file) =>
     file.includes('*'),
   );
   return shouldExpandFiles
-    ? globby.sync(filesBeforeExpansion)
+    ? globbySync(filesBeforeExpansion)
     : filesBeforeExpansion;
 };
 
@@ -73,7 +77,7 @@ export const runTransform = async (
 
   const transformerPath = join(
     transformerDirectory,
-    `${transformer}/${transformer}.js`,
+    `${transformer}/${transformer}.cjs`,
   );
 
   let args = [];
@@ -93,7 +97,6 @@ export const runTransform = async (
   args.push('--no-babel');
 
   args.push('--ignore-pattern=**/node_modules/**');
-  args.push('--ignore-pattern=**/.next/**');
 
   args.push('--extensions=tsx,ts,jsx,js');
 

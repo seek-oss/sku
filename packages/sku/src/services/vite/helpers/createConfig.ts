@@ -6,7 +6,7 @@ import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
-import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin.js';
+import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
 import vocabPluginVite from '@vocab/vite';
@@ -43,7 +43,9 @@ export const createViteConfig = ({
       }),
       react(),
       vanillaExtractPlugin(),
-      skuVitePreloadPlugin(),
+      skuVitePreloadPlugin({
+        convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
+      }),
       ...plugins,
     ],
     resolve: {
@@ -91,6 +93,9 @@ export const createViteConfig = ({
         '@vanilla-extract/css/adapter',
         'serialize-javascript',
         'used-styles',
+        ...(configType === 'ssg' || configType === 'ssr'
+          ? ['sku/vite/loadable']
+          : []),
       ],
       noExternal: ['@vanilla-extract/css', 'braid-design-system'],
     },

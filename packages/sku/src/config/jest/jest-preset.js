@@ -35,7 +35,9 @@ export default jestDecorator({
       import.meta.resolve('@vanilla-extract/jest-transform'),
     ),
     '\\.tsx?$': fileURLToPath(import.meta.resolve('./tsBabelTransform.js')),
-    '\\.[cm]?js$': fileURLToPath(import.meta.resolve('./jsBabelTransform.js')),
+    '\\.[cm]?jsx?$': fileURLToPath(
+      import.meta.resolve('./jsBabelTransform.js'),
+    ),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding

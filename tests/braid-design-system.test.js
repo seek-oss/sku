@@ -25,7 +25,7 @@ function getLocalUrl(site, port) {
 }
 
 describe('braid-design-system', () => {
-  describe.each(['vite', 'webpack'])('bundler %s', (bundler) => {
+  describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
     describe('start', async () => {
       let server;
 

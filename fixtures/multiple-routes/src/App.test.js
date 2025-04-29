@@ -1,6 +1,7 @@
-import App from './App';
-import { StaticRouter } from 'react-router-dom/server';
 import { render } from '@testing-library/react';
+import { StaticRouter } from 'react-router-dom/server';
+
+import App from './App.jsx';
 
 describe('multiple-routes', () => {
   it('should support loadable components', () => {

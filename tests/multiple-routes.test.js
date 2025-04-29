@@ -18,34 +18,95 @@ const appDir = path.dirname(
 
 const targetDirectory = `${appDir}/dist`;
 
+const renderPageCorrectly = async ({ page, pageUrl }) => {
+  it(`should render ${page} page correctly`, async ({ expect }) => {
+    const snapshot = await getAppSnapshot({ url: pageUrl, expect });
+    expect(snapshot).toMatchSnapshot();
+  });
+};
+
 describe('multiple-routes', () => {
-  describe('start', async () => {
-    const port = await getPort();
+  describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
+    describe('start', async () => {
+      let process;
 
-    const url = `http://localhost:${port}`;
-    const args = ['--strict-port', `--port=${port}`];
-    let process;
+      const port = await getPort();
 
-    beforeAll(async () => {
-      process = await runSkuScriptInDir('start', appDir, args);
-      await waitForUrls(url);
-    });
+      const url = `http://localhost:${port}`;
+      const args = ['--strict-port', `--port=${port}`];
 
-    afterAll(async () => {
-      await process.kill();
-    });
+      if (bundler === 'vite') {
+        args.push(
+          '--convert-loadable',
+          '--experimental-bundler',
+          '--config',
+          'sku.config.vite.js',
+        );
+      }
 
-    it('should render home page correctly', async ({ expect }) => {
-      const snapshot = await getAppSnapshot({ url, expect });
-      expect(snapshot).toMatchSnapshot();
-    });
-
-    it('should render details page correctly', async ({ expect }) => {
-      const snapshot = await getAppSnapshot({
-        url: `${url}/details/123`,
-        expect,
+      beforeAll(async () => {
+        process = await runSkuScriptInDir('start', appDir, args);
+        await waitForUrls(url);
       });
-      expect(snapshot).toMatchSnapshot();
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      renderPageCorrectly({
+        page: 'home',
+        pageUrl: url,
+      });
+
+      renderPageCorrectly({
+        page: 'details',
+        pageUrl: `${url}/details/123`,
+      });
+    });
+
+    describe('build and serve', async () => {
+      let process;
+
+      const port = await getPort();
+
+      const url = `http://localhost:${port}`;
+      const portArgs = ['--strict-port', `--port=${port}`];
+
+      const args = [];
+
+      if (bundler === 'vite') {
+        args.push(
+          '--convert-loadable',
+          '--experimental-bundler',
+          '--config',
+          'sku.config.vite.js',
+        );
+      }
+
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args);
+        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        await waitForUrls(url);
+      });
+
+      afterAll(async () => {
+        await process.kill();
+      });
+
+      renderPageCorrectly({
+        page: 'home',
+        pageUrl: url,
+      });
+
+      renderPageCorrectly({
+        page: 'details',
+        pageUrl: `${url}/details/123`,
+      });
+
+      it('should generate the expected files', async ({ expect }) => {
+        const files = await dirContentsToObject(targetDirectory);
+        expect(files).toMatchSnapshot();
+      });
     });
   });
 
@@ -53,39 +114,6 @@ describe('multiple-routes', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
       const { child } = await runSkuScriptInDir('test', appDir);
       expect(child.exitCode).toEqual(0);
-    });
-  });
-
-  describe('build and serve', async () => {
-    let process;
-    const port = await getPort();
-
-    const url = `http://localhost:${port}`;
-    const args = ['--strict-port', `--port=${port}`];
-
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir, args);
-      await waitForUrls(url);
-    });
-
-    afterAll(async () => {
-      await process.kill();
-    });
-
-    it('should return home page', async ({ expect }) => {
-      const app = await getAppSnapshot({ url, expect });
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should return details page', async ({ expect }) => {
-      const app = await getAppSnapshot({ url: `${url}/details/123`, expect });
-      expect(app).toMatchSnapshot();
-    });
-
-    it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(targetDirectory);
-      expect(files).toMatchSnapshot();
     });
   });
 });

@@ -8,10 +8,12 @@ export const getAppSnapshot = async ({
   url,
   warningFilter = () => true,
   expect,
+  waitUntil = 'load',
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;
   expect: ExpectStatic;
+  waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
 }) => {
   const warnings: string[] = [];
   const errors: string[] = [];
@@ -43,7 +45,7 @@ export const getAppSnapshot = async ({
     }
   });
 
-  const response = await appPage.goto(url, { waitUntil: 'networkidle2' });
+  const response = await appPage.goto(url, { waitUntil });
   const sourceHtml = sanitizeHtml((await response?.text()) || '');
   const clientRenderContent = sanitizeHtml(await appPage.content());
 

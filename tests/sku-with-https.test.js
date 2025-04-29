@@ -20,7 +20,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
 );
 
-describe.sequential('sku-with-https', () => {
+describe('sku-with-https', () => {
   describe.each(['vite', 'webpack'])('bundler: %s', async (bundler) => {
     const port = await getPort();
     const args = ['--strict-port', `--port=${port}`];

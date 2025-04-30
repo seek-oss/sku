@@ -72,10 +72,8 @@ export const createViteConfig = ({
             configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
           manualChunks: (id, ctx) => {
-            // handle your own manual chunks before or after the vocab chunks.
             const languageChunkName = createVocabChunks(id, ctx);
             if (languageChunkName) {
-              // vocab has found a language chunk. Either return it or handle it in your own way.
               return languageChunkName;
             }
           },

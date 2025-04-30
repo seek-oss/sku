@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
-import { runTransform } from '../transform/index.js';
+import { runTransform } from '../transform/runner.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -22,7 +22,6 @@ program
   )
   .usage('[codemod] [source] [options]')
   .helpOption('-h, --help', 'Display this help message.')
-  .option('-f, --force', 'Bypass Git safety checks and forcibly run codemods')
   .option('-d, --dry', 'Dry run (no changes are made to files)')
   .option(
     '-p, --print',

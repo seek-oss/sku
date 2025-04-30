@@ -13,6 +13,7 @@ import { createRequire } from 'node:module';
 const execFile = promisify(_execFile);
 const require = createRequire(import.meta.url);
 const skuBin = require.resolve('../packages/sku/bin.js');
+const skuCodemodBin = require.resolve('../packages/sku-codemod/bin.js');
 
 export const run = async (
   file: string,
@@ -101,4 +102,26 @@ export async function runSkuScriptInDir(
 
   // Otherwise, resolve the promise when the script finishes
   return run(skuBin, [script, ...(args || [])], processOptions);
+}
+
+export async function runSkuCodemod(
+  codemod: string,
+  cwd: string,
+  args?: string[],
+  options?: SpawnOptions,
+) {
+  const processOptions = {
+    cwd,
+    // Increased from 1024 * 1024 because Storybook can produce very large outputs.
+    // https://nodejs.org/docs/latest-v18.x/api/child_process.html#child_process_child_process_exec_command_options_callback
+    maxBuffer: 5 * 1024 * 1024,
+    ...options,
+    env: {
+      ...process.env,
+      ...options?.env,
+    },
+  };
+
+  // Otherwise, resolve the promise when the script finishes
+  return run(skuCodemodBin, [codemod, ...(args || [])], processOptions);
 }

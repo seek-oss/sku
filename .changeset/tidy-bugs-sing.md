@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-`vite (vocab)`: Adding language chunks to build output
+`vite`: Support multi-language applications via Vocab

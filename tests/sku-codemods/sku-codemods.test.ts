@@ -1,14 +1,8 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
-import path from 'node:path';
+import { describe, it } from 'vitest';
 import fs from 'node:fs/promises';
 import { runSkuCodemod } from '@sku-private/test-utils';
 import dedent from 'dedent';
-
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-
-const fixtureDirectory = __dirname;
-const projectName = 'codemod-project';
-const projectDirectory = path.join(fixtureDirectory, projectName);
+import { createFixture } from 'fs-fixture';
 
 describe('sku codemods', () => {
   describe('"transform-vite-loadable" codemod', async () => {
@@ -33,32 +27,20 @@ describe('sku codemods', () => {
       },
     ];
 
-    beforeAll(async () => {
-      await fs.rm(projectDirectory, { recursive: true, force: true });
-
-      await fs.rm(path.join(fixtureDirectory, projectName), {
-        recursive: true,
-        force: true,
-      });
-
-      await fs.mkdir(projectDirectory, { recursive: true });
-
-      filesToTest.forEach(async ({ filename, input }) => {
-        const filePath = path.join(projectDirectory, filename);
-        await fs.writeFile(filePath, input);
-      });
-    });
-
-    afterAll(async () => {
-      await fs.rm(projectDirectory, { recursive: true, force: true });
-    });
+    const fixture = await createFixture(
+      filesToTest.reduce((acc: Record<string, string>, { filename, input }) => {
+        acc[filename] = input;
+        return acc;
+      }, {}),
+    );
 
     it('All output files should be the same', async ({ expect }) => {
-      await runSkuCodemod('transform-vite-loadable', projectDirectory, ['.']);
-
+      await runSkuCodemod('transform-vite-loadable', fixture.path, ['.']);
       filesToTest.forEach(async ({ filename, output }) => {
-        const filePath = path.join(projectDirectory, filename);
-        const fileContent = await fs.readFile(filePath, 'utf-8');
+        const fileContent = await fs.readFile(
+          fixture.getPath(filename),
+          'utf-8',
+        );
         expect(fileContent).toEqual(output);
       });
     });

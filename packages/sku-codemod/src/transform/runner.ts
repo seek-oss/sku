@@ -30,6 +30,7 @@ export const runTransform = async (
   options: Options,
 ): Promise<void> => {
   let transformer = transform;
+  console.log('path', path);
   let directory = path;
 
   if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {

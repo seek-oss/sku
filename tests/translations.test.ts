@@ -2,7 +2,11 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
+import {
+  getPort,
+  runSkuScriptInDir,
+  waitForUrls,
+} from '@sku-private/test-utils';
 
 import skuConfig from '@sku-fixtures/translations/sku.config.ts';
 import type { ChildProcess } from 'node:child_process';
@@ -18,38 +22,50 @@ assert(skuConfig.port, 'sku config has port');
 const baseUrl = `http://localhost:${skuConfig.port}`;
 
 describe('translations', () => {
-  let process: ChildProcess;
+  describe.sequential.for(['vite', 'webpack'])(
+    'bundler %s',
+    async (bundler) => {
+      let process: ChildProcess;
+      const port = await getPort();
+      const args: Record<string, string[]> = {
+        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+      };
 
-  beforeAll(async () => {
-    await runSkuScriptInDir('build', appDir);
-    process = await runSkuScriptInDir('serve', appDir);
-    await waitForUrls(`${baseUrl}/en`);
-  });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, args[bundler]);
+        process = await runSkuScriptInDir('serve', appDir, [
+          '--strict-port',
+          `--port=${port}`,
+        ]);
+        await waitForUrls(`${baseUrl}/en`);
+      });
 
-  afterAll(() => {
-    process.kill();
-  });
+      afterAll(() => {
+        process.kill();
+      });
 
-  it('should render en', async ({ expect }) => {
-    const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
-    expect(app).toMatchSnapshot();
-  });
+      it('should render en', async ({ expect }) => {
+        const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
+        expect(app).toMatchSnapshot();
+      });
 
-  it('should render fr', async ({ expect }) => {
-    const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
-    expect(app).toMatchSnapshot();
-  });
+      it('should render fr', async ({ expect }) => {
+        const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
+        expect(app).toMatchSnapshot();
+      });
 
-  it('should render en-PSEUDO post-hydration', async ({ expect }) => {
-    const app = await getAppSnapshot({
-      expect,
-      url: `${baseUrl}/en?pseudo=true`,
-    });
-    expect(app).toMatchSnapshot();
-  });
+      it('should render en-PSEUDO post-hydration', async ({ expect }) => {
+        const app = await getAppSnapshot({
+          expect,
+          url: `${baseUrl}/en?pseudo=true`,
+        });
+        expect(app).toMatchSnapshot();
+      });
 
-  it('should support query parameters', async ({ expect }) => {
-    const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
-    expect(app).toMatchSnapshot();
-  });
+      it('should support query parameters', async ({ expect }) => {
+        const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
+        expect(app).toMatchSnapshot();
+      });
+    },
+  );
 });

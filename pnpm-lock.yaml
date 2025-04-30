@@ -539,6 +539,9 @@ importers:
       '@vocab/react':
         specifier: ^1.1.11
         version: 1.1.12(react@18.3.1)
+      '@vocab/vite':
+        specifier: ^0.1.1
+        version: 0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.10(webpack@5.98.0(@swc/core@1.11.11))

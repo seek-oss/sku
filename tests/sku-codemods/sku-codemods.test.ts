@@ -56,7 +56,9 @@ describe('sku codemods', () => {
         fixture.path,
         ['.', '-dp'],
       );
-      expect(stdout).toMatchSnapshot();
+      // Replace fixture.path with cwd to stop snapshot problems when running in different environments.
+      const trimmedString = stdout.replaceAll(fixture.path, '/$cwd/');
+      expect(trimmedString).toMatchSnapshot();
     });
 
     it('All output files should be the same', async ({ expect }) => {

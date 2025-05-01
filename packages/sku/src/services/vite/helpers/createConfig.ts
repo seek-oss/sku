@@ -11,7 +11,7 @@ import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbu
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
 import vocabPluginVite from '@vocab/vite';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
-import { createVocabChunks } from '@vocab/vite/create-vocab-chunks';
+import { createVocabChunks } from '@vocab/vite/chunks';
 
 const require = createRequire(import.meta.url);
 

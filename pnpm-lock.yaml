@@ -540,8 +540,8 @@ importers:
         specifier: ^1.1.11
         version: 1.1.12(react@18.3.1)
       '@vocab/vite':
-        specifier: ^0.1.1
-        version: 0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+        specifier: ^0.2.0
+        version: 0.2.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.10(webpack@5.98.0(@swc/core@1.11.11))
@@ -704,8 +704,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@vocab/vite':
-        specifier: ^0.1.1
-        version: 0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
+        specifier: ^0.2.0
+        version: 0.2.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.10(webpack@5.98.0(@swc/core@1.11.11)(esbuild@0.25.1))
@@ -3305,8 +3305,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@0.1.1':
-    resolution: {integrity: sha512-IuKOP6X+oBwsBjz8jmN6qrOCnyrMV6UiSnhUb/Gi0DUmNklr4uE0aIbaPH4Hup9XP7OYdu+rJoIa/DOYY75q7w==}
+  '@vocab/vite@0.2.0':
+    resolution: {integrity: sha512-3opaBv9qZokHJTcynA/qjQacC3lCIuUPTsuslkUJA3VySGXJEwxrz2AKnLzdBN4bsyYc5Pb5489xeCKQn0IMxQ==}
     peerDependencies:
       vite: ^5.4.8
 
@@ -11591,7 +11591,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@0.1.1(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
+  '@vocab/vite@0.2.0(vite@6.2.2(@types/node@18.19.80)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
       '@vocab/core': 1.6.3
       cjs-module-lexer: 1.4.3

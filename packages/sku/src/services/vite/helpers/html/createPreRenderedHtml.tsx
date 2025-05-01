@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 
 import type { Render, RenderAppProps } from '@/types/types.js';
 import { serializeConfig } from '../serializeConfig.js';
-import { getChunkName } from '@vocab/webpack/chunk-name';
+import { getChunkName } from '@vocab/vite/chunks';
 
 const log = debug('sku:render:html');
 

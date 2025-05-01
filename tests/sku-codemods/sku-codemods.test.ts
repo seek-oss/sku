@@ -34,6 +34,31 @@ describe('sku codemods', () => {
       }, {}),
     );
 
+    it('"--dry" should not change any files', async ({ expect }) => {
+      await runSkuCodemod('transform-vite-loadable', fixture.path, [
+        '.',
+        '--dry',
+      ]);
+      filesToTest.forEach(async ({ filename, input }) => {
+        const fileContent = await fs.readFile(
+          fixture.getPath(filename),
+          'utf-8',
+        );
+        expect(fileContent).toEqual(input);
+      });
+    });
+
+    it('"--dry --print" should not change any files and print the changes to stdout', async ({
+      expect,
+    }) => {
+      const { stdout } = await runSkuCodemod(
+        'transform-vite-loadable',
+        fixture.path,
+        ['.', '-dp'],
+      );
+      expect(stdout).toMatchSnapshot();
+    });
+
     it('All output files should be the same', async ({ expect }) => {
       await runSkuCodemod('transform-vite-loadable', fixture.path, ['.']);
       filesToTest.forEach(async ({ filename, output }) => {

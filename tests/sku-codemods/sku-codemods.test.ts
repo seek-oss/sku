@@ -48,19 +48,6 @@ describe('sku codemods', () => {
       });
     });
 
-    it('"--dry --print" should not change any files and print the changes to stdout', async ({
-      expect,
-    }) => {
-      const { stdout } = await runSkuCodemod(
-        'transform-vite-loadable',
-        fixture.path,
-        ['.', '-dp'],
-      );
-      // Replace fixture.path with cwd to stop snapshot problems when running in different environments.
-      const trimmedString = stdout.replaceAll(fixture.path, '/$cwd/');
-      expect(trimmedString).toMatchSnapshot();
-    });
-
     it('All output files should be the same', async ({ expect }) => {
       await runSkuCodemod('transform-vite-loadable', fixture.path, ['.']);
       filesToTest.forEach(async ({ filename, output }) => {

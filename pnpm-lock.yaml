@@ -282,9 +282,6 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../test-utils
-      '@sku/codemod':
-        specifier: workspace:*
-        version: link:../../packages/sku-codemod
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -294,6 +291,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      sku-codemod:
+        specifier: workspace:*
+        version: link:../../packages/sku-codemod
 
   fixtures/public-path:
     dependencies:

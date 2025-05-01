@@ -1,5 +1,5 @@
 {
-  "name": "@sku/codemod",
+  "name": "sku-codemod",
   "version": "0.0.0",
   "description": "Codemods for sku",
   "type": "module",

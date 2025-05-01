@@ -10,4 +10,5 @@ export const CODEMODS: Codemod[] = [
     value: 'transform-vite-loadable',
     version: '0.0.1',
   },
+  /* [add-sku-codemod-generator: codemod] */
 ];

@@ -19,7 +19,6 @@ const appDir = path.dirname(
 );
 
 assert(skuConfig.port, 'sku config has port');
-const baseUrl = `http://localhost:${skuConfig.port}`;
 
 describe('translations', () => {
   describe.sequential.for(['vite', 'webpack'])(
@@ -27,6 +26,7 @@ describe('translations', () => {
     async (bundler) => {
       let process: ChildProcess;
       const port = await getPort();
+      const baseUrl = `http://localhost:${port}`;
       const args: Record<string, string[]> = {
         vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
       };

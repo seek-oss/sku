@@ -1,7 +1,8 @@
 import waitOn from 'wait-on';
 
 export const waitForUrls = async (...urls) => {
-  const timeout = 200000;
+  // this should be less than the test timeout otherwise we will not see the error
+  const timeout = 25000;
 
   try {
     return await waitOn({

@@ -6,7 +6,6 @@
   "exclude": [
     "**/*.test.ts",
     "**/*.test.js",
-    "**/*.input.tsx",
-    "**/*.output.tsx"
+    "**/__testfixtures__"
   ]
 }

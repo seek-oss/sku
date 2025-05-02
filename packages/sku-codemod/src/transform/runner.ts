@@ -134,7 +134,7 @@ const getAllFiles = async (paths: string[]) => {
     paths.map(
       (file) =>
         new Promise<string[]>((r) => {
-          const files = globbySync([file, '!node_modules', '!dist'], {
+          const files = globbySync([file, '!**/node_modules', '!**/dist'], {
             absolute: true,
           });
           r(files);

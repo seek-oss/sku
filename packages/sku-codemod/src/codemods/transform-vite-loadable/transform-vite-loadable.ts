@@ -3,19 +3,70 @@ import { parse, Lang } from '@ast-grep/napi';
 export const transform = (source: string) => {
   const ast = parse(Lang.TypeScript, source);
   const root = ast.root();
-  const node = root.find("import $IMPORT_NAME from 'sku/@loadable/component';");
 
-  if (!node) {
+  const importStatement = root.find({
+    rule: {
+      kind: 'import_statement',
+      all: [
+        {
+          has: {
+            kind: 'string',
+            pattern: "'sku/@loadable/component'",
+          },
+        },
+        {
+          has: {
+            kind: 'import_clause',
+            has: {
+              kind: 'identifier',
+            },
+          },
+        },
+      ],
+    },
+  });
+
+  if (!importStatement) {
+    // No import statement found for this file.
     return false;
   }
 
-  const importName = node.getMatch('IMPORT_NAME')?.text();
+  const identifier = importStatement?.find({
+    rule: {
+      kind: 'identifier',
+      inside: {
+        kind: 'import_clause',
+      },
+    },
+  });
 
-  const importStatement =
-    importName === 'loadable' ? 'loadable' : `loadable as ${importName}`;
+  if (!identifier) {
+    // no named identifier found for this file.
+    return false;
+  }
 
-  const edit = node.replace(
-    `import { ${importStatement} } from 'sku/vite/loadable';`,
+  // Check if the import statement also imports named imports from sku/@loadable/components.
+  const namedImports = importStatement?.find({
+    rule: {
+      kind: 'named_imports',
+      inside: {
+        kind: 'import_clause',
+      },
+    },
+  });
+
+  const identifierName =
+    identifier?.text() === 'loadable'
+      ? identifier?.text()
+      : `loadable as ${identifier?.text()}`;
+
+  const loadableImportStatement = `import { ${identifierName} } from 'sku/vite/loadable';`;
+  const loadableReadyImportStatement = namedImports
+    ? `import ${namedImports.text()} from 'sku/@loadable/component';\n`
+    : '';
+
+  const edit = importStatement.replace(
+    [loadableReadyImportStatement, loadableImportStatement].join(''),
   );
 
   return root.commitEdits([edit]);

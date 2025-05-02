@@ -378,6 +378,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      sku-codemod:
+        specifier: workspace:*
+        version: link:../../packages/sku-codemod
 
   fixtures/source-maps:
     dependencies:

@@ -25,6 +25,30 @@ describe('sku codemods', () => {
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
       },
+      {
+        filename: 'onlyNamedImportFixture.tsx',
+        input: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+
+        loadableReady();`,
+        output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+
+        loadableReady();`,
+      },
+      {
+        filename: 'mixedImportFixture.tsx',
+        input: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+        import loadable from 'sku/@loadable/component';
+
+        loadable();
+
+        loadableReady();`,
+        output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+        import { loadable } from 'sku/vite/loadable';
+
+        loadable();
+
+        loadableReady();`,
+      },
     ];
 
     const fixture = await createFixture(

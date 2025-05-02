@@ -59,12 +59,37 @@ const runTest = async (
   );
 };
 
+const runNoChangeTest = async (
+  dirName: string,
+  transformName: string,
+  testFilePrefix: string,
+  testOptions: Record<string, unknown>,
+) => {
+  const transform = (await import(path.join(dirName, '..', transformName)))
+    .transform;
+  const inputPath = path.join(
+    dirName,
+    '..',
+    '__testfixtures__',
+    `${testFilePrefix}.unchanged.${testOptions.extension}`,
+  );
+  const source = fs.readFileSync(inputPath, 'utf8');
+  const output = await transform(source);
+  expect(output).toEqual(false);
+};
+
 export const defineTest = (
   dirName: string,
   transformName: string,
   testFilePrefix: string,
   testOptions: Record<string, unknown> = {},
 ) => {
+  if (testOptions.shouldNotChange) {
+    it(`should not transform using "${testFilePrefix}" data`, async () => {
+      runNoChangeTest(dirName, transformName, testFilePrefix, testOptions);
+    });
+    return;
+  }
   const testName = testFilePrefix
     ? `transforms correctly using "${testFilePrefix}" data`
     : 'transforms correctly';

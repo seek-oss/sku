@@ -3,9 +3,5 @@
   "compilerOptions": {
     "outDir": "./dist"
   },
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.js",
-    "**/__testfixtures__"
-  ]
+  "exclude": ["**/*.test.ts", "**/*.test.js", "**/__testfixtures__"]
 }

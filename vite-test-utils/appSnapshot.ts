@@ -1,4 +1,5 @@
 import type { ExpectStatic } from 'vitest';
+import { TEST_TIMEOUT } from '../vitest.config.ts';
 
 function sanitizeHtml(str: string) {
   return str.replaceAll(process.cwd(), '{cwd}');
@@ -43,14 +44,16 @@ export const getAppSnapshot = async ({
     }
   });
 
-  const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
-  const sourceHtml = sanitizeHtml((await response?.text()) || '');
-  const clientRenderContent = sanitizeHtml(await appPage.content());
+  try {
+    const response = await appPage.goto(url, { timeout: TEST_TIMEOUT });
+    const sourceHtml = sanitizeHtml((await response?.text()) || '');
+    const clientRenderContent = sanitizeHtml(await appPage.content());
 
-  await appPage.close();
+    expect(warnings).toEqual([]);
+    expect(errors).toEqual([]);
 
-  expect(warnings).toEqual([]);
-  expect(errors).toEqual([]);
-
-  return { sourceHtml, clientRenderContent };
+    return { sourceHtml, clientRenderContent };
+  } finally {
+    await appPage.close();
+  }
 };

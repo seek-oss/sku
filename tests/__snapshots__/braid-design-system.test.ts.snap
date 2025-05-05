@@ -1,5 +1,461 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`braid-design-system > bundler vite > build > should generate the expected files 1`] = `
+{
+  "jobStreet/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client-BhFiESAO.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'jobStreet';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">Hello <!-- -->jobStreet<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
+<script type="module" src="/vite-client.js" ></script>
+      </body>
+    </html>
+  ",
+  "seekAnz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client-BhFiESAO.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'seekAnz';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">Hello <!-- -->seekAnz<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
+<script type="module" src="/vite-client.js" ></script>
+      </body>
+    </html>
+  ",
+  "vite-client-BhFiESAO.css": "._1gdwseo0{margin:0;padding:0;border:0;box-sizing:border-box;font-size:100%;font:inherit;vertical-align:baseline;-webkit-tap-highlight-color:transparent}[data-braid-hidefocusrings] ._1gdwseo0{outline:none}._1gdwseo1{display:block}._1gdwseo2{line-height:1}._1gdwseo3{list-style:none}._1gdwseo4{quotes:none}._1gdwseo4:before,._1gdwseo4:after{content:""}._1gdwseo5{border-collapse:collapse;border-spacing:0}._1gdwseo6{-webkit-appearance:none;-moz-appearance:none;appearance:none}._1gdwseo7{background-color:transparent}._1gdwseo9{color:inherit}._1gdwseoa:disabled{opacity:1}._1gdwseoa::-ms-expand{display:none}._1gdwseoc[type=number]{-moz-appearance:textfield}._1gdwseoc[type=number]::-webkit-inner-spin-button,._1gdwseoc[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}._1gdwseoc::-ms-clear{display:none}._1gdwseoc::-webkit-search-cancel-button{-webkit-appearance:none}._1gdwseof{text-decoration:none;color:inherit}.o1ubka0{overflow:hidden}.o1ubka1{overflow:scroll}.o1ubka2{overflow:visible}.o1ubka3{overflow:auto}.o1ubka4{-webkit-user-select:none;user-select:none}.o1ubka5{outline:none}.o1ubka6{opacity:0}.o1ubka7{z-index:0}.o1ubka8{z-index:1}.o1ubka9{z-index:2}.o1ubkaa{z-index:90}.o1ubkab{z-index:100}.o1ubkac{z-index:200}.o1ubkad{z-index:290}.o1ubkae{z-index:300}.o1ubkaf{z-index:400}.o1ubkag{cursor:default}.o1ubkah{cursor:pointer}.o1ubkai{pointer-events:none}.o1ubkaj{top:0}.o1ubkak{bottom:0}.o1ubkal{left:0}.o1ubkam{right:0}.o1ubkan{height:100%}.o1ubkao{height:var(--_1vwoat49)}.o1ubkap{width:100%}.o1ubkaq{width:var(--_1vwoat49)}.o1ubkar{min-width:0%}.o1ubkas{max-width:var(--_1vwoat411)}.o1ubkat{max-width:var(--_1vwoat412)}.o1ubkau{max-width:var(--_1vwoat413)}.o1ubkav{max-width:var(--_1vwoat414)}.o1ubkaw{max-width:fit-content}.o1ubkax{transition:var(--_1vwoat45i)}.o1ubkay{transition:var(--_1vwoat45j)}.o1ubkaz:active{transform:var(--_1vwoat45k)}html:not(.o1ubka10) .o1ubka11{background:var(--_1vwoat41t)}html.o1ubka10 .o1ubka12{background:var(--_1vwoat41t)}html:not(.o1ubka10) .o1ubka13{background:var(--_1vwoat41u)}html.o1ubka10 .o1ubka14{background:var(--_1vwoat41u)}html:not(.o1ubka10) .o1ubka15{background:var(--_1vwoat41v)}html.o1ubka10 .o1ubka16{background:var(--_1vwoat41v)}html:not(.o1ubka10) .o1ubka17{background:var(--_1vwoat41w)}html.o1ubka10 .o1ubka18{background:var(--_1vwoat41w)}html:not(.o1ubka10) .o1ubka19{background:var(--_1vwoat41x)}html.o1ubka10 .o1ubka1a{background:var(--_1vwoat41x)}html:not(.o1ubka10) .o1ubka1b{background:var(--_1vwoat41y)}html.o1ubka10 .o1ubka1c{background:var(--_1vwoat41y)}html:not(.o1ubka10) .o1ubka1d{background:var(--_1vwoat41z)}html.o1ubka10 .o1ubka1e{background:var(--_1vwoat41z)}html:not(.o1ubka10) .o1ubka1f{background:var(--_1vwoat420)}html.o1ubka10 .o1ubka1g{background:var(--_1vwoat420)}html:not(.o1ubka10) .o1ubka1h{background:var(--_1vwoat421)}html.o1ubka10 .o1ubka1i{background:var(--_1vwoat421)}html:not(.o1ubka10) .o1ubka1j{background:var(--_1vwoat422)}html.o1ubka10 .o1ubka1k{background:var(--_1vwoat422)}html:not(.o1ubka10) .o1ubka1l{background:var(--_1vwoat423)}html.o1ubka10 .o1ubka1m{background:var(--_1vwoat423)}html:not(.o1ubka10) .o1ubka1n{background:var(--_1vwoat424)}html.o1ubka10 .o1ubka1o{background:var(--_1vwoat424)}html:not(.o1ubka10) .o1ubka1p{background:var(--_1vwoat425)}html.o1ubka10 .o1ubka1q{background:var(--_1vwoat425)}html:not(.o1ubka10) .o1ubka1r{background:var(--_1vwoat426)}html.o1ubka10 .o1ubka1s{background:var(--_1vwoat426)}html:not(.o1ubka10) .o1ubka1t{background:var(--_1vwoat427)}html.o1ubka10 .o1ubka1u{background:var(--_1vwoat427)}html:not(.o1ubka10) .o1ubka1v{background:var(--_1vwoat428)}html.o1ubka10 .o1ubka1w{background:var(--_1vwoat428)}html:not(.o1ubka10) .o1ubka1x{background:var(--_1vwoat429)}html.o1ubka10 .o1ubka1y{background:var(--_1vwoat429)}html:not(.o1ubka10) .o1ubka1z{background:var(--_1vwoat42a)}html.o1ubka10 .o1ubka20{background:var(--_1vwoat42a)}html:not(.o1ubka10) .o1ubka21{background:var(--_1vwoat42b)}html.o1ubka10 .o1ubka22{background:var(--_1vwoat42b)}html:not(.o1ubka10) .o1ubka23{background:var(--_1vwoat42c)}html.o1ubka10 .o1ubka24{background:var(--_1vwoat42c)}html:not(.o1ubka10) .o1ubka25{background:var(--_1vwoat42d)}html.o1ubka10 .o1ubka26{background:var(--_1vwoat42d)}html:not(.o1ubka10) .o1ubka27{background:var(--_1vwoat42e)}html.o1ubka10 .o1ubka28{background:var(--_1vwoat42e)}html:not(.o1ubka10) .o1ubka29{background:var(--_1vwoat42f)}html.o1ubka10 .o1ubka2a{background:var(--_1vwoat42f)}html:not(.o1ubka10) .o1ubka2b{background:var(--_1vwoat42g)}html.o1ubka10 .o1ubka2c{background:var(--_1vwoat42g)}html:not(.o1ubka10) .o1ubka2d{background:var(--_1vwoat42h)}html.o1ubka10 .o1ubka2e{background:var(--_1vwoat42h)}html:not(.o1ubka10) .o1ubka2f{background:var(--_1vwoat42i)}html.o1ubka10 .o1ubka2g{background:var(--_1vwoat42i)}html:not(.o1ubka10) .o1ubka2h{background:var(--_1vwoat42j)}html.o1ubka10 .o1ubka2i{background:var(--_1vwoat42j)}html:not(.o1ubka10) .o1ubka2j{background:var(--_1vwoat42k)}html.o1ubka10 .o1ubka2k{background:var(--_1vwoat42k)}html:not(.o1ubka10) .o1ubka2l{background:var(--_1vwoat42l)}html.o1ubka10 .o1ubka2m{background:var(--_1vwoat42l)}html:not(.o1ubka10) .o1ubka2n{background:var(--_1vwoat42m)}html.o1ubka10 .o1ubka2o{background:var(--_1vwoat42m)}html:not(.o1ubka10) .o1ubka2p{background:var(--_1vwoat42n)}html.o1ubka10 .o1ubka2q{background:var(--_1vwoat42n)}html:not(.o1ubka10) .o1ubka2r{background:var(--_1vwoat42o)}html.o1ubka10 .o1ubka2s{background:var(--_1vwoat42o)}html:not(.o1ubka10) .o1ubka2t{background:var(--_1vwoat42p)}html.o1ubka10 .o1ubka2u{background:var(--_1vwoat42p)}html:not(.o1ubka10) .o1ubka2v{background:var(--_1vwoat42q)}html.o1ubka10 .o1ubka2w{background:var(--_1vwoat42q)}html:not(.o1ubka10) .o1ubka2x{background:var(--_1vwoat42r)}html.o1ubka10 .o1ubka2y{background:var(--_1vwoat42r)}html:not(.o1ubka10) .o1ubka2z{background:var(--_1vwoat42s)}html.o1ubka10 .o1ubka30{background:var(--_1vwoat42s)}html:not(.o1ubka10) .o1ubka31{background:var(--_1vwoat42t)}html.o1ubka10 .o1ubka32{background:var(--_1vwoat42t)}html:not(.o1ubka10) .o1ubka33{background:var(--_1vwoat42u)}html.o1ubka10 .o1ubka34{background:var(--_1vwoat42u)}html:not(.o1ubka10) .o1ubka35{background:var(--_1vwoat42v)}html.o1ubka10 .o1ubka36{background:var(--_1vwoat42v)}html:not(.o1ubka10) .o1ubka37{box-shadow:var(--_1vwoat45l)}html.o1ubka10 .o1ubka38{box-shadow:var(--_1vwoat45l)}html:not(.o1ubka10) .o1ubka39{box-shadow:var(--_1vwoat45m)}html.o1ubka10 .o1ubka3a{box-shadow:var(--_1vwoat45m)}html:not(.o1ubka10) .o1ubka3b{box-shadow:var(--_1vwoat45n)}html.o1ubka10 .o1ubka3c{box-shadow:var(--_1vwoat45n)}html:not(.o1ubka10) .o1ubka3d{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4f)}html.o1ubka10 .o1ubka3e{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4f)}html:not(.o1ubka10) .o1ubka3f{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4g)}html.o1ubka10 .o1ubka3g{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4g)}html:not(.o1ubka10) .o1ubka3h{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4f)}html.o1ubka10 .o1ubka3i{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4f)}html:not(.o1ubka10) .o1ubka3j{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4g)}html.o1ubka10 .o1ubka3k{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4g)}html:not(.o1ubka10) .o1ubka3l{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4h)}html.o1ubka10 .o1ubka3m{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4h)}html:not(.o1ubka10) .o1ubka3n{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4i)}html.o1ubka10 .o1ubka3o{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4i)}html:not(.o1ubka10) .o1ubka3p{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4j)}html.o1ubka10 .o1ubka3q{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4j)}html:not(.o1ubka10) .o1ubka3r{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4j)}html.o1ubka10 .o1ubka3s{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4j)}html:not(.o1ubka10) .o1ubka3t{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4k)}html.o1ubka10 .o1ubka3u{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4k)}html:not(.o1ubka10) .o1ubka3v{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4k)}html.o1ubka10 .o1ubka3w{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4k)}html:not(.o1ubka10) .o1ubka3x{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4l)}html.o1ubka10 .o1ubka3y{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4l)}html:not(.o1ubka10) .o1ubka3z{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4n)}html.o1ubka10 .o1ubka40{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4n)}html:not(.o1ubka10) .o1ubka41{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4n)}html.o1ubka10 .o1ubka42{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4n)}html:not(.o1ubka10) .o1ubka43{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4o)}html.o1ubka10 .o1ubka44{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4o)}html:not(.o1ubka10) .o1ubka45{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4o)}html.o1ubka10 .o1ubka46{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4o)}html:not(.o1ubka10) .o1ubka47{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4p)}html.o1ubka10 .o1ubka48{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4p)}html:not(.o1ubka10) .o1ubka49{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4q)}html.o1ubka10 .o1ubka4a{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4q)}html:not(.o1ubka10) .o1ubka4b{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4r)}html.o1ubka10 .o1ubka4c{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4r)}html:not(.o1ubka10) .o1ubka4d{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4r)}html.o1ubka10 .o1ubka4e{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4r)}html:not(.o1ubka10) .o1ubka4f{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4s)}html.o1ubka10 .o1ubka4g{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4s)}html:not(.o1ubka10) .o1ubka4h{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4s)}html.o1ubka10 .o1ubka4i{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4s)}html:not(.o1ubka10) .o1ubka4j{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4t)}html.o1ubka10 .o1ubka4k{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4t)}html:not(.o1ubka10) .o1ubka4l{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4u)}html.o1ubka10 .o1ubka4m{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4u)}html:not(.o1ubka10) .o1ubka4n{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4v)}html.o1ubka10 .o1ubka4o{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4v)}html:not(.o1ubka10) .o1ubka4p{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4w)}html.o1ubka10 .o1ubka4q{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4w)}html:not(.o1ubka10) .o1ubka4r{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4x)}html.o1ubka10 .o1ubka4s{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4x)}html:not(.o1ubka10) .o1ubka4t{box-shadow:0 0 0 var(--_1vwoat410) var(--_1vwoat4m)}html.o1ubka10 .o1ubka4u{box-shadow:0 0 0 var(--_1vwoat410) var(--_1vwoat4m)}.o1ubka4v{display:none}.o1ubka4z{display:block}.o1ubka53{display:inline}.o1ubka57{display:inline-block}.o1ubka5b{display:flex}.o1ubka5f{position:relative}.o1ubka5j{position:absolute}.o1ubka5n{position:fixed}.o1ubka5r{border-radius:0}.o1ubka5v{border-radius:9999px}.o1ubka5z{border-radius:var(--_1vwoat4b)}.o1ubka63{border-radius:var(--_1vwoat4c)}.o1ubka67{border-radius:var(--_1vwoat4d)}.o1ubka6b{border-radius:var(--_1vwoat4e)}.o1ubka6f{gap:var(--_1vwoat40)}.o1ubka6j{gap:var(--_1vwoat41)}.o1ubka6n{gap:var(--_1vwoat42)}.o1ubka6r{gap:var(--_1vwoat43)}.o1ubka6v{gap:var(--_1vwoat44)}.o1ubka6z{gap:var(--_1vwoat45)}.o1ubka73{gap:var(--_1vwoat46)}.o1ubka77{gap:var(--_1vwoat47)}.o1ubka7b{gap:var(--_1vwoat48)}.o1ubka7f{gap:0}.o1ubka7j{padding-top:var(--_1vwoat40)}.o1ubka7n{padding-top:var(--_1vwoat41)}.o1ubka7r{padding-top:var(--_1vwoat42)}.o1ubka7v{padding-top:var(--_1vwoat43)}.o1ubka7z{padding-top:var(--_1vwoat44)}.o1ubka83{padding-top:var(--_1vwoat45)}.o1ubka87{padding-top:var(--_1vwoat46)}.o1ubka8b{padding-top:var(--_1vwoat47)}.o1ubka8f{padding-top:var(--_1vwoat48)}.o1ubka8j{padding-top:0}.o1ubka8n{padding-bottom:var(--_1vwoat40)}.o1ubka8r{padding-bottom:var(--_1vwoat41)}.o1ubka8v{padding-bottom:var(--_1vwoat42)}.o1ubka8z{padding-bottom:var(--_1vwoat43)}.o1ubka93{padding-bottom:var(--_1vwoat44)}.o1ubka97{padding-bottom:var(--_1vwoat45)}.o1ubka9b{padding-bottom:var(--_1vwoat46)}.o1ubka9f{padding-bottom:var(--_1vwoat47)}.o1ubka9j{padding-bottom:var(--_1vwoat48)}.o1ubka9n{padding-bottom:0}.o1ubka9r{padding-right:var(--_1vwoat40)}.o1ubka9v{padding-right:var(--_1vwoat41)}.o1ubka9z{padding-right:var(--_1vwoat42)}.o1ubkaa3{padding-right:var(--_1vwoat43)}.o1ubkaa7{padding-right:var(--_1vwoat44)}.o1ubkaab{padding-right:var(--_1vwoat45)}.o1ubkaaf{padding-right:var(--_1vwoat46)}.o1ubkaaj{padding-right:var(--_1vwoat47)}.o1ubkaan{padding-right:var(--_1vwoat48)}.o1ubkaar{padding-right:0}.o1ubkaav{padding-left:var(--_1vwoat40)}.o1ubkaaz{padding-left:var(--_1vwoat41)}.o1ubkab3{padding-left:var(--_1vwoat42)}.o1ubkab7{padding-left:var(--_1vwoat43)}.o1ubkabb{padding-left:var(--_1vwoat44)}.o1ubkabf{padding-left:var(--_1vwoat45)}.o1ubkabj{padding-left:var(--_1vwoat46)}.o1ubkabn{padding-left:var(--_1vwoat47)}.o1ubkabr{padding-left:var(--_1vwoat48)}.o1ubkabv{padding-left:0}.o1ubkabz{margin-top:var(--_1vwoat40)}.o1ubkac3{margin-top:var(--_1vwoat41)}.o1ubkac7{margin-top:var(--_1vwoat42)}.o1ubkacb{margin-top:var(--_1vwoat43)}.o1ubkacf{margin-top:var(--_1vwoat44)}.o1ubkacj{margin-top:var(--_1vwoat45)}.o1ubkacn{margin-top:var(--_1vwoat46)}.o1ubkacr{margin-top:var(--_1vwoat47)}.o1ubkacv{margin-top:var(--_1vwoat48)}.o1ubkacz{margin-top:0}.o1ubkad3{margin-bottom:var(--_1vwoat40)}.o1ubkad7{margin-bottom:var(--_1vwoat41)}.o1ubkadb{margin-bottom:var(--_1vwoat42)}.o1ubkadf{margin-bottom:var(--_1vwoat43)}.o1ubkadj{margin-bottom:var(--_1vwoat44)}.o1ubkadn{margin-bottom:var(--_1vwoat45)}.o1ubkadr{margin-bottom:var(--_1vwoat46)}.o1ubkadv{margin-bottom:var(--_1vwoat47)}.o1ubkadz{margin-bottom:var(--_1vwoat48)}.o1ubkae3{margin-bottom:0}.o1ubkae7{margin-right:var(--_1vwoat40)}.o1ubkaeb{margin-right:var(--_1vwoat41)}.o1ubkaef{margin-right:var(--_1vwoat42)}.o1ubkaej{margin-right:var(--_1vwoat43)}.o1ubkaen{margin-right:var(--_1vwoat44)}.o1ubkaer{margin-right:var(--_1vwoat45)}.o1ubkaev{margin-right:var(--_1vwoat46)}.o1ubkaez{margin-right:var(--_1vwoat47)}.o1ubkaf3{margin-right:var(--_1vwoat48)}.o1ubkaf7{margin-right:0}.o1ubkafb{margin-left:var(--_1vwoat40)}.o1ubkaff{margin-left:var(--_1vwoat41)}.o1ubkafj{margin-left:var(--_1vwoat42)}.o1ubkafn{margin-left:var(--_1vwoat43)}.o1ubkafr{margin-left:var(--_1vwoat44)}.o1ubkafv{margin-left:var(--_1vwoat45)}.o1ubkafz{margin-left:var(--_1vwoat46)}.o1ubkag3{margin-left:var(--_1vwoat47)}.o1ubkag7{margin-left:var(--_1vwoat48)}.o1ubkagb{margin-left:0}.o1ubkagf{align-items:flex-start}.o1ubkagj{align-items:center}.o1ubkagn{align-items:flex-end}.o1ubkagr{justify-content:flex-start}.o1ubkagv{justify-content:center}.o1ubkagz{justify-content:flex-end}.o1ubkah3{justify-content:space-between}.o1ubkah7{flex-direction:row}.o1ubkahb{flex-direction:row-reverse}.o1ubkahf{flex-direction:column}.o1ubkahj{flex-direction:column-reverse}.o1ubkahn{flex-wrap:wrap}.o1ubkahr{flex-wrap:nowrap}.o1ubkahv{flex-shrink:0}.o1ubkahz{flex-grow:0}.o1ubkai3{flex-grow:1}.o1ubkai7{text-align:left}.o1ubkaib{text-align:center}.o1ubkaif{text-align:right}@media screen and (min-width: 740px){.o1ubka4w{display:none}.o1ubka50{display:block}.o1ubka54{display:inline}.o1ubka58{display:inline-block}.o1ubka5c{display:flex}.o1ubka5g{position:relative}.o1ubka5k{position:absolute}.o1ubka5o{position:fixed}.o1ubka5s{border-radius:0}.o1ubka5w{border-radius:9999px}.o1ubka60{border-radius:var(--_1vwoat4b)}.o1ubka64{border-radius:var(--_1vwoat4c)}.o1ubka68{border-radius:var(--_1vwoat4d)}.o1ubka6c{border-radius:var(--_1vwoat4e)}.o1ubka6g{gap:var(--_1vwoat40)}.o1ubka6k{gap:var(--_1vwoat41)}.o1ubka6o{gap:var(--_1vwoat42)}.o1ubka6s{gap:var(--_1vwoat43)}.o1ubka6w{gap:var(--_1vwoat44)}.o1ubka70{gap:var(--_1vwoat45)}.o1ubka74{gap:var(--_1vwoat46)}.o1ubka78{gap:var(--_1vwoat47)}.o1ubka7c{gap:var(--_1vwoat48)}.o1ubka7g{gap:0}.o1ubka7k{padding-top:var(--_1vwoat40)}.o1ubka7o{padding-top:var(--_1vwoat41)}.o1ubka7s{padding-top:var(--_1vwoat42)}.o1ubka7w{padding-top:var(--_1vwoat43)}.o1ubka80{padding-top:var(--_1vwoat44)}.o1ubka84{padding-top:var(--_1vwoat45)}.o1ubka88{padding-top:var(--_1vwoat46)}.o1ubka8c{padding-top:var(--_1vwoat47)}.o1ubka8g{padding-top:var(--_1vwoat48)}.o1ubka8k{padding-top:0}.o1ubka8o{padding-bottom:var(--_1vwoat40)}.o1ubka8s{padding-bottom:var(--_1vwoat41)}.o1ubka8w{padding-bottom:var(--_1vwoat42)}.o1ubka90{padding-bottom:var(--_1vwoat43)}.o1ubka94{padding-bottom:var(--_1vwoat44)}.o1ubka98{padding-bottom:var(--_1vwoat45)}.o1ubka9c{padding-bottom:var(--_1vwoat46)}.o1ubka9g{padding-bottom:var(--_1vwoat47)}.o1ubka9k{padding-bottom:var(--_1vwoat48)}.o1ubka9o{padding-bottom:0}.o1ubka9s{padding-right:var(--_1vwoat40)}.o1ubka9w{padding-right:var(--_1vwoat41)}.o1ubkaa0{padding-right:var(--_1vwoat42)}.o1ubkaa4{padding-right:var(--_1vwoat43)}.o1ubkaa8{padding-right:var(--_1vwoat44)}.o1ubkaac{padding-right:var(--_1vwoat45)}.o1ubkaag{padding-right:var(--_1vwoat46)}.o1ubkaak{padding-right:var(--_1vwoat47)}.o1ubkaao{padding-right:var(--_1vwoat48)}.o1ubkaas{padding-right:0}.o1ubkaaw{padding-left:var(--_1vwoat40)}.o1ubkab0{padding-left:var(--_1vwoat41)}.o1ubkab4{padding-left:var(--_1vwoat42)}.o1ubkab8{padding-left:var(--_1vwoat43)}.o1ubkabc{padding-left:var(--_1vwoat44)}.o1ubkabg{padding-left:var(--_1vwoat45)}.o1ubkabk{padding-left:var(--_1vwoat46)}.o1ubkabo{padding-left:var(--_1vwoat47)}.o1ubkabs{padding-left:var(--_1vwoat48)}.o1ubkabw{padding-left:0}.o1ubkac0{margin-top:var(--_1vwoat40)}.o1ubkac4{margin-top:var(--_1vwoat41)}.o1ubkac8{margin-top:var(--_1vwoat42)}.o1ubkacc{margin-top:var(--_1vwoat43)}.o1ubkacg{margin-top:var(--_1vwoat44)}.o1ubkack{margin-top:var(--_1vwoat45)}.o1ubkaco{margin-top:var(--_1vwoat46)}.o1ubkacs{margin-top:var(--_1vwoat47)}.o1ubkacw{margin-top:var(--_1vwoat48)}.o1ubkad0{margin-top:0}.o1ubkad4{margin-bottom:var(--_1vwoat40)}.o1ubkad8{margin-bottom:var(--_1vwoat41)}.o1ubkadc{margin-bottom:var(--_1vwoat42)}.o1ubkadg{margin-bottom:var(--_1vwoat43)}.o1ubkadk{margin-bottom:var(--_1vwoat44)}.o1ubkado{margin-bottom:var(--_1vwoat45)}.o1ubkads{margin-bottom:var(--_1vwoat46)}.o1ubkadw{margin-bottom:var(--_1vwoat47)}.o1ubkae0{margin-bottom:var(--_1vwoat48)}.o1ubkae4{margin-bottom:0}.o1ubkae8{margin-right:var(--_1vwoat40)}.o1ubkaec{margin-right:var(--_1vwoat41)}.o1ubkaeg{margin-right:var(--_1vwoat42)}.o1ubkaek{margin-right:var(--_1vwoat43)}.o1ubkaeo{margin-right:var(--_1vwoat44)}.o1ubkaes{margin-right:var(--_1vwoat45)}.o1ubkaew{margin-right:var(--_1vwoat46)}.o1ubkaf0{margin-right:var(--_1vwoat47)}.o1ubkaf4{margin-right:var(--_1vwoat48)}.o1ubkaf8{margin-right:0}.o1ubkafc{margin-left:var(--_1vwoat40)}.o1ubkafg{margin-left:var(--_1vwoat41)}.o1ubkafk{margin-left:var(--_1vwoat42)}.o1ubkafo{margin-left:var(--_1vwoat43)}.o1ubkafs{margin-left:var(--_1vwoat44)}.o1ubkafw{margin-left:var(--_1vwoat45)}.o1ubkag0{margin-left:var(--_1vwoat46)}.o1ubkag4{margin-left:var(--_1vwoat47)}.o1ubkag8{margin-left:var(--_1vwoat48)}.o1ubkagc{margin-left:0}.o1ubkagg{align-items:flex-start}.o1ubkagk{align-items:center}.o1ubkago{align-items:flex-end}.o1ubkags{justify-content:flex-start}.o1ubkagw{justify-content:center}.o1ubkah0{justify-content:flex-end}.o1ubkah4{justify-content:space-between}.o1ubkah8{flex-direction:row}.o1ubkahc{flex-direction:row-reverse}.o1ubkahg{flex-direction:column}.o1ubkahk{flex-direction:column-reverse}.o1ubkaho{flex-wrap:wrap}.o1ubkahs{flex-wrap:nowrap}.o1ubkahw{flex-shrink:0}.o1ubkai0{flex-grow:0}.o1ubkai4{flex-grow:1}.o1ubkai8{text-align:left}.o1ubkaic{text-align:center}.o1ubkaig{text-align:right}}@media screen and (min-width: 992px){.o1ubka4x{display:none}.o1ubka51{display:block}.o1ubka55{display:inline}.o1ubka59{display:inline-block}.o1ubka5d{display:flex}.o1ubka5h{position:relative}.o1ubka5l{position:absolute}.o1ubka5p{position:fixed}.o1ubka5t{border-radius:0}.o1ubka5x{border-radius:9999px}.o1ubka61{border-radius:var(--_1vwoat4b)}.o1ubka65{border-radius:var(--_1vwoat4c)}.o1ubka69{border-radius:var(--_1vwoat4d)}.o1ubka6d{border-radius:var(--_1vwoat4e)}.o1ubka6h{gap:var(--_1vwoat40)}.o1ubka6l{gap:var(--_1vwoat41)}.o1ubka6p{gap:var(--_1vwoat42)}.o1ubka6t{gap:var(--_1vwoat43)}.o1ubka6x{gap:var(--_1vwoat44)}.o1ubka71{gap:var(--_1vwoat45)}.o1ubka75{gap:var(--_1vwoat46)}.o1ubka79{gap:var(--_1vwoat47)}.o1ubka7d{gap:var(--_1vwoat48)}.o1ubka7h{gap:0}.o1ubka7l{padding-top:var(--_1vwoat40)}.o1ubka7p{padding-top:var(--_1vwoat41)}.o1ubka7t{padding-top:var(--_1vwoat42)}.o1ubka7x{padding-top:var(--_1vwoat43)}.o1ubka81{padding-top:var(--_1vwoat44)}.o1ubka85{padding-top:var(--_1vwoat45)}.o1ubka89{padding-top:var(--_1vwoat46)}.o1ubka8d{padding-top:var(--_1vwoat47)}.o1ubka8h{padding-top:var(--_1vwoat48)}.o1ubka8l{padding-top:0}.o1ubka8p{padding-bottom:var(--_1vwoat40)}.o1ubka8t{padding-bottom:var(--_1vwoat41)}.o1ubka8x{padding-bottom:var(--_1vwoat42)}.o1ubka91{padding-bottom:var(--_1vwoat43)}.o1ubka95{padding-bottom:var(--_1vwoat44)}.o1ubka99{padding-bottom:var(--_1vwoat45)}.o1ubka9d{padding-bottom:var(--_1vwoat46)}.o1ubka9h{padding-bottom:var(--_1vwoat47)}.o1ubka9l{padding-bottom:var(--_1vwoat48)}.o1ubka9p{padding-bottom:0}.o1ubka9t{padding-right:var(--_1vwoat40)}.o1ubka9x{padding-right:var(--_1vwoat41)}.o1ubkaa1{padding-right:var(--_1vwoat42)}.o1ubkaa5{padding-right:var(--_1vwoat43)}.o1ubkaa9{padding-right:var(--_1vwoat44)}.o1ubkaad{padding-right:var(--_1vwoat45)}.o1ubkaah{padding-right:var(--_1vwoat46)}.o1ubkaal{padding-right:var(--_1vwoat47)}.o1ubkaap{padding-right:var(--_1vwoat48)}.o1ubkaat{padding-right:0}.o1ubkaax{padding-left:var(--_1vwoat40)}.o1ubkab1{padding-left:var(--_1vwoat41)}.o1ubkab5{padding-left:var(--_1vwoat42)}.o1ubkab9{padding-left:var(--_1vwoat43)}.o1ubkabd{padding-left:var(--_1vwoat44)}.o1ubkabh{padding-left:var(--_1vwoat45)}.o1ubkabl{padding-left:var(--_1vwoat46)}.o1ubkabp{padding-left:var(--_1vwoat47)}.o1ubkabt{padding-left:var(--_1vwoat48)}.o1ubkabx{padding-left:0}.o1ubkac1{margin-top:var(--_1vwoat40)}.o1ubkac5{margin-top:var(--_1vwoat41)}.o1ubkac9{margin-top:var(--_1vwoat42)}.o1ubkacd{margin-top:var(--_1vwoat43)}.o1ubkach{margin-top:var(--_1vwoat44)}.o1ubkacl{margin-top:var(--_1vwoat45)}.o1ubkacp{margin-top:var(--_1vwoat46)}.o1ubkact{margin-top:var(--_1vwoat47)}.o1ubkacx{margin-top:var(--_1vwoat48)}.o1ubkad1{margin-top:0}.o1ubkad5{margin-bottom:var(--_1vwoat40)}.o1ubkad9{margin-bottom:var(--_1vwoat41)}.o1ubkadd{margin-bottom:var(--_1vwoat42)}.o1ubkadh{margin-bottom:var(--_1vwoat43)}.o1ubkadl{margin-bottom:var(--_1vwoat44)}.o1ubkadp{margin-bottom:var(--_1vwoat45)}.o1ubkadt{margin-bottom:var(--_1vwoat46)}.o1ubkadx{margin-bottom:var(--_1vwoat47)}.o1ubkae1{margin-bottom:var(--_1vwoat48)}.o1ubkae5{margin-bottom:0}.o1ubkae9{margin-right:var(--_1vwoat40)}.o1ubkaed{margin-right:var(--_1vwoat41)}.o1ubkaeh{margin-right:var(--_1vwoat42)}.o1ubkael{margin-right:var(--_1vwoat43)}.o1ubkaep{margin-right:var(--_1vwoat44)}.o1ubkaet{margin-right:var(--_1vwoat45)}.o1ubkaex{margin-right:var(--_1vwoat46)}.o1ubkaf1{margin-right:var(--_1vwoat47)}.o1ubkaf5{margin-right:var(--_1vwoat48)}.o1ubkaf9{margin-right:0}.o1ubkafd{margin-left:var(--_1vwoat40)}.o1ubkafh{margin-left:var(--_1vwoat41)}.o1ubkafl{margin-left:var(--_1vwoat42)}.o1ubkafp{margin-left:var(--_1vwoat43)}.o1ubkaft{margin-left:var(--_1vwoat44)}.o1ubkafx{margin-left:var(--_1vwoat45)}.o1ubkag1{margin-left:var(--_1vwoat46)}.o1ubkag5{margin-left:var(--_1vwoat47)}.o1ubkag9{margin-left:var(--_1vwoat48)}.o1ubkagd{margin-left:0}.o1ubkagh{align-items:flex-start}.o1ubkagl{align-items:center}.o1ubkagp{align-items:flex-end}.o1ubkagt{justify-content:flex-start}.o1ubkagx{justify-content:center}.o1ubkah1{justify-content:flex-end}.o1ubkah5{justify-content:space-between}.o1ubkah9{flex-direction:row}.o1ubkahd{flex-direction:row-reverse}.o1ubkahh{flex-direction:column}.o1ubkahl{flex-direction:column-reverse}.o1ubkahp{flex-wrap:wrap}.o1ubkaht{flex-wrap:nowrap}.o1ubkahx{flex-shrink:0}.o1ubkai1{flex-grow:0}.o1ubkai5{flex-grow:1}.o1ubkai9{text-align:left}.o1ubkaid{text-align:center}.o1ubkaih{text-align:right}}@media screen and (min-width: 1200px){.o1ubka4y{display:none}.o1ubka52{display:block}.o1ubka56{display:inline}.o1ubka5a{display:inline-block}.o1ubka5e{display:flex}.o1ubka5i{position:relative}.o1ubka5m{position:absolute}.o1ubka5q{position:fixed}.o1ubka5u{border-radius:0}.o1ubka5y{border-radius:9999px}.o1ubka62{border-radius:var(--_1vwoat4b)}.o1ubka66{border-radius:var(--_1vwoat4c)}.o1ubka6a{border-radius:var(--_1vwoat4d)}.o1ubka6e{border-radius:var(--_1vwoat4e)}.o1ubka6i{gap:var(--_1vwoat40)}.o1ubka6m{gap:var(--_1vwoat41)}.o1ubka6q{gap:var(--_1vwoat42)}.o1ubka6u{gap:var(--_1vwoat43)}.o1ubka6y{gap:var(--_1vwoat44)}.o1ubka72{gap:var(--_1vwoat45)}.o1ubka76{gap:var(--_1vwoat46)}.o1ubka7a{gap:var(--_1vwoat47)}.o1ubka7e{gap:var(--_1vwoat48)}.o1ubka7i{gap:0}.o1ubka7m{padding-top:var(--_1vwoat40)}.o1ubka7q{padding-top:var(--_1vwoat41)}.o1ubka7u{padding-top:var(--_1vwoat42)}.o1ubka7y{padding-top:var(--_1vwoat43)}.o1ubka82{padding-top:var(--_1vwoat44)}.o1ubka86{padding-top:var(--_1vwoat45)}.o1ubka8a{padding-top:var(--_1vwoat46)}.o1ubka8e{padding-top:var(--_1vwoat47)}.o1ubka8i{padding-top:var(--_1vwoat48)}.o1ubka8m{padding-top:0}.o1ubka8q{padding-bottom:var(--_1vwoat40)}.o1ubka8u{padding-bottom:var(--_1vwoat41)}.o1ubka8y{padding-bottom:var(--_1vwoat42)}.o1ubka92{padding-bottom:var(--_1vwoat43)}.o1ubka96{padding-bottom:var(--_1vwoat44)}.o1ubka9a{padding-bottom:var(--_1vwoat45)}.o1ubka9e{padding-bottom:var(--_1vwoat46)}.o1ubka9i{padding-bottom:var(--_1vwoat47)}.o1ubka9m{padding-bottom:var(--_1vwoat48)}.o1ubka9q{padding-bottom:0}.o1ubka9u{padding-right:var(--_1vwoat40)}.o1ubka9y{padding-right:var(--_1vwoat41)}.o1ubkaa2{padding-right:var(--_1vwoat42)}.o1ubkaa6{padding-right:var(--_1vwoat43)}.o1ubkaaa{padding-right:var(--_1vwoat44)}.o1ubkaae{padding-right:var(--_1vwoat45)}.o1ubkaai{padding-right:var(--_1vwoat46)}.o1ubkaam{padding-right:var(--_1vwoat47)}.o1ubkaaq{padding-right:var(--_1vwoat48)}.o1ubkaau{padding-right:0}.o1ubkaay{padding-left:var(--_1vwoat40)}.o1ubkab2{padding-left:var(--_1vwoat41)}.o1ubkab6{padding-left:var(--_1vwoat42)}.o1ubkaba{padding-left:var(--_1vwoat43)}.o1ubkabe{padding-left:var(--_1vwoat44)}.o1ubkabi{padding-left:var(--_1vwoat45)}.o1ubkabm{padding-left:var(--_1vwoat46)}.o1ubkabq{padding-left:var(--_1vwoat47)}.o1ubkabu{padding-left:var(--_1vwoat48)}.o1ubkaby{padding-left:0}.o1ubkac2{margin-top:var(--_1vwoat40)}.o1ubkac6{margin-top:var(--_1vwoat41)}.o1ubkaca{margin-top:var(--_1vwoat42)}.o1ubkace{margin-top:var(--_1vwoat43)}.o1ubkaci{margin-top:var(--_1vwoat44)}.o1ubkacm{margin-top:var(--_1vwoat45)}.o1ubkacq{margin-top:var(--_1vwoat46)}.o1ubkacu{margin-top:var(--_1vwoat47)}.o1ubkacy{margin-top:var(--_1vwoat48)}.o1ubkad2{margin-top:0}.o1ubkad6{margin-bottom:var(--_1vwoat40)}.o1ubkada{margin-bottom:var(--_1vwoat41)}.o1ubkade{margin-bottom:var(--_1vwoat42)}.o1ubkadi{margin-bottom:var(--_1vwoat43)}.o1ubkadm{margin-bottom:var(--_1vwoat44)}.o1ubkadq{margin-bottom:var(--_1vwoat45)}.o1ubkadu{margin-bottom:var(--_1vwoat46)}.o1ubkady{margin-bottom:var(--_1vwoat47)}.o1ubkae2{margin-bottom:var(--_1vwoat48)}.o1ubkae6{margin-bottom:0}.o1ubkaea{margin-right:var(--_1vwoat40)}.o1ubkaee{margin-right:var(--_1vwoat41)}.o1ubkaei{margin-right:var(--_1vwoat42)}.o1ubkaem{margin-right:var(--_1vwoat43)}.o1ubkaeq{margin-right:var(--_1vwoat44)}.o1ubkaeu{margin-right:var(--_1vwoat45)}.o1ubkaey{margin-right:var(--_1vwoat46)}.o1ubkaf2{margin-right:var(--_1vwoat47)}.o1ubkaf6{margin-right:var(--_1vwoat48)}.o1ubkafa{margin-right:0}.o1ubkafe{margin-left:var(--_1vwoat40)}.o1ubkafi{margin-left:var(--_1vwoat41)}.o1ubkafm{margin-left:var(--_1vwoat42)}.o1ubkafq{margin-left:var(--_1vwoat43)}.o1ubkafu{margin-left:var(--_1vwoat44)}.o1ubkafy{margin-left:var(--_1vwoat45)}.o1ubkag2{margin-left:var(--_1vwoat46)}.o1ubkag6{margin-left:var(--_1vwoat47)}.o1ubkaga{margin-left:var(--_1vwoat48)}.o1ubkage{margin-left:0}.o1ubkagi{align-items:flex-start}.o1ubkagm{align-items:center}.o1ubkagq{align-items:flex-end}.o1ubkagu{justify-content:flex-start}.o1ubkagy{justify-content:center}.o1ubkah2{justify-content:flex-end}.o1ubkah6{justify-content:space-between}.o1ubkaha{flex-direction:row}.o1ubkahe{flex-direction:row-reverse}.o1ubkahi{flex-direction:column}.o1ubkahm{flex-direction:column-reverse}.o1ubkahq{flex-wrap:wrap}.o1ubkahu{flex-wrap:nowrap}.o1ubkahy{flex-shrink:0}.o1ubkai2{flex-grow:0}.o1ubkai6{flex-grow:1}.o1ubkaia{text-align:left}.o1ubkaie{text-align:center}.o1ubkaii{text-align:right}}._1vgffpw4{font-size:var(--_1vgffpw0);line-height:var(--_1vgffpw1)}._1vgffpw4:before{content:"";margin-bottom:var(--_1vgffpw2);display:table}._1vgffpw4:after{content:"";margin-top:var(--_1vgffpw3);display:table}._1jw6vm00{font-family:var(--_1vwoat42w)}._1jw6vm01{font-weight:var(--_1vwoat446)}._1jw6vm02{font-weight:var(--_1vwoat447)}._1jw6vm03{font-weight:var(--_1vwoat448)}._1jw6vm04{--_1vgffpw0: var(--_1vwoat432);--_1vgffpw1: var(--_1vwoat433);--_1vgffpw2: var(--_1vwoat435);--_1vgffpw3: var(--_1vwoat436)}._1jw6vm07{--_1vgffpw0: var(--_1vwoat43c);--_1vgffpw1: var(--_1vwoat43d);--_1vgffpw2: var(--_1vwoat43f);--_1vgffpw3: var(--_1vwoat43g)}._1jw6vm0a{--_1vgffpw0: var(--_1vwoat43m);--_1vgffpw1: var(--_1vwoat43n);--_1vgffpw2: var(--_1vwoat43p);--_1vgffpw3: var(--_1vwoat43q)}._1jw6vm0d{--_1vgffpw0: var(--_1vwoat43w);--_1vgffpw1: var(--_1vwoat43x);--_1vgffpw2: var(--_1vwoat43z);--_1vgffpw3: var(--_1vwoat440)}._1jw6vm0g{font-size:var(--_1vwoat432);line-height:var(--_1vwoat433)}._1jw6vm0h{font-size:var(--_1vwoat43c);line-height:var(--_1vwoat43d)}._1jw6vm0i{font-size:var(--_1vwoat43m);line-height:var(--_1vwoat43n)}._1jw6vm0j{font-size:var(--_1vwoat43w);line-height:var(--_1vwoat43x)}._1jw6vm0k{font-weight:var(--_1vwoat45d)}._1jw6vm0l{font-weight:var(--_1vwoat45e)}._1jw6vm0m{--_1vgffpw0: var(--_1vwoat449);--_1vgffpw1: var(--_1vwoat44a);--_1vgffpw2: var(--_1vwoat44c);--_1vgffpw3: var(--_1vwoat44d)}._1jw6vm0p{--_1vgffpw0: var(--_1vwoat44j);--_1vgffpw1: var(--_1vwoat44k);--_1vgffpw2: var(--_1vwoat44m);--_1vgffpw3: var(--_1vwoat44n)}._1jw6vm0s{--_1vgffpw0: var(--_1vwoat44t);--_1vgffpw1: var(--_1vwoat44u);--_1vgffpw2: var(--_1vwoat44w);--_1vgffpw3: var(--_1vwoat44x)}._1jw6vm0v{--_1vgffpw0: var(--_1vwoat453);--_1vgffpw1: var(--_1vwoat454);--_1vgffpw2: var(--_1vwoat456);--_1vgffpw3: var(--_1vwoat457)}html:not(.o1ubka10) ._1jw6vm018{--_1jw6vm0y: var(--_1vwoat419);--_1jw6vm0z: var(--_1vwoat417);--_1jw6vm010: var(--_1vwoat41d);--_1jw6vm011: var(--_1vwoat41o);--_1jw6vm012: var(--_1vwoat41m);--_1jw6vm013: var(--_1vwoat415);--_1jw6vm014: var(--_1vwoat41b);--_1jw6vm015: var(--_1vwoat41k);--_1jw6vm016: var(--_1vwoat41r);--_1jw6vm017: var(--_1vwoat41f)}html:not(.o1ubka10) ._1jw6vm019{--_1jw6vm0y: var(--_1vwoat41a);--_1jw6vm0z: var(--_1vwoat418);--_1jw6vm010: var(--_1vwoat41e);--_1jw6vm011: var(--_1vwoat41p);--_1jw6vm012: var(--_1vwoat41n);--_1jw6vm013: var(--_1vwoat416);--_1jw6vm014: var(--_1vwoat41c);--_1jw6vm015: var(--_1vwoat41l);--_1jw6vm016: var(--_1vwoat41s);--_1jw6vm017: var(--_1vwoat41h)}html.o1ubka10 ._1jw6vm01a{--_1jw6vm0y: var(--_1vwoat419);--_1jw6vm0z: var(--_1vwoat417);--_1jw6vm010: var(--_1vwoat41d);--_1jw6vm011: var(--_1vwoat41o);--_1jw6vm012: var(--_1vwoat41m);--_1jw6vm013: var(--_1vwoat415);--_1jw6vm014: var(--_1vwoat41b);--_1jw6vm015: var(--_1vwoat41k);--_1jw6vm016: var(--_1vwoat41r);--_1jw6vm017: var(--_1vwoat41f)}html.o1ubka10 ._1jw6vm01b{--_1jw6vm0y: var(--_1vwoat41a);--_1jw6vm0z: var(--_1vwoat418);--_1jw6vm010: var(--_1vwoat41e);--_1jw6vm011: var(--_1vwoat41p);--_1jw6vm012: var(--_1vwoat41n);--_1jw6vm013: var(--_1vwoat416);--_1jw6vm014: var(--_1vwoat41c);--_1jw6vm015: var(--_1vwoat41l);--_1jw6vm016: var(--_1vwoat41s);--_1jw6vm017: var(--_1vwoat41h)}html:not(.o1ubka10) ._1jw6vm01c{--_1jw6vm015: var(--_1jw6vm0y)}html:not(.o1ubka10) ._1jw6vm01d{--_1jw6vm015: var(--_1jw6vm0y)}html:not(.o1ubka10) ._1jw6vm01e{--_1jw6vm015: var(--_1jw6vm0y)}html:not(.o1ubka10) ._1jw6vm01f{--_1jw6vm015: var(--_1jw6vm0y)}html:not(.o1ubka10) ._1jw6vm01g{--_1jw6vm015: var(--_1jw6vm0z)}html:not(.o1ubka10) ._1jw6vm01h{--_1jw6vm015: var(--_1jw6vm0z)}html:not(.o1ubka10) ._1jw6vm01i{--_1jw6vm015: var(--_1jw6vm012)}html:not(.o1ubka10) ._1jw6vm01j{--_1jw6vm015: var(--_1jw6vm010)}html:not(.o1ubka10) ._1jw6vm01k{--_1jw6vm015: var(--_1jw6vm011)}html.o1ubka10 ._1jw6vm01l,html.o1ubka10 ._1jw6vm01m,html.o1ubka10 ._1jw6vm01n,html.o1ubka10 ._1jw6vm01o{--_1jw6vm015: var(--_1jw6vm0y)}html.o1ubka10 ._1jw6vm01p,html.o1ubka10 ._1jw6vm01q{--_1jw6vm015: var(--_1jw6vm0z)}html.o1ubka10 ._1jw6vm01r{--_1jw6vm015: var(--_1jw6vm012)}html.o1ubka10 ._1jw6vm01s{--_1jw6vm015: var(--_1jw6vm010)}html.o1ubka10 ._1jw6vm01t{--_1jw6vm015: var(--_1jw6vm011)}._1jw6vm01u{color:var(--_1jw6vm0y)}._1jw6vm01v{color:var(--_1jw6vm0z)}._1jw6vm01w{color:var(--_1jw6vm010)}._1jw6vm01x{color:var(--_1jw6vm011)}._1jw6vm01y{color:var(--_1jw6vm012)}._1jw6vm01z{color:var(--_1jw6vm013)}._1jw6vm020{color:var(--_1jw6vm014)}._1jw6vm021{color:var(--_1jw6vm015)}._1jw6vm022{color:var(--_1jw6vm016)}._1jw6vm023{color:var(--_1jw6vm017)}._1jw6vm024{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2)}._1jw6vm025{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2)}._1jw6vm026{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2)}._1jw6vm027{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2)}@media screen and (min-width: 740px){._1jw6vm04{--_1vgffpw0: var(--_1vwoat437);--_1vgffpw1: var(--_1vwoat438);--_1vgffpw2: var(--_1vwoat43a);--_1vgffpw3: var(--_1vwoat43b)}._1jw6vm07{--_1vgffpw0: var(--_1vwoat43h);--_1vgffpw1: var(--_1vwoat43i);--_1vgffpw2: var(--_1vwoat43k);--_1vgffpw3: var(--_1vwoat43l)}._1jw6vm0a{--_1vgffpw0: var(--_1vwoat43r);--_1vgffpw1: var(--_1vwoat43s);--_1vgffpw2: var(--_1vwoat43u);--_1vgffpw3: var(--_1vwoat43v)}._1jw6vm0d{--_1vgffpw0: var(--_1vwoat441);--_1vgffpw1: var(--_1vwoat442);--_1vgffpw2: var(--_1vwoat444);--_1vgffpw3: var(--_1vwoat445)}._1jw6vm0g{font-size:var(--_1vwoat437);line-height:var(--_1vwoat438)}._1jw6vm0h{font-size:var(--_1vwoat43h);line-height:var(--_1vwoat43i)}._1jw6vm0i{font-size:var(--_1vwoat43r);line-height:var(--_1vwoat43s)}._1jw6vm0j{font-size:var(--_1vwoat441);line-height:var(--_1vwoat442)}._1jw6vm0m{--_1vgffpw0: var(--_1vwoat44e);--_1vgffpw1: var(--_1vwoat44f);--_1vgffpw2: var(--_1vwoat44h);--_1vgffpw3: var(--_1vwoat44i)}._1jw6vm0p{--_1vgffpw0: var(--_1vwoat44o);--_1vgffpw1: var(--_1vwoat44p);--_1vgffpw2: var(--_1vwoat44r);--_1vgffpw3: var(--_1vwoat44s)}._1jw6vm0s{--_1vgffpw0: var(--_1vwoat44y);--_1vgffpw1: var(--_1vwoat44z);--_1vgffpw2: var(--_1vwoat451);--_1vgffpw3: var(--_1vwoat452)}._1jw6vm0v{--_1vgffpw0: var(--_1vwoat458);--_1vgffpw1: var(--_1vwoat459);--_1vgffpw2: var(--_1vwoat45b);--_1vgffpw3: var(--_1vwoat45c)}._1jw6vm024{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2)}._1jw6vm025{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2)}._1jw6vm026{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2)}._1jw6vm027{padding-top:calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2);padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2)}}._1fw3bkm0{margin-bottom:-.1em}._1fw3bkm2{text-overflow:ellipsis;white-space:nowrap}._1fw3bkm0 ._1fw3bkm2{padding-bottom:.1em}@supports (display: -webkit-box) and (-webkit-line-clamp: 1){._1fw3bkm4{white-space:initial;display:-webkit-box;-webkit-line-clamp:var(--_1fw3bkm3);-webkit-box-orient:vertical}}[data-braid-hidefocusrings] ._1ixccu70{opacity:0!important}._1iq6bbh0{position:relative}._1iq6bbh0:after{content:"";position:absolute;min-height:44px;min-width:44px;height:100%;width:100%;transform:translate(-50%,-50%);top:50%;left:50%}[data-braid-debug] ._1iq6bbh0:after{background:red;opacity:.2}._1jxquog0{width:1.2em;height:1.2em}._1jxquog1{margin:-.1em}._1jxquog2{margin-top:-.2em;margin-bottom:-.2em}._1jxquog3{vertical-align:middle}._1jxquog4{top:-.105em}._1jxquog5{top:-.16499999999999998em}._1jxquog6{top:-.045em}._1jxquog7{top:-.065em}._1jxquog8{top:-.125em}._1jxquog9{top:-.0050000000000000044em}._1jxquoga{width:var(--_1vwoat433)}._1jxquogb{width:var(--_1vwoat43d)}._1jxquogc{width:var(--_1vwoat43n)}._1jxquogd{width:var(--_1vwoat43x)}@media screen and (min-width: 740px){._1jxquoga{width:var(--_1vwoat438)}._1jxquogb{width:var(--_1vwoat43i)}._1jxquogc{width:var(--_1vwoat43s)}._1jxquogd{width:var(--_1vwoat442)}}._1vhw3mh0{height:var(--_1vwoat433)}._1vhw3mh1{height:var(--_1vwoat43d)}._1vhw3mh2{height:var(--_1vwoat43n)}._1vhw3mh3{height:var(--_1vwoat43x)}@media screen and (min-width: 740px){._1vhw3mh0{height:var(--_1vwoat438)}._1vhw3mh1{height:var(--_1vwoat43i)}._1vhw3mh2{height:var(--_1vwoat43s)}._1vhw3mh3{height:var(--_1vwoat442)}}._1cqqig50{transition:transform .3s ease;transform-origin:50% 50%}._1cqqig51{transform:rotate(90deg)}._1cqqig52{transform:rotate(180deg)}._1cqqig53{transform:rotate(270deg)}.oaw05w6{background:var(--oaw05w0)}.oaw05w7{background:var(--oaw05w1)}.oaw05w8{background:var(--oaw05w2)}.oaw05w9{background:var(--oaw05w3)}.oaw05wa{background:var(--oaw05w4)}.oaw05wb{background:var(--oaw05w5)}html:not(.o1ubka10) .oaw05wc{--oaw05w0: var(--_1vwoat4w);--oaw05w1: var(--_1vwoat4p);--oaw05w2: var(--_1vwoat4u);--oaw05w3: var(--_1vwoat4h);--oaw05w4: var(--_1vwoat4j);--oaw05w5: var(--_1vwoat4n)}html:not(.o1ubka10) .oaw05wd{--oaw05w0: var(--_1vwoat4x);--oaw05w1: var(--_1vwoat4q);--oaw05w2: var(--_1vwoat4v);--oaw05w3: var(--_1vwoat4i);--oaw05w4: var(--_1vwoat4k);--oaw05w5: var(--_1vwoat4o)}html.o1ubka10 .oaw05we{--oaw05w0: var(--_1vwoat4w);--oaw05w1: var(--_1vwoat4p);--oaw05w2: var(--_1vwoat4u);--oaw05w3: var(--_1vwoat4h);--oaw05w4: var(--_1vwoat4j);--oaw05w5: var(--_1vwoat4n)}html.o1ubka10 .oaw05wf{--oaw05w0: var(--_1vwoat4x);--oaw05w1: var(--_1vwoat4q);--oaw05w2: var(--_1vwoat4v);--oaw05w3: var(--_1vwoat4i);--oaw05w4: var(--_1vwoat4k);--oaw05w5: var(--_1vwoat4o)}.oaw05wg{border-top-right-radius:0!important;border-bottom-right-radius:0!important}.oaw05wh{width:var(--_1vwoat4e)}.oaw05wi{width:var(--_1vwoat4a)}._16e5k4g2{--_16e5k4g0: var(--_1vwoat45g);--_16e5k4g1: var(--_1vwoat43o)}._16e5k4g3{--_16e5k4g0: var(--_1vwoat45h);--_16e5k4g1: var(--_1vwoat43e)}._16e5k4g4{width:44px;height:44px;top:calc(((44px - var(--_16e5k4g0)) / 2) * -1);left:calc(((44px - var(--_16e5k4g0)) / 2) * -1)}[data-braid-debug] ._16e5k4g4{background:red;opacity:.2}._16e5k4g5{height:var(--_16e5k4g0);width:var(--_16e5k4g0)}._16e5k4g4[type=checkbox]:checked~._16e5k4g5{background:transparent}._16e5k4g6{padding-top:calc((var(--_16e5k4g0) - var(--_16e5k4g1)) / 2)}._16e5k4g4:checked~* ._16e5k4g8,._16e5k4g4._16e5k4g7~* ._16e5k4g8{display:block;z-index:1}._16e5k4g4:checked+._16e5k4g5>._16e5k4g9,._16e5k4g4._16e5k4g7+._16e5k4g5>._16e5k4g9{opacity:1}html:not(.o1ubka10) ._16e5k4ga{opacity:0}._16e5k4g4:focus+._16e5k4g5>._16e5k4gb{opacity:1}._16e5k4g4:hover:not(:checked):not(._16e5k4g7):not(:disabled)+._16e5k4g5>._16e5k4gc,._16e5k4g4:focus:not(._16e5k4g7)+._16e5k4g5>._16e5k4gc{opacity:1}._16e5k4gc>._16e5k4gd{opacity:.2}._16e5k4ge{opacity:.3}html:not(.o1ubka10) ._16e5k4ge{background-color:var(--_1vwoat41r)}html.o1ubka10 ._16e5k4ge{background-color:var(--_1vwoat41s)}._16e5k4gf{transform:scale(.85)}._16e5k4g4:active+._16e5k4g5>*>._16e5k4gf{transform:scale(.75)}._16e5k4gg{transform:scale(.6)}._16e5k4g4:active+._16e5k4g5>*>._16e5k4gg{transform:scale(.5)}@media screen and (min-width: 740px){._16e5k4g2{--_16e5k4g1: var(--_1vwoat43t)}._16e5k4g3{--_16e5k4g1: var(--_1vwoat43j)}}.tqc3z80{--_1vwoat40: 24px;--_1vwoat41: 8px;--_1vwoat42: 12px;--_1vwoat43: 16px;--_1vwoat44: 24px;--_1vwoat45: 32px;--_1vwoat46: 48px;--_1vwoat47: 64px;--_1vwoat48: 96px;--_1vwoat49: 48px;--_1vwoat4a: 4px;--_1vwoat4b: 4px;--_1vwoat4c: 8px;--_1vwoat4d: 16px;--_1vwoat4e: 24px;--_1vwoat4f: #E60278;--_1vwoat4g: #F8B1DC;--_1vwoat4h: #FDC221;--_1vwoat4i: #FEE384;--_1vwoat4j: #B91E1E;--_1vwoat4k: #FB999A;--_1vwoat4l: #838FA5;--_1vwoat4m: rgba(153,191,247,.7);--_1vwoat4n: #1E47A9;--_1vwoat4o: #99BFF7;--_1vwoat4p: #1D559D;--_1vwoat4q: #98C9F1;--_1vwoat4r: #2E3849;--_1vwoat4t: #EAECF1;--_1vwoat4s: #fff;--_1vwoat4u: #12784F;--_1vwoat4v: #8BDEC5;--_1vwoat4w: #7F35A9;--_1vwoat4x: #E1B2F5;--_1vwoat4y: 2px;--_1vwoat4z: 4px;--_1vwoat410: 6px;--_1vwoat411: 400px;--_1vwoat412: 660px;--_1vwoat413: 940px;--_1vwoat414: 1280px;--_1vwoat415: #E60278;--_1vwoat416: #F8B1DC;--_1vwoat417: #723D02;--_1vwoat418: #FEE384;--_1vwoat419: #B91E1E;--_1vwoat41a: #FB999A;--_1vwoat41b: #1E47A9;--_1vwoat41c: #99BFF7;--_1vwoat41d: #1D559D;--_1vwoat41e: #98C9F1;--_1vwoat41f: #2E3849;--_1vwoat41h: #fff;--_1vwoat41g: #2E3849;--_1vwoat41i: #5B2084;--_1vwoat41j: #F0D6FA;--_1vwoat41k: #2E3849;--_1vwoat41l: #fff;--_1vwoat41m: #12784F;--_1vwoat41n: #8BDEC5;--_1vwoat41o: #7F35A9;--_1vwoat41p: #E1B2F5;--_1vwoat41q: #E60278;--_1vwoat41r: #5A6881;--_1vwoat41s: rgba(255,255,255,.65);--_1vwoat41t: #fff;--_1vwoat41u: #1C2330;--_1vwoat41v: #051A49;--_1vwoat41w: #E60278;--_1vwoat41x: #cd026b;--_1vwoat41y: #fd0585;--_1vwoat41z: #FEEFFA;--_1vwoat420: #fdd7f3;--_1vwoat421: #fde3f6;--_1vwoat422: #FDC221;--_1vwoat423: #FEF8DE;--_1vwoat424: #B91E1E;--_1vwoat425: #a31a1a;--_1vwoat426: #db1616;--_1vwoat427: #FFE3E2;--_1vwoat428: #FEF3F3;--_1vwoat429: #fcdbdb;--_1vwoat42a: #fde7e7;--_1vwoat42b: #1E47A9;--_1vwoat42c: #1a3e93;--_1vwoat42d: #2455c9;--_1vwoat42e: #F0F7FE;--_1vwoat42f: #d8eafc;--_1vwoat42g: #e4f1fd;--_1vwoat42h: #1D559D;--_1vwoat42i: #E3F2FB;--_1vwoat42j: #2E3849;--_1vwoat42k: #242c39;--_1vwoat42l: #384459;--_1vwoat42m: #F3F5F7;--_1vwoat42n: #F3F5F7;--_1vwoat42o: #e4e8ed;--_1vwoat42p: #ebeff2;--_1vwoat42q: #12784F;--_1vwoat42r: #E2F7F1;--_1vwoat42s: #7F35A9;--_1vwoat42t: #F9EBFD;--_1vwoat42u: #fff;--_1vwoat42v: #1C2330;--_1vwoat42w: SeekSans, "SeekSans Fallback", Arial, Tahoma, sans-serif;--_1vwoat42x: 783;--_1vwoat42y: 1057;--_1vwoat42z: -274;--_1vwoat430: 0;--_1vwoat431: 1000;--_1vwoat432: 12px;--_1vwoat433: 18.396px;--_1vwoat434: 9.396px;--_1vwoat435: -.375em;--_1vwoat436: -.375em;--_1vwoat437: 12px;--_1vwoat438: 18.396px;--_1vwoat439: 9.396px;--_1vwoat43a: -.375em;--_1vwoat43b: -.375em;--_1vwoat43c: 14px;--_1vwoat43d: 20.962px;--_1vwoat43e: 10.962px;--_1vwoat43f: -.3571em;--_1vwoat43g: -.3571em;--_1vwoat43h: 14px;--_1vwoat43i: 20.962px;--_1vwoat43j: 10.962px;--_1vwoat43k: -.3571em;--_1vwoat43l: -.3571em;--_1vwoat43m: 16px;--_1vwoat43n: 24.528px;--_1vwoat43o: 12.528px;--_1vwoat43p: -.375em;--_1vwoat43q: -.375em;--_1vwoat43r: 16px;--_1vwoat43s: 24.528px;--_1vwoat43t: 12.528px;--_1vwoat43u: -.375em;--_1vwoat43v: -.375em;--_1vwoat43w: 18px;--_1vwoat43x: 27.094px;--_1vwoat43y: 14.094px;--_1vwoat43z: -.3611em;--_1vwoat440: -.3611em;--_1vwoat441: 18px;--_1vwoat442: 27.094px;--_1vwoat443: 14.094px;--_1vwoat444: -.3611em;--_1vwoat445: -.3611em;--_1vwoat446: 400;--_1vwoat447: 500;--_1vwoat448: 700;--_1vwoat449: 28px;--_1vwoat44a: 32.924px;--_1vwoat44b: 21.924px;--_1vwoat44c: -.1964em;--_1vwoat44d: -.1964em;--_1vwoat44e: 36px;--_1vwoat44f: 42.188px;--_1vwoat44g: 28.188px;--_1vwoat44h: -.1944em;--_1vwoat44i: -.1944em;--_1vwoat44j: 24px;--_1vwoat44k: 29.792px;--_1vwoat44l: 18.792px;--_1vwoat44m: -.2292em;--_1vwoat44n: -.2292em;--_1vwoat44o: 30px;--_1vwoat44p: 36.49px;--_1vwoat44q: 23.49px;--_1vwoat44r: -.2167em;--_1vwoat44s: -.2167em;--_1vwoat44t: 22px;--_1vwoat44u: 27.226px;--_1vwoat44v: 17.226px;--_1vwoat44w: -.2273em;--_1vwoat44x: -.2273em;--_1vwoat44y: 24px;--_1vwoat44z: 29.792px;--_1vwoat450: 18.792px;--_1vwoat451: -.2292em;--_1vwoat452: -.2292em;--_1vwoat453: 20px;--_1vwoat454: 24.66px;--_1vwoat455: 15.66px;--_1vwoat456: -.225em;--_1vwoat457: -.225em;--_1vwoat458: 20px;--_1vwoat459: 24.66px;--_1vwoat45a: 15.66px;--_1vwoat45b: -.225em;--_1vwoat45c: -.225em;--_1vwoat45d: 400;--_1vwoat45e: 500;--_1vwoat45f: underline;--_1vwoat45g: 24px;--_1vwoat45h: 20px;--_1vwoat45i: transform .125s ease, opacity .125s ease;--_1vwoat45j: transform .2s cubic-bezier(.02, 1.505, .745, 1.235);--_1vwoat45k: scale(.95);--_1vwoat45l: 0 2px 4px 0px rgba(28,35,48,.1), 0 2px 2px -2px rgba(28,35,48,.1), 0 4px 4px -4px rgba(28,35,48,.2);--_1vwoat45m: 0 2px 4px 0px rgba(28,35,48,.1), 0 8px 8px -4px rgba(28,35,48,.1), 0 12px 12px -8px rgba(28,35,48,.2);--_1vwoat45n: 0 2px 4px 0px rgba(28,35,48,.1), 0 12px 12px -4px rgba(28,35,48,.1), 0 20px 20px -12px rgba(28,35,48,.2)}.inn18b0{--zv7nmx0: blueviolet;background-color:var(--zv7nmx0);color:#fff;font-size:20px;padding:100px}
+",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`braid-design-system > bundler vite > build > should return built jobStreet site 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="stylesheet"
+      href="/vite-client-BhFiESAO.css"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+      </style>
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
+          Hello
+          jobStreet
+          <span class="_1gdwseo0 o1ubka57">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewbox="0 0 24 24"
+              xml:space="preserve"
+              focusable="false"
+              fill="currentColor"
+              width="16"
+              height="16"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
+              aria-hidden="true"
+            >
+              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+              </path>
+            </svg>
+          </span>
+        </span>
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
+              <input
+                class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
+                type="checkbox"
+                id="id_1"
+                aria-checked="false"
+              >
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
+                  <label
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
+                    for="id_1"
+                  >
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
+                      This is a checkbox
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1gdwseo0 inn18b0">
+          🧁 Vanilla content
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"jobStreet"}
+    </script>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -58,6 +58,7 @@
+                 type="checkbox"
+                 id="id_1"
+                 aria-checked="false"
++                value
+               >
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+@@ -156,7 +157,7 @@
+         </div>
+         <div class="_1gdwseo0 inn18b0">
+           🧁 Vanilla content
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+`;
+
+exports[`braid-design-system > bundler vite > build > should return built seekAnz site 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="stylesheet"
+      href="/vite-client-BhFiESAO.css"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+      </style>
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
+          Hello
+          seekAnz
+          <span class="_1gdwseo0 o1ubka57">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewbox="0 0 24 24"
+              xml:space="preserve"
+              focusable="false"
+              fill="currentColor"
+              width="16"
+              height="16"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
+              aria-hidden="true"
+            >
+              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+              </path>
+            </svg>
+          </span>
+        </span>
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
+              <input
+                class="_1gdwseo0 _1gdwseod _1gdwseo8 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
+                type="checkbox"
+                id="id_1"
+                aria-checked="false"
+              >
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
+                  <label
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
+                    for="id_1"
+                  >
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1jw6vm0c _1jw6vm0b _1vgffpw4 _1jw6vm0a">
+                      This is a checkbox
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1gdwseo0 inn18b0">
+          🧁 Vanilla content
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"seekAnz"}
+    </script>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -58,6 +58,7 @@
+                 type="checkbox"
+                 id="id_1"
+                 aria-checked="false"
++                value
+               >
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+@@ -156,7 +157,7 @@
+         </div>
+         <div class="_1gdwseo0 inn18b0">
+           🧁 Vanilla content
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+`;
+
 exports[`braid-design-system > bundler vite > start > should return development jobStreet site 1`] = `
 "<!DOCTYPE html>
 <html>
@@ -10002,6 +10458,546 @@ POST HYDRATE DIFFS:
 @@ -167,7 +4946,7 @@
          </div>
          <div class="reset_base__1gdwseo0 App_vanillaBox__inn18b0">
+           🧁 Vanilla content
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+`;
+
+exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
+{
+  "2-facd3ccbba2a2e974f05.css": "._1gdwseo0{border:0;box-sizing:border-box;font-size:100%;font:inherit;margin:0;padding:0;vertical-align:baseline;-webkit-tap-highlight-color:transparent}[data-braid-hidefocusrings] ._1gdwseo0{outline:none}._1gdwseo1{display:block}._1gdwseo2{line-height:1}._1gdwseo3{list-style:none}._1gdwseo4{quotes:none}._1gdwseo4:after,._1gdwseo4:before{content:""}._1gdwseo5{border-collapse:collapse;border-spacing:0}._1gdwseo6{-webkit-appearance:none;appearance:none}._1gdwseo7{background-color:transparent}._1gdwseo9{color:inherit}._1gdwseoa:disabled{opacity:1}._1gdwseoa::-ms-expand{display:none}._1gdwseoc[type=number]{-moz-appearance:textfield}._1gdwseoc[type=number]::-webkit-inner-spin-button,._1gdwseoc[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}._1gdwseoc::-ms-clear{display:none}._1gdwseoc::-webkit-search-cancel-button{-webkit-appearance:none}._1gdwseof{color:inherit;text-decoration:none}
+.o1ubka0{overflow:hidden}.o1ubka1{overflow:scroll}.o1ubka2{overflow:visible}.o1ubka3{overflow:auto}.o1ubka4{-webkit-user-select:none;user-select:none}.o1ubka5{outline:none}.o1ubka6{opacity:0}.o1ubka7{z-index:0}.o1ubka8{z-index:1}.o1ubka9{z-index:2}.o1ubkaa{z-index:90}.o1ubkab{z-index:100}.o1ubkac{z-index:200}.o1ubkad{z-index:290}.o1ubkae{z-index:300}.o1ubkaf{z-index:400}.o1ubkag{cursor:default}.o1ubkah{cursor:pointer}.o1ubkai{pointer-events:none}.o1ubkaj{top:0}.o1ubkak{bottom:0}.o1ubkal{left:0}.o1ubkam{right:0}.o1ubkan{height:100%}.o1ubkao{height:var(--_1vwoat49)}.o1ubkap{width:100%}.o1ubkaq{width:var(--_1vwoat49)}.o1ubkar{min-width:0}.o1ubkas{max-width:var(--_1vwoat411)}.o1ubkat{max-width:var(--_1vwoat412)}.o1ubkau{max-width:var(--_1vwoat413)}.o1ubkav{max-width:var(--_1vwoat414)}.o1ubkaw{max-width:-moz-fit-content;max-width:fit-content}.o1ubkax{transition:var(--_1vwoat45i)}.o1ubkay{transition:var(--_1vwoat45j)}.o1ubkaz:active{transform:var(--_1vwoat45k)}html.o1ubka10 .o1ubka12,html:not(.o1ubka10) .o1ubka11{background:var(--_1vwoat41t)}html.o1ubka10 .o1ubka14,html:not(.o1ubka10) .o1ubka13{background:var(--_1vwoat41u)}html.o1ubka10 .o1ubka16,html:not(.o1ubka10) .o1ubka15{background:var(--_1vwoat41v)}html.o1ubka10 .o1ubka18,html:not(.o1ubka10) .o1ubka17{background:var(--_1vwoat41w)}html.o1ubka10 .o1ubka1a,html:not(.o1ubka10) .o1ubka19{background:var(--_1vwoat41x)}html.o1ubka10 .o1ubka1c,html:not(.o1ubka10) .o1ubka1b{background:var(--_1vwoat41y)}html.o1ubka10 .o1ubka1e,html:not(.o1ubka10) .o1ubka1d{background:var(--_1vwoat41z)}html.o1ubka10 .o1ubka1g,html:not(.o1ubka10) .o1ubka1f{background:var(--_1vwoat420)}html.o1ubka10 .o1ubka1i,html:not(.o1ubka10) .o1ubka1h{background:var(--_1vwoat421)}html.o1ubka10 .o1ubka1k,html:not(.o1ubka10) .o1ubka1j{background:var(--_1vwoat422)}html.o1ubka10 .o1ubka1m,html:not(.o1ubka10) .o1ubka1l{background:var(--_1vwoat423)}html.o1ubka10 .o1ubka1o,html:not(.o1ubka10) .o1ubka1n{background:var(--_1vwoat424)}html.o1ubka10 .o1ubka1q,html:not(.o1ubka10) .o1ubka1p{background:var(--_1vwoat425)}html.o1ubka10 .o1ubka1s,html:not(.o1ubka10) .o1ubka1r{background:var(--_1vwoat426)}html.o1ubka10 .o1ubka1u,html:not(.o1ubka10) .o1ubka1t{background:var(--_1vwoat427)}html.o1ubka10 .o1ubka1w,html:not(.o1ubka10) .o1ubka1v{background:var(--_1vwoat428)}html.o1ubka10 .o1ubka1y,html:not(.o1ubka10) .o1ubka1x{background:var(--_1vwoat429)}html.o1ubka10 .o1ubka20,html:not(.o1ubka10) .o1ubka1z{background:var(--_1vwoat42a)}html.o1ubka10 .o1ubka22,html:not(.o1ubka10) .o1ubka21{background:var(--_1vwoat42b)}html.o1ubka10 .o1ubka24,html:not(.o1ubka10) .o1ubka23{background:var(--_1vwoat42c)}html.o1ubka10 .o1ubka26,html:not(.o1ubka10) .o1ubka25{background:var(--_1vwoat42d)}html.o1ubka10 .o1ubka28,html:not(.o1ubka10) .o1ubka27{background:var(--_1vwoat42e)}html.o1ubka10 .o1ubka2a,html:not(.o1ubka10) .o1ubka29{background:var(--_1vwoat42f)}html.o1ubka10 .o1ubka2c,html:not(.o1ubka10) .o1ubka2b{background:var(--_1vwoat42g)}html.o1ubka10 .o1ubka2e,html:not(.o1ubka10) .o1ubka2d{background:var(--_1vwoat42h)}html.o1ubka10 .o1ubka2g,html:not(.o1ubka10) .o1ubka2f{background:var(--_1vwoat42i)}html.o1ubka10 .o1ubka2i,html:not(.o1ubka10) .o1ubka2h{background:var(--_1vwoat42j)}html.o1ubka10 .o1ubka2k,html:not(.o1ubka10) .o1ubka2j{background:var(--_1vwoat42k)}html.o1ubka10 .o1ubka2m,html:not(.o1ubka10) .o1ubka2l{background:var(--_1vwoat42l)}html.o1ubka10 .o1ubka2o,html:not(.o1ubka10) .o1ubka2n{background:var(--_1vwoat42m)}html.o1ubka10 .o1ubka2q,html:not(.o1ubka10) .o1ubka2p{background:var(--_1vwoat42n)}html.o1ubka10 .o1ubka2s,html:not(.o1ubka10) .o1ubka2r{background:var(--_1vwoat42o)}html.o1ubka10 .o1ubka2u,html:not(.o1ubka10) .o1ubka2t{background:var(--_1vwoat42p)}html.o1ubka10 .o1ubka2w,html:not(.o1ubka10) .o1ubka2v{background:var(--_1vwoat42q)}html.o1ubka10 .o1ubka2y,html:not(.o1ubka10) .o1ubka2x{background:var(--_1vwoat42r)}html.o1ubka10 .o1ubka30,html:not(.o1ubka10) .o1ubka2z{background:var(--_1vwoat42s)}html.o1ubka10 .o1ubka32,html:not(.o1ubka10) .o1ubka31{background:var(--_1vwoat42t)}html.o1ubka10 .o1ubka34,html:not(.o1ubka10) .o1ubka33{background:var(--_1vwoat42u)}html.o1ubka10 .o1ubka36,html:not(.o1ubka10) .o1ubka35{background:var(--_1vwoat42v)}html.o1ubka10 .o1ubka38,html:not(.o1ubka10) .o1ubka37{box-shadow:var(--_1vwoat45l)}html.o1ubka10 .o1ubka3a,html:not(.o1ubka10) .o1ubka39{box-shadow:var(--_1vwoat45m)}html.o1ubka10 .o1ubka3c,html:not(.o1ubka10) .o1ubka3b{box-shadow:var(--_1vwoat45n)}html.o1ubka10 .o1ubka3e,html:not(.o1ubka10) .o1ubka3d{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4f)}html.o1ubka10 .o1ubka3g,html:not(.o1ubka10) .o1ubka3f{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4g)}html.o1ubka10 .o1ubka3i,html:not(.o1ubka10) .o1ubka3h{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4f)}html.o1ubka10 .o1ubka3k,html:not(.o1ubka10) .o1ubka3j{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4g)}html.o1ubka10 .o1ubka3m,html:not(.o1ubka10) .o1ubka3l{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4h)}html.o1ubka10 .o1ubka3o,html:not(.o1ubka10) .o1ubka3n{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4i)}html.o1ubka10 .o1ubka3q,html:not(.o1ubka10) .o1ubka3p{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4j)}html.o1ubka10 .o1ubka3s,html:not(.o1ubka10) .o1ubka3r{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4j)}html.o1ubka10 .o1ubka3u,html:not(.o1ubka10) .o1ubka3t{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4k)}html.o1ubka10 .o1ubka3w,html:not(.o1ubka10) .o1ubka3v{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4k)}html.o1ubka10 .o1ubka3y,html:not(.o1ubka10) .o1ubka3x{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4l)}html.o1ubka10 .o1ubka40,html:not(.o1ubka10) .o1ubka3z{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4n)}html.o1ubka10 .o1ubka42,html:not(.o1ubka10) .o1ubka41{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4n)}html.o1ubka10 .o1ubka44,html:not(.o1ubka10) .o1ubka43{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4o)}html.o1ubka10 .o1ubka46,html:not(.o1ubka10) .o1ubka45{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4o)}html.o1ubka10 .o1ubka48,html:not(.o1ubka10) .o1ubka47{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4p)}html.o1ubka10 .o1ubka4a,html:not(.o1ubka10) .o1ubka49{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4q)}html.o1ubka10 .o1ubka4c,html:not(.o1ubka10) .o1ubka4b{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4r)}html.o1ubka10 .o1ubka4e,html:not(.o1ubka10) .o1ubka4d{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4r)}html.o1ubka10 .o1ubka4g,html:not(.o1ubka10) .o1ubka4f{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4s)}html.o1ubka10 .o1ubka4i,html:not(.o1ubka10) .o1ubka4h{box-shadow:inset 0 0 0 var(--_1vwoat4z) var(--_1vwoat4s)}html.o1ubka10 .o1ubka4k,html:not(.o1ubka10) .o1ubka4j{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4t)}html.o1ubka10 .o1ubka4m,html:not(.o1ubka10) .o1ubka4l{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4u)}html.o1ubka10 .o1ubka4o,html:not(.o1ubka10) .o1ubka4n{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4v)}html.o1ubka10 .o1ubka4q,html:not(.o1ubka10) .o1ubka4p{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4w)}html.o1ubka10 .o1ubka4s,html:not(.o1ubka10) .o1ubka4r{box-shadow:inset 0 0 0 var(--_1vwoat4y) var(--_1vwoat4x)}html.o1ubka10 .o1ubka4u,html:not(.o1ubka10) .o1ubka4t{box-shadow:0 0 0 var(--_1vwoat410) var(--_1vwoat4m)}.o1ubka4v{display:none}.o1ubka4z{display:block}.o1ubka53{display:inline}.o1ubka57{display:inline-block}.o1ubka5b{display:flex}.o1ubka5f{position:relative}.o1ubka5j{position:absolute}.o1ubka5n{position:fixed}.o1ubka5r{border-radius:0}.o1ubka5v{border-radius:9999px}.o1ubka5z{border-radius:var(--_1vwoat4b)}.o1ubka63{border-radius:var(--_1vwoat4c)}.o1ubka67{border-radius:var(--_1vwoat4d)}.o1ubka6b{border-radius:var(--_1vwoat4e)}.o1ubka6f{gap:var(--_1vwoat40)}.o1ubka6j{gap:var(--_1vwoat41)}.o1ubka6n{gap:var(--_1vwoat42)}.o1ubka6r{gap:var(--_1vwoat43)}.o1ubka6v{gap:var(--_1vwoat44)}.o1ubka6z{gap:var(--_1vwoat45)}.o1ubka73{gap:var(--_1vwoat46)}.o1ubka77{gap:var(--_1vwoat47)}.o1ubka7b{gap:var(--_1vwoat48)}.o1ubka7f{gap:0}.o1ubka7j{padding-top:var(--_1vwoat40)}.o1ubka7n{padding-top:var(--_1vwoat41)}.o1ubka7r{padding-top:var(--_1vwoat42)}.o1ubka7v{padding-top:var(--_1vwoat43)}.o1ubka7z{padding-top:var(--_1vwoat44)}.o1ubka83{padding-top:var(--_1vwoat45)}.o1ubka87{padding-top:var(--_1vwoat46)}.o1ubka8b{padding-top:var(--_1vwoat47)}.o1ubka8f{padding-top:var(--_1vwoat48)}.o1ubka8j{padding-top:0}.o1ubka8n{padding-bottom:var(--_1vwoat40)}.o1ubka8r{padding-bottom:var(--_1vwoat41)}.o1ubka8v{padding-bottom:var(--_1vwoat42)}.o1ubka8z{padding-bottom:var(--_1vwoat43)}.o1ubka93{padding-bottom:var(--_1vwoat44)}.o1ubka97{padding-bottom:var(--_1vwoat45)}.o1ubka9b{padding-bottom:var(--_1vwoat46)}.o1ubka9f{padding-bottom:var(--_1vwoat47)}.o1ubka9j{padding-bottom:var(--_1vwoat48)}.o1ubka9n{padding-bottom:0}.o1ubka9r{padding-right:var(--_1vwoat40)}.o1ubka9v{padding-right:var(--_1vwoat41)}.o1ubka9z{padding-right:var(--_1vwoat42)}.o1ubkaa3{padding-right:var(--_1vwoat43)}.o1ubkaa7{padding-right:var(--_1vwoat44)}.o1ubkaab{padding-right:var(--_1vwoat45)}.o1ubkaaf{padding-right:var(--_1vwoat46)}.o1ubkaaj{padding-right:var(--_1vwoat47)}.o1ubkaan{padding-right:var(--_1vwoat48)}.o1ubkaar{padding-right:0}.o1ubkaav{padding-left:var(--_1vwoat40)}.o1ubkaaz{padding-left:var(--_1vwoat41)}.o1ubkab3{padding-left:var(--_1vwoat42)}.o1ubkab7{padding-left:var(--_1vwoat43)}.o1ubkabb{padding-left:var(--_1vwoat44)}.o1ubkabf{padding-left:var(--_1vwoat45)}.o1ubkabj{padding-left:var(--_1vwoat46)}.o1ubkabn{padding-left:var(--_1vwoat47)}.o1ubkabr{padding-left:var(--_1vwoat48)}.o1ubkabv{padding-left:0}.o1ubkabz{margin-top:var(--_1vwoat40)}.o1ubkac3{margin-top:var(--_1vwoat41)}.o1ubkac7{margin-top:var(--_1vwoat42)}.o1ubkacb{margin-top:var(--_1vwoat43)}.o1ubkacf{margin-top:var(--_1vwoat44)}.o1ubkacj{margin-top:var(--_1vwoat45)}.o1ubkacn{margin-top:var(--_1vwoat46)}.o1ubkacr{margin-top:var(--_1vwoat47)}.o1ubkacv{margin-top:var(--_1vwoat48)}.o1ubkacz{margin-top:0}.o1ubkad3{margin-bottom:var(--_1vwoat40)}.o1ubkad7{margin-bottom:var(--_1vwoat41)}.o1ubkadb{margin-bottom:var(--_1vwoat42)}.o1ubkadf{margin-bottom:var(--_1vwoat43)}.o1ubkadj{margin-bottom:var(--_1vwoat44)}.o1ubkadn{margin-bottom:var(--_1vwoat45)}.o1ubkadr{margin-bottom:var(--_1vwoat46)}.o1ubkadv{margin-bottom:var(--_1vwoat47)}.o1ubkadz{margin-bottom:var(--_1vwoat48)}.o1ubkae3{margin-bottom:0}.o1ubkae7{margin-right:var(--_1vwoat40)}.o1ubkaeb{margin-right:var(--_1vwoat41)}.o1ubkaef{margin-right:var(--_1vwoat42)}.o1ubkaej{margin-right:var(--_1vwoat43)}.o1ubkaen{margin-right:var(--_1vwoat44)}.o1ubkaer{margin-right:var(--_1vwoat45)}.o1ubkaev{margin-right:var(--_1vwoat46)}.o1ubkaez{margin-right:var(--_1vwoat47)}.o1ubkaf3{margin-right:var(--_1vwoat48)}.o1ubkaf7{margin-right:0}.o1ubkafb{margin-left:var(--_1vwoat40)}.o1ubkaff{margin-left:var(--_1vwoat41)}.o1ubkafj{margin-left:var(--_1vwoat42)}.o1ubkafn{margin-left:var(--_1vwoat43)}.o1ubkafr{margin-left:var(--_1vwoat44)}.o1ubkafv{margin-left:var(--_1vwoat45)}.o1ubkafz{margin-left:var(--_1vwoat46)}.o1ubkag3{margin-left:var(--_1vwoat47)}.o1ubkag7{margin-left:var(--_1vwoat48)}.o1ubkagb{margin-left:0}.o1ubkagf{align-items:flex-start}.o1ubkagj{align-items:center}.o1ubkagn{align-items:flex-end}.o1ubkagr{justify-content:flex-start}.o1ubkagv{justify-content:center}.o1ubkagz{justify-content:flex-end}.o1ubkah3{justify-content:space-between}.o1ubkah7{flex-direction:row}.o1ubkahb{flex-direction:row-reverse}.o1ubkahf{flex-direction:column}.o1ubkahj{flex-direction:column-reverse}.o1ubkahn{flex-wrap:wrap}.o1ubkahr{flex-wrap:nowrap}.o1ubkahv{flex-shrink:0}.o1ubkahz{flex-grow:0}.o1ubkai3{flex-grow:1}.o1ubkai7{text-align:left}.o1ubkaib{text-align:center}.o1ubkaif{text-align:right}@media screen and (min-width:740px){.o1ubka4w{display:none}.o1ubka50{display:block}.o1ubka54{display:inline}.o1ubka58{display:inline-block}.o1ubka5c{display:flex}.o1ubka5g{position:relative}.o1ubka5k{position:absolute}.o1ubka5o{position:fixed}.o1ubka5s{border-radius:0}.o1ubka5w{border-radius:9999px}.o1ubka60{border-radius:var(--_1vwoat4b)}.o1ubka64{border-radius:var(--_1vwoat4c)}.o1ubka68{border-radius:var(--_1vwoat4d)}.o1ubka6c{border-radius:var(--_1vwoat4e)}.o1ubka6g{gap:var(--_1vwoat40)}.o1ubka6k{gap:var(--_1vwoat41)}.o1ubka6o{gap:var(--_1vwoat42)}.o1ubka6s{gap:var(--_1vwoat43)}.o1ubka6w{gap:var(--_1vwoat44)}.o1ubka70{gap:var(--_1vwoat45)}.o1ubka74{gap:var(--_1vwoat46)}.o1ubka78{gap:var(--_1vwoat47)}.o1ubka7c{gap:var(--_1vwoat48)}.o1ubka7g{gap:0}.o1ubka7k{padding-top:var(--_1vwoat40)}.o1ubka7o{padding-top:var(--_1vwoat41)}.o1ubka7s{padding-top:var(--_1vwoat42)}.o1ubka7w{padding-top:var(--_1vwoat43)}.o1ubka80{padding-top:var(--_1vwoat44)}.o1ubka84{padding-top:var(--_1vwoat45)}.o1ubka88{padding-top:var(--_1vwoat46)}.o1ubka8c{padding-top:var(--_1vwoat47)}.o1ubka8g{padding-top:var(--_1vwoat48)}.o1ubka8k{padding-top:0}.o1ubka8o{padding-bottom:var(--_1vwoat40)}.o1ubka8s{padding-bottom:var(--_1vwoat41)}.o1ubka8w{padding-bottom:var(--_1vwoat42)}.o1ubka90{padding-bottom:var(--_1vwoat43)}.o1ubka94{padding-bottom:var(--_1vwoat44)}.o1ubka98{padding-bottom:var(--_1vwoat45)}.o1ubka9c{padding-bottom:var(--_1vwoat46)}.o1ubka9g{padding-bottom:var(--_1vwoat47)}.o1ubka9k{padding-bottom:var(--_1vwoat48)}.o1ubka9o{padding-bottom:0}.o1ubka9s{padding-right:var(--_1vwoat40)}.o1ubka9w{padding-right:var(--_1vwoat41)}.o1ubkaa0{padding-right:var(--_1vwoat42)}.o1ubkaa4{padding-right:var(--_1vwoat43)}.o1ubkaa8{padding-right:var(--_1vwoat44)}.o1ubkaac{padding-right:var(--_1vwoat45)}.o1ubkaag{padding-right:var(--_1vwoat46)}.o1ubkaak{padding-right:var(--_1vwoat47)}.o1ubkaao{padding-right:var(--_1vwoat48)}.o1ubkaas{padding-right:0}.o1ubkaaw{padding-left:var(--_1vwoat40)}.o1ubkab0{padding-left:var(--_1vwoat41)}.o1ubkab4{padding-left:var(--_1vwoat42)}.o1ubkab8{padding-left:var(--_1vwoat43)}.o1ubkabc{padding-left:var(--_1vwoat44)}.o1ubkabg{padding-left:var(--_1vwoat45)}.o1ubkabk{padding-left:var(--_1vwoat46)}.o1ubkabo{padding-left:var(--_1vwoat47)}.o1ubkabs{padding-left:var(--_1vwoat48)}.o1ubkabw{padding-left:0}.o1ubkac0{margin-top:var(--_1vwoat40)}.o1ubkac4{margin-top:var(--_1vwoat41)}.o1ubkac8{margin-top:var(--_1vwoat42)}.o1ubkacc{margin-top:var(--_1vwoat43)}.o1ubkacg{margin-top:var(--_1vwoat44)}.o1ubkack{margin-top:var(--_1vwoat45)}.o1ubkaco{margin-top:var(--_1vwoat46)}.o1ubkacs{margin-top:var(--_1vwoat47)}.o1ubkacw{margin-top:var(--_1vwoat48)}.o1ubkad0{margin-top:0}.o1ubkad4{margin-bottom:var(--_1vwoat40)}.o1ubkad8{margin-bottom:var(--_1vwoat41)}.o1ubkadc{margin-bottom:var(--_1vwoat42)}.o1ubkadg{margin-bottom:var(--_1vwoat43)}.o1ubkadk{margin-bottom:var(--_1vwoat44)}.o1ubkado{margin-bottom:var(--_1vwoat45)}.o1ubkads{margin-bottom:var(--_1vwoat46)}.o1ubkadw{margin-bottom:var(--_1vwoat47)}.o1ubkae0{margin-bottom:var(--_1vwoat48)}.o1ubkae4{margin-bottom:0}.o1ubkae8{margin-right:var(--_1vwoat40)}.o1ubkaec{margin-right:var(--_1vwoat41)}.o1ubkaeg{margin-right:var(--_1vwoat42)}.o1ubkaek{margin-right:var(--_1vwoat43)}.o1ubkaeo{margin-right:var(--_1vwoat44)}.o1ubkaes{margin-right:var(--_1vwoat45)}.o1ubkaew{margin-right:var(--_1vwoat46)}.o1ubkaf0{margin-right:var(--_1vwoat47)}.o1ubkaf4{margin-right:var(--_1vwoat48)}.o1ubkaf8{margin-right:0}.o1ubkafc{margin-left:var(--_1vwoat40)}.o1ubkafg{margin-left:var(--_1vwoat41)}.o1ubkafk{margin-left:var(--_1vwoat42)}.o1ubkafo{margin-left:var(--_1vwoat43)}.o1ubkafs{margin-left:var(--_1vwoat44)}.o1ubkafw{margin-left:var(--_1vwoat45)}.o1ubkag0{margin-left:var(--_1vwoat46)}.o1ubkag4{margin-left:var(--_1vwoat47)}.o1ubkag8{margin-left:var(--_1vwoat48)}.o1ubkagc{margin-left:0}.o1ubkagg{align-items:flex-start}.o1ubkagk{align-items:center}.o1ubkago{align-items:flex-end}.o1ubkags{justify-content:flex-start}.o1ubkagw{justify-content:center}.o1ubkah0{justify-content:flex-end}.o1ubkah4{justify-content:space-between}.o1ubkah8{flex-direction:row}.o1ubkahc{flex-direction:row-reverse}.o1ubkahg{flex-direction:column}.o1ubkahk{flex-direction:column-reverse}.o1ubkaho{flex-wrap:wrap}.o1ubkahs{flex-wrap:nowrap}.o1ubkahw{flex-shrink:0}.o1ubkai0{flex-grow:0}.o1ubkai4{flex-grow:1}.o1ubkai8{text-align:left}.o1ubkaic{text-align:center}.o1ubkaig{text-align:right}}@media screen and (min-width:992px){.o1ubka4x{display:none}.o1ubka51{display:block}.o1ubka55{display:inline}.o1ubka59{display:inline-block}.o1ubka5d{display:flex}.o1ubka5h{position:relative}.o1ubka5l{position:absolute}.o1ubka5p{position:fixed}.o1ubka5t{border-radius:0}.o1ubka5x{border-radius:9999px}.o1ubka61{border-radius:var(--_1vwoat4b)}.o1ubka65{border-radius:var(--_1vwoat4c)}.o1ubka69{border-radius:var(--_1vwoat4d)}.o1ubka6d{border-radius:var(--_1vwoat4e)}.o1ubka6h{gap:var(--_1vwoat40)}.o1ubka6l{gap:var(--_1vwoat41)}.o1ubka6p{gap:var(--_1vwoat42)}.o1ubka6t{gap:var(--_1vwoat43)}.o1ubka6x{gap:var(--_1vwoat44)}.o1ubka71{gap:var(--_1vwoat45)}.o1ubka75{gap:var(--_1vwoat46)}.o1ubka79{gap:var(--_1vwoat47)}.o1ubka7d{gap:var(--_1vwoat48)}.o1ubka7h{gap:0}.o1ubka7l{padding-top:var(--_1vwoat40)}.o1ubka7p{padding-top:var(--_1vwoat41)}.o1ubka7t{padding-top:var(--_1vwoat42)}.o1ubka7x{padding-top:var(--_1vwoat43)}.o1ubka81{padding-top:var(--_1vwoat44)}.o1ubka85{padding-top:var(--_1vwoat45)}.o1ubka89{padding-top:var(--_1vwoat46)}.o1ubka8d{padding-top:var(--_1vwoat47)}.o1ubka8h{padding-top:var(--_1vwoat48)}.o1ubka8l{padding-top:0}.o1ubka8p{padding-bottom:var(--_1vwoat40)}.o1ubka8t{padding-bottom:var(--_1vwoat41)}.o1ubka8x{padding-bottom:var(--_1vwoat42)}.o1ubka91{padding-bottom:var(--_1vwoat43)}.o1ubka95{padding-bottom:var(--_1vwoat44)}.o1ubka99{padding-bottom:var(--_1vwoat45)}.o1ubka9d{padding-bottom:var(--_1vwoat46)}.o1ubka9h{padding-bottom:var(--_1vwoat47)}.o1ubka9l{padding-bottom:var(--_1vwoat48)}.o1ubka9p{padding-bottom:0}.o1ubka9t{padding-right:var(--_1vwoat40)}.o1ubka9x{padding-right:var(--_1vwoat41)}.o1ubkaa1{padding-right:var(--_1vwoat42)}.o1ubkaa5{padding-right:var(--_1vwoat43)}.o1ubkaa9{padding-right:var(--_1vwoat44)}.o1ubkaad{padding-right:var(--_1vwoat45)}.o1ubkaah{padding-right:var(--_1vwoat46)}.o1ubkaal{padding-right:var(--_1vwoat47)}.o1ubkaap{padding-right:var(--_1vwoat48)}.o1ubkaat{padding-right:0}.o1ubkaax{padding-left:var(--_1vwoat40)}.o1ubkab1{padding-left:var(--_1vwoat41)}.o1ubkab5{padding-left:var(--_1vwoat42)}.o1ubkab9{padding-left:var(--_1vwoat43)}.o1ubkabd{padding-left:var(--_1vwoat44)}.o1ubkabh{padding-left:var(--_1vwoat45)}.o1ubkabl{padding-left:var(--_1vwoat46)}.o1ubkabp{padding-left:var(--_1vwoat47)}.o1ubkabt{padding-left:var(--_1vwoat48)}.o1ubkabx{padding-left:0}.o1ubkac1{margin-top:var(--_1vwoat40)}.o1ubkac5{margin-top:var(--_1vwoat41)}.o1ubkac9{margin-top:var(--_1vwoat42)}.o1ubkacd{margin-top:var(--_1vwoat43)}.o1ubkach{margin-top:var(--_1vwoat44)}.o1ubkacl{margin-top:var(--_1vwoat45)}.o1ubkacp{margin-top:var(--_1vwoat46)}.o1ubkact{margin-top:var(--_1vwoat47)}.o1ubkacx{margin-top:var(--_1vwoat48)}.o1ubkad1{margin-top:0}.o1ubkad5{margin-bottom:var(--_1vwoat40)}.o1ubkad9{margin-bottom:var(--_1vwoat41)}.o1ubkadd{margin-bottom:var(--_1vwoat42)}.o1ubkadh{margin-bottom:var(--_1vwoat43)}.o1ubkadl{margin-bottom:var(--_1vwoat44)}.o1ubkadp{margin-bottom:var(--_1vwoat45)}.o1ubkadt{margin-bottom:var(--_1vwoat46)}.o1ubkadx{margin-bottom:var(--_1vwoat47)}.o1ubkae1{margin-bottom:var(--_1vwoat48)}.o1ubkae5{margin-bottom:0}.o1ubkae9{margin-right:var(--_1vwoat40)}.o1ubkaed{margin-right:var(--_1vwoat41)}.o1ubkaeh{margin-right:var(--_1vwoat42)}.o1ubkael{margin-right:var(--_1vwoat43)}.o1ubkaep{margin-right:var(--_1vwoat44)}.o1ubkaet{margin-right:var(--_1vwoat45)}.o1ubkaex{margin-right:var(--_1vwoat46)}.o1ubkaf1{margin-right:var(--_1vwoat47)}.o1ubkaf5{margin-right:var(--_1vwoat48)}.o1ubkaf9{margin-right:0}.o1ubkafd{margin-left:var(--_1vwoat40)}.o1ubkafh{margin-left:var(--_1vwoat41)}.o1ubkafl{margin-left:var(--_1vwoat42)}.o1ubkafp{margin-left:var(--_1vwoat43)}.o1ubkaft{margin-left:var(--_1vwoat44)}.o1ubkafx{margin-left:var(--_1vwoat45)}.o1ubkag1{margin-left:var(--_1vwoat46)}.o1ubkag5{margin-left:var(--_1vwoat47)}.o1ubkag9{margin-left:var(--_1vwoat48)}.o1ubkagd{margin-left:0}.o1ubkagh{align-items:flex-start}.o1ubkagl{align-items:center}.o1ubkagp{align-items:flex-end}.o1ubkagt{justify-content:flex-start}.o1ubkagx{justify-content:center}.o1ubkah1{justify-content:flex-end}.o1ubkah5{justify-content:space-between}.o1ubkah9{flex-direction:row}.o1ubkahd{flex-direction:row-reverse}.o1ubkahh{flex-direction:column}.o1ubkahl{flex-direction:column-reverse}.o1ubkahp{flex-wrap:wrap}.o1ubkaht{flex-wrap:nowrap}.o1ubkahx{flex-shrink:0}.o1ubkai1{flex-grow:0}.o1ubkai5{flex-grow:1}.o1ubkai9{text-align:left}.o1ubkaid{text-align:center}.o1ubkaih{text-align:right}}@media screen and (min-width:1200px){.o1ubka4y{display:none}.o1ubka52{display:block}.o1ubka56{display:inline}.o1ubka5a{display:inline-block}.o1ubka5e{display:flex}.o1ubka5i{position:relative}.o1ubka5m{position:absolute}.o1ubka5q{position:fixed}.o1ubka5u{border-radius:0}.o1ubka5y{border-radius:9999px}.o1ubka62{border-radius:var(--_1vwoat4b)}.o1ubka66{border-radius:var(--_1vwoat4c)}.o1ubka6a{border-radius:var(--_1vwoat4d)}.o1ubka6e{border-radius:var(--_1vwoat4e)}.o1ubka6i{gap:var(--_1vwoat40)}.o1ubka6m{gap:var(--_1vwoat41)}.o1ubka6q{gap:var(--_1vwoat42)}.o1ubka6u{gap:var(--_1vwoat43)}.o1ubka6y{gap:var(--_1vwoat44)}.o1ubka72{gap:var(--_1vwoat45)}.o1ubka76{gap:var(--_1vwoat46)}.o1ubka7a{gap:var(--_1vwoat47)}.o1ubka7e{gap:var(--_1vwoat48)}.o1ubka7i{gap:0}.o1ubka7m{padding-top:var(--_1vwoat40)}.o1ubka7q{padding-top:var(--_1vwoat41)}.o1ubka7u{padding-top:var(--_1vwoat42)}.o1ubka7y{padding-top:var(--_1vwoat43)}.o1ubka82{padding-top:var(--_1vwoat44)}.o1ubka86{padding-top:var(--_1vwoat45)}.o1ubka8a{padding-top:var(--_1vwoat46)}.o1ubka8e{padding-top:var(--_1vwoat47)}.o1ubka8i{padding-top:var(--_1vwoat48)}.o1ubka8m{padding-top:0}.o1ubka8q{padding-bottom:var(--_1vwoat40)}.o1ubka8u{padding-bottom:var(--_1vwoat41)}.o1ubka8y{padding-bottom:var(--_1vwoat42)}.o1ubka92{padding-bottom:var(--_1vwoat43)}.o1ubka96{padding-bottom:var(--_1vwoat44)}.o1ubka9a{padding-bottom:var(--_1vwoat45)}.o1ubka9e{padding-bottom:var(--_1vwoat46)}.o1ubka9i{padding-bottom:var(--_1vwoat47)}.o1ubka9m{padding-bottom:var(--_1vwoat48)}.o1ubka9q{padding-bottom:0}.o1ubka9u{padding-right:var(--_1vwoat40)}.o1ubka9y{padding-right:var(--_1vwoat41)}.o1ubkaa2{padding-right:var(--_1vwoat42)}.o1ubkaa6{padding-right:var(--_1vwoat43)}.o1ubkaaa{padding-right:var(--_1vwoat44)}.o1ubkaae{padding-right:var(--_1vwoat45)}.o1ubkaai{padding-right:var(--_1vwoat46)}.o1ubkaam{padding-right:var(--_1vwoat47)}.o1ubkaaq{padding-right:var(--_1vwoat48)}.o1ubkaau{padding-right:0}.o1ubkaay{padding-left:var(--_1vwoat40)}.o1ubkab2{padding-left:var(--_1vwoat41)}.o1ubkab6{padding-left:var(--_1vwoat42)}.o1ubkaba{padding-left:var(--_1vwoat43)}.o1ubkabe{padding-left:var(--_1vwoat44)}.o1ubkabi{padding-left:var(--_1vwoat45)}.o1ubkabm{padding-left:var(--_1vwoat46)}.o1ubkabq{padding-left:var(--_1vwoat47)}.o1ubkabu{padding-left:var(--_1vwoat48)}.o1ubkaby{padding-left:0}.o1ubkac2{margin-top:var(--_1vwoat40)}.o1ubkac6{margin-top:var(--_1vwoat41)}.o1ubkaca{margin-top:var(--_1vwoat42)}.o1ubkace{margin-top:var(--_1vwoat43)}.o1ubkaci{margin-top:var(--_1vwoat44)}.o1ubkacm{margin-top:var(--_1vwoat45)}.o1ubkacq{margin-top:var(--_1vwoat46)}.o1ubkacu{margin-top:var(--_1vwoat47)}.o1ubkacy{margin-top:var(--_1vwoat48)}.o1ubkad2{margin-top:0}.o1ubkad6{margin-bottom:var(--_1vwoat40)}.o1ubkada{margin-bottom:var(--_1vwoat41)}.o1ubkade{margin-bottom:var(--_1vwoat42)}.o1ubkadi{margin-bottom:var(--_1vwoat43)}.o1ubkadm{margin-bottom:var(--_1vwoat44)}.o1ubkadq{margin-bottom:var(--_1vwoat45)}.o1ubkadu{margin-bottom:var(--_1vwoat46)}.o1ubkady{margin-bottom:var(--_1vwoat47)}.o1ubkae2{margin-bottom:var(--_1vwoat48)}.o1ubkae6{margin-bottom:0}.o1ubkaea{margin-right:var(--_1vwoat40)}.o1ubkaee{margin-right:var(--_1vwoat41)}.o1ubkaei{margin-right:var(--_1vwoat42)}.o1ubkaem{margin-right:var(--_1vwoat43)}.o1ubkaeq{margin-right:var(--_1vwoat44)}.o1ubkaeu{margin-right:var(--_1vwoat45)}.o1ubkaey{margin-right:var(--_1vwoat46)}.o1ubkaf2{margin-right:var(--_1vwoat47)}.o1ubkaf6{margin-right:var(--_1vwoat48)}.o1ubkafa{margin-right:0}.o1ubkafe{margin-left:var(--_1vwoat40)}.o1ubkafi{margin-left:var(--_1vwoat41)}.o1ubkafm{margin-left:var(--_1vwoat42)}.o1ubkafq{margin-left:var(--_1vwoat43)}.o1ubkafu{margin-left:var(--_1vwoat44)}.o1ubkafy{margin-left:var(--_1vwoat45)}.o1ubkag2{margin-left:var(--_1vwoat46)}.o1ubkag6{margin-left:var(--_1vwoat47)}.o1ubkaga{margin-left:var(--_1vwoat48)}.o1ubkage{margin-left:0}.o1ubkagi{align-items:flex-start}.o1ubkagm{align-items:center}.o1ubkagq{align-items:flex-end}.o1ubkagu{justify-content:flex-start}.o1ubkagy{justify-content:center}.o1ubkah2{justify-content:flex-end}.o1ubkah6{justify-content:space-between}.o1ubkaha{flex-direction:row}.o1ubkahe{flex-direction:row-reverse}.o1ubkahi{flex-direction:column}.o1ubkahm{flex-direction:column-reverse}.o1ubkahq{flex-wrap:wrap}.o1ubkahu{flex-wrap:nowrap}.o1ubkahy{flex-shrink:0}.o1ubkai2{flex-grow:0}.o1ubkai6{flex-grow:1}.o1ubkaia{text-align:left}.o1ubkaie{text-align:center}.o1ubkaii{text-align:right}}
+.inn18b0{--zv7nmx0:#8a2be2;background-color:var(--zv7nmx0);color:#fff;font-size:20px;padding:100px}
+._1vgffpw4{font-size:var(--_1vgffpw0);line-height:var(--_1vgffpw1)}._1vgffpw4:before{content:"";display:table;margin-bottom:var(--_1vgffpw2)}._1vgffpw4:after{content:"";display:table;margin-top:var(--_1vgffpw3)}
+._1jw6vm00{font-family:var(--_1vwoat42w)}._1jw6vm01{font-weight:var(--_1vwoat446)}._1jw6vm02{font-weight:var(--_1vwoat447)}._1jw6vm03{font-weight:var(--_1vwoat448)}._1jw6vm04{--_1vgffpw0:var(--_1vwoat432);--_1vgffpw1:var(--_1vwoat433);--_1vgffpw2:var(--_1vwoat435);--_1vgffpw3:var(--_1vwoat436)}._1jw6vm07{--_1vgffpw0:var(--_1vwoat43c);--_1vgffpw1:var(--_1vwoat43d);--_1vgffpw2:var(--_1vwoat43f);--_1vgffpw3:var(--_1vwoat43g)}._1jw6vm0a{--_1vgffpw0:var(--_1vwoat43m);--_1vgffpw1:var(--_1vwoat43n);--_1vgffpw2:var(--_1vwoat43p);--_1vgffpw3:var(--_1vwoat43q)}._1jw6vm0d{--_1vgffpw0:var(--_1vwoat43w);--_1vgffpw1:var(--_1vwoat43x);--_1vgffpw2:var(--_1vwoat43z);--_1vgffpw3:var(--_1vwoat440)}._1jw6vm0g{font-size:var(--_1vwoat432);line-height:var(--_1vwoat433)}._1jw6vm0h{font-size:var(--_1vwoat43c);line-height:var(--_1vwoat43d)}._1jw6vm0i{font-size:var(--_1vwoat43m);line-height:var(--_1vwoat43n)}._1jw6vm0j{font-size:var(--_1vwoat43w);line-height:var(--_1vwoat43x)}._1jw6vm0k{font-weight:var(--_1vwoat45d)}._1jw6vm0l{font-weight:var(--_1vwoat45e)}._1jw6vm0m{--_1vgffpw0:var(--_1vwoat449);--_1vgffpw1:var(--_1vwoat44a);--_1vgffpw2:var(--_1vwoat44c);--_1vgffpw3:var(--_1vwoat44d)}._1jw6vm0p{--_1vgffpw0:var(--_1vwoat44j);--_1vgffpw1:var(--_1vwoat44k);--_1vgffpw2:var(--_1vwoat44m);--_1vgffpw3:var(--_1vwoat44n)}._1jw6vm0s{--_1vgffpw0:var(--_1vwoat44t);--_1vgffpw1:var(--_1vwoat44u);--_1vgffpw2:var(--_1vwoat44w);--_1vgffpw3:var(--_1vwoat44x)}._1jw6vm0v{--_1vgffpw0:var(--_1vwoat453);--_1vgffpw1:var(--_1vwoat454);--_1vgffpw2:var(--_1vwoat456);--_1vgffpw3:var(--_1vwoat457)}html:not(.o1ubka10) ._1jw6vm018{--_1jw6vm0y:var(--_1vwoat419);--_1jw6vm0z:var(--_1vwoat417);--_1jw6vm010:var(--_1vwoat41d);--_1jw6vm011:var(--_1vwoat41o);--_1jw6vm012:var(--_1vwoat41m);--_1jw6vm013:var(--_1vwoat415);--_1jw6vm014:var(--_1vwoat41b);--_1jw6vm015:var(--_1vwoat41k);--_1jw6vm016:var(--_1vwoat41r);--_1jw6vm017:var(--_1vwoat41f)}html:not(.o1ubka10) ._1jw6vm019{--_1jw6vm0y:var(--_1vwoat41a);--_1jw6vm0z:var(--_1vwoat418);--_1jw6vm010:var(--_1vwoat41e);--_1jw6vm011:var(--_1vwoat41p);--_1jw6vm012:var(--_1vwoat41n);--_1jw6vm013:var(--_1vwoat416);--_1jw6vm014:var(--_1vwoat41c);--_1jw6vm015:var(--_1vwoat41l);--_1jw6vm016:var(--_1vwoat41s);--_1jw6vm017:var(--_1vwoat41h)}html.o1ubka10 ._1jw6vm01a{--_1jw6vm0y:var(--_1vwoat419);--_1jw6vm0z:var(--_1vwoat417);--_1jw6vm010:var(--_1vwoat41d);--_1jw6vm011:var(--_1vwoat41o);--_1jw6vm012:var(--_1vwoat41m);--_1jw6vm013:var(--_1vwoat415);--_1jw6vm014:var(--_1vwoat41b);--_1jw6vm015:var(--_1vwoat41k);--_1jw6vm016:var(--_1vwoat41r);--_1jw6vm017:var(--_1vwoat41f)}html.o1ubka10 ._1jw6vm01b{--_1jw6vm0y:var(--_1vwoat41a);--_1jw6vm0z:var(--_1vwoat418);--_1jw6vm010:var(--_1vwoat41e);--_1jw6vm011:var(--_1vwoat41p);--_1jw6vm012:var(--_1vwoat41n);--_1jw6vm013:var(--_1vwoat416);--_1jw6vm014:var(--_1vwoat41c);--_1jw6vm015:var(--_1vwoat41l);--_1jw6vm016:var(--_1vwoat41s);--_1jw6vm017:var(--_1vwoat41h)}html:not(.o1ubka10) ._1jw6vm01c,html:not(.o1ubka10) ._1jw6vm01d,html:not(.o1ubka10) ._1jw6vm01e,html:not(.o1ubka10) ._1jw6vm01f{--_1jw6vm015:var(--_1jw6vm0y)}html:not(.o1ubka10) ._1jw6vm01g,html:not(.o1ubka10) ._1jw6vm01h{--_1jw6vm015:var(--_1jw6vm0z)}html:not(.o1ubka10) ._1jw6vm01i{--_1jw6vm015:var(--_1jw6vm012)}html:not(.o1ubka10) ._1jw6vm01j{--_1jw6vm015:var(--_1jw6vm010)}html:not(.o1ubka10) ._1jw6vm01k{--_1jw6vm015:var(--_1jw6vm011)}html.o1ubka10 ._1jw6vm01l,html.o1ubka10 ._1jw6vm01m,html.o1ubka10 ._1jw6vm01n,html.o1ubka10 ._1jw6vm01o{--_1jw6vm015:var(--_1jw6vm0y)}html.o1ubka10 ._1jw6vm01p,html.o1ubka10 ._1jw6vm01q{--_1jw6vm015:var(--_1jw6vm0z)}html.o1ubka10 ._1jw6vm01r{--_1jw6vm015:var(--_1jw6vm012)}html.o1ubka10 ._1jw6vm01s{--_1jw6vm015:var(--_1jw6vm010)}html.o1ubka10 ._1jw6vm01t{--_1jw6vm015:var(--_1jw6vm011)}._1jw6vm01u{color:var(--_1jw6vm0y)}._1jw6vm01v{color:var(--_1jw6vm0z)}._1jw6vm01w{color:var(--_1jw6vm010)}._1jw6vm01x{color:var(--_1jw6vm011)}._1jw6vm01y{color:var(--_1jw6vm012)}._1jw6vm01z{color:var(--_1jw6vm013)}._1jw6vm020{color:var(--_1jw6vm014)}._1jw6vm021{color:var(--_1jw6vm015)}._1jw6vm022{color:var(--_1jw6vm016)}._1jw6vm023{color:var(--_1jw6vm017)}._1jw6vm024{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat433)) / 2)}._1jw6vm025{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43d)) / 2)}._1jw6vm026{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43n)) / 2)}._1jw6vm027{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43x)) / 2)}@media screen and (min-width:740px){._1jw6vm04{--_1vgffpw0:var(--_1vwoat437);--_1vgffpw1:var(--_1vwoat438);--_1vgffpw2:var(--_1vwoat43a);--_1vgffpw3:var(--_1vwoat43b)}._1jw6vm07{--_1vgffpw0:var(--_1vwoat43h);--_1vgffpw1:var(--_1vwoat43i);--_1vgffpw2:var(--_1vwoat43k);--_1vgffpw3:var(--_1vwoat43l)}._1jw6vm0a{--_1vgffpw0:var(--_1vwoat43r);--_1vgffpw1:var(--_1vwoat43s);--_1vgffpw2:var(--_1vwoat43u);--_1vgffpw3:var(--_1vwoat43v)}._1jw6vm0d{--_1vgffpw0:var(--_1vwoat441);--_1vgffpw1:var(--_1vwoat442);--_1vgffpw2:var(--_1vwoat444);--_1vgffpw3:var(--_1vwoat445)}._1jw6vm0g{font-size:var(--_1vwoat437);line-height:var(--_1vwoat438)}._1jw6vm0h{font-size:var(--_1vwoat43h);line-height:var(--_1vwoat43i)}._1jw6vm0i{font-size:var(--_1vwoat43r);line-height:var(--_1vwoat43s)}._1jw6vm0j{font-size:var(--_1vwoat441);line-height:var(--_1vwoat442)}._1jw6vm0m{--_1vgffpw0:var(--_1vwoat44e);--_1vgffpw1:var(--_1vwoat44f);--_1vgffpw2:var(--_1vwoat44h);--_1vgffpw3:var(--_1vwoat44i)}._1jw6vm0p{--_1vgffpw0:var(--_1vwoat44o);--_1vgffpw1:var(--_1vwoat44p);--_1vgffpw2:var(--_1vwoat44r);--_1vgffpw3:var(--_1vwoat44s)}._1jw6vm0s{--_1vgffpw0:var(--_1vwoat44y);--_1vgffpw1:var(--_1vwoat44z);--_1vgffpw2:var(--_1vwoat451);--_1vgffpw3:var(--_1vwoat452)}._1jw6vm0v{--_1vgffpw0:var(--_1vwoat458);--_1vgffpw1:var(--_1vwoat459);--_1vgffpw2:var(--_1vwoat45b);--_1vgffpw3:var(--_1vwoat45c)}._1jw6vm024{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat438)) / 2)}._1jw6vm025{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43i)) / 2)}._1jw6vm026{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat43s)) / 2)}._1jw6vm027{padding-bottom:calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2);padding-top:calc((var(--_1vwoat49) - var(--_1vwoat442)) / 2)}}
+._1fw3bkm0{margin-bottom:-.1em}._1fw3bkm2{text-overflow:ellipsis;white-space:nowrap}._1fw3bkm0 ._1fw3bkm2{padding-bottom:.1em}@supports (display:-webkit-box) and (-webkit-line-clamp:1){._1fw3bkm4{display:-webkit-box;white-space:normal;-webkit-line-clamp:var(--_1fw3bkm3);-webkit-box-orient:vertical}}
+._1jxquog0{height:1.2em;width:1.2em}._1jxquog1{margin:-.1em}._1jxquog2{margin-bottom:-.2em;margin-top:-.2em}._1jxquog3{vertical-align:middle}._1jxquog4{top:-.105em}._1jxquog5{top:-.16499999999999998em}._1jxquog6{top:-.045em}._1jxquog7{top:-.065em}._1jxquog8{top:-.125em}._1jxquog9{top:-.0050000000000000044em}._1jxquoga{width:var(--_1vwoat433)}._1jxquogb{width:var(--_1vwoat43d)}._1jxquogc{width:var(--_1vwoat43n)}._1jxquogd{width:var(--_1vwoat43x)}@media screen and (min-width:740px){._1jxquoga{width:var(--_1vwoat438)}._1jxquogb{width:var(--_1vwoat43i)}._1jxquogc{width:var(--_1vwoat43s)}._1jxquogd{width:var(--_1vwoat442)}}
+._1vhw3mh0{height:var(--_1vwoat433)}._1vhw3mh1{height:var(--_1vwoat43d)}._1vhw3mh2{height:var(--_1vwoat43n)}._1vhw3mh3{height:var(--_1vwoat43x)}@media screen and (min-width:740px){._1vhw3mh0{height:var(--_1vwoat438)}._1vhw3mh1{height:var(--_1vwoat43i)}._1vhw3mh2{height:var(--_1vwoat43s)}._1vhw3mh3{height:var(--_1vwoat442)}}
+._1cqqig50{transform-origin:50% 50%;transition:transform .3s ease}._1cqqig51{transform:rotate(90deg)}._1cqqig52{transform:rotate(180deg)}._1cqqig53{transform:rotate(270deg)}
+.oaw05w6{background:var(--oaw05w0)}.oaw05w7{background:var(--oaw05w1)}.oaw05w8{background:var(--oaw05w2)}.oaw05w9{background:var(--oaw05w3)}.oaw05wa{background:var(--oaw05w4)}.oaw05wb{background:var(--oaw05w5)}html:not(.o1ubka10) .oaw05wc{--oaw05w0:var(--_1vwoat4w);--oaw05w1:var(--_1vwoat4p);--oaw05w2:var(--_1vwoat4u);--oaw05w3:var(--_1vwoat4h);--oaw05w4:var(--_1vwoat4j);--oaw05w5:var(--_1vwoat4n)}html:not(.o1ubka10) .oaw05wd{--oaw05w0:var(--_1vwoat4x);--oaw05w1:var(--_1vwoat4q);--oaw05w2:var(--_1vwoat4v);--oaw05w3:var(--_1vwoat4i);--oaw05w4:var(--_1vwoat4k);--oaw05w5:var(--_1vwoat4o)}html.o1ubka10 .oaw05we{--oaw05w0:var(--_1vwoat4w);--oaw05w1:var(--_1vwoat4p);--oaw05w2:var(--_1vwoat4u);--oaw05w3:var(--_1vwoat4h);--oaw05w4:var(--_1vwoat4j);--oaw05w5:var(--_1vwoat4n)}html.o1ubka10 .oaw05wf{--oaw05w0:var(--_1vwoat4x);--oaw05w1:var(--_1vwoat4q);--oaw05w2:var(--_1vwoat4v);--oaw05w3:var(--_1vwoat4i);--oaw05w4:var(--_1vwoat4k);--oaw05w5:var(--_1vwoat4o)}.oaw05wg{border-bottom-right-radius:0!important;border-top-right-radius:0!important}.oaw05wh{width:var(--_1vwoat4e)}.oaw05wi{width:var(--_1vwoat4a)}
+[data-braid-hidefocusrings] ._1ixccu70{opacity:0!important}
+._16e5k4g2{--_16e5k4g0:var(--_1vwoat45g);--_16e5k4g1:var(--_1vwoat43o)}._16e5k4g3{--_16e5k4g0:var(--_1vwoat45h);--_16e5k4g1:var(--_1vwoat43e)}._16e5k4g4{height:44px;left:calc(((44px - var(--_16e5k4g0)) / 2) * -1);top:calc(((44px - var(--_16e5k4g0)) / 2) * -1);width:44px}[data-braid-debug] ._16e5k4g4{background:red;opacity:.2}._16e5k4g5{height:var(--_16e5k4g0);width:var(--_16e5k4g0)}._16e5k4g4[type=checkbox]:checked~._16e5k4g5{background:transparent}._16e5k4g6{padding-top:calc((var(--_16e5k4g0) - var(--_16e5k4g1)) / 2)}._16e5k4g4._16e5k4g7~* ._16e5k4g8,._16e5k4g4:checked~* ._16e5k4g8{display:block;z-index:1}._16e5k4g4._16e5k4g7+._16e5k4g5>._16e5k4g9,._16e5k4g4:checked+._16e5k4g5>._16e5k4g9{opacity:1}html:not(.o1ubka10) ._16e5k4ga{opacity:0}._16e5k4g4:focus+._16e5k4g5>._16e5k4gb,._16e5k4g4:focus:not(._16e5k4g7)+._16e5k4g5>._16e5k4gc,._16e5k4g4:hover:not(:checked):not(._16e5k4g7):not(:disabled)+._16e5k4g5>._16e5k4gc{opacity:1}._16e5k4gc>._16e5k4gd{opacity:.2}._16e5k4ge{opacity:.3}html:not(.o1ubka10) ._16e5k4ge{background-color:var(--_1vwoat41r)}html.o1ubka10 ._16e5k4ge{background-color:var(--_1vwoat41s)}._16e5k4gf{transform:scale(.85)}._16e5k4g4:active+._16e5k4g5>*>._16e5k4gf{transform:scale(.75)}._16e5k4gg{transform:scale(.6)}._16e5k4g4:active+._16e5k4g5>*>._16e5k4gg{transform:scale(.5)}@media screen and (min-width:740px){._16e5k4g2{--_16e5k4g1:var(--_1vwoat43t)}._16e5k4g3{--_16e5k4g1:var(--_1vwoat43j)}}
+._1iq6bbh0{position:relative}._1iq6bbh0:after{content:"";height:100%;left:50%;min-height:44px;min-width:44px;position:absolute;top:50%;transform:translate(-50%,-50%);width:100%}[data-braid-debug] ._1iq6bbh0:after{background:red;opacity:.2}
+.tqc3z80{--_1vwoat40:24px;--_1vwoat41:8px;--_1vwoat42:12px;--_1vwoat43:16px;--_1vwoat44:24px;--_1vwoat45:32px;--_1vwoat46:48px;--_1vwoat47:64px;--_1vwoat48:96px;--_1vwoat49:48px;--_1vwoat4a:4px;--_1vwoat4b:4px;--_1vwoat4c:8px;--_1vwoat4d:16px;--_1vwoat4e:24px;--_1vwoat4f:#e60278;--_1vwoat4g:#f8b1dc;--_1vwoat4h:#fdc221;--_1vwoat4i:#fee384;--_1vwoat4j:#b91e1e;--_1vwoat4k:#fb999a;--_1vwoat4l:#838fa5;--_1vwoat4m:rgba(153,191,247,.7);--_1vwoat4n:#1e47a9;--_1vwoat4o:#99bff7;--_1vwoat4p:#1d559d;--_1vwoat4q:#98c9f1;--_1vwoat4r:#2e3849;--_1vwoat4t:#eaecf1;--_1vwoat4s:#fff;--_1vwoat4u:#12784f;--_1vwoat4v:#8bdec5;--_1vwoat4w:#7f35a9;--_1vwoat4x:#e1b2f5;--_1vwoat4y:2px;--_1vwoat4z:4px;--_1vwoat410:6px;--_1vwoat411:400px;--_1vwoat412:660px;--_1vwoat413:940px;--_1vwoat414:1280px;--_1vwoat415:#e60278;--_1vwoat416:#f8b1dc;--_1vwoat417:#723d02;--_1vwoat418:#fee384;--_1vwoat419:#b91e1e;--_1vwoat41a:#fb999a;--_1vwoat41b:#1e47a9;--_1vwoat41c:#99bff7;--_1vwoat41d:#1d559d;--_1vwoat41e:#98c9f1;--_1vwoat41f:#2e3849;--_1vwoat41h:#fff;--_1vwoat41g:#2e3849;--_1vwoat41i:#5b2084;--_1vwoat41j:#f0d6fa;--_1vwoat41k:#2e3849;--_1vwoat41l:#fff;--_1vwoat41m:#12784f;--_1vwoat41n:#8bdec5;--_1vwoat41o:#7f35a9;--_1vwoat41p:#e1b2f5;--_1vwoat41q:#e60278;--_1vwoat41r:#5a6881;--_1vwoat41s:hsla(0,0%,100%,.65);--_1vwoat41t:#fff;--_1vwoat41u:#1c2330;--_1vwoat41v:#051a49;--_1vwoat41w:#e60278;--_1vwoat41x:#cd026b;--_1vwoat41y:#fd0585;--_1vwoat41z:#feeffa;--_1vwoat420:#fdd7f3;--_1vwoat421:#fde3f6;--_1vwoat422:#fdc221;--_1vwoat423:#fef8de;--_1vwoat424:#b91e1e;--_1vwoat425:#a31a1a;--_1vwoat426:#db1616;--_1vwoat427:#ffe3e2;--_1vwoat428:#fef3f3;--_1vwoat429:#fcdbdb;--_1vwoat42a:#fde7e7;--_1vwoat42b:#1e47a9;--_1vwoat42c:#1a3e93;--_1vwoat42d:#2455c9;--_1vwoat42e:#f0f7fe;--_1vwoat42f:#d8eafc;--_1vwoat42g:#e4f1fd;--_1vwoat42h:#1d559d;--_1vwoat42i:#e3f2fb;--_1vwoat42j:#2e3849;--_1vwoat42k:#242c39;--_1vwoat42l:#384459;--_1vwoat42m:#f3f5f7;--_1vwoat42n:#f3f5f7;--_1vwoat42o:#e4e8ed;--_1vwoat42p:#ebeff2;--_1vwoat42q:#12784f;--_1vwoat42r:#e2f7f1;--_1vwoat42s:#7f35a9;--_1vwoat42t:#f9ebfd;--_1vwoat42u:#fff;--_1vwoat42v:#1c2330;--_1vwoat42w:SeekSans,"SeekSans Fallback",Arial,Tahoma,sans-serif;--_1vwoat42x:783;--_1vwoat42y:1057;--_1vwoat42z:-274;--_1vwoat430:0;--_1vwoat431:1000;--_1vwoat432:12px;--_1vwoat433:18.396px;--_1vwoat434:9.396px;--_1vwoat435:-0.375em;--_1vwoat436:-0.375em;--_1vwoat437:12px;--_1vwoat438:18.396px;--_1vwoat439:9.396px;--_1vwoat43a:-0.375em;--_1vwoat43b:-0.375em;--_1vwoat43c:14px;--_1vwoat43d:20.962px;--_1vwoat43e:10.962px;--_1vwoat43f:-0.3571em;--_1vwoat43g:-0.3571em;--_1vwoat43h:14px;--_1vwoat43i:20.962px;--_1vwoat43j:10.962px;--_1vwoat43k:-0.3571em;--_1vwoat43l:-0.3571em;--_1vwoat43m:16px;--_1vwoat43n:24.528px;--_1vwoat43o:12.528px;--_1vwoat43p:-0.375em;--_1vwoat43q:-0.375em;--_1vwoat43r:16px;--_1vwoat43s:24.528px;--_1vwoat43t:12.528px;--_1vwoat43u:-0.375em;--_1vwoat43v:-0.375em;--_1vwoat43w:18px;--_1vwoat43x:27.094px;--_1vwoat43y:14.094px;--_1vwoat43z:-0.3611em;--_1vwoat440:-0.3611em;--_1vwoat441:18px;--_1vwoat442:27.094px;--_1vwoat443:14.094px;--_1vwoat444:-0.3611em;--_1vwoat445:-0.3611em;--_1vwoat446:400;--_1vwoat447:500;--_1vwoat448:700;--_1vwoat449:28px;--_1vwoat44a:32.924px;--_1vwoat44b:21.924px;--_1vwoat44c:-0.1964em;--_1vwoat44d:-0.1964em;--_1vwoat44e:36px;--_1vwoat44f:42.188px;--_1vwoat44g:28.188px;--_1vwoat44h:-0.1944em;--_1vwoat44i:-0.1944em;--_1vwoat44j:24px;--_1vwoat44k:29.792px;--_1vwoat44l:18.792px;--_1vwoat44m:-0.2292em;--_1vwoat44n:-0.2292em;--_1vwoat44o:30px;--_1vwoat44p:36.49px;--_1vwoat44q:23.49px;--_1vwoat44r:-0.2167em;--_1vwoat44s:-0.2167em;--_1vwoat44t:22px;--_1vwoat44u:27.226px;--_1vwoat44v:17.226px;--_1vwoat44w:-0.2273em;--_1vwoat44x:-0.2273em;--_1vwoat44y:24px;--_1vwoat44z:29.792px;--_1vwoat450:18.792px;--_1vwoat451:-0.2292em;--_1vwoat452:-0.2292em;--_1vwoat453:20px;--_1vwoat454:24.66px;--_1vwoat455:15.66px;--_1vwoat456:-0.225em;--_1vwoat457:-0.225em;--_1vwoat458:20px;--_1vwoat459:24.66px;--_1vwoat45a:15.66px;--_1vwoat45b:-0.225em;--_1vwoat45c:-0.225em;--_1vwoat45d:400;--_1vwoat45e:500;--_1vwoat45f:underline;--_1vwoat45g:24px;--_1vwoat45h:20px;--_1vwoat45i:transform .125s ease,opacity .125s ease;--_1vwoat45j:transform 0.2s cubic-bezier(0.02,1.505,0.745,1.235);--_1vwoat45k:scale(0.95);--_1vwoat45l:0 2px 4px 0px rgba(28,35,48,.1),0 2px 2px -2px rgba(28,35,48,.1),0 4px 4px -4px rgba(28,35,48,.2);--_1vwoat45m:0 2px 4px 0px rgba(28,35,48,.1),0 8px 8px -4px rgba(28,35,48,.1),0 12px 12px -8px rgba(28,35,48,.2);--_1vwoat45n:0 2px 4px 0px rgba(28,35,48,.1),0 12px 12px -4px rgba(28,35,48,.1),0 20px 20px -12px rgba(28,35,48,.2)}
+
+/*# sourceMappingURL=2-facd3ccbba2a2e974f05.css.map*/",
+  "2-facd3ccbba2a2e974f05.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "externals.json": "[
+  "crypto",
+  "fs",
+  "node:crypto",
+  "node:stream",
+  "node:url",
+  "os",
+  "path",
+  "stream",
+  "tty",
+  "util"
+]",
+  "jobStreet/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link data-chunk="main" rel="stylesheet" href="/2-facd3ccbba2a2e974f05.css">
+<link data-chunk="main" rel="preload" as="script" href="/runtime.js">
+<link data-chunk="main" rel="preload" as="script" href="/main.js">
+        <script>
+          window.SKU_SITE = 'jobStreet';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->jobStreet<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/runtime.js"></script>
+<script async data-chunk="main" src="/main.js"></script>
+      </body>
+    </html>
+  ",
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "seekAnz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link data-chunk="main" rel="stylesheet" href="/2-facd3ccbba2a2e974f05.css">
+<link data-chunk="main" rel="preload" as="script" href="/runtime.js">
+<link data-chunk="main" rel="preload" as="script" href="/main.js">
+        <script>
+          window.SKU_SITE = 'seekAnz';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="tqc3z80 _1jw6vm018 _1jw6vm01b"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">Hello <!-- -->seekAnz<!-- --> <span class="_1gdwseo0 o1ubka57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36"><div class="_1gdwseo0 o1ubka5f"><div class="_1gdwseo0 o1ubka5b o1ubkai7"><input class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2" type="checkbox" id="id_1" aria-checked="false"/><div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33"><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u"></span><span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44"><div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf"><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_1gdwseo0 o1ubkab3 o1ubkai3"><div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6"><label class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0" for="id_1"><span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">This is a checkbox</span></label></div></div></div></div></div><div class="_1gdwseo0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
+<script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/runtime.js"></script>
+<script async data-chunk="main" src="/main.js"></script>
+      </body>
+    </html>
+  ",
+}
+`;
+
+exports[`braid-design-system > bundler webpack > build > should return built jobStreet site 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="/2-facd3ccbba2a2e974f05.css"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <script>
+      window.SKU_SITE = 'jobStreet';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+      </style>
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
+          Hello
+          jobStreet
+          <span class="_1gdwseo0 o1ubka57">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewbox="0 0 24 24"
+              xml:space="preserve"
+              focusable="false"
+              fill="currentColor"
+              width="16"
+              height="16"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
+              aria-hidden="true"
+            >
+              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+              </path>
+            </svg>
+          </span>
+        </span>
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
+              <input
+                class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
+                type="checkbox"
+                id="id_1"
+                aria-checked="false"
+              >
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
+                  <label
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
+                    for="id_1"
+                  >
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
+                      This is a checkbox
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1gdwseo0 inn18b0">
+          🧁 Vanilla content
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"jobStreet"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -65,6 +65,7 @@
+                 type="checkbox"
+                 id="id_1"
+                 aria-checked="false"
++                value
+               >
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+@@ -163,7 +164,7 @@
+         </div>
+         <div class="_1gdwseo0 inn18b0">
+           🧁 Vanilla content
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+`;
+
+exports[`braid-design-system > bundler webpack > build > should return built seekAnz site 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="/2-facd3ccbba2a2e974f05.css"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <script>
+      window.SKU_SITE = 'seekAnz';
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <style type="text/css">
+        html,body{margin:0;padding:0;background:#fff}
+            html.o1ubka10,html.o1ubka10 body{color-scheme:dark;background:#1C2330}
+      </style>
+      <div class="tqc3z80 _1jw6vm018 _1jw6vm01b">
+        <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
+          Hello
+          seekAnz
+          <span class="_1gdwseo0 o1ubka57">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewbox="0 0 24 24"
+              xml:space="preserve"
+              focusable="false"
+              fill="currentColor"
+              width="16"
+              height="16"
+              class="_1gdwseo0 _1cqqig50 o1ubka57 o1ubka5f _1jxquog0 _1jxquog2 _1jxquog3 _1jxquog4"
+              aria-hidden="true"
+            >
+              <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
+              </path>
+            </svg>
+          </span>
+        </span>
+        <div class="_1gdwseo0 o1ubka8n o1ubka7j o1ubkaav o1ubka9r o1ubka5f o1ubka67 o1ubkai7 o1ubka4j o1ubka4c _1jw6vm018 _1jw6vm01b o1ubka33 o1ubka36">
+          <div class="_1gdwseo0 o1ubka5f">
+            <div class="_1gdwseo0 o1ubka5b o1ubkai7">
+              <input
+                class="_1gdwseo0 _1gdwseo1 _1gdwseo6 _1gdwseo7 _1gdwseoc o1ubka5j o1ubka8 o1ubkah o1ubka6 _16e5k4g4 _16e5k4g2"
+                type="checkbox"
+                id="id_1"
+                aria-checked="false"
+              >
+              <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm021"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka3x o1ubka3y">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 o1ubka3p o1ubka3u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gb o1ubka4t o1ubka4u">
+                </span>
+                <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4gc o1ubka3z o1ubka44">
+                  <div class="_1gdwseo0 o1ubkan o1ubkax o1ubka5f _16e5k4gd _16e5k4gf">
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax o1ubka6">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkax">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewbox="0 0 24 24"
+                        xml:space="preserve"
+                        focusable="false"
+                        fill="currentColor"
+                        width="16"
+                        height="16"
+                        class="_1gdwseo0 o1ubkap o1ubkan o1ubka4z _1jw6vm020"
+                        aria-hidden="true"
+                      >
+                        <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
+                        </path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="_1gdwseo0 o1ubkab3 o1ubkai3">
+                <div class="_1gdwseo0 o1ubka5b _16e5k4g2 _16e5k4g6">
+                  <label
+                    class="_1gdwseo0 o1ubka4 o1ubka4z o1ubkah _1iq6bbh0"
+                    for="id_1"
+                  >
+                    <span class="_1gdwseo0 o1ubka4z _1jw6vm00 _1jw6vm01 _1jw6vm021 _1vgffpw4 _1jw6vm0a">
+                      This is a checkbox
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="_1gdwseo0 inn18b0">
+          🧁 Vanilla content
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"site":"seekAnz"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -65,6 +65,7 @@
+                 type="checkbox"
+                 id="id_1"
+                 aria-checked="false"
++                value
+               >
+               <div class="_1gdwseo0 o1ubkahv o1ubka5f o1ubka63 _16e5k4g5 _16e5k4g2 _1jw6vm018  o1ubka33">
+                 <span class="_1gdwseo0 o1ubkaj o1ubkak o1ubkal o1ubkam o1ubka5j o1ubkai o1ubka63 o1ubkax o1ubka6 _16e5k4g9 _1jw6vm019 _1jw6vm01b o1ubka21 o1ubka22">
+@@ -163,7 +164,7 @@
+         </div>
+         <div class="_1gdwseo0 inn18b0">
            🧁 Vanilla content
 -          Initial
 +          Client

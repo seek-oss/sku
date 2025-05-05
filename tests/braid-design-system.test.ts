@@ -39,13 +39,13 @@ describe('braid-design-system', () => {
       beforeAll(async () => {
         runSkuScriptInDir('start', appDir, args, { cancelSignal: signal });
         await waitForUrls(getLocalUrl('seekAnz', port));
-      });
+      }, 230000);
 
       afterAll(async () => {
         cancel();
       });
 
-      it.only('should return development seekAnz site', async ({ expect }) => {
+      it('should return development seekAnz site', async ({ expect }) => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
@@ -66,13 +66,14 @@ describe('braid-design-system', () => {
       const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
+      const portArgs = ['--strict-port', `--port=${port}`];
       const args: Record<string, string[]> = {
         vite: ['--config', 'sku.config.vite.js', '--experimental-bundler'],
       };
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args[bundler]);
-        runSkuScriptInDir('serve', appDir, [], {
+        runSkuScriptInDir('serve', appDir, portArgs, {
           cancelSignal: signal,
         });
         await waitForUrls(getLocalUrl('seekAnz', port));

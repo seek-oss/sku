@@ -27,7 +27,7 @@ function getLocalUrl(site: string, port: number) {
 
 describe('braid-design-system', () => {
   describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
-    describe.only('start', async () => {
+    describe('start', async () => {
       const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();

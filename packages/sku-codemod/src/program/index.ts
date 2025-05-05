@@ -21,5 +21,4 @@ program
     '-p, --print',
     'Print transformed files to stdout, useful for development',
   )
-  .option('--verbose', 'Show more information about the transform process')
   .action(runTransform);

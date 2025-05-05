@@ -8,6 +8,10 @@
 pnpm dlx sku-codemod <codemod> [files] [options]
 ```
 
+If you don't specify the `codemod` the CLI will prompt you with a list of available codemods.
+
+If you don't specify any `files` the CLI will prompt you to select files to run the codemod on. It defaults to `'.'`.
+
 ## Available codemods
 
 | Codemod                   | Description                                                                |

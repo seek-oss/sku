@@ -75,7 +75,7 @@ export async function runSkuCodemod(
   codemod: string,
   cwd: string,
   args?: string[],
-  options?: SpawnOptions,
+  options?: Options,
 ) {
   const processOptions = {
     cwd,

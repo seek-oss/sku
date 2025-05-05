@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { describe, it, expect } from 'vitest';
 
@@ -41,8 +41,8 @@ const runTest = async (
     fixtureDir,
     `${localTestFilePrefix}.input.${testOptions.extension}`,
   );
-  const source = fs.readFileSync(inputPath, 'utf8');
-  const expectedOutput = fs.readFileSync(
+  const source = await readFile(inputPath, 'utf8');
+  const expectedOutput = await readFile(
     path.join(
       fixtureDir,
       `${localTestFilePrefix}.output.${testOptions.extension}`,
@@ -73,7 +73,7 @@ const runNoChangeTest = async (
     '__testfixtures__',
     `${testFilePrefix}.unchanged.${testOptions.extension}`,
   );
-  const source = fs.readFileSync(inputPath, 'utf8');
+  const source = await readFile(inputPath, 'utf8');
   const output = await transform(source);
   expect(output).toEqual(false);
 };

@@ -1,14 +1,8 @@
-import fs from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
 import { runTransform } from '../transform/runner.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const { name, description, version } = JSON.parse(
-  fs.readFileSync(resolve(__dirname, '../../package.json'), 'utf-8'),
-);
+import packageJson from '../../package.json' with { type: 'json' };
+const { name, description, version } = packageJson;
 
 export const program = new Command(name);
 
@@ -28,6 +22,4 @@ program
     'Print transformed files to stdout, useful for development',
   )
   .option('--verbose', 'Show more information about the transform process')
-  .action(runTransform)
-  .allowUnknownOption()
-  .enablePositionalOptions();
+  .action(runTransform);

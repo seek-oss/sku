@@ -1,4 +1,4 @@
-import { globbySync } from 'globby';
+import { globSync } from 'tinyglobby';
 import prompts from 'prompts';
 import { dirname, join, resolve } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
@@ -24,51 +24,58 @@ type JobWorkerData = {
   }>;
 };
 
+export const getTransformerFromPrompt = async (): Promise<string> => {
+  const res = await prompts(
+    {
+      type: 'select',
+      name: 'transformer',
+      message: 'Which transform would you like to apply?',
+      choices: CODEMODS.reverse().map(({ title, value, version }) => ({
+        title: `(v${version}) ${value}`,
+        description: title,
+        value,
+      })),
+    },
+    { onCancel: () => process.exit(1) },
+  );
+
+  return res.transformer;
+};
+
+export const getPathFromPrompt = async (): Promise<string> => {
+  const res = await prompts(
+    {
+      type: 'text',
+      name: 'path',
+      message: 'On which files or directory should the codemods be applied?',
+      initial: '.',
+    },
+    { onCancel: () => process.exit(1) },
+  );
+
+  return res.path;
+};
+
 export const runTransform = async (
   transform: string,
   path: string,
   options: Options,
 ): Promise<void> => {
-  let transformer = transform;
-  console.log('path', path);
-  let directory = path;
+  if (options.dry) {
+    console.log(
+      picocolors.yellowBright(
+        picocolors.bold('Running in dry mode, no files will be modified.'),
+      ),
+    );
+  }
+
+  const transformer = transform || (await getTransformerFromPrompt());
+  const directory = path || (await getPathFromPrompt());
 
   if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {
     console.error('Invalid transform choice, pick one of:');
     console.error(CODEMODS.map((codemod) => `- ${codemod.value}`).join('\n'));
     process.exit(1);
-  }
-
-  if (!path) {
-    const res = await prompts(
-      {
-        type: 'text',
-        name: 'path',
-        message: 'On which files or directory should the codemods be applied?',
-        initial: '.',
-      },
-      { onCancel: () => process.exit(1) },
-    );
-
-    directory = res.path;
-  }
-
-  if (!transform) {
-    const res = await prompts(
-      {
-        type: 'select',
-        name: 'transformer',
-        message: 'Which transform would you like to apply?',
-        choices: CODEMODS.reverse().map(({ title, value, version }) => ({
-          title: `(v${version}) ${value}`,
-          description: title,
-          value,
-        })),
-      },
-      { onCancel: () => process.exit(1) },
-    );
-
-    transformer = res.transformer;
   }
 
   const filesExpanded = await getAllFiles([directory]);
@@ -129,21 +136,10 @@ export const runTransform = async (
   process.exit(0);
 };
 
-const getAllFiles = async (paths: string[]) => {
-  const list = await Promise.all(
-    paths.map(
-      (file) =>
-        new Promise<string[]>((r) => {
-          const files = globbySync([file, '!**/node_modules', '!**/dist'], {
-            absolute: true,
-          });
-          r(files);
-        }),
-    ),
-  );
-
-  return list.flat();
-};
+const getAllFiles = async (paths: string[]) =>
+  globSync([...paths, '!**/node_modules', '!**/dist'], {
+    absolute: true,
+  });
 
 type JobOutcome = {
   filesChanged: number;

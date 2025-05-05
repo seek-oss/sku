@@ -1,3 +1,4 @@
 #!/usr/bin/env -S node --disable-warning=ExperimentalWarning
+import { program } from './dist/program/index.js';
 
-import './dist/bin/sku-codemods.js';
+program.parse();

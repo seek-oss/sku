@@ -14,8 +14,7 @@
     "@sku-private/test-utils": "workspace:*",
     "@vanilla-extract/css": "^1.0.0",
     "dedent": "^1.5.1",
-    "sku": "workspace:*",
-    "sku-codemod": "workspace:*"
+    "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true
 }

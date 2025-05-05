@@ -12,9 +12,9 @@
     "@ast-grep/napi": "^0.37.0",
     "commander": "^12.1.0",
     "diff": "^7.0.0",
-    "globby": "^14.1.0",
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
+    "tinyglobby": "^0.2.13",
     "typescript": "~5.8.0"
   },
   "repository": {
@@ -37,7 +37,6 @@
     "@types/diff": "^7.0.1",
     "@types/jscodeshift": "^17.3.0",
     "@types/prompts": "^2.4.9",
-    "@types/terminal-kit": "^2.5.7",
     "ts-patch": "^3.3.0",
     "typescript-transform-paths": "^3.5.2"
   }

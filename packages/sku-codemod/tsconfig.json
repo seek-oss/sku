@@ -10,11 +10,8 @@
     "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "declaration": true,
     "types": ["node"],
-    "lib": ["ESNext", "DOM"],
     "paths": {
       "@/*": ["src/*"]
     },

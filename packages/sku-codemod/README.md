@@ -5,7 +5,7 @@
 ## Usage
 
 ```sh
-pnpm dlx sku-codemod <codemod> <files> [options]
+pnpm dlx sku-codemod <codemod> [files] [options]
 ```
 
 ## Available codemods

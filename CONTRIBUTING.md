@@ -47,6 +47,7 @@ The following generators are available:
 | Generator         | Description                                                                                                                                                                  |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `add-sku-command` | **Create a new command for the `sku` `CLI` program** <br><br> This generator allows for sub-command generation with a depth of one. This will modify the parent command file |
+| `add-sku-codemod` | **Create a new codemod for the `sku-codemod` `CLI` program**                                                                                                                 |
 
 [plop]: https://plopjs.com/
 

@@ -125,7 +125,7 @@ export const runTransform = async (
   if (options.dry) {
     console.log(
       picocolors.yellow(
-        `[DRY RUN]: ${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
+        `${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
       ),
     );
   } else {

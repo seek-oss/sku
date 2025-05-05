@@ -4,6 +4,7 @@ import path from 'node:path';
 import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -14,16 +15,16 @@ const appDir = path.dirname(
 describe('public path', () => {
   describe('build and serve', () => {
     const url = 'http://localhost:4001';
-    let process;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      runSkuScriptInDir('serve', appDir, [], { cancelSignal: signal });
       await waitForUrls(url);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
     });
 
     it('should create valid app with no unresolved resources', async ({

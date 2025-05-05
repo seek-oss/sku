@@ -72,7 +72,7 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args[bundler]);
-        await runSkuScriptInDir('serve', appDir, [], {
+        runSkuScriptInDir('serve', appDir, [], {
           cancelSignal: signal,
         });
         await waitForUrls(getLocalUrl('seekAnz', port));

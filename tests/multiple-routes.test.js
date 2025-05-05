@@ -9,6 +9,7 @@ import {
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -28,7 +29,7 @@ const renderPageCorrectly = async ({ page, pageUrl }) => {
 describe('multiple-routes', () => {
   describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
     describe('start', async () => {
-      let process;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
 
@@ -45,12 +46,14 @@ describe('multiple-routes', () => {
       }
 
       beforeAll(async () => {
-        process = await runSkuScriptInDir('start', appDir, args);
+        runSkuScriptInDir('start', appDir, args, {
+          cancelSignal: signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       renderPageCorrectly({
@@ -65,7 +68,7 @@ describe('multiple-routes', () => {
     });
 
     describe('build and serve', async () => {
-      let process;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
 
@@ -85,12 +88,14 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        runSkuScriptInDir('serve', appDir, portArgs, {
+          cancelSignal: signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       renderPageCorrectly({
@@ -112,8 +117,8 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
-      const { child } = await runSkuScriptInDir('test', appDir);
-      expect(child.exitCode).toEqual(0);
+      const child = await runSkuScriptInDir('test', appDir);
+      expect(child?.exitCode).toEqual(0);
     });
   });
 });

@@ -63,7 +63,6 @@ export async function runSkuScriptInDir(
   if (/^(start|serve)/.test(script)) {
     return run(skuBin, [script, ...args], {
       ...processOptions,
-      nodeOptions: ['--max-old-space-size=2048'],
       stdio: 'inherit',
     });
   }

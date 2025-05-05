@@ -5,8 +5,8 @@ import path from 'node:path';
 import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
 
 import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
-import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -27,18 +27,18 @@ const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({
 });
 
 describe('ssr translations', () => {
-  let server: ChildProcess;
+  const { cancel, signal } = createCancelSignal();
   const { backendUrl } = getTestConfig(skuSsrConfig);
 
   beforeAll(async () => {
-    server = await runSkuScriptInDir('start-ssr', appDir, [
-      '--config=sku-ssr.config.ts',
-    ]);
+    runSkuScriptInDir('start-ssr', appDir, ['--config=sku-ssr.config.ts'], {
+      cancelSignal: signal,
+    });
     await waitForUrls(backendUrl);
   });
 
   afterAll(async () => {
-    await server.kill();
+    cancel();
   });
 
   it('should render en', async ({ expect }) => {

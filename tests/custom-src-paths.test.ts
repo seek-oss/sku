@@ -9,9 +9,8 @@ import {
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
-import type { ChildProcess } from 'node:child_process';
-
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -24,7 +23,7 @@ const targetDirectory = `${appDir}/dist`;
 describe('custom-src-paths', () => {
   describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
     describe('start', async () => {
-      let process: ChildProcess;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
       const url = `http://localhost:${port}`;
@@ -35,12 +34,14 @@ describe('custom-src-paths', () => {
       }
 
       beforeAll(async () => {
-        process = await runSkuScriptInDir('start', appDir, args);
+        runSkuScriptInDir('start', appDir, args, {
+          cancelSignal: signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       it('should start a development server', async ({ expect }) => {
@@ -50,7 +51,7 @@ describe('custom-src-paths', () => {
     });
 
     describe('build', async () => {
-      let process: ChildProcess;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
       const url = `http://localhost:${port}`;
@@ -63,12 +64,14 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        runSkuScriptInDir('serve', appDir, portArgs, {
+          cancelSignal: signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       it('should generate the expected files', async ({ expect }) => {
@@ -85,15 +88,15 @@ describe('custom-src-paths', () => {
 
   describe('format', () => {
     it('should format successfully', async ({ expect }) => {
-      const { child } = await runSkuScriptInDir('format', appDir);
-      expect(child.exitCode).toEqual(0);
+      const child = await runSkuScriptInDir('format', appDir);
+      expect(child?.exitCode).toEqual(0);
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async ({ expect }) => {
-      const { child } = await runSkuScriptInDir('lint', appDir);
-      expect(child.exitCode).toEqual(0);
+      const child = await runSkuScriptInDir('lint', appDir);
+      expect(child?.exitCode).toEqual(0);
     });
   });
 });

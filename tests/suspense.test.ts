@@ -7,8 +7,8 @@ import {
   runSkuScriptInDir,
   waitForUrls,
 } from '@sku-private/test-utils';
-import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -31,19 +31,21 @@ describe('suspense', () => {
           ...['--experimental-bundler', '--config', 'sku.config.vite.js'],
         );
       describe('build and serve', () => {
-        let process: ChildProcess;
+        const { cancel, signal } = createCancelSignal();
 
         beforeAll(async () => {
           await runSkuScriptInDir('build', appDir, args);
-          process = await runSkuScriptInDir('serve', appDir, [
-            '--strict-port',
-            `--port=${port}`,
-          ]);
+          runSkuScriptInDir(
+            'serve',
+            appDir,
+            ['--strict-port', `--port=${port}`],
+            { cancelSignal: signal },
+          );
           await waitForUrls(url);
         });
 
         afterAll(async () => {
-          await process.kill();
+          cancel();
         });
 
         it('should return home page', async ({ expect }) => {

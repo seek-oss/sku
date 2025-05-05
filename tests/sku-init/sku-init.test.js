@@ -11,7 +11,7 @@ const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
 
 describe('sku init', () => {
-  let child;
+  let exitCode;
   let stdout;
   let stderr;
 
@@ -24,7 +24,7 @@ describe('sku init', () => {
         force: true,
       });
 
-      ({ child, stdout, stderr } = await runSkuScriptInDir(
+      ({ exitCode, stdout, stderr } = await runSkuScriptInDir(
         'init',
         fixtureDirectory,
         [projectName],
@@ -49,7 +49,7 @@ describe('sku init', () => {
   });
 
   it('should exit with code 0', async ({ expect }) => {
-    expect(child.exitCode).toBe(0);
+    expect(exitCode).toBe(0);
   });
 
   it('should create package.json', async ({ expect }) => {

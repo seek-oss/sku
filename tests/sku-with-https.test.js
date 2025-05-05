@@ -11,6 +11,7 @@ import {
 import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const { serverPort } = skuServerConfig;
 
@@ -31,17 +32,18 @@ describe.sequential('sku-with-https', () => {
           ...['--experimental-bundler', '--config', 'sku.config.vite.mjs'],
         );
       describe('start', () => {
+        const { cancel, signal } = createCancelSignal();
         const url = `https://localhost:${port}`;
 
-        let process;
-
         beforeAll(async () => {
-          process = await runSkuScriptInDir('start', appDir, args);
+          runSkuScriptInDir('start', appDir, args, {
+            cancelSignal: signal,
+          });
           await waitForUrls(url, `${url}/test-middleware`);
         });
 
         afterAll(async () => {
-          await process.kill();
+          cancel();
         });
 
         it('should start a development server', async ({ expect }) => {
@@ -61,17 +63,20 @@ describe.sequential('sku-with-https', () => {
 
   describe('start-ssr', () => {
     const url = `https://localhost:${serverPort}`;
-    let process;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      process = await runSkuScriptInDir('start-ssr', appDir, [
-        '--config=sku-server.config.mjs',
-      ]);
+      runSkuScriptInDir(
+        'start-ssr',
+        appDir,
+        ['--config=sku-server.config.mjs'],
+        { cancelSignal: signal },
+      );
       await waitForUrls(url, `${url}/test-middleware`);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
     });
 
     it('should support the supplied middleware', async ({ expect }) => {
@@ -86,20 +91,18 @@ describe.sequential('sku-with-https', () => {
   describe('serve', async () => {
     const port = await getPort();
     const url = `https://localhost:${port}`;
-    let process;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir, [
-        '--strict-port',
-        `--port=${port}`,
-        ,
-      ]);
+      runSkuScriptInDir('serve', appDir, ['--strict-port', `--port=${port}`], {
+        cancelSignal: signal,
+      });
       await waitForUrls(url, `${url}/test-middleware`);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {

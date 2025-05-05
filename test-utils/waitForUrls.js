@@ -6,9 +6,6 @@ export const waitForUrls = async (...urls) => {
 
   try {
     return await waitOn({
-      delay: 1000,
-      interval: 1000,
-      simultaneous: 5,
       resources: urls.map((url) => url.replace(/http(s?)\:/, 'http$1-get:')),
       headers: { accept: 'text/html, application/javascript' },
       timeout,

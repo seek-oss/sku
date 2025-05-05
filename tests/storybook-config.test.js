@@ -6,9 +6,10 @@ import {
   startAssetServer,
   getStoryPage,
   getTextContentFromFrameOrPage,
-  gracefulSpawn,
+  run,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -28,18 +29,18 @@ describe('storybook-config', () => {
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    /** @type {ChildProcess} */
-    let server;
+    const { cancel, signal } = createCancelSignal();
     /** @type {import("puppeteer").Page} */
     let storyPage;
 
     beforeAll(async () => {
-      server = gracefulSpawn(
+      run(
         'pnpm',
         ['storybook', 'dev', '--ci', '--quiet', '--port', port.toString()],
         {
           cwd: appDir,
           stdio: 'inherit',
+          cancelSignal: signal,
         },
       );
       await waitForUrls(storyIframeUrl, middlewareUrl);
@@ -48,7 +49,7 @@ describe('storybook-config', () => {
 
     afterAll(async () => {
       await storyPage?.close();
-      await server.kill();
+      cancel();
     });
 
     it('should start sku dev middleware if configured', async ({ expect }) => {

@@ -9,6 +9,7 @@ import {
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -31,15 +32,17 @@ describe('library-build', () => {
 
   describe('start', () => {
     const devServerUrl = `http://localhost:8085`;
-    let server;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      runSkuScriptInDir('start', appDir, [], {
+        cancelSignal: signal,
+      });
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {

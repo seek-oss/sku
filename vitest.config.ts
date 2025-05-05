@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export const TEST_TIMEOUT = 50000;
+export const TEST_TIMEOUT = 50_000;
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
@@ -9,8 +9,9 @@ export default defineConfig({
     environment: 'puppeteer',
     setupFiles: ['./vite-test-utils/vitest-setup.ts'],
     globalSetup: 'vitest-environment-puppeteer/global-init',
-    hookTimeout: TEST_TIMEOUT,
-    testTimeout: TEST_TIMEOUT,
+    // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
+    hookTimeout: TEST_TIMEOUT + 1000,
+    testTimeout: TEST_TIMEOUT + 1000,
     exclude: [
       '**/node_modules/**',
       '**/dist/**',

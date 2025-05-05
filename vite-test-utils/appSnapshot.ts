@@ -45,7 +45,10 @@ export const getAppSnapshot = async ({
   });
 
   try {
-    const response = await appPage.goto(url, { timeout: TEST_TIMEOUT });
+    const response = await appPage.goto(url, {
+      timeout: TEST_TIMEOUT,
+      waitUntil,
+    });
     const sourceHtml = sanitizeHtml((await response?.text()) || '');
     const clientRenderContent = sanitizeHtml(await appPage.content());
 

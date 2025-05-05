@@ -122,16 +122,24 @@ export const runTransform = async (
   console.log(
     `Total number of files parsed: ${picocolors.bold(filesExpanded.length)}`,
   );
-  console.log(
-    picocolors.yellowBright(
-      `Unchanged files: ${picocolors.bold(filesExpanded.length - finalOutcome.filesChanged)}`,
-    ),
-  );
-  console.log(
-    picocolors.greenBright(
-      `Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`,
-    ),
-  );
+  if (options.dry) {
+    console.log(
+      picocolors.yellow(
+        `[DRY RUN]: ${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
+      ),
+    );
+  } else {
+    console.log(
+      picocolors.yellowBright(
+        `Unchanged files: ${picocolors.bold(filesExpanded.length - finalOutcome.filesChanged)}`,
+      ),
+    );
+    console.log(
+      picocolors.greenBright(
+        `Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`,
+      ),
+    );
+  }
 
   process.exit(0);
 };

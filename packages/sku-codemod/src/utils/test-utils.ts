@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { describe, it, expect } from 'vitest';
+import { expect } from 'vitest';
 
 type FileInfo = {
   source: string;
@@ -22,7 +22,7 @@ const runInlineTest = async (
   return output;
 };
 
-const runTest = async (
+export const runTest = async (
   dirName: string,
   transformName: string,
   testFilePrefix?: string,
@@ -59,7 +59,7 @@ const runTest = async (
   );
 };
 
-const runNoChangeTest = async (
+export const runNoChangeTest = async (
   dirName: string,
   transformName: string,
   testFilePrefix: string,
@@ -76,26 +76,4 @@ const runNoChangeTest = async (
   const source = await readFile(inputPath, 'utf8');
   const output = await transform(source);
   expect(output).toEqual(false);
-};
-
-export const defineTest = (
-  dirName: string,
-  transformName: string,
-  testFilePrefix: string,
-  testOptions: Record<string, unknown> = {},
-) => {
-  if (testOptions.shouldNotChange) {
-    it(`should not transform using "${testFilePrefix}" data`, async () => {
-      runNoChangeTest(dirName, transformName, testFilePrefix, testOptions);
-    });
-    return;
-  }
-  const testName = testFilePrefix
-    ? `transforms correctly using "${testFilePrefix}" data`
-    : 'transforms correctly';
-  describe(transformName, () => {
-    it(testName, () =>
-      runTest(dirName, transformName, testFilePrefix, testOptions),
-    );
-  });
 };

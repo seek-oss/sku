@@ -1,20 +1,28 @@
-import { defineTest } from '../../../utils/test-utils.js';
+import { describe, it } from 'vitest';
 
-defineTest(__dirname, 'transform-vite-loadable', 'loadableNameFixture', {
-  extension: 'tsx',
-});
+import { runTest, runNoChangeTest } from '../../../utils/test-utils.js';
 
-defineTest(__dirname, 'transform-vite-loadable', 'customNameFixture', {
-  extension: 'tsx',
-});
+const tests = [
+  {
+    fixtureName: 'customNameFixture',
+  },
+  {
+    fixtureName: 'loadableNameFixture',
+  },
+  {
+    fixtureName: 'mixedImportFixture',
+  },
+  {
+    fixtureName: 'onlyNamedImportFixture',
+    shouldNotChange: true,
+  },
+];
 
-defineTest(__dirname, 'transform-vite-loadable', 'mixedImportFixture', {
-  extension: 'tsx',
-});
-
-// This test should ensure that the codemod does not change the file
-
-defineTest(__dirname, 'transform-vite-loadable', 'onlyNamedImportFixture', {
-  extension: 'tsx',
-  shouldNotChange: true,
+describe('[CODEMOD]: "transform-vite-loadable"', () => {
+  it.for(tests)('"$fixtureName"', async ({ fixtureName, shouldNotChange }) => {
+    const testRunner = shouldNotChange ? runNoChangeTest : runTest;
+    testRunner(__dirname, 'transform-vite-loadable', fixtureName, {
+      extension: 'tsx',
+    });
+  });
 });

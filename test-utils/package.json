@@ -26,5 +26,8 @@
     "wait-on": "^8.0.1",
     "webpack-stats-plugin": "^1.0.3"
   },
-  "skuSkipValidatePeerDeps": true
+  "skuSkipValidatePeerDeps": true,
+  "dependencies": {
+    "execa": "^9.5.2"
+  }
 }

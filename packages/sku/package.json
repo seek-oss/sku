@@ -142,6 +142,7 @@
     "eslint-config-seek": "^14.4.0",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
+    "execa": "^9.5.2",
     "express": "^4.19.2",
     "fastest-validator": "^1.9.0",
     "fdir": "^6.1.1",

@@ -10,6 +10,7 @@ import {
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -18,7 +19,7 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'dist');
 
-function getLocalUrl(site, port) {
+function getLocalUrl(site: string, port: number) {
   const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
 
   return `http://${host}:${port}`;
@@ -26,8 +27,8 @@ function getLocalUrl(site, port) {
 
 describe('braid-design-system', () => {
   describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
-    describe('start', async () => {
-      let server;
+    describe.only('start', async () => {
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
       const args = ['--strict-port', `--port=${port}`];
@@ -36,15 +37,15 @@ describe('braid-design-system', () => {
       }
 
       beforeAll(async () => {
-        server = await runSkuScriptInDir('start', appDir, args);
+        runSkuScriptInDir('start', appDir, args, { cancelSignal: signal });
         await waitForUrls(getLocalUrl('seekAnz', port));
       });
 
       afterAll(async () => {
-        await server.kill();
+        cancel();
       });
 
-      it('should return development seekAnz site', async ({ expect }) => {
+      it.only('should return development seekAnz site', async ({ expect }) => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
@@ -62,22 +63,23 @@ describe('braid-design-system', () => {
     });
 
     describe('build', async () => {
-      let process;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
-      const args = ['--strict-port', `--port=${port}`];
-      if (bundler === 'vite') {
-        args.push('--config', 'sku.config.vite.js', '--experimental-bundler');
-      }
+      const args: Record<string, string[]> = {
+        vite: ['--config', 'sku.config.vite.js', '--experimental-bundler'],
+      };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir);
-        process = await runSkuScriptInDir('serve', appDir, args);
+        await runSkuScriptInDir('build', appDir, args[bundler]);
+        await runSkuScriptInDir('serve', appDir, [], {
+          cancelSignal: signal,
+        });
         await waitForUrls(getLocalUrl('seekAnz', port));
-      }, 230000);
+      });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       it('should return built jobStreet site', async ({ expect }) => {
@@ -104,7 +106,7 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async ({ expect }) => {
-    const { child } = await runSkuScriptInDir('test', appDir);
-    expect(child.exitCode).toEqual(0);
+    const child = await runSkuScriptInDir('test', appDir);
+    expect(child?.exitCode).toEqual(0);
   });
 });

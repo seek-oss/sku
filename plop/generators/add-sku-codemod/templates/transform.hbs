@@ -1,0 +1,10 @@
+import { parse, Lang } from '@ast-grep/napi';
+
+export const transform = (source: string) => {
+  const ast = parse(Lang.TypeScript, source);
+  const root = ast.root();
+
+  // Transform the AST
+
+  return root.commitEdits([]);
+};

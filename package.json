@@ -12,7 +12,7 @@
     "lint:prettier": "prettier --cache --list-different .",
     "lint:tsc": "tsc",
     "lint:tsc:sku": "pnpm --filter 'sku' lint:tsc",
-    "build": "pnpm --filter 'sku' build",
+    "build": "pnpm --filter './packages/**' build",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
     "test:update": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run -u",

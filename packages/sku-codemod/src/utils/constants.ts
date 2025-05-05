@@ -1,14 +1,13 @@
 export type Codemod = {
-  title: string;
+  description: string;
   value: string;
-  version: string;
 };
 
 export const CODEMODS: Codemod[] = [
   {
-    title: 'Transform all webpack loadable imports to Vite loadable imports',
+    description:
+      'Transform all webpack loadable imports to Vite loadable imports',
     value: 'transform-vite-loadable',
-    version: '0.0.1',
   },
   /* [add-sku-codemod-generator: codemod] */
 ];

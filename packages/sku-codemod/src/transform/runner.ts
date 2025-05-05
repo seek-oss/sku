@@ -30,9 +30,9 @@ export const getTransformerFromPrompt = async (): Promise<string> => {
       type: 'select',
       name: 'transformer',
       message: 'Which transform would you like to apply?',
-      choices: CODEMODS.reverse().map(({ title, value, version }) => ({
-        title: `(v${version}) ${value}`,
-        description: title,
+      choices: CODEMODS.reverse().map(({ description, value }) => ({
+        title: value,
+        description,
         value,
       })),
     },

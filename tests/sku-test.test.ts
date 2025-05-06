@@ -12,12 +12,13 @@ const appDir = path.dirname(
 
 describe('sku-test', () => {
   it('should run tests', async ({ expect }) => {
-    const child = await runSkuScriptInDir('test', appDir);
-    expect(child?.exitCode).toEqual(0);
+    await expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
   });
 
   it('should pass through unknown flags to jest', async ({ expect }) => {
-    const child = await runSkuScriptInDir('test', appDir, ['--listTests']);
+    const child = await runSkuScriptInDir('test', appDir, {
+      args: ['--listTests'],
+    });
     const output = (child?.stdout as string).replaceAll(cwd(), 'sku');
 
     expect(output).toMatchSnapshot();

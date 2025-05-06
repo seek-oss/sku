@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import { execa, ExecaError, type Options } from 'execa';
+import spawn, { type Options, SubprocessError } from 'nano-spawn';
 
 const require = createRequire(import.meta.url);
 const skuBin = require.resolve('../packages/sku/bin.js');
@@ -20,11 +20,11 @@ export const run = async (
   options: Options = {},
 ) => {
   try {
-    return await execa(options)(script, args);
+    return await spawn(script, args, options);
   } catch (error) {
-    if (error instanceof ExecaError) {
-      if (error.isCanceled) {
-        console.info(error.originalMessage);
+    if (error instanceof SubprocessError) {
+      if (error.cause instanceof Error && error.cause.name === 'AbortError') {
+        console.log(error.cause.cause);
         return;
       }
     }
@@ -48,15 +48,15 @@ type SkuScript =
 export async function runSkuScriptInDir(
   script: SkuScript,
   cwd: string,
-  args: string[] = [],
-  options?: Options,
+  options: Omit<Options, 'cwd'> & { args?: string[] } = {},
 ) {
+  const { args = [], ...spawnOptions } = options;
   const processOptions: Options = {
     cwd,
-    ...options,
+    ...spawnOptions,
     env: {
       ...process.env,
-      ...options?.env,
+      ...spawnOptions?.env,
     },
   };
 

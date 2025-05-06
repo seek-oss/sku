@@ -5,11 +5,11 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -47,7 +47,7 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         runSkuScriptInDir('start', appDir, args, {
-          cancelSignal: signal,
+          signal,
         });
         await waitForUrls(url);
       });
@@ -89,7 +89,7 @@ describe('multiple-routes', () => {
       beforeAll(async () => {
         await runSkuScriptInDir('build', appDir, args);
         runSkuScriptInDir('serve', appDir, portArgs, {
-          cancelSignal: signal,
+          signal,
         });
         await waitForUrls(url);
       });
@@ -117,8 +117,9 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
-      const child = await runSkuScriptInDir('test', appDir);
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

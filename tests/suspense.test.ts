@@ -6,9 +6,9 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -34,13 +34,11 @@ describe('suspense', () => {
         const { cancel, signal } = createCancelSignal();
 
         beforeAll(async () => {
-          await runSkuScriptInDir('build', appDir, args);
-          runSkuScriptInDir(
-            'serve',
-            appDir,
-            ['--strict-port', `--port=${port}`],
-            { cancelSignal: signal },
-          );
+          await runSkuScriptInDir('build', appDir, { args });
+          runSkuScriptInDir('serve', appDir, {
+            signal,
+            args: ['--strict-port', `--port=${port}`],
+          });
           await waitForUrls(url);
         });
 

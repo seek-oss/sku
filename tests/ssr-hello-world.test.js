@@ -36,7 +36,7 @@ describe('ssr-hello-world', () => {
         'start-ssr',
         appDir,
         ['--config=sku-start.config.mjs'],
-        { cancelSignal: signal },
+        { signal },
       );
       await waitForUrls(backendUrl);
     });
@@ -92,7 +92,7 @@ describe('ssr-hello-world', () => {
         run('node', ['server'], {
           cwd: targetDirectory,
           stdio: 'inherit',
-          cancelSignal: signal,
+          signal,
         });
         await waitForUrls(backendUrl);
       });
@@ -123,7 +123,7 @@ describe('ssr-hello-world', () => {
     });
 
     describe('custom port', () => {
-      const customPort = 7654;
+      const customPort = '7654';
       const customPortUrl = `http://localhost:${customPort}`;
       const { cancel, signal } = createCancelSignal();
 
@@ -131,7 +131,7 @@ describe('ssr-hello-world', () => {
         run('node', ['server', '--port', customPort], {
           cwd: targetDirectory,
           stdio: 'inherit',
-          cancelSignal: signal,
+          signal,
         });
         await waitForUrls(customPortUrl);
       });

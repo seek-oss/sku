@@ -5,12 +5,12 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -34,9 +34,7 @@ describe('custom-src-paths', () => {
       }
 
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, args, {
-          cancelSignal: signal,
-        });
+        runSkuScriptInDir('start', appDir, { args, signal });
         await waitForUrls(url);
       });
 
@@ -63,10 +61,8 @@ describe('custom-src-paths', () => {
       }
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args);
-        runSkuScriptInDir('serve', appDir, portArgs, {
-          cancelSignal: signal,
-        });
+        await runSkuScriptInDir('build', appDir, { args });
+        runSkuScriptInDir('serve', appDir, { args: portArgs, signal });
         await waitForUrls(url);
       });
 
@@ -88,15 +84,17 @@ describe('custom-src-paths', () => {
 
   describe('format', () => {
     it('should format successfully', async ({ expect }) => {
-      const child = await runSkuScriptInDir('format', appDir);
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('format', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async ({ expect }) => {
-      const child = await runSkuScriptInDir('lint', appDir);
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('lint', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

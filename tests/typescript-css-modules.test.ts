@@ -43,7 +43,7 @@ describe.sequential('typescript-css-modules', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, args, { cancelSignal: signal });
+      runSkuScriptInDir('serve', appDir, { args, signal });
       await waitForUrls(url);
     });
 
@@ -72,13 +72,13 @@ describe.sequential('typescript-css-modules', () => {
     const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-ssr.config.ts',
-      ]);
+      await runSkuScriptInDir('build-ssr', appDir, {
+        args: ['--config=sku-ssr.config.ts'],
+      });
       run('node', ['server'], {
         cwd: distSsrDir,
         stdio: 'inherit',
-        cancelSignal: signal,
+        signal,
       });
       closeAssetServer = await startAssetServer(assetServerPort, distSsrDir);
       await waitForUrls(backendUrl, `http://localhost:${assetServerPort}`);
@@ -110,7 +110,7 @@ describe.sequential('typescript-css-modules', () => {
     const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
-      runSkuScriptInDir('start', appDir, args, { cancelSignal: signal });
+      runSkuScriptInDir('start', appDir, { args, signal });
       await waitForUrls(devServerUrl);
     });
 
@@ -126,8 +126,9 @@ describe.sequential('typescript-css-modules', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      const child = await runSkuScriptInDir('test', appDir);
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 
@@ -135,9 +136,9 @@ describe.sequential('typescript-css-modules', () => {
     it('should handle tsc and eslint', async ({ expect }) => {
       // run build first to ensure typescript declarations are generated
       await runSkuScriptInDir('build', appDir);
-      const child = await runSkuScriptInDir('lint', appDir);
-
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('lint', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

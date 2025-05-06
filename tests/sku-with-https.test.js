@@ -6,12 +6,12 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const { serverPort } = skuServerConfig;
 
@@ -37,7 +37,7 @@ describe.sequential('sku-with-https', () => {
 
         beforeAll(async () => {
           runSkuScriptInDir('start', appDir, args, {
-            cancelSignal: signal,
+            signal,
           });
           await waitForUrls(url, `${url}/test-middleware`);
         });
@@ -70,7 +70,7 @@ describe.sequential('sku-with-https', () => {
         'start-ssr',
         appDir,
         ['--config=sku-server.config.mjs'],
-        { cancelSignal: signal },
+        { signal },
       );
       await waitForUrls(url, `${url}/test-middleware`);
     });
@@ -96,7 +96,7 @@ describe.sequential('sku-with-https', () => {
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
       runSkuScriptInDir('serve', appDir, ['--strict-port', `--port=${port}`], {
-        cancelSignal: signal,
+        signal,
       });
       await waitForUrls(url, `${url}/test-middleware`);
     });

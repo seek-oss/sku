@@ -6,12 +6,12 @@ import {
   runSkuScriptInDir,
   startAssetServer,
   run,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/assertion-removal/sku.config.ts';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -32,9 +32,7 @@ describe('assertion-removal', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, [], {
-        cancelSignal: signal,
-      });
+      runSkuScriptInDir('serve', appDir, { signal });
       await waitForUrls(url);
     });
 
@@ -64,7 +62,7 @@ describe('assertion-removal', () => {
       run('node', ['server'], {
         cwd: distDir,
         stdio: 'inherit',
-        cancelSignal: signal,
+        signal,
       });
       closeAssetServer = await startAssetServer(4004, distDir);
       await waitForUrls(backendUrl, 'http://localhost:4004');
@@ -91,9 +89,10 @@ describe('assertion-removal', () => {
 
   describe('test', () => {
     it('should keep "assert" and "invariant" in tests', async ({ expect }) => {
-      const child = await runSkuScriptInDir('test', appDir);
       // App.test.tsx expects the code to throw, which means that the sku test script passes
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

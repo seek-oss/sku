@@ -4,12 +4,12 @@ import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -36,7 +36,7 @@ describe('library-build', () => {
 
     beforeAll(async () => {
       runSkuScriptInDir('start', appDir, [], {
-        cancelSignal: signal,
+        signal,
       });
       await waitForUrls(devServerUrl);
     });

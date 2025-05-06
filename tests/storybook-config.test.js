@@ -7,9 +7,9 @@ import {
   getStoryPage,
   getTextContentFromFrameOrPage,
   run,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -40,7 +40,7 @@ describe('storybook-config', () => {
         {
           cwd: appDir,
           stdio: 'inherit',
-          cancelSignal: signal,
+          signal,
         },
       );
       await waitForUrls(storyIframeUrl, middlewareUrl);

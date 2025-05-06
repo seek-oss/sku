@@ -33,8 +33,8 @@ describe('styling', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, [], {
-        cancelSignal: signal,
+      runSkuScriptInDir('serve', appDir, {
+        signal,
       });
       await waitForUrls(devServerUrl);
     });
@@ -58,8 +58,8 @@ describe('styling', () => {
     const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      runSkuScriptInDir('start', appDir, [], {
-        cancelSignal: signal,
+      runSkuScriptInDir('start', appDir, {
+        signal,
       });
       await waitForUrls(devServerUrl);
     });
@@ -76,8 +76,9 @@ describe('styling', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      const child = await runSkuScriptInDir('test', appDir);
-      expect(child?.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 
@@ -105,7 +106,7 @@ describe('styling', () => {
         {
           cwd: appDir,
           stdio: 'inherit',
-          cancelSignal: signal,
+          signal,
         },
       );
       await waitForUrls(storyIframeUrl);

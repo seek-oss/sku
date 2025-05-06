@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "braid-design-system": "^33.6.0",
+    "braid-design-system": "^33.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

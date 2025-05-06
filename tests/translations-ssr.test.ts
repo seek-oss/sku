@@ -2,11 +2,14 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
+import {
+  runSkuScriptInDir,
+  waitForUrls,
+  createCancelSignal,
+} from '@sku-private/test-utils';
 
 import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -31,8 +34,9 @@ describe('ssr translations', () => {
   const { backendUrl } = getTestConfig(skuSsrConfig);
 
   beforeAll(async () => {
-    runSkuScriptInDir('start-ssr', appDir, ['--config=sku-ssr.config.ts'], {
-      cancelSignal: signal,
+    runSkuScriptInDir('start-ssr', appDir, {
+      args: ['--config=sku-ssr.config.ts'],
+      signal,
     });
     await waitForUrls(backendUrl);
   });

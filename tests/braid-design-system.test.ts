@@ -5,12 +5,12 @@ import {
   waitForUrls,
   runSkuScriptInDir,
   getPort,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -37,7 +37,7 @@ describe('braid-design-system', () => {
       }
 
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, args, { cancelSignal: signal });
+        runSkuScriptInDir('start', appDir, { args, signal });
         await waitForUrls(getLocalUrl('seekAnz', port));
       }, 230000);
 
@@ -72,9 +72,10 @@ describe('braid-design-system', () => {
       };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args[bundler]);
-        runSkuScriptInDir('serve', appDir, portArgs, {
-          cancelSignal: signal,
+        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
+        runSkuScriptInDir('serve', appDir, {
+          args: portArgs,
+          signal,
         });
         await waitForUrls(getLocalUrl('seekAnz', port));
       });
@@ -107,7 +108,6 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async ({ expect }) => {
-    const child = await runSkuScriptInDir('test', appDir);
-    expect(child?.exitCode).toEqual(0);
+    expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
   });
 });

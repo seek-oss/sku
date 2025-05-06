@@ -46,7 +46,8 @@ describe('multiple-routes', () => {
       }
 
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, args, {
+        runSkuScriptInDir('start', appDir, {
+          args,
           signal,
         });
         await waitForUrls(url);
@@ -87,8 +88,9 @@ describe('multiple-routes', () => {
       }
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args);
-        runSkuScriptInDir('serve', appDir, portArgs, {
+        await runSkuScriptInDir('build', appDir, { args });
+        runSkuScriptInDir('serve', appDir, {
+          args: portArgs,
           signal,
         });
         await waitForUrls(url);

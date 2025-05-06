@@ -38,7 +38,7 @@ export default {
   clientEntry: './src/client.jsx',
   renderEntry: './src/render.jsx',
   environments: ['production'],
-  port: 8202,
+  port: 8206,
   publicPath: '/static/place',
   cspEnabled: true,
   cspExtraScriptSrcHosts: [

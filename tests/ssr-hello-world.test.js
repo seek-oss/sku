@@ -32,12 +32,10 @@ describe('ssr-hello-world', () => {
     const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      runSkuScriptInDir(
-        'start-ssr',
-        appDir,
-        ['--config=sku-start.config.mjs'],
-        { signal },
-      );
+      runSkuScriptInDir('start-ssr', appDir, {
+        signal,
+        args: ['--config=sku-start.config.mjs'],
+      });
       await waitForUrls(backendUrl);
     });
 
@@ -74,9 +72,9 @@ describe('ssr-hello-world', () => {
     let closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-build.config.mjs',
-      ]);
+      await runSkuScriptInDir('build-ssr', appDir, {
+        args: ['--config=sku-build.config.mjs'],
+      });
 
       closeAssetServer = await startAssetServer(4000, targetDirectory);
     });

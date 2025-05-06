@@ -18,7 +18,9 @@ const appDir = path.dirname(
 describe('source-maps', () => {
   describe('build', () => {
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir, ['--config=sku.config.mjs']);
+      await runSkuScriptInDir('build', appDir, {
+        args: ['--config=sku.config.mjs'],
+      });
     });
 
     it('should generate the expected files', async ({ expect }) => {

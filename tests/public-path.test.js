@@ -22,7 +22,7 @@ describe('public path', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, [], { signal });
+      runSkuScriptInDir('serve', appDir, { signal });
       await waitForUrls(url);
     });
 

@@ -36,9 +36,7 @@ describe.sequential('sku-with-https', () => {
         const url = `https://localhost:${port}`;
 
         beforeAll(async () => {
-          runSkuScriptInDir('start', appDir, args, {
-            signal,
-          });
+          runSkuScriptInDir('start', appDir, { args, signal });
           await waitForUrls(url, `${url}/test-middleware`);
         });
 
@@ -66,12 +64,10 @@ describe.sequential('sku-with-https', () => {
     const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      runSkuScriptInDir(
-        'start-ssr',
-        appDir,
-        ['--config=sku-server.config.mjs'],
-        { signal },
-      );
+      runSkuScriptInDir('start-ssr', appDir, {
+        args: ['--config=sku-server.config.mjs'],
+        signal,
+      });
       await waitForUrls(url, `${url}/test-middleware`);
     });
 
@@ -95,7 +91,8 @@ describe.sequential('sku-with-https', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, ['--strict-port', `--port=${port}`], {
+      runSkuScriptInDir('serve', appDir, {
+        args: ['--strict-port', `--port=${port}`],
         signal,
       });
       await waitForUrls(url, `${url}/test-middleware`);

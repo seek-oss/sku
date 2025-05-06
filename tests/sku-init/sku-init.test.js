@@ -23,9 +23,9 @@ describe('sku init', () => {
         force: true,
       });
 
-      ({ stdout, stderr } = await runSkuScriptInDir('init', fixtureDirectory, [
-        projectName,
-      ]));
+      ({ stdout, stderr } = await runSkuScriptInDir('init', fixtureDirectory, {
+        args: [projectName],
+      }));
 
       console.log('sku init stdout');
       console.log(stdout);

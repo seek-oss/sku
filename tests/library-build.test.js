@@ -35,7 +35,7 @@ describe('library-build', () => {
     const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      runSkuScriptInDir('start', appDir, [], {
+      runSkuScriptInDir('start', appDir, {
         signal,
       });
       await waitForUrls(devServerUrl);

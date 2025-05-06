@@ -120,7 +120,7 @@ describe('lint-format', () => {
         await fs.writeFile(filePath, filesToLint[fileName]);
 
         await expect(
-          runSkuScriptInDir('lint', appDirectory, [filePath]),
+          runSkuScriptInDir('lint', appDirectory, { args: [filePath] }),
         ).rejects.toMatchSnapshot();
       },
     );

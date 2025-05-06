@@ -15,10 +15,12 @@ If you're using `sku/@loadable/component` you have to migrate over to the new `s
 + import { loadable } from 'sku/vite/loadable';
 ```
 
-We've provided a migration script to help you out with this process. Note that it may have unexpected results, so please review the changes it makes.
+We've provided a codemod to help you out with this process. Note that it may have unexpected results, so please review the changes it makes.
 
 ```bash
-# todo: command for migrating here
+pnpm dlx sku-codemod transform-vite-loadable .
+# optionally, you can use the --dry and --print flag to see what changes will be made without actually modifying any files.
+pnpm dlx sku-codemod transform-vite-loadable . -dp
 ```
 
 #### Update render entrypoint

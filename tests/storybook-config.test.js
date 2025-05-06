@@ -34,15 +34,19 @@ describe('storybook-config', () => {
     let storyPage;
 
     beforeAll(async () => {
-      run(
-        'pnpm',
-        ['storybook', 'dev', '--ci', '--quiet', '--port', port.toString()],
-        {
-          cwd: appDir,
-          stdio: 'inherit',
-          signal,
-        },
-      );
+      run('pnpm', {
+        args: [
+          'storybook',
+          'dev',
+          '--ci',
+          '--quiet',
+          '--port',
+          port.toString(),
+        ],
+        cwd: appDir,
+        stdio: 'inherit',
+        signal,
+      });
       await waitForUrls(storyIframeUrl, middlewareUrl);
       storyPage = await getStoryPage(storyIframeUrl);
     }, 100000);

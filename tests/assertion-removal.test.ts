@@ -59,7 +59,8 @@ describe('assertion-removal', () => {
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);
-      run('node', ['server'], {
+      run('node', {
+        args: ['server'],
         cwd: distDir,
         stdio: 'inherit',
         signal,

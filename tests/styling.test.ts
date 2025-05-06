@@ -93,9 +93,8 @@ describe('styling', () => {
     let storyPage: Page;
 
     beforeAll(async () => {
-      run(
-        'pnpm',
-        [
+      run('pnpm', {
+        args: [
           'storybook',
           'dev',
           '--ci',
@@ -103,12 +102,10 @@ describe('styling', () => {
           '--port',
           storybookPort.toString(),
         ],
-        {
-          cwd: appDir,
-          stdio: 'inherit',
-          signal,
-        },
-      );
+        cwd: appDir,
+        stdio: 'inherit',
+        signal,
+      });
       await waitForUrls(storyIframeUrl);
       storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);

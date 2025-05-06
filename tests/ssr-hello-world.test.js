@@ -87,7 +87,8 @@ describe('ssr-hello-world', () => {
       const { cancel, signal } = createCancelSignal();
 
       beforeAll(async () => {
-        run('node', ['server'], {
+        run('node', {
+          args: ['server'],
           cwd: targetDirectory,
           stdio: 'inherit',
           signal,
@@ -126,7 +127,8 @@ describe('ssr-hello-world', () => {
       const { cancel, signal } = createCancelSignal();
 
       beforeAll(async () => {
-        run('node', ['server', '--port', customPort], {
+        run('node', {
+          args: ['server', '--port', customPort],
           cwd: targetDirectory,
           stdio: 'inherit',
           signal,

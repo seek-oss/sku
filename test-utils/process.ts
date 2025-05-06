@@ -16,11 +16,11 @@ export const createCancelSignal = () => {
 
 export const run = async (
   script: string,
-  args?: string[],
-  options: Options = {},
+  options: Options & { args?: string[] } = {},
 ) => {
+  const { args = [], ...spawnOptions } = options;
   try {
-    return await spawn(script, args, options);
+    return await spawn(script, args, spawnOptions);
   } catch (error) {
     if (error instanceof SubprocessError) {
       if (error.cause instanceof Error && error.cause.name === 'AbortError') {
@@ -62,33 +62,37 @@ export async function runSkuScriptInDir(
 
   // When starting a dev server, return a hook to the running process
   if (/^(start|serve)/.test(script)) {
-    return run(skuBin, [script, ...args], {
+    return run(skuBin, {
       ...processOptions,
+      args: [script, ...args],
       stdio: 'inherit',
     });
   }
 
-  return run(skuBin, [script, ...args], processOptions);
+  return run(skuBin, { ...processOptions, args: [script, ...args] });
 }
 
 export async function runSkuCodemod(
   codemod: string,
   cwd: string,
-  args?: string[],
-  options?: Options,
+  options: Omit<Options, 'cwd'> & { args?: string[] } = {},
 ) {
+  const { args = [], ...spawnOptions } = options;
   const processOptions = {
     cwd,
     // Increased from 1024 * 1024 because Storybook can produce very large outputs.
     // https://nodejs.org/docs/latest-v18.x/api/child_process.html#child_process_child_process_exec_command_options_callback
     maxBuffer: 5 * 1024 * 1024,
-    ...options,
+    ...spawnOptions,
     env: {
       ...process.env,
-      ...options?.env,
+      ...spawnOptions?.env,
     },
   };
 
   // Otherwise, resolve the promise when the script finishes
-  return run(skuCodemodBin, [codemod, ...(args || [])], processOptions);
+  return run(skuCodemodBin, {
+    args: [codemod, ...args],
+    ...processOptions,
+  });
 }

@@ -75,7 +75,8 @@ describe.sequential('typescript-css-modules', () => {
       await runSkuScriptInDir('build-ssr', appDir, {
         args: ['--config=sku-ssr.config.ts'],
       });
-      run('node', ['server'], {
+      run('node', {
+        args: ['server'],
         cwd: distSsrDir,
         stdio: 'inherit',
         signal,

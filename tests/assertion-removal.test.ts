@@ -5,11 +5,11 @@ import {
   waitForUrls,
   runSkuScriptInDir,
   startAssetServer,
-  gracefulSpawn,
+  run,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/assertion-removal/sku.config.ts';
-import type { ChildProcess } from 'node:child_process';
 
 import { createRequire } from 'node:module';
 
@@ -28,16 +28,16 @@ const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 describe('assertion-removal', () => {
   describe('build', () => {
     const url = 'http://localhost:8239';
-    let process: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      runSkuScriptInDir('serve', appDir, { signal });
       await waitForUrls(url);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
     });
 
     it('should not contain "assert" or "invariant" in production', async ({
@@ -54,21 +54,23 @@ describe('assertion-removal', () => {
   });
 
   describe('build-ssr', () => {
-    let server: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
     let closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);
-      server = gracefulSpawn('node', ['server'], {
+      run('node', {
+        args: ['server'],
         cwd: distDir,
         stdio: 'inherit',
+        signal,
       });
       closeAssetServer = await startAssetServer(4004, distDir);
       await waitForUrls(backendUrl, 'http://localhost:4004');
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
       closeAssetServer();
     });
 
@@ -87,16 +89,11 @@ describe('assertion-removal', () => {
   });
 
   describe('test', () => {
-    let exitCode: number | null;
-
-    beforeAll(async () => {
-      const { child } = await runSkuScriptInDir('test', appDir);
-      exitCode = child.exitCode;
-    });
-
     it('should keep "assert" and "invariant" in tests', async ({ expect }) => {
       // App.test.tsx expects the code to throw, which means that the sku test script passes
-      expect(exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

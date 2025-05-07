@@ -9,12 +9,11 @@ import {
   runSkuScriptInDir,
   getStoryPage,
   getTextContentFromFrameOrPage,
-  gracefulSpawn,
 } from '@sku-private/test-utils';
-import type { ChildProcess } from 'node:child_process';
 import skuConfigImport from '../fixtures/styling/sku.config.ts';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -30,16 +29,18 @@ const devServerUrl = `http://localhost:${skuConfig.port}`;
 
 describe('styling', () => {
   describe('build', () => {
-    let process: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir);
+      runSkuScriptInDir('serve', appDir, {
+        signal,
+      });
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
     });
 
     it('should create valid app', async ({ expect }) => {
@@ -54,15 +55,17 @@ describe('styling', () => {
   });
 
   describe('start', () => {
-    let server: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      runSkuScriptInDir('start', appDir, {
+        signal,
+      });
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {
@@ -72,15 +75,10 @@ describe('styling', () => {
   });
 
   describe('test', () => {
-    let exitCode: number | null;
-
-    beforeAll(async () => {
-      const { child } = await runSkuScriptInDir('test', appDir);
-      exitCode = child.exitCode;
-    });
-
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      expect(exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 
@@ -91,13 +89,12 @@ describe('styling', () => {
     const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    let server: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
     let storyPage: Page;
 
     beforeAll(async () => {
-      server = gracefulSpawn(
-        'pnpm',
-        [
+      run('pnpm', {
+        args: [
           'storybook',
           'dev',
           '--ci',
@@ -105,18 +102,17 @@ describe('styling', () => {
           '--port',
           storybookPort.toString(),
         ],
-        {
-          cwd: appDir,
-          stdio: 'inherit',
-        },
-      );
+        cwd: appDir,
+        stdio: 'inherit',
+        signal,
+      });
       await waitForUrls(storyIframeUrl);
       storyPage = await getStoryPage(storyIframeUrl);
     }, 200000);
 
     afterAll(async () => {
       await storyPage?.close();
-      await server.kill();
+      cancel();
     });
 
     it('should render external styles', async ({ expect }) => {

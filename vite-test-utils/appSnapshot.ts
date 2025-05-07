@@ -1,4 +1,5 @@
 import type { ExpectStatic } from 'vitest';
+import { TEST_TIMEOUT } from '../vitest.config.ts';
 
 function sanitizeHtml(str: string) {
   return str.replaceAll(process.cwd(), '{cwd}');
@@ -7,10 +8,12 @@ function sanitizeHtml(str: string) {
 export const getAppSnapshot = async ({
   url,
   warningFilter = () => true,
+  waitUntil = 'networkidle2',
   expect,
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;
+  waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
   expect: ExpectStatic;
 }) => {
   const warnings: string[] = [];
@@ -43,14 +46,19 @@ export const getAppSnapshot = async ({
     }
   });
 
-  const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
-  const sourceHtml = sanitizeHtml((await response?.text()) || '');
-  const clientRenderContent = sanitizeHtml(await appPage.content());
+  try {
+    const response = await appPage.goto(url, {
+      timeout: TEST_TIMEOUT,
+      waitUntil,
+    });
+    const sourceHtml = sanitizeHtml((await response?.text()) || '');
+    const clientRenderContent = sanitizeHtml(await appPage.content());
 
-  await appPage.close();
+    expect(warnings).toEqual([]);
+    expect(errors).toEqual([]);
 
-  expect(warnings).toEqual([]);
-  expect(errors).toEqual([]);
-
-  return { sourceHtml, clientRenderContent };
+    return { sourceHtml, clientRenderContent };
+  } finally {
+    await appPage.close();
+  }
 };

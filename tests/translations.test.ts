@@ -2,10 +2,13 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
+import {
+  runSkuScriptInDir,
+  waitForUrls,
+  createCancelSignal,
+} from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/translations/sku.config.ts';
-import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -20,16 +23,18 @@ assert(skuConfig.port, 'sku config has port');
 const baseUrl = `http://localhost:${skuConfig.port}`;
 
 describe('translations', () => {
-  let process: ChildProcess;
+  const { cancel, signal } = createCancelSignal();
 
   beforeAll(async () => {
     await runSkuScriptInDir('build', appDir);
-    process = await runSkuScriptInDir('serve', appDir);
+    runSkuScriptInDir('serve', appDir, {
+      signal,
+    });
     await waitForUrls(`${baseUrl}/en`);
   });
 
   afterAll(() => {
-    process.kill();
+    cancel();
   });
 
   it('should render en', async ({ expect }) => {

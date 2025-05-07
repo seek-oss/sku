@@ -59,10 +59,9 @@ describe('sku codemods', () => {
         });
 
         it('"--dry" should not change any files', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, [
-            '.',
-            '--dry',
-          ]);
+          await runSkuCodemod('transform-vite-loadable', fixture.path, {
+            args: ['.', '--dry'],
+          });
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',
@@ -71,7 +70,9 @@ describe('sku codemods', () => {
         });
 
         it('All output files should be the same', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, ['.']);
+          await runSkuCodemod('transform-vite-loadable', fixture.path, {
+            args: ['.'],
+          });
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',

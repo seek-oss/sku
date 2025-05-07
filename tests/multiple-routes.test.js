@@ -21,7 +21,11 @@ const targetDirectory = `${appDir}/dist`;
 
 const renderPageCorrectly = async ({ page, pageUrl }) => {
   it(`should render ${page} page correctly`, async ({ expect }) => {
-    const snapshot = await getAppSnapshot({ url: pageUrl, expect });
+    const snapshot = await getAppSnapshot({
+      url: pageUrl,
+      expect,
+      waitUntil: 'networkidle0',
+    });
     expect(snapshot).toMatchSnapshot();
   });
 };

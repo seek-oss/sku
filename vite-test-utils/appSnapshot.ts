@@ -8,13 +8,13 @@ function sanitizeHtml(str: string) {
 export const getAppSnapshot = async ({
   url,
   warningFilter = () => true,
-  waitUntil = 'networkidle2',
   expect,
+  waitUntil = 'networkidle2',
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;
-  waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
   expect: ExpectStatic;
+  waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
 }) => {
   const warnings: string[] = [];
   const errors: string[] = [];

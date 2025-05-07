@@ -95,6 +95,7 @@ describe.sequential('sku-with-https', () => {
         args: ['--strict-port', `--port=${port}`],
         signal,
       });
+
       await waitForUrls(url, `${url}/test-middleware`);
     });
 

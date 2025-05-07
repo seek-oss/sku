@@ -1,12 +1,20 @@
 {
   "name": "@sku-fixtures/translations",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@vocab/core": "^1.6.2",
     "@vocab/react": "^1.1.11",
     "@vocab/webpack": "^1.2.9",
+    "@vocab/vite": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "build": "sku build",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts",
+    "start": "sku start",
+    "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

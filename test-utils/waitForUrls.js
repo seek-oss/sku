@@ -1,8 +1,8 @@
 import waitOn from 'wait-on';
+import { TEST_TIMEOUT } from '../vitest.config.ts';
 
 export const waitForUrls = async (...urls) => {
-  // this should be less than the test timeout otherwise we will not see the error
-  const timeout = 25000;
+  const timeout = TEST_TIMEOUT;
 
   try {
     return await waitOn({

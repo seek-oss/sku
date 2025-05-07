@@ -5,6 +5,7 @@ import {
   dirContentsToObject,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import { createRequire } from 'node:module';
@@ -30,15 +31,15 @@ describe('library-file', () => {
 
   describe('start', () => {
     const devServerUrl = `http://localhost:8086`;
-    let server;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir);
+      runSkuScriptInDir('start', appDir, { signal });
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {

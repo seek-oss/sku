@@ -7,13 +7,13 @@ import {
   runSkuScriptInDir,
   waitForUrls,
   startAssetServer,
-  gracefulSpawn,
 } from '@sku-private/test-utils';
 
 import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.mjs';
 import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.mjs';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -29,17 +29,18 @@ const getTestConfig = (skuConfig) => ({
 describe('ssr-hello-world', () => {
   describe('start', () => {
     const { backendUrl } = getTestConfig(skuStartConfig);
-    let server;
+    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start-ssr', appDir, [
-        '--config=sku-start.config.mjs',
-      ]);
+      runSkuScriptInDir('start-ssr', appDir, {
+        signal,
+        args: ['--config=sku-start.config.mjs'],
+      });
       await waitForUrls(backendUrl);
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {
@@ -71,9 +72,9 @@ describe('ssr-hello-world', () => {
     let closeAssetServer;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-build.config.mjs',
-      ]);
+      await runSkuScriptInDir('build-ssr', appDir, {
+        args: ['--config=sku-build.config.mjs'],
+      });
 
       closeAssetServer = await startAssetServer(4000, targetDirectory);
     });
@@ -83,18 +84,20 @@ describe('ssr-hello-world', () => {
     });
 
     describe('default port', () => {
-      let server;
+      const { cancel, signal } = createCancelSignal();
 
       beforeAll(async () => {
-        server = gracefulSpawn('node', ['server'], {
+        run('node', {
+          args: ['server'],
           cwd: targetDirectory,
           stdio: 'inherit',
+          signal,
         });
         await waitForUrls(backendUrl);
       });
 
       afterAll(async () => {
-        await server.kill();
+        cancel();
       });
 
       it('should generate a production server based on config', async ({
@@ -119,20 +122,22 @@ describe('ssr-hello-world', () => {
     });
 
     describe('custom port', () => {
-      const customPort = 7654;
+      const customPort = '7654';
       const customPortUrl = `http://localhost:${customPort}`;
-      let server;
+      const { cancel, signal } = createCancelSignal();
 
       beforeAll(async () => {
-        server = gracefulSpawn('node', ['server', '--port', customPort], {
+        run('node', {
+          args: ['server', '--port', customPort],
           cwd: targetDirectory,
           stdio: 'inherit',
+          signal,
         });
         await waitForUrls(customPortUrl);
       });
 
       afterAll(async () => {
-        await server.kill();
+        cancel();
       });
 
       it('should generate a production server running on custom port', async ({

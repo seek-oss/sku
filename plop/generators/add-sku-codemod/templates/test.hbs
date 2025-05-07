@@ -1,0 +1,20 @@
+import { runTest } from '../../../utils/test-utils.js';
+
+const tests = [
+  {
+    fixtureName: '{{ codemodName }}',
+  },
+];
+
+describe('[CODEMOD]: "{{ codemodName }}"', () => {
+  it.for(tests)('"$fixtureName"', async ({ fixtureName }) => {
+    runTest({
+      dirName: __dirname,
+      transformName: '{{ codemodName }}',
+      fixtureName,
+      testOptions: {
+        extension: 'tsx',
+      }
+    });
+  });
+});

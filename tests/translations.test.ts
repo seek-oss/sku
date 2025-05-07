@@ -6,10 +6,10 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 
 import skuConfig from '@sku-fixtures/translations/sku.config.ts';
-import type { ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -24,7 +24,7 @@ describe('translations', () => {
   describe.sequential.for(['vite', 'webpack'])(
     'bundler %s',
     async (bundler) => {
-      let process: ChildProcess;
+      const { cancel, signal } = createCancelSignal();
       const port = await getPort();
       const baseUrl = `http://localhost:${port}`;
       const args: Record<string, string[]> = {
@@ -32,16 +32,16 @@ describe('translations', () => {
       };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args[bundler]);
-        process = await runSkuScriptInDir('serve', appDir, [
-          '--strict-port',
-          `--port=${port}`,
-        ]);
+        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
+        runSkuScriptInDir('serve', appDir, {
+          args: ['--strict-port', `--port=${port}`],
+          signal,
+        });
         await waitForUrls(`${baseUrl}/en`);
       });
 
       afterAll(() => {
-        process.kill();
+        cancel();
       });
 
       it('should render en', async ({ expect }) => {

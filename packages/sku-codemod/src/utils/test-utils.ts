@@ -7,11 +7,24 @@ type FileInfo = {
   path: string;
 };
 
-const runInlineTest = async (
-  transform: (source: string) => string | false,
-  input: FileInfo,
-  expectedOutput: string,
-) => {
+type InlineTestProps = {
+  transform: (source: string) => string | false;
+  input: FileInfo;
+  expectedOutput: string;
+};
+
+type TestProps = {
+  dirName: string;
+  transformName: string;
+  fixtureName?: string;
+  testOptions?: Record<string, unknown>;
+};
+
+const runInlineTest = async ({
+  transform,
+  input,
+  expectedOutput,
+}: InlineTestProps) => {
   const output = await transform(input.source);
   if (!output) {
     throw new Error('Transform failed');
@@ -22,16 +35,13 @@ const runInlineTest = async (
   return output;
 };
 
-export const runTest = async (
-  dirName: string,
-  transformName: string,
-  testFilePrefix?: string,
-  testOptions: Record<string, unknown> = {},
-) => {
-  let localTestFilePrefix = testFilePrefix;
-  if (!testFilePrefix) {
-    localTestFilePrefix = transformName;
-  }
+export const runTest = async ({
+  dirName,
+  transformName,
+  fixtureName,
+  testOptions = {},
+}: TestProps) => {
+  const testFixtureName = fixtureName || transformName;
 
   // Assumes transform is one level up from __tests__ directory
   const transform = (await import(path.join(dirName, '..', transformName)))
@@ -39,39 +49,36 @@ export const runTest = async (
   const fixtureDir = path.join(dirName, '..', '__testfixtures__');
   const inputPath = path.join(
     fixtureDir,
-    `${localTestFilePrefix}.input.${testOptions.extension}`,
+    `${testFixtureName}.input.${testOptions.extension}`,
   );
   const source = await readFile(inputPath, 'utf8');
   const expectedOutput = await readFile(
-    path.join(
-      fixtureDir,
-      `${localTestFilePrefix}.output.${testOptions.extension}`,
-    ),
+    path.join(fixtureDir, `${testFixtureName}.output.${testOptions.extension}`),
     'utf8',
   );
-  return runInlineTest(
+  return runInlineTest({
     transform,
-    {
+    input: {
       path: inputPath,
       source,
     },
     expectedOutput,
-  );
+  });
 };
 
-export const runNoChangeTest = async (
-  dirName: string,
-  transformName: string,
-  testFilePrefix: string,
-  testOptions: Record<string, unknown>,
-) => {
+export const runNoChangeTest = async ({
+  dirName,
+  transformName,
+  fixtureName,
+  testOptions = {},
+}: TestProps) => {
   const transform = (await import(path.join(dirName, '..', transformName)))
     .transform;
   const inputPath = path.join(
     dirName,
     '..',
     '__testfixtures__',
-    `${testFilePrefix}.unchanged.${testOptions.extension}`,
+    `${fixtureName}.unchanged.${testOptions.extension}`,
   );
   const source = await readFile(inputPath, 'utf8');
   const output = await transform(source);

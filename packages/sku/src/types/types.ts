@@ -119,6 +119,15 @@ export interface SkuConfig {
    */
   __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | 'vite';
   /**
+   * The test runner that sku uses to run the tests.
+   * This is an experimental option that may change or be removed without notice.
+   *
+   * NOTE: Not all sku functionality is supported by the `vitest` option.
+   *
+   * @default: "jest"
+   */
+  __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
+  /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
    * @default "./src/client.js"

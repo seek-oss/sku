@@ -1,14 +1,8 @@
-import debug from 'debug';
-import jest from 'jest';
-
-import isCI from '@/utils/isCI.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
 import { configureProject } from '@/utils/configure.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
-
-const log = debug('sku:jest');
-
-const { run } = jest;
+import { runVitest } from './vitest-test-handler.js';
+import { runJestTests } from './jest-test-handler.js';
 
 const testAction = async (
   {
@@ -21,19 +15,11 @@ const testAction = async (
   await configureProject(skuContext);
   await runVocabCompile(skuContext);
 
-  // https://jestjs.io/docs/configuration#preset-string
-  const jestPreset = 'sku';
-  log(`Using '${jestPreset}' Jest preset`);
-
-  const jestArgv = [...args];
-
-  jestArgv.push('--preset', jestPreset);
-
-  if (isCI) {
-    jestArgv.push('--ci');
+  if (skuContext.testRunner === 'vitest') {
+    await runVitest({ skuContext, filters: args });
+    return;
   }
-
-  run(jestArgv);
+  runJestTests({ skuContext }, { args });
 };
 
 export { testAction };

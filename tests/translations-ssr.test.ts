@@ -2,10 +2,13 @@ import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { runSkuScriptInDir, waitForUrls } from '@sku-private/test-utils';
+import {
+  runSkuScriptInDir,
+  waitForUrls,
+  createCancelSignal,
+} from '@sku-private/test-utils';
 
-import skuSsrConfigImport from '@sku-fixtures/translations/sku-ssr.config.ts';
-import type { ChildProcess } from 'node:child_process';
+import skuSsrConfig from '@sku-fixtures/translations/sku-ssr.config.ts';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -16,10 +19,6 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/translations/sku-ssr.config.ts'),
 );
 
-// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
-const skuSsrConfig =
-  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
-
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
@@ -27,18 +26,19 @@ const getTestConfig = (skuConfig: typeof skuSsrConfig) => ({
 });
 
 describe('ssr translations', () => {
-  let server: ChildProcess;
+  const { cancel, signal } = createCancelSignal();
   const { backendUrl } = getTestConfig(skuSsrConfig);
 
   beforeAll(async () => {
-    server = await runSkuScriptInDir('start-ssr', appDir, [
-      '--config=sku-ssr.config.ts',
-    ]);
+    runSkuScriptInDir('start-ssr', appDir, {
+      args: ['--config=sku-ssr.config.ts'],
+      signal,
+    });
     await waitForUrls(backendUrl);
   });
 
   afterAll(async () => {
-    await server.kill();
+    cancel();
   });
 
   it('should render en', async ({ expect }) => {

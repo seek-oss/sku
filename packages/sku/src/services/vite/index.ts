@@ -48,7 +48,6 @@ export const viteService = {
   },
   startSsr: async (skuContext: SkuContext) => {
     process.env.NODE_ENV = 'development';
-
     const server = await createViteServerSsr({
       skuContext,
     });

@@ -119,16 +119,9 @@ describe('lint-format', () => {
         const filePath = testFile(fileName);
         await fs.writeFile(filePath, filesToLint[fileName]);
 
-        let result;
-
-        try {
-          await runSkuScriptInDir('lint', appDirectory, [filePath]);
-        } catch (err) {
-          result = { stderr: err.stderr, stdout: err.stdout };
-        }
-
-        expect(result).toBeDefined();
-        expect(result).toMatchSnapshot();
+        await expect(
+          runSkuScriptInDir('lint', appDirectory, { args: [filePath] }),
+        ).rejects.toMatchSnapshot();
       },
     );
   });

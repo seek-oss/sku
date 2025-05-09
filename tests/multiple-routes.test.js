@@ -5,6 +5,7 @@ import {
   getPort,
   runSkuScriptInDir,
   waitForUrls,
+  createCancelSignal,
 } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/vitest-utils';
 
@@ -20,7 +21,11 @@ const targetDirectory = `${appDir}/dist`;
 
 const renderPageCorrectly = async ({ page, pageUrl }) => {
   it(`should render ${page} page correctly`, async ({ expect }) => {
-    const snapshot = await getAppSnapshot({ url: pageUrl, expect });
+    const snapshot = await getAppSnapshot({
+      url: pageUrl,
+      expect,
+      waitUntil: 'networkidle0',
+    });
     expect(snapshot).toMatchSnapshot();
   });
 };
@@ -28,7 +33,7 @@ const renderPageCorrectly = async ({ page, pageUrl }) => {
 describe('multiple-routes', () => {
   describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
     describe('start', async () => {
-      let process;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
 
@@ -45,12 +50,15 @@ describe('multiple-routes', () => {
       }
 
       beforeAll(async () => {
-        process = await runSkuScriptInDir('start', appDir, args);
+        runSkuScriptInDir('start', appDir, {
+          args,
+          signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       renderPageCorrectly({
@@ -65,7 +73,7 @@ describe('multiple-routes', () => {
     });
 
     describe('build and serve', async () => {
-      let process;
+      const { cancel, signal } = createCancelSignal();
 
       const port = await getPort();
 
@@ -84,13 +92,16 @@ describe('multiple-routes', () => {
       }
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, args);
-        process = await runSkuScriptInDir('serve', appDir, portArgs);
+        await runSkuScriptInDir('build', appDir, { args });
+        runSkuScriptInDir('serve', appDir, {
+          args: portArgs,
+          signal,
+        });
         await waitForUrls(url);
       });
 
       afterAll(async () => {
-        await process.kill();
+        cancel();
       });
 
       renderPageCorrectly({
@@ -112,8 +123,9 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
-      const { child } = await runSkuScriptInDir('test', appDir);
-      expect(child.exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

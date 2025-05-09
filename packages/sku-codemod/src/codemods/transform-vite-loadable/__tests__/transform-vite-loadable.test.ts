@@ -21,8 +21,13 @@ const tests = [
 describe('[CODEMOD]: "transform-vite-loadable"', () => {
   it.for(tests)('"$fixtureName"', async ({ fixtureName, shouldNotChange }) => {
     const testRunner = shouldNotChange ? runNoChangeTest : runTest;
-    testRunner(__dirname, 'transform-vite-loadable', fixtureName, {
-      extension: 'tsx',
+    testRunner({
+      dirName: __dirname,
+      transformName: 'transform-vite-loadable',
+      fixtureName,
+      testOptions: {
+        extension: 'tsx',
+      },
     });
   });
 });

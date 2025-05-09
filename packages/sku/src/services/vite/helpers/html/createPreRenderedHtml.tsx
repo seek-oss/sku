@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 
 import type { Render, RenderAppProps } from '@/types/types.js';
 import { serializeConfig } from '../serializeConfig.js';
+import { getChunkName } from '@vocab/vite/chunks';
 
 const log = debug('sku:render:html');
 
@@ -64,9 +65,7 @@ export const createPreRenderedHtml = async <App,>({
     debug('sku:render:language')(
       `Using language "${language}" for route "${route}"`,
     );
-    // TODO: Add chunk for language
-    console.error('Not Implemented: Add chunk for language');
-    // extractor.addChunk(getChunkName(language));
+    loadableCollector.register(getChunkName(renderContext.language));
   } else {
     debug('sku:render:language')(`No language on route "${route}"`);
   }

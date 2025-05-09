@@ -9,6 +9,9 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
+import vocabPluginVite from '@vocab/vite';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const require = createRequire(import.meta.url);
@@ -29,11 +32,13 @@ export const createViteConfig = ({
     ssr: skuContext.paths.serverEntry,
     ssg: skuContext.paths.renderEntry,
   };
+  const vocabConfig = getVocabConfig(skuContext);
 
   return {
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
+      vocabConfig && vocabPluginVite.default({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
@@ -68,6 +73,12 @@ export const createViteConfig = ({
           entryFileNames:
             configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
+          manualChunks: (id, ctx) => {
+            const languageChunkName = createVocabChunks(id, ctx);
+            if (languageChunkName) {
+              return languageChunkName;
+            }
+          },
         },
       },
     },

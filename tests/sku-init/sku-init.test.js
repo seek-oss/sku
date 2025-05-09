@@ -11,7 +11,6 @@ const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
 
 describe('sku init', () => {
-  let child;
   let stdout;
   let stderr;
 
@@ -24,11 +23,9 @@ describe('sku init', () => {
         force: true,
       });
 
-      ({ child, stdout, stderr } = await runSkuScriptInDir(
-        'init',
-        fixtureDirectory,
-        [projectName],
-      ));
+      ({ stdout, stderr } = await runSkuScriptInDir('init', fixtureDirectory, {
+        args: [projectName],
+      }));
 
       console.log('sku init stdout');
       console.log(stdout);
@@ -46,10 +43,6 @@ describe('sku init', () => {
     );
     spawnSync('pnpm', ['install']);
     console.log('Cleanup complete');
-  });
-
-  it('should exit with code 0', async ({ expect }) => {
-    expect(child.exitCode).toBe(0);
   });
 
   it('should create package.json', async ({ expect }) => {

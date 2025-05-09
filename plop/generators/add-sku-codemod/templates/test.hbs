@@ -8,8 +8,13 @@ const tests = [
 
 describe('[CODEMOD]: "{{ codemodName }}"', () => {
   it.for(tests)('"$fixtureName"', async ({ fixtureName }) => {
-    runTest(__dirname, '{{ codemodName }}', fixtureName, {
-      extension: 'tsx',
+    runTest({
+      dirName: __dirname,
+      transformName: '{{ codemodName }}',
+      fixtureName,
+      testOptions: {
+        extension: 'tsx',
+      }
     });
   });
 });

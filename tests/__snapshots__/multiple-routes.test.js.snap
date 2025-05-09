@@ -385,12 +385,12 @@ window.$RefreshSig$ = () => (type) => type;
     </style>
     <script
       type="module"
-      src="/@id/__x00__/details/123?html-proxy&index=0.js"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
     >
     </script>
     <script
       type="module"
-      src="/@id/__x00__/details/123?html-proxy&index=1.js"
+      src="/@id/__x00__/index.html?html-proxy&index=1.js"
     >
     </script>
   </head>
@@ -424,14 +424,14 @@ POST HYDRATE DIFFS:
      </style>
      <script
        type="module"
--      src="/@id/__x00__/details/123?html-proxy&index=0.js"
-+      src="/@id/__x00__/details/123?html-proxy&amp;index=0.js"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
      >
      </script>
      <script
        type="module"
--      src="/@id/__x00__/details/123?html-proxy&index=1.js"
-+      src="/@id/__x00__/details/123?html-proxy&amp;index=1.js"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
      </script>
 +    <style

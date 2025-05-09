@@ -9,6 +9,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin/skuVitePreloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const require = createRequire(import.meta.url);
 
@@ -33,6 +34,7 @@ export const createViteConfig = ({
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
+      tsconfigPaths(),
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
       }),

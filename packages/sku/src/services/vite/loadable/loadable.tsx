@@ -24,14 +24,16 @@ export function loadable<T extends ComponentType<any>>(
   },
   moduleId: ModuleId = '', // Gets set via the plugin
 ): PreloadableComponent<T> {
-  const getDefaultExport = (module: { default: T } & Record<string, T>) =>
+  const getResolvedOrDefaultExport = (
+    module: { default: T } & Record<string, T>,
+  ) =>
     options?.resolveComponent
       ? options.resolveComponent(module)
       : module.default;
 
   const lazyFactory = async () => {
     const module = await factory();
-    return { default: getDefaultExport(module) };
+    return { default: getResolvedOrDefaultExport(module) };
   };
   const ReactLazyComponent = lazy(lazyFactory);
   let PreloadedComponent: T | undefined;
@@ -64,7 +66,7 @@ export function loadable<T extends ComponentType<any>>(
   LazyWithPreload.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
-        PreloadedComponent = getDefaultExport(module);
+        PreloadedComponent = getResolvedOrDefaultExport(module);
         return PreloadedComponent;
       });
     }

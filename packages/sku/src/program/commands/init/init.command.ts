@@ -2,9 +2,7 @@ import { Command } from 'commander';
 import { packageManagerOption } from '../../options/packageManager/packageManager.option.js';
 import { setPackageManager } from '../../../services/packageManager/context/packageManager.js';
 
-export const initCommand = new Command('init');
-
-initCommand
+export const initCommand = new Command('init')
   .description('Initialize a new sku project')
   .argument('[projectName]', 'Project name')
   .option(

@@ -5,9 +5,7 @@ import {
   strictPortOption,
 } from '../../options/port/port.option.js';
 
-export const serveCommand = new Command('serve');
-
-serveCommand
+export const serveCommand = new Command('serve')
   .description(
     'Serve a production build of a statically-rendered application from your local machine.',
   )

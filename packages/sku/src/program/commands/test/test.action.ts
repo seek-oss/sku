@@ -10,7 +10,7 @@ const log = debug('sku:jest');
 
 const { run } = jest;
 
-const testAction = async (
+export const testAction = async (
   {
     skuContext,
   }: {
@@ -35,5 +35,3 @@ const testAction = async (
 
   run(jestArgv);
 };
-
-export { testAction };

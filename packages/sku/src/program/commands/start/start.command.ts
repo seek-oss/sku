@@ -1,5 +1,4 @@
 import { Command } from 'commander';
-import { startAction } from './start.action.js';
 import { statsOption } from '@/program/options/stats/stats.option.js';
 import {
   portOption,
@@ -7,9 +6,7 @@ import {
 } from '../../options/port/port.option.js';
 import { convertLoadableOption } from '@/program/options/convertLoadable/convertLoadable.option.js';
 
-const startCommand = new Command('start');
-
-startCommand
+export const startCommand = new Command('start')
   .description(
     'Start the sku development server for a statically-rendered application.',
   )
@@ -17,6 +14,7 @@ startCommand
   .addOption(portOption)
   .addOption(strictPortOption)
   .addOption(convertLoadableOption)
-  .action(startAction);
-
-export { startCommand };
+  .action(async (options, command) => {
+    const { startAction } = await import('./start.action.js');
+    await startAction(options, command);
+  });

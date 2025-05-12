@@ -4,7 +4,12 @@ import loadable from 'sku/@loadable/component';
 
 import * as styles from './Details.css.js';
 
-const AsyncComponent = loadable(() => import('./AsyncComponent'));
+const AsyncComponent = loadable(() => import('./AsyncComponent'), {
+  resolveComponent: (module) => {
+    console.log('resolveComponent', module);
+    return module.AsyncComponent;
+  },
+});
 
 export default function Details({ site }) {
   const { id } = useParams();

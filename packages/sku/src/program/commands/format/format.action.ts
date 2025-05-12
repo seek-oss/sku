@@ -14,7 +14,7 @@ export const formatAction = async (
   console.log(chalk.cyan('Formatting'));
 
   try {
-    await esLintFix({ paths: pathsToCheck, skuContext });
+    await esLintFix({ paths: pathsToCheck });
     await prettierWrite(pathsToCheck);
   } catch (e) {
     if (e) {

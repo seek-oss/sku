@@ -31,7 +31,7 @@ export const lintAction = async (
     }
 
     await prettierCheck(pathsToCheck);
-    await esLintCheck({ paths: pathsToCheck, skuContext });
+    await esLintCheck({ paths: pathsToCheck });
   } catch (e) {
     if (e) {
       console.error(e);

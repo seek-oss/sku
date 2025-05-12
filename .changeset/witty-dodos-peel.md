@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-`lint|format`: Don't redundantly load ESLint config
+`lint|format`: Avoid redundantly loading ESLint config

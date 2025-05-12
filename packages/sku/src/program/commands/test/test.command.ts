@@ -1,13 +1,10 @@
 import { Command } from 'commander';
 
-import { testAction } from './test.action.js';
-
-const testCommand = new Command('test');
-
-testCommand
+export const testCommand = new Command('test')
   .description('Run unit tests.')
   .allowUnknownOption(true)
   .allowExcessArguments(true)
-  .action(testAction);
-
-export { testCommand };
+  .action(async (options, argsObject) => {
+    const { testAction } = await import('./test.action.js');
+    await testAction(options, argsObject);
+  });

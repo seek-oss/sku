@@ -1,9 +1,7 @@
-import { viteBuildHandler } from './vite-build-handler.js';
-import { webpackBuildHandler } from './webpack-build-handler.js';
 import type { StatsChoices } from '@/program/options/stats/stats.option.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-const buildAction = async ({
+export const buildAction = async ({
   stats,
   skuContext,
 }: {
@@ -11,10 +9,10 @@ const buildAction = async ({
   skuContext: SkuContext;
 }) => {
   if (skuContext.bundler === 'vite') {
+    const { viteBuildHandler } = await import('./vite-build-handler.js');
     await viteBuildHandler({ skuContext });
   } else {
+    const { webpackBuildHandler } = await import('./webpack-build-handler.js');
     await webpackBuildHandler({ stats, skuContext });
   }
 };
-
-export { buildAction };

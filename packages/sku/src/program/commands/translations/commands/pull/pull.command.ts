@@ -1,8 +1,12 @@
 import { Command } from 'commander';
-import { pullAction } from './pull.action.js';
 
 const pullCommand = new Command('pull');
 
-pullCommand.description('Pull translations from Phrase').action(pullAction);
+pullCommand
+  .description('Pull translations from Phrase')
+  .action(async (options) => {
+    const { pullAction } = await import('./pull.action.js');
+    await pullAction(options);
+  });
 
 export { pullCommand };

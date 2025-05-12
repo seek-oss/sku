@@ -2,10 +2,10 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent-DtuSLDgp.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-CaxrQeMv.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-BbylO-Ju.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DGJnH813.css": "._1hpn1da0{color:#00f}
 ",
+  "Details-f3a0yRc4.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home-D-106MY_.css": ".ms22la0{color:red}
 ",
   "Home-DQBwRi9y.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -28,16 +28,16 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
 
 <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-f3a0yRc4.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-BbylO-Ju.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
-<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-BbylO-Ju.js" ></script>
+<script type="module" src="/static/place/Details-f3a0yRc4.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -89,16 +89,16 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
 
 <link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-CaxrQeMv.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-f3a0yRc4.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-DtuSLDgp.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-BbylO-Ju.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script type="module" src="/static/place/AsyncComponent-DtuSLDgp.js" ></script>
-<script type="module" src="/static/place/Details-CaxrQeMv.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-BbylO-Ju.js" ></script>
+<script type="module" src="/static/place/Details-f3a0yRc4.js" ></script>
 <script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
@@ -173,12 +173,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     >
     <link
       rel="modulepreload"
-      href="/static/place/Details-CaxrQeMv.js"
+      href="/static/place/Details-f3a0yRc4.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/AsyncComponent-DtuSLDgp.js"
+      href="/static/place/AsyncComponent-BbylO-Ju.js"
       crossorigin
     >
   </head>
@@ -199,12 +199,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </script>
     <script
       type="module"
-      src="/static/place/AsyncComponent-DtuSLDgp.js"
+      src="/static/place/AsyncComponent-BbylO-Ju.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/Details-CaxrQeMv.js"
+      src="/static/place/Details-f3a0yRc4.js"
     >
     </script>
     <script
@@ -219,14 +219,14 @@ POST HYDRATE DIFFS:
 --- sourceHtml
 +++ clientHtml
 @@ -43,11 +43,34 @@
-       href="/static/place/AsyncComponent-DtuSLDgp.js"
+       href="/static/place/AsyncComponent-BbylO-Ju.js"
        crossorigin
      >
 +    <link
 +      rel="modulepreload"
 +      as="script"
 +      crossorigin
-+      href="/Details-CaxrQeMv.js"
++      href="/Details-f3a0yRc4.js"
 +    >
 +    <link
 +      rel="stylesheet"
@@ -237,7 +237,7 @@ POST HYDRATE DIFFS:
 +      rel="modulepreload"
 +      as="script"
 +      crossorigin
-+      href="/AsyncComponent-DtuSLDgp.js"
++      href="/AsyncComponent-BbylO-Ju.js"
 +    >
 +    <link
 +      rel="modulepreload"

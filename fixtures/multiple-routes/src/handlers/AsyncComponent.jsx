@@ -1,1 +1,1 @@
-export default () => <span>Some special async content</span>;
+export const AsyncComponent = () => <span>Some special async content</span>;

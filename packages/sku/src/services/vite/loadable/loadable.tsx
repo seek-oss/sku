@@ -17,13 +17,25 @@ export type PreloadableComponent<T extends ComponentType<any>> = T & {
 };
 
 export function loadable<T extends ComponentType<any>>(
-  factory: () => Promise<{ default: T }>,
+  factory: () => Promise<{ default: T } & Record<string, T>>,
   options?: {
     fallback?: NonNullable<ReactNode> | null;
+    resolveComponent?: (module: { default: T } & Record<string, T>) => T;
   },
   moduleId: ModuleId = '', // Gets set via the plugin
 ): PreloadableComponent<T> {
-  const ReactLazyComponent = lazy(factory);
+  const getResolvedOrDefaultExport = (
+    module: { default: T } & Record<string, T>,
+  ) =>
+    options?.resolveComponent
+      ? options.resolveComponent(module)
+      : module.default;
+
+  const lazyFactory = async () => {
+    const module = await factory();
+    return { default: getResolvedOrDefaultExport(module) };
+  };
+  const ReactLazyComponent = lazy(lazyFactory);
   let PreloadedComponent: T | undefined;
   let factoryPromise: Promise<T> | undefined;
 
@@ -54,7 +66,7 @@ export function loadable<T extends ComponentType<any>>(
   LazyWithPreload.preload = () => {
     if (!factoryPromise) {
       factoryPromise = factory().then((module) => {
-        PreloadedComponent = module.default;
+        PreloadedComponent = getResolvedOrDefaultExport(module);
         return PreloadedComponent;
       });
     }

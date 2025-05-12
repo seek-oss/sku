@@ -1,30 +1,21 @@
 import chalk from 'chalk';
 import { loadESLint } from 'eslint';
-import { createEslintConfig } from './config/index.js';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
-import type { SkuContext } from '@/context/createSkuContext.js';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
 const runESLint = async ({
   fix = false,
   paths,
-  skuContext,
 }: {
   fix?: boolean;
   paths?: string[];
-  skuContext: SkuContext;
 }) => {
   console.log(chalk.cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
-  const eslintConfigSku = createEslintConfig({
-    configPath: skuContext.configPath,
-  });
-
   const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
-    baseConfig: eslintConfigSku,
     fix,
     cache: true,
     overrideConfig: {
@@ -84,18 +75,8 @@ const runESLint = async ({
   }
 };
 
-export const check = ({
-  paths,
-  skuContext,
-}: {
-  paths?: string[];
-  skuContext: SkuContext;
-}) => runESLint({ paths, skuContext });
+export const check = (options?: { paths?: string[] }) =>
+  runESLint({ paths: options?.paths });
 
-export const fix = ({
-  paths,
-  skuContext,
-}: {
-  paths?: string[];
-  skuContext: SkuContext;
-}) => runESLint({ fix: true, paths, skuContext });
+export const fix = (options?: { paths?: string[] }) =>
+  runESLint({ fix: true, paths: options?.paths });

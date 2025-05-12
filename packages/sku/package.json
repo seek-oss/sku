@@ -112,7 +112,7 @@
     "@vocab/core": "^1.6.2",
     "@vocab/phrase": "^2.0.1",
     "@vocab/pseudo-localize": "^1.0.1",
-    "@vocab/vite": "0.2.1",
+    "@vocab/vite": "^0.2.1",
     "@vocab/webpack": "^1.2.9",
     "@zendesk/babel-plugin-react-displayname": "https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2",
     "autoprefixer": "^10.3.1",

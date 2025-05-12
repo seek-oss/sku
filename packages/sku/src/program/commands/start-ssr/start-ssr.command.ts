@@ -1,9 +1,7 @@
 import { Command } from 'commander';
 import { statsOption } from '@/program/options/stats/stats.option.js';
 
-const startSsrCommand = new Command('start-ssr');
-
-startSsrCommand
+export const startSsrCommand = new Command('start-ssr')
   .description(
     'Start the sku development server for a server-rendered application.',
   )
@@ -12,5 +10,3 @@ startSsrCommand
     const { startSsrAction } = await import('./start-ssr.action.js');
     await startSsrAction(options);
   });
-
-export { startSsrCommand };

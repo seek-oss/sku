@@ -12,6 +12,7 @@ import { outDir, renderEntryChunkName } from './bundleConfig.js';
 import vocabPluginVite from '@vocab/vite';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import { createVocabChunks } from '@vocab/vite/chunks';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const require = createRequire(import.meta.url);
 
@@ -38,6 +39,7 @@ export const createViteConfig = ({
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
       vocabConfig && vocabPluginVite.default({ vocabConfig }),
+      tsconfigPaths(),
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
       }),

@@ -352,10 +352,10 @@ exports[`multiple-routes > bundler: vite > start > should render details page co
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-NEZvGkT0ZWP6XHdKYM4B1laRPcM6Lw4LJfkDtIEVAKc=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <script type="module">
-      import { injectIntoGlobalHook } from "/@react-refresh";
+      import { injectIntoGlobalHook } from "/@react-refresh"
 injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;
@@ -459,10 +459,10 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+      content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-NEZvGkT0ZWP6XHdKYM4B1laRPcM6Lw4LJfkDtIEVAKc=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
     <script type="module">
-      import { injectIntoGlobalHook } from "/@react-refresh";
+      import { injectIntoGlobalHook } from "/@react-refresh"
 injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;

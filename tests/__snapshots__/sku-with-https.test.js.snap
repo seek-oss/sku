@@ -6,10 +6,10 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
   <head>
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';"
+      content="script-src 'self' https://some-cdn.com 'sha256-NEZvGkT0ZWP6XHdKYM4B1laRPcM6Lw4LJfkDtIEVAKc=';"
     >
     <script type="module">
-      import { injectIntoGlobalHook } from "/@react-refresh";
+      import { injectIntoGlobalHook } from "/@react-refresh"
 injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;

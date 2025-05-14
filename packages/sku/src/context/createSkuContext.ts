@@ -247,6 +247,7 @@ export const createSkuContext = ({
 
 type ExtraSkuContextOptions = {
   convertLoadable?: boolean;
+  commandName?: string;
 };
 
 export type SkuContext = ReturnType<typeof createSkuContext> &

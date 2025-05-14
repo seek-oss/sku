@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import webpack, { type Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
-import findUp from 'find-up';
+import { findUpSync } from 'find-up';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -230,7 +230,7 @@ const makeWebpackConfig = ({
         // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
         externalizeNodeModules
           ? nodeExternals({
-              modulesDir: findUp.sync('node_modules'), // Allow usage within project subdirectories (required for tests)
+              modulesDir: findUpSync('node_modules'), // Allow usage within project subdirectories (required for tests)
               allowlist: [
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it

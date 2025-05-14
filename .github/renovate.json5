@@ -86,21 +86,5 @@
       enabled: false,
       schedule: ['before 8am on the first day of the month'],
     },
-    {
-      groupName: 'ESM-only packages',
-      matchUpdateTypes: 'major',
-      matchPackageNames: [
-        'chalk',
-        'escape-string-regexp',
-        'find-up',
-        'get-port',
-        'indent-string',
-        'lint-staged',
-        'open',
-        'pretty-ms',
-        'wrap-ansi',
-      ],
-      enabled: false,
-    },
   ],
 }

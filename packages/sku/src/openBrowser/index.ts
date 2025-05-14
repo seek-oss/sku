@@ -74,6 +74,6 @@ export const openBrowser = async (url: string) => {
       }
     }
 
-    open(url, { url: true });
+    open(url);
   }
 };

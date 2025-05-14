@@ -210,6 +210,7 @@ const addAssetToPreloads = ({
   switch (ext) {
     case 'avif':
     case 'bmp':
+    case 'gif':
     case 'jpg':
     case 'jpeg':
     case 'png':

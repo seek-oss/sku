@@ -5,8 +5,19 @@ import { relative } from 'node:path';
 const readFilesAsync = promisify(readFiles);
 
 // Ignore contents of files where the content changes
-// regularly or is non-deterministic.
-const IGNORED_FILE_EXTENSIONS = ['js', 'map'];
+// regularly, is non-deterministic, or is binary data.
+const IGNORED_FILE_EXTENSIONS = [
+  'js',
+  'map',
+  'avif',
+  'bmp',
+  'gif',
+  'jpg',
+  'jpeg',
+  'png',
+  'svg',
+  'webp',
+];
 const ignoredFilePattern = new RegExp(
   `\\.(${IGNORED_FILE_EXTENSIONS.join('|')})$`,
   'i',

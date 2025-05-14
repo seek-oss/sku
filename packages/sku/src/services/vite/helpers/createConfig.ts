@@ -33,8 +33,10 @@ export const createViteConfig = ({
     ssg: skuContext.paths.renderEntry,
   };
   const vocabConfig = getVocabConfig(skuContext);
+  const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
 
   return {
+    base: isStartCommand ? '/' : skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [

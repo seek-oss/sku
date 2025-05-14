@@ -8,10 +8,8 @@ import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import { skuViteHttpsDevServer } from '../../plugins/skuViteHttpsDevServer.js';
 
-export const createViteServer = async (skuContext: SkuContext) => {
-  const base = process.env.BASE || '/';
-
-  return await createServer({
+export const createViteServer = async (skuContext: SkuContext) =>
+  createServer({
     ...createViteConfig({
       skuContext,
       plugins: [
@@ -33,6 +31,4 @@ export const createViteServer = async (skuContext: SkuContext) => {
         (host) => typeof host === 'string',
       ),
     },
-    base,
   });
-};

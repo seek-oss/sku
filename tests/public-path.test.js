@@ -5,6 +5,8 @@ import {
   runSkuScriptInDir,
   waitForUrls,
   createCancelSignal,
+  getPort,
+  dirContentsToObject,
 } from '@sku-private/test-utils';
 
 import { createRequire } from 'node:module';
@@ -15,26 +17,45 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/public-path/sku.config.js'),
 );
 
+const distDir = path.resolve(appDir, 'dist');
+
 describe('public path', () => {
-  describe('build and serve', () => {
-    const url = 'http://localhost:4001';
-    const { cancel, signal } = createCancelSignal();
+  describe.concurrent.each(['vite', 'webpack'])(
+    'bundler: %s',
+    async (bundler) => {
+      const port = await getPort();
+      const args = ['--strict-port', `--port=${port}`];
+      if (bundler === 'vite')
+        args.push(
+          ...['--experimental-bundler', '--config', 'sku.config.vite.js'],
+        );
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, { signal });
-      await waitForUrls(url);
-    });
+      describe('build and serve', () => {
+        const url = `http://localhost:${port}`;
+        const { cancel, signal } = createCancelSignal();
 
-    afterAll(async () => {
-      cancel();
-    });
+        beforeAll(async () => {
+          await runSkuScriptInDir('build', appDir);
+          runSkuScriptInDir('serve', appDir, { args, signal });
+          await waitForUrls(url);
+        });
 
-    it('should create valid app with no unresolved resources', async ({
-      expect,
-    }) => {
-      const app = await getAppSnapshot({ url, expect });
-      expect(app).toMatchSnapshot();
-    });
-  });
+        afterAll(async () => {
+          cancel();
+        });
+
+        it('should create valid app with no unresolved resources', async ({
+          expect,
+        }) => {
+          const app = await getAppSnapshot({ url, expect });
+          expect(app).toMatchSnapshot();
+        });
+
+        it('should generate the expected files', async ({ expect }) => {
+          const files = await dirContentsToObject(distDir);
+          expect(files).toMatchSnapshot();
+        });
+      });
+    },
+  );
 });

@@ -1,6 +1,7 @@
 {
   "name": "@sku-fixtures/public-path",
   "private": true,
+  "type": "module",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

@@ -105,7 +105,7 @@
     "@types/loadable__server": "^5.12.10",
     "@vanilla-extract/integration": "^8.0.1",
     "@vanilla-extract/jest-transform": "^1.1.0",
-    "@vanilla-extract/vite-plugin": "^5.0.1",
+    "@vanilla-extract/vite-plugin": "5.0.2",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "@vitejs/plugin-basic-ssl": "^2.0.0",
     "@vitejs/plugin-react-swc": "^3.8.0",

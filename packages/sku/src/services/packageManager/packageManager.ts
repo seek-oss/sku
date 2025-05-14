@@ -1,4 +1,4 @@
-import findUp from 'find-up';
+import { findUpSync } from 'find-up';
 import { dirname } from 'node:path';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
@@ -62,7 +62,7 @@ const resolvePackageManager = () => {
   );
 
   const lockFile = lockfileByPackageManager[packageManager];
-  const lockFilePath = findUp.sync(lockFile);
+  const lockFilePath = findUpSync(lockFile);
 
   // No root found (occurs during `sku init`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;

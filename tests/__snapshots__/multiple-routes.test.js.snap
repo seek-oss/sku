@@ -218,34 +218,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -43,11 +43,34 @@
-       href="/static/place/AsyncComponent-BbylO-Ju.js"
-       crossorigin
-     >
-+    <link
-+      rel="modulepreload"
-+      as="script"
-+      crossorigin
-+      href="/Details-f3a0yRc4.js"
-+    >
-+    <link
-+      rel="stylesheet"
-+      crossorigin
-+      href="/Details-DGJnH813.css"
-+    >
-+    <link
-+      rel="modulepreload"
-+      as="script"
-+      crossorigin
-+      href="/AsyncComponent-BbylO-Ju.js"
-+    >
-+    <link
-+      rel="modulepreload"
-+      as="script"
-+      crossorigin
-+      href="/vite-client.js"
-+    >
-   </head>
+@@ -47,7 +47,7 @@
    <body>
      <div id="app">
        <h1 class="_1hpn1da0">
@@ -322,28 +295,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
   </body>
 </html>"
-POST HYDRATE DIFFS: 
-===================================================================
---- sourceHtml
-+++ clientHtml
-@@ -38,6 +38,17 @@
-       href="/static/place/Home-DQBwRi9y.js"
-       crossorigin
-     >
-+    <link
-+      rel="modulepreload"
-+      as="script"
-+      crossorigin
-+      href="/Home-DQBwRi9y.js"
-+    >
-+    <link
-+      rel="stylesheet"
-+      crossorigin
-+      href="/Home-D-106MY_.css"
-+    >
-   </head>
-   <body>
-     <div id="app">
+POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`multiple-routes > bundler: vite > start > should render details page correctly 1`] = `

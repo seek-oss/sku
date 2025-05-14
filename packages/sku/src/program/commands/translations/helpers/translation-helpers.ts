@@ -2,10 +2,10 @@ import { resolveConfig } from '@vocab/core';
 
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
+import { execSync } from 'node:child_process';
 
 export const ensureBranch = async () => {
-  const { default: envCi } = await import('env-ci');
-  const { branch } = envCi();
+  const branch = getGitBranch();
 
   if (!branch) {
     throw new Error(
@@ -47,3 +47,29 @@ export const getResolvedVocabConfig = async ({
 
   return vocabConfigFromSkuConfig;
 };
+
+// Modified from `env-ci` to use `execSync`
+// https://github.com/semantic-release/env-ci/blob/e11b2965aa82cd7366511635d9bc4ae3d0144f64/lib/git.js#L11C24-L35
+function getGitBranch() {
+  try {
+    const headRef = execSync('git rev-parse --abbrev-ref HEAD', {
+      encoding: 'utf8',
+    }).trim();
+
+    if (headRef === 'HEAD') {
+      const branch = execSync('git show -s --pretty=%d HEAD', {
+        encoding: 'utf8',
+      })
+        .trim()
+        .replace(/^\(|\)$/g, '')
+        .split(', ')
+        .find((b) => b.startsWith('origin/'));
+
+      return branch ? branch.match(/^origin\/(?<branch>.+)/)?.[1] : undefined;
+    }
+
+    return headRef;
+  } catch {
+    return undefined;
+  }
+}

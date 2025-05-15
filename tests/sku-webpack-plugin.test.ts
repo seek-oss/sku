@@ -8,6 +8,7 @@ import {
 } from '@sku-private/test-utils';
 import { runBin, startBin } from '../packages/sku/dist/utils/runBin.js';
 import { createRequire } from 'node:module';
+import type { ChildProcess } from 'node:child_process';
 
 const require = createRequire(import.meta.url);
 
@@ -22,7 +23,7 @@ const devServerUrl = `http://localhost:${port}`;
 
 describe('sku-webpack-plugin', () => {
   describe('start', () => {
-    let process;
+    let process: ChildProcess;
 
     beforeAll(async () => {
       process = startBin({
@@ -50,7 +51,7 @@ describe('sku-webpack-plugin', () => {
   });
 
   describe('build', () => {
-    let closeAssetServer;
+    let closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runBin({

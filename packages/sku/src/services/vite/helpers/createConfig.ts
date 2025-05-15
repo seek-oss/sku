@@ -6,7 +6,7 @@ import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
-import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin/skuVitePreloadPlugin.js';
+import { preloadPlugin } from '../plugins/preloadPlugin/preloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
 import vocabPluginVite from '@vocab/vite';
@@ -33,8 +33,10 @@ export const createViteConfig = ({
     ssg: skuContext.paths.renderEntry,
   };
   const vocabConfig = getVocabConfig(skuContext);
+  const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
 
   return {
+    base: isStartCommand ? '/' : skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
@@ -45,7 +47,7 @@ export const createViteConfig = ({
       }),
       react(),
       vanillaExtractPlugin(),
-      skuVitePreloadPlugin({
+      preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
       ...plugins,

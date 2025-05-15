@@ -17,8 +17,12 @@ type HostSystemActions = {
 
 export const getAppHosts = ({ sites: configuredSites, hosts }: SkuContext) =>
   configuredSites
-    .filter((site) => site.host)
-    .map((site) => site.host)
+    .reduce<string[]>((acc, currSite) => {
+      if (currSite.host) {
+        return [...acc, currSite.host];
+      }
+      return acc;
+    }, [])
     .concat(hosts);
 
 export const setupHosts =

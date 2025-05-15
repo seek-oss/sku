@@ -1,4 +1,3 @@
-// @ts-expect-error
 import { makeStableHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 

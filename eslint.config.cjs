@@ -124,7 +124,7 @@ module.exports = [
     },
   },
   {
-    files: ['tests/**', 'test-utils/**'],
+    files: ['tests/**', 'test-utils/**', 'vite-test-utils/**'],
 
     languageOptions: {
       globals: {

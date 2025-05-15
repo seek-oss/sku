@@ -10,6 +10,18 @@ import { hasErrorCode } from '@/utils/error-guards.js';
 const log = debug('sku:vite:https');
 
 /**
+ * Force HTTP/1.1 for the dev server. This is needed so middleware that proxys requests can work correctly (http-proxy library does not support HTTP/2).
+ */
+const forceHttp1 = (): Plugin => ({
+  name: 'sku:force-http1',
+  config: () => ({
+    server: {
+      proxy: {},
+    },
+  }),
+});
+
+/**
  * Cleans up stale certs from the cert directory. This is useful when the user changes their hosts in their sku config and the old certs are no longer needed.
  */
 const cleanupStaleCerts = (certDir: string): Plugin => ({
@@ -38,6 +50,7 @@ export const skuViteHttpsDevServer = async (skuContext: SkuContext) => {
   const certDir = path.join(process.cwd(), '.ssl');
 
   return [
+    forceHttp1(),
     cleanupStaleCerts(certDir),
     basicSsl({
       domains: getAppHosts(skuContext).filter((host) => host !== undefined),

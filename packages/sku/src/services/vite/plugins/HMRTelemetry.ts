@@ -10,7 +10,7 @@ const log = debug('sku:metrics');
 const customHmrEvent = 'sku:vite-hmr' as const;
 type ViteHmrTimePayload = { durationInMs: number; timestamp: number };
 
-export default function skuViteHMRTelemetryPlugin({
+export function HMRTelemetryPlugin({
   target,
   type,
 }: {

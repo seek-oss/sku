@@ -3,7 +3,7 @@ import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'node:path';
 
-export const skuViteHttpsDevServer = (skuContext: SkuContext) => {
+export const httpsDevServerPlugin = (skuContext: SkuContext) => {
   if (skuContext.httpsDevServer) {
     const certDir = path.join(process.cwd(), '.ssl');
 

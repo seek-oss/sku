@@ -18,7 +18,7 @@ const require = createRequire(import.meta.url);
 const renderEntry = require.resolve('../entries/vite-render.js');
 const clientEntry = require.resolve('../entries/vite-client.js');
 
-export const skuViteMiddlewarePlugin = (skuContext: SkuContext): Plugin => ({
+export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
     if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {

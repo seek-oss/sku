@@ -5,7 +5,7 @@ import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
 
 const initialPageLoadEventName = 'sku:initialPageLoad' as const;
 
-export const skuViteStartTelemetryPlugin = ({
+export const startTelemetryPlugin = ({
   target,
   type,
 }: {

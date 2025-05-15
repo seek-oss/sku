@@ -1,28 +1,29 @@
-import { skuViteMiddlewarePlugin } from '@/services/vite/plugins/skuViteMiddlewarePlugin.js';
+import { middlewarePlugin } from '@/services/vite/plugins/middlewarePlugin.js';
 import { createServer } from 'vite';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createViteConfig } from '../createConfig.js';
-import skuViteHMRTelemetryPlugin from '@/services/vite/plugins/skuViteHMRTelemetry.js';
-import { skuViteStartTelemetryPlugin } from '../../plugins/skuViteStartTelemetry.js';
+import { HMRTelemetryPlugin } from '@/services/vite/plugins/HMRTelemetry.js';
+import { startTelemetryPlugin } from '../../plugins/startTelemetry.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
-import { skuViteHttpsDevServer } from '../../plugins/skuViteHttpsDevServer.js';
+import { getHttpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 
 export const createViteServer = async (skuContext: SkuContext) =>
   createServer({
     ...createViteConfig({
       skuContext,
       plugins: [
-        skuViteMiddlewarePlugin(skuContext),
-        skuViteStartTelemetryPlugin({
+        middlewarePlugin(skuContext),
+        startTelemetryPlugin({
           target: 'node',
           type: 'static',
         }),
-        skuViteHMRTelemetryPlugin({
+        // eslint-disable-next-line new-cap
+        HMRTelemetryPlugin({
           target: 'node',
           type: 'static',
         }),
-        skuViteHttpsDevServer(skuContext),
+        getHttpsDevServerPlugin(skuContext),
       ],
     }),
     server: {

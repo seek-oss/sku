@@ -11,7 +11,7 @@ import type { SkuContext } from '@/context/createSkuContext.js';
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
 import { createCollector } from '@/services/vite/loadable/collector.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
-import { skuViteHttpsDevServer } from '../../plugins/skuViteHttpsDevServer.js';
+import { getHttpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 
 const base = process.env.BASE || '/';
 
@@ -51,7 +51,7 @@ export const createViteServerSsr = async ({
             (host) => typeof host === 'string',
           ),
         },
-        plugins: [skuViteHttpsDevServer(skuContext)],
+        plugins: [getHttpsDevServerPlugin(skuContext)],
         appType: 'custom',
         base,
       });

@@ -1083,6 +1083,9 @@ importers:
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
+      '@types/serve-handler':
+        specifier: ^6.1.4
+        version: 6.1.4
       '@types/wait-on':
         specifier: ^5.3.4
         version: 5.3.4

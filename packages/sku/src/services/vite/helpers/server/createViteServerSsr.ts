@@ -51,9 +51,7 @@ export const createViteServerSsr = async ({
             (host) => typeof host === 'string',
           ),
         },
-        plugins: [
-          skuContext.httpsDevServer && skuViteHttpsDevServer(skuContext),
-        ],
+        plugins: [skuViteHttpsDevServer(skuContext)],
         appType: 'custom',
         base,
       });

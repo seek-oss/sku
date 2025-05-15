@@ -1,5 +1,5 @@
-import { createServer } from 'vite';
 import { skuViteMiddlewarePlugin } from '@/services/vite/plugins/skuViteMiddlewarePlugin.js';
+import { createServer } from 'vite';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createViteConfig } from '../createConfig.js';
@@ -22,7 +22,7 @@ export const createViteServer = async (skuContext: SkuContext) =>
           target: 'node',
           type: 'static',
         }),
-        skuContext.httpsDevServer && skuViteHttpsDevServer(skuContext),
+        skuViteHttpsDevServer(skuContext),
       ],
     }),
     server: {

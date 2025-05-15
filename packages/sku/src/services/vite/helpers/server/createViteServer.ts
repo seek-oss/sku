@@ -6,7 +6,7 @@ import { createViteConfig } from '../createConfig.js';
 import { HMRTelemetryPlugin } from '@/services/vite/plugins/HMRTelemetry.js';
 import { startTelemetryPlugin } from '../../plugins/startTelemetry.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
-import { getHttpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
+import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 
 export const createViteServer = async (skuContext: SkuContext) =>
   createServer({
@@ -23,7 +23,7 @@ export const createViteServer = async (skuContext: SkuContext) =>
           target: 'node',
           type: 'static',
         }),
-        getHttpsDevServerPlugin(skuContext),
+        httpsDevServerPlugin(skuContext),
       ],
     }),
     server: {

@@ -19,7 +19,13 @@ const appDir = path.dirname(
 
 const targetDirectory = `${appDir}/dist`;
 
-const renderPageCorrectly = async ({ page, pageUrl }) => {
+const renderPageCorrectly = async ({
+  page,
+  pageUrl,
+}: {
+  page: string;
+  pageUrl: string;
+}) => {
   it(`should render ${page} page correctly`, async ({ expect }) => {
     const snapshot = await getAppSnapshot({
       url: pageUrl,
@@ -80,7 +86,7 @@ describe('multiple-routes', () => {
       const url = `http://localhost:${port}`;
       const portArgs = ['--strict-port', `--port=${port}`];
 
-      const args = [];
+      const args: string[] = [];
 
       if (bundler === 'vite') {
         args.push(

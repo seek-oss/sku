@@ -1,5 +1,6 @@
 {
   "name": "@sku-fixtures/ssr-hello-world",
+  "type": "module",
   "private": true,
   "dependencies": {
     "express": "^4.16.3",

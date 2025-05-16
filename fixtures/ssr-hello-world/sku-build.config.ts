@@ -1,4 +1,5 @@
 import { makeStableHashes } from '@sku-private/test-utils';
+import type { SkuConfig } from 'sku';
 
 export default {
   publicPath: 'http://localhost:4000',
@@ -9,4 +10,4 @@ export default {
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
-};
+} satisfies SkuConfig;

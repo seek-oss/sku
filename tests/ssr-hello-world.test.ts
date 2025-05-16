@@ -9,8 +9,8 @@ import {
   startAssetServer,
 } from '@sku-private/test-utils';
 
-import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.mjs';
-import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.mjs';
+import skuBuildConfig from '@sku-fixtures/ssr-hello-world/sku-build.config.ts';
+import skuStartConfig from '@sku-fixtures/ssr-hello-world/sku-start.config.ts';
 
 import { createRequire } from 'node:module';
 import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
@@ -18,10 +18,10 @@ import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
 const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.mjs'),
+  require.resolve('@sku-fixtures/ssr-hello-world/sku-build.config.ts'),
 );
 
-const getTestConfig = (skuConfig) => ({
+const getTestConfig = (skuConfig: { serverPort: number; target: string }) => ({
   backendUrl: `http://localhost:${skuConfig.serverPort}`,
   targetDirectory: path.join(appDir, skuConfig.target),
 });
@@ -34,7 +34,7 @@ describe('ssr-hello-world', () => {
     beforeAll(async () => {
       runSkuScriptInDir('start-ssr', appDir, {
         signal,
-        args: ['--config=sku-start.config.mjs'],
+        args: ['--config=sku-start.config.ts'],
       });
       await waitForUrls(backendUrl);
     });
@@ -69,11 +69,11 @@ describe('ssr-hello-world', () => {
 
   describe('build', () => {
     const { backendUrl, targetDirectory } = getTestConfig(skuBuildConfig);
-    let closeAssetServer;
+    let closeAssetServer: () => void;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir, {
-        args: ['--config=sku-build.config.mjs'],
+        args: ['--config=sku-build.config.ts'],
       });
 
       closeAssetServer = await startAssetServer(4000, targetDirectory);
@@ -88,7 +88,7 @@ describe('ssr-hello-world', () => {
 
       beforeAll(async () => {
         run('node', {
-          args: ['server'],
+          args: ['server.cjs'],
           cwd: targetDirectory,
           stdio: 'inherit',
           signal,
@@ -128,7 +128,7 @@ describe('ssr-hello-world', () => {
 
       beforeAll(async () => {
         run('node', {
-          args: ['server', '--port', customPort],
+          args: ['server.cjs', '--port', customPort],
           cwd: targetDirectory,
           stdio: 'inherit',
           signal,

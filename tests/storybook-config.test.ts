@@ -10,6 +10,7 @@ import {
   createCancelSignal,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
+import type { Page } from 'puppeteer';
 
 const require = createRequire(import.meta.url);
 
@@ -30,8 +31,7 @@ describe('storybook-config', () => {
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
     const { cancel, signal } = createCancelSignal();
-    /** @type {import("puppeteer").Page} */
-    let storyPage;
+    let storyPage: Page;
 
     beforeAll(async () => {
       run('pnpm', {
@@ -96,10 +96,12 @@ describe('storybook-config', () => {
     });
 
     describe('Docs Page', () => {
-      let docsPage;
+      let docsPage: Page;
+
       afterEach(async () => {
         await docsPage?.close();
       });
+
       it('should render a ".mdx" file', async ({ expect }) => {
         const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
         const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
@@ -137,9 +139,8 @@ describe('storybook-config', () => {
     const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
     const storybookDistDir = path.resolve(appDir, 'storybook-static');
 
-    let closeStorybookServer;
-    /** @type {import("puppeteer").Page} */
-    let storyPage;
+    let closeStorybookServer: () => void;
+    let storyPage: Page;
 
     beforeAll(async () => {
       spawnSync('pnpm', ['storybook', 'build', '--quiet'], {

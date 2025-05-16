@@ -18,9 +18,9 @@ const appDirectory = path.dirname(
   require.resolve('@sku-fixtures/lint-format/sku.config.ts'),
 );
 const srcDirectory = path.join(appDirectory, 'src');
-const testFile = (fileName) => path.join(srcDirectory, fileName);
+const testFile = (fileName: string) => path.join(srcDirectory, fileName);
 
-const filesToLint = {
+const filesToLint: Record<string, string> = {
   'utils.test.ts': dedent/* ts */ `
     console.log('foo');
 
@@ -46,7 +46,7 @@ const filesToLint = {
   `,
 };
 
-const filesToFormat = {
+const filesToFormat: Record<string, string> = {
   'importOrder1.ts': dedent/* ts */ `
     import './reset'; // side-effect imports should stay put
 
@@ -93,7 +93,7 @@ globalExpect.addSnapshotSerializer({
     // Remove some logs that contain file paths that are unique to the machine
     const sanitizedStdout = stdout
       .split('\n')
-      .filter((line) => !line.includes('sku/fixtures/lint-format'))
+      .filter((line: string) => !line.includes('sku/fixtures/lint-format'))
       .join('\n');
 
     return dedent`

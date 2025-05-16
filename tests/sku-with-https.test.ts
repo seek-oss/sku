@@ -9,7 +9,7 @@ import {
   createCancelSignal,
 } from '@sku-private/test-utils';
 
-import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.mjs';
+import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.ts';
 
 import { createRequire } from 'node:module';
 
@@ -65,7 +65,7 @@ describe.sequential('sku-with-https', () => {
 
     beforeAll(async () => {
       runSkuScriptInDir('start-ssr', appDir, {
-        args: ['--config=sku-server.config.mjs'],
+        args: ['--config=sku-server.config.ts'],
         signal,
       });
       await waitForUrls(url, `${url}/test-middleware`);

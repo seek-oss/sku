@@ -1,5 +1,107 @@
 # sku
 
+## 14.3.0
+
+### Minor Changes
+
+- Add Port and Strict Port toggle for Start and Serve ([#1232](https://github.com/seek-oss/sku/pull/1232))
+
+  Previously `sku serve` would allow you to choose the port to use with `--port`. This is now available on `sku start`.
+
+  **Start development server using port 8080:**
+
+  ```sh
+  sku start --port 8080
+  ```
+
+  By default, if this port is unavailable a new port will be chosen. If you'd instead prefer to the command to fail, the `--strict-port` in now available.
+
+  **Fails if port not available:**
+
+  ```sh
+  sku serve --port 8080 --strict-port
+  ```
+
+- `vite`: Force HTTP/1 when enabling https dev server ([#1253](https://github.com/seek-oss/sku/pull/1253))
+
+- `vite (start|start-ssr)`: Open default browser on server start ([#1223](https://github.com/seek-oss/sku/pull/1223))
+
+- `vite start`: Enable `devServerMiddleware` for vite projects ([#1225](https://github.com/seek-oss/sku/pull/1225))
+
+- `vite (start|build)`: Enable `csp` functionality ([#1226](https://github.com/seek-oss/sku/pull/1226))
+
+- Change output behaviour of `sku build` with `vite` as the bundler. All asset files now get added directly to the `dist` folder instead of being nested. ([#1234](https://github.com/seek-oss/sku/pull/1234))
+  Change `publicPath` behaviour in the `sku.config` for `sku build` with `vite`. The given value now prepends itself to the `href` and `src` attributes of assets in the `index.html` file.
+- Support root resolution of `.jsx` and `.cjs` files ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+- `setup-hosts` ipv6 hosts are now added alongside their ipv4 counterpart ([#1221](https://github.com/seek-oss/sku/pull/1221))
+
+- `vite/loadable`: Add the `resolveComponent` option to the `loadable` function. The `loadable` function returns the `default` export by default. By using the `resolveComponent` function you can specify the correct component for `loadable` to use. ([#1244](https://github.com/seek-oss/sku/pull/1244))
+
+  **example usage**
+
+  ```typescript
+  // src/MyComponent.tsx
+  export const MyComponent = () => {
+    return <div>Hello, world!</div>;
+  };
+
+  // src/App.tsx
+  import { loadable } from 'sku/vite/loadable';
+
+  const MyComponent = loadable(() => import('./MyComponent'), {
+    resolveComponent: (module) => module.MyComponent,
+  });
+
+  export const App = () => {
+    return (
+      <div>
+        <MyComponent />
+      </div>
+    );
+  };
+  ```
+
+- `vite (start)`: Enable `httpsDevServer` config option ([#1227](https://github.com/seek-oss/sku/pull/1227))
+
+- `vite`: Support multi-language applications via Vocab ([#1235](https://github.com/seek-oss/sku/pull/1235))
+
+### Patch Changes
+
+- Remove `env-ci` dependency ([#1248](https://github.com/seek-oss/sku/pull/1248))
+
+- `vite`: Ensure bundled pre-render entrypoint has a consistent name, regardless of the configured ([#1216](https://github.com/seek-oss/sku/pull/1216))
+  `renderEntry`
+- Disable Node experimental warnings to reduce log noise ([#1236](https://github.com/seek-oss/sku/pull/1236))
+
+- Updated the following dependencies: ([#1249](https://github.com/seek-oss/sku/pull/1249))
+  - `escape-string-regexp`
+  - `find-up`
+  - `get-port`
+  - `indent-string`
+  - `open`
+  - `pretty-ms`
+  - `wrap-ansi`
+- `vite build`: Ensure `publicPath` is prepended to asset URLs imported by Vanilla Extract stylesheets ([#1247](https://github.com/seek-oss/sku/pull/1247))
+
+- CLI: Speed up command execution by asynchronously loading commands at runtime ([#1245](https://github.com/seek-oss/sku/pull/1245))
+
+- `vite`: Change render entrypoint file `api` to match that of `webpack` rendering ([#1222](https://github.com/seek-oss/sku/pull/1222))
+
+- `vite start`: Don't clean up local SSL certs every time the dev server starts ([#1250](https://github.com/seek-oss/sku/pull/1250))
+
+- Re-order root resolution file extensions in order of most common to least common file types ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+  Files with no extension will now be resolved in the following order: `.ts` -> `.tsx` -> `.mts` -> `.cts` -> `.js` -> `.jsx` -> `.mjs` -> `.cjs` -> `.json`
+
+- `vite`: Add the `vite-tsconfig-paths` plugin. ([#1241](https://github.com/seek-oss/sku/pull/1241))
+  This allows `vite` to respect the base path and path aliases in the `tsconfig.json`.
+- Update `lint-staged` dependency to `^16.0.0` ([#1248](https://github.com/seek-oss/sku/pull/1248))
+
+- `configure`: Emit resolve sku config path to generated ESLint config ([#1243](https://github.com/seek-oss/sku/pull/1243))
+
+- `lint|format`: Avoid redundantly loading ESLint config ([#1243](https://github.com/seek-oss/sku/pull/1243))
+
 ## 14.2.0
 
 ### Minor Changes

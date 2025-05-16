@@ -1,7 +1,8 @@
-import { renderToString } from 'react-dom/server';
 import fs from 'fs/promises';
 
-import App from './App';
+import { renderToString } from 'react-dom/server';
+
+import App from './App.js';
 
 const initialResponseTemplate = ({ headTags }) => /* html */ `
 <!DOCTYPE html>

@@ -2,6 +2,7 @@ import {
   ListExternalsWebpackPlugin,
   makeStableHashes,
 } from '@sku-private/test-utils';
+import type { SkuConfig } from 'sku';
 
 export default {
   clientEntry: 'src/serverClient.jsx',
@@ -22,4 +23,4 @@ export default {
 
     return config;
   },
-};
+} satisfies SkuConfig;

@@ -26,7 +26,7 @@ export const createViteConfig = ({
   skuContext: SkuContext;
   configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
-}) => {
+}): InlineConfig => {
   const input = {
     client: clientEntry,
     ssr: skuContext.paths.serverEntry,
@@ -52,6 +52,7 @@ export const createViteConfig = ({
       }),
       ...plugins,
     ],
+
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
@@ -101,5 +102,5 @@ export const createViteConfig = ({
       ],
       noExternal: ['@vanilla-extract/css', 'braid-design-system'],
     },
-  } satisfies InlineConfig;
+  };
 };

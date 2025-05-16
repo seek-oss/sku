@@ -1,7 +1,7 @@
 import waitOn from 'wait-on';
 import { TEST_TIMEOUT } from '../vitest.config.ts';
 
-export const waitForUrls = async (...urls) => {
+export const waitForUrls = async (...urls: string[]) => {
   const timeout = TEST_TIMEOUT;
 
   try {
@@ -15,7 +15,7 @@ export const waitForUrls = async (...urls) => {
       strictSSL: false,
     });
   } catch (error) {
-    if (error.message === 'Timeout') {
+    if (error instanceof Error && error.message === 'Timeout') {
       throw new Error(`waitForUrls waited ${timeout}ms for ${urls.join(', ')}`);
     }
 

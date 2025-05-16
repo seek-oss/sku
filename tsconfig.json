@@ -8,8 +8,7 @@
     // Output incremental build info to node_modules
     "outDir": "node_modules/.cache/typescript",
     "incremental": true,
-    "resolveJsonModule": true,
-    "types": ["vitest-puppeteer"]
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",

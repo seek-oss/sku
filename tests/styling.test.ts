@@ -9,11 +9,12 @@ import {
   runSkuScriptInDir,
   getStoryPage,
   getTextContentFromFrameOrPage,
+  createCancelSignal,
+  run,
 } from '@sku-private/test-utils';
-import skuConfigImport from '../fixtures/styling/sku.config.ts';
+import skuConfig from '@sku-fixtures/styling/sku.config.ts';
 
 import { createRequire } from 'node:module';
-import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -21,8 +22,6 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/styling/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
-
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuConfig.port, 'sku config has port');
 const devServerUrl = `http://localhost:${skuConfig.port}`;

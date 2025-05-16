@@ -11,9 +11,11 @@ export class ListExternalsWebpackPlugin {
         const externals = [
           ...new Set(
             modules
-              .map(({ identifier }) => identifier)
-              .filter((id) => externalRegex.test(id))
-              .map((id) => id.replace(externalRegex, '').replace(/"$/, ''))
+              .map(({ identifier }: { identifier: string }) => identifier)
+              .filter((id: string) => externalRegex.test(id))
+              .map((id: string) =>
+                id.replace(externalRegex, '').replace(/"$/, ''),
+              )
               .sort(),
           ),
         ];

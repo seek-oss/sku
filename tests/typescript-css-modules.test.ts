@@ -11,8 +11,8 @@ import {
   getPort,
 } from '@sku-private/test-utils';
 
-import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
-import skuSsrConfigImport from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
 
 import { createRequire } from 'node:module';
 import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
@@ -24,11 +24,6 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'dist');
 const distSsrDir = path.resolve(appDir, 'dist-ssr');
-
-// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
-const skuSsrConfig =
-  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
 
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 
@@ -76,7 +71,7 @@ describe.sequential('typescript-css-modules', () => {
         args: ['--config=sku-ssr.config.ts'],
       });
       run('node', {
-        args: ['server'],
+        args: ['server.cjs'],
         cwd: distSsrDir,
         stdio: 'inherit',
         signal,
@@ -98,7 +93,11 @@ describe.sequential('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
+      const files = await dirContentsToObject(distSsrDir, [
+        '.cjs',
+        '.js',
+        '.css',
+      ]);
       expect(files).toMatchSnapshot();
     });
   });

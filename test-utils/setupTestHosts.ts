@@ -1,4 +1,3 @@
-// @ts-check
 import { promisify } from 'node:util';
 import { set } from 'hostile';
 

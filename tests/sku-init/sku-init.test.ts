@@ -11,8 +11,8 @@ const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
 
 describe('sku init', () => {
-  let stdout;
-  let stderr;
+  let stdout: string;
+  let stderr: string;
 
   beforeAll(
     async () => {
@@ -23,9 +23,15 @@ describe('sku init', () => {
         force: true,
       });
 
-      ({ stdout, stderr } = await runSkuScriptInDir('init', fixtureDirectory, {
+      const result = await runSkuScriptInDir('init', fixtureDirectory, {
         args: [projectName],
-      }));
+      });
+
+      if (typeof result === 'undefined') {
+        throw new Error('Process was aborted early');
+      }
+
+      ({ stdout, stderr } = result);
 
       console.log('sku init stdout');
       console.log(stdout);
@@ -75,7 +81,7 @@ describe('sku init', () => {
  *
  * When snapshot testing the package.json, we don't care about the specific versions of the dependencies.
  */
-function replaceDependencyVersions(packageJson) {
+function replaceDependencyVersions(packageJson: Record<string, any>) {
   const newPackageJson = structuredClone(packageJson);
 
   // eslint-disable-next-line guard-for-in

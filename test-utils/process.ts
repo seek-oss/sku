@@ -33,12 +33,11 @@ export const run = async (
   }
 };
 
-type DevServerSkuScripts = 'serve' | 'start' | 'start-ssr' | 'storybook';
+type DevServerSkuScripts = 'serve' | 'start' | 'start-ssr';
 type SkuScript =
   | DevServerSkuScripts
   | 'build'
   | 'build-ssr'
-  | 'build-storybook'
   | 'configure'
   | 'format'
   | 'init'

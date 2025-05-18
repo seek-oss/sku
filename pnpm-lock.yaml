@@ -1117,8 +1117,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       nano-spawn:
-        specifier: ^0.2.0
-        version: 0.2.1
+        specifier: ^1.0.1
+        version: 1.0.1
       prettier:
         specifier: ^3.4.1
         version: 3.5.3
@@ -6629,10 +6629,6 @@ packages:
 
   nano-memoize@3.0.16:
     resolution: {integrity: sha512-JyK96AKVGAwVeMj3MoMhaSXaUNqgMbCRSQB3trUV8tYZfWEzqUBKdK1qJpfuNXgKeHOx1jv/IEYTM659ly7zUA==}
-
-  nano-spawn@0.2.1:
-    resolution: {integrity: sha512-/pULofvsF8mOVcl/nUeVXL/GYOEvc7eJWSIxa+K4OYUolvXa5zwSgevsn4eoHs1xvh/BO3vx/PZiD9+Ow2ZVuw==}
-    engines: {node: '>=18.19'}
 
   nano-spawn@1.0.1:
     resolution: {integrity: sha512-BfcvzBlUTxSDWfT+oH7vd6CbUV+rThLLHCIym/QO6GGLBsyVXleZs00fto2i2jzC/wPiBYk5jyOmpXWg4YopiA==}
@@ -15693,8 +15689,6 @@ snapshots:
   mute-stream@1.0.0: {}
 
   nano-memoize@3.0.16: {}
-
-  nano-spawn@0.2.1: {}
 
   nano-spawn@1.0.1: {}
 

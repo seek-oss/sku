@@ -19,8 +19,7 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/assertion-removal/sku.config.ts'),
 );
 const distDir = path.resolve(appDir, 'dist');
-// TODO: fix this casting.
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
+const skuConfig = skuConfigImport;
 
 assert(skuConfig.serverPort, 'skuConfig has serverPort');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
@@ -60,7 +59,7 @@ describe('assertion-removal', () => {
     beforeAll(async () => {
       await runSkuScriptInDir('build-ssr', appDir);
       run('node', {
-        args: ['server'],
+        args: ['server.cjs'],
         cwd: distDir,
         stdio: 'inherit',
         signal,

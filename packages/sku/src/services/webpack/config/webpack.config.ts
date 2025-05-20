@@ -247,15 +247,7 @@ const makeWebpackConfig = ({
           MiniCssExtractPlugin,
           rootResolution,
         }),
-        ...(hot
-          ? [
-              new ReactRefreshWebpackPlugin({
-                overlay: {
-                  sockPath: '/ws',
-                },
-              }),
-            ]
-          : []),
+        ...(hot ? [new ReactRefreshWebpackPlugin()] : []),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'browser' })]
           : []),

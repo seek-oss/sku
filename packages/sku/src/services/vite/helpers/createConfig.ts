@@ -1,7 +1,7 @@
 import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 

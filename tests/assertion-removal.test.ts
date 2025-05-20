@@ -26,7 +26,7 @@ assert(skuConfig.serverPort, 'skuConfig has serverPort');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 
 describe('assertion-removal', () => {
-  describe.for(['webpack'])('bundler %s', (bundler) => {
+  describe.for(['vite', 'webpack'])('bundler %s', (bundler) => {
     describe('build', async () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;

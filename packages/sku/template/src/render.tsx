@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server';
 import type { Render } from 'sku';
 
-import App from './App/App';
+import { App } from './App/App';
 import type { ClientContext } from './types';
 
 interface RenderContext {

@@ -46,9 +46,9 @@ sku start
 
 This command supports the following options:
 
-| Option        | Description                                                                                 | Defaults to |
-| ------------- | ------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `summary`   |
+| Option        | Description                                                                                  | Defaults to |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `summary`   |
 
 [static rendering]: ./docs/building-the-app.md#render
 
@@ -62,9 +62,9 @@ sku start-ssr
 
 This command supports the following options:
 
-| Option        | Description                                                                                 | Defaults to |
-| ------------- | ------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `summary`   |
+| Option        | Description                                                                                  | Defaults to |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `summary`   |
 
 [server rendering]: ./docs/building-the-app.md#server
 
@@ -78,9 +78,9 @@ sku build
 
 This command supports the following options:
 
-| Option        | Description                                                                                 | Defaults to   |
-| ------------- | ------------------------------------------------------------------------------------------- | ------------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `errors-only` |
+| Option        | Description                                                                                  | Defaults to   |
+| ------------- | -------------------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
 [static rendering]: ./docs/building-the-app.md#render
 
@@ -94,9 +94,9 @@ sku build-ssr
 
 This command supports the following options:
 
-| Option        | Description                                                                                 | Defaults to   |
-| ------------- | ------------------------------------------------------------------------------------------- | ------------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku buid --stats=errors-only` | `errors-only` |
+| Option        | Description                                                                                  | Defaults to   |
+| ------------- | -------------------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
 [server rendering]: ./docs/building-the-app.md#server
 

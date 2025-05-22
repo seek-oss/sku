@@ -199,16 +199,7 @@ const makeWebpackConfig = ({
         ...(isDevServer
           ? [new MetricsPlugin({ type: 'ssr', target: 'browser' })]
           : [bundleAnalyzerPlugin({ name: 'client' })]),
-        ...(hot
-          ? [
-              new ReactRefreshWebpackPlugin({
-                overlay: {
-                  sockPort: clientPort,
-                  sockPath: '/ws',
-                },
-              }),
-            ]
-          : []),
+        ...(hot ? [new ReactRefreshWebpackPlugin()] : []),
         ...(vocabOptions ? [new VocabWebpackPlugin(vocabOptions)] : []),
       ],
       stats: getStatsConfig({

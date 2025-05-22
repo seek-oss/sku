@@ -90,39 +90,53 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
         const language =
           getLanguageFromRoute(path, matchingRoute, skuContext) ?? '';
 
-        const { viteRender } = await server.ssrLoadModule(renderEntry);
+        try {
+          const { viteRender } = await server.ssrLoadModule(renderEntry);
 
-        const renderedHtml = await (viteRender as ViteRenderFunction)({
-          environment: 'development',
-          language,
-          route: getRouteWithLanguage(matchingRoute.route, language),
-          routeName: matchingRoute.name || '',
-          site: site?.name || '',
-          clientEntry,
-        });
-
-        const transformedHtml = await server.transformIndexHtml(
-          req.url || '/',
-          renderedHtml,
-        );
-
-        if (skuContext.cspEnabled) {
-          const cspHandler = createCSPHandler({
-            extraHosts: [
-              skuContext.paths.publicPath,
-              ...skuContext.cspExtraScriptSrcHosts,
-            ],
-            isDevelopment: process.env.NODE_ENV === 'development',
+          const renderedHtml = await (viteRender as ViteRenderFunction)({
+            environment: 'development',
+            language,
+            route: getRouteWithLanguage(matchingRoute.route, language),
+            routeName: matchingRoute.name || '',
+            site: site?.name || '',
+            clientEntry,
           });
 
-          const cspHtml = cspHandler.handleHtml(transformedHtml);
-          res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(cspHtml);
-          return;
-        }
+          const transformedHtml = await server.transformIndexHtml(
+            req.url || '/',
+            renderedHtml,
+          );
 
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(transformedHtml);
+          if (skuContext.cspEnabled) {
+            const cspHandler = createCSPHandler({
+              extraHosts: [
+                skuContext.paths.publicPath,
+                ...skuContext.cspExtraScriptSrcHosts,
+              ],
+              isDevelopment: process.env.NODE_ENV === 'development',
+            });
+
+            const cspHtml = cspHandler.handleHtml(transformedHtml);
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(cspHtml);
+            return;
+          }
+
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(transformedHtml);
+        } catch (e) {
+          // If an error is caught, let vite fix the stracktrace so it maps back to
+          // your actual source code.
+          res.writeHead(500);
+          log(e);
+
+          if (e instanceof Error) {
+            server.ssrFixStacktrace(e);
+            res.end(e.stack);
+          } else {
+            res.end(JSON.stringify(e));
+          }
+        }
       });
     };
   },

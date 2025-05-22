@@ -1,7 +1,7 @@
 import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
@@ -35,6 +35,8 @@ export const createViteConfig = ({
   const vocabConfig = getVocabConfig(skuContext);
   const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
 
+  const isProductionBuild = process.env.NODE_ENV === 'production';
+
   return {
     base: isStartCommand ? '/' : skuContext.publicPath,
     root: process.cwd(),
@@ -45,7 +47,23 @@ export const createViteConfig = ({
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
       }),
-      react(),
+      react({
+        babel: {
+          plugins: [
+            ...(isProductionBuild
+              ? [
+                  [
+                    require.resolve('babel-plugin-unassert'),
+                    {
+                      variables: ['assert', 'invariant'],
+                      modules: ['assert', 'node:assert', 'tiny-invariant'],
+                    },
+                  ],
+                ]
+              : []),
+          ],
+        },
+      }),
       vanillaExtractPlugin(),
       preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.

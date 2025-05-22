@@ -7,6 +7,7 @@ import {
   startAssetServer,
   run,
   createCancelSignal,
+  getPort,
 } from '@sku-private/test-utils';
 
 import skuConfigImport from '@sku-fixtures/assertion-removal/sku.config.ts';
@@ -25,30 +26,39 @@ assert(skuConfig.serverPort, 'skuConfig has serverPort');
 const backendUrl = `http://localhost:${skuConfig.serverPort}`;
 
 describe('assertion-removal', () => {
-  describe('build', () => {
-    const url = 'http://localhost:8239';
-    const { cancel, signal } = createCancelSignal();
+  describe.for(['vite', 'webpack'])('bundler %s', (bundler) => {
+    describe('build', async () => {
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+      const { cancel, signal } = createCancelSignal();
+      const args: Record<string, string[]> = {
+        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+      };
 
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, { signal });
-      await waitForUrls(url);
-    });
+      beforeAll(async () => {
+        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
+        runSkuScriptInDir('serve', appDir, {
+          args: ['--strict-port', `--port=${port}`],
+          signal,
+        });
+        await waitForUrls(url);
+      });
 
-    afterAll(async () => {
-      cancel();
-    });
+      afterAll(() => {
+        cancel();
+      });
 
-    it('should not contain "assert" or "invariant" in production', async ({
-      expect,
-    }) => {
-      const appPage = await browser.newPage();
-      const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
-      const sourceHtml = await response?.text();
-      await appPage.close();
-      expect(sourceHtml).toContain(
-        'It rendered without throwing an assertion error',
-      );
+      it('should not contain "assert" or "invariant" in production', async ({
+        expect,
+      }) => {
+        const appPage = await browser.newPage();
+        const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
+        const sourceHtml = await response?.text();
+        await appPage.close();
+        expect(sourceHtml).toContain(
+          'It rendered without throwing an assertion error',
+        );
+      });
     });
   });
 
@@ -68,7 +78,7 @@ describe('assertion-removal', () => {
       await waitForUrls(backendUrl, 'http://localhost:4004');
     });
 
-    afterAll(async () => {
+    afterAll(() => {
       cancel();
       closeAssetServer();
     });

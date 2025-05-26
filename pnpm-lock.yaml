@@ -291,6 +291,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      sku-vite:
+        specifier: workspace:*
+        version: link:../../packages/sku-vite
 
   fixtures/public-path:
     dependencies:
@@ -892,6 +895,9 @@ importers:
       sirv:
         specifier: ^3.0.1
         version: 3.0.1
+      sku-vite:
+        specifier: workspace:*
+        version: link:../sku-vite
       svgo-loader:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1065,6 +1071,25 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  packages/sku-vite:
+    dependencies:
+      debug:
+        specifier: ^4.3.1
+        version: 4.4.0
+    devDependencies:
+      '@types/debug':
+        specifier: ^4.1.12
+        version: 4.1.12
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.3.21
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      vite:
+        specifier: ^6.1.0
+        version: 6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
 
   test-utils:
     devDependencies:

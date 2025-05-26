@@ -114,6 +114,7 @@ export const createViteConfig = ({
         '@vanilla-extract/css/adapter',
         'serialize-javascript',
         'used-styles',
+        'sku-vite',
         ...(configType === 'ssg' || configType === 'ssr'
           ? ['sku/vite/loadable']
           : []),

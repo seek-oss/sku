@@ -10,7 +10,7 @@ interface AppProps {
   environment: 'development' | 'production';
 }
 
-export default ({ environment }: AppProps) => (
+export const App = ({ environment }: AppProps) => (
   <StrictMode>
     <BraidProvider theme={seekJobs}>
       <NextSteps environment={environment} />

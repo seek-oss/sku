@@ -37,7 +37,7 @@ const renderPageCorrectly = async ({
 };
 
 describe('multiple-routes', () => {
-  describe.sequential.for(['vite'])('bundler: %s', (bundler) => {
+  describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
     describe('start', async () => {
       const { cancel, signal } = createCancelSignal();
 

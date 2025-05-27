@@ -9,7 +9,7 @@ export const getAppSnapshot = async ({
   url,
   warningFilter = () => true,
   expect,
-  waitUntil = 'networkidle0',
+  waitUntil = 'networkidle2',
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;

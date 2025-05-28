@@ -11,7 +11,10 @@ export const transform = (source: string) => {
         {
           has: {
             kind: 'string',
-            pattern: "'sku/@loadable/component'",
+            has: {
+              kind: 'string_fragment',
+              regex: 'sku\/@loadable\/component',
+            },
           },
         },
         {

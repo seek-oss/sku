@@ -7,7 +7,7 @@ import { createFixture } from 'fs-fixture';
 const filesToTest = [
   {
     filename: 'customNameFixture.tsx',
-    input: dedent/* typescript */ `import customLoadable from 'sku/@loadable/component';
+    input: dedent/* typescript */ `import customLoadable from "sku/@loadable/component";
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
     output: dedent/* typescript */ `import { loadable as customLoadable } from 'sku-vite/loadable';

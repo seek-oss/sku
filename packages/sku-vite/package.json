@@ -11,7 +11,8 @@
     "./collector": {
       "types": "./dist/loadable/collector.d.ts",
       "default": "./dist/loadable/collector.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=20.15"

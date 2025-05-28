@@ -21,6 +21,7 @@ export function loadable<T extends ComponentType<any>>(
   options?: {
     fallback?: NonNullable<ReactNode> | null;
     resolveComponent?: (module: { default: T } & Record<string, T>) => T;
+    ssr?: boolean; // Whether this is being used in SSR or SSG
   },
   moduleId: ModuleId = '', // Gets set via the plugin
 ): PreloadableComponent<T> {
@@ -44,7 +45,7 @@ export function loadable<T extends ComponentType<any>>(
     // used for all subsequent renders, otherwise it can cause the
     // underlying component to be unmounted and remounted.
     const ComponentToRender = useRef(PreloadedComponent ?? ReactLazyComponent);
-    useRegisterComponent(moduleId);
+    useRegisterComponent(moduleId, Boolean(options?.ssr));
     if (options?.fallback) {
       return (
         <Suspense fallback={options?.fallback}>

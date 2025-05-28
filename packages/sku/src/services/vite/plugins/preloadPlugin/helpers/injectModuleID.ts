@@ -43,8 +43,26 @@ export const injectModuleID = ({
             `${dirname(absolutePath)}/${found}`,
           );
 
+          // Inject the ssr key into the loadable function call options
+          const ssrKeyObjectProperty = t.objectProperty(
+            t.identifier('ssr'),
+            t.memberExpression(
+              t.memberExpression(t.identifier('import'), t.identifier('meta')),
+              t.identifier('env.SSR'),
+            ),
+          );
+
           if (loadableFunctionArgsPath.length === 1) {
-            callPath.node.arguments.push(t.objectExpression([]));
+            callPath.node.arguments.push(
+              t.objectExpression([ssrKeyObjectProperty]),
+            );
+          } else {
+            loadableFunctionArgsPath.find((argPath) => {
+              if (argPath.isObjectExpression()) {
+                const properties = argPath.node.properties;
+                properties.push(ssrKeyObjectProperty);
+              }
+            });
           }
 
           callPath.node.arguments.push(t.stringLiteral(relativePath));
@@ -56,5 +74,6 @@ export const injectModuleID = ({
       }
     },
   });
+
   return injected;
 };

@@ -6,6 +6,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
+  "scripts": {
+    "build": "sku build",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.js"
+  },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@vanilla-extract/css": "^1.0.0",

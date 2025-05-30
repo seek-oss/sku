@@ -6,7 +6,6 @@ import * as styles from './Details.css.js';
 
 const AsyncComponent = loadable(() => import('./AsyncComponent'), {
   resolveComponent: (module) => {
-    console.log('resolveComponent', module);
     return module.AsyncComponent;
   },
 });

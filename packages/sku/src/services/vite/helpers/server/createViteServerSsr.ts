@@ -9,7 +9,7 @@ import { createViteConfig } from '@/services/vite/helpers/createConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
-import { createCollector } from '@/services/vite/loadable/collector.js';
+import { createCollector } from '@sku-lib/vite/collector';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 

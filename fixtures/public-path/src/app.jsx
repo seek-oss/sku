@@ -10,5 +10,6 @@ export default () => (
     <div className={styles.jpg} />
     <div className={styles.png} />
     <div className={styles.webp} />
+    <div className={styles.svg} />
   </>
 );

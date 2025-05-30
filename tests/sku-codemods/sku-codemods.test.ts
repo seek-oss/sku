@@ -10,7 +10,7 @@ const filesToTest = [
     input: dedent/* typescript */ `import customLoadable from "sku/@loadable/component";
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable as customLoadable } from 'sku/vite/loadable';
+    output: dedent/* typescript */ `import { loadable as customLoadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
   },
@@ -19,7 +19,7 @@ const filesToTest = [
     input: dedent/* typescript */ `import loadable from 'sku/@loadable/component';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable } from 'sku/vite/loadable';
+    output: dedent/* typescript */ `import { loadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
   },
@@ -41,7 +41,7 @@ const filesToTest = [
 
         loadableReady();`,
     output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
-        import { loadable } from 'sku/vite/loadable';
+        import { loadable } from '@sku-lib/vite/loadable';
 
         loadable();
 

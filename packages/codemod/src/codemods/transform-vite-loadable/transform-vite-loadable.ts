@@ -63,7 +63,7 @@ export const transform = (source: string) => {
       ? identifier?.text()
       : `loadable as ${identifier?.text()}`;
 
-  const loadableImportStatement = `import { ${identifierName} } from 'sku/vite/loadable';`;
+  const loadableImportStatement = `import { ${identifierName} } from '@sku-lib/vite/loadable';`;
   const loadableReadyImportStatement = namedImports
     ? `import ${namedImports.text()} from 'sku/@loadable/component';\n`
     : '';

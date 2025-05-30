@@ -24,9 +24,9 @@ export const run = async (
   } catch (error) {
     if (error instanceof SubprocessError) {
       if (error.cause instanceof Error && error.cause.name === 'AbortError') {
-        console.log(error.cause.cause);
         return;
       }
+      console.error(error.output);
     }
 
     throw error;

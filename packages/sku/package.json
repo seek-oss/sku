@@ -79,6 +79,7 @@
     }
   },
   "dependencies": {
+    "@sku-lib/vite": "workspace:*",
     "@babel/core": "^7.21.8",
     "@babel/generator": "^7.26.9",
     "@babel/parser": "^7.26.10",

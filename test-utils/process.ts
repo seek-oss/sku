@@ -20,13 +20,13 @@ export const run = async (
 ) => {
   const { args = [], ...spawnOptions } = options;
   try {
-    return await spawn(script, args, spawnOptions);
+    return (await spawn(script, args, spawnOptions)).stderr;
   } catch (error) {
     if (error instanceof SubprocessError) {
       if (error.cause instanceof Error && error.cause.name === 'AbortError') {
-        console.log(error.cause.cause);
         return;
       }
+      console.error(error.output);
     }
 
     throw error;

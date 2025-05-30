@@ -3,7 +3,7 @@ import spawn, { type Options, SubprocessError } from 'nano-spawn';
 
 const require = createRequire(import.meta.url);
 const skuBin = require.resolve('../packages/sku/bin.js');
-const skuCodemodBin = require.resolve('../packages/sku-codemod/bin.js');
+const skuCodemodBin = require.resolve('../packages/codemod/bin.js');
 
 export const createCancelSignal = () => {
   const controller = new AbortController();

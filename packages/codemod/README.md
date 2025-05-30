@@ -5,7 +5,7 @@
 ## Usage
 
 ```sh
-pnpm dlx sku-codemod <codemod> [files] [options]
+pnpm dlx @sku-lib/codemod <codemod> [files] [options]
 ```
 
 If you don't specify the `codemod` the CLI will prompt you with a list of available codemods.

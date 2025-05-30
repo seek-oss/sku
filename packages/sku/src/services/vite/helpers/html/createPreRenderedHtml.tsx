@@ -1,5 +1,5 @@
-import { LoadableProvider } from 'sku-vite/loadable';
-import type { Collector } from 'sku-vite/collector';
+import { LoadableProvider } from '@sku-lib/vite/loadable';
+import type { Collector } from '@sku-lib/vite/collector';
 import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
 import debug from 'debug';
 import type { ReactNode } from 'react';

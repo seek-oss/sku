@@ -1,5 +1,5 @@
 ---
-'sku-codemod': minor
+'@sku-lib/codemod': minor
 ---
 
 Initial release.

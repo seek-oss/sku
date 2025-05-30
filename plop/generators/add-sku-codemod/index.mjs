@@ -1,4 +1,4 @@
-const programRoot = './packages/sku-codemod/src/';
+const programRoot = './packages/codemod/src/';
 
 const addSkuCodemodGenerator = (plop) => {
   plop.setGenerator('add-sku-codemod', {

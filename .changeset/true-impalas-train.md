@@ -1,5 +1,5 @@
 ---
-'sku-vite': minor
+'@sku-lib/vite': minor
 ---
 
 Initial release

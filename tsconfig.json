@@ -10,10 +10,5 @@
     "incremental": true,
     "resolveJsonModule": true
   },
-  "exclude": [
-    "node_modules",
-    "fixtures",
-    "packages/sku",
-    "packages/sku-codemod"
-  ]
+  "exclude": ["node_modules", "fixtures", "packages/sku", "packages/codemod"]
 }

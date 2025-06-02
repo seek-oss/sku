@@ -24,8 +24,8 @@ const webpackFinal = async (config, { configType }) => {
   ).default;
 
   return makeStorybookWebpackConfig(config, {
-    // sku storybook -> configType === 'DEVELOPMENT'
-    // sku build-storybook -> configType === 'PRODUCTION'
+    // storybook dev -> configType === 'DEVELOPMENT'
+    // storybook build -> configType === 'PRODUCTION'
     isDevServer: configType === 'DEVELOPMENT',
   });
 };

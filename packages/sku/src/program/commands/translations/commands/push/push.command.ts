@@ -1,12 +1,10 @@
 import { Command } from 'commander';
 import { deleteUnusedKeysOption } from './delete-unused-keys.option.js';
-import { pushAction } from './push.action.js';
 
-const pushCommand = new Command('push');
-
-pushCommand
+export const pushCommand = new Command('push')
   .description('Push translations to Phrase')
   .addOption(deleteUnusedKeysOption)
-  .action(pushAction);
-
-export { pushCommand };
+  .action(async (options) => {
+    const { pushAction } = await import('./push.action.js');
+    await pushAction(options);
+  });

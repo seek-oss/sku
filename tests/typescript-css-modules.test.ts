@@ -8,15 +8,14 @@ import {
   waitForUrls,
   runSkuScriptInDir,
   startAssetServer,
-  gracefulSpawn,
   getPort,
 } from '@sku-private/test-utils';
 
-import skuConfigImport from '@sku-fixtures/typescript-css-modules/sku.config.ts';
-import skuSsrConfigImport from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
-import type { ChildProcess } from 'node:child_process';
+import skuConfig from '@sku-fixtures/typescript-css-modules/sku.config.ts';
+import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
 
 import { createRequire } from 'node:module';
+import { createCancelSignal, run } from '@sku-private/test-utils/process.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -26,30 +25,25 @@ const appDir = path.dirname(
 const distDir = path.resolve(appDir, 'dist');
 const distSsrDir = path.resolve(appDir, 'dist-ssr');
 
-// TODO: fix this casting. Typescript is resolving the default export the whole `import` type.
-const skuSsrConfig =
-  skuSsrConfigImport as unknown as typeof skuSsrConfigImport.default;
-const skuConfig = skuConfigImport as unknown as typeof skuConfigImport.default;
-
 assert(skuSsrConfig.serverPort, 'sku config has serverPort');
 
 describe.sequential('typescript-css-modules', () => {
   describe('build', async () => {
     assert(skuConfig.port, 'sku config has port');
 
+    const { cancel, signal } = createCancelSignal();
     const port = await getPort();
     const url = `http://localhost:${port}`;
     const args = ['--strict-port', `--port=${port}`];
-    let process: ChildProcess;
 
     beforeAll(async () => {
       await runSkuScriptInDir('build', appDir);
-      process = await runSkuScriptInDir('serve', appDir, args);
+      runSkuScriptInDir('serve', appDir, { args, signal });
       await waitForUrls(url);
     });
 
     afterAll(async () => {
-      await process.kill();
+      cancel();
       // Clean up dist dir to prevent pollution of linted files in lint test
       await rm(distDir, { recursive: true, force: true });
     });
@@ -66,26 +60,28 @@ describe.sequential('typescript-css-modules', () => {
   });
 
   describe('build-ssr', async () => {
-    let server: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
     let closeAssetServer: () => void;
 
     const assetServerPort = 4003;
     const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build-ssr', appDir, [
-        '--config=sku-ssr.config.ts',
-      ]);
-      server = gracefulSpawn('node', ['server'], {
+      await runSkuScriptInDir('build-ssr', appDir, {
+        args: ['--config=sku-ssr.config.ts'],
+      });
+      run('node', {
+        args: ['server.cjs'],
         cwd: distSsrDir,
         stdio: 'inherit',
+        signal,
       });
       closeAssetServer = await startAssetServer(assetServerPort, distSsrDir);
       await waitForUrls(backendUrl, `http://localhost:${assetServerPort}`);
     });
 
     afterAll(async () => {
-      await server.kill();
+      cancel();
       closeAssetServer();
       // Clean up dist-ssr dir to prevent pollution of linted files in lint test
       await rm(distSsrDir, { recursive: true, force: true });
@@ -97,25 +93,29 @@ describe.sequential('typescript-css-modules', () => {
     });
 
     it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(distSsrDir, ['.js', '.css']);
+      const files = await dirContentsToObject(distSsrDir, [
+        '.cjs',
+        '.js',
+        '.css',
+      ]);
       expect(files).toMatchSnapshot();
     });
   });
 
   describe('start', async () => {
-    let server: ChildProcess;
+    const { cancel, signal } = createCancelSignal();
 
     const port = await getPort();
     const devServerUrl = `http://localhost:${port}`;
     const args = ['--strict-port', `--port=${port}`];
 
     beforeAll(async () => {
-      server = await runSkuScriptInDir('start', appDir, args);
+      runSkuScriptInDir('start', appDir, { args, signal });
       await waitForUrls(devServerUrl);
     });
 
     afterAll(async () => {
-      await server?.kill();
+      cancel();
     });
 
     it('should start a development server', async ({ expect }) => {
@@ -125,30 +125,20 @@ describe.sequential('typescript-css-modules', () => {
   });
 
   describe('test', () => {
-    let exitCode: number | null;
-
-    beforeAll(async () => {
-      const { child } = await runSkuScriptInDir('test', appDir);
-      exitCode = child.exitCode;
-    });
-
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      expect(exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('test', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 
   describe('lint', () => {
-    let exitCode: number | null;
-
-    beforeAll(async () => {
+    it('should handle tsc and eslint', async ({ expect }) => {
       // run build first to ensure typescript declarations are generated
       await runSkuScriptInDir('build', appDir);
-      const { child } = await runSkuScriptInDir('lint', appDir);
-      exitCode = child.exitCode;
-    });
-
-    it('should handle tsc and eslint', async ({ expect }) => {
-      expect(exitCode).toEqual(0);
+      await expect(
+        runSkuScriptInDir('lint', appDir),
+      ).resolves.not.toThrowError();
     });
   });
 });

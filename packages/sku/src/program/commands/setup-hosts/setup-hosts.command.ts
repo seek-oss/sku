@@ -1,12 +1,10 @@
 import { Command } from 'commander';
-import { setupHostsAction } from './setup-hosts.action.js';
 
-const setupHostsCommand = new Command('setup-hosts');
-
-setupHostsCommand
+export const setupHostsCommand = new Command('setup-hosts')
   .description(
     'Update your hosts file to point any configured hosts to your local machine.',
   )
-  .action(setupHostsAction);
-
-export { setupHostsCommand };
+  .action(async (options) => {
+    const { setupHostsAction } = await import('./setup-hosts.action.js');
+    await setupHostsAction(options);
+  });

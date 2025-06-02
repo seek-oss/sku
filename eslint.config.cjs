@@ -80,6 +80,19 @@ module.exports = [
       'no-process-exit': 'off',
       'no-sync': 'off',
 
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['**/*.action.js'],
+              message:
+                'Please dynamically import action modules to keep the CLI fast',
+            },
+          ],
+        },
+      ],
+
       'import-x/no-unresolved': [
         'error',
         {
@@ -111,7 +124,7 @@ module.exports = [
     },
   },
   {
-    files: ['tests/**', 'test-utils/**'],
+    files: ['tests/**', 'test-utils/**', 'vite-test-utils/**'],
 
     languageOptions: {
       globals: {

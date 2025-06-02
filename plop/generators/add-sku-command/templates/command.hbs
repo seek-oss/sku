@@ -1,11 +1,7 @@
 import { Command } from 'commander';
 import { {{camelCase commandName}}Action } from './{{commandName}}.action.js';
 
-const {{camelCase commandName}}Command = new Command('{{commandName}}');
-
-{{camelCase commandName}}Command
+export const {{camelCase commandName}}Command = new Command('{{commandName}}')
   .description('<YOUR_DESCRIPTION_HERE>')
   .argument('<ARGUMENTS_HERE>', '<ARGUMENT_DESCRIPTION>')
   .action({{camelCase commandName}}Action);
-
-export { {{camelCase commandName}}Command };

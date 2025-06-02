@@ -1,4 +1,4 @@
-const programRoot = './packages/sku-codemod/src/';
+const programRoot = './packages/codemod/src/';
 
 const addSkuCodemodGenerator = (plop) => {
   plop.setGenerator('add-sku-codemod', {
@@ -42,9 +42,8 @@ const addSkuCodemodGenerator = (plop) => {
         path: `${programRoot}/utils/constants.ts`,
         pattern: /(\/\* \[add-sku-codemod-generator: codemod] \*\/)/g,
         template: `{
-    title: '{{description}}',
+    description: '{{description}}',
     value: '{{codemodName}}',
-    version: '0.0.1',
   },\n  $1`,
       },
     ],

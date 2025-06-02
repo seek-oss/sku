@@ -11,8 +11,7 @@ const appDir = path.dirname(
 );
 
 test('Jest test with preset', async ({ expect }) => {
-  const { child } = await run(`${appDir}/node_modules/jest/bin/jest.js`, [], {
-    cwd: appDir,
-  });
-  expect(child.exitCode).toEqual(0);
+  await expect(
+    run(`${appDir}/node_modules/jest/bin/jest.js`, { cwd: appDir }),
+  ).resolves.not.toThrowError();
 });

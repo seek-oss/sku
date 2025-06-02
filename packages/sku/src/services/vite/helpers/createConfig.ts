@@ -1,14 +1,18 @@
 import { createRequire, builtinModules } from 'node:module';
 import type { InlineConfig } from 'vite';
 
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
-import skuVitePreloadPlugin from '../plugins/skuVitePreloadPlugin/skuVitePreloadPlugin.js';
+import { preloadPlugin } from '../plugins/preloadPlugin/preloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { outDir, renderEntryChunkName } from './bundleConfig.js';
+import vocabPluginVite from '@vocab/vite';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { createVocabChunks } from '@vocab/vite/chunks';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const require = createRequire(import.meta.url);
 
@@ -22,27 +26,51 @@ export const createViteConfig = ({
   skuContext: SkuContext;
   configType?: 'client' | 'ssr' | 'ssg';
   plugins?: InlineConfig['plugins'];
-}) => {
+}): InlineConfig => {
   const input = {
     client: clientEntry,
     ssr: skuContext.paths.serverEntry,
     ssg: skuContext.paths.renderEntry,
   };
+  const vocabConfig = getVocabConfig(skuContext);
+  const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
+
+  const isProductionBuild = process.env.NODE_ENV === 'production';
 
   return {
+    base: isStartCommand ? '/' : skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
+      vocabConfig && vocabPluginVite.default({ vocabConfig }),
+      tsconfigPaths(),
       cjsInterop({
         dependencies: ['@apollo/client', 'lodash'],
       }),
-      react(),
+      react({
+        babel: {
+          plugins: [
+            ...(isProductionBuild
+              ? [
+                  [
+                    require.resolve('babel-plugin-unassert'),
+                    {
+                      variables: ['assert', 'invariant'],
+                      modules: ['assert', 'node:assert', 'tiny-invariant'],
+                    },
+                  ],
+                ]
+              : []),
+          ],
+        },
+      }),
       vanillaExtractPlugin(),
-      skuVitePreloadPlugin({
+      preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
       ...plugins,
     ],
+
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
@@ -66,6 +94,12 @@ export const createViteConfig = ({
           entryFileNames:
             configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
+          manualChunks: (id, ctx) => {
+            const languageChunkName = createVocabChunks(id, ctx);
+            if (languageChunkName) {
+              return languageChunkName;
+            }
+          },
         },
       },
     },
@@ -80,11 +114,12 @@ export const createViteConfig = ({
         '@vanilla-extract/css/adapter',
         'serialize-javascript',
         'used-styles',
+        '@sku-lib/vite',
         ...(configType === 'ssg' || configType === 'ssr'
           ? ['sku/vite/loadable']
           : []),
       ],
       noExternal: ['@vanilla-extract/css', 'braid-design-system'],
     },
-  } satisfies InlineConfig;
+  };
 };

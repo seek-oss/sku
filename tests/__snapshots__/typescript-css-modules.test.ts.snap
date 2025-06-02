@@ -246,7 +246,7 @@ exports[`typescript-css-modules > build-ssr > should generate the expected files
 /*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "server.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "server.cjs": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

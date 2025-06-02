@@ -245,7 +245,7 @@ export const initAction = async (
   });
 
   await configure(skuContext);
-  await esLintFix({ skuContext });
+  await esLintFix();
   await prettierWrite();
 
   const nextSteps = [

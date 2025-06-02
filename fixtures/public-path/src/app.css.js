@@ -5,6 +5,7 @@ import largeImageGif from './large-image.gif';
 import largeImageJpg from './large-image.jpg';
 import largeImagePng from './large-image.png';
 import largeImageWebp from './large-image.webp';
+import largeImageSvg from './large-image.svg';
 
 export const avif = style({
   backgroundImage: `url(${largeImageAvif})`,
@@ -38,6 +39,12 @@ export const png = style({
 
 export const webp = style({
   backgroundImage: `url(${largeImageWebp})`,
+  width: '1039px',
+  height: '240px',
+});
+
+export const svg = style({
+  backgroundImage: `url(${largeImageSvg})`,
   width: '1039px',
   height: '240px',
 });

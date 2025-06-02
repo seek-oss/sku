@@ -7,10 +7,10 @@ import { createFixture } from 'fs-fixture';
 const filesToTest = [
   {
     filename: 'customNameFixture.tsx',
-    input: dedent/* typescript */ `import customLoadable from 'sku/@loadable/component';
+    input: dedent/* typescript */ `import customLoadable from "sku/@loadable/component";
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable as customLoadable } from 'sku/vite/loadable';
+    output: dedent/* typescript */ `import { loadable as customLoadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
   },
@@ -19,7 +19,7 @@ const filesToTest = [
     input: dedent/* typescript */ `import loadable from 'sku/@loadable/component';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable } from 'sku/vite/loadable';
+    output: dedent/* typescript */ `import { loadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
   },
@@ -41,7 +41,7 @@ const filesToTest = [
 
         loadableReady();`,
     output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
-        import { loadable } from 'sku/vite/loadable';
+        import { loadable } from '@sku-lib/vite/loadable';
 
         loadable();
 
@@ -59,10 +59,9 @@ describe('sku codemods', () => {
         });
 
         it('"--dry" should not change any files', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, [
-            '.',
-            '--dry',
-          ]);
+          await runSkuCodemod('transform-vite-loadable', fixture.path, {
+            args: ['.', '--dry'],
+          });
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',
@@ -71,7 +70,9 @@ describe('sku codemods', () => {
         });
 
         it('All output files should be the same', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, ['.']);
+          await runSkuCodemod('transform-vite-loadable', fixture.path, {
+            args: ['.'],
+          });
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',

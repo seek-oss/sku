@@ -1,8 +1,8 @@
 import { Command } from 'commander';
-import { validateAction } from './validate.action.js';
 
-const validateCommand = new Command('validate');
-
-validateCommand.description('Validate .vocab files').action(validateAction);
-
-export { validateCommand };
+export const validateCommand = new Command('validate')
+  .description('Validate .vocab files')
+  .action(async (options) => {
+    const { validateAction } = await import('./validate.action.js');
+    await validateAction(options);
+  });

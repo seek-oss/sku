@@ -41,7 +41,8 @@ Before starting with `vite` rendering make sure you've read the [static renderin
 
 Code splitting is possible with the new `sku/vite/loadable` entrypoint.
 
-The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https://react.dev/reference/react/Suspense) component for the loading of a fallback state. You can wrap the `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you.
+The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`](https://react.dev/reference/react/Suspense) component for the loading of a fallback state
+You can wrap the `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you.
 
 **Example of using `sku/vite/loadable`**
 
@@ -63,6 +64,11 @@ export default () => (
 In order to use `loadable` with the fallback option you would need to render the application inside the `renderToStringAsync` function in the `render.tsx` file. See the example [here](./docs/static-rendering.md#renderApp) for more information.
 
 If you run the vite command with the `--convert-loadable` flag, sku will automatically convert all the `loadable` components from `sku/@loadable/component` to the new imports.
+
+#### Using named exports
+
+The `loadable` function returns the `default` export by default.
+If you want to use a named export you can use the `resolveComponent` option to specify the correct component for `loadable` to use.
 
 ### Dev server middleware
 

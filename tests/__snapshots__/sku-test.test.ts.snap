@@ -1,6 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sku-test > should pass through unknown flags to jest 1`] = `
-"sku/fixtures/sku-test/src/index.test.ts
-"
-`;
+exports[`sku-test > should pass through unknown flags to jest 1`] = `"sku/fixtures/sku-test/src/index.test.ts"`;

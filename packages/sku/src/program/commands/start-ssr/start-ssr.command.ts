@@ -1,14 +1,12 @@
 import { Command } from 'commander';
-import { startSsrAction } from './start-ssr.action.js';
 import { statsOption } from '@/program/options/stats/stats.option.js';
 
-const startSsrCommand = new Command('start-ssr');
-
-startSsrCommand
+export const startSsrCommand = new Command('start-ssr')
   .description(
     'Start the sku development server for a server-rendered application.',
   )
   .addOption(statsOption)
-  .action(startSsrAction);
-
-export { startSsrCommand };
+  .action(async (options) => {
+    const { startSsrAction } = await import('./start-ssr.action.js');
+    await startSsrAction(options);
+  });

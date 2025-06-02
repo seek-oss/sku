@@ -1,11 +1,8 @@
 import { Command } from 'commander';
 import { packageManagerOption } from '../../options/packageManager/packageManager.option.js';
 import { setPackageManager } from '../../../services/packageManager/context/packageManager.js';
-import { initAction } from '@/program/commands/init/init.action.js';
 
-export const initCommand = new Command('init');
-
-initCommand
+export const initCommand = new Command('init')
   .description('Initialize a new sku project')
   .argument('[projectName]', 'Project name')
   .option(
@@ -16,4 +13,7 @@ initCommand
   .on('option:package-manager', (packageManager) => {
     setPackageManager(packageManager);
   })
-  .action(initAction);
+  .action(async (projectName, options) => {
+    const { initAction } = await import('./init.action.js');
+    await initAction(projectName, options);
+  });

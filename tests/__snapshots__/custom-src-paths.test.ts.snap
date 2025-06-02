@@ -59,7 +59,7 @@ exports[`custom-src-paths > bundler vite > start > should start a development se
 <html>
   <head>
     <script type="module">
-      import { injectIntoGlobalHook } from "/@react-refresh";
+      import { injectIntoGlobalHook } from "/@react-refresh"
 injectIntoGlobalHook(window);
 window.$RefreshReg$ = () => {};
 window.$RefreshSig$ = () => (type) => type;

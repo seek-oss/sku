@@ -1,4 +1,4 @@
-import { createCollector } from '@/services/vite/loadable/collector.js';
+import { createCollector } from '@sku-lib/vite/collector';
 import debug from 'debug';
 import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
 

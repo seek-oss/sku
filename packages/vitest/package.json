@@ -1,0 +1,43 @@
+{
+  "name": "@sku-lib/vitest",
+  "version": "0.0.0",
+  "description": "vitest runner for sku test",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "lint:tsc": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/vite"
+  },
+  "author": "SEEK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seek-oss/sku/issues"
+  },
+  "homepage": "https://github.com/seek-oss/sku#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1"
+  },
+  "peerDependencies": {
+    "vitest": "^3.1.1"
+  }
+}

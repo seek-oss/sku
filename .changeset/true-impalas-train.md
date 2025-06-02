@@ -9,7 +9,7 @@ This has been split from the core sku code. New changes:
 * Adds a `resolveComponent` option to the `loadable` function. The `loadable` function returns the `default` export by default. By using the `resolveComponent` function you can specify the correct component for `loadable` to use.
 
 
-**example usage**
+**EXAMPLE USAGE:**
 
 ```typescript
 // src/MyComponent.tsx

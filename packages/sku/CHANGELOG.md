@@ -1,5 +1,101 @@
 # sku
 
+## 14.3.0
+
+### Minor Changes
+
+- Add Port and Strict Port toggle for Start and Serve ([#1232](https://github.com/seek-oss/sku/pull/1232))
+
+  Previously `sku serve` would allow you to choose the port to use with `--port`. This is now available on `sku start`.
+
+  **Start development server using port 8080:**
+
+  ```sh
+  sku start --port 8080
+  ```
+
+  By default, if this port is unavailable a new port will be chosen. If you'd instead prefer to the command to fail, the `--strict-port` in now available.
+
+  **Fails if port not available:**
+
+  ```sh
+  sku serve --port 8080 --strict-port
+  ```
+
+- Support root resolution of `.jsx` and `.cjs` files ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+- `setup-hosts` ipv6 hosts are now added alongside their ipv4 counterpart ([#1221](https://github.com/seek-oss/sku/pull/1221))
+
+- Various improvements were made to sku's Vite support. However, it is still not production ready. ([#1269](https://github.com/seek-oss/sku/pull/1269))
+
+  #### General
+
+  - Ensure bundled pre-render entrypoint has a consistent name, regardless of the configured `renderEntry`.
+  - Change render entrypoint file `api` to match that of `webpack` rendering.
+  - Add the `vite-tsconfig-paths` plugin. This allows `vite` to respect the base path and path aliases in the `tsconfig.json`.
+  - Support multi-language applications via Vocab.
+  - Enable `csp` functionality.
+
+  #### Build
+
+  - Ensure `publicPath` is prepended to asset URLs imported by Vanilla Extract stylesheets.
+  - Strip assertions during production build.
+  - All asset files now get added directly to the `dist` folder instead of being nested.
+  - Aligns `publicPath` logic to mimic Webpack behaviour.
+
+  #### Start
+
+  - Enabled `httpsDevServer`.
+  - Improved error handling during static render.
+  - Enabled `devServerMiddleware`.
+  - Opens default browser on server start.
+  - Force HTTP/1 when enabling https dev server.
+
+  #### Loadable
+
+  - The loadable code has been moved to `@sku-lib/vite`.
+
+### Patch Changes
+
+- Remove `env-ci` dependency ([#1248](https://github.com/seek-oss/sku/pull/1248))
+
+- Disable Node experimental warnings to reduce log noise ([#1236](https://github.com/seek-oss/sku/pull/1236))
+
+- Updated the following dependencies: ([#1249](https://github.com/seek-oss/sku/pull/1249))
+  - `escape-string-regexp`
+  - `find-up`
+  - `get-port`
+  - `indent-string`
+  - `open`
+  - `pretty-ms`
+  - `wrap-ansi`
+- CLI: Speed up command execution by asynchronously loading commands at runtime ([#1245](https://github.com/seek-oss/sku/pull/1245))
+
+- Re-order root resolution file extensions in order of most common to least common file types ([#1219](https://github.com/seek-oss/sku/pull/1219))
+
+  Files with no extension will now be resolved in the following order: `.ts` -> `.tsx` -> `.mts` -> `.cts` -> `.js` -> `.jsx` -> `.mjs` -> `.cjs` -> `.json`
+
+- `sku init`: Update template to use a named export for `App` ([#1262](https://github.com/seek-oss/sku/pull/1262))
+
+- `deps`: Update `webpack`-related dependencies ([#1259](https://github.com/seek-oss/sku/pull/1259))
+
+  - `@pmmmwh/react-refresh-webpack-plugin`: `^0.5.15` -> `^0.6.0`
+  - `babel-loader`: `^9.1.2` -> `^10.0.0`
+  - `css-loader`: `^6.7.1` -> `^7.1.2`
+  - `cssnano`: `^6.0.0` -> `^7.0.7`
+  - `react-refresh`: `^0.14.0` -> `^0.17.0`
+  - `webpack`: `^5.52.0` -> `^5.99.8`
+  - `webpack-merge`: `^5.8.0` -> `^6.0.1`
+
+- Update `lint-staged` dependency to `^16.0.0` ([#1248](https://github.com/seek-oss/sku/pull/1248))
+
+- `configure`: Emit resolve sku config path to generated ESLint config ([#1243](https://github.com/seek-oss/sku/pull/1243))
+
+- `lint|format`: Avoid redundantly loading ESLint config ([#1243](https://github.com/seek-oss/sku/pull/1243))
+
+- Updated dependencies [[`1fc74a6`](https://github.com/seek-oss/sku/commit/1fc74a6d4ae3f99609b57da0333012e9ba6e42c0)]:
+  - @sku-lib/vite@0.1.0
+
 ## 14.2.0
 
 ### Minor Changes

@@ -14,7 +14,7 @@ export const vitestHandler = async ({
     const { runVitest } = await import('@sku-lib/vitest');
     await runVitest({
       setupFiles: skuContext.paths.setupTests,
-      filters: args,
+      args,
     });
     return;
   } catch (e: any) {

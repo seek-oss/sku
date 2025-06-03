@@ -1,16 +1,18 @@
-import { createVitest } from 'vitest/node';
+import { createVitest, parseCLI } from 'vitest/node';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 export const runVitest = async ({
-  setupFiles,
-  filters,
+  setupFiles = [],
+  args,
 }: {
   setupFiles: string | string[];
-  filters: string[];
+  args: string[];
 }) => {
+  const results = parseCLI(args);
+
   const vitest = await createVitest(
     'test',
-    { config: false },
+    { config: false, ...results.options },
     {
       plugins: [vanillaExtractPlugin()],
       test: {
@@ -27,7 +29,7 @@ export const runVitest = async ({
     {},
   );
 
-  await vitest.start(filters);
+  await vitest.start(results.filter);
 
   process.exit(0);
 };

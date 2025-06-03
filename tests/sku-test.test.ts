@@ -12,7 +12,7 @@ const appDir = path.dirname(
 
 describe('sku-test', () => {
   it.for(['vitest', 'jest'])(
-    '[$1]: should run tests',
+    '[%s]: should run tests',
     async (testRunner, { expect }) => {
       const args =
         testRunner === 'vitest' ? ['--config=sku-config.vitest.ts'] : [];

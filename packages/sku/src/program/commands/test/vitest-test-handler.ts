@@ -18,29 +18,31 @@ export const vitestHandler = async ({
     });
     return;
   } catch (e: any) {
-    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install.
-    if (e.code === 'ERR_MODULE_NOT_FOUND' && !isCI) {
-      console.log('@sku-lib/vitest is not installed');
-      const res = await prompts(
-        {
-          type: 'confirm',
-          name: 'install',
-          message: 'Do you want to install `@sku-lib/vitest`?',
-          initial: true,
-        },
-        { onCancel: () => process.exit(1) },
-      );
-      if (!res.install) {
-        console.log('Exiting without running tests.');
-        return;
-      }
-      await installDep({
-        deps: ['@sku-lib/vitest'],
-        type: 'dev',
-        logLevel: 'regular',
-      });
-      // Retry running Vitest after installation
-      await vitestHandler({ skuContext, args });
+    if (e.code !== 'ERR_MODULE_NOT_FOUND' || isCI) {
+      console.error(e.message);
+      return;
     }
+    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install.
+    console.log('@sku-lib/vitest is not installed');
+    const res = await prompts(
+      {
+        type: 'confirm',
+        name: 'install',
+        message: 'Do you want to install `@sku-lib/vitest`?',
+        initial: true,
+      },
+      { onCancel: () => process.exit(1) },
+    );
+    if (!res.install) {
+      console.log('Exiting without running tests.');
+      return;
+    }
+    await installDep({
+      deps: ['@sku-lib/vitest'],
+      type: 'dev',
+      logLevel: 'regular',
+    });
+    // Retry running Vitest after installation
+    await vitestHandler({ skuContext, args });
   }
 };

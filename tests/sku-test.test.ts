@@ -11,13 +11,22 @@ const appDir = path.dirname(
 );
 
 describe('sku-test', () => {
-  it('should run tests', async ({ expect }) => {
-    await expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
-  });
+  it.for(['vitest', 'jest'])(
+    '[$1]: should run tests',
+    async (testRunner, { expect }) => {
+      const args =
+        testRunner === 'vitest' ? ['--config=sku-config.vitest.ts'] : [];
+      await expect(
+        runSkuScriptInDir('test', appDir, {
+          args,
+        }),
+      ).resolves.not.toThrowError();
+    },
+  );
 
   it('should pass through unknown flags to jest', async ({ expect }) => {
     const child = await runSkuScriptInDir('test', appDir, {
-      args: ['--listTests'],
+      args: ['--listTests', '--config=sku.config.ts'],
     });
     const output = (child?.stdout as string).replaceAll(cwd(), 'sku');
 

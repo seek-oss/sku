@@ -10,23 +10,21 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-test/sku.config.ts'),
 );
 
-describe('sku-test', () => {
-  it.for(['vitest', 'jest'])(
-    '[%s]: should run tests',
-    async (testRunner, { expect }) => {
-      const args =
-        testRunner === 'vitest' ? ['--config=sku-config.vitest.ts'] : [];
-      await expect(
-        runSkuScriptInDir('test', appDir, {
-          args,
-        }),
-      ).resolves.not.toThrowError();
-    },
-  );
+describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
+  const args = testRunner === 'vitest' ? ['--config=sku-config.vitest.ts'] : [];
+  it('should run tests', async ({ expect }) => {
+    await expect(
+      runSkuScriptInDir('test', appDir, {
+        args,
+      }),
+    ).resolves.not.toThrowError();
+  });
 
-  it('should pass through unknown flags to jest', async ({ expect }) => {
+  it(`should pass through unknown flags to ${testRunner}`, async ({
+    expect,
+  }) => {
     const child = await runSkuScriptInDir('test', appDir, {
-      args: ['--listTests', '--config=sku.config.ts'],
+      args: [...args, '--coverage'],
     });
     const output = (child?.stdout as string).replaceAll(cwd(), 'sku');
 

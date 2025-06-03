@@ -16,7 +16,8 @@ export const testAction = async (
   await runVocabCompile(skuContext);
 
   if (skuContext.testRunner === 'vitest') {
-    vitestHandler({ skuContext, args });
+    await vitestHandler({ skuContext, args });
+    return;
   }
   runJestTests({ skuContext }, { args });
 };

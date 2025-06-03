@@ -5,8 +5,5 @@
   "devDependencies": {
     "sku": "workspace:*"
   },
-  "scripts": {
-    "test": "NODE_DEBUG=module NODE_OPTIONS='--experimental-require-module' sku test &> test.log"
-  },
   "skuSkipValidatePeerDeps": true
 }

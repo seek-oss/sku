@@ -1,6 +1,7 @@
 import prompts from 'prompts';
 import installDep from '@/services/packageManager/install.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
+import isCI from '@/utils/isCI.js';
 
 export const vitestHandler = async ({
   skuContext,
@@ -17,8 +18,8 @@ export const vitestHandler = async ({
     });
     return;
   } catch (e: any) {
-    // If Vitest is not installed, we fall back to Jest
-    if (e.code === 'ERR_MODULE_NOT_FOUND') {
+    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install.
+    if (e.code === 'ERR_MODULE_NOT_FOUND' && !isCI) {
       console.log('@sku-lib/vitest is not installed');
       const res = await prompts(
         {

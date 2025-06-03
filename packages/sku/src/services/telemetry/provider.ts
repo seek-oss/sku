@@ -32,7 +32,6 @@ try {
     // Consumers install this private dependency
     // eslint-disable-next-line import-x/no-unresolved
     const realProvider = require('@seek/sku-telemetry').default({});
-    console.log('realProvider', realProvider);
 
     // For backwards compat with older versions of @seek/sku-telemetry
     if (typeof realProvider.gauge !== 'function') {

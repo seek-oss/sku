@@ -701,9 +701,6 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.0(react-refresh@0.17.0)(type-fest@0.21.3)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
-      '@sku-lib/vite':
-        specifier: workspace:*
-        version: link:../vite
       '@storybook/react-webpack5':
         specifier: ^7.0.0 || ^8.0.0
         version: 8.6.12(@swc/core@1.11.24)(esbuild@0.25.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
@@ -917,6 +914,9 @@ importers:
       pretty-ms:
         specifier: ^9.2.0
         version: 9.2.0
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       react-refresh:
         specifier: ^0.17.0
         version: 0.17.0
@@ -956,6 +956,9 @@ importers:
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))
+      vitest:
+        specifier: ^3.1.1
+        version: 3.1.3(@types/debug@4.1.12)(@types/node@18.19.100)(jiti@2.4.2)(jsdom@20.0.3)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
       webpack:
         specifier: ^5.99.8
         version: 5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)
@@ -978,6 +981,12 @@ importers:
       '@jest/globals':
         specifier: ^29.7.0
         version: 29.7.0
+      '@sku-lib/vite':
+        specifier: workspace:*
+        version: link:../vite
+      '@sku-lib/vitest':
+        specifier: workspace:*
+        version: link:../vitest
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -1014,6 +1023,9 @@ importers:
       '@types/picomatch':
         specifier: ^2.3.3
         version: 2.3.4
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.21
@@ -1068,9 +1080,6 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
-      vitest:
-        specifier: ^3.1.1
-        version: 3.1.3(@types/debug@4.1.12)(@types/node@18.19.100)(jiti@2.4.2)(jsdom@20.0.3)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
 
   packages/vite:
     dependencies:
@@ -1090,6 +1099,15 @@ importers:
       vite:
         specifier: ^6.1.0
         version: 6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
+
+  packages/vitest:
+    devDependencies:
+      '@vanilla-extract/vite-plugin':
+        specifier: ^5.0.2
+        version: 5.0.2(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)
+      vitest:
+        specifier: ^3.1.1
+        version: 3.1.3(@types/debug@4.1.12)(@types/node@18.19.100)(jiti@2.4.2)(jsdom@20.0.3)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
 
   test-utils:
     devDependencies:

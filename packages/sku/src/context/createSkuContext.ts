@@ -210,6 +210,7 @@ export const createSkuContext = ({
 
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
+    testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
     configPath: appConfigPath,
     publicPath,
     skuConfig,

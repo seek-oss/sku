@@ -19,7 +19,7 @@ describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
       }),
     ).resolves.not.toThrowError();
   });
-  ``;
+
   it(`should pass through unknown flags to ${testRunner}`, async ({
     expect,
   }) => {

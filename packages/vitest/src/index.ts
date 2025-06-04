@@ -8,7 +8,7 @@ export const runVitest = async ({
   setupFiles: string | string[];
   args: string[];
 }) => {
-  const results = parseCLI(args);
+  const results = parseCLI(['vitest', ...args]);
 
   const vitest = await createVitest(
     'test',

@@ -11,7 +11,7 @@ const appDir = path.dirname(
 );
 
 describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
-  const args = testRunner === 'vitest' ? ['--config=sku-config.vitest.ts'] : [];
+  const args = testRunner === 'vitest' ? ['--config=sku.config.vitest.ts'] : [];
   it('should run tests', async ({ expect }) => {
     await expect(
       runSkuScriptInDir('test', appDir, {
@@ -19,7 +19,7 @@ describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
       }),
     ).resolves.not.toThrowError();
   });
-
+  ``;
   it(`should pass through unknown flags to ${testRunner}`, async ({
     expect,
   }) => {

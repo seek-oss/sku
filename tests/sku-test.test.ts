@@ -32,7 +32,10 @@ describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
     expect(
       stripVTControlCharacters(
         // strip out the dynamic parts of the output
-        output.replaceAll(/Start at .*|Duration .*/g, ''),
+        output
+          .replaceAll(/(\d+\.?\d*)s/g, '0.0s')
+          .replaceAll(/(\d+\.?\d*)ms/g, '0ms')
+          .replaceAll(/\b\d{1,2}:\d{2}:\d{2}\b/g, '00:00:00'),
       ),
     ).toMatchSnapshot();
   });

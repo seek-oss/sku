@@ -10,13 +10,9 @@ export const vitestHandler = async ({
   skuContext: SkuContext;
   args: string[];
 }) => {
+  let vitestImport = null;
   try {
-    const { runVitest } = await import('@sku-lib/vitest');
-    await runVitest({
-      setupFiles: skuContext.paths.setupTests,
-      args,
-    });
-    return;
+    vitestImport = await import('@sku-lib/vitest');
   } catch (e: any) {
     if (e.code !== 'ERR_MODULE_NOT_FOUND' || isCI) {
       console.error(e.message);
@@ -44,5 +40,10 @@ export const vitestHandler = async ({
     });
     // Retry running Vitest after installation
     await vitestHandler({ skuContext, args });
+    return;
   }
+  await vitestImport.runVitest({
+    setupFiles: skuContext.paths.setupTests,
+    args,
+  });
 };

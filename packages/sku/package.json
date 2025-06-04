@@ -185,7 +185,6 @@
     "vite": "^6.1.0",
     "vite-plugin-cjs-interop": "^2.1.6",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.1.1",
     "webpack": "^5.99.8",
     "webpack-bundle-analyzer": "^4.6.1",
     "webpack-dev-server": "^5.0.2",
@@ -227,6 +226,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.0.0",
     "ts-patch": "^3.3.0",
-    "typescript-transform-paths": "^3.5.2"
+    "typescript-transform-paths": "^3.5.2",
+    "vitest": "^3.1.1"
   }
 }

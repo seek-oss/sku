@@ -40,9 +40,6 @@ export const vitestHandler = async ({
     });
     // Retry running Vitest after installation
     await vitestHandler({ skuContext, args });
-  }
-  if (!vitestImport) {
-    console.error('Failed to import @sku-lib/vitest');
     return;
   }
   await vitestImport.runVitest({

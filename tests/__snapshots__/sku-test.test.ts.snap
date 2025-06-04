@@ -15,20 +15,20 @@ All files |       0 |        0 |       0 |       0 |
 
 exports[`[vitest]: sku-test > should pass through unknown flags to vitest 1`] = `
 "
-[1m[46m RUN [49m[22m [36mv3.1.3 [39m[90msku/fixtures/sku-test[39m
-      [2mCoverage enabled with [22m[33mv8[39m
+ RUN  v3.1.3 sku/fixtures/sku-test
+      Coverage enabled with v8
 
-[90mstdout[2m | src/index.test.ts
-[22m[39mrunning setup test
+stdout | src/index.test.ts
+running setup test
 
- [32m✓[39m src/index.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 1[2mms[22m[39m
+ ✓ src/index.test.ts (1 test) 1ms
 
-[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
-[2m      Tests [22m [1m[32m1 passed[39m[22m[90m (1)[39m
-[2m   Start at [22m 13:25:09
-[2m   Duration [22m 1.07s[2m (transform 66ms, setup 52ms, collect 5ms, tests 1ms, environment 481ms, prepare 152ms)[22m
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   
+   
 
-[34m % [39m[2mCoverage report from [22m[33mv8[39m
+ % Coverage report from v8
 -------------------|---------|----------|---------|---------|-------------------
 File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 -------------------|---------|----------|---------|---------|-------------------

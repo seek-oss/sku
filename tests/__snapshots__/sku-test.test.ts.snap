@@ -26,7 +26,7 @@ running setup test
  Test Files  1 passed (1)
       Tests  1 passed (1)
    Start at  00:00:00
-   Duration  0.0s (transform 0ms, setup 0ms, collect 0ms, tests 0ms, environment 0ms, prepare 0ms)
+   Duration  0ms (transform 0ms, setup 0ms, collect 0ms, tests 0ms, environment 0ms, prepare 0ms)
 
  % Coverage report from v8
 -------------------|---------|----------|---------|---------|-------------------

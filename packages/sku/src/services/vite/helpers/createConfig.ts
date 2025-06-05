@@ -1,4 +1,4 @@
-import { createRequire, builtinModules } from 'node:module';
+import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';

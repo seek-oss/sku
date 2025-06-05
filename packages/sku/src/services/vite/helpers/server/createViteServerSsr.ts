@@ -1,11 +1,11 @@
 import path from 'node:path';
 import { Transform } from 'node:stream';
 import express, { type RequestHandler, type Express } from 'express';
-import type { Manifest, ViteDevServer } from 'vite';
+import { type Manifest, mergeConfig, type ViteDevServer } from 'vite';
 import crypto from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
-import { createViteConfig } from '@/services/vite/helpers/createConfig.js';
+import { createViteSsrConfig } from '@/services/vite/helpers/config/createConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 import { createSsrHtml } from '@/services/vite/helpers/html/createSsrHtml.js';
@@ -38,23 +38,21 @@ export const createViteServerSsr = async ({
     if (!isProduction) {
       const { createServer: createViteSever } = await import('vite');
 
-      vite = await createViteSever({
-        ...createViteConfig({
-          skuContext,
-          configType: 'ssr',
+      vite = await createViteSever(
+        mergeConfig(createViteSsrConfig(skuContext), {
+          server: {
+            host: 'localhost',
+            middlewareMode: true,
+            hmr: true,
+            allowedHosts: getAppHosts(skuContext).filter(
+              (host) => typeof host === 'string',
+            ),
+          },
+          plugins: [httpsDevServerPlugin(skuContext)],
+          appType: 'custom',
+          base,
         }),
-        server: {
-          host: 'localhost',
-          middlewareMode: true,
-          hmr: true,
-          allowedHosts: getAppHosts(skuContext).filter(
-            (host) => typeof host === 'string',
-          ),
-        },
-        plugins: [httpsDevServerPlugin(skuContext)],
-        appType: 'custom',
-        base,
-      });
+      );
 
       app.use(vite.middlewares);
     } else {

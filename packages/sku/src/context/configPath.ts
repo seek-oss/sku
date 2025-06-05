@@ -35,7 +35,9 @@ export const resolveAppSkuConfigPath = ({
       return resolvedCustomConfigPath;
     }
 
-    debug('Custom sku config file does not exist:', resolvedCustomConfigPath);
+    throw new Error(
+      `No sku config file found for path: ${configPath}. Make sure the path is correct or that you have a sku.config.ts file in your project root.`,
+    );
   }
 
   const supportedSkuConfigPath = resolveSupportedSkuConfigPath();

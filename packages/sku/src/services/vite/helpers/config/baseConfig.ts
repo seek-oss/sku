@@ -97,4 +97,4 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 export const createSkuViteConfig = (
   config: InlineConfig,
   skuContext: SkuContext,
-) => mergeConfig(getBaseConfig(skuContext), config, false);
+) => mergeConfig(getBaseConfig(skuContext), config);

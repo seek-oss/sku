@@ -1,10 +1,10 @@
-import { build } from 'vite';
+import { build, createServer } from 'vite';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-import { createViteServer } from './helpers/server/createViteServer.js';
 import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import {
   createViteClientConfig,
+  createViteDevConfig,
   createViteSsgConfig,
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
@@ -30,7 +30,7 @@ export const viteService = {
   },
   start: async (skuContext: SkuContext) => {
     // TODO Get this to be backwards compat with webpack
-    const server = await createViteServer(skuContext);
+    const server = await createServer(createViteDevConfig(skuContext));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,

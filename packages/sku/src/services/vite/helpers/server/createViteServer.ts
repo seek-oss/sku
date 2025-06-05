@@ -10,27 +10,31 @@ import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 
 export const createViteServer = async (skuContext: SkuContext) =>
   createServer(
-    mergeConfig(createViteClientConfig(skuContext), {
-      base: '/',
-      skuContext,
-      plugins: [
-        middlewarePlugin(skuContext),
-        startTelemetryPlugin({
-          target: 'node',
-          type: 'static',
-        }),
-        // eslint-disable-next-line new-cap
-        HMRTelemetryPlugin({
-          target: 'node',
-          type: 'static',
-        }),
-        httpsDevServerPlugin(skuContext),
-      ],
-      server: {
-        host: 'localhost',
-        allowedHosts: getAppHosts(skuContext).filter(
-          (host) => typeof host === 'string',
-        ),
+    mergeConfig(
+      createViteClientConfig(skuContext),
+      {
+        base: '/',
+        skuContext,
+        plugins: [
+          middlewarePlugin(skuContext),
+          startTelemetryPlugin({
+            target: 'node',
+            type: 'static',
+          }),
+          // eslint-disable-next-line new-cap
+          HMRTelemetryPlugin({
+            target: 'node',
+            type: 'static',
+          }),
+          httpsDevServerPlugin(skuContext),
+        ],
+        server: {
+          host: 'localhost',
+          allowedHosts: getAppHosts(skuContext).filter(
+            (host) => typeof host === 'string',
+          ),
+        },
       },
-    }),
+      false,
+    ),
   );

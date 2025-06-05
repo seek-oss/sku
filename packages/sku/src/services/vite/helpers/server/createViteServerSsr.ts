@@ -39,19 +39,23 @@ export const createViteServerSsr = async ({
       const { createServer: createViteSever } = await import('vite');
 
       vite = await createViteSever(
-        mergeConfig(createViteSsrConfig(skuContext), {
-          server: {
-            host: 'localhost',
-            middlewareMode: true,
-            hmr: true,
-            allowedHosts: getAppHosts(skuContext).filter(
-              (host) => typeof host === 'string',
-            ),
+        mergeConfig(
+          createViteSsrConfig(skuContext),
+          {
+            server: {
+              host: 'localhost',
+              middlewareMode: true,
+              hmr: true,
+              allowedHosts: getAppHosts(skuContext).filter(
+                (host) => typeof host === 'string',
+              ),
+            },
+            plugins: [httpsDevServerPlugin(skuContext)],
+            appType: 'custom',
+            base,
           },
-          plugins: [httpsDevServerPlugin(skuContext)],
-          appType: 'custom',
-          base,
-        }),
+          false,
+        ),
       );
 
       app.use(vite.middlewares);

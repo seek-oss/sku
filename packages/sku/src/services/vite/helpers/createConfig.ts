@@ -119,7 +119,6 @@ export const createViteConfig = ({
         '@sku-lib/vite',
       ],
       noExternal: [
-        '@vanilla-extract/css',
         'braid-design-system',
         ...skuContext.skuConfig.compilePackages,
       ],

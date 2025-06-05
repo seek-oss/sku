@@ -36,6 +36,7 @@ export default {
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
+  dangerouslySetViteConfig: defaultDecorator,
   eslintIgnore: [],
   supportedBrowsers: browserslistConfigSeek,
   cspEnabled: false,

@@ -1,9 +1,12 @@
-import { build } from 'vite';
+import { build, createServer } from 'vite';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-import { createViteServer } from './helpers/server/createViteServer.js';
 import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
-import { createViteConfig } from './helpers/createConfig.js';
+import {
+  createViteClientConfig,
+  createViteDevConfig,
+  createViteSsgConfig,
+} from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
@@ -14,11 +17,11 @@ import allocatePort from '@/utils/allocatePort.js';
 export const viteService = {
   buildSsr: async (skuContext: SkuContext) => {
     // TODO: This isn't fully implemented?
-    await build(createViteConfig({ skuContext }));
+    await build(createViteClientConfig(skuContext));
   },
   build: async (skuContext: SkuContext) => {
-    await build(createViteConfig({ skuContext }));
-    await build(createViteConfig({ skuContext, configType: 'ssg' }));
+    await build(createViteClientConfig(skuContext));
+    await build(createViteSsgConfig(skuContext));
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
@@ -27,7 +30,7 @@ export const viteService = {
   },
   start: async (skuContext: SkuContext) => {
     // TODO Get this to be backwards compat with webpack
-    const server = await createViteServer(skuContext);
+    const server = await createServer(createViteDevConfig(skuContext));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,

@@ -45,6 +45,11 @@ exports[`ssr-hello-world > build > custom port > should generate a production se
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="http://localhost:4000/a85d2645cc4d80a20b5b.png"
+      >
       <div class="qixxyt0">
         <div class="qixxyt1">
           Hello World
@@ -142,6 +147,11 @@ exports[`ssr-hello-world > build > default port > should generate a production s
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="http://localhost:4000/a85d2645cc4d80a20b5b.png"
+      >
       <div class="qixxyt0">
         <div class="qixxyt1">
           Hello World
@@ -239,6 +249,11 @@ exports[`ssr-hello-world > start > should start a development server 1`] = `
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png"
+      >
       <div class="styles_root__qixxyt0">
         <div class="styles_nested__qixxyt1">
           Hello World

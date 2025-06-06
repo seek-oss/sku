@@ -67,6 +67,11 @@ exports[`public path > bundler: vite > build and serve > should create valid app
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/large-image-CufAniQw.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/large-image-CufAniQw.avif">
@@ -121,7 +126,7 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
 
   </head>
   <body>
-    <div id="app"><div class="_1eysbi80"></div><img src="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
+    <div id="app"><link rel="preload" as="image" href="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi80"></div><img src="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
     <script type="module" src="/static/my-app/vite-client.js" ></script>
   </body>
 </html>",
@@ -176,6 +181,11 @@ exports[`public path > bundler: webpack > build and serve > should create valid 
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/76f6980df06dbc480aee.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/76f6980df06dbc480aee.avif">
@@ -252,7 +262,7 @@ exports[`public path > bundler: webpack > build and serve > should generate the 
 <link data-chunk="main" rel="preload" as="script" href="/static/my-app/main.js">
   </head>
   <body>
-    <div id="app"><div class="_1eysbi80"></div><img src="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
+    <div id="app"><link rel="preload" as="image" href="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi80"></div><img src="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/static/my-app/runtime.js"></script>
 <script async data-chunk="main" src="/static/my-app/2.js"></script>

@@ -108,6 +108,6 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async ({ expect }) => {
-    expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
+    await expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
   });
 });

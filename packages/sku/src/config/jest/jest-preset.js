@@ -29,6 +29,10 @@ export default jestDecorator({
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg|avif|bmp)$':
       fileURLToPath(import.meta.resolve('./fileMock.cjs')),
+    // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+    // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+    // @see https://github.com/facebook/react/issues/31827#issuecomment-2563094822
+    'react-dom/server': 'react-dom/server.edge',
   },
   transform: {
     '\\.css\\.ts$': fileURLToPath(

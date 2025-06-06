@@ -1,5 +1,23 @@
 # sku
 
+## 14.4.0
+
+### Minor Changes
+
+- `sku test`: Add experimental support for `vitest` ([#1271](https://github.com/seek-oss/sku/pull/1271))
+
+  > Note: this is an experimental feature. Do not use in production.
+
+### Patch Changes
+
+- Modify root resolution extension order ([#1279](https://github.com/seek-oss/sku/pull/1279))
+
+  Fixes a bug that caused multiple versions of the same package to be bundled in certain situations
+
+- Revert addition of `--disable-warning` flag to `sku` binary ([#1278](https://github.com/seek-oss/sku/pull/1278))
+
+  This flag was added to suppress certain warnings about experimental features being used by `sku`. However, the method use to set this flag is not compatible with certain distributions of Linux without additional configuration, so it has been removed.
+
 ## 14.3.0
 
 ### Minor Changes

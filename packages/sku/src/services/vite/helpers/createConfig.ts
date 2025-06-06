@@ -112,12 +112,7 @@ export const createViteConfig = ({
       exclude: skuContext.skuConfig.skipPackageCompatibilityCompilation,
     },
     ssr: {
-      external: [
-        '@vanilla-extract/css/adapter',
-        'serialize-javascript',
-        'used-styles',
-        '@sku-lib/vite',
-      ],
+      external: ['serialize-javascript', '@sku-lib/vite'],
       noExternal: [
         'braid-design-system',
         ...skuContext.skuConfig.compilePackages,

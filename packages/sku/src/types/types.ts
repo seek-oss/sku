@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
+import type { InlineConfig } from 'vite';
 
 export type ViteRenderFunction = (
   options: {
@@ -240,7 +241,7 @@ export interface SkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
    */
-  dangerouslySetViteConfig?: (skuViteConfig: any) => any;
+  dangerouslySetViteConfig?: (skuViteConfig: InlineConfig) => any;
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.

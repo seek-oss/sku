@@ -1,4 +1,4 @@
-import { createRequire, builtinModules } from 'node:module';
+import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react';
@@ -13,6 +13,7 @@ import vocabPluginVite from '@vocab/vite';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { dangerouslySetViteConfig } from '../plugins/dangerouslySetViteConfig.js';
 
 const require = createRequire(import.meta.url);
 
@@ -36,12 +37,22 @@ export const createViteConfig = ({
   const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
+  const prodBabelPlugins = [
+    [
+      require.resolve('babel-plugin-unassert'),
+      {
+        variables: ['assert', 'invariant'],
+        modules: ['assert', 'node:assert', 'tiny-invariant'],
+      },
+    ],
+  ];
 
   return {
     base: isStartCommand ? '/' : skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
+      dangerouslySetViteConfig(skuContext),
       vocabConfig && vocabPluginVite.default({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
@@ -50,17 +61,8 @@ export const createViteConfig = ({
       react({
         babel: {
           plugins: [
-            ...(isProductionBuild
-              ? [
-                  [
-                    require.resolve('babel-plugin-unassert'),
-                    {
-                      variables: ['assert', 'invariant'],
-                      modules: ['assert', 'node:assert', 'tiny-invariant'],
-                    },
-                  ],
-                ]
-              : []),
+            require.resolve('babel-plugin-macros'),
+            ...(isProductionBuild ? prodBabelPlugins : []),
           ],
         },
       }),
@@ -107,19 +109,14 @@ export const createViteConfig = ({
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
+      exclude: skuContext.skuConfig.skipPackageCompatibilityCompilation,
     },
     ssr: {
-      external: [
-        ...builtinModules,
-        '@vanilla-extract/css/adapter',
-        'serialize-javascript',
-        'used-styles',
-        '@sku-lib/vite',
-        ...(configType === 'ssg' || configType === 'ssr'
-          ? ['sku/vite/loadable']
-          : []),
+      external: ['serialize-javascript', '@sku-lib/vite'],
+      noExternal: [
+        'braid-design-system',
+        ...skuContext.skuConfig.compilePackages,
       ],
-      noExternal: ['@vanilla-extract/css', 'braid-design-system'],
     },
   };
 };

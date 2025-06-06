@@ -54,7 +54,7 @@ interface SharedRenderProps extends RenderableRoute {
 }
 
 export interface RenderAppProps extends SharedRenderProps {
-  SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
+  SkuProvider: ({ children }: { children: ReactNode }) => React.JSX.Element;
   _addChunk: (chunkName: string) => void;
   renderToStringAsync: (element: ReactNode) => Promise<string>;
 }

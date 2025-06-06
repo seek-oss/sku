@@ -217,8 +217,8 @@ export const initAction = async (
   const devDeps = [
     '@vanilla-extract/css',
     'sku',
-    '@types/react@^18.3.12',
-    '@types/react-dom@^18.3.1',
+    '@types/react@^19.1.16',
+    '@types/react-dom@^19.1.6',
   ];
 
   console.log(

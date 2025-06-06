@@ -1,5 +1,5 @@
 {
-  "name": "@sku-fixtures/sku-test",
+  "name": "@sku-fixtures/sku-vitest",
   "private": true,
   "type": "module",
   "devDependencies": {

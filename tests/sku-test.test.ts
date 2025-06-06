@@ -8,10 +8,10 @@ import { stripVTControlCharacters } from 'node:util';
 const require = createRequire(import.meta.url);
 
 const appDir = path.dirname(
-  require.resolve('@sku-fixtures/sku-test/sku.config.ts'),
+  require.resolve('@sku-fixtures/sku-vitest/sku.config.ts'),
 );
 
-describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
+describe.for(['vitest', 'jest'])('[%s]: sku-vitest', (testRunner) => {
   const args = testRunner === 'vitest' ? ['--config=sku.config.vitest.ts'] : [];
   it('should run tests', async ({ expect }) => {
     await expect(

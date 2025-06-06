@@ -47,9 +47,11 @@ export const createPreRenderedHtml = async <App,>({
 
   log('Rendering app for route:', route, renderContext);
 
-  const SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element = ({
+  const SkuProvider: ({
     children,
-  }) => (
+  }: {
+    children: ReactNode;
+  }) => React.JSX.Element = ({ children }) => (
     <LoadableProvider value={loadableCollector}>{children}</LoadableProvider>
   );
 

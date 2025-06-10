@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, JSX } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
+import type { Plugin } from 'vite';
 
 export type ViteRenderFunction = (
   options: {
@@ -225,6 +226,22 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
    */
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
+
+  /**
+   * This function provides a way to modify sku's Vite configuration.
+   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   *
+   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
+   * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+   *
+   * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
+   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
+   */
+  __unstableDangerouslySetViteConfig?: Plugin['config'];
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.

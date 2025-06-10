@@ -1,4 +1,4 @@
-import { builtinModules, createRequire } from 'node:module';
+import { createRequire } from 'node:module';
 import { type InlineConfig, mergeConfig } from 'vite';
 
 import { cjsInterop } from 'vite-plugin-cjs-interop';
@@ -13,16 +13,30 @@ import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import vocabPluginVite from '@vocab/vite';
+import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 
 const require = createRequire(import.meta.url);
 
 const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
   const vocabConfig = getVocabConfig(skuContext);
+
+  const isProductionBuild = process.env.NODE_ENV === 'production';
+  const prodBabelPlugins = [
+    [
+      require.resolve('babel-plugin-unassert'),
+      {
+        variables: ['assert', 'invariant'],
+        modules: ['assert', 'node:assert', 'tiny-invariant'],
+      },
+    ],
+  ];
+
   return {
     base: skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
+      dangerouslySetViteConfig(skuContext),
       vocabConfig && vocabPluginVite.default({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
@@ -31,17 +45,8 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       react({
         babel: {
           plugins: [
-            ...(process.env.NODE_ENV === 'production'
-              ? [
-                  [
-                    require.resolve('babel-plugin-unassert'),
-                    {
-                      variables: ['assert', 'invariant'],
-                      modules: ['assert', 'node:assert', 'tiny-invariant'],
-                    },
-                  ],
-                ]
-              : []),
+            require.resolve('babel-plugin-macros'),
+            ...(isProductionBuild ? prodBabelPlugins : []),
           ],
         },
       }),
@@ -80,16 +85,14 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
+      exclude: skuContext.skuConfig.skipPackageCompatibilityCompilation,
     },
     ssr: {
-      external: [
-        ...builtinModules,
-        '@vanilla-extract/css/adapter',
-        'serialize-javascript',
-        'used-styles',
-        '@sku-lib/vite',
+      external: ['serialize-javascript', '@sku-lib/vite'],
+      noExternal: [
+        'braid-design-system',
+        ...skuContext.skuConfig.compilePackages,
       ],
-      noExternal: ['@vanilla-extract/css', 'braid-design-system'],
     },
   };
 };

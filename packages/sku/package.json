@@ -41,7 +41,6 @@
     "scripts",
     "template",
     "CHANGELOG.md",
-    "tsconfig.json",
     "src/@loadable",
     "bin.js"
   ],

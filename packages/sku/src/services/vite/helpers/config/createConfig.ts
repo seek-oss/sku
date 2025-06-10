@@ -116,7 +116,7 @@ export const createViteDevSsrConfig = (skuContext: SkuContext) =>
       },
       plugins: [httpsDevServerPlugin(skuContext)],
       appType: 'custom',
-      base: process.env.BASE || '/',
+      base: '/',
     },
     skuContext,
   );

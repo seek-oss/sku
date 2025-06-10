@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Adding `babel-plugin-unassert` to the Vite babel plugins
+Adding `babel-plugin-macros` to the Vite babel plugins

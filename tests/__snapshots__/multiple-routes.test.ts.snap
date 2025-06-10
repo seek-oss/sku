@@ -2,13 +2,13 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent-EanKrGxP.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-BO1vW0IN.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-BbylO-Ju.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-CNUAR5xk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DGJnH813.css": "._1hpn1da0{color:#00f}
 ",
-  "Home-BYlupBal.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home-D-106MY_.css": ".ms22la0{color:red}
 ",
+  "Home-DQBwRi9y.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": "<!DOCTYPE html>
 <html>
   <head><meta http-equiv="Content-Security-Policy" content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';">
@@ -26,19 +26,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-BZ75WZ65.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-BO1vW0IN.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-CNUAR5xk.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-EanKrGxP.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-BbylO-Ju.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script type="module" src="/static/place/AsyncComponent-EanKrGxP.js" ></script>
-<script type="module" src="/static/place/Details-BO1vW0IN.js" ></script>
-<script type="module" src="/static/place/vite-client-BZ75WZ65.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-BbylO-Ju.js" ></script>
+<script type="module" src="/static/place/Details-CNUAR5xk.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -58,16 +58,16 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-BZ75WZ65.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Home-BYlupBal.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - au</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script type="module" src="/static/place/Home-BYlupBal.js" ></script>
-<script type="module" src="/static/place/vite-client-BZ75WZ65.js" ></script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
   "production/nz/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -87,19 +87,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-BZ75WZ65.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-BO1vW0IN.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-CNUAR5xk.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-EanKrGxP.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-BbylO-Ju.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script type="module" src="/static/place/AsyncComponent-EanKrGxP.js" ></script>
-<script type="module" src="/static/place/Details-BO1vW0IN.js" ></script>
-<script type="module" src="/static/place/vite-client-BZ75WZ65.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-BbylO-Ju.js" ></script>
+<script type="module" src="/static/place/Details-CNUAR5xk.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
   "production/nz/nz/index.html": "<!DOCTYPE html>
@@ -119,19 +119,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-BZ75WZ65.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Home-BYlupBal.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Home-DQBwRi9y.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - nz</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script type="module" src="/static/place/Home-BYlupBal.js" ></script>
-<script type="module" src="/static/place/vite-client-BZ75WZ65.js" ></script>
+<script type="module" src="/static/place/Home-DQBwRi9y.js" ></script>
+<script type="module" src="/static/place/vite-client.js" ></script>
   </body>
 </html>",
-  "vite-client-BZ75WZ65.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -168,17 +168,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-BZ75WZ65.js"
+      href="/static/place/vite-client.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Details-BO1vW0IN.js"
+      href="/static/place/Details-CNUAR5xk.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/AsyncComponent-EanKrGxP.js"
+      href="/static/place/AsyncComponent-BbylO-Ju.js"
       crossorigin
     >
   </head>
@@ -199,17 +199,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </script>
     <script
       type="module"
-      src="/static/place/AsyncComponent-EanKrGxP.js"
+      src="/static/place/AsyncComponent-BbylO-Ju.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/Details-BO1vW0IN.js"
+      src="/static/place/Details-CNUAR5xk.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-BZ75WZ65.js"
+      src="/static/place/vite-client.js"
     >
     </script>
   </body>
@@ -262,12 +262,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-BZ75WZ65.js"
+      href="/static/place/vite-client.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Home-BYlupBal.js"
+      href="/static/place/Home-DQBwRi9y.js"
       crossorigin
     >
   </head>
@@ -285,12 +285,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
     <script
       type="module"
-      src="/static/place/Home-BYlupBal.js"
+      src="/static/place/Home-DQBwRi9y.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-BZ75WZ65.js"
+      src="/static/place/vite-client.js"
     >
     </script>
   </body>

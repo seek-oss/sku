@@ -1,3 +1,3 @@
-#!/usr/bin/env -S node --disable-warning=ExperimentalWarning
+#!/usr/bin/env node
 
 import './dist/bin/sku.js';

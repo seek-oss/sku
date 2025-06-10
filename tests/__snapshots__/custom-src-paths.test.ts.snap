@@ -14,7 +14,7 @@ exports[`custom-src-paths > bundler vite > build > should create valid app 1`] =
     >
     <link
       rel="modulepreload"
-      href="/some-static-place/vite-client.js"
+      href="/some-static-place/vite-client-M_JrpecH.js"
       crossorigin
     >
   </head>
@@ -26,7 +26,7 @@ exports[`custom-src-paths > bundler vite > build > should create valid app 1`] =
     </div>
     <script
       type="module"
-      src="/some-static-place/vite-client.js"
+      src="/some-static-place/vite-client-M_JrpecH.js"
     >
     </script>
   </body>
@@ -42,15 +42,15 @@ exports[`custom-src-paths > bundler vite > build > should generate the expected 
     <meta charset="UTF-8" />
     <title>hello-world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/some-static-place/vite-client.js" crossorigin />
+    <link rel="modulepreload" href="/some-static-place/vite-client-M_JrpecH.js" crossorigin />
 
   </head>
   <body>
     <div id="app"><div>Hello custom src paths</div></div>
-    <script type="module" src="/some-static-place/vite-client.js" ></script>
+    <script type="module" src="/some-static-place/vite-client-M_JrpecH.js" ></script>
   </body>
 </html>",
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-M_JrpecH.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -1,40 +1,24 @@
 import { createRequire } from 'node:module';
-import type { InlineConfig } from 'vite';
+import { type InlineConfig, mergeConfig } from 'vite';
 
-import react from '@vitejs/plugin-react';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import react from '@vitejs/plugin-react';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
-import { preloadPlugin } from '../plugins/preloadPlugin/preloadPlugin.js';
+import { preloadPlugin } from '../../plugins/preloadPlugin/preloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
-import { outDir, renderEntryChunkName } from './bundleConfig.js';
-import vocabPluginVite from '@vocab/vite';
-import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { dangerouslySetViteConfig } from '../plugins/dangerouslySetViteConfig.js';
+import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import vocabPluginVite from '@vocab/vite';
+import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('../entries/vite-client.js');
-
-export const createViteConfig = ({
-  skuContext,
-  configType = 'client',
-  plugins = [],
-}: {
-  skuContext: SkuContext;
-  configType?: 'client' | 'ssr' | 'ssg';
-  plugins?: InlineConfig['plugins'];
-}): InlineConfig => {
-  const input = {
-    client: clientEntry,
-    ssr: skuContext.paths.serverEntry,
-    ssg: skuContext.paths.renderEntry,
-  };
+const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
   const vocabConfig = getVocabConfig(skuContext);
-  const isStartCommand = Boolean(skuContext.commandName?.startsWith('start'));
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const prodBabelPlugins = [
@@ -48,7 +32,7 @@ export const createViteConfig = ({
   ];
 
   return {
-    base: isStartCommand ? '/' : skuContext.publicPath,
+    base: skuContext.publicPath,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
@@ -70,9 +54,7 @@ export const createViteConfig = ({
       preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
-      ...plugins,
     ],
-
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
@@ -84,17 +66,11 @@ export const createViteConfig = ({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     build: {
-      outDir: outDir[configType],
       emptyOutDir: true,
-      ssr: configType === 'ssr' || configType === 'ssg',
-      manifest: configType === 'client',
       ssrManifest: false,
       assetsDir: '',
       rollupOptions: {
-        input: input[configType],
         output: {
-          entryFileNames:
-            configType === 'ssg' ? renderEntryChunkName : undefined,
           experimentalMinChunkSize: undefined,
           manualChunks: (id, ctx) => {
             const languageChunkName = createVocabChunks(id, ctx);
@@ -120,3 +96,8 @@ export const createViteConfig = ({
     },
   };
 };
+
+export const createSkuViteConfig = (
+  config: InlineConfig,
+  skuContext: SkuContext,
+) => mergeConfig(getBaseConfig(skuContext), config);

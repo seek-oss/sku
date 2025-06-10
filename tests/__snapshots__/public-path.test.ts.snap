@@ -19,7 +19,7 @@ exports[`public path > bundler: vite > build and serve > should create valid app
     >
     <link
       rel="modulepreload"
-      href="/static/my-app/vite-client.js"
+      href="/static/my-app/vite-client-DeKcJang.js"
       crossorigin
     >
     <link
@@ -85,7 +85,7 @@ exports[`public path > bundler: vite > build and serve > should create valid app
     </div>
     <script
       type="module"
-      src="/static/my-app/vite-client.js"
+      src="/static/my-app/vite-client-DeKcJang.js"
     >
     </script>
   </body>
@@ -103,7 +103,7 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/static/my-app/vite-client-DnoafMfl.css" crossorigin />
 
-<link rel="modulepreload" href="/static/my-app/vite-client.js" crossorigin />
+<link rel="modulepreload" href="/static/my-app/vite-client-DeKcJang.js" crossorigin />
 
 <link rel="preload" href="/static/my-app/large-image-CufAniQw.avif" as="image" type="image/avif" />
 
@@ -122,7 +122,7 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
   </head>
   <body>
     <div id="app"><div class="_1eysbi80"></div><img src="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
-    <script type="module" src="/static/my-app/vite-client.js" ></script>
+    <script type="module" src="/static/my-app/vite-client-DeKcJang.js" ></script>
   </body>
 </html>",
   "large-image-6dGggDit.bmp": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -132,9 +132,9 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
   "large-image-DeF69wGd.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-LKfC-v5Z.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-PZSzlfBh.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DeKcJang.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-DnoafMfl.css": "._1eysbi80{background-image:url(/static/my-app/large-image-CufAniQw.avif);width:1039px;height:240px}._1eysbi81{background-image:url(/static/my-app/large-image-6dGggDit.bmp);width:1039px;height:240px}._1eysbi82{background-image:url(/static/my-app/large-image-PZSzlfBh.gif);width:1039px;height:240px}._1eysbi83{background-image:url(/static/my-app/large-image-DVc6bkoY.jpg);width:1039px;height:240px}._1eysbi84{background-image:url(/static/my-app/large-image-DeF69wGd.png);width:1039px;height:240px}._1eysbi85{background-image:url(/static/my-app/large-image-LKfC-v5Z.webp);width:1039px;height:240px}._1eysbi86{background-image:url(/static/my-app/large-image-BVlb-rPD.svg);width:1039px;height:240px}
 ",
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

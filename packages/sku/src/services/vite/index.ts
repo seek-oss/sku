@@ -71,7 +71,8 @@ const printUrls = (
 ) => {
   const proto = skuContext.httpsDevServer ? 'https' : 'http';
   hosts.forEach((site) => {
-    const initialPath = chalk.dim(`${skuContext.initialPath}`);
+    const initialPath =
+      skuContext.initialPath !== '/' ? skuContext.initialPath : '';
     const url = chalk.cyan(
       `${proto}://${site}:${chalk.bold(skuContext.port.client)}${initialPath}`,
     );

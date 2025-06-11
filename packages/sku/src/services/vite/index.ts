@@ -71,8 +71,11 @@ const printUrls = (
 ) => {
   const proto = skuContext.httpsDevServer ? 'https' : 'http';
   hosts.forEach((site) => {
-    console.log(
-      `${chalk.green('➜')}  ${chalk.bold('Local')}: ${chalk.cyan(`${proto}://${site}:${chalk.bold(skuContext.port.client)}`)}`,
+    const initialPath =
+      skuContext.initialPath !== '/' ? skuContext.initialPath : '';
+    const url = chalk.cyan(
+      `${proto}://${site}:${chalk.bold(skuContext.port.client)}${initialPath}`,
     );
+    console.log(`${chalk.green('➜')}  ${chalk.bold('Local')}: ${url}`);
   });
 };

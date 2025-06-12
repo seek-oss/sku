@@ -703,7 +703,7 @@ importers:
         version: 5.15.2(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
-        version: 0.6.0(react-refresh@0.17.0)(type-fest@0.21.3)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
+        version: 0.6.0(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
       '@storybook/react-webpack5':
         specifier: ^7.0.0 || ^8.0.0
         version: 8.6.12(@swc/core@1.11.24)(esbuild@0.25.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
@@ -854,6 +854,9 @@ importers:
       find-up:
         specifier: ^7.0.0
         version: 7.0.0
+      fs-extra:
+        specifier: ^11.3.0
+        version: 11.3.0
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
@@ -947,6 +950,9 @@ importers:
       terser-webpack-plugin:
         specifier: ^5.1.4
         version: 5.3.14(@swc/core@1.11.24)(esbuild@0.25.4)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
+      type-fest:
+        specifier: ^4.41.0
+        version: 4.41.0
       typescript:
         specifier: ~5.8.0
         version: 5.8.3
@@ -1008,6 +1014,9 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -3039,6 +3048,9 @@ packages:
   '@types/fined@1.1.5':
     resolution: {integrity: sha512-2N93vadEGDFhASTIRbizbl4bNqpMOId5zZfj6hHqYZfEzEfO9onnU4Im8xvzo8uudySDveDHBOOSlTWf38ErfQ==}
 
+  '@types/fs-extra@11.0.4':
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
+
   '@types/gh-pages@6.1.0':
     resolution: {integrity: sha512-Ma9bmKkE+WUtywENLC1rSLXTW66cJHJMWX2RQrJTMKhYM8o+73bRJ1ebfo3RWXUcG+HW3khky2nhVaN7nCsa3Q==}
 
@@ -3080,6 +3092,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/jsonfile@6.1.4':
+    resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
@@ -8547,6 +8562,10 @@ packages:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
 
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
+    engines: {node: '>=16'}
+
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -10719,7 +10738,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.6.0(react-refresh@0.17.0)(type-fest@0.21.3)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))':
+  '@pmmmwh/react-refresh-webpack-plugin@0.6.0(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))':
     dependencies:
       anser: 2.3.2
       core-js-pure: 3.42.0
@@ -10730,7 +10749,7 @@ snapshots:
       source-map: 0.7.4
       webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)
     optionalDependencies:
-      type-fest: 0.21.3
+      type-fest: 4.41.0
       webpack-dev-server: 5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
       webpack-hot-middleware: 2.26.1
 
@@ -11328,6 +11347,11 @@ snapshots:
 
   '@types/fined@1.1.5': {}
 
+  '@types/fs-extra@11.0.4':
+    dependencies:
+      '@types/jsonfile': 6.1.4
+      '@types/node': 18.19.100
+
   '@types/gh-pages@6.1.0': {}
 
   '@types/graceful-fs@4.1.9':
@@ -11376,6 +11400,10 @@ snapshots:
       parse5: 7.3.0
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/jsonfile@6.1.4':
+    dependencies:
+      '@types/node': 18.19.100
 
   '@types/keyv@3.1.4':
     dependencies:
@@ -17922,6 +17950,8 @@ snapshots:
   type-fest@0.6.0: {}
 
   type-fest@0.8.1: {}
+
+  type-fest@4.41.0: {}
 
   type-is@1.6.18:
     dependencies:

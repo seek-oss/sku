@@ -14,11 +14,21 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
+import {
+  extractDependencyGraph,
+  getSsrExternalsForCompiledDependency,
+} from '@/services/vite/helpers/config/dependencyGraph.js';
 
 const require = createRequire(import.meta.url);
 
-const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
+const getBaseConfig = async (skuContext: SkuContext): Promise<InlineConfig> => {
   const vocabConfig = getVocabConfig(skuContext);
+
+  const depGraph = await extractDependencyGraph(process.cwd());
+  const ssrExternals = getSsrExternalsForCompiledDependency(
+    '@vanilla-extract/css',
+    depGraph,
+  );
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const prodBabelPlugins = [
@@ -90,14 +100,14 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],
       noExternal: [
-        'braid-design-system',
+        ...ssrExternals.noExternal,
         ...skuContext.skuConfig.compilePackages,
       ],
     },
   };
 };
 
-export const createSkuViteConfig = (
+export const createSkuViteConfig = async (
   config: InlineConfig,
   skuContext: SkuContext,
-) => mergeConfig(getBaseConfig(skuContext), config);
+) => mergeConfig(await getBaseConfig(skuContext), config);

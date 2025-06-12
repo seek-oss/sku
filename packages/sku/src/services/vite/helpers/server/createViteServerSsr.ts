@@ -36,7 +36,7 @@ export const createViteServerSsr = async ({
     if (!isProduction) {
       const { createServer: createViteSever } = await import('vite');
 
-      vite = await createViteSever(createViteDevSsrConfig(skuContext));
+      vite = await createViteSever(await createViteDevSsrConfig(skuContext));
 
       app.use(vite.middlewares);
     } else {

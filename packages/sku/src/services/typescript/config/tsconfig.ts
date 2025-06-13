@@ -25,6 +25,7 @@ export default ({ rootResolution, tsconfigDecorator }: SkuContext) => {
       // resolution-related
       allowImportingTsExtensions: true,
       allowSyntheticDefaultImports: true,
+      allowJs: true,
       esModuleInterop: true,
       isolatedModules: true,
       resolveJsonModule: true,

@@ -15,7 +15,7 @@ const require = createRequire(import.meta.url);
 
 const clientEntry = require.resolve('../../entries/vite-client.js');
 
-export const createViteSsgConfig = (skuContext: SkuContext) =>
+export const createViteSsgConfig = async (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {
@@ -32,7 +32,7 @@ export const createViteSsgConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteSsrConfig = (skuContext: SkuContext) =>
+export const createViteSsrConfig = async (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {
@@ -46,7 +46,7 @@ export const createViteSsrConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteClientConfig = (skuContext: SkuContext) =>
+export const createViteClientConfig = async (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {
@@ -61,7 +61,7 @@ export const createViteClientConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteDevConfig = (skuContext: SkuContext) =>
+export const createViteDevConfig = async (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       base: '/',
@@ -96,7 +96,7 @@ export const createViteDevConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteDevSsrConfig = (skuContext: SkuContext) =>
+export const createViteDevSsrConfig = async (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {

@@ -704,6 +704,9 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.0(react-refresh@0.17.0)(type-fest@0.21.3)(webpack-dev-server@5.2.0(debug@4.4.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4)))(webpack-hot-middleware@2.26.1)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
+      '@sku-lib/vite':
+        specifier: workspace:*
+        version: link:../vite
       '@storybook/react-webpack5':
         specifier: ^7.0.0 || ^8.0.0
         version: 8.6.12(@swc/core@1.11.24)(esbuild@0.25.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
@@ -981,9 +984,6 @@ importers:
       '@jest/globals':
         specifier: ^29.7.0
         version: 29.7.0
-      '@sku-lib/vite':
-        specifier: workspace:*
-        version: link:../vite
       '@sku-lib/vitest':
         specifier: workspace:*
         version: link:../vitest

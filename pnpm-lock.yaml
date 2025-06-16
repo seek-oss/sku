@@ -440,13 +440,13 @@ importers:
         version: 8.6.12(@types/react@18.3.21)(storybook@8.6.12(prettier@3.5.3))
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.6(webpack@5.99.8(@swc/core@1.11.24))
+        version: 3.0.6(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.6.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.6.12(@swc/core@1.11.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
+        version: 8.6.12(@swc/core@1.11.24)(esbuild@0.25.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.21
@@ -480,13 +480,13 @@ importers:
         version: link:../../test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.3
-        version: 3.0.6(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
+        version: 3.0.6(webpack@5.99.8(@swc/core@1.11.24))
       '@storybook/react':
         specifier: ^8.1.5
         version: 8.6.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
       '@storybook/react-webpack5':
         specifier: ^8.1.5
-        version: 8.6.12(@swc/core@1.11.24)(esbuild@0.25.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
+        version: 8.6.12(@swc/core@1.11.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))(typescript@5.8.3)
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.21

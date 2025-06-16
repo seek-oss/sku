@@ -44,6 +44,7 @@ describe('sku init', () => {
 
   afterAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
+    spawnSync('git', ['restore', 'pnpm-lock.yaml']);
     console.log(
       "Running 'pnpm install' to clean up lockfile after sku-init test...",
     );

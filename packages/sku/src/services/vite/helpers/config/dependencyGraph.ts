@@ -25,7 +25,9 @@ interface Dependency {
 type DepGraph = Map<string, Dependency>;
 
 const loadPackage = async (packageJsonPath: string) =>
-  fs.readFile(packageJsonPath, 'utf-8').then(JSON.parse);
+  fs
+    .readFile(packageJsonPath, 'utf-8')
+    .then(JSON.parse) as Promise<PackageJson>;
 
 const anaylyseDependency = async (
   dependent: string,

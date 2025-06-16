@@ -1,9 +1,5 @@
 import { describe, it } from 'vitest';
 
-/**
- * @jest-environment node
- */
-
 import toPosixPath from './toPosixPath.js';
 
 describe('toPosixPath', () => {

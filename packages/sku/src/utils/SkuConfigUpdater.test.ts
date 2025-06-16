@@ -1,7 +1,4 @@
 import { describe, it } from 'vitest';
-/**
- * @jest-environment node
- */
 import { createFixture } from 'fs-fixture';
 import dedent from 'dedent';
 import { SkuConfigUpdater } from './SkuConfigUpdater.js';

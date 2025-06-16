@@ -31,6 +31,7 @@ describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
 
     expect(
       stripVTControlCharacters(output)
+        .replaceAll(/v\d\.\d\.\d /g, '')
         .replaceAll(/(\d+\.?\d*)s|(\d*)ms/g, '0ms')
         .replaceAll(/\b\d{1,2}:\d{2}:\d{2}\b/g, '00:00:00'),
     ).toMatchSnapshot();

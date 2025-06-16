@@ -17,11 +17,11 @@ import allocatePort from '@/utils/allocatePort.js';
 export const viteService = {
   buildSsr: async (skuContext: SkuContext) => {
     // TODO: This isn't fully implemented?
-    await build(await createViteClientConfig(skuContext));
+    await build(createViteClientConfig(skuContext));
   },
   build: async (skuContext: SkuContext) => {
-    await build(await createViteClientConfig(skuContext));
-    await build(await createViteSsgConfig(skuContext));
+    await build(createViteClientConfig(skuContext));
+    await build(createViteSsgConfig(skuContext));
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
@@ -30,7 +30,7 @@ export const viteService = {
   },
   start: async (skuContext: SkuContext) => {
     // TODO Get this to be backwards compat with webpack
-    const server = await createServer(await createViteDevConfig(skuContext));
+    const server = await createServer(createViteDevConfig(skuContext));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,

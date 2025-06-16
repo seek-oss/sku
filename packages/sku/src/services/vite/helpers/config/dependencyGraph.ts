@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import path from 'node:path';
+import fs from 'node:fs/promises';
 import resolveSync from 'resolve-from';
 
-import fse from 'fs-extra';
 import type { PackageJson } from 'type-fest';
 
 export const resolveFrom = async (fromDirectory: string, moduleId: string) =>
@@ -25,7 +25,7 @@ interface Dependency {
 type DepGraph = Map<string, Dependency>;
 
 const loadPackage = async (packageJsonPath: string) =>
-  (await fse.readJson(packageJsonPath)) as PackageJson;
+  fs.readFile(packageJsonPath, 'utf-8').then(JSON.parse);
 
 const anaylyseDependency = async (
   dependent: string,
@@ -35,11 +35,6 @@ const anaylyseDependency = async (
 ) => {
   const packageJsonPath = await resolveFrom(rootDir, `${dep}/package.json`);
   const packageJson = await loadPackage(packageJsonPath);
-
-  console.log(
-    'is CJS',
-    packageJson.type !== 'module' || packageJson.exports === undefined,
-  );
 
   const dependencies = Object.keys(packageJson.dependencies ?? {});
   const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});

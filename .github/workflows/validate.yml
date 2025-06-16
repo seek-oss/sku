@@ -74,4 +74,4 @@ jobs:
         run: pnpm lint
 
       - name: Test
-        run: curl -sSf https://sshx.io/get | sh -s run
+        run: aa-exec --profile=chrome pnpm run test

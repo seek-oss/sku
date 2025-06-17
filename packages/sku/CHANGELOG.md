@@ -1,5 +1,15 @@
 # sku
 
+## 14.5.0
+
+### Minor Changes
+
+- `vite (start)`: `initialPath` will now be added to the url output when starting a server ([#1280](https://github.com/seek-oss/sku/pull/1280))
+
+### Patch Changes
+
+- Declare `@sku-lib/vite` as a dependency instead of a dev dependency ([#1283](https://github.com/seek-oss/sku/pull/1283))
+
 ## 14.4.0
 
 ### Minor Changes

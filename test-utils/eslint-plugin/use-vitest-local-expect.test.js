@@ -1,4 +1,3 @@
-// enforce-foo-bar.test.js
 import { RuleTester } from 'eslint';
 import useVitestLocalExpect from './use-vitest-local-expect.cjs';
 
@@ -55,4 +54,4 @@ ruleTester.run(
   },
 );
 
-console.log('All tests passed!');
+console.log('Vitest local expect rule tests completed successfully.');

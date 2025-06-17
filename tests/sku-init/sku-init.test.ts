@@ -9,13 +9,14 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const fixtureDirectory = __dirname;
 const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
+const lockFilePath = path.join(process.cwd(), 'pnpm-lock.yaml');
 
 describe('sku init', () => {
-  let stdout: string;
-  let stderr: string;
+  let pnpmLockFile: string;
 
   beforeAll(
     async () => {
+      pnpmLockFile = await fs.readFile(lockFilePath, 'utf-8');
       await fs.rm(projectDirectory, { recursive: true, force: true });
 
       await fs.rm(path.join(fixtureDirectory, projectName), {
@@ -31,7 +32,7 @@ describe('sku init', () => {
         throw new Error('Process was aborted early');
       }
 
-      ({ stdout, stderr } = result);
+      const { stdout, stderr } = result;
 
       console.log('sku init stdout');
       console.log(stdout);
@@ -45,8 +46,9 @@ describe('sku init', () => {
   afterAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
     console.log(
-      "Running 'pnpm install' to clean up lockfile after sku-init test...",
+      "Restoring original lock file and running 'pnpm install' to clean after sku-init test...",
     );
+    await fs.writeFile(lockFilePath, pnpmLockFile, 'utf-8');
     spawnSync('pnpm', ['install']);
     console.log('Cleanup complete');
   });

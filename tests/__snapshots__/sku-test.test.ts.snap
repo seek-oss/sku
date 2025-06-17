@@ -15,7 +15,7 @@ All files |       0 |        0 |       0 |       0 |
 
 exports[`[vitest]: sku-test > should pass through unknown flags to vitest 1`] = `
 "
- RUN  v3.1.3 sku/fixtures/sku-test
+ RUN  sku/fixtures/sku-test
       Coverage enabled with v8
 
 stdout | src/index.test.ts

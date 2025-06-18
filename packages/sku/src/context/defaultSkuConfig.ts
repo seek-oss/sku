@@ -8,6 +8,7 @@ const defaultDecorator = <T>(a: T) => a;
 export default {
   __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
   __UNSAFE_EXPERIMENTAL__testRunner: 'jest',
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',

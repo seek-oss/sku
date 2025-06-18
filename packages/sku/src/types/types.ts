@@ -129,6 +129,15 @@ export interface SkuConfig {
    */
   __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
   /**
+   * An array of cjs dependencies that vite should treat as ESM.
+   * This is an experimental option that may change or be removed without notice.
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default: []
+   */
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+  /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
    * @default "./src/client.js"

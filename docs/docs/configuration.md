@@ -12,8 +12,8 @@ While sku has a zero configuration mode, the equivalent manual configuration wou
 import type { SkuConfig } from 'sku';
 
 export default {
-  clientEntry: 'src/client.js',
-  renderEntry: 'src/render.js',
+  clientEntry: 'src/client.tsx',
+  renderEntry: 'src/render.tsx',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',

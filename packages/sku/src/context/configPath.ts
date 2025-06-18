@@ -35,7 +35,15 @@ export const resolveAppSkuConfigPath = ({
       return resolvedCustomConfigPath;
     }
 
+    console.error(
+      chalk.red.bold('Error:'),
+      `Custom sku config file does not exist: ${chalk.yellow(resolvedCustomConfigPath)}`,
+    );
+    console.error(
+      `See ${chalk.blue('https://seek-oss.github.io/sku/#/./docs/configuration')} for configuration help.`,
+    );
     debug('Custom sku config file does not exist:', resolvedCustomConfigPath);
+    process.exit(1);
   }
 
   const supportedSkuConfigPath = resolveSupportedSkuConfigPath();

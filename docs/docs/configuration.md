@@ -26,7 +26,17 @@ If you need to specify a different config file you can do so with the `--config`
 $ sku start --config sku.custom.config.ts
 ```
 
+> When using the `--config` parameter, the specified file must exist. Sku will exit with an error if the file cannot be found.
+
 Config files can use either TypeScript or JavaScript.
+
+When **no** `--config` parameter is provided, sku will automatically look for config files in this order:
+
+1. `sku.config.ts`
+2. `sku.config.js`
+3. `sku.config.mjs`
+
+If none of these files exist, sku will use its built-in default configuration.
 
 ## clientEntry
 

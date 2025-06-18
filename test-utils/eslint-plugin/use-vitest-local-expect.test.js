@@ -40,7 +40,6 @@ ruleTester.run(
           "it('should do something', ({coo, expect}) => { expect(true).toBe(true); });",
         errors: 1,
       },
-
       {
         code: `import { it, expect } from 'vitest';
 

@@ -17,9 +17,13 @@ module.exports = {
             (specifier) => specifier.local.name === 'expect',
           );
           if (importedExpect) {
+            // Find the expect specifier. This is where eslint will report the issue.
+            const expectSpecifier = node.specifiers.find(
+              (specifier) => specifier.local.name === 'expect',
+            );
             if (node.specifiers.length === 1) {
               context.report({
-                node,
+                node: expectSpecifier,
                 message:
                   '`expect` should be accessed from the `it` or `test` function callback.',
                 fix(fixer) {
@@ -33,7 +37,7 @@ module.exports = {
                 .map((specifier) => specifier.local.name)
                 .join(', ');
               context.report({
-                node,
+                node: expectSpecifier,
                 message:
                   '`expect` should be accessed from the `it` or `test` function callback.',
                 fix(fixer) {

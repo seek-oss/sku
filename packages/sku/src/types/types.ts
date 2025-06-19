@@ -129,7 +129,9 @@ export interface SkuConfig {
    */
   __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
   /**
-   * An array of cjs dependencies that vite should treat as ESM.
+   * An array of cjs import paths that have both a default and named exports.
+   * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+   * See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
    * This is an experimental option that may change or be removed without notice.
    *
    * Note: This option is only relevant when using the `vite` bundler.

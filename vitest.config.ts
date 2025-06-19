@@ -1,25 +1,53 @@
-import { defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export const TEST_TIMEOUT = 50_000;
+const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
-    environment: 'puppeteer',
     setupFiles: ['./vite-test-utils/vitest-setup.ts'],
-    globalSetup: 'vitest-environment-puppeteer/global-init',
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/cypress/**',
-      '**/.{idea,git,cache,output,temp}/**',
-      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
-      '**/fixtures/**',
-      '**/test_utils/**',
+    exclude: [...defaultExclude, '**/fixtures/**'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'sku',
+          include: [`packages/sku/${defaultInclude}`],
+          sequence: {
+            groupOrder: 0,
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'sku-puppeteer',
+          environment: 'puppeteer',
+          globalSetup: 'vitest-environment-puppeteer/global-init',
+          include: [`tests/${defaultInclude}`],
+          exclude: ['tests/sku-init/**'],
+          sequence: {
+            groupOrder: 0,
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'sku-init',
+          include: [`tests/sku-init/${defaultInclude}`],
+          sequence: {
+            // sku-init tests must run after the all other tests as it runs `pnpm install`.
+            // Running it during other tests may cause dependency changes to pollute test results.
+            groupOrder: 1,
+          },
+        },
+      },
     ],
   },
 });

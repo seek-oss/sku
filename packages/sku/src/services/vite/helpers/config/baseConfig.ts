@@ -14,7 +14,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
-
+import { setSsrNoExternal } from '@/services/vite/plugins/setSsrNoExternal.js';
 const require = createRequire(import.meta.url);
 
 const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
@@ -54,6 +54,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
+      setSsrNoExternal(skuContext),
     ],
     resolve: {
       alias: {
@@ -89,10 +90,6 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     },
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],
-      noExternal: [
-        'braid-design-system',
-        ...skuContext.skuConfig.compilePackages,
-      ],
     },
   };
 };

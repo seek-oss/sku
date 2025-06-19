@@ -1,6 +1,7 @@
 const seek = require('eslint-config-seek');
 const jsdoc = require('eslint-plugin-jsdoc');
 const unicorn = require('eslint-plugin-unicorn');
+const eslintPluginSkuVitest = require('@sku-private/test-utils/eslint-plugin/eslint-plugin-sku-vitest.cjs');
 
 module.exports = [
   {
@@ -121,6 +122,15 @@ module.exports = [
           project: '**/*/tsconfig.json',
         },
       },
+    },
+  },
+  {
+    files: ['tests/*.test.ts'],
+    plugins: {
+      'sku-vitest': eslintPluginSkuVitest,
+    },
+    rules: {
+      'sku-vitest/use-vitest-local-expect': 'error',
     },
   },
   {

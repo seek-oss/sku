@@ -30,7 +30,9 @@ describe('use-vitest-local-expect', () => {
       errors: ['correctExpect'],
     });
 
-    expect(result.output).toMatchSnapshot();
+    expect(result.output).toMatchInlineSnapshot(
+      `"it('should do something', ({expect}) => { expect(true).toBe(true); });"`,
+    );
   });
 
   it('invalid case: async no expect accessed from context', async ({
@@ -41,7 +43,9 @@ describe('use-vitest-local-expect', () => {
       errors: ['correctExpect'],
     });
 
-    expect(result.output).toMatchSnapshot();
+    expect(result.output).toMatchInlineSnapshot(
+      `"it('should do something', async ({expect}) => { await expect(true).toBe(true); });"`,
+    );
   });
 
   it('invalid case: no expect but context provided', async ({ expect }) => {
@@ -50,7 +54,9 @@ describe('use-vitest-local-expect', () => {
       errors: ['correctExpect'],
     });
 
-    expect(result.output).toMatchSnapshot();
+    expect(result.output).toMatchInlineSnapshot(
+      `"it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"`,
+    );
   });
 
   it('invalid case: expect imported', async ({ expect }) => {
@@ -61,6 +67,42 @@ describe('use-vitest-local-expect', () => {
       errors: ['removeImport', 'correctExpect'],
     });
 
-    expect(result.output).toMatchSnapshot();
+    expect(result.output).toMatchInlineSnapshot(`
+      "import { it } from 'vitest';
+
+               it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"
+    `);
+  });
+
+  it('invalid case: renamed expect imported', async ({ expect }) => {
+    const { result } = await invalid({
+      code: `import { it, expect as globalExpect } from 'vitest';
+
+         it('should do something', ({coo}) => { expect(true).toBe(true); });`,
+      errors: ['correctExpect'],
+    });
+
+    expect(result.output).toMatchInlineSnapshot(`
+      "import { it, expect as globalExpect } from 'vitest';
+
+               it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"
+    `);
+  });
+
+  it('invalid case: expect imported with renamed extra properties', async ({
+    expect,
+  }) => {
+    const { result } = await invalid({
+      code: `import { it, expect, vi as globalVi } from 'vitest';
+
+         it('should do something', ({coo}) => { expect(true).toBe(true); });`,
+      errors: ['removeImport', 'correctExpect'],
+    });
+
+    expect(result.output).toMatchInlineSnapshot(`
+      "import { it, vi as globalVi } from 'vitest';
+
+               it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"
+    `);
   });
 });

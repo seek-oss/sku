@@ -129,6 +129,34 @@ export interface SkuConfig {
    */
   __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
   /**
+   * An array of cjs import paths that have both a default and named exports.
+   * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+   * See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
+   * This is an experimental option that may change or be removed without notice.
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default: []
+   */
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+
+  /**
+   * This function provides a way to modify sku's Vite configuration.
+   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   *
+   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
+   * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+   *
+   * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
+   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
+   */
+  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig?: Plugin['config'];
+
+  /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
    * @default "./src/client.js"
@@ -226,22 +254,6 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
    */
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
-
-  /**
-   * This function provides a way to modify sku's Vite configuration.
-   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
-   *
-   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
-   *
-   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
-   * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
-   *
-   * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
-   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
-   */
-  __unstableDangerouslySetViteConfig?: Plugin['config'];
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.

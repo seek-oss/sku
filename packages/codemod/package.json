@@ -5,7 +5,7 @@
   "type": "module",
   "bin": "./bin.js",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tspc --project tsconfig.build.json",
     "prepare": "ts-patch install -s"
   },
   "dependencies": {

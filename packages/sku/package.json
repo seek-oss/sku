@@ -47,7 +47,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tspc --project tsconfig.build.json",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit",
     "prepare": "ts-patch install -s"

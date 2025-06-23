@@ -8,7 +8,6 @@ import {
   createViteSsgConfig,
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
-import { openBrowser } from '@/openBrowser/index.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
 import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
@@ -41,10 +40,6 @@ export const viteService = {
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    const proto = skuContext.httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${hosts[0]}:${availablePort}${skuContext.initialPath}`;
-    openBrowser(url);
-
     printUrls(hosts, skuContext);
 
     server.bindCLIShortcuts({ print: true });
@@ -57,10 +52,6 @@ export const viteService = {
     server.listen(skuContext.port.server);
 
     const hosts = getAppHosts(skuContext);
-    const proto = skuContext.httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${hosts[0]}:${skuContext.port.server}${skuContext.initialPath}`;
-    openBrowser(url);
-
     printUrls(hosts, skuContext);
   },
 };

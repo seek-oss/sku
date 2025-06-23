@@ -91,6 +91,7 @@ export const createViteDevConfig = (skuContext: SkuContext) =>
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
+        open: skuContext.initialPath || true,
       },
     },
     skuContext,
@@ -113,6 +114,7 @@ export const createViteDevSsrConfig = (skuContext: SkuContext) =>
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
+        open: skuContext.initialPath || true,
       },
       plugins: [httpsDevServerPlugin(skuContext)],
       appType: 'custom',

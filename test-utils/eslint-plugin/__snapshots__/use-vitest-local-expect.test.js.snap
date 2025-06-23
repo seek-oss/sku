@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`use-vitest-local-expect > invalid case: async no expect accessed from context 1`] = `"it('should do something', async ({expect}) => { await expect(true).toBe(true); });"`;
+
+exports[`use-vitest-local-expect > invalid case: expect imported 1`] = `
+"import { it } from 'vitest';
+
+         it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"
+`;
+
+exports[`use-vitest-local-expect > invalid case: no expect accessed from context 1`] = `"it('should do something', ({expect}) => { expect(true).toBe(true); });"`;
+
+exports[`use-vitest-local-expect > invalid case: no expect but context provided 1`] = `"it('should do something', ({coo, expect}) => { expect(true).toBe(true); });"`;

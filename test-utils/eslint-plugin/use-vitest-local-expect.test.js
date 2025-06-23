@@ -1,56 +1,66 @@
-import { RuleTester } from 'eslint';
 import useVitestLocalExpect from './use-vitest-local-expect.cjs';
 
-const ruleTester = new RuleTester({
-  // Must use at least ecmaVersion 2015 because
-  // that's when `const` variables were introduced.
-  languageOptions: { ecmaVersion: 2022 },
+import { createRuleTester } from 'eslint-vitest-rule-tester';
+import { describe, it } from 'vitest';
+
+describe('use-vitest-local-expect', () => {
+  const { valid, invalid } = createRuleTester({
+    name: 'use-vitest-local-expect',
+    rule: useVitestLocalExpect,
+    configs: {
+      // flat config options
+      languageOptions: {
+        parserOptions: {
+          ecmaVersion: 2020,
+          sourceType: 'module',
+        },
+      },
+    },
+  });
+
+  it('valid case', () => {
+    valid(
+      "it('should do something', ({expect}) => { expect(true).toBe(true); });",
+    );
+  });
+
+  it('invalid case: no expect accessed from context', async ({ expect }) => {
+    const { result } = await invalid({
+      code: "it('should do something', () => { expect(true).toBe(true); });",
+      errors: ['correctExpect'],
+    });
+
+    expect(result.output).toMatchSnapshot();
+  });
+
+  it('invalid case: async no expect accessed from context', async ({
+    expect,
+  }) => {
+    const { result } = await invalid({
+      code: `it('should do something', async () => { await expect(true).toBe(true); });`,
+      errors: ['correctExpect'],
+    });
+
+    expect(result.output).toMatchSnapshot();
+  });
+
+  it('invalid case: no expect but context provided', async ({ expect }) => {
+    const { result } = await invalid({
+      code: "it('should do something', ({coo}) => { expect(true).toBe(true); });",
+      errors: ['correctExpect'],
+    });
+
+    expect(result.output).toMatchSnapshot();
+  });
+
+  it('invalid case: expect imported', async ({ expect }) => {
+    const { result } = await invalid({
+      code: `import { it, expect } from 'vitest';
+
+         it('should do something', ({coo}) => { expect(true).toBe(true); });`,
+      errors: ['removeImport', 'correctExpect'],
+    });
+
+    expect(result.output).toMatchSnapshot();
+  });
 });
-
-// Throws error if the tests in ruleTester.run() do not pass
-ruleTester.run(
-  'use-vitest-local-expect', // rule name
-  useVitestLocalExpect, // rule code
-  {
-    // checks
-    // 'valid' checks cases that should pass
-    valid: [
-      {
-        code: "it('should do something', ({expect}) => { expect(true).toBe(true); });",
-      },
-    ],
-    // 'invalid' checks cases that should not pass
-    invalid: [
-      {
-        code: "it('should do something', () => { expect(true).toBe(true); });",
-        output:
-          "it('should do something', ({expect}) => { expect(true).toBe(true); });",
-        errors: 1,
-      },
-      {
-        code: `it('should do something',
-        async () => { await expect(true).toBe(true); });`,
-        output: `it('should do something',
-        async ({expect}) => { await expect(true).toBe(true); });`,
-        errors: 1,
-      },
-      {
-        code: "it('should do something', ({coo}) => { expect(true).toBe(true); });",
-        output:
-          "it('should do something', ({coo, expect}) => { expect(true).toBe(true); });",
-        errors: 1,
-      },
-      {
-        code: `import { it, expect } from 'vitest';
-
-        it('should do something', ({coo}) => { expect(true).toBe(true); });`,
-        output: `import { it } from 'vitest';
-
-        it('should do something', ({coo, expect}) => { expect(true).toBe(true); });`,
-        errors: 2,
-      },
-    ],
-  },
-);
-
-console.log('Vitest local expect rule tests completed successfully.');

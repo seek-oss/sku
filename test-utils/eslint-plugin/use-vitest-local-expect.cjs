@@ -1,3 +1,4 @@
+/** @type {import("eslint").Rule.RuleModule} */
 module.exports = {
   meta: {
     type: 'problem',
@@ -7,39 +8,41 @@ module.exports = {
     },
     fixable: 'code',
     schema: [],
+    messages: {
+      correctExpect:
+        '`expect` should be accessed from the `it` or `test` function callback.',
+      removeImport:
+        '`expect` should be accessed from the `it` or `test` function callback. Only use renamed imports.',
+    },
   },
   create(context) {
     return {
       ImportDeclaration(node) {
         // Check if `expect` is locally imported
         if (node.source.value === 'vitest') {
-          const importedExpect = node.specifiers.some(
+          const expectSpecifier = node.specifiers.find(
             (specifier) => specifier.local.name === 'expect',
           );
-          if (importedExpect) {
+          if (expectSpecifier) {
             // Find the expect specifier. This is where eslint will report the issue.
-            const expectSpecifier = node.specifiers.find(
-              (specifier) => specifier.local.name === 'expect',
-            );
             if (node.specifiers.length === 1) {
               context.report({
                 node: expectSpecifier,
-                message:
-                  '`expect` should be accessed from the `it` or `test` function callback.',
+                messageId: 'removeImport',
                 fix(fixer) {
                   return fixer.remove(node);
                 },
               });
             } else {
               // If there are other imports, remove only `expect`
+              const { sourceCode } = context;
               const newSpecifiers = node.specifiers
                 .filter((specifier) => specifier.local.name !== 'expect')
-                .map((specifier) => specifier.local.name)
+                .map((specifier) => sourceCode.getText(specifier))
                 .join(', ');
               context.report({
                 node: expectSpecifier,
-                message:
-                  '`expect` should be accessed from the `it` or `test` function callback.',
+                messageId: 'removeImport',
                 fix(fixer) {
                   return fixer.replaceText(
                     node,
@@ -75,8 +78,7 @@ module.exports = {
                   // Report and autofix to add `expect` to the context object
                   context.report({
                     node,
-                    message:
-                      '`expect` should be accessed from the `it` or `test` function callback.',
+                    messageId: 'correctExpect',
                     fix(fixer) {
                       const rangeOffset = testCallback.async ? 6 : 0;
                       return fixer.replaceTextRange(
@@ -101,13 +103,12 @@ module.exports = {
                   // Report and autofix to add `expect` to the context object
                   context.report({
                     node,
-                    message:
-                      '`expect` should be accessed from the `it` or `test` function callback.',
+                    messageId: 'correctExpect',
                     fix(fixer) {
-                      return fixer.replaceText(
-                        contextParam[0],
-                        `{${contextParam[0].properties.map((prop) => prop.key.name).join(', ')}, expect}`,
-                      );
+                      const { sourceCode } = context;
+                      const paramText = sourceCode.getText(contextParam[0]);
+                      const newSource = `${paramText.slice(0, -1)}, expect}`;
+                      return fixer.replaceText(contextParam[0], newSource);
                     },
                   });
                 }

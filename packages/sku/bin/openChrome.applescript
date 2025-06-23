@@ -1,4 +1,8 @@
 (*
+
+File copied from create-react-app
+https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/openChrome.applescript
+
 Copyright (c) 2015-present, Facebook, Inc.
 
 This source code is licensed under the MIT license found in the

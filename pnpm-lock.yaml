@@ -676,7 +676,7 @@ importers:
         version: 7.27.1(@babel/core@7.27.1)
       '@babel/runtime':
         specifier: ^7.21.0
-        version: 7.27.1
+        version: 7.27.6
       '@babel/traverse':
         specifier: ^7.26.9
         version: 7.27.1
@@ -730,13 +730,13 @@ importers:
         version: 5.12.11
       '@vanilla-extract/integration':
         specifier: ^8.0.1
-        version: 8.0.2(babel-plugin-macros@3.1.0)
+        version: 8.0.4(babel-plugin-macros@3.1.0)
       '@vanilla-extract/jest-transform':
         specifier: ^1.1.0
         version: 1.1.15(babel-plugin-macros@3.1.0)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.0.2
-        version: 5.0.2(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)
+        specifier: ^5.0.7
+        version: 5.0.7(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)
       '@vanilla-extract/webpack-plugin':
         specifier: ^2.2.0
         version: 2.3.19(babel-plugin-macros@3.1.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))
@@ -1110,7 +1110,7 @@ importers:
     dependencies:
       '@vanilla-extract/vite-plugin':
         specifier: ^5.0.2
-        version: 5.0.2(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)
+        version: 5.0.7(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)
       vitest:
         specifier: ^3.2.3
         version: 3.2.3(@types/debug@4.1.12)(@types/node@18.19.100)(jiti@2.4.2)(jsdom@20.0.3)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
@@ -1974,10 +1974,6 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
-
-  '@babel/runtime@7.27.1':
-    resolution: {integrity: sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog==}
-    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.27.6':
     resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
@@ -3372,11 +3368,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vanilla-extract/babel-plugin-debug-ids@1.2.0':
-    resolution: {integrity: sha512-z5nx2QBnOhvmlmBKeRX5sPVLz437wV30u+GJL+Hzj1rGiJYVNvgIIlzUpRNjVQ0MgAgiQIqIUbqPnmMc6HmDlQ==}
+  '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
+    resolution: {integrity: sha512-MeDWGICAF9zA/OZLOKwhoRlsUW+fiMwnfuOAqFVohL31Agj7Q/RBWAYweqjHLgFBCsdnr6XIfwjJnmb2znEWxw==}
 
-  '@vanilla-extract/compiler@0.1.3':
-    resolution: {integrity: sha512-dSkRFwHfOccEZGlQ6hdRDGQMLko8RZnAKd06u9+gPkRyjNt96nG6ZE/wEh4+3cdY27DPdTLh+TPlTp2DYo94OA==}
+  '@vanilla-extract/compiler@0.2.3':
+    resolution: {integrity: sha512-SFEDLbvd5rhpjhrLp9BtvvVNHNxWupiUht/yrsHQ7xfkpEn4xg45gbfma7aX9fsOpi82ebqFmowHd/g6jHDQnA==}
 
   '@vanilla-extract/css-utils@0.1.4':
     resolution: {integrity: sha512-3WRxMGa/VQaL32jZqRUpnnoVFSws5iPIUpQr+XlT4jXhtMeKYcA20rFK2k2Amkg04sqrO84A8hNMeABWZQesEg==}
@@ -3387,8 +3383,8 @@ packages:
   '@vanilla-extract/dynamic@2.1.3':
     resolution: {integrity: sha512-CIqcV2oznXQw731KoN2cz+OMGT3+edwtOTCavzsSyIqVDZEkIYmm/0SXwUTyw3DgDzxDkTNmezJUcjsZ+kHNEg==}
 
-  '@vanilla-extract/integration@8.0.2':
-    resolution: {integrity: sha512-w9OvWwsYkqyuyHf9NLnOJ8ap0FGTy2pAeWftgxAEkKE3tF1aYeyEtYRHKxfVH6JRgi8JIeQqELHGMSwz+BxwiA==}
+  '@vanilla-extract/integration@8.0.4':
+    resolution: {integrity: sha512-cmOb7tR+g3ulKvFtSbmdw3YUyIS1d7MQqN+FcbwNhdieyno5xzUyfDCMjeWJhmCSMvZ6WlinkrOkgs6SHB+FRg==}
 
   '@vanilla-extract/jest-transform@1.1.15':
     resolution: {integrity: sha512-pMEE+2qUKdZoGwdYitL5fGDnoWZoMOXNWrv53VMXSjM/YXQ33RgjFcOD0i0H8g4kMqgjJnQor97avUO8AGLbgw==}
@@ -3401,8 +3397,8 @@ packages:
     peerDependencies:
       '@vanilla-extract/css': ^1.0.0
 
-  '@vanilla-extract/vite-plugin@5.0.2':
-    resolution: {integrity: sha512-R2yFqeZm6/Z+uZp1teldPHM74ihOjCYvu9ST05mezYVM/g40Pyyz6BDrWY6txNAtuRUQIg6q3Ev66FB9rD2l7w==}
+  '@vanilla-extract/vite-plugin@5.0.7':
+    resolution: {integrity: sha512-UyUma9HEl2qHl0CFlTwPKU7SkyuOwNQOgLT1yMShjqiQqg8k+9oma2Z5GigGtEUhUDizCAxeR4b4bP9KAviDdQ==}
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
 
@@ -10004,8 +10000,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/runtime@7.27.1': {}
-
   '@babel/runtime@7.27.6': {}
 
   '@babel/template@7.27.2':
@@ -10623,7 +10617,7 @@ snapshots:
 
   '@loadable/component@5.16.4(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.27.1
+      '@babel/runtime': 7.27.6
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
       react-is: 16.13.1
@@ -11213,7 +11207,7 @@ snapshots:
   '@testing-library/dom@9.3.4':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/runtime': 7.27.1
+      '@babel/runtime': 7.27.6
       '@types/aria-query': 5.0.4
       aria-query: 5.1.3
       chalk: 4.1.2
@@ -11223,7 +11217,7 @@ snapshots:
 
   '@testing-library/react@14.3.1(@types/react@18.3.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.27.1
+      '@babel/runtime': 7.27.6
       '@testing-library/dom': 9.3.4
       '@types/react-dom': 18.3.7(@types/react@18.3.21)
       react: 18.3.1
@@ -11699,16 +11693,16 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.7.2':
     optional: true
 
-  '@vanilla-extract/babel-plugin-debug-ids@1.2.0':
+  '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
     dependencies:
       '@babel/core': 7.27.1
     transitivePeerDependencies:
       - supports-color
 
-  '@vanilla-extract/compiler@0.1.3(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)':
+  '@vanilla-extract/compiler@0.2.3(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)':
     dependencies:
       '@vanilla-extract/css': 1.17.4(babel-plugin-macros@3.1.0)
-      '@vanilla-extract/integration': 8.0.2(babel-plugin-macros@3.1.0)
+      '@vanilla-extract/integration': 8.0.4(babel-plugin-macros@3.1.0)
       vite: 6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
       vite-node: 3.2.3(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
     transitivePeerDependencies:
@@ -11749,11 +11743,11 @@ snapshots:
     dependencies:
       '@vanilla-extract/private': 1.0.9
 
-  '@vanilla-extract/integration@8.0.2(babel-plugin-macros@3.1.0)':
+  '@vanilla-extract/integration@8.0.4(babel-plugin-macros@3.1.0)':
     dependencies:
       '@babel/core': 7.27.1
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.27.1)
-      '@vanilla-extract/babel-plugin-debug-ids': 1.2.0
+      '@vanilla-extract/babel-plugin-debug-ids': 1.2.2
       '@vanilla-extract/css': 1.17.4(babel-plugin-macros@3.1.0)
       dedent: 1.6.0(babel-plugin-macros@3.1.0)
       esbuild: 0.25.4
@@ -11767,7 +11761,7 @@ snapshots:
 
   '@vanilla-extract/jest-transform@1.1.15(babel-plugin-macros@3.1.0)':
     dependencies:
-      '@vanilla-extract/integration': 8.0.2(babel-plugin-macros@3.1.0)
+      '@vanilla-extract/integration': 8.0.4(babel-plugin-macros@3.1.0)
       esbuild: 0.25.4
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -11779,10 +11773,10 @@ snapshots:
     dependencies:
       '@vanilla-extract/css': 1.17.4(babel-plugin-macros@3.1.0)
 
-  '@vanilla-extract/vite-plugin@5.0.2(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)':
+  '@vanilla-extract/vite-plugin@5.0.7(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(vite@6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1))(yaml@2.7.1)':
     dependencies:
-      '@vanilla-extract/compiler': 0.1.3(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
-      '@vanilla-extract/integration': 8.0.2(babel-plugin-macros@3.1.0)
+      '@vanilla-extract/compiler': 0.2.3(@types/node@18.19.100)(babel-plugin-macros@3.1.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
+      '@vanilla-extract/integration': 8.0.4(babel-plugin-macros@3.1.0)
       vite: 6.3.5(@types/node@18.19.100)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.4)(yaml@2.7.1)
     transitivePeerDependencies:
       - '@types/node'
@@ -11801,7 +11795,7 @@ snapshots:
 
   '@vanilla-extract/webpack-plugin@2.3.19(babel-plugin-macros@3.1.0)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.25.4))':
     dependencies:
-      '@vanilla-extract/integration': 8.0.2(babel-plugin-macros@3.1.0)
+      '@vanilla-extract/integration': 8.0.4(babel-plugin-macros@3.1.0)
       debug: 4.4.1
       loader-utils: 2.0.4
       picocolors: 1.1.1
@@ -12363,7 +12357,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.27.1
+      '@babel/runtime': 7.27.6
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
@@ -13293,7 +13287,7 @@ snapshots:
 
   didyoumean2@7.0.4:
     dependencies:
-      '@babel/runtime': 7.27.1
+      '@babel/runtime': 7.27.6
       fastest-levenshtein: 1.0.16
       lodash.deburr: 4.1.0
 

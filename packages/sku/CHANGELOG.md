@@ -1,5 +1,20 @@
 # sku
 
+## 14.6.0
+
+### Minor Changes
+
+- - Change `__unsafeDangerouslySetViteConfig` to `__UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig` to align with the existing naming convention. ([#1286](https://github.com/seek-oss/sku/pull/1286))
+  - Add `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` to the `SkuConfig` type. This is an array of cjs import paths that have both a default and named exports. This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+### Patch Changes
+
+- Update `@vanilla-extract/vite-plugin` dependency to `^5.0.7` to a fix a bug causing the static render to fail when executing files with singleton variables such as React context ([#1289](https://github.com/seek-oss/sku/pull/1289))
+
+- `start`: Properly reuses Chromium tabs when starting a server. ([#1288](https://github.com/seek-oss/sku/pull/1288))
+
+  Fixes an issue of always opening a new tab in Chromium browsers when one could be reused.
+
 ## 14.5.0
 
 ### Minor Changes

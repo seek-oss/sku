@@ -10,10 +10,13 @@ import { startTelemetryPlugin } from '@/services/vite/plugins/startTelemetry.js'
 import { HMRTelemetryPlugin } from '@/services/vite/plugins/HMRTelemetry.js';
 import { httpsDevServerPlugin } from '@/services/vite/plugins/httpsDevServerPlugin.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import isCI from '@/utils/isCI.js';
 
 const require = createRequire(import.meta.url);
 
 const clientEntry = require.resolve('../../entries/vite-client.js');
+
+const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 
 export const createViteSsgConfig = (skuContext: SkuContext) =>
   createSkuViteConfig(
@@ -91,6 +94,7 @@ export const createViteDevConfig = (skuContext: SkuContext) =>
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
+        open: shouldOpenTab && (skuContext.initialPath || true),
       },
     },
     skuContext,
@@ -113,6 +117,7 @@ export const createViteDevSsrConfig = (skuContext: SkuContext) =>
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
+        open: shouldOpenTab && (skuContext.initialPath || true),
       },
       plugins: [httpsDevServerPlugin(skuContext)],
       appType: 'custom',

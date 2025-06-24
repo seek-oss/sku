@@ -26,10 +26,11 @@ describe('suspense', () => {
       const args: string[] = [];
 
       const url = `http://localhost:${port}`;
-      if (bundler === 'vite')
+      if (bundler === 'vite') {
         args.push(
           ...['--experimental-bundler', '--config', 'sku.config.vite.js'],
         );
+      }
       describe('build and serve', () => {
         const { cancel, signal } = createCancelSignal();
 

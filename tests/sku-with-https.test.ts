@@ -27,10 +27,11 @@ describe.sequential('sku-with-https', () => {
     async (bundler) => {
       const port = await getPort();
       const args = ['--strict-port', `--port=${port}`];
-      if (bundler === 'vite')
+      if (bundler === 'vite') {
         args.push(
           ...['--experimental-bundler', '--config', 'sku.config.vite.mjs'],
         );
+      }
       describe('start', () => {
         const { cancel, signal } = createCancelSignal();
         const url = `https://localhost:${port}`;

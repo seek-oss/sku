@@ -17,20 +17,20 @@ export type PreloadableComponent<T extends ComponentType<any>> = T & {
 };
 
 export function loadable<T extends ComponentType<any>>(
-  factory: () => Promise<{ default: T } & Record<string, T>>,
+  factory: () => Promise<{ default?: T } & Record<string, T>>,
   options?: {
     fallback?: NonNullable<ReactNode> | null;
-    resolveComponent?: (module: { default: T } & Record<string, T>) => T;
+    resolveComponent?: (module: { default?: T } & Record<string, T>) => T;
     ssr?: boolean; // Whether this is being used in SSR or SSG
   },
   moduleId: ModuleId = '', // Gets set via the plugin
 ): PreloadableComponent<T> {
   const getResolvedOrDefaultExport = (
-    module: { default: T } & Record<string, T>,
+    module: { default?: T } & Record<string, T>,
   ) =>
     options?.resolveComponent
       ? options.resolveComponent(module)
-      : module.default;
+      : (module.default as T);
 
   const lazyFactory = async () => {
     const module = await factory();

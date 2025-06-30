@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 0.1.1
+
+### Patch Changes
+
+- `loadable`: The factory type now sets `default` as optional. Not all components loaded will have a `default` export. ([#1291](https://github.com/seek-oss/sku/pull/1291))
+
 ## 0.1.0
 
 ### Minor Changes

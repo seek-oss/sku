@@ -65,7 +65,7 @@
   "homepage": "https://github.com/seek-oss/sku#readme",
   "peerDependencies": {
     "@sku-lib/vitest": "*",
-    "@storybook/react-webpack5": "^7.0.0 || ^8.0.0",
+    "@storybook/react-webpack5": "^7.0.0 || ^8.0.0 || ^9.0.0",
     "@types/react": "^18.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

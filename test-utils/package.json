@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.ts",
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
+    "@jest/globals": "^30.0.3",
     "@prettier/sync": "^0.5.2",
     "@types/css": "^0.0.38",
     "@types/diff": "^7.0.1",

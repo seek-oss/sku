@@ -1,5 +1,20 @@
 # sku
 
+## 14.7.0
+
+### Minor Changes
+
+- Add `^9.0.0` to `@storybook/react-webpack5` optional peer dependency to support Storybook v9 ([#1294](https://github.com/seek-oss/sku/pull/1294))
+
+  Storybook v9 is now available. This release contains breaking changes. Consumers that use Storybook should ensure they read [the v9 migration guide].
+
+  [the v9 migration guide]: https://storybook.js.org/docs/migration-guide
+
+### Patch Changes
+
+- Updated dependencies [[`d76bd1c`](https://github.com/seek-oss/sku/commit/d76bd1c2a6eb3e1e5ba9be3714f0fa00e4656c0a)]:
+  - @sku-lib/vite@0.1.1
+
 ## 14.6.0
 
 ### Minor Changes

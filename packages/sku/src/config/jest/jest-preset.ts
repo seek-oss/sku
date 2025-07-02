@@ -2,6 +2,7 @@ import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
 import { cwd } from '@/utils/cwd.js';
 import { getSkuContext } from '@/context/createSkuContext.js';
+import type { Config } from 'jest';
 
 const { paths, rootResolution, jestDecorator } = getSkuContext();
 
@@ -10,18 +11,11 @@ const compilePackagesRegex = paths.compilePackages
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 
-/** @type {import('jest').Config} */
 export default jestDecorator({
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
   prettierPath: fileURLToPath(import.meta.resolve('prettier')),
   modulePaths: rootResolution ? [cwd()] : undefined,
-  testMatch: [
-    // Default values, but with 'ts' + 'tsx' support
-    // (https://jestjs.io/docs/en/configuration.html#testmatch-array-string)
-    '**/__tests__/**/*.(js|ts|tsx)',
-    '**/?(*.)+(spec|test).(js|ts|tsx)',
-  ],
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
   ],
@@ -34,7 +28,9 @@ export default jestDecorator({
     '\\.css\\.ts$': fileURLToPath(
       import.meta.resolve('@vanilla-extract/jest-transform'),
     ),
-    '\\.tsx?$': fileURLToPath(import.meta.resolve('./tsBabelTransform.js')),
+    '\\.[cm]?tsx?$': fileURLToPath(
+      import.meta.resolve('./tsBabelTransform.js'),
+    ),
     '\\.[cm]?jsx?$': fileURLToPath(
       import.meta.resolve('./jsBabelTransform.js'),
     ),
@@ -48,4 +44,7 @@ export default jestDecorator({
     fileURLToPath(import.meta.resolve('jest-watch-typeahead/filename')),
     fileURLToPath(import.meta.resolve('jest-watch-typeahead/testname')),
   ],
-});
+  testEnvironmentOptions: {
+    globalsCleanup: 'on',
+  },
+}) satisfies Config;

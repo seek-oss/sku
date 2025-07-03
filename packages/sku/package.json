@@ -168,7 +168,7 @@
     "picomatch": "^3.0.1",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
-    "prettier": "~3.5.0",
+    "prettier": "~3.6.2",
     "pretty-ms": "^9.2.0",
     "prompts": "^2.4.2",
     "react-refresh": "^0.17.0",

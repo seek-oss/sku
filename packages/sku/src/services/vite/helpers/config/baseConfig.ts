@@ -15,6 +15,7 @@ import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '@/services/vite/plugins/setSsrNoExternal.js';
+import browserslistToEsbuild from '@/services/vite/helpers/browserslist-to-esbuild.js';
 const require = createRequire(import.meta.url);
 
 const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
@@ -71,6 +72,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     build: {
+      target: browserslistToEsbuild(skuContext.supportedBrowsers),
       emptyOutDir: true,
       ssrManifest: false,
       assetsDir: '',

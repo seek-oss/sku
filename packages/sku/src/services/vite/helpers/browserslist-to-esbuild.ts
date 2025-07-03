@@ -1,3 +1,4 @@
+// Copied from https://github.com/marcofugaro/browserslist-to-esbuild/blob/0875f1a4ec71f206a634ba406c3528ca5ecf04de/src/index.js
 import browserslist from 'browserslist';
 
 // convert the browserslist field in package.json to

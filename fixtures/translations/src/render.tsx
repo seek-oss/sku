@@ -16,7 +16,7 @@ export default {
       </SkuProvider>,
     ),
   provideClientContext: ({ language }): RenderContext => ({ language }),
-  renderDocument: ({ app, bodyTags, headTags }) => html/* html */ `
+  renderDocument: ({ app, bodyTags, headTags }) => html /* html */ `
     <!DOCTYPE html>
     <html>
       <head>

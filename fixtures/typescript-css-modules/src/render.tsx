@@ -12,7 +12,7 @@ const skuRender: Render = {
       </SkuProvider>,
     ),
 
-  renderDocument: ({ app, headTags, bodyTags }) => html/* html */ `
+  renderDocument: ({ app, headTags, bodyTags }) => html /* html */ `
     <!DOCTYPE html>
     <html>
       <head>

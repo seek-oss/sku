@@ -11,7 +11,7 @@ describe('updateSkuConfig', () => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
-        [skuConfigFileName]: dedent/* ts */ `
+        [skuConfigFileName]: dedent /* ts */ `
           export default {
             renderEntry: 'src/render.tsx',
             clientEntry: 'src/client.tsx',
@@ -50,7 +50,7 @@ describe('updateSkuConfig', () => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
-        [skuConfigFileName]: dedent/* ts */ `
+        [skuConfigFileName]: dedent /* ts */ `
           import type { SkuConfig } from 'sku';
 
           export default {
@@ -93,7 +93,7 @@ describe('updateSkuConfig', () => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
-        [skuConfigFileName]: dedent/* ts */ `
+        [skuConfigFileName]: dedent /* ts */ `
           import type { SkuConfig } from 'sku';
 
           const skuConfig: SkuConfig = {
@@ -140,7 +140,7 @@ describe('updateSkuConfig', () => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
-        [skuConfigFileName]: dedent/* ts */ `
+        [skuConfigFileName]: dedent /* ts */ `
           module.exports = {
             renderEntry: 'src/render.tsx',
             clientEntry: 'src/client.tsx',
@@ -179,7 +179,7 @@ describe('updateSkuConfig', () => {
       const skuConfigFileName = 'sku.config.ts';
 
       const fixture = await createFixture({
-        [skuConfigFileName]: dedent/* ts */ `
+        [skuConfigFileName]: dedent /* ts */ `
           const skuConfig = {
             renderEntry: 'src/render.tsx',
             clientEntry: 'src/client.tsx',

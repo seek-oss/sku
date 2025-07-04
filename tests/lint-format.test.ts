@@ -21,7 +21,7 @@ const srcDirectory = path.join(appDirectory, 'src');
 const testFile = (fileName: string) => path.join(srcDirectory, fileName);
 
 const filesToLint: Record<string, string> = {
-  'utils.test.ts': dedent/* ts */ `
+  'utils.test.ts': dedent /* ts */ `
     console.log('foo');
 
     it.only('should test something', () => {
@@ -29,10 +29,10 @@ const filesToLint: Record<string, string> = {
 
       expect(foo).toBe(true);
     });\n`,
-  'typescriptFile.ts': dedent/* ts */ `
+  'typescriptFile.ts': dedent /* ts */ `
     const foo: number = 'a string';
   `,
-  'unformattedFile1.js': dedent/* js */ `
+  'unformattedFile1.js': dedent /* js */ `
     import { something } from "with-double-quotes";
 
       const indented = 'indented';
@@ -47,7 +47,7 @@ const filesToLint: Record<string, string> = {
 };
 
 const filesToFormat: Record<string, string> = {
-  'importOrder1.ts': dedent/* ts */ `
+  'importOrder1.ts': dedent /* ts */ `
     import './reset'; // side-effect imports should stay put
 
     import LocalComponent from './LocalComponent'; // sibling
@@ -59,7 +59,7 @@ const filesToFormat: Record<string, string> = {
     import path from 'path'; //  built-in
     import utils from 'src/utils'; // internal
   `,
-  'importOrder2.ts': dedent/* ts */ `
+  'importOrder2.ts': dedent /* ts */ `
     import aStyle from './a.css';
     import bStyle from './b.css';
     import cStyle from '../c.css';
@@ -68,12 +68,12 @@ const filesToFormat: Record<string, string> = {
     import a from './a';
     import c from '../c';
   `,
-  'fixableLintError.ts': dedent/* ts */ `
+  'fixableLintError.ts': dedent /* ts */ `
     const foo = () => {
       return 'foo';
     };
   `,
-  'unformattedFile2.ts': dedent/* ts */ `
+  'unformattedFile2.ts': dedent /* ts */ `
     import { something } from "with-double-quotes";
 
       const indented = 'indented';

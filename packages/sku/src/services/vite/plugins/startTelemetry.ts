@@ -46,7 +46,7 @@ export const startTelemetryPlugin = ({
   },
 });
 
-const skuPageLoadTelemetryClient = js/* js */ `
+const skuPageLoadTelemetryClient = js /* js */ `
   addEventListener("load", () => {
     if (import.meta.hot) {
       import.meta.hot.send('${initialPageLoadEventName}');

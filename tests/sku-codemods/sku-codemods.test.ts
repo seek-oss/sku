@@ -7,40 +7,40 @@ import { createFixture } from 'fs-fixture';
 const filesToTest = [
   {
     filename: 'customNameFixture.tsx',
-    input: dedent/* typescript */ `import customLoadable from "sku/@loadable/component";
+    input: dedent /* typescript */ `import customLoadable from "sku/@loadable/component";
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable as customLoadable } from '@sku-lib/vite/loadable';
+    output: dedent /* typescript */ `import { loadable as customLoadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
   },
   {
     filename: 'loadableNameFixture.tsx',
-    input: dedent/* typescript */ `import loadable from 'sku/@loadable/component';
+    input: dedent /* typescript */ `import loadable from 'sku/@loadable/component';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
-    output: dedent/* typescript */ `import { loadable } from '@sku-lib/vite/loadable';
+    output: dedent /* typescript */ `import { loadable } from '@sku-lib/vite/loadable';
 
         const LoadableComponent = loadable(() => import('./MyComponent'));`,
   },
   {
     filename: 'onlyNamedImportFixture.tsx',
-    input: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+    input: dedent /* typescript */ `import { loadableReady } from 'sku/@loadable/component';
 
         loadableReady();`,
-    output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+    output: dedent /* typescript */ `import { loadableReady } from 'sku/@loadable/component';
 
         loadableReady();`,
   },
   {
     filename: 'mixedImportFixture.tsx',
-    input: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+    input: dedent /* typescript */ `import { loadableReady } from 'sku/@loadable/component';
         import loadable from 'sku/@loadable/component';
 
         loadable();
 
         loadableReady();`,
-    output: dedent/* typescript */ `import { loadableReady } from 'sku/@loadable/component';
+    output: dedent /* typescript */ `import { loadableReady } from 'sku/@loadable/component';
         import { loadable } from '@sku-lib/vite/loadable';
 
         loadable();

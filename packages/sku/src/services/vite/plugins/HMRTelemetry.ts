@@ -58,7 +58,7 @@ export function HMRTelemetryPlugin({
   };
 }
 
-const skuHmrTelemetryClient = js/* js */ `
+const skuHmrTelemetryClient = js /* js */ `
   if (import.meta.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => {
       performance.mark("vite-hmr");

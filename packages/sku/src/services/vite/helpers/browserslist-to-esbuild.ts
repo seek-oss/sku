@@ -4,7 +4,7 @@ import browserslist from 'browserslist';
 // convert the browserslist field in package.json to
 // esbuild compatible array of browsers
 export default function browserslistToEsbuild(
-  browserslistConfig: string[] | undefined = undefined,
+  browserslistConfig: string[] | string | undefined = undefined,
   options = {},
 ) {
   let internalBrowserslistConfig = browserslistConfig;

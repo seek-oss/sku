@@ -6,7 +6,7 @@ import App from './App';
 export default {
   renderApp: () => renderToString(<App />),
 
-  renderDocument: ({ app, bodyTags, headTags }) => html/* html */ `
+  renderDocument: ({ app, bodyTags, headTags }) => html /* html */ `
     <!DOCTYPE html>
     <html>
       <head>

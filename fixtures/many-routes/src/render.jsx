@@ -20,7 +20,7 @@ export default {
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => {
-    return html/* html */ `
+    return html /* html */ `
       <!DOCTYPE html>
       <html>
         <head>

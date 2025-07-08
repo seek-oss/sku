@@ -248,7 +248,9 @@ Type: `Array<string>`
 
 Default: `['localhost']`
 
-An array of custom hosts the app can be served off when running `sku start`. You must have configured your hosts file to point to localhost as well.
+An array of custom hosts the app can be served off when running `sku start` or `sku start-ssr`.
+Your [hosts file](<https://en.wikipedia.org/wiki/Hosts_(file)>) must be configured to point these hosts to `localhost`.
+This can be done automatically by running [`sudo sku setup-hosts`](./docs/cli.md?id=setup-hosts).
 
 ## httpsDevServer
 
@@ -413,17 +415,25 @@ Point to a JS file that will run before your tests to setup the testing environm
 
 ## sites
 
-**Only for static apps**
-
 Type: `Array<string | { name: string, host: string, languages: Array<string>, routes: Array<string> }>`
 
 Default: `[]`
 
-An array of sites the app supports. These usually correspond to each domain the app is hosted under.
+An array of sites the app supports.
+These usually correspond to each domain the app is hosted under.
 
-Can be an array of site names, or objects with a site name and corresponding host. See [Multi site](./docs/multi-site#switching-site-by-host) for more info.
+Can be an array of site names, or objects with a site name and corresponding host.
+See [Multi site](./docs/multi-site#switching-site-by-host) for more info.
 
-Can be used to limit the languages rendered for a specific site. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
+**Static apps**
+
+Can be used to limit the languages rendered for a specific site.
+Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
+
+**SSR apps**
+
+Only affects which hosts the development server responds to.
+For simplicitly, it's recommended to configure [`hosts`](./docs/configuration?id=hosts) instead.
 
 ## skipPackageCompatibilityCompilation
 

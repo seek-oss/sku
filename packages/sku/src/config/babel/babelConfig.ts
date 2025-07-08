@@ -7,12 +7,21 @@ const require = createRequire(import.meta.url);
 
 type BabelConfigOptions = {
   target: 'node' | 'browser' | 'jest';
-  lang: 'js' | 'ts';
-  browserslist?: string[];
+  lang?: 'js' | 'ts';
+  browserslist?: string | string[] | Record<string, string>;
   displayNamesProd?: boolean;
   removeAssertionsInProduction?: boolean;
   hot?: boolean;
   rootResolution?: boolean;
+};
+
+export type SkuBabelConfig = {
+  babelrc: boolean;
+  sourceType: 'unambiguous' | 'module';
+  cacheDirectory?: boolean;
+  cacheCompression?: boolean;
+  presets: PluginItem[];
+  plugins: PluginItem[];
 };
 
 export default ({
@@ -23,7 +32,7 @@ export default ({
   removeAssertionsInProduction = true,
   hot = false,
   rootResolution = false,
-}: BabelConfigOptions) => {
+}: BabelConfigOptions): SkuBabelConfig => {
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
@@ -106,7 +115,7 @@ export default ({
         development: !isProductionBuild,
       },
     ],
-  ].filter(Boolean);
+  ].filter((preset): preset is NonNullable<typeof preset> => Boolean(preset));
 
   return {
     babelrc: false,

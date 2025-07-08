@@ -1,5 +1,58 @@
 # sku
 
+## 14.8.0
+
+### Minor Changes
+
+- deps: Jest 30 ([#1295](https://github.com/seek-oss/sku/pull/1295))
+
+  This major Jest release includes breaking changes. See the [Jest 30](https://jestjs.io/blog/2025/06/04/jest-30) announcement for more information.
+
+  Notable changes that may affect your tests:
+  - **JSDOM no longer allows mocking `window.location`**: If your tests mock `window.location`, or you use the [`jest-location-mock`](https://www.npmjs.com/package/jest-location-mock) package, you may need to [patch jsdom](https://jestjs.io/blog/2025/06/04/jest-30#known-issues). It's also worth considering whether you can avoid mocking `window.location` entirely by using `react-router`'s [`MemoryRouter`](https://reactrouter.com/6.30.1/routers/picking-a-router#testing) or [`createRoutesStub`](https://reactrouter.com/start/framework/testing).
+  - **Updated expect aliases**: Expect aliases have been removed which may affect your test assertions. Please run `sku format` to update your test files automatically if you are still using these old aliases.
+  - **Updated snapshot printing**: Jest have updated the way snapshots are printed, which may require you to update your snapshot tests.
+
+  In this release, we have enabled the [global cleanup](https://jestjs.io/blog/2025/06/04/jest-30#globals-cleanup-between-test-files) feature by default. This automatically cleans up global state between test files, helping to prevent memory leaks and ensure test isolation.
+
+  If you need to revert to the previous behavior, you can configure the `globalsCleanup` option via `dangerouslySetJestConfig` in your `sku.config.ts` file:
+
+  ```ts
+  export default {
+    dangerouslySetJestConfig: (config) => ({
+      ...config,
+      testEnvironmentOptions: {
+        globalsCleanup: 'soft', // Jest default or `'off'` to disable completely
+      },
+    }),
+  };
+  ```
+
+### Patch Changes
+
+- Modify `webpack-dev-server` dependency range to `<=5.2.0` ([#1293](https://github.com/seek-oss/sku/pull/1293))
+
+  [`webpack-dev-server@5.2.1`][wds release] introduced a CORS change that can break local development in some cases. Although 5.2.2 allegedly addresses this issue, it did not fix the issue in `sku`. Until a proper fix is available, we are pinning the version to `<=5.2.0` to prevent the dependency from being updated during lockfile maintenance.
+
+  [wds release]: https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.1
+
+- Update `prettier` dependency to `~3.6.2` ([#1297](https://github.com/seek-oss/sku/pull/1297))
+
+## 14.7.0
+
+### Minor Changes
+
+- Add `^9.0.0` to `@storybook/react-webpack5` optional peer dependency to support Storybook v9 ([#1294](https://github.com/seek-oss/sku/pull/1294))
+
+  Storybook v9 is now available. This release contains breaking changes. Consumers that use Storybook should ensure they read [the v9 migration guide].
+
+  [the v9 migration guide]: https://storybook.js.org/docs/migration-guide
+
+### Patch Changes
+
+- Updated dependencies [[`d76bd1c`](https://github.com/seek-oss/sku/commit/d76bd1c2a6eb3e1e5ba9be3714f0fa00e4656c0a)]:
+  - @sku-lib/vite@0.1.1
+
 ## 14.6.0
 
 ### Minor Changes
@@ -135,7 +188,6 @@ Loadable
 - `sku init`: Update template to use a named export for `App` ([#1262](https://github.com/seek-oss/sku/pull/1262))
 
 - `deps`: Update `webpack`-related dependencies ([#1259](https://github.com/seek-oss/sku/pull/1259))
-
   - `@pmmmwh/react-refresh-webpack-plugin`: `^0.5.15` -> `^0.6.0`
   - `babel-loader`: `^9.1.2` -> `^10.0.0`
   - `css-loader`: `^6.7.1` -> `^7.1.2`
@@ -298,7 +350,6 @@ Loadable
   The following option flags are now available in their respective scope
 
   #### Global options
-
   - the `-e, --environment` option
   - the `-c, --config` option
   - the `-d, --debug` option
@@ -306,7 +357,6 @@ Loadable
   - **new:** the `-v, --version` option
 
   #### Scoped options
-
   - the `build`, `build-ssr`, `start`, and `start-ssr` commands have the following options
     - `-s, --stats` option
   - the `serve` command now has the following options
@@ -564,7 +614,6 @@ Loadable
 
   `start` and `start-ssr` scripts would previously only reuse an existing tab in Google Chrome.
   This change adds support for the following Chromium browsers:
-
   - Google Chrome,
   - Google Chrome Canary,
   - Microsoft Edge,
@@ -574,7 +623,6 @@ Loadable
   - Arc.
 
   A tab will be reused if:
-
   - The OS is macOS,
   - The user's default browser is a supported Chromium browser,
   - The user has an existing tab open in a supported Chromium browser with the exact same URL.
@@ -690,7 +738,6 @@ Loadable
   #### Update your `sku` config
 
   The following `sku` configuration options have been removed:
-
   - `storybookAddons`
   - `storybookPort`
   - `storybookStoryStore`
@@ -1610,7 +1657,6 @@ Loadable
   We've chosen to support Node.js versions from v18.12 onwards as this version was the first [Node.js 18 LTS release][node 18.12 release].
 
   Consider upgrading the Node.js version for your project across:
-
   - `.nvmrc`
   - `package.json#/engines/node`
   - `@types/node` package version
@@ -1834,7 +1880,6 @@ Loadable
 
   **NOTE**: These settings disable critical functionality of sku, so you likely
   don't want to use them unless you know what you're doing
-
   - `skuSkipConfigure`: Skip generation of config files. E.g. .prettierrc, tsconfig.json, etc.
   - `skuSkipValidatePeerDeps`: Skip checking for multiple copies of the same package. You likely want to try and fix the warnings found by this check rather than disabling it.
 
@@ -1855,7 +1900,6 @@ Loadable
 - **deps**: `@pmmmwh/react-refresh-webpack-plugin@0.5.8` ([#716](https://github.com/seek-oss/sku/pull/716))
 
 - Update to eslint-config-seek v10.1.1. Read the following release notes for all the changes: ([#718](https://github.com/seek-oss/sku/pull/718))
-
   - [v10.1.0] brings improved TypeScript support
   - [v10.1.1] re-enables the `no-undef` rule for JavaScript files
 
@@ -1875,7 +1919,6 @@ Loadable
 - Update to eslint-config-seek v10 ([#709](https://github.com/seek-oss/sku/pull/709))
 
   This update involves a few major version jumps, so be sure to read the following release notes for all the breaking changes:
-
   - [v8.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v8.0.0)
   - [v9.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v9.0.0)
   - [v10.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v10.0.0)
@@ -1885,7 +1928,6 @@ Loadable
 - Upgrade from jest v27 to v29 ([#709](https://github.com/seek-oss/sku/pull/709))
 
   Please take a look at the following upgrade guides as there may be breaking changes that affect your tests:
-
   - [v27 to v28 upgrade guide](https://jestjs.io/docs/28.x/upgrading-to-jest28)
   - [v28 to v29 upgrade guide](https://jestjs.io/docs/upgrading-to-jest29)
 
@@ -2253,7 +2295,6 @@ Loadable
   While there is no breaking change from a sku perspective, there are many underlying changes that may require attention.
 
   Things to validate before merging:
-
   - If you use `dangerouslySetWebpackConfig`, check it's working against webpack 5
   - Static assets are working correctly (e.g. images, fonts, etc)
   - Both start and build scripts are outputting a working application
@@ -2556,7 +2597,6 @@ Loadable
 - Add multi-language support for server rendered applications ([#556](https://github.com/seek-oss/sku/pull/556))
 
 - Upgrade Vocab to v0.0.8 with new .vocab folder ([#558](https://github.com/seek-oss/sku/pull/558))
-
   - `useTranslation` renamed to `useTranslations`
   - Support for server-rendered apps with new `addLanguageChunk` render parameter
   - Support for custom format locales in `<VocabProvider>`
@@ -2703,7 +2743,6 @@ Loadable
   **React fast-refresh**
 
   For fast-refresh to work there are a few gotchas to watch out. For components to succesfully hot reload, they must:
-
   - Have a display name. Avoid using `export default` with anonymous functions.
   - The file must only export React components (excluding types as they are not runtime exports)
 
@@ -2841,7 +2880,6 @@ Loadable
 - Add sku serve command ([#487](https://github.com/seek-oss/sku/pull/487))
 
   The `sku serve` command adds the abilty to view the output of `sku build` without deploying to an environment. This is helpful for:
-
   - Debugging production build only issues
   - Running integration tests
   - Viewing the app on legacy browsers (that require `sku build` only features)

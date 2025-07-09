@@ -7,3 +7,7 @@ packages:
   - 'packages/*'
 
 hoistWorkspacePackages: false
+linkWorkspacePackages: true
+preferWorkspacePackages: true
+publicHoistPattern:
+  - '@babel/*'

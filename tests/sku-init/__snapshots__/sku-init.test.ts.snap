@@ -95,6 +95,13 @@ exports[`sku init > should create package.json 1`] = `
     "sku": "VERSION_IGNORED",
   },
   "name": "new-project",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sku",
+      "@swc/core",
+      "esbuild",
+    ],
+  },
   "private": true,
   "scripts": {
     "build": "sku build",

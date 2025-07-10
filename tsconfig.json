@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
+    "module": "node18",
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "jsx": "react-jsx",

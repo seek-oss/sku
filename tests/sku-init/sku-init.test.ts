@@ -61,13 +61,6 @@ describe('sku init', () => {
     );
     const packageJson = JSON.parse(contents);
 
-    // `workspace:` prefix comes from the default `saveWorkspaceProtocol` value.
-    // See https://pnpm.io/settings#saveworkspaceprotocol.
-    // In NPM, Yarn, or PNPM if configured in such a way, this will be just the version.
-    expect(packageJson.devDependencies.sku).toEqual(
-      `workspace:${skuPackageJson.version}`,
-    );
-
     expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
   });
 

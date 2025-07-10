@@ -7,6 +7,7 @@ import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
 import semver from 'semver';
+import skuPackageJson from 'sku/package.json' with { type: 'json' };
 
 import type { SkuContext } from '@/context/createSkuContext.js';
 
@@ -216,7 +217,9 @@ export const initAction = async (
 
   const devDeps = [
     '@vanilla-extract/css',
-    'sku',
+    // Specify an exact version so running `sku init` with a snapshot installs the snapshot version
+    // instead of the latest version.
+    `sku@${skuPackageJson.version}`,
     '@types/react@^18.3.12',
     '@types/react-dom@^18.3.1',
   ];

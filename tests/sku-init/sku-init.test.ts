@@ -3,6 +3,7 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
+import skuPackageJson from '../../packages/sku/package.json' with { type: 'json' };
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -58,8 +59,16 @@ describe('sku init', () => {
       path.join(fixtureDirectory, projectName, 'package.json'),
       'utf-8',
     );
+    const packageJson = JSON.parse(contents);
 
-    expect(replaceDependencyVersions(JSON.parse(contents))).toMatchSnapshot();
+    // `workspace:` prefix comes from the default `saveWorkspaceProtocol` value.
+    // See https://pnpm.io/settings#saveworkspaceprotocol.
+    // In NPM, Yarn, or PNPM if configured in such a way, this will be just the version.
+    expect(packageJson.devDependencies.sku).toEqual(
+      `workspace:${skuPackageJson.version}`,
+    );
+
+    expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
   });
 
   it.for([

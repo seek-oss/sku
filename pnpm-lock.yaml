@@ -1235,6 +1235,9 @@ importers:
       '@sku-fixtures/styling':
         specifier: workspace:*
         version: link:../fixtures/styling
+      '@sku-fixtures/suspense':
+        specifier: workspace:*
+        version: link:../fixtures/suspense
       '@sku-fixtures/translations':
         specifier: workspace:*
         version: link:../fixtures/translations

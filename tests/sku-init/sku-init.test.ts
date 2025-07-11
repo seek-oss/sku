@@ -3,7 +3,6 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { runSkuScriptInDir } from '@sku-private/test-utils';
-import skuPackageJson from '../../packages/sku/package.json' with { type: 'json' };
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 

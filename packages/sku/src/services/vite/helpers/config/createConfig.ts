@@ -18,7 +18,7 @@ const clientEntry = require.resolve('../../entries/vite-client.js');
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 
-export const createViteSsgConfig = (skuContext: SkuContext) =>
+export const createServerBuildConfig = (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {
@@ -35,21 +35,7 @@ export const createViteSsgConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteSsrConfig = (skuContext: SkuContext) =>
-  createSkuViteConfig(
-    {
-      build: {
-        ssr: true,
-        outDir: outDir.ssr,
-        rollupOptions: {
-          input: skuContext.paths.serverEntry,
-        },
-      },
-    },
-    skuContext,
-  );
-
-export const createViteClientConfig = (skuContext: SkuContext) =>
+export const createClientBuildConfig = (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       build: {
@@ -64,7 +50,7 @@ export const createViteClientConfig = (skuContext: SkuContext) =>
     skuContext,
   );
 
-export const createViteDevConfig = (skuContext: SkuContext) =>
+export const createStartConfig = (skuContext: SkuContext) =>
   createSkuViteConfig(
     {
       base: '/',
@@ -96,32 +82,6 @@ export const createViteDevConfig = (skuContext: SkuContext) =>
         ),
         open: shouldOpenTab && (skuContext.initialPath || true),
       },
-    },
-    skuContext,
-  );
-
-export const createViteDevSsrConfig = (skuContext: SkuContext) =>
-  createSkuViteConfig(
-    {
-      build: {
-        ssr: true,
-        outDir: outDir.ssr,
-        rollupOptions: {
-          input: skuContext.paths.serverEntry,
-        },
-      },
-      server: {
-        host: 'localhost',
-        middlewareMode: true,
-        hmr: true,
-        allowedHosts: getAppHosts(skuContext).filter(
-          (host) => typeof host === 'string',
-        ),
-        open: shouldOpenTab && (skuContext.initialPath || true),
-      },
-      plugins: [httpsDevServerPlugin(skuContext)],
-      appType: 'custom',
-      base: '/',
     },
     skuContext,
   );

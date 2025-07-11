@@ -23,6 +23,11 @@ export const buildSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
+  if (skuContext.bundler === 'vite') {
+    throw new Error(
+      'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',
+    );
+  }
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
   const { port, cspEnabled } = skuContext;

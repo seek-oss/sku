@@ -1,5 +1,21 @@
 # sku
 
+## 14.9.0
+
+### Minor Changes
+
+- Explicitly deny commands unsupported by the vite bundler ([#1305](https://github.com/seek-oss/sku/pull/1305))
+
+  While experimental support with Vite is available, some APIs are still under development. Static site generation is our primary focus for the Vite bundler at this time, so SSR commands with the experimental Vite bundler flags will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
+
+- `sku: vite` enable `supportedBrowsers` when running `sku` with the `vite` bundler. ([#1298](https://github.com/seek-oss/sku/pull/1298))
+
+### Patch Changes
+
+- `sku init`: Specify an exact version of `sku` when isntalling dependencies ([#1302](https://github.com/seek-oss/sku/pull/1302))
+
+  This fixes an issue where running `sku init` with a snapshot version of `sku` would install the latest version of `sku` instead of the specified version.
+
 ## 14.8.0
 
 ### Minor Changes

@@ -12,7 +12,6 @@ linkWorkspacePackages: true
 
 onlyBuiltDependencies:
   - '@swc/core'
-  - core-js-pure
   - docsify
   - esbuild
   - puppeteer

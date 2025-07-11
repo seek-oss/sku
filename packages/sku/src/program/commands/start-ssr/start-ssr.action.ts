@@ -9,12 +9,13 @@ export const startSsrAction = async ({
   skuContext: SkuContext;
 }) => {
   if (skuContext.bundler === 'vite') {
-    const { viteStartSsrHandler } = await import('./vite-start-ssr-handler.js');
-    viteStartSsrHandler(skuContext);
-  } else {
-    const { webpackStartSsrHandler } = await import(
-      './webpack-start-ssr-handler.js'
+    throw new Error(
+      'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',
     );
-    webpackStartSsrHandler({ stats, skuContext });
   }
+
+  const { webpackStartSsrHandler } = await import(
+    './webpack-start-ssr-handler.js'
+  );
+  webpackStartSsrHandler({ stats, skuContext });
 };

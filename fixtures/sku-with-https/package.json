@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "sku start",
-    "start:vite": "sku start --experimental-bundler --config sku.config.vite.mjs"
+    "start:vite": "sku start --experimental-bundler --config sku.config.vite.mjs",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

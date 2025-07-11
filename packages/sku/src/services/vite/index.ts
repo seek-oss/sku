@@ -1,11 +1,10 @@
 import { build, createServer } from 'vite';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
-import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import {
-  createViteClientConfig,
-  createViteDevConfig,
-  createViteSsgConfig,
+  createClientBuildConfig,
+  createServerBuildConfig,
+  createStartConfig,
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
@@ -14,13 +13,9 @@ import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerend
 import allocatePort from '@/utils/allocatePort.js';
 
 export const viteService = {
-  buildSsr: async (skuContext: SkuContext) => {
-    // TODO: This isn't fully implemented?
-    await build(createViteClientConfig(skuContext));
-  },
   build: async (skuContext: SkuContext) => {
-    await build(createViteClientConfig(skuContext));
-    await build(createViteSsgConfig(skuContext));
+    await build(createClientBuildConfig(skuContext));
+    await build(createServerBuildConfig(skuContext));
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
@@ -28,8 +23,7 @@ export const viteService = {
     await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
   },
   start: async (skuContext: SkuContext) => {
-    // TODO Get this to be backwards compat with webpack
-    const server = await createServer(createViteDevConfig(skuContext));
+    const server = await createServer(createStartConfig(skuContext));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,
@@ -43,16 +37,6 @@ export const viteService = {
     printUrls(hosts, skuContext);
 
     server.bindCLIShortcuts({ print: true });
-  },
-  startSsr: async (skuContext: SkuContext) => {
-    process.env.NODE_ENV = 'development';
-    const server = await createViteServerSsr({
-      skuContext,
-    });
-    server.listen(skuContext.port.server);
-
-    const hosts = getAppHosts(skuContext);
-    printUrls(hosts, skuContext);
   },
 };
 

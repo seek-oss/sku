@@ -1,13 +1,24 @@
 packages:
-  - 'docs'
-  - 'fixtures/*'
-  - 'tests'
-  - 'test-utils'
-  - 'vite-test-utils'
-  - 'packages/*'
+  - docs
+  - fixtures/*
+  - tests
+  - test-utils
+  - vite-test-utils
+  - packages/*
 
 hoistWorkspacePackages: false
+
 linkWorkspacePackages: true
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - core-js-pure
+  - docsify
+  - esbuild
+  - puppeteer
+  - unrs-resolver
+
 preferWorkspacePackages: true
+
 publicHoistPattern:
   - '@babel/*'

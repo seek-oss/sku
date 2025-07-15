@@ -4,6 +4,13 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export const TEST_TIMEOUT = 50_000;
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
+/** Tests that don't need to run in the puppeteer environment */
+const skuNodeTests = [
+  'tests/sku-test.test.ts',
+  'tests/source-maps.test.ts',
+  'tests/configure.test.ts',
+];
+
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
@@ -27,7 +34,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'sku',
-          include: [`packages/sku/${defaultInclude}`],
+          include: [`packages/sku/${defaultInclude}`, ...skuNodeTests],
           sequence: {
             groupOrder: 0,
           },
@@ -40,7 +47,7 @@ export default defineConfig({
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
           include: [`tests/${defaultInclude}`],
-          exclude: ['tests/sku-init/**'],
+          exclude: ['tests/sku-init/**', ...skuNodeTests],
           sequence: {
             groupOrder: 0,
           },

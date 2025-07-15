@@ -15,8 +15,8 @@ describe('braid-design-system', () => {
     ).toMatchInlineSnapshot(`
       "<style type="text/css">
                   html,body{margin:0;padding:0;background:#fff}
-                  html.sprinkles_darkMode__7n536n10,html.sprinkles_darkMode__7n536n10 body{color-scheme:dark;background:#1C2330}
-                </style><div class="seekJobs_seekJobs__1sh8lan0 typography_lightModeTone_light__ndjjoi10 typography_darkModeTone_dark__ndjjoi13"><div class="reset_base__14h31gj0 sprinkles_paddingTop_large_mobile__7n536n83 App_vanillaBox__inn18b0"></div></div>"
+                  html.sprinkles_darkMode__7n536n11,html.sprinkles_darkMode__7n536n11 body{color-scheme:dark;background:#1C2330}
+                </style><div class="seekJobs_seekJobs__1sh8lan0 typography_lightModeTone_light__ndjjoi10 typography_darkModeTone_dark__ndjjoi13"><div class="reset_base__14h31gj0 sprinkles_paddingTop_large_mobile__7n536n88 App_vanillaBox__inn18b0"></div></div>"
     `);
   });
 });

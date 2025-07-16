@@ -2,8 +2,8 @@
   "name": "@sku-fixtures/source-maps",
   "private": true,
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

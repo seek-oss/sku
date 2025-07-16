@@ -2,11 +2,11 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent-C5AHhqm_.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-DEuzHRSI.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-DAWJeKL7.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DGJnH813.css": "._1hpn1da0{color:#00f}
 ",
-  "Home-B4Am_Pmc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-Dd6BoYxB.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Home-CWaAqHuh.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home-D-106MY_.css": ".ms22la0{color:red}
 ",
   "production/au/details/$id/index.html": "<!DOCTYPE html>
@@ -26,19 +26,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-5_tId46l.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client-B4WpsK_v.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-DEuzHRSI.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-Dd6BoYxB.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-C5AHhqm_.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-DAWJeKL7.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - au<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script type="module" src="/static/place/AsyncComponent-C5AHhqm_.js" ></script>
-<script type="module" src="/static/place/Details-DEuzHRSI.js" ></script>
-<script type="module" src="/static/place/vite-client-5_tId46l.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-DAWJeKL7.js" ></script>
+<script type="module" src="/static/place/Details-Dd6BoYxB.js" ></script>
+<script type="module" src="/static/place/vite-client-B4WpsK_v.js" ></script>
   </body>
 </html>",
   "production/au/index.html": "<!DOCTYPE html>
@@ -58,16 +58,16 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-5_tId46l.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client-B4WpsK_v.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Home-B4Am_Pmc.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Home-CWaAqHuh.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - au</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"au"}</script>
-<script type="module" src="/static/place/Home-B4Am_Pmc.js" ></script>
-<script type="module" src="/static/place/vite-client-5_tId46l.js" ></script>
+<script type="module" src="/static/place/Home-CWaAqHuh.js" ></script>
+<script type="module" src="/static/place/vite-client-B4WpsK_v.js" ></script>
   </body>
 </html>",
   "production/nz/nz/details/:id/index.html": "<!DOCTYPE html>
@@ -87,19 +87,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Details-DGJnH813.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-5_tId46l.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client-B4WpsK_v.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Details-DEuzHRSI.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Details-Dd6BoYxB.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/AsyncComponent-C5AHhqm_.js" crossorigin >
+<link rel="modulepreload" href="/static/place/AsyncComponent-DAWJeKL7.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="_1hpn1da0">Welcome to the Details page - nz<span>Some special async content</span></h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script type="module" src="/static/place/AsyncComponent-C5AHhqm_.js" ></script>
-<script type="module" src="/static/place/Details-DEuzHRSI.js" ></script>
-<script type="module" src="/static/place/vite-client-5_tId46l.js" ></script>
+<script type="module" src="/static/place/AsyncComponent-DAWJeKL7.js" ></script>
+<script type="module" src="/static/place/Details-Dd6BoYxB.js" ></script>
+<script type="module" src="/static/place/vite-client-B4WpsK_v.js" ></script>
   </body>
 </html>",
   "production/nz/nz/index.html": "<!DOCTYPE html>
@@ -119,19 +119,19 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
     </style>
     <link rel="stylesheet" href="/static/place/Home-D-106MY_.css" crossorigin >
 
-<link rel="modulepreload" href="/static/place/vite-client-5_tId46l.js" crossorigin >
+<link rel="modulepreload" href="/static/place/vite-client-B4WpsK_v.js" crossorigin >
 
-<link rel="modulepreload" href="/static/place/Home-B4Am_Pmc.js" crossorigin >
+<link rel="modulepreload" href="/static/place/Home-CWaAqHuh.js" crossorigin >
 
   </head>
   <body>
     <div id="app"><!--$--><h1 class="ms22la0">Welcome to the Home page - nz</h1><!--/$--></div>
     <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"nz"}</script>
-<script type="module" src="/static/place/Home-B4Am_Pmc.js" ></script>
-<script type="module" src="/static/place/vite-client-5_tId46l.js" ></script>
+<script type="module" src="/static/place/Home-CWaAqHuh.js" ></script>
+<script type="module" src="/static/place/vite-client-B4WpsK_v.js" ></script>
   </body>
 </html>",
-  "vite-client-5_tId46l.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-B4WpsK_v.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -168,17 +168,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-5_tId46l.js"
+      href="/static/place/vite-client-B4WpsK_v.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Details-DEuzHRSI.js"
+      href="/static/place/Details-Dd6BoYxB.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/AsyncComponent-C5AHhqm_.js"
+      href="/static/place/AsyncComponent-DAWJeKL7.js"
       crossorigin
     >
   </head>
@@ -199,17 +199,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </script>
     <script
       type="module"
-      src="/static/place/AsyncComponent-C5AHhqm_.js"
+      src="/static/place/AsyncComponent-DAWJeKL7.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/Details-DEuzHRSI.js"
+      src="/static/place/Details-Dd6BoYxB.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-5_tId46l.js"
+      src="/static/place/vite-client-B4WpsK_v.js"
     >
     </script>
   </body>
@@ -262,12 +262,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-5_tId46l.js"
+      href="/static/place/vite-client-B4WpsK_v.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Home-B4Am_Pmc.js"
+      href="/static/place/Home-CWaAqHuh.js"
       crossorigin
     >
   </head>
@@ -285,12 +285,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
     <script
       type="module"
-      src="/static/place/Home-B4Am_Pmc.js"
+      src="/static/place/Home-CWaAqHuh.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-5_tId46l.js"
+      src="/static/place/vite-client-B4WpsK_v.js"
     >
     </script>
   </body>

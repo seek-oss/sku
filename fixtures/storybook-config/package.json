@@ -2,16 +2,16 @@
   "name": "@sku-fixtures/storybook-config",
   "private": true,
   "dependencies": {
-    "braid-design-system": "^33.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "braid-design-system": "^33.10.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.0.14",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.6",
     "@storybook/react-webpack5": "^9.0.14",
-    "@types/react": "^18.2.3",
-    "@types/react-dom": "^18.2.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vanilla-extract/css": "^1.0.0",
     "sku": "workspace:*",
     "storybook": "^9.0.14"

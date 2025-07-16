@@ -40,6 +40,11 @@ window.$RefreshSig$ = () => (type) => type;
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/src/logo.png"
+      >
       <div class="styles_root__2vdre50">
         <div class="styles_nested__2vdre51">
           Initial
@@ -58,7 +63,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -26,20 +26,31 @@
+@@ -26,14 +26,25 @@
      >
      <script
        type="module"
@@ -86,6 +91,8 @@ POST HYDRATE DIFFS:
    </head>
    <body>
      <div id="app">
+@@ -44,7 +55,7 @@
+       >
        <div class="styles_root__2vdre50">
          <div class="styles_nested__2vdre51">
 -          Initial
@@ -162,6 +169,11 @@ exports[`sku-with-https > bundler: webpack > start > should start a development 
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/a85d2645cc4d80a20b5b.png"
+      >
       <div class="styles_root__2vdre50">
         <div class="styles_nested__2vdre51">
           Initial
@@ -205,8 +217,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -41,7 +41,7 @@
-     <div id="app">
+@@ -46,7 +46,7 @@
+       >
        <div class="styles_root__2vdre50">
          <div class="styles_nested__2vdre51">
 -          Initial
@@ -277,6 +289,11 @@ exports[`sku-with-https > serve > should start a development server 1`] = `
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/a85d2645cc4d80a20b5b.png"
+      >
       <div class="_2vdre50">
         <div class="_2vdre51">
           Initial
@@ -320,8 +337,8 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -41,7 +41,7 @@
-     <div id="app">
+@@ -46,7 +46,7 @@
+       >
        <div class="_2vdre50">
          <div class="_2vdre51">
 -          Initial

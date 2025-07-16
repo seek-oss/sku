@@ -19,7 +19,7 @@ exports[`public path > bundler: vite > build and serve > should create valid app
     >
     <link
       rel="modulepreload"
-      href="/static/my-app/vite-client-DeKcJang.js"
+      href="/static/my-app/vite-client-Fcf1JEm0.js"
       crossorigin
     >
     <link
@@ -67,6 +67,11 @@ exports[`public path > bundler: vite > build and serve > should create valid app
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/large-image-CufAniQw.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/large-image-CufAniQw.avif">
@@ -85,7 +90,7 @@ exports[`public path > bundler: vite > build and serve > should create valid app
     </div>
     <script
       type="module"
-      src="/static/my-app/vite-client-DeKcJang.js"
+      src="/static/my-app/vite-client-Fcf1JEm0.js"
     >
     </script>
   </body>
@@ -103,7 +108,7 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/static/my-app/vite-client-DnoafMfl.css" crossorigin />
 
-<link rel="modulepreload" href="/static/my-app/vite-client-DeKcJang.js" crossorigin />
+<link rel="modulepreload" href="/static/my-app/vite-client-Fcf1JEm0.js" crossorigin />
 
 <link rel="preload" href="/static/my-app/large-image-CufAniQw.avif" as="image" type="image/avif" />
 
@@ -121,8 +126,8 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
 
   </head>
   <body>
-    <div id="app"><div class="_1eysbi80"></div><img src="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
-    <script type="module" src="/static/my-app/vite-client-DeKcJang.js" ></script>
+    <div id="app"><link rel="preload" as="image" href="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi80"></div><img src="/static/my-app/large-image-CufAniQw.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
+    <script type="module" src="/static/my-app/vite-client-Fcf1JEm0.js" ></script>
   </body>
 </html>",
   "large-image-6dGggDit.bmp": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -132,9 +137,9 @@ exports[`public path > bundler: vite > build and serve > should generate the exp
   "large-image-DeF69wGd.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-LKfC-v5Z.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-PZSzlfBh.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DeKcJang.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-DnoafMfl.css": "._1eysbi80{background-image:url(/static/my-app/large-image-CufAniQw.avif);width:1039px;height:240px}._1eysbi81{background-image:url(/static/my-app/large-image-6dGggDit.bmp);width:1039px;height:240px}._1eysbi82{background-image:url(/static/my-app/large-image-PZSzlfBh.gif);width:1039px;height:240px}._1eysbi83{background-image:url(/static/my-app/large-image-DVc6bkoY.jpg);width:1039px;height:240px}._1eysbi84{background-image:url(/static/my-app/large-image-DeF69wGd.png);width:1039px;height:240px}._1eysbi85{background-image:url(/static/my-app/large-image-LKfC-v5Z.webp);width:1039px;height:240px}._1eysbi86{background-image:url(/static/my-app/large-image-BVlb-rPD.svg);width:1039px;height:240px}
 ",
+  "vite-client-Fcf1JEm0.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -176,6 +181,11 @@ exports[`public path > bundler: webpack > build and serve > should create valid 
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/76f6980df06dbc480aee.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/76f6980df06dbc480aee.avif">
@@ -252,7 +262,7 @@ exports[`public path > bundler: webpack > build and serve > should generate the 
 <link data-chunk="main" rel="preload" as="script" href="/static/my-app/main.js">
   </head>
   <body>
-    <div id="app"><div class="_1eysbi80"></div><img src="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
+    <div id="app"><link rel="preload" as="image" href="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi80"></div><img src="/static/my-app/76f6980df06dbc480aee.avif"/><div class="_1eysbi81"></div><div class="_1eysbi82"></div><div class="_1eysbi83"></div><div class="_1eysbi84"></div><div class="_1eysbi85"></div><div class="_1eysbi86"></div></div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/static/my-app/runtime.js"></script>
 <script async data-chunk="main" src="/static/my-app/2.js"></script>

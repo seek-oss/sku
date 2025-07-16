@@ -6,7 +6,6 @@ import dedent from 'dedent';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
-import semver from 'semver';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -16,7 +15,7 @@ import {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
-  packageManagerVersion,
+  isAtLeastPnpmV10,
 } from '@/services/packageManager/packageManager.js';
 import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
 import { fix as esLintFix } from '@/services/eslint/runESLint.js';
@@ -131,21 +130,25 @@ export const initAction = async (
     },
   };
 
-  const isAtLeastPnpmV10 =
-    packageManager === 'pnpm' &&
-    packageManagerVersion &&
-    semver.satisfies(packageManagerVersion, '>=10.0.0');
+  if (isAtLeastPnpmV10()) {
+    trace('PNPM version is >= 10.0.0, creating pnpm-workspace.yaml');
+    // IDE tooling depends on finding `eslint` and `prettier` in the root `node_modules`.
+    // `sku` consumers do not directly install these dependencies, so without this
+    // configuration they would not be present in the root `node_modules`, causing discrepancies
+    // between IDE linting and CLI linting.
+    //
+    // PNPM v9 used to hoist these dependencies by default, but PNPM v10 no longer hoists any
+    // dependencies by default.
+    // See https://github.com/pnpm/pnpm/releases/tag/v10.0.0#:~:text=nothing%20is%20hoisted%20by%20default
+    const pnpmWorkspaceString = dedent`
+      publicHoistPattern:
+        - eslint
+        - prettier`;
 
-  if (isAtLeastPnpmV10) {
-    trace(
-      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
+    await writeFile(
+      path.join(root, 'pnpm-workspace.yaml'),
+      pnpmWorkspaceString,
     );
-    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
-    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
-    packageJson.pnpm = {
-      // We transitively depend on `esbuild` via Vanilla Extract
-      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
-    };
   }
 
   const packageJsonString = JSON.stringify(packageJson, null, 2);

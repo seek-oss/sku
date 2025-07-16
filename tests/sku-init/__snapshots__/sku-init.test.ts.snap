@@ -95,13 +95,6 @@ exports[`sku init > should create package.json 1`] = `
     "sku": "VERSION_IGNORED",
   },
   "name": "new-project",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sku",
-      "@swc/core",
-      "esbuild",
-    ],
-  },
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -113,6 +106,13 @@ exports[`sku init > should create package.json 1`] = `
   },
   "version": "0.1.0",
 }
+`;
+
+exports[`sku init > should create pnpm-workspace.yaml 1`] = `
+"publicHoistPattern:
+  - eslint
+  - prettier
+"
 `;
 
 exports[`sku init > should create sku.config.ts 1`] = `

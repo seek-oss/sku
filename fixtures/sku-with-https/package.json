@@ -7,8 +7,8 @@
     "start:vite": "sku start --experimental-bundler --config sku.config.vite.mjs"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

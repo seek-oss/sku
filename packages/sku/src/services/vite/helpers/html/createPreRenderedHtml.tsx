@@ -1,8 +1,8 @@
+import type { ReactNode, JSX } from 'react';
 import { LoadableProvider } from '@sku-lib/vite/loadable';
 import type { Collector } from '@sku-lib/vite/collector';
 import { renderToStringAsync } from '@/services/webpack/entry/render/render-to-string.js';
 import debug from 'debug';
-import type { ReactNode } from 'react';
 
 import type { Render, RenderAppProps } from '@/types/types.js';
 import { serializeConfig } from '../serializeConfig.js';

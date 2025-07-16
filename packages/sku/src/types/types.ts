@@ -1,4 +1,4 @@
-import type { ReactNode, JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
@@ -10,7 +10,11 @@ export type ViteRenderFunction = (
   } & SharedRenderProps,
 ) => Promise<string>;
 
-export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
+export type SkuProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => JSX.Element;
 
 export interface RenderCallbackParams {
   SkuProvider: SkuProvider;

@@ -1,9 +1,9 @@
 packages:
   - docs
-  - fixtures/*
   - tests
-  - test-utils
+  - fixtures/*
   - packages/*
+  - private/*
 
 hoistWorkspacePackages: false
 

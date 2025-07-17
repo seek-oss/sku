@@ -24,8 +24,7 @@ type SkuCommand =
 
 // Default configuration for cli-testing-library
 const DEFAULT_CONFIG: Partial<Config> = {
-  asyncUtilTimeout: 3000,
-  renderAwaitTime: 1000,
+  asyncUtilTimeout: 5000,
 };
 
 // Configure cli-testing-library with default settings
@@ -43,7 +42,7 @@ export const configureCli = (config: Partial<typeof DEFAULT_CONFIG>) => {
 
 export const scopeToFixture = (fixtureFolder: string) => {
   const appDir = path.dirname(
-    require.resolve(`../fixtures/${fixtureFolder}/sku.config.ts`),
+    require.resolve(`../../fixtures/${fixtureFolder}/sku.config.ts`),
   );
 
   return {

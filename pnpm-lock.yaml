@@ -14,9 +14,15 @@ importers:
       '@changesets/get-github-info':
         specifier: ^0.6.0
         version: 0.6.0
-      '@sku-private/test-utils':
+      '@sku-private/eslint-plugin':
         specifier: workspace:*
-        version: link:test-utils
+        version: link:private/eslint-plugin
+      '@sku-private/puppeteer':
+        specifier: workspace:*
+        version: link:private/puppeteer
+      '@sku-private/testing-library':
+        specifier: workspace:*
+        version: link:private/testing-library
       '@swc/core':
         specifier: ^1.3.84
         version: 1.12.11
@@ -153,7 +159,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.23
@@ -197,7 +203,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -216,7 +222,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -228,7 +234,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -256,7 +262,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -287,7 +293,7 @@ importers:
         version: link:../../packages/vite
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -309,7 +315,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -374,7 +380,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -396,7 +402,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -418,7 +424,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -477,7 +483,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.6
         version: 3.0.6(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
@@ -520,7 +526,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -560,7 +566,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/express':
         specifier: ^4.17.11
         version: 4.17.23
@@ -588,7 +594,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.23
@@ -1116,7 +1122,24 @@ importers:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
 
-  test-utils:
+  private/eslint-plugin: {}
+
+  private/puppeteer:
+    devDependencies:
+      '@types/diff':
+        specifier: ^7.0.1
+        version: 7.0.2
+      '@types/diffable-html':
+        specifier: ^5.0.2
+        version: 5.0.2
+      diff:
+        specifier: ^7.0.0
+        version: 7.0.0
+      diffable-html:
+        specifier: ^5.0.0
+        version: 5.0.0
+
+  private/test-utils:
     devDependencies:
       '@jest/globals':
         specifier: ^30.0.3
@@ -1127,12 +1150,6 @@ importers:
       '@types/css':
         specifier: ^0.0.38
         version: 0.0.38
-      '@types/diff':
-        specifier: ^7.0.1
-        version: 7.0.2
-      '@types/diffable-html':
-        specifier: ^5.0.2
-        version: 5.0.2
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -1154,12 +1171,6 @@ importers:
       css:
         specifier: ^3.0.0
         version: 3.0.0
-      diff:
-        specifier: ^7.0.0
-        version: 7.0.0
-      diffable-html:
-        specifier: ^5.0.0
-        version: 5.0.0
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
@@ -1185,8 +1196,83 @@ importers:
         specifier: ^1.0.3
         version: 1.1.3
 
+  private/testing-library:
+    devDependencies:
+      cli-testing-library:
+        specifier: ^3.0.1
+        version: 3.0.1(@jest/globals@30.0.4)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
+
   tests:
     devDependencies:
+      '@sku-fixtures/assertion-removal':
+        specifier: workspace:*
+        version: link:../fixtures/assertion-removal
+      '@sku-fixtures/braid-design-system':
+        specifier: workspace:*
+        version: link:../fixtures/braid-design-system
+      '@sku-fixtures/configure':
+        specifier: workspace:*
+        version: link:../fixtures/configure
+      '@sku-fixtures/custom-src-paths':
+        specifier: workspace:*
+        version: link:../fixtures/custom-src-paths
+      '@sku-fixtures/jest-test':
+        specifier: workspace:*
+        version: link:../fixtures/jest-test
+      '@sku-fixtures/library-build':
+        specifier: workspace:*
+        version: link:../fixtures/library-build
+      '@sku-fixtures/library-file':
+        specifier: workspace:*
+        version: link:../fixtures/library-file
+      '@sku-fixtures/lint-format':
+        specifier: workspace:*
+        version: link:../fixtures/lint-format
+      '@sku-fixtures/multiple-routes':
+        specifier: workspace:*
+        version: link:../fixtures/multiple-routes
+      '@sku-fixtures/public-path':
+        specifier: workspace:*
+        version: link:../fixtures/public-path
+      '@sku-fixtures/sku-test':
+        specifier: workspace:*
+        version: link:../fixtures/sku-test
+      '@sku-fixtures/sku-webpack-plugin':
+        specifier: workspace:*
+        version: link:../fixtures/sku-webpack-plugin
+      '@sku-fixtures/sku-with-https':
+        specifier: workspace:*
+        version: link:../fixtures/sku-with-https
+      '@sku-fixtures/source-maps':
+        specifier: workspace:*
+        version: link:../fixtures/source-maps
+      '@sku-fixtures/ssr-hello-world':
+        specifier: workspace:*
+        version: link:../fixtures/ssr-hello-world
+      '@sku-fixtures/storybook-config':
+        specifier: workspace:*
+        version: link:../fixtures/storybook-config
+      '@sku-fixtures/styling':
+        specifier: workspace:*
+        version: link:../fixtures/styling
+      '@sku-fixtures/suspense':
+        specifier: workspace:*
+        version: link:../fixtures/suspense
+      '@sku-fixtures/translations':
+        specifier: workspace:*
+        version: link:../fixtures/translations
+      '@sku-fixtures/typescript-css-modules':
+        specifier: workspace:*
+        version: link:../fixtures/typescript-css-modules
+      '@sku-private/puppeteer':
+        specifier: workspace:*
+        version: link:../private/puppeteer
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../private/test-utils
+      '@sku-private/testing-library':
+        specifier: workspace:*
+        version: link:../private/testing-library
       '@types/cross-spawn':
         specifier: ^6.0.3
         version: 6.0.6

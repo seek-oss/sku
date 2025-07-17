@@ -1,0 +1,6 @@
+{
+  "name": "@sku-private/eslint-plugin",
+  "type": "module",
+  "main": "index.cjs",
+  "skuSkipValidatePeerDeps": true
+}

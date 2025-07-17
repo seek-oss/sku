@@ -1,9 +1,6 @@
 import { describe, it } from 'vitest';
 
-import {
-  scopeToFixture,
-  waitFor,
-} from '@sku-private/test-utils/testingLibrary.ts';
+import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 const { render } = scopeToFixture('sku-test');
 

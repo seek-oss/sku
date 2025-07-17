@@ -1,0 +1,13 @@
+{
+  "name": "@sku-private/testing-library",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./vitest": "./vitest.ts"
+  },
+  "devDependencies": {
+    "cli-testing-library": "^3.0.1"
+  }
+}

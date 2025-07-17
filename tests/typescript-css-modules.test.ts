@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, it } from 'vitest';
-import { getAppSnapshot } from '@sku-private/vitest-utils';
+import { getAppSnapshot } from '@sku-private/puppeteer';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { rm } from 'node:fs/promises';

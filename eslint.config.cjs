@@ -1,7 +1,7 @@
 const seek = require('eslint-config-seek');
 const jsdoc = require('eslint-plugin-jsdoc');
 const unicorn = require('eslint-plugin-unicorn');
-const eslintPluginSkuVitest = require('@sku-private/test-utils/eslint-plugin/eslint-plugin-sku-vitest.cjs');
+const eslintPluginSkuVitest = require('@sku-private/eslint-plugin');
 
 module.exports = [
   {

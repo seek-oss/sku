@@ -1187,72 +1187,6 @@ importers:
 
   tests:
     devDependencies:
-      '@sku-fixtures/assertion-removal':
-        specifier: workspace:*
-        version: link:../fixtures/assertion-removal
-      '@sku-fixtures/braid-design-system':
-        specifier: workspace:*
-        version: link:../fixtures/braid-design-system
-      '@sku-fixtures/configure':
-        specifier: workspace:*
-        version: link:../fixtures/configure
-      '@sku-fixtures/custom-src-paths':
-        specifier: workspace:*
-        version: link:../fixtures/custom-src-paths
-      '@sku-fixtures/jest-test':
-        specifier: workspace:*
-        version: link:../fixtures/jest-test
-      '@sku-fixtures/library-build':
-        specifier: workspace:*
-        version: link:../fixtures/library-build
-      '@sku-fixtures/library-file':
-        specifier: workspace:*
-        version: link:../fixtures/library-file
-      '@sku-fixtures/lint-format':
-        specifier: workspace:*
-        version: link:../fixtures/lint-format
-      '@sku-fixtures/multiple-routes':
-        specifier: workspace:*
-        version: link:../fixtures/multiple-routes
-      '@sku-fixtures/public-path':
-        specifier: workspace:*
-        version: link:../fixtures/public-path
-      '@sku-fixtures/sku-test':
-        specifier: workspace:*
-        version: link:../fixtures/sku-test
-      '@sku-fixtures/sku-webpack-plugin':
-        specifier: workspace:*
-        version: link:../fixtures/sku-webpack-plugin
-      '@sku-fixtures/sku-with-https':
-        specifier: workspace:*
-        version: link:../fixtures/sku-with-https
-      '@sku-fixtures/source-maps':
-        specifier: workspace:*
-        version: link:../fixtures/source-maps
-      '@sku-fixtures/ssr-hello-world':
-        specifier: workspace:*
-        version: link:../fixtures/ssr-hello-world
-      '@sku-fixtures/storybook-config':
-        specifier: workspace:*
-        version: link:../fixtures/storybook-config
-      '@sku-fixtures/styling':
-        specifier: workspace:*
-        version: link:../fixtures/styling
-      '@sku-fixtures/suspense':
-        specifier: workspace:*
-        version: link:../fixtures/suspense
-      '@sku-fixtures/translations':
-        specifier: workspace:*
-        version: link:../fixtures/translations
-      '@sku-fixtures/typescript-css-modules':
-        specifier: workspace:*
-        version: link:../fixtures/typescript-css-modules
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../test-utils
-      '@sku-private/vitest-utils':
-        specifier: workspace:*
-        version: link:../vite-test-utils
       '@types/cross-spawn':
         specifier: ^6.0.3
         version: 6.0.6
@@ -1277,24 +1211,6 @@ importers:
       webpack-dev-server:
         specifier: <=5.2.0
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
-
-  vite-test-utils:
-    devDependencies:
-      '@types/diff':
-        specifier: ^7.0.1
-        version: 7.0.2
-      '@types/diffable-html':
-        specifier: ^5.0.2
-        version: 5.0.2
-      cli-testing-library:
-        specifier: ^3.0.1
-        version: 3.0.1(@jest/globals@30.0.4)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
-      diff:
-        specifier: ^7.0.0
-        version: 7.0.0
-      diffable-html:
-        specifier: ^5.0.0
-        version: 5.0.0
 
 packages:
 

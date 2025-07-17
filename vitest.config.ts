@@ -14,7 +14,7 @@ const skuNodeTests = [
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
-    setupFiles: ['./vite-test-utils/vitest-setup.ts'],
+    setupFiles: ['./test-utils/vitest/setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,

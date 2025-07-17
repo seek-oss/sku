@@ -1,18 +1,11 @@
 import { describe, it } from 'vitest';
-import path from 'node:path';
-import { createRequire } from 'node:module';
-import { render, configure, waitFor } from 'cli-testing-library';
 
-configure({
-  asyncUtilTimeout: 3000,
-  renderAwaitTime: 1000,
-});
+import {
+  scopeToFixture,
+  waitFor,
+} from '@sku-private/test-utils/testingLibrary.ts';
 
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/sku-test/sku.config.ts'),
-);
+const { render } = scopeToFixture('sku-test');
 
 const testRunners = ['vitest', 'jest'] as const;
 
@@ -23,13 +16,7 @@ describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
   };
 
   it('should run tests', async ({ expect }) => {
-    const process = await render(
-      'node_modules/.bin/sku',
-      ['test', ...args[testRunner]],
-      {
-        cwd: appDir,
-      },
-    );
+    const process = await render('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
     await waitFor(() => {
@@ -37,14 +24,12 @@ describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
     });
   });
 
-  it(`should pass through unknown flags to vite`, async ({ expect }) => {
-    const process = await render(
-      'node_modules/.bin/sku',
-      ['test', 'testfile.ts', '--passWithNoTests', ...args[testRunner]],
-      {
-        cwd: appDir,
-      },
-    );
+  it(`should pass through unknown flags`, async ({ expect }) => {
+    const process = await render('test', [
+      'testfile.ts',
+      '--passWithNoTests',
+      ...args[testRunner],
+    ]);
 
     const expected: Record<(typeof testRunners)[number], string> = {
       vitest: 'No test files found, exiting with code 0',

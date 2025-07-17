@@ -16,7 +16,7 @@
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
     "test:update": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run -u",
-    "setup-test-hosts": "tsx test-utils/setupTestHosts",
+    "setup-test-hosts": "tsx private/test-utils/setupTestHosts",
     "start:docs": "pnpm run --filter @sku-private/docs start",
     "format": "prettier --cache --write . && eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix .",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",

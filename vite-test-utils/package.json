@@ -14,6 +14,7 @@
   "devDependencies": {
     "@types/diff": "^7.0.1",
     "@types/diffable-html": "^5.0.2",
+    "cli-testing-library": "^3.0.1",
     "diff": "^7.0.0",
     "diffable-html": "^5.0.0"
   }

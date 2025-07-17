@@ -1,9 +1,12 @@
 import { describe, it } from 'vitest';
 import path from 'node:path';
-import { runSkuScriptInDir } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
-import { cwd } from 'node:process';
-import { stripVTControlCharacters } from 'node:util';
+import { render, configure, waitFor } from 'cli-testing-library';
+
+configure({
+  asyncUtilTimeout: 3000,
+  renderAwaitTime: 1000,
+});
 
 const require = createRequire(import.meta.url);
 
@@ -11,29 +14,43 @@ const appDir = path.dirname(
   require.resolve('@sku-fixtures/sku-test/sku.config.ts'),
 );
 
-describe.for(['vitest', 'jest'])('[%s]: sku-test', (testRunner) => {
-  const args = testRunner === 'vitest' ? ['--config=sku.config.vitest.ts'] : [];
+const testRunners = ['vitest', 'jest'] as const;
+
+describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
+  const args: Record<(typeof testRunners)[number], string[]> = {
+    vitest: ['--config=sku.config.vitest.ts'],
+    jest: [],
+  };
+
   it('should run tests', async ({ expect }) => {
-    await expect(
-      runSkuScriptInDir('test', appDir, {
-        args,
-      }),
-    ).resolves.not.toThrowError();
+    const process = await render(
+      'node_modules/.bin/sku',
+      ['test', ...args[testRunner]],
+      {
+        cwd: appDir,
+      },
+    );
+
+    expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
+    await waitFor(() => {
+      expect(process.hasExit()).toMatchObject({ exitCode: 0 });
+    });
   });
 
-  it(`should pass through unknown flags to ${testRunner}`, async ({
-    expect,
-  }) => {
-    const child = await runSkuScriptInDir('test', appDir, {
-      args: [...args, '--coverage'],
-    });
-    const output = (child?.stdout as string).replaceAll(cwd(), 'sku');
+  it(`should pass through unknown flags to vite`, async ({ expect }) => {
+    const process = await render(
+      'node_modules/.bin/sku',
+      ['test', 'testfile.ts', '--passWithNoTests', ...args[testRunner]],
+      {
+        cwd: appDir,
+      },
+    );
 
-    expect(
-      stripVTControlCharacters(output)
-        .replaceAll(/v\d\.\d\.\d /g, '')
-        .replaceAll(/(\d+\.?\d*)s|(\d*)ms/g, '0ms')
-        .replaceAll(/\b\d{1,2}:\d{2}:\d{2}\b/g, '00:00:00'),
-    ).toMatchSnapshot();
+    const expected: Record<(typeof testRunners)[number], string> = {
+      vitest: 'No test files found, exiting with code 0',
+      jest: 'No tests found, exiting with code 0',
+    };
+
+    expect(await process.findByText(expected[testRunner])).toBeInTheConsole();
   });
 });

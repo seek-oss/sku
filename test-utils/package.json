@@ -14,6 +14,7 @@
     "@types/serve-handler": "^6.1.4",
     "@types/wait-on": "^5.3.4",
     "@types/webpack-stats-plugin": "^0.3.5",
+    "cli-testing-library": "^3.0.1",
     "css": "^3.0.0",
     "diff": "^7.0.0",
     "diffable-html": "^5.0.0",

@@ -48,6 +48,7 @@ const removeAppDir = async (folder: string) =>
 describe('configure', () => {
   describe('default', () => {
     beforeAll(async () => {
+      await removeAppDir(appFolder);
       await makeDir(appFolder);
       await makeDir(path.join(appFolder, './src'));
       await copyToApp('src/App.tsx', appFolder);

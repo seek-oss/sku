@@ -1,10 +1,14 @@
-import { describe, it } from 'vitest';
+import { describe, it, afterEach } from 'vitest';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture, waitFor, cleanup } from '@sku-private/testing-library';
 
 const { render } = scopeToFixture('sku-test');
 
 const testRunners = ['vitest', 'jest'] as const;
+
+afterEach(async () => {
+  await cleanup();
+});
 
 describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
   const args: Record<(typeof testRunners)[number], string[]> = {

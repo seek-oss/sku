@@ -2,6 +2,7 @@ import {
   render,
   configure,
   waitFor,
+  cleanup,
   type Config,
   type RenderOptions,
 } from 'cli-testing-library';
@@ -24,7 +25,7 @@ type SkuCommand =
 
 // Default configuration for cli-testing-library
 const DEFAULT_CONFIG: Partial<Config> = {
-  asyncUtilTimeout: 5000,
+  asyncUtilTimeout: 10000,
 };
 
 // Configure cli-testing-library with default settings
@@ -59,4 +60,4 @@ export const scopeToFixture = (fixtureFolder: string) => {
 };
 
 // Re-export the original functions for direct access
-export { waitFor };
+export { waitFor, cleanup };

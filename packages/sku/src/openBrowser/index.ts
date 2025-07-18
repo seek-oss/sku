@@ -2,13 +2,13 @@
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
 import chalk from 'chalk';
-import { type ExecOptions, exec } from 'node:child_process';
 import open from 'open';
 import isCI from '@/utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import debug from 'debug';
+import { execAsync } from '@/utils/execAsync.js';
 
 const log = debug('sku:openBrowser');
 
@@ -89,15 +89,3 @@ export const openBrowser = async (url: string) => {
   log('Opening in a new tab in the browser:', preferredBrowser);
   open(url);
 };
-
-function execAsync(command: string, options?: ExecOptions): Promise<string> {
-  return new Promise((res, rej) => {
-    exec(command, options, (error, stdout) => {
-      if (error) {
-        rej(error);
-      } else {
-        res(stdout.toString());
-      }
-    });
-  });
-}

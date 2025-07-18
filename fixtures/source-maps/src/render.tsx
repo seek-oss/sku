@@ -1,10 +1,10 @@
 import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
 import html from 'dedent';
-import App from './App';
+import App from './App.tsx';
 
 export default {
   renderApp: () => renderToString(<App />),
-
   renderDocument: ({ app, bodyTags, headTags }) => html /* html */ `
     <!DOCTYPE html>
     <html>
@@ -20,4 +20,4 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;

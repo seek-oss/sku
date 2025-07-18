@@ -112,6 +112,8 @@ exports[`sku init > should create pnpm-workspace.yaml 1`] = `
 "publicHoistPattern:
   - eslint
   - prettier
+onlyBuiltDependencies:
+  - sku
 "
 `;
 

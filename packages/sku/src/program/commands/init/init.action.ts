@@ -27,6 +27,7 @@ import { setCwd } from '@/utils/cwd.js';
 import banner from '@/utils/banners/banner.js';
 import toPosixPath from '@/utils/toPosixPath.js';
 import { isEmptyDir } from '@/utils/isEmptyDir.js';
+import { skuPnpmConfig } from '@/services/packageManager/pnpmConfig.js';
 
 const trace = debug('sku:init');
 
@@ -132,23 +133,7 @@ export const initAction = async (
 
   if (isAtLeastPnpmV10()) {
     trace('PNPM version is >= 10.0.0, creating pnpm-workspace.yaml');
-    // IDE tooling depends on finding `eslint` and `prettier` in the root `node_modules`.
-    // `sku` consumers do not directly install these dependencies, so without this
-    // configuration they would not be present in the root `node_modules`, causing discrepancies
-    // between IDE linting and CLI linting.
-    //
-    // PNPM v9 used to hoist these dependencies by default, but PNPM v10 no longer hoists any
-    // dependencies by default.
-    // See https://github.com/pnpm/pnpm/releases/tag/v10.0.0#:~:text=nothing%20is%20hoisted%20by%20default
-    const pnpmWorkspaceString = dedent`
-      publicHoistPattern:
-        - eslint
-        - prettier`;
-
-    await writeFile(
-      path.join(root, 'pnpm-workspace.yaml'),
-      pnpmWorkspaceString,
-    );
+    await writeFile(path.join(root, 'pnpm-workspace.yaml'), skuPnpmConfig);
   }
 
   const packageJsonString = JSON.stringify(packageJson, null, 2);

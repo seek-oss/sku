@@ -21,6 +21,15 @@ import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
 import { hasErrorMessage } from '@/utils/error-guards.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
+import {
+  isAtLeastPnpmV10,
+  rootDir,
+} from '@/services/packageManager/packageManager.js';
+import {
+  createOrUpdatePnpmConfig,
+  detectPnpmConfigFiles,
+  getPnpmConfigAction,
+} from '@/services/packageManager/pnpmConfig.js';
 
 const coverageFolder = 'coverage';
 
@@ -155,4 +164,10 @@ export default async (skuContext: SkuContext) => {
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
+
+  if (rootDir && isAtLeastPnpmV10()) {
+    const configFilesResult = await detectPnpmConfigFiles(rootDir);
+    const action = await getPnpmConfigAction(configFilesResult);
+    await createOrUpdatePnpmConfig({ rootDir, action });
+  }
 };

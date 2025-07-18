@@ -1,6 +1,6 @@
 const seek = require('eslint-config-seek');
 const jsdoc = require('eslint-plugin-jsdoc');
-const unicorn = require('eslint-plugin-unicorn');
+const nodePlugin = require('eslint-plugin-n');
 const eslintPluginSkuVitest = require('@sku-private/eslint-plugin');
 
 module.exports = [
@@ -15,9 +15,7 @@ module.exports = [
       '**/storybook-static/',
       '**/report/',
       '**/template/',
-      'test/test-cases/*/*',
-      '!test/test-cases/*/*.test.js',
-      'fixtures/*/*',
+      'fixtures/**/*',
       '**/__testfixtures__/**',
       '**/@loadable/**/*',
     ],
@@ -26,7 +24,7 @@ module.exports = [
   {
     plugins: {
       jsdoc,
-      unicorn,
+      n: nodePlugin,
     },
 
     languageOptions: {
@@ -112,7 +110,7 @@ module.exports = [
       'one-var': ['error', 'never'],
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
-      'unicorn/prefer-node-protocol': 'error',
+      'n/prefer-node-protocol': ['error'],
     },
   },
   {
@@ -125,7 +123,7 @@ module.exports = [
     },
   },
   {
-    files: ['tests/*.test.ts'],
+    files: ['**/*.test.ts'],
     plugins: {
       'sku-vitest': eslintPluginSkuVitest,
     },

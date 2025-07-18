@@ -42,7 +42,7 @@ export const configureCli = (config: Partial<typeof DEFAULT_CONFIG>) => {
 
 export const scopeToFixture = (fixtureFolder: string) => {
   const appDir = path.dirname(
-    require.resolve(`../../fixtures/${fixtureFolder}/sku.config.ts`),
+    require.resolve(`../../fixtures/${fixtureFolder}/package.json`),
   );
 
   return {

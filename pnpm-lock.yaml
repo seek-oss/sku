@@ -1165,9 +1165,6 @@ importers:
       '@types/webpack-stats-plugin':
         specifier: ^0.3.5
         version: 0.3.5
-      cli-testing-library:
-        specifier: ^3.0.1
-        version: 3.0.1(@jest/globals@30.0.4)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
       css:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1200,7 +1197,7 @@ importers:
     devDependencies:
       cli-testing-library:
         specifier: ^3.0.1
-        version: 3.0.1(@jest/globals@30.0.4)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
+        version: 3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
 
   tests:
     devDependencies:
@@ -12630,7 +12627,7 @@ snapshots:
 
   cli-spinners@2.9.2: {}
 
-  cli-testing-library@3.0.1(@jest/globals@30.0.4)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)):
+  cli-testing-library@3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)):
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/runtime': 7.27.6
@@ -12641,7 +12638,6 @@ snapshots:
       strip-final-newline: 4.0.0
       tree-kill: 1.2.2
     optionalDependencies:
-      '@jest/globals': 30.0.4
       vitest: 3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
 
   cli-truncate@4.0.0:

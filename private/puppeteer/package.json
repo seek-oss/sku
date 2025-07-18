@@ -1,5 +1,6 @@
 {
   "name": "@sku-private/puppeteer",
+  "private": true,
   "type": "module",
   "main": "index.ts",
   "devDependencies": {

@@ -8,7 +8,7 @@ import {
   createCancelSignal,
 } from '@sku-private/test-utils';
 
-import { getAppSnapshot } from '@sku-private/vitest-utils';
+import { getAppSnapshot } from '@sku-private/puppeteer';
 
 import { createRequire } from 'node:module';
 

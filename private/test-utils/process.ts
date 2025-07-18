@@ -2,8 +2,8 @@ import { createRequire } from 'node:module';
 import spawn, { type Options, SubprocessError } from 'nano-spawn';
 
 const require = createRequire(import.meta.url);
-const skuBin = require.resolve('../packages/sku/bin/bin.js');
-const skuCodemodBin = require.resolve('../packages/codemod/bin.js');
+const skuBin = require.resolve('../../packages/sku/bin/bin.js');
+const skuCodemodBin = require.resolve('../../packages/codemod/bin.js');
 
 export const createCancelSignal = () => {
   const controller = new AbortController();

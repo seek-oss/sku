@@ -14,9 +14,15 @@ importers:
       '@changesets/get-github-info':
         specifier: ^0.6.0
         version: 0.6.0
-      '@sku-private/test-utils':
+      '@sku-private/eslint-plugin':
         specifier: workspace:*
-        version: link:test-utils
+        version: link:private/eslint-plugin
+      '@sku-private/puppeteer':
+        specifier: workspace:*
+        version: link:private/puppeteer
+      '@sku-private/testing-library':
+        specifier: workspace:*
+        version: link:private/testing-library
       '@swc/core':
         specifier: ^1.3.84
         version: 1.12.11
@@ -153,7 +159,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.23
@@ -197,7 +203,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -216,7 +222,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -228,7 +234,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -256,7 +262,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -287,7 +293,7 @@ importers:
         version: link:../../packages/vite
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -309,7 +315,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -322,9 +328,6 @@ importers:
 
   fixtures/sku-test:
     devDependencies:
-      '@vitest/coverage-v8':
-        specifier: ^3.2.1
-        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -374,7 +377,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -396,7 +399,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -418,7 +421,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
@@ -477,7 +480,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@storybook/addon-webpack5-compiler-babel':
         specifier: ^3.0.6
         version: 3.0.6(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
@@ -520,7 +523,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -560,7 +563,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/express':
         specifier: ^4.17.11
         version: 4.17.23
@@ -588,7 +591,7 @@ importers:
     devDependencies:
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../../test-utils
+        version: link:../../private/test-utils
       '@types/react':
         specifier: ^18.2.3
         version: 18.3.23
@@ -1116,7 +1119,24 @@ importers:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
 
-  test-utils:
+  private/eslint-plugin: {}
+
+  private/puppeteer:
+    devDependencies:
+      '@types/diff':
+        specifier: ^7.0.1
+        version: 7.0.2
+      '@types/diffable-html':
+        specifier: ^5.0.2
+        version: 5.0.2
+      diff:
+        specifier: ^7.0.0
+        version: 7.0.0
+      diffable-html:
+        specifier: ^5.0.0
+        version: 5.0.0
+
+  private/test-utils:
     devDependencies:
       '@jest/globals':
         specifier: ^30.0.3
@@ -1127,12 +1147,6 @@ importers:
       '@types/css':
         specifier: ^0.0.38
         version: 0.0.38
-      '@types/diff':
-        specifier: ^7.0.1
-        version: 7.0.2
-      '@types/diffable-html':
-        specifier: ^5.0.2
-        version: 5.0.2
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -1151,12 +1165,6 @@ importers:
       css:
         specifier: ^3.0.0
         version: 3.0.0
-      diff:
-        specifier: ^7.0.0
-        version: 7.0.0
-      diffable-html:
-        specifier: ^5.0.0
-        version: 5.0.0
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
@@ -1181,6 +1189,12 @@ importers:
       webpack-stats-plugin:
         specifier: ^1.0.3
         version: 1.1.3
+
+  private/testing-library:
+    devDependencies:
+      cli-testing-library:
+        specifier: ^3.0.1
+        version: 3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
 
   tests:
     devDependencies:
@@ -1244,12 +1258,15 @@ importers:
       '@sku-fixtures/typescript-css-modules':
         specifier: workspace:*
         version: link:../fixtures/typescript-css-modules
+      '@sku-private/puppeteer':
+        specifier: workspace:*
+        version: link:../private/puppeteer
       '@sku-private/test-utils':
         specifier: workspace:*
-        version: link:../test-utils
-      '@sku-private/vitest-utils':
+        version: link:../private/test-utils
+      '@sku-private/testing-library':
         specifier: workspace:*
-        version: link:../vite-test-utils
+        version: link:../private/testing-library
       '@types/cross-spawn':
         specifier: ^6.0.3
         version: 6.0.6
@@ -1274,21 +1291,6 @@ importers:
       webpack-dev-server:
         specifier: <=5.2.0
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
-
-  vite-test-utils:
-    devDependencies:
-      '@types/diff':
-        specifier: ^7.0.1
-        version: 7.0.2
-      '@types/diffable-html':
-        specifier: ^5.0.2
-        version: 5.0.2
-      diff:
-        specifier: ^7.0.0
-        version: 7.0.0
-      diffable-html:
-        specifier: ^5.0.0
-        version: 5.0.0
 
 packages:
 
@@ -2013,10 +2015,6 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
-
-  '@bcoe/v8-coverage@1.0.2':
-    resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
-    engines: {node: '>=18'}
 
   '@capsizecss/core@4.1.2':
     resolution: {integrity: sha512-5tMjLsVsaEEwJ816y3eTfhhTIyUWNFt58x6YcHni0eV5tta8MGDOAIe+CV5ICb5pguXgDpNGLprqhPqBWtkFSg==}
@@ -3494,15 +3492,6 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0
 
-  '@vitest/coverage-v8@3.2.4':
-    resolution: {integrity: sha512-EyF9SXU6kS5Ku/U82E259WSnvg6c8KTjppUncuNdm5QHpe17mwREHnjDzozC8x9MZ0xfBUFSaLkRv4TMA75ALQ==}
-    peerDependencies:
-      '@vitest/browser': 3.2.4
-      vitest: 3.2.4
-    peerDependenciesMeta:
-      '@vitest/browser':
-        optional: true
-
   '@vitest/expect@3.2.4':
     resolution: {integrity: sha512-Io0yyORnB6sikFlt8QW5K7slY4OjqNX9jmJQ02QDda8lyM6B5oNgVWoSoKPac8/kgnCUzuHQKrSLtu/uOqqrig==}
 
@@ -3829,9 +3818,6 @@ packages:
   ast-types@0.16.1:
     resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==}
     engines: {node: '>=4'}
-
-  ast-v8-to-istanbul@0.3.3:
-    resolution: {integrity: sha512-MuXMrSLVVoA6sYN/6Hke18vMzrT4TZNbZIj/hvh0fnYFpO+/kFXcLIaiPwXXWaQUPg4yJD8fj+lfJ7/1EBconw==}
 
   async-function@1.0.0:
     resolution: {integrity: sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA==}
@@ -4213,6 +4199,21 @@ packages:
   cli-spinners@2.9.2:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
+
+  cli-testing-library@3.0.1:
+    resolution: {integrity: sha512-fkQ8D2hQS53RP3s0yuCMHmTfPUMEqtVtJG0rs13MNE2khnkSaY8MsNxN7rSJZAzOOVsSg2I2F2XjEITJwf5dFg==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@jest/expect': ^29.0.0
+      '@jest/globals': ^29.0.0
+      vitest: ^3.0.0
+    peerDependenciesMeta:
+      '@jest/expect':
+        optional: true
+      '@jest/globals':
+        optional: true
+      vitest:
+        optional: true
 
   cli-truncate@4.0.0:
     resolution: {integrity: sha512-nPdaFdQ0h/GEigbPClz11D0v/ZJEwxmeVZGeMo3Z5StPtUTkA9o1lD6QwoirYiSDzbcwn2XcjwmCp68W1IS4TA==}
@@ -7684,6 +7685,10 @@ packages:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
 
+  redent@4.0.0:
+    resolution: {integrity: sha512-tYkDkVVtYkSVhuQ4zBgfvciymHaeuel+zFKXShfDnFP5SyVEP7qo70Rf1jTOTCx3vGNAbnEi/xFkcfQVMIBWag==}
+    engines: {node: '>=12'}
+
   reflect.getprototypeof@1.0.10:
     resolution: {integrity: sha512-00o4I+DVrefhv+nX0ulyi3biSHCPDe+yLv5o/p6d/UVlirijB8E16FtfwSAi4g3tcqrQ4lRAqQSoFEZJehYEcw==}
     engines: {node: '>= 0.4'}
@@ -8217,6 +8222,10 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
+  strip-final-newline@4.0.0:
+    resolution: {integrity: sha512-aulFJcD6YK8V1G7iRB5tigAP4TsHBZZrOV8pjV++zdUwmeV8uzbY7yn6h9MswN62adStNZFuCIx4haBnRuMDaw==}
+    engines: {node: '>=18'}
+
   strip-indent@3.0.0:
     resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==}
     engines: {node: '>=8'}
@@ -8325,10 +8334,6 @@ packages:
   test-exclude@6.0.0:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}
     engines: {node: '>=8'}
-
-  test-exclude@7.0.1:
-    resolution: {integrity: sha512-pFYqmTw68LXVjeWJMST4+borgQP2AyMNbg1BpZh9LbyhUeNkeaPF9gzfPGUAnSMV3qPYdWUwDIjjCLiSDOl7vg==}
-    engines: {node: '>=18'}
 
   text-decoder@1.2.3:
     resolution: {integrity: sha512-3/o9z3X0X0fTupwsYvR03pJ/DjWuqqrfwBgTQzdWDiQSm9KitAyz/9WqsT2JQW7KV2m+bC2ol/zqpW37NHxLaA==}
@@ -9981,8 +9986,6 @@ snapshots:
       '@babel/helper-validator-identifier': 7.27.1
 
   '@bcoe/v8-coverage@0.2.3': {}
-
-  '@bcoe/v8-coverage@1.0.2': {}
 
   '@capsizecss/core@4.1.2':
     dependencies:
@@ -11696,25 +11699,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@bcoe/v8-coverage': 1.0.2
-      ast-v8-to-istanbul: 0.3.3
-      debug: 4.4.1
-      istanbul-lib-coverage: 3.2.2
-      istanbul-lib-report: 3.0.1
-      istanbul-lib-source-maps: 5.0.6
-      istanbul-reports: 3.1.7
-      magic-string: 0.30.17
-      magicast: 0.3.5
-      std-env: 3.9.0
-      test-exclude: 7.0.1
-      tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
-    transitivePeerDependencies:
-      - supports-color
-
   '@vitest/expect@3.2.4':
     dependencies:
       '@types/chai': 5.2.2
@@ -12108,12 +12092,6 @@ snapshots:
   ast-types@0.16.1:
     dependencies:
       tslib: 2.8.1
-
-  ast-v8-to-istanbul@0.3.3:
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.29
-      estree-walker: 3.0.3
-      js-tokens: 9.0.1
 
   async-function@1.0.0: {}
 
@@ -12598,6 +12576,19 @@ snapshots:
       restore-cursor: 5.1.0
 
   cli-spinners@2.9.2: {}
+
+  cli-testing-library@3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)):
+    dependencies:
+      '@babel/code-frame': 7.27.1
+      '@babel/runtime': 7.27.6
+      picocolors: 1.1.1
+      redent: 4.0.0
+      slice-ansi: 7.1.0
+      strip-ansi: 7.1.0
+      strip-final-newline: 4.0.0
+      tree-kill: 1.2.2
+    optionalDependencies:
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
 
   cli-truncate@4.0.0:
     dependencies:
@@ -16599,6 +16590,11 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
+  redent@4.0.0:
+    dependencies:
+      indent-string: 5.0.0
+      strip-indent: 4.0.0
+
   reflect.getprototypeof@1.0.10:
     dependencies:
       call-bind: 1.0.8
@@ -17261,6 +17257,8 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
+  strip-final-newline@4.0.0: {}
+
   strip-indent@3.0.0:
     dependencies:
       min-indent: 1.0.1
@@ -17383,12 +17381,6 @@ snapshots:
       '@istanbuljs/schema': 0.1.3
       glob: 7.2.3
       minimatch: 3.1.2
-
-  test-exclude@7.0.1:
-    dependencies:
-      '@istanbuljs/schema': 0.1.3
-      glob: 10.4.5
-      minimatch: 9.0.5
 
   text-decoder@1.2.3:
     dependencies:

@@ -1,0 +1,11 @@
+{
+  "name": "@sku-private/puppeteer",
+  "type": "module",
+  "main": "index.ts",
+  "devDependencies": {
+    "@types/diff": "^7.0.1",
+    "@types/diffable-html": "^5.0.2",
+    "diff": "^7.0.0",
+    "diffable-html": "^5.0.0"
+  }
+}

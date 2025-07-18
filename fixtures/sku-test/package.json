@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@vitest/coverage-v8": "^3.2.1",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

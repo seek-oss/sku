@@ -8,7 +8,7 @@ const emptyDiff = `=============================================================
 --- sourceHtml
 +++ clientHtml`;
 
-const appSnapshotSerializer: SnapshotSerializer = {
+export const appSnapshotSerializer: SnapshotSerializer = {
   serialize: (
     { sourceHtml, clientRenderContent },
     config,
@@ -45,5 +45,3 @@ const appSnapshotSerializer: SnapshotSerializer = {
     val.hasOwnProperty('clientRenderContent') &&
     val.hasOwnProperty('sourceHtml'),
 };
-
-export default appSnapshotSerializer;

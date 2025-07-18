@@ -1,5 +1,5 @@
 import waitOn from 'wait-on';
-import { TEST_TIMEOUT } from '../vitest.config.ts';
+import { TEST_TIMEOUT } from '../../vitest.config.ts';
 
 export const waitForUrls = async (...urls: string[]) => {
   const timeout = TEST_TIMEOUT;

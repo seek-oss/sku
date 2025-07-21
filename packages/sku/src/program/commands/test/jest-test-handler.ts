@@ -3,7 +3,6 @@ import { run } from 'jest';
 
 import isCI from '@/utils/isCI.js';
 import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject } from '@/utils/configure.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:jest');
@@ -16,7 +15,6 @@ export const runJestTests = async (
   },
   { args = [] }: { args: string[] },
 ) => {
-  await configureProject(skuContext);
   await runVocabCompile(skuContext);
 
   // https://jestjs.io/docs/configuration#preset-string

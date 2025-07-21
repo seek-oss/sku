@@ -139,8 +139,8 @@ export const getPnpmConfigAction = async ({
 
 export const detectPnpmConfigFiles = async (rootDir: string) => {
   const [npmrcExists, pnpmWorkspaceFileExists] = await Promise.all([
-    exists(path.join(rootDir, 'pnpm-workspace.yaml')),
     exists(path.join(rootDir, '.npmrc')),
+    exists(path.join(rootDir, 'pnpm-workspace.yaml')),
   ]);
 
   if (npmrcExists) {

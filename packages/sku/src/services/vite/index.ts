@@ -45,6 +45,7 @@ const printUrls = (
   skuContext: SkuContext,
 ) => {
   const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  console.log('Starting development server...');
   hosts.forEach((site) => {
     const initialPath =
       skuContext.initialPath !== '/' ? skuContext.initialPath : '';

@@ -8,6 +8,7 @@ import {
 } from 'cli-testing-library';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { onTestFinished } from 'vitest';
 
 const require = createRequire(import.meta.url);
 const skuBin = require.resolve('../../packages/sku/bin/bin.js');
@@ -32,15 +33,11 @@ const DEFAULT_CONFIG: Partial<Config> = {
 // Configure cli-testing-library with default settings
 configure(DEFAULT_CONFIG);
 
-export const renderCli = async (
+const renderCli = async (
   command: SkuCommand,
   args: string[] = [],
   options: Partial<RenderOptions> = {},
 ) => render(skuBin, [command, ...args], options);
-
-export const configureCli = (config: Partial<typeof DEFAULT_CONFIG>) => {
-  configure({ ...DEFAULT_CONFIG, ...config });
-};
 
 export const scopeToFixture = (fixtureFolder: string) => {
   const appDir = path.dirname(
@@ -65,26 +62,30 @@ export const scopeToFixture = (fixtureFolder: string) => {
         ...options,
         cwd: appDir,
       }),
+    joinPath: (...paths: string[]) => path.join(appDir, ...paths),
   };
 };
 
-const skipCleanup = new Set<string>();
+const skipCleanupIds = new Set<string>();
 
 export const cleanup = async (task?: { id: string }) => {
-  if (task?.id && skipCleanup.has(task.id)) {
+  if (task?.id && skipCleanupIds.has(task.id)) {
     return;
   }
 
   await _cleanup();
 };
 
-export const deferCleanup = (
-  id: string,
-  onTestFinished: (fn: () => void) => void,
-) => {
-  skipCleanup.add(id);
+/**
+ * Skips cleanup for the given test id, leaving tasks running in the background.
+ * Make sure to run cleanup manually once you are ready to clean up the tasks.
+ */
+export const skipCleanup = (id: string) => {
+  skipCleanupIds.add(id);
+  // onTestFinished is called after the `afterEach` hook, but before the `afterAll` hook
+  // so we use this to skip cleanup for just the given test id.
   onTestFinished(() => {
-    skipCleanup.delete(id);
+    skipCleanupIds.delete(id);
   });
 };
 

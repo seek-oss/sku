@@ -215,10 +215,8 @@ export const webpackStartHandler = async ({
       appHosts?.[0]
     }:${availablePort}${initialPath}`;
 
-    console.log();
-    console.log(
-      chalk.blue(`Starting the development server on ${chalk.underline(url)}`),
-    );
+    console.log('Starting development server...');
+    console.log(chalk.blue(`Local: ${chalk.underline(url)}`));
     console.log();
 
     openBrowser(url);

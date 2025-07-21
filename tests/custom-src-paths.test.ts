@@ -1,81 +1,75 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
-import path from 'node:path';
-import {
-  dirContentsToObject,
-  getPort,
-  runSkuScriptInDir,
-  waitForUrls,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+import { describe, beforeAll, it, expect, afterAll } from 'vitest';
+import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
 
-import { createRequire } from 'node:module';
+import {
+  bundlers,
+  type BundlerValues,
+  cleanup,
+  skipCleanup,
+  scopeToFixture,
+} from '@sku-private/testing-library';
 
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/custom-src-paths/sku.config.ts'),
-);
-
-const targetDirectory = `${appDir}/dist`;
+const { render, joinPath } = scopeToFixture('custom-src-paths');
 
 describe('custom-src-paths', () => {
-  describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
+  describe.sequential.for(bundlers)('bundler %s', (bundler) => {
     describe('start', async () => {
-      const { cancel, signal } = createCancelSignal();
+      it('should start a development server', async () => {
+        const port = await getPort();
+        const url = `http://localhost:${port}`;
 
-      const port = await getPort();
-      const url = `http://localhost:${port}`;
-      const args = ['--strict-port', `--port=${port}`];
+        const args: BundlerValues<string[]> = {
+          vite: [
+            '--config',
+            'sku.config.vite.ts',
+            '--experimental-bundler',
+            '--strict-port',
+            `--port=${port}`,
+          ],
+          webpack: ['--strict-port', `--port=${port}`],
+        };
 
-      if (bundler === 'vite') {
-        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
-      }
+        const start = await render('start', args[bundler]);
+        expect(
+          await start.findByText('Starting development server'),
+        ).toBeInTheConsole();
 
-      beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, { args, signal });
-        await waitForUrls(url);
-      });
-
-      afterAll(async () => {
-        cancel();
-      });
-
-      it('should start a development server', async ({ expect }) => {
         const snapshot = await getAppSnapshot({ url, expect });
         expect(snapshot).toMatchSnapshot();
       });
     });
 
     describe('build', async () => {
-      const { cancel, signal } = createCancelSignal();
-
       const port = await getPort();
       const url = `http://localhost:${port}`;
       const portArgs = ['--strict-port', `--port=${port}`];
-      const args: string[] = [];
 
-      if (bundler === 'vite') {
-        args.push('--experimental-bundler', '--config', 'sku.config.vite.ts');
-      }
+      const args: BundlerValues<string[]> = {
+        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+        webpack: [],
+      };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, { args });
-        runSkuScriptInDir('serve', appDir, { args: portArgs, signal });
-        await waitForUrls(url);
+        const build = await render('build', args[bundler]);
+        expect(await build.findByText('Build complete')).toBeInTheConsole();
+
+        const serve = await render('serve', portArgs);
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
       });
 
-      afterAll(async () => {
-        cancel();
-      });
+      afterAll(cleanup);
 
-      it('should generate the expected files', async ({ expect }) => {
-        const files = await dirContentsToObject(targetDirectory);
+      it('should generate the expected files', async ({ task }) => {
+        skipCleanup(task.id);
+        const files = await dirContentsToObject(joinPath('dist'));
         expect(files).toMatchSnapshot();
       });
 
-      it('should create valid app', async ({ expect }) => {
+      it('should create valid app', async ({ task }) => {
+        skipCleanup(task.id);
+
         const app = await getAppSnapshot({ expect, url });
         expect(app).toMatchSnapshot();
       });
@@ -83,18 +77,16 @@ describe('custom-src-paths', () => {
   });
 
   describe('format', () => {
-    it('should format successfully', async ({ expect }) => {
-      await expect(
-        runSkuScriptInDir('format', appDir),
-      ).resolves.not.toThrowError();
+    it('should format successfully', async () => {
+      const format = await render('format');
+      expect(await format.findByText('Formatting complete')).toBeInTheConsole();
     });
   });
 
   describe('lint', () => {
-    it('should lint successfully', async ({ expect }) => {
-      await expect(
-        runSkuScriptInDir('lint', appDir),
-      ).resolves.not.toThrowError();
+    it('should lint successfully', async () => {
+      const lint = await render('lint');
+      expect(await lint.findByText('Linting complete')).toBeInTheConsole();
     });
   });
 });

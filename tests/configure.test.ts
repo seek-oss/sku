@@ -5,17 +5,10 @@ import * as jsonc from 'jsonc-parser';
 
 import prettierConfig from '../packages/sku/dist/services/prettier/config/prettierConfig.js';
 
-import { createRequire } from 'node:module';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 const sanitizeEslintConfig = (eslintConfig: string) =>
   eslintConfig.replaceAll(process.cwd(), '{cwd}');
-
-const require = createRequire(import.meta.url);
-
-const fixtureFolder = path.dirname(
-  require.resolve('@sku-fixtures/configure/sku.config.ts'),
-);
 
 const readFileContents = async (appDir: string, fileName: string) => {
   const contents = await readFile(path.join(appDir, fileName), 'utf-8');
@@ -35,7 +28,7 @@ const readIgnore = async (appDir: string, fileName: string) => {
 };
 
 const copyToApp = async (filename: string, folder: string) =>
-  copyFile(path.join(fixtureFolder, filename), path.join(folder, filename));
+  copyFile(joinPath(filename), path.join(folder, filename));
 
 const removeAppDir = async (folder: string) =>
   rm(folder, {
@@ -43,11 +36,11 @@ const removeAppDir = async (folder: string) =>
     force: true,
   });
 
-const { render } = scopeToFixture('configure');
+const { render, joinPath } = scopeToFixture('configure');
 
 describe('configure', () => {
   describe('javascript app', () => {
-    const appFolder = path.resolve(fixtureFolder, 'App');
+    const appFolder = joinPath('App');
 
     beforeAll(async () => {
       await makeDir(appFolder);
@@ -98,7 +91,7 @@ describe('configure', () => {
   });
 
   describe('typescript app', () => {
-    const appFolderTS = path.resolve(fixtureFolder, 'TSApp');
+    const appFolderTS = joinPath('TSApp');
 
     beforeAll(async () => {
       await makeDir(appFolderTS);

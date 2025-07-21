@@ -18,7 +18,12 @@ setAdapter(mockAdapter);
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
-const { targetPath } = workerData[0] || {};
+if (!workerData || workerData.length === 0) {
+  // No jobs assigned to this worker, exit gracefully
+  process.exit(0);
+}
+
+const { targetPath } = workerData[0];
 if (!targetPath) {
   throw new Error('targetPath is required in workerData');
 }

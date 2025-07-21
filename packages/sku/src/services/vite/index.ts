@@ -8,7 +8,6 @@ import {
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
-import path from 'node:path';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
 import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
@@ -23,10 +22,7 @@ export const viteService = {
       await prerenderConcurrently(skuContext);
     }
     await cleanTargetDirectory(outDir.ssg, true);
-    await cleanTargetDirectory(
-      path.join(skuContext.paths.target, '.vite'),
-      true,
-    );
+    await cleanTargetDirectory(outDir.join('.vite'), true);
   },
   start: async (skuContext: SkuContext) => {
     const server = await createServer(createStartConfig(skuContext));

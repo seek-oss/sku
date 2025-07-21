@@ -105,10 +105,10 @@ export const getPnpmConfigAction = async ({
     return 'create';
   }
 
-  const publicHoistPatterns =
-    (await getPnpmConfigValue('public-hoist-pattern')) ?? [];
-  const onlyBuiltDependencies =
-    (await getPnpmConfigValue('only-built-dependencies')) ?? [];
+  const [publicHoistPatterns, onlyBuiltDependencies] = await Promise.all([
+    getPnpmConfigValue('public-hoist-pattern'),
+    getPnpmConfigValue('only-built-dependencies'),
+  ]);
 
   const hasExpectedPublicHoistPatterns = skuPublicHoistPatterns.every(
     (pattern) => publicHoistPatterns.includes(pattern),
@@ -138,7 +138,10 @@ export const getPnpmConfigAction = async ({
 };
 
 export const detectPnpmConfigFiles = async (rootDir: string) => {
-  const npmrcExists = await exists(path.join(rootDir, '.npmrc'));
+  const [npmrcExists, pnpmWorkspaceFileExists] = await Promise.all([
+    exists(path.join(rootDir, 'pnpm-workspace.yaml')),
+    exists(path.join(rootDir, '.npmrc')),
+  ]);
 
   if (npmrcExists) {
     console.log(
@@ -147,10 +150,6 @@ export const detectPnpmConfigFiles = async (rootDir: string) => {
       ),
     );
   }
-
-  const pnpmWorkspaceFileExists = await exists(
-    path.join(rootDir, 'pnpm-workspace.yaml'),
-  );
 
   return { pnpmWorkspaceFileExists, npmrcExists };
 };

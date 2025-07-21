@@ -198,16 +198,16 @@ describe('getPnpmConfigAction', () => {
 
   it.for`
     npmrcExists  | pnpmWorkspaceFileExists | publicHoistPattern               | onlyBuiltDependencies        | action
-    ${false}     | ${false}                | ${null}                          | ${null}                      | ${'create'}
-    ${true}      | ${false}                | ${null}                          | ${null}                      | ${'create'}
-    ${false}     | ${true}                 | ${null}                          | ${null}                      | ${'update'}
-    ${true}      | ${true}                 | ${null}                          | ${null}                      | ${'update'}
-    ${true}      | ${false}                | ${['eslint']}                    | ${null}                      | ${'log'}
-    ${true}      | ${true}                 | ${['eslint']}                    | ${null}                      | ${'log'}
-    ${true}      | ${true}                 | ${['foo']}                       | ${null}                      | ${'log'}
-    ${true}      | ${false}                | ${null}                          | ${['sku']}                   | ${'log'}
-    ${true}      | ${true}                 | ${null}                          | ${['sku']}                   | ${'log'}
-    ${true}      | ${true}                 | ${null}                          | ${['foo']}                   | ${'log'}
+    ${false}     | ${false}                | ${[]}                          | ${[]}                      | ${'create'}
+    ${true}      | ${false}                | ${[]}                          | ${[]}                      | ${'create'}
+    ${false}     | ${true}                 | ${[]}                          | ${[]}                      | ${'update'}
+    ${true}      | ${true}                 | ${[]}                          | ${[]}                      | ${'update'}
+    ${true}      | ${false}                | ${['eslint']}                    | ${[]}                      | ${'log'}
+    ${true}      | ${true}                 | ${['eslint']}                    | ${[]}                      | ${'log'}
+    ${true}      | ${true}                 | ${['foo']}                       | ${[]}                      | ${'log'}
+    ${true}      | ${false}                | ${[]}                          | ${['sku']}                   | ${'log'}
+    ${true}      | ${true}                 | ${[]}                          | ${['sku']}                   | ${'log'}
+    ${true}      | ${true}                 | ${[]}                          | ${['foo']}                   | ${'log'}
     ${false}     | ${true}                 | ${['eslint', 'prettier', 'foo']} | ${['sku', 'foo']}            | ${'noop'}
     ${true}      | ${true}                 | ${['eslint', 'prettier', 'foo']} | ${['sku', 'foo']}            | ${'noop'}
   `(

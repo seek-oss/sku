@@ -23,16 +23,6 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'eslint-plugin',
-          include: [`test-utils/eslint-plugin/${defaultInclude}`],
-          sequence: {
-            groupOrder: 0,
-          },
-        },
-      },
-      {
-        extends: true,
-        test: {
           name: 'sku',
           include: [`packages/sku/${defaultInclude}`, ...skuNodeTests],
           sequence: {

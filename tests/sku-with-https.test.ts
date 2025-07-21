@@ -22,43 +22,40 @@ const appDir = path.dirname(
 );
 
 describe.sequential('sku-with-https', () => {
-  describe.concurrent.each(['vite', 'webpack'])(
-    'bundler: %s',
-    async (bundler) => {
-      const port = await getPort();
-      const args = ['--strict-port', `--port=${port}`];
-      if (bundler === 'vite') {
-        args.push(
-          ...['--experimental-bundler', '--config', 'sku.config.vite.mjs'],
-        );
-      }
-      describe('start', () => {
-        const { cancel, signal } = createCancelSignal();
-        const url = `https://localhost:${port}`;
+  describe.each(['vite', 'webpack'])('bundler: %s', async (bundler) => {
+    const port = await getPort();
+    const args = ['--strict-port', `--port=${port}`];
+    if (bundler === 'vite') {
+      args.push(
+        ...['--experimental-bundler', '--config', 'sku.config.vite.mjs'],
+      );
+    }
+    describe('start', () => {
+      const { cancel, signal } = createCancelSignal();
+      const url = `https://localhost:${port}`;
 
-        beforeAll(async () => {
-          runSkuScriptInDir('start', appDir, { args, signal });
-          await waitForUrls(url, `${url}/test-middleware`);
-        });
-
-        afterAll(async () => {
-          cancel();
-        });
-
-        it('should start a development server', async ({ expect }) => {
-          const snapshot = await getAppSnapshot({ url, expect });
-          expect(snapshot).toMatchSnapshot();
-        });
-        it('should support the supplied middleware', async ({ expect }) => {
-          const snapshot = await getAppSnapshot({
-            url: `${url}/test-middleware`,
-            expect,
-          });
-          expect(snapshot).toMatchSnapshot();
-        });
+      beforeAll(async () => {
+        runSkuScriptInDir('start', appDir, { args, signal });
+        await waitForUrls(url, `${url}/test-middleware`);
       });
-    },
-  );
+
+      afterAll(async () => {
+        cancel();
+      });
+
+      it('should start a development server', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({ url, expect });
+        expect(snapshot).toMatchSnapshot();
+      });
+      it('should support the supplied middleware', async ({ expect }) => {
+        const snapshot = await getAppSnapshot({
+          url: `${url}/test-middleware`,
+          expect,
+        });
+        expect(snapshot).toMatchSnapshot();
+      });
+    });
+  });
 
   describe('start-ssr', () => {
     const url = `https://localhost:${serverPort}`;

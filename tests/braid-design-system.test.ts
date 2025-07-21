@@ -1,16 +1,17 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
+import { describe, beforeAll, it, onTestFinished, expect } from 'vitest';
 import path from 'node:path';
-import {
-  dirContentsToObject,
-  waitForUrls,
-  runSkuScriptInDir,
-  getPort,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
 
 import { createRequire } from 'node:module';
+import {
+  bundlers,
+  type BundlerValues,
+  cleanup,
+  deferCleanup,
+  scopeToFixture,
+} from '@sku-private/testing-library';
 
 const require = createRequire(import.meta.url);
 
@@ -25,27 +26,41 @@ function getLocalUrl(site: string, port: number) {
   return `http://${host}:${port}`;
 }
 
-describe('braid-design-system', () => {
-  describe.sequential.for(['vite', 'webpack'])('bundler %s', (bundler) => {
-    describe('start', async () => {
-      const { cancel, signal } = createCancelSignal();
+const { render } = scopeToFixture('braid-design-system');
 
+describe('braid-design-system', () => {
+  describe.sequential.for(bundlers)('bundler %s', (bundler) => {
+    describe('start', async () => {
       const port = await getPort();
-      const args = ['--strict-port', `--port=${port}`];
-      if (bundler === 'vite') {
-        args.push('--config', 'sku.config.vite.js', '--experimental-bundler');
-      }
+
+      const args: BundlerValues<string[]> = {
+        vite: [
+          '--config',
+          'sku.config.vite.js',
+          '--experimental-bundler',
+          '--strict-port',
+          `--port=${port}`,
+        ],
+        webpack: ['--strict-port', `--port=${port}`],
+      };
 
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, { args, signal });
-        await waitForUrls(getLocalUrl('seekAnz', port));
-      }, 230000);
+        const expectedText: BundlerValues<string> = {
+          vite: 'Local: http://localhost',
+          webpack: 'Starting the development server',
+        };
 
-      afterAll(async () => {
-        cancel();
+        const start = await render('start', args[bundler]);
+        expect(
+          await start.findByText(expectedText[bundler]),
+        ).toBeInTheConsole();
+
+        return cleanup;
       });
 
-      it('should return development seekAnz site', async ({ expect }) => {
+      it('should return development seekAnz site', async ({ task }) => {
+        deferCleanup(task.id, onTestFinished);
+
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
@@ -53,7 +68,8 @@ describe('braid-design-system', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it('should return development jobStreet site', async ({ expect }) => {
+      it('should return development jobStreet site', async ({ task }) => {
+        deferCleanup(task.id, onTestFinished);
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
@@ -63,28 +79,31 @@ describe('braid-design-system', () => {
     });
 
     describe('build', async () => {
-      const { cancel, signal } = createCancelSignal();
-
       const port = await getPort();
-      const portArgs = ['--strict-port', `--port=${port}`];
-      const args: Record<string, string[]> = {
+      const args: BundlerValues<string[]> = {
         vite: ['--config', 'sku.config.vite.js', '--experimental-bundler'],
+        webpack: [],
       };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
-        runSkuScriptInDir('serve', appDir, {
-          args: portArgs,
-          signal,
-        });
-        await waitForUrls(getLocalUrl('seekAnz', port));
+        const build = await render('build', args[bundler]);
+        expect(
+          await build.findByText('Sku build complete', undefined, {
+            timeout: 10000,
+          }),
+        ).toBeInTheConsole();
+
+        const serve = await render('serve', [
+          '--strict-port',
+          `--port=${port}`,
+        ]);
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
+
+        return cleanup;
       });
 
-      afterAll(async () => {
-        cancel();
-      });
-
-      it('should return built jobStreet site', async ({ expect }) => {
+      it('should return built jobStreet site', async ({ task }) => {
+        deferCleanup(task.id, onTestFinished);
         const app = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
@@ -92,7 +111,8 @@ describe('braid-design-system', () => {
         expect(app).toMatchSnapshot();
       });
 
-      it('should return built seekAnz site', async ({ expect }) => {
+      it('should return built seekAnz site', async ({ task }) => {
+        deferCleanup(task.id, onTestFinished);
         const app = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
@@ -100,14 +120,16 @@ describe('braid-design-system', () => {
         expect(app).toMatchSnapshot();
       });
 
-      it('should generate the expected files', async ({ expect }) => {
+      it('should generate the expected files', async ({ task }) => {
+        deferCleanup(task.id, onTestFinished);
         const files = await dirContentsToObject(distDir);
         expect(files).toMatchSnapshot();
       });
     });
   });
 
-  it('should handle braid-design-system in tests', async ({ expect }) => {
-    await expect(runSkuScriptInDir('test', appDir)).resolves.not.toThrowError();
+  it('should handle braid-design-system in tests', async () => {
+    const test = await render('test');
+    expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
   });
 });

@@ -18,6 +18,7 @@ export type JobWorkerData = {
   route: string;
   routeName: string;
   site: string;
+  targetPath: string;
 };
 
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
@@ -66,6 +67,7 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
     cspEnabled: skuContext.cspEnabled,
     cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
     language: route.language,
+    targetPath: skuContext.paths.target,
   }));
 
   // If we have more jobs than CPU cores, we need to split the jobs into chunks

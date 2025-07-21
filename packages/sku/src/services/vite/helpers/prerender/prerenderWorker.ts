@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { workerData } from 'node:worker_threads';
 import {
-  outDir,
+  createOutDir,
   renderEntryChunkName,
 } from '@/services/vite/helpers/bundleConfig.js';
 import { createCollector } from '@sku-lib/vite/collector';
@@ -18,8 +18,17 @@ setAdapter(mockAdapter);
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
+const { targetPath } = workerData[0] || {};
+if (!targetPath) {
+  throw new Error('targetPath is required in workerData');
+}
+
+const outDir = createOutDir(targetPath);
+
 const [manifest, render] = await Promise.all([
-  readFile(resolve('./dist/.vite/manifest.json'), 'utf-8').then(JSON.parse),
+  readFile(resolve(path.join(targetPath, '.vite/manifest.json')), 'utf-8').then(
+    JSON.parse,
+  ),
   import(resolve(path.join(outDir.ssg, renderEntryChunkName))).then(
     (m) => m.default,
   ),

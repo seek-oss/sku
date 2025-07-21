@@ -1,17 +1,12 @@
 import { test } from 'vitest';
-import path from 'node:path';
-import { run } from '@sku-private/test-utils';
+import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/jest-test/sku.config.ts'),
-);
+const { node } = scopeToFixture('jest-test');
 
 test('Jest test with preset', async ({ expect }) => {
-  await expect(
-    run(`${appDir}/node_modules/jest/bin/jest.js`, { cwd: appDir }),
-  ).resolves.not.toThrowError();
+  const jest = await node(['node_modules/jest/bin/jest.js']);
+  expect(await jest.findByError('Ran all test suites.')).toBeInTheConsole();
+  await waitFor(() => {
+    expect(jest.hasExit()).toMatchObject({ exitCode: 0 });
+  });
 });

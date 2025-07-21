@@ -10,6 +10,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const require = createRequire(import.meta.url);
+const skuBin = require.resolve('../../packages/sku/bin/bin.js');
 
 type SkuCommand =
   | 'serve'
@@ -35,7 +36,7 @@ export const renderCli = async (
   command: SkuCommand,
   args: string[] = [],
   options: Partial<RenderOptions> = {},
-) => render('node_modules/.bin/sku', [command, ...args], options);
+) => render(skuBin, [command, ...args], options);
 
 export const configureCli = (config: Partial<typeof DEFAULT_CONFIG>) => {
   configure({ ...DEFAULT_CONFIG, ...config });
@@ -50,11 +51,11 @@ export const scopeToFixture = (fixtureFolder: string) => {
     render: (
       command: SkuCommand,
       args: string[] = [],
-      options: Partial<Omit<RenderOptions, 'cwd'>> = {},
+      options: Partial<RenderOptions> = {},
     ) =>
       renderCli(command, args, {
         ...options,
-        cwd: appDir,
+        cwd: path.join(appDir, options.cwd ?? ''),
       }),
     node: (
       args: string[] = [],

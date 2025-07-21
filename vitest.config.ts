@@ -13,6 +13,11 @@ const skuNodeTests = [
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
+  server: {
+    watch: {
+      ignored: ['**/fixtures/**'],
+    },
+  },
   test: {
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.

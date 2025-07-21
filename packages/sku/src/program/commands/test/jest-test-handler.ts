@@ -2,21 +2,10 @@ import debug from 'debug';
 import { run } from 'jest';
 
 import isCI from '@/utils/isCI.js';
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
 
 const log = debug('sku:jest');
 
-export const runJestTests = async (
-  {
-    skuContext,
-  }: {
-    skuContext: SkuContext;
-  },
-  { args = [] }: { args: string[] },
-) => {
-  await runVocabCompile(skuContext);
-
+export const runJestTests = async ({ args = [] }: { args: string[] }) => {
   // https://jestjs.io/docs/configuration#preset-string
   const jestPreset = 'sku';
   log(`Using '${jestPreset}' Jest preset`);

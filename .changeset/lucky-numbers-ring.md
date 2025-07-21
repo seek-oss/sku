@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-`sku test`: Fixes a bug where `sku configure` would be run twice instead of once
+`sku test`: Fixes a bug where project configuration and Vocab translation compilation were running twice instead of once

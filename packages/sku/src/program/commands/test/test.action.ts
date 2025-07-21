@@ -19,5 +19,6 @@ export const testAction = async (
     await vitestHandler({ skuContext, args });
     return;
   }
-  runJestTests({ skuContext }, { args });
+
+  runJestTests({ args });
 };

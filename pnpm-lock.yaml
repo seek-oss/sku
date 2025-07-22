@@ -1229,6 +1229,9 @@ importers:
       '@sku-fixtures/configure':
         specifier: workspace:*
         version: link:../fixtures/configure
+      '@sku-fixtures/custom-output-target':
+        specifier: workspace:*
+        version: link:../fixtures/custom-output-target
       '@sku-fixtures/custom-src-paths':
         specifier: workspace:*
         version: link:../fixtures/custom-src-paths

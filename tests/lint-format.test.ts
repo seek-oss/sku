@@ -1,129 +1,96 @@
 import {
   describe,
-  test,
-  beforeAll,
-  afterAll,
+  it,
+  beforeEach,
+  afterEach,
   expect as globalExpect,
 } from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import dedent from 'dedent';
-import { runSkuScriptInDir } from '@sku-private/test-utils';
-import { createRequire } from 'node:module';
-import { stripVTControlCharacters as stripAnsi } from 'node:util';
+import { scopeToFixture } from '@sku-private/testing-library';
 
-const require = createRequire(import.meta.url);
+const { render, joinPath } = scopeToFixture('lint-format');
 
-const appDirectory = path.dirname(
-  require.resolve('@sku-fixtures/lint-format/sku.config.ts'),
-);
-const srcDirectory = path.join(appDirectory, 'src');
+const srcDirectory = joinPath('src');
 const testFile = (fileName: string) => path.join(srcDirectory, fileName);
 
-const filesToLint: Record<string, string> = {
-  'utils.test.ts': dedent /* ts */ `
-    console.log('foo');
-
-    it.only('should test something', () => {
-      let foo = true;
-
-      expect(foo).toBe(true);
-    });\n`,
-  'typescriptFile.ts': dedent /* ts */ `
-    const foo: number = 'a string';
-  `,
-  'unformattedFile1.js': dedent /* js */ `
-    import { something } from "with-double-quotes";
-
-      const indented = 'indented';
-
-    const foo = [
-      "something \"really\" long",
-      "that has to be moved",
-      'to multiple lines',
-      "so we can 'test' trailing commas"
-    ];
-  `,
-};
-
-const filesToFormat: Record<string, string> = {
-  'importOrder1.ts': dedent /* ts */ `
-    import './reset'; // side-effect imports should stay put
-
-    import LocalComponent from './LocalComponent'; // sibling
-    import Parent from '../parent'; // parents
-    import someModule from 'some-module'; // external
-    import vanillaStyles from './vanillaStyles.css'; // styles
-    import distantParent from '../../../parent'; // parents
-    import myself from '.'; // index
-    import path from 'path'; //  built-in
-    import utils from 'src/utils'; // internal
-  `,
-  'importOrder2.ts': dedent /* ts */ `
-    import aStyle from './a.css';
-    import bStyle from './b.css';
-    import cStyle from '../c.css';
-
-    import b from './b';
-    import a from './a';
-    import c from '../c';
-  `,
-  'fixableLintError.ts': dedent /* ts */ `
-    const foo = () => {
-      return 'foo';
-    };
-  `,
-  'unformattedFile2.ts': dedent /* ts */ `
-    import { something } from "with-double-quotes";
-
-      const indented = 'indented';
-
-    const foo = [
-      "something \"really\" long",
-      "that has to be moved",
-      'to multiple lines',
-      "so we can 'test' trailing commas"
-    ];
-  `,
-};
-
-globalExpect.addSnapshotSerializer({
-  serialize: (val) => {
-    const { stdout } = val;
-    // Remove some logs that contain file paths that are unique to the machine
-    const sanitizedStdout = stdout
-      .split('\n')
-      .filter((line: string) => !line.includes('sku/fixtures/lint-format'))
-      .join('\n');
-
-    return dedent`
-      stdout: ${stripAnsi(sanitizedStdout)}
-    `;
-  },
-  test: (val) => typeof val === 'object' && val.hasOwnProperty('stdout'),
-});
-
 describe('lint-format', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await fs.mkdir(srcDirectory, { recursive: true });
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await fs.rm(srcDirectory, { recursive: true, force: true });
   });
 
   describe('sku lint', () => {
-    test.for(Object.keys(filesToLint))(
-      'lint errors are reported: %s',
-      async (fileName, { expect }) => {
-        const filePath = testFile(fileName);
-        await fs.writeFile(filePath, filesToLint[fileName]);
+    it('should catch type errors', async ({ expect }) => {
+      const fileName = 'typescriptFile.ts';
+      const fileContents = dedent /* ts */ `
+        const foo: number = 'a string';
+      `;
+      await fs.writeFile(testFile(fileName), fileContents);
 
-        await expect(
-          runSkuScriptInDir('lint', appDirectory, { args: [filePath] }),
-        ).rejects.toMatchSnapshot();
-      },
-    );
+      const lint = await render('lint');
+      expect(
+        await lint.findByText('src/typescriptFile.ts(1,7): error'),
+      ).toBeInTheConsole();
+    });
+
+    it('should catch ES lint errors', async ({ expect }) => {
+      const fileName = 'utils.test.ts';
+      const fileContents = dedent /* ts */ `
+        console.log('foo');
+
+        it.only('should test something', () => {
+          let foo = true;
+
+          expect(foo).toBe(true);
+        });\n`;
+      await fs.writeFile(testFile(fileName), fileContents);
+
+      const lint = await render('lint');
+      expect(
+        await lint.findByText('Checking code with ESLint'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByText('3 problems (3 errors, 0 warnings)'),
+      ).toBeInTheConsole();
+    });
+
+    it('should catch prettier errors', async ({ expect }) => {
+      const fileName = 'unformattedFile1.js';
+      const fileContents = dedent /* js */ `
+        import { something } from "with-double-quotes";
+
+          const indented = 'indented';
+
+        const foo = [
+          "something \"really\" long",
+          "that has to be moved",
+          'to multiple lines',
+          "so we can 'test' trailing commas"
+        ];
+      `;
+      await fs.writeFile(testFile(fileName), fileContents);
+
+      const lint = await render('lint');
+      expect(
+        await lint.findByText('Checking code with Prettier'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByText('src/unformattedFile1.js'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByError(
+          'Error: The file(s) listed above failed the prettier check',
+        ),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByText("To fix this issue, run 'pnpm run format'"),
+      ).toBeInTheConsole();
+    });
   });
 
   describe('sku format', () => {
@@ -132,16 +99,59 @@ describe('lint-format', () => {
       test: (val) => typeof val === 'string',
     });
 
-    test.for(Object.keys(filesToFormat))(
+    const filesToFormat: Record<string, string> = {
+      'importOrder1.ts': dedent /* ts */ `
+        import './reset'; // side-effect imports should stay put
+
+        import LocalComponent from './LocalComponent'; // sibling
+        import Parent from '../parent'; // parents
+        import someModule from 'some-module'; // external
+        import vanillaStyles from './vanillaStyles.css'; // styles
+        import distantParent from '../../../parent'; // parents
+        import myself from '.'; // index
+        import path from 'path'; //  built-in
+        import utils from 'src/utils'; // internal
+      `,
+      'importOrder2.ts': dedent /* ts */ `
+        import aStyle from './a.css';
+        import bStyle from './b.css';
+        import cStyle from '../c.css';
+
+        import b from './b';
+        import a from './a';
+        import c from '../c';
+      `,
+      'fixableLintError.ts': dedent /* ts */ `
+        const foo = () => {
+          return 'foo';
+        };
+      `,
+      'unformattedFile2.ts': dedent /* ts */ `
+        import { something } from "with-double-quotes";
+
+          const indented = 'indented';
+
+        const foo = [
+          "something \"really\" long",
+          "that has to be moved",
+          'to multiple lines',
+          "so we can 'test' trailing commas"
+        ];
+      `,
+    };
+
+    it.for(Object.keys(filesToFormat))(
       'errors are fixed: %s',
       async (fileName, { expect }) => {
         const filePath = testFile(fileName);
         await fs.writeFile(filePath, filesToFormat[fileName]);
 
-        await runSkuScriptInDir('format', appDirectory);
+        const format = await render('format');
+        expect(
+          await format.findByText('Formatting complete'),
+        ).toBeInTheConsole();
 
         const result = await fs.readFile(filePath, { encoding: 'utf-8' });
-
         expect(result).toMatchSnapshot();
       },
     );

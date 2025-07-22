@@ -1,51 +1,32 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
-import path from 'node:path';
-import {
-  dirContentsToObject,
-  runSkuScriptInDir,
-  waitForUrls,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+import { describe, it } from 'vitest';
+import { dirContentsToObject } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
 
-import { createRequire } from 'node:module';
+import { scopeToFixture } from '@sku-private/testing-library';
 
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/library-build/sku.config.js'),
-);
-const distDir = path.resolve(appDir, 'dist');
+const { render, joinPath } = scopeToFixture('library-build');
 
 describe('library-build', () => {
   describe('build', () => {
-    beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-    });
-
     it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(distDir);
+      const build = await render('build');
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+
+      const files = await dirContentsToObject(joinPath('dist'));
       expect(files).toMatchSnapshot();
     });
   });
 
   describe('start', () => {
-    const devServerUrl = `http://localhost:8085`;
-    const { cancel, signal } = createCancelSignal();
-
-    beforeAll(async () => {
-      runSkuScriptInDir('start', appDir, {
-        signal,
-      });
-      await waitForUrls(devServerUrl);
-    });
-
-    afterAll(async () => {
-      cancel();
-    });
-
     it('should start a development server', async ({ expect }) => {
+      const devServerUrl = `http://localhost:8085`;
+
+      const start = await render('start');
+      expect(
+        await start.findByText('Starting development server'),
+      ).toBeInTheConsole();
+
       const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });

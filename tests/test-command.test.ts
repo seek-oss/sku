@@ -1,13 +1,16 @@
 import { describe, it } from 'vitest';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  testFrameworks,
+  type TestFrameworkValues,
+  scopeToFixture,
+  waitFor,
+} from '@sku-private/testing-library';
 
 const { render } = scopeToFixture('sku-test');
 
-const testRunners = ['vitest', 'jest'] as const;
-
-describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
-  const args: Record<(typeof testRunners)[number], string[]> = {
+describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
+  const args: TestFrameworkValues<string[]> = {
     vitest: ['--config=sku.config.vitest.ts'],
     jest: [],
   };
@@ -28,7 +31,7 @@ describe.for(testRunners)('[%s]: sku-test', (testRunner) => {
       ...args[testRunner],
     ]);
 
-    const expected: Record<(typeof testRunners)[number], string> = {
+    const expected: TestFrameworkValues<string> = {
       vitest: 'No test files found, exiting with code 0',
       jest: 'No tests found, exiting with code 0',
     };

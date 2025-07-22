@@ -62,6 +62,15 @@ export const scopeToFixture = (fixtureFolder: string) => {
         ...options,
         cwd: appDir,
       }),
+    exec: (
+      command: string,
+      args: string[] = [],
+      options: Partial<Omit<RenderOptions, 'cwd'>> = {},
+    ) =>
+      render(command, args, {
+        ...options,
+        cwd: appDir,
+      }),
     joinPath: (...paths: string[]) => path.join(appDir, ...paths),
   };
 };

@@ -50,30 +50,3 @@ const foo = [
 ];
 
 `;
-
-exports[`lint-format > sku lint > lint errors are reported: typescriptFile.ts 1`] = `
-stdout: Linting
-Checking code with TypeScript compiler
-src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
-`;
-
-exports[`lint-format > sku lint > lint errors are reported: unformattedFile1.js 1`] = `
-stdout: Linting
-Checking code with Prettier
-src/unformattedFile1.js
-To fix this issue, run 'pnpm run format'
-`;
-
-exports[`lint-format > sku lint > lint errors are reported: utils.test.ts 1`] = `
-stdout: Linting
-Checking code with TypeScript compiler
-Checking code with Prettier
-Checking code with ESLint
-
-1:1  error  Unexpected console statement                    no-console
-3:4  error  Unexpected focused test                         jest/no-focused-tests
-4:7  error  'foo' is never reassigned. Use 'const' instead  prefer-const
-
-✖ 3 problems (3 errors, 0 warnings)
-1 error and 0 warnings potentially fixable with the \`--fix\` option.
-`;

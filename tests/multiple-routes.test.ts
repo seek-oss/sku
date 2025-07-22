@@ -1,127 +1,123 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
-import path from 'node:path';
 import {
-  dirContentsToObject,
-  getPort,
-  runSkuScriptInDir,
-  waitForUrls,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
+import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 
-import { createRequire } from 'node:module';
+import {
+  bundlers,
+  type BundlerValues,
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+} from '@sku-private/testing-library';
 
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/multiple-routes/sku.config.js'),
-);
-
-const targetDirectory = `${appDir}/dist`;
-
-const renderPageCorrectly = async ({
-  page,
-  pageUrl,
-}: {
-  page: string;
-  pageUrl: string;
-}) => {
-  it(`should render ${page} page correctly`, async ({ expect }) => {
-    const snapshot = await getAppSnapshot({
-      url: pageUrl,
-      expect,
-      waitUntil: 'networkidle0',
-    });
-    expect(snapshot).toMatchSnapshot();
-  });
-};
+const { render, joinPath } = scopeToFixture('multiple-routes');
 
 describe('multiple-routes', () => {
-  describe.sequential.for(['vite', 'webpack'])('bundler: %s', (bundler) => {
+  describe.sequential.for(bundlers)('bundler: %s', (bundler) => {
     describe('start', async () => {
-      const { cancel, signal } = createCancelSignal();
-
       const port = await getPort();
-
       const url = `http://localhost:${port}`;
-      const args = ['--strict-port', `--port=${port}`];
+      const portArgs = ['--strict-port', `--port=${port}`];
 
-      if (bundler === 'vite') {
-        args.push(
-          '--convert-loadable',
-          '--experimental-bundler',
+      const args: BundlerValues<string[]> = {
+        vite: [
           '--config',
           'sku.config.vite.js',
-        );
-      }
+          '--experimental-bundler',
+          '--convert-loadable',
+          ...portArgs,
+        ],
+        webpack: portArgs,
+      };
 
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, {
-          args,
-          signal,
+        const start = await render('start', args[bundler]);
+        globalExpect(
+          await start.findByText('Starting development server'),
+        ).toBeInTheConsole();
+      });
+
+      afterAll(cleanup);
+
+      it(`should render home page correctly`, async ({ expect, task }) => {
+        skipCleanup(task.id);
+        const snapshot = await getAppSnapshot({
+          url,
+          expect,
         });
-        await waitForUrls(url);
+        expect(snapshot).toMatchSnapshot();
       });
 
-      afterAll(async () => {
-        cancel();
-      });
-
-      renderPageCorrectly({
-        page: 'home',
-        pageUrl: url,
-      });
-
-      renderPageCorrectly({
-        page: 'details',
-        pageUrl: `${url}/details/123`,
+      it(`should render details page correctly`, async ({ expect, task }) => {
+        skipCleanup(task.id);
+        const snapshot = await getAppSnapshot({
+          url: `${url}/details/123`,
+          expect,
+        });
+        expect(snapshot).toMatchSnapshot();
       });
     });
 
     describe('build and serve', async () => {
-      const { cancel, signal } = createCancelSignal();
-
       const port = await getPort();
 
       const url = `http://localhost:${port}`;
       const portArgs = ['--strict-port', `--port=${port}`];
 
-      const args: string[] = [];
-
-      if (bundler === 'vite') {
-        args.push(
+      const args: BundlerValues<string[]> = {
+        vite: [
           '--convert-loadable',
           '--experimental-bundler',
           '--config',
           'sku.config.vite.js',
-        );
-      }
+        ],
+        webpack: [],
+      };
 
       beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, { args });
-        runSkuScriptInDir('serve', appDir, {
-          args: portArgs,
-          signal,
+        const build = await render('build', args[bundler]);
+        globalExpect(
+          await build.findByText('Sku build complete', undefined, {
+            timeout: 10000,
+          }),
+        ).toBeInTheConsole();
+
+        const serve = await render('serve', portArgs);
+        globalExpect(
+          await serve.findByText('Server started'),
+        ).toBeInTheConsole();
+      });
+
+      afterAll(cleanup);
+
+      it(`should render home page correctly`, async ({ expect, task }) => {
+        skipCleanup(task.id);
+        const snapshot = await getAppSnapshot({
+          url,
+          expect,
+          waitUntil: 'load',
         });
-        await waitForUrls(url);
+        expect(snapshot).toMatchSnapshot();
       });
 
-      afterAll(async () => {
-        cancel();
-      });
-
-      renderPageCorrectly({
-        page: 'home',
-        pageUrl: url,
-      });
-
-      renderPageCorrectly({
-        page: 'details',
-        pageUrl: `${url}/details/123`,
+      it(`should render details page correctly`, async ({ expect, task }) => {
+        skipCleanup(task.id);
+        const snapshot = await getAppSnapshot({
+          url: `${url}/details/123`,
+          expect,
+          waitUntil: 'load',
+        });
+        expect(snapshot).toMatchSnapshot();
       });
 
       it('should generate the expected files', async ({ expect }) => {
-        const files = await dirContentsToObject(targetDirectory);
+        const files = await dirContentsToObject(joinPath('dist'));
         expect(files).toMatchSnapshot();
       });
     });
@@ -129,9 +125,11 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
-      await expect(
-        runSkuScriptInDir('test', appDir),
-      ).resolves.not.toThrowError();
+      const test = await render('test');
+
+      expect(
+        await test.findByError('Test Suites: 1 passed, 1 total'),
+      ).toBeInTheConsole();
     });
   });
 });

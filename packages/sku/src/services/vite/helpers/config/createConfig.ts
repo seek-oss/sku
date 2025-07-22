@@ -45,6 +45,7 @@ export const createClientBuildConfig = (skuContext: SkuContext) => {
         ssr: false,
         outDir: outDir.client,
         manifest: true,
+        sourcemap: skuContext.sourceMapsProd,
         rollupOptions: {
           input: clientEntry,
         },

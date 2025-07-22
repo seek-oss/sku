@@ -51,6 +51,7 @@ exports[`custom-src-paths > bundler vite > build > should generate the expected 
   </body>
 </html>",
   "vite-client-M_JrpecH.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-M_JrpecH.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

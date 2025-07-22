@@ -3,10 +3,13 @@
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
   "AsyncComponent-C5AHhqm_.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-C5AHhqm_.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DEuzHRSI.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-DEuzHRSI.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DGJnH813.css": "._1hpn1da0{color:#00f}
 ",
   "Home-B4Am_Pmc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Home-B4Am_Pmc.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home-D-106MY_.css": ".ms22la0{color:red}
 ",
   "production/au/details/$id/index.html": "<!DOCTYPE html>
@@ -132,6 +135,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
   </body>
 </html>",
   "vite-client-5_tId46l.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-5_tId46l.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

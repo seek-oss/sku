@@ -14,6 +14,9 @@ importers:
       '@changesets/get-github-info':
         specifier: ^0.6.0
         version: 0.6.0
+      '@sku-private/eslint-plugin':
+        specifier: workspace:*
+        version: link:private/eslint-plugin
       '@sku-private/puppeteer':
         specifier: workspace:*
         version: link:private/puppeteer
@@ -1121,6 +1124,8 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  private/eslint-plugin: {}
 
   private/puppeteer:
     devDependencies:

@@ -1,4 +1,10 @@
-import { describe, beforeAll, it, expect, afterAll } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  it,
+  expect as globalExpect,
+  afterAll,
+} from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
@@ -16,7 +22,7 @@ const { render, joinPath } = scopeToFixture('custom-src-paths');
 describe('custom-src-paths', () => {
   describe.sequential.for(bundlers)('bundler %s', (bundler) => {
     describe('start', async () => {
-      it('should start a development server', async () => {
+      it('should start a development server', async ({ expect }) => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
 
@@ -32,7 +38,7 @@ describe('custom-src-paths', () => {
         };
 
         const start = await render('start', args[bundler]);
-        expect(
+        globalExpect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
@@ -53,38 +59,42 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         const build = await render('build', args[bundler]);
-        expect(await build.findByText('Build complete')).toBeInTheConsole();
+        globalExpect(
+          await build.findByText('Build complete'),
+        ).toBeInTheConsole();
 
         const serve = await render('serve', portArgs);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        globalExpect(
+          await serve.findByText('Server started'),
+        ).toBeInTheConsole();
       });
 
       afterAll(cleanup);
 
-      it('should generate the expected files', async ({ task }) => {
+      it('should generate the expected files', async ({ expect, task }) => {
         skipCleanup(task.id);
         const files = await dirContentsToObject(joinPath('dist'));
         expect(files).toMatchSnapshot();
       });
 
-      it('should create valid app', async ({ task }) => {
+      it('should create valid app', async ({ task, expect }) => {
         skipCleanup(task.id);
 
-        const app = await getAppSnapshot({ expect, url });
+        const app = await getAppSnapshot({ url, expect });
         expect(app).toMatchSnapshot();
       });
     });
   });
 
   describe('format', () => {
-    it('should format successfully', async () => {
+    it('should format successfully', async ({ expect }) => {
       const format = await render('format');
       expect(await format.findByText('Formatting complete')).toBeInTheConsole();
     });
   });
 
   describe('lint', () => {
-    it('should lint successfully', async () => {
+    it('should lint successfully', async ({ expect }) => {
       const lint = await render('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();
     });

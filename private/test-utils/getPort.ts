@@ -1,5 +1,13 @@
-import _getPort, { portNumbers } from 'get-port';
+import _getPort from 'get-port';
+
+/**
+ * List of recently used ports to avoid collisions
+ * when starting tests in parallel.
+ */
+const usedPorts: number[] = [];
 
 export async function getPort() {
-  return await _getPort({ port: portNumbers(4000, 4100) });
+  const port = await _getPort({ exclude: usedPorts });
+  usedPorts.push(port);
+  return port;
 }

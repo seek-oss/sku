@@ -83,9 +83,7 @@ describe('multiple-routes', () => {
       beforeAll(async () => {
         const build = await render('build', args[bundler]);
         globalExpect(
-          await build.findByText('Sku build complete', undefined, {
-            timeout: 10000,
-          }),
+          await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
 
         const serve = await render('serve', portArgs);

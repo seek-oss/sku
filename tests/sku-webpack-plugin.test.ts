@@ -9,7 +9,7 @@ const devServerUrl = `http://localhost:${port}`;
 const { exec, joinPath } = scopeToFixture('sku-webpack-plugin');
 
 describe('sku-webpack-plugin', () => {
-  describe.skip('start', () => {
+  describe('start', () => {
     it('should start a development server', async ({ expect }) => {
       const server = await exec('node_modules/.bin/webpack-dev-server', [
         '--mode',
@@ -39,16 +39,11 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await waitFor(
-        async () => {
-          expect(build.hasExit()).toMatchObject({
-            exitCode: 0,
-          });
-        },
-        {
-          timeout: 150000,
-        },
-      );
+      await waitFor(async () => {
+        expect(build.hasExit()).toMatchObject({
+          exitCode: 0,
+        });
+      });
 
       const files = await dirContentsToObject(joinPath('dist'));
       expect(files).toMatchSnapshot();

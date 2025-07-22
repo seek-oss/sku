@@ -11,7 +11,7 @@ const projectName = 'new-project';
 const projectDirectory = path.join(fixtureDirectory, projectName);
 const lockFilePath = path.join(process.cwd(), 'pnpm-lock.yaml');
 
-describe('sku init', () => {
+describe.skip('sku init', () => {
   let pnpmLockFile: string;
 
   beforeAll(

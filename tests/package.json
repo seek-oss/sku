@@ -15,6 +15,7 @@
     "@sku-fixtures/assertion-removal": "workspace:*",
     "@sku-fixtures/braid-design-system": "workspace:*",
     "@sku-fixtures/configure": "workspace:*",
+    "@sku-fixtures/custom-output-target": "workspace:*",
     "@sku-fixtures/custom-src-paths": "workspace:*",
     "@sku-fixtures/jest-test": "workspace:*",
     "@sku-fixtures/library-build": "workspace:*",

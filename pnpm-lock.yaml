@@ -189,6 +189,28 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/custom-output-target:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../private/test-utils
+      '@types/react':
+        specifier: ^18.2.3
+        version: 18.3.23
+      '@types/react-dom':
+        specifier: ^18.2.3
+        version: 18.3.7(@types/react@18.3.23)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/custom-src-paths:
     dependencies:
       dedent:
@@ -1213,6 +1235,9 @@ importers:
       '@sku-fixtures/configure':
         specifier: workspace:*
         version: link:../fixtures/configure
+      '@sku-fixtures/custom-output-target':
+        specifier: workspace:*
+        version: link:../fixtures/custom-output-target
       '@sku-fixtures/custom-src-paths':
         specifier: workspace:*
         version: link:../fixtures/custom-src-paths

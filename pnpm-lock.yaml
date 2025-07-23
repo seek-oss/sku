@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+pnpmfileChecksum: sha256-HyzwrIZmFVJr7kvwhHMEE7NoDGkknMxWww7GMTBFW70=
+
 importers:
 
   .:
@@ -675,6 +677,8 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  packages/pnpm-plugin: {}
 
   packages/sku:
     dependencies:

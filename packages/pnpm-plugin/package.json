@@ -1,0 +1,21 @@
+{
+  "name": "pnpm-plugin-sku",
+  "version": "0.0.1",
+  "description": "PNPM config dependency for sku that configures recommended PNPM setting",
+  "main": "pnpmfile.cjs",
+  "type": "module",
+  "files": [
+    "pnpmfile.cjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/pnpm-plugin"
+  },
+  "author": "SEEK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seek-oss/sku/issues"
+  },
+  "homepage": "https://github.com/seek-oss/sku#readme"
+}

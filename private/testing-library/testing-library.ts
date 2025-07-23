@@ -27,7 +27,7 @@ type SkuCommand =
 
 // Default configuration for cli-testing-library
 const DEFAULT_CONFIG: Partial<Config> = {
-  asyncUtilTimeout: 20_000,
+  asyncUtilTimeout: 10_000,
 };
 
 // Configure cli-testing-library with default settings

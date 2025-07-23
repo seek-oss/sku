@@ -1,35 +1,34 @@
 import { describe, it } from 'vitest';
 
-import path from 'node:path';
-
+import { dirContentsToObject } from '@sku-private/test-utils';
 import {
-  runSkuScriptInDir,
-  dirContentsToObject,
-} from '@sku-private/test-utils';
+  bundlers,
+  type BundlerValues,
+  scopeToFixture,
+} from '@sku-private/testing-library';
 
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/source-maps/sku.config.ts'),
-);
+const { render, joinPath } = scopeToFixture('source-maps');
 
 describe('source-maps', () => {
-  const args: Record<string, string[]> = {
+  const args: BundlerValues<string[]> = {
     vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+    webpack: [],
   };
 
-  describe.for(['vite', 'webpack'])('bundler %s', (bundler) => {
+  describe.sequential.each(bundlers)('bundler %s', (bundler) => {
     describe.for([true, false])('sourceMapsProd %s', (sourceMapsProd) => {
       it('should generate the expected files', async ({ expect }) => {
-        await runSkuScriptInDir('build', appDir, {
-          args: args[bundler],
-          env: { SKU_SOURCE_MAPS_PROD: String(sourceMapsProd) },
+        const build = await render('build', args[bundler], {
+          spawnOpts: {
+            env: {
+              ...process.env,
+              SKU_SOURCE_MAPS_PROD: String(sourceMapsProd),
+            },
+          },
         });
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
-        const files = await dirContentsToObject(`${appDir}/dist`);
-
+        const files = await dirContentsToObject(joinPath('./dist'));
         expect(files).toMatchSnapshot();
       });
     });

@@ -1,53 +1,60 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import { getPort } from '@sku-private/test-utils';
 import {
-  getPort,
-  runSkuScriptInDir,
-  waitForUrls,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+  bundlers,
+  type BundlerValues,
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+} from '@sku-private/testing-library';
 
-import skuServerConfig from '@sku-fixtures/sku-with-https/sku-server.config.ts';
+const { render, joinPath } = scopeToFixture('sku-with-https');
 
-import { createRequire } from 'node:module';
-
-const { serverPort } = skuServerConfig;
-
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/sku-with-https/sku.config.mjs'),
-);
+const serverPort = 9894;
 
 describe.sequential('sku-with-https', () => {
-  describe.each(['vite', 'webpack'])('bundler: %s', async (bundler) => {
+  describe.each(bundlers)('bundler: %s', async (bundler) => {
     const port = await getPort();
-    const args = ['--strict-port', `--port=${port}`];
-    if (bundler === 'vite') {
-      args.push(
-        ...['--experimental-bundler', '--config', 'sku.config.vite.mjs'],
-      );
-    }
+    const url = `https://localhost:${port}`;
+
+    const portArgs = ['--strict-port', `--port=${port}`];
+    const args: BundlerValues<string[]> = {
+      vite: [
+        '--experimental-bundler',
+        '--config',
+        'sku.config.vite.mjs',
+        ...portArgs,
+      ],
+      webpack: portArgs,
+    };
+
     describe('start', () => {
-      const { cancel, signal } = createCancelSignal();
-      const url = `https://localhost:${port}`;
-
       beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, { args, signal });
-        await waitForUrls(url, `${url}/test-middleware`);
+        const start = await render('start', args[bundler]);
+        globalExpect(
+          await start.findByText('Starting development server'),
+        ).toBeInTheConsole();
       });
 
-      afterAll(async () => {
-        cancel();
-      });
+      afterAll(cleanup);
 
-      it('should start a development server', async ({ expect }) => {
+      it('should start a development server', async ({ expect, task }) => {
+        skipCleanup(task.id);
         const snapshot = await getAppSnapshot({ url, expect });
         expect(snapshot).toMatchSnapshot();
       });
-      it('should support the supplied middleware', async ({ expect }) => {
+
+      it('should support the supplied middleware', async ({ expect, task }) => {
+        skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
           expect,
@@ -59,21 +66,13 @@ describe.sequential('sku-with-https', () => {
 
   describe('start-ssr', () => {
     const url = `https://localhost:${serverPort}`;
-    const { cancel, signal } = createCancelSignal();
-
-    beforeAll(async () => {
-      runSkuScriptInDir('start-ssr', appDir, {
-        args: ['--config=sku-server.config.ts'],
-        signal,
-      });
-      await waitForUrls(url, `${url}/test-middleware`);
-    });
-
-    afterAll(async () => {
-      cancel();
-    });
 
     it('should support the supplied middleware', async ({ expect }) => {
+      const start = await render('start-ssr', [
+        '--config=sku-server.config.ts',
+      ]);
+      expect(await start.findByText('Server started')).toBeInTheConsole();
+
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
         expect,
@@ -85,28 +84,27 @@ describe.sequential('sku-with-https', () => {
   describe('serve', async () => {
     const port = await getPort();
     const url = `https://localhost:${port}`;
-    const { cancel, signal } = createCancelSignal();
 
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, {
-        args: ['--strict-port', `--port=${port}`],
-        signal,
-      });
+      const build = await render('build');
+      globalExpect(
+        await build.findByText('Sku build complete'),
+      ).toBeInTheConsole();
 
-      await waitForUrls(url, `${url}/test-middleware`);
+      const serve = await render('serve', ['--strict-port', `--port=${port}`]);
+      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
     });
 
-    afterAll(async () => {
-      cancel();
-    });
+    afterAll(cleanup);
 
-    it('should start a development server', async ({ expect }) => {
+    it('should start a development server', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const snapshot = await getAppSnapshot({ url, expect });
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should support the supplied middleware', async ({ expect }) => {
+    it('should support the supplied middleware', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
         expect,
@@ -115,10 +113,10 @@ describe.sequential('sku-with-https', () => {
     });
   });
 
-  describe('.gitignore', () => {
+  describe.only('.gitignore', () => {
     it('should add the .ssl directory to .gitignore', async ({ expect }) => {
       const ignoreContents = await fs.readFile(
-        path.join(appDir, '.gitignore'),
+        path.join(joinPath('./'), '.gitignore'),
         'utf-8',
       );
       expect(ignoreContents.split('\n')).toContain(`.ssl`);

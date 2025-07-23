@@ -1,16 +1,20 @@
-import { describe, beforeAll, afterAll, afterEach, it } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
 import path from 'node:path';
-import { sync as spawnSync } from 'cross-spawn';
 import {
   waitForUrls,
   startAssetServer,
   getStoryPage,
   getTextContentFromFrameOrPage,
-  run,
-  createCancelSignal,
 } from '@sku-private/test-utils';
 import { createRequire } from 'node:module';
 import type { Page } from 'puppeteer';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const require = createRequire(import.meta.url);
 
@@ -20,8 +24,10 @@ const appDir = path.dirname(
 );
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
+
+const { exec } = scopeToFixture('storybook-config');
 describe('storybook-config', () => {
-  describe('storybook', () => {
+  describe('start', () => {
     const port = 8089;
     const storybookBaseUrl = `http://localhost:${port}`;
 
@@ -30,30 +36,27 @@ describe('storybook-config', () => {
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    const { cancel, signal } = createCancelSignal();
     let storyPage: Page;
 
     beforeAll(async () => {
-      run('pnpm', {
-        args: [
-          'storybook',
-          'dev',
-          '--ci',
-          '--quiet',
-          '--port',
-          port.toString(),
-        ],
-        cwd: appDir,
-        stdio: 'inherit',
-        signal,
-      });
-      await waitForUrls(storyIframeUrl, middlewareUrl);
+      const storybook = await exec('pnpm', [
+        'storybook',
+        'dev',
+        '--ci',
+        '--port',
+        port.toString(),
+      ]);
+      globalExpect(
+        await storybook.findByText(
+          'Storybook 9.0.16 for react-webpack5 started',
+        ),
+      ).toBeInTheConsole();
+
       storyPage = await getStoryPage(storyIframeUrl);
-    }, 100000);
+    });
 
     afterAll(async () => {
       await storyPage?.close();
-      cancel();
     });
 
     it('should start sku dev middleware if configured', async ({ expect }) => {
@@ -94,40 +97,48 @@ describe('storybook-config', () => {
       expect(text).toEqual('32px vanilla text');
       expect(fontSize).toEqual('32px');
     });
+  });
 
-    describe('Docs Page', () => {
-      let docsPage: Page;
+  describe('start docs page', () => {
+    it('should render a ".mdx" file', async ({ expect }) => {
+      const port = 8088;
+      const storybook = await exec('pnpm', [
+        'storybook',
+        'dev',
+        '--ci',
+        '--port',
+        port.toString(),
+      ]);
+      globalExpect(
+        await storybook.findByText(
+          'Storybook 9.0.16 for react-webpack5 started',
+        ),
+      ).toBeInTheConsole();
 
-      afterEach(async () => {
-        await docsPage?.close();
-      });
+      const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
+      const docsPage = await getStoryPage(docsIframeUrl);
 
-      it('should render a ".mdx" file', async ({ expect }) => {
-        const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
-        const docsIframeUrl = `${storybookBaseUrl}${docsIframePath}`;
-        docsPage = await getStoryPage(docsIframeUrl);
-        await waitForUrls(docsIframeUrl);
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test',
+        );
 
-        {
-          const { text, fontSize } = await getTextContentFromFrameOrPage(
-            docsPage,
-            '#docs-test',
-          );
+        expect(text).toEqual('Docs Test');
+        expect(fontSize).toEqual('32px');
+      }
 
-          expect(text).toEqual('Docs Test');
-          expect(fontSize).toEqual('32px');
-        }
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test + p',
+        );
 
-        {
-          const { text, fontSize } = await getTextContentFromFrameOrPage(
-            docsPage,
-            '#docs-test + p',
-          );
+        expect(text).toEqual('I am a test document.');
+        expect(fontSize).toEqual('14px');
+      }
 
-          expect(text).toEqual('I am a test document.');
-          expect(fontSize).toEqual('14px');
-        }
-      });
+      await docsPage?.close();
     });
   });
 
@@ -143,10 +154,10 @@ describe('storybook-config', () => {
     let storyPage: Page;
 
     beforeAll(async () => {
-      spawnSync('pnpm', ['storybook', 'build', '--quiet'], {
-        cwd: appDir,
-        stdio: 'inherit',
-      });
+      const storybook = await exec('pnpm', ['storybook', 'build']);
+      globalExpect(
+        await storybook.findByText('info => Output directory'),
+      ).toBeInTheConsole();
 
       closeStorybookServer = await startAssetServer(
         assetServerPort,

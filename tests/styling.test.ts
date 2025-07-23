@@ -1,48 +1,38 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
-import assert from 'node:assert/strict';
-import path from 'node:path';
 import type { Page } from 'puppeteer';
 import {
   dirContentsToObject,
-  waitForUrls,
-  runSkuScriptInDir,
   getStoryPage,
   getTextContentFromFrameOrPage,
-  createCancelSignal,
-  run,
 } from '@sku-private/test-utils';
-import skuConfig from '@sku-fixtures/styling/sku.config.ts';
+import { scopeToFixture } from '@sku-private/testing-library';
 
-import { createRequire } from 'node:module';
+const port = 8205;
+const devServerUrl = `http://localhost:${port}`;
 
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/styling/sku.config.ts'),
-);
-const distDir = path.resolve(appDir, 'dist');
-
-assert(skuConfig.port, 'sku config has port');
-const devServerUrl = `http://localhost:${skuConfig.port}`;
+const { render, exec, joinPath } = scopeToFixture('styling');
+const distDir = joinPath('dist');
 
 describe('styling', () => {
   describe('build', () => {
-    const { cancel, signal } = createCancelSignal();
-
     beforeAll(async () => {
-      await runSkuScriptInDir('build', appDir);
-      runSkuScriptInDir('serve', appDir, {
-        signal,
-      });
-      await waitForUrls(devServerUrl);
-    });
-
-    afterAll(async () => {
-      cancel();
+      const build = await render('build');
+      globalExpect(
+        await build.findByText('Sku build complete'),
+      ).toBeInTheConsole();
     });
 
     it('should create valid app', async ({ expect }) => {
+      const serve = await render('serve');
+      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+
       const app = await getAppSnapshot({ url: devServerUrl, expect });
       expect(app).toMatchSnapshot();
     });
@@ -54,20 +44,12 @@ describe('styling', () => {
   });
 
   describe('start', () => {
-    const { cancel, signal } = createCancelSignal();
-
-    beforeAll(async () => {
-      runSkuScriptInDir('start', appDir, {
-        signal,
-      });
-      await waitForUrls(devServerUrl);
-    });
-
-    afterAll(async () => {
-      cancel();
-    });
-
     it('should start a development server', async ({ expect }) => {
+      const start = await render('start');
+      globalExpect(
+        await start.findByText('Starting development server'),
+      ).toBeInTheConsole();
+
       const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
       expect(snapshot).toMatchSnapshot();
     });
@@ -75,9 +57,8 @@ describe('styling', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      await expect(
-        runSkuScriptInDir('test', appDir),
-      ).resolves.not.toThrowError();
+      const test = await render('test');
+      expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });
   });
 
@@ -88,30 +69,27 @@ describe('styling', () => {
     const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    const { cancel, signal } = createCancelSignal();
     let storyPage: Page;
 
     beforeAll(async () => {
-      run('pnpm', {
-        args: [
-          'storybook',
-          'dev',
-          '--ci',
-          '--quiet',
-          '--port',
-          storybookPort.toString(),
-        ],
-        cwd: appDir,
-        stdio: 'inherit',
-        signal,
-      });
-      await waitForUrls(storyIframeUrl);
+      const storybook = await exec('pnpm', [
+        'storybook',
+        'dev',
+        '--ci',
+        '--port',
+        storybookPort.toString(),
+      ]);
+      globalExpect(
+        await storybook.findByText(
+          'Storybook 9.0.16 for react-webpack5 started',
+        ),
+      ).toBeInTheConsole();
+
       storyPage = await getStoryPage(storyIframeUrl);
-    }, 200000);
+    });
 
     afterAll(async () => {
       await storyPage?.close();
-      cancel();
     });
 
     it('should render external styles', async ({ expect }) => {

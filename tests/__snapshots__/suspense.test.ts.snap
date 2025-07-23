@@ -18,6 +18,7 @@ exports[`suspense > bundler vite > build and serve > should generate the expecte
   </body>
 </html>",
   "vite-client-C3ajiGUu.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-C3ajiGUu.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

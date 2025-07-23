@@ -1,71 +1,68 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
-import assert from 'node:assert/strict';
-import path from 'node:path';
 import {
-  getPort,
-  runSkuScriptInDir,
-  waitForUrls,
-  createCancelSignal,
-} from '@sku-private/test-utils';
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
+import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getPort } from '@sku-private/test-utils';
+import {
+  bundlers,
+  type BundlerValues,
+  scopeToFixture,
+  cleanup,
+  skipCleanup,
+} from '@sku-private/testing-library';
 
-import skuConfig from '@sku-fixtures/translations/sku.config.ts';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-
-const appDir = path.dirname(
-  require.resolve('@sku-fixtures/translations/sku.config.ts'),
-);
-
-assert(skuConfig.port, 'sku config has port');
+const { render } = scopeToFixture('translations');
 
 describe('translations', () => {
-  describe.sequential.for(['vite', 'webpack'])(
-    'bundler %s',
-    async (bundler) => {
-      const { cancel, signal } = createCancelSignal();
-      const port = await getPort();
-      const baseUrl = `http://localhost:${port}`;
-      const args: Record<string, string[]> = {
-        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
-      };
+  describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
+    const port = await getPort();
+    const baseUrl = `http://localhost:${port}`;
+    const args: BundlerValues<string[]> = {
+      vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+      webpack: [],
+    };
 
-      beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
-        runSkuScriptInDir('serve', appDir, {
-          args: ['--strict-port', `--port=${port}`],
-          signal,
-        });
-        await waitForUrls(`${baseUrl}/en`);
-      });
+    beforeAll(async () => {
+      const build = await render('build', args[bundler]);
+      globalExpect(
+        await build.findByText('Sku build complete'),
+      ).toBeInTheConsole();
 
-      afterAll(() => {
-        cancel();
-      });
+      const serve = await render('serve', ['--strict-port', `--port=${port}`]);
+      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+    });
 
-      it('should render en', async ({ expect }) => {
-        const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
-        expect(app).toMatchSnapshot();
-      });
+    afterAll(cleanup);
 
-      it('should render fr', async ({ expect }) => {
-        const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
-        expect(app).toMatchSnapshot();
-      });
+    it('should render en', async ({ expect, task }) => {
+      skipCleanup(task.id);
+      const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
+      expect(app).toMatchSnapshot();
+    });
 
-      it('should render en-PSEUDO post-hydration', async ({ expect }) => {
-        const app = await getAppSnapshot({
-          expect,
-          url: `${baseUrl}/en?pseudo=true`,
-        });
-        expect(app).toMatchSnapshot();
-      });
+    it('should render fr', async ({ expect, task }) => {
+      skipCleanup(task.id);
+      const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
+      expect(app).toMatchSnapshot();
+    });
 
-      it('should support query parameters', async ({ expect }) => {
-        const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
-        expect(app).toMatchSnapshot();
+    it('should render en-PSEUDO post-hydration', async ({ expect, task }) => {
+      skipCleanup(task.id);
+      const app = await getAppSnapshot({
+        expect,
+        url: `${baseUrl}/en?pseudo=true`,
       });
-    },
-  );
+      expect(app).toMatchSnapshot();
+    });
+
+    it('should support query parameters', async ({ expect, task }) => {
+      skipCleanup(task.id);
+      const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
+      expect(app).toMatchSnapshot();
+    });
+  });
 });

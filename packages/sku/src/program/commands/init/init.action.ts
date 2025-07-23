@@ -27,7 +27,7 @@ import { setCwd } from '@/utils/cwd.js';
 import banner from '@/utils/banners/banner.js';
 import toPosixPath from '@/utils/toPosixPath.js';
 import { isEmptyDir } from '@/utils/isEmptyDir.js';
-import { skuPnpmConfig } from '@/services/packageManager/pnpmConfig.js';
+import { execAsync } from '@/utils/execAsync.js';
 
 const trace = debug('sku:init');
 
@@ -131,11 +131,6 @@ export const initAction = async (
     },
   };
 
-  if (isAtLeastPnpmV10()) {
-    trace('PNPM version is >= 10.0.0, creating pnpm-workspace.yaml');
-    await writeFile(path.join(root, 'pnpm-workspace.yaml'), skuPnpmConfig);
-  }
-
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await writeFile(path.join(root, 'package.json'), packageJsonString);
@@ -234,6 +229,14 @@ export const initAction = async (
     logLevel,
     exact: false,
   });
+
+  // Config dependencies are only supported in PNPM v10 and above
+  if (isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    await execAsync('pnpm add --config pnpm-plugin-sku');
+  }
 
   await configure(skuContext);
   await esLintFix();

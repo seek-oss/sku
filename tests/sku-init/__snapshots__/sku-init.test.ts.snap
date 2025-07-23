@@ -108,15 +108,6 @@ exports[`sku init > should create package.json 1`] = `
 }
 `;
 
-exports[`sku init > should create pnpm-workspace.yaml 1`] = `
-"publicHoistPattern:
-  - eslint
-  - prettier
-onlyBuiltDependencies:
-  - sku
-"
-`;
-
 exports[`sku init > should create sku.config.ts 1`] = `
 "import type { SkuConfig } from 'sku';
 

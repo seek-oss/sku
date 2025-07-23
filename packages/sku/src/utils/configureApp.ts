@@ -23,13 +23,11 @@ import { hasErrorMessage } from '@/utils/error-guards.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import {
   isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
   rootDir,
 } from '@/services/packageManager/packageManager.js';
-import {
-  createOrUpdatePnpmConfig,
-  detectPnpmConfigFiles,
-  getPnpmConfigAction,
-} from '@/services/packageManager/pnpmConfig.js';
+import { validatePnpmConfig } from '@/services/packageManager/pnpmConfig.js';
+import { getPnpmConfigDependencies } from '@/services/packageManager/getPnpmConfigDependencies.js';
 
 const coverageFolder = 'coverage';
 
@@ -166,8 +164,19 @@ export default async (skuContext: SkuContext) => {
   });
 
   if (rootDir && isAtLeastPnpmV10()) {
-    const configFilesResult = await detectPnpmConfigFiles(rootDir);
-    const action = await getPnpmConfigAction(configFilesResult);
-    await createOrUpdatePnpmConfig({ rootDir, action });
+    const pnpmConfigDependencies = await getPnpmConfigDependencies();
+
+    const hasRecommendedPnpmVersionInstalled =
+      isAtLeastRecommendedPnpmVersion();
+    const pnpmPluginSkuInstalled =
+      pnpmConfigDependencies.includes('pnpm-plugin-sku');
+
+    await validatePnpmConfig({
+      rootDir,
+      hasRecommendedPnpmVersionInstalled: Boolean(
+        hasRecommendedPnpmVersionInstalled,
+      ),
+      pnpmPluginSkuInstalled,
+    });
   }
 };

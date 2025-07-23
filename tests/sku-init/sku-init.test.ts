@@ -70,7 +70,6 @@ describe('sku init', () => {
     'eslint.config.mjs',
     'README.md',
     'src/App/NextSteps.tsx',
-    'pnpm-workspace.yaml',
   ])('should create %s', async (file, { expect }) => {
     const contents = await fs.readFile(
       path.join(fixtureDirectory, projectName, file),

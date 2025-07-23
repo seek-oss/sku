@@ -52,26 +52,14 @@ const foo = [
 `;
 
 exports[`lint-format > sku lint > lint errors are reported: typescriptFile.ts 1`] = `
-stdout: Potentially conflicting PNPM config detected. Please update your pnpm-workspace.yaml manually with the following config:
-publicHoistPattern:
-- eslint
-- prettier
-onlyBuiltDependencies:
-- sku
-After updating your config, please run pnpm install.
+stdout: In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".
 Linting
 Checking code with TypeScript compiler
 src/typescriptFile.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
 `;
 
 exports[`lint-format > sku lint > lint errors are reported: unformattedFile1.js 1`] = `
-stdout: Potentially conflicting PNPM config detected. Please update your pnpm-workspace.yaml manually with the following config:
-publicHoistPattern:
-- eslint
-- prettier
-onlyBuiltDependencies:
-- sku
-After updating your config, please run pnpm install.
+stdout: In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".
 Linting
 Checking code with Prettier
 src/unformattedFile1.js
@@ -79,13 +67,7 @@ To fix this issue, run 'pnpm run format'
 `;
 
 exports[`lint-format > sku lint > lint errors are reported: utils.test.ts 1`] = `
-stdout: Potentially conflicting PNPM config detected. Please update your pnpm-workspace.yaml manually with the following config:
-publicHoistPattern:
-- eslint
-- prettier
-onlyBuiltDependencies:
-- sku
-After updating your config, please run pnpm install.
+stdout: In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".
 Linting
 Checking code with TypeScript compiler
 Checking code with Prettier

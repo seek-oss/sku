@@ -14,30 +14,33 @@ exports[`ssr-hello-world > build > default port > should generate a production s
     >
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
+      content="script-src 'self' http://localhost:4000 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=';"
     >
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="/main-1f5c2cf64419575cffa6.css"
+      href="http://localhost:4000/main-1f5c2cf64419575cffa6.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="/runtime.js"
+      href="http://localhost:4000/runtime.js"
+      crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="/2.js"
+      href="http://localhost:4000/2.js"
+      crossorigin="anonymous"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="/main.js"
+      href="http://localhost:4000/main.js"
+      crossorigin="anonymous"
     >
   </head>
   <body>
@@ -46,7 +49,7 @@ exports[`ssr-hello-world > build > default port > should generate a production s
         <div class="qixxyt1">
           Hello World
         </div>
-        <img src="/a85d2645cc4d80a20b5b.png">
+        <img src="http://localhost:4000/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
@@ -57,31 +60,36 @@ exports[`ssr-hello-world > build > default port > should generate a production s
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
+      crossorigin="anonymous"
     >
       []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
+      crossorigin="anonymous"
     >
       {"namedChunks":[]}
     </script>
     <script
       async
       data-chunk="main"
-      src="/runtime.js"
+      src="http://localhost:4000/runtime.js"
+      crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="/2.js"
+      src="http://localhost:4000/2.js"
+      crossorigin="anonymous"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="/main.js"
+      src="http://localhost:4000/main.js"
+      crossorigin="anonymous"
     >
     </script>
   </body>

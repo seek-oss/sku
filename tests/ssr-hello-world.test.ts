@@ -14,7 +14,7 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render, joinPath, node } = scopeToFixture('ssr-hello-world');
+const { render, joinPath, node, exec } = scopeToFixture('ssr-hello-world');
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
@@ -73,6 +73,12 @@ describe('ssr-hello-world', () => {
         expect,
       }) => {
         await node(['dist-build/server.cjs']);
+
+        const assetServer = await exec('npm', ['run', 'start:asset-server']);
+        expect(
+          await assetServer.findByText('serving dist-build'),
+        ).toBeInTheConsole();
+
         const snapshot = await getAppSnapshot({ url, expect });
         expect(snapshot).toMatchSnapshot();
       });
@@ -87,9 +93,7 @@ describe('ssr-hello-world', () => {
       });
     });
 
-    it('should generate a production server running on custom port', async ({
-      expect,
-    }) => {
+    it('should run on a custom port', async ({ expect }) => {
       const customPort = '7654';
       const server = await node([
         'dist-build/server.cjs',

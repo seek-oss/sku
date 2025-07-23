@@ -5,23 +5,14 @@ import {
   it,
   expect as globalExpect,
 } from 'vitest';
-import path from 'node:path';
 import {
-  waitForUrls,
-  startAssetServer,
   getStoryPage,
   getTextContentFromFrameOrPage,
 } from '@sku-private/test-utils';
-import { createRequire } from 'node:module';
+
 import type { Page } from 'puppeteer';
 import { scopeToFixture } from '@sku-private/testing-library';
 
-const require = createRequire(import.meta.url);
-
-const skuConfigFileName = 'sku.config.ts';
-const appDir = path.dirname(
-  require.resolve(`@sku-fixtures/storybook-config/${skuConfigFileName}`),
-);
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
 
@@ -145,31 +136,35 @@ describe('storybook-config', () => {
   describe('build-storybook', () => {
     const assetServerPort = 4232;
     const assetServerUrl = `http://localhost:${assetServerPort}`;
+
     const storyIframePath =
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
-    const storybookDistDir = path.resolve(appDir, 'storybook-static');
 
-    let closeStorybookServer: () => void;
     let storyPage: Page;
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
       globalExpect(
-        await storybook.findByText('info => Output directory'),
+        await storybook.findByText(
+          'info => Output directory',
+          {},
+          {
+            timeout: 30000,
+          },
+        ),
       ).toBeInTheConsole();
 
-      closeStorybookServer = await startAssetServer(
-        assetServerPort,
-        storybookDistDir,
-      );
-      await waitForUrls(storyIframeUrl);
+      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      globalExpect(
+        await assetServer.findByText('serving storybook-static'),
+      ).toBeInTheConsole();
+
       storyPage = await getStoryPage(storyIframeUrl);
-    }, 200000);
+    });
 
     afterAll(() => {
       storyPage?.close();
-      closeStorybookServer();
     });
 
     it('should render decorators defined in the storybook preview file', async ({
@@ -207,8 +202,13 @@ describe('storybook-config', () => {
     it('should render a ".mdx" file', async ({ expect }) => {
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
       const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
+
+      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      globalExpect(
+        await assetServer.findByText('serving storybook-static'),
+      ).toBeInTheConsole();
+
       const docsPage = await getStoryPage(docsIframeUrl);
-      await waitForUrls(docsIframeUrl);
 
       {
         const { text, fontSize } = await getTextContentFromFrameOrPage(
@@ -226,11 +226,11 @@ describe('storybook-config', () => {
           '#docs-test + p',
         );
 
-        await docsPage.close();
-
         expect(text).toEqual('I am a test document.');
         expect(fontSize).toEqual('14px');
       }
+
+      await docsPage.close();
     });
   });
 });

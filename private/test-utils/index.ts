@@ -1,5 +1,4 @@
 export { ListExternalsWebpackPlugin } from './ListExternalsWebpackPlugin.ts';
-export { startAssetServer } from './assetServer.ts';
 export { dirContentsToObject } from './dirContentsToObject.ts';
 export {
   run,

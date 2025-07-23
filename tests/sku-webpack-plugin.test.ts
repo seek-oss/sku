@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { beforeAll, describe, expect as globalExpect, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { dirContentsToObject } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
@@ -26,7 +26,7 @@ describe('sku-webpack-plugin', () => {
   });
 
   describe('build', () => {
-    it('should generate the expected files', async ({ expect }) => {
+    beforeAll(async () => {
       const build = await exec(
         'node_modules/.bin/webpack-cli',
         ['--mode', 'production', '--no-stats'],
@@ -40,11 +40,21 @@ describe('sku-webpack-plugin', () => {
         },
       );
       await waitFor(async () => {
-        expect(build.hasExit()).toMatchObject({
+        globalExpect(build.hasExit()).toMatchObject({
           exitCode: 0,
         });
       });
+    });
 
+    it('should create valid app', async ({ expect }) => {
+      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
+
+      const app = await getAppSnapshot({ url: devServerUrl, expect });
+      expect(app).toMatchSnapshot();
+    });
+
+    it('should generate the expected files', async ({ expect }) => {
       const files = await dirContentsToObject(joinPath('dist'));
       expect(files).toMatchSnapshot();
     });

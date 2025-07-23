@@ -372,6 +372,9 @@ importers:
       html-webpack-plugin:
         specifier: ^5.3.2
         version: 5.6.3(webpack@5.100.0)
+      http-server:
+        specifier: ^14.1.1
+        version: 14.1.1(debug@4.4.1)
       mini-css-extract-plugin:
         specifier: ^2.6.1
         version: 2.9.2(webpack@5.100.0)
@@ -487,6 +490,9 @@ importers:
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)
+      http-server:
+        specifier: ^14.1.1
+        version: 14.1.1(debug@4.4.1)
       sku:
         specifier: workspace:*
         version: link:../../packages/sku

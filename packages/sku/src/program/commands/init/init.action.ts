@@ -235,7 +235,7 @@ export const initAction = async (
     console.log(
       `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
     );
-    await execAsync('pnpm add --config pnpm-plugin-sku');
+    await execAsync('pnpm add --config pnpm-plugin-sku && pnpm install');
   }
 
   await configure(skuContext);

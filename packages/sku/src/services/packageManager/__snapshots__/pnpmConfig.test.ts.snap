@@ -29,7 +29,7 @@ exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersion
 exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
-    "Detected '.npmrc' file.",
+    "Detected .npmrc file.",
   ],
   [
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
@@ -43,7 +43,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
 exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
-    "Detected '.npmrc' file.",
+    "Detected .npmrc file.",
   ],
   [
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
@@ -57,7 +57,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
 exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
-    "Detected '.npmrc' file.",
+    "Detected .npmrc file.",
   ],
   [
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
@@ -71,7 +71,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
 exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
-    "Detected '.npmrc' file.",
+    "Detected .npmrc file.",
   ],
   [
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",

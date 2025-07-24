@@ -11,7 +11,7 @@ import {
 } from '@sku-private/test-utils';
 
 import type { Page } from 'puppeteer';
-import { scopeToFixture } from '@sku-private/testing-library';
+import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
@@ -145,15 +145,12 @@ describe('storybook-config', () => {
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
-      globalExpect(
-        await storybook.findByText(
-          'info => Output directory',
-          {},
-          {
-            timeout: 30000,
-          },
-        ),
-      ).toBeInTheConsole();
+
+      await waitFor(async () => {
+        globalExpect(storybook.hasExit()).toMatchObject({
+          exitCode: 0,
+        });
+      });
 
       const assetServer = await exec('npm', ['run', 'start:asset-server']);
       globalExpect(

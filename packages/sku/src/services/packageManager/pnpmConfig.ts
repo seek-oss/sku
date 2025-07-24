@@ -1,3 +1,4 @@
+import banner from '@/utils/banners/banner.js';
 import exists from '@/utils/exists.js';
 import chalk from 'chalk';
 import path from 'node:path';
@@ -17,15 +18,24 @@ export const validatePnpmConfig = async ({
   const npmrcExists = await exists(path.join(rootDir, '.npmrc'));
 
   if (npmrcExists) {
-    console.log(`Detected ${accent('.npmrc')} file.`);
-    console.log(
+    banner('warning', 'Detected .npmrc file', [
       `Please migrate all ${accent('.npmrc')} configuration to ${accent('pnpm-workspace.yaml')} and add ${accent('.npmrc')} to your ${accent('.gitignore')}. See ${info('https://pnpm.io/settings')} for more information.`,
-    );
+    ]);
   }
 
   if (!pnpmPluginSkuInstalled || !hasRecommendedPnpmVersionInstalled) {
-    console.log(
-      `In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "${accent('pnpm add --config pnpm-plugin-sku')}", delete your top-level ${accent('node_modules')} directory and finally run "${accent('pnpm install')}".`,
+    const messages: string[] = [];
+
+    if (!hasRecommendedPnpmVersionInstalled) {
+      messages.push(
+        `Please ensure you are on ${accent('PNPM v10.13.0')} or later.`,
+      );
+    }
+
+    messages.push(
+      `Please delete your top-level ${accent('node_modules')} and run "${accent('pnpm add --config pnpm-plugin-sku && pnpm install')}".`,
     );
+
+    banner('warning', 'pnpm-plugin-sku is not configured correctly', messages);
   }
 };

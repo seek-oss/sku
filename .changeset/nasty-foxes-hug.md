@@ -7,7 +7,7 @@
 During configuration, `sku` will conditionally output warning logs that suggest users make the following changes:
 - Migrate `.npmrc` configuration to `pnpm-workspace.yaml`
 - Update PNPM to at least v10.13.0
-- Install the `pnpm-plugin-sku` [config dependency] via `pnpm add --config pnpm-plugin-sku && pnpm install`
+- Delete top-level `node_modules` and install the `pnpm-plugin-sku` [config dependency] via `pnpm add --config pnpm-plugin-sku && pnpm install`
 
 Applying all of these changes will suppress these warnings.
 

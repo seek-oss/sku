@@ -328,6 +328,9 @@ importers:
 
   fixtures/polyfills:
     dependencies:
+      '@sku-private/3rd-party-polyfill':
+        specifier: workspace:*
+        version: link:../../private/3rd-party-polyfill
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -1167,6 +1170,8 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  private/3rd-party-polyfill: {}
 
   private/eslint-plugin: {}
 

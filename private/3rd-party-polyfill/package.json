@@ -1,0 +1,7 @@
+{
+  "name": "@sku-private/3rd-party-polyfill",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "polyfill.js"
+}

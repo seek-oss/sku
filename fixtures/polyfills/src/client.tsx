@@ -6,4 +6,5 @@ export default () => {
   hydrateRoot(document.getElementById('app'), <App />);
 
   window.injected();
+  window.someRandomApi();
 };

@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@sku-private/3rd-party-polyfill": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

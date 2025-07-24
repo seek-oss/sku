@@ -2,6 +2,9 @@ import exists from '@/utils/exists.js';
 import chalk from 'chalk';
 import path from 'node:path';
 
+const accent = chalk.blue.bold;
+const info = chalk.bold;
+
 export const validatePnpmConfig = async ({
   rootDir,
   hasRecommendedPnpmVersionInstalled,
@@ -14,15 +17,15 @@ export const validatePnpmConfig = async ({
   const npmrcExists = await exists(path.join(rootDir, '.npmrc'));
 
   if (npmrcExists) {
-    console.log("Detected '.npmrc' file.");
+    console.log(`Detected ${accent('.npmrc')} file.`);
     console.log(
-      `Please migrate all ${chalk.blue.bold('.npmrc')} configuration to ${chalk.blue.bold('pnpm-workspace.yaml')} and add ${chalk.blue.bold('.npmrc')} to your ${chalk.blue.bold('.gitignore')}. See ${chalk.bold('https://pnpm.io/settings')} for more information.`,
+      `Please migrate all ${accent('.npmrc')} configuration to ${accent('pnpm-workspace.yaml')} and add ${accent('.npmrc')} to your ${accent('.gitignore')}. See ${info('https://pnpm.io/settings')} for more information.`,
     );
   }
 
   if (!pnpmPluginSkuInstalled || !hasRecommendedPnpmVersionInstalled) {
     console.log(
-      `In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "${chalk.blue.bold('pnpm add --config pnpm-plugin-sku')}" and "${chalk.blue.bold('pnpm install')}".`,
+      `In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "${accent('pnpm add --config pnpm-plugin-sku')}" and "${accent('pnpm install')}".`,
     );
   }
 };

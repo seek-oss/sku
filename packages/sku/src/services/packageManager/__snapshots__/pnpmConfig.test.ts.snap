@@ -3,7 +3,7 @@
 exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;
@@ -11,7 +11,7 @@ exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersion
 exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;
@@ -19,7 +19,7 @@ exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersion
 exports[`validatePnpmConfig > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;
@@ -35,7 +35,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
   ],
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;
@@ -49,7 +49,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
   ],
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;
@@ -63,7 +63,7 @@ exports[`validatePnpmConfig > when npmrcExists: true, hasRecommendedPnpmVersionI
     "Please migrate all .npmrc configuration to pnpm-workspace.yaml and add .npmrc to your .gitignore. See https://pnpm.io/settings for more information.",
   ],
   [
-    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "pnpm add --config pnpm-plugin-sku" and "pnpm install".",
+    "In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "pnpm add --config pnpm-plugin-sku", delete your top-level node_modules directory and finally run "pnpm install".",
   ],
 ]
 `;

@@ -25,7 +25,7 @@ export const validatePnpmConfig = async ({
 
   if (!pnpmPluginSkuInstalled || !hasRecommendedPnpmVersionInstalled) {
     console.log(
-      `In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later and then run "${accent('pnpm add --config pnpm-plugin-sku')}" and "${accent('pnpm install')}".`,
+      `In order for sku to best manage your PNPM config, please update to PNPM v10.13.0 or later, run "${accent('pnpm add --config pnpm-plugin-sku')}", delete your top-level ${accent('node_modules')} directory and finally run "${accent('pnpm install')}".`,
     );
   }
 };

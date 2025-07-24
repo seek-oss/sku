@@ -1,8 +1,8 @@
 import { describe, it } from 'vitest';
 import fs from 'node:fs/promises';
-import { runSkuCodemod } from '@sku-private/test-utils';
 import dedent from 'dedent';
 import { createFixture } from 'fs-fixture';
+import { scopeToFixture } from '@sku-private/testing-library/codemod';
 
 const filesToTest = [
   {
@@ -58,10 +58,14 @@ describe('sku codemods', () => {
           [filename]: input,
         });
 
+        const { render } = scopeToFixture(fixture.path);
+
         it('"--dry" should not change any files', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, {
-            args: ['.', '--dry'],
-          });
+          const cli = await render('transform-vite-loadable', ['.', '--dry']);
+          expect(
+            await cli.findByText('files found that would be changed.'),
+          ).toBeInTheConsole();
+
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',
@@ -70,9 +74,9 @@ describe('sku codemods', () => {
         });
 
         it('All output files should be the same', async ({ expect }) => {
-          await runSkuCodemod('transform-vite-loadable', fixture.path, {
-            args: ['.'],
-          });
+          const cli = await render('transform-vite-loadable', ['.']);
+          expect(await cli.findByText('Changed files')).toBeInTheConsole();
+
           const fileContent = await fs.readFile(
             fixture.getPath(filename),
             'utf-8',

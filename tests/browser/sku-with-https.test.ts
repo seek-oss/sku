@@ -113,7 +113,7 @@ describe.sequential('sku-with-https', () => {
     });
   });
 
-  describe.only('.gitignore', () => {
+  describe('.gitignore', () => {
     it('should add the .ssl directory to .gitignore', async ({ expect }) => {
       const ignoreContents = await fs.readFile(
         path.join(joinPath('./'), '.gitignore'),

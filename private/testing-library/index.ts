@@ -1,2 +1,3 @@
-export * from './testing-library.ts';
+export * from './render-cli.ts';
 export * from './constants.ts';
+export * from './cleanup.ts';

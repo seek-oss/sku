@@ -4,13 +4,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export const TEST_TIMEOUT = 50_000;
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
-/** Tests that don't need to run in the puppeteer environment */
-const skuNodeTests = [
-  'tests/sku-test.test.ts',
-  'tests/source-maps.test.ts',
-  'tests/configure.test.ts',
-];
-
 export default defineConfig({
   plugins: [tsconfigPaths()],
   server: {
@@ -28,8 +21,12 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'eslint-plugin',
-          include: [`test-utils/eslint-plugin/${defaultInclude}`],
+          name: 'node',
+          include: [
+            `packages/${defaultInclude}`,
+            `private/${defaultInclude}`,
+            `tests/node/${defaultInclude}`,
+          ],
           sequence: {
             groupOrder: 0,
           },
@@ -38,21 +35,11 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'sku',
-          include: [`packages/sku/${defaultInclude}`, ...skuNodeTests],
-          sequence: {
-            groupOrder: 0,
-          },
-        },
-      },
-      {
-        extends: true,
-        test: {
-          name: 'sku-puppeteer',
+          name: 'browser',
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [`tests/${defaultInclude}`],
-          exclude: ['tests/sku-init/**', ...skuNodeTests],
+          include: [`tests/browser/${defaultInclude}`],
+          exclude: ['tests/browser/braid-design-system.test.ts'],
           sequence: {
             groupOrder: 0,
           },
@@ -61,12 +48,13 @@ export default defineConfig({
       {
         extends: true,
         test: {
-          name: 'sku-init',
-          include: [`tests/sku-init/${defaultInclude}`],
+          name: 'braid-design-system',
+          environment: 'puppeteer',
+          globalSetup: 'vitest-environment-puppeteer/global-init',
+          include: [`tests/browser/braid-design-system.test.ts`],
           sequence: {
-            // sku-init tests must run after the all other tests as it runs `pnpm install`.
-            // Running it during other tests may cause dependency changes to pollute test results.
-            groupOrder: 1,
+            // these tests are slow and the snapshots are flaky when run with other tests. Placing them firsts seems to help.
+            groupOrder: -1,
           },
         },
       },

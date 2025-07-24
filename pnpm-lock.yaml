@@ -348,6 +348,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/sku-init:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/sku-test:
     devDependencies:
       sku:

@@ -99,7 +99,6 @@ describe('multiple-routes', () => {
         const snapshot = await getAppSnapshot({
           url,
           expect,
-          waitUntil: 'load',
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -109,7 +108,6 @@ describe('multiple-routes', () => {
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
           expect,
-          waitUntil: 'load',
         });
         expect(snapshot).toMatchSnapshot();
       });

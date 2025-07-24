@@ -5,7 +5,8 @@
   "main": "index.ts",
   "exports": {
     ".": "./index.ts",
-    "./vitest": "./vitest.ts"
+    "./vitest": "./vitest.ts",
+    "./codemod": "./render-codemod.ts"
   },
   "devDependencies": {
     "cli-testing-library": "^3.0.1"

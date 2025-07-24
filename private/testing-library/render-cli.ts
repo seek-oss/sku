@@ -2,13 +2,11 @@ import {
   render,
   configure,
   waitFor,
-  cleanup as _cleanup,
   type Config,
   type RenderOptions,
 } from 'cli-testing-library';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { onTestFinished } from 'vitest';
 
 const require = createRequire(import.meta.url);
 const skuBin = require.resolve('../../packages/sku/bin/bin.js');
@@ -27,7 +25,7 @@ type SkuCommand =
 
 // Default configuration for cli-testing-library
 const DEFAULT_CONFIG: Partial<Config> = {
-  asyncUtilTimeout: 10_000,
+  asyncUtilTimeout: 50_000,
 };
 
 // Configure cli-testing-library with default settings
@@ -73,29 +71,6 @@ export const scopeToFixture = (fixtureFolder: string) => {
       }),
     joinPath: (...paths: string[]) => path.join(appDir, ...paths),
   };
-};
-
-const skipCleanupIds = new Set<string>();
-
-export const cleanup = async (task?: { id: string }) => {
-  if (task?.id && skipCleanupIds.has(task.id)) {
-    return;
-  }
-
-  await _cleanup();
-};
-
-/**
- * Skips cleanup for the given test id, leaving tasks running in the background.
- * Make sure to run cleanup manually once you are ready to clean up the tasks.
- */
-export const skipCleanup = (id: string) => {
-  skipCleanupIds.add(id);
-  // onTestFinished is called after the `afterEach` hook, but before the `afterAll` hook
-  // so we use this to skip cleanup for just the given test id.
-  onTestFinished(() => {
-    skipCleanupIds.delete(id);
-  });
 };
 
 // Re-export the original functions for direct access

@@ -4,30 +4,23 @@ import { createFixture, type FileTree } from 'fs-fixture';
 import { validatePnpmConfig } from './pnpmConfig.js';
 
 describe('validatePnpmConfig', () => {
-  const testCases: Array<
-    [
-      npmrcExists: boolean,
-      hasRecommendedPnpmVersionInstalled: boolean,
-      pnpmPluginSkuInstalled: boolean,
-    ]
-  > = [
-    [false, false, false],
-    [false, false, true],
-    [false, true, false],
-    [false, true, true],
-    [true, false, false],
-    [true, false, true],
-    [true, true, false],
-    [true, true, true],
-  ];
-
-  describe.for(testCases)(
-    'when npmrcExists: %s, hasRecommendedPnpmVersionInstalled: %s, pnpmPluginSkuInstalled: %s',
-    ([
+  describe.for`
+    npmrcExists | hasRecommendedPnpmVersionInstalled | pnpmPluginSkuInstalled
+    ${false}    | ${false}                           | ${false}
+    ${false}    | ${false}                           | ${true}
+    ${false}    | ${true}                            | ${false}
+    ${false}    | ${true}                            | ${true}
+    ${true}     | ${false}                           | ${false}
+    ${true}     | ${false}                           | ${true}
+    ${true}     | ${true}                            | ${false}
+    ${true}     | ${true}                            | ${true}
+  `(
+    'when npmrcExists: $npmrcExists, hasRecommendedPnpmVersionInstalled: $hasRecommendedPnpmVersionInstalled, pnpmPluginSkuInstalled: $pnpmPluginSkuInstalled',
+    ({
       npmrcExists,
       hasRecommendedPnpmVersionInstalled,
       pnpmPluginSkuInstalled,
-    ]) => {
+    }) => {
       it('should log appropriate messages', async ({ expect }) => {
         const logSpy = vi
           .spyOn(global.console, 'log')

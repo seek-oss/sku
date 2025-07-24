@@ -39,22 +39,8 @@ export default defineConfig({
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
           include: [`tests/browser/${defaultInclude}`],
-          exclude: ['tests/browser/braid-design-system.test.ts'],
           sequence: {
             groupOrder: 0,
-          },
-        },
-      },
-      {
-        extends: true,
-        test: {
-          name: 'braid-design-system',
-          environment: 'puppeteer',
-          globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [`tests/browser/braid-design-system.test.ts`],
-          sequence: {
-            // these tests are slow and the snapshots are flaky when run with other tests. Placing them firsts seems to help.
-            groupOrder: -1,
           },
         },
       },

@@ -195,16 +195,6 @@ export const initAction = async (
     }),
   );
 
-  // Config dependencies are only supported in PNPM v10 and above.
-  // `pnpm-plugin-sku` needs to be installed before the regular dependencies are installed to ensure
-  // packages are correctly hoisted.
-  if (isAtLeastPnpmV10()) {
-    console.log(
-      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
-    );
-    await execAsync('pnpm add --config pnpm-plugin-sku');
-  }
-
   // TODO: Remove versions from react deps once we support React 19
   const deps = ['braid-design-system', 'react@^18.3.1', 'react-dom@^18.3.1'];
 
@@ -218,10 +208,20 @@ export const initAction = async (
   ];
 
   console.log(
-    `Installing packages with ${chalk.bold(
+    `Installing dependencies with ${chalk.bold(
       packageManager,
-    )}. This might take a couple of minutes.`,
+    )}. This might take a while.`,
   );
+
+  // Config dependencies are only supported in PNPM v10 and above.
+  // `pnpm-plugin-sku` needs to be installed before regular dependencies to ensure packages are correctly hoisted.
+  if (isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    await execAsync('pnpm add --config pnpm-plugin-sku');
+  }
+
   console.log(
     `Installing ${deps
       .concat(devDeps)

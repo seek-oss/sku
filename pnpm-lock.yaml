@@ -1282,6 +1282,9 @@ importers:
       '@sku-fixtures/multiple-routes':
         specifier: workspace:*
         version: link:../fixtures/multiple-routes
+      '@sku-fixtures/polyfills':
+        specifier: workspace:*
+        version: link:../fixtures/polyfills
       '@sku-fixtures/public-path':
         specifier: workspace:*
         version: link:../fixtures/public-path

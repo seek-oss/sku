@@ -22,6 +22,7 @@
     "@sku-fixtures/library-file": "workspace:*",
     "@sku-fixtures/lint-format": "workspace:*",
     "@sku-fixtures/multiple-routes": "workspace:*",
+    "@sku-fixtures/polyfills": "workspace:*",
     "@sku-fixtures/public-path": "workspace:*",
     "@sku-fixtures/sku-test": "workspace:*",
     "@sku-fixtures/sku-webpack-plugin": "workspace:*",

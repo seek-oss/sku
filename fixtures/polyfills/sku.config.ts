@@ -7,5 +7,5 @@ export default {
   publicPath: '/static/polyfills',
   port: 4200,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
-  polyfills: ['./src/polyfills/polyfills.ts'],
+  polyfills: ['./src/polyfills.ts', '@sku-private/3rd-party-polyfill'],
 } satisfies SkuConfig;

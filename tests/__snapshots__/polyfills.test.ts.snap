@@ -1,0 +1,177 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`polyfills > bundler webpack > build > should create valid app 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      polyfill
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/static/polyfills/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/static/polyfills/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/static/polyfills/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        App with a polyfill
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/static/polyfills/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/static/polyfills/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/static/polyfills/main.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -64,5 +64,11 @@
+       src="/static/polyfills/main.js"
+     >
+     </script>
++    <p>
++      This node was injected by the 'injected' global function.
++    </p>
++    <p>
++      This node was injected by the '3rd-party-polyfill' dependency.
++    </p>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`polyfills > bundler webpack > start > should start a development server 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      polyfill
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        App with a polyfill
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -64,5 +64,11 @@
+       src="/main.js"
+     >
+     </script>
++    <p>
++      This node was injected by the 'injected' global function.
++    </p>
++    <p>
++      This node was injected by the '3rd-party-polyfill' dependency.
++    </p>
+   </body>
+ </html>
+\\ No newline at end of file
+`;

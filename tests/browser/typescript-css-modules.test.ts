@@ -10,8 +10,6 @@ import { rm } from 'node:fs/promises';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
-import skuSsrConfig from '@sku-fixtures/typescript-css-modules/sku-ssr.config.ts';
-
 const { render, joinPath, node, exec } = scopeToFixture(
   'typescript-css-modules',
 );
@@ -51,7 +49,7 @@ describe.sequential('typescript-css-modules', () => {
   });
 
   describe('build-ssr', async () => {
-    const backendUrl = `http://localhost:${skuSsrConfig.serverPort}`;
+    const backendUrl = `http://localhost:8010`;
 
     beforeAll(async () => {
       const buildSsr = await render('build-ssr', [

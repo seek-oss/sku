@@ -9,16 +9,16 @@ import {
 import fs from 'node:fs/promises';
 import { scopeToFixture } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('sku-init');
+const { sku, fixturePath } = scopeToFixture('sku-init');
 
 const projectName = 'new-project';
-const projectDirectory = joinPath(projectName);
+const projectDirectory = fixturePath(projectName);
 
 describe('sku init', () => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
 
-    const result = await render('init', [projectName]);
+    const result = await sku('init', [projectName]);
     globalExpect(await result.findByText('Project created')).toBeInTheConsole();
   });
 
@@ -28,7 +28,7 @@ describe('sku init', () => {
 
   it('should create package.json', async ({ expect }) => {
     const contents = await fs.readFile(
-      joinPath(projectName, 'package.json'),
+      fixturePath(projectName, 'package.json'),
       'utf-8',
     );
     const packageJson = JSON.parse(contents);
@@ -45,7 +45,7 @@ describe('sku init', () => {
     'src/App/NextSteps.tsx',
     'pnpm-workspace.yaml',
   ])('should create %s', async (file, { expect }) => {
-    const contents = await fs.readFile(joinPath(projectName, file), 'utf-8');
+    const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(contents).toMatchSnapshot();
   });

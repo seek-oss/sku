@@ -15,7 +15,7 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render } = scopeToFixture('translations');
+const { sku } = scopeToFixture('translations');
 
 describe('translations', () => {
   describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
@@ -27,12 +27,12 @@ describe('translations', () => {
     };
 
     beforeAll(async () => {
-      const build = await render('build', args[bundler]);
+      const build = await sku('build', args[bundler]);
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
 
-      const serve = await render('serve', ['--strict-port', `--port=${port}`]);
+      const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
     });
 

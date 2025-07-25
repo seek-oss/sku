@@ -10,12 +10,12 @@ import { rm } from 'node:fs/promises';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
-const { render, joinPath, node, exec } = scopeToFixture(
+const { sku, fixturePath, node, exec } = scopeToFixture(
   'typescript-css-modules',
 );
 
-const distDir = joinPath('dist');
-const distSsrDir = joinPath('dist-ssr');
+const distDir = fixturePath('dist');
+const distSsrDir = fixturePath('dist-ssr');
 
 describe.sequential('typescript-css-modules', () => {
   describe('build', async () => {
@@ -23,7 +23,7 @@ describe.sequential('typescript-css-modules', () => {
     const url = `http://localhost:${port}`;
 
     beforeAll(async () => {
-      const build = await render('build');
+      const build = await sku('build');
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
@@ -35,7 +35,7 @@ describe.sequential('typescript-css-modules', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const serve = await render('serve', ['--strict-port', `--port=${port}`]);
+      const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url, expect });
@@ -52,9 +52,7 @@ describe.sequential('typescript-css-modules', () => {
     const backendUrl = `http://localhost:8010`;
 
     beforeAll(async () => {
-      const buildSsr = await render('build-ssr', [
-        '--config=sku-ssr.config.ts',
-      ]);
+      const buildSsr = await sku('build-ssr', ['--config=sku-ssr.config.ts']);
       globalExpect(
         await buildSsr.findByText('Sku build complete'),
       ).toBeInTheConsole();
@@ -91,7 +89,7 @@ describe.sequential('typescript-css-modules', () => {
       const port = await getPort();
       const devServerUrl = `http://localhost:${port}`;
 
-      const start = await render('start', ['--strict-port', `--port=${port}`]);
+      const start = await sku('start', ['--strict-port', `--port=${port}`]);
       globalExpect(
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
@@ -103,7 +101,7 @@ describe.sequential('typescript-css-modules', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      const test = await render('test');
+      const test = await sku('test');
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });
   });
@@ -111,12 +109,12 @@ describe.sequential('typescript-css-modules', () => {
   describe('lint', () => {
     it('should handle tsc and eslint', async ({ expect }) => {
       // run build first to ensure typescript declarations are generated
-      const build = await render('build');
+      const build = await sku('build');
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
 
-      const lint = await render('lint');
+      const lint = await sku('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();
       await waitFor(() => {
         expect(lint.hasExit()).toMatchObject({

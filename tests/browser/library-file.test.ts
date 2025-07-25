@@ -3,15 +3,15 @@ import { dirContentsToObject } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { scopeToFixture } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('library-file');
+const { sku, fixturePath } = scopeToFixture('library-file');
 
 describe('library-file', () => {
   describe('build', () => {
     it('should generate the expected files', async ({ expect }) => {
-      const build = await render('build');
+      const build = await sku('build');
       expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
-      const files = await dirContentsToObject(joinPath('dist'));
+      const files = await dirContentsToObject(fixturePath('dist'));
       expect(files).toMatchSnapshot();
     });
   });
@@ -20,7 +20,7 @@ describe('library-file', () => {
     it('should start a development server', async ({ expect }) => {
       const devServerUrl = `http://localhost:8086`;
 
-      const start = await render('start');
+      const start = await sku('start');
       expect(
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();

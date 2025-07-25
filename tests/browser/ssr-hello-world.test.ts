@@ -14,14 +14,14 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render, joinPath, node, exec } = scopeToFixture('ssr-hello-world');
+const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
     const url = `http://localhost:8101`;
 
     beforeAll(async () => {
-      const start = await render('start-ssr', ['--config=sku-start.config.ts']);
+      const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
       globalExpect(await start.findByText('Server started')).toBeInTheConsole();
     });
 
@@ -62,7 +62,7 @@ describe('ssr-hello-world', () => {
     const url = `http://localhost:8001`;
 
     beforeAll(async () => {
-      const build = await render('build-ssr', ['--config=sku-build.config.ts']);
+      const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
@@ -108,16 +108,16 @@ describe('ssr-hello-world', () => {
     it('should copy all public assets to the target folder', async ({
       expect,
     }) => {
-      const files = await fs.readdir(joinPath('dist-build'));
+      const files = await fs.readdir(fixturePath('dist-build'));
       expect(files).toContain('logo.png');
       expect(files).toContain('logo2.png');
       expect(files).toContain('foo');
 
-      const fooFiles = await fs.readdir(joinPath('dist-build/foo'));
+      const fooFiles = await fs.readdir(fixturePath('dist-build/foo'));
       expect(fooFiles).toContain('logo.png');
       expect(fooFiles).toContain('bar');
 
-      const barFiles = await fs.readdir(joinPath('dist-build/foo/bar'));
+      const barFiles = await fs.readdir(fixturePath('dist-build/foo/bar'));
       expect(barFiles).toContain('logo.png');
     });
   });

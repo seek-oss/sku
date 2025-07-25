@@ -20,6 +20,9 @@ importers:
       '@sku-private/puppeteer':
         specifier: workspace:*
         version: link:private/puppeteer
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:private/test-utils
       '@sku-private/testing-library':
         specifier: workspace:*
         version: link:private/testing-library
@@ -1169,6 +1172,12 @@ importers:
 
   private/puppeteer:
     devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
+      '@sku-private/testing-library':
+        specifier: workspace:*
+        version: link:../testing-library
       '@types/diff':
         specifier: ^7.0.1
         version: 7.0.2
@@ -1238,6 +1247,9 @@ importers:
 
   private/testing-library:
     devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../test-utils
       cli-testing-library:
         specifier: ^3.0.1
         version: 3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))

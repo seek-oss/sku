@@ -7,7 +7,7 @@ import {
   scopeToFixture,
 } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('public-path');
+const { sku, fixturePath } = scopeToFixture('public-path');
 
 describe('public path', () => {
   describe.each(bundlers)('bundler: %s', (bundler) => {
@@ -22,17 +22,17 @@ describe('public path', () => {
       it('should build, serve, and create valid app with no unresolved resources', async ({
         expect,
       }) => {
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
-        const serve = await render('serve', portArgs);
+        const serve = await sku('serve', portArgs);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
         const url = `http://localhost:${port}`;
         const app = await getAppSnapshot({ url, expect });
         expect(app).toMatchSnapshot();
 
-        const files = await dirContentsToObject(joinPath('dist'));
+        const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
     });

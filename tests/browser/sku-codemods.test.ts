@@ -58,10 +58,10 @@ describe('sku codemods', () => {
           [filename]: input,
         });
 
-        const { render } = scopeToFixture(fixture.path);
+        const { codemod } = scopeToFixture(fixture.path);
 
         it('"--dry" should not change any files', async ({ expect }) => {
-          const cli = await render('transform-vite-loadable', ['.', '--dry']);
+          const cli = await codemod('transform-vite-loadable', ['.', '--dry']);
           expect(
             await cli.findByText('files found that would be changed.'),
           ).toBeInTheConsole();
@@ -74,7 +74,7 @@ describe('sku codemods', () => {
         });
 
         it('All output files should be the same', async ({ expect }) => {
-          const cli = await render('transform-vite-loadable', ['.']);
+          const cli = await codemod('transform-vite-loadable', ['.']);
           expect(await cli.findByText('Changed files')).toBeInTheConsole();
 
           const fileContent = await fs.readFile(

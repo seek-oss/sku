@@ -23,7 +23,7 @@ function getLocalUrl(site: string, port: number) {
   return `http://${host}:${port}`;
 }
 
-const { render, joinPath } = scopeToFixture('braid-design-system');
+const { sku, fixturePath } = scopeToFixture('braid-design-system');
 
 describe('braid-design-system', () => {
   describe.sequential.for(bundlers)('bundler %s', (bundler) => {
@@ -42,7 +42,7 @@ describe('braid-design-system', () => {
       };
 
       beforeAll(async () => {
-        const start = await render('start', args[bundler]);
+        const start = await sku('start', args[bundler]);
         globalExpect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
@@ -81,15 +81,12 @@ describe('braid-design-system', () => {
       };
 
       beforeAll(async () => {
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
 
-        const serve = await render('serve', [
-          '--strict-port',
-          `--port=${port}`,
-        ]);
+        const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         globalExpect(
           await serve.findByText('Server started'),
         ).toBeInTheConsole();
@@ -117,14 +114,14 @@ describe('braid-design-system', () => {
 
       it('should generate the expected files', async ({ expect, task }) => {
         skipCleanup(task.id);
-        const files = await dirContentsToObject(joinPath('dist'));
+        const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
     });
   });
 
   it('should handle braid-design-system in tests', async ({ expect }) => {
-    const test = await render('test');
+    const test = await sku('test');
     expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
   });
 });

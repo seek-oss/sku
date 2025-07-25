@@ -7,7 +7,7 @@ import {
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
 
-const { render, node } = scopeToFixture('assertion-removal');
+const { sku, node } = scopeToFixture('assertion-removal');
 
 describe('assertion-removal', () => {
   describe.for(bundlers)('bundler %s', (bundler) => {
@@ -23,13 +23,10 @@ describe('assertion-removal', () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
 
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
-        const serve = await render('serve', [
-          '--strict-port',
-          `--port=${port}`,
-        ]);
+        const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
         const appPage = await browser.newPage();
@@ -49,7 +46,7 @@ describe('assertion-removal', () => {
     }) {
       const backendUrl = `http://localhost:8011`;
 
-      const build = await render('build-ssr');
+      const build = await sku('build-ssr');
       expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
       const server = await node(['dist/server.cjs']);
@@ -68,7 +65,7 @@ describe('assertion-removal', () => {
 
   describe('test', () => {
     it('should keep "assert" and "invariant" in tests', async ({ expect }) => {
-      const test = await render('test');
+      const test = await sku('test');
       expect(await test.findByError('assert should throw')).toBeInTheConsole();
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });

@@ -7,9 +7,9 @@ import {
   scopeToFixture,
 } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('suspense');
+const { sku, fixturePath } = scopeToFixture('suspense');
 
-const targetDirectory = joinPath('dist');
+const targetDirectory = fixturePath('dist');
 
 describe('suspense', () => {
   describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
@@ -22,17 +22,14 @@ describe('suspense', () => {
 
     describe('build and serve', () => {
       beforeAll(async () => {
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
       });
 
       it('should return home page', async ({ expect }) => {
-        const serve = await render('serve', [
-          '--strict-port',
-          `--port=${port}`,
-        ]);
+        const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         globalExpect(
           await serve.findByText('Server started'),
         ).toBeInTheConsole();

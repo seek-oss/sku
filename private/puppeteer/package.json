@@ -4,6 +4,8 @@
   "type": "module",
   "main": "index.ts",
   "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "@sku-private/testing-library": "workspace:*",
     "@types/diff": "^7.0.1",
     "@types/diffable-html": "^5.0.2",
     "diff": "^7.0.0",

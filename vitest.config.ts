@@ -1,7 +1,7 @@
 import { defaultExclude, defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
-export const TEST_TIMEOUT = 50_000;
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
 export default defineConfig({

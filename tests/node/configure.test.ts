@@ -34,7 +34,7 @@ const readIgnore = async (appDir: string, fileName: string) => {
 };
 
 const copyToApp = async (filename: string, folder: string) =>
-  copyFile(joinPath(filename), path.join(folder, filename));
+  copyFile(fixturePath(filename), path.join(folder, filename));
 
 const removeAppDir = async (folder: string) =>
   rm(folder, {
@@ -42,11 +42,11 @@ const removeAppDir = async (folder: string) =>
     force: true,
   });
 
-const { render, joinPath } = scopeToFixture('configure');
+const { sku, fixturePath } = scopeToFixture('configure');
 
 describe('configure', () => {
   describe('javascript app', () => {
-    const appFolder = joinPath('App');
+    const appFolder = fixturePath('App');
 
     beforeAll(async () => {
       await makeDir(appFolder);
@@ -54,7 +54,7 @@ describe('configure', () => {
       await copyToApp('src/App.tsx', appFolder);
       await copyToApp('package.json', appFolder);
 
-      const configure = await render('configure', [], {
+      const configure = await sku('configure', [], {
         cwd: './App',
       });
 
@@ -97,7 +97,7 @@ describe('configure', () => {
   });
 
   describe('typescript app', () => {
-    const appFolderTS = joinPath('TSApp');
+    const appFolderTS = fixturePath('TSApp');
 
     beforeAll(async () => {
       await makeDir(appFolderTS);
@@ -106,7 +106,7 @@ describe('configure', () => {
       await copyToApp('package.json', appFolderTS);
       await copyToApp('sku.config.ts', appFolderTS);
 
-      const configure = await render('configure', [], {
+      const configure = await sku('configure', [], {
         cwd: './TSApp',
       });
 

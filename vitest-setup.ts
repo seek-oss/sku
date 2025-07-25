@@ -1,7 +1,9 @@
 import { afterEach, expect } from 'vitest';
 import { appSnapshotSerializer } from '@sku-private/puppeteer';
-import { cleanup } from '@sku-private/testing-library';
+import { cleanup, configure } from '@sku-private/testing-library';
 import '@sku-private/testing-library/vitest';
+
+configure();
 
 expect.addSnapshotSerializer(appSnapshotSerializer);
 

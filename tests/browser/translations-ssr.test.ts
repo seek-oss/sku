@@ -12,13 +12,13 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render } = scopeToFixture('translations');
+const { sku } = scopeToFixture('translations');
 
 const backendUrl = `http://localhost:8314`;
 
 describe('ssr translations', () => {
   beforeAll(async () => {
-    const startSsr = await render('start-ssr', ['--config=sku-ssr.config.ts']);
+    const startSsr = await sku('start-ssr', ['--config=sku-ssr.config.ts']);
     globalExpect(
       await startSsr.findByText('Server started'),
     ).toBeInTheConsole();

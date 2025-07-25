@@ -9,6 +9,7 @@
     "./codemod": "./render-codemod.ts"
   },
   "devDependencies": {
-    "cli-testing-library": "^3.0.1"
+    "cli-testing-library": "^3.0.1",
+    "@sku-private/test-utils": "workspace:*"
   }
 }

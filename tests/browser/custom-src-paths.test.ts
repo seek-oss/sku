@@ -17,7 +17,7 @@ import {
   scopeToFixture,
 } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('custom-src-paths');
+const { sku, fixturePath } = scopeToFixture('custom-src-paths');
 
 describe('custom-src-paths', () => {
   describe.sequential.for(bundlers)('bundler %s', (bundler) => {
@@ -37,7 +37,7 @@ describe('custom-src-paths', () => {
           webpack: ['--strict-port', `--port=${port}`],
         };
 
-        const start = await render('start', args[bundler]);
+        const start = await sku('start', args[bundler]);
         globalExpect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
@@ -58,12 +58,12 @@ describe('custom-src-paths', () => {
       };
 
       beforeAll(async () => {
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Build complete'),
         ).toBeInTheConsole();
 
-        const serve = await render('serve', portArgs);
+        const serve = await sku('serve', portArgs);
         globalExpect(
           await serve.findByText('Server started'),
         ).toBeInTheConsole();
@@ -73,7 +73,7 @@ describe('custom-src-paths', () => {
 
       it('should generate the expected files', async ({ expect, task }) => {
         skipCleanup(task.id);
-        const files = await dirContentsToObject(joinPath('dist'));
+        const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
 
@@ -88,14 +88,14 @@ describe('custom-src-paths', () => {
 
   describe('format', () => {
     it('should format successfully', async ({ expect }) => {
-      const format = await render('format');
+      const format = await sku('format');
       expect(await format.findByText('Formatting complete')).toBeInTheConsole();
     });
   });
 
   describe('lint', () => {
     it('should lint successfully', async ({ expect }) => {
-      const lint = await render('lint');
+      const lint = await sku('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();
     });
   });

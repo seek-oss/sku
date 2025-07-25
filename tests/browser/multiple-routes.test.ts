@@ -16,7 +16,7 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('multiple-routes');
+const { sku, fixturePath } = scopeToFixture('multiple-routes');
 
 describe('multiple-routes', () => {
   describe.sequential.for(bundlers)('bundler: %s', (bundler) => {
@@ -37,7 +37,7 @@ describe('multiple-routes', () => {
       };
 
       beforeAll(async () => {
-        const start = await render('start', args[bundler]);
+        const start = await sku('start', args[bundler]);
         globalExpect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
@@ -81,12 +81,12 @@ describe('multiple-routes', () => {
       };
 
       beforeAll(async () => {
-        const build = await render('build', args[bundler]);
+        const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
 
-        const serve = await render('serve', portArgs);
+        const serve = await sku('serve', portArgs);
         globalExpect(
           await serve.findByText('Server started'),
         ).toBeInTheConsole();
@@ -113,7 +113,7 @@ describe('multiple-routes', () => {
       });
 
       it('should generate the expected files', async ({ expect }) => {
-        const files = await dirContentsToObject(joinPath('dist'));
+        const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
     });
@@ -121,7 +121,7 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async ({ expect }) => {
-      const test = await render('test');
+      const test = await sku('test');
 
       expect(
         await test.findByError('Test Suites: 1 passed, 1 total'),

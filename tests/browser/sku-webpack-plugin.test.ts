@@ -6,7 +6,7 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 const port = 9876;
 const devServerUrl = `http://localhost:${port}`;
 
-const { exec, joinPath } = scopeToFixture('sku-webpack-plugin');
+const { exec, fixturePath } = scopeToFixture('sku-webpack-plugin');
 
 describe('sku-webpack-plugin', () => {
   describe('start', () => {
@@ -55,7 +55,7 @@ describe('sku-webpack-plugin', () => {
     });
 
     it('should generate the expected files', async ({ expect }) => {
-      const files = await dirContentsToObject(joinPath('dist'));
+      const files = await dirContentsToObject(fixturePath('dist'));
       expect(files).toMatchSnapshot();
     });
   });

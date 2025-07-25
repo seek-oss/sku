@@ -8,13 +8,13 @@ const appDir = path.dirname(
 );
 const distDir = path.resolve(appDir, 'custom-output-directory');
 
-const { render } = scopeToFixture('custom-output-target');
+const { sku } = scopeToFixture('custom-output-target');
 
 describe('custom-output-target', () => {
   it('should generate an output directory with the value specified in sku.config', async ({
     expect,
   }) => {
-    const build = await render('build');
+    const build = await sku('build');
 
     expect(await build.findByText('Build complete')).toBeInTheConsole();
 

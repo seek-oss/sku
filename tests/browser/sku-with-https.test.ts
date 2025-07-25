@@ -17,7 +17,7 @@ import {
   skipCleanup,
 } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('sku-with-https');
+const { sku, fixturePath } = scopeToFixture('sku-with-https');
 
 const serverPort = 9894;
 
@@ -39,7 +39,7 @@ describe.sequential('sku-with-https', () => {
 
     describe('start', () => {
       beforeAll(async () => {
-        const start = await render('start', args[bundler]);
+        const start = await sku('start', args[bundler]);
         globalExpect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
@@ -68,9 +68,7 @@ describe.sequential('sku-with-https', () => {
     const url = `https://localhost:${serverPort}`;
 
     it('should support the supplied middleware', async ({ expect }) => {
-      const start = await render('start-ssr', [
-        '--config=sku-server.config.ts',
-      ]);
+      const start = await sku('start-ssr', ['--config=sku-server.config.ts']);
       expect(await start.findByText('Server started')).toBeInTheConsole();
 
       const snapshot = await getAppSnapshot({
@@ -86,12 +84,12 @@ describe.sequential('sku-with-https', () => {
     const url = `https://localhost:${port}`;
 
     beforeAll(async () => {
-      const build = await render('build');
+      const build = await sku('build');
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
 
-      const serve = await render('serve', ['--strict-port', `--port=${port}`]);
+      const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
     });
 
@@ -116,7 +114,7 @@ describe.sequential('sku-with-https', () => {
   describe('.gitignore', () => {
     it('should add the .ssl directory to .gitignore', async ({ expect }) => {
       const ignoreContents = await fs.readFile(
-        path.join(joinPath('./'), '.gitignore'),
+        path.join(fixturePath('./'), '.gitignore'),
         'utf-8',
       );
       expect(ignoreContents.split('\n')).toContain(`.ssl`);

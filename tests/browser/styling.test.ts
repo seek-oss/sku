@@ -17,20 +17,20 @@ import { scopeToFixture } from '@sku-private/testing-library';
 const port = 8205;
 const devServerUrl = `http://localhost:${port}`;
 
-const { render, exec, joinPath } = scopeToFixture('styling');
-const distDir = joinPath('dist');
+const { sku, exec, fixturePath } = scopeToFixture('styling');
+const distDir = fixturePath('dist');
 
 describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
-      const build = await render('build');
+      const build = await sku('build');
       globalExpect(
         await build.findByText('Sku build complete'),
       ).toBeInTheConsole();
     });
 
     it('should create valid app', async ({ expect }) => {
-      const serve = await render('serve');
+      const serve = await sku('serve');
       globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url: devServerUrl, expect });
@@ -45,7 +45,7 @@ describe('styling', () => {
 
   describe('start', () => {
     it('should start a development server', async ({ expect }) => {
-      const start = await render('start');
+      const start = await sku('start');
       globalExpect(
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
@@ -57,7 +57,7 @@ describe('styling', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
-      const test = await render('test');
+      const test = await sku('test');
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });
   });

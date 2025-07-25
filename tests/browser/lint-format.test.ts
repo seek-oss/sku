@@ -10,9 +10,9 @@ import fs from 'node:fs/promises';
 import dedent from 'dedent';
 import { scopeToFixture } from '@sku-private/testing-library';
 
-const { render, joinPath } = scopeToFixture('lint-format');
+const { sku, fixturePath } = scopeToFixture('lint-format');
 
-const srcDirectory = joinPath('src');
+const srcDirectory = fixturePath('src');
 const testFile = (fileName: string) => path.join(srcDirectory, fileName);
 
 describe('lint-format', () => {
@@ -32,7 +32,7 @@ describe('lint-format', () => {
       `;
       await fs.writeFile(testFile(fileName), fileContents);
 
-      const lint = await render('lint');
+      const lint = await sku('lint');
       expect(
         await lint.findByText('src/typescriptFile.ts(1,7): error'),
       ).toBeInTheConsole();
@@ -50,7 +50,7 @@ describe('lint-format', () => {
         });\n`;
       await fs.writeFile(testFile(fileName), fileContents);
 
-      const lint = await render('lint');
+      const lint = await sku('lint');
       expect(
         await lint.findByText('Checking code with ESLint'),
       ).toBeInTheConsole();
@@ -75,7 +75,7 @@ describe('lint-format', () => {
       `;
       await fs.writeFile(testFile(fileName), fileContents);
 
-      const lint = await render('lint');
+      const lint = await sku('lint');
       expect(
         await lint.findByText('Checking code with Prettier'),
       ).toBeInTheConsole();
@@ -146,7 +146,7 @@ describe('lint-format', () => {
         const filePath = testFile(fileName);
         await fs.writeFile(filePath, filesToFormat[fileName]);
 
-        const format = await render('format');
+        const format = await sku('format');
         expect(
           await format.findByText('Formatting complete'),
         ).toBeInTheConsole();

@@ -1,10 +1,4 @@
-import {
-  render,
-  configure,
-  waitFor,
-  type Config,
-  type RenderOptions,
-} from 'cli-testing-library';
+import { render, waitFor, type RenderOptions } from 'cli-testing-library';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
@@ -23,14 +17,6 @@ type SkuCommand =
   | 'lint'
   | 'test';
 
-// Default configuration for cli-testing-library
-const DEFAULT_CONFIG: Partial<Config> = {
-  asyncUtilTimeout: 50_000,
-};
-
-// Configure cli-testing-library with default settings
-configure(DEFAULT_CONFIG);
-
 const renderCli = async (
   command: SkuCommand,
   args: string[] = [],
@@ -42,34 +28,45 @@ export const scopeToFixture = (fixtureFolder: string) => {
     require.resolve(`../../fixtures/${fixtureFolder}/package.json`),
   );
 
+  const fixturePath = (...paths: string[]) => path.join(appDir, ...paths);
+
   return {
-    render: (
+    /**
+     * Runs a `sku` command scoped to the fixture folder.
+     */
+    sku: (
       command: SkuCommand,
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
       renderCli(command, args, {
         ...options,
-        cwd: path.join(appDir, options.cwd ?? ''),
+        cwd: fixturePath(options.cwd ?? ''),
       }),
-    node: (
-      args: string[] = [],
-      options: Partial<Omit<RenderOptions, 'cwd'>> = {},
-    ) =>
+    /**
+     * Runs a `node` command scoped to the fixture folder.
+     */
+    node: (args: string[] = [], options: Partial<RenderOptions> = {}) =>
       render('node', args, {
         ...options,
-        cwd: appDir,
+        cwd: fixturePath(options.cwd ?? ''),
       }),
+    /**
+     * Runs an arbitrary command scoped to the fixture folder.
+     */
     exec: (
       command: string,
       args: string[] = [],
-      options: Partial<Omit<RenderOptions, 'cwd'>> = {},
+      options: Partial<RenderOptions> = {},
     ) =>
       render(command, args, {
         ...options,
-        cwd: appDir,
+        cwd: fixturePath(options.cwd ?? ''),
       }),
-    joinPath: (...paths: string[]) => path.join(appDir, ...paths),
+    /**
+     * Returns a path relative to the fixture folder.
+     */
+    fixturePath,
   };
 };
 

@@ -7,7 +7,7 @@ import {
   waitFor,
 } from '@sku-private/testing-library';
 
-const { render } = scopeToFixture('sku-test');
+const { sku } = scopeToFixture('sku-test');
 
 describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
   const args: TestFrameworkValues<string[]> = {
@@ -16,7 +16,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
   };
 
   it('should run tests', async ({ expect }) => {
-    const process = await render('test', args[testRunner]);
+    const process = await sku('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
     await waitFor(() => {
@@ -25,7 +25,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
   });
 
   it(`should pass through unknown flags`, async ({ expect }) => {
-    const process = await render('test', [
+    const process = await sku('test', [
       'testfile.ts',
       '--passWithNoTests',
       ...args[testRunner],

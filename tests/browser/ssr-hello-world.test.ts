@@ -74,7 +74,7 @@ describe('ssr-hello-world', () => {
       }) => {
         await node(['dist-build/server.cjs']);
 
-        const assetServer = await exec('npm', ['run', 'start:asset-server']);
+        const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
         expect(
           await assetServer.findByText('serving dist-build'),
         ).toBeInTheConsole();

@@ -39,7 +39,7 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await waitFor(async () => {
+      await waitFor(() => {
         globalExpect(build.hasExit()).toMatchObject({
           exitCode: 0,
         });
@@ -47,7 +47,7 @@ describe('sku-webpack-plugin', () => {
     });
 
     it('should create valid app', async ({ expect }) => {
-      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url: devServerUrl, expect });

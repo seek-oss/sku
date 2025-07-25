@@ -16,6 +16,9 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
 
+const storybookStartedRegex =
+  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+
 const { exec } = scopeToFixture('storybook-config');
 describe('storybook-config', () => {
   describe('start', () => {
@@ -38,9 +41,7 @@ describe('storybook-config', () => {
         port.toString(),
       ]);
       globalExpect(
-        await storybook.findByText(
-          'Storybook 9.0.16 for react-webpack5 started',
-        ),
+        await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
       storyPage = await getStoryPage(storyIframeUrl);
@@ -101,9 +102,7 @@ describe('storybook-config', () => {
         port.toString(),
       ]);
       globalExpect(
-        await storybook.findByText(
-          'Storybook 9.0.16 for react-webpack5 started',
-        ),
+        await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
@@ -152,7 +151,7 @@ describe('storybook-config', () => {
         });
       });
 
-      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       globalExpect(
         await assetServer.findByText('serving storybook-static'),
       ).toBeInTheConsole();
@@ -200,7 +199,7 @@ describe('storybook-config', () => {
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
       const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
 
-      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       globalExpect(
         await assetServer.findByText('serving storybook-static'),
       ).toBeInTheConsole();

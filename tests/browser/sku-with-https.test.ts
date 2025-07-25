@@ -45,21 +45,17 @@ describe.sequential('sku-with-https', () => {
         ).toBeInTheConsole();
       });
 
-      afterAll(cleanup);
-
       it('should start a development server', async ({ expect, task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({ url, expect });
-        expect(snapshot).toMatchSnapshot();
-      });
+        expect(snapshot).toMatchSnapshot('homepage');
 
-      it('should support the supplied middleware', async ({ expect, task }) => {
         skipCleanup(task.id);
-        const snapshot = await getAppSnapshot({
+        const middlewareSnapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
           expect,
         });
-        expect(snapshot).toMatchSnapshot();
+        expect(middlewareSnapshot).toMatchSnapshot('middleware');
       });
     });
   });

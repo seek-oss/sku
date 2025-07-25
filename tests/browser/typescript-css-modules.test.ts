@@ -65,7 +65,7 @@ describe.sequential('typescript-css-modules', () => {
 
     it('should create valid app', async ({ expect }) => {
       await node(['dist-ssr/server.cjs']);
-      const assetServer = await exec('npm', ['run', 'start:asset-server']);
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(
         await assetServer.findByText('serving dist-ssr'),
       ).toBeInTheConsole();

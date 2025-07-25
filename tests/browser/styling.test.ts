@@ -20,6 +20,9 @@ const devServerUrl = `http://localhost:${port}`;
 const { sku, exec, fixturePath } = scopeToFixture('styling');
 const distDir = fixturePath('dist');
 
+const storybookStartedRegex =
+  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+
 describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
@@ -80,9 +83,7 @@ describe('styling', () => {
         storybookPort.toString(),
       ]);
       globalExpect(
-        await storybook.findByText(
-          'Storybook 9.0.16 for react-webpack5 started',
-        ),
+        await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
       storyPage = await getStoryPage(storyIframeUrl);

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sku-with-https > bundler: vite > start > should start a development server 1`] = `
+exports[`sku-with-https > bundler: vite > start > should start a development server > homepage 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -95,7 +95,7 @@ POST HYDRATE DIFFS:
        </div>
 `;
 
-exports[`sku-with-https > bundler: vite > start > should support the supplied middleware 1`] = `
+exports[`sku-with-https > bundler: vite > start > should start a development server > middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================
@@ -120,7 +120,7 @@ POST HYDRATE DIFFS:
 \\ No newline at end of file
 `;
 
-exports[`sku-with-https > bundler: webpack > start > should start a development server 1`] = `
+exports[`sku-with-https > bundler: webpack > start > should start a development server > homepage 1`] = `
 "<!DOCTYPE html>
 <html>
   <head>
@@ -216,7 +216,7 @@ POST HYDRATE DIFFS:
        </div>
 `;
 
-exports[`sku-with-https > bundler: webpack > start > should support the supplied middleware 1`] = `
+exports[`sku-with-https > bundler: webpack > start > should start a development server > middleware 1`] = `
 "OK"
 POST HYDRATE DIFFS: 
 ===================================================================

@@ -123,6 +123,7 @@ export default [
             '__sku_alias__serverEntry',
             '__sku_alias__clientEntry',
             '__sku_alias__webpackStats',
+            'virtual:sku/polyfills',
           ],
         },
       ],

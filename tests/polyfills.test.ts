@@ -25,51 +25,54 @@ describe('polyfills', () => {
     vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
   };
 
-  describe.sequential.for(['webpack'])('bundler %s', async (bundler) => {
-    const port = await getPort();
-    const baseUrl = `http://localhost:${port}`;
+  describe.sequential.for(['webpack', 'vite'])(
+    'bundler %s',
+    async (bundler) => {
+      const port = await getPort();
+      const baseUrl = `http://localhost:${port}`;
 
-    describe('build', () => {
-      const { cancel, signal } = createCancelSignal();
+      describe('build', () => {
+        const { cancel, signal } = createCancelSignal();
 
-      beforeAll(async () => {
-        await runSkuScriptInDir('build', appDir, { args: args[bundler] });
-        runSkuScriptInDir('serve', appDir, {
-          args: ['--strict-port', `--port=${port}`],
-          signal,
+        beforeAll(async () => {
+          await runSkuScriptInDir('build', appDir, { args: args[bundler] });
+          runSkuScriptInDir('serve', appDir, {
+            args: ['--strict-port', `--port=${port}`],
+            signal,
+          });
+          await waitForUrls(baseUrl);
         });
-        await waitForUrls(baseUrl);
-      });
 
-      afterAll(async () => {
-        cancel();
-      });
-
-      it('should create valid app', async ({ expect }) => {
-        const app = await getAppSnapshot({ url: baseUrl, expect });
-        expect(app).toMatchSnapshot();
-      });
-    });
-
-    describe('start', () => {
-      const { cancel, signal } = createCancelSignal();
-      const devServerUrl = `http://localhost:${skuConfig.port}`;
-
-      beforeAll(async () => {
-        runSkuScriptInDir('start', appDir, {
-          signal,
+        afterAll(async () => {
+          cancel();
         });
-        await waitForUrls(devServerUrl);
+
+        it('should create valid app', async ({ expect }) => {
+          const app = await getAppSnapshot({ url: baseUrl, expect });
+          expect(app).toMatchSnapshot();
+        });
       });
 
-      afterAll(async () => {
-        cancel();
-      });
+      describe('start', () => {
+        const { cancel, signal } = createCancelSignal();
+        const devServerUrl = `http://localhost:${skuConfig.port}`;
 
-      it('should start a development server', async ({ expect }) => {
-        const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
-        expect(snapshot).toMatchSnapshot();
+        beforeAll(async () => {
+          runSkuScriptInDir('start', appDir, {
+            signal,
+          });
+          await waitForUrls(devServerUrl);
+        });
+
+        afterAll(async () => {
+          cancel();
+        });
+
+        it('should start a development server', async ({ expect }) => {
+          const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
+          expect(snapshot).toMatchSnapshot();
+        });
       });
-    });
-  });
+    },
+  );
 });

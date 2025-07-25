@@ -49,6 +49,15 @@ describe('sku init', () => {
 
     expect(contents).toMatchSnapshot();
   });
+
+  it('should update the pnpm-workspace.yaml', async ({ expect }) => {
+    const contents = await fs.readFile(
+      fixturePath('pnpm-workspace.yaml'),
+      'utf-8',
+    );
+
+    expect(stripYamlVersions(contents)).toMatchSnapshot();
+  });
 });
 
 /**
@@ -69,4 +78,17 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
   }
 
   return newPackageJson;
+}
+
+/**
+ *
+ * When snapshot testing YAML files, we don't care about the specific versions.
+ * This function strips version numbers from YAML content.
+ */
+function stripYamlVersions(yamlContent: string): string {
+  // Replace version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED"
+  return yamlContent.replace(
+    /:\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+    ': VERSION_IGNORED',
+  );
 }

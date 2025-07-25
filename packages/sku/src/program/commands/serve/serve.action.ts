@@ -190,6 +190,7 @@ export const serveAction = async ({
 
     const sitesWithHosts = sites.filter((site) => site.host);
 
+    console.log(chalk.blue('Server started'));
     if (sitesWithHosts.length > 0) {
       sitesWithHosts.forEach((site) => {
         const siteUrl = `${proto}://${site.host}:${availablePort}${initialPath}`;
@@ -201,7 +202,7 @@ export const serveAction = async ({
         );
       });
     } else {
-      console.log(chalk.blue(`Started server on ${chalk.underline(url)}`));
+      console.log(chalk.blue(`Site available at ${chalk.underline(url)}`));
     }
 
     console.log();

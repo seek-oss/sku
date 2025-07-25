@@ -1,5 +1,5 @@
 import type { ExpectStatic } from 'vitest';
-import { TEST_TIMEOUT } from '../../vitest.config.ts';
+import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 function sanitizeHtml(str: string) {
   return str.replaceAll(process.cwd(), '{cwd}');

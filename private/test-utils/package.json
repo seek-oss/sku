@@ -3,6 +3,10 @@
   "private": true,
   "type": "module",
   "main": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./constants": "./constants.js"
+  },
   "devDependencies": {
     "@jest/globals": "^30.0.3",
     "@prettier/sync": "^0.5.2",

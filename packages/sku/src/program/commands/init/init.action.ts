@@ -27,6 +27,7 @@ import { setCwd } from '@/utils/cwd.js';
 import banner from '@/utils/banners/banner.js';
 import toPosixPath from '@/utils/toPosixPath.js';
 import { isEmptyDir } from '@/utils/isEmptyDir.js';
+import { execAsync } from '@/utils/execAsync.js';
 
 const trace = debug('sku:init');
 
@@ -130,27 +131,6 @@ export const initAction = async (
     },
   };
 
-  if (isAtLeastPnpmV10()) {
-    trace('PNPM version is >= 10.0.0, creating pnpm-workspace.yaml');
-    // IDE tooling depends on finding `eslint` and `prettier` in the root `node_modules`.
-    // `sku` consumers do not directly install these dependencies, so without this
-    // configuration they would not be present in the root `node_modules`, causing discrepancies
-    // between IDE linting and CLI linting.
-    //
-    // PNPM v9 used to hoist these dependencies by default, but PNPM v10 no longer hoists any
-    // dependencies by default.
-    // See https://github.com/pnpm/pnpm/releases/tag/v10.0.0#:~:text=nothing%20is%20hoisted%20by%20default
-    const pnpmWorkspaceString = dedent`
-      publicHoistPattern:
-        - eslint
-        - prettier`;
-
-    await writeFile(
-      path.join(root, 'pnpm-workspace.yaml'),
-      pnpmWorkspaceString,
-    );
-  }
-
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await writeFile(path.join(root, 'package.json'), packageJsonString);
@@ -228,10 +208,20 @@ export const initAction = async (
   ];
 
   console.log(
-    `Installing packages with ${chalk.bold(
+    `Installing dependencies with ${chalk.bold(
       packageManager,
-    )}. This might take a couple of minutes.`,
+    )}. This might take a while.`,
   );
+
+  // Config dependencies are only supported in PNPM v10 and above.
+  // `pnpm-plugin-sku` needs to be installed before regular dependencies to ensure packages are correctly hoisted.
+  if (isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    await execAsync('pnpm add --config pnpm-plugin-sku');
+  }
+
   console.log(
     `Installing ${deps
       .concat(devDeps)

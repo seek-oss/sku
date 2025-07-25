@@ -17,6 +17,7 @@ const projectDirectory = fixturePath(projectName);
 describe('sku init', () => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
+    await fs.writeFile(fixturePath('pnpm-workspace.yaml'), '');
 
     const result = await sku('init', [projectName]);
     globalExpect(await result.findByText('Project created')).toBeInTheConsole();

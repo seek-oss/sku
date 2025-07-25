@@ -1,9 +1,27 @@
-const seek = require('eslint-config-seek');
-const jsdoc = require('eslint-plugin-jsdoc');
-const nodePlugin = require('eslint-plugin-n');
-const eslintPluginSkuVitest = require('@sku-private/eslint-plugin');
+import seek from 'eslint-config-seek';
+import jsdoc from 'eslint-plugin-jsdoc';
+import nodePlugin from 'eslint-plugin-n';
+import eslintPluginSkuVitest from '@sku-private/eslint-plugin';
+import vitest from '@vitest/eslint-plugin';
 
-module.exports = [
+const modifiedSeek = seek.map((config) => {
+  // Removing the jest plugin and rules so they don't conflict with the vitest plugin
+  if (config.plugins?.jest) {
+    delete config.plugins.jest;
+  }
+
+  if (config.rules) {
+    for (const ruleName of Object.keys(config.rules)) {
+      if (ruleName.includes('jest')) {
+        config.rules[ruleName] = 'off';
+      }
+    }
+  }
+
+  return config;
+});
+
+export default [
   {
     ignores: [
       '**/*.less.d.ts',
@@ -20,11 +38,12 @@ module.exports = [
       '**/@loadable/**/*',
     ],
   },
-  ...seek,
+  ...modifiedSeek,
   {
     plugins: {
       jsdoc,
       n: nodePlugin,
+      vitest,
     },
 
     languageOptions: {
@@ -62,8 +81,9 @@ module.exports = [
         typescript: true,
       },
     },
-
     rules: {
+      ...vitest.configs.recommended.rules,
+      'vitest/no-focused-tests': 'error',
       'jsdoc/check-alignment': 2,
       'jsdoc/check-types': 2,
 

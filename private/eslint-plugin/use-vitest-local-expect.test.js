@@ -18,6 +18,7 @@ describe('use-vitest-local-expect', () => {
     },
   });
 
+  // eslint-disable-next-line vitest/expect-expect
   it('valid case', () => {
     valid(
       "it('should do something', ({expect}) => { expect(true).toBe(true); });",

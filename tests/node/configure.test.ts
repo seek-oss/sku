@@ -49,6 +49,7 @@ describe('configure', () => {
     const appFolder = fixturePath('App');
 
     beforeAll(async () => {
+      await removeAppDir(appFolder);
       await makeDir(appFolder);
       await makeDir(path.join(appFolder, './src'));
       await copyToApp('src/App.tsx', appFolder);

@@ -21,6 +21,13 @@ import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
 import { hasErrorMessage } from '@/utils/error-guards.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
+import {
+  isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
+  rootDir,
+} from '@/services/packageManager/packageManager.js';
+import { validatePnpmConfig } from '@/services/packageManager/pnpmConfig.js';
+import { getPnpmConfigDependencies } from '@/services/packageManager/getPnpmConfigDependencies.js';
 
 const coverageFolder = 'coverage';
 
@@ -155,4 +162,21 @@ export default async (skuContext: SkuContext) => {
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
+
+  if (rootDir && isAtLeastPnpmV10()) {
+    const pnpmConfigDependencies = await getPnpmConfigDependencies();
+
+    const hasRecommendedPnpmVersionInstalled =
+      isAtLeastRecommendedPnpmVersion();
+    const pnpmPluginSkuInstalled =
+      pnpmConfigDependencies.includes('pnpm-plugin-sku');
+
+    await validatePnpmConfig({
+      rootDir,
+      hasRecommendedPnpmVersionInstalled: Boolean(
+        hasRecommendedPnpmVersionInstalled,
+      ),
+      pnpmPluginSkuInstalled,
+    });
+  }
 };

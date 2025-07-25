@@ -17,6 +17,7 @@ export default defineConfig({
     hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,
     exclude: [...defaultExclude, '**/fixtures/**'],
+    restoreMocks: true,
     projects: [
       {
         extends: true,

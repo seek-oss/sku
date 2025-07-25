@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+pnpmfileChecksum: sha256-HyzwrIZmFVJr7kvwhHMEE7NoDGkknMxWww7GMTBFW70=
+
 importers:
 
   .:
@@ -38,6 +40,9 @@ importers:
       '@types/node':
         specifier: ^18.19.31
         version: 18.19.118
+      '@vitest/eslint-plugin':
+        specifier: ^1.3.4
+        version: 1.3.4(eslint@9.30.1(jiti@2.4.2))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
       change-case:
         specifier: ^5.4.4
         version: 5.4.4
@@ -71,6 +76,9 @@ importers:
       husky:
         specifier: ^9.0.0
         version: 9.1.7
+      jiti:
+        specifier: ^2.4.2
+        version: 2.4.2
       lint-staged:
         specifier: ^16.0.0
         version: 16.1.2
@@ -322,6 +330,28 @@ importers:
       '@testing-library/react':
         specifier: ^14.0.0
         version: 14.3.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      dedent:
+        specifier: ^1.5.1
+        version: 1.6.0(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
+  fixtures/polyfills:
+    dependencies:
+      '@sku-private/3rd-party-polyfill':
+        specifier: workspace:*
+        version: link:../../private/3rd-party-polyfill
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../private/test-utils
       dedent:
         specifier: ^1.5.1
         version: 1.6.0(babel-plugin-macros@3.1.0)
@@ -696,6 +726,8 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  packages/pnpm-plugin: {}
 
   packages/sku:
     dependencies:
@@ -1167,6 +1199,8 @@ importers:
       typescript-transform-paths:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
+
+  private/3rd-party-polyfill: {}
 
   private/eslint-plugin: {}
 
@@ -3479,6 +3513,18 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0
+
+  '@vitest/eslint-plugin@1.3.4':
+    resolution: {integrity: sha512-EOg8d0jn3BAiKnR55WkFxmxfWA3nmzrbIIuOXyTe6A72duryNgyU+bdBEauA97Aab3ho9kLmAwgPX63Ckj4QEg==}
+    peerDependencies:
+      eslint: '>= 8.57.0'
+      typescript: '>= 5.0.0'
+      vitest: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vitest:
+        optional: true
 
   '@vitest/expect@3.2.4':
     resolution: {integrity: sha512-Io0yyORnB6sikFlt8QW5K7slY4OjqNX9jmJQ02QDda8lyM6B5oNgVWoSoKPac8/kgnCUzuHQKrSLtu/uOqqrig==}
@@ -11661,6 +11707,16 @@ snapshots:
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
       vite: 6.3.5(@types/node@18.19.118)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vitest/eslint-plugin@1.3.4(eslint@9.30.1(jiti@2.4.2))(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))':
+    dependencies:
+      '@typescript-eslint/utils': 8.36.0(eslint@9.30.1(jiti@2.4.2))(typescript@5.8.3)
+      eslint: 9.30.1(jiti@2.4.2)
+    optionalDependencies:
+      typescript: 5.8.3
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@18.19.118)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 

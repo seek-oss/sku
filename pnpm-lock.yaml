@@ -334,6 +334,28 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/polyfills:
+    dependencies:
+      '@sku-private/3rd-party-polyfill':
+        specifier: workspace:*
+        version: link:../../private/3rd-party-polyfill
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../private/test-utils
+      dedent:
+        specifier: ^1.5.1
+        version: 1.6.0(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/public-path:
     dependencies:
       react:
@@ -1157,6 +1179,8 @@ importers:
         specifier: ^3.5.2
         version: 3.5.5(typescript@5.8.3)
 
+  private/3rd-party-polyfill: {}
+
   private/eslint-plugin: {}
 
   private/puppeteer:
@@ -1266,6 +1290,9 @@ importers:
       '@sku-fixtures/multiple-routes':
         specifier: workspace:*
         version: link:../fixtures/multiple-routes
+      '@sku-fixtures/polyfills':
+        specifier: workspace:*
+        version: link:../fixtures/polyfills
       '@sku-fixtures/public-path':
         specifier: workspace:*
         version: link:../fixtures/public-path

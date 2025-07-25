@@ -11,5 +11,6 @@
     "incremental": true,
     "resolveJsonModule": true
   },
+  "include": ["eslint.config.ts", ".d.ts"],
   "exclude": ["node_modules", "fixtures", "packages/sku", "packages/codemod"]
 }

@@ -95,6 +95,8 @@ describe('ssr-hello-world', () => {
 
     it('should run on a custom port', async ({ expect }) => {
       const customPort = '7654';
+      const customPortUrl = `http://localhost:${customPort}`;
+
       const server = await node([
         'dist-build/server.cjs',
         '--port',
@@ -103,6 +105,9 @@ describe('ssr-hello-world', () => {
       expect(
         await server.findByText('Server started on port 7654'),
       ).toBeInTheConsole();
+
+      const snapshot = await getAppSnapshot({ url: customPortUrl, expect });
+      expect(snapshot).toMatchSnapshot();
     });
 
     it('should copy all public assets to the target folder', async ({

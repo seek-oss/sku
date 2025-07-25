@@ -1,1 +1,1 @@
-The tests run `sku init` in this directory so this fixture intentionally relatively empty.
+The tests run `sku init` in this directory so this fixture is intentionally relatively empty.

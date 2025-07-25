@@ -1,4 +1,4 @@
-import { describe, it, afterEach } from 'vitest';
+import { describe, it } from 'vitest';
 
 import {
   testFrameworks,

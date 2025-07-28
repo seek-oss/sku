@@ -1,5 +1,4 @@
-// '__sku_alias__clientEntry' is a vite alias
-// pointing to the consuming apps client entry
+import 'virtual:sku/polyfills';
 import client from '__sku_alias__clientEntry';
 import dedent from 'dedent';
 

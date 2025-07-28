@@ -16,6 +16,8 @@ import {
   getPackageManagerInstallPage,
   getInstallCommand,
   isAtLeastPnpmV10,
+  rootDir,
+  packageManagerVersion,
 } from '@/services/packageManager/packageManager.js';
 import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
 import { fix as esLintFix } from '@/services/eslint/runESLint.js';
@@ -130,6 +132,14 @@ export const initAction = async (
       format: 'sku format',
     },
   };
+
+  const isRepoRoot = rootDir === null || rootDir === root;
+  const shouldConfigurePackageManagerField =
+    isRepoRoot && packageManagerVersion;
+
+  if (shouldConfigurePackageManagerField) {
+    packageJson.packageManager = `${packageManager}@${packageManagerVersion}`;
+  }
 
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 

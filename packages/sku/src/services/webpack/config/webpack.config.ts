@@ -22,6 +22,7 @@ import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
 import targets from '@/config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
+import { resolvePolyfills } from '@/utils/resolvePolyfills.js';
 
 const require = createRequire(import.meta.url);
 
@@ -62,10 +63,7 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig(skuContext);
 
-  const resolvedPolyfills =
-    polyfills?.map((polyfill) =>
-      require.resolve(polyfill, { paths: [cwd()] }),
-    ) || [];
+  const resolvedPolyfills = resolvePolyfills(polyfills);
 
   const skuClientEntry = require.resolve('../entry/client/index.js');
 

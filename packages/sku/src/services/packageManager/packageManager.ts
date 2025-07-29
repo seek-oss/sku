@@ -4,6 +4,7 @@ import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
 import { getPackageManager } from './context/packageManager.js';
+import semver from 'semver';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 
@@ -78,6 +79,17 @@ const { rootDir, packageManager, packageManagerVersion } =
   resolvePackageManager();
 
 export { rootDir, packageManager, packageManagerVersion };
+
+export const isAtLeastPnpmV10 = () =>
+  packageManager === 'pnpm' &&
+  packageManagerVersion &&
+  semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+const recommendedPnpmVersion = '10.13.0';
+export const isAtLeastRecommendedPnpmVersion = () =>
+  packageManager === 'pnpm' &&
+  packageManagerVersion &&
+  semver.satisfies(packageManagerVersion, `>=${recommendedPnpmVersion}`);
 
 export const getCommand = (
   agent: SupportedPackageManager,

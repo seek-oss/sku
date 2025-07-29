@@ -1,7 +1,7 @@
 import { createSkuViteConfig } from '@/services/vite/helpers/config/baseConfig.js';
 import type { SkuContext } from '@/context/createSkuContext.js';
 import {
-  outDir,
+  createOutDir,
   renderEntryChunkName,
 } from '@/services/vite/helpers/bundleConfig.js';
 import { createRequire } from 'node:module';
@@ -18,8 +18,9 @@ const clientEntry = require.resolve('../../entries/vite-client.js');
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 
-export const createServerBuildConfig = (skuContext: SkuContext) =>
-  createSkuViteConfig(
+export const createServerBuildConfig = (skuContext: SkuContext) => {
+  const outDir = createOutDir(skuContext.paths.target);
+  return createSkuViteConfig(
     {
       build: {
         ssr: true,
@@ -34,14 +35,17 @@ export const createServerBuildConfig = (skuContext: SkuContext) =>
     },
     skuContext,
   );
+};
 
-export const createClientBuildConfig = (skuContext: SkuContext) =>
-  createSkuViteConfig(
+export const createClientBuildConfig = (skuContext: SkuContext) => {
+  const outDir = createOutDir(skuContext.paths.target);
+  return createSkuViteConfig(
     {
       build: {
         ssr: false,
         outDir: outDir.client,
         manifest: true,
+        sourcemap: skuContext.sourceMapsProd,
         rollupOptions: {
           input: clientEntry,
         },
@@ -49,9 +53,11 @@ export const createClientBuildConfig = (skuContext: SkuContext) =>
     },
     skuContext,
   );
+};
 
-export const createStartConfig = (skuContext: SkuContext) =>
-  createSkuViteConfig(
+export const createStartConfig = (skuContext: SkuContext) => {
+  const outDir = createOutDir(skuContext.paths.target);
+  return createSkuViteConfig(
     {
       base: '/',
       plugins: [
@@ -85,3 +91,4 @@ export const createStartConfig = (skuContext: SkuContext) =>
     },
     skuContext,
   );
+};

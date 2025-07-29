@@ -1,5 +1,3 @@
-import fs from 'fs/promises';
-
 import { renderToString } from 'react-dom/server';
 
 import App from './App.js';
@@ -62,10 +60,8 @@ export default () => ({
   },
   onStart: async () => {
     if (process.env.NODE_ENV === 'production') {
-      await fs.writeFile(
-        './started.txt',
-        "Server started, here's your callback",
-      );
+      // eslint-disable-next-line no-console
+      console.log('Server ran the onStart callback');
     }
   },
 });

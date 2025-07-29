@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`source-maps > bundler vite > sourceMapsProd false > should generate the expected files 1`] = `
+{
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="modulepreload" href="/static/source-maps/vite-client-DcM1ITlA.js" crossorigin />
+
+  </head>
+  <body>
+    <div id="app"><div>Hello source maps</div></div>
+    <script type="module" src="/static/source-maps/vite-client-DcM1ITlA.js" ></script>
+  </body>
+</html>",
+  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`source-maps > bundler vite > sourceMapsProd true > should generate the expected files 1`] = `
+{
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="modulepreload" href="/static/source-maps/vite-client-DcM1ITlA.js" crossorigin />
+
+  </head>
+  <body>
+    <div id="app"><div>Hello source maps</div></div>
+    <script type="module" src="/static/source-maps/vite-client-DcM1ITlA.js" ></script>
+  </body>
+</html>",
+  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DcM1ITlA.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`source-maps > bundler webpack > sourceMapsProd false > should generate the expected files 1`] = `
+{
+  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/runtime.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/2.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/main.js">
+  </head>
+  <body>
+    <div id="app"><div>Hello source maps</div></div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/static/source-maps/runtime.js"></script>
+<script async data-chunk="main" src="/static/source-maps/2.js"></script>
+<script async data-chunk="main" src="/static/source-maps/main.js"></script>
+  </body>
+</html>",
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`source-maps > bundler webpack > sourceMapsProd true > should generate the expected files 1`] = `
+{
+  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/runtime.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/2.js">
+<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/main.js">
+  </head>
+  <body>
+    <div id="app"><div>Hello source maps</div></div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/static/source-maps/runtime.js"></script>
+<script async data-chunk="main" src="/static/source-maps/2.js"></script>
+<script async data-chunk="main" src="/static/source-maps/main.js"></script>
+  </body>
+</html>",
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;

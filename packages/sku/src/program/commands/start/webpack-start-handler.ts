@@ -10,18 +10,12 @@ import getCertificate from '@/utils/certificate.js';
 import getStatsConfig from '@/services/webpack/config/statsConfig.js';
 import createHtmlRenderPlugin from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
-import { watchVocabCompile } from '@/services/vocab/runVocab.js';
 
-import {
-  checkHosts,
-  getAppHosts,
-  withHostile,
-} from '@/utils/contextUtils/hosts.js';
+import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import allocatePort from '@/utils/allocatePort.js';
 import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
 import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
 import { getMatchingRoute } from '@/utils/routeMatcher.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
 import {
   getLanguageFromRoute,
   getRouteWithLanguage,
@@ -54,18 +48,10 @@ export const webpackStartHandler = async ({
     hosts,
   } = skuContext;
 
-  await configureProject(skuContext);
-  validatePeerDeps(skuContext);
-  console.log(chalk.blue(`sku start`));
-
-  await watchVocabCompile(skuContext);
-
   const environment = resolveEnvironment({
     environment: environmentOption,
     skuContext,
   });
-
-  console.log();
 
   const availablePort = await allocatePort({
     port: port.client,
@@ -90,8 +76,6 @@ export const webpackStartHandler = async ({
 
   const clientCompiler = webpack(clientWebpackConfig);
   const renderCompiler = webpack(renderWebpackConfig);
-
-  await withHostile(checkHosts)(skuContext);
 
   renderCompiler.watch({}, (err, stats) => {
     if (err) {
@@ -215,10 +199,8 @@ export const webpackStartHandler = async ({
       appHosts?.[0]
     }:${availablePort}${initialPath}`;
 
-    console.log();
-    console.log(
-      chalk.blue(`Starting the development server on ${chalk.underline(url)}`),
-    );
+    console.log('Starting development server...');
+    console.log(chalk.blue(`Local: ${chalk.underline(url)}`));
     console.log();
 
     openBrowser(url);

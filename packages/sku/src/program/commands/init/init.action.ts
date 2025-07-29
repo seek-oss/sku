@@ -6,7 +6,6 @@ import dedent from 'dedent';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
-import semver from 'semver';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 
 import type { SkuContext } from '@/context/createSkuContext.js';
@@ -16,7 +15,7 @@ import {
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
-  packageManagerVersion,
+  isAtLeastPnpmV10,
 } from '@/services/packageManager/packageManager.js';
 import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
 import { fix as esLintFix } from '@/services/eslint/runESLint.js';
@@ -28,6 +27,7 @@ import { setCwd } from '@/utils/cwd.js';
 import banner from '@/utils/banners/banner.js';
 import toPosixPath from '@/utils/toPosixPath.js';
 import { isEmptyDir } from '@/utils/isEmptyDir.js';
+import { execAsync } from '@/utils/execAsync.js';
 
 const trace = debug('sku:init');
 
@@ -131,23 +131,6 @@ export const initAction = async (
     },
   };
 
-  const isAtLeastPnpmV10 =
-    packageManager === 'pnpm' &&
-    packageManagerVersion &&
-    semver.satisfies(packageManagerVersion, '>=10.0.0');
-
-  if (isAtLeastPnpmV10) {
-    trace(
-      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
-    );
-    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
-    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
-    packageJson.pnpm = {
-      // We transitively depend on `esbuild` via Vanilla Extract
-      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
-    };
-  }
-
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
   await writeFile(path.join(root, 'package.json'), packageJsonString);
@@ -225,10 +208,20 @@ export const initAction = async (
   ];
 
   console.log(
-    `Installing packages with ${chalk.bold(
+    `Installing dependencies with ${chalk.bold(
       packageManager,
-    )}. This might take a couple of minutes.`,
+    )}. This might take a while.`,
   );
+
+  // Config dependencies are only supported in PNPM v10 and above.
+  // `pnpm-plugin-sku` needs to be installed before regular dependencies to ensure packages are correctly hoisted.
+  if (isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    await execAsync('pnpm add --config pnpm-plugin-sku');
+  }
+
   console.log(
     `Installing ${deps
       .concat(devDeps)

@@ -1,12 +1,17 @@
 packages:
   - docs
-  - fixtures/*
   - tests
-  - test-utils
-  - vite-test-utils
+  - fixtures/*
   - packages/*
+  - private/*
+
+configDependencies:
+  pnpm-plugin-sku: 0.0.1+sha512-9tebopr+ruP0nprOotkf8IeMASkXzYdsZuJgOHXhULQLDmg0MkDsPw/zX8P0LcyrImjqQQSXfRvoaWYNXgtrkw==
 
 hoistWorkspacePackages: false
+
+ignoredBuiltDependencies:
+  - core-js-pure
 
 linkWorkspacePackages: true
 

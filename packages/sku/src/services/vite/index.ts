@@ -7,6 +7,7 @@ import {
   createStartConfig,
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
+import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '@/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
 import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
@@ -14,13 +15,14 @@ import allocatePort from '@/utils/allocatePort.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
+    const outDir = createOutDir(skuContext.paths.target);
     await build(createClientBuildConfig(skuContext));
     await build(createServerBuildConfig(skuContext));
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
-    await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
-    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
+    await cleanTargetDirectory(outDir.ssg, true);
+    await cleanTargetDirectory(outDir.join('.vite'), true);
   },
   start: async (skuContext: SkuContext) => {
     const server = await createServer(createStartConfig(skuContext));
@@ -45,6 +47,7 @@ const printUrls = (
   skuContext: SkuContext,
 ) => {
   const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  console.log('Starting development server...');
   hosts.forEach((site) => {
     const initialPath =
       skuContext.initialPath !== '/' ? skuContext.initialPath : '';

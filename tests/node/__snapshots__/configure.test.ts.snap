@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`configure > javascript app > should generate .gitignore 1`] = `
+[
+  ".eslintcache",
+  ".prettierrc",
+  "coverage/",
+  "dist/",
+  "eslint.config.mjs",
+  "report/",
+  "tsconfig.json",
+]
+`;
+
+exports[`configure > javascript app > should generate .prettierignore 1`] = `
+[
+  ".eslintcache",
+  ".prettierrc",
+  "coverage/",
+  "dist/",
+  "eslint.config.mjs",
+  "pnpm-lock.yaml",
+  "report/",
+  "tsconfig.json",
+]
+`;
+
+exports[`configure > typescript app > should generate .gitignore 1`] = `
+[
+  ".eslintcache",
+  ".prettierrc",
+  "coverage/",
+  "eslint.config.mjs",
+  "foo/bar/",
+  "report/",
+  "tsconfig.json",
+]
+`;
+
+exports[`configure > typescript app > should generate .prettierignore 1`] = `
+[
+  ".eslintcache",
+  ".prettierrc",
+  "coverage/",
+  "eslint.config.mjs",
+  "foo/bar/",
+  "pnpm-lock.yaml",
+  "report/",
+  "tsconfig.json",
+]
+`;

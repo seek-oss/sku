@@ -6,6 +6,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 
 import type { SkuContext } from '@/context/createSkuContext.js';
+import { polyfillsPlugin } from '../../plugins/polyfillsPlugin.js';
 import { preloadPlugin } from '../../plugins/preloadPlugin/preloadPlugin.js';
 import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 
@@ -16,6 +17,7 @@ import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '@/services/vite/plugins/setSsrNoExternal.js';
 import browserslistToEsbuild from '@/services/vite/helpers/browserslist-to-esbuild.js';
+
 const require = createRequire(import.meta.url);
 
 const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
@@ -59,6 +61,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
+      polyfillsPlugin(skuContext),
       setSsrNoExternal(skuContext),
     ],
     resolve: {

@@ -15,7 +15,7 @@ import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd, requireFromCwd } from '@/utils/cwd.js';
+import { requireFromCwd } from '@/utils/cwd.js';
 import { getVocabConfig } from '@/services/vocab/config/vocab.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
@@ -23,6 +23,7 @@ import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
 import targets from '@/config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
+import { resolvePolyfills } from '@/utils/resolvePolyfills.js';
 
 const require = createRequire(import.meta.url);
 
@@ -59,9 +60,7 @@ const makeWebpackConfig = ({
 
   const internalInclude = [join(__dirname, '../entry'), ...paths.src];
 
-  const resolvedPolyfills = polyfills.map((polyfill) =>
-    require.resolve(polyfill, { paths: [cwd()] }),
-  );
+  const resolvedPolyfills = resolvePolyfills(polyfills);
   const proto = httpsDevServer ? 'https' : 'http';
   const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 

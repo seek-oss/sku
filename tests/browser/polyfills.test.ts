@@ -1,16 +1,21 @@
 import { describe, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
-import { scopeToFixture } from '@sku-private/testing-library';
+import {
+  bundlers,
+  type BundlerValues,
+  scopeToFixture,
+} from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
 
 const { sku } = scopeToFixture('polyfills');
 
 describe('polyfills', () => {
-  const args: Record<string, string[]> = {
+  const args: BundlerValues<string[]> = {
     vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+    webpack: [],
   };
 
-  describe.sequential.for(['webpack'])('bundler %s', async (bundler) => {
+  describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
     const port = await getPort();
     const baseUrl = `http://localhost:${port}`;
 

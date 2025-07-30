@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-`vite`: Add support for `displayNameProd` `sku.config option
+`vite`: Add support for `displayNameProd` sku.config option

@@ -24,7 +24,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
   const fixturePath = (...paths: string[]) => path.join(appDir, ...paths);
 
   // Using the fixtures sku binary so that dependencies are resolved according to the fixtures package.json (allowing injected dependencies to work).
-  const skuBin = require.resolve(fixturePath('./node_modules/sku/bin/bin.js'));
+  const skuBin = require.resolve(fixturePath('./node_modules/.bin/sku'));
 
   return {
     /**

@@ -96,7 +96,7 @@
     "@eslint/compat": "^1.2.1",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
-    "@loadable/server": "^5.14.0",
+    "@loadable/server": "^5.16.7",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@sku-lib/vite": "workspace:*",
@@ -227,5 +227,10 @@
     "type-fest": "^4.41.0",
     "typescript-transform-paths": "^3.5.2",
     "vitest": "^3.2.3"
+  },
+  "dependenciesMeta": {
+    "@sku-lib/vite": {
+      "injected": true
+    }
   }
 }

@@ -26,3 +26,6 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
+
+syncInjectedDepsAfterScripts:
+  - build

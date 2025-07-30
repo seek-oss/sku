@@ -8,15 +8,15 @@ exports[`source-maps > bundler vite > sourceMapsProd false > should generate the
     <meta charset="UTF-8" />
     <title>hello-world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/static/source-maps/vite-client-B_BJTN7o.js" crossorigin />
+    <link rel="modulepreload" href="/static/source-maps/vite-client-DcM1ITlA.js" crossorigin />
 
   </head>
   <body>
     <div id="app"><div>Hello source maps</div></div>
-    <script type="module" src="/static/source-maps/vite-client-B_BJTN7o.js" ></script>
+    <script type="module" src="/static/source-maps/vite-client-DcM1ITlA.js" ></script>
   </body>
 </html>",
-  "vite-client-B_BJTN7o.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -28,16 +28,16 @@ exports[`source-maps > bundler vite > sourceMapsProd true > should generate the 
     <meta charset="UTF-8" />
     <title>hello-world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/static/source-maps/vite-client-B_BJTN7o.js" crossorigin />
+    <link rel="modulepreload" href="/static/source-maps/vite-client-DcM1ITlA.js" crossorigin />
 
   </head>
   <body>
     <div id="app"><div>Hello source maps</div></div>
-    <script type="module" src="/static/source-maps/vite-client-B_BJTN7o.js" ></script>
+    <script type="module" src="/static/source-maps/vite-client-DcM1ITlA.js" ></script>
   </body>
 </html>",
-  "vite-client-B_BJTN7o.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-B_BJTN7o.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DcM1ITlA.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

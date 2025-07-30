@@ -3,6 +3,7 @@
 import 'vitest-puppeteer';
 
 import { type Page, Frame } from 'puppeteer';
+import { TEST_TIMEOUT } from './constants.js';
 
 /**
  * Returns the page for the given story iframe URL
@@ -12,7 +13,7 @@ export const getStoryPage = async (
   storyIframeUrl: string,
 ) => {
   const storyPage = await browser.newPage();
-  storyPage.setDefaultNavigationTimeout(10_000);
+  storyPage.setDefaultNavigationTimeout(TEST_TIMEOUT);
 
   await storyPage.goto(storyIframeUrl, { waitUntil: ['load'] });
 

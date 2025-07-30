@@ -11,7 +11,12 @@ import {
 } from '@sku-private/test-utils';
 
 import type { Page } from 'puppeteer';
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+  waitFor,
+} from '@sku-private/testing-library';
 
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
@@ -49,9 +54,14 @@ describe('storybook-config', () => {
 
     afterAll(async () => {
       await storyPage?.close();
+      cleanup();
     });
 
-    it('should start sku dev middleware if configured', async ({ expect }) => {
+    it('should start sku dev middleware if configured', async ({
+      expect,
+      task,
+    }) => {
+      skipCleanup(task.id);
       const response = await fetch(middlewareUrl);
 
       expect(response.status).toBe(200);
@@ -60,7 +70,9 @@ describe('storybook-config', () => {
 
     it('should render decorators defined in the storybook preview file', async ({
       expect,
+      task,
     }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-decorator]',
@@ -70,7 +82,8 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async ({ expect }) => {
+    it('should render a component inside a story', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-text]',
@@ -80,7 +93,8 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async ({ expect }) => {
+    it('should render vanilla styles', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',

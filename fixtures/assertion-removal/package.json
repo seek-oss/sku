@@ -3,13 +3,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "@types/react": "^18.2.3",
-    "@types/react-dom": "^18.2.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "assert": "^2.0.0",
     "dedent": "^1.5.1",
     "sku": "workspace:*",

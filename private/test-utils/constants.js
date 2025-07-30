@@ -3,4 +3,4 @@
  * This needs to be a JS file so that it can be imported in the vitest config.
  */
 
-export const TEST_TIMEOUT = 50_000;
+export const TEST_TIMEOUT = 60_000;

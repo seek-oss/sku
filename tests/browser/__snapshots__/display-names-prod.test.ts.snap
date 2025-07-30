@@ -1,0 +1,236 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`display-names-prod > bundler: vite > build > should add displayName properties to React components in production build 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client-ljKe-wB2.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1>
+          Display Names Test
+        </h1>
+        <button>
+          Click me
+        </button>
+        <div>
+          This is a card
+        </div>
+        <input placeholder="Test input">
+        <footer>
+          Footer content
+        </footer>
+        <div id="display-names-test">
+          <p>
+            Components should have displayName in production build:
+          </p>
+          <ul>
+            <li>
+              Button.displayName:
+              Button
+            </li>
+            <li>
+              Card.displayName:
+              Card
+            </li>
+            <li>
+              Header.displayName:
+              Header
+            </li>
+            <li>
+              MemoizedFooter.displayName:
+              MemoizedFooter
+            </li>
+            <li>
+              Input.displayName:
+              Input
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="/vite-client-ljKe-wB2.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`display-names-prod > bundler: vite > build > should create build output with displayNames 1`] = `
+{
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="modulepreload" href="/vite-client-ljKe-wB2.js" crossorigin />
+
+  </head>
+  <body>
+    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input placeholder="Test input"/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoizedFooter.displayName:<!-- --> <!-- -->MemoizedFooter</li><li>Input.displayName: <!-- -->Input</li></ul></div></div></div>
+    <script type="module" src="/vite-client-ljKe-wB2.js" ></script>
+  </body>
+</html>",
+  "vite-client-ljKe-wB2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-ljKe-wB2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`display-names-prod > bundler: webpack > build > should add displayName properties to React components in production build 1`] = `
+"<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime-980fb1ffe39d4de310ac.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/7-4274d242a3d5e5313473.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main-6071e23940ef35af1f55.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1>
+          Display Names Test
+        </h1>
+        <button>
+          Click me
+        </button>
+        <div>
+          This is a card
+        </div>
+        <input placeholder="Test input">
+        <footer>
+          Footer content
+        </footer>
+        <div id="display-names-test">
+          <p>
+            Components should have displayName in production build:
+          </p>
+          <ul>
+            <li>
+              Button.displayName:
+              Button
+            </li>
+            <li>
+              Card.displayName:
+              Card
+            </li>
+            <li>
+              Header.displayName:
+              Header
+            </li>
+            <li>
+              MemoizedFooter.displayName:
+              MemoizedFooter
+            </li>
+            <li>
+              Input.displayName:
+              Input
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime-980fb1ffe39d4de310ac.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/7-4274d242a3d5e5313473.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main-6071e23940ef35af1f55.js"
+    >
+    </script>
+  </body>
+</html>"
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`display-names-prod > bundler: webpack > build > should create build output with displayNames 1`] = `
+{
+  "7-4274d242a3d5e5313473.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "7-4274d242a3d5e5313473.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello-world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<link data-chunk="main" rel="preload" as="script" href="/runtime-980fb1ffe39d4de310ac.js">
+<link data-chunk="main" rel="preload" as="script" href="/7-4274d242a3d5e5313473.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-6071e23940ef35af1f55.js">
+  </head>
+  <body>
+    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input placeholder="Test input"/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoizedFooter.displayName:<!-- --> <!-- -->MemoizedFooter</li><li>Input.displayName: <!-- -->Input</li></ul></div></div></div>
+    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
+<script async data-chunk="main" src="/runtime-980fb1ffe39d4de310ac.js"></script>
+<script async data-chunk="main" src="/7-4274d242a3d5e5313473.js"></script>
+<script async data-chunk="main" src="/main-6071e23940ef35af1f55.js"></script>
+  </body>
+</html>",
+  "main-6071e23940ef35af1f55.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-6071e23940ef35af1f55.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-980fb1ffe39d4de310ac.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime-980fb1ffe39d4de310ac.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;

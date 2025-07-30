@@ -25,7 +25,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
-  const prodBabelPlugins: (string | [string, any])[] = [
+  const prodBabelPlugins: Array<string | [string, any]> = [
     [
       require.resolve('babel-plugin-unassert'),
       {

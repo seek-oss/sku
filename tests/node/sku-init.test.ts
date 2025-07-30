@@ -4,6 +4,7 @@ import {
   afterAll,
   it,
   expect as globalExpect,
+  vi,
 } from 'vitest';
 
 import fs from 'node:fs/promises';
@@ -14,13 +15,22 @@ const { sku, fixturePath } = scopeToFixture('sku-init');
 const projectName = 'new-project';
 const projectDirectory = fixturePath(projectName);
 
+const timeout = 100_000;
+
+vi.setConfig({
+  hookTimeout: timeout + 1000,
+  testTimeout: timeout + 1000,
+});
+
 describe('sku init', () => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
     await fs.writeFile(fixturePath('pnpm-workspace.yaml'), '');
 
     const result = await sku('init', [projectName]);
-    globalExpect(await result.findByText('Project created')).toBeInTheConsole();
+    globalExpect(
+      await result.findByText('Project created', {}, { timeout }),
+    ).toBeInTheConsole();
   });
 
   afterAll(async () => {

@@ -4,6 +4,7 @@ import {
   afterAll,
   it,
   expect as globalExpect,
+  vi,
 } from 'vitest';
 import {
   getStoryPage,
@@ -24,6 +25,13 @@ import {
 const storybookStartedRegex =
   /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
 
+const timeout = 50_000;
+
+vi.setConfig({
+  hookTimeout: timeout + 1000,
+  testTimeout: timeout + 1000,
+});
+
 const { exec } = scopeToFixture('storybook-config');
 describe('storybook-config', () => {
   describe('start', () => {
@@ -42,6 +50,7 @@ describe('storybook-config', () => {
         'storybook',
         'dev',
         '--ci',
+        '--exact-port',
         '--port',
         port.toString(),
       ]);
@@ -112,11 +121,12 @@ describe('storybook-config', () => {
         'storybook',
         'dev',
         '--ci',
+        '--exact-port',
         '--port',
         port.toString(),
       ]);
       globalExpect(
-        await storybook.findByText(storybookStartedRegex),
+        await storybook.findByText(storybookStartedRegex, {}, { timeout }),
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;

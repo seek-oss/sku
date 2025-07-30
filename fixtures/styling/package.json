@@ -2,6 +2,9 @@
   "name": "@sku-fixtures/styling",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "storybook dev --ci --exact-port --port 8090"
+  },
   "dependencies": {
     "@sku-fixtures/package-with-styles": "./fake/node_modules/package-with-styles",
     "react": "^19.1.0",

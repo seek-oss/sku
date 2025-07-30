@@ -611,7 +611,7 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+      src="{cwd}/node_modules/.pnpm/{package}/node_modules/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
     <script
@@ -642,12 +642,12 @@ POST HYDRATE DIFFS:
      </script>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
 +    >
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
 +    >
 +      .reset_base__1icwd1z0 {
 +  margin: 0;
@@ -720,7 +720,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/atoms/sprinkles.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/atoms/sprinkles.css.mjs.vanilla.css"
 +    >
 +      .sprinkles_overflow_hidden__hbci750 {
 +  overflow: hidden;
@@ -2748,7 +2748,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/@capsizecss+vanilla-extract@2.0.1_@vanilla-extract+css@1.17.4_babel-plugin-macros@3.1.0_/node_modules/@capsizecss/vanilla-extract/dist/styles/capsize.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/@capsizecss/vanilla-extract/dist/styles/capsize.css.mjs.vanilla.css"
 +    >
 +      .capsize_capsizeStyle__1lwixuj4 {
 +  font-size: var(--fontSize__1lwixuj0);
@@ -2767,7 +2767,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/typography.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/typography.css.mjs.vanilla.css"
 +    >
 +      .typography_fontFamily__crxsef0 {
 +  font-family: var(--fontFamily__1uvybe32w);
@@ -3084,7 +3084,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Divider/Divider.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Divider/Divider.css.mjs.vanilla.css"
 +    >
 +      .Divider_base__1l7vt1t0 {
 +  height: var(--borderWidth-standard__1uvybe3y);
@@ -3114,7 +3114,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Spread/Spread.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Spread/Spread.css.mjs.vanilla.css"
 +    >
 +      .Spread_fitContent__16dsh0g0 > * {
 +  flex-basis: auto;
@@ -3126,7 +3126,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/MaxLines/MaxLines.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/MaxLines/MaxLines.css.mjs.vanilla.css"
 +    >
 +      .MaxLines_descenderCropFixForWebkitBox__1f1drrm0 {
 +  margin-bottom: -0.1em;
@@ -3150,7 +3150,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/touchable/virtualTouchable.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/touchable/virtualTouchable.css.mjs.vanilla.css"
 +    >
 +      .virtualTouchable_virtualTouchable__1s432y40 {
 +  position: relative;
@@ -3173,7 +3173,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Accordion/AccordionItem.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Accordion/AccordionItem.css.mjs.vanilla.css"
 +    >
 +      .AccordionItem_focusRing__1gmny602 {
 +  outline-offset: var(--space-xxsmall__1uvybe31);
@@ -3181,7 +3181,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/hooks/useIcon/icon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/hooks/useIcon/icon.css.mjs.vanilla.css"
 +    >
 +      .icon_size__1n8au560 {
 +  width: 1.2em;
@@ -3244,7 +3244,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/lineHeightContainer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/lineHeightContainer.css.mjs.vanilla.css"
 +    >
 +      .lineHeightContainer_lineHeightContainer_xsmall__16hhkye0 {
 +  height: var(--textSize-xsmall-mobile-lineHeight__1uvybe333);
@@ -3275,7 +3275,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconChevron/IconChevron.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconChevron/IconChevron.css.mjs.vanilla.css"
 +    >
 +      .IconChevron_root__efdvd50 {
 +  transition: transform 0.3s ease;
@@ -3293,7 +3293,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Inline/Inline.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Inline/Inline.css.mjs.vanilla.css"
 +    >
 +      .Inline_fitContentMobile__1t65ro60 > * {
 +  flex-basis: auto;
@@ -3324,7 +3324,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Column/Column.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Column/Column.css.mjs.vanilla.css"
 +    >
 +      .Column_noSpaceBeforeFirstWhenCollapsed__1cmrba80:first-child {
 +  padding-top: 0;
@@ -3359,7 +3359,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/negativeMargin/negativeMargin.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/negativeMargin/negativeMargin.css.mjs.vanilla.css"
 +    >
 +      .negativeMargin_preventCollapsePseudo_top__11873sp0::before {
 +  content: "";
@@ -3858,7 +3858,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Alert/Alert.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Alert/Alert.css.mjs.vanilla.css"
 +    >
 +      .Alert_closeButton__18a90bh0:focus .Alert_closeButtonHover__18a90bh1, .Alert_closeButton__18a90bh0:hover .Alert_closeButtonHover__18a90bh1 {
 +  opacity: 1;
@@ -3866,7 +3866,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/textAlignedToIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/textAlignedToIcon.css.mjs.vanilla.css"
 +    >
 +      .textAlignedToIcon_textAlignedToIcon_standard__14yvc560 {
 +  padding-top: calc((var(--textSize-standard-mobile-lineHeight__1uvybe33n) - var(--textSize-standard-mobile-capHeight__1uvybe33o)) / 2);
@@ -3881,7 +3881,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/AvoidWidowIcon/AvoidWidowIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/AvoidWidowIcon/AvoidWidowIcon.css.mjs.vanilla.css"
 +    >
 +      .AvoidWidowIcon_nowrap__co9bff0 {
 +  white-space: nowrap;
@@ -3889,7 +3889,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Button/Button.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Button/Button.css.mjs.vanilla.css"
 +    >
 +      @keyframes Button_dot1__ds2y77a {
 +  14% {
@@ -3986,7 +3986,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Popover/Popover.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Popover/Popover.css.mjs.vanilla.css"
 +    >
 +      @keyframes Popover_popupAnimation__1ryfira {
 +  from {
@@ -4021,7 +4021,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TooltipRenderer/TooltipRenderer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TooltipRenderer/TooltipRenderer.css.mjs.vanilla.css"
 +    >
 +      .TooltipRenderer_maxWidth__1ktnvux0 {
 +  max-width: 260px;
@@ -4058,7 +4058,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/ButtonIcon/ButtonIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/ButtonIcon/ButtonIcon.css.mjs.vanilla.css"
 +    >
 +      .ButtonIcon_button__1q6uyr30:hover {
 +  z-index: 1;
@@ -4069,7 +4069,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/HiddenVisually/HiddenVisually.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/HiddenVisually/HiddenVisually.css.mjs.vanilla.css"
 +    >
 +      .HiddenVisually_root__gpith50 {
 +  width: 1px;
@@ -4080,7 +4080,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Field/Field.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Field/Field.css.mjs.vanilla.css"
 +    >
 +      .Field_placeholderColor__1suwyg41::placeholder {
 +  color: var(--foregroundColor-secondary__1uvybe31r);
@@ -4105,7 +4105,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Autosuggest/Autosuggest.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Autosuggest/Autosuggest.css.mjs.vanilla.css"
 +    >
 +      .Autosuggest_backdrop__4iec5m0 {
 +  width: 100vw;
@@ -4127,7 +4127,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Badge/Badge.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Badge/Badge.css.mjs.vanilla.css"
 +    >
 +      .Badge_inline__1speigt0 {
 +  display: inline-flex;
@@ -4138,7 +4138,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Keyline/Keyline.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Keyline/Keyline.css.mjs.vanilla.css"
 +    >
 +      .Keyline_tone_promote__bte28d6 {
 +  background: var(--promote__bte28d0);
@@ -4203,7 +4203,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/InlineField/InlineField.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/InlineField/InlineField.css.mjs.vanilla.css"
 +    >
 +      .InlineField_sizeVars_standard__z9h9nf2 {
 +  --fieldSize__z9h9nf0: var(--inlineFieldSize-standard__1uvybe35g);
@@ -4289,7 +4289,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/ContentBlock/ContentBlock.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/ContentBlock/ContentBlock.css.mjs.vanilla.css"
 +    >
 +      .ContentBlock_marginAuto__1oglqjm0 {
 +  margin: 0 auto;
@@ -4297,7 +4297,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Modal/Modal.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Modal/Modal.css.mjs.vanilla.css"
 +    >
 +      html:not(.sprinkles_darkMode__hbci7511) .Modal_backdrop__147rj3o2 {
 +  background: rgba(0, 0, 0, 0.4);
@@ -4378,7 +4378,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TextLink/TextLink.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TextLink/TextLink.css.mjs.vanilla.css"
 +    >
 +      .TextLink_base__r7lc1j2 {
 +  color: var(--color__r7lc1j0);
@@ -4433,7 +4433,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Dropdown/Dropdown.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Dropdown/Dropdown.css.mjs.vanilla.css"
 +    >
 +      .Dropdown_field__1meugcn0 {
 +  padding-right: var(--touchableSize__1uvybe39);
@@ -4441,7 +4441,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Hidden/Hidden.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Hidden/Hidden.css.mjs.vanilla.css"
 +    >
 +      @media print {
 +  .Hidden_hiddenOnPrint__19d4zjq0 {
@@ -4451,7 +4451,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/List/List.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/List/List.css.mjs.vanilla.css"
 +    >
 +      .List_currentColor__iknmpy0 {
 +  background: currentColor;
@@ -4480,7 +4480,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Loader/Loader.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Loader/Loader.css.mjs.vanilla.css"
 +    >
 +      @keyframes Loader_bounce__1pf7gmv9 {
 +  33% {
@@ -4579,7 +4579,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/ScrollContainer/ScrollContainer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/ScrollContainer/ScrollContainer.css.mjs.vanilla.css"
 +    >
 +      .ScrollContainer_container__1f6sxh00 {
 +  -webkit-overflow-scrolling: touch;
@@ -4633,7 +4633,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuRenderer/MenuRenderer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuRenderer/MenuRenderer.css.mjs.vanilla.css"
 +    >
 +      .MenuRenderer_backdrop__2rlst71 {
 +  width: 100vw;
@@ -4663,7 +4663,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuItem/useMenuItem.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuItem/useMenuItem.css.mjs.vanilla.css"
 +    >
 +      .useMenuItem_menuItem__1whhhw50::-moz-focus-inner {
 +  border: 0;
@@ -4674,7 +4674,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuItemCheckbox/MenuItemCheckbox.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuItemCheckbox/MenuItemCheckbox.css.mjs.vanilla.css"
 +    >
 +      .MenuItemCheckbox_checkboxSize__1bkeihj2 {
 +  --menuItemCapHeight__1bkeihj0: var(--textSize-standard-mobile-capHeight__1uvybe33o);
@@ -4692,7 +4692,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/OverflowMenu/OverflowMenu.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/OverflowMenu/OverflowMenu.css.mjs.vanilla.css"
 +    >
 +      .OverflowMenu_wrapperPositioning__1407osg0 {
 +  margin: -1px -6px;
@@ -4700,7 +4700,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MonthPicker/MonthPicker.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MonthPicker/MonthPicker.css.mjs.vanilla.css"
 +    >
 +      .MonthPicker_nativeInput__5hyoqt0::-webkit-inner-spin-button, .MonthPicker_nativeInput__5hyoqt0::-webkit-calendar-picker-indicator, .MonthPicker_nativeInput__5hyoqt0::-webkit-clear-button {
 +  display: none;
@@ -4709,7 +4709,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Page/Page.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Page/Page.css.mjs.vanilla.css"
 +    >
 +      .Page_fullHeight__uzlqt91 {
 +  min-height: var(--heightLimit__uzlqt90, 100vh);
@@ -4717,7 +4717,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Pagination/Pagination.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Pagination/Pagination.css.mjs.vanilla.css"
 +    >
 +      .Pagination_focusRing__yrdvs91 {
 +  outline-offset: 0;
@@ -4737,7 +4737,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Rating/Rating.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Rating/Rating.css.mjs.vanilla.css"
 +    >
 +      .Rating_inlineFlex__1tb4qop0 {
 +  display: inline-flex;
@@ -4746,7 +4746,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Stepper/Stepper.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Stepper/Stepper.css.mjs.vanilla.css"
 +    >
 +      html:not(.sprinkles_darkMode__hbci7511) .Stepper_tone_formAccent__pynvjl2 {
 +  --highlightVar__pynvjl1: var(--borderColor-formAccent__1uvybe3n);
@@ -4846,7 +4846,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Table/Table.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Table/Table.css.mjs.vanilla.css"
 +    >
 +      .Table_table__1iuwbp1 {
 +  border-collapse: separate;
@@ -4908,7 +4908,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tabs/Tabs.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tabs/Tabs.css.mjs.vanilla.css"
 +    >
 +      .Tabs_tab__13ux5im0::-moz-focus-inner {
 +  border: 0;
@@ -4960,7 +4960,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tag/Tag.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tag/Tag.css.mjs.vanilla.css"
 +    >
 +      .Tag_clearGutter__14sgbz0 {
 +  padding-left: 1px;
@@ -4968,7 +4968,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Textarea/Highlight/Highlight.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Textarea/Highlight/Highlight.css.mjs.vanilla.css"
 +    >
 +      .Highlight_root__11jgt9s1 {
 +  padding: 0 2px;
@@ -4995,7 +4995,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Textarea/Textarea.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Textarea/Textarea.css.mjs.vanilla.css"
 +    >
 +      .Textarea_field__4nc8r20 {
 +  resize: vertical;
@@ -5013,7 +5013,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TextDropdown/TextDropdown.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TextDropdown/TextDropdown.css.mjs.vanilla.css"
 +    >
 +      .TextDropdown_select__1lqcuep0 {
 +  min-height: 44px;
@@ -5039,7 +5039,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tiles/Tiles.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tiles/Tiles.css.mjs.vanilla.css"
 +    >
 +      .Tiles_tiles__e2l8mx5 {
 +  --columns__e2l8mx0: var(--mobileColumnsVar__e2l8mx1);
@@ -5067,7 +5067,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Toggle/Toggle.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Toggle/Toggle.css.mjs.vanilla.css"
 +    >
 +      .Toggle_bleedToCapHeight_standard__1p8w3y30 {
 +  height: var(--textSize-standard-mobile-capHeight__1uvybe33o);
@@ -5184,7 +5184,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/useToast/Toast.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/useToast/Toast.css.mjs.vanilla.css"
 +    >
 +      .Toast_toast__1w0xf6a0 {
 +  pointer-events: all;
@@ -5195,7 +5195,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/useToast/Toaster.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/useToast/Toaster.css.mjs.vanilla.css"
 +    >
 +      .Toaster_toaster__19g5wmp0 {
 +  left: 0;
@@ -5207,7 +5207,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconArrow/IconArrow.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconArrow/IconArrow.css.mjs.vanilla.css"
 +    >
 +      .IconArrow_root__4btzk0 {
 +  transition: transform 0.3s ease;
@@ -5225,7 +5225,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconThumb/IconThumb.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconThumb/IconThumb.css.mjs.vanilla.css"
 +    >
 +      .IconThumb_root__1xo57l0 {
 +  transition: transform 0.3s ease;
@@ -5237,7 +5237,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/themes/seekJobs/seekJobs.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/themes/seekJobs/seekJobs.css.mjs.vanilla.css"
 +    >
 +      .seekJobs_seekJobs__v2rm0f0 {
 +  --space-gutter__1uvybe30: 24px;
@@ -5651,7 +5651,7 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+      src="{cwd}/node_modules/.pnpm/{package}/node_modules/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
     <script
@@ -5682,12 +5682,12 @@ POST HYDRATE DIFFS:
      </script>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
 +    >
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
 +    >
 +      .reset_base__1icwd1z0 {
 +  margin: 0;
@@ -5760,7 +5760,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/atoms/sprinkles.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/atoms/sprinkles.css.mjs.vanilla.css"
 +    >
 +      .sprinkles_overflow_hidden__hbci750 {
 +  overflow: hidden;
@@ -7788,7 +7788,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/@capsizecss+vanilla-extract@2.0.1_@vanilla-extract+css@1.17.4_babel-plugin-macros@3.1.0_/node_modules/@capsizecss/vanilla-extract/dist/styles/capsize.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/@capsizecss/vanilla-extract/dist/styles/capsize.css.mjs.vanilla.css"
 +    >
 +      .capsize_capsizeStyle__1lwixuj4 {
 +  font-size: var(--fontSize__1lwixuj0);
@@ -7807,7 +7807,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/typography.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/typography.css.mjs.vanilla.css"
 +    >
 +      .typography_fontFamily__crxsef0 {
 +  font-family: var(--fontFamily__1uvybe32w);
@@ -8124,7 +8124,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Divider/Divider.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Divider/Divider.css.mjs.vanilla.css"
 +    >
 +      .Divider_base__1l7vt1t0 {
 +  height: var(--borderWidth-standard__1uvybe3y);
@@ -8154,7 +8154,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Spread/Spread.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Spread/Spread.css.mjs.vanilla.css"
 +    >
 +      .Spread_fitContent__16dsh0g0 > * {
 +  flex-basis: auto;
@@ -8166,7 +8166,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/MaxLines/MaxLines.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/MaxLines/MaxLines.css.mjs.vanilla.css"
 +    >
 +      .MaxLines_descenderCropFixForWebkitBox__1f1drrm0 {
 +  margin-bottom: -0.1em;
@@ -8190,7 +8190,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/touchable/virtualTouchable.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/touchable/virtualTouchable.css.mjs.vanilla.css"
 +    >
 +      .virtualTouchable_virtualTouchable__1s432y40 {
 +  position: relative;
@@ -8213,7 +8213,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Accordion/AccordionItem.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Accordion/AccordionItem.css.mjs.vanilla.css"
 +    >
 +      .AccordionItem_focusRing__1gmny602 {
 +  outline-offset: var(--space-xxsmall__1uvybe31);
@@ -8221,7 +8221,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/hooks/useIcon/icon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/hooks/useIcon/icon.css.mjs.vanilla.css"
 +    >
 +      .icon_size__1n8au560 {
 +  width: 1.2em;
@@ -8284,7 +8284,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/lineHeightContainer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/lineHeightContainer.css.mjs.vanilla.css"
 +    >
 +      .lineHeightContainer_lineHeightContainer_xsmall__16hhkye0 {
 +  height: var(--textSize-xsmall-mobile-lineHeight__1uvybe333);
@@ -8315,7 +8315,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconChevron/IconChevron.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconChevron/IconChevron.css.mjs.vanilla.css"
 +    >
 +      .IconChevron_root__efdvd50 {
 +  transition: transform 0.3s ease;
@@ -8333,7 +8333,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Inline/Inline.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Inline/Inline.css.mjs.vanilla.css"
 +    >
 +      .Inline_fitContentMobile__1t65ro60 > * {
 +  flex-basis: auto;
@@ -8364,7 +8364,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Column/Column.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Column/Column.css.mjs.vanilla.css"
 +    >
 +      .Column_noSpaceBeforeFirstWhenCollapsed__1cmrba80:first-child {
 +  padding-top: 0;
@@ -8399,7 +8399,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/negativeMargin/negativeMargin.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/negativeMargin/negativeMargin.css.mjs.vanilla.css"
 +    >
 +      .negativeMargin_preventCollapsePseudo_top__11873sp0::before {
 +  content: "";
@@ -8898,7 +8898,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Alert/Alert.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Alert/Alert.css.mjs.vanilla.css"
 +    >
 +      .Alert_closeButton__18a90bh0:focus .Alert_closeButtonHover__18a90bh1, .Alert_closeButton__18a90bh0:hover .Alert_closeButtonHover__18a90bh1 {
 +  opacity: 1;
@@ -8906,7 +8906,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/css/textAlignedToIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/css/textAlignedToIcon.css.mjs.vanilla.css"
 +    >
 +      .textAlignedToIcon_textAlignedToIcon_standard__14yvc560 {
 +  padding-top: calc((var(--textSize-standard-mobile-lineHeight__1uvybe33n) - var(--textSize-standard-mobile-capHeight__1uvybe33o)) / 2);
@@ -8921,7 +8921,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/AvoidWidowIcon/AvoidWidowIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/AvoidWidowIcon/AvoidWidowIcon.css.mjs.vanilla.css"
 +    >
 +      .AvoidWidowIcon_nowrap__co9bff0 {
 +  white-space: nowrap;
@@ -8929,7 +8929,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Button/Button.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Button/Button.css.mjs.vanilla.css"
 +    >
 +      @keyframes Button_dot1__ds2y77a {
 +  14% {
@@ -9026,7 +9026,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Popover/Popover.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Popover/Popover.css.mjs.vanilla.css"
 +    >
 +      @keyframes Popover_popupAnimation__1ryfira {
 +  from {
@@ -9061,7 +9061,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TooltipRenderer/TooltipRenderer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TooltipRenderer/TooltipRenderer.css.mjs.vanilla.css"
 +    >
 +      .TooltipRenderer_maxWidth__1ktnvux0 {
 +  max-width: 260px;
@@ -9098,7 +9098,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/ButtonIcon/ButtonIcon.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/ButtonIcon/ButtonIcon.css.mjs.vanilla.css"
 +    >
 +      .ButtonIcon_button__1q6uyr30:hover {
 +  z-index: 1;
@@ -9109,7 +9109,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/HiddenVisually/HiddenVisually.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/HiddenVisually/HiddenVisually.css.mjs.vanilla.css"
 +    >
 +      .HiddenVisually_root__gpith50 {
 +  width: 1px;
@@ -9120,7 +9120,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Field/Field.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Field/Field.css.mjs.vanilla.css"
 +    >
 +      .Field_placeholderColor__1suwyg41::placeholder {
 +  color: var(--foregroundColor-secondary__1uvybe31r);
@@ -9145,7 +9145,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Autosuggest/Autosuggest.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Autosuggest/Autosuggest.css.mjs.vanilla.css"
 +    >
 +      .Autosuggest_backdrop__4iec5m0 {
 +  width: 100vw;
@@ -9167,7 +9167,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Badge/Badge.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Badge/Badge.css.mjs.vanilla.css"
 +    >
 +      .Badge_inline__1speigt0 {
 +  display: inline-flex;
@@ -9178,7 +9178,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Keyline/Keyline.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Keyline/Keyline.css.mjs.vanilla.css"
 +    >
 +      .Keyline_tone_promote__bte28d6 {
 +  background: var(--promote__bte28d0);
@@ -9243,7 +9243,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/InlineField/InlineField.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/InlineField/InlineField.css.mjs.vanilla.css"
 +    >
 +      .InlineField_sizeVars_standard__z9h9nf2 {
 +  --fieldSize__z9h9nf0: var(--inlineFieldSize-standard__1uvybe35g);
@@ -9329,7 +9329,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/ContentBlock/ContentBlock.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/ContentBlock/ContentBlock.css.mjs.vanilla.css"
 +    >
 +      .ContentBlock_marginAuto__1oglqjm0 {
 +  margin: 0 auto;
@@ -9337,7 +9337,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/Modal/Modal.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/Modal/Modal.css.mjs.vanilla.css"
 +    >
 +      html:not(.sprinkles_darkMode__hbci7511) .Modal_backdrop__147rj3o2 {
 +  background: rgba(0, 0, 0, 0.4);
@@ -9418,7 +9418,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TextLink/TextLink.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TextLink/TextLink.css.mjs.vanilla.css"
 +    >
 +      .TextLink_base__r7lc1j2 {
 +  color: var(--color__r7lc1j0);
@@ -9473,7 +9473,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Dropdown/Dropdown.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Dropdown/Dropdown.css.mjs.vanilla.css"
 +    >
 +      .Dropdown_field__1meugcn0 {
 +  padding-right: var(--touchableSize__1uvybe39);
@@ -9481,7 +9481,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Hidden/Hidden.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Hidden/Hidden.css.mjs.vanilla.css"
 +    >
 +      @media print {
 +  .Hidden_hiddenOnPrint__19d4zjq0 {
@@ -9491,7 +9491,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/List/List.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/List/List.css.mjs.vanilla.css"
 +    >
 +      .List_currentColor__iknmpy0 {
 +  background: currentColor;
@@ -9520,7 +9520,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Loader/Loader.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Loader/Loader.css.mjs.vanilla.css"
 +    >
 +      @keyframes Loader_bounce__1pf7gmv9 {
 +  33% {
@@ -9619,7 +9619,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/private/ScrollContainer/ScrollContainer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/private/ScrollContainer/ScrollContainer.css.mjs.vanilla.css"
 +    >
 +      .ScrollContainer_container__1f6sxh00 {
 +  -webkit-overflow-scrolling: touch;
@@ -9673,7 +9673,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuRenderer/MenuRenderer.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuRenderer/MenuRenderer.css.mjs.vanilla.css"
 +    >
 +      .MenuRenderer_backdrop__2rlst71 {
 +  width: 100vw;
@@ -9703,7 +9703,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuItem/useMenuItem.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuItem/useMenuItem.css.mjs.vanilla.css"
 +    >
 +      .useMenuItem_menuItem__1whhhw50::-moz-focus-inner {
 +  border: 0;
@@ -9714,7 +9714,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MenuItemCheckbox/MenuItemCheckbox.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MenuItemCheckbox/MenuItemCheckbox.css.mjs.vanilla.css"
 +    >
 +      .MenuItemCheckbox_checkboxSize__1bkeihj2 {
 +  --menuItemCapHeight__1bkeihj0: var(--textSize-standard-mobile-capHeight__1uvybe33o);
@@ -9732,7 +9732,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/OverflowMenu/OverflowMenu.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/OverflowMenu/OverflowMenu.css.mjs.vanilla.css"
 +    >
 +      .OverflowMenu_wrapperPositioning__1407osg0 {
 +  margin: -1px -6px;
@@ -9740,7 +9740,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/MonthPicker/MonthPicker.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/MonthPicker/MonthPicker.css.mjs.vanilla.css"
 +    >
 +      .MonthPicker_nativeInput__5hyoqt0::-webkit-inner-spin-button, .MonthPicker_nativeInput__5hyoqt0::-webkit-calendar-picker-indicator, .MonthPicker_nativeInput__5hyoqt0::-webkit-clear-button {
 +  display: none;
@@ -9749,7 +9749,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Page/Page.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Page/Page.css.mjs.vanilla.css"
 +    >
 +      .Page_fullHeight__uzlqt91 {
 +  min-height: var(--heightLimit__uzlqt90, 100vh);
@@ -9757,7 +9757,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Pagination/Pagination.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Pagination/Pagination.css.mjs.vanilla.css"
 +    >
 +      .Pagination_focusRing__yrdvs91 {
 +  outline-offset: 0;
@@ -9777,7 +9777,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Rating/Rating.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Rating/Rating.css.mjs.vanilla.css"
 +    >
 +      .Rating_inlineFlex__1tb4qop0 {
 +  display: inline-flex;
@@ -9786,7 +9786,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Stepper/Stepper.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Stepper/Stepper.css.mjs.vanilla.css"
 +    >
 +      html:not(.sprinkles_darkMode__hbci7511) .Stepper_tone_formAccent__pynvjl2 {
 +  --highlightVar__pynvjl1: var(--borderColor-formAccent__1uvybe3n);
@@ -9886,7 +9886,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Table/Table.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Table/Table.css.mjs.vanilla.css"
 +    >
 +      .Table_table__1iuwbp1 {
 +  border-collapse: separate;
@@ -9948,7 +9948,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tabs/Tabs.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tabs/Tabs.css.mjs.vanilla.css"
 +    >
 +      .Tabs_tab__13ux5im0::-moz-focus-inner {
 +  border: 0;
@@ -10000,7 +10000,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tag/Tag.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tag/Tag.css.mjs.vanilla.css"
 +    >
 +      .Tag_clearGutter__14sgbz0 {
 +  padding-left: 1px;
@@ -10008,7 +10008,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Textarea/Highlight/Highlight.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Textarea/Highlight/Highlight.css.mjs.vanilla.css"
 +    >
 +      .Highlight_root__11jgt9s1 {
 +  padding: 0 2px;
@@ -10035,7 +10035,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Textarea/Textarea.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Textarea/Textarea.css.mjs.vanilla.css"
 +    >
 +      .Textarea_field__4nc8r20 {
 +  resize: vertical;
@@ -10053,7 +10053,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/TextDropdown/TextDropdown.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/TextDropdown/TextDropdown.css.mjs.vanilla.css"
 +    >
 +      .TextDropdown_select__1lqcuep0 {
 +  min-height: 44px;
@@ -10079,7 +10079,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Tiles/Tiles.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Tiles/Tiles.css.mjs.vanilla.css"
 +    >
 +      .Tiles_tiles__e2l8mx5 {
 +  --columns__e2l8mx0: var(--mobileColumnsVar__e2l8mx1);
@@ -10107,7 +10107,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/Toggle/Toggle.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/Toggle/Toggle.css.mjs.vanilla.css"
 +    >
 +      .Toggle_bleedToCapHeight_standard__1p8w3y30 {
 +  height: var(--textSize-standard-mobile-capHeight__1uvybe33o);
@@ -10224,7 +10224,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/useToast/Toast.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/useToast/Toast.css.mjs.vanilla.css"
 +    >
 +      .Toast_toast__1w0xf6a0 {
 +  pointer-events: all;
@@ -10235,7 +10235,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/useToast/Toaster.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/useToast/Toaster.css.mjs.vanilla.css"
 +    >
 +      .Toaster_toaster__19g5wmp0 {
 +  left: 0;
@@ -10247,7 +10247,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconArrow/IconArrow.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconArrow/IconArrow.css.mjs.vanilla.css"
 +    >
 +      .IconArrow_root__4btzk0 {
 +  transition: transform 0.3s ease;
@@ -10265,7 +10265,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/components/icons/IconThumb/IconThumb.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/components/icons/IconThumb/IconThumb.css.mjs.vanilla.css"
 +    >
 +      .IconThumb_root__1xo57l0 {
 +  transition: transform 0.3s ease;
@@ -10277,7 +10277,7 @@ POST HYDRATE DIFFS:
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/.pnpm/braid-design-system@33.11.0_@types+react@19.1.8_babel-plugin-macros@3.1.0_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/braid-design-system/dist/lib/themes/seekJobs/seekJobs.css.mjs.vanilla.css"
++      data-vite-dev-id="{cwd}/node_modules/.pnpm/{package}/node_modules/braid-design-system/dist/lib/themes/seekJobs/seekJobs.css.mjs.vanilla.css"
 +    >
 +      .seekJobs_seekJobs__v2rm0f0 {
 +  --space-gutter__1uvybe30: 24px;

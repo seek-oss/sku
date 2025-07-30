@@ -54,7 +54,7 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+      src="{cwd}/node_modules/.pnpm/{package}/node_modules/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
   </body>

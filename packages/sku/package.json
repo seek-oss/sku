@@ -227,10 +227,5 @@
     "type-fest": "^4.41.0",
     "typescript-transform-paths": "^3.5.2",
     "vitest": "^3.2.3"
-  },
-  "dependenciesMeta": {
-    "@sku-lib/vite": {
-      "injected": true
-    }
   }
 }

@@ -79,6 +79,7 @@ describe('styling', () => {
         'storybook',
         'dev',
         '--ci',
+        '--exact-port',
         '--port',
         storybookPort.toString(),
       ]);

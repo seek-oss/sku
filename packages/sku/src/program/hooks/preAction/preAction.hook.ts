@@ -4,9 +4,12 @@ import { getSkuContext } from '@/context/createSkuContext.js';
 import provider, { initializeTelemetry } from '@/services/telemetry/index.js';
 import { experimentalBundlersHook } from '@/program/hooks/preAction/experimentalBundlersHook.js';
 
-export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
+export const preActionHook = async (
+  rootCommand: Command,
+  actionCommand: Command,
+) => {
   const { port, strictPort } = actionCommand.opts();
-  const skuContext = getSkuContext({
+  const skuContext = await getSkuContext({
     configPath: rootCommand.opts()?.config,
     port,
     strictPort,

@@ -106,7 +106,9 @@ export default async (skuContext: SkuContext) => {
 
   const eslintConfig = dedent`import { createEslintConfig } from 'sku/config/eslint';
 
-                              export default createEslintConfig(${resolvedConfigPath});`;
+                              const eslintConfig = await createEslintConfig(${resolvedConfigPath});
+
+                              export default eslintConfig;`;
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
 
   gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);

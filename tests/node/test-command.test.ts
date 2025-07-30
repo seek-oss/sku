@@ -39,4 +39,6 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
 
     expect(await process.findByText(expected[testRunner])).toBeInTheConsole();
   });
+
+  // TODO: Add tests that interact with watch mode
 });

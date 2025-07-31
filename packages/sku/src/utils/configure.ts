@@ -2,7 +2,7 @@ import { getPathFromCwd } from './cwd.js';
 import fs from 'node:fs';
 import { validatePeerDeps as _validatePeerDeps } from './validatePeerDeps.js';
 import { log } from './debug.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../context/createSkuContext.js';
 
 let skipConfigure = false;
 let skipValidatePeerDeps = false;

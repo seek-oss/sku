@@ -1,17 +1,17 @@
 import { build, createServer } from 'vite';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../context/createSkuContext.js';
 
 import {
   createClientBuildConfig,
   createServerBuildConfig,
   createStartConfig,
 } from './helpers/config/createConfig.js';
-import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
+import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
-import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import { getAppHosts } from '../../utils/contextUtils/hosts.js';
 import chalk from 'chalk';
-import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
-import allocatePort from '@/utils/allocatePort.js';
+import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
+import allocatePort from '../../utils/allocatePort.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {

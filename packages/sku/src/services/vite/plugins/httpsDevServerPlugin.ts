@@ -1,5 +1,5 @@
-import type { SkuContext } from '@/context/createSkuContext.js';
-import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
+import { getAppHosts } from '../../../utils/contextUtils/hosts.js';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'node:path';
 import type { Plugin } from 'vite';

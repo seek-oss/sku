@@ -1,7 +1,7 @@
 import { describe, beforeEach, test, vi } from 'vitest';
 import { createPackageResolver } from './resolvePackage.js';
 
-import { cwd } from '@/utils/cwd.js';
+import { cwd } from '../../../../utils/cwd.js';
 
 describe.sequential('webpack utils', () => {
   describe('resolvePackage()', () => {

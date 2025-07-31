@@ -1,5 +1,5 @@
-import banner from '@/utils/banners/banner.js';
-import exists from '@/utils/exists.js';
+import banner from '../../utils/banners/banner.js';
+import exists from '../../utils/exists.js';
 import chalk from 'chalk';
 import path from 'node:path';
 

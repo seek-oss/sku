@@ -1,7 +1,7 @@
 import { resolveConfig } from '@vocab/core';
 
-import { getVocabConfig } from '@/services/vocab/config/vocab.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { getVocabConfig } from '../../../../services/vocab/config/vocab.js';
+import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { execSync } from 'node:child_process';
 
 export const ensureBranch = async () => {

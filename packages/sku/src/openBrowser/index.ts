@@ -3,12 +3,12 @@
 
 import chalk from 'chalk';
 import open from 'open';
-import isCI from '@/utils/isCI.js';
+import isCI from '../utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import debug from 'debug';
-import { execAsync } from '@/utils/execAsync.js';
+import { execAsync } from '../utils/execAsync.js';
 
 const log = debug('sku:openBrowser');
 

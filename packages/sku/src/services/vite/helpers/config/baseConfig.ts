@@ -43,6 +43,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 
   return {
     base: skuContext.publicPath,
+    publicDir: false,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [

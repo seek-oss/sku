@@ -16,6 +16,9 @@ const MemoFooter = React.memo(() => <footer>Footer content</footer>);
 
 const Input: WithDisplayName = () => <input />;
 
+const PublicBox = () => <div>This is a Box</div>;
+PublicBox.displayName = 'Box';
+
 export default function App() {
   return (
     <div>
@@ -34,6 +37,7 @@ export default function App() {
             MemoFooter.displayName: {MemoFooter.displayName || 'undefined'}
           </li>
           <li>Input.displayName: {Input.displayName || 'undefined'}</li>
+          <li>PublicBox.displayName: {PublicBox.displayName || 'undefined'}</li>
         </ul>
       </div>
     </div>

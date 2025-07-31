@@ -3,7 +3,7 @@ import {
   beforeAll,
   afterAll,
   it,
-  expect as globalExpected,
+  expect as globalExpect,
 } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -27,7 +27,7 @@ describe('display-names-prod', () => {
     describe('build', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpected(
+        globalExpect(
           await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
       });

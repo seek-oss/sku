@@ -1,9 +1,9 @@
 import { createCollector } from '@sku-lib/vite/collector';
 import debug from 'debug';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
+import { createPreRenderedHtml } from '#src/services/vite/helpers/html/createPreRenderedHtml.js';
 
 import render from '__sku_alias__renderEntry';
-import type { ViteRenderFunction } from '@/types/types.js';
+import type { ViteRenderFunction } from '#src/types/types.js';
 
 const log = debug('sku:vite-render');
 

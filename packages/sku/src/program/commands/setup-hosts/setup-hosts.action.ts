@@ -1,6 +1,6 @@
-import { setupHosts, withHostile } from '@/utils/contextUtils/hosts.js';
-import provider from '@/services/telemetry/index.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { setupHosts, withHostile } from '#src/utils/contextUtils/hosts.js';
+import provider from '#src/services/telemetry/index.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const setupHostsWithHostile = withHostile(setupHosts);
 

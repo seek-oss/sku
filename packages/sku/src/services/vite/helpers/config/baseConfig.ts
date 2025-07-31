@@ -5,18 +5,18 @@ import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 import { polyfillsPlugin } from '../../plugins/polyfillsPlugin.js';
 import { preloadPlugin } from '../../plugins/preloadPlugin/preloadPlugin.js';
-import { fixViteVanillaExtractDepScanPlugin } from '@/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
+import { fixViteVanillaExtractDepScanPlugin } from '#src/services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { getVocabConfig } from '#src/services/vocab/config/vocab.js';
 import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
-import { setSsrNoExternal } from '@/services/vite/plugins/setSsrNoExternal.js';
-import browserslistToEsbuild from '@/services/vite/helpers/browserslist-to-esbuild.js';
+import { setSsrNoExternal } from '#src/services/vite/plugins/setSsrNoExternal.js';
+import browserslistToEsbuild from '#src/services/vite/helpers/browserslist-to-esbuild.js';
 
 const require = createRequire(import.meta.url);
 

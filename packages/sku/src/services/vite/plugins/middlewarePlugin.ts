@@ -1,15 +1,15 @@
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
-import type { ViteRenderFunction } from '@/types/types.js';
-import { getMatchingRoute } from '@/utils/routeMatcher.js';
+import type { ViteRenderFunction } from '#src/types/types.js';
+import { getMatchingRoute } from '#src/utils/routeMatcher.js';
 import debug from 'debug';
 import {
   getLanguageFromRoute,
   getRouteWithLanguage,
-} from '@/utils/language-utils.js';
-import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
-import createCSPHandler from '@/services/webpack/entry/csp.js';
+} from '#src/utils/language-utils.js';
+import { metricsMeasurers } from '#src/services/telemetry/metricsMeasurers.js';
+import createCSPHandler from '#src/services/webpack/entry/csp.js';
 
 const log = debug('sku:middleware:vite');
 

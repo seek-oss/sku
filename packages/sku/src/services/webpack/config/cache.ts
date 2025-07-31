@@ -1,5 +1,5 @@
-import isCI from '@/utils/isCI.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import isCI from '#src/utils/isCI.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 

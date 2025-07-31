@@ -1,4 +1,4 @@
-import { execAsync } from '@/utils/execAsync.js';
+import { execAsync } from '#src/utils/execAsync.js';
 
 export const getPnpmConfigDependencies = async (): Promise<string[]> => {
   // `pnpm config get configDependencies` returns `[object Object]` for some reason, so we fetch the

@@ -4,7 +4,7 @@ import type { Linter } from 'eslint';
 
 import { createImportOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
-import { getSkuContext } from '@/context/createSkuContext.js';
+import { getSkuContext } from '#src/context/createSkuContext.js';
 
 export const createEslintConfig = ({
   configPath,

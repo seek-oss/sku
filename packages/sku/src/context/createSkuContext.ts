@@ -1,14 +1,14 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '@/types/types.d.ts';
-import { getPathFromCwd } from '@/utils/cwd.js';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
+import { getPathFromCwd } from '#src/utils/cwd.js';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
-import isCompilePackage from '@/utils/isCompilePackage.js';
+import isCompilePackage from '#src/utils/isCompilePackage.js';
 import chalk from 'chalk';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import _debug from 'debug';
-import { resolveAppSkuConfigPath } from '@/context/configPath.js';
+import { resolveAppSkuConfigPath } from '#src/context/configPath.js';
 
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';

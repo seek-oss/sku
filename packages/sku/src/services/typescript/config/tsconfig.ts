@@ -1,5 +1,5 @@
-import { cwd } from '@/utils/cwd.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { cwd } from '#src/utils/cwd.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export default ({ rootResolution, tsconfigDecorator }: SkuContext) => {
   const config = {

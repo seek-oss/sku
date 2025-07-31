@@ -1,7 +1,7 @@
 import prompts from 'prompts';
-import installDep from '@/services/packageManager/install.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
-import isCI from '@/utils/isCI.js';
+import installDep from '#src/services/packageManager/install.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
+import isCI from '#src/utils/isCI.js';
 
 export const vitestHandler = async ({
   skuContext,

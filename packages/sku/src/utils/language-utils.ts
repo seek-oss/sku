@@ -1,11 +1,11 @@
 import debug from 'debug';
 
 import routeMatcher from './routeMatcher.js';
-import type { SkuLanguage } from '@/types/types.js';
+import type { SkuLanguage } from '#src/types/types.js';
 import type {
   SkuContext,
   NormalizedRoute,
-} from '@/context/createSkuContext.js';
+} from '#src/context/createSkuContext.js';
 
 const log = debug('sku:language-middleware');
 

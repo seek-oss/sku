@@ -2,19 +2,19 @@ import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import webpack from 'webpack';
 import chalk from 'chalk';
-import { run } from '@/services/webpack/runWebpack.js';
+import { run } from '#src/services/webpack/runWebpack.js';
 import {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-} from '@/utils/buildFileUtils.js';
-import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
-import provider from '@/services/telemetry/index.js';
+} from '#src/utils/buildFileUtils.js';
+import makeWebpackConfig from '#src/services/webpack/config/webpack.config.ssr.js';
+import provider from '#src/services/telemetry/index.js';
 
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { runVocabCompile } from '#src/services/vocab/runVocab.js';
+import { configureProject, validatePeerDeps } from '#src/utils/configure.js';
+import type { StatsChoices } from '#src/program/options/stats/stats.option.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export const buildSsrAction = async ({
   stats,

@@ -4,7 +4,7 @@ import { fdir as Fdir } from 'fdir';
 
 import exists from './exists.js';
 import copyDirContents from './copyDirContents.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export const cleanTargetDirectory = async (
   target: string,

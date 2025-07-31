@@ -5,10 +5,10 @@ import type { PathLike } from 'node:fs';
 import { generate } from 'selfsigned';
 import chalk from 'chalk';
 
-import provider from '@/services/telemetry/index.js';
-import { getPathFromCwd } from '@/utils/cwd.js';
-import exists from '@/utils/exists.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import provider from '#src/services/telemetry/index.js';
+import { getPathFromCwd } from '#src/utils/cwd.js';
+import exists from '#src/utils/exists.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 

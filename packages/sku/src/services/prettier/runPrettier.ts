@@ -1,9 +1,9 @@
-import exists from '@/utils/exists.js';
+import exists from '#src/utils/exists.js';
 import path, { dirname } from 'node:path';
 import chalk from 'chalk';
-import { runBin } from '@/utils/runBin.js';
-import { getPathFromCwd } from '@/utils/cwd.js';
-import { suggestScript } from '@/utils/suggestScript.js';
+import { runBin } from '#src/utils/runBin.js';
+import { getPathFromCwd } from '#src/utils/cwd.js';
+import { suggestScript } from '#src/utils/suggestScript.js';
 
 import { fileURLToPath } from 'node:url';
 

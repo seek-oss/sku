@@ -11,17 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "types": ["node"],
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "plugins": [
-      // Transform paths in output .js files
-      { "transform": "typescript-transform-paths" },
-
-      // Transform paths in output .d.ts files (Include this line if you output declarations files)
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    "types": ["node"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "**/__testfixtures__"]

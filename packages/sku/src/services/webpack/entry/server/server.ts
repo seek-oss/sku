@@ -6,7 +6,7 @@ import createCSPHandler from '../csp.js';
 import serverExports from '__sku_alias__serverEntry';
 import webpackStats from '__sku_alias__webpackStats';
 import { createRequire } from 'node:module';
-import type { RenderCallbackParams } from '@/types/types.js';
+import type { RenderCallbackParams } from '#src/types/types.js';
 
 const publicPath = __SKU_PUBLIC_PATH__;
 const csp = __SKU_CSP__;

@@ -5,12 +5,12 @@ import debug from 'debug';
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} from '@/utils/language-utils.js';
+} from '#src/utils/language-utils.js';
 
 import type { Stats } from 'webpack';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 import { join } from 'node:path';
-import type { RenderableRoute } from '@/types/types.js';
+import type { RenderableRoute } from '#src/types/types.js';
 
 // @ts-expect-error
 const { default: memoize } = nanoMemoize;

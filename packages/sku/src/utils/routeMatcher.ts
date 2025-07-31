@@ -1,7 +1,7 @@
-import type { NormalizedRoute } from '@/context/createSkuContext.js';
+import type { NormalizedRoute } from '#src/context/createSkuContext.js';
 import { match } from 'path-to-regexp';
 import getSiteForHost from './contextUtils/getSiteForHost.js';
-import type { SkuSiteObject } from '@/types/types.js';
+import type { SkuSiteObject } from '#src/types/types.js';
 
 /**
  * Finds the appropriate route for a given URL

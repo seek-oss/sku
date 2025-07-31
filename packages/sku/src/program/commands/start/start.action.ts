@@ -1,9 +1,9 @@
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { StatsChoices } from '#src/program/options/stats/stats.option.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 import type { Command } from 'commander';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import { watchVocabCompile } from '@/services/vocab/runVocab.js';
-import { checkHosts, withHostile } from '@/utils/contextUtils/hosts.js';
+import { configureProject, validatePeerDeps } from '#src/utils/configure.js';
+import { watchVocabCompile } from '#src/services/vocab/runVocab.js';
+import { checkHosts, withHostile } from '#src/utils/contextUtils/hosts.js';
 import chalk from 'chalk';
 
 export const startAction = async (

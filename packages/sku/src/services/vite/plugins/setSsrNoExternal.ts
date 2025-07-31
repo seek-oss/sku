@@ -2,8 +2,8 @@ import { type Plugin, mergeConfig } from 'vite';
 import {
   extractDependencyGraph,
   getSsrExternalsForCompiledDependency,
-} from '@/services/vite/helpers/config/dependencyGraph.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+} from '#src/services/vite/helpers/config/dependencyGraph.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export function setSsrNoExternal(skuContext: SkuContext): Plugin {
   return {

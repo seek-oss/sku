@@ -1,7 +1,7 @@
 import { merge as webpackMerge } from 'webpack-merge';
-import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
-import { resolvePackage } from '@/services/webpack/config/utils/resolvePackage.js';
-import { getSkuContext } from '@/context/createSkuContext.js';
+import makeWebpackConfig from '#src/services/webpack/config/webpack.config.js';
+import { resolvePackage } from '#src/services/webpack/config/utils/resolvePackage.js';
+import { getSkuContext } from '#src/context/createSkuContext.js';
 
 const hot = process.env.SKU_HOT !== 'false';
 

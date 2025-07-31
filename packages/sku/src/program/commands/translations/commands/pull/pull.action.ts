@@ -5,8 +5,8 @@ import {
   ensureBranch,
   getResolvedVocabConfig,
 } from '../../helpers/translation-helpers.js';
-import { configureProject } from '@/utils/configure.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { configureProject } from '#src/utils/configure.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const log = (message: string) => console.log(chalk.cyan(message));
 

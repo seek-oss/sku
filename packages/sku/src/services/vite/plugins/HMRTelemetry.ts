@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import provider from '@/services/telemetry/index.js';
+import provider from '#src/services/telemetry/index.js';
 import debug from 'debug';
 import js from 'dedent';
 

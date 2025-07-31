@@ -1,3 +1,3 @@
-import { program } from '@/program/index.js';
+import { program } from '#src/program/index.js';
 
 program.parse();

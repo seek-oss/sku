@@ -6,11 +6,11 @@ import { workerData } from 'node:worker_threads';
 import {
   createOutDir,
   renderEntryChunkName,
-} from '@/services/vite/helpers/bundleConfig.js';
+} from '#src/services/vite/helpers/bundleConfig.js';
 import { createCollector } from '@sku-lib/vite/collector';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
-import createCSPHandler from '@/services/webpack/entry/csp.js';
-import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
+import { createPreRenderedHtml } from '#src/services/vite/helpers/html/createPreRenderedHtml.js';
+import createCSPHandler from '#src/services/webpack/entry/csp.js';
+import { ensureTargetDirectory } from '#src/utils/buildFileUtils.js';
 
 import type { JobWorkerData } from './prerenderConcurrently.js';
 

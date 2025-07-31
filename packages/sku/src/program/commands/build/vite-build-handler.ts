@@ -1,11 +1,11 @@
-import type { SkuContext } from '@/context/createSkuContext.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
+import { configureProject, validatePeerDeps } from '#src/utils/configure.js';
+import { runVocabCompile } from '#src/services/vocab/runVocab.js';
 import { performance } from 'node:perf_hooks';
-import provider from '@/services/telemetry/index.js';
+import provider from '#src/services/telemetry/index.js';
 import chalk from 'chalk';
 import prettyMilliseconds from 'pretty-ms';
-import { viteService } from '@/services/vite/index.js';
+import { viteService } from '#src/services/vite/index.js';
 
 export const viteBuildHandler = async ({
   skuContext,

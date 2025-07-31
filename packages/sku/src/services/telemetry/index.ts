@@ -1,12 +1,12 @@
 import os from 'node:os';
 
-import { requireFromCwd } from '@/utils/cwd.js';
-import isCI from '@/utils/isCI.js';
+import { requireFromCwd } from '#src/utils/cwd.js';
+import isCI from '#src/utils/isCI.js';
 import provider from './provider.js';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 import debug from 'debug';
 
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const log = debug('sku:telemetry');
 

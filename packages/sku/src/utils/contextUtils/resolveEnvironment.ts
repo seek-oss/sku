@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export const resolveEnvironment = ({
   environment: environmentOption,

@@ -5,29 +5,29 @@ import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';
 
-import getCertificate from '@/utils/certificate.js';
+import getCertificate from '#src/utils/certificate.js';
 
 import {
   copyPublicFiles,
   ensureTargetDirectory,
   cleanTargetDirectory,
-} from '@/utils/buildFileUtils.js';
+} from '#src/utils/buildFileUtils.js';
 import {
   checkHosts,
   getAppHosts,
   withHostile,
-} from '@/utils/contextUtils/hosts.js';
-import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
-import getStatsConfig from '@/services/webpack/config/statsConfig.js';
-import allocatePort from '@/utils/allocatePort.js';
-import { openBrowser } from '@/openBrowser/index.js';
-import createServerManager from '@/services/serverManager.js';
+} from '#src/utils/contextUtils/hosts.js';
+import makeWebpackConfig from '#src/services/webpack/config/webpack.config.ssr.js';
+import getStatsConfig from '#src/services/webpack/config/statsConfig.js';
+import allocatePort from '#src/utils/allocatePort.js';
+import { openBrowser } from '#src/openBrowser/index.js';
+import createServerManager from '#src/services/serverManager.js';
 
-import { watchVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
+import { watchVocabCompile } from '#src/services/vocab/runVocab.js';
+import { configureProject, validatePeerDeps } from '#src/utils/configure.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
-import { requireFromCwd } from '@/utils/cwd.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
+import { requireFromCwd } from '#src/utils/cwd.js';
 
 const log = debug('sku:start-ssr');
 

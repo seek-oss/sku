@@ -3,9 +3,9 @@ import { commands } from './commands/index.js';
 import { debugOption } from './options/debug/debug.option.js';
 import { configOption } from './options/config/config.option.js';
 import { environmentOption } from './options/environment/environment.option.js';
-import { initDebug } from '@/utils/debug.js';
-import { experimentalBundlerOption } from '@/program/options/expirementalBundler/experimentalBundler.option.js';
-import { preActionHook } from '@/program/hooks/preAction/preAction.hook.js';
+import { initDebug } from '#src/utils/debug.js';
+import { experimentalBundlerOption } from '#src/program/options/expirementalBundler/experimentalBundler.option.js';
+import { preActionHook } from '#src/program/hooks/preAction/preAction.hook.js';
 import packageJson from 'sku/package.json' with { type: 'json' };
 
 const { name, description, version } = packageJson;

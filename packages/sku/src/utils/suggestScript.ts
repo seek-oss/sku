@@ -1,10 +1,10 @@
 import {
   getRunCommand,
   getExecuteCommand,
-} from '@/services/packageManager/packageManager.js';
+} from '#src/services/packageManager/packageManager.js';
 
 import chalk from 'chalk';
-import { requireFromCwd } from '@/utils/cwd.js';
+import { requireFromCwd } from '#src/utils/cwd.js';
 
 const findPackageScriptName = (scriptContents: string): string | undefined => {
   let pkg;

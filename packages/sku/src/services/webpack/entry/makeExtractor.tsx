@@ -1,6 +1,6 @@
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
-import type { RenderCallbackParams } from '@/types/types.js';
-import defaultEntryPoint from '@/context/defaultClientEntry.js';
+import type { RenderCallbackParams } from '#src/types/types.js';
+import defaultEntryPoint from '#src/context/defaultClientEntry.js';
 import type { CSPHandler } from './csp.js';
 
 const getNewTags = ({ before, after }: { before: string; after: string }) => {

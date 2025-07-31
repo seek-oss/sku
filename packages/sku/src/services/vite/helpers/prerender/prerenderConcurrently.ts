@@ -2,8 +2,8 @@ import path from 'node:path';
 import url from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
-import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { getBuildRoutes } from '#src/services/webpack/config/plugins/createHtmlRenderPlugin.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const toAbsolute = (p: string) => path.resolve(__dirname, p);

@@ -1,6 +1,6 @@
 import preCommit from '../../../utils/preCommit.js';
-import { configureProject } from '@/utils/configure.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { configureProject } from '#src/utils/configure.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export const preCommitAction = async ({
   skuContext,

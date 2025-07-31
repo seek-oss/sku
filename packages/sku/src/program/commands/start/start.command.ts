@@ -1,10 +1,10 @@
 import { Command } from 'commander';
-import { statsOption } from '@/program/options/stats/stats.option.js';
+import { statsOption } from '#src/program/options/stats/stats.option.js';
 import {
   portOption,
   strictPortOption,
 } from '../../options/port/port.option.js';
-import { convertLoadableOption } from '@/program/options/convertLoadable/convertLoadable.option.js';
+import { convertLoadableOption } from '#src/program/options/convertLoadable/convertLoadable.option.js';
 
 export const startCommand = new Command('start')
   .description(

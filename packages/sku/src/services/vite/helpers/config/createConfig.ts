@@ -1,16 +1,16 @@
-import { createSkuViteConfig } from '@/services/vite/helpers/config/baseConfig.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { createSkuViteConfig } from '#src/services/vite/helpers/config/baseConfig.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 import {
   createOutDir,
   renderEntryChunkName,
-} from '@/services/vite/helpers/bundleConfig.js';
+} from '#src/services/vite/helpers/bundleConfig.js';
 import { createRequire } from 'node:module';
-import { middlewarePlugin } from '@/services/vite/plugins/middlewarePlugin.js';
-import { startTelemetryPlugin } from '@/services/vite/plugins/startTelemetry.js';
-import { HMRTelemetryPlugin } from '@/services/vite/plugins/HMRTelemetry.js';
-import { httpsDevServerPlugin } from '@/services/vite/plugins/httpsDevServerPlugin.js';
-import { getAppHosts } from '@/utils/contextUtils/hosts.js';
-import isCI from '@/utils/isCI.js';
+import { middlewarePlugin } from '#src/services/vite/plugins/middlewarePlugin.js';
+import { startTelemetryPlugin } from '#src/services/vite/plugins/startTelemetry.js';
+import { HMRTelemetryPlugin } from '#src/services/vite/plugins/HMRTelemetry.js';
+import { httpsDevServerPlugin } from '#src/services/vite/plugins/httpsDevServerPlugin.js';
+import { getAppHosts } from '#src/utils/contextUtils/hosts.js';
+import isCI from '#src/utils/isCI.js';
 
 const require = createRequire(import.meta.url);
 

@@ -1,11 +1,11 @@
 import chalk from 'chalk';
-import { check as esLintCheck } from '@/services/eslint/runESLint.js';
-import { check as prettierCheck } from '@/services/prettier/runPrettier.js';
-import runTsc from '@/services/typescript/runTsc.js';
+import { check as esLintCheck } from '#src/services/eslint/runESLint.js';
+import { check as prettierCheck } from '#src/services/prettier/runPrettier.js';
+import runTsc from '#src/services/typescript/runTsc.js';
 
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject } from '@/utils/configure.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { runVocabCompile } from '#src/services/vocab/runVocab.js';
+import { configureProject } from '#src/utils/configure.js';
+import type { SkuContext } from '#src/context/createSkuContext.js';
 
 export const lintAction = async (
   paths: string[],

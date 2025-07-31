@@ -1,22 +1,17 @@
 import type { SnapshotSerializer } from 'vitest';
 import { createTwoFilesPatch } from 'diff';
-import diffableHtml from 'diffable-html';
-
-const formatHtml = (html: string) => diffableHtml(html).trim();
+import { formatHtml } from './formatHtml.ts';
 
 const emptyDiff = `===================================================================
 --- sourceHtml
 +++ clientHtml`;
 
+/**
+ * Serializes the output of `getAppSnapshot`, formatting the HTML and diffing the pre and
+ * post-hydration HTML
+ */
 export const appSnapshotSerializer: SnapshotSerializer = {
-  serialize: (
-    { sourceHtml, clientRenderContent },
-    config,
-    indentation,
-    depth,
-    refs,
-    printer,
-  ) => {
+  serialize: ({ sourceHtml, clientRenderContent }) => {
     const formattedSourceHtml = formatHtml(sourceHtml);
     const formattedClientHtml = formatHtml(clientRenderContent);
 
@@ -33,7 +28,7 @@ export const appSnapshotSerializer: SnapshotSerializer = {
     const isEmptyDiff = htmlDiff === emptyDiff;
 
     const snapshotItems = [
-      printer(formattedSourceHtml, config, indentation, depth, refs),
+      formattedSourceHtml,
       `POST HYDRATE DIFFS: ${isEmptyDiff ? 'NO DIFF' : `\n${htmlDiff}`}`,
     ];
 

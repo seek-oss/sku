@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`custom-src-paths > bundler vite > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -30,33 +30,53 @@ exports[`custom-src-paths > bundler vite > build > should create valid app 1`] =
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`custom-src-paths > bundler vite > build > should generate the expected files 1`] = `
 {
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/some-static-place/vite-client-M_JrpecH.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/some-static-place/vite-client-M_JrpecH.js" crossorigin />
-
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
   </head>
   <body>
-    <div id="app"><div>Hello custom src paths</div></div>
-    <script type="module" src="/some-static-place/vite-client-M_JrpecH.js" ></script>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "vite-client-M_JrpecH.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-M_JrpecH.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`custom-src-paths > bundler vite > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <script type="module">
@@ -101,7 +121,7 @@ window.$RefreshSig$ = () => (type) => type;
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -124,7 +144,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`custom-src-paths > bundler webpack > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -191,7 +211,7 @@ exports[`custom-src-paths > bundler webpack > build > should create valid app 1`
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
@@ -199,25 +219,80 @@ exports[`custom-src-paths > bundler webpack > build > should generate the expect
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/some-static-place/runtime.js",
+    "/some-static-place/2.js",
+    "/some-static-place/main.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-<link data-chunk="main" rel="preload" as="script" href="/some-static-place/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/some-static-place/2.js">
-<link data-chunk="main" rel="preload" as="script" href="/some-static-place/main.js">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
   </head>
   <body>
-    <div id="app"><div>Hello custom src paths</div></div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
-<script async data-chunk="main" src="/some-static-place/runtime.js"></script>
-<script async data-chunk="main" src="/some-static-place/2.js"></script>
-<script async data-chunk="main" src="/some-static-place/main.js"></script>
+    <div id="app">
+      <div>
+        Hello custom src paths
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -226,7 +301,7 @@ exports[`custom-src-paths > bundler webpack > build > should generate the expect
 `;
 
 exports[`custom-src-paths > bundler webpack > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -293,6 +368,6 @@ exports[`custom-src-paths > bundler webpack > start > should start a development
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`styling > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -89,7 +89,7 @@ exports[`styling > build > should create valid app 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -109,29 +109,119 @@ exports[`styling > build > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/styling/runtime.js",
+    "/styling/2.js",
+    "/styling/main.js",
+  ]
+CSS: [
+    "/styling/main-f11c7eb5d7d4b8c58e2e.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>My Awesome Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link data-chunk="main" rel="stylesheet" href="/styling/main-f11c7eb5d7d4b8c58e2e.css">
-<link data-chunk="main" rel="preload" as="script" href="/styling/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/styling/2.js">
-<link data-chunk="main" rel="preload" as="script" href="/styling/main.js">
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="CSS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
   </head>
   <body>
-    <div id="app"><div><div>Render type: <!-- -->Initial</div><div><span class="external" data-automation-external="true">This should be invisible</span><div class="qiwkl41 qiwkl40" data-automation-vanilla="true"></div></div></div></div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
-<script async data-chunk="main" src="/styling/runtime.js"></script>
-<script async data-chunk="main" src="/styling/2.js"></script>
-<script async data-chunk="main" src="/styling/main.js"></script>
+    <div id="app">
+      <div>
+        <div>
+          Render type:
+          Initial
+        </div>
+        <div>
+          <span
+            class="external"
+            data-automation-external="true"
+          >
+            This should be invisible
+          </span>
+          <div
+            class="qiwkl41 qiwkl40"
+            data-automation-vanilla="true"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
   </body>
-</html>",
-  "main-f11c7eb5d7d4b8c58e2e.css": ".external{display:none;font-size:9px}
-.qiwkl40{border:10px solid red}.qiwkl41{background:blue;font-size:64px;height:100px;width:100px}
+</html>,
+  "main-f11c7eb5d7d4b8c58e2e.css": .external {
+  display: none;
+  font-size: 9px;
+}
+.qiwkl40 {
+  border: 10px solid red;
+}
+.qiwkl41 {
+  background: blue;
+  font-size: 64px;
+  height: 100px;
+  width: 100px;
+}
 
-/*# sourceMappingURL=main-f11c7eb5d7d4b8c58e2e.css.map*/",
+/*# sourceMappingURL=main-f11c7eb5d7d4b8c58e2e.css.map*/
+,
   "main-f11c7eb5d7d4b8c58e2e.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -141,7 +231,7 @@ exports[`styling > build > should generate the expected files 1`] = `
 `;
 
 exports[`styling > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -229,7 +319,7 @@ exports[`styling > start > should start a development server 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml

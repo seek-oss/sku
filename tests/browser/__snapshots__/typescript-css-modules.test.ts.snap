@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`typescript-css-modules > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -82,7 +82,7 @@ exports[`typescript-css-modules > build > should create valid app 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -102,28 +102,105 @@ exports[`typescript-css-modules > build > should generate the expected files 1`]
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/static/typescript/runtime.js",
+    "/static/typescript/2.js",
+    "/static/typescript/main.js",
+  ]
+CSS: [
+    "/static/typescript/main-4bad37555f2de4beeb21.css",
+  ]
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>My Awesome Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link data-chunk="main" rel="stylesheet" href="/static/typescript/main-4bad37555f2de4beeb21.css">
-<link data-chunk="main" rel="preload" as="script" href="/static/typescript/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/typescript/2.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/typescript/main.js">
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="CSS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
   </head>
   <body>
-    <div id="app"><div class="_19hsk3y0"><div class="_19hsk3y1" data-automation-text="true">Hello World</div><div>Render type: <!-- -->Initial</div></div></div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
-<script async data-chunk="main" src="/static/typescript/runtime.js"></script>
-<script async data-chunk="main" src="/static/typescript/2.js"></script>
-<script async data-chunk="main" src="/static/typescript/main.js"></script>
+    <div id="app">
+      <div class="_19hsk3y0">
+        <div
+          class="_19hsk3y1"
+          data-automation-text="true"
+        >
+          Hello World
+        </div>
+        <div>
+          Render type:
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
   </body>
-</html>",
-  "main-4bad37555f2de4beeb21.css": "._19hsk3y0{display:flex}._19hsk3y0 ._19hsk3y1{font-size:32px}
+</html>,
+  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
+  display: flex;
+}
+._19hsk3y0 ._19hsk3y1 {
+  font-size: 32px;
+}
 
-/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/",
+/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
+,
   "main-4bad37555f2de4beeb21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -133,7 +210,7 @@ exports[`typescript-css-modules > build > should generate the expected files 1`]
 `;
 
 exports[`typescript-css-modules > build-ssr > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -222,7 +299,7 @@ exports[`typescript-css-modules > build-ssr > should create valid app 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -241,9 +318,15 @@ POST HYDRATE DIFFS:
 exports[`typescript-css-modules > build-ssr > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-4bad37555f2de4beeb21.css": "._19hsk3y0{display:flex}._19hsk3y0 ._19hsk3y1{font-size:32px}
+  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
+  display: flex;
+}
+._19hsk3y0 ._19hsk3y1 {
+  font-size: 32px;
+}
 
-/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/",
+/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
+,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "server.cjs": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -251,7 +334,7 @@ exports[`typescript-css-modules > build-ssr > should generate the expected files
 `;
 
 exports[`typescript-css-modules > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -332,7 +415,7 @@ exports[`typescript-css-modules > start > should start a development server 1`] 
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml

@@ -2,40 +2,80 @@
 
 exports[`source-maps > bundler vite > sourceMapsProd false > should generate the expected files 1`] = `
 {
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/static/source-maps/vite-client-B_BJTN7o.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/static/source-maps/vite-client-B_BJTN7o.js" crossorigin />
-
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
   </head>
   <body>
-    <div id="app"><div>Hello source maps</div></div>
-    <script type="module" src="/static/source-maps/vite-client-B_BJTN7o.js" ></script>
+    <div id="app">
+      <div>
+        Hello source maps
+      </div>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "vite-client-B_BJTN7o.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`source-maps > bundler vite > sourceMapsProd true > should generate the expected files 1`] = `
 {
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/static/source-maps/vite-client-B_BJTN7o.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/static/source-maps/vite-client-B_BJTN7o.js" crossorigin />
-
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
   </head>
   <body>
-    <div id="app"><div>Hello source maps</div></div>
-    <script type="module" src="/static/source-maps/vite-client-B_BJTN7o.js" ></script>
+    <div id="app">
+      <div>
+        Hello source maps
+      </div>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "vite-client-B_BJTN7o.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-B_BJTN7o.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
@@ -44,25 +84,80 @@ exports[`source-maps > bundler vite > sourceMapsProd true > should generate the 
 exports[`source-maps > bundler webpack > sourceMapsProd false > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/static/source-maps/runtime.js",
+    "/static/source-maps/2.js",
+    "/static/source-maps/main.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/2.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/main.js">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
   </head>
   <body>
-    <div id="app"><div>Hello source maps</div></div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
-<script async data-chunk="main" src="/static/source-maps/runtime.js"></script>
-<script async data-chunk="main" src="/static/source-maps/2.js"></script>
-<script async data-chunk="main" src="/static/source-maps/main.js"></script>
+    <div id="app">
+      <div>
+        Hello source maps
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
@@ -72,25 +167,80 @@ exports[`source-maps > bundler webpack > sourceMapsProd true > should generate t
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": "<!DOCTYPE html>
+  "index.html": SCRIPTS: [
+    "/static/source-maps/runtime.js",
+    "/static/source-maps/2.js",
+    "/static/source-maps/main.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/runtime.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/2.js">
-<link data-chunk="main" rel="preload" as="script" href="/static/source-maps/main.js">
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
   </head>
   <body>
-    <div id="app"><div>Hello source maps</div></div>
-    <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
-<script async data-chunk="main" src="/static/source-maps/runtime.js"></script>
-<script async data-chunk="main" src="/static/source-maps/2.js"></script>
-<script async data-chunk="main" src="/static/source-maps/main.js"></script>
+    <div id="app">
+      <div>
+        Hello source maps
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
   </body>
-</html>",
+</html>,
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

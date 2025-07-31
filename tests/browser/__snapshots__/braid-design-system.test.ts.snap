@@ -17147,5 +17147,25 @@ exports[`braid-design-system > bundler webpack > start > should return developme
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
+POST HYDRATE DIFFS: 
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -71,6 +71,7 @@
+                 type="checkbox"
+                 id="id_1"
+                 aria-checked="false"
++                value
+               >
+               <div class="reset_base__1j8ojzz0 sprinkles_flexShrink_0_mobile__iv7so5i0 sprinkles_position_relative_mobile__iv7so55g sprinkles_borderRadius_standard_mobile__iv7so568 InlineField_fakeField__3b9mfp5 InlineField_sizeVars_standard__3b9mfp2 typography_lightModeTone_light__9al9wa10  sprinkles_background_surface_lightMode__iv7so534">
+                 <span class="reset_base__1j8ojzz0 sprinkles_top_0__iv7so5k sprinkles_bottom_0__iv7so5l sprinkles_left_0__iv7so5m sprinkles_right_0__iv7so5n sprinkles_position_absolute_mobile__iv7so55k sprinkles_pointerEvents_none__iv7so5j sprinkles_borderRadius_standard_mobile__iv7so568 sprinkles_transition_fast__iv7so5y sprinkles_opacity_0__iv7so57 InlineField_selected__3b9mfp9 typography_lightModeTone_dark__9al9wa11 typography_darkModeTone_dark__9al9wa13 sprinkles_background_formAccent_lightMode__iv7so522 sprinkles_background_formAccent_darkMode__iv7so523">
+@@ -167,7 +168,7 @@
+         </div>
+         <div class="reset_base__1j8ojzz0 App_vanillaBox__inn18b0">
+           🧁 Vanilla content
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
 `;

@@ -5,8 +5,6 @@ import {
   it,
   expect as globalExpect,
 } from 'vitest';
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
 import { dirContentsToObject } from '@sku-private/test-utils';
 import {
   scopeToFixture,
@@ -38,31 +36,25 @@ describe('display-names-prod', () => {
         expect(files).toMatchSnapshot();
       });
 
-      it('should add displayName assignments to built JavaScript', async ({
+      it('should add displayNames to React components in rendered HTML', async ({
         expect,
       }) => {
         const distDir = fixturePath('dist');
-        const allFiles = readdirSync(distDir);
+        const files = await dirContentsToObject(distDir);
 
-        const jsFiles = allFiles
-          .filter((filename) => filename.endsWith('.js'))
-          .map((filename) => ({
-            filename,
-            content: readFileSync(join(distDir, filename), 'utf-8'),
-          }));
+        const htmlContent = files['index.html'];
+        expect(htmlContent).toBeDefined();
 
-        expect(jsFiles.length).toBeGreaterThan(0);
-
-        const hasDisplayNameAssignments = jsFiles.some(({ content }) =>
-          /\.displayName\s*=\s*['"`][^'"`]+['"`]/.test(content),
+        expect(htmlContent).toContain('Button.displayName: <!-- -->Button');
+        expect(htmlContent).toContain('Card.displayName: <!-- -->Card');
+        expect(htmlContent).toContain('Header.displayName: <!-- -->Header');
+        expect(htmlContent).toContain(
+          'MemoFooter.displayName: <!-- -->MemoFooter',
         );
+        expect(htmlContent).toContain('Input.displayName: <!-- -->Input');
+        expect(htmlContent).toContain('PublicBox.displayName: <!-- -->Box');
 
-        expect(hasDisplayNameAssignments).toBe(true);
-
-        const allJsContent = jsFiles.map(({ content }) => content).join('\n');
-        expect(allJsContent).toMatch(/\w+\.displayName\s*=\s*['"`]Button['"`]/);
-        expect(allJsContent).toMatch(/\w+\.displayName\s*=\s*['"`]Card['"`]/);
-        expect(allJsContent).toMatch(/\w+\.displayName\s*=\s*['"`]Header['"`]/);
+        expect(htmlContent).not.toContain('displayName: <!-- -->undefined');
       });
     });
   });

@@ -8,16 +8,16 @@ exports[`display-names-prod > bundler: vite > build > should create build output
     <meta charset="UTF-8" />
     <title>hello-world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="modulepreload" href="/vite-client-ETQeC-dB.js" crossorigin />
+    <link rel="modulepreload" href="/vite-client-CEKer_RN.js" crossorigin />
 
   </head>
   <body>
-    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoFooter.displayName: <!-- -->MemoFooter</li><li>Input.displayName: <!-- -->Input</li></ul></div></div></div>
-    <script type="module" src="/vite-client-ETQeC-dB.js" ></script>
+    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoFooter.displayName: <!-- -->MemoFooter</li><li>Input.displayName: <!-- -->Input</li><li>PublicBox.displayName: <!-- -->Box</li></ul></div></div></div>
+    <script type="module" src="/vite-client-CEKer_RN.js" ></script>
   </body>
 </html>",
-  "vite-client-ETQeC-dB.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-ETQeC-dB.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-CEKer_RN.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-CEKer_RN.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -34,18 +34,18 @@ exports[`display-names-prod > bundler: webpack > build > should create build out
     
 <link data-chunk="main" rel="preload" as="script" href="/runtime-980fb1ffe39d4de310ac.js">
 <link data-chunk="main" rel="preload" as="script" href="/7-4274d242a3d5e5313473.js">
-<link data-chunk="main" rel="preload" as="script" href="/main-8dddcbc48e8c457682fc.js">
+<link data-chunk="main" rel="preload" as="script" href="/main-c715accbc81524045460.js">
   </head>
   <body>
-    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoFooter.displayName: <!-- -->MemoFooter</li><li>Input.displayName: <!-- -->Input</li></ul></div></div></div>
+    <div id="app"><div><h1>Display Names Test</h1><button>Click me</button><div>This is a card</div><input/><footer>Footer content</footer><div id="display-names-test"><p>Components should have displayName in production build:</p><ul><li>Button.displayName: <!-- -->Button</li><li>Card.displayName: <!-- -->Card</li><li>Header.displayName: <!-- -->Header</li><li>MemoFooter.displayName: <!-- -->MemoFooter</li><li>Input.displayName: <!-- -->Input</li><li>PublicBox.displayName: <!-- -->Box</li></ul></div></div></div>
     <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime-980fb1ffe39d4de310ac.js"></script>
 <script async data-chunk="main" src="/7-4274d242a3d5e5313473.js"></script>
-<script async data-chunk="main" src="/main-8dddcbc48e8c457682fc.js"></script>
+<script async data-chunk="main" src="/main-c715accbc81524045460.js"></script>
   </body>
 </html>",
-  "main-8dddcbc48e8c457682fc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-8dddcbc48e8c457682fc.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c715accbc81524045460.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-c715accbc81524045460.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-980fb1ffe39d4de310ac.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-980fb1ffe39d4de310ac.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

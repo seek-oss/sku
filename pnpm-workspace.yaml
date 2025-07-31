@@ -10,6 +10,9 @@ configDependencies:
 
 hoistWorkspacePackages: false
 
+ignoredBuiltDependencies:
+  - core-js-pure
+
 linkWorkspacePackages: true
 
 onlyBuiltDependencies:

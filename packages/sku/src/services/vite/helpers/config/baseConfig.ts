@@ -24,7 +24,8 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
   const vocabConfig = getVocabConfig(skuContext);
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
-  const prodBabelPlugins = [
+
+  const prodBabelPlugins: Array<string | [string, object]> = [
     [
       require.resolve('babel-plugin-unassert'),
       {
@@ -34,8 +35,15 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     ],
   ];
 
+  if (skuContext.displayNamesProd) {
+    prodBabelPlugins.push(
+      require.resolve('@zendesk/babel-plugin-react-displayname'),
+    );
+  }
+
   return {
     base: skuContext.publicPath,
+    publicDir: false,
     root: process.cwd(),
     clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [

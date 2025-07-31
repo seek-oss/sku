@@ -5,7 +5,7 @@ import {
   it,
   expect as globalExpect,
 } from 'vitest';
-import { dirContentsToObject } from '@sku-private/test-utils';
+import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import {
   scopeToFixture,
   bundlers,
@@ -55,6 +55,41 @@ describe('display-names-prod', () => {
         expect(htmlContent).toContain('PublicBox.displayName: <!-- -->Box');
 
         expect(htmlContent).not.toContain('displayName: <!-- -->undefined');
+      });
+    });
+
+    describe('start (development)', () => {
+      it('should NOT add displayNames in development mode', async ({
+        expect,
+      }) => {
+        const port = await getPort();
+        const url = `http://localhost:${port}`;
+
+        const start = await sku('start', [
+          ...args[bundler],
+          '--strict-port',
+          `--port=${port}`,
+        ]);
+
+        globalExpect(
+          await start.findByText('Starting development server'),
+        ).toBeInTheConsole();
+
+        const appPage = await browser.newPage();
+        const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
+        const sourceHtml = await response?.text();
+        await appPage.close();
+
+        expect(sourceHtml).toBeDefined();
+
+        expect(sourceHtml).toContain('Button.displayName: <!-- -->undefined');
+        expect(sourceHtml).toContain('Card.displayName: <!-- -->undefined');
+        expect(sourceHtml).toContain('Header.displayName: <!-- -->undefined');
+        expect(sourceHtml).toContain(
+          'MemoFooter.displayName: <!-- -->undefined',
+        );
+        expect(sourceHtml).toContain('Input.displayName: <!-- -->undefined');
+        expect(sourceHtml).toContain('PublicBox.displayName: <!-- -->Box'); // This one is manually assigned
       });
     });
   });

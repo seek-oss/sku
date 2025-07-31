@@ -1,0 +1,23 @@
+{
+  "name": "@sku-fixtures/display-names-prod",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "start": "sku start",
+    "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
+    "build": "sku build",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts",
+    "serve": "sku serve"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "@types/react": "^18.2.3",
+    "@types/react-dom": "^18.2.3",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

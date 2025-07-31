@@ -11,7 +11,8 @@ const { sku } = scopeToFixture('sku-test');
 
 describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
   const args: TestFrameworkValues<string[]> = {
-    vitest: ['--config=sku.config.vitest.ts'],
+    // Vitest needs the `run` argument as it defaults to watch mode
+    vitest: ['--config=sku.config.vitest.ts', 'run'],
     jest: [],
   };
 
@@ -38,4 +39,6 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
 
     expect(await process.findByText(expected[testRunner])).toBeInTheConsole();
   });
+
+  // TODO: Add tests that interact with watch mode
 });

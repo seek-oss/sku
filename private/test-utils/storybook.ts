@@ -10,11 +10,24 @@ import { type Page, Frame } from 'puppeteer';
 export const getStoryPage = async (
   /** A URL pointing to a storybook iframe */
   storyIframeUrl: string,
+  { docs }: { docs: boolean } = { docs: false },
 ) => {
   const storyPage = await browser.newPage();
   storyPage.setDefaultNavigationTimeout(10_000);
 
   await storyPage.goto(storyIframeUrl, { waitUntil: ['load'] });
+
+  if (docs) {
+    // If the story is a docs page, we need to wait for the docs content to load
+    await storyPage.waitForSelector('#storybook-docs > * ', {
+      timeout: 10_000,
+    });
+  } else {
+    // For regular stories, we wait for the story contents to load
+    await storyPage.waitForSelector('#storybook-root > *', {
+      timeout: 10_000,
+    });
+  }
 
   return storyPage;
 };

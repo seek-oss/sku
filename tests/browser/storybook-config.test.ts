@@ -106,7 +106,7 @@ describe('storybook-config', () => {
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
-      const docsPage = await getStoryPage(docsIframeUrl);
+      const docsPage = await getStoryPage(docsIframeUrl, { docs: true });
 
       {
         const { text, fontSize } = await getTextContentFromFrameOrPage(
@@ -204,7 +204,7 @@ describe('storybook-config', () => {
         await assetServer.findByText('serving storybook-static'),
       ).toBeInTheConsole();
 
-      const docsPage = await getStoryPage(docsIframeUrl);
+      const docsPage = await getStoryPage(docsIframeUrl, { docs: true });
 
       {
         const { text, fontSize } = await getTextContentFromFrameOrPage(

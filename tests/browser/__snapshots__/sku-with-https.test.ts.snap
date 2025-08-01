@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`sku-with-https > bundler: vite > start > should start a development server > homepage 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -58,7 +58,7 @@ window.$RefreshSig$ = () => (type) => type;
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -103,7 +103,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > bundler: vite > start > should start a development server > middleware 1`] = `
-"OK"
+OK
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -128,7 +128,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > bundler: webpack > start > should start a development server > homepage 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -212,7 +212,7 @@ exports[`sku-with-https > bundler: webpack > start > should start a development 
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -229,7 +229,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > bundler: webpack > start > should start a development server > middleware 1`] = `
-"OK"
+OK
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -248,7 +248,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > serve > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta
@@ -332,7 +332,7 @@ exports[`sku-with-https > serve > should start a development server 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -349,7 +349,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > serve > should support the supplied middleware 1`] = `
-"OK"
+OK
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -368,7 +368,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`sku-with-https > start-ssr > should support the supplied middleware 1`] = `
-"OK"
+OK
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml

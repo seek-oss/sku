@@ -1,8 +1,8 @@
 import chalk from 'chalk';
-import { configureProject } from '@/utils/configure.js';
-import { fix as esLintFix } from '@/services/eslint/runESLint.js';
-import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { configureProject } from '../../../utils/configure.js';
+import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
+import { write as prettierWrite } from '../../../services/prettier/runPrettier.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const formatAction = async (
   paths: string[],

@@ -1,7 +1,7 @@
 import prompts from 'prompts';
-import installDep from '@/services/packageManager/install.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
-import isCI from '@/utils/isCI.js';
+import installDep from '../../../services/packageManager/install.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
+import isCI from '../../../utils/isCI.js';
 
 export const vitestHandler = async ({
   skuContext,
@@ -10,15 +10,17 @@ export const vitestHandler = async ({
   skuContext: SkuContext;
   args: string[];
 }) => {
-  let vitestImport = null;
+  let skuLibVitest = null;
+
   try {
-    vitestImport = await import('@sku-lib/vitest');
+    skuLibVitest = await import('@sku-lib/vitest');
   } catch (e: any) {
     if (e.code !== 'ERR_MODULE_NOT_FOUND' || isCI) {
       console.error(e.message);
       return;
     }
-    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install.
+
+    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install
     console.log('@sku-lib/vitest is not installed');
     const res = await prompts(
       {
@@ -29,20 +31,24 @@ export const vitestHandler = async ({
       },
       { onCancel: () => process.exit(1) },
     );
+
     if (!res.install) {
       console.log('Exiting without running tests.');
       return;
     }
+
     await installDep({
       deps: ['@sku-lib/vitest'],
       type: 'dev',
       logLevel: 'regular',
     });
+
     // Retry running Vitest after installation
     await vitestHandler({ skuContext, args });
     return;
   }
-  await vitestImport.runVitest({
+
+  await skuLibVitest.runVitest({
     setupFiles: skuContext.paths.setupTests,
     args,
   });

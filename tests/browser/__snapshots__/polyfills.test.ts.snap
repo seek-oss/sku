@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`polyfills > bundler vite > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@ exports[`polyfills > bundler vite > build > should create valid app 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -51,7 +51,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`polyfills > bundler vite > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -118,7 +118,7 @@ exports[`polyfills > bundler vite > start > should start a development server 1`
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -139,7 +139,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`polyfills > bundler webpack > build > should create valid app 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -206,7 +206,7 @@ exports[`polyfills > bundler webpack > build > should create valid app 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -227,7 +227,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`polyfills > bundler webpack > start > should start a development server 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -294,7 +294,7 @@ exports[`polyfills > bundler webpack > start > should start a development server
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml

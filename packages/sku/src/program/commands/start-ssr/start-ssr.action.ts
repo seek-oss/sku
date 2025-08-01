@@ -1,5 +1,5 @@
 import type { StatsChoices } from '../../options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const startSsrAction = async ({
   stats,

@@ -1,5 +1,5 @@
-import { getAddCommand } from '@/services/packageManager/packageManager.js';
-import banner from '@/utils/banners/banner.js';
+import { getAddCommand } from '../../../services/packageManager/packageManager.js';
+import banner from '../../../utils/banners/banner.js';
 
 const blockedCommands = ['build', 'start', 'start-ssr'];
 

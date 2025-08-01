@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`translations > bundler vite > should render en 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -47,7 +47,7 @@ exports[`translations > bundler vite > should render en 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -65,7 +65,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -111,7 +111,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -129,7 +129,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`translations > bundler vite > should render fr 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -175,7 +175,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -193,7 +193,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`translations > bundler vite > should support query parameters 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -239,7 +239,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -257,7 +257,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`translations > bundler webpack > should render en 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -343,12 +343,12 @@ exports[`translations > bundler webpack > should render en 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`translations > bundler webpack > should render en-PSEUDO post-hydration 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -434,7 +434,7 @@ exports[`translations > bundler webpack > should render en-PSEUDO post-hydration
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
@@ -452,7 +452,7 @@ POST HYDRATE DIFFS:
 `;
 
 exports[`translations > bundler webpack > should render fr 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -538,12 +538,12 @@ exports[`translations > bundler webpack > should render fr 1`] = `
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`translations > bundler webpack > should support query parameters 1`] = `
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -629,6 +629,6 @@ exports[`translations > bundler webpack > should support query parameters 1`] = 
     >
     </script>
   </body>
-</html>"
+</html>
 POST HYDRATE DIFFS: NO DIFF
 `;

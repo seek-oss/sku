@@ -3,14 +3,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { workerData } from 'node:worker_threads';
-import {
-  createOutDir,
-  renderEntryChunkName,
-} from '@/services/vite/helpers/bundleConfig.js';
+import { createOutDir, renderEntryChunkName } from '../bundleConfig.js';
 import { createCollector } from '@sku-lib/vite/collector';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
-import createCSPHandler from '@/services/webpack/entry/csp.js';
-import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
+import { createPreRenderedHtml } from '../html/createPreRenderedHtml.js';
+import createCSPHandler from '../../../webpack/entry/csp.js';
+import { ensureTargetDirectory } from '../../../../utils/buildFileUtils.js';
 
 import type { JobWorkerData } from './prerenderConcurrently.js';
 

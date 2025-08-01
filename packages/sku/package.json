@@ -47,10 +47,9 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tspc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json",
     "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
-    "lint:tsc": "tsc --noEmit",
-    "prepare": "ts-patch install -s"
+    "lint:tsc": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -223,9 +222,7 @@
     "react-dom": "^19.1.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.0.0",
-    "ts-patch": "^3.3.0",
     "type-fest": "^4.41.0",
-    "typescript-transform-paths": "^3.5.2",
     "vitest": "^3.2.3"
   }
 }

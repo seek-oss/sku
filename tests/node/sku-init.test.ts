@@ -25,7 +25,15 @@ vi.setConfig({
 describe('sku init', () => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
-    await fs.writeFile(fixturePath('pnpm-workspace.yaml'), '');
+    await fs.writeFile(
+      fixturePath('pnpm-workspace.yaml'),
+      `
+      packages:
+        - ../../packages/*
+
+      linkWorkspacePackages: true
+    `,
+    );
 
     const result = await sku('init', [projectName]);
     globalExpect(

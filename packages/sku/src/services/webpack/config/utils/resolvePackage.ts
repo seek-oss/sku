@@ -4,8 +4,8 @@ import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
 import { createRequire } from 'node:module';
 
-import { cwd } from '@/utils/cwd.js';
-import { hasErrorCode } from '@/utils/error-guards.js';
+import { cwd } from '../../../../utils/cwd.js';
+import { hasErrorCode } from '../../../../utils/error-guards.js';
 
 // @ts-expect-error
 const memoize = nanoMemoize?.default || nanoMemoize;

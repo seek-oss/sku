@@ -43,8 +43,7 @@
     "@types/debug": "^4.1.12",
     "@types/react": "^19.1.8",
     "vite": "^6.1.0",
-    "react": "^19.1.0",
-    "typescript-transform-paths": "^3.5.2"
+    "react": "^19.1.0"
   },
   "peerDependencies": {
     "@types/react": "^18.0.0 || ^19.0.0",

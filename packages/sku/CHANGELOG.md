@@ -1,5 +1,58 @@
 # sku
 
+## 14.9.0
+
+### Minor Changes
+
+- Explicitly deny commands unsupported by the vite bundler ([#1305](https://github.com/seek-oss/sku/pull/1305))
+
+  While experimental support with Vite is available, some APIs are still under development. Static site generation is our primary focus for the Vite bundler at this time, so SSR commands with the experimental Vite bundler flags will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
+
+- `vite build`: Generate source maps when `sourceMapsProd: true` is configured ([#1313](https://github.com/seek-oss/sku/pull/1313))
+
+- `vite`: Add support for `displayNameProd` sku.config option ([#1327](https://github.com/seek-oss/sku/pull/1327))
+
+- `vite`: Add support for `polyfills` config ([#1321](https://github.com/seek-oss/sku/pull/1321))
+
+- `sku configure`: suggest recommended configuration changes for PNPM applications ([#1311](https://github.com/seek-oss/sku/pull/1311))
+
+  During configuration, `sku` will conditionally output warning logs that suggest users make the following changes:
+  - Migrate `.npmrc` configuration to `pnpm-workspace.yaml`
+  - Update PNPM to at least v10.13.0
+  - Delete top-level `node_modules` and install the `pnpm-plugin-sku` [config dependency] via `pnpm add --config pnpm-plugin-sku && pnpm install`
+
+  Applying all of these changes will suppress these warnings.
+
+  The combination of these three changes will ensure PNPM hoists dependencies necessary for a smooth development experience across all IDEs, and runs necessary post-install scripts for some of `sku`'s dependencies. The [config dependency] in particular enables `sku` to effectively manage any future configuration changes that are necessary to ensure PNPM applications function correctly.
+
+  [config dependency]: https://pnpm.io/config-dependencies
+
+- `vite (build)`: bundler now respects the `target` config property for specifying custom build output directories ([#1314](https://github.com/seek-oss/sku/pull/1314))
+
+- `sku: vite` enable `supportedBrowsers` when running `sku` with the `vite` bundler. ([#1298](https://github.com/seek-oss/sku/pull/1298))
+
+- `init`: Populate `packageManager` field in `package.json` if the new app is at the repo root ([#1322](https://github.com/seek-oss/sku/pull/1322))
+
+- `sku init`: Install PNPM config dependency when PNPM is detected as the package manager ([#1311](https://github.com/seek-oss/sku/pull/1311))
+
+### Patch Changes
+
+- `vitest`: Honour watch mode when running `sku test` ([#1325](https://github.com/seek-oss/sku/pull/1325))
+
+  Previously it was not possible to run Vitest in watch mode via `sku test`. `sku test` should now behave similarly to [the `vitest` CLI][vitest cli], so `sku test`, `sku test watch` and `sku test -w/--watch` will all trigger watch mode.
+
+  To run tests once and exit, you can execute `sku test run`, `sku test --run` or `sku test --no-watch` .
+
+  [vitest cli]: https://vitest.dev/guide/cli
+
+- `start`: Align webpack and vite `start` implementations ([#1324](https://github.com/seek-oss/sku/pull/1324))
+
+- `sku test`: Fixes a bug where project configuration and Vocab translation compilation were running twice instead of once ([#1315](https://github.com/seek-oss/sku/pull/1315))
+
+- `sku init`: Specify an exact version of `sku` when isntalling dependencies ([#1302](https://github.com/seek-oss/sku/pull/1302))
+
+  This fixes an issue where running `sku init` with a snapshot version of `sku` would install the latest version of `sku` instead of the specified version.
+
 ## 14.8.0
 
 ### Minor Changes

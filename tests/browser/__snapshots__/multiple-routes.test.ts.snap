@@ -512,6 +512,17 @@ exports[`multiple-routes > bundler: vite > start > should render details page co
       http-equiv="Content-Security-Policy"
       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
+    <style
+      type="text/css"
+      data-vanilla-extract-inline-dev-css
+    >
+      .Home_root__ms22la0 {
+  color: red;
+}
+.Details_root__1hpn1da0 {
+  color: blue;
+}
+    </style>
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
 injectIntoGlobalHook(window);
@@ -578,7 +589,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -36,19 +36,27 @@
+@@ -47,19 +47,27 @@
      </style>
      <script
        type="module"
@@ -619,6 +630,14 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
       http-equiv="Content-Security-Policy"
       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
     >
+    <style
+      type="text/css"
+      data-vanilla-extract-inline-dev-css
+    >
+      .Home_root__ms22la0 {
+  color: red;
+}
+    </style>
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
 injectIntoGlobalHook(window);
@@ -682,7 +701,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -36,14 +36,22 @@
+@@ -44,14 +44,22 @@
      </style>
      <script
        type="module"

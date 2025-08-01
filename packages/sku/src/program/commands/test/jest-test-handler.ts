@@ -1,7 +1,7 @@
 import debug from 'debug';
 import { run } from 'jest';
 
-import isCI from '@/utils/isCI.js';
+import isCI from '../../../utils/isCI.js';
 
 const log = debug('sku:jest');
 

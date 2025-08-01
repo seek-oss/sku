@@ -8,7 +8,7 @@ import { Eta } from 'eta';
 import debug from 'debug';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 import {
   packageManager,
@@ -18,18 +18,18 @@ import {
   isAtLeastPnpmV10,
   rootDir,
   packageManagerVersion,
-} from '@/services/packageManager/packageManager.js';
-import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
-import { fix as esLintFix } from '@/services/eslint/runESLint.js';
-import install from '@/services/packageManager/install.js';
+} from '../../../services/packageManager/packageManager.js';
+import { write as prettierWrite } from '../../../services/prettier/runPrettier.js';
+import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
+import install from '../../../services/packageManager/install.js';
 
-import configure from '@/utils/configureApp.js';
+import configure from '../../../utils/configureApp.js';
 
-import { setCwd } from '@/utils/cwd.js';
-import banner from '@/utils/banners/banner.js';
-import toPosixPath from '@/utils/toPosixPath.js';
-import { isEmptyDir } from '@/utils/isEmptyDir.js';
-import { execAsync } from '@/utils/execAsync.js';
+import { setCwd } from '../../../utils/cwd.js';
+import banner from '../../../utils/banners/banner.js';
+import toPosixPath from '../../../utils/toPosixPath.js';
+import { isEmptyDir } from '../../../utils/isEmptyDir.js';
+import { execAsync } from '../../../utils/execAsync.js';
 
 const trace = debug('sku:init');
 

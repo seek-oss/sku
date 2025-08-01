@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite';
 
-import type { SkuContext } from '@/context/createSkuContext.js';
-import { resolvePolyfills } from '@/utils/resolvePolyfills.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
+import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
 
 export const polyfillsPlugin = (skuContext: SkuContext): Plugin => {
   const virtualModuleId = 'virtual:sku/polyfills';

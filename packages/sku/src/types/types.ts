@@ -108,7 +108,7 @@ type TransformOutputPathFunction = (
 
 export type SkuLanguage = string | { name: string; extends?: string };
 
-export interface SkuConfig {
+interface SkuConfigBase {
   /**
    * The bundler that sku uses to build the application.
    * This is an experimental option that may change or be removed without notice.
@@ -119,6 +119,7 @@ export interface SkuConfig {
    * @default "webpack"
    */
   __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | 'vite';
+
   /**
    * The test runner that sku uses to run the tests.
    * This is an experimental option that may change or be removed without notice.
@@ -128,34 +129,6 @@ export interface SkuConfig {
    * @default: "jest"
    */
   __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
-  /**
-   * An array of cjs import paths that have both a default and named exports.
-   * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
-   * See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
-   * This is an experimental option that may change or be removed without notice.
-   *
-   * Note: This option is only relevant when using the `vite` bundler.
-   *
-   * @default: []
-   */
-  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
-
-  /**
-   * This function provides a way to modify sku's Vite configuration.
-   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
-   *
-   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
-   *
-   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
-   * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
-   *
-   * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
-   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
-   */
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig?: Plugin['config'];
-
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
@@ -238,22 +211,6 @@ export interface SkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig
    */
   dangerouslySetTSConfig?: (skuTSConfig: any) => any;
-
-  /**
-   * This function provides a way to modify sku's Webpack configuration.
-   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
-   *
-   * Before customizing your Webpack configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
-   *
-   * As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
-   * If you only need to modify one of these configs, then you can check `config.name` within.
-   *
-   * Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
-   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
-   *
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
-   */
-  dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.
@@ -382,17 +339,6 @@ export interface SkuConfig {
   port?: number;
 
   /**
-   * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
-   *
-   * *Caution*: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching.
-   * You may run into caching issues using this option. It may be removed in future.
-   *
-   * @default 'public'
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=public
-   */
-  public?: string;
-
-  /**
    * The URL all the static assets of the app are accessible under.
    *
    * @default '/'
@@ -436,26 +382,6 @@ export interface SkuConfig {
   routes?: readonly SkuRoute[];
 
   /**
-   * **Only for SSR apps**
-   *
-   * The entry file for the server.
-   *
-   * @default "./src/server.js"
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
-   */
-  serverEntry?: string;
-
-  /**
-   * **Only for SSR apps**
-   *
-   * The port the server is hosted on when running `sku start-ssr`.
-   *
-   * @default 8181
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverport
-   */
-  serverPort?: number;
-
-  /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=setuptests
@@ -494,17 +420,6 @@ export interface SkuConfig {
   sourceMapsProd?: boolean;
 
   /**
-   * An array of directories holding your apps source code.
-   * By default, sku expects your source code to be in a directory named `src` in the root of your project.
-   *
-   * Use this option if your source code needs to be arranged differently.
-   *
-   * @default ['./src']
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=srcpaths
-   */
-  srcPaths?: string[];
-
-  /**
    * The `browserslist` query describing the apps browser support policy.
    *
    * @default browserslist-config-seek
@@ -531,3 +446,101 @@ export interface SkuConfig {
    */
   transformOutputPath?: TransformOutputPathFunction;
 }
+
+interface WebpackSkuConfig {
+  /**
+   * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+   *
+   * *Caution*: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching.
+   * You may run into caching issues using this option. It may be removed in future.
+   *
+   * @default 'public'
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=public
+   */
+  public?: string;
+
+  /**
+   * **Only for SSR apps**
+   *
+   * The entry file for the server.
+   *
+   * @default "./src/server.js"
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
+   */
+  serverEntry?: string;
+
+  /**
+   * **Only for SSR apps**
+   *
+   * The port the server is hosted on when running `sku start-ssr`.
+   *
+   * @default 8181
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverport
+   */
+  serverPort?: number;
+
+  /**
+   * An array of directories holding your apps source code.
+   * By default, sku expects your source code to be in a directory named `src` in the root of your project.
+   *
+   * Use this option if your source code needs to be arranged differently.
+   *
+   * @default ['./src']
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=srcpaths
+   */
+  srcPaths?: string[];
+
+  /**
+   * This function provides a way to modify sku's Webpack configuration.
+   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Before customizing your Webpack configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   *
+   * As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
+   * If you only need to modify one of these configs, then you can check `config.name` within.
+   *
+   * Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
+   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
+   */
+  dangerouslySetWebpackConfig?: <T = any>(skuWebpackConfig: T) => T;
+}
+
+interface ViteSkuConfig {
+  /**
+   * An array of cjs import paths that have both a default and named exports.
+   * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+   * See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
+   * This is an experimental option that may change or be removed without notice.
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default: []
+   */
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+
+  /**
+   * This function provides a way to modify sku's Vite configuration.
+   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   *
+   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
+   * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+   *
+   * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
+   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
+   */
+  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig?: Plugin['config'];
+}
+
+export type SkuConfig = SkuConfigBase &
+  (
+    | ({
+        __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | undefined;
+      } & WebpackSkuConfig)
+    | ({ __UNSAFE_EXPERIMENTAL__bundler: 'vite' } & ViteSkuConfig)
+  );

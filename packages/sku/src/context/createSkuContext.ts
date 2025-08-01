@@ -189,7 +189,10 @@ export const createSkuContext = ({
   const libraryFile = skuConfig.libraryFile!;
   const isLibrary = Boolean(skuConfig.libraryEntry);
   const polyfills = skuConfig.polyfills!;
-  const webpackDecorator = skuConfig.dangerouslySetWebpackConfig!;
+  const webpackDecorator =
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
+      ? <T>(config: T): T => config
+      : (skuConfig as any).dangerouslySetWebpackConfig!;
   const jestDecorator = skuConfig.dangerouslySetJestConfig!;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;

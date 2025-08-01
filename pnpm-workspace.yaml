@@ -31,3 +31,4 @@ publicHoistPattern:
 injectWorkspacePackages: true
 syncInjectedDepsAfterScripts:
   - build
+dedupeInjectedDeps: false

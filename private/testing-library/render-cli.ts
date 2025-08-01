@@ -18,7 +18,9 @@ type SkuCommand =
 
 export const scopeToFixture = (fixtureFolder: string) => {
   const appDir = path.dirname(
-    require.resolve(`../../fixtures/${fixtureFolder}/package.json`),
+    require.resolve(
+      path.join(process.cwd(), `fixtures/${fixtureFolder}/package.json`),
+    ),
   );
 
   const fixturePath = (...paths: string[]) => path.join(appDir, ...paths);

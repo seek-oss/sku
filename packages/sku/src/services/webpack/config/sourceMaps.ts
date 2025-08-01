@@ -4,7 +4,7 @@ function getSourceMapSetting({
 }: {
   isDevServer: boolean;
   sourceMapsProd: boolean;
-}) {
+}): string | false {
   if (isDevServer) {
     return 'eval-cheap-module-source-map';
   }

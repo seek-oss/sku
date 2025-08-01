@@ -298,7 +298,7 @@ const makeWebpackConfig = ({
           : [],
       ),
     },
-  ].map(webpackDecorator);
+  ].map(webpackDecorator) as Configuration[];
 };
 
 export default makeWebpackConfig;

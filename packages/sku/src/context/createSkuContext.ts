@@ -192,7 +192,7 @@ export const createSkuContext = ({
   const webpackDecorator =
     skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
       ? <T>(config: T): T => config
-      : (skuConfig as any).dangerouslySetWebpackConfig!;
+      : skuConfig.dangerouslySetWebpackConfig!;
   const jestDecorator = skuConfig.dangerouslySetJestConfig!;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;

@@ -108,7 +108,7 @@ type TransformOutputPathFunction = (
 
 export type SkuLanguage = string | { name: string; extends?: string };
 
-interface SkuConfigBase {
+export interface SkuConfigBase {
   /**
    * The bundler that sku uses to build the application.
    * This is an experimental option that may change or be removed without notice.
@@ -447,7 +447,7 @@ interface SkuConfigBase {
   transformOutputPath?: TransformOutputPathFunction;
 }
 
-interface WebpackSkuConfig {
+export interface WebpackSkuConfig {
   /**
    * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
    *
@@ -507,7 +507,7 @@ interface WebpackSkuConfig {
   dangerouslySetWebpackConfig?: <T = any>(skuWebpackConfig: T) => T;
 }
 
-interface ViteSkuConfig {
+export interface ViteSkuConfig {
   /**
    * An array of cjs import paths that have both a default and named exports.
    * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.

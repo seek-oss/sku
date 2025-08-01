@@ -16,6 +16,8 @@ import {
   getPackageManagerInstallPage,
   getInstallCommand,
   isAtLeastPnpmV10,
+  rootDir,
+  packageManagerVersion,
 } from '../../../services/packageManager/packageManager.js';
 import { write as prettierWrite } from '../../../services/prettier/runPrettier.js';
 import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
@@ -64,12 +66,12 @@ export const initAction = async (
   projectName: string,
   { verbose, skuContext }: { verbose: boolean; skuContext: SkuContext },
 ) => {
-  const root = path.resolve(projectName);
-  setCwd(root);
+  const initDir = path.resolve(projectName);
+  setCwd(initDir);
 
-  trace(`Creating project "${projectName}" in "${root}"`);
+  trace(`Creating project "${projectName}" in "${initDir}"`);
 
-  const appName = path.basename(root);
+  const appName = path.basename(initDir);
 
   const reservedNames = [
     'react',
@@ -109,12 +111,12 @@ export const initAction = async (
 
   await mkdir(projectName, { recursive: true });
 
-  if (!isEmptyDir(root)) {
+  if (!isEmptyDir(initDir)) {
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }
 
-  console.log(`Creating a new sku project in ${chalk.green(root)}.`);
+  console.log(`Creating a new sku project in ${chalk.green(initDir)}.`);
   console.log();
 
   const packageJson: Record<string, any> = {
@@ -131,10 +133,18 @@ export const initAction = async (
     },
   };
 
+  const isRepoRoot = rootDir === null || rootDir === initDir;
+  const shouldConfigurePackageManagerField =
+    isRepoRoot && packageManagerVersion;
+
+  if (shouldConfigurePackageManagerField) {
+    packageJson.packageManager = `${packageManager}@${packageManagerVersion}`;
+  }
+
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
-  await writeFile(path.join(root, 'package.json'), packageJsonString);
-  process.chdir(root);
+  await writeFile(path.join(initDir, 'package.json'), packageJsonString);
+  process.chdir(initDir);
 
   const templateDirectory = path.join(
     toPosixPath(__dirname),
@@ -147,7 +157,7 @@ export const initAction = async (
     .withPromise();
 
   const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
-    root,
+    initDir,
     templateDirectory,
   );
 

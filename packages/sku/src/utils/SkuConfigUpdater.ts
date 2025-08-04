@@ -30,20 +30,9 @@ import debug from 'debug';
 import prettier from 'prettier';
 import prettierConfig from '../services/prettier/config/prettierConfig.js';
 
-import type {
-  SkuConfig,
-  SkuConfigBase,
-  WebpackSkuConfig,
-  ViteSkuConfig,
-} from '../types/types.js';
+import type { SkuConfig, CompleteSkuConfig } from '../types/types.js';
 
-type AllSkuConfigKeys = keyof (SkuConfigBase &
-  WebpackSkuConfig &
-  ViteSkuConfig);
-
-type AllSkuConfigValues = (SkuConfigBase &
-  WebpackSkuConfig &
-  ViteSkuConfig)[AllSkuConfigKeys];
+type AllSkuConfigKeys = keyof CompleteSkuConfig;
 
 type ProxifiedSkuConfig = ProxifiedObject<SkuConfig>;
 type EsmConfig = { type: 'esm'; configAst: ProxifiedSkuConfig };
@@ -164,7 +153,7 @@ export class SkuConfigUpdater {
     value,
   }: {
     property: T;
-    value: AllSkuConfigValues;
+    value: CompleteSkuConfig[T];
   }) {
     if (this.#config.type === 'cjs') {
       const propertyToUpdate = this.#config.configAst.properties.find(

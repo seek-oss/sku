@@ -537,6 +537,10 @@ export interface ViteSkuConfig {
   __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig?: Plugin['config'];
 }
 
+export type CompleteSkuConfig = SkuConfigBase &
+  WebpackSkuConfig &
+  ViteSkuConfig;
+
 export type SkuConfig = SkuConfigBase &
   (
     | ({

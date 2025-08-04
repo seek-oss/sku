@@ -299,7 +299,7 @@ const makeWebpackConfig = ({
       resolve: {
         alias: {
           __sku_alias__renderEntry: paths.renderEntry,
-        } as Record<string, string>,
+        },
         modules,
       },
       module: {
@@ -339,7 +339,7 @@ const makeWebpackConfig = ({
         level: 'error',
       },
     },
-  ].map(webpackDecorator) as Configuration[];
+  ].map(webpackDecorator);
 };
 
 export default makeWebpackConfig;

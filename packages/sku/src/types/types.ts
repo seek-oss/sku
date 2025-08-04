@@ -504,9 +504,7 @@ export interface WebpackSkuConfig {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
    */
-  dangerouslySetWebpackConfig?: (
-    skuWebpackConfig: Record<string, any>,
-  ) => Record<string, any>;
+  dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
 }
 
 export interface ViteSkuConfig {

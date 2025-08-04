@@ -191,7 +191,7 @@ export const createSkuContext = ({
   const polyfills = skuConfig.polyfills!;
   const webpackDecorator =
     skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
-      ? (config: Record<string, any>): Record<string, any> => config
+      ? <T>(config: T): T => config
       : skuConfig.dangerouslySetWebpackConfig!;
   const jestDecorator = skuConfig.dangerouslySetJestConfig!;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;

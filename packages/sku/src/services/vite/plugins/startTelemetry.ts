@@ -28,7 +28,10 @@ export const startTelemetryPlugin = ({
   },
   configureServer(server) {
     server.ws.on(initialPageLoadEventName, () => {
-      if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+      if (
+        metricsMeasurers.initialPageLoad.isInitialPageLoad &&
+        metricsMeasurers.initialPageLoad.openTab
+      ) {
         const { duration: skuStartDuration } =
           metricsMeasurers.skuStart.measure();
 

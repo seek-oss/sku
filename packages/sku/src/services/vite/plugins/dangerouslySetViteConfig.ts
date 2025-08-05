@@ -5,8 +5,6 @@ export function dangerouslySetViteConfig(skuContext: SkuContext): Plugin {
   return {
     name: 'vite-plugin-dangerously-set-config',
     config:
-      skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
-        ? skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig
-        : undefined,
+      skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig,
   };
 }

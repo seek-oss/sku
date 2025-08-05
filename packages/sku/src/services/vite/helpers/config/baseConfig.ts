@@ -54,10 +54,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
         dependencies: [
           '@apollo/client',
           'lodash',
-          ...(skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
-            ? skuContext.skuConfig
-                .__UNSAFE_EXPERIMENTAL__cjsInteropDependencies || []
-            : []),
+          ...skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
         ],
       }),
       react({

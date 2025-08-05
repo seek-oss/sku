@@ -32,10 +32,11 @@ export default {
   libraryFile: undefined,
   sourceMapsProd: true,
   displayNamesProd: false,
-  dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
+  // Since dangerouslySetWebpackConfig is in a union type, we need to pass the generic type to satisfy type checking.
+  dangerouslySetWebpackConfig: defaultDecorator<any>,
   eslintIgnore: [],
   supportedBrowsers: browserslistConfigSeek,
   cspEnabled: false,

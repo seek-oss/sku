@@ -10,11 +10,7 @@ export type ViteRenderFunction = (
   } & SharedRenderProps,
 ) => Promise<string>;
 
-export type SkuProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => JSX.Element;
+export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
 
 export interface RenderCallbackParams {
   SkuProvider: SkuProvider;

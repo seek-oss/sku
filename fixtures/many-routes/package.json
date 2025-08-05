@@ -9,8 +9,6 @@
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/react": "^16.3.0",
     "dedent": "^1.5.1",
     "sku": "workspace:*"
   },

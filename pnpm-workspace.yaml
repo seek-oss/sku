@@ -31,3 +31,7 @@ publicHoistPattern:
 injectWorkspacePackages: true
 syncInjectedDepsAfterScripts:
   - build
+
+catalog:
+  # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue.
+  jiti: 2.4.2

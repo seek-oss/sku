@@ -1,6 +1,6 @@
 import type { SkuConfig } from 'sku';
 
-import baseConfig from './sku.config.js';
+import baseConfig from './sku.config';
 
 export default {
   ...baseConfig,

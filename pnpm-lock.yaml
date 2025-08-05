@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
   injectWorkspacePackages: true
 
+catalogs:
+  default:
+    jiti:
+      specifier: 2.4.2
+      version: 2.4.2
+
 pnpmfileChecksum: sha256-HyzwrIZmFVJr7kvwhHMEE7NoDGkknMxWww7GMTBFW70=
 
 importers:
@@ -78,7 +84,7 @@ importers:
         specifier: ^9.0.0
         version: 9.1.7
       jiti:
-        specifier: 2.4.2
+        specifier: 'catalog:'
         version: 2.4.2
       lint-staged:
         specifier: ^16.0.0
@@ -1008,7 +1014,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1(jest@30.0.4(@types/node@20.19.9)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6)))
       jiti:
-        specifier: ^2.4.1
+        specifier: 'catalog:'
         version: 2.4.2
       lint-staged:
         specifier: ^16.0.0

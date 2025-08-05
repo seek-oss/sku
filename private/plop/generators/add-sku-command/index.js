@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const programRoot = './packages/sku/src/program/commands';
+const programRoot = '../../packages/sku/src/program/commands';
 
 const getCommandsList = () => {
   const commands = fs.readdirSync(programRoot, {
@@ -9,7 +9,8 @@ const getCommandsList = () => {
   return commands.filter((command) => command !== 'index.ts');
 };
 
-const addSkuCommandGenerator = (plop) => {
+/** @param {import('plop').NodePlopAPI} plop */
+export const addSkuCommandGenerator = (plop) => {
   const subCommands = getCommandsList();
 
   plop.setGenerator('add-sku-command', {
@@ -41,16 +42,14 @@ const addSkuCommandGenerator = (plop) => {
       return [
         {
           type: 'add',
-          templateFile:
-            './plop/generators/add-sku-command/templates/command.hbs',
+          templateFile: './generators/add-sku-command/templates/command.hbs',
           path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }{{commandName}}/{{commandName}}.command.ts`,
         },
         {
           type: 'add',
-          templateFile:
-            './plop/generators/add-sku-command/templates/action.hbs',
+          templateFile: './generators/add-sku-command/templates/action.hbs',
           path: `${programRoot}/${
             data.isSubCommand ? `{{parentCommand}}/commands/` : ''
           }{{commandName}}/{{commandName}}.action.ts`,
@@ -60,7 +59,7 @@ const addSkuCommandGenerator = (plop) => {
               {
                 type: 'add',
                 templateFile:
-                  './plop/generators/add-sku-command/templates/command-index.hbs',
+                  './generators/add-sku-command/templates/command-index.hbs',
                 path: `${programRoot}/{{parentCommand}}/commands/index.ts`,
               },
               {
@@ -98,5 +97,3 @@ const addSkuCommandGenerator = (plop) => {
     },
   });
 };
-
-export default addSkuCommandGenerator;

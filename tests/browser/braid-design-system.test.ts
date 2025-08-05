@@ -68,6 +68,7 @@ describe('braid-design-system', () => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
+          timeout,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -80,6 +81,7 @@ describe('braid-design-system', () => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
+          timeout,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -111,6 +113,7 @@ describe('braid-design-system', () => {
         const app = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
+          timeout,
         });
         expect(app).toMatchSnapshot();
       });
@@ -120,6 +123,7 @@ describe('braid-design-system', () => {
         const app = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
+          timeout,
         });
         expect(app).toMatchSnapshot();
       });

@@ -15,16 +15,19 @@ export const getAppSnapshot = async ({
   warningFilter = () => true,
   expect,
   waitUntil = 'networkidle2',
+  timeout = TEST_TIMEOUT,
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;
   expect: ExpectStatic;
   waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
+  timeout?: number;
 }) => {
   const warnings: string[] = [];
   const errors: string[] = [];
 
   const appPage = await browser.newPage();
+  appPage.setDefaultNavigationTimeout(timeout);
 
   appPage.on('console', (msg) => {
     if (msg.type() === 'warn') {
@@ -53,7 +56,6 @@ export const getAppSnapshot = async ({
 
   try {
     const response = await appPage.goto(url, {
-      timeout: TEST_TIMEOUT,
       waitUntil,
     });
     const sourceHtml = sanitizeHtml((await response?.text()) || '');

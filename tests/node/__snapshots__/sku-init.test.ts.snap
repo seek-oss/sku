@@ -340,7 +340,12 @@ export function NextSteps({ environment }: NextStepsProps) {
 `;
 
 exports[`sku init > should update the pnpm-workspace.yaml 1`] = `
-"configDependencies:
+"packages:
+  - ../../packages/*
+
+configDependencies:
   pnpm-plugin-sku: VERSION_IGNORED
+
+linkWorkspacePackages: true
 "
 `;

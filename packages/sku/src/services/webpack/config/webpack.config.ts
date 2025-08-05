@@ -13,16 +13,16 @@ import MetricsPlugin from './plugins/metrics-plugin/index.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '@/utils/cwd.js';
+import { cwd } from '../../../utils/cwd.js';
 
-import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { getVocabConfig } from '../../vocab/config/vocab.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '@/config/targets.json' with { type: 'json' };
+import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
-import { resolvePolyfills } from '@/utils/resolvePolyfills.js';
+import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
 
 const require = createRequire(import.meta.url);
 

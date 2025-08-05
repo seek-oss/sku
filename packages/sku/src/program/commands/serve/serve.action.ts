@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import exists from '@/utils/exists.js';
+import exists from '../../../utils/exists.js';
 import express from 'express';
 import handler from 'serve-handler';
 import chalk from 'chalk';
@@ -8,19 +8,22 @@ import {
   checkHosts,
   getAppHosts,
   withHostile,
-} from '@/utils/contextUtils/hosts.js';
-import allocatePort from '@/utils/allocatePort.js';
-import { openBrowser } from '@/openBrowser/index.js';
-import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
-import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
-import provider from '@/services/telemetry/index.js';
-import createServer from '@/utils/createServer.js';
+} from '../../../utils/contextUtils/hosts.js';
+import allocatePort from '../../../utils/allocatePort.js';
+import { openBrowser } from '../../../openBrowser/index.js';
+import getSiteForHost from '../../../utils/contextUtils/getSiteForHost.js';
+import { resolveEnvironment } from '../../../utils/contextUtils/resolveEnvironment.js';
+import provider from '../../../services/telemetry/index.js';
+import createServer from '../../../utils/createServer.js';
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} from '@/utils/language-utils.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+} from '../../../utils/language-utils.js';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const serveAction = async ({
   site: preferredSite,

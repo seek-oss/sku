@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export function dangerouslySetViteConfig(skuContext: SkuContext): Plugin {
   return {

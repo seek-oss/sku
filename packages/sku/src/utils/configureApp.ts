@@ -6,28 +6,28 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '@/services/prettier/config/prettierConfig.js';
-import createTSConfig from '@/services/typescript/config/tsconfig.js';
-import { bundleReportFolder } from '@/services/webpack/config/plugins/bundleAnalyzer.js';
+import prettierConfig from '../services/prettier/config/prettierConfig.js';
+import createTSConfig from '../services/typescript/config/tsconfig.js';
+import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} from '@/services/eslint/eslintMigration.js';
+} from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
-import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
+import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 
-import { hasErrorMessage } from '@/utils/error-guards.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { hasErrorMessage } from './error-guards.js';
+import type { SkuContext } from '../context/createSkuContext.js';
 import {
   isAtLeastPnpmV10,
   isAtLeastRecommendedPnpmVersion,
   rootDir,
-} from '@/services/packageManager/packageManager.js';
-import { validatePnpmConfig } from '@/services/packageManager/pnpmConfig.js';
-import { getPnpmConfigDependencies } from '@/services/packageManager/getPnpmConfigDependencies.js';
+} from '../services/packageManager/packageManager.js';
+import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
+import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 
 const coverageFolder = 'coverage';
 

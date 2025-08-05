@@ -1,5 +1,5 @@
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const buildAction = async ({
   stats,

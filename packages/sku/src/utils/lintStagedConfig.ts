@@ -1,8 +1,8 @@
 import {
   isYarn,
   getCommand,
-} from '@/services/packageManager/packageManager.js';
-import { lintExtensions } from '@/services/eslint/lint.js';
+} from '../services/packageManager/packageManager.js';
+import { lintExtensions } from '../services/eslint/lint.js';
 import type { Configuration } from 'lint-staged';
 
 const config: Configuration = {

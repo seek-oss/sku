@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 import { suggestScript } from '../suggestScript.js';
 import { hasErrorCode } from '../error-guards.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../context/createSkuContext.js';
 import { promisify } from 'node:util';
 import { set, get } from 'hostile';
 

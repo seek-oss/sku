@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite';
 import js from 'dedent';
-import provider from '@/services/telemetry/index.js';
-import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
+import provider from '../../telemetry/index.js';
+import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 
 const initialPageLoadEventName = 'sku:initialPageLoad' as const;
 

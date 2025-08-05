@@ -25,7 +25,7 @@ import {
 const storybookStartedRegex =
   /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
 
-const timeout = 60_000;
+const timeout = 50_000;
 
 vi.setConfig({
   hookTimeout: timeout + 1000,
@@ -169,11 +169,16 @@ describe('storybook-config', () => {
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
 
-      await waitFor(async () => {
-        globalExpect(storybook.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
-      });
+      await waitFor(
+        async () => {
+          globalExpect(storybook.hasExit()).toMatchObject({
+            exitCode: 0,
+          });
+        },
+        {
+          timeout,
+        },
+      );
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       globalExpect(

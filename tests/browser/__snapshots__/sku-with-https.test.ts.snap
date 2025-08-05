@@ -8,6 +8,17 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
       http-equiv="Content-Security-Policy"
       content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';"
     >
+    <style
+      type="text/css"
+      data-vanilla-extract-inline-dev-css
+    >
+      .styles_root__2vdre50 {
+  display: flex;
+}
+.styles_root__2vdre50 .styles_nested__2vdre51 {
+  font-size: 32px;
+}
+    </style>
     <script type="module">
       import { injectIntoGlobalHook } from "/@react-refresh";
 injectIntoGlobalHook(window);
@@ -63,7 +74,7 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -26,14 +26,25 @@
+@@ -37,14 +37,25 @@
      >
      <script
        type="module"
@@ -91,7 +102,7 @@ POST HYDRATE DIFFS:
    </head>
    <body>
      <div id="app">
-@@ -44,7 +55,7 @@
+@@ -55,7 +66,7 @@
        >
        <div class="styles_root__2vdre50">
          <div class="styles_nested__2vdre51">

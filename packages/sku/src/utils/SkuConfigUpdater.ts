@@ -32,8 +32,6 @@ import prettierConfig from '../services/prettier/config/prettierConfig.js';
 
 import type { SkuConfig, CompleteSkuConfig } from '../types/types.js';
 
-type AllSkuConfigKeys = keyof CompleteSkuConfig;
-
 type ProxifiedSkuConfig = ProxifiedObject<SkuConfig>;
 type EsmConfig = { type: 'esm'; configAst: ProxifiedSkuConfig };
 type EsmNonLiteralConfig = {
@@ -148,7 +146,7 @@ export class SkuConfigUpdater {
    *
    * This method does not write the changes to the file system. Use `commitConfig` to do that.
    */
-  upsertConfig<T extends AllSkuConfigKeys>({
+  upsertConfig<T extends keyof CompleteSkuConfig>({
     property,
     value,
   }: {

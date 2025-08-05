@@ -14,7 +14,7 @@ export const getAppSnapshot = async ({
   url,
   warningFilter = () => true,
   expect,
-  waitUntil = 'networkidle2',
+  waitUntil = 'networkidle0',
   timeout = TEST_TIMEOUT,
 }: {
   url: string;

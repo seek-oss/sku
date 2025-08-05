@@ -21,7 +21,10 @@ const clientEntry = require.resolve('../entries/vite-client.js');
 export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
-    if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+    if (
+      metricsMeasurers.initialPageLoad.isInitialPageLoad &&
+      metricsMeasurers.initialPageLoad.openTab
+    ) {
       metricsMeasurers.initialPageLoad.mark();
     }
     // We need to start loading the devMiddleware before Vite's middleware runs.

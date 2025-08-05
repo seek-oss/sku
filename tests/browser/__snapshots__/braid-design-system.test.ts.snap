@@ -20,8 +20,8 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
       <body>
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
-            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1sh8lan0 ndjjoi10 ndjjoi13"><span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">Hello <!-- -->jobStreet<!-- --> <span class="_14h31gj0 _7n536n58"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37"><div class="_14h31gj0 _7n536n5g"><div class="_14h31gj0 _7n536n5c _7n536nic"><input class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2" type="checkbox" id="id_1" aria-checked="false"/><div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34"><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23"><div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje"><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z"></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v"></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45"><div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje"><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_14h31gj0 _7n536nb8 _7n536ni8"><div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6"><label class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0" for="id_1"><span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">This is a checkbox</span></label></div></div></div></div></div><div class="_14h31gj0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
+          </style><div class="_1fmskxf0 co4djb10 co4djb13"><span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">Hello <!-- -->jobStreet<!-- --> <span class="yw2qws0 _1hjdb9v58"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37"><div class="yw2qws0 _1hjdb9v5g"><div class="yw2qws0 _1hjdb9v5c _1hjdb9vic"><input class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2" type="checkbox" id="id_1" aria-checked="false"/><div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34"><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23"><div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe"><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z"></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v"></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45"><div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe"><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8"><div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6"><label class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0" for="id_1"><span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">This is a checkbox</span></label></div></div></div></div></div><div class="yw2qws0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script type="module" src="/vite-client-BevCe62w.js" ></script>
       </body>
@@ -45,8 +45,8 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
       <body>
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
-            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1sh8lan0 ndjjoi10 ndjjoi13"><span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">Hello <!-- -->seekAnz<!-- --> <span class="_14h31gj0 _7n536n58"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37"><div class="_14h31gj0 _7n536n5g"><div class="_14h31gj0 _7n536n5c _7n536nic"><input class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2" type="checkbox" id="id_1" aria-checked="false"/><div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34"><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23"><div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje"><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z"></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v"></span><span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45"><div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje"><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_14h31gj0 _7n536nb8 _7n536ni8"><div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6"><label class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0" for="id_1"><span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">This is a checkbox</span></label></div></div></div></div></div><div class="_14h31gj0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
+          </style><div class="_1fmskxf0 co4djb10 co4djb13"><span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">Hello <!-- -->seekAnz<!-- --> <span class="yw2qws0 _1hjdb9v58"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37"><div class="yw2qws0 _1hjdb9v5g"><div class="yw2qws0 _1hjdb9v5c _1hjdb9vic"><input class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2" type="checkbox" id="id_1" aria-checked="false"/><div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34"><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23"><div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe"><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z"></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v"></span><span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45"><div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe"><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8"><div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6"><label class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0" for="id_1"><span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">This is a checkbox</span></label></div></div></div></div></div><div class="yw2qws0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script type="module" src="/vite-client-BevCe62w.js" ></script>
       </body>
@@ -2994,13 +2994,13 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="_1sh8lan0 ndjjoi10 ndjjoi13">
-        <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
+      <div class="_1fmskxf0 co4djb10 co4djb13">
+        <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
           Hello
           jobStreet
-          <span class="_14h31gj0 _7n536n58">
+          <span class="yw2qws0 _1hjdb9v58">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -3009,7 +3009,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
               fill="currentColor"
               width="16"
               height="16"
-              class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434"
+              class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -3017,19 +3017,19 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
             </svg>
           </span>
         </span>
-        <div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37">
-          <div class="_14h31gj0 _7n536n5g">
-            <div class="_14h31gj0 _7n536n5c _7n536nic">
+        <div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37">
+          <div class="yw2qws0 _1hjdb9v5g">
+            <div class="yw2qws0 _1hjdb9v5c _1hjdb9vic">
               <input
-                class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2"
+                class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34">
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23">
-                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+              <div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23">
+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3038,14 +3038,14 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3054,7 +3054,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3063,13 +3063,13 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                     </div>
                   </div>
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z">
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v">
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45">
-                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45">
+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3078,14 +3078,14 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3094,7 +3094,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3104,13 +3104,13 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                   </div>
                 </span>
               </div>
-              <div class="_14h31gj0 _7n536nb8 _7n536ni8">
-                <div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6">
+              <div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8">
+                <div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6">
                   <label
-                    class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0"
+                    class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0"
                     for="id_1"
                   >
-                    <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
+                    <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
                       This is a checkbox
                     </span>
                   </label>
@@ -3119,7 +3119,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
             </div>
           </div>
         </div>
-        <div class="_14h31gj0 inn18b0">
+        <div class="yw2qws0 inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3142,161 +3142,12 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -27,13 +27,12 @@
-     <div id="app">
-       <style type="text/css">
-         html,body{margin:0;padding:0;background:#fff}
--            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
-+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
-       </style>
--      <div class="_1sh8lan0 ndjjoi10 ndjjoi13">
--        <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
--          Hello
--          jobStreet
--          <span class="_14h31gj0 _7n536n58">
-+      <div class="_1fmskxf0 co4djb10 co4djb13">
-+        <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
-+          Hello jobStreet
-+          <span class="yw2qws0 _1hjdb9v58">
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewbox="0 0 24 24"
-@@ -42,7 +41,7 @@
-               fill="currentColor"
-               width="16"
-               height="16"
--              class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434"
-+              class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4"
-               aria-hidden="true"
-             >
-               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
-@@ -50,19 +49,19 @@
-             </svg>
-           </span>
-         </span>
--        <div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37">
--          <div class="_14h31gj0 _7n536n5g">
--            <div class="_14h31gj0 _7n536n5c _7n536nic">
-+        <div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37">
-+          <div class="yw2qws0 _1hjdb9v5g">
-+            <div class="yw2qws0 _1hjdb9v5c _1hjdb9vic">
-               <input
--                class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2"
--                type="checkbox"
-+                class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2"
-                 id="id_1"
-                 aria-checked="false"
-+                type="checkbox"
-               >
--              <div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34">
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23">
--                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+              <div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23">
-+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -71,14 +70,14 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
-                         aria-hidden="true"
-                       >
-                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                         </path>
-                       </svg>
-                     </div>
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -87,7 +86,7 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
-                         aria-hidden="true"
-                       >
-                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-@@ -96,13 +95,13 @@
-                     </div>
-                   </div>
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z">
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v">
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45">
--                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45">
-+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -111,14 +110,14 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
-                         aria-hidden="true"
-                       >
-                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                         </path>
-                       </svg>
-                     </div>
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -127,7 +126,7 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
-                         aria-hidden="true"
-                       >
-                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-@@ -137,13 +136,13 @@
-                   </div>
-                 </span>
-               </div>
--              <div class="_14h31gj0 _7n536nb8 _7n536ni8">
--                <div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6">
-+              <div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8">
-+                <div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6">
-                   <label
--                    class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0"
-+                    class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0"
-                     for="id_1"
-                   >
--                    <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
-+                    <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
-                       This is a checkbox
-                     </span>
-                   </label>
-@@ -152,9 +151,8 @@
-             </div>
-           </div>
+@@ -154,7 +154,7 @@
          </div>
--        <div class="_14h31gj0 inn18b0">
--          🧁 Vanilla content
+         <div class="yw2qws0 inn18b0">
+           🧁 Vanilla content
 -          Initial
-+        <div class="yw2qws0 inn18b0">
-+          🧁 Vanilla content Client
++          Client
          </div>
        </div>
      </div>
@@ -3332,13 +3183,13 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
     <div id="app">
       <style type="text/css">
         html,body{margin:0;padding:0;background:#fff}
-            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
       </style>
-      <div class="_1sh8lan0 ndjjoi10 ndjjoi13">
-        <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
+      <div class="_1fmskxf0 co4djb10 co4djb13">
+        <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
           Hello
           seekAnz
-          <span class="_14h31gj0 _7n536n58">
+          <span class="yw2qws0 _1hjdb9v58">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewbox="0 0 24 24"
@@ -3347,7 +3198,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
               fill="currentColor"
               width="16"
               height="16"
-              class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434"
+              class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4"
               aria-hidden="true"
             >
               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
@@ -3355,19 +3206,19 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
             </svg>
           </span>
         </span>
-        <div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37">
-          <div class="_14h31gj0 _7n536n5g">
-            <div class="_14h31gj0 _7n536n5c _7n536nic">
+        <div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37">
+          <div class="yw2qws0 _1hjdb9v5g">
+            <div class="yw2qws0 _1hjdb9v5c _1hjdb9vic">
               <input
-                class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2"
+                class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2"
                 type="checkbox"
                 id="id_1"
                 aria-checked="false"
               >
-              <div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34">
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23">
-                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+              <div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23">
+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3376,14 +3227,14 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3392,7 +3243,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3401,13 +3252,13 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                     </div>
                   </div>
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z">
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v">
                 </span>
-                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45">
-                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45">
+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3416,14 +3267,14 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
                         aria-hidden="true"
                       >
                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
                         </path>
                       </svg>
                     </div>
-                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny">
+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewbox="0 0 24 24"
@@ -3432,7 +3283,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                         fill="currentColor"
                         width="16"
                         height="16"
-                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
                         aria-hidden="true"
                       >
                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
@@ -3442,13 +3293,13 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                   </div>
                 </span>
               </div>
-              <div class="_14h31gj0 _7n536nb8 _7n536ni8">
-                <div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6">
+              <div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8">
+                <div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6">
                   <label
-                    class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0"
+                    class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0"
                     for="id_1"
                   >
-                    <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
+                    <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
                       This is a checkbox
                     </span>
                   </label>
@@ -3457,7 +3308,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
             </div>
           </div>
         </div>
-        <div class="_14h31gj0 inn18b0">
+        <div class="yw2qws0 inn18b0">
           🧁 Vanilla content
           Initial
         </div>
@@ -3480,161 +3331,12 @@ POST HYDRATE DIFFS:
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -27,13 +27,12 @@
-     <div id="app">
-       <style type="text/css">
-         html,body{margin:0;padding:0;background:#fff}
--            html._7n536n11,html._7n536n11 body{color-scheme:dark;background:#1C2330}
-+            html._1hjdb9v11,html._1hjdb9v11 body{color-scheme:dark;background:#1C2330}
-       </style>
--      <div class="_1sh8lan0 ndjjoi10 ndjjoi13">
--        <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
--          Hello
--          seekAnz
--          <span class="_14h31gj0 _7n536n58">
-+      <div class="_1fmskxf0 co4djb10 co4djb13">
-+        <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
-+          Hello seekAnz
-+          <span class="yw2qws0 _1hjdb9v58">
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewbox="0 0 24 24"
-@@ -42,7 +41,7 @@
-               fill="currentColor"
-               width="16"
-               height="16"
--              class="_14h31gj0 _11pks830 _7n536n58 _7n536n5g bsio430 bsio432 bsio433 bsio434"
-+              class="yw2qws0 v2pdba0 _1hjdb9v58 _1hjdb9v5g _1ltfiyk0 _1ltfiyk2 _1ltfiyk3 _1ltfiyk4"
-               aria-hidden="true"
-             >
-               <path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z">
-@@ -50,19 +49,19 @@
-             </svg>
-           </span>
-         </span>
--        <div class="_14h31gj0 _7n536n8s _7n536n7o _7n536nb0 _7n536n9w _7n536n5g _7n536n6c _7n536nic _7n536n4k _7n536n4d ndjjoi10 ndjjoi13 _7n536n34 _7n536n37">
--          <div class="_14h31gj0 _7n536n5g">
--            <div class="_14h31gj0 _7n536n5c _7n536nic">
-+        <div class="yw2qws0 _1hjdb9v8s _1hjdb9v7o _1hjdb9vb0 _1hjdb9v9w _1hjdb9v5g _1hjdb9v6c _1hjdb9vic _1hjdb9v4k _1hjdb9v4d co4djb10 co4djb13 _1hjdb9v34 _1hjdb9v37">
-+          <div class="yw2qws0 _1hjdb9v5g">
-+            <div class="yw2qws0 _1hjdb9v5c _1hjdb9vic">
-               <input
--                class="_14h31gj0 _14h31gje _14h31gj9 _14h31gj1 _14h31gj6 _14h31gj7 _14h31gj8 _14h31gjd _7n536n5k _7n536n9 _7n536ni _7n536n7 _1kypfdj4 _1kypfdj2"
--                type="checkbox"
-+                class="yw2qws0 yw2qwse yw2qws9 yw2qws1 yw2qws6 yw2qws7 yw2qws8 yw2qwsd _1hjdb9v5k _1hjdb9v9 _1hjdb9vi _1hjdb9v7 _1b4ltjx4 _1b4ltjx2"
-                 id="id_1"
-                 aria-checked="false"
-+                type="checkbox"
-               >
--              <div class="_14h31gj0 _7n536ni0 _7n536n5g _7n536n68 _1kypfdj5 _1kypfdj2 ndjjoi10  _7n536n34">
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdj9 ndjjoi11 ndjjoi13 _7n536n22 _7n536n23">
--                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+              <div class="yw2qws0 _1hjdb9vi0 _1hjdb9v5g _1hjdb9v68 _1b4ltjx5 _1b4ltjx2 co4djb10  _1hjdb9v34">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjx9 co4djb11 co4djb13 _1hjdb9v22 _1hjdb9v23">
-+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -71,14 +70,14 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
-                         aria-hidden="true"
-                       >
-                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                         </path>
-                       </svg>
-                     </div>
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -87,7 +86,7 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1t"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1t"
-                         aria-hidden="true"
-                       >
-                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-@@ -96,13 +95,13 @@
-                     </div>
-                   </div>
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n3y _7n536n3z">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v3y _1hjdb9v3z">
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _7n536n3q _7n536n3v">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1hjdb9v3q _1hjdb9v3v">
-                 </span>
--                <span class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536nj _7n536n68 _7n536ny _7n536n7 _1kypfdjb _7n536n40 _7n536n45">
--                  <div class="_14h31gj0 _7n536no _7n536ny _7n536n5g _1kypfdjc _1kypfdje">
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny _7n536n7">
-+                <span class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vj _1hjdb9v68 _1hjdb9vy _1hjdb9v7 _1b4ltjxb _1hjdb9v40 _1hjdb9v45">
-+                  <div class="yw2qws0 _1hjdb9vo _1hjdb9vy _1hjdb9v5g _1b4ltjxc _1b4ltjxe">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy _1hjdb9v7">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -111,14 +110,14 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
-                         aria-hidden="true"
-                       >
-                         <path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z">
-                         </path>
-                       </svg>
-                     </div>
--                    <div class="_14h31gj0 _7n536nk _7n536nl _7n536nm _7n536nn _7n536n5k _7n536ny">
-+                    <div class="yw2qws0 _1hjdb9vk _1hjdb9vl _1hjdb9vm _1hjdb9vn _1hjdb9v5k _1hjdb9vy">
-                       <svg
-                         xmlns="http://www.w3.org/2000/svg"
-                         viewbox="0 0 24 24"
-@@ -127,7 +126,7 @@
-                         fill="currentColor"
-                         width="16"
-                         height="16"
--                        class="_14h31gj0 _7n536nq _7n536no _7n536n50 ndjjoi1s"
-+                        class="yw2qws0 _1hjdb9vq _1hjdb9vo _1hjdb9v50 co4djb1s"
-                         aria-hidden="true"
-                       >
-                         <path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z">
-@@ -137,13 +136,13 @@
-                   </div>
-                 </span>
-               </div>
--              <div class="_14h31gj0 _7n536nb8 _7n536ni8">
--                <div class="_14h31gj0 _7n536n5c _1kypfdj2 _1kypfdj6">
-+              <div class="yw2qws0 _1hjdb9vb8 _1hjdb9vi8">
-+                <div class="yw2qws0 _1hjdb9v5c _1b4ltjx2 _1b4ltjx6">
-                   <label
--                    class="_14h31gj0 _7n536n4 _7n536n50 _7n536ni jg3qrj0"
-+                    class="yw2qws0 _1hjdb9v4 _1hjdb9v50 _1hjdb9vi _9705do0"
-                     for="id_1"
-                   >
--                    <span class="_14h31gj0 _7n536n50 ndjjoi0 ndjjoi1 ndjjoi1t ndjjoi9 ndjjoi8 _19n6lle4">
-+                    <span class="yw2qws0 _1hjdb9v50 co4djb0 co4djb1 co4djb1t co4djb9 co4djb8 _1lwixuj4">
-                       This is a checkbox
-                     </span>
-                   </label>
-@@ -152,9 +151,8 @@
-             </div>
-           </div>
+@@ -154,7 +154,7 @@
          </div>
--        <div class="_14h31gj0 inn18b0">
--          🧁 Vanilla content
+         <div class="yw2qws0 inn18b0">
+           🧁 Vanilla content
 -          Initial
-+        <div class="yw2qws0 inn18b0">
-+          🧁 Vanilla content Client
++          Client
          </div>
        </div>
      </div>

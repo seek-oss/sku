@@ -21,7 +21,10 @@ const clientEntry = require.resolve('../entries/vite-client.js');
 export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
-    if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+    if (
+      metricsMeasurers.initialPageLoad.isInitialPageLoad &&
+      metricsMeasurers.initialPageLoad.openTab
+    ) {
       metricsMeasurers.initialPageLoad.mark();
     }
     // We need to start loading the devMiddleware before Vite's middleware runs.
@@ -43,8 +46,10 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
     // Code returned from here will run *after* Vite's middleware. Lazy loading middleware should happen outside (before) this return.
     return async () => {
       log('Configuring server middleware');
+
       server.middlewares.use('/', async (req, res, next) => {
         log('Handling request:', req.url);
+
         // Check that the request is for the index.html file (i.e., a valid route in our app)
         // If we don't check for index.html, the middleware will run for every request, including static assets.
         if (!req.originalUrl || req.url !== '/index.html') {
@@ -63,6 +68,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
             'Internal error occurred. No hostname found when handling middleware. Host header required.',
           );
         }
+
         const site =
           skuContext.sites.find((skuSite) => skuSite.host === hostname) ||
           skuContext.sites[0];
@@ -93,7 +99,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
         try {
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
-          const renderedHtml = await (viteRender as ViteRenderFunction)({
+          let html = await (viteRender as ViteRenderFunction)({
             environment: 'development',
             language,
             route: getRouteWithLanguage(matchingRoute.route, language),
@@ -102,10 +108,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
             clientEntry,
           });
 
-          const transformedHtml = await server.transformIndexHtml(
-            req.url || '/',
-            renderedHtml,
-          );
+          html = await server.transformIndexHtml(req.url || '/', html);
 
           if (skuContext.cspEnabled) {
             const cspHandler = createCSPHandler({
@@ -116,14 +119,11 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
               isDevelopment: process.env.NODE_ENV === 'development',
             });
 
-            const cspHtml = cspHandler.handleHtml(transformedHtml);
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(cspHtml);
-            return;
+            html = cspHandler.handleHtml(html);
           }
 
           res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(transformedHtml);
+          res.end(html);
         } catch (e) {
           // If an error is caught, let vite fix the stracktrace so it maps back to
           // your actual source code.

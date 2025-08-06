@@ -1,14 +1,13 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
 import isCompilePackage from '../utils/isCompilePackage.js';
-import type { SkuConfig } from '../types/types.js';
+import type { CompleteSkuConfig } from '../types/types.js';
 
 const defaultDecorator = <T>(a: T) => a;
 
 export default {
   __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
   __UNSAFE_EXPERIMENTAL__testRunner: 'jest',
-  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
   clientEntry: 'src/client.js',
   renderEntry: 'src/render.js',
   serverEntry: 'src/server.js',
@@ -33,11 +32,11 @@ export default {
   libraryFile: undefined,
   sourceMapsProd: true,
   displayNamesProd: false,
-  dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: defaultDecorator,
+  // Since dangerouslySetWebpackConfig is in a union type, we need to pass the generic type to satisfy type checking.
+  dangerouslySetWebpackConfig: defaultDecorator<any>,
   eslintIgnore: [],
   supportedBrowsers: browserslistConfigSeek,
   cspEnabled: false,
@@ -48,4 +47,6 @@ export default {
   languages: undefined,
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,
-} satisfies SkuConfig;
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
+  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: undefined,
+} satisfies CompleteSkuConfig;

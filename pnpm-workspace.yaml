@@ -32,6 +32,11 @@ injectWorkspacePackages: true
 syncInjectedDepsAfterScripts:
   - build
 
+# Catalogue works, but it does raise warnings on install.
+# @see https://github.com/pnpm/pnpm/issues/9662
 catalog:
   # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue.
   jiti: 2.4.2
+  vite: ^7.0.6
+  '@vanilla-extract/vite-plugin': ^5.1.1
+  '@vocab/vite': ^0.2.3

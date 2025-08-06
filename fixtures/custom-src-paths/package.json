@@ -4,8 +4,8 @@
   "type": "module",
   "dependencies": {
     "dedent": "^1.5.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "scripts": {
     "start": "sku start",
@@ -13,8 +13,8 @@
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
-    "@types/react": "^18.2.3",
-    "@types/react-dom": "^18.2.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

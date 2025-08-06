@@ -1,4 +1,4 @@
-import type { ReactNode, JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';

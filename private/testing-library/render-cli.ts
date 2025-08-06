@@ -3,7 +3,6 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 const require = createRequire(import.meta.url);
-const skuBin = require.resolve('../../packages/sku/bin/bin.js');
 
 type SkuCommand =
   | 'serve'
@@ -17,18 +16,17 @@ type SkuCommand =
   | 'lint'
   | 'test';
 
-const renderCli = async (
-  command: SkuCommand,
-  args: string[] = [],
-  options: Partial<RenderOptions> = {},
-) => render(skuBin, [command, ...args], options);
-
 export const scopeToFixture = (fixtureFolder: string) => {
   const appDir = path.dirname(
-    require.resolve(`../../fixtures/${fixtureFolder}/package.json`),
+    require.resolve(
+      path.join(process.cwd(), `fixtures/${fixtureFolder}/package.json`),
+    ),
   );
 
   const fixturePath = (...paths: string[]) => path.join(appDir, ...paths);
+
+  // Using the fixtures sku binary so that dependencies are resolved according to the fixtures package.json (allowing injected dependencies to work).
+  const skuBin = require.resolve(fixturePath('./node_modules/.bin/sku'));
 
   return {
     /**
@@ -39,10 +37,11 @@ export const scopeToFixture = (fixtureFolder: string) => {
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
-      renderCli(command, args, {
+      render(skuBin, [command, ...args], {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
       }),
+
     /**
      * Runs a `node` command scoped to the fixture folder.
      */

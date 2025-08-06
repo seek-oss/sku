@@ -1,23 +1,23 @@
 {
-  "name": "@sku-fixtures/display-names-prod",
+  "name": "@sku-fixtures/react-18",
   "private": true,
   "type": "module",
   "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "scripts": {
     "start": "sku start",
     "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
     "build": "sku build",
-    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts",
-    "serve": "sku serve"
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "sku": "workspace:*"
+    "dedent": "^1.5.1",
+    "sku": "workspace:*",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1"
   },
   "skuSkipValidatePeerDeps": true
 }

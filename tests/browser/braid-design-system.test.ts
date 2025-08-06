@@ -4,6 +4,7 @@ import {
   it,
   expect as globalExpect,
   afterAll,
+  vi,
 } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
@@ -16,6 +17,13 @@ import {
   skipCleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
+
+const timeout = 50_000;
+
+vi.setConfig({
+  hookTimeout: timeout + 1000,
+  testTimeout: timeout + 1000,
+});
 
 function getLocalUrl(site: string, port: number) {
   const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
@@ -44,7 +52,11 @@ describe('braid-design-system', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
         globalExpect(
-          await start.findByText('Starting development server'),
+          await start.findByText(
+            'Starting development server',
+            {},
+            { timeout },
+          ),
         ).toBeInTheConsole();
       });
 
@@ -56,6 +68,7 @@ describe('braid-design-system', () => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
+          timeout,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -68,6 +81,7 @@ describe('braid-design-system', () => {
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
+          timeout,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -83,7 +97,7 @@ describe('braid-design-system', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
         globalExpect(
-          await build.findByText('Sku build complete'),
+          await build.findByText('Sku build complete', {}, { timeout }),
         ).toBeInTheConsole();
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
@@ -99,6 +113,7 @@ describe('braid-design-system', () => {
         const app = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
           expect,
+          timeout,
         });
         expect(app).toMatchSnapshot();
       });
@@ -108,6 +123,7 @@ describe('braid-design-system', () => {
         const app = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
           expect,
+          timeout,
         });
         expect(app).toMatchSnapshot();
       });

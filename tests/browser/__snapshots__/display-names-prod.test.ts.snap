@@ -3,7 +3,7 @@
 exports[`display-names-prod > bundler: vite > build > should create build output 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/vite-client-CEKer_RN.js",
+    "/vite-client-8QWWB4Jk.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -79,19 +79,19 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-CEKer_RN.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-CEKer_RN.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-8QWWB4Jk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-8QWWB4Jk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`display-names-prod > bundler: webpack > build > should create build output 1`] = `
 {
-  "7-4274d242a3d5e5313473.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "7-4274d242a3d5e5313473.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "767-d815cd51ea3f357594ec.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "767-d815cd51ea3f357594ec.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/runtime-980fb1ffe39d4de310ac.js",
-    "/7-4274d242a3d5e5313473.js",
-    "/main-c715accbc81524045460.js",
+    "/767-d815cd51ea3f357594ec.js",
+    "/main-8e262f9398b6689c1fb1.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -205,8 +205,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-c715accbc81524045460.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-c715accbc81524045460.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8e262f9398b6689c1fb1.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-8e262f9398b6689c1fb1.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-980fb1ffe39d4de310ac.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-980fb1ffe39d4de310ac.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

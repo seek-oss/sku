@@ -1,17 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`source-maps > bundler vite > sourceMapsProd false > should generate the expected files 1`] = `
-{
-  "index.html": SCRIPTS: [
-    "/static/source-maps/vite-client-DcM1ITlA.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`react-18 > bundler vite > build > should create valid app 1`] = `
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
-      hello-world
+      React 18
     </title>
     <meta
       name="viewport"
@@ -19,83 +14,33 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link
       rel="modulepreload"
-      href="SCRIPTS[0]"
+      href="/vite-client-BwCn9A6A.js"
       crossorigin
     >
   </head>
   <body>
     <div id="app">
       <div>
-        Hello source maps
+        React 18 app
       </div>
     </div>
     <script
       type="module"
-      src="SCRIPTS[0]"
+      src="/vite-client-BwCn9A6A.js"
     >
     </script>
   </body>
-</html>,
-  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
+</html>
+POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`source-maps > bundler vite > sourceMapsProd true > should generate the expected files 1`] = `
-{
-  "index.html": SCRIPTS: [
-    "/static/source-maps/vite-client-DcM1ITlA.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`react-18 > bundler vite > start > should start a development server 1`] = `
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
-      hello-world
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="SCRIPTS[0]"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello source maps
-      </div>
-    </div>
-    <script
-      type="module"
-      src="SCRIPTS[0]"
-    >
-    </script>
-  </body>
-</html>,
-  "vite-client-DcM1ITlA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DcM1ITlA.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
-`;
-
-exports[`source-maps > bundler webpack > sourceMapsProd false > should generate the expected files 1`] = `
-{
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
-    "/static/source-maps/runtime.js",
-    "/static/source-maps/2.js",
-    "/static/source-maps/main.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      hello-world
+      React 18
     </title>
     <meta
       name="viewport"
@@ -105,25 +50,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[1]"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[2]"
+      href="/main.js"
     >
   </head>
   <body>
     <div id="app">
       <div>
-        Hello source maps
+        React 18 app
       </div>
     </div>
     <script
@@ -141,44 +86,33 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[1]"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[2]"
+      src="/main.js"
     >
     </script>
   </body>
-</html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
+</html>
+POST HYDRATE DIFFS: NO DIFF
 `;
 
-exports[`source-maps > bundler webpack > sourceMapsProd true > should generate the expected files 1`] = `
-{
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
-    "/static/source-maps/runtime.js",
-    "/static/source-maps/2.js",
-    "/static/source-maps/main.js",
-  ]
-CSS: []
-SOURCE HTML: <!DOCTYPE html>
+exports[`react-18 > bundler webpack > build > should create valid app 1`] = `
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>
-      hello-world
+      React 18
     </title>
     <meta
       name="viewport"
@@ -188,25 +122,25 @@ SOURCE HTML: <!DOCTYPE html>
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[0]"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[1]"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="SCRIPTS[2]"
+      href="/main.js"
     >
   </head>
   <body>
     <div id="app">
       <div>
-        Hello source maps
+        React 18 app
       </div>
     </div>
     <script
@@ -224,26 +158,94 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[0]"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[1]"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="SCRIPTS[2]"
+      src="/main.js"
     >
     </script>
   </body>
-</html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-}
+</html>
+POST HYDRATE DIFFS: NO DIFF
+`;
+
+exports[`react-18 > bundler webpack > start > should start a development server 1`] = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      React 18
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        React 18 app
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>
+POST HYDRATE DIFFS: NO DIFF
 `;

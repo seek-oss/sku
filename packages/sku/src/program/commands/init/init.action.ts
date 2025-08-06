@@ -205,16 +205,15 @@ export const initAction = async (
     }),
   );
 
-  // TODO: Remove versions from react deps once we support React 19
-  const deps = ['braid-design-system', 'react@^18.3.1', 'react-dom@^18.3.1'];
+  const deps = ['braid-design-system', 'react', 'react-dom'];
 
   const devDeps = [
     '@vanilla-extract/css',
     // Specify an exact version so running `sku init` with a snapshot installs the snapshot version
     // instead of the latest version.
     `sku@${skuPackageJson.version}`,
-    '@types/react@^18.3.12',
-    '@types/react-dom@^18.3.1',
+    '@types/react',
+    '@types/react-dom',
   ];
 
   console.log(

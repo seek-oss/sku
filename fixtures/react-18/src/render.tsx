@@ -1,12 +1,11 @@
 import html from 'dedent';
-import { renderToString } from 'react-dom/server';
 import type { Render } from 'sku';
 
 import { App } from './App.tsx';
 
 export default {
-  renderApp: ({ SkuProvider }) =>
-    renderToString(
+  renderApp: ({ SkuProvider, renderToStringAsync }) =>
+    renderToStringAsync(
       <SkuProvider>
         <App />
       </SkuProvider>,
@@ -16,7 +15,7 @@ export default {
     <html>
       <head>
         <meta charset="UTF-8" />
-        <title>polyfill</title>
+        <title>React 18</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${headTags}
       </head>

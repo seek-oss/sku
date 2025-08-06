@@ -3,26 +3,42 @@ import { createRequire } from 'node:module';
 import { getAddCommand } from '../packageManager/packageManager.js';
 import banner from '../../utils/banners/banner.js';
 
+import _debug from 'debug';
+
 const require = createRequire(import.meta.url);
 
-function noop() {}
+const debug = _debug('sku:telemetry');
+const noopDebug =
+  (functionName: string) =>
+  (...args: unknown[]) => {
+    debug("noop telemetry call '%s' with data: %O", functionName, args);
+  };
 
+type MetricName =
+  | 'build'
+  | 'serve'
+  | 'setup_hosts'
+  | 'start.webpack.initial'
+  | 'start.webpack.rebuild'
+  | 'certificate.generate'
+  | 'duplicate_compile_package'
+  | 'peer_dep_version_mismatch';
 type TagMap = Record<string, string | number | boolean>;
 
 interface TelemetryProvider {
-  count: (path: string, tagMap?: TagMap, increment?: number) => void;
-  timing: (path: string, duration: number, tagMap?: TagMap) => void;
-  close: () => Promise<void>;
-  gauge: (path: string, duration: number, tagMap?: TagMap) => void;
+  count: (metricName: MetricName, tagMap?: TagMap, increment?: number) => void;
+  timing: (metricName: MetricName, duration: number, tagMap?: TagMap) => void;
+  gauge: (metricName: MetricName, duration: number, tagMap?: TagMap) => void;
   addGlobalTags: (tagMap: TagMap) => void;
+  close: () => Promise<void>;
   isRealProvider: boolean;
 }
 
 let provider: TelemetryProvider = {
-  count: noop,
-  timing: noop,
-  addGlobalTags: noop,
-  gauge: noop,
+  count: noopDebug('count'),
+  timing: noopDebug('timing'),
+  gauge: noopDebug('gauge'),
+  addGlobalTags: noopDebug('addGlobalTags'),
   close: () => Promise.resolve(),
   isRealProvider: false,
 };
@@ -31,11 +47,13 @@ try {
   if (process.env.SKU_TELEMETRY !== 'false') {
     // Consumers install this private dependency
     // eslint-disable-next-line import-x/no-unresolved
-    const realProvider = require('@seek/sku-telemetry').default({});
+    const realProvider = require('@seek/sku-telemetry').default(
+      {},
+    ) as TelemetryProvider;
 
     // For backwards compat with older versions of @seek/sku-telemetry
     if (typeof realProvider.gauge !== 'function') {
-      realProvider.gauge = noop;
+      realProvider.gauge = noopDebug('gauge');
     }
 
     provider = realProvider;
@@ -43,6 +61,10 @@ try {
     provider.isRealProvider = true;
   }
 } catch {
+  debug(
+    '@seek/sku-telemetry not installed, falling back to noop telemetry provider',
+  );
+
   const addCommand = getAddCommand({
     deps: ['@seek/sku-telemetry'],
     type: 'dev',

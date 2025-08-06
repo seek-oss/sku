@@ -162,7 +162,9 @@ const makeWebpackConfig = ({
         emitOnErrors: isProductionBuild,
       },
       resolve: {
-        alias: { __sku_alias__clientEntry: paths.clientEntry },
+        alias: {
+          __sku_alias__clientEntry: paths.clientEntry,
+        },
         modules,
       },
       module: {
@@ -295,7 +297,9 @@ const makeWebpackConfig = ({
         nodeEnv: process.env.NODE_ENV,
       },
       resolve: {
-        alias: { __sku_alias__renderEntry: paths.renderEntry },
+        alias: {
+          __sku_alias__renderEntry: paths.renderEntry,
+        },
         modules,
       },
       module: {

@@ -1,5 +1,6 @@
 import html from 'dedent';
 import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
 
 import { App } from './App.tsx';
 
@@ -25,4 +26,4 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;

@@ -1,6 +1,7 @@
-const programRoot = './packages/codemod/src/';
+const codemodRoot = '../../packages/codemod/src/';
 
-const addSkuCodemodGenerator = (plop) => {
+/** @param {import('plop').NodePlopAPI} plop */
+export const addSkuCodemodGenerator = (plop) => {
   plop.setGenerator('add-sku-codemod', {
     description: 'Create a new codemod for sku',
     prompts: [
@@ -18,28 +19,27 @@ const addSkuCodemodGenerator = (plop) => {
     actions: [
       {
         type: 'add',
-        templateFile:
-          './plop/generators/add-sku-codemod/templates/transform.hbs',
-        path: `${programRoot}/codemods/{{codemodName}}/{{codemodName}}.ts`,
+        templateFile: './generators/add-sku-codemod/templates/transform.hbs',
+        path: `${codemodRoot}/codemods/{{codemodName}}/{{codemodName}}.ts`,
       },
       {
         type: 'add',
-        templateFile: './plop/generators/add-sku-codemod/templates/test.hbs',
-        path: `${programRoot}/codemods/{{codemodName}}/__tests__/{{codemodName}}.test.ts`,
+        templateFile: './generators/add-sku-codemod/templates/test.hbs',
+        path: `${codemodRoot}/codemods/{{codemodName}}/__tests__/{{codemodName}}.test.ts`,
       },
       {
         type: 'add',
         template: '// INPUT',
-        path: `${programRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.input.ts`,
+        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.input.ts`,
       },
       {
         type: 'add',
         template: '// OUTPUT',
-        path: `${programRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.output.ts`,
+        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.output.ts`,
       },
       {
         type: 'modify',
-        path: `${programRoot}/utils/constants.ts`,
+        path: `${codemodRoot}/utils/constants.ts`,
         pattern: /(\/\* \[add-sku-codemod-generator: codemod] \*\/)/g,
         template: `{
     description: '{{description}}',
@@ -49,5 +49,3 @@ const addSkuCodemodGenerator = (plop) => {
     ],
   });
 };
-
-export default addSkuCodemodGenerator;

@@ -14,7 +14,7 @@ exports[`translations > bundler vite > should render en 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/vite-client-DX4HpkjP.js"
+      href="/vite-client-79htCCWk.js"
       crossorigin
     >
     <link
@@ -43,7 +43,7 @@ exports[`translations > bundler vite > should render en 1`] = `
     </script>
     <script
       type="module"
-      src="/vite-client-DX4HpkjP.js"
+      src="/vite-client-79htCCWk.js"
     >
     </script>
   </body>
@@ -78,7 +78,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
     >
     <link
       rel="modulepreload"
-      href="/vite-client-DX4HpkjP.js"
+      href="/vite-client-79htCCWk.js"
       crossorigin
     >
     <link
@@ -107,7 +107,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
     </script>
     <script
       type="module"
-      src="/vite-client-DX4HpkjP.js"
+      src="/vite-client-79htCCWk.js"
     >
     </script>
   </body>
@@ -142,7 +142,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/vite-client-DX4HpkjP.js"
+      href="/vite-client-79htCCWk.js"
       crossorigin
     >
     <link
@@ -171,7 +171,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
     </script>
     <script
       type="module"
-      src="/vite-client-DX4HpkjP.js"
+      src="/vite-client-79htCCWk.js"
     >
     </script>
   </body>
@@ -206,7 +206,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/vite-client-DX4HpkjP.js"
+      href="/vite-client-79htCCWk.js"
       crossorigin
     >
     <link
@@ -235,7 +235,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
     </script>
     <script
       type="module"
-      src="/vite-client-DX4HpkjP.js"
+      src="/vite-client-79htCCWk.js"
     >
     </script>
   </body>

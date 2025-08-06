@@ -323,7 +323,7 @@ An array of custom path alias mappings for module resolution. Each object maps a
 
 When using the `vite` bundler, sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
 
-**Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` and `srcPaths` configurations used in Webpack.
+**Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` configuration used in Webpack.
 
 **Example:**
 

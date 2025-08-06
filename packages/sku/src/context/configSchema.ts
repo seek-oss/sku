@@ -194,4 +194,12 @@ export default validator.compile({
   externalizeNodeModules: {
     type: 'boolean',
   },
+  pathAliases: {
+    type: 'array',
+    items: {
+      type: 'object',
+      minProps: 1,
+    },
+    optional: true,
+  },
 });

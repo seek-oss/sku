@@ -97,6 +97,22 @@ export const createSkuContext = ({
     process.exit(1);
   }
 
+  // Validate pathAliases destinations don't contain node_modules
+  if (skuConfig.pathAliases) {
+    for (const aliasObj of skuConfig.pathAliases) {
+      for (const [alias, destination] of Object.entries(aliasObj)) {
+        if (destination.match(/(?:^|\/)node_modules(?:\/|$)/)) {
+          console.log(
+            chalk.red(
+              `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
+            ),
+          );
+          process.exit(1);
+        }
+      }
+    }
+  }
+
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
     typeof route === 'string' ? { route } : route;
 
@@ -208,6 +224,28 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
+  // Generate TypeScript paths for Vite pathAliases
+  const tsPaths =
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
+      ? (() => {
+          const paths: Record<string, string[]> = {
+            // Automatic src/* alias for Vite
+            'src/*': ['./src/*'],
+          };
+
+          // Add user-defined path aliases
+          if (skuConfig.pathAliases) {
+            for (const aliasObj of skuConfig.pathAliases) {
+              for (const [alias, destination] of Object.entries(aliasObj)) {
+                paths[alias] = [destination];
+              }
+            }
+          }
+
+          return paths;
+        })()
+      : undefined;
+
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
     testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
@@ -226,6 +264,7 @@ export const createSkuContext = ({
     eslintDecorator,
     tsconfigDecorator,
     eslintIgnore,
+    tsPaths,
     routes,
     environments,
     supportedBrowsers,

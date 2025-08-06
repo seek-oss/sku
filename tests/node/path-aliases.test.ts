@@ -16,45 +16,51 @@ describe('pathAliases', () => {
       });
     });
 
-    it('should generate TypeScript paths configuration with pathAliases', async () => {
+    it('should generate TypeScript paths configuration with pathAliases', async ({
+      expect,
+    }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);
 
-      globalExpect(tsconfig.compilerOptions.paths).toEqual({
+      expect(tsconfig.compilerOptions.paths).toEqual({
         'src/*': ['./src/*'],
         '@components/*': ['./src/components/*'],
         '@utils/*': ['./src/utils/*'],
       });
     });
 
-    it('should always include automatic src/* alias for Vite', async () => {
+    it('should always include automatic src/* alias for Vite', async ({
+      expect,
+    }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);
 
-      globalExpect(tsconfig.compilerOptions.paths).toHaveProperty('src/*');
-      globalExpect(tsconfig.compilerOptions.paths['src/*']).toEqual([
-        './src/*',
-      ]);
+      expect(tsconfig.compilerOptions.paths).toHaveProperty('src/*');
+      expect(tsconfig.compilerOptions.paths['src/*']).toEqual(['./src/*']);
     });
 
-    it('should preserve existing baseUrl behavior alongside paths', async () => {
+    it('should preserve existing baseUrl behavior alongside paths', async ({
+      expect,
+    }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);
 
-      globalExpect(tsconfig.compilerOptions.baseUrl).toBeDefined();
-      globalExpect(tsconfig.compilerOptions.paths).toBeDefined();
+      expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
+      expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });
 
   describe('validation', () => {
-    it('should reject pathAliases pointing to node_modules', async () => {
+    it('should reject pathAliases pointing to node_modules', async ({
+      expect,
+    }) => {
       const configure = await sku('configure', ['--config=sku.config.bad.ts']);
 
       await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 1 });
+        expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
       });
     });
   });

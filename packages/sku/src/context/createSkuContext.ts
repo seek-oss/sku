@@ -228,7 +228,7 @@ export const createSkuContext = ({
   const tsPaths =
     skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
       ? (() => {
-          const paths: Record<string, string[]> = {
+          const typeScriptPaths: Record<string, string[]> = {
             // Automatic src/* alias for Vite
             'src/*': ['./src/*'],
           };
@@ -237,12 +237,12 @@ export const createSkuContext = ({
           if (skuConfig.pathAliases) {
             for (const aliasObj of skuConfig.pathAliases) {
               for (const [alias, destination] of Object.entries(aliasObj)) {
-                paths[alias] = [destination];
+                typeScriptPaths[alias] = [destination];
               }
             }
           }
 
-          return paths;
+          return typeScriptPaths;
         })()
       : undefined;
 

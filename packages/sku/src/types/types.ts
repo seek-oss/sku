@@ -533,7 +533,7 @@ export interface ViteSkuConfig {
    *
    * @default []
    */
-  pathAliases?: Array<{ [alias: string]: string }>;
+  pathAliases?: Array<Record<string, string>>;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

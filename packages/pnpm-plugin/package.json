@@ -1,6 +1,6 @@
 {
   "name": "pnpm-plugin-sku",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "PNPM config dependency for sku that configures recommended PNPM setting",
   "main": "pnpmfile.cjs",
   "type": "module",

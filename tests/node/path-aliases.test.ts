@@ -41,14 +41,14 @@ describe('pathAliases', () => {
       expect(tsconfig.compilerOptions.paths['src/*']).toEqual(['./src/*']);
     });
 
-    it('should preserve existing baseUrl behavior alongside paths', async ({
+    it('should not include baseUrl when using pathAliases', async ({
       expect,
     }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);
 
-      expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });

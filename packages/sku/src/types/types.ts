@@ -450,12 +450,16 @@ export interface SkuConfigBase {
    * Path alias mappings for module resolution.
    * Each alias maps a pattern to a destination path relative to the project root.
    *
+   * This configuration affects both bundler module resolution and TypeScript's
+   * `paths` configuration in tsconfig.json.
+   *
    * Note: sku provides a default 'src/*' alias that maps to './src/*'.
    * This option allows you to define additional custom aliases.
    *
    * Example: { "components/*": "./src/components/*", "utils/*": "./src/utils/*" }
    *
    * @default { 'src/*': './src/*' }
+   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
    */
   pathAliases?: Record<string, string>;
 }

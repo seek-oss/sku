@@ -102,7 +102,7 @@ export const createSkuContext = ({
     for (const [alias, destination] of Object.entries(
       skuConfig.pathAliases,
     ) as [string, string][]) {
-      if (destination.match(/(?:^|\/)node_modules(?:\/|$)/)) {
+      if (destination.includes('node_modules')) {
         console.log(
           chalk.red(
             `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,

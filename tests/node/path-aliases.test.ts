@@ -61,6 +61,9 @@ describe('pathAliases', () => {
 
       await waitFor(() => {
         expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
+        expect(configure.getStdallStr()).toContain(
+          'Path alias "@bad/*" cannot point to node_modules.',
+        );
       });
     });
   });

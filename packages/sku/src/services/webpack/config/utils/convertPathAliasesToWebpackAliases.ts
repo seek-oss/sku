@@ -4,7 +4,9 @@ import { cwd } from '../../../../utils/cwd.js';
 export const convertPathAliasesToWebpackAliases = (
   pathAliases?: Record<string, string>,
 ): Record<string, string> => {
-  if (!pathAliases) return {};
+  if (!pathAliases) {
+    return {};
+  }
 
   return Object.fromEntries(
     Object.entries(pathAliases).map(([alias, destination]) => {

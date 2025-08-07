@@ -27,10 +27,9 @@ const generateTypeScriptPaths = (
 
   // Add path aliases from config (includes default src/* alias)
   if (pathAliases) {
-    for (const [alias, destination] of Object.entries(pathAliases) as [
-      string,
-      string,
-    ][]) {
+    for (const [alias, destination] of Object.entries(pathAliases) as Array<
+      [string, string]
+    >) {
       typeScriptPaths[alias] = [destination];
     }
   }
@@ -119,7 +118,7 @@ export const createSkuContext = ({
   if (skuConfig.pathAliases) {
     for (const [alias, destination] of Object.entries(
       skuConfig.pathAliases,
-    ) as [string, string][]) {
+    ) as Array<[string, string]>) {
       if (destination.includes('node_modules')) {
         console.log(
           chalk.red(

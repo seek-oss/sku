@@ -242,11 +242,7 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
-  // Generate TypeScript paths for Vite pathAliases
-  const tsPaths =
-    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
-      ? generateTypeScriptPaths(skuConfig.pathAliases)
-      : undefined;
+  const tsPaths = generateTypeScriptPaths(skuConfig.pathAliases);
 
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
@@ -284,6 +280,7 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
+    pathAliases: skuConfig.pathAliases,
   };
 };
 

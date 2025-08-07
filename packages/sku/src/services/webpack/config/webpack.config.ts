@@ -23,6 +23,7 @@ import modules from './resolveModules.js';
 import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
+import { convertPathAliasesToWebpackAliases } from './utils/convertPathAliasesToWebpackAliases.js';
 
 const require = createRequire(import.meta.url);
 
@@ -56,6 +57,7 @@ const makeWebpackConfig = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
+    pathAliases,
   } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -64,6 +66,7 @@ const makeWebpackConfig = ({
   const vocabOptions = getVocabConfig(skuContext);
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
+  const webpackAliases = convertPathAliasesToWebpackAliases(pathAliases);
 
   const skuClientEntry = require.resolve('../entry/client/index.js');
 
@@ -164,6 +167,7 @@ const makeWebpackConfig = ({
       resolve: {
         alias: {
           __sku_alias__clientEntry: paths.clientEntry,
+          ...webpackAliases,
         },
         modules,
       },
@@ -299,6 +303,7 @@ const makeWebpackConfig = ({
       resolve: {
         alias: {
           __sku_alias__renderEntry: paths.renderEntry,
+          ...webpackAliases,
         },
         modules,
       },

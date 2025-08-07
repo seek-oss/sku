@@ -3,7 +3,7 @@
 exports[`display-names-prod > bundler: vite > build > should create build output 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/vite-client-8QWWB4Jk.js",
+    "/vite-client-{hash}.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -79,8 +79,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-8QWWB4Jk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-8QWWB4Jk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

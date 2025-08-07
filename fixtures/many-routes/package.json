@@ -3,8 +3,8 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-router-dom": "^6.0.0"
   },
   "devDependencies": {

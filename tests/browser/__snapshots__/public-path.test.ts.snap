@@ -19,7 +19,7 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     >
     <link
       rel="modulepreload"
-      href="/static/my-app/vite-client-DPLKzYdM.js"
+      href="/static/my-app/vite-client-{hash}.js"
       crossorigin
     >
     <link
@@ -90,7 +90,7 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     </div>
     <script
       type="module"
-      src="/static/my-app/vite-client-DPLKzYdM.js"
+      src="/static/my-app/vite-client-{hash}.js"
     >
     </script>
   </body>
@@ -101,7 +101,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`public path > bundler: vite > build and serve > should build, serve, and create valid app with no unresolved resources 2`] = `
 {
   "index.html": SCRIPTS: [
-    "/static/my-app/vite-client-DPLKzYdM.js",
+    "/static/my-app/vite-client-{hash}.js",
   ]
 CSS: [
     "/static/my-app/vite-client-DnoafMfl.css",
@@ -207,8 +207,6 @@ SOURCE HTML: <!DOCTYPE html>
   "large-image-DeF69wGd.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-LKfC-v5Z.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-PZSzlfBh.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DPLKzYdM.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DPLKzYdM.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-DnoafMfl.css": ._1eysbi80 {
   background-image: url(/static/my-app/large-image-CufAniQw.avif);
   width: 1039px;
@@ -245,6 +243,8 @@ SOURCE HTML: <!DOCTYPE html>
   height: 240px;
 }
 ,
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -281,7 +281,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
       data-chunk="main"
       rel="preload"
       as="script"
-      href="/static/my-app/main.js"
+      href="/static/my-{hash}.js"
     >
   </head>
   <body>
@@ -334,7 +334,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
     <script
       async
       data-chunk="main"
-      src="/static/my-app/main.js"
+      src="/static/my-{hash}.js"
     >
     </script>
   </body>
@@ -396,7 +396,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
   "index.html": SCRIPTS: [
     "/static/my-app/runtime.js",
     "/static/my-app/2.js",
-    "/static/my-app/main.js",
+    "/static/my-{hash}.js",
   ]
 CSS: [
     "/static/my-app/2-4d2434ce6cb595e73b82.css",

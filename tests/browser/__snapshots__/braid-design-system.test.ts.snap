@@ -52,8 +52,6 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
       </body>
     </html>
   ",
-  "vite-client-BevCe62w.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-BevCe62w.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-UQg7MwHG.css": .yw2qws0 {
   margin: 0;
   padding: 0;
@@ -2961,6 +2959,8 @@ html._1hjdb9v11 ._1b4ltjxd {
   padding: 100px;
 }
 ,
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -2983,7 +2983,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
     >
     <link
       rel="modulepreload"
-      href="/vite-client-BevCe62w.js"
+      href="/vite-client-{hash}.js"
       crossorigin
     >
     <script>
@@ -3133,7 +3133,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
     </script>
     <script
       type="module"
-      src="/vite-client-BevCe62w.js"
+      src="/vite-client-{hash}.js"
     >
     </script>
   </body>
@@ -3172,7 +3172,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
     >
     <link
       rel="modulepreload"
-      href="/vite-client-BevCe62w.js"
+      href="/vite-client-{hash}.js"
       crossorigin
     >
     <script>
@@ -3322,7 +3322,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
     </script>
     <script
       type="module"
-      src="/vite-client-BevCe62w.js"
+      src="/vite-client-{hash}.js"
     >
     </script>
   </body>
@@ -8039,7 +8039,7 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+      src="{cwd}/node_modules/.pnpm/{package}/node_modules/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
     <script
@@ -17602,7 +17602,7 @@ window.$RefreshSig$ = () => (type) => type;
     </div>
     <script
       type="module"
-      src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+      src="{cwd}/node_modules/.pnpm/{package}/node_modules/sku/dist/services/vite/entries/vite-client.js"
     >
     </script>
     <script

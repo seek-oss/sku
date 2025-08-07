@@ -3,7 +3,7 @@
 exports[`suspense > bundler vite > build and serve > should generate the expected files 1`] = `
 {
   "production/au/index.html": SCRIPTS: [
-    "/static/suspense/vite-client-CEqnLIhB.js",
+    "/static/suspense/vite-client-{hash}.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -50,8 +50,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-CEqnLIhB.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-CEqnLIhB.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -69,7 +69,7 @@ exports[`suspense > bundler vite > build and serve > should return home page 1`]
     >
     <link
       rel="modulepreload"
-      href="/static/suspense/vite-client-CEqnLIhB.js"
+      href="/static/suspense/vite-client-{hash}.js"
       crossorigin
     >
   </head>
@@ -95,7 +95,7 @@ exports[`suspense > bundler vite > build and serve > should return home page 1`]
     </script>
     <script
       type="module"
-      src="/static/suspense/vite-client-CEqnLIhB.js"
+      src="/static/suspense/vite-client-{hash}.js"
     >
     </script>
   </body>

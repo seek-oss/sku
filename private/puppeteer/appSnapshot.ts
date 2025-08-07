@@ -1,14 +1,6 @@
 import type { ExpectStatic } from 'vitest';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
-
-function sanitizeHtml(str: string) {
-  return (
-    str
-      .replaceAll(process.cwd(), '{cwd}')
-      // Sanitize .pnpm paths to avoid test failures on different machines
-      .replaceAll(/\.pnpm\/[^/]+@[^/]+_[^/]+/g, '.pnpm/{package}')
-  );
-}
+import { sanitizeString } from '../test-utils/sanitizeString.ts';
 
 export const getAppSnapshot = async ({
   url,
@@ -58,8 +50,8 @@ export const getAppSnapshot = async ({
     const response = await appPage.goto(url, {
       waitUntil,
     });
-    const sourceHtml = sanitizeHtml((await response?.text()) || '');
-    const clientRenderContent = sanitizeHtml(await appPage.content());
+    const sourceHtml = sanitizeString((await response?.text()) || '');
+    const clientRenderContent = sanitizeString(await appPage.content());
 
     expect(warnings).toEqual([]);
     expect(errors).toEqual([]);

@@ -2,25 +2,25 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent-mB82i4mm.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-mB82i4mm.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-B6pbTWh5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-B6pbTWh5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Details-DGJnH813.css": ._1hpn1da0 {
   color: #00f;
 }
 ,
-  "Home-CtIy4c9G.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Home-CtIy4c9G.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home-D-106MY_.css": .ms22la0 {
   color: red;
 }
 ,
+  "Home-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Home-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Details-B6pbTWh5.js",
-    "/static/place/AsyncComponent-mB82i4mm.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Details-{hash}.js",
+    "/static/place/AsyncComponent-{hash}.js",
   ]
 CSS: [
     "/static/place/Details-DGJnH813.css",
@@ -105,8 +105,8 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Home-CtIy4c9G.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Home-{hash}.js",
   ]
 CSS: [
     "/static/place/Home-D-106MY_.css",
@@ -178,9 +178,9 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Details-B6pbTWh5.js",
-    "/static/place/AsyncComponent-mB82i4mm.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Details-{hash}.js",
+    "/static/place/AsyncComponent-{hash}.js",
   ]
 CSS: [
     "/static/place/Details-DGJnH813.css",
@@ -265,8 +265,8 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Home-CtIy4c9G.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Home-{hash}.js",
   ]
 CSS: [
     "/static/place/Home-D-106MY_.css",
@@ -336,8 +336,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-jm3K3cXX.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-jm3K3cXX.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -374,17 +374,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-jm3K3cXX.js"
+      href="/static/place/vite-client-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Details-B6pbTWh5.js"
+      href="/static/place/Details-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/AsyncComponent-mB82i4mm.js"
+      href="/static/place/AsyncComponent-{hash}.js"
       crossorigin
     >
   </head>
@@ -405,17 +405,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </script>
     <script
       type="module"
-      src="/static/place/AsyncComponent-mB82i4mm.js"
+      src="/static/place/AsyncComponent-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/Details-B6pbTWh5.js"
+      src="/static/place/Details-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-jm3K3cXX.js"
+      src="/static/place/vite-client-{hash}.js"
     >
     </script>
   </body>
@@ -468,12 +468,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-jm3K3cXX.js"
+      href="/static/place/vite-client-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Home-CtIy4c9G.js"
+      href="/static/place/Home-{hash}.js"
       crossorigin
     >
   </head>
@@ -491,12 +491,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
     <script
       type="module"
-      src="/static/place/Home-CtIy4c9G.js"
+      src="/static/place/Home-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-jm3K3cXX.js"
+      src="/static/place/vite-client-{hash}.js"
     >
     </script>
   </body>

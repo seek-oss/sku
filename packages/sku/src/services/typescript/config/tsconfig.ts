@@ -40,7 +40,7 @@ export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {
       jsx: 'react-jsx',
       lib: ['dom', 'dom.iterable', 'es2022'],
       target: 'es2022',
-      ...(rootResolution && !tsPaths
+      ...(rootResolution
         ? {
             baseUrl: cwd(),
           }

@@ -99,16 +99,16 @@ export const createSkuContext = ({
 
   // Validate pathAliases destinations don't contain node_modules
   if (skuConfig.pathAliases) {
-    for (const aliasObj of skuConfig.pathAliases) {
-      for (const [alias, destination] of Object.entries(aliasObj)) {
-        if (destination.match(/(?:^|\/)node_modules(?:\/|$)/)) {
-          console.log(
-            chalk.red(
-              `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
-            ),
-          );
-          process.exit(1);
-        }
+    for (const [alias, destination] of Object.entries(
+      skuConfig.pathAliases,
+    ) as [string, string][]) {
+      if (destination.match(/(?:^|\/)node_modules(?:\/|$)/)) {
+        console.log(
+          chalk.red(
+            `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
+          ),
+        );
+        process.exit(1);
       }
     }
   }
@@ -235,10 +235,10 @@ export const createSkuContext = ({
 
           // Add user-defined path aliases
           if (skuConfig.pathAliases) {
-            for (const aliasObj of skuConfig.pathAliases) {
-              for (const [alias, destination] of Object.entries(aliasObj)) {
-                typeScriptPaths[alias] = [destination];
-              }
+            for (const [alias, destination] of Object.entries(
+              skuConfig.pathAliases,
+            ) as [string, string][]) {
+              typeScriptPaths[alias] = [destination];
             }
           }
 

@@ -313,13 +313,13 @@ If `libraryFile` is not specified then `libraryName` will be used instead.
 
 ## pathAliases
 
-Type: `Array<Record<string, string>>`
+Type: `Record<string, string>`
 
-Default: `[]`
+Default: `{}`
 
 **Only available with Vite bundler**
 
-An array of custom path alias mappings for module resolution. Each object maps an alias pattern to a destination path relative to the project root.
+Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
 
 When using the `vite` bundler, sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
 
@@ -330,11 +330,11 @@ When using the `vite` bundler, sku automatically provides a `src/*` alias that m
 ```typescript
 export default {
   __UNSAFE_EXPERIMENTAL__bundler: 'vite',
-  pathAliases: [
-    { '@components/*': './src/components/*' },
-    { '@utils/*': './src/utils/*' },
-    { '@assets/*': './src/assets/*' },
-  ],
+  pathAliases: {
+    '@components/*': './src/components/*',
+    '@utils/*': './src/utils/*',
+    '@assets/*': './src/assets/*',
+  },
 } satisfies SkuConfig;
 ```
 

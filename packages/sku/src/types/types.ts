@@ -521,19 +521,19 @@ export interface ViteSkuConfig {
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
 
   /**
-   * An array of path alias mappings for module resolution.
+   * Path alias mappings for module resolution.
    * Each alias maps a pattern to a destination path relative to the project root.
    *
    * Note: sku automatically provides a 'src/*' alias that maps to './src/*'.
    * This option is only needed for additional custom aliases.
    *
-   * Example: [{ "components/*": "./src/components/*" }, { "utils/*": "./src/utils/*" }]
+   * Example: { "components/*": "./src/components/*", "utils/*": "./src/utils/*" }
    *
    * Note: This option is only relevant when using the `vite` bundler.
    *
-   * @default []
+   * @default {}
    */
-  pathAliases?: Array<Record<string, string>>;
+  pathAliases?: Record<string, string>;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

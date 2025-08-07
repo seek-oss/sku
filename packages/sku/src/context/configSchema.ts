@@ -195,11 +195,9 @@ export default validator.compile({
     type: 'boolean',
   },
   pathAliases: {
-    type: 'array',
-    items: {
-      type: 'object',
-      minProps: 1,
-    },
+    type: 'record',
+    key: { type: 'string' },
+    value: { type: 'string' },
     optional: true,
   },
 });

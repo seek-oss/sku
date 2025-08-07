@@ -99,6 +99,10 @@ export const createSkuContext = ({
   const skuConfig = {
     ...defaultSkuConfig,
     ...appSkuConfig,
+    pathAliases: {
+      ...defaultSkuConfig.pathAliases,
+      ...appSkuConfig.pathAliases,
+    },
   } satisfies SkuConfig;
 
   validateConfig(skuConfig);

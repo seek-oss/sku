@@ -37,8 +37,9 @@ describe('pathAliases', () => {
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);
 
-      expect(tsconfig.compilerOptions.paths).toHaveProperty('src/*');
-      expect(tsconfig.compilerOptions.paths['src/*']).toEqual(['./src/*']);
+      expect(tsconfig.compilerOptions.paths).toMatchObject({
+        'src/*': ['./src/*'],
+      });
     });
 
     it('should preserve existing baseUrl behavior alongside paths', async ({

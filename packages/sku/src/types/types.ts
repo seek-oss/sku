@@ -531,7 +531,7 @@ export interface ViteSkuConfig {
    *
    * Note: This option is only relevant when using the `vite` bundler.
    *
-   * @default {}
+   * @default { 'src/*': './src/*' }
    */
   pathAliases?: Record<string, string>;
 

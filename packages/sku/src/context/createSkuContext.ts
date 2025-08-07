@@ -23,12 +23,9 @@ const debug = _debug('sku:config');
 const generateTypeScriptPaths = (
   pathAliases?: Record<string, string>,
 ): Record<string, string[]> => {
-  const typeScriptPaths: Record<string, string[]> = {
-    // Automatic src/* alias for Vite
-    'src/*': ['./src/*'],
-  };
+  const typeScriptPaths: Record<string, string[]> = {};
 
-  // Add user-defined path aliases
+  // Add path aliases from config (includes default src/* alias)
   if (pathAliases) {
     for (const [alias, destination] of Object.entries(pathAliases) as [
       string,

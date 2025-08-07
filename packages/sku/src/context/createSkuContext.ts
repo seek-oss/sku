@@ -20,6 +20,27 @@ const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
+const generateTypeScriptPaths = (
+  pathAliases?: Record<string, string>,
+): Record<string, string[]> => {
+  const typeScriptPaths: Record<string, string[]> = {
+    // Automatic src/* alias for Vite
+    'src/*': ['./src/*'],
+  };
+
+  // Add user-defined path aliases
+  if (pathAliases) {
+    for (const [alias, destination] of Object.entries(pathAliases) as [
+      string,
+      string,
+    ][]) {
+      typeScriptPaths[alias] = [destination];
+    }
+  }
+
+  return typeScriptPaths;
+};
+
 interface SkuContextOptions {
   configPath?: string;
   port?: number;
@@ -227,23 +248,7 @@ export const createSkuContext = ({
   // Generate TypeScript paths for Vite pathAliases
   const tsPaths =
     skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
-      ? (() => {
-          const typeScriptPaths: Record<string, string[]> = {
-            // Automatic src/* alias for Vite
-            'src/*': ['./src/*'],
-          };
-
-          // Add user-defined path aliases
-          if (skuConfig.pathAliases) {
-            for (const [alias, destination] of Object.entries(
-              skuConfig.pathAliases,
-            ) as [string, string][]) {
-              typeScriptPaths[alias] = [destination];
-            }
-          }
-
-          return typeScriptPaths;
-        })()
+      ? generateTypeScriptPaths(skuConfig.pathAliases)
       : undefined;
 
   return {

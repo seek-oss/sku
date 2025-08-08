@@ -1,6 +1,47 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`custom-output-target > should generate an output directory with the value specified in sku.config 1`] = `
+exports[`bundler vite > custom-output-target > should generate an output directory with the value specified in sku.config 1`] = `
+{
+  "index.html": SCRIPTS: [
+    "/vite-client-DCgbtdoA.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <p>
+        Hello there!
+      </p>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
+  </body>
+</html>,
+  "vite-client-DCgbtdoA.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DCgbtdoA.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`bundler webpack > custom-output-target > should generate an output directory with the value specified in sku.config 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",

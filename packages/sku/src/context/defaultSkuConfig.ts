@@ -48,5 +48,6 @@ export default {
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
+  pathAliases: { 'src/*': './src/*' },
   __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: undefined,
 } satisfies CompleteSkuConfig;

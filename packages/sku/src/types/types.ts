@@ -527,14 +527,14 @@ export interface ViteSkuConfig {
    * This configuration affects both bundler module resolution and TypeScript's
    * `paths` configuration in tsconfig.json.
    *
-   * Note: sku provides a default 'src/*' alias that maps to './src/*'.
+   * Note: sku automatically provides a 'src/*' alias that maps to './src/*'.
    * This option allows you to define additional custom aliases.
    *
    * Example: { "@components/*": "./src/components/*", "@utils/*": "./src/utils/*" }
    *
    * Note: This option is only relevant when using the `vite` bundler.
    *
-   * @default { 'src/*': './src/*' }
+   * @default {}
    * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
    */
   pathAliases?: Record<string, string>;

@@ -315,13 +315,13 @@ If `libraryFile` is not specified then `libraryName` will be used instead.
 
 Type: `Record<string, string>`
 
-Default: `{ 'src/*': './src/*' }`
+Default: `{}`
 
 **Only available with Vite bundler**
 
 Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
 
-When using the `vite` bundler, sku provides a default `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
+Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
 
 **Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` configuration used in Webpack.
 

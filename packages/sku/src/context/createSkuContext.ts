@@ -25,9 +25,9 @@ const generateTypeScriptPaths = (
 ): Record<string, string[]> => {
   const typeScriptPaths: Record<string, string[]> = {};
 
-  // Always include default src/* alias, then merge with user-provided aliases
+  // Always include automatic src/* alias, then merge with user-provided aliases
   const mergedAliases = {
-    ...defaultSkuConfig.pathAliases,
+    'src/*': './src/*',
     ...pathAliases,
   };
 

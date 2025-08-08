@@ -28,7 +28,7 @@ import { formatDate } from '@utils/dateHelpers';
 
 ## Migration from dangerouslySetTSConfig
 
-If you're currently using `dangerouslySetTSConfig` for TypeScript path mapping, you can migrate to the cleaner `pathAliases` approach:
+If you're currently using `dangerouslySetTSConfig` exclusively to configure `paths`, you can migrate to the cleaner `pathAliases` approach:
 
 **Before:**
 ```typescript

@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-Add pathAliases configuration for custom import paths, compatible with both Webpack and Vite bundlers.
+Add pathAliases configuration for custom import paths with Vite bundler.
 
 ## New pathAliases config
 
@@ -11,6 +11,7 @@ The `pathAliases` option provides a clean way to configure custom import paths:
 ```typescript
 // sku.config.ts
 export default {
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
   pathAliases: {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*', 
@@ -32,6 +33,7 @@ If you're currently using `dangerouslySetTSConfig` for TypeScript path mapping, 
 **Before:**
 ```typescript
 export default {
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
   dangerouslySetTSConfig: (config) => ({
     ...config,
     compilerOptions: {
@@ -48,6 +50,7 @@ export default {
 **After:**
 ```typescript
 export default {
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
   pathAliases: {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
@@ -58,7 +61,7 @@ export default {
 **Notes**
 
 - **Automatic src/* alias**: sku provides `src/*` -> `./src/*` by default
-- **Bundler support**: Works with both Webpack and Vite bundlers
+- **Bundler support**: Only available with Vite bundler
 - **Validation**: Prevents aliases from pointing to node_modules
 
 ## Bug fixes

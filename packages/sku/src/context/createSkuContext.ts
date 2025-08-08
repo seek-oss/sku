@@ -25,13 +25,16 @@ const generateTypeScriptPaths = (
 ): Record<string, string[]> => {
   const typeScriptPaths: Record<string, string[]> = {};
 
-  // Add path aliases from config (includes default src/* alias)
-  if (pathAliases) {
-    for (const [alias, destination] of Object.entries(pathAliases) as Array<
-      [string, string]
-    >) {
-      typeScriptPaths[alias] = [destination];
-    }
+  // Always include default src/* alias, then merge with user-provided aliases
+  const mergedAliases = {
+    ...defaultSkuConfig.pathAliases,
+    ...pathAliases,
+  };
+
+  for (const [alias, destination] of Object.entries(mergedAliases) as Array<
+    [string, string]
+  >) {
+    typeScriptPaths[alias] = [destination];
   }
 
   return typeScriptPaths;
@@ -99,10 +102,6 @@ export const createSkuContext = ({
   const skuConfig = {
     ...defaultSkuConfig,
     ...appSkuConfig,
-    pathAliases: {
-      ...defaultSkuConfig.pathAliases,
-      ...appSkuConfig.pathAliases,
-    },
   } satisfies SkuConfig;
 
   validateConfig(skuConfig);
@@ -119,7 +118,10 @@ export const createSkuContext = ({
   }
 
   // Validate pathAliases destinations don't contain node_modules
-  if (skuConfig.pathAliases) {
+  if (
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' &&
+    skuConfig.pathAliases
+  ) {
     for (const [alias, destination] of Object.entries(
       skuConfig.pathAliases,
     ) as Array<[string, string]>) {
@@ -245,7 +247,11 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
-  const tsPaths = generateTypeScriptPaths(skuConfig.pathAliases);
+  // Generate TypeScript paths for Vite pathAliases
+  const tsPaths =
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
+      ? generateTypeScriptPaths(skuConfig.pathAliases)
+      : undefined;
 
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
@@ -283,7 +289,6 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
-    pathAliases: skuConfig.pathAliases,
   };
 };
 

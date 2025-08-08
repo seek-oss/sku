@@ -30,9 +30,7 @@ describe('pathAliases', () => {
       });
     });
 
-    it('should always include automatic src/* alias for Vite', async ({
-      expect,
-    }) => {
+    it('should always include automatic src/* alias', async ({ expect }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
       const tsconfig = jsonc.parse(tsconfigContents);

@@ -445,23 +445,6 @@ export interface SkuConfigBase {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=transformoutputpath
    */
   transformOutputPath?: TransformOutputPathFunction;
-
-  /**
-   * Path alias mappings for module resolution.
-   * Each alias maps a pattern to a destination path relative to the project root.
-   *
-   * This configuration affects both bundler module resolution and TypeScript's
-   * `paths` configuration in tsconfig.json.
-   *
-   * Note: sku provides a default 'src/*' alias that maps to './src/*'.
-   * This option allows you to define additional custom aliases.
-   *
-   * Example: { "components/*": "./src/components/*", "utils/*": "./src/utils/*" }
-   *
-   * @default { 'src/*': './src/*' }
-   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
-   */
-  pathAliases?: Record<string, string>;
 }
 
 export interface WebpackSkuConfig {
@@ -536,6 +519,25 @@ export interface ViteSkuConfig {
    * @default: []
    */
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+
+  /**
+   * Path alias mappings for module resolution.
+   * Each alias maps a pattern to a destination path relative to the project root.
+   *
+   * This configuration affects both bundler module resolution and TypeScript's
+   * `paths` configuration in tsconfig.json.
+   *
+   * Note: sku provides a default 'src/*' alias that maps to './src/*'.
+   * This option allows you to define additional custom aliases.
+   *
+   * Example: { "@components/*": "./src/components/*", "@utils/*": "./src/utils/*" }
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default { 'src/*': './src/*' }
+   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
+   */
+  pathAliases?: Record<string, string>;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

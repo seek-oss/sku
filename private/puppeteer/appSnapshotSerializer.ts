@@ -1,6 +1,7 @@
 import type { SnapshotSerializer } from 'vitest';
 import { createTwoFilesPatch } from 'diff';
 import { formatHtml } from './formatHtml.ts';
+import { sanitizeString } from './sanitizeString.ts';
 
 const emptyDiff = `===================================================================
 --- sourceHtml
@@ -32,7 +33,7 @@ export const appSnapshotSerializer: SnapshotSerializer = {
       `POST HYDRATE DIFFS: ${isEmptyDiff ? 'NO DIFF' : `\n${htmlDiff}`}`,
     ];
 
-    return snapshotItems.join('\n');
+    return sanitizeString(snapshotItems.join('\n'));
   },
 
   test: (val) =>

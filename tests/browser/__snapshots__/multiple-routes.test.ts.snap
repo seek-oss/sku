@@ -2,28 +2,28 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent-mB82i4mm.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent-mB82i4mm.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-B6pbTWh5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-B6pbTWh5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details-DGJnH813.css": ._1hpn1da0 {
+  "AsyncComponent-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "AsyncComponent-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Details-{hash}.css": ._1hpn1da0 {
   color: #00f;
 }
 ,
-  "Home-CtIy4c9G.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Home-CtIy4c9G.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Home-D-106MY_.css": .ms22la0 {
+  "Home-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Home-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "Home-{hash}.css": .ms22la0 {
   color: red;
 }
 ,
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Details-B6pbTWh5.js",
-    "/static/place/AsyncComponent-mB82i4mm.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Details-{hash}.js",
+    "/static/place/AsyncComponent-{hash}.js",
   ]
 CSS: [
-    "/static/place/Details-DGJnH813.css",
+    "/static/place/Details-{hash}.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -105,11 +105,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Home-CtIy4c9G.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Home-{hash}.js",
   ]
 CSS: [
-    "/static/place/Home-D-106MY_.css",
+    "/static/place/Home-{hash}.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -178,12 +178,12 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Details-B6pbTWh5.js",
-    "/static/place/AsyncComponent-mB82i4mm.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Details-{hash}.js",
+    "/static/place/AsyncComponent-{hash}.js",
   ]
 CSS: [
-    "/static/place/Details-DGJnH813.css",
+    "/static/place/Details-{hash}.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -265,11 +265,11 @@ SOURCE HTML: <!DOCTYPE html>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client-jm3K3cXX.js",
-    "/static/place/Home-CtIy4c9G.js",
+    "/static/place/vite-client-{hash}.js",
+    "/static/place/Home-{hash}.js",
   ]
 CSS: [
-    "/static/place/Home-D-106MY_.css",
+    "/static/place/Home-{hash}.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -336,8 +336,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-jm3K3cXX.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-jm3K3cXX.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

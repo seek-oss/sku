@@ -26,3 +26,12 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
+
+# This is needed so that the React 18 fixture doesn't clobber React 19 in every other fixture. We can remove this once we've dropped React 18 support.
+injectWorkspacePackages: true
+syncInjectedDepsAfterScripts:
+  - build
+
+catalog:
+  # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue.
+  jiti: 2.4.2

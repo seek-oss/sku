@@ -19,7 +19,7 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     >
     <link
       rel="modulepreload"
-      href="/static/my-app/vite-client-DeKcJang.js"
+      href="/static/my-app/vite-client-DPLKzYdM.js"
       crossorigin
     >
     <link
@@ -67,6 +67,11 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/large-image-CufAniQw.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/large-image-CufAniQw.avif">
@@ -85,7 +90,7 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     </div>
     <script
       type="module"
-      src="/static/my-app/vite-client-DeKcJang.js"
+      src="/static/my-app/vite-client-DPLKzYdM.js"
     >
     </script>
   </body>
@@ -96,7 +101,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`public path > bundler: vite > build and serve > should build, serve, and create valid app with no unresolved resources 2`] = `
 {
   "index.html": SCRIPTS: [
-    "/static/my-app/vite-client-DeKcJang.js",
+    "/static/my-app/vite-client-DPLKzYdM.js",
   ]
 CSS: [
     "/static/my-app/vite-client-DnoafMfl.css",
@@ -167,6 +172,11 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/large-image-CufAniQw.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/large-image-CufAniQw.avif">
@@ -197,8 +207,8 @@ SOURCE HTML: <!DOCTYPE html>
   "large-image-DeF69wGd.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-LKfC-v5Z.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "large-image-PZSzlfBh.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DeKcJang.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-DeKcJang.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DPLKzYdM.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-DPLKzYdM.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "vite-client-DnoafMfl.css": ._1eysbi80 {
   background-image: url(/static/my-app/large-image-CufAniQw.avif);
   width: 1039px;
@@ -276,6 +286,11 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/76f6980df06dbc480aee.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/76f6980df06dbc480aee.avif">
@@ -423,6 +438,11 @@ SOURCE HTML: <!DOCTYPE html>
   </head>
   <body>
     <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/static/my-app/76f6980df06dbc480aee.avif"
+      >
       <div class="_1eysbi80">
       </div>
       <img src="/static/my-app/76f6980df06dbc480aee.avif">

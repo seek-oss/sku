@@ -1,13 +1,7 @@
 import { hydrateRoot } from 'react-dom/client';
 
-import { App } from './App.tsx';
+import { App } from './App';
 
 export default () => {
   hydrateRoot(document.getElementById('app')!, <App />);
-
-  // @ts-expect-error
-  window.injected();
-
-  // @ts-expect-error
-  window.someRandomApi();
 };

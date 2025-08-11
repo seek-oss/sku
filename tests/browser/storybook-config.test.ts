@@ -4,6 +4,7 @@ import {
   afterAll,
   it,
   expect as globalExpect,
+  vi,
 } from 'vitest';
 import {
   getStoryPage,
@@ -11,13 +12,25 @@ import {
 } from '@sku-private/test-utils';
 
 import type { Page } from 'puppeteer';
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+  waitFor,
+} from '@sku-private/testing-library';
 
 // NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
 // font size of an element
 
 const storybookStartedRegex =
   /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+
+const timeout = 50_000;
+
+vi.setConfig({
+  hookTimeout: timeout + 1000,
+  testTimeout: timeout + 1000,
+});
 
 const { exec } = scopeToFixture('storybook-config');
 describe('storybook-config', () => {
@@ -37,6 +50,7 @@ describe('storybook-config', () => {
         'storybook',
         'dev',
         '--ci',
+        '--exact-port',
         '--port',
         port.toString(),
       ]);
@@ -49,9 +63,14 @@ describe('storybook-config', () => {
 
     afterAll(async () => {
       await storyPage?.close();
+      cleanup();
     });
 
-    it('should start sku dev middleware if configured', async ({ expect }) => {
+    it('should start sku dev middleware if configured', async ({
+      expect,
+      task,
+    }) => {
+      skipCleanup(task.id);
       const response = await fetch(middlewareUrl);
 
       expect(response.status).toBe(200);
@@ -60,7 +79,9 @@ describe('storybook-config', () => {
 
     it('should render decorators defined in the storybook preview file', async ({
       expect,
+      task,
     }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-decorator]',
@@ -70,7 +91,8 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async ({ expect }) => {
+    it('should render a component inside a story', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-text]',
@@ -80,7 +102,8 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async ({ expect }) => {
+    it('should render vanilla styles', async ({ expect, task }) => {
+      skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',
@@ -98,11 +121,12 @@ describe('storybook-config', () => {
         'storybook',
         'dev',
         '--ci',
+        '--exact-port',
         '--port',
         port.toString(),
       ]);
       globalExpect(
-        await storybook.findByText(storybookStartedRegex),
+        await storybook.findByText(storybookStartedRegex, {}, { timeout }),
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
@@ -145,11 +169,16 @@ describe('storybook-config', () => {
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
 
-      await waitFor(async () => {
-        globalExpect(storybook.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
-      });
+      await waitFor(
+        async () => {
+          globalExpect(storybook.hasExit()).toMatchObject({
+            exitCode: 0,
+          });
+        },
+        {
+          timeout,
+        },
+      );
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       globalExpect(

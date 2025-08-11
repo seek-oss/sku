@@ -11,7 +11,8 @@ describe('sanitizeFiles', () => {
     ${'AsyncComponent.chunk.js'}                    | ${'AsyncComponent.chunk.js'}
     ${'handlers-Home-2d237e279ab26e7d9ff4.css.map'} | ${'handlers-Home-2d237e279ab26e7d9ff4.css.map'}
     ${'/static/place/Details-3_rL4jQS.js'}          | ${'/static/place/Details-{hash}.js'}
-    ${'vite-client-UQg7MwHG.css'}                   | ${'vite-client-{hash}.css'}
+    ${'/vite-client-UQg7MwHG.css'}                  | ${'/vite-client-{hash}.css'}
+    ${'"href="/vite-client-79htCCWk.js"'}            | ${'"href="/vite-client-{hash}.js"'}
     ${'first-child > .Table_cell__y0v62q5'}         | ${'first-child > .Table_cell__y0v62q5'}
     ${'https://error-url.com'}                      | ${'https://error-url.com'}
   `(

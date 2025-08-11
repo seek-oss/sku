@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   test: {
+    cache: false,
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,
@@ -28,9 +29,6 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
-          sequence: {
-            groupOrder: 0,
-          },
         },
       },
       {
@@ -40,9 +38,6 @@ export default defineConfig({
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
           include: [`tests/browser/${defaultInclude}`],
-          sequence: {
-            groupOrder: 0,
-          },
         },
       },
     ],

@@ -1,58 +1,32 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`translations > bundler vite > should render en 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="/vite-client-79htCCWk.js"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="/en-translations-Dc5XqNPs.js"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello sku
-        Company name
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"en"}
-    </script>
-    <script
-      type="module"
-      src="/en-translations-Dc5XqNPs.js"
-    >
-    </script>
-    <script
-      type="module"
-      src="/vite-client-79htCCWk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -23,8 +23,7 @@
+@@ -1,47 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client-79htCCWk.js"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/en-translations-Dc5XqNPs.js"
+       crossorigin
+     >
+   </head>
    <body>
      <div id="app">
        <div>
@@ -62,61 +36,53 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"language":"en"}
+     </script>
+     <script
+       type="module"
+       src="/en-translations-Dc5XqNPs.js"
+     >
+     </script>
+     <script
+       type="module"
+       src="/vite-client-79htCCWk.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="/vite-client-79htCCWk.js"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="/en-translations-Dc5XqNPs.js"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello sku
-        Company name
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"en"}
-    </script>
-    <script
-      type="module"
-      src="/en-translations-Dc5XqNPs.js"
-    >
-    </script>
-    <script
-      type="module"
-      src="/vite-client-79htCCWk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -23,8 +23,7 @@
+@@ -1,47 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client-79htCCWk.js"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/en-translations-Dc5XqNPs.js"
+       crossorigin
+     >
+   </head>
    <body>
      <div id="app">
        <div>
@@ -126,61 +92,53 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"language":"en"}
+     </script>
+     <script
+       type="module"
+       src="/en-translations-Dc5XqNPs.js"
+     >
+     </script>
+     <script
+       type="module"
+       src="/vite-client-79htCCWk.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`translations > bundler vite > should render fr 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="/vite-client-79htCCWk.js"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="/fr-translations-BhmHAfV8.js"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Bonjour sku
-        บริษัท
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"fr"}
-    </script>
-    <script
-      type="module"
-      src="/fr-translations-BhmHAfV8.js"
-    >
-    </script>
-    <script
-      type="module"
-      src="/vite-client-79htCCWk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -23,8 +23,7 @@
+@@ -1,47 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client-79htCCWk.js"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/fr-translations-BhmHAfV8.js"
+       crossorigin
+     >
+   </head>
    <body>
      <div id="app">
        <div>
@@ -190,61 +148,53 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"language":"fr"}
+     </script>
+     <script
+       type="module"
+       src="/fr-translations-BhmHAfV8.js"
+     >
+     </script>
+     <script
+       type="module"
+       src="/vite-client-79htCCWk.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`translations > bundler vite > should support query parameters 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="modulepreload"
-      href="/vite-client-79htCCWk.js"
-      crossorigin
-    >
-    <link
-      rel="modulepreload"
-      href="/en-translations-Dc5XqNPs.js"
-      crossorigin
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello sku
-        Company name
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"en"}
-    </script>
-    <script
-      type="module"
-      src="/en-translations-Dc5XqNPs.js"
-    >
-    </script>
-    <script
-      type="module"
-      src="/vite-client-79htCCWk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -23,8 +23,7 @@
+@@ -1,47 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client-79htCCWk.js"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/en-translations-Dc5XqNPs.js"
+       crossorigin
+     >
+   </head>
    <body>
      <div id="app">
        <div>
@@ -254,192 +204,160 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"language":"en"}
+     </script>
+     <script
+       type="module"
+       src="/en-translations-Dc5XqNPs.js"
+     >
+     </script>
+     <script
+       type="module"
+       src="/vite-client-79htCCWk.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`translations > bundler webpack > should render en 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/5.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/main.js"
-    >
-    <link
-      data-chunk="en-translations"
-      rel="preload"
-      as="script"
-      href="/en-translations.chunk.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello sku
-        Company name
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"en"}
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      [1]
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":["en-translations"]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/5.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/main.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="en-translations"
-      src="/en-translations.chunk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: NO DIFF
-`;
-
-exports[`translations > bundler webpack > should render en-PSEUDO post-hydration 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/5.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/main.js"
-    >
-    <link
-      data-chunk="en-translations"
-      rel="preload"
-      as="script"
-      href="/en-translations.chunk.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div>
-        Hello sku
-        Company name
-      </div>
-    </div>
-    <script
-      id="__SKU_CLIENT_CONTEXT__"
-      type="application/json"
-    >
-      {"language":"en"}
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      [1]
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":["en-translations"]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/5.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/main.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="en-translations"
-      src="/en-translations.chunk.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -37,8 +37,7 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/5.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="/en-translations.chunk.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+        Company name
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"language":"en"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      [1]
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":["en-translations"]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/5.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="en-translations"
+      src="/en-translations.chunk.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`translations > bundler webpack > should render en-PSEUDO post-hydration 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,87 +1,86 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/5.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+     <link
+       data-chunk="en-translations"
+       rel="preload"
+       as="script"
+       href="/en-translations.chunk.js"
+     >
+   </head>
    <body>
      <div id="app">
        <div>
@@ -449,9 +367,56 @@ POST HYDRATE DIFFS:
        </div>
      </div>
      <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"language":"en"}
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       [1]
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":["en-translations"]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/5.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="en-translations"
+       src="/en-translations.chunk.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`translations > bundler webpack > should render fr 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -539,10 +504,12 @@ exports[`translations > bundler webpack > should render fr 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`translations > bundler webpack > should support query parameters 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -630,5 +597,4 @@ exports[`translations > bundler webpack > should support query parameters 1`] = 
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;

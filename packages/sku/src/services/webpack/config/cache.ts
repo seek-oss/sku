@@ -1,7 +1,7 @@
 import isCI from '../../../utils/isCI.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 
-const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
+export const disableCacheOverride = Boolean(process.env.SKU_DISABLE_CACHE);
 
 function getWebpackCacheSettings({
   isDevServer,

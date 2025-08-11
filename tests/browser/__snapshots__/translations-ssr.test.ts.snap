@@ -1,6 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ssr translations > should render en 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -92,10 +95,12 @@ exports[`ssr translations > should render en 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr translations > should render en-PSEUDO 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -187,10 +192,12 @@ exports[`ssr translations > should render en-PSEUDO 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr translations > should render fr 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -282,5 +289,4 @@ exports[`ssr translations > should render fr 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;

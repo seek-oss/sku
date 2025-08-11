@@ -8,10 +8,9 @@
     "@sku-private/test-utils": "workspace:*",
     "@sku-private/testing-library": "workspace:*",
     "@types/css": "^0.0.38",
-    "@types/diff": "^7.0.1",
     "@types/diffable-html": "^5.0.2",
     "css": "^3.0.0",
-    "diff": "^7.0.0",
-    "diffable-html": "^5.0.0"
+    "diff": "^8.0.2",
+    "diffable-html": "^6.0.1"
   }
 }

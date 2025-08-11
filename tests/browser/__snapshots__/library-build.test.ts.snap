@@ -19,36 +19,30 @@ exports[`library-build > build > should generate the expected files 1`] = `
 `;
 
 exports[`library-build > start > should start a development server 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/MyLibrary.css"
-    >
-  </head>
-  <body>
-    <script src="/MyLibrary.js">
-    </script>
-    <script>
-      window.MyLibrary();
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -21,5 +21,8 @@
+@@ -1,25 +1,28 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       type="text/css"
+       href="/MyLibrary.css"
+     >
+   </head>
+   <body>
+     <script src="/MyLibrary.js">
+     </script>
      <script>
        window.MyLibrary();
      </script>

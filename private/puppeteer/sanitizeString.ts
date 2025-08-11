@@ -8,7 +8,4 @@ export const sanitizeString = (str: string) =>
     )
     // replace 8-character hashes between dash and file extension.
     // This will reduce changes in snapshots when hashes (vite, etc.) change from dependency updates.
-    .replaceAll(
-      /(?<!https:\/{2}[^ ]*)-[^\s]{8}(\.[a-z]+)(\.map)?/gi,
-      '-{hash}$1$2',
-    );
+    .replaceAll(/(?<!https:\/{2}[^ ]*)-[^\s]{8}(\.[a-z]+)/gi, '-{hash}$1');

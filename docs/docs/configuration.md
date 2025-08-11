@@ -311,6 +311,46 @@ The file name of the library. The main bundle of the library will be output to `
 
 If `libraryFile` is not specified then `libraryName` will be used instead.
 
+## pathAliases
+
+Type: `Record<string, string>`
+
+Default: `{}`
+
+**Only available with Vite bundler**
+
+Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
+
+Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
+
+**Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` configuration used in Webpack.
+
+**Example:**
+
+```typescript
+export default {
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  pathAliases: {
+    '@components/*': './src/components/*',
+    '@utils/*': './src/utils/*',
+    '@assets/*': './src/assets/*',
+  },
+} satisfies SkuConfig;
+```
+
+This enables clean imports like:
+
+```typescript
+import { Button } from '@components/Button';
+import { formatDate } from '@utils/date';
+```
+
+**Best practices:**
+
+- Prefer organizing code within a well-structured `src/` directory over extensive path aliasing
+- For complex projects requiring high levels of code organization, consider using a monorepo structure instead of relying heavily on path aliases
+- Path aliases cannot point to `node_modules` directories
+
 ## polyfills
 
 Type: `Array<string>`

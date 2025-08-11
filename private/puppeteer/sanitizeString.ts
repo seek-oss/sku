@@ -7,7 +7,7 @@ export const sanitizeString = (str: string) =>
       '/node_modules/$1',
     )
     // replace 8-character hashes between dash and file extension.
-    // This will reduce changes in snapshots when dependency hashes (vite, braid, etc.) change.
+    // This will reduce changes in snapshots when hashes (vite, etc.) change from dependency updates.
     .replaceAll(
       /(?<!https:\/{2}[^ ]*)-.{8}(\.[a-z]+)(\.map)?$/gi,
       '-{hash}$1$2',

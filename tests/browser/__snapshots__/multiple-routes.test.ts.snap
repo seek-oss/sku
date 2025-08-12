@@ -369,22 +369,22 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </style>
     <link
       rel="stylesheet"
-      href="/static/place/Details-DGJnH813.css"
+      href="/static/place/Details-{hash}.css"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-jm3K3cXX.js"
+      href="/static/place/vite-client-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Details-B6pbTWh5.js"
+      href="/static/place/Details-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/AsyncComponent-mB82i4mm.js"
+      href="/static/place/AsyncComponent-{hash}.js"
       crossorigin
     >
   </head>
@@ -405,17 +405,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
     </script>
     <script
       type="module"
-      src="/static/place/AsyncComponent-mB82i4mm.js"
+      src="/static/place/AsyncComponent-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/Details-B6pbTWh5.js"
+      src="/static/place/Details-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-jm3K3cXX.js"
+      src="/static/place/vite-client-{hash}.js"
     >
     </script>
   </body>
@@ -463,17 +463,17 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </style>
     <link
       rel="stylesheet"
-      href="/static/place/Home-D-106MY_.css"
+      href="/static/place/Home-{hash}.css"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client-jm3K3cXX.js"
+      href="/static/place/vite-client-{hash}.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/Home-CtIy4c9G.js"
+      href="/static/place/Home-{hash}.js"
       crossorigin
     >
   </head>
@@ -491,12 +491,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
     <script
       type="module"
-      src="/static/place/Home-CtIy4c9G.js"
+      src="/static/place/Home-{hash}.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client-jm3K3cXX.js"
+      src="/static/place/vite-client-{hash}.js"
     >
     </script>
   </body>

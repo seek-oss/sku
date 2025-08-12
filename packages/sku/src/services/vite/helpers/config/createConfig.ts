@@ -41,7 +41,7 @@ export const createClientBuildConfig = (skuContext: SkuContext) => {
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const isIntegration = process.env.SKU_INTEGRATION === 'true';
   const bundleAnalyzer =
-    isProductionBuild && !isIntegration
+    isProductionBuild || !isIntegration
       ? [bundleAnalyzerPlugin({ name: 'client' })]
       : [];
 

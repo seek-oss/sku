@@ -205,7 +205,13 @@ export const initAction = async (
     }),
   );
 
-  const deps = ['braid-design-system', 'react', 'react-dom'];
+  // By default, deps will installed with an exact version. However, this doesn't seem to work without specifying a version.
+  // Adding @latest pins the version.
+  const deps = [
+    'braid-design-system@latest',
+    'react@latest',
+    'react-dom@latest',
+  ];
 
   const devDeps = [
     '@vanilla-extract/css',

@@ -357,19 +357,6 @@ export interface SkuConfigBase {
   renderEntry?: string;
 
   /**
-   * Enables root resolution.
-   *
-   * By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
-   *
-   * Unfortunately, these kinds of imports only work for apps.
-   * In packages, the imports will work locally, but fail when consumed from `node_modules`.
-   *
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=rootresolution
-   */
-  rootResolution?: boolean;
-
-  /**
    * **Only for static apps**
    *
    * An array of routes for the app. Each route must specify a name and a route corresponding to the path it is hosted under. Each route may also have a custom client entry, which can help with bundle splitting. See static-rendering for more info.
@@ -505,6 +492,19 @@ export interface WebpackSkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
    */
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
+
+  /**
+   * Enables root resolution.
+   *
+   * By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
+   *
+   * Unfortunately, these kinds of imports only work for apps.
+   * In packages, the imports will work locally, but fail when consumed from `node_modules`.
+   *
+   * @default true
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=rootresolution
+   */
+  rootResolution?: boolean;
 }
 
 export interface ViteSkuConfig {
@@ -519,6 +519,25 @@ export interface ViteSkuConfig {
    * @default: []
    */
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+
+  /**
+   * Path alias mappings for module resolution.
+   * Each alias maps a pattern to a destination path relative to the project root.
+   *
+   * This configuration affects both bundler module resolution and TypeScript's
+   * `paths` configuration in tsconfig.json.
+   *
+   * Note: sku automatically provides a 'src/*' alias that maps to './src/*'.
+   * This option allows you to define additional custom aliases.
+   *
+   * Example: { "@components/*": "./src/components/*", "@utils/*": "./src/utils/*" }
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default {}
+   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
+   */
+  pathAliases?: Record<string, string>;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

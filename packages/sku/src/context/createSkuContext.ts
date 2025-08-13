@@ -20,6 +20,26 @@ const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
+const generateTypeScriptPaths = (
+  pathAliases?: Record<string, string>,
+): Record<string, string[]> => {
+  const typeScriptPaths: Record<string, string[]> = {};
+
+  // Always include automatic src/* alias, then merge with user-provided aliases
+  const mergedAliases = {
+    'src/*': './src/*',
+    ...pathAliases,
+  };
+
+  for (const [alias, destination] of Object.entries(mergedAliases) as Array<
+    [string, string]
+  >) {
+    typeScriptPaths[alias] = [destination];
+  }
+
+  return typeScriptPaths;
+};
+
 interface SkuContextOptions {
   configPath?: string;
   port?: number;
@@ -95,6 +115,25 @@ export const createSkuContext = ({
       ),
     );
     process.exit(1);
+  }
+
+  // Validate pathAliases destinations don't contain node_modules
+  if (
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' &&
+    skuConfig.pathAliases
+  ) {
+    for (const [alias, destination] of Object.entries(
+      skuConfig.pathAliases,
+    ) as Array<[string, string]>) {
+      if (destination.includes('node_modules')) {
+        console.log(
+          chalk.red(
+            `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
+          ),
+        );
+        process.exit(1);
+      }
+    }
   }
 
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
@@ -208,6 +247,12 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
+  // Generate TypeScript paths for Vite pathAliases
+  const tsPaths =
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite'
+      ? generateTypeScriptPaths(skuConfig.pathAliases)
+      : undefined;
+
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
     testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
@@ -226,6 +271,7 @@ export const createSkuContext = ({
     eslintDecorator,
     tsconfigDecorator,
     eslintIgnore,
+    tsPaths,
     routes,
     environments,
     supportedBrowsers,

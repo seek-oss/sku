@@ -194,4 +194,10 @@ export default validator.compile({
   externalizeNodeModules: {
     type: 'boolean',
   },
+  pathAliases: {
+    type: 'record',
+    key: { type: 'string' },
+    value: { type: 'string' },
+    optional: true,
+  },
 });

@@ -39,15 +39,13 @@ export const createClientBuildConfig = (skuContext: SkuContext) => {
   const outDir = createOutDir(skuContext.paths.target);
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
-  const isIntegration = process.env.SKU_INTEGRATION === 'true';
-  const bundleAnalyzer =
-    isProductionBuild || !isIntegration
-      ? [bundleAnalyzerPlugin({ name: 'client' })]
-      : [];
+  const bundleAnalyzer = isProductionBuild
+    ? bundleAnalyzerPlugin({ name: 'client' })
+    : null;
 
   return createSkuViteConfig(
     {
-      plugins: [...bundleAnalyzer],
+      plugins: [bundleAnalyzer],
       build: {
         ssr: false,
         outDir: outDir.client,

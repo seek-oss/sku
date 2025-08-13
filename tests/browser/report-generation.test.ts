@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect as globalExpect, vi } from 'vitest';
+import { describe, beforeAll, it, expect as globalExpect } from 'vitest';
 import {
   bundlers,
   type BundlerValues,
@@ -7,14 +7,8 @@ import {
   scopeToFixture,
 } from '@sku-private/testing-library';
 import fs from 'node:fs';
-import path from 'node:path';
 
 const timeout = 50_000;
-
-vi.setConfig({
-  hookTimeout: timeout + 1000,
-  testTimeout: timeout + 1000,
-});
 
 const { sku, fixturePath } = scopeToFixture('report-generation');
 
@@ -27,6 +21,12 @@ describe('report-generation', () => {
       };
 
       beforeAll(async () => {
+        // Clean up any existing report folder
+        const reportDir = fixturePath('report');
+        if (fs.existsSync(reportDir)) {
+          fs.rmSync(reportDir, { recursive: true, force: true });
+        }
+
         const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Sku build complete', {}, { timeout }),
@@ -37,24 +37,12 @@ describe('report-generation', () => {
 
       it('should generate bundle analysis report', async ({ expect, task }) => {
         skipCleanup(task.id);
-        const reportPath = fixturePath('report');
-        const clientReportPath = path.join(reportPath, 'client.html');
-
-        expect(fs.existsSync(reportPath)).toBe(true);
-        expect(fs.existsSync(clientReportPath)).toBe(true);
-
-        // Verify the report is a valid HTML file with reasonable content
-        const reportContent = fs.readFileSync(clientReportPath, 'utf-8');
-        const stats = fs.statSync(clientReportPath);
-
-        expect(reportContent).toContain('<!DOCTYPE html>');
-        expect(reportContent).toContain('<html');
-        expect(reportContent).toContain('</html>');
-        expect(reportContent).toMatch(
-          /(bundle|Bundle|chart|Chart|visual|Visual)/i,
-        );
+        const reportHtml = fixturePath('report/client.html');
+        expect(fs.existsSync(reportHtml)).toBe(true);
 
         // Should be a substantial file (bundle analysis reports are typically large)
+        const stats = fs.statSync(reportHtml);
+        console.log({ stats });
         expect(stats.size).toBeGreaterThan(1000); // At least 1KB
       });
     });

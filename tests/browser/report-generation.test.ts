@@ -3,10 +3,10 @@ import {
   bundlers,
   type BundlerValues,
   cleanup,
-  skipCleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import fs from 'node:fs';
+import { rm } from 'node:fs/promises';
 
 const timeout = 50_000;
 
@@ -23,9 +23,7 @@ describe('report-generation', () => {
       beforeAll(async () => {
         // Clean up any existing report folder
         const reportDir = fixturePath('report');
-        if (fs.existsSync(reportDir)) {
-          fs.rmSync(reportDir, { recursive: true, force: true });
-        }
+        rm(reportDir, { recursive: true, force: true });
 
         const build = await sku('build', args[bundler]);
         globalExpect(
@@ -35,14 +33,12 @@ describe('report-generation', () => {
         return cleanup;
       });
 
-      it('should generate bundle analysis report', async ({ expect, task }) => {
-        skipCleanup(task.id);
+      it('should generate bundle analysis report', async ({ expect }) => {
         const reportHtml = fixturePath('report/client.html');
         expect(fs.existsSync(reportHtml)).toBe(true);
 
         // Should be a substantial file (bundle analysis reports are typically large)
         const stats = fs.statSync(reportHtml);
-        console.log({ stats });
         expect(stats.size).toBeGreaterThan(1000); // At least 1KB
       });
     });

@@ -56,6 +56,9 @@ SOURCE HTML: <!DOCTYPE html>
 `;
 
 exports[`suspense > bundler vite > build and serve > should return home page 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -100,7 +103,6 @@ exports[`suspense > bundler vite > build and serve > should return home page 1`]
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`suspense > bundler webpack > build and serve > should generate the expected files 1`] = `
@@ -203,6 +205,9 @@ SOURCE HTML: <!DOCTYPE html>
 `;
 
 exports[`suspense > bundler webpack > build and serve > should return home page 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -285,5 +290,4 @@ exports[`suspense > bundler webpack > build and serve > should return home page 
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;

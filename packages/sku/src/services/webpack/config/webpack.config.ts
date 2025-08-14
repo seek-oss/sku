@@ -195,7 +195,7 @@ const makeWebpackConfig = ({
                       loader: require.resolve('babel-loader'),
                       options: {
                         babelrc: false,
-                        cacheDirectory: !disableCacheOverride,
+                        cacheDirectory: true,
                         cacheCompression: false,
                         presets: [
                           [

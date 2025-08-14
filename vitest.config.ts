@@ -12,7 +12,6 @@ export default defineConfig({
     },
   },
   test: {
-    cache: false,
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,

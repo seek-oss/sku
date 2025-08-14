@@ -10,3 +10,5 @@ Previously it was not possible to run Vitest in watch mode via `sku test`. `sku 
 To run tests once and exit, you can execute `sku test run`, `sku test --run` or `sku test --no-watch` .
 
 [vitest cli]: https://vitest.dev/guide/cli
+
+`deps` Bump peer dependencies to support React 19

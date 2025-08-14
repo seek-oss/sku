@@ -1,3 +1,5 @@
+import { makeStableViteHashes } from '@sku-private/test-utils';
+
 import baseConfig from './sku.config.mjs';
 
 export default {
@@ -5,4 +7,5 @@ export default {
   port: baseConfig.port + 10000,
   __UNSAFE_EXPERIMENTAL__bundler: 'vite',
   devServerMiddleware: './dev-middleware.vite.js',
+  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: makeStableViteHashes,
 };

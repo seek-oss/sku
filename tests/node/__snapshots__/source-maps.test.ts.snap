@@ -3,7 +3,7 @@
 exports[`source-maps > bundler vite > sourceMapsProd false > should generate the expected files 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/static/source-maps/vite-client-{hash}.js",
+    "/static/source-maps/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -36,14 +36,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`source-maps > bundler vite > sourceMapsProd true > should generate the expected files 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/static/source-maps/vite-client-{hash}.js",
+    "/static/source-maps/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -76,8 +76,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -14,53 +14,53 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     >
     <link
       rel="stylesheet"
-      href="/static/my-app/vite-client-{hash}.css"
+      href="/static/my-app/vite-client.css"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/my-app/vite-client-{hash}.js"
+      href="/static/my-app/vite-client.js"
       crossorigin
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.avif"
+      href="/static/my-app/large-image.avif"
       as="image"
       type="image/avif"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.bmp"
+      href="/static/my-app/large-image.bmp"
       as="image"
       type="image/bmp"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.gif"
+      href="/static/my-app/large-image.gif"
       as="image"
       type="image/gif"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.jpg"
+      href="/static/my-app/large-image.jpg"
       as="image"
       type="image/jpg"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.png"
+      href="/static/my-app/large-image.png"
       as="image"
       type="image/png"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.webp"
+      href="/static/my-app/large-image.webp"
       as="image"
       type="image/webp"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-{hash}.svg"
+      href="/static/my-app/large-image.svg"
       as="image"
       type="image/svg+xml"
     >
@@ -70,11 +70,11 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
       <link
         rel="preload"
         as="image"
-        href="/static/my-app/large-image-{hash}.avif"
+        href="/static/my-app/large-image.avif"
       >
       <div class="_1eysbi80">
       </div>
-      <img src="/static/my-app/large-image-{hash}.avif">
+      <img src="/static/my-app/large-image.avif">
       <div class="_1eysbi81">
       </div>
       <div class="_1eysbi82">
@@ -90,7 +90,7 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     </div>
     <script
       type="module"
-      src="/static/my-app/vite-client-{hash}.js"
+      src="/static/my-app/vite-client.js"
     >
     </script>
   </body>
@@ -101,10 +101,10 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`public path > bundler: vite > build and serve > should build, serve, and create valid app with no unresolved resources 2`] = `
 {
   "index.html": SCRIPTS: [
-    "/static/my-app/vite-client-{hash}.js",
+    "/static/my-app/vite-client.js",
   ]
 CSS: [
-    "/static/my-app/vite-client-{hash}.css",
+    "/static/my-app/vite-client.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -129,43 +129,43 @@ SOURCE HTML: <!DOCTYPE html>
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-CufAniQw.avif"
+      href="/static/my-app/large-image.avif"
       as="image"
       type="image/avif"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-6dGggDit.bmp"
+      href="/static/my-app/large-image.bmp"
       as="image"
       type="image/bmp"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-PZSzlfBh.gif"
+      href="/static/my-app/large-image.gif"
       as="image"
       type="image/gif"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-DVc6bkoY.jpg"
+      href="/static/my-app/large-image.jpg"
       as="image"
       type="image/jpg"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-DeF69wGd.png"
+      href="/static/my-app/large-image.png"
       as="image"
       type="image/png"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-LKfC-v5Z.webp"
+      href="/static/my-app/large-image.webp"
       as="image"
       type="image/webp"
     >
     <link
       rel="preload"
-      href="/static/my-app/large-image-BVlb-rPD.svg"
+      href="/static/my-app/large-image.svg"
       as="image"
       type="image/svg+xml"
     >
@@ -175,11 +175,11 @@ SOURCE HTML: <!DOCTYPE html>
       <link
         rel="preload"
         as="image"
-        href="/static/my-app/large-image-CufAniQw.avif"
+        href="/static/my-app/large-image.avif"
       >
       <div class="_1eysbi80">
       </div>
-      <img src="/static/my-app/large-image-CufAniQw.avif">
+      <img src="/static/my-app/large-image.avif">
       <div class="_1eysbi81">
       </div>
       <div class="_1eysbi82">
@@ -200,51 +200,51 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "large-image-{hash}.bmp": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.svg": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.avif": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.jpg": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "large-image-{hash}.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.css": ._1eysbi80 {
-  background-image: url(/static/my-app/large-image-CufAniQw.avif);
+  "large-image.avif": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.bmp": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.gif": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.jpg": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.svg": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "large-image.webp": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.css": ._1eysbi80 {
+  background-image: url(/static/my-app/large-image.avif);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi81 {
-  background-image: url(/static/my-app/large-image-6dGggDit.bmp);
+  background-image: url(/static/my-app/large-image.bmp);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi82 {
-  background-image: url(/static/my-app/large-image-PZSzlfBh.gif);
+  background-image: url(/static/my-app/large-image.gif);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi83 {
-  background-image: url(/static/my-app/large-image-DVc6bkoY.jpg);
+  background-image: url(/static/my-app/large-image.jpg);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi84 {
-  background-image: url(/static/my-app/large-image-DeF69wGd.png);
+  background-image: url(/static/my-app/large-image.png);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi85 {
-  background-image: url(/static/my-app/large-image-LKfC-v5Z.webp);
+  background-image: url(/static/my-app/large-image.webp);
   width: 1039px;
   height: 240px;
 }
 ._1eysbi86 {
-  background-image: url(/static/my-app/large-image-BVlb-rPD.svg);
+  background-image: url(/static/my-app/large-image.svg);
   width: 1039px;
   height: 240px;
 }
 ,
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -281,7 +281,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
       data-chunk="main"
       rel="preload"
       as="script"
-      href="/static/my-{hash}.js"
+      href="/static/my-app/main.js"
     >
   </head>
   <body>
@@ -334,7 +334,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
     <script
       async
       data-chunk="main"
-      src="/static/my-{hash}.js"
+      src="/static/my-app/main.js"
     >
     </script>
   </body>
@@ -396,7 +396,7 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
   "index.html": SCRIPTS: [
     "/static/my-app/runtime.js",
     "/static/my-app/2.js",
-    "/static/my-{hash}.js",
+    "/static/my-app/main.js",
   ]
 CSS: [
     "/static/my-app/2-4d2434ce6cb595e73b82.css",

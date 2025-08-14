@@ -3,7 +3,7 @@
 exports[`bundler vite > custom-output-target > should generate an output directory with the value specified in sku.config 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/vite-client-{hash}.js",
+    "/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -36,8 +36,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

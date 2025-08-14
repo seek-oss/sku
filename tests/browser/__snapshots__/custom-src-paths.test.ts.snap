@@ -14,7 +14,7 @@ exports[`custom-src-paths > bundler vite > build > should create valid app 1`] =
     >
     <link
       rel="modulepreload"
-      href="/some-static-place/vite-client-{hash}.js"
+      href="/some-static-place/vite-client.js"
       crossorigin
     >
   </head>
@@ -26,7 +26,7 @@ exports[`custom-src-paths > bundler vite > build > should create valid app 1`] =
     </div>
     <script
       type="module"
-      src="/some-static-place/vite-client-{hash}.js"
+      src="/some-static-place/vite-client.js"
     >
     </script>
   </body>
@@ -37,7 +37,7 @@ POST HYDRATE DIFFS: NO DIFF
 exports[`custom-src-paths > bundler vite > build > should generate the expected files 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/some-static-place/vite-client-{hash}.js",
+    "/some-static-place/vite-client.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -70,8 +70,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-{hash}.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-{hash}.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

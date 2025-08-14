@@ -14,7 +14,7 @@ exports[`polyfills > bundler vite > build > should create valid app 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/static/polyfills/vite-client-{hash}.js"
+      href="/static/polyfills/vite-client.js"
       crossorigin
     >
   </head>
@@ -26,7 +26,7 @@ exports[`polyfills > bundler vite > build > should create valid app 1`] = `
     </div>
     <script
       type="module"
-      src="/static/polyfills/vite-client-{hash}.js"
+      src="/static/polyfills/vite-client.js"
     >
     </script>
   </body>
@@ -36,7 +36,7 @@ POST HYDRATE DIFFS:
 --- sourceHtml
 +++ clientHtml
 @@ -26,5 +26,11 @@
-       src="/static/polyfills/vite-client-{hash}.js"
+       src="/static/polyfills/vite-client.js"
      >
      </script>
 +    <p>

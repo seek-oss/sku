@@ -9,6 +9,7 @@
   },
   "skuSkipValidatePeerDeps": true,
   "dependencies": {
-    "jest": "^30.0.0"
+    "jest": "^30.0.0",
+    "@types/jest": "^30.0.0"
   }
 }

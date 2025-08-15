@@ -2,11 +2,11 @@
   "name": "@sku-fixtures/configure",
   "private": true,
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "^19.1.8",
+    "@types/react": "catalog:",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

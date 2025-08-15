@@ -6,9 +6,9 @@
     "@vocab/core": "^1.6.2",
     "@vocab/react": "^1.1.11",
     "@vocab/webpack": "^1.2.9",
-    "@vocab/vite": "^0.2.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@vocab/vite": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "scripts": {
     "build": "sku build",
@@ -19,8 +19,8 @@
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@types/express": "^4.17.11",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "dedent": "^1.5.1",
     "sku": "workspace:*"
   },

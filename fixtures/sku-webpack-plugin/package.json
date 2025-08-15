@@ -3,9 +3,9 @@
   "private": true,
   "main": "./main.js",
   "dependencies": {
-    "braid-design-system": "^33.10.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "braid-design-system": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "scripts": {
     "start:asset-server": "http-server dist -p 9876 --cors"

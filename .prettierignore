@@ -9,7 +9,7 @@ custom-output-directory/
 dist-start/
 report/
 template/
-# .changeset/*.md
+.changeset/*.md
 CHANGELOG.md
 .vscode/
 pnpm-lock.yaml

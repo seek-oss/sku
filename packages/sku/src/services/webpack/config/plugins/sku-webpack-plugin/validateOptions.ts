@@ -1,7 +1,7 @@
 import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
 import chalk from 'chalk';
-import didYouMean from 'didyoumean2';
+import { closest } from 'fastest-levenshtein';
 import { hasErrorMessage } from '../../../../../utils/error-guards.js';
 
 // @ts-expect-error
@@ -98,7 +98,7 @@ const validateOptions = (options: SkuWebpackPluginOptions) => {
     .filter((key) => !availableOptions.includes(key))
     .forEach((key) => {
       const unknownMessage = `Unknown option '${chalk.bold(key)}'.`;
-      const suggestedKey = didYouMean(key, availableOptions);
+      const suggestedKey = closest(key, availableOptions);
       const suggestedMessage = suggestedKey
         ? ` Did you mean '${chalk.bold(suggestedKey)}'?`
         : '';

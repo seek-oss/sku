@@ -3,7 +3,7 @@ import exists from '../../../utils/exists.js';
 import express from 'express';
 import handler from 'serve-handler';
 import chalk from 'chalk';
-import didYouMean from 'didyoumean2';
+import { closest } from 'fastest-levenshtein';
 import {
   checkHosts,
   getAppHosts,
@@ -64,7 +64,7 @@ export const serveAction = async ({
 
   if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
     console.log(chalk.red(`Unknown site '${chalk.bold(preferredSite)}'`));
-    const suggestedSite = didYouMean(preferredSite, availableSites);
+    const suggestedSite = closest(preferredSite, availableSites);
 
     if (suggestedSite) {
       console.log(`Did you mean '${chalk.bold(suggestedSite)}'?`);

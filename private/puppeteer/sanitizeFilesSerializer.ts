@@ -1,7 +1,7 @@
 import type { SnapshotSerializer } from 'vitest';
 import { sanitizeString } from './sanitizeString.ts';
 
-/** Formats CSS strings */
+/** Sanitizes file contents */
 export const sanitizeFilesSerializer = {
   serialize(val: string, config, indentation, depth, refs, printer) {
     // Runs the default serializer on the sanitized value

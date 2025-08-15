@@ -192,7 +192,6 @@
     "wrap-ansi": "^9.0.0"
   },
   "devDependencies": {
-    "@jest/globals": "^30.0.3",
     "@sku-lib/vitest": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",

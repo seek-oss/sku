@@ -2,17 +2,13 @@
 'sku': minor
 ---
 
-This release improves support for the experimental Vite bundler, enabling full sku config parity with the Webpack bundler. This is a big step forward for the Vite bundler, bringing us closer to taking it out of experimental mode.
+This release improves support for the experimental Vite bundler, enabling full sku static-site config parity with the Webpack bundler. This is a big step forward for the Vite bundler, bringing us closer to taking it out of experimental mode.
 
 ### React 19 support
 
 Sku now has React 19 support, while still supporting React 18.
 
 ### Vite bundler improvements
-
-- Explicitly deny commands unsupported by the vite bundler.
-
-  Static site generation is our primary focus for the Vite bundler at this time, so SSR commands (`start-ssr`, `build-ssr`) with the experimental Vite bundler will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
 
 - `config`: The vite bundler now has full support for all sku static-site config properties. (library mode and ssr mode is not supported.)
 
@@ -21,6 +17,10 @@ Sku now has React 19 support, while still supporting React 18.
 - `build`: Bundle analysis reports are now generated for Vite builds in the `/report/` directory. This matches the behaviour of the Webpack bundler.
 
 - `start`: Inline Vanilla Extract CSS to fix flash of unstyled text.
+
+- Explicitly deny commands unsupported by the vite bundler.
+
+  Static site generation is our primary focus for the Vite bundler at this time, so SSR commands (`start-ssr`, `build-ssr`) with the experimental Vite bundler will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
 
 ### `sku init`
 

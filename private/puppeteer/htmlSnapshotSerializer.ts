@@ -1,4 +1,3 @@
-import { sanitizeString } from '../test-utils/sanitizeString.ts';
 import { formatHtml } from './formatHtml.ts';
 
 import type { SnapshotSerializer } from 'vitest';
@@ -35,7 +34,7 @@ export const htmlSnapshotSerializer: SnapshotSerializer = {
     );
 
     return [
-      `SCRIPTS: ${sanitizeString(serializer(assets.SCRIPTS))}`,
+      `SCRIPTS: ${serializer(assets.SCRIPTS)}`,
       `CSS: ${serializer(assets.CSS)}`,
       `SOURCE HTML: ${formatHtml(extractedHtml)}`,
     ].join('\n');

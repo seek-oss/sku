@@ -2,7 +2,6 @@ import { relative } from 'node:path';
 import { readFile } from 'node:fs/promises';
 
 import klaw from 'klaw';
-import { sanitizeString } from './sanitizeString.ts';
 
 // Ignore contents of files where the content changes
 // regularly, is non-deterministic, or is binary data.
@@ -40,9 +39,7 @@ export const dirContentsToObject = async (
         includeExtensions.filter((ext) => relativeFilePath.endsWith(ext))
           .length > 0
       ) {
-        files[sanitizeString(relativeFilePath)] = ignoredFilePattern.test(
-          relativeFilePath,
-        )
+        files[relativeFilePath] = ignoredFilePattern.test(relativeFilePath)
           ? 'CONTENTS IGNORED IN SNAPSHOT TEST'
           : await readFile(file.path, 'utf8');
       }

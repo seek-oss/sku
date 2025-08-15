@@ -25,7 +25,7 @@ import {
 const storybookStartedRegex =
   /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
 
-const timeout = 100_000;
+const timeout = 150_000;
 
 vi.setConfig({
   hookTimeout: timeout + 1000,

@@ -1,3 +1,6 @@
+/**
+ * A helper to make stable hashes for webpack.
+ */
 export const makeStableHashes = (config: Record<string, any>) => {
   // Addresses an issue where module IDs were different between local dev and CI
   config.optimization.chunkIds = 'natural';
@@ -13,3 +16,18 @@ export const makeStableHashes = (config: Record<string, any>) => {
 
   return config;
 };
+
+/**
+ * A helper for vite to make stable hashes.
+ */
+export const makeStableViteHashes = () => ({
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name][extname]',
+        entryFileNames: '[name].js',
+      },
+    },
+  },
+});

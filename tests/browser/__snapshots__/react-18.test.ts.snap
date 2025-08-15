@@ -17,7 +17,7 @@ exports[`react-18 > bundler vite > build > should create valid app 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/vite-client-BwCn9A6A.js"
+      href="/vite-client.js"
       crossorigin
     >
   </head>
@@ -29,7 +29,7 @@ exports[`react-18 > bundler vite > build > should create valid app 1`] = `
     </div>
     <script
       type="module"
-      src="/vite-client-BwCn9A6A.js"
+      src="/vite-client.js"
     >
     </script>
   </body>

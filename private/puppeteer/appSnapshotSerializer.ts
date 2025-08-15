@@ -1,6 +1,7 @@
 import type { SnapshotSerializer } from 'vitest';
 import { createTwoFilesPatch } from 'diff';
 import { formatHtml } from './formatHtml.ts';
+import { sanitizeString } from './sanitizeString.ts';
 
 const emptyDiff = `===================================================================
 --- sourceHtml
@@ -26,9 +27,11 @@ export const appSnapshotSerializer: SnapshotSerializer = {
     ).trim();
 
     // If there is no difference between the source and client html then we can just return the source html
-    return htmlDiff === emptyDiff
-      ? [emptyDiff, formattedSourceHtml].join('\n')
-      : htmlDiff;
+    return sanitizeString(
+      htmlDiff === emptyDiff
+        ? [emptyDiff, formattedSourceHtml].join('\n')
+        : htmlDiff,
+    );
   },
 
   test: (val) =>

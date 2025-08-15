@@ -18,12 +18,12 @@ exports[`translations > bundler vite > should render en 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client-79htCCWk.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/en-translations-Dc5XqNPs.js"
+       href="/en-translations.js"
        crossorigin
      >
    </head>
@@ -43,12 +43,12 @@ exports[`translations > bundler vite > should render en 1`] = `
      </script>
      <script
        type="module"
-       src="/en-translations-Dc5XqNPs.js"
+       src="/en-translations.js"
      >
      </script>
      <script
        type="module"
-       src="/vite-client-79htCCWk.js"
+       src="/vite-client.js"
      >
      </script>
    </body>
@@ -74,12 +74,12 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      >
      <link
        rel="modulepreload"
-       href="/vite-client-79htCCWk.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/en-translations-Dc5XqNPs.js"
+       href="/en-translations.js"
        crossorigin
      >
    </head>
@@ -99,12 +99,12 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      </script>
      <script
        type="module"
-       src="/en-translations-Dc5XqNPs.js"
+       src="/en-translations.js"
      >
      </script>
      <script
        type="module"
-       src="/vite-client-79htCCWk.js"
+       src="/vite-client.js"
      >
      </script>
    </body>
@@ -130,12 +130,12 @@ exports[`translations > bundler vite > should render fr 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client-79htCCWk.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/fr-translations-BhmHAfV8.js"
+       href="/fr-translations.js"
        crossorigin
      >
    </head>
@@ -155,12 +155,12 @@ exports[`translations > bundler vite > should render fr 1`] = `
      </script>
      <script
        type="module"
-       src="/fr-translations-BhmHAfV8.js"
+       src="/fr-translations.js"
      >
      </script>
      <script
        type="module"
-       src="/vite-client-79htCCWk.js"
+       src="/vite-client.js"
      >
      </script>
    </body>
@@ -186,12 +186,12 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client-79htCCWk.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/en-translations-Dc5XqNPs.js"
+       href="/en-translations.js"
        crossorigin
      >
    </head>
@@ -211,12 +211,12 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      </script>
      <script
        type="module"
-       src="/en-translations-Dc5XqNPs.js"
+       src="/en-translations.js"
      >
      </script>
      <script
        type="module"
-       src="/vite-client-79htCCWk.js"
+       src="/vite-client.js"
      >
      </script>
    </body>

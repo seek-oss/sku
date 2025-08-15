@@ -15,6 +15,7 @@
     "serve": "sku serve"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@sku-private/test-utils": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

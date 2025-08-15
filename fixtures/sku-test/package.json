@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "@types/jest": "^30.0.0"
   },
   "skuSkipValidatePeerDeps": true
 }

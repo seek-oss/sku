@@ -10,6 +10,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@types/jest": "^30.0.0",
     "assert": "^2.0.0",
     "dedent": "^1.5.1",
     "sku": "workspace:*",

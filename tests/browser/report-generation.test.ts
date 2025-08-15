@@ -2,13 +2,10 @@ import { describe, beforeAll, it, expect as globalExpect } from 'vitest';
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import fs from 'node:fs';
 import { rm } from 'node:fs/promises';
-
-const timeout = 50_000;
 
 const { sku, fixturePath } = scopeToFixture('report-generation');
 
@@ -27,10 +24,8 @@ describe('report-generation', () => {
 
         const build = await sku('build', args[bundler]);
         globalExpect(
-          await build.findByText('Sku build complete', {}, { timeout }),
+          await build.findByText('Sku build complete'),
         ).toBeInTheConsole();
-
-        return cleanup;
       });
 
       it('should generate bundle analysis report', async ({ expect }) => {

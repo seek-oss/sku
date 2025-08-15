@@ -63,7 +63,7 @@ describe('storybook-config', () => {
 
     afterAll(async () => {
       await storyPage?.close();
-      cleanup();
+      await cleanup();
     });
 
     it('should start sku dev middleware if configured', async ({
@@ -188,13 +188,17 @@ describe('storybook-config', () => {
       storyPage = await getStoryPage(storyIframeUrl);
     });
 
-    afterAll(() => {
-      storyPage?.close();
+    afterAll(async () => {
+      await storyPage?.close();
+      await cleanup();
     });
 
     it('should render decorators defined in the storybook preview file', async ({
       expect,
+      task,
     }) => {
+      skipCleanup(task.id);
+
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-decorator]',
@@ -204,7 +208,9 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async ({ expect }) => {
+    it('should render a component inside a story', async ({ expect, task }) => {
+      skipCleanup(task.id);
+
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-text]',
@@ -214,7 +220,9 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async ({ expect }) => {
+    it('should render vanilla styles', async ({ expect, task }) => {
+      skipCleanup(task.id);
+
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',
@@ -224,14 +232,11 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async ({ expect }) => {
+    it('should render a ".mdx" file', async ({ expect, task }) => {
+      skipCleanup(task.id);
+
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
       const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
-
-      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      globalExpect(
-        await assetServer.findByText('serving storybook-static'),
-      ).toBeInTheConsole();
 
       const docsPage = await getStoryPage(docsIframeUrl);
 

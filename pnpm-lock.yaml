@@ -975,9 +975,6 @@ importers:
       default-browser:
         specifier: ^5.2.1
         version: 5.2.1
-      didyoumean2:
-        specifier: ^7.0.2
-        version: 7.0.4
       ensure-gitignore:
         specifier: ^1.1.2
         version: 1.2.0
@@ -999,6 +996,9 @@ importers:
       express:
         specifier: ^4.19.2
         version: 4.21.2
+      fastest-levenshtein:
+        specifier: ^1.0.16
+        version: 1.0.16
       fastest-validator:
         specifier: ^1.9.0
         version: 1.19.1
@@ -4801,10 +4801,6 @@ packages:
   devtools-protocol@0.0.1464554:
     resolution: {integrity: sha512-CAoP3lYfwAGQTaAXYvA6JZR0fjGUb7qec1qf4mToyoH2TZgUFeIqYcjh6f9jNuhHfuZiEdH+PONHYrLhRQX6aw==}
 
-  didyoumean2@7.0.4:
-    resolution: {integrity: sha512-+yW4SNY7W2DOWe2Jx5H4c2qMTFbLGM6wIyoDPkAPy66X+sD1KfYjBPAIWPVsYqMxelflaMQCloZDudELIPhLqA==}
-    engines: {node: ^18.12.0 || >=20.9.0}
-
   diff@7.0.0:
     resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
     engines: {node: '>=0.3.1'}
@@ -6597,9 +6593,6 @@ packages:
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-
-  lodash.deburr@4.1.0:
-    resolution: {integrity: sha512-m/M1U1f3ddMCs6Hq2tAsYThTBDaAKFDX3dwDo97GEYzamXi9SqUpjWi/Rrj/gf3X2n8ktwgZrlP1z6E3v/IExQ==}
 
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
@@ -13453,12 +13446,6 @@ snapshots:
 
   devtools-protocol@0.0.1464554: {}
 
-  didyoumean2@7.0.4:
-    dependencies:
-      '@babel/runtime': 7.27.6
-      fastest-levenshtein: 1.0.16
-      lodash.deburr: 4.1.0
-
   diff@7.0.0: {}
 
   diff@8.0.2: {}
@@ -15791,8 +15778,6 @@ snapshots:
 
   lodash.debounce@4.0.8: {}
 
-  lodash.deburr@4.1.0: {}
-
   lodash.get@4.4.2: {}
 
   lodash.memoize@4.1.2: {}
@@ -17442,7 +17427,6 @@ snapshots:
       debug: 4.4.1
       dedent: 1.6.0(babel-plugin-macros@3.1.0)
       default-browser: 5.2.1
-      didyoumean2: 7.0.4
       ensure-gitignore: 1.2.0
       escape-string-regexp: 5.0.0
       eslint: 9.30.1(jiti@2.4.2)
@@ -17450,6 +17434,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@3.0.1)
       find-up: 7.0.0
@@ -17594,7 +17579,6 @@ snapshots:
       debug: 4.4.1
       dedent: 1.6.0(babel-plugin-macros@3.1.0)
       default-browser: 5.2.1
-      didyoumean2: 7.0.4
       ensure-gitignore: 1.2.0
       escape-string-regexp: 5.0.0
       eslint: 9.30.1(jiti@2.4.2)
@@ -17602,6 +17586,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@3.0.1)
       find-up: 7.0.0

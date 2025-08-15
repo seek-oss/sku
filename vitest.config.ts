@@ -28,8 +28,18 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
+        },
+      },
+      // Isolate braid to reduce flakiness.
+      {
+        extends: true,
+        test: {
+          name: 'braid-design-system',
+          environment: 'puppeteer',
+          globalSetup: 'vitest-environment-puppeteer/global-init',
+          include: [`tests/browser/braid-design-system.test.ts`],
           sequence: {
-            groupOrder: 0,
+            groupOrder: -1,
           },
         },
       },
@@ -39,10 +49,10 @@ export default defineConfig({
           name: 'browser',
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [`tests/browser/${defaultInclude}`],
-          sequence: {
-            groupOrder: 0,
-          },
+          include: [
+            `tests/browser/${defaultInclude}`,
+            '!tests/browser/braid-design-system.test.ts',
+          ],
         },
       },
     ],

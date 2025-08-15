@@ -23,17 +23,15 @@ export const appSnapshotSerializer: SnapshotSerializer = {
       formattedClientHtml,
       undefined,
       undefined,
-      { ignoreNewlineAtEof: true, context: 3 },
+      { ignoreWhitespace: true, context: Infinity },
     ).trim();
 
-    const isEmptyDiff = htmlDiff === emptyDiff;
-
-    const snapshotItems = [
-      formattedSourceHtml,
-      `POST HYDRATE DIFFS: ${isEmptyDiff ? 'NO DIFF' : `\n${htmlDiff}`}`,
-    ];
-
-    return sanitizeString(snapshotItems.join('\n'));
+    // If there is no difference between the source and client html then we can just return the source html
+    return sanitizeString(
+      htmlDiff === emptyDiff
+        ? [emptyDiff, formattedSourceHtml].join('\n')
+        : htmlDiff,
+    );
   },
 
   test: (val) =>

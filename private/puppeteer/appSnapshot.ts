@@ -18,6 +18,9 @@ export const getAppSnapshot = async ({
   const errors: string[] = [];
 
   const appPage = await browser.newPage();
+  // Puppeteer, by default, respects standard HTTP caching rules. This can cause mismatches during snapshot testing so we disable it.
+  await appPage.setCacheEnabled(false);
+
   appPage.setDefaultNavigationTimeout(timeout);
 
   appPage.on('console', (msg) => {

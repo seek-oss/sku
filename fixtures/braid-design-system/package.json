@@ -9,7 +9,10 @@
   },
   "scripts": {
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.js --experimental-bundler"
+    "start:vite": "sku start --config sku.config.vite.js --experimental-bundler",
+    "build:vite": "sku build --config sku.config.vite.js --experimental-bundler",
+    "build": "sku build",
+    "serve": "sku serve"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

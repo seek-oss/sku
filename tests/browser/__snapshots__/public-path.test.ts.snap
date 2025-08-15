@@ -1,6 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`public path > bundler: vite > build and serve > should build, serve, and create valid app with no unresolved resources 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -95,7 +98,6 @@ exports[`public path > bundler: vite > build and serve > should build, serve, an
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`public path > bundler: vite > build and serve > should build, serve, and create valid app with no unresolved resources 2`] = `
@@ -249,6 +251,9 @@ SOURCE HTML: <!DOCTYPE html>
 `;
 
 exports[`public path > bundler: webpack > build and serve > should build, serve, and create valid app with no unresolved resources 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -339,7 +344,6 @@ exports[`public path > bundler: webpack > build and serve > should build, serve,
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`public path > bundler: webpack > build and serve > should build, serve, and create valid app with no unresolved resources 2`] = `

@@ -1,6 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ssr-hello-world > build > default port > should generate a production server based on config 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -99,10 +102,12 @@ exports[`ssr-hello-world > build > default port > should generate a production s
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world > build > should run on a custom port 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -201,10 +206,12 @@ exports[`ssr-hello-world > build > should run on a custom port 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`ssr-hello-world > start > should start a development server 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -303,5 +310,4 @@ exports[`ssr-hello-world > start > should start a development server 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;

@@ -103,7 +103,12 @@ describe('ssr-hello-world', () => {
         customPort,
       ]);
       expect(
-        await server.findByText('Server started on port 7654'),
+        await server.findByText(`Server started on port ${customPort}`),
+      ).toBeInTheConsole();
+
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
+      expect(
+        await assetServer.findByText('serving dist-build'),
       ).toBeInTheConsole();
 
       const snapshot = await getAppSnapshot({ url: customPortUrl, expect });

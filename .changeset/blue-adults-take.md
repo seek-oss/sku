@@ -51,10 +51,12 @@ Sku now has React 19 support, while still supporting React 18.
 
 ### General improvements
 
-- The `SkuConfig` type has better type safety for webpack and vite options.
+- `config`: The `SkuConfig` type has better type safety for webpack and vite options.
 
   When using `__experimental__bundler: 'vite'`, the `SkuConfig` type will be more strict, and will not allow you to use any properties that are not supported by the Vite bundler.
 
 - `start`: Don't emit telemetry when `OPEN_TAB=false` is set.
 
 - `test`: Fixes a bug where project configuration and Vocab translation compilation were running twice instead of once.
+
+- `deps`: Replace `didyoumean2` dependency with `fastest-levenshtein`

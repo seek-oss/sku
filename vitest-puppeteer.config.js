@@ -3,4 +3,5 @@ export default {
     headless: true,
     acceptInsecureCerts: true,
   },
+  browserContext: 'incognito',
 };

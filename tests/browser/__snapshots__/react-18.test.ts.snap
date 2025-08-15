@@ -1,6 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`react-18 > bundler vite > build > should create valid app 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +17,7 @@ exports[`react-18 > bundler vite > build > should create valid app 1`] = `
     >
     <link
       rel="modulepreload"
-      href="/vite-client-{hash}.js"
+      href="/vite-client.js"
       crossorigin
     >
   </head>
@@ -26,15 +29,17 @@ exports[`react-18 > bundler vite > build > should create valid app 1`] = `
     </div>
     <script
       type="module"
-      src="/vite-client-{hash}.js"
+      src="/vite-client.js"
     >
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`react-18 > bundler vite > start > should start a development server 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -103,10 +108,12 @@ exports[`react-18 > bundler vite > start > should start a development server 1`]
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`react-18 > bundler webpack > build > should create valid app 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -175,10 +182,12 @@ exports[`react-18 > bundler webpack > build > should create valid app 1`] = `
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;
 
 exports[`react-18 > bundler webpack > start > should start a development server 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
 <!DOCTYPE html>
 <html>
   <head>
@@ -247,5 +256,4 @@ exports[`react-18 > bundler webpack > start > should start a development server 
     </script>
   </body>
 </html>
-POST HYDRATE DIFFS: NO DIFF
 `;

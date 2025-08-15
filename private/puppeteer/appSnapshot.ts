@@ -1,6 +1,5 @@
 import type { ExpectStatic } from 'vitest';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
-import { sanitizeString } from '../test-utils/sanitizeString.ts';
 
 export const getAppSnapshot = async ({
   url,
@@ -19,6 +18,9 @@ export const getAppSnapshot = async ({
   const errors: string[] = [];
 
   const appPage = await browser.newPage();
+  // Puppeteer, by default, respects standard HTTP caching rules. This can cause mismatches during snapshot testing so we disable it.
+  await appPage.setCacheEnabled(false);
+
   appPage.setDefaultNavigationTimeout(timeout);
 
   appPage.on('console', (msg) => {
@@ -50,8 +52,8 @@ export const getAppSnapshot = async ({
     const response = await appPage.goto(url, {
       waitUntil,
     });
-    const sourceHtml = sanitizeString((await response?.text()) || '');
-    const clientRenderContent = sanitizeString(await appPage.content());
+    const sourceHtml = (await response?.text()) || '';
+    const clientRenderContent = await appPage.content();
 
     expect(warnings).toEqual([]);
     expect(errors).toEqual([]);

@@ -8,6 +8,7 @@ import { HMRTelemetryPlugin } from '../../plugins/HMRTelemetry.js';
 import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 import { getAppHosts } from '../../../../utils/contextUtils/hosts.js';
 import isCI from '../../../../utils/isCI.js';
+import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
 
 const require = createRequire(import.meta.url);
 
@@ -36,8 +37,15 @@ export const createServerBuildConfig = (skuContext: SkuContext) => {
 
 export const createClientBuildConfig = (skuContext: SkuContext) => {
   const outDir = createOutDir(skuContext.paths.target);
+
+  const isProductionBuild = process.env.NODE_ENV === 'production';
+  const bundleAnalyzer = isProductionBuild
+    ? bundleAnalyzerPlugin({ name: 'client' })
+    : null;
+
   return createSkuViteConfig(
     {
+      plugins: [bundleAnalyzer],
       build: {
         ssr: false,
         outDir: outDir.client,

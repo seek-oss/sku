@@ -1,93 +1,53 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`typescript-css-modules > build > should create valid app 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="stylesheet"
-      href="/static/typescript/main-4bad37555f2de4beeb21.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/typescript/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/typescript/2.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/static/typescript/main.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div class="_19hsk3y0">
-        <div
-          class="_19hsk3y1"
-          data-automation-text="true"
-        >
-          Hello World
-        </div>
-        <div>
-          Render type:
-          Initial
-        </div>
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/typescript/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/typescript/2.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/static/typescript/main.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -44,7 +44,7 @@
+@@ -1,82 +1,82 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/static/typescript/main-4bad37555f2de4beeb21.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/static/typescript/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/static/typescript/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/static/typescript/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_19hsk3y0">
+         <div
+           class="_19hsk3y1"
+           data-automation-text="true"
+         >
+           Hello World
          </div>
          <div>
            Render type:
@@ -96,6 +56,39 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/static/typescript/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/static/typescript/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/static/typescript/main.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`typescript-css-modules > build > should generate the expected files 1`] = `
@@ -210,101 +203,56 @@ SOURCE HTML: <!DOCTYPE html>
 `;
 
 exports[`typescript-css-modules > build-ssr > should create valid app 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="stylesheet"
-      href="http://localhost:4003/main-4bad37555f2de4beeb21.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="http://localhost:4003/runtime.js"
-      crossorigin="anonymous"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="http://localhost:4003/2.js"
-      crossorigin="anonymous"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="http://localhost:4003/main.js"
-      crossorigin="anonymous"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div class="_19hsk3y0">
-        <div
-          class="_19hsk3y1"
-          data-automation-text="true"
-        >
-          Hello World
-        </div>
-        <div>
-          Render type:
-          Initial
-        </div>
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-      crossorigin="anonymous"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-      crossorigin="anonymous"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="http://localhost:4003/runtime.js"
-      crossorigin="anonymous"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="http://localhost:4003/2.js"
-      crossorigin="anonymous"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="http://localhost:4003/main.js"
-      crossorigin="anonymous"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -47,7 +47,7 @@
+@@ -1,90 +1,90 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="http://localhost:4003/main-4bad37555f2de4beeb21.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="http://localhost:4003/runtime.js"
+       crossorigin="anonymous"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="http://localhost:4003/2.js"
+       crossorigin="anonymous"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="http://localhost:4003/main.js"
+       crossorigin="anonymous"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_19hsk3y0">
+         <div
+           class="_19hsk3y1"
+           data-automation-text="true"
+         >
+           Hello World
          </div>
          <div>
            Render type:
@@ -313,6 +261,44 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+       crossorigin="anonymous"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+       crossorigin="anonymous"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="http://localhost:4003/runtime.js"
+       crossorigin="anonymous"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="http://localhost:4003/2.js"
+       crossorigin="anonymous"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="http://localhost:4003/main.js"
+       crossorigin="anonymous"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;
 
 exports[`typescript-css-modules > build-ssr > should generate the expected files 1`] = `
@@ -334,93 +320,53 @@ exports[`typescript-css-modules > build-ssr > should generate the expected files
 `;
 
 exports[`typescript-css-modules > start > should start a development server 1`] = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>
-      My Awesome Project
-    </title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    >
-    <link
-      data-chunk="main"
-      rel="stylesheet"
-      href="/main.css"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/runtime.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/2.js"
-    >
-    <link
-      data-chunk="main"
-      rel="preload"
-      as="script"
-      href="/main.js"
-    >
-  </head>
-  <body>
-    <div id="app">
-      <div class="styles_root__19hsk3y0">
-        <div
-          class="styles_nested__19hsk3y1"
-          data-automation-text="true"
-        >
-          Hello World
-        </div>
-        <div>
-          Render type:
-          Initial
-        </div>
-      </div>
-    </div>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS__"
-      type="application/json"
-    >
-      []
-    </script>
-    <script
-      id="__LOADABLE_REQUIRED_CHUNKS___ext"
-      type="application/json"
-    >
-      {"namedChunks":[]}
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/runtime.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/2.js"
-    >
-    </script>
-    <script
-      async
-      data-chunk="main"
-      src="/main.js"
-    >
-    </script>
-  </body>
-</html>
-POST HYDRATE DIFFS: 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -44,7 +44,7 @@
+@@ -1,82 +1,82 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/main.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="styles_root__19hsk3y0">
+         <div
+           class="styles_nested__19hsk3y1"
+           data-automation-text="true"
+         >
+           Hello World
          </div>
          <div>
            Render type:
@@ -429,4 +375,37 @@ POST HYDRATE DIFFS:
          </div>
        </div>
      </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;

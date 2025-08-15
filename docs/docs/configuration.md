@@ -157,6 +157,8 @@ export default {
 
 Type: `function`
 
+Bundler: `webpack`
+
 This function provides a way to modify sku's Webpack configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
@@ -311,6 +313,46 @@ The file name of the library. The main bundle of the library will be output to `
 
 If `libraryFile` is not specified then `libraryName` will be used instead.
 
+## pathAliases
+
+Type: `Record<string, string>`
+
+Default: `{}`
+
+Bundler: `vite`
+
+Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
+
+Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
+
+**Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` configuration used in Webpack.
+
+**Example:**
+
+```typescript
+export default {
+  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  pathAliases: {
+    '@components/*': './src/components/*',
+    '@utils/*': './src/utils/*',
+    '@assets/*': './src/assets/*',
+  },
+} satisfies SkuConfig;
+```
+
+This enables clean imports like:
+
+```typescript
+import { Button } from '@components/Button';
+import { formatDate } from '@utils/date';
+```
+
+**Best practices:**
+
+- Prefer organizing code within a well-structured `src/` directory over extensive path aliasing
+- For complex projects requiring high levels of code organization, consider using a monorepo structure instead of relying heavily on path aliases
+- Path aliases cannot point to `node_modules` directories
+
 ## polyfills
 
 Type: `Array<string>`
@@ -332,6 +374,8 @@ The port the app is hosted on when running `sku start`.
 Type: `string`
 
 Default: `public`
+
+Bundler: `webpack`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
 
@@ -360,6 +404,8 @@ The render entry file to the app. This file should export the required functions
 Type: `boolean`
 
 Default: `true`
+
+Bundler: `webpack`
 
 Enable root resolution. By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
 
@@ -391,6 +437,8 @@ export default {
 
 Type: `string`
 
+Bundler: `webpack`
+
 **Only for SSR apps**
 
 Default: `./src/server.js`
@@ -400,6 +448,8 @@ The entry file for the server.
 ## serverPort
 
 Type: `number`
+
+Bundler: `webpack`
 
 **Only for SSR apps**
 
@@ -491,6 +541,8 @@ Type: `Array<string>`
 
 Default: `['./src']`
 
+Bundler: `webpack`
+
 An array of directories holding your app's source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
 
 ## supportedBrowsers
@@ -520,3 +572,50 @@ Default: `({ environment = '', site = '', route = '' }) => path.join(environment
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
 
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
+
+## \_\_UNSAFE_EXPERIMENTAL\_\_bundler
+
+Type: `string`
+
+Default: `webpack`
+
+_This is an experimental option that may change or be removed without notice._
+
+The bundler that sku uses to build the application.
+
+NOTE: Not all sku functionality is supported by the `vite` option. Production applications should not use the `vite` option.
+
+## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies
+
+Type: `string[]`
+
+Default: `[]`
+
+Bundler: `vite`
+
+_This is an experimental option that may change or be removed without notice._
+
+An array of cjs import paths that have both a default and named exports.
+
+This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
+
+## \_\_UNSAFE_EXPERIMENTAL\_\_dangerouslySetViteConfig
+
+Type: `function`
+
+Bundler: `vite`
+
+_This is an experimental option that may change or be removed without notice._
+
+This function provides a way to modify sku's Vite configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+
+As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
+If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+
+Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
+It is the responsibility of the user to ensure that their customizations are compatible with sku.

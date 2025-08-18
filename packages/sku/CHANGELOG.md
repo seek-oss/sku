@@ -8,7 +8,7 @@
 
   ### React 19 support
 
-  Sku now has React 19 support, while still supporting React 18.
+  Sku now has React 19 support, while still supporting React 18. **React 19 contains breaking changes**. Please refer to the [React 19 migration guide](https://react.dev/blog/2024/04/25/react-19-upgrade-guide) for more information on how to upgrade your application.
 
   ### Vite bundler improvements
   - `config`: The vite bundler now has full support for all sku static-site config properties. (library mode and ssr mode is not supported.)

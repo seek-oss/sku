@@ -1,7 +1,6 @@
 ---
 '@sku-lib/vitest': patch
 '@sku-lib/vite': patch
-'sku': patch
 ---
 
 Experimental vite bundler now requires vite v7.

@@ -30,14 +30,17 @@ export default defineConfig({
           ],
         },
       },
-      // Isolate braid to reduce flakiness.
+      // Isolate braid and storybook-config tests to reduce flakiness.
       {
         extends: true,
         test: {
-          name: 'braid-design-system',
+          name: 'flakey',
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [`tests/browser/braid-design-system.test.ts`],
+          include: [
+            'tests/browser/braid-design-system.test.ts',
+            'tests/browser/storybook-config.test.ts',
+          ],
           sequence: {
             groupOrder: -1,
           },
@@ -52,6 +55,7 @@ export default defineConfig({
           include: [
             `tests/browser/${defaultInclude}`,
             '!tests/browser/braid-design-system.test.ts',
+            '!tests/browser/storybook-config.test.ts',
           ],
         },
       },

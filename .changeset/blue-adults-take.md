@@ -22,6 +22,8 @@ Sku now has React 19 support, while still supporting React 18.
 
   Static site generation is our primary focus for the Vite bundler at this time, so SSR commands (`start-ssr`, `build-ssr`) with the experimental Vite bundler will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
 
+- Vite v7 is now supported. Dropped support for v6.
+
 ### `sku init`
 
 - Dependencies will now correctly be pinned when running `sku init` in PNPM workspaces.

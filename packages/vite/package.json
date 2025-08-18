@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/vite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Loadable components for sku vite",
   "types": "./dist/index.d.ts",
   "exports": {

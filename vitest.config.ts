@@ -4,6 +4,11 @@ import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
+const flakeyTestGlobs = [
+  'tests/browser/braid-design-system.test.ts',
+  'tests/browser/storybook-config.test.ts',
+];
+
 export default defineConfig({
   plugins: [tsconfigPaths()],
   server: {
@@ -37,10 +42,7 @@ export default defineConfig({
           name: 'flakey',
           environment: 'puppeteer',
           globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [
-            'tests/browser/braid-design-system.test.ts',
-            'tests/browser/storybook-config.test.ts',
-          ],
+          include: flakeyTestGlobs,
           sequence: {
             groupOrder: -1,
           },
@@ -54,8 +56,7 @@ export default defineConfig({
           globalSetup: 'vitest-environment-puppeteer/global-init',
           include: [
             `tests/browser/${defaultInclude}`,
-            '!tests/browser/braid-design-system.test.ts',
-            '!tests/browser/storybook-config.test.ts',
+            ...flakeyTestGlobs.map((g) => `!${g}`),
           ],
         },
       },

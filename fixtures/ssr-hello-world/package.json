@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "express": "^4.16.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "scripts": {
     "start:asset-server": "http-server dist-build -p 4000 --cors"

@@ -81,7 +81,7 @@ exports[`custom-src-paths > bundler vite > start > should start a development se
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,46 +1,46 @@
+@@ -1,60 +1,60 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -115,6 +115,20 @@ exports[`custom-src-paths > bundler vite > start > should start a development se
 -      src="/@id/__x00__/index.html?html-proxy&index=1.js"
 +      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
      </script>
    </head>
    <body>

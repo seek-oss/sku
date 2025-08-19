@@ -4,25 +4,14 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,69 +1,80 @@
+@@ -1,72 +1,83 @@
  <!DOCTYPE html>
  <html>
    <head>
      <meta
        http-equiv="Content-Security-Policy"
-       content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';"
+       content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=';"
      >
-     <style
-       type="text/css"
-       data-vanilla-extract-inline-dev-css
-     >
-       .styles_root__2vdre50 {
-   display: flex;
- }
- .styles_root__2vdre50 .styles_nested__2vdre51 {
-   font-size: 32px;
- }
-     </style>
      <script type="module">
        import { injectIntoGlobalHook } from "/@react-refresh";
  injectIntoGlobalHook(window);
@@ -53,6 +42,20 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
 -      src="/@id/__x00__/index.html?html-proxy&index=1.js"
 +      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
      </script>
 +    <style
 +      type="text/css"

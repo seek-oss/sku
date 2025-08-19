@@ -1107,7 +1107,7 @@ importers:
         version: 6.1.13
       open:
         specifier: ^10.1.2
-        version: 10.1.2
+        version: 10.2.0
       package-manager-detector:
         specifier: ^0.2.0
         version: 0.2.11
@@ -7072,8 +7072,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  open@10.1.2:
-    resolution: {integrity: sha512-cxN6aIDPz6rm8hbebcP7vrQNhvRcveZoJU72Y7vskh4oIm+BZwBECnx5nTmrlres1Qapvx27Qo1Auukpf8PKXw==}
+  open@10.2.0:
+    resolution: {integrity: sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==}
     engines: {node: '>=18'}
 
   open@6.4.0:
@@ -9202,6 +9202,10 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  wsl-utils@0.1.0:
+    resolution: {integrity: sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw==}
+    engines: {node: '>=18'}
 
   xdg-basedir@4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
@@ -16204,12 +16208,12 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  open@10.1.2:
+  open@10.2.0:
     dependencies:
       default-browser: 5.2.1
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
-      is-wsl: 3.1.0
+      wsl-utils: 0.1.0
 
   open@6.4.0:
     dependencies:
@@ -17506,7 +17510,7 @@ snapshots:
       mini-css-extract-plugin: 2.9.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       nano-memoize: 3.0.16
       node-html-parser: 6.1.13
-      open: 10.1.2
+      open: 10.2.0
       package-manager-detector: 0.2.11
       path-to-regexp: 6.3.0
       picomatch: 3.0.1
@@ -17658,7 +17662,7 @@ snapshots:
       mini-css-extract-plugin: 2.9.2(webpack@5.100.0)
       nano-memoize: 3.0.16
       node-html-parser: 6.1.13
-      open: 10.1.2
+      open: 10.2.0
       package-manager-detector: 0.2.11
       path-to-regexp: 6.3.0
       picomatch: 3.0.1
@@ -18727,7 +18731,7 @@ snapshots:
       http-proxy-middleware: 2.0.9(@types/express@4.17.23)(debug@4.4.1)
       ipaddr.js: 2.2.0
       launch-editor: 2.10.0
-      open: 10.1.2
+      open: 10.2.0
       p-retry: 6.2.1
       schema-utils: 4.3.2
       selfsigned: 2.4.1
@@ -18765,7 +18769,7 @@ snapshots:
       http-proxy-middleware: 2.0.9(@types/express@4.17.23)(debug@4.4.1)
       ipaddr.js: 2.2.0
       launch-editor: 2.10.0
-      open: 10.1.2
+      open: 10.2.0
       p-retry: 6.2.1
       schema-utils: 4.3.2
       selfsigned: 2.4.1
@@ -19009,6 +19013,10 @@ snapshots:
   ws@7.5.10: {}
 
   ws@8.18.3: {}
+
+  wsl-utils@0.1.0:
+    dependencies:
+      is-wsl: 3.1.0
 
   xdg-basedir@4.0.0: {}
 

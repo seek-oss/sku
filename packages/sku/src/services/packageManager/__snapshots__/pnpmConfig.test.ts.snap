@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
     "
@@ -19,7 +19,7 @@ exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommend
 ]
 `;
 
-exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
     "
@@ -38,7 +38,7 @@ exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommend
 ]
 `;
 
-exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
     "
@@ -55,123 +55,9 @@ exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommend
 ]
 `;
 
-exports[`validatePnpmConfig > when in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
 
-exports[`validatePnpmConfig > when in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please ensure you are on PNPM v10.13.0 or later.
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please ensure you are on PNPM v10.13.0 or later.
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
-
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please ensure you are on PNPM v10.13.0 or later.
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please ensure you are on PNPM v10.13.0 or later.
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
-[
-  [
-    "
---------------------------------------------------------------------------------
-
-    pnpm-plugin-sku is not configured correctly
-
-    Please delete your top-level node_modules and run "pnpm add --config
-    pnpm-plugin-sku && pnpm install".
-
---------------------------------------------------------------------------------
-  ",
-  ],
-]
-`;
-
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
-
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
     "
@@ -203,7 +89,7 @@ exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecomm
 ]
 `;
 
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
     "
@@ -235,7 +121,7 @@ exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecomm
 ]
 `;
 
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
 [
   [
     "
@@ -265,7 +151,7 @@ exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecomm
 ]
 `;
 
-exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+exports[`validatePnpmConfig > When isCI: false > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
 [
   [
     "
@@ -282,3 +168,117 @@ exports[`validatePnpmConfig > when not in CI > when npmrcExists: true, hasRecomm
   ],
 ]
 `;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: false, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > When isCI: true > when not in CI > when npmrcExists: true, hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;

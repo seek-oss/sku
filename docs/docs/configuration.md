@@ -619,3 +619,16 @@ If you only need to modify one of these configs, then you can check `env.mode` f
 
 Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
 It is the responsibility of the user to ensure that their customizations are compatible with sku.
+
+## \_\_UNSAFE_EXPERIMENTAL\_\_testRunner
+
+Type: `string`
+
+Default: `jest`
+
+_This is an experimental option that may change or be removed without notice._
+
+The test runner that sku uses to run the tests.
+Valid options are `jest` and `vitest`.
+
+NOTE: Not all `sku` functionality is supported by the `vitest` option.

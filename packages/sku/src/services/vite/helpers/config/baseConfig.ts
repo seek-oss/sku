@@ -19,10 +19,8 @@ import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
 
 const require = createRequire(import.meta.url);
-// throw new Error('hehe');
 
 const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
-  console.log('🤡🤡🤡🤡');
   const vocabConfig = getVocabConfig(skuContext);
 
   const isProductionBuild = process.env.NODE_ENV === 'production';
@@ -44,8 +42,6 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       require.resolve('@zendesk/babel-plugin-react-displayname'),
     );
   }
-
-  console.log({ prodBabelPlugins });
 
   return {
     base: skuContext.publicPath,

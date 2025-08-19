@@ -6,12 +6,11 @@ import { validatePnpmConfig } from './pnpmConfig.js';
 
 describe('validatePnpmConfig', () => {
   describe.for([true, false])('When isCI: $0', (mockedIsCI) => {
-    describe('when not in CI', () => {
-      beforeEach(() => {
-        vi.spyOn(ci, 'default', 'get').mockReturnValue(mockedIsCI);
-      });
+    beforeEach(() => {
+      vi.spyOn(ci, 'default', 'get').mockReturnValue(mockedIsCI);
+    });
 
-      describe.for`
+    describe.for`
     npmrcExists | hasRecommendedPnpmVersionInstalled | pnpmPluginSkuInstalled
     ${false}    | ${false}                           | ${false}
     ${false}    | ${false}                           | ${true}
@@ -22,32 +21,31 @@ describe('validatePnpmConfig', () => {
     ${true}     | ${true}                            | ${false}
     ${true}     | ${true}                            | ${true}
   `(
-        'when npmrcExists: $npmrcExists, hasRecommendedPnpmVersionInstalled: $hasRecommendedPnpmVersionInstalled, pnpmPluginSkuInstalled: $pnpmPluginSkuInstalled',
-        ({
-          npmrcExists,
-          hasRecommendedPnpmVersionInstalled,
-          pnpmPluginSkuInstalled,
-        }) => {
-          it('should log appropriate messages', async ({ expect }) => {
-            const logSpy = vi
-              .spyOn(global.console, 'log')
-              .mockImplementation(() => {});
+      'when npmrcExists: $npmrcExists, hasRecommendedPnpmVersionInstalled: $hasRecommendedPnpmVersionInstalled, pnpmPluginSkuInstalled: $pnpmPluginSkuInstalled',
+      ({
+        npmrcExists,
+        hasRecommendedPnpmVersionInstalled,
+        pnpmPluginSkuInstalled,
+      }) => {
+        it('should log appropriate messages', async ({ expect }) => {
+          const logSpy = vi
+            .spyOn(global.console, 'log')
+            .mockImplementation(() => {});
 
-            const fileTree: FileTree = npmrcExists ? { '.npmrc': '' } : {};
-            await using fixture = await createFixture(fileTree);
+          const fileTree: FileTree = npmrcExists ? { '.npmrc': '' } : {};
+          await using fixture = await createFixture(fileTree);
 
-            const rootDir = fixture.path;
+          const rootDir = fixture.path;
 
-            await validatePnpmConfig({
-              rootDir,
-              hasRecommendedPnpmVersionInstalled,
-              pnpmPluginSkuInstalled,
-            });
-
-            expect(logSpy.mock.calls).toMatchSnapshot();
+          await validatePnpmConfig({
+            rootDir,
+            hasRecommendedPnpmVersionInstalled,
+            pnpmPluginSkuInstalled,
           });
-        },
-      );
-    });
+
+          expect(logSpy.mock.calls).toMatchSnapshot();
+        });
+      },
+    );
   });
 });

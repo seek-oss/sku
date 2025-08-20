@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "plop": "pnpm --filter '@sku-private/plop' plop",
-    "postinstall": "node ./postinstall.mjs",
+    "postinstall": "node ./postinstall.js",
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
@@ -78,9 +78,6 @@
   },
   "engines": {
     "node": ">=20.18.2"
-  },
-  "volta": {
-    "node": "20.18.2"
   },
   "packageManager": "pnpm@10.13.1",
   "skuSkipPostInstall": true,

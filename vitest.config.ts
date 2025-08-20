@@ -4,7 +4,10 @@ import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
-const flakeyTestGlobs = ['tests/browser/storybook-config.test.ts'];
+const flakeyTestGlobs = [
+  'tests/browser/braid-design-system.test.ts',
+  'tests/browser/storybook-config.test.ts',
+];
 
 export default defineConfig({
   plugins: [tsconfigPaths()],

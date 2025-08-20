@@ -10,3 +10,7 @@ storybook-static/
 yarn.lock
 .eslintcache
 yalc.lock
+
+
+# remove before PR
+test-create-output

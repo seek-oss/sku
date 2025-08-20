@@ -4,6 +4,9 @@ import fs from 'node:fs/promises';
 import resolveSync from 'resolve-from';
 
 import type { PackageJson } from 'type-fest';
+import debug from 'debug';
+
+const log = debug('sku:dependency-graph');
 
 export const resolveFrom = async (fromDirectory: string, moduleId: string) =>
   resolveSync(fromDirectory, moduleId);
@@ -29,7 +32,7 @@ const loadPackage = async (packageJsonPath: string) =>
     .readFile(packageJsonPath, 'utf-8')
     .then(JSON.parse) as Promise<PackageJson>;
 
-const anaylyseDependency = async (
+const analyseDependency = async (
   dependent: string,
   dep: string,
   rootDir: string,
@@ -66,18 +69,26 @@ const anaylyseDependency = async (
       peerDependencies,
     });
 
-    await promiseMap([...dependencies, ...peerDependencies], (childDep) =>
-      anaylyseDependency(
-        dep,
-        childDep,
-        path.dirname(packageJsonPath),
-        depGraph,
-      ),
+    await promiseMap(
+      [...dependencies, ...peerDependencies],
+      async (childDep) => {
+        try {
+          await analyseDependency(
+            dep,
+            childDep,
+            path.dirname(packageJsonPath),
+            depGraph,
+          );
+        } catch (e) {
+          log(`Error analysing dependency ${childDep} for ${dep}.`, e);
+        }
+      },
     );
   }
 };
 
 export const extractDependencyGraph = async (rootDir: string) => {
+  log('starting to extract dependency graph...');
   const depGraph: DepGraph = new Map();
 
   const packageJson = await loadPackage(`${rootDir}/package.json`);
@@ -95,12 +106,13 @@ export const extractDependencyGraph = async (rootDir: string) => {
 
   await promiseMap(deps, async (childDep) => {
     try {
-      await anaylyseDependency(ROOT, childDep, rootDir, depGraph);
-    } catch {
-      // Ignore dep errors
+      await analyseDependency(ROOT, childDep, rootDir, depGraph);
+    } catch (e) {
+      log(`Error analysing dependency ${childDep} for ${ROOT}.`, e);
     }
   });
 
+  log('finished extracting dependency graph');
   return depGraph;
 };
 
@@ -129,7 +141,14 @@ export const getSsrExternalsForCompiledDependency = (
 
   noExternals.delete(ROOT);
 
+  const noExternal = Array.from(noExternals);
+
+  log(
+    `Found dependencies to prevent externalising for ${depName}:`,
+    noExternal,
+  );
+
   return {
-    noExternal: Array.from(noExternals),
+    noExternal,
   };
 };

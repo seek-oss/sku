@@ -6,25 +6,8 @@ import type { ViteDevServer } from 'vite';
 // https://github.com/sveltejs/kit/blob/998edb26d431e4ee4d3b4dc792a86960a85a5b45/packages/kit/src/exports/vite/dev/index.js#L186-L219
 // https://github.com/withastro/astro/blob/6aaeec5034cabf6a83e1949ec1ca8f50e7978cc1/packages/astro/src/vite-plugin-astro-server/css.ts
 
-/**
- * We need to make sure that the Braid reset styles are loaded first.
- * This will catch any `reset` files, which should generally be the first styles to load anyway.
- */
-function sortResetFirst(a: string, b: string) {
-  const aHasReset = a.includes('reset');
-  const bHasReset = b.includes('reset');
-  if (aHasReset && !bHasReset) {
-    return -1;
-  }
-  if (!aHasReset && bHasReset) {
-    return 1;
-  }
-  // preserve the order if it does not match the conditions
-  return 0;
-}
-
 export async function collectStyle(server: ViteDevServer, entries: string[]) {
-  const urls = (await collectStyleUrls(server, entries)).sort(sortResetFirst);
+  const urls = await collectStyleUrls(server, entries);
   const codes = await Promise.all(
     urls.map(async (url) => {
       const res = url.includes('\0')

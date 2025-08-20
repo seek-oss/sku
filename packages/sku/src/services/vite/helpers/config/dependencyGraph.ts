@@ -32,7 +32,7 @@ const loadPackage = async (packageJsonPath: string) =>
     .readFile(packageJsonPath, 'utf-8')
     .then(JSON.parse) as Promise<PackageJson>;
 
-const anaylyseDependency = async (
+const analyseDependency = async (
   dependent: string,
   dep: string,
   rootDir: string,
@@ -73,7 +73,7 @@ const anaylyseDependency = async (
       [...dependencies, ...peerDependencies],
       async (childDep) => {
         try {
-          await anaylyseDependency(
+          await analyseDependency(
             dep,
             childDep,
             path.dirname(packageJsonPath),
@@ -106,7 +106,7 @@ export const extractDependencyGraph = async (rootDir: string) => {
 
   await promiseMap(deps, async (childDep) => {
     try {
-      await anaylyseDependency(ROOT, childDep, rootDir, depGraph);
+      await analyseDependency(ROOT, childDep, rootDir, depGraph);
     } catch (e) {
       log(`Error analysing dependency ${childDep} for ${ROOT}.`, e);
     }

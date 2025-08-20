@@ -55,16 +55,19 @@ async function collectStyleUrls(
     if (!mod) {
       return;
     }
-    await Promise.all(
-      [...mod.importedModules].map((childMod) => traverse(childMod.url)),
-    );
+    // Sequential traversal for depth-first behavior
+    for (const childMod of mod.importedModules) {
+      await traverse(childMod.url);
+    }
   }
 
   // ensure vite's import analysis is ready _only_ for top entries to not go too aggresive
   await Promise.all(entries.map((e) => server.transformRequest(e)));
 
-  // traverse
-  await Promise.all(entries.map((url) => traverse(url)));
+  // traverse sequentially for depth-first
+  for (const url of entries) {
+    await traverse(url);
+  }
 
   // filter
   return [...visited].filter((url) => url.match(CSS_LANGS_RE));

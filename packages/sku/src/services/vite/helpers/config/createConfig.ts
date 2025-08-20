@@ -9,6 +9,7 @@ import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
 import { getAppHosts } from '../../../../utils/contextUtils/hosts.js';
 import isCI from '../../../../utils/isCI.js';
 import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
+import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';
 
 const require = createRequire(import.meta.url);
 
@@ -66,6 +67,9 @@ export const createStartConfig = (skuContext: SkuContext) => {
     {
       base: '/',
       plugins: [
+        vitePluginSsrCss({
+          entries: [skuContext.paths.renderEntry],
+        }),
         middlewarePlugin(skuContext),
         startTelemetryPlugin({
           target: 'node',

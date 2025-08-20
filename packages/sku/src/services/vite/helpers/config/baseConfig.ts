@@ -67,9 +67,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
           ],
         },
       }),
-      vanillaExtractPlugin({
-        unstable_mode: 'inlineCssInDev',
-      }),
+      vanillaExtractPlugin(),
       preloadPlugin({
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),

@@ -503,25 +503,14 @@ exports[`multiple-routes > bundler: vite > start > should render details page co
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,80 +1,88 @@
+@@ -1,83 +1,91 @@
  <!DOCTYPE html>
  <html>
    <head>
      <meta
        http-equiv="Content-Security-Policy"
-       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=';"
      >
-     <style
-       type="text/css"
-       data-vanilla-extract-inline-dev-css
-     >
-       .Home_root__ms22la0 {
-   color: red;
- }
- .Details_root__1hpn1da0 {
-   color: blue;
- }
-     </style>
      <script type="module">
        import { injectIntoGlobalHook } from "/@react-refresh";
  injectIntoGlobalHook(window);
@@ -562,6 +551,20 @@ exports[`multiple-routes > bundler: vite > start > should render details page co
 -      src="/@id/__x00__/index.html?html-proxy&index=1.js"
 +      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
      </script>
 +    <style
 +      type="text/css"
@@ -602,22 +605,14 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,74 +1,82 @@
+@@ -1,80 +1,88 @@
  <!DOCTYPE html>
  <html>
    <head>
      <meta
        http-equiv="Content-Security-Policy"
-       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=';"
+       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=';"
      >
-     <style
-       type="text/css"
-       data-vanilla-extract-inline-dev-css
-     >
-       .Home_root__ms22la0 {
-   color: red;
- }
-     </style>
      <script type="module">
        import { injectIntoGlobalHook } from "/@react-refresh";
  injectIntoGlobalHook(window);
@@ -658,6 +653,20 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
 -      src="/@id/__x00__/index.html?html-proxy&index=1.js"
 +      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
      >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
      </script>
 +    <style
 +      type="text/css"

@@ -14,7 +14,7 @@ describe('setupHosts', () => {
   });
 
   it('should set site-specific hosts', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
     await setupHosts({
@@ -34,7 +34,7 @@ describe('setupHosts', () => {
   });
 
   it('should set app-wide hosts', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
     await setupHosts({
@@ -51,7 +51,7 @@ describe('setupHosts', () => {
   });
 
   it('should combine app-wide and site-specific hosts', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
     await setupHosts({
@@ -68,7 +68,7 @@ describe('setupHosts', () => {
   });
 
   it('should set ipv4 and ipv6 hosts', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
     await setupHosts({
@@ -85,7 +85,7 @@ describe('setupHosts', () => {
   });
 
   it('should not set hosts if none are defined', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
     await setupHosts({
@@ -101,7 +101,7 @@ describe('setupHosts', () => {
   });
 
   it('should throw an error if setting hosts fails', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockSetHosts = vi
       .fn(async () => {})
       .mockRejectedValue(new Error('Failed to set hosts'));
@@ -131,7 +131,7 @@ describe('checkHosts', () => {
 
   // All this function does is output info to the console so rather than testing the output we can just that it doesn't throw.
   it('should not throw errors', async ({ expect }) => {
-    const context = createSkuContext({});
+    const context = await createSkuContext({});
     const mockGetHosts = vi.fn(async () => []);
 
     await expect(

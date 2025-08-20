@@ -4,7 +4,7 @@ import { cwd } from '../../utils/cwd.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Config } from 'jest';
 
-const { paths, rootResolution, jestDecorator } = getSkuContext();
+const { paths, rootResolution, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = paths.compilePackages

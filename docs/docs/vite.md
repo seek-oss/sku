@@ -10,9 +10,7 @@ If you wish to try it out, please reach out in [`#sku-support`].
 ## Limitations
 
 Vite support is currently only available for [static applications (SSG)][SSG].
-Support for [server-rendered applications (SSR)][SSR] is planned for the future.
-
-Practically, this means that currently only [`sku start`] and [`sku build`] are supported with Vite.
+This means that only [`sku start`] and [`sku build`] are supported.
 [`sku serve`] is also available as it is bundler agnostic.
 
 [`sku start`]: ./docs/CLI.md#start
@@ -33,11 +31,28 @@ A migration guide for `sku` libraries will be provided in the future once the de
 
 !> Before making any changes to your application, please ensure you have read this document in its entirety.
 
+There are two critical prerequisites for migrating to Vite:
+
+1. [Applications must be written in ESM][Migrating to ESM]
+2. [Applications must use Vitest for running tests][Migrating to Vitest]
+
+Given [Jest's current limitations with ESM], it is highly likely that both these prerequisites will need to be implemented at the same time.
+
+!> It is highly recommended to implement, test and release these changes independently from the changes necessary to [migrate to Vite][Migrating to Vite].
+
+[Migrating to ESM]: #migrating-to-esm
+[Migrating to Vitest]: #migrating-to-vitest
+[Migrating to Vite]: #migrating-to-vite
+
 ### Migrating to ESM
 
-Vite applications must be written in [ESM (ECMAScript Modules)][ESM].
-**_Before swapping to Vite_**, you must ensure the Node.js package containing your application declares itself as an ES module.
-Additionally, any application code must use ESM syntax for importing and exporting modules.
+Migrating to ESM involves two steps:
+
+1. [Ensure your application declares itself as an ES module][Declaring an ES module]
+1. [Ensure all application code uses ESM syntax for importing and exporting modules][ESM syntax]
+
+[Declaring an ES module]: #declaring-an-es-module
+[ESM syntax]: #esm-syntax
 
 #### Declaring an ES module
 
@@ -55,15 +70,15 @@ Declaring your package as an ES module involves adding `"type": "module"` to you
 }
 ```
 
-While this change may seem small, it has a significant impact on how Node.js and TypeScript interpret your code: it signals to Node.js and TypeScript that **any code written in `.js` or `.ts` files should be treated as ESM**.
+While this change may seem small, it has a significant impact on how Node.js and TypeScript interpret your code: it signals that **any code written in `.js` or `.ts` files should be treated as ESM**.
 
 You may have non-application code such as Node.js scripts or configuration files that will also be affected by this change.
-If these files contain [CommonJS] syntax and you do not wish to convert them to ESM, you can keep them as CommonJS by using the `.cjs` or `.cts` file extensions.
+If these files contain [CommonJS (CJS)][CommonJS] syntax and you do not wish to convert them to ESM, you can keep them as CommonJS by using the `.cjs` or `.cts` file extensions.
 However, **it is highly recommended to convert all code to ESM if possible**.
 
 #### ESM syntax
 
-Most application code at SEEK is written in ESM syntax, so it's likely unnecessary to make many changes to your codebase.
+Most application code at SEEK is already written using ESM syntax, so it's unlikely you'll need to make many changes to your application.
 However, if you _do_ need to convert some code to ESM, the primary change will be to ensure you are using the correct import syntax.
 
 In ESM, modules are imported using the `import` keyword and exported using the `export` keyword:
@@ -111,7 +126,7 @@ These features make it a great replacement for Jest in `sku` applications, espec
 Migrating to Vitest should be fairly straightforward.
 Before making any changes, it is highly recommend to read [the Vitest documentation](https://vitest.dev/guide/) to familiarise yourself with the API and features, as well as to better understand the differences between Jest and Vitest.
 
-To configure `sku` to use Vitest instead of Jest when running `sku test`, configure `__UNSAFE_EXPERIMENTAL__testRunner` in your `sku` config:
+To configure `sku` to use Vitest instead of Jest when running `sku test`, configure [`__UNSAFE_EXPERIMENTAL__testRunner`][test runner] in your `sku` config:
 
 ```typescript
 // sku.config.ts
@@ -121,6 +136,12 @@ export default {
   __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
   ...
 } satisfies SkuConfig;
+```
+
+Additionally, install the `@sku-lib/vitest` dependency:
+
+```bash
+pnpm add -D @sku-lib/vitest
 ```
 
 With this change, `sku` will now invoke [the `vitest` CLI][Vitest CLI] instead the `jest` CLI when running `sku test`.
@@ -143,6 +164,7 @@ This aligns with the Jest API and allows you to write tests without needing to i
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
+[test runner]: ./docs/configuration.md#__unsafe_experimental__testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
@@ -150,7 +172,7 @@ This aligns with the Jest API and allows you to write tests without needing to i
 
 ## Migrating to Vite
 
-To configure `sku` to bundle your applications with Vite, configure `__UNSAFE_EXPERIMENTAL__bundler` in your `sku` config:
+To configure `sku` to bundle your applications with Vite, configure [`__UNSAFE_EXPERIMENTAL__bundler`][bundler] in your `sku` config:
 
 ```typescript
 // sku.config.ts
@@ -175,6 +197,7 @@ Documented below is a list of differences between `sku` with `webpack` and `sku`
 
 ?> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
 
+[bundler]: ./docs/configuration.md#__unsafe_experimental__bundler
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### Code splitting
@@ -235,9 +258,35 @@ export default function (server) {
 ```
 
 ?> Currently only JavaScript middleware is supported.
-Support for TypeScript middleware will be added in the near future.
 
 [`use`]: https://github.com/senchalabs/connect#use-middleware
+
+### CJS named imports
+
+Importing named exports from CJS dependencies may result in an error:
+
+```
+SyntaxError: [vite] Named export 'someFunction' not found. The requested module 'someDependency' is a CommonJS module, which may not support all module.exports as named exports.
+CommonJS modules can always be imported via the default export, for example using:
+
+import pkg from 'someDependency';
+const {someFunction} = pkg;
+```
+
+`sku` provides a [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`][cjs interop] configuration option to address these errors:
+
+```typescript
+// sku.config.ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [
+    'someDependency'
+  ],
+  ...
+} satisfies SkuConfig;
+```
+[cjs interop]: ./docs/configuration.md#__unsafe_experimental__cjsinteropdependencies
 
 ### Vite client types
 

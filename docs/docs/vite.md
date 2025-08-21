@@ -286,6 +286,7 @@ export default {
   ...
 } satisfies SkuConfig;
 ```
+
 [cjs interop]: ./docs/configuration.md#__unsafe_experimental__cjsinteropdependencies
 
 ### Vite client types

@@ -55,8 +55,5 @@
     "@types/debug": "^4.1.12",
     "@types/semver": "^7.5.8",
     "typescript": "~5.8.0"
-  },
-  "peerDependencies": {
-    "sku": "workspace:*"
   }
 }

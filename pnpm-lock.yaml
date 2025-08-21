@@ -893,9 +893,6 @@ importers:
       semver:
         specifier: ^7.3.4
         version: 7.7.2
-      sku:
-        specifier: workspace:*
-        version: link:../sku
     devDependencies:
       '@types/cross-spawn':
         specifier: ^6.0.3
@@ -971,6 +968,9 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      '@sku-lib/create':
+        specifier: workspace:*
+        version: file:packages/create(babel-plugin-macros@3.1.0)(picomatch@3.0.1)
       '@sku-lib/vite':
         specifier: workspace:*
         version: link:../vite
@@ -3020,6 +3020,11 @@ packages:
 
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
+
+  '@sku-lib/create@file:packages/create':
+    resolution: {directory: packages/create, type: directory}
+    engines: {node: '>=20.15'}
+    hasBin: true
 
   '@sku-lib/vite@file:packages/vite':
     resolution: {directory: packages/vite, type: directory}
@@ -11107,6 +11112,24 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
+  '@sku-lib/create@file:packages/create(babel-plugin-macros@3.1.0)(picomatch@3.0.1)':
+    dependencies:
+      chalk: 5.4.1
+      commander: 12.1.0
+      cross-spawn: 7.0.6
+      debug: 4.4.1
+      dedent: 1.6.0(babel-plugin-macros@3.1.0)
+      eta: 3.5.0
+      fastest-validator: 1.19.1
+      fdir: 6.4.6(picomatch@3.0.1)
+      find-up: 7.0.0
+      prompts: 2.4.2
+      semver: 7.7.2
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - picomatch
+      - supports-color
+
   '@sku-lib/vite@file:packages/vite(@types/react@18.3.23)(react@18.3.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))':
     dependencies:
       '@types/react': 18.3.23
@@ -17504,6 +17527,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@18.3.1))(react@18.3.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      '@sku-lib/create': file:packages/create(babel-plugin-macros@3.1.0)(picomatch@3.0.1)
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.23)(react@18.3.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1
@@ -17656,6 +17680,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@19.1.1))(react@19.1.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.100.0)
+      '@sku-lib/create': file:packages/create(babel-plugin-macros@3.1.0)(picomatch@3.0.1)
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.9)(react@19.1.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1

@@ -17,8 +17,8 @@ import {
   rootDir,
   packageManagerVersion,
 } from '../utils/packageManager.js';
-// import { write as prettierWrite } from '../utils/prettier.js';
-// import { fix as esLintFix } from '../utils/eslint.js';
+import { write as prettierWrite } from '../utils/prettier.js';
+import { fix as esLintFix } from '../utils/eslint.js';
 import { install } from '../utils/packageInstaller.js';
 
 import { setCwd } from '../utils/cwd.js';
@@ -319,10 +319,9 @@ export const createProject = async (
     exact: false,
   });
 
-  // TODO: Configure sku context and run prettier/eslint
-  // await configure(skuContext);
-  // await esLintFix();
-  // await prettierWrite();
+  // Run prettier and eslint to clean up generated files
+  await esLintFix(initDir);
+  await prettierWrite(initDir);
 
   const nextSteps = [
     `${chalk.cyan('cd')} ${projectName}`,

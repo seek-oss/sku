@@ -36,6 +36,7 @@ export default [
       'fixtures/**/*',
       '**/__testfixtures__/**',
       '**/@loadable/**/*',
+      'packages/create/templates/**',
     ],
   },
   ...modifiedSeek,

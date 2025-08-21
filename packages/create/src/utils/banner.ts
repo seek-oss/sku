@@ -13,7 +13,12 @@ export const banner = (
   };
 
   const color = colorMap[type];
-  const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+  let icon = 'ℹ️';
+  if (type === 'success') {
+    icon = '✅';
+  } else if (type === 'error') {
+    icon = '❌';
+  }
 
   console.log();
   console.log(color(`${icon} ${title}`));

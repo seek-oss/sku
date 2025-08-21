@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 
-export const execAsync = (command: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
+export const execAsync = (command: string): Promise<void> =>
+  new Promise((resolve, reject) => {
     const [cmd, ...args] = command.split(' ');
     const child = spawn(cmd, args, {
       stdio: 'inherit',
@@ -18,4 +18,3 @@ export const execAsync = (command: string): Promise<void> => {
 
     child.on('error', reject);
   });
-};

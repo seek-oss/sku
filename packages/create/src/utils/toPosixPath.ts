@@ -1,3 +1,1 @@
-export const toPosixPath = (filePath: string) => {
-  return filePath.replace(/\\/g, '/');
-};
+export const toPosixPath = (filePath: string) => filePath.replace(/\\/g, '/');

@@ -13,8 +13,8 @@ export const install = ({
   type = 'regular',
   logLevel = 'regular',
   exact = true,
-}: InstallOptions): Promise<void> => {
-  return new Promise((resolve, reject) => {
+}: InstallOptions): Promise<void> =>
+  new Promise((resolve, reject) => {
     const args: string[] = [];
 
     // Add command
@@ -64,4 +64,3 @@ export const install = ({
 
     child.on('error', reject);
   });
-};

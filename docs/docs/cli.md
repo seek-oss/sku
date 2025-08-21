@@ -186,7 +186,7 @@ sku configure
 Translation-specific commands.
 These commands are only useful if your application is configured to be a [multi-language application].
 
-[multi-language application]: ./docs/multi-language-applications.md
+[multi-language application]: ./docs/multi-language.md
 
 ### `translations compile`
 
@@ -217,8 +217,6 @@ This command supports the following options:
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
 | `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys` |
 
-[phrase-specific features]: ./docs/multi-language-applications.md#phrase-specific-features
-
 ### `translations pull`
 
 Pull translations from Phrase.
@@ -228,6 +226,8 @@ See the documentation on [phrase-specific features] for more information.
 sku translations pull
 ```
 
+[phrase-specific features]: ./docs/multi-language.md#phrase-specific-features
+
 ### `translations validate`
 
 Validate translations defined in `.vocab` directories.
@@ -236,5 +236,4 @@ Validate translations defined in `.vocab` directories.
 sku translations validate
 ```
 
-[phrase-specific features]: ./docs/multi-language-applications.md#phrase-specific-features
 [stats preset]: https://webpack.js.org/configuration/stats/#stats-presets

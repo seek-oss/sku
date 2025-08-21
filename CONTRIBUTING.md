@@ -13,10 +13,7 @@ We'd be happy to help out!
 
 1. (Optional) Fork the repo if you do not have write access
 1. Clone the repo
-1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc`. This repo is configured to use [`volta`]
-   for managing toolchain dependencies, but feel free to use `nvm`, `corepack`, or whatever suits you best.
-
-[`volta`]: https://volta.sh/
+1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc` respectively
 
 ## Making Changes
 

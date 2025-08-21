@@ -1,17 +1,6 @@
 // @ts-check
-/**
- * Keeps the .nvmrc file in sync with the node version defined in the volta config in the monorepo's package.json
- */
-
 import { readFile, writeFile } from 'node:fs/promises';
 import { format } from 'prettier';
-
-const packageJson = await readFile('./package.json', 'utf-8');
-const {
-  volta: { node: nodeVersion },
-} = JSON.parse(packageJson);
-
-await writeFile('./.nvmrc', `${nodeVersion}\n`);
 
 /**
  * Keeps the current node target for use with `@babel/preset-env` in sync with the node version defined in the

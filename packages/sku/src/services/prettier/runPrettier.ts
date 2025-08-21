@@ -10,7 +10,10 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
-const prettierConfigPath = path.join(__dirname, './config/prettierConfig.js');
+const prettierConfigPath = path.join(
+  __dirname,
+  '../../config/prettier/prettierConfig.js',
+);
 
 const runPrettier = async ({
   write,

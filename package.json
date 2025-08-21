@@ -17,7 +17,7 @@
     "test:update": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run -u",
     "setup-test-hosts": "tsx private/test-utils/setupTestHosts",
     "start:docs": "pnpm run --filter @sku-private/docs start",
-    "format": "prettier --cache --experimental-cli --write . && eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix .",
+    "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
     "version": "changeset version && pnpm install --lockfile-only"

@@ -1,11 +1,10 @@
 import { rm } from 'node:fs/promises';
 import { includeIgnoreFile } from '@eslint/compat';
 
-import { createEslintIgnoresConfig } from './config/ignores.js';
-
 import { getPathFromCwd } from '../../utils/cwd.js';
 import exists from '../../utils/exists.js';
 import { SkuConfigUpdater } from '../../utils/SkuConfigUpdater.js';
+import { createEslintIgnoresConfig } from '../../config/eslint/ignores.js';
 
 const oldEslintConfigPath = getPathFromCwd('.eslintrc');
 const eslintIgnorePath = getPathFromCwd('.eslintignore');

@@ -83,9 +83,8 @@ This can be a faster way to iterate on a feature than rather than running the te
 
 There are 3 ways to run commands against a fixture:
 
-1. Run `pnpm fixture <fuzzy-fixture> <script>`, runs a `package.json` script with a fuzzy name search on fixture directories
-2. Run `pnpm fixture:list`, select the fixture you want and the `package.json` script to run
-3. `cd` into the fixture and run a command directly: `cd fixtures/styling && pnpm sku start`.
+1. Run `pnpm fixture [fuzzy-fixture] [script]`, runs a `package.json` script with a fuzzy name search on fixture directories. Running with no arguments will list all fixtures and scripts.
+2. `cd` into the fixture and run a command directly: `cd fixtures/styling && pnpm sku start`.
 
 > [!TIP]
 > `pnpm fixture` lists scripts in a fixture's `package.json` file.

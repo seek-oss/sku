@@ -38,7 +38,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
         await import(skuContext.paths.devServerMiddleware)
       ).default;
       if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-        devServerMiddleware(server);
+        devServerMiddleware(server.middlewares);
         log('Dev server middleware loaded');
       }
     }

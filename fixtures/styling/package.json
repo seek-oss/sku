@@ -5,6 +5,9 @@
   "scripts": {
     "start": "storybook dev --ci --exact-port --port 8090"
   },
+  "exports": {
+    "./package.json": "./package.json"
+  },
   "dependencies": {
     "@sku-fixtures/package-with-styles": "./fake/node_modules/package-with-styles",
     "react": "catalog:",

@@ -1326,6 +1326,27 @@ importers:
 
   private/eslint-plugin: {}
 
+  private/fixture-cli:
+    devDependencies:
+      '@clack/prompts':
+        specifier: 1.0.0-alpha.4
+        version: 1.0.0-alpha.4
+      '@types/cross-spawn':
+        specifier: ^6.0.6
+        version: 6.0.6
+      commander:
+        specifier: ^14.0.0
+        version: 14.0.0
+      cross-spawn:
+        specifier: ^7.0.6
+        version: 7.0.6
+      fuse.js:
+        specifier: ^7.1.0
+        version: 7.1.0
+      tsx:
+        specifier: ^4.19.4
+        version: 4.20.3
+
   private/plop:
     devDependencies:
       plop:
@@ -1358,21 +1379,6 @@ importers:
       diffable-html:
         specifier: ^6.0.1
         version: 6.0.1
-
-  private/scripts:
-    devDependencies:
-      '@clack/prompts':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4
-      '@types/cross-spawn':
-        specifier: ^6.0.6
-        version: 6.0.6
-      cross-spawn:
-        specifier: ^7.0.6
-        version: 7.0.6
-      tsx:
-        specifier: ^4.19.4
-        version: 4.20.3
 
   private/test-utils:
     devDependencies:
@@ -5613,6 +5619,10 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  fuse.js@7.1.0:
+    resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
+    engines: {node: '>=10'}
 
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -14543,6 +14553,8 @@ snapshots:
       is-callable: 1.2.7
 
   functions-have-names@1.2.3: {}
+
+  fuse.js@7.1.0: {}
 
   gensync@1.0.0-beta.2: {}
 

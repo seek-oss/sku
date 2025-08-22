@@ -1,14 +1,16 @@
 {
-  "name": "@sku-private/scripts",
+  "name": "@sku-private/fixture-cli",
   "private": true,
   "type": "module",
   "scripts": {
-    "fixture": "tsx ./src/fixture.ts"
+    "fixture": "tsx ./src/index.ts"
   },
   "devDependencies": {
     "@clack/prompts": "1.0.0-alpha.4",
     "@types/cross-spawn": "^6.0.6",
     "cross-spawn": "^7.0.6",
-    "tsx": "^4.19.4"
+    "tsx": "^4.19.4",
+    "commander": "^14.0.0",
+    "fuse.js": "^7.1.0"
   }
 }

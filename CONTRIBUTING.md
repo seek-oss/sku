@@ -81,10 +81,11 @@ pnpm run test:update
 You can also run commands directly against any of the app fixtures.
 This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
 
-There are 2 ways to run commands against a fixture:
+There are 3 ways to run commands against a fixture:
 
 1. Run `pnpm fixture`, select the fixture you want and the `package.json` script to run
-2. `cd` into the fixture and run a command directly. E.g. `cd fixtures/styling && pnpm sku start`.
+1. Use `pnpm`'s `--filter` flag to target a specific fixture: `pnpm --filter="@sku-fixtures/styling" exec sku start`
+1. `cd` into the fixture and run a command directly: `cd fixtures/styling && pnpm sku start`.
 
 > [!TIP]
 > `pnpm fixture` lists scripts in a fixture's `package.json` file.

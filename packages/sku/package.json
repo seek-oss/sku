@@ -13,7 +13,7 @@
         "require": "./dist/index.d.cts"
       }
     },
-    "./jest-preset": "./dist/config/jest/jest-preset.js",
+    "./jest-preset": "./dist/config/jest/jestPreset.js",
     "./config/eslint": {
       "types": "./dist/config/eslint/eslintConfig.d.ts",
       "default": "./dist/config/eslint/eslintConfig.js"

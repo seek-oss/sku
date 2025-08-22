@@ -21,7 +21,7 @@ export const banner = (
   }
 
   console.log();
-  console.log(color(`${icon} ${title}`));
+  console.log(color(`${icon}  ${title}`));
 
   if (messages.length > 0) {
     console.log();

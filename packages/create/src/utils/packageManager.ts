@@ -21,7 +21,7 @@ const validatePackageManager = (packageManager: string) => {
 const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
-  let packageManager = 'npm';
+  let packageManager = 'pnpm';
   let version = null;
 
   if (userAgent) {

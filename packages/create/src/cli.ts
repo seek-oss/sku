@@ -19,11 +19,6 @@ program
     '--verbose',
     "Sets the underlying packageManager's log level to `verbose`",
   )
-  .option(
-    '--package-manager <manager>',
-    'Package manager to use (npm, yarn, pnpm)',
-    'pnpm',
-  )
   .action(async (projectName, options) => {
     await createProject(projectName, options);
   });

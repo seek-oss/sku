@@ -16,7 +16,7 @@ export const selectFixture = async (input?: string): Promise<string> => {
 
   if (fixtureMatches.length === 1) {
     log.info(
-      `Found matching fixtures ${styleText(['bold', 'blue'], fixtureMatches[0])}`,
+      `Found matching fixture ${styleText(['bold', 'blue'], fixtureMatches[0])}`,
     );
     return fixtureMatches[0];
   }

@@ -24,4 +24,4 @@
 - [Testing](./docs/testing.md)
 - [Linting/formatting](./docs/linting.md)
 - **Experimental**
-- [Vite Support](./docs/vite-support.md)
+- [Vite](./docs/vite.md)

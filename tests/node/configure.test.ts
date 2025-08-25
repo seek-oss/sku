@@ -9,7 +9,7 @@ import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 
-import prettierConfig from '../../packages/sku/dist/config/prettier/prettierConfig.js';
+import prettierConfig from '../../packages/sku/dist/config/prettier.js';
 
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 

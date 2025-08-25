@@ -246,8 +246,8 @@ const makeWebpackConfig = ({
         path: paths.target,
         publicPath,
         filename: `server.${type === 'module' ? 'c' : ''}js`,
-        library: { name: 'server', type: 'var' },
         hotUpdateChunkFilename: `[id].[fullhash].hot-update.${type === 'module' ? 'c' : ''}js`,
+        library: { name: 'server', type: 'var' },
       },
       cache: getCacheSettings({ isDevServer, paths }),
       optimization: {

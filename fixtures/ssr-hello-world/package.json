@@ -8,6 +8,7 @@
     "react-dom": "catalog:"
   },
   "scripts": {
+    "start": "sku start-ssr --config=sku-start.config.ts",
     "start:asset-server": "http-server dist-build -p 4000 --cors"
   },
   "devDependencies": {

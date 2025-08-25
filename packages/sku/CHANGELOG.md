@@ -1,5 +1,36 @@
 # sku
 
+## 14.10.0
+
+### Minor Changes
+
+- Add production babel plugins to Vite bundler for optimized builds. ([#1350](https://github.com/seek-oss/sku/pull/1350))
+  - `babel-plugin-transform-react-remove-prop-types` - Strips PropTypes from production builds
+  - `@babel/plugin-transform-react-constant-elements` - Hoists constant JSX elements
+
+### Patch Changes
+
+- `start(vite)`: Fix sporadic hydration issues ([#1356](https://github.com/seek-oss/sku/pull/1356))
+
+- Fix hot reload modules loading as ESM causing Reference Error for type: module packages ([#1361](https://github.com/seek-oss/sku/pull/1361))
+
+  When in type: module package hot-module files (`*.hot-update.js`) could be loaded as ESM.
+  Resulting in a reference error.
+
+  **Example Error:**
+
+  ```js
+  exports.id = 0;
+  ^
+  // ReferenceError: exports is not defined
+  ```
+
+  Hot reload modules are now exported as `*.hot-update.cjs` to ensure they are loaded as CJS.
+
+- Don't emit `.npmrc` validation warning on CI ([#1352](https://github.com/seek-oss/sku/pull/1352))
+
+  `.npmrc` files may be generated on CI, causing a false positive
+
 ## 14.9.0
 
 ### Minor Changes

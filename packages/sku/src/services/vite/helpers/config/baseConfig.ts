@@ -12,7 +12,7 @@ import { fixViteVanillaExtractDepScanPlugin } from '../../plugins/esbuild/fixVit
 
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { getVocabConfig } from '../../../vocab/config/vocab.js';
+import { getVocabConfig } from '../../../vocab/config.js';
 import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';

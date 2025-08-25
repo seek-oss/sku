@@ -1,6 +1,6 @@
 import { createTransformer } from 'babel-jest';
 
-import babelConfig from '../babel/babelConfig.js';
+import babelConfig from '../babel.js';
 import targets from '../targets.json' with { type: 'json' };
 
 import { getSkuContext } from '../../context/createSkuContext.js';

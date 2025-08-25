@@ -1,8 +1,8 @@
 import { resolveConfig } from '@vocab/core';
 
-import { getVocabConfig } from '../../../../services/vocab/config/vocab.js';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { execSync } from 'node:child_process';
+import { getVocabConfig } from '../../../../services/vocab/config.js';
 
 export const ensureBranch = async () => {
   const branch = getGitBranch();

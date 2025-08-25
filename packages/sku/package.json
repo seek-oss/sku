@@ -13,14 +13,14 @@
         "require": "./dist/index.d.cts"
       }
     },
-    "./jest-preset": "./dist/config/jest/jest-preset.js",
+    "./jest-preset": "./dist/config/jest/preset.js",
     "./config/eslint": {
-      "types": "./dist/services/eslint/config/index.d.ts",
-      "default": "./dist/services/eslint/config/index.js"
+      "types": "./dist/config/eslint/config.d.ts",
+      "default": "./dist/config/eslint/config.js"
     },
     "./config/storybook": {
-      "types": "./dist/config/storybook/index.d.ts",
-      "default": "./dist/config/storybook/index.cjs"
+      "types": "./dist/config/storybook/config.d.ts",
+      "default": "./dist/config/storybook/config.cjs"
     },
     "./vite/loadable": {
       "types": "./dist/services/vite/loadable/index.d.ts",

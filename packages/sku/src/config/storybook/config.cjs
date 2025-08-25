@@ -19,9 +19,8 @@
 
 /** @type AsyncWebpackFinal */
 const webpackFinal = async (config, { configType }) => {
-  const makeStorybookWebpackConfig = (
-    await import('./storybookWebpackConfig.js')
-  ).default;
+  const makeStorybookWebpackConfig = (await import('./webpackConfig.js'))
+    .default;
 
   return makeStorybookWebpackConfig(config, {
     // storybook dev -> configType === 'DEVELOPMENT'
@@ -32,7 +31,7 @@ const webpackFinal = async (config, { configType }) => {
 
 /** @type {NonNullable<StorybookConfig['babel']>} */
 const babel = async () => {
-  const createBabelConfig = (await import('../babel/babelConfig.js')).default;
+  const createBabelConfig = (await import('../babel.js')).default;
 
   return createBabelConfig({
     target: 'browser',

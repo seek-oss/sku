@@ -1,7 +1,7 @@
-import { cwd } from '../../utils/cwd.js';
+import { cwd } from '../utils/cwd.js';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
-import { rootResolutionFileExtensions } from '../fileResolutionExtensions.js';
+import { rootResolutionFileExtensions } from './fileResolutionExtensions.js';
 
 const require = createRequire(import.meta.url);
 

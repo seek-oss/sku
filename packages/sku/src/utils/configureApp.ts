@@ -6,8 +6,8 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '../services/prettier/config/prettierConfig.js';
-import createTSConfig from '../services/typescript/config/tsconfig.js';
+import prettierConfig from '../config/prettier.js';
+import createTSConfig from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,

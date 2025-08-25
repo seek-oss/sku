@@ -28,7 +28,7 @@ import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 import debug from 'debug';
 
 import prettier from 'prettier';
-import prettierConfig from '../config/prettier/prettierConfig.js';
+import prettierConfig from '../config/prettier.js';
 
 import type { SkuConfig, CompleteSkuConfig } from '../types/types.js';
 

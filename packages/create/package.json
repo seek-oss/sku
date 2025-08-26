@@ -54,6 +54,9 @@
     "@types/cross-spawn": "^6.0.3",
     "@types/debug": "^4.1.12",
     "@types/semver": "^7.5.8",
-    "typescript": "~5.8.0"
+    "typescript": "~5.8.0",
+    "vitest": "catalog:",
+    "@sku-lib/vitest": "workspace:*",
+    "fs-fixture": "^1.1.0"
   }
 }

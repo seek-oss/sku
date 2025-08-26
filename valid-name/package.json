@@ -1,0 +1,13 @@
+{
+  "name": "valid-name",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "sku start",
+    "test": "sku test",
+    "build": "sku build",
+    "serve": "sku serve",
+    "lint": "sku lint",
+    "format": "sku format"
+  }
+}

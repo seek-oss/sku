@@ -4,7 +4,7 @@ import semver from 'semver';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 
-const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+export const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
 
 const validatePackageManager = (packageManager: string) => {
   if (!supportedPackageManagers.includes(packageManager)) {
@@ -18,7 +18,7 @@ const validatePackageManager = (packageManager: string) => {
   return packageManager as SupportedPackageManager;
 };
 
-const getPackageManagerFromUserAgent = () => {
+export const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
   let packageManager = 'pnpm';
@@ -30,10 +30,10 @@ const getPackageManagerFromUserAgent = () => {
 
   if (userAgent.includes('yarn')) {
     packageManager = 'yarn';
-  }
-
-  if (userAgent.includes('pnpm')) {
+  } else if (userAgent.includes('pnpm')) {
     packageManager = 'pnpm';
+  } else if (userAgent.includes('npm')) {
+    packageManager = 'npm';
   }
 
   return { packageManager, version };
@@ -45,7 +45,7 @@ const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
   npm: 'package-lock.json',
 };
 
-const resolvePackageManager = () => {
+export const resolvePackageManager = () => {
   const userAgentPackageManager = getPackageManagerFromUserAgent();
   const packageManager = validatePackageManager(
     userAgentPackageManager.packageManager,

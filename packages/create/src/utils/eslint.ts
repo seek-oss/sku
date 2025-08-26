@@ -11,15 +11,15 @@ export const fix = async (projectPath: string): Promise<void> =>
 
     child.on('close', (code) => {
       if (code === 0) {
-        console.log('✓ Code fixed with ESLint');
+        console.log('✅  Code fixed with ESLint');
       } else {
-        console.log('⚠ ESLint fixing skipped (optional step)');
+        console.log('⚠️  ESLint fixing skipped (optional step)');
       }
       resolve(); // Always resolve, don't fail project creation
     });
 
     child.on('error', () => {
-      console.log('⚠ ESLint not available, skipping fixing');
+      console.log('⚠️  ESLint not available, skipping fixing');
       resolve();
     });
   });

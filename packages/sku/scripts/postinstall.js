@@ -3,15 +3,26 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import debug from 'debug';
-import chalk from 'chalk';
+import { styleText } from 'node:util';
+
+/** @param {string} text */
+const bold = (text) => styleText(['bold'], text);
 
 try {
   const initCwd = process.env.INIT_CWD;
-
   const localCwd = initCwd || process.cwd();
 
   const packageJson = join(localCwd, './package.json');
-  const packageJsonContents = await readFile(packageJson, 'utf-8');
+  let packageJsonContents;
+
+  try {
+    packageJsonContents = await readFile(packageJson, 'utf-8');
+  } catch (error) {
+    console.error(`Failed to read package.json file at ${packageJson}`);
+    console.error(error);
+    process.exit(1);
+  }
+
   const {
     name: packageName,
     dependencies,
@@ -33,11 +44,12 @@ try {
   }
 
   // Suppressing eslint. These imports will work after the build steps for postinstall.
-  const { setCwd } = await import('../dist/utils/cwd.js');
-  const banner = (await import('../dist/utils/banners/banner.js')).default;
-  const { createSkuContext } = await import(
-    '../dist/context/createSkuContext.js'
-  );
+  const [{ setCwd }, { default: banner }, { createSkuContext }] =
+    await Promise.all([
+      import('../dist/utils/cwd.js'),
+      import('../dist/utils/banners/banner.js'),
+      import('../dist/context/createSkuContext.js'),
+    ]);
 
   const log = debug('sku:postinstall');
 
@@ -45,10 +57,10 @@ try {
 
   if (hasSkuDep) {
     banner('warning', 'sku dependency detected', [
-      `${chalk.bold('sku')} is present as a ${chalk.bold('dependency')} in ${chalk.bold(
+      `${bold('sku')} is installed as a ${bold('dependency')} in ${bold(
         packageJson,
       )}.`,
-      `${chalk.bold('sku')} should be installed in ${chalk.bold('devDependencies')}.`,
+      `${bold('sku')} should be installed in ${bold('devDependencies')}.`,
     ]);
   }
 
@@ -62,23 +74,24 @@ try {
       'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
     );
     console.error(error);
-    throw error;
+    process.exit(1);
   }
   log('postinstall', 'loaded configure');
 
   try {
     log('postinstall', 'running configure');
-    const skuContext = await createSkuContext({});
+    const skuContext = createSkuContext({});
     configure(skuContext);
-    log('postinstall', 'successfully configured');
   } catch (error) {
     console.error(
       'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',
     );
     console.error(error);
-    throw error;
+    process.exit(1);
   }
-} catch {
-  console.log('package.json does not exist');
-  process.exit();
+  log('postinstall', 'successfully configured');
+} catch (error) {
+  console.error('An unknown error occurred');
+  console.error(error);
+  process.exit(1);
 }

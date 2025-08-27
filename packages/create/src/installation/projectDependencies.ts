@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import { install } from '../utils/packageInstaller.js';
+import { install, installConfig } from '../utils/packageManagerRunner.js';
+import { isAtLeastPnpmV10, isPnpm } from '../utils/packageManager.js';
 
 import type { TemplateConfig } from '../templates/templateConfigs.js';
 
@@ -12,20 +13,23 @@ export async function installProjectDependencies(
   options: InstallOptions = {},
 ): Promise<void> {
   const deps = templateConfig.dependencies;
-  const devDeps = [
-    ...templateConfig.devDependencies,
-    'sku@latest', // Always use latest sku version
-  ];
+  const devDeps = [...templateConfig.devDependencies, 'sku@latest'];
 
   console.log(`Installing dependencies. This might take a while.`);
 
   // Install PNPM plugin for v10+
-  // if (isAtLeastPnpmV10()) {
-  //   console.log(
-  //     `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`
-  //   );
-  //   await execAsync('pnpm add --config pnpm-plugin-sku');
-  // }
+  if (isPnpm && isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    try {
+      await installConfig('pnpm-plugin-sku');
+    } catch (error) {
+      console.warn(
+        `Failed to install pnpm-plugin-sku: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
 
   console.log(
     `Installing ${deps

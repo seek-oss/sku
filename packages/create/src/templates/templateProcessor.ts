@@ -9,7 +9,7 @@ import {
   getPackageManagerInstallPage,
   getInstallCommand,
 } from '../utils/packageManager.js';
-import { toPosixPath } from '../utils/toPosixPath.js';
+import toPosixPath from '../utils/toPosixPath.js';
 
 const removeLeadingUnderscoreFromFileName = (filePath: string) => {
   const basename = path.basename(filePath);
@@ -109,7 +109,6 @@ export async function processTemplateFiles(
   );
 }
 
-// Export utility functions for testing
 export {
   removeLeadingUnderscoreFromFileName,
   getTemplateFileDestinationFromRoot,

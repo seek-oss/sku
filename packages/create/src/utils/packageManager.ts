@@ -21,10 +21,12 @@ const validatePackageManager = (packageManager: string) => {
 export const getPackageManagerFromUserAgent = () => {
   const userAgent = process.env.npm_config_user_agent || '';
 
+  // Default to 'pnpm' for create package (different from sku which defaults to npm)
   let packageManager = 'pnpm';
-  let version = null;
 
+  let version = null;
   if (userAgent) {
+    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
     version = userAgent.split(' ')?.[0].split('/')?.[1];
   }
 
@@ -72,6 +74,16 @@ export const isAtLeastPnpmV10 = () =>
   packageManager === 'pnpm' &&
   packageManagerVersion &&
   semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+const recommendedPnpmVersion = '10.13.0';
+export const isAtLeastRecommendedPnpmVersion = () =>
+  packageManager === 'pnpm' &&
+  packageManagerVersion &&
+  semver.satisfies(packageManagerVersion, `>=${recommendedPnpmVersion}`);
+
+export const isYarn = packageManager === 'yarn';
+export const isPnpm = packageManager === 'pnpm';
+export const isNpm = packageManager === 'npm';
 
 export const getRunCommand = (script: string) => {
   switch (packageManager) {

@@ -8,7 +8,7 @@ import {
   ProjectValidationError,
 } from '../validation/projectValidation.js';
 import { generatePackageJson } from '../config/packageJsonGenerator.js';
-import { installProjectDependencies } from '../installation/dependencyInstaller.js';
+import { installProjectDependencies } from '../installation/projectDependencies.js';
 import { processTemplateFiles } from '../templates/templateProcessor.js';
 import { TEMPLATES, type TemplateKey } from '../templates/templateConfigs.js';
 
@@ -35,7 +35,7 @@ interface CreateProjectOptions {
   packageManager?: string;
 }
 
-async function selectTemplate(template?: string): Promise<TemplateKey> {
+const selectTemplate = async (template?: string): Promise<TemplateKey> => {
   if (template && template !== 'interactive' && template in TEMPLATES) {
     return template as TemplateKey;
   }
@@ -58,7 +58,7 @@ async function selectTemplate(template?: string): Promise<TemplateKey> {
   }
 
   return selectedTemplate;
-}
+};
 
 export const createProject = async (
   projectName: string,
@@ -84,12 +84,12 @@ export const createProject = async (
 
   const appName = path.basename(initDir);
 
-  await mkdir(projectName, { recursive: true });
-
   if (!isEmptyDir(initDir)) {
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }
+
+  await mkdir(projectName, { recursive: true });
 
   console.log(`Creating a new sku project in ${chalk.green(initDir)}.`);
   console.log(`Using template: ${chalk.cyan(templateConfig.name)}`);
@@ -118,7 +118,6 @@ export const createProject = async (
     verbose: options.verbose,
   });
 
-  // Run prettier and eslint to clean up generated files
   await esLintFix(initDir);
   await prettierWrite(initDir);
 

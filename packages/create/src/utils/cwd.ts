@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 let cwd = process.cwd();
 
 export const setCwd = (dir: string) => {
@@ -5,3 +7,5 @@ export const setCwd = (dir: string) => {
 };
 
 export const getCwd = () => cwd;
+
+export const getPathFromCwd = (filePath: string) => join(cwd, filePath);

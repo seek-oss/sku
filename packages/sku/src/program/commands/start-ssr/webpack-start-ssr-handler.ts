@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';
+import proxy from 'express-http-proxy';
 
 import getCertificate from '../../../utils/certificate.js';
 
@@ -89,6 +90,8 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
+  const devServerAsProxy = skuContext.devServerAsProxy;
+
   await withHostile(checkHosts)(skuContext);
 
   const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
@@ -107,20 +110,26 @@ export const webpackStartSsrHandler = async ({
 
   const proto = httpsDevServer ? 'https' : 'http';
 
-  const serverUrl = `${proto}://${appHosts?.[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `${proto}://${appHosts?.[0]}:${clientPort}`;
+  const serverHost = `${proto}://${appHosts?.[0]}:${serverPort}`;
+  const webpackDevServerHost = `${proto}://${appHosts?.[0]}:${clientPort}`;
+
+  const initialUrl = `${devServerAsProxy ? webpackDevServerHost : serverHost}${initialPath}`;
 
   console.log();
   console.log(
-    chalk.blue(
-      `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
-    ),
+    chalk.blue(`Starting the dev server on ${chalk.underline(initialUrl)}`),
   );
-  console.log(
-    chalk.blue(
-      `Starting the SSR development server on ${chalk.underline(serverUrl)}`,
-    ),
-  );
+  if (devServerAsProxy) {
+    console.log(
+      chalk.blue(`Starting the SSR server on ${chalk.underline(serverHost)}`),
+    );
+  } else {
+    console.log(
+      chalk.blue(
+        `Starting the webpack server on ${chalk.underline(webpackDevServerHost)}`,
+      ),
+    );
+  }
   console.log();
 
   const onServerDone = once((err, stats) => {
@@ -143,7 +152,7 @@ export const webpackStartSsrHandler = async ({
 
     serverManager.start();
 
-    openBrowser(serverUrl);
+    openBrowser(initialUrl);
   });
 
   // Starts the server webpack config running.
@@ -177,6 +186,16 @@ export const webpackStartSsrHandler = async ({
     },
     setupExitSignals: true,
   };
+
+  if (devServerAsProxy) {
+    devServerConfig.setupMiddlewares = (middlewares) => [
+      ...middlewares,
+      {
+        name: 'send-to-ssr',
+        middleware: proxy(serverHost),
+      },
+    ];
+  }
 
   if (httpsDevServer) {
     const pems = await getCertificate('.ssl', hosts);

@@ -14,8 +14,8 @@
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@vanilla-extract/css": "^1.0.0",
-    "sku": "workspace:*",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true
 }

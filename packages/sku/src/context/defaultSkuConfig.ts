@@ -42,6 +42,7 @@ export default {
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
+  devServerAsProxy: true,
   devServerMiddleware: undefined,
   rootResolution: !isCompilePackage,
   languages: undefined,

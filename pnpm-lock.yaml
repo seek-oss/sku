@@ -912,7 +912,7 @@ importers:
         version: 5.15.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
-        version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+        version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@sku-lib/vite':
         specifier: workspace:*
         version: link:../vite
@@ -1054,6 +1054,9 @@ importers:
       express:
         specifier: ^4.19.2
         version: 4.21.2
+      express-http-proxy:
+        specifier: ^2.1.1
+        version: 2.1.1
       fastest-levenshtein:
         specifier: ^1.0.16
         version: 1.0.16
@@ -1181,8 +1184,8 @@ importers:
         specifier: ^4.6.1
         version: 4.10.2
       webpack-dev-server:
-        specifier: <=5.2.0
-        version: 5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+        specifier: ^5.2.2
+        version: 5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
@@ -1217,6 +1220,9 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
+      '@types/express-http-proxy':
+        specifier: ^1.6.7
+        version: 1.6.7
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -3299,6 +3305,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/express-http-proxy@1.6.7':
+    resolution: {integrity: sha512-CEp9pbnwVI1RzN9PXc+KESMxwUW5r1O7tkWb5h7Wg/YAIf+KulD/zKev8fbbn+Ljt0Yvs8MXwV2W6Id+cKxe2Q==}
+
   '@types/express-serve-static-core@4.19.6':
     resolution: {integrity: sha512-N4LZ2xG7DatVqhCZzOGb1Yi5lMbXSZcmdLDe9EzSndPV2HpWYWzRbaerl2n27irrm94EPpprqa8KpskPT085+A==}
 
@@ -4766,6 +4775,14 @@ packages:
       supports-color:
         optional: true
 
+  debug@3.2.7:
+    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
     engines: {node: '>=6.0'}
@@ -5109,6 +5126,9 @@ packages:
     resolution: {integrity: sha512-w+5mJ3GuFL+NjVtJlvydShqE1eN3h3PbI7/5LAsYJP/2qtuMXjfL2LpHSRqo4b4eSF5K/DH1JXKUAHSB2UW50g==}
     engines: {node: '>= 0.4'}
 
+  es6-promise@4.2.8:
+    resolution: {integrity: sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==}
+
   esbuild-register@3.6.0:
     resolution: {integrity: sha512-H2/S7Pm8a9CL1uhp9OvjwrBh5Pvx0H8qVOxNu8Wed9Y7qv56MPtq+GGM8RJpq6glYJn9Wspr8uw7l55uyinNeg==}
     peerDependencies:
@@ -5370,6 +5390,10 @@ packages:
   expect@30.0.4:
     resolution: {integrity: sha512-dDLGjnP2cKbEppxVICxI/Uf4YemmGMPNy0QytCbfafbpYk9AFQsxb8Uyrxii0RPK7FWgLGlSem+07WirwS3cFQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
+
+  express-http-proxy@2.1.1:
+    resolution: {integrity: sha512-4aRQRqDQU7qNPV5av0/hLcyc0guB9UP71nCYrQEYml7YphTo8tmWf3nDZWdTJMMjFikyz9xKXaURor7Chygdwg==}
+    engines: {node: '>=6.0.0'}
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -9090,6 +9114,19 @@ packages:
       webpack-cli:
         optional: true
 
+  webpack-dev-server@5.2.2:
+    resolution: {integrity: sha512-QcQ72gh8a+7JO63TAx/6XZf/CWhgMzu5m0QirvPfGvptOusAxG12w2+aua1Jkjr7hzaWDnJ2n6JFeexMHI+Zjg==}
+    engines: {node: '>= 18.12.0'}
+    hasBin: true
+    peerDependencies:
+      webpack: ^5.0.0
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack:
+        optional: true
+      webpack-cli:
+        optional: true
+
   webpack-hot-middleware@2.26.1:
     resolution: {integrity: sha512-khZGfAeJx6I8K9zKohEWWYN6KDlVw2DHownoe+6Vtwj1LP9WFgegXnVMSkZ/dBEBtXFwrkkydsaPFlB7f8wU2A==}
 
@@ -10972,22 +11009,7 @@ snapshots:
 
   '@pkgr/core@0.2.7': {}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))':
-    dependencies:
-      anser: 2.3.2
-      core-js-pure: 3.44.0
-      error-stack-parser: 2.1.4
-      html-entities: 2.6.0
-      react-refresh: 0.17.0
-      schema-utils: 4.3.2
-      source-map: 0.7.4
-      webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)
-    optionalDependencies:
-      type-fest: 4.41.0
-      webpack-dev-server: 5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
-      webpack-hot-middleware: 2.26.1
-
-  '@pmmmwh/react-refresh-webpack-plugin@0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.100.0)':
+  '@pmmmwh/react-refresh-webpack-plugin@0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.2(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0))(webpack-hot-middleware@2.26.1)(webpack@5.100.0)':
     dependencies:
       anser: 2.3.2
       core-js-pure: 3.44.0
@@ -10999,7 +11021,22 @@ snapshots:
       webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)(webpack-cli@5.1.4)
     optionalDependencies:
       type-fest: 4.41.0
-      webpack-dev-server: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
+      webpack-dev-server: 5.2.2(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
+      webpack-hot-middleware: 2.26.1
+
+  '@pmmmwh/react-refresh-webpack-plugin@0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))':
+    dependencies:
+      anser: 2.3.2
+      core-js-pure: 3.44.0
+      error-stack-parser: 2.1.4
+      html-entities: 2.6.0
+      react-refresh: 0.17.0
+      schema-utils: 4.3.2
+      source-map: 0.7.4
+      webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)
+    optionalDependencies:
+      type-fest: 4.41.0
+      webpack-dev-server: 5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       webpack-hot-middleware: 2.26.1
 
   '@polka/url@1.0.0-next.29': {}
@@ -11628,6 +11665,10 @@ snapshots:
       '@types/json-schema': 7.0.15
 
   '@types/estree@1.0.8': {}
+
+  '@types/express-http-proxy@1.6.7':
+    dependencies:
+      '@types/express': 4.17.23
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
@@ -13464,6 +13505,10 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
+  debug@3.2.7:
+    dependencies:
+      ms: 2.1.3
+
   debug@4.4.1:
     dependencies:
       ms: 2.1.3
@@ -13863,6 +13908,8 @@ snapshots:
       is-date-object: 1.1.0
       is-symbol: 1.1.1
 
+  es6-promise@4.2.8: {}
+
   esbuild-register@3.6.0(esbuild@0.25.6):
     dependencies:
       debug: 4.4.1
@@ -14215,6 +14262,14 @@ snapshots:
       jest-message-util: 30.0.2
       jest-mock: 30.0.2
       jest-util: 30.0.2
+
+  express-http-proxy@2.1.1:
+    dependencies:
+      debug: 3.2.7
+      es6-promise: 4.2.8
+      raw-body: 2.5.2
+    transitivePeerDependencies:
+      - supports-color
 
   express@4.21.2:
     dependencies:
@@ -17504,7 +17559,7 @@ snapshots:
       '@loadable/component': 5.16.7(react@18.3.1)
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@18.3.1))(react@18.3.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
-      '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.23)(react@18.3.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1
@@ -17552,6 +17607,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      express-http-proxy: 2.1.1
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@3.0.1)
@@ -17595,7 +17651,7 @@ snapshots:
       vite-tsconfig-paths: 5.1.4(typescript@5.8.3)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-server: 5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      webpack-dev-server: 5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       webpack-merge: 6.0.1
       webpack-node-externals: 3.0.0
       wrap-ansi: 9.0.0
@@ -17656,7 +17712,7 @@ snapshots:
       '@loadable/component': 5.16.7(react@19.1.1)
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@19.1.1))(react@19.1.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0)
-      '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.100.0)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.2(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0))(webpack-hot-middleware@2.26.1)(webpack@5.100.0)
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.9)(react@19.1.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1
@@ -17704,6 +17760,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      express-http-proxy: 2.1.1
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@3.0.1)
@@ -17747,7 +17804,7 @@ snapshots:
       vite-tsconfig-paths: 5.1.4(typescript@5.8.3)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)(webpack-cli@5.1.4)
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-server: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
+      webpack-dev-server: 5.2.2(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
       webpack-merge: 6.0.1
       webpack-node-externals: 3.0.0
       wrap-ansi: 9.0.0
@@ -18808,11 +18865,51 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)):
+  webpack-dev-server@5.2.2(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
       '@types/express': 4.17.23
+      '@types/express-serve-static-core': 4.19.6
+      '@types/serve-index': 1.9.4
+      '@types/serve-static': 1.15.8
+      '@types/sockjs': 0.3.36
+      '@types/ws': 8.18.1
+      ansi-html-community: 0.0.8
+      bonjour-service: 1.3.0
+      chokidar: 3.6.0
+      colorette: 2.0.20
+      compression: 1.8.0
+      connect-history-api-fallback: 2.0.0
+      express: 4.21.2
+      graceful-fs: 4.2.11
+      http-proxy-middleware: 2.0.9(@types/express@4.17.23)(debug@4.4.1)
+      ipaddr.js: 2.2.0
+      launch-editor: 2.10.0
+      open: 10.2.0
+      p-retry: 6.2.1
+      schema-utils: 4.3.2
+      selfsigned: 2.4.1
+      serve-index: 1.9.1
+      sockjs: 0.3.24
+      spdy: 4.0.2
+      webpack-dev-middleware: 7.4.2(webpack@5.100.0)
+      ws: 8.18.3
+    optionalDependencies:
+      webpack: 5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.2.0)(webpack@5.100.0)
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+
+  webpack-dev-server@5.2.2(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)):
+    dependencies:
+      '@types/bonjour': 3.5.13
+      '@types/connect-history-api-fallback': 1.5.4
+      '@types/express': 4.17.23
+      '@types/express-serve-static-core': 4.19.6
       '@types/serve-index': 1.9.4
       '@types/serve-static': 1.15.8
       '@types/sockjs': 0.3.36

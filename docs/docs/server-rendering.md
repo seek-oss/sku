@@ -125,3 +125,21 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
   );
 }
 ```
+
+## Developement Server Proxying
+
+When developing your application sku will start two services:
+
+- A Webpack Dev Server responsible for serving the client assets
+- An SSR Service running your app's server code
+
+By default, sku will proxy traffic from the Webpack Dev Server to your SSR Server.
+This allows you to access a single host that serves both your SSR server and your static assets.
+
+If you'd like to disable this behaviour set `devServerAsProxy` to `false` in your **sku.config.js**.
+
+**sku.config.js - Disable dev server proxying**
+
+```
+devServerAsProxy: false
+```

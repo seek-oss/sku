@@ -1,158 +1,92 @@
 import { describe, it } from 'vitest';
 import { generatePackageJson } from './packageJsonGenerator.js';
-
-const webpackTemplate = {
-  name: 'Webpack (Default)',
-  description: 'Standard React setup with Webpack bundler',
-  dependencies: ['react@latest', 'react-dom@latest'],
-  devDependencies: ['@types/react', '@types/react-dom'],
-  scripts: {
-    start: 'sku start',
-    test: 'sku test',
-    build: 'sku build',
-    serve: 'sku serve',
-    lint: 'sku lint',
-    format: 'sku format',
-  },
-};
-
-const viteTemplate = {
-  ...webpackTemplate,
-  name: 'Vite (Experimental)',
-  description: 'Modern React setup with Vite bundler (experimental)',
-  scripts: {
-    start: 'sku start --experimental-bundler',
-    test: 'sku test',
-    build: 'sku build --experimental-bundler',
-    serve: 'sku serve',
-    lint: 'sku lint',
-    format: 'sku format',
-  },
-  packageJsonExtras: {
-    type: 'module',
-  },
-};
+import { TEMPLATES } from '../templates/templateConfigs.js';
 
 describe('generatePackageJson', () => {
-  const mockPackageManagerInfo = {
+  const basePackageManagerInfo = {
     name: 'pnpm',
     version: '8.0.0',
-    rootDir: null,
+    rootDir: '/project',
   };
 
-  const projectDir = '/path/to/my-project';
+  const projectDir = '/project';
 
-  it('should generate basic package.json structure', ({ expect }) => {
+  it('should generate basic package.json with webpack template', ({
+    expect,
+  }) => {
     const result = generatePackageJson(
-      'my-app',
-      webpackTemplate,
-      mockPackageManagerInfo,
+      'test-app',
+      TEMPLATES.webpack,
+      basePackageManagerInfo,
       projectDir,
     );
 
-    expect(result).toMatchObject({
-      name: 'my-app',
+    expect(result).toEqual({
+      name: 'test-app',
       version: '0.1.0',
       private: true,
-      scripts: webpackTemplate.scripts,
-    });
-  });
-
-  it('should include packageManager field when at repo root with version', ({
-    expect,
-  }) => {
-    const result = generatePackageJson(
-      'my-app',
-      webpackTemplate,
-      mockPackageManagerInfo,
-      projectDir,
-    );
-
-    expect(result.packageManager).toBe('pnpm@8.0.0');
-  });
-
-  it('should not include packageManager field when not at repo root', ({
-    expect,
-  }) => {
-    const packageManagerInfo = {
-      ...mockPackageManagerInfo,
-      rootDir: '/different/path',
-    };
-
-    const result = generatePackageJson(
-      'my-app',
-      webpackTemplate,
-      packageManagerInfo,
-      projectDir,
-    );
-
-    expect(result).not.toHaveProperty('packageManager');
-  });
-
-  it('should not include packageManager field when no version available', ({
-    expect,
-  }) => {
-    const packageManagerInfo = {
-      ...mockPackageManagerInfo,
-      version: null,
-    };
-
-    const result = generatePackageJson(
-      'my-app',
-      webpackTemplate,
-      packageManagerInfo,
-      projectDir,
-    );
-
-    expect(result).not.toHaveProperty('packageManager');
-  });
-
-  it('should include packageManager field when rootDir matches projectDir', ({
-    expect,
-  }) => {
-    const packageManagerInfo = {
-      ...mockPackageManagerInfo,
-      rootDir: projectDir,
-    };
-
-    const result = generatePackageJson(
-      'my-app',
-      webpackTemplate,
-      packageManagerInfo,
-      projectDir,
-    );
-
-    expect(result.packageManager).toBe('pnpm@8.0.0');
-  });
-
-  it('should include template extras for vite template', ({ expect }) => {
-    const result = generatePackageJson(
-      'my-vite-app',
-      viteTemplate,
-      mockPackageManagerInfo,
-      projectDir,
-    );
-
-    expect(result).toMatchObject({
-      name: 'my-vite-app',
-      version: '0.1.0',
-      private: true,
-      type: 'module',
-      scripts: viteTemplate.scripts,
+      scripts: TEMPLATES.webpack.scripts,
       packageManager: 'pnpm@8.0.0',
     });
   });
 
-  it('should not include template extras for webpack template', ({
-    expect,
-  }) => {
+  it('should merge packageJsonExtras from vite template', ({ expect }) => {
     const result = generatePackageJson(
-      'my-webpack-app',
-      webpackTemplate,
-      mockPackageManagerInfo,
+      'vite-app',
+      TEMPLATES.vite,
+      basePackageManagerInfo,
       projectDir,
     );
 
-    expect(result).not.toHaveProperty('type');
+    expect(result.type).toBe('module');
+    expect(result.scripts).toBe(TEMPLATES.vite.scripts);
+  });
+
+  it('should omit packageManager when version is null', ({ expect }) => {
+    const packageManagerWithoutVersion = {
+      ...basePackageManagerInfo,
+      version: null,
+    };
+
+    const result = generatePackageJson(
+      'test-app',
+      TEMPLATES.webpack,
+      packageManagerWithoutVersion,
+      projectDir,
+    );
+
+    expect(result.packageManager).toBeUndefined();
+  });
+
+  it('should omit packageManager when not at repo root', ({ expect }) => {
+    const packageManagerAtDifferentRoot = {
+      ...basePackageManagerInfo,
+      rootDir: '/different/root',
+    };
+
+    const result = generatePackageJson(
+      'test-app',
+      TEMPLATES.webpack,
+      packageManagerAtDifferentRoot,
+      projectDir,
+    );
+
+    expect(result.packageManager).toBeUndefined();
+  });
+
+  it('should include packageManager when rootDir is null', ({ expect }) => {
+    const packageManagerAtRoot = {
+      ...basePackageManagerInfo,
+      rootDir: null,
+    };
+
+    const result = generatePackageJson(
+      'test-app',
+      TEMPLATES.webpack,
+      packageManagerAtRoot,
+      projectDir,
+    );
+
+    expect(result.packageManager).toBe('pnpm@8.0.0');
   });
 });

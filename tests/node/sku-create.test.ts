@@ -7,6 +7,25 @@ import { promisify } from 'node:util';
 
 const execFileAsync = promisify(execFile);
 
+/**
+ * When snapshot testing the package.json, we don't care about the specific versions of the dependencies.
+ */
+function replaceDependencyVersions(packageJson: Record<string, any>) {
+  const newPackageJson = structuredClone(packageJson);
+
+  // eslint-disable-next-line guard-for-in
+  for (const dep in newPackageJson.dependencies) {
+    newPackageJson.dependencies[dep] = 'VERSION_IGNORED';
+  }
+
+  // eslint-disable-next-line guard-for-in
+  for (const dep in newPackageJson.devDependencies) {
+    newPackageJson.devDependencies[dep] = 'VERSION_IGNORED';
+  }
+
+  return newPackageJson;
+}
+
 describe('sku create integration', () => {
   const createCliPath = path.resolve(
     __dirname,
@@ -233,6 +252,102 @@ describe('sku create integration', () => {
       ]);
 
       expect(stdout.trim()).toMatch(/^\d+\.\d+\.\d+$/);
+    });
+  });
+
+  describe('file content snapshots', () => {
+    it('should generate webpack project files matching snapshots', async ({
+      expect,
+    }) => {
+      const fixture = await createFixture({});
+      const projectName = 'snapshot-webpack-app';
+      const projectPath = path.join(fixture.path, projectName);
+
+      try {
+        await execFileAsync(
+          'node',
+          [createCliPath, projectName, '--template', 'webpack'],
+          {
+            cwd: fixture.path,
+            env: { ...process.env, npm_config_user_agent: 'pnpm/8.0.0' },
+          },
+        );
+      } catch (error) {
+        console.warn(
+          'CLI execution had issues, checking if files were created:',
+          error,
+        );
+      }
+
+      // Test package.json snapshot with versions normalized
+      const packageJsonContent = await readFile(
+        path.join(projectPath, 'package.json'),
+        'utf-8',
+      );
+      const packageJson = JSON.parse(packageJsonContent);
+      expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
+
+      // Test key generated files
+      const filesToSnapshot = [
+        'sku.config.ts',
+        '.gitignore',
+        'README.md',
+        'src/App/App.tsx',
+        'src/client.tsx',
+        'src/render.tsx',
+      ];
+
+      for (const file of filesToSnapshot) {
+        const content = await readFile(path.join(projectPath, file), 'utf-8');
+        expect(content).toMatchSnapshot(`webpack-${file}`);
+      }
+    });
+
+    it('should generate vite project files matching snapshots', async ({
+      expect,
+    }) => {
+      const fixture = await createFixture({});
+      const projectName = 'snapshot-vite-app';
+      const projectPath = path.join(fixture.path, projectName);
+
+      try {
+        await execFileAsync(
+          'node',
+          [createCliPath, projectName, '--template', 'vite'],
+          {
+            cwd: fixture.path,
+            env: { ...process.env, npm_config_user_agent: 'pnpm/8.0.0' },
+          },
+        );
+      } catch (error) {
+        console.warn(
+          'CLI execution had issues, checking if files were created:',
+          error,
+        );
+      }
+
+      // Test package.json snapshot with versions normalized
+      const packageJsonContent = await readFile(
+        path.join(projectPath, 'package.json'),
+        'utf-8',
+      );
+      const packageJson = JSON.parse(packageJsonContent);
+      expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
+
+      // Test key generated files
+      const filesToSnapshot = [
+        'sku.config.ts',
+        '.gitignore',
+        'README.md',
+        'src/App/App.tsx',
+        'src/client.tsx',
+        'src/render.tsx',
+      ];
+
+      for (const file of filesToSnapshot) {
+        const content = await readFile(path.join(projectPath, file), 'utf-8');
+        expect(content).toMatchSnapshot(`vite-${file}`);
+      }
     });
   });
 });

@@ -6,7 +6,5 @@
     "noEmit": false,
     "allowImportingTsExtensions": false
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

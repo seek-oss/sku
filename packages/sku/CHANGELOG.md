@@ -1,5 +1,20 @@
 # sku
 
+## 14.10.1
+
+### Patch Changes
+
+- Optimize and improve error handling inside `postinstall` script ([#1362](https://github.com/seek-oss/sku/pull/1362))
+
+- Update dependencies: ([#1367](https://github.com/seek-oss/sku/pull/1367))
+  - `node-html-pareser`: `^6.1.1` -> `^7.0.1`
+  - `picomatch`: `^3.0.1` -> `^4.0.3`
+  - `rollup-plugin-visualizer`: `^5.12.0` -> `^6.0.3`
+  - `selfsigned`: `^2.1.1` -> `^3.0.1`
+- Remove warning when `.npmrc` file is detected ([#1364](https://github.com/seek-oss/sku/pull/1364))
+
+- Remove unused `sirv` dependency ([#1367](https://github.com/seek-oss/sku/pull/1367))
+
 ## 14.10.0
 
 ### Minor Changes

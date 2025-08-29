@@ -25,10 +25,18 @@ const removeLeadingUnderscoreFromFileName = (filePath: string) => {
 };
 
 const getTemplateFileDestinationFromRoot =
-  (projectRoot: string, templateDirectory: string) => (filePath: string) => {
+  (projectRoot: string, templateDirectory: string, selectedTemplate: string) =>
+  (filePath: string) => {
     const normalizedFilePath = removeLeadingUnderscoreFromFileName(filePath);
     const filePathRelativeToTemplate =
       normalizedFilePath.split(templateDirectory)[1];
+
+    // Handle template-specific sku.config files
+    const basename = path.basename(normalizedFilePath);
+    if (basename === `sku.config.${selectedTemplate}.ts`) {
+      const filePathWithoutBasename = path.dirname(filePathRelativeToTemplate);
+      return path.join(projectRoot, filePathWithoutBasename, 'sku.config.ts');
+    }
 
     return path.join(projectRoot, filePathRelativeToTemplate);
   };
@@ -72,7 +80,7 @@ export async function processTemplateFiles(
 
   const templateDirectory = path.join(
     toPosixPath(__dirname),
-    `../../templates/${selectedTemplate}`,
+    `../../templates/base`,
   );
 
   const templateFiles = await new Fdir()
@@ -80,9 +88,19 @@ export async function processTemplateFiles(
     .crawl(templateDirectory)
     .withPromise();
 
+  // Filter out the wrong sku.config file
+  const filteredFiles = templateFiles.filter((file) => {
+    const basename = path.basename(file);
+    if (basename.startsWith('sku.config.') && basename.endsWith('.ts')) {
+      return basename === `sku.config.${selectedTemplate}.ts`;
+    }
+    return true;
+  });
+
   const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
     projectDir,
     templateDirectory,
+    selectedTemplate,
   );
 
   const templateData = generateTemplateData(appName);
@@ -95,7 +113,7 @@ export async function processTemplateFiles(
   });
 
   await Promise.all(
-    templateFiles.map(async (file) => {
+    filteredFiles.map(async (file) => {
       const fileContents = await eta.renderAsync(
         path.relative(templateDirectory, file),
         templateData,

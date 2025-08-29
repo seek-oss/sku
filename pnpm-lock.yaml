@@ -1062,7 +1062,7 @@ importers:
         version: 1.19.1
       fdir:
         specifier: ^6.1.1
-        version: 6.4.6(picomatch@3.0.1)
+        version: 6.4.6(picomatch@4.0.3)
       find-up:
         specifier: ^7.0.0
         version: 7.0.0
@@ -1103,8 +1103,8 @@ importers:
         specifier: ^3.0.16
         version: 3.0.16
       node-html-parser:
-        specifier: ^6.1.1
-        version: 6.1.13
+        specifier: ^7.0.1
+        version: 7.0.1
       open:
         specifier: ^10.1.2
         version: 10.2.0
@@ -1115,8 +1115,8 @@ importers:
         specifier: ^6.2.0
         version: 6.3.0
       picomatch:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^4.0.3
+        version: 4.0.3
       postcss:
         specifier: ^8.4.0
         version: 8.5.6
@@ -1139,11 +1139,11 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       rollup-plugin-visualizer:
-        specifier: ^5.12.0
-        version: 5.14.0(rollup@4.44.2)
+        specifier: ^6.0.3
+        version: 6.0.3(rollup@4.44.2)
       selfsigned:
-        specifier: ^2.1.1
-        version: 2.4.1
+        specifier: ^3.0.1
+        version: 3.0.1
       semver:
         specifier: ^7.3.4
         version: 7.7.2
@@ -1153,9 +1153,6 @@ importers:
       serve-handler:
         specifier: ^6.1.3
         version: 6.1.6
-      sirv:
-        specifier: ^3.0.1
-        version: 3.0.1
       svgo-loader:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1230,8 +1227,8 @@ importers:
         specifier: 'catalog:'
         version: 20.19.9
       '@types/picomatch':
-        specifier: ^2.3.3
-        version: 2.3.4
+        specifier: ^4.0.2
+        version: 4.0.2
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -1277,12 +1274,6 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.1.1(react@19.1.1)
-      react-helmet:
-        specifier: ^6.1.0
-        version: 6.1.0(react@19.1.1)
-      react-router-dom:
-        specifier: ^6.0.0
-        version: 6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -3392,8 +3383,8 @@ packages:
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
 
-  '@types/picomatch@2.3.4':
-    resolution: {integrity: sha512-0so8lU8O5zatZS/2Fi4zrwks+vZv7e0dygrgEZXljODXBig97l4cPQD+9LabXfGJOWwoRkTVz6Q4edZvD12UOA==}
+  '@types/picomatch@4.0.2':
+    resolution: {integrity: sha512-qHHxQ+P9PysNEGbALT8f8YOSHW0KJu6l2xU8DYY0fu/EmGxXdVnuTLvFUvBgPJMSqXq29SYHveejeAha+4AYgA==}
 
   '@types/prompts@2.4.9':
     resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
@@ -7010,8 +7001,8 @@ packages:
     resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
     engines: {node: '>= 6.13.0'}
 
-  node-html-parser@6.1.13:
-    resolution: {integrity: sha512-qIsTMOY4C/dAa5Q5vsobRpOOvPfC4pB61UVW2uSwZNUp0QU/jCekTal1vMmbO0DgdHeLUJpv/ARmDqErVxA3Sg==}
+  node-html-parser@7.0.1:
+    resolution: {integrity: sha512-KGtmPY2kS0thCWGK0VuPyOS+pBKhhe8gXztzA2ilAOhbUbxa9homF1bOyKvhGzMLXUoRds9IOmr/v5lr/lqNmA==}
 
   node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
@@ -7366,10 +7357,6 @@ packages:
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
-
-  picomatch@3.0.1:
-    resolution: {integrity: sha512-I3EurrIQMlRc9IaAZnqRR044Phh2DXY+55o7uJ0V+hYZAcQYSuFWsc9q5PvyDHUSCe1Qxn/iBz+78s86zWnGag==}
-    engines: {node: '>=10'}
 
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
@@ -7772,9 +7759,6 @@ packages:
     peerDependencies:
       react: ^19.1.1
 
-  react-fast-compare@3.2.2:
-    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-
   react-focus-lock@2.13.6:
     resolution: {integrity: sha512-ehylFFWyYtBKXjAO9+3v8d0i+cnc1trGS0vlTGhzFW1vbFXVUTmR8s2tt/ZQG8x5hElg6rhENlLG1H3EZK0Llg==}
     peerDependencies:
@@ -7783,11 +7767,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  react-helmet@6.1.0:
-    resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
-    peerDependencies:
-      react: '>=16.3.0'
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -7834,11 +7813,6 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
-
-  react-side-effect@2.1.2:
-    resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}
-    peerDependencies:
-      react: ^16.3.0 || ^17.0.0 || ^18.0.0
 
   react-style-singleton@2.2.3:
     resolution: {integrity: sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==}
@@ -8018,12 +7992,12 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rollup-plugin-visualizer@5.14.0:
-    resolution: {integrity: sha512-VlDXneTDaKsHIw8yzJAFWtrzguoJ/LnQ+lMpoVfYJ3jJF4Ihe5oYLAqLklIK/35lgUY+1yEzCkHyZ1j4A5w5fA==}
+  rollup-plugin-visualizer@6.0.3:
+    resolution: {integrity: sha512-ZU41GwrkDcCpVoffviuM9Clwjy5fcUxlz0oMoTXTYsK+tcIFzbdacnrr2n8TXcHxbGKKXtOdjxM2HUS4HjkwIw==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
-      rolldown: 1.x
+      rolldown: 1.x || ^1.0.0-beta
       rollup: 2.x || 3.x || 4.x
     peerDependenciesMeta:
       rolldown:
@@ -8100,6 +8074,10 @@ packages:
 
   selfsigned@2.4.1:
     resolution: {integrity: sha512-th5B4L2U+eGLq1TVh7zNRGBapioSORUeymIydxgFpwww9d2qyKvtuPU2jJuHvYAwwqi2Y596QBL3eEqcPEYL8Q==}
+    engines: {node: '>=10'}
+
+  selfsigned@3.0.1:
+    resolution: {integrity: sha512-6U6w6kSLrM9Zxo0D7mC7QdGS6ZZytMWBnj/vhF9p+dAHx6CwGezuRcO4VclTbrrI7mg7SD6zNiqXUuBHOVopNQ==}
     engines: {node: '>=10'}
 
   semver-diff@3.1.1:
@@ -8202,10 +8180,6 @@ packages:
   sirv@2.0.4:
     resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
     engines: {node: '>= 10'}
-
-  sirv@3.0.1:
-    resolution: {integrity: sha512-FoqMu0NCGBLCcAkS1qA+XJIQTR6/JHfQXl+uGteNCQ76T91DMUjPa9xfmeqMY3z80nLSg9yQmNjK0Px6RWsH/A==}
-    engines: {node: '>=18'}
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -11742,7 +11716,7 @@ snapshots:
 
   '@types/parse-json@4.0.2': {}
 
-  '@types/picomatch@2.3.4': {}
+  '@types/picomatch@4.0.2': {}
 
   '@types/prompts@2.4.9':
     dependencies:
@@ -14312,10 +14286,6 @@ snapshots:
     dependencies:
       pend: 1.2.0
 
-  fdir@6.4.6(picomatch@3.0.1):
-    optionalDependencies:
-      picomatch: 3.0.1
-
   fdir@6.4.6(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
@@ -16143,7 +16113,7 @@ snapshots:
 
   node-forge@1.3.1: {}
 
-  node-html-parser@6.1.13:
+  node-html-parser@7.0.1:
     dependencies:
       css-select: 5.2.2
       he: 1.2.0
@@ -16529,8 +16499,6 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
-
-  picomatch@3.0.1: {}
 
   picomatch@4.0.3: {}
 
@@ -16964,8 +16932,6 @@ snapshots:
       react: 19.1.1
       scheduler: 0.26.0
 
-  react-fast-compare@3.2.2: {}
-
   react-focus-lock@2.13.6(@types/react@19.1.9)(react@19.1.1):
     dependencies:
       '@babel/runtime': 7.27.6
@@ -16977,14 +16943,6 @@ snapshots:
       use-sidecar: 1.1.3(@types/react@19.1.9)(react@19.1.1)
     optionalDependencies:
       '@types/react': 19.1.9
-
-  react-helmet@6.1.0(react@19.1.1):
-    dependencies:
-      object-assign: 4.1.1
-      prop-types: 15.8.1
-      react: 19.1.1
-      react-fast-compare: 3.2.2
-      react-side-effect: 2.1.2(react@19.1.1)
 
   react-is@16.13.1: {}
 
@@ -17023,10 +16981,6 @@ snapshots:
   react-router@6.30.1(react@19.1.1):
     dependencies:
       '@remix-run/router': 1.23.0
-      react: 19.1.1
-
-  react-side-effect@2.1.2(react@19.1.1):
-    dependencies:
       react: 19.1.1
 
   react-style-singleton@2.2.3(@types/react@19.1.9)(react@19.1.1):
@@ -17225,7 +17179,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rollup-plugin-visualizer@5.14.0(rollup@4.44.2):
+  rollup-plugin-visualizer@6.0.3(rollup@4.44.2):
     dependencies:
       open: 8.4.2
       picomatch: 4.0.3
@@ -17329,6 +17283,10 @@ snapshots:
   selfsigned@2.4.1:
     dependencies:
       '@types/node-forge': 1.3.12
+      node-forge: 1.3.1
+
+  selfsigned@3.0.1:
+    dependencies:
       node-forge: 1.3.1
 
   semver-diff@3.1.1:
@@ -17478,12 +17436,6 @@ snapshots:
       mrmime: 2.0.1
       totalist: 3.0.1
 
-  sirv@3.0.1:
-    dependencies:
-      '@polka/url': 1.0.0-next.29
-      mrmime: 2.0.1
-      totalist: 3.0.1
-
   sisteransi@1.0.5: {}
 
   sku@file:packages/sku(5fc5a60ce7d89df0a86d68dc63dc8c10):
@@ -17554,7 +17506,7 @@ snapshots:
       express: 4.21.2
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
-      fdir: 6.4.6(picomatch@3.0.1)
+      fdir: 6.4.6(picomatch@4.0.3)
       find-up: 7.0.0
       get-port: 7.1.0
       hostile: 1.4.0
@@ -17568,11 +17520,11 @@ snapshots:
       magicast: 0.3.5
       mini-css-extract-plugin: 2.9.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       nano-memoize: 3.0.16
-      node-html-parser: 6.1.13
+      node-html-parser: 7.0.1
       open: 10.2.0
       package-manager-detector: 0.2.11
       path-to-regexp: 6.3.0
-      picomatch: 3.0.1
+      picomatch: 4.0.3
       postcss: 8.5.6
       postcss-loader: 8.1.1(postcss@8.5.6)(typescript@5.8.3)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       prettier: 3.6.2
@@ -17581,12 +17533,11 @@ snapshots:
       react: 18.3.1
       react-refresh: 0.17.0
       resolve-from: 5.0.0
-      rollup-plugin-visualizer: 5.14.0(rollup@4.44.2)
-      selfsigned: 2.4.1
+      rollup-plugin-visualizer: 6.0.3(rollup@4.44.2)
+      selfsigned: 3.0.1
       semver: 7.7.2
       serialize-javascript: 6.0.2
       serve-handler: 6.1.6
-      sirv: 3.0.1
       svgo-loader: 4.0.0
       terser-webpack-plugin: 5.3.14(@swc/core@1.12.11)(esbuild@0.25.6)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       typescript: 5.8.3
@@ -17706,7 +17657,7 @@ snapshots:
       express: 4.21.2
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
-      fdir: 6.4.6(picomatch@3.0.1)
+      fdir: 6.4.6(picomatch@4.0.3)
       find-up: 7.0.0
       get-port: 7.1.0
       hostile: 1.4.0
@@ -17720,11 +17671,11 @@ snapshots:
       magicast: 0.3.5
       mini-css-extract-plugin: 2.9.2(webpack@5.100.0)
       nano-memoize: 3.0.16
-      node-html-parser: 6.1.13
+      node-html-parser: 7.0.1
       open: 10.2.0
       package-manager-detector: 0.2.11
       path-to-regexp: 6.3.0
-      picomatch: 3.0.1
+      picomatch: 4.0.3
       postcss: 8.5.6
       postcss-loader: 8.1.1(postcss@8.5.6)(typescript@5.8.3)(webpack@5.100.0)
       prettier: 3.6.2
@@ -17733,12 +17684,11 @@ snapshots:
       react: 19.1.1
       react-refresh: 0.17.0
       resolve-from: 5.0.0
-      rollup-plugin-visualizer: 5.14.0(rollup@4.44.2)
-      selfsigned: 2.4.1
+      rollup-plugin-visualizer: 6.0.3(rollup@4.44.2)
+      selfsigned: 3.0.1
       semver: 7.7.2
       serialize-javascript: 6.0.2
       serve-handler: 6.1.6
-      sirv: 3.0.1
       svgo-loader: 4.0.0
       terser-webpack-plugin: 5.3.14(@swc/core@1.12.11)(esbuild@0.25.6)(webpack@5.100.0)
       typescript: 5.8.3

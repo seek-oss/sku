@@ -78,7 +78,6 @@ export const createProject = async (
   const templateConfig = TEMPLATES[selectedTemplate];
 
   const initDir = path.resolve(projectName);
-  setCwd(initDir);
 
   trace(`Creating project "${projectName}" in "${initDir}"`);
 
@@ -88,6 +87,8 @@ export const createProject = async (
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }
+
+  setCwd(initDir);
 
   await mkdir(projectName, { recursive: true });
 

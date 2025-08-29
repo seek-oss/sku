@@ -844,19 +844,16 @@ importers:
       tinyglobby:
         specifier: ^0.2.13
         version: 0.2.14
-      typescript:
-        specifier: ~5.8.0
-        version: 5.8.3
     devDependencies:
       '@types/diff':
         specifier: ^7.0.1
         version: 7.0.2
-      '@types/jscodeshift':
-        specifier: ^17.3.0
-        version: 17.3.0
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
+      typescript:
+        specifier: ~5.8.0
+        version: 5.8.3
 
   packages/pnpm-plugin: {}
 
@@ -3331,9 +3328,6 @@ packages:
 
   '@types/jest@30.0.0':
     resolution: {integrity: sha512-XTYugzhuwqWjws0CVz8QpM36+T+Dz5mTEBKhNs/esGLnCIlGdRy+Dq78NRjd7ls7r8BC8ZRMOrKlkO1hU0JOwA==}
-
-  '@types/jscodeshift@17.3.0':
-    resolution: {integrity: sha512-ogvGG8VQQqAQQ096uRh+d6tBHrYuZjsumHirKtvBa5qEyTMN3IQJ7apo+sw9lxaB/iKWIhbbLlF3zmAWk9XQIg==}
 
   '@types/jsdom@21.1.7':
     resolution: {integrity: sha512-yOriVnggzrnQ3a9OKOCxaVuSug3w3/SbOj5i7VwXWZEyUNl3bLF9V3MfxGbZKuwqJOQyRfqXyROBB1CoZLFWzA==}
@@ -11657,11 +11651,6 @@ snapshots:
     dependencies:
       expect: 30.0.4
       pretty-format: 30.0.2
-
-  '@types/jscodeshift@17.3.0':
-    dependencies:
-      ast-types: 0.16.1
-      recast: 0.23.11
 
   '@types/jsdom@21.1.7':
     dependencies:

@@ -174,16 +174,15 @@ export const webpackStartSsrHandler = async ({
         port: clientPort,
       },
     },
+    setupMiddlewares: (middlewares) => [
+      ...middlewares,
+      {
+        name: 'send-to-ssr',
+        middleware: proxy(serverHost),
+      },
+    ],
     setupExitSignals: true,
   };
-
-  devServerConfig.setupMiddlewares = (middlewares) => [
-    ...middlewares,
-    {
-      name: 'send-to-ssr',
-      middleware: proxy(serverHost),
-    },
-  ];
 
   if (httpsDevServer) {
     const pems = await getCertificate('.ssl', hosts);

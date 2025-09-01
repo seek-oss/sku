@@ -90,8 +90,6 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
-  const devServerAsEntry = skuContext.devServerAsEntry;
-
   await withHostile(checkHosts)(skuContext);
 
   const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
@@ -113,23 +111,15 @@ export const webpackStartSsrHandler = async ({
   const serverHost = `${proto}://${appHosts?.[0]}:${serverPort}`;
   const webpackDevServerHost = `${proto}://${appHosts?.[0]}:${clientPort}`;
 
-  const initialUrl = `${devServerAsEntry ? webpackDevServerHost : serverHost}${initialPath}`;
+  const initialUrl = `${webpackDevServerHost}${initialPath}`;
 
   console.log();
   console.log(
     chalk.blue(`Starting the dev server on ${chalk.underline(initialUrl)}`),
   );
-  if (devServerAsEntry) {
-    console.log(
-      chalk.blue(`Starting the SSR server on ${chalk.underline(serverHost)}`),
-    );
-  } else {
-    console.log(
-      chalk.blue(
-        `Starting the webpack server on ${chalk.underline(webpackDevServerHost)}`,
-      ),
-    );
-  }
+  console.log(
+    chalk.blue(`Starting the SSR server on ${chalk.underline(serverHost)}`),
+  );
   console.log();
 
   const onServerDone = once((err, stats) => {
@@ -187,15 +177,13 @@ export const webpackStartSsrHandler = async ({
     setupExitSignals: true,
   };
 
-  if (devServerAsEntry) {
-    devServerConfig.setupMiddlewares = (middlewares) => [
-      ...middlewares,
-      {
-        name: 'send-to-ssr',
-        middleware: proxy(serverHost),
-      },
-    ];
-  }
+  devServerConfig.setupMiddlewares = (middlewares) => [
+    ...middlewares,
+    {
+      name: 'send-to-ssr',
+      middleware: proxy(serverHost),
+    },
+  ];
 
   if (httpsDevServer) {
     const pems = await getCertificate('.ssl', hosts);

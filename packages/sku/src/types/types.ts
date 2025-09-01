@@ -221,13 +221,6 @@ export interface SkuConfigBase {
   devServerMiddleware?: string;
 
   /**
-   * Whether or not to have the dev server act as a proxy for non-static asset requests.
-   *
-   * This can be used to access your SSR endpoints on the same host as the client static assets.
-   */
-  devServerAsEntry?: boolean;
-
-  /**
    * Adds static `displayName` properties to React components in production.
    * This setting is designed for usage on sites that generate React code snippets, e.g. Braid.
    *

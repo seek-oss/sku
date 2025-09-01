@@ -9,6 +9,5 @@ export default {
   public: 'assets',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
-  devServerAsEntry: true,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

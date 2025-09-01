@@ -126,23 +126,18 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 }
 ```
 
-## Development server environment
+## Development server entry
 
 When developing your application sku will start two services:
 
 - A dev server responsible for serving the client assets (default: localhost:8080)
 - An SSR service running your app's server code (Default: localhost:8181)
 
-By default, sku will open your SSR server URL in a browser, sending asset requests (JS, CSS, etc) to the Dev Server.
+sku will use the Dev Server as a single entry-point for your development environment, proxying requests to your SSR service that don't match any other known routes.
 
-### Single entrypoint with dev server as entry
+This aligns to typical production environments, where a reverse proxy directs asset, API or other requests to another service.
 
-sku now supports the ability to use the Dev Server as a single entry-point for your development environment.
-
-When enabled with `devServerAsEntry` the Dev Server will proxy requests to your SSR Service.
-
-This will better align to production environments, where a reverse proxy redirect asset, API or other requests to another service.
-Avoiding the need to pass Cross-Origin Resource Sharing (CORS) checks when making requests from the client.
+It also avoids the need to complete Cross-Origin Resource Sharing (CORS) checks when making requests from the client.
 
 To include other requests, like typical API traffic, consider using the [Dev Server Middleware] to proxy these requests.
 

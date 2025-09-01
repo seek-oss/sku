@@ -42,7 +42,6 @@ export default {
   cspEnabled: false,
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
-  devServerAsEntry: false,
   devServerMiddleware: undefined,
   rootResolution: !isCompilePackage,
   languages: undefined,

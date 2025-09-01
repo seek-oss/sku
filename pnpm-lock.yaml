@@ -855,6 +855,22 @@ importers:
         specifier: ~5.8.0
         version: 5.8.3
 
+  packages/create:
+    dependencies:
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
+    devDependencies:
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
+      typescript:
+        specifier: ^5.6.2
+        version: 5.8.3
+
   packages/pnpm-plugin: {}
 
   packages/sku:

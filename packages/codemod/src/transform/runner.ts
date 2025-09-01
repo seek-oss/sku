@@ -1,4 +1,4 @@
-import { globSync } from 'tinyglobby';
+import { glob } from 'tinyglobby';
 import prompts from 'prompts';
 import { dirname, join, resolve } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
@@ -144,8 +144,8 @@ export const runTransform = async (
   process.exit(0);
 };
 
-const getAllFiles = async (paths: string[]) =>
-  globSync([...paths, '!**/node_modules', '!**/dist'], {
+const getAllFiles = (paths: string[]) =>
+  glob([...paths, '!**/node_modules', '!**/dist'], {
     absolute: true,
   });
 

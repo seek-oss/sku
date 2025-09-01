@@ -131,7 +131,7 @@ export const webpackStartHandler = async ({
           hostname: req.hostname,
           path: req.path,
           sites,
-        }) || { route: '' };
+        });
 
         if (!matchingRoute) {
           return next();

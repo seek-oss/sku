@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Create sku projects",
   "private": true,
-  "type":"module",
+  "type": "module",
   "bin": {
     "create-sku": "./dist/cli.js"
   },

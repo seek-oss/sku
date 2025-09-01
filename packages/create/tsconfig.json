@@ -8,7 +8,7 @@
     "target": "ESNext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*"]
 }

@@ -3,12 +3,16 @@
 import { Command } from 'commander';
 import prompts from 'prompts';
 
+import packageJson from '../package.json' with { type: 'json' };
+
+const { name, description, version } = packageJson;
+
 const program = new Command();
 
 program
-  .name('create-sku')
-  .description('Create a new sku project')
-  .version('0.0.0')
+  .name(name)
+  .description(description)
+  .version(version)
   .argument('[project-name]', 'Name of the project to create')
   .option('-t, --template <template>', 'Template to use (webpack, vite)')
   .action(async (projectName: string = '.', options: { template?: string }) => {

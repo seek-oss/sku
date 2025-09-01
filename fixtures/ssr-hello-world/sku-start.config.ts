@@ -9,4 +9,5 @@ export default {
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
+  publicPath: '/static/ssr-hello-world',
 } satisfies SkuConfig;

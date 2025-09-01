@@ -90,7 +90,7 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
-  const devServerAsProxy = skuContext.devServerAsProxy;
+  const devServerAsEntry = skuContext.devServerAsEntry;
 
   await withHostile(checkHosts)(skuContext);
 
@@ -113,13 +113,13 @@ export const webpackStartSsrHandler = async ({
   const serverHost = `${proto}://${appHosts?.[0]}:${serverPort}`;
   const webpackDevServerHost = `${proto}://${appHosts?.[0]}:${clientPort}`;
 
-  const initialUrl = `${devServerAsProxy ? webpackDevServerHost : serverHost}${initialPath}`;
+  const initialUrl = `${devServerAsEntry ? webpackDevServerHost : serverHost}${initialPath}`;
 
   console.log();
   console.log(
     chalk.blue(`Starting the dev server on ${chalk.underline(initialUrl)}`),
   );
-  if (devServerAsProxy) {
+  if (devServerAsEntry) {
     console.log(
       chalk.blue(`Starting the SSR server on ${chalk.underline(serverHost)}`),
     );
@@ -187,7 +187,7 @@ export const webpackStartSsrHandler = async ({
     setupExitSignals: true,
   };
 
-  if (devServerAsProxy) {
+  if (devServerAsEntry) {
     devServerConfig.setupMiddlewares = (middlewares) => [
       ...middlewares,
       {

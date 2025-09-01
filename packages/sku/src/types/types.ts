@@ -225,7 +225,7 @@ export interface SkuConfigBase {
    *
    * This can be used to access your SSR endpoints on the same host as the client static assets.
    */
-  devServerAsProxy?: boolean;
+  devServerAsEntry?: boolean;
 
   /**
    * Adds static `displayName` properties to React components in production.

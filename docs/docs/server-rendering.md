@@ -126,20 +126,24 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 }
 ```
 
-## Developement Server Proxying
+## Developement servers
 
 When developing your application sku will start two services:
 
-- A Webpack Dev Server responsible for serving the client assets
-- An SSR Service running your app's server code
+- A dev server responsible for serving the client assets
+- An SSR service running your app's server code
 
-By default, sku will proxy traffic from the Webpack Dev Server to your SSR Server.
-This allows you to access a single host that serves both your SSR server and your static assets.
+By default, sku will open your SSR server URL in a browser, sending asset requests (JS, CSS, etc) to the Dev Server.
 
-If you'd like to disable this behaviour set `devServerAsProxy` to `false` in your **sku.config.js**.
+### Single entrypoint with dev server as entry
 
-**sku.config.js - Disable dev server proxying**
+sku now supports the ability to use the Dev Server as a single entry-point for your development environment.
 
-```
-devServerAsProxy: false
-```
+When enabled with `devServerAsEntry` the Dev Server will proxy requests to your SSR Service.
+
+This will better align to production environments, where a reverse proxy redirect asset, API or other requests to another service.
+Avoiding the need to pass Cross-Origin Resource Sharing (CORS) checks when making requests from the client.
+
+To include other requests, like typical API traffic, consider using the [Dev Server Middleware] to proxy these requests.
+
+[Dev Server Middleware]: #/./docs/configuration?id=devservermiddleware

@@ -237,7 +237,7 @@ export const createSkuContext = ({
   const environments = skuConfig.environments!;
   const supportedBrowsers = skuConfig.supportedBrowsers!;
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
-  const devServerAsProxy = Boolean(skuConfig.devServerAsProxy);
+  const devServerAsEntry = Boolean(skuConfig.devServerAsEntry);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
   const cspEnabled = skuConfig.cspEnabled!;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts!;
@@ -277,7 +277,7 @@ export const createSkuContext = ({
     environments,
     supportedBrowsers,
     sourceMapsProd,
-    devServerAsProxy,
+    devServerAsEntry,
     displayNamesProd,
     cspEnabled,
     cspExtraScriptSrcHosts,

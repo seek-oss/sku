@@ -43,7 +43,7 @@ const makeWebpackConfig = ({
     webpackDecorator,
     polyfills,
     supportedBrowsers,
-    devServerAsProxy,
+    devServerAsEntry,
     displayNamesProd,
     cspEnabled,
     cspExtraScriptSrcHosts,
@@ -71,7 +71,7 @@ const makeWebpackConfig = ({
   const serverEntry = require.resolve('../entry/server/index.js');
 
   const prodPath = isStartScript ? '/' : paths.publicPath;
-  const publicPath = devServerAsProxy || !isDevServer ? prodPath : clientServer;
+  const publicPath = devServerAsEntry || !isDevServer ? prodPath : clientServer;
 
   const webpackStatsFilename = 'webpackStats.json';
 

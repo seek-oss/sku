@@ -564,7 +564,7 @@ importers:
         specifier: ^5.0.0
         version: 5.1.4(webpack-dev-server@5.2.0)(webpack@5.100.0)
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
 
   fixtures/sku-with-https:
@@ -1181,7 +1181,7 @@ importers:
         specifier: ^4.6.1
         version: 4.10.2
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       webpack-merge:
         specifier: ^6.0.1
@@ -1473,7 +1473,7 @@ importers:
         specifier: ^5.0.0
         version: 5.1.4(webpack-dev-server@5.2.0)(webpack@5.100.0)
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
       yaml:
         specifier: ^2.8.1

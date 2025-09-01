@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-`start`: Shows 404 messaging instead of an error when routes are empty
+`start`: Shows Not Found (404) messaging instead of an error when routes are empty

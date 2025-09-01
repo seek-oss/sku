@@ -273,7 +273,13 @@ import pkg from 'someDependency';
 const {someFunction} = pkg;
 ```
 
-`sku` provides a [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`][cjs interop] configuration option to address these errors:
+There are a few options to resolve this issue:
+
+- Replace the dependency with native APIs
+- Upgrade the dependency to a version that supports ESM
+- Replace the dependency with an alternative that supports ESM
+
+Failing those solutions, `sku` provides a [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`][cjs interop] configuration option can be used as a last resort:
 
 ```typescript
 // sku.config.ts

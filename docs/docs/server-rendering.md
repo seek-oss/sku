@@ -133,7 +133,7 @@ When developing your application sku will start two services:
 - A dev server responsible for serving the client assets (default: localhost:8080)
 - An SSR service running your app's server code (Default: localhost:8181)
 
-sku will use the Dev Server as a single entry-point for your development environment, proxying requests to your SSR service that don't match any other known routes.
+The dev server should act as a single entry-point for your development environment, proxying requests to your SSR service that don't match any other known routes.
 
 This aligns to typical production environments, where a reverse proxy directs asset, API or other requests to another service.
 

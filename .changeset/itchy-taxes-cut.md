@@ -9,7 +9,7 @@ They would then load static assets from the webpack dev server on a separate hos
 
 `sku start` will now proxy requests from the webpack dev server to the consumer's app. Allowing the dev server to act as a single entrypoint.
 
-Starting the dev server consumers may notice some changes:
+When starting the dev server consumers may notice some changes:
 
 - A new port used when opening the browser window
 - Changes to the path used when loading assets

@@ -126,12 +126,12 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 }
 ```
 
-## Developement servers
+## Development server environment
 
 When developing your application sku will start two services:
 
-- A dev server responsible for serving the client assets
-- An SSR service running your app's server code
+- A dev server responsible for serving the client assets (default: localhost:8080)
+- An SSR service running your app's server code (Default: localhost:8181)
 
 By default, sku will open your SSR server URL in a browser, sending asset requests (JS, CSS, etc) to the Dev Server.
 

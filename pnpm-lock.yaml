@@ -162,9 +162,6 @@ importers:
       docsify-cli:
         specifier: ^4.4.4
         version: 4.4.4
-      docsify-plugin-flexible-alerts:
-        specifier: ^1.1.1
-        version: 1.1.1
       gh-pages:
         specifier: ^6.3.0
         version: 6.3.0
@@ -4932,9 +4929,6 @@ packages:
     resolution: {integrity: sha512-NAZgg6b0BsDuq/Pe+P19Qb2J1d+ZVbS0eGkeCNxyu4F9/CQSsRqZqAvPJ9/0I+BCHn4sgftA2jluqhQVzKzrSA==}
     engines: {node: '>= 10', npm: '>= 6'}
     hasBin: true
-
-  docsify-plugin-flexible-alerts@1.1.1:
-    resolution: {integrity: sha512-dXDJW4Mzskn3hITBTsmkCNqi2pEZSmo/c8FS1q6qR2lnApFBT/KjP4S8n0JtI9cM/7j6TMSkDUQ650N0vu5lHg==}
 
   docsify-server-renderer@4.13.1:
     resolution: {integrity: sha512-XNJeCK3zp+mVO7JZFn0bH4hNBAMMC1MbuCU7CBsjLHYn4NHrjIgCBGmylzEan3/4Qm6kbSzQx8XzUK5T7GQxHw==}
@@ -13614,8 +13608,6 @@ snapshots:
       - encoding
       - supports-color
       - utf-8-validate
-
-  docsify-plugin-flexible-alerts@1.1.1: {}
 
   docsify-server-renderer@4.13.1:
     dependencies:

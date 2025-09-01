@@ -30,7 +30,6 @@ const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const makeWebpackConfig = ({
-  clientPort,
   serverPort,
   isDevServer = false,
   hot = false,

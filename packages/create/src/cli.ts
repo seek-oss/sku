@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import prompts from 'prompts';
 
-import packageJson from '../package.json' with { type: 'json' };
+import packageJson from '@sku-lib/create/package.json' with { type: 'json' };
 
 const { name, description, version } = packageJson;
 

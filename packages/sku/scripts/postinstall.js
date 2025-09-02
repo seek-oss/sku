@@ -17,10 +17,11 @@ try {
 
   try {
     packageJsonContents = await readFile(packageJson, 'utf-8');
-  } catch (error) {
-    console.error(`Failed to read package.json file at ${packageJson}`);
-    console.error(error);
-    process.exit(1);
+  } catch {
+    console.log(
+      `package.json file does not exist at ${packageJson}. Skipping sku postinstall.`,
+    );
+    process.exit(0);
   }
 
   const {

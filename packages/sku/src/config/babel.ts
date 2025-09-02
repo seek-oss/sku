@@ -1,4 +1,4 @@
-import { cwd } from '../utils/cwd.js';
+import { cwd } from '@sku-lib/utils';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
 import { rootResolutionFileExtensions } from './fileResolutionExtensions.js';

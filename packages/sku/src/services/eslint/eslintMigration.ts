@@ -1,7 +1,7 @@
 import { rm } from 'node:fs/promises';
 import { includeIgnoreFile } from '@eslint/compat';
 
-import { getPathFromCwd } from '../../utils/cwd.js';
+import { getPathFromCwd } from '@sku-lib/utils';
 import exists from '../../utils/exists.js';
 import { SkuConfigUpdater } from '../../utils/SkuConfigUpdater.js';
 import { createEslintIgnoresConfig } from '../../config/eslint/ignores.js';

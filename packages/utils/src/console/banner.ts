@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import wrap from 'wrap-ansi';
 import identString from 'indent-string';
 
-const banner = (
+export const banner = (
   type: 'info' | 'error' | 'warning',
   heading: string,
   messages: string[] = [],
@@ -47,5 +47,3 @@ ${renderContent(messages.join('\n\n'))}
 ${border}
   `);
 };
-
-export default banner;

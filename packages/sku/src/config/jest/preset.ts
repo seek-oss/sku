@@ -1,6 +1,6 @@
 import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
-import { cwd } from '../../utils/cwd.js';
+import { cwd } from '@sku-lib/utils';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Config } from 'jest';
 

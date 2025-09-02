@@ -30,7 +30,7 @@ import {
 } from '../../../utils/configure.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { requireFromCwd } from '../../../utils/cwd.js';
+import { requireFromCwd } from '@sku-lib/utils';
 
 const log = debug('sku:start-ssr');
 

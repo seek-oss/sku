@@ -1,6 +1,5 @@
-import { prependWithManagedConfigBanner } from './banners/managedConfigBanner.js';
+import { prependWithManagedConfigBanner } from '../console/managedConfigBanner.js';
 import { writeFile } from 'node:fs/promises';
-
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
 

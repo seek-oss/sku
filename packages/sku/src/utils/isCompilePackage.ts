@@ -1,4 +1,4 @@
-import { getPathFromCwd } from './cwd.js';
+import { getPathFromCwd } from '@sku-lib/utils';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 
-import { toPosixPath } from '@sku-lib/utils';
+import toPosixPath from './toPosixPath.js';
 
 describe('toPosixPath', () => {
   it('should leave a posix path as-is', ({ expect }) => {

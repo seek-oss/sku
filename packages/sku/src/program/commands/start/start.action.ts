@@ -6,7 +6,7 @@ import {
   validatePeerDeps,
 } from '../../../utils/configure.js';
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
-import { checkHosts, withHostile } from '../../../utils/contextUtils/hosts.js';
+import { checkHosts, withHostile } from '../../../context/hosts.js';
 import chalk from 'chalk';
 
 export const startAction = async (
@@ -24,8 +24,8 @@ export const startAction = async (
   console.log(chalk.blue(`sku start`));
 
   await Promise.all([
-    await configureProject(skuContext),
-    await watchVocabCompile(skuContext),
+    configureProject(skuContext),
+    watchVocabCompile(skuContext),
   ]);
 
   withHostile(checkHosts)(skuContext);

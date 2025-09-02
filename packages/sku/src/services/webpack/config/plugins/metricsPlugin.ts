@@ -1,14 +1,14 @@
 import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import debug from 'debug';
-import provider from '../../../../telemetry/index.js';
+import provider from '../../../telemetry/index.js';
 import type { Compiler, WebpackPluginInstance } from 'webpack';
 
 const log = debug('sku:metrics');
 
 const smp = 'sku-metrics-plugin';
 
-class MetricsPlugin implements WebpackPluginInstance {
+export class MetricsPlugin implements WebpackPluginInstance {
   private initial: boolean;
   private readonly target: string;
   private readonly type: string;
@@ -50,5 +50,3 @@ class MetricsPlugin implements WebpackPluginInstance {
     });
   }
 }
-
-export default MetricsPlugin;

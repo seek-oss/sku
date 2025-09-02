@@ -2,7 +2,7 @@ import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
 import chalk from 'chalk';
 import { closest } from 'fastest-levenshtein';
-import { hasErrorMessage } from '../../../../../utils/error-guards.js';
+import { hasErrorMessage } from '../../../../utils/error-guards.js';
 
 // @ts-expect-error
 const validator = new Validator();
@@ -90,7 +90,7 @@ const validate = validator.compile(schema);
 
 const availableOptions = Object.keys(schema);
 
-const validateOptions = (options: SkuWebpackPluginOptions) => {
+export const validateOptions = (options: SkuWebpackPluginOptions) => {
   const errors = [];
 
   // Validate extra keys
@@ -138,5 +138,3 @@ const validateOptions = (options: SkuWebpackPluginOptions) => {
     exitWithErrors(errors);
   }
 };
-
-export default validateOptions;

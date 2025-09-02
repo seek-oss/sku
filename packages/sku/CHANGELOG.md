@@ -1,5 +1,24 @@
 # sku
 
+## 14.11.0
+
+### Minor Changes
+
+- Expose named `SkuWebpackPlugin` export from `sku/webpack-plugin`, deprecate default export ([#1374](https://github.com/seek-oss/sku/pull/1374))
+
+  **MIGRATION GUIDE**
+
+  ```diff
+  -import SkuWebpackPlugin from 'sku/webpack-plugin';
+  +import { SkuWebpackPlugin } from 'sku/webpack-plugin';
+  ```
+
+### Patch Changes
+
+- `start`: Shows Not Found (404) messaging instead of an error when routes are empty ([#1370](https://github.com/seek-oss/sku/pull/1370))
+
+- Fixes a bug where `sku`'s `postinstall` script would fail during `sku init` ([#1376](https://github.com/seek-oss/sku/pull/1376))
+
 ## 14.10.1
 
 ### Patch Changes

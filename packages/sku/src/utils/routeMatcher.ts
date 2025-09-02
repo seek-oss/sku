@@ -1,6 +1,6 @@
 import type { NormalizedRoute } from '../context/createSkuContext.js';
 import { match } from 'path-to-regexp';
-import getSiteForHost from './contextUtils/getSiteForHost.js';
+import { getSiteForHost } from '../context/getSiteForHost.js';
 import type { SkuSiteObject } from '../types/types.js';
 
 /**

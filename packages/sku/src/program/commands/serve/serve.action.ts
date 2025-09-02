@@ -8,11 +8,11 @@ import {
   checkHosts,
   getAppHosts,
   withHostile,
-} from '../../../utils/contextUtils/hosts.js';
+} from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
-import { openBrowser } from '../../../openBrowser/index.js';
-import getSiteForHost from '../../../utils/contextUtils/getSiteForHost.js';
-import { resolveEnvironment } from '../../../utils/contextUtils/resolveEnvironment.js';
+import { openBrowser } from '../../../openBrowser.js';
+import { getSiteForHost } from '../../../context/getSiteForHost.js';
+import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
 import provider from '../../../services/telemetry/index.js';
 import createServer from '../../../utils/createServer.js';
 import {

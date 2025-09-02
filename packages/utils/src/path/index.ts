@@ -1,1 +1,1 @@
-export { default as toPosixPath } from './toPosixPath.js';
+export { toPosixPath } from './toPosixPath.js';

@@ -19,7 +19,7 @@ try {
     packageJsonContents = await readFile(packageJson, 'utf-8');
   } catch {
     console.log(
-      `package.json file does not exist at ${packageJson}. Skipping sku postinstall`,
+      `package.json file does not exist at ${packageJson}. Skipping sku postinstall.`,
     );
     process.exit(0);
   }

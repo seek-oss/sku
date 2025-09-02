@@ -1,6 +1,6 @@
-import type { SkuContext } from '../../context/createSkuContext.js';
+import type { SkuContext } from './createSkuContext.js';
 
-const getSiteForHost = (
+export const getSiteForHost = (
   hostname: string,
   defaultSite: string | undefined,
   sites: SkuContext['sites'],
@@ -17,5 +17,3 @@ const getSiteForHost = (
 
   return defaultSite ? defaultSite : sites[0].name;
 };
-
-export default getSiteForHost;

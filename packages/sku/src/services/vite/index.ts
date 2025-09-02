@@ -8,7 +8,7 @@ import {
 } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
-import { getAppHosts } from '../../utils/contextUtils/hosts.js';
+import { getAppHosts } from '../../context/hosts.js';
 import chalk from 'chalk';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';

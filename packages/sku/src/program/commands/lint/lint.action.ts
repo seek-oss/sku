@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
-import { check as prettierCheck } from '../../../services/prettier/runPrettier.js';
+import { check as prettierCheck } from '../../../services/prettier.js';
 import runTsc from '../../../services/typescript/runTsc.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';

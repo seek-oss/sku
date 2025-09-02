@@ -44,12 +44,10 @@ try {
   }
 
   // Suppressing eslint. These imports will work after the build steps for postinstall.
-  const [{ setCwd }, { default: banner }, { createSkuContext }] =
-    await Promise.all([
-      import('../dist/utils/cwd.js'),
-      import('../dist/utils/banners/banner.js'),
-      import('../dist/context/createSkuContext.js'),
-    ]);
+  const [{ setCwd, banner }, { createSkuContext }] = await Promise.all([
+    import('@sku-lib/utils'),
+    import('../dist/context/createSkuContext.js'),
+  ]);
 
   const log = debug('sku:postinstall');
 

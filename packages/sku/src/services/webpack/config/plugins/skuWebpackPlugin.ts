@@ -10,15 +10,16 @@ import {
   IMAGE,
   SVG,
   resolvePackage,
-} from '../../utils/index.js';
-import defaultCompilePackages from '../../../../../context/defaultCompilePackages.js';
-import validateOptions, {
+} from '../utils/index.js';
+import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
+import {
+  validateOptions,
   type SkuWebpackPluginOptions,
 } from './validateOptions.js';
-import targets from '../../../../../config/targets.json' with { type: 'json' };
-import { rootResolutionFileExtensions } from '../../../../../config/fileResolutionExtensions.js';
+import targets from '../../../../config/targets.json' with { type: 'json' };
+import { rootResolutionFileExtensions } from '../../../../config/fileResolutionExtensions.js';
 
-class SkuWebpackPlugin implements WebpackPluginInstance {
+export class SkuWebpackPlugin implements WebpackPluginInstance {
   options: SkuWebpackPluginOptions;
   compilePackages: string[];
   include: string[];
@@ -201,4 +202,5 @@ class SkuWebpackPlugin implements WebpackPluginInstance {
   }
 }
 
+/** @deprecated Please use the named `SkuWebpackPlugin` export */
 export default SkuWebpackPlugin;

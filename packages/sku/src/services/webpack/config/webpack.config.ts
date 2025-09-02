@@ -8,8 +8,8 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
-import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
-import MetricsPlugin from './plugins/metrics-plugin/index.js';
+import SkuWebpackPlugin from './plugins/skuWebpackPlugin.js';
+import { MetricsPlugin } from './plugins/metricsPlugin.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';

@@ -30,7 +30,7 @@
       "types": "./dist/services/vite/client.d.ts"
     },
     "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./webpack-plugin": "./dist/services/webpack/config/plugins/sku-webpack-plugin/index.js",
+    "./webpack-plugin": "./dist/services/webpack/config/plugins/skuWebpackPlugin.js",
     "./package.json": "./package.json"
   },
   "engines": {

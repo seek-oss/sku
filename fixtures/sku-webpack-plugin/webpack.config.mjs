@@ -1,6 +1,6 @@
 import HTMLWebackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import SkuWebpackPlugin from 'sku/webpack-plugin';
+import { SkuWebpackPlugin } from 'sku/webpack-plugin';
 
 export default {
   entry: './main.js',

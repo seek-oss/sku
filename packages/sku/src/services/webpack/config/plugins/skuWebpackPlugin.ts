@@ -19,7 +19,7 @@ import {
 import targets from '../../../../config/targets.json' with { type: 'json' };
 import { rootResolutionFileExtensions } from '../../../../config/fileResolutionExtensions.js';
 
-class SkuWebpackPlugin implements WebpackPluginInstance {
+export class SkuWebpackPlugin implements WebpackPluginInstance {
   options: SkuWebpackPluginOptions;
   compilePackages: string[];
   include: string[];
@@ -202,4 +202,5 @@ class SkuWebpackPlugin implements WebpackPluginInstance {
   }
 }
 
+/** @deprecated Please use the named `SkuWebpackPlugin` export */
 export default SkuWebpackPlugin;

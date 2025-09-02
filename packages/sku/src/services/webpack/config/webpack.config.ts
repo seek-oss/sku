@@ -8,7 +8,7 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
-import SkuWebpackPlugin from './plugins/skuWebpackPlugin.js';
+import { SkuWebpackPlugin } from './plugins/skuWebpackPlugin.js';
 import { MetricsPlugin } from './plugins/metricsPlugin.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 

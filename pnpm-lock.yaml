@@ -926,6 +926,9 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      '@sku-lib/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@sku-lib/vite':
         specifier: workspace:*
         version: link:../vite
@@ -3036,6 +3039,10 @@ packages:
 
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
+
+  '@sku-lib/utils@file:packages/utils':
+    resolution: {directory: packages/utils, type: directory}
+    engines: {node: '>=20.15'}
 
   '@sku-lib/vite@file:packages/vite':
     resolution: {directory: packages/vite, type: directory}
@@ -11118,6 +11125,15 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
+  '@sku-lib/utils@file:packages/utils':
+    dependencies:
+      chalk: 5.4.1
+      find-up: 7.0.0
+      indent-string: 5.0.0
+      package-manager-detector: 0.2.11
+      semver: 7.7.2
+      wrap-ansi: 9.0.0
+
   '@sku-lib/vite@file:packages/vite(@types/react@18.3.23)(react@18.3.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))':
     dependencies:
       '@types/react': 18.3.23
@@ -17490,6 +17506,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@18.3.1))(react@18.3.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6)))(webpack-hot-middleware@2.26.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
+      '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.23)(react@18.3.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1
@@ -17641,6 +17658,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@19.1.1))(react@19.1.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.100.0)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.100.0)
+      '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.9)(react@19.1.1)(vite@7.1.2(@types/node@20.19.9)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       '@swc/core': 1.12.11
       '@types/eslint': 9.6.1

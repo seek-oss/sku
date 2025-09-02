@@ -1,4 +1,5 @@
-import { getPathFromCwd } from './cwd.js';
+import { getPathFromCwd } from '@sku-lib/utils';
+
 import fs from 'node:fs';
 import { validatePeerDeps as _validatePeerDeps } from './validatePeerDeps.js';
 import { log } from './debug.js';

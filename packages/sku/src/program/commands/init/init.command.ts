@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { packageManagerOption } from '../../options/packageManager/packageManager.option.js';
-import { setPackageManager } from '../../../services/packageManager/context.js';
+import { setPackageManager } from '@sku-lib/utils';
 
 export const initCommand = new Command('init')
   .description('Initialize a new sku project')

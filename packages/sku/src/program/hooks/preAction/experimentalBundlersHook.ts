@@ -1,5 +1,4 @@
-import { getAddCommand } from '../../../services/packageManager/packageManager.js';
-import banner from '../../../utils/banners/banner.js';
+import { getAddCommand, banner } from '@sku-lib/utils';
 
 const blockedCommands = ['build', 'start', 'start-ssr'];
 

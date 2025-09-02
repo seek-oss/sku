@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { existsSync } from 'node:fs';
-import { getPathFromCwd } from '../utils/cwd.js';
+import { getPathFromCwd } from '@sku-lib/utils';
 import _debug from 'debug';
 
 const debug = _debug('sku:config');

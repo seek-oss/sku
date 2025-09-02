@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 
-import { getAddCommand } from '../packageManager/packageManager.js';
-import banner from '../../utils/banners/banner.js';
+import { banner, getAddCommand } from '@sku-lib/utils';
 
 import _debug from 'debug';
 

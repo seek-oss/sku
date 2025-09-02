@@ -4,17 +4,17 @@ import chalk from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 import type { RequestHandler } from 'express';
 
-import { openBrowser } from '../../../openBrowser/index.js';
+import { openBrowser } from '../../../openBrowser.js';
 import getCertificate from '../../../utils/certificate.js';
 
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import makeWebpackConfig from '../../../services/webpack/config/webpack.config.js';
 
-import { getAppHosts } from '../../../utils/contextUtils/hosts.js';
+import { getAppHosts } from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
-import getSiteForHost from '../../../utils/contextUtils/getSiteForHost.js';
-import { resolveEnvironment } from '../../../utils/contextUtils/resolveEnvironment.js';
+import { getSiteForHost } from '../../../context/getSiteForHost.js';
+import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
 import { getMatchingRoute } from '../../../utils/routeMatcher.js';
 import {
   getLanguageFromRoute,

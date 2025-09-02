@@ -16,11 +16,11 @@ import {
   checkHosts,
   getAppHosts,
   withHostile,
-} from '../../../utils/contextUtils/hosts.js';
+} from '../../../context/hosts.js';
 import makeWebpackConfig from '../../../services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import allocatePort from '../../../utils/allocatePort.js';
-import { openBrowser } from '../../../openBrowser/index.js';
+import { openBrowser } from '../../../openBrowser.js';
 import createServerManager from '../../../services/serverManager.js';
 
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';

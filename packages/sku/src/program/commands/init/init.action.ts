@@ -19,7 +19,7 @@ import {
   rootDir,
   packageManagerVersion,
 } from '../../../services/packageManager/packageManager.js';
-import { write as prettierWrite } from '../../../services/prettier/runPrettier.js';
+import { write as prettierWrite } from '../../../services/prettier.js';
 import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
 import install from '../../../services/packageManager/install.js';
 

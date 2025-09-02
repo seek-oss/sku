@@ -6,7 +6,7 @@ import { middlewarePlugin } from '../../plugins/middlewarePlugin.js';
 import { startTelemetryPlugin } from '../../plugins/startTelemetry.js';
 import { HMRTelemetryPlugin } from '../../plugins/HMRTelemetry.js';
 import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
-import { getAppHosts } from '../../../../utils/contextUtils/hosts.js';
+import { getAppHosts } from '../../../../context/hosts.js';
 import isCI from '../../../../utils/isCI.js';
 import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
 import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';

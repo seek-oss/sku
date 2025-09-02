@@ -1,5 +1,5 @@
 import { describe, beforeEach, afterEach, it, vi } from 'vitest';
-import { createSkuContext } from '../../context/createSkuContext.js';
+import { createSkuContext } from './createSkuContext.js';
 import { checkHosts, setupHosts } from './hosts.js';
 
 describe('setupHosts', () => {

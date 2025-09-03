@@ -7,24 +7,40 @@ export interface PackageJsonOptions {
   template: Template;
 }
 
+const DEPENDENCIES = {
+  'braid-design-system': 'latest',
+  react: 'latest',
+  'react-dom': 'latest',
+};
+
+const DEV_DEPENDENCIES = {
+  '@vanilla-extract/css': '^1.15.5',
+  sku: '^14.11.0',
+  '@types/react': '^18.3.5',
+  '@types/react-dom': '^18.3.0',
+};
+
 export const generatePackageJson = async (
   targetPath: string,
-  { projectName }: PackageJsonOptions,
+  { projectName, template }: PackageJsonOptions,
 ) => {
+  const isVite = template === 'vite';
+  const bundlerFlag = isVite ? ' --experimental-bundler' : '';
+
   const packageJson = {
     name: projectName,
     version: '1.0.0',
     private: true,
+    ...(isVite ? { type: 'module' } : {}),
     scripts: {
-      start: 'sku start',
-      build: 'sku build',
+      start: `sku start${bundlerFlag}`,
+      build: `sku build${bundlerFlag}`,
       test: 'sku test',
       format: 'sku format',
       lint: 'sku lint',
     },
-    devDependencies: {
-      sku: '^14.11.0',
-    },
+    dependencies: DEPENDENCIES,
+    devDependencies: DEV_DEPENDENCIES,
   };
 
   const packageJsonPath = join(targetPath, 'package.json');

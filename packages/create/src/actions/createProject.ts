@@ -2,6 +2,7 @@ import { resolve } from 'node:path';
 import { existsSync, statSync, mkdirSync } from 'node:fs';
 import { isEmptyDir, cwd } from '@sku-lib/utils';
 import { generatePackageJson } from '../generators/packageJson.js';
+import { generateTemplateFiles } from '../generators/templates.js';
 import type { Template } from '../types/index.js';
 
 export interface CreateProjectOptions {
@@ -27,6 +28,8 @@ export const createProject = async ({
   createProjectDirectory(targetPath);
 
   await generatePackageJson(targetPath, { projectName, template });
+
+  await generateTemplateFiles(targetPath, { projectName, template });
 
   console.log('✅ Project created successfully!');
   console.log(`

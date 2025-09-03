@@ -22,6 +22,8 @@
   "dependencies": {
     "@sku-lib/utils": "workspace:*",
     "commander": "^12.1.0",
+    "eta": "^3.2.0",
+    "fdir": "^6.1.1",
     "prompts": "^2.4.2"
   },
   "devDependencies": {

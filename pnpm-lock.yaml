@@ -5,55 +5,6 @@ settings:
   excludeLinksFromLockfile: false
   injectWorkspacePackages: true
 
-catalogs:
-  default:
-    '@types/node':
-      specifier: ^20.19.9
-      version: 20.19.9
-    '@types/react':
-      specifier: ^19.1.9
-      version: 19.1.9
-    '@types/react-dom':
-      specifier: ^19.1.7
-      version: 19.1.7
-    '@vanilla-extract/vite-plugin':
-      specifier: ^5.1.1
-      version: 5.1.1
-    '@vocab/vite':
-      specifier: ^0.2.3
-      version: 0.2.4
-    braid-design-system:
-      specifier: ^33.11.0
-      version: 33.11.3
-    jiti:
-      specifier: 2.4.2
-      version: 2.4.2
-    react:
-      specifier: ^19.1.0
-      version: 19.1.1
-    react-dom:
-      specifier: ^19.1.0
-      version: 19.1.1
-    vite:
-      specifier: ^7.0.6
-      version: 7.1.2
-    vitest:
-      specifier: ^3.2.3
-      version: 3.2.4
-  react18:
-    '@types/react':
-      specifier: ^18.3.23
-      version: 18.3.23
-    '@types/react-dom':
-      specifier: ^18.3.7
-      version: 18.3.7
-    react:
-      specifier: ^18.3.1
-      version: 18.3.1
-    react-dom:
-      specifier: ^18.3.1
-      version: 18.3.1
-
 pnpmfileChecksum: sha256-HyzwrIZmFVJr7kvwhHMEE7NoDGkknMxWww7GMTBFW70=
 
 importers:
@@ -153,6 +104,18 @@ importers:
       vitest-puppeteer:
         specifier: ^11.0.3
         version: 11.0.3(debug@4.4.1)(puppeteer@24.12.1(typescript@5.8.3))(typescript@5.8.3)
+
+  123a:
+    dependencies:
+      braid-design-system:
+        specifier: ^33.11.3
+        version: 33.11.3(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
 
   docs:
     devDependencies:
@@ -824,6 +787,18 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  hello:
+    dependencies:
+      braid-design-system:
+        specifier: ^33.11.3
+        version: 33.11.3(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
+
   packages/codemod:
     dependencies:
       '@ast-grep/napi':
@@ -1489,6 +1464,18 @@ importers:
       cli-testing-library:
         specifier: ^3.0.1
         version: 3.0.1(vitest@3.2.4(@types/debug@4.1.12)(@types/node@20.19.9)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
+
+  test/hello-world:
+    dependencies:
+      braid-design-system:
+        specifier: ^33.11.3
+        version: 33.11.3(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
 
   tests:
     devDependencies:

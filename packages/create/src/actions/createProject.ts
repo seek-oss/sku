@@ -6,6 +6,7 @@ import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
 import { installDependencies } from '../services/install.js';
 import { formatProject } from '../services/format.js';
+import { validatePackageName } from '../validation/packageName.js';
 import type { Template } from '../types/index.js';
 
 export interface CreateProjectOptions {
@@ -22,6 +23,7 @@ export const createProject = async ({
   );
 
   const targetPath = resolveProjectPath(projectName);
+  validatePackageName(targetPath);
 
   console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
 
@@ -51,12 +53,10 @@ export const createProject = async ({
 };
 
 const resolveProjectPath = (projectName: string): string => {
-  // If projectName is '.', use current directory
   if (projectName === '.') {
     return cwd();
   }
 
-  // Otherwise create subdirectory
   return resolve(cwd(), projectName);
 };
 

@@ -3,6 +3,8 @@ import { existsSync, statSync, mkdirSync } from 'node:fs';
 import { isEmptyDir, cwd } from '@sku-lib/utils';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
+import { installDependencies } from '../services/install.js';
+import { formatProject } from '../services/format.js';
 import type { Template } from '../types/index.js';
 
 export interface CreateProjectOptions {
@@ -31,11 +33,14 @@ export const createProject = async ({
 
   await generateTemplateFiles(targetPath, { projectName, template });
 
+  await installDependencies(targetPath);
+
+  await formatProject(targetPath);
+
   console.log('✅ Project created successfully!');
   console.log(`
 Next steps:
   cd ${projectName === '.' ? '.' : projectName}
-  npm install
   npm start
   `);
 };

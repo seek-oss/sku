@@ -857,6 +857,9 @@ importers:
 
   packages/create:
     dependencies:
+      '@sku-lib/utils':
+        specifier: workspace:*
+        version: link:../utils
       commander:
         specifier: ^12.1.0
         version: 12.1.0

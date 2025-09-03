@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import prompts from 'prompts';
 
 import packageJson from '@sku-lib/create/package.json' with { type: 'json' };
+import { createProject } from './actions/createProject.js';
 
 const { name, description, version } = packageJson;
 
@@ -33,9 +34,23 @@ program
       selectedTemplate = template;
     }
 
-    console.log('🚧 create-sku is not yet implemented');
-    console.log(`Project name: ${projectName}`);
-    console.log(`Template: ${selectedTemplate}`);
+    if (!selectedTemplate) {
+      console.log('❌ No template selected. Exiting.');
+      process.exit(1);
+    }
+
+    try {
+      await createProject({
+        projectName,
+        template: selectedTemplate as 'webpack' | 'vite',
+      });
+    } catch (error) {
+      console.error(
+        '❌ Error creating project:',
+        error instanceof Error ? error.message : error,
+      );
+      process.exit(1);
+    }
   });
 
 program.parse();

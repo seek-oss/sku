@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/seek-oss/sku/issues"
   },
-  "homepage": "https://github.com/seek-oss/sku#readme"
+  "homepage": "https://github.com/seek-oss/sku#readme",
+  "devDependencies": {
+    "@pnpm/types": "^1000.7.0"
+  }
 }

@@ -871,7 +871,11 @@ importers:
         specifier: ^5.6.2
         version: 5.8.3
 
-  packages/pnpm-plugin: {}
+  packages/pnpm-plugin:
+    devDependencies:
+      '@pnpm/types':
+        specifier: ^1000.7.0
+        version: 1000.7.0
 
   packages/sku:
     dependencies:
@@ -2897,6 +2901,10 @@ packages:
         optional: true
       webpack-plugin-serve:
         optional: true
+
+  '@pnpm/types@1000.7.0':
+    resolution: {integrity: sha512-1s7FvDqmOEIeFGLUj/VO8sF5lGFxeE/1WALrBpfZhDnMXY/x8FbmuygTTE5joWifebcZ8Ww8Kw2CgBoStsIevQ==}
+    engines: {node: '>=18.12'}
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -11020,6 +11028,8 @@ snapshots:
       type-fest: 4.41.0
       webpack-dev-server: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
       webpack-hot-middleware: 2.26.1
+
+  '@pnpm/types@1000.7.0': {}
 
   '@polka/url@1.0.0-next.29': {}
 

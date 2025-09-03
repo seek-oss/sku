@@ -7,19 +7,6 @@ export interface PackageJsonOptions {
   template: Template;
 }
 
-const DEPENDENCIES = {
-  'braid-design-system': 'latest',
-  react: 'latest',
-  'react-dom': 'latest',
-};
-
-const DEV_DEPENDENCIES = {
-  '@vanilla-extract/css': '^1.15.5',
-  sku: '^14.11.0',
-  '@types/react': '^18.3.5',
-  '@types/react-dom': '^18.3.0',
-};
-
 export const generatePackageJson = async (
   targetPath: string,
   { projectName, template }: PackageJsonOptions,
@@ -39,8 +26,6 @@ export const generatePackageJson = async (
       format: 'sku format',
       lint: 'sku lint',
     },
-    dependencies: DEPENDENCIES,
-    devDependencies: DEV_DEPENDENCIES,
   };
 
   const packageJsonPath = join(targetPath, 'package.json');

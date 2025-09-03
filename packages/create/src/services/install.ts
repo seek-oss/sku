@@ -1,4 +1,4 @@
-import { packageManager, getAddCommand } from '@sku-lib/utils';
+import { getAddCommand } from '@sku-lib/utils';
 import { spawn } from 'node:child_process';
 
 const DEPENDENCIES = [

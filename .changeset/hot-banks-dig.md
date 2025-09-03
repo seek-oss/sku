@@ -3,4 +3,4 @@
 'sku': patch
 ---
 
-`test (vitest)`: Fixing the ability to migrate to vitest without also moving to vite
+`test (vitest)`: Fixing the ability to migrate to vitest independently of vite

@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
+import { styleText } from 'node:util';
 import { existsSync, statSync, mkdirSync } from 'node:fs';
-import { isEmptyDir, cwd } from '@sku-lib/utils';
+import { isEmptyDir, cwd, getRunCommand, banner } from '@sku-lib/utils';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
 import { installDependencies } from '../services/install.js';
@@ -16,16 +17,15 @@ export const createProject = async ({
   projectName,
   template,
 }: CreateProjectOptions) => {
-  console.log(`🚀 Creating new sku project: ${projectName}`);
-  console.log(`📦 Using template: ${template}`);
+  console.log(
+    `🚀 Creating new sku project: ${styleText('cyan', projectName)} with ${styleText('cyan', template)} template`,
+  );
 
   const targetPath = resolveProjectPath(projectName);
 
-  console.log(`📁 Target directory: ${targetPath}`);
+  console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
 
   validateTargetDirectory(targetPath);
-
-  console.log('✅ Directory validation complete');
 
   createProjectDirectory(targetPath);
 
@@ -37,12 +37,17 @@ export const createProject = async ({
 
   await formatProject(targetPath);
 
-  console.log('✅ Project created successfully!');
-  console.log(`
-Next steps:
-  cd ${projectName === '.' ? '.' : projectName}
-  npm start
-  `);
+  const nextSteps = [
+    `${styleText('cyan', 'cd')} ${projectName}`,
+    `${styleText('cyan', getRunCommand('start'))}`,
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  banner('info', `${projectName} created`, [
+    'Get started by running:',
+    nextSteps,
+  ]);
 };
 
 const resolveProjectPath = (projectName: string): string => {
@@ -57,7 +62,6 @@ const resolveProjectPath = (projectName: string): string => {
 
 const validateTargetDirectory = (targetPath: string): void => {
   if (!existsSync(targetPath)) {
-    console.log(`📁 Directory ${targetPath} will be created`);
     return;
   }
 
@@ -79,6 +83,5 @@ const validateTargetDirectory = (targetPath: string): void => {
 const createProjectDirectory = (targetPath: string): void => {
   if (!existsSync(targetPath)) {
     mkdirSync(targetPath, { recursive: true });
-    console.log(`📁 Created directory: ${targetPath}`);
   }
 };

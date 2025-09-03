@@ -47,6 +47,4 @@ export const generatePackageJson = async (
   const packageJsonContent = `${JSON.stringify(packageJson, null, 2)}\n`;
 
   await writeFile(packageJsonPath, packageJsonContent, 'utf8');
-
-  console.log('📄 Generated package.json');
 };

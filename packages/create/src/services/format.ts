@@ -1,10 +1,14 @@
 import { spawn } from 'node:child_process';
+import { getRunCommand } from '@sku-lib/utils';
 
 export const formatProject = async (projectPath: string): Promise<void> => {
   console.log('🎨 Formatting project...');
 
   return new Promise((resolve) => {
-    const child = spawn('npm', ['run', 'format'], {
+    const formatCommand = getRunCommand('format');
+    const [command, ...args] = formatCommand.split(' ');
+
+    const child = spawn(command, args, {
       cwd: projectPath,
       stdio: 'inherit',
     });

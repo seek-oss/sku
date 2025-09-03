@@ -3,6 +3,13 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import { fileURLToPath } from 'node:url';
+import dedent from 'dedent';
+import {
+  getInstallCommand,
+  getPackageManagerInstallPage,
+  getRunCommand,
+  packageManager,
+} from '@sku-lib/utils';
 
 import type { Template } from '../types/index.js';
 
@@ -29,8 +36,6 @@ export const generateTemplateFiles = async (
   targetPath: string,
   { projectName, template }: TemplateOptions,
 ) => {
-  console.log('📋 Copying template files...');
-
   const templatesRoot = join(__dirname, '../../templates');
   const baseTemplateDir = join(templatesRoot, 'base');
   const bundlerTemplateDir = join(templatesRoot, template);
@@ -39,8 +44,6 @@ export const generateTemplateFiles = async (
 
   await copyTemplateFiles(baseTemplateDir, targetPath, templateData);
   await copyTemplateFiles(bundlerTemplateDir, targetPath, templateData);
-
-  console.log('✅ Template files copied');
 };
 
 const createTemplateData = (
@@ -50,17 +53,29 @@ const createTemplateData = (
   const isVite = template === 'vite';
   const bundlerFlag = isVite ? ' --experimental-bundler' : '';
 
+  const startScript = `${getRunCommand('start')}${bundlerFlag}`;
+  const buildScript = `${getRunCommand('build')}${bundlerFlag}`;
+  const testScript = getRunCommand('test');
+  const formatScript = getRunCommand('format');
+  const lintScript = getRunCommand('lint');
+
   return {
     projectName,
     appName: projectName,
-    gettingStartedDocs: `To start developing, run \`${
-      isVite ? 'npm start --experimental-bundler' : 'npm start'
-    }\` and open your browser to the URL provided in the terminal.`,
-    startScript: `npm start${bundlerFlag}`,
-    buildScript: `npm run build${bundlerFlag}`,
-    testScript: 'npm test',
-    formatScript: 'npm run format',
-    lintScript: 'npm run lint',
+    gettingStartedDocs: dedent`
+    First of all, make sure you've installed [${packageManager}](${getPackageManagerInstallPage()}).
+
+    Then, install dependencies:
+
+    \`\`\`sh
+    $ ${getInstallCommand()}
+    \`\`\`
+    `,
+    startScript,
+    buildScript,
+    testScript,
+    formatScript,
+    lintScript,
   };
 };
 

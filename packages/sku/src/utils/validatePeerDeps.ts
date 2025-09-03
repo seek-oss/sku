@@ -1,7 +1,4 @@
-import {
-  getWhyCommand,
-  isPnpm,
-} from '../services/packageManager/packageManager.js';
+import { getWhyCommand, isPnpm, banner, getPathFromCwd } from '@sku-lib/utils';
 
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
@@ -9,10 +6,8 @@ import { fdir as Fdir } from 'fdir';
 import semver from 'semver';
 import chalk from 'chalk';
 
-import banner from './banners/banner.js';
 import provider from '../services/telemetry/index.js';
 
-import { getPathFromCwd } from './cwd.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 
 const asyncMap = (

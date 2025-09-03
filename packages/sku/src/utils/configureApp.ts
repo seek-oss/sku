@@ -1,3 +1,11 @@
+import {
+  isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
+  rootDir,
+  getPathFromCwd,
+  writeFileToCWD,
+} from '@sku-lib/utils';
+
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -17,15 +25,9 @@ import {
 } from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
-import { getPathFromCwd, writeFileToCWD } from './cwd.js';
 
 import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
-import {
-  isAtLeastPnpmV10,
-  isAtLeastRecommendedPnpmVersion,
-  rootDir,
-} from '../services/packageManager/packageManager.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 

@@ -4,9 +4,7 @@ import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
 import { createRequire } from 'node:module';
 
-import toPosixPath from '../utils/toPosixPath.js';
-
-import { rootDir, isPnpm } from '../services/packageManager/packageManager.js';
+import { toPosixPath, rootDir, isPnpm } from '@sku-lib/utils';
 
 const debug = _debug('sku:compilePackages');
 

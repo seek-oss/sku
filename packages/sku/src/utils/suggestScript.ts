@@ -1,10 +1,10 @@
 import {
   getRunCommand,
   getExecuteCommand,
-} from '../services/packageManager/packageManager.js';
+  requireFromCwd,
+} from '@sku-lib/utils';
 
 import chalk from 'chalk';
-import { requireFromCwd } from './cwd.js';
 
 const findPackageScriptName = (scriptContents: string): string | undefined => {
   let pkg;

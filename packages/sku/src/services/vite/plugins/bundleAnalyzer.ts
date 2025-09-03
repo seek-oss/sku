@@ -1,4 +1,4 @@
-import { getPathFromCwd, requireFromCwd } from '../../../utils/cwd.js';
+import { getPathFromCwd, requireFromCwd } from '@sku-lib/utils';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { Plugin } from 'vite';
 

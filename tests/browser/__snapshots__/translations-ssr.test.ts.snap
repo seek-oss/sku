@@ -19,29 +19,25 @@ exports[`ssr translations > should render en 1`] = `
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      href="/main.js"
     >
     <link
       data-chunk="en-translations"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/en-translations.js"
-      crossorigin="anonymous"
+      href="/en-translations.js"
     >
   </head>
   <body>
@@ -54,43 +50,37 @@ exports[`ssr translations > should render en 1`] = `
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
-      crossorigin="anonymous"
     >
       [1]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
-      crossorigin="anonymous"
     >
       {"namedChunks":["en-translations"]}
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="en-translations"
-      src="http://127.0.0.1:8313/en-translations.js"
-      crossorigin="anonymous"
+      src="/en-translations.js"
     >
     </script>
   </body>
@@ -116,29 +106,25 @@ exports[`ssr translations > should render en-PSEUDO 1`] = `
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      href="/main.js"
     >
     <link
       data-chunk="en-PSEUDO-translations"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/en-PSEUDO-translations.js"
-      crossorigin="anonymous"
+      href="/en-PSEUDO-translations.js"
     >
   </head>
   <body>
@@ -151,43 +137,37 @@ exports[`ssr translations > should render en-PSEUDO 1`] = `
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
-      crossorigin="anonymous"
     >
       [0]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
-      crossorigin="anonymous"
     >
       {"namedChunks":["en-PSEUDO-translations"]}
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="en-PSEUDO-translations"
-      src="http://127.0.0.1:8313/en-PSEUDO-translations.js"
-      crossorigin="anonymous"
+      src="/en-PSEUDO-translations.js"
     >
     </script>
   </body>
@@ -213,29 +193,25 @@ exports[`ssr translations > should render fr 1`] = `
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      href="/5.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      href="/main.js"
     >
     <link
       data-chunk="fr-translations"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8313/fr-translations.js"
-      crossorigin="anonymous"
+      href="/fr-translations.js"
     >
   </head>
   <body>
@@ -248,43 +224,37 @@ exports[`ssr translations > should render fr 1`] = `
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
-      crossorigin="anonymous"
     >
       [2]
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
-      crossorigin="anonymous"
     >
       {"namedChunks":["fr-translations"]}
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/runtime.js"
-      crossorigin="anonymous"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/5.js"
-      crossorigin="anonymous"
+      src="/5.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8313/main.js"
-      crossorigin="anonymous"
+      src="/main.js"
     >
     </script>
     <script
       async
       data-chunk="fr-translations"
-      src="http://127.0.0.1:8313/fr-translations.js"
-      crossorigin="anonymous"
+      src="/fr-translations.js"
     >
     </script>
   </body>

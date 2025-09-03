@@ -5,6 +5,7 @@ import prompts from 'prompts';
 
 import packageJson from '@sku-lib/create/package.json' with { type: 'json' };
 import { createProject } from './actions/createProject.js';
+import type { Template } from './types/index.js';
 
 const { name, description, version } = packageJson;
 
@@ -42,7 +43,7 @@ program
     try {
       await createProject({
         projectName,
-        template: selectedTemplate as 'webpack' | 'vite',
+        template: selectedTemplate as Template,
       });
     } catch (error) {
       console.error(

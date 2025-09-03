@@ -1,10 +1,12 @@
 import { resolve } from 'node:path';
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, statSync, mkdirSync } from 'node:fs';
 import { isEmptyDir, cwd } from '@sku-lib/utils';
+import { generatePackageJson } from '../generators/packageJson.js';
+import type { Template } from '../types/index.js';
 
 export interface CreateProjectOptions {
   projectName: string;
-  template: 'webpack' | 'vite';
+  template: Template;
 }
 
 export const createProject = async ({
@@ -21,9 +23,18 @@ export const createProject = async ({
   validateTargetDirectory(targetPath);
 
   console.log('✅ Directory validation complete');
-  console.log(
-    '🚧 Project creation is still in development - stopping here for now',
-  );
+
+  createProjectDirectory(targetPath);
+
+  await generatePackageJson(targetPath, { projectName, template });
+
+  console.log('✅ Project created successfully!');
+  console.log(`
+Next steps:
+  cd ${projectName === '.' ? '.' : projectName}
+  npm install
+  npm start
+  `);
 };
 
 const resolveProjectPath = (projectName: string): string => {
@@ -55,4 +66,11 @@ const validateTargetDirectory = (targetPath: string): void => {
   }
 
   console.log(`📁 Directory ${targetPath} exists and is empty`);
+};
+
+const createProjectDirectory = (targetPath: string): void => {
+  if (!existsSync(targetPath)) {
+    mkdirSync(targetPath, { recursive: true });
+    console.log(`📁 Created directory: ${targetPath}`);
+  }
 };

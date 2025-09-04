@@ -7,12 +7,17 @@ export const getAppSnapshot = async ({
   expect,
   waitUntil = 'networkidle0',
   timeout = TEST_TIMEOUT,
+  waitForText,
 }: {
   url: string;
   warningFilter?: (warning: string) => boolean;
   expect: ExpectStatic;
   waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
   timeout?: number;
+  /**
+   * Wait until the text is present in the body of the page.
+   */
+  waitForText?: string;
 }) => {
   const warnings: string[] = [];
   const errors: string[] = [];
@@ -57,6 +62,14 @@ export const getAppSnapshot = async ({
 
     expect(warnings).toEqual([]);
     expect(errors).toEqual([]);
+
+    if (waitForText) {
+      await appPage.waitForFunction(
+        (text) => document.body.innerText.includes(text),
+        {},
+        waitForText,
+      );
+    }
 
     return { sourceHtml, clientRenderContent };
   } finally {

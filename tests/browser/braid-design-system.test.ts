@@ -4,7 +4,6 @@ import {
   it,
   expect as globalExpect,
   afterAll,
-  beforeEach,
   vi,
 } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
@@ -32,20 +31,9 @@ function getLocalUrl(site: string, port: number) {
   return `http://${host}:${port}`;
 }
 
-const { sku, exec, fixturePath } = scopeToFixture('braid-design-system');
-
-const removeCache = async () => {
-  // remove the cache directory before building to ensure consistent results
-  await exec('rm -rf node_modules/.cache');
-  await exec('rm -rf node_modules/.vite');
-  await exec('rm -rf dist');
-};
+const { sku, fixturePath } = scopeToFixture('braid-design-system');
 
 describe('braid-design-system', () => {
-  beforeEach(async () => {
-    await vitestPuppeteer.resetBrowser();
-  });
-
   describe.sequential.for(bundlers)('bundler %s', (bundler) => {
     describe('start', async () => {
       const port = await getPort();
@@ -62,8 +50,6 @@ describe('braid-design-system', () => {
       };
 
       beforeAll(async () => {
-        await removeCache();
-
         const start = await sku('start', args[bundler]);
         globalExpect(
           await start.findByText(
@@ -83,6 +69,7 @@ describe('braid-design-system', () => {
           url: getLocalUrl('seekAnz', port),
           expect,
           timeout,
+          waitForText: 'Client',
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -96,6 +83,7 @@ describe('braid-design-system', () => {
           url: getLocalUrl('jobStreet', port),
           expect,
           timeout,
+          waitForText: 'Client',
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -109,8 +97,6 @@ describe('braid-design-system', () => {
       };
 
       beforeAll(async () => {
-        await removeCache();
-
         const build = await sku('build', args[bundler]);
         globalExpect(
           await build.findByText('Sku build complete', {}, { timeout }),

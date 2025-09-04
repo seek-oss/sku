@@ -98,18 +98,29 @@ const copyTemplateFiles = async (
 
   await Promise.all(
     templateFiles.map(async (file) => {
-      const relativePath = relative(templateDir, file);
-      const destinationPath = join(targetPath, normalizeFileName(relativePath));
+      try {
+        const relativePath = relative(templateDir, file);
+        const destinationPath = join(
+          targetPath,
+          normalizeFileName(relativePath),
+        );
 
-      const destDir = dirname(destinationPath);
-      await mkdir(destDir, { recursive: true });
+        const destDir = dirname(destinationPath);
+        await mkdir(destDir, { recursive: true });
 
-      const processedContent = await eta.renderAsync(
-        relativePath,
-        templateData,
-      );
+        const processedContent = await eta.renderAsync(
+          relativePath,
+          templateData,
+        );
 
-      await writeFile(destinationPath, processedContent, 'utf8');
+        await writeFile(destinationPath, processedContent, 'utf8');
+      } catch (error) {
+        throw new Error(
+          `Failed to process template file ${file}: ${
+            error instanceof Error ? error.message : String(error)
+          }`,
+        );
+      }
     }),
   );
 };

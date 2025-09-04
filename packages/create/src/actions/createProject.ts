@@ -9,7 +9,7 @@ import { formatProject } from '../services/format.js';
 import { validatePackageName } from '../validation/packageName.js';
 import type { Template } from '../types/index.js';
 
-export interface CreateProjectOptions {
+interface CreateProjectOptions {
   projectName: string;
   template: Template;
 }
@@ -28,15 +28,11 @@ export const createProject = async ({
   console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
 
   validateTargetDirectory(targetPath);
-
   createProjectDirectory(targetPath);
 
   await generatePackageJson(targetPath, { projectName, template });
-
   await generateTemplateFiles(targetPath, { projectName, template });
-
   await installDependencies(targetPath);
-
   await formatProject(targetPath);
 
   const nextSteps = [

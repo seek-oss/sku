@@ -30,12 +30,12 @@ export const addSkuCodemodGenerator = (plop) => {
       {
         type: 'add',
         template: '// INPUT',
-        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.input.ts`,
+        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtures__/{{codemodName}}.input.ts`,
       },
       {
         type: 'add',
         template: '// OUTPUT',
-        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtutes__/{{codemodName}}.output.ts`,
+        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtures__/{{codemodName}}.output.ts`,
       },
       {
         type: 'modify',

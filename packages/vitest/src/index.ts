@@ -34,7 +34,6 @@ export const runVitest = async ({
       ],
       test: {
         environment: 'jsdom',
-        globals: true,
         setupFiles,
       },
       ssr: {

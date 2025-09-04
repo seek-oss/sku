@@ -34,12 +34,16 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "devDependencies": {
-    "typescript-transform-paths": "^3.5.2"
+    "typescript-transform-paths": "^3.5.2",
+    "vitest": "catalog:"
   },
   "dependencies": {
     "@vanilla-extract/vite-plugin": "catalog:",
     "vitest": "catalog:",
     "vite-plugin-cjs-interop": "^2.3.0",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "peerDependencies": {
+    "vitest": "^3.0.0"
   }
 }

@@ -26,10 +26,6 @@ const runInlineTest = async ({
   input,
   expectedOutput,
 }: InlineTestProps) => {
-  if (!isValidTransform(transform)) {
-    throw new Error('Invalid transform function provided');
-  }
-
   const output = transform(input.source);
   if (!output) {
     throw new Error('Transform failed');
@@ -67,6 +63,10 @@ export const runTest = async ({
     sourceRead,
     expectedOutputRead,
   ]);
+
+  if (!isValidTransform(transform)) {
+    throw new Error('Invalid transform function provided');
+  }
 
   return runInlineTest({
     transform,

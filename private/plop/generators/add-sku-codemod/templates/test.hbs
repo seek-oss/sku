@@ -9,7 +9,7 @@ const tests = [
 
 describe('[CODEMOD]: "{{ codemodName }}"', () => {
   it.for(tests)('"$fixtureName"', async ({ fixtureName }) => {
-    runTest({
+    await runTest({
       dirName: __dirname,
       transformName: '{{ codemodName }}',
       fixtureName,

@@ -18,19 +18,19 @@ describe('ssr translations', () => {
 
   afterAll(cleanup);
 
-  it('should render en', async ({ expect, task }) => {
+  it('should render en', async ({ task }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({ expect, url: `${backendUrl}/en` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render fr', async ({ expect, task }) => {
+  it('should render fr', async ({ task }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({ expect, url: `${backendUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render en-PSEUDO', async ({ expect, task }) => {
+  it('should render en-PSEUDO', async ({ task }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({
       expect,

@@ -67,7 +67,7 @@ export const getAppSnapshot = async ({
       await appPage.waitForFunction(
         (text) => document.body.innerText.includes(text),
         {},
-        'Client',
+        waitForText,
       );
     }
 

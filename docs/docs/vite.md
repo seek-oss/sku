@@ -78,7 +78,7 @@ However, **it is highly recommended to convert all code to ESM if possible**.
 
 #### Finding ESM code changes
 
-After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed.
+After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed:
 
 ```bash
 npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off"
@@ -135,7 +135,7 @@ These features make it a great replacement for Jest in `sku` applications, espec
 Migrating to Vitest should be fairly straightforward.
 Before making any changes, it is highly recommend to read [the Vitest documentation](https://vitest.dev/guide/) to familiarise yourself with the API and features, as well as to better understand the differences between Jest and Vitest.
 
-To enable Vitest in `sku`, first install the required dependencies.
+To enable Vitest in `sku`, first install the required dependencies:
 
 ```bash
 pnpm add -D vitest @sku-lib/vitest
@@ -156,7 +156,7 @@ export default {
 `sku` will now invoke [the `vitest` CLI][Vitest CLI] instead of the `jest` CLI when running `sku test`.
 
 **A key difference** between the `jest` and `vitest` CLIs is that `vitest` defaults to watch mode when running tests locally.
-To run test without watch mode you can use `sku test --run`.
+To run test without watch mode you can use `sku test --run`:
 
 ```json
 // package.json

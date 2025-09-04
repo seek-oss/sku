@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect as globalExpect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import {
@@ -12,7 +12,7 @@ const { sku, fixturePath } = scopeToFixture('suspense');
 const targetDirectory = fixturePath('dist');
 
 describe('suspense', () => {
-  describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
+  describe.for(bundlers)('bundler %s', async (bundler) => {
     const port = await getPort();
     const url = `http://localhost:${port}`;
     const args: BundlerValues<string[]> = {
@@ -23,22 +23,18 @@ describe('suspense', () => {
     describe('build and serve', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpect(
-          await build.findByText('Sku build complete'),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
       });
 
-      it('should return home page', async ({ expect }) => {
+      it('should return home page', async () => {
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-        globalExpect(
-          await serve.findByText('Server started'),
-        ).toBeInTheConsole();
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
 
         const app = await getAppSnapshot({ url, expect });
         expect(app).toMatchSnapshot();
       });
 
-      it('should generate the expected files', async ({ expect }) => {
+      it('should generate the expected files', async () => {
         const files = await dirContentsToObject(targetDirectory);
         expect(files).toMatchSnapshot();
       });

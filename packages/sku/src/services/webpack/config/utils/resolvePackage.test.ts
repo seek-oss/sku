@@ -1,9 +1,9 @@
-import { describe, beforeEach, test, vi } from 'vitest';
+import { describe, beforeEach, test, vi, expect } from 'vitest';
 import { createPackageResolver } from './resolvePackage.js';
 
 import { cwd } from '@sku-lib/utils';
 
-describe.sequential('webpack utils', () => {
+describe('webpack utils', () => {
   describe('resolvePackage()', () => {
     let resolvePackage: ReturnType<typeof createPackageResolver>;
     let fs: any; // No idea how to type this properly here. I tried jest.Mocked<> but I couldnt get it to play nice with the readFileSync mock
@@ -17,14 +17,12 @@ describe.sequential('webpack utils', () => {
       resolvePackage = createPackageResolver(fs, resolve);
     });
 
-    test('defaults to require.resolve', ({ expect }) => {
+    test('defaults to require.resolve', () => {
       resolve.mockReturnValue('./node_modules/test/package.json');
       expect(resolvePackage('test')).toEqual('./node_modules/test');
     });
 
-    test('returns a naive path when require.resolve fails and the package is not a project dependency', ({
-      expect,
-    }) => {
+    test('returns a naive path when require.resolve fails and the package is not a project dependency', () => {
       const error = new Error('Module not found') as Error & { code: string };
       error.code = 'MODULE_NOT_FOUND';
       resolve.mockImplementation(() => {
@@ -34,9 +32,7 @@ describe.sequential('webpack utils', () => {
       expect(resolvePackage('test')).toEqual(`${cwd()}/node_modules/test`);
     });
 
-    test('handles missing package.json when looking for dependencies', ({
-      expect,
-    }) => {
+    test('handles missing package.json when looking for dependencies', () => {
       const resolveError = new Error('Module not found') as Error & {
         code: string;
       };
@@ -68,7 +64,7 @@ describe.sequential('webpack utils', () => {
         });
       });
 
-      test('in dependencies', ({ expect }) => {
+      test('in dependencies', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             dependencies: {
@@ -80,7 +76,7 @@ describe.sequential('webpack utils', () => {
         expect(() => resolvePackage('test')).toThrow(resolveError);
       });
 
-      test('in devDependencies', ({ expect }) => {
+      test('in devDependencies', () => {
         fs.readFileSync.mockReturnValue(
           JSON.stringify({
             devDependencies: {
@@ -93,7 +89,7 @@ describe.sequential('webpack utils', () => {
       });
     });
 
-    test('caches results', ({ expect }) => {
+    test('caches results', () => {
       resolve.mockReturnValue('./node_modules/test/package.json');
 
       resolvePackage('test');

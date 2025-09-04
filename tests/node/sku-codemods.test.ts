@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import fs from 'node:fs/promises';
 import dedent from 'dedent';
 import { createFixture } from 'fs-fixture';
@@ -60,7 +60,7 @@ describe('sku codemods', () => {
 
         const { codemod } = scopeToFixture(fixture.path);
 
-        it('"--dry" should not change any files', async ({ expect }) => {
+        it('"--dry" should not change any files', async () => {
           const cli = await codemod('transform-vite-loadable', ['.', '--dry']);
           expect(
             await cli.findByText('files found that would be changed.'),
@@ -73,7 +73,7 @@ describe('sku codemods', () => {
           expect(fileContent).toEqual(input);
         });
 
-        it('All output files should be the same', async ({ expect }) => {
+        it('All output files should be the same', async () => {
           const cli = await codemod('transform-vite-loadable', ['.']);
           expect(await cli.findByText('Changed files')).toBeInTheConsole();
 

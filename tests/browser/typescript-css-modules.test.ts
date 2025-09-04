@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { rm } from 'node:fs/promises';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
@@ -17,16 +11,14 @@ const { sku, fixturePath, node, exec } = scopeToFixture(
 const distDir = fixturePath('dist');
 const distSsrDir = fixturePath('dist-ssr');
 
-describe.sequential('typescript-css-modules', () => {
+describe('typescript-css-modules', () => {
   describe('build', async () => {
     const port = await getPort();
     const url = `http://localhost:${port}`;
 
     beforeAll(async () => {
       const build = await sku('build');
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
     });
 
     afterAll(async () => {
@@ -34,15 +26,15 @@ describe.sequential('typescript-css-modules', () => {
       await rm(distDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async ({ expect }) => {
+    it('should create valid app', async () => {
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+      expect(await serve.findByText('Server started')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async ({ expect }) => {
+    it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
@@ -53,7 +45,7 @@ describe.sequential('typescript-css-modules', () => {
 
     beforeAll(async () => {
       const buildSsr = await sku('build-ssr', ['--config=sku-ssr.config.ts']);
-      globalExpect(
+      expect(
         await buildSsr.findByText('Sku build complete'),
       ).toBeInTheConsole();
     });
@@ -63,7 +55,7 @@ describe.sequential('typescript-css-modules', () => {
       await rm(distSsrDir, { recursive: true, force: true });
     });
 
-    it('should create valid app', async ({ expect }) => {
+    it('should create valid app', async () => {
       await node(['dist-ssr/server.cjs']);
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(
@@ -74,7 +66,7 @@ describe.sequential('typescript-css-modules', () => {
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async ({ expect }) => {
+    it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distSsrDir, [
         '.cjs',
         '.js',
@@ -85,12 +77,12 @@ describe.sequential('typescript-css-modules', () => {
   });
 
   describe('start', async () => {
-    it('should start a development server', async ({ expect }) => {
+    it('should start a development server', async () => {
       const port = await getPort();
       const devServerUrl = `http://localhost:${port}`;
 
       const start = await sku('start', ['--strict-port', `--port=${port}`]);
-      globalExpect(
+      expect(
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
 
@@ -100,19 +92,17 @@ describe.sequential('typescript-css-modules', () => {
   });
 
   describe('test', () => {
-    it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
+    it('should handle Vanilla Extract styles in tests', async () => {
       const test = await sku('test');
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });
   });
 
   describe('lint', () => {
-    it('should handle tsc and eslint', async ({ expect }) => {
+    it('should handle tsc and eslint', async () => {
       // run build first to ensure typescript declarations are generated
       const build = await sku('build');
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
       const lint = await sku('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();

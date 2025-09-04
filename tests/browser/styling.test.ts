@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import type { Page } from 'puppeteer';
 import {
@@ -27,29 +21,27 @@ describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build');
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
     });
 
-    it('should create valid app', async ({ expect }) => {
+    it('should create valid app', async () => {
       const serve = await sku('serve');
-      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+      expect(await serve.findByText('Server started')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url: devServerUrl, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async ({ expect }) => {
+    it('should generate the expected files', async () => {
       const files = await dirContentsToObject(distDir);
       expect(files).toMatchSnapshot();
     });
   });
 
   describe('start', () => {
-    it('should start a development server', async ({ expect }) => {
+    it('should start a development server', async () => {
       const start = await sku('start');
-      globalExpect(
+      expect(
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
 
@@ -59,7 +51,7 @@ describe('styling', () => {
   });
 
   describe('test', () => {
-    it('should handle Vanilla Extract styles in tests', async ({ expect }) => {
+    it('should handle Vanilla Extract styles in tests', async () => {
       const test = await sku('test');
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });
@@ -83,7 +75,7 @@ describe('styling', () => {
         '--port',
         storybookPort.toString(),
       ]);
-      globalExpect(
+      expect(
         await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
@@ -94,7 +86,7 @@ describe('styling', () => {
       await storyPage?.close();
     });
 
-    it('should render external styles', async ({ expect }) => {
+    it('should render external styles', async () => {
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-external]',
@@ -104,7 +96,7 @@ describe('styling', () => {
       expect(fontSize).toEqual('9px');
     });
 
-    it('should render Vanilla Extract styles', async ({ expect }) => {
+    it('should render Vanilla Extract styles', async () => {
       const { fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
         '[data-automation-vanilla]',

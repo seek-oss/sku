@@ -1,4 +1,4 @@
-import { describe, beforeEach, afterEach, it, vi } from 'vitest';
+import { describe, beforeEach, afterEach, it, vi, expect } from 'vitest';
 import { createSkuContext } from './createSkuContext.js';
 import { checkHosts, setupHosts } from './hosts.js';
 
@@ -13,7 +13,7 @@ describe('setupHosts', () => {
     vi.restoreAllMocks();
   });
 
-  it('should set site-specific hosts', async ({ expect }) => {
+  it('should set site-specific hosts', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
@@ -33,7 +33,7 @@ describe('setupHosts', () => {
     expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'local.seek.com');
   });
 
-  it('should set app-wide hosts', async ({ expect }) => {
+  it('should set app-wide hosts', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
@@ -50,7 +50,7 @@ describe('setupHosts', () => {
     expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'dev.seek.com');
   });
 
-  it('should combine app-wide and site-specific hosts', async ({ expect }) => {
+  it('should combine app-wide and site-specific hosts', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
@@ -67,7 +67,7 @@ describe('setupHosts', () => {
     expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'dev.seek.com');
   });
 
-  it('should set ipv4 and ipv6 hosts', async ({ expect }) => {
+  it('should set ipv4 and ipv6 hosts', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
@@ -84,7 +84,7 @@ describe('setupHosts', () => {
     expect(mockSetHosts).toHaveBeenCalledWith('::1', 'local.seek.com');
   });
 
-  it('should not set hosts if none are defined', async ({ expect }) => {
+  it('should not set hosts if none are defined', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi.fn(async () => {});
 
@@ -100,7 +100,7 @@ describe('setupHosts', () => {
     expect(mockSetHosts).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if setting hosts fails', async ({ expect }) => {
+  it('should throw an error if setting hosts fails', async () => {
     const context = createSkuContext({});
     const mockSetHosts = vi
       .fn(async () => {})
@@ -130,7 +130,7 @@ describe('checkHosts', () => {
   });
 
   // All this function does is output info to the console so rather than testing the output we can just that it doesn't throw.
-  it('should not throw errors', async ({ expect }) => {
+  it('should not throw errors', async () => {
     const context = createSkuContext({});
     const mockGetHosts = vi.fn(async () => []);
 

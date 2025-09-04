@@ -46,7 +46,7 @@ export const generateTemplateFiles = async (
   await copyTemplateFiles(bundlerTemplateDir, targetPath, templateData);
 };
 
-const createTemplateData = (
+export const createTemplateData = (
   projectName: string,
   template: Template,
 ): TemplateData => {
@@ -125,7 +125,7 @@ const copyTemplateFiles = async (
   );
 };
 
-const normalizeFileName = (filePath: string): string => {
+export const normalizeFileName = (filePath: string): string => {
   // Handle files that start with underscore (like _.gitignore -> .gitignore)
   const parts = filePath.split('/');
   const fileName = parts[parts.length - 1];

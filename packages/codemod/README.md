@@ -14,9 +14,9 @@ If you don't specify any `files` the CLI will prompt you to select files to run 
 
 ## Available codemods
 
-| Codemod                   | Description                                                                |
-| ------------------------- | -------------------------------------------------------------------------- |
-| `transform-vite-loadable` | Converts `sku/@loadable/component` imports to `sku/vite/loadable` imports. |
+| Codemod                   | Description                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------- |
+| `transform-vite-loadable` | Converts `sku/@loadable/component` imports to `@sku-lib/vite/loadable` imports. |
 
 ## Options
 

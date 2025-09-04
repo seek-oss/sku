@@ -1,6 +1,7 @@
 import { parse, Lang } from '@ast-grep/napi';
+import type { Transform } from '../../utils/types.js';
 
-export const transform = (source: string) => {
+export const transform: Transform = (source) => {
   const ast = parse(Lang.TypeScript, source);
   const root = ast.root();
 
@@ -31,7 +32,7 @@ export const transform = (source: string) => {
 
   if (!importStatement) {
     // No import statement found for this file.
-    return false;
+    return null;
   }
 
   const identifier = importStatement?.find({
@@ -45,7 +46,7 @@ export const transform = (source: string) => {
 
   if (!identifier) {
     // no named identifier found for this file.
-    return false;
+    return null;
   }
 
   // Check if the import statement also imports named imports from sku/@loadable/components.

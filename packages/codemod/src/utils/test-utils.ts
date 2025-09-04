@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { expect } from 'vitest';
+import { isValidTransform, type Transform } from './types.js';
 
 type FileInfo = {
   source: string;
@@ -8,7 +9,7 @@ type FileInfo = {
 };
 
 type InlineTestProps = {
-  transform: (source: string) => string | false;
+  transform: Transform;
   input: FileInfo;
   expectedOutput: string;
 };
@@ -17,7 +18,7 @@ type TestProps = {
   dirName: string;
   transformName: string;
   fixtureName?: string;
-  testOptions?: Record<string, unknown>;
+  testOptions?: { extension?: string };
 };
 
 const runInlineTest = async ({
@@ -25,13 +26,17 @@ const runInlineTest = async ({
   input,
   expectedOutput,
 }: InlineTestProps) => {
-  const output = await transform(input.source);
+  if (!isValidTransform(transform)) {
+    throw new Error('Invalid transform function provided');
+  }
+
+  const output = transform(input.source);
   if (!output) {
     throw new Error('Transform failed');
   }
-  const expectation = (o: string) =>
-    expect(o.trim()).toEqual(expectedOutput.trim());
-  expectation(output);
+
+  expect(output.trim()).toEqual(expectedOutput.trim());
+
   return output;
 };
 
@@ -43,19 +48,26 @@ export const runTest = async ({
 }: TestProps) => {
   const testFixtureName = fixtureName || transformName;
 
-  // Assumes transform is one level up from __tests__ directory
-  const transform = (await import(path.join(dirName, '..', transformName)))
-    .transform;
   const fixtureDir = path.join(dirName, '..', '__testfixtures__');
   const inputPath = path.join(
     fixtureDir,
     `${testFixtureName}.input.${testOptions.extension}`,
   );
-  const source = await readFile(inputPath, 'utf8');
-  const expectedOutput = await readFile(
+
+  // Assumes transform is one level up from __tests__ directory
+  const transformImport = import(path.join(dirName, '..', transformName));
+  const sourceRead = readFile(inputPath, 'utf8');
+  const expectedOutputRead = readFile(
     path.join(fixtureDir, `${testFixtureName}.output.${testOptions.extension}`),
     'utf8',
   );
+
+  const [{ transform }, source, expectedOutput] = await Promise.all([
+    transformImport,
+    sourceRead,
+    expectedOutputRead,
+  ]);
+
   return runInlineTest({
     transform,
     input: {
@@ -72,15 +84,21 @@ export const runNoChangeTest = async ({
   fixtureName,
   testOptions = {},
 }: TestProps) => {
-  const transform = (await import(path.join(dirName, '..', transformName)))
-    .transform;
   const inputPath = path.join(
     dirName,
     '..',
     '__testfixtures__',
     `${fixtureName}.unchanged.${testOptions.extension}`,
   );
-  const source = await readFile(inputPath, 'utf8');
+
+  const sourceRead = readFile(inputPath, 'utf8');
+  const transformImport = import(path.join(dirName, '..', transformName));
+
+  const [{ transform }, source] = await Promise.all([
+    transformImport,
+    sourceRead,
+  ]);
   const output = await transform(source);
-  expect(output).toEqual(false);
+
+  expect(output).toEqual(null);
 };

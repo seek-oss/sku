@@ -202,19 +202,19 @@ Documented below is a list of differences between `sku` with `webpack` and `sku`
 
 ### Code splitting
 
-Routes and components that take advantage of `sku`'s [code splitting] API will need to update imports from `sku/@loadable/component` to `sku/vite/loadable`.
+Routes and components that take advantage of `sku`'s [code splitting] API will need to update imports from `sku/@loadable/component` to `@sku-lib/vite/loadable`.
 A codemod is available to help with this migration:
 
 ```bash
 pnpm dlx @sku-lib/codemod transform-vite-loadable .
 ```
 
-The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
+The new `@sku-lib/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
 You can wrap a `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you:
 
 ```tsx
 import { Suspense } from 'react';
-import { loadable } from 'sku/vite/loadable';
+import { loadable } from '@sku-lib/vite/loadable';
 
 const Home = loadable(() => import('./Home'), {
   fallback: <div>Loading Home...</div>,

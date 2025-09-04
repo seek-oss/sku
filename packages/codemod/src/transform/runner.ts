@@ -16,7 +16,7 @@ type Options = {
   print?: boolean;
 };
 
-type JobWorkerData = {
+export type JobWorkerData = {
   transformerPath: string;
   options: Options;
   jobs: Array<{

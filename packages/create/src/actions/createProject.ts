@@ -48,7 +48,7 @@ export const createProject = async ({
   ]);
 };
 
-const resolveProjectPath = (projectName: string): string => {
+const resolveProjectPath = (projectName: string) => {
   if (projectName === '.') {
     return cwd();
   }
@@ -56,7 +56,7 @@ const resolveProjectPath = (projectName: string): string => {
   return resolve(cwd(), projectName);
 };
 
-const validateTargetDirectory = (targetPath: string): void => {
+const validateTargetDirectory = (targetPath: string) => {
   if (!existsSync(targetPath)) {
     return;
   }
@@ -76,7 +76,7 @@ const validateTargetDirectory = (targetPath: string): void => {
   console.log(`📁 Directory ${targetPath} exists and is empty`);
 };
 
-const createProjectDirectory = (targetPath: string): void => {
+const createProjectDirectory = (targetPath: string) => {
   if (!existsSync(targetPath)) {
     mkdirSync(targetPath, { recursive: true });
   }

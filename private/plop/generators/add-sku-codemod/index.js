@@ -23,21 +23,6 @@ export const addSkuCodemodGenerator = (plop) => {
         path: `${codemodRoot}/codemods/{{codemodName}}/{{codemodName}}.ts`,
       },
       {
-        type: 'add',
-        templateFile: './generators/add-sku-codemod/templates/test.hbs',
-        path: `${codemodRoot}/codemods/{{codemodName}}/__tests__/{{codemodName}}.test.ts`,
-      },
-      {
-        type: 'add',
-        template: '// INPUT',
-        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtures__/{{codemodName}}.input.ts`,
-      },
-      {
-        type: 'add',
-        template: '// OUTPUT',
-        path: `${codemodRoot}/codemods/{{codemodName}}/__testfixtures__/{{codemodName}}.output.ts`,
-      },
-      {
         type: 'modify',
         path: `${codemodRoot}/utils/constants.ts`,
         pattern: /(\/\* \[add-sku-codemod-generator: codemod] \*\/)/g,

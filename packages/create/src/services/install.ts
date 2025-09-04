@@ -9,7 +9,7 @@ const DEPENDENCIES = [
 
 const DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
-  'sku@^14.11.0',
+  'sku',
   '@types/react',
   '@types/react-dom',
 ];
@@ -30,7 +30,7 @@ const installPackages = async (
   deps: string[],
   type: 'dev' | 'prod',
 ): Promise<void> =>
-  new Promise((resolvePromise, reject) => {
+  new Promise((resolve, reject) => {
     const addCommand = getAddCommand({
       deps,
       type,
@@ -49,6 +49,6 @@ const installPackages = async (
         reject(new Error(`Installation failed with exit code ${code}`));
         return;
       }
-      resolvePromise();
+      resolve();
     });
   });

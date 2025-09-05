@@ -27,19 +27,3 @@ pnpm dlx @sku-lib/create my-app --template vite
 npx @sku-lib/create .
 pnpm dlx @sku-lib/create .
 ```
-
-**Technical Implementation:**
-- Built with TypeScript ES modules
-- Uses shared utilities from `@sku-lib/utils`
-- Eta templating engine for flexible file generation
-- Delegates formatting to `sku format` for consistency
-- Comprehensive test coverage with unit and integration tests
-
-**Generated Projects Include:**
-- `sku.config.ts` - Bundler configuration
-- `package.json`
-- TypeScript setup with proper configs
-- ESLint and Prettier configuration
-- `.gitignore` and `README.md` files
-- Starter React app
-- `braid-design-system` and `vanilla-extract` pre-installed

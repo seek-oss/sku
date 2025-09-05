@@ -10,7 +10,7 @@ const { sku } = scopeToFixture('translations');
 
 const backendUrl = `http://localhost:8314`;
 
-describe('ssr translations', () => {
+describe.concurrent('ssr translations', () => {
   beforeAll(async () => {
     const startSsr = await sku('start-ssr', ['--config=sku-ssr.config.ts']);
     expect(await startSsr.findByText('Server started')).toBeInTheConsole();

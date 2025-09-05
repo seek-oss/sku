@@ -16,6 +16,8 @@ describe('display-names-prod', () => {
       webpack: [],
     };
 
+    afterAll(cleanup);
+
     describe('build', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
@@ -81,6 +83,4 @@ describe('display-names-prod', () => {
       });
     });
   });
-
-  afterAll(cleanup);
 });

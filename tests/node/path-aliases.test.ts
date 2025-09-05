@@ -7,7 +7,11 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 const { sku, fixturePath } = scopeToFixture('path-aliases');
 
 describe('pathAliases', () => {
-  describe('with Vite bundler', () => {
+  describe.concurrent('with Vite bundler', async () => {
+    const tsconfigPath = fixturePath('tsconfig.json');
+    const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
+    const tsconfig = jsonc.parse(tsconfigContents);
+
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
@@ -17,10 +21,6 @@ describe('pathAliases', () => {
     });
 
     it('should generate TypeScript paths configuration with pathAliases', async () => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
-
       expect(tsconfig.compilerOptions.paths).toEqual({
         'src/*': ['./src/*'],
         '@components/*': ['./src/components/*'],
@@ -29,20 +29,12 @@ describe('pathAliases', () => {
     });
 
     it('should always include automatic src/* alias', async () => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
-
       expect(tsconfig.compilerOptions.paths).toMatchObject({
         'src/*': ['./src/*'],
       });
     });
 
     it('should preserve existing baseUrl behavior alongside paths', async () => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
-
       expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });

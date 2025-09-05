@@ -1,5 +1,5 @@
 ---
-'@sku-lib/create': major
+'@sku-lib/create': minor
 ---
 
 Add new standalone create-sku CLI package

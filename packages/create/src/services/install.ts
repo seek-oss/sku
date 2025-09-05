@@ -41,7 +41,7 @@ const installPackages = async (
 
     const child = spawn(command, args, {
       cwd: projectPath,
-      stdio: ['inherit', 'inherit', 'inherit'],
+      stdio: 'inherit',
     });
 
     child.on('close', (code) => {

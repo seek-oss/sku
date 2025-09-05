@@ -23,7 +23,7 @@ export const createProject = async ({
   );
 
   const targetPath = resolveProjectPath(projectName);
-  validatePackageName(targetPath);
+  validatePackageName(projectName);
 
   console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
 

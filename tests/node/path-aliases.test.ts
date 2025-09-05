@@ -11,15 +11,15 @@ describe('pathAliases', () => {
 
   describe('with Vite bundler', async () => {
     beforeAll(async () => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      tsconfig = jsonc.parse(tsconfigContents);
-
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
       await waitFor(() => {
         expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
       });
+
+      const tsconfigPath = fixturePath('tsconfig.json');
+      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
+      tsconfig = jsonc.parse(tsconfigContents);
     });
 
     it('should generate TypeScript paths configuration with pathAliases', async () => {

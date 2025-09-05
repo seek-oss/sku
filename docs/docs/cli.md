@@ -19,7 +19,13 @@ It provides a number of commands to help you develop, test and build your applic
 
 ## CLI Commands
 
-### `init`
+### `init` ⚠️ Deprecated
+
+> **Warning**: `sku init` is deprecated. Please use `@sku-lib/create` instead:
+>
+> ```sh
+> pnpm dlx @sku-lib/create my-app
+> ```
 
 Initialize a new `sku` project.
 Unless you've installed `sku` globally (not recommended), you should use `npx` or `pnpm dlx` to run this command:
@@ -35,6 +41,12 @@ This command supports the following options and arguments:
 | argument | `project-name` <br> _required_ | The name of the project to create <br> `pnpm dlx sku init my-app`                                                                                                                            |
 | option   | `--package-manager, -p`        | Overrides the package manager used when installing dependencies <br> This defaults to the package manager being used to run `sku init` <br> `pnpm dlx sku init my-app --package-manager=npm` |
 | option   | `--verbose`                    | Enable verbose logging for the package manager <br> `pnpm dlx sku init my-app --verbose`                                                                                                     |
+
+For new projects, use `@sku-lib/create` instead:
+
+```sh
+pnpm dlx @sku-lib/create my-app
+```
 
 ### `start`
 

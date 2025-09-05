@@ -12,5 +12,11 @@
     "resolveJsonModule": true
   },
   "include": ["**/*", "eslint.config.ts", "types.d.ts"],
-  "exclude": ["node_modules", "fixtures", "packages/sku", "packages/codemod"]
+  "exclude": [
+    "node_modules",
+    "fixtures",
+    "packages/sku",
+    "packages/codemod",
+    "packages/create"
+  ]
 }

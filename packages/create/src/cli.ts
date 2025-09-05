@@ -4,6 +4,8 @@ import { Command } from 'commander';
 import prompts from 'prompts';
 
 import packageJson from '@sku-lib/create/package.json' with { type: 'json' };
+import { createProject } from './actions/createProject.js';
+import type { Template } from './types/index.js';
 
 const { name, description, version } = packageJson;
 
@@ -15,7 +17,7 @@ program
   .version(version)
   .argument('[project-name]', 'Name of the project to create')
   .option('-t, --template <template>', 'Template to use (webpack, vite)')
-  .action(async (projectName: string = '.', options: { template?: string }) => {
+  .action(async (targetDir: string = '.', options: { template?: string }) => {
     let selectedTemplate = options.template;
 
     if (!selectedTemplate) {
@@ -25,7 +27,7 @@ program
         message: 'Which template would you like to use?',
         choices: [
           { title: 'webpack', value: 'webpack' },
-          { title: 'vite', value: 'vite' },
+          { title: 'vite (experimental)', value: 'vite' },
         ],
         initial: 0,
       });
@@ -33,9 +35,40 @@ program
       selectedTemplate = template;
     }
 
-    console.log('🚧 create-sku is not yet implemented');
-    console.log(`Project name: ${projectName}`);
-    console.log(`Template: ${selectedTemplate}`);
+    if (selectedTemplate === 'vite') {
+      const { confirmVite } = await prompts({
+        type: 'confirm',
+        name: 'confirmVite',
+        message:
+          '⚠️  Vite bundler in sku is currently experimental and not yet suitable for production use. Continue?',
+        initial: false,
+      });
+
+      if (!confirmVite) {
+        console.log(
+          '❌ Cancelled. Use `webpack` template for a stable production-ready experience.',
+        );
+        process.exit(0);
+      }
+    }
+
+    if (!selectedTemplate) {
+      console.log('❌ No template selected. Exiting.');
+      process.exit(1);
+    }
+
+    try {
+      await createProject({
+        targetDir,
+        template: selectedTemplate as Template,
+      });
+    } catch (error) {
+      console.error(
+        '❌ Error creating project:',
+        error instanceof Error ? error.message : error,
+      );
+      process.exit(1);
+    }
   });
 
 program.parse();

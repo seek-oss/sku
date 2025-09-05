@@ -1,5 +1,17 @@
 # sku
 
+## 14.11.1
+
+### Patch Changes
+
+- Move util functions from `sku` to `@sku-lib/utils` package to allow usage between packages. No functional changes. ([#1377](https://github.com/seek-oss/sku/pull/1377))
+
+- `deps`: Update `vite-plugin-cjs-interop` from `^2.2.0` to `^2.3.0` ([#1386](https://github.com/seek-oss/sku/pull/1386))
+
+- `test (vitest)`: Added missing `pathAlias` support for the vitest test runner ([#1381](https://github.com/seek-oss/sku/pull/1381))
+
+- Remove unused experimental `sku/vite/loadable` entrypoint ([#1382](https://github.com/seek-oss/sku/pull/1382))
+
 ## 14.11.0
 
 ### Minor Changes

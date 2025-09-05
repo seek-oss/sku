@@ -1,5 +1,13 @@
 # @sku-lib/vitest
 
+## 0.1.2
+
+### Patch Changes
+
+- `deps`: Update `vite-plugin-cjs-interop` from `^2.2.0` to `^2.3.0` ([#1386](https://github.com/seek-oss/sku/pull/1386))
+
+- Added missing `compilePackages` and `cjsInteropDependencies` support ([#1381](https://github.com/seek-oss/sku/pull/1381))
+
 ## 0.1.1
 
 ### Patch Changes

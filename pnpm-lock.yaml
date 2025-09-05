@@ -848,6 +848,9 @@ importers:
       '@types/diff':
         specifier: ^7.0.1
         version: 7.0.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.9
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9

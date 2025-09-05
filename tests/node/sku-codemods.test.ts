@@ -52,7 +52,7 @@ const filesToTest = [
 describe('sku codemods', () => {
   describe('"transform-vite-loadable" codemod', async () => {
     describe.for(filesToTest)(
-      'File "$filename"',
+      'File $filename',
       async ({ filename, input, output }) => {
         const fixture = await createFixture({
           [filename]: input,
@@ -73,7 +73,9 @@ describe('sku codemods', () => {
           expect(fileContent).toEqual(input);
         });
 
-        it('All output files should be the same', async ({ expect }) => {
+        it('Should transform files and match expected output', async ({
+          expect,
+        }) => {
           const cli = await codemod('transform-vite-loadable', ['.']);
           expect(await cli.findByText('Changed files')).toBeInTheConsole();
 

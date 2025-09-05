@@ -9,14 +9,14 @@ import picocolors from 'picocolors';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const transformerDirectory = join(__dirname, '../', 'codemods');
+const transformerDirectory = join(__dirname, '../', 'codemods');
 
 type Options = {
   dry?: boolean;
   print?: boolean;
 };
 
-type JobWorkerData = {
+export type JobWorkerData = {
   transformerPath: string;
   options: Options;
   jobs: Array<{
@@ -85,10 +85,7 @@ export const runTransform = async (
     return;
   }
 
-  const transformerPath = join(
-    transformerDirectory,
-    `${transformer}/${transformer}.js`,
-  );
+  const transformerPath = join(transformerDirectory, `${transformer}.js`);
 
   const cpus =
     os.cpus().length > filesExpanded.length

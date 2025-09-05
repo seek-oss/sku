@@ -1,6 +1,0 @@
-{
-  "name": "@sku-private/eslint-plugin",
-  "private": true,
-  "type": "module",
-  "main": "index.cjs"
-}

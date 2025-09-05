@@ -1,10 +1,4 @@
-import {
-  describe,
-  it,
-  beforeEach,
-  afterEach,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import dedent from 'dedent';
@@ -25,7 +19,7 @@ describe('lint-format', () => {
   });
 
   describe('sku lint', () => {
-    it('should catch type errors', async ({ expect }) => {
+    it('should catch type errors', async () => {
       const fileName = 'typescriptFile.ts';
       const fileContents = dedent /* ts */ `
         const foo: number = 'a string';
@@ -38,7 +32,7 @@ describe('lint-format', () => {
       ).toBeInTheConsole();
     });
 
-    it('should catch ES lint errors', async ({ expect }) => {
+    it('should catch ES lint errors', async () => {
       const fileName = 'utils.test.ts';
       const fileContents = dedent /* ts */ `
         console.log('foo');
@@ -59,7 +53,7 @@ describe('lint-format', () => {
       ).toBeInTheConsole();
     });
 
-    it('should catch prettier errors', async ({ expect }) => {
+    it('should catch prettier errors', async () => {
       const fileName = 'unformattedFile1.js';
       const fileContents = dedent /* js */ `
         import { something } from "with-double-quotes";
@@ -94,7 +88,7 @@ describe('lint-format', () => {
   });
 
   describe('sku format', () => {
-    globalExpect.addSnapshotSerializer({
+    expect.addSnapshotSerializer({
       serialize: (val) => val,
       test: (val) => typeof val === 'string',
     });
@@ -142,7 +136,7 @@ describe('lint-format', () => {
 
     it.for(Object.keys(filesToFormat))(
       'errors are fixed: %s',
-      async (fileName, { expect }) => {
+      async (fileName) => {
         const filePath = testFile(fileName);
         await fs.writeFile(filePath, filesToFormat[fileName]);
 

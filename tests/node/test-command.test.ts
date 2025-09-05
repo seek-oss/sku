@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import {
   testFrameworks,
@@ -16,7 +16,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
     jest: [],
   };
 
-  it('should run tests', async ({ expect }) => {
+  it('should run tests', async () => {
     const process = await sku('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
@@ -25,7 +25,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
     });
   });
 
-  it(`should pass through unknown flags`, async ({ expect }) => {
+  it(`should pass through unknown flags`, async () => {
     const process = await sku('test', [
       'testfile.ts',
       '--passWithNoTests',

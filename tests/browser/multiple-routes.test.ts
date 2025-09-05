@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 
@@ -19,7 +13,7 @@ import {
 const { sku, fixturePath } = scopeToFixture('multiple-routes');
 
 describe('multiple-routes', () => {
-  describe.sequential.for(bundlers)('bundler: %s', (bundler) => {
+  describe.for(bundlers)('bundler: %s', (bundler) => {
     describe('start', async () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;
@@ -38,14 +32,14 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        globalExpect(
+        expect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
       });
 
       afterAll(cleanup);
 
-      it(`should render home page correctly`, async ({ expect, task }) => {
+      it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
@@ -54,7 +48,7 @@ describe('multiple-routes', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it(`should render details page correctly`, async ({ expect, task }) => {
+      it(`should render details page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
@@ -82,19 +76,15 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpect(
-          await build.findByText('Sku build complete'),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
         const serve = await sku('serve', portArgs);
-        globalExpect(
-          await serve.findByText('Server started'),
-        ).toBeInTheConsole();
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
       });
 
       afterAll(cleanup);
 
-      it(`should render home page correctly`, async ({ expect, task }) => {
+      it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
@@ -103,7 +93,7 @@ describe('multiple-routes', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it(`should render details page correctly`, async ({ expect, task }) => {
+      it(`should render details page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
@@ -112,7 +102,7 @@ describe('multiple-routes', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it('should generate the expected files', async ({ expect }) => {
+      it('should generate the expected files', async () => {
         const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
@@ -120,7 +110,7 @@ describe('multiple-routes', () => {
   });
 
   describe('test', () => {
-    it('should handle dynamic imports in tests', async ({ expect }) => {
+    it('should handle dynamic imports in tests', async () => {
       const test = await sku('test');
 
       expect(

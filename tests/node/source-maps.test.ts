@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import { dirContentsToObject } from '@sku-private/test-utils';
 import {
@@ -15,9 +15,9 @@ describe('source-maps', () => {
     webpack: [],
   };
 
-  describe.sequential.each(bundlers)('bundler %s', (bundler) => {
+  describe.each(bundlers)('bundler %s', (bundler) => {
     describe.for([true, false])('sourceMapsProd %s', (sourceMapsProd) => {
-      it('should generate the expected files', async ({ expect }) => {
+      it('should generate the expected files', async () => {
         const build = await sku('build', args[bundler], {
           spawnOpts: {
             env: {

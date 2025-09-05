@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect as globalExpect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import {
   bundlers,
   type BundlerValues,
@@ -10,7 +10,7 @@ import { rm } from 'node:fs/promises';
 const { sku, fixturePath } = scopeToFixture('report-generation');
 
 describe('report-generation', () => {
-  describe.sequential.for(bundlers)('bundler %s', (bundler) => {
+  describe.for(bundlers)('bundler %s', (bundler) => {
     describe('build', async () => {
       const args: BundlerValues<string[]> = {
         vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
@@ -23,12 +23,10 @@ describe('report-generation', () => {
         rm(reportDir, { recursive: true, force: true });
 
         const build = await sku('build', args[bundler]);
-        globalExpect(
-          await build.findByText('Sku build complete'),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
       });
 
-      it('should generate bundle analysis report', async ({ expect }) => {
+      it('should generate bundle analysis report', async () => {
         const reportHtml = fixturePath('report/client.html');
         expect(fs.existsSync(reportHtml)).toBe(true);
 

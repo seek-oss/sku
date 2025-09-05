@@ -1,11 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-  vi,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
 import {
   getStoryPage,
   getTextContentFromFrameOrPage,
@@ -54,7 +47,7 @@ describe('storybook-config', () => {
         '--port',
         port.toString(),
       ]);
-      globalExpect(
+      expect(
         await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
@@ -66,10 +59,7 @@ describe('storybook-config', () => {
       await cleanup();
     });
 
-    it('should start sku dev middleware if configured', async ({
-      expect,
-      task,
-    }) => {
+    it('should start sku dev middleware if configured', async ({ task }) => {
       skipCleanup(task.id);
       const response = await fetch(middlewareUrl);
 
@@ -78,7 +68,6 @@ describe('storybook-config', () => {
     });
 
     it('should render decorators defined in the storybook preview file', async ({
-      expect,
       task,
     }) => {
       skipCleanup(task.id);
@@ -91,7 +80,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async ({ expect, task }) => {
+    it('should render a component inside a story', async ({ task }) => {
       skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
@@ -102,7 +91,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async ({ expect, task }) => {
+    it('should render vanilla styles', async ({ task }) => {
       skipCleanup(task.id);
       const { text, fontSize } = await getTextContentFromFrameOrPage(
         storyPage,
@@ -115,7 +104,7 @@ describe('storybook-config', () => {
   });
 
   describe('start docs page', () => {
-    it('should render a ".mdx" file', async ({ expect }) => {
+    it('should render a ".mdx" file', async () => {
       const port = 8088;
       const storybook = await exec('pnpm', [
         'storybook',
@@ -125,7 +114,7 @@ describe('storybook-config', () => {
         '--port',
         port.toString(),
       ]);
-      globalExpect(
+      expect(
         await storybook.findByText(storybookStartedRegex, {}, { timeout }),
       ).toBeInTheConsole();
 
@@ -171,7 +160,7 @@ describe('storybook-config', () => {
 
       await waitFor(
         async () => {
-          globalExpect(storybook.hasExit()).toMatchObject({
+          expect(storybook.hasExit()).toMatchObject({
             exitCode: 0,
           });
         },
@@ -181,7 +170,7 @@ describe('storybook-config', () => {
       );
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      globalExpect(
+      expect(
         await assetServer.findByText('serving storybook-static'),
       ).toBeInTheConsole();
 
@@ -194,7 +183,6 @@ describe('storybook-config', () => {
     });
 
     it('should render decorators defined in the storybook preview file', async ({
-      expect,
       task,
     }) => {
       skipCleanup(task.id);
@@ -208,7 +196,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render a component inside a story', async ({ expect, task }) => {
+    it('should render a component inside a story', async ({ task }) => {
       skipCleanup(task.id);
 
       const { text, fontSize } = await getTextContentFromFrameOrPage(
@@ -220,7 +208,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('16px');
     });
 
-    it('should render vanilla styles', async ({ expect, task }) => {
+    it('should render vanilla styles', async ({ task }) => {
       skipCleanup(task.id);
 
       const { text, fontSize } = await getTextContentFromFrameOrPage(
@@ -232,7 +220,7 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async ({ expect, task }) => {
+    it('should render a ".mdx" file', async ({ task }) => {
       skipCleanup(task.id);
 
       const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';

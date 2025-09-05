@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect as globalExpect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import * as jsonc from 'jsonc-parser';
 
@@ -7,22 +7,22 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 const { sku, fixturePath } = scopeToFixture('path-aliases');
 
 describe('pathAliases', () => {
-  describe('with Vite bundler', () => {
+  let tsconfig: any;
+
+  describe('with Vite bundler', async () => {
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
       await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
       });
-    });
 
-    it('should generate TypeScript paths configuration with pathAliases', async ({
-      expect,
-    }) => {
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
+      tsconfig = jsonc.parse(tsconfigContents);
+    });
 
+    it('should generate TypeScript paths configuration with pathAliases', async () => {
       expect(tsconfig.compilerOptions.paths).toEqual({
         'src/*': ['./src/*'],
         '@components/*': ['./src/components/*'],
@@ -30,32 +30,20 @@ describe('pathAliases', () => {
       });
     });
 
-    it('should always include automatic src/* alias', async ({ expect }) => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
-
+    it('should always include automatic src/* alias', async () => {
       expect(tsconfig.compilerOptions.paths).toMatchObject({
         'src/*': ['./src/*'],
       });
     });
 
-    it('should preserve existing baseUrl behavior alongside paths', async ({
-      expect,
-    }) => {
-      const tsconfigPath = fixturePath('tsconfig.json');
-      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-      const tsconfig = jsonc.parse(tsconfigContents);
-
+    it('should preserve existing baseUrl behavior alongside paths', async () => {
       expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });
 
   describe('validation', () => {
-    it('should reject pathAliases pointing to node_modules', async ({
-      expect,
-    }) => {
+    it('should reject pathAliases pointing to node_modules', async () => {
       const configure = await sku('configure', ['--config=sku.config.bad.ts']);
 
       await waitFor(() => {

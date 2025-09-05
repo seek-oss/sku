@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import fs from 'node:fs/promises';
 
@@ -22,21 +16,18 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
-      globalExpect(await start.findByText('Server started')).toBeInTheConsole();
+      expect(await start.findByText('Server started')).toBeInTheConsole();
     });
 
     afterAll(cleanup);
 
-    it('should start a development server', async ({ expect, task }) => {
+    it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
       const snapshot = await getAppSnapshot({ url, expect });
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should respond to dev middleware route request', async ({
-      expect,
-      task,
-    }) => {
+    it('should respond to dev middleware route request', async ({ task }) => {
       skipCleanup(task.id);
       const { sourceHtml } = await getAppSnapshot({
         url: `${url}/test-middleware`,
@@ -46,7 +37,6 @@ describe('ssr-hello-world', () => {
     });
 
     it('should respond to dev middleware static asset request', async ({
-      expect,
       task,
     }) => {
       skipCleanup(task.id);
@@ -63,15 +53,11 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
     });
 
     describe('default port', () => {
-      it('should generate a production server based on config', async ({
-        expect,
-      }) => {
+      it('should generate a production server based on config', async () => {
         await node(['dist-build/server.cjs']);
 
         const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
@@ -83,9 +69,7 @@ describe('ssr-hello-world', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it("should invoke the provided 'onStart' callback", async ({
-        expect,
-      }) => {
+      it("should invoke the provided 'onStart' callback", async () => {
         const server = await node(['dist-build/server.cjs']);
         expect(
           await server.findByText('Server ran the onStart callback'),
@@ -93,7 +77,7 @@ describe('ssr-hello-world', () => {
       });
     });
 
-    it('should run on a custom port', async ({ expect }) => {
+    it('should run on a custom port', async () => {
       const customPort = '7654';
       const customPortUrl = `http://localhost:${customPort}`;
 
@@ -115,9 +99,7 @@ describe('ssr-hello-world', () => {
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should copy all public assets to the target folder', async ({
-      expect,
-    }) => {
+    it('should copy all public assets to the target folder', async () => {
       const files = await fs.readdir(fixturePath('dist-build'));
       expect(files).toContain('logo.png');
       expect(files).toContain('logo2.png');

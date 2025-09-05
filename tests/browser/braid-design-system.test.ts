@@ -1,11 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  it,
-  expect as globalExpect,
-  afterAll,
-  vi,
-} from 'vitest';
+import { describe, beforeAll, it, afterAll, vi, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
@@ -34,7 +27,7 @@ function getLocalUrl(site: string, port: number) {
 const { sku, fixturePath } = scopeToFixture('braid-design-system');
 
 describe('braid-design-system', () => {
-  describe.sequential.for(bundlers)('bundler %s', (bundler) => {
+  describe.for(bundlers)('bundler %s', (bundler) => {
     describe('start', async () => {
       const port = await getPort();
 
@@ -51,7 +44,7 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        globalExpect(
+        expect(
           await start.findByText(
             'Starting development server',
             {},
@@ -62,7 +55,7 @@ describe('braid-design-system', () => {
 
       afterAll(cleanup);
 
-      it('should return development seekAnz site', async ({ expect, task }) => {
+      it('should return development seekAnz site', async ({ task }) => {
         skipCleanup(task.id);
 
         const snapshot = await getAppSnapshot({
@@ -74,10 +67,7 @@ describe('braid-design-system', () => {
         expect(snapshot).toMatchSnapshot();
       });
 
-      it('should return development jobStreet site', async ({
-        expect,
-        task,
-      }) => {
+      it('should return development jobStreet site', async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
@@ -98,19 +88,17 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpect(
+        expect(
           await build.findByText('Sku build complete', {}, { timeout }),
         ).toBeInTheConsole();
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-        globalExpect(
-          await serve.findByText('Server started'),
-        ).toBeInTheConsole();
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
 
         return cleanup;
       });
 
-      it('should return built jobStreet site', async ({ expect, task }) => {
+      it('should return built jobStreet site', async ({ task }) => {
         skipCleanup(task.id);
         const app = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
@@ -120,7 +108,7 @@ describe('braid-design-system', () => {
         expect(app).toMatchSnapshot();
       });
 
-      it('should return built seekAnz site', async ({ expect, task }) => {
+      it('should return built seekAnz site', async ({ task }) => {
         skipCleanup(task.id);
         const app = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
@@ -130,7 +118,7 @@ describe('braid-design-system', () => {
         expect(app).toMatchSnapshot();
       });
 
-      it('should generate the expected files', async ({ expect, task }) => {
+      it('should generate the expected files', async ({ task }) => {
         skipCleanup(task.id);
         const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
@@ -138,7 +126,7 @@ describe('braid-design-system', () => {
     });
   });
 
-  it('should handle braid-design-system in tests', async ({ expect }) => {
+  it('should handle braid-design-system in tests', async () => {
     const test = await sku('test');
     expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
   });

@@ -178,7 +178,7 @@
     "terser-webpack-plugin": "^5.1.4",
     "typescript": "~5.8.0",
     "vite": "catalog:",
-    "vite-plugin-cjs-interop": "^2.2.0",
+    "vite-plugin-cjs-interop": "^2.3.0",
     "vite-tsconfig-paths": "^5.1.4",
     "webpack": "^5.99.8",
     "webpack-bundle-analyzer": "^4.6.1",

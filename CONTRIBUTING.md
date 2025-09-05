@@ -96,6 +96,11 @@ Once you've made the desired changes and you're ready to commit, stage your loca
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.
 > These changes should not be committed and can be safely discard.
 
+### Testing Codemods
+
+Codemods are tested via the `sku-codemod` E2E test suite.
+Input and output files are defined inline in the test file.
+
 ## Publishing a New Version
 
 This repo uses [changesets] for publishing new versions.

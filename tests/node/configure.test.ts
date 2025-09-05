@@ -1,4 +1,10 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  it,
+  expect as globalExpect,
+} from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
@@ -51,7 +57,7 @@ describe('configure', () => {
       });
 
       await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
       });
     });
 
@@ -59,12 +65,12 @@ describe('configure', () => {
       await removeAppDir(appFolder);
     });
 
-    it('should generate a prettier config', async () => {
+    it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolder, '.prettierrc');
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate a eslint config', async () => {
+    it('should generate a eslint config', async ({ expect }) => {
       const eslintConfig = await readFileContents(
         appFolder,
         'eslint.config.mjs',
@@ -80,7 +86,7 @@ describe('configure', () => {
 
     it.for(['.prettierignore', '.gitignore'])(
       'should generate %s',
-      async (ignore) => {
+      async (ignore, { expect }) => {
         const ignoreContents = await readIgnore(appFolder, ignore);
 
         expect(ignoreContents).toMatchSnapshot();
@@ -103,7 +109,7 @@ describe('configure', () => {
       });
 
       await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
       });
     });
 
@@ -117,7 +123,7 @@ describe('configure', () => {
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate an eslint config', async () => {
+    it('should generate an eslint config', async ({ expect }) => {
       const eslintConfig = await readFileContents(
         appFolderTS,
         'eslint.config.mjs',
@@ -139,7 +145,7 @@ describe('configure', () => {
 
     it.for(['.prettierignore', '.gitignore'])(
       'should generate %s',
-      async (ignore) => {
+      async (ignore, { expect }) => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
 
         expect(ignoreContents).toMatchSnapshot();

@@ -16,15 +16,24 @@ describe('createTemplateData', () => {
   it('should create template data for webpack template', ({ expect }) => {
     const result = createTemplateData('my-app', 'webpack');
 
-    expect(result.projectName).toBe('my-app');
-    expect(result.appName).toBe('my-app');
-    expect(result.startScript).toBe('pnpm start');
-    expect(result.buildScript).toBe('pnpm build');
-    expect(result.testScript).toBe('pnpm test');
-    expect(result.formatScript).toBe('pnpm format');
-    expect(result.lintScript).toBe('pnpm lint');
-    expect(result.gettingStartedDocs).toContain('pnpm install');
-    expect(result.gettingStartedDocs).toContain('https://pnpm.io/installation');
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "appName": "my-app",
+        "buildScript": "pnpm build",
+        "formatScript": "pnpm format",
+        "gettingStartedDocs": "First of all, make sure you've installed [pnpm](https://pnpm.io/installation).
+
+      Then, install dependencies:
+
+      \`\`\`sh
+      $ pnpm install
+      \`\`\`",
+        "lintScript": "pnpm lint",
+        "projectName": "my-app",
+        "startScript": "pnpm start",
+        "testScript": "pnpm test",
+      }
+    `);
   });
 
   it('should create template data for vite template with experimental bundler flags', ({
@@ -32,19 +41,47 @@ describe('createTemplateData', () => {
   }) => {
     const result = createTemplateData('my-vite-app', 'vite');
 
-    expect(result.projectName).toBe('my-vite-app');
-    expect(result.startScript).toBe('pnpm start --experimental-bundler');
-    expect(result.buildScript).toBe('pnpm build --experimental-bundler');
-    expect(result.testScript).toBe('pnpm test');
-    expect(result.formatScript).toBe('pnpm format');
-    expect(result.lintScript).toBe('pnpm lint');
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "appName": "my-vite-app",
+        "buildScript": "pnpm build --experimental-bundler",
+        "formatScript": "pnpm format",
+        "gettingStartedDocs": "First of all, make sure you've installed [pnpm](https://pnpm.io/installation).
+
+      Then, install dependencies:
+
+      \`\`\`sh
+      $ pnpm install
+      \`\`\`",
+        "lintScript": "pnpm lint",
+        "projectName": "my-vite-app",
+        "startScript": "pnpm start --experimental-bundler",
+        "testScript": "pnpm test",
+      }
+    `);
   });
 
   it('should handle project names with special characters', ({ expect }) => {
     const result = createTemplateData('@scope/my-app', 'webpack');
 
-    expect(result.projectName).toBe('@scope/my-app');
-    expect(result.appName).toBe('@scope/my-app');
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "appName": "@scope/my-app",
+        "buildScript": "pnpm build",
+        "formatScript": "pnpm format",
+        "gettingStartedDocs": "First of all, make sure you've installed [pnpm](https://pnpm.io/installation).
+
+      Then, install dependencies:
+
+      \`\`\`sh
+      $ pnpm install
+      \`\`\`",
+        "lintScript": "pnpm lint",
+        "projectName": "@scope/my-app",
+        "startScript": "pnpm start",
+        "testScript": "pnpm test",
+      }
+    `);
   });
 });
 

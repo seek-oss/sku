@@ -14,18 +14,22 @@ describe('generatePackageJson', () => {
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
-    const packageJson = JSON.parse(packageJsonContent);
 
-    expect(packageJson.name).toBe('my-app');
-    expect(packageJson.version).toBe('1.0.0');
-    expect(packageJson.private).toBe(true);
-    expect(packageJson.scripts).toMatchObject({
-      start: expect.stringContaining('start'),
-      build: expect.stringContaining('build'),
-      test: expect.stringContaining('test'),
-      lint: expect.stringContaining('lint'),
-      format: expect.stringContaining('format'),
-    });
+    expect(packageJsonContent).toMatchInlineSnapshot(`
+      "{
+        "name": "my-app",
+        "version": "1.0.0",
+        "private": true,
+        "scripts": {
+          "start": "sku start",
+          "build": "sku build",
+          "test": "sku test",
+          "format": "sku format",
+          "lint": "sku lint"
+        }
+      }
+      "
+    `);
 
     await fixture.rm();
   });
@@ -39,12 +43,23 @@ describe('generatePackageJson', () => {
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
-    const packageJson = JSON.parse(packageJsonContent);
 
-    expect(packageJson.name).toBe('my-vite-app');
-    expect(packageJson.type).toBe('module');
-    expect(packageJson.scripts.start).toContain('--experimental-bundler');
-    expect(packageJson.scripts.build).toContain('--experimental-bundler');
+    expect(packageJsonContent).toMatchInlineSnapshot(`
+      "{
+        "name": "my-vite-app",
+        "version": "1.0.0",
+        "private": true,
+        "type": "module",
+        "scripts": {
+          "start": "sku start --experimental-bundler",
+          "build": "sku build --experimental-bundler",
+          "test": "sku test",
+          "format": "sku format",
+          "lint": "sku lint"
+        }
+      }
+      "
+    `);
 
     await fixture.rm();
   });
@@ -58,9 +73,22 @@ describe('generatePackageJson', () => {
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
-    const packageJson = JSON.parse(packageJsonContent);
 
-    expect(packageJson.name).toBe('@scope/my-app');
+    expect(packageJsonContent).toMatchInlineSnapshot(`
+      "{
+        "name": "@scope/my-app",
+        "version": "1.0.0",
+        "private": true,
+        "scripts": {
+          "start": "sku start",
+          "build": "sku build",
+          "test": "sku test",
+          "format": "sku format",
+          "lint": "sku lint"
+        }
+      }
+      "
+    `);
 
     await fixture.rm();
   });

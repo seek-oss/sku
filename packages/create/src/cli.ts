@@ -27,12 +27,29 @@ program
         message: 'Which template would you like to use?',
         choices: [
           { title: 'webpack', value: 'webpack' },
-          { title: 'vite', value: 'vite' },
+          { title: 'vite (experimental)', value: 'vite' },
         ],
         initial: 0,
       });
 
       selectedTemplate = template;
+    }
+
+    if (selectedTemplate === 'vite') {
+      const { confirmVite } = await prompts({
+        type: 'confirm',
+        name: 'confirmVite',
+        message:
+          '⚠️  Vite bundler in sku is currently experimental and not yet suitable for production use. Continue?',
+        initial: false,
+      });
+
+      if (!confirmVite) {
+        console.log(
+          '❌ Cancelled. Use `webpack` template for a stable production-ready experience.',
+        );
+        process.exit(0);
+      }
     }
 
     if (!selectedTemplate) {

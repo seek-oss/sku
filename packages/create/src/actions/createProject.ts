@@ -36,7 +36,7 @@ export const createProject = async ({
   await formatProject(targetPath);
 
   const nextSteps = [
-    `${styleText('cyan', 'cd')} ${projectName}`,
+    `${styleText('cyan', `cd ${projectName}`)}`,
     `${styleText('cyan', getRunCommand('start'))}`,
   ]
     .filter(Boolean)
@@ -59,11 +59,6 @@ const resolveProjectPath = (projectName: string) => {
 const validateTargetDirectory = (targetPath: string) => {
   if (!existsSync(targetPath)) {
     return;
-  }
-
-  const stats = statSync(targetPath);
-  if (!stats.isDirectory()) {
-    throw new Error(`${targetPath} exists but is not a directory`);
   }
 
   const isEmpty = isEmptyDir(targetPath);

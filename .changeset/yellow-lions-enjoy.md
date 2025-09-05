@@ -2,9 +2,9 @@
 '@sku-lib/create': minor
 ---
 
-Add new standalone create-sku CLI package
+Release new standalone `sku` template creation CLI
 
-Introduces a new `@sku-lib/create` package that provides a standalone CLI for scaffolding new sku projects. This package replaces the functionality of `sku init` with a dedicated tool optimized for project creation. The existing `sku init` command is expected to be deprecated in a future release.
+Introduces a new `@sku-lib/create` package that provides a standalone CLI for scaffolding new sku projects. This package replaces the functionality of `sku init` with a dedicated tool optimized for project creation. The existing `sku init` command is now deprecated and will be removed in a future release.
 
 **Features:**
 - 🚀 **Simple project creation**: `npx @sku-lib/create my-app` or `pnpm dlx @sku-lib/create my-app`

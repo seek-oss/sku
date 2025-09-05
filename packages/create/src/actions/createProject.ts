@@ -1,6 +1,6 @@
-import { resolve } from 'node:path';
+import { resolve, basename } from 'node:path';
 import { styleText } from 'node:util';
-import { existsSync, statSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync } from 'node:fs';
 import { isEmptyDir, cwd, getRunCommand, banner } from '@sku-lib/utils';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
@@ -10,19 +10,21 @@ import { validatePackageName } from '../validation/packageName.js';
 import type { Template } from '../types/index.js';
 
 interface CreateProjectOptions {
-  projectName: string;
+  targetDir: string;
   template: Template;
 }
 
 export const createProject = async ({
-  projectName,
+  targetDir,
   template,
 }: CreateProjectOptions) => {
+  const targetPath = resolveProjectPath(targetDir);
+  const projectName = targetDir === '.' ? basename(targetPath) : targetDir;
+
   console.log(
     `🚀 Creating new sku project: ${styleText('cyan', projectName)} with ${styleText('cyan', template)} template`,
   );
 
-  const targetPath = resolveProjectPath(projectName);
   validatePackageName(projectName);
 
   console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
@@ -36,7 +38,7 @@ export const createProject = async ({
   await formatProject(targetPath);
 
   const nextSteps = [
-    `${styleText('cyan', `cd ${projectName}`)}`,
+    targetDir !== '.' ? `${styleText('cyan', `cd ${targetDir}`)}` : null,
     `${styleText('cyan', getRunCommand('start'))}`,
   ]
     .filter(Boolean)
@@ -48,12 +50,12 @@ export const createProject = async ({
   ]);
 };
 
-const resolveProjectPath = (projectName: string) => {
-  if (projectName === '.') {
+const resolveProjectPath = (targetDir: string) => {
+  if (targetDir === '.') {
     return cwd();
   }
 
-  return resolve(cwd(), projectName);
+  return resolve(cwd(), targetDir);
 };
 
 const validateTargetDirectory = (targetPath: string) => {

@@ -17,7 +17,7 @@ program
   .version(version)
   .argument('[project-name]', 'Name of the project to create')
   .option('-t, --template <template>', 'Template to use (webpack, vite)')
-  .action(async (projectName: string = '.', options: { template?: string }) => {
+  .action(async (targetDir: string = '.', options: { template?: string }) => {
     let selectedTemplate = options.template;
 
     if (!selectedTemplate) {
@@ -59,7 +59,7 @@ program
 
     try {
       await createProject({
-        projectName,
+        targetDir,
         template: selectedTemplate as Template,
       });
     } catch (error) {

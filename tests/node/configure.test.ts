@@ -117,7 +117,7 @@ describe('configure', () => {
       await removeAppDir(appFolderTS);
     });
 
-    it('should generate a prettier config', async () => {
+    it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
 
       expect(prettierRc).toEqual(prettierConfig);
@@ -137,7 +137,7 @@ describe('configure', () => {
       `);
     });
 
-    it('should generate tsconfig config', async () => {
+    it('should generate tsconfig config', async ({ expect }) => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
 
       expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);

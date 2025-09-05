@@ -7,12 +7,14 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 const { sku, fixturePath } = scopeToFixture('path-aliases');
 
 describe('pathAliases', () => {
-  describe.concurrent('with Vite bundler', async () => {
-    const tsconfigPath = fixturePath('tsconfig.json');
-    const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
-    const tsconfig = jsonc.parse(tsconfigContents);
+  let tsconfig: any;
 
+  describe('with Vite bundler', async () => {
     beforeAll(async () => {
+      const tsconfigPath = fixturePath('tsconfig.json');
+      const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
+      tsconfig = jsonc.parse(tsconfigContents);
+
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
       await waitFor(() => {

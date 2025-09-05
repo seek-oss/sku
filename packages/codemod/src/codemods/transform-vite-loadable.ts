@@ -2,7 +2,7 @@ import { parse, Lang } from '@ast-grep/napi';
 import type { Transform } from '../utils/types.js';
 
 export const transform: Transform = (source) => {
-  const ast = parse(Lang.TypeScript, source);
+  const ast = parse(Lang.Tsx, source);
   const root = ast.root();
 
   const importStatement = root.find({

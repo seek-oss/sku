@@ -33,6 +33,7 @@
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
   "devDependencies": {
     "@types/diff": "^7.0.1",
+    "@types/node": "catalog:",
     "@types/prompts": "^2.4.9",
     "typescript": "~5.8.0"
   }

@@ -38,6 +38,8 @@
   },
   "dependencies": {
     "@vanilla-extract/vite-plugin": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "vite-plugin-cjs-interop": "^2.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

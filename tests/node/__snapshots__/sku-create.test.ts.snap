@@ -110,12 +110,12 @@ exports[`create-sku > should create package.json 1`] = `
 exports[`create-sku > should create sku.config.ts 1`] = `
 "import type { SkuConfig } from 'sku';
 
-const skuConfig: SkuConfig = {
+const skuConfig = {
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
-};
+} satisfies SkuConfig;
 
 export default skuConfig;
 "

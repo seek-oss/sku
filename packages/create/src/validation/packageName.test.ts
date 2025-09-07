@@ -2,7 +2,7 @@ import { describe, it } from 'vitest';
 import { validatePackageName } from './packageName.js';
 
 const npmNameRestrictionError = /npm naming restrictions/;
-const dependencyExistsError = /dependency with the same name exists/;
+const dependencyExistsError = /NPM package with the same name already exists/;
 
 describe('validatePackageName', () => {
   it('should accept valid package names', ({ expect }) => {

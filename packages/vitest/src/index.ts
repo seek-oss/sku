@@ -20,7 +20,7 @@ export const runVitest = async ({
   const results = parseCLI(['vitest', ...args]);
   const { cjsInteropDependencies, compilePackages } = skuContext;
 
-  await startVitest(
+  const vitest = await startVitest(
     'test',
     results.filter,
     { config: false, ...results.options },
@@ -42,4 +42,6 @@ export const runVitest = async ({
     },
     {},
   );
+
+  await vitest.close();
 };

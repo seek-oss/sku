@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -21,7 +15,7 @@ const { sku, fixturePath } = scopeToFixture('sku-with-https');
 
 const serverPort = 9894;
 
-describe.sequential('sku-with-https', () => {
+describe('sku-with-https', () => {
   describe.each(bundlers)('bundler: %s', async (bundler) => {
     const port = await getPort();
     const url = `https://localhost:${port}`;
@@ -40,12 +34,12 @@ describe.sequential('sku-with-https', () => {
     describe('start', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        globalExpect(
+        expect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
       });
 
-      it('should start a development server', async ({ expect, task }) => {
+      it('should start a development server', async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({ url, expect });
         expect(snapshot).toMatchSnapshot('homepage');
@@ -63,7 +57,7 @@ describe.sequential('sku-with-https', () => {
   describe('start-ssr', () => {
     const url = `https://localhost:${serverPort}`;
 
-    it('should support the supplied middleware', async ({ expect }) => {
+    it('should support the supplied middleware', async () => {
       const start = await sku('start-ssr', ['--config=sku-server.config.ts']);
       expect(await start.findByText('Server started')).toBeInTheConsole();
 
@@ -81,23 +75,21 @@ describe.sequential('sku-with-https', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+      expect(await serve.findByText('Server started')).toBeInTheConsole();
     });
 
     afterAll(cleanup);
 
-    it('should start a development server', async ({ expect, task }) => {
+    it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
       const snapshot = await getAppSnapshot({ url, expect });
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should support the supplied middleware', async ({ expect, task }) => {
+    it('should support the supplied middleware', async ({ task }) => {
       skipCleanup(task.id);
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
@@ -108,7 +100,7 @@ describe.sequential('sku-with-https', () => {
   });
 
   describe('.gitignore', () => {
-    it('should add the .ssl directory to .gitignore', async ({ expect }) => {
+    it('should add the .ssl directory to .gitignore', async () => {
       const ignoreContents = await fs.readFile(
         path.join(fixturePath('./'), '.gitignore'),
         'utf-8',

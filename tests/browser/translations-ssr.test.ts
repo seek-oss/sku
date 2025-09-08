@@ -16,7 +16,7 @@ const { sku } = scopeToFixture('translations');
 
 const backendUrl = `http://localhost:8314`;
 
-describe('ssr translations', () => {
+describe.concurrent('ssr translations', () => {
   beforeAll(async () => {
     const startSsr = await sku('start-ssr', ['--config=sku-ssr.config.ts']);
     globalExpect(
@@ -26,19 +26,19 @@ describe('ssr translations', () => {
 
   afterAll(cleanup);
 
-  it('should render en', async ({ expect, task }) => {
+  it('should render en', async ({ task, expect }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({ expect, url: `${backendUrl}/en` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render fr', async ({ expect, task }) => {
+  it('should render fr', async ({ task, expect }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({ expect, url: `${backendUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
-  it('should render en-PSEUDO', async ({ expect, task }) => {
+  it('should render en-PSEUDO', async ({ task, expect }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({
       expect,

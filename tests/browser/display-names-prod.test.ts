@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import {
   scopeToFixture,
@@ -16,29 +10,27 @@ import {
 const { sku, fixturePath } = scopeToFixture('display-names-prod');
 
 describe('display-names-prod', () => {
-  describe.sequential.for(bundlers)('bundler: %s', (bundler) => {
+  describe.for(bundlers)('bundler: %s', (bundler) => {
     const args: BundlerValues<string[]> = {
       vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
       webpack: [],
     };
 
+    afterAll(cleanup);
+
     describe('build', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpect(
-          await build.findByText('Sku build complete'),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
       });
 
-      it('should create build output', async ({ expect }) => {
+      it('should create build output', async () => {
         const distDir = fixturePath('dist');
         const files = await dirContentsToObject(distDir);
         expect(files).toMatchSnapshot();
       });
 
-      it('should add displayNames to React components in rendered HTML', async ({
-        expect,
-      }) => {
+      it('should add displayNames to React components in rendered HTML', async () => {
         const distDir = fixturePath('dist');
         const files = await dirContentsToObject(distDir);
 
@@ -59,9 +51,7 @@ describe('display-names-prod', () => {
     });
 
     describe('start (development)', () => {
-      it('should NOT add displayNames in development mode', async ({
-        expect,
-      }) => {
+      it('should NOT add displayNames in development mode', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
 
@@ -71,7 +61,7 @@ describe('display-names-prod', () => {
           `--port=${port}`,
         ]);
 
-        globalExpect(
+        expect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
@@ -93,6 +83,4 @@ describe('display-names-prod', () => {
       });
     });
   });
-
-  afterAll(cleanup);
 });

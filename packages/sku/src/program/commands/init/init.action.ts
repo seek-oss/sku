@@ -117,7 +117,7 @@ export const initAction = async (
   }
 
   console.log(
-    chalk.yellow('⚠️  DEPRECATION WARNING: `sku init` is deprecated.'),
+    chalk.yellow('⚠️ DEPRECATION WARNING: `sku init` is deprecated.'),
   );
   console.log(
     chalk.yellow(

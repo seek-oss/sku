@@ -157,7 +157,7 @@ export default {
 
 #### Key differences between Vitest and Jest
 
-Vitest has strong compatibility with the Jest API, however it still has differences that may affect your tests. Differences that affect sku projects are listed here, however a full list is documented in on the Vitest documentation: [Migrating from Jest to Vitest].
+Vitest has strong compatibility with the Jest API, however it still has differences that may affect your tests. Differences that affect sku projects are listed here. The full list is documented in the Vitest documentation: [Migrating from Jest to Vitest].
 
 To automate most of the migration process, a codemod is available. Note that additional changes may still be required after running this codemod.
 

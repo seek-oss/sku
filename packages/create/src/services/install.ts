@@ -1,5 +1,6 @@
-import { getAddCommand } from '@sku-lib/utils';
+import { getAddCommand, isAtLeastPnpmV10 } from '@sku-lib/utils';
 import { spawn } from 'node:child_process';
+import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
   'braid-design-system@latest',
@@ -18,6 +19,10 @@ export const installDependencies = async (
   projectPath: string,
 ): Promise<void> => {
   console.log('📦 Installing dependencies...');
+
+  if (isAtLeastPnpmV10()) {
+    await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
+  }
 
   await installPackages(projectPath, DEPENDENCIES, 'prod');
   await installPackages(projectPath, DEV_DEPENDENCIES, 'dev');

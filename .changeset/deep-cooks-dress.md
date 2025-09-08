@@ -1,5 +1,5 @@
 ---
-'@sku-lib/vitest': major
+'@sku-lib/vitest': minor
 ---
 
 Turning off Vitest globals

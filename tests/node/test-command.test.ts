@@ -10,13 +10,12 @@ import {
 const { sku } = scopeToFixture('sku-test');
 
 describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
-  const args: TestFrameworkValues<string[]> = {
-    // Vitest needs the `run` argument as it defaults to watch mode
-    vitest: ['--config=sku.config.vitest.ts', 'run'],
-    jest: [],
-  };
-
   it('should run tests', async ({ expect }) => {
+    const args: TestFrameworkValues<string[]> = {
+      // Vitest needs the `run` argument as it defaults to watch mode
+      vitest: ['--config=sku.config.vitest.ts', 'run', 'src/vitest.test.ts'],
+      jest: ['src/jest.test.ts'],
+    };
     const process = await sku('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
@@ -26,6 +25,11 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
   });
 
   it(`should pass through unknown flags`, async ({ expect }) => {
+    const args: TestFrameworkValues<string[]> = {
+      // Vitest needs the `run` argument as it defaults to watch mode
+      vitest: ['--config=sku.config.vitest.ts', 'run'],
+      jest: [],
+    };
     const process = await sku('test', [
       'testfile.ts',
       '--passWithNoTests',

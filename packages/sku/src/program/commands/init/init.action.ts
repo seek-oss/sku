@@ -282,7 +282,7 @@ export const initAction = async (
   ]);
 
   console.log();
-  console.log(chalk.yellow('⚠️  REMINDER: `sku init` is deprecated.'));
+  console.log(chalk.yellow('⚠️ REMINDER: `sku init` is deprecated.'));
   console.log(
     chalk.yellow(
       `   For future projects, use ${chalk.cyan('pnpm dlx @sku-lib/create')} instead.`,

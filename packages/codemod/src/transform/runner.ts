@@ -58,7 +58,7 @@ export const getPathFromPrompt = async (): Promise<string> => {
 
 export const runTransform = async (
   transform: string,
-  path: string,
+  _path: string,
   options: Options,
 ): Promise<void> => {
   if (options.dry) {
@@ -70,7 +70,7 @@ export const runTransform = async (
   }
 
   const transformer = transform || (await getTransformerFromPrompt());
-  const directory = path || (await getPathFromPrompt());
+  const path = _path || (await getPathFromPrompt());
 
   if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {
     console.error('Invalid transform choice, pick one of:');
@@ -78,10 +78,10 @@ export const runTransform = async (
     process.exit(1);
   }
 
-  const filesExpanded = await getAllFiles([directory]);
+  const filesExpanded = await getAllFiles(path);
 
   if (!filesExpanded.length) {
-    console.log(`No files found matching "${directory}"`);
+    console.log(`No files found matching "${path}"`);
     return;
   }
 
@@ -141,8 +141,10 @@ export const runTransform = async (
   process.exit(0);
 };
 
-const getAllFiles = (paths: string[]) =>
-  glob([...paths, '!**/node_modules', '!**/dist'], {
+const getAllFiles = (directory: string) =>
+  glob(join(directory, '**/*.?(c|m){js,ts}?(x)'), {
+    ignore: ['**/node_modules', '**/dist', ''],
+    expandDirectories: false,
     absolute: true,
   });
 

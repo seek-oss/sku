@@ -5,13 +5,13 @@
 ## Usage
 
 ```sh
-pnpm dlx @sku-lib/codemod <codemod> [files] [options]
+pnpm dlx @sku-lib/codemod <codemod> [path] [options]
 ```
 
 If you don't specify the `codemod` the CLI will prompt you with a list of available codemods.
 
-If you don't specify any `files` the CLI will prompt you to select files to run the codemod on.
-It defaults to `'.'`.
+If you don't specify a `path` the CLI will prompt you to enter a path to a directory to run the codemod on.
+The default path is `'.'`.
 
 ## Available codemods
 

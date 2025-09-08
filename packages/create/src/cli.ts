@@ -40,7 +40,7 @@ program
         type: 'confirm',
         name: 'confirmVite',
         message:
-          '⚠️  Vite bundler in sku is currently experimental and not yet suitable for production use. Continue?',
+          '⚠️  Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
         initial: false,
       });
 
@@ -48,7 +48,7 @@ program
         console.log(
           '❌ Cancelled. Use `webpack` template for a stable production-ready experience.',
         );
-        process.exit(0);
+        process.exit(1);
       }
     }
 

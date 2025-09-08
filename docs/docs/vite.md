@@ -185,9 +185,9 @@ To run test without watch mode you can use `sku test --run`:
 
 **Globals disabled**
 
-Jest has their globals API enabled by default.
+Jest enables global APIs such as `it`, `describe`, `beforeAll`, etc., by default.
 Vitest does not.
-Sku adopts the Vitest defaults, meaning you will need to explicitly import test functions (`expect`, `beforeEach`, etc.).
+Sku adopts the Vitest defaults, meaning you will need to explicitly import these test functions.
 This change results in a cleaner global namespace, better type safety, clearer dependencies and is more consistency with modern javascript practices.
 
 ```diff
@@ -203,9 +203,7 @@ import '@testing-library/jest-dom';
 + import { cleanup } from '@testing-library/react';
 + import { afterEach } from 'vitest';
 
-+ afterEach(() => {
-+  cleanup();
-+ });
++ afterEach(cleanup)
 ```
 
 [Vitest]: https://vitest.dev/

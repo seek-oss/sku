@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  it,
-  expect as globalExpect,
-  afterAll,
-} from 'vitest';
+import { describe, beforeAll, it, expect, afterAll } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/puppeteer';
@@ -20,9 +14,9 @@ import {
 const { sku, fixturePath } = scopeToFixture('custom-src-paths');
 
 describe('custom-src-paths', () => {
-  describe.sequential.for(bundlers)('bundler %s', (bundler) => {
+  describe.for(bundlers)('bundler %s', (bundler) => {
     describe('start', async () => {
-      it('should start a development server', async ({ expect }) => {
+      it('should start a development server', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
 
@@ -38,7 +32,7 @@ describe('custom-src-paths', () => {
         };
 
         const start = await sku('start', args[bundler]);
-        globalExpect(
+        expect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
@@ -59,25 +53,21 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        globalExpect(
-          await build.findByText('Build complete'),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Build complete')).toBeInTheConsole();
 
         const serve = await sku('serve', portArgs);
-        globalExpect(
-          await serve.findByText('Server started'),
-        ).toBeInTheConsole();
+        expect(await serve.findByText('Server started')).toBeInTheConsole();
       });
 
       afterAll(cleanup);
 
-      it('should generate the expected files', async ({ expect, task }) => {
+      it('should generate the expected files', async ({ task }) => {
         skipCleanup(task.id);
         const files = await dirContentsToObject(fixturePath('dist'));
         expect(files).toMatchSnapshot();
       });
 
-      it('should create valid app', async ({ task, expect }) => {
+      it('should create valid app', async ({ task }) => {
         skipCleanup(task.id);
 
         const app = await getAppSnapshot({ url, expect });
@@ -87,14 +77,14 @@ describe('custom-src-paths', () => {
   });
 
   describe('format', () => {
-    it('should format successfully', async ({ expect }) => {
+    it('should format successfully', async () => {
       const format = await sku('format');
       expect(await format.findByText('Formatting complete')).toBeInTheConsole();
     });
   });
 
   describe('lint', () => {
-    it('should lint successfully', async ({ expect }) => {
+    it('should lint successfully', async () => {
       const lint = await sku('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();
     });

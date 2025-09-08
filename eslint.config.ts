@@ -1,7 +1,6 @@
 import seek from 'eslint-config-seek';
 import jsdoc from 'eslint-plugin-jsdoc';
 import nodePlugin from 'eslint-plugin-n';
-import eslintPluginSkuVitest from '@sku-private/eslint-plugin';
 import vitest from '@vitest/eslint-plugin';
 
 const modifiedSeek = seek.map((config) => {
@@ -33,6 +32,7 @@ export default [
       '**/storybook-static/',
       '**/report/',
       '**/template/',
+      '**/templates/',
       'fixtures/**/*',
       '**/__testfixtures__/**',
       '**/@loadable/**/*',
@@ -144,17 +144,7 @@ export default [
     },
   },
   {
-    files: ['**/*.test.ts'],
-    plugins: {
-      'sku-vitest': eslintPluginSkuVitest,
-    },
-    rules: {
-      'sku-vitest/use-vitest-local-expect': 'error',
-    },
-  },
-  {
     files: ['tests/**', 'test-utils/**'],
-
     languageOptions: {
       globals: {
         browser: true,

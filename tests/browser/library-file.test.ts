@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { dirContentsToObject } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { scopeToFixture } from '@sku-private/testing-library';
@@ -7,7 +7,7 @@ const { sku, fixturePath } = scopeToFixture('library-file');
 
 describe('library-file', () => {
   describe('build', () => {
-    it('should generate the expected files', async ({ expect }) => {
+    it('should generate the expected files', async () => {
       const build = await sku('build');
       expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
@@ -17,7 +17,7 @@ describe('library-file', () => {
   });
 
   describe('start', () => {
-    it('should start a development server', async ({ expect }) => {
+    it('should start a development server', async () => {
       const devServerUrl = `http://localhost:8086`;
 
       const start = await sku('start');

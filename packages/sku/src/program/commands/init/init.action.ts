@@ -116,6 +116,16 @@ export const initAction = async (
     process.exit(1);
   }
 
+  console.log(
+    chalk.yellow('⚠️ DEPRECATION WARNING: `sku init` is deprecated.'),
+  );
+  console.log(
+    chalk.yellow(
+      `   Please use ${chalk.cyan('pnpm dlx @sku-lib/create')} instead.`,
+    ),
+  );
+  console.log();
+
   console.log(`Creating a new sku project in ${chalk.green(initDir)}.`);
   console.log();
 
@@ -270,4 +280,12 @@ export const initAction = async (
     'Get started by running:',
     nextSteps,
   ]);
+
+  console.log();
+  console.log(chalk.yellow('⚠️ REMINDER: `sku init` is deprecated.'));
+  console.log(
+    chalk.yellow(
+      `   For future projects, use ${chalk.cyan('pnpm dlx @sku-lib/create')} instead.`,
+    ),
+  );
 };

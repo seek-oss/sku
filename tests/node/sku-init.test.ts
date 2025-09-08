@@ -1,11 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-  vi,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
 import { parseDocument, Document } from 'yaml';
 
 import fs from 'node:fs/promises';
@@ -55,7 +48,7 @@ describe('sku init', () => {
     await fs.writeFile(fixturePath('pnpm-workspace.yaml'), workspace);
 
     const result = await sku('init', [projectName]);
-    globalExpect(
+    expect(
       await result.findByText('Project created', {}, { timeout }),
     ).toBeInTheConsole();
   });
@@ -64,7 +57,7 @@ describe('sku init', () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
   });
 
-  it('should create package.json', async ({ expect }) => {
+  it('should create package.json', async () => {
     const contents = await fs.readFile(
       fixturePath(projectName, 'package.json'),
       'utf-8',
@@ -81,13 +74,13 @@ describe('sku init', () => {
     'eslint.config.mjs',
     'README.md',
     'src/App/NextSteps.tsx',
-  ])('should create %s', async (file, { expect }) => {
+  ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(contents).toMatchSnapshot();
   });
 
-  it('should update the pnpm-workspace.yaml', async ({ expect }) => {
+  it('should update the pnpm-workspace.yaml', async () => {
     const rootFile = await fs.readFile(
       path.resolve(fixturePath('pnpm-workspace.yaml')),
       'utf8',

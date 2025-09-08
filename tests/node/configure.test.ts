@@ -42,7 +42,7 @@ const removeAppDir = async (folder: string) =>
 const { sku, fixturePath } = scopeToFixture('configure');
 
 describe('configure', () => {
-  describe('javascript app', () => {
+  describe.concurrent('javascript app', () => {
     const appFolder = fixturePath('App');
 
     beforeAll(async () => {
@@ -94,7 +94,7 @@ describe('configure', () => {
     );
   });
 
-  describe('typescript app', () => {
+  describe.concurrent('typescript app', () => {
     const appFolderTS = fixturePath('TSApp');
 
     beforeAll(async () => {

@@ -10,5 +10,6 @@
     "moduleResolution": "nodenext",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["./templates"]
 }

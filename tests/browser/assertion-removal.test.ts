@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import {
   bundlers,
@@ -17,9 +17,7 @@ describe('assertion-removal', () => {
         webpack: [],
       };
 
-      it('should not contain "assert" or "invariant" in production', async ({
-        expect,
-      }) => {
+      it('should not contain "assert" or "invariant" in production', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
 
@@ -41,9 +39,7 @@ describe('assertion-removal', () => {
   });
 
   describe('build-ssr', () => {
-    it('should not contain "assert" or "invariant" in production', async function ({
-      expect,
-    }) {
+    it('should not contain "assert" or "invariant" in production', async () => {
       const backendUrl = `http://localhost:8011`;
 
       const build = await sku('build-ssr');
@@ -64,7 +60,7 @@ describe('assertion-removal', () => {
   });
 
   describe('test', () => {
-    it('should keep "assert" and "invariant" in tests', async ({ expect }) => {
+    it('should keep "assert" and "invariant" in tests', async () => {
       const test = await sku('test');
       expect(await test.findByError('assert should throw')).toBeInTheConsole();
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();

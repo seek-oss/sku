@@ -66,9 +66,6 @@ importers:
       '@changesets/get-github-info':
         specifier: ^0.6.0
         version: 0.6.0
-      '@sku-private/eslint-plugin':
-        specifier: workspace:*
-        version: link:private/eslint-plugin
       '@sku-private/puppeteer':
         specifier: workspace:*
         version: link:private/puppeteer
@@ -515,6 +512,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/sku-create:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/sku-init:
     devDependencies:
       sku:
@@ -863,9 +866,21 @@ importers:
 
   packages/create:
     dependencies:
+      '@sku-lib/utils':
+        specifier: workspace:*
+        version: link:../utils
       commander:
         specifier: ^12.1.0
         version: 12.1.0
+      dedent:
+        specifier: ^1.5.1
+        version: 1.6.0(babel-plugin-macros@3.1.0)
+      eta:
+        specifier: ^3.2.0
+        version: 3.5.0
+      fdir:
+        specifier: ^6.1.1
+        version: 6.4.6(picomatch@4.0.3)
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -873,6 +888,9 @@ importers:
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
+      fs-fixture:
+        specifier: ^2.6.0
+        version: 2.8.1
       typescript:
         specifier: ^5.6.2
         version: 5.8.3
@@ -1374,8 +1392,6 @@ importers:
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.9)(jiti@2.4.2)(jsdom@26.1.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1)
 
   private/3rd-party-polyfill: {}
-
-  private/eslint-plugin: {}
 
   private/fixture-cli:
     devDependencies:

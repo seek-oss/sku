@@ -13,6 +13,7 @@ export const generatePackageJson = async (
 ) => {
   const isVite = template === 'vite';
   const bundlerFlag = isVite ? ' --experimental-bundler' : '';
+  const testFlag = isVite ? ' --run' : '';
 
   const packageJson = {
     name: projectName,
@@ -22,7 +23,7 @@ export const generatePackageJson = async (
     scripts: {
       start: `sku start${bundlerFlag}`,
       build: `sku build${bundlerFlag}`,
-      test: 'sku test',
+      test: `sku test${testFlag}`,
       format: 'sku format',
       lint: 'sku lint',
     },

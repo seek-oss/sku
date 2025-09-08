@@ -34,7 +34,7 @@ export const createProject = async ({
 
   await generatePackageJson(targetPath, { projectName, template });
   await generateTemplateFiles(targetPath, { projectName, template });
-  await installDependencies(targetPath);
+  await installDependencies(targetPath, { template });
   await formatProject(targetPath);
 
   const nextSteps = [

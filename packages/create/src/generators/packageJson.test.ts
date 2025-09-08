@@ -53,7 +53,7 @@ describe('generatePackageJson', () => {
         "scripts": {
           "start": "sku start --experimental-bundler",
           "build": "sku build --experimental-bundler",
-          "test": "sku test",
+          "test": "sku test --run",
           "format": "sku format",
           "lint": "sku lint"
         }

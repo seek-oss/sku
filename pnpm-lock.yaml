@@ -23,7 +23,7 @@ catalogs:
       specifier: ^0.2.3
       version: 0.2.4
     braid-design-system:
-      specifier: 33.11.0
+      specifier: ^33.11.0
       version: 33.11.0
     jiti:
       specifier: 2.4.2

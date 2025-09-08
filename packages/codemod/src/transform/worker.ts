@@ -19,10 +19,9 @@ await Promise.all(
     const output = transform(source);
 
     if (!output) {
+      console.log('no output for file: ', filePath);
       return;
     }
-
-    filesChanged++;
 
     if (options.print) {
       const diff = createTwoFilesPatch(
@@ -41,6 +40,9 @@ await Promise.all(
 
     if (!options.dry) {
       await writeFile(filePath, output);
+      if (source !== output) {
+        filesChanged++;
+      }
     }
   }),
 );

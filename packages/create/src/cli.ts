@@ -50,8 +50,18 @@ program
         name: 'template',
         message: 'Which template would you like to use?',
         choices: [
-          { title: 'webpack', value: 'webpack' },
-          { title: 'vite (experimental)', value: 'vite' },
+          {
+            title: 'Webpack',
+            value: 'webpack',
+            description:
+              "Equivalent to the existing 'sku init' template. Uses Webpack for serving and bundling your application, and Jest for running tests. Select this template for a stable, battle-tested development environment.",
+          },
+          {
+            title: 'Vite (experimental)',
+            value: 'vite',
+            description:
+              'NOT PRODUCTION-READY. An experimental template that uses Vite for serving and bundling your application, and Vitest for running tests. Select this template for fast builds and lightning-fast local development.',
+          },
         ],
         initial: 0,
       });

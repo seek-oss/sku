@@ -17,7 +17,31 @@ program
   .version(version)
   .argument('[project-name]', 'Name of the project to create')
   .option('-t, --template <template>', 'Template to use (webpack, vite)')
-  .action(async (targetDir: string = '.', options: { template?: string }) => {
+  .action(async (targetDir?: string, options: { template?: string } = {}) => {
+    // Prompt for project name if not provided
+    let finalTargetDir = targetDir;
+    if (!finalTargetDir) {
+      const { projectName } = await prompts({
+        type: 'text',
+        name: 'projectName',
+        message: 'Project name (or "." for current directory):',
+        initial: 'my-sku-app',
+        validate: (value: string) => {
+          if (!value.trim()) {
+            return 'Project name is required';
+          }
+          return true;
+        },
+      });
+
+      if (!projectName) {
+        console.log('❌ No project name provided. Exiting.');
+        process.exit(1);
+      }
+
+      finalTargetDir = projectName.trim();
+    }
+
     let selectedTemplate = options.template;
 
     if (!selectedTemplate) {
@@ -59,7 +83,7 @@ program
 
     try {
       await createProject({
-        targetDir,
+        targetDir: finalTargetDir!,
         template: selectedTemplate as Template,
       });
     } catch (error) {

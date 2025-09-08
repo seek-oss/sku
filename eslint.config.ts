@@ -32,6 +32,7 @@ export default [
       '**/storybook-static/',
       '**/report/',
       '**/template/',
+      '**/templates/',
       'fixtures/**/*',
       '**/__testfixtures__/**',
       '**/@loadable/**/*',

@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { getPort } from '@sku-private/test-utils';
 import {
@@ -18,7 +12,7 @@ import {
 const { sku } = scopeToFixture('translations');
 
 describe('translations', () => {
-  describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
+  describe.for(bundlers)('bundler %s', async (bundler) => {
     const port = await getPort();
     const baseUrl = `http://localhost:${port}`;
     const args: BundlerValues<string[]> = {
@@ -28,29 +22,27 @@ describe('translations', () => {
 
     beforeAll(async () => {
       const build = await sku('build', args[bundler]);
-      globalExpect(
-        await build.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      globalExpect(await serve.findByText('Server started')).toBeInTheConsole();
+      expect(await serve.findByText('Server started')).toBeInTheConsole();
     });
 
     afterAll(cleanup);
 
-    it('should render en', async ({ expect, task }) => {
+    it('should render en', async ({ task }) => {
       skipCleanup(task.id);
       const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
       expect(app).toMatchSnapshot();
     });
 
-    it('should render fr', async ({ expect, task }) => {
+    it('should render fr', async ({ task }) => {
       skipCleanup(task.id);
       const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
       expect(app).toMatchSnapshot();
     });
 
-    it('should render en-PSEUDO post-hydration', async ({ expect, task }) => {
+    it('should render en-PSEUDO post-hydration', async ({ task }) => {
       skipCleanup(task.id);
       const app = await getAppSnapshot({
         expect,
@@ -59,7 +51,7 @@ describe('translations', () => {
       expect(app).toMatchSnapshot();
     });
 
-    it('should support query parameters', async ({ expect, task }) => {
+    it('should support query parameters', async ({ task }) => {
       skipCleanup(task.id);
       const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
       expect(app).toMatchSnapshot();

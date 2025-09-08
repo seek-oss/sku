@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   migrateEslintignore,
   addEslintIgnoreToSkuConfig,
@@ -8,9 +8,7 @@ import dedent from 'dedent';
 
 describe('eslintMigration', () => {
   describe('migrateEslintignore', () => {
-    it("should return a migrated eslint ignore config exluding any of sku's ignore entries or old ignore entries", async ({
-      expect,
-    }) => {
+    it("should return a migrated eslint ignore config exluding any of sku's ignore entries or old ignore entries", async () => {
       const fixture = await createFixture({
         '.eslintignore': dedent`
           # managed by sku
@@ -46,9 +44,7 @@ describe('eslintMigration', () => {
       await fixture.rm();
     });
 
-    it("should return the correct config when a 'languages' and a custom 'target' are configured", async ({
-      expect,
-    }) => {
+    it("should return the correct config when a 'languages' and a custom 'target' are configured", async () => {
       const fixture = await createFixture({
         '.eslintignore': dedent`
           # managed by sku
@@ -76,7 +72,7 @@ describe('eslintMigration', () => {
   });
 
   describe('addEslintIgnoreToSkuConfig', () => {
-    it("should add 'eslintIgnore' to a sku config", async ({ expect }) => {
+    it("should add 'eslintIgnore' to a sku config", async () => {
       const eslintIgnore = ['**/foo', 'src/types/graphql.ts'];
       const skuConfigFileName = 'sku.config.ts';
 

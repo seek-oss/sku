@@ -1,4 +1,4 @@
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, expect } from 'vitest';
 
 import { validatePnpmConfig } from './pnpmConfig.js';
 
@@ -16,7 +16,7 @@ describe('validatePnpmConfig', () => {
   `(
     'when hasRecommendedPnpmVersionInstalled: $hasRecommendedPnpmVersionInstalled, pnpmPluginSkuInstalled: $pnpmPluginSkuInstalled',
     ({ hasRecommendedPnpmVersionInstalled, pnpmPluginSkuInstalled }) => {
-      it('should log appropriate messages', async ({ expect }) => {
+      it('should log appropriate messages', async () => {
         const logSpy = vi
           .spyOn(global.console, 'log')
           .mockImplementation(() => {});

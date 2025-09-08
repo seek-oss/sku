@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect as globalExpect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import { dirContentsToObject } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
@@ -10,7 +10,7 @@ const { exec, fixturePath } = scopeToFixture('sku-webpack-plugin');
 
 describe('sku-webpack-plugin', () => {
   describe('start', () => {
-    it('should start a development server', async ({ expect }) => {
+    it('should start a development server', async () => {
       const server = await exec('node_modules/.bin/webpack-dev-server', [
         '--mode',
         'development',
@@ -40,13 +40,13 @@ describe('sku-webpack-plugin', () => {
         },
       );
       await waitFor(() => {
-        globalExpect(build.hasExit()).toMatchObject({
+        expect(build.hasExit()).toMatchObject({
           exitCode: 0,
         });
       });
     });
 
-    it('should create valid app', async ({ expect }) => {
+    it('should create valid app', async () => {
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
@@ -54,7 +54,7 @@ describe('sku-webpack-plugin', () => {
       expect(app).toMatchSnapshot();
     });
 
-    it('should generate the expected files', async ({ expect }) => {
+    it('should generate the expected files', async () => {
       const files = await dirContentsToObject(fixturePath('dist'));
       expect(files).toMatchSnapshot();
     });

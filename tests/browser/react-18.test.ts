@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/puppeteer';
 import {
   bundlers,
@@ -15,12 +15,12 @@ describe('react-18', () => {
     webpack: [],
   };
 
-  describe.sequential.for(bundlers)('bundler %s', async (bundler) => {
+  describe.for(bundlers)('bundler %s', async (bundler) => {
     const port = await getPort();
     const baseUrl = `http://localhost:${port}`;
 
     describe('build', () => {
-      it('should create valid app', async ({ expect }) => {
+      it('should create valid app', async () => {
         const build = await sku('build', args[bundler]);
         expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
@@ -33,7 +33,7 @@ describe('react-18', () => {
     });
 
     describe('start', () => {
-      it('should start a development server', async ({ expect }) => {
+      it('should start a development server', async () => {
         const start = await sku('start', ['--strict-port', `--port=${port}`]);
         expect(
           await start.findByText('Starting development server'),

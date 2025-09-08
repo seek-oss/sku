@@ -38,7 +38,7 @@ catalog:
   '@types/react-dom': '^19.1.6'
   '@vanilla-extract/vite-plugin': ^5.1.1
   '@vocab/vite': ^0.2.3
-  braid-design-system: '33.11.0'
+  braid-design-system: '^33.11.0'
   # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue.
   jiti: 2.4.2
   react: '^19.1.0'

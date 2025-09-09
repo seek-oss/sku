@@ -143,7 +143,7 @@ export const runTransform = async (
 
 const getAllFiles = (directory: string) =>
   glob(join(directory, '**/*.?(c|m){js,ts}?(x)'), {
-    ignore: ['**/node_modules', '**/dist', ''],
+    ignore: ['**/node_modules', '**/dist'],
     expandDirectories: false,
     absolute: true,
   });

@@ -19,7 +19,6 @@ await Promise.all(
     const output = transform(source);
 
     if (!output) {
-      console.log('no output for file: ', filePath);
       return;
     }
 

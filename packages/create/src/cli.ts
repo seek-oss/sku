@@ -50,8 +50,18 @@ program
         name: 'template',
         message: 'Which template would you like to use?',
         choices: [
-          { title: 'webpack', value: 'webpack' },
-          { title: 'vite (experimental)', value: 'vite' },
+          {
+            title: 'Webpack',
+            value: 'webpack',
+            description:
+              "Equivalent to the existing 'sku init' template. Uses Webpack for serving and bundling your application, and Jest for running tests. Select this template for a familiar, production-ready development environment.",
+          },
+          {
+            title: 'Vite (experimental)',
+            value: 'vite',
+            description:
+              'NOT PRODUCTION-READY. An experimental template that uses Vite for serving and bundling your application, and Vitest for running tests. Select this template to experiment with upcoming features.',
+          },
         ],
         initial: 0,
       });
@@ -64,7 +74,7 @@ program
         type: 'confirm',
         name: 'confirmVite',
         message:
-          '⚠️  Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
+          '⚠️ Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
         initial: false,
       });
 

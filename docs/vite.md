@@ -1,6 +1,6 @@
 # Vite
 
-!> Support for [Vite] as an alternative bundler for `sku` is available as an experimental feature.
+?> Support for [Vite] as an alternative bundler for `sku` is available as an experimental feature.
 It is currently being trialled internally and is not ready for general production use.
 If you wish to try it out, please reach out in [`#sku-support`].
 
@@ -38,7 +38,7 @@ There are two critical prerequisites for migrating to Vite:
 
 Given [Jest's current limitations with ESM], it is highly likely that both these prerequisites will need to be implemented at the same time.
 
-!> It is highly recommended to implement, test and release these changes independently from the changes necessary to [migrate to Vite][Migrating to Vite].
+**It is highly recommended to implement, test and release these changes independently from the changes necessary to [migrate to Vite][Migrating to Vite].**
 
 [Migrating to ESM]: #migrating-to-esm
 [Migrating to Vitest]: #migrating-to-vitest
@@ -75,6 +75,16 @@ While this change may seem small, it has a significant impact on how Node.js and
 You may have non-application code such as Node.js scripts or configuration files that will also be affected by this change.
 If these files contain [CommonJS (CJS)][CommonJS] syntax and you do not wish to convert them to ESM, you can keep them as CommonJS by using the `.cjs` or `.cts` file extensions.
 However, **it is highly recommended to convert all code to ESM if possible**.
+
+#### Finding ESM code changes
+
+After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed:
+
+```bash
+npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off"
+```
+
+The following sections detail changes that may be required.
 
 #### ESM syntax
 
@@ -120,13 +130,18 @@ In situations where an explicit file extension is required, such as in a Node.js
 
 [Vitest] is a testing framework that supports ESM out-of-the-box, integrates with the Vite ecosystem and has a similar API to Jest.
 These features make it a great replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
-
-?> Due to these limitations, it's likely that you'll need to migrate to Vitest at the same time as migrating to ESM.
+**Due to these limitations, it's likely that you'll need to migrate to Vitest at the same time as migrating to ESM.**
 
 Migrating to Vitest should be fairly straightforward.
 Before making any changes, it is highly recommend to read [the Vitest documentation](https://vitest.dev/guide/) to familiarise yourself with the API and features, as well as to better understand the differences between Jest and Vitest.
 
-To configure `sku` to use Vitest instead of Jest when running `sku test`, configure [`__UNSAFE_EXPERIMENTAL__testRunner`][test runner] in your `sku` config:
+To enable Vitest in `sku`, first install the required dependencies:
+
+```bash
+pnpm add -D vitest @sku-lib/vitest
+```
+
+Then, configure [`__UNSAFE_EXPERIMENTAL__testRunner`][test runner] in your `sku` config:
 
 ```typescript
 // sku.config.ts
@@ -138,29 +153,58 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Additionally, install the `@sku-lib/vitest` dependency:
+`sku` will now invoke [the `vitest` CLI][Vitest CLI] instead of the `jest` CLI when running `sku test`.
 
-```bash
-pnpm add -D @sku-lib/vitest
-```
+#### Key differences between Vitest and Jest
 
-With this change, `sku` will now invoke [the `vitest` CLI][Vitest CLI] instead the `jest` CLI when running `sku test`.
+Vitest has strong compatibility with the Jest API, however it still has differences that may affect your tests.
+Differences that affect sku projects are listed here.
+The full list is documented in the Vitest documentation: [Migrating from Jest to Vitest].
 
-?> A key difference between the `jest` and `vitest` CLIs is that `vitest` defaults to watch mode when running tests locally.
-To force run (non-watch) mode, you can use `sku test --run`.
-
-Your tests are unlikely to work immediately as there are some differences between Jest and Vitest that may need addressing.
-The [Jest -> Vitest][codemod] can fix some of these differences automatically:
+To automate most of the migration process, a codemod is available.
+Note that additional changes may still be required after running this codemod.
 
 ```sh
 pnpm dlx codemod jest/vitest
 ```
 
-After running the codemod, manual changes may still be necessary.
-These differences are documented in [Migrating from Jest to Vitest].
+**Default watch mode**
 
-?> By default `sku` enables [Vitest globals] such as `describe`, `it`, and `expect` in your tests.
-This aligns with the Jest API and allows you to write tests without needing to import these functions.
+`vitest` defaults to watch mode when running tests locally.
+To run test without watch mode you can use `sku test --run`:
+
+```json
+// package.json
+{
+  "scripts": {
+    // ...
+    "test": "sku test --run"
+  }
+}
+```
+
+**Globals disabled**
+
+Jest enables global APIs such as `it`, `describe`, `beforeAll`, etc., by default.
+Vitest does not.
+Sku adopts the Vitest defaults, meaning you will need to explicitly import these test functions.
+This change results in a cleaner global namespace, better type safety, clearer dependencies and is more consistency with modern javascript practices.
+
+```diff
++ import { describe, expect, it } from 'vitest';
+```
+
+Be aware that since globals are disabled, some common libraries like `testing-library` will not run auto DOM cleanup.
+If using these libraries, you will need to add cleanup to your configured `setupTests` file.
+
+```diff
+import '@testing-library/jest-dom';
+
++ import { cleanup } from '@testing-library/react';
++ import { afterEach } from 'vitest';
+
++ afterEach(cleanup)
+```
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
@@ -202,19 +246,19 @@ Documented below is a list of differences between `sku` with `webpack` and `sku`
 
 ### Code splitting
 
-Routes and components that take advantage of `sku`'s [code splitting] API will need to update imports from `sku/@loadable/component` to `sku/vite/loadable`.
+Routes and components that take advantage of `sku`'s [code splitting] API will need to update imports from `sku/@loadable/component` to `@sku-lib/vite/loadable`.
 A codemod is available to help with this migration:
 
 ```bash
 pnpm dlx @sku-lib/codemod transform-vite-loadable .
 ```
 
-The new `sku/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
+The new `@sku-lib/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
 You can wrap a `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you:
 
 ```tsx
 import { Suspense } from 'react';
-import { loadable } from 'sku/vite/loadable';
+import { loadable } from '@sku-lib/vite/loadable';
 
 const Home = loadable(() => import('./Home'), {
   fallback: <div>Loading Home...</div>,

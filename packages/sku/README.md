@@ -28,19 +28,21 @@ This tool is heavily inspired by other work, most notably:
 Create a new project and start a local development environment:
 
 ```sh
-$ pnpm dlx sku init my-app
+$ pnpm dlx @sku-lib/create my-app
 $ cd my-app
 $ pnpm start
 ```
 
-By default, a new project's dependencies will be installed with the same package manager used to run `sku init`.
-This can be overridden via the `--package-manager` flag:
+Or create in the current directory:
 
 ```sh
-$ pnpm dlx sku init --package-manager yarn my-app
-$ cd my-app
-$ yarn start
+$ pnpm dlx @sku-lib/create .
+$ pnpm start
 ```
+
+By default, a new project's dependencies will be installed with the same package manager used to run the create command.
+
+> **Note**: `sku init` is deprecated. Please use `@sku-lib/create` instead.
 
 ## [Documentation](https://seek-oss.github.io/sku)
 

@@ -1,14 +1,14 @@
 {
   "name": "@sku-lib/create",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Create sku projects",
-  "private": true,
   "type": "module",
   "bin": {
     "create-sku": "./dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "templates"
   ],
   "engines": {
     "node": ">=20.15"
@@ -20,11 +20,16 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
+    "@sku-lib/utils": "workspace:*",
     "commander": "^12.1.0",
+    "dedent": "^1.5.1",
+    "eta": "^3.2.0",
+    "fdir": "^6.1.1",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
     "typescript": "^5.6.2",
-    "@types/prompts": "^2.4.9"
+    "@types/prompts": "^2.4.9",
+    "fs-fixture": "^2.6.0"
   }
 }

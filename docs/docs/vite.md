@@ -155,7 +155,22 @@ export default {
 
 `sku` will now invoke [the `vitest` CLI][Vitest CLI] instead of the `jest` CLI when running `sku test`.
 
-**A key difference** between the `jest` and `vitest` CLIs is that `vitest` defaults to watch mode when running tests locally.
+#### Key differences between Vitest and Jest
+
+Vitest has strong compatibility with the Jest API, however it still has differences that may affect your tests.
+Differences that affect sku projects are listed here.
+The full list is documented in the Vitest documentation: [Migrating from Jest to Vitest].
+
+To automate most of the migration process, a codemod is available.
+Note that additional changes may still be required after running this codemod.
+
+```sh
+pnpm dlx codemod jest/vitest
+```
+
+**Default watch mode**
+
+`vitest` defaults to watch mode when running tests locally.
 To run test without watch mode you can use `sku test --run`:
 
 ```json
@@ -168,18 +183,28 @@ To run test without watch mode you can use `sku test --run`:
 }
 ```
 
-Your tests are unlikely to work immediately as there are some differences between Jest and Vitest that may need addressing.
-The [Jest -> Vitest][codemod] can fix some of these differences automatically:
+**Globals disabled**
 
-```sh
-pnpm dlx codemod jest/vitest
+Jest enables global APIs such as `it`, `describe`, `beforeAll`, etc., by default.
+Vitest does not.
+Sku adopts the Vitest defaults, meaning you will need to explicitly import these test functions.
+This change results in a cleaner global namespace, better type safety, clearer dependencies and is more consistency with modern javascript practices.
+
+```diff
++ import { describe, expect, it } from 'vitest';
 ```
 
-After running the codemod, manual changes may still be necessary.
-These differences are documented in [Migrating from Jest to Vitest].
+Be aware that since globals are disabled, some common libraries like `testing-library` will not run auto DOM cleanup.
+If using these libraries, you will need to add cleanup to your configured `setupTests` file.
 
-?> By default `sku` enables [Vitest globals] such as `describe`, `it`, and `expect` in your tests.
-This aligns with the Jest API and allows you to write tests without needing to import these functions.
+```diff
+import '@testing-library/jest-dom';
+
++ import { cleanup } from '@testing-library/react';
++ import { afterEach } from 'vitest';
+
++ afterEach(cleanup)
+```
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules

@@ -4,7 +4,8 @@
   "type": "module",
   "devDependencies": {
     "sku": "workspace:*",
-    "@types/jest": "^30.0.0"
+    "@types/jest": "^30.0.0",
+    "vitest": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

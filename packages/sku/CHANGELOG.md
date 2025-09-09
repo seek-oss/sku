@@ -1,5 +1,29 @@
 # sku
 
+## 14.12.0
+
+### Minor Changes
+
+- **DEPRECATION**: `sku init` is now deprecated in favor of `@sku-lib/create` ([#1389](https://github.com/seek-oss/sku/pull/1389))
+
+  The `sku init` command now shows a deprecation warning directing users to use the new standalone `@sku-lib/create` package instead. This new package provides better UX with interactive prompts and maintains full parity with `sku init` functionality.
+
+  **Usage:**
+  - Old: `pnpm dlx sku init my-app`
+  - New: `pnpm dlx @sku-lib/create my-app`
+
+  The `sku init` command will continue to work but will be removed in an upcoming release.
+
+### Patch Changes
+
+- Move util functions from `sku` to `@sku-lib/utils` package to allow usage between packages. No functional changes. ([#1377](https://github.com/seek-oss/sku/pull/1377))
+
+- `deps`: Update `vite-plugin-cjs-interop` from `^2.2.0` to `^2.3.0` ([#1386](https://github.com/seek-oss/sku/pull/1386))
+
+- `test (vitest)`: Added missing `pathAlias` support for the vitest test runner ([#1381](https://github.com/seek-oss/sku/pull/1381))
+
+- Remove unused experimental `sku/vite/loadable` entrypoint ([#1382](https://github.com/seek-oss/sku/pull/1382))
+
 ## 14.11.0
 
 ### Minor Changes

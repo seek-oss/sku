@@ -570,7 +570,7 @@ importers:
         specifier: ^5.0.0
         version: 5.1.4(webpack-dev-server@5.2.0)(webpack@5.100.0)
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
 
   fixtures/sku-with-https:
@@ -1098,6 +1098,9 @@ importers:
       express:
         specifier: ^4.19.2
         version: 4.21.2
+      express-http-proxy:
+        specifier: ^2.1.1
+        version: 2.1.1
       fastest-levenshtein:
         specifier: ^1.0.16
         version: 1.0.16
@@ -1222,7 +1225,7 @@ importers:
         specifier: ^4.6.1
         version: 4.10.2
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       webpack-merge:
         specifier: ^6.0.1
@@ -1258,6 +1261,9 @@ importers:
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
+      '@types/express-http-proxy':
+        specifier: ^1.6.7
+        version: 1.6.7
       '@types/hostile':
         specifier: ^1.3.5
         version: 1.3.5
@@ -1543,7 +1549,7 @@ importers:
         specifier: ^5.0.0
         version: 5.1.4(webpack-dev-server@5.2.0)(webpack@5.100.0)
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: ^5.0.2
         version: 5.2.0(debug@4.4.1)(webpack-cli@5.1.4)(webpack@5.100.0)
       yaml:
         specifier: ^2.8.1
@@ -3428,6 +3434,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/express-http-proxy@1.6.7':
+    resolution: {integrity: sha512-CEp9pbnwVI1RzN9PXc+KESMxwUW5r1O7tkWb5h7Wg/YAIf+KulD/zKev8fbbn+Ljt0Yvs8MXwV2W6Id+cKxe2Q==}
+
   '@types/express-serve-static-core@4.19.6':
     resolution: {integrity: sha512-N4LZ2xG7DatVqhCZzOGb1Yi5lMbXSZcmdLDe9EzSndPV2HpWYWzRbaerl2n27irrm94EPpprqa8KpskPT085+A==}
 
@@ -4892,6 +4901,14 @@ packages:
       supports-color:
         optional: true
 
+  debug@3.2.7:
+    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
     engines: {node: '>=6.0'}
@@ -5235,6 +5252,9 @@ packages:
     resolution: {integrity: sha512-w+5mJ3GuFL+NjVtJlvydShqE1eN3h3PbI7/5LAsYJP/2qtuMXjfL2LpHSRqo4b4eSF5K/DH1JXKUAHSB2UW50g==}
     engines: {node: '>= 0.4'}
 
+  es6-promise@4.2.8:
+    resolution: {integrity: sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==}
+
   esbuild-register@3.6.0:
     resolution: {integrity: sha512-H2/S7Pm8a9CL1uhp9OvjwrBh5Pvx0H8qVOxNu8Wed9Y7qv56MPtq+GGM8RJpq6glYJn9Wspr8uw7l55uyinNeg==}
     peerDependencies:
@@ -5496,6 +5516,10 @@ packages:
   expect@30.0.4:
     resolution: {integrity: sha512-dDLGjnP2cKbEppxVICxI/Uf4YemmGMPNy0QytCbfafbpYk9AFQsxb8Uyrxii0RPK7FWgLGlSem+07WirwS3cFQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
+
+  express-http-proxy@2.1.1:
+    resolution: {integrity: sha512-4aRQRqDQU7qNPV5av0/hLcyc0guB9UP71nCYrQEYml7YphTo8tmWf3nDZWdTJMMjFikyz9xKXaURor7Chygdwg==}
+    engines: {node: '>=6.0.0'}
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -11776,6 +11800,10 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/express-http-proxy@1.6.7':
+    dependencies:
+      '@types/express': 4.17.23
+
   '@types/express-serve-static-core@4.19.6':
     dependencies:
       '@types/node': 20.19.9
@@ -13606,6 +13634,10 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
+  debug@3.2.7:
+    dependencies:
+      ms: 2.1.3
+
   debug@4.4.1:
     dependencies:
       ms: 2.1.3
@@ -14005,6 +14037,8 @@ snapshots:
       is-date-object: 1.1.0
       is-symbol: 1.1.1
 
+  es6-promise@4.2.8: {}
+
   esbuild-register@3.6.0(esbuild@0.25.6):
     dependencies:
       debug: 4.4.1
@@ -14357,6 +14391,14 @@ snapshots:
       jest-message-util: 30.0.2
       jest-mock: 30.0.2
       jest-util: 30.0.2
+
+  express-http-proxy@2.1.1:
+    dependencies:
+      debug: 3.2.7
+      es6-promise: 4.2.8
+      raw-body: 2.5.2
+    transitivePeerDependencies:
+      - supports-color
 
   express@4.21.2:
     dependencies:
@@ -17680,6 +17722,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      express-http-proxy: 2.1.1
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@4.0.3)
@@ -17832,6 +17875,7 @@ snapshots:
       eta: 3.5.0
       exception-formatter: 2.1.2
       express: 4.21.2
+      express-http-proxy: 2.1.1
       fastest-levenshtein: 1.0.16
       fastest-validator: 1.19.1
       fdir: 6.4.6(picomatch@4.0.3)

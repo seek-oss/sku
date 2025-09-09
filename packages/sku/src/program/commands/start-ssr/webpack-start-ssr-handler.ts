@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import onDeath from 'death';
 import chalk from 'chalk';
 import debug from 'debug';
+import proxy from 'express-http-proxy';
 
 import getCertificate from '../../../utils/certificate.js';
 
@@ -107,19 +108,17 @@ export const webpackStartSsrHandler = async ({
 
   const proto = httpsDevServer ? 'https' : 'http';
 
-  const serverUrl = `${proto}://${appHosts?.[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `${proto}://${appHosts?.[0]}:${clientPort}`;
+  const serverHost = `${proto}://${appHosts?.[0]}:${serverPort}`;
+  const webpackDevServerHost = `${proto}://${appHosts?.[0]}:${clientPort}`;
+
+  const initialUrl = `${webpackDevServerHost}${initialPath}`;
 
   console.log();
   console.log(
-    chalk.blue(
-      `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
-    ),
+    chalk.blue(`Starting the dev server on ${chalk.underline(initialUrl)}`),
   );
   console.log(
-    chalk.blue(
-      `Starting the SSR development server on ${chalk.underline(serverUrl)}`,
-    ),
+    chalk.blue(`Starting the SSR server on ${chalk.underline(serverHost)}`),
   );
   console.log();
 
@@ -143,7 +142,7 @@ export const webpackStartSsrHandler = async ({
 
     serverManager.start();
 
-    openBrowser(serverUrl);
+    openBrowser(initialUrl);
   });
 
   // Starts the server webpack config running.
@@ -175,6 +174,13 @@ export const webpackStartSsrHandler = async ({
         port: clientPort,
       },
     },
+    setupMiddlewares: (middlewares) => [
+      ...middlewares,
+      {
+        name: 'send-to-ssr',
+        middleware: proxy(serverHost),
+      },
+    ],
     setupExitSignals: true,
   };
 

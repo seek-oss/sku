@@ -1,5 +1,34 @@
 # @sku-lib/vitest
 
+## 0.2.0
+
+### Minor Changes
+
+- Disable Vitest globals ([#1387](https://github.com/seek-oss/sku/pull/1387))
+
+  `vitest` is now a peer dependency. As such, `vitest` APIs must now be imported explicitly
+
+  **EXAMPLE USAGE**:
+
+  ```ts
+  // example.test.ts
+  import { describe, it, expect } from 'vitest';
+
+  describe("test suite", () => {
+    it("should be true" () => {
+      expect(true).toBe(true);
+    });
+  });
+  ```
+
+### Patch Changes
+
+- `deps`: Update `vite-plugin-cjs-interop` from `^2.2.0` to `^2.3.0` ([#1386](https://github.com/seek-oss/sku/pull/1386))
+
+- Added missing `compilePackages` and `cjsInteropDependencies` support ([#1381](https://github.com/seek-oss/sku/pull/1381))
+
+- Fixed a bug causing `sku test` to hang when `vitest` is executed in `run` mode ([#1387](https://github.com/seek-oss/sku/pull/1387))
+
 ## 0.1.1
 
 ### Patch Changes

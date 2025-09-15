@@ -81,7 +81,7 @@ However, **it is highly recommended to convert all code to ESM if possible**.
 After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed:
 
 ```bash
-npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off"
+npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off, import/extensions: off"
 ```
 
 The following sections detail changes that may be required.
@@ -165,7 +165,7 @@ To automate most of the migration process, a codemod is available.
 Note that additional changes may still be required after running this codemod.
 
 ```sh
-pnpm dlx codemod jest/vitest
+pnpm dlx @sku-lib/codemod jest-to-vitest .
 ```
 
 **Default watch mode**

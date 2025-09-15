@@ -52,8 +52,7 @@ export const vitestHandler = async ({
     setupFiles: skuContext.paths.setupTests,
     args,
     skuContext: {
-      cjsInteropDependencies:
-        skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
+      cjsInteropDependencies: skuContext.cjsInteropDependencies,
       compilePackages: skuContext.skuConfig.compilePackages,
     },
   });

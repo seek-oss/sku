@@ -53,11 +53,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       vocabConfig && vocabPluginVite.default({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
-        dependencies: [
-          '@apollo/client',
-          'lodash',
-          ...skuContext.skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
-        ],
+        dependencies: skuContext.cjsInteropDependencies,
       }),
       react({
         babel: {

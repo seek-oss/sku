@@ -1,5 +1,11 @@
 # sku
 
+## 14.12.1
+
+### Patch Changes
+
+- `vitest`: Correctly forward CJS interop dependencies ([#1395](https://github.com/seek-oss/sku/pull/1395))
+
 ## 14.12.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @sku-lib/vitest
 
+## 0.2.1
+
+### Patch Changes
+
+- Fix `watch` mode ([#1393](https://github.com/seek-oss/sku/pull/1393))
+
 ## 0.2.0
 
 ### Minor Changes

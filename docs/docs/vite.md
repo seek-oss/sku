@@ -165,7 +165,7 @@ To automate most of the migration process, a codemod is available.
 Note that additional changes may still be required after running this codemod.
 
 ```sh
-pnpm dlx codemod jest/vitest
+pnpm dlx @sku-lib/codemod jest-to-vitest .
 ```
 
 **Default watch mode**

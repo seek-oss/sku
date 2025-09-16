@@ -1,7 +1,6 @@
 import { startVitest, parseCLI } from 'vitest/node';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 type SkuContext = {
   cjsInteropDependencies: string[];
@@ -25,19 +24,13 @@ export const runVitest = async ({
     results.filter,
     { config: false, ...results.options },
     {
-      plugins: [
-        vanillaExtractPlugin(),
-        tsconfigPaths(),
-        cjsInterop({
-          dependencies: [...cjsInteropDependencies],
-        }),
-      ],
+      plugins: [vanillaExtractPlugin(), tsconfigPaths()],
       test: {
         environment: 'jsdom',
         setupFiles,
       },
       ssr: {
-        noExternal: [...compilePackages],
+        noExternal: [...compilePackages, ...cjsInteropDependencies],
       },
     },
     {},

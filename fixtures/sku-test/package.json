@@ -5,11 +5,15 @@
   "devDependencies": {
     "sku": "workspace:*",
     "@types/jest": "^30.0.0",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "catalog:"
   },
   "dependencies": {
     "@sku-private/3rd-party-cjs-interop-dep": "workspace:*",
-    "@apollo/client": "^3.14.0"
+    "@apollo/client": "^3.14.0",
+    "react": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

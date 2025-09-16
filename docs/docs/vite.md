@@ -170,8 +170,8 @@ pnpm dlx @sku-lib/codemod jest-to-vitest .
 
 **Default watch mode**
 
-`vitest` defaults to watch mode when running tests locally.
-To run test without watch mode you can use `sku test --run`:
+`vitest` defaults to watch mode when running tests.
+To run test without watch mode you can use the `--run` flag:
 
 ```json
 // package.json
@@ -182,6 +182,8 @@ To run test without watch mode you can use `sku test --run`:
   }
 }
 ```
+
+Watch mode won't trigger in CI environments, so it's safe to run without the flag in your pipeline.
 
 **Globals disabled**
 
@@ -253,7 +255,13 @@ A codemod is available to help with this migration:
 pnpm dlx @sku-lib/codemod transform-vite-loadable .
 ```
 
-The new `@sku-lib/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
+You will also need to install the new library:
+
+```bash
+pnpm add @sku-lib/vite/loadable
+```
+
+`@sku-lib/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
 You can wrap a `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you:
 
 ```tsx

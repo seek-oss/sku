@@ -186,6 +186,21 @@ const testCases: TestCase[] = [
         })
       })`,
   },
+  {
+    filename: 'chainedTestMethods.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test } from 'vitest';
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

@@ -7,6 +7,8 @@ import {
 } from '../../../utils/configure.js';
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
 import { checkHosts, withHostile } from '../../../context/hosts.js';
+import { detectUnnecessaryPolyfills } from '../../../utils/polyfillDetector.js';
+import { displayPolyfillWarnings } from '../../../utils/polyfillWarnings.js';
 import chalk from 'chalk';
 
 export const startAction = async (
@@ -30,6 +32,10 @@ export const startAction = async (
 
   withHostile(checkHosts)(skuContext);
   validatePeerDeps(skuContext);
+
+  // Check for unnecessary polyfills and display warnings
+  const detectedPolyfills = detectUnnecessaryPolyfills(skuContext.polyfills);
+  displayPolyfillWarnings(detectedPolyfills);
 
   if (skuContext.bundler === 'vite') {
     const { viteStartHandler } = await import('./vite-start-handler.js');

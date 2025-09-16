@@ -1,5 +1,7 @@
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { detectUnnecessaryPolyfills } from '../../../utils/polyfillDetector.js';
+import { displayPolyfillWarnings } from '../../../utils/polyfillWarnings.js';
 
 export const startSsrAction = async ({
   stats,
@@ -13,6 +15,10 @@ export const startSsrAction = async ({
       'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',
     );
   }
+
+  // Check for unnecessary polyfills and display warnings
+  const detectedPolyfills = detectUnnecessaryPolyfills(skuContext.polyfills);
+  displayPolyfillWarnings(detectedPolyfills);
 
   const { webpackStartSsrHandler } = await import(
     './webpack-start-ssr-handler.js'

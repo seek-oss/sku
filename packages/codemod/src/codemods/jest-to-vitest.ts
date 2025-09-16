@@ -73,10 +73,25 @@ export const transform = (source: string) => {
       },
     });
 
-    const jestMockFactoryEdits = requireActualNodes.map((n) => {
+    const jestMockFactoryEdits: Edit[] = [];
+
+    for (const n of requireActualNodes) {
       seenJestRequireActualNodes.add(n.id());
-      return n.replace('await vi.importActual');
+      jestMockFactoryEdits.push(n.replace('await vi.importActual'));
+    }
+
+    // The `jest.<method>` rule above will be overwritten by this targeted edit, so we need to
+    // handle `jest.fn()` calls within mock factores separately
+    const jestFnNodes = jestMockFactory.findAll({
+      rule: {
+        pattern: 'jest.fn',
+        kind: 'member_expression',
+      },
     });
+
+    for (const n of jestFnNodes) {
+      jestMockFactoryEdits.push(n.replace('vi.fn'));
+    }
 
     // Commit edits to the factory function because further targeted edits seem to be overwritten by
     // broader edits

@@ -85,6 +85,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: jest.fn(),
         };
       })
 
@@ -143,6 +144,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: vi.fn(),
         };
       })
 

@@ -53,7 +53,7 @@ export const vitestHandler = async ({
     args,
     skuContext: {
       cjsInteropDependencies: skuContext.cjsInteropDependencies,
-      compilePackages: skuContext.skuConfig.compilePackages,
+      compilePackages: skuContext.paths.compilePackages,
     },
   });
 };

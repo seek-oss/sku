@@ -183,6 +183,16 @@ To run test without watch mode you can use `sku test --run`:
 }
 ```
 
+**Testing Library Matchers**
+
+If your test setup file includes an import for `@testing-library/jest-dom`, you may need to change this to `@testing-library/jest-dom/vitest`:
+
+```diff
+// test-setup.ts
+- import '@testing-library/jest-dom';
++ import '@testing-library/jest-dom/vitest';
+```
+
 **Globals disabled**
 
 Jest enables global APIs such as `it`, `describe`, `beforeAll`, etc., by default.
@@ -198,7 +208,7 @@ Be aware that since globals are disabled, some common libraries like `testing-li
 If using these libraries, you will need to add cleanup to your configured `setupTests` file.
 
 ```diff
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 
 + import { cleanup } from '@testing-library/react';
 + import { afterEach } from 'vitest';

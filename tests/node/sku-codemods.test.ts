@@ -112,6 +112,13 @@ const testCases: TestCase[] = [
 
       const standalone = jest.requireActual('standalone');
 
+      const mockedFoo = foo as jest.Mock;
+      const mockedFoo = foo as jest.Mock<any>;
+      const mockedFoo = foo as jest.Mock<any, any, any>;
+      const mockedFoo = foo as jest.MockedFunction;
+      const mockedFoo = foo as jest.MockedFunction<typeof foo>;
+      const mockedFoo = foo as jest.MockedFunction<typeof foo> & { otherProperty: any };
+
       describe("foo", () => {
         it("should foo", () => {
           expect("foo").toBe("foo");
@@ -163,6 +170,13 @@ const testCases: TestCase[] = [
 
       const standalone = await vi.importActual('standalone');
 
+      const mockedFoo = vi.mocked(foo);
+      const mockedFoo = vi.mocked(foo);
+      const mockedFoo = vi.mocked(foo);
+      const mockedFoo = vi.mocked(foo);
+      const mockedFoo = vi.mocked(foo);
+      const mockedFoo = vi.mocked(foo);
+
       describe("foo", () => {
         it("should foo", () => {
           expect("foo").toBe("foo");
@@ -171,6 +185,21 @@ const testCases: TestCase[] = [
           expect("foo").toBe("foo");
         })
       })`,
+  },
+  {
+    filename: 'chainedTestMethods.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test } from 'vitest';
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
   },
 ];
 

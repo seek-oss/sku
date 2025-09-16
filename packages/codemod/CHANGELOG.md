@@ -1,5 +1,15 @@
 # @sku-lib/codemod
 
+## 0.3.0
+
+### Minor Changes
+
+- Add support for converting failing tests such as `test.failing` to `test.fails` ([#1401](https://github.com/seek-oss/sku/pull/1401))
+
+- Add support for detecting chained test methods such as `it.each` and `test.skip.each` ([#1400](https://github.com/seek-oss/sku/pull/1400))
+
+- Add support for converting `jest.Mock` and `jest.MockedFunction` typecasts into `vi.mocked` function calls ([#1396](https://github.com/seek-oss/sku/pull/1396))
+
 ## 0.2.0
 
 ### Minor Changes

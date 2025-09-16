@@ -128,6 +128,43 @@ export const transform = (source: string) => {
     vitestImports.add(t);
   }
 
+  const foundJestMockTypes = root.findAll({
+    rule: {
+      any: [
+        { pattern: '$IDENTIFIER as jest.Mock', kind: 'as_expression' },
+        {
+          pattern: '$IDENTIFIER as jest.Mock<$$$_GENERIC_ARGS>',
+          kind: 'as_expression',
+        },
+        {
+          pattern: '$IDENTIFIER as jest.MockedFunction',
+          kind: 'as_expression',
+        },
+        {
+          pattern: '$IDENTIFIER as jest.MockedFunction<$$$_GENERIC_ARGS>',
+          kind: 'as_expression',
+        },
+        {
+          pattern:
+            '$IDENTIFIER as jest.MockedFunction<$$$_GENERIC_ARGS> & $_OBJECT_TYPE',
+          kind: 'as_expression',
+        },
+      ],
+    },
+  });
+
+  for (const node of foundJestMockTypes) {
+    const identifier = node.getMatch('IDENTIFIER')?.text();
+    if (identifier) {
+      const edit = node.replace(`vi.mocked(${identifier})`);
+      edits.push(edit);
+    }
+  }
+
+  if (foundJestMockTypes.length > 0) {
+    vitestImports.add('vi');
+  }
+
   const result = root.commitEdits(edits);
 
   // Unsure why, but committing an edit for the vitest import causes a runtime panic, so we

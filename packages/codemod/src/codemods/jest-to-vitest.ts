@@ -1,14 +1,13 @@
 import { parse, Lang, type Edit } from '@ast-grep/napi';
 
+const testGlobals = ['describe', 'it', 'test'];
 const jestGlobals = [
   'expect',
   'beforeAll',
   'beforeEach',
   'afterAll',
   'afterEach',
-  'describe',
-  'it',
-  'test',
+  ...testGlobals,
 ];
 
 export const transform = (source: string) => {
@@ -115,11 +114,18 @@ export const transform = (source: string) => {
 
   const foundJestGlobals = root.findAll({
     // Matches globals like `beforeAll()`, describe()`, `it()`, etc.
+    // Also matches `test.only`, `it.skip.each`, etc.
     rule: {
-      any: jestGlobals.map((global) => ({
-        pattern: global,
-        kind: 'call_expression > identifier',
-      })),
+      any: [
+        ...jestGlobals.map((global) => ({
+          pattern: global,
+          kind: 'call_expression > identifier',
+        })),
+        ...testGlobals.map((global) => ({
+          pattern: global,
+          kind: 'call_expression member_expression > identifier',
+        })),
+      ],
     },
   });
 

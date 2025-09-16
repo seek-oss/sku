@@ -7,5 +7,9 @@
     "@types/jest": "^30.0.0",
     "vitest": "catalog:"
   },
+  "dependencies": {
+    "@sku-private/3rd-party-cjs-interop-dep": "workspace:*",
+    "@apollo/client": "^3.14.0"
+  },
   "skuSkipValidatePeerDeps": true
 }

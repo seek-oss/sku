@@ -171,6 +171,20 @@ export const transform = (source: string) => {
     vitestImports.add('vi');
   }
 
+  const foundFailingTests = root.findAll({
+    rule: {
+      pattern: {
+        selector: 'property_identifier',
+        context: '$_OBJ.failing',
+      },
+    },
+  });
+
+  for (const node of foundFailingTests) {
+    const edit = node.replace('fails');
+    edits.push(edit);
+  }
+
   const result = root.commitEdits(edits);
 
   // Unsure why, but committing an edit for the vitest import causes a runtime panic, so we

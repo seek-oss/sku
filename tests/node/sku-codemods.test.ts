@@ -201,6 +201,31 @@ const testCases: TestCase[] = [
       it.skip.each("foo")
     `,
   },
+  {
+    filename: 'chainedTestMethods.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+
+      test.failing("foo")
+      test.failing.each("foo")
+      it.skip.failing("foo")
+      it.only.failing("foo")
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test } from 'vitest';
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+
+      test.fails("foo")
+      test.fails.each("foo")
+      it.skip.fails("foo")
+      it.only.fails("foo")
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

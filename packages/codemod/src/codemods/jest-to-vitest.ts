@@ -42,59 +42,40 @@ export const transform = (source: string) => {
     vitestImports.add('vi');
   }
 
-  // Replace `jest.mock()` with `vi.mock()`, replace `jest.requireActual()` with
-  // `await vi.importActual()` within the factory, and make the factory async if it isn't already
-
-  const jestMockNodes = root.findAll({
+  const jestMockFactoryParameters = root.findAll({
+    // Find all mock factories that contain `jest.requireActual` and are not already async
     rule: {
-      pattern: 'jest.mock',
-      kind: 'member_expression',
+      any: [{ kind: 'arrow_function' }, { kind: 'function_expression' }],
+      not: { pattern: 'async $$$' },
+      inside: {
+        pattern: 'jest.mock($$$)',
+        has: {
+          pattern: 'jest.requireActual',
+          kind: 'member_expression',
+          stopBy: 'end',
+        },
+        // Prevent matching further formal_parameters within the factory function body
+        stopBy: { kind: 'statement_block' },
+      },
     },
   });
 
-  const seenJestRequireActualNodes = new Set<number>();
-  for (const node of jestMockNodes) {
-    const parent = node.parent();
-    if (!parent?.is('call_expression')) {
-      // No parent somehow, or parent isn't a call expression
-      continue;
-    }
+  // Prepend `async` to found mock factories
+  for (const node of jestMockFactoryParameters) {
+    const {
+      start: { index },
+    } = node.range();
 
-    const jestMockFactory = parent.field('arguments')?.child(3);
-    if (!jestMockFactory) {
-      // No factory function, nothing to replace
-      continue;
-    }
+    const edit: Edit = {
+      startPos: index,
+      endPos: index,
+      insertedText: 'async ',
+    };
 
-    const requireActualNodes = jestMockFactory.findAll({
-      rule: {
-        pattern: 'jest.requireActual',
-        kind: 'member_expression',
-      },
-    });
-
-    const jestMockFactoryEdits = requireActualNodes.map((n) => {
-      seenJestRequireActualNodes.add(n.id());
-      return n.replace('await vi.importActual');
-    });
-
-    // Commit edits to the factory function because further targeted edits seem to be overwritten by
-    // broader edits
-
-    if (jestMockFactoryEdits.length > 0) {
-      const newJestMockFactory =
-        jestMockFactory.commitEdits(jestMockFactoryEdits);
-      const factoryIsAsync = newJestMockFactory.startsWith('async');
-      const replacementText = factoryIsAsync
-        ? newJestMockFactory
-        : `async ${newJestMockFactory}`;
-      const edit = jestMockFactory.replace(replacementText);
-      edits.push(edit);
-    }
+    edits.push(edit);
   }
 
-  // Replace `jest.requireActual()` calls outside of `jest.mock()` factories
-
+  // Replace `jest.requireActual` with `await vi.importActual`
   const requireActualNodes = root.findAll({
     rule: {
       pattern: 'jest.requireActual',
@@ -103,11 +84,8 @@ export const transform = (source: string) => {
   });
 
   for (const node of requireActualNodes) {
-    const nodeId = node.id();
-    if (!seenJestRequireActualNodes.has(nodeId)) {
-      const edit = node.replace('await vi.importActual');
-      edits.push(edit);
-    }
+    const edit = node.replace('await vi.importActual');
+    edits.push(edit);
   }
 
   // Track usage of Jest globals and import them from `vitest`

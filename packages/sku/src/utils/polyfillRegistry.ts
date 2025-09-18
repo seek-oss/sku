@@ -18,6 +18,10 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
     reason: 'Deprecated package',
     docsUrl: 'https://babeljs.io/docs/en/babel-polyfill',
   },
+  'babel/polyfill': {
+    reason: 'Deprecated package',
+    docsUrl: 'https://babeljs.io/docs/en/babel-polyfill',
+  },
   'regenerator-runtime': {
     reason:
       'async/await is well established and works across many devices and browser versions',

@@ -114,24 +114,15 @@ export const transform = (source: string) => {
 
   const foundJestMockTypes = root.findAll({
     rule: {
+      kind: 'as_expression',
       any: [
-        { pattern: '$IDENTIFIER as jest.Mock', kind: 'as_expression' },
-        {
-          pattern: '$IDENTIFIER as jest.Mock<$$$_GENERIC_ARGS>',
-          kind: 'as_expression',
-        },
-        {
-          pattern: '$IDENTIFIER as jest.MockedFunction',
-          kind: 'as_expression',
-        },
-        {
-          pattern: '$IDENTIFIER as jest.MockedFunction<$$$_GENERIC_ARGS>',
-          kind: 'as_expression',
-        },
+        { pattern: '$IDENTIFIER as jest.Mock' },
+        { pattern: '$IDENTIFIER as jest.Mock<$$$_GENERIC_ARGS>' },
+        { pattern: '$IDENTIFIER as jest.MockedFunction' },
+        { pattern: '$IDENTIFIER as jest.MockedFunction<$$$_GENERIC_ARGS>' },
         {
           pattern:
             '$IDENTIFIER as jest.MockedFunction<$$$_GENERIC_ARGS> & $_OBJECT_TYPE',
-          kind: 'as_expression',
         },
       ],
     },

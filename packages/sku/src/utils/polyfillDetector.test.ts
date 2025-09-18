@@ -53,5 +53,36 @@ describe('polyfillDetector', () => {
 
       expect(result).toHaveLength(0);
     });
+
+    it('should detect core-js prefix variants', ({ expect }) => {
+      const polyfills = [
+        'core-js/stable',
+        'core-js/es6',
+        'core-js/features/promise',
+      ];
+
+      const result = detectUnnecessaryPolyfills(polyfills);
+
+      expect(result).toHaveLength(3);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "docsUrl": "https://github.com/zloirock/core-js#usage",
+            "polyfillName": "core-js/stable",
+            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+          },
+          {
+            "docsUrl": "https://github.com/zloirock/core-js#usage",
+            "polyfillName": "core-js/es6",
+            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+          },
+          {
+            "docsUrl": "https://github.com/zloirock/core-js#usage",
+            "polyfillName": "core-js/features/promise",
+            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+          },
+        ]
+      `);
+    });
   });
 });

@@ -15,8 +15,11 @@ export const detectUnnecessaryPolyfills = (
   polyfills: string[],
 ): DetectedPolyfill[] =>
   polyfills
-    .filter((polyfillName) => polyfillName in POLYFILL_REGISTRY)
+    .filter(
+      (polyfillName) =>
+        polyfillName in POLYFILL_REGISTRY || polyfillName.startsWith('core-js'),
+    )
     .map((polyfillName) => ({
       polyfillName,
-      ...POLYFILL_REGISTRY[polyfillName]!,
+      ...(POLYFILL_REGISTRY[polyfillName] || POLYFILL_REGISTRY['core-js']!),
     }));

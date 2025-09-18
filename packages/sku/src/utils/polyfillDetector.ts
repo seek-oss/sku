@@ -14,17 +14,9 @@ export interface DetectedPolyfill extends PolyfillRegistryEntry {
 export const detectUnnecessaryPolyfills = (
   polyfills: string[],
 ): DetectedPolyfill[] =>
-  polyfills.flatMap((polyfillName) => {
-    const registryEntry = POLYFILL_REGISTRY[polyfillName];
-
-    if (!registryEntry) {
-      return [];
-    }
-
-    return [
-      {
-        polyfillName,
-        ...registryEntry,
-      },
-    ];
-  });
+  polyfills
+    .filter((polyfillName) => polyfillName in POLYFILL_REGISTRY)
+    .map((polyfillName) => ({
+      polyfillName,
+      ...POLYFILL_REGISTRY[polyfillName]!,
+    }));

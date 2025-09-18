@@ -1,12 +1,15 @@
 import { styleText } from 'node:util';
-import type { DetectedPolyfill } from './polyfillDetector.js';
+import {
+  detectUnnecessaryPolyfills,
+  type DetectedPolyfill,
+} from './polyfillDetector.js';
 
 /**
  * Displays warnings for unnecessary polyfills in a clean, formatted way
  */
-export const displayPolyfillWarnings = (
-  detectedPolyfills: DetectedPolyfill[],
-): void => {
+export const displayPolyfillWarnings = (polyfills: string[]): void => {
+  const detectedPolyfills = detectUnnecessaryPolyfills(polyfills);
+
   if (detectedPolyfills.length === 0) {
     return;
   }

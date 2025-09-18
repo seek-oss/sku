@@ -11,15 +11,16 @@ export type PolyfillRegistry = Record<string, PolyfillRegistryEntry>;
 export const POLYFILL_REGISTRY: PolyfillRegistry = {
   'core-js': {
     reason:
-      'Most ES2015-ES2017 features are natively supported in modern browsers',
+      'Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs',
     docsUrl: 'https://github.com/zloirock/core-js#usage',
   },
   '@babel/polyfill': {
-    reason: 'Deprecated package, replaced by core-js',
+    reason: 'Deprecated package',
     docsUrl: 'https://babeljs.io/docs/en/babel-polyfill',
   },
   'regenerator-runtime': {
-    reason: 'async/await is natively supported in modern browsers',
+    reason:
+      'async/await is well established and works across many devices and browser versions',
   },
   'es6-promise': {
     reason: 'Promises are natively supported in modern browsers',

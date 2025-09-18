@@ -234,6 +234,24 @@ const testCases: TestCase[] = [
       it.only.fails("foo")
     `,
   },
+  {
+    filename: 'existingVitestImport.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      import { test, vi } from 'vitest';
+      test("foo")
+      it("foo")
+      describe("foo")
+      vi.mock('foo')
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test, vi } from 'vitest';
+      test("foo")
+      it("foo")
+      describe("foo")
+      vi.mock('foo')
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

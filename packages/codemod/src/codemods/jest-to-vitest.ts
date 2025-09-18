@@ -10,6 +10,9 @@ const jestGlobals = [
   ...testGlobals,
 ];
 
+const serializeImports = (imports: Set<string>) =>
+  Array.from(imports).sort().join(', ');
+
 export const transform = (source: string) => {
   const ast = parse(Lang.Tsx, source);
   const root = ast.root();
@@ -163,15 +166,47 @@ export const transform = (source: string) => {
     edits.push(edit);
   }
 
-  const result = root.commitEdits(edits);
+  if (vitestImports.size === 0) {
+    return root.commitEdits(edits);
+  }
 
-  // Unsure why, but committing an edit for the vitest import causes a runtime panic, so we
-  // manually add the import instead
-  if (vitestImports.size > 0) {
-    const serializedImports = Array.from(vitestImports).sort().join(', ');
+  const existingVitestImports = root.findAll({
+    rule: {
+      kind: 'import_specifier',
+      inside: {
+        kind: 'import_statement',
+        stopBy: 'end',
+        has: {
+          kind: 'string',
+          regex: 'vitest',
+        },
+        not: {
+          pattern: 'import type',
+        },
+      },
+    },
+  });
 
+  if (existingVitestImports.length === 0) {
+    const result = root.commitEdits(edits);
+    const serializedImports = serializeImports(vitestImports);
+
+    // Unsure why, but committing an edit for the vitest import causes a runtime panic, so we
+    // commit existing edits and then prepend the import manually
     return `import { ${serializedImports} } from 'vitest';\n${result}`;
   }
 
-  return result;
+  for (const node of existingVitestImports) {
+    // This doesn't handle aliased imports, but that's a very niche case and adds complexity
+    vitestImports.add(node.text());
+  }
+
+  const serializedImports = serializeImports(vitestImports);
+  const namedImportsList = existingVitestImports[0].parent();
+  if (namedImportsList) {
+    const edit = namedImportsList?.replace(`{ ${serializedImports} }`);
+    edits.push(edit);
+  }
+
+  return root.commitEdits(edits);
 };

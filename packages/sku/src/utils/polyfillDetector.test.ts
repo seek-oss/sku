@@ -21,12 +21,12 @@ describe('polyfillDetector', () => {
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js",
-            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
           },
           {
             "docsUrl": "https://babeljs.io/docs/en/babel-polyfill",
             "polyfillName": "@babel/polyfill",
-            "reason": "Deprecated package, replaced by core-js",
+            "reason": "Deprecated package",
           },
           {
             "polyfillName": "whatwg-fetch",
@@ -69,17 +69,17 @@ describe('polyfillDetector', () => {
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/stable",
-            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
           },
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/es6",
-            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
           },
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/features/promise",
-            "reason": "Most ES2015-ES2017 features are natively supported in modern browsers",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
           },
         ]
       `);

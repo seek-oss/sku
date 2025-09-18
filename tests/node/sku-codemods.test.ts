@@ -85,6 +85,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: jest.fn(),
         };
       })
 
@@ -94,6 +95,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: jest.fn(),
         };
       })
 
@@ -101,12 +103,14 @@ const testCases: TestCase[] = [
           ...jest.requireActual('./foo2'),
           ...jest.requireActual('./foo3'),
           foo: 'foo',
+          bar: jest.fn(),
         })
       );
 
       jest.mock('./foo4', async () => ({
           ...jest.requireActual('./foo4'),
           foo: 'foo',
+          bar: jest.fn(),
         })
       );
 
@@ -143,6 +147,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: vi.fn(),
         };
       })
 
@@ -152,6 +157,7 @@ const testCases: TestCase[] = [
         return {
           ...originalModule,
           foo: 'foo',
+          bar: vi.fn(),
         };
       })
 
@@ -159,12 +165,14 @@ const testCases: TestCase[] = [
           ...await vi.importActual('./foo2'),
           ...await vi.importActual('./foo3'),
           foo: 'foo',
+          bar: vi.fn(),
         })
       );
 
       vi.mock('./foo4', async () => ({
           ...await vi.importActual('./foo4'),
           foo: 'foo',
+          bar: vi.fn(),
         })
       );
 

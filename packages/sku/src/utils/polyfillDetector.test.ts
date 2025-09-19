@@ -21,7 +21,7 @@ describe('polyfillDetector', () => {
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js",
-            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
             "docsUrl": "https://babeljs.io/docs/en/babel-polyfill",
@@ -30,7 +30,7 @@ describe('polyfillDetector', () => {
           },
           {
             "polyfillName": "whatwg-fetch",
-            "reason": "Fetch API is natively supported in modern browsers",
+            "reason": "Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.",
           },
         ]
       `);
@@ -69,17 +69,17 @@ describe('polyfillDetector', () => {
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/stable",
-            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/es6",
-            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/features/promise",
-            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
         ]
       `);

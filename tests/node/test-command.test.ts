@@ -48,3 +48,18 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
 
   // TODO: Add tests that interact with watch mode
 });
+
+describe('vitest CJS interop', () => {
+  it('should run tests that import modules that require CJS interop', async () => {
+    const process = await sku('test', [
+      '--config=sku.config.vitest.ts',
+      'cjsInterop.test.ts',
+      '--run',
+    ]);
+
+    expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
+    await waitFor(() => {
+      expect(process.hasExit()).toMatchObject({ exitCode: 0 });
+    });
+  });
+});

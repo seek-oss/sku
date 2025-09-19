@@ -10,11 +10,8 @@ program
   .description(description)
   .version(version)
   .argument('[codemod]', 'Codemod slug to run.')
-  .argument(
-    '[source]',
-    'Path to source files or directory to transform including glob patterns.',
-  )
-  .usage('[codemod] [source] [options]')
+  .argument('[path]', 'Path to a directory to transform.')
+  .usage('[codemod] [path] [options]')
   .helpOption('-h, --help', 'Display this help message.')
   .option('-d, --dry', 'Dry run (no changes are made to files)')
   .option(

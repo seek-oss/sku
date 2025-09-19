@@ -40,6 +40,8 @@ const generateTypeScriptPaths = (
   return typeScriptPaths;
 };
 
+const defaultCjsInteropDependencies = ['@apollo/client', 'lodash'];
+
 interface SkuContextOptions {
   configPath?: string;
   port?: number;
@@ -289,6 +291,10 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
+    cjsInteropDependencies: [
+      ...defaultCjsInteropDependencies,
+      ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
+    ],
   };
 };
 

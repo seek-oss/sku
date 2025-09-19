@@ -22,8 +22,6 @@ await Promise.all(
       return;
     }
 
-    filesChanged++;
-
     if (options.print) {
       const diff = createTwoFilesPatch(
         'source',
@@ -41,6 +39,9 @@ await Promise.all(
 
     if (!options.dry) {
       await writeFile(filePath, output);
+      if (source !== output) {
+        filesChanged++;
+      }
     }
   }),
 );

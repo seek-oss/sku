@@ -81,7 +81,7 @@ However, **it is highly recommended to convert all code to ESM if possible**.
 After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed:
 
 ```bash
-npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off"
+npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off, import/extensions: off"
 ```
 
 The following sections detail changes that may be required.
@@ -165,13 +165,13 @@ To automate most of the migration process, a codemod is available.
 Note that additional changes may still be required after running this codemod.
 
 ```sh
-pnpm dlx codemod jest/vitest
+pnpm dlx @sku-lib/codemod jest-to-vitest .
 ```
 
 **Default watch mode**
 
-`vitest` defaults to watch mode when running tests locally.
-To run test without watch mode you can use `sku test --run`:
+`vitest` defaults to watch mode when running tests.
+To run tests without watch mode you can use the `--run` flag:
 
 ```json
 // package.json
@@ -181,6 +181,18 @@ To run test without watch mode you can use `sku test --run`:
     "test": "sku test --run"
   }
 }
+```
+
+Watch mode won't trigger in CI environments, so it's safe to omit the flag in your pipeline.
+
+**Testing Library Matchers**
+
+If your test setup file includes an import for `@testing-library/jest-dom`, you may need to change this to `@testing-library/jest-dom/vitest`:
+
+```diff
+// test-setup.ts
+- import '@testing-library/jest-dom';
++ import '@testing-library/jest-dom/vitest';
 ```
 
 **Globals disabled**
@@ -198,7 +210,7 @@ Be aware that since globals are disabled, some common libraries like `testing-li
 If using these libraries, you will need to add cleanup to your configured `setupTests` file.
 
 ```diff
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 
 + import { cleanup } from '@testing-library/react';
 + import { afterEach } from 'vitest';
@@ -253,7 +265,13 @@ A codemod is available to help with this migration:
 pnpm dlx @sku-lib/codemod transform-vite-loadable .
 ```
 
-The new `@sku-lib/vite/loadable` entrypoint relies on React's [`<Suspense />`][suspense] component to load a fallback state.
+You will also need to install a separate library that provides Vite-compatible loadable APIs:
+
+```bash
+pnpm add @sku-lib/vite/loadable
+```
+
+`@sku-lib/vite/loadable` relies on React's [`<Suspense />`][suspense] component to load a fallback state.
 You can wrap a `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you:
 
 ```tsx

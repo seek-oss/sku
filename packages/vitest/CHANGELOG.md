@@ -1,5 +1,17 @@
 # @sku-lib/vitest
 
+## 0.2.2
+
+### Patch Changes
+
+- Pass `cjsInteropDependencies` to `ssr.noExternal` to ensure CJS interop is applied to transitive dependencies ([#1399](https://github.com/seek-oss/sku/pull/1399))
+
+## 0.2.1
+
+### Patch Changes
+
+- Fix `watch` mode ([#1393](https://github.com/seek-oss/sku/pull/1393))
+
 ## 0.2.0
 
 ### Minor Changes

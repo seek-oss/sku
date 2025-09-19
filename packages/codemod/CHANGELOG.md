@@ -1,5 +1,15 @@
 # @sku-lib/codemod
 
+## 0.3.1
+
+### Patch Changes
+
+- Simplify jest mock type matching rule ([#1409](https://github.com/seek-oss/sku/pull/1409))
+
+- Simplify logic for making mock factories async within `jest.mock` calls ([#1406](https://github.com/seek-oss/sku/pull/1406))
+
+- Update existing `vitest` import if detected ([#1408](https://github.com/seek-oss/sku/pull/1408))
+
 ## 0.3.0
 
 ### Minor Changes

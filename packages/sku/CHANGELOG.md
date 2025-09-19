@@ -1,5 +1,17 @@
 # sku
 
+## 14.13.0
+
+### Minor Changes
+
+- Emit warnings when unnecessary polyfills are detected ([#1405](https://github.com/seek-oss/sku/pull/1405))
+
+  To help reduce bundle size, start and build commands now warn about polyfills that are no longer necessary in modern browsers.
+
+### Patch Changes
+
+- Replace `resolve-from` dependency with native `require.resolve` ([#1410](https://github.com/seek-oss/sku/pull/1410))
+
 ## 14.12.2
 
 ### Patch Changes

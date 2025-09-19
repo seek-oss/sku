@@ -1,15 +1,14 @@
 import assert from 'node:assert';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import resolveSync from 'resolve-from';
 
 import type { PackageJson } from 'type-fest';
 import debug from 'debug';
+import { createRequire } from 'node:module';
 
 const log = debug('sku:dependency-graph');
 
-export const resolveFrom = async (fromDirectory: string, moduleId: string) =>
-  resolveSync(fromDirectory, moduleId);
+const require = createRequire(import.meta.url);
 
 const ROOT = 'ROOT';
 
@@ -38,7 +37,9 @@ const analyseDependency = async (
   rootDir: string,
   depGraph: DepGraph,
 ) => {
-  const packageJsonPath = await resolveFrom(rootDir, `${dep}/package.json`);
+  const packageJsonPath = require.resolve(`${dep}/package.json`, {
+    paths: [rootDir],
+  });
   const packageJson = await loadPackage(packageJsonPath);
 
   const dependencies = Object.keys(packageJson.dependencies ?? {});

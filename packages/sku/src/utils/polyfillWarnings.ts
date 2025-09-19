@@ -5,9 +5,9 @@ import {
 } from './polyfillDetector.js';
 
 /**
- * Displays warnings for unnecessary polyfills in a clean, formatted way
+ * Validates and displays warnings for unnecessary polyfills in a clean, formatted way
  */
-export const displayPolyfillWarnings = (polyfills: string[]): void => {
+export const validatePolyfills = (polyfills: string[]): void => {
   const detectedPolyfills = detectUnnecessaryPolyfills(polyfills);
 
   if (detectedPolyfills.length === 0) {

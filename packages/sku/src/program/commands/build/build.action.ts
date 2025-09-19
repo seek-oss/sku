@@ -1,6 +1,6 @@
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { displayPolyfillWarnings } from '../../../utils/polyfillWarnings.js';
+import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 
 export const buildAction = async ({
   stats,
@@ -9,8 +9,7 @@ export const buildAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  // Check for unnecessary polyfills and display warnings
-  displayPolyfillWarnings(skuContext.polyfills);
+  validatePolyfills(skuContext.polyfills);
 
   if (skuContext.bundler === 'vite') {
     const { viteBuildHandler } = await import('./vite-build-handler.js');

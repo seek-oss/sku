@@ -16,7 +16,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
-import { displayPolyfillWarnings } from '../../../utils/polyfillWarnings.js';
+import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 
@@ -37,9 +37,8 @@ export const buildSsrAction = async ({
   const { port, cspEnabled } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
+  validatePolyfills(skuContext.polyfills);
 
-  // Check for unnecessary polyfills and display warnings
-  displayPolyfillWarnings(skuContext.polyfills);
   try {
     await runVocabCompile(skuContext);
     const [clientConfig, serverConfig] = makeWebpackConfig({

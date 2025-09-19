@@ -10,8 +10,10 @@
   "scripts": {
     "start": "sku start",
     "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
+    "start:bad": "sku start --config sku.config.bad.ts",
     "build": "sku build",
-    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts"
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts",
+    "build:bad": "sku build --config sku.config.bad.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

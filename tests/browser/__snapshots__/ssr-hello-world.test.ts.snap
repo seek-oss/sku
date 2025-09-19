@@ -225,33 +225,30 @@ exports[`ssr-hello-world > start > should start a development server 1`] = `
     >
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self' http://127.0.0.1:8100 https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
+      content="script-src 'self' https://some-cdn.com https://code.jquery.com 'sha256-WHrb12igXgDsoQpp4ijb4PgZBl4AXNijY5y96KkF2hY=' 'unsafe-eval';"
     >
     <link
       data-chunk="main"
       rel="stylesheet"
-      href="http://127.0.0.1:8100/main.css"
+      href="/main.css"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8100/runtime.js"
-      crossorigin="anonymous"
+      href="/runtime.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8100/2.js"
-      crossorigin="anonymous"
+      href="/2.js"
     >
     <link
       data-chunk="main"
       rel="preload"
       as="script"
-      href="http://127.0.0.1:8100/main.js"
-      crossorigin="anonymous"
+      href="/main.js"
     >
   </head>
   <body>
@@ -259,13 +256,13 @@ exports[`ssr-hello-world > start > should start a development server 1`] = `
       <link
         rel="preload"
         as="image"
-        href="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png"
+        href="/a85d2645cc4d80a20b5b.png"
       >
       <div class="styles_root__qixxyt0">
         <div class="styles_nested__qixxyt1">
           Hello World
         </div>
-        <img src="http://127.0.0.1:8100/a85d2645cc4d80a20b5b.png">
+        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
@@ -276,36 +273,31 @@ exports[`ssr-hello-world > start > should start a development server 1`] = `
     <script
       id="__LOADABLE_REQUIRED_CHUNKS__"
       type="application/json"
-      crossorigin="anonymous"
     >
       []
     </script>
     <script
       id="__LOADABLE_REQUIRED_CHUNKS___ext"
       type="application/json"
-      crossorigin="anonymous"
     >
       {"namedChunks":[]}
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8100/runtime.js"
-      crossorigin="anonymous"
+      src="/runtime.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8100/2.js"
-      crossorigin="anonymous"
+      src="/2.js"
     >
     </script>
     <script
       async
       data-chunk="main"
-      src="http://127.0.0.1:8100/main.js"
-      crossorigin="anonymous"
+      src="/main.js"
     >
     </script>
   </body>

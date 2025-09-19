@@ -30,7 +30,6 @@ const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const makeWebpackConfig = ({
-  clientPort,
   serverPort,
   isDevServer = false,
   hot = false,
@@ -61,17 +60,13 @@ const makeWebpackConfig = ({
   const internalInclude = [join(__dirname, '../entry'), ...paths.src];
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
-  const proto = httpsDevServer ? 'https' : 'http';
-  const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
 
   const serverEntry = require.resolve('../entry/server/index.js');
 
-  const prodPath = isStartScript ? '/' : paths.publicPath;
-
-  const publicPath = isDevServer ? clientServer : prodPath;
+  const publicPath = isStartScript ? '/' : paths.publicPath;
 
   const webpackStatsFilename = 'webpackStats.json';
 

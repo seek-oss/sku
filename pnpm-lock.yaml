@@ -1198,9 +1198,6 @@ importers:
       react-refresh:
         specifier: ^0.17.0
         version: 0.17.0
-      resolve-from:
-        specifier: ^5.0.0
-        version: 5.0.0
       rollup-plugin-visualizer:
         specifier: ^6.0.3
         version: 6.0.3(rollup@4.44.2)
@@ -17866,7 +17863,6 @@ snapshots:
       prompts: 2.4.2
       react: 18.3.1
       react-refresh: 0.17.0
-      resolve-from: 5.0.0
       rollup-plugin-visualizer: 6.0.3(rollup@4.44.2)
       selfsigned: 3.0.1
       semver: 7.7.2
@@ -18018,7 +18014,6 @@ snapshots:
       prompts: 2.4.2
       react: 19.1.1
       react-refresh: 0.17.0
-      resolve-from: 5.0.0
       rollup-plugin-visualizer: 6.0.3(rollup@4.44.2)
       selfsigned: 3.0.1
       semver: 7.7.2

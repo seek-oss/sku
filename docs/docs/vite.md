@@ -359,7 +359,8 @@ There are a few options to resolve this issue:
 - Upgrade the dependency to a version that supports ESM
 - Replace the dependency with an alternative that supports ESM
 
-Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code, increasing bundle size, but allowing vite to interop the CJS code.
+Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code.
+This may affect build time, but allows vite to interop the CJS code.
 _Use this option as a last resort_:
 
 ```typescript

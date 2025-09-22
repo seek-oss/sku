@@ -3,6 +3,7 @@ import {
   detectUnnecessaryPolyfills,
   type DetectedPolyfill,
 } from './polyfillDetector.js';
+import provider from '../services/telemetry/provider.js';
 
 /**
  * Validates and displays warnings for unnecessary polyfills in a clean, formatted way
@@ -13,6 +14,8 @@ export const validatePolyfills = (polyfills: string[]): void => {
   if (detectedPolyfills.length === 0) {
     return;
   }
+
+  provider.count('unnecessary_polyfill', undefined, detectedPolyfills.length);
 
   console.log();
   console.log(styleText('yellow', '⚠️  Unnecessary polyfills detected'));

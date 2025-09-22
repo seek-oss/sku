@@ -21,7 +21,8 @@ type MetricName =
   | 'start.webpack.rebuild'
   | 'certificate.generate'
   | 'duplicate_compile_package'
-  | 'peer_dep_version_mismatch';
+  | 'peer_dep_version_mismatch'
+  | 'unnecessary_polyfill';
 type TagMap = Record<string, string | number | boolean>;
 
 interface TelemetryProvider {

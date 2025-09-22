@@ -359,21 +359,22 @@ There are a few options to resolve this issue:
 - Upgrade the dependency to a version that supports ESM
 - Replace the dependency with an alternative that supports ESM
 
-Failing those solutions, `sku` provides a [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`][cjs interop] configuration option can be used as a last resort:
+Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code, increasing bundle size, but allowing vite to interop the CJS code.
+_Use this option as a last resort_:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [
+  compilePackages: [
     'someDependency'
   ],
   ...
 } satisfies SkuConfig;
 ```
 
-[cjs interop]: ./docs/configuration.md#__unsafe_experimental__cjsinteropdependencies
+[compilePackages]: ./docs/configuration.md#compilePackages
 
 ### Vite client types
 

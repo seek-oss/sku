@@ -360,7 +360,7 @@ There are a few options to resolve this issue:
 - Replace the dependency with an alternative that supports ESM
 
 Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code.
-This may affect build time, but allows vite to interop the CJS code.
+This may affect build time, but allows Vite to handle certain CJS dependencies without throwing the error above.
 _Use this option as a last resort_:
 
 ```typescript

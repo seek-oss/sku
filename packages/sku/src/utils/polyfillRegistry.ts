@@ -50,4 +50,12 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
     reason:
       'IntersectionObserver is well established and works across many devices and browser versions. It has been available across browsers since March 2019.',
   },
+  raf: {
+    reason:
+      'requestAnimationFrame is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+  },
+  'raf/polyfill': {
+    reason:
+      'requestAnimationFrame is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+  },
 } as const;

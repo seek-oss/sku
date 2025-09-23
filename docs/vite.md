@@ -84,7 +84,16 @@ After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://githu
 npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off, import/extensions: off"
 ```
 
-The following sections detail changes that may be required.
+Common files that may need to be updated include:
+
+- [Dev server middleware][devServerMiddleware]
+- [Polyfills][polyfills]
+- Configuration for external tooling
+
+The following sections detail changes that may be required to migrate CJS code to ESM.
+
+[devServerMiddleware]: ./docs/configuration.md#devservermiddleware
+[polyfills]: ./docs/configuration.md#polyfills
 
 #### ESM syntax
 
@@ -168,7 +177,7 @@ Note that additional changes may still be required after running this codemod.
 pnpm dlx @sku-lib/codemod jest-to-vitest .
 ```
 
-**Default watch mode**
+**Default Watch Mode**
 
 `vitest` defaults to watch mode when running tests.
 To run tests without watch mode you can use the `--run` flag:
@@ -185,6 +194,15 @@ To run tests without watch mode you can use the `--run` flag:
 
 Watch mode won't trigger in CI environments, so it's safe to omit the flag in your pipeline.
 
+**Code Coverage Dependencies**
+
+Vitest does not install code coverage dependencies by default.
+To collect code coverage, pass the `--coverage` flag to the `sku test` command and install the `@vitest/coverage-v8` package:
+
+```bash
+pnpm add -D @vitest/coverage-v8
+```
+
 **Testing Library Matchers**
 
 If your test setup file includes an import for `@testing-library/jest-dom`, you may need to change this to `@testing-library/jest-dom/vitest`:
@@ -195,7 +213,7 @@ If your test setup file includes an import for `@testing-library/jest-dom`, you 
 + import '@testing-library/jest-dom/vitest';
 ```
 
-**Globals disabled**
+**Globals Disabled**
 
 Jest enables global APIs such as `it`, `describe`, `beforeAll`, etc., by default.
 Vitest does not.
@@ -341,21 +359,23 @@ There are a few options to resolve this issue:
 - Upgrade the dependency to a version that supports ESM
 - Replace the dependency with an alternative that supports ESM
 
-Failing those solutions, `sku` provides a [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`][cjs interop] configuration option can be used as a last resort:
+Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code.
+This may affect build time, but allows Vite to handle certain CJS dependencies without throwing the error above.
+_Use this option as a last resort_:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [
+  compilePackages: [
     'someDependency'
   ],
   ...
 } satisfies SkuConfig;
 ```
 
-[cjs interop]: ./docs/configuration.md#__unsafe_experimental__cjsinteropdependencies
+[compilePackages]: ./docs/configuration.md#compilePackages
 
 ### Vite client types
 

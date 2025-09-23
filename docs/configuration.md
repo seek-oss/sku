@@ -44,7 +44,7 @@ Type: `Array<string>`
 
 Default: `[]`
 
-An array of `node_modules` to be compiled as if they were part of your source code. This allows the use of packages that make use of CSS Modules or TypeScript without having them be pre compiled. Ideally, this setting should only be used for internally controlled packages.
+An array of `node_modules` to be compiled as if they were part of your source code. This allows the use of packages that make use of CSS Modules or TypeScript without having them be pre compiled. Ideally, this setting should only be used for internally controlled packages. Many modules added to this array may affect build time.
 
 ## cspEnabled
 

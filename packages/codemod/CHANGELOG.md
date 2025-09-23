@@ -1,5 +1,11 @@
 # @sku-lib/codemod
 
+## 0.3.2
+
+### Patch Changes
+
+- Logging when a worker starts will now be a debug log ([#1414](https://github.com/seek-oss/sku/pull/1414))
+
 ## 0.3.1
 
 ### Patch Changes

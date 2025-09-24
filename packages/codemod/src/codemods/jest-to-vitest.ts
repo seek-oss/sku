@@ -52,7 +52,6 @@ export const transform = async (source: string) => {
       any: [{ kind: 'arrow_function' }, { kind: 'function_expression' }],
       not: { pattern: 'async $$$' },
       inside: {
-        kind: 'arguments',
         has: {
           pattern: 'jest.requireActual',
           kind: 'member_expression',

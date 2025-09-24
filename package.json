@@ -77,7 +77,7 @@
     "vitest-puppeteer": "^11.0.3"
   },
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=22.20.0"
   },
   "packageManager": "pnpm@10.17.1",
   "skuSkipPostInstall": true,

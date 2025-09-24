@@ -7,4 +7,4 @@
 'sku': major
 ---
 
-Minimum node version bumped to 22.19.0
+Minimum node version bumped to 22.20.0

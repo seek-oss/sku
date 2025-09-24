@@ -13,60 +13,60 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-  // {
-  //   filename: 'customNameFixture.tsx',
-  //   codemodName: 'transform-vite-loadable',
-  //   input: ts /* ts */ `
-  //     import customLoadable from "sku/@loadable/component";
+  {
+    filename: 'customNameFixture.tsx',
+    codemodName: 'transform-vite-loadable',
+    input: ts /* ts */ `
+      import customLoadable from "sku/@loadable/component";
 
-  //     const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
-  //   output: ts /* ts */ `
-  //     import { loadable as customLoadable } from '@sku-lib/vite/loadable';
+      const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
+    output: ts /* ts */ `
+      import { loadable as customLoadable } from '@sku-lib/vite/loadable';
 
-  //     const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
-  // },
-  // {
-  //   filename: 'loadableNameFixture.tsx',
-  //   codemodName: 'transform-vite-loadable',
-  //   input: ts /* ts */ `
-  //     import loadable from 'sku/@loadable/component';
+      const LoadableComponent = customLoadable(() => import('./MyComponent'));`,
+  },
+  {
+    filename: 'loadableNameFixture.tsx',
+    codemodName: 'transform-vite-loadable',
+    input: ts /* ts */ `
+      import loadable from 'sku/@loadable/component';
 
-  //     const LoadableComponent = loadable(() => import('./MyComponent'));`,
-  //   output: ts /* ts */ `
-  //     import { loadable } from '@sku-lib/vite/loadable';
+      const LoadableComponent = loadable(() => import('./MyComponent'));`,
+    output: ts /* ts */ `
+      import { loadable } from '@sku-lib/vite/loadable';
 
-  //     const LoadableComponent = loadable(() => import('./MyComponent'));`,
-  // },
-  // {
-  //   filename: 'onlyNamedImportFixture.tsx',
-  //   codemodName: 'transform-vite-loadable',
-  //   input: ts /* ts */ `
-  //     import { loadableReady } from 'sku/@loadable/component';
+      const LoadableComponent = loadable(() => import('./MyComponent'));`,
+  },
+  {
+    filename: 'onlyNamedImportFixture.tsx',
+    codemodName: 'transform-vite-loadable',
+    input: ts /* ts */ `
+      import { loadableReady } from 'sku/@loadable/component';
 
-  //     loadableReady();`,
-  //   output: ts /* ts */ `
-  //     import { loadableReady } from 'sku/@loadable/component';
+      loadableReady();`,
+    output: ts /* ts */ `
+      import { loadableReady } from 'sku/@loadable/component';
 
-  //     loadableReady();`,
-  // },
-  // {
-  //   filename: 'mixedImportFixture.tsx',
-  //   codemodName: 'transform-vite-loadable',
-  //   input: ts /* ts */ `
-  //     import { loadableReady } from 'sku/@loadable/component';
-  //     import loadable from 'sku/@loadable/component';
+      loadableReady();`,
+  },
+  {
+    filename: 'mixedImportFixture.tsx',
+    codemodName: 'transform-vite-loadable',
+    input: ts /* ts */ `
+      import { loadableReady } from 'sku/@loadable/component';
+      import loadable from 'sku/@loadable/component';
 
-  //     loadable();
+      loadable();
 
-  //     loadableReady();`,
-  //   output: ts /* ts */ `
-  //     import { loadableReady } from 'sku/@loadable/component';
-  //     import { loadable } from '@sku-lib/vite/loadable';
+      loadableReady();`,
+    output: ts /* ts */ `
+      import { loadableReady } from 'sku/@loadable/component';
+      import { loadable } from '@sku-lib/vite/loadable';
 
-  //     loadable();
+      loadable();
 
-  //     loadableReady();`,
-  // },
+      loadableReady();`,
+  },
   {
     filename: 'example.test.tsx',
     codemodName: 'jest-to-vitest',
@@ -218,64 +218,114 @@ const testCases: TestCase[] = [
         })
       })`,
   },
-  // {
-  //   filename: 'chainedTestMethods.test.ts',
-  //   codemodName: 'jest-to-vitest',
-  //   input: ts /* ts */ `
-  //     test.only("foo")
-  //     describe.skip.each("foo")
-  //     it.skip.each("foo")
-  //   `,
-  //   output: ts /* ts */ `
-  //     import { describe, it, test } from 'vitest';
-  //     test.only("foo")
-  //     describe.skip.each("foo")
-  //     it.skip.each("foo")
-  //   `,
-  // },
-  // {
-  //   filename: 'chainedTestMethods.test.ts',
-  //   codemodName: 'jest-to-vitest',
-  //   input: ts /* ts */ `
-  //     test.only("foo")
-  //     describe.skip.each("foo")
-  //     it.skip.each("foo")
+  {
+    filename: 'chainedTestMethods.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test } from 'vitest';
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
+    `,
+  },
+  {
+    filename: 'chainedTestMethods.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
 
-  //     test.failing("foo")
-  //     test.failing.each("foo")
-  //     it.skip.failing("foo")
-  //     it.only.failing("foo")
-  //   `,
-  //   output: ts /* ts */ `
-  //     import { describe, it, test } from 'vitest';
-  //     test.only("foo")
-  //     describe.skip.each("foo")
-  //     it.skip.each("foo")
+      test.failing("foo")
+      test.failing.each("foo")
+      it.skip.failing("foo")
+      it.only.failing("foo")
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test } from 'vitest';
+      test.only("foo")
+      describe.skip.each("foo")
+      it.skip.each("foo")
 
-  //     test.fails("foo")
-  //     test.fails.each("foo")
-  //     it.skip.fails("foo")
-  //     it.only.fails("foo")
-  //   `,
-  // },
-  // {
-  //   filename: 'existingVitestImport.test.ts',
-  //   codemodName: 'jest-to-vitest',
-  //   input: ts /* ts */ `
-  //     import { test, vi } from 'vitest';
-  //     test("foo")
-  //     it("foo")
-  //     describe("foo")
-  //     vi.mock('foo')
-  //   `,
-  //   output: ts /* ts */ `
-  //     import { describe, it, test, vi } from 'vitest';
-  //     test("foo")
-  //     it("foo")
-  //     describe("foo")
-  //     vi.mock('foo')
-  //   `,
-  // },
+      test.fails("foo")
+      test.fails.each("foo")
+      it.skip.fails("foo")
+      it.only.fails("foo")
+    `,
+  },
+  {
+    filename: 'existingVitestImport.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      import { test, vi } from 'vitest';
+      test("foo")
+      it("foo")
+      describe("foo")
+      vi.mock('foo')
+    `,
+    output: ts /* ts */ `
+      import { describe, it, test, vi } from 'vitest';
+      test("foo")
+      it("foo")
+      describe("foo")
+      vi.mock('foo')
+    `,
+  },
+  {
+    filename: 'mock-defined-outside.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      import { test, vi } from 'vitest';
+      const mock = () => ({
+        ...jest.requireActual('./foo2'),
+        ...jest.requireActual('./foo3'),
+        foo: 'foo',
+        bar: jest.fn(),
+        baz: () => {
+          return 'baz';
+        },
+        qux: async () => {
+          return 'qux';
+        },
+        wert: function () {
+          return 'wert';
+        },
+        pulp: async function () {
+          return 'pulp';
+        },
+      });
+
+      jest.mock('./foo2', mock);
+    `,
+    output: ts /* ts */ `
+    import { test, vi } from 'vitest';
+    const mock = async () => ({
+      ...await vi.importActual('./foo2'),
+      ...await vi.importActual('./foo3'),
+      foo: 'foo',
+      bar: vi.fn(),
+      baz: () => {
+        return 'baz';
+      },
+      qux: async () => {
+        return 'qux';
+      },
+      wert: function () {
+        return 'wert';
+      },
+      pulp: async function () {
+        return 'pulp';
+      },
+    });
+
+    vi.mock('./foo2', mock);
+    `,
+  },
 ];
 
 describe('sku codemods', () => {
@@ -303,7 +353,7 @@ describe('sku codemods', () => {
         expect(fileContent).toEqual(input);
       });
 
-      it.only('Should transform files and match expected output', async () => {
+      it('Should transform files and match expected output', async () => {
         const cli = await codemod(codemodName, ['.']);
 
         expect(await cli.findByText('Changed files')).toBeInTheConsole();

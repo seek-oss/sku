@@ -1,5 +1,253 @@
 # sku
 
+## 14.13.0
+
+### Minor Changes
+
+- Emit warnings when unnecessary polyfills are detected ([#1405](https://github.com/seek-oss/sku/pull/1405))
+
+  To help reduce bundle size, start and build commands now warn about polyfills that are no longer necessary in modern browsers.
+
+### Patch Changes
+
+- Replace `resolve-from` dependency with native `require.resolve` ([#1410](https://github.com/seek-oss/sku/pull/1410))
+
+## 14.12.2
+
+### Patch Changes
+
+- `vitest`: Correctly forward compile packages ([#1397](https://github.com/seek-oss/sku/pull/1397))
+
+## 14.12.1
+
+### Patch Changes
+
+- `vitest`: Correctly forward CJS interop dependencies ([#1395](https://github.com/seek-oss/sku/pull/1395))
+
+## 14.12.0
+
+### Minor Changes
+
+- **DEPRECATION**: `sku init` is now deprecated in favor of `@sku-lib/create` ([#1389](https://github.com/seek-oss/sku/pull/1389))
+
+  The `sku init` command now shows a deprecation warning directing users to use the new standalone `@sku-lib/create` package instead. This new package provides better UX with interactive prompts and maintains full parity with `sku init` functionality.
+
+  **Usage:**
+  - Old: `pnpm dlx sku init my-app`
+  - New: `pnpm dlx @sku-lib/create my-app`
+
+  The `sku init` command will continue to work but will be removed in an upcoming release.
+
+### Patch Changes
+
+- Move util functions from `sku` to `@sku-lib/utils` package to allow usage between packages. No functional changes. ([#1377](https://github.com/seek-oss/sku/pull/1377))
+
+- `deps`: Update `vite-plugin-cjs-interop` from `^2.2.0` to `^2.3.0` ([#1386](https://github.com/seek-oss/sku/pull/1386))
+
+- `test (vitest)`: Added missing `pathAlias` support for the vitest test runner ([#1381](https://github.com/seek-oss/sku/pull/1381))
+
+- Remove unused experimental `sku/vite/loadable` entrypoint ([#1382](https://github.com/seek-oss/sku/pull/1382))
+
+## 14.11.0
+
+### Minor Changes
+
+- Expose named `SkuWebpackPlugin` export from `sku/webpack-plugin`, deprecate default export ([#1374](https://github.com/seek-oss/sku/pull/1374))
+
+  **MIGRATION GUIDE**
+
+  ```diff
+  -import SkuWebpackPlugin from 'sku/webpack-plugin';
+  +import { SkuWebpackPlugin } from 'sku/webpack-plugin';
+  ```
+
+### Patch Changes
+
+- `start`: Shows Not Found (404) messaging instead of an error when routes are empty ([#1370](https://github.com/seek-oss/sku/pull/1370))
+
+- Fixes a bug where `sku`'s `postinstall` script would fail during `sku init` ([#1376](https://github.com/seek-oss/sku/pull/1376))
+
+## 14.10.1
+
+### Patch Changes
+
+- Optimize and improve error handling inside `postinstall` script ([#1362](https://github.com/seek-oss/sku/pull/1362))
+
+- Update dependencies: ([#1367](https://github.com/seek-oss/sku/pull/1367))
+  - `node-html-pareser`: `^6.1.1` -> `^7.0.1`
+  - `picomatch`: `^3.0.1` -> `^4.0.3`
+  - `rollup-plugin-visualizer`: `^5.12.0` -> `^6.0.3`
+  - `selfsigned`: `^2.1.1` -> `^3.0.1`
+- Remove warning when `.npmrc` file is detected ([#1364](https://github.com/seek-oss/sku/pull/1364))
+
+- Remove unused `sirv` dependency ([#1367](https://github.com/seek-oss/sku/pull/1367))
+
+## 14.10.0
+
+### Minor Changes
+
+- Add production babel plugins to Vite bundler for optimized builds. ([#1350](https://github.com/seek-oss/sku/pull/1350))
+  - `babel-plugin-transform-react-remove-prop-types` - Strips PropTypes from production builds
+  - `@babel/plugin-transform-react-constant-elements` - Hoists constant JSX elements
+
+### Patch Changes
+
+- `start(vite)`: Fix sporadic hydration issues ([#1356](https://github.com/seek-oss/sku/pull/1356))
+
+- Fix hot reload modules loading as ESM causing Reference Error for type: module packages ([#1361](https://github.com/seek-oss/sku/pull/1361))
+
+  When in type: module package hot-module files (`*.hot-update.js`) could be loaded as ESM.
+  Resulting in a reference error.
+
+  **Example Error:**
+
+  ```js
+  exports.id = 0;
+  ^
+  // ReferenceError: exports is not defined
+  ```
+
+  Hot reload modules are now exported as `*.hot-update.cjs` to ensure they are loaded as CJS.
+
+- Don't emit `.npmrc` validation warning on CI ([#1352](https://github.com/seek-oss/sku/pull/1352))
+
+  `.npmrc` files may be generated on CI, causing a false positive
+
+## 14.9.0
+
+### Minor Changes
+
+- This release improves support for the experimental Vite bundler, enabling full sku static-site config parity with the Webpack bundler. This is a big step forward for the Vite bundler, bringing us closer to taking it out of experimental mode. ([#1305](https://github.com/seek-oss/sku/pull/1305))
+
+  ### React 19 support
+
+  Sku now has React 19 support, while still supporting React 18. **React 19 contains breaking changes**. Please refer to the [React 19 migration guide](https://react.dev/blog/2024/04/25/react-19-upgrade-guide) for more information on how to upgrade your application.
+
+  ### Vite bundler improvements
+  - `config`: The vite bundler now has full support for all sku static-site config properties. (library mode and ssr mode is not supported.)
+  - `config`: Add `pathAliases` configuration for custom import paths with Vite bundler.
+  - `build`: Bundle analysis reports are now generated for Vite builds in the `/report/` directory. This matches the behaviour of the Webpack bundler.
+  - `start`: Inline Vanilla Extract CSS to fix flash of unstyled text.
+  - Explicitly deny commands unsupported by the vite bundler.
+
+    Static site generation is our primary focus for the Vite bundler at this time, so SSR commands (`start-ssr`, `build-ssr`) with the experimental Vite bundler will now throw an error. Disable the experimental vite mode to continue using sku in SSR apps.
+
+  - Vite v7 is now supported. Dropped support for v6.
+
+  ### `sku init`
+  - Dependencies will now correctly be pinned when running `sku init` in PNPM workspaces.
+  - Populate `packageManager` field in `package.json` if the new app is at the repo root.
+  - Install PNPM config dependency when PNPM is detected as the package manager.
+  - Specify an exact version of `sku` when installing dependencies.
+
+    This fixes an issue where running `sku init` with a snapshot version of `sku` would install the latest version of `sku` instead of the specified version.
+
+  ### `sku configure`
+  - Suggest recommended configuration changes for PNPM applications.
+
+    During configuration, `sku` will conditionally output warning logs that suggest users make the following changes:
+    - migrate `.npmrc` configuration to `pnpm-workspace.yaml`
+    - update PNPM to at least v10.13.0
+    - delete top-level `node_modules` and install the `pnpm-plugin-sku` [config dependency] via `pnpm add --config pnpm-plugin-sku && pnpm install`
+
+    Applying all of these changes will suppress these warnings.
+
+    The combination of these three changes will ensure PNPM hoists dependencies necessary for a smooth development experience across all IDEs, and runs necessary post-install scripts for some of `sku`'s dependencies. The [config dependency] in particular enables `sku` to effectively manage any future configuration changes that are necessary to ensure PNPM applications function correctly.
+
+    [config dependency]: https://pnpm.io/config-dependencies
+
+  ### General improvements
+  - `config`: The `SkuConfig` type has better type safety for webpack and vite options.
+
+    When using `__experimental__bundler: 'vite'`, the `SkuConfig` type will be more strict, and will not allow you to use any properties that are not supported by the Vite bundler.
+
+  - `start`: Don't emit telemetry when `OPEN_TAB=false` is set.
+  - `test`: Fixes a bug where project configuration and Vocab translation compilation were running twice instead of once.
+  - `deps`: Replace `didyoumean2` dependency with `fastest-levenshtein`
+
+### Patch Changes
+
+- Updated dependencies [[`98f12bc`](https://github.com/seek-oss/sku/commit/98f12bc6f5ab9bb0e732d8b14a564d4b15f557ae), [`3f6fe0c`](https://github.com/seek-oss/sku/commit/3f6fe0ccac359ccd6127ce77895a867e66099af3)]:
+  - @sku-lib/vite@0.1.2
+
+## 14.8.0
+
+### Minor Changes
+
+- deps: Jest 30 ([#1295](https://github.com/seek-oss/sku/pull/1295))
+
+  This major Jest release includes breaking changes. See the [Jest 30](https://jestjs.io/blog/2025/06/04/jest-30) announcement for more information.
+
+  Notable changes that may affect your tests:
+  - **JSDOM no longer allows mocking `window.location`**: If your tests mock `window.location`, or you use the [`jest-location-mock`](https://www.npmjs.com/package/jest-location-mock) package, you may need to [patch jsdom](https://jestjs.io/blog/2025/06/04/jest-30#known-issues). It's also worth considering whether you can avoid mocking `window.location` entirely by using `react-router`'s [`MemoryRouter`](https://reactrouter.com/6.30.1/routers/picking-a-router#testing) or [`createRoutesStub`](https://reactrouter.com/start/framework/testing).
+  - **Updated expect aliases**: Expect aliases have been removed which may affect your test assertions. Please run `sku format` to update your test files automatically if you are still using these old aliases.
+  - **Updated snapshot printing**: Jest have updated the way snapshots are printed, which may require you to update your snapshot tests.
+
+  In this release, we have enabled the [global cleanup](https://jestjs.io/blog/2025/06/04/jest-30#globals-cleanup-between-test-files) feature by default. This automatically cleans up global state between test files, helping to prevent memory leaks and ensure test isolation.
+
+  If you need to revert to the previous behavior, you can configure the `globalsCleanup` option via `dangerouslySetJestConfig` in your `sku.config.ts` file:
+
+  ```ts
+  export default {
+    dangerouslySetJestConfig: (config) => ({
+      ...config,
+      testEnvironmentOptions: {
+        globalsCleanup: 'soft', // Jest default or `'off'` to disable completely
+      },
+    }),
+  };
+  ```
+
+### Patch Changes
+
+- Modify `webpack-dev-server` dependency range to `<=5.2.0` ([#1293](https://github.com/seek-oss/sku/pull/1293))
+
+  [`webpack-dev-server@5.2.1`][wds release] introduced a CORS change that can break local development in some cases. Although 5.2.2 allegedly addresses this issue, it did not fix the issue in `sku`. Until a proper fix is available, we are pinning the version to `<=5.2.0` to prevent the dependency from being updated during lockfile maintenance.
+
+  [wds release]: https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.1
+
+- Update `prettier` dependency to `~3.6.2` ([#1297](https://github.com/seek-oss/sku/pull/1297))
+
+## 14.7.0
+
+### Minor Changes
+
+- Add `^9.0.0` to `@storybook/react-webpack5` optional peer dependency to support Storybook v9 ([#1294](https://github.com/seek-oss/sku/pull/1294))
+
+  Storybook v9 is now available. This release contains breaking changes. Consumers that use Storybook should ensure they read [the v9 migration guide].
+
+  [the v9 migration guide]: https://storybook.js.org/docs/migration-guide
+
+### Patch Changes
+
+- Updated dependencies [[`d76bd1c`](https://github.com/seek-oss/sku/commit/d76bd1c2a6eb3e1e5ba9be3714f0fa00e4656c0a)]:
+  - @sku-lib/vite@0.1.1
+
+## 14.6.0
+
+### Minor Changes
+
+- - Change `__unsafeDangerouslySetViteConfig` to `__UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig` to align with the existing naming convention. ([#1286](https://github.com/seek-oss/sku/pull/1286))
+  - Add `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` to the `SkuConfig` type. This is an array of cjs import paths that have both a default and named exports. This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+### Patch Changes
+
+- Update `@vanilla-extract/vite-plugin` dependency to `^5.0.7` to a fix a bug causing the static render to fail when executing files with singleton variables such as React context ([#1289](https://github.com/seek-oss/sku/pull/1289))
+
+- `start`: Properly reuses Chromium tabs when starting a server. ([#1288](https://github.com/seek-oss/sku/pull/1288))
+
+  Fixes an issue of always opening a new tab in Chromium browsers when one could be reused.
+
+## 14.5.0
+
+### Minor Changes
+
+- `vite (start)`: `initialPath` will now be added to the url output when starting a server ([#1280](https://github.com/seek-oss/sku/pull/1280))
+
+### Patch Changes
+
+- Declare `@sku-lib/vite` as a dependency instead of a dev dependency ([#1283](https://github.com/seek-oss/sku/pull/1283))
+
 ## 14.4.0
 
 ### Minor Changes
@@ -110,7 +358,6 @@ Loadable
 - `sku init`: Update template to use a named export for `App` ([#1262](https://github.com/seek-oss/sku/pull/1262))
 
 - `deps`: Update `webpack`-related dependencies ([#1259](https://github.com/seek-oss/sku/pull/1259))
-
   - `@pmmmwh/react-refresh-webpack-plugin`: `^0.5.15` -> `^0.6.0`
   - `babel-loader`: `^9.1.2` -> `^10.0.0`
   - `css-loader`: `^6.7.1` -> `^7.1.2`
@@ -273,7 +520,6 @@ Loadable
   The following option flags are now available in their respective scope
 
   #### Global options
-
   - the `-e, --environment` option
   - the `-c, --config` option
   - the `-d, --debug` option
@@ -281,7 +527,6 @@ Loadable
   - **new:** the `-v, --version` option
 
   #### Scoped options
-
   - the `build`, `build-ssr`, `start`, and `start-ssr` commands have the following options
     - `-s, --stats` option
   - the `serve` command now has the following options
@@ -539,7 +784,6 @@ Loadable
 
   `start` and `start-ssr` scripts would previously only reuse an existing tab in Google Chrome.
   This change adds support for the following Chromium browsers:
-
   - Google Chrome,
   - Google Chrome Canary,
   - Microsoft Edge,
@@ -549,7 +793,6 @@ Loadable
   - Arc.
 
   A tab will be reused if:
-
   - The OS is macOS,
   - The user's default browser is a supported Chromium browser,
   - The user has an existing tab open in a supported Chromium browser with the exact same URL.
@@ -665,7 +908,6 @@ Loadable
   #### Update your `sku` config
 
   The following `sku` configuration options have been removed:
-
   - `storybookAddons`
   - `storybookPort`
   - `storybookStoryStore`
@@ -1585,7 +1827,6 @@ Loadable
   We've chosen to support Node.js versions from v18.12 onwards as this version was the first [Node.js 18 LTS release][node 18.12 release].
 
   Consider upgrading the Node.js version for your project across:
-
   - `.nvmrc`
   - `package.json#/engines/node`
   - `@types/node` package version
@@ -1809,7 +2050,6 @@ Loadable
 
   **NOTE**: These settings disable critical functionality of sku, so you likely
   don't want to use them unless you know what you're doing
-
   - `skuSkipConfigure`: Skip generation of config files. E.g. .prettierrc, tsconfig.json, etc.
   - `skuSkipValidatePeerDeps`: Skip checking for multiple copies of the same package. You likely want to try and fix the warnings found by this check rather than disabling it.
 
@@ -1830,7 +2070,6 @@ Loadable
 - **deps**: `@pmmmwh/react-refresh-webpack-plugin@0.5.8` ([#716](https://github.com/seek-oss/sku/pull/716))
 
 - Update to eslint-config-seek v10.1.1. Read the following release notes for all the changes: ([#718](https://github.com/seek-oss/sku/pull/718))
-
   - [v10.1.0] brings improved TypeScript support
   - [v10.1.1] re-enables the `no-undef` rule for JavaScript files
 
@@ -1850,7 +2089,6 @@ Loadable
 - Update to eslint-config-seek v10 ([#709](https://github.com/seek-oss/sku/pull/709))
 
   This update involves a few major version jumps, so be sure to read the following release notes for all the breaking changes:
-
   - [v8.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v8.0.0)
   - [v9.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v9.0.0)
   - [v10.0.0](https://github.com/seek-oss/eslint-config-seek/releases/tag/v10.0.0)
@@ -1860,7 +2098,6 @@ Loadable
 - Upgrade from jest v27 to v29 ([#709](https://github.com/seek-oss/sku/pull/709))
 
   Please take a look at the following upgrade guides as there may be breaking changes that affect your tests:
-
   - [v27 to v28 upgrade guide](https://jestjs.io/docs/28.x/upgrading-to-jest28)
   - [v28 to v29 upgrade guide](https://jestjs.io/docs/upgrading-to-jest29)
 
@@ -2228,7 +2465,6 @@ Loadable
   While there is no breaking change from a sku perspective, there are many underlying changes that may require attention.
 
   Things to validate before merging:
-
   - If you use `dangerouslySetWebpackConfig`, check it's working against webpack 5
   - Static assets are working correctly (e.g. images, fonts, etc)
   - Both start and build scripts are outputting a working application
@@ -2531,7 +2767,6 @@ Loadable
 - Add multi-language support for server rendered applications ([#556](https://github.com/seek-oss/sku/pull/556))
 
 - Upgrade Vocab to v0.0.8 with new .vocab folder ([#558](https://github.com/seek-oss/sku/pull/558))
-
   - `useTranslation` renamed to `useTranslations`
   - Support for server-rendered apps with new `addLanguageChunk` render parameter
   - Support for custom format locales in `<VocabProvider>`
@@ -2678,7 +2913,6 @@ Loadable
   **React fast-refresh**
 
   For fast-refresh to work there are a few gotchas to watch out. For components to succesfully hot reload, they must:
-
   - Have a display name. Avoid using `export default` with anonymous functions.
   - The file must only export React components (excluding types as they are not runtime exports)
 
@@ -2816,7 +3050,6 @@ Loadable
 - Add sku serve command ([#487](https://github.com/seek-oss/sku/pull/487))
 
   The `sku serve` command adds the abilty to view the output of `sku build` without deploying to an environment. This is helpful for:
-
   - Debugging production build only issues
   - Running integration tests
   - Viewing the app on legacy browsers (that require `sku build` only features)

@@ -1,3 +1,11 @@
+import {
+  isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
+  rootDir,
+  getPathFromCwd,
+  writeFileToCWD,
+} from '@sku-lib/utils';
+
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -6,21 +14,22 @@ import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
-import prettierConfig from '@/services/prettier/config/prettierConfig.js';
-import createTSConfig from '@/services/typescript/config/tsconfig.js';
-import { bundleReportFolder } from '@/services/webpack/config/plugins/bundleAnalyzer.js';
+import prettierConfig from '../config/prettier.js';
+import createTSConfig from '../services/typescript/tsconfig.js';
+import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,
   migrateEslintignore,
   cleanUpOldEslintFiles,
   addEslintIgnoreToSkuConfig,
-} from '@/services/eslint/eslintMigration.js';
+} from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
-import { getPathFromCwd, writeFileToCWD } from '@/utils/cwd.js';
 
-import { hasErrorMessage } from '@/utils/error-guards.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { hasErrorMessage } from './error-guards.js';
+import type { SkuContext } from '../context/createSkuContext.js';
+import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
+import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 
 const coverageFolder = 'coverage';
 
@@ -155,4 +164,19 @@ export default async (skuContext: SkuContext) => {
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
+
+  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's package manager
+  if (rootDir && isAtLeastPnpmV10()) {
+    const pnpmConfigDependencies = await getPnpmConfigDependencies();
+
+    const hasRecommendedPnpmVersionInstalled =
+      isAtLeastRecommendedPnpmVersion();
+    const pnpmPluginSkuInstalled =
+      pnpmConfigDependencies.includes('pnpm-plugin-sku');
+
+    await validatePnpmConfig({
+      hasRecommendedPnpmVersionInstalled,
+      pnpmPluginSkuInstalled,
+    });
+  }
 };

@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { statsOption } from '../../options/stats/stats.option.js';
-import { convertLoadableOption } from '@/program/options/convertLoadable/convertLoadable.option.js';
+import { convertLoadableOption } from '../../options/convertLoadable/convertLoadable.option.js';
 
 export const buildCommand = new Command('build')
   .description(

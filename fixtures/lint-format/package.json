@@ -2,7 +2,8 @@
   "name": "@sku-fixtures/lint-format",
   "private": true,
   "devDependencies": {
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "@types/jest": "^30.0.0"
   },
   "scripts": {
     "format": "sku format"

@@ -1,5 +1,5 @@
-export default (app) => {
-  app.middlewares.use('/test-middleware', (req, res, next) => {
+export default (server) => {
+  server.use('/test-middleware', (req, res, next) => {
     if (req.method !== 'GET') {
       next();
     }

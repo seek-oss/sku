@@ -1,4 +1,4 @@
-import { getAddCommand, type GetAddCommandOptions } from './packageManager.js';
+import { getAddCommand, type GetAddCommandOptions } from '@sku-lib/utils';
 
 import { spawn } from 'cross-spawn';
 

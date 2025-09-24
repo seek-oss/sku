@@ -28,9 +28,9 @@ import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 import debug from 'debug';
 
 import prettier from 'prettier';
-import prettierConfig from '../services/prettier/config/prettierConfig.js';
+import prettierConfig from '../config/prettier.js';
 
-import type { SkuConfig } from '../types/types.js';
+import type { SkuConfig, CompleteSkuConfig } from '../types/types.js';
 
 type ProxifiedSkuConfig = ProxifiedObject<SkuConfig>;
 type EsmConfig = { type: 'esm'; configAst: ProxifiedSkuConfig };
@@ -146,12 +146,12 @@ export class SkuConfigUpdater {
    *
    * This method does not write the changes to the file system. Use `commitConfig` to do that.
    */
-  upsertConfig<T extends keyof SkuConfig>({
+  upsertConfig<T extends keyof CompleteSkuConfig>({
     property,
     value,
   }: {
     property: T;
-    value: SkuConfig[T];
+    value: CompleteSkuConfig[T];
   }) {
     if (this.#config.type === 'cjs') {
       const propertyToUpdate = this.#config.configAst.properties.find(

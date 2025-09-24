@@ -1,35 +1,42 @@
-import { createVitest, parseCLI } from 'vitest/node';
+import { startVitest, parseCLI } from 'vitest/node';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+type SkuContext = {
+  cjsInteropDependencies: string[];
+  compilePackages: string[];
+};
 
 export const runVitest = async ({
   setupFiles = [],
   args,
+  skuContext = { cjsInteropDependencies: [], compilePackages: [] },
 }: {
   setupFiles: string | string[];
   args: string[];
+  skuContext?: SkuContext;
 }) => {
   const results = parseCLI(['vitest', ...args]);
+  const { cjsInteropDependencies, compilePackages } = skuContext;
 
-  const vitest = await createVitest(
+  const ctx = await startVitest(
     'test',
+    results.filter,
     { config: false, ...results.options },
     {
-      plugins: [vanillaExtractPlugin()],
+      plugins: [vanillaExtractPlugin(), tsconfigPaths()],
       test: {
-        watch: false,
         environment: 'jsdom',
-        globals: true,
         setupFiles,
-        include: [
-          '**/__tests__/**/*.test.{js,jsx,ts,tsx}',
-          '**/?(*.)+(spec|test).{js,jsx,ts,tsx}',
-        ],
+      },
+      ssr: {
+        noExternal: [...compilePackages, ...cjsInteropDependencies],
       },
     },
     {},
   );
 
-  await vitest.start(results.filter);
-
-  process.exit(0);
+  if (!ctx.shouldKeepServer()) {
+    await ctx.exit();
+  }
 };

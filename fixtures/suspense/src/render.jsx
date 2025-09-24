@@ -28,6 +28,7 @@ export default {
 
     // Set deterministic future dataUpdatedAt for snapshot consistency
     dehydratedState.queries[0].state.dataUpdatedAt = 4323283200000;
+    dehydratedState.queries[0].dehydratedAt = 4323283200000;
 
     return {
       appHtml,
@@ -41,7 +42,7 @@ export default {
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => {
-    return html/* html */ `
+    return html /* html */ `
       <!DOCTYPE html>
       <html>
         <head>

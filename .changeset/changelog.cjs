@@ -7,7 +7,9 @@ const repo = 'seek-oss/sku';
 
 const changelogFunctions = {
   getDependencyReleaseLine: async (changesets, dependenciesUpdated) => {
-    if (dependenciesUpdated.length === 0) return '';
+    if (dependenciesUpdated.length === 0) {
+      return '';
+    }
 
     const changesetLink = `- Updated dependencies [${(
       await Promise.all(

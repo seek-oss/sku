@@ -1,0 +1,254 @@
+import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
+import {
+  getStoryPage,
+  getTextContentFromFrameOrPage,
+} from '@sku-private/test-utils';
+
+import type { Page } from 'puppeteer';
+import {
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+  waitFor,
+} from '@sku-private/testing-library';
+
+// NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
+// font size of an element
+
+const storybookStartedRegex =
+  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+
+const timeout = 150_000;
+
+vi.setConfig({
+  hookTimeout: timeout + 1000,
+  testTimeout: timeout + 1000,
+});
+
+const { exec } = scopeToFixture('storybook-config');
+describe('storybook-config', () => {
+  describe('start', () => {
+    const port = 8089;
+    const storybookBaseUrl = `http://localhost:${port}`;
+
+    const middlewareUrl = `${storybookBaseUrl}/test-middleware`;
+    const storyIframePath =
+      '/iframe.html?viewMode=story&id=testcomponent--default';
+    const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
+
+    let storyPage: Page;
+
+    beforeAll(async () => {
+      const storybook = await exec('pnpm', [
+        'storybook',
+        'dev',
+        '--ci',
+        '--exact-port',
+        '--port',
+        port.toString(),
+      ]);
+      expect(
+        await storybook.findByText(storybookStartedRegex),
+      ).toBeInTheConsole();
+
+      storyPage = await getStoryPage(storyIframeUrl);
+    });
+
+    afterAll(async () => {
+      await storyPage?.close();
+      await cleanup();
+    });
+
+    it('should start sku dev middleware if configured', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(middlewareUrl);
+
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe('OK');
+    });
+
+    it('should render decorators defined in the storybook preview file', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-decorator]',
+      );
+
+      expect(text).toEqual('Braid Text decorator');
+      expect(fontSize).toEqual('16px');
+    });
+
+    it('should render a component inside a story', async ({ task }) => {
+      skipCleanup(task.id);
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-text]',
+      );
+
+      expect(text).toEqual('Hello world');
+      expect(fontSize).toEqual('16px');
+    });
+
+    it('should render vanilla styles', async ({ task }) => {
+      skipCleanup(task.id);
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-vanilla]',
+      );
+
+      expect(text).toEqual('32px vanilla text');
+      expect(fontSize).toEqual('32px');
+    });
+  });
+
+  describe('start docs page', () => {
+    it('should render a ".mdx" file', async () => {
+      const port = 8088;
+      const storybook = await exec('pnpm', [
+        'storybook',
+        'dev',
+        '--ci',
+        '--exact-port',
+        '--port',
+        port.toString(),
+      ]);
+      expect(
+        await storybook.findByText(storybookStartedRegex, {}, { timeout }),
+      ).toBeInTheConsole();
+
+      const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
+      const docsPage = await getStoryPage(docsIframeUrl);
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test',
+        );
+
+        expect(text).toEqual('Docs Test');
+        expect(fontSize).toEqual('32px');
+      }
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test + p',
+        );
+
+        expect(text).toEqual('I am a test document.');
+        expect(fontSize).toEqual('14px');
+      }
+
+      await docsPage?.close();
+    });
+  });
+
+  describe('build-storybook', () => {
+    const assetServerPort = 4232;
+    const assetServerUrl = `http://localhost:${assetServerPort}`;
+
+    const storyIframePath =
+      '/iframe.html?viewMode=story&id=testcomponent--default';
+    const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
+
+    let storyPage: Page;
+
+    beforeAll(async () => {
+      const storybook = await exec('pnpm', ['storybook', 'build']);
+
+      await waitFor(
+        async () => {
+          expect(storybook.hasExit()).toMatchObject({
+            exitCode: 0,
+          });
+        },
+        {
+          timeout,
+        },
+      );
+
+      const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
+      expect(
+        await assetServer.findByText('serving storybook-static'),
+      ).toBeInTheConsole();
+
+      storyPage = await getStoryPage(storyIframeUrl);
+    });
+
+    afterAll(async () => {
+      await storyPage?.close();
+      await cleanup();
+    });
+
+    it('should render decorators defined in the storybook preview file', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-decorator]',
+      );
+
+      expect(text).toEqual('Braid Text decorator');
+      expect(fontSize).toEqual('16px');
+    });
+
+    it('should render a component inside a story', async ({ task }) => {
+      skipCleanup(task.id);
+
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-text]',
+      );
+
+      expect(text).toEqual('Hello world');
+      expect(fontSize).toEqual('16px');
+    });
+
+    it('should render vanilla styles', async ({ task }) => {
+      skipCleanup(task.id);
+
+      const { text, fontSize } = await getTextContentFromFrameOrPage(
+        storyPage,
+        '[data-automation-vanilla]',
+      );
+
+      expect(text).toEqual('32px vanilla text');
+      expect(fontSize).toEqual('32px');
+    });
+
+    it('should render a ".mdx" file', async ({ task }) => {
+      skipCleanup(task.id);
+
+      const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
+      const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
+
+      const docsPage = await getStoryPage(docsIframeUrl);
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test',
+        );
+
+        expect(text).toEqual('Docs Test');
+        expect(fontSize).toEqual('32px');
+      }
+
+      {
+        const { text, fontSize } = await getTextContentFromFrameOrPage(
+          docsPage,
+          '#docs-test + p',
+        );
+
+        expect(text).toEqual('I am a test document.');
+        expect(fontSize).toEqual('14px');
+      }
+
+      await docsPage.close();
+    });
+  });
+});

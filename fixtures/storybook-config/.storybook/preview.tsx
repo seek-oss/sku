@@ -3,7 +3,7 @@ import 'braid-design-system/reset';
 import { BraidProvider, Text } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
 
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-webpack5';
 
 export default {
   decorators: [

@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite';
 import js from 'dedent';
-import provider from '@/services/telemetry/index.js';
-import { metricsMeasurers } from '@/services/telemetry/metricsMeasurers.js';
+import provider from '../../telemetry/index.js';
+import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 
 const initialPageLoadEventName = 'sku:initialPageLoad' as const;
 
@@ -28,7 +28,10 @@ export const startTelemetryPlugin = ({
   },
   configureServer(server) {
     server.ws.on(initialPageLoadEventName, () => {
-      if (metricsMeasurers.initialPageLoad.isInitialPageLoad) {
+      if (
+        metricsMeasurers.initialPageLoad.isInitialPageLoad &&
+        metricsMeasurers.initialPageLoad.openTab
+      ) {
         const { duration: skuStartDuration } =
           metricsMeasurers.skuStart.measure();
 
@@ -46,7 +49,7 @@ export const startTelemetryPlugin = ({
   },
 });
 
-const skuPageLoadTelemetryClient = js/* js */ `
+const skuPageLoadTelemetryClient = js /* js */ `
   addEventListener("load", () => {
     if (import.meta.hot) {
       import.meta.hot.send('${initialPageLoadEventName}');

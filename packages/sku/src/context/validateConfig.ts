@@ -1,12 +1,12 @@
 import browserslist from 'browserslist';
 import chalk from 'chalk';
-import didYouMean from 'didyoumean2';
+import { closest } from 'fastest-levenshtein';
 
 import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import type { SkuConfig } from '@/types/types.js';
-import { hasErrorMessage } from '@/utils/error-guards.js';
+import type { SkuConfig } from '../types/types.js';
+import { hasErrorMessage } from '../utils/error-guards.js';
 import type { ValidationError } from 'fastest-validator';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
@@ -27,7 +27,7 @@ export default (skuConfig: SkuConfig) => {
     .filter((key) => !availableConfigKeys.includes(key))
     .forEach((key) => {
       const unknownMessage = `Unknown key '${chalk.bold(key)}'.`;
-      const suggestedKey = didYouMean(key, availableConfigKeys);
+      const suggestedKey = closest(key, availableConfigKeys);
       const suggestedMessage = suggestedKey
         ? ` Did you mean '${chalk.bold(suggestedKey)}'?`
         : '';

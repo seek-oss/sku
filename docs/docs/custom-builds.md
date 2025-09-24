@@ -3,7 +3,7 @@
 If your project has a custom [webpack](https://webpack.js.org) build, you can use the `SkuWebpackPlugin` in your webpack config as part of your plugins array:
 
 ```js
-import SkuWebpackPlugin from 'sku/webpack-plugin';
+import { SkuWebpackPlugin } from 'sku/webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default {

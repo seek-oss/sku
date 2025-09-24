@@ -1,0 +1,8 @@
+{
+  "name": "@sku-private/sku-create",
+  "private": true,
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

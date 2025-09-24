@@ -1,3 +1,5 @@
+import { getPathFromCwd } from '@sku-lib/utils';
+
 import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 import { performance } from 'node:perf_hooks';
 import type { PathLike } from 'node:fs';
@@ -5,10 +7,9 @@ import type { PathLike } from 'node:fs';
 import { generate } from 'selfsigned';
 import chalk from 'chalk';
 
-import provider from '@/services/telemetry/index.js';
-import { getPathFromCwd } from '@/utils/cwd.js';
-import exists from '@/utils/exists.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import provider from '../services/telemetry/index.js';
+import exists from './exists.js';
+import type { SkuContext } from '../context/createSkuContext.js';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 

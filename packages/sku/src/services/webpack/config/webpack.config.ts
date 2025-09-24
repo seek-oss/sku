@@ -8,20 +8,21 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
-import SkuWebpackPlugin from './plugins/sku-webpack-plugin/index.js';
-import MetricsPlugin from './plugins/metrics-plugin/index.js';
+import { SkuWebpackPlugin } from './plugins/skuWebpackPlugin.js';
+import { MetricsPlugin } from './plugins/metricsPlugin.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '@/utils/cwd.js';
+import { cwd } from '@sku-lib/utils';
 
-import { getVocabConfig } from '@/services/vocab/config/vocab.js';
+import { getVocabConfig } from '../../vocab/config.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';
 import getCacheSettings from './cache.js';
 import modules from './resolveModules.js';
-import targets from '@/config/targets.json' with { type: 'json' };
+import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
+import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
 
 const require = createRequire(import.meta.url);
 
@@ -62,10 +63,7 @@ const makeWebpackConfig = ({
 
   const vocabOptions = getVocabConfig(skuContext);
 
-  const resolvedPolyfills =
-    polyfills?.map((polyfill) =>
-      require.resolve(polyfill, { paths: [cwd()] }),
-    ) || [];
+  const resolvedPolyfills = resolvePolyfills(polyfills);
 
   const skuClientEntry = require.resolve('../entry/client/index.js');
 
@@ -164,7 +162,9 @@ const makeWebpackConfig = ({
         emitOnErrors: isProductionBuild,
       },
       resolve: {
-        alias: { __sku_alias__clientEntry: paths.clientEntry },
+        alias: {
+          __sku_alias__clientEntry: paths.clientEntry,
+        },
         modules,
       },
       module: {
@@ -297,7 +297,9 @@ const makeWebpackConfig = ({
         nodeEnv: process.env.NODE_ENV,
       },
       resolve: {
-        alias: { __sku_alias__renderEntry: paths.renderEntry },
+        alias: {
+          __sku_alias__renderEntry: paths.renderEntry,
+        },
         modules,
       },
       module: {

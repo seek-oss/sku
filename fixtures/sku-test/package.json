@@ -3,8 +3,17 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@vitest/coverage-v8": "^3.2.1",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "@types/jest": "^30.0.0",
+    "vitest": "catalog:",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "catalog:"
+  },
+  "dependencies": {
+    "@sku-private/3rd-party-cjs-interop-dep": "workspace:*",
+    "@apollo/client": "^3.14.0",
+    "react": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

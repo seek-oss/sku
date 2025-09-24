@@ -1,14 +1,14 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '@/types/types.d.ts';
-import { getPathFromCwd } from '@/utils/cwd.js';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.d.ts';
+import { getPathFromCwd } from '@sku-lib/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
-import isCompilePackage from '@/utils/isCompilePackage.js';
+import isCompilePackage from '../utils/isCompilePackage.js';
 import chalk from 'chalk';
 import defaultCompilePackages from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import _debug from 'debug';
-import { resolveAppSkuConfigPath } from '@/context/configPath.js';
+import { resolveAppSkuConfigPath } from './configPath.js';
 
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -19,6 +19,28 @@ const createJiti = require('jiti');
 const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
+
+const generateTypeScriptPaths = (
+  pathAliases?: Record<string, string>,
+): Record<string, string[]> => {
+  const typeScriptPaths: Record<string, string[]> = {};
+
+  // Always include automatic src/* alias, then merge with user-provided aliases
+  const mergedAliases = {
+    'src/*': './src/*',
+    ...pathAliases,
+  };
+
+  for (const [alias, destination] of Object.entries(mergedAliases) as Array<
+    [string, string]
+  >) {
+    typeScriptPaths[alias] = [destination];
+  }
+
+  return typeScriptPaths;
+};
+
+const defaultCjsInteropDependencies = ['@apollo/client', 'lodash'];
 
 interface SkuContextOptions {
   configPath?: string;
@@ -95,6 +117,25 @@ export const createSkuContext = ({
       ),
     );
     process.exit(1);
+  }
+
+  // Validate pathAliases destinations don't contain node_modules
+  if (
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' &&
+    skuConfig.pathAliases
+  ) {
+    for (const [alias, destination] of Object.entries(
+      skuConfig.pathAliases,
+    ) as Array<[string, string]>) {
+      if (destination.includes('node_modules')) {
+        console.log(
+          chalk.red(
+            `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
+          ),
+        );
+        process.exit(1);
+      }
+    }
   }
 
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
@@ -208,6 +249,12 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation!;
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
+  const tsPaths =
+    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' ||
+    skuConfig.__UNSAFE_EXPERIMENTAL__testRunner === 'vitest'
+      ? generateTypeScriptPaths(skuConfig.pathAliases)
+      : undefined;
+
   return {
     bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
     testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
@@ -226,6 +273,7 @@ export const createSkuContext = ({
     eslintDecorator,
     tsconfigDecorator,
     eslintIgnore,
+    tsPaths,
     routes,
     environments,
     supportedBrowsers,
@@ -243,6 +291,10 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
+    cjsInteropDependencies: [
+      ...defaultCjsInteropDependencies,
+      ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
+    ],
   };
 };
 

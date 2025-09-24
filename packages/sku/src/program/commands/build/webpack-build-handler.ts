@@ -8,15 +8,18 @@ import {
   cleanTargetDirectory,
   ensureTargetDirectory,
   cleanStaticRenderEntry,
-} from '@/utils/buildFileUtils.js';
-import { run } from '@/services/webpack/runWebpack.js';
-import createHtmlRenderPlugin from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import makeWebpackConfig from '@/services/webpack/config/webpack.config.js';
-import provider from '@/services/telemetry/index.js';
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+} from '../../../utils/buildFileUtils.js';
+import { run } from '../../../services/webpack/runWebpack.js';
+import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/createHtmlRenderPlugin.js';
+import makeWebpackConfig from '../../../services/webpack/config/webpack.config.js';
+import provider from '../../../services/telemetry/index.js';
+import { runVocabCompile } from '../../../services/vocab/runVocab.js';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
+import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const webpackBuildHandler = async ({
   stats,

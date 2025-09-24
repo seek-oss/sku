@@ -2,19 +2,23 @@ import { performance } from 'node:perf_hooks';
 import prettyMilliseconds from 'pretty-ms';
 import webpack from 'webpack';
 import chalk from 'chalk';
-import { run } from '@/services/webpack/runWebpack.js';
+import { run } from '../../../services/webpack/runWebpack.js';
 import {
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
-} from '@/utils/buildFileUtils.js';
-import makeWebpackConfig from '@/services/webpack/config/webpack.config.ssr.js';
-import provider from '@/services/telemetry/index.js';
+} from '../../../utils/buildFileUtils.js';
+import makeWebpackConfig from '../../../services/webpack/config/webpack.config.ssr.js';
+import provider from '../../../services/telemetry/index.js';
 
-import { runVocabCompile } from '@/services/vocab/runVocab.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { runVocabCompile } from '../../../services/vocab/runVocab.js';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
+import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
+import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const buildSsrAction = async ({
   stats,
@@ -23,11 +27,18 @@ export const buildSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
+  if (skuContext.bundler === 'vite') {
+    throw new Error(
+      'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',
+    );
+  }
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
   const { port, cspEnabled } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
+  validatePolyfills(skuContext.polyfills);
+
   try {
     await runVocabCompile(skuContext);
     const [clientConfig, serverConfig] = makeWebpackConfig({

@@ -1,8 +1,9 @@
-import { getPathFromCwd } from './cwd.js';
+import { getPathFromCwd } from '@sku-lib/utils';
+
 import fs from 'node:fs';
-import _validatePeerDeps from './validatePeerDeps.js';
+import { validatePeerDeps as _validatePeerDeps } from './validatePeerDeps.js';
 import { log } from './debug.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../context/createSkuContext.js';
 
 let skipConfigure = false;
 let skipValidatePeerDeps = false;
@@ -22,7 +23,7 @@ export const configureProject = async (skuContext: SkuContext) => {
     return;
   }
 
-  const configure = (await import('../utils/configureApp.js')).default;
+  const { default: configure } = await import('../utils/configureApp.js');
   await configure(skuContext);
 };
 

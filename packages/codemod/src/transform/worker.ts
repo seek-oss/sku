@@ -2,23 +2,25 @@ import { workerData, parentPort } from 'node:worker_threads';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createTwoFilesPatch } from 'diff';
 import picocolors from 'picocolors';
+import type { JobWorkerData } from './runner.js';
+import type { Transform } from '../utils/types.js';
 
-const { transformerPath, jobs, options } = workerData;
+const { transformerPath, jobs, options } = workerData as JobWorkerData;
 
-const fileTransformer = (await import(transformerPath)).transform;
+const { transform } = (await import(transformerPath)) as {
+  transform: Transform;
+};
 
 let filesChanged = 0;
 
 await Promise.all(
   jobs.map(async ({ filePath }: { filePath: string }) => {
     const source = await readFile(filePath, 'utf-8');
-    const output = fileTransformer(source);
+    const output = transform(source);
 
     if (!output) {
       return;
     }
-
-    filesChanged++;
 
     if (options.print) {
       const diff = createTwoFilesPatch(
@@ -37,6 +39,9 @@ await Promise.all(
 
     if (!options.dry) {
       await writeFile(filePath, output);
+      if (source !== output) {
+        filesChanged++;
+      }
     }
   }),
 );

@@ -1,7 +1,7 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
-import isCompilePackage from '@/utils/isCompilePackage.js';
-import type { SkuConfig } from '@/types/types.js';
+import isCompilePackage from '../utils/isCompilePackage.js';
+import type { CompleteSkuConfig } from '../types/types.js';
 
 const defaultDecorator = <T>(a: T) => a;
 
@@ -32,11 +32,11 @@ export default {
   libraryFile: undefined,
   sourceMapsProd: true,
   displayNamesProd: false,
-  dangerouslySetWebpackConfig: defaultDecorator,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
-  __unstableDangerouslySetViteConfig: defaultDecorator,
+  // Since dangerouslySetWebpackConfig is in a union type, we need to pass the generic type to satisfy type checking.
+  dangerouslySetWebpackConfig: defaultDecorator<any>,
   eslintIgnore: [],
   supportedBrowsers: browserslistConfigSeek,
   cspEnabled: false,
@@ -47,4 +47,7 @@ export default {
   languages: undefined,
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,
-} satisfies SkuConfig;
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
+  pathAliases: {},
+  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: undefined,
+} satisfies CompleteSkuConfig;

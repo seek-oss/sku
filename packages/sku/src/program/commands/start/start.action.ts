@@ -1,6 +1,14 @@
-import type { StatsChoices } from '@/program/options/stats/stats.option.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { Command } from 'commander';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
+import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
+import { checkHosts, withHostile } from '../../../context/hosts.js';
+import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
+import chalk from 'chalk';
 
 export const startAction = async (
   {
@@ -13,6 +21,18 @@ export const startAction = async (
   command: Command,
 ) => {
   const { environment } = command.optsWithGlobals();
+
+  console.log(chalk.blue(`sku start`));
+
+  await Promise.all([
+    configureProject(skuContext),
+    watchVocabCompile(skuContext),
+  ]);
+
+  withHostile(checkHosts)(skuContext);
+  validatePeerDeps(skuContext);
+  validatePolyfills(skuContext.polyfills);
+
   if (skuContext.bundler === 'vite') {
     const { viteStartHandler } = await import('./vite-start-handler.js');
     viteStartHandler(skuContext);

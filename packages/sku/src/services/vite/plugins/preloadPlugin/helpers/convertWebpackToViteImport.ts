@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { VITE_LOADABLE_IMPORT } from '@/services/vite/plugins/preloadPlugin/helpers/constants.js';
+import { VITE_LOADABLE_IMPORT } from './constants.js';
 import type { NodePath } from '@babel/traverse';
 
 export const convertWebpackToViteImport = (

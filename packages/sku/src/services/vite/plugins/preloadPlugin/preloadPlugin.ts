@@ -11,6 +11,7 @@ import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifier
 import { getWebpackLoadableSpecifierName } from './helpers/getWebpackLoadableSpecifierName.js';
 import { convertWebpackToViteImport } from './helpers/convertWebpackToViteImport.js';
 import { injectModuleID } from './helpers/injectModuleID.js';
+import { getExecuteCommand } from '@sku-lib/utils';
 
 /* NOTE: This implementation can probably be improved and simplified.
  * My primary goal was to get it working and replacing but my limited experience with AST parsing is likely showing.
@@ -93,7 +94,7 @@ export function preloadPlugin({
               !code.includes(VITE_LOADABLE_IMPORT)
             ) {
               console.log(
-                `Webpack loadable import found but no vite loadable import for file ${id}. This can have unintended side effects and the files may not load propperly.`,
+                `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
               );
               return;
             }

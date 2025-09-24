@@ -8,6 +8,8 @@ const RENDER_TIMEOUT_MS = 5000;
 
 let hasWarned = false;
 
+const log = debug('sku:render:renderToStringAsync');
+
 /**
  * Renders a React node to a string in a way that is compatible with Suspense and async rendering.
  * Will await all Suspense boundaries before resolving the promise.
@@ -20,7 +22,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
     );
     hasWarned = true;
   }
-  debug('sku:render:renderToStringAsync')('Starting render');
+  log('Starting render');
 
   return new Promise<string>((resolve, reject) => {
     let hasErrored = false;
@@ -29,24 +31,22 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
     const { pipe, abort } = renderToPipeableStream(reactNode, {
       onShellError(error) {
         // A Shell Error is unrecoverable. Reject so that Error handling can resolve the response.
-        debug('sku:render:renderToStringAsync')('Shell Render Error:', error);
+        log('Shell Render Error:', error);
         hasErrored = true;
         reject(error);
       },
 
       onError(error) {
         // Non-shell errors are recoverable. HTML shell can still be returned.
-        debug('sku:render:renderToStringAsync')('Render Error:', error);
+        log('Render Error:', error);
       },
 
       onShellReady() {
-        debug('sku:render:renderToStringAsync')('Shell Ready: No action');
+        log('Shell Ready: No action');
       },
 
       async onAllReady() {
-        debug('sku:render:renderToStringAsync')(
-          'All Ready: Ready to stream to string',
-        );
+        log('All Ready: Ready to stream to string');
         startStreamToString();
       },
     });
@@ -56,7 +56,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
         return;
       }
 
-      debug('sku:render:renderToStringAsync')(
+      log(
         `Timeout after having not errored or rendered in ${RENDER_TIMEOUT_MS}ms`,
       );
 
@@ -69,7 +69,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
       if (hasErrored) {
         return;
       }
-      debug('sku:render:renderToStringAsync')('Starting streaming to string');
+      log('Starting streaming to string');
       hasRendered = true;
       let html = '';
       const stream = new Writable({
@@ -79,9 +79,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
         },
         // Potential error here before. We were calling callback() on the error parameter.
         destroy(_error, callback) {
-          debug('sku:render:renderToStringAsync')(
-            'Stream ended. Returning HTML',
-          );
+          log('Stream ended. Returning HTML');
           resolve(html);
           callback();
         },

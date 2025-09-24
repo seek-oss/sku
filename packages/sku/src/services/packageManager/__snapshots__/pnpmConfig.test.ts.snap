@@ -1,0 +1,115 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: false > should log appropriate messages 2`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: false, pnpmPluginSkuInstalled: true > should log appropriate messages 2`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please ensure you are on PNPM v10.13.0 or later.
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 1`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: false > should log appropriate messages 2`] = `
+[
+  [
+    "
+--------------------------------------------------------------------------------
+
+    pnpm-plugin-sku is not configured correctly
+
+    Please delete your top-level node_modules and run "pnpm add --config
+    pnpm-plugin-sku && pnpm install".
+
+--------------------------------------------------------------------------------
+  ",
+  ],
+]
+`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 1`] = `[]`;
+
+exports[`validatePnpmConfig > when hasRecommendedPnpmVersionInstalled: true, pnpmPluginSkuInstalled: true > should log appropriate messages 2`] = `[]`;

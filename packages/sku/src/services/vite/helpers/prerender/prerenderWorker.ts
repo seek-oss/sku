@@ -3,14 +3,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { workerData } from 'node:worker_threads';
-import {
-  outDir,
-  renderEntryChunkName,
-} from '@/services/vite/helpers/bundleConfig.js';
+import { createOutDir, renderEntryChunkName } from '../bundleConfig.js';
 import { createCollector } from '@sku-lib/vite/collector';
-import { createPreRenderedHtml } from '@/services/vite/helpers/html/createPreRenderedHtml.js';
-import createCSPHandler from '@/services/webpack/entry/csp.js';
-import { ensureTargetDirectory } from '@/utils/buildFileUtils.js';
+import { createPreRenderedHtml } from '../html/createPreRenderedHtml.js';
+import createCSPHandler from '../../../webpack/entry/csp.js';
+import { ensureTargetDirectory } from '../../../../utils/buildFileUtils.js';
 
 import type { JobWorkerData } from './prerenderConcurrently.js';
 
@@ -18,8 +15,22 @@ setAdapter(mockAdapter);
 
 const resolve = (p: string) => path.resolve(process.cwd(), p);
 
+if (!workerData || workerData.length === 0) {
+  // No jobs assigned to this worker, exit gracefully
+  process.exit(0);
+}
+
+const { targetPath } = workerData[0];
+if (!targetPath) {
+  throw new Error('targetPath is required in workerData');
+}
+
+const outDir = createOutDir(targetPath);
+
 const [manifest, render] = await Promise.all([
-  readFile(resolve('./dist/.vite/manifest.json'), 'utf-8').then(JSON.parse),
+  readFile(resolve(path.join(targetPath, '.vite/manifest.json')), 'utf-8').then(
+    JSON.parse,
+  ),
   import(resolve(path.join(outDir.ssg, renderEntryChunkName))).then(
     (m) => m.default,
   ),

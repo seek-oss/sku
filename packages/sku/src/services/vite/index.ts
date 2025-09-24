@@ -1,36 +1,31 @@
 import { build, createServer } from 'vite';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../context/createSkuContext.js';
 
-import { createViteServerSsr } from './helpers/server/createViteServerSsr.js';
 import {
-  createViteClientConfig,
-  createViteDevConfig,
-  createViteSsgConfig,
+  createClientBuildConfig,
+  createServerBuildConfig,
+  createStartConfig,
 } from './helpers/config/createConfig.js';
-import { cleanTargetDirectory } from '@/utils/buildFileUtils.js';
-import { openBrowser } from '@/openBrowser/index.js';
-import { getAppHosts } from '@/utils/contextUtils/hosts.js';
+import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
+import { createOutDir } from './helpers/bundleConfig.js';
+import { getAppHosts } from '../../context/hosts.js';
 import chalk from 'chalk';
-import { prerenderConcurrently } from '@/services/vite/helpers/prerender/prerenderConcurrently.js';
-import allocatePort from '@/utils/allocatePort.js';
+import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
+import allocatePort from '../../utils/allocatePort.js';
 
 export const viteService = {
-  buildSsr: async (skuContext: SkuContext) => {
-    // TODO: This isn't fully implemented?
-    await build(createViteClientConfig(skuContext));
-  },
   build: async (skuContext: SkuContext) => {
-    await build(createViteClientConfig(skuContext));
-    await build(createViteSsgConfig(skuContext));
+    const outDir = createOutDir(skuContext.paths.target);
+    await build(createClientBuildConfig(skuContext));
+    await build(createServerBuildConfig(skuContext));
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
-    await cleanTargetDirectory(`${process.cwd()}/dist/render`, true);
-    await cleanTargetDirectory(`${process.cwd()}/dist/.vite`, true);
+    await cleanTargetDirectory(outDir.ssg, true);
+    await cleanTargetDirectory(outDir.join('.vite'), true);
   },
   start: async (skuContext: SkuContext) => {
-    // TODO Get this to be backwards compat with webpack
-    const server = await createServer(createViteDevConfig(skuContext));
+    const server = await createServer(createStartConfig(skuContext));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,
@@ -41,27 +36,9 @@ export const viteService = {
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    const proto = skuContext.httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${hosts[0]}:${availablePort}${skuContext.initialPath}`;
-    openBrowser(url);
-
     printUrls(hosts, skuContext);
 
     server.bindCLIShortcuts({ print: true });
-  },
-  startSsr: async (skuContext: SkuContext) => {
-    process.env.NODE_ENV = 'development';
-    const server = await createViteServerSsr({
-      skuContext,
-    });
-    server.listen(skuContext.port.server);
-
-    const hosts = getAppHosts(skuContext);
-    const proto = skuContext.httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${hosts[0]}:${skuContext.port.server}${skuContext.initialPath}`;
-    openBrowser(url);
-
-    printUrls(hosts, skuContext);
   },
 };
 
@@ -70,6 +47,7 @@ const printUrls = (
   skuContext: SkuContext,
 ) => {
   const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  console.log('Starting development server...');
   hosts.forEach((site) => {
     const initialPath =
       skuContext.initialPath !== '/' ? skuContext.initialPath : '';

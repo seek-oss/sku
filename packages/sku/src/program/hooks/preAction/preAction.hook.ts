@@ -1,8 +1,10 @@
 import type { Command } from 'commander';
 
-import { getSkuContext } from '@/context/createSkuContext.js';
-import provider, { initializeTelemetry } from '@/services/telemetry/index.js';
-import { experimentalBundlersHook } from '@/program/hooks/preAction/experimentalBundlersHook.js';
+import { getSkuContext } from '../../../context/createSkuContext.js';
+import provider, {
+  initializeTelemetry,
+} from '../../../services/telemetry/index.js';
+import { experimentalBundlersHook } from './experimentalBundlersHook.js';
 
 export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
   const { port, strictPort } = actionCommand.opts();

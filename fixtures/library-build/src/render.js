@@ -1,7 +1,7 @@
 import html from 'dedent';
 
 export default {
-  renderDocument: ({ libraryName, headTags, bodyTags }) => html/* html */ `
+  renderDocument: ({ libraryName, headTags, bodyTags }) => html /* html */ `
     <!DOCTYPE html>
     <html>
       <head>

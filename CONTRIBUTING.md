@@ -13,10 +13,7 @@ We'd be happy to help out!
 
 1. (Optional) Fork the repo if you do not have write access
 1. Clone the repo
-1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc`. This repo is configured to use [`volta`]
-   for managing toolchain dependencies, but feel free to use `nvm`, `corepack`, or whatever suits you best.
-
-[`volta`]: https://volta.sh/
+1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc` respectively
 
 ## Making Changes
 
@@ -81,17 +78,28 @@ pnpm run test:update
 > [!TIP]
 > The test suite needs to pass for your changes to be accepted, so it's worth running this locally during development and right before committing.
 
-You can also run any `sku` CLI command against any of the app fixtures.
+You can also run commands directly against any of the app fixtures.
 This can be a faster way to iterate on a feature than rather than running the test suite every time you make a change.
 
-1. `cd` into the fixture you want to test. E.g. `cd fixtures/styling`.
-1. Run your sku command. E.g. `pnpm run sku build`.
+There are 3 ways to run commands against a fixture:
+
+1. Run `pnpm fixture [fuzzy-fixture] [script]`, runs a `package.json` script with a fuzzy name search on fixture directories. Running with no arguments will list all fixtures and scripts.
+2. `cd` into the fixture and run a command directly: `cd fixtures/styling && pnpm sku start`.
+
+> [!TIP]
+> `pnpm fixture` lists scripts in a fixture's `package.json` file.
+> If there's a script that's commonly run in a specific fixture, feel free to add it to the `package.json` file.
 
 Once you've made the desired changes and you're ready to commit, stage your local changes.
 
 > [!NOTE]
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.
 > These changes should not be committed and can be safely discard.
+
+### Testing Codemods
+
+Codemods are tested via the `sku-codemod` E2E test suite.
+Input and output files are defined inline in the test file.
 
 ## Publishing a New Version
 

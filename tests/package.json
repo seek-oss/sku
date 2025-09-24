@@ -12,27 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@sku-fixtures/assertion-removal": "workspace:*",
-    "@sku-fixtures/braid-design-system": "workspace:*",
-    "@sku-fixtures/configure": "workspace:*",
-    "@sku-fixtures/custom-src-paths": "workspace:*",
-    "@sku-fixtures/jest-test": "workspace:*",
-    "@sku-fixtures/library-build": "workspace:*",
-    "@sku-fixtures/library-file": "workspace:*",
-    "@sku-fixtures/lint-format": "workspace:*",
-    "@sku-fixtures/multiple-routes": "workspace:*",
-    "@sku-fixtures/public-path": "workspace:*",
-    "@sku-fixtures/sku-test": "workspace:*",
-    "@sku-fixtures/sku-webpack-plugin": "workspace:*",
-    "@sku-fixtures/sku-with-https": "workspace:*",
-    "@sku-fixtures/source-maps": "workspace:*",
-    "@sku-fixtures/ssr-hello-world": "workspace:*",
-    "@sku-fixtures/storybook-config": "workspace:*",
-    "@sku-fixtures/styling": "workspace:*",
-    "@sku-fixtures/translations": "workspace:*",
-    "@sku-fixtures/typescript-css-modules": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
-    "@sku-private/vitest-utils": "workspace:*",
+    "@sku-private/testing-library": "workspace:*",
     "@types/cross-spawn": "^6.0.3",
     "cross-spawn": "^7.0.3",
     "dedent": "^1.5.1",
@@ -40,6 +21,7 @@
     "jsonc-parser": "^3.0.0",
     "webpack": "^5.52.0",
     "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^5.0.2"
+    "webpack-dev-server": "<=5.2.0",
+    "yaml": "^2.8.1"
   }
 }

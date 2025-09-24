@@ -1,26 +1,29 @@
 import { join } from 'node:path';
-import exists from '@/utils/exists.js';
+import exists from '../../../utils/exists.js';
 import express from 'express';
 import handler from 'serve-handler';
 import chalk from 'chalk';
-import didYouMean from 'didyoumean2';
+import { closest } from 'fastest-levenshtein';
 import {
   checkHosts,
   getAppHosts,
   withHostile,
-} from '@/utils/contextUtils/hosts.js';
-import allocatePort from '@/utils/allocatePort.js';
-import { openBrowser } from '@/openBrowser/index.js';
-import getSiteForHost from '@/utils/contextUtils/getSiteForHost.js';
-import { resolveEnvironment } from '@/utils/contextUtils/resolveEnvironment.js';
-import provider from '@/services/telemetry/index.js';
-import createServer from '@/utils/createServer.js';
+} from '../../../context/hosts.js';
+import allocatePort from '../../../utils/allocatePort.js';
+import { openBrowser } from '../../../openBrowser.js';
+import { getSiteForHost } from '../../../context/getSiteForHost.js';
+import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
+import provider from '../../../services/telemetry/index.js';
+import createServer from '../../../utils/createServer.js';
 import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
-} from '@/utils/language-utils.js';
-import { configureProject, validatePeerDeps } from '@/utils/configure.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+} from '../../../utils/language-utils.js';
+import {
+  configureProject,
+  validatePeerDeps,
+} from '../../../utils/configure.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const serveAction = async ({
   site: preferredSite,
@@ -61,7 +64,7 @@ export const serveAction = async ({
 
   if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
     console.log(chalk.red(`Unknown site '${chalk.bold(preferredSite)}'`));
-    const suggestedSite = didYouMean(preferredSite, availableSites);
+    const suggestedSite = closest(preferredSite, availableSites);
 
     if (suggestedSite) {
       console.log(`Did you mean '${chalk.bold(suggestedSite)}'?`);
@@ -190,6 +193,7 @@ export const serveAction = async ({
 
     const sitesWithHosts = sites.filter((site) => site.host);
 
+    console.log(chalk.blue('Server started'));
     if (sitesWithHosts.length > 0) {
       sitesWithHosts.forEach((site) => {
         const siteUrl = `${proto}://${site.host}:${availablePort}${initialPath}`;
@@ -201,7 +205,7 @@ export const serveAction = async ({
         );
       });
     } else {
-      console.log(chalk.blue(`Started server on ${chalk.underline(url)}`));
+      console.log(chalk.blue(`Site available at ${chalk.underline(url)}`));
     }
 
     console.log();

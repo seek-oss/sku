@@ -1,4 +1,4 @@
-import { globSync } from 'tinyglobby';
+import { glob } from 'tinyglobby';
 import prompts from 'prompts';
 import { dirname, join, resolve } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
@@ -6,17 +6,20 @@ import { fileURLToPath } from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
+import debug from 'debug';
+
+const log = debug('sku:codemod');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const transformerDirectory = join(__dirname, '../', 'codemods');
+const transformerDirectory = join(__dirname, '../', 'codemods');
 
 type Options = {
   dry?: boolean;
   print?: boolean;
 };
 
-type JobWorkerData = {
+export type JobWorkerData = {
   transformerPath: string;
   options: Options;
   jobs: Array<{
@@ -58,7 +61,7 @@ export const getPathFromPrompt = async (): Promise<string> => {
 
 export const runTransform = async (
   transform: string,
-  path: string,
+  _path: string,
   options: Options,
 ): Promise<void> => {
   if (options.dry) {
@@ -70,7 +73,7 @@ export const runTransform = async (
   }
 
   const transformer = transform || (await getTransformerFromPrompt());
-  const directory = path || (await getPathFromPrompt());
+  const path = _path || (await getPathFromPrompt());
 
   if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {
     console.error('Invalid transform choice, pick one of:');
@@ -78,17 +81,14 @@ export const runTransform = async (
     process.exit(1);
   }
 
-  const filesExpanded = await getAllFiles([directory]);
+  const filesExpanded = await getAllFiles(path);
 
   if (!filesExpanded.length) {
-    console.log(`No files found matching "${directory}"`);
+    console.log(`No files found matching "${path}"`);
     return;
   }
 
-  const transformerPath = join(
-    transformerDirectory,
-    `${transformer}/${transformer}.js`,
-  );
+  const transformerPath = join(transformerDirectory, `${transformer}.js`);
 
   const cpus =
     os.cpus().length > filesExpanded.length
@@ -98,7 +98,7 @@ export const runTransform = async (
 
   const outcomes: JobOutcome[] = await Promise.all(
     Array.from({ length: cpus }, (_, i) => {
-      console.log(picocolors.gray(`Starting worker ${i + 1} of ${cpus}`));
+      log(`Starting worker ${i + 1} of ${cpus}`);
       return runJobs({
         transformerPath,
         options,
@@ -119,9 +119,7 @@ export const runTransform = async (
     { filesChanged: 0 },
   );
 
-  console.log(
-    `Total number of files parsed: ${picocolors.bold(filesExpanded.length)}`,
-  );
+  console.log(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
   if (options.dry) {
     console.log(
       picocolors.yellow(
@@ -144,8 +142,10 @@ export const runTransform = async (
   process.exit(0);
 };
 
-const getAllFiles = async (paths: string[]) =>
-  globSync([...paths, '!**/node_modules', '!**/dist'], {
+const getAllFiles = (directory: string) =>
+  glob(join(directory, '**/*.?(c|m){js,ts}?(x)'), {
+    ignore: ['**/node_modules', '**/dist'],
+    expandDirectories: false,
     absolute: true,
   });
 

@@ -19,7 +19,13 @@ It provides a number of commands to help you develop, test and build your applic
 
 ## CLI Commands
 
-### `init`
+### `init` ⚠️ Deprecated
+
+> **Warning**: `sku init` is deprecated. Please use `@sku-lib/create` instead:
+>
+> ```sh
+> pnpm dlx @sku-lib/create my-app
+> ```
 
 Initialize a new `sku` project.
 Unless you've installed `sku` globally (not recommended), you should use `npx` or `pnpm dlx` to run this command:
@@ -35,6 +41,12 @@ This command supports the following options and arguments:
 | argument | `project-name` <br> _required_ | The name of the project to create <br> `pnpm dlx sku init my-app`                                                                                                                            |
 | option   | `--package-manager, -p`        | Overrides the package manager used when installing dependencies <br> This defaults to the package manager being used to run `sku init` <br> `pnpm dlx sku init my-app --package-manager=npm` |
 | option   | `--verbose`                    | Enable verbose logging for the package manager <br> `pnpm dlx sku init my-app --verbose`                                                                                                     |
+
+For new projects, use `@sku-lib/create` instead:
+
+```sh
+pnpm dlx @sku-lib/create my-app
+```
 
 ### `start`
 
@@ -186,7 +198,7 @@ sku configure
 Translation-specific commands.
 These commands are only useful if your application is configured to be a [multi-language application].
 
-[multi-language application]: ./docs/multi-language-applications.md
+[multi-language application]: ./docs/multi-language.md
 
 ### `translations compile`
 
@@ -217,8 +229,6 @@ This command supports the following options:
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
 | `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys` |
 
-[phrase-specific features]: ./docs/multi-language-applications.md#phrase-specific-features
-
 ### `translations pull`
 
 Pull translations from Phrase.
@@ -228,6 +238,8 @@ See the documentation on [phrase-specific features] for more information.
 sku translations pull
 ```
 
+[phrase-specific features]: ./docs/multi-language.md#phrase-specific-features
+
 ### `translations validate`
 
 Validate translations defined in `.vocab` directories.
@@ -236,5 +248,4 @@ Validate translations defined in `.vocab` directories.
 sku translations validate
 ```
 
-[phrase-specific features]: ./docs/multi-language-applications.md#phrase-specific-features
 [stats preset]: https://webpack.js.org/configuration/stats/#stats-presets

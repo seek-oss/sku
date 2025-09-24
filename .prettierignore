@@ -4,8 +4,9 @@ coverage/
 dist/
 dist-ssr/
 dist-build/
-dist-start/
 storybook-static/
+custom-output-directory/
+dist-start/
 report/
 template/
 .changeset/*.md

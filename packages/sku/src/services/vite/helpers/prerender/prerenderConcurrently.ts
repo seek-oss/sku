@@ -2,8 +2,8 @@ import path from 'node:path';
 import url from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
-import { getBuildRoutes } from '@/services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import type { SkuContext } from '@/context/createSkuContext.js';
+import { getBuildRoutes } from '../../../webpack/config/plugins/createHtmlRenderPlugin.js';
+import type { SkuContext } from '../../../../context/createSkuContext.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const toAbsolute = (p: string) => path.resolve(__dirname, p);
@@ -18,6 +18,7 @@ export type JobWorkerData = {
   route: string;
   routeName: string;
   site: string;
+  targetPath: string;
 };
 
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
@@ -38,31 +39,35 @@ const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
   });
 };
 
+const getFileName = (
+  skuContext: SkuContext,
+  skuRoute: ReturnType<typeof getBuildRoutes>[0],
+) => {
+  let renderDirectory = skuContext.skuConfig.target;
+  const relativeFilePath = skuContext.transformOutputPath(skuRoute);
+  const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
+  if (!path.isAbsolute(renderDirectory)) {
+    renderDirectory = path.resolve(renderDirectory);
+  }
+  return includesHtmlInFilePath
+    ? path.join(renderDirectory, relativeFilePath)
+    : path.join(renderDirectory, relativeFilePath, 'index.html');
+};
+
 export const prerenderConcurrently = async (skuContext: SkuContext) => {
   const routes = getBuildRoutes(skuContext);
-
-  const getFileName = (skuRoute: ReturnType<typeof getBuildRoutes>[0]) => {
-    let renderDirectory = skuContext.skuConfig.target;
-    const relativeFilePath = skuContext.transformOutputPath(skuRoute);
-    const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
-    if (!path.isAbsolute(renderDirectory)) {
-      renderDirectory = path.resolve(renderDirectory);
-    }
-    return includesHtmlInFilePath
-      ? path.join(renderDirectory, relativeFilePath)
-      : path.join(renderDirectory, relativeFilePath, 'index.html');
-  };
 
   const jobs = routes.map((route) => ({
     route: route.route,
     routeName: route.routeName,
     site: route.site,
-    filePath: getFileName(route),
+    filePath: getFileName(skuContext, route),
     publicPath: skuContext.publicPath,
     environment: route.environment,
     cspEnabled: skuContext.cspEnabled,
     cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
     language: route.language,
+    targetPath: skuContext.paths.target,
   }));
 
   // If we have more jobs than CPU cores, we need to split the jobs into chunks

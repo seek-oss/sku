@@ -1,0 +1,26 @@
+{
+  "name": "@sku-fixtures/polyfills",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sku-private/3rd-party-polyfill": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "scripts": {
+    "start": "sku start",
+    "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
+    "start:bad": "sku start --config sku.config.bad.ts",
+    "build": "sku build",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts",
+    "build:bad": "sku build --config sku.config.bad.ts"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "dedent": "^1.5.1",
+    "sku": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:"
+  },
+  "skuSkipValidatePeerDeps": true
+}

@@ -1,24 +1,62 @@
-import { defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
-export const TEST_TIMEOUT = 50_000;
+const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
+
+const flakeyTestGlobs = ['tests/browser/storybook-config.test.ts'];
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
+  server: {
+    watch: {
+      ignored: ['**/fixtures/**'],
+    },
+  },
   test: {
-    environment: 'puppeteer',
-    setupFiles: ['./vite-test-utils/vitest-setup.ts'],
-    globalSetup: 'vitest-environment-puppeteer/global-init',
+    setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/cypress/**',
-      '**/.{idea,git,cache,output,temp}/**',
-      '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
-      '**/fixtures/**',
+    exclude: [...defaultExclude, '**/fixtures/**'],
+    restoreMocks: true,
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          include: [
+            `packages/${defaultInclude}`,
+            `private/${defaultInclude}`,
+            `tests/node/${defaultInclude}`,
+          ],
+        },
+      },
+      // Isolate braid and storybook-config tests to reduce flakiness.
+      {
+        extends: true,
+        test: {
+          name: 'flakey',
+          environment: 'puppeteer',
+          globalSetup: 'vitest-environment-puppeteer/global-init',
+          include: flakeyTestGlobs,
+          sequence: {
+            groupOrder: -1,
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'browser',
+          environment: 'puppeteer',
+          globalSetup: 'vitest-environment-puppeteer/global-init',
+          include: [
+            `tests/browser/${defaultInclude}`,
+            ...flakeyTestGlobs.map((g) => `!${g}`),
+          ],
+        },
+      },
     ],
   },
 });

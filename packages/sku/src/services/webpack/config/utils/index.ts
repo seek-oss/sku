@@ -1,4 +1,4 @@
-import { extensions } from '@/config/fileResolutionExtensions.js';
+import { extensions } from '../../../../config/fileResolutionExtensions.js';
 
 export * from './loaders.js';
 export { resolvePackage } from './resolvePackage.js';

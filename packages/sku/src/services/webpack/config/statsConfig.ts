@@ -1,4 +1,4 @@
-import isCI from '@/utils/isCI.js';
+import isCI from '../../../utils/isCI.js';
 
 const getStatsConfig = ({
   stats,

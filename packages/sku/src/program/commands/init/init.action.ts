@@ -6,27 +6,30 @@ import dedent from 'dedent';
 import { fdir as Fdir } from 'fdir';
 import { Eta } from 'eta';
 import debug from 'debug';
-import semver from 'semver';
+import skuPackageJson from 'sku/package.json' with { type: 'json' };
 
-import type { SkuContext } from '@/context/createSkuContext.js';
+import type { SkuContext } from '../../../context/createSkuContext.js';
 
 import {
   packageManager,
   getRunCommand,
   getPackageManagerInstallPage,
   getInstallCommand,
+  isAtLeastPnpmV10,
+  rootDir,
   packageManagerVersion,
-} from '@/services/packageManager/packageManager.js';
-import { write as prettierWrite } from '@/services/prettier/runPrettier.js';
-import { fix as esLintFix } from '@/services/eslint/runESLint.js';
-import install from '@/services/packageManager/install.js';
+  setCwd,
+  toPosixPath,
+  isEmptyDir,
+  banner,
+} from '@sku-lib/utils';
+import { write as prettierWrite } from '../../../services/prettier.js';
+import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
+import install from '../../../services/packageManager/install.js';
 
-import configure from '@/utils/configureApp.js';
+import configure from '../../../utils/configureApp.js';
 
-import { setCwd } from '@/utils/cwd.js';
-import banner from '@/utils/banners/banner.js';
-import toPosixPath from '@/utils/toPosixPath.js';
-import { isEmptyDir } from '@/utils/isEmptyDir.js';
+import { execAsync } from '../../../utils/execAsync.js';
 
 const trace = debug('sku:init');
 
@@ -63,12 +66,12 @@ export const initAction = async (
   projectName: string,
   { verbose, skuContext }: { verbose: boolean; skuContext: SkuContext },
 ) => {
-  const root = path.resolve(projectName);
-  setCwd(root);
+  const initDir = path.resolve(projectName);
+  setCwd(initDir);
 
-  trace(`Creating project "${projectName}" in "${root}"`);
+  trace(`Creating project "${projectName}" in "${initDir}"`);
 
-  const appName = path.basename(root);
+  const appName = path.basename(initDir);
 
   const reservedNames = [
     'react',
@@ -108,12 +111,22 @@ export const initAction = async (
 
   await mkdir(projectName, { recursive: true });
 
-  if (!isEmptyDir(root)) {
+  if (!isEmptyDir(initDir)) {
     console.log(`The directory ${chalk.green(projectName)} is not empty.`);
     process.exit(1);
   }
 
-  console.log(`Creating a new sku project in ${chalk.green(root)}.`);
+  console.log(
+    chalk.yellow('⚠️ DEPRECATION WARNING: `sku init` is deprecated.'),
+  );
+  console.log(
+    chalk.yellow(
+      `   Please use ${chalk.cyan('pnpm dlx @sku-lib/create')} instead.`,
+    ),
+  );
+  console.log();
+
+  console.log(`Creating a new sku project in ${chalk.green(initDir)}.`);
   console.log();
 
   const packageJson: Record<string, any> = {
@@ -130,27 +143,18 @@ export const initAction = async (
     },
   };
 
-  const isAtLeastPnpmV10 =
-    packageManager === 'pnpm' &&
-    packageManagerVersion &&
-    semver.satisfies(packageManagerVersion, '>=10.0.0');
+  const isRepoRoot = rootDir === null || rootDir === initDir;
+  const shouldConfigurePackageManagerField =
+    isRepoRoot && packageManagerVersion;
 
-  if (isAtLeastPnpmV10) {
-    trace(
-      'PNPM version is >= 10.0.0, adding "pnpm.onlyBuiltDependencies" to package.json',
-    );
-    // Allows `pnpm` to run `sku`'s, and its dependencies', build scripts
-    // See https://pnpm.io/package_json#pnpmonlybuiltdependencies
-    packageJson.pnpm = {
-      // We transitively depend on `esbuild` via Vanilla Extract
-      onlyBuiltDependencies: ['sku', '@swc/core', 'esbuild'],
-    };
+  if (shouldConfigurePackageManagerField) {
+    packageJson.packageManager = `${packageManager}@${packageManagerVersion}`;
   }
 
   const packageJsonString = JSON.stringify(packageJson, null, 2);
 
-  await writeFile(path.join(root, 'package.json'), packageJsonString);
-  process.chdir(root);
+  await writeFile(path.join(initDir, 'package.json'), packageJsonString);
+  process.chdir(initDir);
 
   const templateDirectory = path.join(
     toPosixPath(__dirname),
@@ -163,7 +167,7 @@ export const initAction = async (
     .withPromise();
 
   const getTemplateFileDestination = getTemplateFileDestinationFromRoot(
-    root,
+    initDir,
     templateDirectory,
   );
 
@@ -211,21 +215,38 @@ export const initAction = async (
     }),
   );
 
-  // TODO: Remove versions from react deps once we support React 19
-  const deps = ['braid-design-system', 'react@^18.3.1', 'react-dom@^18.3.1'];
+  // By default, deps will installed with an exact version. However, this doesn't seem to work without specifying a version.
+  // Adding @latest pins the version.
+  const deps = [
+    'braid-design-system@latest',
+    'react@latest',
+    'react-dom@latest',
+  ];
 
   const devDeps = [
     '@vanilla-extract/css',
-    'sku',
-    '@types/react@^18.3.12',
-    '@types/react-dom@^18.3.1',
+    // Specify an exact version so running `sku init` with a snapshot installs the snapshot version
+    // instead of the latest version.
+    `sku@${skuPackageJson.version}`,
+    '@types/react',
+    '@types/react-dom',
   ];
 
   console.log(
-    `Installing packages with ${chalk.bold(
+    `Installing dependencies with ${chalk.bold(
       packageManager,
-    )}. This might take a couple of minutes.`,
+    )}. This might take a while.`,
   );
+
+  // Config dependencies are only supported in PNPM v10 and above.
+  // `pnpm-plugin-sku` needs to be installed before regular dependencies to ensure packages are correctly hoisted.
+  if (isAtLeastPnpmV10()) {
+    console.log(
+      `Installing PNPM config dependency ${chalk.cyan('pnpm-plugin-sku')}`,
+    );
+    await execAsync('pnpm add --config pnpm-plugin-sku');
+  }
+
   console.log(
     `Installing ${deps
       .concat(devDeps)
@@ -259,4 +280,12 @@ export const initAction = async (
     'Get started by running:',
     nextSteps,
   ]);
+
+  console.log();
+  console.log(chalk.yellow('⚠️ REMINDER: `sku init` is deprecated.'));
+  console.log(
+    chalk.yellow(
+      `   For future projects, use ${chalk.cyan('pnpm dlx @sku-lib/create')} instead.`,
+    ),
+  );
 };

@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import provider from '@/services/telemetry/index.js';
+import provider from '../../telemetry/index.js';
 import debug from 'debug';
 import js from 'dedent';
 
@@ -58,7 +58,7 @@ export function HMRTelemetryPlugin({
   };
 }
 
-const skuHmrTelemetryClient = js/* js */ `
+const skuHmrTelemetryClient = js /* js */ `
   if (import.meta.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => {
       performance.mark("vite-hmr");

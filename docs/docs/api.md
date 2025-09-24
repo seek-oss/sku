@@ -80,7 +80,7 @@ See the [custom builds documentation] for more information.
 Example:
 
 ```ts
-import SkuWebpackPlugin from 'sku/webpack-plugin';
+import { SkuWebpackPlugin } from 'sku/webpack-plugin';
 ```
 
 [custom builds documentation]: ./docs/custom-builds.md

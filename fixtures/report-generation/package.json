@@ -1,0 +1,19 @@
+{
+  "name": "@sku-fixtures/report-generation",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "scripts": {
+    "build": "sku build",
+    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts"
+  },
+  "devDependencies": {
+    "@sku-private/test-utils": "workspace:*",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "sku": "workspace:*"
+  }
+}

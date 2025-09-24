@@ -48,7 +48,6 @@ export const transform = async (source: string) => {
   const jestMockFactoryParameters = root.findAll({
     // Find all mock factories that contain `jest.requireActual` and are not already async
     rule: {
-      pattern: '$FUNCTION',
       any: [{ kind: 'arrow_function' }, { kind: 'function_expression' }],
       not: { pattern: 'async $$$' },
       inside: {

@@ -1,0 +1,14 @@
+{
+  "name": "@sku-fixtures/cli-arguments",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  }
+}

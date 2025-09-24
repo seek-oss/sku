@@ -358,8 +358,6 @@ describe('sku codemods', () => {
 
         expect(await cli.findByText('Changed files')).toBeInTheConsole();
 
-        cli.debug();
-
         const fileContent = await fs.readFile(
           fixture.getPath(filename),
           'utf-8',

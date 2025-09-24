@@ -19,16 +19,19 @@ describe('polyfillDetector', () => {
       expect(result).toMatchInlineSnapshot(`
         [
           {
+            "detectionSource": "config",
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js",
             "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
+            "detectionSource": "config",
             "docsUrl": "https://babeljs.io/docs/en/babel-polyfill",
             "polyfillName": "@babel/polyfill",
             "reason": "Deprecated package",
           },
           {
+            "detectionSource": "config",
             "polyfillName": "whatwg-fetch",
             "reason": "Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.",
           },
@@ -67,16 +70,19 @@ describe('polyfillDetector', () => {
       expect(result).toMatchInlineSnapshot(`
         [
           {
+            "detectionSource": "config",
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/stable",
             "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
+            "detectionSource": "config",
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/es6",
             "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
           },
           {
+            "detectionSource": "config",
             "docsUrl": "https://github.com/zloirock/core-js#usage",
             "polyfillName": "core-js/features/promise",
             "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",

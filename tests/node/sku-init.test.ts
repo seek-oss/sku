@@ -9,34 +9,22 @@ configure({
   asyncUtilTimeout: timeout,
 });
 
-describe('sku init', async () => {
-  it('should error if the user uses the init command', async () => {
-    const result = await sku('init');
+describe('sku init', () => {
+  it.each`
+    description                  | args
+    ${'without args'}            | ${[]}
+    ${'with a project name'}     | ${['new-project']}
+    ${'with an any option flag'} | ${['--packageManager=pnpm']}
+  `(
+    'should error if the user uses the init command $description',
+    async ({ args }) => {
+      const result = await sku('init', args);
 
-    expect(
-      await result.findByError(
-        `'sku init' is deprecated. Please use '@sku-lib/create' instead.`,
-      ),
-    ).toBeInTheConsole();
-  });
-
-  it('should error if the user uses the init command with a project name', async () => {
-    const result = await sku('init', ['new-project']);
-
-    expect(
-      await result.findByError(
-        `'sku init' is deprecated. Please use '@sku-lib/create' instead.`,
-      ),
-    ).toBeInTheConsole();
-  });
-
-  it('should error if the user uses the init command with an unknown option', async () => {
-    const result = await sku('init', ['--unknown']);
-
-    expect(
-      await result.findByError(
-        `'sku init' is deprecated. Please use '@sku-lib/create' instead.`,
-      ),
-    ).toBeInTheConsole();
-  });
+      expect(
+        await result.findByError(
+          `'sku init' is deprecated. Please use '@sku-lib/create' instead.`,
+        ),
+      ).toBeInTheConsole();
+    },
+  );
 });

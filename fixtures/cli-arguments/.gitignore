@@ -1,0 +1,9 @@
+# managed by sku
+.eslintcache
+.prettierrc
+coverage/
+custom-output-directory/
+eslint.config.mjs
+report/
+tsconfig.json
+# end managed by sku

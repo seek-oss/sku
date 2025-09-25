@@ -10,7 +10,7 @@
     "@types/cross-spawn": "^6.0.6",
     "cross-spawn": "^7.0.6",
     "tsx": "^4.19.4",
-    "commander": "^14.0.0",
+    "commander": "catalog:",
     "fuse.js": "^7.1.0"
   }
 }

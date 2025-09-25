@@ -7,4 +7,4 @@
 'sku': major
 ---
 
-Minimum node version bumped to 22.20.0
+The minimum supported Node.js version is now 22.20.0. Consumers must upgrade to Node.js v22.20.0 or later.

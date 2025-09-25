@@ -512,17 +512,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/sku-create:
-    devDependencies:
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
-  fixtures/sku-init:
-    devDependencies:
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
+  fixtures/sku-create: {}
 
   fixtures/sku-test:
     dependencies:

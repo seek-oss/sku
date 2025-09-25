@@ -1,6 +1,6 @@
 import { render, waitFor, type RenderOptions } from 'cli-testing-library';
 import { createRequire } from 'node:module';
-import path from 'node:path';
+import { makeFixturePathResolver } from './makeFixturePathResolver.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -17,13 +17,9 @@ type SkuCommand =
   | 'test';
 
 export const scopeToFixture = (fixtureFolder: string) => {
-  const appDir = path.dirname(
-    require.resolve(
-      path.join(process.cwd(), `fixtures/${fixtureFolder}/package.json`),
-    ),
+  const fixturePath = makeFixturePathResolver(
+    `fixtures/${fixtureFolder}/package.json`,
   );
-
-  const fixturePath = (...paths: string[]) => path.join(appDir, ...paths);
 
   // Using the fixtures sku binary so that dependencies are resolved according to the fixtures package.json (allowing injected dependencies to work).
   const skuBin = require.resolve(fixturePath('./node_modules/.bin/sku'));

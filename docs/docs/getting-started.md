@@ -16,5 +16,3 @@ $ pnpm start
 ```
 
 By default, a new project's dependencies will be installed using the package manager it was run with.
-
-> **Note**: `sku init` is deprecated. Please use `@sku-lib/create` instead.

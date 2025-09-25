@@ -2,7 +2,7 @@ import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
 import { parseDocument, Document } from 'yaml';
 
 import fs from 'node:fs/promises';
-import { configure } from '@sku-private/testing-library';
+import { configure, waitFor } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import path from 'node:path';
 
@@ -68,6 +68,12 @@ describe('template flag', () => {
         'Cancelled. Use `webpack` template for a stable production-ready experience.',
       ),
     ).toBeInTheConsole();
+
+    await waitFor(async () => {
+      expect(result.hasExit()).toMatchObject({
+        exitCode: 1,
+      });
+    });
   });
 
   it('should create a vite project if the user says yes explicitly', async () => {

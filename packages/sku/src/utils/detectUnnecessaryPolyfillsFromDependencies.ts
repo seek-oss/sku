@@ -1,7 +1,9 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { getPathFromCwd } from '@sku-lib/utils';
-import { POLYFILL_REGISTRY } from './polyfillRegistry.js';
-import type { DetectedPolyfillWithSource } from './polyfillDetector.js';
+import {
+  type DetectedPolyfillWithSource,
+  getDeprecatedPolyfill,
+} from './polyfillDetector.js';
 
 /**
  * Detects unnecessary polyfills from package.json dependencies
@@ -12,7 +14,9 @@ export const detectUnnecessaryPolyfillsFromDependencies =
     const packageJsonPath = getPathFromCwd('package.json');
 
     if (!existsSync(packageJsonPath)) {
-      return [];
+      throw new Error(
+        `package.json not found at ${packageJsonPath} - this is required for polyfill detection`,
+      );
     }
 
     try {
@@ -24,33 +28,31 @@ export const detectUnnecessaryPolyfillsFromDependencies =
 
       const detectedPolyfills: DetectedPolyfillWithSource[] = [];
 
-      // Check dependencies
-      for (const depName of Object.keys(dependencies)) {
-        if (depName in POLYFILL_REGISTRY || depName.startsWith('core-js')) {
-          detectedPolyfills.push({
-            polyfillName: depName,
-            detectionSource: 'dependency',
-            dependencyType: 'dependencies',
-            ...(POLYFILL_REGISTRY[depName] || POLYFILL_REGISTRY['core-js']!),
-          });
-        }
-      }
+      for (const [dependencyType, deps] of Object.entries({
+        dependencies,
+        devDependencies,
+      })) {
+        for (const depName of Object.keys(deps)) {
+          const polyfill = getDeprecatedPolyfill(depName);
+          if (!polyfill) {
+            continue;
+          }
 
-      // Check devDependencies
-      for (const depName of Object.keys(devDependencies)) {
-        if (depName in POLYFILL_REGISTRY || depName.startsWith('core-js')) {
           detectedPolyfills.push({
             polyfillName: depName,
             detectionSource: 'dependency',
-            dependencyType: 'devDependencies',
-            ...(POLYFILL_REGISTRY[depName] || POLYFILL_REGISTRY['core-js']!),
+            dependencyType: dependencyType as
+              | 'dependencies'
+              | 'devDependencies',
+            ...polyfill,
           });
         }
       }
 
       return detectedPolyfills;
-    } catch {
-      // If we can't read or parse package.json, return empty array
-      return [];
+    } catch (error) {
+      throw new Error(
+        `Failed to read or parse package.json at ${packageJsonPath}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      );
     }
   };

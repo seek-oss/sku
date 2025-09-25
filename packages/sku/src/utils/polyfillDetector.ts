@@ -1,4 +1,7 @@
-import type { PolyfillRegistryEntry } from './polyfillRegistry.js';
+import {
+  type PolyfillRegistryEntry,
+  POLYFILL_REGISTRY,
+} from './polyfillRegistry.js';
 import { detectUnnecessaryPolyfillsFromDependencies } from './detectUnnecessaryPolyfillsFromDependencies.js';
 import { detectUnnecessaryPolyfillsFromConfig } from './detectUnnecessaryPolyfillsFromConfig.js';
 
@@ -7,6 +10,23 @@ export interface DetectedPolyfillWithSource extends PolyfillRegistryEntry {
   detectionSource: 'config' | 'dependency';
   dependencyType?: 'dependencies' | 'devDependencies';
 }
+
+/**
+ * Gets the polyfill registry entry for a given polyfill name, or null if not deprecated
+ */
+export const getDeprecatedPolyfill = (
+  polyfillName: string,
+): PolyfillRegistryEntry | null => {
+  if (polyfillName in POLYFILL_REGISTRY) {
+    return POLYFILL_REGISTRY[polyfillName];
+  }
+
+  if (polyfillName.startsWith('core-js')) {
+    return POLYFILL_REGISTRY['core-js']!;
+  }
+
+  return null;
+};
 
 /**
  * Detects unnecessary polyfills from both config and dependencies

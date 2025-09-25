@@ -8,9 +8,9 @@ const defaultDecorator = <T>(a: T) => a;
 export default {
   __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
   __UNSAFE_EXPERIMENTAL__testRunner: 'jest',
-  clientEntry: 'src/client.js',
-  renderEntry: 'src/render.js',
-  serverEntry: 'src/server.js',
+  clientEntry: 'src/client.tsx',
+  renderEntry: 'src/render.tsx',
+  serverEntry: 'src/server.tsx',
   libraryEntry: undefined,
   routes: [],
   sites: [],

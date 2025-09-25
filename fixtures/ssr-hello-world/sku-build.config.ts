@@ -2,6 +2,8 @@ import { makeStableHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
+  clientEntry: 'src/client.js',
+  serverEntry: 'src/render.js',
   publicPath: 'http://localhost:4000',
   port: 8000,
   serverPort: 8001,

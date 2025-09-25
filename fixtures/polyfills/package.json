@@ -8,7 +8,7 @@
     "react-dom": "catalog:"
   },
   "scripts": {
-    "start": "sku start",
+    "start": "sku start --config sku.config.special.js",
     "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
     "start:bad": "sku start --config sku.config.bad.ts",
     "build": "sku build",

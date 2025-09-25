@@ -1,4 +1,6 @@
 import { describe, it, vi, beforeEach } from 'vitest';
+import { existsSync, readFileSync } from 'node:fs';
+
 import { detectUnnecessaryPolyfills } from './polyfillDetector.js';
 
 vi.mock('node:fs', () => ({
@@ -8,7 +10,6 @@ vi.mock('node:fs', () => ({
 
 describe('polyfillDetector', () => {
   beforeEach(async () => {
-    const { existsSync, readFileSync } = await import('node:fs');
     // Default mock: package.json exists but has no polyfill dependencies
     vi.mocked(existsSync).mockReturnValue(true);
     vi.mocked(readFileSync).mockReturnValue(
@@ -119,26 +120,28 @@ describe('polyfillDetector', () => {
         },
       };
 
-      const { existsSync, readFileSync } = await import('node:fs');
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue(JSON.stringify(mockPackageJson));
 
       const result = detectUnnecessaryPolyfills([]);
 
-      expect(result).toHaveLength(2);
-      expect(
-        result.find(
-          (p) =>
-            p.polyfillName === 'core-js' && p.detectionSource === 'dependency',
-        ),
-      ).toBeTruthy();
-      expect(
-        result.find(
-          (p) =>
-            p.polyfillName === 'whatwg-fetch' &&
-            p.detectionSource === 'dependency',
-        ),
-      ).toBeTruthy();
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "dependencyType": "dependencies",
+            "detectionSource": "dependency",
+            "docsUrl": "https://github.com/zloirock/core-js#usage",
+            "polyfillName": "core-js",
+            "reason": "Polyfills many features that may be unnecessary. Consider removing or using targeted polyfills for specific APIs.",
+          },
+          {
+            "dependencyType": "devDependencies",
+            "detectionSource": "dependency",
+            "polyfillName": "whatwg-fetch",
+            "reason": "Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.",
+          },
+        ]
+      `);
 
       vi.clearAllMocks();
     });

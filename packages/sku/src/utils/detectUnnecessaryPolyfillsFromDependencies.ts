@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { getPathFromCwd } from '@sku-lib/utils';
 import {
   type DetectedPolyfillWithSource,
@@ -12,12 +12,6 @@ import {
 export const detectUnnecessaryPolyfillsFromDependencies =
   (): DetectedPolyfillWithSource[] => {
     const packageJsonPath = getPathFromCwd('package.json');
-
-    if (!existsSync(packageJsonPath)) {
-      throw new Error(
-        `package.json not found at ${packageJsonPath} - this is required for polyfill detection`,
-      );
-    }
 
     try {
       const packageJsonContent = readFileSync(packageJsonPath, 'utf-8');

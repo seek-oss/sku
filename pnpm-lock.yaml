@@ -11,10 +11,10 @@ catalogs:
       specifier: ^20.19.9
       version: 20.19.9
     '@types/react':
-      specifier: ^19.1.8
+      specifier: ^19.1.9
       version: 19.1.9
     '@types/react-dom':
-      specifier: ^19.1.6
+      specifier: ^19.1.7
       version: 19.1.7
     '@vanilla-extract/vite-plugin':
       specifier: ^5.1.1
@@ -24,7 +24,7 @@ catalogs:
       version: 0.2.4
     braid-design-system:
       specifier: ^33.11.0
-      version: 33.11.0
+      version: 33.11.5
     jiti:
       specifier: 2.4.2
       version: 2.4.2
@@ -54,7 +54,7 @@ catalogs:
       specifier: ^18.3.1
       version: 18.3.1
 
-pnpmfileChecksum: sha256-HyzwrIZmFVJr7kvwhHMEE7NoDGkknMxWww7GMTBFW70=
+pnpmfileChecksum: sha256-BJdU5A0PR48f+qVWdlca0zjt2m4OSJwKkKWHz8OgDE0=
 
 importers:
 
@@ -201,7 +201,7 @@ importers:
     dependencies:
       braid-design-system:
         specifier: 'catalog:'
-        version: 33.11.0(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 33.11.5(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: 'catalog:'
         version: 19.1.1
@@ -514,6 +514,12 @@ importers:
 
   fixtures/sku-create: {}
 
+  fixtures/sku-init:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/sku-test:
     dependencies:
       '@apollo/client':
@@ -549,7 +555,7 @@ importers:
     dependencies:
       braid-design-system:
         specifier: 'catalog:'
-        version: 33.11.0(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 33.11.5(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: 'catalog:'
         version: 19.1.1
@@ -658,7 +664,7 @@ importers:
     dependencies:
       braid-design-system:
         specifier: 'catalog:'
-        version: 33.11.0(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 33.11.5(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: 'catalog:'
         version: 19.1.1
@@ -1317,7 +1323,7 @@ importers:
         version: 1.1.13(react@19.1.1)
       braid-design-system:
         specifier: 'catalog:'
-        version: 33.11.0(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 33.11.5(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       esbuild:
         specifier: ^0.25.0
         version: 0.25.6
@@ -4424,8 +4430,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  braid-design-system@33.11.0:
-    resolution: {integrity: sha512-9d5raoSjiFA0QsHhnX2aEQZlWy6xt0Fpv2wakv7lal3THICvFwXgxzm6vunJ0PcMTPkbiH01K6ftrXoma/y0vA==}
+  braid-design-system@33.11.5:
+    resolution: {integrity: sha512-9skUMXYikWhnNZd3hspJnALAe/2k0GURkL/nxCoTSyLR+5dN0EqHR4KIU/4cwrwjjDsFfKCdPzQlKNPu4OES3g==}
     peerDependencies:
       react: ^18 || ^19
       react-dom: ^18 || ^19
@@ -13128,7 +13134,7 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  braid-design-system@33.11.0(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  braid-design-system@33.11.5(@types/react@19.1.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       '@capsizecss/core': 4.1.2
       '@capsizecss/metrics': 3.5.0

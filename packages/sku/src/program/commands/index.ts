@@ -1,3 +1,4 @@
+import { initCommand } from './init/init.command.js';
 import { buildSsrCommand } from './build-ssr/build-ssr.command.js';
 import { configureCommand } from './configure/configure.command.js';
 import { formatCommand } from './format/format.command.js';
@@ -13,6 +14,7 @@ import { testCommand } from './test/test.command.js';
 /* [add-sku-command-generator: import] */
 
 export const commands = [
+  initCommand,
   buildSsrCommand,
   configureCommand,
   formatCommand,

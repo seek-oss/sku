@@ -54,7 +54,7 @@ program
             title: 'Webpack',
             value: 'webpack',
             description:
-              "Equivalent to the existing 'sku init' template. Uses Webpack for serving and bundling your application, and Jest for running tests. Select this template for a familiar, production-ready development environment.",
+              'Uses Webpack for serving and bundling your application, and Jest for running tests. Select this template for a familiar, production-ready development environment.',
           },
           {
             title: 'Vite (experimental)',

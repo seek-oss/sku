@@ -7,4 +7,5 @@ const DEFAULT_CONFIG: Partial<Config> = {
 };
 
 // Configure cli-testing-library with default settings
-export const configure = () => _configure(DEFAULT_CONFIG);
+export const configure = (config: Partial<Config> = {}) =>
+  _configure({ ...DEFAULT_CONFIG, ...config });

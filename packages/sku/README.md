@@ -42,8 +42,6 @@ $ pnpm start
 
 By default, a new project's dependencies will be installed with the same package manager used to run the create command.
 
-> **Note**: `sku init` is deprecated. Please use `@sku-lib/create` instead.
-
 ## [Documentation](https://seek-oss.github.io/sku)
 
 ## Contributing

@@ -7,6 +7,7 @@ import {
 import type { Page } from 'puppeteer';
 import {
   cleanup,
+  configure,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -19,6 +20,10 @@ const storybookStartedRegex =
   /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
 
 const timeout = 150_000;
+
+configure({
+  asyncUtilTimeout: timeout,
+});
 
 vi.setConfig({
   hookTimeout: timeout + 1000,
@@ -115,7 +120,7 @@ describe('storybook-config', () => {
         port.toString(),
       ]);
       expect(
-        await storybook.findByText(storybookStartedRegex, {}, { timeout }),
+        await storybook.findByText(storybookStartedRegex),
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
@@ -158,16 +163,11 @@ describe('storybook-config', () => {
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
 
-      await waitFor(
-        async () => {
-          expect(storybook.hasExit()).toMatchObject({
-            exitCode: 0,
-          });
-        },
-        {
-          timeout,
-        },
-      );
+      await waitFor(async () => {
+        expect(storybook.hasExit()).toMatchObject({
+          exitCode: 0,
+        });
+      });
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(

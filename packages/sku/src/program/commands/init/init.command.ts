@@ -1,19 +1,16 @@
 import { Command } from 'commander';
-import { packageManagerOption } from '../../options/packageManager/packageManager.option.js';
-import { setPackageManager } from '@sku-lib/utils';
 
+/**
+ * This command is deprecated.
+ */
 export const initCommand = new Command('init')
-  .description('Initialize a new sku project')
   .argument('[projectName]', 'Project name')
-  .option(
-    '--verbose',
-    "Sets the underlying packageManager's log level to `verbose`",
-  )
-  .addOption(packageManagerOption)
-  .on('option:package-manager', (packageManager) => {
-    setPackageManager(packageManager);
-  })
-  .action(async (projectName, options) => {
-    const { initAction } = await import('./init.action.js');
-    await initAction(projectName, options);
-  });
+  .allowExcessArguments(true)
+  .allowUnknownOption(true)
+  .description('Deprecated. Please use `@sku-lib/create` instead.')
+  .error(
+    `
+    'sku init' is deprecated. Please use '@sku-lib/create' instead.
+    @see https://seek-oss.github.io/sku/#/./docs/getting-started?id=getting-started
+    `,
+  );

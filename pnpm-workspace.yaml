@@ -33,7 +33,7 @@ syncInjectedDepsAfterScripts:
 # Catalogue works, but it does raise warnings on install.
 # @see https://github.com/pnpm/pnpm/issues/9662
 catalog:
-  '@types/node': '^20.19.9'
+  '@types/node': '^22.18.6'
   '@types/react': '^19.1.8'
   '@types/react-dom': '^19.1.6'
   '@vanilla-extract/vite-plugin': ^5.1.1

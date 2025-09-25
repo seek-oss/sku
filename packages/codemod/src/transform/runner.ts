@@ -6,6 +6,9 @@ import { fileURLToPath } from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
+import debug from 'debug';
+
+const log = debug('sku:codemod');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -95,7 +98,7 @@ export const runTransform = async (
 
   const outcomes: JobOutcome[] = await Promise.all(
     Array.from({ length: cpus }, (_, i) => {
-      console.log(picocolors.gray(`Starting worker ${i + 1} of ${cpus}`));
+      log(`Starting worker ${i + 1} of ${cpus}`);
       return runJobs({
         transformerPath,
         options,
@@ -116,9 +119,7 @@ export const runTransform = async (
     { filesChanged: 0 },
   );
 
-  console.log(
-    `Total number of files parsed: ${picocolors.bold(filesExpanded.length)}`,
-  );
+  console.log(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
   if (options.dry) {
     console.log(
       picocolors.yellow(

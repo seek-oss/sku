@@ -16,7 +16,7 @@ let filesChanged = 0;
 await Promise.all(
   jobs.map(async ({ filePath }: { filePath: string }) => {
     const source = await readFile(filePath, 'utf-8');
-    const output = transform(source);
+    const output = await transform(source);
 
     if (!output) {
       return;

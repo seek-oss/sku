@@ -1,4 +1,4 @@
-import { parse, Lang, type Edit } from '@ast-grep/napi';
+import { parseAsync, Lang, type Edit } from '@ast-grep/napi';
 
 const testGlobals = ['describe', 'it', 'test'];
 const jestGlobals = [
@@ -13,8 +13,8 @@ const jestGlobals = [
 const serializeImports = (imports: Set<string>) =>
   Array.from(imports).sort().join(', ');
 
-export const transform = (source: string) => {
-  const ast = parse(Lang.Tsx, source);
+export const transform = async (source: string) => {
+  const ast = await parseAsync(Lang.Tsx, source);
   const root = ast.root();
 
   const edits: Edit[] = [];
@@ -51,19 +51,16 @@ export const transform = (source: string) => {
       any: [{ kind: 'arrow_function' }, { kind: 'function_expression' }],
       not: { pattern: 'async $$$' },
       inside: {
-        pattern: 'jest.mock($$$)',
         has: {
           pattern: 'jest.requireActual',
           kind: 'member_expression',
           stopBy: 'end',
         },
-        // Prevent matching further formal_parameters within the factory function body
-        stopBy: { kind: 'statement_block' },
       },
     },
   });
 
-  // Prepend `async` to found mock factories
+  // Add "async" to mock factory parameters
   for (const node of jestMockFactoryParameters) {
     const {
       start: { index },

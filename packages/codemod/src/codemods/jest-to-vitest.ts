@@ -48,9 +48,12 @@ export const transform = async (source: string) => {
   const jestMockFactoryParameters = root.findAll({
     // Find all mock factories that contain `jest.requireActual` and are not already async
     rule: {
-      any: [{ kind: 'arrow_function' }, { kind: 'function_expression' }],
-      not: { pattern: 'async $$$' },
+      // Matching only the parameters of the function so that we can edit deeply nested functions.
+      // Matching on `arrow_function` and `function_expression` _would_ match deeply nested functions, but
+      // editing will fail since the top-level function will have been edited already, breaking child edits.
+      kind: 'formal_parameters',
       inside: {
+        not: { pattern: 'async $$$' },
         has: {
           pattern: 'jest.requireActual',
           kind: 'member_expression',
@@ -62,9 +65,14 @@ export const transform = async (source: string) => {
 
   // Add "async" to mock factory parameters
   for (const node of jestMockFactoryParameters) {
+    const parent = node.parent();
+    // Since we are matching on the parameters of the function we need to check
+    // if the parent is a function expression (`function () {}`) so that we add `async` to the right place.
+    const nodeToEdit = parent?.is('function_expression') ? parent : node;
+
     const {
       start: { index },
-    } = node.range();
+    } = nodeToEdit.range();
 
     const edit: Edit = {
       startPos: index,

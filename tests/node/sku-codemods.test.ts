@@ -298,6 +298,12 @@ const testCases: TestCase[] = [
         pulp: async function () {
           return 'pulp';
         },
+        blorp: () => {
+          return jest.requireActual();
+        },
+        beep: function importMock() {
+          return jest.requireActual();
+        },
       });
 
       jest.mock('./foo2', mock);
@@ -320,6 +326,12 @@ const testCases: TestCase[] = [
       },
       pulp: async function () {
         return 'pulp';
+      },
+      blorp: async () => {
+        return await vi.importActual();
+      },
+      beep: async function importMock() {
+        return await vi.importActual();
       },
     });
 

@@ -8,7 +8,17 @@
 
 2. **Default entry file extensions**: Default values for entry files now use `.tsx` extensions instead of `.js`:
    - `clientEntry`: `'src/client.js'` → `'src/client.tsx'`
-   - `renderEntry`: `'src/render.js'` → `'src/render.tsx'`  
+   - `renderEntry`: `'src/render.js'` → `'src/render.tsx'`
    - `serverEntry`: `'src/server.js'` → `'src/server.tsx'`
 
-   Existing projects with `.js` entry files will need to either rename their files to `.tsx` or explicitly specify the `.js` paths in their sku config.
+   Existing projects with `.js` entry files will need to either rename their files to `.tsx` or explicitly specify the `.js` paths in their sku config:
+
+   ```diff
+   // sku.config.ts
+   export default {
+   +  clientEntry: 'src/client.js',
+   +  renderEntry: 'src/render.js',
+   +  serverEntry: 'src/server.js',
+     // ... rest of config
+   }
+   ```

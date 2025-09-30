@@ -1,7 +1,7 @@
 import { styleText } from 'node:util';
 import {
   detectUnnecessaryPolyfills,
-  type DetectedPolyfill,
+  type DetectedPolyfillWithSource,
 } from './polyfillDetector.js';
 import provider from '../services/telemetry/provider.js';
 
@@ -37,14 +37,39 @@ export const validatePolyfills = (polyfills: string[]): void => {
   console.log();
 };
 
-const displayPolyfillWarning = (polyfill: DetectedPolyfill): void => {
+const displayPolyfillWarning = (polyfill: DetectedPolyfillWithSource): void => {
+  const sourceText =
+    polyfill.detectionSource === 'config'
+      ? 'found in config'
+      : `found in ${polyfill.dependencyType}`;
+
   console.log(
-    styleText('red', `  ❌ ${styleText('bold', polyfill.polyfillName)}`),
+    styleText(
+      'red',
+      `  ❌ ${styleText('bold', polyfill.polyfillName)} ${styleText('dim', `(${sourceText})`)}`,
+    ),
   );
   console.log(styleText('dim', `     ${polyfill.reason}`));
 
   if (polyfill.docsUrl) {
     console.log(styleText('dim', `     Docs: ${polyfill.docsUrl}`));
+  }
+
+  // Provide actionable guidance based on detection source
+  if (polyfill.detectionSource === 'config') {
+    console.log(
+      styleText(
+        'dim',
+        `     Action: Remove from polyfills array in sku.config.ts`,
+      ),
+    );
+  } else {
+    console.log(
+      styleText(
+        'dim',
+        `     Action: Remove from ${polyfill.dependencyType} in package.json`,
+      ),
+    );
   }
 
   console.log();

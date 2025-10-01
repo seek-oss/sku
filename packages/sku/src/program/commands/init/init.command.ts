@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 
 /**
- * This command is deprecated.
+ * @deprecated Will be removed entirely in a future major version. Replaced by `@sku-lib/create`.
  */
 export const initCommand = new Command('init')
   .argument('[projectName]', 'Project name')

@@ -2,23 +2,13 @@
 'sku': major
 ---
 
-**Breaking changes to configuration handling:**
+Throw on invalid `--config` file path
 
-1. **Custom config file validation**: `sku` no longer falls back to default sku config files when the config file specified with the `--config` flag cannot be found. It will now throw an error and exit the program instead. This ensures users are aware that the configuration file is either missing or incorrectly specified, rather than silently falling back to a default configuration that may not be appropriate for their use case. If you encounter this error, ensure that the `--config` flag points to a valid configuration file.
+**BREAKING CHANGE**:
 
-2. **Default entry file extensions**: Default values for entry files now use `.tsx` extensions instead of `.js`:
-   - `clientEntry`: `'src/client.js'` → `'src/client.tsx'`
-   - `renderEntry`: `'src/render.js'` → `'src/render.tsx'`
-   - `serverEntry`: `'src/server.js'` → `'src/server.tsx'`
+`sku` no longer falls back to default sku config files when the config file specified with the `--config` flag cannot be found.
+It will now throw an error and exit the program instead.
 
-   Existing projects with `.js` entry files will need to either rename their files to `.tsx` or explicitly specify the `.js` paths in their sku config:
+This ensures users are aware that the configuration file is either missing or incorrectly specified, rather than silently falling back to a default configuration that may not be appropriate for their use case.
 
-   ```diff
-   // sku.config.ts
-   export default {
-   +  clientEntry: 'src/client.js',
-   +  renderEntry: 'src/render.js',
-   +  serverEntry: 'src/server.js',
-     // ... rest of config
-   }
-   ```
+If you encounter this error, ensure that the `--config` flag points to a valid configuration file.

@@ -15,7 +15,7 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": ">=22.20.0"
+    "node": ">=22.19.0"
   },
   "files": [
     "dist"

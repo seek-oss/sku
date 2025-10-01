@@ -6,5 +6,8 @@
 '@sku-lib/vite': major
 'sku': major
 ---
+Drop support for Node.js versions below 22.19.0
 
-The minimum supported Node.js version is now 22.20.0. Consumers must upgrade to Node.js v22.20.0 or later.
+BREAKING CHANGE:
+
+The minimum supported Node.js version is now 22.19.0. Consumers must upgrade to Node.js v22.19.0 or later.

@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { configure, scopeToFixture } from '@sku-private/testing-library';
+import {
+  configure,
+  scopeToFixture,
+  waitFor,
+} from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('sku-init');
 
@@ -21,10 +25,15 @@ describe('sku init', () => {
       const result = await sku('init', args);
 
       expect(
-        await result.findByError(
-          `'sku init' is deprecated. Please use '@sku-lib/create' instead.`,
+        await result.findByText(
+          // Whitespace is collapsed
+          '`sku init` is deprecated Please use `@sku-lib/create` instead',
         ),
       ).toBeInTheConsole();
+
+      await waitFor(() => {
+        expect(result.hasExit()).toMatchObject({ exitCode: 1 });
+      });
     },
   );
 });

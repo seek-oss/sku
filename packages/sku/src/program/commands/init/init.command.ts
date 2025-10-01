@@ -1,4 +1,6 @@
+import { banner } from '@sku-lib/utils';
 import { Command } from 'commander';
+import { styleText } from 'node:util';
 
 /**
  * @deprecated Will be removed entirely in a future major version. Replaced by `@sku-lib/create`.
@@ -8,9 +10,11 @@ export const initCommand = new Command('init')
   .allowExcessArguments(true)
   .allowUnknownOption(true)
   .description('Deprecated. Please use `@sku-lib/create` instead.')
-  .error(
-    `
-    'sku init' is deprecated. Please use '@sku-lib/create' instead.
-    @see https://seek-oss.github.io/sku/#/./docs/getting-started?id=getting-started
-    `,
-  );
+  // .error(`'sku init' is deprecated. Please use '@sku-lib/create' instead.`);
+  .action(() => {
+    banner('error', '`sku init` is deprecated', [
+      'Please use `@sku-lib/create` instead.',
+      'https://seek-oss.github.io/sku/#/./docs/getting-started?id=getting-started',
+    ]);
+    process.exit(1);
+  });

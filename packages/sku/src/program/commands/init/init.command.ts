@@ -1,6 +1,5 @@
 import { banner } from '@sku-lib/utils';
 import { Command } from 'commander';
-import { styleText } from 'node:util';
 
 /**
  * @deprecated Will be removed entirely in a future major version. Replaced by `@sku-lib/create`.

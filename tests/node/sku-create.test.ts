@@ -1,28 +1,18 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-  vi,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
 import { parseDocument, Document } from 'yaml';
 
 import fs from 'node:fs/promises';
-import { scopeToFixture } from '@sku-private/testing-library';
+import { configure, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library/create';
 import path from 'node:path';
 
-const { node, fixturePath } = scopeToFixture('sku-create');
-
-const runCreateSku = (projectName: string, template = 'webpack') =>
-  node([
-    path.resolve(__dirname, '../../packages/create/dist/cli.js'),
-    projectName,
-    '--template',
-    template,
-  ]);
+const { create, fixturePath } = scopeToFixture('sku-create');
 
 const timeout = 100_000;
+
+configure({
+  asyncUtilTimeout: timeout,
+});
 
 vi.setConfig({
   hookTimeout: timeout + 1000,
@@ -54,25 +44,129 @@ const createWorkspace = async () => {
 const projectName = 'new-project';
 const projectDirectory = fixturePath(projectName);
 
-describe('create-sku', () => {
+describe('template flag', () => {
+  it('should create a webpack project', async () => {
+    const result = await create(projectName, ['--template', 'webpack']);
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with webpack template`,
+      ),
+    ).toBeInTheConsole();
+  });
+
+  it('should not create a vite project if the user does not say yes explicitly', async () => {
+    const result = await create(projectName, ['--template', 'vite']);
+
+    expect(
+      await result.findByText(
+        `Vite support in sku is currently experimental and not yet suitable for production use. Continue?`,
+      ),
+    ).toBeInTheConsole();
+    result.userEvent.keyboard('[Enter]');
+    expect(
+      await result.findByText(
+        'Cancelled. Use `webpack` template for a stable production-ready experience.',
+      ),
+    ).toBeInTheConsole();
+
+    await waitFor(async () => {
+      expect(result.hasExit()).toMatchObject({
+        exitCode: 1,
+      });
+    });
+  });
+
+  it('should create a vite project if the user says yes explicitly', async () => {
+    const result = await create(projectName, ['--template', 'vite']);
+
+    expect(
+      await result.findByText(
+        `Vite support in sku is currently experimental and not yet suitable for production use. Continue?`,
+      ),
+    ).toBeInTheConsole();
+    result.userEvent.keyboard('y');
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with vite template`,
+      ),
+    ).toBeInTheConsole();
+  });
+});
+
+describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
 
     const workspace = await createWorkspace();
 
     await fs.writeFile(fixturePath('pnpm-workspace.yaml'), workspace);
-
-    const result = await runCreateSku(projectName);
-    globalExpect(
-      await result.findByText(`${projectName} created`, {}, { timeout }),
-    ).toBeInTheConsole();
   });
 
   afterAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
   });
 
-  it('should create package.json', async ({ expect }) => {
+  // Tests are run sequentially so this can be run first in its own test
+  it.runIf(template === 'webpack')(
+    'should create a webpack project',
+    async () => {
+      const result = await create(projectName);
+      expect(
+        await result.findByText(
+          'Which template would you like to use?',
+          {},
+          { timeout },
+        ),
+      ).toBeInTheConsole();
+
+      expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
+
+      result.userEvent.keyboard('[Enter]');
+      expect(
+        await result.findByText(
+          `Creating new sku project: ${projectName} with webpack template`,
+        ),
+      ).toBeInTheConsole();
+
+      expect(
+        await result.findByText(`${projectName} created`),
+      ).toBeInTheConsole();
+    },
+  );
+
+  it.runIf(template === 'vite')('should create a vite project', async () => {
+    const result = await create(projectName);
+    expect(
+      await result.findByText(
+        'Which template would you like to use?',
+        {},
+        { timeout },
+      ),
+    ).toBeInTheConsole();
+
+    result.userEvent.keyboard('[ArrowDown]');
+    expect(await result.findByText('❯ Vite (experimental)')).toBeInTheConsole();
+
+    result.userEvent.keyboard('[Enter]');
+    expect(
+      await result.findByText(
+        'Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
+      ),
+    ).toBeInTheConsole();
+    result.userEvent.keyboard('y');
+
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with vite template`,
+      ),
+    ).toBeInTheConsole();
+
+    expect(
+      await result.findByText(`${projectName} created`),
+    ).toBeInTheConsole();
+  });
+
+  it('should create package.json', async () => {
     const contents = await fs.readFile(
       fixturePath(projectName, 'package.json'),
       'utf-8',
@@ -89,13 +183,13 @@ describe('create-sku', () => {
     'README.md',
     '.prettierignore',
     'src/App/NextSteps.tsx',
-  ])('should create %s', async (file, { expect }) => {
+  ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(contents).toMatchSnapshot();
   });
 
-  it('should update the pnpm-workspace.yaml', async ({ expect }) => {
+  it('should update the pnpm-workspace.yaml', async () => {
     const rootFile = await fs.readFile(
       path.resolve(fixturePath('pnpm-workspace.yaml')),
       'utf8',

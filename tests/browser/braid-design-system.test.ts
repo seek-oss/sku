@@ -39,7 +39,7 @@ describe('braid-design-system', () => {
       const args: BundlerValues<string[]> = {
         vite: [
           '--config',
-          'sku.config.vite.js',
+          'sku.config.vite.ts',
           '--experimental-bundler',
           '--strict-port',
           `--port=${port}`,
@@ -83,7 +83,7 @@ describe('braid-design-system', () => {
     describe('build', async () => {
       const port = await getPort();
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.js', '--experimental-bundler'],
+        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
         webpack: [],
       };
 

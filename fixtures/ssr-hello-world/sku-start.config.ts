@@ -2,8 +2,6 @@ import { makeStableHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
-  clientEntry: 'src/client.js',
-  serverEntry: 'src/server.js',
   port: 8100,
   serverPort: 8101,
   target: 'dist-start',

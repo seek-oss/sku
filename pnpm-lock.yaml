@@ -660,6 +660,12 @@ importers:
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../../private/test-utils
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.9
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.1.7(@types/react@19.1.9)
       '@vanilla-extract/css':
         specifier: ^1.0.0
         version: 1.17.4(babel-plugin-macros@3.1.0)

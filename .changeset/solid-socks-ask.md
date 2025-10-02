@@ -3,7 +3,8 @@
 '@sku-lib/create': major
 ---
 
-Update commander.js to the latest version.
+Throw error when given unsupported arguments.
+This is now the default behaviour of the updated commander.js version.
 
 **BREAKING CHANGE**:
 

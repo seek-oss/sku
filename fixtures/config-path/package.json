@@ -1,0 +1,8 @@
+{
+  "name": "@sku-fixtures/config-path",
+  "private": true,
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

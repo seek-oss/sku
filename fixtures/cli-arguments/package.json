@@ -1,0 +1,8 @@
+{
+  "name": "@sku-fixtures/cli-arguments",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "sku": "workspace:*"
+  }
+}

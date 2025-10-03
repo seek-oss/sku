@@ -5,7 +5,7 @@ const skuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
-  __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
+  testRunner: 'vitest',
   bundler: 'vite',
 } satisfies SkuConfig;
 

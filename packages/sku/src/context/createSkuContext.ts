@@ -247,14 +247,13 @@ export const createSkuContext = ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   const tsPaths =
-    skuConfig.bundler === 'vite' ||
-    skuConfig.__UNSAFE_EXPERIMENTAL__testRunner === 'vitest'
+    skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'
       ? generateTypeScriptPaths(skuConfig.pathAliases)
       : undefined;
 
   return {
     bundler: skuConfig.bundler,
-    testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
+    testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
     skuConfig,

@@ -150,14 +150,14 @@ To enable Vitest in `sku`, first install the required dependencies:
 pnpm add -D vitest @sku-lib/vitest
 ```
 
-Then, configure [`__UNSAFE_EXPERIMENTAL__testRunner`][test runner] in your `sku` config:
+Then, configure [`testRunner`][test runner] in your `sku` config:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
+  testRunner: 'vitest',
   ...
 } satisfies SkuConfig;
 ```
@@ -238,7 +238,7 @@ import '@testing-library/jest-dom/vitest';
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./docs/configuration.md#__unsafe_experimental__testrunner
+[test runner]: ./docs/configuration.md#testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest

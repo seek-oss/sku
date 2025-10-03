@@ -128,7 +128,7 @@ export interface SkuConfigBase {
    *
    * @default: "jest"
    */
-  __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
+  testRunner?: 'vitest' | 'jest';
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *

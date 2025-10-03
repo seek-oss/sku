@@ -5,6 +5,6 @@ import baseConfig from './sku.config';
 
 export default {
   ...baseConfig,
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: makeStableViteHashes,
+  bundler: 'vite',
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts"
+    "build:vite": "sku build --config sku.config.vite.ts"
   },
   "dependencies": {
     "react": "catalog:",

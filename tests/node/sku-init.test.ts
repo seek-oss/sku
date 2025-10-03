@@ -1,17 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  configure,
-  scopeToFixture,
-  waitFor,
-} from '@sku-private/testing-library';
+import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('sku-init');
-
-const timeout = 5_000;
-configure({
-  asyncUtilTimeout: timeout,
-});
 
 describe('sku init', () => {
   it.each`

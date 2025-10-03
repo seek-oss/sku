@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts --experimental-bundler",
-    "build:vite": "sku build --config sku.config.vite.ts --experimental-bundler",
+    "start:vite": "sku start --config sku.config.vite.ts",
+    "build:vite": "sku build --config sku.config.vite.ts",
     "build": "sku build",
     "serve": "sku serve"
   },

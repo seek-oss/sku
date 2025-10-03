@@ -23,5 +23,5 @@
 - **Quality**
 - [Testing](./docs/testing.md)
 - [Linting/formatting](./docs/linting.md)
-- **Experimental**
+- **Alternate bundlers**
 - [Vite](./docs/vite.md)

@@ -12,7 +12,7 @@ const { sku, fixturePath } = scopeToFixture('display-names-prod');
 describe('display-names-prod', () => {
   describe.for(bundlers)('bundler: %s', (bundler) => {
     const args: BundlerValues<string[]> = {
-      vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+      vite: ['--config', 'sku.config.vite.ts'],
       webpack: [],
     };
 

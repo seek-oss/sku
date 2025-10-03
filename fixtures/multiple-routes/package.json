@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start:vite": "sku start --convert-loadable --experimental-bundler --config sku.config.vite.js",
-    "build:vite": "sku build --convert-loadable --experimental-bundler --config sku.config.vite.js",
+    "start:vite": "sku start --convert-loadable --config sku.config.vite.js",
+    "build:vite": "sku build --convert-loadable --config sku.config.vite.js",
     "serve": "sku serve"
   },
   "dependencies": {

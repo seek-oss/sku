@@ -57,7 +57,7 @@ $ pnpm i
 Start a local development server:
 
 \`\`\`sh
-$ pnpm run start --experimental-bundler
+$ pnpm run start
 \`\`\`
 
 Run unit tests:
@@ -76,7 +76,7 @@ $ pnpm run format
 Build assets for production:
 
 \`\`\`sh
-$ pnpm run build --experimental-bundler
+$ pnpm run build
 \`\`\`
 "
 `;
@@ -106,10 +106,10 @@ exports[`create-sku vite > should create package.json 1`] = `
   "name": "new-project",
   "private": true,
   "scripts": {
-    "build": "sku build --experimental-bundler",
+    "build": "sku build",
     "format": "sku format",
     "lint": "sku lint",
-    "start": "sku start --experimental-bundler",
+    "start": "sku start",
     "test": "sku test --run",
   },
   "type": "module",
@@ -125,8 +125,8 @@ const skuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
-  __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  testRunner: 'vitest',
+  bundler: 'vite',
 } satisfies SkuConfig;
 
 export default skuConfig;

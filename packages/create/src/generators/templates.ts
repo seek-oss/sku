@@ -40,21 +40,15 @@ export const generateTemplateFiles = async (
   const baseTemplateDir = join(templatesRoot, 'base');
   const bundlerTemplateDir = join(templatesRoot, template);
 
-  const templateData = createTemplateData(projectName, template);
+  const templateData = createTemplateData(projectName);
 
   await copyTemplateFiles(baseTemplateDir, targetPath, templateData);
   await copyTemplateFiles(bundlerTemplateDir, targetPath, templateData);
 };
 
-export const createTemplateData = (
-  projectName: string,
-  template: Template,
-): TemplateData => {
-  const isVite = template === 'vite';
-  const bundlerFlag = isVite ? ' --experimental-bundler' : '';
-
-  const startScript = `${getRunCommand('start')}${bundlerFlag}`;
-  const buildScript = `${getRunCommand('build')}${bundlerFlag}`;
+export const createTemplateData = (projectName: string): TemplateData => {
+  const startScript = `${getRunCommand('start')}`;
+  const buildScript = `${getRunCommand('build')}`;
   const testScript = getRunCommand('test');
   const formatScript = getRunCommand('format');
   const lintScript = getRunCommand('lint');

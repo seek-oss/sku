@@ -10,7 +10,7 @@ const { sku, fixturePath } = scopeToFixture('custom-output-target');
 
 describe.each(bundlers)('bundler %s', (bundler) => {
   const args: BundlerValues<string[]> = {
-    vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+    vite: ['--config', 'sku.config.vite.ts'],
     webpack: [],
   };
 

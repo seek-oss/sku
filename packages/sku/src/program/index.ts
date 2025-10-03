@@ -4,7 +4,6 @@ import { debugOption } from './options/debug/debug.option.js';
 import { configOption } from './options/config/config.option.js';
 import { environmentOption } from './options/environment/environment.option.js';
 import { initDebug } from '../utils/debug.js';
-import { experimentalBundlerOption } from './options/expirementalBundler/experimentalBundler.option.js';
 import { preActionHook } from './hooks/preAction/preAction.hook.js';
 import packageJson from 'sku/package.json' with { type: 'json' };
 
@@ -18,7 +17,6 @@ export const program = new Command()
   .addOption(environmentOption)
   .addOption(configOption)
   .addOption(debugOption)
-  .addOption(experimentalBundlerOption)
   .on('option:debug', () => {
     if (program.opts()?.debug) {
       initDebug();

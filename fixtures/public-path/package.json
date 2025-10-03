@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --experimental-bundler --config sku.config.vite.js"
+    "build:vite": "sku build --config sku.config.vite.js"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

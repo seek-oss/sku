@@ -13,7 +13,7 @@ describe('report-generation', () => {
   describe.for(bundlers)('bundler %s', (bundler) => {
     describe('build', async () => {
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+        vite: ['--config', 'sku.config.vite.ts'],
         webpack: [],
       };
 

@@ -1,9 +1,5 @@
 # Vite
 
-?> Support for [Vite] as an alternative bundler for `sku` is available as an experimental feature.
-It is currently being trialled internally and is not ready for general production use.
-If you wish to try it out, please reach out in [`#sku-support`].
-
 [Vite]: https://vite.dev/
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
@@ -150,14 +146,14 @@ To enable Vitest in `sku`, first install the required dependencies:
 pnpm add -D vitest @sku-lib/vitest
 ```
 
-Then, configure [`__UNSAFE_EXPERIMENTAL__testRunner`][test runner] in your `sku` config:
+Then, configure [`testRunner`][test runner] in your `sku` config:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
+  testRunner: 'vitest',
   ...
 } satisfies SkuConfig;
 ```
@@ -238,7 +234,7 @@ import '@testing-library/jest-dom/vitest';
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./docs/configuration.md#__unsafe_experimental__testrunner
+[test runner]: ./docs/configuration.md#testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
@@ -246,32 +242,25 @@ import '@testing-library/jest-dom/vitest';
 
 ## Migrating to Vite
 
-To configure `sku` to bundle your applications with Vite, configure [`__UNSAFE_EXPERIMENTAL__bundler`][bundler] in your `sku` config:
+To configure `sku` to bundle your applications with Vite, configure [`bundler`][bundler] in your `sku` config:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
   ...
 } satisfies SkuConfig;
 ```
 
-Additionally, the `--experimental-bundler` flag must be passed to `sku` CLI commands to enable Vite:
-
-```bash
-sku start --experimental-bundler
-```
-
 Depending on your application, you may need no further changes to your codebase after this point in order to run your application with Vite.
-However, if there are issues with your application, you may need to make some changes to your codebase.
 
 Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
 
 ?> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
 
-[bundler]: ./docs/configuration.md#__unsafe_experimental__bundler
+[bundler]: ./docs/configuration.md#bundler
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### Code splitting
@@ -286,7 +275,7 @@ pnpm dlx @sku-lib/codemod transform-vite-loadable .
 You will also need to install a separate library that provides Vite-compatible loadable APIs:
 
 ```bash
-pnpm add @sku-lib/vite/loadable
+pnpm add @sku-lib/vite
 ```
 
 `@sku-lib/vite/loadable` relies on React's [`<Suspense />`][suspense] component to load a fallback state.

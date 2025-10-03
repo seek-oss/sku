@@ -6,8 +6,8 @@ import type { CompleteSkuConfig } from '../types/types.js';
 const defaultDecorator = <T>(a: T) => a;
 
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
-  __UNSAFE_EXPERIMENTAL__testRunner: 'jest',
+  bundler: 'webpack',
+  testRunner: 'jest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
@@ -49,5 +49,5 @@ export default {
   externalizeNodeModules: false,
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
   pathAliases: {},
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: undefined,
+  dangerouslySetViteConfig: undefined,
 } satisfies CompleteSkuConfig;

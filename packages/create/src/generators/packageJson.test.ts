@@ -51,8 +51,8 @@ describe('generatePackageJson', () => {
         "private": true,
         "type": "module",
         "scripts": {
-          "start": "sku start --experimental-bundler",
-          "build": "sku build --experimental-bundler",
+          "start": "sku start",
+          "build": "sku build",
           "test": "sku test --run",
           "format": "sku format",
           "lint": "sku lint"

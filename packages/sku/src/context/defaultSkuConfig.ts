@@ -49,5 +49,5 @@ export default {
   externalizeNodeModules: false,
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
   pathAliases: {},
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: undefined,
+  dangerouslySetViteConfig: undefined,
 } satisfies CompleteSkuConfig;

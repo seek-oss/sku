@@ -7,5 +7,5 @@ export default {
   port: baseConfig.port + 10000,
   bundler: 'vite',
   devServerMiddleware: './dev-middleware.vite.js',
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: makeStableViteHashes,
+  dangerouslySetViteConfig: makeStableViteHashes,
 };

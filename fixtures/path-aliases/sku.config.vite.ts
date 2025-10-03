@@ -9,5 +9,5 @@ export default {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
   },
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig: makeStableViteHashes,
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

@@ -2,7 +2,7 @@ import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   pathAliases: {

@@ -6,7 +6,7 @@ const skuConfig = {
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
   __UNSAFE_EXPERIMENTAL__testRunner: 'vitest',
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
 } satisfies SkuConfig;
 
 export default skuConfig;

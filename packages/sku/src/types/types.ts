@@ -118,7 +118,7 @@ export interface SkuConfigBase {
    *
    * @default "webpack"
    */
-  __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | 'vite';
+  bundler?: 'webpack' | 'vite';
 
   /**
    * The test runner that sku uses to run the tests.
@@ -563,7 +563,7 @@ export type CompleteSkuConfig = SkuConfigBase &
 export type SkuConfig = SkuConfigBase &
   (
     | ({
-        __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | undefined;
+        bundler?: 'webpack' | undefined;
       } & WebpackSkuConfig)
-    | ({ __UNSAFE_EXPERIMENTAL__bundler: 'vite' } & ViteSkuConfig)
+    | ({ bundler: 'vite' } & ViteSkuConfig)
   );

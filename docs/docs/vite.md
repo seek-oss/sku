@@ -246,14 +246,14 @@ import '@testing-library/jest-dom/vitest';
 
 ## Migrating to Vite
 
-To configure `sku` to bundle your applications with Vite, configure [`__UNSAFE_EXPERIMENTAL__bundler`][bundler] in your `sku` config:
+To configure `sku` to bundle your applications with Vite, configure [`bundler`][bundler] in your `sku` config:
 
 ```typescript
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
   ...
 } satisfies SkuConfig;
 ```
@@ -271,7 +271,7 @@ Documented below is a list of differences between `sku` with `webpack` and `sku`
 
 ?> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
 
-[bundler]: ./docs/configuration.md#__unsafe_experimental__bundler
+[bundler]: ./docs/configuration.md#bundler
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### Code splitting

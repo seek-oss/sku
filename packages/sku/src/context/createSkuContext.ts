@@ -120,10 +120,7 @@ export const createSkuContext = ({
   }
 
   // Validate pathAliases destinations don't contain node_modules
-  if (
-    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' &&
-    skuConfig.pathAliases
-  ) {
+  if (skuConfig.bundler === 'vite' && skuConfig.pathAliases) {
     for (const [alias, destination] of Object.entries(
       skuConfig.pathAliases,
     ) as Array<[string, string]>) {
@@ -250,13 +247,13 @@ export const createSkuContext = ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules!;
 
   const tsPaths =
-    skuConfig.__UNSAFE_EXPERIMENTAL__bundler === 'vite' ||
+    skuConfig.bundler === 'vite' ||
     skuConfig.__UNSAFE_EXPERIMENTAL__testRunner === 'vitest'
       ? generateTypeScriptPaths(skuConfig.pathAliases)
       : undefined;
 
   return {
-    bundler: skuConfig.__UNSAFE_EXPERIMENTAL__bundler,
+    bundler: skuConfig.bundler,
     testRunner: skuConfig.__UNSAFE_EXPERIMENTAL__testRunner,
     configPath: appConfigPath,
     publicPath,

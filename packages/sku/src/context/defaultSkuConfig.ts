@@ -6,7 +6,7 @@ import type { CompleteSkuConfig } from '../types/types.js';
 const defaultDecorator = <T>(a: T) => a;
 
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'webpack',
+  bundler: 'webpack',
   __UNSAFE_EXPERIMENTAL__testRunner: 'jest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',

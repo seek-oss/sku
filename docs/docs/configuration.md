@@ -39,6 +39,14 @@ If none of these files exist, sku will use its built-in default configuration.
 
 Config files can use either TypeScript or JavaScript.
 
+## bundler
+
+Type: `string`
+
+Default: `webpack`
+
+The bundler that sku uses to build the application.
+
 ## clientEntry
 
 Type: `string`
@@ -342,7 +350,7 @@ Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAlia
 
 ```typescript
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
   pathAliases: {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
@@ -572,6 +580,15 @@ Default: `dist`
 
 The directory to build your assets into when running `sku build` or `sku build-ssr`
 
+## testRunner
+
+Type: `string`
+
+Default: `jest`
+
+The test runner that sku uses to run the tests.
+Valid options are `jest` and `vitest`.
+
 ## transformOutputPath
 
 Type: `function`
@@ -583,18 +600,6 @@ Default: `({ environment = '', site = '', route = '' }) => path.join(environment
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
 
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
-
-## \_\_UNSAFE_EXPERIMENTAL\_\_bundler
-
-Type: `string`
-
-Default: `webpack`
-
-_This is an experimental option that may change or be removed without notice._
-
-The bundler that sku uses to build the application.
-
-NOTE: Not all sku functionality is supported by the `vite` option. Production applications should not use the `vite` option.
 
 ## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies
 
@@ -630,16 +635,3 @@ If you only need to modify one of these configs, then you can check `env.mode` f
 
 Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
 It is the responsibility of the user to ensure that their customizations are compatible with sku.
-
-## \_\_UNSAFE_EXPERIMENTAL\_\_testRunner
-
-Type: `string`
-
-Default: `jest`
-
-_This is an experimental option that may change or be removed without notice._
-
-The test runner that sku uses to run the tests.
-Valid options are `jest` and `vitest`.
-
-NOTE: Not all `sku` functionality is supported by the `vitest` option.

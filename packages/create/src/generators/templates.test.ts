@@ -14,7 +14,7 @@ describe('createTemplateData', () => {
   });
 
   it('should create template data for webpack template', ({ expect }) => {
-    const result = createTemplateData('my-app', 'webpack');
+    const result = createTemplateData('my-app');
 
     expect(result).toMatchInlineSnapshot(`
       {
@@ -39,12 +39,12 @@ describe('createTemplateData', () => {
   it('should create template data for vite template with experimental bundler flags', ({
     expect,
   }) => {
-    const result = createTemplateData('my-vite-app', 'vite');
+    const result = createTemplateData('my-vite-app');
 
     expect(result).toMatchInlineSnapshot(`
       {
         "appName": "my-vite-app",
-        "buildScript": "pnpm build --experimental-bundler",
+        "buildScript": "pnpm build",
         "formatScript": "pnpm format",
         "gettingStartedDocs": "First of all, make sure you've installed [pnpm](https://pnpm.io/installation).
 
@@ -55,14 +55,14 @@ describe('createTemplateData', () => {
       \`\`\`",
         "lintScript": "pnpm lint",
         "projectName": "my-vite-app",
-        "startScript": "pnpm start --experimental-bundler",
+        "startScript": "pnpm start",
         "testScript": "pnpm test",
       }
     `);
   });
 
   it('should handle project names with special characters', ({ expect }) => {
-    const result = createTemplateData('@scope/my-app', 'webpack');
+    const result = createTemplateData('@scope/my-app');
 
     expect(result).toMatchInlineSnapshot(`
       {

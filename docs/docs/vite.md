@@ -1,9 +1,5 @@
 # Vite
 
-?> Support for [Vite] as an alternative bundler for `sku` is available as an experimental feature.
-It is currently being trialled internally and is not ready for general production use.
-If you wish to try it out, please reach out in [`#sku-support`].
-
 [Vite]: https://vite.dev/
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
@@ -258,14 +254,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Additionally, the `--experimental-bundler` flag must be passed to `sku` CLI commands to enable Vite:
-
-```bash
-sku start --experimental-bundler
-```
-
 Depending on your application, you may need no further changes to your codebase after this point in order to run your application with Vite.
-However, if there are issues with your application, you may need to make some changes to your codebase.
 
 Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
 
@@ -286,7 +275,7 @@ pnpm dlx @sku-lib/codemod transform-vite-loadable .
 You will also need to install a separate library that provides Vite-compatible loadable APIs:
 
 ```bash
-pnpm add @sku-lib/vite/loadable
+pnpm add @sku-lib/vite
 ```
 
 `@sku-lib/vite/loadable` relies on React's [`<Suspense />`][suspense] component to load a fallback state.

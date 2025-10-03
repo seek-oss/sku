@@ -7,8 +7,8 @@
     "react-dom": "^19.1.0"
   },
   "scripts": {
-    "start:vite": "sku start --experimental-bundler --config sku.config.vite.ts",
-    "build:vite": "sku build --experimental-bundler --config sku.config.vite.ts"
+    "start:vite": "sku start --config sku.config.vite.ts",
+    "build:vite": "sku build --config sku.config.vite.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

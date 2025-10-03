@@ -23,7 +23,6 @@ describe('multiple-routes', () => {
         vite: [
           '--config',
           'sku.config.vite.js',
-          '--experimental-bundler',
           '--convert-loadable',
           ...portArgs,
         ],
@@ -65,12 +64,7 @@ describe('multiple-routes', () => {
       const portArgs = ['--strict-port', `--port=${port}`];
 
       const args: BundlerValues<string[]> = {
-        vite: [
-          '--convert-loadable',
-          '--experimental-bundler',
-          '--config',
-          'sku.config.vite.js',
-        ],
+        vite: ['--convert-loadable', '--config', 'sku.config.vite.js'],
         webpack: [],
       };
 

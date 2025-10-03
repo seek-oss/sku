@@ -16,7 +16,7 @@ describe('translations', () => {
     const port = await getPort();
     const baseUrl = `http://localhost:${port}`;
     const args: BundlerValues<string[]> = {
-      vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+      vite: ['--config', 'sku.config.vite.ts'],
       webpack: [],
     };
 

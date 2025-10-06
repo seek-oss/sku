@@ -41,11 +41,12 @@ Config files can use either TypeScript or JavaScript.
 
 ## bundler
 
-Type: `string`
+Type: `webpack | vite`
 
 Default: `webpack`
 
 The bundler that sku uses to build the application.
+See [Vite support](https://seek-oss.github.io/sku/#/./docs/vite) for details.
 
 ## clientEntry
 
@@ -196,7 +197,7 @@ Example:
 ```ts
 export default {
   // partial config is deeply merged
-  dangerouslySetViteConfig: () => ({
+  dangerouslySetViteConfig: (_config, _env) => ({
     resolve: {
       alias: {
         foo: 'bar',
@@ -616,12 +617,11 @@ The directory to build your assets into when running `sku build` or `sku build-s
 
 ## testRunner
 
-Type: `string`
+Type: `jest | vitest`
 
 Default: `jest`
 
 The test runner that sku uses to run the tests.
-Valid options are `jest` and `vitest`.
 
 ## transformOutputPath
 

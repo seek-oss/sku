@@ -1,5 +1,6 @@
-import * as styles from './styles.css.js';
 import logo from './logo.png';
+
+import * as styles from './styles.css';
 
 const App = () => (
   <div className={styles.root}>

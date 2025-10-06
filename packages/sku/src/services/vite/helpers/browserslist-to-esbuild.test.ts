@@ -10,10 +10,11 @@ test('works by passing browsers as array', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome109",
-      "edge136",
-      "firefox115",
-      "ios15.6",
+      "chrome105",
+      "edge138",
+      "firefox141",
+      "ios11",
+      "opera120",
       "safari18.5",
     ]
   `);
@@ -24,13 +25,13 @@ test('works by passing browsers as string', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome137",
-      "edge137",
-      "firefox139",
+      "chrome139",
+      "edge139",
+      "firefox142",
       "ie10",
-      "ios18.4",
-      "opera116",
-      "safari18.4",
+      "ios18.5",
+      "opera121",
+      "safari18.5",
     ]
   `);
 });
@@ -50,7 +51,7 @@ test('works with android and ios', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome138",
+      "chrome140",
       "ios11",
     ]
   `);
@@ -61,7 +62,7 @@ test('no support for android 4', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome138",
+      "chrome140",
     ]
   `);
 });
@@ -71,7 +72,7 @@ test('safari TP defaults to latest safari', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "safari18.5",
+      "safari26",
     ]
   `);
 });

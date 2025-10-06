@@ -12,6 +12,8 @@
     "start:asset-server": "http-server dist-build -p 4000 --cors"
   },
   "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@sku-private/test-utils": "workspace:*",
     "@vanilla-extract/css": "^1.0.0",
     "sku": "workspace:*",

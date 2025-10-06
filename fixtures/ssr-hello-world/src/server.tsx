@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 
-import App from './App.js';
+import App from './App';
 
 const initialResponseTemplate = ({ headTags }) => /* html */ `
 <!DOCTYPE html>
@@ -60,7 +60,6 @@ export default () => ({
   },
   onStart: async () => {
     if (process.env.NODE_ENV === 'production') {
-      // eslint-disable-next-line no-console
       console.log('Server ran the onStart callback');
     }
   },

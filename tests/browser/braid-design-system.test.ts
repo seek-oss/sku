@@ -9,9 +9,14 @@ import {
   cleanup,
   skipCleanup,
   scopeToFixture,
+  configure,
 } from '@sku-private/testing-library';
 
 const timeout = 50_000;
+
+configure({
+  asyncUtilTimeout: timeout,
+});
 
 vi.setConfig({
   hookTimeout: timeout + 1000,
@@ -34,7 +39,7 @@ describe('braid-design-system', () => {
       const args: BundlerValues<string[]> = {
         vite: [
           '--config',
-          'sku.config.vite.js',
+          'sku.config.vite.ts',
           '--experimental-bundler',
           '--strict-port',
           `--port=${port}`,
@@ -45,11 +50,7 @@ describe('braid-design-system', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
         expect(
-          await start.findByText(
-            'Starting development server',
-            {},
-            { timeout },
-          ),
+          await start.findByText('Starting development server'),
         ).toBeInTheConsole();
       });
 
@@ -82,15 +83,13 @@ describe('braid-design-system', () => {
     describe('build', async () => {
       const port = await getPort();
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.js', '--experimental-bundler'],
+        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
         webpack: [],
       };
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(
-          await build.findByText('Sku build complete', {}, { timeout }),
-        ).toBeInTheConsole();
+        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();

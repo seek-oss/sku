@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "description": "Shared utilities for sku packages",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/utils"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./package.json": "./package.json"

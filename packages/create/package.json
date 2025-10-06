@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "description": "Create sku projects",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/create"
+  },
   "bin": {
     "create-sku": "./dist/cli.js"
   },

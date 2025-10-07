@@ -111,10 +111,8 @@ export type SkuLanguage = string | { name: string; extends?: string };
 export interface SkuConfigBase {
   /**
    * The bundler that sku uses to build the application.
-   * This is an experimental option that may change or be removed without notice.
    *
-   * NOTE: Not all sku functionality is supported by the `vite` option.
-   * Production applications should not use the `vite` option.
+   * `vite` is currently only supported for static apps.
    *
    * @default "webpack"
    */
@@ -122,13 +120,11 @@ export interface SkuConfigBase {
 
   /**
    * The test runner that sku uses to run the tests.
-   * This is an experimental option that may change or be removed without notice.
-   *
-   * NOTE: Not all sku functionality is supported by the `vitest` option.
    *
    * @default: "jest"
    */
   testRunner?: 'vitest' | 'jest';
+
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *

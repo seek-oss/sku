@@ -46,6 +46,8 @@ Type: `webpack | vite`
 Default: `webpack`
 
 The bundler that sku uses to build the application.
+
+`vite` is currently only supported for static apps.
 See [Vite support](https://seek-oss.github.io/sku/#/./docs/vite) for details.
 
 ## clientEntry

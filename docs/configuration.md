@@ -12,8 +12,8 @@ While sku has a zero configuration mode, the equivalent manual configuration wou
 import type { SkuConfig } from 'sku';
 
 export default {
-  clientEntry: 'src/client.js',
-  renderEntry: 'src/render.js',
+  clientEntry: 'src/client.tsx',
+  renderEntry: 'src/render.tsx',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
@@ -26,7 +26,29 @@ If you need to specify a different config file you can do so with the `--config`
 $ sku start --config sku.custom.config.ts
 ```
 
+> When using the `--config` parameter, the specified file must exist. Sku will exit with an error if the file cannot be found.
+> Config files can use either TypeScript or JavaScript.
+
+When **no** `--config` parameter is provided, sku will automatically look for config files in this order:
+
+1. `sku.config.ts`
+2. `sku.config.js`
+3. `sku.config.mjs`
+
+If none of these files exist, sku will use its built-in default configuration.
+
 Config files can use either TypeScript or JavaScript.
+
+## bundler
+
+Type: `webpack | vite`
+
+Default: `webpack`
+
+The bundler that sku uses to build the application.
+
+`vite` is currently only supported for static apps.
+See [Vite support](https://seek-oss.github.io/sku/#/./docs/vite) for details.
 
 ## clientEntry
 
@@ -149,6 +171,40 @@ export default {
     ...skuTSConfig,
     include: ['packages', 'site'],
     exclude: ['**/scripts'],
+  }),
+} satisfies SkuConfig;
+```
+
+## dangerouslySetViteConfig
+
+Type: `function`
+
+Bundler: `vite`
+
+This function provides a way to modify sku's Vite configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+
+As sku creates two Vite configs (`client` & `render`), this function will actually run twice.
+If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+
+This function can return a partial config object that will be deeply merged into existing config (recommended), or directly mutate the config (if the default merging cannot achieve the desired result).
+
+> Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+
+Example:
+
+```ts
+export default {
+  // partial config is deeply merged
+  dangerouslySetViteConfig: (_config, _env) => ({
+    resolve: {
+      alias: {
+        foo: 'bar',
+      },
+    },
   }),
 } satisfies SkuConfig;
 ```
@@ -331,7 +387,7 @@ Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAlia
 
 ```typescript
 export default {
-  __UNSAFE_EXPERIMENTAL__bundler: 'vite',
+  bundler: 'vite',
   pathAliases: {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
@@ -561,6 +617,14 @@ Default: `dist`
 
 The directory to build your assets into when running `sku build` or `sku build-ssr`
 
+## testRunner
+
+Type: `jest | vitest`
+
+Default: `jest`
+
+The test runner that sku uses to run the tests.
+
 ## transformOutputPath
 
 Type: `function`
@@ -572,18 +636,6 @@ Default: `({ environment = '', site = '', route = '' }) => path.join(environment
 This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
 
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
-
-## \_\_UNSAFE_EXPERIMENTAL\_\_bundler
-
-Type: `string`
-
-Default: `webpack`
-
-_This is an experimental option that may change or be removed without notice._
-
-The bundler that sku uses to build the application.
-
-NOTE: Not all sku functionality is supported by the `vite` option. Production applications should not use the `vite` option.
 
 ## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies
 
@@ -600,35 +652,3 @@ An array of cjs import paths that have both a default and named exports.
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
-
-## \_\_UNSAFE_EXPERIMENTAL\_\_dangerouslySetViteConfig
-
-Type: `function`
-
-Bundler: `vite`
-
-_This is an experimental option that may change or be removed without notice._
-
-This function provides a way to modify sku's Vite configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
-
-Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
-
-As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
-If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
-
-Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
-It is the responsibility of the user to ensure that their customizations are compatible with sku.
-
-## \_\_UNSAFE_EXPERIMENTAL\_\_testRunner
-
-Type: `string`
-
-Default: `jest`
-
-_This is an experimental option that may change or be removed without notice._
-
-The test runner that sku uses to run the tests.
-Valid options are `jest` and `vitest`.
-
-NOTE: Not all `sku` functionality is supported by the `vitest` option.

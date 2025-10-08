@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/vitest",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "vitest runner for sku test",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",

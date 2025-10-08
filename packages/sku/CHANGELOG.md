@@ -1,5 +1,94 @@
 # sku
 
+## 15.0.0
+
+### Major Changes
+
+- Drop support for Node.js versions below 22.19.0 ([#1419](https://github.com/seek-oss/sku/pull/1419))
+
+  BREAKING CHANGE:
+
+  The minimum supported Node.js version is now 22.19.0. Consumers must upgrade to Node.js v22.19.0 or later.
+
+- Drop `sku init` in favour of `@sku-lib/create` ([#1421](https://github.com/seek-oss/sku/pull/1421))
+
+  BREAKING CHANGE:
+
+  The `sku init` command will now no longer do anything and will display a deprecation notice when used.
+  It will be removed entirely in a future major version.
+
+  To create a new `sku` project, use `@sku-lib/create` instead. Example usage:
+
+  ```
+  pnpm dlx @sku-lib/create my-app
+  ```
+
+- Throw on invalid `--config` file path ([#1420](https://github.com/seek-oss/sku/pull/1420))
+
+  **BREAKING CHANGE**:
+
+  `sku` no longer falls back to default sku config files when the config file specified with the `--config` flag cannot be found.
+  It will now throw an error and exit the program instead.
+
+  This ensures users are aware that the configuration file is either missing or incorrectly specified, rather than silently falling back to a default configuration that may not be appropriate for their use case.
+
+  If you encounter this error, ensure that the `--config` flag points to a valid configuration file.
+
+- Throw error when given unsupported arguments. ([#1418](https://github.com/seek-oss/sku/pull/1418))
+  This is now the default behaviour of the updated commander.js version.
+
+  **BREAKING CHANGE**:
+
+  Excess command-arguments will now cause an error.
+  To fix this, remove any unsupported arguments provided to the command.
+
+  ```bash
+  # Error
+  sku build extra-arg
+
+  > error: too many arguments for 'build'. Expected 0 arguments but got 1.
+
+  # Fix
+  sku build
+  ```
+
+- Default values for entry files use `.tsx` extensions instead of `.js`: ([#1420](https://github.com/seek-oss/sku/pull/1420))
+
+  **BREAKING CHANGE**:
+
+  The following `sku` config options have had their default values changed.
+  - `clientEntry`: `'src/client.js'` → `'src/client.tsx'`
+  - `renderEntry`: `'src/render.js'` → `'src/render.tsx'`
+  - `serverEntry`: `'src/server.js'` → `'src/server.tsx'`
+
+  Existing projects with `.js` entry files will need to either rename their files to `.tsx` or explicitly specify the `.js` paths in their sku config:
+
+  ```diff
+  // sku.config.ts
+  export default {
+  +  clientEntry: 'src/client.js',
+  +  renderEntry: 'src/render.js',
+  +  serverEntry: 'src/server.js',
+    // ... rest of config
+  }
+  ```
+
+### Minor Changes
+
+- Vite and Vitest can be used without experimental flags ([#1424](https://github.com/seek-oss/sku/pull/1424))
+
+  The Vite bundler and Vitest test runner now have stable support and can be used in production for static apps.
+
+  See sku's [vite] documentation for more information and migration guidance.
+
+  [vite]: https://seek-oss.github.io/sku/#/./docs/vite
+
+### Patch Changes
+
+- Updated dependencies [[`7ad51f4`](https://github.com/seek-oss/sku/commit/7ad51f42e3c55e1588e908c79f7f83c950acb4c1)]:
+  - @sku-lib/utils@1.0.0
+  - @sku-lib/vite@1.0.0
+
 ## 14.13.0
 
 ### Minor Changes

@@ -1,5 +1,36 @@
 # @sku-lib/create
 
+## 1.0.0
+
+### Major Changes
+
+- Drop support for Node.js versions below 22.19.0 ([#1419](https://github.com/seek-oss/sku/pull/1419))
+
+  BREAKING CHANGE:
+
+  The minimum supported Node.js version is now 22.19.0. Consumers must upgrade to Node.js v22.19.0 or later.
+
+- First major release marking stable support for this package ([#1418](https://github.com/seek-oss/sku/pull/1418))
+
+- Throw error when given unsupported arguments. ([#1418](https://github.com/seek-oss/sku/pull/1418))
+  This is now the default behaviour of the updated commander.js version.
+
+  **BREAKING CHANGE**:
+
+  Excess command-arguments will now cause an error.
+  To fix this, remove any unsupported arguments provided to the command.
+
+### Minor Changes
+
+- Vite template will be created without experimental flags ([#1424](https://github.com/seek-oss/sku/pull/1424))
+
+### Patch Changes
+
+- Updated webpack description to remove `sku init` reference ([#1421](https://github.com/seek-oss/sku/pull/1421))
+
+- Updated dependencies [[`7ad51f4`](https://github.com/seek-oss/sku/commit/7ad51f42e3c55e1588e908c79f7f83c950acb4c1)]:
+  - @sku-lib/utils@1.0.0
+
 ## 0.1.0
 
 ### Minor Changes

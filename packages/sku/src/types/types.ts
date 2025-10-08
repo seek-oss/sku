@@ -111,24 +111,20 @@ export type SkuLanguage = string | { name: string; extends?: string };
 export interface SkuConfigBase {
   /**
    * The bundler that sku uses to build the application.
-   * This is an experimental option that may change or be removed without notice.
    *
-   * NOTE: Not all sku functionality is supported by the `vite` option.
-   * Production applications should not use the `vite` option.
+   * `vite` is currently only supported for static apps.
    *
    * @default "webpack"
    */
-  __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | 'vite';
+  bundler?: 'webpack' | 'vite';
 
   /**
    * The test runner that sku uses to run the tests.
-   * This is an experimental option that may change or be removed without notice.
-   *
-   * NOTE: Not all sku functionality is supported by the `vitest` option.
    *
    * @default: "jest"
    */
-  __UNSAFE_EXPERIMENTAL__testRunner?: 'vitest' | 'jest';
+  testRunner?: 'vitest' | 'jest';
+
   /**
    * The client entry point to the app. The client entry is the file that executes your browser code.
    *
@@ -545,15 +541,17 @@ export interface ViteSkuConfig {
    *
    * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
    *
-   * As sku creates two Vite configs (`client` & `server|render`), this function will actually run twice.
+   * As sku creates two Vite configs (`client` & `render`), this function will actually run twice.
    * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+   *
+   * This function can return a partial config object that will be deeply merged into existing config (recommended), or directly mutate the config (if the default merging cannot achieve the desired result).
    *
    * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetviteconfig
    */
-  __UNSAFE_EXPERIMENTAL__dangerouslySetViteConfig?: Plugin['config'];
+  dangerouslySetViteConfig?: Plugin['config'];
 }
 
 export type CompleteSkuConfig = SkuConfigBase &
@@ -563,7 +561,7 @@ export type CompleteSkuConfig = SkuConfigBase &
 export type SkuConfig = SkuConfigBase &
   (
     | ({
-        __UNSAFE_EXPERIMENTAL__bundler?: 'webpack' | undefined;
+        bundler?: 'webpack' | undefined;
       } & WebpackSkuConfig)
-    | ({ __UNSAFE_EXPERIMENTAL__bundler: 'vite' } & ViteSkuConfig)
+    | ({ bundler: 'vite' } & ViteSkuConfig)
   );

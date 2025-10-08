@@ -24,7 +24,6 @@ describe('custom-src-paths', () => {
           vite: [
             '--config',
             'sku.config.vite.ts',
-            '--experimental-bundler',
             '--strict-port',
             `--port=${port}`,
           ],
@@ -47,7 +46,7 @@ describe('custom-src-paths', () => {
       const portArgs = ['--strict-port', `--port=${port}`];
 
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+        vite: ['--config', 'sku.config.vite.ts'],
         webpack: [],
       };
 

@@ -22,12 +22,7 @@ describe('sku-with-https', () => {
 
     const portArgs = ['--strict-port', `--port=${port}`];
     const args: BundlerValues<string[]> = {
-      vite: [
-        '--experimental-bundler',
-        '--config',
-        'sku.config.vite.mjs',
-        ...portArgs,
-      ],
+      vite: ['--config', 'sku.config.vite.mjs', ...portArgs],
       webpack: portArgs,
     };
 

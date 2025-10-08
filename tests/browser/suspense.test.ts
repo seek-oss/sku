@@ -16,7 +16,7 @@ describe('suspense', () => {
     const port = await getPort();
     const url = `http://localhost:${port}`;
     const args: BundlerValues<string[]> = {
-      vite: ['--experimental-bundler', '--config', 'sku.config.vite.js'],
+      vite: ['--config', 'sku.config.vite.js'],
       webpack: [],
     };
 

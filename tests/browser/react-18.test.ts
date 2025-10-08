@@ -11,7 +11,7 @@ const { sku } = scopeToFixture('react-18');
 
 describe('react-18', () => {
   const args: BundlerValues<string[]> = {
-    vite: ['--config', 'sku.config.vite.ts', '--experimental-bundler'],
+    vite: ['--config', 'sku.config.vite.ts'],
     webpack: [],
   };
 

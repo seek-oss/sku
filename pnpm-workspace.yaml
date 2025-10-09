@@ -5,8 +5,6 @@ packages:
   - packages/*
   - private/*
 
-# Catalogue works, but it does raise warnings on install. (last checked with v10.17.0).
-# @see https://github.com/pnpm/pnpm/issues/9662
 catalog:
   '@types/node': ^22.18.8
   '@types/react': ^19.1.9
@@ -28,9 +26,6 @@ catalogs:
     '@types/react-dom': ^18.3.7
     react: ^18.3.1
     react-dom: ^18.3.1
-
-configDependencies:
-  pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==
 
 ignoredBuiltDependencies:
   - core-js-pure

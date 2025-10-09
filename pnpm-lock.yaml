@@ -57,8 +57,6 @@ catalogs:
       specifier: ^18.3.1
       version: 18.3.1
 
-pnpmfileChecksum: sha256-BJdU5A0PR48f+qVWdlca0zjt2m4OSJwKkKWHz8OgDE0=
-
 importers:
 
   .:

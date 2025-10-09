@@ -1,5 +1,13 @@
 # sku
 
+## 15.0.1
+
+### Patch Changes
+
+- `configure`: No longer prompt to install `pnpm-plugin-sku` ([#1426](https://github.com/seek-oss/sku/pull/1426))
+
+  The `configDependencies` pnpm-workspace property has issues on Renovate/Mend, causing automated dependency management to fail. Until the issue with Renovate is resolved `sku` will not prompt to install `pnpm-plugin-sku` when running `sku configure`
+
 ## 15.0.0
 
 ### Major Changes

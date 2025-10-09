@@ -11,7 +11,11 @@ import * as jsonc from 'jsonc-parser';
 
 import prettierConfig from '../../packages/sku/dist/config/prettier.js';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  type RenderResult,
+  scopeToFixture,
+  waitFor,
+} from '@sku-private/testing-library';
 
 const readFileContents = async (appDir: string, fileName: string) => {
   const contents = await readFile(path.join(appDir, fileName), 'utf-8');
@@ -44,6 +48,7 @@ const { sku, fixturePath } = scopeToFixture('configure');
 describe('configure', () => {
   describe.concurrent('javascript app', () => {
     const appFolder = fixturePath('App');
+    let configure: RenderResult;
 
     beforeAll(async () => {
       await removeAppDir(appFolder);
@@ -52,7 +57,7 @@ describe('configure', () => {
       await copyToApp('src/App.tsx', appFolder);
       await copyToApp('package.json', appFolder);
 
-      const configure = await sku('configure', [], {
+      configure = await sku('configure', [], {
         cwd: './App',
       });
 
@@ -92,10 +97,19 @@ describe('configure', () => {
         expect(ignoreContents).toMatchSnapshot();
       },
     );
+
+    it('should not show any warnings in the console', async ({ expect }) => {
+      await waitFor(() => {
+        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+      });
+
+      expect(configure.getStdallStr()).toMatchInlineSnapshot(``);
+    });
   });
 
   describe.concurrent('typescript app', () => {
     const appFolderTS = fixturePath('TSApp');
+    let configure: RenderResult;
 
     beforeAll(async () => {
       await makeDir(appFolderTS);
@@ -104,7 +118,7 @@ describe('configure', () => {
       await copyToApp('package.json', appFolderTS);
       await copyToApp('sku.config.ts', appFolderTS);
 
-      const configure = await sku('configure', [], {
+      configure = await sku('configure', [], {
         cwd: './TSApp',
       });
 
@@ -151,5 +165,13 @@ describe('configure', () => {
         expect(ignoreContents).toMatchSnapshot();
       },
     );
+
+    it('should not show any warnings in the console', async ({ expect }) => {
+      await waitFor(() => {
+        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+      });
+
+      expect(configure.getStdallStr()).toMatchInlineSnapshot(``);
+    });
   });
 });

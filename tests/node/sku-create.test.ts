@@ -54,37 +54,8 @@ describe('template flag', () => {
     ).toBeInTheConsole();
   });
 
-  it('should not create a vite project if the user does not say yes explicitly', async () => {
+  it('should create a vite project', async () => {
     const result = await create(projectName, ['--template', 'vite']);
-
-    expect(
-      await result.findByText(
-        `Vite support in sku is currently experimental and not yet suitable for production use. Continue?`,
-      ),
-    ).toBeInTheConsole();
-    result.userEvent.keyboard('[Enter]');
-    expect(
-      await result.findByText(
-        'Cancelled. Use `webpack` template for a stable production-ready experience.',
-      ),
-    ).toBeInTheConsole();
-
-    await waitFor(async () => {
-      expect(result.hasExit()).toMatchObject({
-        exitCode: 1,
-      });
-    });
-  });
-
-  it('should create a vite project if the user says yes explicitly', async () => {
-    const result = await create(projectName, ['--template', 'vite']);
-
-    expect(
-      await result.findByText(
-        `Vite support in sku is currently experimental and not yet suitable for production use. Continue?`,
-      ),
-    ).toBeInTheConsole();
-    result.userEvent.keyboard('y');
     expect(
       await result.findByText(
         `Creating new sku project: ${projectName} with vite template`,
@@ -119,6 +90,7 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
         ),
       ).toBeInTheConsole();
 
+      result.userEvent.keyboard('[ArrowDown]');
       expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
 
       result.userEvent.keyboard('[Enter]');
@@ -144,16 +116,9 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
       ),
     ).toBeInTheConsole();
 
-    result.userEvent.keyboard('[ArrowDown]');
-    expect(await result.findByText('❯ Vite (experimental)')).toBeInTheConsole();
+    expect(await result.findByText('❯ Vite')).toBeInTheConsole();
 
     result.userEvent.keyboard('[Enter]');
-    expect(
-      await result.findByText(
-        'Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
-      ),
-    ).toBeInTheConsole();
-    result.userEvent.keyboard('y');
 
     expect(
       await result.findByText(

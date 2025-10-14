@@ -2,7 +2,7 @@ import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
 import { parseDocument, Document } from 'yaml';
 
 import fs from 'node:fs/promises';
-import { configure, waitFor } from '@sku-private/testing-library';
+import { configure } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import path from 'node:path';
 

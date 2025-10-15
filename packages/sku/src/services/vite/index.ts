@@ -29,14 +29,17 @@ export const viteService = {
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,
-      host: '0.0.0.0',
       strictPort: skuContext.port.strictPort,
     });
 
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    printUrls(hosts, skuContext);
+    printUrls(hosts, {
+      https: skuContext.httpsDevServer,
+      initialPath: skuContext.initialPath,
+      port: availablePort,
+    });
 
     server.bindCLIShortcuts({ print: true });
   },
@@ -44,15 +47,14 @@ export const viteService = {
 
 const printUrls = (
   hosts: Array<string | undefined>,
-  skuContext: SkuContext,
+  opts: { https: boolean; initialPath: string; port: number },
 ) => {
-  const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  const proto = opts.https ? 'https' : 'http';
   console.log('Starting development server...');
   hosts.forEach((site) => {
-    const initialPath =
-      skuContext.initialPath !== '/' ? skuContext.initialPath : '';
+    const initialPath = opts.initialPath !== '/' ? opts.initialPath : '';
     const url = chalk.cyan(
-      `${proto}://${site}:${chalk.bold(skuContext.port.client)}${initialPath}`,
+      `${proto}://${site}:${chalk.bold(opts.port)}${initialPath}`,
     );
     console.log(`${chalk.green('➜')}  ${chalk.bold('Local')}: ${url}`);
   });

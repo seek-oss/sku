@@ -51,39 +51,21 @@ program
         message: 'Which template would you like to use?',
         choices: [
           {
+            title: 'Vite',
+            value: 'vite',
+            description:
+              '(recommended) Uses Vite for serving and bundling your application, and Vitest for running tests.',
+          },
+          {
             title: 'Webpack',
             value: 'webpack',
             description:
-              'Uses Webpack for serving and bundling your application, and Jest for running tests. Select this template for a familiar, production-ready development environment.',
-          },
-          {
-            title: 'Vite (experimental)',
-            value: 'vite',
-            description:
-              'NOT PRODUCTION-READY. An experimental template that uses Vite for serving and bundling your application, and Vitest for running tests. Select this template to experiment with upcoming features.',
+              'Uses Webpack for serving and bundling your application, and Jest for running tests.',
           },
         ],
-        initial: 0,
       });
 
       selectedTemplate = template;
-    }
-
-    if (selectedTemplate === 'vite') {
-      const { confirmVite } = await prompts({
-        type: 'confirm',
-        name: 'confirmVite',
-        message:
-          '⚠️ Vite support in sku is currently experimental and not yet suitable for production use. Continue?',
-        initial: false,
-      });
-
-      if (!confirmVite) {
-        console.log(
-          '❌ Cancelled. Use `webpack` template for a stable production-ready experience.',
-        );
-        process.exit(1);
-      }
     }
 
     if (!selectedTemplate) {

@@ -4,6 +4,9 @@
 - [API](./docs/api.md)
 - [FAQ](./docs/faq)
 - [Debugging](./docs/debugging.md)
+- **Alternate runners**
+- [Vite](./docs/vite.md)
+- [Vitest](./docs/vitest.md)
 - **Project types**
 - [Static rendering](./docs/static-rendering.md)
 - [Server rendering](./docs/server-rendering.md)
@@ -23,5 +26,3 @@
 - **Quality**
 - [Testing](./docs/testing.md)
 - [Linting/formatting](./docs/linting.md)
-- **Alternate bundlers**
-- [Vite](./docs/vite.md)

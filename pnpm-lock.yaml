@@ -456,6 +456,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/port-clash:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/public-path:
     dependencies:
       react:

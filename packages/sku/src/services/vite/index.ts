@@ -1,4 +1,5 @@
 import { build, createServer } from 'vite';
+import { styleText } from 'node:util';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 import {
@@ -9,7 +10,7 @@ import {
 import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
-import chalk from 'chalk';
+
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
 
@@ -29,14 +30,17 @@ export const viteService = {
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,
-      host: '0.0.0.0',
       strictPort: skuContext.port.strictPort,
     });
 
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    printUrls(hosts, skuContext);
+    printUrls(hosts, {
+      https: skuContext.httpsDevServer,
+      initialPath: skuContext.initialPath,
+      port: availablePort,
+    });
 
     server.bindCLIShortcuts({ print: true });
   },
@@ -44,16 +48,18 @@ export const viteService = {
 
 const printUrls = (
   hosts: Array<string | undefined>,
-  skuContext: SkuContext,
+  opts: { https: boolean; initialPath: string; port: number },
 ) => {
-  const proto = skuContext.httpsDevServer ? 'https' : 'http';
+  const proto = opts.https ? 'https' : 'http';
   console.log('Starting development server...');
   hosts.forEach((site) => {
-    const initialPath =
-      skuContext.initialPath !== '/' ? skuContext.initialPath : '';
-    const url = chalk.cyan(
-      `${proto}://${site}:${chalk.bold(skuContext.port.client)}${initialPath}`,
+    const initialPath = opts.initialPath !== '/' ? opts.initialPath : '';
+    const url = styleText(
+      'cyan',
+      `${proto}://${site}:${styleText('bold', String(opts.port))}${initialPath}`,
     );
-    console.log(`${chalk.green('➜')}  ${chalk.bold('Local')}: ${url}`);
+    console.log(
+      `${styleText('green', '➜')}  ${styleText('bold', 'Local')}: ${url}`,
+    );
   });
 };

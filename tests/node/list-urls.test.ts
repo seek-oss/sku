@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, test, expect } from 'vitest';
 import {
   bundlers,
   type BundlerValues,
@@ -8,11 +8,14 @@ import {
 
 const { sku } = scopeToFixture('list-urls');
 
-const urls = [
-  'http://localhost:8222',
-  'http://local.seek.com:8222',
-  'http://dev.seek.com.au:8222',
+const makeUrls = (port: number) => [
+  `http://localhost:${port}`,
+  `http://local.seek.com:${port}`,
+  `http://dev.seek.com.au:${port}`,
 ];
+
+const urls = makeUrls(8222);
+const serverUrls = makeUrls(8223);
 
 configure({ asyncUtilTimeout: 5000 });
 
@@ -35,7 +38,7 @@ describe('list-urls', () => {
   describe.each(['--list-urls', '-l'])(
     'should display all urls when %s is passed',
     (flag) => {
-      it.each(bundlers)('bundler %s', async (bundler) => {
+      test.each(bundlers)('`start` with %s', async (bundler) => {
         const args: BundlerValues<string[]> = {
           vite: ['--config', 'sku.config.vite.ts', flag],
           webpack: [flag],
@@ -43,6 +46,14 @@ describe('list-urls', () => {
         const process = await sku('start', args[bundler]);
 
         for (const url of urls) {
+          expect(await process.findByText(url)).toBeInTheConsole();
+        }
+      });
+
+      it('start-ssr', async () => {
+        const process = await sku('start-ssr', [flag]);
+
+        for (const url of serverUrls) {
           expect(await process.findByText(url)).toBeInTheConsole();
         }
       });

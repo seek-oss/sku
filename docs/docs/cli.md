@@ -48,9 +48,10 @@ sku start-ssr
 
 This command supports the following options:
 
-| Option        | Description                                                                                  | Defaults to |
-| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `summary`   |
+| Option            | Description                                                                                                     | Defaults to |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`                    | `summary`   |
+| `--list-urls, -l` | Lists all of the dev server urls that the app can be accessed on. If false, only displays the first found host. | `false`     |
 
 [server rendering]: ./docs/building-the-app.md#server
 

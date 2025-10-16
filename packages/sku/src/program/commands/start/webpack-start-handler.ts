@@ -1,6 +1,5 @@
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
-import chalk from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 import type { RequestHandler } from 'express';
 
@@ -20,8 +19,9 @@ import {
   getLanguageFromRoute,
   getRouteWithLanguage,
 } from '../../../utils/language-utils.js';
-import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { printUrls } from '@sku-lib/utils';
 
 const localhost = '0.0.0.0';
 
@@ -92,7 +92,7 @@ export const webpackStartHandler = async ({
     );
   });
 
-  const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
+  const appHosts = getAppHosts(skuContext);
 
   let devServerMiddleware = null;
   if (useDevServerMiddleware) {
@@ -199,9 +199,11 @@ export const webpackStartHandler = async ({
       appHosts?.[0]
     }:${availablePort}${initialPath}`;
 
-    console.log('Starting development server...');
-    console.log(chalk.blue(`Local: ${chalk.underline(url)}`));
-    console.log();
+    printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
+      https: httpsDevServer,
+      initialPath,
+      port: availablePort,
+    });
 
     openBrowser(url);
   });

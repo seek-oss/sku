@@ -18,7 +18,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
-import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const webpackBuildHandler = async ({

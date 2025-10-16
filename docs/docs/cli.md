@@ -29,9 +29,12 @@ sku start
 
 This command supports the following options:
 
-| Option        | Description                                                                                  | Defaults to |
-| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `summary`   |
+| Option            | Description                                                                                                     | Defaults to |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`                    | `summary`   |
+| `--port`          | The port to serve the dev server on.                                                                            |             |
+| `--strict-port`   | Will make sku throw an error if the given port is already in use.                                               | `false`     |
+| `--list-urls, -l` | Lists all of the dev server urls that the app can be accessed on. If false, only displays the first found host. | `false`     |
 
 [static rendering]: ./docs/building-the-app.md#render
 

@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { statsOption } from '../../options/stats/stats.option.js';
+import { statsOption } from '../../options/stats.option.js';
 
 export const startSsrCommand = new Command('start-ssr')
   .description(

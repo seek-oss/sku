@@ -1,4 +1,5 @@
 import { build, createServer } from 'vite';
+import { styleText } from 'node:util';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 import {
@@ -9,7 +10,7 @@ import {
 import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
-import chalk from 'chalk';
+
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
 
@@ -53,9 +54,12 @@ const printUrls = (
   console.log('Starting development server...');
   hosts.forEach((site) => {
     const initialPath = opts.initialPath !== '/' ? opts.initialPath : '';
-    const url = chalk.cyan(
-      `${proto}://${site}:${chalk.bold(opts.port)}${initialPath}`,
+    const url = styleText(
+      'cyan',
+      `${proto}://${site}:${styleText('bold', String(opts.port))}${initialPath}`,
     );
-    console.log(`${chalk.green('➜')}  ${chalk.bold('Local')}: ${url}`);
+    console.log(
+      `${styleText('green', '➜')}  ${styleText('bold', 'Local')}: ${url}`,
+    );
   });
 };

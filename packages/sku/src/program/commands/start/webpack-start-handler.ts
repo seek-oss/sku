@@ -1,6 +1,5 @@
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
-import chalk from 'chalk';
 import exceptionFormatter from 'exception-formatter';
 import type { RequestHandler } from 'express';
 

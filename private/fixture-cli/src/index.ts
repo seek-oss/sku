@@ -17,10 +17,10 @@ program
   .allowExcessArguments(true)
   .action(async (fixtureInput?: string, scriptInput?: string[]) => {
     const fixture = await selectFixture(fixtureInput);
-    const [originalScriptName, ...scriptArgs] = scriptInput ?? [];
+    const [scriptNameInput, ...scriptArgs] = scriptInput ?? [];
     const [scriptName, scriptCommand] = await selectScript(
       fixture,
-      originalScriptName,
+      scriptNameInput,
     );
 
     log.info(

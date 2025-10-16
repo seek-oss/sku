@@ -175,7 +175,7 @@
     "serve-handler": "^6.1.3",
     "svgo-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.1.4",
-    "typescript": "~5.8.0",
+    "typescript": "~5.9.0",
     "vite": "catalog:",
     "vite-plugin-cjs-interop": "^2.3.0",
     "vite-tsconfig-paths": "^5.1.4",

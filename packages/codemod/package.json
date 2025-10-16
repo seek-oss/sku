@@ -37,6 +37,6 @@
     "@types/node": "catalog:",
     "@types/debug": "^4.1.12",
     "@types/prompts": "^2.4.9",
-    "typescript": "~5.8.0"
+    "typescript": "~5.9.0"
   }
 }

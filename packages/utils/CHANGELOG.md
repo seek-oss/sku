@@ -1,5 +1,11 @@
 # @sku-lib/utils
 
+## 1.1.0
+
+### Minor Changes
+
+- `printUrls` function is now publicly exposed ([#1434](https://github.com/seek-oss/sku/pull/1434))
+
 ## 1.0.0
 
 ### Major Changes

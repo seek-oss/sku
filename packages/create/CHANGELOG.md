@@ -1,5 +1,12 @@
 # @sku-lib/create
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`67d4fe8`](https://github.com/seek-oss/sku/commit/67d4fe8a8b1b289c08acd31bfa16cc587017eecb)]:
+  - @sku-lib/utils@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

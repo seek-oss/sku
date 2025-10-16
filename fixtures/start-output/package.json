@@ -1,0 +1,12 @@
+{
+  "name": "@sku-fixtures/port-clash",
+  "private": true,
+  "scripts": {
+    "start": "sku start",
+    "start:vite": "sku start --config sku.config.vite.ts"
+  },
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

@@ -685,6 +685,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/start-output:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/storybook-config:
     dependencies:
       braid-design-system:

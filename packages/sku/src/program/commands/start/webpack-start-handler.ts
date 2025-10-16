@@ -22,6 +22,7 @@ import {
 } from '../../../utils/language-utils.js';
 import type { StatsChoices } from '../../options/stats/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { printUrls } from '@sku-lib/utils';
 
 const localhost = '0.0.0.0';
 
@@ -92,7 +93,7 @@ export const webpackStartHandler = async ({
     );
   });
 
-  const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
+  const appHosts = getAppHosts(skuContext);
 
   let devServerMiddleware = null;
   if (useDevServerMiddleware) {
@@ -199,9 +200,11 @@ export const webpackStartHandler = async ({
       appHosts?.[0]
     }:${availablePort}${initialPath}`;
 
-    console.log('Starting development server...');
-    console.log(chalk.blue(`Local: ${chalk.underline(url)}`));
-    console.log();
+    printUrls(appHosts, {
+      https: httpsDevServer,
+      initialPath,
+      port: availablePort,
+    });
 
     openBrowser(url);
   });

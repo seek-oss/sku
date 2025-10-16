@@ -1,5 +1,5 @@
 import { build, createServer } from 'vite';
-import { styleText } from 'node:util';
+
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 import {
@@ -10,9 +10,9 @@ import {
 import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
-
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
+import { printUrls } from '@sku-lib/utils';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
@@ -44,22 +44,4 @@ export const viteService = {
 
     server.bindCLIShortcuts({ print: true });
   },
-};
-
-const printUrls = (
-  hosts: Array<string | undefined>,
-  opts: { https: boolean; initialPath: string; port: number },
-) => {
-  const proto = opts.https ? 'https' : 'http';
-  console.log('Starting development server...');
-  hosts.forEach((site) => {
-    const initialPath = opts.initialPath !== '/' ? opts.initialPath : '';
-    const url = styleText(
-      'cyan',
-      `${proto}://${site}:${styleText('bold', String(opts.port))}${initialPath}`,
-    );
-    console.log(
-      `${styleText('green', '➜')}  ${styleText('bold', 'Local')}: ${url}`,
-    );
-  });
 };

@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-`start(webpack)`: All urls the server is available on will be displayed in the terminal
+`start`: New flag added to list all the urls the dev server can be accessed on: `--list-urls, -l`

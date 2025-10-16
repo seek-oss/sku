@@ -372,6 +372,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/list-urls:
+    devDependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/multiple-routes:
     dependencies:
       '@vanilla-extract/css':
@@ -681,12 +687,6 @@ importers:
       http-server:
         specifier: ^14.1.1
         version: 14.1.1(debug@4.4.3)
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
-  fixtures/start-output:
-    devDependencies:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku

@@ -1,8 +1,8 @@
 import { Command } from 'commander';
 import { commands } from './commands/index.js';
-import { debugOption } from './options/debug/debug.option.js';
-import { configOption } from './options/config/config.option.js';
-import { environmentOption } from './options/environment/environment.option.js';
+import { debugOption } from './options/debug.option.js';
+import { configOption } from './options/config.option.js';
+import { environmentOption } from './options/environment.option.js';
 import { initDebug } from '../utils/debug.js';
 import { preActionHook } from './hooks/preAction/preAction.hook.js';
 import packageJson from 'sku/package.json' with { type: 'json' };

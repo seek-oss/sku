@@ -1,9 +1,6 @@
 import { Command } from 'commander';
-import { siteOption } from '../../options/site/site.option.js';
-import {
-  portOption,
-  strictPortOption,
-} from '../../options/port/port.option.js';
+import { siteOption } from '../../options/site.option.js';
+import { portOption, strictPortOption } from '../../options/port.option.js';
 
 export const serveCommand = new Command('serve')
   .description(

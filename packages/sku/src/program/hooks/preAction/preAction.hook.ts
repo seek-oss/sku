@@ -13,6 +13,7 @@ export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
 
   // Set extra options:
   skuContext.convertLoadable = actionCommand.opts()?.convertLoadable;
+  skuContext.listUrls = actionCommand.opts()?.listUrls;
   skuContext.commandName = actionCommand.name();
 
   initializeTelemetry(skuContext);

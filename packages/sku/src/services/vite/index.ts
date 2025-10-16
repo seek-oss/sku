@@ -36,7 +36,7 @@ export const viteService = {
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    printUrls(hosts, {
+    printUrls(skuContext.listUrls ? hosts : [hosts[0]], {
       https: skuContext.httpsDevServer,
       initialPath: skuContext.initialPath,
       port: availablePort,

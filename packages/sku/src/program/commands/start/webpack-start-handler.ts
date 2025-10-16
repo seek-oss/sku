@@ -19,7 +19,7 @@ import {
   getLanguageFromRoute,
   getRouteWithLanguage,
 } from '../../../utils/language-utils.js';
-import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { printUrls } from '@sku-lib/utils';
 
@@ -199,7 +199,7 @@ export const webpackStartHandler = async ({
       appHosts?.[0]
     }:${availablePort}${initialPath}`;
 
-    printUrls(appHosts, {
+    printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
       https: httpsDevServer,
       initialPath,
       port: availablePort,

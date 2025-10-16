@@ -2,4 +2,4 @@
 '@sku-lib/utils': minor
 ---
 
-Making `printUrls` function available
+`printUrls` function is now publicly exposed

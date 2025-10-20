@@ -106,10 +106,8 @@ describe('sku-with-https', () => {
   });
 
   it('should error if the dev server middleware is invalid', async () => {
-    const invalidMiddlewarePath = path.join(
-      fixturePath('./'),
-      'dev-middleware-invalid.cjs',
-    );
+    const invalidMiddlewarePath = fixturePath('dev-middleware-invalid.cjs');
+
     const start = await sku('start', [
       '--config=sku.config.invalid-dev-server.mjs',
     ]);

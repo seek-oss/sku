@@ -1,10 +1,8 @@
 import { Command } from 'commander';
-import { statsOption } from '../../options/stats/stats.option.js';
-import {
-  portOption,
-  strictPortOption,
-} from '../../options/port/port.option.js';
-import { convertLoadableOption } from '../../options/convertLoadable/convertLoadable.option.js';
+import { statsOption } from '../../options/stats.option.js';
+import { portOption, strictPortOption } from '../../options/port.option.js';
+import { convertLoadableOption } from '../../options/convertLoadable.option.js';
+import { listUrlsOption } from '../../options/list-urls.js';
 
 export const startCommand = new Command('start')
   .description(
@@ -13,6 +11,7 @@ export const startCommand = new Command('start')
   .addOption(statsOption)
   .addOption(portOption)
   .addOption(strictPortOption)
+  .addOption(listUrlsOption)
   .addOption(convertLoadableOption)
   .action(async (options, command) => {
     const { startAction } = await import('./start.action.js');

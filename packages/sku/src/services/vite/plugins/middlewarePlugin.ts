@@ -29,7 +29,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
     }
     // We need to start loading the devMiddleware before Vite's middleware runs.
     // Trying to lazy load it after Vite's middleware causes the Vite 404 middleware to take over the requests because this hook is run async.
-    if (skuContext.useDevServerMiddleware) {
+    if (skuContext.paths.devServerMiddleware) {
       log(
         'Using dev server middleware at %s',
         skuContext.paths.devServerMiddleware,

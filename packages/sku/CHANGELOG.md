@@ -1,5 +1,18 @@
 # sku
 
+## 15.1.0
+
+### Minor Changes
+
+- `start`: New flag added to list all the urls the dev server can be accessed on: `--list-urls, -l` ([#1434](https://github.com/seek-oss/sku/pull/1434))
+
+### Patch Changes
+
+- `start(vite)`: Correct fallback port will be displayed when initial port is taken ([#1432](https://github.com/seek-oss/sku/pull/1432))
+
+- Updated dependencies [[`67d4fe8`](https://github.com/seek-oss/sku/commit/67d4fe8a8b1b289c08acd31bfa16cc587017eecb)]:
+  - @sku-lib/utils@1.1.0
+
 ## 15.0.1
 
 ### Patch Changes

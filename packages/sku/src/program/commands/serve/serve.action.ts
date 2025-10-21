@@ -40,7 +40,6 @@ export const serveAction = async ({
     initialPath,
     routes,
     sites,
-    useDevServerMiddleware,
     httpsDevServer,
     hosts,
     languages,
@@ -104,7 +103,7 @@ export const serveAction = async ({
 
   const app = express();
 
-  if (useDevServerMiddleware) {
+  if (paths.devServerMiddleware) {
     const devServerMiddleware = (await import(paths.devServerMiddleware))
       .default;
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {

@@ -1,4 +1,4 @@
-import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 

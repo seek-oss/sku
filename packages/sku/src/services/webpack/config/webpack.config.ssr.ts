@@ -47,7 +47,6 @@ const makeWebpackConfig = ({
     cspEnabled,
     cspExtraScriptSrcHosts,
     httpsDevServer,
-    useDevServerMiddleware,
     rootResolution,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
@@ -272,7 +271,7 @@ const makeWebpackConfig = ({
               isDevServer ? paths.devServerMiddleware : false,
             ),
             __SKU_DEV_MIDDLEWARE_ENABLED__: JSON.stringify(
-              isDevServer ? useDevServerMiddleware : false,
+              isDevServer ? Boolean(paths.devServerMiddleware) : false,
             ),
             __SKU_DEV_HTTPS__: JSON.stringify(
               isDevServer ? httpsDevServer : false,

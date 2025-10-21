@@ -28,9 +28,9 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
-import type { StatsChoices } from '../../options/stats/stats.option.js';
+import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { requireFromCwd } from '@sku-lib/utils';
+import { printUrls, requireFromCwd } from '@sku-lib/utils';
 
 const log = debug('sku:start-ssr');
 
@@ -91,7 +91,7 @@ export const webpackStartSsrHandler = async ({
 
   await withHostile(checkHosts)(skuContext);
 
-  const appHosts = getAppHosts(skuContext) as string | string[] | undefined;
+  const appHosts = getAppHosts(skuContext);
 
   // Make sure target directory exists before starting
   await ensureTargetDirectory(skuContext.paths.target);
@@ -116,11 +116,11 @@ export const webpackStartSsrHandler = async ({
       `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
     ),
   );
-  console.log(
-    chalk.blue(
-      `Starting the SSR development server on ${chalk.underline(serverUrl)}`,
-    ),
-  );
+  printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
+    https: httpsDevServer,
+    initialPath,
+    port: serverPort,
+  });
   console.log();
 
   const onServerDone = once((err, stats) => {

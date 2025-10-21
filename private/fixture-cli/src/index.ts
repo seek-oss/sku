@@ -12,19 +12,22 @@ program
   .name('fixture')
   .description('CLI to easily run fixture scripts')
   .argument('[fixture-dir]', 'fuzzy search fixture directory name')
-  .argument('[script]', 'package.json script to run')
-  .action(async (fixtureInput?: string, scriptInput?: string) => {
+  .argument('[script...]', 'package.json script to run')
+  .allowUnknownOption(true)
+  .allowExcessArguments(true)
+  .action(async (fixtureInput?: string, scriptInput?: string[]) => {
     const fixture = await selectFixture(fixtureInput);
+    const [scriptNameInput, ...scriptArgs] = scriptInput ?? [];
     const [scriptName, scriptCommand] = await selectScript(
       fixture,
-      scriptInput,
+      scriptNameInput,
     );
 
     log.info(
       `Running ${styleText(['bold', 'blue'], scriptCommand)} in ${styleText(['bold', 'blue'], fixture)} fixture`,
     );
 
-    spawn('pnpm', [scriptName], {
+    spawn('pnpm', [scriptName, ...scriptArgs], {
       cwd: getFixtureDir(fixture),
       env: { ...process.env, SKU_TELEMETRY: 'false' },
       stdio: 'inherit',

@@ -9,6 +9,7 @@ import {
   cleanup,
   scopeToFixture,
   skipCleanup,
+  waitFor,
 } from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('sku-with-https');
@@ -101,6 +102,22 @@ describe('sku-with-https', () => {
         'utf-8',
       );
       expect(ignoreContents.split('\n')).toContain(`.ssl`);
+    });
+  });
+
+  it('should error if the dev server middleware is invalid', async () => {
+    const invalidMiddlewarePath = fixturePath('dev-middleware-invalid.cjs');
+
+    const start = await sku('start', [
+      '--config=sku.config.invalid-dev-server.mjs',
+    ]);
+    expect(
+      await start.findByError(
+        `Error: ${invalidMiddlewarePath} does not exist. Please create the file or remove 'devServerMiddleware' from your sku config.`,
+      ),
+    ).toBeInTheConsole();
+    await waitFor(() => {
+      expect(start.hasExit()).toMatchObject({ exitCode: 1 });
     });
   });
 });

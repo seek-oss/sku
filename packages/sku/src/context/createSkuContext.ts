@@ -190,10 +190,7 @@ export const createSkuContext = ({
     skuConfig.devServerMiddleware &&
     getPathFromCwd(skuConfig.devServerMiddleware);
 
-  const useDevServerMiddleware =
-    Boolean(devServerMiddleware) || existsSync(devServerMiddleware!);
-
-  if (devServerMiddleware && !useDevServerMiddleware) {
+  if (devServerMiddleware && !existsSync(devServerMiddleware)) {
     throw new Error(
       `${devServerMiddleware} does not exist. Please create the file or remove 'devServerMiddleware' from your sku config.`,
     );
@@ -201,7 +198,7 @@ export const createSkuContext = ({
 
   const paths = {
     appSkuConfigPath: appSkuConfigPath!,
-    devServerMiddleware: devServerMiddleware!,
+    devServerMiddleware,
     src: skuConfig.srcPaths!.map(getPathFromCwd),
     compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages!],
     clientEntry: getPathFromCwd(skuConfig.clientEntry!),
@@ -283,7 +280,6 @@ export const createSkuContext = ({
     initialPath,
     transformOutputPath: skuConfig.transformOutputPath,
     sites,
-    useDevServerMiddleware,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,

@@ -1,6 +1,9 @@
 {
   "name": "@sku-fixtures/configure",
   "private": true,
+  "scripts": {
+    "configure": "sku configure"
+  },
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"

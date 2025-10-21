@@ -37,16 +37,8 @@ export const webpackStartHandler = async ({
   skuContext: SkuContext;
 }) => {
   process.env.NODE_ENV = 'development';
-  const {
-    port,
-    initialPath,
-    paths,
-    routes,
-    httpsDevServer,
-    useDevServerMiddleware,
-    sites,
-    hosts,
-  } = skuContext;
+  const { port, initialPath, paths, routes, httpsDevServer, sites, hosts } =
+    skuContext;
 
   const environment = resolveEnvironment({
     environment: environmentOption,
@@ -95,7 +87,7 @@ export const webpackStartHandler = async ({
   const appHosts = getAppHosts(skuContext);
 
   let devServerMiddleware = null;
-  if (useDevServerMiddleware) {
+  if (paths.devServerMiddleware) {
     devServerMiddleware = (await import(paths.devServerMiddleware)).default;
   }
 

@@ -1,5 +1,15 @@
 # sku
 
+## 15.2.0
+
+### Minor Changes
+
+- `start-ssr`: `--list-urls, -l` flag is available for SSR apps ([#1435](https://github.com/seek-oss/sku/pull/1435))
+
+### Patch Changes
+
+- Fix incorrect devServerMiddleware validation logic ([#1437](https://github.com/seek-oss/sku/pull/1437))
+
 ## 15.1.0
 
 ### Minor Changes

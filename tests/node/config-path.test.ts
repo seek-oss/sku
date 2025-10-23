@@ -8,13 +8,12 @@ describe('config-paths', () => {
   it('should throw if the --config flag is provided but the path is not found', async ({
     expect,
   }) => {
+    const notFoundConfigPath = fixturePath('sku-not-found.config.ts');
     const cli = await sku('build', ['--config', 'sku-not-found.config.ts']);
 
     expect(
       await cli.findByError(
-        new RegExp(
-          `Error: Sku config file not found for path: .*config-path/sku-not-found.config.ts$`,
-        ),
+        `Error: Sku config file not found for path: ${notFoundConfigPath}`,
       ),
     ).toBeInTheConsole();
 
@@ -47,11 +46,7 @@ describe('config-paths', () => {
         });
 
         expect(
-          await cli.findByError(
-            new RegExp(
-              `Loading sku config: .*config-path/sku.config.${configExtension}$`,
-            ),
-          ),
+          await cli.findByError(`Loading sku config: ${configPath}`),
         ).toBeInTheConsole();
       });
     },

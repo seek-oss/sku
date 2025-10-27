@@ -18,7 +18,7 @@ catalog:
   react: ^19.1.0
   react-dom: ^19.1.0
   vite: ^7.0.6
-  vitest: ^3.2.3
+  vitest: ^4.0.3
 
 catalogs:
   react18:
@@ -40,7 +40,11 @@ onlyBuiltDependencies:
   - docsify
   - esbuild
   - puppeteer
+  - sku
   - unrs-resolver
+
+patchedDependencies:
+  vitest-environment-puppeteer: patches/vitest-environment-puppeteer.patch
 
 preferWorkspacePackages: true
 

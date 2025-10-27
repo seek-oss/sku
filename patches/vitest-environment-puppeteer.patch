@@ -1,0 +1,22 @@
+diff --git a/dist/index.js b/dist/index.js
+index a33d4b9fdcda118a3ed7066adc86216b79ed409b..9a9fb65361316a646979ae73ebb4e2365f73c7d2 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -102,7 +102,7 @@ const getJestWorkerId = ()=>{
+ };
+ const getWorkerIndex = ()=>{
+     // Jest worker ID starts at 1
+-    return getJestWorkerId() - 1;
++    return getJestWorkerId();
+ };
+ const getWorkerWsEndpointIndex = ()=>{
+     return Math.min(readWorkersCount() - 1, getWorkerIndex());
+@@ -218,7 +218,7 @@ const closeAll = async (global)=>{
+ };
+ const PuppeteerEnvironment = {
+     name: "puppeteer",
+-    transformMode: "ssr",
++    viteEnvironment: "ssr",
+     async setup (global) {
+         global.puppeteerConfig = await readConfig();
+         global.vitestPuppeteer = {

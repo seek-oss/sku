@@ -22,13 +22,9 @@ export const runVitest = async ({
   const ctx = await startVitest(
     'test',
     results.filter,
-    { config: false, ...results.options },
+    { config: false, environment: 'jsdom', setupFiles, ...results.options },
     {
       plugins: [vanillaExtractPlugin(), tsconfigPaths()],
-      test: {
-        environment: 'jsdom',
-        setupFiles,
-      },
       ssr: {
         noExternal: [...compilePackages, ...cjsInteropDependencies],
       },

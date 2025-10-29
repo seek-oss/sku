@@ -10,6 +10,7 @@ import { getAppHosts } from '../../../../context/hosts.js';
 import isCI from '../../../../utils/isCI.js';
 import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
 import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';
+import { serverUrls } from '@sku-lib/utils';
 
 const require = createRequire(import.meta.url);
 
@@ -95,7 +96,14 @@ export const createStartConfig = (skuContext: SkuContext) => {
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
-        open: shouldOpenTab && (skuContext.initialPath || true),
+        open:
+          shouldOpenTab &&
+          serverUrls({
+            hosts: getAppHosts(skuContext),
+            port: skuContext.port.client,
+            initialPath: skuContext.initialPath,
+            https: skuContext.httpsDevServer,
+          }).first(),
       },
     },
     skuContext,

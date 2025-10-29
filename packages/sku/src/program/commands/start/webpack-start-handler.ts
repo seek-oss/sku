@@ -21,7 +21,7 @@ import {
 } from '../../../utils/language-utils.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { printUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-lib/utils';
 
 const localhost = '0.0.0.0';
 
@@ -187,16 +187,16 @@ export const webpackStartHandler = async ({
       return;
     }
 
-    const url = `${httpsDevServer ? 'https' : 'http'}://${
-      appHosts?.[0]
-    }:${availablePort}${initialPath}`;
-
-    printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
-      https: httpsDevServer,
-      initialPath,
+    const urls = serverUrls({
+      hosts: appHosts,
       port: availablePort,
+      initialPath,
+      https: httpsDevServer,
     });
 
-    openBrowser(url);
+    console.log('Starting development server...');
+    urls.print(skuContext.listUrls ? 'all' : 1);
+
+    openBrowser(urls.first());
   });
 };

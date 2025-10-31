@@ -18,7 +18,13 @@ const require = createRequire(import.meta.url);
 const renderEntry = require.resolve('../entries/vite-render.js');
 const clientEntry = require.resolve('../entries/vite-client.js');
 
-export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
+export const middlewarePlugin = ({
+  skuContext,
+  environment,
+}: {
+  skuContext: SkuContext;
+  environment: string;
+}): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
     if (
@@ -100,7 +106,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
           let html = await (viteRender as ViteRenderFunction)({
-            environment: 'development',
+            environment,
             language,
             route: getRouteWithLanguage(matchingRoute.route, language),
             routeName: matchingRoute.name || '',

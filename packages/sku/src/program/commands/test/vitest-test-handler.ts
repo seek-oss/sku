@@ -2,6 +2,8 @@ import prompts from 'prompts';
 import installDep from '../../../services/packageManager/install.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import isCI from '../../../utils/isCI.js';
+import type { InlineConfig } from 'vite';
+import { createSkuViteConfig } from '../../../services/vite/helpers/config/baseConfig.js';
 
 export const vitestHandler = async ({
   skuContext,
@@ -51,9 +53,13 @@ export const vitestHandler = async ({
   await skuLibVitest.runVitest({
     setupFiles: skuContext.paths.setupTests,
     args,
-    skuContext: {
-      cjsInteropDependencies: skuContext.cjsInteropDependencies,
-      compilePackages: skuContext.paths.compilePackages,
-    },
+    noExternal: [
+      ...skuContext.cjsInteropDependencies,
+      ...skuContext.paths.compilePackages,
+    ],
+    viteConfigOverride: createSkuViteConfig(
+      {},
+      skuContext,
+    ) satisfies InlineConfig,
   });
 };

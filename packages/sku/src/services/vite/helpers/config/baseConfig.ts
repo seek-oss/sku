@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import { type InlineConfig, mergeConfig } from 'vite';
 
-import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 
@@ -17,6 +16,7 @@ import vocabPluginVite from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
+import { cjsInterop } from '../../plugins/vite-plugin-cjs-interop.js';
 
 const require = createRequire(import.meta.url);
 

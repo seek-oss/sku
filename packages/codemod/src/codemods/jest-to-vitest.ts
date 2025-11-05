@@ -23,12 +23,15 @@ export const transform = async (source: string) => {
   // Replace `jest.<method>` with `vi.<method>`
 
   const jestMethods = root.findAll({
-    // Matches `jest.<method>` except `jest.requireActual` as that is handled separately
+    // Matches `jest.<method>` except `jest.requireActual` and `jest.setTimeout` as those are handled separately
     rule: {
       pattern: 'jest.$METHOD',
       kind: 'member_expression',
       not: {
-        pattern: 'jest.requireActual',
+        any: [
+          { pattern: 'jest.requireActual' },
+          { pattern: 'jest.setTimeout' },
+        ],
       },
     },
   });
@@ -42,6 +45,26 @@ export const transform = async (source: string) => {
   }
 
   if (jestMethods.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  // Replace `jest.setTimeout` with `vi.setConfig({ testTimeout: ... })`
+  const jestSetTimeoutCalls = root.findAll({
+    rule: {
+      pattern: 'jest.setTimeout($TIMEOUT)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestSetTimeoutCalls) {
+    const timeoutArg = node.getMatch('TIMEOUT')?.text();
+
+    if (timeoutArg) {
+      edits.push(node.replace(`vi.setConfig({ testTimeout: ${timeoutArg} })`));
+    }
+  }
+
+  if (jestSetTimeoutCalls.length > 0) {
     vitestImports.add('vi');
   }
 

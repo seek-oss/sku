@@ -2,7 +2,7 @@
 '@sku-lib/codemod': minor
 ---
 
-jest-to-vitest: Transform generics in .resolves/.rejects expect chains with satisfies operator
+jest-to-vitest: Transform generics in `.resolves`/`.rejects` expect chains with `satisfies` operator
 
 ```diff
 - expect(result).resolves.toEqual<MyType>({});

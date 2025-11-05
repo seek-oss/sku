@@ -358,6 +358,17 @@ const testCases: TestCase[] = [
         expect(result).resolves.toEqual<MyType>({});
         expect(result).resolves.toMatchObject<MyType>({ id: 1 });
 
+        // Generic with longer chains including .not (should be transformed)
+        expect(result).not.resolves.toEqual<MyType>({});
+        expect(result).not.resolves.toMatchObject<MyType>({ id: 1 });
+        expect(promise).not.rejects.toThrow<Error>(error);
+        expect(result).resolves.not.toEqual<MyType>(wrongData);
+        expect(promise).rejects.not.toBe<string>('error');
+
+        // Generic with complex types and multiple arguments (should be transformed)
+        expect(asyncData).resolves.toEqual<ComplexType<string, number>>(data, extraArg);
+        expect(rejectedPromise).rejects.toMatchObject<{ error: string }>({ error: 'failed' });
+
         // Generic with regular expect chains (should remain unchanged)
         expect(stringValue).toBe<string>('hello');
         expect(numberValue).toEqual<number>(42);
@@ -389,6 +400,17 @@ const testCases: TestCase[] = [
         // Generic with resolves/rejects and objects (should be transformed)
         expect(result).resolves.toEqual({} satisfies MyType);
         expect(result).resolves.toMatchObject({ id: 1 } satisfies MyType);
+
+        // Generic with longer chains including .not (should be transformed)
+        expect(result).not.resolves.toEqual({} satisfies MyType);
+        expect(result).not.resolves.toMatchObject({ id: 1 } satisfies MyType);
+        expect(promise).not.rejects.toThrow(error satisfies Error);
+        expect(result).resolves.not.toEqual(wrongData satisfies MyType);
+        expect(promise).rejects.not.toBe('error' satisfies string);
+
+        // Generic with complex types and multiple arguments (should be transformed)
+        expect(asyncData).resolves.toEqual(data satisfies ComplexType<string, number>, extraArg);
+        expect(rejectedPromise).rejects.toMatchObject({ error: 'failed' } satisfies { error: string });
 
         // Generic with regular expect chains (should remain unchanged)
         expect(stringValue).toBe<string>('hello');

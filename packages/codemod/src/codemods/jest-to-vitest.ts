@@ -162,6 +162,94 @@ export const transform = async (source: string) => {
     edits.push(edit);
   }
 
+  // Replace generics in expect chains with satisfies operator
+  // This handles patterns like:
+  // - expect(result).resolves.toEqual<MyType>({}) -> expect(result).resolves.toEqual({} satisfies MyType)
+  // - expect(result).not.toBe<Foo>("test") -> expect(result).not.toBe("test" satisfies Foo)
+  // - expect(result).rejects.toThrow<ErrorType>() -> expect(result).rejects.toThrow({} satisfies ErrorType)
+
+  // Use a simpler approach: find all call expressions with type arguments that contain "expect"
+  const expectChainGenerics = root.findAll({
+    rule: {
+      kind: 'call_expression',
+      has: {
+        kind: 'type_arguments',
+      },
+    },
+  });
+
+  for (const node of expectChainGenerics) {
+    const fullText = node.text();
+
+    // Only process nodes that contain expect calls
+    if (!fullText.includes('expect(')) {
+      continue;
+    }
+
+    // Check if this is an expect chain by looking at the member expression
+    const memberExpr = node.field('function');
+    if (!memberExpr) {
+      continue;
+    }
+
+    const memberText = memberExpr.text();
+    if (!memberText.includes('expect(') && !memberText.includes('expect.')) {
+      continue;
+    }
+
+    // Find type arguments
+    const typeArgs = node.find({
+      rule: {
+        kind: 'type_arguments',
+      },
+    });
+
+    if (!typeArgs) {
+      continue;
+    }
+
+    // Extract the generic type (without < >)
+    const genericText = typeArgs.text();
+    const generic = genericText.slice(1, -1);
+
+    // Get arguments
+    const argsNode = node.field('arguments');
+    if (!argsNode) {
+      continue;
+    }
+
+    const argsText = argsNode.text();
+    const args = argsText.slice(1, -1).trim(); // Remove ( and )
+
+    // Build replacement
+    const beforeTypeArgs = fullText.substring(0, fullText.indexOf('<'));
+    const afterArgs = fullText.substring(fullText.lastIndexOf(')') + 1);
+
+    let replacement: string;
+
+    if (args && args.trim() !== '') {
+      // Simple argument parsing - for complex cases, just append satisfies to first arg
+      const firstComma = args.indexOf(',');
+
+      if (firstComma === -1) {
+        // Single argument
+        replacement = `${beforeTypeArgs}(${args} satisfies ${generic})${afterArgs}`;
+      } else {
+        // Multiple arguments - add satisfies to the first one
+        const firstArg = args.substring(0, firstComma).trim();
+        const restArgs = args.substring(firstComma);
+        replacement = `${beforeTypeArgs}(${firstArg} satisfies ${generic}${restArgs})${afterArgs}`;
+      }
+    } else {
+      // No arguments - skip transformation for empty calls like .toThrow<Error>()
+      // These should remain as is since there's nothing to apply satisfies to
+      continue;
+    }
+
+    const edit = node.replace(replacement);
+    edits.push(edit);
+  }
+
   if (vitestImports.size === 0) {
     return root.commitEdits(edits);
   }

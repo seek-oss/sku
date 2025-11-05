@@ -61,7 +61,13 @@ export const createClientBuildConfig = (skuContext: SkuContext) => {
   );
 };
 
-export const createStartConfig = (skuContext: SkuContext) => {
+export const createStartConfig = ({
+  skuContext,
+  environment,
+}: {
+  skuContext: SkuContext;
+  environment: string;
+}) => {
   const outDir = createOutDir(skuContext.paths.target);
   return createSkuViteConfig(
     {
@@ -70,7 +76,7 @@ export const createStartConfig = (skuContext: SkuContext) => {
         vitePluginSsrCss({
           entries: [skuContext.paths.renderEntry],
         }),
-        middlewarePlugin(skuContext),
+        middlewarePlugin({ skuContext, environment }),
         startTelemetryPlugin({
           target: 'node',
           type: 'static',

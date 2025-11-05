@@ -165,8 +165,10 @@ export const transform = async (source: string) => {
   // Replace generics in expect chains with satisfies operator
   // This handles patterns like:
   // - expect(result).resolves.toEqual<MyType>({}) -> expect(result).resolves.toEqual({} satisfies MyType)
-  // - expect(result).not.toBe<Foo>("test") -> expect(result).not.toBe("test" satisfies Foo)
-  // - expect(result).rejects.toThrow<ErrorType>() -> expect(result).rejects.toThrow({} satisfies ErrorType)
+  // - expect(result).rejects.toThrow<ErrorType>({}) -> expect(result).rejects.toThrow({} satisfies ErrorType)
+  //
+  // Only transforms calls that contain .resolves or .rejects as these are the only cases
+  // where Vitest doesn't support generics
 
   // Use a simpler approach: find all call expressions with type arguments that contain "expect"
   const expectChainGenerics = root.findAll({
@@ -183,6 +185,12 @@ export const transform = async (source: string) => {
 
     // Only process nodes that contain expect calls
     if (!fullText.includes('expect(')) {
+      continue;
+    }
+
+    // IMPORTANT: Only transform calls that contain .resolves or .rejects
+    // Regular expect calls with generics should remain unchanged
+    if (!fullText.includes('.resolves.') && !fullText.includes('.rejects.')) {
       continue;
     }
 
@@ -241,8 +249,7 @@ export const transform = async (source: string) => {
         replacement = `${beforeTypeArgs}(${firstArg} satisfies ${generic}${restArgs})${afterArgs}`;
       }
     } else {
-      // No arguments - skip transformation for empty calls like .toThrow<Error>()
-      // These should remain as is since there's nothing to apply satisfies to
+      // No arguments - skip transformation for empty calls
       continue;
     }
 

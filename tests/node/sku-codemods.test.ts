@@ -354,20 +354,20 @@ const testCases: TestCase[] = [
         const numberValue = 42;
         const objectValue = { key: 'value' };
 
-        // Generic with resolves/rejects and objects
+        // Generic with resolves/rejects and objects (should be transformed)
         expect(result).resolves.toEqual<MyType>({});
         expect(result).resolves.toMatchObject<MyType>({ id: 1 });
 
-        // Generic with regular expect chains
+        // Generic with regular expect chains (should remain unchanged)
         expect(stringValue).toBe<string>('hello');
         expect(numberValue).toEqual<number>(42);
         expect(objectValue).toMatchObject<{ key: string }>({ key: 'value' });
 
-        // Generic with .not chains
+        // Generic with .not chains (should remain unchanged)
         expect(stringValue).not.toBe<string>('world');
         expect(numberValue).not.toEqual<number>(0);
 
-        // Generic with variables and complex expressions
+        // Generic with variables and complex expressions (should remain unchanged)
         expect(getValue()).toEqual<MyType>(expectedValue);
         expect(processData(input)).toBe<string>(result.output);
       });
@@ -386,22 +386,22 @@ const testCases: TestCase[] = [
         const numberValue = 42;
         const objectValue = { key: 'value' };
 
-        // Generic with resolves/rejects and objects
+        // Generic with resolves/rejects and objects (should be transformed)
         expect(result).resolves.toEqual({} satisfies MyType);
         expect(result).resolves.toMatchObject({ id: 1 } satisfies MyType);
 
-        // Generic with regular expect chains
-        expect(stringValue).toBe('hello' satisfies string);
-        expect(numberValue).toEqual(42 satisfies number);
-        expect(objectValue).toMatchObject({ key: 'value' } satisfies { key: string });
+        // Generic with regular expect chains (should remain unchanged)
+        expect(stringValue).toBe<string>('hello');
+        expect(numberValue).toEqual<number>(42);
+        expect(objectValue).toMatchObject<{ key: string }>({ key: 'value' });
 
-        // Generic with .not chains
-        expect(stringValue).not.toBe('world' satisfies string);
-        expect(numberValue).not.toEqual(0 satisfies number);
+        // Generic with .not chains (should remain unchanged)
+        expect(stringValue).not.toBe<string>('world');
+        expect(numberValue).not.toEqual<number>(0);
 
-        // Generic with variables and complex expressions
-        expect(getValue()).toEqual(expectedValue satisfies MyType);
-        expect(processData(input)).toBe(result.output satisfies string);
+        // Generic with variables and complex expressions (should remain unchanged)
+        expect(getValue()).toEqual<MyType>(expectedValue);
+        expect(processData(input)).toBe<string>(result.output);
       });
     `,
   },

@@ -158,6 +158,18 @@ To pull translations from Phrase:
 $ sku translations pull
 ```
 
+### Automatic Translation
+
+Phrase supports the ability to automatically translate content using machine-learning.
+
+Whilst this can be configured in your Phrase project, Phrase may not automatically translate keys uploaded by the API.
+
+To instruct Phrase to translate keys use `--auto-translate`.
+
+```sh
+$ sku translations push --auto-translate
+```
+
 ### Delete Unused Keys
 
 When uploading translations, Phrase identifies keys that exist in the Phrase project, but were not referenced in the upload.

@@ -11,9 +11,11 @@ import type { SkuContext } from '../../../../../context/createSkuContext.js';
 const log = (message: string) => console.log(chalk.cyan(message));
 
 export const pushAction = async ({
+  autoTranslate,
   deleteUnusedKeys,
   skuContext,
 }: {
+  autoTranslate?: boolean;
   deleteUnusedKeys?: boolean;
   skuContext: SkuContext;
 }) => {
@@ -26,7 +28,10 @@ export const pushAction = async ({
     const branch = await ensureBranch();
 
     log('Pushing translations to Phrase...');
-    await push({ branch, deleteUnusedKeys }, vocabConfigFromSkuConfig);
+    await push(
+      { autoTranslate, branch, deleteUnusedKeys },
+      vocabConfigFromSkuConfig,
+    );
     log('Successfully pushed translations to Phrase');
   } catch (e) {
     if (e) {

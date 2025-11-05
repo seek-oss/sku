@@ -200,9 +200,10 @@ sku translations push
 
 This command supports the following options:
 
-| Option                 | Description                                                                                           |
-| ---------------------- | ----------------------------------------------------------------------------------------------------- |
-| `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys` |
+| Option                 | Description                                                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `--auto-translate`     | Instructs Phrase to automatically translate any missing keys using machine translation. `sku translations push --auto-translate` |
+| `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys`                            |
 
 ### `translations pull`
 

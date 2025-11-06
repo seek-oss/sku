@@ -27,15 +27,11 @@ export const runVitest = async ({
           inline: noExternal,
         },
       },
+      environment: 'jsdom',
+      setupFiles,
       ...results.options,
     },
-    {
-      ...viteConfigOverride,
-      test: {
-        environment: 'jsdom',
-        setupFiles,
-      },
-    },
+    viteConfigOverride,
     {},
   );
 

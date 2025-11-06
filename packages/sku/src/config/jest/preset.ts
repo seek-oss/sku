@@ -1,5 +1,4 @@
 import escapeRegex from 'escape-string-regexp';
-import { fileURLToPath } from 'node:url';
 import { cwd } from '@sku-lib/utils';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Config } from 'jest';
@@ -14,7 +13,7 @@ const compilePackagesRegex = paths.compilePackages
 export default jestDecorator({
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
-  prettierPath: fileURLToPath(import.meta.resolve('prettier')),
+  prettierPath: require.resolve('prettier'),
   modulePaths: rootResolution ? [cwd()] : undefined,
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
@@ -22,18 +21,12 @@ export default jestDecorator({
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg|avif|bmp)$':
-      fileURLToPath(import.meta.resolve('./fileMock.cjs')),
+      require.resolve('./fileMock.cjs'),
   },
   transform: {
-    '\\.css\\.ts$': fileURLToPath(
-      import.meta.resolve('@vanilla-extract/jest-transform'),
-    ),
-    '\\.[cm]?tsx?$': fileURLToPath(
-      import.meta.resolve('./tsBabelTransform.js'),
-    ),
-    '\\.[cm]?jsx?$': fileURLToPath(
-      import.meta.resolve('./jsBabelTransform.js'),
-    ),
+    '\\.css\\.ts$': require.resolve('@vanilla-extract/jest-transform'),
+    '\\.[cm]?tsx?$': require.resolve('./tsBabelTransform.js'),
+    '\\.[cm]?jsx?$': require.resolve('./jsBabelTransform.js'),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding
@@ -41,8 +34,8 @@ export default jestDecorator({
     `node_modules${slash}(?!(${compilePackagesRegex}))`,
   ],
   watchPlugins: [
-    fileURLToPath(import.meta.resolve('jest-watch-typeahead/filename')),
-    fileURLToPath(import.meta.resolve('jest-watch-typeahead/testname')),
+    require.resolve('jest-watch-typeahead/filename'),
+    require.resolve('jest-watch-typeahead/testname'),
   ],
   testEnvironmentOptions: {
     globalsCleanup: 'on',

@@ -2,12 +2,10 @@
   "name": "@sku-lib/vitest",
   "version": "1.0.0",
   "description": "vitest runner for sku test",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -43,5 +41,8 @@
   },
   "peerDependencies": {
     "vitest": "^3.0.0"
-  }
+  },
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts"
 }

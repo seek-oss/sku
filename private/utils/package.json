@@ -1,6 +1,7 @@
 {
   "name": "@sku-lib/utils",
   "version": "1.1.0",
+  "private": true,
   "description": "Shared utilities for sku packages",
   "type": "module",
   "repository": {
@@ -9,7 +10,7 @@
     "directory": "packages/utils"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
   "files": [

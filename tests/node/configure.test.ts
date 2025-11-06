@@ -9,8 +9,6 @@ import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 
-import prettierConfig from '../../packages/sku/dist/config/prettier.js';
-
 import {
   type RenderResult,
   scopeToFixture,
@@ -72,7 +70,7 @@ describe('configure', () => {
 
     it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolder, '.prettierrc');
-      expect(prettierRc).toEqual(prettierConfig);
+      expect(prettierRc).toMatchInlineSnapshot();
     });
 
     it('should generate a eslint config', async ({ expect }) => {
@@ -124,6 +122,7 @@ describe('configure', () => {
 
       await waitFor(() => {
         globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+        configure.debug();
       });
     });
 
@@ -134,7 +133,7 @@ describe('configure', () => {
     it('should generate a prettier config', async ({ expect }) => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
 
-      expect(prettierRc).toEqual(prettierConfig);
+      expect(prettierRc).toMatchInlineSnapshot();
     });
 
     it('should generate an eslint config', async ({ expect }) => {

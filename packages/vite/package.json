@@ -2,15 +2,15 @@
   "name": "@sku-lib/vite",
   "version": "1.0.0",
   "description": "Loadable components for sku vite",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "exports": {
-    "./loadable": {
-      "types": "./dist/loadable/index.d.ts",
-      "default": "./dist/loadable/index.js"
-    },
     "./collector": {
-      "types": "./dist/loadable/collector.d.ts",
-      "default": "./dist/loadable/collector.js"
+      "import": "./dist/collector.js",
+      "require": "./dist/collector.cjs"
+    },
+    "./loadable": {
+      "import": "./dist/loadable.js",
+      "require": "./dist/loadable.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -49,5 +49,7 @@
     "@types/react": "^18.0.0 || ^19.0.0",
     "vite": "^7.0.0",
     "react": "^18.0.0 || ^19.0.0"
-  }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js"
 }

@@ -2,31 +2,55 @@
   "name": "sku",
   "version": "15.1.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "bin": {
     "sku": "bin/bin.js"
   },
   "exports": {
     ".": {
-      "types": {
-        "import": "./dist/index.d.ts",
-        "require": "./dist/index.d.cts"
-      }
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
-    "./jest-preset": "./dist/config/jest/preset.js",
+    "./@loadable/component": {
+      "import": "./dist/@loadable/component.js",
+      "require": "./dist/@loadable/component.cjs"
+    },
+    "./bin/sku": {
+      "import": "./dist/bin/sku.js",
+      "require": "./dist/bin/sku.cjs"
+    },
     "./config/eslint": {
-      "types": "./dist/config/eslint/config.d.ts",
-      "default": "./dist/config/eslint/config.js"
+      "import": "./dist/config/eslint.js",
+      "require": "./dist/config/eslint.cjs"
+    },
+    "./config/prettier": {
+      "import": "./dist/config/prettier.js",
+      "require": "./dist/config/prettier.cjs"
     },
     "./config/storybook": {
-      "types": "./dist/config/storybook/config.d.ts",
-      "default": "./dist/config/storybook/config.cjs"
+      "import": "./dist/config/storybook.js",
+      "require": "./dist/config/storybook.cjs"
+    },
+    "./context/createSkuContext.js": {
+      "import": "./dist/context/createSkuContext.js.js",
+      "require": "./dist/context/createSkuContext.js.cjs"
+    },
+    "./jest-preset": {
+      "import": "./dist/jest-preset.js",
+      "require": "./dist/jest-preset.cjs"
+    },
+    "./utils/configureApp.js": {
+      "import": "./dist/utils/configureApp.js.js",
+      "require": "./dist/utils/configureApp.js.cjs"
     },
     "./vite/client": {
-      "types": "./dist/services/vite/client.d.ts"
+      "import": "./dist/vite/client.js",
+      "require": "./dist/vite/client.cjs"
     },
-    "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./webpack-plugin": "./dist/services/webpack/config/plugins/skuWebpackPlugin.js",
+    "./webpack-plugin": {
+      "import": "./dist/webpack-plugin.js",
+      "require": "./dist/webpack-plugin.cjs"
+    },
     "./package.json": "./package.json"
   },
   "engines": {
@@ -94,7 +118,6 @@
     "@loadable/server": "^5.16.7",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@sku-lib/utils": "workspace:*",
     "@sku-lib/vite": "workspace:*",
     "@swc/core": "^1.6.13",
     "@types/eslint": "^9.6.1",
@@ -187,6 +210,7 @@
     "wrap-ansi": "^9.0.0"
   },
   "devDependencies": {
+    "@sku-lib/utils": "workspace:*",
     "@sku-lib/vitest": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",
@@ -217,5 +241,7 @@
     "react-dom": "catalog:",
     "type-fest": "^4.41.0",
     "vitest": "catalog:"
-  }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js"
 }

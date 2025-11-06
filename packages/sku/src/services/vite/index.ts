@@ -25,8 +25,16 @@ export const viteService = {
     await cleanTargetDirectory(outDir.ssg, true);
     await cleanTargetDirectory(outDir.join('.vite'), true);
   },
-  start: async (skuContext: SkuContext) => {
-    const server = await createServer(createStartConfig(skuContext));
+  start: async ({
+    skuContext,
+    environment,
+  }: {
+    skuContext: SkuContext;
+    environment: string;
+  }) => {
+    const server = await createServer(
+      createStartConfig({ skuContext, environment }),
+    );
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,

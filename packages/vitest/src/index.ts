@@ -1,36 +1,39 @@
 import { startVitest, parseCLI } from 'vitest/node';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
-import tsconfigPaths from 'vite-tsconfig-paths';
-
-type SkuContext = {
-  cjsInteropDependencies: string[];
-  compilePackages: string[];
-};
 
 export const runVitest = async ({
   setupFiles = [],
   args,
-  skuContext = { cjsInteropDependencies: [], compilePackages: [] },
+  noExternal,
+  viteConfigOverride,
 }: {
   setupFiles: string | string[];
   args: string[];
-  skuContext?: SkuContext;
+  noExternal?: string[];
+  viteConfigOverride?: Record<string, any>;
 }) => {
   const results = parseCLI(['vitest', ...args]);
-  const { cjsInteropDependencies, compilePackages } = skuContext;
 
   const ctx = await startVitest(
     'test',
     results.filter,
-    { config: false, ...results.options },
     {
-      plugins: [vanillaExtractPlugin(), tsconfigPaths()],
+      config: false,
+      css: true,
+      server: {
+        deps: {
+          // According to the docs all dependencies specified in ssr.noExternal will be inlined by default.
+          // However this doesn't seem to be picked up properly. Adding these manually fixed transitive cjs interop.
+          // @see https://vitest.dev/config/#server-deps-inline
+          inline: noExternal,
+        },
+      },
+      ...results.options,
+    },
+    {
+      ...viteConfigOverride,
       test: {
         environment: 'jsdom',
         setupFiles,
-      },
-      ssr: {
-        noExternal: [...compilePackages, ...cjsInteropDependencies],
       },
     },
     {},

@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.1.0
+
+### Minor Changes
+
+- Vite template no longer marked as experimental ([#1431](https://github.com/seek-oss/sku/pull/1431))
+
 ## 1.0.1
 
 ### Patch Changes

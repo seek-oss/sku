@@ -23,7 +23,7 @@ export const transform = async (source: string) => {
   // Replace `jest.<method>` with `vi.<method>`
 
   const jestMethods = root.findAll({
-    // Matches `jest.<method>` except `jest.requireActual` and `jest.setTimeout` as those are handled separately
+    // Matches `jest.<method>` except `jest.requireActual`, `jest.setTimeout`, and `jest.fn<...>` as those are handled separately
     rule: {
       pattern: 'jest.$METHOD',
       kind: 'member_expression',
@@ -31,6 +31,15 @@ export const transform = async (source: string) => {
         any: [
           { pattern: 'jest.requireActual' },
           { pattern: 'jest.setTimeout' },
+          {
+            pattern: 'jest.fn',
+            inside: {
+              kind: 'call_expression',
+              has: {
+                kind: 'type_arguments',
+              },
+            },
+          },
         ],
       },
     },
@@ -45,6 +54,33 @@ export const transform = async (source: string) => {
   }
 
   if (jestMethods.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  const jestFnGenericCalls = root.findAll({
+    rule: {
+      pattern: 'jest.fn<$GENERIC_ARG1,$GENERIC_ARG2>($$$MATCHER_ARGS)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestFnGenericCalls) {
+    const returnType = node.getMatch('GENERIC_ARG1')?.text();
+    const parametersType = node.getMatch('GENERIC_ARG2')?.text();
+    const matcherArgs = node.getMatch('MATCHER_ARGS')?.text();
+
+    if (returnType && parametersType) {
+      // Transform: jest.fn<ReturnType, Parameters>() -> vi.fn<(...args: Parameters) => ReturnType>()
+      const args = matcherArgs ? `(${matcherArgs})` : '()';
+      edits.push(
+        node.replace(
+          `vi.fn<(...args: ${parametersType}) => ${returnType}>${args}`,
+        ),
+      );
+    }
+  }
+
+  if (jestFnGenericCalls.length > 0) {
     vitestImports.add('vi');
   }
 

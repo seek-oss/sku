@@ -98,7 +98,7 @@ export const transform = async (source: string) => {
 
   // Transform jest hooks with function references to arrow functions
   // eg beforeAll(someSetupFunction) -> beforeAll(() => { someSetupFunction() })
-  const jestHooks = ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'];
+  const lifecycleHooks = ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'];
 
   const hookCallsWithFunctionReferences = root.findAll({
     rule: {

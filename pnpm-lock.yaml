@@ -7002,9 +7002,6 @@ packages:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
 
-  magic-string@0.30.18:
-    resolution: {integrity: sha512-yi8swmWbO17qHhwIBNeeZxTceJMeBvWJaId6dyvTSOwTipqeHhMhOrz6513r1sOKnpvQ7zkhlG8tPrpilwTxHQ==}
-
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -11482,7 +11479,7 @@ snapshots:
       es-module-lexer: 1.7.0
       fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.9.3)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       html-webpack-plugin: 5.6.3(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       storybook: 9.1.2(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.1.2(@types/node@22.18.8)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       style-loader: 3.3.4(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       terser-webpack-plugin: 5.3.14(@swc/core@1.12.11)(esbuild@0.25.6)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
@@ -11509,7 +11506,7 @@ snapshots:
       es-module-lexer: 1.7.0
       fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.9.3)(webpack@5.100.0)
       html-webpack-plugin: 5.6.3(webpack@5.100.0)
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       storybook: 9.1.2(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.1.2(@types/node@22.18.8)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
       style-loader: 3.3.4(webpack@5.100.0)
       terser-webpack-plugin: 5.3.14(@swc/core@1.12.11)(esbuild@0.25.6)(webpack@5.100.0)
@@ -11551,7 +11548,7 @@ snapshots:
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.9.3)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@types/semver': 7.7.0
       find-up: 7.0.0
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       react: 18.3.1
       react-docgen: 7.1.1
       react-dom: 18.3.1(react@18.3.1)
@@ -11576,7 +11573,7 @@ snapshots:
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.9.3)(webpack@5.100.0(@swc/core@1.12.11)(esbuild@0.25.6))
       '@types/semver': 7.7.0
       find-up: 7.0.0
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       react: 19.1.1
       react-docgen: 7.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -11600,7 +11597,7 @@ snapshots:
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.9.3)(webpack@5.100.0)
       '@types/semver': 7.7.0
       find-up: 7.0.0
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       react: 19.1.1
       react-docgen: 7.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -16272,10 +16269,6 @@ snapshots:
   lru-cache@7.18.3: {}
 
   lz-string@1.5.0: {}
-
-  magic-string@0.30.18:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
 
   magic-string@0.30.21:
     dependencies:

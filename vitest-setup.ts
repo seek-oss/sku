@@ -6,7 +6,7 @@ import {
   sanitizeFilesSerializer,
 } from '@sku-private/puppeteer';
 import { cleanup, configure } from '@sku-private/testing-library';
-import '@sku-private/testing-library/vitest';
+import 'cli-testing-library/vitest';
 
 configure();
 

@@ -1,5 +1,11 @@
 # @sku-lib/codemod
 
+## 1.1.0
+
+### Minor Changes
+
+- jest-to-vitest: Update codemod to handle `jest.setTimeout` calls ([#1439](https://github.com/seek-oss/sku/pull/1439))
+
 ## 1.0.0
 
 ### Major Changes

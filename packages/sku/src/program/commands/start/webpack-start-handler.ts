@@ -63,6 +63,14 @@ export const webpackStartHandler = async ({
   const clientCompiler = webpack(clientWebpackConfig);
   const renderCompiler = webpack(renderWebpackConfig);
 
+  if (!clientCompiler) {
+    throw new Error('Failed to create client webpack compiler');
+  }
+
+  if (!renderCompiler) {
+    throw new Error('Failed to create render webpack compiler');
+  }
+
   renderCompiler.watch({}, (err, stats) => {
     if (err) {
       console.error(err);

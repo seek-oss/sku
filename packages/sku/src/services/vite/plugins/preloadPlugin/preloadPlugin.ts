@@ -101,7 +101,7 @@ export function preloadPlugin({
 
             // Find the loadable import name and see if it has been aliased.
             if (
-              t.isLiteral(importPath.node.source, {
+              t.isStringLiteral(importPath.node.source, {
                 value: VITE_LOADABLE_IMPORT,
               })
             ) {
@@ -111,7 +111,7 @@ export function preloadPlugin({
             }
 
             if (
-              t.isLiteral(importPath.node.source, {
+              t.isStringLiteral(importPath.node.source, {
                 value: WEBPACK_LOADABLE_IMPORT,
               })
             ) {

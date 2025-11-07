@@ -49,8 +49,19 @@ export const buildSsrAction = async ({
     });
     await ensureTargetDirectory(skuContext.paths.target);
     await cleanTargetDirectory(skuContext.paths.target);
-    await run(webpack(clientConfig), { stats });
-    await run(webpack(serverConfig), { stats });
+
+    const clientCompiler = webpack(clientConfig);
+    if (!clientCompiler) {
+      throw new Error('Failed to create client webpack compiler');
+    }
+
+    const serverCompiler = webpack(serverConfig);
+    if (!serverCompiler) {
+      throw new Error('Failed to create server webpack compiler');
+    }
+
+    await run(clientCompiler, { stats });
+    await run(serverCompiler, { stats });
     await copyPublicFiles(skuContext);
 
     const timeTaken = performance.now();

@@ -1,5 +1,13 @@
 # @sku-lib/vitest
 
+## 1.0.1
+
+### Patch Changes
+
+- test(vitest): Vitest now works for React apps ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
+  The vitest runner wasn't inheriting the vite config so many vitest plugins, including React, were missing. This has now been resolved.
+
 ## 1.0.0
 
 ### Major Changes

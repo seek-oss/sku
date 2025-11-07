@@ -125,7 +125,7 @@ export const transform = async (source: string) => {
 
   const hookCallsWithFunctionReferences = root.findAll({
     rule: {
-      any: jestHooks.map((hook) => ({
+      any: lifecycleHooks.map((hook) => ({
         pattern: `${hook}($ARG)`,
         kind: 'call_expression',
       })),

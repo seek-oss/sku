@@ -251,6 +251,99 @@ export const transform = async (source: string) => {
     edits.push(edit);
   }
 
+  // Replace generics in expect chains with satisfies operator
+  // This handles patterns like:
+  // - expect(result).resolves.toEqual<MyType>({}) -> expect(result).resolves.toEqual({} satisfies MyType)
+  // - expect(result).rejects.toThrow<ErrorType>({}) -> expect(result).rejects.toThrow({} satisfies ErrorType)
+  //
+  // Only transforms calls that contain .resolves or .rejects as these are the only cases
+  // where Vitest doesn't support generics
+
+  // Use exhaustive patterns to match all possible expect chains with resolves/rejects and generics
+  const expectChainGenerics = root.findAll({
+    rule: {
+      any: [
+        {
+          pattern:
+            'expect($EXPECT_ARG).resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).not.resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).not.rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).resolves.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).rejects.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+      ],
+    },
+  });
+
+  for (const node of expectChainGenerics) {
+    // Extract pattern-matched components using getMultipleMatches for multi-token patterns
+    const expectArg = node.getMatch('EXPECT_ARG')?.text();
+    const matcher = node.getMatch('MATCHER')?.text();
+
+    // Use getMultipleMatches for multi-token patterns - works correctly where getMatch fails
+    const genericArgsNodes = node.getMultipleMatches('GENERIC_ARGS');
+    const matcherArgsNodes = node.getMultipleMatches('MATCHER_ARGS');
+
+    if (!expectArg || !matcher || genericArgsNodes.length === 0) {
+      continue;
+    }
+
+    // Extract the generic type (should be a single node for the entire generic)
+    const genericArgs = genericArgsNodes[0]?.text();
+
+    if (!genericArgs) {
+      continue;
+    }
+
+    // For matcher arguments, filter out comma separators and reconstruct the argument list
+    const matcherArgs = matcherArgsNodes
+      .filter((argNode) => argNode.text() !== ',')
+      .map((argNode) => argNode.text())
+      .join(', ');
+
+    if (!matcherArgs || matcherArgs.trim() === '') {
+      // No arguments - skip transformation for empty calls
+      continue;
+    }
+
+    // Extract the part before generics and reconstruct with satisfies
+    const fullText = node.text();
+    const beforeGeneric = fullText.substring(0, fullText.indexOf('<'));
+
+    let replacement: string;
+    const trimmedArgs = matcherArgs.trim();
+    const firstComma = trimmedArgs.indexOf(',');
+
+    if (firstComma === -1) {
+      // Single argument
+      replacement = `${beforeGeneric}(${trimmedArgs} satisfies ${genericArgs})`;
+    } else {
+      // Multiple arguments - add satisfies to the first one
+      const firstArg = trimmedArgs.substring(0, firstComma).trim();
+      const restArgs = trimmedArgs.substring(firstComma);
+      replacement = `${beforeGeneric}(${firstArg} satisfies ${genericArgs}${restArgs})`;
+    }
+
+    const edit = node.replace(replacement);
+    edits.push(edit);
+  }
+
   if (vitestImports.size === 0) {
     return root.commitEdits(edits);
   }

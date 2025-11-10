@@ -66,7 +66,7 @@ describe('serverUrls.first()', () => {
 
 describe('serverUrls.print()', () => {
   it('prints the first url', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({ hosts: ['localhost', 'localhost2'] }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
@@ -76,7 +76,7 @@ describe('serverUrls.print()', () => {
   });
 
   it('prints the first url with a port', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({ hosts: ['localhost'], port: 3000 }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
@@ -86,7 +86,7 @@ describe('serverUrls.print()', () => {
   });
 
   it('prints the first url with a port and initialPath', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({
       hosts: ['localhost'],
       port: 3000,
@@ -100,7 +100,7 @@ describe('serverUrls.print()', () => {
   });
 
   it('prints the first url with a port and initialPath and https', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({
       hosts: ['localhost'],
       port: 3000,
@@ -115,7 +115,7 @@ describe('serverUrls.print()', () => {
   });
 
   it('prints number of urls', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({ hosts: ['localhost', 'localhost2', 'secure.domain'] }).print(
       2,
     );
@@ -130,7 +130,7 @@ describe('serverUrls.print()', () => {
 
 describe('serverUrls.printAll()', () => {
   it('prints all urls', () => {
-    const consoleLogSpy = vi.spyOn(console, 'log');
+    using consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     serverUrls({
       hosts: ['localhost', 'localhost2', 'secure.domain'],
     }).printAll();

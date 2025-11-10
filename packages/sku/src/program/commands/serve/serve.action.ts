@@ -207,6 +207,7 @@ export const serveAction = async ({
       https: httpsDevServer,
     });
 
+    console.log(chalk.blue('Server started'));
     if (skuContext.listUrls) {
       urls.printAll();
     } else {

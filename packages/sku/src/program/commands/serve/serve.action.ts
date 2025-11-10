@@ -186,17 +186,17 @@ export const serveAction = async ({
   app.on('error', console.error);
 
   server.listen(availablePort, () => {
-    const url = serverUrls({
+    const urls = serverUrls({
       hosts: appHosts,
       port: availablePort,
       initialPath,
       https: httpsDevServer,
     });
 
-    url.print(skuContext.listUrls ? 'all' : 1);
+    skuContext.listUrls ? urls.printAll() : urls.print();
 
     console.log();
 
-    openBrowser(url.first());
+    openBrowser(urls.first());
   });
 };

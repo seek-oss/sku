@@ -195,7 +195,8 @@ export const webpackStartHandler = async ({
     });
 
     console.log('Starting development server...');
-    urls.print(skuContext.listUrls ? 'all' : 1);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    skuContext.listUrls ? urls.printAll() : urls.print();
 
     openBrowser(urls.first());
   });

@@ -38,12 +38,15 @@ export const viteService = {
     const hosts = getAppHosts(skuContext);
 
     console.log('Starting development server...');
-    serverUrls({
+    const urls = serverUrls({
       hosts,
       port: availablePort,
       initialPath: skuContext.initialPath,
       https: skuContext.httpsDevServer,
-    }).print(skuContext.listUrls ? 'all' : 1);
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    skuContext.listUrls ? urls.printAll() : urls.print();
 
     server.bindCLIShortcuts({ print: true });
   },

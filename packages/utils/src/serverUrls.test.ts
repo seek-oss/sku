@@ -70,7 +70,6 @@ describe('serverUrls.print()', () => {
     serverUrls({ hosts: ['localhost', 'localhost2'] }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: http://localhost",
       ]
     `);
@@ -81,7 +80,6 @@ describe('serverUrls.print()', () => {
     serverUrls({ hosts: ['localhost'], port: 3000 }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: http://localhost:3000",
       ]
     `);
@@ -96,7 +94,6 @@ describe('serverUrls.print()', () => {
     }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: http://localhost:3000/foo",
       ]
     `);
@@ -112,7 +109,6 @@ describe('serverUrls.print()', () => {
     }).print();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: https://localhost:3000/foo",
       ]
     `);
@@ -125,7 +121,6 @@ describe('serverUrls.print()', () => {
     );
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: http://localhost",
         "➜  Local: http://localhost2",
       ]
@@ -134,12 +129,11 @@ describe('serverUrls.print()', () => {
 
   it('prints all urls', () => {
     const consoleLogSpy = vi.spyOn(console, 'log');
-    serverUrls({ hosts: ['localhost', 'localhost2', 'secure.domain'] }).print(
-      'all',
-    );
+    serverUrls({
+      hosts: ['localhost', 'localhost2', 'secure.domain'],
+    }).printAll();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
       [
-        "Starting development server...",
         "➜  Local: http://localhost",
         "➜  Local: http://localhost2",
         "➜  Local: http://secure.domain",

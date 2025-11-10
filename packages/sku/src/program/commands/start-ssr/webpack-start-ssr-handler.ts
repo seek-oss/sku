@@ -30,7 +30,7 @@ import {
 } from '../../../utils/configure.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { requireFromCwd, serverUrls, styledUrl } from '@sku-lib/utils';
+import { makeUrl, requireFromCwd, serverUrls } from '@sku-lib/utils';
 
 const log = debug('sku:start-ssr');
 
@@ -111,10 +111,11 @@ export const webpackStartSsrHandler = async ({
     initialPath,
     https: httpsDevServer,
   });
-  const webpackDevServerUrl = styledUrl({
+  const webpackDevServerUrl = makeUrl({
+    host: appHosts?.[0],
     port: clientPort,
     https: httpsDevServer,
-  })(appHosts?.[0]);
+  });
 
   console.log();
   console.log(
@@ -123,7 +124,7 @@ export const webpackStartSsrHandler = async ({
     ),
   );
   console.log('Starting development server...');
-  urls.print(skuContext.listUrls ? 'all' : 1);
+  skuContext.listUrls ? urls.printAll() : urls.print();
   console.log();
 
   const onServerDone = once((err, stats) => {

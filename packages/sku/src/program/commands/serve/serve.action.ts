@@ -189,7 +189,6 @@ export const serveAction = async ({
     const preferredHost = sites.find(
       ({ name }) => name === preferredSite,
     )?.host;
-    console.log('preferredHost', preferredHost);
     const urls = serverUrls({
       // Sort the preferred host to the top of the list
       hosts: !preferredHost

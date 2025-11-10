@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/vitest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vitest runner for sku test",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
@@ -35,11 +35,7 @@
   "homepage": "https://github.com/seek-oss/sku#readme",
   "devDependencies": {
     "typescript-transform-paths": "^3.5.2",
-    "vitest": "catalog:"
-  },
-  "dependencies": {
-    "@vanilla-extract/vite-plugin": "catalog:",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vitest": "^3.2.3"
   },
   "peerDependencies": {
     "vitest": "^3.0.0"

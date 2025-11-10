@@ -6,8 +6,6 @@ import type { ReactNode } from 'react';
 
 const RENDER_TIMEOUT_MS = 5000;
 
-let hasWarned = false;
-
 const log = debug('sku:render:renderToStringAsync');
 
 /**
@@ -16,12 +14,6 @@ const log = debug('sku:render:renderToStringAsync');
  * @returns Promise that resolves with the rendered HTML string.
  */
 export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
-  if (!hasWarned) {
-    console.log(
-      "Warning: The use of `renderApp`'s `renderToStringAsync` parameter is experimental. Its API and behaviour may change, and you may experience unexpected behaviours.",
-    );
-    hasWarned = true;
-  }
   log('Starting render');
 
   return new Promise<string>((resolve, reject) => {

@@ -338,6 +338,169 @@ const testCases: TestCase[] = [
     vi.mock('./foo2', mock);
     `,
   },
+  {
+    filename: 'jestHooksWithFunctionReferences.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      const scoringService = {
+        spy: () => console.log('spy called'),
+        setup: () => console.log('setup'),
+        nested: {
+          method: () => console.log('nested method')
+        }
+      };
+
+      const mockFunction = jest.fn();
+      const globalSetup = () => console.log('global');
+
+      // These should be transformed - function references
+      beforeAll(scoringService.spy);
+      beforeEach(mockFunction);
+      afterAll(scoringService.setup);
+      afterEach(scoringService.nested.method);
+
+      // These should NOT be transformed - already function expressions
+      beforeAll(() => {
+        console.log('setup');
+      });
+
+      beforeEach(function() {
+        console.log('before each');
+      });
+
+      afterAll(async () => {
+        await cleanup();
+      });
+
+      describe('test suite with hooks', () => {
+        beforeAll(globalSetup); // This should be transformed
+
+        it('should work', () => {
+          expect(true).toBe(true);
+        });
+      });
+    `,
+    output: ts /* ts */ `
+      import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+      const scoringService = {
+        spy: () => console.log('spy called'),
+        setup: () => console.log('setup'),
+        nested: {
+          method: () => console.log('nested method')
+        }
+      };
+
+      const mockFunction = vi.fn();
+      const globalSetup = () => console.log('global');
+
+      // These should be transformed - function references
+      beforeAll(() => { scoringService.spy() });
+      beforeEach(() => { mockFunction() });
+      afterAll(() => { scoringService.setup() });
+      afterEach(() => { scoringService.nested.method() });
+
+      // These should NOT be transformed - already function expressions
+      beforeAll(() => {
+        console.log('setup');
+      });
+
+      beforeEach(function() {
+        console.log('before each');
+      });
+
+      afterAll(async () => {
+        await cleanup();
+      });
+
+      describe('test suite with hooks', () => {
+        beforeAll(() => { globalSetup() }); // This should be transformed
+
+        it('should work', () => {
+          expect(true).toBe(true);
+        });
+      });
+    `,
+  },
+  {
+    filename: 'jest-setTimeout.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      describe('timeout tests', () => {
+        beforeEach(() => {
+          jest.setTimeout(10000);
+        });
+
+        it('should handle timeout', () => {
+          jest.setTimeout(5_000);
+          expect(true).toBe(true);
+        });
+
+        test('with variable timeout', () => {
+          const timeout = 15000;
+          jest.setTimeout(timeout);
+          expect(true).toBe(true);
+        });
+      });
+    `,
+    output: ts /* ts */ `
+      import { beforeEach, describe, expect, it, test, vi } from 'vitest';
+      describe('timeout tests', () => {
+        beforeEach(() => {
+          vi.setConfig({ testTimeout: 10000 });
+        });
+
+        it('should handle timeout', () => {
+          vi.setConfig({ testTimeout: 5_000 });
+          expect(true).toBe(true);
+        });
+
+        test('with variable timeout', () => {
+          const timeout = 15000;
+          vi.setConfig({ testTimeout: timeout });
+          expect(true).toBe(true);
+        });
+      });
+    `,
+  },
+  {
+    filename: 'jest-fn-with-generics.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      type Middleware = (req: Request, res: Response) => void;
+
+      const middleware = jest.fn<void, Parameters<Middleware>>();
+      const callback = jest.fn<string, [number, boolean]>();
+      const handler = jest.fn<Promise<void>, [Context]>();
+      export const resolveRoles = jest.fn<
+        Promise<string[]> | string[],
+        [ApolloContext]
+      >();
+    `,
+    output: ts /* ts */ `
+      import { vi } from 'vitest';
+      type Middleware = (req: Request, res: Response) => void;
+
+      const middleware = vi.fn<(...args: Parameters<Middleware>) => void>();
+      const callback = vi.fn<(...args: [number, boolean]) => string>();
+      const handler = vi.fn<(...args: [Context]) => Promise<void>>();
+      export const resolveRoles = vi.fn<(...args: [ApolloContext]) => Promise<string[]> | string[]>();
+    `,
+  },
+  {
+    filename: 'jest-fn-without-generics.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      const foo = jest.fn();
+      const bar = jest.fn((arg) => arg);
+      const baz = jest.fn(() => 'hello');
+    `,
+    output: ts /* ts */ `
+      import { vi } from 'vitest';
+      const foo = vi.fn();
+      const bar = vi.fn((arg) => arg);
+      const baz = vi.fn(() => 'hello');
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

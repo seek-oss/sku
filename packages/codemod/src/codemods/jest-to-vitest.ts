@@ -23,12 +23,24 @@ export const transform = async (source: string) => {
   // Replace `jest.<method>` with `vi.<method>`
 
   const jestMethods = root.findAll({
-    // Matches `jest.<method>` except `jest.requireActual` as that is handled separately
+    // Matches `jest.<method>` except `jest.requireActual`, `jest.setTimeout`, and `jest.fn<...>` as those are handled separately
     rule: {
       pattern: 'jest.$METHOD',
       kind: 'member_expression',
       not: {
-        pattern: 'jest.requireActual',
+        any: [
+          { pattern: 'jest.requireActual' },
+          { pattern: 'jest.setTimeout' },
+          {
+            pattern: 'jest.fn',
+            inside: {
+              kind: 'call_expression',
+              has: {
+                kind: 'type_arguments',
+              },
+            },
+          },
+        ],
       },
     },
   });
@@ -42,6 +54,53 @@ export const transform = async (source: string) => {
   }
 
   if (jestMethods.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  const jestFnGenericCalls = root.findAll({
+    rule: {
+      pattern: 'jest.fn<$GENERIC_ARG1,$GENERIC_ARG2>($$$MATCHER_ARGS)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestFnGenericCalls) {
+    const returnType = node.getMatch('GENERIC_ARG1')?.text();
+    const parametersType = node.getMatch('GENERIC_ARG2')?.text();
+    const matcherArgs = node.getMatch('MATCHER_ARGS')?.text();
+
+    if (returnType && parametersType) {
+      // Transform: jest.fn<ReturnType, Parameters>() -> vi.fn<(...args: Parameters) => ReturnType>()
+      const args = matcherArgs ? `(${matcherArgs})` : '()';
+      edits.push(
+        node.replace(
+          `vi.fn<(...args: ${parametersType}) => ${returnType}>${args}`,
+        ),
+      );
+    }
+  }
+
+  if (jestFnGenericCalls.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  // Replace `jest.setTimeout` with `vi.setConfig({ testTimeout: ... })`
+  const jestSetTimeoutCalls = root.findAll({
+    rule: {
+      pattern: 'jest.setTimeout($TIMEOUT)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestSetTimeoutCalls) {
+    const timeoutArg = node.getMatch('TIMEOUT')?.text();
+
+    if (timeoutArg) {
+      edits.push(node.replace(`vi.setConfig({ testTimeout: ${timeoutArg} })`));
+    }
+  }
+
+  if (jestSetTimeoutCalls.length > 0) {
     vitestImports.add('vi');
   }
 
@@ -94,6 +153,36 @@ export const transform = async (source: string) => {
   for (const node of requireActualNodes) {
     const edit = node.replace('await vi.importActual');
     edits.push(edit);
+  }
+
+  // Transform jest hooks with function references to arrow functions
+  // eg beforeAll(someSetupFunction) -> beforeAll(() => { someSetupFunction() })
+  const lifecycleHooks = ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'];
+
+  const hookCallsWithFunctionReferences = root.findAll({
+    rule: {
+      any: lifecycleHooks.map((hook) => ({
+        pattern: `${hook}($ARG)`,
+        kind: 'call_expression',
+      })),
+    },
+  });
+
+  for (const node of hookCallsWithFunctionReferences) {
+    const arg = node.getMatch('ARG');
+    if (arg) {
+      const argText = arg.text();
+      // Check if the argument is a function reference (not a function expression or arrow function)
+      // Function references are typically identifiers or member expressions like 'scoringService.spy'
+      const isFunctionReference =
+        arg.kind() === 'identifier' || arg.kind() === 'member_expression';
+
+      if (isFunctionReference) {
+        // Wrap the function reference in an arrow function
+        const edit = arg.replace(`() => { ${argText}() }`);
+        edits.push(edit);
+      }
+    }
   }
 
   // Track usage of Jest globals and import them from `vitest`

@@ -1,5 +1,17 @@
 # sku
 
+## 15.2.1
+
+### Patch Changes
+
+- test(vitest): Vitest now works for React apps ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
+  The vitest runner wasn't inheriting the vite config so many vitest plugins, including React, were missing. This has now been resolved.
+
+- start(vite): sku `environment` value will be set correctly ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
+- vite: Transitive cjs interop now works correctly ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
 ## 15.2.0
 
 ### Minor Changes

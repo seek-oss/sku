@@ -1,5 +1,26 @@
 # sku
 
+## 15.3.0
+
+### Minor Changes
+
+- serve: Add support for the `--list-urls, -l` flag ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+  Previously, `serve` printed every site's URL to the console. This logic now aligns with the behaviour of the `start|start-ssr` commands - only printing the first available server URL unless the `-l` flag is passed.
+
+  The service will still be available on all site hosts regardless of the passed flag. This change only affects terminal output.
+
+### Patch Changes
+
+- Fix `@seek/sku-telemetry` package detection ([#1447](https://github.com/seek-oss/sku/pull/1447))
+
+- serve: `--site` flag will open the given site by default ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+- start|start-ssr|serve: The first url displayed when starting a server will be the one opened in the browser ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+- Updated dependencies [[`c7408a2`](https://github.com/seek-oss/sku/commit/c7408a27de24db01fc599bad2e96cd1f3a110682)]:
+  - @sku-lib/utils@1.1.1
+
 ## 15.2.1
 
 ### Patch Changes

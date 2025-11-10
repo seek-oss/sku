@@ -30,7 +30,7 @@ import {
 } from '../../../utils/configure.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { printUrls, requireFromCwd } from '@sku-lib/utils';
+import { makeUrl, requireFromCwd, serverUrls } from '@sku-lib/utils';
 
 const log = debug('sku:start-ssr');
 
@@ -105,10 +105,17 @@ export const webpackStartSsrHandler = async ({
     path.join(paths.target, `server.${type === 'module' ? 'c' : ''}js`),
   );
 
-  const proto = httpsDevServer ? 'https' : 'http';
-
-  const serverUrl = `${proto}://${appHosts?.[0]}:${serverPort}${initialPath}`;
-  const webpackDevServerUrl = `${proto}://${appHosts?.[0]}:${clientPort}`;
+  const urls = serverUrls({
+    hosts: appHosts,
+    port: serverPort,
+    initialPath,
+    https: httpsDevServer,
+  });
+  const webpackDevServerUrl = makeUrl({
+    host: appHosts?.[0],
+    port: clientPort,
+    https: httpsDevServer,
+  });
 
   console.log();
   console.log(
@@ -116,11 +123,12 @@ export const webpackStartSsrHandler = async ({
       `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
     ),
   );
-  printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
-    https: httpsDevServer,
-    initialPath,
-    port: serverPort,
-  });
+  console.log('Starting development server...');
+  if (skuContext.listUrls) {
+    urls.printAll();
+  } else {
+    urls.print();
+  }
   console.log();
 
   const onServerDone = once((err, stats) => {
@@ -143,7 +151,7 @@ export const webpackStartSsrHandler = async ({
 
     serverManager.start();
 
-    openBrowser(serverUrl);
+    openBrowser(urls.first());
   });
 
   // Starts the server webpack config running.

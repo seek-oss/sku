@@ -124,7 +124,11 @@ export const webpackStartSsrHandler = async ({
     ),
   );
   console.log('Starting development server...');
-  skuContext.listUrls ? urls.printAll() : urls.print();
+  if (skuContext.listUrls) {
+    urls.printAll();
+  } else {
+    urls.print();
+  }
   console.log();
 
   const onServerDone = once((err, stats) => {

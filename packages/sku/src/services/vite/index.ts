@@ -45,8 +45,11 @@ export const viteService = {
       https: skuContext.httpsDevServer,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    skuContext.listUrls ? urls.printAll() : urls.print();
+    if (skuContext.listUrls) {
+      urls.printAll();
+    } else {
+      urls.print();
+    }
 
     server.bindCLIShortcuts({ print: true });
   },

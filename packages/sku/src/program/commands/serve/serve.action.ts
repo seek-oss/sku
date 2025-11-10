@@ -186,14 +186,33 @@ export const serveAction = async ({
   app.on('error', console.error);
 
   server.listen(availablePort, () => {
+    const preferredHost = sites.find(
+      ({ name }) => name === preferredSite,
+    )?.host;
+    console.log('preferredHost', preferredHost);
     const urls = serverUrls({
-      hosts: appHosts,
+      // Sort the preferred host to the top of the list
+      hosts: !preferredHost
+        ? appHosts
+        : appHosts.sort((a, b) => {
+            if (a === preferredHost) {
+              return -1;
+            }
+            if (b === preferredHost) {
+              return 1;
+            }
+            return 0;
+          }),
       port: availablePort,
       initialPath,
       https: httpsDevServer,
     });
 
-    skuContext.listUrls ? urls.printAll() : urls.print();
+    if (skuContext.listUrls) {
+      urls.printAll();
+    } else {
+      urls.print();
+    }
 
     console.log();
 

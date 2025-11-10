@@ -462,6 +462,45 @@ const testCases: TestCase[] = [
       });
     `,
   },
+  {
+    filename: 'jest-fn-with-generics.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      type Middleware = (req: Request, res: Response) => void;
+
+      const middleware = jest.fn<void, Parameters<Middleware>>();
+      const callback = jest.fn<string, [number, boolean]>();
+      const handler = jest.fn<Promise<void>, [Context]>();
+      export const resolveRoles = jest.fn<
+        Promise<string[]> | string[],
+        [ApolloContext]
+      >();
+    `,
+    output: ts /* ts */ `
+      import { vi } from 'vitest';
+      type Middleware = (req: Request, res: Response) => void;
+
+      const middleware = vi.fn<(...args: Parameters<Middleware>) => void>();
+      const callback = vi.fn<(...args: [number, boolean]) => string>();
+      const handler = vi.fn<(...args: [Context]) => Promise<void>>();
+      export const resolveRoles = vi.fn<(...args: [ApolloContext]) => Promise<string[]> | string[]>();
+    `,
+  },
+  {
+    filename: 'jest-fn-without-generics.test.ts',
+    codemodName: 'jest-to-vitest',
+    input: ts /* ts */ `
+      const foo = jest.fn();
+      const bar = jest.fn((arg) => arg);
+      const baz = jest.fn(() => 'hello');
+    `,
+    output: ts /* ts */ `
+      import { vi } from 'vitest';
+      const foo = vi.fn();
+      const bar = vi.fn((arg) => arg);
+      const baz = vi.fn(() => 'hello');
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

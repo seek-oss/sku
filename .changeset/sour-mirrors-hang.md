@@ -2,8 +2,8 @@
 'sku': minor
 ---
 
-serve: `--list-urls, -l` flag is enabled on serve
+serve: Add support for the `--list-urls, -l` flag
 
-Running `serve` would print every site host url to the console. This logic now aligns with `start|start-ssr` commands and will now only print the first available server url unless the `-l` flag is passed.
+Previously, `serve` printed every site's URL to the console. This logic now aligns with the behaviour of the `start|start-ssr` commands - only printing the first available server URL unless the `-l` flag is passed.
 
 The service will still be available on all site hosts regardless of the passed flag. This change only affects terminal output.

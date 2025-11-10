@@ -2,7 +2,6 @@ import { describe, it, test, expect } from 'vitest';
 import {
   bundlers,
   type BundlerValues,
-  configure,
   scopeToFixture,
 } from '@sku-private/testing-library';
 
@@ -16,8 +15,6 @@ const makeUrls = (port: number) => [
 
 const urls = makeUrls(8222);
 const serverUrls = makeUrls(8223);
-
-configure({ asyncUtilTimeout: 5000 });
 
 describe('list-urls', () => {
   it.each(bundlers)(

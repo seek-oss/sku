@@ -1,5 +1,9 @@
 import type { SkuContext } from './createSkuContext.js';
 
+/**
+ * Gets the site name for a given hostname.
+ * If no site is found (i.e., localhost), it will return the default site or the first site if no default site is provided.
+ */
 export const getSiteForHost = (
   hostname: string,
   defaultSite: string | undefined,

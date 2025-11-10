@@ -12,7 +12,7 @@ import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
-import { printUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-lib/utils';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
@@ -44,11 +44,20 @@ export const viteService = {
     await server.listen(availablePort);
 
     const hosts = getAppHosts(skuContext);
-    printUrls(skuContext.listUrls ? hosts : [hosts[0]], {
-      https: skuContext.httpsDevServer,
-      initialPath: skuContext.initialPath,
+
+    console.log('Starting development server...');
+    const urls = serverUrls({
+      hosts,
       port: availablePort,
+      initialPath: skuContext.initialPath,
+      https: skuContext.httpsDevServer,
     });
+
+    if (skuContext.listUrls) {
+      urls.printAll();
+    } else {
+      urls.print();
+    }
 
     server.bindCLIShortcuts({ print: true });
   },

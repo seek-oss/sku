@@ -1,5 +1,11 @@
 # @sku-lib/utils
 
+## 1.1.1
+
+### Patch Changes
+
+- start|start-ssr|serve: The first url displayed when starting a server will be the one opened in the browser ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
 ## 1.1.0
 
 ### Minor Changes

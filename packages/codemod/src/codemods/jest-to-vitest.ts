@@ -155,6 +155,36 @@ export const transform = async (source: string) => {
     edits.push(edit);
   }
 
+  // Transform jest hooks with function references to arrow functions
+  // eg beforeAll(someSetupFunction) -> beforeAll(() => { someSetupFunction() })
+  const lifecycleHooks = ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'];
+
+  const hookCallsWithFunctionReferences = root.findAll({
+    rule: {
+      any: lifecycleHooks.map((hook) => ({
+        pattern: `${hook}($ARG)`,
+        kind: 'call_expression',
+      })),
+    },
+  });
+
+  for (const node of hookCallsWithFunctionReferences) {
+    const arg = node.getMatch('ARG');
+    if (arg) {
+      const argText = arg.text();
+      // Check if the argument is a function reference (not a function expression or arrow function)
+      // Function references are typically identifiers or member expressions like 'scoringService.spy'
+      const isFunctionReference =
+        arg.kind() === 'identifier' || arg.kind() === 'member_expression';
+
+      if (isFunctionReference) {
+        // Wrap the function reference in an arrow function
+        const edit = arg.replace(`() => { ${argText}() }`);
+        edits.push(edit);
+      }
+    }
+  }
+
   // Track usage of Jest globals and import them from `vitest`
 
   const foundJestGlobals = root.findAll({

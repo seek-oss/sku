@@ -126,18 +126,20 @@ describe('serverUrls.print()', () => {
       ]
     `);
   });
+});
 
+describe('serverUrls.printAll()', () => {
   it('prints all urls', () => {
     const consoleLogSpy = vi.spyOn(console, 'log');
     serverUrls({
       hosts: ['localhost', 'localhost2', 'secure.domain'],
     }).printAll();
     expect(consoleLogSpy.mock.calls.flat()).toMatchInlineSnapshot(`
-      [
-        "➜  Local: http://localhost",
-        "➜  Local: http://localhost2",
-        "➜  Local: http://secure.domain",
-      ]
-    `);
+        [
+          "➜  Local: http://localhost",
+          "➜  Local: http://localhost2",
+          "➜  Local: http://secure.domain",
+        ]
+      `);
   });
 });

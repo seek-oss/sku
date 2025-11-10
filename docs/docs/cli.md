@@ -98,10 +98,11 @@ sku serve
 
 This command supports the following options:
 
-| Option   | Description                                                            |
-| -------- | ---------------------------------------------------------------------- |
-| `--port` | The `port` to serve the application on <br> `sku serve --port=8080`    |
-| `--site` | The `site` to serve the application on <br> `sku serve --site=seekAnz` |
+| Option            | Description                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- | ------- |
+| `--port`          | The `port` to serve the application on <br> `sku serve --port=8080`                                             |
+| `--site`          | The `site` to serve the application on <br> `sku serve --site=seekAnz`                                          |
+| `--list-urls, -l` | Lists all of the dev server urls that the app can be accessed on. If false, only displays the first found host. | `false` |
 
 [`sku build`]: #sku-build
 

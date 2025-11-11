@@ -8371,7 +8371,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
      </div>
      <script
        type="module"
-       src="{cwd}/node_modules/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
      >
      </script>
      <script
@@ -13428,7 +13428,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
      </div>
      <script
        type="module"
-       src="{cwd}/node_modules/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
      >
      </script>
      <script

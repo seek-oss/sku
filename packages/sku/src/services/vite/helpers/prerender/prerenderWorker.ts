@@ -60,7 +60,6 @@ await Promise.all(
         language,
         route,
         routeName,
-
         site,
         render,
         loadableCollector,

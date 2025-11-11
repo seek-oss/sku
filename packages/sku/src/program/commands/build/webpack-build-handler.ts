@@ -37,21 +37,26 @@ export const webpackBuildHandler = async ({
     await runVocabCompile(skuContext);
     await ensureTargetDirectory(paths.target);
     await cleanTargetDirectory(paths.target);
-    await run(
-      webpack(
-        makeWebpackConfig({
-          htmlRenderPlugin: !isLibrary
-            ? createHtmlRenderPlugin({
-                isStartScript: false,
-                skuContext,
-              })
-            : undefined,
-          stats,
-          skuContext,
-        }),
-      ),
-      { stats },
+
+    const compiler = webpack(
+      // @ts-expect-error Tiny incompatibility between the Configuration and NormalizedWebpackOptions types.
+      // Not really worth fixing as this code will eventually be removed when we move to Vite.
+      makeWebpackConfig({
+        htmlRenderPlugin: !isLibrary
+          ? createHtmlRenderPlugin({
+              isStartScript: false,
+              skuContext,
+            })
+          : undefined,
+        stats,
+        skuContext,
+      }),
     );
+    if (!compiler) {
+      throw new Error('Failed to create webpack compiler');
+    }
+
+    await run(compiler, { stats });
     await cleanStaticRenderEntry({ paths });
     await copyPublicFiles({ paths });
 

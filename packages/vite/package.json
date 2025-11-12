@@ -37,10 +37,10 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "dependencies": {
-    "debug": "^4.3.1"
+    "debug": "catalog:"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.12",
+    "@types/debug": "catalog:",
     "@types/react": "catalog:",
     "vite": "catalog:",
     "react": "^19.1.0"

@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import { rm } from 'node:fs/promises';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
@@ -30,7 +30,7 @@ describe('typescript-css-modules', () => {
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       expect(await serve.findByText('Server started')).toBeInTheConsole();
 
-      const app = await getAppSnapshot({ url, expect });
+      const app = await getAppSnapshot({ url });
       expect(app).toMatchSnapshot();
     });
 
@@ -62,7 +62,7 @@ describe('typescript-css-modules', () => {
         await assetServer.findByText('serving dist-ssr'),
       ).toBeInTheConsole();
 
-      const app = await getAppSnapshot({ url: backendUrl, expect });
+      const app = await getAppSnapshot({ url: backendUrl });
       expect(app).toMatchSnapshot();
     });
 
@@ -86,7 +86,7 @@ describe('typescript-css-modules', () => {
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
 
-      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
+      const snapshot = await getAppSnapshot({ url: devServerUrl });
       expect(snapshot).toMatchSnapshot();
     });
   });

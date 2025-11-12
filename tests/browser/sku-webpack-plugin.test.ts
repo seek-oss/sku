@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import { dirContentsToObject } from '@sku-private/test-utils';
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
@@ -19,7 +19,6 @@ describe('sku-webpack-plugin', () => {
 
       const snapshot = await getAppSnapshot({
         url: devServerUrl,
-        expect,
       });
       expect(snapshot).toMatchSnapshot();
     });
@@ -50,7 +49,7 @@ describe('sku-webpack-plugin', () => {
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
-      const app = await getAppSnapshot({ url: devServerUrl, expect });
+      const app = await getAppSnapshot({ url: devServerUrl });
       expect(app).toMatchSnapshot();
     });
 

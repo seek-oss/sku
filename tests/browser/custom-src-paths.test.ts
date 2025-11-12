@@ -1,7 +1,7 @@
 import { describe, beforeAll, it, expect, afterAll } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
@@ -35,7 +35,7 @@ describe('custom-src-paths', () => {
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
-        const snapshot = await getAppSnapshot({ url, expect });
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot();
       });
     });
@@ -69,7 +69,7 @@ describe('custom-src-paths', () => {
       it('should create valid app', async ({ task }) => {
         skipCleanup(task.id);
 
-        const app = await getAppSnapshot({ url, expect });
+        const app = await getAppSnapshot({ url });
         expect(app).toMatchSnapshot();
       });
     });

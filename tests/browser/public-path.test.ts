@@ -1,11 +1,11 @@
 import { describe, it } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
-import { getAppSnapshot } from '@sku-private/puppeteer';
 import {
   bundlers,
   type BundlerValues,
   scopeToFixture,
 } from '@sku-private/testing-library';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 const { sku, fixturePath } = scopeToFixture('public-path');
 
@@ -29,7 +29,7 @@ describe('public path', () => {
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
         const url = `http://localhost:${port}`;
-        const app = await getAppSnapshot({ url, expect });
+        const app = await getAppSnapshot({ url });
         expect(app).toMatchSnapshot();
 
         const files = await dirContentsToObject(fixturePath('dist'));

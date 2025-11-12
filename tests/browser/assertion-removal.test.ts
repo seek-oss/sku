@@ -6,6 +6,7 @@ import {
   scopeToFixture,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
+import { createPage } from '@sku-private/playwright';
 
 const { sku, node } = scopeToFixture('assertion-removal');
 
@@ -27,8 +28,8 @@ describe('assertion-removal', () => {
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
-        const appPage = await browser.newPage();
-        const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
+        const appPage = await createPage();
+        const response = await appPage.goto(url);
         const sourceHtml = await response?.text();
         await appPage.close();
         expect(sourceHtml).toContain(
@@ -50,7 +51,7 @@ describe('assertion-removal', () => {
         await server.findByText('Server started on port 8011'),
       ).toBeInTheConsole();
 
-      const appPage = await browser.newPage();
+      const appPage = await createPage();
       const response = await appPage.goto(backendUrl);
       const sourceHtml = await response?.text();
       expect(sourceHtml).toContain(

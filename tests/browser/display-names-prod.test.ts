@@ -6,6 +6,7 @@ import {
   cleanup,
   type BundlerValues,
 } from '@sku-private/testing-library';
+import { createPage } from '@sku-private/playwright';
 
 const { sku, fixturePath } = scopeToFixture('display-names-prod');
 
@@ -65,8 +66,8 @@ describe('display-names-prod', () => {
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
-        const appPage = await browser.newPage();
-        const response = await appPage.goto(url, { waitUntil: 'networkidle0' });
+        const appPage = await createPage();
+        const response = await appPage.goto(url);
         const sourceHtml = await response?.text();
         await appPage.close();
 

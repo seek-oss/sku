@@ -39,7 +39,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 
   if (skuContext.displayNamesProd) {
     prodBabelPlugins.push(
-      require.resolve('@zendesk/babel-plugin-react-displayname'),
+      require.resolve('@mui/internal-babel-plugin-display-name'),
     );
   }
 

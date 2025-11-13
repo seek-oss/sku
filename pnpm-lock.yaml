@@ -1007,6 +1007,9 @@ importers:
       '@loadable/webpack-plugin':
         specifier: ^5.14.0
         version: 5.15.2(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
+      '@mui/internal-babel-plugin-display-name':
+        specifier: ^1.0.2
+        version: 1.0.2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.3)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
@@ -1070,9 +1073,6 @@ importers:
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.14(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
-      '@zendesk/babel-plugin-react-displayname':
-        specifier: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2
-        version: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer:
         specifier: ^10.3.1
         version: 10.4.22(postcss@8.5.6)
@@ -2951,6 +2951,12 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
+  '@mui/internal-babel-plugin-display-name@1.0.2':
+    resolution: {integrity: sha512-hnvpDAxATJVGfL6TaPtTFLCxyENMLU4i19gVi9Bx6sqC+aNDIgdpEzqEZRWr6raeLqdJvdoj8CMgsCDjJ1vbVg==}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      '@babel/preset-react': ^7.0.0
+
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
@@ -4112,13 +4118,6 @@ packages:
 
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
-
-  '@zendesk/babel-plugin-react-displayname@https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2':
-    resolution: {tarball: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2}
-    version: 1.0.0
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      '@babel/preset-react': ^7.0.0
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -11207,6 +11206,15 @@ snapshots:
       '@types/react': 19.1.17
       react: 19.1.1
 
+  '@mui/internal-babel-plugin-display-name@1.0.2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))':
+    dependencies:
+      '@babel/core': 7.28.5
+      '@babel/helper-module-imports': 7.27.1
+      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/preset-react': 7.28.5(@babel/core@7.28.5)
+    transitivePeerDependencies:
+      - supports-color
+
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
       '@emnapi/core': 1.7.0
@@ -12711,12 +12719,6 @@ snapshots:
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
-
-  '@zendesk/babel-plugin-react-displayname@https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
-      '@babel/preset-react': 7.28.5(@babel/core@7.28.5)
 
   accepts@1.3.8:
     dependencies:
@@ -17759,6 +17761,7 @@ snapshots:
       '@loadable/component': 5.16.7(react@18.3.1)
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@18.3.1))(react@18.3.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
+      '@mui/internal-babel-plugin-display-name': 1.0.2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.3)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
       '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.26)(react@18.3.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -17780,7 +17783,6 @@ snapshots:
       '@vocab/pseudo-localize': 1.0.2
       '@vocab/vite': 0.2.4(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@vocab/webpack': 1.2.14(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
-      '@zendesk/babel-plugin-react-displayname': https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer: 10.4.22(postcss@8.5.6)
       babel-jest: 30.2.0(@babel/core@7.28.5)
       babel-loader: 10.0.0(@babel/core@7.28.5)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
@@ -17913,6 +17915,7 @@ snapshots:
       '@loadable/component': 5.16.7(react@19.1.1)
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@19.1.1))(react@19.1.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1)
+      '@mui/internal-babel-plugin-display-name': 1.0.2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.102.1)
       '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.17)(react@19.1.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -17934,7 +17937,6 @@ snapshots:
       '@vocab/pseudo-localize': 1.0.2
       '@vocab/vite': 0.2.4(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@vocab/webpack': 1.2.14(webpack@5.102.1)
-      '@zendesk/babel-plugin-react-displayname': https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer: 10.4.22(postcss@8.5.6)
       babel-jest: 30.2.0(@babel/core@7.28.5)
       babel-loader: 10.0.0(@babel/core@7.28.5)(webpack@5.102.1)

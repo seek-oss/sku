@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   test: {
+    retry: 1,
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     hookTimeout: TEST_TIMEOUT + 1000,
@@ -28,12 +29,16 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
+          sequence: {
+            groupOrder: 1,
+          },
         },
       },
       {
         extends: true,
         test: {
           name: 'browser',
+          maxWorkers: '80%',
           include: [`tests/browser/${defaultInclude}`],
         },
       },

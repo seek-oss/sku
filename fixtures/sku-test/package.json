@@ -13,7 +13,8 @@
   "dependencies": {
     "@sku-private/3rd-party-cjs-interop-dep": "workspace:*",
     "@apollo/client": "^3.14.0",
-    "react": "catalog:"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

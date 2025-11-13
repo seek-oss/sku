@@ -510,7 +510,7 @@ importers:
         version: 1.7.0(babel-plugin-macros@3.1.0)
       sku:
         specifier: workspace:*
-        version: file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3))(@types/node@22.19.0)(@types/react@18.3.26)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(yaml@2.8.1)
+        version: file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3))(@types/node@22.19.0)(@types/react@18.3.26)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@vanilla-extract/css@1.17.4(babel-plugin-macros@3.1.0))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(yaml@2.8.1)
 
   fixtures/report-generation:
     dependencies:
@@ -606,7 +606,7 @@ importers:
         version: 2.9.4(webpack@5.102.1)
       sku:
         specifier: workspace:*
-        version: file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3)(webpack-cli@5.1.4))(@types/node@22.19.0)(@types/react@19.1.17)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-cli@5.1.4)(webpack-hot-middleware@2.26.1)(yaml@2.8.1)
+        version: file:packages/sku(d058f3927e3832333c303e5a800e2d19)
       webpack:
         specifier: ^5.52.0
         version: 5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)(webpack-cli@5.1.4)
@@ -992,6 +992,9 @@ importers:
       '@babel/types':
         specifier: ^7.26.0
         version: 7.28.5
+      '@capsizecss/vanilla-extract':
+        specifier: 2.0.1
+        version: 2.0.1(@vanilla-extract/css@1.17.4(babel-plugin-macros@3.1.0))
       '@eslint/compat':
         specifier: ^1.2.1
         version: 1.4.1(eslint@9.39.1(jiti@2.6.1))
@@ -17741,7 +17744,7 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  sku@file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3))(@types/node@22.19.0)(@types/react@18.3.26)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(yaml@2.8.1):
+  sku@file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3))(@types/node@22.19.0)(@types/react@18.3.26)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@vanilla-extract/css@1.17.4(babel-plugin-macros@3.1.0))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(yaml@2.8.1):
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -17754,6 +17757,7 @@ snapshots:
       '@babel/runtime': 7.28.4
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
+      '@capsizecss/vanilla-extract': 2.0.1(@vanilla-extract/css@1.17.4(babel-plugin-macros@3.1.0))
       '@eslint/compat': 1.4.1(eslint@9.39.1(jiti@2.6.1))
       '@loadable/babel-plugin': 5.16.1(@babel/core@7.28.5)
       '@loadable/component': 5.16.7(react@18.3.1)
@@ -17867,6 +17871,7 @@ snapshots:
       - '@types/webpack'
       - '@typescript-eslint/eslint-plugin'
       - '@typescript-eslint/utils'
+      - '@vanilla-extract/css'
       - bufferutil
       - canvas
       - esbuild
@@ -17895,7 +17900,7 @@ snapshots:
       - webpack-plugin-serve
       - yaml
 
-  sku@file:packages/sku(@sku-lib/vitest@file:packages/vitest(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.19.0)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(@storybook/react-webpack5@9.1.16(@swc/core@1.15.1)(esbuild@0.25.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1)))(typescript@5.9.3)(webpack-cli@5.1.4))(@types/node@22.19.0)(@types/react@19.1.17)(@typescript-eslint/eslint-plugin@8.46.4(@typescript-eslint/parser@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(esbuild-register@3.6.0(esbuild@0.25.12))(esbuild@0.25.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rollup@4.53.2)(terser@5.44.1)(tsx@4.20.6)(type-fest@4.41.0)(webpack-cli@5.1.4)(webpack-hot-middleware@2.26.1)(yaml@2.8.1):
+  sku@file:packages/sku(d058f3927e3832333c303e5a800e2d19):
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -17908,6 +17913,7 @@ snapshots:
       '@babel/runtime': 7.28.4
       '@babel/traverse': 7.28.5
       '@babel/types': 7.28.5
+      '@capsizecss/vanilla-extract': 2.0.1(@vanilla-extract/css@1.17.4(babel-plugin-macros@3.1.0))
       '@eslint/compat': 1.4.1(eslint@9.39.1(jiti@2.6.1))
       '@loadable/babel-plugin': 5.16.1(@babel/core@7.28.5)
       '@loadable/component': 5.16.7(react@19.1.1)
@@ -18021,6 +18027,7 @@ snapshots:
       - '@types/webpack'
       - '@typescript-eslint/eslint-plugin'
       - '@typescript-eslint/utils'
+      - '@vanilla-extract/css'
       - bufferutil
       - canvas
       - esbuild

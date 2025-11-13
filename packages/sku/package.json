@@ -106,6 +106,7 @@
     "@vanilla-extract/jest-transform": "^1.1.0",
     "@vanilla-extract/vite-plugin": "catalog:",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
+    "@capsizecss/vanilla-extract": "2.0.1",
     "@vitejs/plugin-basic-ssl": "^2.0.0",
     "@vitejs/plugin-react": "^4.4.1",
     "@vocab/core": "^1.6.2",
@@ -220,8 +221,5 @@
     "react-dom": "catalog:",
     "type-fest": "^4.41.0",
     "vitest": "catalog:"
-  },
-  "overrides": {
-    "@capsizecss/vanilla-extract": "2.0.1"
   }
 }

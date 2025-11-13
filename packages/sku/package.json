@@ -220,5 +220,8 @@
     "react-dom": "catalog:",
     "type-fest": "^4.41.0",
     "vitest": "catalog:"
+  },
+  "overrides": {
+    "@capsizecss/vanilla-extract": "2.0.1"
   }
 }

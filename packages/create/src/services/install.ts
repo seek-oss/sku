@@ -1,6 +1,5 @@
-import { getAddCommand, isAtLeastPnpmV10 } from '@sku-lib/utils';
+import { getAddCommand } from '@sku-lib/utils';
 import { spawn } from 'node:child_process';
-import { execAsync } from '../utils/execAsync.js';
 import type { Template } from '../types/index.js';
 
 const DEPENDENCIES = [
@@ -23,9 +22,11 @@ export const installDependencies = async (
 ): Promise<void> => {
   console.log('📦 Installing dependencies...');
 
-  if (isAtLeastPnpmV10()) {
-    await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
-  }
+  // ! Re-enable this once we've resolved the issue with Renovate/Mend
+  // ! @see https://github.com/renovatebot/renovate/discussions/38237
+  // if (isAtLeastPnpmV10()) {
+  //   await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
+  // }
 
   const devDeps = [...COMMON_DEV_DEPENDENCIES];
   if (template === 'vite') {

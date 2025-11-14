@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
@@ -32,20 +32,19 @@ describe('translations', () => {
 
     it('should render en', async ({ task }) => {
       skipCleanup(task.id);
-      const app = await getAppSnapshot({ url: `${baseUrl}/en`, expect });
+      const app = await getAppSnapshot({ url: `${baseUrl}/en` });
       expect(app).toMatchSnapshot();
     });
 
     it('should render fr', async ({ task }) => {
       skipCleanup(task.id);
-      const app = await getAppSnapshot({ expect, url: `${baseUrl}/fr` });
+      const app = await getAppSnapshot({ url: `${baseUrl}/fr` });
       expect(app).toMatchSnapshot();
     });
 
     it('should render en-PSEUDO post-hydration', async ({ task }) => {
       skipCleanup(task.id);
       const app = await getAppSnapshot({
-        expect,
         url: `${baseUrl}/en?pseudo=true`,
       });
       expect(app).toMatchSnapshot();
@@ -53,7 +52,7 @@ describe('translations', () => {
 
     it('should support query parameters', async ({ task }) => {
       skipCleanup(task.id);
-      const app = await getAppSnapshot({ expect, url: `${baseUrl}/en?a=1` });
+      const app = await getAppSnapshot({ url: `${baseUrl}/en?a=1` });
       expect(app).toMatchSnapshot();
     });
   });

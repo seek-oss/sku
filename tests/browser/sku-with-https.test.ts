@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { getPort } from '@sku-private/test-utils';
@@ -14,7 +14,7 @@ import {
 
 const { sku, fixturePath } = scopeToFixture('sku-with-https');
 
-const serverPort = 9894;
+const serverPort = 8120;
 
 describe('sku-with-https', () => {
   describe.each(bundlers)('bundler: %s', async (bundler) => {
@@ -37,13 +37,12 @@ describe('sku-with-https', () => {
 
       it('should start a development server', async ({ task }) => {
         skipCleanup(task.id);
-        const snapshot = await getAppSnapshot({ url, expect });
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot('homepage');
 
         skipCleanup(task.id);
         const middlewareSnapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
-          expect,
         });
         expect(middlewareSnapshot).toMatchSnapshot('middleware');
       });
@@ -59,7 +58,6 @@ describe('sku-with-https', () => {
 
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(snapshot).toMatchSnapshot();
     });
@@ -81,7 +79,7 @@ describe('sku-with-https', () => {
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
-      const snapshot = await getAppSnapshot({ url, expect });
+      const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot();
     });
 
@@ -89,7 +87,6 @@ describe('sku-with-https', () => {
       skipCleanup(task.id);
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(snapshot).toMatchSnapshot();
     });

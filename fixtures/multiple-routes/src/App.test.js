@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router-dom';
 
 import App from './App.jsx';
 

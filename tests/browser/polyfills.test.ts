@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import {
   bundlers,
   type BundlerValues,
@@ -27,7 +27,7 @@ describe('polyfills', () => {
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
-        const app = await getAppSnapshot({ url: baseUrl, expect });
+        const app = await getAppSnapshot({ url: baseUrl });
         expect(app).toMatchSnapshot();
       });
     });
@@ -39,7 +39,7 @@ describe('polyfills', () => {
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
-        const app = await getAppSnapshot({ url: baseUrl, expect });
+        const app = await getAppSnapshot({ url: baseUrl });
         expect(app).toMatchSnapshot();
       });
     });

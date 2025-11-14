@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
 
 import {
@@ -23,7 +23,7 @@ describe('ssr-hello-world', () => {
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
-      const snapshot = await getAppSnapshot({ url, expect });
+      const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot();
     });
 
@@ -31,7 +31,6 @@ describe('ssr-hello-world', () => {
       skipCleanup(task.id);
       const { sourceHtml } = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(sourceHtml).toBe('OK');
     });
@@ -42,7 +41,6 @@ describe('ssr-hello-world', () => {
       skipCleanup(task.id);
       const { sourceHtml } = await getAppSnapshot({
         url: `${url}/assets/logo.png`,
-        expect,
       });
       expect(sourceHtml).toMatch(/^�PNG/);
     });
@@ -65,7 +63,7 @@ describe('ssr-hello-world', () => {
           await assetServer.findByText('serving dist-build'),
         ).toBeInTheConsole();
 
-        const snapshot = await getAppSnapshot({ url, expect });
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot();
       });
 
@@ -95,7 +93,7 @@ describe('ssr-hello-world', () => {
         await assetServer.findByText('serving dist-build'),
       ).toBeInTheConsole();
 
-      const snapshot = await getAppSnapshot({ url: customPortUrl, expect });
+      const snapshot = await getAppSnapshot({ url: customPortUrl });
       expect(snapshot).toMatchSnapshot();
     });
 

@@ -31,4 +31,5 @@ export default {
   ],
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],
+  setupTests: './setupTests.js',
 };

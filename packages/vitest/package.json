@@ -35,9 +35,9 @@
   "homepage": "https://github.com/seek-oss/sku#readme",
   "devDependencies": {
     "typescript-transform-paths": "^3.5.2",
-    "vitest": "^3.2.3"
+    "vitest": "catalog:"
   },
   "peerDependencies": {
-    "vitest": "^3.0.0"
+    "vitest": "^3.0.0 || ^4.0.0"
   }
 }

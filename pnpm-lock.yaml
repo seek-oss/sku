@@ -32,7 +32,7 @@ catalogs:
       specifier: ^14.0.1
       version: 14.0.2
     debug:
-      specifier: ^4.3.1
+      specifier: ^4.4.3
       version: 4.4.3
     react:
       specifier: ^19.1.0

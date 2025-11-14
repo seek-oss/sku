@@ -1,3 +1,4 @@
+// @ts-check
 import seek from 'eslint-config-seek';
 import jsdoc from 'eslint-plugin-jsdoc';
 import nodePlugin from 'eslint-plugin-n';

@@ -101,6 +101,14 @@ export const webpackStartSsrHandler = async ({
   const clientCompiler = webpack(clientWebpackConfig);
   const serverCompiler = webpack(serverWebpackConfig);
 
+  if (!clientCompiler) {
+    throw new Error('Failed to create client webpack compiler');
+  }
+
+  if (!serverCompiler) {
+    throw new Error('Failed to create server webpack compiler');
+  }
+
   const serverManager = createServerManager(
     path.join(paths.target, `server.${type === 'module' ? 'c' : ''}js`),
   );

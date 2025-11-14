@@ -10,7 +10,7 @@ export const createEslintConfig = ({
   configPath,
 }: {
   configPath?: string;
-} = {}) => {
+} = {}): Linter.Config[] => {
   const skuContext = getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;

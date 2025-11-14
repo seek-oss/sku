@@ -183,6 +183,8 @@ export const serveAction = async ({
     hosts,
   });
 
+  // @ts-expect-error This seems to have never been a valid event handler, but leaving it here so as
+  // not to accidentally break anything
   app.on('error', console.error);
 
   server.listen(availablePort, () => {

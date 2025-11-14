@@ -8,11 +8,16 @@ type AppSnapshotOptions = {
 export const getAppSnapshot = async ({ url }: AppSnapshotOptions) => {
   const page = await createPage();
 
+  const warnings: string[] = [];
   const errors: string[] = [];
 
   page.on('console', (msg) => {
     if (msg.type() === 'error') {
       errors.push(msg.text());
+    }
+
+    if (msg.type() === 'warning') {
+      warnings.push(msg.text());
     }
   });
 
@@ -23,6 +28,7 @@ export const getAppSnapshot = async ({ url }: AppSnapshotOptions) => {
   await page.close();
 
   expect(errors).toEqual([]);
+  expect(warnings).toEqual([]);
 
   return { sourceHtml, clientRenderContent };
 };

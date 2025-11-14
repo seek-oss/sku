@@ -12,14 +12,14 @@ export default defineConfig({
     },
   },
   test: {
+    exclude: [...defaultExclude, '**/fixtures/**'],
+    hookTimeout: TEST_TIMEOUT + 1000,
     maxWorkers: '80%',
+    restoreMocks: true,
     retry: 1,
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
-    hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,
-    exclude: [...defaultExclude, '**/fixtures/**'],
-    restoreMocks: true,
     projects: [
       {
         extends: true,

@@ -15,4 +15,5 @@ export default {
   publicPath: '/static/suspense',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   skipPackageCompatibilityCompilation: ['react-router-dom'],
+  setupTests: './setupTests.js',
 };

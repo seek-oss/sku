@@ -6,6 +6,8 @@ const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 
 const flakeyTestGlobs = ['tests/browser/storybook-config.test.ts'];
 
+const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+
 export default defineConfig({
   plugins: [tsconfigPaths()],
   server: {
@@ -30,6 +32,15 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
+          exclude: [babelPluginDisplayNameTests],
+        },
+      },
+      // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
+      // snapshot output.
+      {
+        test: {
+          name: 'babel-plugin-display-name',
+          include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
         },
       },
       // Isolate braid and storybook-config tests to reduce flakiness.

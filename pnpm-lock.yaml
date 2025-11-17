@@ -880,6 +880,25 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  packages/babel-plugin-display-name:
+    dependencies:
+      '@babel/core':
+        specifier: ^7.28.5
+        version: 7.28.5
+      '@babel/helper-plugin-utils':
+        specifier: ^7.27.1
+        version: 7.27.1
+    devDependencies:
+      '@babel/preset-react':
+        specifier: ^7.28.5
+        version: 7.28.5(@babel/core@7.28.5)
+      '@types/babel__core':
+        specifier: ^7.20.5
+        version: 7.20.5
+      '@types/babel__helper-plugin-utils':
+        specifier: ^7.10.3
+        version: 7.10.3
+
   packages/codemod:
     dependencies:
       '@ast-grep/napi':
@@ -1010,6 +1029,9 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.6.0
         version: 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.3)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
+      '@sku-lib/babel-plugin-display-name':
+        specifier: workspace:*
+        version: link:../babel-plugin-display-name
       '@sku-lib/utils':
         specifier: workspace:*
         version: link:../utils
@@ -1070,9 +1092,6 @@ importers:
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.14(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
-      '@zendesk/babel-plugin-react-displayname':
-        specifier: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2
-        version: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer:
         specifier: ^10.3.1
         version: 10.4.22(postcss@8.5.6)
@@ -3239,6 +3258,10 @@ packages:
   '@sinonjs/fake-timers@13.0.5':
     resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
 
+  '@sku-lib/babel-plugin-display-name@file:packages/babel-plugin-display-name':
+    resolution: {directory: packages/babel-plugin-display-name, type: directory}
+    engines: {node: '>=22.19.0'}
+
   '@sku-lib/utils@file:packages/utils':
     resolution: {directory: packages/utils, type: directory}
     engines: {node: '>=22.19.0'}
@@ -3481,6 +3504,9 @@ packages:
 
   '@types/babel__generator@7.27.0':
     resolution: {integrity: sha512-ufFd2Xi92OAVPYsy+P4n7/U7e68fex0+Ee8gSG9KX7eo084CWiQ4sdxktvdl0bOPupXtVJPY19zk6EwWqUQ8lg==}
+
+  '@types/babel__helper-plugin-utils@7.10.3':
+    resolution: {integrity: sha512-FcLBBPXInqKfULB2nvOBskQPcnSMZ0s1Y2q76u9H1NPPWaLcTeq38xBeKfF/RBUECK333qeaqRdYoPSwW7rTNQ==}
 
   '@types/babel__template@7.4.4':
     resolution: {integrity: sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==}
@@ -4132,13 +4158,6 @@ packages:
 
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
-
-  '@zendesk/babel-plugin-react-displayname@https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2':
-    resolution: {tarball: https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2}
-    version: 1.0.0
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      '@babel/preset-react': ^7.0.0
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -11245,6 +11264,13 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
+  '@sku-lib/babel-plugin-display-name@file:packages/babel-plugin-display-name':
+    dependencies:
+      '@babel/core': 7.28.5
+      '@babel/helper-plugin-utils': 7.27.1
+    transitivePeerDependencies:
+      - supports-color
+
   '@sku-lib/utils@file:packages/utils':
     dependencies:
       chalk: 5.6.2
@@ -11684,6 +11710,10 @@ snapshots:
   '@types/babel__generator@7.27.0':
     dependencies:
       '@babel/types': 7.28.5
+
+  '@types/babel__helper-plugin-utils@7.10.3':
+    dependencies:
+      '@types/babel__core': 7.20.5
 
   '@types/babel__template@7.4.4':
     dependencies:
@@ -12567,12 +12597,6 @@ snapshots:
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
-
-  '@zendesk/babel-plugin-react-displayname@https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
-      '@babel/preset-react': 7.28.5(@babel/core@7.28.5)
 
   accepts@1.3.8:
     dependencies:
@@ -17418,6 +17442,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@18.3.1))(react@18.3.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.3)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
+      '@sku-lib/babel-plugin-display-name': file:packages/babel-plugin-display-name
       '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.26)(react@18.3.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@swc/core': 1.15.1
@@ -17438,7 +17463,6 @@ snapshots:
       '@vocab/pseudo-localize': 1.0.2
       '@vocab/vite': 0.2.4(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@vocab/webpack': 1.2.14(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
-      '@zendesk/babel-plugin-react-displayname': https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer: 10.4.22(postcss@8.5.6)
       babel-jest: 30.2.0(@babel/core@7.28.5)
       babel-loader: 10.0.0(@babel/core@7.28.5)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
@@ -17572,6 +17596,7 @@ snapshots:
       '@loadable/server': 5.16.7(@loadable/component@5.16.7(react@19.1.1))(react@19.1.1)
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.102.1)
+      '@sku-lib/babel-plugin-display-name': file:packages/babel-plugin-display-name
       '@sku-lib/utils': file:packages/utils
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.17)(react@19.1.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@swc/core': 1.15.1
@@ -17592,7 +17617,6 @@ snapshots:
       '@vocab/pseudo-localize': 1.0.2
       '@vocab/vite': 0.2.4(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@vocab/webpack': 1.2.14(webpack@5.102.1)
-      '@zendesk/babel-plugin-react-displayname': https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2(@babel/core@7.28.5)(@babel/preset-react@7.28.5(@babel/core@7.28.5))
       autoprefixer: 10.4.22(postcss@8.5.6)
       babel-jest: 30.2.0(@babel/core@7.28.5)
       babel-loader: 10.0.0(@babel/core@7.28.5)(webpack@5.102.1)

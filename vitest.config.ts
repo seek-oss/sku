@@ -30,6 +30,15 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
+          exclude: [babelPluginDisplayNameTests],
+        },
+      },
+      // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
+      // snapshot output.
+      {
+        test: {
+          name: 'babel-plugin-display-name',
+          include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
         },
       },
       {

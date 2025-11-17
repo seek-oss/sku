@@ -75,7 +75,7 @@ export default ({
     );
 
     if (displayNamesProd) {
-      plugins.push(require.resolve('@zendesk/babel-plugin-react-displayname'));
+      plugins.push(require.resolve('@sku-lib/babel-plugin-display-name'));
     }
 
     if (removeAssertionsInProduction) {

@@ -1,5 +1,14 @@
 # sku
 
+## 15.3.1
+
+### Patch Changes
+
+- Replace `@zendesk/babel-plugin-react-displayname` dependency with `@sku-lib/babel-plugin-display-name` ([#1450](https://github.com/seek-oss/sku/pull/1450))
+
+- Updated dependencies [[`bdd48be`](https://github.com/seek-oss/sku/commit/bdd48be26240bdca78e6ed5046f2fa93366ba43e)]:
+  - @sku-lib/babel-plugin-display-name@0.0.1
+
 ## 15.3.0
 
 ### Minor Changes

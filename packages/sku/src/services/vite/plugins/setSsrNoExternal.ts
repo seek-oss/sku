@@ -17,7 +17,7 @@ export function setSsrNoExternal(skuContext: SkuContext): Plugin {
       );
 
       return {
-        ssr: {
+        resolve: {
           noExternal: [
             ...skuContext.skuConfig.compilePackages,
             ...ssrExternals.noExternal,

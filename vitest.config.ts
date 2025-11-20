@@ -3,6 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
+const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
 
 export default defineConfig({
   plugins: [tsconfigPaths()],

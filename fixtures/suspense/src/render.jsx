@@ -4,7 +4,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import html from 'dedent';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router';
 
 import App from './App';
 

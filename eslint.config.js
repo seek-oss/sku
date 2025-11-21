@@ -1,8 +1,12 @@
 // @ts-check
 import seek from 'eslint-config-seek';
-import jsdoc from 'eslint-plugin-jsdoc';
-import nodePlugin from 'eslint-plugin-n';
-import vitest from '@vitest/eslint-plugin';
+import * as jsdocModule from 'eslint-plugin-jsdoc';
+import * as nodePluginModule from 'eslint-plugin-n';
+import * as vitestModule from '@vitest/eslint-plugin';
+
+const jsdoc = jsdocModule.default;
+const nodePlugin = nodePluginModule.default;
+const vitest = vitestModule.default;
 
 const modifiedSeek = seek.map((config) => {
   // Removing the jest plugin and rules so they don't conflict with the vitest plugin

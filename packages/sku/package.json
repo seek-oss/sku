@@ -59,11 +59,11 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "peerDependencies": {
-    "@sku-lib/vitest": "workspace:*",
     "@storybook/react-webpack5": "^7.0.0 || ^8.0.0 || ^9.0.0",
     "@types/react": "^18.0.0 || ^19.0.0",
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "vitest": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@storybook/react-webpack5": {
@@ -72,7 +72,7 @@
     "react-dom": {
       "optional": true
     },
-    "@sku-lib/vitest": {
+    "vitest": {
       "optional": true
     }
   },
@@ -190,7 +190,6 @@
     "wrap-ansi": "^9.0.0"
   },
   "devDependencies": {
-    "@sku-lib/vitest": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.6",

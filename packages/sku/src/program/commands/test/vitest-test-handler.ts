@@ -1,9 +1,7 @@
-import prompts from 'prompts';
-import installDep from '../../../services/packageManager/install.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import isCI from '../../../utils/isCI.js';
 import type { InlineConfig } from 'vite';
 import { createSkuVitestConfig } from '../../../services/vite/helpers/config/baseConfig.js';
+import { parseCLI, type TestUserConfig, startVitest } from 'vitest/node';
 
 export const vitestHandler = async ({
   skuContext,
@@ -12,53 +10,36 @@ export const vitestHandler = async ({
   skuContext: SkuContext;
   args: string[];
 }) => {
-  let skuLibVitest = null;
-
-  try {
-    skuLibVitest = await import('@sku-lib/vitest');
-  } catch (e: any) {
-    if (e.code !== 'ERR_MODULE_NOT_FOUND' || isCI) {
-      console.error(e.message);
-      return;
-    }
-
-    // If @sku-lib/vitest is not installed, and we're not on CI we prompt to install
-    console.log('@sku-lib/vitest is not installed');
-    const res = await prompts(
-      {
-        type: 'confirm',
-        name: 'install',
-        message: 'Do you want to install `@sku-lib/vitest`?',
-        initial: true,
-      },
-      { onCancel: () => process.exit(1) },
-    );
-
-    if (!res.install) {
-      console.log('Exiting without running tests.');
-      return;
-    }
-
-    await installDep({
-      deps: ['@sku-lib/vitest'],
-      type: 'dev',
-      logLevel: 'regular',
-    });
-
-    // Retry running Vitest after installation
-    await vitestHandler({ skuContext, args });
-    return;
-  }
-
   const viteConfigOverride = createSkuVitestConfig(
     {},
     skuContext,
   ) satisfies InlineConfig;
 
-  await skuLibVitest.runVitest({
+  const results = parseCLI(['vitest', ...args]);
+
+  const overrideableOptions: TestUserConfig =
+    skuContext.skuConfig.dangerouslySetVitestConfig({
+      css: true,
+      environment: 'jsdom',
+    });
+  const nonOverrideableOptions: TestUserConfig = {
+    // options passed in via the CLI will have priority over `dangerouslySetVitestConfig`
+    ...results.options,
     setupFiles: skuContext.paths.setupTests,
-    args,
+    config: false,
+  };
+
+  const ctx = await startVitest(
+    'test',
+    results.filter,
+    {
+      ...overrideableOptions,
+      ...nonOverrideableOptions,
+    },
     viteConfigOverride,
-    vitestConfigOverride: skuContext.skuConfig.dangerouslySetVitestConfig?.(),
-  });
+  );
+
+  if (!ctx.shouldKeepServer()) {
+    await ctx.exit();
+  }
 };

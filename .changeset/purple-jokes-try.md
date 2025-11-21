@@ -1,5 +1,4 @@
 ---
-'@sku-lib/vitest': minor
 'sku': minor
 ---
 

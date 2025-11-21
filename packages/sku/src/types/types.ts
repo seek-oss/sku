@@ -217,7 +217,7 @@ export interface SkuConfigBase {
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetvitestconfig
    */
-  dangerouslySetVitestConfig?: () => TestUserConfig;
+  dangerouslySetVitestConfig?: (config: TestUserConfig) => TestUserConfig;
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.

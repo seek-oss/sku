@@ -1,6 +1,5 @@
-import { formatHtml } from './formatHtml.ts';
-
 import type { SnapshotSerializer } from 'vitest';
+import { formatHtml } from '../formatHtml.ts';
 
 /**
  * Typically used to serialize the result of `dirContentsToObject`. It groups assets by type, and

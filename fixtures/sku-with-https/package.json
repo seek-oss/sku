@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "sku start",
+    "start-ssr": "sku start-ssr --config sku-server.config.ts",
     "start:vite": "sku start --config sku.config.vite.mjs"
   },
   "dependencies": {

@@ -30,5 +30,5 @@ export default {
     'https://fb-tracking.com',
   ],
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
-  skipPackageCompatibilityCompilation: ['react-router-dom'],
+  setupTests: './setupTests.js',
 };

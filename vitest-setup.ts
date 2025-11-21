@@ -1,10 +1,11 @@
-import { afterEach, expect } from 'vitest';
+import { afterAll, afterEach, expect } from 'vitest';
 import {
+  closeBrowser,
   appSnapshotSerializer,
   htmlSnapshotSerializer,
   cssSnapshotSerializer,
   sanitizeFilesSerializer,
-} from '@sku-private/puppeteer';
+} from '@sku-private/playwright';
 import { cleanup, configure } from '@sku-private/testing-library';
 import 'cli-testing-library/vitest';
 
@@ -16,3 +17,4 @@ expect.addSnapshotSerializer(htmlSnapshotSerializer);
 expect.addSnapshotSerializer(cssSnapshotSerializer);
 
 afterEach(({ task }) => cleanup(task));
+afterAll(closeBrowser);

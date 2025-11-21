@@ -3,7 +3,7 @@ import installDep from '../../../services/packageManager/install.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import isCI from '../../../utils/isCI.js';
 import type { InlineConfig } from 'vite';
-import { createSkuViteConfig } from '../../../services/vite/helpers/config/baseConfig.js';
+import { createSkuVitestConfig } from '../../../services/vite/helpers/config/baseConfig.js';
 
 export const vitestHandler = async ({
   skuContext,
@@ -50,16 +50,15 @@ export const vitestHandler = async ({
     return;
   }
 
+  const viteConfigOverride = createSkuVitestConfig(
+    {},
+    skuContext,
+  ) satisfies InlineConfig;
+
   await skuLibVitest.runVitest({
     setupFiles: skuContext.paths.setupTests,
     args,
-    noExternal: [
-      ...skuContext.cjsInteropDependencies,
-      ...skuContext.paths.compilePackages,
-    ],
-    viteConfigOverride: createSkuViteConfig(
-      {},
-      skuContext,
-    ) satisfies InlineConfig,
+    viteConfigOverride,
+    vitestConfigOverride: skuContext.skuConfig.dangerouslySetVitestConfig?.(),
   });
 };

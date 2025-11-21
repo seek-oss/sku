@@ -5,7 +5,7 @@ import {
   it,
   expect as globalExpect,
 } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import {
   cleanup,
   scopeToFixture,
@@ -28,20 +28,19 @@ describe.concurrent('ssr translations', () => {
 
   it('should render en', async ({ task, expect }) => {
     skipCleanup(task.id);
-    const app = await getAppSnapshot({ expect, url: `${backendUrl}/en` });
+    const app = await getAppSnapshot({ url: `${backendUrl}/en` });
     expect(app).toMatchSnapshot();
   });
 
   it('should render fr', async ({ task, expect }) => {
     skipCleanup(task.id);
-    const app = await getAppSnapshot({ expect, url: `${backendUrl}/fr` });
+    const app = await getAppSnapshot({ url: `${backendUrl}/fr` });
     expect(app).toMatchSnapshot();
   });
 
   it('should render en-PSEUDO', async ({ task, expect }) => {
     skipCleanup(task.id);
     const app = await getAppSnapshot({
-      expect,
       url: `${backendUrl}/en?pseudo=true`,
     });
     expect(app).toMatchSnapshot();

@@ -1,5 +1,5 @@
 import { describe, beforeAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import {
   bundlers,
@@ -30,7 +30,7 @@ describe('suspense', () => {
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
 
-        const app = await getAppSnapshot({ url, expect });
+        const app = await getAppSnapshot({ url });
         expect(app).toMatchSnapshot();
       });
 

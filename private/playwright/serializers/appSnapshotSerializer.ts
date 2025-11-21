@@ -1,7 +1,7 @@
 import type { SnapshotSerializer } from 'vitest';
 import { createTwoFilesPatch } from 'diff';
-import { formatHtml } from './formatHtml.ts';
-import { sanitizeString } from './sanitizeString.ts';
+import { formatHtml } from '../formatHtml.ts';
+import { sanitizeString } from '../sanitizeString.ts';
 
 const emptyDiff = `===================================================================
 --- sourceHtml

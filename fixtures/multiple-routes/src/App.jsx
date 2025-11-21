@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 import loadable from 'sku/@loadable/component';
 
 const routes = {

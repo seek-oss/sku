@@ -17,6 +17,7 @@ const getBrowser = async () => {
   _browser = chromium.launch({
     // Slow down Playwright actions so the browser has time to hydrate the app
     slowMo: 50,
+    headless: process.env.HEADLESS !== 'false',
   });
 
   return _browser;

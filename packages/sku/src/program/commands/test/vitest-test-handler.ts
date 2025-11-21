@@ -2,7 +2,6 @@ import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { InlineConfig } from 'vite';
 import { createSkuVitestConfig } from '../../../services/vite/helpers/config/baseConfig.js';
 import { type TestUserConfig } from 'vitest/node';
-import { styleText } from 'node:util';
 
 export const vitestHandler = async ({
   skuContext,

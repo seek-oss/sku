@@ -48,11 +48,8 @@ export const vitestHandler = async ({
 
 const lazyLoadVitest = async () => {
   try {
-    const { parseCLI, startVitest } = await import('vitest/node');
-    return {
-      parseCLI,
-      startVitest,
-    };
+    const vite = await import('vitest/node');
+    return vite;
   } catch (error: any) {
     if (error instanceof Error && error.name === 'ERR_MODULE_NOT_FOUND') {
       throw new Error(

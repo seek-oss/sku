@@ -225,7 +225,6 @@ Example:
 
 ```ts
 export default {
-  // partial config is deeply merged
   dangerouslySetVitestConfig: () => ({
     clearMocks: true,
   }),

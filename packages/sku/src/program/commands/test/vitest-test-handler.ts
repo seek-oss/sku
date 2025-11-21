@@ -1,7 +1,8 @@
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { InlineConfig } from 'vite';
 import { createSkuVitestConfig } from '../../../services/vite/helpers/config/baseConfig.js';
-import { parseCLI, type TestUserConfig, startVitest } from 'vitest/node';
+import { type TestUserConfig } from 'vitest/node';
+import { styleText } from 'node:util';
 
 export const vitestHandler = async ({
   skuContext,
@@ -15,6 +16,7 @@ export const vitestHandler = async ({
     skuContext,
   ) satisfies InlineConfig;
 
+  const { parseCLI, startVitest } = await lazyLoadVitest();
   const results = parseCLI(['vitest', ...args]);
 
   const overrideableOptions: TestUserConfig =
@@ -41,5 +43,22 @@ export const vitestHandler = async ({
 
   if (!ctx.shouldKeepServer()) {
     await ctx.exit();
+  }
+};
+
+const lazyLoadVitest = async () => {
+  try {
+    const { parseCLI, startVitest } = await import('vitest/node');
+    return {
+      parseCLI,
+      startVitest,
+    };
+  } catch (error: any) {
+    if (error instanceof Error && error.name === 'ERR_MODULE_NOT_FOUND') {
+      throw new Error(
+        'vitest is not installed. Please install it as a dev dependency.',
+      );
+    }
+    throw error;
   }
 };

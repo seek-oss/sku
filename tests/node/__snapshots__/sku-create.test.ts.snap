@@ -96,7 +96,6 @@ exports[`create-sku vite > should create package.json 1`] = `
     "react-dom": "VERSION_IGNORED",
   },
   "devDependencies": {
-    "@sku-lib/vitest": "VERSION_IGNORED",
     "@types/react": "VERSION_IGNORED",
     "@types/react-dom": "VERSION_IGNORED",
     "@vanilla-extract/css": "VERSION_IGNORED",

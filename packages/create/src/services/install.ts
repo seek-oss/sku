@@ -14,7 +14,7 @@ const COMMON_DEV_DEPENDENCIES = [
   '@types/react',
   '@types/react-dom',
 ];
-const VITE_DEV_DEPENDENCIES = ['vitest', '@sku-lib/vitest'];
+const VITE_DEV_DEPENDENCIES = ['vitest'];
 
 export const installDependencies = async (
   projectPath: string,

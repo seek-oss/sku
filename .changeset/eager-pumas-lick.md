@@ -1,5 +1,5 @@
 ---
-'@sku-lib/vitest': minor
+'sku': minor
 ---
 
 Add vitest v4 support

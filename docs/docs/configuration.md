@@ -225,7 +225,8 @@ Example:
 
 ```ts
 export default {
-  dangerouslySetVitestConfig: () => ({
+  dangerouslySetVitestConfig: (config) => ({
+    ...config,
     clearMocks: true,
   }),
 } satisfies SkuConfig;

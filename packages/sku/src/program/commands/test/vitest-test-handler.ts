@@ -10,12 +10,13 @@ export const vitestHandler = async ({
   skuContext: SkuContext;
   args: string[];
 }) => {
+  const { parseCLI, startVitest } = await lazyLoadVitest();
+
   const viteConfigOverride = createSkuVitestConfig(
     {},
     skuContext,
   ) satisfies InlineConfig;
 
-  const { parseCLI, startVitest } = await lazyLoadVitest();
   const results = parseCLI(['vitest', ...args]);
 
   const overrideableOptions: TestUserConfig =

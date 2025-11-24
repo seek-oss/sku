@@ -5,7 +5,6 @@
   "main": "index.ts",
   "exports": {
     ".": "./index.ts",
-    "./vitest": "./vitest.ts",
     "./codemod": "./render-codemod.ts",
     "./create": "./render-create.ts"
   },

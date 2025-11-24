@@ -1,6 +1,6 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
@@ -42,7 +42,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -51,7 +50,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -82,7 +80,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -91,7 +88,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });

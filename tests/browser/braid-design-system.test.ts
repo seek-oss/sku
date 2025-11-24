@@ -1,7 +1,7 @@
 import { describe, beforeAll, it, afterAll, vi, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
@@ -60,9 +60,6 @@ describe('braid-design-system', () => {
 
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
-          expect,
-          timeout,
-          waitForText: 'Client',
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -71,9 +68,6 @@ describe('braid-design-system', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
-          expect,
-          timeout,
-          waitForText: 'Client',
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -100,8 +94,6 @@ describe('braid-design-system', () => {
         skipCleanup(task.id);
         const app = await getAppSnapshot({
           url: getLocalUrl('jobStreet', port),
-          expect,
-          timeout,
         });
         expect(app).toMatchSnapshot();
       });
@@ -110,8 +102,6 @@ describe('braid-design-system', () => {
         skipCleanup(task.id);
         const app = await getAppSnapshot({
           url: getLocalUrl('seekAnz', port),
-          expect,
-          timeout,
         });
         expect(app).toMatchSnapshot();
       });

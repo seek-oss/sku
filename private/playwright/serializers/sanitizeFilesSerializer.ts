@@ -1,5 +1,5 @@
 import type { SnapshotSerializer } from 'vitest';
-import { sanitizeString } from './sanitizeString.ts';
+import { sanitizeString } from '../sanitizeString.ts';
 
 /** Sanitizes file contents */
 export const sanitizeFilesSerializer = {

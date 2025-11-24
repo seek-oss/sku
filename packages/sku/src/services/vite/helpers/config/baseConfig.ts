@@ -12,7 +12,7 @@ import { fixViteVanillaExtractDepScanPlugin } from '../../plugins/esbuild/fixVit
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '../../../vocab/config.js';
-import vocabPluginVite from '@vocab/vite';
+import { vitePluginVocab } from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
@@ -47,10 +47,9 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     base: skuContext.publicPath,
     publicDir: false,
     root: process.cwd(),
-    clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
       dangerouslySetViteConfig(skuContext),
-      vocabConfig && vocabPluginVite.default({ vocabConfig }),
+      vocabConfig && vitePluginVocab({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
         dependencies: skuContext.cjsInteropDependencies,
@@ -109,7 +108,19 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
   };
 };
 
+const getVitestBaseConfig = (skuContext: SkuContext): InlineConfig => ({
+  plugins: [tsconfigPaths(), react(), vanillaExtractPlugin()],
+  resolve: {
+    noExternal: skuContext.skuConfig.compilePackages,
+  },
+});
+
 export const createSkuViteConfig = (
   config: InlineConfig,
   skuContext: SkuContext,
 ) => mergeConfig(getBaseConfig(skuContext), config);
+
+export const createSkuVitestConfig = (
+  config: InlineConfig,
+  skuContext: SkuContext,
+) => mergeConfig(getVitestBaseConfig(skuContext), config);

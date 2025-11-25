@@ -45,7 +45,7 @@ export default {
   }),
 
   renderDocument: ({ app, bodyTags, headTags }) => {
-    // ..
+    // ...
   },
 };
 ```

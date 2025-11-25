@@ -76,7 +76,7 @@ await Promise.all(
         loadableCollector,
         createUnsafeNonce: cspHandler
           ? cspHandler.createUnsafeNonce
-          : () => undefined,
+          : undefined,
       });
 
       if (cspHandler) {

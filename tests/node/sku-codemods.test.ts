@@ -370,12 +370,12 @@ const testCases: TestCase[] = [
         expect(rejectedPromise).rejects.toMatchObject<{ error: string }>({ error: 'failed' });
         expect(rejectedPromise).rejects.toMatchObject<{ error: string, status: number }>({ error: 'failed', status: 500 });
         await expect(complexAsyncCall()).resolves.toStrictEqual<ComplexObject>({
-          countryCode: 'MY',
-          settings: {
-            type: 'post',
-            codes: ['CODE-1'],
+          prop1: 'value1',
+          nested: {
+            prop2: 'value2',
+            items: ['item1'],
           },
-          metadata: expect.any(Object),
+          prop3: expect.any(Object),
         });
 
         // Generic with regular expect chains (should remain unchanged)
@@ -422,12 +422,12 @@ const testCases: TestCase[] = [
         expect(rejectedPromise).rejects.toMatchObject({ error: 'failed' } satisfies { error: string });
         expect(rejectedPromise).rejects.toMatchObject({ error: 'failed', status: 500 } satisfies { error: string, status: number });
         await expect(complexAsyncCall()).resolves.toStrictEqual({
-          countryCode: 'MY',
-          settings: {
-            type: 'post',
-            codes: ['CODE-1'],
+          prop1: 'value1',
+          nested: {
+            prop2: 'value2',
+            items: ['item1'],
           },
-          metadata: expect.any(Object),
+          prop3: expect.any(Object),
         } satisfies ComplexObject);
 
         // Generic with regular expect chains (should remain unchanged)

@@ -14,7 +14,7 @@ If you need to allow scripts that are only known client side (e.g. scripts loade
 
 ### Nonce Values
 
-[Nonce] values can be used to permit inline scripts that are generated on client side.
+[Nonce] values can be used to permit inline scripts that are generated client side.
 Nonce values are created by calling `createUnsafeNonce` during render.
 
 > The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.

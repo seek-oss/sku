@@ -59,7 +59,7 @@ jobs:
         run: pnpm lint
 
       - name: Install Playwright Browsers
-        run: pnpm dlx playwright install chromium --with-deps
+        run: pnpm exec playwright install chromium --with-deps
 
       - name: Test
         run: aa-exec --profile=chrome pnpm run test

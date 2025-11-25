@@ -91,4 +91,32 @@ describe('createCSPHandler', () => {
             </html>"
     `);
   });
+
+  describe('createUnsafeNonce', () => {
+    it('should form a valid nonce value', () => {
+      const cspHandler = createCSPHandler();
+
+      const nonce = cspHandler.createUnsafeNonce();
+
+      expect(nonce).toMatch(/^[A-Za-z0-9+/=]{24}$/);
+    });
+
+    it('should generate unique nonces', () => {
+      const cspHandler = createCSPHandler();
+
+      const nonce1 = cspHandler.createUnsafeNonce();
+      const nonce2 = cspHandler.createUnsafeNonce();
+
+      expect(nonce1).not.toBe(nonce2);
+    });
+
+    it('should add nonce to CSP tag', () => {
+      const cspHandler = createCSPHandler();
+
+      const nonce = cspHandler.createUnsafeNonce();
+
+      const cspTag = cspHandler.createCSPTag();
+      expect(cspTag).toContain(nonce);
+    });
+  });
 });

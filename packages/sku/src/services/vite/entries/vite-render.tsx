@@ -14,6 +14,7 @@ export const viteRender: ViteRenderFunction = async ({
   routeName,
   site,
   clientEntry,
+  createUnsafeNonce,
 }) => {
   log(`Rendering route: ${routeName}:${route}`);
 
@@ -32,5 +33,6 @@ export const viteRender: ViteRenderFunction = async ({
         `<script type="module" src="${clientEntry}"></script>`,
       ],
     },
+    createUnsafeNonce,
   });
 };

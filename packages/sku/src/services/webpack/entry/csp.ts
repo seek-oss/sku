@@ -1,4 +1,4 @@
-import { createHash, type BinaryLike } from 'node:crypto';
+import { createHash, randomBytes, type BinaryLike } from 'node:crypto';
 import { parse, valid, type HTMLElement } from 'node-html-parser';
 import { URL } from 'node:url';
 import type { RenderCallbackParams } from '../../../types/types.js';
@@ -11,6 +11,7 @@ const hashScriptContents = (scriptContents: BinaryLike) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
 interface CreateCSPHandlerOptions {
+  enabled?: boolean;
   extraHosts?: string[];
   isDevelopment?: boolean;
 }
@@ -18,21 +19,41 @@ interface CreateCSPHandlerOptions {
 export type CSPHandler = {
   registerScript: (script: string) => void;
   createCSPTag: () => string;
+  createUnsafeNonce: () => string;
   handleHtml: (html: string) => string;
 };
 
 export default function createCSPHandler({
+  enabled = true,
   extraHosts = [],
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
   let tagReturned = false;
   const hosts = new Set();
   const shas = new Set();
+  const nonces = new Set();
 
   const addScriptContents = (contents: BinaryLike | undefined) => {
     if (contents) {
       shas.add(hashScriptContents(contents));
     }
+  };
+
+  const createUnsafeNonce = () => {
+    if (tagReturned) {
+      throw new Error(
+        `Unable to add nonce. Content Security Policy already sent. Try adding nonces before calling flushHeadTags.`,
+      );
+    }
+    if (!enabled) {
+      throw new Error(
+        `Unable to add nonce. Content Security Policy is disabled. Enable with cspEnabled option. https://seek-oss.github.io/sku/#/./docs/configuration?id=cspenabled`,
+      );
+    }
+
+    const nonce = randomBytes(16).toString('hex');
+    nonces.add(nonce);
+    return nonce;
   };
 
   const addScriptUrl = (src: string) => {
@@ -68,6 +89,11 @@ export default function createCSPHandler({
         )}`,
       );
     }
+    if (!enabled) {
+      throw new Error(
+        `Unable to register script. Content Security Policy is disabled. Enable with cspEnabled option. https://seek-oss.github.io/sku/#/./docs/configuration?id=cspenabled`,
+      );
+    }
 
     if (process.env.NODE_ENV !== 'production' && !valid(script)) {
       console.error(`Invalid script passed to 'registerScript'\n${script}`);
@@ -85,11 +111,18 @@ export default function createCSPHandler({
       inlineCspShas.push(`'sha256-${sha}'`);
     }
 
+    const inlineCspNonces = [];
+
+    for (const nonce of nonces.values()) {
+      inlineCspNonces.push(`'nonce-${nonce}'`);
+    }
+
     const scriptSrcPolicy = [
       'script-src',
       `'self'`,
       ...hosts.values(),
       ...inlineCspShas,
+      ...inlineCspNonces,
     ];
 
     if (isDevelopment) {
@@ -133,6 +166,7 @@ export default function createCSPHandler({
   return {
     registerScript,
     createCSPTag,
+    createUnsafeNonce,
     handleHtml,
   };
 }

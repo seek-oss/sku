@@ -55,6 +55,11 @@ await Promise.all(
         base: publicPath,
       });
 
+      const cspHandler = createCSPHandler({
+        extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
+        isDevelopment: process.env.NODE_ENV === 'development',
+      });
+
       let html = await createPreRenderedHtml({
         environment,
         language,
@@ -63,14 +68,12 @@ await Promise.all(
         site,
         render,
         loadableCollector,
+        createUnsafeNonce: cspEnabled
+          ? cspHandler.createUnsafeNonce
+          : () => undefined,
       });
 
       if (cspEnabled) {
-        const cspHandler = createCSPHandler({
-          extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
-          isDevelopment: process.env.NODE_ENV === 'development',
-        });
-
         html = cspHandler.handleHtml(html);
       }
 

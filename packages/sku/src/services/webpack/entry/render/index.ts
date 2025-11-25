@@ -34,6 +34,11 @@ export default async (renderParams: RenderAppProps) => {
     publicPath,
   );
 
+  const cspHandler = createCSPHandler({
+    extraHosts: [publicPath, ...csp.extraHosts],
+    isDevelopment: process.env.NODE_ENV === 'development',
+  });
+
   // renderApp is optional for libraries
   if (render.renderApp) {
     app = await render.renderApp({
@@ -42,6 +47,7 @@ export default async (renderParams: RenderAppProps) => {
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
       renderToStringAsync,
+      createUnsafeNonce: cspHandler.createUnsafeNonce,
     });
     if (renderContext.language) {
       debug('sku:render:language')(
@@ -76,11 +82,6 @@ export default async (renderParams: RenderAppProps) => {
   });
 
   if (csp.enabled) {
-    const cspHandler = createCSPHandler({
-      extraHosts: [publicPath, ...csp.extraHosts],
-      isDevelopment: process.env.NODE_ENV === 'development',
-    });
-
     return cspHandler.handleHtml(result);
   }
 

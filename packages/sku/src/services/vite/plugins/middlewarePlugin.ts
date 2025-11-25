@@ -102,6 +102,14 @@ export const middlewarePlugin = ({
         const language =
           getLanguageFromRoute(path, matchingRoute, skuContext) ?? '';
 
+        const cspHandler = createCSPHandler({
+          extraHosts: [
+            skuContext.paths.publicPath,
+            ...skuContext.cspExtraScriptSrcHosts,
+          ],
+          isDevelopment: process.env.NODE_ENV === 'development',
+        });
+
         try {
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
@@ -112,19 +120,14 @@ export const middlewarePlugin = ({
             routeName: matchingRoute.name || '',
             site: site?.name || '',
             clientEntry,
+            createUnsafeNonce: skuContext.cspEnabled
+              ? cspHandler.createUnsafeNonce
+              : undefined,
           });
 
           html = await server.transformIndexHtml(req.url || '/', html);
 
           if (skuContext.cspEnabled) {
-            const cspHandler = createCSPHandler({
-              extraHosts: [
-                skuContext.paths.publicPath,
-                ...skuContext.cspExtraScriptSrcHosts,
-              ],
-              isDevelopment: process.env.NODE_ENV === 'development',
-            });
-
             html = cspHandler.handleHtml(html);
           }
 

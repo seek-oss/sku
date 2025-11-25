@@ -116,7 +116,7 @@ describe('createCSPHandler', () => {
       const nonce = cspHandler.createUnsafeNonce();
 
       const cspTag = cspHandler.createCSPTag();
-      expect(cspTag).toContain(nonce);
+      expect(cspTag).toContain(`nonce-${nonce}`);
     });
   });
 });

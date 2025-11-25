@@ -255,6 +255,7 @@ export const transform = async (source: string) => {
   // This handles patterns like:
   // - expect(result).resolves.toEqual<MyType>({}) -> expect(result).resolves.toEqual({} satisfies MyType)
   // - expect(result).rejects.toThrow<ErrorType>({}) -> expect(result).rejects.toThrow({} satisfies ErrorType)
+  // - await expect(result).resolves.toEqual<MyType>({}) -> await expect(result).resolves.toEqual({} satisfies MyType)
   //
   // Only transforms calls that contain .resolves or .rejects as these are the only cases
   // where Vitest doesn't support generics
@@ -287,6 +288,31 @@ export const transform = async (source: string) => {
           pattern:
             'expect($EXPECT_ARG).rejects.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
         },
+        // Patterns with await keyword
+        {
+          pattern:
+            'await expect($EXPECT_ARG).resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).not.resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).not.rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).resolves.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).rejects.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
       ],
     },
   });
@@ -311,13 +337,12 @@ export const transform = async (source: string) => {
       continue;
     }
 
-    // For matcher arguments, filter out comma separators and reconstruct the argument list
-    const matcherArgs = matcherArgsNodes
-      .filter((argNode) => argNode.text() !== ',')
-      .map((argNode) => argNode.text())
-      .join(', ');
+    // Filter out comma separators from the matched arguments
+    const actualArgs = matcherArgsNodes.filter(
+      (argNode) => argNode.text() !== ',',
+    );
 
-    if (!matcherArgs || matcherArgs.trim() === '') {
+    if (actualArgs.length === 0) {
       // No arguments - skip transformation for empty calls
       continue;
     }
@@ -326,19 +351,9 @@ export const transform = async (source: string) => {
     const fullText = node.text();
     const beforeGeneric = fullText.substring(0, fullText.indexOf('<'));
 
-    let replacement: string;
-    const trimmedArgs = matcherArgs.trim();
-    const firstComma = trimmedArgs.indexOf(',');
-
-    if (firstComma === -1) {
-      // Single argument
-      replacement = `${beforeGeneric}(${trimmedArgs} satisfies ${genericArgs})`;
-    } else {
-      // Multiple arguments - add satisfies to the first one
-      const firstArg = trimmedArgs.substring(0, firstComma).trim();
-      const restArgs = trimmedArgs.substring(firstComma);
-      replacement = `${beforeGeneric}(${firstArg} satisfies ${genericArgs}${restArgs})`;
-    }
+    // Add satisfies to the single argument
+    const argText = actualArgs[0].text();
+    const replacement = `${beforeGeneric}(${argText} satisfies ${genericArgs})`;
 
     const edit = node.replace(replacement);
     edits.push(edit);

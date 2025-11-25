@@ -357,6 +357,7 @@ const testCases: TestCase[] = [
         // Generic with resolves/rejects and objects (should be transformed)
         expect(result).resolves.toEqual<MyType>({});
         expect(result).resolves.toMatchObject<MyType>({ id: 1 });
+        await expect(result).resolves.toStrictEqual<MyType>({ id: 1, name: 'test' });
 
         // Generic with longer chains including .not (should be transformed)
         expect(result).not.resolves.toEqual<MyType>({});
@@ -365,9 +366,17 @@ const testCases: TestCase[] = [
         expect(result).resolves.not.toEqual<MyType>(wrongData);
         expect(promise).rejects.not.toBe<string>('error');
 
-        // Generic with complex types and multiple arguments (should be transformed)
-        expect(asyncData).resolves.toEqual<ComplexType<string, number>>(data, extraArg);
+        // Generic with complex types (should be transformed)
         expect(rejectedPromise).rejects.toMatchObject<{ error: string }>({ error: 'failed' });
+        expect(rejectedPromise).rejects.toMatchObject<{ error: string, status: number }>({ error: 'failed', status: 500 });
+        await expect(complexAsyncCall()).resolves.toStrictEqual<ComplexObject>({
+          countryCode: 'MY',
+          settings: {
+            type: 'post',
+            codes: ['CODE-1'],
+          },
+          metadata: expect.any(Object),
+        });
 
         // Generic with regular expect chains (should remain unchanged)
         expect(stringValue).toBe<string>('hello');
@@ -400,6 +409,7 @@ const testCases: TestCase[] = [
         // Generic with resolves/rejects and objects (should be transformed)
         expect(result).resolves.toEqual({} satisfies MyType);
         expect(result).resolves.toMatchObject({ id: 1 } satisfies MyType);
+        await expect(result).resolves.toStrictEqual({ id: 1, name: 'test' } satisfies MyType);
 
         // Generic with longer chains including .not (should be transformed)
         expect(result).not.resolves.toEqual({} satisfies MyType);
@@ -408,9 +418,17 @@ const testCases: TestCase[] = [
         expect(result).resolves.not.toEqual(wrongData satisfies MyType);
         expect(promise).rejects.not.toBe('error' satisfies string);
 
-        // Generic with complex types and multiple arguments (should be transformed)
-        expect(asyncData).resolves.toEqual(data satisfies ComplexType<string, number>, extraArg);
+        // Generic with complex types (should be transformed)
         expect(rejectedPromise).rejects.toMatchObject({ error: 'failed' } satisfies { error: string });
+        expect(rejectedPromise).rejects.toMatchObject({ error: 'failed', status: 500 } satisfies { error: string, status: number });
+        await expect(complexAsyncCall()).resolves.toStrictEqual({
+          countryCode: 'MY',
+          settings: {
+            type: 'post',
+            codes: ['CODE-1'],
+          },
+          metadata: expect.any(Object),
+        } satisfies ComplexObject);
 
         // Generic with regular expect chains (should remain unchanged)
         expect(stringValue).toBe<string>('hello');

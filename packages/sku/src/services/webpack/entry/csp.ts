@@ -11,7 +11,6 @@ const hashScriptContents = (scriptContents: BinaryLike) =>
   createHash('sha256').update(scriptContents).digest('base64');
 
 interface CreateCSPHandlerOptions {
-  enabled?: boolean;
   extraHosts?: string[];
   isDevelopment?: boolean;
 }
@@ -24,7 +23,6 @@ export type CSPHandler = {
 };
 
 export default function createCSPHandler({
-  enabled = true,
   extraHosts = [],
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
@@ -43,11 +41,6 @@ export default function createCSPHandler({
     if (tagReturned) {
       throw new Error(
         `Unable to add nonce. Content Security Policy already sent. Try adding nonces before calling flushHeadTags.`,
-      );
-    }
-    if (!enabled) {
-      throw new Error(
-        `Unable to add nonce. Content Security Policy is disabled. Enable with cspEnabled option. https://seek-oss.github.io/sku/#/./docs/configuration?id=cspenabled`,
       );
     }
 
@@ -87,11 +80,6 @@ export default function createCSPHandler({
           0,
           30,
         )}`,
-      );
-    }
-    if (!enabled) {
-      throw new Error(
-        `Unable to register script. Content Security Policy is disabled. Enable with cspEnabled option. https://seek-oss.github.io/sku/#/./docs/configuration?id=cspenabled`,
       );
     }
 

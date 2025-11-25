@@ -98,7 +98,7 @@ describe('createCSPHandler', () => {
 
       const nonce = cspHandler.createUnsafeNonce();
 
-      expect(nonce).toMatch(/^[A-Za-z0-9+/=]{24}$/);
+      expect(nonce).toMatch(/^[A-Za-z0-9+/=]{32}$/);
     });
 
     it('should generate unique nonces', () => {

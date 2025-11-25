@@ -350,8 +350,6 @@ export const transform = async (source: string) => {
     // Extract the part before generics and reconstruct with satisfies
     const fullText = node.text();
     const beforeGeneric = fullText.substring(0, fullText.indexOf('<'));
-
-    // Add satisfies to the single argument
     const argText = actualArgs[0].text();
     const replacement = `${beforeGeneric}(${argText} satisfies ${genericArgs})`;
 

@@ -45,16 +45,10 @@ exports[`security-controls > build-ssr > should start a server with content-secu
   </head>
   <body>
     <div id="app">
-      <link
-        rel="preload"
-        as="image"
-        href="/a85d2645cc4d80a20b5b.png"
-      >
       <div class="_14y9ssh0">
         <div class="_14y9ssh1">
           Initial
         </div>
-        <img src="/a85d2645cc4d80a20b5b.png">
       </div>
     </div>
     <script
@@ -101,7 +95,7 @@ exports[`security-controls > bundler vite > start > should start an app with sec
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,78 +1,92 @@
+@@ -1,72 +1,86 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -168,17 +162,11 @@ exports[`security-controls > bundler vite > start > should start an app with sec
    </head>
    <body>
      <div id="app">
-       <link
-         rel="preload"
-         as="image"
-         href="/src/logo.png"
-       >
        <div class="styles_root__14y9ssh0">
          <div class="styles_nested__14y9ssh1">
 -          Initial
 +          Client
          </div>
-         <img src="/src/logo.png">
        </div>
      </div>
      <script
@@ -204,7 +192,7 @@ exports[`security-controls > bundler webpack > start > should start an app with 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,91 +1,94 @@
+@@ -1,85 +1,88 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -246,17 +234,11 @@ exports[`security-controls > bundler webpack > start > should start an app with 
    </head>
    <body>
      <div id="app">
-       <link
-         rel="preload"
-         as="image"
-         href="/a85d2645cc4d80a20b5b.png"
-       >
        <div class="styles_root__14y9ssh0">
          <div class="styles_nested__14y9ssh1">
 -          Initial
 +          Client
          </div>
-         <img src="/a85d2645cc4d80a20b5b.png">
        </div>
      </div>
      <script

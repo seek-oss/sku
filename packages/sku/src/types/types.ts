@@ -7,6 +7,7 @@ import type { TestUserConfig } from 'vitest/node';
 
 export type ViteRenderFunction = (
   options: {
+    createUnsafeNonce?: () => string;
     clientEntry: string;
   } & SharedRenderProps,
 ) => Promise<string>;
@@ -59,6 +60,7 @@ export interface RenderAppProps extends SharedRenderProps {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
   _addChunk: (chunkName: string) => void;
   renderToStringAsync: (element: ReactNode) => Promise<string>;
+  createUnsafeNonce?: (nonce: string) => void;
 }
 
 interface RenderDocumentProps<App> extends SharedRenderProps {

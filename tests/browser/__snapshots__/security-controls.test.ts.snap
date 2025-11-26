@@ -1,0 +1,286 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`security-controls > build-ssr > should start a server with content-security-policies 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE';"
+    >
+    <link
+      data-chunk="main"
+      rel="stylesheet"
+      href="/main-3c56f665610e32e791fe.css"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div class="_14y9ssh0">
+        <div class="_14y9ssh1">
+          Initial
+        </div>
+      </div>
+    </div>
+    <script
+      id="render-context"
+      type="application/json"
+    >
+      {"dynamicScriptNonce":"RANDOM_NONCE"}
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`security-controls > bundler vite > start > should start an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,72 +1,86 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE';"
+     >
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/security-controls/src/styles.css.js.vanilla.css"
++    >
++      .styles_root__14y9ssh0 {
++  display: flex;
++}
++.styles_root__14y9ssh0 .styles_nested__14y9ssh1 {
++  font-size: 32px;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <div class="styles_root__14y9ssh0">
+         <div class="styles_nested__14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+     >
+     </script>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`security-controls > bundler webpack > start > should start an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,85 +1,88 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE' 'unsafe-eval';"
+     >
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/main.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="styles_root__14y9ssh0">
+         <div class="styles_nested__14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;

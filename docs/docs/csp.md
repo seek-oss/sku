@@ -8,7 +8,60 @@
 
 Set `cspEnabled: true` in your `sku.config.js`.
 
+### Extra Hosts
+
 If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in `sku.config.js`.
+
+### Nonce Values
+
+[Nonce] values can be used to permit inline scripts that are generated client side.
+Nonce values are created by calling `createUnsafeNonce` during render.
+
+> The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.
+> For inline scripts this is typically done automatically by calculating a hash of their content when they are created during the initial render.
+> This ensures only authorised scripts are run in client environments.
+>
+> When a script is created dynamically on the client it may not be possible to predict the required hash, in this case a nonce can be used.
+
+**Warning:** Nonces are less safe than content hashes.
+Please consider if other options are available and whether the risks are acceptable for your use-case.
+
+`createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
+
+**Example: Using `createUnsafeNonce` to create a nonce value and use it client side**
+
+```tsx
+// render.tsx
+export default {
+  renderApp: ({ createUnsafeNonce }) => {
+    const appHtml = renderToString(<App />);
+    const dynamicScriptNonce = createUnsafeNonce();
+
+    return { appHtml, dynamicScriptNonce };
+  },
+  provideClientContext: ({ environment, app }) => ({
+    environment,
+    dynamicScriptNonce: app.dynamicScriptNonce,
+  }),
+
+  renderDocument: ({ app, bodyTags, headTags }) => {
+    // ...
+  },
+};
+```
+
+```tsx
+// client.tsx
+import App from './App';
+
+export default ({ dynamicScriptNonce }) => {
+  client.init({ nonce: dynamicScriptNonce });
+  // ...
+};
+```
+
+[nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
+[Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 
 ### Extra SSR Setup
 

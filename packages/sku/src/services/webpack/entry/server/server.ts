@@ -74,6 +74,7 @@ app.get('*', (...args) => {
       extractor,
       flushHeadTags,
       registerScript: cspHandler ? cspHandler.registerScript : undefined,
+      createUnsafeNonce: cspHandler ? cspHandler.createUnsafeNonce : undefined,
     },
     ...args,
   );

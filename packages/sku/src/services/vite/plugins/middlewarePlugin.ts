@@ -9,7 +9,7 @@ import {
   getRouteWithLanguage,
 } from '../../../utils/language-utils.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
-import createCSPHandler from '../../webpack/entry/csp.js';
+import createCSPHandler, { type CSPHandler } from '../../webpack/entry/csp.js';
 
 const log = debug('sku:middleware:vite');
 
@@ -102,6 +102,18 @@ export const middlewarePlugin = ({
         const language =
           getLanguageFromRoute(path, matchingRoute, skuContext) ?? '';
 
+        let cspHandler: CSPHandler | undefined;
+
+        if (skuContext.cspEnabled) {
+          cspHandler = createCSPHandler({
+            extraHosts: [
+              skuContext.paths.publicPath,
+              ...skuContext.cspExtraScriptSrcHosts,
+            ],
+            isDevelopment: process.env.NODE_ENV === 'development',
+          });
+        }
+
         try {
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
@@ -112,19 +124,14 @@ export const middlewarePlugin = ({
             routeName: matchingRoute.name || '',
             site: site?.name || '',
             clientEntry,
+            createUnsafeNonce: cspHandler
+              ? cspHandler.createUnsafeNonce
+              : undefined,
           });
 
           html = await server.transformIndexHtml(req.url || '/', html);
 
-          if (skuContext.cspEnabled) {
-            const cspHandler = createCSPHandler({
-              extraHosts: [
-                skuContext.paths.publicPath,
-                ...skuContext.cspExtraScriptSrcHosts,
-              ],
-              isDevelopment: process.env.NODE_ENV === 'development',
-            });
-
+          if (cspHandler) {
             html = cspHandler.handleHtml(html);
           }
 

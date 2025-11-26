@@ -28,11 +28,10 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
     validateOptions(options);
 
     this.options = {
-      // Is this default value correct? I imagine it will be set via the options.
       include: [],
       hot: false,
       generateCSSTypes: false,
-      browserslist: defaultSupportedBrowsers as unknown as string[],
+      browserslist: defaultSupportedBrowsers,
       compilePackages: [],
       rootResolution: false,
       ...options,

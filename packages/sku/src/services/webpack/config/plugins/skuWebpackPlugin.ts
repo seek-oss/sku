@@ -122,15 +122,33 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
         ],
       },
       {
-        test: /(\.vanilla)?\.css$/i,
-        issuer: this.include,
-        use: makeExternalCssLoaders({
-          target,
-          isProductionBuild,
-          MiniCssExtractPlugin,
-          hot,
-          browserslist,
-        }),
+        test: /\.css$/i,
+        oneOf: [
+          {
+            // All CSS created by vanilla-extract
+            test: /\.vanilla\.css$/i,
+            issuer: this.include,
+            use: makeExternalCssLoaders({
+              target,
+              isProductionBuild,
+              MiniCssExtractPlugin,
+              hot,
+              browserslist,
+            }),
+          },
+          {
+            test: /\.css$/i,
+            issuer: this.include,
+            include: /node_modules/,
+            use: makeExternalCssLoaders({
+              target,
+              isProductionBuild,
+              MiniCssExtractPlugin,
+              hot,
+              browserslist,
+            }),
+          },
+        ],
       },
       {
         test: IMAGE,

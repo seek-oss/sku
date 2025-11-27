@@ -127,10 +127,7 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
           {
             // All CSS created by vanilla-extract
             test: /\.vanilla\.css$/i,
-            // Don't process vanilla files from Playroom as they are handled separately.
-            // Virtual file paths will look more realistic in the future allowing
-            // more standard handling of include/exclude path matching.
-            exclude: /node_modules\/playroom/,
+            issuer: this.include,
             use: makeExternalCssLoaders({
               target,
               isProductionBuild,
@@ -141,8 +138,8 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
           },
           {
             test: /\.css$/i,
+            issuer: this.include,
             include: /node_modules/,
-            exclude: /node_modules\/playroom/,
             use: makeExternalCssLoaders({
               target,
               isProductionBuild,

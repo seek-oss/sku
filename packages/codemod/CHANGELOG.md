@@ -1,5 +1,11 @@
 # @sku-lib/codemod
 
+## 1.2.1
+
+### Patch Changes
+
+- jest-to-vitest: Properly handle `await expect()` generic syntax ([#1457](https://github.com/seek-oss/sku/pull/1457))
+
 ## 1.2.0
 
 ### Minor Changes

@@ -1,5 +1,51 @@
 # sku
 
+## 15.4.0
+
+### Minor Changes
+
+- New `createUnsafeNonce` allows inserting [nonce] values in [Content Security Policy (CSP)] Tag. ([#1459](https://github.com/seek-oss/sku/pull/1459))
+
+  Nonce's can be used to permit inline scripts that are generated after the initial render.
+  Nonce's will allow dynamic scripts to run without validation.
+  Please consider if other options can be used and if using this feature is safe for your use-case.
+
+  ```ts
+  // render.tsx
+  export default {
+    renderApp: ({ createUnsafeNonce }) => {
+      const appHtml = renderToString(<App />);
+      const dynamicScriptNonce = createUnsafeNonce();
+
+      return { appHtml, dynamicScriptNonce };
+    },
+    // ...
+  }
+  ```
+
+  [nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
+  [Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+
+- Add vitest v4 support ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
+- Added `dangerouslySetVitestConfig` option ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
+### Patch Changes
+
+- webpack: Scope css loader by requesting module not file path ([#1461](https://github.com/seek-oss/sku/pull/1461))
+
+- Remove `@sku-lib/vitest` as a peer dependency. ([#1455](https://github.com/seek-oss/sku/pull/1455))
+
+  `@sku-lib/vitest` is now included in the core `sku` package. If you use `testRunner: 'vitest'` in your sku config, simply add `vitest` as a dev dependency if it is not already present:
+
+  ```sh
+  pnpm install -D vitest
+  ```
+
+  You can safely remove `@sku-lib/vitest` from your dependencies.
+
+- `vite`: Fix `compilePackages` bundling ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
 ## 15.3.1
 
 ### Patch Changes

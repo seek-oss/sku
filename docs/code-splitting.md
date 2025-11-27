@@ -37,7 +37,7 @@ export default {
 // render.tsx
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import type { Render } from 'sku';
 
 import App from './App';
@@ -75,7 +75,7 @@ export default {
 // client.tsx
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 
 import App from './App';
 
@@ -92,7 +92,7 @@ export default () => {
 ```tsx
 // App.tsx
 import React, { Fragment } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 import loadable from 'sku/@loadable/component';
 
 const Home = loadable(() => import('./handlers/Home'));

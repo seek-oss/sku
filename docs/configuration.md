@@ -209,6 +209,29 @@ export default {
 } satisfies SkuConfig;
 ```
 
+## dangerouslySetVitestConfig
+
+Type: `function`
+
+This function provides a way to modify sku's Vitest configuration.
+It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+Before customizing your Vitest configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+
+> Sku provides no guarantees that its Vitest configuration will remain compatible with any customizations made within this function.
+> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+
+Example:
+
+```ts
+export default {
+  dangerouslySetVitestConfig: (config) => ({
+    ...config,
+    clearMocks: true,
+  }),
+} satisfies SkuConfig;
+```
+
 ## dangerouslySetWebpackConfig
 
 Type: `function`

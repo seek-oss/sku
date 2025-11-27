@@ -122,36 +122,15 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
         ],
       },
       {
-        test: /\.css$/i,
-        oneOf: [
-          {
-            // All CSS created by vanilla-extract
-            test: /\.vanilla\.css$/i,
-            // Don't process vanilla files from Playroom as they are handled separately.
-            // Virtual file paths will look more realistic in the future allowing
-            // more standard handling of include/exclude path matching.
-            exclude: /node_modules\/playroom/,
-            use: makeExternalCssLoaders({
-              target,
-              isProductionBuild,
-              MiniCssExtractPlugin,
-              hot,
-              browserslist,
-            }),
-          },
-          {
-            test: /\.css$/i,
-            include: /node_modules/,
-            exclude: /node_modules\/playroom/,
-            use: makeExternalCssLoaders({
-              target,
-              isProductionBuild,
-              MiniCssExtractPlugin,
-              hot,
-              browserslist,
-            }),
-          },
-        ],
+        test: /(\.vanilla)?\.css$/i,
+        issuer: this.include,
+        use: makeExternalCssLoaders({
+          target,
+          isProductionBuild,
+          MiniCssExtractPlugin,
+          hot,
+          browserslist,
+        }),
       },
       {
         test: IMAGE,

@@ -1,5 +1,19 @@
 # @sku-lib/create
 
+## 1.1.3
+
+### Patch Changes
+
+- Remove `@sku-lib/vitest` as a peer dependency. ([#1455](https://github.com/seek-oss/sku/pull/1455))
+
+  `@sku-lib/vitest` is now included in the core `sku` package. If you use `testRunner: 'vitest'` in your sku config, simply add `vitest` as a dev dependency if it is not already present:
+
+  ```sh
+  pnpm install -D vitest
+  ```
+
+  You can safely remove `@sku-lib/vitest` from your dependencies.
+
 ## 1.1.2
 
 ### Patch Changes

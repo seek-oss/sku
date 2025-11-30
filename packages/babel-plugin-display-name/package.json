@@ -9,7 +9,10 @@
     "directory": "packages/babel-plugin-display-name"
   },
   "exports": {
-    ".": "./dist/plugin.js",
+    ".": {
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.cjs"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -26,8 +29,12 @@
     "@babel/core": "^7.28.5"
   },
   "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
     "@babel/preset-react": "^7.28.5",
     "@types/babel__core": "^7.20.5",
     "@types/babel__helper-plugin-utils": "^7.10.3"
-  }
+  },
+  "main": "./dist/plugin.cjs",
+  "module": "./dist/plugin.mjs",
+  "types": "./dist/plugin.d.cts"
 }

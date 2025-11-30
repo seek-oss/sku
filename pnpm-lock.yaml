@@ -917,6 +917,9 @@ importers:
       '@babel/preset-react':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.28.5)
+      '@sku-private/tsdown':
+        specifier: workspace:*
+        version: link:../../private/tsdown
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5

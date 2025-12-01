@@ -1,5 +1,11 @@
 # sku
 
+## 15.5.0
+
+### Minor Changes
+
+- `vite`: Enable local HTTPS dev servers to use the HTTP/2 protocol ([#1462](https://github.com/seek-oss/sku/pull/1462))
+
 ## 15.4.0
 
 ### Minor Changes

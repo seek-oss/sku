@@ -9,7 +9,7 @@
     "directory": "packages/create"
   },
   "bin": {
-    "create-sku": "./dist/cli.js"
+    "create-sku": "./dist/cli.mjs"
   },
   "files": [
     "dist",
@@ -18,14 +18,10 @@
   "engines": {
     "node": ">=22.19.0"
   },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
-  },
   "exports": {
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@sku-lib/utils": "workspace:*",
     "commander": "catalog:",
     "dedent": "^1.5.1",
     "eta": "^3.2.0",
@@ -33,6 +29,8 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@sku-lib/utils": "workspace:*",
+    "@sku-private/tsdown": "workspace:*",
     "typescript": "^5.6.2",
     "@types/prompts": "^2.4.9",
     "fs-fixture": "^2.6.0"

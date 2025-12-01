@@ -9,10 +9,7 @@
     "directory": "packages/babel-plugin-display-name"
   },
   "exports": {
-    ".": {
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.cjs"
-    },
+    ".": "./dist/plugin.mjs",
     "./package.json": "./package.json"
   },
   "files": [
@@ -20,9 +17,6 @@
   ],
   "engines": {
     "node": ">=22.19.0"
-  },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
   },
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.27.1",
@@ -34,7 +28,7 @@
     "@types/babel__core": "^7.20.5",
     "@types/babel__helper-plugin-utils": "^7.10.3"
   },
-  "main": "./dist/plugin.cjs",
+  "main": "./dist/plugin.mjs",
   "module": "./dist/plugin.mjs",
-  "types": "./dist/plugin.d.cts"
+  "types": "./dist/plugin.d.mts"
 }

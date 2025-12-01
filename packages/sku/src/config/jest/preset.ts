@@ -22,17 +22,17 @@ export default jestDecorator({
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg|avif|bmp)$':
-      fileURLToPath(import.meta.resolve('./fileMock.cjs')),
+      fileURLToPath(import.meta.resolve('sku/jest/file-mock')),
   },
   transform: {
     '\\.css\\.ts$': fileURLToPath(
       import.meta.resolve('@vanilla-extract/jest-transform'),
     ),
     '\\.[cm]?tsx?$': fileURLToPath(
-      import.meta.resolve('./tsBabelTransform.js'),
+      import.meta.resolve('sku/jest/ts-transform'),
     ),
     '\\.[cm]?jsx?$': fileURLToPath(
-      import.meta.resolve('./jsBabelTransform.js'),
+      import.meta.resolve('sku/jest/js-transform'),
     ),
   },
   transformIgnorePatterns: [

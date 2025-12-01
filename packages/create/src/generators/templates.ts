@@ -36,7 +36,7 @@ export const generateTemplateFiles = async (
   targetPath: string,
   { projectName, template }: TemplateOptions,
 ) => {
-  const templatesRoot = join(__dirname, '../../templates');
+  const templatesRoot = join(__dirname, '../templates');
   const baseTemplateDir = join(templatesRoot, 'base');
   const bundlerTemplateDir = join(templatesRoot, template);
 

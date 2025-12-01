@@ -1,4 +1,4 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.d.ts';
+import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { getPathFromCwd } from '@sku-lib/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';

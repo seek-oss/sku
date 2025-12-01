@@ -2,7 +2,7 @@ import type { UserConfig } from 'tsdown';
 
 export const defaultConfig: UserConfig = {
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   dts: true,
   exports: true,
   sourcemap: true,

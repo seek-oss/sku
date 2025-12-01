@@ -972,9 +972,6 @@ importers:
 
   packages/create:
     dependencies:
-      '@sku-lib/utils':
-        specifier: workspace:*
-        version: link:../../private/utils
       commander:
         specifier: 'catalog:'
         version: 14.0.2
@@ -991,6 +988,12 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
     devDependencies:
+      '@sku-lib/utils':
+        specifier: workspace:*
+        version: link:../../private/utils
+      '@sku-private/tsdown':
+        specifier: workspace:*
+        version: link:../../private/tsdown
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -1063,9 +1066,6 @@ importers:
       '@sku-lib/babel-plugin-display-name':
         specifier: workspace:*
         version: link:../babel-plugin-display-name
-      '@sku-lib/utils':
-        specifier: workspace:*
-        version: link:../../private/utils
       '@sku-lib/vite':
         specifier: workspace:*
         version: link:../vite
@@ -1346,6 +1346,12 @@ importers:
         specifier: ^9.0.0
         version: 9.0.2
     devDependencies:
+      '@sku-lib/utils':
+        specifier: workspace:*
+        version: link:../../private/utils
+      '@sku-private/tsdown':
+        specifier: workspace:*
+        version: link:../../private/tsdown
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -1440,6 +1446,9 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
+      '@sku-private/tsdown':
+        specifier: workspace:*
+        version: link:../../private/tsdown
       '@types/debug':
         specifier: 'catalog:'
         version: 4.1.12
@@ -3477,10 +3486,6 @@ packages:
 
   '@sku-lib/babel-plugin-display-name@file:packages/babel-plugin-display-name':
     resolution: {directory: packages/babel-plugin-display-name, type: directory}
-    engines: {node: '>=22.19.0'}
-
-  '@sku-lib/utils@file:private/utils':
-    resolution: {directory: private/utils, type: directory}
     engines: {node: '>=22.19.0'}
 
   '@sku-lib/vite@file:packages/vite':
@@ -11694,15 +11699,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sku-lib/utils@file:private/utils':
-    dependencies:
-      chalk: 5.6.2
-      find-up: 7.0.0
-      indent-string: 5.0.0
-      package-manager-detector: 0.2.11
-      semver: 7.7.3
-      wrap-ansi: 9.0.2
-
   '@sku-lib/vite@file:packages/vite(@types/react@18.3.26)(react@18.3.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
       '@types/react': 18.3.26
@@ -17937,7 +17933,6 @@ snapshots:
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0(debug@4.4.3)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.102.1(@swc/core@1.15.1)(esbuild@0.25.12))
       '@sku-lib/babel-plugin-display-name': file:packages/babel-plugin-display-name
-      '@sku-lib/utils': file:private/utils
       '@sku-lib/vite': file:packages/vite(@types/react@18.3.26)(react@18.3.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@swc/core': 1.15.1
       '@types/eslint': 9.6.1
@@ -18091,7 +18086,6 @@ snapshots:
       '@loadable/webpack-plugin': 5.15.2(webpack@5.102.1)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@4.41.0)(webpack-dev-server@5.2.0)(webpack-hot-middleware@2.26.1)(webpack@5.102.1)
       '@sku-lib/babel-plugin-display-name': file:packages/babel-plugin-display-name
-      '@sku-lib/utils': file:private/utils
       '@sku-lib/vite': file:packages/vite(@types/react@19.1.17)(react@19.1.1)(vite@7.2.2(@types/node@22.19.0)(jiti@2.6.1)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.1))
       '@swc/core': 1.15.1
       '@types/eslint': 9.6.1

@@ -171,7 +171,7 @@ exports[`security-controls > bundler vite > start > should start an app with sec
      </div>
      <script
        type="module"
-       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
      >
      </script>
      <script

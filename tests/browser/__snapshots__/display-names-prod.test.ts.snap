@@ -91,7 +91,7 @@ exports[`display-names-prod > bundler: webpack > build > should create build out
   "index.html": SCRIPTS: [
     "/runtime-62290a749f5470cb7836.js",
     "/531-7be2c26aa965bb0c6246.js",
-    "/main-3f7cadec188585fde4be.js",
+    "/main-60b754fb14670add95b2.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -205,8 +205,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-3f7cadec188585fde4be.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-3f7cadec188585fde4be.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-60b754fb14670add95b2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-60b754fb14670add95b2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-62290a749f5470cb7836.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-62290a749f5470cb7836.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

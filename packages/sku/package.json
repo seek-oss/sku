@@ -12,7 +12,6 @@
     "./bin/sku": "./dist/bin/sku.mjs",
     "./config/eslint": "./dist/config/eslint.mjs",
     "./config/prettier": "./dist/config/prettier.mjs",
-    "./config/storybook": "./dist/config/storybook.mjs",
     "./entries/vite-client": "./dist/entries/vite-client.mjs",
     "./entries/vite-render": "./dist/entries/vite-render.mjs",
     "./jest-preset": "./dist/jest-preset.mjs",
@@ -26,7 +25,8 @@
     "./webpack/library-render": "./dist/webpack/library-render.mjs",
     "./webpack/render": "./dist/webpack/render.mjs",
     "./webpack/server": "./dist/webpack/server.mjs",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./config/storybook": "./dist/config/storybook.cjs"
   },
   "engines": {
     "node": ">=22.19.0"

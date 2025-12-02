@@ -12,7 +12,6 @@ export default defineConfig([
       'bin/sku': 'src/bin/sku.ts',
       'config/eslint': 'src/config/eslint/config.ts',
       'config/prettier': 'src/config/prettier.ts',
-      'config/storybook': 'src/config/storybook/config.cjs',
       'entries/vite-client': 'src/services/vite/entries/vite-client.tsx',
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
       'jest-preset': 'src/config/jest/preset.ts',
@@ -30,6 +29,13 @@ export default defineConfig([
       'webpack/render': 'src/services/webpack/entry/render/index.ts',
       'webpack/server': 'src/services/webpack/entry/server/index.ts',
     },
+    // List of custom exports to add to the package.json as-is.
+    exports: {
+      customExports: (pkg, _context) => {
+        pkg['./config/storybook'] = './dist/config/storybook.cjs';
+        return pkg;
+      },
+    },
     external: [
       '__sku_alias__renderEntry',
       '__sku_alias__clientEntry',
@@ -43,5 +49,15 @@ export default defineConfig([
     ...defaultConfig,
     exports: false,
     entry: './src/postinstall.ts',
+  },
+  // Storybook config needs to be cjs for storybook to work. @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058
+  // This file is added as an entry manually via the exports.customExports hook above.
+  {
+    ...defaultConfig,
+    exports: false,
+    format: ['esm', 'cjs'],
+    entry: {
+      'config/storybook': './src/config/storybook/config.cjs',
+    },
   },
 ]);

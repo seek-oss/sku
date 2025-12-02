@@ -9,7 +9,7 @@
     "directory": "packages/create"
   },
   "bin": {
-    "create-sku": "./dist/cli.mjs"
+    "create-sku": "./bin.js"
   },
   "files": [
     "dist",

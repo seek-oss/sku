@@ -1,8 +1,5 @@
 import { render, waitFor, type RenderOptions } from 'cli-testing-library';
-import { createRequire } from 'node:module';
 import { makeFixturePathResolver } from './makeFixturePathResolver.ts';
-
-const require = createRequire(import.meta.url);
 
 type SkuCommand =
   | 'serve'
@@ -21,9 +18,6 @@ export const scopeToFixture = (fixtureFolder: string) => {
     `fixtures/${fixtureFolder}/package.json`,
   );
 
-  // Using the fixtures sku binary so that dependencies are resolved according to the fixtures package.json (allowing injected dependencies to work).
-  const skuBin = require.resolve(fixturePath('./node_modules/.bin/sku'));
-
   return {
     /**
      * Runs a `sku` command scoped to the fixture folder.
@@ -33,7 +27,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
-      render(skuBin, [command, ...args], {
+      render('pnpm', ['sku', command, ...args], {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
       }),

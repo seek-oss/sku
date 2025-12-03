@@ -14,7 +14,7 @@ import { serverUrls } from '@sku-lib/utils';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('sku/entries/vite-client');
+const clientEntry = require.resolve('#entries/vite-client');
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 

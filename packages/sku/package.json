@@ -6,27 +6,24 @@
   "bin": {
     "sku": "bin/bin.js"
   },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": "./dist/index.mjs",
     "./@loadable/component": "./dist/@loadable/component.mjs",
-    "./bin/sku": "./dist/bin/sku.mjs",
-    "./config/eslint": "./dist/config/eslint.mjs",
     "./config/prettier": "./dist/config/prettier.mjs",
-    "./entries/vite-client": "./dist/entries/vite-client.mjs",
-    "./entries/vite-render": "./dist/entries/vite-render.mjs",
+    "./config/eslint": "./dist/config/eslint.mjs",
+    "./config/storybook": "./dist/config/storybook.cjs",
+    "./bin/sku": "./dist/bin/sku.mjs",
     "./jest-preset": "./dist/jest-preset.mjs",
-    "./jest/file-mock": "./dist/jest/file-mock.mjs",
-    "./jest/js-transform": "./dist/jest/js-transform.mjs",
-    "./jest/ts-transform": "./dist/jest/ts-transform.mjs",
-    "./vite/client": "./dist/vite/client.mjs",
-    "./vite/prerender-worker": "./dist/vite/prerender-worker.mjs",
     "./webpack-plugin": "./dist/webpack-plugin.mjs",
-    "./webpack/client": "./dist/webpack/client.mjs",
-    "./webpack/library-render": "./dist/webpack/library-render.mjs",
-    "./webpack/render": "./dist/webpack/render.mjs",
-    "./webpack/server": "./dist/webpack/server.mjs",
-    "./package.json": "./package.json",
-    "./config/storybook": "./dist/config/storybook.cjs"
+    "./package.json": "./package.json"
+  },
+  "imports": {
+    "#entries/*": "./dist/entries/*.mjs",
+    "#jest/*": "./dist/jest/*.mjs",
+    "#vite/*": "./dist/vite/*.mjs",
+    "#webpack/*": "./dist/webpack/*.mjs"
   },
   "engines": {
     "node": ">=22.19.0"
@@ -218,7 +215,5 @@
     "react-dom": "catalog:",
     "type-fest": "^4.41.0",
     "vitest": "catalog:"
-  },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs"
+  }
 }

@@ -22,18 +22,14 @@ export default jestDecorator({
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg|avif|bmp)$':
-      fileURLToPath(import.meta.resolve('sku/jest/file-mock')),
+      fileURLToPath(import.meta.resolve('#jest/file-mock')),
   },
   transform: {
     '\\.css\\.ts$': fileURLToPath(
       import.meta.resolve('@vanilla-extract/jest-transform'),
     ),
-    '\\.[cm]?tsx?$': fileURLToPath(
-      import.meta.resolve('sku/jest/ts-transform'),
-    ),
-    '\\.[cm]?jsx?$': fileURLToPath(
-      import.meta.resolve('sku/jest/js-transform'),
-    ),
+    '\\.[cm]?tsx?$': fileURLToPath(import.meta.resolve('#jest/ts-transform')),
+    '\\.[cm]?jsx?$': fileURLToPath(import.meta.resolve('#jest/js-transform')),
   },
   transformIgnorePatterns: [
     // Allow 'compilePackages' code to be transformed in tests by overriding

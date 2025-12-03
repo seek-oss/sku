@@ -26,8 +26,8 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('sku/webpack/render');
-const libraryRenderEntry = require.resolve('sku/webpack/library-render');
+const renderEntry = require.resolve('#webpack/render');
+const libraryRenderEntry = require.resolve('#webpack/library-render');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.
@@ -65,7 +65,7 @@ const makeWebpackConfig = ({
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
 
-  const skuClientEntry = require.resolve('sku/webpack/client');
+  const skuClientEntry = require.resolve('#webpack/client');
 
   const createEntry = (entry: string): string[] => [
     ...resolvedPolyfills,

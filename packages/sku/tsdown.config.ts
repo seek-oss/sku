@@ -4,6 +4,7 @@ import { defaultConfig } from '@sku-private/tsdown';
 export default defineConfig([
   {
     ...defaultConfig,
+    exports: false,
     // Need to use unbundled mode because `webpack/entry/server/index.ts` calls webpackHot.accept which needs a known path to the server app at runtime.
     // If we use bundled mode, the server app will be bundled into the main bundle, and the webpackHot.accept will not be able to find the server app.
     unbundle: true,
@@ -30,13 +31,6 @@ export default defineConfig([
       'webpack/render': 'src/services/webpack/entry/render/index.ts',
       'webpack/server': 'src/services/webpack/entry/server/index.ts',
     },
-    // List of custom exports to add to the package.json as-is.
-    exports: {
-      customExports: (pkg, _context) => {
-        pkg['./config/storybook'] = './dist/config/storybook.cjs';
-        return pkg;
-      },
-    },
     external: [
       '__sku_alias__renderEntry',
       '__sku_alias__clientEntry',
@@ -51,12 +45,12 @@ export default defineConfig([
     exports: false,
     entry: './src/postinstall.ts',
   },
-  // Storybook config needs to be cjs for storybook to work. @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058
-  // This file is added as an entry manually via the exports.customExports hook above.
+  // Storybook config needs to be cjs for webpack storybook to work.
+  // @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058
   {
     ...defaultConfig,
     exports: false,
-    format: ['esm', 'cjs'],
+    format: ['cjs'],
     entry: {
       'config/storybook': './src/config/storybook/config.cjs',
     },

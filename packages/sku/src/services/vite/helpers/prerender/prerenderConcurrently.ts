@@ -18,7 +18,7 @@ export type JobWorkerData = {
 };
 
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
-  const workerPath = new URL(import.meta.resolve('sku/vite/prerender-worker'));
+  const workerPath = new URL(import.meta.resolve('#vite/prerender-worker'));
   const worker = new Worker(workerPath, {
     workerData: jobs,
   });

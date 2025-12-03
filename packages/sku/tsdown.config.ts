@@ -4,7 +4,8 @@ import { defaultConfig } from '@sku-private/tsdown';
 export default defineConfig([
   {
     ...defaultConfig,
-    // Need to use unbundled mode because `webpack/entry/server/index.ts` calls webpackHot.accept which needs the server app to be a different file.
+    // Need to use unbundled mode because `webpack/entry/server/index.ts` calls webpackHot.accept which needs a known path to the server app at runtime.
+    // If we use bundled mode, the server app will be bundled into the main bundle, and the webpackHot.accept will not be able to find the server app.
     unbundle: true,
     entry: {
       index: 'src/index.ts',

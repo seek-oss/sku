@@ -1,6 +1,5 @@
 {
   "name": "@sku-lib/utils",
-  "version": "1.1.1",
   "main": "src/index.ts",
   "private": true,
   "description": "Shared utilities for sku packages",

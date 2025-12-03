@@ -5,7 +5,7 @@ import { styleText } from 'node:util';
 import configureApp from './utils/configureApp.js';
 
 /**
- * Separated out from the scripts/postinstall.js so that this can be bundled with vite
+ * Separated out from the scripts/postinstall.js so that this can be bundled
  */
 
 const log = debug('sku:postinstall');

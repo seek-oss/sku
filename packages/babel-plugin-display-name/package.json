@@ -8,6 +8,9 @@
     "url": "git+https://github.com/seek-oss/sku.git",
     "directory": "packages/babel-plugin-display-name"
   },
+  "main": "./dist/plugin.mjs",
+  "module": "./dist/plugin.mjs",
+  "types": "./dist/plugin.d.mts",
   "exports": {
     ".": "./dist/plugin.mjs",
     "./package.json": "./package.json"
@@ -27,8 +30,5 @@
     "@babel/preset-react": "^7.28.5",
     "@types/babel__core": "^7.20.5",
     "@types/babel__helper-plugin-utils": "^7.10.3"
-  },
-  "main": "./dist/plugin.mjs",
-  "module": "./dist/plugin.mjs",
-  "types": "./dist/plugin.d.mts"
+  }
 }

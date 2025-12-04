@@ -35,7 +35,7 @@ export const createSsrHtml = async ({
 
   const bodyTags = [
     isDev
-      ? `<script type="module" src="${require.resolve('../../entries/vite-client.js')}"></script>\n`
+      ? `<script type="module" src="${require.resolve('#entries/vite-client')}"></script>\n`
       : '',
     `${serializeConfig(clientContext)}<!-- body tags -->`,
   ].join('');

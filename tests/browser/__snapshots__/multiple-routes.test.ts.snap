@@ -587,7 +587,7 @@ exports[`multiple-routes > bundler: vite > start > should render details page co
      </div>
      <script
        type="module"
-       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
      >
      </script>
      <script
@@ -685,7 +685,7 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
      </div>
      <script
        type="module"
-       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
      >
      </script>
      <script

@@ -1,2 +1,2 @@
 // @ts-check
-export { default } from './packages/sku/dist/config/prettier.js';
+export { default } from './packages/sku/dist/config/prettier.mjs';

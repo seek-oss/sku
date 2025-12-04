@@ -4,9 +4,6 @@
   "description": "Codemods for sku",
   "type": "module",
   "bin": "./bin.js",
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
-  },
   "dependencies": {
     "@ast-grep/napi": "^0.39.4",
     "commander": "catalog:",
@@ -33,10 +30,21 @@
   ],
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
   "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
     "@types/diff": "^7.0.1",
     "@types/node": "catalog:",
     "@types/debug": "catalog:",
     "@types/prompts": "^2.4.9",
     "typescript": "~5.9.0"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    "./codemods/jest-to-vitest": "./dist/codemods/jest-to-vitest.mjs",
+    "./codemods/transform-vite-loadable": "./dist/codemods/transform-vite-loadable.mjs",
+    "./program": "./dist/program/index.mjs",
+    "./transform/worker": "./dist/transform/worker.mjs",
+    "./package.json": "./package.json"
   }
 }

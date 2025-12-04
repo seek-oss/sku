@@ -53,10 +53,13 @@ if (import.meta.webpackHot) {
 
   let currentApp = app;
 
-  import.meta.webpackHot.accept('./server.js', () => {
-    server.removeListener('request', currentApp);
-    server.on('request', app);
-    currentApp = app;
-    console.log('Server hot reloaded');
-  });
+  import.meta.webpackHot.accept(
+    '../services/webpack/entry/server/server.mjs',
+    () => {
+      server.removeListener('request', currentApp);
+      server.on('request', app);
+      currentApp = app;
+      console.log('Server hot reloaded');
+    },
+  );
 }

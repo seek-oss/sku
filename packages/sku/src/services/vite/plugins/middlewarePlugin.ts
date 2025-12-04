@@ -15,8 +15,8 @@ const log = debug('sku:middleware:vite');
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('../entries/vite-render.js');
-const clientEntry = require.resolve('../entries/vite-client.js');
+const renderEntry = require.resolve('#entries/vite-render');
+const clientEntry = require.resolve('#entries/vite-client');
 
 export const middlewarePlugin = ({
   skuContext,

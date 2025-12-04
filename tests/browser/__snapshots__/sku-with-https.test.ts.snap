@@ -86,7 +86,7 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
      </div>
      <script
        type="module"
-       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
      >
      </script>
    </body>

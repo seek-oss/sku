@@ -14,7 +14,8 @@
     "build": "sku build",
     "build:vite": "sku build --config sku.config.vite.ts",
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start:vite": "sku start --config sku.config.vite.ts",
+    "start:ssr": "sku start-ssr --config sku-ssr.config.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

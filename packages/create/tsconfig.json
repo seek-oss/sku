@@ -2,7 +2,6 @@
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
     "noEmit": false,
     "allowImportingTsExtensions": false,
     "target": "ESNext",
@@ -10,6 +9,6 @@
     "moduleResolution": "nodenext",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./tsdown.config.ts"],
   "exclude": ["./templates"]
 }

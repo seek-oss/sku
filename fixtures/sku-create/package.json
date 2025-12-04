@@ -1,9 +1,6 @@
 {
   "name": "@sku-private/sku-create",
   "private": true,
-  "scripts": {
-    "create-sku": "create-sku"
-  },
   "skuSkipValidatePeerDeps": true,
   "devDependencies": {
     "@sku-lib/create": "workspace:*"

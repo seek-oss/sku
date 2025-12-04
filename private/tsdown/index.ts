@@ -5,5 +5,4 @@ export const defaultConfig: UserConfig = {
   format: ['esm'],
   dts: true,
   exports: true,
-  sourcemap: true,
 };

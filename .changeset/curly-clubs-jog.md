@@ -6,4 +6,4 @@
 'sku': patch
 ---
 
-Migrate package bundling to use Vite
+Migrate package bundling to use tsdown

@@ -10,7 +10,7 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": "./dist/index.mjs",
-    "./@loadable/component": "./dist/@loadable/component.mjs",
+    "./@loadable/component": "./dist/@loadable/component/index.ts",
     "./config/prettier": "./dist/config/prettier.mjs",
     "./config/eslint": "./dist/config/eslint.mjs",
     "./config/storybook": "./dist/config/storybook.cjs",

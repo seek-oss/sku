@@ -23,6 +23,7 @@
   "imports": {
     "#entries/*": "./dist/entries/*.mjs",
     "#jest/*": "./dist/jest/*.mjs",
+    "#jest/file-mock": "./dist/jest/file-mock.cjs",
     "#vite/*": "./dist/vite/*.mjs",
     "#webpack/*": "./dist/webpack/*.mjs"
   },

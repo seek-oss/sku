@@ -20,7 +20,7 @@ import {
 } from '../../../utils/language-utils.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { serverUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-private/utils';
 
 const localhost = '0.0.0.0';
 

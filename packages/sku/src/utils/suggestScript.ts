@@ -2,7 +2,7 @@ import {
   getRunCommand,
   getExecuteCommand,
   requireFromCwd,
-} from '@sku-lib/utils';
+} from '@sku-private/utils';
 
 import chalk from 'chalk';
 

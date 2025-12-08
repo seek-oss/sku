@@ -1,6 +1,6 @@
 import { styleText } from 'node:util';
 import { existsSync } from 'node:fs';
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import _debug from 'debug';
 
 const debug = _debug('sku:config');

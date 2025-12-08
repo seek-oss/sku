@@ -11,7 +11,7 @@ import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifier
 import { getWebpackLoadableSpecifierName } from './helpers/getWebpackLoadableSpecifierName.js';
 import { convertWebpackToViteImport } from './helpers/convertWebpackToViteImport.js';
 import { injectModuleID } from './helpers/injectModuleID.js';
-import { getExecuteCommand } from '@sku-lib/utils';
+import { getExecuteCommand } from '@sku-private/utils';
 
 /* NOTE: This implementation can probably be improved and simplified.
  * My primary goal was to get it working and replacing but my limited experience with AST parsing is likely showing.

@@ -1,4 +1,4 @@
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 
 import { mkdir, unlink, writeFile, stat, readFile } from 'node:fs/promises';
 import { performance } from 'node:perf_hooks';

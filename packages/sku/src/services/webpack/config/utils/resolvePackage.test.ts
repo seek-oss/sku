@@ -1,7 +1,7 @@
 import { describe, beforeEach, test, vi, expect } from 'vitest';
 import { createPackageResolver } from './resolvePackage.js';
 
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {

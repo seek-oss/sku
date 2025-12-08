@@ -1,4 +1,4 @@
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export const bundleReportFolder = 'report';

@@ -1,5 +1,5 @@
 import debug from 'debug';
-import { setCwd, banner } from '@sku-lib/utils';
+import { setCwd, banner } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
 import { styleText } from 'node:util';
 import configureApp from './utils/configureApp.js';

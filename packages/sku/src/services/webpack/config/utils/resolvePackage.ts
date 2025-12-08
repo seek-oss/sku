@@ -4,7 +4,7 @@ import nanoMemoize from 'nano-memoize';
 import debug from 'debug';
 import { createRequire } from 'node:module';
 
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 import { hasErrorCode } from '../../../../utils/error-guards.js';
 
 // @ts-expect-error

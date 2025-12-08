@@ -1,7 +1,7 @@
 import exists from '../utils/exists.js';
 import chalk from 'chalk';
 import { runBin } from '../utils/runBin.js';
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import { suggestScript } from '../utils/suggestScript.js';
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');

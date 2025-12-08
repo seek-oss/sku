@@ -12,7 +12,7 @@ import { MetricsPlugin } from './plugins/metricsPlugin.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 
 import { getVocabConfig } from '../../vocab/config.js';
 import getStatsConfig from './statsConfig.js';

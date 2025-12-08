@@ -1,5 +1,5 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';

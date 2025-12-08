@@ -12,7 +12,7 @@ import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
-import { serverUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-private/utils';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {

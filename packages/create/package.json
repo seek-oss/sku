@@ -29,7 +29,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@sku-lib/utils": "workspace:*",
+    "@sku-private/utils": "workspace:*",
     "@sku-private/tsdown": "workspace:*",
     "typescript": "^5.6.2",
     "@types/prompts": "^2.4.9",

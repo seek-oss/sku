@@ -9,7 +9,7 @@ import {
   getPackageManagerInstallPage,
   getRunCommand,
   packageManager,
-} from '@sku-lib/utils';
+} from '@sku-private/utils';
 
 import type { Template } from '../types/index.js';
 

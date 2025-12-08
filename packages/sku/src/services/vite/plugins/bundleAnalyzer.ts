@@ -1,4 +1,4 @@
-import { getPathFromCwd, requireFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { visualizer } from 'rollup-plugin-visualizer';
 import type { Plugin } from 'vite';
 

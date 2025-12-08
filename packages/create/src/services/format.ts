@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { getRunCommand } from '@sku-lib/utils';
+import { getRunCommand } from '@sku-private/utils';
 
 export const formatProject = async (projectPath: string): Promise<void> => {
   console.log('🎨 Formatting project...');

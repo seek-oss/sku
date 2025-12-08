@@ -15,7 +15,7 @@ import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { requireFromCwd } from '@sku-lib/utils';
+import { requireFromCwd } from '@sku-private/utils';
 import { getVocabConfig } from '../../vocab/config.js';
 import getStatsConfig from './statsConfig.js';
 import getSourceMapSetting from './sourceMaps.js';

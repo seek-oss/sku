@@ -5,6 +5,12 @@ export default defineConfig([
   {
     ...defaultConfig,
     exports: false,
+    copy: [
+      {
+        from: 'src/services/vite/client.d.ts',
+        to: 'dist/vite/client.d.ts',
+      },
+    ],
     // Need to use unbundled mode because `webpack/entry/server/index.ts` calls webpackHot.accept which needs a known path to the server app at runtime.
     // If we use bundled mode, the server app will be bundled into the main bundle, and the webpackHot.accept will not be able to find the server app.
     unbundle: true,
@@ -20,6 +26,7 @@ export default defineConfig([
       'jest/file-mock': 'src/config/jest/fileMock.cjs',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
+      postinstall: './src/postinstall.ts',
       'vite/client': 'src/services/vite/index.ts',
       'vite/prerender-worker':
         'src/services/vite/helpers/prerender/prerenderWorker.ts',
@@ -39,11 +46,6 @@ export default defineConfig([
       'virtual:sku/polyfills',
       '@vanilla-extract/css/adapter',
     ],
-  },
-  {
-    ...defaultConfig,
-    exports: false,
-    entry: './src/postinstall.ts',
   },
   // Storybook config needs to be cjs for webpack storybook to work.
   // @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058

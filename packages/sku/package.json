@@ -16,6 +16,7 @@
     "./config/storybook": "./dist/config/storybook.cjs",
     "./bin/sku": "./dist/bin/sku.mjs",
     "./jest-preset": "./dist/jest-preset.mjs",
+    "./vite/client": "./dist/vite/client.d.ts",
     "./webpack-plugin": "./dist/webpack-plugin.mjs",
     "./package.json": "./package.json"
   },
@@ -39,7 +40,6 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {

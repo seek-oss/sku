@@ -21,7 +21,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
     `fixtures/${fixtureFolder}/package.json`,
   );
 
-  const skuBin = require.resolve('../../packages/sku/bin/bin.js');
+  const skuBin = require.resolve(fixturePath('./node_modules/.bin/sku'));
 
   return {
     /**

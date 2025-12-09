@@ -1,9 +1,8 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import {
   scopeToFixture,
   bundlers,
-  cleanup,
   type BundlerValues,
 } from '@sku-private/testing-library';
 import { createPage } from '@sku-private/playwright';
@@ -16,8 +15,6 @@ describe('display-names-prod', () => {
       vite: ['--config', 'sku.config.vite.ts'],
       webpack: [],
     };
-
-    afterAll(cleanup);
 
     describe('build', () => {
       beforeAll(async () => {

@@ -2,7 +2,11 @@ import { describe, beforeAll, it, expect } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import * as jsonc from 'jsonc-parser';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  scopeToFixture,
+  waitFor,
+  hasExitSuccessfully,
+} from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('path-aliases');
 
@@ -13,12 +17,7 @@ describe('pathAliases', () => {
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
-      await waitFor(async () => {
-        const hasExit = configure.hasExit();
-        if (!hasExit || hasExit.exitCode !== 0) {
-          throw new Error('Configure exited without code 0');
-        }
-      });
+      await hasExitSuccessfully(configure);
 
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');

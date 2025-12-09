@@ -1,10 +1,6 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
+import { describe, beforeAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
-import {
-  cleanup,
-  scopeToFixture,
-  skipCleanup,
-} from '@sku-private/testing-library';
+import { scopeToFixture, skipCleanup } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('translations');
 
@@ -15,8 +11,6 @@ describe.concurrent('ssr translations', () => {
     const startSsr = await sku('start-ssr', ['--config=sku-ssr.config.ts']);
     await startSsr.findByText('Server started');
   });
-
-  afterAll(cleanup);
 
   it('should render en', async ({ task, expect }) => {
     skipCleanup(task.id);

@@ -1,12 +1,8 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
 
-import {
-  cleanup,
-  scopeToFixture,
-  skipCleanup,
-} from '@sku-private/testing-library';
+import { scopeToFixture, skipCleanup } from '@sku-private/testing-library';
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
@@ -18,8 +14,6 @@ describe('ssr-hello-world', () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
       await start.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);

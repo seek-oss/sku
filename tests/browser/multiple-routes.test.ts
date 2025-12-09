@@ -1,11 +1,10 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
   skipCleanup,
 } from '@sku-private/testing-library';
@@ -33,8 +32,6 @@ describe('multiple-routes', () => {
         const start = await sku('start', args[bundler]);
         await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);
@@ -71,8 +68,6 @@ describe('multiple-routes', () => {
         const serve = await sku('serve', portArgs);
         await serve.findByText('Server started');
       });
-
-      afterAll(cleanup);
 
       it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);

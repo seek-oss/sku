@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -6,7 +6,6 @@ import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -72,8 +71,6 @@ describe('sku-with-https', () => {
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       await serve.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);

@@ -1,10 +1,9 @@
-import { describe, beforeAll, afterAll, it, expect, beforeEach } from 'vitest';
+import { describe, beforeAll, it, expect, beforeEach } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
@@ -32,8 +31,6 @@ describe('security-controls', () => {
         ]);
         await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it('should start an app with security controls', async () => {
         const app = await getAppSnapshot({

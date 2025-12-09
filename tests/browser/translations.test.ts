@@ -1,11 +1,10 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
   scopeToFixture,
-  cleanup,
   skipCleanup,
 } from '@sku-private/testing-library';
 
@@ -27,8 +26,6 @@ describe('translations', () => {
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       await serve.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should render en', async ({ task }) => {
       skipCleanup(task.id);

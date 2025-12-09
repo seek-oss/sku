@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, afterAll, vi, expect } from 'vitest';
+import { describe, beforeAll, it, vi, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/playwright';
@@ -50,8 +50,6 @@ describe('braid-design-system', () => {
         const start = await sku('start', args[bundler]);
         await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it('should return development seekAnz site', async ({ task }) => {
         skipCleanup(task.id);

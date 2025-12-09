@@ -17,4 +17,8 @@ expect.addSnapshotSerializer(htmlSnapshotSerializer);
 expect.addSnapshotSerializer(cssSnapshotSerializer);
 
 afterEach(({ task }) => cleanup(task));
-afterAll(closeBrowser);
+
+afterAll(() => {
+  cleanup();
+  closeBrowser();
+});

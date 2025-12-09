@@ -7,6 +7,7 @@ import {
   scopeToFixture,
   skipCleanup,
   waitFor,
+  hasExitSuccessfully,
 } from '@sku-private/testing-library';
 
 const storybookStartedRegex =
@@ -137,13 +138,7 @@ describe('storybook-config', () => {
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
-
-      await waitFor(async () => {
-        const exit = storybook.hasExit();
-        if (exit?.exitCode !== 0) {
-          throw new Error(`Storybook build did not exit with code 0`);
-        }
-      });
+      await hasExitSuccessfully(storybook);
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       await assetServer.findByText('serving storybook-static');

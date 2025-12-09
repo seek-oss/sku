@@ -1,7 +1,10 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { dirContentsToObject } from '@sku-private/test-utils';
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import {
+  scopeToFixture,
+  hasExitSuccessfully,
+} from '@sku-private/testing-library';
 
 const port = 9876;
 const devServerUrl = `http://localhost:${port}`;
@@ -38,12 +41,7 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await waitFor(async () => {
-        const hasExit = build.hasExit();
-        if (!hasExit || hasExit.exitCode !== 0) {
-          throw new Error('Build exited without code 0');
-        }
-      });
+      await hasExitSuccessfully(build);
     });
 
     it('should create valid app', async () => {

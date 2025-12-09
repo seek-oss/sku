@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, expect, afterAll } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/playwright';
@@ -6,7 +6,6 @@ import { getAppSnapshot } from '@sku-private/playwright';
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   skipCleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
@@ -57,8 +56,6 @@ describe('custom-src-paths', () => {
         const serve = await sku('serve', portArgs);
         await serve.findByText('Server started');
       });
-
-      afterAll(cleanup);
 
       it('should generate the expected files', async ({ task }) => {
         skipCleanup(task.id);

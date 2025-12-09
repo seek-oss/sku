@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/babel-plugin-display-name",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Babel plugin for automatic React display name generation with tree-shaking and prefix support, forked from @mui/internal-babel-plugin-display-name.",
   "type": "module",
   "repository": {

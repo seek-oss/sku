@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 1.0.1
+
+### Patch Changes
+
+- Migrate package bundling to use tsdown ([#1464](https://github.com/seek-oss/sku/pull/1464))
+
 ## 1.0.0
 
 ### Major Changes

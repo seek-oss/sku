@@ -1,5 +1,19 @@
 # sku
 
+## 15.5.0
+
+### Minor Changes
+
+- `vite`: Enable local HTTPS dev servers to use the HTTP/2 protocol ([#1462](https://github.com/seek-oss/sku/pull/1462))
+
+### Patch Changes
+
+- Migrate package bundling to use tsdown ([#1464](https://github.com/seek-oss/sku/pull/1464))
+
+- Updated dependencies [[`a5b0195`](https://github.com/seek-oss/sku/commit/a5b0195c6d85632bcd43be89b0aeb23cb717b9b9)]:
+  - @sku-lib/babel-plugin-display-name@0.0.2
+  - @sku-lib/vite@1.0.1
+
 ## 15.4.0
 
 ### Minor Changes

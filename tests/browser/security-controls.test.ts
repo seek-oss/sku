@@ -30,10 +30,7 @@ describe('security-controls', () => {
           '--strict-port',
           `--port=${port}`,
         ]);
-
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
 
       afterAll(cleanup);
@@ -52,8 +49,7 @@ describe('security-controls', () => {
 
       beforeAll(async () => {
         const build = await sku('build', [...args[bundler]]);
-
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
       });
 
       beforeEach(async () => {
@@ -91,8 +87,7 @@ describe('security-controls', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-server.config.ts']);
-
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     it('should start a server with content-security-policies', async () => {

@@ -22,10 +22,10 @@ describe('translations', () => {
 
     beforeAll(async () => {
       const build = await sku('build', args[bundler]);
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      expect(await serve.findByText('Server started')).toBeInTheConsole();
+      await serve.findByText('Server started');
     });
 
     afterAll(cleanup);

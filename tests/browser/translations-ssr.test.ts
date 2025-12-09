@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import {
   cleanup,
@@ -19,9 +13,7 @@ const backendUrl = `http://localhost:8314`;
 describe.concurrent('ssr translations', () => {
   beforeAll(async () => {
     const startSsr = await sku('start-ssr', ['--config=sku-ssr.config.ts']);
-    globalExpect(
-      await startSsr.findByText('Server started'),
-    ).toBeInTheConsole();
+    await startSsr.findByText('Server started');
   });
 
   afterAll(cleanup);

@@ -43,9 +43,7 @@ describe('storybook-config', () => {
         '--port',
         port.toString(),
       ]);
-      expect(
-        await storybook.findByText(storybookStartedRegex),
-      ).toBeInTheConsole();
+      await storybook.findByText(storybookStartedRegex);
     });
 
     afterAll(async () => {
@@ -141,15 +139,14 @@ describe('storybook-config', () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
 
       await waitFor(async () => {
-        expect(storybook.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
+        const exit = storybook.hasExit();
+        if (exit?.exitCode !== 0) {
+          throw new Error(`Storybook build did not exit with code 0`);
+        }
       });
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      expect(
-        await assetServer.findByText('serving storybook-static'),
-      ).toBeInTheConsole();
+      await assetServer.findByText('serving storybook-static');
     });
 
     afterAll(async () => {

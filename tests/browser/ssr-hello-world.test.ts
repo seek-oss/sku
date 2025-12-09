@@ -16,7 +16,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
-      expect(await start.findByText('Server started')).toBeInTheConsole();
+      await start.findByText('Server started');
     });
 
     afterAll(cleanup);
@@ -51,7 +51,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     describe('default port', () => {

@@ -52,10 +52,10 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Build complete')).toBeInTheConsole();
+        await build.findByText('Build complete');
 
         const serve = await sku('serve', portArgs);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        await serve.findByText('Server started');
       });
 
       afterAll(cleanup);

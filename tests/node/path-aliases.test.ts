@@ -13,8 +13,11 @@ describe('pathAliases', () => {
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
-      await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+      await waitFor(async () => {
+        const hasExit = configure.hasExit();
+        if (!hasExit || hasExit.exitCode !== 0) {
+          throw new Error('Configure exited without code 0');
+        }
       });
 
       const tsconfigPath = fixturePath('tsconfig.json');

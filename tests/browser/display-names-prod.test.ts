@@ -22,7 +22,7 @@ describe('display-names-prod', () => {
     describe('build', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
       });
 
       it('should create build output', async () => {

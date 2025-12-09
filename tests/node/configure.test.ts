@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
@@ -61,8 +55,11 @@ describe('configure', () => {
         cwd: './App',
       });
 
-      await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+      await waitFor(async () => {
+        const exit = configure.hasExit();
+        if (!exit || exit.exitCode !== 0) {
+          throw new Error('Configure exited without code 0');
+        }
       });
     });
 
@@ -122,8 +119,11 @@ describe('configure', () => {
         cwd: './TSApp',
       });
 
-      await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
+      await waitFor(async () => {
+        const hasExit = configure.hasExit();
+        if (!hasExit || hasExit.exitCode !== 0) {
+          throw new Error('Configure exited without code 0');
+        }
       });
     });
 

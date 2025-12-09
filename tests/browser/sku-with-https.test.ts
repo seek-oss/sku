@@ -30,9 +30,7 @@ describe('sku-with-https', () => {
     describe('start', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
 
       it('should start a development server', async ({ task }) => {
@@ -69,10 +67,10 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      expect(await serve.findByText('Server started')).toBeInTheConsole();
+      await serve.findByText('Server started');
     });
 
     afterAll(cleanup);

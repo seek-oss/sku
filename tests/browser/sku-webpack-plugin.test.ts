@@ -38,10 +38,11 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await waitFor(() => {
-        expect(build.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
+      await waitFor(async () => {
+        const hasExit = build.hasExit();
+        if (!hasExit || hasExit.exitCode !== 0) {
+          throw new Error('Build exited without code 0');
+        }
       });
     });
 

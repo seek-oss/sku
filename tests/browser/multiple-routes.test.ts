@@ -31,9 +31,7 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
 
       afterAll(cleanup);
@@ -68,10 +66,10 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
 
         const serve = await sku('serve', portArgs);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        await serve.findByText('Server started');
       });
 
       afterAll(cleanup);

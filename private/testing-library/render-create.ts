@@ -1,9 +1,9 @@
 import { render, type RenderOptions } from 'cli-testing-library';
-import { createRequire } from 'node:module';
 import { makeFixturePathResolver } from './makeFixturePathResolver.ts';
+import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
-const createBin = require.resolve('../../packages/create/dist/cli.js');
+const createSkuBin = require.resolve('../../packages/create/bin.js');
 
 export const scopeToFixture = (dir: string) => {
   const fixturePath = makeFixturePathResolver(`fixtures/${dir}/package.json`);
@@ -14,7 +14,7 @@ export const scopeToFixture = (dir: string) => {
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
-      render('node', [createBin, projectName, ...args], {
+      render(createSkuBin, [projectName, ...args], {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
       }),

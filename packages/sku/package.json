@@ -2,32 +2,30 @@
   "name": "sku",
   "version": "15.4.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "sku": "bin/bin.js"
   },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
-    ".": {
-      "types": {
-        "import": "./dist/index.d.ts",
-        "require": "./dist/index.d.cts"
-      }
-    },
-    "./jest-preset": "./dist/config/jest/preset.js",
-    "./config/eslint": {
-      "types": "./dist/config/eslint/config.d.ts",
-      "default": "./dist/config/eslint/config.js"
-    },
-    "./config/storybook": {
-      "types": "./dist/config/storybook/config.d.ts",
-      "default": "./dist/config/storybook/config.cjs"
-    },
-    "./vite/client": {
-      "types": "./dist/services/vite/client.d.ts"
-    },
-    "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./webpack-plugin": "./dist/services/webpack/config/plugins/skuWebpackPlugin.js",
+    ".": "./dist/index.mjs",
+    "./@loadable/component": "./dist/@loadable/component/index.ts",
+    "./config/prettier": "./dist/config/prettier.mjs",
+    "./config/eslint": "./dist/config/eslint.mjs",
+    "./config/storybook": "./dist/config/storybook.cjs",
+    "./bin/sku": "./dist/bin/sku.mjs",
+    "./jest-preset": "./dist/jest-preset.mjs",
+    "./vite/client": "./dist/vite/client.d.ts",
+    "./webpack-plugin": "./dist/webpack-plugin.mjs",
     "./package.json": "./package.json"
+  },
+  "imports": {
+    "#entries/*": "./dist/entries/*.mjs",
+    "#jest/file-mock": "./dist/jest/file-mock.cjs",
+    "#jest/*": "./dist/jest/*.mjs",
+    "#vite/*": "./dist/vite/*.mjs",
+    "#webpack/*": "./dist/webpack/*.mjs"
   },
   "engines": {
     "node": ">=22.19.0"
@@ -43,8 +41,6 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc --project tsconfig.build.json",
-    "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {
@@ -94,7 +90,6 @@
     "@loadable/server": "^5.16.7",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@sku-lib/utils": "workspace:*",
     "@sku-lib/vite": "workspace:*",
     "@swc/core": "^1.6.13",
     "@types/eslint": "^9.6.1",
@@ -190,6 +185,8 @@
     "wrap-ansi": "^9.0.0"
   },
   "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
+    "@sku-private/utils": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.6",

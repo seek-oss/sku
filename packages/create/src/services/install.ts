@@ -1,4 +1,4 @@
-import { getAddCommand } from '@sku-lib/utils';
+import { getAddCommand } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
 import type { Template } from '../types/index.js';
 

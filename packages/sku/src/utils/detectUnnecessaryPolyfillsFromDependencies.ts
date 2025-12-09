@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import {
   type DetectedPolyfillWithSource,
   getDeprecatedPolyfill,

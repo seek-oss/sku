@@ -24,7 +24,7 @@ import {
   validatePeerDeps,
 } from '../../../utils/configure.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { serverUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-private/utils';
 
 export const serveAction = async ({
   site: preferredSite,

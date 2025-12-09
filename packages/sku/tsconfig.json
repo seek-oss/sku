@@ -1,7 +1,6 @@
 {
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
     "target": "ESNext",
     "allowJs": true,
     "jsx": "react-jsx",
@@ -15,6 +14,6 @@
     "types": ["webpack/module", "jest", "node"],
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./tsdown.config.ts"],
   "exclude": ["node_modules", "**/@loadable"]
 }

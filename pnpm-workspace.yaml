@@ -18,23 +18,13 @@ catalog:
   jiti: ^2.4.2
   react: ^19.1.0
   react-dom: ^19.1.0
-  vite: ^7.2.4
-  vitest: ^4.0.8
+  vite: ^7.2.6
+  vitest: ^4.0.15
   debug: ^4.4.3
   '@types/debug': '^4.1.12'
 
-catalogs:
-  react18:
-    '@types/react': ^18.3.23
-    '@types/react-dom': ^18.3.7
-    react: ^18.3.1
-    react-dom: ^18.3.1
-
 ignoredBuiltDependencies:
   - core-js-pure
-
-# This is needed so that the React 18 fixture doesn't clobber React 19 in every other fixture. We can remove this once we've dropped React 18 support.
-injectWorkspacePackages: true
 
 linkWorkspacePackages: deep
 
@@ -49,6 +39,3 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
-
-syncInjectedDepsAfterScripts:
-  - build

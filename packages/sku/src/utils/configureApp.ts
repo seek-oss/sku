@@ -1,4 +1,4 @@
-import { getPathFromCwd, writeFileToCWD } from '@sku-lib/utils';
+import { getPathFromCwd, writeFileToCWD } from '@sku-private/utils';
 
 import { rm } from 'node:fs/promises';
 import path from 'node:path';

@@ -10,11 +10,11 @@ import { getAppHosts } from '../../../../context/hosts.js';
 import isCI from '../../../../utils/isCI.js';
 import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
 import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';
-import { serverUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-private/utils';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('../../entries/vite-client.js');
+const clientEntry = require.resolve('#entries/vite-client');
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 

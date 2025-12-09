@@ -1,7 +1,7 @@
 import { resolve, basename } from 'node:path';
 import { styleText } from 'node:util';
 import { existsSync, mkdirSync } from 'node:fs';
-import { isEmptyDir, cwd, getRunCommand, banner } from '@sku-lib/utils';
+import { isEmptyDir, cwd, getRunCommand, banner } from '@sku-private/utils';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
 import { installDependencies } from '../services/install.js';

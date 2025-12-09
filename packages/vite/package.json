@@ -2,16 +2,12 @@
   "name": "@sku-lib/vite",
   "version": "1.0.0",
   "description": "Loadable components for sku vite",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
-    "./loadable": {
-      "types": "./dist/loadable/index.d.ts",
-      "default": "./dist/loadable/index.js"
-    },
-    "./collector": {
-      "types": "./dist/loadable/collector.d.ts",
-      "default": "./dist/loadable/collector.js"
-    },
+    "./collector": "./dist/collector.mjs",
+    "./loadable": "./dist/loadable.mjs",
     "./package.json": "./package.json"
   },
   "engines": {
@@ -22,7 +18,6 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {
@@ -40,6 +35,7 @@
     "debug": "catalog:"
   },
   "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
     "@types/debug": "catalog:",
     "@types/react": "catalog:",
     "vite": "catalog:",

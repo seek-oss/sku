@@ -8,8 +8,11 @@
     "url": "git+https://github.com/seek-oss/sku.git",
     "directory": "packages/babel-plugin-display-name"
   },
+  "main": "./dist/plugin.mjs",
+  "module": "./dist/plugin.mjs",
+  "types": "./dist/plugin.d.mts",
   "exports": {
-    ".": "./dist/plugin.js",
+    ".": "./dist/plugin.mjs",
     "./package.json": "./package.json"
   },
   "files": [
@@ -18,14 +21,12 @@
   "engines": {
     "node": ">=22.19.0"
   },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
-  },
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.27.1",
     "@babel/core": "^7.28.5"
   },
   "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
     "@babel/preset-react": "^7.28.5",
     "@types/babel__core": "^7.20.5",
     "@types/babel__helper-plugin-utils": "^7.10.3"

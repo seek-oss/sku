@@ -1,4 +1,4 @@
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 import { createRequire } from 'node:module';
 
 export const resolvePolyfills = (polyfills: string[]): string[] => {

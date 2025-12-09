@@ -1,4 +1,4 @@
-import { isYarn, getCommand } from '@sku-lib/utils';
+import { isYarn, getCommand } from '@sku-private/utils';
 import { lintExtensions } from '../services/eslint/lint.js';
 import type { Configuration } from 'lint-staged';
 

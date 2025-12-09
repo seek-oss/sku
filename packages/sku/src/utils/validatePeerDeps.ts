@@ -1,4 +1,9 @@
-import { getWhyCommand, isPnpm, banner, getPathFromCwd } from '@sku-lib/utils';
+import {
+  getWhyCommand,
+  isPnpm,
+  banner,
+  getPathFromCwd,
+} from '@sku-private/utils';
 
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';

@@ -2,11 +2,6 @@
 // @ts-check
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import debug from 'debug';
-import { styleText } from 'node:util';
-
-/** @param {string} text */
-const bold = (text) => styleText(['bold'], text);
 
 try {
   const initCwd = process.env.INIT_CWD;
@@ -44,51 +39,9 @@ try {
     process.exit();
   }
 
-  // Suppressing eslint. These imports will work after the build steps for postinstall.
-  const [{ setCwd, banner }, { createSkuContext }] = await Promise.all([
-    import('@sku-lib/utils'),
-    import('../dist/context/createSkuContext.js'),
-  ]);
-
-  const log = debug('sku:postinstall');
-
-  setCwd(localCwd);
-
-  if (hasSkuDep) {
-    banner('warning', 'sku dependency detected', [
-      `${bold('sku')} is installed as a ${bold('dependency')} in ${bold(
-        packageJson,
-      )}.`,
-      `${bold('sku')} should be installed in ${bold('devDependencies')}.`,
-    ]);
-  }
-
-  log('postinstall', 'configuring');
-  let configure;
-  try {
-    log('postinstall', 'starting load of configure');
-    configure = (await import('../dist/utils/configureApp.js')).default;
-  } catch (error) {
-    console.error(
-      'An error occurred loading configure script. Please check that sku.config.js is correct and try again.',
-    );
-    console.error(error);
-    process.exit(1);
-  }
-  log('postinstall', 'loaded configure');
-
-  try {
-    log('postinstall', 'running configure');
-    const skuContext = createSkuContext({});
-    configure(skuContext);
-  } catch (error) {
-    console.error(
-      'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',
-    );
-    console.error(error);
-    process.exit(1);
-  }
-  log('postinstall', 'successfully configured');
+  // Ignore eslint. These imports will work after the build steps for postinstall.
+  const { postinstall } = await import('../dist/postinstall.mjs');
+  await postinstall({ localCwd, packageJson, hasSkuDep });
 } catch (error) {
   console.error('An unknown error occurred');
   console.error(error);

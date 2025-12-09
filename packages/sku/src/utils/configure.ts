@@ -1,4 +1,4 @@
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 
 import fs from 'node:fs';
 import { validatePeerDeps as _validatePeerDeps } from './validatePeerDeps.js';

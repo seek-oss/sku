@@ -1,6 +1,6 @@
 import os from 'node:os';
 
-import { requireFromCwd } from '@sku-lib/utils';
+import { requireFromCwd } from '@sku-private/utils';
 import isCI from '../../utils/isCI.js';
 import provider from './provider.js';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };

@@ -1,6 +1,8 @@
 {
-  "name": "@sku-lib/utils",
-  "version": "1.1.1",
+  "name": "@sku-private/utils",
+  "main": "src/index.ts",
+  "version": "0.0.0",
+  "private": true,
   "description": "Shared utilities for sku packages",
   "type": "module",
   "repository": {
@@ -8,18 +10,8 @@
     "url": "git+https://github.com/seek-oss/sku.git",
     "directory": "packages/utils"
   },
-  "exports": {
-    ".": "./dist/index.js",
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist"
-  ],
   "engines": {
     "node": ">=22.19.0"
-  },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json"
   },
   "dependencies": {
     "chalk": "^5.3.0",

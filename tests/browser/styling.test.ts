@@ -20,7 +20,7 @@ describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     it('should create valid app', async () => {
@@ -72,9 +72,7 @@ describe('styling', () => {
         '--port',
         storybookPort.toString(),
       ]);
-      expect(
-        await storybook.findByText(storybookStartedRegex),
-      ).toBeInTheConsole();
+      await storybook.findByText(storybookStartedRegex);
     });
 
     afterAll(async () => {

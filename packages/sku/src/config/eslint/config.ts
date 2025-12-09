@@ -1,4 +1,3 @@
-// @ts-expect-error `eslint-config-seek` has no types yet
 import eslintConfigSeek from 'eslint-config-seek';
 import type { Linter } from 'eslint';
 
@@ -15,7 +14,7 @@ export const createEslintConfig = ({
   const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;
 
-  const _eslintConfigSku = [
+  const _eslintConfigSku: Linter.Config[] = [
     createEslintIgnoresConfig({
       hasLanguagesConfig: Boolean(languages && languages.length > 0),
       target: relativeTarget,
@@ -23,7 +22,8 @@ export const createEslintConfig = ({
     ...eslintConfigSeek,
     createImportOrderConfig(skuContext),
     ...(eslintIgnore && eslintIgnore.length > 0
-      ? [{ ignores: eslintIgnore }]
+      ? // Spread here to turn a read-only array into a mutable one
+        [{ ignores: [...eslintIgnore] }]
       : []),
   ];
 

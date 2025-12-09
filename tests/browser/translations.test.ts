@@ -1,11 +1,10 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
   scopeToFixture,
-  cleanup,
   skipCleanup,
 } from '@sku-private/testing-library';
 
@@ -22,13 +21,11 @@ describe('translations', () => {
 
     beforeAll(async () => {
       const build = await sku('build', args[bundler]);
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      expect(await serve.findByText('Server started')).toBeInTheConsole();
+      await serve.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should render en', async ({ task }) => {
       skipCleanup(task.id);

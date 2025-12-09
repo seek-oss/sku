@@ -18,7 +18,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     afterAll(async () => {
@@ -45,9 +45,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       const buildSsr = await sku('build-ssr', ['--config=sku-ssr.config.ts']);
-      expect(
-        await buildSsr.findByText('Sku build complete'),
-      ).toBeInTheConsole();
+      await buildSsr.findByText('Sku build complete');
     });
 
     afterAll(async () => {

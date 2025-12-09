@@ -1,4 +1,4 @@
-import { describe, beforeAll, it, afterAll, vi, expect } from 'vitest';
+import { describe, beforeAll, it, vi, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/playwright';
@@ -48,12 +48,8 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it('should return development seekAnz site', async ({ task }) => {
         skipCleanup(task.id);
@@ -82,10 +78,10 @@ describe('braid-design-system', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        await serve.findByText('Server started');
 
         return cleanup;
       });

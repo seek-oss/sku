@@ -23,7 +23,7 @@ describe('report-generation', () => {
         rm(reportDir, { recursive: true, force: true });
 
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
       });
 
       it('should generate bundle analysis report', async () => {

@@ -1,10 +1,9 @@
-import { describe, beforeAll, afterAll, it, expect, beforeEach } from 'vitest';
+import { describe, beforeAll, it, expect, beforeEach } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
@@ -30,13 +29,8 @@ describe('security-controls', () => {
           '--strict-port',
           `--port=${port}`,
         ]);
-
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it('should start an app with security controls', async () => {
         const app = await getAppSnapshot({
@@ -52,8 +46,7 @@ describe('security-controls', () => {
 
       beforeAll(async () => {
         const build = await sku('build', [...args[bundler]]);
-
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
       });
 
       beforeEach(async () => {
@@ -91,8 +84,7 @@ describe('security-controls', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-server.config.ts']);
-
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     it('should start a server with content-security-policies', async () => {

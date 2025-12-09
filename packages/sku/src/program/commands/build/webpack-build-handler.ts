@@ -39,8 +39,6 @@ export const webpackBuildHandler = async ({
     await cleanTargetDirectory(paths.target);
 
     const compiler = webpack(
-      // @ts-expect-error Tiny incompatibility between the Configuration and NormalizedWebpackOptions types.
-      // Not really worth fixing as this code will eventually be removed when we move to Vite.
       makeWebpackConfig({
         htmlRenderPlugin: !isLibrary
           ? createHtmlRenderPlugin({

@@ -6,7 +6,7 @@ import {
   configure,
   scopeToFixture,
   skipCleanup,
-  waitFor,
+  hasExitSuccessfully,
 } from '@sku-private/testing-library';
 
 const storybookStartedRegex =
@@ -43,9 +43,7 @@ describe('storybook-config', () => {
         '--port',
         port.toString(),
       ]);
-      expect(
-        await storybook.findByText(storybookStartedRegex),
-      ).toBeInTheConsole();
+      await storybook.findByText(storybookStartedRegex);
     });
 
     afterAll(async () => {
@@ -139,17 +137,10 @@ describe('storybook-config', () => {
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
-
-      await waitFor(async () => {
-        expect(storybook.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
-      });
+      await hasExitSuccessfully(storybook);
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      expect(
-        await assetServer.findByText('serving storybook-static'),
-      ).toBeInTheConsole();
+      await assetServer.findByText('serving storybook-static');
     });
 
     afterAll(async () => {

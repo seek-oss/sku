@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -6,7 +6,6 @@ import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -30,9 +29,7 @@ describe('sku-with-https', () => {
     describe('start', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
 
       it('should start a development server', async ({ task }) => {
@@ -69,13 +66,11 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      expect(await serve.findByText('Server started')).toBeInTheConsole();
+      await serve.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);

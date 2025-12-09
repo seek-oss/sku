@@ -23,6 +23,9 @@ catalog:
   debug: ^4.4.3
   '@types/debug': '^4.1.12'
 
+overrides:
+  esbuild: ~0.27.0
+
 ignoredBuiltDependencies:
   - core-js-pure
 

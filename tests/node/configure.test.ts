@@ -1,10 +1,4 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  it,
-  expect as globalExpect,
-} from 'vitest';
+import { describe, beforeAll, afterAll, it } from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
@@ -12,6 +6,7 @@ import * as jsonc from 'jsonc-parser';
 import prettierConfig from '../../packages/sku/dist/config/prettier.mjs';
 
 import {
+  hasExitSuccessfully,
   type RenderResult,
   scopeToFixture,
   waitFor,
@@ -61,9 +56,7 @@ describe('configure', () => {
         cwd: './App',
       });
 
-      await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
-      });
+      await hasExitSuccessfully(configure);
     });
 
     afterAll(async () => {
@@ -122,9 +115,7 @@ describe('configure', () => {
         cwd: './TSApp',
       });
 
-      await waitFor(() => {
-        globalExpect(configure.hasExit()).toMatchObject({ exitCode: 0 });
-      });
+      await hasExitSuccessfully(configure);
     });
 
     afterAll(async () => {

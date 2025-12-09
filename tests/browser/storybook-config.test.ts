@@ -6,7 +6,6 @@ import {
   configure,
   scopeToFixture,
   skipCleanup,
-  waitFor,
   hasExitSuccessfully,
 } from '@sku-private/testing-library';
 

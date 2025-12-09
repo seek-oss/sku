@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @ts-nocheck
+// @ts-check
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 

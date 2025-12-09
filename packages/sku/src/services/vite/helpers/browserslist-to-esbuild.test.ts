@@ -25,13 +25,13 @@ test('works by passing browsers as string', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome141",
+      "chrome142",
       "edge141",
-      "firefox143",
+      "firefox144",
       "ie10",
       "ios18.5",
       "opera121",
-      "safari26",
+      "safari26.1",
     ]
   `);
 });
@@ -72,7 +72,7 @@ test('safari TP defaults to latest safari', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "safari26.1",
+      "safari26.2",
     ]
   `);
 });

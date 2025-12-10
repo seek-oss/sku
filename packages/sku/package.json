@@ -132,7 +132,7 @@
     "ensure-gitignore": "^1.1.2",
     "escape-string-regexp": "^5.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.4.0",
+    "eslint-config-seek": "^15.0.0",
     "estree-walker": "^3.0.3",
     "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",

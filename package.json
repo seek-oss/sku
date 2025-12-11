@@ -57,7 +57,7 @@
     "debug": "catalog:",
     "dedent": "^1.5.1",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^15.0.0",
+    "eslint-config-seek": "^15.0.1",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-jsdoc": "^61.4.1",
     "eslint-plugin-n": "^17.21.0",

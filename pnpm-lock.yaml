@@ -90,8 +90,8 @@ importers:
         specifier: ^9.10.0
         version: 9.39.1(jiti@2.6.1)
       eslint-config-seek:
-        specifier: ^15.0.0
-        version: 15.0.0(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: ^15.0.1
+        version: 15.0.1(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
       eslint-import-resolver-typescript:
         specifier: ^4.4.4
         version: 4.4.4(eslint-plugin-import-x@4.16.1(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))
@@ -1154,8 +1154,8 @@ importers:
         specifier: ^9.10.0
         version: 9.39.1(jiti@2.6.1)
       eslint-config-seek:
-        specifier: ^15.0.0
-        version: 15.0.0(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: ^15.0.1
+        version: 15.0.1(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
       estree-walker:
         specifier: ^3.0.3
         version: 3.0.3
@@ -5577,8 +5577,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-seek@15.0.0:
-    resolution: {integrity: sha512-u4Qsbl2C1T1dGwOAt9wJLBRErJCaQ2J4yHPodDq0dh1MqFM8TlbL5lhquCt+RMX0M+9+94uhlZ99kvBzA0WMqQ==}
+  eslint-config-seek@15.0.1:
+    resolution: {integrity: sha512-VNABEF8zoLC20zJ42lsWdaQww40HoE0n4JQxKxOV1Y/OWVBxhYDCk3XBobQi4Uqy25iinv9HtjrJep7HQnYQFg==}
     engines: {node: '>=22.21.1'}
     peerDependencies:
       eslint: '>=9.22.0'
@@ -14196,7 +14196,7 @@ snapshots:
     dependencies:
       eslint: 9.39.1(jiti@2.6.1)
 
-  eslint-config-seek@15.0.0(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2)):
+  eslint-config-seek@15.0.1(@typescript-eslint/eslint-plugin@8.49.0(@typescript-eslint/parser@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.49.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(jest@30.2.0(@types/node@22.19.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.1)))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
       '@vitest/eslint-plugin': 1.5.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.15(@types/node@22.19.2)(jiti@2.6.1)(jsdom@26.1.0)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))
       eslint: 9.39.1(jiti@2.6.1)

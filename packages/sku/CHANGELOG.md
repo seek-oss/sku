@@ -1,5 +1,20 @@
 # sku
 
+## 15.6.0
+
+### Minor Changes
+
+- Use `vitest`-specific ESLint rules when `testRunner: 'vitest'` is configured ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers using `vitest` may see new ESLint rules applied to their codebase.
+  Previously `jest` rules were always applied regardless of the configured test runner.
+
+- Update `eslint-config-seek` to `^15.0.0` ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers may see new linting errors or warnings. Some of these may be auto-fixable via `sku format`, but others may require manual intervention. Please see the [`eslint-config-seek` changelog] for more information.
+
+  [`eslint-config-seek` changelog]: https://github.com/seek-oss/eslint-config-seek/blob/master/CHANGELOG.md#1500
+
 ## 15.5.0
 
 ### Minor Changes

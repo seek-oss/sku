@@ -85,6 +85,30 @@ describe('lint-format', () => {
         await lint.findByText("To fix this issue, run 'pnpm run format'"),
       ).toBeInTheConsole();
     });
+
+    it('should use vitest lint rules when test runner is vitest', async () => {
+      const fileName = 'utils.test.ts';
+      const fileContents = dedent /* ts */ `
+        console.log('foo');
+
+        it.only('should test something', () => {
+          let foo = true;
+
+          expect(foo).toBe(true);
+        });\n`;
+      await fs.writeFile(testFile(fileName), fileContents);
+
+      const lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
+      expect(
+        await lint.findByText('Checking code with ESLint'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByText('3 problems (3 errors, 0 warnings)'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByText('vitest/no-focused-tests'),
+      ).toBeInTheConsole();
+    });
   });
 
   describe('sku format', () => {

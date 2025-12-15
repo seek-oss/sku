@@ -44,9 +44,10 @@ const getPackageManagerFromUserAgent = () => {
   return { packageManager, version };
 };
 
+// lockfiles should be ordered by priority, highest priority first.
 const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
-  yarn: 'yarn.lock',
   pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
   npm: 'package-lock.json',
 };
 
@@ -61,7 +62,13 @@ const resolvePackageManager = () => {
   );
 
   const lockFile = lockfileByPackageManager[packageManager];
-  const lockFilePath = findUpSync(lockFile);
+  const lockFilePath = findUpSync(Object.values(lockfileByPackageManager));
+
+  if (lockFilePath && !lockFilePath.includes(lockFile)) {
+    console.warn(
+      `Lockfile mismatch: ${lockFilePath} is not a valid lockfile for ${packageManager}`,
+    );
+  }
 
   // No root found (occurs during `sku init`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;

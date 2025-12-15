@@ -4,8 +4,15 @@ import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
 import { createRequire } from 'node:module';
 
-import { toPosixPath, rootDir, isPnpm, banner } from '@sku-private/utils';
+import {
+  toPosixPath,
+  rootDir,
+  isPnpm,
+  banner,
+  packageManager,
+} from '@sku-private/utils';
 import { existsSync } from 'node:fs';
+import { styleText } from 'node:util';
 
 const debug = _debug('sku:compilePackages');
 
@@ -26,9 +33,10 @@ if (rootDir) {
     if (hasPnpmVirtualStore && !isPnpm) {
       banner(
         'error',
-        'pnpm virtual store found, but another package manager is in use',
+        `${styleText('bold', 'pnpm')} virtual store found, but ${styleText('bold', packageManager)} is in use`,
         [
           'Please use pnpm to build your project or remove the `node_modules/.pnpm` directory.',
+          'Different package managers expect different `node_modules` structures.',
           'Running commands with a different package manager may cause unexpected behaviour.',
         ],
       );

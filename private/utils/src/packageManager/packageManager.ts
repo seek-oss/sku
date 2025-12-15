@@ -69,7 +69,7 @@ const resolvePackageManager = () => {
     console.warn(
       styleText(
         'yellow',
-        `Lockfile mismatch: ${styleText('bold', lockFilePath.split(path.sep).slice(-1)[0])} is not a valid lockfile for ${styleText('bold', packageManager)}`,
+        `Lockfile mismatch: ${styleText('bold', path.basename(lockFilePath))} is not a valid lockfile for ${styleText('bold', packageManager)}`,
       ),
     );
   }

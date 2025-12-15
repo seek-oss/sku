@@ -12,7 +12,6 @@ import {
   packageManager,
 } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
-import { styleText } from 'node:util';
 
 const debug = _debug('sku:compilePackages');
 

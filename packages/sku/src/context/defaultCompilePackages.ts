@@ -33,7 +33,7 @@ if (rootDir) {
     if (hasPnpmVirtualStore && !isPnpm) {
       banner(
         'error',
-        `${styleText('bold', 'pnpm')} virtual store found, but ${styleText('bold', packageManager)} is in use`,
+        `pnpm virtual store found, but ${packageManager} is in use`,
         [
           'Please use pnpm to build your project or remove the `node_modules/.pnpm` directory.',
           'Different package managers expect different `node_modules` structures.',

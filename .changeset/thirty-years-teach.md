@@ -2,7 +2,7 @@
 'sku': patch
 ---
 
-Warn if pnpm virtual store is found with another package manager in use
+Warn if pnpm virtual store is found when another package manager in use
 
 When a `pnpm` virtual store directory (`node_modules/.pnpm`) is detected but a different package manager (such as npm or yarn) is in use, a warning will now be printed, but the build will continue.
 

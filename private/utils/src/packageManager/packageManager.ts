@@ -1,5 +1,6 @@
 import { findUpSync } from 'find-up';
-import { dirname } from 'node:path';
+import path, { dirname } from 'node:path';
+import { styleText } from 'node:util';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
@@ -61,12 +62,15 @@ const resolvePackageManager = () => {
     userAgentPackageManager.packageManager,
   );
 
-  const lockFile = lockfileByPackageManager[packageManager];
+  const expectedLockfile = lockfileByPackageManager[packageManager];
   const lockFilePath = findUpSync(Object.values(lockfileByPackageManager));
 
-  if (lockFilePath && !lockFilePath.includes(lockFile)) {
+  if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
     console.warn(
-      `Lockfile mismatch: ${lockFilePath} is not a valid lockfile for ${packageManager}`,
+      styleText(
+        'yellow',
+        `Lockfile mismatch: ${styleText('bold', lockFilePath.split(path.sep).slice(-1)[0])} is not a valid lockfile for ${styleText('bold', packageManager)}`,
+      ),
     );
   }
 

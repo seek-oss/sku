@@ -1,5 +1,28 @@
 # sku
 
+## 15.6.0
+
+### Minor Changes
+
+- Use `vitest`-specific ESLint rules when `testRunner: 'vitest'` is configured ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers using `vitest` may see new ESLint rules applied to their codebase.
+  Previously `jest` rules were always applied regardless of the configured test runner.
+
+- Update `eslint-config-seek` to `^15.0.0` ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers may see new linting errors or warnings. Some of these may be auto-fixable via `sku format`, but others may require manual intervention. Please see the [`eslint-config-seek` changelog] for more information.
+
+  [`eslint-config-seek` changelog]: https://github.com/seek-oss/eslint-config-seek/blob/master/CHANGELOG.md#1500
+
+### Patch Changes
+
+- Warn if pnpm virtual store is found when another package manager in use ([#1469](https://github.com/seek-oss/sku/pull/1469))
+
+  When a `pnpm` virtual store directory (`node_modules/.pnpm`) is detected but a different package manager (such as npm or yarn) is in use, a warning will now be printed, but the build will continue.
+
+  **Note:** This behavior is only temporary and is _not recommended_; mixing package managers in a project can cause unexpected issues. Please migrate to a consistent package manager as soon as possible. This warning may become a hard error in a future release.
+
 ## 15.5.0
 
 ### Minor Changes

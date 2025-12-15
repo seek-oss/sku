@@ -1456,7 +1456,7 @@ importers:
     devDependencies:
       '@prettier/sync':
         specifier: ^0.6.1
-        version: 0.6.1(prettier@3.7.4)
+        version: 0.6.1(prettier@3.6.2)
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../test-utils
@@ -11387,10 +11387,10 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@prettier/sync@0.6.1(prettier@3.7.4)':
+  '@prettier/sync@0.6.1(prettier@3.6.2)':
     dependencies:
       make-synchronized: 0.8.0
-      prettier: 3.7.4
+      prettier: 3.6.2
 
   '@quansync/fs@1.0.0':
     dependencies:

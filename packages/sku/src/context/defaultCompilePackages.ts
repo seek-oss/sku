@@ -4,7 +4,8 @@ import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
 import { createRequire } from 'node:module';
 
-import { toPosixPath, rootDir, isPnpm } from '@sku-private/utils';
+import { toPosixPath, rootDir, isPnpm, banner } from '@sku-private/utils';
+import { existsSync } from 'node:fs';
 
 const debug = _debug('sku:compilePackages');
 
@@ -16,10 +17,27 @@ let detectedCompilePackages: string[] = [];
 // package manager. In either case, we can't correctly detect compile packages.
 if (rootDir) {
   try {
+    const pnpmVirtualStorePath = path.join(
+      toPosixPath(rootDir),
+      'node_modules/.pnpm',
+    );
+    const hasPnpmVirtualStore = existsSync(pnpmVirtualStorePath);
+
+    if (hasPnpmVirtualStore && !isPnpm) {
+      banner(
+        'error',
+        'pnpm virtual store found, but another package manager is in use',
+        [
+          'Please use pnpm to build your project or remove the `node_modules/.pnpm` directory.',
+          'Running commands with a different package manager may cause unexpected behaviour.',
+        ],
+      );
+    }
+
     // Always use full paths so we don't need to worry about joining paths later
     let crawler = new Fdir().withFullPaths();
 
-    if (isPnpm) {
+    if (hasPnpmVirtualStore) {
       // Follow symlinks inside node_modules into the pnpm virtual store
       crawler = crawler.withSymlinks();
     }
@@ -31,12 +49,7 @@ if (rootDir) {
       .crawl('./node_modules/@seek')
       .sync();
 
-    if (isPnpm) {
-      const pnpmVirtualStorePath = path.join(
-        toPosixPath(rootDir),
-        'node_modules/.pnpm',
-      );
-
+    if (hasPnpmVirtualStore) {
       const pnpmVirtualStoreRelativePath = path.relative(
         '.',
         pnpmVirtualStorePath,

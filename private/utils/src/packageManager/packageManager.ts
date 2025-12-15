@@ -3,7 +3,6 @@ import { dirname } from 'node:path';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
-import { getPackageManager } from './context.js';
 import semver from 'semver';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
@@ -52,14 +51,13 @@ const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
 };
 
 /**
- * Get the package manager and root directory of the project. The package manager is derived from
- * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
+ * Get the package manager and root directory of the project.
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const resolvePackageManager = () => {
   const userAgentPackageManager = getPackageManagerFromUserAgent();
   const packageManager = validatePackageManager(
-    getPackageManager() || userAgentPackageManager.packageManager,
+    userAgentPackageManager.packageManager,
   );
 
   const lockFile = lockfileByPackageManager[packageManager];

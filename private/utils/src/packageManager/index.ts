@@ -1,4 +1,3 @@
-export { getPackageManager, setPackageManager } from './context.js';
 export {
   rootDir,
   packageManager,

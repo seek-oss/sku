@@ -1,9 +1,9 @@
 import { findUpSync } from 'find-up';
-import { dirname } from 'node:path';
+import path, { dirname } from 'node:path';
+import { styleText } from 'node:util';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
-import { getPackageManager } from './context.js';
 import semver from 'semver';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
@@ -45,25 +45,34 @@ const getPackageManagerFromUserAgent = () => {
   return { packageManager, version };
 };
 
+// lockfiles should be ordered by priority, highest priority first.
 const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
-  yarn: 'yarn.lock',
   pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
   npm: 'package-lock.json',
 };
 
 /**
- * Get the package manager and root directory of the project. The package manager is derived from
- * the `packageManager` CLI argument if present, falling back to the `npm_config_user_agent` envar.
+ * Get the package manager and root directory of the project.
  * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const resolvePackageManager = () => {
   const userAgentPackageManager = getPackageManagerFromUserAgent();
   const packageManager = validatePackageManager(
-    getPackageManager() || userAgentPackageManager.packageManager,
+    userAgentPackageManager.packageManager,
   );
 
-  const lockFile = lockfileByPackageManager[packageManager];
-  const lockFilePath = findUpSync(lockFile);
+  const expectedLockfile = lockfileByPackageManager[packageManager];
+  const lockFilePath = findUpSync(Object.values(lockfileByPackageManager));
+
+  if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
+    console.warn(
+      styleText(
+        'yellow',
+        `Lockfile mismatch: ${styleText('bold', path.basename(lockFilePath))} is not a valid lockfile for ${styleText('bold', packageManager)}`,
+      ),
+    );
+  }
 
   // No root found (occurs during `sku init`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;

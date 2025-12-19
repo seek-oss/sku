@@ -47,12 +47,13 @@ describe('sku-with-https', () => {
   describe('webpack start with ESM middleware', async () => {
     const port = await getPort();
     const url = `https://localhost:${port}`;
+    const portArgs = ['--strict-port', `--port=${port}`];
+
     beforeAll(async () => {
       const start = await sku('start', [
         '--config',
         'sku.config.esm-middleware.mjs',
-        '--strict-port',
-        `--port=${port}`,
+        ...portArgs,
       ]);
       await start.findByText('Starting development server');
     });

@@ -33,11 +33,9 @@ describe('sku-with-https', () => {
       });
 
       it('should start a development server', async ({ task }) => {
-        skipCleanup(task.id);
         const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot('homepage');
 
-        skipCleanup(task.id);
         const middlewareSnapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
         });
@@ -60,11 +58,9 @@ describe('sku-with-https', () => {
     });
 
     it('should start a development server', async ({ task }) => {
-      skipCleanup(task.id);
       const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot('homepage');
 
-      skipCleanup(task.id);
       const middlewareSnapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
       });

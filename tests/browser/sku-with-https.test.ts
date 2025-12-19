@@ -32,7 +32,7 @@ describe('sku-with-https', () => {
         await start.findByText('Starting development server');
       });
 
-      it('should start a development server', async ({ task }) => {
+      it('should start a development server', async () => {
         const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot('homepage');
 
@@ -58,7 +58,7 @@ describe('sku-with-https', () => {
       await start.findByText('Starting development server');
     });
 
-    it('should start a development server', async ({ task }) => {
+    it('should start a development server', async () => {
       const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot('homepage');
 

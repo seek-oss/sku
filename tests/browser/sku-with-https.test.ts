@@ -32,17 +32,40 @@ describe('sku-with-https', () => {
         await start.findByText('Starting development server');
       });
 
-      it('should start a development server', async ({ task }) => {
-        skipCleanup(task.id);
+      it('should start a development server', async () => {
         const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot('homepage');
 
-        skipCleanup(task.id);
         const middlewareSnapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
         });
         expect(middlewareSnapshot).toMatchSnapshot('middleware');
       });
+    });
+  });
+
+  describe('webpack start with ESM middleware', async () => {
+    const port = await getPort();
+    const url = `https://localhost:${port}`;
+    const portArgs = ['--strict-port', `--port=${port}`];
+
+    beforeAll(async () => {
+      const start = await sku('start', [
+        '--config',
+        'sku.config.esm-middleware.mjs',
+        ...portArgs,
+      ]);
+      await start.findByText('Starting development server');
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot({ url });
+      expect(snapshot).toMatchSnapshot('homepage');
+
+      const middlewareSnapshot = await getAppSnapshot({
+        url: `${url}/test-middleware`,
+      });
+      expect(middlewareSnapshot).toMatchSnapshot('esm middleware');
     });
   });
 

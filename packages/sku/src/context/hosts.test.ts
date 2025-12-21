@@ -106,16 +106,16 @@ describe('setupHosts', () => {
       .fn(async () => {})
       .mockRejectedValue(new Error('Failed to set hosts'));
 
-    await expect(async () => {
-      await setupHosts({
+    await expect(
+      setupHosts({
         getSystemHosts: async () => [],
         setSystemHost: mockSetHosts,
       })({
         ...context,
         sites: [],
         hosts: ['dev.seek.com'],
-      });
-    }).rejects.toThrow('Failed to set hosts');
+      }),
+    ).rejects.toThrow('Failed to set hosts');
   });
 });
 

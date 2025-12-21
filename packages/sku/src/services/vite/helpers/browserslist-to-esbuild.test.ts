@@ -27,10 +27,10 @@ test('works by passing browsers as string', () => {
     [
       "chrome142",
       "edge142",
-      "firefox144",
+      "firefox145",
       "ie10",
-      "ios18.5",
-      "opera121",
+      "ios26.1",
+      "opera124",
       "safari26.1",
     ]
   `);
@@ -51,7 +51,7 @@ test('works with android and ios', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome142",
+      "chrome143",
       "ios11",
     ]
   `);
@@ -62,7 +62,7 @@ test('no support for android 4', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome142",
+      "chrome143",
     ]
   `);
 });

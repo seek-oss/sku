@@ -10,14 +10,14 @@
     "start:asset-server": "http-server storybook-static -p 4232 --cors"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "^9.1.1",
-    "@storybook/addon-webpack5-compiler-babel": "^3.0.6",
-    "@storybook/react-webpack5": "^9.1.1",
+    "@storybook/addon-docs": "^10.0.0",
+    "@storybook/addon-webpack5-compiler-babel": "^4.0.0",
+    "@storybook/react-webpack5": "^10.0.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",
     "sku": "workspace:*",
-    "storybook": "^9.1.1",
+    "storybook": "^10.0.0",
     "http-server": "^14.1.1"
   },
   "skuSkipValidatePeerDeps": true

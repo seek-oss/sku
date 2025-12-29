@@ -9,8 +9,7 @@ import {
   hasExitSuccessfully,
 } from '@sku-private/testing-library';
 
-const storybookStartedRegex =
-  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+const storybookStartedRegex = /Storybook ready!/;
 
 const timeout = 150_000;
 
@@ -24,6 +23,7 @@ vi.setConfig({
 });
 
 const { exec } = scopeToFixture('storybook-config');
+
 describe('storybook-config', () => {
   describe('start', () => {
     const port = 8089;

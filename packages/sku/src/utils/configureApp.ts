@@ -1,4 +1,10 @@
-import { getPathFromCwd, writeFileToCWD } from '@sku-private/utils';
+import {
+  getPathFromCwd,
+  isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
+  writeFileToCWD,
+  rootDir,
+} from '@sku-private/utils';
 
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -22,6 +28,8 @@ import getCertificate from './certificate.js';
 
 import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
+import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
+import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 
 const coverageFolder = 'coverage';
 

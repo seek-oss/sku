@@ -157,23 +157,18 @@ export default async (skuContext: SkuContext) => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  /**
-   * ! The following code has been intentionally disabled because `configDependencies` cause issues with Renovate/Mend, leading to no automated dependency updates.
-   * ! Once this issue is resolved, we can re-enable this code.
-   * ! @see https://github.com/renovatebot/renovate/discussions/38237
-   */
   // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's package manager
-  // if (rootDir && isAtLeastPnpmV10()) {
-  //   const pnpmConfigDependencies = await getPnpmConfigDependencies();
+  if (rootDir && isAtLeastPnpmV10()) {
+    const pnpmConfigDependencies = await getPnpmConfigDependencies();
 
-  //   const hasRecommendedPnpmVersionInstalled =
-  //     isAtLeastRecommendedPnpmVersion();
-  //   const pnpmPluginSkuInstalled =
-  //     pnpmConfigDependencies.includes('pnpm-plugin-sku');
+    const hasRecommendedPnpmVersionInstalled =
+      isAtLeastRecommendedPnpmVersion();
+    const pnpmPluginSkuInstalled =
+      pnpmConfigDependencies.includes('pnpm-plugin-sku');
 
-  //   await validatePnpmConfig({
-  //     hasRecommendedPnpmVersionInstalled,
-  //     pnpmPluginSkuInstalled,
-  //   });
-  // }
+    await validatePnpmConfig({
+      hasRecommendedPnpmVersionInstalled,
+      pnpmPluginSkuInstalled,
+    });
+  }
 };

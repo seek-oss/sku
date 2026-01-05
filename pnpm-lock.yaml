@@ -49,6 +49,8 @@ catalogs:
 overrides:
   esbuild: ~0.27.0
 
+pnpmfileChecksum: sha256-BJdU5A0PR48f+qVWdlca0zjt2m4OSJwKkKWHz8OgDE0=
+
 importers:
 
   .:

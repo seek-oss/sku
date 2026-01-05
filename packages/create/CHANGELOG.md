@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.1.5
+
+### Patch Changes
+
+- Install pnpm-plugin-sku on creation ([#1478](https://github.com/seek-oss/sku/pull/1478))
+
 ## 1.1.4
 
 ### Patch Changes

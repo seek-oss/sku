@@ -350,7 +350,9 @@ export function NextSteps({ environment }: NextStepsProps) {
 `;
 
 exports[`create-sku vite > should update the pnpm-workspace.yaml 1`] = `
-"{}
+"
+configDependencies:
+  pnpm-plugin-sku: VERSION_IGNORED
 "
 `;
 
@@ -693,6 +695,8 @@ export function NextSteps({ environment }: NextStepsProps) {
 `;
 
 exports[`create-sku webpack > should update the pnpm-workspace.yaml 1`] = `
-"{}
+"
+configDependencies:
+  pnpm-plugin-sku: VERSION_IGNORED
 "
 `;

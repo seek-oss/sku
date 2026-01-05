@@ -1,6 +1,7 @@
-import { getAddCommand } from '@sku-private/utils';
+import { getAddCommand, isAtLeastPnpmV10 } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
 import type { Template } from '../types/index.js';
+import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
   'braid-design-system@latest',
@@ -22,11 +23,9 @@ export const installDependencies = async (
 ): Promise<void> => {
   console.log('📦 Installing dependencies...');
 
-  // ! Re-enable this once we've resolved the issue with Renovate/Mend
-  // ! @see https://github.com/renovatebot/renovate/discussions/38237
-  // if (isAtLeastPnpmV10()) {
-  //   await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
-  // }
+  if (isAtLeastPnpmV10()) {
+    await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
+  }
 
   const devDeps = [...COMMON_DEV_DEPENDENCIES];
   if (template === 'vite') {

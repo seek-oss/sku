@@ -13,8 +13,7 @@ const devServerUrl = `http://localhost:${port}`;
 const { sku, exec, fixturePath } = scopeToFixture('styling');
 const distDir = fixturePath('dist');
 
-const storybookStartedRegex =
-  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+const storybookStartedRegex = /Storybook ready!/;
 
 describe('styling', () => {
   describe('build', () => {

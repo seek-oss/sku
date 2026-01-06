@@ -1,9 +1,8 @@
-// @ts-expect-error
+// @ts-expect-error - no types available
 import jsonFilesPlugin from 'eslint-plugin-json-files';
-import type { SkuContext } from '../../context/createSkuContext.js';
 import type { Linter } from 'eslint';
 
-export const createJsonFilesConfig = (_: SkuContext): Linter.Config => ({
+export const createJsonFilesConfig = (): Linter.Config => ({
   plugins: {
     'json-files': jsonFilesPlugin,
   },

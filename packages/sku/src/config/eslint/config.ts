@@ -4,6 +4,7 @@ import { createImportOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { SkuConfig } from '../../types/types.js';
+import { createJsonFilesConfig } from './jsonFiles.js';
 
 export const createEslintConfig = async ({
   configPath,
@@ -26,6 +27,7 @@ export const createEslintConfig = async ({
     }),
     ...eslintConfigSeek,
     createImportOrderConfig(skuContext),
+    createJsonFilesConfig(skuContext),
     ...(eslintIgnore && eslintIgnore.length > 0
       ? // Spread here to turn a read-only array into a mutable one
         [{ ignores: [...eslintIgnore] }]

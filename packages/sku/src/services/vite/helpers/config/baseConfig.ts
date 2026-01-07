@@ -16,7 +16,7 @@ import { vitePluginVocab } from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
 import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
-import { cjsInterop } from '../../plugins/vite-plugin-cjs-interop.js';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 const require = createRequire(import.meta.url);
 

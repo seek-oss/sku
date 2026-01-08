@@ -133,7 +133,6 @@
     "escape-string-regexp": "^5.0.0",
     "eslint": "^9.10.0",
     "eslint-config-seek": "^15.0.4",
-    "eta": "^3.5.0",
     "exception-formatter": "^2.1.2",
     "express": "^4.19.2",
     "fastest-levenshtein": "^1.0.16",

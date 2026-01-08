@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`sort-package-json > sku format > should sort package.json 1`] = `
+{
+  "name": "@sku-fixtures/sort-package-json",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "sku format",
+    "lint": "sku lint"
+  },
+  "dependencies": {
+    "sku": "workspace:*"
+  },
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}
+
+`;
+
+exports[`sort-package-json > sku format > should sort package.json 2`] = `
+{
+  "name": "@sku-fixtures/sort-package-json",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "sku format",
+    "lint": "sku lint"
+  },
+  "dependencies": {
+    "sku": "workspace:*"
+  },
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}
+
+`;

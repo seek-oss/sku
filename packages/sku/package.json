@@ -161,7 +161,7 @@
     "prettier": "~3.6.2",
     "pretty-ms": "^9.2.0",
     "prompts": "^2.4.2",
-    "react-refresh": "^0.17.0",
+    "react-refresh": "^0.18.0",
     "rollup-plugin-visualizer": "^6.0.3",
     "selfsigned": "^3.0.1",
     "semver": "^7.3.4",

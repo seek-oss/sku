@@ -1,5 +1,15 @@
 # sku
 
+## 15.7.1
+
+### Patch Changes
+
+- Re-enable `vite-plugin-cjs-interop` dependency ([#1481](https://github.com/seek-oss/sku/pull/1481))
+
+  Previously, this package was internalised due to a bug. Now that the issue has been resolved upstream, we're reverting to using the official package.
+
+- Fix incorrect hostname matching for `vite` when using non-standard HTTP ports (e.g. in local development). ([#1484](https://github.com/seek-oss/sku/pull/1484))
+
 ## 15.7.0
 
 ### Minor Changes

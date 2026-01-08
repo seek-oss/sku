@@ -1233,9 +1233,6 @@ importers:
       pretty-ms:
         specifier: ^9.2.0
         version: 9.3.0
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
       react-refresh:
         specifier: ^0.18.0
         version: 0.18.0
@@ -1330,9 +1327,6 @@ importers:
       '@types/picomatch':
         specifier: ^4.0.2
         version: 4.0.2
-      '@types/prompts':
-        specifier: ^2.4.9
-        version: 2.4.9
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.7

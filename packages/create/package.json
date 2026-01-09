@@ -24,7 +24,7 @@
   "dependencies": {
     "commander": "catalog:",
     "dedent": "^1.5.1",
-    "eta": "^3.2.0",
+    "eta": "^4.5.0",
     "fdir": "^6.1.1",
     "prompts": "^2.4.2"
   },

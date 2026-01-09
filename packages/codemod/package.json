@@ -4,15 +4,6 @@
   "description": "Codemods for sku",
   "type": "module",
   "bin": "./bin.js",
-  "dependencies": {
-    "@ast-grep/napi": "^0.39.4",
-    "commander": "catalog:",
-    "diff": "^7.0.0",
-    "picocolors": "^1.1.1",
-    "prompts": "^2.4.2",
-    "tinyglobby": "^0.2.13",
-    "debug": "catalog:"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seek-oss/sku.git",
@@ -29,9 +20,17 @@
     "tsconfig.json"
   ],
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
+  "dependencies": {
+    "@ast-grep/napi": "^0.39.4",
+    "commander": "catalog:",
+    "diff": "^8.0.2",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "tinyglobby": "^0.2.13",
+    "debug": "catalog:"
+  },
   "devDependencies": {
     "@sku-private/tsdown": "workspace:*",
-    "@types/diff": "^7.0.1",
     "@types/node": "catalog:",
     "@types/debug": "catalog:",
     "@types/prompts": "^2.4.9",

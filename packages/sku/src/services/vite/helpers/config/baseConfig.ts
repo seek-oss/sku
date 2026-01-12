@@ -14,7 +14,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { vitePluginVocab } from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
-import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
+import { setNoExternal } from '../../plugins/setNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 
@@ -67,7 +67,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
       polyfillsPlugin(skuContext),
-      setSsrNoExternal(skuContext),
+      setNoExternal(skuContext),
     ],
     resolve: {
       alias: {
@@ -109,10 +109,12 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 };
 
 const getVitestBaseConfig = (skuContext: SkuContext): InlineConfig => ({
-  plugins: [tsconfigPaths(), react(), vanillaExtractPlugin()],
-  resolve: {
-    noExternal: skuContext.skuConfig.compilePackages,
-  },
+  plugins: [
+    tsconfigPaths(),
+    react(),
+    setNoExternal(skuContext),
+    vanillaExtractPlugin(),
+  ],
 });
 
 export const createSkuViteConfig = (

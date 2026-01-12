@@ -33,6 +33,9 @@ catalogs:
     debug:
       specifier: ^4.4.3
       version: 4.4.3
+    jiti:
+      specifier: ^2.4.2
+      version: 2.6.1
     react:
       specifier: ^19.1.0
       version: 19.2.3
@@ -1116,9 +1119,6 @@ importers:
       commander:
         specifier: 'catalog:'
         version: 14.0.2
-      compression:
-        specifier: ^1.8.0
-        version: 1.8.1
       cross-spawn:
         specifier: ^7.0.3
         version: 7.0.6
@@ -1192,7 +1192,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1(jest@30.2.0(@types/node@22.19.3)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.2)))
       jiti:
-        specifier: ^2.4.1
+        specifier: 'catalog:'
         version: 2.6.1
       lint-staged:
         specifier: ^16.0.0
@@ -1303,9 +1303,6 @@ importers:
       '@types/babel__traverse':
         specifier: ^7.20.6
         version: 7.28.0
-      '@types/compression':
-        specifier: ^1.7.5
-        version: 1.8.1
       '@types/cross-spawn':
         specifier: ^6.0.3
         version: 6.0.6
@@ -1507,9 +1504,6 @@ importers:
       klaw:
         specifier: ^4.1.0
         version: 4.1.0
-      nano-spawn:
-        specifier: ^2.0.0
-        version: 2.0.0
       prettier:
         specifier: ~3.6.2
         version: 3.6.2
@@ -3709,9 +3703,6 @@ packages:
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
-
-  '@types/compression@1.8.1':
-    resolution: {integrity: sha512-kCFuWS0ebDbmxs0AXYn6e2r2nrGAb5KwQhknjSPSPgJcGd8+HVSILlUyFhGqML2gk39HcG7D1ydW9/qpYkN00Q==}
 
   '@types/connect-history-api-fallback@1.5.4':
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
@@ -11924,11 +11915,6 @@ snapshots:
     dependencies:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
-
-  '@types/compression@1.8.1':
-    dependencies:
-      '@types/express': 4.17.25
-      '@types/node': 25.0.3
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:

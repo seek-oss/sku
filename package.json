@@ -69,13 +69,13 @@
     "tsdown": "^0.16.7",
     "tsx": "^4.19.4",
     "typescript": "~5.9.0",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^6.0.3",
     "vitest": "catalog:"
   },
   "engines": {
     "node": ">=22.19.0"
   },
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.27.0",
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true

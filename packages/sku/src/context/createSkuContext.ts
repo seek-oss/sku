@@ -255,7 +255,6 @@ export const createSkuContext = ({
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
-    skuConfig,
     paths,
     hosts,
     port,

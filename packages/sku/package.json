@@ -207,7 +207,7 @@
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "type-fest": "^4.41.0",
+    "type-fest": "^5.0.0",
     "vitest": "catalog:"
   }
 }

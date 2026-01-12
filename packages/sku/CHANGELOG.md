@@ -1,5 +1,35 @@
 # sku
 
+## 15.7.1
+
+### Patch Changes
+
+- vite|vitest: Ensure compilePackage includes defaults ([#1489](https://github.com/seek-oss/sku/pull/1489))
+
+  Default and automatically resolved compilePackage values are now properly included.
+
+- Remove unused `eta` dependency ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Re-enable `vite-plugin-cjs-interop` dependency ([#1481](https://github.com/seek-oss/sku/pull/1481))
+
+  Previously, this package was internalised due to a bug. Now that the issue has been resolved upstream, we're reverting to using the official package.
+
+- Remove unused `prompts` dependency ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `serialize-javascript` dependency to `^7.0.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `magicast` dependency to `^0.5.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Remove unused `compression` dependency ([#1488](https://github.com/seek-oss/sku/pull/1488))
+
+- Update `webpack-bundle-analyzer` dependency to `^5.1.1` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `react-refresh` dependency to `^0.18.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `vite-tsconfig-paths` dependency to `^6.0.3` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Fix incorrect hostname matching for `vite` when using non-standard HTTP ports (e.g. in local development). ([#1484](https://github.com/seek-oss/sku/pull/1484))
+
 ## 15.7.0
 
 ### Minor Changes

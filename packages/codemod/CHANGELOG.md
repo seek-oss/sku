@@ -1,5 +1,11 @@
 # @sku-lib/codemod
 
+## 1.2.3
+
+### Patch Changes
+
+- Update `diff` dependency to `^8.0.2` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
 ## 1.2.2
 
 ### Patch Changes

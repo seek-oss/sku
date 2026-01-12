@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/codemod",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Codemods for sku",
   "type": "module",
   "bin": "./bin.js",

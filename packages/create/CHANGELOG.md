@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.1.6
+
+### Patch Changes
+
+- Update `eta` dependency to `^4.5.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
 ## 1.1.5
 
 ### Patch Changes

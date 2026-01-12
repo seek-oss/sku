@@ -1179,9 +1179,6 @@ importers:
       html-render-webpack-plugin:
         specifier: ^3.0.1
         version: 3.0.2(express@4.22.1)
-      indent-string:
-        specifier: ^5.0.0
-        version: 5.0.0
       jest:
         specifier: ^30.0.0
         version: 30.2.0(@types/node@22.19.3)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.27.2))
@@ -1212,9 +1209,6 @@ importers:
       open:
         specifier: ^10.1.2
         version: 10.2.0
-      package-manager-detector:
-        specifier: ^0.2.0
-        version: 0.2.11
       path-to-regexp:
         specifier: ^6.2.0
         version: 6.3.0
@@ -1284,9 +1278,6 @@ importers:
       webpack-node-externals:
         specifier: ^3.0.0
         version: 3.0.0
-      wrap-ansi:
-        specifier: ^9.0.0
-        version: 9.0.2
     devDependencies:
       '@sku-private/tsdown':
         specifier: workspace:*

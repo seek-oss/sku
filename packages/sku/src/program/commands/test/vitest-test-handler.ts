@@ -21,11 +21,10 @@ export const vitestHandler = async ({
 
   const results = parseCLI(['vitest', ...args]);
 
-  const overrideableOptions: TestUserConfig =
-    skuContext.skuConfig.dangerouslySetVitestConfig({
-      css: true,
-      environment: 'jsdom',
-    });
+  const overrideableOptions: TestUserConfig = skuContext.vitestDecorator({
+    css: true,
+    environment: 'jsdom',
+  });
   const nonOverrideableOptions: TestUserConfig = {
     // options passed in via the CLI will have priority over `dangerouslySetVitestConfig`
     ...results.options,

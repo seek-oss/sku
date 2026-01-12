@@ -228,6 +228,8 @@ export const createSkuContext = ({
   const jestDecorator = skuConfig.dangerouslySetJestConfig!;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;
+  const viteDecorator = skuConfig.dangerouslySetViteConfig!;
+  const vitestDecorator = skuConfig.dangerouslySetVitestConfig!;
   const eslintIgnore = skuConfig.eslintIgnore!;
   const routes = normalizedRoutes!;
   const environments = skuConfig.environments!;
@@ -265,6 +267,8 @@ export const createSkuContext = ({
     jestDecorator,
     eslintDecorator,
     tsconfigDecorator,
+    viteDecorator,
+    vitestDecorator,
     eslintIgnore,
     tsPaths,
     routes,

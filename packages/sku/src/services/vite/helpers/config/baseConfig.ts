@@ -100,7 +100,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
-      exclude: skuContext.skuConfig.skipPackageCompatibilityCompilation,
+      exclude: skuContext.skipPackageCompatibilityCompilation,
     },
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],

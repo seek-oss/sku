@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint';
-import { packageJsonPlugin, jsonProcessor } from './rules/sort-package-json.js';
+import { packageJsonPlugin, jsonProcessor } from './plugins/package-json.js';
 
 export const createJsonFilesConfig = (): Linter.Config[] => [
   {

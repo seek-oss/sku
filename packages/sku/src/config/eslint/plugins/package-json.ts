@@ -61,7 +61,7 @@ const sortRule = {
 
 /**
  * Processor for JSON files.
- * Simply prefixes the text with the `export default` so it can be parsed by eslint as javascript.
+ * Simply prefixes the text with `export default` so it can be parsed by eslint as javascript.
  */
 export const jsonProcessor: Linter.Processor = {
   meta: {
@@ -74,6 +74,7 @@ export const jsonProcessor: Linter.Processor = {
   },
   postprocess(messages) {
     // May need to filter out messages that are not from the sort-package-json rule if we encounter extra rules running on json files.
+    // Not sure if this is necessary yet, so leaving it for now and just flattening the messages.
     return messages.flat();
   },
   supportsAutofix: true,

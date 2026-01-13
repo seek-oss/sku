@@ -64,6 +64,10 @@ const sortRule = {
  * Simply prefixes the text with the `export default` so it can be parsed by eslint as javascript.
  */
 export const jsonProcessor: Linter.Processor = {
+  meta: {
+    name: 'json-processor',
+    version: '1.0.0',
+  },
   preprocess(text) {
     const prefix = 'export default ';
     return [`${prefix}${text}`];

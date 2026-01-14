@@ -40,7 +40,7 @@ const getFileName = (
   skuContext: SkuContext,
   skuRoute: ReturnType<typeof getBuildRoutes>[0],
 ) => {
-  let renderDirectory = skuContext.skuConfig.target;
+  let renderDirectory = skuContext.paths.target;
   const relativeFilePath = skuContext.transformOutputPath(skuRoute);
   const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
   if (!path.isAbsolute(renderDirectory)) {

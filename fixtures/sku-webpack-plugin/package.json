@@ -11,12 +11,12 @@
     "start:asset-server": "http-server dist -p 9876 --cors"
   },
   "devDependencies": {
-    "babel-loader": "^9.1.2",
+    "babel-loader": "^10.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "html-webpack-plugin": "^5.3.2",
     "sku": "workspace:*",
     "webpack": "^5.52.0",
-    "webpack-cli": "^5.0.0",
+    "webpack-cli": "^6.0.0",
     "webpack-dev-server": "<=5.2.0",
     "http-server": "^14.1.1"
   },

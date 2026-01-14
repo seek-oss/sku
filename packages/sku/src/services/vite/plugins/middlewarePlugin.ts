@@ -85,7 +85,7 @@ export const middlewarePlugin = ({
         const { pathname: path } = url;
 
         const matchingRoute = getMatchingRoute({
-          hostname: host,
+          hostname,
           path,
           routes: skuContext.routes,
           sites: skuContext.sites,

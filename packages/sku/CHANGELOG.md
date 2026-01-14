@@ -1,5 +1,30 @@
 # sku
 
+## 15.8.0
+
+### Minor Changes
+
+- lint|format: Enforce sorted keys in package.json ([#1480](https://github.com/seek-oss/sku/pull/1480))
+
+  ESLint will now warn if the keys in package.json are not sorted. Running `sku format` will automatically fix the sort order.
+
+  If you need to, you can disable this rule by using `dangerouslySetESLintConfig` in your sku config (not recommended):
+
+  ```ts
+  const config = {
+    ...,
+    dangerouslySetESLintConfig: (esLintConfig) => [
+      ...esLintConfig,
+      {
+        files: ['**/package.json'],
+        rules: {
+          'package-json/sort': 'off',
+        },
+      },
+    ],
+  }
+  ```
+
 ## 15.7.1
 
 ### Patch Changes

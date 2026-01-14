@@ -1,12 +1,12 @@
 {
   "name": "@sku-fixtures/lint-format",
   "private": true,
-  "devDependencies": {
-    "sku": "workspace:*",
-    "@types/jest": "^30.0.0"
-  },
   "scripts": {
     "format": "sku format"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true
 }

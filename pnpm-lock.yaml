@@ -627,6 +627,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/sort-package-json:
+    dependencies:
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/source-maps:
     dependencies:
       react:
@@ -1245,6 +1251,9 @@ importers:
       serve-handler:
         specifier: ^6.1.3
         version: 6.1.6
+      sort-package-json:
+        specifier: ^3.6.0
+        version: 3.6.0
       svgo-loader:
         specifier: ^4.0.0
         version: 4.0.0
@@ -5278,9 +5287,17 @@ packages:
     resolution: {integrity: sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==}
     engines: {node: '>=8'}
 
+  detect-indent@7.0.2:
+    resolution: {integrity: sha512-y+8xyqdGLL+6sh0tVeHcfP/QDd8gUgbasolJJpY7NgeQGSZ739bDtSiaiDgtoicy+mtYB81dKLxO9xRhCyIB3A==}
+    engines: {node: '>=12.20'}
+
   detect-newline@3.1.0:
     resolution: {integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==}
     engines: {node: '>=8'}
+
+  detect-newline@4.0.1:
+    resolution: {integrity: sha512-qE3Veg1YXzGHQhlA6jzebZN2qVf6NX+A7m7qlhCGG30dJixrAQhYOsJjsnBjJkCSmuOPpCk30145fr8FV0bzog==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
@@ -6068,6 +6085,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  git-hooks-list@4.1.1:
+    resolution: {integrity: sha512-cmP497iLq54AZnv4YRAEMnEyQ1eIn4tGKbmswqwmFV4GBnAqE8NLtWxxdXa++AalfgL5EBH4IxTPyquEuGY/jA==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -6571,6 +6591,10 @@ packages:
   is-plain-obj@3.0.0:
     resolution: {integrity: sha512-gwsOE28k+23GP1B6vFl1oVh/WOzmawBrKwo5Ev6wMKzPkaXaCDIQKzLnvsA42DRlbVTWorkgTKIviAKCWkfUwA==}
     engines: {node: '>=10'}
+
+  is-plain-obj@4.1.0:
+    resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
+    engines: {node: '>=12'}
 
   is-plain-object@2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
@@ -8512,6 +8536,14 @@ packages:
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
+
+  sort-object-keys@2.1.0:
+    resolution: {integrity: sha512-SOiEnthkJKPv2L6ec6HMwhUcN0/lppkeYuN1x63PbyPRrgSPIuBJCiYxYyvWRTtjMlOi14vQUCGUJqS6PLVm8g==}
+
+  sort-package-json@3.6.0:
+    resolution: {integrity: sha512-fyJsPLhWvY7u2KsKPZn1PixbXp+1m7V8NWqU8CvgFRbMEX41Ffw1kD8n0CfJiGoaSfoAvbrqRRl/DcHO8omQOQ==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -13769,7 +13801,11 @@ snapshots:
 
   detect-indent@6.1.0: {}
 
+  detect-indent@7.0.2: {}
+
   detect-newline@3.1.0: {}
+
+  detect-newline@4.0.1: {}
 
   detect-node-es@1.1.0: {}
 
@@ -14782,6 +14818,8 @@ snapshots:
       fs-extra: 11.3.3
       globby: 11.1.0
 
+  git-hooks-list@4.1.1: {}
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -15327,6 +15365,8 @@ snapshots:
   is-path-inside@3.0.3: {}
 
   is-plain-obj@3.0.0: {}
+
+  is-plain-obj@4.1.0: {}
 
   is-plain-object@2.0.4:
     dependencies:
@@ -17620,6 +17660,18 @@ snapshots:
       faye-websocket: 0.11.4
       uuid: 8.3.2
       websocket-driver: 0.7.4
+
+  sort-object-keys@2.1.0: {}
+
+  sort-package-json@3.6.0:
+    dependencies:
+      detect-indent: 7.0.2
+      detect-newline: 4.0.1
+      git-hooks-list: 4.1.1
+      is-plain-obj: 4.1.0
+      semver: 7.7.3
+      sort-object-keys: 2.1.0
+      tinyglobby: 0.2.15
 
   source-map-js@1.2.1: {}
 

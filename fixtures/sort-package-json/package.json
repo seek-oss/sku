@@ -1,0 +1,17 @@
+{
+  "version": "0.0.0",
+  "name": "@sku-fixtures/sort-package-json",
+  "private": true,
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "scripts": {
+    "format": "sku format",
+    "lint": "sku lint"
+  },
+  "skuSkipValidatePeerDeps": true,
+  "type": "module",
+  "dependencies": {
+    "sku": "workspace:*"
+  }
+}

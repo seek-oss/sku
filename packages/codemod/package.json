@@ -21,7 +21,7 @@
   ],
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
   "dependencies": {
-    "@ast-grep/napi": "^0.39.4",
+    "@ast-grep/napi": "^0.40.0",
     "commander": "catalog:",
     "diff": "^8.0.2",
     "picocolors": "^1.1.1",

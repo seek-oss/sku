@@ -1,5 +1,17 @@
 # sku
 
+## 15.9.0
+
+### Minor Changes
+
+- Add auto-translate feature for translations push command ([#1444](https://github.com/seek-oss/sku/pull/1444))
+
+  Adds a new `--auto-translate` flag to the `sku translations push` command that enables automatic translation for missing translations in the Phrase platform. When enabled, this flag instructs Phrase to automatically translate any missing keys using machine translation.
+
+  ```sh
+  $ sku translations push --auto-translate
+  ```
+
 ## 15.8.0
 
 ### Minor Changes

@@ -1078,8 +1078,8 @@ importers:
         specifier: ^1.6.2
         version: 1.7.3
       '@vocab/phrase':
-        specifier: ^2.0.1
-        version: 2.1.7
+        specifier: ^2.2.0
+        version: 2.2.0
       '@vocab/pseudo-localize':
         specifier: ^1.0.1
         version: 1.0.2
@@ -4208,8 +4208,11 @@ packages:
   '@vocab/core@1.7.3':
     resolution: {integrity: sha512-QnO/0VoqPY3knutBdVymCM2JSjTt6wzRoeppjw86CFSKg601suDn3FJBSr+IJmH8YOJsxNhQAotw2yArVJLeeg==}
 
-  '@vocab/phrase@2.1.7':
-    resolution: {integrity: sha512-E9c+ZpM20vfFTIncTzzxzMkX2HPSOqP54wCWamKNWR9c6F6UHTuOEUNJRAYbyqzChgeRbujdObi0vMq4jMupdQ==}
+  '@vocab/core@1.7.6':
+    resolution: {integrity: sha512-e/iUVX1Jdwah8P4NspVFU5H7UgC8k9AEsOajRLc0s2/AQ1lVIrd8Apkahxz95ifT8XNHUj7QULtM4MPSFXFYCQ==}
+
+  '@vocab/phrase@2.2.0':
+    resolution: {integrity: sha512-TDcKx3Ia8hTAwAurhyOCgusJK6MhIBXkbdUgHCGx88YP+/kswhbuBTQotc6WRuXJXOGfWu+MEemXQ9Y1yPE15g==}
 
   '@vocab/pseudo-localize@1.0.2':
     resolution: {integrity: sha512-W9NzX0zrznGX7ghNz0VDi5nj+CLyBdpde4fXfwFwUdsS0p/ApvxZ+8jZ7Dn0W/VavKzjnknyNQO2H7IoYNQQZw==}
@@ -12600,9 +12603,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/phrase@2.1.7':
+  '@vocab/core@1.7.6':
     dependencies:
-      '@vocab/core': 1.7.3
+      '@formatjs/icu-messageformat-parser': 2.11.4
+      chokidar: 5.0.0
+      debug: 4.4.3
+      fastest-validator: 1.19.1
+      find-up: 5.0.0
+      intl-messageformat: 10.7.18
+      picocolors: 1.1.1
+      picomatch: 4.0.3
+      prettier: 3.6.2
+      tinyglobby: 0.2.15
+    transitivePeerDependencies:
+      - supports-color
+
+  '@vocab/phrase@2.2.0':
+    dependencies:
+      '@vocab/core': 1.7.6
       csv-stringify: 6.6.0
       debug: 4.4.3
       picocolors: 1.1.1

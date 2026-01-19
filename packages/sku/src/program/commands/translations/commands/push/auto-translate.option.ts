@@ -2,5 +2,5 @@ import { Option } from 'commander';
 
 export const autoTranslateOption = new Option(
   '--auto-translate',
-  'Automatically translate new keys using machine translation',
+  'Enable automatic translation for missing translations',
 ).default(false);

@@ -105,7 +105,7 @@
     "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@vitejs/plugin-react": "^5.1.1",
     "@vocab/core": "^1.6.2",
-    "@vocab/phrase": "2.2.0-add-auto-translate-20251105043557",
+    "@vocab/phrase": "^2.2.0",
     "@vocab/pseudo-localize": "^1.0.1",
     "@vocab/vite": "catalog:",
     "@vocab/webpack": "^1.2.9",

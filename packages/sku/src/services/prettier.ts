@@ -1,16 +1,11 @@
 import exists from '../utils/exists.js';
-import path, { dirname } from 'node:path';
 import chalk from 'chalk';
 import { runBin } from '../utils/runBin.js';
-import { getPathFromCwd } from '@sku-lib/utils';
+import { getPathFromCwd } from '@sku-private/utils';
 import { suggestScript } from '../utils/suggestScript.js';
 
-import { fileURLToPath } from 'node:url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
-const prettierConfigPath = path.join(__dirname, '../config/prettier.js');
+const prettierConfigPath = import.meta.resolve('sku/config/prettier');
 
 const runPrettier = async ({
   write,

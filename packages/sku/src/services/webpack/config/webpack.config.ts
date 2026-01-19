@@ -1,6 +1,5 @@
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 import webpack, { type Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
@@ -13,7 +12,7 @@ import { MetricsPlugin } from './plugins/metricsPlugin.js';
 import { VocabWebpackPlugin } from '@vocab/webpack';
 
 import { JAVASCRIPT, resolvePackage } from './utils/index.js';
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 
 import { getVocabConfig } from '../../vocab/config.js';
 import getStatsConfig from './statsConfig.js';
@@ -23,11 +22,12 @@ import modules from './resolveModules.js';
 import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
+import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('../entry/render');
-const libraryRenderEntry = require.resolve('../entry/libraryRender');
+const renderEntry = require.resolve('#webpack/render');
+const libraryRenderEntry = require.resolve('#webpack/library-render');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.
@@ -65,7 +65,7 @@ const makeWebpackConfig = ({
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
 
-  const skuClientEntry = require.resolve('../entry/client/index.js');
+  const skuClientEntry = require.resolve('#webpack/client');
 
   const createEntry = (entry: string): string[] => [
     ...resolvedPolyfills,

@@ -35,6 +35,7 @@ export const createPreRenderedHtml = async <App,>({
   render,
   hooks,
   loadableCollector,
+  createUnsafeNonce,
 }: CreatePreRenderedHtmlOptions<App>) => {
   const renderContext = {
     environment,
@@ -59,6 +60,7 @@ export const createPreRenderedHtml = async <App,>({
       loadableCollector.register(chunkName);
     },
     SkuProvider,
+    createUnsafeNonce,
   });
 
   if (language) {

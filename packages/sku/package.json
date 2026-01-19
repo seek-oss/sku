@@ -1,33 +1,31 @@
 {
   "name": "sku",
-  "version": "15.2.0",
+  "version": "15.8.0",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "sku": "bin/bin.js"
   },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
-    ".": {
-      "types": {
-        "import": "./dist/index.d.ts",
-        "require": "./dist/index.d.cts"
-      }
-    },
-    "./jest-preset": "./dist/config/jest/preset.js",
-    "./config/eslint": {
-      "types": "./dist/config/eslint/config.d.ts",
-      "default": "./dist/config/eslint/config.js"
-    },
-    "./config/storybook": {
-      "types": "./dist/config/storybook/config.d.ts",
-      "default": "./dist/config/storybook/config.cjs"
-    },
-    "./vite/client": {
-      "types": "./dist/services/vite/client.d.ts"
-    },
-    "./@loadable/component": "./src/@loadable/component/index.ts",
-    "./webpack-plugin": "./dist/services/webpack/config/plugins/skuWebpackPlugin.js",
+    ".": "./dist/index.mjs",
+    "./@loadable/component": "./dist/@loadable/component/index.ts",
+    "./config/prettier": "./dist/config/prettier.mjs",
+    "./config/eslint": "./dist/config/eslint.mjs",
+    "./config/storybook": "./dist/config/storybook.cjs",
+    "./bin/sku": "./dist/bin/sku.mjs",
+    "./jest-preset": "./dist/jest-preset.mjs",
+    "./vite/client": "./dist/vite/client.d.ts",
+    "./webpack-plugin": "./dist/webpack-plugin.mjs",
     "./package.json": "./package.json"
+  },
+  "imports": {
+    "#entries/*": "./dist/entries/*.mjs",
+    "#jest/file-mock": "./dist/jest/file-mock.cjs",
+    "#jest/*": "./dist/jest/*.mjs",
+    "#vite/*": "./dist/vite/*.mjs",
+    "#webpack/*": "./dist/webpack/*.mjs"
   },
   "engines": {
     "node": ">=22.19.0"
@@ -43,8 +41,6 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./scripts/postinstall.js",
-    "build": "tsc --project tsconfig.build.json",
-    "postbuild": "cp dist/index.d.ts dist/index.d.cts && cp src/services/vite/client.d.ts dist/services/vite/client.d.ts",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {
@@ -59,11 +55,11 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "peerDependencies": {
-    "@sku-lib/vitest": "*",
-    "@storybook/react-webpack5": "^7.0.0 || ^8.0.0 || ^9.0.0",
+    "@storybook/react-webpack5": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
     "@types/react": "^18.0.0 || ^19.0.0",
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "vitest": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@storybook/react-webpack5": {
@@ -72,7 +68,7 @@
     "react-dom": {
       "optional": true
     },
-    "@sku-lib/vitest": {
+    "vitest": {
       "optional": true
     }
   },
@@ -94,7 +90,7 @@
     "@loadable/server": "^5.16.7",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@sku-lib/utils": "workspace:*",
+    "@sku-lib/babel-plugin-display-name": "workspace:*",
     "@sku-lib/vite": "workspace:*",
     "@swc/core": "^1.6.13",
     "@types/eslint": "^9.6.1",
@@ -106,14 +102,13 @@
     "@vanilla-extract/jest-transform": "^1.1.0",
     "@vanilla-extract/vite-plugin": "catalog:",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
-    "@vitejs/plugin-basic-ssl": "^2.0.0",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-basic-ssl": "^2.1.0",
+    "@vitejs/plugin-react": "^5.1.1",
     "@vocab/core": "^1.6.2",
     "@vocab/phrase": "2.2.0-add-auto-translate-20251105043557",
     "@vocab/pseudo-localize": "^1.0.1",
     "@vocab/vite": "catalog:",
     "@vocab/webpack": "^1.2.9",
-    "@zendesk/babel-plugin-react-displayname": "https://codeload.github.com/zendesk/babel-plugin-react-displayname/tar.gz/7a837f2",
     "autoprefixer": "^10.3.1",
     "babel-jest": "^30.0.0",
     "babel-loader": "^10.0.0",
@@ -126,19 +121,17 @@
     "browserslist-config-seek": "3.3.0",
     "chalk": "^5.3.0",
     "commander": "catalog:",
-    "compression": "^1.8.0",
     "cross-spawn": "^7.0.3",
     "css-loader": "^7.1.2",
     "cssnano": "^7.0.7",
     "death": "^1.1.0",
-    "debug": "^4.3.1",
+    "debug": "catalog:",
     "dedent": "^1.5.1",
     "default-browser": "^5.2.1",
     "ensure-gitignore": "^1.1.2",
     "escape-string-regexp": "^5.0.0",
     "eslint": "^9.10.0",
-    "eslint-config-seek": "^14.4.0",
-    "eta": "^3.5.0",
+    "eslint-config-seek": "^15.0.4",
     "exception-formatter": "^2.1.2",
     "express": "^4.19.2",
     "fastest-levenshtein": "^1.0.16",
@@ -148,59 +141,54 @@
     "get-port": "^7.1.0",
     "hostile": "^1.3.3",
     "html-render-webpack-plugin": "^3.0.1",
-    "indent-string": "^5.0.0",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
     "jest-watch-typeahead": "^3.0.1",
-    "jiti": "^2.4.1",
+    "jiti": "catalog:",
     "lint-staged": "^16.0.0",
-    "magicast": "^0.3.5",
+    "magicast": "^0.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "nano-memoize": "^3.0.16",
     "node-html-parser": "^7.0.1",
     "open": "^10.1.2",
-    "package-manager-detector": "^0.2.0",
     "path-to-regexp": "^6.2.0",
     "picomatch": "^4.0.3",
     "postcss": "^8.4.0",
     "postcss-loader": "^8.0.0",
     "prettier": "~3.6.2",
     "pretty-ms": "^9.2.0",
-    "prompts": "^2.4.2",
-    "react-refresh": "^0.17.0",
+    "react-refresh": "^0.18.0",
     "rollup-plugin-visualizer": "^6.0.3",
     "selfsigned": "^3.0.1",
     "semver": "^7.3.4",
-    "serialize-javascript": "^6.0.0",
+    "serialize-javascript": "^7.0.2",
     "serve-handler": "^6.1.3",
+    "sort-package-json": "^3.6.0",
     "svgo-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.1.4",
     "typescript": "~5.9.0",
     "vite": "catalog:",
-    "vite-plugin-cjs-interop": "^2.3.0",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-plugin-cjs-interop": "^2.4.0",
+    "vite-tsconfig-paths": "^6.0.3",
     "webpack": "^5.99.8",
-    "webpack-bundle-analyzer": "^4.6.1",
+    "webpack-bundle-analyzer": "^5.1.1",
     "webpack-dev-server": "<=5.2.0",
     "webpack-merge": "^6.0.1",
-    "webpack-node-externals": "^3.0.0",
-    "wrap-ansi": "^9.0.0"
+    "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@sku-lib/vitest": "workspace:*",
+    "@sku-private/tsdown": "workspace:*",
+    "@sku-private/utils": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.6",
-    "@types/compression": "^1.7.5",
     "@types/cross-spawn": "^6.0.3",
     "@types/death": "^1.1.5",
-    "@types/debug": "^4.1.12",
+    "@types/debug": "catalog:",
     "@types/hostile": "^1.3.5",
-    "@types/lint-staged": "^13.3.0",
     "@types/loadable__webpack-plugin": "^5.7.6",
     "@types/node": "catalog:",
     "@types/picomatch": "^4.0.2",
-    "@types/prompts": "^2.4.9",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/semver": "^7.5.8",
@@ -211,11 +199,11 @@
     "@vanilla-extract/css": "^1.17.0",
     "@vocab/react": "^1.1.11",
     "braid-design-system": "catalog:",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.27.0",
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "type-fest": "^4.41.0",
+    "type-fest": "^5.0.0",
     "vitest": "catalog:"
   }
 }

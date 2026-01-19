@@ -4,7 +4,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 
 import App from './App';
 

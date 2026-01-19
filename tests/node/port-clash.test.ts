@@ -1,10 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { configure, scopeToFixture } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
 
 const { sku } = scopeToFixture('port-clash');
-
-configure({ asyncUtilTimeout: 5000 });
 
 describe('port-clash - vite', () => {
   it('should use a different port if the requested port is already in use', async () => {

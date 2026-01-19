@@ -3,8 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
-
-const flakeyTestGlobs = ['tests/browser/storybook-config.test.ts'];
+const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
@@ -14,12 +13,14 @@ export default defineConfig({
     },
   },
   test: {
+    exclude: [...defaultExclude, '**/fixtures/**'],
+    hookTimeout: TEST_TIMEOUT + 1000,
+    maxWorkers: '80%',
+    restoreMocks: true,
+    retry: 1,
     setupFiles: ['./vitest-setup.ts'],
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
-    hookTimeout: TEST_TIMEOUT + 1000,
     testTimeout: TEST_TIMEOUT + 1000,
-    exclude: [...defaultExclude, '**/fixtures/**'],
-    restoreMocks: true,
     projects: [
       {
         extends: true,
@@ -30,31 +31,22 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
+          exclude: [babelPluginDisplayNameTests],
         },
       },
-      // Isolate braid and storybook-config tests to reduce flakiness.
+      // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
+      // snapshot output.
       {
-        extends: true,
         test: {
-          name: 'flakey',
-          environment: 'puppeteer',
-          globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: flakeyTestGlobs,
-          sequence: {
-            groupOrder: -1,
-          },
+          name: 'babel-plugin-display-name',
+          include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
         },
       },
       {
         extends: true,
         test: {
           name: 'browser',
-          environment: 'puppeteer',
-          globalSetup: 'vitest-environment-puppeteer/global-init',
-          include: [
-            `tests/browser/${defaultInclude}`,
-            ...flakeyTestGlobs.map((g) => `!${g}`),
-          ],
+          include: [`tests/browser/${defaultInclude}`],
         },
       },
     ],

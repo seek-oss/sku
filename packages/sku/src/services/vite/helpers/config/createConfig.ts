@@ -10,10 +10,11 @@ import { getAppHosts } from '../../../../context/hosts.js';
 import isCI from '../../../../utils/isCI.js';
 import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
 import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';
+import { serverUrls } from '@sku-private/utils';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('../../entries/vite-client.js');
+const clientEntry = require.resolve('#entries/vite-client');
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
 
@@ -61,7 +62,13 @@ export const createClientBuildConfig = (skuContext: SkuContext) => {
   );
 };
 
-export const createStartConfig = (skuContext: SkuContext) => {
+export const createStartConfig = ({
+  skuContext,
+  environment,
+}: {
+  skuContext: SkuContext;
+  environment: string;
+}) => {
   const outDir = createOutDir(skuContext.paths.target);
   return createSkuViteConfig(
     {
@@ -70,7 +77,7 @@ export const createStartConfig = (skuContext: SkuContext) => {
         vitePluginSsrCss({
           entries: [skuContext.paths.renderEntry],
         }),
-        middlewarePlugin(skuContext),
+        middlewarePlugin({ skuContext, environment }),
         startTelemetryPlugin({
           target: 'node',
           type: 'static',
@@ -95,7 +102,14 @@ export const createStartConfig = (skuContext: SkuContext) => {
         allowedHosts: getAppHosts(skuContext).filter(
           (host) => typeof host === 'string',
         ),
-        open: shouldOpenTab && (skuContext.initialPath || true),
+        open:
+          shouldOpenTab &&
+          serverUrls({
+            hosts: getAppHosts(skuContext),
+            port: skuContext.port.client,
+            initialPath: skuContext.initialPath,
+            https: skuContext.httpsDevServer,
+          }).first(),
       },
     },
     skuContext,

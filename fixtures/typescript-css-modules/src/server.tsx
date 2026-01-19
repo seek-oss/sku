@@ -1,4 +1,3 @@
-import type React from 'react';
 import { renderToString } from 'react-dom/server';
 import type { Server } from 'sku';
 

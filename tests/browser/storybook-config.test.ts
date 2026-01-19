@@ -1,23 +1,15 @@
 import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
-import {
-  getStoryPage,
-  getTextContentFromFrameOrPage,
-} from '@sku-private/test-utils';
+import { getTextContent } from '@sku-private/playwright';
 
-import type { Page } from 'puppeteer';
 import {
   cleanup,
   configure,
   scopeToFixture,
   skipCleanup,
-  waitFor,
+  hasExitSuccessfully,
 } from '@sku-private/testing-library';
 
-// NOTE: Puppeteer renders in a small enough window that it may trigger a breakpoint that alters the
-// font size of an element
-
-const storybookStartedRegex =
-  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+const storybookStartedRegex = /Storybook ready!/;
 
 const timeout = 150_000;
 
@@ -31,6 +23,7 @@ vi.setConfig({
 });
 
 const { exec } = scopeToFixture('storybook-config');
+
 describe('storybook-config', () => {
   describe('start', () => {
     const port = 8089;
@@ -41,8 +34,6 @@ describe('storybook-config', () => {
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    let storyPage: Page;
-
     beforeAll(async () => {
       const storybook = await exec('pnpm', [
         'storybook',
@@ -52,15 +43,10 @@ describe('storybook-config', () => {
         '--port',
         port.toString(),
       ]);
-      expect(
-        await storybook.findByText(storybookStartedRegex),
-      ).toBeInTheConsole();
-
-      storyPage = await getStoryPage(storyIframeUrl);
+      await storybook.findByText(storybookStartedRegex);
     });
 
     afterAll(async () => {
-      await storyPage?.close();
       await cleanup();
     });
 
@@ -76,8 +62,8 @@ describe('storybook-config', () => {
       task,
     }) => {
       skipCleanup(task.id);
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-decorator]',
       );
 
@@ -87,8 +73,8 @@ describe('storybook-config', () => {
 
     it('should render a component inside a story', async ({ task }) => {
       skipCleanup(task.id);
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-text]',
       );
 
@@ -98,8 +84,8 @@ describe('storybook-config', () => {
 
     it('should render vanilla styles', async ({ task }) => {
       skipCleanup(task.id);
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-vanilla]',
       );
 
@@ -124,29 +110,17 @@ describe('storybook-config', () => {
       ).toBeInTheConsole();
 
       const docsIframeUrl = `http://localhost:${port}/iframe.html?viewMode=docs&id=docstest--docs`;
-      const docsPage = await getStoryPage(docsIframeUrl);
 
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test',
-        );
+      const doctest = await getTextContent(docsIframeUrl, '#docs-test');
+      expect(doctest.text).toEqual('Docs Test');
+      expect(doctest.fontSize).toEqual('32px');
 
-        expect(text).toEqual('Docs Test');
-        expect(fontSize).toEqual('32px');
-      }
-
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test + p',
-        );
-
-        expect(text).toEqual('I am a test document.');
-        expect(fontSize).toEqual('14px');
-      }
-
-      await docsPage?.close();
+      const doctestParagraph = await getTextContent(
+        docsIframeUrl,
+        '#docs-test + p',
+      );
+      expect(doctestParagraph.text).toEqual('I am a test document.');
+      expect(doctestParagraph.fontSize).toEqual('14px');
     });
   });
 
@@ -158,27 +132,18 @@ describe('storybook-config', () => {
       '/iframe.html?viewMode=story&id=testcomponent--default';
     const storyIframeUrl = `${assetServerUrl}${storyIframePath}`;
 
-    let storyPage: Page;
+    const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
+    const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
-
-      await waitFor(async () => {
-        expect(storybook.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
-      });
+      await hasExitSuccessfully(storybook);
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      expect(
-        await assetServer.findByText('serving storybook-static'),
-      ).toBeInTheConsole();
-
-      storyPage = await getStoryPage(storyIframeUrl);
+      await assetServer.findByText('serving storybook-static');
     });
 
     afterAll(async () => {
-      await storyPage?.close();
       await cleanup();
     });
 
@@ -187,8 +152,8 @@ describe('storybook-config', () => {
     }) => {
       skipCleanup(task.id);
 
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-decorator]',
       );
 
@@ -199,8 +164,8 @@ describe('storybook-config', () => {
     it('should render a component inside a story', async ({ task }) => {
       skipCleanup(task.id);
 
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-text]',
       );
 
@@ -211,8 +176,8 @@ describe('storybook-config', () => {
     it('should render vanilla styles', async ({ task }) => {
       skipCleanup(task.id);
 
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-vanilla]',
       );
 
@@ -220,35 +185,27 @@ describe('storybook-config', () => {
       expect(fontSize).toEqual('32px');
     });
 
-    it('should render a ".mdx" file', async ({ task }) => {
+    it('should render a ".mdx" file > docs-test', async ({ task }) => {
       skipCleanup(task.id);
 
-      const docsIframePath = '/iframe.html?viewMode=docs&id=docstest--docs';
-      const docsIframeUrl = `${assetServerUrl}${docsIframePath}`;
+      const { text, fontSize } = await getTextContent(
+        docsIframeUrl,
+        '#docs-test',
+      );
 
-      const docsPage = await getStoryPage(docsIframeUrl);
+      expect(text).toEqual('Docs Test');
+      expect(fontSize).toEqual('32px');
+    });
 
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test',
-        );
+    it('should render a ".mdx" file > docs-test + p', async ({ task }) => {
+      skipCleanup(task.id);
+      const { text, fontSize } = await getTextContent(
+        docsIframeUrl,
+        '#docs-test + p',
+      );
 
-        expect(text).toEqual('Docs Test');
-        expect(fontSize).toEqual('32px');
-      }
-
-      {
-        const { text, fontSize } = await getTextContentFromFrameOrPage(
-          docsPage,
-          '#docs-test + p',
-        );
-
-        expect(text).toEqual('I am a test document.');
-        expect(fontSize).toEqual('14px');
-      }
-
-      await docsPage.close();
+      expect(text).toEqual('I am a test document.');
+      expect(fontSize).toEqual('14px');
     });
   });
 });

@@ -1,12 +1,11 @@
-import { describe, beforeAll, it, expect, afterAll } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   skipCleanup,
   scopeToFixture,
 } from '@sku-private/testing-library';
@@ -35,7 +34,7 @@ describe('custom-src-paths', () => {
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();
 
-        const snapshot = await getAppSnapshot({ url, expect });
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot();
       });
     });
@@ -52,13 +51,11 @@ describe('custom-src-paths', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Build complete')).toBeInTheConsole();
+        await build.findByText('Build complete');
 
         const serve = await sku('serve', portArgs);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        await serve.findByText('Server started');
       });
-
-      afterAll(cleanup);
 
       it('should generate the expected files', async ({ task }) => {
         skipCleanup(task.id);
@@ -69,7 +66,7 @@ describe('custom-src-paths', () => {
       it('should create valid app', async ({ task }) => {
         skipCleanup(task.id);
 
-        const app = await getAppSnapshot({ url, expect });
+        const app = await getAppSnapshot({ url });
         expect(app).toMatchSnapshot();
       });
     });

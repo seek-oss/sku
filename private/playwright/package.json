@@ -1,0 +1,18 @@
+{
+  "name": "@sku-private/playwright",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "devDependencies": {
+    "@prettier/sync": "^0.6.1",
+    "@sku-private/test-utils": "workspace:*",
+    "@sku-private/testing-library": "workspace:*",
+    "@types/css": "^0.0.38",
+    "@types/diffable-html": "^5.0.2",
+    "@types/debug": "catalog:",
+    "css": "^3.0.0",
+    "diff": "^8.0.2",
+    "diffable-html": "^6.0.1",
+    "debug": "catalog:"
+  }
+}

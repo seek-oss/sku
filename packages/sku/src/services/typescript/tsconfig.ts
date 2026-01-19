@@ -1,4 +1,4 @@
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {

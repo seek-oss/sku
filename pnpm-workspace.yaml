@@ -10,42 +10,38 @@ catalog:
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
   '@vanilla-extract/vite-plugin': ^5.1.1
-  '@vocab/vite': ^0.2.3
-  braid-design-system: ^33.11.0
+  '@vocab/vite': ^0.3.1
+  braid-design-system: ^34.0.0
   commander: ^14.0.1
   # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue. (last checked with v2.6.1)
-  jiti: 2.4.2
+  # 12/11/25: Unpinning for now and using JS eslint config because jiti peer deps from other packages are causing issues. We can re-evaluate later.
+  jiti: ^2.4.2
   react: ^19.1.0
   react-dom: ^19.1.0
-  vite: ^7.0.6
-  vitest: ^3.2.3
+  vite: ^7.2.6
+  vitest: ^4.0.15
+  debug: ^4.4.3
+  '@types/debug': '^4.1.12'
 
-catalogs:
-  react18:
-    '@types/react': ^18.3.23
-    '@types/react-dom': ^18.3.7
-    react: ^18.3.1
-    react-dom: ^18.3.1
+overrides:
+  esbuild: ~0.27.0
 
 ignoredBuiltDependencies:
   - core-js-pure
 
-# This is needed so that the React 18 fixture doesn't clobber React 19 in every other fixture. We can remove this once we've dropped React 18 support.
-injectWorkspacePackages: true
-
-linkWorkspacePackages: true
+linkWorkspacePackages: deep
 
 onlyBuiltDependencies:
   - '@swc/core'
   - docsify
   - esbuild
-  - puppeteer
   - unrs-resolver
+  - sku
 
 preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
 
-syncInjectedDepsAfterScripts:
-  - build
+configDependencies:
+  pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==

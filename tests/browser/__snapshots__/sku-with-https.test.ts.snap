@@ -86,7 +86,7 @@ exports[`sku-with-https > bundler: vite > start > should start a development ser
      </div>
      <script
        type="module"
-       src="{cwd}/packages/sku/dist/services/vite/entries/vite-client.js"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
      >
      </script>
    </body>
@@ -218,7 +218,7 @@ exports[`sku-with-https > bundler: webpack > start > should start a development 
 +  <head>
 +  </head>
 +  <body>
-     OK
+     OK CJS
 +  </body>
 +</html>
 \\ No newline at end of file
@@ -327,7 +327,7 @@ exports[`sku-with-https > serve > should support the supplied middleware 1`] = `
 +  <head>
 +  </head>
 +  <body>
-     OK
+     OK CJS
 +  </body>
 +</html>
 \\ No newline at end of file
@@ -342,8 +342,117 @@ exports[`sku-with-https > start-ssr > should support the supplied middleware 1`]
 +  <head>
 +  </head>
 +  <body>
-     OK
+     OK CJS
 +  </body>
 +</html>
+\\ No newline at end of file
+`;
+
+exports[`sku-with-https > webpack start with ESM middleware > should start a development server > esm middleware 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,1 +1,7 @@
++<html>
++  <head>
++  </head>
++  <body>
+     OK ESM
++  </body>
++</html>
+\\ No newline at end of file
+`;
+
+exports[`sku-with-https > webpack start with ESM middleware > should start a development server > homepage 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,85 +1,85 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'unsafe-eval';"
+     >
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/main.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <link
+         rel="preload"
+         as="image"
+         href="/a85d2645cc4d80a20b5b.png"
+       >
+       <div class="styles_root__2vdre50">
+         <div class="styles_nested__2vdre51">
+-          Initial
++          Client
+         </div>
+         <img src="/a85d2645cc4d80a20b5b.png">
+       </div>
+     </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
+     </script>
+   </body>
+ </html>
 \\ No newline at end of file
 `;

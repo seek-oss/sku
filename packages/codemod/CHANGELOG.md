@@ -1,5 +1,60 @@
 # @sku-lib/codemod
 
+## 1.2.3
+
+### Patch Changes
+
+- Update `diff` dependency to `^8.0.2` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+## 1.2.2
+
+### Patch Changes
+
+- Migrate package bundling to use tsdown ([#1464](https://github.com/seek-oss/sku/pull/1464))
+
+## 1.2.1
+
+### Patch Changes
+
+- jest-to-vitest: Properly handle `await expect()` generic syntax ([#1457](https://github.com/seek-oss/sku/pull/1457))
+
+## 1.2.0
+
+### Minor Changes
+
+- jest-to-vitest: Transform generics in `.resolves`/`.rejects` expect chains with `satisfies` operator ([#1442](https://github.com/seek-oss/sku/pull/1442))
+
+  ```diff
+  - expect(result).resolves.toEqual<MyType>({});
+  + expect(result).resolves.toEqual({} satisfies MyType);
+
+  - expect(promise).rejects.toThrow<ErrorType>(error);
+  + expect(promise).rejects.toThrow(error satisfies ErrorType);
+  ```
+
+- jest-to-vitest: Update codemod to transform `jest.beforeAll/beforeEach/afterAll/afterEach` calls with function references into arrow functions ([#1440](https://github.com/seek-oss/sku/pull/1440))
+
+  ```diff
+  -  beforeAll(someSetupFunction)
+  +  beforeAll(() => { someSetupFunction() })
+  ```
+
+- jest-to-vitest: Add support for transforming `jest.fn` calls with TypeScript generics. ([#1445](https://github.com/seek-oss/sku/pull/1445))
+
+  ```diff
+  - const middleware = jest.fn<void, Parameters<Middleware>>();
+  + const middleware = vi.fn<(...args: Parameters<Middleware>) => void>();
+
+  - const callback = jest.fn<string, [number, boolean]>();
+  + const callback = vi.fn<(...args: [number, boolean]) => string>();
+  ```
+
+## 1.1.0
+
+### Minor Changes
+
+- jest-to-vitest: Update codemod to handle `jest.setTimeout` calls ([#1439](https://github.com/seek-oss/sku/pull/1439))
+
 ## 1.0.0
 
 ### Major Changes

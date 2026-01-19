@@ -1,12 +1,8 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { describe, beforeAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
 
-import {
-  cleanup,
-  scopeToFixture,
-  skipCleanup,
-} from '@sku-private/testing-library';
+import { scopeToFixture, skipCleanup } from '@sku-private/testing-library';
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
@@ -16,14 +12,12 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
-      expect(await start.findByText('Server started')).toBeInTheConsole();
+      await start.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
-      const snapshot = await getAppSnapshot({ url, expect });
+      const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot();
     });
 
@@ -31,7 +25,6 @@ describe('ssr-hello-world', () => {
       skipCleanup(task.id);
       const { sourceHtml } = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(sourceHtml).toBe('OK');
     });
@@ -42,7 +35,6 @@ describe('ssr-hello-world', () => {
       skipCleanup(task.id);
       const { sourceHtml } = await getAppSnapshot({
         url: `${url}/assets/logo.png`,
-        expect,
       });
       expect(sourceHtml).toMatch(/^�PNG/);
     });
@@ -53,7 +45,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     describe('default port', () => {
@@ -65,7 +57,7 @@ describe('ssr-hello-world', () => {
           await assetServer.findByText('serving dist-build'),
         ).toBeInTheConsole();
 
-        const snapshot = await getAppSnapshot({ url, expect });
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot();
       });
 
@@ -95,7 +87,7 @@ describe('ssr-hello-world', () => {
         await assetServer.findByText('serving dist-build'),
       ).toBeInTheConsole();
 
-      const snapshot = await getAppSnapshot({ url: customPortUrl, expect });
+      const snapshot = await getAppSnapshot({ url: customPortUrl });
       expect(snapshot).toMatchSnapshot();
     });
 

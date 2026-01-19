@@ -9,16 +9,22 @@ import {
   getRouteWithLanguage,
 } from '../../../utils/language-utils.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
-import createCSPHandler from '../../webpack/entry/csp.js';
+import createCSPHandler, { type CSPHandler } from '../../webpack/entry/csp.js';
 
 const log = debug('sku:middleware:vite');
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('../entries/vite-render.js');
-const clientEntry = require.resolve('../entries/vite-client.js');
+const renderEntry = require.resolve('#entries/vite-render');
+const clientEntry = require.resolve('#entries/vite-client');
 
-export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
+export const middlewarePlugin = ({
+  skuContext,
+  environment,
+}: {
+  skuContext: SkuContext;
+  environment: string;
+}): Plugin => ({
   name: 'vite-plugin-sku-server-middleware',
   async configureServer(server) {
     if (
@@ -79,7 +85,7 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
         const { pathname: path } = url;
 
         const matchingRoute = getMatchingRoute({
-          hostname: host,
+          hostname,
           path,
           routes: skuContext.routes,
           sites: skuContext.sites,
@@ -96,29 +102,36 @@ export const middlewarePlugin = (skuContext: SkuContext): Plugin => ({
         const language =
           getLanguageFromRoute(path, matchingRoute, skuContext) ?? '';
 
+        let cspHandler: CSPHandler | undefined;
+
+        if (skuContext.cspEnabled) {
+          cspHandler = createCSPHandler({
+            extraHosts: [
+              skuContext.paths.publicPath,
+              ...skuContext.cspExtraScriptSrcHosts,
+            ],
+            isDevelopment: process.env.NODE_ENV === 'development',
+          });
+        }
+
         try {
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
           let html = await (viteRender as ViteRenderFunction)({
-            environment: 'development',
+            environment,
             language,
             route: getRouteWithLanguage(matchingRoute.route, language),
             routeName: matchingRoute.name || '',
             site: site?.name || '',
             clientEntry,
+            createUnsafeNonce: cspHandler
+              ? cspHandler.createUnsafeNonce
+              : undefined,
           });
 
           html = await server.transformIndexHtml(req.url || '/', html);
 
-          if (skuContext.cspEnabled) {
-            const cspHandler = createCSPHandler({
-              extraHosts: [
-                skuContext.paths.publicPath,
-                ...skuContext.cspExtraScriptSrcHosts,
-              ],
-              isDevelopment: process.env.NODE_ENV === 'development',
-            });
-
+          if (cspHandler) {
             html = cspHandler.handleHtml(html);
           }
 

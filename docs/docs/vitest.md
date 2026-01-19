@@ -14,7 +14,7 @@ Before making any changes, it is highly recommend to read [the Vitest documentat
 To enable Vitest in `sku`, first install the required dependencies:
 
 ```bash
-pnpm add -D vitest @sku-lib/vitest
+pnpm add -D vitest
 ```
 
 Then, configure [`testRunner`][test runner] in your `sku` config:

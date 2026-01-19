@@ -1,7 +1,7 @@
-import { getAddCommand, isAtLeastPnpmV10 } from '@sku-lib/utils';
+import { getAddCommand, isAtLeastPnpmV10 } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
-import { execAsync } from '../utils/execAsync.js';
 import type { Template } from '../types/index.js';
+import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
   'braid-design-system@latest',
@@ -15,7 +15,7 @@ const COMMON_DEV_DEPENDENCIES = [
   '@types/react',
   '@types/react-dom',
 ];
-const VITE_DEV_DEPENDENCIES = ['vitest', '@sku-lib/vitest'];
+const VITE_DEV_DEPENDENCIES = ['vitest'];
 
 export const installDependencies = async (
   projectPath: string,

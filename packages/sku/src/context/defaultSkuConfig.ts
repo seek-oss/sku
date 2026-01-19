@@ -50,4 +50,5 @@ export default {
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
   pathAliases: {},
   dangerouslySetViteConfig: undefined,
+  dangerouslySetVitestConfig: defaultDecorator,
 } satisfies CompleteSkuConfig;

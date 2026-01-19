@@ -3,9 +3,11 @@ import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
 import type { Plugin } from 'vite';
+import type { TestUserConfig } from 'vitest/node';
 
 export type ViteRenderFunction = (
   options: {
+    createUnsafeNonce?: () => string;
     clientEntry: string;
   } & SharedRenderProps,
 ) => Promise<string>;
@@ -58,6 +60,7 @@ export interface RenderAppProps extends SharedRenderProps {
   SkuProvider: ({ children }: { children: ReactNode }) => JSX.Element;
   _addChunk: (chunkName: string) => void;
   renderToStringAsync: (element: ReactNode) => Promise<string>;
+  createUnsafeNonce?: (nonce: string) => void;
 }
 
 interface RenderDocumentProps<App> extends SharedRenderProps {
@@ -207,6 +210,16 @@ export interface SkuConfigBase {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig
    */
   dangerouslySetTSConfig?: (skuTSConfig: any) => any;
+
+  /**
+   * This function provides a way to modify sku's Vitest configuration.
+   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Before customizing your Vitest configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetvitestconfig
+   */
+  dangerouslySetVitestConfig?: (config: TestUserConfig) => TestUserConfig;
 
   /**
    * Path to a file in your project that exports a function that can receive the Express server.

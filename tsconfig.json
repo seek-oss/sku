@@ -11,7 +11,7 @@
     "incremental": true,
     "resolveJsonModule": true
   },
-  "include": ["**/*", "eslint.config.ts", "types.d.ts"],
+  "include": ["**/*", "eslint.config.js", "types.d.ts"],
   "exclude": [
     "node_modules",
     "fixtures",

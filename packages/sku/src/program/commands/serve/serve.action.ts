@@ -24,6 +24,7 @@ import {
   validatePeerDeps,
 } from '../../../utils/configure.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { serverUrls } from '@sku-private/utils';
 
 export const serveAction = async ({
   site: preferredSite,
@@ -182,33 +183,41 @@ export const serveAction = async ({
     hosts,
   });
 
+  // @ts-expect-error This seems to have never been a valid event handler, but leaving it here so as
+  // not to accidentally break anything
   app.on('error', console.error);
 
   server.listen(availablePort, () => {
-    const proto = httpsDevServer ? 'https' : 'http';
-    const url = `${proto}://${appHosts[0]}:${availablePort}${initialPath}`;
-
-    console.log();
-
-    const sitesWithHosts = sites.filter((site) => site.host);
+    const preferredHost = sites.find(
+      ({ name }) => name === preferredSite,
+    )?.host;
+    const urls = serverUrls({
+      // Sort the preferred host to the top of the list
+      hosts: !preferredHost
+        ? appHosts
+        : appHosts.sort((a, b) => {
+            if (a === preferredHost) {
+              return -1;
+            }
+            if (b === preferredHost) {
+              return 1;
+            }
+            return 0;
+          }),
+      port: availablePort,
+      initialPath,
+      https: httpsDevServer,
+    });
 
     console.log(chalk.blue('Server started'));
-    if (sitesWithHosts.length > 0) {
-      sitesWithHosts.forEach((site) => {
-        const siteUrl = `${proto}://${site.host}:${availablePort}${initialPath}`;
-
-        console.log(
-          chalk.blue(
-            `${chalk.bold(site.name)} site available at ${chalk.underline(siteUrl)}`,
-          ),
-        );
-      });
+    if (skuContext.listUrls) {
+      urls.printAll();
     } else {
-      console.log(chalk.blue(`Site available at ${chalk.underline(url)}`));
+      urls.print();
     }
 
     console.log();
 
-    openBrowser(url);
+    openBrowser(urls.first());
   });
 };

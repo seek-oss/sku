@@ -11,7 +11,7 @@ import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifier
 import { getWebpackLoadableSpecifierName } from './helpers/getWebpackLoadableSpecifierName.js';
 import { convertWebpackToViteImport } from './helpers/convertWebpackToViteImport.js';
 import { injectModuleID } from './helpers/injectModuleID.js';
-import { getExecuteCommand } from '@sku-lib/utils';
+import { getExecuteCommand } from '@sku-private/utils';
 
 /* NOTE: This implementation can probably be improved and simplified.
  * My primary goal was to get it working and replacing but my limited experience with AST parsing is likely showing.
@@ -101,7 +101,7 @@ export function preloadPlugin({
 
             // Find the loadable import name and see if it has been aliased.
             if (
-              t.isLiteral(importPath.node.source, {
+              t.isStringLiteral(importPath.node.source, {
                 value: VITE_LOADABLE_IMPORT,
               })
             ) {
@@ -111,7 +111,7 @@ export function preloadPlugin({
             }
 
             if (
-              t.isLiteral(importPath.node.source, {
+              t.isStringLiteral(importPath.node.source, {
                 value: WEBPACK_LOADABLE_IMPORT,
               })
             ) {

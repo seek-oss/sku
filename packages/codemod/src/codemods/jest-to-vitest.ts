@@ -23,12 +23,24 @@ export const transform = async (source: string) => {
   // Replace `jest.<method>` with `vi.<method>`
 
   const jestMethods = root.findAll({
-    // Matches `jest.<method>` except `jest.requireActual` as that is handled separately
+    // Matches `jest.<method>` except `jest.requireActual`, `jest.setTimeout`, and `jest.fn<...>` as those are handled separately
     rule: {
       pattern: 'jest.$METHOD',
       kind: 'member_expression',
       not: {
-        pattern: 'jest.requireActual',
+        any: [
+          { pattern: 'jest.requireActual' },
+          { pattern: 'jest.setTimeout' },
+          {
+            pattern: 'jest.fn',
+            inside: {
+              kind: 'call_expression',
+              has: {
+                kind: 'type_arguments',
+              },
+            },
+          },
+        ],
       },
     },
   });
@@ -42,6 +54,53 @@ export const transform = async (source: string) => {
   }
 
   if (jestMethods.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  const jestFnGenericCalls = root.findAll({
+    rule: {
+      pattern: 'jest.fn<$GENERIC_ARG1,$GENERIC_ARG2>($$$MATCHER_ARGS)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestFnGenericCalls) {
+    const returnType = node.getMatch('GENERIC_ARG1')?.text();
+    const parametersType = node.getMatch('GENERIC_ARG2')?.text();
+    const matcherArgs = node.getMatch('MATCHER_ARGS')?.text();
+
+    if (returnType && parametersType) {
+      // Transform: jest.fn<ReturnType, Parameters>() -> vi.fn<(...args: Parameters) => ReturnType>()
+      const args = matcherArgs ? `(${matcherArgs})` : '()';
+      edits.push(
+        node.replace(
+          `vi.fn<(...args: ${parametersType}) => ${returnType}>${args}`,
+        ),
+      );
+    }
+  }
+
+  if (jestFnGenericCalls.length > 0) {
+    vitestImports.add('vi');
+  }
+
+  // Replace `jest.setTimeout` with `vi.setConfig({ testTimeout: ... })`
+  const jestSetTimeoutCalls = root.findAll({
+    rule: {
+      pattern: 'jest.setTimeout($TIMEOUT)',
+      kind: 'call_expression',
+    },
+  });
+
+  for (const node of jestSetTimeoutCalls) {
+    const timeoutArg = node.getMatch('TIMEOUT')?.text();
+
+    if (timeoutArg) {
+      edits.push(node.replace(`vi.setConfig({ testTimeout: ${timeoutArg} })`));
+    }
+  }
+
+  if (jestSetTimeoutCalls.length > 0) {
     vitestImports.add('vi');
   }
 
@@ -94,6 +153,36 @@ export const transform = async (source: string) => {
   for (const node of requireActualNodes) {
     const edit = node.replace('await vi.importActual');
     edits.push(edit);
+  }
+
+  // Transform jest hooks with function references to arrow functions
+  // eg beforeAll(someSetupFunction) -> beforeAll(() => { someSetupFunction() })
+  const lifecycleHooks = ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'];
+
+  const hookCallsWithFunctionReferences = root.findAll({
+    rule: {
+      any: lifecycleHooks.map((hook) => ({
+        pattern: `${hook}($ARG)`,
+        kind: 'call_expression',
+      })),
+    },
+  });
+
+  for (const node of hookCallsWithFunctionReferences) {
+    const arg = node.getMatch('ARG');
+    if (arg) {
+      const argText = arg.text();
+      // Check if the argument is a function reference (not a function expression or arrow function)
+      // Function references are typically identifiers or member expressions like 'scoringService.spy'
+      const isFunctionReference =
+        arg.kind() === 'identifier' || arg.kind() === 'member_expression';
+
+      if (isFunctionReference) {
+        // Wrap the function reference in an arrow function
+        const edit = arg.replace(`() => { ${argText}() }`);
+        edits.push(edit);
+      }
+    }
   }
 
   // Track usage of Jest globals and import them from `vitest`
@@ -159,6 +248,112 @@ export const transform = async (source: string) => {
 
   for (const node of foundFailingTests) {
     const edit = node.replace('fails');
+    edits.push(edit);
+  }
+
+  // Replace generics in expect chains with satisfies operator
+  // This handles patterns like:
+  // - expect(result).resolves.toEqual<MyType>({}) -> expect(result).resolves.toEqual({} satisfies MyType)
+  // - expect(result).rejects.toThrow<ErrorType>({}) -> expect(result).rejects.toThrow({} satisfies ErrorType)
+  // - await expect(result).resolves.toEqual<MyType>({}) -> await expect(result).resolves.toEqual({} satisfies MyType)
+  //
+  // Only transforms calls that contain .resolves or .rejects as these are the only cases
+  // where Vitest doesn't support generics
+
+  // Use exhaustive patterns to match all possible expect chains with resolves/rejects and generics
+  const expectChainGenerics = root.findAll({
+    rule: {
+      any: [
+        {
+          pattern:
+            'expect($EXPECT_ARG).resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).not.resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).not.rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).resolves.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'expect($EXPECT_ARG).rejects.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        // Patterns with await keyword
+        {
+          pattern:
+            'await expect($EXPECT_ARG).resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).not.resolves.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).not.rejects.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).resolves.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+        {
+          pattern:
+            'await expect($EXPECT_ARG).rejects.not.$MATCHER<$$$GENERIC_ARGS>($$$MATCHER_ARGS)',
+        },
+      ],
+    },
+  });
+
+  for (const node of expectChainGenerics) {
+    // Extract pattern-matched components using getMultipleMatches for multi-token patterns
+    const expectArg = node.getMatch('EXPECT_ARG')?.text();
+    const matcher = node.getMatch('MATCHER')?.text();
+
+    // Use getMultipleMatches for multi-token patterns - works correctly where getMatch fails
+    const genericArgsNodes = node.getMultipleMatches('GENERIC_ARGS');
+    const matcherArgsNodes = node.getMultipleMatches('MATCHER_ARGS');
+
+    if (!expectArg || !matcher || genericArgsNodes.length === 0) {
+      continue;
+    }
+
+    // Extract the generic type (should be a single node for the entire generic)
+    const genericArgs = genericArgsNodes[0]?.text();
+
+    if (!genericArgs) {
+      continue;
+    }
+
+    // Filter out comma separators from the matched arguments
+    const actualArgs = matcherArgsNodes.filter(
+      (argNode) => argNode.text() !== ',',
+    );
+
+    if (actualArgs.length === 0) {
+      // No arguments - skip transformation for empty calls
+      continue;
+    }
+
+    // Extract the part before generics and reconstruct with satisfies
+    const fullText = node.text();
+    const beforeGeneric = fullText.substring(0, fullText.indexOf('<'));
+    const argText = actualArgs[0].text();
+    const replacement = `${beforeGeneric}(${argText} satisfies ${genericArgs})`;
+
+    const edit = node.replace(replacement);
     edits.push(edit);
   }
 

@@ -1,11 +1,10 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, it, expect } from 'vitest';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
   skipCleanup,
 } from '@sku-private/testing-library';
@@ -31,18 +30,13 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
-
-      afterAll(cleanup);
 
       it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -51,7 +45,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -70,19 +63,16 @@ describe('multiple-routes', () => {
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await build.findByText('Sku build complete');
 
         const serve = await sku('serve', portArgs);
-        expect(await serve.findByText('Server started')).toBeInTheConsole();
+        await serve.findByText('Server started');
       });
-
-      afterAll(cleanup);
 
       it(`should render home page correctly`, async ({ task }) => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });
@@ -91,7 +81,6 @@ describe('multiple-routes', () => {
         skipCleanup(task.id);
         const snapshot = await getAppSnapshot({
           url: `${url}/details/123`,
-          expect,
         });
         expect(snapshot).toMatchSnapshot();
       });

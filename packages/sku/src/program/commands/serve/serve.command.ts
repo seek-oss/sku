@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import { siteOption } from '../../options/site.option.js';
 import { portOption, strictPortOption } from '../../options/port.option.js';
+import { listUrlsOption } from '../../options/list-urls.js';
 
 export const serveCommand = new Command('serve')
   .description(
@@ -9,6 +10,7 @@ export const serveCommand = new Command('serve')
   .addOption(siteOption)
   .addOption(portOption)
   .addOption(strictPortOption)
+  .addOption(listUrlsOption)
   .action(async ({ site, skuContext }, command) => {
     const { serveAction } = await import('./serve.action.js');
     const { environment } = command.optsWithGlobals();

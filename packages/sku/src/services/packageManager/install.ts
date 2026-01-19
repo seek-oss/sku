@@ -1,4 +1,4 @@
-import { getAddCommand, type GetAddCommandOptions } from '@sku-lib/utils';
+import { getAddCommand, type GetAddCommandOptions } from '@sku-private/utils';
 
 import { spawn } from 'cross-spawn';
 

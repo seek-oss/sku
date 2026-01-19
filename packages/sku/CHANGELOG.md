@@ -1,5 +1,213 @@
 # sku
 
+## 15.8.0
+
+### Minor Changes
+
+- lint|format: Enforce sorted keys in package.json ([#1480](https://github.com/seek-oss/sku/pull/1480))
+
+  ESLint will now warn if the keys in package.json are not sorted. Running `sku format` will automatically fix the sort order.
+
+  If you need to, you can disable this rule by using `dangerouslySetESLintConfig` in your sku config (not recommended):
+
+  ```ts
+  const config = {
+    ...,
+    dangerouslySetESLintConfig: (esLintConfig) => [
+      ...esLintConfig,
+      {
+        files: ['**/package.json'],
+        rules: {
+          'package-json/sort': 'off',
+        },
+      },
+    ],
+  }
+  ```
+
+## 15.7.1
+
+### Patch Changes
+
+- vite|vitest: Ensure compilePackage includes defaults ([#1489](https://github.com/seek-oss/sku/pull/1489))
+
+  Default and automatically resolved compilePackage values are now properly included.
+
+- Remove unused `eta` dependency ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Re-enable `vite-plugin-cjs-interop` dependency ([#1481](https://github.com/seek-oss/sku/pull/1481))
+
+  Previously, this package was internalised due to a bug. Now that the issue has been resolved upstream, we're reverting to using the official package.
+
+- Remove unused `prompts` dependency ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `serialize-javascript` dependency to `^7.0.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `magicast` dependency to `^0.5.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Remove unused `compression` dependency ([#1488](https://github.com/seek-oss/sku/pull/1488))
+
+- Update `webpack-bundle-analyzer` dependency to `^5.1.1` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `react-refresh` dependency to `^0.18.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Update `vite-tsconfig-paths` dependency to `^6.0.3` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+- Fix incorrect hostname matching for `vite` when using non-standard HTTP ports (e.g. in local development). ([#1484](https://github.com/seek-oss/sku/pull/1484))
+
+## 15.7.0
+
+### Minor Changes
+
+- Support Storybook v10 ([#1472](https://github.com/seek-oss/sku/pull/1472))
+
+  Storybook v10 requires its configuration files to be written in ESM. In applications that are already using ESM (have set `"type": "module"` in their `package.json`), there should be very little, if anything, to change.
+
+  If you are not using ESM yet, then you _may_ need to make changes to your storybook configuration files, though it's worth running `storybook` first to confirm whether any changes are necessary.
+
+  Typical changes include:
+  - Renaming file extensions from `.js` to `.mjs` (or typescript equivalents)
+  - Converting `require` statements to `import` statements
+  - Converting `module.exports` to `export` statements
+  - Adding file extensions to import statements (e.g. `import foo from './foo.js'` instead of `import foo from './foo'`)
+
+  For more information, see the [Storybook v10 migration guide].
+
+  [Storybook v10 migration guide]: https://storybook.js.org/docs/releases/migration-guide
+
+### Patch Changes
+
+- Enable pnpm-plugin-sku install notice ([#1478](https://github.com/seek-oss/sku/pull/1478))
+
+  Messaging was temporarily removed due to Renovate issues with configDependencies. With the issue fixed, the install notice is reenabled.
+
+- Update `eslint-config-seek` dependency to `^15.0.4` ([#1476](https://github.com/seek-oss/sku/pull/1476))
+
+## 15.6.0
+
+### Minor Changes
+
+- Use `vitest`-specific ESLint rules when `testRunner: 'vitest'` is configured ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers using `vitest` may see new ESLint rules applied to their codebase.
+  Previously `jest` rules were always applied regardless of the configured test runner.
+
+- Update `eslint-config-seek` to `^15.0.0` ([#1466](https://github.com/seek-oss/sku/pull/1466))
+
+  Consumers may see new linting errors or warnings. Some of these may be auto-fixable via `sku format`, but others may require manual intervention. Please see the [`eslint-config-seek` changelog] for more information.
+
+  [`eslint-config-seek` changelog]: https://github.com/seek-oss/eslint-config-seek/blob/master/CHANGELOG.md#1500
+
+### Patch Changes
+
+- Warn if pnpm virtual store is found when another package manager in use ([#1469](https://github.com/seek-oss/sku/pull/1469))
+
+  When a `pnpm` virtual store directory (`node_modules/.pnpm`) is detected but a different package manager (such as npm or yarn) is in use, a warning will now be printed, but the build will continue.
+
+  **Note:** This behavior is only temporary and is _not recommended_; mixing package managers in a project can cause unexpected issues. Please migrate to a consistent package manager as soon as possible. This warning may become a hard error in a future release.
+
+## 15.5.0
+
+### Minor Changes
+
+- `vite`: Enable local HTTPS dev servers to use the HTTP/2 protocol ([#1462](https://github.com/seek-oss/sku/pull/1462))
+
+### Patch Changes
+
+- Migrate package bundling to use tsdown ([#1464](https://github.com/seek-oss/sku/pull/1464))
+
+- Updated dependencies [[`a5b0195`](https://github.com/seek-oss/sku/commit/a5b0195c6d85632bcd43be89b0aeb23cb717b9b9)]:
+  - @sku-lib/babel-plugin-display-name@0.0.2
+  - @sku-lib/vite@1.0.1
+
+## 15.4.0
+
+### Minor Changes
+
+- New `createUnsafeNonce` allows inserting [nonce] values in [Content Security Policy (CSP)] Tag. ([#1459](https://github.com/seek-oss/sku/pull/1459))
+
+  Nonce's can be used to permit inline scripts that are generated after the initial render.
+  Nonce's will allow dynamic scripts to run without validation.
+  Please consider if other options can be used and if using this feature is safe for your use-case.
+
+  ```ts
+  // render.tsx
+  export default {
+    renderApp: ({ createUnsafeNonce }) => {
+      const appHtml = renderToString(<App />);
+      const dynamicScriptNonce = createUnsafeNonce();
+
+      return { appHtml, dynamicScriptNonce };
+    },
+    // ...
+  }
+  ```
+
+  [nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
+  [Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+
+- Add vitest v4 support ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
+- Added `dangerouslySetVitestConfig` option ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
+### Patch Changes
+
+- webpack: Scope css loader by requesting module not file path ([#1461](https://github.com/seek-oss/sku/pull/1461))
+
+- Remove `@sku-lib/vitest` as a peer dependency. ([#1455](https://github.com/seek-oss/sku/pull/1455))
+
+  `@sku-lib/vitest` is now included in the core `sku` package. If you use `testRunner: 'vitest'` in your sku config, simply add `vitest` as a dev dependency if it is not already present:
+
+  ```sh
+  pnpm install -D vitest
+  ```
+
+  You can safely remove `@sku-lib/vitest` from your dependencies.
+
+- `vite`: Fix `compilePackages` bundling ([#1449](https://github.com/seek-oss/sku/pull/1449))
+
+## 15.3.1
+
+### Patch Changes
+
+- Replace `@zendesk/babel-plugin-react-displayname` dependency with `@sku-lib/babel-plugin-display-name` ([#1450](https://github.com/seek-oss/sku/pull/1450))
+
+- Updated dependencies [[`bdd48be`](https://github.com/seek-oss/sku/commit/bdd48be26240bdca78e6ed5046f2fa93366ba43e)]:
+  - @sku-lib/babel-plugin-display-name@0.0.1
+
+## 15.3.0
+
+### Minor Changes
+
+- serve: Add support for the `--list-urls, -l` flag ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+  Previously, `serve` printed every site's URL to the console. This logic now aligns with the behaviour of the `start|start-ssr` commands - only printing the first available server URL unless the `-l` flag is passed.
+
+  The service will still be available on all site hosts regardless of the passed flag. This change only affects terminal output.
+
+### Patch Changes
+
+- Fix `@seek/sku-telemetry` package detection ([#1447](https://github.com/seek-oss/sku/pull/1447))
+
+- serve: `--site` flag will open the given site by default ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+- start|start-ssr|serve: The first url displayed when starting a server will be the one opened in the browser ([#1448](https://github.com/seek-oss/sku/pull/1448))
+
+- Updated dependencies [[`c7408a2`](https://github.com/seek-oss/sku/commit/c7408a27de24db01fc599bad2e96cd1f3a110682)]:
+  - @sku-lib/utils@1.1.1
+
+## 15.2.1
+
+### Patch Changes
+
+- test(vitest): Vitest now works for React apps ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
+  The vitest runner wasn't inheriting the vite config so many vitest plugins, including React, were missing. This has now been resolved.
+
+- start(vite): sku `environment` value will be set correctly ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
+- vite: Transitive cjs interop now works correctly ([#1441](https://github.com/seek-oss/sku/pull/1441))
+
 ## 15.2.0
 
 ### Minor Changes

@@ -13,7 +13,6 @@ import makeWebpackConfig from '../../../services/webpack/config/webpack.config.j
 import { getAppHosts } from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
 import { getSiteForHost } from '../../../context/getSiteForHost.js';
-import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
 import { getMatchingRoute } from '../../../utils/routeMatcher.js';
 import {
   getLanguageFromRoute,
@@ -21,7 +20,7 @@ import {
 } from '../../../utils/language-utils.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { printUrls } from '@sku-lib/utils';
+import { serverUrls } from '@sku-private/utils';
 
 const localhost = '0.0.0.0';
 
@@ -29,7 +28,7 @@ const hot = process.env.SKU_HOT !== 'false';
 
 export const webpackStartHandler = async ({
   stats: statsOption,
-  environment: environmentOption,
+  environment,
   skuContext,
 }: {
   stats: StatsChoices;
@@ -39,11 +38,6 @@ export const webpackStartHandler = async ({
   process.env.NODE_ENV = 'development';
   const { port, initialPath, paths, routes, httpsDevServer, sites, hosts } =
     skuContext;
-
-  const environment = resolveEnvironment({
-    environment: environmentOption,
-    skuContext,
-  });
 
   const availablePort = await allocatePort({
     port: port.client,
@@ -68,6 +62,14 @@ export const webpackStartHandler = async ({
 
   const clientCompiler = webpack(clientWebpackConfig);
   const renderCompiler = webpack(renderWebpackConfig);
+
+  if (!clientCompiler) {
+    throw new Error('Failed to create client webpack compiler');
+  }
+
+  if (!renderCompiler) {
+    throw new Error('Failed to create render webpack compiler');
+  }
 
   renderCompiler.watch({}, (err, stats) => {
     if (err) {
@@ -187,16 +189,20 @@ export const webpackStartHandler = async ({
       return;
     }
 
-    const url = `${httpsDevServer ? 'https' : 'http'}://${
-      appHosts?.[0]
-    }:${availablePort}${initialPath}`;
-
-    printUrls(skuContext.listUrls ? appHosts : [appHosts[0]], {
-      https: httpsDevServer,
-      initialPath,
+    const urls = serverUrls({
+      hosts: appHosts,
       port: availablePort,
+      initialPath,
+      https: httpsDevServer,
     });
 
-    openBrowser(url);
+    console.log('Starting development server...');
+    if (skuContext.listUrls) {
+      urls.printAll();
+    } else {
+      urls.print();
+    }
+
+    openBrowser(urls.first());
   });
 };

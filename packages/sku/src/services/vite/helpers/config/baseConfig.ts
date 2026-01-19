@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import { type InlineConfig, mergeConfig } from 'vite';
 
-import { cjsInterop } from 'vite-plugin-cjs-interop';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import react from '@vitejs/plugin-react';
 
@@ -13,10 +12,11 @@ import { fixViteVanillaExtractDepScanPlugin } from '../../plugins/esbuild/fixVit
 import { createVocabChunks } from '@vocab/vite/chunks';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { getVocabConfig } from '../../../vocab/config.js';
-import vocabPluginVite from '@vocab/vite';
+import { vitePluginVocab } from '@vocab/vite';
 import { dangerouslySetViteConfig } from '../../plugins/dangerouslySetViteConfig.js';
-import { setSsrNoExternal } from '../../plugins/setSsrNoExternal.js';
+import { setNoExternal } from '../../plugins/setNoExternal.js';
 import browserslistToEsbuild from '../browserslist-to-esbuild.js';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 const require = createRequire(import.meta.url);
 
@@ -39,7 +39,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
 
   if (skuContext.displayNamesProd) {
     prodBabelPlugins.push(
-      require.resolve('@zendesk/babel-plugin-react-displayname'),
+      require.resolve('@sku-lib/babel-plugin-display-name'),
     );
   }
 
@@ -47,10 +47,9 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     base: skuContext.publicPath,
     publicDir: false,
     root: process.cwd(),
-    clearScreen: process.env.NODE_ENV !== 'test',
     plugins: [
       dangerouslySetViteConfig(skuContext),
-      vocabConfig && vocabPluginVite.default({ vocabConfig }),
+      vocabConfig && vitePluginVocab({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
         dependencies: skuContext.cjsInteropDependencies,
@@ -68,7 +67,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
         convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
       }),
       polyfillsPlugin(skuContext),
-      setSsrNoExternal(skuContext),
+      setNoExternal(skuContext),
     ],
     resolve: {
       alias: {
@@ -101,7 +100,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
-      exclude: skuContext.skuConfig.skipPackageCompatibilityCompilation,
+      exclude: skuContext.skipPackageCompatibilityCompilation,
     },
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],
@@ -109,7 +108,21 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
   };
 };
 
+const getVitestBaseConfig = (skuContext: SkuContext): InlineConfig => ({
+  plugins: [
+    tsconfigPaths(),
+    react(),
+    setNoExternal(skuContext),
+    vanillaExtractPlugin(),
+  ],
+});
+
 export const createSkuViteConfig = (
   config: InlineConfig,
   skuContext: SkuContext,
 ) => mergeConfig(getBaseConfig(skuContext), config);
+
+export const createSkuVitestConfig = (
+  config: InlineConfig,
+  skuContext: SkuContext,
+) => mergeConfig(getVitestBaseConfig(skuContext), config);

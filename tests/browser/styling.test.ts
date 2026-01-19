@@ -1,12 +1,11 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
-import type { Page } from 'puppeteer';
+import { getAppSnapshot, getTextContent } from '@sku-private/playwright';
+import { dirContentsToObject } from '@sku-private/test-utils';
 import {
-  dirContentsToObject,
-  getStoryPage,
-  getTextContentFromFrameOrPage,
-} from '@sku-private/test-utils';
-import { scopeToFixture } from '@sku-private/testing-library';
+  cleanup,
+  scopeToFixture,
+  skipCleanup,
+} from '@sku-private/testing-library';
 
 const port = 8205;
 const devServerUrl = `http://localhost:${port}`;
@@ -14,21 +13,20 @@ const devServerUrl = `http://localhost:${port}`;
 const { sku, exec, fixturePath } = scopeToFixture('styling');
 const distDir = fixturePath('dist');
 
-const storybookStartedRegex =
-  /Storybook \d+\.\d+\.\d+ for react-webpack5 started/;
+const storybookStartedRegex = /Storybook ready!/;
 
 describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
     });
 
     it('should create valid app', async () => {
       const serve = await sku('serve');
       expect(await serve.findByText('Server started')).toBeInTheConsole();
 
-      const app = await getAppSnapshot({ url: devServerUrl, expect });
+      const app = await getAppSnapshot({ url: devServerUrl });
       expect(app).toMatchSnapshot();
     });
 
@@ -45,7 +43,7 @@ describe('styling', () => {
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
 
-      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
+      const snapshot = await getAppSnapshot({ url: devServerUrl });
       expect(snapshot).toMatchSnapshot();
     });
   });
@@ -64,8 +62,6 @@ describe('styling', () => {
     const storyIframePath = '/iframe.html?viewMode=story&id=blueblock--default';
     const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
 
-    let storyPage: Page;
-
     beforeAll(async () => {
       const storybook = await exec('pnpm', [
         'storybook',
@@ -75,20 +71,17 @@ describe('styling', () => {
         '--port',
         storybookPort.toString(),
       ]);
-      expect(
-        await storybook.findByText(storybookStartedRegex),
-      ).toBeInTheConsole();
-
-      storyPage = await getStoryPage(storyIframeUrl);
+      await storybook.findByText(storybookStartedRegex);
     });
 
     afterAll(async () => {
-      await storyPage?.close();
+      await cleanup();
     });
 
-    it('should render external styles', async () => {
-      const { text, fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+    it('should render external styles', async ({ task }) => {
+      skipCleanup(task.id);
+      const { text, fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-external]',
       );
 
@@ -96,9 +89,10 @@ describe('styling', () => {
       expect(fontSize).toEqual('9px');
     });
 
-    it('should render Vanilla Extract styles', async () => {
-      const { fontSize } = await getTextContentFromFrameOrPage(
-        storyPage,
+    it('should render Vanilla Extract styles', async ({ task }) => {
+      skipCleanup(task.id);
+      const { fontSize } = await getTextContent(
+        storyIframeUrl,
         '[data-automation-vanilla]',
       );
 

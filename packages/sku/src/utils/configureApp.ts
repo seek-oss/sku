@@ -1,4 +1,10 @@
-import { getPathFromCwd, writeFileToCWD } from '@sku-lib/utils';
+import {
+  getPathFromCwd,
+  isAtLeastPnpmV10,
+  isAtLeastRecommendedPnpmVersion,
+  writeFileToCWD,
+  rootDir,
+} from '@sku-private/utils';
 
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -22,6 +28,8 @@ import getCertificate from './certificate.js';
 
 import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
+import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
+import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 
 const coverageFolder = 'coverage';
 
@@ -100,7 +108,7 @@ export default async (skuContext: SkuContext) => {
 
   const eslintConfig = dedent`import { createEslintConfig } from 'sku/config/eslint';
 
-                              export default createEslintConfig(${resolvedConfigPath});`;
+                              export default await createEslintConfig(${resolvedConfigPath});`;
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
 
   gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);
@@ -157,23 +165,18 @@ export default async (skuContext: SkuContext) => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  /**
-   * ! The following code has been intentionally disabled because `configDependencies` cause issues with Renovate/Mend, leading to no automated dependency updates.
-   * ! Once this issue is resolved, we can re-enable this code.
-   * ! @see https://github.com/renovatebot/renovate/discussions/38237
-   */
   // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's package manager
-  // if (rootDir && isAtLeastPnpmV10()) {
-  //   const pnpmConfigDependencies = await getPnpmConfigDependencies();
+  if (rootDir && isAtLeastPnpmV10()) {
+    const pnpmConfigDependencies = await getPnpmConfigDependencies();
 
-  //   const hasRecommendedPnpmVersionInstalled =
-  //     isAtLeastRecommendedPnpmVersion();
-  //   const pnpmPluginSkuInstalled =
-  //     pnpmConfigDependencies.includes('pnpm-plugin-sku');
+    const hasRecommendedPnpmVersionInstalled =
+      isAtLeastRecommendedPnpmVersion();
+    const pnpmPluginSkuInstalled =
+      pnpmConfigDependencies.includes('pnpm-plugin-sku');
 
-  //   await validatePnpmConfig({
-  //     hasRecommendedPnpmVersionInstalled,
-  //     pnpmPluginSkuInstalled,
-  //   });
-  // }
+    await validatePnpmConfig({
+      hasRecommendedPnpmVersionInstalled,
+      pnpmPluginSkuInstalled,
+    });
+  }
 };

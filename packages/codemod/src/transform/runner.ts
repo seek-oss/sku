@@ -1,18 +1,13 @@
 import { glob } from 'tinyglobby';
 import prompts from 'prompts';
-import { dirname, join, resolve } from 'node:path';
+import { join } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
-import { fileURLToPath } from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
 import debug from 'debug';
 
 const log = debug('sku:codemod');
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const transformerDirectory = join(__dirname, '../', 'codemods');
 
 type Options = {
   dry?: boolean;
@@ -88,7 +83,9 @@ export const runTransform = async (
     return;
   }
 
-  const transformerPath = join(transformerDirectory, `${transformer}.js`);
+  const transformerPath = import.meta.resolve(
+    `@sku-lib/codemod/codemods/${transformer}`,
+  );
 
   const cpus =
     os.cpus().length > filesExpanded.length
@@ -154,7 +151,8 @@ type JobOutcome = {
 };
 
 const runJobs = (jobs: JobWorkerData): Promise<JobOutcome> => {
-  const worker = new Worker(resolve(__dirname, './worker.js'), {
+  const workerPath = import.meta.resolve('@sku-lib/codemod/transform/worker');
+  const worker = new Worker(new URL(workerPath), {
     workerData: jobs,
   });
 

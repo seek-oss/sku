@@ -3,7 +3,7 @@ import { getChunkName } from '@vocab/webpack/chunk-name';
 import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor.js';
 import clientContextKey from '../../../../utils/constants/clientContextKey.js';
-import createCSPHandler from '../csp.js';
+import createCSPHandler, { type CSPHandler } from '../csp.js';
 import type { RenderAppProps } from '../../../../types/types.js';
 
 import { renderToStringAsync } from './render-to-string.js';
@@ -34,6 +34,15 @@ export default async (renderParams: RenderAppProps) => {
     publicPath,
   );
 
+  let cspHandler: CSPHandler | undefined;
+
+  if (csp.enabled) {
+    cspHandler = createCSPHandler({
+      extraHosts: [publicPath, ...csp.extraHosts],
+      isDevelopment: process.env.NODE_ENV === 'development',
+    });
+  }
+
   // renderApp is optional for libraries
   if (render.renderApp) {
     app = await render.renderApp({
@@ -42,6 +51,7 @@ export default async (renderParams: RenderAppProps) => {
       _addChunk: (chunkName) => extractor.addChunk(chunkName),
       SkuProvider,
       renderToStringAsync,
+      createUnsafeNonce: cspHandler ? cspHandler.createUnsafeNonce : undefined,
     });
     if (renderContext.language) {
       debug('sku:render:language')(
@@ -75,12 +85,7 @@ export default async (renderParams: RenderAppProps) => {
     app,
   });
 
-  if (csp.enabled) {
-    const cspHandler = createCSPHandler({
-      extraHosts: [publicPath, ...csp.extraHosts],
-      isDevelopment: process.env.NODE_ENV === 'development',
-    });
-
+  if (cspHandler) {
     return cspHandler.handleHtml(result);
   }
 

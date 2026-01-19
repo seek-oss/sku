@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
 
-import { banner, getAddCommand } from '@sku-lib/utils';
+import { banner, getAddCommand } from '@sku-private/utils';
 
 import _debug from 'debug';
 
@@ -47,9 +47,10 @@ try {
   if (process.env.SKU_TELEMETRY !== 'false') {
     // Consumers install this private dependency
     // eslint-disable-next-line import-x/no-unresolved
-    const realProvider = require('@seek/sku-telemetry').default(
-      {},
-    ) as TelemetryProvider;
+    const _mod = require('@seek/sku-telemetry');
+    // Handle changes in module export style between v1.5.0 and v1.6.0
+    const mod = _mod?.default ?? _mod;
+    const realProvider = mod({}) as TelemetryProvider;
 
     // For backwards compat with older versions of @seek/sku-telemetry
     if (typeof realProvider.gauge !== 'function') {

@@ -1,0 +1,34 @@
+{
+  "name": "@sku-lib/babel-plugin-display-name",
+  "version": "0.0.2",
+  "description": "Babel plugin for automatic React display name generation with tree-shaking and prefix support, forked from @mui/internal-babel-plugin-display-name.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/babel-plugin-display-name"
+  },
+  "main": "./dist/plugin.mjs",
+  "module": "./dist/plugin.mjs",
+  "types": "./dist/plugin.d.mts",
+  "exports": {
+    ".": "./dist/plugin.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "dependencies": {
+    "@babel/helper-plugin-utils": "^7.27.1",
+    "@babel/core": "^7.28.5"
+  },
+  "devDependencies": {
+    "@sku-private/tsdown": "workspace:*",
+    "@babel/preset-react": "^7.28.5",
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__helper-plugin-utils": "^7.10.3"
+  }
+}

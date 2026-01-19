@@ -44,17 +44,6 @@ jobs:
       - name: Build Sku
         run: pnpm build
 
-      - name: Set Puppeteer Cache Directory
-        id: set-puppeteer-cache
-        run: echo "PUPPETEER_CACHE_DIR=$HOME/.cache/puppeteer" >> $GITHUB_OUTPUT
-
-      - name: Cache Puppeteer
-        id: puppeteer-cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.set-puppeteer-cache.outputs.PUPPETEER_CACHE_DIR }}
-          key: puppeteer-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
-
       - name: Cache babel-loader
         id: babel-loader-cache
         uses: actions/cache@v4
@@ -62,16 +51,15 @@ jobs:
           path: 'fixtures/*/node_modules/.cache/babel-loader'
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
-      - name: Install Puppeteer
-        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
-        run: pnpm puppeteer browsers install chrome
-
       - name: Set up hosts
         # Couldn't get `sudo pnpm setup-test-hosts` to work
         run: sudo ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts
 
       - name: Lint
         run: pnpm lint
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install chromium --with-deps
 
       - name: Test
         run: aa-exec --profile=chrome pnpm run test

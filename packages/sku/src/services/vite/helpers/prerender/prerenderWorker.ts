@@ -6,7 +6,9 @@ import { workerData } from 'node:worker_threads';
 import { createOutDir, renderEntryChunkName } from '../bundleConfig.js';
 import { createCollector } from '@sku-lib/vite/collector';
 import { createPreRenderedHtml } from '../html/createPreRenderedHtml.js';
-import createCSPHandler from '../../../webpack/entry/csp.js';
+import createCSPHandler, {
+  type CSPHandler,
+} from '../../../webpack/entry/csp.js';
 import { ensureTargetDirectory } from '../../../../utils/buildFileUtils.js';
 
 import type { JobWorkerData } from './prerenderConcurrently.js';
@@ -55,23 +57,29 @@ await Promise.all(
         base: publicPath,
       });
 
+      let cspHandler: CSPHandler | undefined;
+
+      if (cspEnabled) {
+        cspHandler = createCSPHandler({
+          extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
+          isDevelopment: process.env.NODE_ENV === 'development',
+        });
+      }
+
       let html = await createPreRenderedHtml({
         environment,
         language,
         route,
         routeName,
-
         site,
         render,
         loadableCollector,
+        createUnsafeNonce: cspHandler
+          ? cspHandler.createUnsafeNonce
+          : undefined,
       });
 
-      if (cspEnabled) {
-        const cspHandler = createCSPHandler({
-          extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
-          isDevelopment: process.env.NODE_ENV === 'development',
-        });
-
+      if (cspHandler) {
         html = cspHandler.handleHtml(html);
       }
 

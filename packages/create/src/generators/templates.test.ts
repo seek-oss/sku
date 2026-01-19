@@ -1,7 +1,7 @@
 import { describe, it, vi, beforeEach } from 'vitest';
 import { createTemplateData, normalizeFileName } from './templates.js';
 
-vi.mock('@sku-lib/utils', () => ({
+vi.mock('@sku-private/utils', () => ({
   getRunCommand: vi.fn((cmd: string) => `pnpm ${cmd}`),
   getInstallCommand: vi.fn(() => 'pnpm install'),
   getPackageManagerInstallPage: vi.fn(() => 'https://pnpm.io/installation'),

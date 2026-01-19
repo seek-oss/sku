@@ -1,5 +1,5 @@
 import html from 'dedent';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 
 import App from './App';
 

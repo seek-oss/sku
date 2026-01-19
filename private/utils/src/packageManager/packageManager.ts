@@ -1,0 +1,201 @@
+import { findUpSync } from 'find-up';
+import path, { dirname } from 'node:path';
+import { styleText } from 'node:util';
+import type { Command } from 'package-manager-detector';
+import { resolveCommand } from 'package-manager-detector/commands';
+import { INSTALL_PAGE } from 'package-manager-detector/constants';
+import semver from 'semver';
+
+type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
+
+const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+
+const validatePackageManager = (packageManager: string) => {
+  if (!supportedPackageManagers.includes(packageManager)) {
+    throw new Error(
+      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
+        ', ',
+      )}`,
+    );
+  }
+
+  return packageManager as SupportedPackageManager;
+};
+
+const getPackageManagerFromUserAgent = () => {
+  const userAgent = process.env.npm_config_user_agent || '';
+
+  // Default to 'npm'
+  let packageManager = 'npm';
+
+  let version = null;
+  if (userAgent) {
+    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
+    version = userAgent.split(' ')?.[0].split('/')?.[1];
+  }
+
+  if (userAgent.includes('yarn')) {
+    packageManager = 'yarn';
+  }
+
+  if (userAgent.includes('pnpm')) {
+    packageManager = 'pnpm';
+  }
+
+  return { packageManager, version };
+};
+
+// lockfiles should be ordered by priority, highest priority first.
+const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
+  pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
+  npm: 'package-lock.json',
+};
+
+/**
+ * Get the package manager and root directory of the project.
+ * If the project does not have a root directory, `rootDir` will be `null`.
+ */
+const resolvePackageManager = () => {
+  const userAgentPackageManager = getPackageManagerFromUserAgent();
+  const packageManager = validatePackageManager(
+    userAgentPackageManager.packageManager,
+  );
+
+  const expectedLockfile = lockfileByPackageManager[packageManager];
+  const lockFilePath = findUpSync(Object.values(lockfileByPackageManager));
+
+  if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
+    console.warn(
+      styleText(
+        'yellow',
+        `Lockfile mismatch: ${styleText('bold', path.basename(lockFilePath))} is not a valid lockfile for ${styleText('bold', packageManager)}`,
+      ),
+    );
+  }
+
+  // No root found (occurs during `sku init`), `rootDir` will be `null`
+  const rootDir = lockFilePath ? dirname(lockFilePath) : null;
+
+  return {
+    packageManager,
+    rootDir,
+    packageManagerVersion: userAgentPackageManager.version,
+  };
+};
+
+const { rootDir, packageManager, packageManagerVersion } =
+  resolvePackageManager();
+
+export { rootDir, packageManager, packageManagerVersion };
+
+export const isAtLeastPnpmV10 = () =>
+  packageManager === 'pnpm' &&
+  packageManagerVersion &&
+  semver.satisfies(packageManagerVersion, '>=10.0.0');
+
+const recommendedPnpmVersion = '10.13.0';
+export const isAtLeastRecommendedPnpmVersion = () =>
+  Boolean(
+    packageManager === 'pnpm' &&
+      packageManagerVersion &&
+      semver.satisfies(packageManagerVersion, `>=${recommendedPnpmVersion}`),
+  );
+
+export const getCommand = (
+  agent: SupportedPackageManager,
+  command: Command,
+  args: string[],
+) => {
+  const resolvedCommand = resolveCommand(agent, command, args);
+
+  if (!resolvedCommand) {
+    throw new Error(`Unable to resolve command: ${agent} ${command} ${args}`);
+  }
+
+  return `${resolvedCommand.command} ${resolvedCommand.args.join(' ')}`;
+};
+
+export const isYarn = packageManager === 'yarn';
+export const isPnpm = packageManager === 'pnpm';
+export const isNpm = packageManager === 'npm';
+
+export const getRunCommand = (scriptName: string) =>
+  getCommand(packageManager, 'run', [scriptName]);
+
+export const getExecuteCommand = (args: string[]) =>
+  getCommand(packageManager, 'execute', args);
+
+const regularLoglevelArgsByPackageManager: Record<
+  SupportedPackageManager,
+  string[]
+> = {
+  // Yarn doesn't have a loglevel flag
+  yarn: [],
+  pnpm: ['--loglevel', 'error'],
+  npm: ['--loglevel', 'error'],
+};
+
+const verboseLoglevelArgsByPackageManager: Record<
+  SupportedPackageManager,
+  string[]
+> = {
+  yarn: ['--verbose'],
+  pnpm: ['--loglevel', 'info'],
+  npm: ['--loglevel', 'verbose'],
+};
+
+const resolveLogLevelArgs = (logLevel: 'verbose' | 'regular') => {
+  if (logLevel === 'verbose') {
+    return verboseLoglevelArgsByPackageManager[packageManager];
+  }
+
+  return regularLoglevelArgsByPackageManager[packageManager];
+};
+
+export type GetAddCommandOptions = {
+  type?: 'dev' | 'prod';
+  logLevel?: 'verbose' | 'regular';
+  exact?: boolean;
+  deps: string[];
+};
+
+export const getAddCommand = ({
+  type,
+  logLevel,
+  deps,
+  exact,
+}: GetAddCommandOptions) => {
+  const args = [];
+
+  const addingDevDeps = type === 'dev';
+
+  if (addingDevDeps) {
+    const devDepFlag = isYarn ? '--dev' : `--save-dev`;
+    args.push(devDepFlag);
+  }
+
+  if (exact) {
+    const exactFlag = isYarn ? '--exact' : '--save-exact';
+    args.push(exactFlag);
+  }
+
+  if (logLevel) {
+    args.push(...resolveLogLevelArgs(logLevel));
+  }
+
+  args.push(...deps);
+
+  return getCommand(packageManager, 'add', args);
+};
+
+export const getInstallCommand = () =>
+  getCommand(packageManager, 'install', []);
+
+export const getWhyCommand = () => {
+  const whyCommand = isPnpm ? 'why -r' : 'why';
+
+  return `${packageManager} ${whyCommand}`;
+};
+
+export const getPackageManagerInstallPage = () => INSTALL_PAGE[packageManager];

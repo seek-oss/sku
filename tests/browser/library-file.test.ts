@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { dirContentsToObject } from '@sku-private/test-utils';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { getAppSnapshot } from '@sku-private/playwright';
 import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('library-file');
@@ -25,7 +25,7 @@ describe('library-file', () => {
         await start.findByText('Starting development server'),
       ).toBeInTheConsole();
 
-      const snapshot = await getAppSnapshot({ url: devServerUrl, expect });
+      const snapshot = await getAppSnapshot({ url: devServerUrl });
       expect(snapshot).toMatchSnapshot();
     });
   });

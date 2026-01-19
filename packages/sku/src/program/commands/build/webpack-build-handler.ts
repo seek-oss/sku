@@ -37,21 +37,24 @@ export const webpackBuildHandler = async ({
     await runVocabCompile(skuContext);
     await ensureTargetDirectory(paths.target);
     await cleanTargetDirectory(paths.target);
-    await run(
-      webpack(
-        makeWebpackConfig({
-          htmlRenderPlugin: !isLibrary
-            ? createHtmlRenderPlugin({
-                isStartScript: false,
-                skuContext,
-              })
-            : undefined,
-          stats,
-          skuContext,
-        }),
-      ),
-      { stats },
+
+    const compiler = webpack(
+      makeWebpackConfig({
+        htmlRenderPlugin: !isLibrary
+          ? createHtmlRenderPlugin({
+              isStartScript: false,
+              skuContext,
+            })
+          : undefined,
+        stats,
+        skuContext,
+      }),
     );
+    if (!compiler) {
+      throw new Error('Failed to create webpack compiler');
+    }
+
+    await run(compiler, { stats });
     await cleanStaticRenderEntry({ paths });
     await copyPublicFiles({ paths });
 

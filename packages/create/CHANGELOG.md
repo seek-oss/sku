@@ -1,5 +1,50 @@
 # @sku-lib/create
 
+## 1.1.6
+
+### Patch Changes
+
+- Update `eta` dependency to `^4.5.0` ([#1483](https://github.com/seek-oss/sku/pull/1483))
+
+## 1.1.5
+
+### Patch Changes
+
+- Install pnpm-plugin-sku on creation ([#1478](https://github.com/seek-oss/sku/pull/1478))
+
+## 1.1.4
+
+### Patch Changes
+
+- Migrate package bundling to use tsdown ([#1464](https://github.com/seek-oss/sku/pull/1464))
+
+## 1.1.3
+
+### Patch Changes
+
+- Remove `@sku-lib/vitest` as a peer dependency. ([#1455](https://github.com/seek-oss/sku/pull/1455))
+
+  `@sku-lib/vitest` is now included in the core `sku` package. If you use `testRunner: 'vitest'` in your sku config, simply add `vitest` as a dev dependency if it is not already present:
+
+  ```sh
+  pnpm install -D vitest
+  ```
+
+  You can safely remove `@sku-lib/vitest` from your dependencies.
+
+## 1.1.2
+
+### Patch Changes
+
+- No longer install `pnpm-plugin-sku` ([#1451](https://github.com/seek-oss/sku/pull/1451))
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`c7408a2`](https://github.com/seek-oss/sku/commit/c7408a27de24db01fc599bad2e96cd1f3a110682)]:
+  - @sku-lib/utils@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

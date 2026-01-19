@@ -1,4 +1,4 @@
-import { banner } from '@sku-lib/utils';
+import { banner } from '@sku-private/utils';
 import chalk from 'chalk';
 
 const accent = chalk.blue.bold;

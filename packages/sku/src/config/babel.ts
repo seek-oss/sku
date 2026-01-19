@@ -1,4 +1,4 @@
-import { cwd } from '@sku-lib/utils';
+import { cwd } from '@sku-private/utils';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
 import { rootResolutionFileExtensions } from './fileResolutionExtensions.js';
@@ -75,7 +75,7 @@ export default ({
     );
 
     if (displayNamesProd) {
-      plugins.push(require.resolve('@zendesk/babel-plugin-react-displayname'));
+      plugins.push(require.resolve('@sku-lib/babel-plugin-display-name'));
     }
 
     if (removeAssertionsInProduction) {

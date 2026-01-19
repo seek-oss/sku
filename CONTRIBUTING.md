@@ -63,6 +63,12 @@ This can either be done manually, or via the following script:
 sudo pnpm setup-test-hosts
 ```
 
+To run the browser tests, please ensure that Playwright is installed. You can set it up by running:
+
+```sh
+pnpm exec playwright install
+```
+
 To run the test suite locally:
 
 ```sh
@@ -95,6 +101,14 @@ Once you've made the desired changes and you're ready to commit, stage your loca
 > [!NOTE]
 > Due to the inconsistent ordering of our test suite, dot files within the fixture directories can sometimes end up with changes.
 > These changes should not be committed and can be safely discard.
+
+### Debugging browser tests
+
+Browser tests are executed in headless mode by default, meaning the browser UI is not displayed during test runs. To facilitate debugging — such as investigating hydration issues — you can disable headless mode to observe the browser interactively.
+
+Set the environment variable `HEADLESS=false` to run tests in headed mode.
+
+For advanced configuration, you may directly modify `playwright/browser.ts`.
 
 ### Testing Codemods
 

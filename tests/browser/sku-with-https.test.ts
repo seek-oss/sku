@@ -1,12 +1,11 @@
-import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/puppeteer';
+import { describe, beforeAll, it, expect } from 'vitest';
+import { getAppSnapshot } from '@sku-private/playwright';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
-  cleanup,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -14,7 +13,7 @@ import {
 
 const { sku, fixturePath } = scopeToFixture('sku-with-https');
 
-const serverPort = 9894;
+const serverPort = 8120;
 
 describe('sku-with-https', () => {
   describe.each(bundlers)('bundler: %s', async (bundler) => {
@@ -30,23 +29,43 @@ describe('sku-with-https', () => {
     describe('start', () => {
       beforeAll(async () => {
         const start = await sku('start', args[bundler]);
-        expect(
-          await start.findByText('Starting development server'),
-        ).toBeInTheConsole();
+        await start.findByText('Starting development server');
       });
 
-      it('should start a development server', async ({ task }) => {
-        skipCleanup(task.id);
-        const snapshot = await getAppSnapshot({ url, expect });
+      it('should start a development server', async () => {
+        const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot('homepage');
 
-        skipCleanup(task.id);
         const middlewareSnapshot = await getAppSnapshot({
           url: `${url}/test-middleware`,
-          expect,
         });
         expect(middlewareSnapshot).toMatchSnapshot('middleware');
       });
+    });
+  });
+
+  describe('webpack start with ESM middleware', async () => {
+    const port = await getPort();
+    const url = `https://localhost:${port}`;
+    const portArgs = ['--strict-port', `--port=${port}`];
+
+    beforeAll(async () => {
+      const start = await sku('start', [
+        '--config',
+        'sku.config.esm-middleware.mjs',
+        ...portArgs,
+      ]);
+      await start.findByText('Starting development server');
+    });
+
+    it('should start a development server', async () => {
+      const snapshot = await getAppSnapshot({ url });
+      expect(snapshot).toMatchSnapshot('homepage');
+
+      const middlewareSnapshot = await getAppSnapshot({
+        url: `${url}/test-middleware`,
+      });
+      expect(middlewareSnapshot).toMatchSnapshot('esm middleware');
     });
   });
 
@@ -59,7 +78,6 @@ describe('sku-with-https', () => {
 
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(snapshot).toMatchSnapshot();
     });
@@ -71,17 +89,15 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await build.findByText('Sku build complete');
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
-      expect(await serve.findByText('Server started')).toBeInTheConsole();
+      await serve.findByText('Server started');
     });
-
-    afterAll(cleanup);
 
     it('should start a development server', async ({ task }) => {
       skipCleanup(task.id);
-      const snapshot = await getAppSnapshot({ url, expect });
+      const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot();
     });
 
@@ -89,7 +105,6 @@ describe('sku-with-https', () => {
       skipCleanup(task.id);
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,
-        expect,
       });
       expect(snapshot).toMatchSnapshot();
     });

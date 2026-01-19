@@ -1,12 +1,8 @@
 import path from 'node:path';
-import url from 'node:url';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import { getBuildRoutes } from '../../../webpack/config/plugins/createHtmlRenderPlugin.js';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
-
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const toAbsolute = (p: string) => path.resolve(__dirname, p);
 
 export type JobWorkerData = {
   publicPath: string;
@@ -22,7 +18,8 @@ export type JobWorkerData = {
 };
 
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
-  const worker = new Worker(toAbsolute('./prerenderWorker.js'), {
+  const workerPath = new URL(import.meta.resolve('#vite/prerender-worker'));
+  const worker = new Worker(workerPath, {
     workerData: jobs,
   });
 
@@ -43,7 +40,7 @@ const getFileName = (
   skuContext: SkuContext,
   skuRoute: ReturnType<typeof getBuildRoutes>[0],
 ) => {
-  let renderDirectory = skuContext.skuConfig.target;
+  let renderDirectory = skuContext.paths.target;
   const relativeFilePath = skuContext.transformOutputPath(skuRoute);
   const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
   if (!path.isAbsolute(renderDirectory)) {

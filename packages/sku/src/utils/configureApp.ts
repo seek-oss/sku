@@ -102,13 +102,13 @@ export default async (skuContext: SkuContext) => {
   const eslintConfigFilename = 'eslint.config.mjs';
   const eslintCacheFilename = '.eslintcache';
 
-  const resolvedConfigPath = skuContext.configPath
-    ? `'${path.resolve(skuContext.configPath)}'`
+  const createEslintConfigParams = skuContext.configPath
+    ? `{configPath: '${path.resolve(skuContext.configPath)}'}`
     : '';
 
   const eslintConfig = dedent`import { createEslintConfig } from 'sku/config/eslint';
 
-                              export default await createEslintConfig(${resolvedConfigPath});`;
+                              export default await createEslintConfig(${createEslintConfigParams});`;
   await writeFileToCWD(eslintConfigFilename, eslintConfig);
 
   gitIgnorePatterns.push(eslintConfigFilename, eslintCacheFilename);

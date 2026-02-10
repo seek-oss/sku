@@ -2,14 +2,14 @@
   "name": "@sku-fixtures/custom-src-paths",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "sku start",
+    "start:vite": "sku start --config sku.config.vite.ts"
+  },
   "dependencies": {
     "dedent": "^1.5.1",
     "react": "catalog:",
     "react-dom": "catalog:"
-  },
-  "scripts": {
-    "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

@@ -7,8 +7,6 @@
   },
   "devDependencies": {
     "@clack/prompts": "1.0.0-alpha.4",
-    "@types/cross-spawn": "^6.0.6",
-    "cross-spawn": "^7.0.6",
     "tsx": "^4.19.4",
     "commander": "catalog:",
     "fuse.js": "^7.1.0"

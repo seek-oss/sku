@@ -1,20 +1,13 @@
 {
   "name": "@sku-private/tests",
   "private": true,
-  "version": "1.0.0",
-  "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@sku-private/testing-library": "workspace:*",
-    "@types/cross-spawn": "^6.0.3",
-    "cross-spawn": "^7.0.3",
     "dedent": "^1.5.1",
     "fs-fixture": "^2.6.0",
     "jsonc-parser": "^3.0.0",

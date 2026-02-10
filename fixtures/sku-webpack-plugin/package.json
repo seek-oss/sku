@@ -11,6 +11,7 @@
     "start:asset-server": "http-server dist -p 9876 --cors"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.28.5",
     "babel-loader": "^10.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "html-webpack-plugin": "^5.3.2",

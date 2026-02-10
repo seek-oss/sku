@@ -22,7 +22,7 @@ export type JobWorkerData = {
   }>;
 };
 
-export const getTransformerFromPrompt = async (): Promise<string> => {
+const getTransformerFromPrompt = async (): Promise<string> => {
   const res = await prompts(
     {
       type: 'select',
@@ -40,7 +40,7 @@ export const getTransformerFromPrompt = async (): Promise<string> => {
   return res.transformer;
 };
 
-export const getPathFromPrompt = async (): Promise<string> => {
+const getPathFromPrompt = async (): Promise<string> => {
   const res = await prompts(
     {
       type: 'text',

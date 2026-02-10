@@ -42,9 +42,3 @@ type Options = {
 
 export const runBin = ({ packageName, binName, args, options }: Options) =>
   spawnPromise(resolveBin(packageName, binName), args, options);
-
-export const startBin = ({ packageName, binName, args, options }: Options) => {
-  const childProcess = spawn(resolveBin(packageName, binName), args, options);
-
-  return childProcess;
-};

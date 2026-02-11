@@ -66,7 +66,6 @@ if (rootDir) {
         pnpmVirtualStorePath,
       );
 
-      // picks up transitive seek dependencies with skuCompilePackage set to true
       const pnpmVirtualStoreResults = new Fdir()
         .withFullPaths()
         .glob(seekDependencyGlob)

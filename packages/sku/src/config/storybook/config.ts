@@ -29,6 +29,6 @@ export const babel: NonNullable<StorybookConfig['babel']> = async () =>
   createBabelConfig({
     target: 'browser',
     lang: 'ts',
-    browserslist: ['chrome > 122'],
+    browserslist: 'last 2 chrome versions',
     displayNamesProd: true,
   });

@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Fix node resolution of transient compilePackages
+Resolve paths for transient compilePackage dependencies

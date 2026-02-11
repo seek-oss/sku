@@ -11,7 +11,10 @@ import {
   SVG,
   resolvePackage,
 } from '../utils/index.js';
-import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
+import {
+  defaultCompilePackages,
+  detectedCompilePackagePaths,
+} from '../../../../context/defaultCompilePackages.js';
 import {
   validateOptions,
   type SkuWebpackPluginOptions,
@@ -36,16 +39,20 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
       rootResolution: false,
       ...options,
     };
+
+    // Resolve the default and user-defined compilePackages to their actual paths
+    const resolvedCompilePackagePaths = [
+      ...(this.options.compilePackages || []),
+      ...defaultCompilePackages,
+    ].map(resolvePackage);
+
     this.compilePackages = [
       ...new Set([
-        ...defaultCompilePackages,
-        ...(this.options.compilePackages || []),
+        ...detectedCompilePackagePaths,
+        ...resolvedCompilePackagePaths,
       ]),
     ];
-    this.include = [
-      ...(this.options.include || []),
-      ...this.compilePackages.map(resolvePackage),
-    ];
+    this.include = [...(this.options.include || []), ...this.compilePackages];
   }
 
   apply(compiler: Compiler) {

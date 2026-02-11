@@ -1,4 +1,4 @@
-import { posix as path } from 'node:path';
+import { dirname, posix as path } from 'node:path';
 import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
@@ -17,7 +17,11 @@ const debug = _debug('sku:compilePackages');
 
 const require = createRequire(import.meta.url);
 
-let detectedCompilePackages: string[] = [];
+let detectedCompilePackages: Array<{
+  isCompilePackage: boolean;
+  packageName: string;
+  packagePath: string;
+}> = [];
 
 // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
 // package manager. In either case, we can't correctly detect compile packages.
@@ -78,10 +82,10 @@ if (rootDir) {
         return {
           isCompilePackage: Boolean(packageJson.skuCompilePackage),
           packageName: packageJson.name,
+          packagePath: dirname(packagePath),
         };
       })
-      .filter(({ isCompilePackage }) => isCompilePackage)
-      .map(({ packageName }) => packageName);
+      .filter(({ isCompilePackage }) => isCompilePackage);
   } catch (e) {
     console.log(
       chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
@@ -92,8 +96,11 @@ if (rootDir) {
 
 debug(detectedCompilePackages);
 
-export default [
-  'sku',
-  'braid-design-system',
-  ...new Set(detectedCompilePackages),
-];
+export const detectedCompilePackagePaths = detectedCompilePackages.map(
+  ({ packagePath }) => packagePath,
+);
+export const detectedCompilePackageNames = detectedCompilePackages.map(
+  ({ packageName }) => packageName,
+);
+
+export const defaultCompilePackages = ['sku', 'braid-design-system'];

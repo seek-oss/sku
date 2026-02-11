@@ -6,8 +6,8 @@ import validateConfig from './validateConfig.js';
 import isCompilePackage from '../utils/isCompilePackage.js';
 import chalk from 'chalk';
 import {
+  defaultCompilePackages,
   detectedCompilePackageNames,
-  detectedCompilePackagePaths,
 } from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import _debug from 'debug';
@@ -205,7 +205,7 @@ export const createSkuContext = ({
     src: skuConfig.srcPaths!.map(getPathFromCwd),
     compilePackages: [
       ...detectedCompilePackageNames,
-      ...detectedCompilePackagePaths,
+      ...defaultCompilePackages,
       ...skuConfig.compilePackages!,
     ],
     clientEntry: getPathFromCwd(skuConfig.clientEntry!),

@@ -70,7 +70,6 @@ if (rootDir) {
       const pnpmVirtualStoreResults = new Fdir()
         .withFullPaths()
         .glob(seekDependencyGlob)
-        .withSymlinks()
         .crawl(pnpmVirtualStoreRelativePath)
         .sync();
 

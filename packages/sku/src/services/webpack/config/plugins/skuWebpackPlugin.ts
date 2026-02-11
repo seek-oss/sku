@@ -39,13 +39,17 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
       rootResolution: false,
       ...options,
     };
+
+    // Resolve the default and user-defined compilePackages to their actual paths
+    const resolvedCompilePackagePaths = [
+      ...(this.options.compilePackages || []),
+      ...defaultCompilePackages,
+    ].map(resolvePackage);
+
     this.compilePackages = [
       ...new Set([
         ...detectedCompilePackagePaths,
-        ...[
-          ...(this.options.compilePackages || []),
-          ...defaultCompilePackages,
-        ]?.map(resolvePackage),
+        ...resolvedCompilePackagePaths,
       ]),
     ];
     this.include = [...(this.options.include || []), ...this.compilePackages];

@@ -17,7 +17,11 @@ const debug = _debug('sku:compilePackages');
 
 const require = createRequire(import.meta.url);
 
-let detectedCompilePackages: string[] = [];
+let detectedCompilePackages: Array<{
+  isCompilePackage: boolean;
+  packageName: string;
+  packagePath: string;
+}> = [];
 
 // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
 // package manager. In either case, we can't correctly detect compile packages.
@@ -62,9 +66,11 @@ if (rootDir) {
         pnpmVirtualStorePath,
       );
 
+      // picks up transitive seek dependencies with skuCompilePackage set to true
       const pnpmVirtualStoreResults = new Fdir()
         .withFullPaths()
         .glob(seekDependencyGlob)
+        .withSymlinks()
         .crawl(pnpmVirtualStoreRelativePath)
         .sync();
 
@@ -78,10 +84,10 @@ if (rootDir) {
         return {
           isCompilePackage: Boolean(packageJson.skuCompilePackage),
           packageName: packageJson.name,
+          packagePath,
         };
       })
-      .filter(({ isCompilePackage }) => isCompilePackage)
-      .map(({ packageName }) => packageName);
+      .filter(({ isCompilePackage }) => isCompilePackage);
   } catch (e) {
     console.log(
       chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
@@ -92,8 +98,19 @@ if (rootDir) {
 
 debug(detectedCompilePackages);
 
-export default [
-  'sku',
-  'braid-design-system',
-  ...new Set(detectedCompilePackages),
-];
+/**
+ * Compile packages are:
+ * - default added ones (sku, braid-design-system)
+ * - direct dependencies with skuCompilePackage set to true
+ * - transitive *SEEK* dependencies with skuCompilePackage set to true
+ * - users added ones in the sku config
+ */
+
+export const detectedCompilePackagePaths = detectedCompilePackages.map(
+  ({ packagePath }) => packagePath,
+);
+export const detectedCompilePackageNames = detectedCompilePackages.map(
+  ({ packageName }) => packageName,
+);
+
+export const defaultCompilePackages = ['sku', 'braid-design-system'];

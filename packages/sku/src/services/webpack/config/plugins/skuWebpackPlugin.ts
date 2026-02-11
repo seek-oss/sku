@@ -11,7 +11,10 @@ import {
   SVG,
   resolvePackage,
 } from '../utils/index.js';
-import defaultCompilePackages from '../../../../context/defaultCompilePackages.js';
+import {
+  defaultCompilePackages,
+  detectedCompilePackagePaths,
+} from '../../../../context/defaultCompilePackages.js';
 import {
   validateOptions,
   type SkuWebpackPluginOptions,
@@ -38,14 +41,14 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
     };
     this.compilePackages = [
       ...new Set([
-        ...defaultCompilePackages,
-        ...(this.options.compilePackages || []),
+        ...detectedCompilePackagePaths,
+        ...[
+          ...(this.options.compilePackages || []),
+          ...defaultCompilePackages,
+        ]?.map(resolvePackage),
       ]),
     ];
-    this.include = [
-      ...(this.options.include || []),
-      ...this.compilePackages.map(resolvePackage),
-    ];
+    this.include = [...(this.options.include || []), ...this.compilePackages];
   }
 
   apply(compiler: Compiler) {

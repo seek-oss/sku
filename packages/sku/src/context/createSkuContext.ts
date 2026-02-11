@@ -5,7 +5,10 @@ import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
 import isCompilePackage from '../utils/isCompilePackage.js';
 import chalk from 'chalk';
-import defaultCompilePackages from './defaultCompilePackages.js';
+import {
+  detectedCompilePackageNames,
+  detectedCompilePackagePaths,
+} from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import _debug from 'debug';
 import { resolveAppSkuConfigPath } from './configPath.js';
@@ -200,7 +203,11 @@ export const createSkuContext = ({
     appSkuConfigPath: appSkuConfigPath!,
     devServerMiddleware,
     src: skuConfig.srcPaths!.map(getPathFromCwd),
-    compilePackages: [...defaultCompilePackages, ...skuConfig.compilePackages!],
+    compilePackages: [
+      ...detectedCompilePackageNames,
+      ...detectedCompilePackagePaths,
+      ...skuConfig.compilePackages!,
+    ],
     clientEntry: getPathFromCwd(skuConfig.clientEntry!),
     renderEntry: getPathFromCwd(skuConfig.renderEntry!),
     libraryEntry: skuConfig.libraryEntry

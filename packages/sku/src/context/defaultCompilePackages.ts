@@ -1,4 +1,4 @@
-import { posix as path } from 'node:path';
+import { dirname, posix as path } from 'node:path';
 import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
@@ -84,7 +84,7 @@ if (rootDir) {
         return {
           isCompilePackage: Boolean(packageJson.skuCompilePackage),
           packageName: packageJson.name,
-          packagePath,
+          packagePath: dirname(packagePath),
         };
       })
       .filter(({ isCompilePackage }) => isCompilePackage);

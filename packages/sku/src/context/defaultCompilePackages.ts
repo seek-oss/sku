@@ -97,14 +97,6 @@ if (rootDir) {
 
 debug(detectedCompilePackages);
 
-/**
- * Compile packages are:
- * - default added ones (sku, braid-design-system)
- * - direct dependencies with skuCompilePackage set to true
- * - transitive *SEEK* dependencies with skuCompilePackage set to true
- * - users added ones in the sku config
- */
-
 export const detectedCompilePackagePaths = detectedCompilePackages.map(
   ({ packagePath }) => packagePath,
 );

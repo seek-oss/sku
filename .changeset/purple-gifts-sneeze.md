@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Resolve paths for transient compilePackage dependencies
+Resolve paths for transitive compilePackage dependencies

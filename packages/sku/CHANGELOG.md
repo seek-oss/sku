@@ -1,5 +1,11 @@
 # sku
 
+## 15.9.1
+
+### Patch Changes
+
+- Resolve paths for transitive compilePackage dependencies ([#1495](https://github.com/seek-oss/sku/pull/1495))
+
 ## 15.9.0
 
 ### Minor Changes

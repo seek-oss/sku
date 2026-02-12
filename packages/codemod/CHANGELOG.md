@@ -1,5 +1,11 @@
 # @sku-lib/codemod
 
+## 1.2.4
+
+### Patch Changes
+
+- Update `@ast-grep/napi` dependency to `^0.40.0` ([#1487](https://github.com/seek-oss/sku/pull/1487))
+
 ## 1.2.3
 
 ### Patch Changes

@@ -56,8 +56,8 @@ export default defineConfig([
     exports: false,
     format: ['cjs'],
     entry: {
-      'config/storybook': './src/config/storybook/config.cjs',
-      'jest/file-mock': 'src/config/jest/fileMock.cjs',
+      'config/storybook': './src/config/storybook/config.ts',
+      'jest/file-mock': 'src/config/jest/fileMock.ts',
     },
   },
 ]);

@@ -3322,7 +3322,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5022 @@
+@@ -1,198 +1,5032 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -3374,6 +3374,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
                    .forEach(node => node.remove());
                });
      </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
++    </style>
 +    <style
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
@@ -8188,6 +8193,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/vars.css.ts.vanilla.css"
++    >
++    </style>
++    <style
++      type="text/css"
 +      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/App.css.ts.vanilla.css"
 +    >
 +      .App_vanillaBox__inn18b0 {
@@ -8355,7 +8365,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5027 @@
+@@ -1,198 +1,5032 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -8407,6 +8417,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
                    .forEach(node => node.remove());
                });
      </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
++    </style>
 +    <style
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"

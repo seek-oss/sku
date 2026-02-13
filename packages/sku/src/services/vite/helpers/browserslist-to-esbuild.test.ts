@@ -10,12 +10,12 @@ test('works by passing browsers as array', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome105",
-      "edge142",
-      "firefox145",
+      "chrome103",
+      "edge143",
+      "firefox146",
       "ios11",
-      "opera124",
-      "safari26.1",
+      "opera125",
+      "safari26.2",
     ]
   `);
 });

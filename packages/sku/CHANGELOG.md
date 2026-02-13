@@ -1,5 +1,11 @@
 # sku
 
+## 15.9.2
+
+### Patch Changes
+
+- Update Storybook babel config to target `last 2 chrome versions` ([#1497](https://github.com/seek-oss/sku/pull/1497))
+
 ## 15.9.1
 
 ### Patch Changes

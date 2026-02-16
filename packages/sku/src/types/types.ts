@@ -2,7 +2,7 @@ import type { JSX, ReactNode } from 'react';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
-import type { Plugin } from 'vite';
+import type { Plugin, PluginOption } from 'vite';
 import type { TestUserConfig } from 'vitest/node';
 
 export type ViteRenderFunction = (
@@ -528,6 +528,15 @@ export interface ViteSkuConfig {
    * @default: []
    */
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies?: string[];
+
+  /**
+   * Provides a way to add additional Vite plugins to the Vite config.
+   *
+   * Note: This option is only relevant when using the `vite` bundler.
+   *
+   * @default: []
+   */
+  __UNSTABLE_vitePlugins?: PluginOption[];
 
   /**
    * Path alias mappings for module resolution.

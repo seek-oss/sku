@@ -51,4 +51,5 @@ export default {
   pathAliases: {},
   dangerouslySetViteConfig: undefined,
   dangerouslySetVitestConfig: defaultDecorator,
+  __UNSTABLE_vitePlugins: [],
 } satisfies CompleteSkuConfig;

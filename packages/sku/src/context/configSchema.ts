@@ -152,6 +152,17 @@ export default validator.compile({
   dangerouslySetTSConfig: {
     type: 'function',
   },
+  dangerouslySetViteConfig: {
+    type: 'function',
+    optional: true,
+  },
+  dangerouslySetVitestConfig: {
+    type: 'function',
+  },
+  __UNSTABLE_vitePlugins: {
+    type: 'array',
+    items: [{ type: 'object' }],
+  },
   eslintIgnore: {
     type: 'array',
     items: {

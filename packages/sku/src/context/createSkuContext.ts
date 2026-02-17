@@ -237,7 +237,7 @@ export const createSkuContext = ({
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;
   const viteDecorator = skuConfig.dangerouslySetViteConfig!;
   const vitestDecorator = skuConfig.dangerouslySetVitestConfig!;
-  const vitePluginsDecorator = skuConfig.__UNSTABLE_vitePlugins!;
+  const vitePlugins = skuConfig.__UNSTABLE_vitePlugins!;
   const eslintIgnore = skuConfig.eslintIgnore!;
   const routes = normalizedRoutes!;
   const environments = skuConfig.environments!;
@@ -276,7 +276,7 @@ export const createSkuContext = ({
     tsconfigDecorator,
     viteDecorator,
     vitestDecorator,
-    vitePluginsDecorator,
+    vitePlugins,
     eslintIgnore,
     tsPaths,
     routes,

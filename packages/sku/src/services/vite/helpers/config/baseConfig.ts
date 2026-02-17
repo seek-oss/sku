@@ -49,7 +49,7 @@ const getBaseConfig = (skuContext: SkuContext): InlineConfig => {
     root: process.cwd(),
     plugins: [
       dangerouslySetViteConfig(skuContext),
-      skuContext.vitePluginsDecorator,
+      skuContext.vitePlugins,
       vocabConfig && vitePluginVocab({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({

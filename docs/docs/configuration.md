@@ -675,3 +675,13 @@ An array of cjs import paths that have both a default and named exports.
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
+
+## \_\_UNSTABLE_vitePlugins
+
+Type: `PluginOption[]`
+
+Default: `[]`
+
+Bundler: `vite`
+
+Provides a way to add additional Vite plugins to the Vite config.

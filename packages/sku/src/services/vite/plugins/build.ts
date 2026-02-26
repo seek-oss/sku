@@ -16,8 +16,10 @@ export const buildPlugin = ({
 
   return {
     name: makePluginName('build'),
+    apply: 'build',
     config: () => ({
       // these are inherited by each environment
+      base: skuContext.publicPath,
       build: {
         target: browserslistToEsbuild(skuContext.supportedBrowsers),
         emptyOutDir: true,

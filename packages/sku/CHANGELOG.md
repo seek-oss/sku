@@ -1,5 +1,22 @@
 # sku
 
+## 15.10.0
+
+### Minor Changes
+
+- Update prettier dependency from `~3.6.2` to `~3.8.0` ([#1500](https://github.com/seek-oss/sku/pull/1500))
+
+  While the 3.8.0 release was primarily focused on formatting Angular code, the 3.7.0 release contains changes that may result in code formatting changes in your application.
+  Please review the [Prettier 3.7.0 release notes].
+
+  [Prettier 3.7.0 release notes]: https://prettier.io/blog/2025/11/27/3.7.0
+
+- Introduce `__UNSTABLE_vitePlugins` configuration option to support adding 3rd-party and/or custom Vite plugins ([#1502](https://github.com/seek-oss/sku/pull/1502))
+
+### Patch Changes
+
+- Update Storybook babel config to target `last 2 chrome versions` ([#1497](https://github.com/seek-oss/sku/pull/1497))
+
 ## 15.9.1
 
 ### Patch Changes

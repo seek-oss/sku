@@ -1,9 +1,10 @@
 import type { Plugin } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { makePluginName } from '../helpers/makePluginName.js';
 
-export function dangerouslySetViteConfig(skuContext: SkuContext): Plugin {
+export function dangerouslySetViteConfigPlugin(skuContext: SkuContext): Plugin {
   return {
-    name: 'vite-plugin-dangerously-set-config',
+    name: makePluginName('dangerouslySetViteConfig'),
     config: skuContext.viteDecorator,
   };
 }

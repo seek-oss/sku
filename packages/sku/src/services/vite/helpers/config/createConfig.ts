@@ -1,117 +1,79 @@
-import { createSkuViteConfig } from './baseConfig.js';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
-import { createOutDir, renderEntryChunkName } from '../bundleConfig.js';
 import { createRequire } from 'node:module';
-import { middlewarePlugin } from '../../plugins/middlewarePlugin.js';
-import { startTelemetryPlugin } from '../../plugins/startTelemetry.js';
-import { HMRTelemetryPlugin } from '../../plugins/HMRTelemetry.js';
-import { httpsDevServerPlugin } from '../../plugins/httpsDevServerPlugin.js';
-import { getAppHosts } from '../../../../context/hosts.js';
-import isCI from '../../../../utils/isCI.js';
-import { bundleAnalyzerPlugin } from '../../plugins/bundleAnalyzer.js';
-import { vitePluginSsrCss } from '../../plugins/ssrCss/plugin.js';
-import { serverUrls } from '@sku-private/utils';
+import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
+import type { InlineConfig } from 'vite';
+import { vitePluginVocab } from '@vocab/vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
+import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import { getVocabConfig } from '../../../vocab/config.js';
+import { skuPlugin } from '../../skuPlugin.js';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const require = createRequire(import.meta.url);
 
-const clientEntry = require.resolve('#entries/vite-client');
-
-const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
-
-export const createServerBuildConfig = (skuContext: SkuContext) => {
-  const outDir = createOutDir(skuContext.paths.target);
-  return createSkuViteConfig(
-    {
-      build: {
-        ssr: true,
-        outDir: outDir.ssg,
-        rollupOptions: {
-          input: skuContext.paths.renderEntry,
-          output: {
-            entryFileNames: renderEntryChunkName,
-          },
-        },
-      },
-    },
-    skuContext,
-  );
-};
-
-export const createClientBuildConfig = (skuContext: SkuContext) => {
-  const outDir = createOutDir(skuContext.paths.target);
-
+export const createConfig = (
+  skuContext: SkuContext,
+  environment?: string,
+): InlineConfig => {
+  const vocabConfig = getVocabConfig(skuContext);
   const isProductionBuild = process.env.NODE_ENV === 'production';
-  const bundleAnalyzer = isProductionBuild
-    ? bundleAnalyzerPlugin({ name: 'client' })
-    : null;
 
-  return createSkuViteConfig(
-    {
-      plugins: [bundleAnalyzer],
-      build: {
-        ssr: false,
-        outDir: outDir.client,
-        manifest: true,
-        sourcemap: skuContext.sourceMapsProd,
-        rollupOptions: {
-          input: clientEntry,
-        },
+  // ? Review these babel plugins
+  const prodBabelPlugins: Array<string | [string, object]> = [
+    require.resolve('babel-plugin-transform-react-remove-prop-types'),
+    require.resolve('@babel/plugin-transform-react-constant-elements'),
+    [
+      require.resolve('babel-plugin-unassert'),
+      {
+        variables: ['assert', 'invariant'],
+        modules: ['assert', 'node:assert', 'tiny-invariant'],
       },
-    },
-    skuContext,
-  );
-};
+    ],
+  ];
 
-export const createStartConfig = ({
-  skuContext,
-  environment,
-}: {
-  skuContext: SkuContext;
-  environment: string;
-}) => {
-  const outDir = createOutDir(skuContext.paths.target);
-  return createSkuViteConfig(
-    {
-      base: '/',
-      plugins: [
-        vitePluginSsrCss({
-          entries: [skuContext.paths.renderEntry],
-        }),
-        middlewarePlugin({ skuContext, environment }),
-        startTelemetryPlugin({
-          target: 'node',
-          type: 'static',
-        }),
-        // eslint-disable-next-line new-cap
-        HMRTelemetryPlugin({
-          target: 'node',
-          type: 'static',
-        }),
-        httpsDevServerPlugin(skuContext),
-      ],
-      build: {
-        ssr: false,
-        outDir: outDir.client,
-        manifest: true,
-        rollupOptions: {
-          input: clientEntry,
+  if (skuContext.displayNamesProd) {
+    prodBabelPlugins.push(
+      require.resolve('@sku-lib/babel-plugin-display-name'),
+    );
+  }
+
+  return {
+    plugins: [
+      /**
+       * user added plugins
+       */
+      skuContext.vitePlugins,
+
+      /**
+       * the sku plugin (only sku specific changes)
+       */
+      skuPlugin({ skuContext, environment }),
+
+      /**
+       * vendor plugins
+       */
+      vocabConfig && vitePluginVocab({ vocabConfig }),
+      tsconfigPaths(),
+      cjsInterop({
+        dependencies: skuContext.cjsInteropDependencies,
+      }),
+      react({
+        babel: {
+          plugins: [
+            require.resolve('babel-plugin-macros'),
+            ...(isProductionBuild ? prodBabelPlugins : []),
+          ],
         },
-      },
-      server: {
-        host: 'localhost',
-        allowedHosts: getAppHosts(skuContext).filter(
-          (host) => typeof host === 'string',
-        ),
-        open:
-          shouldOpenTab &&
-          serverUrls({
-            hosts: getAppHosts(skuContext),
-            port: skuContext.port.client,
-            initialPath: skuContext.initialPath,
-            https: skuContext.httpsDevServer,
-          }).first(),
-      },
-    },
-    skuContext,
-  );
+      }),
+      vanillaExtractPlugin(),
+      visualizer({
+        filename: getPathFromCwd('report/client.html'),
+        template: 'treemap',
+        gzipSize: true,
+        title: requireFromCwd('./package.json').name || 'Vite Bundle Analyzer',
+      }),
+    ],
+  };
 };

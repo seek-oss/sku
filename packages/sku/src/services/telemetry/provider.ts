@@ -19,6 +19,8 @@ type MetricName =
   | 'setup_hosts'
   | 'start.webpack.initial'
   | 'start.webpack.rebuild'
+  | 'start.vite.initial'
+  | 'start.vite.rebuild'
   | 'certificate.generate'
   | 'duplicate_compile_package'
   | 'peer_dep_version_mismatch'

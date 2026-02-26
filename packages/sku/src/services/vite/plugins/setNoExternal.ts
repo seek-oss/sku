@@ -4,10 +4,11 @@ import {
   getSsrExternalsForCompiledDependency,
 } from '../helpers/config/dependencyGraph.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { makePluginName } from '../helpers/makePluginName.js';
 
-export function setNoExternal(skuContext: SkuContext): Plugin {
+export function setNoExternalPlugin(skuContext: SkuContext): Plugin {
   return {
-    name: 'vite-plugin-set-no-external',
+    name: makePluginName('setNoExternal'),
     async config() {
       const depGraph = await extractDependencyGraph(process.cwd());
 

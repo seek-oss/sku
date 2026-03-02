@@ -49,7 +49,6 @@ export function preloadPlugin({
   let count = 0;
   return {
     name: makePluginName('preload'),
-    apply: 'build',
 
     async transform(code, id) {
       const isSsr = this.environment?.name === 'ssr';

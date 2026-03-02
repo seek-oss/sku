@@ -1,9 +1,9 @@
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { InlineConfig } from 'vite';
-import { createSkuVitestConfig } from '../../../services/vite/helpers/config/baseConfig.js';
 import type { TestUserConfig } from 'vitest/node';
 import { hasErrorCode } from '../../../utils/error-guards.js';
 import { styleText } from 'node:util';
+import { createConfig } from '../../../services/vite/helpers/config/createConfig.js';
 
 export const vitestHandler = async ({
   skuContext,
@@ -14,10 +14,7 @@ export const vitestHandler = async ({
 }) => {
   const { parseCLI, startVitest } = await lazyLoadVitest();
 
-  const viteConfigOverride = createSkuVitestConfig(
-    {},
-    skuContext,
-  ) satisfies InlineConfig;
+  const viteConfigOverride = createConfig(skuContext) satisfies InlineConfig;
 
   const results = parseCLI(['vitest', ...args]);
 

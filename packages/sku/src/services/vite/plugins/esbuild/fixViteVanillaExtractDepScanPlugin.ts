@@ -7,7 +7,7 @@ import { makePluginName } from '../../helpers/makePluginName.js';
 const require = createRequire(import.meta.url);
 
 export const fixViteVanillaExtractDepScanPlugin = (): Plugin => ({
-  name: makePluginName('fixVanillaExtractDepScan'),
+  name: makePluginName('fix-vanilla-extract-dep-scan'),
   setup(build) {
     build.onResolve({ filter: cssFileFilter }, ({ importer, path }) => ({
       path: require.resolve(path, { paths: [dirname(importer)] }),

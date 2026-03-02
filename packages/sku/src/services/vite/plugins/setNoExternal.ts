@@ -8,7 +8,7 @@ import { makePluginName } from '../helpers/makePluginName.js';
 
 export function setNoExternalPlugin(skuContext: SkuContext): Plugin {
   return {
-    name: makePluginName('setNoExternal'),
+    name: makePluginName('set-no-external'),
     async config() {
       const depGraph = await extractDependencyGraph(process.cwd());
 

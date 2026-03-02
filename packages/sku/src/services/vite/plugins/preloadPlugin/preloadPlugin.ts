@@ -47,18 +47,13 @@ export function preloadPlugin({
   const lazyImportedModules = new Set();
   const injectedModules = new Set();
   let count = 0;
-  let isSsr = false;
-
   return {
     name: makePluginName('preload'),
-
-    apply(config) {
-      // Enable on SSR builds (--ssr)
-      isSsr = Boolean(config.build?.ssr);
-      return true;
-    },
+    apply: 'build',
 
     async transform(code, id) {
+      const isSsr = this.environment?.name === 'ssr';
+
       if (!include.test(id)) {
         return null;
       }

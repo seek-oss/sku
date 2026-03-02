@@ -13,6 +13,7 @@ export const devServerPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => ({
   name: makePluginName('devServer'),
+  apply: 'serve',
   config: () => ({
     server: {
       host: 'localhost',

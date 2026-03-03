@@ -10,7 +10,6 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    // see if we can scope these any better
     publicDir: false,
     root: process.cwd(),
     resolve: {

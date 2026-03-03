@@ -1,6 +1,5 @@
 import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { createRequire } from 'node:module';
-import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -9,7 +8,6 @@ import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
-import { visualizer } from 'rollup-plugin-visualizer';
 
 const require = createRequire(import.meta.url);
 
@@ -68,12 +66,6 @@ export const createConfig = (
         },
       }),
       vanillaExtractPlugin(),
-      visualizer({
-        filename: getPathFromCwd('report/client.html'),
-        template: 'treemap',
-        gzipSize: true,
-        title: requireFromCwd('./package.json').name || 'Vite Bundle Analyzer',
-      }),
     ],
   };
 };

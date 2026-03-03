@@ -11,6 +11,7 @@ import { telemetryPlugin } from './plugins/telemetry.js';
 import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
 import { devServerPlugin } from './plugins/devServer.js';
+import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 
 /**
  * All sku related functionality and customization as a vite plugin.
@@ -22,17 +23,17 @@ export const skuPlugin = ({
   skuContext: SkuContext;
   environment?: string;
 }): PluginOption[] => [
-  // shared
   configPlugin({ skuContext }),
+  dangerouslySetViteConfigPlugin(skuContext),
+  setNoExternalPlugin(skuContext),
   buildPlugin({ skuContext }),
   devServerPlugin({ skuContext }),
-  dangerouslySetViteConfigPlugin(skuContext),
+  httpsDevServerPlugin(skuContext),
   preloadPlugin({
-    convertFromWebpack: skuContext.convertLoadable, // Convert loadable import from webpack to vite. Can be put behind a flag.
+    // Convert loadable import from webpack to vite. Can be put behind a flag.
+    convertFromWebpack: skuContext.convertLoadable,
   }),
   polyfillsPlugin(skuContext),
-  setNoExternalPlugin(skuContext),
-  // start
   vitePluginSsrCss({
     entries: [skuContext.paths.renderEntry],
   }),
@@ -41,5 +42,5 @@ export const skuPlugin = ({
     target: 'node',
     type: 'static',
   }),
-  httpsDevServerPlugin(skuContext),
+  bundleAnalyzerPlugin(),
 ];

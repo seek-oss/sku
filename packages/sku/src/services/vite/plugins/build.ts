@@ -22,7 +22,6 @@ export const buildPlugin = ({
       base: skuContext.publicPath,
       build: {
         target: browserslistToEsbuild(skuContext.supportedBrowsers),
-        emptyOutDir: true,
         assetsDir: '',
         rollupOptions: {
           output: {

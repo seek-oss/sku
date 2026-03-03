@@ -45,11 +45,6 @@ export const createConfig = (
       skuContext.vitePlugins,
 
       /**
-       * the sku plugin (only sku specific changes)
-       */
-      skuPlugin({ skuContext, environment }),
-
-      /**
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
@@ -66,6 +61,11 @@ export const createConfig = (
         },
       }),
       vanillaExtractPlugin(),
+
+      /**
+       * the sku plugin (only sku specific changes)
+       */
+      skuPlugin({ skuContext, environment }),
     ],
   };
 };

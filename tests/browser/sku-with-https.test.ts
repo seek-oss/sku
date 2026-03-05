@@ -6,6 +6,7 @@ import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
   type BundlerValues,
+  type RenderResult,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -49,8 +50,10 @@ describe('sku-with-https', () => {
     const url = `https://localhost:${port}`;
     const portArgs = ['--strict-port', `--port=${port}`];
 
+    let start: Awaited<RenderResult>;
+
     beforeAll(async () => {
-      const start = await sku('start', [
+      start = await sku('start', [
         '--config',
         'sku.config.esm-middleware.mjs',
         ...portArgs,
@@ -61,6 +64,8 @@ describe('sku-with-https', () => {
     it('should start a development server', async () => {
       const snapshot = await getAppSnapshot({ url });
       expect(snapshot).toMatchSnapshot('homepage');
+
+      start.debug();
 
       const middlewareSnapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,

@@ -4,6 +4,7 @@ import { getAppSnapshot } from '@sku-private/playwright';
 import {
   bundlers,
   type BundlerValues,
+  type RenderResult,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
@@ -23,8 +24,10 @@ describe('security-controls', () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;
 
+      let start: Awaited<RenderResult>;
+
       beforeAll(async () => {
-        const start = await sku('start', [
+        start = await sku('start', [
           ...args[bundler],
           '--strict-port',
           `--port=${port}`,
@@ -36,6 +39,8 @@ describe('security-controls', () => {
         const app = await getAppSnapshot({
           url,
         });
+
+        start.debug();
 
         expect(app).toMatchSnapshot();
       });

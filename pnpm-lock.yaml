@@ -22,8 +22,8 @@ catalogs:
       specifier: ^5.1.1
       version: 5.1.4
     '@vocab/vite':
-      specifier: ^0.3.1
-      version: 0.3.9
+      specifier: ^1.0.0
+      version: 1.0.0
     braid-design-system:
       specifier: ^34.0.0
       version: 34.0.2
@@ -807,7 +807,7 @@ importers:
         version: 1.1.22(react@19.2.4)
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 0.3.9(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.0(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.2)
@@ -1098,7 +1098,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 0.3.9(vite@7.3.1(@types/node@22.19.11)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.0(vite@7.3.1(@types/node@22.19.11)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.2(@swc/core@1.15.11)(esbuild@0.27.3))
@@ -1435,7 +1435,7 @@ importers:
     devDependencies:
       '@prettier/sync':
         specifier: ^0.6.1
-        version: 0.6.1(prettier@3.8.1)
+        version: 0.6.1(prettier@3.6.2)
       '@sku-private/test-utils':
         specifier: workspace:*
         version: link:../test-utils
@@ -4310,10 +4310,10 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@0.3.9':
-    resolution: {integrity: sha512-RC6b49uJSZtBFHoDKkmM50ce6nY0l5jSoCVd6/npNuRsYzmbAlM15ByNMr1pQfBEZTYH7N01CcegNaCCbj5F8A==}
+  '@vocab/vite@1.0.0':
+    resolution: {integrity: sha512-90yYP297g/ujj1bygBJ5U8o8jgD0u2mPPl4V52I3yzcTj7JWGKamSoZcFAGmImb255fT1oOgqOS1GWVOoA0dzQ==}
     peerDependencies:
-      vite: ^5.4.8 || ^6.0.0 || ^7.0.0
+      vite: ^6.0.0 || ^7.0.0
 
   '@vocab/webpack@1.2.22':
     resolution: {integrity: sha512-9NX03qs+MgvEHrg1JG6sebTP1Fww3DbnIXFz98RkUWSelpobexe0aiDNp9MTYm74t5ewq2dcXT6evKMRH60jaw==}
@@ -11553,10 +11553,10 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@prettier/sync@0.6.1(prettier@3.8.1)':
+  '@prettier/sync@0.6.1(prettier@3.6.2)':
     dependencies:
       make-synchronized: 0.8.0
-      prettier: 3.8.1
+      prettier: 3.6.2
 
   '@quansync/fs@1.0.0':
     dependencies:
@@ -12867,7 +12867,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@0.3.9(vite@7.3.1(@types/node@22.19.11)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.0(vite@7.3.1(@types/node@22.19.11)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0
@@ -12878,7 +12878,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@0.3.9(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.0(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0

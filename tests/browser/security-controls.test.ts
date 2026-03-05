@@ -36,10 +36,14 @@ describe('security-controls', () => {
       });
 
       it('should start an app with security controls', async () => {
+        console.log('Starting app with security controls', bundler);
+        console.log('before snapshot');
+        start.debug();
+
         const app = await getAppSnapshot({
           url,
         });
-
+        console.log('after snapshot');
         start.debug();
 
         expect(app).toMatchSnapshot();

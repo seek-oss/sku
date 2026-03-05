@@ -6,6 +6,7 @@ import isCI from '../../../utils/isCI.js';
 import { makePluginName } from '../helpers/makePluginName.js';
 
 const shouldOpenTab = process.env.OPEN_TAB !== 'false' && !isCI;
+const disableWatch = Boolean(process.env.SKU_VITE_DISABLE_WATCH);
 
 export const devServerPlugin = ({
   skuContext,
@@ -15,6 +16,7 @@ export const devServerPlugin = ({
   name: makePluginName('dev-server'),
   config: () => ({
     server: {
+      watch: disableWatch ? null : {},
       host: 'localhost',
       allowedHosts: getAppHosts(skuContext).filter(
         (host) => typeof host === 'string',

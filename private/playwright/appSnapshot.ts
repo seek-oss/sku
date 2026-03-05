@@ -12,7 +12,7 @@ export const getAppSnapshot = async ({ url }: AppSnapshotOptions) => {
   const errors: string[] = [];
 
   page.on('console', (msg) => {
-    if (msg.type() === 'error') {
+    if (msg.type() === 'error' && !msg.location().url.includes('favicon.ico')) {
       errors.push(msg.text());
     }
 

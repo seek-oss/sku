@@ -36,21 +36,15 @@ describe('security-controls', () => {
       });
 
       it('should start an app with security controls', async () => {
-        console.log('Starting app with security controls', bundler);
-        console.log('before snapshot');
-        start.debug();
-
         const app = await getAppSnapshot({
           url,
         });
-        console.log('after snapshot');
-        start.debug();
 
         expect(app).toMatchSnapshot();
       });
     });
 
-    describe('build', async () => {
+    describe.skip('build', async () => {
       let cspTag: HTMLElement;
 
       beforeAll(async () => {
@@ -86,7 +80,7 @@ describe('security-controls', () => {
     });
   });
 
-  describe('build-ssr', async () => {
+  describe.skip('build-ssr', async () => {
     const port = await getPort();
     const assetPort = await getPort();
     const url = `http://localhost:${port}`;

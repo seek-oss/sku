@@ -4,7 +4,6 @@ import { getAppSnapshot } from '@sku-private/playwright';
 import {
   bundlers,
   type BundlerValues,
-  type RenderResult,
   scopeToFixture,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
@@ -24,10 +23,8 @@ describe('security-controls', () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;
 
-      let start: Awaited<RenderResult>;
-
       beforeAll(async () => {
-        start = await sku('start', [
+        const start = await sku('start', [
           ...args[bundler],
           '--strict-port',
           `--port=${port}`,
@@ -36,19 +33,12 @@ describe('security-controls', () => {
       });
 
       it('should start an app with security controls', async () => {
-        start.debug();
         console.log('checking snapshot - before');
 
-        try {
-          const app = await getAppSnapshot({
-            url,
-          });
-          expect(app).toMatchSnapshot();
-        } catch (error) {
-          console.log('an error occurred');
-          console.log('error', error);
-          throw error;
-        }
+        const app = await getAppSnapshot({
+          url,
+        });
+        expect(app).toMatchSnapshot();
 
         console.log('checking snapshot - after');
       });

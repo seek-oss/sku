@@ -40,11 +40,6 @@ export const createConfig = (
   return {
     plugins: [
       /**
-       * the sku plugin (only sku specific changes)
-       */
-      skuPlugin({ skuContext, environment }),
-
-      /**
        * user added plugins
        */
       skuContext.vitePlugins,
@@ -66,6 +61,10 @@ export const createConfig = (
         },
       }),
       vanillaExtractPlugin(),
+      /**
+       * the sku plugin (only sku specific changes)
+       */
+      skuPlugin({ skuContext, environment }),
     ],
   };
 };

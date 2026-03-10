@@ -24,6 +24,12 @@ export const configPlugin = ({
     },
 
     optimizeDeps: {
+      // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold start.
+      entries: [
+        skuContext.paths.clientEntry,
+        skuContext.paths.serverEntry,
+        skuContext.paths.renderEntry,
+      ],
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },

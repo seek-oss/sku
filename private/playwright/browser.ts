@@ -41,21 +41,9 @@ export const closeBrowser = async (): Promise<void> => {
 
 const createContext = async () => {
   const browser = await getBrowser();
-  // return browser;
 
   const context = await browser.newContext({
     ignoreHTTPSErrors: true,
-  });
-
-  context.clearCookies();
-  context.clearPermissions();
-
-  context.on('weberror', (error) => {
-    console.error('Web error', error);
-  });
-
-  context.on('requestfailed', (error) => {
-    console.error('Web error', error);
   });
 
   return context;

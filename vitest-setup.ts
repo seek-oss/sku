@@ -4,7 +4,7 @@ import {
   htmlSnapshotSerializer,
   cssSnapshotSerializer,
   sanitizeFilesSerializer,
-  // closeBrowser,
+  closeBrowser,
 } from '@sku-private/playwright';
 import { cleanup, configure } from '@sku-private/testing-library';
 import 'cli-testing-library/vitest';
@@ -23,5 +23,5 @@ afterEach(({ task }) => {
 
 afterAll(() => {
   cleanup();
-  // closeBrowser();
+  closeBrowser();
 });

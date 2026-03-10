@@ -17,8 +17,6 @@ const getBrowser = async () => {
   _browser = browserInstance.launch({
     // Using the chromium channel to enable the latest headless mode
     channel: 'chromium',
-    // Slow down Playwright actions so the browser has time to hydrate the app
-    slowMo: 150,
     headless: process.env.HEADLESS !== 'false',
   });
 

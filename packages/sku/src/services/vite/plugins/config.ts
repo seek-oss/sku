@@ -2,6 +2,12 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { fixViteVanillaExtractDepScanPlugin } from './esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+
+const renderEntry = require.resolve('#entries/vite-render');
+const clientEntry = require.resolve('#entries/vite-client');
 
 export const configPlugin = ({
   skuContext,
@@ -24,11 +30,15 @@ export const configPlugin = ({
     },
 
     optimizeDeps: {
-      // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold start.
+      // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold-start.
+      // Reloads on cold-start cause issues with our Playwright tests, so we need to ensure they get optimized ahead of time.
+      // If you see "REFUSED_CONNECTION" errors in Playwright tests it may be because entries are missing from here.
       entries: [
         skuContext.paths.clientEntry,
         skuContext.paths.serverEntry,
         skuContext.paths.renderEntry,
+        renderEntry,
+        clientEntry,
       ],
       esbuildOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],

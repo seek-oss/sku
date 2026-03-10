@@ -14,7 +14,7 @@ describe('vite-cjs-interop-apollo-client-v4', () => {
     const url = `http://localhost:${port}`;
     const portArgs = ['--strict-port', `--port=${port}`];
 
-    it(`should render home page correctly`, async ({ task }) => {
+    it(`should render home page correctly`, async () => {
       const start = await sku('start', portArgs);
       await start.findByText('Starting development server');
 
@@ -39,7 +39,7 @@ describe('vite-cjs-interop-apollo-client-v4', () => {
       await serve.findByText('Server started');
     });
 
-    it(`should render home page correctly`, async ({ task }) => {
+    it(`should render home page correctly`, async () => {
       const snapshot = await getAppSnapshot({
         url,
       });

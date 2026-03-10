@@ -13,7 +13,6 @@ export default defineConfig({
     },
   },
   test: {
-    cache: false,
     exclude: [...defaultExclude, '**/fixtures/**'],
     hookTimeout: TEST_TIMEOUT + 1000,
     maxWorkers: '80%',

@@ -40,7 +40,7 @@ describe('security-controls', () => {
       });
     });
 
-    describe.skip('build', async () => {
+    describe('build', async () => {
       let cspTag: HTMLElement;
 
       beforeAll(async () => {
@@ -76,7 +76,7 @@ describe('security-controls', () => {
     });
   });
 
-  describe.skip('build-ssr', async () => {
+  describe('build-ssr', async () => {
     const port = await getPort();
     const assetPort = await getPort();
     const url = `http://localhost:${port}`;

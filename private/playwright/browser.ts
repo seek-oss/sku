@@ -1,4 +1,4 @@
-import { type Browser, chromium as browserInstance } from 'playwright';
+import { type Browser, chromium } from 'playwright';
 import debug from 'debug';
 
 const log = debug('sku:browser');
@@ -14,7 +14,7 @@ const getBrowser = async () => {
   }
 
   log('Launching browser');
-  _browser = browserInstance.launch({
+  _browser = chromium.launch({
     // Using the chromium channel to enable the latest headless mode
     channel: 'chromium',
     slowMo: 150,

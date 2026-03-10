@@ -1,3 +1,7 @@
 {
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: ['github>seek-oss/rynovate'],
+  ignoreDeps: [
+    '@apollo/client', // We install 2 different major versions - v3 and v4 - so we can test against both of them. This can be remoed once we no longer care about supporting v3.
+  ],
 }

@@ -1,5 +1,13 @@
 # sku
 
+## 15.10.1
+
+### Patch Changes
+
+- `vite`: Improve compatibility with `@apollo/client` v3 and v4 ([#1512](https://github.com/seek-oss/sku/pull/1512))
+
+  CJS interop for `@apollo/client` is now applied conditionally depending on both the major version and the `sku` command being executed.
+
 ## 15.10.0
 
 ### Minor Changes

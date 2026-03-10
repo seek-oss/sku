@@ -15,6 +15,7 @@ const getBrowser = async () => {
 
   log('Launching browser');
   _browser = browserInstance.launch({
+    // Using the chromium channel to enable the latest headless mode
     channel: 'chromium',
     // Slow down Playwright actions so the browser has time to hydrate the app
     slowMo: 150,
@@ -30,11 +31,9 @@ const getBrowser = async () => {
 export const closeBrowser = async (): Promise<void> => {
   const browser = await _browser;
   if (!browser) {
-    console.log('No browser to close');
     return;
   }
   log('Closing browser');
-  console.log('Closing browser');
   await browser?.close();
   _browser = null;
 };

@@ -17,8 +17,7 @@ expect.addSnapshotSerializer(htmlSnapshotSerializer);
 expect.addSnapshotSerializer(cssSnapshotSerializer);
 
 afterEach(({ task }) => {
-  console.log('cleaning up task', task.name);
-  return cleanup(task);
+  cleanup(task);
 });
 
 afterAll(() => {

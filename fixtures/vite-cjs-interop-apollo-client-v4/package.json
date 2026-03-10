@@ -1,5 +1,5 @@
 {
-  "name": "@sku-fixtures/vite-cjs-interop",
+  "name": "@sku-fixtures/vite-cjs-interop-apollo-client-v4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:",
-    "@apollo/client": "^3.14.0"
+    "@apollo/client": "^4.1.6"
   },
   "devDependencies": {
     "@types/react": "catalog:",

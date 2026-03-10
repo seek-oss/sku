@@ -874,8 +874,8 @@ importers:
   fixtures/vite-cjs-interop-apollo-client-v3:
     dependencies:
       '@apollo/client':
-        specifier: ^4.1.6
-        version: 4.1.6(graphql@16.12.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rxjs@7.8.2)
+        specifier: ^3.14.0
+        version: 3.14.0(@types/react@19.2.14)(graphql@16.12.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -896,8 +896,8 @@ importers:
   fixtures/vite-cjs-interop-apollo-client-v4:
     dependencies:
       '@apollo/client':
-        specifier: ^3.14.0
-        version: 3.14.0(@types/react@19.2.14)(graphql@16.12.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^4.1.6
+        version: 4.1.6(graphql@16.12.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rxjs@7.8.2)
       react:
         specifier: 'catalog:'
         version: 19.2.4

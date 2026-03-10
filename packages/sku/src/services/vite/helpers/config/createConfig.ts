@@ -50,7 +50,12 @@ export const createConfig = (
       vocabConfig && vitePluginVocab({ vocabConfig }),
       tsconfigPaths(),
       cjsInterop({
-        dependencies: skuContext.cjsInteropDependencies,
+        dependencies: skuContext.serveCjsInteropDependencies,
+        apply: 'serve',
+      }),
+      cjsInterop({
+        dependencies: skuContext.buildCjsInteropDependencies,
+        apply: 'build',
       }),
       react({
         babel: {

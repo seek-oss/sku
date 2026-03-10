@@ -3,7 +3,7 @@
 exports[`vite-cjs-interop-apollo-client-v4 > build and serve > should generate the expected files 1`] = `
 {
   "index.html": SCRIPTS: [
-    "/vite-client-Bti9GCMp.js",
+    "/vite-client-x_7eW-Hx.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -36,8 +36,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client-Bti9GCMp.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client-Bti9GCMp.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-x_7eW-Hx.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-x_7eW-Hx.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -58,7 +58,7 @@ exports[`vite-cjs-interop-apollo-client-v4 > build and serve > should render hom
     >
     <link
       rel="modulepreload"
-      href="/vite-client-Bti9GCMp.js"
+      href="/vite-client-x_7eW-Hx.js"
       crossorigin
     >
   </head>
@@ -70,7 +70,7 @@ exports[`vite-cjs-interop-apollo-client-v4 > build and serve > should render hom
     </div>
     <script
       type="module"
-      src="/vite-client-Bti9GCMp.js"
+      src="/vite-client-x_7eW-Hx.js"
     >
     </script>
   </body>

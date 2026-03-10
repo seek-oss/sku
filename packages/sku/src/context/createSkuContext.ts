@@ -1,5 +1,5 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
-import { getPathFromCwd } from '@sku-private/utils';
+import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
@@ -15,6 +15,9 @@ import { resolveAppSkuConfigPath } from './configPath.js';
 
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { getCjsInteropDeps } from './cjsInteropDeps.js';
+import type { PackageJson } from 'type-fest';
+
 const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 
@@ -42,8 +45,6 @@ const generateTypeScriptPaths = (
 
   return typeScriptPaths;
 };
-
-const defaultCjsInteropDependencies = ['@apollo/client', 'lodash'];
 
 interface SkuContextOptions {
   configPath?: string;
@@ -258,6 +259,23 @@ export const createSkuContext = ({
       ? generateTypeScriptPaths(skuConfig.pathAliases)
       : undefined;
 
+  const defaultCjsInteropDependencies = ['lodash'];
+
+  const packageJson: PackageJson = requireFromCwd('./package.json');
+  const allDeps = {
+    ...packageJson.dependencies,
+    ...packageJson.devDependencies,
+  };
+  const apolloClientVersion = allDeps['@apollo/client'];
+
+  const cjsInteropDependencies = [
+    ...defaultCjsInteropDependencies,
+    ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
+  ];
+
+  const { serveCjsInteropDependencies, buildCjsInteropDependencies } =
+    getCjsInteropDeps({ cjsInteropDependencies, apolloClientVersion });
+
   return {
     bundler: skuConfig.bundler,
     testRunner: skuConfig.testRunner,
@@ -295,10 +313,8 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
-    cjsInteropDependencies: [
-      ...defaultCjsInteropDependencies,
-      ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
-    ],
+    serveCjsInteropDependencies,
+    buildCjsInteropDependencies,
   };
 };
 

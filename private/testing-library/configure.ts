@@ -4,6 +4,7 @@ import { configure as _configure, type Config } from 'cli-testing-library';
 // Default configuration for cli-testing-library
 const DEFAULT_CONFIG: Partial<Config> = {
   asyncUtilTimeout: TEST_TIMEOUT,
+  showOriginalStackTrace: true,
 };
 
 // Configure cli-testing-library with default settings

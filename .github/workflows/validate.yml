@@ -48,7 +48,7 @@ jobs:
         id: babel-loader-cache
         uses: actions/cache@v5
         with:
-          path: 'fixtures/*/node_modules/.cache/babel-loader'
+          path: "fixtures/*/node_modules/.cache/babel-loader"
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Set up hosts
@@ -59,7 +59,7 @@ jobs:
         run: pnpm lint
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install chromium --with-deps
+        run: pnpm exec playwright install chromium --with-deps --no-shell
 
       - name: Test
         run: aa-exec --profile=chrome pnpm run test

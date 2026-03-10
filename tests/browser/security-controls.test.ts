@@ -36,11 +36,21 @@ describe('security-controls', () => {
       });
 
       it('should start an app with security controls', async () => {
-        const app = await getAppSnapshot({
-          url,
-        });
+        start.debug();
+        console.log('checking snapshot - before');
 
-        expect(app).toMatchSnapshot();
+        try {
+          const app = await getAppSnapshot({
+            url,
+          });
+          expect(app).toMatchSnapshot();
+        } catch (error) {
+          console.log('an error occurred');
+          console.log('error', error);
+          throw error;
+        }
+
+        console.log('checking snapshot - after');
       });
     });
 

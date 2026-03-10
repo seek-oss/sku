@@ -1,4 +1,4 @@
-import { type Browser, chromium } from 'playwright';
+import { type Browser, chromium as browserInstance } from 'playwright';
 import debug from 'debug';
 
 const log = debug('sku:browser');
@@ -14,7 +14,8 @@ const getBrowser = async () => {
   }
 
   log('Launching browser');
-  _browser = chromium.launch({
+  _browser = browserInstance.launch({
+    channel: 'chromium',
     // Slow down Playwright actions so the browser has time to hydrate the app
     slowMo: 150,
     headless: process.env.HEADLESS !== 'false',
@@ -29,9 +30,11 @@ const getBrowser = async () => {
 export const closeBrowser = async (): Promise<void> => {
   const browser = await _browser;
   if (!browser) {
+    console.log('No browser to close');
     return;
   }
   log('Closing browser');
+  console.log('Closing browser');
   await browser?.close();
   _browser = null;
 };

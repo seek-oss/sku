@@ -1,0 +1,20 @@
+{
+  "name": "@sku-fixtures/vite-cjs-interop",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sku build",
+    "start": "sku start"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "@apollo/client": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

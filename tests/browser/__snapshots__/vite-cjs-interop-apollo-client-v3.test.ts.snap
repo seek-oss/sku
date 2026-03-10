@@ -1,0 +1,148 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`vite-cjs-interop-apollo-client-v3 > build and serve > should generate the expected files 1`] = `
+{
+  "index.html": SCRIPTS: [
+    "/vite-client-iHiw5ICO.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Vite CJS Interop - Apollo Client v3
+      </div>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
+  </body>
+</html>,
+  "vite-client-iHiw5ICO.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client-iHiw5ICO.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`vite-cjs-interop-apollo-client-v3 > build and serve > should render home page correctly 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client-iHiw5ICO.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Vite CJS Interop - Apollo Client v3
+      </div>
+    </div>
+    <script
+      type="module"
+      src="/vite-client-iHiw5ICO.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`vite-cjs-interop-apollo-client-v3 > start > should render home page correctly 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,60 +1,60 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
+   </head>
+   <body>
+     <div id="app">
+       <div>
+         Vite CJS Interop - Apollo Client v3
+       </div>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;

@@ -1,5 +1,11 @@
 # sku
 
+## 15.10.2
+
+### Patch Changes
+
+- Fix a bug where conditional CJS interop for `@apollo/client` would fail if the app used a PNPM catalog dependency ([#1517](https://github.com/seek-oss/sku/pull/1517))
+
 ## 15.10.1
 
 ### Patch Changes

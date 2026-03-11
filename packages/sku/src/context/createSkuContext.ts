@@ -274,7 +274,11 @@ export const createSkuContext = ({
   ];
 
   const { serveCjsInteropDependencies, buildCjsInteropDependencies } =
-    getCjsInteropDeps({ cjsInteropDependencies, apolloClientVersion });
+    getCjsInteropDeps({
+      appName: packageJson.name ?? null,
+      cjsInteropDependencies,
+      apolloClientVersion: apolloClientVersion ?? null,
+    });
 
   return {
     bundler: skuConfig.bundler,

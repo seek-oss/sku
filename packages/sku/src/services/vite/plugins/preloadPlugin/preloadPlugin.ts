@@ -12,6 +12,7 @@ import { getWebpackLoadableSpecifierName } from './helpers/getWebpackLoadableSpe
 import { convertWebpackToViteImport } from './helpers/convertWebpackToViteImport.js';
 import { injectModuleID } from './helpers/injectModuleID.js';
 import { getExecuteCommand } from '@sku-private/utils';
+import { makePluginName } from '../../helpers/makePluginName.js';
 
 /* NOTE: This implementation can probably be improved and simplified.
  * My primary goal was to get it working and replacing but my limited experience with AST parsing is likely showing.
@@ -46,18 +47,12 @@ export function preloadPlugin({
   const lazyImportedModules = new Set();
   const injectedModules = new Set();
   let count = 0;
-  let isSsr = false;
-
   return {
-    name: 'vite-plugin-sku-vite-preload',
-
-    apply(config) {
-      // Enable on SSR builds (--ssr)
-      isSsr = Boolean(config.build?.ssr);
-      return true;
-    },
+    name: makePluginName('preload'),
 
     async transform(code, id) {
+      const isSsr = this.environment?.name === 'ssr';
+
       if (!include.test(id)) {
         return null;
       }

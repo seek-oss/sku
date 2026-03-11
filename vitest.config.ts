@@ -18,7 +18,7 @@ export default defineConfig({
     maxWorkers: '80%',
     restoreMocks: true,
     retry: 1,
-    setupFiles: ['./vitest-setup.ts'],
+    setupFiles: './vitest-setup.ts',
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     testTimeout: TEST_TIMEOUT + 1000,
     projects: [

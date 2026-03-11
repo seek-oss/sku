@@ -31,7 +31,7 @@ export class MetricsPlugin implements WebpackPluginInstance {
         log('Initial "%s" build complete: %s', this.target, {
           toString: () => prettyMilliseconds(performance.now()),
         });
-        provider.timing('start.webpack.initial', performance.now(), {
+        provider.timing('start.initial', performance.now(), {
           target: this.target,
           type: this.type,
         });
@@ -42,7 +42,7 @@ export class MetricsPlugin implements WebpackPluginInstance {
         log('Rebuild for "%s" complete: %s', this.target, {
           toString: () => prettyMilliseconds(rebuildTime),
         });
-        provider.timing('start.webpack.rebuild', rebuildTime, {
+        provider.timing('start.rebuild', rebuildTime, {
           target: this.target,
           type: this.type,
         });

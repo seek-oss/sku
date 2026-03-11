@@ -14,7 +14,7 @@
     "build": "tsdown",
     "check": "pnpm install --frozen-lockfile && echo 'Ignore paths from lint-staged'",
     "fixture": "pnpm --filter '@sku-private/fixture-cli' fixture",
-    "test": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
+    "test": "SKU_VITE_DISABLE_WATCH=true SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
     "test:update": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run -u",
     "setup-test-hosts": "tsx private/test-utils/setupTestHosts",
     "start:docs": "pnpm run --filter @sku-private/docs start",
@@ -73,7 +73,7 @@
   "engines": {
     "node": ">=22.19.0"
   },
-  "packageManager": "pnpm@10.30.1",
+  "packageManager": "pnpm@10.32.0",
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true

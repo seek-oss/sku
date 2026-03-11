@@ -2,6 +2,7 @@ import type { Plugin } from 'vite';
 
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
+import { makePluginName } from '../helpers/makePluginName.js';
 
 export const polyfillsPlugin = (skuContext: SkuContext): Plugin => {
   const virtualModuleId = 'virtual:sku/polyfills';
@@ -9,7 +10,7 @@ export const polyfillsPlugin = (skuContext: SkuContext): Plugin => {
   const resolvedPolyfills = resolvePolyfills(skuContext.polyfills);
 
   return {
-    name: 'vite-plugin-sku-polyfills',
+    name: makePluginName('polyfills'),
     resolveId(id) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId;

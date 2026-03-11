@@ -10,6 +10,7 @@ import {
 } from '../../../utils/language-utils.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import createCSPHandler, { type CSPHandler } from '../../webpack/entry/csp.js';
+import { makePluginName } from '../helpers/makePluginName.js';
 
 const log = debug('sku:middleware:vite');
 
@@ -25,7 +26,7 @@ export const middlewarePlugin = ({
   skuContext: SkuContext;
   environment: string;
 }): Plugin => ({
-  name: 'vite-plugin-sku-server-middleware',
+  name: makePluginName('middleware'),
   async configureServer(server) {
     if (
       metricsMeasurers.initialPageLoad.isInitialPageLoad &&

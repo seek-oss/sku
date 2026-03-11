@@ -47,7 +47,7 @@ export const getCjsInteropDeps = ({
     // Vite build seems to resolve `@apollo/client/react` correctly - applying CJS interop to it
     // results in build errors
     const buildCjsInteropDependencies = serveCjsInteropDependencies.filter(
-      (dep) => !dep.startsWith('@apollo/client/react'),
+      (dep) => dep !== '@apollo/client/react',
     );
 
     return { serveCjsInteropDependencies, buildCjsInteropDependencies };

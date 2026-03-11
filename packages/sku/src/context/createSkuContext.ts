@@ -266,15 +266,20 @@ export const createSkuContext = ({
     ...packageJson.dependencies,
     ...packageJson.devDependencies,
   };
-  const apolloClientVersion = allDeps['@apollo/client'];
+  const dependsOnApolloClient = Boolean(allDeps['@apollo/client']);
 
   const cjsInteropDependencies = [
     ...defaultCjsInteropDependencies,
     ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
   ];
 
+  // TODO: Remove logic specific to apollo client in next sku major, assuming uptake of apollo
+  // client v4 is good enough. Consumer still on v3 will need to manually configure CJS interop.
   const { serveCjsInteropDependencies, buildCjsInteropDependencies } =
-    getCjsInteropDeps({ cjsInteropDependencies, apolloClientVersion });
+    getCjsInteropDeps({
+      dependsOnApolloClient,
+      cjsInteropDependencies,
+    });
 
   return {
     bundler: skuConfig.bundler,

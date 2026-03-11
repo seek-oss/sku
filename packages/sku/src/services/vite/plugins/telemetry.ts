@@ -87,7 +87,7 @@ const handleInitialPageLoadEvent = (tags: Record<string, string>) => () => {
 
     const initialStartTime = skuStartDuration + initialLoadDuration;
 
-    provider.timing('start.vite.initial', initialStartTime, tags);
+    provider.timing('start.initial', initialStartTime, tags);
   }
 };
 
@@ -119,6 +119,6 @@ const handleCustomHmrEvent =
       timestamps.delete(timestamp);
 
       log('HMR update completed in %dms', durationInMs);
-      provider.timing('start.vite.rebuild', durationInMs, tags);
+      provider.timing('start.rebuild', durationInMs, tags);
     }
   };

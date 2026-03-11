@@ -1,5 +1,11 @@
 # sku
 
+## 15.10.3
+
+### Patch Changes
+
+- start(vite): minimize reloads caused by dependency optimization on cold startup ([#1516](https://github.com/seek-oss/sku/pull/1516))
+
 ## 15.10.2
 
 ### Patch Changes

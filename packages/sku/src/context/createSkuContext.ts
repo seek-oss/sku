@@ -266,7 +266,7 @@ export const createSkuContext = ({
     ...packageJson.dependencies,
     ...packageJson.devDependencies,
   };
-  const apolloClientVersion = allDeps['@apollo/client'];
+  const dependsOnApolloClient = Boolean(allDeps['@apollo/client']);
 
   const cjsInteropDependencies = [
     ...defaultCjsInteropDependencies,
@@ -275,9 +275,8 @@ export const createSkuContext = ({
 
   const { serveCjsInteropDependencies, buildCjsInteropDependencies } =
     getCjsInteropDeps({
-      appName: packageJson.name ?? null,
+      dependsOnApolloClient,
       cjsInteropDependencies,
-      apolloClientVersion: apolloClientVersion ?? null,
     });
 
   return {

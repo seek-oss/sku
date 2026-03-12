@@ -536,7 +536,7 @@ export interface ViteSkuConfig {
    *
    * @default: []
    */
-  __UNSTABLE_vitePlugins?: PluginOption[];
+  vitePlugins?: PluginOption[];
 
   /**
    * Path alias mappings for module resolution.

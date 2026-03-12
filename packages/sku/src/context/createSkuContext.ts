@@ -1,5 +1,5 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
-import { getPathFromCwd } from '@sku-private/utils';
+import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
@@ -15,6 +15,9 @@ import { resolveAppSkuConfigPath } from './configPath.js';
 
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { getCjsInteropDeps } from './cjsInteropDeps.js';
+import type { PackageJson } from 'type-fest';
+
 const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
 
@@ -42,8 +45,6 @@ const generateTypeScriptPaths = (
 
   return typeScriptPaths;
 };
-
-const defaultCjsInteropDependencies = ['@apollo/client', 'lodash'];
 
 interface SkuContextOptions {
   configPath?: string;
@@ -237,7 +238,7 @@ export const createSkuContext = ({
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;
   const viteDecorator = skuConfig.dangerouslySetViteConfig!;
   const vitestDecorator = skuConfig.dangerouslySetVitestConfig!;
-  const vitePlugins = skuConfig.__UNSTABLE_vitePlugins!;
+  const vitePlugins = skuConfig.vitePlugins!;
   const eslintIgnore = skuConfig.eslintIgnore!;
   const routes = normalizedRoutes!;
   const environments = skuConfig.environments!;
@@ -257,6 +258,28 @@ export const createSkuContext = ({
     skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'
       ? generateTypeScriptPaths(skuConfig.pathAliases)
       : undefined;
+
+  const defaultCjsInteropDependencies = ['lodash'];
+
+  const packageJson: PackageJson = requireFromCwd('./package.json');
+  const allDeps = {
+    ...packageJson.dependencies,
+    ...packageJson.devDependencies,
+  };
+  const dependsOnApolloClient = Boolean(allDeps['@apollo/client']);
+
+  const cjsInteropDependencies = [
+    ...defaultCjsInteropDependencies,
+    ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
+  ];
+
+  // TODO: Remove logic specific to apollo client in next sku major, assuming uptake of apollo
+  // client v4 is good enough. Consumer still on v3 will need to manually configure CJS interop.
+  const { serveCjsInteropDependencies, buildCjsInteropDependencies } =
+    getCjsInteropDeps({
+      dependsOnApolloClient,
+      cjsInteropDependencies,
+    });
 
   return {
     bundler: skuConfig.bundler,
@@ -295,10 +318,8 @@ export const createSkuContext = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     defaultClientEntry,
-    cjsInteropDependencies: [
-      ...defaultCjsInteropDependencies,
-      ...skuConfig.__UNSAFE_EXPERIMENTAL__cjsInteropDependencies,
-    ],
+    serveCjsInteropDependencies,
+    buildCjsInteropDependencies,
   };
 };
 

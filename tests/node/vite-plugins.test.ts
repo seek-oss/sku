@@ -4,7 +4,7 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('vite-plugins');
 
-describe('__UNSTABLE_vitePlugins', () => {
+describe('vitePlugins', () => {
   it('should run custom Vite plugins during build', async () => {
     const build = await sku('build');
 

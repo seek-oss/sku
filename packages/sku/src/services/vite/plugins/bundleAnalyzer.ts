@@ -1,15 +1,15 @@
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { visualizer } from 'rollup-plugin-visualizer';
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 
-export const bundleReportFolder = 'report';
-
-const getProjectName = (): string => requireFromCwd('./package.json').name;
-
-export const bundleAnalyzerPlugin = ({ name }: { name: string }): Plugin =>
-  visualizer({
-    filename: getPathFromCwd(`${bundleReportFolder}/${name}.html`),
+export const bundleAnalyzerPlugin = (): PluginOption => ({
+  ...visualizer({
+    filename: getPathFromCwd('report/client.html'),
     template: 'treemap',
     gzipSize: true,
-    title: getProjectName() || 'Vite Bundle Analyzer',
-  });
+    title: requireFromCwd('./package.json').name || 'Vite Bundle Analyzer',
+  }),
+  // make this plugin only apply to the client environment during build
+  apply: 'build',
+  applyToEnvironment: (environment) => environment.name === 'client',
+});

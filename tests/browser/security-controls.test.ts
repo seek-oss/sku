@@ -36,7 +36,6 @@ describe('security-controls', () => {
         const app = await getAppSnapshot({
           url,
         });
-
         expect(app).toMatchSnapshot();
       });
     });

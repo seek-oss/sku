@@ -1,12 +1,8 @@
-import { build, createServer } from 'vite';
+import { createServer, createBuilder } from 'vite';
 
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-import {
-  createClientBuildConfig,
-  createServerBuildConfig,
-  createStartConfig,
-} from './helpers/config/createConfig.js';
+import { createConfig } from './helpers/config/createConfig.js';
 import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
@@ -17,8 +13,11 @@ import { serverUrls } from '@sku-private/utils';
 export const viteService = {
   build: async (skuContext: SkuContext) => {
     const outDir = createOutDir(skuContext.paths.target);
-    await build(createClientBuildConfig(skuContext));
-    await build(createServerBuildConfig(skuContext));
+    const builder = await createBuilder(createConfig(skuContext));
+
+    // builds all environments in the order they are defined in the config
+    await builder.buildApp();
+
     if (skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
@@ -32,9 +31,7 @@ export const viteService = {
     skuContext: SkuContext;
     environment: string;
   }) => {
-    const server = await createServer(
-      createStartConfig({ skuContext, environment }),
-    );
+    const server = await createServer(createConfig(skuContext, environment));
 
     const availablePort = await allocatePort({
       port: skuContext.port.client,

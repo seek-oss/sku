@@ -159,7 +159,7 @@ export default validator.compile({
   dangerouslySetVitestConfig: {
     type: 'function',
   },
-  __UNSTABLE_vitePlugins: {
+  vitePlugins: {
     type: 'array',
     items: [{ type: 'object' }],
   },

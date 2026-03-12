@@ -1,5 +1,11 @@
 # sku
 
+## 15.11.0
+
+### Minor Changes
+
+- config: Stable support for `vitePlugins` ([#1520](https://github.com/seek-oss/sku/pull/1520))
+
 ## 15.10.3
 
 ### Patch Changes

@@ -2,4 +2,4 @@
 'sku': minor
 ---
 
-config: `vitePlugins` is now stable
+config: Stable support for `vitePlugins`

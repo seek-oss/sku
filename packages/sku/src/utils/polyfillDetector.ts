@@ -22,7 +22,7 @@ export const getDeprecatedPolyfill = (
   }
 
   if (polyfillName.startsWith('core-js')) {
-    return POLYFILL_REGISTRY['core-js']!;
+    return POLYFILL_REGISTRY['core-js'];
   }
 
   return null;

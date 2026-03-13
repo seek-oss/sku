@@ -34,7 +34,7 @@ program
         },
       });
 
-      if (!projectName) {
+      if (!(projectName && typeof projectName === 'string')) {
         console.log('❌ No project name provided. Exiting.');
         process.exit(1);
       }
@@ -75,7 +75,7 @@ program
 
     try {
       await createProject({
-        targetDir: finalTargetDir!,
+        targetDir: finalTargetDir,
         template: selectedTemplate as Template,
       });
     } catch (error) {

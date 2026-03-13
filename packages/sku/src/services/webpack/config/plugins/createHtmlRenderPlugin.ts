@@ -60,6 +60,8 @@ const getStartRoutes = ({
       if (routeIsForSpecificSite) {
         allRouteCombinations.push({
           route,
+          // Route types are a mess, probably needs a rethink/refactor to address properly
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           site: sites[route.siteIndex!],
           language,
         });
@@ -109,6 +111,8 @@ export const getBuildRoutes = ({
         if (routeIsForSpecificSite) {
           allRouteCombinations.push({
             route,
+            // Route types are a mess, probably needs a rethink/refactor to address properly
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             site: sites[route.siteIndex!],
             environment,
             language,

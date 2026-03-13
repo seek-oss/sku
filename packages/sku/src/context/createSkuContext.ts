@@ -165,7 +165,7 @@ export const createSkuContext = ({
       )
     : null;
 
-  const getSetupTests = (setupTests: string | string[]) => {
+  const getSetupTests = (setupTests?: string | string[]) => {
     if (!setupTests) {
       return [];
     }
@@ -201,58 +201,61 @@ export const createSkuContext = ({
   }
 
   const paths = {
+    // Can technically be undefined, in which case we use the default sku config.
+    // Maybe we shouldn't have a default sku config at all and just throw if it doesn't exist.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     appSkuConfigPath: appSkuConfigPath!,
     devServerMiddleware,
-    src: skuConfig.srcPaths!.map(getPathFromCwd),
+    src: skuConfig.srcPaths.map(getPathFromCwd),
     compilePackages: [
       ...detectedCompilePackageNames,
       ...defaultCompilePackages,
-      ...skuConfig.compilePackages!,
+      ...skuConfig.compilePackages,
     ],
-    clientEntry: getPathFromCwd(skuConfig.clientEntry!),
-    renderEntry: getPathFromCwd(skuConfig.renderEntry!),
+    clientEntry: getPathFromCwd(skuConfig.clientEntry),
+    renderEntry: getPathFromCwd(skuConfig.renderEntry),
     libraryEntry: skuConfig.libraryEntry
       ? getPathFromCwd(skuConfig.libraryEntry)
       : null,
-    serverEntry: getPathFromCwd(skuConfig.serverEntry!),
-    public: getPathFromCwd(skuConfig.public!),
-    target: getPathFromCwd(skuConfig.target!),
-    relativeTarget: skuConfig.target!,
+    serverEntry: getPathFromCwd(skuConfig.serverEntry),
+    public: getPathFromCwd(skuConfig.public),
+    target: getPathFromCwd(skuConfig.target),
+    relativeTarget: skuConfig.target,
     publicPath,
-    setupTests: getSetupTests(skuConfig.setupTests!),
+    setupTests: getSetupTests(skuConfig.setupTests),
   };
 
-  const hosts = skuConfig.hosts!;
+  const hosts = skuConfig.hosts;
   const port = {
     client: portArg || skuConfig.port,
     server: skuConfig.serverPort,
     strictPort: strictPort || false,
   };
-  const libraryName = skuConfig.libraryName!;
-  const libraryFile = skuConfig.libraryFile!;
+  const libraryName = skuConfig.libraryName;
+  const libraryFile = skuConfig.libraryFile;
   const isLibrary = Boolean(skuConfig.libraryEntry);
-  const polyfills = skuConfig.polyfills!;
-  const webpackDecorator = skuConfig.dangerouslySetWebpackConfig!;
-  const jestDecorator = skuConfig.dangerouslySetJestConfig!;
-  const eslintDecorator = skuConfig.dangerouslySetESLintConfig!;
-  const tsconfigDecorator = skuConfig.dangerouslySetTSConfig!;
-  const viteDecorator = skuConfig.dangerouslySetViteConfig!;
-  const vitestDecorator = skuConfig.dangerouslySetVitestConfig!;
-  const vitePlugins = skuConfig.vitePlugins!;
-  const eslintIgnore = skuConfig.eslintIgnore!;
-  const routes = normalizedRoutes!;
-  const environments = skuConfig.environments!;
-  const supportedBrowsers = skuConfig.supportedBrowsers!;
+  const polyfills = skuConfig.polyfills;
+  const webpackDecorator = skuConfig.dangerouslySetWebpackConfig;
+  const jestDecorator = skuConfig.dangerouslySetJestConfig;
+  const eslintDecorator = skuConfig.dangerouslySetESLintConfig;
+  const tsconfigDecorator = skuConfig.dangerouslySetTSConfig;
+  const viteDecorator = skuConfig.dangerouslySetViteConfig;
+  const vitestDecorator = skuConfig.dangerouslySetVitestConfig;
+  const vitePlugins = skuConfig.vitePlugins;
+  const eslintIgnore = skuConfig.eslintIgnore;
+  const routes = normalizedRoutes;
+  const environments = skuConfig.environments;
+  const supportedBrowsers = skuConfig.supportedBrowsers;
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
-  const cspEnabled = skuConfig.cspEnabled!;
-  const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts!;
-  const httpsDevServer = skuConfig.httpsDevServer!;
-  const rootResolution = skuConfig.rootResolution!;
-  const languages = normalizedLanguages!;
+  const cspEnabled = skuConfig.cspEnabled;
+  const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
+  const httpsDevServer = skuConfig.httpsDevServer;
+  const rootResolution = skuConfig.rootResolution;
+  const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
-    skuConfig.skipPackageCompatibilityCompilation!;
-  const externalizeNodeModules = skuConfig.externalizeNodeModules!;
+    skuConfig.skipPackageCompatibilityCompilation;
+  const externalizeNodeModules = skuConfig.externalizeNodeModules;
 
   const tsPaths =
     skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'

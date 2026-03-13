@@ -76,6 +76,7 @@ export default [
           allowWhitespace: true,
         },
       ],
+      '@typescript-eslint/no-non-null-assertion': 'error',
 
       'jsdoc/require-asterisk-prefix': ['error', 'always'],
       'no-console': 'off',

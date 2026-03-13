@@ -52,10 +52,15 @@ describe('security-controls', () => {
         const indexPath = fixturePath('dist/index.html');
         const content = await readFile(indexPath, 'utf-8');
         const root = parse(content);
-
-        cspTag = root.querySelector(
+        const element = root.querySelector(
           'meta[http-equiv="Content-Security-Policy"]',
-        )!;
+        );
+
+        if (!element) {
+          throw new Error('Unable to select CSP meta element');
+        }
+
+        cspTag = element;
       });
 
       it('should generate a CSP meta tag', async () => {
@@ -69,9 +74,7 @@ describe('security-controls', () => {
       });
 
       it('should generate a CSP with nonce value', async () => {
-        expect(cspTag!.getAttribute('content')).match(
-          /nonce-([a-zA-Z0-9+/=]+)/,
-        );
+        expect(cspTag.getAttribute('content')).match(/nonce-([a-zA-Z0-9+/=]+)/);
       });
     });
   });

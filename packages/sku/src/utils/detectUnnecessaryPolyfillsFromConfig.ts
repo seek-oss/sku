@@ -10,17 +10,16 @@ import {
 export const detectUnnecessaryPolyfillsFromConfig = (
   polyfills: string[],
 ): DetectedPolyfillWithSource[] =>
-  polyfills
-    .map((polyfillName) => {
-      const polyfillRegistryEntry = getDeprecatedPolyfill(polyfillName);
-      if (!polyfillRegistryEntry) {
-        return;
-      }
+  polyfills.reduce<DetectedPolyfillWithSource[]>((acc, polyfillName) => {
+    const polyfillRegistryEntry = getDeprecatedPolyfill(polyfillName);
 
-      return {
+    if (polyfillRegistryEntry) {
+      acc.push({
         polyfillName,
         detectionSource: 'config',
         ...polyfillRegistryEntry,
-      };
-    })
-    .filter((item): item is DetectedPolyfillWithSource => Boolean(item));
+      });
+    }
+
+    return acc;
+  }, []);

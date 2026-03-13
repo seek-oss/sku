@@ -1,17 +1,24 @@
-import type { Plugin } from 'esbuild';
+import type { RolldownPluginOption } from 'rolldown';
 import { cssFileFilter } from '@vanilla-extract/integration';
-import { dirname } from 'node:path';
-import { createRequire } from 'node:module';
 import { makePluginName } from '../../helpers/makePluginName.js';
+import { dirname } from 'node:path';
 
-const require = createRequire(import.meta.url);
-
-export const fixViteVanillaExtractDepScanPlugin = (): Plugin => ({
+export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),
-  setup(build) {
-    build.onResolve({ filter: cssFileFilter }, ({ importer, path }) => ({
-      path: require.resolve(path, { paths: [dirname(importer)] }),
-      external: true,
-    }));
+
+  // ! not sure if this is the correct vite@8 way to do this.
+  resolveId(source, importer) {
+    if (cssFileFilter.test(source)) {
+      // externalize the css file
+      return {
+        id: require.resolve(source, {
+          paths: importer ? [dirname(importer)] : undefined,
+        }),
+        external: true,
+      };
+    }
+
+    // defer to other resolvers
+    return null;
   },
 });

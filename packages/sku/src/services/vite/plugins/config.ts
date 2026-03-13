@@ -16,9 +16,17 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
+    // ! test out some apps to see if we need this or now. We've had some cjs interop issues in the past.
+    // ! @see https://vite.dev/guide/migration#consistent-commonjs-interop
+    // ! also see if we can remove the cjs interop plugin we've been using  (maybe vite@8 handles this better now?)
+    // legacy: {
+    //   inconsistentCjsInterop: true,
+    // },
+    //
     publicDir: false,
     root: process.cwd(),
     resolve: {
+      tsconfigPaths: true,
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
@@ -28,7 +36,6 @@ export const configPlugin = ({
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
-
     optimizeDeps: {
       // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold-start.
       // Reloads on cold-start cause issues with our Playwright tests, so we need to ensure they get optimized ahead of time.
@@ -40,7 +47,7 @@ export const configPlugin = ({
         renderEntry,
         clientEntry,
       ],
-      esbuildOptions: {
+      rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
       exclude: skuContext.skipPackageCompatibilityCompilation,

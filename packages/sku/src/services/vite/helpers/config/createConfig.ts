@@ -2,7 +2,6 @@ import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
@@ -48,7 +47,6 @@ export const createConfig = (
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
-      tsconfigPaths(),
       cjsInterop({
         dependencies: skuContext.serveCjsInteropDependencies,
         apply: 'serve',

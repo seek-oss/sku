@@ -102,7 +102,7 @@
     "@vanilla-extract/vite-plugin": "catalog:",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "@vitejs/plugin-basic-ssl": "^2.1.0",
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^6.0.0",
     "@vocab/core": "^1.6.2",
     "@vocab/phrase": "^2.2.0",
     "@vocab/pseudo-localize": "^1.0.1",

@@ -171,7 +171,7 @@
     "vite-tsconfig-paths": "^6.0.3",
     "webpack": "^5.99.8",
     "webpack-bundle-analyzer": "^5.1.1",
-    "webpack-dev-server": "<=5.2.0",
+    "webpack-dev-server": "<=5.2.3",
     "webpack-merge": "^6.0.1",
     "webpack-node-externals": "^3.0.0"
   },

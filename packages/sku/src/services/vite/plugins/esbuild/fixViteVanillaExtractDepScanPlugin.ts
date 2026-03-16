@@ -9,16 +9,16 @@ export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   // ! not sure if this is the correct vite@8 way to do this.
   resolveId(source, importer) {
     if (cssFileFilter.test(source)) {
-      // externalize the css file
+      const id = require.resolve(source, {
+        paths: importer ? [dirname(importer)] : undefined,
+      });
+
       return {
-        id: require.resolve(source, {
-          paths: importer ? [dirname(importer)] : undefined,
-        }),
-        external: true,
+        id,
+        // keep the absolute path of the css file so its externalized correctly.
+        external: 'absolute',
       };
     }
-
-    // defer to other resolvers
     return null;
   },
 });

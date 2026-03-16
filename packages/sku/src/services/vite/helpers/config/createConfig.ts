@@ -4,6 +4,7 @@ import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
@@ -55,13 +56,14 @@ export const createConfig = (
         dependencies: skuContext.buildCjsInteropDependencies,
         apply: 'build',
       }),
-      react({
-        babel: {
-          plugins: [
-            require.resolve('babel-plugin-macros'),
-            ...(isProductionBuild ? prodBabelPlugins : []),
-          ],
-        },
+      react(),
+      babel({
+        // turn this on for react-compiler support
+        // presets: [reactCompilerPreset()],
+        plugins: [
+          require.resolve('babel-plugin-macros'),
+          ...(isProductionBuild ? prodBabelPlugins : []),
+        ],
       }),
       vanillaExtractPlugin(),
       /**

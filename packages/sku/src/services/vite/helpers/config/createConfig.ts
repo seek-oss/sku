@@ -8,6 +8,7 @@ import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
+import { cjsModuleRunnerPlugin } from '@vitejs/plugin-rsc/plugins/cjs';
 
 const require = createRequire(import.meta.url);
 
@@ -39,6 +40,10 @@ export const createConfig = (
 
   return {
     plugins: [
+      // ssrLoadModule only works on ESM code. This plugin transforms CJS code to ESM during dev.
+      // We could use optimizeDeps.include but this will catch them automatically.
+      // @see https://github.com/vitejs/vite/issues/20726#issuecomment-3274141203
+      cjsModuleRunnerPlugin(),
       /**
        * user added plugins
        */

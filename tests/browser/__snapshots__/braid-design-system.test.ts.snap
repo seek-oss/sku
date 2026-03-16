@@ -53,14 +53,14 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
     </html>
   ",
   "vite-client.css": .sut6bi0 {
-  margin: 0;
-  padding: 0;
-  border: 0;
   box-sizing: border-box;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
   -webkit-tap-highlight-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 .sut6bi1 {
   display: block;
@@ -87,11 +87,11 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   appearance: none;
 }
 .sut6bi7 {
-  background-color: transparent;
+  background-color: #0000;
 }
 .sut6bi8 {
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 .sut6bi8:focus-visible {
   outline-color: var(--_1oekxtvm);
@@ -108,7 +108,10 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 .sut6bid[type="number"] {
   -moz-appearance: textfield;
 }
-.sut6bid[type="number"]::-webkit-inner-spin-button,
+.sut6bid[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .sut6bid[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -120,8 +123,8 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   -webkit-appearance: none;
 }
 .sut6big {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 .iho3a20 {
   overflow: hidden;
@@ -141,7 +144,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 }
 .iho3a25 {
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 .iho3a25:focus-visible {
   outline-color: var(--_1oekxtvm);
@@ -225,6 +228,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   max-width: var(--_1oekxtv14);
 }
 .iho3a2w {
+  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 .iho3a2x {
@@ -236,411 +240,275 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 .iho3a2z:active {
   transform: var(--_1oekxtv5j);
 }
-html:not(.iho3a210) .iho3a211 {
-  background: var(--_1oekxtv1s);
-}
+html:not(.iho3a210) .iho3a211,
 html.iho3a210 .iho3a212 {
   background: var(--_1oekxtv1s);
 }
-html:not(.iho3a210) .iho3a213 {
-  background: var(--_1oekxtv1t);
-}
+html:not(.iho3a210) .iho3a213,
 html.iho3a210 .iho3a214 {
   background: var(--_1oekxtv1t);
 }
-html:not(.iho3a210) .iho3a215 {
-  background: var(--_1oekxtv1u);
-}
+html:not(.iho3a210) .iho3a215,
 html.iho3a210 .iho3a216 {
   background: var(--_1oekxtv1u);
 }
-html:not(.iho3a210) .iho3a217 {
-  background: var(--_1oekxtv1v);
-}
+html:not(.iho3a210) .iho3a217,
 html.iho3a210 .iho3a218 {
   background: var(--_1oekxtv1v);
 }
-html:not(.iho3a210) .iho3a219 {
-  background: var(--_1oekxtv1w);
-}
+html:not(.iho3a210) .iho3a219,
 html.iho3a210 .iho3a21a {
   background: var(--_1oekxtv1w);
 }
-html:not(.iho3a210) .iho3a21b {
-  background: var(--_1oekxtv1x);
-}
+html:not(.iho3a210) .iho3a21b,
 html.iho3a210 .iho3a21c {
   background: var(--_1oekxtv1x);
 }
-html:not(.iho3a210) .iho3a21d {
-  background: var(--_1oekxtv1y);
-}
+html:not(.iho3a210) .iho3a21d,
 html.iho3a210 .iho3a21e {
   background: var(--_1oekxtv1y);
 }
-html:not(.iho3a210) .iho3a21f {
-  background: var(--_1oekxtv1z);
-}
+html:not(.iho3a210) .iho3a21f,
 html.iho3a210 .iho3a21g {
   background: var(--_1oekxtv1z);
 }
-html:not(.iho3a210) .iho3a21h {
-  background: var(--_1oekxtv20);
-}
+html:not(.iho3a210) .iho3a21h,
 html.iho3a210 .iho3a21i {
   background: var(--_1oekxtv20);
 }
-html:not(.iho3a210) .iho3a21j {
-  background: var(--_1oekxtv21);
-}
+html:not(.iho3a210) .iho3a21j,
 html.iho3a210 .iho3a21k {
   background: var(--_1oekxtv21);
 }
-html:not(.iho3a210) .iho3a21l {
-  background: var(--_1oekxtv22);
-}
+html:not(.iho3a210) .iho3a21l,
 html.iho3a210 .iho3a21m {
   background: var(--_1oekxtv22);
 }
-html:not(.iho3a210) .iho3a21n {
-  background: var(--_1oekxtv23);
-}
+html:not(.iho3a210) .iho3a21n,
 html.iho3a210 .iho3a21o {
   background: var(--_1oekxtv23);
 }
-html:not(.iho3a210) .iho3a21p {
-  background: var(--_1oekxtv24);
-}
+html:not(.iho3a210) .iho3a21p,
 html.iho3a210 .iho3a21q {
   background: var(--_1oekxtv24);
 }
-html:not(.iho3a210) .iho3a21r {
-  background: var(--_1oekxtv25);
-}
+html:not(.iho3a210) .iho3a21r,
 html.iho3a210 .iho3a21s {
   background: var(--_1oekxtv25);
 }
-html:not(.iho3a210) .iho3a21t {
-  background: var(--_1oekxtv26);
-}
+html:not(.iho3a210) .iho3a21t,
 html.iho3a210 .iho3a21u {
   background: var(--_1oekxtv26);
 }
-html:not(.iho3a210) .iho3a21v {
-  background: var(--_1oekxtv27);
-}
+html:not(.iho3a210) .iho3a21v,
 html.iho3a210 .iho3a21w {
   background: var(--_1oekxtv27);
 }
-html:not(.iho3a210) .iho3a21x {
-  background: var(--_1oekxtv28);
-}
+html:not(.iho3a210) .iho3a21x,
 html.iho3a210 .iho3a21y {
   background: var(--_1oekxtv28);
 }
-html:not(.iho3a210) .iho3a21z {
-  background: var(--_1oekxtv29);
-}
+html:not(.iho3a210) .iho3a21z,
 html.iho3a210 .iho3a220 {
   background: var(--_1oekxtv29);
 }
-html:not(.iho3a210) .iho3a221 {
-  background: var(--_1oekxtv2a);
-}
+html:not(.iho3a210) .iho3a221,
 html.iho3a210 .iho3a222 {
   background: var(--_1oekxtv2a);
 }
-html:not(.iho3a210) .iho3a223 {
-  background: var(--_1oekxtv2b);
-}
+html:not(.iho3a210) .iho3a223,
 html.iho3a210 .iho3a224 {
   background: var(--_1oekxtv2b);
 }
-html:not(.iho3a210) .iho3a225 {
-  background: var(--_1oekxtv2c);
-}
+html:not(.iho3a210) .iho3a225,
 html.iho3a210 .iho3a226 {
   background: var(--_1oekxtv2c);
 }
-html:not(.iho3a210) .iho3a227 {
-  background: var(--_1oekxtv2d);
-}
+html:not(.iho3a210) .iho3a227,
 html.iho3a210 .iho3a228 {
   background: var(--_1oekxtv2d);
 }
-html:not(.iho3a210) .iho3a229 {
-  background: var(--_1oekxtv2e);
-}
+html:not(.iho3a210) .iho3a229,
 html.iho3a210 .iho3a22a {
   background: var(--_1oekxtv2e);
 }
-html:not(.iho3a210) .iho3a22b {
-  background: var(--_1oekxtv2f);
-}
+html:not(.iho3a210) .iho3a22b,
 html.iho3a210 .iho3a22c {
   background: var(--_1oekxtv2f);
 }
-html:not(.iho3a210) .iho3a22d {
-  background: var(--_1oekxtv2g);
-}
+html:not(.iho3a210) .iho3a22d,
 html.iho3a210 .iho3a22e {
   background: var(--_1oekxtv2g);
 }
-html:not(.iho3a210) .iho3a22f {
-  background: var(--_1oekxtv2h);
-}
+html:not(.iho3a210) .iho3a22f,
 html.iho3a210 .iho3a22g {
   background: var(--_1oekxtv2h);
 }
-html:not(.iho3a210) .iho3a22h {
-  background: var(--_1oekxtv2i);
-}
+html:not(.iho3a210) .iho3a22h,
 html.iho3a210 .iho3a22i {
   background: var(--_1oekxtv2i);
 }
-html:not(.iho3a210) .iho3a22j {
-  background: var(--_1oekxtv2j);
-}
+html:not(.iho3a210) .iho3a22j,
 html.iho3a210 .iho3a22k {
   background: var(--_1oekxtv2j);
 }
-html:not(.iho3a210) .iho3a22l {
-  background: var(--_1oekxtv2k);
-}
+html:not(.iho3a210) .iho3a22l,
 html.iho3a210 .iho3a22m {
   background: var(--_1oekxtv2k);
 }
-html:not(.iho3a210) .iho3a22n {
-  background: var(--_1oekxtv2l);
-}
+html:not(.iho3a210) .iho3a22n,
 html.iho3a210 .iho3a22o {
   background: var(--_1oekxtv2l);
 }
-html:not(.iho3a210) .iho3a22p {
-  background: var(--_1oekxtv2m);
-}
+html:not(.iho3a210) .iho3a22p,
 html.iho3a210 .iho3a22q {
   background: var(--_1oekxtv2m);
 }
-html:not(.iho3a210) .iho3a22r {
-  background: var(--_1oekxtv2n);
-}
+html:not(.iho3a210) .iho3a22r,
 html.iho3a210 .iho3a22s {
   background: var(--_1oekxtv2n);
 }
-html:not(.iho3a210) .iho3a22t {
-  background: var(--_1oekxtv2o);
-}
+html:not(.iho3a210) .iho3a22t,
 html.iho3a210 .iho3a22u {
   background: var(--_1oekxtv2o);
 }
-html:not(.iho3a210) .iho3a22v {
-  background: var(--_1oekxtv2p);
-}
+html:not(.iho3a210) .iho3a22v,
 html.iho3a210 .iho3a22w {
   background: var(--_1oekxtv2p);
 }
-html:not(.iho3a210) .iho3a22x {
-  background: var(--_1oekxtv2q);
-}
+html:not(.iho3a210) .iho3a22x,
 html.iho3a210 .iho3a22y {
   background: var(--_1oekxtv2q);
 }
-html:not(.iho3a210) .iho3a22z {
-  background: var(--_1oekxtv2r);
-}
+html:not(.iho3a210) .iho3a22z,
 html.iho3a210 .iho3a230 {
   background: var(--_1oekxtv2r);
 }
-html:not(.iho3a210) .iho3a231 {
-  background: var(--_1oekxtv2s);
-}
+html:not(.iho3a210) .iho3a231,
 html.iho3a210 .iho3a232 {
   background: var(--_1oekxtv2s);
 }
-html:not(.iho3a210) .iho3a233 {
-  background: var(--_1oekxtv2t);
-}
+html:not(.iho3a210) .iho3a233,
 html.iho3a210 .iho3a234 {
   background: var(--_1oekxtv2t);
 }
-html:not(.iho3a210) .iho3a235 {
-  background: var(--_1oekxtv2u);
-}
+html:not(.iho3a210) .iho3a235,
 html.iho3a210 .iho3a236 {
   background: var(--_1oekxtv2u);
 }
-html:not(.iho3a210) .iho3a237 {
-  box-shadow: var(--_1oekxtv5k);
-}
+html:not(.iho3a210) .iho3a237,
 html.iho3a210 .iho3a238 {
   box-shadow: var(--_1oekxtv5k);
 }
-html:not(.iho3a210) .iho3a239 {
-  box-shadow: var(--_1oekxtv5l);
-}
+html:not(.iho3a210) .iho3a239,
 html.iho3a210 .iho3a23a {
   box-shadow: var(--_1oekxtv5l);
 }
-html:not(.iho3a210) .iho3a23b {
-  box-shadow: var(--_1oekxtv5m);
-}
+html:not(.iho3a210) .iho3a23b,
 html.iho3a210 .iho3a23c {
   box-shadow: var(--_1oekxtv5m);
 }
-html:not(.iho3a210) .iho3a23d {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvf);
-}
+html:not(.iho3a210) .iho3a23d,
 html.iho3a210 .iho3a23e {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvf);
 }
-html:not(.iho3a210) .iho3a23f {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvg);
-}
+html:not(.iho3a210) .iho3a23f,
 html.iho3a210 .iho3a23g {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvg);
 }
-html:not(.iho3a210) .iho3a23h {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvf);
-}
+html:not(.iho3a210) .iho3a23h,
 html.iho3a210 .iho3a23i {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvf);
 }
-html:not(.iho3a210) .iho3a23j {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvg);
-}
+html:not(.iho3a210) .iho3a23j,
 html.iho3a210 .iho3a23k {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvg);
 }
-html:not(.iho3a210) .iho3a23l {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvh);
-}
+html:not(.iho3a210) .iho3a23l,
 html.iho3a210 .iho3a23m {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvh);
 }
-html:not(.iho3a210) .iho3a23n {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvi);
-}
+html:not(.iho3a210) .iho3a23n,
 html.iho3a210 .iho3a23o {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvi);
 }
-html:not(.iho3a210) .iho3a23p {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvj);
-}
+html:not(.iho3a210) .iho3a23p,
 html.iho3a210 .iho3a23q {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvj);
 }
-html:not(.iho3a210) .iho3a23r {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvj);
-}
+html:not(.iho3a210) .iho3a23r,
 html.iho3a210 .iho3a23s {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvj);
 }
-html:not(.iho3a210) .iho3a23t {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvk);
-}
+html:not(.iho3a210) .iho3a23t,
 html.iho3a210 .iho3a23u {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvk);
 }
-html:not(.iho3a210) .iho3a23v {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvk);
-}
+html:not(.iho3a210) .iho3a23v,
 html.iho3a210 .iho3a23w {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvk);
 }
-html:not(.iho3a210) .iho3a23x {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvl);
-}
+html:not(.iho3a210) .iho3a23x,
 html.iho3a210 .iho3a23y {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvl);
 }
-html:not(.iho3a210) .iho3a23z {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvn);
-}
+html:not(.iho3a210) .iho3a23z,
 html.iho3a210 .iho3a240 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvn);
 }
-html:not(.iho3a210) .iho3a241 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvn);
-}
+html:not(.iho3a210) .iho3a241,
 html.iho3a210 .iho3a242 {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvn);
 }
-html:not(.iho3a210) .iho3a243 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvo);
-}
+html:not(.iho3a210) .iho3a243,
 html.iho3a210 .iho3a244 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvo);
 }
-html:not(.iho3a210) .iho3a245 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvo);
-}
+html:not(.iho3a210) .iho3a245,
 html.iho3a210 .iho3a246 {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvo);
 }
-html:not(.iho3a210) .iho3a247 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvp);
-}
+html:not(.iho3a210) .iho3a247,
 html.iho3a210 .iho3a248 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvp);
 }
-html:not(.iho3a210) .iho3a249 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvq);
-}
+html:not(.iho3a210) .iho3a249,
 html.iho3a210 .iho3a24a {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvq);
 }
-html:not(.iho3a210) .iho3a24b {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvr);
-}
+html:not(.iho3a210) .iho3a24b,
 html.iho3a210 .iho3a24c {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvr);
 }
-html:not(.iho3a210) .iho3a24d {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvr);
-}
+html:not(.iho3a210) .iho3a24d,
 html.iho3a210 .iho3a24e {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvr);
 }
-html:not(.iho3a210) .iho3a24f {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvs);
-}
+html:not(.iho3a210) .iho3a24f,
 html.iho3a210 .iho3a24g {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvs);
 }
-html:not(.iho3a210) .iho3a24h {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvs);
-}
+html:not(.iho3a210) .iho3a24h,
 html.iho3a210 .iho3a24i {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvs);
 }
-html:not(.iho3a210) .iho3a24j {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvt);
-}
+html:not(.iho3a210) .iho3a24j,
 html.iho3a210 .iho3a24k {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvt);
 }
-html:not(.iho3a210) .iho3a24l {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvu);
-}
+html:not(.iho3a210) .iho3a24l,
 html.iho3a210 .iho3a24m {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvu);
 }
-html:not(.iho3a210) .iho3a24n {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvv);
-}
+html:not(.iho3a210) .iho3a24n,
 html.iho3a210 .iho3a24o {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvv);
 }
-html:not(.iho3a210) .iho3a24p {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvw);
-}
+html:not(.iho3a210) .iho3a24p,
 html.iho3a210 .iho3a24q {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvw);
 }
-html:not(.iho3a210) .iho3a24r {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvx);
-}
+html:not(.iho3a210) .iho3a24r,
 html.iho3a210 .iho3a24s {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvx);
 }
@@ -2282,21 +2150,13 @@ html.iho3a210 .q0kq4e13 {
   --q0kq4ey: var(--_1oekxtv1r);
   --q0kq4ez: var(--_1oekxtv1h);
 }
-html:not(.iho3a210) .q0kq4e14 {
-  --q0kq4ex: var(--q0kq4eq);
-}
-html:not(.iho3a210) .q0kq4e15 {
-  --q0kq4ex: var(--q0kq4eq);
-}
-html:not(.iho3a210) .q0kq4e16 {
-  --q0kq4ex: var(--q0kq4eq);
-}
+html:not(.iho3a210) .q0kq4e14,
+html:not(.iho3a210) .q0kq4e15,
+html:not(.iho3a210) .q0kq4e16,
 html:not(.iho3a210) .q0kq4e17 {
   --q0kq4ex: var(--q0kq4eq);
 }
-html:not(.iho3a210) .q0kq4e18 {
-  --q0kq4ex: var(--q0kq4er);
-}
+html:not(.iho3a210) .q0kq4e18,
 html:not(.iho3a210) .q0kq4e19 {
   --q0kq4ex: var(--q0kq4er);
 }
@@ -2470,9 +2330,9 @@ html.iho3a210 .q0kq4e1l {
 @supports (display: -webkit-box) and (-webkit-line-clamp: 1) {
   ._129wd9g4 {
     white-space: initial;
-    display: -webkit-box;
     -webkit-line-clamp: var(--_129wd9g3);
     -webkit-box-orient: vertical;
+    display: -webkit-box;
   }
 }
 ._28izme0 {
@@ -2493,7 +2353,7 @@ html.iho3a210 .q0kq4e1l {
   top: -0.105em;
 }
 ._28izme5 {
-  top: -0.16499999999999998em;
+  top: -0.165em;
 }
 ._28izme6 {
   top: -0.045em;
@@ -2505,7 +2365,7 @@ html.iho3a210 .q0kq4e1l {
   top: -0.125em;
 }
 ._28izme9 {
-  top: -0.0050000000000000044em;
+  top: -0.005em;
 }
 ._28izmea {
   width: var(--_1oekxtv32);
@@ -2560,8 +2420,8 @@ html.iho3a210 .q0kq4e1l {
   }
 }
 ._164ng3y0 {
-  transition: transform 0.3s ease;
-  transform-origin: 50% 50%;
+  transform-origin: 50%;
+  transition: transform 0.3s;
 }
 ._164ng3y1 {
   transform: rotate(90deg);
@@ -2577,18 +2437,18 @@ html.iho3a210 .q0kq4e1l {
 }
 ._3z0ycm0:after {
   content: "";
-  position: absolute;
-  min-height: 44px;
+  width: 100%;
   min-width: 44px;
   height: 100%;
-  width: 100%;
-  transform: translate(-50%, -50%);
+  min-height: 44px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 [data-braid-debug] ._3z0ycm0:after {
-  background: red;
   opacity: 0.2;
+  background: red;
 }
 ._1habs826 {
   background: var(--_1habs820);
@@ -2665,17 +2525,17 @@ html.iho3a210 ._1habs82f {
   left: calc(((44px - var(--_13vf6rg0)) / 2) * -1);
 }
 [data-braid-debug] ._13vf6rg4 {
-  background: red;
   opacity: 0.2;
+  background: red;
 }
 ._13vf6rg5 {
   height: var(--_13vf6rg0);
   width: var(--_13vf6rg0);
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 ._13vf6rg4[type="checkbox"]:checked ~ ._13vf6rg5 {
-  background: transparent;
+  background: 0 0;
 }
 ._13vf6rg4:focus-visible ~ ._13vf6rg5 {
   outline-color: var(--_1oekxtvm);
@@ -2685,8 +2545,8 @@ html.iho3a210 ._1habs82f {
 }
 ._13vf6rg4:checked ~ * ._13vf6rg8,
 ._13vf6rg4._13vf6rg7 ~ * ._13vf6rg8 {
-  display: block;
   z-index: 1;
+  display: block;
 }
 ._13vf6rg4:checked + ._13vf6rg5 > ._13vf6rg9,
 ._13vf6rg4._13vf6rg7 + ._13vf6rg5 > ._13vf6rg9 {
@@ -2756,7 +2616,7 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtvj: #b91e1e;
   --_1oekxtvk: #fb999a;
   --_1oekxtvl: #838fa5;
-  --_1oekxtvm: rgba(153, 191, 247, 0.7);
+  --_1oekxtvm: #99bff7b3;
   --_1oekxtvn: #1e47a9;
   --_1oekxtvo: #99bff7;
   --_1oekxtvp: #1d559d;
@@ -2797,7 +2657,7 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtv1o: #7f35a9;
   --_1oekxtv1p: #e1b2f5;
   --_1oekxtv1q: #5a6881;
-  --_1oekxtv1r: rgba(255, 255, 255, 0.65);
+  --_1oekxtv1r: #ffffffa6;
   --_1oekxtv1s: #fff;
   --_1oekxtv1t: #1c2330;
   --_1oekxtv1u: #051a49;
@@ -2934,19 +2794,16 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtv5h: transform 0.125s ease, opacity 0.125s ease;
   --_1oekxtv5i: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   --_1oekxtv5j: scale(0.95);
-  --_1oekxtv5k:
-    0 0 4px 0 rgba(28, 35, 48, 0.08), 0 4px 8px -2px rgba(28, 35, 48, 0.08);
-  --_1oekxtv5l:
-    0 0 8px 0 rgba(28, 35, 48, 0.08), 0 8px 16px -4px rgba(28, 35, 48, 0.08);
-  --_1oekxtv5m:
-    0 0 12px 0 rgba(28, 35, 48, 0.08), 0 12px 24px -6px rgba(28, 35, 48, 0.08);
+  --_1oekxtv5k: 0 0 4px 0 #1c233014, 0 4px 8px -2px #1c233014;
+  --_1oekxtv5l: 0 0 8px 0 #1c233014, 0 8px 16px -4px #1c233014;
+  --_1oekxtv5m: 0 0 12px 0 #1c233014, 0 12px 24px -6px #1c233014;
 }
 .inn18b0 {
   --zv7nmx0: blueviolet;
   background-color: var(--zv7nmx0);
   color: #fff;
-  font-size: 20px;
   padding: 100px;
+  font-size: 20px;
 }
 ,
   "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -3374,11 +3231,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
                    .forEach(node => node.remove());
                });
      </script>
-+    <style
-+      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
 +    <style
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
@@ -5470,6 +5322,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    text-align: right;
 +  }
 +}
++    </style>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
 +    </style>
 +    <style
 +      type="text/css"
@@ -8419,11 +8276,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
      </script>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
 +    >
 +      .reset_base__sut6bi0 {
@@ -10513,6 +10365,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    text-align: right;
 +  }
 +}
++    </style>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
 +    </style>
 +    <style
 +      type="text/css"

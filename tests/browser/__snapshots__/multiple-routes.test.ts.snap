@@ -565,6 +565,206 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
 </html>
 `;
 
+exports[`multiple-routes > bundler: vite > start > should render details page correctly 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,83 +1,91 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=';"
+     >
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+     </script>
+     <script>
+       console.log('Hi');
+     </script>
+     <style type="text/css">
+       body {
+         background: pink;
+       }
+     </style>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Details.css.js.vanilla.css"
++    >
++      .Details_root__1hpn1da0 {
++  color: blue;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <h1 class="Details_root__1hpn1da0">
+-        Welcome to the Details page - au
++        Welcome to the Details page - auID: 123
+         <span>
+           Some special async content
+         </span>
+       </h1>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
+     >
+     </script>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"site":"au"}
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`multiple-routes > bundler: vite > start > should render home page correctly 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,80 +1,88 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://error-tracking.com https://fb-tracking.com https://code.jquery.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-rGv16tw6EM5EMe4gsxdgzpqzrzd14bhfa2neQclOXDU=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=';"
+     >
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js">
+     </script>
+     <script>
+       console.log('Hi');
+     </script>
+     <style type="text/css">
+       body {
+         background: pink;
+       }
+     </style>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Home.css.js.vanilla.css"
++    >
++      .Home_root__ms22la0 {
++  color: red;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <h1 class="Home_root__ms22la0">
+         Welcome to the Home page - au
+       </h1>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
+     >
+     </script>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"site":"au"}
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`multiple-routes > bundler: webpack > build and serve > should generate the expected files 1`] = `
 {
   "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

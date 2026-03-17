@@ -6,7 +6,6 @@ import { dirname } from 'node:path';
 export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),
 
-  // ! not sure if this is the correct vite@8 way to do this.
   resolveId(source, importer) {
     if (cssFileFilter.test(source)) {
       const id = require.resolve(source, {

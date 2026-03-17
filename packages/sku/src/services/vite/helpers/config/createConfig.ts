@@ -40,9 +40,10 @@ export const createConfig = (
 
   return {
     plugins: [
-      // ssrLoadModule only works on ESM code. This plugin transforms CJS code to ESM during dev.
-      // We could use optimizeDeps.include but this will catch them automatically.
-      // @see https://github.com/vitejs/vite/issues/20726#issuecomment-3274141203
+      // This is needed because of an error in  @oxc-project/runtime importing cjs code causing "ReferenceError: module is not defined".
+      // This plugin will transform CJS code to ESM during dev.
+      // @see issue - https://github.com/vitejs/vite/pull/21822
+      // @see plugin - https://github.com/vitejs/vite/issues/20726#issuecomment-3274141203
       cjsModuleRunnerPlugin(),
       /**
        * user added plugins

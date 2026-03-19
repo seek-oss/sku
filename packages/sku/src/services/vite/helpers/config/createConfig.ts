@@ -41,7 +41,7 @@ export const createConfig = (
   return {
     plugins: [
       // This is needed because of an error in  @oxc-project/runtime importing cjs code causing "ReferenceError: module is not defined".
-      // This plugin will transform CJS code to ESM during dev.
+      // This plugin will transform CJS code to ESM during dev. This can be removed once the following issue is resolved
       // @see issue - https://github.com/vitejs/vite/pull/21822
       // @see plugin - https://github.com/vitejs/vite/issues/20726#issuecomment-3274141203
       cjsModuleRunnerPlugin(),

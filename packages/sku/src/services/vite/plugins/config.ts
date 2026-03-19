@@ -16,13 +16,6 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    // ! test out some apps to see if we need this or now. We've had some cjs interop issues in the past.
-    // ! @see https://vite.dev/guide/migration#consistent-commonjs-interop
-    // ! also see if we can remove the cjs interop plugin we've been using  (maybe vite@8 handles this better now?)
-    // legacy: {
-    //   inconsistentCjsInterop: true,
-    // },
-    //
     publicDir: false,
     root: process.cwd(),
     resolve: {

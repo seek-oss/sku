@@ -22,8 +22,8 @@ catalogs:
       specifier: ^5.1.1
       version: 5.1.4
     '@vocab/vite':
-      specifier: 1.0.1-vite-v8-support-20260319005609
-      version: 1.0.1-vite-v8-support-20260319005609
+      specifier: 1.0.1
+      version: 1.0.1
     braid-design-system:
       specifier: ^34.0.0
       version: 34.0.4
@@ -804,7 +804,7 @@ importers:
         version: 1.1.22(react@19.2.4)
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.1(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(esbuild@0.27.3))
@@ -1145,7 +1145,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.1(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))
@@ -4516,8 +4516,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.1-vite-v8-support-20260319005609':
-    resolution: {integrity: sha512-LeETLcmYTVGw35yJ+Xeg0Wy8GZvkgwMWTUInb0PzQlNw6yEip5dZ6zWBvJYnWwcsg7MrlQa9ZHG2U9KfE7zlBQ==}
+  '@vocab/vite@1.0.1':
+    resolution: {integrity: sha512-cfE0hpqL5j2NkuT5/F1EzmKHMUcBtLfy2fc6XXQy7+rzoUezJqfwVcOf8R6va3WQPejK9pdiTVC7RbvqGZddOg==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -13224,7 +13224,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.1(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0
@@ -13235,7 +13235,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.1(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0

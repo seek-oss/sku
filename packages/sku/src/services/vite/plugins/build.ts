@@ -25,7 +25,6 @@ export const buildPlugin = ({
         assetsDir: '',
         rolldownOptions: {
           output: {
-            experimentalMinChunkSize: undefined,
             codeSplitting: {
               groups: [
                 {

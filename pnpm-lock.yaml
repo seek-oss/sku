@@ -22,8 +22,8 @@ catalogs:
       specifier: ^5.1.1
       version: 5.1.4
     '@vocab/vite':
-      specifier: ^1.0.0
-      version: 1.0.0
+      specifier: 1.0.1-vite-v8-support-20260319005609
+      version: 1.0.1-vite-v8-support-20260319005609
     braid-design-system:
       specifier: ^34.0.0
       version: 34.0.4
@@ -804,7 +804,7 @@ importers:
         version: 1.1.22(react@19.2.4)
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.0(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(esbuild@0.27.3))
@@ -1145,7 +1145,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.0(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))
@@ -4516,10 +4516,10 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.0':
-    resolution: {integrity: sha512-90yYP297g/ujj1bygBJ5U8o8jgD0u2mPPl4V52I3yzcTj7JWGKamSoZcFAGmImb255fT1oOgqOS1GWVOoA0dzQ==}
+  '@vocab/vite@1.0.1-vite-v8-support-20260319005609':
+    resolution: {integrity: sha512-LeETLcmYTVGw35yJ+Xeg0Wy8GZvkgwMWTUInb0PzQlNw6yEip5dZ6zWBvJYnWwcsg7MrlQa9ZHG2U9KfE7zlBQ==}
     peerDependencies:
-      vite: ^6.0.0 || ^7.0.0
+      vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
   '@vocab/webpack@1.2.22':
     resolution: {integrity: sha512-9NX03qs+MgvEHrg1JG6sebTP1Fww3DbnIXFz98RkUWSelpobexe0aiDNp9MTYm74t5ewq2dcXT6evKMRH60jaw==}
@@ -11443,7 +11443,7 @@ snapshots:
       '@jest/fake-timers': 30.3.0
       '@jest/types': 30.3.0
       '@types/jsdom': 21.1.7
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       jest-mock: 30.3.0
       jest-util: 30.3.0
       jsdom: 26.1.0
@@ -11452,7 +11452,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 30.3.0
       '@jest/types': 30.3.0
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       jest-mock: 30.3.0
 
   '@jest/expect-utils@30.3.0':
@@ -11470,7 +11470,7 @@ snapshots:
     dependencies:
       '@jest/types': 30.3.0
       '@sinonjs/fake-timers': 15.1.1
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       jest-message-util: 30.3.0
       jest-mock: 30.3.0
       jest-util: 30.3.0
@@ -12546,7 +12546,7 @@ snapshots:
 
   '@types/cross-spawn@6.0.6':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
 
   '@types/css@0.0.38': {}
 
@@ -12631,7 +12631,7 @@ snapshots:
 
   '@types/jsdom@21.1.7':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       '@types/tough-cookie': 4.0.5
       parse5: 7.3.0
 
@@ -12688,7 +12688,7 @@ snapshots:
 
   '@types/prompts@2.4.9':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       kleur: 3.0.3
 
   '@types/qs@6.15.0': {}
@@ -12726,7 +12726,7 @@ snapshots:
 
   '@types/serve-handler@6.1.4':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
 
   '@types/serve-index@1.9.4':
     dependencies:
@@ -12760,7 +12760,7 @@ snapshots:
 
   '@types/webpack-bundle-analyzer@4.7.0(@swc/core@1.15.18)(esbuild@0.27.3)':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       tapable: 2.3.0
       webpack: 5.105.4(@swc/core@1.15.18)(esbuild@0.27.3)
     transitivePeerDependencies:
@@ -12771,7 +12771,7 @@ snapshots:
 
   '@types/webpack-node-externals@3.0.4(@swc/core@1.15.18)(esbuild@0.27.3)':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       webpack: 5.105.4(@swc/core@1.15.18)(esbuild@0.27.3)
     transitivePeerDependencies:
       - '@swc/core'
@@ -12781,7 +12781,7 @@ snapshots:
 
   '@types/webpack-sources@3.2.3':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       '@types/source-list-map': 0.1.6
       source-map: 0.7.6
 
@@ -12791,7 +12791,7 @@ snapshots:
 
   '@types/webpack@4.41.40':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       '@types/tapable': 1.0.12
       '@types/uglify-js': 3.17.5
       '@types/webpack-sources': 3.2.3
@@ -13213,7 +13213,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.0(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0
@@ -13224,7 +13224,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.0(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.1-vite-v8-support-20260319005609(vite@8.0.0(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@vocab/core': 1.7.6
       cjs-module-lexer: 2.2.0
@@ -15041,7 +15041,7 @@ snapshots:
 
   eval@0.1.8:
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       require-like: 0.1.2
 
   eventemitter3@4.0.7: {}
@@ -16358,7 +16358,7 @@ snapshots:
   jest-mock@30.3.0:
     dependencies:
       '@jest/types': 30.3.0
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       jest-util: 30.3.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@30.3.0):
@@ -16468,7 +16468,7 @@ snapshots:
   jest-util@30.3.0:
     dependencies:
       '@jest/types': 30.3.0
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       chalk: 4.1.2
       ci-info: 4.4.0
       graceful-fs: 4.2.11
@@ -16498,7 +16498,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 30.3.0
       '@jest/types': 30.3.0
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -16507,7 +16507,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.4.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 

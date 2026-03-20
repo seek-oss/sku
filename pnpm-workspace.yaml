@@ -9,7 +9,7 @@ catalog:
   '@types/node': ^22.18.8
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
-  '@vanilla-extract/vite-plugin': ^5.2.0
+  '@vanilla-extract/vite-plugin': ^5.2.1
   '@vanilla-extract/integration': '^8.0.9'
   '@vanilla-extract/jest-transform': '^1.1.21'
   '@vanilla-extract/webpack-plugin': '^2.3.26'

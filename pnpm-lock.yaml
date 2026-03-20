@@ -28,8 +28,8 @@ catalogs:
       specifier: ^1.1.21
       version: 1.1.21
     '@vanilla-extract/vite-plugin':
-      specifier: ^5.2.0
-      version: 5.2.0
+      specifier: ^5.2.1
+      version: 5.2.1
     '@vanilla-extract/webpack-plugin':
       specifier: ^2.3.26
       version: 2.3.26
@@ -1133,7 +1133,7 @@ importers:
         version: 1.1.21(babel-plugin-macros@3.1.0)
       '@vanilla-extract/vite-plugin':
         specifier: 'catalog:'
-        version: 5.2.0(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        version: 5.2.1(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       '@vanilla-extract/webpack-plugin':
         specifier: 'catalog:'
         version: 2.3.26(babel-plugin-macros@3.1.0)(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))
@@ -4387,8 +4387,8 @@ packages:
   '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
     resolution: {integrity: sha512-MeDWGICAF9zA/OZLOKwhoRlsUW+fiMwnfuOAqFVohL31Agj7Q/RBWAYweqjHLgFBCsdnr6XIfwjJnmb2znEWxw==}
 
-  '@vanilla-extract/compiler@0.5.1':
-    resolution: {integrity: sha512-0FyUMZYlgdvgQuv3e5sBii0Xc0f76hOMIiAaqc/KNClss6MkKrY8vib1g542uMC1fUHQ5xhViq/4sZK72GYPyQ==}
+  '@vanilla-extract/compiler@0.6.0':
+    resolution: {integrity: sha512-FlZM8s/h1obGHdYSTo05iIXUr6hsNvoE/okv/e9Sq7GN+niofhUKyuZPSwZNVYMK49xxeWNH9mopOlGRRPV4mw==}
 
   '@vanilla-extract/css-utils@0.1.6':
     resolution: {integrity: sha512-iICpaHma0s2EEnQDw/JRqudQJwYw1JERyWfIllNQplps226KVphjGb3jyGMiBK5Waw69RD3q4gulgRVQAQmKmA==}
@@ -4413,8 +4413,8 @@ packages:
     peerDependencies:
       '@vanilla-extract/css': ^1.0.0
 
-  '@vanilla-extract/vite-plugin@5.2.0':
-    resolution: {integrity: sha512-FM2DP/jJG2BOdK83nZe+w5+2+Qv3oYlckApAOWMTnSG9rWBdBeh4L7PzJKcix9RctvuaRC0ogY1GOnoP99+BsQ==}
+  '@vanilla-extract/vite-plugin@5.2.1':
+    resolution: {integrity: sha512-1dmCgmTmls/c4G+t453vZIzZ+82ftr+JC2J48C1drVkiwtZ7DscYSIko9Ci0CyDptBLWz5EO9fWnqzfHnns8tg==}
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -12938,7 +12938,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vanilla-extract/compiler@0.5.1(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
+  '@vanilla-extract/compiler@0.6.0(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
     dependencies:
       '@vanilla-extract/css': 1.20.0(babel-plugin-macros@3.1.0)
       '@vanilla-extract/integration': 8.0.9(babel-plugin-macros@3.1.0)
@@ -13014,9 +13014,9 @@ snapshots:
     dependencies:
       '@vanilla-extract/css': 1.20.0(babel-plugin-macros@3.1.0)
 
-  '@vanilla-extract/vite-plugin@5.2.0(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
+  '@vanilla-extract/vite-plugin@5.2.1(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
     dependencies:
-      '@vanilla-extract/compiler': 0.5.1(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+      '@vanilla-extract/compiler': 0.6.0(@types/node@22.19.15)(babel-plugin-macros@3.1.0)(esbuild@0.27.3)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
       '@vanilla-extract/integration': 8.0.9(babel-plugin-macros@3.1.0)
       vite: 8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     transitivePeerDependencies:

@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Bumped minimum dependency versions with security vulnerabilities
+Updated minimum versions of dependencies to address security vulnerabilities

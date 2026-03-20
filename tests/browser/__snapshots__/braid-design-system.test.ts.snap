@@ -21,7 +21,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
@@ -46,7 +46,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
@@ -2006,18 +2006,18 @@ html.iho3a210 .iho3a24s {
     text-align: right;
   }
 }
-.yhgvqw4 {
-  font-size: var(--yhgvqw0);
-  line-height: var(--yhgvqw1);
+.f1kcu44 {
+  font-size: var(--f1kcu40);
+  line-height: var(--f1kcu41);
 }
-.yhgvqw4:before {
+.f1kcu44:before {
   content: "";
-  margin-bottom: var(--yhgvqw2);
+  margin-bottom: var(--f1kcu42);
   display: table;
 }
-.yhgvqw4:after {
+.f1kcu44:after {
   content: "";
-  margin-top: var(--yhgvqw3);
+  margin-top: var(--f1kcu43);
   display: table;
 }
 .q0kq4e0 {
@@ -2033,28 +2033,28 @@ html.iho3a210 .iho3a24s {
   font-weight: var(--_1oekxtv47);
 }
 .q0kq4e4 {
-  --yhgvqw0: var(--_1oekxtv31);
-  --yhgvqw1: var(--_1oekxtv32);
-  --yhgvqw2: var(--_1oekxtv34);
-  --yhgvqw3: var(--_1oekxtv35);
+  --f1kcu40: var(--_1oekxtv31);
+  --f1kcu41: var(--_1oekxtv32);
+  --f1kcu42: var(--_1oekxtv34);
+  --f1kcu43: var(--_1oekxtv35);
 }
 .q0kq4e6 {
-  --yhgvqw0: var(--_1oekxtv3b);
-  --yhgvqw1: var(--_1oekxtv3c);
-  --yhgvqw2: var(--_1oekxtv3e);
-  --yhgvqw3: var(--_1oekxtv3f);
+  --f1kcu40: var(--_1oekxtv3b);
+  --f1kcu41: var(--_1oekxtv3c);
+  --f1kcu42: var(--_1oekxtv3e);
+  --f1kcu43: var(--_1oekxtv3f);
 }
 .q0kq4e8 {
-  --yhgvqw0: var(--_1oekxtv3l);
-  --yhgvqw1: var(--_1oekxtv3m);
-  --yhgvqw2: var(--_1oekxtv3o);
-  --yhgvqw3: var(--_1oekxtv3p);
+  --f1kcu40: var(--_1oekxtv3l);
+  --f1kcu41: var(--_1oekxtv3m);
+  --f1kcu42: var(--_1oekxtv3o);
+  --f1kcu43: var(--_1oekxtv3p);
 }
 .q0kq4ea {
-  --yhgvqw0: var(--_1oekxtv3v);
-  --yhgvqw1: var(--_1oekxtv3w);
-  --yhgvqw2: var(--_1oekxtv3y);
-  --yhgvqw3: var(--_1oekxtv3z);
+  --f1kcu40: var(--_1oekxtv3v);
+  --f1kcu41: var(--_1oekxtv3w);
+  --f1kcu42: var(--_1oekxtv3y);
+  --f1kcu43: var(--_1oekxtv3z);
 }
 .q0kq4ec {
   font-size: var(--_1oekxtv31);
@@ -2079,28 +2079,28 @@ html.iho3a210 .iho3a24s {
   font-weight: var(--_1oekxtv5d);
 }
 .q0kq4ei {
-  --yhgvqw0: var(--_1oekxtv48);
-  --yhgvqw1: var(--_1oekxtv49);
-  --yhgvqw2: var(--_1oekxtv4b);
-  --yhgvqw3: var(--_1oekxtv4c);
+  --f1kcu40: var(--_1oekxtv48);
+  --f1kcu41: var(--_1oekxtv49);
+  --f1kcu42: var(--_1oekxtv4b);
+  --f1kcu43: var(--_1oekxtv4c);
 }
 .q0kq4ek {
-  --yhgvqw0: var(--_1oekxtv4i);
-  --yhgvqw1: var(--_1oekxtv4j);
-  --yhgvqw2: var(--_1oekxtv4l);
-  --yhgvqw3: var(--_1oekxtv4m);
+  --f1kcu40: var(--_1oekxtv4i);
+  --f1kcu41: var(--_1oekxtv4j);
+  --f1kcu42: var(--_1oekxtv4l);
+  --f1kcu43: var(--_1oekxtv4m);
 }
 .q0kq4em {
-  --yhgvqw0: var(--_1oekxtv4s);
-  --yhgvqw1: var(--_1oekxtv4t);
-  --yhgvqw2: var(--_1oekxtv4v);
-  --yhgvqw3: var(--_1oekxtv4w);
+  --f1kcu40: var(--_1oekxtv4s);
+  --f1kcu41: var(--_1oekxtv4t);
+  --f1kcu42: var(--_1oekxtv4v);
+  --f1kcu43: var(--_1oekxtv4w);
 }
 .q0kq4eo {
-  --yhgvqw0: var(--_1oekxtv52);
-  --yhgvqw1: var(--_1oekxtv53);
-  --yhgvqw2: var(--_1oekxtv55);
-  --yhgvqw3: var(--_1oekxtv56);
+  --f1kcu40: var(--_1oekxtv52);
+  --f1kcu41: var(--_1oekxtv53);
+  --f1kcu42: var(--_1oekxtv55);
+  --f1kcu43: var(--_1oekxtv56);
 }
 html:not(.iho3a210) .q0kq4e10 {
   --q0kq4eq: var(--_1oekxtv19);
@@ -2236,28 +2236,28 @@ html.iho3a210 .q0kq4e1l {
 }
 @media screen and (min-width: 740px) {
   .q0kq4e4 {
-    --yhgvqw0: var(--_1oekxtv36);
-    --yhgvqw1: var(--_1oekxtv37);
-    --yhgvqw2: var(--_1oekxtv39);
-    --yhgvqw3: var(--_1oekxtv3a);
+    --f1kcu40: var(--_1oekxtv36);
+    --f1kcu41: var(--_1oekxtv37);
+    --f1kcu42: var(--_1oekxtv39);
+    --f1kcu43: var(--_1oekxtv3a);
   }
   .q0kq4e6 {
-    --yhgvqw0: var(--_1oekxtv3g);
-    --yhgvqw1: var(--_1oekxtv3h);
-    --yhgvqw2: var(--_1oekxtv3j);
-    --yhgvqw3: var(--_1oekxtv3k);
+    --f1kcu40: var(--_1oekxtv3g);
+    --f1kcu41: var(--_1oekxtv3h);
+    --f1kcu42: var(--_1oekxtv3j);
+    --f1kcu43: var(--_1oekxtv3k);
   }
   .q0kq4e8 {
-    --yhgvqw0: var(--_1oekxtv3q);
-    --yhgvqw1: var(--_1oekxtv3r);
-    --yhgvqw2: var(--_1oekxtv3t);
-    --yhgvqw3: var(--_1oekxtv3u);
+    --f1kcu40: var(--_1oekxtv3q);
+    --f1kcu41: var(--_1oekxtv3r);
+    --f1kcu42: var(--_1oekxtv3t);
+    --f1kcu43: var(--_1oekxtv3u);
   }
   .q0kq4ea {
-    --yhgvqw0: var(--_1oekxtv40);
-    --yhgvqw1: var(--_1oekxtv41);
-    --yhgvqw2: var(--_1oekxtv43);
-    --yhgvqw3: var(--_1oekxtv44);
+    --f1kcu40: var(--_1oekxtv40);
+    --f1kcu41: var(--_1oekxtv41);
+    --f1kcu42: var(--_1oekxtv43);
+    --f1kcu43: var(--_1oekxtv44);
   }
   .q0kq4ec {
     font-size: var(--_1oekxtv36);
@@ -2276,28 +2276,28 @@ html.iho3a210 .q0kq4e1l {
     line-height: var(--_1oekxtv41);
   }
   .q0kq4ei {
-    --yhgvqw0: var(--_1oekxtv4d);
-    --yhgvqw1: var(--_1oekxtv4e);
-    --yhgvqw2: var(--_1oekxtv4g);
-    --yhgvqw3: var(--_1oekxtv4h);
+    --f1kcu40: var(--_1oekxtv4d);
+    --f1kcu41: var(--_1oekxtv4e);
+    --f1kcu42: var(--_1oekxtv4g);
+    --f1kcu43: var(--_1oekxtv4h);
   }
   .q0kq4ek {
-    --yhgvqw0: var(--_1oekxtv4n);
-    --yhgvqw1: var(--_1oekxtv4o);
-    --yhgvqw2: var(--_1oekxtv4q);
-    --yhgvqw3: var(--_1oekxtv4r);
+    --f1kcu40: var(--_1oekxtv4n);
+    --f1kcu41: var(--_1oekxtv4o);
+    --f1kcu42: var(--_1oekxtv4q);
+    --f1kcu43: var(--_1oekxtv4r);
   }
   .q0kq4em {
-    --yhgvqw0: var(--_1oekxtv4x);
-    --yhgvqw1: var(--_1oekxtv4y);
-    --yhgvqw2: var(--_1oekxtv50);
-    --yhgvqw3: var(--_1oekxtv51);
+    --f1kcu40: var(--_1oekxtv4x);
+    --f1kcu41: var(--_1oekxtv4y);
+    --f1kcu42: var(--_1oekxtv50);
+    --f1kcu43: var(--_1oekxtv51);
   }
   .q0kq4eo {
-    --yhgvqw0: var(--_1oekxtv57);
-    --yhgvqw1: var(--_1oekxtv58);
-    --yhgvqw2: var(--_1oekxtv5a);
-    --yhgvqw3: var(--_1oekxtv5b);
+    --f1kcu40: var(--_1oekxtv57);
+    --f1kcu41: var(--_1oekxtv58);
+    --f1kcu42: var(--_1oekxtv5a);
+    --f1kcu43: var(--_1oekxtv5b);
   }
   .q0kq4e1w {
     padding-top: calc((var(--_1oekxtv9) - var(--_1oekxtv37)) / 2);
@@ -2848,7 +2848,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
            Hello
            jobStreet
            <span class="sut6bi0 iho3a255">
@@ -2961,7 +2961,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -3030,7 +3030,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
            Hello
            seekAnz
            <span class="sut6bi0 iho3a255">
@@ -3143,7 +3143,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -5332,18 +5332,18 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__yhgvqw4 {
-+  font-size: var(--fontSize__yhgvqw0);
-+  line-height: var(--lineHeight__yhgvqw1);
++      .capsize_capsizeStyle__f1kcu44 {
++  font-size: var(--fontSize__f1kcu40);
++  line-height: var(--lineHeight__f1kcu41);
 +}
-+.capsize_capsizeStyle__yhgvqw4::before {
++.capsize_capsizeStyle__f1kcu44::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__yhgvqw2);
++  margin-bottom: var(--capHeightTrim__f1kcu42);
 +  display: table;
 +}
-+.capsize_capsizeStyle__yhgvqw4::after {
++.capsize_capsizeStyle__f1kcu44::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__yhgvqw3);
++  margin-top: var(--baselineTrim__f1kcu43);
 +  display: table;
 +}
 +    </style>
@@ -5364,28 +5364,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__1oekxtv47);
 +}
 +.typography_textSize_xsmall__q0kq4e4 {
-+  --fontSize__yhgvqw0: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
-+  --lineHeight__yhgvqw1: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
-+  --capHeightTrim__yhgvqw2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
-+  --baselineTrim__yhgvqw3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
++  --fontSize__f1kcu40: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
++  --lineHeight__f1kcu41: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
++  --capHeightTrim__f1kcu42: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
++  --baselineTrim__f1kcu43: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
 +}
 +.typography_textSize_small__q0kq4e6 {
-+  --fontSize__yhgvqw0: var(--textSize-small-mobile-fontSize__1oekxtv3b);
-+  --lineHeight__yhgvqw1: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
-+  --capHeightTrim__yhgvqw2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
-+  --baselineTrim__yhgvqw3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
++  --fontSize__f1kcu40: var(--textSize-small-mobile-fontSize__1oekxtv3b);
++  --lineHeight__f1kcu41: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
++  --capHeightTrim__f1kcu42: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
++  --baselineTrim__f1kcu43: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
 +}
 +.typography_textSize_standard__q0kq4e8 {
-+  --fontSize__yhgvqw0: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
-+  --lineHeight__yhgvqw1: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
-+  --capHeightTrim__yhgvqw2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
-+  --baselineTrim__yhgvqw3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
++  --fontSize__f1kcu40: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
++  --lineHeight__f1kcu41: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
++  --capHeightTrim__f1kcu42: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
++  --baselineTrim__f1kcu43: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
 +}
 +.typography_textSize_large__q0kq4ea {
-+  --fontSize__yhgvqw0: var(--textSize-large-mobile-fontSize__1oekxtv3v);
-+  --lineHeight__yhgvqw1: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
-+  --capHeightTrim__yhgvqw2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
-+  --baselineTrim__yhgvqw3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
++  --fontSize__f1kcu40: var(--textSize-large-mobile-fontSize__1oekxtv3v);
++  --lineHeight__f1kcu41: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
++  --capHeightTrim__f1kcu42: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
++  --baselineTrim__f1kcu43: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
@@ -5410,28 +5410,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__1oekxtv5d);
 +}
 +.typography_heading_1__q0kq4ei {
-+  --fontSize__yhgvqw0: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
-+  --lineHeight__yhgvqw1: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
++  --fontSize__f1kcu40: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
++  --lineHeight__f1kcu41: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
++  --capHeightTrim__f1kcu42: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
++  --baselineTrim__f1kcu43: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
 +}
 +.typography_heading_2__q0kq4ek {
-+  --fontSize__yhgvqw0: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
-+  --lineHeight__yhgvqw1: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
++  --fontSize__f1kcu40: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
++  --lineHeight__f1kcu41: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
++  --capHeightTrim__f1kcu42: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
++  --baselineTrim__f1kcu43: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
 +}
 +.typography_heading_3__q0kq4em {
-+  --fontSize__yhgvqw0: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
-+  --lineHeight__yhgvqw1: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
++  --fontSize__f1kcu40: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
++  --lineHeight__f1kcu41: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
++  --capHeightTrim__f1kcu42: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
++  --baselineTrim__f1kcu43: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
 +}
 +.typography_heading_4__q0kq4eo {
-+  --fontSize__yhgvqw0: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
-+  --lineHeight__yhgvqw1: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
++  --fontSize__f1kcu40: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
++  --lineHeight__f1kcu41: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
++  --capHeightTrim__f1kcu42: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
++  --baselineTrim__f1kcu43: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
 +}
 +html:not(.sprinkles_darkMode__iho3a210) .typography_lightModeTone_light__q0kq4e10 {
 +  --critical__q0kq4eq: var(--foregroundColor-critical__1oekxtv19);
@@ -5583,28 +5583,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__q0kq4e4 {
-+    --fontSize__yhgvqw0: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
-+    --lineHeight__yhgvqw1: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
-+    --capHeightTrim__yhgvqw2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
-+    --baselineTrim__yhgvqw3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
++    --fontSize__f1kcu40: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
++    --lineHeight__f1kcu41: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
++    --capHeightTrim__f1kcu42: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
++    --baselineTrim__f1kcu43: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
 +  }
 +  .typography_textSize_small__q0kq4e6 {
-+    --fontSize__yhgvqw0: var(--textSize-small-tablet-fontSize__1oekxtv3g);
-+    --lineHeight__yhgvqw1: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
-+    --capHeightTrim__yhgvqw2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
-+    --baselineTrim__yhgvqw3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
++    --fontSize__f1kcu40: var(--textSize-small-tablet-fontSize__1oekxtv3g);
++    --lineHeight__f1kcu41: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
++    --capHeightTrim__f1kcu42: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
++    --baselineTrim__f1kcu43: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
 +  }
 +  .typography_textSize_standard__q0kq4e8 {
-+    --fontSize__yhgvqw0: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
-+    --lineHeight__yhgvqw1: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
-+    --capHeightTrim__yhgvqw2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
-+    --baselineTrim__yhgvqw3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
++    --fontSize__f1kcu40: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
++    --lineHeight__f1kcu41: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
++    --capHeightTrim__f1kcu42: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
++    --baselineTrim__f1kcu43: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
 +  }
 +  .typography_textSize_large__q0kq4ea {
-+    --fontSize__yhgvqw0: var(--textSize-large-tablet-fontSize__1oekxtv40);
-+    --lineHeight__yhgvqw1: var(--textSize-large-tablet-lineHeight__1oekxtv41);
-+    --capHeightTrim__yhgvqw2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
-+    --baselineTrim__yhgvqw3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
++    --fontSize__f1kcu40: var(--textSize-large-tablet-fontSize__1oekxtv40);
++    --lineHeight__f1kcu41: var(--textSize-large-tablet-lineHeight__1oekxtv41);
++    --capHeightTrim__f1kcu42: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
++    --baselineTrim__f1kcu43: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
@@ -5623,28 +5623,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__1oekxtv41);
 +  }
 +  .typography_heading_1__q0kq4ei {
-+    --fontSize__yhgvqw0: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
-+    --lineHeight__yhgvqw1: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
++    --fontSize__f1kcu40: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
++    --lineHeight__f1kcu41: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
++    --capHeightTrim__f1kcu42: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
++    --baselineTrim__f1kcu43: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
 +  }
 +  .typography_heading_2__q0kq4ek {
-+    --fontSize__yhgvqw0: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
-+    --lineHeight__yhgvqw1: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
++    --fontSize__f1kcu40: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
++    --lineHeight__f1kcu41: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
++    --capHeightTrim__f1kcu42: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
++    --baselineTrim__f1kcu43: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
 +  }
 +  .typography_heading_3__q0kq4em {
-+    --fontSize__yhgvqw0: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
-+    --lineHeight__yhgvqw1: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
++    --fontSize__f1kcu40: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
++    --lineHeight__f1kcu41: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
++    --capHeightTrim__f1kcu42: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
++    --baselineTrim__f1kcu43: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
 +  }
 +  .typography_heading_4__q0kq4eo {
-+    --fontSize__yhgvqw0: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
-+    --lineHeight__yhgvqw1: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
++    --fontSize__f1kcu40: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
++    --lineHeight__f1kcu41: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
++    --capHeightTrim__f1kcu42: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
++    --baselineTrim__f1kcu43: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
 +  }
 +  .typography_touchableText_xsmall__q0kq4e1w {
 +    padding-top: calc((var(--touchableSize__1oekxtv9) - var(--textSize-xsmall-tablet-lineHeight__1oekxtv37)) / 2);
@@ -8073,7 +8073,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            jobStreet
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -8186,7 +8186,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -10375,18 +10375,18 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__yhgvqw4 {
-+  font-size: var(--fontSize__yhgvqw0);
-+  line-height: var(--lineHeight__yhgvqw1);
++      .capsize_capsizeStyle__f1kcu44 {
++  font-size: var(--fontSize__f1kcu40);
++  line-height: var(--lineHeight__f1kcu41);
 +}
-+.capsize_capsizeStyle__yhgvqw4::before {
++.capsize_capsizeStyle__f1kcu44::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__yhgvqw2);
++  margin-bottom: var(--capHeightTrim__f1kcu42);
 +  display: table;
 +}
-+.capsize_capsizeStyle__yhgvqw4::after {
++.capsize_capsizeStyle__f1kcu44::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__yhgvqw3);
++  margin-top: var(--baselineTrim__f1kcu43);
 +  display: table;
 +}
 +    </style>
@@ -10407,28 +10407,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__1oekxtv47);
 +}
 +.typography_textSize_xsmall__q0kq4e4 {
-+  --fontSize__yhgvqw0: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
-+  --lineHeight__yhgvqw1: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
-+  --capHeightTrim__yhgvqw2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
-+  --baselineTrim__yhgvqw3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
++  --fontSize__f1kcu40: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
++  --lineHeight__f1kcu41: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
++  --capHeightTrim__f1kcu42: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
++  --baselineTrim__f1kcu43: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
 +}
 +.typography_textSize_small__q0kq4e6 {
-+  --fontSize__yhgvqw0: var(--textSize-small-mobile-fontSize__1oekxtv3b);
-+  --lineHeight__yhgvqw1: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
-+  --capHeightTrim__yhgvqw2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
-+  --baselineTrim__yhgvqw3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
++  --fontSize__f1kcu40: var(--textSize-small-mobile-fontSize__1oekxtv3b);
++  --lineHeight__f1kcu41: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
++  --capHeightTrim__f1kcu42: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
++  --baselineTrim__f1kcu43: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
 +}
 +.typography_textSize_standard__q0kq4e8 {
-+  --fontSize__yhgvqw0: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
-+  --lineHeight__yhgvqw1: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
-+  --capHeightTrim__yhgvqw2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
-+  --baselineTrim__yhgvqw3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
++  --fontSize__f1kcu40: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
++  --lineHeight__f1kcu41: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
++  --capHeightTrim__f1kcu42: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
++  --baselineTrim__f1kcu43: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
 +}
 +.typography_textSize_large__q0kq4ea {
-+  --fontSize__yhgvqw0: var(--textSize-large-mobile-fontSize__1oekxtv3v);
-+  --lineHeight__yhgvqw1: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
-+  --capHeightTrim__yhgvqw2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
-+  --baselineTrim__yhgvqw3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
++  --fontSize__f1kcu40: var(--textSize-large-mobile-fontSize__1oekxtv3v);
++  --lineHeight__f1kcu41: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
++  --capHeightTrim__f1kcu42: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
++  --baselineTrim__f1kcu43: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
@@ -10453,28 +10453,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__1oekxtv5d);
 +}
 +.typography_heading_1__q0kq4ei {
-+  --fontSize__yhgvqw0: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
-+  --lineHeight__yhgvqw1: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
++  --fontSize__f1kcu40: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
++  --lineHeight__f1kcu41: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
++  --capHeightTrim__f1kcu42: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
++  --baselineTrim__f1kcu43: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
 +}
 +.typography_heading_2__q0kq4ek {
-+  --fontSize__yhgvqw0: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
-+  --lineHeight__yhgvqw1: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
++  --fontSize__f1kcu40: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
++  --lineHeight__f1kcu41: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
++  --capHeightTrim__f1kcu42: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
++  --baselineTrim__f1kcu43: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
 +}
 +.typography_heading_3__q0kq4em {
-+  --fontSize__yhgvqw0: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
-+  --lineHeight__yhgvqw1: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
++  --fontSize__f1kcu40: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
++  --lineHeight__f1kcu41: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
++  --capHeightTrim__f1kcu42: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
++  --baselineTrim__f1kcu43: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
 +}
 +.typography_heading_4__q0kq4eo {
-+  --fontSize__yhgvqw0: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
-+  --lineHeight__yhgvqw1: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
++  --fontSize__f1kcu40: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
++  --lineHeight__f1kcu41: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
++  --capHeightTrim__f1kcu42: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
++  --baselineTrim__f1kcu43: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
 +}
 +html:not(.sprinkles_darkMode__iho3a210) .typography_lightModeTone_light__q0kq4e10 {
 +  --critical__q0kq4eq: var(--foregroundColor-critical__1oekxtv19);
@@ -10626,28 +10626,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__q0kq4e4 {
-+    --fontSize__yhgvqw0: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
-+    --lineHeight__yhgvqw1: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
-+    --capHeightTrim__yhgvqw2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
-+    --baselineTrim__yhgvqw3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
++    --fontSize__f1kcu40: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
++    --lineHeight__f1kcu41: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
++    --capHeightTrim__f1kcu42: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
++    --baselineTrim__f1kcu43: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
 +  }
 +  .typography_textSize_small__q0kq4e6 {
-+    --fontSize__yhgvqw0: var(--textSize-small-tablet-fontSize__1oekxtv3g);
-+    --lineHeight__yhgvqw1: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
-+    --capHeightTrim__yhgvqw2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
-+    --baselineTrim__yhgvqw3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
++    --fontSize__f1kcu40: var(--textSize-small-tablet-fontSize__1oekxtv3g);
++    --lineHeight__f1kcu41: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
++    --capHeightTrim__f1kcu42: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
++    --baselineTrim__f1kcu43: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
 +  }
 +  .typography_textSize_standard__q0kq4e8 {
-+    --fontSize__yhgvqw0: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
-+    --lineHeight__yhgvqw1: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
-+    --capHeightTrim__yhgvqw2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
-+    --baselineTrim__yhgvqw3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
++    --fontSize__f1kcu40: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
++    --lineHeight__f1kcu41: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
++    --capHeightTrim__f1kcu42: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
++    --baselineTrim__f1kcu43: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
 +  }
 +  .typography_textSize_large__q0kq4ea {
-+    --fontSize__yhgvqw0: var(--textSize-large-tablet-fontSize__1oekxtv40);
-+    --lineHeight__yhgvqw1: var(--textSize-large-tablet-lineHeight__1oekxtv41);
-+    --capHeightTrim__yhgvqw2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
-+    --baselineTrim__yhgvqw3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
++    --fontSize__f1kcu40: var(--textSize-large-tablet-fontSize__1oekxtv40);
++    --lineHeight__f1kcu41: var(--textSize-large-tablet-lineHeight__1oekxtv41);
++    --capHeightTrim__f1kcu42: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
++    --baselineTrim__f1kcu43: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
@@ -10666,28 +10666,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__1oekxtv41);
 +  }
 +  .typography_heading_1__q0kq4ei {
-+    --fontSize__yhgvqw0: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
-+    --lineHeight__yhgvqw1: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
++    --fontSize__f1kcu40: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
++    --lineHeight__f1kcu41: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
++    --capHeightTrim__f1kcu42: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
++    --baselineTrim__f1kcu43: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
 +  }
 +  .typography_heading_2__q0kq4ek {
-+    --fontSize__yhgvqw0: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
-+    --lineHeight__yhgvqw1: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
++    --fontSize__f1kcu40: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
++    --lineHeight__f1kcu41: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
++    --capHeightTrim__f1kcu42: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
++    --baselineTrim__f1kcu43: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
 +  }
 +  .typography_heading_3__q0kq4em {
-+    --fontSize__yhgvqw0: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
-+    --lineHeight__yhgvqw1: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
++    --fontSize__f1kcu40: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
++    --lineHeight__f1kcu41: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
++    --capHeightTrim__f1kcu42: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
++    --baselineTrim__f1kcu43: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
 +  }
 +  .typography_heading_4__q0kq4eo {
-+    --fontSize__yhgvqw0: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
-+    --lineHeight__yhgvqw1: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
++    --fontSize__f1kcu40: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
++    --lineHeight__f1kcu41: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
++    --capHeightTrim__f1kcu42: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
++    --baselineTrim__f1kcu43: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
 +  }
 +  .typography_touchableText_xsmall__q0kq4e1w {
 +    padding-top: calc((var(--touchableSize__1oekxtv9) - var(--textSize-xsmall-tablet-lineHeight__1oekxtv37)) / 2);
@@ -13116,7 +13116,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            seekAnz
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -13229,7 +13229,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -13263,7 +13263,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 
 exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
 {
-  "2-7400c79465cea6efdf21.css": .sut6bi0 {
+  "2-3c5f43a659fa2d033875.css": .sut6bi0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -15214,19 +15214,19 @@ html:not(.iho3a210) .iho3a24r {
     text-align: right;
   }
 }
-.yhgvqw4 {
-  font-size: var(--yhgvqw0);
-  line-height: var(--yhgvqw1);
+.f1kcu44 {
+  font-size: var(--f1kcu40);
+  line-height: var(--f1kcu41);
 }
-.yhgvqw4:before {
+.f1kcu44:before {
   content: "";
   display: table;
-  margin-bottom: var(--yhgvqw2);
+  margin-bottom: var(--f1kcu42);
 }
-.yhgvqw4:after {
+.f1kcu44:after {
   content: "";
   display: table;
-  margin-top: var(--yhgvqw3);
+  margin-top: var(--f1kcu43);
 }
 .q0kq4e0 {
   font-family: var(--_1oekxtv2v);
@@ -15241,28 +15241,28 @@ html:not(.iho3a210) .iho3a24r {
   font-weight: var(--_1oekxtv47);
 }
 .q0kq4e4 {
-  --yhgvqw0: var(--_1oekxtv31);
-  --yhgvqw1: var(--_1oekxtv32);
-  --yhgvqw2: var(--_1oekxtv34);
-  --yhgvqw3: var(--_1oekxtv35);
+  --f1kcu40: var(--_1oekxtv31);
+  --f1kcu41: var(--_1oekxtv32);
+  --f1kcu42: var(--_1oekxtv34);
+  --f1kcu43: var(--_1oekxtv35);
 }
 .q0kq4e6 {
-  --yhgvqw0: var(--_1oekxtv3b);
-  --yhgvqw1: var(--_1oekxtv3c);
-  --yhgvqw2: var(--_1oekxtv3e);
-  --yhgvqw3: var(--_1oekxtv3f);
+  --f1kcu40: var(--_1oekxtv3b);
+  --f1kcu41: var(--_1oekxtv3c);
+  --f1kcu42: var(--_1oekxtv3e);
+  --f1kcu43: var(--_1oekxtv3f);
 }
 .q0kq4e8 {
-  --yhgvqw0: var(--_1oekxtv3l);
-  --yhgvqw1: var(--_1oekxtv3m);
-  --yhgvqw2: var(--_1oekxtv3o);
-  --yhgvqw3: var(--_1oekxtv3p);
+  --f1kcu40: var(--_1oekxtv3l);
+  --f1kcu41: var(--_1oekxtv3m);
+  --f1kcu42: var(--_1oekxtv3o);
+  --f1kcu43: var(--_1oekxtv3p);
 }
 .q0kq4ea {
-  --yhgvqw0: var(--_1oekxtv3v);
-  --yhgvqw1: var(--_1oekxtv3w);
-  --yhgvqw2: var(--_1oekxtv3y);
-  --yhgvqw3: var(--_1oekxtv3z);
+  --f1kcu40: var(--_1oekxtv3v);
+  --f1kcu41: var(--_1oekxtv3w);
+  --f1kcu42: var(--_1oekxtv3y);
+  --f1kcu43: var(--_1oekxtv3z);
 }
 .q0kq4ec {
   font-size: var(--_1oekxtv31);
@@ -15287,28 +15287,28 @@ html:not(.iho3a210) .iho3a24r {
   font-weight: var(--_1oekxtv5d);
 }
 .q0kq4ei {
-  --yhgvqw0: var(--_1oekxtv48);
-  --yhgvqw1: var(--_1oekxtv49);
-  --yhgvqw2: var(--_1oekxtv4b);
-  --yhgvqw3: var(--_1oekxtv4c);
+  --f1kcu40: var(--_1oekxtv48);
+  --f1kcu41: var(--_1oekxtv49);
+  --f1kcu42: var(--_1oekxtv4b);
+  --f1kcu43: var(--_1oekxtv4c);
 }
 .q0kq4ek {
-  --yhgvqw0: var(--_1oekxtv4i);
-  --yhgvqw1: var(--_1oekxtv4j);
-  --yhgvqw2: var(--_1oekxtv4l);
-  --yhgvqw3: var(--_1oekxtv4m);
+  --f1kcu40: var(--_1oekxtv4i);
+  --f1kcu41: var(--_1oekxtv4j);
+  --f1kcu42: var(--_1oekxtv4l);
+  --f1kcu43: var(--_1oekxtv4m);
 }
 .q0kq4em {
-  --yhgvqw0: var(--_1oekxtv4s);
-  --yhgvqw1: var(--_1oekxtv4t);
-  --yhgvqw2: var(--_1oekxtv4v);
-  --yhgvqw3: var(--_1oekxtv4w);
+  --f1kcu40: var(--_1oekxtv4s);
+  --f1kcu41: var(--_1oekxtv4t);
+  --f1kcu42: var(--_1oekxtv4v);
+  --f1kcu43: var(--_1oekxtv4w);
 }
 .q0kq4eo {
-  --yhgvqw0: var(--_1oekxtv52);
-  --yhgvqw1: var(--_1oekxtv53);
-  --yhgvqw2: var(--_1oekxtv55);
-  --yhgvqw3: var(--_1oekxtv56);
+  --f1kcu40: var(--_1oekxtv52);
+  --f1kcu41: var(--_1oekxtv53);
+  --f1kcu42: var(--_1oekxtv55);
+  --f1kcu43: var(--_1oekxtv56);
 }
 html:not(.iho3a210) .q0kq4e10 {
   --q0kq4eq: var(--_1oekxtv19);
@@ -15444,28 +15444,28 @@ html.iho3a210 .q0kq4e1l {
 }
 @media screen and (min-width: 740px) {
   .q0kq4e4 {
-    --yhgvqw0: var(--_1oekxtv36);
-    --yhgvqw1: var(--_1oekxtv37);
-    --yhgvqw2: var(--_1oekxtv39);
-    --yhgvqw3: var(--_1oekxtv3a);
+    --f1kcu40: var(--_1oekxtv36);
+    --f1kcu41: var(--_1oekxtv37);
+    --f1kcu42: var(--_1oekxtv39);
+    --f1kcu43: var(--_1oekxtv3a);
   }
   .q0kq4e6 {
-    --yhgvqw0: var(--_1oekxtv3g);
-    --yhgvqw1: var(--_1oekxtv3h);
-    --yhgvqw2: var(--_1oekxtv3j);
-    --yhgvqw3: var(--_1oekxtv3k);
+    --f1kcu40: var(--_1oekxtv3g);
+    --f1kcu41: var(--_1oekxtv3h);
+    --f1kcu42: var(--_1oekxtv3j);
+    --f1kcu43: var(--_1oekxtv3k);
   }
   .q0kq4e8 {
-    --yhgvqw0: var(--_1oekxtv3q);
-    --yhgvqw1: var(--_1oekxtv3r);
-    --yhgvqw2: var(--_1oekxtv3t);
-    --yhgvqw3: var(--_1oekxtv3u);
+    --f1kcu40: var(--_1oekxtv3q);
+    --f1kcu41: var(--_1oekxtv3r);
+    --f1kcu42: var(--_1oekxtv3t);
+    --f1kcu43: var(--_1oekxtv3u);
   }
   .q0kq4ea {
-    --yhgvqw0: var(--_1oekxtv40);
-    --yhgvqw1: var(--_1oekxtv41);
-    --yhgvqw2: var(--_1oekxtv43);
-    --yhgvqw3: var(--_1oekxtv44);
+    --f1kcu40: var(--_1oekxtv40);
+    --f1kcu41: var(--_1oekxtv41);
+    --f1kcu42: var(--_1oekxtv43);
+    --f1kcu43: var(--_1oekxtv44);
   }
   .q0kq4ec {
     font-size: var(--_1oekxtv36);
@@ -15484,28 +15484,28 @@ html.iho3a210 .q0kq4e1l {
     line-height: var(--_1oekxtv41);
   }
   .q0kq4ei {
-    --yhgvqw0: var(--_1oekxtv4d);
-    --yhgvqw1: var(--_1oekxtv4e);
-    --yhgvqw2: var(--_1oekxtv4g);
-    --yhgvqw3: var(--_1oekxtv4h);
+    --f1kcu40: var(--_1oekxtv4d);
+    --f1kcu41: var(--_1oekxtv4e);
+    --f1kcu42: var(--_1oekxtv4g);
+    --f1kcu43: var(--_1oekxtv4h);
   }
   .q0kq4ek {
-    --yhgvqw0: var(--_1oekxtv4n);
-    --yhgvqw1: var(--_1oekxtv4o);
-    --yhgvqw2: var(--_1oekxtv4q);
-    --yhgvqw3: var(--_1oekxtv4r);
+    --f1kcu40: var(--_1oekxtv4n);
+    --f1kcu41: var(--_1oekxtv4o);
+    --f1kcu42: var(--_1oekxtv4q);
+    --f1kcu43: var(--_1oekxtv4r);
   }
   .q0kq4em {
-    --yhgvqw0: var(--_1oekxtv4x);
-    --yhgvqw1: var(--_1oekxtv4y);
-    --yhgvqw2: var(--_1oekxtv50);
-    --yhgvqw3: var(--_1oekxtv51);
+    --f1kcu40: var(--_1oekxtv4x);
+    --f1kcu41: var(--_1oekxtv4y);
+    --f1kcu42: var(--_1oekxtv50);
+    --f1kcu43: var(--_1oekxtv51);
   }
   .q0kq4eo {
-    --yhgvqw0: var(--_1oekxtv57);
-    --yhgvqw1: var(--_1oekxtv58);
-    --yhgvqw2: var(--_1oekxtv5a);
-    --yhgvqw3: var(--_1oekxtv5b);
+    --f1kcu40: var(--_1oekxtv57);
+    --f1kcu41: var(--_1oekxtv58);
+    --f1kcu42: var(--_1oekxtv5a);
+    --f1kcu43: var(--_1oekxtv5b);
   }
   .q0kq4e1w {
     padding-bottom: calc((var(--_1oekxtv9) - var(--_1oekxtv37)) / 2);
@@ -16017,9 +16017,9 @@ html.iho3a210 ._13vf6rgd {
   padding: 100px;
 }
 
-/*# sourceMappingURL=2-7400c79465cea6efdf21.css.map*/
+/*# sourceMappingURL=2-3c5f43a659fa2d033875.css.map*/
 ,
-  "2-7400c79465cea6efdf21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-3c5f43a659fa2d033875.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "async_hooks",
   "crypto",
@@ -16040,7 +16040,7 @@ html.iho3a210 ._13vf6rgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-7400c79465cea6efdf21.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-3c5f43a659fa2d033875.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16051,7 +16051,7 @@ html.iho3a210 ._13vf6rgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16070,7 +16070,7 @@ html.iho3a210 ._13vf6rgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-7400c79465cea6efdf21.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-3c5f43a659fa2d033875.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16081,7 +16081,7 @@ html.iho3a210 ._13vf6rgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16111,7 +16111,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-7400c79465cea6efdf21.css"
+       href="/2-3c5f43a659fa2d033875.css"
      >
      <link
        data-chunk="main"
@@ -16136,7 +16136,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
            Hello
            jobStreet
            <span class="sut6bi0 iho3a255">
@@ -16249,7 +16249,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16319,7 +16319,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-7400c79465cea6efdf21.css"
+       href="/2-3c5f43a659fa2d033875.css"
      >
      <link
        data-chunk="main"
@@ -16344,7 +16344,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
            Hello
            seekAnz
            <span class="sut6bi0 iho3a255">
@@ -16457,7 +16457,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16558,7 +16558,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            jobStreet
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -16671,7 +16671,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16778,7 +16778,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            seekAnz
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -16891,7 +16891,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>

@@ -9,7 +9,11 @@ catalog:
   '@types/node': ^22.18.8
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
-  '@vanilla-extract/vite-plugin': ^5.1.1
+  '@vanilla-extract/vite-plugin': ^5.2.0
+  '@vanilla-extract/integration': '^8.0.9'
+  '@vanilla-extract/jest-transform': '^1.1.21'
+  '@vanilla-extract/webpack-plugin': '^2.3.26'
+  '@vanilla-extract/css': '^1.20.0'
   '@vocab/vite': 1.0.1
   braid-design-system: ^34.0.0
   commander: ^14.0.1

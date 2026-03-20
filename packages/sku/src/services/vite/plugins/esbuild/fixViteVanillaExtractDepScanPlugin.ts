@@ -9,8 +9,11 @@ const require = createRequire(import.meta.url);
 export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),
 
-  resolveId(source, importer) {
-    if (cssFileFilter.test(source)) {
+  resolveId: {
+    filter: {
+      id: cssFileFilter,
+    },
+    handler: (source, importer) => {
       const id = require.resolve(source, {
         paths: importer ? [dirname(importer)] : undefined,
       });
@@ -20,7 +23,6 @@ export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
         // keep the absolute path of the css file so its externalized correctly.
         external: 'absolute',
       };
-    }
-    return null;
+    },
   },
 });

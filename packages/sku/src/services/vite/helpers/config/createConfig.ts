@@ -39,12 +39,11 @@ export const createConfig = (
   }
 
   return {
+    resolve: {
+      // adding this at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment.
+      tsconfigPaths: true,
+    },
     plugins: [
-      // This is needed because of an error in  @oxc-project/runtime importing cjs code causing "ReferenceError: module is not defined".
-      // This plugin will transform CJS code to ESM during dev. This can be removed once the following issue is resolved
-      // @see issue - https://github.com/vitejs/vite/pull/21822
-      // @see plugin - https://github.com/vitejs/vite/issues/20726#issuecomment-3274141203
-      cjsModuleRunnerPlugin(),
       /**
        * user added plugins
        */

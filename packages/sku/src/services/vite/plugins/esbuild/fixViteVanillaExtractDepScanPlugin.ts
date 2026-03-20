@@ -1,17 +1,28 @@
-import type { Plugin } from 'esbuild';
+import type { RolldownPluginOption } from 'rolldown';
 import { cssFileFilter } from '@vanilla-extract/integration';
+import { makePluginName } from '../../helpers/makePluginName.js';
 import { dirname } from 'node:path';
 import { createRequire } from 'node:module';
-import { makePluginName } from '../../helpers/makePluginName.js';
 
 const require = createRequire(import.meta.url);
 
-export const fixViteVanillaExtractDepScanPlugin = (): Plugin => ({
+export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),
-  setup(build) {
-    build.onResolve({ filter: cssFileFilter }, ({ importer, path }) => ({
-      path: require.resolve(path, { paths: [dirname(importer)] }),
-      external: true,
-    }));
+
+  resolveId: {
+    filter: {
+      id: cssFileFilter,
+    },
+    handler: (source, importer) => {
+      const id = require.resolve(source, {
+        paths: importer ? [dirname(importer)] : undefined,
+      });
+
+      return {
+        id,
+        // keep the absolute path of the css file so its externalized correctly.
+        external: 'absolute',
+      };
+    },
   },
 });

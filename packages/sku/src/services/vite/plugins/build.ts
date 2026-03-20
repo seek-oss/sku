@@ -23,14 +23,20 @@ export const buildPlugin = ({
       build: {
         target: browserslistToEsbuild(skuContext.supportedBrowsers),
         assetsDir: '',
-        rollupOptions: {
+        rolldownOptions: {
           output: {
-            experimentalMinChunkSize: undefined,
-            manualChunks: (id, ctx) => {
-              const languageChunkName = createVocabChunks(id, ctx);
-              if (languageChunkName) {
-                return languageChunkName;
-              }
+            codeSplitting: {
+              groups: [
+                {
+                  name: (id, ctx) => {
+                    const languageChunkName = createVocabChunks(id, ctx);
+                    if (languageChunkName) {
+                      return languageChunkName;
+                    }
+                    return null;
+                  },
+                },
+              ],
             },
           },
         },
@@ -41,7 +47,7 @@ export const buildPlugin = ({
             outDir: outDir.client,
             manifest: true,
             sourcemap: skuContext.sourceMapsProd,
-            rollupOptions: {
+            rolldownOptions: {
               // this should be skuContext.paths.clientEntry in sku start-ssr or build-ssr mode
               input: clientEntry,
             },
@@ -51,7 +57,7 @@ export const buildPlugin = ({
           build: {
             ssr: true,
             outDir: outDir.ssg,
-            rollupOptions: {
+            rolldownOptions: {
               // this should be skuContext.paths.serverEntry in sku start-ssr or build-ssr mode
               input: skuContext.paths.renderEntry,
               output: {

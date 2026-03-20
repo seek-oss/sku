@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite';
+import { exactRegex } from 'rolldown/filter';
 
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
@@ -11,17 +12,19 @@ export const polyfillsPlugin = (skuContext: SkuContext): Plugin => {
 
   return {
     name: makePluginName('polyfills'),
-    resolveId(id) {
-      if (id === virtualModuleId) {
+    resolveId: {
+      filter: { id: exactRegex(virtualModuleId) },
+      handler() {
         return resolvedVirtualModuleId;
-      }
+      },
     },
-    load(id) {
-      if (id === resolvedVirtualModuleId) {
+    load: {
+      filter: { id: exactRegex(resolvedVirtualModuleId) },
+      handler() {
         return resolvedPolyfills
           .map((polyfillPath) => `import '${polyfillPath}';`)
           .join('\n');
-      }
+      },
     },
   };
 };

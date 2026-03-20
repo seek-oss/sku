@@ -16,9 +16,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
 ,
   "Home.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "Home.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "jsx-runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "jsx-runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
+    "/static/place/jsx-runtime.js",
     "/static/place/Details.js",
     "/static/place/AsyncComponent.js",
   ]
@@ -70,6 +73,11 @@ SOURCE HTML: <!DOCTYPE html>
       href="SCRIPTS[3]"
       crossorigin
     >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[4]"
+      crossorigin
+    >
   </head>
   <body>
     <div id="app">
@@ -85,6 +93,11 @@ SOURCE HTML: <!DOCTYPE html>
       type="application/json"
     >
       {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="SCRIPTS[4]"
+    >
     </script>
     <script
       type="module"
@@ -106,6 +119,7 @@ SOURCE HTML: <!DOCTYPE html>
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
+    "/static/place/jsx-runtime.js",
     "/static/place/Home.js",
   ]
 CSS: [
@@ -151,6 +165,11 @@ SOURCE HTML: <!DOCTYPE html>
       href="SCRIPTS[2]"
       crossorigin
     >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[3]"
+      crossorigin
+    >
   </head>
   <body>
     <div id="app">
@@ -163,6 +182,11 @@ SOURCE HTML: <!DOCTYPE html>
       type="application/json"
     >
       {"site":"au"}
+    </script>
+    <script
+      type="module"
+      src="SCRIPTS[3]"
+    >
     </script>
     <script
       type="module"
@@ -179,6 +203,7 @@ SOURCE HTML: <!DOCTYPE html>
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
+    "/static/place/jsx-runtime.js",
     "/static/place/Details.js",
     "/static/place/AsyncComponent.js",
   ]
@@ -230,6 +255,11 @@ SOURCE HTML: <!DOCTYPE html>
       href="SCRIPTS[3]"
       crossorigin
     >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[4]"
+      crossorigin
+    >
   </head>
   <body>
     <div id="app">
@@ -245,6 +275,11 @@ SOURCE HTML: <!DOCTYPE html>
       type="application/json"
     >
       {"site":"nz"}
+    </script>
+    <script
+      type="module"
+      src="SCRIPTS[4]"
+    >
     </script>
     <script
       type="module"
@@ -266,6 +301,7 @@ SOURCE HTML: <!DOCTYPE html>
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
+    "/static/place/jsx-runtime.js",
     "/static/place/Home.js",
   ]
 CSS: [
@@ -311,6 +347,11 @@ SOURCE HTML: <!DOCTYPE html>
       href="SCRIPTS[2]"
       crossorigin
     >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[3]"
+      crossorigin
+    >
   </head>
   <body>
     <div id="app">
@@ -323,6 +364,11 @@ SOURCE HTML: <!DOCTYPE html>
       type="application/json"
     >
       {"site":"nz"}
+    </script>
+    <script
+      type="module"
+      src="SCRIPTS[3]"
+    >
     </script>
     <script
       type="module"
@@ -345,7 +391,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,78 +1,78 @@
+@@ -1,88 +1,88 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -383,6 +429,11 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
      >
      <link
        rel="modulepreload"
+       href="/static/place/jsx-runtime.js"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
        href="/static/place/Details.js"
        crossorigin
      >
@@ -416,6 +467,11 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
      <script
        type="module"
        src="/static/place/Details.js"
+     >
+     </script>
+     <script
+       type="module"
+       src="/static/place/jsx-runtime.js"
      >
      </script>
      <script
@@ -469,6 +525,11 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     >
     <link
       rel="modulepreload"
+      href="/static/place/jsx-runtime.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
       href="/static/place/Home.js"
       crossorigin
     >
@@ -488,6 +549,11 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     <script
       type="module"
       src="/static/place/Home.js"
+    >
+    </script>
+    <script
+      type="module"
+      src="/static/place/jsx-runtime.js"
     >
     </script>
     <script

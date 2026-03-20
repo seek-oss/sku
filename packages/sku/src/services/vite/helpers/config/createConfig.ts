@@ -8,7 +8,6 @@ import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
-import { cjsModuleRunnerPlugin } from '@vitejs/plugin-rsc/plugins/cjs';
 
 const require = createRequire(import.meta.url);
 

@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 2.0.0
+
+### Major Changes
+
+- Dropped vite@7 support. Minimum version bumped to vite@8. ([#1526](https://github.com/seek-oss/sku/pull/1526))
+
 ## 1.0.1
 
 ### Patch Changes

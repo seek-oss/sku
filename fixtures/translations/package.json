@@ -2,20 +2,21 @@
   "name": "@sku-fixtures/translations",
   "private": true,
   "type": "module",
-  "dependencies": {
-    "@vocab/core": "^1.6.2",
-    "@vocab/react": "^1.1.11",
-    "@vocab/webpack": "^1.2.9",
-    "@vocab/vite": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:"
-  },
   "scripts": {
     "build": "sku build",
     "build:vite": "sku build --config sku.config.vite.ts",
+    "serve": "sku serve",
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts",
-    "start:ssr": "sku start-ssr --config sku-ssr.config.ts"
+    "start:ssr": "sku start-ssr --config sku-ssr.config.ts",
+    "start:vite": "sku start --config sku.config.vite.ts"
+  },
+  "dependencies": {
+    "@vocab/core": "^1.6.2",
+    "@vocab/react": "^1.1.11",
+    "@vocab/vite": "catalog:",
+    "@vocab/webpack": "^1.2.9",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

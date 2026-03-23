@@ -21,7 +21,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
@@ -46,21 +46,21 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bie sut6bi9 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
     </html>
   ",
   "vite-client.css": .sut6bi0 {
-  margin: 0;
-  padding: 0;
-  border: 0;
   box-sizing: border-box;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
   -webkit-tap-highlight-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 .sut6bi1 {
   display: block;
@@ -87,11 +87,11 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   appearance: none;
 }
 .sut6bi7 {
-  background-color: transparent;
+  background-color: #0000;
 }
 .sut6bi8 {
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 .sut6bi8:focus-visible {
   outline-color: var(--_1oekxtvm);
@@ -108,7 +108,10 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 .sut6bid[type="number"] {
   -moz-appearance: textfield;
 }
-.sut6bid[type="number"]::-webkit-inner-spin-button,
+.sut6bid[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .sut6bid[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -120,8 +123,8 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   -webkit-appearance: none;
 }
 .sut6big {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 .iho3a20 {
   overflow: hidden;
@@ -141,7 +144,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 }
 .iho3a25 {
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 .iho3a25:focus-visible {
   outline-color: var(--_1oekxtvm);
@@ -225,6 +228,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   max-width: var(--_1oekxtv14);
 }
 .iho3a2w {
+  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 .iho3a2x {
@@ -236,411 +240,275 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
 .iho3a2z:active {
   transform: var(--_1oekxtv5j);
 }
-html:not(.iho3a210) .iho3a211 {
-  background: var(--_1oekxtv1s);
-}
+html:not(.iho3a210) .iho3a211,
 html.iho3a210 .iho3a212 {
   background: var(--_1oekxtv1s);
 }
-html:not(.iho3a210) .iho3a213 {
-  background: var(--_1oekxtv1t);
-}
+html:not(.iho3a210) .iho3a213,
 html.iho3a210 .iho3a214 {
   background: var(--_1oekxtv1t);
 }
-html:not(.iho3a210) .iho3a215 {
-  background: var(--_1oekxtv1u);
-}
+html:not(.iho3a210) .iho3a215,
 html.iho3a210 .iho3a216 {
   background: var(--_1oekxtv1u);
 }
-html:not(.iho3a210) .iho3a217 {
-  background: var(--_1oekxtv1v);
-}
+html:not(.iho3a210) .iho3a217,
 html.iho3a210 .iho3a218 {
   background: var(--_1oekxtv1v);
 }
-html:not(.iho3a210) .iho3a219 {
-  background: var(--_1oekxtv1w);
-}
+html:not(.iho3a210) .iho3a219,
 html.iho3a210 .iho3a21a {
   background: var(--_1oekxtv1w);
 }
-html:not(.iho3a210) .iho3a21b {
-  background: var(--_1oekxtv1x);
-}
+html:not(.iho3a210) .iho3a21b,
 html.iho3a210 .iho3a21c {
   background: var(--_1oekxtv1x);
 }
-html:not(.iho3a210) .iho3a21d {
-  background: var(--_1oekxtv1y);
-}
+html:not(.iho3a210) .iho3a21d,
 html.iho3a210 .iho3a21e {
   background: var(--_1oekxtv1y);
 }
-html:not(.iho3a210) .iho3a21f {
-  background: var(--_1oekxtv1z);
-}
+html:not(.iho3a210) .iho3a21f,
 html.iho3a210 .iho3a21g {
   background: var(--_1oekxtv1z);
 }
-html:not(.iho3a210) .iho3a21h {
-  background: var(--_1oekxtv20);
-}
+html:not(.iho3a210) .iho3a21h,
 html.iho3a210 .iho3a21i {
   background: var(--_1oekxtv20);
 }
-html:not(.iho3a210) .iho3a21j {
-  background: var(--_1oekxtv21);
-}
+html:not(.iho3a210) .iho3a21j,
 html.iho3a210 .iho3a21k {
   background: var(--_1oekxtv21);
 }
-html:not(.iho3a210) .iho3a21l {
-  background: var(--_1oekxtv22);
-}
+html:not(.iho3a210) .iho3a21l,
 html.iho3a210 .iho3a21m {
   background: var(--_1oekxtv22);
 }
-html:not(.iho3a210) .iho3a21n {
-  background: var(--_1oekxtv23);
-}
+html:not(.iho3a210) .iho3a21n,
 html.iho3a210 .iho3a21o {
   background: var(--_1oekxtv23);
 }
-html:not(.iho3a210) .iho3a21p {
-  background: var(--_1oekxtv24);
-}
+html:not(.iho3a210) .iho3a21p,
 html.iho3a210 .iho3a21q {
   background: var(--_1oekxtv24);
 }
-html:not(.iho3a210) .iho3a21r {
-  background: var(--_1oekxtv25);
-}
+html:not(.iho3a210) .iho3a21r,
 html.iho3a210 .iho3a21s {
   background: var(--_1oekxtv25);
 }
-html:not(.iho3a210) .iho3a21t {
-  background: var(--_1oekxtv26);
-}
+html:not(.iho3a210) .iho3a21t,
 html.iho3a210 .iho3a21u {
   background: var(--_1oekxtv26);
 }
-html:not(.iho3a210) .iho3a21v {
-  background: var(--_1oekxtv27);
-}
+html:not(.iho3a210) .iho3a21v,
 html.iho3a210 .iho3a21w {
   background: var(--_1oekxtv27);
 }
-html:not(.iho3a210) .iho3a21x {
-  background: var(--_1oekxtv28);
-}
+html:not(.iho3a210) .iho3a21x,
 html.iho3a210 .iho3a21y {
   background: var(--_1oekxtv28);
 }
-html:not(.iho3a210) .iho3a21z {
-  background: var(--_1oekxtv29);
-}
+html:not(.iho3a210) .iho3a21z,
 html.iho3a210 .iho3a220 {
   background: var(--_1oekxtv29);
 }
-html:not(.iho3a210) .iho3a221 {
-  background: var(--_1oekxtv2a);
-}
+html:not(.iho3a210) .iho3a221,
 html.iho3a210 .iho3a222 {
   background: var(--_1oekxtv2a);
 }
-html:not(.iho3a210) .iho3a223 {
-  background: var(--_1oekxtv2b);
-}
+html:not(.iho3a210) .iho3a223,
 html.iho3a210 .iho3a224 {
   background: var(--_1oekxtv2b);
 }
-html:not(.iho3a210) .iho3a225 {
-  background: var(--_1oekxtv2c);
-}
+html:not(.iho3a210) .iho3a225,
 html.iho3a210 .iho3a226 {
   background: var(--_1oekxtv2c);
 }
-html:not(.iho3a210) .iho3a227 {
-  background: var(--_1oekxtv2d);
-}
+html:not(.iho3a210) .iho3a227,
 html.iho3a210 .iho3a228 {
   background: var(--_1oekxtv2d);
 }
-html:not(.iho3a210) .iho3a229 {
-  background: var(--_1oekxtv2e);
-}
+html:not(.iho3a210) .iho3a229,
 html.iho3a210 .iho3a22a {
   background: var(--_1oekxtv2e);
 }
-html:not(.iho3a210) .iho3a22b {
-  background: var(--_1oekxtv2f);
-}
+html:not(.iho3a210) .iho3a22b,
 html.iho3a210 .iho3a22c {
   background: var(--_1oekxtv2f);
 }
-html:not(.iho3a210) .iho3a22d {
-  background: var(--_1oekxtv2g);
-}
+html:not(.iho3a210) .iho3a22d,
 html.iho3a210 .iho3a22e {
   background: var(--_1oekxtv2g);
 }
-html:not(.iho3a210) .iho3a22f {
-  background: var(--_1oekxtv2h);
-}
+html:not(.iho3a210) .iho3a22f,
 html.iho3a210 .iho3a22g {
   background: var(--_1oekxtv2h);
 }
-html:not(.iho3a210) .iho3a22h {
-  background: var(--_1oekxtv2i);
-}
+html:not(.iho3a210) .iho3a22h,
 html.iho3a210 .iho3a22i {
   background: var(--_1oekxtv2i);
 }
-html:not(.iho3a210) .iho3a22j {
-  background: var(--_1oekxtv2j);
-}
+html:not(.iho3a210) .iho3a22j,
 html.iho3a210 .iho3a22k {
   background: var(--_1oekxtv2j);
 }
-html:not(.iho3a210) .iho3a22l {
-  background: var(--_1oekxtv2k);
-}
+html:not(.iho3a210) .iho3a22l,
 html.iho3a210 .iho3a22m {
   background: var(--_1oekxtv2k);
 }
-html:not(.iho3a210) .iho3a22n {
-  background: var(--_1oekxtv2l);
-}
+html:not(.iho3a210) .iho3a22n,
 html.iho3a210 .iho3a22o {
   background: var(--_1oekxtv2l);
 }
-html:not(.iho3a210) .iho3a22p {
-  background: var(--_1oekxtv2m);
-}
+html:not(.iho3a210) .iho3a22p,
 html.iho3a210 .iho3a22q {
   background: var(--_1oekxtv2m);
 }
-html:not(.iho3a210) .iho3a22r {
-  background: var(--_1oekxtv2n);
-}
+html:not(.iho3a210) .iho3a22r,
 html.iho3a210 .iho3a22s {
   background: var(--_1oekxtv2n);
 }
-html:not(.iho3a210) .iho3a22t {
-  background: var(--_1oekxtv2o);
-}
+html:not(.iho3a210) .iho3a22t,
 html.iho3a210 .iho3a22u {
   background: var(--_1oekxtv2o);
 }
-html:not(.iho3a210) .iho3a22v {
-  background: var(--_1oekxtv2p);
-}
+html:not(.iho3a210) .iho3a22v,
 html.iho3a210 .iho3a22w {
   background: var(--_1oekxtv2p);
 }
-html:not(.iho3a210) .iho3a22x {
-  background: var(--_1oekxtv2q);
-}
+html:not(.iho3a210) .iho3a22x,
 html.iho3a210 .iho3a22y {
   background: var(--_1oekxtv2q);
 }
-html:not(.iho3a210) .iho3a22z {
-  background: var(--_1oekxtv2r);
-}
+html:not(.iho3a210) .iho3a22z,
 html.iho3a210 .iho3a230 {
   background: var(--_1oekxtv2r);
 }
-html:not(.iho3a210) .iho3a231 {
-  background: var(--_1oekxtv2s);
-}
+html:not(.iho3a210) .iho3a231,
 html.iho3a210 .iho3a232 {
   background: var(--_1oekxtv2s);
 }
-html:not(.iho3a210) .iho3a233 {
-  background: var(--_1oekxtv2t);
-}
+html:not(.iho3a210) .iho3a233,
 html.iho3a210 .iho3a234 {
   background: var(--_1oekxtv2t);
 }
-html:not(.iho3a210) .iho3a235 {
-  background: var(--_1oekxtv2u);
-}
+html:not(.iho3a210) .iho3a235,
 html.iho3a210 .iho3a236 {
   background: var(--_1oekxtv2u);
 }
-html:not(.iho3a210) .iho3a237 {
-  box-shadow: var(--_1oekxtv5k);
-}
+html:not(.iho3a210) .iho3a237,
 html.iho3a210 .iho3a238 {
   box-shadow: var(--_1oekxtv5k);
 }
-html:not(.iho3a210) .iho3a239 {
-  box-shadow: var(--_1oekxtv5l);
-}
+html:not(.iho3a210) .iho3a239,
 html.iho3a210 .iho3a23a {
   box-shadow: var(--_1oekxtv5l);
 }
-html:not(.iho3a210) .iho3a23b {
-  box-shadow: var(--_1oekxtv5m);
-}
+html:not(.iho3a210) .iho3a23b,
 html.iho3a210 .iho3a23c {
   box-shadow: var(--_1oekxtv5m);
 }
-html:not(.iho3a210) .iho3a23d {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvf);
-}
+html:not(.iho3a210) .iho3a23d,
 html.iho3a210 .iho3a23e {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvf);
 }
-html:not(.iho3a210) .iho3a23f {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvg);
-}
+html:not(.iho3a210) .iho3a23f,
 html.iho3a210 .iho3a23g {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvg);
 }
-html:not(.iho3a210) .iho3a23h {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvf);
-}
+html:not(.iho3a210) .iho3a23h,
 html.iho3a210 .iho3a23i {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvf);
 }
-html:not(.iho3a210) .iho3a23j {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvg);
-}
+html:not(.iho3a210) .iho3a23j,
 html.iho3a210 .iho3a23k {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvg);
 }
-html:not(.iho3a210) .iho3a23l {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvh);
-}
+html:not(.iho3a210) .iho3a23l,
 html.iho3a210 .iho3a23m {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvh);
 }
-html:not(.iho3a210) .iho3a23n {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvi);
-}
+html:not(.iho3a210) .iho3a23n,
 html.iho3a210 .iho3a23o {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvi);
 }
-html:not(.iho3a210) .iho3a23p {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvj);
-}
+html:not(.iho3a210) .iho3a23p,
 html.iho3a210 .iho3a23q {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvj);
 }
-html:not(.iho3a210) .iho3a23r {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvj);
-}
+html:not(.iho3a210) .iho3a23r,
 html.iho3a210 .iho3a23s {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvj);
 }
-html:not(.iho3a210) .iho3a23t {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvk);
-}
+html:not(.iho3a210) .iho3a23t,
 html.iho3a210 .iho3a23u {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvk);
 }
-html:not(.iho3a210) .iho3a23v {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvk);
-}
+html:not(.iho3a210) .iho3a23v,
 html.iho3a210 .iho3a23w {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvk);
 }
-html:not(.iho3a210) .iho3a23x {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvl);
-}
+html:not(.iho3a210) .iho3a23x,
 html.iho3a210 .iho3a23y {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvl);
 }
-html:not(.iho3a210) .iho3a23z {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvn);
-}
+html:not(.iho3a210) .iho3a23z,
 html.iho3a210 .iho3a240 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvn);
 }
-html:not(.iho3a210) .iho3a241 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvn);
-}
+html:not(.iho3a210) .iho3a241,
 html.iho3a210 .iho3a242 {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvn);
 }
-html:not(.iho3a210) .iho3a243 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvo);
-}
+html:not(.iho3a210) .iho3a243,
 html.iho3a210 .iho3a244 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvo);
 }
-html:not(.iho3a210) .iho3a245 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvo);
-}
+html:not(.iho3a210) .iho3a245,
 html.iho3a210 .iho3a246 {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvo);
 }
-html:not(.iho3a210) .iho3a247 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvp);
-}
+html:not(.iho3a210) .iho3a247,
 html.iho3a210 .iho3a248 {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvp);
 }
-html:not(.iho3a210) .iho3a249 {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvq);
-}
+html:not(.iho3a210) .iho3a249,
 html.iho3a210 .iho3a24a {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvq);
 }
-html:not(.iho3a210) .iho3a24b {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvr);
-}
+html:not(.iho3a210) .iho3a24b,
 html.iho3a210 .iho3a24c {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvr);
 }
-html:not(.iho3a210) .iho3a24d {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvr);
-}
+html:not(.iho3a210) .iho3a24d,
 html.iho3a210 .iho3a24e {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvr);
 }
-html:not(.iho3a210) .iho3a24f {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvs);
-}
+html:not(.iho3a210) .iho3a24f,
 html.iho3a210 .iho3a24g {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvs);
 }
-html:not(.iho3a210) .iho3a24h {
-  box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvs);
-}
+html:not(.iho3a210) .iho3a24h,
 html.iho3a210 .iho3a24i {
   box-shadow: inset 0 0 0 var(--_1oekxtvz) var(--_1oekxtvs);
 }
-html:not(.iho3a210) .iho3a24j {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvt);
-}
+html:not(.iho3a210) .iho3a24j,
 html.iho3a210 .iho3a24k {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvt);
 }
-html:not(.iho3a210) .iho3a24l {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvu);
-}
+html:not(.iho3a210) .iho3a24l,
 html.iho3a210 .iho3a24m {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvu);
 }
-html:not(.iho3a210) .iho3a24n {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvv);
-}
+html:not(.iho3a210) .iho3a24n,
 html.iho3a210 .iho3a24o {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvv);
 }
-html:not(.iho3a210) .iho3a24p {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvw);
-}
+html:not(.iho3a210) .iho3a24p,
 html.iho3a210 .iho3a24q {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvw);
 }
-html:not(.iho3a210) .iho3a24r {
-  box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvx);
-}
+html:not(.iho3a210) .iho3a24r,
 html.iho3a210 .iho3a24s {
   box-shadow: inset 0 0 0 var(--_1oekxtvy) var(--_1oekxtvx);
 }
@@ -2138,18 +2006,18 @@ html.iho3a210 .iho3a24s {
     text-align: right;
   }
 }
-.yhgvqw4 {
-  font-size: var(--yhgvqw0);
-  line-height: var(--yhgvqw1);
+.f1kcu44 {
+  font-size: var(--f1kcu40);
+  line-height: var(--f1kcu41);
 }
-.yhgvqw4:before {
+.f1kcu44:before {
   content: "";
-  margin-bottom: var(--yhgvqw2);
+  margin-bottom: var(--f1kcu42);
   display: table;
 }
-.yhgvqw4:after {
+.f1kcu44:after {
   content: "";
-  margin-top: var(--yhgvqw3);
+  margin-top: var(--f1kcu43);
   display: table;
 }
 .q0kq4e0 {
@@ -2165,28 +2033,28 @@ html.iho3a210 .iho3a24s {
   font-weight: var(--_1oekxtv47);
 }
 .q0kq4e4 {
-  --yhgvqw0: var(--_1oekxtv31);
-  --yhgvqw1: var(--_1oekxtv32);
-  --yhgvqw2: var(--_1oekxtv34);
-  --yhgvqw3: var(--_1oekxtv35);
+  --f1kcu40: var(--_1oekxtv31);
+  --f1kcu41: var(--_1oekxtv32);
+  --f1kcu42: var(--_1oekxtv34);
+  --f1kcu43: var(--_1oekxtv35);
 }
 .q0kq4e6 {
-  --yhgvqw0: var(--_1oekxtv3b);
-  --yhgvqw1: var(--_1oekxtv3c);
-  --yhgvqw2: var(--_1oekxtv3e);
-  --yhgvqw3: var(--_1oekxtv3f);
+  --f1kcu40: var(--_1oekxtv3b);
+  --f1kcu41: var(--_1oekxtv3c);
+  --f1kcu42: var(--_1oekxtv3e);
+  --f1kcu43: var(--_1oekxtv3f);
 }
 .q0kq4e8 {
-  --yhgvqw0: var(--_1oekxtv3l);
-  --yhgvqw1: var(--_1oekxtv3m);
-  --yhgvqw2: var(--_1oekxtv3o);
-  --yhgvqw3: var(--_1oekxtv3p);
+  --f1kcu40: var(--_1oekxtv3l);
+  --f1kcu41: var(--_1oekxtv3m);
+  --f1kcu42: var(--_1oekxtv3o);
+  --f1kcu43: var(--_1oekxtv3p);
 }
 .q0kq4ea {
-  --yhgvqw0: var(--_1oekxtv3v);
-  --yhgvqw1: var(--_1oekxtv3w);
-  --yhgvqw2: var(--_1oekxtv3y);
-  --yhgvqw3: var(--_1oekxtv3z);
+  --f1kcu40: var(--_1oekxtv3v);
+  --f1kcu41: var(--_1oekxtv3w);
+  --f1kcu42: var(--_1oekxtv3y);
+  --f1kcu43: var(--_1oekxtv3z);
 }
 .q0kq4ec {
   font-size: var(--_1oekxtv31);
@@ -2211,28 +2079,28 @@ html.iho3a210 .iho3a24s {
   font-weight: var(--_1oekxtv5d);
 }
 .q0kq4ei {
-  --yhgvqw0: var(--_1oekxtv48);
-  --yhgvqw1: var(--_1oekxtv49);
-  --yhgvqw2: var(--_1oekxtv4b);
-  --yhgvqw3: var(--_1oekxtv4c);
+  --f1kcu40: var(--_1oekxtv48);
+  --f1kcu41: var(--_1oekxtv49);
+  --f1kcu42: var(--_1oekxtv4b);
+  --f1kcu43: var(--_1oekxtv4c);
 }
 .q0kq4ek {
-  --yhgvqw0: var(--_1oekxtv4i);
-  --yhgvqw1: var(--_1oekxtv4j);
-  --yhgvqw2: var(--_1oekxtv4l);
-  --yhgvqw3: var(--_1oekxtv4m);
+  --f1kcu40: var(--_1oekxtv4i);
+  --f1kcu41: var(--_1oekxtv4j);
+  --f1kcu42: var(--_1oekxtv4l);
+  --f1kcu43: var(--_1oekxtv4m);
 }
 .q0kq4em {
-  --yhgvqw0: var(--_1oekxtv4s);
-  --yhgvqw1: var(--_1oekxtv4t);
-  --yhgvqw2: var(--_1oekxtv4v);
-  --yhgvqw3: var(--_1oekxtv4w);
+  --f1kcu40: var(--_1oekxtv4s);
+  --f1kcu41: var(--_1oekxtv4t);
+  --f1kcu42: var(--_1oekxtv4v);
+  --f1kcu43: var(--_1oekxtv4w);
 }
 .q0kq4eo {
-  --yhgvqw0: var(--_1oekxtv52);
-  --yhgvqw1: var(--_1oekxtv53);
-  --yhgvqw2: var(--_1oekxtv55);
-  --yhgvqw3: var(--_1oekxtv56);
+  --f1kcu40: var(--_1oekxtv52);
+  --f1kcu41: var(--_1oekxtv53);
+  --f1kcu42: var(--_1oekxtv55);
+  --f1kcu43: var(--_1oekxtv56);
 }
 html:not(.iho3a210) .q0kq4e10 {
   --q0kq4eq: var(--_1oekxtv19);
@@ -2282,21 +2150,13 @@ html.iho3a210 .q0kq4e13 {
   --q0kq4ey: var(--_1oekxtv1r);
   --q0kq4ez: var(--_1oekxtv1h);
 }
-html:not(.iho3a210) .q0kq4e14 {
-  --q0kq4ex: var(--q0kq4eq);
-}
-html:not(.iho3a210) .q0kq4e15 {
-  --q0kq4ex: var(--q0kq4eq);
-}
-html:not(.iho3a210) .q0kq4e16 {
-  --q0kq4ex: var(--q0kq4eq);
-}
+html:not(.iho3a210) .q0kq4e14,
+html:not(.iho3a210) .q0kq4e15,
+html:not(.iho3a210) .q0kq4e16,
 html:not(.iho3a210) .q0kq4e17 {
   --q0kq4ex: var(--q0kq4eq);
 }
-html:not(.iho3a210) .q0kq4e18 {
-  --q0kq4ex: var(--q0kq4er);
-}
+html:not(.iho3a210) .q0kq4e18,
 html:not(.iho3a210) .q0kq4e19 {
   --q0kq4ex: var(--q0kq4er);
 }
@@ -2376,28 +2236,28 @@ html.iho3a210 .q0kq4e1l {
 }
 @media screen and (min-width: 740px) {
   .q0kq4e4 {
-    --yhgvqw0: var(--_1oekxtv36);
-    --yhgvqw1: var(--_1oekxtv37);
-    --yhgvqw2: var(--_1oekxtv39);
-    --yhgvqw3: var(--_1oekxtv3a);
+    --f1kcu40: var(--_1oekxtv36);
+    --f1kcu41: var(--_1oekxtv37);
+    --f1kcu42: var(--_1oekxtv39);
+    --f1kcu43: var(--_1oekxtv3a);
   }
   .q0kq4e6 {
-    --yhgvqw0: var(--_1oekxtv3g);
-    --yhgvqw1: var(--_1oekxtv3h);
-    --yhgvqw2: var(--_1oekxtv3j);
-    --yhgvqw3: var(--_1oekxtv3k);
+    --f1kcu40: var(--_1oekxtv3g);
+    --f1kcu41: var(--_1oekxtv3h);
+    --f1kcu42: var(--_1oekxtv3j);
+    --f1kcu43: var(--_1oekxtv3k);
   }
   .q0kq4e8 {
-    --yhgvqw0: var(--_1oekxtv3q);
-    --yhgvqw1: var(--_1oekxtv3r);
-    --yhgvqw2: var(--_1oekxtv3t);
-    --yhgvqw3: var(--_1oekxtv3u);
+    --f1kcu40: var(--_1oekxtv3q);
+    --f1kcu41: var(--_1oekxtv3r);
+    --f1kcu42: var(--_1oekxtv3t);
+    --f1kcu43: var(--_1oekxtv3u);
   }
   .q0kq4ea {
-    --yhgvqw0: var(--_1oekxtv40);
-    --yhgvqw1: var(--_1oekxtv41);
-    --yhgvqw2: var(--_1oekxtv43);
-    --yhgvqw3: var(--_1oekxtv44);
+    --f1kcu40: var(--_1oekxtv40);
+    --f1kcu41: var(--_1oekxtv41);
+    --f1kcu42: var(--_1oekxtv43);
+    --f1kcu43: var(--_1oekxtv44);
   }
   .q0kq4ec {
     font-size: var(--_1oekxtv36);
@@ -2416,28 +2276,28 @@ html.iho3a210 .q0kq4e1l {
     line-height: var(--_1oekxtv41);
   }
   .q0kq4ei {
-    --yhgvqw0: var(--_1oekxtv4d);
-    --yhgvqw1: var(--_1oekxtv4e);
-    --yhgvqw2: var(--_1oekxtv4g);
-    --yhgvqw3: var(--_1oekxtv4h);
+    --f1kcu40: var(--_1oekxtv4d);
+    --f1kcu41: var(--_1oekxtv4e);
+    --f1kcu42: var(--_1oekxtv4g);
+    --f1kcu43: var(--_1oekxtv4h);
   }
   .q0kq4ek {
-    --yhgvqw0: var(--_1oekxtv4n);
-    --yhgvqw1: var(--_1oekxtv4o);
-    --yhgvqw2: var(--_1oekxtv4q);
-    --yhgvqw3: var(--_1oekxtv4r);
+    --f1kcu40: var(--_1oekxtv4n);
+    --f1kcu41: var(--_1oekxtv4o);
+    --f1kcu42: var(--_1oekxtv4q);
+    --f1kcu43: var(--_1oekxtv4r);
   }
   .q0kq4em {
-    --yhgvqw0: var(--_1oekxtv4x);
-    --yhgvqw1: var(--_1oekxtv4y);
-    --yhgvqw2: var(--_1oekxtv50);
-    --yhgvqw3: var(--_1oekxtv51);
+    --f1kcu40: var(--_1oekxtv4x);
+    --f1kcu41: var(--_1oekxtv4y);
+    --f1kcu42: var(--_1oekxtv50);
+    --f1kcu43: var(--_1oekxtv51);
   }
   .q0kq4eo {
-    --yhgvqw0: var(--_1oekxtv57);
-    --yhgvqw1: var(--_1oekxtv58);
-    --yhgvqw2: var(--_1oekxtv5a);
-    --yhgvqw3: var(--_1oekxtv5b);
+    --f1kcu40: var(--_1oekxtv57);
+    --f1kcu41: var(--_1oekxtv58);
+    --f1kcu42: var(--_1oekxtv5a);
+    --f1kcu43: var(--_1oekxtv5b);
   }
   .q0kq4e1w {
     padding-top: calc((var(--_1oekxtv9) - var(--_1oekxtv37)) / 2);
@@ -2470,9 +2330,9 @@ html.iho3a210 .q0kq4e1l {
 @supports (display: -webkit-box) and (-webkit-line-clamp: 1) {
   ._129wd9g4 {
     white-space: initial;
-    display: -webkit-box;
     -webkit-line-clamp: var(--_129wd9g3);
     -webkit-box-orient: vertical;
+    display: -webkit-box;
   }
 }
 ._28izme0 {
@@ -2493,7 +2353,7 @@ html.iho3a210 .q0kq4e1l {
   top: -0.105em;
 }
 ._28izme5 {
-  top: -0.16499999999999998em;
+  top: -0.165em;
 }
 ._28izme6 {
   top: -0.045em;
@@ -2505,7 +2365,7 @@ html.iho3a210 .q0kq4e1l {
   top: -0.125em;
 }
 ._28izme9 {
-  top: -0.0050000000000000044em;
+  top: -0.005em;
 }
 ._28izmea {
   width: var(--_1oekxtv32);
@@ -2560,8 +2420,8 @@ html.iho3a210 .q0kq4e1l {
   }
 }
 ._164ng3y0 {
-  transition: transform 0.3s ease;
-  transform-origin: 50% 50%;
+  transform-origin: 50%;
+  transition: transform 0.3s;
 }
 ._164ng3y1 {
   transform: rotate(90deg);
@@ -2577,18 +2437,18 @@ html.iho3a210 .q0kq4e1l {
 }
 ._3z0ycm0:after {
   content: "";
-  position: absolute;
-  min-height: 44px;
+  width: 100%;
   min-width: 44px;
   height: 100%;
-  width: 100%;
-  transform: translate(-50%, -50%);
+  min-height: 44px;
+  position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 [data-braid-debug] ._3z0ycm0:after {
-  background: red;
   opacity: 0.2;
+  background: red;
 }
 ._1habs826 {
   background: var(--_1habs820);
@@ -2665,17 +2525,17 @@ html.iho3a210 ._1habs82f {
   left: calc(((44px - var(--_13vf6rg0)) / 2) * -1);
 }
 [data-braid-debug] ._13vf6rg4 {
-  background: red;
   opacity: 0.2;
+  background: red;
 }
 ._13vf6rg5 {
   height: var(--_13vf6rg0);
   width: var(--_13vf6rg0);
   outline: var(--_1oekxtv10) solid transparent;
-  transition: outline-color 0.125s ease;
+  transition: outline-color 0.125s;
 }
 ._13vf6rg4[type="checkbox"]:checked ~ ._13vf6rg5 {
-  background: transparent;
+  background: 0 0;
 }
 ._13vf6rg4:focus-visible ~ ._13vf6rg5 {
   outline-color: var(--_1oekxtvm);
@@ -2685,8 +2545,8 @@ html.iho3a210 ._1habs82f {
 }
 ._13vf6rg4:checked ~ * ._13vf6rg8,
 ._13vf6rg4._13vf6rg7 ~ * ._13vf6rg8 {
-  display: block;
   z-index: 1;
+  display: block;
 }
 ._13vf6rg4:checked + ._13vf6rg5 > ._13vf6rg9,
 ._13vf6rg4._13vf6rg7 + ._13vf6rg5 > ._13vf6rg9 {
@@ -2756,7 +2616,7 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtvj: #b91e1e;
   --_1oekxtvk: #fb999a;
   --_1oekxtvl: #838fa5;
-  --_1oekxtvm: rgba(153, 191, 247, 0.7);
+  --_1oekxtvm: #99bff7b3;
   --_1oekxtvn: #1e47a9;
   --_1oekxtvo: #99bff7;
   --_1oekxtvp: #1d559d;
@@ -2797,7 +2657,7 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtv1o: #7f35a9;
   --_1oekxtv1p: #e1b2f5;
   --_1oekxtv1q: #5a6881;
-  --_1oekxtv1r: rgba(255, 255, 255, 0.65);
+  --_1oekxtv1r: #ffffffa6;
   --_1oekxtv1s: #fff;
   --_1oekxtv1t: #1c2330;
   --_1oekxtv1u: #051a49;
@@ -2934,19 +2794,16 @@ html.iho3a210 ._13vf6rgd {
   --_1oekxtv5h: transform 0.125s ease, opacity 0.125s ease;
   --_1oekxtv5i: transform 0.2s cubic-bezier(0.02, 1.505, 0.745, 1.235);
   --_1oekxtv5j: scale(0.95);
-  --_1oekxtv5k:
-    0 0 4px 0 rgba(28, 35, 48, 0.08), 0 4px 8px -2px rgba(28, 35, 48, 0.08);
-  --_1oekxtv5l:
-    0 0 8px 0 rgba(28, 35, 48, 0.08), 0 8px 16px -4px rgba(28, 35, 48, 0.08);
-  --_1oekxtv5m:
-    0 0 12px 0 rgba(28, 35, 48, 0.08), 0 12px 24px -6px rgba(28, 35, 48, 0.08);
+  --_1oekxtv5k: 0 0 4px 0 #1c233014, 0 4px 8px -2px #1c233014;
+  --_1oekxtv5l: 0 0 8px 0 #1c233014, 0 8px 16px -4px #1c233014;
+  --_1oekxtv5m: 0 0 12px 0 #1c233014, 0 12px 24px -6px #1c233014;
 }
 .inn18b0 {
   --zv7nmx0: blueviolet;
   background-color: var(--zv7nmx0);
   color: #fff;
-  font-size: 20px;
   padding: 100px;
+  font-size: 20px;
 }
 ,
   "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -2991,7 +2848,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
            Hello
            jobStreet
            <span class="sut6bi0 iho3a255">
@@ -3104,7 +2961,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -3173,7 +3030,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
            Hello
            seekAnz
            <span class="sut6bi0 iho3a255">
@@ -3286,7 +3143,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e9 q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -3376,11 +3233,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
      </script>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
 +    >
 +      .reset_base__sut6bi0 {
@@ -5473,20 +5325,25 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
++    </style>
++    <style
++      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__yhgvqw4 {
-+  font-size: var(--fontSize__yhgvqw0);
-+  line-height: var(--lineHeight__yhgvqw1);
++      .capsize_capsizeStyle__f1kcu44 {
++  font-size: var(--fontSize__f1kcu40);
++  line-height: var(--lineHeight__f1kcu41);
 +}
-+.capsize_capsizeStyle__yhgvqw4::before {
++.capsize_capsizeStyle__f1kcu44::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__yhgvqw2);
++  margin-bottom: var(--capHeightTrim__f1kcu42);
 +  display: table;
 +}
-+.capsize_capsizeStyle__yhgvqw4::after {
++.capsize_capsizeStyle__f1kcu44::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__yhgvqw3);
++  margin-top: var(--baselineTrim__f1kcu43);
 +  display: table;
 +}
 +    </style>
@@ -5507,28 +5364,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__1oekxtv47);
 +}
 +.typography_textSize_xsmall__q0kq4e4 {
-+  --fontSize__yhgvqw0: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
-+  --lineHeight__yhgvqw1: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
-+  --capHeightTrim__yhgvqw2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
-+  --baselineTrim__yhgvqw3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
++  --fontSize__f1kcu40: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
++  --lineHeight__f1kcu41: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
++  --capHeightTrim__f1kcu42: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
++  --baselineTrim__f1kcu43: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
 +}
 +.typography_textSize_small__q0kq4e6 {
-+  --fontSize__yhgvqw0: var(--textSize-small-mobile-fontSize__1oekxtv3b);
-+  --lineHeight__yhgvqw1: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
-+  --capHeightTrim__yhgvqw2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
-+  --baselineTrim__yhgvqw3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
++  --fontSize__f1kcu40: var(--textSize-small-mobile-fontSize__1oekxtv3b);
++  --lineHeight__f1kcu41: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
++  --capHeightTrim__f1kcu42: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
++  --baselineTrim__f1kcu43: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
 +}
 +.typography_textSize_standard__q0kq4e8 {
-+  --fontSize__yhgvqw0: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
-+  --lineHeight__yhgvqw1: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
-+  --capHeightTrim__yhgvqw2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
-+  --baselineTrim__yhgvqw3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
++  --fontSize__f1kcu40: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
++  --lineHeight__f1kcu41: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
++  --capHeightTrim__f1kcu42: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
++  --baselineTrim__f1kcu43: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
 +}
 +.typography_textSize_large__q0kq4ea {
-+  --fontSize__yhgvqw0: var(--textSize-large-mobile-fontSize__1oekxtv3v);
-+  --lineHeight__yhgvqw1: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
-+  --capHeightTrim__yhgvqw2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
-+  --baselineTrim__yhgvqw3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
++  --fontSize__f1kcu40: var(--textSize-large-mobile-fontSize__1oekxtv3v);
++  --lineHeight__f1kcu41: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
++  --capHeightTrim__f1kcu42: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
++  --baselineTrim__f1kcu43: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
@@ -5553,28 +5410,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__1oekxtv5d);
 +}
 +.typography_heading_1__q0kq4ei {
-+  --fontSize__yhgvqw0: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
-+  --lineHeight__yhgvqw1: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
++  --fontSize__f1kcu40: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
++  --lineHeight__f1kcu41: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
++  --capHeightTrim__f1kcu42: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
++  --baselineTrim__f1kcu43: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
 +}
 +.typography_heading_2__q0kq4ek {
-+  --fontSize__yhgvqw0: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
-+  --lineHeight__yhgvqw1: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
++  --fontSize__f1kcu40: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
++  --lineHeight__f1kcu41: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
++  --capHeightTrim__f1kcu42: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
++  --baselineTrim__f1kcu43: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
 +}
 +.typography_heading_3__q0kq4em {
-+  --fontSize__yhgvqw0: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
-+  --lineHeight__yhgvqw1: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
++  --fontSize__f1kcu40: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
++  --lineHeight__f1kcu41: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
++  --capHeightTrim__f1kcu42: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
++  --baselineTrim__f1kcu43: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
 +}
 +.typography_heading_4__q0kq4eo {
-+  --fontSize__yhgvqw0: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
-+  --lineHeight__yhgvqw1: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
++  --fontSize__f1kcu40: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
++  --lineHeight__f1kcu41: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
++  --capHeightTrim__f1kcu42: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
++  --baselineTrim__f1kcu43: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
 +}
 +html:not(.sprinkles_darkMode__iho3a210) .typography_lightModeTone_light__q0kq4e10 {
 +  --critical__q0kq4eq: var(--foregroundColor-critical__1oekxtv19);
@@ -5726,28 +5583,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__q0kq4e4 {
-+    --fontSize__yhgvqw0: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
-+    --lineHeight__yhgvqw1: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
-+    --capHeightTrim__yhgvqw2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
-+    --baselineTrim__yhgvqw3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
++    --fontSize__f1kcu40: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
++    --lineHeight__f1kcu41: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
++    --capHeightTrim__f1kcu42: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
++    --baselineTrim__f1kcu43: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
 +  }
 +  .typography_textSize_small__q0kq4e6 {
-+    --fontSize__yhgvqw0: var(--textSize-small-tablet-fontSize__1oekxtv3g);
-+    --lineHeight__yhgvqw1: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
-+    --capHeightTrim__yhgvqw2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
-+    --baselineTrim__yhgvqw3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
++    --fontSize__f1kcu40: var(--textSize-small-tablet-fontSize__1oekxtv3g);
++    --lineHeight__f1kcu41: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
++    --capHeightTrim__f1kcu42: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
++    --baselineTrim__f1kcu43: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
 +  }
 +  .typography_textSize_standard__q0kq4e8 {
-+    --fontSize__yhgvqw0: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
-+    --lineHeight__yhgvqw1: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
-+    --capHeightTrim__yhgvqw2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
-+    --baselineTrim__yhgvqw3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
++    --fontSize__f1kcu40: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
++    --lineHeight__f1kcu41: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
++    --capHeightTrim__f1kcu42: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
++    --baselineTrim__f1kcu43: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
 +  }
 +  .typography_textSize_large__q0kq4ea {
-+    --fontSize__yhgvqw0: var(--textSize-large-tablet-fontSize__1oekxtv40);
-+    --lineHeight__yhgvqw1: var(--textSize-large-tablet-lineHeight__1oekxtv41);
-+    --capHeightTrim__yhgvqw2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
-+    --baselineTrim__yhgvqw3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
++    --fontSize__f1kcu40: var(--textSize-large-tablet-fontSize__1oekxtv40);
++    --lineHeight__f1kcu41: var(--textSize-large-tablet-lineHeight__1oekxtv41);
++    --capHeightTrim__f1kcu42: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
++    --baselineTrim__f1kcu43: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
@@ -5766,28 +5623,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__1oekxtv41);
 +  }
 +  .typography_heading_1__q0kq4ei {
-+    --fontSize__yhgvqw0: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
-+    --lineHeight__yhgvqw1: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
++    --fontSize__f1kcu40: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
++    --lineHeight__f1kcu41: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
++    --capHeightTrim__f1kcu42: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
++    --baselineTrim__f1kcu43: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
 +  }
 +  .typography_heading_2__q0kq4ek {
-+    --fontSize__yhgvqw0: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
-+    --lineHeight__yhgvqw1: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
++    --fontSize__f1kcu40: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
++    --lineHeight__f1kcu41: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
++    --capHeightTrim__f1kcu42: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
++    --baselineTrim__f1kcu43: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
 +  }
 +  .typography_heading_3__q0kq4em {
-+    --fontSize__yhgvqw0: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
-+    --lineHeight__yhgvqw1: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
++    --fontSize__f1kcu40: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
++    --lineHeight__f1kcu41: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
++    --capHeightTrim__f1kcu42: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
++    --baselineTrim__f1kcu43: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
 +  }
 +  .typography_heading_4__q0kq4eo {
-+    --fontSize__yhgvqw0: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
-+    --lineHeight__yhgvqw1: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
++    --fontSize__f1kcu40: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
++    --lineHeight__f1kcu41: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
++    --capHeightTrim__f1kcu42: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
++    --baselineTrim__f1kcu43: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
 +  }
 +  .typography_touchableText_xsmall__q0kq4e1w {
 +    padding-top: calc((var(--touchableSize__1oekxtv9) - var(--textSize-xsmall-tablet-lineHeight__1oekxtv37)) / 2);
@@ -8216,7 +8073,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            jobStreet
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -8329,7 +8186,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -8417,11 +8274,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
                    .forEach(node => node.remove());
                });
      </script>
-+    <style
-+      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
 +    <style
 +      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/css/reset/reset.css.mjs.vanilla.css"
@@ -10516,20 +10368,25 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
++    </style>
++    <style
++      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__yhgvqw4 {
-+  font-size: var(--fontSize__yhgvqw0);
-+  line-height: var(--lineHeight__yhgvqw1);
++      .capsize_capsizeStyle__f1kcu44 {
++  font-size: var(--fontSize__f1kcu40);
++  line-height: var(--lineHeight__f1kcu41);
 +}
-+.capsize_capsizeStyle__yhgvqw4::before {
++.capsize_capsizeStyle__f1kcu44::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__yhgvqw2);
++  margin-bottom: var(--capHeightTrim__f1kcu42);
 +  display: table;
 +}
-+.capsize_capsizeStyle__yhgvqw4::after {
++.capsize_capsizeStyle__f1kcu44::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__yhgvqw3);
++  margin-top: var(--baselineTrim__f1kcu43);
 +  display: table;
 +}
 +    </style>
@@ -10550,28 +10407,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__1oekxtv47);
 +}
 +.typography_textSize_xsmall__q0kq4e4 {
-+  --fontSize__yhgvqw0: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
-+  --lineHeight__yhgvqw1: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
-+  --capHeightTrim__yhgvqw2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
-+  --baselineTrim__yhgvqw3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
++  --fontSize__f1kcu40: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
++  --lineHeight__f1kcu41: var(--textSize-xsmall-mobile-lineHeight__1oekxtv32);
++  --capHeightTrim__f1kcu42: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__1oekxtv34);
++  --baselineTrim__f1kcu43: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__1oekxtv35);
 +}
 +.typography_textSize_small__q0kq4e6 {
-+  --fontSize__yhgvqw0: var(--textSize-small-mobile-fontSize__1oekxtv3b);
-+  --lineHeight__yhgvqw1: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
-+  --capHeightTrim__yhgvqw2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
-+  --baselineTrim__yhgvqw3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
++  --fontSize__f1kcu40: var(--textSize-small-mobile-fontSize__1oekxtv3b);
++  --lineHeight__f1kcu41: var(--textSize-small-mobile-lineHeight__1oekxtv3c);
++  --capHeightTrim__f1kcu42: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__1oekxtv3e);
++  --baselineTrim__f1kcu43: var(--textSize-small-mobile-capsizeTrims-baselineTrim__1oekxtv3f);
 +}
 +.typography_textSize_standard__q0kq4e8 {
-+  --fontSize__yhgvqw0: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
-+  --lineHeight__yhgvqw1: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
-+  --capHeightTrim__yhgvqw2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
-+  --baselineTrim__yhgvqw3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
++  --fontSize__f1kcu40: var(--textSize-standard-mobile-fontSize__1oekxtv3l);
++  --lineHeight__f1kcu41: var(--textSize-standard-mobile-lineHeight__1oekxtv3m);
++  --capHeightTrim__f1kcu42: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__1oekxtv3o);
++  --baselineTrim__f1kcu43: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__1oekxtv3p);
 +}
 +.typography_textSize_large__q0kq4ea {
-+  --fontSize__yhgvqw0: var(--textSize-large-mobile-fontSize__1oekxtv3v);
-+  --lineHeight__yhgvqw1: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
-+  --capHeightTrim__yhgvqw2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
-+  --baselineTrim__yhgvqw3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
++  --fontSize__f1kcu40: var(--textSize-large-mobile-fontSize__1oekxtv3v);
++  --lineHeight__f1kcu41: var(--textSize-large-mobile-lineHeight__1oekxtv3w);
++  --capHeightTrim__f1kcu42: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__1oekxtv3y);
++  --baselineTrim__f1kcu43: var(--textSize-large-mobile-capsizeTrims-baselineTrim__1oekxtv3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__1oekxtv31);
@@ -10596,28 +10453,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__1oekxtv5d);
 +}
 +.typography_heading_1__q0kq4ei {
-+  --fontSize__yhgvqw0: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
-+  --lineHeight__yhgvqw1: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
++  --fontSize__f1kcu40: var(--headingLevel-1-mobile-fontSize__1oekxtv48);
++  --lineHeight__f1kcu41: var(--headingLevel-1-mobile-lineHeight__1oekxtv49);
++  --capHeightTrim__f1kcu42: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__1oekxtv4b);
++  --baselineTrim__f1kcu43: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__1oekxtv4c);
 +}
 +.typography_heading_2__q0kq4ek {
-+  --fontSize__yhgvqw0: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
-+  --lineHeight__yhgvqw1: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
++  --fontSize__f1kcu40: var(--headingLevel-2-mobile-fontSize__1oekxtv4i);
++  --lineHeight__f1kcu41: var(--headingLevel-2-mobile-lineHeight__1oekxtv4j);
++  --capHeightTrim__f1kcu42: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__1oekxtv4l);
++  --baselineTrim__f1kcu43: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__1oekxtv4m);
 +}
 +.typography_heading_3__q0kq4em {
-+  --fontSize__yhgvqw0: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
-+  --lineHeight__yhgvqw1: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
++  --fontSize__f1kcu40: var(--headingLevel-3-mobile-fontSize__1oekxtv4s);
++  --lineHeight__f1kcu41: var(--headingLevel-3-mobile-lineHeight__1oekxtv4t);
++  --capHeightTrim__f1kcu42: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__1oekxtv4v);
++  --baselineTrim__f1kcu43: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__1oekxtv4w);
 +}
 +.typography_heading_4__q0kq4eo {
-+  --fontSize__yhgvqw0: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
-+  --lineHeight__yhgvqw1: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
-+  --capHeightTrim__yhgvqw2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
-+  --baselineTrim__yhgvqw3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
++  --fontSize__f1kcu40: var(--headingLevel-4-mobile-fontSize__1oekxtv52);
++  --lineHeight__f1kcu41: var(--headingLevel-4-mobile-lineHeight__1oekxtv53);
++  --capHeightTrim__f1kcu42: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__1oekxtv55);
++  --baselineTrim__f1kcu43: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__1oekxtv56);
 +}
 +html:not(.sprinkles_darkMode__iho3a210) .typography_lightModeTone_light__q0kq4e10 {
 +  --critical__q0kq4eq: var(--foregroundColor-critical__1oekxtv19);
@@ -10769,28 +10626,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__q0kq4e4 {
-+    --fontSize__yhgvqw0: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
-+    --lineHeight__yhgvqw1: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
-+    --capHeightTrim__yhgvqw2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
-+    --baselineTrim__yhgvqw3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
++    --fontSize__f1kcu40: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
++    --lineHeight__f1kcu41: var(--textSize-xsmall-tablet-lineHeight__1oekxtv37);
++    --capHeightTrim__f1kcu42: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__1oekxtv39);
++    --baselineTrim__f1kcu43: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__1oekxtv3a);
 +  }
 +  .typography_textSize_small__q0kq4e6 {
-+    --fontSize__yhgvqw0: var(--textSize-small-tablet-fontSize__1oekxtv3g);
-+    --lineHeight__yhgvqw1: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
-+    --capHeightTrim__yhgvqw2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
-+    --baselineTrim__yhgvqw3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
++    --fontSize__f1kcu40: var(--textSize-small-tablet-fontSize__1oekxtv3g);
++    --lineHeight__f1kcu41: var(--textSize-small-tablet-lineHeight__1oekxtv3h);
++    --capHeightTrim__f1kcu42: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__1oekxtv3j);
++    --baselineTrim__f1kcu43: var(--textSize-small-tablet-capsizeTrims-baselineTrim__1oekxtv3k);
 +  }
 +  .typography_textSize_standard__q0kq4e8 {
-+    --fontSize__yhgvqw0: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
-+    --lineHeight__yhgvqw1: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
-+    --capHeightTrim__yhgvqw2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
-+    --baselineTrim__yhgvqw3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
++    --fontSize__f1kcu40: var(--textSize-standard-tablet-fontSize__1oekxtv3q);
++    --lineHeight__f1kcu41: var(--textSize-standard-tablet-lineHeight__1oekxtv3r);
++    --capHeightTrim__f1kcu42: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__1oekxtv3t);
++    --baselineTrim__f1kcu43: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__1oekxtv3u);
 +  }
 +  .typography_textSize_large__q0kq4ea {
-+    --fontSize__yhgvqw0: var(--textSize-large-tablet-fontSize__1oekxtv40);
-+    --lineHeight__yhgvqw1: var(--textSize-large-tablet-lineHeight__1oekxtv41);
-+    --capHeightTrim__yhgvqw2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
-+    --baselineTrim__yhgvqw3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
++    --fontSize__f1kcu40: var(--textSize-large-tablet-fontSize__1oekxtv40);
++    --lineHeight__f1kcu41: var(--textSize-large-tablet-lineHeight__1oekxtv41);
++    --capHeightTrim__f1kcu42: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__1oekxtv43);
++    --baselineTrim__f1kcu43: var(--textSize-large-tablet-capsizeTrims-baselineTrim__1oekxtv44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__q0kq4ec {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__1oekxtv36);
@@ -10809,28 +10666,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__1oekxtv41);
 +  }
 +  .typography_heading_1__q0kq4ei {
-+    --fontSize__yhgvqw0: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
-+    --lineHeight__yhgvqw1: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
++    --fontSize__f1kcu40: var(--headingLevel-1-tablet-fontSize__1oekxtv4d);
++    --lineHeight__f1kcu41: var(--headingLevel-1-tablet-lineHeight__1oekxtv4e);
++    --capHeightTrim__f1kcu42: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__1oekxtv4g);
++    --baselineTrim__f1kcu43: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__1oekxtv4h);
 +  }
 +  .typography_heading_2__q0kq4ek {
-+    --fontSize__yhgvqw0: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
-+    --lineHeight__yhgvqw1: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
++    --fontSize__f1kcu40: var(--headingLevel-2-tablet-fontSize__1oekxtv4n);
++    --lineHeight__f1kcu41: var(--headingLevel-2-tablet-lineHeight__1oekxtv4o);
++    --capHeightTrim__f1kcu42: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__1oekxtv4q);
++    --baselineTrim__f1kcu43: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__1oekxtv4r);
 +  }
 +  .typography_heading_3__q0kq4em {
-+    --fontSize__yhgvqw0: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
-+    --lineHeight__yhgvqw1: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
++    --fontSize__f1kcu40: var(--headingLevel-3-tablet-fontSize__1oekxtv4x);
++    --lineHeight__f1kcu41: var(--headingLevel-3-tablet-lineHeight__1oekxtv4y);
++    --capHeightTrim__f1kcu42: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__1oekxtv50);
++    --baselineTrim__f1kcu43: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__1oekxtv51);
 +  }
 +  .typography_heading_4__q0kq4eo {
-+    --fontSize__yhgvqw0: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
-+    --lineHeight__yhgvqw1: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
-+    --capHeightTrim__yhgvqw2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
-+    --baselineTrim__yhgvqw3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
++    --fontSize__f1kcu40: var(--headingLevel-4-tablet-fontSize__1oekxtv57);
++    --lineHeight__f1kcu41: var(--headingLevel-4-tablet-lineHeight__1oekxtv58);
++    --capHeightTrim__f1kcu42: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__1oekxtv5a);
++    --baselineTrim__f1kcu43: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__1oekxtv5b);
 +  }
 +  .typography_touchableText_xsmall__q0kq4e1w {
 +    padding-top: calc((var(--touchableSize__1oekxtv9) - var(--textSize-xsmall-tablet-lineHeight__1oekxtv37)) / 2);
@@ -13259,7 +13116,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            seekAnz
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -13372,7 +13229,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSizeTrimmed_standard__q0kq4e9 typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -13406,7 +13263,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 
 exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
 {
-  "2-7400c79465cea6efdf21.css": .sut6bi0 {
+  "2-3c5f43a659fa2d033875.css": .sut6bi0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -15357,19 +15214,19 @@ html:not(.iho3a210) .iho3a24r {
     text-align: right;
   }
 }
-.yhgvqw4 {
-  font-size: var(--yhgvqw0);
-  line-height: var(--yhgvqw1);
+.f1kcu44 {
+  font-size: var(--f1kcu40);
+  line-height: var(--f1kcu41);
 }
-.yhgvqw4:before {
+.f1kcu44:before {
   content: "";
   display: table;
-  margin-bottom: var(--yhgvqw2);
+  margin-bottom: var(--f1kcu42);
 }
-.yhgvqw4:after {
+.f1kcu44:after {
   content: "";
   display: table;
-  margin-top: var(--yhgvqw3);
+  margin-top: var(--f1kcu43);
 }
 .q0kq4e0 {
   font-family: var(--_1oekxtv2v);
@@ -15384,28 +15241,28 @@ html:not(.iho3a210) .iho3a24r {
   font-weight: var(--_1oekxtv47);
 }
 .q0kq4e4 {
-  --yhgvqw0: var(--_1oekxtv31);
-  --yhgvqw1: var(--_1oekxtv32);
-  --yhgvqw2: var(--_1oekxtv34);
-  --yhgvqw3: var(--_1oekxtv35);
+  --f1kcu40: var(--_1oekxtv31);
+  --f1kcu41: var(--_1oekxtv32);
+  --f1kcu42: var(--_1oekxtv34);
+  --f1kcu43: var(--_1oekxtv35);
 }
 .q0kq4e6 {
-  --yhgvqw0: var(--_1oekxtv3b);
-  --yhgvqw1: var(--_1oekxtv3c);
-  --yhgvqw2: var(--_1oekxtv3e);
-  --yhgvqw3: var(--_1oekxtv3f);
+  --f1kcu40: var(--_1oekxtv3b);
+  --f1kcu41: var(--_1oekxtv3c);
+  --f1kcu42: var(--_1oekxtv3e);
+  --f1kcu43: var(--_1oekxtv3f);
 }
 .q0kq4e8 {
-  --yhgvqw0: var(--_1oekxtv3l);
-  --yhgvqw1: var(--_1oekxtv3m);
-  --yhgvqw2: var(--_1oekxtv3o);
-  --yhgvqw3: var(--_1oekxtv3p);
+  --f1kcu40: var(--_1oekxtv3l);
+  --f1kcu41: var(--_1oekxtv3m);
+  --f1kcu42: var(--_1oekxtv3o);
+  --f1kcu43: var(--_1oekxtv3p);
 }
 .q0kq4ea {
-  --yhgvqw0: var(--_1oekxtv3v);
-  --yhgvqw1: var(--_1oekxtv3w);
-  --yhgvqw2: var(--_1oekxtv3y);
-  --yhgvqw3: var(--_1oekxtv3z);
+  --f1kcu40: var(--_1oekxtv3v);
+  --f1kcu41: var(--_1oekxtv3w);
+  --f1kcu42: var(--_1oekxtv3y);
+  --f1kcu43: var(--_1oekxtv3z);
 }
 .q0kq4ec {
   font-size: var(--_1oekxtv31);
@@ -15430,28 +15287,28 @@ html:not(.iho3a210) .iho3a24r {
   font-weight: var(--_1oekxtv5d);
 }
 .q0kq4ei {
-  --yhgvqw0: var(--_1oekxtv48);
-  --yhgvqw1: var(--_1oekxtv49);
-  --yhgvqw2: var(--_1oekxtv4b);
-  --yhgvqw3: var(--_1oekxtv4c);
+  --f1kcu40: var(--_1oekxtv48);
+  --f1kcu41: var(--_1oekxtv49);
+  --f1kcu42: var(--_1oekxtv4b);
+  --f1kcu43: var(--_1oekxtv4c);
 }
 .q0kq4ek {
-  --yhgvqw0: var(--_1oekxtv4i);
-  --yhgvqw1: var(--_1oekxtv4j);
-  --yhgvqw2: var(--_1oekxtv4l);
-  --yhgvqw3: var(--_1oekxtv4m);
+  --f1kcu40: var(--_1oekxtv4i);
+  --f1kcu41: var(--_1oekxtv4j);
+  --f1kcu42: var(--_1oekxtv4l);
+  --f1kcu43: var(--_1oekxtv4m);
 }
 .q0kq4em {
-  --yhgvqw0: var(--_1oekxtv4s);
-  --yhgvqw1: var(--_1oekxtv4t);
-  --yhgvqw2: var(--_1oekxtv4v);
-  --yhgvqw3: var(--_1oekxtv4w);
+  --f1kcu40: var(--_1oekxtv4s);
+  --f1kcu41: var(--_1oekxtv4t);
+  --f1kcu42: var(--_1oekxtv4v);
+  --f1kcu43: var(--_1oekxtv4w);
 }
 .q0kq4eo {
-  --yhgvqw0: var(--_1oekxtv52);
-  --yhgvqw1: var(--_1oekxtv53);
-  --yhgvqw2: var(--_1oekxtv55);
-  --yhgvqw3: var(--_1oekxtv56);
+  --f1kcu40: var(--_1oekxtv52);
+  --f1kcu41: var(--_1oekxtv53);
+  --f1kcu42: var(--_1oekxtv55);
+  --f1kcu43: var(--_1oekxtv56);
 }
 html:not(.iho3a210) .q0kq4e10 {
   --q0kq4eq: var(--_1oekxtv19);
@@ -15587,28 +15444,28 @@ html.iho3a210 .q0kq4e1l {
 }
 @media screen and (min-width: 740px) {
   .q0kq4e4 {
-    --yhgvqw0: var(--_1oekxtv36);
-    --yhgvqw1: var(--_1oekxtv37);
-    --yhgvqw2: var(--_1oekxtv39);
-    --yhgvqw3: var(--_1oekxtv3a);
+    --f1kcu40: var(--_1oekxtv36);
+    --f1kcu41: var(--_1oekxtv37);
+    --f1kcu42: var(--_1oekxtv39);
+    --f1kcu43: var(--_1oekxtv3a);
   }
   .q0kq4e6 {
-    --yhgvqw0: var(--_1oekxtv3g);
-    --yhgvqw1: var(--_1oekxtv3h);
-    --yhgvqw2: var(--_1oekxtv3j);
-    --yhgvqw3: var(--_1oekxtv3k);
+    --f1kcu40: var(--_1oekxtv3g);
+    --f1kcu41: var(--_1oekxtv3h);
+    --f1kcu42: var(--_1oekxtv3j);
+    --f1kcu43: var(--_1oekxtv3k);
   }
   .q0kq4e8 {
-    --yhgvqw0: var(--_1oekxtv3q);
-    --yhgvqw1: var(--_1oekxtv3r);
-    --yhgvqw2: var(--_1oekxtv3t);
-    --yhgvqw3: var(--_1oekxtv3u);
+    --f1kcu40: var(--_1oekxtv3q);
+    --f1kcu41: var(--_1oekxtv3r);
+    --f1kcu42: var(--_1oekxtv3t);
+    --f1kcu43: var(--_1oekxtv3u);
   }
   .q0kq4ea {
-    --yhgvqw0: var(--_1oekxtv40);
-    --yhgvqw1: var(--_1oekxtv41);
-    --yhgvqw2: var(--_1oekxtv43);
-    --yhgvqw3: var(--_1oekxtv44);
+    --f1kcu40: var(--_1oekxtv40);
+    --f1kcu41: var(--_1oekxtv41);
+    --f1kcu42: var(--_1oekxtv43);
+    --f1kcu43: var(--_1oekxtv44);
   }
   .q0kq4ec {
     font-size: var(--_1oekxtv36);
@@ -15627,28 +15484,28 @@ html.iho3a210 .q0kq4e1l {
     line-height: var(--_1oekxtv41);
   }
   .q0kq4ei {
-    --yhgvqw0: var(--_1oekxtv4d);
-    --yhgvqw1: var(--_1oekxtv4e);
-    --yhgvqw2: var(--_1oekxtv4g);
-    --yhgvqw3: var(--_1oekxtv4h);
+    --f1kcu40: var(--_1oekxtv4d);
+    --f1kcu41: var(--_1oekxtv4e);
+    --f1kcu42: var(--_1oekxtv4g);
+    --f1kcu43: var(--_1oekxtv4h);
   }
   .q0kq4ek {
-    --yhgvqw0: var(--_1oekxtv4n);
-    --yhgvqw1: var(--_1oekxtv4o);
-    --yhgvqw2: var(--_1oekxtv4q);
-    --yhgvqw3: var(--_1oekxtv4r);
+    --f1kcu40: var(--_1oekxtv4n);
+    --f1kcu41: var(--_1oekxtv4o);
+    --f1kcu42: var(--_1oekxtv4q);
+    --f1kcu43: var(--_1oekxtv4r);
   }
   .q0kq4em {
-    --yhgvqw0: var(--_1oekxtv4x);
-    --yhgvqw1: var(--_1oekxtv4y);
-    --yhgvqw2: var(--_1oekxtv50);
-    --yhgvqw3: var(--_1oekxtv51);
+    --f1kcu40: var(--_1oekxtv4x);
+    --f1kcu41: var(--_1oekxtv4y);
+    --f1kcu42: var(--_1oekxtv50);
+    --f1kcu43: var(--_1oekxtv51);
   }
   .q0kq4eo {
-    --yhgvqw0: var(--_1oekxtv57);
-    --yhgvqw1: var(--_1oekxtv58);
-    --yhgvqw2: var(--_1oekxtv5a);
-    --yhgvqw3: var(--_1oekxtv5b);
+    --f1kcu40: var(--_1oekxtv57);
+    --f1kcu41: var(--_1oekxtv58);
+    --f1kcu42: var(--_1oekxtv5a);
+    --f1kcu43: var(--_1oekxtv5b);
   }
   .q0kq4e1w {
     padding-bottom: calc((var(--_1oekxtv9) - var(--_1oekxtv37)) / 2);
@@ -16160,9 +16017,9 @@ html.iho3a210 ._13vf6rgd {
   padding: 100px;
 }
 
-/*# sourceMappingURL=2-7400c79465cea6efdf21.css.map*/
+/*# sourceMappingURL=2-3c5f43a659fa2d033875.css.map*/
 ,
-  "2-7400c79465cea6efdf21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-3c5f43a659fa2d033875.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "async_hooks",
   "crypto",
@@ -16183,7 +16040,7 @@ html.iho3a210 ._13vf6rgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-7400c79465cea6efdf21.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-3c5f43a659fa2d033875.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16194,7 +16051,7 @@ html.iho3a210 ._13vf6rgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">Hello <!-- -->jobStreet<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16213,7 +16070,7 @@ html.iho3a210 ._13vf6rgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-7400c79465cea6efdf21.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-3c5f43a659fa2d033875.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16224,7 +16081,7 @@ html.iho3a210 ._13vf6rgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="_1k8ihtm0 q0kq4e10 q0kq4e13"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">Hello <!-- -->seekAnz<!-- --> <span class="sut6bi0 iho3a255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 _164ng3y0 iho3a255 iho3a25d _28izme0 _28izme2 _28izme3 _28izme4" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="sut6bi0 iho3a28p iho3a27l iho3a2ax iho3a29t iho3a25d iho3a269 iho3a2i9 iho3a24j iho3a24c q0kq4e10 q0kq4e13 iho3a233 iho3a236"><div class="sut6bi0 iho3a25d"><div class="sut6bi0 iho3a259 iho3a2i9"><input class="sut6bi0 sut6bi1 sut6bi6 sut6bi7 sut6bi8 sut6bid iho3a25h iho3a28 iho3a2h iho3a26 _13vf6rg4 _13vf6rg2" type="checkbox" id="id_1" aria-checked="false"/><div class="sut6bi0 iho3a2hx iho3a25d iho3a265 _13vf6rg5 _13vf6rg2 q0kq4e10  iho3a233"><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rg9 q0kq4e11 q0kq4e13 iho3a221 iho3a222"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a23x iho3a23y"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 iho3a23p iho3a23u"></span><span class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2i iho3a265 iho3a2x iho3a26 _13vf6rgb iho3a23z iho3a244"><div class="sut6bi0 iho3a2n iho3a2x iho3a25d _13vf6rgc _13vf6rge"><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x iho3a26"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="sut6bi0 iho3a2j iho3a2k iho3a2l iho3a2m iho3a25h iho3a2x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="sut6bi0 iho3a2p iho3a2n iho3a24x q0kq4e1s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="sut6bi0 iho3a2b5 iho3a2i5"><div class="sut6bi0 iho3a259 _13vf6rg2 _13vf6rg6"><label class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0" for="id_1"><span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">This is a checkbox</span></label></div></div></div></div></div><div class="sut6bi0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16254,7 +16111,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-7400c79465cea6efdf21.css"
+       href="/2-3c5f43a659fa2d033875.css"
      >
      <link
        data-chunk="main"
@@ -16279,7 +16136,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
            Hello
            jobStreet
            <span class="sut6bi0 iho3a255">
@@ -16392,7 +16249,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16462,7 +16319,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-7400c79465cea6efdf21.css"
+       href="/2-3c5f43a659fa2d033875.css"
      >
      <link
        data-chunk="main"
@@ -16487,7 +16344,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
              html.iho3a210,html.iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="_1k8ihtm0 q0kq4e10 q0kq4e13">
-         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+         <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
            Hello
            seekAnz
            <span class="sut6bi0 iho3a255">
@@ -16600,7 +16457,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
                      class="sut6bi0 iho3a24 iho3a24x iho3a2h _3z0ycm0"
                      for="id_1"
                    >
-                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 yhgvqw4">
+                     <span class="sut6bi0 iho3a24x q0kq4e0 q0kq4e1 q0kq4e1t q0kq4e8 f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16701,7 +16558,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            jobStreet
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -16814,7 +16671,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>
@@ -16921,7 +16778,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__iho3a210,html.sprinkles_darkMode__iho3a210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__1k8ihtm0 typography_lightModeTone_light__q0kq4e10 typography_darkModeTone_dark__q0kq4e13">
-         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+         <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
            Hello
            seekAnz
            <span class="reset_base__sut6bi0 sprinkles_display_inlineBlock_mobile__iho3a255">
@@ -17034,7 +16891,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__sut6bi0 sprinkles_userSelect_none__iho3a24 sprinkles_display_block_mobile__iho3a24x sprinkles_cursor_pointer__iho3a2h virtualTouchable_virtualTouchable__3z0ycm0"
                      for="id_1"
                    >
-                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__yhgvqw4">
+                     <span class="reset_base__sut6bi0 sprinkles_display_block_mobile__iho3a24x typography_fontFamily__q0kq4e0 typography_fontWeight_regular__q0kq4e1 typography_tone_neutral__q0kq4e1t typography_textSize_standard__q0kq4e8 capsize_capsizeStyle__f1kcu44">
                        This is a checkbox
                      </span>
                    </label>

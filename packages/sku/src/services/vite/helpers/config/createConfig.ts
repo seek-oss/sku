@@ -2,9 +2,9 @@ import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
@@ -38,6 +38,10 @@ export const createConfig = (
   }
 
   return {
+    resolve: {
+      // adding this at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment.
+      tsconfigPaths: true,
+    },
     plugins: [
       /**
        * user added plugins
@@ -48,7 +52,6 @@ export const createConfig = (
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
-      tsconfigPaths(),
       cjsInterop({
         dependencies: skuContext.serveCjsInteropDependencies,
         apply: 'serve',
@@ -57,13 +60,14 @@ export const createConfig = (
         dependencies: skuContext.buildCjsInteropDependencies,
         apply: 'build',
       }),
-      react({
-        babel: {
-          plugins: [
-            require.resolve('babel-plugin-macros'),
-            ...(isProductionBuild ? prodBabelPlugins : []),
-          ],
-        },
+      react(),
+      babel({
+        // turn this on for react-compiler support
+        // presets: [reactCompilerPreset()],
+        plugins: [
+          require.resolve('babel-plugin-macros'),
+          ...(isProductionBuild ? prodBabelPlugins : []),
+        ],
       }),
       vanillaExtractPlugin(),
       /**

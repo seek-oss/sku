@@ -7,6 +7,8 @@ import {
   waitFor,
   hasExitSuccessfully,
 } from '@sku-private/testing-library';
+import { getPort } from '@sku-private/test-utils';
+import { createPage } from '@sku-private/playwright';
 
 const { sku, fixturePath } = scopeToFixture('path-aliases');
 
@@ -57,6 +59,36 @@ describe('pathAliases', () => {
           'Path alias "@bad/*" cannot point to node_modules.',
         ),
       ).toBeInTheConsole();
+    });
+  });
+
+  describe.only('vite:start', () => {
+    it('should resolve path aliases on start', async () => {
+      const port = await getPort();
+
+      const start = await sku('start', [
+        '--config=sku.config.vite.ts',
+        '--strict-port',
+        `--port=${port}`,
+      ]);
+
+      expect(
+        await start.findByText('Starting development server'),
+      ).toBeInTheConsole();
+
+      const appPage = await createPage();
+      await appPage.goto(`http://localhost:${port}`);
+
+      expect(
+        start.queryByError('The plugin "vite-tsconfig-paths" is detected.'),
+      ).not.toBeInTheConsole();
+
+      expect(
+        start.queryByError(
+          "Cannot find module '@components/Button'",
+          undefined,
+        ),
+      ).not.toBeInTheConsole();
     });
   });
 });

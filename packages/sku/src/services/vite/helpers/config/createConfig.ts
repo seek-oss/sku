@@ -1,4 +1,5 @@
 import type { SkuContext } from '../../../../context/createSkuContext.js';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
@@ -39,10 +40,17 @@ export const createConfig = (
 
   return {
     resolve: {
-      // adding this at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment.
-      tsconfigPaths: true,
+      // ! vite v8+ supports tsconfigPaths out of the box, however we need to use the vite-tsconfig-paths plugin instead for vitest v3 support.
+      // ! Once we drop support for vitest v3, we can remove this plugin and use the built-in tsconfigPaths support.
+      // ! This will need to be added at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment (unless whitelisting the entire plugin)
+      // tsconfigPaths: true,
     },
     plugins: [
+      {
+        ...tsconfigPaths(),
+        // This is a workaround to avoid the warning about the plugin being detected.
+        name: 'sku-tsconfig-paths',
+      },
       /**
        * user added plugins
        */

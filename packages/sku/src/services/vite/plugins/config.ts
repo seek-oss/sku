@@ -19,7 +19,6 @@ export const configPlugin = ({
     publicDir: false,
     root: process.cwd(),
     resolve: {
-      tsconfigPaths: true,
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,

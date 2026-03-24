@@ -38,6 +38,8 @@ export const createConfig = (
     );
   }
 
+  const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
+
   return {
     resolve: {
       // ! vite v8+ supports tsconfigPaths out of the box, however we need to use the vite-tsconfig-paths plugin instead for vitest v3 support.
@@ -49,7 +51,7 @@ export const createConfig = (
       {
         ...tsconfigPaths(),
         // This is a workaround to avoid the warning about the plugin being detected.
-        name: 'sku-tsconfig-paths',
+        name: TSCONFIG_PLUGIN_NAME,
       },
       /**
        * user added plugins
@@ -77,7 +79,10 @@ export const createConfig = (
           ...(isProductionBuild ? prodBabelPlugins : []),
         ],
       }),
-      vanillaExtractPlugin(),
+      vanillaExtractPlugin({
+        // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to filter it manually.
+        unstable_pluginFilter: ({ name }) => name === TSCONFIG_PLUGIN_NAME,
+      }),
       /**
        * the sku plugin (only sku specific changes)
        */

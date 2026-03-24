@@ -1,5 +1,32 @@
 # sku
 
+## 15.12.1
+
+### Patch Changes
+
+- fix vitest v3 compatibility ([#1529](https://github.com/seek-oss/sku/pull/1529))
+
+## 15.12.0
+
+### Minor Changes
+
+- Bumping vite version to vite@8 ([#1526](https://github.com/seek-oss/sku/pull/1526))
+
+  This update should not affect most applications, unless you have specified unsupported vite@8 options via `dangerouslySetViteConfig`. Since this API is subject to potential changes, this is a minor (not breaking) release.
+
+  If your app relies on `@sku-lib/vite`, please ensure you upgrade to at least version 2.0.0.
+
+  ```
+  pnpm update @sku-lib/vite^2.0.0
+  ```
+
+### Patch Changes
+
+- Updated minimum versions of dependencies to address security vulnerabilities ([#1526](https://github.com/seek-oss/sku/pull/1526))
+
+- Updated dependencies [[`a34849d`](https://github.com/seek-oss/sku/commit/a34849d4ba3bbfae56e6e1d1459592497d754567)]:
+  - @sku-lib/vite@2.0.0
+
 ## 15.11.0
 
 ### Minor Changes

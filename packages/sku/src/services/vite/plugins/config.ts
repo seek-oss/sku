@@ -28,7 +28,6 @@ export const configPlugin = ({
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
-
     optimizeDeps: {
       // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold-start.
       // Reloads on cold-start cause issues with our Playwright tests, so we need to ensure they get optimized ahead of time.
@@ -40,7 +39,7 @@ export const configPlugin = ({
         renderEntry,
         clientEntry,
       ],
-      esbuildOptions: {
+      rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
       exclude: skuContext.skipPackageCompatibilityCompilation,

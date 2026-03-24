@@ -1,10 +1,11 @@
 import type { SkuContext } from '../../../../context/createSkuContext.js';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
@@ -37,7 +38,15 @@ export const createConfig = (
     );
   }
 
+  const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
+
   return {
+    resolve: {
+      // ! vite v8+ supports tsconfigPaths out of the box, however we need to use the vite-tsconfig-paths plugin instead for vitest v3 support.
+      // ! Once we drop support for vitest v3, we can remove this plugin and use the built-in tsconfigPaths support.
+      // ! This will need to be added at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment (unless whitelisting the entire plugin)
+      // tsconfigPaths: true,
+    },
     plugins: [
       /**
        * user added plugins
@@ -48,7 +57,11 @@ export const createConfig = (
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
-      tsconfigPaths(),
+      {
+        ...tsconfigPaths(),
+        // This is a workaround to avoid the warning about the plugin being detected.
+        name: TSCONFIG_PLUGIN_NAME,
+      },
       cjsInterop({
         dependencies: skuContext.serveCjsInteropDependencies,
         apply: 'serve',
@@ -57,15 +70,19 @@ export const createConfig = (
         dependencies: skuContext.buildCjsInteropDependencies,
         apply: 'build',
       }),
-      react({
-        babel: {
-          plugins: [
-            require.resolve('babel-plugin-macros'),
-            ...(isProductionBuild ? prodBabelPlugins : []),
-          ],
-        },
+      react(),
+      babel({
+        // turn this on for react-compiler support
+        // presets: [reactCompilerPreset()],
+        plugins: [
+          require.resolve('babel-plugin-macros'),
+          ...(isProductionBuild ? prodBabelPlugins : []),
+        ],
       }),
-      vanillaExtractPlugin(),
+      vanillaExtractPlugin({
+        // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to filter it manually.
+        unstable_pluginFilter: ({ name }) => name === TSCONFIG_PLUGIN_NAME,
+      }),
       /**
        * the sku plugin (only sku specific changes)
        */

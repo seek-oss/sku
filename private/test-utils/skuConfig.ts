@@ -22,7 +22,7 @@ export const makeStableHashes = (config: Record<string, any>) => {
  */
 export const makeStableViteHashes = () => ({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         chunkFileNames: '[name].js',
         assetFileNames: '[name][extname]',

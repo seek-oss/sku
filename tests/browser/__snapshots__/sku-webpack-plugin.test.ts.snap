@@ -35,7 +35,7 @@ exports[`sku-webpack-plugin > build > should create valid app 1`] = `
 +      </style>
 +      <div class="wmpgvt0 _1wjhub510 _1wjhub513">
 +        <div class="_1s963ek0 _56mx2d8p _56mx2d7l _56mx2dax _56mx2d9t _56mx2d5d _56mx2d69 _56mx2di9 _56mx2d4j _56mx2d4c _1wjhub510 _1wjhub513 _56mx2d33 _56mx2d36">
-+          <span class="_1s963ek0 _56mx2d4x _1wjhub50 _1wjhub51 _1wjhub51t _1wjhub5a _1xascs94">
++          <span class="_1s963ek0 _56mx2d4x _1wjhub50 _1wjhub51 _1wjhub51t _1wjhub5a _53pak74">
 +            Is it working?
 +          </span>
 +        </div>
@@ -2208,19 +2208,19 @@ html:not(._56mx2d10) ._56mx2d4r {
   --exopzm5m:
     0 0 12px 0 rgba(28, 35, 48, 0.08), 0 12px 24px -6px rgba(28, 35, 48, 0.08);
 }
-._1xascs94 {
-  font-size: var(--_1xascs90);
-  line-height: var(--_1xascs91);
+._53pak74 {
+  font-size: var(--_53pak70);
+  line-height: var(--_53pak71);
 }
-._1xascs94:before {
+._53pak74:before {
   content: "";
   display: table;
-  margin-bottom: var(--_1xascs92);
+  margin-bottom: var(--_53pak72);
 }
-._1xascs94:after {
+._53pak74:after {
   content: "";
   display: table;
-  margin-top: var(--_1xascs93);
+  margin-top: var(--_53pak73);
 }
 ._1wjhub50 {
   font-family: var(--exopzm2v);
@@ -2235,28 +2235,28 @@ html:not(._56mx2d10) ._56mx2d4r {
   font-weight: var(--exopzm47);
 }
 ._1wjhub54 {
-  --_1xascs90: var(--exopzm31);
-  --_1xascs91: var(--exopzm32);
-  --_1xascs92: var(--exopzm34);
-  --_1xascs93: var(--exopzm35);
+  --_53pak70: var(--exopzm31);
+  --_53pak71: var(--exopzm32);
+  --_53pak72: var(--exopzm34);
+  --_53pak73: var(--exopzm35);
 }
 ._1wjhub56 {
-  --_1xascs90: var(--exopzm3b);
-  --_1xascs91: var(--exopzm3c);
-  --_1xascs92: var(--exopzm3e);
-  --_1xascs93: var(--exopzm3f);
+  --_53pak70: var(--exopzm3b);
+  --_53pak71: var(--exopzm3c);
+  --_53pak72: var(--exopzm3e);
+  --_53pak73: var(--exopzm3f);
 }
 ._1wjhub58 {
-  --_1xascs90: var(--exopzm3l);
-  --_1xascs91: var(--exopzm3m);
-  --_1xascs92: var(--exopzm3o);
-  --_1xascs93: var(--exopzm3p);
+  --_53pak70: var(--exopzm3l);
+  --_53pak71: var(--exopzm3m);
+  --_53pak72: var(--exopzm3o);
+  --_53pak73: var(--exopzm3p);
 }
 ._1wjhub5a {
-  --_1xascs90: var(--exopzm3v);
-  --_1xascs91: var(--exopzm3w);
-  --_1xascs92: var(--exopzm3y);
-  --_1xascs93: var(--exopzm3z);
+  --_53pak70: var(--exopzm3v);
+  --_53pak71: var(--exopzm3w);
+  --_53pak72: var(--exopzm3y);
+  --_53pak73: var(--exopzm3z);
 }
 ._1wjhub5c {
   font-size: var(--exopzm31);
@@ -2281,28 +2281,28 @@ html:not(._56mx2d10) ._56mx2d4r {
   font-weight: var(--exopzm5d);
 }
 ._1wjhub5i {
-  --_1xascs90: var(--exopzm48);
-  --_1xascs91: var(--exopzm49);
-  --_1xascs92: var(--exopzm4b);
-  --_1xascs93: var(--exopzm4c);
+  --_53pak70: var(--exopzm48);
+  --_53pak71: var(--exopzm49);
+  --_53pak72: var(--exopzm4b);
+  --_53pak73: var(--exopzm4c);
 }
 ._1wjhub5k {
-  --_1xascs90: var(--exopzm4i);
-  --_1xascs91: var(--exopzm4j);
-  --_1xascs92: var(--exopzm4l);
-  --_1xascs93: var(--exopzm4m);
+  --_53pak70: var(--exopzm4i);
+  --_53pak71: var(--exopzm4j);
+  --_53pak72: var(--exopzm4l);
+  --_53pak73: var(--exopzm4m);
 }
 ._1wjhub5m {
-  --_1xascs90: var(--exopzm4s);
-  --_1xascs91: var(--exopzm4t);
-  --_1xascs92: var(--exopzm4v);
-  --_1xascs93: var(--exopzm4w);
+  --_53pak70: var(--exopzm4s);
+  --_53pak71: var(--exopzm4t);
+  --_53pak72: var(--exopzm4v);
+  --_53pak73: var(--exopzm4w);
 }
 ._1wjhub5o {
-  --_1xascs90: var(--exopzm52);
-  --_1xascs91: var(--exopzm53);
-  --_1xascs92: var(--exopzm55);
-  --_1xascs93: var(--exopzm56);
+  --_53pak70: var(--exopzm52);
+  --_53pak71: var(--exopzm53);
+  --_53pak72: var(--exopzm55);
+  --_53pak73: var(--exopzm56);
 }
 html:not(._56mx2d10) ._1wjhub510 {
   --_1wjhub5q: var(--exopzm19);
@@ -2438,28 +2438,28 @@ html._56mx2d10 ._1wjhub51l {
 }
 @media screen and (min-width: 740px) {
   ._1wjhub54 {
-    --_1xascs90: var(--exopzm36);
-    --_1xascs91: var(--exopzm37);
-    --_1xascs92: var(--exopzm39);
-    --_1xascs93: var(--exopzm3a);
+    --_53pak70: var(--exopzm36);
+    --_53pak71: var(--exopzm37);
+    --_53pak72: var(--exopzm39);
+    --_53pak73: var(--exopzm3a);
   }
   ._1wjhub56 {
-    --_1xascs90: var(--exopzm3g);
-    --_1xascs91: var(--exopzm3h);
-    --_1xascs92: var(--exopzm3j);
-    --_1xascs93: var(--exopzm3k);
+    --_53pak70: var(--exopzm3g);
+    --_53pak71: var(--exopzm3h);
+    --_53pak72: var(--exopzm3j);
+    --_53pak73: var(--exopzm3k);
   }
   ._1wjhub58 {
-    --_1xascs90: var(--exopzm3q);
-    --_1xascs91: var(--exopzm3r);
-    --_1xascs92: var(--exopzm3t);
-    --_1xascs93: var(--exopzm3u);
+    --_53pak70: var(--exopzm3q);
+    --_53pak71: var(--exopzm3r);
+    --_53pak72: var(--exopzm3t);
+    --_53pak73: var(--exopzm3u);
   }
   ._1wjhub5a {
-    --_1xascs90: var(--exopzm40);
-    --_1xascs91: var(--exopzm41);
-    --_1xascs92: var(--exopzm43);
-    --_1xascs93: var(--exopzm44);
+    --_53pak70: var(--exopzm40);
+    --_53pak71: var(--exopzm41);
+    --_53pak72: var(--exopzm43);
+    --_53pak73: var(--exopzm44);
   }
   ._1wjhub5c {
     font-size: var(--exopzm36);
@@ -2478,28 +2478,28 @@ html._56mx2d10 ._1wjhub51l {
     line-height: var(--exopzm41);
   }
   ._1wjhub5i {
-    --_1xascs90: var(--exopzm4d);
-    --_1xascs91: var(--exopzm4e);
-    --_1xascs92: var(--exopzm4g);
-    --_1xascs93: var(--exopzm4h);
+    --_53pak70: var(--exopzm4d);
+    --_53pak71: var(--exopzm4e);
+    --_53pak72: var(--exopzm4g);
+    --_53pak73: var(--exopzm4h);
   }
   ._1wjhub5k {
-    --_1xascs90: var(--exopzm4n);
-    --_1xascs91: var(--exopzm4o);
-    --_1xascs92: var(--exopzm4q);
-    --_1xascs93: var(--exopzm4r);
+    --_53pak70: var(--exopzm4n);
+    --_53pak71: var(--exopzm4o);
+    --_53pak72: var(--exopzm4q);
+    --_53pak73: var(--exopzm4r);
   }
   ._1wjhub5m {
-    --_1xascs90: var(--exopzm4x);
-    --_1xascs91: var(--exopzm4y);
-    --_1xascs92: var(--exopzm50);
-    --_1xascs93: var(--exopzm51);
+    --_53pak70: var(--exopzm4x);
+    --_53pak71: var(--exopzm4y);
+    --_53pak72: var(--exopzm50);
+    --_53pak73: var(--exopzm51);
   }
   ._1wjhub5o {
-    --_1xascs90: var(--exopzm57);
-    --_1xascs91: var(--exopzm58);
-    --_1xascs92: var(--exopzm5a);
-    --_1xascs93: var(--exopzm5b);
+    --_53pak70: var(--exopzm57);
+    --_53pak71: var(--exopzm58);
+    --_53pak72: var(--exopzm5a);
+    --_53pak73: var(--exopzm5b);
   }
   ._1wjhub51w {
     padding-bottom: calc((var(--exopzm9) - var(--exopzm37)) / 2);
@@ -2686,7 +2686,7 @@ exports[`sku-webpack-plugin > start > should start a development server 1`] = `
 +      </style>
 +      <div class="seekJobs_seekJobs__wmpgvt0 typography_lightModeTone_light__1wjhub510 typography_darkModeTone_dark__1wjhub513">
 +        <div class="reset_base__1s963ek0 sprinkles_paddingBottom_gutter_mobile__56mx2d8p sprinkles_paddingTop_gutter_mobile__56mx2d7l sprinkles_paddingLeft_gutter_mobile__56mx2dax sprinkles_paddingRight_gutter_mobile__56mx2d9t sprinkles_position_relative_mobile__56mx2d5d sprinkles_borderRadius_large_mobile__56mx2d69 sprinkles_textAlign_left_mobile__56mx2di9 sprinkles_boxShadow_borderNeutralLight_lightMode__56mx2d4j sprinkles_boxShadow_borderNeutral_darkMode__56mx2d4c typography_lightModeTone_light__1wjhub510 typography_darkModeTone_dark__1wjhub513 sprinkles_background_surface_lightMode__56mx2d33 sprinkles_background_surfaceDark_darkMode__56mx2d36">
-+          <span class="reset_base__1s963ek0 sprinkles_display_block_mobile__56mx2d4x typography_fontFamily__1wjhub50 typography_fontWeight_regular__1wjhub51 typography_tone_neutral__1wjhub51t typography_textSize_large__1wjhub5a capsize_capsizeStyle__1xascs94">
++          <span class="reset_base__1s963ek0 sprinkles_display_block_mobile__56mx2d4x typography_fontFamily__1wjhub50 typography_fontWeight_regular__1wjhub51 typography_tone_neutral__1wjhub51t typography_textSize_large__1wjhub5a capsize_capsizeStyle__53pak74">
 +            Is it working?
 +          </span>
 +        </div>

@@ -4,12 +4,13 @@
   "type": "module",
   "scripts": {
     "build": "sku build",
+    "serve": "sku serve",
     "start": "sku start"
   },
   "dependencies": {
+    "@apollo/client": "^4.1.6",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "@apollo/client": "^4.1.6"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:",

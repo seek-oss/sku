@@ -48,11 +48,6 @@ export const createConfig = (
       // tsconfigPaths: true,
     },
     plugins: [
-      {
-        ...tsconfigPaths(),
-        // This is a workaround to avoid the warning about the plugin being detected.
-        name: TSCONFIG_PLUGIN_NAME,
-      },
       /**
        * user added plugins
        */
@@ -62,6 +57,11 @@ export const createConfig = (
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
+      {
+        ...tsconfigPaths(),
+        // This is a workaround to avoid the warning about the plugin being detected.
+        name: TSCONFIG_PLUGIN_NAME,
+      },
       cjsInterop({
         dependencies: skuContext.serveCjsInteropDependencies,
         apply: 'serve',

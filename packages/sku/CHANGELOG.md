@@ -1,5 +1,11 @@
 # sku
 
+## 15.12.1
+
+### Patch Changes
+
+- fix vitest v3 compatibility ([#1529](https://github.com/seek-oss/sku/pull/1529))
+
 ## 15.12.0
 
 ### Minor Changes

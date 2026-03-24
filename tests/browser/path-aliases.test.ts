@@ -62,7 +62,7 @@ describe('pathAliases', () => {
     });
   });
 
-  describe.only('vite:start', () => {
+  describe('vite:start', () => {
     it('should resolve path aliases on start', async () => {
       const port = await getPort();
 

@@ -1,21 +1,59 @@
-# Build features
+# Extra features
 
-## Images
+## Importing image assets
 
-The following images types are supported in sku:
-`bmp`, `gif`, `jpeg`, `png`, `svg`, `webp` and `avif`.
+The following image types are supported in sku: `bmp`, `gif`, `jpg`, `jpeg`, `png`, `svg`, `webp` and `avif`.
 
-?> Browser support for `webp` and `avif` varies. To ensure compatability across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
+Using an image in your application is as simple as importing it:
 
-```html
-<picture>
-  <source srcset="image.avif" type="image/avif" />
-  <source srcset="image.webp" type="image/webp" />
-  <img src="image.png" />
-</picture>
+```tsx
+import heroImageUrl from './heroImage.png';
+
+const HeroImage = () => <img src={heroImageUrl} alt="A hero image" />;
 ```
 
-If you want to use a currently unsupported format feel free to submit a PR or contact #sku-support.
+All supported image types (except [SVG]) will be imported as strings you can pass to a `src` attribute.
+The imported string is typically a URL, however files up to 8,096 bytes will be inlined as a base64-encoded [`data:` URL].
+
+?> Browser support for `webp` and `avif` varies. To ensure compatibility across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
+
+```tsx
+import avifImageUrl from './image.avif';
+import webpImageUrl from './image.webp';
+import pngImageUrl from './image.png';
+
+const ImageWithFallbacks = () => (
+  <picture>
+    <source srcset={avifImageUrl} type="image/avif" />
+    <source srcset={webpImageUrl} type="image/webp" />
+    <img src={pngImageUrl} alt="An image" />
+  </picture>
+);
+```
+
+If you want to use a currently unsupported format feel free to submit a PR or contact [`#sku-support`].
+
+[SVG]: #SVGs
+[`data:` URL]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
+
+### SVGs
+
+SVGs are handled differently to other image formats.
+Imported SVGs are raw strings representing optimized (via [SVGO]) markup, not URLs.
+These markup strings can then be passed to an HTML element in React:
+
+```tsx
+import svgMarkup from './icon.svg';
+
+const MySvgComponent = () => {
+  return <div dangerouslySetInnerHTML={{ __html: svgMarkup }} />;
+};
+```
+
+?> Importing optimized SVG markup from files is recommended over rendering SVG elements with React. SVG elements rendered by React are not optimized by sku. Importing SVGs may not be possible in all use cases, such as when the SVG elements require user-configurable props.
+
+[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
+[SVGO]: https://github.com/svg/svgo
 
 ## Source maps
 

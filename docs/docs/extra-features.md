@@ -50,7 +50,36 @@ const MySvgComponent = () => {
 };
 ```
 
-?> Importing optimized SVG markup from files is recommended over rendering SVG elements with React. SVG elements rendered by React are not optimized by sku. Importing SVGs may not be possible in all use cases, such as when the SVG elements require user-configurable props.
+?> Importing optimized SVG markup from files is recommended over rendering SVG elements with React.
+SVG elements rendered by React are not optimized by sku.
+
+Importing SVGs may not be possible in all use cases, such as when the SVG elements require user-configurable props.
+In those cases you can render SVG elements directly in React:
+
+```tsx
+const SvgComponent = ({ tone }: { tone: 'critical' }) => {
+  const stroke = tone === 'critical' ? 'red' : 'black';
+
+  return (
+    <svg
+      width="50"
+      height="50"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="10"
+        y="10"
+        width="30"
+        height="30"
+        stroke={stroke}
+        fill="transparent"
+        stroke-width="5"
+      />
+    </svg>
+  );
+};
+```
 
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 [SVGO]: https://github.com/svg/svgo

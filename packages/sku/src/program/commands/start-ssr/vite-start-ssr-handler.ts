@@ -15,10 +15,9 @@ export const viteStartSsrHandler = async ({
   console.log();
   console.log(
     chalk.blue(
-      `Starting the Vite dev server for SSR on port ${skuContext.port.client}`,
+      `Starting the Vite SSR dev server (API + assets) on port ${skuContext.port.server}`,
     ),
   );
-  console.log('Starting development server...');
   console.log();
 
   await viteService.startSsr(skuContext);

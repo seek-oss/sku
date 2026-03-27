@@ -75,14 +75,7 @@ export const makeSvgLoaders = () => [
     loader: require.resolve('svgo-loader'),
     options: {
       plugins: [
-        {
-          name: 'preset-default',
-          params: {
-            overrides: {
-              removeViewBox: false,
-            },
-          },
-        },
+        'preset-default',
         {
           name: 'addAttributesToSVGElement',
           params: {

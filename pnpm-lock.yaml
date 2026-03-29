@@ -1351,7 +1351,7 @@ importers:
         specifier: ^5.1.1
         version: 5.2.0
       webpack-dev-server:
-        specifier: <=5.2.0
+        specifier: <=5.2.3
         version: 5.2.0(debug@4.4.3)(tslib@2.8.1)(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))
       webpack-merge:
         specifier: ^6.0.1

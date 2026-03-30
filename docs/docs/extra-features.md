@@ -39,7 +39,7 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 
 ### SVGs
 
-?> Importing SVGs without query parameters is handled differently in webpack and Vite. See [below] for more information.
+?> Importing SVGs without query parameters is handled differently in webpack and Vite. See [bundler-specific behaviour] for more information.
 
 SVGs are handled differently to other image formats.
 Imported SVGs are raw strings representing optimized (via [SVGO]) markup, not URLs.
@@ -84,7 +84,7 @@ const SvgComponent = ({ tone }: { tone: 'critical' }) => {
 };
 ```
 
-[below]: #bundler-specific-differences
+[bundler-specific behaviour]: #bundler-specific-behaviour
 [SVGO]: https://github.com/svg/svgo
 
 #### Bundler-specific behaviour

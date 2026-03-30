@@ -279,11 +279,63 @@ export default {
 
 ### Vite client types
 
-If you require [types for Vite's client-side APIs], such as [`import.meta.glob`], create a `.d.ts` file in your codebase:
+If you require [types for Vite's client-side APIs], such as [`import.meta.glob`], or types for [imported image assets], create a `.d.ts` file in your codebase:
 
 ```typescript
+// src/vite-env.d.ts
+
+// eslint-disable-next-line spaced-comment
 /// <reference types="sku/vite/client" />
 ```
 
 [types for Vite's client-side APIs]: https://vite.dev/guide/features#client-types
+[imported image assets]: https://vite.dev/guide/assets#importing-asset-as-url
 [`import.meta.glob`]: https://vite.dev/guide/features.html#glob-import
+
+### Importing image assets
+
+Vite provides built-in support for importing image assets as URLs.
+See [the importing image assets docs] for more info.
+
+#### Migrating SVG imports
+
+Importing SVG files with no query parameters has different behaviour in webpack and Vite.
+SVG imports within your application will need to be updated.
+
+?> Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
+
+If your application imports SVG files for use within a React component, add the `raw` query parameter to the import:
+
+```diff
+-import svgMarkup from './icon.svg';
++import svgMarkup from './icon.svg?raw';
+
+const MySvgComponent = () => {
+  return <div dangerouslySetInnerHTML={{ __html: svgMarkup }} />;
+};
+```
+
+If your application imports SVG files inside Vanilla Extract CSS, depending on the use case you can add either the `url` or `inline` query parameter to the import:
+
+```diff
+import { style } from '@vanilla-extract/css';
+-import iconMarkup from './icon.svg';
+
+// URL of the SVG file
++import iconUrl from './icon.svg?url';
+// or SVG data URL
++import iconUrl from './icon.svg?inline';
+
+export const svgBackground = style({
+-  backgroundImage: `url("data:image/svg+xml;base64,${Buffer.from(value).toString('base64')}")`,
++  backgroundImage: `url("${iconUrl}")`,
+});
+```
+
+Similar changes will need to be made in any libraries you consume that import SVG files.
+Consumers of these libraries may see inconsistent results when importing SVG files, depending on the query parameters used by the library and the version of `sku` they are using.
+Ensure changes made to libraries for the purpose of Vite compatibility are communicated clearly in the release notes.
+
+[sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
+[the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
+[the importing image assets docs]: ./docs/extra-features.md#importing-image-assets

@@ -13,7 +13,7 @@ const HeroImage = () => <img src={heroImageUrl} alt="A hero image" />;
 ```
 
 All supported image types (except [SVG]) will be imported as strings you can pass to a `src` attribute.
-The imported string is typically a URL, however files up to 8,096 bytes will be inlined as a base64-encoded [`data:` URL].
+The imported string is typically a URL, however files smaller than 10,000 bytes will be inlined as a base64-encoded [`data:` URL].
 
 ?> Browser support for `webp` and `avif` varies. To ensure compatibility across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
 
@@ -35,8 +35,11 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 
 [SVG]: #SVGs
 [`data:` URL]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
+[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### SVGs
+
+?> Importing SVGs without query parameters is handled differently in webpack and Vite. See [below] for more information.
 
 SVGs are handled differently to other image formats.
 Imported SVGs are raw strings representing optimized (via [SVGO]) markup, not URLs.
@@ -81,8 +84,24 @@ const SvgComponent = ({ tone }: { tone: 'critical' }) => {
 };
 ```
 
-[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
+[below]: #bundler-specific-differences
 [SVGO]: https://github.com/svg/svgo
+
+#### Bundler-specific behaviour
+
+Importing SVG files with no query parameters has different behaviour in webpack and Vite.
+Webpack imports the optimized contents of the SVG file, while Vite handles SVGs like any other image asset: inlining small assets as data URLs and returning asset URLs for larger assets.
+
+Rather than changing the default SVG behaviour in webpack to address these inconsistencies, which could break existing apps, as of [sku v15.13.0] webpack apps now support the same `url`, `raw` and `inline` query parameters that Vite provides for importing assets, **but only when importing SVG files**.
+This allows applications and libraries to opt-in to consistent behaviour for both bundlers.
+See [the vite docs] for more details on these query parameters.
+
+To guarantee consistent behaviour across bundlers, it's recommended to include a query parameter when importing SVG files in both applications and libraries.
+See [sku's Vite migration guide] for more details.
+
+[sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
+[the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
+[sku's Vite migration guide]: ./docs/vite#migrating-svg-imports
 
 ## Source maps
 

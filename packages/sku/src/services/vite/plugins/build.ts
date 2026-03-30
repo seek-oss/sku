@@ -4,6 +4,7 @@ import { renderEntryChunkName, createOutDir } from '../helpers/bundleConfig.js';
 import { createVocabChunks } from '@vocab/vite/chunks';
 import browserslistToEsbuild from '../helpers/browserslist-to-esbuild.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { assetsInlineLimitBytes } from '../../bundlerConstants.js';
 
 const clientEntry = require.resolve('#entries/vite-client');
 
@@ -23,6 +24,7 @@ export const buildPlugin = ({
       build: {
         target: browserslistToEsbuild(skuContext.supportedBrowsers),
         assetsDir: '',
+        assetsInlineLimit: assetsInlineLimitBytes,
         rolldownOptions: {
           output: {
             codeSplitting: {

@@ -149,6 +149,7 @@
     "magicast": "^0.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "nano-memoize": "^3.0.16",
+    "nitro": "3.0.260311-beta",
     "node-html-parser": "^7.0.1",
     "open": "^10.1.2",
     "path-to-regexp": "^6.3.0",

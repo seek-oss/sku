@@ -18,7 +18,7 @@ import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
  */
 export const skuPlugin = ({
   skuContext,
-  environment,
+  // environment,
 }: {
   skuContext: SkuContext;
   environment?: string;
@@ -26,21 +26,25 @@ export const skuPlugin = ({
   configPlugin({ skuContext }),
   dangerouslySetViteConfigPlugin(skuContext),
   setNoExternalPlugin(skuContext),
-  buildPlugin({ skuContext }),
+  // buildPlugin({ skuContext }),
   devServerPlugin({ skuContext }),
   httpsDevServerPlugin(skuContext),
-  preloadPlugin({
-    // Convert loadable import from webpack to vite. Can be put behind a flag.
-    convertFromWebpack: skuContext.convertLoadable,
-  }),
+  // preloadPlugin({
+  //   // Convert loadable import from webpack to vite. Can be put behind a flag.
+  //   convertFromWebpack: skuContext.convertLoadable,
+  // }),
   polyfillsPlugin(skuContext),
   vitePluginSsrCss({
-    entries: [skuContext.paths.renderEntry],
+    entries: [
+      skuContext.commandName === 'start-ssr'
+        ? skuContext.paths.serverEntry
+        : skuContext.paths.renderEntry,
+    ],
   }),
-  environment !== undefined && middlewarePlugin({ skuContext, environment }),
-  telemetryPlugin({
-    target: 'node',
-    type: 'static',
-  }),
+  // environment !== undefined && middlewarePlugin({ skuContext, environment }),
+  // telemetryPlugin({
+  //   target: 'node',
+  //   type: 'static',
+  // }),
   bundleAnalyzerPlugin(),
 ];

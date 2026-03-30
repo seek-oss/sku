@@ -58,4 +58,32 @@ export const viteService = {
 
     server.bindCLIShortcuts({ print: true });
   },
+  startSsr: async (skuContext: SkuContext) => {
+    const server = await createServer(createConfig(skuContext));
+
+    const availablePort = await allocatePort({
+      port: skuContext.port.client,
+      strictPort: skuContext.port.strictPort,
+    });
+
+    await server.listen(availablePort);
+
+    const hosts = getAppHosts(skuContext);
+
+    console.log('Starting development server...');
+    const urls = serverUrls({
+      hosts,
+      port: availablePort,
+      initialPath: skuContext.initialPath,
+      https: skuContext.httpsDevServer,
+    });
+
+    if (skuContext.listUrls) {
+      urls.printAll();
+    } else {
+      urls.print();
+    }
+
+    server.bindCLIShortcuts({ print: true });
+  },
 };

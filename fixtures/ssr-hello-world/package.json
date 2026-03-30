@@ -3,12 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "preview": "pnpm dlx nitro preview",
+    "serve": "node .output/server/index.mjs",
     "start": "sku start-ssr --config=sku-start.config.ts",
     "start:asset-server": "http-server dist-build -p 4000 --cors",
     "start:vite": "sku start-ssr --config=sku-start-vite.config.ts"
   },
   "dependencies": {
     "express": "^4.16.3",
+    "nitro": "3.0.260311-beta",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

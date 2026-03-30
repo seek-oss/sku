@@ -1,3 +1,4 @@
+import { nitro } from 'nitro/vite';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { createRequire } from 'node:module';
@@ -70,6 +71,9 @@ export const createConfig = (
         dependencies: skuContext.buildCjsInteropDependencies,
         apply: 'build',
       }),
+      nitro({
+        serverEntry: skuContext.paths.serverEntry,
+      }),
       react(),
       babel({
         // turn this on for react-compiler support
@@ -88,5 +92,10 @@ export const createConfig = (
        */
       skuPlugin({ skuContext, environment }),
     ],
+    environments: {
+      client: {
+        build: { rollupOptions: { input: skuContext.paths.clientEntry } },
+      },
+    },
   };
 };

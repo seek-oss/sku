@@ -49,7 +49,10 @@ export const buildPlugin = ({
             sourcemap: skuContext.sourceMapsProd,
             rolldownOptions: {
               // this should be skuContext.paths.clientEntry in sku start-ssr or build-ssr mode
-              input: clientEntry,
+              input:
+                skuContext.commandName === 'start-ssr'
+                  ? skuContext.paths.clientEntry
+                  : clientEntry,
             },
           },
         },
@@ -59,7 +62,10 @@ export const buildPlugin = ({
             outDir: outDir.ssg,
             rolldownOptions: {
               // this should be skuContext.paths.serverEntry in sku start-ssr or build-ssr mode
-              input: skuContext.paths.renderEntry,
+              input:
+                skuContext.commandName === 'start-ssr'
+                  ? skuContext.paths.serverEntry
+                  : skuContext.paths.renderEntry,
               output: {
                 entryFileNames: renderEntryChunkName,
               },

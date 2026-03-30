@@ -1,4 +1,8 @@
-import webpack, { type Compiler, type WebpackPluginInstance } from 'webpack';
+import webpack, {
+  type ModuleOptions,
+  type Compiler,
+  type WebpackPluginInstance,
+} from 'webpack';
 import defaultSupportedBrowsers from 'browserslist-config-seek';
 import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
 import {
@@ -21,6 +25,7 @@ import {
 } from './validateOptions.js';
 import targets from '../../../../config/targets.json' with { type: 'json' };
 import { rootResolutionFileExtensions } from '../../../../config/fileResolutionExtensions.js';
+import { assetsInlineLimitBytes } from '../../../bundlerConstants.js';
 
 export class SkuWebpackPlugin implements WebpackPluginInstance {
   options: SkuWebpackPluginOptions;
@@ -69,7 +74,7 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
 
     const isProductionBuild = mode === 'production';
 
-    const rules = [
+    const rules: ModuleOptions['rules'] = [
       {
         test: TYPESCRIPT,
         include: this.include,
@@ -166,7 +171,7 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 10000,
+            maxSize: assetsInlineLimitBytes,
           },
         },
       },
@@ -174,6 +179,29 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
         test: SVG,
         include: this.include,
         type: 'asset/source',
+        use: makeSvgLoaders(),
+      },
+      // To facilitate interop between Webpack and Vite, the rules below mimic Vite's handling of static assets.
+      // See https://vite.dev/guide/assets#importing-asset-as-url and https://webpack.js.org/guides/asset-modules/.
+      {
+        test: SVG,
+        resourceQuery: /raw/,
+        include: this.include,
+        type: 'asset/source',
+        use: makeSvgLoaders(),
+      },
+      {
+        test: SVG,
+        resourceQuery: /inline/,
+        include: this.include,
+        type: 'asset/inline',
+        use: makeSvgLoaders(),
+      },
+      {
+        test: SVG,
+        resourceQuery: /url/,
+        include: this.include,
+        type: 'asset/resource',
         use: makeSvgLoaders(),
       },
     ];

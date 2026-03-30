@@ -11,5 +11,9 @@ export default () => (
     <div className={styles.png} />
     <div className={styles.webp} />
     <div className={styles.svg} />
+    <div className={styles.smallSvg} />
+    <div className={styles.svgInline} />
+    <div className={styles.svgRaw} />
+    <div className={styles.svgUrl} />
   </>
 );

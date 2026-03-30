@@ -1,68 +1,20 @@
-import { renderToString } from 'react-dom/server';
-import type { Server } from 'sku';
+import { StrictMode } from 'react';
+import { makeServer, startServer } from 'sku/vite/ssr';
 
-import App from './App';
+import { Root } from './App';
 
-const initialResponseTemplate = ({ headTags }) => /* html */ `
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>hello-world</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    ${headTags}
-`;
+const server = makeServer({
+  serverHandler: async ({ headTags, bodyTags }) => {
+    const app = (
+      <StrictMode>
+        <Root headTags={headTags} bodyTags={bodyTags} />
+      </StrictMode>
+    );
 
-const template = ({ headTags, bodyTags, app, extraScripts }) => /* html */ `
-      ${headTags}
-    </head>
-    <body>
-      <div id="app">${app}</div>
-      ${extraScripts.join('\n')}
-      ${bodyTags}
-    </body>
-  </html>
-`;
+    return { app };
+  },
+});
 
-export default () =>
-  ({
-    renderCallback: async (
-      { SkuProvider, getBodyTags, flushHeadTags, registerScript },
-      req,
-      res,
-    ) => {
-      const extraScripts = [
-        `<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>`,
-        `<script>console.log('Hi');</script>`,
-      ];
+startServer(server);
 
-      extraScripts.forEach((script) => registerScript?.(script));
-
-      res.status(200).write(
-        initialResponseTemplate({
-          headTags: flushHeadTags(),
-        }),
-      );
-      await Promise.resolve();
-
-      const app = renderToString(
-        <SkuProvider>
-          <App />
-        </SkuProvider>,
-      );
-      res.write(
-        template({
-          headTags: flushHeadTags(),
-          bodyTags: getBodyTags(),
-          app,
-          extraScripts,
-        }),
-      );
-      res.end();
-    },
-    onStart: async () => {
-      if (process.env.NODE_ENV === 'production') {
-        console.log('Server ran the onStart callback');
-      }
-    },
-  }) satisfies Server;
+export default server;

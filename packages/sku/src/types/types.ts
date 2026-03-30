@@ -34,7 +34,7 @@ export interface Server {
   renderCallback: (
     params: RenderCallbackParams,
     ...requestHandlerParams: Parameters<RequestHandler>
-  ) => void;
+  ) => string;
   onStart?: (app: Express) => void;
   middleware?: RequestHandler | RequestHandler[];
 }

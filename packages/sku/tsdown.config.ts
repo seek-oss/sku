@@ -29,6 +29,7 @@ export default defineConfig([
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
       postinstall: './src/postinstall.ts',
+      'vite/ssr': 'src/services/vite/server-vite-ssr.tsx',
       'vite/client': 'src/services/vite/index.ts',
       'vite/prerender-worker':
         'src/services/vite/helpers/prerender/prerenderWorker.ts',

@@ -1,8 +1,11 @@
+import { StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { loadableReady } from 'sku/@loadable/component';
 
-import App from './App';
+import { Root } from './App';
 
-loadableReady(() => {
-  hydrateRoot(document.getElementById('app'), <App />);
-});
+hydrateRoot(
+  document,
+  <StrictMode>
+    <Root />
+  </StrictMode>,
+);

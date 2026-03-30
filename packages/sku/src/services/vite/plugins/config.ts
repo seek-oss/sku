@@ -36,7 +36,7 @@ export const configPlugin = ({
         skuContext.paths.clientEntry,
         skuContext.paths.serverEntry,
         skuContext.paths.renderEntry,
-        renderEntry,
+        skuContext.commandName !== 'start-ssr' ? renderEntry : '',
         clientEntry,
       ],
       rolldownOptions: {

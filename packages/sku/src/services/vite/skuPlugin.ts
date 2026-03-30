@@ -35,7 +35,11 @@ export const skuPlugin = ({
   }),
   polyfillsPlugin(skuContext),
   vitePluginSsrCss({
-    entries: [skuContext.paths.renderEntry],
+    entries: [
+      skuContext.commandName === 'start-ssr'
+        ? skuContext.paths.serverEntry
+        : skuContext.paths.renderEntry,
+    ],
   }),
   environment !== undefined && middlewarePlugin({ skuContext, environment }),
   telemetryPlugin({

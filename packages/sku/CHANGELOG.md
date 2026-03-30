@@ -1,5 +1,15 @@
 # sku
 
+## 15.12.2
+
+### Patch Changes
+
+- Update `vite-plugin-cjs-interop` and `@vitejs/plugin-basic-ssl` dependencies to `vite@8`-compatible versions ([#1531](https://github.com/seek-oss/sku/pull/1531))
+
+- Update `svgo-loader` dependency to `^5.0.0` ([#1535](https://github.com/seek-oss/sku/pull/1535))
+
+- Update `picomatch` to `^4.0.4` to address CVE-2026-33671 and CVE-2026-33672 ([#1537](https://github.com/seek-oss/sku/pull/1537))
+
 ## 15.12.1
 
 ### Patch Changes

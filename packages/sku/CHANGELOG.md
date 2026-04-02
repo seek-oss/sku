@@ -1,5 +1,21 @@
 # sku
 
+## 15.13.0
+
+### Minor Changes
+
+- `webpack`: Add support for Vite-style query parameters when importing SVG files ([#1538](https://github.com/seek-oss/sku/pull/1538))
+
+  To support migration from webpack to Vite, SVG imports in webpack now support the same `raw`, `inline` and `url` query parameters as Vite. This allows you to specify how the SVG should be imported: as a raw string, a base64 data URL, or an asset URL. See [the image asset docs] for more information.
+
+  [the image asset docs]: https://seek-oss.github.io/sku/#/./docs/extra-features?id=importing-image-assets
+
+### Patch Changes
+
+- `vite`: Align asset inline limit with webpack ([#1538](https://github.com/seek-oss/sku/pull/1538))
+
+  To align with sku's webpack config, image assets imported in a Vite app that are smaller than 10,000 bytes will now be inlined as base64-encoded [`data` URLs](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data). Previously the limit was 4,096 bytes.
+
 ## 15.12.2
 
 ### Patch Changes

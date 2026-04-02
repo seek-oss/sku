@@ -1,5 +1,23 @@
 # @sku-lib/codemod
 
+## 1.3.0
+
+### Minor Changes
+
+- Add `svg-import-query-param` codemod to convert `import svg from './file.svg'` imports to `import svg from './file.svg?raw'` ([#1540](https://github.com/seek-oss/sku/pull/1540))
+
+  This codemod migrates all SVG imports to include the `?raw` query parameter. This ensures that SVG import behaviour is consistent between Vite and Webpack.
+
+  **EXAMPLE USAGE:**
+
+  ```sh
+  pnpm dlx @sku-lib/codemod svg-import-query-param .
+  ```
+
+  See the [Vite migration docs] for more information.
+
+  [Vite migration docs]: https://seek-oss.github.io/sku/#/./docs/vite?id=migrating-svg-imports
+
 ## 1.2.6
 
 ### Patch Changes

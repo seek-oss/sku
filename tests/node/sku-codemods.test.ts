@@ -608,6 +608,22 @@ const testCases: TestCase[] = [
       const baz = vi.fn(() => 'hello');
     `,
   },
+  {
+    filename: 'svg-imports.tsx',
+    codemodName: 'svg-import-query-params',
+    input: ts /* ts */ `
+      import foo from './foo.svg';
+      import foo from './foo.svg?inline';
+      import foo from './foo.ts';
+      import foo from './.svg/foo.ts';
+    `,
+    output: ts /* ts */ `
+      import foo from './foo.svg?raw';
+      import foo from './foo.svg?inline';
+      import foo from './foo.ts';
+      import foo from './.svg/foo.ts';
+    `,
+  },
 ];
 
 describe('sku codemods', () => {

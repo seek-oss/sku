@@ -41,6 +41,7 @@
   "types": "./dist/index.d.mts",
   "exports": {
     "./codemods/jest-to-vitest": "./dist/codemods/jest-to-vitest.mjs",
+    "./codemods/svg-import-query-param": "./dist/codemods/svg-import-query-param.mjs",
     "./codemods/transform-vite-loadable": "./dist/codemods/transform-vite-loadable.mjs",
     "./program": "./dist/program/index.mjs",
     "./transform/worker": "./dist/transform/worker.mjs",

@@ -300,26 +300,21 @@ See [the importing image assets docs] for more info.
 #### Migrating SVG imports
 
 Importing SVG files with no query parameters has different behaviour in webpack and Vite.
-SVG imports within your application will need to be updated.
+SVG imports within your application will need to be updated in order to function correctly with Vite.
 
 ?> Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
-If your application imports SVG files for use within a React component, add the `raw` query parameter to the import:
+The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:
 
-```diff
--import svgMarkup from './icon.svg';
-+import svgMarkup from './icon.svg?raw';
-
-const MySvgComponent = () => {
-  return <div dangerouslySetInnerHTML={{ __html: svgMarkup }} />;
-};
+```sh
+pnpm dlx @sku-lib/codemod svg-import-query-param .
 ```
 
-If your application imports SVG files inside Vanilla Extract CSS, depending on the use case you can add either the `url` or `inline` query parameter to the import:
+If you were manually constructing [`data:` URLs] from the imported SVG markup, you can instead use the `url` or `inline` query parameters to import the SVG as a URL or data URL respectively, removing the need to construct a data URL yourself:
 
 ```diff
 import { style } from '@vanilla-extract/css';
--import iconMarkup from './icon.svg';
+-import iconMarkup from './icon.svg?raw';
 
 // URL of the SVG file
 +import iconUrl from './icon.svg?url';
@@ -327,7 +322,7 @@ import { style } from '@vanilla-extract/css';
 +import iconUrl from './icon.svg?inline';
 
 export const svgBackground = style({
--  backgroundImage: `url("data:image/svg+xml;base64,${Buffer.from(value).toString('base64')}")`,
+-  backgroundImage: `url("data:image/svg+xml;base64,${Buffer.from(iconMarkup).toString('base64')}")`,
 +  backgroundImage: `url("${iconUrl}")`,
 });
 ```
@@ -339,3 +334,4 @@ Ensure changes made to libraries for the purpose of Vite compatibility are commu
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
 [the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
 [the importing image assets docs]: ./docs/extra-features.md#importing-image-assets
+[`data:` URLs]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data

@@ -15,7 +15,7 @@ export const CODEMODS = [
   },
   {
     description: 'Add query params to SVG imports for compatibility with Vite',
-    value: 'svg-import-query-params',
+    value: 'svg-import-query-param',
   },
   /* [add-sku-codemod-generator: codemod] */
 ] as const satisfies Codemod[];

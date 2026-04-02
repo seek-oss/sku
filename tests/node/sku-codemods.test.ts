@@ -610,7 +610,7 @@ const testCases: TestCase[] = [
   },
   {
     filename: 'svg-imports.tsx',
-    codemodName: 'svg-import-query-params',
+    codemodName: 'svg-import-query-param',
     input: ts /* ts */ `
       import foo from './foo.svg';
       import foo from './foo.svg?inline';

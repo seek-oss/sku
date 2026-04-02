@@ -13,6 +13,10 @@ export const CODEMODS = [
     description: 'Convert Jest tests to Vitest',
     value: 'jest-to-vitest',
   },
+  {
+    description: 'Add query params to SVG imports for compatibility with Vite',
+    value: 'svg-import-query-param',
+  },
   /* [add-sku-codemod-generator: codemod] */
 ] as const satisfies Codemod[];
 

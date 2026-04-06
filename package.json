@@ -46,7 +46,7 @@
   "homepage": "https://github.com/seek-oss/sku#readme",
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
-    "@changesets/get-github-info": "^0.6.0",
+    "@changesets/get-github-info": "^0.8.0",
     "@sku-private/playwright": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
     "@sku-private/testing-library": "workspace:*",
@@ -62,9 +62,9 @@
     "husky": "^9.0.0",
     "lint-staged": "^16.0.0",
     "playwright": "^1.56.1",
-    "prettier": "~3.6.2",
+    "prettier": "~3.8.0",
     "renovate-config-seek": "^0.4.0",
-    "tsdown": "^0.16.7",
+    "tsdown": "^0.21.0",
     "tsx": "^4.19.4",
     "typescript": "~5.9.0",
     "vitest": "catalog:"

@@ -2,6 +2,7 @@ import babelConfig from '../../../../config/babel.js';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { createRequire } from 'node:module';
+import { svgoConfig } from '../../../bundlerConstants.js';
 
 type BabelConfigOptions = {
   target: 'node' | 'browser';
@@ -73,16 +74,6 @@ export const makeExternalCssLoaders = (
 export const makeSvgLoaders = () => [
   {
     loader: require.resolve('svgo-loader'),
-    options: {
-      plugins: [
-        'preset-default',
-        {
-          name: 'addAttributesToSVGElement',
-          params: {
-            attributes: [{ focusable: false }],
-          },
-        },
-      ],
-    },
+    options: svgoConfig,
   },
 ];

@@ -12,6 +12,8 @@ import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
 import { devServerPlugin } from './plugins/devServer.js';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
+import { svgOptimizerPlugin } from './plugins/svgOptimization.js';
+import { svgoConfig } from '../bundlerConstants.js';
 
 /**
  * All sku related functionality and customization as a vite plugin.
@@ -43,4 +45,5 @@ export const skuPlugin = ({
     type: 'static',
   }),
   bundleAnalyzerPlugin(),
+  svgOptimizerPlugin(svgoConfig),
 ];

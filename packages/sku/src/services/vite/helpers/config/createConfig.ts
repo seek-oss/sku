@@ -9,6 +9,7 @@ import babel from '@rolldown/plugin-babel';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
+import { pluginName as svgOptimizationPluginName } from '../../plugins/svgOptimization.js';
 
 const require = createRequire(import.meta.url);
 
@@ -39,6 +40,11 @@ export const createConfig = (
   }
 
   const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
+  const vanillaExtractCompilerPluginWhitelist = [
+    TSCONFIG_PLUGIN_NAME,
+    svgOptimizationPluginName,
+    'vite-plugin-inspect',
+  ];
 
   return {
     resolve: {
@@ -81,7 +87,8 @@ export const createConfig = (
       }),
       vanillaExtractPlugin({
         // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to filter it manually.
-        unstable_pluginFilter: ({ name }) => name === TSCONFIG_PLUGIN_NAME,
+        unstable_pluginFilter: ({ name }) =>
+          vanillaExtractCompilerPluginWhitelist.includes(name),
       }),
       /**
        * the sku plugin (only sku specific changes)

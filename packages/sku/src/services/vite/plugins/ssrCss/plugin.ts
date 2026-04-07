@@ -71,7 +71,9 @@ export function vitePluginSsrCss(pluginOpts: { entries: string[] }): Plugin {
           children: /* js */ `
               import { createHotContext } from "/@vite/client";
               const hot = createHotContext("/__clear_ssr_css");
+                console.log("hot");
               hot.on("vite:afterUpdate", () => {
+                console.log("removing SSR CSS");
                 document
                   .querySelectorAll("[data-ssr-css]")
                   .forEach(node => node.remove());

@@ -29,6 +29,8 @@ catalog:
 
 overrides:
   esbuild: ~0.27.0
+  '@vanilla-extract/compiler': 'vite-environment'
+  '@vanilla-extract/vite-plugin': 'vite-environment'
 
 ignoredBuiltDependencies:
   - core-js-pure

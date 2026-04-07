@@ -1,8 +1,10 @@
 import * as styles from './app.css.js';
 import avif from './large-image.avif';
+import largeSvg from './large-image.svg';
 
 export default () => (
   <>
+    {largeSvg}
     <div className={styles.avif} />
     <img src={avif} />
     <div className={styles.bmp} />

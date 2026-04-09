@@ -98,8 +98,8 @@ const recommendedPnpmVersion = '10.13.0';
 export const isAtLeastRecommendedPnpmVersion = () =>
   Boolean(
     packageManager === 'pnpm' &&
-      packageManagerVersion &&
-      semver.satisfies(packageManagerVersion, `>=${recommendedPnpmVersion}`),
+    packageManagerVersion &&
+    semver.satisfies(packageManagerVersion, `>=${recommendedPnpmVersion}`),
   );
 
 export const getCommand = (

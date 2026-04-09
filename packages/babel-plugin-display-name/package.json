@@ -8,8 +8,6 @@
     "url": "git+https://github.com/seek-oss/sku.git",
     "directory": "packages/babel-plugin-display-name"
   },
-  "main": "./dist/plugin.mjs",
-  "module": "./dist/plugin.mjs",
   "types": "./dist/plugin.d.mts",
   "exports": {
     ".": "./dist/plugin.mjs",

@@ -34,8 +34,8 @@ catalogs:
       specifier: ^2.3.26
       version: 2.3.26
     '@vocab/vite':
-      specifier: 1.0.1
-      version: 1.0.1
+      specifier: ^1.0.3
+      version: 1.0.3
     braid-design-system:
       specifier: ^34.0.0
       version: 34.0.4
@@ -810,13 +810,13 @@ importers:
     dependencies:
       '@vocab/core':
         specifier: ^1.6.2
-        version: 1.7.6
+        version: 1.8.1
       '@vocab/react':
         specifier: ^1.1.11
         version: 1.1.22(react@19.2.4)
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.1(vite@8.0.1(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.3(vite@8.0.1(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(esbuild@0.27.3))
@@ -1145,7 +1145,7 @@ importers:
         version: 6.0.1(@rolldown/plugin-babel@0.2.1(@babel/core@7.29.0)(@babel/plugin-transform-runtime@7.29.0(@babel/core@7.29.0))(@babel/runtime@7.29.2)(rolldown@1.0.0-rc.12)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)))(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/core':
         specifier: ^1.6.2
-        version: 1.7.6
+        version: 1.8.1
       '@vocab/phrase':
         specifier: ^2.2.0
         version: 2.2.0
@@ -1154,7 +1154,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.1(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.0.3(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.22(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))
@@ -4430,8 +4430,8 @@ packages:
   '@vitest/utils@4.1.0':
     resolution: {integrity: sha512-XfPXT6a8TZY3dcGY8EdwsBulFCIw+BeeX0RZn2x/BtiY/75YGh8FeWGG8QISN/WhaqSrE2OrlDgtF8q5uhOTmw==}
 
-  '@vocab/core@1.7.6':
-    resolution: {integrity: sha512-e/iUVX1Jdwah8P4NspVFU5H7UgC8k9AEsOajRLc0s2/AQ1lVIrd8Apkahxz95ifT8XNHUj7QULtM4MPSFXFYCQ==}
+  '@vocab/core@1.8.1':
+    resolution: {integrity: sha512-wdBHEdpztp09NbW0upQtZPkoEfcz64mubGwE/S/0A6Hwel/T7UV04kX6zGEvdXFdMS/EGpbId5suIdy1rSApNw==}
 
   '@vocab/phrase@2.2.0':
     resolution: {integrity: sha512-TDcKx3Ia8hTAwAurhyOCgusJK6MhIBXkbdUgHCGx88YP+/kswhbuBTQotc6WRuXJXOGfWu+MEemXQ9Y1yPE15g==}
@@ -4444,8 +4444,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.1':
-    resolution: {integrity: sha512-cfE0hpqL5j2NkuT5/F1EzmKHMUcBtLfy2fc6XXQy7+rzoUezJqfwVcOf8R6va3WQPejK9pdiTVC7RbvqGZddOg==}
+  '@vocab/vite@1.0.3':
+    resolution: {integrity: sha512-w7h1x/+mqW/EWDJM5OB9pkWDFtgX8yn8yWvj/ww+AbAQrqkHVsk7MTercrvBYIbI/QBn6rJQ2GiUwNMbYHPLvg==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -13057,7 +13057,7 @@ snapshots:
       convert-source-map: 2.0.0
       tinyrainbow: 3.0.3
 
-  '@vocab/core@1.7.6':
+  '@vocab/core@1.8.1':
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.11.4
       chokidar: 5.0.0
@@ -13074,7 +13074,7 @@ snapshots:
 
   '@vocab/phrase@2.2.0':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       csv-stringify: 6.6.0
       debug: 4.4.3
       picocolors: 1.1.1
@@ -13085,15 +13085,15 @@ snapshots:
 
   '@vocab/react@1.1.22(react@19.2.4)':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       intl-messageformat: 10.7.18
       react: 19.2.4
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.1(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.3(vite@8.0.1(@types/node@22.19.15)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       cjs-module-lexer: 2.2.0
       debug: 4.4.3
       es-module-lexer: 2.0.0
@@ -13102,9 +13102,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.1(vite@8.0.1(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@vocab/vite@1.0.3(vite@8.0.1(@types/node@25.4.0)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       cjs-module-lexer: 2.2.0
       debug: 4.4.3
       es-module-lexer: 2.0.0
@@ -13115,7 +13115,7 @@ snapshots:
 
   '@vocab/webpack@1.2.22(webpack@5.105.4(@swc/core@1.15.18)(esbuild@0.27.3))':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       cjs-module-lexer: 2.2.0
       debug: 4.4.3
       es-module-lexer: 2.0.0
@@ -13127,7 +13127,7 @@ snapshots:
 
   '@vocab/webpack@1.2.22(webpack@5.105.4(esbuild@0.27.3))':
     dependencies:
-      '@vocab/core': 1.7.6
+      '@vocab/core': 1.8.1
       cjs-module-lexer: 2.2.0
       debug: 4.4.3
       es-module-lexer: 2.0.0

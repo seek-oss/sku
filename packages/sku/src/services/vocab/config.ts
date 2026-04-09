@@ -11,6 +11,7 @@ export const getVocabConfig = ({ languages }: SkuContext) => {
   }
 
   const result = {
+    projectRoot: process.cwd(),
     devLanguage: 'en',
     ignore: ['node_modules/sku/**', 'node_modules/vocab/**'],
     languages,

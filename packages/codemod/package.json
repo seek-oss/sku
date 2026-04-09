@@ -16,8 +16,7 @@
   },
   "files": [
     "bin.js",
-    "dist",
-    "tsconfig.json"
+    "dist"
   ],
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
   "dependencies": {

@@ -17,8 +17,7 @@ export const startSsrAction = async ({
 
   validatePolyfills(skuContext.polyfills);
 
-  const { webpackStartSsrHandler } = await import(
-    './webpack-start-ssr-handler.js'
-  );
+  const { webpackStartSsrHandler } =
+    await import('./webpack-start-ssr-handler.js');
   webpackStartSsrHandler({ stats, skuContext });
 };

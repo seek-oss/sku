@@ -36,8 +36,6 @@
     "@types/prompts": "^2.4.9",
     "typescript": "~5.9.0"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {
     "./codemods/jest-to-vitest": "./dist/codemods/jest-to-vitest.mjs",

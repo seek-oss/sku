@@ -3,8 +3,6 @@
   "version": "2.0.0",
   "description": "Loadable components for sku vite",
   "types": "./dist/index.d.mts",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "exports": {
     "./collector": "./dist/collector.mjs",
     "./loadable": "./dist/loadable.mjs",

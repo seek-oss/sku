@@ -18,7 +18,7 @@
     "sku": "workspace:*",
     "webpack": "^5.52.0",
     "webpack-cli": "^6.0.0",
-    "webpack-dev-server": "<=5.2.3",
+    "webpack-dev-server": "<=5.2.0",
     "http-server": "^14.1.1"
   },
   "skuSkipValidatePeerDeps": true

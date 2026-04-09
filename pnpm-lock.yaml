@@ -34,7 +34,7 @@ catalogs:
       specifier: ^2.3.26
       version: 2.3.26
     '@vocab/vite':
-      specifier: 1.0.3
+      specifier: ^1.0.3
       version: 1.0.3
     braid-design-system:
       specifier: ^34.0.0

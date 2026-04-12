@@ -28,6 +28,8 @@ catalog:
   '@types/debug': '^4.1.12'
 
 overrides:
+  # Multiple versions of esbuild tend to crop up in the lockfile. Pin to a specific minor version
+  # purely to reduce installation size.
   esbuild: ~0.28.0
 
 ignoredBuiltDependencies:

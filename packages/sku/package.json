@@ -200,7 +200,6 @@
     "@vanilla-extract/css": "catalog:",
     "@vocab/react": "^1.1.11",
     "braid-design-system": "catalog:",
-    "esbuild": "^0.28.0",
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",

@@ -17,14 +17,24 @@ export type JobWorkerData = {
   targetPath: string;
 };
 
+export class PrerenderWorkerError extends Error {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message, options);
+    this.name = 'PrerenderWorkerError';
+  }
+}
+
 const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
   const workerPath = new URL(import.meta.resolve('#vite/prerender-worker'));
   const worker = new Worker(workerPath, {
     workerData: jobs,
+    execArgv: ['--enable-source-maps'],
   });
 
   return new Promise((resolve, reject) => {
-    worker.on('error', reject);
+    worker.on('error', (error) => {
+      reject(new PrerenderWorkerError(error.message, { cause: error.cause }));
+    });
 
     worker.on('exit', (code) => {
       if (code === 0) {

@@ -51,7 +51,6 @@ await Promise.all(
       routeName,
       language,
     }: JobWorkerData) => {
-      // TODO: It would be nice to type this file properly
       const loadableCollector = createCollector({
         manifest,
         base: publicPath,
@@ -66,28 +65,35 @@ await Promise.all(
         });
       }
 
-      let html = await createPreRenderedHtml({
-        environment,
-        language,
-        route,
-        routeName,
-        site,
-        render,
-        loadableCollector,
-        createUnsafeNonce: cspHandler
-          ? cspHandler.createUnsafeNonce
-          : undefined,
-      });
+      let html = '';
+      try {
+        html = await createPreRenderedHtml({
+          environment,
+          language,
+          route,
+          routeName,
+          site,
+          render,
+          loadableCollector,
+          createUnsafeNonce: cspHandler
+            ? cspHandler.createUnsafeNonce
+            : undefined,
+        });
 
-      if (cspHandler) {
-        html = cspHandler.handleHtml(html);
+        if (cspHandler) {
+          html = cspHandler.handleHtml(html);
+        }
+      } catch (e) {
+        throw new Error(`Error rendering HTML for route ${route}`, {
+          cause: e,
+        });
       }
 
-      await ensureTargetDirectory(filePath.split('/').slice(0, -1).join('/'));
+      await ensureTargetDirectory(path.dirname(filePath));
       try {
         await writeFile(resolve(filePath), html);
       } catch (e) {
-        console.error('Error writing file', filePath, e);
+        throw new Error(`Error writing file ${filePath}`, { cause: e });
       }
 
       // Make this a nicer log.

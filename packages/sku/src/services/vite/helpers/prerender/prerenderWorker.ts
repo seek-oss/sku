@@ -84,7 +84,7 @@ await Promise.all(
           html = cspHandler.handleHtml(html);
         }
       } catch (e) {
-        throw new Error(`Error rendering HTML for route ${route}`, {
+        throw new Error(`Error rendering HTML for route "${route}"`, {
           cause: e,
         });
       }

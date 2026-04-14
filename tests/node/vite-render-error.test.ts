@@ -12,10 +12,11 @@ describe('vite render error', () => {
       expect(build.hasExit()).toMatchObject({ exitCode: 1 });
     });
 
-    const stderr = build.stderrArr.map((item) => item.contents).join('');
+    const stderr = build.stderrArr.map((item) => item.contents).join('\n');
 
     expect(stderr).toMatchInlineSnapshot(`
-      "Error rendering HTML for route /Error: Home page error
+      "Error rendering HTML for route "/"
+      Error: Home page error
           at HomePage ({cwd}/fixtures/vite-render-error/src/HomePage.tsx:2:9)
           at renderWithHooks ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4196:18)
           at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4334:14)

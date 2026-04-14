@@ -57,6 +57,8 @@ export const buildPlugin = ({
         },
         ssr: {
           build: {
+            // Sourcemaps are necessary to get useful stack traces for errors thrown during prerendering
+            sourcemap: 'inline',
             ssr: true,
             outDir: outDir.ssg,
             rolldownOptions: {

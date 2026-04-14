@@ -6,9 +6,10 @@ import {
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { performance } from 'node:perf_hooks';
 import provider from '../../../services/telemetry/index.js';
-import chalk from 'chalk';
 import prettyMilliseconds from 'pretty-ms';
 import { viteService } from '../../../services/vite/index.js';
+import { styleText } from 'node:util';
+import { PrerenderWorkerError } from '../../../services/vite/helpers/prerender/prerenderConcurrently.js';
 
 export const viteBuildHandler = async ({
   skuContext,
@@ -35,7 +36,10 @@ export const viteBuildHandler = async ({
     });
 
     console.log(
-      chalk.green(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
+      styleText(
+        'green',
+        `Sku build complete in ${prettyMilliseconds(timeTaken)}`,
+      ),
     );
   } catch (error) {
     const timeTaken = performance.now();
@@ -45,7 +49,15 @@ export const viteBuildHandler = async ({
       csp: cspEnabled,
     });
 
-    console.error(chalk.red(error));
+    if (error instanceof PrerenderWorkerError) {
+      console.error(styleText('red', error.message));
+      console.error(error.cause);
+    } else if (error instanceof Error) {
+      console.error(styleText('red', error.message));
+      console.error(error.stack);
+    } else {
+      console.error(styleText('red', String(error)));
+    }
 
     process.exitCode = 1;
   } finally {

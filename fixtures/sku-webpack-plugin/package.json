@@ -16,7 +16,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "html-webpack-plugin": "^5.3.2",
     "sku": "workspace:*",
-    "webpack": "^5.52.0",
+    "webpack": "^5.106.1",
     "webpack-cli": "^6.0.0",
     "webpack-dev-server": "<=5.2.0",
     "http-server": "^14.1.1"

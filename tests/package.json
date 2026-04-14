@@ -12,7 +12,7 @@
     "fs-fixture": "^2.6.0",
     "jsonc-parser": "^3.0.0",
     "node-html-parser": "^7.0.1",
-    "webpack": "^5.52.0",
+    "webpack": "^5.106.1",
     "webpack-cli": "^6.0.0",
     "webpack-dev-server": "<=5.2.0",
     "yaml": "^2.8.1"

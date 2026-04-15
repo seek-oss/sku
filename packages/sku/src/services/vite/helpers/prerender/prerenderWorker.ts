@@ -92,14 +92,18 @@ await Promise.all(
       }
 
       await ensureTargetDirectory(path.dirname(filePath));
+      const relativeOutputPath = path.relative(process.cwd(), filePath);
+
       try {
+        console.log(
+          `Writing HTML for route "${route}" to "${relativeOutputPath}"`,
+        );
         await writeFile(resolve(filePath), html);
       } catch (e) {
-        throw new Error(`Error writing file ${filePath}`, { cause: e });
+        throw new Error(`Error writing file to "${relativeOutputPath}"`, {
+          cause: e,
+        });
       }
-
-      // Make this a nicer log.
-      console.log(`Static Site Generation for route: ${route} to ${filePath}`);
     },
   ),
 );

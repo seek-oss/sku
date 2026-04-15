@@ -4,6 +4,19 @@ import { scopeToFixture, waitFor } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('vite-render-error');
 
+const filterNodeInternalStackFrames = (stack: string) =>
+  stack
+    .split('\n')
+    .filter((line) => !line.includes('node:internal'))
+    .join('\n');
+
+const aggregateStdErr = (
+  stderrArr: Array<{ contents: string | Buffer<ArrayBufferLike> }>,
+) =>
+  stderrArr
+    .map((item) => filterNodeInternalStackFrames(item.contents.toString()))
+    .join('\n');
+
 describe('vite render error', () => {
   it('should emit an error with the route name and stack trace when a route fails to render', async () => {
     const build = await sku('build');
@@ -12,7 +25,7 @@ describe('vite render error', () => {
       expect(build.hasExit()).toMatchObject({ exitCode: 1 });
     });
 
-    const stderr = build.stderrArr.map((item) => item.contents).join('\n');
+    const stderr = aggregateStdErr(build.stderrArr);
 
     expect(stderr).toMatchInlineSnapshot(`
       "Error rendering HTML for route "/"
@@ -37,15 +50,12 @@ describe('vite render error', () => {
       expect(build.hasExit()).toMatchObject({ exitCode: 1 });
     });
 
-    const stderr = build.stderrArr.map((item) => item.contents).join('\n');
+    const stderr = aggregateStdErr(build.stderrArr);
 
     expect(stderr).toMatchInlineSnapshot(`
       "Error importing sku render entrypoint
       Error: Render entrypoint error
           at <anonymous> ({cwd}/fixtures/vite-render-error/src/renderError.tsx:7:7)
-          at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
-          at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-          at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
           at async Promise.all (index 1)
           at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:17:28"
     `);

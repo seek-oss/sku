@@ -33,9 +33,11 @@ const [manifest, render] = await Promise.all([
   readFile(resolve(path.join(targetPath, '.vite/manifest.json')), 'utf-8').then(
     JSON.parse,
   ),
-  import(resolve(path.join(outDir.ssg, renderEntryChunkName))).then(
-    (m) => m.default,
-  ),
+  import(resolve(path.join(outDir.ssg, renderEntryChunkName)))
+    .then((m) => m.default)
+    .catch((e) => {
+      throw new Error(`Error importing sku render entrypoint`, { cause: e });
+    }),
 ]);
 
 await Promise.all(

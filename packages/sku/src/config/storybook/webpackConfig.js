@@ -67,6 +67,7 @@ export default (config, { isDevServer }) => {
     module: clientWebpackConfig.module,
     resolve: clientWebpackConfig.resolve,
     plugins: clientWebpackConfig.plugins,
+    devtool: clientWebpackConfig.devtool,
     stats: 'errors-only',
   });
 };

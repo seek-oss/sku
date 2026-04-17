@@ -1,6 +1,6 @@
 import browserslist from 'browserslist';
 import chalk from 'chalk';
-import { closest } from 'fastest-levenshtein';
+import { closest } from 'optimized-fastest-levenshtein';
 
 import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';

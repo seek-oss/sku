@@ -156,12 +156,32 @@ export default {
 ### [Webpack filesystem cache]
 
 This cache stores generated webpack modules and chunks.
-It is only emitted during local development.
-Its purpose is to reduce the time it takes to start the local development server.
+By default (`webpackFilesystemCache: 'development'` in `sku.config.ts`), it is only used for the local development server (`sku start` / `sku start-ssr`).
+
+Set `webpackFilesystemCache: 'always'` to also enable it for `sku build` / `sku build-ssr` (including in CI), unless `SKU_DISABLE_CACHE` is set. You can override the mode with `SKU_WEBPACK_FILESYSTEM_CACHE=development` or `SKU_WEBPACK_FILESYSTEM_CACHE=always`.
+
+For finer control, pass an options object that mirrors Webpack's [advanced cache options]:
+
+```ts
+export default {
+  webpackFilesystemCache: {
+    mode: 'always',
+    compression: 'gzip',
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    buildDependencies: ['./tsconfig.json'],
+  },
+} satisfies SkuConfig;
+```
+
+Sku always invalidates the cache when your `sku.config.*` or the installed `sku` version changes; any `buildDependencies` you provide are added on top.
+
+In Docker or Buildkite, pair `'always'` with a [BuildKit cache mount] on `node_modules/.cache/webpack` so the cache persists between image builds on the same agents.
 
 > This cache is stored in `node_modules/.cache/webpack` and can be safely deleted at any time.
 
 [webpack filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
+[advanced cache options]: https://webpack.js.org/guides/caching/#advanced-options
+[BuildKit cache mount]: https://docs.docker.com/build/cache/optimize/#use-cache-mounts
 
 ### [`babel-loader` cache]
 

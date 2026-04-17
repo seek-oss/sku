@@ -197,6 +197,40 @@ export default validator.compile({
   rootResolution: {
     type: 'boolean',
   },
+  webpackFilesystemCache: [
+    {
+      type: 'enum',
+      values: ['development', 'always'],
+      optional: true,
+    },
+    {
+      type: 'object',
+      optional: true,
+      props: {
+        mode: {
+          type: 'enum',
+          values: ['development', 'always'],
+          optional: true,
+        },
+        compression: {
+          type: 'enum',
+          values: [false, 'gzip', 'brotli'],
+          optional: true,
+        },
+        maxAge: {
+          type: 'number',
+          optional: true,
+          integer: true,
+          positive: true,
+        },
+        buildDependencies: {
+          type: 'array',
+          optional: true,
+          items: { type: 'string' },
+        },
+      },
+    },
+  ],
   languages: languagesToCompile,
   skipPackageCompatibilityCompilation: {
     type: 'array',

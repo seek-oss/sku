@@ -1,4 +1,10 @@
-import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
+import type {
+  SkuConfig,
+  SkuRoute,
+  SkuRouteObject,
+  WebpackFilesystemCacheMode,
+  WebpackFilesystemCacheOptions,
+} from '../types/types.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
@@ -257,6 +263,22 @@ export const createSkuContext = ({
     skuConfig.skipPackageCompatibilityCompilation;
   const externalizeNodeModules = skuConfig.externalizeNodeModules;
 
+  const envWebpackFilesystemCacheMode = process.env
+    .SKU_WEBPACK_FILESYSTEM_CACHE as WebpackFilesystemCacheMode | undefined;
+  const rawWebpackFilesystemCache = skuConfig.webpackFilesystemCache;
+  const baseWebpackFilesystemCache: WebpackFilesystemCacheOptions =
+    typeof rawWebpackFilesystemCache === 'string'
+      ? { mode: rawWebpackFilesystemCache }
+      : (rawWebpackFilesystemCache ?? { mode: 'development' });
+  const webpackFilesystemCache: WebpackFilesystemCacheOptions = {
+    ...baseWebpackFilesystemCache,
+    mode:
+      envWebpackFilesystemCacheMode === 'always' ||
+      envWebpackFilesystemCacheMode === 'development'
+        ? envWebpackFilesystemCacheMode
+        : (baseWebpackFilesystemCache.mode ?? 'development'),
+  };
+
   const tsPaths =
     skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'
       ? generateTypeScriptPaths(skuConfig.pathAliases)
@@ -314,6 +336,7 @@ export const createSkuContext = ({
     cspExtraScriptSrcHosts,
     httpsDevServer,
     rootResolution,
+    webpackFilesystemCache,
     languages,
     initialPath,
     transformOutputPath: skuConfig.transformOutputPath,

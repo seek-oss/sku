@@ -51,6 +51,7 @@ const makeWebpackConfig = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
+    webpackFilesystemCache,
   } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
   const webpackMode = isProductionBuild ? 'production' : 'development';
@@ -94,7 +95,11 @@ const makeWebpackConfig = ({
         filename: `${fileMask}.js`,
         chunkFilename: `${fileMask}.js`,
       },
-      cache: getCacheSettings({ isDevServer, paths }),
+      cache: getCacheSettings({
+        isDevServer,
+        paths,
+        webpackFilesystemCache,
+      }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -248,7 +253,11 @@ const makeWebpackConfig = ({
         hotUpdateChunkFilename: `[id].[fullhash].hot-update.${type === 'module' ? 'c' : ''}js`,
         library: { name: 'server', type: 'var' },
       },
-      cache: getCacheSettings({ isDevServer, paths }),
+      cache: getCacheSettings({
+        isDevServer,
+        paths,
+        webpackFilesystemCache,
+      }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         emitOnErrors: isProductionBuild,

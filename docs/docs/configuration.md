@@ -492,6 +492,18 @@ Unfortunately, these kinds of imports only work for apps. In packages, the impor
 
 You can set this option in `sku.config.js`, or adding `"skuCompilePackage": true` to your `package.json` will disable this behaviour by default.
 
+## webpackFilesystemCache
+
+Type: `'development' | 'always' | { mode?, compression?, maxAge?, buildDependencies? }`
+
+Default: `'development'`
+
+Bundler: `webpack`
+
+Controls Webpack’s [filesystem cache](https://webpack.js.org/configuration/cache/#cachetype). With `'development'`, the cache is used only for the local dev server. Set to `'always'` to also use it for production builds and in CI (unless `SKU_DISABLE_CACHE` is set). Override the mode with `SKU_WEBPACK_FILESYSTEM_CACHE=development` or `SKU_WEBPACK_FILESYSTEM_CACHE=always`.
+
+Pass an object to tune Webpack's [advanced cache options](https://webpack.js.org/guides/caching/#advanced-options) (`compression`, `maxAge`) and add extra `buildDependencies`. Sku always invalidates the cache on changes to `sku.config.*` and to the installed `sku` version. See [Caching](./extra-features?id=caching) for Docker and CI notes.
+
 ## routes
 
 Type: `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`

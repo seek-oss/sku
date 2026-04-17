@@ -44,6 +44,7 @@ export default {
   httpsDevServer: false,
   devServerMiddleware: undefined,
   rootResolution: !isCompilePackage,
+  webpackFilesystemCache: { mode: 'development' },
   languages: undefined,
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,

@@ -56,6 +56,7 @@ const makeWebpackConfig = ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
+    webpackFilesystemCache,
   } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
@@ -134,7 +135,11 @@ const makeWebpackConfig = ({
             }
           : {}),
       },
-      cache: getCacheSettings({ isDevServer, paths }),
+      cache: getCacheSettings({
+        isDevServer,
+        paths,
+        webpackFilesystemCache,
+      }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
         minimize: isProductionBuild,
@@ -292,7 +297,11 @@ const makeWebpackConfig = ({
         filename: 'render.js',
         library: { name: 'static', type: 'umd2', export: 'default' },
       },
-      cache: getCacheSettings({ isDevServer, paths }),
+      cache: getCacheSettings({
+        isDevServer,
+        paths,
+        webpackFilesystemCache,
+      }),
       optimization: {
         nodeEnv: process.env.NODE_ENV,
       },

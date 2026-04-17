@@ -3,4 +3,7 @@ export type {
   RenderCallbackParams,
   Server,
   SkuConfig,
+  WebpackFilesystemCacheConfig,
+  WebpackFilesystemCacheMode,
+  WebpackFilesystemCacheOptions,
 } from './types/types.js';

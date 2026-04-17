@@ -443,6 +443,51 @@ export interface SkuConfigBase {
   transformOutputPath?: TransformOutputPathFunction;
 }
 
+export type WebpackFilesystemCacheMode = 'development' | 'always';
+
+/**
+ * Advanced configuration for Webpack's [filesystem cache].
+ * Mirrors the relevant subset of Webpack's `cache` options.
+ *
+ * [filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
+ */
+export interface WebpackFilesystemCacheOptions {
+  /**
+   * When the cache is enabled.
+   *
+   * - `'development'` (default): only used for the local dev server.
+   * - `'always'`: also used for `sku build` / `sku build-ssr` and in CI.
+   */
+  mode?: WebpackFilesystemCacheMode;
+
+  /**
+   * Compression for cache files. Reduces disk usage at the cost of some CPU.
+   *
+   * @default false
+   * @see https://webpack.js.org/configuration/cache/#cachecompression
+   */
+  compression?: false | 'gzip' | 'brotli';
+
+  /**
+   * Maximum age (ms) of unused cache entries before they're cleaned up.
+   *
+   * @see https://webpack.js.org/configuration/cache/#cachemaxage
+   */
+  maxAge?: number;
+
+  /**
+   * Additional files whose changes should invalidate the cache.
+   * Sku already includes the resolved `sku.config.*` and `sku/package.json`.
+   *
+   * @see https://webpack.js.org/configuration/cache/#cachebuilddependencies
+   */
+  buildDependencies?: string[];
+}
+
+export type WebpackFilesystemCacheConfig =
+  | WebpackFilesystemCacheMode
+  | WebpackFilesystemCacheOptions;
+
 export interface WebpackSkuConfig {
   /**
    * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
@@ -514,6 +559,21 @@ export interface WebpackSkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=rootresolution
    */
   rootResolution?: boolean;
+
+  /**
+   * Controls [Webpack filesystem caching](https://webpack.js.org/configuration/cache/#cachetype).
+   *
+   * Pass either a mode string or an options object:
+   *
+   * - `'development'` (default): cache is used only for the local dev server (`sku start` / `sku start-ssr`), not for production builds or in CI.
+   * - `'always'`: cache is also used for `sku build` / `sku build-ssr` and in CI, unless `SKU_DISABLE_CACHE` is set.
+   * - Object form: `{ mode, compression, maxAge, buildDependencies }` to tune Webpack's [advanced cache options](https://webpack.js.org/guides/caching/#advanced-options).
+   *
+   * The mode can also be overridden with `SKU_WEBPACK_FILESYSTEM_CACHE=development|always`.
+   *
+   * In Docker/Buildkite, pair `'always'` with a BuildKit cache mount on `node_modules/.cache/webpack` (and optionally `node_modules/.cache/babel-loader`) so the cache persists between builds.
+   */
+  webpackFilesystemCache?: WebpackFilesystemCacheConfig;
 }
 
 export interface ViteSkuConfig {

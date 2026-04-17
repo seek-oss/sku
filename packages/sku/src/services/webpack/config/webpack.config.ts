@@ -180,7 +180,7 @@ const makeWebpackConfig = ({
                      * - Prevent running `react-dom` & `react` as they already meet our browser support policy
                      */
                     ...[
-                      ...paths.compilePackages,
+                      ...paths.compilePackagesSync(),
                       ...skipPackageCompatibilityCompilation,
                       'react-dom',
                       'react',
@@ -237,7 +237,7 @@ const makeWebpackConfig = ({
           target: 'browser',
           hot,
           include: internalInclude,
-          compilePackages: paths.compilePackages,
+          compilePackages: paths.compilePackagesSync(),
           browserslist: supportedBrowsers,
           mode: webpackMode,
           libraryName,
@@ -279,9 +279,9 @@ const makeWebpackConfig = ({
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it
                 // matches when importing a file within a package e.g. import { MyComponent } from '@seek/my-component-package'.
-                ...paths.compilePackages.map(
-                  (packageName) => new RegExp(`^(${packageName})`),
-                ),
+                ...paths
+                  .compilePackagesSync()
+                  .map((packageName) => new RegExp(`^(${packageName})`)),
               ],
             })
           : {},
@@ -322,7 +322,7 @@ const makeWebpackConfig = ({
           target: 'node',
           hot: false,
           include: internalInclude,
-          compilePackages: paths.compilePackages,
+          compilePackages: paths.compilePackagesSync(),
           browserslist: [targets.browserslistNodeTarget],
           mode: webpackMode,
           libraryName,

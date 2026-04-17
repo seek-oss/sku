@@ -29,9 +29,11 @@ export const validatePeerDeps = async ({ paths }: SkuContext) => {
     return;
   }
 
+  const skuCompilePackages = await paths.compilePackages();
+
   try {
     const duplicatePackages: string[] = [];
-    const packagesToCheck = [...paths.compilePackages, ...singletonPackages];
+    const packagesToCheck = [...skuCompilePackages, ...singletonPackages];
 
     const packagePatterns = packagesToCheck.map((packageName) => [
       packageName,
@@ -96,7 +98,7 @@ export const validatePeerDeps = async ({ paths }: SkuContext) => {
       const peers = new Map();
 
       Object.keys(peerDependencies)
-        .filter((dep) => paths.compilePackages.includes(dep))
+        .filter((dep) => skuCompilePackages.includes(dep))
         .forEach((dep) => {
           peers.set(dep, peerDependencies[dep]);
         });

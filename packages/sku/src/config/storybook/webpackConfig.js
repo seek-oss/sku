@@ -37,7 +37,7 @@ export default (config, { isDevServer }) => {
         if (!rule.test.test(EXAMPLE_MDX_FILE)) {
           rule.exclude.push(
             ...paths.src,
-            ...paths.compilePackages.map(resolvePackage),
+            ...paths.compilePackagesSync().map(resolvePackage),
           );
         }
 
@@ -52,7 +52,7 @@ export default (config, { isDevServer }) => {
         // To be safe, exclude everything if the rule's test isn't a RegExp
         rule.exclude.push(
           ...paths.src,
-          ...paths.compilePackages.map(resolvePackage),
+          ...paths.compilePackagesSync().map(resolvePackage),
           /\.vanilla\.css$/, // Vanilla Extract virtual modules
           /\.css$/, // external CSS
         );

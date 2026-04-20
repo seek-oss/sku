@@ -8,6 +8,14 @@ export default {
   pathAliases: {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
+    '#styles/*': './src/styles/*',
   },
-  dangerouslySetViteConfig: makeStableViteHashes,
+  dangerouslySetViteConfig: () => ({
+    ...makeStableViteHashes(),
+    optimizeDeps: {
+      // css resolution issues only occur during the first optimization.
+      // Forcing a re-optimization to be able to test the error consistently.
+      force: true,
+    },
+  }),
 } satisfies SkuConfig;

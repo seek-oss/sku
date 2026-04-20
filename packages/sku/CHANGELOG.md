@@ -1,5 +1,17 @@
 # sku
 
+## 15.14.0
+
+### Minor Changes
+
+- `vite`: Improve error messaging during `sku build` ([#1548](https://github.com/seek-oss/sku/pull/1548))
+
+  Pre-render errors and failures in the first errored route will now be logged with stack traces for easier debugging.
+
+### Patch Changes
+
+- `storybook`: Pass through `sku` sourcemap config to the Storybook webpack config ([#1553](https://github.com/seek-oss/sku/pull/1553))
+
 ## 15.13.0
 
 ### Minor Changes

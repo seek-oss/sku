@@ -8,11 +8,11 @@ export default defineConfig([
     copy: [
       {
         from: 'src/services/vite/client.d.ts',
-        to: 'dist/vite/client.d.ts',
+        to: 'dist/vite/',
       },
       {
         from: 'src/@loadable/component/index.ts',
-        to: 'dist/@loadable/component/index.ts',
+        to: 'dist/@loadable/component/',
       },
     ],
     // Need to use unbundled mode because `webpack/entry/server/index.ts` calls webpackHot.accept which needs a known path to the server app at runtime.

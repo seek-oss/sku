@@ -1,5 +1,11 @@
 # sku
 
+## 15.14.1
+
+### Patch Changes
+
+- Fixes a bug causing incorrect bundling of the `sku/@loadable/component` and `sku/vite/client` entrypoints ([#1559](https://github.com/seek-oss/sku/pull/1559))
+
 ## 15.14.0
 
 ### Minor Changes

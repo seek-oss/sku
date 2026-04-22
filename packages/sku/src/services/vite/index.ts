@@ -31,26 +31,36 @@ export const viteService = {
     skuContext: SkuContext;
     environment: string;
   }) => {
-    const server = await createServer(createConfig(skuContext, environment));
-
     const availablePort = await allocatePort({
       port: skuContext.port.client,
       strictPort: skuContext.port.strictPort,
     });
 
+    const skuContextOverride = {
+      ...skuContext,
+      port: {
+        ...skuContext.port,
+        client: availablePort,
+      },
+    };
+
+    const server = await createServer(
+      createConfig(skuContextOverride, environment),
+    );
+
     await server.listen(availablePort);
 
-    const hosts = getAppHosts(skuContext);
+    const hosts = getAppHosts(skuContextOverride);
 
     console.log('Starting development server...');
     const urls = serverUrls({
       hosts,
       port: availablePort,
-      initialPath: skuContext.initialPath,
+      initialPath: skuContextOverride.initialPath,
       https: skuContext.httpsDevServer,
     });
 
-    if (skuContext.listUrls) {
+    if (skuContextOverride.listUrls) {
       urls.printAll();
     } else {
       urls.print();

@@ -1,10 +1,9 @@
 import type { RolldownPluginOption } from 'rolldown';
 import { cssFileFilter } from '@vanilla-extract/integration';
 import { makePluginName } from '../../helpers/makePluginName.js';
-import { dirname } from 'node:path';
-import { createRequire } from 'node:module';
+import _debug from 'debug';
 
-const require = createRequire(import.meta.url);
+const debug = _debug('sku:fix-vanilla-extract-dep-scan');
 
 export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),
@@ -13,13 +12,16 @@ export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
     filter: {
       id: cssFileFilter,
     },
-    handler: (source, importer) => {
-      const id = require.resolve(source, {
-        paths: importer ? [dirname(importer)] : undefined,
-      });
+    async handler(source, importer) {
+      const resolved = await this.resolve(source, importer);
+      // If it can't be resolved, don't do anything.
+      if (!resolved) {
+        debug(`Could not resolve "${source}" from "${importer}"`);
+        return null;
+      }
 
       return {
-        id,
+        id: resolved.id,
         // keep the absolute path of the css file so its externalized correctly.
         external: 'absolute',
       };

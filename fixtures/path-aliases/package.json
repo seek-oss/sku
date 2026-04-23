@@ -2,18 +2,19 @@
   "name": "@sku-fixtures/custom-output-target",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build:vite": "sku build --config sku.config.vite.ts",
+    "start:vite": "sku start --config sku.config.vite.ts"
+  },
   "dependencies": {
     "react": "catalog:",
     "react-dom": "catalog:"
-  },
-  "scripts": {
-    "start:vite": "sku start --config sku.config.vite.ts",
-    "build:vite": "sku build --config sku.config.vite.ts"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@vanilla-extract/css": "catalog:",
     "sku": "workspace:*"
   }
 }

@@ -31,6 +31,7 @@ describe('pathAliases', () => {
         'src/*': ['./src/*'],
         '@components/*': ['./src/components/*'],
         '@utils/*': ['./src/utils/*'],
+        '#styles/*': ['./src/styles/*'],
       });
     });
 
@@ -82,6 +83,8 @@ describe('pathAliases', () => {
       expect(
         start.queryByError('The plugin "vite-tsconfig-paths" is detected.'),
       ).not.toBeInTheConsole();
+
+      expect(start.queryByError('PLUGIN_ERROR')).not.toBeInTheConsole();
 
       expect(
         start.queryByError(

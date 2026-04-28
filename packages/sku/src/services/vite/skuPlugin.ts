@@ -1,17 +1,18 @@
 import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../context/createSkuContext.js';
 import { httpsDevServerPlugin } from './plugins/httpsDevServer.js';
-import { middlewarePlugin } from './plugins/middleware.js';
+// import { middlewarePlugin } from './plugins/middleware.js';
 import { vitePluginSsrCss } from './plugins/ssrCss/plugin.js';
 import { preloadPlugin } from './plugins/preloadPlugin/preloadPlugin.js';
 import { setNoExternalPlugin } from './plugins/setNoExternal.js';
 import { polyfillsPlugin } from './plugins/polyfills.js';
 import { dangerouslySetViteConfigPlugin } from './plugins/dangerouslySetViteConfig.js';
-import { telemetryPlugin } from './plugins/telemetry.js';
+// import { telemetryPlugin } from './plugins/telemetry.js';
 import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
 import { devServerPlugin } from './plugins/devServer.js';
-import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
+// import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
+import { ssrPlugin } from './plugins/ssr.js';
 
 /**
  * All sku related functionality and customization as a vite plugin.
@@ -35,12 +36,17 @@ export const skuPlugin = ({
   }),
   polyfillsPlugin(skuContext),
   vitePluginSsrCss({
-    entries: [skuContext.paths.renderEntry],
+    entries: [
+      skuContext.commandName === 'start-ssr'
+        ? skuContext.paths.serverEntry
+        : skuContext.paths.renderEntry,
+    ],
   }),
-  environment !== undefined && middlewarePlugin({ skuContext, environment }),
-  telemetryPlugin({
-    target: 'node',
-    type: 'static',
-  }),
-  bundleAnalyzerPlugin(),
+  ssrPlugin(skuContext),
+  // environment !== undefined && middlewarePlugin({ skuContext, environment }),
+  // telemetryPlugin({
+  //   target: 'node',
+  //   type: 'static',
+  // }),
+  // bundleAnalyzerPlugin(),
 ];

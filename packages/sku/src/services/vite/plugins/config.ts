@@ -22,7 +22,7 @@ export const configPlugin = ({
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
-        __sku_alias__renderEntry: skuContext.paths.renderEntry,
+        // __sku_alias__renderEntry: skuContext.paths.renderEntry,
       },
     },
     define: {
@@ -35,8 +35,8 @@ export const configPlugin = ({
       entries: [
         skuContext.paths.clientEntry,
         skuContext.paths.serverEntry,
-        skuContext.paths.renderEntry,
-        renderEntry,
+        // skuContext.paths.renderEntry,
+        // renderEntry,
         clientEntry,
       ],
       rolldownOptions: {

@@ -17,7 +17,7 @@ import {
   getAppHosts,
   withHostile,
 } from '../../../context/hosts.js';
-import makeWebpackConfig from '../../../services/webpack/config/webpack.config.ssr.js';
+import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import allocatePort from '../../../utils/allocatePort.js';
 import { openBrowser } from '../../../openBrowser.js';
@@ -79,7 +79,7 @@ export const webpackStartSsrHandler = async ({
     strictPort: port.strictPort,
   });
 
-  const [clientWebpackConfig, serverWebpackConfig] = makeWebpackConfig({
+  const [clientWebpackConfig, serverWebpackConfig] = await makeWebpackConfig({
     clientPort,
     serverPort,
     isDevServer: true,

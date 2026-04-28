@@ -8,7 +8,7 @@ import getCertificate from '../../../utils/certificate.js';
 
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import makeWebpackConfig from '../../../services/webpack/config/webpack.config.js';
+import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.js';
 
 import { getAppHosts } from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
@@ -50,7 +50,7 @@ export const webpackStartHandler = async ({
     isStartScript: true,
   });
 
-  const [clientWebpackConfig, renderWebpackConfig] = makeWebpackConfig({
+  const [clientWebpackConfig, renderWebpackConfig] = await makeWebpackConfig({
     isDevServer: true,
     htmlRenderPlugin,
     metrics: true,

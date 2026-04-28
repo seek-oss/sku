@@ -90,7 +90,6 @@ const handleError = (e: unknown): CompilePackagesResult => {
 };
 
 export const detectedCompilePackagesSync = (): CompilePackagesResult => {
-  console.time('detectedCompilePackagesSync');
   if (cachedResult) {
     return cachedResult;
   }
@@ -109,7 +108,6 @@ export const detectedCompilePackagesSync = (): CompilePackagesResult => {
     cachedResult = handleError(e);
   }
 
-  console.timeEnd('detectedCompilePackagesSync');
   return cachedResult;
 };
 
@@ -122,7 +120,6 @@ export const detectedCompilePackages =
       return inFlight;
     }
 
-    console.time('detectedCompilePackages');
     const pnpmVirtualStorePath = getPnpmVirtualStorePath();
     if (!pnpmVirtualStorePath) {
       cachedResult = emptyResult;
@@ -144,7 +141,6 @@ export const detectedCompilePackages =
       return cachedResult;
     } finally {
       inFlight = undefined;
-      console.timeEnd('detectedCompilePackages');
     }
   };
 

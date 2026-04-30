@@ -20,7 +20,7 @@ export const addSkuCodemodGenerator = (plop) => {
       {
         type: 'add',
         templateFile: './generators/add-sku-codemod/templates/transform.hbs',
-        path: `${codemodRoot}/codemods/{{codemodName}}/{{codemodName}}.ts`,
+        path: `${codemodRoot}/codemods/{{codemodName}}.ts`,
       },
       {
         type: 'modify',

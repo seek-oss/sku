@@ -1,4 +1,4 @@
-import type { Rule, Linter } from 'eslint';
+import type { Rule, Linter, ESLint } from 'eslint';
 import path from 'node:path';
 import { sortPackageJson } from 'sort-package-json';
 
@@ -80,7 +80,7 @@ export const jsonProcessor: Linter.Processor = {
   supportsAutofix: true,
 };
 
-export const packageJsonPlugin = {
+export const packageJsonPlugin: ESLint.Plugin = {
   rules: {
     sort: sortRule,
   },

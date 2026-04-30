@@ -1604,6 +1604,9 @@ importers:
       cli-testing-library:
         specifier: ^3.0.1
         version: 3.0.1(vitest@4.1.0(@types/node@22.19.15)(jsdom@26.1.0)(vite@8.0.1(@types/node@22.19.15)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)))
+      fs-fixture:
+        specifier: ^2.6.0
+        version: 2.11.0
 
   private/tsdown: {}
 

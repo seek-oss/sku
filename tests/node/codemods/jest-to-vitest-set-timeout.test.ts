@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('jest-to-vitest', 'jest-to-vitest set-timeout', [
+runCodemodTests('jest-to-vitest-set-timeout', [
   {
     filename: 'jest-setTimeout.test.ts',
     input: ts /* ts */ `
@@ -23,7 +23,6 @@ runCodemodTests('jest-to-vitest', 'jest-to-vitest set-timeout', [
       });
     `,
     output: ts /* ts */ `
-      import { beforeEach, describe, expect, it, test, vi } from 'vitest';
       describe('timeout tests', () => {
         beforeEach(() => {
           vi.setConfig({ testTimeout: 10000 });

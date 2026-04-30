@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('jest-to-vitest', 'jest-to-vitest hooks', [
+runCodemodTests('jest-to-vitest-hooks', [
   {
     filename: 'jestHooksWithFunctionReferences.test.ts',
     input: ts /* ts */ `
@@ -13,7 +13,7 @@ runCodemodTests('jest-to-vitest', 'jest-to-vitest hooks', [
         }
       };
 
-      const mockFunction = jest.fn();
+      const mockFunction = vi.fn();
       const globalSetup = () => console.log('global');
 
       // These should be transformed - function references
@@ -44,7 +44,6 @@ runCodemodTests('jest-to-vitest', 'jest-to-vitest hooks', [
       });
     `,
     output: ts /* ts */ `
-      import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
       const scoringService = {
         spy: () => console.log('spy called'),
         setup: () => console.log('setup'),

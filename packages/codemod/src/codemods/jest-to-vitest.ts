@@ -1,5 +1,5 @@
 import { transform as mockTypes } from './jest-to-vitest-mock-types.js';
-import { transform as jestMembers } from './jest-to-vitest-jest-members.js';
+import { transform as jestMethods } from './jest-to-vitest-jest-methods.js';
 import { transform as fnGenerics } from './jest-to-vitest-fn-generics.js';
 import { transform as setTimeout } from './jest-to-vitest-set-timeout.js';
 import { transform as mockFactories } from './jest-to-vitest-mock-factories.js';
@@ -11,7 +11,7 @@ import type { Transform } from '../utils/types.js';
 
 const steps: Transform[] = [
   mockTypes,
-  jestMembers,
+  jestMethods,
   fnGenerics,
   setTimeout,
   mockFactories,

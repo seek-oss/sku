@@ -1,10 +1,18 @@
-import {
-  parseTsx,
-  testGlobals,
-  jestGlobals,
-  serializeImports,
-} from './_shared/index.js';
+import { parseTsx } from '../utils/parse.js';
 import type { Transform } from '../utils/types.js';
+
+const testGlobals = ['describe', 'it', 'test'];
+const jestGlobals = [
+  'expect',
+  'beforeAll',
+  'beforeEach',
+  'afterAll',
+  'afterEach',
+  ...testGlobals,
+];
+
+const serializeImports = (imports: Set<string>) =>
+  Array.from(imports).sort().join(', ');
 
 /**
  * Adds or updates the `import { ... } from 'vitest'` statement based on what

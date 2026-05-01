@@ -42,7 +42,7 @@
     "./codemods/jest-to-vitest-fn-generics": "./dist/codemods/jest-to-vitest-fn-generics.mjs",
     "./codemods/jest-to-vitest-hooks": "./dist/codemods/jest-to-vitest-hooks.mjs",
     "./codemods/jest-to-vitest-imports": "./dist/codemods/jest-to-vitest-imports.mjs",
-    "./codemods/jest-to-vitest-jest-members": "./dist/codemods/jest-to-vitest-jest-members.mjs",
+    "./codemods/jest-to-vitest-jest-methods": "./dist/codemods/jest-to-vitest-jest-methods.mjs",
     "./codemods/jest-to-vitest-mock-factories": "./dist/codemods/jest-to-vitest-mock-factories.mjs",
     "./codemods/jest-to-vitest-mock-types": "./dist/codemods/jest-to-vitest-mock-types.mjs",
     "./codemods/jest-to-vitest-resolves-rejects-generics": "./dist/codemods/jest-to-vitest-resolves-rejects-generics.mjs",

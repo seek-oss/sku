@@ -20,7 +20,7 @@ export const CODEMODS = [
   },
   {
     description: 'jest-to-vitest: replace `jest.<method>` with `vi.<method>`',
-    value: 'jest-to-vitest-jest-members',
+    value: 'jest-to-vitest-jest-methods',
   },
   {
     description:

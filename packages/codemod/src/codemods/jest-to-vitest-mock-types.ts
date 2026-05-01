@@ -1,10 +1,10 @@
-import { parseTsx } from './_shared/index.js';
+import { parseTsx } from '../utils/parse.js';
 import type { Transform } from '../utils/types.js';
 
 /**
  * Transforms `as jest.Mock` / `jest.MockedFunction` type casts to `vi.mocked(...)`.
  *
- * Runs before jest-members so the `jest.Mock` member expression in type position is
+ * Runs before jest-methods so the `jest.Mock` member expression in type position is
  * matched intact (it is a `member_type`, not `member_expression`, but running first
  * makes the intent explicit and avoids any future parser ambiguity).
  */

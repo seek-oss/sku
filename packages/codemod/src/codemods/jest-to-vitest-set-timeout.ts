@@ -1,4 +1,4 @@
-import { parseTsx } from './_shared/index.js';
+import { parseTsx } from '../utils/parse.js';
 import type { Transform } from '../utils/types.js';
 
 /**

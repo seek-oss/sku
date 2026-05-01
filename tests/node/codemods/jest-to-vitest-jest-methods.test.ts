@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('jest-to-vitest-jest-members', [
+runCodemodTests('jest-to-vitest-jest-methods', [
   {
     filename: 'jest-fn-without-generics.test.ts',
     input: ts /* ts */ `

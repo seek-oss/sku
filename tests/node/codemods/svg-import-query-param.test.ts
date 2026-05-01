@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('svg-import-query-param', 'svg-import-query-param', [
+runCodemodTests('svg-import-query-param', [
   {
     filename: 'svg-imports.tsx',
     input: ts /* ts */ `

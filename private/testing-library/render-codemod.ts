@@ -34,12 +34,11 @@ export type CodemodTestCase = {
 
 export const runCodemodTests = (
   codemodName: CodemodName,
-  label: string,
   cases: CodemodTestCase[],
 ) => {
   describe('sku codemods', () => {
     describe.for(cases)(
-      `${label} - $filename`,
+      `${codemodName} - $filename`,
       async ({ filename, input, output }) => {
         const fixture = await createFixture({ [filename]: input });
         const { codemod } = scopeToFixture(fixture.path);

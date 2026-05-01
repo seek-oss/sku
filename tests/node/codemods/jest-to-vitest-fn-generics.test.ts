@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('jest-to-vitest', 'jest-to-vitest fn-generics', [
+runCodemodTests('jest-to-vitest-fn-generics', [
   {
     filename: 'jest-fn-with-generics.test.ts',
     input: ts /* ts */ `
@@ -16,7 +16,6 @@ runCodemodTests('jest-to-vitest', 'jest-to-vitest fn-generics', [
       >();
     `,
     output: ts /* ts */ `
-      import { vi } from 'vitest';
       type Middleware = (req: Request, res: Response) => void;
 
       const middleware = vi.fn<(...args: Parameters<Middleware>) => void>();

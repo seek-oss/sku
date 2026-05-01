@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('transform-vite-loadable', 'transform-vite-loadable', [
+runCodemodTests('transform-vite-loadable', [
   {
     filename: 'customNameFixture.tsx',
     input: ts /* ts */ `

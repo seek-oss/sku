@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "cli-testing-library": "^3.0.1",
+    "fs-fixture": "^2.6.0",
     "@sku-private/test-utils": "workspace:*"
   }
 }

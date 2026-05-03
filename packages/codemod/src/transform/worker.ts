@@ -5,20 +5,32 @@ import picocolors from 'picocolors';
 import type { JobWorkerData } from './runner.js';
 import type { Transform } from '../utils/types.js';
 
-const { transformerPath, jobs, options } = workerData as JobWorkerData;
+const { transformerPaths, jobs, options } = workerData as JobWorkerData;
 
-const { transform } = (await import(transformerPath)) as {
-  transform: Transform;
-};
+const transforms = await Promise.all(
+  transformerPaths.map(async (transformerPath) => {
+    const { transform } = (await import(transformerPath)) as {
+      transform: Transform;
+    };
+    return transform;
+  }),
+);
 
 let filesChanged = 0;
 
 await Promise.all(
   jobs.map(async ({ filePath }: { filePath: string }) => {
     const source = await readFile(filePath, 'utf-8');
-    const output = await transform(source);
+    let current = source;
 
-    if (!output) {
+    for (const transform of transforms) {
+      const next = await transform(current);
+      if (next !== null) {
+        current = next;
+      }
+    }
+
+    if (current === source) {
       return;
     }
 
@@ -27,7 +39,7 @@ await Promise.all(
         'source',
         'output',
         source,
-        output,
+        current,
         undefined,
         undefined,
         { ignoreNewlineAtEof: true, context: 3 },
@@ -38,11 +50,10 @@ await Promise.all(
     }
 
     if (!options.dry) {
-      await writeFile(filePath, output);
-      if (source !== output) {
-        filesChanged++;
-      }
+      await writeFile(filePath, current);
     }
+
+    filesChanged++;
   }),
 );
 

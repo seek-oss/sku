@@ -15,7 +15,7 @@ type Options = {
 };
 
 export type JobWorkerData = {
-  transformerPath: string;
+  transformerPaths: string[];
   options: Options;
   jobs: Array<{
     filePath: string;
@@ -28,7 +28,7 @@ const getTransformerFromPrompt = async (): Promise<string> => {
       type: 'select',
       name: 'transformer',
       message: 'Which transform would you like to apply?',
-      choices: CODEMODS.reverse().map(({ description, value }) => ({
+      choices: [...CODEMODS].reverse().map(({ description, value }) => ({
         title: value,
         description,
         value,
@@ -83,9 +83,9 @@ export const runTransform = async (
     return;
   }
 
-  const transformerPath = import.meta.resolve(
-    `@sku-lib/codemod/codemods/${transformer}`,
-  );
+  const transformerPaths = [
+    import.meta.resolve(`@sku-lib/codemod/codemods/${transformer}`),
+  ];
 
   const cpus =
     os.cpus().length > filesExpanded.length
@@ -97,7 +97,7 @@ export const runTransform = async (
     Array.from({ length: cpus }, (_, i) => {
       log(`Starting worker ${i + 1} of ${cpus}`);
       return runJobs({
-        transformerPath,
+        transformerPaths,
         options,
         jobs: filesExpanded
           .slice(i * chunkSize, (i + 1) * chunkSize)

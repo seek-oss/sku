@@ -1,13 +1,27 @@
 import { glob } from 'tinyglobby';
-import prompts from 'prompts';
+import {
+  intro,
+  isCancel,
+  multiselect,
+  outro,
+  select,
+  spinner,
+  text,
+} from '@clack/prompts';
 import { join } from 'node:path';
-import { CODEMODS } from '../utils/constants.js';
+import {
+  CODEMODS,
+  JEST_TO_VITEST_STEP_SLUGS,
+  type CodemodName,
+} from '../utils/constants.js';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
 import debug from 'debug';
 
 const log = debug('sku:codemod');
+
+const JEST_IMPORTS_SLUG = 'jest-to-vitest-imports' satisfies CodemodName;
 
 type Options = {
   dry?: boolean;
@@ -22,36 +36,112 @@ export type JobWorkerData = {
   }>;
 };
 
-const getTransformerFromPrompt = async (): Promise<string> => {
-  const res = await prompts(
-    {
-      type: 'select',
-      name: 'transformer',
-      message: 'Which transform would you like to apply?',
-      choices: [...CODEMODS].reverse().map(({ description, value }) => ({
-        title: value,
-        description,
-        value,
-      })),
-    },
-    { onCancel: () => process.exit(1) },
-  );
+const codemodMeta = (slug: CodemodName) =>
+  CODEMODS.find((c) => c.value === slug)?.description ?? slug;
 
-  return res.transformer;
+const interactiveRootOptions = () =>
+  CODEMODS.filter(
+    (c) =>
+      c.value === 'jest-to-vitest' || !c.value.startsWith('jest-to-vitest-'),
+  ).map((c) => ({
+    value: c.value,
+    label: c.value,
+    hint: c.description,
+  }));
+
+const resolveCodemodUrl = (slug: CodemodName | string) =>
+  import.meta.resolve(`@sku-lib/codemod/codemods/${slug}`);
+
+/** Canonical-order paths for granular jest-to-vitest steps; appends imports when needed. */
+export const transformerPathsForJestSubsteps = (
+  selectedSlugs: readonly string[],
+): string[] => {
+  const selected = new Set(selectedSlugs);
+  let ordered = JEST_TO_VITEST_STEP_SLUGS.filter((s) => selected.has(s));
+
+  const needsImports =
+    [...selected].some((s) => s !== JEST_IMPORTS_SLUG) &&
+    !selected.has(JEST_IMPORTS_SLUG);
+
+  if (needsImports) {
+    ordered = [...ordered, JEST_IMPORTS_SLUG];
+  }
+
+  return ordered.map((slug) => resolveCodemodUrl(slug));
+};
+
+const exitCancel = (): never => {
+  process.exit(1);
+};
+
+const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
+  const rootChoice = await select({
+    message: 'Which transform would you like to apply?',
+    options: interactiveRootOptions(),
+  });
+
+  if (isCancel(rootChoice)) {
+    exitCancel();
+  }
+
+  if (rootChoice !== 'jest-to-vitest') {
+    return [resolveCodemodUrl(rootChoice)];
+  }
+
+  const pipelineMode = await select({
+    message: 'Jest → Vitest migration',
+    options: [
+      {
+        value: 'full' as const,
+        label: 'Run full pipeline',
+        hint: 'All steps in order (recommended)',
+      },
+      {
+        value: 'steps' as const,
+        label: 'Choose specific steps',
+        hint: 'Pick substeps; import synthesis runs last when needed',
+      },
+    ],
+    initialValue: 'full',
+  });
+
+  if (isCancel(pipelineMode)) {
+    exitCancel();
+  }
+
+  if (pipelineMode === 'full') {
+    return [resolveCodemodUrl('jest-to-vitest')];
+  }
+
+  const picked = await multiselect({
+    message: 'Select steps (runs in canonical order, not selection order)',
+    options: JEST_TO_VITEST_STEP_SLUGS.map((slug) => ({
+      value: slug,
+      label: slug,
+      hint: codemodMeta(slug),
+    })),
+    required: true,
+  });
+
+  if (isCancel(picked)) {
+    exitCancel();
+  }
+
+  return transformerPathsForJestSubsteps(picked);
 };
 
 const getPathFromPrompt = async (): Promise<string> => {
-  const res = await prompts(
-    {
-      type: 'text',
-      name: 'path',
-      message: 'On which files or directory should the codemods be applied?',
-      initial: '.',
-    },
-    { onCancel: () => process.exit(1) },
-  );
+  const pathResult = await text({
+    message: 'On which files or directory should the codemods be applied?',
+    placeholder: '.',
+    defaultValue: '.',
+  });
 
-  return res.path;
+  if (isCancel(pathResult)) {
+    exitCancel();
+  }
+
+  return pathResult;
 };
 
 export const runTransform = async (
@@ -59,6 +149,9 @@ export const runTransform = async (
   _path: string,
   options: Options,
 ): Promise<void> => {
+  let transformerPaths: string[];
+  let showClackOutro = false;
+
   if (options.dry) {
     console.log(
       picocolors.yellowBright(
@@ -67,25 +160,30 @@ export const runTransform = async (
     );
   }
 
-  const transformer = transform || (await getTransformerFromPrompt());
-  const path = _path || (await getPathFromPrompt());
-
-  if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {
-    console.error('Invalid transform choice, pick one of:');
-    console.error(CODEMODS.map((codemod) => `- ${codemod.value}`).join('\n'));
-    process.exit(1);
+  if (transform) {
+    if (!CODEMODS.find((codemod) => codemod.value === transform)) {
+      console.error('Invalid transform choice, pick one of:');
+      console.error(CODEMODS.map((codemod) => `- ${codemod.value}`).join('\n'));
+      process.exit(1);
+    }
+    transformerPaths = [resolveCodemodUrl(transform)];
+  } else {
+    intro('sku codemod');
+    showClackOutro = true;
+    transformerPaths = await chooseInteractiveTransformerPaths();
   }
+
+  const path = _path || (await getPathFromPrompt());
 
   const filesExpanded = await getAllFiles(path);
 
   if (!filesExpanded.length) {
     console.log(`No files found matching "${path}"`);
-    return;
+    if (showClackOutro) {
+      outro('No matching files.');
+    }
+    process.exit(0);
   }
-
-  const transformerPaths = [
-    import.meta.resolve(`@sku-lib/codemod/codemods/${transformer}`),
-  ];
 
   const cpus =
     os.cpus().length > filesExpanded.length
@@ -93,20 +191,29 @@ export const runTransform = async (
       : os.cpus().length;
   const chunkSize = Math.ceil(filesExpanded.length / cpus);
 
-  const outcomes: JobOutcome[] = await Promise.all(
-    Array.from({ length: cpus }, (_, i) => {
-      log(`Starting worker ${i + 1} of ${cpus}`);
-      return runJobs({
-        transformerPaths,
-        options,
-        jobs: filesExpanded
-          .slice(i * chunkSize, (i + 1) * chunkSize)
-          .map((filePath) => ({
-            filePath,
-          })),
-      });
-    }),
-  );
+  const s = spinner();
+  s.start('Running transforms…');
+
+  let outcomes: JobOutcome[];
+
+  try {
+    outcomes = await Promise.all(
+      Array.from({ length: cpus }, (_, i) => {
+        log(`Starting worker ${i + 1} of ${cpus}`);
+        return runJobs({
+          transformerPaths,
+          options,
+          jobs: filesExpanded
+            .slice(i * chunkSize, (i + 1) * chunkSize)
+            .map((filePath) => ({
+              filePath,
+            })),
+        });
+      }),
+    );
+  } finally {
+    s.stop('Transforms finished.');
+  }
 
   const finalOutcome = outcomes.reduce(
     (acc, outcome) => {
@@ -134,6 +241,10 @@ export const runTransform = async (
         `Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`,
       ),
     );
+  }
+
+  if (showClackOutro) {
+    outro('Done.');
   }
 
   process.exit(0);

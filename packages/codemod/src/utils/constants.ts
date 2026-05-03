@@ -64,3 +64,16 @@ export const CODEMODS = [
 ] as const satisfies Codemod[];
 
 export type CodemodName = (typeof CODEMODS)[number]['value'];
+
+/** Granular jest-to-vitest steps in pipeline order (imports must run last). */
+export const JEST_TO_VITEST_STEP_SLUGS = [
+  'jest-to-vitest-mock-types',
+  'jest-to-vitest-jest-methods',
+  'jest-to-vitest-fn-generics',
+  'jest-to-vitest-set-timeout',
+  'jest-to-vitest-mock-factories',
+  'jest-to-vitest-hooks',
+  'jest-to-vitest-failing',
+  'jest-to-vitest-resolves-rejects-generics',
+  'jest-to-vitest-imports',
+] as const satisfies readonly CodemodName[];

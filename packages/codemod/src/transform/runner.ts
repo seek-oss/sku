@@ -4,9 +4,9 @@ import {
   isCancel,
   multiselect,
   outro,
+  path as pathPrompt,
   select,
   spinner,
-  text,
 } from '@clack/prompts';
 import { join } from 'node:path';
 import {
@@ -131,10 +131,10 @@ const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
 };
 
 const getPathFromPrompt = async (): Promise<string> => {
-  const pathResult = await text({
-    message: 'On which files or directory should the codemods be applied?',
-    placeholder: '.',
-    defaultValue: '.',
+  const pathResult = await pathPrompt({
+    message: 'Which directory should the codemods run on?',
+    directory: true,
+    initialValue: '.',
   });
 
   if (isCancel(pathResult)) {

@@ -22,7 +22,7 @@
   "dependencies": {
     "@ast-grep/napi": "^0.42.0",
     "commander": "catalog:",
-    "diff": "^8.0.2",
+    "diff": "^9.0.0",
     "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
     "tinyglobby": "^0.2.13",

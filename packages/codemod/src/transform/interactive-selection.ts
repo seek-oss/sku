@@ -124,7 +124,7 @@ export async function chooseInteractiveTransformerPaths(): Promise<string[]> {
 export async function confirmDryRunFromPrompt(): Promise<boolean> {
   const value = await confirm({
     message: 'Dry run (do not write changes to disk)?',
-    initialValue: false,
+    initialValue: true,
   });
 
   if (isCancel(value)) {
@@ -143,7 +143,6 @@ export async function getTargetDirectoryFromPrompt(): Promise<string> {
     message: 'Which directory should the codemods run on?',
     directory: true,
     root: process.cwd(),
-    initialValue: '.',
   });
 
   assertClackSubmittedString(pathResult);

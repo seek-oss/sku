@@ -34,7 +34,8 @@ await Promise.all(
       return;
     }
 
-    if (options.print) {
+    const showDiff = options.print === true || options.dry === true;
+    if (showDiff) {
       const diff = createTwoFilesPatch(
         'source',
         'output',

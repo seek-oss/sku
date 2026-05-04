@@ -85,8 +85,14 @@ export const runTransform = async (
       : os.cpus().length;
   const chunkSize = Math.ceil(filesExpanded.length / cpus);
 
+  // Spinner captures stdout; dry run and --print stream diffs from workers.
+  const useSpinner = !runOptions.dry && !runOptions.print;
   const s = spinner();
-  s.start('Running transforms…');
+  if (useSpinner) {
+    s.start('Running transforms…');
+  } else {
+    console.log('Running transforms…');
+  }
 
   let outcomes: JobOutcome[];
 
@@ -106,7 +112,11 @@ export const runTransform = async (
       }),
     );
   } finally {
-    s.stop('Transforms finished.');
+    if (useSpinner) {
+      s.stop('Transforms finished.');
+    } else {
+      console.log('Transforms finished.');
+    }
   }
 
   const finalOutcome = outcomes.reduce(

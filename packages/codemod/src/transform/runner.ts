@@ -49,7 +49,7 @@ const interactiveRootOptions = () =>
     hint: c.description,
   }));
 
-const resolveCodemodUrl = (slug: CodemodName) =>
+const resolveCodemodModule = (slug: CodemodName) =>
   import.meta.resolve(`@sku-lib/codemod/codemods/${slug}`);
 
 /** Canonical-order paths for granular jest-to-vitest steps; appends imports when needed. */
@@ -67,7 +67,7 @@ export const transformerPathsForJestSubsteps = (
     ordered = [...ordered, JEST_IMPORTS_SLUG];
   }
 
-  return ordered.map((slug) => resolveCodemodUrl(slug));
+  return ordered.map((slug) => resolveCodemodModule(slug));
 };
 
 const exitCancel = (): never => {
@@ -94,7 +94,7 @@ const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
   }
 
   if (rootChoice !== 'jest-to-vitest') {
-    return [resolveCodemodUrl(rootChoice)];
+    return [resolveCodemodModule(rootChoice)];
   }
 
   const pipelineMode = await select({
@@ -119,7 +119,7 @@ const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
   }
 
   if (pipelineMode === 'full') {
-    return [resolveCodemodUrl('jest-to-vitest')];
+    return [resolveCodemodModule('jest-to-vitest')];
   }
 
   const picked = (await multiselect({
@@ -174,7 +174,7 @@ export const runTransform = async (
       console.error(CODEMODS.map((c) => `- ${c.value}`).join('\n'));
       process.exit(1);
     }
-    transformerPaths = [resolveCodemodUrl(codemod.value)];
+    transformerPaths = [resolveCodemodModule(codemod.value)];
   } else {
     intro('sku codemod');
     showClackOutro = true;

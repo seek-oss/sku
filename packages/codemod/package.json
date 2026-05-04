@@ -33,7 +33,7 @@
     "@types/node": "catalog:",
     "@types/debug": "catalog:",
     "@types/prompts": "^2.4.9",
-    "typescript": "~5.9.0"
+    "typescript": "~6.0.0"
   },
   "types": "./dist/index.d.mts",
   "exports": {

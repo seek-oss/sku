@@ -54,7 +54,7 @@
     "@types/node": "catalog:",
     "cli-testing-library": "^3.0.1",
     "dedent": "^1.5.1",
-    "eslint": "^9.10.0",
+    "eslint": "^10.0.0",
     "eslint-config-seek": "^15.0.4",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-jsdoc": "^62.0.0",
@@ -66,7 +66,7 @@
     "renovate-config-seek": "^0.4.0",
     "tsdown": "^0.21.0",
     "tsx": "^4.19.4",
-    "typescript": "~5.9.0",
+    "typescript": "~6.0.0",
     "vitest": "catalog:"
   },
   "engines": {

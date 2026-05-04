@@ -1,5 +1,5 @@
 import { merge as webpackMerge } from 'webpack-merge';
-import makeWebpackConfig from '../../services/webpack/config/webpack.config.js';
+import { makeWebpackConfig } from '../../services/webpack/config/webpack.config.js';
 import { resolvePackage } from '../../services/webpack/config/utils/resolvePackage.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
 
@@ -12,19 +12,21 @@ const EXAMPLE_MDX_FILE = 'example.mdx';
  * @param {import("webpack").Configuration} config
  * @param {{isDevServer: boolean}}
  */
-export default (config, { isDevServer }) => {
+export default async (config, { isDevServer }) => {
   const skuContext = getSkuContext();
   const { paths } = skuContext;
-  const clientWebpackConfig = makeWebpackConfig({
-    isIntegration: true,
-    isDevServer,
-    hot: isDevServer && hot,
-    skuContext,
-  }).find(({ name }) => name === 'client');
+  const clientWebpackConfig = (
+    await makeWebpackConfig({
+      isIntegration: true,
+      isDevServer,
+      hot: isDevServer && hot,
+      skuContext,
+    })
+  ).find(({ name }) => name === 'client');
 
   // Ensure Storybook's webpack loaders ignore our code :(
-  if (config && config.module && Array.isArray(config.module.rules)) {
-    config.module.rules.forEach((rule) => {
+  if (config?.module && Array.isArray(config.module.rules)) {
+    for (const rule of config.module.rules) {
       const previousExclude = rule.exclude || [];
       rule.exclude = [
         ...(Array.isArray(previousExclude)
@@ -37,7 +39,7 @@ export default (config, { isDevServer }) => {
         if (!rule.test.test(EXAMPLE_MDX_FILE)) {
           rule.exclude.push(
             ...paths.src,
-            ...paths.compilePackages.map(resolvePackage),
+            ...(await paths.compilePackages()).map(resolvePackage),
           );
         }
 
@@ -52,12 +54,12 @@ export default (config, { isDevServer }) => {
         // To be safe, exclude everything if the rule's test isn't a RegExp
         rule.exclude.push(
           ...paths.src,
-          ...paths.compilePackages.map(resolvePackage),
+          ...(await paths.compilePackages()).map(resolvePackage),
           /\.vanilla\.css$/, // Vanilla Extract virtual modules
           /\.css$/, // external CSS
         );
       }
-    });
+    }
   }
 
   return webpackMerge(config, {

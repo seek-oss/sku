@@ -31,7 +31,7 @@ const libraryRenderEntry = require.resolve('#webpack/library-render');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO: HtmlRenderPlugin needs proper typing.
-const makeWebpackConfig = ({
+export const makeWebpackConfig = async ({
   isIntegration = false,
   isDevServer = false,
   htmlRenderPlugin,
@@ -40,7 +40,7 @@ const makeWebpackConfig = ({
   isStartScript = false,
   stats,
   skuContext,
-}: MakeWebpackConfigOptions): Configuration[] => {
+}: MakeWebpackConfigOptions): Promise<Configuration[]> => {
   const {
     paths,
     webpackDecorator,
@@ -180,7 +180,7 @@ const makeWebpackConfig = ({
                      * - Prevent running `react-dom` & `react` as they already meet our browser support policy
                      */
                     ...[
-                      ...paths.compilePackages,
+                      ...(await paths.compilePackages()),
                       ...skipPackageCompatibilityCompilation,
                       'react-dom',
                       'react',
@@ -237,7 +237,6 @@ const makeWebpackConfig = ({
           target: 'browser',
           hot,
           include: internalInclude,
-          compilePackages: paths.compilePackages,
           browserslist: supportedBrowsers,
           mode: webpackMode,
           libraryName,
@@ -279,7 +278,7 @@ const makeWebpackConfig = ({
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it
                 // matches when importing a file within a package e.g. import { MyComponent } from '@seek/my-component-package'.
-                ...paths.compilePackages.map(
+                ...(await paths.compilePackages()).map(
                   (packageName) => new RegExp(`^(${packageName})`),
                 ),
               ],
@@ -322,7 +321,6 @@ const makeWebpackConfig = ({
           target: 'node',
           hot: false,
           include: internalInclude,
-          compilePackages: paths.compilePackages,
           browserslist: [targets.browserslistNodeTarget],
           mode: webpackMode,
           libraryName,
@@ -341,5 +339,3 @@ const makeWebpackConfig = ({
     },
   ].map(webpackDecorator);
 };
-
-export default makeWebpackConfig;

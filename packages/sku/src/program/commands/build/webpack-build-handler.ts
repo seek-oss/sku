@@ -11,7 +11,7 @@ import {
 } from '../../../utils/buildFileUtils.js';
 import { run } from '../../../services/webpack/runWebpack.js';
 import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/createHtmlRenderPlugin.js';
-import makeWebpackConfig from '../../../services/webpack/config/webpack.config.js';
+import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.js';
 import provider from '../../../services/telemetry/index.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import {
@@ -39,7 +39,7 @@ export const webpackBuildHandler = async ({
     await cleanTargetDirectory(paths.target);
 
     const compiler = webpack(
-      makeWebpackConfig({
+      await makeWebpackConfig({
         htmlRenderPlugin: !isLibrary
           ? createHtmlRenderPlugin({
               isStartScript: false,

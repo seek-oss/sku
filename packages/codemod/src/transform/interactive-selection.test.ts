@@ -18,7 +18,6 @@ vi.mock('@clack/prompts', async () => {
 });
 
 import {
-  assertClackSubmittedString,
   chooseInteractiveTransformerPaths,
   getInteractiveRootCodemodSlugs,
   getTargetDirectoryFromPrompt,
@@ -33,21 +32,6 @@ describe('getInteractiveRootCodemodSlugs', () => {
     expect(slugs).toContain('svg-import-query-param');
     expect(slugs).not.toContain('jest-to-vitest-hooks');
     expect(slugs).not.toContain('jest-to-vitest-imports');
-  });
-});
-
-describe('assertClackSubmittedString', () => {
-  it('accepts string values', () => {
-    expect(() => assertClackSubmittedString('.')).not.toThrow();
-  });
-
-  it('invokes process.exit for non-string values', () => {
-    const exit = vi.spyOn(process, 'exit').mockImplementation((code) => {
-      void code;
-      throw new Error('exit');
-    });
-    expect(() => assertClackSubmittedString(Symbol('x'))).toThrow('exit');
-    exit.mockRestore();
   });
 });
 

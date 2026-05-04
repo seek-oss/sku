@@ -56,7 +56,7 @@ export const exitCancel = (): never => {
 };
 
 /** Clack prompts return `string | symbol`; cancel uses a symbol sentinel. */
-export function assertClackSubmittedString(
+function assertClackSubmittedString(
   value: string | symbol,
 ): asserts value is string {
   if (typeof value !== 'string') {

@@ -1,7 +1,7 @@
 import ts from 'dedent';
 import { runCodemodTests } from '@sku-private/testing-library/codemod';
 
-runCodemodTests('jest-to-vitest', 'jest-to-vitest failing', [
+runCodemodTests('jest-to-vitest-failing', [
   {
     filename: 'chainedTestMethodsWithFailing.test.ts',
     input: ts /* ts */ `
@@ -15,7 +15,6 @@ runCodemodTests('jest-to-vitest', 'jest-to-vitest failing', [
       it.only.failing("foo")
     `,
     output: ts /* ts */ `
-      import { describe, it, test } from 'vitest';
       test.only("foo")
       describe.skip.each("foo")
       it.skip.each("foo")

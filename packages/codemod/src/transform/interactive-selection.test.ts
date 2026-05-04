@@ -4,8 +4,11 @@ const mockSelect = vi.hoisted(() => vi.fn());
 const mockMultiselect = vi.hoisted(() => vi.fn());
 const mockPath = vi.hoisted(() => vi.fn());
 
-vi.mock('@clack/prompts', async (importOriginal) => {
-  const mod = (await importOriginal()) as Record<string, unknown>;
+vi.mock('@clack/prompts', async () => {
+  const mod = (await vi.importActual('@clack/prompts')) as Record<
+    string,
+    unknown
+  >;
   return {
     ...mod,
     select: mockSelect,

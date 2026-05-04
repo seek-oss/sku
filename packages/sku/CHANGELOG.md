@@ -1,5 +1,13 @@
 # sku
 
+## 15.14.2
+
+### Patch Changes
+
+- `vite`: Fix the browser not opening to the right url when a fallback port it used ([#1561](https://github.com/seek-oss/sku/pull/1561))
+
+- vite: make vanilla-extract dep scan resolve path aliases for `css.ts` imports ([#1558](https://github.com/seek-oss/sku/pull/1558))
+
 ## 15.14.1
 
 ### Patch Changes

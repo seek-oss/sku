@@ -8,6 +8,7 @@ import picocolors from 'picocolors';
 import debug from 'debug';
 import {
   chooseInteractiveTransformerPaths,
+  confirmDryRunFromPrompt,
   getTargetDirectoryFromPrompt,
   resolveCodemodModule,
 } from './interactive-selection.js';
@@ -37,14 +38,6 @@ export const runTransform = async (
   let transformerPaths: string[];
   let showClackOutro = false;
 
-  if (options.dry) {
-    console.log(
-      picocolors.yellowBright(
-        picocolors.bold('Running in dry mode, no files will be modified.'),
-      ),
-    );
-  }
-
   if (transform) {
     const codemod = CODEMODS.find((c) => c.value === transform);
     if (!codemod) {
@@ -60,6 +53,21 @@ export const runTransform = async (
   }
 
   const path = _path || (await getTargetDirectoryFromPrompt());
+
+  let dry = options.dry === true;
+  if (showClackOutro && options.dry !== true) {
+    dry = await confirmDryRunFromPrompt();
+  }
+
+  const runOptions: Options = { ...options, dry };
+
+  if (runOptions.dry) {
+    console.log(
+      picocolors.yellowBright(
+        picocolors.bold('Running in dry mode, no files will be modified.'),
+      ),
+    );
+  }
 
   const filesExpanded = await getAllFiles(path);
 
@@ -88,7 +96,7 @@ export const runTransform = async (
         log(`Starting worker ${i + 1} of ${cpus}`);
         return runJobs({
           transformerPaths,
-          options,
+          options: runOptions,
           jobs: filesExpanded
             .slice(i * chunkSize, (i + 1) * chunkSize)
             .map((filePath) => ({
@@ -110,7 +118,7 @@ export const runTransform = async (
   );
 
   console.log(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
-  if (options.dry) {
+  if (runOptions.dry) {
     console.log(
       picocolors.yellow(
         `${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,

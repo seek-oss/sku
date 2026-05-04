@@ -1,4 +1,5 @@
 import {
+  confirm,
   isCancel,
   multiselect,
   path as pathPrompt,
@@ -120,11 +121,29 @@ export async function chooseInteractiveTransformerPaths(): Promise<string[]> {
   return transformerPathsForJestSubsteps(picked);
 }
 
+export async function confirmDryRunFromPrompt(): Promise<boolean> {
+  const value = await confirm({
+    message: 'Dry run (do not write changes to disk)?',
+    initialValue: false,
+  });
+
+  if (isCancel(value)) {
+    exitCancel();
+  }
+
+  if (typeof value !== 'boolean') {
+    exitCancel();
+  }
+
+  return value as boolean;
+}
+
 export async function getTargetDirectoryFromPrompt(): Promise<string> {
   const pathResult = await pathPrompt({
     message: 'Which directory should the codemods run on?',
     directory: true,
     root: process.cwd(),
+    initialValue: '.',
   });
 
   assertClackSubmittedString(pathResult);

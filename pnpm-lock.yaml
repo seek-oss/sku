@@ -666,6 +666,9 @@ importers:
 
   fixtures/ssr-hello-world:
     dependencies:
+      '@sku-lib/vite':
+        specifier: workspace:*
+        version: link:../../packages/vite
       express:
         specifier: ^4.16.3
         version: 4.22.1

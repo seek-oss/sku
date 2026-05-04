@@ -8,6 +8,7 @@
     "start:vite": "sku start-ssr --config=sku-start-vite.config.ts"
   },
   "dependencies": {
+    "@sku-lib/vite": "workspace:*",
     "express": "^4.16.3",
     "react": "catalog:",
     "react-dom": "catalog:"

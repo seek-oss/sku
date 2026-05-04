@@ -1,11 +1,8 @@
-import { renderToString } from 'react-dom/server';
-// import type { Server } from 'sku';
-
 import App from './App';
 
 export default () => ({
-  renderApp: ({ SkuProvider }) =>
-    renderToString(
+  renderApp: ({ SkuProvider, renderToStringAsync }) =>
+    renderToStringAsync(
       <SkuProvider>
         <App />
       </SkuProvider>,
@@ -30,8 +27,12 @@ export default () => ({
   `,
 
   onStart: async () => {
-    // if (process.env.NODE_ENV === 'production') {
     console.log('Server ran the onStart callback');
-    // }
   },
+  middleware: [
+    (req, _res, next) => {
+      console.log('Middleware ran for', req.url);
+      next();
+    },
+  ],
 });

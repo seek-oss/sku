@@ -13,6 +13,7 @@ import express from 'express';
 import type { ReactNode, JSX } from 'react';
 import { LoadableProvider } from '@sku-lib/vite/loadable';
 import { Collector } from '@sku-lib/vite/collector';
+import { renderToStringAsync } from '../webpack/entry/render/render-to-string.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
@@ -132,6 +133,7 @@ export const viteService = {
 
       const appHtml = await renderApp({
         SkuProvider,
+        renderToStringAsync,
       });
 
       // 5. Inject the app-rendered HTML into the template.

@@ -49,12 +49,12 @@ const interactiveRootOptions = () =>
     hint: c.description,
   }));
 
-const resolveCodemodUrl = (slug: CodemodName | string) =>
+const resolveCodemodUrl = (slug: CodemodName) =>
   import.meta.resolve(`@sku-lib/codemod/codemods/${slug}`);
 
 /** Canonical-order paths for granular jest-to-vitest steps; appends imports when needed. */
 export const transformerPathsForJestSubsteps = (
-  selectedSlugs: readonly string[],
+  selectedSlugs: readonly CodemodName[],
 ): string[] => {
   const selected = new Set(selectedSlugs);
   let ordered = JEST_TO_VITEST_STEP_SLUGS.filter((s) => selected.has(s));
@@ -74,11 +74,20 @@ const exitCancel = (): never => {
   process.exit(1);
 };
 
+/** Clack prompts return `string | symbol`; cancel uses a symbol sentinel. */
+function assertClackSubmittedString(
+  value: string | symbol,
+): asserts value is string {
+  if (typeof value !== 'string') {
+    exitCancel();
+  }
+}
+
 const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
-  const rootChoice = await select({
+  const rootChoice = (await select({
     message: 'Which transform would you like to apply?',
     options: interactiveRootOptions(),
-  });
+  })) as CodemodName;
 
   if (isCancel(rootChoice)) {
     exitCancel();
@@ -113,7 +122,7 @@ const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
     return [resolveCodemodUrl('jest-to-vitest')];
   }
 
-  const picked = await multiselect({
+  const picked = (await multiselect({
     message: 'Select steps (runs in canonical order, not selection order)',
     options: JEST_TO_VITEST_STEP_SLUGS.map((slug) => ({
       value: slug,
@@ -121,7 +130,7 @@ const chooseInteractiveTransformerPaths = async (): Promise<string[]> => {
       hint: codemodMeta(slug),
     })),
     required: true,
-  });
+  })) as CodemodName[];
 
   if (isCancel(picked)) {
     exitCancel();
@@ -134,13 +143,11 @@ const getPathFromPrompt = async (): Promise<string> => {
   const pathResult = await pathPrompt({
     message: 'Which directory should the codemods run on?',
     directory: true,
+    root: process.cwd(),
     initialValue: '.',
   });
 
-  if (isCancel(pathResult)) {
-    exitCancel();
-  }
-
+  assertClackSubmittedString(pathResult);
   return pathResult;
 };
 
@@ -161,12 +168,13 @@ export const runTransform = async (
   }
 
   if (transform) {
-    if (!CODEMODS.find((codemod) => codemod.value === transform)) {
+    const codemod = CODEMODS.find((c) => c.value === transform);
+    if (!codemod) {
       console.error('Invalid transform choice, pick one of:');
-      console.error(CODEMODS.map((codemod) => `- ${codemod.value}`).join('\n'));
+      console.error(CODEMODS.map((c) => `- ${c.value}`).join('\n'));
       process.exit(1);
     }
-    transformerPaths = [resolveCodemodUrl(transform)];
+    transformerPaths = [resolveCodemodUrl(codemod.value)];
   } else {
     intro('sku codemod');
     showClackOutro = true;

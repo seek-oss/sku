@@ -1,13 +1,21 @@
 import { glob } from 'tinyglobby';
-import prompts from 'prompts';
+import { intro, outro, spinner } from '@clack/prompts';
 import { join } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
 import debug from 'debug';
+import {
+  chooseInteractiveTransformerPaths,
+  confirmDryRunFromPrompt,
+  getTargetDirectoryFromPrompt,
+  resolveCodemodModule,
+} from './interactive-selection.js';
 
 const log = debug('sku:codemod');
+
+export { transformerPathsForJestSubsteps } from './interactive-selection.js';
 
 type Options = {
   dry?: boolean;
@@ -15,43 +23,11 @@ type Options = {
 };
 
 export type JobWorkerData = {
-  transformerPath: string;
+  transformerPaths: string[];
   options: Options;
   jobs: Array<{
     filePath: string;
   }>;
-};
-
-const getTransformerFromPrompt = async (): Promise<string> => {
-  const res = await prompts(
-    {
-      type: 'select',
-      name: 'transformer',
-      message: 'Which transform would you like to apply?',
-      choices: CODEMODS.reverse().map(({ description, value }) => ({
-        title: value,
-        description,
-        value,
-      })),
-    },
-    { onCancel: () => process.exit(1) },
-  );
-
-  return res.transformer;
-};
-
-const getPathFromPrompt = async (): Promise<string> => {
-  const res = await prompts(
-    {
-      type: 'text',
-      name: 'path',
-      message: 'On which files or directory should the codemods be applied?',
-      initial: '.',
-    },
-    { onCancel: () => process.exit(1) },
-  );
-
-  return res.path;
 };
 
 export const runTransform = async (
@@ -59,7 +35,33 @@ export const runTransform = async (
   _path: string,
   options: Options,
 ): Promise<void> => {
-  if (options.dry) {
+  let transformerPaths: string[];
+  let showClackOutro = false;
+
+  if (transform) {
+    const codemod = CODEMODS.find((c) => c.value === transform);
+    if (!codemod) {
+      console.error('Invalid transform choice, pick one of:');
+      console.error(CODEMODS.map((c) => `- ${c.value}`).join('\n'));
+      process.exit(1);
+    }
+    transformerPaths = [resolveCodemodModule(codemod.value)];
+  } else {
+    intro('sku codemod');
+    showClackOutro = true;
+    transformerPaths = await chooseInteractiveTransformerPaths();
+  }
+
+  const path = _path || (await getTargetDirectoryFromPrompt());
+
+  let dry = options.dry === true;
+  if (showClackOutro && options.dry !== true) {
+    dry = await confirmDryRunFromPrompt();
+  }
+
+  const runOptions: Options = { ...options, dry };
+
+  if (runOptions.dry) {
     console.log(
       picocolors.yellowBright(
         picocolors.bold('Running in dry mode, no files will be modified.'),
@@ -67,25 +69,15 @@ export const runTransform = async (
     );
   }
 
-  const transformer = transform || (await getTransformerFromPrompt());
-  const path = _path || (await getPathFromPrompt());
-
-  if (transform && !CODEMODS.find((codemod) => codemod.value === transform)) {
-    console.error('Invalid transform choice, pick one of:');
-    console.error(CODEMODS.map((codemod) => `- ${codemod.value}`).join('\n'));
-    process.exit(1);
-  }
-
   const filesExpanded = await getAllFiles(path);
 
   if (!filesExpanded.length) {
     console.log(`No files found matching "${path}"`);
-    return;
+    if (showClackOutro) {
+      outro('No matching files.');
+    }
+    process.exit(0);
   }
-
-  const transformerPath = import.meta.resolve(
-    `@sku-lib/codemod/codemods/${transformer}`,
-  );
 
   const cpus =
     os.cpus().length > filesExpanded.length
@@ -93,20 +85,39 @@ export const runTransform = async (
       : os.cpus().length;
   const chunkSize = Math.ceil(filesExpanded.length / cpus);
 
-  const outcomes: JobOutcome[] = await Promise.all(
-    Array.from({ length: cpus }, (_, i) => {
-      log(`Starting worker ${i + 1} of ${cpus}`);
-      return runJobs({
-        transformerPath,
-        options,
-        jobs: filesExpanded
-          .slice(i * chunkSize, (i + 1) * chunkSize)
-          .map((filePath) => ({
-            filePath,
-          })),
-      });
-    }),
-  );
+  // Spinner captures stdout; dry run and --print stream diffs from workers.
+  const useSpinner = !runOptions.dry && !runOptions.print;
+  const s = spinner();
+  if (useSpinner) {
+    s.start('Running transforms…');
+  } else {
+    console.log('Running transforms…');
+  }
+
+  let outcomes: JobOutcome[];
+
+  try {
+    outcomes = await Promise.all(
+      Array.from({ length: cpus }, (_, i) => {
+        log(`Starting worker ${i + 1} of ${cpus}`);
+        return runJobs({
+          transformerPaths,
+          options: runOptions,
+          jobs: filesExpanded
+            .slice(i * chunkSize, (i + 1) * chunkSize)
+            .map((filePath) => ({
+              filePath,
+            })),
+        });
+      }),
+    );
+  } finally {
+    if (useSpinner) {
+      s.stop('Transforms finished.');
+    } else {
+      console.log('Transforms finished.');
+    }
+  }
 
   const finalOutcome = outcomes.reduce(
     (acc, outcome) => {
@@ -117,7 +128,7 @@ export const runTransform = async (
   );
 
   console.log(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
-  if (options.dry) {
+  if (runOptions.dry) {
     console.log(
       picocolors.yellow(
         `${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
@@ -134,6 +145,10 @@ export const runTransform = async (
         `Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`,
       ),
     );
+  }
+
+  if (showClackOutro) {
+    outro('Done.');
   }
 
   process.exit(0);

@@ -55,7 +55,7 @@ export const exitCancel = (): never => {
   process.exit(1);
 };
 
-/** Clack prompts return `string | symbol`; cancel uses a symbol sentinel. */
+/** Clack prompts return `string | symbol`; cancel uses a symbol. */
 function assertClackSubmittedString(
   value: string | symbol,
 ): asserts value is string {
@@ -125,7 +125,6 @@ export async function getTargetDirectoryFromPrompt(): Promise<string> {
     message: 'Which directory should the codemods run on?',
     directory: true,
     root: process.cwd(),
-    initialValue: '.',
   });
 
   assertClackSubmittedString(pathResult);

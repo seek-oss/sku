@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-const mockSelect = vi.hoisted(() => vi.fn());
-const mockMultiselect = vi.hoisted(() => vi.fn());
-const mockPath = vi.hoisted(() => vi.fn());
+import { select, multiselect, path } from '@clack/prompts';
 
 vi.mock('@clack/prompts', async () => {
   const mod =
     await vi.importActual<typeof import('@clack/prompts')>('@clack/prompts');
   return {
     ...mod,
-    select: mockSelect,
-    multiselect: mockMultiselect,
-    path: mockPath,
+    select: vi.fn(),
+    multiselect: vi.fn(),
+    path: vi.fn(),
   };
 });
+
+const mockSelect = vi.mocked(select);
+const mockMultiselect = vi.mocked(multiselect);
+const mockPath = vi.mocked(path);
 
 import {
   chooseInteractiveTransformerPaths,
@@ -74,9 +76,7 @@ describe('transformerPathsForJestSubsteps', () => {
 
 describe('chooseInteractiveTransformerPaths (mocked Clack)', () => {
   beforeEach(() => {
-    mockSelect.mockReset();
-    mockMultiselect.mockReset();
-    mockPath.mockReset();
+    vi.resetAllMocks();
   });
 
   it('returns one module URL when user picks a non-jest root codemod', async () => {

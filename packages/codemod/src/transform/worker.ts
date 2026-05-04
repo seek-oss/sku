@@ -42,7 +42,7 @@ await Promise.all(
         current,
         undefined,
         undefined,
-        { ignoreNewlineAtEof: true, context: 3 },
+        { context: 3 },
       ).trim();
       console.log(
         `${picocolors.bold('[TRANSFORM FILE]')}: ${filePath} \n${picocolors.bold('[DIFF]')}:\n${diff}\n`,

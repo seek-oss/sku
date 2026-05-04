@@ -111,7 +111,18 @@ describe('chooseInteractiveTransformerPaths (mocked Clack)', () => {
       'jest-to-vitest-hooks.mjs',
       'jest-to-vitest-imports.mjs',
     ]);
-    expect(mockMultiselect).toHaveBeenCalledTimes(1);
+    expect(mockMultiselect).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: 'Select steps',
+        options: expect.arrayContaining([
+          expect.objectContaining({
+            value: 'jest-to-vitest-hooks',
+            label: 'hooks',
+          }),
+        ]),
+        required: true,
+      }),
+    );
   });
 });
 

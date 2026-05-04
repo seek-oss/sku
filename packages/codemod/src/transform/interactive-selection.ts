@@ -12,9 +12,16 @@ import {
 } from '../utils/constants.js';
 
 const JEST_IMPORTS_SLUG = 'jest-to-vitest-imports' satisfies CodemodName;
+const JEST_PIPELINE_STEP_PREFIX = 'jest-to-vitest-';
 
 const codemodMeta = (slug: CodemodName) =>
   CODEMODS.find((c) => c.value === slug)?.description ?? slug;
+
+/** Shorter Clack labels inside the Jest → Vitest step picker (value stays the full slug). */
+const jestPipelineStepLabel = (slug: CodemodName): string =>
+  slug.startsWith(JEST_PIPELINE_STEP_PREFIX)
+    ? slug.slice(JEST_PIPELINE_STEP_PREFIX.length)
+    : slug;
 
 /** Slugs shown at the top-level interactive prompt (no granular jest-* substeps). */
 export function getInteractiveRootCodemodSlugs(): CodemodName[] {
@@ -108,7 +115,7 @@ export async function chooseInteractiveTransformerPaths(): Promise<string[]> {
     message: 'Select steps (runs in canonical order, not selection order)',
     options: JEST_TO_VITEST_STEP_SLUGS.map((slug) => ({
       value: slug,
-      label: slug,
+      label: jestPipelineStepLabel(slug),
       hint: codemodMeta(slug),
     })),
     required: true,

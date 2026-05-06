@@ -76,6 +76,7 @@ export const createConfig = (
           handler: skuContext.paths.serverEntry,
           format: 'node',
         },
+        serverDir: './',
       }),
       react(),
       babel({

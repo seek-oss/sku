@@ -15,6 +15,8 @@ import { LoadableProvider } from '@sku-lib/vite/loadable';
 import { Collector } from '@sku-lib/vite/collector';
 import { renderToStringAsync } from '../webpack/entry/render/render-to-string.js';
 
+const APP_OUTLET = '<!--ssr-outlet-->';
+
 export const viteService = {
   build: async (skuContext: SkuContext) => {
     const outDir = createOutDir(skuContext.paths.target);
@@ -92,7 +94,12 @@ export const viteService = {
       await serverEnvironment.runner.import(skuContext.paths.serverEntry)
     ).default() as any;
 
-    const { renderApp, renderDocument, onStart, middleware } = serverEntry;
+    const {
+      renderApp,
+      onStart,
+      middleware,
+      // renderDocument - not used in this approach
+    } = serverEntry;
 
     app.use(viteServer.middlewares);
     if (middleware) {
@@ -103,18 +110,14 @@ export const viteService = {
       const url = req.originalUrl;
 
       // 1. Read index.html
-      let template = renderDocument({
-        getBodyTags: () =>
-          [
-            `<script type="module" src="${skuContext.paths.clientEntry}"></script>`,
-          ].join('\n'),
-        getHeadTags: () => [].join('\n'),
-      });
-
-      // 2. Apply Vite HTML transforms. This injects the Vite HMR client,
-      //    and also applies HTML transforms from Vite plugins, e.g. global
-      //    preambles from @vitejs/plugin-react
-      template = await viteServer.transformIndexHtml(url, template);
+      // let template = renderDocument({
+      //   getBodyTags: () =>
+      //     [
+      //       `<script type="module" src="${skuContext.paths.clientEntry}"></script>`,
+      //     ].join('\n'),
+      //   getHeadTags: () => [].join('\n'),
+      //   getAppOutlet: () => APP_OUTLET,
+      // });
 
       const loadableCollector = new Collector({});
 
@@ -134,13 +137,22 @@ export const viteService = {
       const appHtml = await renderApp({
         SkuProvider,
         renderToStringAsync,
+        BodyTags: () => (
+          <script type="module" src={skuContext.paths.clientEntry} />
+        ),
+        HeadTags: () => <></>,
       });
 
+      // 2. Apply Vite HTML transforms. This injects the Vite HMR client,
+      //    and also applies HTML transforms from Vite plugins, e.g. global
+      //    preambles from @vitejs/plugin-react
+      const template = await viteServer.transformIndexHtml(url, appHtml);
+
       // 5. Inject the app-rendered HTML into the template.
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      // const html = template.replace(APP_OUTLET, appHtml);
 
       // 6. Send the rendered HTML back.
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
     });
 
     app.listen(skuContext.port.server, () => {

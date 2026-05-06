@@ -1,7 +1,6 @@
 import { workerData, parentPort } from 'node:worker_threads';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createTwoFilesPatch } from 'diff';
-import picocolors from 'picocolors';
 import type { JobWorkerData } from './runner.js';
 import type { Transform } from '../utils/types.js';
 
@@ -31,6 +30,10 @@ await Promise.all(
     }
 
     if (current === source) {
+      parentPort?.postMessage({
+        type: 'PROGRESS',
+        data: { filePath, changed: false },
+      });
       return;
     }
 
@@ -45,9 +48,10 @@ await Promise.all(
         undefined,
         { context: 3 },
       ).trim();
-      console.log(
-        `${picocolors.bold('[TRANSFORM FILE]')}: ${filePath} \n${picocolors.bold('[DIFF]')}:\n${diff}\n`,
-      );
+      parentPort?.postMessage({
+        type: 'DIFF',
+        data: { filePath, diff },
+      });
     }
 
     if (!options.dry) {
@@ -55,6 +59,10 @@ await Promise.all(
     }
 
     filesChanged++;
+    parentPort?.postMessage({
+      type: 'PROGRESS',
+      data: { filePath, changed: true },
+    });
   }),
 );
 

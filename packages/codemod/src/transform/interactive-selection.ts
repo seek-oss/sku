@@ -17,13 +17,11 @@ const JEST_PIPELINE_STEP_PREFIX = 'jest-to-vitest-';
 const codemodMeta = (slug: CodemodName) =>
   CODEMODS.find((c) => c.value === slug)?.description ?? slug;
 
-/** Shorter Clack labels inside the Jest → Vitest step picker (value stays the full slug). */
 const jestPipelineStepLabel = (slug: CodemodName): string =>
   slug.startsWith(JEST_PIPELINE_STEP_PREFIX)
     ? slug.slice(JEST_PIPELINE_STEP_PREFIX.length)
     : slug;
 
-/** Slugs shown at the top-level interactive prompt (no granular jest-* substeps). */
 export function getInteractiveRootCodemodSlugs(): CodemodName[] {
   return CODEMODS.filter(
     (c) =>

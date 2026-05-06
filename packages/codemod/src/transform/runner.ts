@@ -1,6 +1,6 @@
 import { glob } from 'tinyglobby';
-import { intro, outro, spinner } from '@clack/prompts';
-import { join } from 'node:path';
+import { intro, log, outro, stream, taskLog } from '@clack/prompts';
+import { join, relative } from 'node:path';
 import { CODEMODS } from '../utils/constants.js';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
@@ -13,7 +13,7 @@ import {
   resolveCodemodModule,
 } from './interactive-selection.js';
 
-const log = debug('sku:codemod');
+const debugLog = debug('sku:codemod');
 
 export { transformerPathsForJestSubsteps } from './interactive-selection.js';
 
@@ -30,6 +30,18 @@ export type JobWorkerData = {
   }>;
 };
 
+type WorkerProgress = { filePath: string; changed: boolean };
+type WorkerDiff = { filePath: string; diff: string };
+type WorkerMessage =
+  | { type: 'PROGRESS'; data: WorkerProgress }
+  | { type: 'DIFF'; data: WorkerDiff }
+  | { type: 'FINISHED'; data: JobOutcome };
+
+type WorkerHandlers = {
+  onProgress?: (data: WorkerProgress) => void;
+  onDiff?: (data: WorkerDiff) => void;
+};
+
 export const runTransform = async (
   transform: string,
   _path: string,
@@ -41,8 +53,12 @@ export const runTransform = async (
   if (transform) {
     const codemod = CODEMODS.find((c) => c.value === transform);
     if (!codemod) {
-      console.error('Invalid transform choice, pick one of:');
-      console.error(CODEMODS.map((c) => `- ${c.value}`).join('\n'));
+      log.error(
+        [
+          'Invalid transform choice, pick one of:',
+          ...CODEMODS.map((c) => `- ${c.value}`),
+        ].join('\n'),
+      );
       process.exit(1);
     }
     transformerPaths = [resolveCodemodModule(codemod.value)];
@@ -62,17 +78,13 @@ export const runTransform = async (
   const runOptions: Options = { ...options, dry };
 
   if (runOptions.dry) {
-    console.log(
-      picocolors.yellowBright(
-        picocolors.bold('Running in dry mode, no files will be modified.'),
-      ),
-    );
+    log.warn('Running in dry mode, no files will be modified.');
   }
 
   const filesExpanded = await getAllFiles(path);
 
   if (!filesExpanded.length) {
-    console.log(`No files found matching "${path}"`);
+    log.warn(`No files found matching "${path}"`);
     if (showClackOutro) {
       outro('No matching files.');
     }
@@ -85,37 +97,63 @@ export const runTransform = async (
       : os.cpus().length;
   const chunkSize = Math.ceil(filesExpanded.length / cpus);
 
-  // Spinner captures stdout; dry run and --print stream diffs from workers.
-  const useSpinner = !runOptions.dry && !runOptions.print;
-  const s = spinner();
-  if (useSpinner) {
-    s.start('Running transforms…');
-  } else {
-    console.log('Running transforms…');
+  // taskLog gives a rolling per-file log that clears on success.
+  // In dry/print mode the diffs are the focus, so we skip the rolling progress
+  // and let stream.message render each diff as it arrives instead.
+  const showProgress = !runOptions.dry && !runOptions.print;
+  const tlog = showProgress
+    ? taskLog({ title: 'Running transforms…', limit: 6 })
+    : null;
+  if (!tlog) {
+    log.step('Running transforms…');
   }
+
+  // Diffs from parallel workers are funnelled through one promise chain so
+  // their byte streams don't interleave under the same log entry.
+  let diffChain: Promise<void> = Promise.resolve();
+
+  const onProgress = (data: WorkerProgress) => {
+    if (!tlog) {
+      return;
+    }
+    const relPath = relative(process.cwd(), data.filePath) || data.filePath;
+    const marker = data.changed ? picocolors.green('✓') : picocolors.dim('·');
+    tlog.message(`${marker} ${relPath}`);
+  };
+
+  const onDiff = (data: WorkerDiff) => {
+    const relPath = relative(process.cwd(), data.filePath) || data.filePath;
+    diffChain = diffChain.then(() =>
+      stream.message(diffChunks(relPath, data.diff)),
+    );
+  };
 
   let outcomes: JobOutcome[];
 
   try {
     outcomes = await Promise.all(
       Array.from({ length: cpus }, (_, i) => {
-        log(`Starting worker ${i + 1} of ${cpus}`);
-        return runJobs({
-          transformerPaths,
-          options: runOptions,
-          jobs: filesExpanded
-            .slice(i * chunkSize, (i + 1) * chunkSize)
-            .map((filePath) => ({
-              filePath,
-            })),
-        });
+        debugLog(`Starting worker ${i + 1} of ${cpus}`);
+        return runJobs(
+          {
+            transformerPaths,
+            options: runOptions,
+            jobs: filesExpanded
+              .slice(i * chunkSize, (i + 1) * chunkSize)
+              .map((filePath) => ({
+                filePath,
+              })),
+          },
+          { onProgress, onDiff },
+        );
       }),
     );
+    await diffChain;
   } finally {
-    if (useSpinner) {
-      s.stop('Transforms finished.');
+    if (tlog) {
+      tlog.success('Transforms finished.');
     } else {
-      console.log('Transforms finished.');
+      log.success('Transforms finished.');
     }
   }
 
@@ -127,24 +165,16 @@ export const runTransform = async (
     { filesChanged: 0 },
   );
 
-  console.log(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
+  log.info(`Files parsed: ${picocolors.bold(filesExpanded.length)}`);
   if (runOptions.dry) {
-    console.log(
-      picocolors.yellow(
-        `${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
-      ),
+    log.warn(
+      `${picocolors.bold(finalOutcome.filesChanged)} files found that would be changed.`,
     );
   } else {
-    console.log(
-      picocolors.yellowBright(
-        `Unchanged files: ${picocolors.bold(filesExpanded.length - finalOutcome.filesChanged)}`,
-      ),
+    log.info(
+      `Unchanged files: ${picocolors.bold(filesExpanded.length - finalOutcome.filesChanged)}`,
     );
-    console.log(
-      picocolors.greenBright(
-        `Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`,
-      ),
-    );
+    log.success(`Changed files: ${picocolors.bold(finalOutcome.filesChanged)}`);
   }
 
   if (showClackOutro) {
@@ -165,7 +195,22 @@ type JobOutcome = {
   filesChanged: number;
 };
 
-const runJobs = (jobs: JobWorkerData): Promise<JobOutcome> => {
+/**
+ * One stream.message chunk per file: clack renders each yielded chunk as a
+ * paragraph under the bar, so we batch the whole diff into a single yield to
+ * keep the diff visually contiguous.
+ */
+async function* diffChunks(
+  filePath: string,
+  diff: string,
+): AsyncIterable<string> {
+  yield `${picocolors.bold(filePath)}\n${diff}`;
+}
+
+const runJobs = (
+  jobs: JobWorkerData,
+  handlers: WorkerHandlers,
+): Promise<JobOutcome> => {
   const workerPath = import.meta.resolve('@sku-lib/codemod/transform/worker');
   const worker = new Worker(new URL(workerPath), {
     workerData: jobs,
@@ -178,9 +223,13 @@ const runJobs = (jobs: JobWorkerData): Promise<JobOutcome> => {
       filesChanged: 0,
     };
 
-    worker.on('message', (message) => {
+    worker.on('message', (message: WorkerMessage) => {
       if (message.type === 'FINISHED') {
         jobOutcome = message.data;
+      } else if (message.type === 'PROGRESS') {
+        handlers.onProgress?.(message.data);
+      } else if (message.type === 'DIFF') {
+        handlers.onDiff?.(message.data);
       }
     });
 

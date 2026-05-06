@@ -10,13 +10,14 @@
     "start:vite": "sku start-ssr --config=sku-start-vite.config.ts"
   },
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^5.2.1",
     "nitro": "3.0.260311-beta",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",
+    "@types/express": "^5.0.6",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",

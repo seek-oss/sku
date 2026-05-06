@@ -72,7 +72,10 @@ export const createConfig = (
         apply: 'build',
       }),
       nitro({
-        serverEntry: skuContext.paths.serverEntry,
+        serverEntry: {
+          handler: skuContext.paths.serverEntry,
+          format: 'node',
+        },
       }),
       react(),
       babel({

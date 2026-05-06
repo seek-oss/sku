@@ -2,5 +2,6 @@
 '@sku-lib/codemod': minor
 ---
 
-- Split jest-to-vitest codemods into individual modules for better organization.
-- Transition interactive menu implementation to Clack for improved user interaction.
+Enable interactive selection of individual `jest-to-vitest` codemods.
+
+Previously all `jest-to-vitest` codemods had to be applied, now individual codemods can be applied as necessary.

@@ -8,11 +8,11 @@ import {
 describe('getInteractiveRootCodemodSlugs', () => {
   it('includes orchestrator and family slugs but not granular jest substeps', () => {
     const slugs = getInteractiveRootCodemodSlugs();
-    expect(slugs).toContain('jest-to-vitest');
-    expect(slugs).toContain('transform-vite-loadable');
-    expect(slugs).toContain('svg-import-query-param');
-    expect(slugs).not.toContain('jest-to-vitest-hooks');
-    expect(slugs).not.toContain('jest-to-vitest-imports');
+    expect(slugs).toStrictEqual([
+      'transform-vite-loadable',
+      'jest-to-vitest',
+      'svg-import-query-param',
+    ]);
   });
 });
 

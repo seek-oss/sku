@@ -1,48 +1,68 @@
 import { workerData, parentPort } from 'node:worker_threads';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createTwoFilesPatch } from 'diff';
-import picocolors from 'picocolors';
 import type { JobWorkerData } from './runner.js';
 import type { Transform } from '../utils/types.js';
 
-const { transformerPath, jobs, options } = workerData as JobWorkerData;
+const { transformerPaths, jobs, options } = workerData as JobWorkerData;
 
-const { transform } = (await import(transformerPath)) as {
-  transform: Transform;
-};
+const transforms = await Promise.all(
+  transformerPaths.map(async (transformerPath) => {
+    const { transform } = (await import(transformerPath)) as {
+      transform: Transform;
+    };
+    return transform;
+  }),
+);
 
 let filesChanged = 0;
 
 await Promise.all(
   jobs.map(async ({ filePath }: { filePath: string }) => {
     const source = await readFile(filePath, 'utf-8');
-    const output = await transform(source);
+    let current = source;
 
-    if (!output) {
+    for (const transform of transforms) {
+      const next = await transform(current);
+      if (next !== null) {
+        current = next;
+      }
+    }
+
+    if (current === source) {
+      parentPort?.postMessage({
+        type: 'PROGRESS',
+        data: { filePath, changed: false },
+      });
       return;
     }
 
-    if (options.print) {
+    const showDiff = options.print === true || options.dry === true;
+    if (showDiff) {
       const diff = createTwoFilesPatch(
         'source',
         'output',
         source,
-        output,
+        current,
         undefined,
         undefined,
-        { ignoreNewlineAtEof: true, context: 3 },
+        { context: 3 },
       ).trim();
-      console.log(
-        `${picocolors.bold('[TRANSFORM FILE]')}: ${filePath} \n${picocolors.bold('[DIFF]')}:\n${diff}\n`,
-      );
+      parentPort?.postMessage({
+        type: 'DIFF',
+        data: { filePath, diff },
+      });
     }
 
     if (!options.dry) {
-      await writeFile(filePath, output);
-      if (source !== output) {
-        filesChanged++;
-      }
+      await writeFile(filePath, current);
     }
+
+    filesChanged++;
+    parentPort?.postMessage({
+      type: 'PROGRESS',
+      data: { filePath, changed: true },
+    });
   }),
 );
 

@@ -22,7 +22,7 @@ describe('transformerPathsForJestSubsteps', () => {
       'jest-to-vitest-hooks',
       'jest-to-vitest-mock-types',
     ]);
-    expect(paths.map((u) => u.split('/').pop())).toEqual([
+    expect(paths.map((u) => u.split('/').pop())).toStrictEqual([
       'jest-to-vitest-mock-types.mjs',
       'jest-to-vitest-hooks.mjs',
       'jest-to-vitest-imports.mjs',
@@ -31,9 +31,10 @@ describe('transformerPathsForJestSubsteps', () => {
 
   it('appends imports when another step is selected but imports is not', () => {
     const paths = transformerPathsForJestSubsteps(['jest-to-vitest-hooks']);
-    expect(paths).toHaveLength(2);
-    expect(paths[0]).toContain('jest-to-vitest-hooks');
-    expect(paths[1]).toContain('jest-to-vitest-imports');
+    expect(paths.map((u) => u.split('/').pop())).toStrictEqual([
+      'jest-to-vitest-hooks.mjs',
+      'jest-to-vitest-imports.mjs',
+    ]);
   });
 
   it('does not duplicate imports when already selected', () => {
@@ -41,8 +42,7 @@ describe('transformerPathsForJestSubsteps', () => {
       'jest-to-vitest-hooks',
       'jest-to-vitest-imports',
     ]);
-    expect(paths).toHaveLength(2);
-    expect(paths.map((u) => u.split('/').pop())).toEqual([
+    expect(paths.map((u) => u.split('/').pop())).toStrictEqual([
       'jest-to-vitest-hooks.mjs',
       'jest-to-vitest-imports.mjs',
     ]);
@@ -50,7 +50,8 @@ describe('transformerPathsForJestSubsteps', () => {
 
   it('allows imports-only selection', () => {
     const paths = transformerPathsForJestSubsteps(['jest-to-vitest-imports']);
-    expect(paths).toHaveLength(1);
-    expect(paths[0]).toContain('jest-to-vitest-imports');
+    expect(paths.map((u) => u.split('/').pop())).toStrictEqual([
+      'jest-to-vitest-imports.mjs',
+    ]);
   });
 });

@@ -34,7 +34,7 @@ afterEach(async () => {
 });
 
 describe('interactive CLI', () => {
-  it('routes a non-jest codemod', async () => {
+  it('runs a non-jest codemod', async () => {
     const fixture = await makeTmpDir({
       'file.ts': ts`
         import logo from './logo.svg';

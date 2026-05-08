@@ -1205,8 +1205,8 @@ importers:
         specifier: ^4.26.2
         version: 4.28.2
       browserslist-config-seek:
-        specifier: 3.3.0
-        version: 3.3.0
+        specifier: ~3.4.1
+        version: 3.4.1
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -4823,8 +4823,8 @@ packages:
       react: ^18 || ^19
       react-dom: ^18 || ^19
 
-  browserslist-config-seek@3.3.0:
-    resolution: {integrity: sha512-k9q8Zslsl3yR790gKmdBeD3dItwIhDWlVQKJCiS8Ykg0u9wTsrvnK0aLb9Wa/AMibpUInBVr5A4aVgpo+hPFGg==}
+  browserslist-config-seek@3.4.1:
+    resolution: {integrity: sha512-gYyJQ+HOloDead/XKQkxreMDN+JQEQ8wLp7PmVSqdfYKKwddXzN2wDnpLXqXpVLegY3uh0y+8KNNj1Ip8nwjEw==}
 
   browserslist@4.28.2:
     resolution: {integrity: sha512-48xSriZYYg+8qXna9kwqjIVzuQxi+KYWp2+5nCYnYKPTr0LvD89Jqk2Or5ogxz0NUMfIjhh2lIUX/LyX9B4oIg==}
@@ -13529,7 +13529,7 @@ snapshots:
       - '@types/react'
       - babel-plugin-macros
 
-  browserslist-config-seek@3.3.0: {}
+  browserslist-config-seek@3.4.1: {}
 
   browserslist@4.28.2:
     dependencies:

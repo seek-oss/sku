@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import ts from 'dedent';
 
 const require = createRequire(import.meta.url);
-const codemodBin = require.resolve('../../bin.js');
+const codemodBin = require.resolve('../../../packages/codemod/bin.js');
 
 const renderInteractive = (cwd: string) => render(codemodBin, [], { cwd });
 

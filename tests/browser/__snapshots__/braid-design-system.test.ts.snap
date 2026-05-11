@@ -83,7 +83,6 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   border-spacing: 0;
 }
 ._1vn8e2j6 {
-  -webkit-appearance: none;
   appearance: none;
 }
 ._1vn8e2j7 {
@@ -228,7 +227,6 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
   max-width: var(--geixft14);
 }
 .ue3bfiw {
-  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 .ue3bfix {
@@ -13297,7 +13295,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 
 exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
 {
-  "2-19f5a988c0a3c6379db9.css": ._1vn8e2j0 {
+  "2-35b0fc6ee7028f604610.css": ._1vn8e2j0 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -13328,7 +13326,6 @@ exports[`braid-design-system > bundler webpack > build > should generate the exp
   border-spacing: 0;
 }
 ._1vn8e2j6 {
-  -webkit-appearance: none;
   appearance: none;
 }
 ._1vn8e2j7 {
@@ -13470,7 +13467,6 @@ exports[`braid-design-system > bundler webpack > build > should generate the exp
   max-width: var(--geixft14);
 }
 .ue3bfiw {
-  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 .ue3bfix {
@@ -16051,9 +16047,9 @@ html.ue3bfi10 ._2h9hjid {
   padding: 100px;
 }
 
-/*# sourceMappingURL=2-19f5a988c0a3c6379db9.css.map*/
+/*# sourceMappingURL=2-35b0fc6ee7028f604610.css.map*/
 ,
-  "2-19f5a988c0a3c6379db9.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-35b0fc6ee7028f604610.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "async_hooks",
   "crypto",
@@ -16074,7 +16070,7 @@ html.ue3bfi10 ._2h9hjid {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-19f5a988c0a3c6379db9.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-35b0fc6ee7028f604610.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16104,7 +16100,7 @@ html.ue3bfi10 ._2h9hjid {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-19f5a988c0a3c6379db9.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-35b0fc6ee7028f604610.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16145,7 +16141,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-19f5a988c0a3c6379db9.css"
+       href="/2-35b0fc6ee7028f604610.css"
      >
      <link
        data-chunk="main"
@@ -16353,7 +16349,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-19f5a988c0a3c6379db9.css"
+       href="/2-35b0fc6ee7028f604610.css"
      >
      <link
        data-chunk="main"

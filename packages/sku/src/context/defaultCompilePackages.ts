@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
 import { createRequire } from 'node:module';
-import { existsSync } from 'node:fs';
+import { existsSync, opendirSync } from 'node:fs';
 
 import {
   toPosixPath,
@@ -26,10 +26,40 @@ const seekDependencyGlob = '**/@seek/*/package.json';
 const makePnpmVirtualStorePath = (_rootDir: string) =>
   path.join(toPosixPath(_rootDir), 'node_modules/.pnpm');
 
+const allPnpmDependenciesAreHoisted = ({
+  pnpmVirtualStorePath,
+}: {
+  pnpmVirtualStorePath: string;
+}) => {
+  const dir = opendirSync(pnpmVirtualStorePath);
+  let count = 0;
+
+  try {
+    while (dir.readSync() !== null) {
+      count++;
+
+      // PNPM repos will always have a `lock.yaml` file inside `node_modules/.pnpm`, even if all
+      // dependencies are hoisted. If there is more than 1 file inside `node_modules/.pnpm`, then we
+      // at least know dependencies are not fully hoisted, but they may still be partially hoisted.
+      if (count > 1) {
+        return false;
+      }
+    }
+  } finally {
+    // Directory handle must be closed manually when using the sync API
+    dir.closeSync();
+  }
+
+  return true;
+};
+
 const buildCrawler = ({ rootDir: _rootDir }: { rootDir: string }) => {
   const pnpmVirtualStorePath = makePnpmVirtualStorePath(_rootDir);
 
-  if (!existsSync(pnpmVirtualStorePath)) {
+  if (
+    !existsSync(pnpmVirtualStorePath) ||
+    allPnpmDependenciesAreHoisted({ pnpmVirtualStorePath })
+  ) {
     return new Fdir()
       .withFullPaths()
       .glob(seekDependencyGlob)

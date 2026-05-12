@@ -26,7 +26,7 @@ const seekDependencyGlob = '**/@seek/*/package.json';
 const makePnpmVirtualStorePath = (_rootDir: string) =>
   path.join(toPosixPath(_rootDir), 'node_modules/.pnpm');
 
-const allPnpmDependenciesAreHoisted = ({
+const isPnpmVirtualStorePopulated = ({
   pnpmVirtualStorePath,
 }: {
   pnpmVirtualStorePath: string;
@@ -38,11 +38,11 @@ const allPnpmDependenciesAreHoisted = ({
     while (dir.readSync() !== null) {
       count++;
 
-      // PNPM repos will always have a `lock.yaml` file inside `node_modules/.pnpm`, even if all
-      // dependencies are hoisted. If there is more than 1 file inside `node_modules/.pnpm`, then we
-      // at least know dependencies are not fully hoisted, but they may still be partially hoisted.
+      // PNPM repos will always have a `lock.yaml` file inside the virtual store, even if
+      // `nodeLinker=hoisted` is set, so we assume it's populated as long as it contains
+      // at least 2 entries
       if (count > 1) {
-        return false;
+        return true;
       }
     }
   } finally {
@@ -50,16 +50,20 @@ const allPnpmDependenciesAreHoisted = ({
     dir.closeSync();
   }
 
-  return true;
+  return false;
 };
 
 const buildCrawler = ({ rootDir: _rootDir }: { rootDir: string }) => {
   const pnpmVirtualStorePath = makePnpmVirtualStorePath(_rootDir);
 
-  if (
-    !existsSync(pnpmVirtualStorePath) ||
-    allPnpmDependenciesAreHoisted({ pnpmVirtualStorePath })
-  ) {
+  // If there is a pnpm virtual store directory and it is populated, then we should crawl it.
+  // In all other cases we can assume that either npm or yarn is in use, or `nodeLinker=hoisted` has
+  // been set, in which case we crawl only the top-level `node_modules` directory.
+  const shouldCrawlPnpmVirtualStore =
+    existsSync(pnpmVirtualStorePath) &&
+    isPnpmVirtualStorePopulated({ pnpmVirtualStorePath });
+
+  if (!shouldCrawlPnpmVirtualStore) {
     return new Fdir()
       .withFullPaths()
       .glob(seekDependencyGlob)

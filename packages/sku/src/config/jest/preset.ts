@@ -7,8 +7,7 @@ import type { Config } from 'jest';
 const { paths, rootResolution, jestDecorator } = getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
-const compilePackagesRegex = paths
-  .compilePackagesSync()
+const compilePackagesRegex = (await paths.compilePackages())
   .map((pkg) => `.*${escapeRegex(pkg)}`)
   .join('|');
 

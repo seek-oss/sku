@@ -21,10 +21,10 @@
   "homepage": "https://github.com/seek-oss/sku/packages/codemod#readme",
   "dependencies": {
     "@ast-grep/napi": "^0.42.0",
+    "@clack/prompts": "^1.0.1",
     "commander": "catalog:",
     "diff": "^8.0.2",
     "picocolors": "^1.1.1",
-    "prompts": "^2.4.2",
     "tinyglobby": "^0.2.13",
     "debug": "catalog:"
   },
@@ -32,12 +32,20 @@
     "@sku-private/tsdown": "workspace:*",
     "@types/node": "catalog:",
     "@types/debug": "catalog:",
-    "@types/prompts": "^2.4.9",
     "typescript": "~5.9.0"
   },
   "types": "./dist/index.d.mts",
   "exports": {
     "./codemods/jest-to-vitest": "./dist/codemods/jest-to-vitest.mjs",
+    "./codemods/jest-to-vitest-failing": "./dist/codemods/jest-to-vitest-failing.mjs",
+    "./codemods/jest-to-vitest-fn-generics": "./dist/codemods/jest-to-vitest-fn-generics.mjs",
+    "./codemods/jest-to-vitest-hooks": "./dist/codemods/jest-to-vitest-hooks.mjs",
+    "./codemods/jest-to-vitest-imports": "./dist/codemods/jest-to-vitest-imports.mjs",
+    "./codemods/jest-to-vitest-jest-methods": "./dist/codemods/jest-to-vitest-jest-methods.mjs",
+    "./codemods/jest-to-vitest-mock-factories": "./dist/codemods/jest-to-vitest-mock-factories.mjs",
+    "./codemods/jest-to-vitest-mock-types": "./dist/codemods/jest-to-vitest-mock-types.mjs",
+    "./codemods/jest-to-vitest-resolves-rejects-generics": "./dist/codemods/jest-to-vitest-resolves-rejects-generics.mjs",
+    "./codemods/jest-to-vitest-set-timeout": "./dist/codemods/jest-to-vitest-set-timeout.mjs",
     "./codemods/svg-import-query-param": "./dist/codemods/svg-import-query-param.mjs",
     "./codemods/transform-vite-loadable": "./dist/codemods/transform-vite-loadable.mjs",
     "./program": "./dist/program/index.mjs",

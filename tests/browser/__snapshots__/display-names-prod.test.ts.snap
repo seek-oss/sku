@@ -86,12 +86,12 @@ SOURCE HTML: <!DOCTYPE html>
 
 exports[`display-names-prod > bundler: webpack > build > should create build output 1`] = `
 {
-  "116-1467cbd7ba9633170fcc.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "116-1467cbd7ba9633170fcc.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "33-5a5d564c3f0b18cdb1cd.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "33-5a5d564c3f0b18cdb1cd.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "index.html": SCRIPTS: [
     "/runtime-62290a749f5470cb7836.js",
-    "/116-1467cbd7ba9633170fcc.js",
-    "/main-1846d542df3e3ed02d26.js",
+    "/33-5a5d564c3f0b18cdb1cd.js",
+    "/main-686fd54fef0c5ca6b5ca.js",
   ]
 CSS: []
 SOURCE HTML: <!DOCTYPE html>
@@ -205,8 +205,8 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-1846d542df3e3ed02d26.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-1846d542df3e3ed02d26.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-686fd54fef0c5ca6b5ca.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-686fd54fef0c5ca6b5ca.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-62290a749f5470cb7836.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime-62290a749f5470cb7836.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }

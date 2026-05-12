@@ -23,16 +23,12 @@ const require = createRequire(import.meta.url);
 
 const seekDependencyGlob = '**/@seek/*/package.json';
 
-const getPnpmVirtualStorePath = () => {
-  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
-  // package manager. In either case, we can't correctly detect compile packages.
-  if (!rootDir) {
-    return undefined;
-  }
-  return path.join(toPosixPath(rootDir), 'node_modules/.pnpm');
-};
+const makePnpmVirtualStorePath = (_rootDir: string) =>
+  path.join(toPosixPath(_rootDir), 'node_modules/.pnpm');
 
-const buildCrawler = (pnpmVirtualStorePath: string) => {
+const buildCrawler = ({ rootDir: _rootDir }: { rootDir: string }) => {
+  const pnpmVirtualStorePath = makePnpmVirtualStorePath(_rootDir);
+
   if (!existsSync(pnpmVirtualStorePath)) {
     return new Fdir()
       .withFullPaths()
@@ -94,16 +90,15 @@ export const detectedCompilePackagesSync = (): CompilePackagesResult => {
     return cachedResult;
   }
 
-  const pnpmVirtualStorePath = getPnpmVirtualStorePath();
-  if (!pnpmVirtualStorePath) {
+  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+  // package manager. In either case, we can't correctly detect compile packages.
+  if (!rootDir) {
     cachedResult = emptyResult;
     return cachedResult;
   }
 
   try {
-    cachedResult = reducePackagePaths(
-      buildCrawler(pnpmVirtualStorePath).sync(),
-    );
+    cachedResult = reducePackagePaths(buildCrawler({ rootDir }).sync());
   } catch (e) {
     cachedResult = handleError(e);
   }
@@ -120,8 +115,9 @@ export const detectedCompilePackages =
       return inFlight;
     }
 
-    const pnpmVirtualStorePath = getPnpmVirtualStorePath();
-    if (!pnpmVirtualStorePath) {
+    // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+    // package manager. In either case, we can't correctly detect compile packages.
+    if (!rootDir) {
       cachedResult = emptyResult;
       return cachedResult;
     }
@@ -129,7 +125,7 @@ export const detectedCompilePackages =
     inFlight = (async () => {
       try {
         return reducePackagePaths(
-          await buildCrawler(pnpmVirtualStorePath).withPromise(),
+          await buildCrawler({ rootDir }).withPromise(),
         );
       } catch (e) {
         return handleError(e);

@@ -118,7 +118,7 @@
     "babel-plugin-transform-remove-imports": "^1.7.0",
     "babel-plugin-unassert": "^3.1.0",
     "browserslist": "^4.26.2",
-    "browserslist-config-seek": "3.3.0",
+    "browserslist-config-seek": "~3.4.1",
     "chalk": "^5.3.0",
     "commander": "catalog:",
     "cross-spawn": "^7.0.6",

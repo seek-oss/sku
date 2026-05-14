@@ -80,7 +80,6 @@ exports[`sku-webpack-plugin > build > should generate the expected files 1`] = `
   border-spacing: 0;
 }
 ._1g4gxse6 {
-  -webkit-appearance: none;
   appearance: none;
 }
 ._1g4gxse7 {
@@ -222,7 +221,6 @@ exports[`sku-webpack-plugin > build > should generate the expected files 1`] = `
   max-width: var(--_1615att14);
 }
 .eph9qhw {
-  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 .eph9qhx {

@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest';
 import browserslistToEsbuild from './browserslist-to-esbuild.js';
+import browserslistConfigSeek from 'browserslist-config-seek';
 
 test('works by passing browsers as array', () => {
   const target = browserslistToEsbuild([
@@ -73,6 +74,20 @@ test('safari TP defaults to latest safari', () => {
   expect(target).toMatchInlineSnapshot(`
     [
       "safari26.4",
+    ]
+  `);
+});
+
+test('handles browserslist-config-seek', () => {
+  const target = browserslistToEsbuild(browserslistConfigSeek);
+
+  expect(target).toMatchInlineSnapshot(`
+    [
+      "chrome95",
+      "edge95",
+      "firefox98",
+      "ios15.4",
+      "safari15.4",
     ]
   `);
 });

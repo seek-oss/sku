@@ -1,5 +1,17 @@
 # @sku-lib/codemod
 
+## 1.4.0
+
+### Minor Changes
+
+- Enable interactive selection of individual `jest-to-vitest` codemods. ([#1569](https://github.com/seek-oss/sku/pull/1569))
+
+  Previously all `jest-to-vitest` codemods had to be applied, now individual codemods can be applied as necessary.
+
+### Patch Changes
+
+- Update `diff` dependency to `^9.0.0` ([#1557](https://github.com/seek-oss/sku/pull/1557))
+
 ## 1.3.0
 
 ### Minor Changes

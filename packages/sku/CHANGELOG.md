@@ -1,5 +1,31 @@
 # sku
 
+## 15.15.0
+
+### Minor Changes
+
+- Update `browserslist-config-seek` to `~3.4.1` ([#1570](https://github.com/seek-oss/sku/pull/1570))
+
+  `sku` applications and libraries now default to supporting the following browser versions:
+
+  | Browser          | Oldest supported version |
+  | ---------------- | ------------------------ |
+  | Chrome           | 95                       |
+  | Edge             | 95                       |
+  | Safari           | 15.4                     |
+  | Firefox          | 98                       |
+  | Samsung Internet | 16                       |
+
+### Patch Changes
+
+- Lazily detect compile packages ([#1563](https://github.com/seek-oss/sku/pull/1563))
+
+- `vite`: Fix the browser not opening to the right url when a fallback port it used ([#1561](https://github.com/seek-oss/sku/pull/1561))
+
+- vite: make vanilla-extract dep scan resolve path aliases for `css.ts` imports ([#1558](https://github.com/seek-oss/sku/pull/1558))
+
+- Improve performance of compile package detection ([#1563](https://github.com/seek-oss/sku/pull/1563))
+
 ## 15.14.1
 
 ### Patch Changes

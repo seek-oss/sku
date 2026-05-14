@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-speed up compilePackage check
+Improve performance of `compilePackage` check

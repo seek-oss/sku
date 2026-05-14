@@ -21,7 +21,7 @@ export function setNoExternalPlugin(skuContext: SkuContext): Plugin {
       return {
         resolve: {
           noExternal: [
-            ...skuContext.paths.compilePackages,
+            ...(await skuContext.paths.compilePackages()),
             ...ssrExternals.noExternal,
           ],
         },

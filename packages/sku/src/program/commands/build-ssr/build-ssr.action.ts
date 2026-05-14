@@ -8,7 +8,7 @@ import {
   cleanTargetDirectory,
   ensureTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
-import makeWebpackConfig from '../../../services/webpack/config/webpack.config.ssr.js';
+import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import provider from '../../../services/telemetry/index.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
@@ -41,7 +41,7 @@ export const buildSsrAction = async ({
 
   try {
     await runVocabCompile(skuContext);
-    const [clientConfig, serverConfig] = makeWebpackConfig({
+    const [clientConfig, serverConfig] = await makeWebpackConfig({
       clientPort: port.client,
       serverPort: port.server,
       stats,

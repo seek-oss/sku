@@ -7,7 +7,8 @@ import isCompilePackage from '../utils/isCompilePackage.js';
 import chalk from 'chalk';
 import {
   defaultCompilePackages,
-  detectedCompilePackageNames,
+  detectedCompilePackages,
+  detectedCompilePackagesSync,
 } from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import _debug from 'debug';
@@ -207,11 +208,24 @@ export const createSkuContext = ({
     appSkuConfigPath: appSkuConfigPath!,
     devServerMiddleware,
     src: skuConfig.srcPaths.map(getPathFromCwd),
-    compilePackages: [
-      ...detectedCompilePackageNames,
-      ...defaultCompilePackages,
-      ...skuConfig.compilePackages,
-    ],
+    async compilePackages() {
+      const { names: detectedCompilePackageNames } =
+        await detectedCompilePackages();
+      return [
+        ...detectedCompilePackageNames,
+        ...defaultCompilePackages,
+        ...skuConfig.compilePackages,
+      ];
+    },
+    compilePackagesSync() {
+      const { names: detectedCompilePackageNames } =
+        detectedCompilePackagesSync();
+      return [
+        ...detectedCompilePackageNames,
+        ...defaultCompilePackages,
+        ...skuConfig.compilePackages,
+      ];
+    },
     clientEntry: getPathFromCwd(skuConfig.clientEntry),
     renderEntry: getPathFromCwd(skuConfig.renderEntry),
     libraryEntry: skuConfig.libraryEntry

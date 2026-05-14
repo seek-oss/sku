@@ -17,7 +17,7 @@ import {
 } from '../utils/index.js';
 import {
   defaultCompilePackages,
-  detectedCompilePackagePaths,
+  detectedCompilePackagesSync,
 } from '../../../../context/defaultCompilePackages.js';
 import {
   validateOptions,
@@ -44,7 +44,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
       rootResolution: false,
       ...options,
     };
-
     // Resolve the default and user-defined compilePackages to their actual paths
     const resolvedCompilePackagePaths = [
       ...(this.options.compilePackages || []),
@@ -53,7 +52,7 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
 
     this.compilePackages = [
       ...new Set([
-        ...detectedCompilePackagePaths,
+        ...detectedCompilePackagesSync().paths,
         ...resolvedCompilePackagePaths,
       ]),
     ];

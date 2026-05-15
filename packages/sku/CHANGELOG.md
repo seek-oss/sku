@@ -1,5 +1,11 @@
 # sku
 
+## 15.15.1
+
+### Patch Changes
+
+- Fix a bug causing `compilePackages` from sku config to be ignored ([#1571](https://github.com/seek-oss/sku/pull/1571))
+
 ## 15.15.0
 
 ### Minor Changes

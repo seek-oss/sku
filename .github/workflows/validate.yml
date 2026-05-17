@@ -46,7 +46,7 @@ jobs:
 
       - name: Cache babel-loader
         id: babel-loader-cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: 'fixtures/*/node_modules/.cache/babel-loader'
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}

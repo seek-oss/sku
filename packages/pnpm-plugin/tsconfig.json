@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "lib": ["ESNext"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["pnpmfile.cjs", "pnpmfile.mjs"]
+}

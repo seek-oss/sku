@@ -11,6 +11,7 @@ describe('generatePackageJson', () => {
     await generatePackageJson(fixture.path, {
       projectName: 'my-app',
       template: 'webpack',
+      packageManager: 'npm',
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
@@ -40,6 +41,7 @@ describe('generatePackageJson', () => {
     await generatePackageJson(fixture.path, {
       projectName: 'my-vite-app',
       template: 'vite',
+      packageManager: 'npm',
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
@@ -70,6 +72,7 @@ describe('generatePackageJson', () => {
     await generatePackageJson(fixture.path, {
       projectName: '@scope/my-app',
       template: 'webpack',
+      packageManager: 'npm',
     });
 
     const packageJsonContent = await fixture.readFile('package.json', 'utf8');
@@ -86,6 +89,37 @@ describe('generatePackageJson', () => {
           "format": "sku format",
           "lint": "sku lint"
         }
+      }
+      "
+    `);
+
+    await fixture.rm();
+  });
+
+  it('should add pnpm-specific config when using pnpm', async ({ expect }) => {
+    const fixture = await createFixture({});
+
+    await generatePackageJson(fixture.path, {
+      projectName: 'my-app',
+      template: 'webpack',
+      packageManager: 'pnpm',
+    });
+
+    const packageJsonContent = await fixture.readFile('package.json', 'utf8');
+
+    expect(packageJsonContent).toMatchInlineSnapshot(`
+      "{
+        "name": "my-app",
+        "version": "1.0.0",
+        "private": true,
+        "scripts": {
+          "start": "sku start",
+          "build": "sku build",
+          "test": "sku test",
+          "format": "sku format",
+          "lint": "sku lint"
+        },
+        "packageManager": "pnpm@10.33.4"
       }
       "
     `);

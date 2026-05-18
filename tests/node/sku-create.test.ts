@@ -148,10 +148,11 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
     'README.md',
     '.prettierignore',
     'src/App/NextSteps.tsx',
+    'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
-    expect(contents).toMatchSnapshot();
+    expect(stripYamlVersions(contents)).toMatchSnapshot();
   });
 
   it('should update the pnpm-workspace.yaml', async () => {
@@ -160,7 +161,7 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
       'utf8',
     );
     const workspace = parseDocument(rootFile);
-    // Delete some of the fields that we don't care about
+    // Delete the fields that we don't care about
     workspace.delete('catalog');
     workspace.delete('packages');
     workspace.delete('linkWorkspacePackages');
@@ -195,7 +196,7 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
 function stripYamlVersions(yamlContent: string): string {
   // Replace version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED"
   return yamlContent.replace(
-    /:\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+    /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
     ': VERSION_IGNORED',
   );
 }

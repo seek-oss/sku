@@ -1,11 +1,25 @@
 {
   "name": "pnpm-plugin-sku",
   "version": "0.0.3",
-  "description": "PNPM config dependency for sku that configures recommended PNPM setting",
-  "main": "pnpmfile.cjs",
+  "description": "PNPM config dependency for sku that configures recommended PNPM settings",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./config": {
+      "import": "./dist/config.mjs",
+      "require": "./dist/config.cjs"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "pnpmfile.cjs"
+    "pnpmfile.cjs",
+    "pnpmfile.mjs"
   ],
   "repository": {
     "type": "git",
@@ -19,6 +33,6 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "devDependencies": {
-    "@pnpm/types": "^1001.0.0"
+    "@pnpm/config": "^1004.11.0"
   }
 }

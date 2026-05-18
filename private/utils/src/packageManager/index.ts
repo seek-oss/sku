@@ -15,4 +15,5 @@ export {
   getWhyCommand,
   getPackageManagerInstallPage,
   type GetAddCommandOptions,
+  type SupportedPackageManager,
 } from './packageManager.js';

@@ -6,7 +6,7 @@ import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
 import semver from 'semver';
 
-type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
+export type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 
 const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
 

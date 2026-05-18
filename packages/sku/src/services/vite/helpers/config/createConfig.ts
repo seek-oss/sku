@@ -12,6 +12,13 @@ import { skuPlugin } from '../../skuPlugin.js';
 
 const require = createRequire(import.meta.url);
 
+const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
+
+const allowedPluginsToPassThroughToVE = [
+  'sku:dangerously-set-vite-config',
+  TSCONFIG_PLUGIN_NAME,
+];
+
 export const createConfig = (
   skuContext: SkuContext,
   environment?: string,
@@ -37,8 +44,6 @@ export const createConfig = (
       require.resolve('@sku-lib/babel-plugin-display-name'),
     );
   }
-
-  const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
 
   return {
     resolve: {
@@ -81,7 +86,8 @@ export const createConfig = (
       }),
       vanillaExtractPlugin({
         // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to filter it manually.
-        unstable_pluginFilter: ({ name }) => name === TSCONFIG_PLUGIN_NAME,
+        unstable_pluginFilter: ({ name }) =>
+          allowedPluginsToPassThroughToVE.includes(name),
       }),
       /**
        * the sku plugin (only sku specific changes)

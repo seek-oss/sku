@@ -32,7 +32,7 @@ export const postinstall = async ({
 
   try {
     log('postinstall', 'running configure');
-    const skuContext = createSkuContext({});
+    const skuContext = await createSkuContext({});
     configureApp(skuContext);
   } catch (error) {
     console.error(

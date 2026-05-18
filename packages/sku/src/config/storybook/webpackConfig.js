@@ -13,7 +13,7 @@ const EXAMPLE_MDX_FILE = 'example.mdx';
  * @param {{isDevServer: boolean}}
  */
 export default async (config, { isDevServer }) => {
-  const skuContext = getSkuContext();
+  const skuContext = await getSkuContext();
   const { paths } = skuContext;
   const clientWebpackConfig = (
     await makeWebpackConfig({

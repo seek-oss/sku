@@ -11,7 +11,7 @@ export const createEslintConfig = async ({
 }: {
   configPath?: string;
 } = {}): Promise<Linter.Config[]> => {
-  const skuContext = getSkuContext({ configPath });
+  const skuContext = await getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths, testRunner } =
     skuContext;
   const { relativeTarget } = paths;

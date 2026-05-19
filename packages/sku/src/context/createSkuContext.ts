@@ -1,10 +1,10 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
+import { error, strong } from '@sku-private/utils/console';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
 import isCompilePackage from '../utils/isCompilePackage.js';
-import chalk from 'chalk';
 import {
   defaultCompilePackages,
   detectedCompilePackages,
@@ -115,8 +115,8 @@ export const createSkuContext = ({
 
   if (isCompilePackage && skuConfig.rootResolution) {
     console.log(
-      chalk.red(
-        `Error: "${chalk.bold(
+      error(
+        `Error: "${strong(
           'rootResolution',
         )}" is not safe for compile packages as consuming apps can't resolve them.`,
       ),
@@ -131,9 +131,7 @@ export const createSkuContext = ({
     ) as Array<[string, string]>) {
       if (destination.includes('node_modules')) {
         console.log(
-          chalk.red(
-            `Path alias "${chalk.bold(alias)}" cannot point to node_modules.`,
-          ),
+          error(`Path alias "${strong(alias)}" cannot point to node_modules.`),
         );
         process.exit(1);
       }

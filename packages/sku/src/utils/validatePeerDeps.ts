@@ -1,15 +1,10 @@
-import {
-  getWhyCommand,
-  isPnpm,
-  banner,
-  getPathFromCwd,
-} from '@sku-private/utils';
+import { getWhyCommand, isPnpm, getPathFromCwd } from '@sku-private/utils';
+import { accent, banner, caution, strong } from '@sku-private/utils/console';
 
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import { fdir as Fdir } from 'fdir';
 import semver from 'semver';
-import chalk from 'chalk';
 
 import provider from '../services/telemetry/index.js';
 
@@ -55,7 +50,7 @@ export const validatePeerDeps = async ({ paths }: SkuContext) => {
 
       if (resultsForPackage.length > 1) {
         const messages = [
-          `Multiple copies of ${chalk.bold(packageName)} are present in node_modules. This is likely to cause errors, but even if it works, it will probably result in an unnecessarily large bundle size.`,
+          `Multiple copies of ${strong(packageName)} are present in node_modules. This is likely to cause errors, but even if it works, it will probably result in an unnecessarily large bundle size.`,
         ];
 
         messages.push(
@@ -68,13 +63,13 @@ export const validatePeerDeps = async ({ paths }: SkuContext) => {
               return `${depLocation.replace(
                 '/package.json',
                 '',
-              )} (${chalk.bold(version)})`;
+              )} (${strong(version)})`;
             })
             .join('\n'),
         );
 
         messages.push(
-          `Try running "${chalk.blue.bold(getWhyCommand())} ${chalk.bold(packageName)}" to diagnose the issue`,
+          `Try running "${accent(getWhyCommand())} ${accent(packageName)}" to diagnose the issue`,
         );
 
         provider.count('duplicate_compile_package', {
@@ -117,13 +112,13 @@ export const validatePeerDeps = async ({ paths }: SkuContext) => {
 
           const peerIsBehind = semver.gtr(dep.version, peerVersionRange);
 
-          const errorMessage = `${chalk.bold(packageName)} expected to find ${chalk.bold(peerName)} ${chalk.yellow(peerVersionRange)} but found ${chalk.yellow(dep.version)}.`;
+          const errorMessage = `${strong(packageName)} expected to find ${strong(peerName)} ${caution(peerVersionRange)} but found ${caution(dep.version)}.`;
 
-          const peerBehindMessage = `The best way to fix this is for ${chalk.bold(packageName)} to update its peer dependency on ${chalk.bold(peerName)}.`;
+          const peerBehindMessage = `The best way to fix this is for ${strong(packageName)} to update its peer dependency on ${strong(peerName)}.`;
 
-          const peerAheadMessage = `The best way to fix this is to update your dependency on ${chalk.bold(peerName)}.`;
+          const peerAheadMessage = `The best way to fix this is to update your dependency on ${strong(peerName)}.`;
 
-          banner('warning', 'Warning: Package version mismatch', [
+          banner('caution', 'Warning: Package version mismatch', [
             errorMessage,
             peerIsBehind ? peerBehindMessage : peerAheadMessage,
           ]);

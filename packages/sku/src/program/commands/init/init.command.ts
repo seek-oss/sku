@@ -1,4 +1,4 @@
-import { banner } from '@sku-private/utils';
+import { banner } from '@sku-private/utils/console';
 import { Command } from 'commander';
 
 /**

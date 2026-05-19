@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { pull } from '@vocab/phrase';
 
 import {
@@ -7,8 +6,9 @@ import {
 } from '../../helpers/translation-helpers.js';
 import { configureProject } from '../../../../../utils/configure.js';
 import type { SkuContext } from '../../../../../context/createSkuContext.js';
+import { accentLight, strong } from '@sku-private/utils/console';
 
-const log = (message: string) => console.log(chalk.cyan(message));
+const log = (message: string) => console.log(accentLight(message));
 
 export const pullAction = async ({
   skuContext,
@@ -28,7 +28,7 @@ export const pullAction = async ({
     log('Successfully pulled translations from Phrase');
   } catch (e) {
     if (e) {
-      console.error(`Error running ${chalk.bold(`translations push`)}:`, e);
+      console.error(`Error running ${strong(`translations push`)}:`, e);
     }
     process.exit(1);
   }

@@ -1,8 +1,9 @@
 import debug from 'debug';
-import { setCwd, banner } from '@sku-private/utils';
+import { setCwd } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
 import { styleText } from 'node:util';
 import configureApp from './utils/configureApp.js';
+import { banner } from '@sku-private/utils/console';
 
 /**
  * Separated out from the scripts/postinstall.js so that this can be bundled
@@ -23,7 +24,7 @@ export const postinstall = async ({
   setCwd(localCwd);
 
   if (hasSkuDep) {
-    banner('warning', 'sku dependency detected', [
+    banner('caution', 'sku dependency detected', [
       `${bold('sku')} is installed as a ${bold('dependency')} in ${bold(
         packageJson,
       )}.`,

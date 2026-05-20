@@ -10,7 +10,6 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 
 import dedent from 'dedent';
-import chalk from 'chalk';
 
 import ensureGitignore from 'ensure-gitignore';
 
@@ -30,6 +29,7 @@ import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
+import { success } from '@sku-private/utils/console';
 
 const coverageFolder = 'coverage';
 
@@ -80,8 +80,8 @@ export default async (skuContext: SkuContext) => {
 
           console.log('Please manually add the following to your sku config:');
           console.log(
-            chalk.green('eslintIgnore:'),
-            chalk.green(JSON.stringify(customIgnores, null, 2)),
+            success('eslintIgnore:'),
+            success(JSON.stringify(customIgnores, null, 2)),
           );
         }
 

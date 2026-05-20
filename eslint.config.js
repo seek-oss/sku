@@ -90,7 +90,7 @@ export default [
             {
               group: ['**/*.action.js'],
               message:
-                'Please dynamically import action modules to keep the CLI fast',
+                'Please dynamically import action modules to keep the CLI fast.',
             },
           ],
         },
@@ -116,6 +116,24 @@ export default [
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'n/prefer-node-protocol': ['error'],
+    },
+  },
+  {
+    ignores: ['private/utils/src/console/styles.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'node:util',
+              importNames: ['styleText'],
+              message:
+                "Please use sku's semantic console styling utils from `@sku-private/utils/console` instead.",
+            },
+          ],
+        },
+      ],
     },
   },
   {

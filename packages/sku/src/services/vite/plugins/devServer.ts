@@ -1,4 +1,4 @@
-import { serverUrls } from '@sku-private/utils/src/serverUrls.js';
+import { serverUrls } from '@sku-private/utils';
 import type { PluginOption } from 'vite';
 import { getAppHosts } from '../../../context/hosts.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';

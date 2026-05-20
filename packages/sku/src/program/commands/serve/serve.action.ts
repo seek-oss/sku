@@ -2,7 +2,6 @@ import { join } from 'node:path';
 import exists from '../../../utils/exists.js';
 import express from 'express';
 import handler from 'serve-handler';
-import chalk from 'chalk';
 import { closest } from 'fastest-levenshtein';
 import {
   checkHosts,
@@ -25,6 +24,7 @@ import {
 } from '../../../utils/configure.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { serverUrls } from '@sku-private/utils';
+import { accent, critical, strong } from '@sku-private/utils/console';
 
 export const serveAction = async ({
   site: preferredSite,
@@ -53,8 +53,8 @@ export const serveAction = async ({
 
   if (!targetFolderExists) {
     console.log(
-      chalk.red(
-        `${chalk.bold('sku build')} must be run before running ${chalk.bold('sku serve')}`,
+      critical(
+        `${strong('sku build')} must be run before running ${strong('sku serve')}`,
       ),
     );
     process.exit(1);
@@ -63,11 +63,11 @@ export const serveAction = async ({
   const availableSites = sites.map(({ name }) => name);
 
   if (preferredSite && !availableSites.some((site) => preferredSite === site)) {
-    console.log(chalk.red(`Unknown site '${chalk.bold(preferredSite)}'`));
+    console.error(critical(`Unknown site '${strong(preferredSite)}'`));
     const suggestedSite = closest(preferredSite, availableSites);
 
     if (suggestedSite) {
-      console.log(`Did you mean '${chalk.bold(suggestedSite)}'?`);
+      console.log(`Did you mean '${strong(suggestedSite)}'?`);
     }
 
     process.exit(1);
@@ -77,8 +77,8 @@ export const serveAction = async ({
     paths.publicPath.startsWith('http') ||
     paths.publicPath.startsWith('//')
   ) {
-    console.log(
-      chalk.red(
+    console.error(
+      critical(
         'sku serve not supported when publicPath is on a separate domain.',
       ),
     );
@@ -95,7 +95,7 @@ export const serveAction = async ({
     strictPort: port.strictPort,
   });
 
-  console.log(chalk.blue(`sku serve`));
+  console.log(accent(`sku serve`));
 
   const environment = resolveEnvironment({
     environment: environmentOption,
@@ -209,7 +209,7 @@ export const serveAction = async ({
       https: httpsDevServer,
     });
 
-    console.log(chalk.blue('Server started'));
+    console.log(accent('Server started'));
     if (skuContext.listUrls) {
       urls.printAll();
     } else {

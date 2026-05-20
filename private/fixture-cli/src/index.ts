@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { getFixtureDir } from './getFixtureDir.ts';
 import { log } from '@clack/prompts';
 import { selectScript } from './selectScript.ts';
-import { styleText } from 'node:util';
+import { accent } from '../../utils/src/console/styles.ts';
 
 const program = new Command();
 
@@ -23,9 +23,7 @@ program
       scriptNameInput,
     );
 
-    log.info(
-      `Running ${styleText(['bold', 'blue'], scriptCommand)} in ${styleText(['bold', 'blue'], fixture)} fixture`,
-    );
+    log.info(`Running ${accent(scriptCommand)} in ${accent(fixture)} fixture`);
 
     spawn('pnpm', [scriptName, ...scriptArgs], {
       cwd: getFixtureDir(fixture),

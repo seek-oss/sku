@@ -1,23 +1,19 @@
 import Fuse from 'fuse.js';
 import { getAllFixtures } from './getAllFixtures.ts';
-import { styleText } from 'node:util';
 import { log, autocomplete, cancel, isCancel } from '@clack/prompts';
+import { accent, critical } from '../../utils/src/console/styles.ts';
 
 export const selectFixture = async (input?: string): Promise<string> => {
   const allFixtures = await getAllFixtures();
   const fixtureMatches = input ? fuzzySearch(input, allFixtures) : allFixtures;
 
   if (input && fixtureMatches.length === 0) {
-    log.error(
-      `No fixtures matching '${styleText(['bold', 'red'], input)}' found`,
-    );
+    log.error(`No fixtures matching '${critical(input)}' found`);
     process.exit(1);
   }
 
   if (fixtureMatches.length === 1) {
-    log.info(
-      `Found matching fixture ${styleText(['bold', 'blue'], fixtureMatches[0])}`,
-    );
+    log.info(`Found matching fixture ${accent(fixtureMatches[0])}`);
     return fixtureMatches[0];
   }
 

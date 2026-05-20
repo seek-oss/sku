@@ -1,11 +1,11 @@
 import { validate } from '@vocab/core';
-import chalk from 'chalk';
 
 import { getResolvedVocabConfig } from '../../helpers/translation-helpers.js';
 import { configureProject } from '../../../../../utils/configure.js';
 import type { SkuContext } from '../../../../../context/createSkuContext.js';
+import { accentLight, strong } from '@sku-private/utils/console';
 
-const log = (message: string) => console.log(chalk.cyan(message));
+const log = (message: string) => console.log(accentLight(message));
 
 export const validateAction = async ({
   skuContext,
@@ -24,7 +24,7 @@ export const validateAction = async ({
     log('Successfully validated translations');
   } catch (e) {
     if (e) {
-      console.error(`Error running ${chalk.bold(`translations validate`)}:`, e);
+      console.error(`Error running ${strong(`translations validate`)}:`, e);
     }
     process.exit(1);
   }

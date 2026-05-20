@@ -1,10 +1,10 @@
 import { findUpSync } from 'find-up';
 import path, { dirname } from 'node:path';
-import { styleText } from 'node:util';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
 import semver from 'semver';
+import { caution, strong } from '../console/styles.js';
 
 type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 
@@ -67,9 +67,8 @@ const resolvePackageManager = () => {
 
   if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
     console.warn(
-      styleText(
-        'yellow',
-        `Lockfile mismatch: ${styleText('bold', path.basename(lockFilePath))} is not a valid lockfile for ${styleText('bold', packageManager)}`,
+      caution(
+        `Lockfile mismatch: ${strong(path.basename(lockFilePath))} is not a valid lockfile for ${strong(packageManager)}`,
       ),
     );
   }

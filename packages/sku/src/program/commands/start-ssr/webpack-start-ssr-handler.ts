@@ -2,7 +2,6 @@ import path from 'node:path';
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
 import onDeath from 'death';
-import chalk from 'chalk';
 import debug from 'debug';
 
 import getCertificate from '../../../utils/certificate.js';
@@ -31,6 +30,7 @@ import {
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { makeUrl, requireFromCwd, serverUrls } from '@sku-private/utils';
+import { accent, link } from '@sku-private/utils/console';
 
 const log = debug('sku:start-ssr');
 
@@ -127,9 +127,7 @@ export const webpackStartSsrHandler = async ({
 
   console.log();
   console.log(
-    chalk.blue(
-      `Starting the webpack dev server on ${chalk.underline(webpackDevServerUrl)}`,
-    ),
+    accent(`Starting the webpack dev server on ${link(webpackDevServerUrl)}`),
   );
   console.log('Starting development server...');
   if (skuContext.listUrls) {

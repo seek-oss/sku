@@ -2,17 +2,17 @@ import wrap from 'wrap-ansi';
 import identString from 'indent-string';
 import { strong, critical, info, caution } from './styles.js';
 
+const highlightMap = {
+  info,
+  critical,
+  caution,
+};
+
 export const banner = (
-  type: 'info' | 'critical' | 'caution',
+  type: keyof typeof highlightMap,
   heading: string,
   messages: string[] = [],
 ) => {
-  const highlightMap = {
-    info,
-    critical,
-    caution,
-  };
-
   if (!(type in highlightMap)) {
     throw new Error(`Banner type not implemented: ${type}`);
   }

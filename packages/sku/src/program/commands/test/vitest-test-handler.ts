@@ -58,6 +58,6 @@ const lazyLoadVitest = async () => {
       );
       process.exit(1);
     }
-    throw critical;
+    throw error;
   }
 };

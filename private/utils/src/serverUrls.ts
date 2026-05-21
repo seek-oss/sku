@@ -1,4 +1,4 @@
-import { styleText } from 'node:util';
+import { strong, success } from './console/styles.js';
 
 export const makeUrl = ({
   host,
@@ -35,13 +35,11 @@ export const serverUrls = (opts: {
     slicedHosts.forEach((host) => {
       const url = makeUrl({
         host,
-        port: port ? styleText('bold', String(port)) : undefined,
+        port: port ? strong(String(port)) : undefined,
         initialPath,
         https,
       });
-      console.log(
-        `${styleText('green', '➜')}  ${styleText('bold', 'Local')}: ${url}`,
-      );
+      console.log(`${success('➜')}  ${strong('Local')}: ${url}`);
     });
   };
 

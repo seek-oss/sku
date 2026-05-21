@@ -3,8 +3,7 @@ import {
   getExecuteCommand,
   requireFromCwd,
 } from '@sku-private/utils';
-
-import chalk from 'chalk';
+import { accent, strong } from '@sku-private/utils/console';
 
 const findPackageScriptName = (scriptContents: string): string | undefined => {
   let pkg;
@@ -44,7 +43,5 @@ const getSuggestedScript = (
 export const suggestScript = (scriptName: string, options?: Options) => {
   const suggestedScript = getSuggestedScript(scriptName, options);
 
-  console.log(
-    chalk.blue(`To fix this issue, run '${chalk.bold(suggestedScript)}'`),
-  );
+  console.log(accent(`To fix this issue, run '${strong(suggestedScript)}'`));
 };

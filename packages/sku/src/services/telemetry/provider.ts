@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module';
 
-import { banner, getAddCommand } from '@sku-private/utils';
+import { getAddCommand } from '@sku-private/utils';
+import { banner } from '@sku-private/utils/console';
 
 import _debug from 'debug';
 
@@ -71,7 +72,7 @@ try {
     type: 'dev',
   });
 
-  banner('warning', '@seek/sku-telemetry not installed', [
+  banner('caution', '@seek/sku-telemetry not installed', [
     'To help us improve sku, please install our private telemetry package that gives us insights on usage, errors and performance.',
     addCommand,
     'Non SEEK based usage can disable this message with `SKU_TELEMETRY=false`',

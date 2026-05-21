@@ -5,11 +5,11 @@ import { performance } from 'node:perf_hooks';
 import type { PathLike } from 'node:fs';
 
 import { generate } from 'selfsigned';
-import chalk from 'chalk';
 
 import provider from '../services/telemetry/index.js';
 import exists from './exists.js';
 import type { SkuContext } from '../context/createSkuContext.js';
+import { accent } from '@sku-private/utils/console';
 
 const certificateTtl = 1000 * 60 * 60 * 24;
 
@@ -18,7 +18,7 @@ const createSelfSignedCertificate = ({
 }: {
   hosts: SkuContext['hosts'];
 }) => {
-  console.log(chalk.blue`Generating self-signed certificate`);
+  console.log(accent('Generating self-signed certificate'));
   const attributes = [
     {
       name: 'commonName',

@@ -1,7 +1,7 @@
-import { styleText } from 'node:util';
 import { existsSync } from 'node:fs';
 import { getPathFromCwd } from '@sku-private/utils';
 import _debug from 'debug';
+import { caution, critical, link, strong } from '@sku-private/utils/console';
 
 const debug = _debug('sku:config');
 
@@ -35,14 +35,12 @@ export const resolveAppSkuConfigPath = ({
       return resolvedCustomConfigPath;
     }
     console.error(
-      styleText(['red', 'bold'], 'Error:'),
-      `Sku config file not found for path: ${styleText('yellow', resolvedCustomConfigPath)}`,
+      critical('Error:'),
+      `Sku config file not found for path: ${caution(resolvedCustomConfigPath)}`,
     );
+    console.error();
     console.error(
-      `Verify the file path is correct or remove the ${styleText('cyan', '--config')} flag to use default config.`,
-    );
-    console.error(
-      `See ${styleText('blue', 'https://seek-oss.github.io/sku/#/./docs/configuration')} for configuration help.`,
+      `See ${link('https://seek-oss.github.io/sku/#/./docs/configuration')} for configuration help.`,
     );
     debug('Custom sku config file does not exist:', resolvedCustomConfigPath);
     process.exit(1);
@@ -57,7 +55,7 @@ export const resolveAppSkuConfigPath = ({
   }
 
   debug(
-    `Failed to find a supported ${styleText('bold', 'sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}`).join(', ')})`,
+    `Failed to find a supported ${strong('sku.config')} file (supported formats are ${supportedSkuConfigExtensions.map((ext) => `sku.config.${ext}`).join(', ')})`,
   );
 
   return null;

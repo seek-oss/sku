@@ -1,7 +1,4 @@
-import { banner } from '@sku-private/utils';
-import chalk from 'chalk';
-
-const accent = chalk.blue.bold;
+import { banner, accent } from '@sku-private/utils/console';
 
 export const validatePnpmConfig = async ({
   hasRecommendedPnpmVersionInstalled,
@@ -23,6 +20,6 @@ export const validatePnpmConfig = async ({
       `Please delete your top-level ${accent('node_modules')} and run "${accent('pnpm add --config pnpm-plugin-sku && pnpm install')}".`,
     );
 
-    banner('warning', 'pnpm-plugin-sku is not configured correctly', messages);
+    banner('caution', 'pnpm-plugin-sku is not configured correctly', messages);
   }
 };

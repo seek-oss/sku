@@ -3,7 +3,7 @@ import { readdir } from 'node:fs/promises';
 import { autocomplete, group, cancel, log } from '@clack/prompts';
 
 import { spawn } from 'cross-spawn';
-import { styleText } from 'node:util';
+import { accent } from '../../utils/src/console/styles.ts';
 
 const fixturesDir = resolve('../../fixtures');
 const fixturesDirContents = await readdir(fixturesDir, {
@@ -61,7 +61,7 @@ const groupResult = await group(
 const workingDirectory = join(fixturesDir, groupResult.fixture);
 
 log.info(
-  `Running ${styleText(['bold', 'blue'], groupResult.script as string)} in ${styleText(['bold', 'blue'], groupResult.fixture)} fixture`,
+  `Running ${accent(groupResult.script as string)} in ${accent(groupResult.fixture)} fixture`,
 );
 
 spawn('pnpm', (groupResult.script as string).split(' '), {

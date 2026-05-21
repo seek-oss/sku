@@ -1,5 +1,4 @@
-import chalk from 'chalk';
-
+import { critical } from '@sku-private/utils/console';
 import config from './lintStagedConfig.js';
 
 const preCommit = async () => {
@@ -10,7 +9,7 @@ const preCommit = async () => {
     const { default: lintStaged } = await import('lint-staged');
     success = await lintStaged({ config });
   } catch (e) {
-    console.error(chalk.red(e));
+    console.error(critical(String(e)));
   }
 
   if (!success) {

@@ -1,7 +1,7 @@
-import chalk from 'chalk';
 import { loadESLint } from 'eslint';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
+import { accentLight, caution, secondary } from '@sku-private/utils/console';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
@@ -12,7 +12,7 @@ const runESLint = async ({
   fix?: boolean;
   paths?: string[];
 }) => {
-  console.log(chalk.cyan(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
+  console.log(accentLight(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
   const ESLint = await loadESLint({ useFlatConfig: true });
   const eslint = new ESLint({
@@ -34,11 +34,11 @@ const runESLint = async ({
       );
 
   if (filteredFilePaths.length === 0) {
-    console.log(chalk.gray(`No files to lint`));
+    console.log(secondary(`No files to lint`));
     return Promise.resolve();
   }
 
-  console.log(chalk.gray(`Paths: ${filteredFilePaths.join(' ')}`));
+  console.log(secondary(`Paths: ${filteredFilePaths.join(' ')}`));
   try {
     const lintResults = await eslint.lintFiles(filteredFilePaths);
 
@@ -66,9 +66,9 @@ const runESLint = async ({
     assert(e instanceof Error);
 
     if (e.message.includes('No files matching')) {
-      console.warn(chalk.yellow(`Warning: ${e.message}`));
+      console.warn(caution(`Warning: ${e.message}`));
     } else {
-      console.warn(chalk.yellow('ESLint encountered an error:'));
+      console.warn(caution('ESLint encountered an error:'));
       console.log(e.message);
       return Promise.reject();
     }

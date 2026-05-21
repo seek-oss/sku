@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { critical, strong } from '@sku-private/utils/console';
 import type { SkuContext } from './createSkuContext.js';
 
 export const resolveEnvironment = ({
@@ -12,11 +12,11 @@ export const resolveEnvironment = ({
 
   if (environment) {
     if (!skuContext.environments?.includes(environment)) {
-      console.log(chalk.red(`Unknown environment: ${chalk.bold(environment)}`));
+      console.log(critical(`Unknown environment: ${strong(environment)}`));
       process.exit(1);
     }
 
-    console.log(`Using ${chalk.bold(environment)} environment`);
+    console.log(`Using ${strong(environment)} environment`);
   }
 
   return environment;

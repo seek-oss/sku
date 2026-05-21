@@ -1,11 +1,11 @@
 import { compile } from '@vocab/core';
-import chalk from 'chalk';
 
 import { getResolvedVocabConfig } from '../../helpers/translation-helpers.js';
 import { configureProject } from '../../../../../utils/configure.js';
 import type { SkuContext } from '../../../../../context/createSkuContext.js';
+import { accentLight, strong } from '@sku-private/utils/console';
 
-const log = (message: string) => console.log(chalk.cyan(message));
+const log = (message: string) => console.log(accentLight(message));
 
 export const compileAction = async ({
   watch,
@@ -34,7 +34,7 @@ export const compileAction = async ({
     }
   } catch (e) {
     if (e) {
-      console.error(`Error running ${chalk.bold(`translations compile`)}:`, e);
+      console.error(`Error running ${strong(`translations compile`)}:`, e);
     }
     process.exit(1);
   }

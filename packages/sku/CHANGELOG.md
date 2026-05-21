@@ -1,5 +1,11 @@
 # sku
 
+## 15.15.2
+
+### Patch Changes
+
+- Replace `chalk` dependency with native `styleText`, align text styling to be more consistent ([#1575](https://github.com/seek-oss/sku/pull/1575))
+
 ## 15.15.1
 
 ### Patch Changes

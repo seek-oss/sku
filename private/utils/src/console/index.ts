@@ -1,2 +1,12 @@
 export { banner } from './banner.js';
-export { prependWithManagedConfigBanner } from './managedConfigBanner.js';
+export {
+  accent,
+  accentLight,
+  caution,
+  critical,
+  info,
+  link,
+  secondary,
+  strong,
+  success,
+} from './styles.js';

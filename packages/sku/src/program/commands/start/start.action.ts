@@ -8,8 +8,8 @@ import {
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
 import { checkHosts, withHostile } from '../../../context/hosts.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
-import chalk from 'chalk';
 import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
+import { accent } from '@sku-private/utils/console';
 
 export const startAction = async (
   {
@@ -21,7 +21,7 @@ export const startAction = async (
   },
   command: Command,
 ) => {
-  console.log(chalk.blue(`sku start`));
+  console.log(accent(`sku start`));
   const { environment: environmentOption } = command.optsWithGlobals();
 
   const environment = resolveEnvironment({

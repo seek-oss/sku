@@ -1,7 +1,6 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
-import chalk from 'chalk';
 import open from 'open';
 import isCI from './utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
@@ -9,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import debug from 'debug';
 import { execAsync } from './utils/execAsync.js';
+import { caution, strong } from '@sku-private/utils/console';
 
 const log = debug('sku:openBrowser');
 
@@ -38,10 +38,10 @@ async function getBrowserPreference() {
     const { name } = await getDefaultBrowser();
     return name ?? envBrowser;
   } catch {
-    console.log(chalk.yellow.bold('Failed to detect default browser.'));
+    console.log(strong(caution('Failed to detect default browser.')));
     console.log(
-      chalk.yellow(
-        `For a better ${chalk.italic('start')} experience on macOS, go to ${chalk.italic(
+      caution(
+        `For a better ${strong('start')} experience on macOS, go to ${strong(
           'System Preferences > Privacy & Security > Automation > Terminal/Application',
         )} and enable Finder permissions.`,
       ),

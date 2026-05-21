@@ -1,9 +1,14 @@
-import { styleText } from 'node:util';
 import {
   detectUnnecessaryPolyfills,
   type DetectedPolyfillWithSource,
 } from './polyfillDetector.js';
 import provider from '../services/telemetry/provider.js';
+import {
+  caution,
+  critical,
+  secondary,
+  strong,
+} from '@sku-private/utils/console';
 
 /**
  * Validates and displays warnings for unnecessary polyfills in a clean, formatted way
@@ -18,19 +23,16 @@ export const validatePolyfills = (polyfills: string[]): void => {
   provider.count('unnecessary_polyfill', undefined, detectedPolyfills.length);
 
   console.log();
-  console.log(styleText('yellow', '⚠️  Unnecessary polyfills detected'));
+  console.log(caution('⚠️  Unnecessary polyfills detected'));
   console.log();
 
-  console.log(
-    styleText('dim', 'The following polyfills may no longer be necessary:'),
-  );
+  console.log(secondary('The following polyfills may no longer be necessary:'));
   console.log();
 
   detectedPolyfills.forEach((polyfill) => displayPolyfillWarning(polyfill));
 
   console.log(
-    styleText(
-      'dim',
+    secondary(
       '💡 Consider removing these polyfills to reduce your bundle size.',
     ),
   );
@@ -44,29 +46,24 @@ const displayPolyfillWarning = (polyfill: DetectedPolyfillWithSource): void => {
       : `found in ${polyfill.dependencyType}`;
 
   console.log(
-    styleText(
-      'red',
-      `  ❌ ${styleText('bold', polyfill.polyfillName)} ${styleText('dim', `(${sourceText})`)}`,
+    critical(
+      `  ❌ ${strong(polyfill.polyfillName)} ${secondary(`(${sourceText})`)}`,
     ),
   );
-  console.log(styleText('dim', `     ${polyfill.reason}`));
+  console.log(secondary(`     ${polyfill.reason}`));
 
   if (polyfill.docsUrl) {
-    console.log(styleText('dim', `     Docs: ${polyfill.docsUrl}`));
+    console.log(secondary(`     Docs: ${polyfill.docsUrl}`));
   }
 
   // Provide actionable guidance based on detection source
   if (polyfill.detectionSource === 'config') {
     console.log(
-      styleText(
-        'dim',
-        `     Action: Remove from polyfills array in sku.config.ts`,
-      ),
+      secondary(`     Action: Remove from polyfills array in sku.config.ts`),
     );
   } else {
     console.log(
-      styleText(
-        'dim',
+      secondary(
         `     Action: Remove from ${polyfill.dependencyType} in package.json`,
       ),
     );

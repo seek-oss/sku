@@ -2,8 +2,8 @@ import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { InlineConfig } from 'vite';
 import type { TestUserConfig } from 'vitest/node';
 import { hasErrorCode } from '../../../utils/error-guards.js';
-import { styleText } from 'node:util';
 import { createConfig } from '../../../services/vite/helpers/config/createConfig.js';
+import { critical, strong } from '@sku-private/utils/console';
 
 export const vitestHandler = async ({
   skuContext,
@@ -48,12 +48,11 @@ const lazyLoadVitest = async () => {
   try {
     const vitest = await import('vitest/node');
     return vitest;
-  } catch (error: any) {
+  } catch (error) {
     if (hasErrorCode(error) && error.code === 'ERR_MODULE_NOT_FOUND') {
-      const vitest = styleText('bold', 'vitest');
+      const vitest = strong('vitest');
       console.error(
-        styleText(
-          'red',
+        critical(
           `Could not find ${vitest}. Please install it in your project's devDependencies.`,
         ),
       );

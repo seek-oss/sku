@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../services/prettier.js';
 import runTsc from '../../../services/typescript/runTsc.js';
@@ -6,6 +5,7 @@ import runTsc from '../../../services/typescript/runTsc.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { accentLight } from '@sku-private/utils/console';
 
 export const lintAction = async (
   paths: string[],
@@ -14,7 +14,7 @@ export const lintAction = async (
   await configureProject(skuContext);
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 
-  console.log(chalk.cyan('Linting'));
+  console.log(accentLight('Linting'));
 
   await runVocabCompile(skuContext);
 
@@ -40,5 +40,5 @@ export const lintAction = async (
     process.exit(1);
   }
 
-  console.log(chalk.cyan('Linting complete'));
+  console.log(accentLight('Linting complete'));
 };

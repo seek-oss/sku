@@ -1,4 +1,4 @@
-import { banner } from '@sku-private/utils';
+import { banner } from '@sku-private/utils/console';
 import { Command } from 'commander';
 
 /**
@@ -11,7 +11,7 @@ export const initCommand = new Command('init')
   .description('Deprecated. Please use `@sku-lib/create` instead.')
   // .error(`'sku init' is deprecated. Please use '@sku-lib/create' instead.`);
   .action(() => {
-    banner('error', '`sku init` is deprecated', [
+    banner('critical', '`sku init` is deprecated', [
       'Please use `@sku-lib/create` instead.',
       'https://seek-oss.github.io/sku/#/./docs/getting-started?id=getting-started',
     ]);

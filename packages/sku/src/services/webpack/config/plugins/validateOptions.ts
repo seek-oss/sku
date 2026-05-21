@@ -1,18 +1,16 @@
 import Validator from 'fastest-validator';
 import browserslist from 'browserslist';
-import chalk from 'chalk';
 import { closest } from 'fastest-levenshtein';
 import { hasErrorMessage } from '../../../../utils/error-guards.js';
+import { caution, critical, strong } from '@sku-private/utils/console';
 
 // @ts-expect-error
 const validator = new Validator();
 
 const exitWithErrors = async (errors: string[]) => {
-  console.log(
-    chalk.bold(chalk.underline(chalk.red('SkuWebpackPlugin: Invalid options'))),
-  );
+  console.log(strong(critical('SkuWebpackPlugin: Invalid options')));
   errors.forEach((error) => {
-    console.log(chalk.yellow(error));
+    console.log(caution(error));
   });
   process.exit(1);
 };
@@ -97,10 +95,10 @@ export const validateOptions = (options: SkuWebpackPluginOptions) => {
   Object.keys(options)
     .filter((key) => !availableOptions.includes(key))
     .forEach((key) => {
-      const unknownMessage = `Unknown option '${chalk.bold(key)}'.`;
+      const unknownMessage = `Unknown option '${strong(key)}'.`;
       const suggestedKey = closest(key, availableOptions);
       const suggestedMessage = suggestedKey
-        ? ` Did you mean '${chalk.bold(suggestedKey)}'?`
+        ? ` Did you mean '${strong(suggestedKey)}'?`
         : '';
       errors.push(`❓ ${unknownMessage}${suggestedMessage}`);
     });
@@ -111,8 +109,8 @@ export const validateOptions = (options: SkuWebpackPluginOptions) => {
     schemaCheckResult.forEach(
       ({ message, field }: { message: string; field: string }) => {
         const errorMessage = message
-          ? `🚫 ${message.replace(field, `${chalk.bold(field)}`)}`
-          : `🚫 '${chalk.bold(field)}' is invalid`;
+          ? `🚫 ${message.replace(field, `${strong(field)}`)}`
+          : `🚫 '${strong(field)}' is invalid`;
 
         errors.push(errorMessage);
       },
@@ -126,9 +124,9 @@ export const validateOptions = (options: SkuWebpackPluginOptions) => {
     } catch (e) {
       if (hasErrorMessage(e)) {
         errors.push(
-          `🚫 '${chalk.bold(
+          `🚫 '${strong(
             'browserslist',
-          )}' must be a valid browserslist query. ${chalk.white(e.message)}`,
+          )}' must be a valid browserslist query. ${strong(e.message)}`,
         );
       }
     }

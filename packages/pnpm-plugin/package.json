@@ -19,7 +19,8 @@
   },
   "files": [
     "pnpmfile.cjs",
-    "pnpmfile.mjs"
+    "pnpmfile.mjs",
+    "dist"
   ],
   "repository": {
     "type": "git",

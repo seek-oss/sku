@@ -1,13 +1,12 @@
 import { resolve, basename } from 'node:path';
-import { styleText } from 'node:util';
 import { existsSync, mkdirSync } from 'node:fs';
 import {
   isEmptyDir,
   cwd,
   getRunCommand,
-  banner,
   packageManager,
 } from '@sku-private/utils';
+import { accentLight, banner } from '@sku-private/utils/console';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
 import { installDependencies } from '../services/install.js';
@@ -29,12 +28,12 @@ export const createProject = async ({
   const projectName = targetDir === '.' ? basename(targetPath) : targetDir;
 
   console.log(
-    `🚀 Creating new sku project: ${styleText('cyan', projectName)} with ${styleText('cyan', template)} template`,
+    `🚀 Creating new sku project: ${accentLight(projectName)} with ${accentLight(template)} template`,
   );
 
   validatePackageName(projectName);
 
-  console.log(`📁 Creating project at ${styleText('cyan', targetPath)}`);
+  console.log(`📁 Creating project at ${accentLight(targetPath)}`);
 
   validateTargetDirectory(targetPath);
   createProjectDirectory(targetPath);
@@ -58,8 +57,8 @@ export const createProject = async ({
   await formatProject(targetPath);
 
   const nextSteps = [
-    targetDir !== '.' ? `${styleText('cyan', `cd ${targetDir}`)}` : null,
-    `${styleText('cyan', getRunCommand('start'))}`,
+    targetDir !== '.' ? `${accentLight(`cd ${targetDir}`)}` : null,
+    `${accentLight(getRunCommand('start'))}`,
   ]
     .filter(Boolean)
     .join('\n');

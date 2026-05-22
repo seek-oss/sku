@@ -1,15 +1,14 @@
 import debug from 'debug';
-import { setCwd, banner } from '@sku-private/utils';
+import { setCwd } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
-import { styleText } from 'node:util';
 import configureApp from './utils/configureApp.js';
+import { banner, strong } from '@sku-private/utils/console';
 
 /**
  * Separated out from the scripts/postinstall.js so that this can be bundled
  */
 
 const log = debug('sku:postinstall');
-const bold = (text: string) => styleText(['bold'], text);
 
 export const postinstall = async ({
   localCwd,
@@ -23,11 +22,11 @@ export const postinstall = async ({
   setCwd(localCwd);
 
   if (hasSkuDep) {
-    banner('warning', 'sku dependency detected', [
-      `${bold('sku')} is installed as a ${bold('dependency')} in ${bold(
+    banner('caution', 'sku dependency detected', [
+      `${strong('sku')} is installed as a ${strong('dependency')} in ${strong(
         packageJson,
       )}.`,
-      `${bold('sku')} should be installed in ${bold('devDependencies')}.`,
+      `${strong('sku')} should be installed in ${strong('devDependencies')}.`,
     ]);
   }
 

@@ -1,8 +1,13 @@
 import exists from '../utils/exists.js';
-import chalk from 'chalk';
 import { runBin } from '../utils/runBin.js';
 import { getPathFromCwd } from '@sku-private/utils';
 import { suggestScript } from '../utils/suggestScript.js';
+import {
+  accentLight,
+  caution,
+  critical,
+  secondary,
+} from '@sku-private/utils/console';
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = import.meta.resolve('sku/config/prettier');
@@ -17,7 +22,7 @@ const runPrettier = async ({
   paths?: string[];
 }) => {
   console.log(
-    chalk.cyan(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
+    accentLight(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
   );
 
   const prettierArgs = ['--config', prettierConfigPath, '--cache'];
@@ -38,7 +43,7 @@ const runPrettier = async ({
 
   prettierArgs.push(...pathsToCheck);
 
-  console.log(chalk.gray(`Paths: ${pathsToCheck.join(' ')}`));
+  console.log(secondary(`Paths: ${pathsToCheck.join(' ')}`));
 
   try {
     await runBin({
@@ -54,19 +59,17 @@ const runPrettier = async ({
   } catch (exitCode) {
     if (exitCode === 2) {
       console.warn(
-        chalk.yellow('Warning: No files matching', pathsToCheck.join(' ')),
+        caution(`Warning: No files matching ${pathsToCheck.join(' ')}`),
       );
     } else {
       if (listDifferent && exitCode === 1) {
         console.error(
-          chalk.red(
-            'Error: The file(s) listed above failed the prettier check',
-          ),
+          critical('Error: The file(s) listed above failed the prettier check'),
         );
         suggestScript('format');
       } else {
         console.error(
-          chalk.red('Error: Prettier check exited with exit code', exitCode),
+          critical(`Error: Prettier check exited with exit code ${exitCode}`),
         );
       }
       throw new Error();

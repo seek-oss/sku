@@ -8,8 +8,8 @@ import { performance } from 'node:perf_hooks';
 import provider from '../../../services/telemetry/index.js';
 import prettyMilliseconds from 'pretty-ms';
 import { viteService } from '../../../services/vite/index.js';
-import { styleText } from 'node:util';
 import { PrerenderWorkerError } from '../../../services/vite/helpers/prerender/prerenderConcurrently.js';
+import { critical, success } from '@sku-private/utils/console';
 
 export const viteBuildHandler = async ({
   skuContext,
@@ -36,10 +36,7 @@ export const viteBuildHandler = async ({
     });
 
     console.log(
-      styleText(
-        'green',
-        `Sku build complete in ${prettyMilliseconds(timeTaken)}`,
-      ),
+      success(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
     );
   } catch (error) {
     const timeTaken = performance.now();
@@ -50,13 +47,13 @@ export const viteBuildHandler = async ({
     });
 
     if (error instanceof PrerenderWorkerError) {
-      console.error(styleText('red', error.message));
+      console.error(critical(error.message));
       console.error(error.cause);
     } else if (error instanceof Error) {
-      console.error(styleText('red', error.message));
+      console.error(critical(error.message));
       console.error(error.stack);
     } else {
-      console.error(styleText('red', String(error)));
+      console.error(critical(String(error)));
     }
 
     process.exitCode = 1;

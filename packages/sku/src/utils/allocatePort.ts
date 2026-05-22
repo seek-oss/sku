@@ -1,6 +1,6 @@
-import chalk from 'chalk';
 import getPort from 'get-port';
 import _debug from 'debug';
+import { caution, strong } from '@sku-private/utils/console';
 
 const debug = _debug('sku:allocatePort');
 
@@ -9,7 +9,7 @@ const allocatePort = async ({
   host,
   strictPort = false,
 }: {
-  port?: number;
+  port: number;
   host?: string;
   strictPort: boolean;
 }) => {
@@ -23,10 +23,10 @@ const allocatePort = async ({
       );
     }
     console.log(
-      chalk.yellow(
-        `Warning: Requested port ${chalk.bold(
-          port,
-        )} is unavailable. Falling back to ${chalk.bold(actualPort)}.`,
+      caution(
+        `Warning: Requested port ${strong(
+          String(port),
+        )} is unavailable. Falling back to ${strong(String(actualPort))}.`,
       ),
     );
   }

@@ -1,8 +1,8 @@
-import chalk from 'chalk';
 import { configureProject } from '../../../utils/configure.js';
 import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
 import { write as prettierWrite } from '../../../services/prettier.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { accentLight } from '@sku-private/utils/console';
 
 export const formatAction = async (
   paths: string[],
@@ -11,7 +11,7 @@ export const formatAction = async (
   await configureProject(skuContext);
   const pathsToCheck = paths.length > 0 ? paths : undefined;
 
-  console.log(chalk.cyan('Formatting'));
+  console.log(accentLight('Formatting'));
 
   try {
     await esLintFix({ paths: pathsToCheck });
@@ -23,5 +23,5 @@ export const formatAction = async (
 
     process.exit(1);
   }
-  console.log(chalk.cyan('Formatting complete'));
+  console.log(accentLight('Formatting complete'));
 };

@@ -1,10 +1,9 @@
-import chalk from 'chalk';
-
 import { suggestScript } from '../utils/suggestScript.js';
 import { hasErrorCode } from '../utils/error-guards.js';
 import type { SkuContext } from './createSkuContext.js';
 import { promisify } from 'node:util';
 import { set, get } from 'hostile';
+import { caution, critical, strong } from '@sku-private/utils/console';
 
 type Line = string | [string, /* host */ string /* ip */];
 type SetSystemHostFunction = (ip: string, host: string) => Promise<void>;
@@ -38,14 +37,14 @@ export const setupHosts =
           await setSystemHost('127.0.0.1', host);
           await setSystemHost('::1', host);
           console.log(
-            `Successfully added '${chalk.bold(host)}' to your hosts file`,
+            `Successfully added '${strong(host)}' to your hosts file`,
           );
         }
       }
     } catch (e: unknown) {
       if (hasErrorCode(e) && e.code === 'EACCES') {
         console.log(
-          chalk.red('Error: setup-hosts must be run with root privileges'),
+          critical('Error: setup-hosts must be run with root privileges'),
         );
       } else {
         console.error(e);
@@ -67,8 +66,8 @@ export const checkHosts =
       if (missingHosts.length > 0) {
         missingHosts.forEach((appHost) => {
           console.log(
-            chalk.yellow(
-              `Host '${chalk.bold(appHost)}' is not configured in your hosts file`,
+            caution(
+              `Host '${strong(appHost)}' is not configured in your hosts file`,
             ),
           );
         });

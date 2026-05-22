@@ -1,6 +1,6 @@
 import { autocomplete, cancel, isCancel, log } from '@clack/prompts';
 import { getFixtureScripts } from './getFixtureScripts.ts';
-import { styleText } from 'node:util';
+import { caution } from '../../utils/src/console/styles.ts';
 
 export const selectScript = async (
   fixture: string,
@@ -13,9 +13,7 @@ export const selectScript = async (
       return [input, fixtureScripts[input]];
     }
 
-    log.warn(
-      `No script matching '${styleText(['bold', 'yellow'], input)}' found`,
-    );
+    log.warn(`No script matching '${caution(input)}' found`);
   }
 
   const selectedScript = await autocomplete({

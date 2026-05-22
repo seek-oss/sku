@@ -1,5 +1,4 @@
 import { dirname, posix as path } from 'node:path';
-import chalk from 'chalk';
 import { fdir as Fdir } from 'fdir';
 import _debug from 'debug';
 import { createRequire } from 'node:module';
@@ -9,9 +8,9 @@ import {
   toPosixPath,
   rootDir,
   isPnpm,
-  banner,
   packageManager,
 } from '@sku-private/utils';
+import { banner, critical } from '@sku-private/utils/console';
 
 type CompilePackagesResult = {
   names: string[];
@@ -72,7 +71,7 @@ const buildCrawler = ({ rootDir: _rootDir }: { rootDir: string }) => {
 
   if (!isPnpm) {
     banner(
-      'error',
+      'critical',
       `pnpm virtual store found, but ${packageManager} is in use`,
       [
         'Please use pnpm to build your project or remove the `node_modules/.pnpm` directory.',
@@ -113,7 +112,9 @@ const emptyResult: CompilePackagesResult = { names: [], paths: [] };
 
 const handleError = (e: unknown): CompilePackagesResult => {
   console.log(
-    chalk.red`Warning: Failed to detect compile packages. Contact #sku-support.`,
+    critical(
+      'Warning: Failed to detect compile packages. Contact #sku-support.',
+    ),
   );
   console.error(e);
   return emptyResult;

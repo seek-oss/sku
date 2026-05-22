@@ -2,17 +2,17 @@ import { merge as webpackMerge } from 'webpack-merge';
 import { makeWebpackConfig } from '../../services/webpack/config/webpack.config.js';
 import { resolvePackage } from '../../services/webpack/config/utils/resolvePackage.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
+import type { Configuration } from 'webpack';
 
 const hot = process.env.SKU_HOT !== 'false';
 
 const EXAMPLE_CSS_FILE = 'example.css';
 const EXAMPLE_MDX_FILE = 'example.mdx';
 
-/**
- * @param {import("webpack").Configuration} config
- * @param {{isDevServer: boolean}}
- */
-export default async (config, { isDevServer }) => {
+export default async (
+  config: Configuration,
+  { isDevServer }: { isDevServer: boolean },
+) => {
   const skuContext = getSkuContext();
   const { paths } = skuContext;
   const clientWebpackConfig = (
@@ -24,9 +24,17 @@ export default async (config, { isDevServer }) => {
     })
   ).find(({ name }) => name === 'client');
 
+  if (!clientWebpackConfig) {
+    throw new Error("Failed to find sku 'client' webpack config");
+  }
+
   // Ensure Storybook's webpack loaders ignore our code :(
   if (config?.module && Array.isArray(config.module.rules)) {
     for (const rule of config.module.rules) {
+      if (!rule || typeof rule !== 'object') {
+        continue;
+      }
+
       const previousExclude = rule.exclude || [];
       rule.exclude = [
         ...(Array.isArray(previousExclude)

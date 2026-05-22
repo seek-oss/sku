@@ -1643,6 +1643,9 @@ importers:
       '@sku-private/testing-library':
         specifier: workspace:*
         version: link:../private/testing-library
+      '@types/semver':
+        specifier: ^7.5.8
+        version: 7.7.1
       dedent:
         specifier: ^1.5.1
         version: 1.7.2(babel-plugin-macros@3.1.0)
@@ -1655,6 +1658,9 @@ importers:
       node-html-parser:
         specifier: ^7.0.1
         version: 7.1.0
+      semver:
+        specifier: ^7.6.3
+        version: 7.7.4
       webpack:
         specifier: ^5.52.0
         version: 5.106.2(esbuild@0.28.0)(webpack-cli@6.0.1)

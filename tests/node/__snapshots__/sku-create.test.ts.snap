@@ -103,7 +103,7 @@ exports[`create-sku vite > should create package.json 1`] = `
     "vitest": "VERSION_IGNORED",
   },
   "name": "new-project",
-  "packageManager": "pnpm@10.33.4",
+  "packageManager": "pnpm@10.VERSION_IGNORED",
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -479,7 +479,7 @@ exports[`create-sku webpack > should create package.json 1`] = `
     "sku": "VERSION_IGNORED",
   },
   "name": "new-project",
-  "packageManager": "pnpm@10.33.4",
+  "packageManager": "pnpm@10.VERSION_IGNORED",
   "private": true,
   "scripts": {
     "build": "sku build",

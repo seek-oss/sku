@@ -1,6 +1,11 @@
 import { resolve, basename } from 'node:path';
 import { existsSync, mkdirSync } from 'node:fs';
-import { isEmptyDir, cwd, getRunCommand } from '@sku-private/utils';
+import {
+  isEmptyDir,
+  cwd,
+  getRunCommand,
+  packageManager,
+} from '@sku-private/utils';
 import { accentLight, banner } from '@sku-private/utils/console';
 import { generatePackageJson } from '../generators/packageJson.js';
 import { generateTemplateFiles } from '../generators/templates.js';
@@ -8,6 +13,7 @@ import { installDependencies } from '../services/install.js';
 import { formatProject } from '../services/format.js';
 import { validatePackageName } from '../validation/packageName.js';
 import type { Template } from '../types/index.js';
+import { generatePnpmWorkspaceYaml } from '../generators/pnpmWorkspace.js';
 
 interface CreateProjectOptions {
   targetDir: string;
@@ -32,8 +38,21 @@ export const createProject = async ({
   validateTargetDirectory(targetPath);
   createProjectDirectory(targetPath);
 
-  await generatePackageJson(targetPath, { projectName, template });
-  await generateTemplateFiles(targetPath, { projectName, template });
+  await generatePackageJson(targetPath, {
+    projectName,
+    template,
+    packageManager,
+  });
+
+  if (packageManager === 'pnpm') {
+    await generatePnpmWorkspaceYaml(targetPath);
+  }
+
+  await generateTemplateFiles(targetPath, {
+    projectName,
+    template,
+  });
+
   await installDependencies(targetPath, { template });
   await formatProject(targetPath);
 

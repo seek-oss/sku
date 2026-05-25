@@ -15,3 +15,11 @@ pnpm install
 
 [PNPM config dependency]: https://pnpm.io/config-dependencies
 [10.13]: https://github.com/pnpm/pnpm/releases/tag/v10.13.0
+
+## Programmatic Config Access
+
+The default PNPM config used by the plugin can be accessed via the `config` entrypoint:
+
+```ts
+import { defaultConfig } from 'pnpm-plugin-sku/config';
+```

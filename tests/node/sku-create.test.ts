@@ -5,6 +5,7 @@ import fs from 'node:fs/promises';
 import { configure } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import path from 'node:path';
+import { major } from 'semver';
 
 const { create, fixturePath } = scopeToFixture('sku-create');
 
@@ -148,10 +149,11 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
     'README.md',
     '.prettierignore',
     'src/App/NextSteps.tsx',
+    'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
-    expect(contents).toMatchSnapshot();
+    expect(stripYamlVersions(contents)).toMatchSnapshot();
   });
 
   it('should update the pnpm-workspace.yaml', async () => {
@@ -160,7 +162,7 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
       'utf8',
     );
     const workspace = parseDocument(rootFile);
-    // Delete some of the fields that we don't care about
+    // Delete the fields that we don't care about
     workspace.delete('catalog');
     workspace.delete('packages');
     workspace.delete('linkWorkspacePackages');
@@ -185,6 +187,14 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
     newPackageJson.devDependencies[dep] = 'VERSION_IGNORED';
   }
 
+  if ('packageManager' in newPackageJson) {
+    // Only keep the major version number because we have direct control over it and it will reduce
+    // snapshot noise
+    const [name, version] = newPackageJson.packageManager.split('@');
+    const packageManagerMajorVersion = major(version);
+    newPackageJson.packageManager = `${name}@${packageManagerMajorVersion}.VERSION_IGNORED`;
+  }
+
   return newPackageJson;
 }
 
@@ -195,7 +205,7 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
 function stripYamlVersions(yamlContent: string): string {
   // Replace version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED"
   return yamlContent.replace(
-    /:\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+    /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
     ': VERSION_IGNORED',
   );
 }

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "dedent": "^1.5.1",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

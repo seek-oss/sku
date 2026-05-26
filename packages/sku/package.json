@@ -197,8 +197,6 @@
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/webpack-node-externals": "^3.0.4",
     "@vanilla-extract/css": "catalog:",
-    "@vocab/react": "^1.1.11",
-    "braid-design-system": "catalog:",
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",

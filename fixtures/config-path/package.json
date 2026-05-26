@@ -1,6 +1,9 @@
 {
   "name": "@sku-fixtures/config-path",
   "private": true,
+  "scripts": {
+    "start": "sku start"
+  },
   "devDependencies": {
     "sku": "workspace:*"
   },

@@ -2,6 +2,9 @@
   "name": "@sku-fixtures/sku-test",
   "private": true,
   "type": "module",
+  "scripts": {
+    "test": "sku test"
+  },
   "devDependencies": {
     "sku": "workspace:*",
     "@types/jest": "^30.0.0",

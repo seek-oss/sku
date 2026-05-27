@@ -2,6 +2,9 @@
   "name": "@sku-fixtures/suspense",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "sku start"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.56.2",
     "react": "catalog:",

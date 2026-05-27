@@ -2,6 +2,9 @@
   "name": "@sku-fixtures/cli-arguments",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "sku start"
+  },
   "dependencies": {
     "sku": "workspace:*"
   }

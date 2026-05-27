@@ -5,8 +5,6 @@
   "main": "index.ts",
   "devDependencies": {
     "@prettier/sync": "^0.6.1",
-    "@sku-private/test-utils": "workspace:*",
-    "@sku-private/testing-library": "workspace:*",
     "@types/css": "^0.0.38",
     "@types/diffable-html": "^5.0.2",
     "@types/debug": "catalog:",

@@ -1,0 +1,189 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
+  "tags": ["-knipignore"],
+  "workspaces": {
+    ".": {
+      // Used in the renovate config
+      "ignoreDependencies": ["renovate-config-seek"],
+    },
+    "packages/sku": {
+      "ignoreDependencies": [
+        // Private package installed by consumers
+        "@seek/sku-telemetry",
+        // Used indirectly by webpack for minification
+        "@swc/core",
+        // Used in tests
+        "jest-environment-jsdom",
+        // Optional peer dep
+        "@storybook/react-webpack5",
+      ],
+      "ignoreUnresolved": [
+        "__sku_alias__clientEntry",
+        "__sku_alias__renderEntry",
+        "__sku_alias__serverEntry",
+        "__sku_alias__webpackStats",
+      ],
+    },
+    "packages/babel-plugin-display-name": {
+      // Dep is referenced as a string
+      "ignoreDependencies": ["@babel/preset-react"],
+    },
+    "tests": {
+      "entry": ["**/*.test.ts"],
+      "project": ["**/*.ts"],
+      // Used in tests
+      "ignoreDependencies": ["webpack", "webpack-dev-server", "webpack-cli"],
+    },
+    "fixtures/assertion-removal": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "ignoreDependencies": [
+        // It definitely is used, not sure why knip thinks otherwise
+        "assert",
+      ],
+      "ignoreUnresolved": ["#styles/root.css.ts"],
+    },
+    "fixtures/braid-design-system": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/custom-output-target": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/custom-src-paths": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/display-names-prod": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/library-build": {
+      "entry": ["src/library.js", "src/render.js", "sku.config.*"],
+    },
+    "fixtures/library-file": {
+      "entry": ["src/library.js", "src/render.js", "sku.config.*"],
+    },
+    "fixtures/list-urls": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/multiple-routes": {
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+      // Used by the `--convert-loadable` flag
+      "ignoreDependencies": ["@sku-lib/vite"],
+    },
+    "fixtures/path-aliases": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      // tsconfig isn't present during CI lint so some deps appear unused and some paths appear unresolved
+      "ignoreDependencies": [
+        "@vanilla-extract/css",
+        "@components/Button",
+        "src/utils/add",
+      ],
+      "ignoreUnresolved": ["#styles/root.css.ts"],
+    },
+    "fixtures/polyfills": {
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/polyfills.ts",
+        "sku.config.*",
+      ],
+      // Referenced in sku config
+      "ignoreDependencies": ["@sku-private/3rd-party-polyfill"],
+    },
+    "fixtures/port-clash": {
+      "entry": ["src/client.tsx", "sku.config.*"],
+    },
+    "fixtures/public-path": {
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+    },
+    "fixtures/report-generation": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/security-controls": {
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+    },
+    "fixtures/sku-create": {
+      // Used in tests
+      "ignoreDependencies": ["@sku-lib/create"],
+    },
+    "fixtures/sku-init": {
+      // `sku init` is run in the package
+      "ignoreDependencies": ["sku"],
+    },
+    "fixtures/sku-test": {
+      "entry": ["sku.config.*", "src/*.test.ts", "setup-test.*"],
+    },
+    "fixtures/sku-webpack-plugin": {
+      // Used in tests
+      "ignoreDependencies": ["webpack-dev-server"],
+    },
+    "fixtures/sku-with-https": {
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+    },
+    "fixtures/sort-package-json": {
+      // Used in gitignored eslint config
+      "ignoreDependencies": ["sku"],
+    },
+    "fixtures/source-maps": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/ssr-hello-world": {
+      "entry": [
+        "src/client.tsx",
+        "src/server.tsx",
+        "sku-build.config.ts",
+        "sku-start.config.ts",
+        "dev-middleware.cjs",
+      ],
+    },
+    "fixtures/styling": {
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/server.tsx",
+        "sku.config.*",
+      ],
+    },
+    "fixtures/suspense": {
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+    },
+    "fixtures/translations": {
+      "entry": [
+        "src/client.tsx",
+        "src/ssr-client.tsx",
+        "src/render.tsx",
+        "src/render.tsx",
+        "sku.config.*",
+      ],
+      "ignoreDependencies": [
+        // Used by their respective bundlers
+        "@vocab/vite",
+        "@vocab/webpack",
+        // Used in translation files, but these aren't generated on CI during linting so knip
+        // doesn't see the usage
+        "@vocab/core",
+      ],
+    },
+    "fixtures/typescript-css-modules": {
+      "entry": [
+        "src/client.tsx",
+        "src/client-ssr.tsx",
+        "src/render.tsx",
+        "src/render.tsx",
+        "sku.config.*",
+      ],
+      // tsconfig isn't present during CI lint `src/App` is flagged as a missing dep
+      "ignoreDependencies": ["src/App"],
+    },
+    "fixtures/vite-cjs-interop-apollo-client-v3": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/vite-cjs-interop-apollo-client-v4": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/vite-plugins": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/vite-render-error": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+  },
+}

@@ -11,9 +11,9 @@
     "build:vite": "sku build --config sku.config.vite.ts"
   },
   "devDependencies": {
-    "@sku-private/test-utils": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "dedent": "^1.5.1",
     "sku": "workspace:*"
   }
 }

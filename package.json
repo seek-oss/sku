@@ -51,7 +51,7 @@
     "@sku-private/playwright": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
     "@sku-private/testing-library": "workspace:*",
-    "@tsconfig/node22": "^22.0.2",
+    "@tsconfig/node24": "^24.0.4",
     "@types/node": "catalog:",
     "cli-testing-library": "^3.0.1",
     "eslint": "^9.10.0",

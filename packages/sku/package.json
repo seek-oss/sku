@@ -28,7 +28,7 @@
     "#webpack/*": "./dist/webpack/*.mjs"
   },
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=24.16.0"
   },
   "files": [
     "dist",
@@ -154,7 +154,6 @@
     "postcss": "^8.5.8",
     "postcss-loader": "^8.0.0",
     "prettier": "~3.8.0",
-    "pretty-ms": "^9.2.0",
     "react-refresh": "^0.18.0",
     "rolldown": "^1.0.0-rc.9",
     "rollup-plugin-visualizer": "^7.0.1",

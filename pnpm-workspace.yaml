@@ -6,7 +6,7 @@ packages:
   - private/*
 
 catalog:
-  '@types/node': ^22.18.8
+  '@types/node': ^24.12.4
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
   '@vanilla-extract/vite-plugin': ^5.2.1

@@ -1,6 +1,7 @@
 import { describe, it } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { generatePackageJson } from './packageJson.js';
+import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 describe('generatePackageJson', () => {
   it('should generate package.json for webpack template', async ({
@@ -105,23 +106,28 @@ describe('generatePackageJson', () => {
       packageManager: 'pnpm',
     });
 
-    const packageJsonContent = await fixture.readFile('package.json', 'utf8');
+    const packageJsonContent = JSON.parse(
+      await fixture.readFile('package.json', 'utf8'),
+    );
+
+    packageJsonContent.packageManager = normalizePackageManagerVersion(
+      packageJsonContent.packageManager,
+    );
 
     expect(packageJsonContent).toMatchInlineSnapshot(`
-      "{
+      {
         "name": "my-app",
-        "version": "1.0.0",
+        "packageManager": "pnpm@10.VERSION_IGNORED",
         "private": true,
         "scripts": {
-          "start": "sku start",
           "build": "sku build",
-          "test": "sku test",
           "format": "sku format",
-          "lint": "sku lint"
+          "lint": "sku lint",
+          "start": "sku start",
+          "test": "sku test",
         },
-        "packageManager": "pnpm@10.33.4"
+        "version": "1.0.0",
       }
-      "
     `);
 
     await fixture.rm();

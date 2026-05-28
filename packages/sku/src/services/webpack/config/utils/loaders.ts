@@ -1,7 +1,6 @@
 import babelConfig from '../../../../config/babel.js';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import { createRequire } from 'node:module';
+import lightningcssPlugin from 'postcss-lightningcss';
 
 type BabelConfigOptions = {
   target: 'node' | 'browser';
@@ -49,20 +48,14 @@ export const makeExternalCssLoaders = (
       options: {
         postcssOptions: {
           plugins: [
-            autoprefixer({ overrideBrowserslist: browserslist }),
-            // Minimize CSS on production builds
-            ...(isProductionBuild
-              ? [
-                  cssnano({
-                    preset: [
-                      'default',
-                      {
-                        calc: false,
-                      },
-                    ],
-                  }),
-                ]
-              : []),
+            lightningcssPlugin({
+              browsers: browserslist,
+              cssModules: false,
+              lightningcssOptions: {
+                minify: isProductionBuild,
+                sourceMap: true,
+              },
+            }),
           ],
         },
       },

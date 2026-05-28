@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import { configure } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import path from 'node:path';
-import { major } from 'semver';
+import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 const { create, fixturePath } = scopeToFixture('sku-create');
 
@@ -188,11 +188,9 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
   }
 
   if ('packageManager' in newPackageJson) {
-    // Only keep the major version number because we have direct control over it and it will reduce
-    // snapshot noise
-    const [name, version] = newPackageJson.packageManager.split('@');
-    const packageManagerMajorVersion = major(version);
-    newPackageJson.packageManager = `${name}@${packageManagerMajorVersion}.VERSION_IGNORED`;
+    newPackageJson.packageManager = normalizePackageManagerVersion(
+      newPackageJson.packageManager,
+    );
   }
 
   return newPackageJson;

@@ -56,6 +56,11 @@ export const makeExternalCssLoaders = (
                   cssnano({
                     preset: [
                       'default',
+                      // The calc optimizer can make incorrect assumptions, so we disable it.
+                      // See https://github.com/postcss/postcss-calc/issues/238.
+                      //
+                      // Turning off calc optimizations is currently not possible in lightningcss.
+                      // See https://github.com/parcel-bundler/lightningcss/issues/12.
                       {
                         calc: false,
                       },

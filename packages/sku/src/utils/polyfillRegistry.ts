@@ -68,6 +68,6 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
   },
   'url-search-params-polyfill': {
     reason:
-      'URLSearchParms is well established and works across many devices and browser versions. It has been available across browsers since April 2018.',
+      'URLSearchParams is well established and works across many devices and browser versions. It has been available across browsers since April 2018.',
   },
 } as const;

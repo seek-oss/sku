@@ -22,6 +22,10 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
     reason: 'Deprecated package',
     docsUrl: 'https://babeljs.io/docs/en/babel-polyfill',
   },
+  'babel-polyfill': {
+    reason: 'Deprecated package',
+    docsUrl: 'https://babeljs.io/docs/en/babel-polyfill',
+  },
   'regenerator-runtime': {
     reason:
       'async/await is well established and works across many devices and browser versions. It has been available across browsers since April 2017.',
@@ -46,6 +50,10 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
     reason:
       'Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017, and Node.js since April 2022.',
   },
+  'node-fetch': {
+    reason:
+      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017.',
+  },
   'intersection-observer': {
     reason:
       'IntersectionObserver is well established and works across many devices and browser versions. It has been available across browsers since March 2019.',
@@ -57,5 +65,9 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
   'raf/polyfill': {
     reason:
       'requestAnimationFrame is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+  },
+  'url-search-params-polyfill': {
+    reason:
+      'URLSearchParams is well established and works across many devices and browser versions. It has been available across browsers since April 2018.',
   },
 } as const;

@@ -18,12 +18,12 @@ exports[`translations > bundler vite > should render en 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client.js"
+       href="/rolldown-runtime.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/rolldown-runtime.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
@@ -84,12 +84,12 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      >
      <link
        rel="modulepreload"
-       href="/vite-client.js"
+       href="/rolldown-runtime.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/rolldown-runtime.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
@@ -150,12 +150,12 @@ exports[`translations > bundler vite > should render fr 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client.js"
+       href="/rolldown-runtime.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/rolldown-runtime.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link
@@ -216,12 +216,12 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      >
      <link
        rel="modulepreload"
-       href="/vite-client.js"
+       href="/rolldown-runtime.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/rolldown-runtime.js"
+       href="/vite-client.js"
        crossorigin
      >
      <link

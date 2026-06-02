@@ -6,17 +6,19 @@ packages:
   - private/*
 
 catalog:
+  '@types/debug': '^4.1.12'
   '@types/node': ^22.18.8
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
-  '@vanilla-extract/vite-plugin': ^5.2.1
+  '@vanilla-extract/css': '^1.20.1'
   '@vanilla-extract/integration': '^8.0.9'
   '@vanilla-extract/jest-transform': '^1.1.21'
+  '@vanilla-extract/vite-plugin': ^5.2.1
   '@vanilla-extract/webpack-plugin': '^2.3.26'
-  '@vanilla-extract/css': '^1.20.0'
   '@vocab/vite': ^1.0.3
   braid-design-system: ^34.0.0
   commander: ^14.0.1
+  debug: ^4.4.3
   # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue. (last checked with v2.6.1)
   # 12/11/25: Unpinning for now and using JS eslint config because jiti peer deps from other packages are causing issues. We can re-evaluate later.
   jiti: ^2.4.2
@@ -24,13 +26,9 @@ catalog:
   react-dom: ^19.1.0
   vite: ^8.0.1
   vitest: ^4.1.0
-  debug: ^4.4.3
-  '@types/debug': '^4.1.12'
 
-overrides:
-  # Multiple versions of esbuild tend to crop up in the lockfile. Pin to a specific minor version
-  # purely to reduce installation size.
-  esbuild: ~0.28.0
+configDependencies:
+  pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==
 
 ignoredBuiltDependencies:
   - core-js-pure
@@ -44,10 +42,12 @@ onlyBuiltDependencies:
   - unrs-resolver
   - sku
 
+overrides:
+  # Multiple versions of esbuild tend to crop up in the lockfile. Pin to a specific minor version
+  # purely to reduce installation size.
+  esbuild: ~0.28.0
+
 preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
-
-configDependencies:
-  pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==

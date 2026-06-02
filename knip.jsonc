@@ -179,6 +179,9 @@
     "fixtures/vite-cjs-interop-apollo-client-v4": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
+    "fixtures/vite-loadable-css-order": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
     "fixtures/vite-plugins": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },

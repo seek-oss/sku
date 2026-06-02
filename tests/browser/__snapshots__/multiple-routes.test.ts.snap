@@ -20,8 +20,8 @@ exports[`multiple-routes > bundler: vite > build and serve > should generate the
   "jsx-runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client.js",
     "/static/place/jsx-runtime.js",
+    "/static/place/vite-client.js",
     "/static/place/Details.js",
     "/static/place/AsyncComponent.js",
   ]
@@ -106,20 +106,20 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
 </html>,
   "production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client.js",
     "/static/place/jsx-runtime.js",
+    "/static/place/vite-client.js",
     "/static/place/Home.js",
   ]
 CSS: [
@@ -190,20 +190,20 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
 </html>,
   "production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client.js",
     "/static/place/jsx-runtime.js",
+    "/static/place/vite-client.js",
     "/static/place/Details.js",
     "/static/place/AsyncComponent.js",
   ]
@@ -288,20 +288,20 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
 </html>,
   "production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
-    "/static/place/vite-client.js",
     "/static/place/jsx-runtime.js",
+    "/static/place/vite-client.js",
     "/static/place/Home.js",
   ]
 CSS: [
@@ -372,12 +372,12 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
@@ -424,12 +424,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
      >
      <link
        rel="modulepreload"
-       href="/static/place/vite-client.js"
+       href="/static/place/jsx-runtime.js"
        crossorigin
      >
      <link
        rel="modulepreload"
-       href="/static/place/jsx-runtime.js"
+       href="/static/place/vite-client.js"
        crossorigin
      >
      <link
@@ -520,12 +520,12 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     >
     <link
       rel="modulepreload"
-      href="/static/place/vite-client.js"
+      href="/static/place/jsx-runtime.js"
       crossorigin
     >
     <link
       rel="modulepreload"
-      href="/static/place/jsx-runtime.js"
+      href="/static/place/vite-client.js"
       crossorigin
     >
     <link

@@ -96,6 +96,7 @@ const parseManifestForEntry = ({
   preloads,
   scripts,
   base,
+  seenChunks = new Set<string>(),
 }: {
   manifest: Manifest;
   entry: string;
@@ -103,6 +104,7 @@ const parseManifestForEntry = ({
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
   base?: string;
+  seenChunks?: Set<string>;
 }) => {
   const foundChunk =
     manifest[entry] ??
@@ -111,7 +113,35 @@ const parseManifestForEntry = ({
   if (!foundChunk) {
     return;
   }
+
+  // Guard against revisiting a chunk (and against cycles in the import graph).
+  // We key on the output file name, mirroring Vite's `getCssFilesForChunk`
+  // `seenChunks` set, since `entry` can be either a manifest key or a chunk
+  // name resolving to the same chunk.
+  if (seenChunks.has(foundChunk.file)) {
+    return;
+  }
+  seenChunks.add(foundChunk.file);
+
   const entryChunk = parseEntryChunk(foundChunk, { base });
+
+  // Recurse into imports BEFORE registering this chunk's own CSS/assets so that
+  // dependency CSS is emitted first. This matches the post-order DFS Vite uses
+  // in `getCssFilesForChunk`, ensuring the cascade order is correct (e.g. a
+  // reset stylesheet in a dependency loads before the importing chunk's atoms).
+  if (entryChunk.imports) {
+    for (const chunk of entryChunk.imports) {
+      parseManifestForEntry({
+        manifest,
+        entry: chunk,
+        nonce,
+        preloads,
+        scripts,
+        base,
+        seenChunks,
+      });
+    }
+  }
 
   if (entryChunk.css) {
     for (const chunk of entryChunk.css) {
@@ -131,21 +161,6 @@ const parseManifestForEntry = ({
     isEntry: Boolean(entryChunk.isEntry),
     nonce,
   });
-
-  if (entryChunk.imports) {
-    for (const chunk of entryChunk.imports) {
-      if (!preloads.has(chunk)) {
-        parseManifestForEntry({
-          manifest,
-          entry: chunk,
-          nonce,
-          preloads,
-          scripts,
-          base,
-        });
-      }
-    }
-  }
 };
 
 const parseEntryChunk = (

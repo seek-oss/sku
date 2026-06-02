@@ -1,6 +1,7 @@
 {
   "name": "@sku-private/test-utils",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "main": "index.ts",
   "exports": {

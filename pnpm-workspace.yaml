@@ -32,22 +32,28 @@ overrides:
   # purely to reduce installation size.
   esbuild: ~0.28.0
 
-ignoredBuiltDependencies:
-  - core-js-pure
-
 linkWorkspacePackages: deep
-
-onlyBuiltDependencies:
-  - '@swc/core'
-  - docsify
-  - esbuild
-  - unrs-resolver
-  - sku
 
 preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
 
+minimumReleaseAge: 4320 # 3 days
+minimumReleaseAgeExclude:
+  - '@braid-design-system/*'
+  - 'braid-design-system'
+  - 'browserslist-config-seek'
+  - 'ensure-gitignore'
+  - 'eslint-config-seek'
+  - 'renovate-config-seek'
+
 configDependencies:
   pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==
+
+allowBuilds:
+  '@swc/core': true
+  core-js-pure: false
+  docsify: false
+  esbuild: true
+  unrs-resolver: false

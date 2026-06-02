@@ -1,3 +1,24 @@
+---
+lockfileVersion: '9.0'
+
+importers:
+
+  .:
+    configDependencies:
+      pnpm-plugin-sku:
+        specifier: 0.0.3
+        version: 0.0.3
+
+packages:
+
+  pnpm-plugin-sku@0.0.3:
+    resolution: {integrity: sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==}
+
+snapshots:
+
+  pnpm-plugin-sku@0.0.3: {}
+
+---
 lockfileVersion: '9.0'
 
 settings:

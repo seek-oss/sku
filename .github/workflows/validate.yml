@@ -52,8 +52,7 @@ jobs:
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Set up hosts
-        # Couldn't get `sudo pnpm setup-test-hosts` to work
-        run: sudo ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts
+        run: sudo pnpm setup-test-hosts
 
       - name: Lint
         run: pnpm lint

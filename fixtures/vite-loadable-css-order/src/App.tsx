@@ -16,7 +16,7 @@ const Details = loadable(() => import('./Details.tsx'), {
   resolveComponent: (module) => module.Details,
 });
 
-export default () => (
+export const App = () => (
   <StrictMode>
     <BraidProvider theme={seekJobs}>
       <Stack space="medium">

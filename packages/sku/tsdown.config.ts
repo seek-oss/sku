@@ -25,6 +25,7 @@ export default defineConfig([
       'config/prettier': 'src/config/prettier.ts',
       'entries/vite-client': 'src/services/vite/entries/vite-client.tsx',
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
+      'jest/file-mock': 'src/config/jest/fileMock.ts',
       'jest-preset': 'src/config/jest/preset.ts',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
@@ -57,7 +58,6 @@ export default defineConfig([
     format: ['cjs'],
     entry: {
       'config/storybook': './src/config/storybook/config.ts',
-      'jest/file-mock': 'src/config/jest/fileMock.ts',
     },
   },
 ]);

@@ -1,10 +1,10 @@
-import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { describe, it, expect } from 'vitest';
 import { parse } from 'node-html-parser';
 
 import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { dirContentsToObject } from '@sku-private/test-utils';
 
 const { sku, fixturePath } = scopeToFixture('vite-loadable-css-order');
 
@@ -23,23 +23,21 @@ describe('vite loadable CSS ordering', () => {
     });
     expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
-    const html = await readFile(fixturePath('./dist/index.html'), 'utf-8');
-    const hrefs = getStylesheetHrefs(html);
+    const distFiles = await dirContentsToObject(fixturePath('dist'), [
+      'css',
+      'html',
+    ]);
+    const hrefs = getStylesheetHrefs(distFiles['index.html']);
+
+    const cssContents = hrefs.map((href) => {
+      const fileName = path.basename(href);
+      const contents = distFiles[fileName];
+      return { href, contents };
+    });
 
     // Identify which emitted stylesheet contains the reset by reading each file
     // and looking for `box-sizing:border-box`, which the Braid reset provides.
     // See https://github.com/seek-oss/braid-design-system/blob/9fc0b9a705e1ab7b5c33561ac88c3dc41335e08c/packages/braid-design-system/src/lib/css/reset/reset.css.ts#L9
-    const cssContents = await Promise.all(
-      hrefs.map(async (href) => {
-        const fileName = path.basename(href);
-        const contents = await readFile(
-          fixturePath(`./dist/${fileName}`),
-          'utf-8',
-        );
-        return { href, contents };
-      }),
-    );
-
     const resetIndex = cssContents.findIndex(({ contents }) =>
       contents.includes('box-sizing:border-box'),
     );

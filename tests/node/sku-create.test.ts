@@ -91,10 +91,10 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
         ),
       ).toBeInTheConsole();
 
-      result.userEvent.keyboard('[ArrowDown]');
+      await result.userEvent.keyboard('[ArrowDown]');
       expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
 
-      result.userEvent.keyboard('[Enter]');
+      await result.userEvent.keyboard('[Enter]');
       expect(
         await result.findByText(
           `Creating new sku project: ${projectName} with webpack template`,
@@ -119,7 +119,7 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
 
     expect(await result.findByText('❯ Vite')).toBeInTheConsole();
 
-    result.userEvent.keyboard('[Enter]');
+    await result.userEvent.keyboard('[Enter]');
 
     expect(
       await result.findByText(

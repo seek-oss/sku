@@ -1,7 +1,7 @@
 import { StaticRouter } from 'react-router';
 import type { Render } from 'sku';
 
-import App from './App';
+import { App } from './App';
 
 export default {
   renderApp: async ({ SkuProvider, route, renderToStringAsync }) =>

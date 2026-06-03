@@ -65,7 +65,7 @@ describe('template flag', () => {
   });
 });
 
-describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
+describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
 

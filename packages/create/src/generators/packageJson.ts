@@ -49,13 +49,13 @@ const resolvePackageManagerField = async (
     return null;
   }
 
-  const latestPnpmV10Version = (
-    await execAsync(`pnpm view pnpm dist-tags.latest-10`)
+  const latestPnpmV11Version = (
+    await execAsync(`pnpm view pnpm dist-tags.latest-11`)
   ).trim();
 
-  if (!latestPnpmV10Version) {
+  if (!latestPnpmV11Version) {
     return null;
   }
 
-  return `pnpm@${latestPnpmV10Version}`;
+  return `pnpm@${latestPnpmV11Version}`;
 };

@@ -19,7 +19,7 @@ exports[`styling > build > should create valid app 1`] = `
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/styling/main-f11c7eb5d7d4b8c58e2e.css"
+       href="/styling/main-f373f2b7a80be49b3db1.css"
      >
      <link
        data-chunk="main"
@@ -108,7 +108,7 @@ exports[`styling > build > should generate the expected files 1`] = `
     "/styling/main.js",
   ]
 CSS: [
-    "/styling/main-f11c7eb5d7d4b8c58e2e.css",
+    "/styling/main-f373f2b7a80be49b3db1.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -199,7 +199,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-f11c7eb5d7d4b8c58e2e.css": .external {
+  "main-f373f2b7a80be49b3db1.css": .external {
   display: none;
   font-size: 9px;
 }
@@ -207,15 +207,21 @@ SOURCE HTML: <!DOCTYPE html>
   border: 10px solid red;
 }
 .qiwkl41 {
-  background: blue;
+  background: #00f;
   font-size: 64px;
   height: 100px;
   width: 100px;
 }
+.qiwkl42 {
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
+  width: calc(100vh - calc(100vh - 100%));
+}
 
-/*# sourceMappingURL=main-f11c7eb5d7d4b8c58e2e.css.map*/
+/*# sourceMappingURL=main-f373f2b7a80be49b3db1.css.map*/
 ,
-  "main-f11c7eb5d7d4b8c58e2e.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main-f373f2b7a80be49b3db1.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",

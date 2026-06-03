@@ -1,0 +1,14 @@
+{
+  "name": "@sku-private/react-lib-with-loadable",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@sku-lib/vite": "workspace:*",
+    "@types/react": "catalog:",
+    "braid-design-system": "catalog:",
+    "react": "catalog:"
+  }
+}

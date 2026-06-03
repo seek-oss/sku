@@ -1,0 +1,23 @@
+{
+  "name": "@sku-fixtures/vite-loadable-css-order",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "sku start",
+    "build": "sku build"
+  },
+  "dependencies": {
+    "braid-design-system": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "^7.9.6",
+    "@sku-private/react-lib-with-loadable": "workspace:*"
+  },
+  "devDependencies": {
+    "@sku-lib/vite": "workspace:^",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

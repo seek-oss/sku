@@ -19,7 +19,7 @@ catalogs:
       specifier: ^19.1.7
       version: 19.2.3
     '@vanilla-extract/css':
-      specifier: ^1.20.0
+      specifier: ^1.20.1
       version: 1.20.1
     '@vanilla-extract/integration':
       specifier: ^8.0.9
@@ -945,6 +945,37 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/vite-loadable-css-order:
+    dependencies:
+      '@sku-private/react-lib-with-loadable':
+        specifier: workspace:*
+        version: link:../../private/react-lib-with-loadable
+      braid-design-system:
+        specifier: 'catalog:'
+        version: 34.1.0(@types/react@19.2.14)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.5
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.5(react@19.2.5)
+      react-router:
+        specifier: ^7.9.6
+        version: 7.14.2(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+    devDependencies:
+      '@sku-lib/vite':
+        specifier: workspace:^
+        version: link:../../packages/vite
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/vite-plugins:
     dependencies:
       react:
@@ -1562,6 +1593,21 @@ importers:
       plop:
         specifier: ^4.0.1
         version: 4.0.5(@types/node@25.6.0)
+
+  private/react-lib-with-loadable:
+    dependencies:
+      '@sku-lib/vite':
+        specifier: workspace:*
+        version: link:../../packages/vite
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      braid-design-system:
+        specifier: 'catalog:'
+        version: 34.1.0(@types/react@19.2.14)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.5
 
   private/scripts:
     devDependencies:

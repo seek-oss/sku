@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 2.0.1
+
+### Patch Changes
+
+- `vite`: Fixed a bug that caused apps using loadable components to sometimes emit incorrectly ordered CSS chunks resulting in broken styles ([#1585](https://github.com/seek-oss/sku/pull/1585))
+
 ## 2.0.0
 
 ### Major Changes

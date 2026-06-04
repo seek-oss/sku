@@ -1,5 +1,16 @@
 # sku
 
+## 15.15.3
+
+### Patch Changes
+
+- Add `babel-polyfill`, `node-fetch` and `url-search-params-polyfill` to list of unnecessary polyfills ([#1584](https://github.com/seek-oss/sku/pull/1584))
+
+  These polyfill dependencies are unnecessary given sku's browser support policy. Warnings will now be logged if they are detected. To address these warnings uninstall the dependencies and remove all references to them from your application.
+
+- Updated dependencies [[`974166d`](https://github.com/seek-oss/sku/commit/974166d6a88af0ff938f44da07b75b571100a409)]:
+  - @sku-lib/vite@2.0.1
+
 ## 15.15.2
 
 ### Patch Changes

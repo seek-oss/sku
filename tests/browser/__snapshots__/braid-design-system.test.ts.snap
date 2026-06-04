@@ -3175,7 +3175,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5044 @@
+@@ -1,198 +1,5049 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -5318,6 +5318,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    text-align: right;
 +  }
 +}
++    </style>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
 +    </style>
 +    <style
 +      type="text/css"
@@ -8230,7 +8235,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5044 @@
+@@ -1,198 +1,5049 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -10373,6 +10378,11 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    text-align: right;
 +  }
 +}
++    </style>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
++    >
 +    </style>
 +    <style
 +      type="text/css"

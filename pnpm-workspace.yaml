@@ -14,6 +14,8 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
+  - '@capsizecss/*'
+  - '@vanilla-extract/*'
   - 'braid-design-system'
   - 'browserslist-config-seek'
   - 'ensure-gitignore'

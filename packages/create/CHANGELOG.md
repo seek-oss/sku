@@ -1,5 +1,16 @@
 # @sku-lib/create
 
+## 1.2.0
+
+### Minor Changes
+
+- When `pnpm` is used to run the CLI, the `package.json#packageManager` field will now be set to the latest v11 version of PNPM and a `pnpm-workspace.yaml` will be included in directory root ([#1574](https://github.com/seek-oss/sku/pull/1574))
+
+### Patch Changes
+
+- Updated dependencies [[`51ce9bb`](https://github.com/seek-oss/sku/commit/51ce9bba4fce76f42d09c4c005d90d3ba9ba26d1), [`51ce9bb`](https://github.com/seek-oss/sku/commit/51ce9bba4fce76f42d09c4c005d90d3ba9ba26d1), [`51ce9bb`](https://github.com/seek-oss/sku/commit/51ce9bba4fce76f42d09c4c005d90d3ba9ba26d1)]:
+  - pnpm-plugin-sku@0.1.0
+
 ## 1.1.6
 
 ### Patch Changes

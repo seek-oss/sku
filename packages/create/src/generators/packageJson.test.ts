@@ -117,7 +117,7 @@ describe('generatePackageJson', () => {
     expect(packageJsonContent).toMatchInlineSnapshot(`
       {
         "name": "my-app",
-        "packageManager": "pnpm@10.VERSION_IGNORED",
+        "packageManager": "pnpm@11.VERSION_IGNORED",
         "private": true,
         "scripts": {
           "build": "sku build",

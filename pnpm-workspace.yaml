@@ -5,6 +5,25 @@ packages:
   - packages/*
   - private/*
 
+allowBuilds:
+  '@swc/core': true
+  core-js-pure: false
+  docsify: false
+  esbuild: true
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@braid-design-system/*'
+  - '@capsizecss/*'
+  - '@vanilla-extract/*'
+  - 'braid-design-system'
+  - 'browserslist-config-seek'
+  - 'ensure-gitignore'
+  - 'eslint-config-seek'
+  - 'renovate-config-seek'
+
+dedupePeers: true
+
 catalog:
   '@types/debug': '^4.1.12'
   '@types/node': ^22.18.8
@@ -34,13 +53,6 @@ ignoredBuiltDependencies:
   - core-js-pure
 
 linkWorkspacePackages: deep
-
-onlyBuiltDependencies:
-  - '@swc/core'
-  - docsify
-  - esbuild
-  - unrs-resolver
-  - sku
 
 overrides:
   # Multiple versions of esbuild tend to crop up in the lockfile. Pin to a specific minor version

@@ -11,10 +11,15 @@ export const getPnpmConfigDependencies = async (): Promise<string[]> => {
 
   // Be VERY careful with this object as it can contain package registry secrets.
   // Only extract specific keys that are safe to expose.
+  // As of PNPM v11, sensitive information is now redacted.
   const result = JSON.parse(rawResult);
-  if (!result['config-dependencies']) {
+
+  // Keys changed to camel case in PNPM v11, so we check for both versions
+  const configDependencies: Record<string, string> | undefined =
+    result['config-dependencies'] ?? result.configDependencies;
+  if (!configDependencies) {
     return [];
   }
 
-  return Object.keys(result['config-dependencies']);
+  return Object.keys(configDependencies);
 };

@@ -49,13 +49,16 @@ const resolvePackageManagerField = async (
     return null;
   }
 
-  const latestPnpmV10Version = (
-    await execAsync(`pnpm view pnpm dist-tags.latest-10`)
-  ).trim();
+  const latestPnpmV11Version =
+    // The `latest-*` tag controls what major version of PNPM is configured in new apps.
+    // When updating it in the future, ensure that the sku repo itself also updates to the
+    // same major version. Not doing this can result in inconsistent test behaviour.
+    // See https://github.com/seek-oss/sku/pull/1586.
+    (await execAsync(`pnpm view pnpm dist-tags.latest-11`)).trim();
 
-  if (!latestPnpmV10Version) {
+  if (!latestPnpmV11Version) {
     return null;
   }
 
-  return `pnpm@${latestPnpmV10Version}`;
+  return `pnpm@${latestPnpmV11Version}`;
 };

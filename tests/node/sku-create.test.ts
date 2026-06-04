@@ -65,7 +65,7 @@ describe('template flag', () => {
   });
 });
 
-describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
+describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
 
@@ -91,10 +91,10 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
         ),
       ).toBeInTheConsole();
 
-      result.userEvent.keyboard('[ArrowDown]');
+      await result.userEvent.keyboard('[ArrowDown]');
       expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
 
-      result.userEvent.keyboard('[Enter]');
+      await result.userEvent.keyboard('[Enter]');
       expect(
         await result.findByText(
           `Creating new sku project: ${projectName} with webpack template`,
@@ -119,7 +119,7 @@ describe.each(['webpack', 'vite'])('create-sku %s', (template) => {
 
     expect(await result.findByText('❯ Vite')).toBeInTheConsole();
 
-    result.userEvent.keyboard('[Enter]');
+    await result.userEvent.keyboard('[Enter]');
 
     expect(
       await result.findByText(

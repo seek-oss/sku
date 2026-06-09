@@ -3,18 +3,30 @@ import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import { getBuildRoutes } from '../../../webpack/config/plugins/createHtmlRenderPlugin.js';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
+import type { Manifest } from 'vite';
+import { readFile } from 'node:fs/promises';
+import { success } from '@sku-private/utils/console';
 
-export type JobWorkerData = {
-  publicPath: string;
+export type Job = {
   filePath: string;
-  cspEnabled: boolean;
-  cspExtraScriptSrcHosts: string[];
   environment: string;
   language: string;
   route: string;
   routeName: string;
   site: string;
+};
+
+export type SharedWorkerData = {
+  publicPath: string;
+  cspEnabled: boolean;
+  cspExtraScriptSrcHosts: string[];
   targetPath: string;
+  manifest: Manifest;
+};
+
+export type WorkerData = {
+  jobs: Job[];
+  sharedWorkerData: SharedWorkerData;
 };
 
 export class PrerenderWorkerError extends Error {
@@ -24,10 +36,17 @@ export class PrerenderWorkerError extends Error {
   }
 }
 
-const runJobs = (jobs: JobWorkerData[]): Promise<void> => {
+const runJobs = (
+  jobs: Job[],
+  sharedWorkerData: SharedWorkerData,
+): Promise<void> => {
   const workerPath = new URL(import.meta.resolve('#vite/prerender-worker'));
+  const workerData: WorkerData = {
+    jobs,
+    sharedWorkerData,
+  };
   const worker = new Worker(workerPath, {
-    workerData: jobs,
+    workerData,
     execArgv: ['--enable-source-maps'],
   });
 
@@ -64,26 +83,38 @@ const getFileName = (
 export const prerenderConcurrently = async (skuContext: SkuContext) => {
   const routes = getBuildRoutes(skuContext);
 
+  const targetPath = skuContext.paths.target;
+
   const jobs = routes.map((route) => ({
     route: route.route,
     routeName: route.routeName,
     site: route.site,
     filePath: getFileName(skuContext, route),
-    publicPath: skuContext.publicPath,
     environment: route.environment,
-    cspEnabled: skuContext.cspEnabled,
-    cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
     language: route.language,
-    targetPath: skuContext.paths.target,
   }));
 
-  // If we have more jobs than CPU cores, we need to split the jobs into chunks
-  const cpus = os.cpus().length > jobs.length ? jobs.length : os.cpus().length;
-  const chunkSize = Math.ceil(jobs.length / cpus);
+  const rawManifest = await readFile(
+    path.resolve(path.join(targetPath, '.vite/manifest.json')),
+    'utf-8',
+  );
+
+  const sharedWorkerData = {
+    publicPath: skuContext.publicPath,
+    cspEnabled: skuContext.cspEnabled,
+    cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+    targetPath,
+    manifest: JSON.parse(rawManifest) as Manifest,
+  };
+
+  const cores = Math.min(os.availableParallelism(), jobs.length);
+  const chunkSize = Math.ceil(jobs.length / cores);
 
   await Promise.all(
-    Array.from({ length: cpus }, (_, i) =>
-      runJobs(jobs.slice(i * chunkSize, (i + 1) * chunkSize)),
+    Array.from({ length: cores }, (_, i) =>
+      runJobs(jobs.slice(i * chunkSize, (i + 1) * chunkSize), sharedWorkerData),
     ),
   );
+
+  console.log(success(`Finished pre-rendering ${routes.length} pages`));
 };

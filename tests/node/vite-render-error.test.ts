@@ -56,8 +56,7 @@ describe('vite render error', () => {
       "Error importing sku render entrypoint
       Error: Render entrypoint error
           at <anonymous> ({cwd}/fixtures/vite-render-error/src/renderError.tsx:7:7)
-          at async Promise.all (index 1)
-          at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:17:28"
+          at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:19:12"
     `);
   });
 });

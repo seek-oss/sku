@@ -1,5 +1,5 @@
 import { mockAdapter, setAdapter } from '@vanilla-extract/css/adapter';
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { workerData } from 'node:worker_threads';
@@ -11,48 +11,49 @@ import createCSPHandler, {
 } from '../../../webpack/entry/csp.js';
 import { ensureTargetDirectory } from '../../../../utils/buildFileUtils.js';
 
-import type { JobWorkerData } from './prerenderConcurrently.js';
+import type { WorkerData } from './prerenderConcurrently.js';
+import type { Render } from '../../../../types/types.js';
 
+// Vite handles generating Vanilla Extract CSS during its build, so we set a mock adapter
+// to prevent Vanilla Extract errors during pre-rendering.
 setAdapter(mockAdapter);
 
-const resolve = (p: string) => path.resolve(process.cwd(), p);
-
-if (!workerData || workerData.length === 0) {
+const typedWorkerData = workerData as WorkerData;
+if (!typedWorkerData || typedWorkerData.jobs.length === 0) {
   // No jobs assigned to this worker, exit gracefully
   process.exit(0);
 }
 
-const { targetPath } = workerData[0];
+const {
+  sharedWorkerData: {
+    cspEnabled,
+    cspExtraScriptSrcHosts,
+    manifest,
+    publicPath,
+    targetPath,
+  },
+  jobs,
+} = typedWorkerData;
+
 if (!targetPath) {
   throw new Error('targetPath is required in workerData');
 }
 
 const outDir = createOutDir(targetPath);
 
-const [manifest, render] = await Promise.all([
-  readFile(resolve(path.join(targetPath, '.vite/manifest.json')), 'utf-8').then(
-    JSON.parse,
-  ),
-  import(resolve(path.join(outDir.ssg, renderEntryChunkName)))
-    .then((m) => m.default)
-    .catch((e) => {
-      throw new Error(`Error importing sku render entrypoint`, { cause: e });
-    }),
-]);
+let render: Render;
+try {
+  const renderModule = await import(
+    path.join(outDir.ssg, renderEntryChunkName)
+  );
+  render = renderModule.default;
+} catch (e) {
+  throw new Error(`Error importing sku render entrypoint`, { cause: e });
+}
 
 await Promise.all(
-  workerData.map(
-    async ({
-      publicPath,
-      environment,
-      filePath,
-      cspExtraScriptSrcHosts,
-      cspEnabled,
-      site,
-      route,
-      routeName,
-      language,
-    }: JobWorkerData) => {
+  jobs.map(
+    async ({ environment, filePath, site, route, routeName, language }) => {
       const loadableCollector = createCollector({
         manifest,
         base: publicPath,
@@ -98,7 +99,7 @@ await Promise.all(
         console.log(
           `Writing HTML for route "${route}" to "${relativeOutputPath}"`,
         );
-        await writeFile(resolve(filePath), html);
+        await writeFile(filePath, html);
       } catch (e) {
         throw new Error(`Error writing file to "${relativeOutputPath}"`, {
           cause: e,

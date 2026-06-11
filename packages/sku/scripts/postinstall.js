@@ -29,7 +29,7 @@ try {
 
   const skipPostInstall = skuSkipPostInstall || skuSkipPostinstall;
   const hasSkuDep = Boolean(dependencies?.sku);
-  // sku should always be a dev dependency now that sku init installs it as one, but some repos may still have it as a regular dependency
+  // sku should always be a dev dependency now that @sku-lib/create installs it as one, but some repos may still have it as a regular dependency
   const hasSku = Boolean(devDependencies?.sku) || hasSkuDep;
   // Don't run configure script on sku itself
   // Don't run configure script if sku is not installed

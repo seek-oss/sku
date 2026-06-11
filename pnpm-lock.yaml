@@ -571,12 +571,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/create
 
-  fixtures/sku-init:
-    devDependencies:
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
   fixtures/sku-test:
     dependencies:
       '@apollo/client':

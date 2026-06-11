@@ -165,7 +165,7 @@ export default async (skuContext: SkuContext) => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's package manager
+  // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's package manager
   if (rootDir && isAtLeastPnpmV10()) {
     const pnpmConfigDependencies = await getPnpmConfigDependencies();
 

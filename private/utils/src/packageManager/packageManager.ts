@@ -73,7 +73,7 @@ const resolvePackageManager = () => {
     );
   }
 
-  // No root found (occurs during `sku init`), `rootDir` will be `null`
+  // No root found (occurs during `@sku-lib/create`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;
 
   return {

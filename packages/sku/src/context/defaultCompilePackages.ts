@@ -125,7 +125,7 @@ export const detectedCompilePackagesSync = (): CompilePackagesResult => {
     return cachedResult;
   }
 
-  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+  // If there's no rootDir, we're either inside a "@sku-lib/create" command, or we can't determine the user's
   // package manager. In either case, we can't correctly detect compile packages.
   if (!rootDir) {
     cachedResult = emptyResult;
@@ -150,7 +150,7 @@ export const detectedCompilePackages =
       return inFlight;
     }
 
-    // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+    // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's
     // package manager. In either case, we can't correctly detect compile packages.
     if (!rootDir) {
       cachedResult = emptyResult;

@@ -25,6 +25,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
         // A Shell Error is unrecoverable. Reject so that Error handling can resolve the response.
         log('Shell Render Error:', error);
         hasErrored = true;
+        clearTimeout(timeout);
         reject(error);
       },
 
@@ -43,7 +44,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
       },
     });
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (hasErrored || hasRendered) {
         return;
       }
@@ -72,6 +73,7 @@ export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
         // Potential error here before. We were calling callback() on the error parameter.
         destroy(_error, callback) {
           log('Stream ended. Returning HTML');
+          clearTimeout(timeout);
           resolve(html);
           callback();
         },

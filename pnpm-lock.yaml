@@ -1207,10 +1207,10 @@ importers:
         specifier: ^0.2.1
         version: 0.2.3(@babel/core@7.29.0)(@babel/plugin-transform-runtime@7.29.0)(@babel/runtime@7.29.2)(rolldown@1.0.0-rc.18)(vite@8.0.10)
       '@sku-lib/babel-plugin-display-name':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../babel-plugin-display-name
       '@sku-lib/vite':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../vite
       '@storybook/react-webpack5':
         specifier: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0

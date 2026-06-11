@@ -1,5 +1,19 @@
 # sku
 
+## 15.15.4
+
+### Patch Changes
+
+- `vite`: Avoid redundant work during static pre-rendering ([#1590](https://github.com/seek-oss/sku/pull/1590))
+
+- Unpin `@sku-lib/babel-plugin-display-name` and `@sku-lib/vite` dependencies ([#1587](https://github.com/seek-oss/sku/pull/1587))
+
+- `vite`: Pass through options set via `dangerouslySetViteConfig` to the Vanilla Extract plugin ([#1588](https://github.com/seek-oss/sku/pull/1588))
+
+- `vite`: Clear render timeout after successful `renderToStringAsync` ([#1590](https://github.com/seek-oss/sku/pull/1590))
+
+  Vite apps that use `renderToStringAsync` were being artificially slowed down by a 5 second timeout that was not being cleared.
+
 ## 15.15.3
 
 ### Patch Changes

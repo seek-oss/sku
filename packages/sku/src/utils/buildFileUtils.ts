@@ -3,7 +3,7 @@ import { rm, mkdir } from 'node:fs/promises';
 import { fdir as Fdir } from 'fdir';
 
 import exists from './exists.js';
-import copyDirContents from './copyDirContents.js';
+import { copyDirContents } from './copyDirContents.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 
 export const cleanTargetDirectory = async (

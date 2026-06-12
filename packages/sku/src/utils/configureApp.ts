@@ -30,6 +30,7 @@ import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 import { success } from '@sku-private/utils/console';
+import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
 const coverageFolder = 'coverage';
 
@@ -179,4 +180,6 @@ export default async (skuContext: SkuContext) => {
       pnpmPluginSkuInstalled,
     });
   }
+
+  warnOnLegacyReact();
 };

@@ -39,7 +39,6 @@ interface TelemetryProvider {
   gauge: (metricName: MetricName, duration: number, tagMap?: TagMap) => void;
   addGlobalTags: (tagMap: TagMap) => void;
   close: () => Promise<void>;
-  isRealProvider: boolean;
 }
 
 const createNoopProvider = (): TelemetryProvider => ({
@@ -48,30 +47,30 @@ const createNoopProvider = (): TelemetryProvider => ({
   gauge: noopDebug('gauge'),
   addGlobalTags: noopDebug('addGlobalTags'),
   close: () => Promise.resolve(),
-  isRealProvider: false,
 });
 
-let innerProvider: TelemetryProvider = createNoopProvider();
+let activeProvider: TelemetryProvider = createNoopProvider();
 const pendingGlobalTags: GlobalTagsProvider[] = [];
-let resolved = false;
+let providerResolved = false;
+let usingRealProvider = false;
 
 const flushPendingGlobalTags = () => {
   const tagsProviders = pendingGlobalTags.splice(0);
 
-  // Only the real provider does anything with global tags, so skip computing
-  // them entirely when telemetry is disabled or not installed.
-  if (!innerProvider.isRealProvider) {
+  // Skip computing global tags entirely when telemetry is disabled or not
+  // installed, since the noop provider would just discard them.
+  if (!usingRealProvider) {
     return;
   }
 
-  tagsProviders.forEach((getTags) => innerProvider.addGlobalTags(getTags()));
+  tagsProviders.forEach((getTags) => activeProvider.addGlobalTags(getTags()));
 };
 
 const resolveProvider = () => {
-  if (resolved) {
+  if (providerResolved) {
     return;
   }
-  resolved = true;
+  providerResolved = true;
 
   if (process.env.SKU_TELEMETRY === 'false') {
     debug('Sku telemetry is disabled, skipping initialization');
@@ -92,8 +91,8 @@ const resolveProvider = () => {
       realProvider.gauge = noopDebug('gauge');
     }
 
-    innerProvider = realProvider;
-    innerProvider.isRealProvider = true;
+    activeProvider = realProvider;
+    usingRealProvider = true;
   } catch {
     debug(
       '@seek/sku-telemetry not installed, falling back to noop telemetry provider',
@@ -120,37 +119,33 @@ const resolveProvider = () => {
  * expensive) computation is deferred until the first metric is emitted.
  */
 export const registerGlobalTags = (getTags: GlobalTagsProvider) => {
-  if (!resolved) {
+  if (!providerResolved) {
     pendingGlobalTags.push(getTags);
     return;
   }
 
-  if (innerProvider.isRealProvider) {
-    innerProvider.addGlobalTags(getTags());
+  if (usingRealProvider) {
+    activeProvider.addGlobalTags(getTags());
   }
 };
 
 const provider: TelemetryProvider = {
   count: (...args) => {
     resolveProvider();
-    innerProvider.count(...args);
+    activeProvider.count(...args);
   },
   timing: (...args) => {
     resolveProvider();
-    innerProvider.timing(...args);
+    activeProvider.timing(...args);
   },
   gauge: (...args) => {
     resolveProvider();
-    innerProvider.gauge(...args);
+    activeProvider.gauge(...args);
   },
   addGlobalTags: (tagMap) => registerGlobalTags(() => tagMap),
   close: async () => {
     resolveProvider();
-    await innerProvider.close();
-  },
-  get isRealProvider() {
-    resolveProvider();
-    return innerProvider.isRealProvider;
+    await activeProvider.close();
   },
 };
 

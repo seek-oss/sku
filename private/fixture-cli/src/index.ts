@@ -27,7 +27,7 @@ program
 
     spawn('pnpm', [scriptName, ...scriptArgs], {
       cwd: getFixtureDir(fixture),
-      env: { ...process.env, SKU_TELEMETRY: 'false' },
+      env: { ...process.env },
       stdio: 'inherit',
     });
   });

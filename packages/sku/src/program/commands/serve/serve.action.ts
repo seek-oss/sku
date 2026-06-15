@@ -12,7 +12,9 @@ import allocatePort from '../../../utils/allocatePort.js';
 import { openBrowser } from '../../../openBrowser.js';
 import { getSiteForHost } from '../../../context/getSiteForHost.js';
 import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
-import provider from '../../../services/telemetry/index.js';
+import provider, {
+  initializeTelemetry,
+} from '../../../services/telemetry/index.js';
 import createServer from '../../../utils/createServer.js';
 import {
   getRouteWithLanguage,
@@ -35,6 +37,8 @@ export const serveAction = async ({
   environment: string;
   skuContext: SkuContext;
 }) => {
+  initializeTelemetry(skuContext);
+
   const {
     port,
     paths,

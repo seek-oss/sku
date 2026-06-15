@@ -44,8 +44,13 @@ let provider: TelemetryProvider = {
   isRealProvider: false,
 };
 
-try {
-  if (process.env.SKU_TELEMETRY !== 'false') {
+export const setRealProvider = () => {
+  if (process.env.SKU_TELEMETRY === 'false') {
+    debug('Sku telemetry is disabled, skipping initialization');
+    return;
+  }
+
+  try {
     // Consumers install this private dependency
     // eslint-disable-next-line import-x/no-unresolved
     const _mod = require('@seek/sku-telemetry');
@@ -61,22 +66,22 @@ try {
     provider = realProvider;
     // we now know that telemetry is enabled
     provider.isRealProvider = true;
+  } catch {
+    debug(
+      '@seek/sku-telemetry not installed, falling back to noop telemetry provider',
+    );
+
+    const addCommand = getAddCommand({
+      deps: ['@seek/sku-telemetry'],
+      type: 'dev',
+    });
+
+    banner('caution', '@seek/sku-telemetry not installed', [
+      'To help us improve sku, please install our private telemetry package that gives us insights on usage, errors and performance.',
+      addCommand,
+      'Non SEEK based usage can disable this message with `SKU_TELEMETRY=false`',
+    ]);
   }
-} catch {
-  debug(
-    '@seek/sku-telemetry not installed, falling back to noop telemetry provider',
-  );
-
-  const addCommand = getAddCommand({
-    deps: ['@seek/sku-telemetry'],
-    type: 'dev',
-  });
-
-  banner('caution', '@seek/sku-telemetry not installed', [
-    'To help us improve sku, please install our private telemetry package that gives us insights on usage, errors and performance.',
-    addCommand,
-    'Non SEEK based usage can disable this message with `SKU_TELEMETRY=false`',
-  ]);
-}
+};
 
 export default provider;

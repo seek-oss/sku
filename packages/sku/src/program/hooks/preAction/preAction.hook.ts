@@ -1,7 +1,6 @@
 import type { Command } from 'commander';
 
 import { getSkuContext } from '../../../context/createSkuContext.js';
-import { initializeTelemetry } from '../../../services/telemetry/index.js';
 
 export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
   const { port, strictPort } = actionCommand.opts();
@@ -16,6 +15,5 @@ export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
   skuContext.listUrls = actionCommand.opts()?.listUrls;
   skuContext.commandName = actionCommand.name();
 
-  initializeTelemetry(skuContext);
   actionCommand.setOptionValue('skuContext', skuContext);
 };

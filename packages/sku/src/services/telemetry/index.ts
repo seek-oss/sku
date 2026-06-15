@@ -2,7 +2,7 @@ import os from 'node:os';
 
 import { requireFromCwd } from '@sku-private/utils';
 import isCI from '../../utils/isCI.js';
-import provider from './provider.js';
+import provider, { setRealProvider } from './provider.js';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 import debug from 'debug';
 
@@ -10,7 +10,7 @@ import type { SkuContext } from '../../context/createSkuContext.js';
 
 const log = debug('sku:telemetry');
 
-export const initializeTelemetry = ({ languages, bundler }: SkuContext) => {
+const setGlobalTags = ({ languages, bundler }: SkuContext) => {
   let projectName = 'unknown';
   let braidVersion = 'unknown';
   const skuVersion = skuPackageJson.version;
@@ -36,6 +36,11 @@ export const initializeTelemetry = ({ languages, bundler }: SkuContext) => {
     languageSupport: Boolean(languages) ? 'multi' : 'single',
     bundler,
   });
+};
+
+export const initializeTelemetry = (skuContext: SkuContext) => {
+  setRealProvider();
+  setGlobalTags(skuContext);
 };
 
 export default provider;

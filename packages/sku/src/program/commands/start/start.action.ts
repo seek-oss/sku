@@ -10,6 +10,7 @@ import { checkHosts, withHostile } from '../../../context/hosts.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
 import { accent } from '@sku-private/utils/console';
+import { initializeTelemetry } from '../../../services/telemetry/index.js';
 
 export const startAction = async (
   {
@@ -21,6 +22,8 @@ export const startAction = async (
   },
   command: Command,
 ) => {
+  initializeTelemetry(skuContext);
+
   console.log(accent(`sku start`));
   const { environment: environmentOption } = command.optsWithGlobals();
 

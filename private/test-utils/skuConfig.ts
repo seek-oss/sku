@@ -21,12 +21,29 @@ export const makeStableHashes = (config: Record<string, any>) => {
  * A helper for vite to make stable hashes.
  */
 export const makeStableViteHashes = () => ({
-  build: {
-    rolldownOptions: {
-      output: {
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name][extname]',
-        entryFileNames: '[name].js',
+  environments: {
+    ssr: {
+      build: {
+        rolldownOptions: {
+          output: {
+            // Don't set `entryFileNames` for client build because sku relies on the render
+            // entrypoint having a static name
+            // entryFileNames: 'render.js',
+            chunkFileNames: '[name].js',
+            assetFileNames: '[name][extname]',
+          },
+        },
+      },
+    },
+    client: {
+      build: {
+        rolldownOptions: {
+          output: {
+            entryFileNames: '[name].js',
+            chunkFileNames: '[name].js',
+            assetFileNames: '[name][extname]',
+          },
+        },
       },
     },
   },

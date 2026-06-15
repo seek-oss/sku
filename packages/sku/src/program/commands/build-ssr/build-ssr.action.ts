@@ -8,9 +8,7 @@ import {
   ensureTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
-import provider, {
-  initializeTelemetry,
-} from '../../../services/telemetry/index.js';
+import provider from '../../../services/telemetry/index.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import {
@@ -29,8 +27,6 @@ export const buildSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  initializeTelemetry(skuContext);
-
   if (skuContext.bundler === 'vite') {
     throw new Error(
       'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',

@@ -2,7 +2,7 @@ import os from 'node:os';
 
 import { requireFromCwd } from '@sku-private/utils';
 import isCI from '../../utils/isCI.js';
-import provider, { setRealProvider } from './provider.js';
+import provider, { registerGlobalTags } from './provider.js';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
 import debug from 'debug';
 
@@ -10,7 +10,7 @@ import type { SkuContext } from '../../context/createSkuContext.js';
 
 const log = debug('sku:telemetry');
 
-const setGlobalTags = ({ languages, bundler }: SkuContext) => {
+const computeGlobalTags = ({ languages, bundler }: SkuContext) => {
   let projectName = 'unknown';
   let braidVersion = 'unknown';
   const skuVersion = skuPackageJson.version;
@@ -27,20 +27,25 @@ const setGlobalTags = ({ languages, bundler }: SkuContext) => {
     log(`Error getting project name or braid version: ${e}`);
   }
 
-  provider.addGlobalTags({
+  return {
     ci: isCI,
     version: skuVersion,
     braidVersion,
     project: projectName,
     os: os.platform(),
-    languageSupport: Boolean(languages) ? 'multi' : 'single',
+    languageSupport: languages ? 'multi' : 'single',
     bundler,
-  });
+  };
 };
 
-export const initializeTelemetry = (skuContext: SkuContext) => {
-  setRealProvider();
-  setGlobalTags(skuContext);
+/**
+ * Registers the global tags for the current sku command. The tags are only
+ * computed if telemetry ends up being used, so this is safe to call eagerly
+ * (e.g. from the preAction hook) without triggering the work for commands that
+ * never emit metrics.
+ */
+export const setGlobalTags = (skuContext: SkuContext) => {
+  registerGlobalTags(() => computeGlobalTags(skuContext));
 };
 
 export default provider;

@@ -1,7 +1,6 @@
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
-import { initializeTelemetry } from '../../../services/telemetry/index.js';
 
 export const buildAction = async ({
   stats,
@@ -10,7 +9,6 @@ export const buildAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  initializeTelemetry(skuContext);
   validatePolyfills(skuContext.polyfills);
 
   if (skuContext.bundler === 'vite') {

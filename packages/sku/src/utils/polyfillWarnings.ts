@@ -2,7 +2,7 @@ import {
   detectUnnecessaryPolyfills,
   type DetectedPolyfillWithSource,
 } from './polyfillDetector.js';
-import provider from '../services/telemetry/provider.js';
+import provider from '../services/telemetry/index.js';
 import {
   caution,
   critical,

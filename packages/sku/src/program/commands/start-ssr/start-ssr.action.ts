@@ -1,7 +1,6 @@
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
-import { initializeTelemetry } from '../../../services/telemetry/index.js';
 
 export const startSsrAction = async ({
   stats,
@@ -16,7 +15,6 @@ export const startSsrAction = async ({
     );
   }
 
-  initializeTelemetry(skuContext);
   validatePolyfills(skuContext.polyfills);
 
   const { webpackStartSsrHandler } =

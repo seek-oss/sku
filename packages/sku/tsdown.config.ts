@@ -40,14 +40,16 @@ export default defineConfig([
       'webpack/render': 'src/services/webpack/entry/render/index.ts',
       'webpack/server': 'src/services/webpack/entry/server/index.ts',
     },
-    external: [
-      '__sku_alias__renderEntry',
-      '__sku_alias__clientEntry',
-      '__sku_alias__serverEntry',
-      '__sku_alias__webpackStats',
-      'virtual:sku/polyfills',
-      '@vanilla-extract/css/adapter',
-    ],
+    deps: {
+      neverBundle: [
+        '__sku_alias__renderEntry',
+        '__sku_alias__clientEntry',
+        '__sku_alias__serverEntry',
+        '__sku_alias__webpackStats',
+        'virtual:sku/polyfills',
+        '@vanilla-extract/css/adapter',
+      ],
+    },
   },
   // Storybook config needs to be cjs for webpack storybook to work.
   // @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058

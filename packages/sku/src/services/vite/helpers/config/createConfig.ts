@@ -1,5 +1,4 @@
 import type { SkuContext } from '../../../../context/createSkuContext.js';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { createRequire } from 'node:module';
 import type { InlineConfig } from 'vite';
 import { vitePluginVocab } from '@vocab/vite';
@@ -12,14 +11,10 @@ import { skuPlugin } from '../../skuPlugin.js';
 
 const require = createRequire(import.meta.url);
 
-const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
-
-const vanillaExtractCompilerPluginAllowlist = [
+const vanillaExtractCompilerPluginAllowlist = new Set([
   // Without this plugin, user-configured overrides won't be passed through to the VE compiler
   'sku:dangerously-set-vite-config',
-  // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to explicitly allow it
-  TSCONFIG_PLUGIN_NAME,
-];
+]);
 
 export const createConfig = (
   skuContext: SkuContext,
@@ -49,10 +44,9 @@ export const createConfig = (
 
   return {
     resolve: {
-      // ! vite v8+ supports tsconfigPaths out of the box, however we need to use the vite-tsconfig-paths plugin instead for vitest v3 support.
-      // ! Once we drop support for vitest v3, we can remove this plugin and use the built-in tsconfigPaths support.
-      // ! This will need to be added at the top level so that vanilla-extract picks it up. VE doesn't inherit config options from plugins at the moment (unless whitelisting the entire plugin)
-      // tsconfigPaths: true,
+      // This needs to be added at the top level so that vanilla-extract picks it up.
+      // VE doesn't inherit config options from plugins at the moment (unless whitelisting the entire plugin)
+      tsconfigPaths: true,
     },
     plugins: [
       /**
@@ -64,11 +58,6 @@ export const createConfig = (
        * vendor plugins
        */
       vocabConfig && vitePluginVocab({ vocabConfig }),
-      {
-        ...tsconfigPaths(),
-        // This is a workaround to avoid the warning about the plugin being detected.
-        name: TSCONFIG_PLUGIN_NAME,
-      },
       cjsInterop({
         dependencies: skuContext.serveCjsInteropDependencies,
         apply: 'serve',
@@ -88,7 +77,7 @@ export const createConfig = (
       }),
       vanillaExtractPlugin({
         unstable_pluginFilter: ({ name }) =>
-          vanillaExtractCompilerPluginAllowlist.includes(name),
+          vanillaExtractCompilerPluginAllowlist.has(name),
       }),
       /**
        * the sku plugin (only sku specific changes)

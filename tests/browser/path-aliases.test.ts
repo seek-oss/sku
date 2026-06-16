@@ -81,12 +81,6 @@ describe('pathAliases', () => {
       await appPage.goto(`http://localhost:${port}`);
 
       expect(
-        start.queryByError('The plugin "vite-tsconfig-paths" is detected.'),
-      ).not.toBeInTheConsole();
-
-      expect(start.queryByError('PLUGIN_ERROR')).not.toBeInTheConsole();
-
-      expect(
         start.queryByError(
           "Cannot find module '@components/Button'",
           undefined,

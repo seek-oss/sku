@@ -56,8 +56,8 @@ catalogs:
       specifier: ^2.3.26
       version: 2.3.27
     '@vocab/vite':
-      specifier: ^1.0.3
-      version: 1.0.3
+      specifier: ^1.0.4
+      version: 1.0.4
     braid-design-system:
       specifier: ^34.0.0
       version: 34.1.0
@@ -773,7 +773,7 @@ importers:
         version: link:../../packages/sku
       storybook:
         specifier: ^10.0.0
-        version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+        version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
 
   fixtures/styling:
     dependencies:
@@ -813,7 +813,7 @@ importers:
         version: link:../../packages/sku
       storybook:
         specifier: ^10.0.0
-        version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+        version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
 
   fixtures/suspense:
     dependencies:
@@ -856,7 +856,7 @@ importers:
         version: 1.1.24(react@19.2.5)
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.3(vite@8.0.10)
+        version: 1.0.4(vite@8.0.10)
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.24(webpack@5.106.2)
@@ -1259,7 +1259,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.3(vite@8.0.10)
+        version: 1.0.4(vite@8.0.10)
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.24(webpack@5.106.2)
@@ -1587,7 +1587,7 @@ importers:
     devDependencies:
       '@prettier/sync':
         specifier: ^0.6.1
-        version: 0.6.1(prettier@3.8.3)
+        version: 0.6.1(prettier@3.8.4)
       '@types/css':
         specifier: ^0.0.38
         version: 0.0.38
@@ -4795,8 +4795,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.3':
-    resolution: {integrity: sha512-w7h1x/+mqW/EWDJM5OB9pkWDFtgX8yn8yWvj/ww+AbAQrqkHVsk7MTercrvBYIbI/QBn6rJQ2GiUwNMbYHPLvg==}
+  '@vocab/vite@1.0.4':
+    resolution: {integrity: sha512-VNvRIfQjiege9+AY01gXu/0PIW1VOS0bWK4qtWJpt2rcdECPXFJk1f/KCCTsXPlrDeWh41/cgM3l+pWqng5Wow==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -8674,6 +8674,11 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
+  prettier@3.8.4:
+    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   pretty-error@4.0.0:
     resolution: {integrity: sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==}
 
@@ -9710,6 +9715,7 @@ packages:
   tsconfck@3.1.6:
     resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
     engines: {node: ^18 || >=20}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -12622,10 +12628,10 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@prettier/sync@0.6.1(prettier@3.8.3)':
+  '@prettier/sync@0.6.1(prettier@3.8.4)':
     dependencies:
       make-synchronized: 0.8.0
-      prettier: 3.8.3
+      prettier: 3.8.4
 
   '@quansync/fs@1.0.0':
     dependencies:
@@ -12769,7 +12775,7 @@ snapshots:
       '@storybook/react-dom-shim': 10.3.6(react-dom@19.2.5)(react@19.2.5)(storybook@10.3.6)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - '@types/react'
@@ -12824,7 +12830,7 @@ snapshots:
       fork-ts-checker-webpack-plugin: 9.1.0(typescript@5.9.3)(webpack@5.106.2)
       html-webpack-plugin: 5.6.7(webpack@5.106.2)
       magic-string: 0.30.21
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       style-loader: 4.0.0(webpack@5.106.2)
       terser-webpack-plugin: 5.5.0(esbuild@0.28.0)(webpack@5.106.2)
       ts-dedent: 2.2.0
@@ -12843,12 +12849,12 @@ snapshots:
 
   '@storybook/core-webpack@10.3.6(storybook@10.3.6)':
     dependencies:
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       ts-dedent: 2.2.0
 
   '@storybook/csf-plugin@10.3.6(esbuild@0.28.0)(storybook@10.3.6)(vite@8.0.10)(webpack@5.106.2)':
     dependencies:
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       unplugin: 2.3.11
     optionalDependencies:
       esbuild: 0.28.0
@@ -12896,7 +12902,7 @@ snapshots:
       react-dom: 19.2.5(react@19.2.5)
       resolve: 1.22.12
       semver: 7.7.4
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       tsconfig-paths: 4.2.0
       webpack: 5.106.2(esbuild@0.28.0)(webpack-cli@6.0.1)
     optionalDependencies:
@@ -12926,7 +12932,7 @@ snapshots:
     dependencies:
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
 
   '@storybook/react-webpack5@10.3.6(@swc/core@1.15.32)(esbuild@0.28.0)(react-dom@19.2.5)(react@19.2.5)(storybook@10.3.6)(typescript@5.9.3)':
     dependencies:
@@ -12953,7 +12959,7 @@ snapshots:
       '@storybook/react': 10.3.6(react-dom@19.2.5)(react@19.2.5)(storybook@10.3.6)(typescript@5.9.3)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -12972,7 +12978,7 @@ snapshots:
       react-docgen: 8.0.3
       react-docgen-typescript: 2.4.0(typescript@5.9.3)
       react-dom: 19.2.5(react@19.2.5)
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -13794,7 +13800,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.3(vite@8.0.10)':
+  '@vocab/vite@1.0.4(vite@8.0.10)':
     dependencies:
       '@vocab/core': 1.8.1
       cjs-module-lexer: 2.2.0
@@ -14781,7 +14787,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.4
     optionalDependencies:
-      webpack: 5.106.2(esbuild@0.28.0)(webpack-cli@6.0.1)
+      webpack: 5.106.2(@swc/core@1.15.32)(esbuild@0.28.0)
 
   css-select@4.3.0:
     dependencies:
@@ -18270,6 +18276,8 @@ snapshots:
 
   prettier@3.8.3: {}
 
+  prettier@3.8.4: {}
+
   pretty-error@4.0.0:
     dependencies:
       lodash: 4.18.1
@@ -19094,6 +19102,30 @@ snapshots:
       ws: 8.20.0
     optionalDependencies:
       prettier: 3.8.3
+    transitivePeerDependencies:
+      - '@testing-library/dom'
+      - bufferutil
+      - react
+      - react-dom
+      - utf-8-validate
+
+  storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5):
+    dependencies:
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 2.0.1(react-dom@19.2.5)(react@19.2.5)
+      '@testing-library/jest-dom': 6.9.1
+      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
+      '@vitest/expect': 3.2.4
+      '@vitest/spy': 3.2.4
+      '@webcontainer/env': 1.1.1
+      esbuild: 0.28.0
+      open: 10.2.0
+      recast: 0.23.11
+      semver: 7.7.4
+      use-sync-external-store: 1.6.0(react@19.2.5)
+      ws: 8.20.0
+    optionalDependencies:
+      prettier: 3.8.4
     transitivePeerDependencies:
       - '@testing-library/dom'
       - bufferutil

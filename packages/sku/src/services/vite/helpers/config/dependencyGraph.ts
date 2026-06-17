@@ -3,10 +3,10 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 
 import type { PackageJson } from 'type-fest';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { createRequire } from 'node:module';
 
-const log = debug('sku:dependency-graph');
+const log = createDebug('sku:dependency-graph');
 
 const require = createRequire(import.meta.url);
 

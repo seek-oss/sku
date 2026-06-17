@@ -45,36 +45,35 @@ const runPrettier = async ({
 
   console.log(secondary(`Paths: ${pathsToCheck.join(' ')}`));
 
-  try {
-    await runBin({
-      packageName: 'prettier',
-      args: prettierArgs,
-      /**
-       * Show Prettier output with stdio: inherit
-       * The child process will use the parent process's stdin/stdout/stderr
-       * See https://nodejs.org/api/child_process.html#child_process_options_stdio
-       */
-      options: { stdio: 'inherit' },
-    });
-  } catch (exitCode) {
-    if (exitCode === 2) {
-      console.warn(
-        caution(`Warning: No files matching ${pathsToCheck.join(' ')}`),
-      );
-    } else {
-      if (listDifferent && exitCode === 1) {
-        console.error(
-          critical('Error: The file(s) listed above failed the prettier check'),
-        );
-        suggestScript('format');
-      } else {
-        console.error(
-          critical(`Error: Prettier check exited with exit code ${exitCode}`),
-        );
-      }
-      throw new Error();
-    }
+  const { exitCode } = await runBin({
+    packageName: 'prettier',
+    args: prettierArgs,
+    /**
+     * Show Prettier output with stdio: inherit
+     * The child process will use the parent process's stdin/stdout/stderr
+     * See https://nodejs.org/api/child_process.html#child_process_options_stdio
+     */
+    options: { stdio: 'inherit' },
+  });
+
+  if (exitCode === 2) {
+    console.warn(
+      caution(`Warning: No files matching ${pathsToCheck.join(' ')}`),
+    );
+    return;
   }
+
+  if (listDifferent && exitCode === 1) {
+    console.error(
+      critical('Error: The file(s) listed above failed the prettier check'),
+    );
+    suggestScript('format');
+    return;
+  }
+
+  console.error(
+    critical(`Error: Prettier check exited with exit code ${exitCode}`),
+  );
 };
 
 export const check = (paths?: string[]) =>

@@ -25,7 +25,7 @@
     "semver": "^7.6.3"
   },
   "devDependencies": {
-    "typescript": "^5.6.2",
+    "typescript": "catalog:",
     "@types/semver": "^7.5.8"
   }
 }

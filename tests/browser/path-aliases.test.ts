@@ -41,8 +41,8 @@ describe('pathAliases', () => {
       });
     });
 
-    it('should preserve existing baseUrl behavior alongside paths', async () => {
-      expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
+    it('should resolve imports via paths without baseUrl', async () => {
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });

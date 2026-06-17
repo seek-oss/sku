@@ -67,7 +67,7 @@
     "renovate-config-seek": "^0.4.0",
     "tsdown": "^0.21.0",
     "tsx": "^4.19.4",
-    "typescript": "~5.9.0",
+    "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "engines": {

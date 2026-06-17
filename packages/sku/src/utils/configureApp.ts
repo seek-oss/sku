@@ -14,7 +14,7 @@ import dedent from 'dedent';
 import ensureGitignore from 'ensure-gitignore';
 
 import prettierConfig from '../config/prettier.js';
-import createTSConfig from '../services/typescript/tsconfig.js';
+import { createTSConfig } from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,

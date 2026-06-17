@@ -1,8 +1,12 @@
-import { cwd } from '@sku-private/utils';
 import type { SkuContext } from '../../context/createSkuContext.js';
+import type { TsConfigJson } from 'type-fest';
 
-export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {
-  const config = {
+export const createTSConfig = ({
+  tsconfigDecorator,
+  tsPaths,
+  testRunner,
+}: SkuContext) => {
+  const config: { compilerOptions: TsConfigJson.CompilerOptions } = {
     compilerOptions: {
       // Don't compile anything, only perform type checking
       noEmit: true,
@@ -34,18 +38,20 @@ export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {
       // Aligns with `babel-preset-typescript`'s `onlyRemoveTypeImports` option.
       verbatimModuleSyntax: true,
 
+      // Side-effect imports for CSS/assets are resolved by bundlers, not TypeScript
+      noUncheckedSideEffectImports: false,
+
       // misc
       strict: true,
       forceConsistentCasingInFileNames: true,
       jsx: 'react-jsx',
-      lib: ['dom', 'dom.iterable', 'es2022'],
+      lib: ['dom', 'es2022'],
+      // ? should we update this to es2025
       target: 'es2022',
-      ...(rootResolution
-        ? {
-            baseUrl: cwd(),
-          }
-        : {}),
       ...(tsPaths ? { paths: tsPaths } : {}),
+
+      // TS 6 no longer auto-discovers @types packages
+      types: ['node', ...(testRunner === 'jest' ? ['jest'] : [])],
     },
   };
 

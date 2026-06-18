@@ -233,7 +233,7 @@ A report is generated in the `/report` directory when `sku build` is run.
 
 > **Deprecation notice:** The built-in `sku pre-commit` command has been removed. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
 
-To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged](https://github.com/usmanyunusov/nano-staged) (a tiny, zero-dependency alternative to `lint-staged`) with [husky](https://www.npmjs.com/package/husky).
+To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged] (a tiny, zero-dependency alternative to `lint-staged`) with [husky].
 
 1. Install both tools as development dependencies:
 
@@ -262,7 +262,10 @@ pnpm install --dev nano-staged husky
 echo "pnpm nano-staged" > .husky/pre-commit
 ```
 
-For more details, see the [nano-staged](https://github.com/usmanyunusov/nano-staged#readme) and [husky](https://typicode.github.io/husky/#create-a-hook) documentation.
+For more details, see the [nano-staged] and [husky] documentation.
+
+[husky]: https://github.com/typicode/husky#husky
+[nano-staged]: https://github.com/usmanyunusov/nano-staged#readme
 
 ## Assertion removal
 

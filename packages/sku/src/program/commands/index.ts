@@ -3,7 +3,6 @@ import { buildSsrCommand } from './build-ssr/build-ssr.command.js';
 import { configureCommand } from './configure/configure.command.js';
 import { formatCommand } from './format/format.command.js';
 import { lintCommand } from './lint/lint.command.js';
-import { preCommitCommand } from './pre-commit/pre-commit.command.js';
 import { serveCommand } from './serve/serve.command.js';
 import { setupHostsCommand } from './setup-hosts/setup-hosts.command.js';
 import { startCommand } from './start/start.command.js';
@@ -19,7 +18,6 @@ export const commands = [
   configureCommand,
   formatCommand,
   lintCommand,
-  preCommitCommand,
   serveCommand,
   setupHostsCommand,
   startCommand,

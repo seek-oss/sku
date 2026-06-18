@@ -231,8 +231,17 @@ A report is generated in the `/report` directory when `sku build` is run.
 
 ## Pre-commit hook
 
-To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI.
-To make use of this hook, it's recommended to install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it as follows:
+> **Deprecation notice:** The built-in `sku pre-commit` command has been removed. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
+
+To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged](https://github.com/usmanyunusov/nano-staged) (a tiny, zero-dependency alternative to `lint-staged`) with [husky](https://www.npmjs.com/package/husky).
+
+1. Install both tools as development dependencies:
+
+```sh
+pnpm install --dev nano-staged husky
+```
+
+2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`:
 
 ```json
 // package.json
@@ -240,15 +249,20 @@ To make use of this hook, it's recommended to install [husky](https://www.npmjs.
 {
   "scripts": {
     "prepare": "husky"
+  },
+  "nano-staged": {
+    "**/*.{js,jsx,ts,tsx,md}": ["sku format", "sku lint"]
   }
 }
 ```
 
+3. Create the pre-commit hook that runs `nano-staged`:
+
 ```sh
-echo "yarn sku pre-commit" > .husky/pre-commit
+echo "pnpm nano-staged" > .husky/pre-commit
 ```
 
-For more details on configuring hooks, please see husky's [documentation](https://typicode.github.io/husky/#create-a-hook).
+For more details, see the [nano-staged](https://github.com/usmanyunusov/nano-staged#readme) and [husky](https://typicode.github.io/husky/#create-a-hook) documentation.
 
 ## Assertion removal
 

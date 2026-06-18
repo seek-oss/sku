@@ -241,7 +241,7 @@ To speed up the feedback loop on linting and formatting errors, you can run `sku
 pnpm install --dev nano-staged husky
 ```
 
-2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`:
+2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`. Adjust the nano-staged config to your project's needs - an example is provided below:
 
 ```json
 // package.json

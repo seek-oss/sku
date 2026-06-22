@@ -1315,9 +1315,6 @@ importers:
       ensure-gitignore:
         specifier: ^1.1.2
         version: 1.2.0
-      escape-string-regexp:
-        specifier: ^5.0.0
-        version: 5.0.0
       eslint:
         specifier: ^9.10.0
         version: 9.39.4(jiti@2.7.0)

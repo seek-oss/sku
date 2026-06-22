@@ -126,7 +126,6 @@
     "default-browser": "^5.2.1",
     "empathic": "^2.0.1",
     "ensure-gitignore": "^1.1.2",
-    "escape-string-regexp": "^5.0.0",
     "eslint": "^9.10.0",
     "eslint-config-seek": "^15.0.4",
     "exception-formatter": "^2.1.2",

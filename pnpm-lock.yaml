@@ -145,7 +145,7 @@ importers:
         version: 1.60.0
       prettier:
         specifier: ~3.8.0
-        version: 3.8.3
+        version: 3.8.4
       renovate-config-seek:
         specifier: ^0.4.0
         version: 0.4.0
@@ -1400,7 +1400,7 @@ importers:
         version: 8.2.1(postcss@8.5.12)(typescript@5.9.3)(webpack@5.106.2)
       prettier:
         specifier: ~3.8.0
-        version: 3.8.3
+        version: 3.8.4
       pretty-ms:
         specifier: ^9.2.0
         version: 9.3.0
@@ -8669,11 +8669,6 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  prettier@3.8.3:
-    resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   prettier@3.8.4:
     resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
     engines: {node: '>=14'}
@@ -12803,7 +12798,7 @@ snapshots:
       fork-ts-checker-webpack-plugin: 9.1.0(typescript@5.9.3)(webpack@5.106.2)
       html-webpack-plugin: 5.6.7(webpack@5.106.2)
       magic-string: 0.30.21
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       style-loader: 4.0.0(webpack@5.106.2)
       terser-webpack-plugin: 5.5.0(@swc/core@1.15.32)(esbuild@0.28.0)(webpack@5.106.2)
       ts-dedent: 2.2.0
@@ -12879,7 +12874,7 @@ snapshots:
       react-dom: 19.2.5(react@19.2.5)
       resolve: 1.22.12
       semver: 7.7.4
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
       tsconfig-paths: 4.2.0
       webpack: 5.106.2(@swc/core@1.15.32)(esbuild@0.28.0)
     optionalDependencies:
@@ -12941,7 +12936,7 @@ snapshots:
       '@storybook/react': 10.3.6(react-dom@19.2.5)(react@19.2.5)(storybook@10.3.6)(typescript@5.9.3)
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
-      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -13776,7 +13771,7 @@ snapshots:
       intl-messageformat: 10.7.18
       picocolors: 1.1.1
       picomatch: 4.0.4
-      prettier: 3.8.3
+      prettier: 3.8.4
       tinyglobby: 0.2.16
     transitivePeerDependencies:
       - supports-color
@@ -18274,8 +18269,6 @@ snapshots:
 
   prettier@2.8.8: {}
 
-  prettier@3.8.3: {}
-
   prettier@3.8.4: {}
 
   pretty-error@4.0.0:
@@ -19084,30 +19077,6 @@ snapshots:
     dependencies:
       es-errors: 1.3.0
       internal-slot: 1.1.0
-
-  storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5)(react@19.2.5):
-    dependencies:
-      '@storybook/global': 5.0.0
-      '@storybook/icons': 2.0.1(react-dom@19.2.5)(react@19.2.5)
-      '@testing-library/jest-dom': 6.9.1
-      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
-      '@vitest/expect': 3.2.4
-      '@vitest/spy': 3.2.4
-      '@webcontainer/env': 1.1.1
-      esbuild: 0.28.0
-      open: 10.2.0
-      recast: 0.23.11
-      semver: 7.7.4
-      use-sync-external-store: 1.6.0(react@19.2.5)
-      ws: 8.20.0
-    optionalDependencies:
-      prettier: 3.8.3
-    transitivePeerDependencies:
-      - '@testing-library/dom'
-      - bufferutil
-      - react
-      - react-dom
-      - utf-8-validate
 
   storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.4)(react-dom@19.2.5)(react@19.2.5):
     dependencies:

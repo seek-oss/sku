@@ -20,15 +20,19 @@ import { stripServerConfigPlugin } from './plugins/stripServerConfig.js';
 export const skuPlugin = ({
   skuContext,
   environment,
-  stripServerConfig = false,
 }: {
   skuContext: SkuContext;
   environment?: string;
-  stripServerConfig?: boolean;
 }): PluginOption[] => [
   configPlugin({ skuContext }),
   dangerouslySetViteConfigPlugin(skuContext),
-  stripServerConfigPlugin({ apply: stripServerConfig }),
+  stripServerConfigPlugin({
+    // We can't trust vite to apply this only to its definition of `build` because the VE compiler
+    // is stuck in `serve` mode due to a constraint imposed by the `createServer` API. So instead we
+    // apply it based on the sku command being run.
+    // See https://github.com/vitejs/vite/blob/9a0dd481ac2160078b8173879e0fa86e5e6af05d/packages/vite/src/node/server/index.ts#L501-L505.
+    apply: Boolean(skuContext.commandName?.startsWith('build')),
+  }),
   setNoExternalPlugin(skuContext),
   buildPlugin({ skuContext }),
   devServerPlugin({ skuContext }),

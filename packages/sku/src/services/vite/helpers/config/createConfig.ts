@@ -92,10 +92,9 @@ export const createConfig = (
           vanillaExtractCompilerPluginAllowlist.includes(name),
       }),
       /**
-       * The sku plugin (only sku specific changes). We strip server config for
-       * Vanilla Extract to prevent the build from hanging in certain cases.
+       * The sku plugin (only sku specific changes)
        */
-      skuPlugin({ skuContext, environment, stripServerConfig: true }),
+      skuPlugin({ skuContext, environment }),
     ],
   };
 };

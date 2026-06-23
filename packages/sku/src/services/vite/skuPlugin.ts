@@ -12,6 +12,7 @@ import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
 import { devServerPlugin } from './plugins/devServer.js';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
+import { stripServerConfigPlugin } from './plugins/stripServerConfig.js';
 
 /**
  * All sku related functionality and customization as a vite plugin.
@@ -19,12 +20,15 @@ import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 export const skuPlugin = ({
   skuContext,
   environment,
+  stripServerConfig = false,
 }: {
   skuContext: SkuContext;
   environment?: string;
+  stripServerConfig?: boolean;
 }): PluginOption[] => [
   configPlugin({ skuContext }),
   dangerouslySetViteConfigPlugin(skuContext),
+  stripServerConfigPlugin({ apply: stripServerConfig }),
   setNoExternalPlugin(skuContext),
   buildPlugin({ skuContext }),
   devServerPlugin({ skuContext }),

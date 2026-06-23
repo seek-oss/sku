@@ -17,6 +17,7 @@ const TSCONFIG_PLUGIN_NAME = 'sku-tsconfig-paths';
 const vanillaExtractCompilerPluginAllowlist = [
   // Without this plugin, user-configured overrides won't be passed through to the VE compiler
   'sku:dangerously-set-vite-config',
+  'sku:strip-server-config',
   // vite-tsconfig-paths is whitelisted by default, but since we are renaming it to avoid the vite warning we need to explicitly allow it
   TSCONFIG_PLUGIN_NAME,
 ];
@@ -91,9 +92,10 @@ export const createConfig = (
           vanillaExtractCompilerPluginAllowlist.includes(name),
       }),
       /**
-       * the sku plugin (only sku specific changes)
+       * The sku plugin (only sku specific changes). We strip server config for
+       * Vanilla Extract to prevent the build from hanging in certain cases.
        */
-      skuPlugin({ skuContext, environment }),
+      skuPlugin({ skuContext, environment, stripServerConfig: true }),
     ],
   };
 };

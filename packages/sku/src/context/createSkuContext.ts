@@ -4,7 +4,6 @@ import { critical, strong } from '@sku-private/utils/console';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
-import isCompilePackage from '../utils/isCompilePackage.js';
 import {
   defaultCompilePackages,
   detectedCompilePackages,
@@ -27,18 +26,47 @@ const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
 
+/**
+ * Validate `pathAliases`. `sku` mirrors these into the `package.json` `imports`
+ * field, which only supports `#`-prefixed subpath import specifiers, and aliases
+ * must not point at `node_modules`.
+ */
+const validatePathAliases = (pathAliases?: Record<string, string>) => {
+  if (!pathAliases) {
+    return;
+  }
+
+  for (const [alias, destination] of Object.entries(pathAliases) as Array<
+    [string, string]
+  >) {
+    if (!alias.startsWith('#')) {
+      console.log(
+        critical(
+          `Path alias "${strong(alias)}" must start with "#" to be a valid subpath import.`,
+        ),
+      );
+      process.exit(1);
+    }
+
+    if (destination.includes('node_modules')) {
+      console.log(
+        critical(`Path alias "${strong(alias)}" cannot point to node_modules.`),
+      );
+      process.exit(1);
+    }
+  }
+};
+
 const generateTypeScriptPaths = (
   pathAliases?: Record<string, string>,
-): Record<string, string[]> => {
+): Record<string, string[]> | undefined => {
+  if (!pathAliases || Object.keys(pathAliases).length === 0) {
+    return undefined;
+  }
+
   const typeScriptPaths: Record<string, string[]> = {};
 
-  // Always include automatic src/* alias, then merge with user-provided aliases
-  const mergedAliases = {
-    'src/*': './src/*',
-    ...pathAliases,
-  };
-
-  for (const [alias, destination] of Object.entries(mergedAliases) as Array<
+  for (const [alias, destination] of Object.entries(pathAliases) as Array<
     [string, string]
   >) {
     typeScriptPaths[alias] = [destination];
@@ -113,32 +141,7 @@ export const createSkuContext = ({
 
   validateConfig(skuConfig);
 
-  if (isCompilePackage && skuConfig.rootResolution) {
-    console.log(
-      critical(
-        `Error: "${strong(
-          'rootResolution',
-        )}" is not safe for compile packages as consuming apps can't resolve them.`,
-      ),
-    );
-    process.exit(1);
-  }
-
-  // Validate pathAliases destinations don't contain node_modules
-  if (skuConfig.bundler === 'vite' && skuConfig.pathAliases) {
-    for (const [alias, destination] of Object.entries(
-      skuConfig.pathAliases,
-    ) as Array<[string, string]>) {
-      if (destination.includes('node_modules')) {
-        console.log(
-          critical(
-            `Path alias "${strong(alias)}" cannot point to node_modules.`,
-          ),
-        );
-        process.exit(1);
-      }
-    }
-  }
+  validatePathAliases(skuConfig.pathAliases);
 
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
     typeof route === 'string' ? { route } : route;
@@ -265,16 +268,13 @@ export const createSkuContext = ({
   const cspEnabled = skuConfig.cspEnabled;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
-  const rootResolution = skuConfig.rootResolution;
   const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
     skuConfig.skipPackageCompatibilityCompilation;
   const externalizeNodeModules = skuConfig.externalizeNodeModules;
 
-  const tsPaths =
-    skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'
-      ? generateTypeScriptPaths(skuConfig.pathAliases)
-      : undefined;
+  const pathAliases = skuConfig.pathAliases;
+  const tsPaths = generateTypeScriptPaths(pathAliases);
 
   const defaultCjsInteropDependencies = ['lodash'];
 
@@ -318,6 +318,7 @@ export const createSkuContext = ({
     vitestDecorator,
     vitePlugins,
     eslintIgnore,
+    pathAliases,
     tsPaths,
     routes,
     environments,
@@ -327,7 +328,6 @@ export const createSkuContext = ({
     cspEnabled,
     cspExtraScriptSrcHosts,
     httpsDevServer,
-    rootResolution,
     languages,
     initialPath,
     transformOutputPath: skuConfig.transformOutputPath,

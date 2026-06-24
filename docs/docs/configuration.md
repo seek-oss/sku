@@ -398,32 +398,44 @@ Type: `Record<string, string>`
 
 Default: `{}`
 
-Bundler: `vite`
-
 Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
 
-Sku automatically provides a `src/*` alias that maps to `./src/*`. The `pathAliases` option allows you to define additional custom aliases.
+This option generates TypeScript's [`paths`](https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths) configuration in `tsconfig.json` so that the TypeScript compiler and your editor understand the aliases.
 
-**Note**: For Vite projects, `pathAliases` replaces the need for `rootResolution` configuration used in Webpack.
+Actual module resolution at build time is handled natively by the bundler (both Webpack and Vite) via Node.js [subpath imports](https://nodejs.org/api/packages.html#subpath-imports). `sku` takes complete ownership of the `imports` field in your `package.json` and keeps it in sync with `pathAliases`, so you don't need to maintain it manually. Subpath import specifiers must be prefixed with `#`.
+
+> [!WARNING]
+> Because `sku` fully manages the `imports` field, any entries you add manually will be removed. Declare all of your subpath imports via `pathAliases` instead.
 
 **Example:**
 
+`sku.config.ts`:
+
 ```typescript
 export default {
-  bundler: 'vite',
   pathAliases: {
-    '@components/*': './src/components/*',
-    '@utils/*': './src/utils/*',
-    '@assets/*': './src/assets/*',
+    '#components/*': './src/components/*',
+    '#utils/*': './src/utils/*',
   },
 } satisfies SkuConfig;
+```
+
+`sku` writes the matching `imports` field to your `package.json`:
+
+```json
+{
+  "imports": {
+    "#components/*": "./src/components/*",
+    "#utils/*": "./src/utils/*"
+  }
+}
 ```
 
 This enables clean imports like:
 
 ```typescript
-import { Button } from '@components/Button';
-import { formatDate } from '@utils/date';
+import { Button } from '#components/Button';
+import { formatDate } from '#utils/date';
 ```
 
 **Best practices:**
@@ -477,20 +489,6 @@ Type: `string`
 Default: `./src/render.js`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./docs/static-rendering.md) for more info.
-
-## rootResolution
-
-Type: `boolean`
-
-Default: `true`
-
-Bundler: `webpack`
-
-Enable root resolution. By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
-
-Unfortunately, these kinds of imports only work for apps. In packages, the imports will work locally, but fail when consumed from `node_modules`.
-
-You can set this option in `sku.config.js`, or adding `"skuCompilePackage": true` to your `package.json` will disable this behaviour by default.
 
 ## routes
 

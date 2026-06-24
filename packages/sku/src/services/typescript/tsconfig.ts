@@ -1,7 +1,6 @@
-import { cwd } from '@sku-private/utils';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {
+export default ({ tsconfigDecorator, tsPaths }: SkuContext) => {
   const config = {
     compilerOptions: {
       // Don't compile anything, only perform type checking
@@ -40,11 +39,6 @@ export default ({ rootResolution, tsconfigDecorator, tsPaths }: SkuContext) => {
       jsx: 'react-jsx',
       lib: ['dom', 'dom.iterable', 'es2022'],
       target: 'es2022',
-      ...(rootResolution
-        ? {
-            baseUrl: cwd(),
-          }
-        : {}),
       ...(tsPaths ? { paths: tsPaths } : {}),
     },
   };

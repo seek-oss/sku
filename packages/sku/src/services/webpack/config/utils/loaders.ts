@@ -10,7 +10,6 @@ type BabelConfigOptions = {
   displayNamesProd?: boolean;
   removeAssertionsInProduction?: boolean;
   hot?: boolean;
-  rootResolution?: boolean;
 };
 
 const require = createRequire(import.meta.url);

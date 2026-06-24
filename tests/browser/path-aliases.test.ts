@@ -28,21 +28,14 @@ describe('pathAliases', () => {
 
     it('should generate TypeScript paths configuration with pathAliases', async () => {
       expect(tsconfig.compilerOptions.paths).toEqual({
-        'src/*': ['./src/*'],
-        '@components/*': ['./src/components/*'],
-        '@utils/*': ['./src/utils/*'],
+        '#components/*': ['./src/components/*'],
+        '#utils/*': ['./src/utils/*'],
         '#styles/*': ['./src/styles/*'],
       });
     });
 
-    it('should always include automatic src/* alias', async () => {
-      expect(tsconfig.compilerOptions.paths).toMatchObject({
-        'src/*': ['./src/*'],
-      });
-    });
-
-    it('should preserve existing baseUrl behavior alongside paths', async () => {
-      expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
+    it('should not set a baseUrl', async () => {
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });
@@ -80,15 +73,11 @@ describe('pathAliases', () => {
       const appPage = await createPage();
       await appPage.goto(`http://localhost:${port}`);
 
-      expect(
-        start.queryByError('The plugin "vite-tsconfig-paths" is detected.'),
-      ).not.toBeInTheConsole();
-
       expect(start.queryByError('PLUGIN_ERROR')).not.toBeInTheConsole();
 
       expect(
         start.queryByError(
-          "Cannot find module '@components/Button'",
+          "Cannot find module '#components/Button'",
           undefined,
         ),
       ).not.toBeInTheConsole();

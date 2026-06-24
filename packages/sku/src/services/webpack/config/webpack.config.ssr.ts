@@ -47,7 +47,6 @@ export const makeWebpackConfig = async ({
     cspEnabled,
     cspExtraScriptSrcHosts,
     httpsDevServer,
-    rootResolution,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
@@ -191,7 +190,6 @@ export const makeWebpackConfig = async ({
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
-          rootResolution,
           removeAssertionsInProduction: true,
         }),
         ...(isDevServer
@@ -286,7 +284,6 @@ export const makeWebpackConfig = async ({
             mode: webpackMode,
             displayNamesProd,
             MiniCssExtractPlugin,
-            rootResolution,
           }),
         ] as webpack.WebpackPluginInstance[]
       ).concat(

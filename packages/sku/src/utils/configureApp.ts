@@ -24,6 +24,7 @@ import {
 } from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
+import { syncPathAliasImports } from './pathAliasImports.js';
 
 import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
@@ -128,6 +129,11 @@ export default async (skuContext: SkuContext) => {
   const tsConfigFileName = 'tsconfig.json';
   await writeFileToCWD(tsConfigFileName, createTSConfig(skuContext));
   gitIgnorePatterns.push(tsConfigFileName);
+
+  // Take ownership of the `imports` field in `package.json`, keeping it in sync
+  // with the `pathAliases` sku config option so aliases resolve natively at
+  // build time via Node.js subpath imports.
+  await syncPathAliasImports(skuContext.pathAliases);
 
   const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 

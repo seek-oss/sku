@@ -194,9 +194,6 @@ export default validator.compile({
     type: 'string',
     optional: true,
   },
-  rootResolution: {
-    type: 'boolean',
-  },
   languages: languagesToCompile,
   skipPackageCompatibilityCompilation: {
     type: 'array',

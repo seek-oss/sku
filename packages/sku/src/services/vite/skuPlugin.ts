@@ -51,4 +51,13 @@ export const skuPlugin = ({
     type: 'static',
   }),
   bundleAnalyzerPlugin(),
+  {
+    name: 'remove-server-watch-ignore',
+    enforce: 'post',
+    config: (config) => {
+      config.server ??= {};
+      config.server.watch = null;
+      return config;
+    },
+  },
 ];

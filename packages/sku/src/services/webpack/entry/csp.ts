@@ -20,6 +20,8 @@ export type CSPHandler = {
   createCSP: () => string;
   createCSPTag: () => string;
   createUnsafeNonce: () => string;
+  processHtml: (html: string) => HTMLElement;
+  updateHtml: (root: HTMLElement) => string;
   handleHtml: (html: string) => string;
 };
 
@@ -124,14 +126,14 @@ export default function createCSPHandler({
   const createCSPTag = () =>
     `<meta http-equiv="Content-Security-Policy" content="${createCSP()}">`;
 
-  const handleHtml = (html: string) => {
+  const processHtml = (html: string) => {
     const root = parse(html, {
       comment: true,
     });
 
     if (!root) {
       throw new Error(
-        `Unable to parse HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
+        `Unable to parse HTML in order to create CSP. Check the following output of renderDocument for invalid HTML.\n${
           html.length > 250 ? `${html.substring(0, 200)}...` : html
         }`,
       );
@@ -139,8 +141,14 @@ export default function createCSPHandler({
 
     root.querySelectorAll('script').forEach(processScriptNode);
 
+    return root;
+  };
+
+  const updateHtml = (root: HTMLElement) => {
     const headElement = root.querySelector('head');
     if (!headElement) {
+      const html = root.toString();
+
       throw new Error(
         `Unable to find 'head' element in HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
           html.length > 250 ? `${html.substring(0, 200)}...` : html
@@ -153,11 +161,15 @@ export default function createCSPHandler({
     return root.toString();
   };
 
+  const handleHtml = (html: string) => updateHtml(processHtml(html));
+
   return {
     registerScript,
     createCSP,
     createCSPTag,
     createUnsafeNonce,
+    processHtml,
+    updateHtml,
     handleHtml,
   };
 }

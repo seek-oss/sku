@@ -17,6 +17,7 @@ interface CreateCSPHandlerOptions {
 
 export type CSPHandler = {
   registerScript: (script: string) => void;
+  createCSP: () => string;
   createCSPTag: () => string;
   createUnsafeNonce: () => string;
   handleHtml: (html: string) => string;
@@ -26,7 +27,7 @@ export default function createCSPHandler({
   extraHosts = [],
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
-  let tagReturned = false;
+  let cspCreated = false;
   const hosts = new Set();
   const shas = new Set();
   const nonces = new Set();
@@ -38,7 +39,7 @@ export default function createCSPHandler({
   };
 
   const createUnsafeNonce = () => {
-    if (tagReturned) {
+    if (cspCreated) {
       throw new Error(
         `Unable to add nonce. Content Security Policy already sent. Try adding nonces before calling flushHeadTags.`,
       );
@@ -74,7 +75,7 @@ export default function createCSPHandler({
   };
 
   const registerScript: RenderCallbackParams['registerScript'] = (script) => {
-    if (tagReturned) {
+    if (cspCreated) {
       throw new Error(
         `Unable to register script. Content Security Policy already sent. Try registering scripts before calling flushHeadTags. Script: ${script.substr(
           0,
@@ -90,8 +91,8 @@ export default function createCSPHandler({
     parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
-  const createCSPTag = () => {
-    tagReturned = true;
+  const createCSP = () => {
+    cspCreated = true;
 
     const inlineCspShas = [];
 
@@ -117,10 +118,11 @@ export default function createCSPHandler({
       scriptSrcPolicy.push(`'unsafe-eval'`);
     }
 
-    return `<meta http-equiv="Content-Security-Policy" content="${scriptSrcPolicy.join(
-      ' ',
-    )};">`;
+    return `${scriptSrcPolicy.join(' ')};`;
   };
+
+  const createCSPTag = () =>
+    `<meta http-equiv="Content-Security-Policy" content="${createCSP()}">`;
 
   const handleHtml = (html: string) => {
     const root = parse(html, {
@@ -153,6 +155,7 @@ export default function createCSPHandler({
 
   return {
     registerScript,
+    createCSP,
     createCSPTag,
     createUnsafeNonce,
     handleHtml,

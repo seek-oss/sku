@@ -41,14 +41,8 @@ describe('vite loadable CSS ordering', () => {
     const resetIndex = cssContents.findIndex(({ contents }) =>
       contents.includes('box-sizing:border-box'),
     );
-    const restIndex = cssContents.findIndex(({ href }) =>
-      href.includes('vite-client'),
-    );
-
-    expect(resetIndex).toBeGreaterThanOrEqual(0);
-    expect(restIndex).toBeGreaterThanOrEqual(0);
 
     // The reset must load before other styles
-    expect(resetIndex).toBeLessThan(restIndex);
+    expect(resetIndex).toBe(0);
   });
 });

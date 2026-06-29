@@ -8,7 +8,7 @@ TypeScript updated to version 6
 
 sku now generates a TypeScript 6 compatible `tsconfig.json` for you, so most projects will not need changes. However, TypeScript 6 ships new defaults and deprecations that may affect your source code, dependencies, or any custom config. See the [TypeScript 6.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) or the [5.x to 6.0 migration guide](https://gist.github.com/privatenumber/3d2e80da28f84ee30b77d53e1693378f) for full details.
 
-Run `sku configure` to regenerate your `tsconfig.json`, then `tsc` (or your editor) to surface anything below.
+Run `sku configure` to regenerate your `tsconfig.json`, then `sku lint` to surface anything below.
 
 ### Most likely to need attention
 
@@ -24,11 +24,9 @@ Run `sku configure` to regenerate your `tsconfig.json`, then `tsc` (or your edit
   }),
   ```
 
-- **Custom import aliases.** Type resolution now relies on `paths` instead of the removed `baseUrl`. sku still provides the `src/*` alias automatically, so most projects need nothing here. To add more aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) config option (Vite) — sku writes them into your tsconfig `paths` for you. Only reach for `dangerouslySetTSConfig` if `pathAliases` does not cover your case.
-
 ### If you customize your tsconfig
 
-- **Remove `baseUrl`** — deprecated in TS 6, removed in TS 7. If you set `baseUrl` via `dangerouslySetTSConfig`, remove it. For import aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) config option (Vite) instead.
+- **Remove `baseUrl`** — deprecated in TS 6, will be removed in TS 7. If you set `baseUrl` via `dangerouslySetTSConfig`, remove it. For import aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) config option instead.
 - **Remove deprecated options** if you set any of these in `dangerouslySetTSConfig`: `downlevelIteration`, `outFile`, `alwaysStrict: false`, `esModuleInterop: false`, `allowSyntheticDefaultImports: false`, `moduleResolution: node`/`node10`/`classic`, `module: amd`/`umd`/`system`/`none`, `target: es3`/`es5`.
 
 ### Source code updates (less common)
@@ -39,9 +37,7 @@ Run `sku configure` to regenerate your `tsconfig.json`, then `tsc` (or your edit
 - **Inference edge cases:** TS 6's improved method inference can change a few inferred types — add explicit annotations where needed.
 
 ### Tooling & dependencies
-
-- **`tsc` with file arguments** (e.g. `tsc foo.ts`) now errors when a `tsconfig.json` is present — use `tsc --ignoreConfig foo.ts` or drop the file args.
-- **Dependencies with legacy `.d.ts` syntax** (old `module Foo { }` namespaces) may need upgrading, forking, or `patch-package`.
-- **Temporal polyfills** (`@js-temporal/polyfill`, `temporal-polyfill`) are not type-compatible with the new built-in `Temporal` lib types.
+- **Dependencies with legacy `.d.ts` syntax:** Old `module Foo { }` namespaces may need upgrading, forking, or `patch-package`.
+- **Temporal polyfills:** If you used `@js-temporal/polyfill` or `temporal-polyfill`, they are now no longer type-compatible with the new built-in `Temporal` lib types.
 
 > Tip: if deprecation errors come from options you set via `dangerouslySetTSConfig`, you can add `ignoreDeprecations: '6.0'` there to silence them temporarily. This will stop working in TypeScript 7.

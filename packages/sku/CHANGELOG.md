@@ -1,5 +1,11 @@
 # sku
 
+## 15.15.5
+
+### Patch Changes
+
+- `vite`: Fixed a bug causing `build` to hang when a custom `server.watch` config was set ([#1600](https://github.com/seek-oss/sku/pull/1600))
+
 ## 15.15.4
 
 ### Patch Changes

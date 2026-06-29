@@ -396,6 +396,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.9(@types/node@26.0.0)(jsdom@26.1.0)(vite@8.0.16)
 
   fixtures/list-urls:
     devDependencies:

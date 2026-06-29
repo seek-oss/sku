@@ -5,4 +5,4 @@
 Add `migrate-root-resolution` codemod
 
 Migrates projects away from `sku`'s `rootResolution` feature to native [subpath imports](https://nodejs.org/api/packages.html#subpath-imports).
-The codemod rewrites `src/…` imports to `#src/…`, and adds a `{ pathAliases: { "#src/*": "./src/*" } }` entry to your sku config (ESM and CommonJS configs are both supported). `sku` owns the `package.json` `imports` field and keeps it in sync with `pathAliases`, so the subpath resolves natively at build time.
+The codemod rewrites `src/…` imports to `#src/…`, and adds a `{ pathAliases: { "#src/*": "./src/*" } }` entry to your sku config.

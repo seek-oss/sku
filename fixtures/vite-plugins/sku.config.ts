@@ -18,4 +18,13 @@ export default {
       },
     },
   ],
+  // Tests that `server.watch` overrides don't break the Vanilla Extract compiler's Vite server
+  // during a build
+  dangerouslySetViteConfig: () => ({
+    server: {
+      watch: {
+        ignored: /src\/foo\//,
+      },
+    },
+  }),
 } satisfies SkuConfig;

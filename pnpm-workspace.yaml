@@ -16,6 +16,7 @@ minimumReleaseAgeExclude:
   - '@braid-design-system/*'
   - '@capsizecss/*'
   - '@vanilla-extract/*'
+  - '@vocab/*'
   - 'braid-design-system'
   - 'browserslist-config-seek'
   - 'ensure-gitignore'
@@ -34,7 +35,7 @@ catalog:
   '@vanilla-extract/jest-transform': '^1.1.21'
   '@vanilla-extract/vite-plugin': ^5.2.1
   '@vanilla-extract/webpack-plugin': '^2.3.26'
-  '@vocab/vite': ^1.0.3
+  '@vocab/vite': ^1.0.4
   braid-design-system: ^34.0.0
   commander: ^14.0.1
   debug: ^4.4.3

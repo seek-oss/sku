@@ -1,8 +1,11 @@
 import { requireFromCwd } from '@sku-private/utils';
 import { banner, link, strong } from '@sku-private/utils/console';
 import semver from 'semver';
+import _debug from 'debug';
 
 const MIN_REACT_VERSION = '19.0.0';
+
+const debug = _debug('sku:warnOnLegacyReact');
 
 export const warnOnLegacyReact = () => {
   try {
@@ -15,6 +18,6 @@ export const warnOnLegacyReact = () => {
       ]);
     }
   } catch {
-    // React is not installed, skip
+    debug('React not found, skipping warning');
   }
 };

@@ -5,19 +5,10 @@ import { addPathAlias } from '../utils/skuConfig.js';
 const SUBPATH_IMPORT = '#src/*';
 const SUBPATH_DESTINATION = './src/*';
 
-const SKU_CONFIG_RE = /(?:^|[\\/])sku\.config\.(?:[cm]?[jt]sx?)$/;
+const SKU_CONFIG_REGEX = /(?:^|[\\/])sku\.config\.(?:[cm]?[jt]sx?)$/;
 
-/**
- * Migrates `rootResolution` `src/` imports to native subpath imports.
- *
- * - In source files, rewrites `src/...` specifiers (in static/dynamic imports,
- *   re-exports and `require` calls) to `#src/...`.
- * - In the sku config, adds a `pathAliases` entry mapping `#src/*` to `./src/*`.
- *   `sku` owns the `package.json` `imports` field and keeps it in sync with
- *   `pathAliases`, so the subpath resolves natively at build time.
- */
 export const transform: Transform = async (source, filePath) => {
-  if (SKU_CONFIG_RE.test(filePath)) {
+  if (SKU_CONFIG_REGEX.test(filePath)) {
     return addPathAlias(source, SUBPATH_IMPORT, SUBPATH_DESTINATION);
   }
 

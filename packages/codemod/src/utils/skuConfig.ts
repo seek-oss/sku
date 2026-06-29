@@ -2,8 +2,8 @@ import { parseAsync, Lang, type SgNode } from '@ast-grep/napi';
 
 const unquote = (text: string) => text.replace(/^['"`]|['"`]$/g, '');
 
-/** Find the `pair` children of an object whose key matches `key`. */
-const findPair = (object: SgNode, key: string): SgNode | null =>
+/** Find the child of an object whose key matches `key`. */
+const getChildNode = (object: SgNode, key: string): SgNode | null =>
   object
     .children()
     .find(
@@ -13,7 +13,7 @@ const findPair = (object: SgNode, key: string): SgNode | null =>
     ) ?? null;
 
 const hasKey = (object: SgNode, key: string): boolean =>
-  findPair(object, key) !== null;
+  getChildNode(object, key) !== null;
 
 /**
  * Locate the sku config object literal, supporting:
@@ -63,12 +63,7 @@ const findConfigObject = (root: SgNode): SgNode => {
 };
 
 /**
- * Insert `entry` as the first property of an object literal, preserving the
- * existing contents. The result is intentionally unformatted; `sku format` is
- * run after the codemod to fix indentation and spacing.
- *
- * `entry` should be the property text without a trailing comma, e.g.
- * `"'#src/*': './src/*'"`.
+ * Insert `entry` as the first property of an object literal, preserving the existing contents.
  */
 const insertProperty = (object: SgNode, entry: string): string => {
   const text = object.text();
@@ -80,9 +75,6 @@ const insertProperty = (object: SgNode, entry: string): string => {
  * Adds a `pathAliases` entry to a sku config, merging into any existing
  * `pathAliases` object. Returns the updated source, or `null` when no change is
  * needed (entry already present) or the config shape is unsupported.
- *
- * Uses `@ast-grep/napi` to surgically insert text without reformatting the rest
- * of the file.
  */
 export const addPathAlias = async (
   source: string,
@@ -92,27 +84,29 @@ export const addPathAlias = async (
   const ast = await parseAsync(Lang.Tsx, source);
   const root = ast.root();
 
-  const configObject = findConfigObject(root);
-  if (!configObject) {
+  const skuConfigObject = findConfigObject(root);
+  if (!skuConfigObject) {
     return null;
   }
 
   const entry = `'${alias}': '${destination}'`;
-  const existing = findPair(configObject, 'pathAliases');
+  const existingPathAliases = getChildNode(skuConfigObject, 'pathAliases');
 
-  if (existing) {
-    const aliases = existing.field('value');
+  if (existingPathAliases) {
+    const pathAliases = existingPathAliases.field('value');
     // Only edit a plain object literal; bail on spreads, references, etc.
-    if (aliases?.kind() !== 'object' || hasKey(aliases, alias)) {
+    if (pathAliases?.kind() !== 'object' || hasKey(pathAliases, alias)) {
       return null;
     }
 
-    return root.commitEdits([aliases.replace(insertProperty(aliases, entry))]);
+    return root.commitEdits([
+      pathAliases.replace(insertProperty(pathAliases, entry)),
+    ]);
   }
 
   return root.commitEdits([
-    configObject.replace(
-      insertProperty(configObject, `pathAliases: { ${entry} }`),
+    skuConfigObject.replace(
+      insertProperty(skuConfigObject, `pathAliases: { ${entry} }`),
     ),
   ]);
 };

@@ -181,8 +181,6 @@ export const runTransform = async (
   process.exit(0);
 };
 
-// This function does not work with specific files since the input is a directory.
-// We may want to allow giving specific files as a path so that codemods that only look for specific files don't have to scan every file.
 const getAllFiles = (directory: string) =>
   glob(join(directory, '**/*.?(c|m){js,ts}?(x)'), {
     ignore: ['**/node_modules', '**/dist'],

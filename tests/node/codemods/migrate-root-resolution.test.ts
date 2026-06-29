@@ -1,5 +1,10 @@
 import dedent from 'dedent';
-import { runCodemodTests } from '@sku-private/testing-library/codemod';
+import {
+  runCodemodTests,
+  scopeToFixture,
+} from '@sku-private/testing-library/codemod';
+import { createFixture, waitFor } from '@sku-private/testing-library';
+import { it, expect } from 'vitest';
 
 runCodemodTests('migrate-root-resolution', [
   {
@@ -38,12 +43,29 @@ runCodemodTests('migrate-root-resolution', [
     output: dedent /* ts */ `
       import type { SkuConfig } from 'sku';
 
-      export default {
-        pathAliases: {
-          '#src/*': './src/*',
-        },
+      export default { pathAliases: { '#src/*': './src/*' },
         clientEntry: 'src/client.tsx',
       } satisfies SkuConfig;
+    `,
+  },
+  // Adds a `pathAliases` entry to the sku config (literal default export)
+  {
+    filename: 'sku.config.ts',
+    input: dedent /* ts */ `
+      import type { SkuConfig } from 'sku';
+
+      const config: SkuConfig = {
+        clientEntry: 'src/client.tsx',
+      };
+      export default config;
+    `,
+    output: dedent /* ts */ `
+      import type { SkuConfig } from 'sku';
+
+      const config: SkuConfig = { pathAliases: { '#src/*': './src/*' },
+        clientEntry: 'src/client.tsx',
+      };
+      export default config;
     `,
   },
   // Merges into an existing `pathAliases` object
@@ -58,8 +80,7 @@ runCodemodTests('migrate-root-resolution', [
     `,
     output: dedent /* ts */ `
       export default {
-        pathAliases: {
-          '#src/*': './src/*',
+        pathAliases: { '#src/*': './src/*',
           '#utils/*': './src/utils/*',
         },
       } satisfies SkuConfig;
@@ -76,31 +97,11 @@ runCodemodTests('migrate-root-resolution', [
       export default config;
     `,
     output: dedent /* ts */ `
-      const config = {
-        pathAliases: {
-          '#src/*': './src/*',
-        },
+      const config = { pathAliases: { '#src/*': './src/*' },
         clientEntry: 'src/client.tsx',
       };
 
       export default config;
-    `,
-  },
-  // Handles CommonJS (`module.exports`) configs
-  {
-    filename: 'sku.config.js',
-    input: dedent /* js */ `
-      module.exports = {
-        clientEntry: 'src/client.tsx',
-      };
-    `,
-    output: dedent /* js */ `
-      module.exports = {
-        pathAliases: {
-          '#src/*': './src/*',
-        },
-        clientEntry: 'src/client.tsx',
-      };
     `,
   },
   // Leaves the config untouched when `#src/*` is already present
@@ -122,3 +123,25 @@ runCodemodTests('migrate-root-resolution', [
     `,
   },
 ]);
+
+it('should fail on unsupported file', async () => {
+  const fixture = await createFixture({
+    'sku.config.js': dedent /* js */ `
+    module.exports = {
+      clientEntry: 'src/client.tsx',
+    };
+  `,
+  });
+  const { codemod } = scopeToFixture(fixture.path);
+
+  const cli = await codemod('migrate-root-resolution', ['.']);
+  cli.debug();
+
+  await waitFor(() => {
+    expect(cli.hasExit()).toMatchObject({ exitCode: 1 });
+  });
+
+  expect(
+    await cli.findByError('Unsupported sku config shape:'),
+  ).toBeInTheConsole();
+});

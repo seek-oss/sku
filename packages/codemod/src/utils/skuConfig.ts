@@ -19,12 +19,11 @@ const hasKey = (object: SgNode, key: string): boolean =>
  * Locate the sku config object literal, supporting:
  *
  * - `export default { ... }` (optionally with `satisfies SkuConfig`)
- * - `module.exports = { ... }`
  * - `const config = { ... }; export default config;`
  *
- * Returns `null` for shapes we can't safely edit, leaving the file untouched.
+ * Throws for shapes we don't support.
  */
-const findConfigObject = (root: SgNode): SgNode | null => {
+const findConfigObject = (root: SgNode): SgNode => {
   /** Match `pattern` and return its `$OBJ` capture only if it's an object. */
   const matchObject = (pattern: string): SgNode | null => {
     const match = root.find({ rule: { pattern } })?.getMatch('OBJ');
@@ -33,8 +32,8 @@ const findConfigObject = (root: SgNode): SgNode | null => {
 
   const directExport =
     matchObject('export default $OBJ satisfies $T') ??
-    matchObject('export default $OBJ') ??
-    matchObject('module.exports = $OBJ');
+    matchObject('export default $OBJ');
+
   if (directExport) {
     return directExport;
   }
@@ -57,7 +56,9 @@ const findConfigObject = (root: SgNode): SgNode | null => {
     }
   }
 
-  return null;
+  throw new Error(
+    'Unsupported sku config shape: only ESM configs (`export default`) can be edited. CJS configs (`module.exports = { ... }`) are not supported',
+  );
 };
 
 /**

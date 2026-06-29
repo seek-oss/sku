@@ -27,7 +27,7 @@ export const createEslintConfig = async ({
     }),
     ...createJsonFilesConfig(),
     ...eslintConfigSeek,
-    createImportOrderConfig(skuContext),
+    createImportOrderConfig(),
     ...(eslintIgnore && eslintIgnore.length > 0
       ? // Spread here to turn a read-only array into a mutable one
         [{ ignores: [...eslintIgnore] }]

@@ -9,18 +9,9 @@ import { banner, accent } from '@sku-private/utils/console';
  */
 const cjsExportsPattern = /module\.exports\b/;
 
-/**
- * Returns `true` when the provided sku config source uses the unsupported
- * CommonJS `module.exports` format rather than an ESM `export default`.
- */
 export const isCjsSkuConfig = (source: string): boolean =>
   cjsExportsPattern.test(source);
 
-/**
- * Validates that the user's sku config uses the supported ESM format. If the
- * config uses the CommonJS `module.exports` format, a banner is shown and the
- * process exits.
- */
 export const validateSkuConfigFormat = (appSkuConfigPath?: string) => {
   if (!appSkuConfigPath) {
     return;

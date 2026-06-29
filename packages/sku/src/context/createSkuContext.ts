@@ -1,6 +1,5 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
-import { critical, strong } from '@sku-private/utils/console';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
@@ -17,6 +16,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { getCjsInteropDeps } from './cjsInteropDeps.js';
 import type { PackageJson } from 'type-fest';
+import { validatePathAliases } from './validatePathAliases.js';
 
 const require = createRequire(import.meta.url);
 const __filename = fileURLToPath(import.meta.url);
@@ -25,55 +25,6 @@ const createJiti = require('jiti');
 const jiti = createJiti(__filename);
 
 const debug = _debug('sku:config');
-
-/**
- * Validate `pathAliases`. `sku` mirrors these into the `package.json` `imports`
- * field, which only supports `#`-prefixed subpath import specifiers, and aliases
- * must not point at `node_modules`.
- */
-const validatePathAliases = (pathAliases?: Record<string, string>) => {
-  if (!pathAliases) {
-    return;
-  }
-
-  for (const [alias, destination] of Object.entries(pathAliases) as Array<
-    [string, string]
-  >) {
-    if (!alias.startsWith('#')) {
-      console.log(
-        critical(
-          `Path alias "${strong(alias)}" must start with "#" to be a valid subpath import.`,
-        ),
-      );
-      process.exit(1);
-    }
-
-    if (destination.includes('node_modules')) {
-      console.log(
-        critical(`Path alias "${strong(alias)}" cannot point to node_modules.`),
-      );
-      process.exit(1);
-    }
-  }
-};
-
-const generateTypeScriptPaths = (
-  pathAliases?: Record<string, string>,
-): Record<string, string[]> | undefined => {
-  if (!pathAliases || Object.keys(pathAliases).length === 0) {
-    return undefined;
-  }
-
-  const typeScriptPaths: Record<string, string[]> = {};
-
-  for (const [alias, destination] of Object.entries(pathAliases) as Array<
-    [string, string]
-  >) {
-    typeScriptPaths[alias] = [destination];
-  }
-
-  return typeScriptPaths;
-};
 
 interface SkuContextOptions {
   configPath?: string;
@@ -274,7 +225,6 @@ export const createSkuContext = ({
   const externalizeNodeModules = skuConfig.externalizeNodeModules;
 
   const pathAliases = skuConfig.pathAliases;
-  const tsPaths = generateTypeScriptPaths(pathAliases);
 
   const defaultCjsInteropDependencies = ['lodash'];
 
@@ -319,7 +269,6 @@ export const createSkuContext = ({
     vitePlugins,
     eslintIgnore,
     pathAliases,
-    tsPaths,
     routes,
     environments,
     supportedBrowsers,

@@ -1,6 +1,26 @@
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-export default ({ tsconfigDecorator, tsPaths }: SkuContext) => {
+const generateTypeScriptPaths = (
+  pathAliases?: Record<string, string>,
+): Record<string, string[]> | undefined => {
+  if (!pathAliases || Object.keys(pathAliases).length === 0) {
+    return undefined;
+  }
+
+  return Object.fromEntries(
+    Object.entries(pathAliases).map(([alias, destination]) => [
+      alias,
+      [destination],
+    ]),
+  );
+};
+
+export const createTSConfig = ({
+  tsconfigDecorator,
+  pathAliases,
+}: SkuContext) => {
+  const tsPaths = generateTypeScriptPaths(pathAliases);
+
   const config = {
     compilerOptions: {
       // Don't compile anything, only perform type checking
@@ -45,3 +65,5 @@ export default ({ tsconfigDecorator, tsPaths }: SkuContext) => {
 
   return tsconfigDecorator(config);
 };
+
+export default createTSConfig;

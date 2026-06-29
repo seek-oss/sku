@@ -446,17 +446,11 @@ export interface SkuConfigBase {
    * Path alias mappings for module resolution.
    * Each alias maps a pattern to a destination path relative to the project root.
    *
-   * This option generates TypeScript's `paths` configuration in `tsconfig.json` so
-   * that the TypeScript compiler and editors understand the aliases.
-   *
-   * Actual module resolution at build time is handled natively by the bundler via
-   * Node.js [subpath imports](https://nodejs.org/api/packages.html#subpath-imports).
-   * To make an alias resolve at build time, add a matching entry to the `imports`
-   * field of your `package.json`. Subpath imports must be prefixed with `#`.
+   * This option generates TypeScript's `paths` configuration for editor/type support, and `sku`
+   * mirrors it into your `package.json` `imports` field so the aliases resolve natively at build time.
+   * Subpath import specifiers must be prefixed with `#`.
    *
    * Example `sku.config.ts`: `{ "#components/*": "./src/components/*" }`
-   *
-   * Example `package.json`: `{ "imports": { "#components/*": "./src/components/*" } }`
    *
    * @default {}
    * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths

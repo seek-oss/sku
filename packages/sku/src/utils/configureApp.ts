@@ -14,7 +14,7 @@ import dedent from 'dedent';
 import ensureGitignore from 'ensure-gitignore';
 
 import prettierConfig from '../config/prettier.js';
-import createTSConfig from '../services/typescript/tsconfig.js';
+import { createTSConfig } from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 import {
   shouldMigrateOldEslintConfig,
@@ -134,9 +134,6 @@ export default async (skuContext: SkuContext) => {
   await writeFileToCWD(tsConfigFileName, createTSConfig(skuContext));
   gitIgnorePatterns.push(tsConfigFileName);
 
-  // Take ownership of the `imports` field in `package.json`, keeping it in sync
-  // with the `pathAliases` sku config option so aliases resolve natively at
-  // build time via Node.js subpath imports.
   await syncPathAliasImports(skuContext.pathAliases);
 
   const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];

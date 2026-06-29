@@ -400,9 +400,7 @@ Default: `{}`
 
 Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
 
-This option generates TypeScript's [`paths`](https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths) configuration in `tsconfig.json` so that the TypeScript compiler and your editor understand the aliases.
-
-Actual module resolution at build time is handled natively by the bundler (both Webpack and Vite) via Node.js [subpath imports](https://nodejs.org/api/packages.html#subpath-imports). `sku` takes complete ownership of the `imports` field in your `package.json` and keeps it in sync with `pathAliases`, so you don't need to maintain it manually. Subpath import specifiers must be prefixed with `#`.
+This option generates TypeScript's `paths` configuration for editor/type support, and `sku` mirrors it into your `package.json` `imports` field so the aliases resolve natively at build time. Subpath import specifiers must be prefixed with `#`.
 
 > [!WARNING]
 > Because `sku` fully manages the `imports` field, any entries you add manually will be removed. Declare all of your subpath imports via `pathAliases` instead.

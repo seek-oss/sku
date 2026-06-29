@@ -4,21 +4,15 @@ import { getPathFromCwd } from '@sku-private/utils';
 import { applyEdits, modify } from 'jsonc-parser';
 
 import { hasErrorMessage } from './error-guards.js';
+import _debug from 'debug';
 
 const formattingOptions = { insertSpaces: true, tabSize: 2 };
+
+const debug = _debug('sku:path-alias-imports');
 
 /**
  * Sync the `imports` field of the project's `package.json` with the `pathAliases`
  * sku config option.
- *
- * sku takes complete ownership of the `imports` field: it is fully replaced with
- * the entries derived from `pathAliases`. When `pathAliases` is empty or omitted,
- * the `imports` field is removed entirely.
- *
- * Edits are applied surgically via `jsonc-parser` so the rest of `package.json`
- * (key order, formatting, comments) is preserved, and the file is only written
- * when its contents actually change. This keeps the operation idempotent, as it
- * runs on every sku command.
  */
 export const syncPathAliasImports = async (
   pathAliases: Record<string, string> = {},
@@ -30,6 +24,7 @@ export const syncPathAliasImports = async (
     source = await readFile(packageJsonPath, 'utf-8');
   } catch {
     // No `package.json` in the current working directory (e.g. during `sku init`).
+    debug('No package.json found, skipping path alias imports');
     return;
   }
 
@@ -40,11 +35,13 @@ export const syncPathAliasImports = async (
   const updated = applyEdits(source, edits);
 
   if (updated === source) {
+    debug('package.json is already in sync, skipping update');
     return;
   }
 
   try {
     await writeFile(packageJsonPath, updated);
+    debug('Updated package.json with path alias imports');
   } catch (error) {
     const message = hasErrorMessage(error) ? `: ${error.message}` : '';
     throw new Error(

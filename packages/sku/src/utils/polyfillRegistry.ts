@@ -32,27 +32,31 @@ export const POLYFILL_REGISTRY: PolyfillRegistry = {
   },
   'es6-promise': {
     reason:
-      'Promises is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+      'Promise is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
   },
   'es6-promise/auto': {
     reason:
-      'Promises is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+      'Promise is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
   },
   'promise-polyfill': {
     reason:
-      'Promises is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
+      'Promise is well established and works across many devices and browser versions. It has been available across browsers since July 2015.',
   },
   'whatwg-fetch': {
     reason:
-      'Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.',
+      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.',
   },
   'isomorphic-fetch': {
     reason:
-      'Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017, and Node.js since April 2022.',
+      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.',
   },
   'node-fetch': {
     reason:
-      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017.',
+      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.',
+  },
+  'cross-fetch': {
+    reason:
+      'fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.',
   },
   'intersection-observer': {
     reason:

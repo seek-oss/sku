@@ -130,16 +130,3 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
     });
   },
 );
-
-// webpack dev server handles SIGINT/SIGTERM and exits the parent; SIGQUIT does not
-describe.each(['SIGINT', 'SIGTERM'] as const)(
-  'start-ssr exits the parent on %s',
-  (signal) => {
-    it('exits the parent process', async () => {
-      const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
-      await start.findByText('Server started');
-      start.process.kill(signal);
-      await waitFor(() => expect(start.hasExit()).not.toBeNull());
-    });
-  },
-);

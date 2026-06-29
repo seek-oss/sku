@@ -42,7 +42,9 @@ describe('pathAliases', () => {
 
   describe('validation', () => {
     it('should reject pathAliases pointing to node_modules', async () => {
-      const configure = await sku('configure', ['--config=sku.config.bad.ts']);
+      const configure = await sku('configure', [
+        '--config=sku.config.bad-node-modules.ts',
+      ]);
 
       await waitFor(() => {
         expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
@@ -50,7 +52,23 @@ describe('pathAliases', () => {
 
       expect(
         configure.getByText(
-          'Path alias "@bad/*" cannot point to node_modules.',
+          'Path alias "#bad/*" cannot point to node_modules.',
+        ),
+      ).toBeInTheConsole();
+    });
+
+    it('should reject pathAliases with invalid import specifier', async () => {
+      const configure = await sku('configure', [
+        '--config=sku.config.bad-wrong-import.ts',
+      ]);
+
+      await waitFor(() => {
+        expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+
+      expect(
+        configure.getByText(
+          'Path alias "@bad/*" must start with "#" to be a valid subpath import.',
         ),
       ).toBeInTheConsole();
     });

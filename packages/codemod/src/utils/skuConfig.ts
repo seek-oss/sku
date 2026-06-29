@@ -42,6 +42,7 @@ const findConfigObject = (root: SgNode): SgNode => {
   const reference = root
     .find({ rule: { pattern: 'export default $OBJ' } })
     ?.getMatch('OBJ');
+
   if (reference?.kind() === 'identifier') {
     const value = root
       .find({

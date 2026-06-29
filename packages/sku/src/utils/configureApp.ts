@@ -25,6 +25,7 @@ import {
 
 import getCertificate from './certificate.js';
 import { syncPathAliasImports } from './pathAliasImports.js';
+import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 
 import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
@@ -41,6 +42,9 @@ const addSep = (p: string) => `${p}${path.sep}`;
 
 export default async (skuContext: SkuContext) => {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
+
+  validateSkuConfigFormat(paths.appSkuConfigPath);
+
   // Ignore target directories
   const webpackTargetDirectory = addSep(paths.relativeTarget);
 

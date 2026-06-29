@@ -135,7 +135,6 @@ it('should fail on unsupported file', async () => {
   const { codemod } = scopeToFixture(fixture.path);
 
   const cli = await codemod('migrate-root-resolution', ['.']);
-  cli.debug();
 
   await waitFor(() => {
     expect(cli.hasExit()).toMatchObject({ exitCode: 1 });

@@ -12,7 +12,7 @@ import path from 'path'; //  built-in
 
 import someModule from 'some-module'; // external
 
-import utils from 'src/utils'; // internal
+import utils from '#src/utils'; // internal
 
 import distantParent from '../../../parent'; // parents
 import Parent from '../parent'; // parents

@@ -48,7 +48,7 @@ describe('polyfillDetector', () => {
           {
             "detectionSource": "config",
             "polyfillName": "whatwg-fetch",
-            "reason": "Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.",
+            "reason": "fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.",
           },
         ]
       `);
@@ -138,7 +138,7 @@ describe('polyfillDetector', () => {
             "dependencyType": "devDependencies",
             "detectionSource": "dependency",
             "polyfillName": "whatwg-fetch",
-            "reason": "Fetch API is well established and works across many devices and browser versions. It has been available across browsers since March 2017.",
+            "reason": "fetch is well established and works across many devices and browser versions. It has been available across browsers since March 2017 and Node.js since v18.0.0.",
           },
         ]
       `);

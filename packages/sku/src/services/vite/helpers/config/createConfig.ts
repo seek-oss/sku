@@ -14,6 +14,7 @@ const require = createRequire(import.meta.url);
 const vanillaExtractCompilerPluginAllowlist = new Set([
   // Without this plugin, user-configured overrides won't be passed through to the VE compiler
   'sku:dangerously-set-vite-config',
+  'sku:strip-server-config',
 ]);
 
 export const createConfig = (
@@ -80,7 +81,7 @@ export const createConfig = (
           vanillaExtractCompilerPluginAllowlist.has(name),
       }),
       /**
-       * the sku plugin (only sku specific changes)
+       * The sku plugin (only sku specific changes)
        */
       skuPlugin({ skuContext, environment }),
     ],

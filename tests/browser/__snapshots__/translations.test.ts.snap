@@ -70,7 +70,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,57 +1,56 @@
+@@ -1,57 +1,62 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -97,6 +97,12 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
        href="/en-translations.js"
        crossorigin
      >
++    <link
++      rel="modulepreload"
++      as="script"
++      crossorigin
++      href="/en-PSEUDO-translations.js"
++    >
    </head>
    <body>
      <div id="app">

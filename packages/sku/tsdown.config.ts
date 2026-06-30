@@ -20,6 +20,7 @@ export default defineConfig([
       'bin/sku': 'src/bin/sku.ts',
       'config/eslint': 'src/config/eslint/config.ts',
       'config/prettier': 'src/config/prettier.ts',
+      'config/storybook': './src/config/storybook/config.ts',
       'entries/vite-client': 'src/services/vite/entries/vite-client.tsx',
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
       'jest/file-mock': 'src/config/jest/fileMock.ts',
@@ -46,16 +47,6 @@ export default defineConfig([
         'virtual:sku/polyfills',
         '@vanilla-extract/css/adapter',
       ],
-    },
-  },
-  // Storybook config needs to be cjs for webpack storybook to work.
-  // @see https://github.com/storybookjs/storybook/issues/23972#issuecomment-1948534058
-  {
-    ...defaultConfig,
-    exports: false,
-    format: ['cjs'],
-    entry: {
-      'config/storybook': './src/config/storybook/config.ts',
     },
   },
 ]);

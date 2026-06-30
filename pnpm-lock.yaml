@@ -1211,7 +1211,7 @@ importers:
         specifier: workspace:^
         version: link:../vite
       '@storybook/react-webpack5':
-        specifier: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
+        specifier: ^10.0.0
         version: 10.4.6(@swc/core@1.15.41)(@types/react-dom@19.2.3)(@types/react@19.2.17)(cssnano@7.1.9)(esbuild@0.28.1)(postcss@8.5.15)(react-dom@19.2.7)(react@19.2.7)(storybook@10.4.6)(typescript@5.9.3)
       '@swc/core':
         specifier: ^1.6.13

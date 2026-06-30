@@ -14,7 +14,7 @@ export const warnOnLegacyReact = () => {
     if (coerced && semver.lt(coerced, MIN_REACT_VERSION)) {
       banner('caution', 'React 18 or below detected', [
         `Your application is using ${strong(`react@${reactVersion}`)}. Sku now recommends using React 19.`,
-        `Consider upgrading to React 19. See the ${link('https://react.dev/blog/2024/04/25/react-19-upgrade-guide')} for more information.`,
+        `Consider upgrading to React 19. See ${link('https://react.dev/blog/2024/04/25/react-19-upgrade-guide')} for more information.`,
       ]);
     }
   } catch {

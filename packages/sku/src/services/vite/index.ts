@@ -3,10 +3,7 @@ import { createServer, createBuilder } from 'vite';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 import { createConfig } from './helpers/config/createConfig.js';
-import {
-  cleanTargetDirectory,
-  ensureTargetDirectory,
-} from '../../utils/buildFileUtils.js';
+import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
@@ -16,8 +13,6 @@ import { serverUrls } from '@sku-private/utils';
 export const viteService = {
   build: async (skuContext: SkuContext) => {
     const outDir = createOutDir(skuContext.paths.target);
-    await ensureTargetDirectory(outDir.client);
-    await cleanTargetDirectory(outDir.client);
     const builder = await createBuilder(createConfig(skuContext));
 
     // builds all environments in the order they are defined in the config

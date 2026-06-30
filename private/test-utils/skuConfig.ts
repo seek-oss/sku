@@ -20,31 +20,35 @@ export const makeStableHashes = (config: Record<string, any>) => {
 /**
  * A helper for vite to make stable hashes.
  */
-export const makeStableViteHashes = () => ({
-  environments: {
-    ssr: {
-      build: {
-        rolldownOptions: {
-          output: {
-            // Don't set `entryFileNames` for client build because sku relies on the render
-            // entrypoint having a static name
-            // entryFileNames: 'render.js',
-            chunkFileNames: '[name].js',
-            assetFileNames: '[name][extname]',
+export const makeStableViteHashes = () => {
+  // ssr and client environments must share the same asset and chunk names to ensure files emitted
+  // during the client build match asset and chunk names reference by static HTML
+  const sharedOutputFileNames = {
+    chunkFileNames: '[name].js',
+    assetFileNames: '[name][extname]',
+  };
+
+  return {
+    // Order of environments is aligned with sku's `buildPlugin` to ensure the render entrypoint isn't
+    // cleaned up by Vite before pre-rendering
+    environments: {
+      client: {
+        build: {
+          rolldownOptions: {
+            output: {
+              entryFileNames: '[name].js',
+              ...sharedOutputFileNames,
+            },
+          },
+        },
+      },
+      ssr: {
+        build: {
+          rolldownOptions: {
+            output: sharedOutputFileNames,
           },
         },
       },
     },
-    client: {
-      build: {
-        rolldownOptions: {
-          output: {
-            entryFileNames: '[name].js',
-            chunkFileNames: '[name].js',
-            assetFileNames: '[name][extname]',
-          },
-        },
-      },
-    },
-  },
-});
+  };
+};

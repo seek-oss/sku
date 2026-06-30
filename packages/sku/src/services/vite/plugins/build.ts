@@ -54,11 +54,6 @@ export const buildPlugin = ({
         client: {
           build: {
             outDir: outDir.client,
-            // The render bundle is emitted to a subdirectory of the client outDir, so we
-            // manually clean the target directory at the vite service layer and disable vite's
-            // automatic cleanup of the `outDir`. This ensures cleanup is not dependent on which
-            // environment's build runs first.
-            emptyOutDir: false,
             manifest: true,
             sourcemap: skuContext.sourceMapsProd,
             rolldownOptions: {

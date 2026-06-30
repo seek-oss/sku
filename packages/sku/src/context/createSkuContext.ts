@@ -11,7 +11,7 @@ import {
   detectedCompilePackagesSync,
 } from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { resolveAppSkuConfigPath } from './configPath.js';
 
 import { createRequire } from 'node:module';
@@ -25,7 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const createJiti = require('jiti');
 const jiti = createJiti(__filename);
 
-const debug = _debug('sku:config');
+const debug = createDebug('sku:config');
 
 const generateTypeScriptPaths = (
   pathAliases?: Record<string, string>,

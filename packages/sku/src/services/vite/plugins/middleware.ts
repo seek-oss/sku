@@ -3,7 +3,7 @@ import type { Plugin } from 'vite';
 import { createRequire } from 'node:module';
 import type { ViteRenderFunction } from '../../../types/types.js';
 import { getMatchingRoute } from '../../../utils/routeMatcher.js';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import {
   getLanguageFromRoute,
   getRouteWithLanguage,
@@ -12,7 +12,7 @@ import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import createCSPHandler, { type CSPHandler } from '../../webpack/entry/csp.js';
 import { makePluginName } from '../helpers/makePluginName.js';
 
-const log = debug('sku:middleware:vite');
+const log = createDebug('sku:middleware:vite');
 
 const require = createRequire(import.meta.url);
 

@@ -1,7 +1,7 @@
 import { join, dirname } from 'node:path';
 import nodeFs from 'node:fs';
 import nanoMemoize from 'nano-memoize';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { createRequire } from 'node:module';
 
 import { cwd } from '@sku-private/utils';
@@ -10,7 +10,7 @@ import { hasErrorCode } from '../../../../utils/error-guards.js';
 // @ts-expect-error
 const memoize = nanoMemoize?.default || nanoMemoize;
 
-const log = debug('sku:resolvePackage');
+const log = createDebug('sku:resolvePackage');
 
 const require = createRequire(import.meta.url);
 

@@ -1,6 +1,6 @@
 import { dirname, posix as path } from 'node:path';
 import { fdir as Fdir } from 'fdir';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { createRequire } from 'node:module';
 import { existsSync, opendirSync } from 'node:fs';
 
@@ -17,7 +17,7 @@ type CompilePackagesResult = {
   paths: string[];
 };
 
-const debug = _debug('sku:compilePackages');
+const debug = createDebug('sku:compilePackages');
 const require = createRequire(import.meta.url);
 
 const seekDependencyGlob = '**/@seek/*/package.json';

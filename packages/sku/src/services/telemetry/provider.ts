@@ -3,11 +3,11 @@ import { createRequire } from 'node:module';
 import { getAddCommand } from '@sku-private/utils';
 import { banner } from '@sku-private/utils/console';
 
-import _debug from 'debug';
+import { createDebug } from 'obug';
 
 const require = createRequire(import.meta.url);
 
-const debug = _debug('sku:telemetry');
+const debug = createDebug('sku:telemetry');
 const noopDebug =
   (functionName: string) =>
   (...args: unknown[]) => {

@@ -1,7 +1,7 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 import cluster, { type Worker } from 'node:cluster';
 
-const log = debug('sku:server-watcher');
+const log = createDebug('sku:server-watcher');
 
 function createServerManager(serverFilePath: string) {
   let activeWorker: Worker;

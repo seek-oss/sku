@@ -231,6 +231,3 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
     }
   }
 }
-
-/** @deprecated Please use the named `SkuWebpackPlugin` export */
-export default SkuWebpackPlugin;

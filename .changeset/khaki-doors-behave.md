@@ -1,0 +1,8 @@
+---
+'sku': major
+---
+
+Remove `init` command.
+
+The `init` command was deprecated in v15.0.0 and is now removed.
+To create a new `sku` project, use `@sku-lib/create` instead.

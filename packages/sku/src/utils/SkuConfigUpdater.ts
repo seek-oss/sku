@@ -25,7 +25,7 @@ import {
 } from 'magicast';
 import { getConfigFromVariableDeclaration } from 'magicast/helpers';
 
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import prettier from 'prettier';
 import prettierConfig from '../config/prettier.js';
@@ -41,7 +41,7 @@ type EsmNonLiteralConfig = {
 };
 type CjsConfig = { type: 'cjs'; configAst: ObjectExpression };
 
-const log = debug('sku:update-sku-config');
+const log = createDebug('sku:update-sku-config');
 
 export class SkuConfigUpdater {
   /** The AST or AST proxy of the sku config */

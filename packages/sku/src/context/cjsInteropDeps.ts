@@ -1,9 +1,9 @@
 import { intersects } from 'semver';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import { requireFromCwd } from '@sku-private/utils';
 
-const log = debug('sku:cjsInteropDependencies');
+const log = createDebug('sku:cjsInteropDependencies');
 
 type CjsInteropDependencies = {
   serveCjsInteropDependencies: string[];

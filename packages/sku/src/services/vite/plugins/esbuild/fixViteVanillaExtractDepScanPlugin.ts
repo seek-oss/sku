@@ -1,9 +1,9 @@
 import type { RolldownPluginOption } from 'rolldown';
 import { cssFileFilter } from '@vanilla-extract/integration';
 import { makePluginName } from '../../helpers/makePluginName.js';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 
-const debug = _debug('sku:fix-vanilla-extract-dep-scan');
+const debug = createDebug('sku:fix-vanilla-extract-dep-scan');
 
 export const fixViteVanillaExtractDepScanPlugin = (): RolldownPluginOption => ({
   name: makePluginName('fix-vanilla-extract-dep-scan'),

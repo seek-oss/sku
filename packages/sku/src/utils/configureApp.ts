@@ -30,6 +30,7 @@ import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 import { success } from '@sku-private/utils/console';
+import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
 const coverageFolder = 'coverage';
 
@@ -165,7 +166,7 @@ export default async (skuContext: SkuContext) => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's package manager
+  // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's package manager
   if (rootDir && isAtLeastPnpmV10()) {
     const pnpmConfigDependencies = await getPnpmConfigDependencies();
 
@@ -179,4 +180,6 @@ export default async (skuContext: SkuContext) => {
       pnpmPluginSkuInstalled,
     });
   }
+
+  warnOnLegacyReact();
 };

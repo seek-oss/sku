@@ -104,10 +104,6 @@
       // Used in tests
       "ignoreDependencies": ["@sku-lib/create"],
     },
-    "fixtures/sku-init": {
-      // `sku init` is run in the package
-      "ignoreDependencies": ["sku"],
-    },
     "fixtures/sku-test": {
       "entry": ["sku.config.*", "src/*.test.ts", "setup-test.*"],
     },

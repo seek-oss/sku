@@ -1,4 +1,4 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { getChunkName } from '@vocab/webpack/chunk-name';
 import serializeJavascript from 'serialize-javascript';
 import makeExtractor from '../makeExtractor.js';
@@ -54,13 +54,13 @@ export default async (renderParams: RenderAppProps) => {
       createUnsafeNonce: cspHandler ? cspHandler.createUnsafeNonce : undefined,
     });
     if (renderContext.language) {
-      debug('sku:render:language')(
+      createDebug('sku:render:language')(
         `Using language "${renderContext.language}" for route "${renderContext.route}"`,
       );
       // @ts-expect-error - addChunk is not on the ChunkExtractor type
       extractor.addChunk(getChunkName(renderContext.language));
     } else {
-      debug('sku:render:language')(
+      createDebug('sku:render:language')(
         `No language on route "${renderContext.route}"`,
       );
     }

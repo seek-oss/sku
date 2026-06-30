@@ -1,7 +1,7 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
-import open from 'open';
+import open from 'tiny-open';
 import isCI from './utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
 import { fileURLToPath } from 'node:url';

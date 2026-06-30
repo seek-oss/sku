@@ -61,6 +61,7 @@
     "eslint-plugin-n": "^17.21.0",
     "husky": "^9.0.0",
     "knip": "^6.14.2",
+    "nano-staged": "catalog:",
     "playwright": "^1.60.0",
     "prettier": "~3.8.0",
     "renovate-config-seek": "^0.4.0",
@@ -75,8 +76,5 @@
   "packageManager": "pnpm@11.5.1",
   "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
-  "skuSkipValidatePeerDeps": true,
-  "dependencies": {
-    "nano-staged": "catalog:"
-  }
+  "skuSkipValidatePeerDeps": true
 }

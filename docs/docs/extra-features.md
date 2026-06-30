@@ -231,7 +231,7 @@ A report is generated in the `/report` directory when `sku build` is run.
 
 ## Pre-commit hook
 
-> **Deprecation notice:** The built-in `sku pre-commit` command has been removed. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
+> The `sku pre-commit` command was removed in v16. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
 
 To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged] (a tiny, zero-dependency alternative to `lint-staged`) with [husky].
 

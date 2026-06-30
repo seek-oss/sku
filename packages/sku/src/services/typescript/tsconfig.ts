@@ -72,7 +72,7 @@ export const createTSConfig = ({
       forceConsistentCasingInFileNames: true,
       jsx: 'react-jsx',
       lib: ['dom', 'es2022'],
-      // ? should we update this to es2025
+      // keep this as es2022 to align with our browser support policy.
       target: 'es2022',
       ...(tsPaths ? { paths: tsPaths } : {}),
 

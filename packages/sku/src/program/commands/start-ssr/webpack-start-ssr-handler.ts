@@ -1,7 +1,6 @@
 import path from 'node:path';
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
-import onDeath from 'death';
 import debug from 'debug';
 
 import getCertificate from '../../../utils/certificate.js';
@@ -38,6 +37,15 @@ const hot = process.env.SKU_HOT !== 'false';
 
 const pluginName = 'sku-start-ssr';
 const localhost = '0.0.0.0';
+
+// Run a handler when the process receives a termination signal. Replaces the
+// `death` package, which simply registered the same handler on each signal.
+const onDeath = (handler: NodeJS.SignalsListener) => {
+  const signals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+  for (const signal of signals) {
+    process.on(signal, handler);
+  }
+};
 
 const once = (fn: (...args: any[]) => void) => {
   let called = false;
@@ -209,7 +217,6 @@ export const webpackStartSsrHandler = async ({
   devServer.startCallback((err) => {
     if (err) {
       console.log(err);
-      return;
     }
   });
 
@@ -218,6 +225,11 @@ export const webpackStartSsrHandler = async ({
 
     serverCompiler.close(() => {
       log('Server compiler closed');
+    });
+
+    // webpack-dev-server doesn't exit on SIGQUIT, so we will stop it manually
+    devServer.stopCallback(() => {
+      process.exit(0);
     });
   });
 };

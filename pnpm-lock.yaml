@@ -1305,9 +1305,6 @@ importers:
       cssnano:
         specifier: ^7.0.7
         version: 7.1.9(postcss@8.5.15)
-      death:
-        specifier: ^1.1.0
-        version: 1.1.0
       debug:
         specifier: 'catalog:'
         version: 4.4.3
@@ -1480,9 +1477,6 @@ importers:
       '@types/cross-spawn':
         specifier: ^6.0.3
         version: 6.0.6
-      '@types/death':
-        specifier: ^1.1.5
-        version: 1.1.5
       '@types/debug':
         specifier: 'catalog:'
         version: 4.1.13
@@ -4556,9 +4550,6 @@ packages:
   '@types/css@0.0.38':
     resolution: {integrity: sha512-FsAy4pBnrJb8qdKmIyDy582o4Xt8pHwpCwYRmIvXw4dslA7C4436oOM+8XNnMEsV/LSculbFNaZsBZmycDjARw==}
 
-  '@types/death@1.1.5':
-    resolution: {integrity: sha512-r9LUPz2hMUZZyViBRbOTU1NV0a92xB23aeC/gXRWTIBOuhX/MtmeYPVBQ7Je86jVYt5trKEr2sfeFGyWU+ijPA==}
-
   '@types/debug@4.1.13':
     resolution: {integrity: sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==}
 
@@ -6047,9 +6038,6 @@ packages:
 
   dataloader@1.4.0:
     resolution: {integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==}
-
-  death@1.1.0:
-    resolution: {integrity: sha512-vsV6S4KVHvTGxbEcij7hkWRv0It+sGGWVOM67dQde/o5Xjnr+KmLjxWJii2uEObIrt1CcM9w0Yaovx+iOlIL+w==}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -13727,8 +13715,6 @@ snapshots:
 
   '@types/css@0.0.38': {}
 
-  '@types/death@1.1.5': {}
-
   '@types/debug@4.1.13':
     dependencies:
       '@types/ms': 2.1.0
@@ -15504,8 +15490,6 @@ snapshots:
       is-data-view: 1.0.2
 
   dataloader@1.4.0: {}
-
-  death@1.1.0: {}
 
   debug@2.6.9:
     dependencies:

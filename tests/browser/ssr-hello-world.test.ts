@@ -2,7 +2,11 @@ import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
 
-import { scopeToFixture, skipCleanup } from '@sku-private/testing-library';
+import {
+  scopeToFixture,
+  skipCleanup,
+  waitFor,
+} from '@sku-private/testing-library';
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
@@ -106,3 +110,31 @@ describe('ssr-hello-world', () => {
     });
   });
 });
+
+describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
+  'start-ssr teardown on %s',
+  (signal) => {
+    it('kills the SSR server worker and frees the port', async () => {
+      const clientPort = 8100;
+      const serverPort = 8101;
+
+      const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
+      await start.findByText('Server started');
+
+      await expect(
+        fetch(`http://localhost:${clientPort}`),
+      ).resolves.toBeDefined();
+      await expect(
+        fetch(`http://localhost:${serverPort}`),
+      ).resolves.toBeDefined();
+      start.process.kill(signal);
+
+      await waitFor(async () => {
+        await expect(fetch(`http://localhost:${clientPort}`)).rejects.toThrow();
+        await expect(fetch(`http://localhost:${serverPort}`)).rejects.toThrow();
+      });
+
+      await waitFor(() => expect(start.hasExit()).not.toBeNull());
+    });
+  },
+);

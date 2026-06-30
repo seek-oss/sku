@@ -86,11 +86,6 @@ const resolveProvider = () => {
     const mod = _mod?.default ?? _mod;
     const realProvider = mod({}) as TelemetryProvider;
 
-    // For backwards compat with older versions of @seek/sku-telemetry
-    if (typeof realProvider.gauge !== 'function') {
-      realProvider.gauge = noopDebug('gauge');
-    }
-
     activeProvider = realProvider;
     usingRealProvider = true;
   } catch {

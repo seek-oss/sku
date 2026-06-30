@@ -1,11 +1,11 @@
 import { requireFromCwd } from '@sku-private/utils';
 import { banner, link, strong } from '@sku-private/utils/console';
 import semver from 'semver';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 
 const MIN_REACT_VERSION = '19.0.0';
 
-const debug = _debug('sku:warnOnLegacyReact');
+const debug = createDebug('sku:warnOnLegacyReact');
 
 export const warnOnLegacyReact = () => {
   try {

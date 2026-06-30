@@ -2,15 +2,15 @@ import type { SkuContext } from '../../context/createSkuContext.js';
 import { requireFromCwd } from '@sku-private/utils';
 import type { PackageJson, TsConfigJson } from 'type-fest';
 
-const hasTypesInstalled = (types: string) => {
+const hasTypesInstalledForPackage = (packageName: string) => {
   try {
-    // Trying to import @types/{types}/package.json can lead to false positives, so instead we'll check the dependencies directly.
+    // Trying to import @types/{packageName}/package.json can lead to false positives, so instead we'll check the dependencies directly.
     const packageJson: PackageJson = requireFromCwd('./package.json');
     const allDeps = {
       ...packageJson.dependencies,
       ...packageJson.devDependencies,
     };
-    return Boolean(allDeps[`@types/${types}`]);
+    return Boolean(allDeps[`@types/${packageName}`]);
   } catch {
     return false;
   }
@@ -26,7 +26,7 @@ export const createTSConfig = ({
 
     // If a project doesn't have @types/jest installed then a TS lint error will be thrown if it's present in the types array.
     // This is possible if a project isn't testing anything, so they don't install the jest types.
-    if (testRunner === 'jest' && hasTypesInstalled('jest')) {
+    if (testRunner === 'jest' && hasTypesInstalledForPackage('jest')) {
       types.push('jest');
     }
     return types;

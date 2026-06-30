@@ -26,6 +26,11 @@ describe('pathAliases', () => {
       tsconfig = jsonc.parse(tsconfigContents);
     });
 
+    it('should include paths without baseUrl', async () => {
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
+      expect(tsconfig.compilerOptions.paths).toBeDefined();
+    });
+
     it('should generate TypeScript paths configuration with pathAliases', async () => {
       expect(tsconfig.compilerOptions.paths).toEqual({
         'src/*': ['./src/*'],
@@ -39,11 +44,6 @@ describe('pathAliases', () => {
       expect(tsconfig.compilerOptions.paths).toMatchObject({
         'src/*': ['./src/*'],
       });
-    });
-
-    it('should resolve imports via paths without baseUrl', async () => {
-      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
-      expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });
 

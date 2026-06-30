@@ -1,8 +1,11 @@
 import { Command } from 'commander';
 import { runTransform } from '../transform/runner.js';
 
-import packageJson from '../../package.json' with { type: 'json' };
-const { name, description, version } = packageJson;
+import {
+  name,
+  description,
+  version,
+} from '@sku-lib/codemod/package.json' with { type: 'json' };
 
 export const program = new Command(name);
 

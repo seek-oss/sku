@@ -4,14 +4,12 @@
     "rootDir": "./src",
     "target": "ESNext",
     "allowJs": true,
-    "jsx": "react-jsx",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "declaration": true,
     "types": ["node"]
   },
-  "include": ["./src/**/*", "tsdown.config.ts"],
-  "exclude": ["node_modules", "**/__testfixtures__"]
+  "include": ["./src/**/*", "tsdown.config.ts"]
 }

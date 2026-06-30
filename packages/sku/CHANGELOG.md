@@ -1,5 +1,11 @@
 # sku
 
+## 15.15.6
+
+### Patch Changes
+
+- Replace `open` with `tiny-open` ([#1610](https://github.com/seek-oss/sku/pull/1610))
+
 ## 15.15.5
 
 ### Patch Changes

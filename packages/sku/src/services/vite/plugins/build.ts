@@ -15,13 +15,6 @@ export const buildPlugin = ({
 }): PluginOption => {
   const outDir = createOutDir(skuContext.paths.target);
 
-  // ssr and client environments must share the same asset and chunk names to ensure files emitted
-  // during the client build match asset and chunk names reference by static HTML
-  const sharedOutputFileNames = {
-    chunkFileNames: '[name]-[hash].chunk.js',
-    assetFileNames: '[name]-[hash][extname]',
-  };
-
   return {
     name: makePluginName('build'),
     apply: 'build',
@@ -34,6 +27,9 @@ export const buildPlugin = ({
         assetsInlineLimit: assetsInlineLimitBytes,
         rolldownOptions: {
           output: {
+            entryFileNames: '[name]-[hash].js',
+            chunkFileNames: '[name]-[hash].chunk.js',
+            assetFileNames: '[name]-[hash][extname]',
             codeSplitting: {
               groups: [
                 {
@@ -59,10 +55,6 @@ export const buildPlugin = ({
             rolldownOptions: {
               // this should be skuContext.paths.clientEntry in sku start-ssr or build-ssr mode
               input: clientEntry,
-              output: {
-                entryFileNames: '[name]-[hash].js',
-                ...sharedOutputFileNames,
-              },
             },
           },
         },
@@ -77,7 +69,6 @@ export const buildPlugin = ({
               input: skuContext.paths.renderEntry,
               output: {
                 entryFileNames: renderEntryChunkName,
-                ...sharedOutputFileNames,
               },
             },
           },

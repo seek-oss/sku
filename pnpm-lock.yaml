@@ -77,7 +77,7 @@ catalogs:
       specifier: ^19.1.0
       version: 19.2.7
     typescript:
-      specifier: ^6.0.3
+      specifier: ~6.0.3
       version: 6.0.3
     vite:
       specifier: ^8.0.1

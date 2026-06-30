@@ -16,20 +16,12 @@ import ensureGitignore from 'ensure-gitignore';
 import prettierConfig from '../config/prettier.js';
 import createTSConfig from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
-import {
-  shouldMigrateOldEslintConfig,
-  migrateEslintignore,
-  cleanUpOldEslintFiles,
-  addEslintIgnoreToSkuConfig,
-} from '../services/eslint/eslintMigration.js';
 
 import getCertificate from './certificate.js';
 
-import { hasErrorMessage } from './error-guards.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
-import { success } from '@sku-private/utils/console';
 import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
 const coverageFolder = 'coverage';
@@ -50,55 +42,6 @@ export default async (skuContext: SkuContext) => {
     addSep(coverageFolder),
     webpackTargetDirectory,
   ];
-
-  // TODO: Remove this migration before releasing sku v15.
-  const { shouldMigrate, eslintIgnoreExists } =
-    await shouldMigrateOldEslintConfig();
-
-  if (shouldMigrate) {
-    if (eslintIgnoreExists) {
-      console.log("'.eslintignore' file detected. Attempting migration...");
-
-      const customIgnores = migrateEslintignore({
-        hasLanguagesConfig: Boolean(languages && languages.length > 0),
-        target: paths.relativeTarget,
-      });
-
-      if (customIgnores.length > 0) {
-        try {
-          await addEslintIgnoreToSkuConfig({
-            skuConfigPath: paths.appSkuConfigPath,
-            eslintIgnore: customIgnores,
-          });
-          console.log(
-            "Successfully migrated '.eslintignore' file to 'eslintIgnore' property in sku config.",
-          );
-        } catch (e: unknown) {
-          console.log("Failed to automatically migrate '.eslintignore' file");
-          if (hasErrorMessage(e)) {
-            console.log('Error:', e.message, '\n');
-          }
-
-          console.log('Please manually add the following to your sku config:');
-          console.log(
-            success('eslintIgnore:'),
-            success(JSON.stringify(customIgnores, null, 2)),
-          );
-        }
-
-        console.log(
-          "Please note that this is a best-effort migration and you should manually review the 'eslintIgnore' property in your sku config.",
-        );
-      } else {
-        console.log("No custom ignores found in '.eslintignore' file");
-      }
-    }
-
-    console.log(
-      "Deleting '.eslintrc' and '.eslintignore' files if they exist...",
-    );
-    await cleanUpOldEslintFiles();
-  }
 
   const eslintConfigFilename = 'eslint.config.mjs';
   const eslintCacheFilename = '.eslintcache';

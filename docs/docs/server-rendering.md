@@ -125,3 +125,18 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
   );
 }
 ```
+
+## Development server entrypoint
+
+When developing your application sku will start two services:
+
+- A dev server responsible for serving static assets
+- An SSR service running your app's server code
+
+The dev server acts as a single entrypoint for your development environment, proxying requests to your SSR service that don't match any other known routes.
+This simulates a typical production environment, where a reverse proxy directs asset, API or other requests to another service.
+It also avoids the need to complete Cross-Origin Resource Sharing (CORS) checks when making requests from the client.
+
+To include other requests, like typical API traffic, consider using [Dev Server Middleware] to proxy requests.
+
+[Dev Server Middleware]: ./docs/extra-features?id=devserver-middleware

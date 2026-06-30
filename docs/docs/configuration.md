@@ -271,11 +271,11 @@ This can be used to extend to the dev server middleware.
 Example:
 
 ```js
-module.exports = app => {
+export default (app) => {
   app.get('/mock-api', (req, res) => {
-    ...
-  })
-}
+    // ...
+  });
+};
 ```
 
 ## displayNamesProd

@@ -42,7 +42,6 @@ export const buildSsrAction = async ({
   try {
     await runVocabCompile(skuContext);
     const [clientConfig, serverConfig] = await makeWebpackConfig({
-      clientPort: port.client,
       serverPort: port.server,
       stats,
       skuContext,

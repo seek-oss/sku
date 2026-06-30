@@ -197,19 +197,6 @@ export const webpackStartSsrHandler = async ({
         port: clientPort,
       },
     },
-    onListening(devServer) {
-      onDeath(() => {
-        serverManager.kill();
-
-        serverCompiler.close(() => {
-          log('Server compiler closed');
-        });
-
-        devServer.stopCallback(() => {
-          process.exit(0);
-        });
-      });
-    },
     setupExitSignals: true,
   };
 
@@ -231,5 +218,18 @@ export const webpackStartSsrHandler = async ({
     if (err) {
       console.log(err);
     }
+  });
+
+  onDeath(() => {
+    serverManager.kill();
+
+    serverCompiler.close(() => {
+      log('Server compiler closed');
+    });
+
+    // webpack-dev-server doesn't exit on SIGQUIT, so we will stop it manually
+    devServer.stopCallback(() => {
+      process.exit(0);
+    });
   });
 };

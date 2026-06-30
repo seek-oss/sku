@@ -1,4 +1,3 @@
-import prettyMilliseconds from 'pretty-ms';
 import webpack from 'webpack';
 import { performance } from 'node:perf_hooks';
 
@@ -20,6 +19,7 @@ import {
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { critical, success } from '@sku-private/utils/console';
+import { formatMs } from '../../../utils/formatMs.js';
 
 export const webpackBuildHandler = async ({
   stats,
@@ -65,9 +65,7 @@ export const webpackBuildHandler = async ({
       csp: cspEnabled,
     });
 
-    console.log(
-      success(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
-    );
+    console.log(success(`Sku build complete in ${formatMs(timeTaken)}`));
   } catch (error) {
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

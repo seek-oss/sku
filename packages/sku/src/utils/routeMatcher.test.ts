@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import routeMatcher, { getMatchingRoute } from './routeMatcher.js';
+import { getMatchingRoute, routeMatcher } from './routeMatcher.js';
 
 describe('routeMatcher', () => {
   it('matches static routes', () => {

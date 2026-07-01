@@ -1,6 +1,6 @@
 import { HtmlRenderPlugin } from 'html-render-webpack-plugin';
-import nanoMemoize from 'nano-memoize';
 import { createDebug } from 'obug';
+import memoize from 'memoize';
 
 import {
   getRouteWithLanguage,
@@ -11,9 +11,6 @@ import type { Stats } from 'webpack';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { join } from 'node:path';
 import type { RenderableRoute } from '../../../../types/types.js';
-
-// @ts-expect-error
-const { default: memoize } = nanoMemoize;
 
 const log = createDebug('sku:html-render-plugin');
 

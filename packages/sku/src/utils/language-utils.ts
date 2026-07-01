@@ -1,6 +1,6 @@
 import { createDebug } from 'obug';
 
-import routeMatcher from './routeMatcher.js';
+import { routeMatcher } from './routeMatcher.js';
 import type { SkuLanguage } from '../types/types.js';
 import type {
   SkuContext,

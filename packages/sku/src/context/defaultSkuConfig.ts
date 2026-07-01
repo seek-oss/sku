@@ -42,6 +42,8 @@ export default {
   cspEnabled: false,
   cspDelivery: 'tag',
   cspExtraScriptSrcHosts: [],
+  cspReportOnlyEnabled: false,
+  cspReportOnlyExtraScriptSrcHosts: undefined,
   httpsDevServer: false,
   devServerMiddleware: undefined,
   rootResolution: !isCompilePackage,

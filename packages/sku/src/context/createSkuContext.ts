@@ -265,6 +265,9 @@ export const createSkuContext = ({
   const cspEnabled = skuConfig.cspEnabled;
   const cspDelivery = skuConfig.cspDelivery;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
+  const cspReportOnlyEnabled = skuConfig.cspReportOnlyEnabled;
+  const cspReportOnlyExtraScriptSrcHosts =
+    skuConfig.cspReportOnlyExtraScriptSrcHosts ?? cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
   const rootResolution = skuConfig.rootResolution;
   const languages = normalizedLanguages;
@@ -328,6 +331,8 @@ export const createSkuContext = ({
     cspEnabled,
     cspDelivery,
     cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts,
     httpsDevServer,
     rootResolution,
     languages,

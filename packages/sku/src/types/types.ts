@@ -173,6 +173,24 @@ export interface SkuConfigBase {
   cspExtraScriptSrcHosts?: string[];
 
   /**
+   * **Unavailable for libraries**
+   *
+   * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/#/./docs/csp
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cspreportonlyenabled
+   */
+  cspReportOnlyEnabled?: boolean;
+
+  /**
+   * Extra external hosts to allow in your `script-src` report-only content security policy. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
+   *
+   * @default {@link cspExtraScriptSrcHosts}
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cspreportonlyextrascriptsrchosts
+   */
+  cspReportOnlyExtraScriptSrcHosts?: string[];
+
+  /**
    * This function provides a way to modify sku's ESLint configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
@@ -409,6 +427,7 @@ export interface SkuConfigBase {
    *
    * The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
    *
+   * @default []
    * @default []
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=skippackagecompatibilitycompilation
    */

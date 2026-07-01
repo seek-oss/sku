@@ -188,6 +188,12 @@ export default validator.compile({
     type: 'array',
     items: { type: 'string' },
   },
+  cspReportOnlyEnabled: { type: 'boolean' },
+  cspReportOnlyExtraScriptSrcHosts: {
+    type: 'array',
+    items: { type: 'string' },
+    optional: true,
+  },
   httpsDevServer: {
     type: 'boolean',
   },

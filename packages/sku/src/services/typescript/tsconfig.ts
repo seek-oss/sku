@@ -65,5 +65,3 @@ export const createTSConfig = ({
 
   return tsconfigDecorator(config);
 };
-
-export default createTSConfig;

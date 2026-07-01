@@ -2,7 +2,7 @@ import { describe, it, afterEach } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { setCwd } from '@sku-private/utils';
 
-import { syncPathAliasImports } from './pathAliasImports.js';
+import { syncPathAliasImportsJson as syncPathAliasImports } from './pathAliasImports.js';
 
 const originalCwd = process.cwd();
 
@@ -12,7 +12,7 @@ describe('syncPathAliasImports', () => {
   });
 
   it('writes the imports field from pathAliases', async ({ expect }) => {
-    await using fixture = await createFixture({
+    const fixture = await createFixture({
       'package.json': `${JSON.stringify(
         { name: 'my-app', private: true },
         null,
@@ -41,7 +41,7 @@ describe('syncPathAliasImports', () => {
   });
 
   it('fully replaces an existing imports field', async ({ expect }) => {
-    await using fixture = await createFixture({
+    const fixture = await createFixture({
       'package.json': `${JSON.stringify(
         {
           name: 'my-app',

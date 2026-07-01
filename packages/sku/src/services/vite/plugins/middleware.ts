@@ -1,5 +1,6 @@
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { Plugin } from 'vite';
+import type { OutgoingHttpHeaders } from 'node:http';
 import { createRequire } from 'node:module';
 import type { ViteRenderFunction } from '../../../types/types.js';
 import { getMatchingRoute } from '../../../utils/routeMatcher.js';
@@ -118,6 +119,7 @@ export const middlewarePlugin = ({
         try {
           const { viteRender } = await server.ssrLoadModule(renderEntry);
 
+          const headers: OutgoingHttpHeaders = { 'content-type': 'text/html' };
           let html = await (viteRender as ViteRenderFunction)({
             environment,
             language,
@@ -133,10 +135,16 @@ export const middlewarePlugin = ({
           html = await server.transformIndexHtml(req.url || '/', html);
 
           if (cspHandler) {
-            html = cspHandler.handleHtml(html);
+            const root = cspHandler.processHtml(html);
+
+            if (skuContext.cspDelivery === 'tag') {
+              html = cspHandler.updateHtml(root);
+            } else if (skuContext.cspDelivery === 'header') {
+              headers['content-security-policy'] = cspHandler.createCSP();
+            }
           }
 
-          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.writeHead(200, headers);
           res.end(html);
         } catch (e) {
           // If an error is caught, let vite fix the stracktrace so it maps back to

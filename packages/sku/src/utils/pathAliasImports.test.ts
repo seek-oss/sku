@@ -2,7 +2,7 @@ import { describe, it, afterEach } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { setCwd } from '@sku-private/utils';
 
-import { syncPathAliasImportsJson as syncPathAliasImports } from './pathAliasImports.js';
+import { syncPathAliasImports } from './pathAliasImports.js';
 
 const originalCwd = process.cwd();
 

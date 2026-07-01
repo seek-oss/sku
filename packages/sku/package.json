@@ -142,7 +142,6 @@
     "jest-environment-jsdom": "^30.0.0",
     "jest-watch-typeahead": "^3.0.1",
     "jiti": "catalog:",
-    "jsonc-parser": "^3.3.1",
     "lint-staged": "^16.0.0",
     "magicast": "^0.5.0",
     "mini-css-extract-plugin": "^2.6.1",

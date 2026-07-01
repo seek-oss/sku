@@ -5,7 +5,7 @@ import targets from '../targets.json' with { type: 'json' };
 
 import { getSkuContext } from '../../context/createSkuContext.js';
 
-const { rootResolution } = getSkuContext();
+const { rootResolution } = await getSkuContext();
 
 const transformer: ReturnType<typeof createTransformer> = createTransformer(
   babelConfig({

@@ -263,6 +263,7 @@ export const createSkuContext = ({
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
   const cspEnabled = skuConfig.cspEnabled;
+  const cspDelivery = skuConfig.cspDelivery;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
   const rootResolution = skuConfig.rootResolution;
@@ -325,6 +326,7 @@ export const createSkuContext = ({
     sourceMapsProd,
     displayNamesProd,
     cspEnabled,
+    cspDelivery,
     cspExtraScriptSrcHosts,
     httpsDevServer,
     rootResolution,

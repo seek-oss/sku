@@ -183,6 +183,7 @@ export default validator.compile({
     type: 'boolean',
   },
   cspEnabled: { type: 'boolean' },
+  cspDelivery: { type: 'enum', values: ['tag', 'header'] },
   cspExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },

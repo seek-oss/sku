@@ -40,6 +40,7 @@ export default {
   eslintIgnore: [],
   supportedBrowsers: browserslistConfigSeek,
   cspEnabled: false,
+  cspDelivery: 'tag',
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
   devServerMiddleware: undefined,

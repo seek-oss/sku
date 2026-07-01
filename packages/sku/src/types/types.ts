@@ -157,6 +157,14 @@ export interface SkuConfigBase {
   cspEnabled?: boolean;
 
   /**
+   * The way the content security policy is delivered.  Only relevant if {@link cspEnabled} is set to `true`.
+   *
+   * @default 'tag'
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cspdelivery
+   */
+  cspDelivery?: 'tag' | 'header';
+
+  /**
    * Extra external hosts to allow in your `script-src` content security policy. Only relevant if {@link cspEnabled} is set to `true`.
    *
    * @default []

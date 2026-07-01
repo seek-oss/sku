@@ -139,17 +139,6 @@ sku format
 
 [linting/formatting documentation]: ./docs/linting.md
 
-### `pre-commit`
-
-Run the `sku` pre-commit hook.
-See the [pre-commit hook documentation] for more information.
-
-```sh
-sku pre-commit
-```
-
-[pre-commit hook documentation]: ./docs/extra-features.md#pre-commit-hook
-
 ### `setup-hosts`
 
 Update your hosts file to point any configured [`hosts`] to your local machine.

@@ -27,6 +27,7 @@ if (!typedWorkerData || typedWorkerData.jobs.length === 0) {
 const {
   sharedWorkerData: {
     cspEnabled,
+    cspDelivery,
     cspExtraScriptSrcHosts,
     manifest,
     publicPath,
@@ -84,7 +85,11 @@ await Promise.all(
         });
 
         if (cspHandler) {
-          html = cspHandler.handleHtml(html);
+          const root = cspHandler.processHtml(html);
+
+          if (cspDelivery === 'tag') {
+            html = cspHandler.updateHtml(root);
+          }
         }
       } catch (e) {
         throw new Error(`Error rendering HTML for route "${route}"`, {
@@ -104,6 +109,23 @@ await Promise.all(
         throw new Error(`Error writing file to "${relativeOutputPath}"`, {
           cause: e,
         });
+      }
+
+      if (cspHandler && cspDelivery === 'header') {
+        const metadata = { csp: cspHandler.createCSP() };
+        const json = JSON.stringify({ metadata }, null, 2);
+
+        try {
+          console.log(
+            `Writing metadata for route "${route}" to "${relativeOutputPath}.json"`,
+          );
+          await writeFile(`${filePath}.json`, json);
+        } catch (e) {
+          throw new Error(
+            `Error writing file to "${relativeOutputPath}.json"`,
+            { cause: e },
+          );
+        }
       }
     },
   ),

@@ -1,13 +1,10 @@
 import { describe, it, vi, expect, beforeEach } from 'vitest';
+import { createFixture } from 'fs-fixture';
 
 import {
   isCjsSkuConfig,
   validateSkuConfigFormat,
 } from './validateSkuConfigFormat.js';
-
-const { readFileSync } = vi.hoisted(() => ({ readFileSync: vi.fn() }));
-
-vi.mock('node:fs', () => ({ readFileSync }));
 
 describe('isCjsSkuConfig', () => {
   it('should detect a `module.exports` config', () => {
@@ -58,29 +55,29 @@ describe('validateSkuConfigFormat', () => {
   it('should do nothing when there is no config path', () => {
     validateSkuConfigFormat();
 
-    expect(readFileSync).not.toHaveBeenCalled();
     expect(exitSpy).not.toHaveBeenCalled();
+    expect(logSpy).not.toHaveBeenCalled();
   });
 
-  it('should not exit for an ESM config', () => {
-    readFileSync.mockReturnValue(
-      `export default { clientEntry: 'src/client.tsx' };`,
-    );
+  it('should not exit for an ESM config', async () => {
+    await using fixture = await createFixture({
+      'sku.config.ts': `export default { clientEntry: 'src/client.tsx' };`,
+    });
 
-    validateSkuConfigFormat('/app/sku.config.ts');
+    validateSkuConfigFormat(fixture.getPath('sku.config.ts'));
 
     expect(exitSpy).not.toHaveBeenCalled();
     expect(logSpy).not.toHaveBeenCalled();
   });
 
-  it('should show a banner and exit for a CJS config', () => {
-    readFileSync.mockReturnValue(
-      `module.exports = { clientEntry: 'src/client.tsx' };`,
-    );
+  it('should show a banner and exit for a CJS config', async () => {
+    await using fixture = await createFixture({
+      'sku.config.js': `module.exports = { clientEntry: 'src/client.tsx' };`,
+    });
 
-    expect(() => validateSkuConfigFormat('/app/sku.config.js')).toThrow(
-      'process.exit: 1',
-    );
+    expect(() =>
+      validateSkuConfigFormat(fixture.getPath('sku.config.js')),
+    ).toThrow('process.exit: 1');
 
     expect(exitSpy).toHaveBeenCalledWith(1);
     expect(logSpy).toHaveBeenCalled();

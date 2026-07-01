@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-export const createImportOrderConfig = (): Linter.Config => ({
+export const importOrderConfig: Linter.Config = {
   rules: {
     'import-x/order': [
       'error',
@@ -26,4 +26,4 @@ export const createImportOrderConfig = (): Linter.Config => ({
       },
     ],
   },
-});
+};

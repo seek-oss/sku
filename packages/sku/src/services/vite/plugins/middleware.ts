@@ -133,10 +133,19 @@ export const middlewarePlugin = ({
           html = await server.transformIndexHtml(req.url || '/', html);
 
           if (cspHandler) {
-            html = cspHandler.handleHtml(html);
+            const root = cspHandler.processHtml(html);
+
+            if (skuContext.cspDelivery === 'tag') {
+              html = cspHandler.updateHtml(root);
+            }
           }
 
-          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.writeHead(200, {
+            'Content-Type': 'text/html',
+            ...(cspHandler && skuContext.cspDelivery === 'header'
+              ? { 'Content-Security-Policy': cspHandler.createCSP() }
+              : {}),
+          });
           res.end(html);
         } catch (e) {
           // If an error is caught, let vite fix the stracktrace so it maps back to

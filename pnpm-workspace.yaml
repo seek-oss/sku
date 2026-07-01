@@ -26,7 +26,7 @@ minimumReleaseAgeExclude:
 dedupePeers: true
 
 catalog:
-  '@types/node': ^22.18.8
+  '@types/node': ^24.12.4
   '@types/react': ^19.1.9
   '@types/react-dom': ^19.1.7
   '@vanilla-extract/css': '^1.20.1'

@@ -1291,9 +1291,6 @@ importers:
       commander:
         specifier: 'catalog:'
         version: 14.0.3
-      cross-spawn:
-        specifier: ^7.0.6
-        version: 7.0.6
       css-loader:
         specifier: ^7.1.2
         version: 7.1.4(webpack@5.107.2)
@@ -1426,6 +1423,9 @@ importers:
       terser-webpack-plugin:
         specifier: ^5.1.4
         version: 5.6.1(@swc/core@1.15.41)(cssnano@7.1.9)(esbuild@0.28.1)(postcss@8.5.15)(webpack@5.107.2)
+      tinyexec:
+        specifier: ^1.2.4
+        version: 1.2.4
       typescript:
         specifier: ~5.9.0
         version: 5.9.3
@@ -1469,9 +1469,6 @@ importers:
       '@types/babel__traverse':
         specifier: ^7.20.6
         version: 7.28.0
-      '@types/cross-spawn':
-        specifier: ^6.0.3
-        version: 6.0.6
       '@types/death':
         specifier: ^1.1.5
         version: 1.1.5
@@ -4523,9 +4520,6 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
-
-  '@types/cross-spawn@6.0.6':
-    resolution: {integrity: sha512-fXRhhUkG4H3TQk5dBhQ7m/JDdSNHKwR2BBia62lhwEIq9xGiQKLxd6LymNhn47SjXhsUEPmxi+PKw2OkW4LLjA==}
 
   '@types/css@0.0.38':
     resolution: {integrity: sha512-FsAy4pBnrJb8qdKmIyDy582o4Xt8pHwpCwYRmIvXw4dslA7C4436oOM+8XNnMEsV/LSculbFNaZsBZmycDjARw==}
@@ -13668,10 +13662,6 @@ snapshots:
       '@types/node': 26.0.0
 
   '@types/connect@3.4.38':
-    dependencies:
-      '@types/node': 26.0.0
-
-  '@types/cross-spawn@6.0.6':
     dependencies:
       '@types/node': 26.0.0
 

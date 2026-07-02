@@ -2,6 +2,21 @@ import type { SkuContext } from '../../context/createSkuContext.js';
 import { requireFromCwd } from '@sku-private/utils';
 import type { PackageJson, TsConfigJson } from 'type-fest';
 
+const generateTypeScriptPaths = (
+  pathAliases?: Record<string, string>,
+): Record<string, string[]> | undefined => {
+  if (!pathAliases || Object.keys(pathAliases).length === 0) {
+    return undefined;
+  }
+
+  return Object.fromEntries(
+    Object.entries(pathAliases).map(([alias, destination]) => [
+      alias,
+      [destination],
+    ]),
+  );
+};
+
 const hasTypesInstalledForPackage = (packageName: string) => {
   try {
     // Trying to import @types/{packageName}/package.json can lead to false positives, so instead we'll check the dependencies directly.
@@ -18,9 +33,10 @@ const hasTypesInstalledForPackage = (packageName: string) => {
 
 export const createTSConfig = ({
   tsconfigDecorator,
-  tsPaths,
   testRunner,
+  pathAliases,
 }: SkuContext) => {
+  const tsPaths = generateTypeScriptPaths(pathAliases);
   const makeTypes = () => {
     const types = ['node'];
 

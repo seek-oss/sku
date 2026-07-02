@@ -45,6 +45,7 @@
     "./codemods/jest-to-vitest-mock-types": "./dist/codemods/jest-to-vitest-mock-types.mjs",
     "./codemods/jest-to-vitest-resolves-rejects-generics": "./dist/codemods/jest-to-vitest-resolves-rejects-generics.mjs",
     "./codemods/jest-to-vitest-set-timeout": "./dist/codemods/jest-to-vitest-set-timeout.mjs",
+    "./codemods/migrate-root-resolution": "./dist/codemods/migrate-root-resolution.mjs",
     "./codemods/svg-import-query-param": "./dist/codemods/svg-import-query-param.mjs",
     "./codemods/transform-vite-loadable": "./dist/codemods/transform-vite-loadable.mjs",
     "./program": "./dist/program/index.mjs",

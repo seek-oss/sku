@@ -52,7 +52,6 @@ export const makeWebpackConfig = async ({
     displayNamesProd,
     cspEnabled,
     cspExtraScriptSrcHosts,
-    rootResolution,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
@@ -245,7 +244,6 @@ export const makeWebpackConfig = async ({
           displayNamesProd,
           removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
-          rootResolution,
         }),
         ...(hot ? [new ReactRefreshWebpackPlugin()] : []),
         ...(metrics
@@ -329,7 +327,6 @@ export const makeWebpackConfig = async ({
           displayNamesProd,
           removeAssertionsInProduction: !isIntegration,
           MiniCssExtractPlugin,
-          rootResolution,
         }),
         ...(metrics
           ? [new MetricsPlugin({ type: 'static', target: 'node' })]

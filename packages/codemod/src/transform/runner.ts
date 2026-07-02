@@ -91,10 +91,7 @@ export const runTransform = async (
     process.exit(0);
   }
 
-  const cpus =
-    os.cpus().length > filesExpanded.length
-      ? filesExpanded.length
-      : os.cpus().length;
+  const cpus = Math.min(os.cpus().length, filesExpanded.length);
   const chunkSize = Math.ceil(filesExpanded.length / cpus);
 
   // taskLog gives a rolling per-file log that clears on success.

@@ -1,12 +1,16 @@
 import { style } from '@vanilla-extract/css';
 
+import { width } from '#components/width.css';
+
+import { height } from '#components/height';
+
 export const border = style({
   border: '10px solid red',
 });
 
 export const root = style({
-  width: '100px',
-  height: '100px',
+  width,
+  height,
   // Optimized to `background: #00f`
   background: '#0000ff',
   fontSize: '64px',

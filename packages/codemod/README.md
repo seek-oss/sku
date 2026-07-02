@@ -20,6 +20,7 @@ The default path is `'.'`.
 | `transform-vite-loadable` | Converts `sku/@loadable/component` imports to `@sku-lib/vite/loadable` imports.        |
 | `jest-to-vitest`          | Converts usage of Jest APIs to Vitest APIs.                                            |
 | `svg-import-query-param`  | Converts `import svg from './file.svg'` imports to `import svg from './file.svg?raw'`. |
+| `migrate-root-resolution` | Migrates `rootResolution` `src/` imports to native subpath imports (`#src/`).          |
 
 ## Options
 

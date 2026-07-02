@@ -129,7 +129,7 @@ describe('lint-format', () => {
         import distantParent from '../../../parent'; // parents
         import myself from '.'; // index
         import path from 'path'; //  built-in
-        import utils from 'src/utils'; // internal
+        import utils from '#src/utils'; // internal
       `,
       'importOrder2.ts': dedent /* ts */ `
         import aStyle from './a.css';

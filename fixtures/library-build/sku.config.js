@@ -1,6 +1,6 @@
-const { makeStableHashes } = require('@sku-private/test-utils');
+import { makeStableHashes } from '@sku-private/test-utils';
 
-module.exports = {
+export default {
   libraryEntry: 'src/library.js',
   renderEntry: 'src/render.js',
   libraryName: 'MyLibrary',

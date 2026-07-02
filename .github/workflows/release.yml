@@ -43,7 +43,7 @@ jobs:
         run: npm install -g npm@latest
 
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
         with:
           version: pnpm run version
           publish: pnpm run release

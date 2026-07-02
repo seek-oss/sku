@@ -56,6 +56,10 @@ const runPrettier = async ({
     options: { stdio: 'inherit' },
   });
 
+  if (exitCode === 0) {
+    return;
+  }
+
   if (exitCode === 2) {
     console.warn(
       caution(`Warning: No files matching ${pathsToCheck.join(' ')}`),

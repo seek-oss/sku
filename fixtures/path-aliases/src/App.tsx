@@ -1,6 +1,6 @@
+/** @knipignore @components/Button is purposely not used (we test for an error) */
 import { Button } from '@components/Button';
 
-/** @knipignore Can't seem to ignore this via knip config */
 import { add } from 'src/utils/add';
 
 import { paragraph } from '#styles/root.css';

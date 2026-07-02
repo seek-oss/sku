@@ -69,8 +69,6 @@
     },
     "fixtures/path-aliases": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
-      // The @components/Button is purposely not used fro tests, so ignoring it in knip
-      "ignoreDependencies": ["@components/Button"],
     },
     "fixtures/polyfills": {
       "entry": [

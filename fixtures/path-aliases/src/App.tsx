@@ -1,6 +1,6 @@
 import { Button } from '#components/Button';
-import { add } from '#src/utils/add';
 import * as stylesCssTs from '#styles/root.css.ts';
+import { add } from '#utils/add';
 
 import { paragraph, paragraph as _paragraph } from '#styles/root.css';
 // This does not get picked up by the vanilla-extract css filter since it doesn't have a ts/js extension (e.g., "foo.css.ts")

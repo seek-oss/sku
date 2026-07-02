@@ -5,8 +5,7 @@
   "imports": {
     "#components/*": "./src/components/*",
     "#utils/*": "./src/utils/*",
-    "#styles/*": "./src/styles/*",
-    "#src/*": "./src/*"
+    "#styles/*": "./src/styles/*"
   },
   "scripts": {
     "build:vite": "sku build --config sku.config.vite.ts",

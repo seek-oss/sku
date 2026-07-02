@@ -3,9 +3,9 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { getPathFromCwd } from '@sku-private/utils';
 
 import { hasErrorMessage } from './error-guards.js';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 
-const debug = _debug('sku:path-alias-imports');
+const debug = createDebug('sku:path-alias-imports');
 
 /**
  * Syncs the user's `package.json#imports` field with sku's `sku.config.ts#pathAliases` option.

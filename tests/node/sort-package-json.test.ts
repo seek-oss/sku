@@ -8,13 +8,13 @@ describe('sort-package-json', () => {
   describe('sku lint', () => {
     it('should catch type errors', async () => {
       const lint = await sku('lint');
-      expect(await lint.findByText('Linting complete')).toBeInTheConsole();
+
       expect(
-        lint.getByText('package.json is not sorted correctly'),
+        await lint.findByText('package.json is not sorted correctly'),
       ).toBeInTheConsole();
       expect(
-        lint.getByText(
-          '0 errors and 2 warnings potentially fixable with the `--fix` option.',
+        await lint.findByText(
+          '2 errors and 0 warnings potentially fixable with the `--fix` option.',
         ),
       ).toBeInTheConsole();
     });

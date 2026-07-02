@@ -1,13 +1,13 @@
 import type { Plugin } from 'vite';
 import js from 'dedent';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import provider from '../../telemetry/index.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import { makePluginName } from '../helpers/makePluginName.js';
 
 type ViteHmrTimePayload = { durationInMs: number; timestamp: number };
 
-const log = debug('sku:metrics');
+const log = createDebug('sku:metrics');
 const customHmrEvent = 'sku:vite-hmr' as const;
 const initialPageLoadEvent = 'sku:initialPageLoad' as const;
 

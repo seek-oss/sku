@@ -1,8 +1,8 @@
 import getPort from 'get-port';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { caution, strong } from '@sku-private/utils/console';
 
-const debug = _debug('sku:allocatePort');
+const debug = createDebug('sku:allocatePort');
 
 const allocatePort = async ({
   port,

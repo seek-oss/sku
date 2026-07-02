@@ -5,7 +5,7 @@ import { CODEMODS } from '../utils/constants.js';
 import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import picocolors from 'picocolors';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import {
   chooseInteractiveTransformerPaths,
   confirmDryRunFromPrompt,
@@ -13,7 +13,7 @@ import {
   resolveCodemodModule,
 } from './interactive-selection.js';
 
-const debugLog = debug('sku:codemod');
+const debugLog = createDebug('sku:codemod');
 
 export { transformerPathsForJestSubsteps } from './interactive-selection.js';
 

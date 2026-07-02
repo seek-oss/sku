@@ -1,11 +1,11 @@
 import { createCollector } from '@sku-lib/vite/collector';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { createPreRenderedHtml } from '../helpers/html/createPreRenderedHtml.js';
 
 import render from '__sku_alias__renderEntry';
 import type { ViteRenderFunction } from '../../../types/types.js';
 
-const log = debug('sku:vite-render');
+const log = createDebug('sku:vite-render');
 
 export const viteRender: ViteRenderFunction = async ({
   environment,

@@ -1,13 +1,13 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 
-import routeMatcher from './routeMatcher.js';
+import { routeMatcher } from './routeMatcher.js';
 import type { SkuLanguage } from '../types/types.js';
 import type {
   SkuContext,
   NormalizedRoute,
 } from '../context/createSkuContext.js';
 
-const log = debug('sku:language-middleware');
+const log = createDebug('sku:language-middleware');
 
 export function getValidLanguagesForRoute({
   route,

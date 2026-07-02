@@ -12,7 +12,6 @@ type SkuCommand =
   | 'build-ssr'
   | 'configure'
   | 'format'
-  | 'init'
   | 'lint'
   | 'test';
 

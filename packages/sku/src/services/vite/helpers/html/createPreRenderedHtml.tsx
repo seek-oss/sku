@@ -2,13 +2,13 @@ import type { ReactNode, JSX } from 'react';
 import { LoadableProvider } from '@sku-lib/vite/loadable';
 import type { Collector } from '@sku-lib/vite/collector';
 import { renderToStringAsync } from '../../../webpack/entry/render/render-to-string.js';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import type { Render, RenderAppProps } from '../../../../types/types.js';
 import { serializeConfig } from '../serializeConfig.js';
 import { getChunkName } from '@vocab/vite/chunks';
 
-const log = debug('sku:render:html');
+const log = createDebug('sku:render:html');
 
 type CreatePreRenderedHtmlOptions<App> = {
   render: Render<App>;
@@ -64,12 +64,12 @@ export const createPreRenderedHtml = async <App,>({
   });
 
   if (language) {
-    debug('sku:render:language')(
+    createDebug('sku:render:language')(
       `Using language "${language}" for route "${route}"`,
     );
     loadableCollector.register(getChunkName(renderContext.language));
   } else {
-    debug('sku:render:language')(`No language on route "${route}"`);
+    createDebug('sku:render:language')(`No language on route "${route}"`);
   }
 
   const clientContext =

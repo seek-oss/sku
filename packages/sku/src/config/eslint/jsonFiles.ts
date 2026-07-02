@@ -9,7 +9,7 @@ export const createJsonFilesConfig = (): Linter.Config[] => [
     // Lint all package.json files, including nested ones in monorepos if running lint from workspace root
     files: ['**/package.json'],
     rules: {
-      'package-json/sort': 'warn',
+      'package-json/sort': 'error',
     },
     processor: jsonProcessor,
   },

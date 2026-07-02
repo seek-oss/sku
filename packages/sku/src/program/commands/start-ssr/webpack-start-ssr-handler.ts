@@ -2,7 +2,7 @@ import path from 'node:path';
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
 import onDeath from 'death';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import getCertificate from '../../../utils/certificate.js';
 
@@ -32,7 +32,7 @@ import type { SkuContext } from '../../../context/createSkuContext.js';
 import { makeUrl, requireFromCwd, serverUrls } from '@sku-private/utils';
 import { accent, link } from '@sku-private/utils/console';
 
-const log = debug('sku:start-ssr');
+const log = createDebug('sku:start-ssr');
 
 const hot = process.env.SKU_HOT !== 'false';
 

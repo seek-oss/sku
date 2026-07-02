@@ -1,12 +1,12 @@
 import { Writable } from 'node:stream';
 
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { renderToPipeableStream } from 'react-dom/server';
 import type { ReactNode } from 'react';
 
 const RENDER_TIMEOUT_MS = 5000;
 
-const log = debug('sku:render:renderToStringAsync');
+const log = createDebug('sku:render:renderToStringAsync');
 
 /**
  * Renders a React node to a string in a way that is compatible with Suspense and async rendering.

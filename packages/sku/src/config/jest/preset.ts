@@ -1,14 +1,14 @@
-import escapeRegex from 'escape-string-regexp';
 import { fileURLToPath } from 'node:url';
 import { cwd } from '@sku-private/utils';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Config } from 'jest';
 
-const { paths, rootResolution, jestDecorator } = getSkuContext();
+const { paths, rootResolution, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = (await paths.compilePackages())
-  .map((pkg) => `.*${escapeRegex(pkg)}`)
+  // @ts-expect-error No types until we upgrade can consume ES2025 types via TypeScript 6.0
+  .map((pkg) => `.*${RegExp.escape(pkg)}`)
   .join('|');
 
 export default jestDecorator({

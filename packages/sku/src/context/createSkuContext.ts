@@ -11,21 +11,16 @@ import {
   detectedCompilePackagesSync,
 } from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { resolveAppSkuConfigPath } from './configPath.js';
 
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
 import { getCjsInteropDeps } from './cjsInteropDeps.js';
 import type { PackageJson } from 'type-fest';
+import { createJiti } from 'jiti';
 
-const require = createRequire(import.meta.url);
-const __filename = fileURLToPath(import.meta.url);
+const jiti = createJiti(import.meta.url);
 
-const createJiti = require('jiti');
-const jiti = createJiti(__filename);
-
-const debug = _debug('sku:config');
+const debug = createDebug('sku:config');
 
 const generateTypeScriptPaths = (
   pathAliases?: Record<string, string>,
@@ -54,23 +49,25 @@ interface SkuContextOptions {
 }
 let storedSkuContext: SkuContext;
 
-export const getSkuContext = (skuContextOptions: SkuContextOptions = {}) => {
+export const getSkuContext = async (
+  skuContextOptions: SkuContextOptions = {},
+) => {
   if (storedSkuContext) {
     return storedSkuContext;
   }
-  storedSkuContext = createSkuContext(skuContextOptions);
+  storedSkuContext = await createSkuContext(skuContextOptions);
   return storedSkuContext;
 };
 
-const getSkuConfig = ({
+const getSkuConfig = async ({
   configPath,
 }: {
   configPath?: string;
-}): {
+}): Promise<{
   appSkuConfig: SkuConfig;
   appSkuConfigPath?: string;
   configPath?: string;
-} => {
+}> => {
   const appSkuConfigPath = resolveAppSkuConfigPath({ configPath });
 
   if (!appSkuConfigPath) {
@@ -81,10 +78,9 @@ const getSkuConfig = ({
     };
   }
 
-  const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
-
-  // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
-  const appSkuConfig = mod?.default ?? mod;
+  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
+    default: true,
+  });
 
   return {
     appSkuConfig,
@@ -95,7 +91,7 @@ const getSkuConfig = ({
 
 export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 
-export const createSkuContext = ({
+export const createSkuContext = async ({
   configPath,
   port: portArg,
   strictPort,
@@ -104,7 +100,7 @@ export const createSkuContext = ({
     appSkuConfig,
     appSkuConfigPath,
     configPath: appConfigPath,
-  } = getSkuConfig({ configPath });
+  } = await getSkuConfig({ configPath });
 
   const skuConfig = {
     ...defaultSkuConfig,
@@ -348,5 +344,5 @@ type ExtraSkuContextOptions = {
   listUrls?: boolean;
 };
 
-export type SkuContext = ReturnType<typeof createSkuContext> &
+export type SkuContext = Awaited<ReturnType<typeof createSkuContext>> &
   ExtraSkuContextOptions;

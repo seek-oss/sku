@@ -1,10 +1,10 @@
-import debug from 'debug';
+import { createDebug, enable } from 'obug';
 
-export const log = debug('sku:bin');
+export const log = createDebug('sku:bin');
 
 export const initDebug = () => {
-  // Enable all sku:* `debug` logs
-  // @see https://www.npmjs.com/package/debug
+  // Enable all sku:* `obug` logs
+  // @see https://www.npmjs.com/package/obug
   process.env.DEBUG = `sku:*${`,${process.env.DEBUG}` || ''}`;
-  debug.enable(process.env.DEBUG);
+  enable(process.env.DEBUG);
 };

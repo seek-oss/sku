@@ -18,11 +18,11 @@
     "node": ">=22.19.0"
   },
   "dependencies": {
-    "wrap-ansi": "^9.0.0",
+    "empathic": "^2.0.1",
     "indent-string": "^5.0.0",
-    "find-up": "^7.0.0",
     "package-manager-detector": "^0.2.6",
-    "semver": "^7.6.3"
+    "semver": "^7.6.3",
+    "wrap-ansi": "^9.0.0"
   },
   "devDependencies": {
     "typescript": "catalog:",

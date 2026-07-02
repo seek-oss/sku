@@ -197,7 +197,6 @@ export const webpackStartSsrHandler = async ({
         port: clientPort,
       },
     },
-    setupExitSignals: true,
   };
 
   if (httpsDevServer) {

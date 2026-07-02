@@ -40,6 +40,7 @@
         // It definitely is used, not sure why knip thinks otherwise
         "assert",
       ],
+      "ignoreUnresolved": ["#styles/root.css.ts"],
     },
     "fixtures/braid-design-system": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
@@ -69,6 +70,13 @@
     },
     "fixtures/path-aliases": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      // tsconfig isn't present during CI lint so some deps appear unused and some paths appear unresolved
+      "ignoreDependencies": [
+        "@vanilla-extract/css",
+        "@components/Button",
+        "src/utils/add",
+      ],
+      "ignoreUnresolved": ["#styles/root.css.ts"],
     },
     "fixtures/polyfills": {
       "entry": [
@@ -158,6 +166,8 @@
         "src/render.tsx",
         "sku.config.*",
       ],
+      // tsconfig isn't present during CI lint `src/App` is flagged as a missing dep
+      "ignoreDependencies": ["src/App"],
     },
     "fixtures/vite-cjs-interop-apollo-client-v3": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],

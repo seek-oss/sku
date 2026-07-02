@@ -9,6 +9,7 @@ export default {
     '@components/*': './src/components/*',
     '@utils/*': './src/utils/*',
     '#styles/*': './src/styles/*',
+    '#src/*': './src/*',
   },
   dangerouslySetViteConfig: () => ({
     ...makeStableViteHashes(),

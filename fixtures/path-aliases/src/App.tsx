@@ -1,6 +1,5 @@
-import { Button } from '@components/Button';
-/** @knipignore Can't seem to ignore this via knip config */
-import { add } from 'src/utils/add';
+import { Button } from '#components/Button';
+import { add } from '#utils/add';
 
 // This does not get picked up by the vanilla-extract css filter since it doesn't have a ts/js extension (e.g., "foo.css.ts")
 import * as stylesCss from '#styles/root.css';

@@ -14,10 +14,12 @@ import dedent from 'dedent';
 import ensureGitignore from 'ensure-gitignore';
 
 import prettierConfig from '../config/prettier.js';
-import createTSConfig from '../services/typescript/tsconfig.js';
+import { createTSConfig } from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 
 import getCertificate from './certificate.js';
+import { syncPathAliasImports } from './pathAliasImports.js';
+import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 
 import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
@@ -33,6 +35,9 @@ const addSep = (p: string) => `${p}${path.sep}`;
 
 export default async (skuContext: SkuContext) => {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
+
+  validateSkuConfigFormat(paths.appSkuConfigPath);
+
   // Ignore target directories
   const webpackTargetDirectory = addSep(paths.relativeTarget);
 
@@ -72,6 +77,8 @@ export default async (skuContext: SkuContext) => {
   const tsConfigFileName = 'tsconfig.json';
   await writeFileToCWD(tsConfigFileName, createTSConfig(skuContext));
   gitIgnorePatterns.push(tsConfigFileName);
+
+  await syncPathAliasImports(skuContext.pathAliases);
 
   const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 

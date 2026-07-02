@@ -24,7 +24,7 @@ import {
   type SkuWebpackPluginOptions,
 } from './validateOptions.js';
 import targets from '../../../../config/targets.json' with { type: 'json' };
-import { rootResolutionFileExtensions } from '../../../../config/fileResolutionExtensions.js';
+import { fileResolutionExtensions } from '../../../../config/fileResolutionExtensions.js';
 import { assetsInlineLimitBytes } from '../../../bundlerConstants.js';
 
 export class SkuWebpackPlugin implements WebpackPluginInstance {
@@ -41,7 +41,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
       generateCSSTypes: false,
       browserslist: defaultSupportedBrowsers,
       compilePackages: [],
-      rootResolution: false,
       ...options,
     };
     // Resolve the default and user-defined compilePackages to their actual paths
@@ -68,7 +67,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
       displayNamesProd,
       removeAssertionsInProduction,
       MiniCssExtractPlugin,
-      rootResolution,
     } = this.options;
 
     const isProductionBuild = mode === 'production';
@@ -87,7 +85,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
-              rootResolution,
             }),
           },
           {
@@ -98,7 +95,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
-              rootResolution,
             }),
           },
         ],
@@ -116,7 +112,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
               displayNamesProd,
               removeAssertionsInProduction,
               hot: false,
-              rootResolution,
             }),
           },
           {
@@ -127,7 +122,6 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
               displayNamesProd,
               removeAssertionsInProduction,
               hot,
-              rootResolution,
             }),
           },
         ],
@@ -208,10 +202,10 @@ export class SkuWebpackPlugin implements WebpackPluginInstance {
     compiler.options.module.rules.push(...rules);
 
     if (!compiler.options.resolve.extensions) {
-      compiler.options.resolve.extensions = rootResolutionFileExtensions;
+      compiler.options.resolve.extensions = fileResolutionExtensions;
     } else {
       const dedupedExtensions = new Set([
-        ...rootResolutionFileExtensions,
+        ...fileResolutionExtensions,
         ...compiler.options.resolve.extensions,
       ]);
 

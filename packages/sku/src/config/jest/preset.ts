@@ -1,9 +1,8 @@
 import { fileURLToPath } from 'node:url';
-import { cwd } from '@sku-private/utils';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Config } from 'jest';
 
-const { paths, rootResolution, jestDecorator } = await getSkuContext();
+const { paths, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = (await paths.compilePackages())
@@ -15,7 +14,6 @@ export default jestDecorator({
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: paths.setupTests,
   prettierPath: fileURLToPath(import.meta.resolve('prettier')),
-  modulePaths: rootResolution ? [cwd()] : undefined,
   testPathIgnorePatterns: [
     `<rootDir>${slash}(${paths.target}|node_modules)${slash}`,
   ],

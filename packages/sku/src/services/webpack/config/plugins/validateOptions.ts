@@ -27,7 +27,6 @@ export type SkuWebpackPluginOptions = {
   removeAssertionsInProduction?: boolean;
   browserslist?: string[];
   displayNamesProd?: boolean;
-  rootResolution?: boolean;
 };
 
 const schema = {
@@ -75,10 +74,6 @@ const schema = {
     optional: true,
   },
   displayNamesProd: {
-    type: 'boolean',
-    optional: true,
-  },
-  rootResolution: {
     type: 'boolean',
     optional: true,
   },

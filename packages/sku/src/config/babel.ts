@@ -1,7 +1,5 @@
-import { cwd } from '@sku-private/utils';
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
-import { rootResolutionFileExtensions } from './fileResolutionExtensions.js';
 
 const require = createRequire(import.meta.url);
 
@@ -12,7 +10,6 @@ type BabelConfigOptions = {
   displayNamesProd?: boolean;
   removeAssertionsInProduction?: boolean;
   hot?: boolean;
-  rootResolution?: boolean;
 };
 
 export type SkuBabelConfig = {
@@ -31,20 +28,12 @@ export default ({
   displayNamesProd = false,
   removeAssertionsInProduction = true,
   hot = false,
-  rootResolution = false,
 }: BabelConfigOptions): SkuBabelConfig => {
   const isBrowser = target === 'browser';
   const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const plugins: PluginItem[] = [
-    [
-      require.resolve('babel-plugin-module-resolver'),
-      {
-        root: rootResolution ? [cwd()] : undefined,
-        extensions: rootResolutionFileExtensions,
-      },
-    ],
     require.resolve('babel-plugin-macros'),
     require.resolve('@babel/plugin-transform-runtime'),
   ];

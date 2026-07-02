@@ -6,7 +6,8 @@
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "vitest": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

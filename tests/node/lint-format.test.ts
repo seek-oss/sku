@@ -89,6 +89,7 @@ describe('lint-format', () => {
     it('should use vitest lint rules when test runner is vitest', async () => {
       const fileName = 'utils.test.ts';
       const fileContents = dedent /* ts */ `
+        import { it, expect } from 'vitest';
         console.log('foo');
 
         it.only('should test something', () => {

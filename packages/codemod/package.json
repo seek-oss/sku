@@ -31,7 +31,7 @@
   "devDependencies": {
     "@sku-private/tsdown": "workspace:*",
     "@types/node": "catalog:",
-    "typescript": "~5.9.0"
+    "typescript": "catalog:"
   },
   "types": "./dist/index.d.mts",
   "exports": {

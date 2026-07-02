@@ -5,9 +5,7 @@ const formatter: {
     seconds?: number;
     milliseconds?: number;
   }) => string;
-} =
-  // @ts-expect-error TS 6.0 is required for Intl.DurationFormat types
-  new Intl.DurationFormat('en', { style: 'narrow' });
+} = new Intl.DurationFormat('en', { style: 'narrow' });
 
 /**
  * Formats a duration in milliseconds as a human-readable string (e.g. `500ms`, `1m 5s`).

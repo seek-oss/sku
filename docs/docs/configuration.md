@@ -400,13 +400,13 @@ Default: `{}`
 
 Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
 
-This option generates `tsconfig.json#paths` so TypeScript can resolve these imports, and `sku`
-mirrors it into your `package.json#imports` field so the aliases resolve natively at build time.
+This option generates `tsconfig.json#paths` so TypeScript can resolve these imports, and `sku` mirrors it into your `package.json#imports` field so the aliases resolve natively at build time.
 
 Subpath import specifiers must be prefixed with `#`.
 
 > [!WARNING]
-> Because `sku` fully manages the `imports` field, any entries you add manually will be removed. Declare all of your subpath imports via `pathAliases` instead.
+> Because `sku` fully manages the `imports` field, any entries you add manually will be removed.
+> Declare all of your subpath imports via `pathAliases` instead.
 
 **Example:**
 

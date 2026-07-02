@@ -7,7 +7,6 @@ const { paths, rootResolution, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
 const compilePackagesRegex = (await paths.compilePackages())
-  // @ts-expect-error No types until we upgrade can consume ES2025 types via TypeScript 6.0
   .map((pkg) => `.*${RegExp.escape(pkg)}`)
   .join('|');
 

@@ -69,7 +69,6 @@
     },
     "fixtures/path-aliases": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
-      "ignoreUnresolved": ["#styles/root.css.ts", "@vanilla-extract/css"],
       // The @components/Button is purposely not used fro tests, so ignoring it in knip
       "ignoreDependencies": ["@components/Button"],
     },

@@ -1,7 +1,9 @@
 import { Button } from '@components/Button';
+
 /** @knipignore Can't seem to ignore this via knip config */
 import { add } from 'src/utils/add';
 
+import { paragraph } from '#styles/root.css';
 // This does not get picked up by the vanilla-extract css filter since it doesn't have a ts/js extension (e.g., "foo.css.ts")
 import * as stylesCss from '#styles/root.css';
 
@@ -11,8 +13,9 @@ import * as stylesCssTs from '#styles/root.css.ts';
 
 export default () => (
   <div>
-    <p className={stylesCss.paragraph}>6 + 9 = {add(6, 9)}</p>
-    <p className={stylesCssTs.paragraph}>this text is red</p>
+    <p className={paragraph}>6 + 9 = {add(6, 9)}</p>
+    <p className={stylesCss.paragraph}>this text is red</p>
+    <p className={stylesCssTs.paragraph}>this text is also red</p>
     <Button />
   </div>
 );

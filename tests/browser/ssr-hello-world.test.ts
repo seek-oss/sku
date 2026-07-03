@@ -1,6 +1,7 @@
 import { describe, beforeAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
+import net from 'node:net';
 
 import {
   scopeToFixture,
@@ -9,6 +10,22 @@ import {
 } from '@sku-private/testing-library';
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
+
+// Probe whether a TCP port is accepting connections.
+// Used instead of `fetch` so it's agnostic to https/http.
+const isPortListening = (port: number) =>
+  new Promise<boolean>((resolve) => {
+    const socket = net
+      .connect(port, 'localhost')
+      .once('connect', () => {
+        socket.destroy();
+        resolve(true);
+      })
+      .once('error', () => {
+        socket.destroy();
+        resolve(false);
+      });
+  });
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
@@ -115,23 +132,20 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
   'start-ssr teardown on %s',
   (signal) => {
     it('kills the SSR server worker and frees the port', async () => {
-      const clientPort = 8100;
-      const serverPort = 8101;
+      const nodeServerPort = 8100;
+      const devServerPort = 8101;
 
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
       await start.findByText('Server started');
 
-      await expect(
-        fetch(`http://localhost:${clientPort}`),
-      ).resolves.toBeDefined();
-      await expect(
-        fetch(`http://localhost:${serverPort}`),
-      ).resolves.toBeDefined();
+      expect(await isPortListening(nodeServerPort)).toBe(true);
+      expect(await isPortListening(devServerPort)).toBe(true);
+
       start.process.kill(signal);
 
       await waitFor(async () => {
-        await expect(fetch(`http://localhost:${clientPort}`)).rejects.toThrow();
-        await expect(fetch(`http://localhost:${serverPort}`)).rejects.toThrow();
+        expect(await isPortListening(nodeServerPort)).toBe(false);
+        expect(await isPortListening(devServerPort)).toBe(false);
       });
 
       await waitFor(() => expect(start.hasExit()).not.toBeNull());

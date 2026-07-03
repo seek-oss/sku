@@ -2,12 +2,8 @@ import exists from '../utils/exists.js';
 import { runBin } from '../utils/runBin.js';
 import { getPathFromCwd } from '@sku-private/utils';
 import { suggestScript } from '../utils/suggestScript.js';
-import {
-  accentLight,
-  caution,
-  critical,
-  secondary,
-} from '@sku-private/utils/console';
+import { accentLight, critical, secondary } from '@sku-private/utils/console';
+import type { LintResult } from '../utils/runLintChecks.js';
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = import.meta.resolve('sku/config/prettier');
@@ -20,7 +16,7 @@ const runPrettier = async ({
   write?: boolean;
   listDifferent?: boolean;
   paths?: string[];
-}) => {
+}): Promise<LintResult> => {
   console.log(
     accentLight(`${write ? 'Formatting' : 'Checking'} code with Prettier`),
   );
@@ -55,29 +51,14 @@ const runPrettier = async ({
      */
     options: { stdio: 'inherit' },
   });
-
-  if (exitCode === 0) {
-    return;
-  }
-
-  if (exitCode === 2) {
-    console.warn(
-      caution(`Warning: No files matching ${pathsToCheck.join(' ')}`),
-    );
-    return;
-  }
-
   if (listDifferent && exitCode === 1) {
     console.error(
       critical('Error: The file(s) listed above failed the prettier check'),
     );
     suggestScript('format');
-    return;
   }
 
-  console.error(
-    critical(`Error: Prettier check exited with exit code ${exitCode}`),
-  );
+  return { exitCode };
 };
 
 export const check = (paths?: string[]) =>

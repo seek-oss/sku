@@ -18,7 +18,7 @@ describe('lint-format', () => {
     await fs.rm(srcDirectory, { recursive: true, force: true });
   });
 
-  describe('sku lint', () => {
+  describe.only('sku lint', () => {
     it('should catch type errors', async () => {
       const fileName = 'typescriptFile.ts';
       const fileContents = dedent /* ts */ `
@@ -84,6 +84,35 @@ describe('lint-format', () => {
       expect(
         await lint.findByText("To fix this issue, run 'pnpm run format'"),
       ).toBeInTheConsole();
+    });
+
+    it('should error when a path matches no files', async () => {
+      const lint = await sku('lint', ['does-not-exist.js']);
+      expect(
+        await lint.findByText('Checking code with Prettier'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByError('No files matching the pattern were'),
+      ).toBeInTheConsole();
+      expect(
+        await lint.findByError('Prettier check exited with exit code 2'),
+      ).toBeInTheConsole();
+    });
+
+    it('should error when prettier cannot parse a file', async () => {
+      const fileName = 'brokenSyntax.js';
+      await fs.writeFile(testFile(fileName), 'const x = (\n');
+
+      const lint = await sku('lint', [`src/${fileName}`]);
+      expect(
+        await lint.findByText('Checking code with Prettier'),
+      ).toBeInTheConsole();
+      expect(await lint.findByError('SyntaxError')).toBeInTheConsole();
+      expect(
+        await lint.findByError('Prettier check exited with exit code 2'),
+      ).toBeInTheConsole();
+
+      lint.debug();
     });
 
     it('should use vitest lint rules when test runner is vitest', async () => {
@@ -176,3 +205,7 @@ describe('lint-format', () => {
     );
   });
 });
+
+/**
+ * TODO get the test to pass (will  likely need some reorganising)
+ */

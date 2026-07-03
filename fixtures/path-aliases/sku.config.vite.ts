@@ -6,8 +6,8 @@ export default {
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   pathAliases: {
-    '@components/*': './src/components/*',
-    '@utils/*': './src/utils/*',
+    '#components/*': './src/components/*',
+    '#utils/*': './src/utils/*',
     '#styles/*': './src/styles/*',
   },
   dangerouslySetViteConfig: () => ({

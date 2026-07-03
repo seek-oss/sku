@@ -1,1 +1,4 @@
-export type Transform = (source: string) => Promise<string | null>;
+export type Transform = (
+  source: string,
+  filePath: string,
+) => Promise<string | null>;

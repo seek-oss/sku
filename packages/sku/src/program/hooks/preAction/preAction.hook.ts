@@ -3,9 +3,12 @@ import type { Command } from 'commander';
 import { getSkuContext } from '../../../context/createSkuContext.js';
 import { setGlobalTags } from '../../../services/telemetry/index.js';
 
-export const preActionHook = (rootCommand: Command, actionCommand: Command) => {
+export const preActionHook = async (
+  rootCommand: Command,
+  actionCommand: Command,
+) => {
   const { port, strictPort } = actionCommand.opts();
-  const skuContext = getSkuContext({
+  const skuContext = await getSkuContext({
     configPath: rootCommand.opts()?.config,
     port,
     strictPort,

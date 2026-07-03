@@ -10,3 +10,4 @@ storybook-static/
 yarn.lock
 .eslintcache
 yalc.lock
+.pnpm-store

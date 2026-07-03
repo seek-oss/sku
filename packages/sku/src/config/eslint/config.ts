@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-import { createImportOrderConfig } from './importOrder.js';
+import { importOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { SkuConfig } from '../../types/types.js';
@@ -11,7 +11,7 @@ export const createEslintConfig = async ({
 }: {
   configPath?: string;
 } = {}): Promise<Linter.Config[]> => {
-  const skuContext = getSkuContext({ configPath });
+  const skuContext = await getSkuContext({ configPath });
   const { eslintDecorator, eslintIgnore, languages, paths, testRunner } =
     skuContext;
   const { relativeTarget } = paths;
@@ -27,7 +27,7 @@ export const createEslintConfig = async ({
     }),
     ...createJsonFilesConfig(),
     ...eslintConfigSeek,
-    createImportOrderConfig(skuContext),
+    importOrderConfig,
     ...(eslintIgnore && eslintIgnore.length > 0
       ? // Spread here to turn a read-only array into a mutable one
         [{ ignores: [...eslintIgnore] }]

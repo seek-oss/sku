@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import BlueBlock from './BlueBlock';
+// tests subpath imports in storybook stories
+import BlueBlock from '#components/BlueBlock';
 
 const meta = {
   title: 'BlueBlock',

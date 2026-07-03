@@ -4,11 +4,11 @@ import { requireFromCwd } from '@sku-private/utils';
 import isCI from '../../utils/isCI.js';
 import provider, { registerGlobalTags } from './provider.js';
 import skuPackageJson from 'sku/package.json' with { type: 'json' };
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-const log = debug('sku:telemetry');
+const log = createDebug('sku:telemetry');
 
 const computeGlobalTags = ({ languages, bundler }: SkuContext) => {
   let projectName = 'unknown';

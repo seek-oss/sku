@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import webpack, { type Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import nodeExternals from 'webpack-node-externals';
-import { findUpSync } from 'find-up';
+import * as find from 'empathic/find';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -30,7 +30,6 @@ const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const makeWebpackConfig = async ({
-  clientPort,
   serverPort,
   isDevServer = false,
   hot = false,
@@ -47,7 +46,6 @@ export const makeWebpackConfig = async ({
     cspEnabled,
     cspExtraScriptSrcHosts,
     httpsDevServer,
-    rootResolution,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
@@ -60,8 +58,6 @@ export const makeWebpackConfig = async ({
   const internalInclude = [join(__dirname, '../entry'), ...paths.src];
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
-  const proto = httpsDevServer ? 'https' : 'http';
-  const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
@@ -70,7 +66,10 @@ export const makeWebpackConfig = async ({
 
   const prodPath = isStartScript ? '/' : paths.publicPath;
 
-  const publicPath = isDevServer ? clientServer : prodPath;
+  // In dev, assets are referenced relative to the front-door origin (the webpack
+  // dev server) so the browser only talks to a single port. The dev server
+  // serves assets directly and proxies document requests to the SSR server.
+  const publicPath = isDevServer ? '/' : prodPath;
 
   const webpackStatsFilename = 'webpackStats.json';
 
@@ -191,7 +190,6 @@ export const makeWebpackConfig = async ({
           mode: webpackMode,
           displayNamesProd,
           MiniCssExtractPlugin,
-          rootResolution,
           removeAssertionsInProduction: true,
         }),
         ...(isDevServer
@@ -219,7 +217,7 @@ export const makeWebpackConfig = async ({
         // Don't bundle or transpile non-compiled packages if externalizeNodeModules is enabled
         externalizeNodeModules
           ? nodeExternals({
-              modulesDir: findUpSync('node_modules'), // Allow usage within project subdirectories (required for tests)
+              modulesDir: find.up('node_modules'), // Allow usage within project subdirectories (required for tests)
               allowlist: [
                 // webpack-node-externals compares the `import` or `require` expression to this list,
                 // not the package name, so we map each packageName to a pattern. This ensures it
@@ -286,7 +284,6 @@ export const makeWebpackConfig = async ({
             mode: webpackMode,
             displayNamesProd,
             MiniCssExtractPlugin,
-            rootResolution,
           }),
         ] as webpack.WebpackPluginInstance[]
       ).concat(

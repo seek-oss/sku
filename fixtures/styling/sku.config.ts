@@ -15,4 +15,8 @@ export default {
   }),
 
   eslintIgnore: ['**/storybook-static/'],
+
+  pathAliases: {
+    '#components/*': './src/components/*',
+  },
 } satisfies SkuConfig;

@@ -6,10 +6,10 @@ import {
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { performance } from 'node:perf_hooks';
 import provider from '../../../services/telemetry/index.js';
-import prettyMilliseconds from 'pretty-ms';
 import { viteService } from '../../../services/vite/index.js';
 import { PrerenderWorkerError } from '../../../services/vite/helpers/prerender/prerenderConcurrently.js';
 import { critical, success } from '@sku-private/utils/console';
+import { formatMs } from '../../../utils/formatMs.js';
 
 export const viteBuildHandler = async ({
   skuContext,
@@ -35,9 +35,7 @@ export const viteBuildHandler = async ({
       csp: cspEnabled,
     });
 
-    console.log(
-      success(`Sku build complete in ${prettyMilliseconds(timeTaken)}`),
-    );
+    console.log(success(`Sku build complete in ${formatMs(timeTaken)}`));
   } catch (error) {
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

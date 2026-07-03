@@ -1,0 +1,16 @@
+{
+  "name": "@sku-fixtures/legacy-react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "sku start"
+  },
+  "dependencies": {
+    "react": "18.3.1"
+  },
+  "devDependencies": {
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

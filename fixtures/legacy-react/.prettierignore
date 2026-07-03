@@ -1,0 +1,10 @@
+# managed by sku
+.eslintcache
+.prettierrc
+coverage/
+dist/
+eslint.config.mjs
+pnpm-lock.yaml
+report/
+tsconfig.json
+# end managed by sku

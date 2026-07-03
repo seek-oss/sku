@@ -3,11 +3,11 @@ import { createRequire } from 'node:module';
 import { getAddCommand } from '@sku-private/utils';
 import { banner } from '@sku-private/utils/console';
 
-import _debug from 'debug';
+import { createDebug } from 'obug';
 
 const require = createRequire(import.meta.url);
 
-const debug = _debug('sku:telemetry');
+const debug = createDebug('sku:telemetry');
 const noopDebug =
   (functionName: string) =>
   (...args: unknown[]) => {
@@ -85,11 +85,6 @@ const resolveProvider = () => {
     // Handle changes in module export style between v1.5.0 and v1.6.0
     const mod = _mod?.default ?? _mod;
     const realProvider = mod({}) as TelemetryProvider;
-
-    // For backwards compat with older versions of @seek/sku-telemetry
-    if (typeof realProvider.gauge !== 'function') {
-      realProvider.gauge = noopDebug('gauge');
-    }
 
     activeProvider = realProvider;
     usingRealProvider = true;

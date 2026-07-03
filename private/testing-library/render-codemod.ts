@@ -36,35 +36,32 @@ export const runCodemodTests = (
   codemodName: CodemodName,
   cases: CodemodTestCase[],
 ) => {
-  describe('sku codemods', () => {
-    describe.for(cases)(
-      `${codemodName} - $filename`,
-      async ({ filename, input, output }) => {
-        const fixture = await createFixture({ [filename]: input });
-        const { codemod } = scopeToFixture(fixture.path);
+  describe(codemodName, () => {
+    describe.for(cases)(`$filename`, async ({ filename, input, output }) => {
+      const fixture = await createFixture({ [filename]: input });
+      const { codemod } = scopeToFixture(fixture.path);
 
-        it('"--dry" should not change any files', async () => {
-          const cli = await codemod(codemodName, ['.', '--dry']);
+      it('"--dry" should not change any files', async () => {
+        const cli = await codemod(codemodName, ['.', '--dry']);
 
-          expect(
-            await cli.findByText('files found that would be changed.'),
-          ).toBeInTheConsole();
+        expect(
+          await cli.findByText('files found that would be changed.'),
+        ).toBeInTheConsole();
 
-          expect(await fs.readFile(fixture.getPath(filename), 'utf-8')).toEqual(
-            input,
-          );
-        });
+        expect(await fs.readFile(fixture.getPath(filename), 'utf-8')).toEqual(
+          input,
+        );
+      });
 
-        it('Should transform files and match expected output', async () => {
-          const cli = await codemod(codemodName, ['.']);
+      it('Should transform files and match expected output', async () => {
+        const cli = await codemod(codemodName, ['.']);
 
-          expect(await cli.findByText('Changed files')).toBeInTheConsole();
+        expect(await cli.findByText('Changed files')).toBeInTheConsole();
 
-          expect(await fs.readFile(fixture.getPath(filename), 'utf-8')).toEqual(
-            output,
-          );
-        });
-      },
-    );
+        expect(await fs.readFile(fixture.getPath(filename), 'utf-8')).toEqual(
+          output,
+        );
+      });
+    });
   });
 };

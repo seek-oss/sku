@@ -231,8 +231,17 @@ A report is generated in the `/report` directory when `sku build` is run.
 
 ## Pre-commit hook
 
-To speed up the feedback loop on linting and formatting errors, `sku` provides a `pre-commit` script that can be run to catch simple problems before CI.
-To make use of this hook, it's recommended to install [husky](https://www.npmjs.com/package/husky) as a development dependency and configure it as follows:
+> The `sku pre-commit` command was removed in v16. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
+
+To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged] (a tiny, zero-dependency alternative to `lint-staged`) with [husky].
+
+1. Install both tools as development dependencies:
+
+```sh
+pnpm install --dev nano-staged husky
+```
+
+2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`. Adjust the nano-staged config to your project's needs - an example is provided below:
 
 ```json
 // package.json
@@ -240,15 +249,23 @@ To make use of this hook, it's recommended to install [husky](https://www.npmjs.
 {
   "scripts": {
     "prepare": "husky"
+  },
+  "nano-staged": {
+    "**/*.{js,jsx,ts,tsx,md}": ["sku format", "sku lint"]
   }
 }
 ```
 
+3. Create the pre-commit hook that runs `nano-staged`:
+
 ```sh
-echo "yarn sku pre-commit" > .husky/pre-commit
+echo "pnpm nano-staged" > .husky/pre-commit
 ```
 
-For more details on configuring hooks, please see husky's [documentation](https://typicode.github.io/husky/#create-a-hook).
+For more details, see the [nano-staged] and [husky] documentation.
+
+[husky]: https://github.com/typicode/husky#husky
+[nano-staged]: https://github.com/usmanyunusov/nano-staged#readme
 
 ## Assertion removal
 
@@ -352,18 +369,17 @@ The second `if` block is removed, however the contents of the block are kept as 
 
 ## DevServer Middleware
 
-Supply a `devServerMiddleware` path in your sku config to access the internal dev [Express] server.
+Supply a [`devServerMiddleware`] path in your sku config to access the internal dev [Express] server.
 
-The file must export a function that will receive the express server.
-
-Example:
+The file must export a function that will receive the express server:
 
 ```js
-module.exports = (app) => {
+export default (app) => {
   app.get('/mock-api', (req, res) => {
     // ...
   });
 };
 ```
 
+[`devServerMiddleware`]: ./docs/configuration?id=devservermiddleware
 [express]: http://expressjs.com/

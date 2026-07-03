@@ -27,6 +27,9 @@ export const buildPlugin = ({
         assetsInlineLimit: assetsInlineLimitBytes,
         rolldownOptions: {
           output: {
+            entryFileNames: '[name]-[hash].js',
+            chunkFileNames: '[name]-[hash].chunk.js',
+            assetFileNames: '[name]-[hash][extname]',
             codeSplitting: {
               groups: [
                 {

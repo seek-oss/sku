@@ -705,13 +705,13 @@ exports[`multiple-routes > bundler: webpack > build and serve > should generate 
   "5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "AsyncComponent.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-791506971640531b9f92.css": ._1hpn1da0 {
-  color: blue;
+  "handlers-Details-959bfbcac2e62e53d74f.css": ._1hpn1da0 {
+  color: #00f;
 }
 
-/*# sourceMappingURL=handlers-Details-791506971640531b9f92.css.map*/
+/*# sourceMappingURL=handlers-Details-959bfbcac2e62e53d74f.css.map*/
 ,
-  "handlers-Details-791506971640531b9f92.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "handlers-Details-959bfbcac2e62e53d74f.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Details.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "handlers-Home-2d237e279ab26e7d9ff4.css": .ms22la0 {
@@ -734,7 +734,7 @@ exports[`multiple-routes > bundler: webpack > build and serve > should generate 
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-791506971640531b9f92.css",
+    "/static/place/handlers-Details-959bfbcac2e62e53d74f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -980,7 +980,7 @@ SOURCE HTML: <!DOCTYPE html>
     "/static/place/AsyncComponent.chunk.js",
   ]
 CSS: [
-    "/static/place/handlers-Details-791506971640531b9f92.css",
+    "/static/place/handlers-Details-959bfbcac2e62e53d74f.css",
   ]
 SOURCE HTML: <!DOCTYPE html>
 <html>
@@ -1255,7 +1255,7 @@ exports[`multiple-routes > bundler: webpack > build and serve > should render de
      <link
        data-chunk="handlers-Details"
        rel="stylesheet"
-       href="/static/place/handlers-Details-791506971640531b9f92.css"
+       href="/static/place/handlers-Details-959bfbcac2e62e53d74f.css"
      >
      <link
        data-chunk="main"

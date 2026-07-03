@@ -7,6 +7,9 @@ const skuConfig = {
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
   testRunner: 'vitest',
   bundler: 'vite',
+  pathAliases: {
+    '#src/*': './src/*',
+  },
 } satisfies SkuConfig;
 
 export default skuConfig;

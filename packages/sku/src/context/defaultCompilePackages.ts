@@ -1,6 +1,6 @@
 import { dirname, posix as path } from 'node:path';
 import { fdir as Fdir } from 'fdir';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { createRequire } from 'node:module';
 import { existsSync, opendirSync } from 'node:fs';
 
@@ -17,7 +17,7 @@ type CompilePackagesResult = {
   paths: string[];
 };
 
-const debug = _debug('sku:compilePackages');
+const debug = createDebug('sku:compilePackages');
 const require = createRequire(import.meta.url);
 
 const seekDependencyGlob = '**/@seek/*/package.json';
@@ -125,7 +125,7 @@ export const detectedCompilePackagesSync = (): CompilePackagesResult => {
     return cachedResult;
   }
 
-  // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+  // If there's no rootDir, we're either inside a "@sku-lib/create" command, or we can't determine the user's
   // package manager. In either case, we can't correctly detect compile packages.
   if (!rootDir) {
     cachedResult = emptyResult;
@@ -150,7 +150,7 @@ export const detectedCompilePackages =
       return inFlight;
     }
 
-    // If there's no rootDir, we're either inside `sku init`, or we can't determine the user's
+    // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's
     // package manager. In either case, we can't correctly detect compile packages.
     if (!rootDir) {
       cachedResult = emptyResult;

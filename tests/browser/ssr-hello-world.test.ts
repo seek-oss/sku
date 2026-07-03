@@ -12,7 +12,7 @@ const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
-    const url = `http://localhost:8101`;
+    const url = `https://localhost:8101`;
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);

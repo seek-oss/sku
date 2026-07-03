@@ -58,6 +58,11 @@ export const CODEMODS = [
     description: 'Add query params to SVG imports for compatibility with Vite',
     value: 'svg-import-query-param',
   },
+  {
+    description:
+      'Migrate `rootResolution` `src/` imports to native subpath imports (`#src/`)',
+    value: 'migrate-root-resolution',
+  },
   /* [add-sku-codemod-generator: codemod] */
 ] as const satisfies Codemod[];
 

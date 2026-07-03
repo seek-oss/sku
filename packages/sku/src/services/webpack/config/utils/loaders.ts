@@ -1,7 +1,6 @@
 import babelConfig from '../../../../config/babel.js';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import { createRequire } from 'node:module';
+import lightningcssPlugin from 'postcss-lightningcss';
 
 type BabelConfigOptions = {
   target: 'node' | 'browser';
@@ -10,7 +9,6 @@ type BabelConfigOptions = {
   displayNamesProd?: boolean;
   removeAssertionsInProduction?: boolean;
   hot?: boolean;
-  rootResolution?: boolean;
 };
 
 const require = createRequire(import.meta.url);
@@ -49,25 +47,14 @@ export const makeExternalCssLoaders = (
       options: {
         postcssOptions: {
           plugins: [
-            autoprefixer({ overrideBrowserslist: browserslist }),
-            // Minimize CSS on production builds
-            ...(isProductionBuild
-              ? [
-                  cssnano({
-                    preset: [
-                      'default',
-                      // The calc optimizer can make incorrect assumptions, so we disable it.
-                      // See https://github.com/postcss/postcss-calc/issues/238.
-                      //
-                      // Turning off calc optimizations is currently not possible in lightningcss.
-                      // See https://github.com/parcel-bundler/lightningcss/issues/12.
-                      {
-                        calc: false,
-                      },
-                    ],
-                  }),
-                ]
-              : []),
+            lightningcssPlugin({
+              browsers: browserslist,
+              cssModules: false,
+              lightningcssOptions: {
+                minify: isProductionBuild,
+                sourceMap: true,
+              },
+            }),
           ],
         },
       },

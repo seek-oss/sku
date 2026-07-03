@@ -7,7 +7,7 @@ export const extensions = {
 
 const prependDot = (ext: string) => `.${ext}`;
 
-export const rootResolutionFileExtensions = [
+export const fileResolutionExtensions = [
   ...extensions.js.map(prependDot),
   '.json',
   ...extensions.ts.map(prependDot),

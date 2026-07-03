@@ -12,6 +12,7 @@ describe('getInteractiveRootCodemodSlugs', () => {
       'transform-vite-loadable',
       'jest-to-vitest',
       'svg-import-query-param',
+      'migrate-root-resolution',
     ]);
   });
 });

@@ -13,7 +13,7 @@ export default async (
   config: Configuration,
   { isDevServer }: { isDevServer: boolean },
 ) => {
-  const skuContext = getSkuContext();
+  const skuContext = await getSkuContext();
   const { paths } = skuContext;
   const clientWebpackConfig = (
     await makeWebpackConfig({

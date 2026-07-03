@@ -30,11 +30,10 @@
   },
   "homepage": "https://github.com/seek-oss/sku#readme",
   "dependencies": {
-    "debug": "catalog:"
+    "obug": "catalog:"
   },
   "devDependencies": {
     "@sku-private/tsdown": "workspace:*",
-    "@types/debug": "catalog:",
     "@types/react": "catalog:",
     "vite": "catalog:",
     "react": "catalog:"

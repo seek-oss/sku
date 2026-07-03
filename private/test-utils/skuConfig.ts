@@ -26,7 +26,17 @@ export const makeStableViteHashes = () => ({
       output: {
         chunkFileNames: '[name].js',
         assetFileNames: '[name][extname]',
-        entryFileNames: '[name].js',
+      },
+    },
+  },
+  environments: {
+    client: {
+      build: {
+        rolldownOptions: {
+          output: {
+            entryFileNames: '[name].js',
+          },
+        },
       },
     },
   },

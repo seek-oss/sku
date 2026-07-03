@@ -20,7 +20,7 @@ const { values } = parseArgs({
 const { port } = values;
 
 const startCallback = () => {
-  console.log('Server started on port', port);
+  console.log('sku SSR server started on port', port);
 
   if (typeof onStart === 'function') {
     onStart(app);

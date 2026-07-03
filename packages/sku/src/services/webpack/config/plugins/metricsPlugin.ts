@@ -1,10 +1,10 @@
 import { performance } from 'node:perf_hooks';
-import prettyMilliseconds from 'pretty-ms';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import provider from '../../../telemetry/index.js';
 import type { Compiler, WebpackPluginInstance } from 'webpack';
+import { formatMs } from '../../../../utils/formatMs.js';
 
-const log = debug('sku:metrics');
+const log = createDebug('sku:metrics');
 
 const smp = 'sku-metrics-plugin';
 
@@ -29,7 +29,7 @@ export class MetricsPlugin implements WebpackPluginInstance {
     compiler.hooks.done.tap(smp, () => {
       if (this.initial) {
         log('Initial "%s" build complete: %s', this.target, {
-          toString: () => prettyMilliseconds(performance.now()),
+          toString: () => formatMs(performance.now()),
         });
         provider.timing('start.initial', performance.now(), {
           target: this.target,
@@ -40,7 +40,7 @@ export class MetricsPlugin implements WebpackPluginInstance {
       } else {
         const rebuildTime = performance.now() - this.startTime;
         log('Rebuild for "%s" complete: %s', this.target, {
-          toString: () => prettyMilliseconds(rebuildTime),
+          toString: () => formatMs(rebuildTime),
         });
         provider.timing('start.rebuild', rebuildTime, {
           target: this.target,

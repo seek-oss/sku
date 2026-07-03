@@ -89,6 +89,7 @@ describe('lint-format', () => {
     it('should use vitest lint rules when test runner is vitest', async () => {
       const fileName = 'utils.test.ts';
       const fileContents = dedent /* ts */ `
+        import { it, expect } from 'vitest';
         console.log('foo');
 
         it.only('should test something', () => {
@@ -128,7 +129,7 @@ describe('lint-format', () => {
         import distantParent from '../../../parent'; // parents
         import myself from '.'; // index
         import path from 'path'; //  built-in
-        import utils from 'src/utils'; // internal
+        import utils from '#src/utils'; // internal
       `,
       'importOrder2.ts': dedent /* ts */ `
         import aStyle from './a.css';

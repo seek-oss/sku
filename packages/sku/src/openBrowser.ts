@@ -1,16 +1,16 @@
 // Inspired by create-react-app
 // https://github.com/facebook/create-react-app/commit/d2de54b25cc25800df1764058997e3e274bd79ac
 
-import open from 'open';
+import open from 'tiny-open';
 import isCI from './utils/isCI.js';
 import getDefaultBrowser from 'default-browser';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { execAsync } from './utils/execAsync.js';
 import { caution, strong } from '@sku-private/utils/console';
 
-const log = debug('sku:openBrowser');
+const log = createDebug('sku:openBrowser');
 
 const BIN_DIR = resolve(fileURLToPath(import.meta.url), '../../bin');
 

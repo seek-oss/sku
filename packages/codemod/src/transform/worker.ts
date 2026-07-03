@@ -23,7 +23,7 @@ await Promise.all(
     let current = source;
 
     for (const transform of transforms) {
-      const next = await transform(current);
+      const next = await transform(current, filePath);
       if (next !== null) {
         current = next;
       }

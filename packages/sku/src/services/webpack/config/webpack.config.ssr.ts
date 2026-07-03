@@ -30,7 +30,6 @@ const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const makeWebpackConfig = async ({
-  clientPort,
   serverPort,
   isDevServer = false,
   hot = false,
@@ -59,8 +58,6 @@ export const makeWebpackConfig = async ({
   const internalInclude = [join(__dirname, '../entry'), ...paths.src];
 
   const resolvedPolyfills = resolvePolyfills(polyfills);
-  const proto = httpsDevServer ? 'https' : 'http';
-  const clientServer = `${proto}://127.0.0.1:${clientPort}/`;
 
   // Add polyfills to all entries
   const clientEntry = [...resolvedPolyfills, paths.clientEntry];
@@ -69,7 +66,10 @@ export const makeWebpackConfig = async ({
 
   const prodPath = isStartScript ? '/' : paths.publicPath;
 
-  const publicPath = isDevServer ? clientServer : prodPath;
+  // In dev, assets are referenced relative to the front-door origin (the webpack
+  // dev server) so the browser only talks to a single port. The dev server
+  // serves assets directly and proxies document requests to the SSR server.
+  const publicPath = isDevServer ? '/' : prodPath;
 
   const webpackStatsFilename = 'webpackStats.json';
 

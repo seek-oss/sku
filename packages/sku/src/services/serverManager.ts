@@ -3,9 +3,9 @@ import cluster, { type Worker } from 'node:cluster';
 
 const log = createDebug('sku:server-watcher');
 
-function createServerManager(serverFilePath: string) {
+export function createServerManager(serverFilePath: string) {
   let activeWorker: Worker;
-  cluster.setupMaster({
+  cluster.setupPrimary({
     exec: serverFilePath,
     silent: false,
   });
@@ -59,5 +59,3 @@ function createServerManager(serverFilePath: string) {
 
   return { start, hotUpdate, kill: killIfNotDead };
 }
-
-export default createServerManager;

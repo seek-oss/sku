@@ -369,18 +369,17 @@ The second `if` block is removed, however the contents of the block are kept as 
 
 ## DevServer Middleware
 
-Supply a `devServerMiddleware` path in your sku config to access the internal dev [Express] server.
+Supply a [`devServerMiddleware`] path in your sku config to access the internal dev [Express] server.
 
-The file must export a function that will receive the express server.
-
-Example:
+The file must export a function that will receive the express server:
 
 ```js
-module.exports = (app) => {
+export default (app) => {
   app.get('/mock-api', (req, res) => {
     // ...
   });
 };
 ```
 
+[`devServerMiddleware`]: ./docs/configuration?id=devservermiddleware
 [express]: http://expressjs.com/

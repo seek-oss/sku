@@ -1,51 +1,25 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
-import { critical, strong } from '@sku-private/utils/console';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
 import validateConfig from './validateConfig.js';
-import isCompilePackage from '../utils/isCompilePackage.js';
 import {
   defaultCompilePackages,
   detectedCompilePackages,
   detectedCompilePackagesSync,
 } from './defaultCompilePackages.js';
 import defaultClientEntry from './defaultClientEntry.js';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { resolveAppSkuConfigPath } from './configPath.js';
 
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
 import { getCjsInteropDeps } from './cjsInteropDeps.js';
 import type { PackageJson } from 'type-fest';
+import { createJiti } from 'jiti';
+import { validatePathAliases } from './validatePathAliases.js';
 
-const require = createRequire(import.meta.url);
-const __filename = fileURLToPath(import.meta.url);
+const jiti = createJiti(import.meta.url);
 
-const createJiti = require('jiti');
-const jiti = createJiti(__filename);
-
-const debug = _debug('sku:config');
-
-const generateTypeScriptPaths = (
-  pathAliases?: Record<string, string>,
-): Record<string, string[]> => {
-  const typeScriptPaths: Record<string, string[]> = {};
-
-  // Always include automatic src/* alias, then merge with user-provided aliases
-  const mergedAliases = {
-    'src/*': './src/*',
-    ...pathAliases,
-  };
-
-  for (const [alias, destination] of Object.entries(mergedAliases) as Array<
-    [string, string]
-  >) {
-    typeScriptPaths[alias] = [destination];
-  }
-
-  return typeScriptPaths;
-};
+const debug = createDebug('sku:config');
 
 interface SkuContextOptions {
   configPath?: string;
@@ -54,23 +28,25 @@ interface SkuContextOptions {
 }
 let storedSkuContext: SkuContext;
 
-export const getSkuContext = (skuContextOptions: SkuContextOptions = {}) => {
+export const getSkuContext = async (
+  skuContextOptions: SkuContextOptions = {},
+) => {
   if (storedSkuContext) {
     return storedSkuContext;
   }
-  storedSkuContext = createSkuContext(skuContextOptions);
+  storedSkuContext = await createSkuContext(skuContextOptions);
   return storedSkuContext;
 };
 
-const getSkuConfig = ({
+const getSkuConfig = async ({
   configPath,
 }: {
   configPath?: string;
-}): {
+}): Promise<{
   appSkuConfig: SkuConfig;
   appSkuConfigPath?: string;
   configPath?: string;
-} => {
+}> => {
   const appSkuConfigPath = resolveAppSkuConfigPath({ configPath });
 
   if (!appSkuConfigPath) {
@@ -81,10 +57,9 @@ const getSkuConfig = ({
     };
   }
 
-  const mod = jiti(appSkuConfigPath) as { default: SkuConfig } & SkuConfig;
-
-  // Jiti require doesn't support the `default` config so we have to check for `default` ourselves
-  const appSkuConfig = mod?.default ?? mod;
+  const appSkuConfig = await jiti.import<SkuConfig>(appSkuConfigPath, {
+    default: true,
+  });
 
   return {
     appSkuConfig,
@@ -95,7 +70,7 @@ const getSkuConfig = ({
 
 export type NormalizedRoute = SkuRouteObject & { siteIndex?: number };
 
-export const createSkuContext = ({
+export const createSkuContext = async ({
   configPath,
   port: portArg,
   strictPort,
@@ -104,7 +79,7 @@ export const createSkuContext = ({
     appSkuConfig,
     appSkuConfigPath,
     configPath: appConfigPath,
-  } = getSkuConfig({ configPath });
+  } = await getSkuConfig({ configPath });
 
   const skuConfig = {
     ...defaultSkuConfig,
@@ -113,32 +88,7 @@ export const createSkuContext = ({
 
   validateConfig(skuConfig);
 
-  if (isCompilePackage && skuConfig.rootResolution) {
-    console.log(
-      critical(
-        `Error: "${strong(
-          'rootResolution',
-        )}" is not safe for compile packages as consuming apps can't resolve them.`,
-      ),
-    );
-    process.exit(1);
-  }
-
-  // Validate pathAliases destinations don't contain node_modules
-  if (skuConfig.bundler === 'vite' && skuConfig.pathAliases) {
-    for (const [alias, destination] of Object.entries(
-      skuConfig.pathAliases,
-    ) as Array<[string, string]>) {
-      if (destination.includes('node_modules')) {
-        console.log(
-          critical(
-            `Path alias "${strong(alias)}" cannot point to node_modules.`,
-          ),
-        );
-        process.exit(1);
-      }
-    }
-  }
+  validatePathAliases(skuConfig.pathAliases);
 
   const normalizeRoute = (route: SkuRoute): NormalizedRoute =>
     typeof route === 'string' ? { route } : route;
@@ -265,16 +215,12 @@ export const createSkuContext = ({
   const cspEnabled = skuConfig.cspEnabled;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
-  const rootResolution = skuConfig.rootResolution;
   const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
     skuConfig.skipPackageCompatibilityCompilation;
   const externalizeNodeModules = skuConfig.externalizeNodeModules;
 
-  const tsPaths =
-    skuConfig.bundler === 'vite' || skuConfig.testRunner === 'vitest'
-      ? generateTypeScriptPaths(skuConfig.pathAliases)
-      : undefined;
+  const pathAliases = skuConfig.pathAliases;
 
   const defaultCjsInteropDependencies = ['lodash'];
 
@@ -318,7 +264,7 @@ export const createSkuContext = ({
     vitestDecorator,
     vitePlugins,
     eslintIgnore,
-    tsPaths,
+    pathAliases,
     routes,
     environments,
     supportedBrowsers,
@@ -327,7 +273,6 @@ export const createSkuContext = ({
     cspEnabled,
     cspExtraScriptSrcHosts,
     httpsDevServer,
-    rootResolution,
     languages,
     initialPath,
     transformOutputPath: skuConfig.transformOutputPath,
@@ -346,5 +291,5 @@ type ExtraSkuContextOptions = {
   listUrls?: boolean;
 };
 
-export type SkuContext = ReturnType<typeof createSkuContext> &
+export type SkuContext = Awaited<ReturnType<typeof createSkuContext>> &
   ExtraSkuContextOptions;

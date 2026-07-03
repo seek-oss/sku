@@ -1,6 +1,6 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 
-const log = debug('sku:metrics');
+const log = createDebug('sku:metrics');
 
 const skuStartMarkName = 'skuStartComplete';
 const skuStart = {

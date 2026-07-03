@@ -1,9 +1,9 @@
 import { existsSync } from 'node:fs';
 import { getPathFromCwd } from '@sku-private/utils';
-import _debug from 'debug';
+import { createDebug } from 'obug';
 import { caution, critical, link, strong } from '@sku-private/utils/console';
 
-const debug = _debug('sku:config');
+const debug = createDebug('sku:config');
 
 const supportedSkuConfigExtensions = ['ts', 'js', 'mjs'];
 

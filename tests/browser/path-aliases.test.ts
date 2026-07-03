@@ -26,30 +26,30 @@ describe('pathAliases', () => {
       tsconfig = jsonc.parse(tsconfigContents);
     });
 
+    it('should include paths without baseUrl', async () => {
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
+      expect(tsconfig.compilerOptions.paths).toBeDefined();
+    });
+
     it('should generate TypeScript paths configuration with pathAliases', async () => {
       expect(tsconfig.compilerOptions.paths).toEqual({
-        'src/*': ['./src/*'],
-        '@components/*': ['./src/components/*'],
-        '@utils/*': ['./src/utils/*'],
+        '#components/*': ['./src/components/*'],
+        '#utils/*': ['./src/utils/*'],
         '#styles/*': ['./src/styles/*'],
       });
     });
 
-    it('should always include automatic src/* alias', async () => {
-      expect(tsconfig.compilerOptions.paths).toMatchObject({
-        'src/*': ['./src/*'],
-      });
-    });
-
-    it('should preserve existing baseUrl behavior alongside paths', async () => {
-      expect(tsconfig.compilerOptions.baseUrl).toBeDefined();
+    it('should not set a baseUrl', async () => {
+      expect(tsconfig.compilerOptions.baseUrl).toBeUndefined();
       expect(tsconfig.compilerOptions.paths).toBeDefined();
     });
   });
 
   describe('validation', () => {
     it('should reject pathAliases pointing to node_modules', async () => {
-      const configure = await sku('configure', ['--config=sku.config.bad.ts']);
+      const configure = await sku('configure', [
+        '--config=sku.config.bad-node-modules.ts',
+      ]);
 
       await waitFor(() => {
         expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
@@ -57,7 +57,23 @@ describe('pathAliases', () => {
 
       expect(
         configure.getByText(
-          'Path alias "@bad/*" cannot point to node_modules.',
+          'Path alias "#bad/*" cannot point to node_modules.',
+        ),
+      ).toBeInTheConsole();
+    });
+
+    it('should reject pathAliases with invalid import specifier', async () => {
+      const configure = await sku('configure', [
+        '--config=sku.config.bad-wrong-import.ts',
+      ]);
+
+      await waitFor(() => {
+        expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+
+      expect(
+        configure.getByText(
+          'Path alias "@bad/*" must start with "#" to be a valid subpath import.',
         ),
       ).toBeInTheConsole();
     });
@@ -80,15 +96,11 @@ describe('pathAliases', () => {
       const appPage = await createPage();
       await appPage.goto(`http://localhost:${port}`);
 
-      expect(
-        start.queryByError('The plugin "vite-tsconfig-paths" is detected.'),
-      ).not.toBeInTheConsole();
-
       expect(start.queryByError('PLUGIN_ERROR')).not.toBeInTheConsole();
 
       expect(
         start.queryByError(
-          "Cannot find module '@components/Button'",
+          "Cannot find module '#components/Button'",
           undefined,
         ),
       ).not.toBeInTheConsole();

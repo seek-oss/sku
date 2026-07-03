@@ -1,8 +1,8 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { generator } from '@vocab/pseudo-localize';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-const log = debug('sku:vocab:config');
+const log = createDebug('sku:vocab:config');
 
 export const getVocabConfig = ({ languages }: SkuContext) => {
   if (!languages) {

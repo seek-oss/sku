@@ -1,5 +1,6 @@
 import type { NormalizedRoute } from '../context/createSkuContext.js';
 import { match } from 'path-to-regexp';
+import memoize from 'memoize';
 import { getSiteForHost } from '../context/getSiteForHost.js';
 import type { SkuSiteObject } from '../types/types.js';
 
@@ -32,7 +33,7 @@ export function getMatchingRoute({
   });
 }
 
-const routeMatcher = (route: string) => {
+const createRouteMatcher = (route: string) => {
   const normalisedRoute = route
     .split('/')
     .map((part) => {
@@ -48,4 +49,4 @@ const routeMatcher = (route: string) => {
   return match<Record<string, string>>(normalisedRoute);
 };
 
-export default routeMatcher;
+export const routeMatcher = memoize(createRouteMatcher);

@@ -2,11 +2,14 @@
   "name": "@sku-fixtures/styling",
   "private": true,
   "type": "module",
-  "scripts": {
-    "start": "storybook dev --ci --exact-port --port 8090"
+  "imports": {
+    "#components/*": "./src/components/*"
   },
   "exports": {
     "./package.json": "./package.json"
+  },
+  "scripts": {
+    "start": "storybook dev --ci --exact-port --port 8090"
   },
   "dependencies": {
     "@sku-fixtures/package-with-styles": "./fake/node_modules/package-with-styles",
@@ -20,9 +23,9 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",
-    "storybook": "^10.0.0",
     "dedent": "^1.5.1",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "storybook": "^10.0.0"
   },
   "skuSkipValidatePeerDeps": true
 }

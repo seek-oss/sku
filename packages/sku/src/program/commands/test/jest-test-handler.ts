@@ -1,9 +1,9 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { run } from 'jest';
 
 import isCI from '../../../utils/isCI.js';
 
-const log = debug('sku:jest');
+const log = createDebug('sku:jest');
 
 export const runJestTests = async ({ args = [] }: { args: string[] }) => {
   // https://jestjs.io/docs/configuration#preset-string

@@ -1,7 +1,7 @@
 import { type Browser, chromium } from 'playwright';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
-const log = debug('sku:browser');
+const log = createDebug('sku:browser');
 
 let _browser: Promise<Browser> | null = null;
 

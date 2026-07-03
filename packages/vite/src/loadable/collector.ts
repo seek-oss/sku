@@ -11,9 +11,9 @@ import {
   type InjectableScript,
   sortInjectableScript,
 } from './helpers/scriptUtils.js';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
-const log = debug('sku:loadable:collector');
+const log = createDebug('sku:loadable:collector');
 
 export type ModuleId = string;
 

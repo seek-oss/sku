@@ -135,13 +135,22 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
       const nodeServerPort = 8100;
       const devServerPort = 8101;
 
-      const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
+      // Spawn detached so we can signal the whole process group below. The
+      // command runs via a shell that doesn't forward signals to sku on Linux.
+      const start = await sku('start-ssr', ['--config=sku-start.config.ts'], {
+        spawnOpts: { detached: true },
+      });
       await start.findByText('Server started');
 
       expect(await isPortListening(nodeServerPort)).toBe(true);
       expect(await isPortListening(devServerPort)).toBe(true);
 
-      start.process.kill(signal);
+      const { pid } = start.process;
+      if (!pid) {
+        throw new Error('start-ssr process has no pid');
+      }
+      // A negative pid signals the whole process group.
+      process.kill(-pid, signal);
 
       await waitFor(async () => {
         expect(await isPortListening(nodeServerPort)).toBe(false);

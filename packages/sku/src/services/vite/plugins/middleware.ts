@@ -106,12 +106,20 @@ export const middlewarePlugin = ({
 
         let cspHandler: CSPHandler | undefined;
 
-        if (skuContext.cspEnabled) {
+        if (skuContext.cspEnabled || skuContext.cspReportOnlyEnabled) {
           cspHandler = createCSPHandler({
-            extraHosts: [
-              skuContext.paths.publicPath,
-              ...skuContext.cspExtraScriptSrcHosts,
-            ],
+            extraHosts: skuContext.cspEnabled
+              ? [
+                  skuContext.paths.publicPath,
+                  ...skuContext.cspExtraScriptSrcHosts,
+                ]
+              : undefined,
+            reportOnlyExtraHosts: skuContext.cspReportOnlyEnabled
+              ? [
+                  skuContext.paths.publicPath,
+                  ...skuContext.cspReportOnlyExtraScriptSrcHosts,
+                ]
+              : undefined,
             isDevelopment: process.env.NODE_ENV === 'development',
           });
         }
@@ -137,10 +145,17 @@ export const middlewarePlugin = ({
           if (cspHandler) {
             const root = cspHandler.processHtml(html);
 
-            if (skuContext.cspDelivery === 'tag') {
-              html = cspHandler.updateHtml(root);
-            } else if (skuContext.cspDelivery === 'header') {
-              headers['content-security-policy'] = cspHandler.createCSP();
+            if (skuContext.cspEnabled) {
+              if (skuContext.cspDelivery === 'tag') {
+                html = cspHandler.updateHtml(root);
+              } else if (skuContext.cspDelivery === 'header') {
+                headers['content-security-policy'] = cspHandler.createCSP();
+              }
+            }
+
+            if (skuContext.cspReportOnlyEnabled) {
+              headers['content-security-policy-report-only'] =
+                cspHandler.createReportOnlyCSP();
             }
           }
 

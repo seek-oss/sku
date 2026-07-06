@@ -540,7 +540,7 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
-   * The way the content security policy is delivered.  Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
    *
    * @default 'tag'
    * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery

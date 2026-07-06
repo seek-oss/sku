@@ -78,6 +78,16 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
+## cspDelivery
+
+Type: `'tag' | 'header'`
+
+Default: `'tag'`
+
+Bundler: `vite`
+
+The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
+
 ## cspExtraScriptSrcHosts
 
 Type: `Array<string>`

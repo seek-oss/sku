@@ -29,6 +29,8 @@ const {
     cspEnabled,
     cspDelivery,
     cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts,
     manifest,
     publicPath,
     targetPath,
@@ -62,14 +64,19 @@ await Promise.all(
 
       let cspHandler: CSPHandler | undefined;
 
-      if (cspEnabled) {
+      if (cspEnabled || cspReportOnlyEnabled) {
         cspHandler = createCSPHandler({
-          extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
+          extraHosts: cspEnabled
+            ? [publicPath, ...cspExtraScriptSrcHosts]
+            : undefined,
+          reportOnlyExtraHosts: cspReportOnlyEnabled
+            ? [publicPath, ...cspReportOnlyExtraScriptSrcHosts]
+            : undefined,
           isDevelopment: process.env.NODE_ENV === 'development',
         });
       }
 
-      const metadata: { csp?: string } = {};
+      const metadata: { csp?: string; cspReportOnly?: string } = {};
       let html = '';
       try {
         html = await createPreRenderedHtml({
@@ -88,10 +95,16 @@ await Promise.all(
         if (cspHandler) {
           const root = cspHandler.processHtml(html);
 
-          if (cspDelivery === 'tag') {
-            html = cspHandler.updateHtml(root);
-          } else if (cspDelivery === 'header') {
-            metadata.csp = cspHandler.createCSP();
+          if (cspEnabled) {
+            if (cspDelivery === 'tag') {
+              html = cspHandler.updateHtml(root);
+            } else if (cspDelivery === 'header') {
+              metadata.csp = cspHandler.createCSP();
+            }
+          }
+
+          if (cspReportOnlyEnabled) {
+            metadata.cspReportOnly = cspHandler.createReportOnlyCSP();
           }
         }
       } catch (e) {

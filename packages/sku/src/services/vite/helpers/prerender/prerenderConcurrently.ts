@@ -21,6 +21,8 @@ export type SharedWorkerData = {
   cspEnabled: boolean;
   cspDelivery: 'tag' | 'header';
   cspExtraScriptSrcHosts: string[];
+  cspReportOnlyEnabled: boolean;
+  cspReportOnlyExtraScriptSrcHosts: string[];
   targetPath: string;
   manifest: Manifest;
 };
@@ -105,6 +107,9 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
     cspEnabled: skuContext.cspEnabled,
     cspDelivery: skuContext.cspDelivery,
     cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts:
+      skuContext.cspReportOnlyExtraScriptSrcHosts,
     targetPath,
     manifest: JSON.parse(rawManifest) as Manifest,
   };

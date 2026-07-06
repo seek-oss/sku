@@ -36,8 +36,7 @@ export const detectUnnecessaryPolyfillsFromDependencies =
             polyfillName: depName,
             detectionSource: 'dependency',
             dependencyType: dependencyType as
-              | 'dependencies'
-              | 'devDependencies',
+              'dependencies' | 'devDependencies',
             ...polyfill,
           });
         }

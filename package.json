@@ -63,7 +63,7 @@
     "knip": "^6.14.2",
     "nano-staged": "catalog:",
     "playwright": "^1.60.0",
-    "prettier": "~3.8.0",
+    "prettier": "~3.9.0",
     "renovate-config-seek": "^0.4.0",
     "tsdown": "^0.21.0",
     "tsx": "^4.19.4",

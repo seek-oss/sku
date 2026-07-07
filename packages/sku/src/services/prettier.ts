@@ -44,11 +44,6 @@ const runPrettier = async ({
   const { exitCode } = await runBin({
     packageName: 'prettier',
     args: prettierArgs,
-    /**
-     * Show Prettier output with stdio: inherit
-     * The child process will use the parent process's stdin/stdout/stderr
-     * See https://nodejs.org/api/child_process.html#child_process_options_stdio
-     */
     options: { stdio: 'inherit' },
   });
   if (listDifferent && exitCode === 1) {

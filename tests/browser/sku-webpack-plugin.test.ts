@@ -1,10 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { dirContentsToObject } from '@sku-private/test-utils';
-import {
-  scopeToFixture,
-  hasExitSuccessfully,
-} from '@sku-private/testing-library';
+import { scopeToFixture, waitForExitCode } from '@sku-private/testing-library';
 
 const port = 9876;
 const devServerUrl = `http://localhost:${port}`;
@@ -41,7 +38,7 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await hasExitSuccessfully(build);
+      await waitForExitCode(build, 0);
     });
 
     it('should create valid app', async () => {

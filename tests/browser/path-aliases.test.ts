@@ -5,7 +5,7 @@ import * as jsonc from 'jsonc-parser';
 import {
   scopeToFixture,
   waitFor,
-  hasExitSuccessfully,
+  waitForExitCode,
 } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
 import { createPage } from '@sku-private/playwright';
@@ -19,7 +19,7 @@ describe('pathAliases', () => {
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
-      await hasExitSuccessfully(configure);
+      await waitForExitCode(configure, 0);
 
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');

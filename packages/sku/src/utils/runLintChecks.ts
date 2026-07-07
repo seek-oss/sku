@@ -7,7 +7,7 @@ export type LintCheck = {
 
 /**
  * Runs the provided lint checks sequentially, returning `true` if any
- * enabled check exits with a non-zero (or undefined) exit code.
+ * check exits with a non-zero exit code.
  */
 export const runLintChecks = async (checks: LintCheck[]): Promise<boolean> => {
   let hasFailure = false;

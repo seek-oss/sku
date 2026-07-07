@@ -16,12 +16,12 @@ export const formatAction = async (
 
   const checks: LintCheck[] = [
     {
-      name: 'Prettier',
-      run: () => prettierWrite(pathsToCheck),
-    },
-    {
       name: 'ESLint',
       run: () => esLintFix({ paths: pathsToCheck }),
+    },
+    {
+      name: 'Prettier',
+      run: () => prettierWrite(pathsToCheck),
     },
   ];
 

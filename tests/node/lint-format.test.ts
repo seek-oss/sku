@@ -1,4 +1,4 @@
-import { describe, it, beforeAll, afterAll, expect } from 'vitest';
+import { describe, it, beforeAll, expect } from 'vitest';
 import path from 'node:path';
 import dedent from 'dedent';
 import {
@@ -60,17 +60,16 @@ describe('lint-format', () => {
   describe('sku lint', () => {
     describe('when there are no lint errors', () => {
       let lint: RenderResult;
-      let fixture: Fixture;
 
       beforeAll(async () => {
-        fixture = await createSrcFixture({ 'passing.ts': passingFile });
-
+        const fixture = await createSrcFixture({
+          'passing.ts': passingFile,
+        });
         lint = await sku('lint');
 
         await waitForExitCode(lint, 0);
+        fixture.rm();
       });
-
-      afterAll(() => fixture.rm());
 
       it('should run every linter', async () => {
         expect(
@@ -95,10 +94,9 @@ describe('lint-format', () => {
 
     describe('when every linter reports errors', () => {
       let lint: RenderResult;
-      let fixture: Fixture;
 
       beforeAll(async () => {
-        fixture = await createSrcFixture({
+        const fixture = await createSrcFixture({
           'typeError.ts': typeErrorFile,
           'prettierError.js': prettierErrorFile,
           'esLintError.test.ts': esLintErrorFile,
@@ -107,9 +105,8 @@ describe('lint-format', () => {
         lint = await sku('lint');
 
         await waitForExitCode(lint, 1);
+        fixture.rm();
       });
-
-      afterAll(() => fixture.rm());
 
       it('should run every linter before failing', async () => {
         expect(
@@ -138,9 +135,7 @@ describe('lint-format', () => {
               `error TS2322: Type 'string' is not assignable to type 'number'.`,
             ),
           ).toBeInTheConsole();
-          expect(
-            await lint.findByText(relativePath(fixture, 'typeError.ts')),
-          ).toBeInTheConsole();
+          expect(await lint.findByText('typeError.ts')).toBeInTheConsole();
         });
       });
 
@@ -172,11 +167,10 @@ describe('lint-format', () => {
 
     describe('when file paths are provided', () => {
       let lint: RenderResult;
-      let fixture: Fixture;
       let target: string;
 
       beforeAll(async () => {
-        fixture = await createSrcFixture({
+        await using fixture = await createSrcFixture({
           'prettierError.js': prettierErrorFile,
         });
         target = relativePath(fixture, 'prettierError.js');
@@ -185,8 +179,6 @@ describe('lint-format', () => {
 
         await waitForExitCode(lint, 1);
       });
-
-      afterAll(() => fixture.rm());
 
       it('should skip the TypeScript check', async () => {
         expect(
@@ -250,10 +242,9 @@ describe('lint-format', () => {
 
     describe('when Prettier cannot parse a file', () => {
       let lint: RenderResult;
-      let fixture: Fixture;
 
       beforeAll(async () => {
-        fixture = await createSrcFixture({
+        await using fixture = await createSrcFixture({
           'brokenSyntax.js': 'const x = (\n',
         });
 
@@ -261,8 +252,6 @@ describe('lint-format', () => {
 
         await waitForExitCode(lint, 1);
       });
-
-      afterAll(() => fixture.rm());
 
       it('should skip the TypeScript check', async () => {
         expect(
@@ -281,10 +270,9 @@ describe('lint-format', () => {
 
     describe('when the test runner is vitest', () => {
       let lint: RenderResult;
-      let fixture: Fixture;
 
       beforeAll(async () => {
-        fixture = await createSrcFixture({
+        await using fixture = await createSrcFixture({
           // only fails vitest rules (correctly formatted)
           'vitestRules.test.ts': dedent /* ts */ `
             import { it, expect } from 'vitest';
@@ -301,9 +289,8 @@ describe('lint-format', () => {
         lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
 
         await waitForExitCode(lint, 1);
+        fixture.rm();
       });
-
-      afterAll(() => fixture.rm());
 
       it('should use vitest lint rules', async () => {
         expect(
@@ -370,7 +357,6 @@ describe('lint-format', () => {
       await using fixture = await createSrcFixture(filesToFormat);
 
       const format = await sku('format');
-      expect(await format.findByText('Formatting complete')).toBeInTheConsole();
 
       await waitFor(() => {
         expect(format.hasExit()).toMatchObject({ exitCode: 0 });

@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-`lint|format`: Run all lint checks instead of bailing on the first failure
+`lint`: Run all lint checks instead of bailing on the first failure
 
 Previously, a single failing lint check would halt the entire process, so you'd only see errors from the first check to fail and would have to fix them before any other errors surfaced.
 

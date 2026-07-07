@@ -6,7 +6,7 @@ import {
   scopeToFixture,
   type RenderResult,
   waitForExitCode,
-  hasExitCode,
+  hasExpectedExitCode,
   waitFor,
 } from '@sku-private/testing-library';
 
@@ -85,7 +85,7 @@ describe('lint-format', () => {
       });
 
       it('should exit with a zero exit code', () => {
-        expect(hasExitCode(lint, 0)).toBe(true);
+        expect(hasExpectedExitCode(lint, 0)).toBe(true);
       });
 
       it('should report that linting is complete', async () => {
@@ -124,7 +124,7 @@ describe('lint-format', () => {
       });
 
       it('should exit with a non-zero exit code', () => {
-        expect(hasExitCode(lint, 1)).toBe(true);
+        expect(hasExpectedExitCode(lint, 1)).toBe(true);
       });
 
       it('should report that linting failed', async () => {

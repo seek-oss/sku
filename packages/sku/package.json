@@ -144,7 +144,7 @@
     "postcss": "^8.5.8",
     "postcss-lightningcss": "^1.1.0",
     "postcss-loader": "^8.0.0",
-    "prettier": "~3.8.0",
+    "prettier": "~3.9.0",
     "react-refresh": "^0.18.0",
     "rolldown": "^1.0.0-rc.9",
     "rollup-plugin-visualizer": "^7.0.1",

@@ -3,6 +3,7 @@ import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
 import { write as prettierWrite } from '../../../services/prettier.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { accentLight } from '@sku-private/utils/console';
+import { type LintCheck, runLintChecks } from '../../../utils/runLintChecks.js';
 
 export const formatAction = async (
   paths: string[],
@@ -13,15 +14,19 @@ export const formatAction = async (
 
   console.log(accentLight('Formatting'));
 
-  try {
-    await esLintFix({ paths: pathsToCheck });
-    await prettierWrite(pathsToCheck);
-  } catch (e) {
-    if (e) {
-      console.error(e);
-    }
+  const checks: LintCheck[] = [
+    {
+      name: 'Prettier',
+      run: () => prettierWrite(pathsToCheck),
+    },
+    {
+      name: 'ESLint',
+      run: () => esLintFix({ paths: pathsToCheck }),
+    },
+  ];
 
-    process.exit(1);
-  }
+  await runLintChecks(checks);
+
+  // Errors will be logged by the lint checks themselves, but format will always pass
   console.log(accentLight('Formatting complete'));
 };

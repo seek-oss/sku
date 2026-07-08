@@ -2,7 +2,8 @@ import { configureProject } from '../../../utils/configure.js';
 import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
 import { write as prettierWrite } from '../../../services/prettier.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { accentLight } from '@sku-private/utils/console';
+import { accentLight, critical } from '@sku-private/utils/console';
+import { type LintCheck, runLintChecks } from '../../../utils/runLintChecks.js';
 
 export const formatAction = async (
   paths: string[],
@@ -13,15 +14,23 @@ export const formatAction = async (
 
   console.log(accentLight('Formatting'));
 
-  try {
-    await esLintFix({ paths: pathsToCheck });
-    await prettierWrite(pathsToCheck);
-  } catch (e) {
-    if (e) {
-      console.error(e);
-    }
+  const checks: LintCheck[] = [
+    {
+      name: 'ESLint',
+      run: () => esLintFix({ paths: pathsToCheck }),
+    },
+    {
+      name: 'Prettier',
+      run: () => prettierWrite(pathsToCheck),
+    },
+  ];
 
+  const hasFailure = await runLintChecks(checks);
+
+  if (hasFailure) {
+    console.error(critical('Formatting failed'));
     process.exit(1);
   }
+
   console.log(accentLight('Formatting complete'));
 };

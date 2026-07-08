@@ -6,7 +6,7 @@ import * as jsonc from 'jsonc-parser';
 import prettierConfig from '../../packages/sku/dist/config/prettier.mjs';
 
 import {
-  hasExitSuccessfully,
+  waitForExitCode,
   type RenderResult,
   scopeToFixture,
   waitFor,
@@ -56,7 +56,7 @@ describe('configure', () => {
         cwd: './App',
       });
 
-      await hasExitSuccessfully(configure);
+      await waitForExitCode(configure, 0);
     });
 
     afterAll(async () => {
@@ -115,7 +115,7 @@ describe('configure', () => {
         cwd: './TSApp',
       });
 
-      await hasExitSuccessfully(configure);
+      await waitForExitCode(configure, 0);
     });
 
     afterAll(async () => {

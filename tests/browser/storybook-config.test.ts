@@ -6,7 +6,7 @@ import {
   configure,
   scopeToFixture,
   skipCleanup,
-  hasExitSuccessfully,
+  waitForExitCode,
 } from '@sku-private/testing-library';
 
 const storybookStartedRegex = /Storybook ready!/;
@@ -137,7 +137,7 @@ describe('storybook-config', () => {
 
     beforeAll(async () => {
       const storybook = await exec('pnpm', ['storybook', 'build']);
-      await hasExitSuccessfully(storybook);
+      await waitForExitCode(storybook, 0);
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       await assetServer.findByText('serving storybook-static');

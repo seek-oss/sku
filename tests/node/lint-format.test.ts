@@ -21,26 +21,13 @@ type Fixture = Awaited<ReturnType<typeof createFixture>>;
 const createSrcFixture = (files: Record<string, string>) =>
   createFixture(files, { tempDir: fixturePath() });
 
-/** The fixture's location relative to the directory `sku` is run from. */
-const relativePath = (fixture: Fixture, ...subpaths: string[]) =>
+const relativePathFromFixture = (fixture: Fixture, ...subpaths: string[]) =>
   path.relative(fixturePath(), fixture.getPath(...subpaths));
 
-/**
- * A file that only fails the TypeScript check.
- * It is exported so that ESLint does not additionally flag it as an unused variable.
- */
 const typeErrorFile = `export const notANumber: number = 'a string';\n`;
 
-/**
- * A file that only fails the Prettier check.
- * It is exported so that neither TypeScript nor ESLint flag it.
- */
 const prettierErrorFile = `export const badlyFormatted = "needs formatting"\n`;
 
-/**
- * A file that only fails the ESLint check.
- * It is already correctly formatted so that Prettier does not flag it.
- */
 const esLintErrorFile = `console.log('foo');
 
 it.only('should test something', () => {
@@ -50,10 +37,6 @@ it.only('should test something', () => {
 });
 `;
 
-/**
- * A file that passes every linter: valid types, correctly formatted and free of
- * lint errors.
- */
 const passingFile = `export const greeting = 'hello world';\n`;
 
 describe('lint-format', () => {
@@ -173,7 +156,7 @@ describe('lint-format', () => {
         await using fixture = await createSrcFixture({
           'prettierError.js': prettierErrorFile,
         });
-        target = relativePath(fixture, 'prettierError.js');
+        target = relativePathFromFixture(fixture, 'prettierError.js');
 
         lint = await sku('lint', [target]);
 
@@ -248,7 +231,9 @@ describe('lint-format', () => {
           'brokenSyntax.js': 'const x = (\n',
         });
 
-        lint = await sku('lint', [relativePath(fixture, 'brokenSyntax.js')]);
+        lint = await sku('lint', [
+          relativePathFromFixture(fixture, 'brokenSyntax.js'),
+        ]);
 
         await waitForExitCode(lint, 1);
       });

@@ -21,7 +21,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">Hello <!-- -->jobStreet<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws3e _19azws39 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">Hello <!-- -->jobStreet<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws3e _19azws39 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
@@ -46,7 +46,7 @@ exports[`braid-design-system > bundler vite > build > should generate the expect
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">Hello <!-- -->seekAnz<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws3e _19azws39 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">Hello <!-- -->seekAnz<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws3e _19azws39 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script type="module" src="/vite-client.js" ></script>
       </body>
@@ -2004,18 +2004,18 @@ html.r2i18210 .r2i1824s {
     text-align: right;
   }
 }
-.z1t4tb4 {
-  font-size: var(--z1t4tb0);
-  line-height: var(--z1t4tb1);
+._1x6fthg4 {
+  font-size: var(--_1x6fthg0);
+  line-height: var(--_1x6fthg1);
 }
-.z1t4tb4:before {
+._1x6fthg4:before {
   content: "";
-  margin-bottom: var(--z1t4tb2);
+  margin-bottom: var(--_1x6fthg2);
   display: table;
 }
-.z1t4tb4:after {
+._1x6fthg4:after {
   content: "";
-  margin-top: var(--z1t4tb3);
+  margin-top: var(--_1x6fthg3);
   display: table;
 }
 .fx8zm70 {
@@ -2031,28 +2031,28 @@ html.r2i18210 .r2i1824s {
   font-weight: var(--_9h6w0d47);
 }
 .fx8zm74 {
-  --z1t4tb0: var(--_9h6w0d31);
-  --z1t4tb1: var(--_9h6w0d32);
-  --z1t4tb2: var(--_9h6w0d34);
-  --z1t4tb3: var(--_9h6w0d35);
+  --_1x6fthg0: var(--_9h6w0d31);
+  --_1x6fthg1: var(--_9h6w0d32);
+  --_1x6fthg2: var(--_9h6w0d34);
+  --_1x6fthg3: var(--_9h6w0d35);
 }
 .fx8zm76 {
-  --z1t4tb0: var(--_9h6w0d3b);
-  --z1t4tb1: var(--_9h6w0d3c);
-  --z1t4tb2: var(--_9h6w0d3e);
-  --z1t4tb3: var(--_9h6w0d3f);
+  --_1x6fthg0: var(--_9h6w0d3b);
+  --_1x6fthg1: var(--_9h6w0d3c);
+  --_1x6fthg2: var(--_9h6w0d3e);
+  --_1x6fthg3: var(--_9h6w0d3f);
 }
 .fx8zm78 {
-  --z1t4tb0: var(--_9h6w0d3l);
-  --z1t4tb1: var(--_9h6w0d3m);
-  --z1t4tb2: var(--_9h6w0d3o);
-  --z1t4tb3: var(--_9h6w0d3p);
+  --_1x6fthg0: var(--_9h6w0d3l);
+  --_1x6fthg1: var(--_9h6w0d3m);
+  --_1x6fthg2: var(--_9h6w0d3o);
+  --_1x6fthg3: var(--_9h6w0d3p);
 }
 .fx8zm7a {
-  --z1t4tb0: var(--_9h6w0d3v);
-  --z1t4tb1: var(--_9h6w0d3w);
-  --z1t4tb2: var(--_9h6w0d3y);
-  --z1t4tb3: var(--_9h6w0d3z);
+  --_1x6fthg0: var(--_9h6w0d3v);
+  --_1x6fthg1: var(--_9h6w0d3w);
+  --_1x6fthg2: var(--_9h6w0d3y);
+  --_1x6fthg3: var(--_9h6w0d3z);
 }
 .fx8zm7c {
   font-size: var(--_9h6w0d31);
@@ -2077,28 +2077,28 @@ html.r2i18210 .r2i1824s {
   font-weight: var(--_9h6w0d5d);
 }
 .fx8zm7i {
-  --z1t4tb0: var(--_9h6w0d48);
-  --z1t4tb1: var(--_9h6w0d49);
-  --z1t4tb2: var(--_9h6w0d4b);
-  --z1t4tb3: var(--_9h6w0d4c);
+  --_1x6fthg0: var(--_9h6w0d48);
+  --_1x6fthg1: var(--_9h6w0d49);
+  --_1x6fthg2: var(--_9h6w0d4b);
+  --_1x6fthg3: var(--_9h6w0d4c);
 }
 .fx8zm7k {
-  --z1t4tb0: var(--_9h6w0d4i);
-  --z1t4tb1: var(--_9h6w0d4j);
-  --z1t4tb2: var(--_9h6w0d4l);
-  --z1t4tb3: var(--_9h6w0d4m);
+  --_1x6fthg0: var(--_9h6w0d4i);
+  --_1x6fthg1: var(--_9h6w0d4j);
+  --_1x6fthg2: var(--_9h6w0d4l);
+  --_1x6fthg3: var(--_9h6w0d4m);
 }
 .fx8zm7m {
-  --z1t4tb0: var(--_9h6w0d4s);
-  --z1t4tb1: var(--_9h6w0d4t);
-  --z1t4tb2: var(--_9h6w0d4v);
-  --z1t4tb3: var(--_9h6w0d4w);
+  --_1x6fthg0: var(--_9h6w0d4s);
+  --_1x6fthg1: var(--_9h6w0d4t);
+  --_1x6fthg2: var(--_9h6w0d4v);
+  --_1x6fthg3: var(--_9h6w0d4w);
 }
 .fx8zm7o {
-  --z1t4tb0: var(--_9h6w0d52);
-  --z1t4tb1: var(--_9h6w0d53);
-  --z1t4tb2: var(--_9h6w0d55);
-  --z1t4tb3: var(--_9h6w0d56);
+  --_1x6fthg0: var(--_9h6w0d52);
+  --_1x6fthg1: var(--_9h6w0d53);
+  --_1x6fthg2: var(--_9h6w0d55);
+  --_1x6fthg3: var(--_9h6w0d56);
 }
 html:not(.r2i18210) .fx8zm710 {
   --fx8zm7q: var(--_9h6w0d19);
@@ -2234,28 +2234,28 @@ html.r2i18210 .fx8zm71l {
 }
 @media screen and (min-width: 740px) {
   .fx8zm74 {
-    --z1t4tb0: var(--_9h6w0d36);
-    --z1t4tb1: var(--_9h6w0d37);
-    --z1t4tb2: var(--_9h6w0d39);
-    --z1t4tb3: var(--_9h6w0d3a);
+    --_1x6fthg0: var(--_9h6w0d36);
+    --_1x6fthg1: var(--_9h6w0d37);
+    --_1x6fthg2: var(--_9h6w0d39);
+    --_1x6fthg3: var(--_9h6w0d3a);
   }
   .fx8zm76 {
-    --z1t4tb0: var(--_9h6w0d3g);
-    --z1t4tb1: var(--_9h6w0d3h);
-    --z1t4tb2: var(--_9h6w0d3j);
-    --z1t4tb3: var(--_9h6w0d3k);
+    --_1x6fthg0: var(--_9h6w0d3g);
+    --_1x6fthg1: var(--_9h6w0d3h);
+    --_1x6fthg2: var(--_9h6w0d3j);
+    --_1x6fthg3: var(--_9h6w0d3k);
   }
   .fx8zm78 {
-    --z1t4tb0: var(--_9h6w0d3q);
-    --z1t4tb1: var(--_9h6w0d3r);
-    --z1t4tb2: var(--_9h6w0d3t);
-    --z1t4tb3: var(--_9h6w0d3u);
+    --_1x6fthg0: var(--_9h6w0d3q);
+    --_1x6fthg1: var(--_9h6w0d3r);
+    --_1x6fthg2: var(--_9h6w0d3t);
+    --_1x6fthg3: var(--_9h6w0d3u);
   }
   .fx8zm7a {
-    --z1t4tb0: var(--_9h6w0d40);
-    --z1t4tb1: var(--_9h6w0d41);
-    --z1t4tb2: var(--_9h6w0d43);
-    --z1t4tb3: var(--_9h6w0d44);
+    --_1x6fthg0: var(--_9h6w0d40);
+    --_1x6fthg1: var(--_9h6w0d41);
+    --_1x6fthg2: var(--_9h6w0d43);
+    --_1x6fthg3: var(--_9h6w0d44);
   }
   .fx8zm7c {
     font-size: var(--_9h6w0d36);
@@ -2274,28 +2274,28 @@ html.r2i18210 .fx8zm71l {
     line-height: var(--_9h6w0d41);
   }
   .fx8zm7i {
-    --z1t4tb0: var(--_9h6w0d4d);
-    --z1t4tb1: var(--_9h6w0d4e);
-    --z1t4tb2: var(--_9h6w0d4g);
-    --z1t4tb3: var(--_9h6w0d4h);
+    --_1x6fthg0: var(--_9h6w0d4d);
+    --_1x6fthg1: var(--_9h6w0d4e);
+    --_1x6fthg2: var(--_9h6w0d4g);
+    --_1x6fthg3: var(--_9h6w0d4h);
   }
   .fx8zm7k {
-    --z1t4tb0: var(--_9h6w0d4n);
-    --z1t4tb1: var(--_9h6w0d4o);
-    --z1t4tb2: var(--_9h6w0d4q);
-    --z1t4tb3: var(--_9h6w0d4r);
+    --_1x6fthg0: var(--_9h6w0d4n);
+    --_1x6fthg1: var(--_9h6w0d4o);
+    --_1x6fthg2: var(--_9h6w0d4q);
+    --_1x6fthg3: var(--_9h6w0d4r);
   }
   .fx8zm7m {
-    --z1t4tb0: var(--_9h6w0d4x);
-    --z1t4tb1: var(--_9h6w0d4y);
-    --z1t4tb2: var(--_9h6w0d50);
-    --z1t4tb3: var(--_9h6w0d51);
+    --_1x6fthg0: var(--_9h6w0d4x);
+    --_1x6fthg1: var(--_9h6w0d4y);
+    --_1x6fthg2: var(--_9h6w0d50);
+    --_1x6fthg3: var(--_9h6w0d51);
   }
   .fx8zm7o {
-    --z1t4tb0: var(--_9h6w0d57);
-    --z1t4tb1: var(--_9h6w0d58);
-    --z1t4tb2: var(--_9h6w0d5a);
-    --z1t4tb3: var(--_9h6w0d5b);
+    --_1x6fthg0: var(--_9h6w0d57);
+    --_1x6fthg1: var(--_9h6w0d58);
+    --_1x6fthg2: var(--_9h6w0d5a);
+    --_1x6fthg3: var(--_9h6w0d5b);
   }
   .fx8zm71w {
     padding-top: calc((var(--_9h6w0d9) - var(--_9h6w0d37)) / 2);
@@ -2846,7 +2846,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
              html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="ylnqo70 fx8zm710 fx8zm713">
-         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">
+         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">
            Hello
            jobStreet
            <span class="_19azws30 r2i18255">
@@ -2959,7 +2959,7 @@ exports[`braid-design-system > bundler vite > build > should return built jobStr
                      class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0"
                      for="id_1"
                    >
-                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">
+                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -3028,7 +3028,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
              html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="ylnqo70 fx8zm710 fx8zm713">
-         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">
+         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">
            Hello
            seekAnz
            <span class="_19azws30 r2i18255">
@@ -3141,7 +3141,7 @@ exports[`braid-design-system > bundler vite > build > should return built seekAn
                      class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0"
                      for="id_1"
                    >
-                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 z1t4tb4">
+                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm79 fx8zm78 _1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -3177,7 +3177,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5103 @@
+@@ -1,198 +1,5093 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -5323,25 +5323,20 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__z1t4tb4 {
-+  font-size: var(--fontSize__z1t4tb0);
-+  line-height: var(--lineHeight__z1t4tb1);
++      .capsize_capsizeStyle__1x6fthg4 {
++  font-size: var(--fontSize__1x6fthg0);
++  line-height: var(--lineHeight__1x6fthg1);
 +}
-+.capsize_capsizeStyle__z1t4tb4::before {
++.capsize_capsizeStyle__1x6fthg4::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__z1t4tb2);
++  margin-bottom: var(--capHeightTrim__1x6fthg2);
 +  display: table;
 +}
-+.capsize_capsizeStyle__z1t4tb4::after {
++.capsize_capsizeStyle__1x6fthg4::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__z1t4tb3);
++  margin-top: var(--baselineTrim__1x6fthg3);
 +  display: table;
 +}
 +    </style>
@@ -5362,28 +5357,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__9h6w0d47);
 +}
 +.typography_textSize_xsmall__fx8zm74 {
-+  --fontSize__z1t4tb0: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
-+  --lineHeight__z1t4tb1: var(--textSize-xsmall-mobile-lineHeight__9h6w0d32);
-+  --capHeightTrim__z1t4tb2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__9h6w0d34);
-+  --baselineTrim__z1t4tb3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__9h6w0d35);
++  --fontSize__1x6fthg0: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
++  --lineHeight__1x6fthg1: var(--textSize-xsmall-mobile-lineHeight__9h6w0d32);
++  --capHeightTrim__1x6fthg2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__9h6w0d34);
++  --baselineTrim__1x6fthg3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__9h6w0d35);
 +}
 +.typography_textSize_small__fx8zm76 {
-+  --fontSize__z1t4tb0: var(--textSize-small-mobile-fontSize__9h6w0d3b);
-+  --lineHeight__z1t4tb1: var(--textSize-small-mobile-lineHeight__9h6w0d3c);
-+  --capHeightTrim__z1t4tb2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__9h6w0d3e);
-+  --baselineTrim__z1t4tb3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__9h6w0d3f);
++  --fontSize__1x6fthg0: var(--textSize-small-mobile-fontSize__9h6w0d3b);
++  --lineHeight__1x6fthg1: var(--textSize-small-mobile-lineHeight__9h6w0d3c);
++  --capHeightTrim__1x6fthg2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__9h6w0d3e);
++  --baselineTrim__1x6fthg3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__9h6w0d3f);
 +}
 +.typography_textSize_standard__fx8zm78 {
-+  --fontSize__z1t4tb0: var(--textSize-standard-mobile-fontSize__9h6w0d3l);
-+  --lineHeight__z1t4tb1: var(--textSize-standard-mobile-lineHeight__9h6w0d3m);
-+  --capHeightTrim__z1t4tb2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__9h6w0d3o);
-+  --baselineTrim__z1t4tb3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__9h6w0d3p);
++  --fontSize__1x6fthg0: var(--textSize-standard-mobile-fontSize__9h6w0d3l);
++  --lineHeight__1x6fthg1: var(--textSize-standard-mobile-lineHeight__9h6w0d3m);
++  --capHeightTrim__1x6fthg2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__9h6w0d3o);
++  --baselineTrim__1x6fthg3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__9h6w0d3p);
 +}
 +.typography_textSize_large__fx8zm7a {
-+  --fontSize__z1t4tb0: var(--textSize-large-mobile-fontSize__9h6w0d3v);
-+  --lineHeight__z1t4tb1: var(--textSize-large-mobile-lineHeight__9h6w0d3w);
-+  --capHeightTrim__z1t4tb2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__9h6w0d3y);
-+  --baselineTrim__z1t4tb3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__9h6w0d3z);
++  --fontSize__1x6fthg0: var(--textSize-large-mobile-fontSize__9h6w0d3v);
++  --lineHeight__1x6fthg1: var(--textSize-large-mobile-lineHeight__9h6w0d3w);
++  --capHeightTrim__1x6fthg2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__9h6w0d3y);
++  --baselineTrim__1x6fthg3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__9h6w0d3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__fx8zm7c {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
@@ -5408,28 +5403,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__9h6w0d5d);
 +}
 +.typography_heading_1__fx8zm7i {
-+  --fontSize__z1t4tb0: var(--headingLevel-1-mobile-fontSize__9h6w0d48);
-+  --lineHeight__z1t4tb1: var(--headingLevel-1-mobile-lineHeight__9h6w0d49);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__9h6w0d4b);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__9h6w0d4c);
++  --fontSize__1x6fthg0: var(--headingLevel-1-mobile-fontSize__9h6w0d48);
++  --lineHeight__1x6fthg1: var(--headingLevel-1-mobile-lineHeight__9h6w0d49);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__9h6w0d4b);
++  --baselineTrim__1x6fthg3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__9h6w0d4c);
 +}
 +.typography_heading_2__fx8zm7k {
-+  --fontSize__z1t4tb0: var(--headingLevel-2-mobile-fontSize__9h6w0d4i);
-+  --lineHeight__z1t4tb1: var(--headingLevel-2-mobile-lineHeight__9h6w0d4j);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__9h6w0d4l);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__9h6w0d4m);
++  --fontSize__1x6fthg0: var(--headingLevel-2-mobile-fontSize__9h6w0d4i);
++  --lineHeight__1x6fthg1: var(--headingLevel-2-mobile-lineHeight__9h6w0d4j);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__9h6w0d4l);
++  --baselineTrim__1x6fthg3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__9h6w0d4m);
 +}
 +.typography_heading_3__fx8zm7m {
-+  --fontSize__z1t4tb0: var(--headingLevel-3-mobile-fontSize__9h6w0d4s);
-+  --lineHeight__z1t4tb1: var(--headingLevel-3-mobile-lineHeight__9h6w0d4t);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__9h6w0d4v);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__9h6w0d4w);
++  --fontSize__1x6fthg0: var(--headingLevel-3-mobile-fontSize__9h6w0d4s);
++  --lineHeight__1x6fthg1: var(--headingLevel-3-mobile-lineHeight__9h6w0d4t);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__9h6w0d4v);
++  --baselineTrim__1x6fthg3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__9h6w0d4w);
 +}
 +.typography_heading_4__fx8zm7o {
-+  --fontSize__z1t4tb0: var(--headingLevel-4-mobile-fontSize__9h6w0d52);
-+  --lineHeight__z1t4tb1: var(--headingLevel-4-mobile-lineHeight__9h6w0d53);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__9h6w0d55);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__9h6w0d56);
++  --fontSize__1x6fthg0: var(--headingLevel-4-mobile-fontSize__9h6w0d52);
++  --lineHeight__1x6fthg1: var(--headingLevel-4-mobile-lineHeight__9h6w0d53);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__9h6w0d55);
++  --baselineTrim__1x6fthg3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__9h6w0d56);
 +}
 +html:not(.sprinkles_darkMode__r2i18210) .typography_lightModeTone_light__fx8zm710 {
 +  --critical__fx8zm7q: var(--foregroundColor-critical__9h6w0d19);
@@ -5581,28 +5576,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__fx8zm74 {
-+    --fontSize__z1t4tb0: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
-+    --lineHeight__z1t4tb1: var(--textSize-xsmall-tablet-lineHeight__9h6w0d37);
-+    --capHeightTrim__z1t4tb2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__9h6w0d39);
-+    --baselineTrim__z1t4tb3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__9h6w0d3a);
++    --fontSize__1x6fthg0: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
++    --lineHeight__1x6fthg1: var(--textSize-xsmall-tablet-lineHeight__9h6w0d37);
++    --capHeightTrim__1x6fthg2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__9h6w0d39);
++    --baselineTrim__1x6fthg3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__9h6w0d3a);
 +  }
 +  .typography_textSize_small__fx8zm76 {
-+    --fontSize__z1t4tb0: var(--textSize-small-tablet-fontSize__9h6w0d3g);
-+    --lineHeight__z1t4tb1: var(--textSize-small-tablet-lineHeight__9h6w0d3h);
-+    --capHeightTrim__z1t4tb2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__9h6w0d3j);
-+    --baselineTrim__z1t4tb3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__9h6w0d3k);
++    --fontSize__1x6fthg0: var(--textSize-small-tablet-fontSize__9h6w0d3g);
++    --lineHeight__1x6fthg1: var(--textSize-small-tablet-lineHeight__9h6w0d3h);
++    --capHeightTrim__1x6fthg2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__9h6w0d3j);
++    --baselineTrim__1x6fthg3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__9h6w0d3k);
 +  }
 +  .typography_textSize_standard__fx8zm78 {
-+    --fontSize__z1t4tb0: var(--textSize-standard-tablet-fontSize__9h6w0d3q);
-+    --lineHeight__z1t4tb1: var(--textSize-standard-tablet-lineHeight__9h6w0d3r);
-+    --capHeightTrim__z1t4tb2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__9h6w0d3t);
-+    --baselineTrim__z1t4tb3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__9h6w0d3u);
++    --fontSize__1x6fthg0: var(--textSize-standard-tablet-fontSize__9h6w0d3q);
++    --lineHeight__1x6fthg1: var(--textSize-standard-tablet-lineHeight__9h6w0d3r);
++    --capHeightTrim__1x6fthg2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__9h6w0d3t);
++    --baselineTrim__1x6fthg3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__9h6w0d3u);
 +  }
 +  .typography_textSize_large__fx8zm7a {
-+    --fontSize__z1t4tb0: var(--textSize-large-tablet-fontSize__9h6w0d40);
-+    --lineHeight__z1t4tb1: var(--textSize-large-tablet-lineHeight__9h6w0d41);
-+    --capHeightTrim__z1t4tb2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__9h6w0d43);
-+    --baselineTrim__z1t4tb3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__9h6w0d44);
++    --fontSize__1x6fthg0: var(--textSize-large-tablet-fontSize__9h6w0d40);
++    --lineHeight__1x6fthg1: var(--textSize-large-tablet-lineHeight__9h6w0d41);
++    --capHeightTrim__1x6fthg2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__9h6w0d43);
++    --baselineTrim__1x6fthg3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__9h6w0d44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__fx8zm7c {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
@@ -5621,28 +5616,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__9h6w0d41);
 +  }
 +  .typography_heading_1__fx8zm7i {
-+    --fontSize__z1t4tb0: var(--headingLevel-1-tablet-fontSize__9h6w0d4d);
-+    --lineHeight__z1t4tb1: var(--headingLevel-1-tablet-lineHeight__9h6w0d4e);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__9h6w0d4g);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__9h6w0d4h);
++    --fontSize__1x6fthg0: var(--headingLevel-1-tablet-fontSize__9h6w0d4d);
++    --lineHeight__1x6fthg1: var(--headingLevel-1-tablet-lineHeight__9h6w0d4e);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__9h6w0d4g);
++    --baselineTrim__1x6fthg3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__9h6w0d4h);
 +  }
 +  .typography_heading_2__fx8zm7k {
-+    --fontSize__z1t4tb0: var(--headingLevel-2-tablet-fontSize__9h6w0d4n);
-+    --lineHeight__z1t4tb1: var(--headingLevel-2-tablet-lineHeight__9h6w0d4o);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__9h6w0d4q);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__9h6w0d4r);
++    --fontSize__1x6fthg0: var(--headingLevel-2-tablet-fontSize__9h6w0d4n);
++    --lineHeight__1x6fthg1: var(--headingLevel-2-tablet-lineHeight__9h6w0d4o);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__9h6w0d4q);
++    --baselineTrim__1x6fthg3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__9h6w0d4r);
 +  }
 +  .typography_heading_3__fx8zm7m {
-+    --fontSize__z1t4tb0: var(--headingLevel-3-tablet-fontSize__9h6w0d4x);
-+    --lineHeight__z1t4tb1: var(--headingLevel-3-tablet-lineHeight__9h6w0d4y);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__9h6w0d50);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__9h6w0d51);
++    --fontSize__1x6fthg0: var(--headingLevel-3-tablet-fontSize__9h6w0d4x);
++    --lineHeight__1x6fthg1: var(--headingLevel-3-tablet-lineHeight__9h6w0d4y);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__9h6w0d50);
++    --baselineTrim__1x6fthg3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__9h6w0d51);
 +  }
 +  .typography_heading_4__fx8zm7o {
-+    --fontSize__z1t4tb0: var(--headingLevel-4-tablet-fontSize__9h6w0d57);
-+    --lineHeight__z1t4tb1: var(--headingLevel-4-tablet-lineHeight__9h6w0d58);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__9h6w0d5a);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__9h6w0d5b);
++    --fontSize__1x6fthg0: var(--headingLevel-4-tablet-fontSize__9h6w0d57);
++    --lineHeight__1x6fthg1: var(--headingLevel-4-tablet-lineHeight__9h6w0d58);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__9h6w0d5a);
++    --baselineTrim__1x6fthg3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__9h6w0d5b);
 +  }
 +  .typography_touchableText_xsmall__fx8zm71w {
 +    padding-top: calc((var(--touchableSize__9h6w0d9) - var(--textSize-xsmall-tablet-lineHeight__9h6w0d37)) / 2);
@@ -8119,11 +8114,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/vars.css.ts.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/App.css.ts.vanilla.css"
 +    >
 +      .App_vanillaBox__inn18b0 {
@@ -8142,7 +8132,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__r2i18210,html.sprinkles_darkMode__r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__ylnqo70 typography_lightModeTone_light__fx8zm710 typography_darkModeTone_dark__fx8zm713">
-         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
            Hello
            jobStreet
            <span class="reset_base__19azws30 sprinkles_display_inlineBlock_mobile__r2i18255">
@@ -8255,7 +8245,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__19azws30 sprinkles_userSelect_none__r2i1824 sprinkles_display_block_mobile__r2i1824x sprinkles_cursor_pointer__r2i182h virtualTouchable_virtualTouchable__9kzhon0"
                      for="id_1"
                    >
-                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -8291,7 +8281,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,198 +1,5103 @@
+@@ -1,198 +1,5093 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -10437,25 +10427,20 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/node_modules/braid-design-system/dist/lib/themes/vars.css.mjs.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/node_modules/@capsizecss/vanilla-extract/dist/capsize.css.mjs.vanilla.css"
 +    >
-+      .capsize_capsizeStyle__z1t4tb4 {
-+  font-size: var(--fontSize__z1t4tb0);
-+  line-height: var(--lineHeight__z1t4tb1);
++      .capsize_capsizeStyle__1x6fthg4 {
++  font-size: var(--fontSize__1x6fthg0);
++  line-height: var(--lineHeight__1x6fthg1);
 +}
-+.capsize_capsizeStyle__z1t4tb4::before {
++.capsize_capsizeStyle__1x6fthg4::before {
 +  content: '';
-+  margin-bottom: var(--capHeightTrim__z1t4tb2);
++  margin-bottom: var(--capHeightTrim__1x6fthg2);
 +  display: table;
 +}
-+.capsize_capsizeStyle__z1t4tb4::after {
++.capsize_capsizeStyle__1x6fthg4::after {
 +  content: '';
-+  margin-top: var(--baselineTrim__z1t4tb3);
++  margin-top: var(--baselineTrim__1x6fthg3);
 +  display: table;
 +}
 +    </style>
@@ -10476,28 +10461,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--textWeight-strong__9h6w0d47);
 +}
 +.typography_textSize_xsmall__fx8zm74 {
-+  --fontSize__z1t4tb0: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
-+  --lineHeight__z1t4tb1: var(--textSize-xsmall-mobile-lineHeight__9h6w0d32);
-+  --capHeightTrim__z1t4tb2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__9h6w0d34);
-+  --baselineTrim__z1t4tb3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__9h6w0d35);
++  --fontSize__1x6fthg0: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
++  --lineHeight__1x6fthg1: var(--textSize-xsmall-mobile-lineHeight__9h6w0d32);
++  --capHeightTrim__1x6fthg2: var(--textSize-xsmall-mobile-capsizeTrims-capHeightTrim__9h6w0d34);
++  --baselineTrim__1x6fthg3: var(--textSize-xsmall-mobile-capsizeTrims-baselineTrim__9h6w0d35);
 +}
 +.typography_textSize_small__fx8zm76 {
-+  --fontSize__z1t4tb0: var(--textSize-small-mobile-fontSize__9h6w0d3b);
-+  --lineHeight__z1t4tb1: var(--textSize-small-mobile-lineHeight__9h6w0d3c);
-+  --capHeightTrim__z1t4tb2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__9h6w0d3e);
-+  --baselineTrim__z1t4tb3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__9h6w0d3f);
++  --fontSize__1x6fthg0: var(--textSize-small-mobile-fontSize__9h6w0d3b);
++  --lineHeight__1x6fthg1: var(--textSize-small-mobile-lineHeight__9h6w0d3c);
++  --capHeightTrim__1x6fthg2: var(--textSize-small-mobile-capsizeTrims-capHeightTrim__9h6w0d3e);
++  --baselineTrim__1x6fthg3: var(--textSize-small-mobile-capsizeTrims-baselineTrim__9h6w0d3f);
 +}
 +.typography_textSize_standard__fx8zm78 {
-+  --fontSize__z1t4tb0: var(--textSize-standard-mobile-fontSize__9h6w0d3l);
-+  --lineHeight__z1t4tb1: var(--textSize-standard-mobile-lineHeight__9h6w0d3m);
-+  --capHeightTrim__z1t4tb2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__9h6w0d3o);
-+  --baselineTrim__z1t4tb3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__9h6w0d3p);
++  --fontSize__1x6fthg0: var(--textSize-standard-mobile-fontSize__9h6w0d3l);
++  --lineHeight__1x6fthg1: var(--textSize-standard-mobile-lineHeight__9h6w0d3m);
++  --capHeightTrim__1x6fthg2: var(--textSize-standard-mobile-capsizeTrims-capHeightTrim__9h6w0d3o);
++  --baselineTrim__1x6fthg3: var(--textSize-standard-mobile-capsizeTrims-baselineTrim__9h6w0d3p);
 +}
 +.typography_textSize_large__fx8zm7a {
-+  --fontSize__z1t4tb0: var(--textSize-large-mobile-fontSize__9h6w0d3v);
-+  --lineHeight__z1t4tb1: var(--textSize-large-mobile-lineHeight__9h6w0d3w);
-+  --capHeightTrim__z1t4tb2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__9h6w0d3y);
-+  --baselineTrim__z1t4tb3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__9h6w0d3z);
++  --fontSize__1x6fthg0: var(--textSize-large-mobile-fontSize__9h6w0d3v);
++  --lineHeight__1x6fthg1: var(--textSize-large-mobile-lineHeight__9h6w0d3w);
++  --capHeightTrim__1x6fthg2: var(--textSize-large-mobile-capsizeTrims-capHeightTrim__9h6w0d3y);
++  --baselineTrim__1x6fthg3: var(--textSize-large-mobile-capsizeTrims-baselineTrim__9h6w0d3z);
 +}
 +.typography_textSizeUntrimmed_xsmall__fx8zm7c {
 +  font-size: var(--textSize-xsmall-mobile-fontSize__9h6w0d31);
@@ -10522,28 +10507,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +  font-weight: var(--headingWeight-regular__9h6w0d5d);
 +}
 +.typography_heading_1__fx8zm7i {
-+  --fontSize__z1t4tb0: var(--headingLevel-1-mobile-fontSize__9h6w0d48);
-+  --lineHeight__z1t4tb1: var(--headingLevel-1-mobile-lineHeight__9h6w0d49);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__9h6w0d4b);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__9h6w0d4c);
++  --fontSize__1x6fthg0: var(--headingLevel-1-mobile-fontSize__9h6w0d48);
++  --lineHeight__1x6fthg1: var(--headingLevel-1-mobile-lineHeight__9h6w0d49);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-1-mobile-capsizeTrims-capHeightTrim__9h6w0d4b);
++  --baselineTrim__1x6fthg3: var(--headingLevel-1-mobile-capsizeTrims-baselineTrim__9h6w0d4c);
 +}
 +.typography_heading_2__fx8zm7k {
-+  --fontSize__z1t4tb0: var(--headingLevel-2-mobile-fontSize__9h6w0d4i);
-+  --lineHeight__z1t4tb1: var(--headingLevel-2-mobile-lineHeight__9h6w0d4j);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__9h6w0d4l);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__9h6w0d4m);
++  --fontSize__1x6fthg0: var(--headingLevel-2-mobile-fontSize__9h6w0d4i);
++  --lineHeight__1x6fthg1: var(--headingLevel-2-mobile-lineHeight__9h6w0d4j);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-2-mobile-capsizeTrims-capHeightTrim__9h6w0d4l);
++  --baselineTrim__1x6fthg3: var(--headingLevel-2-mobile-capsizeTrims-baselineTrim__9h6w0d4m);
 +}
 +.typography_heading_3__fx8zm7m {
-+  --fontSize__z1t4tb0: var(--headingLevel-3-mobile-fontSize__9h6w0d4s);
-+  --lineHeight__z1t4tb1: var(--headingLevel-3-mobile-lineHeight__9h6w0d4t);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__9h6w0d4v);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__9h6w0d4w);
++  --fontSize__1x6fthg0: var(--headingLevel-3-mobile-fontSize__9h6w0d4s);
++  --lineHeight__1x6fthg1: var(--headingLevel-3-mobile-lineHeight__9h6w0d4t);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-3-mobile-capsizeTrims-capHeightTrim__9h6w0d4v);
++  --baselineTrim__1x6fthg3: var(--headingLevel-3-mobile-capsizeTrims-baselineTrim__9h6w0d4w);
 +}
 +.typography_heading_4__fx8zm7o {
-+  --fontSize__z1t4tb0: var(--headingLevel-4-mobile-fontSize__9h6w0d52);
-+  --lineHeight__z1t4tb1: var(--headingLevel-4-mobile-lineHeight__9h6w0d53);
-+  --capHeightTrim__z1t4tb2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__9h6w0d55);
-+  --baselineTrim__z1t4tb3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__9h6w0d56);
++  --fontSize__1x6fthg0: var(--headingLevel-4-mobile-fontSize__9h6w0d52);
++  --lineHeight__1x6fthg1: var(--headingLevel-4-mobile-lineHeight__9h6w0d53);
++  --capHeightTrim__1x6fthg2: var(--headingLevel-4-mobile-capsizeTrims-capHeightTrim__9h6w0d55);
++  --baselineTrim__1x6fthg3: var(--headingLevel-4-mobile-capsizeTrims-baselineTrim__9h6w0d56);
 +}
 +html:not(.sprinkles_darkMode__r2i18210) .typography_lightModeTone_light__fx8zm710 {
 +  --critical__fx8zm7q: var(--foregroundColor-critical__9h6w0d19);
@@ -10695,28 +10680,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +}
 +@media screen and (min-width: 740px) {
 +  .typography_textSize_xsmall__fx8zm74 {
-+    --fontSize__z1t4tb0: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
-+    --lineHeight__z1t4tb1: var(--textSize-xsmall-tablet-lineHeight__9h6w0d37);
-+    --capHeightTrim__z1t4tb2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__9h6w0d39);
-+    --baselineTrim__z1t4tb3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__9h6w0d3a);
++    --fontSize__1x6fthg0: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
++    --lineHeight__1x6fthg1: var(--textSize-xsmall-tablet-lineHeight__9h6w0d37);
++    --capHeightTrim__1x6fthg2: var(--textSize-xsmall-tablet-capsizeTrims-capHeightTrim__9h6w0d39);
++    --baselineTrim__1x6fthg3: var(--textSize-xsmall-tablet-capsizeTrims-baselineTrim__9h6w0d3a);
 +  }
 +  .typography_textSize_small__fx8zm76 {
-+    --fontSize__z1t4tb0: var(--textSize-small-tablet-fontSize__9h6w0d3g);
-+    --lineHeight__z1t4tb1: var(--textSize-small-tablet-lineHeight__9h6w0d3h);
-+    --capHeightTrim__z1t4tb2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__9h6w0d3j);
-+    --baselineTrim__z1t4tb3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__9h6w0d3k);
++    --fontSize__1x6fthg0: var(--textSize-small-tablet-fontSize__9h6w0d3g);
++    --lineHeight__1x6fthg1: var(--textSize-small-tablet-lineHeight__9h6w0d3h);
++    --capHeightTrim__1x6fthg2: var(--textSize-small-tablet-capsizeTrims-capHeightTrim__9h6w0d3j);
++    --baselineTrim__1x6fthg3: var(--textSize-small-tablet-capsizeTrims-baselineTrim__9h6w0d3k);
 +  }
 +  .typography_textSize_standard__fx8zm78 {
-+    --fontSize__z1t4tb0: var(--textSize-standard-tablet-fontSize__9h6w0d3q);
-+    --lineHeight__z1t4tb1: var(--textSize-standard-tablet-lineHeight__9h6w0d3r);
-+    --capHeightTrim__z1t4tb2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__9h6w0d3t);
-+    --baselineTrim__z1t4tb3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__9h6w0d3u);
++    --fontSize__1x6fthg0: var(--textSize-standard-tablet-fontSize__9h6w0d3q);
++    --lineHeight__1x6fthg1: var(--textSize-standard-tablet-lineHeight__9h6w0d3r);
++    --capHeightTrim__1x6fthg2: var(--textSize-standard-tablet-capsizeTrims-capHeightTrim__9h6w0d3t);
++    --baselineTrim__1x6fthg3: var(--textSize-standard-tablet-capsizeTrims-baselineTrim__9h6w0d3u);
 +  }
 +  .typography_textSize_large__fx8zm7a {
-+    --fontSize__z1t4tb0: var(--textSize-large-tablet-fontSize__9h6w0d40);
-+    --lineHeight__z1t4tb1: var(--textSize-large-tablet-lineHeight__9h6w0d41);
-+    --capHeightTrim__z1t4tb2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__9h6w0d43);
-+    --baselineTrim__z1t4tb3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__9h6w0d44);
++    --fontSize__1x6fthg0: var(--textSize-large-tablet-fontSize__9h6w0d40);
++    --lineHeight__1x6fthg1: var(--textSize-large-tablet-lineHeight__9h6w0d41);
++    --capHeightTrim__1x6fthg2: var(--textSize-large-tablet-capsizeTrims-capHeightTrim__9h6w0d43);
++    --baselineTrim__1x6fthg3: var(--textSize-large-tablet-capsizeTrims-baselineTrim__9h6w0d44);
 +  }
 +  .typography_textSizeUntrimmed_xsmall__fx8zm7c {
 +    font-size: var(--textSize-xsmall-tablet-fontSize__9h6w0d36);
@@ -10735,28 +10720,28 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    line-height: var(--textSize-large-tablet-lineHeight__9h6w0d41);
 +  }
 +  .typography_heading_1__fx8zm7i {
-+    --fontSize__z1t4tb0: var(--headingLevel-1-tablet-fontSize__9h6w0d4d);
-+    --lineHeight__z1t4tb1: var(--headingLevel-1-tablet-lineHeight__9h6w0d4e);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__9h6w0d4g);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__9h6w0d4h);
++    --fontSize__1x6fthg0: var(--headingLevel-1-tablet-fontSize__9h6w0d4d);
++    --lineHeight__1x6fthg1: var(--headingLevel-1-tablet-lineHeight__9h6w0d4e);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-1-tablet-capsizeTrims-capHeightTrim__9h6w0d4g);
++    --baselineTrim__1x6fthg3: var(--headingLevel-1-tablet-capsizeTrims-baselineTrim__9h6w0d4h);
 +  }
 +  .typography_heading_2__fx8zm7k {
-+    --fontSize__z1t4tb0: var(--headingLevel-2-tablet-fontSize__9h6w0d4n);
-+    --lineHeight__z1t4tb1: var(--headingLevel-2-tablet-lineHeight__9h6w0d4o);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__9h6w0d4q);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__9h6w0d4r);
++    --fontSize__1x6fthg0: var(--headingLevel-2-tablet-fontSize__9h6w0d4n);
++    --lineHeight__1x6fthg1: var(--headingLevel-2-tablet-lineHeight__9h6w0d4o);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-2-tablet-capsizeTrims-capHeightTrim__9h6w0d4q);
++    --baselineTrim__1x6fthg3: var(--headingLevel-2-tablet-capsizeTrims-baselineTrim__9h6w0d4r);
 +  }
 +  .typography_heading_3__fx8zm7m {
-+    --fontSize__z1t4tb0: var(--headingLevel-3-tablet-fontSize__9h6w0d4x);
-+    --lineHeight__z1t4tb1: var(--headingLevel-3-tablet-lineHeight__9h6w0d4y);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__9h6w0d50);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__9h6w0d51);
++    --fontSize__1x6fthg0: var(--headingLevel-3-tablet-fontSize__9h6w0d4x);
++    --lineHeight__1x6fthg1: var(--headingLevel-3-tablet-lineHeight__9h6w0d4y);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-3-tablet-capsizeTrims-capHeightTrim__9h6w0d50);
++    --baselineTrim__1x6fthg3: var(--headingLevel-3-tablet-capsizeTrims-baselineTrim__9h6w0d51);
 +  }
 +  .typography_heading_4__fx8zm7o {
-+    --fontSize__z1t4tb0: var(--headingLevel-4-tablet-fontSize__9h6w0d57);
-+    --lineHeight__z1t4tb1: var(--headingLevel-4-tablet-lineHeight__9h6w0d58);
-+    --capHeightTrim__z1t4tb2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__9h6w0d5a);
-+    --baselineTrim__z1t4tb3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__9h6w0d5b);
++    --fontSize__1x6fthg0: var(--headingLevel-4-tablet-fontSize__9h6w0d57);
++    --lineHeight__1x6fthg1: var(--headingLevel-4-tablet-lineHeight__9h6w0d58);
++    --capHeightTrim__1x6fthg2: var(--headingLevel-4-tablet-capsizeTrims-capHeightTrim__9h6w0d5a);
++    --baselineTrim__1x6fthg3: var(--headingLevel-4-tablet-capsizeTrims-baselineTrim__9h6w0d5b);
 +  }
 +  .typography_touchableText_xsmall__fx8zm71w {
 +    padding-top: calc((var(--touchableSize__9h6w0d9) - var(--textSize-xsmall-tablet-lineHeight__9h6w0d37)) / 2);
@@ -13233,11 +13218,6 @@ exports[`braid-design-system > bundler vite > start > should return development 
 +    </style>
 +    <style
 +      type="text/css"
-+      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/vars.css.ts.vanilla.css"
-+    >
-+    </style>
-+    <style
-+      type="text/css"
 +      data-vite-dev-id="{cwd}/fixtures/braid-design-system/src/App.css.ts.vanilla.css"
 +    >
 +      .App_vanillaBox__inn18b0 {
@@ -13256,7 +13236,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
              html.sprinkles_darkMode__r2i18210,html.sprinkles_darkMode__r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__ylnqo70 typography_lightModeTone_light__fx8zm710 typography_darkModeTone_dark__fx8zm713">
-         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
            Hello
            seekAnz
            <span class="reset_base__19azws30 sprinkles_display_inlineBlock_mobile__r2i18255">
@@ -13369,7 +13349,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
                      class="reset_base__19azws30 sprinkles_userSelect_none__r2i1824 sprinkles_display_block_mobile__r2i1824x sprinkles_cursor_pointer__r2i182h virtualTouchable_virtualTouchable__9kzhon0"
                      for="id_1"
                    >
-                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSizeTrimmed_standard__fx8zm79 typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -13403,7 +13383,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 
 exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
 {
-  "2-f89c63c35e9a744838a1.css": ._19azws30 {
+  "2-466afdb3eeda6ab3ca44.css": ._19azws30 {
   border: 0;
   box-sizing: border-box;
   font-size: 100%;
@@ -15352,19 +15332,19 @@ html:not(.r2i18210) .r2i1824r {
     text-align: right;
   }
 }
-.z1t4tb4 {
-  font-size: var(--z1t4tb0);
-  line-height: var(--z1t4tb1);
+._1x6fthg4 {
+  font-size: var(--_1x6fthg0);
+  line-height: var(--_1x6fthg1);
 }
-.z1t4tb4:before {
+._1x6fthg4:before {
   content: "";
   display: table;
-  margin-bottom: var(--z1t4tb2);
+  margin-bottom: var(--_1x6fthg2);
 }
-.z1t4tb4:after {
+._1x6fthg4:after {
   content: "";
   display: table;
-  margin-top: var(--z1t4tb3);
+  margin-top: var(--_1x6fthg3);
 }
 .fx8zm70 {
   font-family: var(--_9h6w0d2v);
@@ -15379,28 +15359,28 @@ html:not(.r2i18210) .r2i1824r {
   font-weight: var(--_9h6w0d47);
 }
 .fx8zm74 {
-  --z1t4tb0: var(--_9h6w0d31);
-  --z1t4tb1: var(--_9h6w0d32);
-  --z1t4tb2: var(--_9h6w0d34);
-  --z1t4tb3: var(--_9h6w0d35);
+  --_1x6fthg0: var(--_9h6w0d31);
+  --_1x6fthg1: var(--_9h6w0d32);
+  --_1x6fthg2: var(--_9h6w0d34);
+  --_1x6fthg3: var(--_9h6w0d35);
 }
 .fx8zm76 {
-  --z1t4tb0: var(--_9h6w0d3b);
-  --z1t4tb1: var(--_9h6w0d3c);
-  --z1t4tb2: var(--_9h6w0d3e);
-  --z1t4tb3: var(--_9h6w0d3f);
+  --_1x6fthg0: var(--_9h6w0d3b);
+  --_1x6fthg1: var(--_9h6w0d3c);
+  --_1x6fthg2: var(--_9h6w0d3e);
+  --_1x6fthg3: var(--_9h6w0d3f);
 }
 .fx8zm78 {
-  --z1t4tb0: var(--_9h6w0d3l);
-  --z1t4tb1: var(--_9h6w0d3m);
-  --z1t4tb2: var(--_9h6w0d3o);
-  --z1t4tb3: var(--_9h6w0d3p);
+  --_1x6fthg0: var(--_9h6w0d3l);
+  --_1x6fthg1: var(--_9h6w0d3m);
+  --_1x6fthg2: var(--_9h6w0d3o);
+  --_1x6fthg3: var(--_9h6w0d3p);
 }
 .fx8zm7a {
-  --z1t4tb0: var(--_9h6w0d3v);
-  --z1t4tb1: var(--_9h6w0d3w);
-  --z1t4tb2: var(--_9h6w0d3y);
-  --z1t4tb3: var(--_9h6w0d3z);
+  --_1x6fthg0: var(--_9h6w0d3v);
+  --_1x6fthg1: var(--_9h6w0d3w);
+  --_1x6fthg2: var(--_9h6w0d3y);
+  --_1x6fthg3: var(--_9h6w0d3z);
 }
 .fx8zm7c {
   font-size: var(--_9h6w0d31);
@@ -15425,28 +15405,28 @@ html:not(.r2i18210) .r2i1824r {
   font-weight: var(--_9h6w0d5d);
 }
 .fx8zm7i {
-  --z1t4tb0: var(--_9h6w0d48);
-  --z1t4tb1: var(--_9h6w0d49);
-  --z1t4tb2: var(--_9h6w0d4b);
-  --z1t4tb3: var(--_9h6w0d4c);
+  --_1x6fthg0: var(--_9h6w0d48);
+  --_1x6fthg1: var(--_9h6w0d49);
+  --_1x6fthg2: var(--_9h6w0d4b);
+  --_1x6fthg3: var(--_9h6w0d4c);
 }
 .fx8zm7k {
-  --z1t4tb0: var(--_9h6w0d4i);
-  --z1t4tb1: var(--_9h6w0d4j);
-  --z1t4tb2: var(--_9h6w0d4l);
-  --z1t4tb3: var(--_9h6w0d4m);
+  --_1x6fthg0: var(--_9h6w0d4i);
+  --_1x6fthg1: var(--_9h6w0d4j);
+  --_1x6fthg2: var(--_9h6w0d4l);
+  --_1x6fthg3: var(--_9h6w0d4m);
 }
 .fx8zm7m {
-  --z1t4tb0: var(--_9h6w0d4s);
-  --z1t4tb1: var(--_9h6w0d4t);
-  --z1t4tb2: var(--_9h6w0d4v);
-  --z1t4tb3: var(--_9h6w0d4w);
+  --_1x6fthg0: var(--_9h6w0d4s);
+  --_1x6fthg1: var(--_9h6w0d4t);
+  --_1x6fthg2: var(--_9h6w0d4v);
+  --_1x6fthg3: var(--_9h6w0d4w);
 }
 .fx8zm7o {
-  --z1t4tb0: var(--_9h6w0d52);
-  --z1t4tb1: var(--_9h6w0d53);
-  --z1t4tb2: var(--_9h6w0d55);
-  --z1t4tb3: var(--_9h6w0d56);
+  --_1x6fthg0: var(--_9h6w0d52);
+  --_1x6fthg1: var(--_9h6w0d53);
+  --_1x6fthg2: var(--_9h6w0d55);
+  --_1x6fthg3: var(--_9h6w0d56);
 }
 html:not(.r2i18210) .fx8zm710 {
   --fx8zm7q: var(--_9h6w0d19);
@@ -15582,28 +15562,28 @@ html.r2i18210 .fx8zm71l {
 }
 @media screen and (min-width: 740px) {
   .fx8zm74 {
-    --z1t4tb0: var(--_9h6w0d36);
-    --z1t4tb1: var(--_9h6w0d37);
-    --z1t4tb2: var(--_9h6w0d39);
-    --z1t4tb3: var(--_9h6w0d3a);
+    --_1x6fthg0: var(--_9h6w0d36);
+    --_1x6fthg1: var(--_9h6w0d37);
+    --_1x6fthg2: var(--_9h6w0d39);
+    --_1x6fthg3: var(--_9h6w0d3a);
   }
   .fx8zm76 {
-    --z1t4tb0: var(--_9h6w0d3g);
-    --z1t4tb1: var(--_9h6w0d3h);
-    --z1t4tb2: var(--_9h6w0d3j);
-    --z1t4tb3: var(--_9h6w0d3k);
+    --_1x6fthg0: var(--_9h6w0d3g);
+    --_1x6fthg1: var(--_9h6w0d3h);
+    --_1x6fthg2: var(--_9h6w0d3j);
+    --_1x6fthg3: var(--_9h6w0d3k);
   }
   .fx8zm78 {
-    --z1t4tb0: var(--_9h6w0d3q);
-    --z1t4tb1: var(--_9h6w0d3r);
-    --z1t4tb2: var(--_9h6w0d3t);
-    --z1t4tb3: var(--_9h6w0d3u);
+    --_1x6fthg0: var(--_9h6w0d3q);
+    --_1x6fthg1: var(--_9h6w0d3r);
+    --_1x6fthg2: var(--_9h6w0d3t);
+    --_1x6fthg3: var(--_9h6w0d3u);
   }
   .fx8zm7a {
-    --z1t4tb0: var(--_9h6w0d40);
-    --z1t4tb1: var(--_9h6w0d41);
-    --z1t4tb2: var(--_9h6w0d43);
-    --z1t4tb3: var(--_9h6w0d44);
+    --_1x6fthg0: var(--_9h6w0d40);
+    --_1x6fthg1: var(--_9h6w0d41);
+    --_1x6fthg2: var(--_9h6w0d43);
+    --_1x6fthg3: var(--_9h6w0d44);
   }
   .fx8zm7c {
     font-size: var(--_9h6w0d36);
@@ -15622,28 +15602,28 @@ html.r2i18210 .fx8zm71l {
     line-height: var(--_9h6w0d41);
   }
   .fx8zm7i {
-    --z1t4tb0: var(--_9h6w0d4d);
-    --z1t4tb1: var(--_9h6w0d4e);
-    --z1t4tb2: var(--_9h6w0d4g);
-    --z1t4tb3: var(--_9h6w0d4h);
+    --_1x6fthg0: var(--_9h6w0d4d);
+    --_1x6fthg1: var(--_9h6w0d4e);
+    --_1x6fthg2: var(--_9h6w0d4g);
+    --_1x6fthg3: var(--_9h6w0d4h);
   }
   .fx8zm7k {
-    --z1t4tb0: var(--_9h6w0d4n);
-    --z1t4tb1: var(--_9h6w0d4o);
-    --z1t4tb2: var(--_9h6w0d4q);
-    --z1t4tb3: var(--_9h6w0d4r);
+    --_1x6fthg0: var(--_9h6w0d4n);
+    --_1x6fthg1: var(--_9h6w0d4o);
+    --_1x6fthg2: var(--_9h6w0d4q);
+    --_1x6fthg3: var(--_9h6w0d4r);
   }
   .fx8zm7m {
-    --z1t4tb0: var(--_9h6w0d4x);
-    --z1t4tb1: var(--_9h6w0d4y);
-    --z1t4tb2: var(--_9h6w0d50);
-    --z1t4tb3: var(--_9h6w0d51);
+    --_1x6fthg0: var(--_9h6w0d4x);
+    --_1x6fthg1: var(--_9h6w0d4y);
+    --_1x6fthg2: var(--_9h6w0d50);
+    --_1x6fthg3: var(--_9h6w0d51);
   }
   .fx8zm7o {
-    --z1t4tb0: var(--_9h6w0d57);
-    --z1t4tb1: var(--_9h6w0d58);
-    --z1t4tb2: var(--_9h6w0d5a);
-    --z1t4tb3: var(--_9h6w0d5b);
+    --_1x6fthg0: var(--_9h6w0d57);
+    --_1x6fthg1: var(--_9h6w0d58);
+    --_1x6fthg2: var(--_9h6w0d5a);
+    --_1x6fthg3: var(--_9h6w0d5b);
   }
   .fx8zm71w {
     padding-bottom: calc((var(--_9h6w0d9) - var(--_9h6w0d37)) / 2);
@@ -16155,9 +16135,9 @@ html.r2i18210 ._1hw07lgd {
   padding: 100px;
 }
 
-/*# sourceMappingURL=2-f89c63c35e9a744838a1.css.map*/
+/*# sourceMappingURL=2-466afdb3eeda6ab3ca44.css.map*/
 ,
-  "2-f89c63c35e9a744838a1.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2-466afdb3eeda6ab3ca44.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "async_hooks",
   "crypto",
@@ -16178,7 +16158,7 @@ html.r2i18210 ._1hw07lgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-f89c63c35e9a744838a1.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-466afdb3eeda6ab3ca44.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16189,7 +16169,7 @@ html.r2i18210 ._1hw07lgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">Hello <!-- -->jobStreet<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">Hello <!-- -->jobStreet<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16208,7 +16188,7 @@ html.r2i18210 ._1hw07lgd {
         <meta charset="UTF-8">
         <title>My Awesome Project</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link data-chunk="main" rel="stylesheet" href="/2-f89c63c35e9a744838a1.css">
+        <link data-chunk="main" rel="stylesheet" href="/2-466afdb3eeda6ab3ca44.css">
 <link data-chunk="main" rel="preload" as="script" href="/runtime.js">
 <link data-chunk="main" rel="preload" as="script" href="/main.js">
         <script>
@@ -16219,7 +16199,7 @@ html.r2i18210 ._1hw07lgd {
         <div id="app"><style type="text/css">
             html,body{margin:0;padding:0;background:#fff}
             html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
-          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">Hello <!-- -->seekAnz<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+          </style><div class="ylnqo70 fx8zm710 fx8zm713"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">Hello <!-- -->seekAnz<!-- --> <span class="_19azws30 r2i18255"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 _716eoa0 r2i18255 r2i1825d _16185310 _16185312 _16185313 _16185314" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"></path></svg></span></span><div class="_19azws30 r2i1828p r2i1827l r2i182ax r2i1829t r2i1825d r2i18269 r2i182i9 r2i1824j r2i1824c fx8zm710 fx8zm713 r2i18233 r2i18236"><div class="_19azws30 r2i1825d"><div class="_19azws30 r2i18259 r2i182i9"><input class="_19azws30 _19azws31 _19azws36 _19azws37 _19azws38 _19azws3d r2i1825h r2i1828 r2i182h r2i1826 _1hw07lg4 _1hw07lg2" type="checkbox" id="id_1" aria-checked="false"/><div class="_19azws30 r2i182hx r2i1825d r2i18265 _1hw07lg5 _1hw07lg2 fx8zm710  r2i18233"><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lg9 fx8zm711 fx8zm713 r2i18221 r2i18222"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71t" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1823x r2i1823y"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 r2i1823p r2i1823u"></span><span class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182i r2i18265 r2i182x r2i1826 _1hw07lgb r2i1823z r2i18244"><div class="_19azws30 r2i182n r2i182x r2i1825d _1hw07lgc _1hw07lge"><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x r2i1826"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1z"></path></svg></div><div class="_19azws30 r2i182j r2i182k r2i182l r2i182m r2i1825h r2i182x"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve" focusable="false" fill="currentColor" width="16" height="16" class="_19azws30 r2i182p r2i182n r2i1824x fx8zm71s" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4z"></path></svg></div></div></span></div><div class="_19azws30 r2i182b5 r2i182i5"><div class="_19azws30 r2i18259 _1hw07lg2 _1hw07lg6"><label class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0" for="id_1"><span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">This is a checkbox</span></label></div></div></div></div></div><div class="_19azws30 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
         <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
 <script id="__LOADABLE_REQUIRED_CHUNKS__" type="application/json">[]</script><script id="__LOADABLE_REQUIRED_CHUNKS___ext" type="application/json">{"namedChunks":[]}</script>
 <script async data-chunk="main" src="/runtime.js"></script>
@@ -16249,7 +16229,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-f89c63c35e9a744838a1.css"
+       href="/2-466afdb3eeda6ab3ca44.css"
      >
      <link
        data-chunk="main"
@@ -16274,7 +16254,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
              html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="ylnqo70 fx8zm710 fx8zm713">
-         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">
+         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">
            Hello
            jobStreet
            <span class="_19azws30 r2i18255">
@@ -16387,7 +16367,7 @@ exports[`braid-design-system > bundler webpack > build > should return built job
                      class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0"
                      for="id_1"
                    >
-                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">
+                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -16457,7 +16437,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
      <link
        data-chunk="main"
        rel="stylesheet"
-       href="/2-f89c63c35e9a744838a1.css"
+       href="/2-466afdb3eeda6ab3ca44.css"
      >
      <link
        data-chunk="main"
@@ -16482,7 +16462,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
              html.r2i18210,html.r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="ylnqo70 fx8zm710 fx8zm713">
-         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">
+         <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">
            Hello
            seekAnz
            <span class="_19azws30 r2i18255">
@@ -16595,7 +16575,7 @@ exports[`braid-design-system > bundler webpack > build > should return built see
                      class="_19azws30 r2i1824 r2i1824x r2i182h _9kzhon0"
                      for="id_1"
                    >
-                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 z1t4tb4">
+                     <span class="_19azws30 r2i1824x fx8zm70 fx8zm71 fx8zm71t fx8zm78 _1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -16696,7 +16676,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__r2i18210,html.sprinkles_darkMode__r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__ylnqo70 typography_lightModeTone_light__fx8zm710 typography_darkModeTone_dark__fx8zm713">
-         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
            Hello
            jobStreet
            <span class="reset_base__19azws30 sprinkles_display_inlineBlock_mobile__r2i18255">
@@ -16809,7 +16789,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__19azws30 sprinkles_userSelect_none__r2i1824 sprinkles_display_block_mobile__r2i1824x sprinkles_cursor_pointer__r2i182h virtualTouchable_virtualTouchable__9kzhon0"
                      for="id_1"
                    >
-                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>
@@ -16916,7 +16896,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
              html.sprinkles_darkMode__r2i18210,html.sprinkles_darkMode__r2i18210 body{color-scheme:dark;background:#1C2330}
        </style>
        <div class="seekJobs_seekJobs__ylnqo70 typography_lightModeTone_light__fx8zm710 typography_darkModeTone_dark__fx8zm713">
-         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+         <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
            Hello
            seekAnz
            <span class="reset_base__19azws30 sprinkles_display_inlineBlock_mobile__r2i18255">
@@ -17029,7 +17009,7 @@ exports[`braid-design-system > bundler webpack > start > should return developme
                      class="reset_base__19azws30 sprinkles_userSelect_none__r2i1824 sprinkles_display_block_mobile__r2i1824x sprinkles_cursor_pointer__r2i182h virtualTouchable_virtualTouchable__9kzhon0"
                      for="id_1"
                    >
-                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__z1t4tb4">
+                     <span class="reset_base__19azws30 sprinkles_display_block_mobile__r2i1824x typography_fontFamily__fx8zm70 typography_fontWeight_regular__fx8zm71 typography_tone_neutral__fx8zm71t typography_textSize_standard__fx8zm78 capsize_capsizeStyle__1x6fthg4">
                        This is a checkbox
                      </span>
                    </label>

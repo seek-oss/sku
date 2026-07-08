@@ -2,4 +2,4 @@
 'sku': major
 ---
 
-`format`: Format will throw on Prettier errors instead of silently passing
+`format`: Throws if Prettier cannot complete formatting (invalid syntax, missing config, etc.)

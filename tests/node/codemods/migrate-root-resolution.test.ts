@@ -18,6 +18,10 @@ runCodemodTests('migrate-root-resolution', [
       const cjs = require('src/cjs');
       import local from './src/local';
       import external from 'pkg/src/thing';
+      vi.mock('src/mocked');
+      const { mocked } = (await vi.importActual(
+        'src/mocked',
+      )) as { mocked: Mocked };
     `,
     output: dedent /* tsx */ `
       import { add } from '#src/utils/add';
@@ -28,6 +32,10 @@ runCodemodTests('migrate-root-resolution', [
       const cjs = require('#src/cjs');
       import local from './src/local';
       import external from 'pkg/src/thing';
+      vi.mock('#src/mocked');
+      const { mocked } = (await vi.importActual(
+        '#src/mocked',
+      )) as { mocked: Mocked };
     `,
   },
   // Adds a `pathAliases` entry to the sku config

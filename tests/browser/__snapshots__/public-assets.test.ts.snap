@@ -39,6 +39,10 @@ exports[`public assets > bundler: vite > build and serve > should copy public as
       <p>
         Public assets fixture
       </p>
+      <p>
+        Public asset URL:
+        /nested/icon.png
+      </p>
     </div>
     <script
       type="module"
@@ -91,6 +95,10 @@ SOURCE HTML: <!DOCTYPE html>
       <p>
         Public assets fixture
       </p>
+      <p>
+        Public asset URL:
+        /nested/icon.png
+      </p>
     </div>
     <script
       type="module"
@@ -112,7 +120,7 @@ exports[`public assets > bundler: vite > start > should serve the app and public
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,73 +1,73 @@
+@@ -1,77 +1,77 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -180,6 +188,10 @@ exports[`public assets > bundler: vite > start > should serve the app and public
        <p>
          Public assets fixture
        </p>
+       <p>
+         Public asset URL:
+         /nested/icon.png
+       </p>
      </div>
      <script
        type="module"
@@ -242,6 +254,9 @@ exports[`public assets > bundler: webpack > build and serve > should copy public
       >
       <p>
         Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
       </p>
     </div>
     <script
@@ -336,6 +351,9 @@ SOURCE HTML: <!DOCTYPE html>
       >
       <p>
         Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
       </p>
     </div>
     <script
@@ -432,6 +450,9 @@ exports[`public assets > bundler: webpack > start > should serve the app and pub
       >
       <p>
         Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
       </p>
     </div>
     <script

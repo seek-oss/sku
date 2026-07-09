@@ -16,8 +16,7 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    // Public assets are copied into `target` after the build via `copyPublicFiles`.
-    publicDir: false,
+    publicDir: skuContext.paths.public,
     root: process.cwd(),
     resolve: {
       alias: {

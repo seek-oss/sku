@@ -51,17 +51,7 @@ describe('public assets', () => {
         expect(await build.findByText('Sku build complete')).toBeInTheConsole();
         expect(
           await build.findByText(
-            'Copying assets/favicon.ico to dist/favicon.ico',
-          ),
-        ).toBeInTheConsole();
-        expect(
-          await build.findByText(
-            'Copying assets/nested/icon.png to dist/nested/icon.png',
-          ),
-        ).toBeInTheConsole();
-        expect(
-          await build.findByText(
-            'Copying assets/robots.txt to dist/robots.txt',
+            'Copying public assets from "assets" to "dist"',
           ),
         ).toBeInTheConsole();
 

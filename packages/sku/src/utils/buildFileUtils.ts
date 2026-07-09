@@ -5,6 +5,7 @@ import { fdir as Fdir } from 'fdir';
 import exists from './exists.js';
 import { copyDirContents } from './copyDirContents.js';
 import type { SkuContext } from '../context/createSkuContext.js';
+import { cwd } from '@sku-private/utils';
 
 export const cleanTargetDirectory = async (
   target: string,
@@ -33,18 +34,10 @@ export const copyPublicFiles = async ({
     return;
   }
 
-  const files = await new Fdir()
-    .withBasePath()
-    .crawl(paths.public)
-    .withPromise();
-
-  for (const file of files) {
-    const relativePublicPath = relative(paths.public, file);
-    const sourcePath = relative(process.cwd(), file);
-    const destinationPath = join(paths.relativeTarget, relativePublicPath);
-
-    console.log(`Copying ${sourcePath} to ${destinationPath}`);
-  }
+  const currentCwd = cwd();
+  console.log(
+    `Copying public assets from "${relative(currentCwd, paths.public)}" to "${relative(currentCwd, paths.target)}"`,
+  );
 
   await copyDirContents(join(paths.public), join(paths.target));
 };

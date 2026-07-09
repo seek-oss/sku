@@ -35,7 +35,7 @@ exports[`sku-webpack-plugin > build > should create valid app 1`] = `
 +      </style>
 +      <div class="_121uhli0 _115b53m10 _115b53m13">
 +        <div class="m8hx7y0 nsymv18p nsymv17l nsymv1ax nsymv19t nsymv15d nsymv169 nsymv1i9 nsymv14j nsymv14c _115b53m10 _115b53m13 nsymv133 nsymv136">
-+          <span class="m8hx7y0 nsymv14x _115b53m0 _115b53m1 _115b53m1t _115b53ma _17i4nh34">
++          <span class="m8hx7y0 nsymv14x _115b53m0 _115b53m1 _115b53m1t _115b53ma _1170cum4">
 +            Is it working?
 +          </span>
 +        </div>
@@ -2206,18 +2206,18 @@ html.nsymv110 .nsymv14s {
   --_1u46xyh5l: 0 0 8px 0 #1c233014, 0 8px 16px -4px #1c233014;
   --_1u46xyh5m: 0 0 12px 0 #1c233014, 0 12px 24px -6px #1c233014;
 }
-._17i4nh34 {
-  font-size: var(--_17i4nh30);
-  line-height: var(--_17i4nh31);
+._1170cum4 {
+  font-size: var(--_1170cum0);
+  line-height: var(--_1170cum1);
 }
-._17i4nh34:before {
+._1170cum4:before {
   content: "";
-  margin-bottom: var(--_17i4nh32);
+  margin-bottom: var(--_1170cum2);
   display: table;
 }
-._17i4nh34:after {
+._1170cum4:after {
   content: "";
-  margin-top: var(--_17i4nh33);
+  margin-top: var(--_1170cum3);
   display: table;
 }
 ._115b53m0 {
@@ -2233,28 +2233,28 @@ html.nsymv110 .nsymv14s {
   font-weight: var(--_1u46xyh47);
 }
 ._115b53m4 {
-  --_17i4nh30: var(--_1u46xyh31);
-  --_17i4nh31: var(--_1u46xyh32);
-  --_17i4nh32: var(--_1u46xyh34);
-  --_17i4nh33: var(--_1u46xyh35);
+  --_1170cum0: var(--_1u46xyh31);
+  --_1170cum1: var(--_1u46xyh32);
+  --_1170cum2: var(--_1u46xyh34);
+  --_1170cum3: var(--_1u46xyh35);
 }
 ._115b53m6 {
-  --_17i4nh30: var(--_1u46xyh3b);
-  --_17i4nh31: var(--_1u46xyh3c);
-  --_17i4nh32: var(--_1u46xyh3e);
-  --_17i4nh33: var(--_1u46xyh3f);
+  --_1170cum0: var(--_1u46xyh3b);
+  --_1170cum1: var(--_1u46xyh3c);
+  --_1170cum2: var(--_1u46xyh3e);
+  --_1170cum3: var(--_1u46xyh3f);
 }
 ._115b53m8 {
-  --_17i4nh30: var(--_1u46xyh3l);
-  --_17i4nh31: var(--_1u46xyh3m);
-  --_17i4nh32: var(--_1u46xyh3o);
-  --_17i4nh33: var(--_1u46xyh3p);
+  --_1170cum0: var(--_1u46xyh3l);
+  --_1170cum1: var(--_1u46xyh3m);
+  --_1170cum2: var(--_1u46xyh3o);
+  --_1170cum3: var(--_1u46xyh3p);
 }
 ._115b53ma {
-  --_17i4nh30: var(--_1u46xyh3v);
-  --_17i4nh31: var(--_1u46xyh3w);
-  --_17i4nh32: var(--_1u46xyh3y);
-  --_17i4nh33: var(--_1u46xyh3z);
+  --_1170cum0: var(--_1u46xyh3v);
+  --_1170cum1: var(--_1u46xyh3w);
+  --_1170cum2: var(--_1u46xyh3y);
+  --_1170cum3: var(--_1u46xyh3z);
 }
 ._115b53mc {
   font-size: var(--_1u46xyh31);
@@ -2279,28 +2279,28 @@ html.nsymv110 .nsymv14s {
   font-weight: var(--_1u46xyh5d);
 }
 ._115b53mi {
-  --_17i4nh30: var(--_1u46xyh48);
-  --_17i4nh31: var(--_1u46xyh49);
-  --_17i4nh32: var(--_1u46xyh4b);
-  --_17i4nh33: var(--_1u46xyh4c);
+  --_1170cum0: var(--_1u46xyh48);
+  --_1170cum1: var(--_1u46xyh49);
+  --_1170cum2: var(--_1u46xyh4b);
+  --_1170cum3: var(--_1u46xyh4c);
 }
 ._115b53mk {
-  --_17i4nh30: var(--_1u46xyh4i);
-  --_17i4nh31: var(--_1u46xyh4j);
-  --_17i4nh32: var(--_1u46xyh4l);
-  --_17i4nh33: var(--_1u46xyh4m);
+  --_1170cum0: var(--_1u46xyh4i);
+  --_1170cum1: var(--_1u46xyh4j);
+  --_1170cum2: var(--_1u46xyh4l);
+  --_1170cum3: var(--_1u46xyh4m);
 }
 ._115b53mm {
-  --_17i4nh30: var(--_1u46xyh4s);
-  --_17i4nh31: var(--_1u46xyh4t);
-  --_17i4nh32: var(--_1u46xyh4v);
-  --_17i4nh33: var(--_1u46xyh4w);
+  --_1170cum0: var(--_1u46xyh4s);
+  --_1170cum1: var(--_1u46xyh4t);
+  --_1170cum2: var(--_1u46xyh4v);
+  --_1170cum3: var(--_1u46xyh4w);
 }
 ._115b53mo {
-  --_17i4nh30: var(--_1u46xyh52);
-  --_17i4nh31: var(--_1u46xyh53);
-  --_17i4nh32: var(--_1u46xyh55);
-  --_17i4nh33: var(--_1u46xyh56);
+  --_1170cum0: var(--_1u46xyh52);
+  --_1170cum1: var(--_1u46xyh53);
+  --_1170cum2: var(--_1u46xyh55);
+  --_1170cum3: var(--_1u46xyh56);
 }
 html:not(.nsymv110) ._115b53m10 {
   --_115b53mq: var(--_1u46xyh19);
@@ -2436,28 +2436,28 @@ html.nsymv110 ._115b53m1l {
 }
 @media screen and (min-width: 740px) {
   ._115b53m4 {
-    --_17i4nh30: var(--_1u46xyh36);
-    --_17i4nh31: var(--_1u46xyh37);
-    --_17i4nh32: var(--_1u46xyh39);
-    --_17i4nh33: var(--_1u46xyh3a);
+    --_1170cum0: var(--_1u46xyh36);
+    --_1170cum1: var(--_1u46xyh37);
+    --_1170cum2: var(--_1u46xyh39);
+    --_1170cum3: var(--_1u46xyh3a);
   }
   ._115b53m6 {
-    --_17i4nh30: var(--_1u46xyh3g);
-    --_17i4nh31: var(--_1u46xyh3h);
-    --_17i4nh32: var(--_1u46xyh3j);
-    --_17i4nh33: var(--_1u46xyh3k);
+    --_1170cum0: var(--_1u46xyh3g);
+    --_1170cum1: var(--_1u46xyh3h);
+    --_1170cum2: var(--_1u46xyh3j);
+    --_1170cum3: var(--_1u46xyh3k);
   }
   ._115b53m8 {
-    --_17i4nh30: var(--_1u46xyh3q);
-    --_17i4nh31: var(--_1u46xyh3r);
-    --_17i4nh32: var(--_1u46xyh3t);
-    --_17i4nh33: var(--_1u46xyh3u);
+    --_1170cum0: var(--_1u46xyh3q);
+    --_1170cum1: var(--_1u46xyh3r);
+    --_1170cum2: var(--_1u46xyh3t);
+    --_1170cum3: var(--_1u46xyh3u);
   }
   ._115b53ma {
-    --_17i4nh30: var(--_1u46xyh40);
-    --_17i4nh31: var(--_1u46xyh41);
-    --_17i4nh32: var(--_1u46xyh43);
-    --_17i4nh33: var(--_1u46xyh44);
+    --_1170cum0: var(--_1u46xyh40);
+    --_1170cum1: var(--_1u46xyh41);
+    --_1170cum2: var(--_1u46xyh43);
+    --_1170cum3: var(--_1u46xyh44);
   }
   ._115b53mc {
     font-size: var(--_1u46xyh36);
@@ -2476,28 +2476,28 @@ html.nsymv110 ._115b53m1l {
     line-height: var(--_1u46xyh41);
   }
   ._115b53mi {
-    --_17i4nh30: var(--_1u46xyh4d);
-    --_17i4nh31: var(--_1u46xyh4e);
-    --_17i4nh32: var(--_1u46xyh4g);
-    --_17i4nh33: var(--_1u46xyh4h);
+    --_1170cum0: var(--_1u46xyh4d);
+    --_1170cum1: var(--_1u46xyh4e);
+    --_1170cum2: var(--_1u46xyh4g);
+    --_1170cum3: var(--_1u46xyh4h);
   }
   ._115b53mk {
-    --_17i4nh30: var(--_1u46xyh4n);
-    --_17i4nh31: var(--_1u46xyh4o);
-    --_17i4nh32: var(--_1u46xyh4q);
-    --_17i4nh33: var(--_1u46xyh4r);
+    --_1170cum0: var(--_1u46xyh4n);
+    --_1170cum1: var(--_1u46xyh4o);
+    --_1170cum2: var(--_1u46xyh4q);
+    --_1170cum3: var(--_1u46xyh4r);
   }
   ._115b53mm {
-    --_17i4nh30: var(--_1u46xyh4x);
-    --_17i4nh31: var(--_1u46xyh4y);
-    --_17i4nh32: var(--_1u46xyh50);
-    --_17i4nh33: var(--_1u46xyh51);
+    --_1170cum0: var(--_1u46xyh4x);
+    --_1170cum1: var(--_1u46xyh4y);
+    --_1170cum2: var(--_1u46xyh50);
+    --_1170cum3: var(--_1u46xyh51);
   }
   ._115b53mo {
-    --_17i4nh30: var(--_1u46xyh57);
-    --_17i4nh31: var(--_1u46xyh58);
-    --_17i4nh32: var(--_1u46xyh5a);
-    --_17i4nh33: var(--_1u46xyh5b);
+    --_1170cum0: var(--_1u46xyh57);
+    --_1170cum1: var(--_1u46xyh58);
+    --_1170cum2: var(--_1u46xyh5a);
+    --_1170cum3: var(--_1u46xyh5b);
   }
   ._115b53m1w {
     padding-top: calc((var(--_1u46xyh9) - var(--_1u46xyh37)) / 2);
@@ -2684,7 +2684,7 @@ exports[`sku-webpack-plugin > start > should start a development server 1`] = `
 +      </style>
 +      <div class="seekJobs_seekJobs__121uhli0 typography_lightModeTone_light__115b53m10 typography_darkModeTone_dark__115b53m13">
 +        <div class="reset_base__m8hx7y0 sprinkles_paddingBottom_gutter_mobile__nsymv18p sprinkles_paddingTop_gutter_mobile__nsymv17l sprinkles_paddingLeft_gutter_mobile__nsymv1ax sprinkles_paddingRight_gutter_mobile__nsymv19t sprinkles_position_relative_mobile__nsymv15d sprinkles_borderRadius_large_mobile__nsymv169 sprinkles_textAlign_left_mobile__nsymv1i9 sprinkles_boxShadow_borderNeutralLight_lightMode__nsymv14j sprinkles_boxShadow_borderNeutral_darkMode__nsymv14c typography_lightModeTone_light__115b53m10 typography_darkModeTone_dark__115b53m13 sprinkles_background_surface_lightMode__nsymv133 sprinkles_background_surfaceDark_darkMode__nsymv136">
-+          <span class="reset_base__m8hx7y0 sprinkles_display_block_mobile__nsymv14x typography_fontFamily__115b53m0 typography_fontWeight_regular__115b53m1 typography_tone_neutral__115b53m1t typography_textSize_large__115b53ma capsize_capsizeStyle__17i4nh34">
++          <span class="reset_base__m8hx7y0 sprinkles_display_block_mobile__nsymv14x typography_fontFamily__115b53m0 typography_fontWeight_regular__115b53m1 typography_tone_neutral__115b53m1t typography_textSize_large__115b53ma capsize_capsizeStyle__1170cum4">
 +            Is it working?
 +          </span>
 +        </div>

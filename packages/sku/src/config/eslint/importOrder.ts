@@ -1,21 +1,6 @@
-import { basename } from 'node:path';
-import type { SkuContext } from '../../context/createSkuContext.js';
 import type { Linter } from 'eslint';
 
-const internalRegex = (paths: SkuContext['paths']) =>
-  `^(${paths.src.map((srcPath: string) => basename(srcPath)).join('|')})/`;
-
-const rootResolutionConfig = (paths: SkuContext['paths']) => ({
-  settings: {
-    'import-x/internal-regex': internalRegex(paths),
-  },
-});
-
-export const createImportOrderConfig = ({
-  paths,
-  rootResolution,
-}: SkuContext): Linter.Config => ({
-  ...(rootResolution ? rootResolutionConfig(paths) : undefined),
+export const importOrderConfig: Linter.Config = {
   rules: {
     'import-x/order': [
       'error',
@@ -41,4 +26,4 @@ export const createImportOrderConfig = ({
       },
     ],
   },
-});
+};

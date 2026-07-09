@@ -2,6 +2,7 @@ import { loadESLint } from 'eslint';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
 import { accentLight, caution, secondary } from '@sku-private/utils/console';
+import type { LintResult } from '../../utils/runLintChecks.js';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
@@ -11,7 +12,7 @@ const runESLint = async ({
 }: {
   fix?: boolean;
   paths?: string[];
-}) => {
+}): Promise<LintResult> => {
   console.log(accentLight(`${fix ? 'Fixing' : 'Checking'} code with ESLint`));
 
   const ESLint = await loadESLint({ useFlatConfig: true });
@@ -35,7 +36,7 @@ const runESLint = async ({
 
   if (filteredFilePaths.length === 0) {
     console.log(secondary(`No files to lint`));
-    return Promise.resolve();
+    return { exitCode: 0 };
   }
 
   console.log(secondary(`Paths: ${filteredFilePaths.join(' ')}`));
@@ -59,9 +60,11 @@ const runESLint = async ({
       }
 
       if (errorCount > 0) {
-        return Promise.reject();
+        return { exitCode: 1 };
       }
     }
+
+    return { exitCode: 0 };
   } catch (e) {
     assert(e instanceof Error);
 
@@ -70,8 +73,9 @@ const runESLint = async ({
     } else {
       console.warn(caution('ESLint encountered an error:'));
       console.log(e.message);
-      return Promise.reject();
     }
+
+    return { exitCode: 1 };
   }
 };
 

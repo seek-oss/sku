@@ -441,6 +441,23 @@ export interface SkuConfigBase {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=transformoutputpath
    */
   transformOutputPath?: TransformOutputPathFunction;
+
+  /**
+   * Path alias mappings for module resolution.
+   * Each alias maps a pattern to a destination path relative to the project root.
+   *
+   * This option generates `tsconfig.json#paths` so TypeScript can resolve these imports, and `sku`
+   * mirrors it into your `package.json#imports` field so the aliases resolve natively at build time.
+   *
+   * Subpath import specifiers must be prefixed with `#`.
+   *
+   * Example `sku.config.ts`: `{ "#components/*": "./src/components/*" }`
+   *
+   * @default {}
+   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
+   * @see https://nodejs.org/api/packages.html#subpath-imports
+   */
+  pathAliases?: Record<string, string>;
 }
 
 export interface WebpackSkuConfig {
@@ -501,19 +518,6 @@ export interface WebpackSkuConfig {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysetwebpackconfig
    */
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
-
-  /**
-   * Enables root resolution.
-   *
-   * By default, sku allows importing from the root of the project e.g. `import something from 'src/modules/something'`.
-   *
-   * Unfortunately, these kinds of imports only work for apps.
-   * In packages, the imports will work locally, but fail when consumed from `node_modules`.
-   *
-   * @default true
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=rootresolution
-   */
-  rootResolution?: boolean;
 }
 
 export interface ViteSkuConfig {
@@ -537,25 +541,6 @@ export interface ViteSkuConfig {
    * @default: []
    */
   vitePlugins?: PluginOption[];
-
-  /**
-   * Path alias mappings for module resolution.
-   * Each alias maps a pattern to a destination path relative to the project root.
-   *
-   * This configuration affects both bundler module resolution and TypeScript's
-   * `paths` configuration in tsconfig.json.
-   *
-   * Note: sku automatically provides a 'src/*' alias that maps to './src/*'.
-   * This option allows you to define additional custom aliases.
-   *
-   * Example: { "@components/*": "./src/components/*", "@utils/*": "./src/utils/*" }
-   *
-   * Note: This option is only relevant when using the `vite` bundler.
-   *
-   * @default {}
-   * @see https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths
-   */
-  pathAliases?: Record<string, string>;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

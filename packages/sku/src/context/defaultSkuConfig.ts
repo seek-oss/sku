@@ -1,6 +1,5 @@
 import browserslistConfigSeek from 'browserslist-config-seek';
 import { join } from 'node:path';
-import isCompilePackage from '../utils/isCompilePackage.js';
 import type { CompleteSkuConfig } from '../types/types.js';
 
 const defaultDecorator = <T>(a: T) => a;
@@ -43,7 +42,6 @@ export default {
   cspExtraScriptSrcHosts: [],
   httpsDevServer: false,
   devServerMiddleware: undefined,
-  rootResolution: !isCompilePackage,
   languages: undefined,
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,

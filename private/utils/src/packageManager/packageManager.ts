@@ -1,4 +1,4 @@
-import { findUpSync } from 'find-up';
+import * as find from 'empathic/find';
 import path, { dirname } from 'node:path';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
@@ -63,7 +63,7 @@ const resolvePackageManager = () => {
   );
 
   const expectedLockfile = lockfileByPackageManager[packageManager];
-  const lockFilePath = findUpSync(Object.values(lockfileByPackageManager));
+  const lockFilePath = find.any(Object.values(lockfileByPackageManager));
 
   if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
     console.warn(
@@ -73,7 +73,7 @@ const resolvePackageManager = () => {
     );
   }
 
-  // No root found (occurs during `sku init`), `rootDir` will be `null`
+  // No root found (occurs during `@sku-lib/create`), `rootDir` will be `null`
   const rootDir = lockFilePath ? dirname(lockFilePath) : null;
 
   return {

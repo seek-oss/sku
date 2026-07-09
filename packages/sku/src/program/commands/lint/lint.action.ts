@@ -1,11 +1,12 @@
 import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../services/prettier.js';
-import runTsc from '../../../services/typescript/runTsc.js';
+import { runTsc } from '../../../services/typescript/runTsc.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
+import { runLintChecks, type LintCheck } from '../../../utils/runLintChecks.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { accentLight } from '@sku-private/utils/console';
+import { accentLight, critical } from '@sku-private/utils/console';
 
 export const lintAction = async (
   paths: string[],
@@ -18,25 +19,25 @@ export const lintAction = async (
 
   await runVocabCompile(skuContext);
 
-  try {
-    const hasPaths = typeof pathsToCheck !== 'undefined';
-    const pathsIncludeTS =
-      hasPaths &&
-      pathsToCheck.filter(
-        (filePath) => filePath.endsWith('.ts') || filePath.endsWith('.tsx'),
-      ).length > 0;
+  const checks: LintCheck[] = [
+    {
+      name: 'TypeScript',
+      run: () => runTsc(pathsToCheck),
+    },
+    {
+      name: 'Prettier',
+      run: () => prettierCheck(pathsToCheck),
+    },
+    {
+      name: 'ESLint',
+      run: () => esLintCheck({ paths: pathsToCheck }),
+    },
+  ];
 
-    if (!hasPaths || pathsIncludeTS) {
-      await runTsc();
-    }
+  const hasFailure = await runLintChecks(checks);
 
-    await prettierCheck(pathsToCheck);
-    await esLintCheck({ paths: pathsToCheck });
-  } catch (e) {
-    if (e) {
-      console.error(e);
-    }
-
+  if (hasFailure) {
+    console.error(critical('Linting failed'));
     process.exit(1);
   }
 

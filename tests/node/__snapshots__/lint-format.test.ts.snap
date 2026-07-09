@@ -1,18 +1,16 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`lint-format > sku format > errors are fixed: fixableLintError.ts 1`] = `
+exports[`lint-format > sku format > fixes formatting errors > fixableLintError.ts 1`] = `
 const foo = () => 'foo';
 
 `;
 
-exports[`lint-format > sku format > errors are fixed: importOrder1.ts 1`] = `
+exports[`lint-format > sku format > fixes formatting errors > importOrder1.ts 1`] = `
 import './reset'; // side-effect imports should stay put
 
 import path from 'path'; //  built-in
 
 import someModule from 'some-module'; // external
-
-import utils from 'src/utils'; // internal
 
 import distantParent from '../../../parent'; // parents
 import Parent from '../parent'; // parents
@@ -23,9 +21,11 @@ import myself from '.'; // index
 
 import vanillaStyles from './vanillaStyles.css'; // styles
 
+import utils from '#src/utils'; // internal
+
 `;
 
-exports[`lint-format > sku format > errors are fixed: importOrder2.ts 1`] = `
+exports[`lint-format > sku format > fixes formatting errors > importOrder2.ts 1`] = `
 import c from '../c';
 
 import a from './a';
@@ -37,7 +37,7 @@ import cStyle from '../c.css';
 
 `;
 
-exports[`lint-format > sku format > errors are fixed: unformattedFile2.ts 1`] = `
+exports[`lint-format > sku format > fixes formatting errors > unformattedFile2.ts 1`] = `
 import { something } from 'with-double-quotes';
 
 const indented = 'indented';

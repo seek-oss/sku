@@ -1,4 +1,4 @@
-import debug from 'debug';
+import { createDebug } from 'obug';
 import { setCwd } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
 import configureApp from './utils/configureApp.js';
@@ -8,7 +8,7 @@ import { banner, strong } from '@sku-private/utils/console';
  * Separated out from the scripts/postinstall.js so that this can be bundled
  */
 
-const log = debug('sku:postinstall');
+const log = createDebug('sku:postinstall');
 
 export const postinstall = async ({
   localCwd,
@@ -32,7 +32,7 @@ export const postinstall = async ({
 
   try {
     log('postinstall', 'running configure');
-    const skuContext = createSkuContext({});
+    const skuContext = await createSkuContext({});
     configureApp(skuContext);
   } catch (error) {
     console.error(

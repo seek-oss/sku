@@ -8,5 +8,6 @@ export default {
   devServerMiddleware: './dev-middleware.cjs',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
+  httpsDevServer: true,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

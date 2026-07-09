@@ -1,8 +1,7 @@
 import path from 'node:path';
 import WebpackDevServer, { type Configuration } from 'webpack-dev-server';
 import webpack from 'webpack';
-import onDeath from 'death';
-import debug from 'debug';
+import { createDebug } from 'obug';
 
 import getCertificate from '../../../utils/certificate.js';
 
@@ -20,7 +19,7 @@ import { makeWebpackConfig } from '../../../services/webpack/config/webpack.conf
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import allocatePort from '../../../utils/allocatePort.js';
 import { openBrowser } from '../../../openBrowser.js';
-import createServerManager from '../../../services/serverManager.js';
+import { createServerManager } from '../../../services/serverManager.js';
 
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
 import {
@@ -29,15 +28,23 @@ import {
 } from '../../../utils/configure.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
-import { makeUrl, requireFromCwd, serverUrls } from '@sku-private/utils';
-import { accent, link } from '@sku-private/utils/console';
+import { requireFromCwd, serverUrls } from '@sku-private/utils';
 
-const log = debug('sku:start-ssr');
+const log = createDebug('sku:start-ssr');
 
 const hot = process.env.SKU_HOT !== 'false';
 
 const pluginName = 'sku-start-ssr';
 const localhost = '0.0.0.0';
+
+// Run a handler when the process receives a termination signal. Replaces the
+// `death` package, which simply registered the same handler on each signal.
+const onDeath = (handler: NodeJS.SignalsListener) => {
+  const signals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+  for (const signal of signals) {
+    process.on(signal, handler);
+  }
+};
 
 const once = (fn: (...args: any[]) => void) => {
   let called = false;
@@ -67,21 +74,19 @@ export const webpackStartSsrHandler = async ({
   validatePeerDeps(skuContext);
   await watchVocabCompile(skuContext);
 
-  // Find available ports if requested ones aren't available
-  const clientPort = await allocatePort({
-    port: port.client,
+  const devServerPort = await allocatePort({
+    port: port.server,
     host: localhost,
     strictPort: port.strictPort,
   });
-  const serverPort = await allocatePort({
-    port: port.server,
+  const nodeServerPort = await allocatePort({
+    port: port.client,
     host: localhost,
     strictPort: port.strictPort,
   });
 
   const [clientWebpackConfig, serverWebpackConfig] = await makeWebpackConfig({
-    clientPort,
-    serverPort,
+    serverPort: nodeServerPort,
     isDevServer: true,
     hot,
     isStartScript: true,
@@ -115,20 +120,11 @@ export const webpackStartSsrHandler = async ({
 
   const urls = serverUrls({
     hosts: appHosts,
-    port: serverPort,
+    port: devServerPort,
     initialPath,
     https: httpsDevServer,
   });
-  const webpackDevServerUrl = makeUrl({
-    host: appHosts?.[0],
-    port: clientPort,
-    https: httpsDevServer,
-  });
 
-  console.log();
-  console.log(
-    accent(`Starting the webpack dev server on ${link(webpackDevServerUrl)}`),
-  );
   console.log('Starting development server...');
   if (skuContext.listUrls) {
     urls.printAll();
@@ -176,17 +172,41 @@ export const webpackStartSsrHandler = async ({
     serverManager.hotUpdate();
   });
 
+  const proto = httpsDevServer ? 'https' : 'http';
+  const nodeServerUrl = `${proto}://127.0.0.1:${nodeServerPort}`;
+
   const devServerConfig: Configuration = {
     host: localhost,
-    port: clientPort,
+    port: devServerPort,
     allowedHosts: appHosts,
     hot,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    devMiddleware: {
+      // Disable serving an index file so document requests (including `/`) fall
+      // through to the proxy and are rendered by the SSR server
+      index: false,
+    },
+    proxy: [
+      {
+        // Proxy everything the dev server doesn't serve itself (i.e. anything
+        // that isn't a webpack asset) to the internal SSR server. Webpack
+        // assets are handled by `webpack-dev-middleware`, which runs first.
+        context: () => true,
+        target: nodeServerUrl,
+        // The SSR server may be served over https in dev; don't reject its
+        // self-signed certificate
+        secure: false,
+        // Preserve the original Host header so the SSR server's host-based
+        // routing (sites) continues to work.
+        changeOrigin: false,
+      },
+    ],
     client: {
       overlay: false,
+      // The HMR websocket is served by this dev server (the front door), so the
+      // browser connects directly to it.
       webSocketURL: {
         hostname: appHosts?.[0],
-        port: clientPort,
+        port: devServerPort,
       },
     },
     setupExitSignals: true,
@@ -209,7 +229,6 @@ export const webpackStartSsrHandler = async ({
   devServer.startCallback((err) => {
     if (err) {
       console.log(err);
-      return;
     }
   });
 
@@ -218,6 +237,11 @@ export const webpackStartSsrHandler = async ({
 
     serverCompiler.close(() => {
       log('Server compiler closed');
+    });
+
+    // webpack-dev-server doesn't exit on SIGQUIT, so we will stop it manually
+    devServer.stopCallback(() => {
+      process.exit(0);
     });
   });
 };

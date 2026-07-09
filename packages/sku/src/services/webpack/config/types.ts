@@ -8,7 +8,6 @@ export interface MakeWebpackConfigOptions {
   hot?: boolean;
   isStartScript?: boolean;
   stats?: string;
-  clientPort?: number;
   serverPort?: number;
   skuContext: SkuContext;
 }

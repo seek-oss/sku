@@ -1,20 +1,36 @@
 import { waitFor, type RenderResult } from 'cli-testing-library';
 
-/**
- * Checks if a command exited successfully outside of a test (beforeEach, beforeAll, etc.)
- *
- * If checking for an exit code in a test, please use `expect` to  assert the exit code. E.g.,
- * ```
- * await waitFor(() => {
- *    expect(process.hasExit()).toMatchObject({ exitCode: 0 });
- * });
- * ```
- */
-export const hasExitSuccessfully = async (process: RenderResult) => {
-  await waitFor(async () => {
+export const waitForExitCode = async (
+  process: RenderResult,
+  exitCode: number,
+  debug: boolean = false,
+) => {
+  await waitFor(() => {
     const exit = process.hasExit();
-    if (!exit || exit.exitCode !== 0) {
-      throw new Error(`command exited without code 0`);
+    if (!hasExpectedExitCode(process, exitCode, debug)) {
+      throw new Error(
+        `Expected the command to exit with code ${exitCode} but got ${exit?.exitCode}`,
+      );
     }
   });
+};
+
+// TODO refactor the tests to use this in expect. e.g., expect(hasExitCode(process, 0)).toBe(true). Will be done in a different branch.
+/**
+ * Checks if a command exited with the given code.
+ * Useful in tests since it will output the debug information if it fails.
+ */
+export const hasExpectedExitCode = (
+  process: RenderResult,
+  exitCode: number,
+  debug: boolean = true,
+) => {
+  const exit = process.hasExit();
+  if (exit?.exitCode === exitCode) {
+    return true;
+  }
+  if (debug) {
+    process.debug();
+  }
+  return false;
 };

@@ -2,11 +2,13 @@
   "name": "@sku-fixtures/lint-format",
   "private": true,
   "scripts": {
-    "format": "sku format"
+    "format": "sku format",
+    "lint": "sku lint"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "vitest": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

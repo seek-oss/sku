@@ -5,6 +5,7 @@ import { makePluginName } from '../helpers/makePluginName.js';
 export function dangerouslySetViteConfigPlugin(skuContext: SkuContext): Plugin {
   return {
     name: makePluginName('dangerously-set-vite-config'),
+    enforce: 'post',
     config: skuContext.viteDecorator,
   };
 }

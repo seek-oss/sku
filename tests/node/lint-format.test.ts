@@ -1,113 +1,293 @@
-import { describe, it, beforeEach, afterEach, expect } from 'vitest';
+import { describe, it, beforeAll, expect } from 'vitest';
 import path from 'node:path';
-import fs from 'node:fs/promises';
 import dedent from 'dedent';
-import { scopeToFixture } from '@sku-private/testing-library';
+import {
+  createFixture,
+  scopeToFixture,
+  type RenderResult,
+  waitForExitCode,
+  hasExpectedExitCode,
+  waitFor,
+} from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('lint-format');
 
-const srcDirectory = fixturePath('src');
-const testFile = (fileName: string) => path.join(srcDirectory, fileName);
+type Fixture = Awaited<ReturnType<typeof createFixture>>;
+
+/**
+ * Creates the throwaway source files inside the `lint-format` fixture so that
+ * `sku lint`/`sku format` picks them
+ */
+const createSrcFixture = (files: Record<string, string>) =>
+  createFixture(files, { tempDir: fixturePath() });
+
+const relativePathFromFixture = (fixture: Fixture, ...subpaths: string[]) =>
+  path.relative(fixturePath(), fixture.getPath(...subpaths));
+
+const typeErrorFile = `export const notANumber: number = 'a string';\n`;
+
+const prettierErrorFile = `export const badlyFormatted = "needs formatting"\n`;
+
+const esLintErrorFile = `console.log('foo');
+
+it.only('should test something', () => {
+  let mutable = true;
+
+  expect(mutable).toBe(true);
+});
+`;
+
+const passingFile = `export const greeting = 'hello world';\n`;
 
 describe('lint-format', () => {
-  beforeEach(async () => {
-    await fs.mkdir(srcDirectory, { recursive: true });
-  });
-
-  afterEach(async () => {
-    await fs.rm(srcDirectory, { recursive: true, force: true });
-  });
-
   describe('sku lint', () => {
-    it('should catch type errors', async () => {
-      const fileName = 'typescriptFile.ts';
-      const fileContents = dedent /* ts */ `
-        const foo: number = 'a string';
-      `;
-      await fs.writeFile(testFile(fileName), fileContents);
+    describe('when there are no lint errors', () => {
+      let lint: RenderResult;
 
-      const lint = await sku('lint');
-      expect(
-        await lint.findByText('src/typescriptFile.ts(1,7): error'),
-      ).toBeInTheConsole();
+      beforeAll(async () => {
+        const fixture = await createSrcFixture({
+          'passing.ts': passingFile,
+        });
+        lint = await sku('lint');
+
+        await waitForExitCode(lint, 0);
+        fixture.rm();
+      });
+
+      it('should run every linter', async () => {
+        expect(
+          await lint.findByText('Checking code with TypeScript compiler'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('Checking code with Prettier'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('Checking code with ESLint'),
+        ).toBeInTheConsole();
+      });
+
+      it('should exit with a zero exit code', () => {
+        expect(hasExpectedExitCode(lint, 0)).toBe(true);
+      });
+
+      it('should report that linting is complete', async () => {
+        expect(await lint.findByText('Linting complete')).toBeInTheConsole();
+      });
     });
 
-    it('should catch ES lint errors', async () => {
-      const fileName = 'utils.test.ts';
-      const fileContents = dedent /* ts */ `
-        console.log('foo');
+    describe('when every linter reports errors', () => {
+      let lint: RenderResult;
 
-        it.only('should test something', () => {
-          let foo = true;
+      beforeAll(async () => {
+        const fixture = await createSrcFixture({
+          'typeError.ts': typeErrorFile,
+          'prettierError.js': prettierErrorFile,
+          'esLintError.test.ts': esLintErrorFile,
+        });
 
-          expect(foo).toBe(true);
-        });\n`;
-      await fs.writeFile(testFile(fileName), fileContents);
+        lint = await sku('lint');
 
-      const lint = await sku('lint');
-      expect(
-        await lint.findByText('Checking code with ESLint'),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByText('3 problems (3 errors, 0 warnings)'),
-      ).toBeInTheConsole();
+        await waitForExitCode(lint, 1);
+        fixture.rm();
+      });
+
+      it('should run every linter before failing', async () => {
+        expect(
+          await lint.findByText('Checking code with TypeScript compiler'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('Checking code with Prettier'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('Checking code with ESLint'),
+        ).toBeInTheConsole();
+      });
+
+      it('should exit with a non-zero exit code', () => {
+        expect(hasExpectedExitCode(lint, 1)).toBe(true);
+      });
+
+      it('should report that linting failed', async () => {
+        expect(await lint.findByError('Linting failed')).toBeInTheConsole();
+      });
+
+      describe('TypeScript', () => {
+        it('should report type errors', async () => {
+          expect(
+            await lint.findByText(
+              `error TS2322: Type 'string' is not assignable to type 'number'.`,
+            ),
+          ).toBeInTheConsole();
+          expect(await lint.findByText('typeError.ts')).toBeInTheConsole();
+        });
+      });
+
+      describe('Prettier', () => {
+        it('should report unformatted files', async () => {
+          expect(
+            await lint.findByError(
+              'Error: The file(s) listed above failed the prettier check',
+            ),
+          ).toBeInTheConsole();
+          expect(
+            await lint.findByText("To fix this issue, run 'pnpm run format'"),
+          ).toBeInTheConsole();
+        });
+      });
+
+      describe('ESLint', () => {
+        it('should report lint errors', async () => {
+          expect(
+            await lint.findByText('3 problems (3 errors, 0 warnings)'),
+          ).toBeInTheConsole();
+          expect(await lint.findByText('no-console')).toBeInTheConsole();
+          expect(
+            await lint.findByText('jest/no-focused-tests'),
+          ).toBeInTheConsole();
+        });
+      });
     });
 
-    it('should catch prettier errors', async () => {
-      const fileName = 'unformattedFile1.js';
-      const fileContents = dedent /* js */ `
-        import { something } from "with-double-quotes";
+    describe('when file paths are provided', () => {
+      let lint: RenderResult;
+      let target: string;
 
-          const indented = 'indented';
+      beforeAll(async () => {
+        await using fixture = await createSrcFixture({
+          'prettierError.js': prettierErrorFile,
+        });
+        target = relativePathFromFixture(fixture, 'prettierError.js');
 
-        const foo = [
-          "something \"really\" long",
-          "that has to be moved",
-          'to multiple lines',
-          "so we can 'test' trailing commas"
-        ];
-      `;
-      await fs.writeFile(testFile(fileName), fileContents);
+        lint = await sku('lint', [target]);
 
-      const lint = await sku('lint');
-      expect(
-        await lint.findByText('Checking code with Prettier'),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByText('src/unformattedFile1.js'),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByError(
-          'Error: The file(s) listed above failed the prettier check',
-        ),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByText("To fix this issue, run 'pnpm run format'"),
-      ).toBeInTheConsole();
+        await waitForExitCode(lint, 1);
+      });
+
+      it('should skip the TypeScript check', async () => {
+        expect(
+          await lint.findByText('Skipping TypeScript check'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText(
+            'Typescript checks are skipped when file paths are provided',
+          ),
+        ).toBeInTheConsole();
+
+        expect(
+          lint.queryByText('Checking code with TypeScript compiler'),
+        ).not.toBeInTheConsole();
+      });
+
+      it('should still run Prettier and ESLint against the provided paths', async () => {
+        expect(
+          await lint.findByText('Checking code with Prettier'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('Checking code with ESLint'),
+        ).toBeInTheConsole();
+        expect(await lint.findByText(`Paths: ${target}`)).toBeInTheConsole();
+      });
     });
 
-    it('should use vitest lint rules when test runner is vitest', async () => {
-      const fileName = 'utils.test.ts';
-      const fileContents = dedent /* ts */ `
-        console.log('foo');
+    describe('when a path matches no files', () => {
+      let lint: RenderResult;
 
-        it.only('should test something', () => {
-          let foo = true;
+      beforeAll(async () => {
+        lint = await sku('lint', ['does-not-exist.js']);
 
-          expect(foo).toBe(true);
-        });\n`;
-      await fs.writeFile(testFile(fileName), fileContents);
+        await waitForExitCode(lint, 1);
+      });
 
-      const lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
-      expect(
-        await lint.findByText('Checking code with ESLint'),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByText('3 problems (3 errors, 0 warnings)'),
-      ).toBeInTheConsole();
-      expect(
-        await lint.findByText('vitest/no-focused-tests'),
-      ).toBeInTheConsole();
+      it('should skip the TypeScript check', async () => {
+        expect(
+          await lint.findByText('Skipping TypeScript check'),
+        ).toBeInTheConsole();
+      });
+
+      it('should report that Prettier found no matching files', async () => {
+        expect(
+          await lint.findByError('No files matching the pattern were found'),
+        ).toBeInTheConsole();
+      });
+
+      it('should report that ESLint found no matching files', async () => {
+        expect(
+          await lint.findByError(
+            `No files matching 'does-not-exist.js' were found`,
+          ),
+        ).toBeInTheConsole();
+      });
+
+      it('should fail linting', async () => {
+        expect(await lint.findByError('Linting failed')).toBeInTheConsole();
+      });
+    });
+
+    describe('when Prettier cannot parse a file', () => {
+      let lint: RenderResult;
+
+      beforeAll(async () => {
+        await using fixture = await createSrcFixture({
+          'brokenSyntax.js': 'const x = (\n',
+        });
+
+        lint = await sku('lint', [
+          relativePathFromFixture(fixture, 'brokenSyntax.js'),
+        ]);
+
+        await waitForExitCode(lint, 1);
+      });
+
+      it('should skip the TypeScript check', async () => {
+        expect(
+          await lint.findByText('Skipping TypeScript check'),
+        ).toBeInTheConsole();
+      });
+
+      it('should report a Prettier syntax error', async () => {
+        expect(await lint.findByError('SyntaxError')).toBeInTheConsole();
+      });
+
+      it('should fail linting', async () => {
+        expect(await lint.findByError('Linting failed')).toBeInTheConsole();
+      });
+    });
+
+    describe('when the test runner is vitest', () => {
+      let lint: RenderResult;
+
+      beforeAll(async () => {
+        await using fixture = await createSrcFixture({
+          // only fails vitest rules (correctly formatted)
+          'vitestRules.test.ts': dedent /* ts */ `
+            import { it, expect } from 'vitest';
+            console.log('foo');
+
+            it.only('should test something', () => {
+              let mutable = true;
+
+              expect(mutable).toBe(true);
+            });
+          `,
+        });
+
+        lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
+
+        await waitForExitCode(lint, 1);
+        fixture.rm();
+      });
+
+      it('should use vitest lint rules', async () => {
+        expect(
+          await lint.findByText('Checking code with ESLint'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('vitest/no-focused-tests'),
+        ).toBeInTheConsole();
+        expect(
+          await lint.findByText('3 problems (3 errors, 0 warnings)'),
+        ).toBeInTheConsole();
+      });
     });
   });
 
@@ -128,7 +308,7 @@ describe('lint-format', () => {
         import distantParent from '../../../parent'; // parents
         import myself from '.'; // index
         import path from 'path'; //  built-in
-        import utils from 'src/utils'; // internal
+        import utils from '#src/utils'; // internal
       `,
       'importOrder2.ts': dedent /* ts */ `
         import aStyle from './a.css';
@@ -158,20 +338,19 @@ describe('lint-format', () => {
       `,
     };
 
-    it.for(Object.keys(filesToFormat))(
-      'errors are fixed: %s',
-      async (fileName) => {
-        const filePath = testFile(fileName);
-        await fs.writeFile(filePath, filesToFormat[fileName]);
+    it('fixes formatting errors', async () => {
+      await using fixture = await createSrcFixture(filesToFormat);
 
-        const format = await sku('format');
-        expect(
-          await format.findByText('Formatting complete'),
-        ).toBeInTheConsole();
+      const format = await sku('format');
 
-        const result = await fs.readFile(filePath, { encoding: 'utf-8' });
-        expect(result).toMatchSnapshot();
-      },
-    );
+      await waitFor(() => {
+        expect(format.hasExit()).toMatchObject({ exitCode: 0 });
+      });
+
+      for (const fileName of Object.keys(filesToFormat)) {
+        const result = await fixture.readFile(fileName, { encoding: 'utf-8' });
+        expect(result).toMatchSnapshot(fileName);
+      }
+    });
   });
 });

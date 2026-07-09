@@ -1,5 +1,5 @@
 import path from 'node:path';
-import spawn from 'cross-spawn';
+import { x } from 'tinyexec';
 import { createRequire } from 'node:module';
 import type { SpawnOptions } from 'node:child_process';
 
@@ -15,22 +15,18 @@ const resolveBin = (packageName: string, binName: string | undefined) => {
   return require.resolve(path.join(packageName, binPath));
 };
 
-const spawnPromise = (
+const spawnPromise = async (
   commandPath: string,
   args: string[] | undefined,
   options: SpawnOptions | undefined,
 ) => {
-  const childProcess = spawn(commandPath, args, options);
-
-  return new Promise((resolve, reject) => {
-    childProcess.on('exit', (exitCode) => {
-      if (exitCode === 0) {
-        resolve(exitCode);
-        return;
-      }
-      reject(exitCode);
-    });
+  const { exitCode } = await x(commandPath, args, {
+    nodeOptions: options,
   });
+
+  return {
+    exitCode,
+  };
 };
 
 type Options = {

@@ -18,11 +18,21 @@ runCodemodTests('migrate-root-resolution', [
       const cjs = require('src/cjs');
       import local from './src/local';
       import external from 'pkg/src/thing';
+
       vi.mock('src/mocked');
+      vi.mock('src/mocked-with-factory', () => ({
+        mocked: vi.fn(),
+      }));
+      vi.doMock('src/do-mocked');
       const { mocked } = (await vi.importActual(
         'src/mocked',
       )) as { mocked: Mocked };
+
       jest.mock('src/mocked');
+      jest.mock('src/mocked-with-factory', () => ({
+        mocked: jest.fn(),
+      }));
+      jest.doMock('src/do-mocked');
       jest.requireActual('src/mocked');
       jest.requireActual<typeof import('src/mocked')>('src/mocked');
     `,
@@ -35,11 +45,21 @@ runCodemodTests('migrate-root-resolution', [
       const cjs = require('#src/cjs');
       import local from './src/local';
       import external from 'pkg/src/thing';
+
       vi.mock('#src/mocked');
+      vi.mock('#src/mocked-with-factory', () => ({
+        mocked: vi.fn(),
+      }));
+      vi.doMock('#src/do-mocked');
       const { mocked } = (await vi.importActual(
         '#src/mocked',
       )) as { mocked: Mocked };
+
       jest.mock('#src/mocked');
+      jest.mock('#src/mocked-with-factory', () => ({
+        mocked: jest.fn(),
+      }));
+      jest.doMock('#src/do-mocked');
       jest.requireActual('#src/mocked');
       jest.requireActual<typeof import('#src/mocked')>('#src/mocked');
     `,

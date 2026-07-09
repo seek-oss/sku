@@ -34,7 +34,23 @@ const transformSource = async (source: string): Promise<string | null> => {
               kind: 'call_expression',
               has: {
                 field: 'function',
-                any: [{ kind: 'import' }, { regex: '^require$' }],
+                any: [
+                  { kind: 'import' },
+                  { regex: '^require$' },
+                  { pattern: 'vi.mock', kind: 'member_expression' },
+                  { pattern: 'vi.doMock', kind: 'member_expression' },
+                  { pattern: 'vi.importActual', kind: 'member_expression' },
+                  { pattern: 'jest.mock', kind: 'member_expression' },
+                  { pattern: 'jest.doMock', kind: 'member_expression' },
+                  { pattern: 'jest.requireActual', kind: 'member_expression' },
+                ],
+              },
+            },
+            {
+              kind: 'parenthesized_expression',
+              inside: {
+                kind: 'binary_expression',
+                regex: String.raw`^jest\.requireActual<`,
               },
             },
           ],

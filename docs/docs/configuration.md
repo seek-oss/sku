@@ -467,11 +467,7 @@ Type: `string`
 
 Default: `public`
 
-Bundler: `webpack`
-
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
-
-> Caution: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching. You may run into caching issues using this option. It may be removed in the future.
 
 ## publicPath
 

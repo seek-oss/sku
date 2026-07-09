@@ -14,7 +14,9 @@ export const devServerPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => ({
   name: makePluginName('dev-server'),
+  apply: 'serve',
   config: () => ({
+    publicDir: skuContext.paths.public,
     server: {
       watch: disableWatch ? null : {},
       host: 'localhost',

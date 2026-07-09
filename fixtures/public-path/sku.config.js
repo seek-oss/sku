@@ -4,6 +4,6 @@ export default {
   clientEntry: 'src/client.jsx',
   renderEntry: 'src/render.jsx',
   publicPath: '/static/my-app',
-  port: 4001,
+  port: 4004,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 };

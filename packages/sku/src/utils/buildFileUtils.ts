@@ -1,4 +1,4 @@
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { rm, mkdir } from 'node:fs/promises';
 import { fdir as Fdir } from 'fdir';
 
@@ -29,9 +29,24 @@ export const copyPublicFiles = async ({
 }: {
   paths: SkuContext['paths'];
 }) => {
-  if (await exists(paths.public)) {
-    await copyDirContents(join(paths.public), join(paths.target));
+  if (!(await exists(paths.public))) {
+    return;
   }
+
+  const files = await new Fdir()
+    .withBasePath()
+    .crawl(paths.public)
+    .withPromise();
+
+  for (const file of files) {
+    const relativePublicPath = relative(paths.public, file);
+    const sourcePath = relative(process.cwd(), file);
+    const destinationPath = join(paths.relativeTarget, relativePublicPath);
+
+    console.log(`Copying ${sourcePath} to ${destinationPath}`);
+  }
+
+  await copyDirContents(join(paths.public), join(paths.target));
 };
 
 export const ensureTargetDirectory = async (target: string) => {

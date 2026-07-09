@@ -86,6 +86,9 @@
     "fixtures/public-path": {
       "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
     },
+    "fixtures/public-assets": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
     "fixtures/report-generation": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },

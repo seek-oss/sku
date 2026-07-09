@@ -13,6 +13,7 @@ const IGNORED_FILE_EXTENSIONS = [
   'avif',
   'bmp',
   'gif',
+  'ico',
   'jpg',
   'jpeg',
   'png',

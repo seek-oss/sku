@@ -512,6 +512,25 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/public-assets:
+    dependencies:
+      react:
+        specifier: 'catalog:'
+        version: 19.2.7
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.7(react@19.2.7)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../private/test-utils
+      dedent:
+        specifier: ^1.5.1
+        version: 1.7.2(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/public-path:
     dependencies:
       react:

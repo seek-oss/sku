@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-`vite`: Add support for `public` config
+`vite`: Enable support for configuring a public assets directory via the `public` option in sku config
 
 Previously, the [`public`] configuration option was only supported in Webpack apps. It now also support in Vite apps.
 

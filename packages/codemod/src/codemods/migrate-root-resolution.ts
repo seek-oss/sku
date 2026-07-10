@@ -43,6 +43,7 @@ const transformSource = async (source: string): Promise<string | null> => {
                   { pattern: 'jest.mock', kind: 'member_expression' },
                   { pattern: 'jest.doMock', kind: 'member_expression' },
                   { pattern: 'jest.requireActual', kind: 'member_expression' },
+                  { pattern: 'jest.requireMock', kind: 'member_expression' },
                 ],
               },
             },

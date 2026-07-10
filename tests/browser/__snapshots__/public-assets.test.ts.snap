@@ -1,0 +1,490 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`public assets > bundler: vite > build and serve > should copy public assets to dist and serve them in the app 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      public-assets
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/nested/icon.png"
+      >
+      <img
+        src="/nested/icon.png"
+        alt="public asset"
+      >
+      <p>
+        Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
+        /nested/icon.png
+      </p>
+    </div>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`public assets > bundler: vite > build and serve > should copy public assets to dist and serve them in the app 2`] = `
+{
+  "favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": SCRIPTS: [
+    "/vite-client.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      public-assets
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    >
+    <link
+      rel="modulepreload"
+      href="SCRIPTS[0]"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/nested/icon.png"
+      >
+      <img
+        src="/nested/icon.png"
+        alt="public asset"
+      >
+      <p>
+        Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
+        /nested/icon.png
+      </p>
+    </div>
+    <script
+      type="module"
+      src="SCRIPTS[0]"
+    >
+    </script>
+  </body>
+</html>,
+  "nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "robots.txt": "User-agent: *
+Disallow:
+",
+  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`public assets > bundler: vite > start > should serve the app and public assets 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,77 +1,77 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       public-assets
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="icon"
+       href="/favicon.ico"
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
+   </head>
+   <body>
+     <div id="app">
+       <link
+         rel="preload"
+         as="image"
+         href="/nested/icon.png"
+       >
+       <img
+         src="/nested/icon.png"
+         alt="public asset"
+       >
+       <p>
+         Public assets fixture
+       </p>
+       <p>
+         Public asset URL:
+         /nested/icon.png
+       </p>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`public assets > bundler: webpack > build and serve > should copy public assets to dist and serve them in the app 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      public-assets
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/nested/icon.png"
+      >
+      <img
+        src="/nested/icon.png"
+        alt="public asset"
+      >
+      <p>
+        Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
+      </p>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`public assets > bundler: webpack > build and serve > should copy public assets to dist and serve them in the app 2`] = `
+{
+  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "index.html": SCRIPTS: [
+    "/runtime.js",
+    "/2.js",
+    "/main.js",
+  ]
+CSS: []
+SOURCE HTML: <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      public-assets
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[0]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[1]"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="SCRIPTS[2]"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/nested/icon.png"
+      >
+      <img
+        src="/nested/icon.png"
+        alt="public asset"
+      >
+      <p>
+        Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
+      </p>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[0]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[1]"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="SCRIPTS[2]"
+    >
+    </script>
+  </body>
+</html>,
+  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "robots.txt": "User-agent: *
+Disallow:
+",
+  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+}
+`;
+
+exports[`public assets > bundler: webpack > start > should serve the app and public assets 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      public-assets
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/2.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <link
+        rel="preload"
+        as="image"
+        href="/nested/icon.png"
+      >
+      <img
+        src="/nested/icon.png"
+        alt="public asset"
+      >
+      <p>
+        Public assets fixture
+      </p>
+      <p>
+        Public asset URL:
+      </p>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      []
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":[]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/2.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+  </body>
+</html>
+`;

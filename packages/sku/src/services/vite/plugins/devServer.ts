@@ -14,6 +14,7 @@ export const devServerPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => ({
   name: makePluginName('dev-server'),
+  apply: 'serve',
   config: () => ({
     server: {
       watch: disableWatch ? null : {},

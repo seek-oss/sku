@@ -348,6 +348,14 @@ export interface SkuConfigBase {
   port?: number;
 
   /**
+   * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+   *
+   * @default 'public'
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=public
+   */
+  public?: string;
+
+  /**
    * The URL all the static assets of the app are accessible under.
    *
    * @default '/'
@@ -461,17 +469,6 @@ export interface SkuConfigBase {
 }
 
 export interface WebpackSkuConfig {
-  /**
-   * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
-   *
-   * *Caution*: All assets should ideally be imported through the source code to ensure they are named correctly for long term caching.
-   * You may run into caching issues using this option. It may be removed in future.
-   *
-   * @default 'public'
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=public
-   */
-  public?: string;
-
   /**
    * **Only for SSR apps**
    *

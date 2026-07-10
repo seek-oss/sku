@@ -3,7 +3,10 @@ import { createServer, createBuilder } from 'vite';
 import type { SkuContext } from '../../context/createSkuContext.js';
 
 import { createConfig } from './helpers/config/createConfig.js';
-import { cleanTargetDirectory } from '../../utils/buildFileUtils.js';
+import {
+  cleanTargetDirectory,
+  copyPublicFiles,
+} from '../../utils/buildFileUtils.js';
 import { createOutDir } from './helpers/bundleConfig.js';
 import { getAppHosts } from '../../context/hosts.js';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
@@ -23,6 +26,7 @@ export const viteService = {
     }
     await cleanTargetDirectory(outDir.ssg, true);
     await cleanTargetDirectory(outDir.join('.vite'), true);
+    await copyPublicFiles(skuContext);
   },
   start: async ({
     skuContext,

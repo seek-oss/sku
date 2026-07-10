@@ -1,10 +1,11 @@
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { rm, mkdir } from 'node:fs/promises';
 import { fdir as Fdir } from 'fdir';
 
 import exists from './exists.js';
 import { copyDirContents } from './copyDirContents.js';
 import type { SkuContext } from '../context/createSkuContext.js';
+import { cwd } from '@sku-private/utils';
 
 export const cleanTargetDirectory = async (
   target: string,
@@ -29,9 +30,16 @@ export const copyPublicFiles = async ({
 }: {
   paths: SkuContext['paths'];
 }) => {
-  if (await exists(paths.public)) {
-    await copyDirContents(join(paths.public), join(paths.target));
+  if (!(await exists(paths.public))) {
+    return;
   }
+
+  const currentCwd = cwd();
+  console.log(
+    `Copying public assets from "${relative(currentCwd, paths.public)}" to "${relative(currentCwd, paths.target)}"`,
+  );
+
+  await copyDirContents(join(paths.public), join(paths.target));
 };
 
 export const ensureTargetDirectory = async (target: string) => {

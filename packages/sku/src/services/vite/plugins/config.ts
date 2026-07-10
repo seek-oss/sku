@@ -16,7 +16,7 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    publicDir: false,
+    publicDir: skuContext.paths.public,
     root: process.cwd(),
     resolve: {
       alias: {

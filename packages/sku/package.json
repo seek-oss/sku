@@ -34,7 +34,6 @@
     "dist",
     "scripts",
     "CHANGELOG.md",
-    "src/@loadable",
     "bin"
   ],
   "type": "module",

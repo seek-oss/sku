@@ -15,46 +15,53 @@ const getChildNode = (object: SgNode, key: string): SgNode | null =>
 const hasKey = (object: SgNode, key: string): boolean =>
   getChildNode(object, key) !== null;
 
+const findObjectLiteral = (node: SgNode | null | undefined): SgNode | null => {
+  if (!node) {
+    return null;
+  }
+  if (node.kind() === 'object') {
+    return node;
+  }
+  // Handles `{ ... } satisfies SkuConfig`
+  if (node.kind() === 'satisfies_expression') {
+    return node.children().find((child) => child.kind() === 'object') ?? null;
+  }
+  return null;
+};
+
+/** Resolve `export default name` back to the value of `name`'s declaration. */
+const findReference = (root: SgNode, name: string): SgNode | null =>
+  root
+    .find({
+      rule: {
+        kind: 'variable_declarator',
+        has: { field: 'name', regex: `^${name}$` },
+      },
+    })
+    ?.field('value') ?? null;
+
 /**
  * Locate the sku config object literal, supporting:
  *
- * - `export default { ... }` (optionally with `satisfies SkuConfig`)
+ * - `export default { ... }`
  * - `const config = { ... }; export default config;`
  *
  * Throws for shapes we don't support.
  */
 const findConfigObject = (root: SgNode): SgNode => {
-  /** Match `pattern` and return its `$OBJ` capture only if it's an object. */
-  const matchObject = (pattern: string): SgNode | null => {
-    const match = root.find({ rule: { pattern } })?.getMatch('OBJ');
-    return match?.kind() === 'object' ? match : null;
-  };
-
-  const directExport =
-    matchObject('export default $OBJ satisfies $T') ??
-    matchObject('export default $OBJ');
-
-  if (directExport) {
-    return directExport;
-  }
-
-  // `const config = { ... }; export default config;`
-  const reference = root
+  const exported = root
     .find({ rule: { pattern: 'export default $OBJ' } })
     ?.getMatch('OBJ');
 
-  if (reference?.kind() === 'identifier') {
-    const value = root
-      .find({
-        rule: {
-          kind: 'variable_declarator',
-          has: { field: 'name', regex: `^${reference.text()}$` },
-        },
-      })
-      ?.field('value');
-    if (value?.kind() === 'object') {
-      return value;
-    }
+  const target =
+    exported?.kind() === 'identifier'
+      ? // handles `const config = { ... }; export default config;`
+        findReference(root, exported.text())
+      : exported;
+
+  const object = findObjectLiteral(target);
+  if (object) {
+    return object;
   }
 
   throw new Error(

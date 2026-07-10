@@ -12,8 +12,8 @@ test('works by passing browsers as array', () => {
   expect(target).toMatchInlineSnapshot(`
     [
       "chrome103",
-      "edge147",
-      "firefox150",
+      "edge148",
+      "firefox121",
       "ios11",
       "opera131",
       "safari18.5",
@@ -26,9 +26,9 @@ test('works by passing browsers as string', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome148",
-      "edge148",
-      "firefox150",
+      "chrome149",
+      "edge149",
+      "firefox151",
       "ie10",
       "ios26.3",
       "opera127",

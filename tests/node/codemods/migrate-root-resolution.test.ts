@@ -35,6 +35,7 @@ runCodemodTests('migrate-root-resolution', [
       jest.doMock('src/do-mocked');
       jest.requireActual('src/mocked');
       jest.requireActual<typeof import('src/mocked')>('src/mocked');
+      jest.requireMock('src/mocked').foo = originalFoo;
     `,
     output: dedent /* tsx */ `
       import { add } from '#src/utils/add';
@@ -62,6 +63,7 @@ runCodemodTests('migrate-root-resolution', [
       jest.doMock('#src/do-mocked');
       jest.requireActual('#src/mocked');
       jest.requireActual<typeof import('#src/mocked')>('#src/mocked');
+      jest.requireMock('#src/mocked').foo = originalFoo;
     `,
   },
   // Adds a `pathAliases` entry to the sku config

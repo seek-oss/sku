@@ -88,18 +88,39 @@ runCodemodTests('migrate-root-resolution', [
     input: dedent /* ts */ `
       import type { SkuConfig } from 'sku';
 
-      const config: SkuConfig = {
+      const skuConfig: SkuConfig = {
         clientEntry: 'src/client.tsx',
       };
-      export default config;
+      export default skuConfig;
     `,
     output: dedent /* ts */ `
       import type { SkuConfig } from 'sku';
 
-      const config: SkuConfig = { pathAliases: { '#src/*': './src/*' },
+      const skuConfig: SkuConfig = { pathAliases: { '#src/*': './src/*' },
         clientEntry: 'src/client.tsx',
       };
-      export default config;
+      export default skuConfig;
+    `,
+  },
+  {
+    filename: 'sku.config.ts',
+    input: dedent /* ts */ `
+      import type { SkuConfig } from 'sku';
+
+      const skuConfig = {
+        clientEntry: 'src/client.tsx',
+      } satisfies SkuConfig;
+
+      export default skuConfig;
+    `,
+    output: dedent /* ts */ `
+      import type { SkuConfig } from 'sku';
+
+      const skuConfig = { pathAliases: { '#src/*': './src/*' },
+        clientEntry: 'src/client.tsx',
+      } satisfies SkuConfig;
+
+      export default skuConfig;
     `,
   },
   // Merges into an existing `pathAliases` object
